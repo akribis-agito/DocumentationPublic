@@ -1,0 +1,208 @@
+/* ================================================================
+   Agito PCSuite — Keyword Reference Manual Theme
+   ================================================================ */
+
+
+/* ── Page Title (H1 = keyword / section name) ───────────────── */
+
+.markdown-rendered h1 {
+  font-size: 1.7em;
+  font-weight: 700;
+  color: #1e3a5f;
+  border-bottom: 2px solid #2563a8;
+  padding-bottom: 0.25em;
+  margin-bottom: 0.9em;
+  letter-spacing: -0.01em;
+}
+
+
+/* ── Section Headings ────────────────────────────────────────── */
+
+.markdown-rendered h2 {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #1e3a5f;
+  border-bottom: 1px solid #c0d4ec;
+  padding-bottom: 0.2em;
+  margin-top: 1.6em;
+}
+
+.markdown-rendered h3,
+.markdown-rendered h4,
+.markdown-rendered h5 {
+  font-size: 1.0em;
+  font-weight: 600;
+  color: #2563a8;
+  margin-top: 1.2em;
+}
+
+
+/* ── Bold section labels (Definition:, Example:, See also:, …) ─
+   Targets a <p> whose sole content is a <strong> tag, i.e.
+   a line like **Definition:** on its own paragraph.            */
+
+.markdown-rendered p > strong:only-child {
+  display: block;
+  font-size: 0.82em;
+  font-weight: 700;
+  color: #1e3a5f;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  border-left: 3px solid #2563a8;
+  padding-left: 0.55em;
+  margin-bottom: -0.3em;
+}
+
+
+/* ── <u> sub-section labels (used in overview pages) ─────────── */
+
+.markdown-rendered u {
+  text-decoration: none;
+  font-weight: 600;
+  color: #2563a8;
+  padding-bottom: 1px;
+  border-bottom: 1px solid #2563a8;
+}
+
+
+/* ── Tables ──────────────────────────────────────────────────── */
+
+.markdown-rendered table {
+  border-collapse: collapse;
+  margin: 0.6em auto 1.4em;
+  font-size: 0.93em;
+  width: auto;
+}
+
+.markdown-rendered table th {
+  background: #1e3a5f !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  padding: 0.45em 1em;
+  border: 1px solid #162e4d !important;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.markdown-rendered table td {
+  padding: 0.38em 1em;
+  border: 1px solid #c0d4ec;
+  vertical-align: top;
+}
+
+.markdown-rendered table tr:nth-child(even) td {
+  background: #f0f6ff;
+}
+
+.markdown-rendered table tr:nth-child(odd) td {
+  background: #ffffff;
+}
+
+/* Suppress truly empty header rows (all <th></th> with no content). */
+.markdown-rendered table thead tr:has(th:empty):not(:has(th:not(:empty))) {
+  display: none;
+}
+
+/* ── Left-column row headers ─────────────────────────────────────
+   For tables where the header is on the left, write row-label
+   cells as <th> inside <tbody> (HTML table, not markdown pipe).
+   Markdown tables only ever produce <th> inside <thead>, so this
+   selector never fires on a standard top-header table.            */
+
+.markdown-rendered table tbody th {
+  background: #dce8f5 !important;
+  color: #1e3a5f !important;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid #c0d4ec !important;
+  padding: 0.38em 1em;
+  text-align: left;
+  vertical-align: top;
+}
+
+
+/* ── Inline code (keyword names, values) ─────────────────────── */
+
+.markdown-rendered :not(pre) > code {
+  font-family: 'Consolas', 'Menlo', 'Courier New', monospace;
+  font-size: 0.87em;
+  background: #edf3fc;
+  border: 1px solid #c0d4ec;
+  border-radius: 3px;
+  padding: 0.1em 0.4em;
+  color: #1e3a5f;
+}
+
+
+/* ── Code / fenced blocks ────────────────────────────────────── */
+
+.markdown-rendered pre {
+  background: #f5f8fd;
+  border: 1px solid #c0d4ec;
+  border-radius: 4px;
+  padding: 0.8em 1.1em;
+}
+
+.markdown-rendered pre > code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-size: 0.9em;
+}
+
+
+/* ── [!note] and [!warning] callouts ─────────────────────────── */
+
+.markdown-rendered .callout[data-callout="note"] {
+  background: #edf3fc;
+  border-color: #2563a8;
+}
+
+.markdown-rendered .callout[data-callout="note"] .callout-title {
+  color: #1e3a5f;
+}
+
+.markdown-rendered .callout[data-callout="warning"],
+.markdown-rendered .callout[data-callout="caution"] {
+  background: #fff8e6;
+  border-color: #c07800;
+}
+
+
+/* ── Internal links ──────────────────────────────────────────── */
+
+.markdown-rendered a.internal-link {
+  color: #2563a8;
+  text-decoration: none;
+}
+
+.markdown-rendered a.internal-link:hover {
+  text-decoration: underline;
+}
+
+
+/* ── Pending / mark highlight ────────────────────────────────── */
+
+.markdown-rendered mark,
+.markdown-rendered .mark {
+  background: #fff2a0;
+  color: #6b4c00;
+  border-radius: 2px;
+  padding: 0.05em 0.25em;
+}
+
+
+/* ── Horizontal rule ─────────────────────────────────────────── */
+
+.markdown-rendered hr {
+  border-color: #c0d4ec;
+  opacity: 1;
+}
+
+
+/* ── Math (LaTeX equations) ──────────────────────────────────── */
+
+.markdown-rendered mjx-container {
+  overflow-x: auto;
+}

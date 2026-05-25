@@ -1,0 +1,29 @@
+# IdenResults
+
+**Condition:**
+
+IdenResults is only applicable to sine sweep identification.
+
+**Definition:**
+
+IdenResults stores the calculated relations between the recorded input and output vectors. It is updated after CalcIden operation completes. Fundamental/first harmonic frequency refers to the frequency defined in [InjectFreq](../../02-keywords/13-injection/InjectFreq.md).
+
+The details of each array entry are as shown.
+
+| Index | Descriptions |
+|----|----|
+| 1, 12 | Real magnitude ratio of output over input at fundamental sine frequency |
+| 2, 13 | Imaginary magnitude ratio of output over input at fundamental sine frequency |
+| 3, 14 | Harmonic quality (amplitude ratio of second harmonic to first/fundamental harmonic), in terms of percentage |
+| 4, 15 | Noise quality (RMS value of the error between actual output and modelled output, over the amplitude of output fundamental sine wave), in terms of percentage |
+| 5, 16 | Amplitude ratio of output over input fundamental sine waves, in terms of dB |
+| 6, 17 | Phase difference between output and input fundamental sine waves, in terms of deg/100 |
+| 7, 18 | Amplitude of output fundamental sine wave |
+| 8, 19 | Amplitude of input fundamental sine wave |
+| 11, 22 | Amplitude of output fundamental sine wave, scaled up by 1000 |
+
+For standard identification, there will only be 1 input and 1 output vectors, with results populated in array indices 1 to 11.
+
+For dual loop system plant identification, there will be 1 input and 2 output vectors. The relationship between the first output and the input, and second output and the input will be on the indices 1 to 11 and 12 to 22, respectively.
+
+The results are acquired by PCSuite after CalcIden operation following each sine excitation. Please contact Agito if more information is needed.

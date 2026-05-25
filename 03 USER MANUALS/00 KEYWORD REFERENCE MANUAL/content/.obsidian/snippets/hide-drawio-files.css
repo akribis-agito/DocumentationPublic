@@ -1,0 +1,16 @@
+/* Hide .drawio and .drawio.svg files from the file-tree sidebar.
+   They're referenced by markdown files but are noise as standalone entries. */
+
+.nav-file:has(.nav-file-title[data-path$=".drawio.svg"]),
+.nav-file:has(.nav-file-title[data-path$=".drawio"]) {
+  display: none !important;
+}
+
+/* Also hide them from the file/quick switcher search results — comment out
+   if you want to be able to Ctrl+O directly to a diagram file. */
+/*
+.suggestion-item[data-path$=".drawio.svg"],
+.suggestion-item[data-path$=".drawio"] {
+  display: none !important;
+}
+*/

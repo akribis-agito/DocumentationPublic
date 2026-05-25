@@ -1,0 +1,7 @@
+# ProgExpStack
+
+<!-- Imported from the 2021 PDF reference. Verify against current
+     firmware behavior and update with the latest semantics. -->
+
+ProgExpStack is a user program low level language keyword. It is used to read the top number of
+the numeric stack without popping it. This keyword is most useful for debug.

@@ -1,0 +1,33 @@
+/* Compact the top of every page — remove the gap between the editor's
+   top edge and the first heading. */
+
+/* Pull the very first content line up against the top of the editor. */
+.markdown-source-view.is-live-preview .cm-content,
+.markdown-source-view.cm-s-obsidian .cm-content {
+  padding-top: 8px !important;
+}
+
+.markdown-reading-view .markdown-preview-view {
+  padding-top: 8px !important;
+}
+
+/* Knock down the top margin of the first heading (which would otherwise
+   add another ~1.5em of space). */
+.markdown-source-view.is-live-preview .cm-content > .cm-line:first-of-type .HyperMD-header,
+.markdown-rendered > h1:first-child,
+.markdown-rendered > h2:first-child,
+.markdown-rendered > .el-h1:first-child h1,
+.markdown-rendered > .el-h2:first-child h2 {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* When properties are hidden, collapse any phantom container left behind. */
+.metadata-container.is-collapsed,
+.metadata-container[style*="display: none"],
+.metadata-properties:empty {
+  display: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 0 !important;
+}

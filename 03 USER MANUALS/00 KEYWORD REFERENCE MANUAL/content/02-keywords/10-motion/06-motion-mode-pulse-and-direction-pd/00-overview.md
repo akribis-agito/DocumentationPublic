@@ -1,0 +1,52 @@
+# Motion mode - Pulse and direction (PD)
+
+This section extends from direct PD motion ([MotionMode](../../../02-keywords/10-motion/02-motion-configuration/MotionMode.md) = 3) and indirect PD motion ([MotionMode](../../../02-keywords/10-motion/02-motion-configuration/MotionMode.md) = 4). All the keywords in this section are only applicable under these motion modes.
+
+Pulse and direction command is a traditional method to decouple the controller that does the profiling, from the amplifier that drives the motor.
+
+With this, controllers with profiling algorithm for specific applications (e.g. CNC machine or laser cutter) can be used with any stage system that supports this mode of command. It allows for flexibility in pairing of drivers of different sizes and types.
+
+<img alt="A diagram of a device AI-generated content may be incorrect." src="image31.png" style="width:6.14955in;height:3.54617in"/>
+
+**Note:**
+
+1. Pulse and direction motion mode is only available for non-Central-i products, namely AGD101, AGD155, AGD200 and AGD301.
+2. The pulse and direction input pins are hard coded for each product, where the input pins must be of differential type. No DInMode setting is needed, as the following digital inputs will be automatically assumed as pulse and direction inputs.
+
+There are 2 phases of pulse and direction command.
+
+1.  Encoding (to generate pulse and direction outputs from position reference)
+
+2.  Decoding (to generate position reference from digital inputs of pulse and direction)
+
+This section discusses the decoding of pulse and direction command. For more information on encoding, please refer to <span class="mark">???</span>.
+
+In the decoding of the pulse-direction signals, each rising edge of the pulse will cause the counter to increment if direction signal is high, or decrement if direction signal is low. The decoded counter will be used as position reference or target position depending on motion mode.
+
+<span class="mark">**DN:** Please check this statement.</span>
+![image32.png](../../../assets/image32.png)
+
+As shown in the block diagram below, the change in the counter value is scaled ([PDFact](../../../02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDFact.md) and [PDFactDen](../../../02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDFactDen.md)), sign-corrected ([PDEncDir](../../../02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDEncDir.md)) and accumulated in [PDPos](../../../02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDPos.md) (a scaled counter). This is done on every controller cycle to avoid losing track on pulse and direction signals.
+
+Two pulse and direction motion modes are available:
+
+1.  Direct pulse-direction motion
+
+![image33.png](../../../assets/image33.png)
+
+After setting [MotionMode](../../../02-keywords/10-motion/02-motion-configuration/MotionMode.md) = 3 and commanding start of motion ([Begin](../../../02-keywords/10-motion/04-motion-command/Begin.md)), the master and slave offsets will be reset to PDPos and initial position reference once. This is to ensure the generated position reference only takes the change in PDPos since the start of motion. Afterwards, any change in PDPos will corresponds to the same change in profiler’s position reference, subject to a low-pass filter ([PDPosFilt](../../../02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDPosFilt.md)).
+
+2.  Indirect pulse-direction motion
+
+> ![image34.png](../../../assets/image34.png)
+
+Similarly, after setting [MotionMode](../../../02-keywords/10-motion/02-motion-configuration/MotionMode.md) = 4 and commanding start of motion ([Begin](../../../02-keywords/10-motion/04-motion-command/Begin.md)), the master and slave offsets will be reset to PDPos and initial position reference once.
+
+Instead, any change in PDPos will corresponds to the same change in the target position ([AbsTrgt)](../../../02-keywords/10-motion/03-kinematics-configuration/AbsTrgt.md). AbsTrgt will be fed to second-order profile generator, that respects the maximum kinematic limits of Speed, Accel and Decel. The filter to smoothen out the scaled delta is also absent.
+
+**Note:**
+
+1. For both direct and indirect PD motion, once motion is commanded, axis will stay in the moving motion state indefinitely, until motion stop is requested or axis is disabled.
+2. For both direct and indirect PD motion, generated position reference are saturated/protected by software limits.
+3. For indirect PD motion, the profile generation is only up to second order. Please contact Agito if third or higher order motion profile is needed.
+4. For both direct and indirect PD motion, the settling status ( InTargetStat ) will be checked, only after PDEndTime has elapsed since the pulse-direction inputs and generated position reference no longer change.

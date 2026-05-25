@@ -1,0 +1,53 @@
+# MotionReason
+
+**Definition:**
+
+MotionReason stores the reason for which the motion was stopped. MotionReason is reset to 0 upon Begin command.
+
+| Value | Function descriptions |
+|----|----|
+| 0 | Current motion still not ended or motion ended normally. |
+| 1 | Motion ended due to Stop command |
+| 2 | Motion ended due to Abort command |
+| 3 | Motion ended due to StopRep command |
+| 4 | Motion ended due to reverse limit switch detection |
+| 5 | Motion ended due to forward limit switch detection |
+| 6 | Motion ended due to reverse software limit |
+| 7 | Motion ended due to forward software limit |
+| 8 | Motion ended due to disabled motor |
+| 9 | Motion ended due to StopECAM command (for ECAM motions only) |
+| 10 | Motion ended due to Stop FIFO command (for FIFO motions only) |
+| 11 | Motion ended due to detected index (for Jogging only) |
+| 12 | Motion ended due to StopCNCA command (for CNCA motions only) |
+| 13 | Motion ended due to timeout at homing |
+| 14 | Motion ended due to GoToCurrMode command |
+| 15 | Motion ended due to hardstop at homing |
+| 16 | Motion ended due to home switch change |
+| 17 | Motion ended due to GoToForceMode command |
+| 18 | Motion ended due to one member of CNCA was disabled |
+| 19 | Motion ended due to one member of CNCA was stopped |
+| 20 | Motion ended due to one member of CNCA was aborted |
+| 21 | Motion ended due to stop by input signal |
+| 22 | Motion ended due to abort by input signal |
+| 23 | Motion ended due to one member of CNCA hitting the forward/reverse limit switch |
+| 24 | Motion ended due to one member of CNCA hitting the forward/reverse software limit |
+| 25 | Motion ended due to one member of CNCB was stopped |
+| 26 | Motion ended due to one member of CNCB hit the forward/reverse limit switch |
+| 27 | Motion ended due to one member of CNCB hit the forward/reverse software limit |
+| 28 | Motion ended due to controlled stop by input signal |
+| 29 | Motion ended due to StopVec command |
+| 30 | Motion ended due to one member of vector was disabled |
+| 31 | Motion ended due to one member of vector was stopped |
+| 32 | Motion ended due to one member of vector was aborted |
+| 33 | Motion ended due to one member of vector hit the forward/reverse limit switch |
+| 34 | Motion ended due to one member of vector hit the forward/reverse software limit |
+| 35 | Motion ended due to StopBuff command |
+| 36 | Motion ended due to one member of spline buffer was disabled |
+| 37 | Motion ended due to one member of spline buffer was stopped |
+| 38 | Motion ended due to one member of spline buffer was aborted |
+| 39 | Motion ended due to one member of spline buffer hit the forward/reverse limit switch |
+| 40 | Motion ended due to one member of spline buffer hit the forward/reverse software limit |
+
+**Example:**
+
+If the motion was ended by an abort command, but during deceleration the forward software limit was exceeded, and then the limit switch was encountered, MotionReason will have a value of 2, indicating the original reason to stop and ignoring any following events that could have stopped the motion.

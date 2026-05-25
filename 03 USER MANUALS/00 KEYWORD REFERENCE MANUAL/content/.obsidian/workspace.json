@@ -1,0 +1,238 @@
+{
+  "main": {
+    "id": "fbca94bf66512d69",
+    "type": "split",
+    "children": [
+      {
+        "id": "f43aa6dd201dd903",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "49c40e50a2cf9a14",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "02-keywords/13-injection/FastIdInit.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "FastIdInit"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c02f684541152a01",
+    "type": "split",
+    "children": [
+      {
+        "id": "890536bc2678591a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a4d4453b89ec02bd",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": true,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "f4c6c70ab2e98f81",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          },
+          {
+            "id": "17ecee062ee76061",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "horizontal",
+    "width": 270.5
+  },
+  "right": {
+    "id": "09ab073706612083",
+    "type": "split",
+    "children": [
+      {
+        "id": "3a562e4ba469901e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6d3cf521de77364e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "01-keyword-usage-and-syntax/complex-can-code.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": false
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for complex-can-code"
+            }
+          },
+          {
+            "id": "45c4f855ae616b5f",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "pages/AInFilt.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from AInFilt"
+            }
+          },
+          {
+            "id": "81c62750fc4d9b9d",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "a3a0c9afeff40074",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "658a22f6af46766f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "02-keywords/13-injection/FastIdInit.md",
+                "followCursor": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of FastIdInit"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "49c40e50a2cf9a14",
+  "lastOpenFiles": [
+    "02-keywords/13-injection/InjectedValue.md",
+    "02-keywords/13-injection/FastIdInit.md",
+    "02-keywords/13-injection/FastIdDownSam.md",
+    "02-keywords/13-injection/InjectChirpF.md",
+    "02-keywords/03-encoder/01-general-settings/EncRes.md",
+    "02-keywords/03-encoder/01-general-settings/EncType-AuxEncType.md",
+    "02-keywords/03-encoder/01-general-settings/SinCosSignals-AuxSinCosSig.md",
+    "02-keywords/03-encoder/05-encoder-emulation/EmulFilter.md",
+    "02-keywords/04-error-mapping/MapPosGap.md",
+    "02-keywords/06-protections/04-force-control/MaxForceErrOL.md",
+    "02-keywords/06-protections/06-brake/Dynamicbrake.md",
+    "02-keywords/13-injection/00-overview.md",
+    "02-keywords/12-gantry-control/04-dual-loop-gantry-control/00-overview.md",
+    "02-keywords/12-gantry-control/02-gantry-kinematic-feedback/GantryOffset.md",
+    "02-keywords/12-gantry-control/02-gantry-kinematic-feedback/GantryAuxVel.md",
+    "02-keywords/12-gantry-control/02-gantry-kinematic-feedback/GantryAuxFdbk.md",
+    "06-appendix/customisable-filter-filtdef.md",
+    "05-legacy-keywords/EncSinCosHWEn.md",
+    "05-legacy-keywords/IndirectArray.md",
+    "01-keyword-usage-and-syntax/complex-can-code.md",
+    "01-keyword-usage-and-syntax/syntax.md",
+    "02-keywords/01-system/01-status/AllStat.md",
+    "02-keywords/01-system/01-status/About.md",
+    "02-keywords/06-protections/04-force-control/MaxForceErr.md",
+    "02-keywords/04-error-mapping/MapLength.md",
+    "02-keywords/01-system/01-status/ParamCS.md",
+    "Untitled.base",
+    "Untitled.canvas",
+    "Untitled",
+    "Untitled 1.canvas",
+    "02-keywords/05-inputs-outputs/04-digital-inputs/digital-input-chain.drawio.svg",
+    "assets/image16.png",
+    "assets/image22.png",
+    "assets/image19.png",
+    "assets/image5.png",
+    "assets/image4.png",
+    "assets/image1.jpg",
+    "02-keywords/06-protections/03-motion/stepper-stall-protection",
+    "02-keywords/06-protections/03-motion/position-limit-protection",
+    "02-keywords/06-protections/03-motion/motor-stuck-protection",
+    "02-keywords/06-protections/03-motion/general-maximum-limits",
+    "02-keywords/06-protections/03-motion/dual-loop-stuck-protection",
+    "02-keywords/06-protections/02-current-and-voltage/Untitled Diagram.svg",
+    "02-keywords/06-protections/02-current-and-voltage/I2t-tripping-mechanism.svg",
+    "02-keywords/06-protections/02-current-and-voltage/I2t-tripping-mechanism.drawio",
+    "02-keywords/05-inputs-outputs/02-analog-inputs/AInDB.md.tmp.55728.1777947755594",
+    "02-keywords/04-error-mapping/error-mapping-sum.drawio.svg",
+    "02-keywords/10-motion/13-motion-mode-ptp"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "baseFontSize": 14,
+  "theme": "moonstone",
+  "enabledCssSnippets": [
+    "properties-table",
+    "compact-page-top",
+    "hide-drawio-files",
+    "reference-manual"
+  ],
+  "showViewHeader": true,
+  "showRibbon": true,
+  "baseFontSizeAction": true
+}
