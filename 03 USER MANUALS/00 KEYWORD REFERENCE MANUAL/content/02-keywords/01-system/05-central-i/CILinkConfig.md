@@ -1,5 +1,6 @@
 ---
 keyword: CILinkConfig
+summary: Per-axis array configuring the physical and protocol parameters of a Central-i port.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # CILinkConfig
 
-**Definition:**
+Per-axis array configuring the physical and protocol parameters of a Central-i port.
 
-CILinkConfig is an axis-related array that configures the physical and protocol parameters of a Central-i port, such as baud rate, timing, and framing options. The settings are saved to flash and applied when [CIConnect](CIConnect.md) initialises the link.
+## Overview
 
-**See also:**
+`CILinkConfig` is an axis-related array that configures the physical and protocol parameters of a Central-i port — such as baud rate, timing, and framing options. The settings are saved to flash and applied when [CIConnect](CIConnect.md) initialises the link, so configure them before connecting.
 
-[CIDeviceType](CIDeviceType.md), [CIConnect](CIConnect.md), [CISyncDef](CISyncDef.md)
+## Examples
+
+```text
+CILinkConfig[1]?    ; read the first link-configuration element
+```
+
+## See also
+
+- [CIDeviceType](CIDeviceType.md) — port role/class
+- [CIConnect](CIConnect.md) — initiate the link
+- [CISyncDef](CISyncDef.md) — synchronous data definition

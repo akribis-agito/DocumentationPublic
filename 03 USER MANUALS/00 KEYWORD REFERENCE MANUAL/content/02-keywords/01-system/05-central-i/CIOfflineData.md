@@ -1,5 +1,6 @@
 ---
 keyword: CIOfflineData
+summary: Per-axis array holding the payload sent during a Central-i offline (simulation) transaction.
 availability:
   standalone:
   - v4
@@ -26,10 +27,19 @@ overrides: {}
 ---
 # CIOfflineData
 
-**Definition:**
+Per-axis array holding the payload sent during a Central-i offline (simulation) transaction.
 
-CIOfflineData is an axis-related array that holds the data payload to be transmitted during a Central-i offline (simulation) transaction. The values are loaded before [CIOfflineSend](CIOfflineSend.md) is called, and are saved to flash so the same offline dataset can be replayed after reset.
+## Overview
 
-**See also:**
+`CIOfflineData` is an axis-related array holding the data payload transmitted during a Central-i offline (simulation) transaction. Load the values before calling [CIOfflineSend](CIOfflineSend.md); they are saved to flash so the same offline dataset can be replayed after reset. The *shape* of the dataset — which parameters it contains — is set by [CIOfflineDef](CIOfflineDef.md).
 
-[CIOfflineDef](CIOfflineDef.md), [CIOfflineSend](CIOfflineSend.md)
+## Examples
+
+```text
+CIOfflineData[1]=0  ; set the first element of the offline payload
+```
+
+## See also
+
+- [CIOfflineDef](CIOfflineDef.md) — defines the offline dataset contents
+- [CIOfflineSend](CIOfflineSend.md) — transmit the offline package

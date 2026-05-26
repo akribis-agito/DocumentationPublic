@@ -1,5 +1,6 @@
 ---
 keyword: CIIdentity
+summary: Per-axis array of identifying information returned by the connected Central-i device.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # CIIdentity
 
-**Definition:**
+Per-axis array of identifying information returned by the connected Central-i device.
 
-CIIdentity is a read-only axis-related array that contains identifying information returned by the connected Central-i device, such as device class, version, and serial number. It is populated automatically after a successful [CIConnect](CIConnect.md).
+## Overview
 
-**See also:**
+`CIIdentity` is a read-only, axis-related array containing identifying information reported by the connected Central-i device — such as device class, version, and serial number. It is populated automatically after a successful [CIConnect](CIConnect.md); before connection its contents are not meaningful.
 
-[CIConnect](CIConnect.md), [CIStatus](CIStatus.md), [CIDeviceType](CIDeviceType.md)
+## Examples
+
+```text
+CIIdentity[1]?      ; read the first identity word of the connected device
+```
+
+## See also
+
+- [CIConnect](CIConnect.md) — populates this array on connect
+- [CIStatus](CIStatus.md) — live link state
+- [CIDeviceType](CIDeviceType.md) — locally configured port role

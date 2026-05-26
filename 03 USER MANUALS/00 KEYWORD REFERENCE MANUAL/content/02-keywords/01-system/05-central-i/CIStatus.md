@@ -1,5 +1,6 @@
 ---
 keyword: CIStatus
+summary: Per-axis array reporting the live state of the Central-i port.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # CIStatus
 
-**Definition:**
+Per-axis array reporting the live state of the Central-i port.
 
-CIStatus is a read-only axis-related array that reports the current state of the Central-i port for the selected axis, including connection status, error flags, and link quality indicators. It is updated in real time and does not require a specific motion or motor state.
+## Overview
 
-**See also:**
+`CIStatus` is a read-only, axis-related array reporting the current state of the Central-i port on the selected axis — connection status, error flags, and link-quality indicators. It is updated in real time and can be read in any motion or motor state. For a one-value, system-wide summary across all ports, use [CIGlobalStat](CIGlobalStat.md).
 
-[CIGlobalStat](CIGlobalStat.md), [CIConnect](CIConnect.md), [CIIdentity](CIIdentity.md)
+## Examples
+
+```text
+CIStatus[1]?        ; read the first status word for this axis's port
+```
+
+## See also
+
+- [CIGlobalStat](CIGlobalStat.md) — system-wide connection summary
+- [CIConnect](CIConnect.md) — initiate the link
+- [CIIdentity](CIIdentity.md) — connected device identity

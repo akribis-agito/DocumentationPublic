@@ -1,5 +1,6 @@
 ---
 keyword: CiMuxSel
+summary: Per-axis array selecting which physical port is routed through the Central-i multiplexer.
 availability:
   standalone:
   - v4
@@ -26,10 +27,19 @@ overrides: {}
 ---
 # CiMuxSel
 
-**Definition:**
+Per-axis array selecting which physical port is routed through the Central-i multiplexer.
 
-CiMuxSel is an axis-related array (three elements per axis) that selects which physical port is routed through the Central-i multiplexer for each axis. Together with [CiMuxDir](CiMuxDir.md) it determines the complete multiplexer configuration. The setting is saved to flash.
+## Overview
 
-**See also:**
+`CiMuxSel` is an axis-related array that selects which physical port is routed through the Central-i multiplexer for each axis. Together with [CiMuxDir](CiMuxDir.md) it determines the complete multiplexer configuration, allowing one controller's Central-i interface to be shared across ports. It is saved to flash.
 
-[CiMuxDir](CiMuxDir.md), [CIConnect](CIConnect.md)
+## Examples
+
+```text
+CiMuxSel[1]?        ; read the first multiplexer selection element for this axis
+```
+
+## See also
+
+- [CiMuxDir](CiMuxDir.md) — multiplexer direction
+- [CIConnect](CIConnect.md) — initiate the link

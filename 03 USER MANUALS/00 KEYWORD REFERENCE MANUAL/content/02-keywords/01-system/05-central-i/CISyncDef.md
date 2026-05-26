@@ -1,5 +1,6 @@
 ---
 keyword: CISyncDef
+summary: Per-axis array defining the parameters exchanged synchronously each control cycle.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # CISyncDef
 
-**Definition:**
+Per-axis array defining the parameters exchanged synchronously each control cycle.
 
-CISyncDef is an axis-related array that defines the set of parameters exchanged synchronously over the Central-i link each control cycle. The definition is saved to flash and takes effect after [CIConnect](CIConnect.md) is executed.
+## Overview
 
-**See also:**
+`CISyncDef` is an axis-related array that defines the set of parameters exchanged synchronously over the Central-i link on every control cycle — the real-time data map for the port. The definition is saved to flash and takes effect when [CIConnect](CIConnect.md) is executed. It is the synchronous (live-link) counterpart to the offline dataset defined by [CIOfflineDef](CIOfflineDef.md).
 
-[CILinkConfig](CILinkConfig.md), [CIOfflineDef](CIOfflineDef.md), [CIConnect](CIConnect.md)
+## Examples
+
+```text
+CISyncDef[1]?       ; read the first synchronous-data definition element
+```
+
+## See also
+
+- [CILinkConfig](CILinkConfig.md) — physical/protocol parameters
+- [CIOfflineDef](CIOfflineDef.md) — offline dataset definition
+- [CIConnect](CIConnect.md) — initiate the link

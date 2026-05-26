@@ -1,5 +1,6 @@
 ---
 keyword: CIAutoConnect
+summary: When enabled, establishes the Central-i connection automatically at power-up.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # CIAutoConnect
 
-**Definition:**
+When enabled, establishes the Central-i connection automatically at power-up.
 
-CIAutoConnect is an axis-related parameter that, when enabled, causes the controller to automatically attempt to establish a Central-i connection on power-up or reset, without requiring an explicit [CIConnect](CIConnect.md) command from the host. The setting is saved to flash.
+## Overview
 
-**See also:**
+`CIAutoConnect = 1` causes the controller to attempt a Central-i connection automatically on power-up or reset, without an explicit [CIConnect](CIConnect.md) from the host. `CIAutoConnect = 0` (default) requires the host to connect manually. The setting is axis-related and saved to flash.
 
-[CIConnect](CIConnect.md), [CIDisconnect](CIDisconnect.md), [CIStatus](CIStatus.md)
+## Examples
+
+```text
+CIAutoConnect=1     ; auto-connect this axis's Central-i port at startup
+```
+
+## See also
+
+- [CIConnect](CIConnect.md) — connect manually
+- [CIDisconnect](CIDisconnect.md) — disconnect
+- [CIStatus](CIStatus.md) — link state

@@ -1,5 +1,6 @@
 ---
 keyword: CIOfflineSend
+summary: Command that transmits the Central-i offline data package on the selected axis port.
 availability:
   standalone:
   - v4
@@ -25,10 +26,20 @@ overrides: {}
 ---
 # CIOfflineSend
 
-**Definition:**
+Command that transmits the Central-i offline data package on the selected axis port.
 
-CIOfflineSend is a command that transmits the offline data package (defined by [CIOfflineDef](CIOfflineDef.md) and populated in [CIOfflineData](CIOfflineData.md)) to the Central-i device on the selected axis port. It is used to pre-load or simulate device data when a live connection is not available.
+## Overview
 
-**See also:**
+`CIOfflineSend` transmits the offline data package — defined by [CIOfflineDef](CIOfflineDef.md) and populated in [CIOfflineData](CIOfflineData.md) — to the Central-i device on the selected axis port. It is used to pre-load or simulate device data when a live connection is not available.
 
-[CIOfflineData](CIOfflineData.md), [CIOfflineDef](CIOfflineDef.md), [CIConnect](CIConnect.md)
+## Examples
+
+```text
+CIOfflineSend       ; send the configured offline data package
+```
+
+## See also
+
+- [CIOfflineData](CIOfflineData.md) — offline payload values
+- [CIOfflineDef](CIOfflineDef.md) — offline dataset definition
+- [CIConnect](CIConnect.md) — initiate a live link

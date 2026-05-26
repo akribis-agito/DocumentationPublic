@@ -1,5 +1,6 @@
 ---
 keyword: CIDisconnect
+summary: Command that terminates the active Central-i link on the selected axis port.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # CIDisconnect
 
-**Definition:**
+Command that terminates the active Central-i link on the selected axis port.
 
-CIDisconnect is a command that terminates the active Central-i link on the selected axis port. After this command the port stops real-time data exchange until a subsequent [CIConnect](CIConnect.md) is issued.
+## Overview
 
-**See also:**
+`CIDisconnect` terminates the active Central-i link on the selected axis port. After it runs, the port stops real-time data exchange until a subsequent [CIConnect](CIConnect.md) is issued. It cannot be issued while the motor is on or in motion.
 
-[CIConnect](CIConnect.md), [CIAutoConnect](CIAutoConnect.md), [CIStatus](CIStatus.md)
+## Examples
+
+```text
+CIDisconnect        ; tear down the Central-i link on the selected axis
+```
+
+## See also
+
+- [CIConnect](CIConnect.md) — initiate the link
+- [CIAutoConnect](CIAutoConnect.md) — connect automatically at power-up
+- [CIStatus](CIStatus.md) — link state

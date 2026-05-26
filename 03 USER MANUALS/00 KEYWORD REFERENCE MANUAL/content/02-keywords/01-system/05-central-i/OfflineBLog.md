@@ -1,5 +1,6 @@
 ---
 keyword: OfflineBLog
+summary: Receive buffer for Central-i offline log data from device port B.
 availability:
   standalone:
   - v4
@@ -26,10 +27,19 @@ overrides: {}
 ---
 # OfflineBLog
 
-**Definition:**
+Receive buffer for Central-i offline log data from device port B.
 
-OfflineBLog is a non-axis array that serves as the receive buffer for Central-i offline log data from device port B. It mirrors the function of [OfflineALog](OfflineALog.md) but for the second port.
+## Overview
 
-**See also:**
+`OfflineBLog` is a non-axis array that serves as the receive buffer for Central-i offline log data from device **port B**. It mirrors [OfflineALog](OfflineALog.md), which captures data from port A. The firmware populates the array when the offline log transaction completes, and the host reads it to inspect the captured device data.
 
-[OfflineALog](OfflineALog.md), [CIOfflineData](CIOfflineData.md), [CIOfflineSend](CIOfflineSend.md)
+## Examples
+
+```text
+OfflineBLog[1]?     ; read the first word of captured port-B log data
+```
+
+## See also
+
+- [OfflineALog](OfflineALog.md) — port-A log buffer
+- [CIOfflineData](CIOfflineData.md) / [CIOfflineSend](CIOfflineSend.md) — offline data exchange

@@ -1,5 +1,6 @@
 ---
 keyword: CiMuxDir
+summary: Sets the direction of the Central-i multiplexer (which port the shared bus routes to).
 availability:
   standalone:
   - v4
@@ -26,10 +27,19 @@ overrides: {}
 ---
 # CiMuxDir
 
-**Definition:**
+Sets the direction of the Central-i multiplexer (which port the shared bus routes to).
 
-CiMuxDir is a non-axis parameter that controls the direction of the Central-i multiplexer — i.e., which physical port the shared CI bus is currently routed to. Together with [CiMuxSel](CiMuxSel.md) it allows one controller to share its Central-i interface across multiple ports. The setting is saved to flash.
+## Overview
 
-**See also:**
+`CiMuxDir` is a non-axis parameter that controls the direction of the Central-i multiplexer — that is, which physical port the shared Central-i bus is currently routed to. Together with [CiMuxSel](CiMuxSel.md) it lets one controller share its Central-i interface across multiple ports. It is saved to flash.
 
-[CiMuxSel](CiMuxSel.md), [CIConnect](CIConnect.md)
+## Examples
+
+```text
+CiMuxDir=1          ; route the shared Central-i bus to the configured port
+```
+
+## See also
+
+- [CiMuxSel](CiMuxSel.md) — per-axis multiplexer port selection
+- [CIConnect](CIConnect.md) — initiate the link

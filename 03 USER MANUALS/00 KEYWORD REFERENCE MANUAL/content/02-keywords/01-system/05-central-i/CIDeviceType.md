@@ -1,5 +1,6 @@
 ---
 keyword: CIDeviceType
+summary: Selects the role/class of the Central-i port on an axis.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # CIDeviceType
 
-**Definition:**
+Selects the role/class of the Central-i port on an axis.
 
-CIDeviceType is an axis-related parameter that selects the role of the Central-i port on that axis — for example, master or slave, or a specific device class. The value is saved to flash and affects how the link is initialised at startup or when [CIConnect](CIConnect.md) is called.
+## Overview
 
-**See also:**
+`CIDeviceType` selects the role of the Central-i port on its axis — for example master or slave, or a specific device class. It is axis-related and saved to flash, and it affects how the link is initialised at startup or when [CIConnect](CIConnect.md) is called. Configure it (together with [CILinkConfig](CILinkConfig.md)) before connecting.
 
-[CIConnect](CIConnect.md), [CILinkConfig](CILinkConfig.md), [CISyncDef](CISyncDef.md)
+## Examples
+
+```text
+CIDeviceType?       ; query the configured Central-i role for this axis
+```
+
+## See also
+
+- [CIConnect](CIConnect.md) — initiate the link
+- [CILinkConfig](CILinkConfig.md) — physical/protocol parameters
+- [CISyncDef](CISyncDef.md) — synchronous data definition

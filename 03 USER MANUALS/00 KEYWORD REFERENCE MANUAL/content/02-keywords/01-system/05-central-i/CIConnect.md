@@ -1,5 +1,6 @@
 ---
 keyword: CIConnect
+summary: Command that initiates a Central-i link on the selected axis port.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # CIConnect
 
-**Definition:**
+Command that initiates a Central-i link on the selected axis port.
 
-CIConnect is a command that initiates a Central-i link connection on the selected axis port. It must be executed after the port is configured (device type, link configuration) and before any real-time synchronised data exchange can take place.
+## Overview
 
-**See also:**
+`CIConnect` initiates a Central-i link connection on the selected axis port. Run it after the port has been configured — device role ([CIDeviceType](CIDeviceType.md)) and link parameters ([CILinkConfig](CILinkConfig.md)) — and before any real-time synchronised data exchange can take place. It cannot be issued while the motor is on or in motion. After a successful connection, [CIIdentity](CIIdentity.md) is populated and [CIStatus](CIStatus.md) reflects the live link.
 
-[CIAutoConnect](CIAutoConnect.md), [CIDisconnect](CIDisconnect.md), [CIDeviceType](CIDeviceType.md), [CIStatus](CIStatus.md)
+## Examples
+
+```text
+CIConnect           ; bring up the Central-i link on the selected axis
+```
+
+## See also
+
+- [CIAutoConnect](CIAutoConnect.md) — connect automatically at power-up
+- [CIDisconnect](CIDisconnect.md) — tear down the link
+- [CIDeviceType](CIDeviceType.md) / [CILinkConfig](CILinkConfig.md) — port configuration
+- [CIStatus](CIStatus.md) — link state
