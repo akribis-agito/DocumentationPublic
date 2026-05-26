@@ -1,3 +1,29 @@
+---
+keyword: CurrPosErrTh
+availability:
+  standalone:
+  - v4
+  central-i:
+  - v4
+can_code: 337
+attributes:
+  access: rw
+  scope: axis
+  flash: false
+  type: scalar
+  array_size: 1
+  data_type: int32
+  ok_in_motion: true
+  ok_motor_on: true
+  units: user
+  range:
+  - -327680
+  - 327680
+  default: 0
+  scaling: 1.0
+  implemented: final
+overrides: {}
+---
 # CurrPosErrTh
 
 **Condition:**

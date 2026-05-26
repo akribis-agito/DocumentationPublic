@@ -1,3 +1,27 @@
+---
+keyword: DInMode
+availability:
+  standalone:
+  - v4
+  central-i:
+  - v4
+can_code: 225
+attributes:
+  access: rw
+  scope: axis
+  flash: true
+  type: array
+  array_size: 33
+  data_type: int32
+  ok_in_motion: true
+  ok_motor_on: true
+  units: none
+  range: null
+  default: 0
+  scaling: 1.0
+  implemented: final
+overrides: {}
+---
 # DInMode
 
 **Definition:**

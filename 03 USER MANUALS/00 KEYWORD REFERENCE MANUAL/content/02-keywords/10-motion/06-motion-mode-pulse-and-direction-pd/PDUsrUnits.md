@@ -1,3 +1,29 @@
+---
+keyword: PDUsrUnits
+availability:
+  standalone:
+  - v4
+  central-i:
+  - v4
+can_code: 66
+attributes:
+  access: rw
+  scope: axis
+  flash: true
+  type: scalar
+  array_size: 1
+  data_type: int32
+  ok_in_motion: false
+  ok_motor_on: false
+  units: none
+  range:
+  - 1
+  - 2147483647
+  default: 65536
+  scaling: 1.0
+  implemented: final
+overrides: {}
+---
 # PDUsrUnits
 
 **Definition:**

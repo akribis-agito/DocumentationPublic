@@ -1,3 +1,28 @@
+---
+keyword: CIOfflineSend
+availability:
+  standalone:
+  - v4
+  central-i: []
+can_code: 502
+attributes:
+  access: ro
+  scope: axis
+  flash: false
+  type: scalar
+  array_size: 1
+  data_type: int32
+  ok_in_motion: true
+  ok_motor_on: true
+  units: func
+  range:
+  - 0
+  - 0
+  default: 0
+  scaling: 1.0
+  implemented: final
+overrides: {}
+---
 # CIOfflineSend
 
 **Definition:**

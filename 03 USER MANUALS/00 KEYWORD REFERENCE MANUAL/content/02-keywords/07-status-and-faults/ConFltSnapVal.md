@@ -1,3 +1,29 @@
+---
+keyword: ConFltSnapVal
+availability:
+  standalone:
+  - v4
+  central-i:
+  - v4
+can_code: 529
+attributes:
+  access: ro
+  scope: axis
+  flash: false
+  type: array
+  array_size: 15
+  data_type: int32
+  ok_in_motion: true
+  ok_motor_on: true
+  units: none
+  range:
+  - -2147483648
+  - -2147483648
+  default: -1
+  scaling: 1.0
+  implemented: final
+overrides: {}
+---
 # ConFltSnapVal
 
 **Definition:**

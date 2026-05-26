@@ -1,3 +1,29 @@
+---
+keyword: RecStat
+availability:
+  standalone:
+  - v4
+  central-i:
+  - v4
+can_code: 249
+attributes:
+  access: ro
+  scope: non-axis
+  flash: false
+  type: array
+  array_size: 2
+  data_type: int32
+  ok_in_motion: true
+  ok_motor_on: true
+  units: none
+  range:
+  - 0
+  - 5
+  default: 0
+  scaling: 1.0
+  implemented: final
+overrides: {}
+---
 # RecStat
 
 **Definition:**
