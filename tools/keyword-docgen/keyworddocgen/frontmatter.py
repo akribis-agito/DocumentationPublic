@@ -7,6 +7,14 @@ import yaml
 _FENCE = "---\n"
 
 
+class _NoAliasDumper(yaml.SafeDumper):
+    """Dumper that never emits YAML anchors/aliases (&id / *id), so equal
+    values (e.g. identical override ranges) are written out in full."""
+
+    def ignore_aliases(self, data):
+        return True
+
+
 def split_doc(text: str) -> tuple[dict, str]:
     """Return (frontmatter_dict, body). Body is preserved exactly."""
     if not text.startswith(_FENCE):
@@ -23,7 +31,8 @@ def split_doc(text: str) -> tuple[dict, str]:
 
 def render_doc(frontmatter: dict, body: str) -> str:
     """Render frontmatter + body back into a document string."""
-    dumped = yaml.safe_dump(
-        frontmatter, sort_keys=False, default_flow_style=False, allow_unicode=True
+    dumped = yaml.dump(
+        frontmatter, Dumper=_NoAliasDumper, sort_keys=False,
+        default_flow_style=False, allow_unicode=True,
     )
     return f"{_FENCE}{dumped}{_FENCE}{body}"
