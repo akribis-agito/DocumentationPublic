@@ -4,3 +4,6 @@
 #define POSGAIN_DFLT        0
 #define DERIVED_MAX         (POSGAIN_MAX * 2)
 #define DONTCARE            "n/a"
+#define POSKI_MIN           0
+#define POSKI_MAX           1000
+#define POSKI_DFLT          5
