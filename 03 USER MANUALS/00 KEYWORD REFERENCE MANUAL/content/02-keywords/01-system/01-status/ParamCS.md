@@ -1,5 +1,6 @@
 ---
 keyword: ParamCS
+summary: Read-only checksum over the controller's parameter set, for verifying configuration.
 availability:
   standalone:
   - v4
@@ -26,10 +27,19 @@ overrides: {}
 ---
 # ParamCS
 
-**Definition:**
+Read-only checksum over the controller's parameter set, for verifying configuration.
 
-ParamCS is a read-only array (indices 0–3) that holds a checksum computed over the controller's parameter set. The host can read this value to verify that the parameters stored on the device match an expected configuration without downloading the full parameter list.
+## Overview
 
-**See also:**
+`ParamCS` is a read-only array (indices 0–3) holding a checksum computed over the controller's parameter set. A host can read it to verify that the parameters stored on the device match an expected configuration — for example to confirm a fleet of units is identically configured — without downloading and comparing the full parameter list. Comparing `ParamCS` before and after a [Save](../02-operation/Save.md) also confirms whether stored configuration changed.
 
-[ParamAbout](ParamAbout.md), [Save](../02-operation/Save.md)
+## Examples
+
+```text
+ParamCS[0]?         ; read the first word of the parameter checksum
+```
+
+## See also
+
+- [ParamAbout](ParamAbout.md) — metadata for a single parameter
+- [Save](../02-operation/Save.md) — persist parameters to flash

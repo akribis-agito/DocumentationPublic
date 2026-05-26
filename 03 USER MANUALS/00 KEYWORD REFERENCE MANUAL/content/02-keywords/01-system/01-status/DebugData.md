@@ -1,5 +1,6 @@
 ---
 keyword: DebugData
+summary: Array reserved for Agito feature development and testing.
 availability:
   standalone:
   - v4
@@ -26,6 +27,12 @@ overrides: {}
 ---
 # DebugData
 
-**Definition:**
+Array reserved for Agito feature development and testing.
 
-DebugData is reserved for feature development and testing.
+## Overview
+
+`DebugData` is a 200-element scratch array reserved for Agito feature development and testing. Its contents and meaning are not fixed and may change between firmware builds, so it should not be used in production integrations.
+
+## See also
+
+- [RNDDebug](../02-operation/RNDDebug.md) — related development/debug command

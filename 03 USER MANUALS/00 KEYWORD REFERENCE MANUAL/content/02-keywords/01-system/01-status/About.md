@@ -1,5 +1,6 @@
 ---
 keyword: About
+summary: Internal command (Agito PCSuite) that returns all controller parameters.
 availability:
   standalone:
   - v4
@@ -26,6 +27,14 @@ overrides: {}
 ---
 # About
 
-**Definition:**
+Internal command (Agito PCSuite) that returns all controller parameters.
 
-About is the command used to obtain all parameters in the controller. It is for Agito PCSuite internal use only.
+## Overview
+
+`About` is a read-only command that returns the full set of parameters held in the controller. It is intended for **Agito PCSuite internal use only** and is not part of the normal user command set; to inspect an individual parameter's metadata from host software, use [ParamAbout](ParamAbout.md) instead.
+
+## See also
+
+- [ParamAbout](ParamAbout.md) — metadata for a single parameter
+- [FWInfo](FWInfo.md) — firmware version and build information
+- [Identity](Identity.md) — controller identification and features

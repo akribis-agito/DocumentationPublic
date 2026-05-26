@@ -1,5 +1,6 @@
 ---
 keyword: ParamAbout
+summary: Function returning a parameter's metadata (CAN code, name, attributes, range, default).
 availability:
   standalone:
   - v4
@@ -26,10 +27,23 @@ overrides: {}
 ---
 # ParamAbout
 
-**Definition:**
+Function returning a parameter's metadata (CAN code, name, attributes, range, default).
 
-ParamAbout is an axis-related function that returns descriptive information about a specified parameter, including its CAN code, mnemonic name, attribute flags, range, and default value. It is intended for host software and diagnostic tools that need to enumerate or inspect parameter metadata at runtime.
+## Overview
 
-**See also:**
+`ParamAbout` returns descriptive metadata about a single parameter — its CAN code, mnemonic name, attribute flags, valid range, and default value. It lets host software and diagnostic tools enumerate or inspect parameter metadata at runtime instead of hard-coding it.
 
-[About](About.md), [Identity](Identity.md), [ParamCS](ParamCS.md)
+The parameter to inspect is selected by its CAN code (the valid range, 0–1023, matches the controller's CAN-code space). Unlike [About](About.md), which dumps every parameter, `ParamAbout` targets one.
+
+## Examples
+
+```text
+ParamAbout=100      ; select the parameter with CAN code 100 (PosGain)
+ParamAbout?         ; read back its descriptor
+```
+
+## See also
+
+- [About](About.md) — full parameter dump (Agito PCSuite internal use)
+- [ParamCS](ParamCS.md) — checksum over the parameter set
+- [Identity](Identity.md) — controller identification and features

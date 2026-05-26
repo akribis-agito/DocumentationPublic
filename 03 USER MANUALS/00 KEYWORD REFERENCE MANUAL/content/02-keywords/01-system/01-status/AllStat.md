@@ -1,5 +1,6 @@
 ---
 keyword: AllStat
+summary: Ethernet-binary multi-axis status query used by the AAMotion API (being deprecated).
 availability:
   standalone:
   - v4
@@ -24,6 +25,14 @@ overrides: {}
 ---
 # AllStat
 
-**Definition:**
+Ethernet-binary multi-axis status query used by the AAMotion API (being deprecated).
 
-AllStat is only supported over Ethernet Binary communication. It is used by AAMotion API to query various statuses for multiple axes in a single message. This keyword is scheduled to be deprecated / revamped.
+## Overview
+
+`AllStat` is supported only over **Ethernet Binary** communication. The AAMotion API uses it to query various statuses for multiple axes in a single message, reducing round-trips when polling a multi-axis system.
+
+> **Deprecation:** `AllStat` is scheduled to be deprecated / revamped. Avoid relying on it for new integrations.
+
+## See also
+
+- [UnitStat](UnitStat.md) — unit hardware/firmware health

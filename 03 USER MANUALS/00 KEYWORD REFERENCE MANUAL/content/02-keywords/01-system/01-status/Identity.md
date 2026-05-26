@@ -1,5 +1,6 @@
 ---
 keyword: Identity
+summary: Read-only array of controller information used by PCSuite to detect features.
 availability:
   standalone:
   - v4
@@ -26,6 +27,14 @@ overrides: {}
 ---
 # Identity
 
-**Definition:**
+Read-only array of controller information used by PCSuite to detect features.
 
-Identity is an array that includes information about the controller. It is used internally by PCSuite GUI to identify the features implemented by the controller and to adjust the GUI accordingly.
+## Overview
+
+`Identity` is a read-only array that describes the controller. Agito PCSuite reads it to identify which features the controller implements and to adapt its GUI accordingly. It is non-axis and reflects the live device, not a stored value.
+
+## See also
+
+- [FWInfo](FWInfo.md) — firmware version and build information
+- [About](About.md) — full parameter dump (Agito PCSuite internal use)
+- [ProductSN](ProductSN.md) — the unit's product serial number

@@ -1,5 +1,6 @@
 ---
 keyword: ProductSN
+summary: Array storing the unit's product serial number (persisted to flash).
 availability:
   standalone:
   - v4
@@ -26,10 +27,19 @@ overrides: {}
 ---
 # ProductSN
 
-**Definition:**
+Array storing the unit's product serial number (persisted to flash).
 
-ProductSN is an array that stores the product serial number of the controller. It can be written to flash (with special handling) and read back at any time, and is used to uniquely identify a hardware unit in a production or field-service context.
+## Overview
 
-**See also:**
+`ProductSN` is a three-element array that stores the product serial number of the controller. It is written to flash (with special handling) and can be read back at any time, uniquely identifying a hardware unit in production or field-service contexts. Because it is saved to flash, the serial number persists across power cycles.
 
-[Identity](Identity.md), [UnitStat](UnitStat.md)
+## Examples
+
+```text
+ProductSN[0]?       ; read the first word of the product serial number
+```
+
+## See also
+
+- [Identity](Identity.md) — controller identification and features
+- [UnitStat](UnitStat.md) — unit hardware/firmware health
