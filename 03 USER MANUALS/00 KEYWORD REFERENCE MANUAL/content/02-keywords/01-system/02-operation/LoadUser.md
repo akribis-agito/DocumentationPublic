@@ -1,9 +1,22 @@
+---
+keyword: LoadUser
+summary: Restores the user-saved parameter set from flash into the active parameters.
+---
 # LoadUser
 
-**Definition:**
+Restores the user-saved parameter set from flash into the active parameters.
 
-LoadUser is a command that loads the user-defined parameter set (saved by [SaveUser](SaveUser.md)) from flash memory back into the active parameter table, overwriting the current values. It is the counterpart of SaveUser and cannot be executed while the motor is in motion.
+## Overview
 
-**See also:**
+`LoadUser` loads the user-defined parameter set — previously stored by [SaveUser](SaveUser.md) — from flash into the active parameter table, overwriting the current values. It is the counterpart of `SaveUser`. The user parameter area is separate from the main parameter set handled by [Load](Load.md) / [Save](Save.md), letting an operator keep and recall their own configuration independently of the saved defaults. `LoadUser` cannot be executed while the motor is in motion.
 
-[SaveUser](SaveUser.md), [Load](Load.md), [Save](Save.md)
+## Examples
+
+```text
+LoadUser            ; restore the user-saved parameter set (motor must be stopped)
+```
+
+## See also
+
+- [SaveUser](SaveUser.md) — save the user parameter set
+- [Load](Load.md) / [Save](Save.md) — main parameter set

@@ -1,5 +1,6 @@
 ---
 keyword: DoNothing
+summary: No-op command used to check communication responsiveness.
 availability:
   standalone:
   - v4
@@ -26,6 +27,18 @@ overrides: {}
 ---
 # DoNothing
 
-**Definition:**
+No-op command used to check communication responsiveness.
 
-DoNothing is a dummy command that will do nothing. It can be used to check communication responsiveness.
+## Overview
+
+`DoNothing` performs no action. Its only purpose is to give the host a harmless command to send when it needs to confirm that the controller is present and responding — effectively a communication "ping." It is safe to issue at any time, including while the motor is on or in motion.
+
+## Examples
+
+```text
+DoNothing           ; issue a no-op; a normal acknowledgement confirms the link
+```
+
+## See also
+
+- [About](../01-status/About.md) — host/diagnostic command

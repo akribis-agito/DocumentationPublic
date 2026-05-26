@@ -1,5 +1,6 @@
 ---
 keyword: DownloadFW
+summary: Command that puts the controller into firmware-download mode.
 availability:
   standalone:
   - v4
@@ -26,8 +27,18 @@ overrides: {}
 ---
 # DownloadFW
 
-**Definition:**
+Command that puts the controller into firmware-download mode.
 
-DownloadFW will cause the controller to go into firmware download mode. To prevent unexpected behaviour, user must use this keyword only through Agito PCSuite’s firmware download tab.
+## Overview
 
-Please contact Agito if user wishes to program their own user interface.
+`DownloadFW` switches the controller into firmware-download mode, after which a new firmware image can be transferred. It cannot be issued while the motor is on or in motion.
+
+> **Use through Agito PCSuite only.** To avoid leaving a controller in an unexpected state, issue `DownloadFW` only via PCSuite's firmware-download tab. Contact Agito if you need to drive the download from your own host software.
+
+The [DontDownload](../01-status/DontDownload.md) flag, when set, blocks firmware download as a safety interlock.
+
+## See also
+
+- [DownloadFPGA](DownloadFPGA.md) — equivalent command for the FPGA image
+- [DontDownload](../01-status/DontDownload.md) — interlock that blocks firmware download
+- [FWInfo](../01-status/FWInfo.md) — current firmware version

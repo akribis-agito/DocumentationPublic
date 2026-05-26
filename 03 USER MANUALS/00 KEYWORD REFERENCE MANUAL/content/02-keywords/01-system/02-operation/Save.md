@@ -1,5 +1,6 @@
 ---
 keyword: Save
+summary: Writes all flash-saveable parameters from volatile memory to flash.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # Save
 
-**Definition:**
+Writes all flash-saveable parameters from volatile memory to flash.
 
-Save command is used to save the parameters to a non-volatile (flash) memory. After the Save command is entered, previous parameter content area in the non-volatile memory is erased. Then, all the flash-saveable parameters are copied from the volatile memory to the flash.
+## Overview
 
-Saving to flash is not allowed while motor is enabled.
+`Save` persists parameters to non-volatile (flash) memory. It first erases the previous parameter area in flash, then copies every flash-saveable parameter from volatile memory into it — so the stored set always reflects the controller's current configuration. Settings that are not saved are lost on the next power cycle or [Load](Load.md).
 
-Please refer to the attribute table to identify whether each parameter can be saved to/loaded from flash.
+Saving is **not allowed while the motor is enabled**. Whether a given parameter is included depends on its `flash` attribute (shown in each keyword's Quick Facts).
+
+## Examples
+
+```text
+Save                ; persist current parameters to flash (motor must be off)
+```
+
+## See also
+
+- [Load](Load.md) — reload parameters from flash
+- [Reset](Reset.md) — software power cycle
+- [ParamCS](../01-status/ParamCS.md) — checksum to verify stored configuration

@@ -1,5 +1,6 @@
 ---
 keyword: AutoExec
+summary: When set, runs the user program automatically on power-up or restart.
 availability:
   standalone:
   - v4
@@ -26,9 +27,23 @@ overrides: {}
 ---
 # AutoExec
 
-<!-- Imported from the 2021 PDF reference. Verify against current firmware
-     behavior and update with the latest semantics. -->
+When set, runs the user program automatically on power-up or restart.
 
-`AutoExec = 1` will cause the user program to start executing automatically on power up or after software restart.
+## Overview
 
-The [Save](Save.md) command must be used before reset to save the value of `AutoExec` to flash memory.
+`AutoExec = 1` causes the controller to start executing the user program automatically on power-up or after a software restart. `AutoExec = 0` (default) leaves the program stopped until it is started explicitly.
+
+Because `AutoExec` is saved to flash, run [Save](Save.md) before resetting so the setting persists across the power cycle.
+
+## Examples
+
+```text
+AutoExec=1          ; run the user program automatically at startup
+AutoExec?           ; query the current setting
+Save                ; persist to flash, then Reset to apply
+```
+
+## See also
+
+- [Save](Save.md) — persist parameters to flash
+- [Reset](Reset.md) — software power cycle

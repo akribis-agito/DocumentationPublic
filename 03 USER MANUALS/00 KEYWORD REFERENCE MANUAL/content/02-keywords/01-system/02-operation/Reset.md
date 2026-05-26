@@ -1,5 +1,6 @@
 ---
 keyword: Reset
+summary: Performs a software power cycle; flash parameters are reloaded on restart.
 availability:
   standalone:
   - v4
@@ -26,6 +27,20 @@ overrides: {}
 ---
 # Reset
 
-**Definition:**
+Performs a software power cycle; flash parameters are reloaded on restart.
 
-Reset command will perform software power cycle operation on the controller. Flash parameters will be loaded upon power up, overriding all unsaved changes on volatile memory.
+## Overview
+
+`Reset` performs a software power-cycle of the controller. On restart, the parameters stored in flash are loaded, overriding any unsaved changes in volatile memory. Use it to apply settings that only take effect at startup (for example after a [Save](Save.md)), or to return the controller to its saved state. `Reset` cannot be issued while the motor is on or in motion.
+
+## Examples
+
+```text
+Reset               ; software power cycle (motor must be off)
+```
+
+## See also
+
+- [Save](Save.md) — persist parameters before resetting
+- [Load](Load.md) — reload from flash without a power cycle
+- [AutoExec](AutoExec.md) — auto-start the user program after reset

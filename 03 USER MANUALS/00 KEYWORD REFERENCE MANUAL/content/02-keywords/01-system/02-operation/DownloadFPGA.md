@@ -1,5 +1,6 @@
 ---
 keyword: DownloadFPGA
+summary: Command that puts the controller into FPGA-download mode.
 availability:
   standalone:
   - v4
@@ -26,8 +27,18 @@ overrides: {}
 ---
 # DownloadFPGA
 
-**Definition:**
+Command that puts the controller into FPGA-download mode.
 
-DownloadFPGA will cause the controller to enter FPGA download mode. To prevent unexpected behaviour, user must use this keyword only through Agito PCSuite’s FPGA download tab.
+## Overview
 
-Please contact Agito if user wishes to program their own user interface.
+`DownloadFPGA` switches the controller into FPGA-download mode, after which a new FPGA image can be transferred. It cannot be issued while the motor is on or in motion.
+
+> **Use through Agito PCSuite only.** To avoid leaving a controller in an unexpected state, issue `DownloadFPGA` only via PCSuite's FPGA-download tab. Contact Agito if you need to drive the download from your own host software.
+
+A firmware/FPGA version mismatch is reported by [UnitStat](../01-status/UnitStat.md).
+
+## See also
+
+- [DownloadFW](DownloadFW.md) — equivalent command for the firmware image
+- [DontDownload](../01-status/DontDownload.md) — interlock that blocks download
+- [UnitStat](../01-status/UnitStat.md) — flags FW/FPGA image mismatches

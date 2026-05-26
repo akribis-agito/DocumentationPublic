@@ -1,5 +1,6 @@
 ---
 keyword: RNDDebug
+summary: Partially-implemented diagnostic function reserved for Agito R&D.
 availability:
   standalone:
   - v4
@@ -26,11 +27,12 @@ overrides: {}
 ---
 # RNDDebug
 
-**Definition:**
+Partially-implemented diagnostic function reserved for Agito R&D.
 
-RNDDebug is a partially-implemented diagnostic function reserved for internal R&D and debugging purposes. Its behaviour depends on the firmware build and is not intended for use in production applications.
+## Overview
 
-%%
-Needs verification
-This keyword is marked PARTIAL in the firmware table; exact semantics may vary by firmware version.
-%%
+`RNDDebug` is a diagnostic function reserved for Agito internal research and debugging. It is marked **partially implemented** in the firmware: its behaviour depends on the firmware build and its exact semantics may change between versions. It is not intended for use in production applications.
+
+## See also
+
+- [DebugData](../01-status/DebugData.md) — development/test scratch array

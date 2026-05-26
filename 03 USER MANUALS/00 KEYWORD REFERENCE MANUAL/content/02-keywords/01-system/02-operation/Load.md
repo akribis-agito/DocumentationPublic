@@ -1,5 +1,6 @@
 ---
 keyword: Load
+summary: Reloads all parameters from flash into volatile memory, discarding unsaved changes.
 availability:
   standalone:
   - v4
@@ -26,12 +27,21 @@ overrides: {}
 ---
 # Load
 
-**Definition:**
+Reloads all parameters from flash into volatile memory, discarding unsaved changes.
 
-Load command is used to retrieve all the parameters from the non-volatile (flash) memory and is performed once internally upon power up. Running Load command will not cause power cycle.
+## Overview
 
-Please refer to the attribute table to identify whether each parameter can be saved to/loaded from flash.
+`Load` retrieves all flash-saveable parameters from non-volatile (flash) memory into the active (volatile) parameter table. The controller performs this once automatically at power-up; issuing `Load` manually repeats it **without** a power cycle.
 
-**Note:**
+`Load` overwrites every unsaved change in volatile memory. This makes it the quick way to recover from a bad, unsaved configuration: `Load` reverts the controller to the last known-good parameters stored in flash. Whether a given parameter participates is determined by its `flash` attribute (shown in each keyword's Quick Facts).
 
-Load will overwrite all unsaved changes in volatile memory. As a use case, in case of bad and unsaved parameter settings, user can use Load to revert to good parameter settings saved in flash.
+## Examples
+
+```text
+Load                ; reload all flash-saved parameters, discarding unsaved edits
+```
+
+## See also
+
+- [Save](Save.md) — write parameters to flash
+- [Reset](Reset.md) — software power cycle (also reloads from flash)
