@@ -1,5 +1,6 @@
 ---
 keyword: ExtBoard
+summary: Selects the hardware configuration of the attached external expansion board.
 availability:
   standalone:
   - v4
@@ -26,10 +27,19 @@ overrides: {}
 ---
 # ExtBoard
 
-**Definition:**
+Selects the hardware configuration of the attached external expansion board.
 
-ExtBoard selects the hardware configuration for the external expansion board attached to the controller. Setting this parameter to the appropriate board type enables the firmware to correctly initialize and use the expansion board's I/O resources. It is saved to flash and takes effect after reset.
+## Overview
 
-**See also:**
+`ExtBoard` selects the hardware configuration for an external expansion board attached to the controller. Setting it to the appropriate board type lets the firmware correctly initialise and use the board's I/O resources. It is saved to flash and takes effect after a [Reset](02-operation/Reset.md). It cannot be changed while the motor is on or in motion.
 
-[AInPort](../09-current-and-voltage/01-system-variables/AInPort.md), [DInPort](../09-current-and-voltage/01-system-variables/DInPort.md)
+## Examples
+
+```text
+ExtBoard?           ; query the configured expansion-board type
+```
+
+## See also
+
+- [AInPort](../05-inputs-outputs/02-analog-inputs/AInPort.md) — analog-input port mapping
+- [DInPort](../05-inputs-outputs/04-digital-inputs/DInPort-DInPortHigh.md) — digital-input port mapping
