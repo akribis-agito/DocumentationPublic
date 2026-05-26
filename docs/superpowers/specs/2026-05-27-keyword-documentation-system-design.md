@@ -47,6 +47,11 @@ proves it on one pilot category. It does not attempt to enrich all keywords at o
 - Building the C# in-product help viewer.
   (Both are downstream display projects that *consume* this contract; this spec only
   guarantees the format serves them.)
+- A manual-wide **documentation structure / information-architecture review** (category
+  overviews, `03-special-features`, `04-error-codes`, `01-keyword-usage-and-syntax`,
+  `05-legacy-keywords`, navigation). This is a separate concern from the per-keyword page
+  system and warrants its own brainstorm + spec in a future cycle; noted here so it is not
+  lost.
 
 ## 3. Locked decisions
 
@@ -89,6 +94,7 @@ attributes:
   flash: true           # FLASH -> true, NOFLASH -> false
   type: scalar          # NOARRAY -> scalar, ISARRAY -> array
   array_size: 1         # MaxArrayIndex + 1
+  data_type: int32      # numeric type; see vocabulary below. Can diverge by version.
   ok_in_motion: true    # OKINMOTN -> true, NOMOTN -> false
   ok_motor_on: true     # OKMTRON -> true
   units: user           # USER_UNITS -> user, NO_USER_UNITS -> none, FUNC_UNITS -> func
@@ -99,13 +105,28 @@ attributes:
 
 # ONLY cells that differ from the primary — drives the ● markers and the matrix
 overrides:
-  standalone.v4: { range: [0, 32767], default: 120, access: ro }
+  standalone.v4: { data_type: int32, range: [0, 32767], default: 120, access: ro }
   central-i.v5:  { default: 90 }
 
 # optional, set by the generator when a keyword is gone from a scanned version
 removed_in: []          # e.g. [v5] if present in v4 scan but absent in v5 scan
 ---
 ```
+
+### `data_type` vocabulary
+
+The numeric type of the keyword, which evolves across releases:
+
+| Token | Display label | Availability |
+|---|---|---|
+| `int32` | 32-bit integer (long) | v4 and below (historical default) |
+| `float32` | 32-bit float | v4 (planned) |
+| `int64` | 64-bit integer (long long) | v5 |
+| `float64` | 64-bit double | v5 |
+
+`data_type` can diverge per cell (e.g. `int32` in v4 → `float64` in v5) and is handled by
+the same `overrides` mechanism as any other attribute — a type change needs no special case.
+A renderer shows it as a Quick Facts row with a `●` when it differs.
 
 ### Source-column mapping
 
@@ -120,6 +141,7 @@ The generator derives `attributes` directly from the `STRUCT_KEYWORDS_TABLE` col
 | `attributes.ok_in_motion` | bOKInMotion (`OKINMOTN`/`NOMOTN`/`MPNOMOTN`) |
 | `attributes.ok_motor_on` | bOKMotorOn (`OKMTRON`/`MPNOMTR`) |
 | `attributes.type` / `array_size` | bIsArray + MaxArrayIndex |
+| `attributes.data_type` | numeric type encoding (see risks — v4 defaults to `int32`; v5 encoding TBC) |
 | `attributes.flash` | bSaveToFlash (`FLASH`/`NOFLASH`) |
 | `attributes.scope` | bAxisRelated (`AXIS`/`NON_AXIS`) |
 | `attributes.implemented` | bImplemented (`FINAL`/`PARTIAL`) |
@@ -232,6 +254,11 @@ The format is deliberately language-neutral so a single source of truth feeds bo
 
 - **Macro resolution robustness** — different products/branches may define the same symbol
   differently; the generator must resolve within the correct branch/product context.
+- **`data_type` encoding (TBC)** — on the LTS branch every keyword is a 32-bit `long`, so v4
+  defaults to `int32`. How v4's planned `float32` and v5's `int64`/`float64` are encoded in
+  the develop-branch source (a new table column, a separate type table, or naming
+  convention) must be confirmed when the generator is built; until then `data_type` may need
+  a manual override path for the new types.
 - **Multiple table copies** — `Params.c` also contains an `IS_BOOT_IMAGE` table; the
   generator targets only `CONTROLLER` and `CI_MASTER` and ignores the boot image.
 - **Mnemonic stability** — matching docs to keywords relies on the mnemonic; renamed
