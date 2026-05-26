@@ -1,5 +1,6 @@
 ---
 keyword: DOutType
+summary: Per-output sink/source mode for single-ended digital outputs (bitfield).
 availability:
   standalone:
   - v4
@@ -24,19 +25,22 @@ overrides: {}
 ---
 # DOutType
 
-**Definition:**
+Per-output sink/source mode for single-ended digital outputs (bitfield).
 
-DOutType configures the digital outputs to operate in either sink or source mode, in 0-based indexing form.
+## Overview
 
-| Bit’s value | Mode        |
-|-------------|-------------|
-| 0           | Sink mode   |
-| 1           | Source mode |
+`DOutType` configures each digital output for sink or source mode, as a bitfield (0-based: bit 0 = output 1). Each bit: `0` = sink, `1` = source. It applies only to single-ended outputs that have configurable sink/source type — see the individual product manual.
 
-**Example:**
+| Bit value | Mode |
+|-----------|------|
+| 0 | Sink |
+| 1 | Source |
 
-If DOutType = 9 (binary 00000000 00000000 00000000 00001001), output 1 and 4 are in source mode, while all other outputs are in sink mode.
+## Examples
 
-**Note:**
+`DOutType = 9` (binary `…1001`) puts outputs 1 and 4 in source mode; the rest stay sink.
 
-This keyword is applicable only for single ended digital outputs with configurable sink/source types. Please refer to individual product manual for more information.
+## See also
+
+- [DOutPort](DOutPort.md) — output states
+- [DOutSelect](DOutSelect.md) / [DOutMode](DOutMode.md) — output function assignment

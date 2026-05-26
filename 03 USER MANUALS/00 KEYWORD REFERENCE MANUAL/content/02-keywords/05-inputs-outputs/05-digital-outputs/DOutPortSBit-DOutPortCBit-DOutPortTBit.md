@@ -1,28 +1,38 @@
-# DOutPortSBit/DOutPortCBit/DOutPortTBit
+---
+summary: Atomic set / clear / toggle of individual DOutPort bits, one output per array index.
+---
+# DOutPortSBit / DOutPortCBit / DOutPortTBit
 
-DOutPortSBit sets, DOutPortCBit clears, and DOutPortTBit toggles the individual bits of DOutPort.
+Atomic set / clear / toggle of individual DOutPort bits.
 
-Each index corresponds to an output (1-based index).
+## Overview
 
-| Index | Changes DOutPort Bit \# | Corresponds to |
-|-------|-------------------------|----------------|
-| 1     | 0                       | Output 1       |
-| 2     | 1                       | Output 2       |
-| 3     | 2                       | Output 3       |
-| …     | …                       | …              |
+These three array keywords change individual bits of [DOutPort](DOutPort.md) atomically — avoiding the read-modify-write race of writing `DOutPort` directly:
 
-**Example:**
+- `DOutPortSBit[i]` — **sets** the bit for output *i*
+- `DOutPortCBit[i]` — **clears** the bit for output *i*
+- `DOutPortTBit[i]` — **toggles** the bit for output *i*
 
-If DOutPort is initially 6 (0b0110) and
+The array index is the output number (1-based: index 1 → DOutPort bit 0 → output 1).
 
-1.  DOutPortSBit\[4\] is called, then DOutPort will become 14 (0b1110) where bit 3 is set.
+| Index | Changes DOutPort bit # | Output |
+|-------|------------------------|--------|
+| 1 | 0 | Output 1 |
+| 2 | 1 | Output 2 |
+| 3 | 2 | Output 3 |
+| … | … | … |
 
-2.  DOutPortCBit\[2\] is called, then DOutPort will become 4 (0b0100) where bit 1 is cleared.
+## Examples
 
-3.  DOutPortTBit\[3\] is called, then DOutPort will become 2 (0b0010) where bit 2 is toggled.
+Starting from `DOutPort = 6` (`0b0110`):
 
-| Initial DOutPort value | Command sent | Operation | Final DOutPort value |
-|---|---|---|---|
-| 6 (0b0110) | DOutPortSBit[4] | Sets bit 3 | 14 (0b1110) |
-| 6 (0b0110) | DOutPortCBit[2] | Clears bit 1 | 4 (0b0100) |
-| 6 (0b0110) | DOutPortTBit[3] | Toggle bit 2 | 2 (0b0010) |
+| Command | Operation | Result |
+|---------|-----------|--------|
+| `DOutPortSBit[4]` | set bit 3 | 14 (`0b1110`) |
+| `DOutPortCBit[2]` | clear bit 1 | 4 (`0b0100`) |
+| `DOutPortTBit[3]` | toggle bit 2 | 2 (`0b0010`) |
+
+## See also
+
+- [DOutPort](DOutPort.md) — the underlying output bitfield
+- [DOutLog](DOutLog.md) — output logic inversion

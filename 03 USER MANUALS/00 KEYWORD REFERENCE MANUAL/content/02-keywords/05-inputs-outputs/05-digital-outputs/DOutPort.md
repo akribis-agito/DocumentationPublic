@@ -1,5 +1,6 @@
 ---
 keyword: DOutPort
+summary: Bit-packed manual state of the digital outputs (before DOutLog inversion).
 availability:
   standalone:
   - v4
@@ -26,27 +27,26 @@ overrides: {}
 ---
 # DOutPort
 
-**Definition:**
+Bit-packed manual state of the digital outputs (before DOutLog inversion).
 
-DOutPort represents the state of the digital outputs, before XOR operation by DOutLog, in 0-based indexing form.
+## Overview
 
-| Bit’s value | State (Before DOutLog) |
-|-------------|------------------------|
-| 0           | Off                    |
-| 1           | On                     |
+`DOutPort` holds the manual state of the digital outputs as a bitfield (0-based bit positions: bit 0 = output 1). Each bit: `1` = on, `0` = off. It is the value *before* any [DOutLog](DOutLog.md) inversion.
 
-DOutPort can be written by user, but only when such digital output(s) are not configured/tied to any functionality or keywords. In other words, DOutPort can be written only if
+`DOutPort` is writable only when the output is under manual control — that is, [DOutSelect](DOutSelect.md)`[x] = 0` **and** [DOutMode](DOutMode.md)`[x] = 0`. It is not saved to flash, so manual states must be re-applied after power-up.
 
-4.  DOutSelect\[x\] = 0 (where DOutMode is used)
+## Examples
 
-5.  DOutMode\[x\] = 0 (where DOutPort can be set by user)
+`DOutPort = 6` (binary `…0110`) turns outputs 2 and 3 on, all others off.
 
-**Example:**
+## Notes
 
-If DOutPort = 6 (binary 00000000 00000000 00000000 00000<u>11</u>0), output 2 and 3 are in “On” state, while all other outputs are in “Off” state.
+1. `DOutPort = DOutPort | Bitword` is the usual way to set specific bits, but it is **not atomic** (read–modify–write): another process writing `DOutPort` in between can be overwritten. Prefer the atomic [DOutPortSBit/CBit/TBit](DOutPortSBit-DOutPortCBit-DOutPortTBit.md) operations.
+2. Not saved to flash.
+3. The final physical state may be inverted by [DOutLog](DOutLog.md).
 
-**Note:**
+## See also
 
-1. “ D O u t P o r t = D O u t P o r t | B i t w o r d ” is typically used to set desired bit(s). However, this is not an atomic function, as it requires reading DOutPort, bit manipulation, and then writing back the value. In between, DOutPort might be assigned another value by another process or thread, this change will be overwritten and lost.
-2. DOutPort is not saved to flash. Any user-defined digital output states must be rewritten upon power up.
-3. The final digital output state may be inverted by DOutLog.
+- [DOutPortSBit-DOutPortCBit-DOutPortTBit](DOutPortSBit-DOutPortCBit-DOutPortTBit.md) — atomic set/clear/toggle
+- [DOutLog](DOutLog.md) — output logic inversion
+- [DOutSelect](DOutSelect.md) / [DOutMode](DOutMode.md) — must both be 0 to write DOutPort

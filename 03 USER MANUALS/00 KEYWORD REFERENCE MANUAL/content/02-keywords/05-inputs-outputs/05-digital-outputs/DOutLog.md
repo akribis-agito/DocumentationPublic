@@ -1,5 +1,6 @@
 ---
 keyword: DOutLog
+summary: Per-output logic inversion (XOR) applied to the final digital-output state.
 availability:
   standalone:
   - v4
@@ -24,43 +25,25 @@ overrides: {}
 ---
 # DOutLog
 
-**Definition:**
+Per-output logic inversion (XOR) applied to the final digital-output state.
 
-DOutLog inverts the logic for selected digital outputs, in 0-based indexing form.
+## Overview
 
-$$
-DOutPortFinal\  = \ DOutPort\ \hat{}\ DOutLog
-$$
+`DOutLog` inverts the logic of selected digital outputs, as a bitfield (0-based: bit 0 = output 1). Each bit: `0` = default, `1` = inverted. The inversion is applied after [DOutPort](DOutPort.md) (and after any hardware/software function), producing the internal `DOutPortFinal` that drives the physical outputs.
 
-| Bit’s value | Logic    |
-|-------------|----------|
-| 0           | Default  |
-| 1           | Inverted |
-
-DOutPortFinal (internal variable) will be used for physical circuit of digital outputs.
-
-**Example:**
-
-If
+## How it works
 
 $$
-DOutPort\  = \ 7\ (binary\ 00000000\ 00000000\ 00000000\ 00000111)
+DOutPortFinal = DOutPort \oplus DOutLog
 $$
 
-and
+**Example:** with `DOutPort = 7` (`…0111`) and `DOutLog = 3` (`…0011`), `DOutPortFinal = 4` (`…0100`) — bits 0 and 1 (outputs 1 and 2) are inverted.
 
-$$
-DOutLog\  = \ 3\ (binary\ 00000000\ 00000000\ 00000000\ 00000011)
-$$
+## Notes
 
-then
+`DOutLog` also applies to outputs assigned a hardware or software function, not just manual outputs.
 
-$$
-DOutPortFinal = \ 4\ (binary\ 00000000\ 00000000\ 00000000\ 00000100)
-$$
+## See also
 
-where bits 0 and 1 are inverted (referring to digital output 1 and 2).
-
-**Note:**
-
-DOutLog also applies to digital outputs that are assigned with hardware or software functionalities.
+- [DOutPort](DOutPort.md) — pre-inversion output state
+- [DOutType](DOutType.md) — sink/source mode

@@ -1,5 +1,6 @@
 ---
 keyword: UserPWMDiv
+summary: Period divisor setting the PWM frequency for all user PWM channels.
 availability:
   standalone:
   - v4
@@ -26,10 +27,19 @@ overrides: {}
 ---
 # UserPWMDiv
 
-**Definition:**
+Period divisor setting the PWM frequency for all user PWM channels.
 
-UserPWMDiv sets the period divisor for the user PWM outputs, controlling the PWM frequency for all channels defined by UserPWM. A higher value produces a lower PWM frequency. It is a non-axis parameter saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`UserPWMDiv` sets the period divisor for the user PWM outputs, which fixes the PWM frequency shared by all channels defined in [UserPWM](UserPWM.md). A higher value lengthens the period, producing a **lower** PWM frequency. Saved to flash.
 
-[UserPWM](UserPWM.md), [DOutMode](DOutMode.md)
+## Examples
+
+```text
+UserPWMDiv=9        ; default period divisor
+```
+
+## See also
+
+- [UserPWM](UserPWM.md) — per-channel duty cycle
+- [DOutSelect](DOutSelect.md) — route a PWM channel to an output

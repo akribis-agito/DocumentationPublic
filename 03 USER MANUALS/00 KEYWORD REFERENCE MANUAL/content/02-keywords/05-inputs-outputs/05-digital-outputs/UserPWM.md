@@ -1,5 +1,6 @@
 ---
 keyword: UserPWM
+summary: Duty cycle of each user-controlled PWM output channel.
 availability:
   standalone:
   - v4
@@ -26,10 +27,19 @@ overrides: {}
 ---
 # UserPWM
 
-**Definition:**
+Duty cycle of each user-controlled PWM output channel.
 
-UserPWM is an array that sets the duty cycle of user-controlled PWM output channels. Each element corresponds to one PWM channel, and the value determines the on-time as a fraction of the period set by UserPWMDiv. It is a non-axis array saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`UserPWM` sets the duty cycle of the user PWM output channels — one element per channel. The value is the on-time as a fraction of the PWM period (0–4095), where the period is set by [UserPWMDiv](UserPWMDiv.md). To drive a PWM signal on a physical output, route the channel to that output with [DOutSelect](DOutSelect.md) (UserPWM 1 / UserPWM 2 options). Saved to flash.
 
-[UserPWMDiv](UserPWMDiv.md), [DOutMode](DOutMode.md)
+## Examples
+
+```text
+UserPWM[1]=2048     ; ~50% duty cycle on PWM channel 1
+```
+
+## See also
+
+- [UserPWMDiv](UserPWMDiv.md) — PWM period / frequency
+- [DOutSelect](DOutSelect.md) — route a PWM channel to an output
