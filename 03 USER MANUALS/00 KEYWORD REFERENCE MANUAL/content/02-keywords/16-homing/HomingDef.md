@@ -1,3 +1,29 @@
+---
+keyword: HomingDef
+availability:
+  standalone:
+  - v4
+  central-i:
+  - v4
+can_code: 341
+attributes:
+  access: rw
+  scope: axis
+  flash: true
+  type: array
+  array_size: 201
+  data_type: int32
+  ok_in_motion: true
+  ok_motor_on: true
+  units: none
+  range:
+  - -2147483648
+  - 2147483647
+  default: 0
+  scaling: 1.0
+  implemented: final
+overrides: {}
+---
 # HomingDef
 
 HomingDef defines homing configurations for up to 15 homing steps. The ones decimal unit of Index will represent configuration parameters. The tenth and hundredth decimal units will represent homing steps. As such, HomingDef\[1-10\] will represent homing configurations of step 1, HomingDef\[11-20\] will represent homing configurations of step 2, and so on. The first element of each step’s configuration set is the instruction of that homing set. The remaining elements of each set are the parameters related to the instruction.

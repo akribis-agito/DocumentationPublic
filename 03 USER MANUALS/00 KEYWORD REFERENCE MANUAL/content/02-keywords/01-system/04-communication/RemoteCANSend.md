@@ -1,3 +1,29 @@
+---
+keyword: RemoteCANSend
+availability:
+  standalone:
+  - v4
+  central-i:
+  - v4
+can_code: 443
+attributes:
+  access: rw
+  scope: non-axis
+  flash: false
+  type: scalar
+  array_size: 1
+  data_type: int32
+  ok_in_motion: true
+  ok_motor_on: true
+  units: func
+  range:
+  - 1
+  - 3
+  default: 0
+  scaling: 1.0
+  implemented: final
+overrides: {}
+---
 # RemoteCANSend
 
 **Definition:**

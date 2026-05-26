@@ -1,3 +1,29 @@
+---
+keyword: CurrCmdHTime
+availability:
+  standalone:
+  - v4
+  central-i:
+  - v4
+can_code: 332
+attributes:
+  access: rw
+  scope: axis
+  flash: true
+  type: array
+  array_size: 21
+  data_type: int32
+  ok_in_motion: true
+  ok_motor_on: true
+  units: scaling
+  range:
+  - -2000000000
+  - 2000000000
+  default: 0
+  scaling: 1.0
+  implemented: final
+overrides: {}
+---
 # CurrCmdHTime
 
 **Definition:**

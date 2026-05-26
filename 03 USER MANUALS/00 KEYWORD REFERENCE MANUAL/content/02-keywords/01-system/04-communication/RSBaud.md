@@ -1,3 +1,29 @@
+---
+keyword: RSBaud
+availability:
+  standalone:
+  - v4
+  central-i:
+  - v4
+can_code: 79
+attributes:
+  access: rw
+  scope: non-axis
+  flash: true
+  type: array
+  array_size: 3
+  data_type: int32
+  ok_in_motion: true
+  ok_motor_on: true
+  units: none
+  range:
+  - 1
+  - 5
+  default: 4
+  scaling: 1.0
+  implemented: final
+overrides: {}
+---
 # RSBaud
 
 **Definition:**
