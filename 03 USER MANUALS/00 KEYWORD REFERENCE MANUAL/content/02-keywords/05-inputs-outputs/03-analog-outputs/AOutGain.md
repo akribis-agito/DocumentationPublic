@@ -1,14 +1,18 @@
+---
+keyword: AOutGain
+summary: Not a current firmware keyword — analog-output scaling is done by AOutShifts.
+---
 # AOutGain
 
-**Definition:**
+Not a current firmware keyword — analog-output scaling is done by AOutShifts.
 
-AOutGain sets the gain applied to the analog output signal before it is sent to the DAC. It scales the output value so that the full-scale voltage range of the analog output port matches the expected signal range of the connected device.
+> **Not present in the firmware.** `AOutGain` does not exist in the controller's keyword
+> table (`AG300_CTL01Params.c`) and cannot be used. Analog-output scaling is performed by
+> [AOutShifts](AOutShifts.md) (a power-of-two scale) together with [AOutOffset](AOutOffset.md).
+> This page is retained only to redirect readers who expected a gain keyword.
 
-%%
-Needs verification
-AOutGain was not found in the AG300_CTL01Params.c firmware parameter table. Confirm availability and correct parameter attributes before use.
-%%
+## See also
 
-**See also:**
-
-[AOutMode](AOutMode.md), [AOutOffset](AOutOffset.md), [AOutPort](AOutPort.md)
+- [AOutShifts](AOutShifts.md) — power-of-two output scaling (the actual mechanism)
+- [AOutMode](AOutMode.md) — direct vs monitoring mode
+- [AOutOffset](AOutOffset.md) — output offset

@@ -1,5 +1,6 @@
 ---
 keyword: AOutMode
+summary: Selects direct command mode or parameter-monitoring mode for each analog output.
 availability:
   standalone:
   - v4
@@ -26,13 +27,28 @@ overrides: {}
 ---
 # AOutMode
 
-**Definition:**
+Selects direct command mode or parameter-monitoring mode for each analog output.
 
-AOutMode defines if the analog outputs are in direct command mode or monitoring mode. The array index corresponds to the index of the analog output. (i.e.: AOutMode\[2\] refers to analog output 2).
+## Overview
 
-The table below shows the value associated to AOutMode.
+`AOutMode` sets whether an analog output is in **direct command mode** or **monitoring mode**. The array index is the analog-output number (e.g. `AOutMode[2]` is analog output 2).
 
-| Value | Descriptions |
-|---|---|
-| 0 | Direct command mode |
-| CCC | Monitoring mode CCC is the Complex CAN code of the parameter/keyword to be emulated. |
+| Value | Mode |
+|-------|------|
+| 0 | Direct command mode — the output follows [AOutPort](AOutPort.md) |
+| CCC | Monitoring mode — the output emulates the parameter whose Complex CAN code (CCC) is given |
+
+In monitoring mode the emulated parameter is treated as millivolts, scaled by [AOutShifts](AOutShifts.md) and offset by [AOutOffset](AOutOffset.md). See the [analog-output overview](00-overview.md).
+
+## Examples
+
+```text
+AOutMode[1]=0       ; direct command mode
+AOutMode[1]=<CCC>   ; monitor a parameter (use its Complex CAN code)
+```
+
+## See also
+
+- [AOutPort](AOutPort.md) — commanded value (direct mode)
+- [AOutShifts](AOutShifts.md) — scaling (monitoring mode)
+- [AOutOffset](AOutOffset.md) — output offset

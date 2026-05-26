@@ -1,5 +1,6 @@
 ---
 keyword: AOutPort
+summary: Commanded analog-output value (mV) in direct command mode.
 availability:
   standalone:
   - v4
@@ -26,6 +27,20 @@ overrides: {}
 ---
 # AOutPort
 
-AOutPort defines the output value to analog output in millivolts (mV). The array index corresponds to the index of the analog output. (i.e.: AOutPort\[2\] refers to analog output 2).
+Commanded analog-output value (mV) in direct command mode.
 
-AOutPort\[Index\] only takes effect if AOutMode\[Index\] == 0.
+## Overview
+
+`AOutPort` sets the value, in millivolts, driven on an analog output when that output is in **direct command mode**. The array index is the analog-output number (e.g. `AOutPort[2]` is analog output 2). `AOutPort[Index]` only takes effect when `AOutMode[Index] == 0`; in monitoring mode the output follows the emulated parameter instead. See the [analog-output overview](00-overview.md) for both modes.
+
+## Examples
+
+```text
+AOutMode[1]=0       ; direct command mode
+AOutPort[1]=5000    ; drive analog output 1 to 5000 mV
+```
+
+## See also
+
+- [AOutMode](AOutMode.md) — direct vs monitoring mode
+- [AOutOffset](AOutOffset.md) — output calibration offset

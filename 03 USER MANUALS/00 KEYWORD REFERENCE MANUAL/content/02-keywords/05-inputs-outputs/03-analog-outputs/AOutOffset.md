@@ -1,5 +1,6 @@
 ---
 keyword: AOutOffset
+summary: Offset (mV) added to the analog output, used to calibrate/zero it.
 availability:
   standalone:
   - v4
@@ -26,6 +27,19 @@ overrides: {}
 ---
 # AOutOffset
 
-**Definition:**
+Offset (mV) added to the analog output, used to calibrate/zero it.
 
-AOutOffset defines the offset value (in millivolts) that is added to the scaled analog output. The array index corresponds to the index of the analog output. (i.e.: AOutOffset\[2\] refers to analog output 2).
+## Overview
+
+`AOutOffset` adds a fixed offset, in millivolts, to the analog output — the final stage of the [analog-output signal path](00-overview.md), applied after scaling. The array index is the analog-output number (e.g. `AOutOffset[2]` is analog output 2). Use it to calibrate or zero the output of a channel.
+
+## Examples
+
+```text
+AOutOffset[1]=-12   ; trim analog output 1 by -12 mV to zero it
+```
+
+## See also
+
+- [AOutPort](AOutPort.md) — commanded value (direct mode)
+- [AOutShifts](AOutShifts.md) — scaling (monitoring mode)
