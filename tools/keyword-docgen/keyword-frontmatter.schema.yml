@@ -32,7 +32,11 @@ fields:
     type: integer
     origin: generated
     required: true
-    description: CAN code of the primary cell.
+    description: >
+      CAN code of the PRIMARY cell. The CAN code can differ between versions;
+      when it does, the differing cell's can_code appears inside its `overrides`
+      entry (treated like any other divergent field). Renderers should show the
+      primary can_code with a divergence marker when an override carries can_code.
 
   category:
     type: string
@@ -80,11 +84,12 @@ fields:
     origin: generated
     required: false
     description: >
-      Per-cell deltas from the primary attributes. Keys are "<product>.<version>"
-      (flat dotted), values are a partial attributes map containing ONLY the
-      fields that differ from the primary. Drives the divergence markers.
+      Per-cell deltas from the primary. Keys are "<product>.<version>" (flat
+      dotted); values are a partial map containing ONLY the fields that differ
+      from the primary. May include any attributes field AND `can_code` (the CAN
+      code can differ by version). Drives the divergence markers.
     example:
-      standalone.v4: { range: [0, 32767], default: 120, access: ro }
+      standalone.v4: { can_code: 468, range: [0, 32767], default: 120, access: ro }
       central-i.v5:  { default: 90 }
 
   removed_in:

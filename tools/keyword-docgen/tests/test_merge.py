@@ -14,11 +14,21 @@ def attrs(**over):
     return base
 
 
-def scan_present(**over):
+def scan_present(can_code=100, **over):
     return {
-        "standalone": {"can_code": 100, "attributes": attrs(**over)},
-        "central-i": {"can_code": 100, "attributes": attrs(**over)},
+        "standalone": {"can_code": can_code, "attributes": attrs(**over)},
+        "central-i": {"can_code": can_code, "attributes": attrs(**over)},
     }
+
+
+def test_can_code_divergence_recorded_in_overrides():
+    fm = merge_version({}, scan_present(can_code=468), "v4", mode="append")
+    fm = merge_version(fm, scan_present(can_code=348), "v5", mode="append")
+    assert fm["can_code"] == 348                                   # v5 primary
+    assert fm["overrides"]["standalone.v4"]["can_code"] == 468
+    # reconstruct round-trip keeps v4 can_code distinct from v5
+    fm = merge_version(fm, scan_present(can_code=348), "v5", mode="overwrite")
+    assert fm["overrides"]["standalone.v4"]["can_code"] == 468
 
 
 def test_first_append_sets_primary_and_availability():

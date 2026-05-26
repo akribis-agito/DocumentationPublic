@@ -33,6 +33,6 @@ def render_doc(frontmatter: dict, body: str) -> str:
     """Render frontmatter + body back into a document string."""
     dumped = yaml.dump(
         frontmatter, Dumper=_NoAliasDumper, sort_keys=False,
-        default_flow_style=False, allow_unicode=True,
+        default_flow_style=False, allow_unicode=True, width=4096,
     )
     return f"{_FENCE}{dumped}{_FENCE}{body}"

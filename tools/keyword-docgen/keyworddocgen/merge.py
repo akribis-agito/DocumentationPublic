@@ -16,16 +16,21 @@ class VersionAlreadyRecorded(Exception):
 
 
 def _reconstruct_cells(fm: dict) -> dict[tuple[str, str], dict]:
-    """Rebuild {(product, version): attributes} from primary + overrides."""
+    """Rebuild {(product, version): {"attrs": {...}, "can_code": int}} from the
+    primary attributes/can_code plus per-cell overrides. `can_code` may appear
+    inside an override entry (it can differ by version)."""
     cells: dict[tuple[str, str], dict] = {}
-    primary = fm.get("attributes")
+    primary_attrs = fm.get("attributes") or {}
+    top_can = fm.get("can_code")
     availability = fm.get("availability", {})
     overrides = fm.get("overrides", {})
     for product in PRODUCTS:
         for version in availability.get(product, []):
-            attrs = dict(primary) if primary else {}
-            attrs.update(overrides.get(cell_key(product, version), {}))
-            cells[(product, version)] = attrs
+            ov = dict(overrides.get(cell_key(product, version), {}))
+            can_code = ov.pop("can_code", top_can)
+            attrs = dict(primary_attrs)
+            attrs.update(ov)
+            cells[(product, version)] = {"attrs": attrs, "can_code": can_code}
     return cells
 
 
@@ -47,15 +52,16 @@ def merge_version(fm: dict, scan_cells: dict, version: str, mode: str) -> dict:
         raise VersionAlreadyRecorded(version)
 
     cells = _reconstruct_cells(fm)
-    can_codes = {k: fm.get("can_code") for k in cells}
 
     # Drop any prior cells for this version, then apply the scan.
     for product in PRODUCTS:
         cells.pop((product, version), None)
         cell = scan_cells.get(product)
         if cell is not None:
-            cells[(product, version)] = cell["attributes"]
-            can_codes[(product, version)] = cell["can_code"]
+            cells[(product, version)] = {
+                "attrs": cell["attributes"],
+                "can_code": cell["can_code"],
+            }
 
     # removed_in: a version we scanned but where the keyword is now absent,
     # while older cells still exist.
@@ -76,10 +82,10 @@ def merge_version(fm: dict, scan_cells: dict, version: str, mode: str) -> dict:
     result = dict(fm)
     result["availability"] = availability
     if primary_cell is not None:
-        primary_attrs = cells[primary_cell]
-        result["can_code"] = can_codes.get(primary_cell, fm.get("can_code"))
-        result["attributes"] = primary_attrs
-        result["overrides"] = _compute_overrides(cells, primary_cell, primary_attrs)
+        primary = cells[primary_cell]
+        result["can_code"] = primary["can_code"]
+        result["attributes"] = primary["attrs"]
+        result["overrides"] = _compute_overrides(cells, primary_cell)
     if removed_in:
         result["removed_in"] = sorted(removed_in, key=version_rank)
     else:
@@ -96,12 +102,20 @@ def _pick_primary(cells: dict[tuple[str, str], dict]) -> tuple[str, str] | None:
     return None
 
 
-def _compute_overrides(cells, primary_cell, primary_attrs) -> dict:
+def _compute_overrides(cells, primary_cell) -> dict:
+    """Per-cell deltas from the primary cell, covering both attributes and
+    can_code (which can differ by version)."""
+    primary = cells[primary_cell]
     overrides: dict[str, dict] = {}
-    for (product, version), attrs in cells.items():
+    for (product, version), cell in cells.items():
         if (product, version) == primary_cell:
             continue
-        diff = {k: v for k, v in attrs.items() if v != primary_attrs.get(k)}
+        diff = {
+            k: v for k, v in cell["attrs"].items()
+            if v != primary["attrs"].get(k)
+        }
+        if cell["can_code"] != primary["can_code"]:
+            diff["can_code"] = cell["can_code"]
         if diff:
             overrides[cell_key(product, version)] = diff
     return overrides
