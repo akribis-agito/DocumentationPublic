@@ -4,8 +4,10 @@ summary: Partially-implemented function that routes a parameter write to another
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 484
 attributes:
   access: rw

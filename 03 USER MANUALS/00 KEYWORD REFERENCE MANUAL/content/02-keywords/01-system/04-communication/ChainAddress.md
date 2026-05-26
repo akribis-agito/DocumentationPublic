@@ -4,8 +4,10 @@ summary: CAN address used when the controller runs in a daisy-chain topology.
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 159
 attributes:
   access: rw

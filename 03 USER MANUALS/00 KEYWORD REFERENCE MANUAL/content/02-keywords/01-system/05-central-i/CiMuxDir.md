@@ -4,8 +4,10 @@ summary: Sets the direction of the Central-i multiplexer (which port the shared 
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 551
 attributes:
   access: rw

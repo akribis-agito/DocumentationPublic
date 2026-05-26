@@ -4,8 +4,10 @@ summary: Controller IP address, stored one octet per array element.
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 600
 attributes:
   access: rw

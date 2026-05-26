@@ -4,8 +4,10 @@ summary: Array reserved for Agito feature development and testing.
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 224
 attributes:
   access: rw

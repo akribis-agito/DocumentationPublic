@@ -4,8 +4,10 @@ summary: Delay, in samples, applied to CAN messages.
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 222
 attributes:
   access: rw

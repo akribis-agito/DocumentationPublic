@@ -4,8 +4,10 @@ summary: Per-axis array defining the parameters exchanged synchronously each con
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 506
 attributes:
   access: rw

@@ -4,8 +4,10 @@ summary: Reloads all parameters from flash into volatile memory, discarding unsa
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 233
 attributes:
   access: ro

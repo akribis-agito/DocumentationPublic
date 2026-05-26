@@ -4,8 +4,10 @@ summary: Read-only command returning firmware version and build information.
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 312
 attributes:
   access: ro

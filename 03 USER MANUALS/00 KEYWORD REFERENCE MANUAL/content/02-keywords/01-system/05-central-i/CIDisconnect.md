@@ -4,8 +4,10 @@ summary: Command that terminates the active Central-i link on the selected axis 
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 505
 attributes:
   access: ro

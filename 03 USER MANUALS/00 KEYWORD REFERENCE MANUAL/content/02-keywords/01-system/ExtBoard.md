@@ -4,8 +4,10 @@ summary: Selects the hardware configuration of the attached external expansion b
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 612
 attributes:
   access: rw

@@ -4,8 +4,10 @@ summary: Per-axis array reporting the live state of the Central-i port.
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 508
 attributes:
   access: ro

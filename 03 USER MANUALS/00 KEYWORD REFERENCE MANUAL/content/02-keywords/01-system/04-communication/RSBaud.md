@@ -4,8 +4,10 @@ summary: Serial (RS232/USB) baud rate per port, selected from a fixed table.
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 79
 attributes:
   access: rw
@@ -19,11 +21,19 @@ attributes:
   units: none
   range:
   - 1
-  - 5
+  - 4
   default: 4
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  standalone.v4:
+    range:
+    - 1
+    - 5
+  central-i.v4:
+    range:
+    - 1
+    - 5
 ---
 # RSBaud
 

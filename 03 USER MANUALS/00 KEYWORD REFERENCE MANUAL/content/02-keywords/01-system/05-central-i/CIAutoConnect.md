@@ -4,8 +4,10 @@ summary: When enabled, establishes the Central-i connection automatically at pow
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 500
 attributes:
   access: rw

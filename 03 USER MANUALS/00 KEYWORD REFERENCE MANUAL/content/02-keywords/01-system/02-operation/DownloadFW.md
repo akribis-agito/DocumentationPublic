@@ -4,8 +4,10 @@ summary: Command that puts the controller into firmware-download mode.
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 230
 attributes:
   access: ro

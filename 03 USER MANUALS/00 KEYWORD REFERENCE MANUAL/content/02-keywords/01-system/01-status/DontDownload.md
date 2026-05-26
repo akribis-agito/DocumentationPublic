@@ -4,8 +4,10 @@ summary: Read-only safety interlock that, when set, blocks firmware download.
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 670
 attributes:
   access: ro

@@ -4,8 +4,10 @@ summary: Ethernet-binary multi-axis status query used by the AAMotion API (being
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 420
 attributes:
   access: rw

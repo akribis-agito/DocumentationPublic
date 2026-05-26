@@ -4,9 +4,11 @@ summary: Two-element array holding the unit's hardware version and production se
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
-can_code: 468
+  - v5
+can_code: 348
 attributes:
   access: rw
   scope: non-axis
@@ -23,7 +25,11 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  standalone.v4:
+    can_code: 468
+  central-i.v4:
+    can_code: 468
 ---
 # ProductSN
 

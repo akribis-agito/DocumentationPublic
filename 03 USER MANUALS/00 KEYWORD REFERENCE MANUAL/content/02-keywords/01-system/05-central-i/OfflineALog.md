@@ -4,8 +4,10 @@ summary: Receive buffer for Central-i offline log data from device port A.
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 620
 attributes:
   access: rw

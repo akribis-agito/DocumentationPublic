@@ -4,8 +4,10 @@ summary: Two independent down-counters decremented every controller cycle.
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 39
 attributes:
   access: rw

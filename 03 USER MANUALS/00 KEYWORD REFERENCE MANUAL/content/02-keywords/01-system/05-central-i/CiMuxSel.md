@@ -4,8 +4,10 @@ summary: Per-axis array selecting which physical port is routed through the Cent
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 552
 attributes:
   access: rw

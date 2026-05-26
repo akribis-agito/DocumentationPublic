@@ -4,8 +4,10 @@ summary: Value to write to the remote controller's parameter on RemoteCANSend.
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 442
 attributes:
   access: rw

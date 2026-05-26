@@ -4,8 +4,10 @@ summary: Per-axis array holding the payload sent during a Central-i offline (sim
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 501
 attributes:
   access: rw

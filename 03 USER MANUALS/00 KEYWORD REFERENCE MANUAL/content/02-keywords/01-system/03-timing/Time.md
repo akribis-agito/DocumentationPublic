@@ -4,8 +4,10 @@ summary: Read-only seconds elapsed since power-on.
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 41
 attributes:
   access: ro

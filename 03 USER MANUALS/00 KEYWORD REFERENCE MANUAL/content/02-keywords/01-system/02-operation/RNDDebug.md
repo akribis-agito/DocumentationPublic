@@ -4,8 +4,10 @@ summary: Partially-implemented diagnostic function reserved for Agito R&D.
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 1022
 attributes:
   access: rw

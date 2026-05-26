@@ -4,8 +4,10 @@ summary: Selects the role/class of the Central-i port on an axis.
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 503
 attributes:
   access: rw

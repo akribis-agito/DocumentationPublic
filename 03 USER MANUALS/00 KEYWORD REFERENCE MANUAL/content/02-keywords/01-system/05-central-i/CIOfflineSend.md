@@ -4,6 +4,7 @@ summary: Command that transmits the Central-i offline data package on the select
 availability:
   standalone:
   - v4
+  - v5
   central-i: []
 can_code: 502
 attributes:

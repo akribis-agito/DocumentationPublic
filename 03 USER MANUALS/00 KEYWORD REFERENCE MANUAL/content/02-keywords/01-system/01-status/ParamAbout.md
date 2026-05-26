@@ -4,8 +4,10 @@ summary: Function returning a parameter's metadata (CAN code, name, attributes, 
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 499
 attributes:
   access: rw

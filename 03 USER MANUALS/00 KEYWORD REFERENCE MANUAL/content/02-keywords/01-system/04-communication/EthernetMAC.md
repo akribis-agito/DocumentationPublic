@@ -4,8 +4,10 @@ summary: Controller MAC address, stored as decimal octets one per array element.
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 602
 attributes:
   access: rw

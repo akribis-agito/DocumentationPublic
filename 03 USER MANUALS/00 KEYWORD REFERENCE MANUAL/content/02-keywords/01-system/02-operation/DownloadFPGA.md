@@ -4,8 +4,10 @@ summary: Command that puts the controller into FPGA-download mode.
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 231
 attributes:
   access: ro

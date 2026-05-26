@@ -4,8 +4,10 @@ summary: Command that transmits a CAN write to a remote node using the RemoteCAN
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 443
 attributes:
   access: rw

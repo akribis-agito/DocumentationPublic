@@ -4,8 +4,10 @@ summary: Read-only bitfield reporting the unit's hardware and firmware health.
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
+  - v5
 can_code: 75
 attributes:
   access: ro
