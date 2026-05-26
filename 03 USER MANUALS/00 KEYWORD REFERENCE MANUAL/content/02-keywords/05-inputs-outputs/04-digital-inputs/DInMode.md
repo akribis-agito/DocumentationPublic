@@ -1,5 +1,6 @@
 ---
 keyword: DInMode
+summary: Assigns a software function to each digital input, with per-axis targeting.
 availability:
   standalone:
   - v4
@@ -24,46 +25,35 @@ overrides: {}
 ---
 # DInMode
 
-**Definition:**
+Assigns a software function to each digital input, with per-axis targeting.
 
-DInMode assigns specific software functions to digital inputs.
+## Overview
 
-Each index in DInMode\[\] corresponds to an input (1-based index).
+`DInMode` assigns a software function to a digital input. The array **index** selects the input (1-based: `DInMode[1]` is input 1, `DInMode[2]` is input 2, …).
 
-| Index | Corresponds to |
-|-------|----------------|
-| 1     | Input 1        |
-| 2     | Input 2        |
-| 3     | Input 3        |
-| …     | …              |
+## How it works
 
-The functionality is selected by the Value (lower 16 bits). The list of functionalities is as per the table below.
+- The **lower 16 bits** of the value select the function (a numeric functionality code — e.g. `10` = reverse limit switch, FLS).
+- **Bits 16–27** select which axes the function applies to; each bit is one axis (A–L), and multiple bits may be set.
 
-**Note:**
+| Axis | A | B | C | D | E | F | G | H | I | J | K | L |
+|------|---|---|---|---|---|---|---|---|---|---|---|---|
+| Value, Bit# | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 |
 
-1. When the input is low, control set 1 is used.
-2. When the input is high, control set 2 is used.
+**Example:** `CDInMode[2] = 65546` (binary `…0001 0000 0000 0000 1010`):
+- Index → 2 (digital input 2)
+- Lower 16 bits → 10 (reverse limit switch)
+- Bit 16 set → axis B
 
-The axes, for which the function **applies to**, is selected by the bit 16 to 27 of Value. Each bit corresponds to an axis; multiple axes can be selected.
+…so digital input 2 (of axis C) acts as the reverse-limit-switch input for axis B.
 
-| Axis        | A   | B   | C   | D   | E   | F   | G   | H   | I   | J   | K   | L   |
-|-------------|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
-| Value, Bit# | 16  | 17  | 18  | 19  | 20  | 21  | 22  | 23  | 24  | 25  | 26  | 27  |
+## Notes
 
-**Example:**
+1. After changing `DInMode[]`, [Save](../../01-system/02-operation/Save.md) and [Reset](../../01-system/02-operation/Reset.md) — some special functions only start (or stop) working after a power cycle.
+2. At most **20** special functions may be assigned across the digital inputs; beyond that, only the first 20 are operational. A function applied to two axes counts as two.
+3. Functions are evaluated in ascending index order; a duplicate functionality on a later input is ignored (except general-purpose input). No error is raised, but PCSuite shows a warning.
 
-If CDInMode\[2\] = 65,546 (binary 00000000 00000001 00000000 00001010):
+## See also
 
-1.  Index → 2 (Digital Input 2)
-
-2.  Value (bit 16 to 27) → bit 16 (Axis B)
-
-3.  Value (lower 16-bits) → 10 (FLS)
-
-Digital Input 2 (of Axis C) is used as Axis B FLS input.
-
-**Note:**
-
-1. It is highly recommended to save to flash ( Save ) and reset the controller ( Reset ) after making changes to DInMode[] since some of the special functionalities require power cycle to work (or to stop working) properly.
-2. It is not allowed to set more than 20 special functions to the discrete inputs. In case more than 20 functions are set, only the first 20 will be operational. For example, if a special function is assigned to a given input and is applied on two axes, it is counted as 2 special functions.
-3. The functionality is checked in ascending order of the array elements. Any subsequent digital inputs with duplicated functionality definition (except for the general-purpose input functionality) will be ignored/ineffective. For example, if DInMode[1] = 9 and DInMode[3] = 9, digital input 3 (corresponds to DInMode[3]) will be ignored and will not act a reverse limit switch input. No error message is thrown, but a warning will be shown on PCSuite.
+- [DInPort-DInPortHigh](DInPort-DInPortHigh.md) — input states
+- [DInLog-DInLogHigh](DInLog-DInLogHigh.md) — logic inversion

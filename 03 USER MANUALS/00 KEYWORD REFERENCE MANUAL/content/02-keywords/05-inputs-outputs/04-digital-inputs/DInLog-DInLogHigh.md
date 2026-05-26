@@ -1,48 +1,36 @@
-# DInLog/DInLogHigh
+---
+summary: Per-input logic inversion (XOR) for the digital inputs (DInLog = inputs 1–32, DInLogHigh = 33–64).
+---
+# DInLog / DInLogHigh
 
-**Definition:**
+Per-input logic inversion (XOR) for the digital inputs.
 
-DInLog/DInLogHigh inverts the logic for selected digital inputs through XOR operation.
+## Overview
 
-| Bit’s value | Logic    |
-|-------------|----------|
-| 0           | Default  |
-| 1           | Inverted |
+`DInLog` inverts the logic of selected digital inputs 1–32; `DInLogHigh` does the same for inputs 33–64. Each input is one bit; a set bit inverts that input via an XOR applied before the state is stored in [DInPort](DInPort-DInPortHigh.md).
 
-For digital inputs 1 to 32,
+| Bit value | Logic |
+|-----------|-------|
+| 0 | Default |
+| 1 | Inverted |
 
-$$
-DInPort\  = \ DInPortBefore\ \hat{}\ DInLog
-$$
-
-For digital inputs 33 to 64,
-
-$$
-DInPortHigh\  = \ DInPortHighBefore\ \hat{}\ DInLogHigh
-$$
-
-**Example:**
-
-If
+## How it works
 
 $$
-DInPortBefore\  = \ 15\ (binary\ 00000000\ 00000000\ 00000000\ 00001111)
+DInPort = DInPortBefore \oplus DInLog
+$$
+$$
+DInPortHigh = DInPortHighBefore \oplus DInLogHigh
 $$
 
-and
+**Example:** with `DInPortBefore = 15` (`…00001111`) and `DInLog = 6` (`…00000110`), the result is `DInPort = 9` (`…00001001`) — bits 1 and 2 are inverted (digital inputs 2 and 3).
 
-$$
-DInLog\  = \ 6\ (binary\ 00000000\ 00000000\ 00000000\ 00000110)
-$$
+## Notes
 
-then
+Typically used for limit switches for fail-safe reasons: configure so that a disconnected switch (input low) triggers a fault.
 
-$$
-DInPort = \ 9\ (binary\ 00000000\ 00000000\ 00000000\ 00001001)
-$$
+## See also
 
-where bits 1 and 2 are inverted (referring to digital input 2 and 3).
-
-**Note:**
-
-This is typically used for limit switches for fail-safe reasons. (i.e.: If limit switch is not connected (input low), then fault is triggered).
+- [DInPort-DInPortHigh](DInPort-DInPortHigh.md) — resulting input states
+- [DInFilt](DInFilt.md) — debounce filter
+- [DInMode](DInMode.md) — assign functions to inputs

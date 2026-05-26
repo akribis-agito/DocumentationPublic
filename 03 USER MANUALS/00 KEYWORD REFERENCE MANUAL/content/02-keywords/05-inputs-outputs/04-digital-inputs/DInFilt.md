@@ -1,5 +1,6 @@
 ---
 keyword: DInFilt
+summary: Software debounce filter for all digital inputs on an axis.
 availability:
   standalone:
   - v4
@@ -26,8 +27,21 @@ overrides: {}
 ---
 # DInFilt
 
-DInFilt determines the number of consecutive samples where each raw digital input must have the same state/value, before its change is asserted. Otherwise, the digital input retains its state. In short, it defines software debouncing filter. For example, if DInFilt is 3, 3 consecutive readings of “1” is needed before “1” is asserted.
+Software debounce filter for all digital inputs on an axis.
 
-After n-cycle debouncing, the effective digital input sampling rate will be reduced by a factor of n. However, this filter improves the noise immunity of the digital input.
+## Overview
 
-DInFilt is a single parameter that applies to all of the digital inputs of the axis. For example, CDInFilt applies to all digital inputs of axis/module C.
+`DInFilt` sets a software debounce filter: a raw digital input must hold the same value for `DInFilt` consecutive samples before the change is asserted; otherwise the input keeps its previous state. For example, `DInFilt = 3` requires three consecutive readings of "1" before a "1" is asserted. It is the first stage of the [digital-input signal path](00-overview.md).
+
+`DInFilt` is a single value that applies to **all** digital inputs of the axis/module (e.g. `CDInFilt` applies to all inputs of axis/module C). Debouncing improves noise immunity at the cost of reducing the effective sampling rate by the filter factor.
+
+## Examples
+
+```text
+DInFilt=3           ; require 3 consecutive matching samples
+```
+
+## See also
+
+- [DInPort-DInPortHigh](DInPort-DInPortHigh.md) — resulting input states
+- [DInLog-DInLogHigh](DInLog-DInLogHigh.md) — logic inversion
