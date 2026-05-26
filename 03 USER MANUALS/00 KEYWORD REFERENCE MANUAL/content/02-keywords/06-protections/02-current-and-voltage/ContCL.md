@@ -1,5 +1,6 @@
 ---
 keyword: ContCL
+summary: Continuous current limit used in the I²t power-limitation scheme.
 availability:
   standalone:
   - v4
@@ -26,10 +27,27 @@ overrides: {}
 ---
 # ContCL
 
-**Definition:**
+Continuous current limit used in the I²t power-limitation scheme.
 
-ContCL refers to the continuous current limit of the amplifier. It is used to define amplifier behaviour in I2t power limitation scheme.
+## Overview
 
-**Note:**
+`ContCL` is the continuous current limit of the amplifier. Together with [PeakCL](PeakCL.md) (the peak limit) and [PeakTime](PeakTime.md) (the time allowed at peak), it defines the **I²t** scheme that lets the drive deliver brief bursts of peak current while protecting the motor and amplifier from sustained overheating.
 
-If ContCL is defined equal to or higher than peak current limit (PeakCL), controller will internally use the continuous current limit of PeakCL/2 instead. ContCL value will not be automatically updated.
+## How it works
+
+![I²t tripping mechanism](I2t-tripping-mechanism.svg)
+
+The drive may run up to `PeakCL` for up to `PeakTime`; sustained current is then limited toward `ContCL`.
+
+> **Note:** if `ContCL` is set equal to or higher than `PeakCL`, the controller internally uses a continuous limit of `PeakCL / 2` instead. The stored `ContCL` value is not changed automatically.
+
+## Examples
+
+```text
+ContCL=16000        ; continuous current limit (mA)
+```
+
+## See also
+
+- [PeakCL](PeakCL.md) — peak current limit
+- [PeakTime](PeakTime.md) — time allowed at peak current

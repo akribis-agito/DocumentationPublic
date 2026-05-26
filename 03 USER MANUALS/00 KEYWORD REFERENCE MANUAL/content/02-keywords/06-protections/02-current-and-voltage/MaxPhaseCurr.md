@@ -1,5 +1,6 @@
 ---
 keyword: MaxPhaseCurr
+summary: Hard limit on motor phase current; exceeding it disables the axis.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # MaxPhaseCurr
 
-**Definition:**
+Hard limit on motor phase current; exceeding it disables the axis.
 
-MaxPhaseCurr defines the maximum allowable motor phase current in mA. If absolute value of any phase current exceeds MaxPhaseCurr for more than 0.25ms, axis is disabled, and an error code is thrown to ConFlt.
+## Overview
 
-**Note:**
+`MaxPhaseCurr` is the maximum allowable motor **phase** current, in mA. If the absolute value of any phase current exceeds `MaxPhaseCurr` for more than 0.25 ms, the axis is disabled and an error code is reported to the fault register `ConFlt`.
 
-For single-phase motor/voice-coil, MotorCurr is monitored. For three-phase motor, Ia, Ib and Ic are monitored. Ic is inferred from Ia and Ib.
+> **Note:** for a single-phase motor / voice coil, `MotorCurr` is monitored. For a three-phase motor, `Ia`, `Ib`, and `Ic` are monitored (`Ic` is inferred from `Ia` and `Ib`).
+
+## Examples
+
+```text
+MaxPhaseCurr=50000  ; per-phase over-current trip (mA)
+```
+
+## See also
+
+- [MaxMotorCurr](MaxMotorCurr.md) — total motor-current trip
+- [PeakCL](PeakCL.md) — peak current limiting

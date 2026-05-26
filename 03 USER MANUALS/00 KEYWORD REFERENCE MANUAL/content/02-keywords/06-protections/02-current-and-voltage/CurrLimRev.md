@@ -1,5 +1,6 @@
 ---
 keyword: CurrLimRev
+summary: Negative current-command limit (used when CurrLimMode = 3).
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # CurrLimRev
 
-**Condition:**
+Negative current-command limit (used when CurrLimMode = 3).
 
-It is only used if CurrLimMode=3.
+## Overview
 
-**Definition:**
+`CurrLimRev` defines the **negative** current-command limit, overriding the default [PeakCL](PeakCL.md) limit. It applies only when [CurrLimMode](CurrLimMode.md) is `3`. The value should be given as a positive number (it bounds the negative side, i.e. the command is limited to −`CurrLimRev`).
 
-CurrLimFwd defines the negative current command limit, overwriting the default PeakCL limitation. The value should be positive.
+## Examples
+
+```text
+CurrLimMode=3
+CurrLimRev=40000    ; magnitude of the negative current limit (mA)
+```
+
+## See also
+
+- [CurrLimFwd](CurrLimFwd.md) — positive current-command limit
+- [CurrLimMode](CurrLimMode.md) — must be 3 for this to apply

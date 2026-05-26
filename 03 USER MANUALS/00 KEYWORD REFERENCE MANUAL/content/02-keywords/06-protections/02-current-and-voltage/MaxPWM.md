@@ -1,5 +1,6 @@
 ---
 keyword: MaxPWM
+summary: Limits the maximum PWM duty cycle (and thus the maximum voltage to the motor).
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # MaxPWM
 
-**Definition:**
+Limits the maximum PWM duty cycle (and thus the maximum voltage to the motor).
 
-For PWM amplifiers, MaxPWM is used to limit the maximum duty cycle of PWM drives, and effectively the maximum voltage output to the motor. The units for MaxPWM is 0.1%, where 1000 represents 100% duty cycle, and a 0 value represents maximum 0% duty cycle.
+## Overview
 
-**Example:**
+For PWM amplifiers, `MaxPWM` limits the maximum duty cycle of the PWM drive — and therefore the maximum voltage applied to the motor. The units are **0.1%**: `1000` represents 100% duty cycle, and `0` represents 0%.
 
-For example, an axis has default value of MaxPWM=900 and bus voltage is 48V. To limit to maximum 30% duty cycle, user should set MaxPWM=300 to limit maximum voltage output to 14.4V.
+## Examples
+
+With a 48 V bus and default `MaxPWM = 900`, to cap the output at 30% duty cycle (14.4 V) set:
+
+```text
+MaxPWM=300          ; limit to 30% duty cycle -> ~14.4 V on a 48 V bus
+```
+
+## See also
+
+- [MaxVBus](MaxVBus.md) / [MinVBus](MinVBus.md) — bus-voltage limits

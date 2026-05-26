@@ -1,5 +1,6 @@
 ---
 keyword: ProtectMask
+summary: Bitfield enabling which hardware protection conditions trigger a fault.
 availability:
   standalone:
   - v4
@@ -24,10 +25,18 @@ overrides: {}
 ---
 # ProtectMask
 
-**Definition:**
+Bitfield enabling which hardware protection conditions trigger a fault.
 
-ProtectMask is a bit-field that selects which hardware protection conditions are enabled and will trigger a fault. Setting a bit to 1 enables the corresponding protection; clearing it disables that protection. It is an axis-related parameter saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`ProtectMask` is a bitfield that selects which hardware protection conditions are enabled: setting a bit to 1 enables the corresponding protection (so it will trigger a fault), and clearing it disables that protection. The bit positions correspond to the conditions reported by [HWProtectBits](HWProtectBits.md). It is axis-related, saved to flash, and may be changed at any time.
 
-[HWProtectBits](HWProtectBits.md)
+## Examples
+
+```text
+ProtectMask?        ; read which hardware protections are enabled
+```
+
+## See also
+
+- [HWProtectBits](HWProtectBits.md) — reports the live state of these protections

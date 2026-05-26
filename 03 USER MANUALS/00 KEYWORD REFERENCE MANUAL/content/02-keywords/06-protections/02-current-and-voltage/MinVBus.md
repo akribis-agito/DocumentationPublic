@@ -1,5 +1,6 @@
 ---
 keyword: MinVBus
+summary: Minimum allowed bus voltage; sustained shortfall disables the axis.
 availability:
   standalone:
   - v4
@@ -26,6 +27,19 @@ overrides: {}
 ---
 # MinVBus
 
-**Definition:**
+Minimum allowed bus voltage; sustained shortfall disables the axis.
 
-MinVBus is the minimum allowed bus voltage in mV. If actual bus voltage is under this limit for period longer than MaxVBusTime, axis is disabled, and an error code is thrown to ConFlt.
+## Overview
+
+`MinVBus` is the minimum allowed bus voltage, in mV. If the actual bus voltage stays below this limit for longer than [MaxVBusTime](MaxVBusTime.md), the axis is disabled and an error code is reported to the fault register `ConFlt`. This guards against brown-out / supply-loss conditions.
+
+## Examples
+
+```text
+MinVBus=18000       ; 18 V minimum bus voltage (mV)
+```
+
+## See also
+
+- [MaxVBus](MaxVBus.md) — maximum bus voltage
+- [MaxVBusTime](MaxVBusTime.md) — out-of-range time before tripping

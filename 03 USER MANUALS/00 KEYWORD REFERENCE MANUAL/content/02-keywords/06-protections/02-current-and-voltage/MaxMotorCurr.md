@@ -1,5 +1,6 @@
 ---
 keyword: MaxMotorCurr
+summary: Hard limit on motor current; exceeding it disables the axis.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # MaxMotorCurr
 
-**Definition:**
+Hard limit on motor current; exceeding it disables the axis.
 
-MaxMotorCurr defines the maximum allowable motor current ([MotorCurr](../../../02-keywords/09-current-and-voltage/02-motor-variables/MotorCurr.md)) in mA. If absolute value of MotorCurr exceeds MaxMotorCurr for more than 0.25ms, axis is disabled, and an error code is thrown to ConFlt.
+## Overview
 
-**Note:**
+`MaxMotorCurr` is the maximum allowable motor current (`MotorCurr`), in mA. If the absolute value of the motor current exceeds `MaxMotorCurr` for more than 0.25 ms, the axis is disabled and an error code is reported to the fault register `ConFlt`. Unlike the I²t scheme (which limits sustained current), this is an instantaneous over-current trip.
 
-For three-phase motor, MotorCurr is equal to amplitude of motor current phasor.
+> **Note:** for a three-phase motor, `MotorCurr` is the amplitude of the motor-current phasor.
+
+## Examples
+
+```text
+MaxMotorCurr=50000  ; trip if motor current exceeds 50 A (mA units)
+```
+
+## See also
+
+- [MaxPhaseCurr](MaxPhaseCurr.md) — per-phase over-current trip
+- [PeakCL](PeakCL.md) / [ContCL](ContCL.md) — current limiting (vs tripping)

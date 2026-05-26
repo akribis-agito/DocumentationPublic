@@ -1,5 +1,6 @@
 ---
 keyword: HWProtectBits
+summary: Read-only bitfield reporting active hardware protection conditions.
 availability:
   standalone:
   - v4
@@ -26,10 +27,18 @@ overrides: {}
 ---
 # HWProtectBits
 
-**Definition:**
+Read-only bitfield reporting active hardware protection conditions.
 
-HWProtectBits is a read-only bit-field that reports the current state of the hardware protection inputs detected by the controller. Each bit corresponds to a specific hardware protection condition (such as over-current, over-voltage, or hardware enable signals). It is an axis-related status variable that is not saved to flash.
+## Overview
 
-**See also:**
+`HWProtectBits` is a read-only bitfield reporting the current state of the controller's hardware protection inputs. Each bit corresponds to a specific hardware protection condition (such as over-current, over-voltage, or a hardware enable signal). It is axis-related, updated live, and not saved to flash. Which of these conditions actually trigger a fault is selected by [ProtectMask](ProtectMask.md).
 
-[ProtectMask](ProtectMask.md)
+## Examples
+
+```text
+HWProtectBits?      ; read the active hardware protection conditions
+```
+
+## See also
+
+- [ProtectMask](ProtectMask.md) — enables which protections trigger a fault

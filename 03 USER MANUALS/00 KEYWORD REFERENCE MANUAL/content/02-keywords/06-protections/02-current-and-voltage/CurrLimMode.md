@@ -1,5 +1,6 @@
 ---
 keyword: CurrLimMode
+summary: Selects how the current command (CurrRef) is saturated.
 availability:
   standalone:
   - v4
@@ -26,16 +27,29 @@ overrides: {}
 ---
 # CurrLimMode
 
-**Definition:**
+Selects how the current command (CurrRef) is saturated.
 
-CurrLimMode defines the current command (CurrRef) saturation limits.
+## Overview
 
-| Value | Limitation based on | Allowable CurrRef range \[mA\] |
-|----|----|----|
-| 0 | PeakCL (using absolute value) | \[-PeakCL, PeakCL\] |
-| 1 | 2 analog inputs (using absolute values) | \[-AInPort\[q\], AInPort\[p\]\] |
-| 2 | 1 analog input (using absolute value) | \[-AInPort\[p\], AInPort\[p\]\] |
-| 3 | CurrLimFwd, CurrLimRev (using absolute value) | \[-CurrLimRev, CurrLimFwd\] |
+`CurrLimMode` chooses the source of the current-command (`CurrRef`) saturation limits:
 
-<span class="mark">If CurrLimMode=1, the current command will take the positive limitation from AInPort\[p\] of which AInMode\[p\]=8. Similarly, the negative limitation is taken from AInPort\[q\] of which AinPort\[q\]=7.</span>
-<span class="mark">If CurrLimMode=2, the current command will take the positive and negative limitation from AInPort\[p\] of which AInMode\[p\]=8.</span>
+| Value | Limited by | Allowable CurrRef range [mA] |
+|-------|------------|------------------------------|
+| 0 | [PeakCL](PeakCL.md) (absolute value) | [−PeakCL, PeakCL] |
+| 1 | Two analog inputs | [−AInPort[q], AInPort[p]] |
+| 2 | One analog input | [−AInPort[p], AInPort[p]] |
+| 3 | [CurrLimFwd](CurrLimFwd.md), [CurrLimRev](CurrLimRev.md) | [−CurrLimRev, CurrLimFwd] |
+
+- **Mode 1:** the positive limit comes from the analog input `p` where [AInMode](../../05-inputs-outputs/02-analog-inputs/AInMode.md)`[p] = 8` (positive current limit); the negative limit from input `q` where `AInMode[q] = 7` (negative current limit).
+- **Mode 2:** both limits come from the single analog input `p` where `AInMode[p] = 8`.
+
+## Examples
+
+```text
+CurrLimMode=3       ; use CurrLimFwd / CurrLimRev as the limits
+```
+
+## See also
+
+- [CurrLimFwd](CurrLimFwd.md) / [CurrLimRev](CurrLimRev.md) — limits used in mode 3
+- [PeakCL](PeakCL.md) — limit used in mode 0

@@ -1,5 +1,6 @@
 ---
 keyword: PeakCL
+summary: Peak current limit, used for both current-command saturation and I²t protection.
 availability:
   standalone:
   - v4
@@ -26,6 +27,20 @@ overrides: {}
 ---
 # PeakCL
 
-**Definition:**
+Peak current limit, used for both current-command saturation and I²t protection.
 
-PeakCL is the peak current limit used in both current command and I2t limitations. If current limitation mode (CurrLimMode) is 0, the absolute value of current command will never exceed this value.
+## Overview
+
+`PeakCL` is the peak current limit. It serves two roles: it is the upper bound used by the I²t scheme (with [ContCL](ContCL.md) and [PeakTime](PeakTime.md)), and — when the current-limit mode [CurrLimMode](CurrLimMode.md) is `0` — it caps the current command, so the absolute value of the command never exceeds `PeakCL`.
+
+## Examples
+
+```text
+PeakCL=64000        ; peak current limit (mA)
+```
+
+## See also
+
+- [ContCL](ContCL.md) — continuous current limit
+- [PeakTime](PeakTime.md) — time allowed at peak current
+- [CurrLimMode](CurrLimMode.md) — selects how the current command is limited

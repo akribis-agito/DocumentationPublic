@@ -1,5 +1,6 @@
 ---
 keyword: CurrLimFwd
+summary: Positive current-command limit (used when CurrLimMode = 3).
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # CurrLimFwd
 
-**Condition:**
+Positive current-command limit (used when CurrLimMode = 3).
 
-It is only used if CurrLimMode=3.
+## Overview
 
-**Definition:**
+`CurrLimFwd` defines the **positive** current-command limit, overriding the default [PeakCL](PeakCL.md) limit. It applies only when [CurrLimMode](CurrLimMode.md) is `3`. The value should be positive.
 
-CurrLimFwd defines the positive current command limit, overwriting the default PeakCL limitation. The value should be positive.
+## Examples
+
+```text
+CurrLimMode=3
+CurrLimFwd=40000    ; positive current limit (mA)
+```
+
+## See also
+
+- [CurrLimRev](CurrLimRev.md) — negative current-command limit
+- [CurrLimMode](CurrLimMode.md) — must be 3 for this to apply

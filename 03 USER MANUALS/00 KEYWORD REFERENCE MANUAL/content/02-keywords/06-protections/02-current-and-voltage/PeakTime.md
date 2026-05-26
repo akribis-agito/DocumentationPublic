@@ -1,5 +1,6 @@
 ---
 keyword: PeakTime
+summary: Maximum time allowed at peak current; sets the I²t time constant.
 availability:
   standalone:
   - v4
@@ -26,6 +27,21 @@ overrides: {}
 ---
 # PeakTime
 
-**Definition:**
+Maximum time allowed at peak current; sets the I²t time constant.
 
-PeakTime defines the maximum time allowed at the peak current. It is used together with ContCL and PeakCL to define time constant in I2t protection. If motor’s trip time is rated at trip current that is different from the peak current, please refer to [Current and Power](#motion-1) protection section to calculate the equivalent peak current time according to trip curve formula.
+## Overview
+
+`PeakTime` defines the maximum time the drive may spend at the peak current. Together with [ContCL](ContCL.md) and [PeakCL](PeakCL.md) it sets the time constant of the I²t protection (see the [I²t mechanism diagram on ContCL](ContCL.md)).
+
+If the motor's trip time is rated at a trip current different from the peak current, compute the equivalent peak-current time from the motor's trip-curve formula before setting `PeakTime`.
+
+## Examples
+
+```text
+PeakTime=500        ; time allowed at peak current
+```
+
+## See also
+
+- [ContCL](ContCL.md) — continuous current limit (and I²t diagram)
+- [PeakCL](PeakCL.md) — peak current limit

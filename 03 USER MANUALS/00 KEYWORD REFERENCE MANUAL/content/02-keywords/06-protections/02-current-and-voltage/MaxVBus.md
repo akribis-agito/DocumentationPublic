@@ -1,5 +1,6 @@
 ---
 keyword: MaxVBus
+summary: Maximum allowed bus voltage; sustained excess disables the axis.
 availability:
   standalone:
   - v4
@@ -26,6 +27,20 @@ overrides: {}
 ---
 # MaxVBus
 
-**Definition:**
+Maximum allowed bus voltage; sustained excess disables the axis.
 
-MaxVBus is the maximum allowed bus voltage in mV. If actual bus voltage exceeds this limit for period longer than MaxVBusTime, axis is disabled, and an error code is thrown to ConFlt.
+## Overview
+
+`MaxVBus` is the maximum allowed bus voltage, in mV. If the actual bus voltage exceeds this limit for longer than [MaxVBusTime](MaxVBusTime.md), the axis is disabled and an error code is reported to the fault register `ConFlt`. For an instantaneous (no delay) over-voltage trip, see [MaxVBusAbs](MaxVBusAbs.md).
+
+## Examples
+
+```text
+MaxVBus=80000       ; 80 V maximum bus voltage (mV)
+```
+
+## See also
+
+- [MinVBus](MinVBus.md) — minimum bus voltage
+- [MaxVBusTime](MaxVBusTime.md) — out-of-range time before tripping
+- [MaxVBusAbs](MaxVBusAbs.md) — instantaneous over-voltage trip

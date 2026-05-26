@@ -1,5 +1,6 @@
 ---
 keyword: MaxVBusTime
+summary: How long bus voltage may stay outside the MinVBus/MaxVBus limits before tripping.
 availability:
   standalone:
   - v4
@@ -26,6 +27,19 @@ overrides: {}
 ---
 # MaxVBusTime
 
-**Definition:**
+How long bus voltage may stay outside the MinVBus/MaxVBus limits before tripping.
 
-MaxVBusTime defines the maximum out-of-range time of bus voltage under the MinVBus and MaxVBus limits.
+## Overview
+
+`MaxVBusTime` is the maximum time the bus voltage may remain outside the [MinVBus](MinVBus.md) / [MaxVBus](MaxVBus.md) limits before the axis is disabled. It adds tolerance for brief transients; for a hard, instantaneous ceiling use [MaxVBusAbs](MaxVBusAbs.md).
+
+## Examples
+
+```text
+MaxVBusTime=1000    ; allow brief out-of-range excursions before tripping
+```
+
+## See also
+
+- [MaxVBus](MaxVBus.md) / [MinVBus](MinVBus.md) — the limits this delay applies to
+- [MaxVBusAbs](MaxVBusAbs.md) — instantaneous trip (no delay)

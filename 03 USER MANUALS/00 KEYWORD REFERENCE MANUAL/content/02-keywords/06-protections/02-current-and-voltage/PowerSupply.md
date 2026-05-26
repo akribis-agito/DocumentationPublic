@@ -1,5 +1,6 @@
 ---
 keyword: PowerSupply
+summary: Declares the drive's power-supply type so protections behave correctly.
 availability:
   standalone:
   - v4
@@ -26,14 +27,24 @@ overrides: {}
 ---
 # PowerSupply
 
-**Definition:**
+Declares the drive's power-supply type so protections behave correctly.
 
-PowerSupply defines the type of drive power supply input to the amplifier. User needs to select correct value (for example, in PCSuite configuration page) for proper protection.
+## Overview
 
-The table below shows PowerSupply values and their descriptions.
+`PowerSupply` tells the amplifier what type of power supply feeds it, so that bus-voltage and related protections operate correctly. Select the value matching your hardware (typically via the PCSuite configuration page). It cannot be changed while the motor is on or in motion.
 
-| PowerSupply | Descriptions           |
-|-------------|------------------------|
-| 1           | Single-phase AC supply |
-| 2           | DC supply              |
-| 3           | Three-phase AC supply  |
+| Value | Supply type |
+|-------|-------------|
+| 1 | Single-phase AC |
+| 2 | DC |
+| 3 | Three-phase AC |
+
+## Examples
+
+```text
+PowerSupply=2       ; DC supply
+```
+
+## See also
+
+- [MaxVBus](MaxVBus.md) / [MinVBus](MinVBus.md) — bus-voltage limits

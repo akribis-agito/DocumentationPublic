@@ -1,5 +1,6 @@
 ---
 keyword: MaxVBusAbs
+summary: Absolute bus-voltage ceiling; exceeding it disables the axis instantly.
 availability:
   standalone:
   - v4
@@ -26,6 +27,19 @@ overrides: {}
 ---
 # MaxVBusAbs
 
-**Definition:**
+Absolute bus-voltage ceiling; exceeding it disables the axis instantly.
 
-MaxVBusAbs defines maximum allowable absolute value of bus voltage. If absolute bus voltage value exceeds MaxVBusAbs, axis will be instantaneously disabled and an error is thrown to ConFlt.
+## Overview
+
+`MaxVBusAbs` is the maximum allowable absolute bus voltage. If the bus voltage exceeds `MaxVBusAbs`, the axis is **instantaneously** disabled and an error is reported to the fault register `ConFlt`. This is the no-delay counterpart to [MaxVBus](MaxVBus.md), which tolerates excess for up to [MaxVBusTime](MaxVBusTime.md).
+
+## Examples
+
+```text
+MaxVBusAbs=90000    ; instantaneous over-voltage ceiling (mV)
+```
+
+## See also
+
+- [MaxVBus](MaxVBus.md) — time-delayed over-voltage limit
+- [MaxVBusTime](MaxVBusTime.md) — delay used by MaxVBus / MinVBus
