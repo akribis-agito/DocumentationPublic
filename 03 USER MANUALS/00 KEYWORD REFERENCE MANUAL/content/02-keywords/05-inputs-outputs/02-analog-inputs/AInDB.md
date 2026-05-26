@@ -1,5 +1,6 @@
 ---
 keyword: AInDB
+summary: First analog-input deadband (mV) per input.
 availability:
   standalone:
   - v4
@@ -26,16 +27,20 @@ overrides: {}
 ---
 # AInDB
 
-AInDB defines the first analog deadband value in millivolts. The array index corresponds to the index of the analog input (i.e.: AInDB\[3\] refers to analog input 3).
+First analog-input deadband (mV) per input.
 
-The following table shows the input-output relation for this deadband adjustment block.
+## Overview
 
-| abs(Input) | Output                     |
-|------------|----------------------------|
-| ≤AInDB     | 0                          |
-| \>AInDB    | Input – Sign(Input)\*AInDB |
+`AInDB` sets the **first** deadband, in millivolts, applied to an analog input — the deadband stage between offset and gain in the [analog-input signal path](00-overview.md). The array index is the analog-input number (e.g. `AInDB[3]` is analog input 3). Inputs within the deadband are forced to zero, suppressing noise around 0 mV.
 
-For example, if the dead band is 20mV, the output (in mV) as a function of the input (in mV) will look as follows.
+## How it works
+
+| abs(Input) | Output |
+|------------|--------|
+| ≤ AInDB | 0 |
+| > AInDB | Input − Sign(Input)·AInDB |
+
+For example, with a 20 mV deadband, the output (mV) as a function of the input (mV) is:
 
 ```desmos-graph
 left=-120; right=120; bottom=-90; top=90
@@ -48,3 +53,14 @@ x=20|black|dashed
 x=-20|black|dashed
 
 ```
+
+## Examples
+
+```text
+AInDB[1]=20         ; ±20 mV deadband on analog input 1
+```
+
+## See also
+
+- [AInMuteRange](AInMuteRange.md) — second deadband (after gain)
+- [AInGain](AInGain.md) — gain stage

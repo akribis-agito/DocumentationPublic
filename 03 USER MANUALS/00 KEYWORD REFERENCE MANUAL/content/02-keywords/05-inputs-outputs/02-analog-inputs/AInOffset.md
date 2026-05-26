@@ -1,5 +1,6 @@
 ---
 keyword: AInOffset
+summary: Offset (mV) added to each analog input.
 availability:
   standalone:
   - v4
@@ -26,10 +27,25 @@ overrides: {}
 ---
 # AInOffset
 
-AInOffset defines the offset value (in millivolts) that is added to the analog input. The array index corresponds to the index of the analog input (i.e.: AInOffset\[3\] refers to analog input 3).
+Offset (mV) added to each analog input.
 
-The input ($u$) and output ($y$) relation of the offset block is as follows.
+## Overview
+
+`AInOffset` adds a fixed offset, in millivolts, to an analog input — the offset stage of the [analog-input signal path](00-overview.md), applied after digital filtering and before the first deadband. The array index is the analog-input number (e.g. `AInOffset[3]` is analog input 3). Use it to null out a sensor's bias.
+
+## How it works
 
 $$
 y = u + AInOffset
 $$
+
+## Examples
+
+```text
+AInOffset[1]=-50    ; subtract 50 mV of bias from analog input 1
+```
+
+## See also
+
+- [AInGain](AInGain.md) — gain stage applied after the deadband
+- [AInPort](AInPort.md) — resulting readings

@@ -1,5 +1,6 @@
 ---
 keyword: AInFilt
+summary: Digital low-pass filter coefficient for each analog input.
 availability:
   standalone:
   - v4
@@ -26,18 +27,30 @@ overrides: {}
 ---
 # AInFilt
 
-AInFilt defines the digital low pass filter coefficient. The array index corresponds to the index of the analog input (i.e.: AInFilt\[2\] refers to analog input 2).
+Digital low-pass filter coefficient for each analog input.
 
-The filtered output of the current controller cycle ($y_{i}$) is a function of
+## Overview
 
-1.  the filter input of the current controller cycle ($u_{i}$)
+`AInFilt` sets the digital low-pass filter coefficient applied to an analog input, the first digital stage of the [analog-input signal path](00-overview.md). The array index is the analog-input number (e.g. `AInFilt[2]` is analog input 2).
 
-2.  the filtered output of the last controller cycle ($y_{i - 1}$)
+## How it works
 
-where
+The filtered output of the current controller cycle ($y_{i}$) depends on the current filter input ($u_{i}$) and the previous filtered output ($y_{i-1}$):
 
 $$
 y_{i} = \frac{AInFilt}{65536}u_{i} + \left( 1 - \frac{AInFilt}{65536} \right)y_{i - 1}
 $$
 
-To get unfiltered analog input value where $y_{i} = u_{i}$, user should set AInFilt=65536.
+To pass the signal through unfiltered ($y_{i} = u_{i}$), set `AInFilt = 65536`.
+
+## Examples
+
+```text
+AInFilt[1]=10000    ; moderate low-pass filtering on analog input 1
+AInFilt[1]=65536    ; no filtering
+```
+
+## See also
+
+- [AInPort](AInPort.md) — resulting readings
+- [AInOffset](AInOffset.md), [AInGain](AInGain.md) — later stages of the chain

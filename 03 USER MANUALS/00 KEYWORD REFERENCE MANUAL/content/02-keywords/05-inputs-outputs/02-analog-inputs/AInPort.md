@@ -1,5 +1,6 @@
 ---
 keyword: AInPort
+summary: Read-only analog-input readings — processed values and raw ADC values.
 availability:
   standalone:
   - v4
@@ -26,11 +27,25 @@ overrides: {}
 ---
 # AInPort
 
-AInPort contains the processed and original readings of the analog inputs. The array length corresponds to twice the number of the analog inputs.
+Read-only analog-input readings — processed values and raw ADC values.
 
-The first half of the array holds the readings after processing (filter, offset, first deadband, gain and second deadband). The second half of the array holds the original values of the analog inputs (after ADC) as shown below.
+## Overview
 
-| Data | **Analog input 1** | **Analog input 2** | **Analog input 3** | **Analog input 4** |
-|----|----|----|----|----|
-| Processed input | AInPort\[1\] | AInPort\[2\] | AInPort\[3\] | AInPort\[4\] |
-| Original input | AInPort\[5\] | AInPort\[6\] | AInPort\[7\] | AInPort\[8\] |
+`AInPort` holds the analog-input readings. Its length is twice the number of analog inputs: the first half holds the **processed** readings (after filter, offset, first deadband, gain, and second deadband), and the second half holds the **original** values straight from the ADC. See the [analog-input signal path](00-overview.md) for the full processing chain.
+
+| Data | Analog input 1 | Analog input 2 | Analog input 3 | Analog input 4 |
+|------|----------------|----------------|----------------|----------------|
+| Processed input | AInPort[1] | AInPort[2] | AInPort[3] | AInPort[4] |
+| Original input | AInPort[5] | AInPort[6] | AInPort[7] | AInPort[8] |
+
+## Examples
+
+```text
+AInPort[1]?         ; processed reading of analog input 1
+AInPort[5]?         ; raw (post-ADC) reading of analog input 1
+```
+
+## See also
+
+- [AInFilt](AInFilt.md), [AInOffset](AInOffset.md), [AInDB](AInDB.md), [AInGain](AInGain.md), [AInMuteRange](AInMuteRange.md) — the processing chain
+- [AInMode](AInMode.md) — assign a function to an analog input

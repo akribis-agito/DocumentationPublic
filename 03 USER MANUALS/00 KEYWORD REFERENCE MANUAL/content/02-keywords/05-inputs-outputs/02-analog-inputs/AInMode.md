@@ -1,5 +1,6 @@
 ---
 keyword: AInMode
+summary: Assigns a control function to each analog input, with per-axis targeting.
 availability:
   standalone:
   - v4
@@ -24,38 +25,45 @@ overrides: {}
 ---
 # AInMode
 
-AInMode is used to assign functionality to the analog inputs.
+Assigns a control function to each analog input, with per-axis targeting.
 
-The input is selected by the Index. For example, AAInMode\[2\] defines the functionality for Analog Input 2 of Axis A. The axis reference here is only relevant for Central-i product with multiple IO modules on different axes
+## Overview
 
-The functionality is selected by the lower 16 bits of Value. The list of functionalities is as per the table below.
+`AInMode` assigns a functionality to an analog input. The **index** selects the input — e.g. `AInMode[2]` configures analog input 2. (The axis prefix is only relevant on Central-i products with multiple I/O modules on different axes.)
 
-| Lower 16-bit value | Functionality                        |
-|--------------------|--------------------------------------|
-| 0                  | General input – no function          |
-| 1                  | Velocity command                     |
-| 2                  | Current command                      |
-| 3                  | Force feedback                       |
-| 4                  | Force command                        |
-| 5                  | Joystick input                       |
-| 6                  | Torque compensation                  |
-| 7                  | Negative current limit (for CurrRef) |
-| 8                  | Positive current limit (for CurrRef) |
-| 9                  | Tachometer feedback                  |
-| 10                 | Position feedback                    |
+## How it works
 
-The axes for which the functionality applies to is selected by the upper 16 bits of Value. Each bit represents a particular axis; multiple bits can be selected to apply the functionality to multiple axes.
+The **lower 16 bits** of the value select the function:
 
-The bit-field list of axes which to use the functionality (bits 16 to bits 23) is as shown below.
+| Lower 16-bit value | Functionality |
+|--------------------|---------------|
+| 0 | General input – no function |
+| 1 | Velocity command |
+| 2 | Current command |
+| 3 | Force feedback |
+| 4 | Force command |
+| 5 | Joystick input |
+| 6 | Torque compensation |
+| 7 | Negative current limit (for CurrRef) |
+| 8 | Positive current limit (for CurrRef) |
+| 9 | Tachometer feedback |
+| 10 | Position feedback |
 
-| Value, Bit# | 16  | 17  | 18  | 19  | 20  | 21  | 22  | 23  |
-|-------------|-----|-----|-----|-----|-----|-----|-----|-----|
-| Axis        | A   | B   | C   | D   | E   | F   | G   | H   |
+The **upper 16 bits** select which axes the function applies to — each bit is one axis, and multiple bits may be set:
 
-**Example:**
+| Value, Bit# | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 |
+|-------------|----|----|----|----|----|----|----|----|
+| Axis | A | B | C | D | E | F | G | H |
 
-If the analog input 2 of axis C is to be used as force feedback of axis A, then the command would be
+## Examples
+
+To use analog input 2 of axis C as the force feedback of axis A:
 
 $$
-CAInMode\lbrack 2\rbrack\  = \ 3\  + \ 2\hat{}16\  = \ 65539
+CAInMode\lbrack 2\rbrack\ = \ 3\ + \ 2\hat{}16\ = \ 65539
 $$
+
+## See also
+
+- [AInPort](AInPort.md) — analog-input readings
+- [AInGain](AInGain.md), [AInOffset](AInOffset.md) — input conditioning

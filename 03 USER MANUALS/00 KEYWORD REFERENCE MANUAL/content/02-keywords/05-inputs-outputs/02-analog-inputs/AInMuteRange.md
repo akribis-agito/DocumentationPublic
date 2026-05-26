@@ -1,5 +1,6 @@
 ---
 keyword: AInMuteRange
+summary: Second analog-input deadband (mV) per input, applied after gain.
 availability:
   standalone:
   - v4
@@ -26,11 +27,26 @@ overrides: {}
 ---
 # AInMuteRange
 
-AInMuteRange defines the second analog deadband value in millivolts. The array index corresponds to the index of the analog input (i.e.: AInMuteRange\[2\] refers to analog input 2).
+Second analog-input deadband (mV) per input, applied after gain.
 
-The following table shows the input-output relation for this deadband adjustment block.
+## Overview
 
-| abs(Input)     | Output |
-|----------------|--------|
-| ≤AInMuteRange  | 0      |
-| \>AInMuteRange | Input  |
+`AInMuteRange` sets the **second** deadband, in millivolts, applied to an analog input — the final stage of the [analog-input signal path](00-overview.md), after the gain. Unlike the first deadband ([AInDB](AInDB.md)), values above the threshold pass through unchanged (no subtraction). The array index is the analog-input number (e.g. `AInMuteRange[2]` is analog input 2).
+
+## How it works
+
+| abs(Input) | Output |
+|------------|--------|
+| ≤ AInMuteRange | 0 |
+| > AInMuteRange | Input |
+
+## Examples
+
+```text
+AInMuteRange[1]=10  ; mute analog input 1 within ±10 mV of zero
+```
+
+## See also
+
+- [AInDB](AInDB.md) — first deadband (before gain)
+- [AInPort](AInPort.md) — resulting readings

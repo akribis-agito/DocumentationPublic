@@ -1,5 +1,6 @@
 ---
 keyword: AInGain
+summary: DC gain (×65536 fixed-point) applied to each analog input.
 availability:
   standalone:
   - v4
@@ -26,12 +27,28 @@ overrides: {}
 ---
 # AInGain
 
-AInGain is the actual analog input gain multiplied by 65536. The multiplication is needed to allow representation of fractions by only using integers. The array index corresponds to the index of the analog input (i.e.: AInGain\[1\] refers to analog input 1).
+DC gain (×65536 fixed-point) applied to each analog input.
 
-The input ($u$) and output ($y$) relation of the gain block is as follows.
+## Overview
+
+`AInGain` is the analog-input DC gain, stored as the actual gain multiplied by 65536 so that fractional gains can be represented with integers. It is the gain stage of the [analog-input signal path](00-overview.md), applied after the first deadband. The array index is the analog-input number (e.g. `AInGain[1]` is analog input 1).
+
+## How it works
 
 $$
 y = \frac{AInGain}{65536}u
 $$
 
-To have unity gain, user should set AInGain=65536.
+For unity gain, set `AInGain = 65536`.
+
+## Examples
+
+```text
+AInGain[1]=131072   ; gain of 2.0 on analog input 1
+AInGain[1]=65536    ; unity gain
+```
+
+## See also
+
+- [AInOffset](AInOffset.md) — offset stage (before gain)
+- [AInPort](AInPort.md) — resulting readings

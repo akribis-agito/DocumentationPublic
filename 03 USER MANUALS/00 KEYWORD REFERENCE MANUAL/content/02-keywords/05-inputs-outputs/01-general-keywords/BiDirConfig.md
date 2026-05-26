@@ -1,5 +1,6 @@
 ---
 keyword: BiDirConfig
+summary: Bitfield configuring each bi-directional I/O pin as an input or an output.
 availability:
   standalone:
   - v4
@@ -24,10 +25,19 @@ overrides: {}
 ---
 # BiDirConfig
 
-**Definition:**
+Bitfield configuring each bi-directional I/O pin as an input or an output.
 
-BiDirConfig configures the direction of bi-directional I/O pins on the controller, specifying which pins are used as inputs and which as outputs. Each bit in the value corresponds to one bi-directional channel. It is a non-axis parameter saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`BiDirConfig` sets the direction of the controller's bi-directional I/O pins — which pins act as inputs and which as outputs. Each bit of the value corresponds to one bi-directional channel. It is saved to flash and can be changed at any time. Configure pin direction here before using the digital-input or digital-output keywords for those channels.
 
-[DInPort-DInPortHigh](../04-digital-inputs/DInPort-DInPortHigh.md), [DOutPort](../05-digital-outputs/DOutPort.md)
+## Examples
+
+```text
+BiDirConfig?        ; read the current direction configuration
+```
+
+## See also
+
+- [DInPort-DInPortHigh](../04-digital-inputs/DInPort-DInPortHigh.md) — digital-input port states
+- [DOutPort](../05-digital-outputs/DOutPort.md) — digital-output port states

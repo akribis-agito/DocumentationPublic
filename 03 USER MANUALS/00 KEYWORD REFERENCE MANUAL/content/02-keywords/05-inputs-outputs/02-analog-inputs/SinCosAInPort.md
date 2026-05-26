@@ -1,14 +1,21 @@
+---
+keyword: SinCosAInPort
+summary: Removed — formerly selected the analog port for sin/cos (resolver) encoder feedback.
+---
 # SinCosAInPort
 
-**Definition:**
+Removed — formerly selected the analog port for sin/cos (resolver) encoder feedback.
 
-SinCosAInPort formerly selected which analog input port is used to read the sine/cosine encoder signals for resolver or sin/cos encoder feedback.
+> **Removed in firmware 1.3.0.1-36.** `SinCosAInPort` is no longer present in the parameter
+> table of current firmware builds and cannot be used. This page is retained for reference
+> to older firmware and documentation.
 
-%%
-Legacy — removed
-SinCosAInPort was removed from the firmware parameter table as of version 1.3.0.1-36. It is no longer available in current firmware builds.
-%%
+## Overview (historical)
 
-**See also:**
+`SinCosAInPort` formerly selected which analog input port was used to read the sine/cosine
+encoder signals for resolver or sin/cos encoder feedback.
 
-[AInPort](AInPort.md), [AInMode](AInMode.md)
+## See also
+
+- [AInPort](AInPort.md) — analog-input readings
+- [AInMode](AInMode.md) — analog-input function assignment
