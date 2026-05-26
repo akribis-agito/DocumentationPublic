@@ -1,5 +1,6 @@
 ---
 keyword: DualStuckVel
+summary: Maximum tolerated velocity difference between the two dual-loop feedbacks.
 availability:
   standalone:
   - v4
@@ -26,12 +27,24 @@ overrides: {}
 ---
 # DualStuckVel
 
-**Definition:**
+Maximum tolerated velocity difference between the two dual-loop feedbacks.
 
-DualStuckVel is the maximum absolute velocity difference between the two feedback in dual-loop tolerable by the controller. It is in count/s where the count refers to the main (or position-loop) feedback count.
+## Overview
 
-**Formula:**
+`DualStuckVel` is the maximum absolute velocity difference tolerated between the two feedbacks in a dual-loop configuration, in count/s (counts referring to the main / position-loop feedback). If the difference exceeds this for [DualStuckTime](DualStuckTime.md) consecutive cycles, the axis is disabled — catching a slipped or broken coupling between the two encoders.
+
+## How it works
 
 $$
-Absolute\ velocity\ difference = abs\left( Vel\lbrack 2\rbrack - \frac{AuxVel \bullet DualLoopFact}{65536} \right)
+\text{Absolute velocity difference} = \left| Vel[2] - \frac{AuxVel \cdot DualLoopFact}{65536} \right|
 $$
+
+## Examples
+
+```text
+DualStuckVel=40000  ; max tolerated feedback velocity mismatch (count/s)
+```
+
+## See also
+
+- [DualStuckTime](DualStuckTime.md) — how long the mismatch may persist

@@ -1,5 +1,6 @@
 ---
 keyword: MaxVelErrOL
+summary: Maximum open-loop (injection) velocity error; exceeding it disables the axis.
 availability:
   standalone:
   - v4
@@ -26,6 +27,19 @@ overrides: {}
 ---
 # MaxVelErrOL
 
-**Definition:**
+Maximum open-loop (injection) velocity error; exceeding it disables the axis.
 
-MaxVelErrOL defines maximum allowable absolute velocity error ([VelErr](../../../../02-keywords/10-motion/01-kinematics-status/VelErr.md)) while in open loop condition during [injection](../../../../02-keywords/13-injection/00-overview.md). If the absolute value of VelErr exceeds MaxVelErrOL, the axis will be instantaneously disabled and an error is thrown to ConFlt.
+## Overview
+
+`MaxVelErrOL` is the maximum allowable absolute velocity error ([VelErr](../../../../02-keywords/10-motion/01-kinematics-status/VelErr.md)) while in **open-loop** operation during [injection](../../../../02-keywords/13-injection/00-overview.md). If `|VelErr|` exceeds `MaxVelErrOL`, the axis is instantaneously disabled and an error is reported to `ConFlt`. It is the open-loop counterpart of [MaxVelErr](MaxVelErr.md).
+
+## Examples
+
+```text
+MaxVelErrOL=20000000 ; max open-loop velocity error (user units)
+```
+
+## See also
+
+- [MaxVelErr](MaxVelErr.md) — closed-loop velocity-error limit
+- [MaxPosErrOL](MaxPosErrOL.md) — open-loop position-error limit

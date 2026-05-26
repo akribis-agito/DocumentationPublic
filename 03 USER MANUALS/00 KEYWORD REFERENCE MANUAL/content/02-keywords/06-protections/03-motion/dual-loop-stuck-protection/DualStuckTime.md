@@ -1,5 +1,6 @@
 ---
 keyword: DualStuckTime
+summary: Consecutive cycles the dual-loop feedback mismatch may persist before tripping.
 availability:
   standalone:
   - v4
@@ -26,8 +27,18 @@ overrides: {}
 ---
 # DualStuckTime
 
-**Definition:**
+Consecutive cycles the dual-loop feedback mismatch may persist before tripping.
 
-DualStuckTime specifies the maximum number of consecutive controller cycles (1 cycle ≈ 61µs) of which the difference between the two feedback in dual-loop can be more than DualStuckVel.
+## Overview
 
-If DualStuckVel is exceeded for consecutive controller cycle number of DualStuckTime, axis will be disabled, and error message will be thrown.
+`DualStuckTime` is the maximum number of consecutive controller cycles (1 cycle ≈ 61 µs) for which the velocity difference between the two dual-loop feedbacks may exceed [DualStuckVel](DualStuckVel.md). If `DualStuckVel` is exceeded for `DualStuckTime` consecutive cycles, the axis is disabled and an error is reported.
+
+## Examples
+
+```text
+DualStuckTime=4096  ; cycles the feedback mismatch may persist before tripping
+```
+
+## See also
+
+- [DualStuckVel](DualStuckVel.md) — the tolerated velocity-difference threshold

@@ -1,5 +1,6 @@
 ---
 keyword: StallVal
+summary: Read-only current value of the stepper stall-detection metric.
 availability:
   standalone:
   - v4
@@ -26,6 +27,15 @@ overrides: {}
 ---
 # StallVal
 
-**Definition:**
+Read-only current value of the stepper stall-detection metric.
 
-<span class="mark">Pending</span>
+## Overview
+
+`StallVal` is the read-only, live value of the stepper stall-detection metric — the quantity compared against the threshold ([StallTh](StallTh.md)) to decide [StallStat](StallStat.md).
+
+> **Documentation pending:** the exact quantity `StallVal` represents is not yet documented. Contact Agito for details until this section is completed.
+
+## See also
+
+- [StallTh](StallTh.md) — threshold this value is compared against
+- [StallStat](StallStat.md) — resulting stall flag

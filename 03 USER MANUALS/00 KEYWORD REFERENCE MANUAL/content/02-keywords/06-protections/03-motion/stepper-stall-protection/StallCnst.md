@@ -1,5 +1,6 @@
 ---
 keyword: StallCnst
+summary: Tuning constants for stepper stall detection (3-element array).
 availability:
   standalone:
   - v4
@@ -26,6 +27,15 @@ overrides: {}
 ---
 # StallCnst
 
-**Definition:**
+Tuning constants for stepper stall detection.
 
-<span class="mark">Pending</span>
+## Overview
+
+`StallCnst` is an array of constants that tune the stepper stall-detection algorithm selected by [StallCfg](StallCfg.md).
+
+> **Documentation pending:** the meaning of each element is not yet documented. Contact Agito for details until this section is completed.
+
+## See also
+
+- [StallCfg](StallCfg.md) — stall-detection mode
+- [StallThPcnt](StallThPcnt.md) — stall threshold percentage

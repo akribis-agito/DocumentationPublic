@@ -1,5 +1,6 @@
 ---
 keyword: RevPLim
+summary: Reverse software travel limit; reference position is capped here.
 availability:
   standalone:
   - v4
@@ -26,8 +27,19 @@ overrides: {}
 ---
 # RevPLim
 
-**Definition:**
+Reverse software travel limit; reference position is capped here.
 
-RevPLim specifies reverse software travel limit, in unit of count.
+## Overview
 
-Lower limit of reference position will be capped at RevPLim. As a result, motion stops at RevPLim if reference position is lower than this limit. Any negative/reverse motion with final target position above RevPLim is disallowed.
+`RevPLim` is the reverse (negative) software travel limit, in counts. The reference position is capped at `RevPLim`: motion stops there if the reference would go lower, and any reverse motion whose final target is below `RevPLim` is rejected. It cannot be changed while the axis is in motion.
+
+## Examples
+
+```text
+RevPLim=-1000000    ; reverse soft limit (counts)
+```
+
+## See also
+
+- [FwdPLim](FwdPLim.md) — forward software travel limit
+- [LimitsStat](LimitsStat.md) — hardware limit-switch status

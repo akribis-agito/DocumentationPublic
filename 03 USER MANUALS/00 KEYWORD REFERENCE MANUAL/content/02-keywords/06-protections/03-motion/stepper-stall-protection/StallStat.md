@@ -1,5 +1,6 @@
 ---
 keyword: StallStat
+summary: Read-only stepper stall status flag (0 = no stall, 1 = stalled).
 availability:
   standalone:
   - v4
@@ -26,6 +27,15 @@ overrides: {}
 ---
 # StallStat
 
-**Definition:**
+Read-only stepper stall status flag (0 = no stall, 1 = stalled).
 
-<span class="mark">Pending</span>
+## Overview
+
+`StallStat` is a read-only flag reporting the stepper stall-detection result: `0` = no stall detected, `1` = stall detected. It is the status output of the stall-protection group configured by [StallCfg](StallCfg.md).
+
+> **Documentation pending:** the precise detection conditions are not yet documented. Contact Agito for details until this section is completed.
+
+## See also
+
+- [StallCfg](StallCfg.md) — stall-detection mode
+- [StallVal](StallVal.md) / [StallTh](StallTh.md) — stall metric and threshold

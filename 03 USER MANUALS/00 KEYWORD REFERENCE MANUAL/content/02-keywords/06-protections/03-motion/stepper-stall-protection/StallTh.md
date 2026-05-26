@@ -1,5 +1,6 @@
 ---
 keyword: StallTh
+summary: Read-only stepper stall-detection threshold.
 availability:
   standalone:
   - v4
@@ -26,6 +27,15 @@ overrides: {}
 ---
 # StallTh
 
-**Definition:**
+Read-only stepper stall-detection threshold.
 
-<span class="mark">Pending</span>
+## Overview
+
+`StallTh` is the read-only threshold used by stepper stall detection — the value [StallVal](StallVal.md) is compared against to set [StallStat](StallStat.md). It is influenced by [StallThPcnt](StallThPcnt.md).
+
+> **Documentation pending:** how `StallTh` is derived is not yet documented. Contact Agito for details until this section is completed.
+
+## See also
+
+- [StallThPcnt](StallThPcnt.md) — threshold percentage input
+- [StallVal](StallVal.md) — metric compared against this threshold

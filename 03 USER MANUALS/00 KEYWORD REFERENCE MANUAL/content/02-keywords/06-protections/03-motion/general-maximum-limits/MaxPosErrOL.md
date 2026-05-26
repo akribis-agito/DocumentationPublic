@@ -1,5 +1,6 @@
 ---
 keyword: MaxPosErrOL
+summary: Maximum open-loop (injection) position error; exceeding it disables the axis.
 availability:
   standalone:
   - v4
@@ -26,6 +27,19 @@ overrides: {}
 ---
 # MaxPosErrOL
 
-**Definition:**
+Maximum open-loop (injection) position error; exceeding it disables the axis.
 
-MaxPosErrOL defines maximum allowable absolute position error ([PosErr](../../../../02-keywords/10-motion/01-kinematics-status/PosErr.md)) while in open loop condition during [injection](../../../../02-keywords/13-injection/00-overview.md). If the absolute value of PosErr exceeds MaxPosErrOL, the axis will be instantaneously disabled, and an error is thrown to ConFlt.
+## Overview
+
+`MaxPosErrOL` is the maximum allowable absolute position error ([PosErr](../../../../02-keywords/10-motion/01-kinematics-status/PosErr.md)) while in **open-loop** operation during [injection](../../../../02-keywords/13-injection/00-overview.md). If `|PosErr|` exceeds `MaxPosErrOL`, the axis is instantaneously disabled and an error is reported to `ConFlt`. It is the open-loop counterpart of [MaxPosErr](MaxPosErr.md) (open-loop error is naturally larger, hence a separate, larger limit).
+
+## Examples
+
+```text
+MaxPosErrOL=1000000 ; max open-loop position error (user units)
+```
+
+## See also
+
+- [MaxPosErr](MaxPosErr.md) — closed-loop position-error limit
+- [MaxVelErrOL](MaxVelErrOL.md) — open-loop velocity-error limit

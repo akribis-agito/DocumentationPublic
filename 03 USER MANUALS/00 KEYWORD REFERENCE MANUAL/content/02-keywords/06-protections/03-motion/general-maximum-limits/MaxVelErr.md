@@ -1,5 +1,6 @@
 ---
 keyword: MaxVelErr
+summary: Maximum closed-loop velocity error; exceeding it disables the axis.
 availability:
   standalone:
   - v4
@@ -26,6 +27,19 @@ overrides: {}
 ---
 # MaxVelErr
 
-**Definition:**
+Maximum closed-loop velocity error; exceeding it disables the axis.
 
-MaxVelErr defines maximum allowable absolute velocity error ([VelErr](../../../../02-keywords/10-motion/01-kinematics-status/VelErr.md)) while in closed loop condition. If the absolute value of VelErr exceeds MaxVelErr, the axis will be instantaneously disabled, and an error is thrown to ConFlt.
+## Overview
+
+`MaxVelErr` is the maximum allowable absolute velocity error ([VelErr](../../../../02-keywords/10-motion/01-kinematics-status/VelErr.md)) in closed-loop operation. If `|VelErr|` exceeds `MaxVelErr`, the axis is instantaneously disabled and an error is reported to `ConFlt`. For the open-loop (injection) equivalent, see [MaxVelErrOL](MaxVelErrOL.md).
+
+## Examples
+
+```text
+MaxVelErr=100000    ; max velocity error (user units)
+```
+
+## See also
+
+- [MaxVelErrOL](MaxVelErrOL.md) — open-loop velocity-error limit
+- [MaxPosErr](MaxPosErr.md) — position-error limit

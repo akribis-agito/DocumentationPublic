@@ -1,5 +1,6 @@
 ---
 keyword: StuckTime
+summary: Duration the stuck condition must persist before the axis is flagged stuck.
 availability:
   standalone:
   - v4
@@ -26,6 +27,19 @@ overrides: {}
 ---
 # StuckTime
 
-**Definition:**
+Duration the stuck condition must persist before the axis is flagged stuck.
 
-StuckTime defines the duration used for motor stuck detection.
+## Overview
+
+`StuckTime` is the duration used for motor-stuck detection: the high-current / low-velocity condition (current above [StuckCurr](StuckCurr.md) while velocity stays below [StuckVel](StuckVel.md)) must persist for `StuckTime` before the axis is declared stuck.
+
+## Examples
+
+```text
+StuckTime=4096      ; how long the stuck condition must hold
+```
+
+## See also
+
+- [StuckCurr](StuckCurr.md) — current threshold
+- [StuckVel](StuckVel.md) — velocity threshold

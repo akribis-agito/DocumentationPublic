@@ -1,5 +1,6 @@
 ---
 keyword: StuckVel
+summary: Velocity threshold for motor-stuck detection.
 availability:
   standalone:
   - v4
@@ -26,6 +27,19 @@ overrides: {}
 ---
 # StuckVel
 
-**Definition:**
+Velocity threshold for motor-stuck detection.
 
-StuckVel defines the velocity threshold used for motor stuck detection. If velocity is less than StuckVel while current exceeds StuckCurr for StuckTime, the axis is considered stuck.
+## Overview
+
+`StuckVel` is the velocity threshold for motor-stuck detection. The axis is considered **stuck** when its velocity stays below `StuckVel` while the current exceeds [StuckCurr](StuckCurr.md) for at least [StuckTime](StuckTime.md) — i.e. the drive is pushing hard but the motor is not moving.
+
+## Examples
+
+```text
+StuckVel=40000      ; stuck if velocity stays below this (user units)
+```
+
+## See also
+
+- [StuckCurr](StuckCurr.md) — current threshold for stuck detection
+- [StuckTime](StuckTime.md) — duration before declaring stuck

@@ -1,5 +1,6 @@
 ---
 keyword: MaxVel
+summary: Maximum closed-loop velocity; exceeding it (+25% buffer) disables the axis.
 availability:
   standalone:
   - v4
@@ -26,6 +27,19 @@ overrides: {}
 ---
 # MaxVel
 
-**Definition:**
+Maximum closed-loop velocity; exceeding it (+25% buffer) disables the axis.
 
-MaxVel defines maximum allowable velocity while in closed loop condition, before an additional buffer of 25%. If the absolute value of Vel\[1\] exceeds (MaxVel \* 125%), the axis will be instantaneously disabled, and an error is thrown to ConFlt.
+## Overview
+
+`MaxVel` is the maximum allowable velocity in closed-loop operation, with an additional 25% buffer before the trip. If the absolute value of `Vel[1]` exceeds `MaxVel × 125%`, the axis is **instantaneously** disabled and an error is reported to the fault register `ConFlt`.
+
+## Examples
+
+```text
+MaxVel=500000       ; maximum velocity (user units)
+```
+
+## See also
+
+- [MaxVelErr](MaxVelErr.md) — velocity-error trip
+- [MaxAcc](MaxAcc.md) — acceleration limit (checked before motion)

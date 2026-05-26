@@ -1,5 +1,6 @@
 ---
 keyword: StuckCurr
+summary: Current threshold for motor-stuck detection.
 availability:
   standalone:
   - v4
@@ -26,6 +27,19 @@ overrides: {}
 ---
 # StuckCurr
 
-**Definition:**
+Current threshold for motor-stuck detection.
 
-StuckCurr defines the current threshold used for motor stuck detection.
+## Overview
+
+`StuckCurr` is the current threshold used for motor-stuck detection. The stuck condition triggers when the current exceeds `StuckCurr` while velocity stays below [StuckVel](StuckVel.md) for at least [StuckTime](StuckTime.md).
+
+## Examples
+
+```text
+StuckCurr=4000      ; current above which a non-moving motor counts as stuck (mA)
+```
+
+## See also
+
+- [StuckVel](StuckVel.md) — velocity threshold
+- [StuckTime](StuckTime.md) — duration before declaring stuck

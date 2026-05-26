@@ -1,5 +1,6 @@
 ---
 keyword: FwdPLim
+summary: Forward software travel limit; reference position is capped here.
 availability:
   standalone:
   - v4
@@ -26,8 +27,19 @@ overrides: {}
 ---
 # FwdPLim
 
-**Definition:**
+Forward software travel limit; reference position is capped here.
 
-FwdPLim specifies forward software travel limit, in units of count.
+## Overview
 
-Upper limit of reference position will be capped at FwdPLim. As a result, motion stops at FwdPLim if reference position is higher than this limit. Any positive/forward motion with final target position above FwdPLim is disallowed.
+`FwdPLim` is the forward (positive) software travel limit, in counts. The reference position is capped at `FwdPLim`: motion stops there if the reference would go higher, and any forward motion whose final target is above `FwdPLim` is rejected. It cannot be changed while the axis is in motion.
+
+## Examples
+
+```text
+FwdPLim=1000000     ; forward soft limit (counts)
+```
+
+## See also
+
+- [RevPLim](RevPLim.md) — reverse software travel limit
+- [LimitsStat](LimitsStat.md) — hardware limit-switch status

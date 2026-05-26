@@ -1,5 +1,6 @@
 ---
 keyword: StallThPcnt
+summary: Stepper stall threshold as a percentage (10–90%, default 50%).
 availability:
   standalone:
   - v4
@@ -26,6 +27,21 @@ overrides: {}
 ---
 # StallThPcnt
 
-**Definition:**
+Stepper stall threshold as a percentage (10–90%, default 50%).
 
-<span class="mark">Pending</span>
+## Overview
+
+`StallThPcnt` sets the stepper stall-detection threshold as a percentage (valid 10–90%, default 50%). It scales the effective threshold [StallTh](StallTh.md) used to evaluate the stall metric [StallVal](StallVal.md). A lower percentage makes stall detection more sensitive.
+
+> **Documentation pending:** the exact relationship between this percentage and `StallTh` is not yet documented. Contact Agito for details until this section is completed.
+
+## Examples
+
+```text
+StallThPcnt=50      ; stall threshold at 50%
+```
+
+## See also
+
+- [StallTh](StallTh.md) — resulting threshold
+- [StallCfg](StallCfg.md) — stall-detection mode

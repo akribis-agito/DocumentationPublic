@@ -1,5 +1,6 @@
 ---
 keyword: LimitsStat
+summary: Read-only bitfield reporting reverse/forward limit-switch activation.
 availability:
   standalone:
   - v4
@@ -26,16 +27,24 @@ overrides: {}
 ---
 # LimitsStat
 
-**Definition:**
+Read-only bitfield reporting reverse/forward limit-switch activation.
 
-LimitsStat reflects the current status of the limit switches. If the bit is set ("1"), limit is activated. If the bit is cleared ("0"), limit is not activated.
+## Overview
 
-| LimitsStat, Bit # | 0 | 1 | 2-31 |
-|---|---|---|---|
-| Axis | RLS (Reverse Limit Switch) | FLS (Forward Limit Switch) | Unused |
+`LimitsStat` reports the current state of the hardware limit switches as a bitfield. A set bit (`1`) means that limit is active.
 
-**Example:**
+| Bit # | 0 | 1 | 2–31 |
+|-------|---|---|------|
+| Meaning | RLS (reverse limit switch) | FLS (forward limit switch) | Unused |
 
-LimitsStat == 1 indicate that RLS is active.
+So `LimitsStat = 1` → RLS active; `LimitsStat = 2` → FLS active.
 
-LimitsStat == 2 indicate that FLS is active.
+## Examples
+
+```text
+LimitsStat?         ; 1 = RLS active, 2 = FLS active, 3 = both
+```
+
+## See also
+
+- [FwdPLim](FwdPLim.md) / [RevPLim](RevPLim.md) — software travel limits
