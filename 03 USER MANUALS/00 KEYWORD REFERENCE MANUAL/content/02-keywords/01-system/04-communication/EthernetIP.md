@@ -1,5 +1,6 @@
 ---
 keyword: EthernetIP
+summary: Controller IP address, stored one octet per array element.
 availability:
   standalone:
   - v4
@@ -26,15 +27,29 @@ overrides: {}
 ---
 # EthernetIP
 
-**Definition:**
+Controller IP address, stored one octet per array element.
 
-In Ethernet communication, EthernetIP is a parameter array storing the IP address.
+## Overview
 
-For example, if IP addresss is “172.1.1.50”, each array element is as follows.
+`EthernetIP` holds the controller's IP address as four octets, one per array element (each 0–255). It is saved to flash. For example, the address `172.1.1.50` is stored as:
 
-| Parameter        | Value |
-| ---------------- | ----- |
-| EthernetIP\[1\]  | 172   |
-| EthernetIP\[2\]  | 1     |
-| EthernetIP\[3\]  | 1     |
-| EthernetIP\[4\]  | 50    |
+| Element | Value |
+|---------|-------|
+| EthernetIP[1] | 172 |
+| EthernetIP[2] | 1 |
+| EthernetIP[3] | 1 |
+| EthernetIP[4] | 50 |
+
+## Examples
+
+```text
+EthernetIP[1]=172
+EthernetIP[2]=1
+EthernetIP[3]=1
+EthernetIP[4]=50    ; sets 172.1.1.50 (Save + Reset to apply)
+```
+
+## See also
+
+- [EthernetPort](EthernetPort.md) — TCP port number
+- [EthernetMAC](EthernetMAC.md) — MAC address

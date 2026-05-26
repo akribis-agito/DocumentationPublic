@@ -1,5 +1,6 @@
 ---
 keyword: RSBaud
+summary: Serial (RS232/USB) baud rate per port, selected from a fixed table.
 availability:
   standalone:
   - v4
@@ -26,17 +27,33 @@ overrides: {}
 ---
 # RSBaud
 
-**Definition:**
+Serial (RS232/USB) baud rate per port, selected from a fixed table.
 
-In RS232/USB communication, RSBaud defines the baud rate as listed below.
+## Overview
 
-| RSBaud value | Baud rate \[bit/s\] |
-|--------------|---------------------|
-| 1            | 9600                |
-| 2            | 19200               |
-| 3            | 38400               |
-| 4            | 115200              |
+`RSBaud` selects the baud rate for the controller's serial ports. Each array element configures one port:
 
-RSBaud\[1\] defines the baud rate of micro-USB port. RSBaud\[2\] defines the baud rate of RJ45 port.
+- `RSBaud[1]` — micro-USB port
+- `RSBaud[2]` — RJ45 port
 
-For more information, please refer to communication manual.
+The value maps to a baud rate as follows (default `4` = 115200 bit/s). It is saved to flash.
+
+| RSBaud | Baud rate [bit/s] |
+|--------|-------------------|
+| 1 | 9600 |
+| 2 | 19200 |
+| 3 | 38400 |
+| 4 | 115200 |
+
+See the communication manual for more information.
+
+## Examples
+
+```text
+RSBaud[1]=4         ; set the micro-USB port to 115200 bit/s
+```
+
+## See also
+
+- [CANBaud](CANBaud.md) — CAN bus baud rate
+- [EthernetPort](EthernetPort.md) — Ethernet port

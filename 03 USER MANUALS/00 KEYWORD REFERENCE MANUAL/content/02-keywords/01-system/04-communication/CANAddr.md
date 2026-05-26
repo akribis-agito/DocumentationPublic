@@ -1,5 +1,6 @@
 ---
 keyword: CANAddr
+summary: CAN base address of the controller node.
 availability:
   standalone:
   - v4
@@ -24,13 +25,27 @@ overrides: {}
 ---
 # CANAddr
 
-**Definition:**
+CAN base address of the controller node.
 
-In CAN bus communication, CANAddr specifies the CAN base address of the node. It is recommended to always set the CAN base address (and therefore the CAN initial address) to a multiple of 16. This is because each controller requires 16 addresses for internal purposes.
+## Overview
 
-DIP switches can be used to specify CAN initial address’ offset from the CAN base address. CAN initial address will wraparound if address after offset overflows past 2032.
+`CANAddr` sets the CAN base address of the controller on a CAN bus. Set it to a **multiple of 16**, because each controller reserves 16 addresses for internal purposes.
 
-The controller receives messages at CAN initial address + 2\*N where N = 0, 1, 2 and so on.
-The controller replies to messages at CAN initial address + 2\*N + 1 where N = 0, 1, 2 and so on.
+DIP switches add an offset to the base address to form the *CAN initial address*; the initial address wraps around if it overflows past 2032. From the initial address:
 
-For more information, please refer to communication manual.
+- the controller **receives** messages at `initial address + 2·N`
+- the controller **replies** at `initial address + 2·N + 1`
+
+where N = 0, 1, 2, …. `CANAddr` is saved to flash. See the communication manual for full addressing details.
+
+## Examples
+
+```text
+CANAddr=64          ; set the CAN base address (a multiple of 16)
+```
+
+## See also
+
+- [CANBaud](CANBaud.md) — CAN bus baud rate
+- [CANDelay](CANDelay.md) — CAN message delay
+- [ChainAddress](ChainAddress.md) — address in a daisy-chain topology

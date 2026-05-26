@@ -1,5 +1,6 @@
 ---
 keyword: RemoteCANAdd
+summary: Target CAN node address for a remote write issued by RemoteCANSend.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # RemoteCANAdd
 
-**Definition:**
+Target CAN node address for a remote write issued by RemoteCANSend.
 
-RemoteCANAdd specifies the CAN node address of a remote controller to which a CAN message will be sent when [RemoteCANSend](RemoteCANSend.md) is executed. It is saved to flash and works together with [RemoteCANCCC](RemoteCANCCC.md) and [RemoteCANVal](RemoteCANVal.md) to form the outgoing message.
+## Overview
 
-**See also:**
+`RemoteCANAdd` specifies the CAN node address of the remote controller that will receive a message when [RemoteCANSend](RemoteCANSend.md) is executed. It is saved to flash and works together with [RemoteCANCCC](RemoteCANCCC.md) (the parameter to write) and [RemoteCANVal](RemoteCANVal.md) (the value) to form the outgoing transaction.
 
-[RemoteCANCCC](RemoteCANCCC.md), [RemoteCANVal](RemoteCANVal.md), [RemoteCANSend](RemoteCANSend.md)
+## Examples
+
+```text
+RemoteCANAdd=128    ; address of the remote node to write to
+```
+
+## See also
+
+- [RemoteCANCCC](RemoteCANCCC.md) — parameter identifier to write
+- [RemoteCANVal](RemoteCANVal.md) — value to write
+- [RemoteCANSend](RemoteCANSend.md) — execute the remote write

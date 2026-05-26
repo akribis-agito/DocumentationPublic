@@ -1,5 +1,6 @@
 ---
 keyword: RemoteCANVal
+summary: Value to write to the remote controller's parameter on RemoteCANSend.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # RemoteCANVal
 
-**Definition:**
+Value to write to the remote controller's parameter on RemoteCANSend.
 
-RemoteCANVal holds the value that will be written to the remote controller's parameter (identified by [RemoteCANCCC](RemoteCANCCC.md)) when [RemoteCANSend](RemoteCANSend.md) is executed. It is a transient register (not saved to flash).
+## Overview
 
-**See also:**
+`RemoteCANVal` holds the value that will be written to the remote controller's parameter — identified by [RemoteCANCCC](RemoteCANCCC.md) — when [RemoteCANSend](RemoteCANSend.md) is executed. It is a transient register and is **not** saved to flash.
 
-[RemoteCANAdd](RemoteCANAdd.md), [RemoteCANCCC](RemoteCANCCC.md), [RemoteCANSend](RemoteCANSend.md)
+## Examples
+
+```text
+RemoteCANVal=5000   ; value to send to the remote parameter
+```
+
+## See also
+
+- [RemoteCANAdd](RemoteCANAdd.md) — target node address
+- [RemoteCANCCC](RemoteCANCCC.md) — parameter identifier to write
+- [RemoteCANSend](RemoteCANSend.md) — execute the remote write

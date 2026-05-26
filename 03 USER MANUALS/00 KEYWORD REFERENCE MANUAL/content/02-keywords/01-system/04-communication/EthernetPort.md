@@ -1,5 +1,6 @@
 ---
 keyword: EthernetPort
+summary: TCP port for Ethernet communication (Agito controllers support port 50000).
 availability:
   standalone:
   - v4
@@ -26,6 +27,19 @@ overrides: {}
 ---
 # EthernetPort
 
-**Definition:**
+TCP port for Ethernet communication (Agito controllers support port 50000).
 
-In Ethernet communication, EthernetPort defines the port number. Agito controllers only support port 50,000.
+## Overview
+
+`EthernetPort` defines the TCP port number used for Ethernet communication. Agito controllers support **only port 50000**, which is also the default. It is saved to flash.
+
+## Examples
+
+```text
+EthernetPort?       ; query the configured port (50000)
+```
+
+## See also
+
+- [EthernetIP](EthernetIP.md) — IP address
+- [EthernetMAC](EthernetMAC.md) — MAC address

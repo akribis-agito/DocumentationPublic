@@ -1,5 +1,6 @@
 ---
 keyword: EthernetMAC
+summary: Controller MAC address, stored as decimal octets one per array element.
 availability:
   standalone:
   - v4
@@ -26,17 +27,28 @@ overrides: {}
 ---
 # EthernetMAC
 
-**Definition:**
+Controller MAC address, stored as decimal octets one per array element.
 
-In Ethernet communication, EthernetMAC is a parameter array storing the MAC address in decimal. Each controller on the same network must have a unique MAC address.
+## Overview
 
-For example, if MAC addresss is “00-B0-D0-63-C2-26”, each array element is as follows.
+`EthernetMAC` holds the controller's MAC address as six octets in **decimal**, one per array element. Each controller on the same network must have a unique MAC address. It is saved to flash. For example, `00-B0-D0-63-C2-26` is stored as:
 
-| Parameter         | Hex | Value (decimal) |
-| ----------------- | --- | --------------- |
-| EthernetMAC\[1\]  | 00  | 0               |
-| EthernetMAC\[2\]  | B0  | 176             |
-| EthernetMAC\[3\]  | D0  | 208             |
-| EthernetMAC\[4\]  | 63  | 99              |
-| EthernetMAC\[5\]  | C2  | 194             |
-| EthernetMAC\[6\]  | 26  | 38              |
+| Element | Hex | Decimal |
+|---------|-----|---------|
+| EthernetMAC[1] | 00 | 0 |
+| EthernetMAC[2] | B0 | 176 |
+| EthernetMAC[3] | D0 | 208 |
+| EthernetMAC[4] | 63 | 99 |
+| EthernetMAC[5] | C2 | 194 |
+| EthernetMAC[6] | 26 | 38 |
+
+## Examples
+
+```text
+EthernetMAC[3]?     ; read the third octet (decimal)
+```
+
+## See also
+
+- [EthernetIP](EthernetIP.md) — IP address
+- [EthernetPort](EthernetPort.md) — TCP port number

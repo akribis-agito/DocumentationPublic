@@ -1,5 +1,6 @@
 ---
 keyword: SendToCntrlr
+summary: Partially-implemented function that routes a parameter write to another controller.
 availability:
   standalone:
   - v4
@@ -26,10 +27,13 @@ overrides: {}
 ---
 # SendToCntrlr
 
-**Definition:**
+Partially-implemented function that routes a parameter write to another controller.
 
-SendToCntrlr is a partially-implemented function that routes a parameter write to another controller over the communication bus. It accepts an array of values that encode the target controller address, parameter code, and data payload. Because it is flagged PARTIAL, full functionality may depend on the specific firmware build.
+## Overview
 
-**See also:**
+`SendToCntrlr` routes a parameter write to another controller over the communication bus. It accepts an array of values that encode the target controller address, the parameter code, and the data payload. It is flagged **partially implemented**, so full behaviour may depend on the specific firmware build. For single CAN parameter writes to a remote node, the [RemoteCAN](RemoteCANSend.md) group is the more direct mechanism.
 
-[RemoteCANSend](RemoteCANSend.md), [CANAddr](CANAddr.md)
+## See also
+
+- [RemoteCANSend](RemoteCANSend.md) — send a single CAN write to a remote node
+- [CANAddr](CANAddr.md) — CAN addressing

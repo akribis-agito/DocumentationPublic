@@ -1,5 +1,6 @@
 ---
 keyword: ChainAddress
+summary: CAN address used when the controller runs in a daisy-chain topology.
 availability:
   standalone:
   - v4
@@ -26,10 +27,19 @@ overrides: {}
 ---
 # ChainAddress
 
-**Definition:**
+CAN address used when the controller runs in a daisy-chain topology.
 
-ChainAddress sets the CAN address used when the controller is operating in a daisy-chain topology. It is saved to flash and takes effect after reset, allowing a group of controllers to share a communication bus with distinct addresses.
+## Overview
 
-**See also:**
+`ChainAddress` sets the address a controller uses on a daisy-chained communication bus, letting a group of controllers share one bus with distinct addresses. The default of `-1` indicates the controller is not assigned a chain position. It is saved to flash and takes effect after a [Reset](../02-operation/Reset.md).
 
-[CANAddr](CANAddr.md), [CANBaud](CANBaud.md)
+## Examples
+
+```text
+ChainAddress=1      ; assign a chain position, then Save and Reset to apply
+```
+
+## See also
+
+- [CANAddr](CANAddr.md) — CAN base address
+- [CANBaud](CANBaud.md) — CAN bus baud rate

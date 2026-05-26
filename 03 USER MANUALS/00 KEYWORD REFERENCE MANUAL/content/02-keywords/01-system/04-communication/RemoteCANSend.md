@@ -1,5 +1,6 @@
 ---
 keyword: RemoteCANSend
+summary: Command that transmits a CAN write to a remote node using the RemoteCAN* registers.
 availability:
   standalone:
   - v4
@@ -26,10 +27,29 @@ overrides: {}
 ---
 # RemoteCANSend
 
-**Definition:**
+Command that transmits a CAN write to a remote node using the RemoteCAN* registers.
 
-RemoteCANSend is a command that transmits a CAN write message to the remote node specified by [RemoteCANAdd](RemoteCANAdd.md), setting the parameter identified by [RemoteCANCCC](RemoteCANCCC.md) to the value in [RemoteCANVal](RemoteCANVal.md). It can be executed during motion.
+## Overview
 
-**See also:**
+`RemoteCANSend` transmits a CAN write message to a remote node. It uses the three RemoteCAN registers set beforehand:
 
-[RemoteCANAdd](RemoteCANAdd.md), [RemoteCANCCC](RemoteCANCCC.md), [RemoteCANVal](RemoteCANVal.md)
+1. [RemoteCANAdd](RemoteCANAdd.md) — the target node's CAN address
+2. [RemoteCANCCC](RemoteCANCCC.md) — the parameter (CAN command code) to write
+3. [RemoteCANVal](RemoteCANVal.md) — the value to write
+
+Set those three, then execute `RemoteCANSend` to perform the remote write. It can be executed during motion.
+
+## Examples
+
+```text
+RemoteCANAdd=128    ; target node
+RemoteCANCCC=100    ; parameter to write on the remote node
+RemoteCANVal=5000   ; value
+RemoteCANSend=1     ; send the write
+```
+
+## See also
+
+- [RemoteCANAdd](RemoteCANAdd.md) — target node address
+- [RemoteCANCCC](RemoteCANCCC.md) — parameter identifier
+- [RemoteCANVal](RemoteCANVal.md) — value to write

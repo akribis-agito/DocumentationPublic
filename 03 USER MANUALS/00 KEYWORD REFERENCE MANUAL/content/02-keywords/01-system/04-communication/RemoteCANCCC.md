@@ -1,5 +1,6 @@
 ---
 keyword: RemoteCANCCC
+summary: CAN command code (parameter identifier) for a remote write issued by RemoteCANSend.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # RemoteCANCCC
 
-**Definition:**
+CAN command code (parameter identifier) for a remote write issued by RemoteCANSend.
 
-RemoteCANCCC holds the CAN Command Code (CCC) — the parameter identifier — that will be written to the remote controller when [RemoteCANSend](RemoteCANSend.md) is executed. Together with [RemoteCANAdd](RemoteCANAdd.md) and [RemoteCANVal](RemoteCANVal.md) it defines the complete remote write transaction.
+## Overview
 
-**See also:**
+`RemoteCANCCC` holds the CAN Command Code (CCC) — the parameter identifier — that will be written on the remote controller when [RemoteCANSend](RemoteCANSend.md) is executed. Together with [RemoteCANAdd](RemoteCANAdd.md) (the target node) and [RemoteCANVal](RemoteCANVal.md) (the value) it defines the complete remote write. It is saved to flash.
 
-[RemoteCANAdd](RemoteCANAdd.md), [RemoteCANVal](RemoteCANVal.md), [RemoteCANSend](RemoteCANSend.md)
+## Examples
+
+```text
+RemoteCANCCC=100    ; write the remote node's parameter with CAN code 100
+```
+
+## See also
+
+- [RemoteCANAdd](RemoteCANAdd.md) — target node address
+- [RemoteCANVal](RemoteCANVal.md) — value to write
+- [RemoteCANSend](RemoteCANSend.md) — execute the remote write

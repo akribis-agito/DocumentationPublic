@@ -1,5 +1,6 @@
 ---
 keyword: CANBaud
+summary: CAN bus baud rate, selected from a fixed table.
 availability:
   standalone:
   - v4
@@ -26,17 +27,30 @@ overrides: {}
 ---
 # CANBaud
 
-**Definition:**
+CAN bus baud rate, selected from a fixed table.
 
-In CAN bus communication, CANBaud defines the baud rate of the CAN bus communication. The following table shows the values of CANBaud and corresponding baud rates.
+## Overview
 
-| CANBaud value | Baud rate \[kHz\] |
-|---------------|-------------------|
-| 1             | 31.25             |
-| 2             | 62.5              |
-| 3             | 125               |
-| 4             | 250               |
-| 5             | 500               |
-| 6             | 1000              |
+`CANBaud` selects the CAN bus baud rate from the table below. The default, `6`, corresponds to 1 Mbit/s. It is saved to flash; all nodes on a bus must use the same baud rate.
 
-For more information, please refer to communication manual.
+| CANBaud | Baud rate [kbit/s] |
+|---------|--------------------|
+| 1 | 31.25 |
+| 2 | 62.5 |
+| 3 | 125 |
+| 4 | 250 |
+| 5 | 500 |
+| 6 | 1000 |
+
+See the communication manual for more information.
+
+## Examples
+
+```text
+CANBaud=6           ; 1 Mbit/s
+```
+
+## See also
+
+- [CANAddr](CANAddr.md) — CAN base address
+- [CANDelay](CANDelay.md) — CAN message delay
