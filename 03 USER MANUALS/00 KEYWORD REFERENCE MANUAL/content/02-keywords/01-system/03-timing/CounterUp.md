@@ -1,5 +1,6 @@
 ---
 keyword: CounterUp
+summary: Two independent up-counters incremented every controller cycle.
 availability:
   standalone:
   - v4
@@ -26,8 +27,20 @@ overrides: {}
 ---
 # CounterUp
 
-**Definition:**
+Two independent up-counters incremented every controller cycle.
 
-CounterUp is a user-writable keyword containing 2 array elements that count up independently from each other. The counters are initialised to 0 upon power up, and will always increment by 1 count every controller cycle.
+## Overview
 
-If CounterUp reaches its maximum value of 2147483647, it will rollover to -2147483648 and continue incrementing.
+`CounterUp` provides two independent counters, `CounterUp[1]` and `CounterUp[2]`. Each starts at 0 at power-up and increments by 1 every controller cycle. On reaching the maximum (2147483647) a counter rolls over to −2147483648 and keeps incrementing. Because it is writable, a user program can preset or reset a counter to time or count events in units of controller cycles.
+
+## Examples
+
+```text
+CounterUp[1]?       ; read the first up-counter
+CounterUp[1]=0      ; reset the first up-counter
+```
+
+## See also
+
+- [CounterDown](CounterDown.md) — cycle-based down-counters
+- [Time](Time.md) / [HWTimer](HWTimer.md) — wall-clock and high-resolution timers

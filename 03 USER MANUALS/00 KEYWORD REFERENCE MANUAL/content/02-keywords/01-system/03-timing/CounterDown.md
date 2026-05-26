@@ -1,5 +1,6 @@
 ---
 keyword: CounterDown
+summary: Two independent down-counters decremented every controller cycle.
 availability:
   standalone:
   - v4
@@ -26,8 +27,20 @@ overrides: {}
 ---
 # CounterDown
 
-**Definition:**
+Two independent down-counters decremented every controller cycle.
 
-CounterDown is a user-writable keyword containing 2 array elements that count down independently from each other. The counters are initialised to 0 upon power up, and if non-zero, will decrement by 1 count every controller cycle.
+## Overview
 
-Once CounterDown reaches 0, it will remain at 0 and not rollover.
+`CounterDown` provides two independent counters, `CounterDown[1]` and `CounterDown[2]`. Each starts at 0 at power-up and, while non-zero, decrements by 1 every controller cycle. On reaching 0 a counter stays at 0 — it does not roll over. Write a starting value to count down a fixed number of controller cycles, for example to implement a timeout or delay in a user program.
+
+## Examples
+
+```text
+CounterDown[1]=1000 ; count down 1000 controller cycles
+CounterDown[1]?     ; read the remaining count
+```
+
+## See also
+
+- [CounterUp](CounterUp.md) — cycle-based up-counters
+- [Time](Time.md) / [HWTimer](HWTimer.md) — wall-clock and high-resolution timers

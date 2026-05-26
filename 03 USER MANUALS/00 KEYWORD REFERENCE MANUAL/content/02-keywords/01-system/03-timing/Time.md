@@ -1,5 +1,6 @@
 ---
 keyword: Time
+summary: Read-only seconds elapsed since power-on.
 availability:
   standalone:
   - v4
@@ -26,6 +27,19 @@ overrides: {}
 ---
 # Time
 
-**Definition:**
+Read-only seconds elapsed since power-on.
 
-Time is a read only parameter that holds the time (in seconds) since power on.
+## Overview
+
+`Time` holds the number of seconds elapsed since the controller powered on. It is read-only and resets to 0 at each power-up, making it convenient for coarse, second-resolution timestamping or elapsed-time checks. For measuring short intervals at sub-microsecond resolution, use [HWTimer](HWTimer.md) instead.
+
+## Examples
+
+```text
+Time?               ; seconds since power-on
+```
+
+## See also
+
+- [HWTimer](HWTimer.md) — high-resolution interval timer
+- [CounterUp](CounterUp.md) / [CounterDown](CounterDown.md) — cycle-based counters
