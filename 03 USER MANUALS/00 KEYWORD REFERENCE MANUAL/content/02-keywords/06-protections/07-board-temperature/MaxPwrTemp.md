@@ -1,5 +1,6 @@
 ---
 keyword: MaxPwrTemp
+summary: Maximum allowed power-stage temperature (°C); exceeding it triggers protection.
 availability:
   standalone:
   - v4
@@ -26,5 +27,19 @@ overrides: {}
 ---
 # MaxPwrTemp
 
-MaxPwrTemp is the maximum allowed temperature in Celsius for the power generating
-components of the product.
+Maximum allowed power-stage temperature (°C); exceeding it triggers protection.
+
+## Overview
+
+`MaxPwrTemp` is the maximum allowed temperature, in °C, for the power-generating components of the product. When [PwrTemp](PwrTemp.md) approaches or exceeds this limit, the controller's over-temperature protection acts to prevent damage.
+
+## Examples
+
+```text
+MaxPwrTemp=65       ; power-stage over-temperature limit (°C)
+```
+
+## See also
+
+- [PwrTemp](PwrTemp.md) — measured power-stage temperature
+- [BoardTemp](BoardTemp.md) — controller-board temperature

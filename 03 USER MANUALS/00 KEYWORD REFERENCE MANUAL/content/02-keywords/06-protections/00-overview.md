@@ -1,53 +1,13 @@
 # Protections
 
-The following table shows the summary of protections keywords.
+Keywords that protect the motor, amplifier, and machine by limiting operation and tripping faults when limits are exceeded. The category is organised by what is protected:
 
-| No. | Sub-section         | Keywords        | Summary |
-|-----|---------------------|-----------------|---------|
-| 1   | General protection  | HWProtectBits   |         |
-| 2   | General protection  | ProtectMask     |         |
-| 3   | Current and voltage | ContCL          |         |
-| 4   | Current and voltage | CurrLimFwd      |         |
-| 5   | Current and voltage | CurrLimMode     |         |
-| 6   | Current and voltage | CurrLimRev      |         |
-| 7   | Current and voltage | MaxMotorCurr    |         |
-| 8   | Current and voltage | MaxPhaseCurr    |         |
-| 9   | Current and voltage | MaxPWM          |         |
-| 10  | Current and voltage | MaxVBus         |         |
-| 11  | Current and voltage | MaxVBusAbs      |         |
-| 12  | Current and voltage | MaxVBusTime     |         |
-| 13  | Current and voltage | MinVBus         |         |
-| 14  | Current and voltage | PeakCL          |         |
-| 15  | Current and voltage | PeakTime        |         |
-| 16  | Current and voltage | PowerSupply     |         |
-| 17  | Motion              | MaxAcc          |         |
-| 18  | Motion              | MaxPosErr       |         |
-| 19  | Motion              | MaxPosErrOL     |         |
-| 20  | Motion              | MaxVel          |         |
-| 21  | Motion              | MaxVelErr       |         |
-| 22  | Motion              | MaxVelErrOL     |         |
-| 23  | Motion              | FwdPLim         |         |
-| 24  | Motion              | RevPLim         |         |
-| 25  | Motion              | LimitsStat      |         |
-| 26  | Motion              | StuckCurr       |         |
-| 27  | Motion              | StuckTime       |         |
-| 28  | Motion              | StuckVel        |         |
-| 29  | Motion              | DualStuckTime   |         |
-| 30  | Motion              | DualStuckVel    |         |
-| 31  | Motion              | StallCfg        |         |
-| 32  | Motion              | StallCnst       |         |
-| 33  | Motion              | StallStat       |         |
-| 34  | Motion              | StallTh         |         |
-| 35  | Motion              | StallThPcnt     |         |
-| 36  | Motion              | StallVal        |         |
-| 37  | Force control       | MaxForceErr     |         |
-| 38  | Force control       | MaxForceErrOL   |         |
-| 39  | Motor temperature   | MotorTempUsed   |         |
-| 40  | Motor temperature   | MotorTempOffset |         |
-| 41  | Motor temperature   | MaxMotorTemp    |         |
-| 42  | Brake               | DynBrakeOn      |         |
-| 43  | Brake               | DynBrkRef       |         |
-| 44  | Brake               | BrakeUsed       |         |
-| 45  | Brake               | BrakeMode       |         |
-| 46  | Brake               | BrakeLockTime   |         |
-| 47  | Brake               | BrakeRelTime    |         |
+- **General protection** — which hardware protections are active and enabled ([HWProtectBits](01-general-protection/HWProtectBits.md), [ProtectMask](01-general-protection/ProtectMask.md)).
+- **Current and voltage** — current limiting via the I²t scheme ([ContCL](02-current-and-voltage/ContCL.md) / [PeakCL](02-current-and-voltage/PeakCL.md) / [PeakTime](02-current-and-voltage/PeakTime.md)), current-command limits ([CurrLimMode](02-current-and-voltage/CurrLimMode.md), [CurrLimFwd](02-current-and-voltage/CurrLimFwd.md), [CurrLimRev](02-current-and-voltage/CurrLimRev.md)), over-current trips ([MaxMotorCurr](02-current-and-voltage/MaxMotorCurr.md), [MaxPhaseCurr](02-current-and-voltage/MaxPhaseCurr.md)), bus-voltage limits ([MinVBus](02-current-and-voltage/MinVBus.md) / [MaxVBus](02-current-and-voltage/MaxVBus.md) / [MaxVBusTime](02-current-and-voltage/MaxVBusTime.md) / [MaxVBusAbs](02-current-and-voltage/MaxVBusAbs.md)), plus [MaxPWM](02-current-and-voltage/MaxPWM.md) and [PowerSupply](02-current-and-voltage/PowerSupply.md).
+- **Motion** — velocity/acceleration and following-error limits, software travel limits, and stuck/stall detection (see the sub-groups: general-maximum-limits, position-limit-protection, motor-stuck-protection, dual-loop-stuck-protection, stepper-stall-protection).
+- **Force control** — force-error limits ([MaxForceErr](04-force-control/MaxForceErr.md), [MaxForceErrOL](04-force-control/MaxForceErrOL.md)).
+- **Motor temperature** — sensor selection and over-temperature limit ([MotorTempUsed](05-motor-temperature/MotorTempUsed.md), [MotorTemp](05-motor-temperature/MotorTemp.md), [MaxMotorTemp](05-motor-temperature/MaxMotorTemp.md), [MotorTempOffset](05-motor-temperature/MotorTempOffset.md)).
+- **Brake** — [dynamic](06-brake/Dynamicbrake.md) (electrical) and [static](06-brake/Staticbrake.md) (holding) braking.
+- **Board temperature** — board and power-stage temperature ([BoardTemp](07-board-temperature/BoardTemp.md), [PwrTemp](07-board-temperature/PwrTemp.md), [MaxPwrTemp](07-board-temperature/MaxPwrTemp.md)).
+
+Most limit-exceeded conditions disable the axis and report an error to the fault register `ConFlt`; some current/voltage protections *limit* the value rather than tripping.

@@ -1,5 +1,6 @@
 ---
 keyword: MotorTemp
+summary: Read-only measured motor temperature (flagged not implemented in current firmware).
 availability:
   standalone:
   - v4
@@ -26,15 +27,16 @@ overrides: {}
 ---
 # MotorTemp
 
-**Definition:**
+Read-only measured motor temperature (flagged not implemented in current firmware).
 
-MotorTemp reports the measured motor temperature from an attached temperature sensor. It is a read-only, axis-related status variable that is not saved to flash.
+## Overview
 
-%%
-Needs verification
-MotorTemp is flagged NOT_IMPLEMENTED in the current firmware parameter table; confirm hardware support and sensor availability before use.
-%%
+`MotorTemp` reports the measured motor temperature from an attached sensor (°C). It is read-only, axis-related, and not saved to flash.
 
-**See also:**
+> **Not implemented:** `MotorTemp` is flagged `NOT_IMPLEMENTED` in the current firmware parameter table. Confirm hardware/sensor support with Agito before relying on it.
 
-[MaxMotorTemp](MaxMotorTemp.md), [MotorTempUsed](MotorTempUsed.md), [MotorTempOffset](MotorTempOffset.md)
+## See also
+
+- [MaxMotorTemp](MaxMotorTemp.md) — over-temperature limit
+- [MotorTempUsed](MotorTempUsed.md) — sensor-type selection
+- [MotorTempOffset](MotorTempOffset.md) — reading offset

@@ -1,9 +1,19 @@
+---
+keyword: MotorTempOffset
+summary: Offset applied to the motor temperature reading (cable-resistance compensation).
+---
 # MotorTempOffset
 
-**Condition:**
+Offset applied to the motor temperature reading (cable-resistance compensation).
 
-MotorTempOffset is only applicable for PT100 temperature sensors (MotorTempUsed == 1).
+## Overview
 
-**Definition:**
+`MotorTempOffset` defines an offset applied to [MotorTemp](MotorTemp.md), used to correct temperature-reading errors caused by cable resistance.
 
-MotorTempOffset defines an offset that is applied to MotorTemp. It is used to offset errors in temperature reading due to cable resistance.
+> **Condition:** only applicable with a PT100 temperature sensor — i.e. [MotorTempUsed](MotorTempUsed.md) `== 1`.
+
+## See also
+
+- [MotorTemp](MotorTemp.md) — measured temperature
+- [MaxMotorTemp](MaxMotorTemp.md) — over-temperature limit
+- [MotorTempUsed](MotorTempUsed.md) — sensor-type selection

@@ -1,5 +1,6 @@
 ---
 keyword: BoardTemp
+summary: Read-only controller-board temperature (°C).
 availability:
   standalone:
   - v4
@@ -26,10 +27,19 @@ overrides: {}
 ---
 # BoardTemp
 
-**Definition:**
+Read-only controller-board temperature (°C).
 
-BoardTemp reports the current temperature of the controller board as measured by the on-board temperature sensor. It is a read-only, non-axis status variable that is not saved to flash and is available at all times.
+## Overview
 
-**See also:**
+`BoardTemp` reports the temperature of the controller board, measured by the on-board sensor, in °C. It is read-only, not saved to flash, and available at all times. For the temperature of the power stage specifically, see [PwrTemp](PwrTemp.md).
 
-[PwrTemp](PwrTemp.md), [MaxPwrTemp](MaxPwrTemp.md)
+## Examples
+
+```text
+BoardTemp?          ; controller board temperature (°C)
+```
+
+## See also
+
+- [PwrTemp](PwrTemp.md) — power-stage temperature
+- [MaxPwrTemp](MaxPwrTemp.md) — power-stage over-temperature limit

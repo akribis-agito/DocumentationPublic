@@ -1,5 +1,6 @@
 ---
 keyword: MaxForceErrOL
+summary: Maximum allowable force error in open-loop force control; exceeding it faults.
 availability:
   standalone:
   - v4
@@ -26,10 +27,18 @@ overrides: {}
 ---
 # MaxForceErrOL
 
-**Definition:**
+Maximum allowable force error in open-loop force control; exceeding it faults.
 
-MaxForceErrOL sets the maximum allowable force error in open-loop force control mode (OL = open loop). If the force error exceeds this limit in open-loop operation, the controller generates a fault. It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
+## Overview
 
-**See also:**
+`MaxForceErrOL` is the maximum allowable force error in **open-loop** force-control mode (OL = open loop). If the force error exceeds this limit in open-loop operation, the controller raises a fault. It is axis-related, saved to flash, and may be changed at any time including during motion. It is the open-loop counterpart of [MaxForceErr](MaxForceErr.md) (its default is larger, as open-loop error is naturally greater).
 
-[MaxForceErr](MaxForceErr.md)
+## Examples
+
+```text
+MaxForceErrOL=50000 ; max open-loop force error before fault
+```
+
+## See also
+
+- [MaxForceErr](MaxForceErr.md) — closed-loop force-error limit

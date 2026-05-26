@@ -1,5 +1,6 @@
 ---
 keyword: PwrTemp
+summary: Read-only power-stage temperature (°C).
 availability:
   standalone:
   - v4
@@ -26,7 +27,19 @@ overrides: {}
 ---
 # PwrTemp
 
-<!-- Imported from the 2021 PDF reference. Verify against current firmware
-     behavior and update with the latest semantics. -->
+Read-only power-stage temperature (°C).
 
-`PwrTemp` returns the temperature in Celsius measured on the power-generating part of the product.
+## Overview
+
+`PwrTemp` reports the temperature, in °C, measured on the power-generating part of the product (the power stage). It is read-only. The protection limit for this temperature is [MaxPwrTemp](MaxPwrTemp.md).
+
+## Examples
+
+```text
+PwrTemp?            ; power-stage temperature (°C)
+```
+
+## See also
+
+- [MaxPwrTemp](MaxPwrTemp.md) — power-stage over-temperature limit
+- [BoardTemp](BoardTemp.md) — controller-board temperature

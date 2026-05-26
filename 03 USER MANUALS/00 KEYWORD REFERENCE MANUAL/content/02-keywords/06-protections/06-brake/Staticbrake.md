@@ -1,54 +1,47 @@
+---
+summary: Static (holding) brake control — engagement mode and timing (BrakeUsed, BrakeMode, BrakeLockTime, BrakeRelTime).
+---
 # Static brake
 
-##### BrakeUsed
+Static braking controls an external holding brake — engaging it to hold the load and releasing it before motion. This page covers `BrakeUsed`, `BrakeMode`, `BrakeLockTime`, and `BrakeRelTime`.
 
-**Definition:**
+## BrakeUsed
 
-BrakeUsed enables/disables the static braking feature.
+Enables or disables the static brake feature.
 
-| Value | Descriptions |
-|-------|--------------|
-| 0     | Disabled     |
-| 1     | Enabled      |
+| Value | Description |
+|-------|-------------|
+| 0 | Disabled |
+| 1 | Enabled |
 
-##### BrakeMode
+## BrakeMode
 
-**Definition:**
+Defines how the brake is controlled. (Engaged = not energized; released = energized.)
 
-BrakeMode defines how the brake will be controlled.
+| Value | Description |
+|-------|-------------|
+| 0 | **Manual lock** — brake engaged (not energized). |
+| 1 | **Manual release, with protection** — brake released, provided the motor is enabled. |
+| 2 | **Manual release, without protection** — brake released (energized). |
+| 3 | **Automatic by motor-on state** — released when the motor is enabled, engaged when disabled. |
+| 4 | **Automatic by discrete input, with protection** — input high → engaged (if not in motion); input low → released (if motor enabled). |
 
-| Value | Descriptions |
-|---|---|
-| 0 | **Manual Lock Command** Brake is engaged (not energized). |
-| 1 | **Manual Release Command – with Protection** Upon setting BrakeMode = 1, brake is released (energized), provided motor enabled. |
-| 2 | **Manual Release Command – without Protection** Brake is released (energized). |
-| 3 | **Automatic – By MotorOn State** When motor is enabled, brake is released (energized). When motor is disabled, brake is engaged (not energized). |
-| 4 | **Automatic – By Discrete Input – with Protection** When input logic is toggled high, brake is engaged (not energized), provided motor is not motion. When input logic is toggled low, brake is released (energized), provided motor is enabled. |
+## BrakeLockTime
 
-##### BrakeLockTime
+> **Condition:** applicable when `BrakeMode = 3`.
 
-**Condition:**
+Delay, in milliseconds, from receiving the motor-disable command until the motor is actually disabled — giving the brake time to engage first.
 
-BrakeLockTime is only applicable when BrakeMode = 3 (in “Automatic – By MotorOn State”).
+**Example:** if the brake takes 300 ms to engage after power is cut, set `BrakeLockTime = 350`. On a disable command, the controller cuts power to the brake, waits 350 ms for it to engage, then disables the motor.
 
-**Definition:**
+## BrakeRelTime
 
-BrakeLockTime defines the delay time, in milliseconds, from the receipt of motor disable command until the motor is actually disabled.
+> **Condition:** applicable when `BrakeMode = 3`.
 
-**Example:**
+Time to wait, in milliseconds, after energizing the brake before allowing motion.
 
-If the brake takes 300ms to physically engage upon cutting the power, then BrakeLockTime should be set to a value greater than that, e.g. 350ms. Upon sending the command to disable the motor, the controller will first cut the power to the brakes and wait for 350ms for the brakes to engage. Only then will it disable the motor.
+**Example:** if the brake takes 150 ms to release, set `BrakeRelTime = 200`. On a motor-on command, the controller powers both motor and brake, waits 200 ms for the brake to release, then allows motion.
 
-##### BrakeRelTime
+## See also
 
-**Condition:**
-
-BrakeLockTime is only applicable when BrakeMode = 3 (in “Automatic – By MotorOn State”).
-
-**Definition:**
-
-BrakeRelTime defines the time to wait, in milliseconds, before allowing the motor to move.
-
-**Example:**
-
-If the brake takes 150ms to release upon providing power, then BrakeRelTime should be set to a value greater than that, e.g. 200ms. Upon sending the command to motor on, the controller will provide power to both the motor and the brakes. It will wait for 200ms for the brakes to release, only then will it allow motion.
+- [Dynamic brake](Dynamicbrake.md) — fast electrical braking

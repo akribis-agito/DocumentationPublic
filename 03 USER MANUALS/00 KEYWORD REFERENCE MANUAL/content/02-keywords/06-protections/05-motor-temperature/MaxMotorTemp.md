@@ -1,5 +1,6 @@
 ---
 keyword: MaxMotorTemp
+summary: Maximum allowable motor temperature (PT100 sensor); exceeding it faults.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # MaxMotorTemp
 
-**Condition:**
+Maximum allowable motor temperature (PT100 sensor); exceeding it faults.
 
-MaxMotorTemp is only applicable for PT100 temperature sensors (MotorTempUsed == 1).
+## Overview
 
-**Definition:**
+`MaxMotorTemp` is the maximum allowable motor temperature, in °C. If the measured [MotorTemp](MotorTemp.md) exceeds this limit, the controller raises a fault to protect the motor.
 
-MotorTempOffset defines an offset that is applied to MotorTemp. It is used to offset errors in temperature reading due to cable resistance.
+> **Condition:** only applicable with a PT100 temperature sensor — i.e. [MotorTempUsed](MotorTempUsed.md) `== 1`.
+
+## Examples
+
+```text
+MaxMotorTemp=80     ; trip if motor temperature exceeds 80 °C
+```
+
+## See also
+
+- [MotorTemp](MotorTemp.md) — measured motor temperature
+- [MotorTempUsed](MotorTempUsed.md) — sensor-type selection
+- [MotorTempOffset](MotorTempOffset.md) — reading offset (cable compensation)

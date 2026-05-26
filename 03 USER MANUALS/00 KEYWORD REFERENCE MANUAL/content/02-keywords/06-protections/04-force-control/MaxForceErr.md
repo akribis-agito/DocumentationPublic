@@ -1,5 +1,6 @@
 ---
 keyword: MaxForceErr
+summary: Maximum allowable force error in closed-loop force control; exceeding it faults.
 availability:
   standalone:
   - v4
@@ -26,10 +27,18 @@ overrides: {}
 ---
 # MaxForceErr
 
-**Definition:**
+Maximum allowable force error in closed-loop force control; exceeding it faults.
 
-MaxForceErr sets the maximum allowable force error in closed-loop force control mode. If the difference between the commanded force and the measured force exceeds this threshold, the controller generates a fault. It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
+## Overview
 
-**See also:**
+`MaxForceErr` is the maximum allowable force error in **closed-loop** force-control mode. If the difference between the commanded and measured force exceeds this threshold, the controller raises a fault. It is axis-related, saved to flash, and may be changed at any time including during motion. For the open-loop equivalent, see [MaxForceErrOL](MaxForceErrOL.md).
 
-[MaxForceErrOL](MaxForceErrOL.md)
+## Examples
+
+```text
+MaxForceErr=2000    ; max closed-loop force error before fault
+```
+
+## See also
+
+- [MaxForceErrOL](MaxForceErrOL.md) — open-loop force-error limit
