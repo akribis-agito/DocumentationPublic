@@ -1,0 +1,115 @@
+// keyword-frontmatter.schema.yml
+//
+// Canonical contract for the YAML frontmatter on every keyword doc.
+// Use this as the single reference when rendering a keyword page (web or C#)
+// or when validating generator output. It documents each field, its type,
+// allowed values, whether it is generated or authored, and how it drives the
+// rendered page (the "render mapping" section at the bottom).
+//
+// Source of truth for facts: firmware KeywordsTableArray (AG300_CTL01Params.c),
+// extracted by tools/keyword-docgen. Prose (body) and `summary` are authored.
+
+version: 1
+
+# ---------------------------------------------------------------------------
+# Field reference
+# ---------------------------------------------------------------------------
+fields:
+
+  keyword:
+    type: string
+    origin: generated   # mirrors the doc filename / mnemonic
+    required: true
+    description: Mnemonic of the keyword.
+
+  summary:
+    type: string
+    origin: authored
+    required: false
+    description: One-line description shown under the page title.
+
+  can_code:
+    type: integer
+    origin: generated
+    required: true
+    description: CAN code of the primary cell.
+
+  category:
+    type: string
+    origin: authored
+    required: false
+    description: Category slug (e.g. control-tuning, system).
+
+  availability:
+    type: object
+    origin: generated
+    required: true
+    description: Which (product, version) cells this keyword exists in.
+    properties:
+      standalone: { type: list, items: version }   # e.g. [v4, v5]
+      central-i:  { type: list, items: version }
+    note: An empty list means the keyword is not available on that product.
+
+  attributes:
+    type: object
+    origin: generated
+    required: true
+    description: >
+      Facts for the PRIMARY cell (latest version of the primary product,
+      standalone). Every field below is rendered in Quick Facts.
+    properties:
+      access:       { type: enum, values: [ro, rw] }
+      scope:        { type: enum, values: [axis, non-axis] }
+      flash:        { type: boolean }                       # saved to flash
+      type:         { type: enum, values: [scalar, array] }
+      array_size:   { type: integer }                       # firmware MaxArrayIndex + 1;
+                                                            # includes reserved slot 0, so
+                                                            # highest USABLE index = array_size - 1
+                                                            # (arrays are 1-indexed; [0] is not accessible)
+      data_type:    { type: enum, values: [int32, float32, int64, float64] }
+      ok_in_motion: { type: boolean }
+      ok_motor_on:  { type: boolean }
+      units:        { type: enum, values: [user, none, func] }
+      range:        { type: "list[2] | null", items: integer }   # [min, max], or null if unresolved
+      default:      { type: "integer | null" }
+      scaling:      { type: number }
+      implemented:  { type: enum, values: [final, partial] }
+
+  overrides:
+    type: object
+    origin: generated
+    required: false
+    description: >
+      Per-cell deltas from the primary attributes. Keys are "<product>.<version>"
+      (flat dotted), values are a partial attributes map containing ONLY the
+      fields that differ from the primary. Drives the divergence markers.
+    example:
+      standalone.v4: { range: [0, 32767], default: 120, access: ro }
+      central-i.v5:  { default: 90 }
+
+  removed_in:
+    type: list
+    origin: generated
+    required: false
+    description: Versions scanned in which the keyword is absent though older cells exist.
+
+# ---------------------------------------------------------------------------
+# data_type vocabulary (display labels)
+# ---------------------------------------------------------------------------
+data_type_labels:
+  int32:   "32-bit integer (long)"
+  float32: "32-bit float"
+  int64:   "64-bit integer (long long)"
+  float64: "64-bit double"
+
+# ---------------------------------------------------------------------------
+# Render mapping — how a renderer turns this frontmatter into the page
+# ---------------------------------------------------------------------------
+render_mapping:
+  title:            "# heading + summary line"
+  availability:     "2x2 matrix (rows: standalone/central-i, cols: versions). Cell = present / present-but-differs / n/a."
+  primary_cell:     "standalone + latest available version; its attributes populate Quick Facts in full."
+  quick_facts:      "one row per attributes.* field (latest-version values)."
+  divergence_dot:   "a field gets a marker if it appears in any overrides.* entry; the old value is shown on hover/expand from that override."
+  array_indexing:   "present array indexes starting at 1 (index 0 is reserved/inaccessible)."
+  behavioural_diff: "authored '## Changes between versions' body section (not derivable from facts)."
