@@ -35,7 +35,7 @@ Data value to be written to the absolute encoder register on a write transaction
 
 ## How it works
 
-On a write transaction `EncAbsSendCmd` writes `EncAbsWData` to the encoder-interface write-data register after setting [EncAbsAddr](EncAbsAddr.md), then issues the encoder "write to memory" command (`AG300_CTL01Funcs.c:20057`). It is ignored on a read transaction ([EncAbsWRType](EncAbsWRType.md) = 0). The value is the data byte sent to the addressed encoder register.
+On a write transaction `EncAbsSendCmd` writes `EncAbsWData` to the encoder-interface write-data register after setting [EncAbsAddr](EncAbsAddr.md), then issues the encoder "write to memory" command. It is ignored on a read transaction ([EncAbsWRType](EncAbsWRType.md) = 0). The value is the data byte sent to the addressed encoder register.
 
 ## Examples
 

@@ -35,7 +35,7 @@ Register address within the absolute encoder to be accessed by the next transact
 
 ## How it works
 
-When [EncAbsSendCmd](EncAbsSendCmd.md) runs, it writes `EncAbsAddr` to the encoder-interface memory-address register before issuing the read or write command (`AG300_CTL01Funcs.c:20045`/`20056`). The address therefore selects which encoder register the subsequent transaction targets; it has no effect on its own. Set it together with [EncAbsWRType](EncAbsWRType.md) — and, for a write, [EncAbsWData](EncAbsWData.md) — then issue `EncAbsSendCmd`.
+When [EncAbsSendCmd](EncAbsSendCmd.md) runs, it writes `EncAbsAddr` to the encoder-interface memory-address register before issuing the read or write command. The address therefore selects which encoder register the subsequent transaction targets; it has no effect on its own. Set it together with [EncAbsWRType](EncAbsWRType.md) — and, for a write, [EncAbsWData](EncAbsWData.md) — then issue `EncAbsSendCmd`.
 
 ## Examples
 

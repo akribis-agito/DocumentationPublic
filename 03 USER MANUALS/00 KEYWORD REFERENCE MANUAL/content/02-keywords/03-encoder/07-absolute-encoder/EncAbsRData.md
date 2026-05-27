@@ -35,7 +35,7 @@ Data returned from an absolute encoder register read transaction.
 
 ## How it works
 
-On a read transaction `EncAbsSendCmd` waits for the encoder to respond, reads the returned byte from the encoder-interface read-data register, bit-reverses it (the encoder transmits LSB-first), and stores the result in `EncAbsRData` (`AG300_CTL01Funcs.c:20051`–`20052`). It is only updated by a read ([EncAbsWRType](EncAbsWRType.md) = 0); a write transaction leaves it unchanged. Read it after `EncAbsSendCmd` reports completion.
+On a read transaction `EncAbsSendCmd` waits for the encoder to respond, reads the returned byte from the encoder-interface read-data register, bit-reverses it (the encoder transmits LSB-first), and stores the result in `EncAbsRData`. It is only updated by a read ([EncAbsWRType](EncAbsWRType.md) = 0); a write transaction leaves it unchanged. Read it after `EncAbsSendCmd` reports completion.
 
 ## Examples
 

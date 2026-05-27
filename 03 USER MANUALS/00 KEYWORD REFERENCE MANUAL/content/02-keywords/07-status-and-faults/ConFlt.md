@@ -36,7 +36,7 @@ Holds the controller error code that disabled the axis.
 
 ## Overview
 
-`ConFlt` stores the error code that caused the axis to be disabled. A value of `0` (`CON_FLT_NONE`) means no fault is present; any positive value is a controller fault code. Fault codes are numbered from a base of `1000`, so the first real fault is `1001` (abort signal) and the codes run up contiguously from there — see [Controller error codes](../../04-error-codes/controller-error-codes.md) for the full list and their meanings.
+`ConFlt` stores the error code that caused the axis to be disabled. A value of `0` means no fault is present; any positive value is a controller fault code. Fault codes are numbered from a base of `1000`, so the first real fault is `1001` (abort signal) and the codes run up contiguously from there — see [Controller error codes](../../04-error-codes/controller-error-codes.md) for the full list and their meanings.
 
 `ConFlt` is an axis-scoped register that is not saved to flash, so it always reflects the live fault state of that axis. It works together with the diagnostic snapshot pair [ConFltSnapSrc](ConFltSnapSrc.md) / [ConFltSnapVal](ConFltSnapVal.md), which freeze selected parameter values at the moment a fault occurs, and with [MotorReason](MotorReason.md), which reports the broader category of why the axis was disabled.
 
@@ -44,12 +44,12 @@ Holds the controller error code that disabled the axis.
 
 When the controller detects a disabling fault it performs four actions together, atomically, for the affected axis:
 
-1. The axis is disabled (the internal `MotorOn` flag is forced off).
-2. `ConFlt` is loaded with the fault code (`CON_FLT_*`).
+1. The axis is disabled ([MotorOn](../08-axis-operation/01-general-keywords/MotorOn.md) is forced off).
+2. `ConFlt` is loaded with the fault code.
 3. A diagnostic snapshot is captured into [ConFltSnapVal](ConFltSnapVal.md).
 4. The fault is appended to the controller [ErrLog](ErrLog.md), tagged with the axis letter, together with the power-on time.
 
-Separately, when the axis transitions to disabled while a fault is present, [MotorReason](MotorReason.md) is set to `1` (CONFLT).
+Separately, when the axis transitions to disabled while a fault is present, [MotorReason](MotorReason.md) is set to `1` (controller fault).
 
 Clearing:
 
@@ -63,7 +63,7 @@ A few representative codes appear below; the [Controller error codes](../../04-e
 
 | Code | Meaning |
 |------|---------|
-| 0 | No fault (`CON_FLT_NONE`) |
+| 0 | No fault |
 | 1001 | Abort signal was detected |
 | 1003 | Encoder error (disconnected or other) |
 | 1008 | Bus voltage too high |

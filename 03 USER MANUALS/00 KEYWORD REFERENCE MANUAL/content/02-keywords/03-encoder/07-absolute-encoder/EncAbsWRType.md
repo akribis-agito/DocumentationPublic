@@ -35,7 +35,7 @@ Selects read or write access for the next absolute encoder register transaction.
 
 ## How it works
 
-`EncAbsSendCmd` branches on this value (`AG300_CTL01Funcs.c:20043`):
+`EncAbsSendCmd` branches on this value:
 
 | Value | Access | Effect |
 |---|---|---|

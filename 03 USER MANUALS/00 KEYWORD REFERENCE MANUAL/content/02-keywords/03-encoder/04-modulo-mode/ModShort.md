@@ -45,14 +45,14 @@ Selects the path of motion for absolute PTP under modulo mode.
 
 ## How it works
 
-`ModShort` is evaluated once when an absolute PTP target is commanded (no relative target). It rewrites the absolute target [AbsTrgt](../../10-motion/13-motion-mode-ptp/AbsTrgt.md) relative to the current reference before the move begins (`AG300_CTL01Funcs.c`, around lines 1194 and 1330):
+`ModShort` is evaluated once when an absolute PTP target is commanded (no relative target). It rewrites the absolute target [AbsTrgt](../../10-motion/13-motion-mode-ptp/AbsTrgt.md) relative to the current reference before the move begins:
 
-| Value | Description | Firmware action |
+| Value | Description | Action |
 |---|---|---|
 | 0 | Axis moves to the target like a linear axis (taking additional revolution(s) if the absolute position delta is more than `ModRev`). | `AbsTrgt` unchanged — move to the literal target. |
-| 1 | Negative direction only. If the target is higher than the current position, take the shortest negative-only path; otherwise move like a linear axis. | If `AbsTrgt > FinalPosRef`, subtract `ModRev` from `AbsTrgt`. |
-| 2 | Positive direction only. If the target is lower than the current position, take the shortest positive-only path; otherwise move like a linear axis. | If `AbsTrgt < FinalPosRef`, add `ModRev` to `AbsTrgt`. |
-| 3 | Shortest path. Does not take additional revolution(s) even if the absolute position delta is more than `ModRev`. | Compute `delta = (AbsTrgt − FinalPosRef + ModRev) mod ModRev`; if `delta ≤ ModRev/2` move `+delta`, else move `−(ModRev − delta)`. |
+| 1 | Negative direction only. If the target is higher than the current position, take the shortest negative-only path; otherwise move like a linear axis. | If `AbsTrgt` is above the current reference, subtract `ModRev` from `AbsTrgt`. |
+| 2 | Positive direction only. If the target is lower than the current position, take the shortest positive-only path; otherwise move like a linear axis. | If `AbsTrgt` is below the current reference, add `ModRev` to `AbsTrgt`. |
+| 3 | Shortest path. Does not take additional revolution(s) even if the absolute position delta is more than `ModRev`. | Compute `delta = (AbsTrgt − current reference + ModRev) mod ModRev`; if `delta ≤ ModRev/2` move `+delta`, else move `−(ModRev − delta)`. |
 
 For value 3 the firmware folds the requested delta into one revolution and chooses the direction whose distance is at most half a revolution, so the axis never travels more than `ModRev/2` to reach the target.
 
@@ -69,7 +69,7 @@ AModShort=3          ; shortest path
 |---|---|---|
 | Access | not implemented (no effect) | read/write, range 0–3 |
 
-The path-selection logic (the `switch (glModShort)` blocks in `AG300_CTL01Funcs.c`) exists only on the v5 firmware; it is absent on v4. **v5 is central-i only.**
+The path-selection logic exists only on the v5 firmware; it is absent on v4. **v5 is central-i only.**
 
 ## See also
 

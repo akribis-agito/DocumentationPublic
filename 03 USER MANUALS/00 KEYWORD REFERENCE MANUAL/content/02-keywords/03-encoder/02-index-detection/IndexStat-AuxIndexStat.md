@@ -11,7 +11,7 @@ Flag indicating whether the encoder index pulse has been detected.
 
 ## How it works
 
-`IndexStat` is re-evaluated every control cycle. At the top of each control interrupt the firmware first assumes no index (`IndexStat = 0`), then tests the index input; if asserted it sets `IndexStat = 1` and captures [IndexPos](IndexPos-AuxIndexPos.md) (`AG300_CTL01ControlInterrupt.c:1316`–`1357` for the standalone GPIO path; `:1595`–`1600` for the central-i status-bit path). Because the flag is cleared at the start of every cycle, it reflects the *current* cycle only — it is not latched until cleared by the user. A consumer that needs to act on a single index event (such as homing) reads it within the cycle it is set.
+`IndexStat` is re-evaluated every control cycle. At the top of each control interrupt the firmware first assumes no index (`IndexStat = 0`), then tests the index input; if asserted it sets `IndexStat = 1` and captures [IndexPos](IndexPos-AuxIndexPos.md) (from the dedicated index input on a standalone controller, or from the per-axis status bit on central-i). Because the flag is cleared at the start of every cycle, it reflects the *current* cycle only — it is not latched until cleared by the user. A consumer that needs to act on a single index event (such as homing) reads it within the cycle it is set.
 
 | IndexStat | Meaning |
 |---|---|
@@ -20,8 +20,8 @@ Flag indicating whether the encoder index pulse has been detected.
 
 The flag drives two firmware features:
 
-- **Stop on index** ([StopOnIndex](../../16-homing/StopOnIndex.md)): during a jog/joystick move, if `StopOnIndex` is set and `IndexStat` is 1, the profiler issues a stop request and reports motion-reason "index" (`AG300_CTL01Profiler.c:736`).
-- **Homing / commutation:** homing steps reference the index via `IndexStat`/`IndexPos`; for the Hall-plus-index commutation method the firmware waits for `IndexStat` to set the commutation angle to zero (`AG300_CTL01ControlInterrupt.c:3654`).
+- **Stop on index** ([StopOnIndex](../../16-homing/StopOnIndex.md)): during a jog/joystick move, if `StopOnIndex` is set and `IndexStat` is 1, the profiler issues a stop request and reports motion-reason "index".
+- **Homing / commutation:** homing steps reference the index via `IndexStat`/`IndexPos`; for the Hall-plus-index commutation method the firmware waits for `IndexStat` to set the commutation angle to zero.
 
 ## AuxIndexStat
 

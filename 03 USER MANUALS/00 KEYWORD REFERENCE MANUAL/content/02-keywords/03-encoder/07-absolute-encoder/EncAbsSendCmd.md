@@ -35,7 +35,7 @@ Command that initiates a register read/write transaction to the absolute encoder
 
 ## How it works
 
-The transaction is carried out synchronously inside `EncAbsSendCmd` (`AG300_CTL01Funcs.c:20035`). The command branches on [EncAbsWRType](EncAbsWRType.md):
+The transaction is carried out synchronously while the command runs. The command branches on [EncAbsWRType](EncAbsWRType.md):
 
 **Read ([EncAbsWRType](EncAbsWRType.md) = 0)**
 1. Write [EncAbsAddr](EncAbsAddr.md) to the encoder-interface memory-address register.
