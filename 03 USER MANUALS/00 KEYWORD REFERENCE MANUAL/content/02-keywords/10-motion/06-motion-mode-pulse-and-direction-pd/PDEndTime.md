@@ -36,12 +36,12 @@ Settling-check delay (ms) after PDPos and the position reference stop changing.
 
 ## How it works
 
-The check is in `HandlePDInTarget` (`AG300_CTL01Profiler.c:7495`), called every control cycle during P/D motion:
+The settling check runs every control cycle during P/D motion:
 
-- When both the P/D delta and the reference derivative are zero (`gllPDPosDelta == 0 && glldPosRef == 0`), a counter `glPDEndMotionCounter` increments. Once it reaches `PDEndTime`, in-target checking begins (`InTargetStat` moves from "in motion" to "waiting target time", then evaluates [InTargetTol](../05-motion-status/InTargetTol.md)/`InTargetTime` as usual).
+- When both the P/D delta and the reference derivative are zero, an internal counter increments. Once it reaches `PDEndTime`, in-target checking begins (`InTargetStat` moves from "in motion" to "waiting target time", then evaluates [InTargetTol](../05-motion-status/InTargetTol.md)/`InTargetTime` as usual).
 - If *either* the input or the reference moves again, the counter is reset to 0 and `InTargetStat` returns to "in motion".
 
-`PDEndTime` is **stored internally in control samples** but exchanged with the host **in milliseconds**: the keyword has a `SAMPLES_TO_MS_FACT` scaling (16.384 samples/ms), so reading or writing it uses ms while the comparison counter counts samples. The default internal value is `SAMPLES_PER_1MSECOND` (16 samples ≈ 1 ms); the maximum is 10 s.
+`PDEndTime` is **stored internally in control samples** but exchanged with the host **in milliseconds**: the keyword has a samples-to-ms scaling (16.384 samples/ms), so reading or writing it uses ms while the comparison counter counts samples. The default internal value is 16 samples (≈ 1 ms); the maximum is 10 s.
 
 ## Examples
 

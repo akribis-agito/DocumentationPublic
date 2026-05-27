@@ -36,7 +36,7 @@ Array of per-segment acceleration scaling factors for the acceleration-shaping p
 
 ## How it works
 
-When the remaining distance to target falls within a band defined by [AccShapeDist](AccShapeDist.md), the matching `AccShapeFact` entry is read as a **fixed-point fraction scaled by 65536** and multiplied into the acceleration and deceleration limits for that cycle (`AG300_CTL01Profiler.c:1034`, using `DIVIDE_BY_65536 = 1/65536`):
+When the remaining distance to target falls within a band defined by [AccShapeDist](AccShapeDist.md), the matching `AccShapeFact` entry is read as a **fixed-point fraction scaled by 65536** and multiplied into the acceleration and deceleration limits for that cycle:
 
 ```text
 factor      = AccShapeFact[n] / 65536
@@ -52,7 +52,7 @@ DecelFinal  = Decel × AccelFact × factor
 | 16384 | ×0.25 |
 | 0 | ×0 (no acceleration in this band) |
 
-The factors are paired with their distances and re-sorted into ascending distance order whenever the table is written (`SpAccShape`, `SpecialFuncs.c:5868`), so the value in `AccShapeFact[n]` always travels with `AccShapeDist[n]`. The array size is 11 to allow 1-based command indexing; only indices 1–10 are used. See [AccShapeOn](AccShapeOn.md) for the full mechanism.
+The factors are paired with their distances and re-sorted into ascending distance order whenever the table is written, so the value in `AccShapeFact[n]` always travels with `AccShapeDist[n]`. The array size is 11 to allow 1-based command indexing; only indices 1–10 are used. See [AccShapeOn](AccShapeOn.md) for the full mechanism.
 
 ## Examples
 

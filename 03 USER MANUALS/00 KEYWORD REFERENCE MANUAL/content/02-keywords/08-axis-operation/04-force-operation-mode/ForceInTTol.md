@@ -36,7 +36,7 @@ Settling window around the target force used for in-target status.
 
 ## How it works
 
-The window is **symmetric**: each cycle (while [ForceInTStat](ForceInTStat.md) = 3) the firmware tests the force error against ±`ForceInTTol`, i.e. `ForceErr <= ForceInTTol && ForceErr >= -ForceInTTol` (`AG300_CTL01ControlLoops.c:1178`). Because the target force is held by the (filtered) [ForceRef](ForceRef.md), `ForceErr` is the deviation of the [Force](Force.md) feedback from the commanded value, so the window is effectively `|measured force − target force| <= ForceInTTol`. While inside the window the [ForceInTTime](ForceInTTime.md) dwell counter accumulates; leaving the window resets it.
+The window is **symmetric**: each cycle (while [ForceInTStat](ForceInTStat.md) = 3) the controller tests the force error against ±`ForceInTTol`, i.e. `ForceErr <= ForceInTTol && ForceErr >= -ForceInTTol`. Because the target force is held by the (filtered) [ForceRef](ForceRef.md), `ForceErr` is the deviation of the [Force](Force.md) feedback from the commanded value, so the window is effectively `|measured force − target force| <= ForceInTTol`. While inside the window the [ForceInTTime](ForceInTTime.md) dwell counter accumulates; leaving the window resets it.
 
 ## Examples
 

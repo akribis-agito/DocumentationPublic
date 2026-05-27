@@ -36,9 +36,9 @@ The typical use is to relieve a standing position error when the load is stuck o
 
 ## How it works
 
-`ZeroPosErr` (`develop:CommonC/AG300_CTL01Funcs.c:7632`) does nothing when the motor is off (the reference already tracks the feedback in that state). When the motor is on, it samples the current feedback `Pos` and writes it into the **entire reference chain** — `PosRef`, the shaped and shaped-filtered references and all of their 64-bit history, plus the accumulator `gllPosRef` — leaving `Pos` unchanged. The result is `PosRef = Pos`, i.e. `PosErr = 0`. As in [SetPosition](SetPosition.md), it temporarily forces [Jerk](Jerk.md) to `0` to re-seed the smoothing buffer and resets the reference filter history.
+`ZeroPosErr` does nothing when the motor is off (the reference already tracks the feedback in that state). When the motor is on, it samples the current feedback `Pos` and writes it into the **entire reference chain** — `PosRef`, the shaped and shaped-filtered references and all of their 64-bit history, plus the high-precision reference accumulator — leaving `Pos` unchanged. The result is `PosRef = Pos`, i.e. `PosErr = 0`. As in [SetPosition](SetPosition.md), it temporarily forces [Jerk](Jerk.md) to `0` to re-seed the smoothing buffer and resets the reference filter history.
 
-If the axis is in motion when `ZeroPosErr` is issued, the firmware first performs an [Abort](../04-motion-command/Abort.md)-style immediate end of motion, then zeroes the error. It assumes the motor is not actually moving at that moment; issuing it on a moving axis behaves like an abort.
+If the axis is in motion when `ZeroPosErr` is issued, the controller first performs an [Abort](../04-motion-command/Abort.md)-style immediate end of motion, then zeroes the error. It assumes the motor is not actually moving at that moment; issuing it on a moving axis behaves like an abort.
 
 ### Conditions
 

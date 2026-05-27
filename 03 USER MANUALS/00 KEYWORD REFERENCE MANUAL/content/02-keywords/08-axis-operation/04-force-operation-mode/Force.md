@@ -38,9 +38,9 @@ Force feedback obtained from the analog input.
 
 ## How it works
 
-Every control cycle the firmware copies the filtered analog force-feedback channel into `Force` (`AG300_CTL01ControlInterrupt.c:2382`). `Force` is updated continuously regardless of the active [OperationMode](../01-general-keywords/OperationMode.md), so it can be read for monitoring even outside force mode.
+Every control cycle the controller copies the filtered analog force-feedback channel into `Force`. `Force` is updated continuously regardless of the active [OperationMode](../01-general-keywords/OperationMode.md), so it can be read for monitoring even outside force mode.
 
-If force operation mode is entered while no analog input has been assigned the force-feedback function, the force loop cannot run: the controller faults with `CON_FLT_NO_FORCE_FEEDBACK` and the motor is turned off (`AG300_CTL01ControlLoops.c:2806`). Assign the feedback channel with [AInMode](../../../02-keywords/05-inputs-outputs/02-analog-inputs/AInMode.md) before commanding force mode.
+If force operation mode is entered while no analog input has been assigned the force-feedback function, the force loop cannot run: [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1046 (no force feedback) and the motor is turned off. Assign the feedback channel with [AInMode](../../../02-keywords/05-inputs-outputs/02-analog-inputs/AInMode.md) before commanding force mode.
 
 ## Examples
 

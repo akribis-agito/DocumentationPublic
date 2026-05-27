@@ -40,9 +40,9 @@ Index of the active ForceCmdVal / ForceCmdHTime table entry.
 
 ## How it works
 
-The generator auto-increments `ForceCmdIndex` when the current entry's hold time elapses (`AG300_CTL01ControlLoops.c:1314`). It is clamped to the last usable entry (20): if it would advance past the end of the array it is held there, so the axis stays on the final [ForceCmdVal](ForceCmdVal.md) rather than wrapping (`AG300_CTL01ControlLoops.c:1320`). When advancing to a new entry the holding timer [ForceCmdCntr](ForceCmdCntr.md) is cleared so the next entry's [ForceCmdHTime](ForceCmdHTime.md) is timed from zero.
+The generator auto-increments `ForceCmdIndex` when the current entry's hold time elapses. It is clamped to the last usable entry (20): if it would advance past the end of the array it is held there, so the axis stays on the final [ForceCmdVal](ForceCmdVal.md) rather than wrapping. When advancing to a new entry the holding timer [ForceCmdCntr](ForceCmdCntr.md) is cleared so the next entry's [ForceCmdHTime](ForceCmdHTime.md) is timed from zero.
 
-The reset to `1` on graceful entry is performed by [GoToForceMode](GoToForceMode.md) (`AG300_CTL01Funcs.c:16518`) and by the automatic / digital-input switch paths (`AG300_CTL01ControlInterrupt.c:10956`).
+The reset to `1` on graceful entry is performed by [GoToForceMode](GoToForceMode.md) and by the automatic / digital-input switch paths.
 
 ## Examples
 

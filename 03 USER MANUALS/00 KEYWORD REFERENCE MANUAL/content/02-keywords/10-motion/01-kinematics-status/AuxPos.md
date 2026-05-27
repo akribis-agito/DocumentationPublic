@@ -39,18 +39,18 @@ Auxiliary-encoder position feedback, in auxiliary user units.
 
 `AuxPos` reports the auxiliary encoder feedback, expressed in auxiliary user units (configurable via [AuxUsrUnits](../../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md)). It is the auxiliary-loop counterpart of the main position feedback [Pos](Pos.md): it feeds dual-loop control, can act as a [MapEncoder](../../04-error-mapping/MapEncoder.md) source for error mapping, and is the value the auxiliary velocity [AuxVel](AuxVel.md) is derived from.
 
-Although `AuxPos` is writable, it can only be set while the axis is disabled (it is declared `RW` with no-motion / no-motor-on flags, `AG300_CTL01Params.c:651`). Its value resets to `0` on power-up.
+Although `AuxPos` is writable, it can only be set while the axis is disabled (it is declared `RW` with no-motion / no-motor-on flags). Its value resets to `0` on power-up.
 
 ## How it works
 
 ### Reading
 
-Each control cycle the firmware reads the auxiliary encoder hardware, computes the per-cycle change `glDeltaAuxPos` and accumulates it into `glAuxPos` (the encoder-handling loop, `AG300_CTL01ControlInterrupt.c:1880`–`1953` and following; the per-cycle delta drives [AuxVel](AuxVel.md) at `:3223`). On the controller hardware the aux encoder is a physical input; on the central-i master the aux value is delivered per axis over the network. With an absolute auxiliary encoder it is initialised from the absolute reading at startup.
+Each control cycle the controller reads the auxiliary encoder, computes the per-cycle change and accumulates it into the auxiliary position; the per-cycle delta also drives [AuxVel](AuxVel.md). On the controller hardware the aux encoder is a physical input; on the central-i master the aux value is delivered per axis over the network. With an absolute auxiliary encoder it is initialised from the absolute reading at startup.
 
 ### Use in dual-loop and error mapping
 
-- **Dual-loop:** when [DualLoopOn](../../11-control-tuning/02-dual-loop-control/DualLoopOn.md) = 1, the auxiliary encoder is the load-side feedback. The velocity loop uses the auxiliary velocity scaled by [DualLoopFact](../../11-control-tuning/02-dual-loop-control/DualLoopFact.md) (see [Vel](Vel.md)`[1]`), and `glCommutationPos`/`glCommutationDeltaPos` are taken from the auxiliary encoder for commutation (`AG300_CTL01ControlInterrupt.c:3256`–`3266`).
-- **Error mapping:** an error-map encoder selection can point the map source at `glAuxPos` of an axis (`SpecialFuncs.c:1885`), so the auxiliary encoder can supply the mapping coordinate.
+- **Dual-loop:** when [DualLoopOn](../../11-control-tuning/02-dual-loop-control/DualLoopOn.md) = 1, the auxiliary encoder is the load-side feedback. The velocity loop uses the auxiliary velocity scaled by [DualLoopFact](../../11-control-tuning/02-dual-loop-control/DualLoopFact.md) (see [Vel](Vel.md)`[1]`), and the commutation position and its delta are taken from the auxiliary encoder.
+- **Error mapping:** an error-map encoder selection can point the map source at the auxiliary position of an axis, so the auxiliary encoder can supply the mapping coordinate.
 
 ## Examples
 
@@ -61,7 +61,7 @@ AAuxPos=0           ; preset to zero (axis must be disabled)
 
 ## Changes between versions
 
-In **v5 (central-i)** `AuxPos` is a 64-bit value (`gllAuxPos`); the reading, dual-loop and error-mapping uses are the same. The data-type/range difference is shown in the frontmatter. **v5 is central-i only**, so on standalone `AuxPos` remains the v4 32-bit value.
+In **v5 (central-i)** `AuxPos` is a 64-bit value; the reading, dual-loop and error-mapping uses are the same. The data-type/range difference is shown in the frontmatter. **v5 is central-i only**, so on standalone `AuxPos` remains the v4 32-bit value.
 
 ## See also
 

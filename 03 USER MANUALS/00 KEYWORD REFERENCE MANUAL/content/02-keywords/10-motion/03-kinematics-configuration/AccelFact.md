@@ -36,19 +36,19 @@ Scaling factor applied to `Accel` to adjust effective acceleration without chang
 
 ## How it works
 
-Every control cycle the profiler multiplies both the acceleration and deceleration rates by `AccelFact` before using them (`AG300_CTL01Profiler.c:781`, `:1062`–`1063`, `:1068`):
+Every control cycle the profiler multiplies both the acceleration and deceleration rates by `AccelFact` before using them:
 
 $$
 Accel_{eff} = Accel \times AccelFact ,\qquad
 Decel_{eff} = Decel \times AccelFact
 $$
 
-Key points mined from the profiler:
+Key behavioral points:
 
-- **Applies to the emergency rate too.** When [EmrgDec](EmrgDec.md) replaces `Decel` on a limit/abort/controlled stop, that value is also multiplied by `AccelFact` (`AG300_CTL01Profiler.c:1068`), so emergency stops scale with the factor as well.
-- **Whole-number only.** `AccelFact` is an integer 1–40; the upper bound is described in the firmware as "just a number, maybe even too big" (`AG300_CTL01Params.h:1110`). Fractional scaling is not possible — adjust `Accel`/`Decel` directly for finer control.
+- **Applies to the emergency rate too.** When [EmrgDec](EmrgDec.md) replaces `Decel` on a limit/abort/controlled stop, that value is also multiplied by `AccelFact`, so emergency stops scale with the factor as well.
+- **Whole-number only.** `AccelFact` is an integer 1–40. Fractional scaling is not possible — adjust `Accel`/`Decel` directly for finer control.
 - **Live.** Because the multiply happens each cycle, changing `AccelFact` mid-move re-scales the ramp slopes on the next cycle.
-- **Carries into both profiler orders.** The scaled `Accel_eff`/`Decel_eff` are what the second-order ramp uses directly, and what is passed to the third-order jerk profiler as the peak-acceleration/peak-deceleration constraints (`AG300_CTL01Profiler.c:1170`).
+- **Carries into both profiler orders.** The scaled `Accel_eff`/`Decel_eff` are what the second-order ramp uses directly, and what is passed to the third-order jerk profiler as the peak-acceleration/peak-deceleration constraints.
 
 It is dimensionless (no user-unit scaling) and does **not** scale [Speed](Speed.md) or the jerk settings — only the accel/decel rates.
 

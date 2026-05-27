@@ -38,9 +38,9 @@ Counts repetitions made during repetitive point-to-point (PTP) motion.
 
 ## How it works
 
-`RptCounter` is reset to `0` when a new motion is commanded (the `Begin` handler resets it alongside `MotionReason` and `InTargetStat`, `AG300_CTL01Funcs.c:1164`). The profiler then increments it by one at the end of each repetition — specifically once the end-of-smoothing wait for a repetition has elapsed, and only while in `MOTION_MODE_PTP_REP` (`AG300_CTL01Profiler.c:446`).
+`RptCounter` is reset to `0` when a new motion is commanded (the `Begin` handler resets it alongside `MotionReason` and `InTargetStat`). The controller then increments it by one at the end of each repetition — specifically once the end-of-smoothing wait for a repetition has elapsed, and only while in repetitive PTP mode.
 
-After incrementing, the profiler decides whether to start another repetition: it continues only if no [StopRep](../04-motion-command/StopRep.md) is pending and either [RptCycles](../02-motion-configuration/RptCycles.md) `= 0` (run indefinitely) or `RptCounter ≠ RptCycles` (`AG300_CTL01Profiler.c:449–461`). When `RptCounter` reaches a non-zero `RptCycles` the motion ends instead of looping. The next target for each repetition is set from [RptMode](../02-motion-configuration/RptMode.md): mode 1 reflects the target about the current reference (back-and-forth), otherwise it returns toward the previous start position (`AG300_CTL01Profiler.c:930–936`).
+After incrementing, the controller decides whether to start another repetition: it continues only if no [StopRep](../04-motion-command/StopRep.md) is pending and either [RptCycles](../02-motion-configuration/RptCycles.md) `= 0` (run indefinitely) or `RptCounter ≠ RptCycles`. When `RptCounter` reaches a non-zero `RptCycles` the motion ends instead of looping. The next target for each repetition is set from [RptMode](../02-motion-configuration/RptMode.md): mode 1 reflects the target about the current reference (back-and-forth), otherwise it returns toward the previous start position.
 
 ## Examples
 

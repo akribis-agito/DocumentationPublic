@@ -44,19 +44,19 @@ Like `JerkInAcc`, this is a genuine jerk limit (not the moving-average exponent 
 
 ## How it works
 
-When `JerkMode = 1`, the profiler passes `JerkInDec` to the structured jerk profiler each cycle (`AG300_CTL01Profiler.c:1169`–`1170`). It is the jerk magnitude used in the deceleration segments that bracket a constant-deceleration phase (`AG300_CTL01Profiler.c:10832`, `:10841`), and it also governs the controlled decel-to-cruise transition when the axis must slow to a lower target speed (`AG300_CTL01Profiler.c:10761`):
+When `JerkMode = 1`, the profiler uses `JerkInDec` in the structured jerk profiler each cycle. It is the jerk magnitude used in the deceleration segments that bracket a constant-deceleration phase, and it also governs the controlled decel-to-cruise transition when the axis must slow to a lower target speed:
 
 | Segment | Jerk used |
 |---------|-----------|
-| Deceleration, jerk-up (`DEC_MIN_J`) | `−JerkInDec` — deceleration rises toward `Decel` |
-| Deceleration, constant (`DEC_ZERO_J`) | 0 — deceleration held at `Decel` |
-| Deceleration, jerk-down (`DEC_MAX_J`) | `+JerkInDec` — deceleration falls back to 0 at the target |
+| Deceleration, jerk-up | `−JerkInDec` — deceleration rises toward `Decel` |
+| Deceleration, constant | 0 — deceleration held at `Decel` |
+| Deceleration, jerk-down | `+JerkInDec` — deceleration falls back to 0 at the target |
 
 A larger `JerkInDec` reaches the `Decel` limit faster (sharper, shorter braking transition); a smaller value spreads it over more time for a gentler stop.
 
 ### Units and internal scaling (v4)
 
-On v4 `JerkInDec` is an integer with a `NO_USER_UNITS` flag and range 100–1,000,000,000 (default 1,000,000). The firmware multiplies it by `TRUE_JERK_FACTOR` = 1000 before use (`AG300_CTL01Profiler.c:1169`), so the effective jerk constraint in counts/s³ is:
+On v4 `JerkInDec` is a dimensionless integer with range 100–1,000,000,000 (default 1,000,000). The controller multiplies it by a fixed factor of 1000 before use, so the effective jerk constraint in counts/s³ is:
 
 $$
 jerk_{dec} = JerkInDec \times 1000
@@ -64,7 +64,7 @@ $$
 
 ### Emergency stops
 
-`JerkInDec` does not shape an emergency stop: limit/abort/controlled-stop halts force the internal jerk mode OFF and brake with [EmrgDec](EmrgDec.md) directly, without jerk limiting (`AG300_CTL01Profiler.c:1069`).
+`JerkInDec` does not shape an emergency stop: limit/abort/controlled-stop halts force the internal jerk mode OFF and brake with [EmrgDec](EmrgDec.md) directly, without jerk limiting.
 
 ## Examples
 
@@ -80,10 +80,10 @@ AJerkInDec           ; read current value
 | | v4 (standalone & central-i) | v5 (central-i) |
 |---|---|---|
 | Command code | 721 | 566 |
-| Data type | 32-bit integer (`glJerkInDec`) | float (`gfJerkInDec`) |
-| Units | none (`NO_USER_UNITS`), value × 1000 internally | user units (jerk in user units/s³, used directly) |
+| Data type | 32-bit integer | float |
+| Units | none, value × 1000 internally | user units (jerk in user units/s³, used directly) |
 
-In **v5** `JerkInDec` is a floating-point value in user jerk units, passed to the same structured profiler without the ×1000 factor (`develop:CommonC/AG300_CTL01Profiler.c:1114`). **v5 is central-i only.**
+In **v5** `JerkInDec` is a floating-point value in user jerk units, passed to the same structured profiler without the ×1000 factor. **v5 is central-i only.**
 
 ## See also
 

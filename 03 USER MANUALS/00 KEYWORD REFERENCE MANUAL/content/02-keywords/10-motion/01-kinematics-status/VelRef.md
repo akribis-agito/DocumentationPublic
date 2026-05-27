@@ -41,29 +41,29 @@ Velocity-loop reference/input (position-controller output plus velocity referenc
 
 ## How it works
 
-`VelRef` is built in `AG300_CTL01ControlLoops.c` only while the motor is on, commutation is done, the axis is not in simulation and the amplifier is not a position-drive (`AG300_CTL01ControlLoops.c:418`). The construction proceeds in stages.
+`VelRef` is built only while the motor is on, commutation is done, the axis is not in simulation and the amplifier is not a position-drive. The construction proceeds in stages.
 
 ### 1. Position-controller output + velocity feed-forward
 
-The base value is the position gain acting on [PosErr](PosErr.md) plus a velocity feed-forward term derived from [dPosRef](dPosRef.md) (`AG300_CTL01ControlLoops.c:454`–`456`):
+The base value is the position gain acting on [PosErr](PosErr.md) plus a velocity feed-forward term derived from [dPosRef](dPosRef.md):
 
 $$
 VelRef = PosErr \times PosGain + \frac{dPosRef \times VelTrackFact}{1024}
 $$
 
-In gantry mode the gantry position gain is used instead of [PosGain](../../11-control-tuning/03-position-control/PosGain.md). The product is computed in 64-bit and then clamped into the 32-bit range before being stored (`AG300_CTL01ControlLoops.c:462`–`467`).
+In gantry mode the gantry position gain is used instead of [PosGain](../../11-control-tuning/03-position-control/PosGain.md). The product is computed in 64-bit and then clamped into the 32-bit range before being stored.
 
 ### 2. Dual-loop and operation-mode overrides
 
-| Stage | Effect | Source |
-|-------|--------|--------|
-| Dual-loop on ([DualLoopOn](../../11-control-tuning/02-dual-loop-control/DualLoopOn.md) = 1) | `VelRef` is scaled by `gfDualLoopCmdGain` (derived from [DualLoopFact](../../11-control-tuning/02-dual-loop-control/DualLoopFact.md)) | `:470`–`471` |
-| Velocity operation mode | `VelRef` is replaced by the filtered analog velocity command | `:474`–`475` |
-| FIFO position tracking (e.g. EtherCAT CSP), in motion | A user offset `glFIFOPosVelOf` is added | `:481`–`483` |
+| Stage | Effect |
+|-------|--------|
+| Dual-loop on ([DualLoopOn](../../11-control-tuning/02-dual-loop-control/DualLoopOn.md) = 1) | `VelRef` is scaled by a command gain derived from [DualLoopFact](../../11-control-tuning/02-dual-loop-control/DualLoopFact.md) |
+| Velocity operation mode | `VelRef` is replaced by the filtered analog velocity command |
+| FIFO position tracking (e.g. EtherCAT CSP), in motion | A user position-tracking offset is added |
 
 ### 3. Injection
 
-If [InjectPoint](../../13-injection/InjectPoint.md) targets the velocity reference, a test signal ([InjectType](../../13-injection/InjectType.md)) is either substituted for or added to `VelRef` (`AG300_CTL01ControlLoops.c:488`–`638`):
+If [InjectPoint](../../13-injection/InjectPoint.md) targets the velocity reference, a test signal ([InjectType](../../13-injection/InjectType.md)) is either substituted for or added to `VelRef`:
 
 | Inject type | Action on `VelRef` |
 |-------------|--------------------|
@@ -74,7 +74,7 @@ If [InjectPoint](../../13-injection/InjectPoint.md) targets the velocity referen
 
 ### 4. Saturation to MaxVel
 
-Finally `VelRef` is hard-limited to ±[MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md). On saturation the firmware sets the velocity-saturation bit in [StatReg](../../07-status-and-faults/StatReg.md) (`STAT_REG_VEL_SAT_SET`) and raises the "any saturation" flag (`AG300_CTL01ControlLoops.c:641`–`653`). This clamp is why `VelRef` reports within ±1.3e9 rather than the full 32-bit range.
+Finally `VelRef` is hard-limited to ±[MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md). On saturation the velocity-saturation bit of [StatReg](../../07-status-and-faults/StatReg.md) (bit 23) is set, along with the general "any saturation" flag. This clamp is why `VelRef` reports within ±1.3e9 rather than the full 32-bit range.
 
 ## Examples
 
@@ -84,7 +84,7 @@ AVelRef             ; read the velocity-loop reference
 
 ## Changes between versions
 
-In **v5 (central-i)** `VelRef` is a 64-bit value (`gllVelRef`) limited to ±`gllMaxVel`, and the position-controller output that feeds it includes an optional **position-integral** term ([PosKi](../../11-control-tuning/03-position-control/PosKi.md)) and a position-error filter in addition to the proportional gain — so v5 `VelRef` is a PI(+filter)+FFW output, whereas v4 is P+FFW (`develop:CommonC/AG300_CTL01ControlLoops.c:583`). The dual-loop, operation-mode, FIFO-offset, injection and `MaxVel`-saturation stages are unchanged. **v5 is central-i only.**
+In **v5 (central-i)** `VelRef` is a 64-bit value limited to ±`MaxVel`, and the position-controller output that feeds it includes an optional **position-integral** term ([PosKi](../../11-control-tuning/03-position-control/PosKi.md)) and a position-error filter in addition to the proportional gain — so v5 `VelRef` is a PI(+filter)+FFW output, whereas v4 is P+FFW. The dual-loop, operation-mode, FIFO-offset, injection and `MaxVel`-saturation stages are unchanged. **v5 is central-i only.**
 
 ## See also
 

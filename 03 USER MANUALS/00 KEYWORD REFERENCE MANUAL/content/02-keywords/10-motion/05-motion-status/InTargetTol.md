@@ -36,13 +36,13 @@ In position or velocity control operation mode ([OperationMode](../../08-axis-op
 
 ## How it works
 
-The settling check is a direct magnitude comparison done each control cycle by the profiler:
+The settling check is a direct magnitude comparison done each control cycle:
 
 $$
 |PosErr| \le InTargetTol
 $$
 
-While the comparison is true the firmware increments the dwell counter; the moment `|PosErr|` leaves the window the counter is reset to 0 (`AG300_CTL01Profiler.c:965–986`). Only when the counter has accumulated `InTargetTime` worth of consecutive in-window cycles does `InTargetStat` latch to 4. `InTargetTol` is in user units (the same units as `PosErr`); the firmware compares against the raw stored value, so a value of `0` requires an exact-zero position error. The default is `10` counts (`INTARGETTOL_DFLT`). It is saved to flash and may be changed while in motion.
+While the comparison is true the dwell counter is incremented; the moment `|PosErr|` leaves the window the counter is reset to 0. Only when the counter has accumulated `InTargetTime` worth of consecutive in-window cycles does `InTargetStat` latch to 4. `InTargetTol` is in user units (the same units as `PosErr`); the comparison is against the raw stored value, so a value of `0` requires an exact-zero position error. The default is `10` counts. It is saved to flash and may be changed while in motion.
 
 ## Examples
 

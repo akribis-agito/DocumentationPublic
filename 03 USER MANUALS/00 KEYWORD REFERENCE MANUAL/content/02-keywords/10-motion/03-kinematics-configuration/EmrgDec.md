@@ -39,22 +39,22 @@ Emergency deceleration rate applied on `Abort` or fault, in user units per secon
 
 ## How it works
 
-`EmrgDec` is not used during a normal move. The profiler swaps it in for the deceleration rate only when the **motion reason** is one of the emergency/limit cases (`AG300_CTL01Profiler.c:1066`–`1069`, and `:783`–`784` for jog):
+`EmrgDec` is not used during a normal move. The profiler swaps it in for the deceleration rate only when the [MotionReason](../05-motion-status/MotionReason.md) is one of the emergency/limit cases:
 
-| Motion reason | Stop rate used |
+| Stop condition ([MotionReason](../05-motion-status/MotionReason.md) value) | Stop rate used |
 |---------------|----------------|
-| Forward / reverse limit switch (`MOTION_REASON_END_FLS` / `_RLS`) | `EmrgDec × AccelFact` |
-| Forward / reverse software position limit (`_FWD_PLIM` / `_REV_PLIM`) | `EmrgDec × AccelFact` |
-| Controlled-stop input (`_CONTROLLED_STOP_BY_INPUT`) | `EmrgDec × AccelFact` |
-| Normal [Stop](../04-motion-command/Stop.md) / end of move | `Decel × AccelFact` |
+| Reverse / forward limit switch (`MotionReason` = 4 / 5) | `EmrgDec × AccelFact` |
+| Reverse / forward software position limit (`MotionReason` = 6 / 7) | `EmrgDec × AccelFact` |
+| Controlled stop by input signal (`MotionReason` = 28) | `EmrgDec × AccelFact` |
+| Normal [Stop](../04-motion-command/Stop.md) / end of move (`MotionReason` = 1 / 0) | `Decel × AccelFact` |
 
-When `EmrgDec` is selected, the profiler also forces `JerkMode` internally to OFF for that stop, so the emergency deceleration is applied **without jerk smoothing** (`AG300_CTL01Profiler.c:1069`) — the priority is to stop quickly, not smoothly.
+When `EmrgDec` is selected, the profiler also forces `JerkMode` internally to OFF for that stop, so the emergency deceleration is applied **without jerk smoothing** — the priority is to stop quickly, not smoothly.
 
-Like the other rates, `EmrgDec` is multiplied by [AccelFact](AccelFact.md) each cycle (`AG300_CTL01Profiler.c:1068`), and the deceleration-distance lookahead then uses this scaled value so the axis still decelerates to rest at the limit/target rather than overshooting.
+Like the other rates, `EmrgDec` is multiplied by [AccelFact](AccelFact.md) each cycle, and the deceleration-distance lookahead then uses this scaled value so the axis still decelerates to rest at the limit/target rather than overshooting.
 
 ### Relationship to Abort
 
-An [Abort](../04-motion-command/Abort.md) halts motion immediately. Note that the firmware's `EmrgDec`-rate path is driven by the **motion-reason** codes above (limits and controlled-stop input); a normal `Stop` uses `Decel`. Set `EmrgDec ≥ Decel` so that any of these emergency stops is at least as aggressive as a normal one.
+An [Abort](../04-motion-command/Abort.md) halts motion immediately. Note that the `EmrgDec`-rate path is driven by the [MotionReason](../05-motion-status/MotionReason.md) conditions above (limit switches = 4 / 5, software limits = 6 / 7, and controlled stop by input = 28); a normal `Stop` ([MotionReason](../05-motion-status/MotionReason.md) = 1) uses `Decel`. Set `EmrgDec ≥ Decel` so that any of these emergency stops is at least as aggressive as a normal one.
 
 ## Examples
 
@@ -65,7 +65,7 @@ AEmrgDec             ; read current value
 
 ## Changes between versions
 
-In **v4** `EmrgDec` is a 32-bit integer (`glEmrgDec`); in **v5 (central-i)** it is a single-precision float (`gfEmrgDec`, `develop:CommonC/AG300_CTL01Profiler.c:813`). The substitution logic and `AccelFact` scaling are unchanged. **v5 is central-i only.**
+In **v4** `EmrgDec` is a 32-bit integer; in **v5 (central-i)** it is a single-precision float. The substitution logic and `AccelFact` scaling are unchanged. **v5 is central-i only.**
 
 ## See also
 
@@ -74,3 +74,4 @@ In **v4** `EmrgDec` is a 32-bit integer (`glEmrgDec`); in **v5 (central-i)** it 
 - [AccelFact](AccelFact.md) — integer multiplier also applied to `EmrgDec`
 - [Abort](../04-motion-command/Abort.md) — immediate stop command
 - [Stop](../04-motion-command/Stop.md) — controlled stop (uses `Decel`, not `EmrgDec`)
+- [MotionReason](../05-motion-status/MotionReason.md) — reason codes (4 / 5 / 6 / 7 / 28) that select the `EmrgDec` rate

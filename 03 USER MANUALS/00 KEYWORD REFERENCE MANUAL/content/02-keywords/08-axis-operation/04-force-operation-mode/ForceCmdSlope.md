@@ -36,13 +36,13 @@ Ramp rate (unit/s) toward each force-command table entry.
 
 ## How it works
 
-While the raw reference has not yet reached the target value, the generator steps it toward the target by `ForceCmdSlope[ForceCmdIndex] * Ts` each control cycle, where `Ts` is the cycle period (`AG300_CTL01ControlLoops.c:1332`):
+While the raw reference has not yet reached the target value, the generator steps it toward the target by `ForceCmdSlope[ForceCmdIndex] * Ts` each control cycle, where `Ts` is the cycle period:
 
 $$
 \Delta ForceRef\ \lbrack unit\rbrack\  = \ ForceCmdSlope\ \times\ T_{s}
 $$
 
-During the ramp the firmware sets [ForceInTStat](ForceInTStat.md) to 2 (ramping) and holds [ForceCmdCntr](ForceCmdCntr.md) at 0 (`AG300_CTL01ControlLoops.c:1336`). The step is clamped so the reference does not overshoot the target [ForceCmdVal](ForceCmdVal.md). Only when the raw reference exactly equals the target does the holding timer start and the in-target dwell begin. Because `ForceCmdSlope` has a minimum value of 1, the ramp is always finite (a value cannot be applied as an instantaneous step).
+During the ramp the controller sets [ForceInTStat](ForceInTStat.md) to 2 (ramping) and holds [ForceCmdCntr](ForceCmdCntr.md) at 0. The step is clamped so the reference does not overshoot the target [ForceCmdVal](ForceCmdVal.md). Only when the raw reference exactly equals the target does the holding timer start and the in-target dwell begin. Because `ForceCmdSlope` has a minimum value of 1, the ramp is always finite (a value cannot be applied as an instantaneous step).
 
 ## Examples
 

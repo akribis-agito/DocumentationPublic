@@ -45,7 +45,7 @@ Deceleration rate for point-to-point motion, in user units per second squared.
 
 ### Effective deceleration each cycle
 
-Each control cycle the profiler forms the effective deceleration as the product of `Decel` and [AccelFact](AccelFact.md) (`AG300_CTL01Profiler.c:1063`):
+Each control cycle the profiler forms the effective deceleration as the product of `Decel` and [AccelFact](AccelFact.md):
 
 $$
 Decel_{eff} = Decel \times AccelFact
@@ -53,27 +53,27 @@ $$
 
 ### Deceleration-distance lookahead
 
-`Decel` is the rate the profiler plans its stop with. Every cycle it computes the velocity from which the axis could still come to rest exactly at [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) using `Decel_eff` (`AG300_CTL01Profiler.c:1090`):
+`Decel` is the rate the profiler plans its stop with. Every cycle it computes the velocity from which the axis could still come to rest exactly at [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) using `Decel_eff`:
 
 $$
 v_{dec} = -Decel_{eff}\,T_s + \sqrt{Decel_{eff}^{2}\,T_s^{2} + 2\,Decel_{eff}\,(target - posRef)\,T_s}
 $$
 
-When the rising profiler velocity exceeds this `v_dec`, the profiler clamps to `v_dec` and the motion enters its deceleration phase (the `IN_DECELERATION` motion-status bit is set). `Decel` therefore sets the **trailing slope** of the trapezoidal velocity profile. A larger `Decel` lets the axis run at `Speed` longer before braking; a smaller `Decel` starts braking earlier and from a lower velocity.
+When the rising profiler velocity exceeds this `v_dec`, the profiler clamps to `v_dec` and the motion enters its deceleration phase (the deceleration motion-status bit is set). `Decel` therefore sets the **trailing slope** of the trapezoidal velocity profile. A larger `Decel` lets the axis run at `Speed` longer before braking; a smaller `Decel` starts braking earlier and from a lower velocity.
 
-`Decel` is also used as the brake rate when the profiler velocity has the wrong sign for the requested direction (`AG300_CTL01Profiler.c:1082`), i.e. when reversing.
+`Decel` is also used as the brake rate when the profiler velocity has the wrong sign for the requested direction, i.e. when reversing.
 
 ### Software-limit braking
 
-In jog/joystick moves the same `Decel`-based lookahead is computed against the software position limits ([FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md)/[RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md)) so the axis decelerates to rest at the limit (`AG300_CTL01Profiler.c:792`).
+In jog/joystick moves the same `Decel`-based lookahead is computed against the software position limits ([FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md)/[RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md)) so the axis decelerates to rest at the limit.
 
 ### When EmrgDec replaces Decel
 
-When the motion ends because of a limit switch, a software position limit, or a controlled-stop input, the profiler substitutes [EmrgDec](EmrgDec.md) for `Decel` and disables jerk smoothing for that stop (`AG300_CTL01Profiler.c:1066`–`1069`). A normal [Stop](../04-motion-command/Stop.md) command keeps using `Decel`; only [Abort](../04-motion-command/Abort.md)/fault paths use `EmrgDec`.
+When the motion ends because of a limit switch, a software position limit, or a controlled-stop input, the profiler substitutes [EmrgDec](EmrgDec.md) for `Decel` and disables jerk smoothing for that stop. A normal [Stop](../04-motion-command/Stop.md) command keeps using `Decel`; only [Abort](../04-motion-command/Abort.md)/fault paths use `EmrgDec`.
 
 ### Third-order mode
 
-In third-order mode ([JerkMode](../02-motion-configuration/JerkMode.md) = 1) `Decel` is the **peak deceleration** constraint passed to the structured jerk profiler (`AG300_CTL01Profiler.c:1170`); the deceleration is itself ramped at the rate set by [JerkInDec](JerkInDec.md).
+In third-order mode ([JerkMode](../02-motion-configuration/JerkMode.md) = 1) `Decel` is the **peak deceleration** constraint passed to the structured jerk profiler; the deceleration is itself ramped at the rate set by [JerkInDec](JerkInDec.md).
 
 ## Examples
 
@@ -84,7 +84,7 @@ ADecel               ; read current deceleration
 
 ## Changes between versions
 
-In **v4** `Decel` is a 32-bit integer (`glDecel`); in **v5 (central-i)** it is a single-precision float (`gfDecel`, `develop:CommonC/AG300_CTL01Profiler.c:815`). The lookahead, `AccelFact` scaling, `EmrgDec` substitution and jerk interactions are unchanged. **v5 is central-i only.**
+In **v4** `Decel` is a 32-bit integer; in **v5 (central-i)** it is a single-precision float. The lookahead, `AccelFact` scaling, `EmrgDec` substitution and jerk interactions are unchanged. **v5 is central-i only.**
 
 ## See also
 

@@ -14,7 +14,7 @@
 
   <!-- accumulator -->
   <rect x="410" y="60" width="150" height="60" rx="6" fill="#fbf3e7" stroke="#b5852f"/>
-  <text x="485" y="84" text-anchor="middle">gllPDPos (32.32)</text>
+  <text x="485" y="84" text-anchor="middle">accumulator (32.32)</text>
   <text x="485" y="102" text-anchor="middle" font-size="11">+= delta each cycle</text>
   <text x="485" y="116" text-anchor="middle" font-size="11">read as PDPos / PDVel</text>
 
@@ -35,6 +35,6 @@
   <line x1="560" y1="80" x2="598" y2="45" stroke="#444" marker-end="url(#a)"/>
   <line x1="560" y1="100" x2="598" y2="138" stroke="#444" marker-end="url(#a)"/>
 
-  <text x="430" y="210" font-size="12" fill="#555">SetPDPos presets gllPDPos; Begin latches PDPosInitial so motion is relative to that instant.</text>
+  <text x="430" y="210" font-size="12" fill="#555">SetPDPos presets the accumulator; Begin latches its value so motion is relative to that instant.</text>
   <text x="430" y="232" font-size="12" fill="#555">PDUsrUnits scales PDPos/PDVel only when read over the bus; PDEndTime gates in-target.</text>
 </svg>

@@ -36,15 +36,9 @@ Command that presets/re-zeroes the pulse-and-direction position counter without 
 
 ## How it works
 
-`SetPDPos` (`AG300_CTL01Funcs.c:7344`) writes the value to both representations of the counter atomically (interrupts disabled around the write), and clears the derived velocity:
+`SetPDPos` writes the value to both representations of the counter atomically (interrupts disabled around the write), rebuilding the 32.32 accumulator from the supplied value and clearing the derived velocity to zero.
 
-```text
-glPDPos  = value
-gllPDPos = (long long) value << 32      ; rebuild the 32.32 accumulator
-glPDVel  = 0
-```
-
-Because it sets the 32.32 accumulator `gllPDPos` directly (not just the reported `PDPos`), subsequent per-cycle deltas accumulate from the new base. It does **not** touch the value latched at [Begin](../04-motion-command/Begin.md) (`gllPDPosInitial`): during an active direct/indirect P/D motion, motion is measured relative to that latched value, so presetting the counter mid-motion would shift it — preset before issuing `Begin`. This is the P/D-input analogue of [SetPosition](../03-kinematics-configuration/SetPosition.md), which presets the axis feedback.
+Because it sets the 32.32 accumulator directly (not just the reported `PDPos`), subsequent per-cycle deltas accumulate from the new base. It does **not** touch the value latched at [Begin](../04-motion-command/Begin.md): during an active direct/indirect P/D motion, motion is measured relative to that latched value, so presetting the counter mid-motion would shift it — preset before issuing `Begin`. This is the P/D-input analogue of [SetPosition](../03-kinematics-configuration/SetPosition.md), which presets the axis feedback.
 
 ## Examples
 

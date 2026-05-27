@@ -38,9 +38,9 @@ Filtered force reference used in the force control loop.
 
 ## How it works
 
-The force-command generator first builds a *raw* force reference each cycle from the selected source — the analog input, or the [ForceCmdVal](ForceCmdVal.md) table value (after applying the [ForceCmdSlope](ForceCmdSlope.md) ramp). That raw reference is then passed through a first-order reference filter to produce `ForceRef` (`AG300_CTL01ControlLoops.c:2803`), which is the value the loop and [ForceErr](ForceErr.md) use.
+The force-command generator first builds a *raw* force reference each cycle from the selected source — the analog input, or the [ForceCmdVal](ForceCmdVal.md) table value (after applying the [ForceCmdSlope](ForceCmdSlope.md) ramp). That raw reference is then passed through a first-order reference filter to produce `ForceRef`, which is the value the loop and [ForceErr](ForceErr.md) use.
 
-This filtering is why the in-target / sequence timing in force mode is keyed to the **unfiltered** (pre-filter) reference: the holding timer and the move/settle measurements start the moment the raw reference reaches the target [ForceCmdVal](ForceCmdVal.md), not when the filtered `ForceRef` catches up. When force mode is not active, `ForceRef` is held equal to the [Force](Force.md) feedback so the switch into force mode is bumpless (`AG300_CTL01ControlLoops.c:1546`).
+This filtering is why the in-target / sequence timing in force mode is keyed to the **unfiltered** (pre-filter) reference: the holding timer and the move/settle measurements start the moment the raw reference reaches the target [ForceCmdVal](ForceCmdVal.md), not when the filtered `ForceRef` catches up. When force mode is not active, `ForceRef` is held equal to the [Force](Force.md) feedback so the switch into force mode is bumpless.
 
 Please refer to [Control tuning – Force control](../../../02-keywords/06-protections/04-force-control/00-overview.md) for more information on the filter.
 

@@ -41,9 +41,9 @@ Array of per-segment distances defining the acceleration-shaping profile.
 
 ## How it works
 
-Each control cycle the profiler compares the remaining distance to target, `|AbsTrgt − PosRef|`, against these thresholds and uses the matching [AccShapeFact](AccShapeFact.md) entry as the acceleration scale (`AG300_CTL01Profiler.c:1028`–`1054`). The thresholds are interpreted **nearest-to-target first**: the first entry whose distance exceeds the remaining distance selects the band. If the remaining distance is larger than every threshold, the factor is `1.0` (no shaping).
+Each control cycle the profiler compares the remaining distance to target, `|AbsTrgt − PosRef|`, against these thresholds and uses the matching [AccShapeFact](AccShapeFact.md) entry as the acceleration scale. The thresholds are interpreted **nearest-to-target first**: the first entry whose distance exceeds the remaining distance selects the band. If the remaining distance is larger than every threshold, the factor is `1.0` (no shaping).
 
-The values are in the same user units as position. You do **not** need to enter them in order — when any `AccShapeDist`/`AccShapeFact` element is written the firmware re-sorts the (distance, factor) pairs into ascending distance order before they are used (`SpAccShape`, `SpecialFuncs.c:5868`). The array is declared with size 11 so that command indices can start at `1`; only indices 1–10 carry data (`ACCSHAPE_SIZE = 11`, `AG300_CTL01ParamsCommon.h:653`). See [AccShapeOn](AccShapeOn.md) for the full lookup mechanism.
+The values are in the same user units as position. You do **not** need to enter them in order — when any `AccShapeDist`/`AccShapeFact` element is written the controller re-sorts the (distance, factor) pairs into ascending distance order before they are used. The array is declared with size 11 so that command indices can start at `1`; only indices 1–10 carry data. See [AccShapeOn](AccShapeOn.md) for the full lookup mechanism.
 
 ## Examples
 

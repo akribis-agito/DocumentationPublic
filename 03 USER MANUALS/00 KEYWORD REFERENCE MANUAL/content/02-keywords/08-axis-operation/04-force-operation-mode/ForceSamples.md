@@ -32,22 +32,22 @@ Timings of the last completed ForceCmdVal application, in controller cycles.
 
 ## Overview
 
-`ForceSamples` reports the timings of the last completed [ForceCmdVal](ForceCmdVal.md) application, the force-mode counterpart of [MotionSamples](../../10-motion/05-motion-status/MotionSamples.md). It is applicable only when [ForceCmdSrc](ForceCmdSrc.md) = 1 or 2. The unit is the number of controller cycles, where one cycle is the sample period $T_{s} = \frac{1}{16384\ \text{Hz}} \approx 61.035\ \mu s$. The four timings are recorded together the moment [ForceInTStat](ForceInTStat.md) reaches 4 (settled), using the internal cycle counter `glForceSampleCounter` and the dwell time [ForceInTTime](ForceInTTime.md) (`AG300_CTL01ControlLoops.c:1188`).
+`ForceSamples` reports the timings of the last completed [ForceCmdVal](ForceCmdVal.md) application, the force-mode counterpart of [MotionSamples](../../10-motion/05-motion-status/MotionSamples.md). It is applicable only when [ForceCmdSrc](ForceCmdSrc.md) = 1 or 2. The unit is the number of controller cycles, where one cycle is the sample period $T_{s} = \frac{1}{16384\ \text{Hz}} \approx 61.035\ \mu s$. The four timings are recorded together the moment [ForceInTStat](ForceInTStat.md) reaches 4 (settled), using an internal cycle counter and the dwell time [ForceInTTime](ForceInTTime.md).
 
-Each element is initialised to `-1` (`MOTION_SAMPLES_VALUE_NOT_VALID`) when the motor is disabled, so `-1` means "no completed application yet" (`AG300_CTL01ControlInterrupt.h:573`). The array uses indices 1 to 4 (index 0 is unused).
+Each element is initialized to `-1` when the motor is disabled, so `-1` means "no completed application yet". The array uses indices 1 to 4 (index 0 is unused).
 
 ## How it works
 
 Each array element represents a different elapsed time, measured from the start of the new target-force application (when the index advanced to this entry):
 
-| Index | Firmware constant | Descriptions |
-|----|----|----|
-| 1 | `MOTION_SAMPLES_PROFILER_INDEX` | Time for the raw force reference to reach the target value (ForceCmdVal) from its initial value — the ramp / "move" time. |
-| 2 | `MOTION_SAMPLES_TILL_TARGET_INDEX` | Time until `ForceErr` **first enters** the ForceInTTol window (and stays long enough to ultimately settle) — "move and settle" time. |
-| 3 | `MOTION_SAMPLES_TILL_IN_TARGET_INDEX` | Time until `ForceErr` is **declared settled** (inside ForceInTTol for at least ForceInTTime) — "move, settle and in-target" time. |
-| 4 | `MOTION_SAMPLES_SETTLING_TIME_INDEX` | Time from the raw reference reaching the target until `ForceErr` first enters the ForceInTTol window — the "settle" time alone. |
+| Index | Descriptions |
+|----|----|
+| 1 | Time for the raw force reference to reach the target value (ForceCmdVal) from its initial value — the ramp / "move" time. |
+| 2 | Time until `ForceErr` **first enters** the ForceInTTol window (and stays long enough to ultimately settle) — "move and settle" time. |
+| 3 | Time until `ForceErr` is **declared settled** (inside ForceInTTol for at least ForceInTTime) — "move, settle and in-target" time. |
+| 4 | Time from the raw reference reaching the target until `ForceErr` first enters the ForceInTTol window — the "settle" time alone. |
 
-In summary (matching the firmware computation at `AG300_CTL01ControlLoops.c:1188`–`1195`):
+In summary:
 
 $$
 ForceSamples\lbrack 2\rbrack = \ ForceSamples\lbrack 1\rbrack + \ ForceSamples\lbrack 4\rbrack

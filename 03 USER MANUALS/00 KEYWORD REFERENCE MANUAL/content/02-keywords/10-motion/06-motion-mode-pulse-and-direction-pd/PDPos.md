@@ -42,35 +42,29 @@ Read-only scaled pulse-and-direction counter, accumulated every controller cycle
 
 ### Per-cycle accumulation
 
-The reading and scaling are done by the `M_READ_CALCULATE_PDPOS` macro, called once per axis from the control interrupt (macro defined in `AG300_CTL01ControlInterrupt.h:1265`; invoked at `AG300_CTL01ControlInterrupt.c:1743`, `1760`, `1775`). Each cycle it:
+The reading and scaling are done once per axis from the control interrupt. Each cycle the controller:
 
-1. Reads the signed pulse delta for this cycle from the FPGA. Older FPGAs (`IDENTITY_FPGA_VERSION_INDEX < 3036`) expose a single counter register (`FPGA_PD_COUNTER_REG`); newer FPGAs have a per-axis register (`FPGA_PD_A_AXIS_COUNTER_REG + axis`). The raw delta is a 16-bit signed value.
-2. Scales the delta by the floating-point factor `gfPDFact = PDFact / PDFactDen` (precomputed in `SpPDFactors`, `SpecialFuncs.c:3948`), and adds the fixed-point **remainder carried over from the previous cycle** so fractional pulses are never lost over time.
-3. Computes that cycle's exact remainder using full 64-bit integer math and stores it in `glPDPosDeltaRemainderPrev` for the next cycle — this is why a fractional `PDFact/PDFactDen` ratio does not drift.
-4. Accumulates into the internal counter, applying the direction sign as `× (1 − 2·PDEncDir)` (so `PDEncDir = 0` adds, `PDEncDir = 1` subtracts):
+1. Reads the signed pulse delta for this cycle from the FPGA. Older FPGAs expose a single shared counter register; newer FPGAs have a per-axis counter register. The raw delta is a 16-bit signed value.
+2. Scales the delta by the floating-point factor `PDFact / PDFactDen` (precomputed when those keywords change), and adds the fixed-point **remainder carried over from the previous cycle** so fractional pulses are never lost over time.
+3. Computes that cycle's exact remainder using full 64-bit integer math and stores it for the next cycle — this is why a fractional `PDFact/PDFactDen` ratio does not drift.
+4. Accumulates into the internal counter, applying the direction sign as `× (1 − 2·PDEncDir)` (so `PDEncDir = 0` adds, `PDEncDir = 1` subtracts).
 
-   ```text
-   gllPDPos += gllPDPosDelta * (1 - 2*PDEncDir)
-   glPDPos   = gllPDPos >> 32
-   glPDVel   = gllPDPosDelta >> (32 - 14)
-   ```
-
-The accumulator `gllPDPos` is held in **32.32 fixed-point** (`AG300_CTL01ControlInterrupt.c:163`); `PDPos` is its top 32 bits (`>> 32`) and [PDVel](PDVel.md) is derived from the per-cycle delta. Accumulating every control cycle guarantees no pulses are dropped between reads.
+The accumulator is held in **32.32 fixed-point**; `PDPos` is its top 32 bits (a right shift of 32) and [PDVel](PDVel.md) is derived from the per-cycle delta. Accumulating every control cycle guarantees no pulses are dropped between reads.
 
 ### How PDPos becomes the reference
 
-`Begin` latches the current accumulator into `gllPDPosInitial` (`AG300_CTL01Funcs.c:1411`, `1438`) so motion is measured **relative to the instant motion started**:
+`Begin` latches the current accumulator value so motion is measured **relative to the instant motion started**:
 
-- **Direct (MotionMode = 3):** `PosRef` is built from `(gllPDPos − gllPDPosInitial)` shifted from 32.32 into the reference's 50.14 scaling, passed through the first-order filter [PDFiltFact](PDFiltFact.md) (set via [PDPosFilt](PDPosFilt.md)), then added to the reference latched at `Begin` (`AG300_CTL01Profiler.c:1251`). If the result hits a software travel limit the motion is aborted (further pulses would be lost).
-- **Indirect (MotionMode = 4):** the same delta sets the profiler target `gllAbsTrgt` (`AG300_CTL01Profiler.c:1304`), and the controller's own second-order profiler drives `PosRef` toward it subject to `Speed`/`Accel`/`Decel`.
+- **Direct (MotionMode = 3):** `PosRef` is built from the change in the accumulator since `Begin`, shifted from 32.32 into the reference's 50.14 scaling, passed through the first-order filter [PDFiltFact](PDFiltFact.md) (set via [PDPosFilt](PDPosFilt.md)), then added to the reference latched at `Begin`. If the result hits a software travel limit the motion is aborted (further pulses would be lost).
+- **Indirect (MotionMode = 4):** the same delta sets the profiler target [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md), and the controller's own second-order profiler drives `PosRef` toward it subject to `Speed`/`Accel`/`Decel`.
 
 ### Modulo
 
-If [ModRev](../../03-encoder/04-modulo-mode/ModRev.md) ≠ 0, when the feedback wraps the firmware shifts the whole 32.32 accumulator by `ModRev` (`gllPDPos ∓= ModRev << 32`, `AG300_CTL01ControlInterrupt.c:13158`, `13213`) together with the rest of the reference frame, so the P/D following error is preserved across the wrap.
+If [ModRev](../../03-encoder/04-modulo-mode/ModRev.md) ≠ 0, when the feedback wraps the controller shifts the whole 32.32 accumulator by one `ModRev` interval together with the rest of the reference frame, so the P/D following error is preserved across the wrap.
 
 ### Auxiliary-encoder reuse
 
-When the P/D inputs are repurposed as an auxiliary encoder (`AuxAsPDPosOn = 1`), the firmware copies `PDPos`/`PDVel` into the auxiliary feedback ([AuxPos](../01-kinematics-status/AuxPos.md)/`AuxVel`) instead of using them for P/D motion (`AG300_CTL01ControlInterrupt.c:1755`).
+When the P/D inputs are repurposed as an auxiliary encoder, the controller copies `PDPos`/`PDVel` into the auxiliary feedback ([AuxPos](../01-kinematics-status/AuxPos.md)/`AuxVel`) instead of using them for P/D motion.
 
 ### Reading in user units
 

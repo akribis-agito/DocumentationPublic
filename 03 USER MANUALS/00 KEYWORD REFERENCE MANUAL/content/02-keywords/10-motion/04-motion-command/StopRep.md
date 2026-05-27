@@ -32,32 +32,24 @@ Ends repetitive point-to-point motion after the repetition in progress, instead 
 
 ## Overview
 
-`StopRep` ends repetitive point-to-point motion ([MotionMode](../02-motion-configuration/MotionMode.md) `= 2`, PTP-repetitive). It does not stop the axis mid-move: it requests that the repetition cycle **not be restarted**, so the current repetition completes normally and the move then ends — rather than continuing until [RptCycles](../02-motion-configuration/RptCycles.md) is reached. The remaining motion (the in-progress repetition or the dwell between repetitions) still uses the normal [Decel](../03-kinematics-configuration/Decel.md) profile. It is an axis-related command function handled by `StopRep()` in `AG300_CTL01Funcs.c:2872`, and may be issued during motion.
+`StopRep` ends repetitive point-to-point motion ([MotionMode](../02-motion-configuration/MotionMode.md) `= 2`, PTP-repetitive). It does not stop the axis mid-move: it requests that the repetition cycle **not be restarted**, so the current repetition completes normally and the move then ends — rather than continuing until [RptCycles](../02-motion-configuration/RptCycles.md) is reached. The remaining motion (the in-progress repetition or the dwell between repetitions) still uses the normal [Decel](../03-kinematics-configuration/Decel.md) profile. It is an axis-related command function and may be issued during motion.
 
 ## How it works
 
 ### Requesting the stop
 
-`StopRep` (under interrupts disabled) sets the repetitive-stop request bit and records the reason (`AG300_CTL01Funcs.c:2879`–`2881`):
+`StopRep` (under interrupts disabled) sets the repetitive-stop request bit and records the reason:
 
 | Field set by `StopRep` | Value | Meaning |
 |---|---|---|
-| [MotionStat](../05-motion-status/MotionStat.md) bit 2 `IN_REPETITIVE_STOP_BIT` | 1 | Request to end the repetitive motion |
-| [MotionReason](../05-motion-status/MotionReason.md) | 3 (`MOTION_REASON_END_STOP_REP`) | Records that the move is ending because of `StopRep` |
+| [MotionStat](../05-motion-status/MotionStat.md) bit 2 (repetitive-stop) | 1 | Request to end the repetitive motion |
+| [MotionReason](../05-motion-status/MotionReason.md) | 3 | Records that the move is ending because of `StopRep` |
 
 ### How the profiler ends the repetition
 
-Repetitive motion alternates between a moving phase and a dwell ([IN_WAITING_BIT](../05-motion-status/MotionStat.md), held for [RptWait](../02-motion-configuration/RptWait.md) cycles), counting completed repetitions in [RptCounter](../05-motion-status/RptCounter.md). At the end of each repetition's smoothing tail the profiler decides whether to start another one. That decision requires the repetitive-stop bit to be **clear** (`AG300_CTL01Profiler.c:449`–`451`):
+Repetitive motion alternates between a moving phase and a dwell (the waiting bit, held for [RptWait](../02-motion-configuration/RptWait.md) cycles), counting completed repetitions in [RptCounter](../05-motion-status/RptCounter.md). At the end of each repetition's smoothing tail the profiler decides whether to start another one. That decision requires the repetitive-stop bit to be **clear**: a new repetition is started only while the repetitive-stop bit is clear and [RptCycles](../02-motion-configuration/RptCycles.md) is either 0 (endless) or not yet reached; otherwise the motion ends and all motion bits are cleared.
 
-```text
-if (mode == PTP_REP)
-   && (IN_REPETITIVE_STOP_BIT is clear)
-   && (RptCycles == 0  ||  RptCycles != RptCounter)
-        → enter the dwell and run another repetition
-   else → end the motion (clear all motion bits)
-```
-
-So once `StopRep` has set the bit, the next time a repetition finishes the profiler takes the `else` branch and clears the motion bits instead of starting the dwell. If the bit is set while the axis is already in the inter-repetition dwell, the dwell is ended and the motion is cleared on that cycle (`AG300_CTL01Profiler.c:905`–`919`). Either way [MotionReason](../05-motion-status/MotionReason.md) keeps the value `3`. The direction/return behaviour of the repetitions is configured by [RptMode](../02-motion-configuration/RptMode.md).
+So once `StopRep` has set the bit, the next time a repetition finishes the profiler ends the move instead of starting the dwell. If the bit is set while the axis is already in the inter-repetition dwell, the dwell is ended and the motion is cleared on that cycle. Either way [MotionReason](../05-motion-status/MotionReason.md) keeps the value `3`. The direction/return behaviour of the repetitions is configured by [RptMode](../02-motion-configuration/RptMode.md).
 
 ## Examples
 
@@ -72,5 +64,5 @@ AStopRep             ; finish the current repetition, then stop (do not start an
 - [RptCycles](../02-motion-configuration/RptCycles.md) — programmed repetition count `StopRep` cuts short
 - [RptWait](../02-motion-configuration/RptWait.md) — dwell between repetitions
 - [RptCounter](../05-motion-status/RptCounter.md) — completed-repetition count
-- [MotionStat](../05-motion-status/MotionStat.md) — bit 2 `IN_REPETITIVE_STOP_BIT` set by `StopRep`
+- [MotionStat](../05-motion-status/MotionStat.md) — bit 2 (repetitive-stop) set by `StopRep`
 - [MotionReason](../05-motion-status/MotionReason.md) — reason code 3 set by `StopRep`

@@ -38,12 +38,12 @@ Command to gracefully enter force operation mode.
 
 ## How it works
 
-When accepted, the command (`AG300_CTL01Funcs.c:16484`) performs the following hand-off:
+When accepted, the command performs the following hand-off:
 
-1. **Ends any active motion** with reason `MOTION_REASON_END_GO_TO_FORCE` and stores the move profiler time, so the axis is no longer in motion when the force loop takes over (`AG300_CTL01Funcs.c:16508`).
-2. **Resets the command-sequence state** — [ForceCmdIndex](ForceCmdIndex.md) is set to `1` (first table entry) and [ForceCmdCntr](ForceCmdCntr.md) is cleared to `0` (`AG300_CTL01Funcs.c:16518`).
-3. **Seeds the force-loop integrator** from the present current reference so the commanded current is continuous across the switch and the motor does not jump (`AG300_CTL01Funcs.c:16524`).
-4. **Switches [OperationMode](../01-general-keywords/OperationMode.md) to force control** and records the switch position (`AG300_CTL01Funcs.c:16537`).
+1. **Ends any active motion** (reported as [MotionReason](../../10-motion/05-motion-status/MotionReason.md) = 17, motion ended due to GoToForceMode command) and stores the move profiler time, so the axis is no longer in motion when the force loop takes over.
+2. **Resets the command-sequence state** — [ForceCmdIndex](ForceCmdIndex.md) is set to `1` (first table entry) and [ForceCmdCntr](ForceCmdCntr.md) is cleared to `0`.
+3. **Seeds the force-loop integrator** from the present current reference so the commanded current is continuous across the switch and the motor does not jump.
+4. **Switches [OperationMode](../01-general-keywords/OperationMode.md) to force control** and records the switch position.
 
 Because the command resets [ForceCmdIndex](ForceCmdIndex.md) and [ForceCmdCntr](ForceCmdCntr.md), the force-command sequence always restarts from the first [ForceCmdVal](ForceCmdVal.md) entry. (A direct `OperationMode = 4` assignment does **not** reset them, so it can resume from a preset entry.)
 

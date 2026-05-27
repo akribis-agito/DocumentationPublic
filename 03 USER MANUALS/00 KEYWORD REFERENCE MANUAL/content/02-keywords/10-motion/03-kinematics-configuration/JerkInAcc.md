@@ -44,19 +44,19 @@ This third-order ("infinite-snap") profiler is a structured, segment-based gener
 
 ## How it works
 
-When `JerkMode = 1`, the profiler calls the structured jerk profiler each cycle, passing `JerkInAcc` (and `JerkInDec`) as the jerk constraints alongside the [Speed](Speed.md), [Accel](Accel.md) and [Decel](Decel.md) limits (`AG300_CTL01Profiler.c:1168`–`1170`). The profiler advances through a fixed sequence of segments, and `JerkInAcc` is the magnitude of the jerk applied in the positive- and negative-jerk acceleration segments (`PROFILER_ACC_MAX_J` / `PROFILER_ACC_MIN_J`, `AG300_CTL01Profiler.c:10789`, `:10803`). It shapes the leading half of the move:
+When `JerkMode = 1`, the profiler runs the structured jerk profiler each cycle, using `JerkInAcc` (and `JerkInDec`) as the jerk constraints alongside the [Speed](Speed.md), [Accel](Accel.md) and [Decel](Decel.md) limits. The profiler advances through a fixed sequence of segments, and `JerkInAcc` is the magnitude of the jerk applied in the positive- and negative-jerk acceleration segments. It shapes the leading half of the move:
 
 | Segment | Jerk used |
 |---------|-----------|
-| Acceleration, jerk-up (`ACC_MAX_J`) | `+JerkInAcc` — acceleration rises toward `Accel` |
-| Acceleration, constant (`ACC_ZERO_J`) | 0 — acceleration held at `Accel` |
-| Acceleration, jerk-down (`ACC_MIN_J`) | `−JerkInAcc` — acceleration falls back to 0 at cruise |
+| Acceleration, jerk-up | `+JerkInAcc` — acceleration rises toward `Accel` |
+| Acceleration, constant | 0 — acceleration held at `Accel` |
+| Acceleration, jerk-down | `−JerkInAcc` — acceleration falls back to 0 at cruise |
 
 A larger `JerkInAcc` makes acceleration reach the `Accel` limit faster (sharper, shorter S transition); a smaller value spreads the transition over more time for gentler motion.
 
 ### Units and internal scaling (v4)
 
-On v4 `JerkInAcc` is an integer with a `NO_USER_UNITS` flag and range 100–1,000,000,000 (default 1,000,000). The firmware multiplies the value by `TRUE_JERK_FACTOR` = 1000 before handing it to the profiler (`AG300_CTL01Profiler.c:1168`), so the effective jerk constraint in counts/s³ is:
+On v4 `JerkInAcc` is a dimensionless integer with range 100–1,000,000,000 (default 1,000,000). The controller multiplies the value by a fixed factor of 1000 before applying it in the profiler, so the effective jerk constraint in counts/s³ is:
 
 $$
 jerk_{acc} = JerkInAcc \times 1000
@@ -64,7 +64,7 @@ $$
 
 ### Emergency stops
 
-The third-order profiler is bypassed for emergency/limit stops: those force the internal jerk mode OFF and decelerate with [EmrgDec](EmrgDec.md) without jerk shaping (`AG300_CTL01Profiler.c:1069`), so `JerkInAcc` does not apply to an emergency stop.
+The third-order profiler is bypassed for emergency/limit stops: those force the internal jerk mode OFF and decelerate with [EmrgDec](EmrgDec.md) without jerk shaping, so `JerkInAcc` does not apply to an emergency stop.
 
 ## Examples
 
@@ -80,10 +80,10 @@ AJerkInAcc           ; read current value
 | | v4 (standalone & central-i) | v5 (central-i) |
 |---|---|---|
 | Command code | 720 | 565 |
-| Data type | 32-bit integer (`glJerkInAcc`) | float (`gfJerkInAcc`) |
-| Units | none (`NO_USER_UNITS`), value × 1000 internally | user units (jerk in user units/s³, used directly) |
+| Data type | 32-bit integer | float |
+| Units | none, value × 1000 internally | user units (jerk in user units/s³, used directly) |
 
-In **v5** `JerkInAcc` is a floating-point value expressed directly in user jerk units and passed to the same structured profiler without the ×1000 factor (`develop:CommonC/AG300_CTL01Profiler.c:1114`). **v5 is central-i only.**
+In **v5** `JerkInAcc` is a floating-point value expressed directly in user jerk units and passed to the same structured profiler without the ×1000 factor. **v5 is central-i only.**
 
 ## See also
 

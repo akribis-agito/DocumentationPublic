@@ -32,11 +32,11 @@ Rate of change of acceleration; a finite value produces an S-curve motion profil
 
 ## Overview
 
-`Jerk` is the second-order S-curve control. It is **not** a jerk rate in physical units — it is a power-of-two exponent that sets the **length of a moving-average filter** the firmware runs over the profiler's position reference. A larger `Jerk` lengthens the filter, which softens the corners where the velocity ramp meets [Accel](Accel.md)/[Decel](Decel.md) and the cruise [Speed](Speed.md), turning the trapezoid into an S-curve and reducing mechanical vibration at the start/end of a move.
+`Jerk` is the second-order S-curve control. It is **not** a jerk rate in physical units — it is a power-of-two exponent that sets the **length of a moving-average filter** the controller runs over the profiler's position reference. A larger `Jerk` lengthens the filter, which softens the corners where the velocity ramp meets [Accel](Accel.md)/[Decel](Decel.md) and the cruise [Speed](Speed.md), turning the trapezoid into an S-curve and reducing mechanical vibration at the start/end of a move.
 
 `Jerk` governs the **second-order** profiler ([JerkMode](../02-motion-configuration/JerkMode.md) = 0). The genuinely jerk-limited **third-order** profiler ([JerkMode](../02-motion-configuration/JerkMode.md) = 1) ignores `Jerk` and uses [JerkInAcc](JerkInAcc.md)/[JerkInDec](JerkInDec.md) instead.
 
-Unlike most kinematic parameters, `Jerk` **cannot be changed while the axis is in motion** (the parameter table marks it `NOMOTN`). It is read/write, axis-scoped and saved to flash. Range is 0–9 on standard processors (0–13 on Zynq).
+Unlike most kinematic parameters, `Jerk` **cannot be changed while the axis is in motion**. It is read/write, axis-scoped and saved to flash. Range is 0–9 on standard processors (0–13 on Zynq).
 
 ![Velocity profile: trapezoid versus S-curve](velocity-profile.svg)
 
@@ -44,13 +44,13 @@ Unlike most kinematic parameters, `Jerk` **cannot be changed while the axis is i
 
 ### A moving-average (boxcar) filter, not a jerk rate
 
-The profiler always produces a trapezoidal position reference (`gllPosRef`). After the profiler, the control interrupt runs that reference through a **circular-buffer moving-average filter** before it becomes the smoothed reference the loops follow (`AG300_CTL01ControlInterrupt.c:3796`, `:3834`). Each cycle the newest reference is pushed into a history buffer and a running sum is updated; the smoothed output is the sum divided by the window length:
+The profiler always produces a trapezoidal position reference. After the profiler, the controller runs that reference through a **circular-buffer moving-average filter** before it becomes the smoothed reference the loops follow. Each cycle the newest reference is pushed into a history buffer and a running sum is updated; the smoothed output is the sum divided by the window length:
 
 $$
 posRef_{smooth} = \frac{1}{N}\sum_{i=0}^{N-1} posRef_{k-i} ,\qquad N = 2^{Jerk}
 $$
 
-The division is implemented as a right shift by `Jerk` bits (`gllPosRefHistorySum >> Jerk`), so the window length is exactly **2^Jerk control cycles**.
+The division is implemented as a right shift by `Jerk` bits, so the window length is exactly **2^Jerk control cycles**.
 
 ### Window length and smoothing time
 
@@ -69,19 +69,19 @@ Because the filter is a boxcar of `2^Jerk` samples, the velocity ramp it produce
 | 8 | 256 | ≈ 15.6 ms |
 | 9 | 512 | ≈ 31.3 ms |
 
-(On the Zynq processor, where `JERK_MAX = 13`, the history buffer extends to 8192 points and `Jerk` may reach 13.) `Jerk = 0` selects the `case 0` no-smoothing branch, where the smoothed reference equals the raw reference (`AG300_CTL01ControlInterrupt.c:3836`).
+(On the Zynq processor the maximum is 13, the history buffer extends to 8192 points and `Jerk` may reach 13.) `Jerk = 0` selects the no-smoothing case, where the smoothed reference equals the raw reference.
 
 ### Effect on the move
 
-The S-curve smoothing **lengthens the move** by roughly the window time and **delays** the reference by half the window, because the average lags the trapezoid. It does not change the peak [Speed](Speed.md), [Accel](Accel.md) or [Decel](Decel.md) — it only rounds the transitions between phases. At the end of a move the firmware also waits for the smoothing tail to flush: the "wait-end-smooth" counter must exceed `2^Jerk` cycles before the motion is declared complete (`AG300_CTL01Profiler.c:444`).
+The S-curve smoothing **lengthens the move** by roughly the window time and **delays** the reference by half the window, because the average lags the trapezoid. It does not change the peak [Speed](Speed.md), [Accel](Accel.md) or [Decel](Decel.md) — it only rounds the transitions between phases. At the end of a move the controller also waits for the smoothing tail to flush: an end-of-move smoothing counter must exceed `2^Jerk` cycles before the motion is declared complete.
 
 ### Where smoothing is skipped
 
-The moving-average is bypassed for motion modes that do not use the profiler (P/D direct, master direct, FIFO), and in current- or force-operation mode (`AG300_CTL01ControlInterrupt.c:3832`). During commutation/auto-phasing the firmware temporarily forces `Jerk = 0`, restoring the user value afterward (`AG300_CTL01ControlInterrupt.c:5301`).
+The moving-average is bypassed for motion modes that do not use the profiler (P/D direct, master direct, FIFO), and in current- or force-operation mode. During commutation/auto-phasing the controller temporarily forces `Jerk = 0`, restoring the user value afterward.
 
 ### Interaction with modulo
 
-Under continuous-rotation modulo ([ModRev](../../03-encoder/04-modulo-mode/ModRev.md) ≠ 0) the history buffer can hold pre-wrap values; the firmware tracks how many buffer entries are "wrong" because of a wrap and corrects the running sum accordingly, and only performs the modulo wrap once the jerk buffer is clear of such values (`AG300_CTL01ControlInterrupt.c:3143`, `:3805`).
+Under continuous-rotation modulo ([ModRev](../../03-encoder/04-modulo-mode/ModRev.md) ≠ 0) the history buffer can hold pre-wrap values; the controller tracks how many buffer entries are "wrong" because of a wrap and corrects the running sum accordingly, and only performs the modulo wrap once the jerk buffer is clear of such values.
 
 ## Examples
 

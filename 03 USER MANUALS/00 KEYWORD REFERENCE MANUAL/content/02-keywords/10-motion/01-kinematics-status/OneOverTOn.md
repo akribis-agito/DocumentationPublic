@@ -38,26 +38,15 @@ It applies when a digital incremental encoder ([EncType](../../03-encoder/01-gen
 
 ## How it works
 
-On standalone products the 1/T capture is performed by the DSP's enhanced quadrature encoder pulse (eQEP) hardware unit, which is **always running** regardless of `OneOverTOn` — the unit continuously latches the timer count between encoder events (`SpecialFuncs.c:4113`, comment: *"Enable the 1/T unit, it is always working independent of OneOverTOn"*).
+On standalone products the 1/T capture is performed by a dedicated quadrature-encoder timing unit, which is **always running** regardless of `OneOverTOn` — the unit continuously latches the timer count between encoder events.
 
-`OneOverTOn` only gates the *calculation* of `Vel[4]` from that captured value, which is done once per control interrupt in the second half of the cycle. The velocity computation involves a division, so it is skipped when the feature is off to save interrupt time (`AG300_CTL01ControlInterrupt.c:7639`–`7641`):
+`OneOverTOn` only gates the *calculation* of `Vel[4]` from that captured value, which is done once per control cycle in the second half of the cycle. The velocity computation involves a division, so when the feature is off the calculation is skipped (to save cycle time) and `Vel[4]` is reported as `0`.
 
-```c
-if (glOneOverTOn[A_AXIS] != 0)
-{
-    // ... read the eQEP capture, validate, compute glVel[A_AXIS][4] ...
-}
-else
-{
-    glVel[A_AXIS][4] = 0;       // 1/T reading is off
-}
-```
-
-The actual velocity is derived from the latched timer period (`AG300_CTL01ControlInterrupt.c:7685`); see [OneOverTFreq](OneOverTFreq.md) and [OneOverTGap](OneOverTGap.md) for the full equation and the sign/overflow handling.
+The actual velocity is derived from the latched timer period; see [OneOverTFreq](OneOverTFreq.md) and [OneOverTGap](OneOverTGap.md) for the full equation and the sign/overflow handling.
 
 | Value | Effect on standalone |
 |-------|----------------------|
-| `0` (default) | 1/T velocity calculation skipped; `Vel[4] = 0`. The eQEP capture hardware still runs. |
+| `0` (default) | 1/T velocity calculation skipped; `Vel[4] = 0`. The capture timing unit still runs. |
 | `1` | `Vel[4]` is computed each control interrupt from the captured 1/T timer period. |
 
 ## Examples
@@ -72,9 +61,9 @@ After enabling, read the result with `AVel[1][4]` (the 1/T element of the veloci
 
 ## Changes between versions
 
-On **standalone (v4)** products `OneOverTOn` gates the eQEP-based `Vel[4]` calculation as described above.
+On **standalone (v4)** products `OneOverTOn` gates the timing-unit-based `Vel[4]` calculation as described above.
 
-On **Central-i (v5)** the 1/T velocity is computed in the remote amplifier and delivered to the master in the synchronous message; the master copies it into `Vel[4]` directly (`AG300_CTL01ControlInterrupt.c:8951`–`8963`). That Central-i path is **not gated by `OneOverTOn`**, so on Central-i the keyword does not switch `Vel[4]` off the way it does on standalone. The companion tuning keywords [OneOverTFreq](OneOverTFreq.md), [OneOverTGap](OneOverTGap.md) and [OneOverTAuto](OneOverTAuto.md) are standalone-only.
+On **Central-i (v5)** the 1/T velocity is computed in the remote amplifier and delivered to the master in the synchronous message; the master copies it into `Vel[4]` directly. That Central-i path is **not gated by `OneOverTOn`**, so on Central-i the keyword does not switch `Vel[4]` off the way it does on standalone. The companion tuning keywords [OneOverTFreq](OneOverTFreq.md), [OneOverTGap](OneOverTGap.md) and [OneOverTAuto](OneOverTAuto.md) are standalone-only.
 
 ## See also
 

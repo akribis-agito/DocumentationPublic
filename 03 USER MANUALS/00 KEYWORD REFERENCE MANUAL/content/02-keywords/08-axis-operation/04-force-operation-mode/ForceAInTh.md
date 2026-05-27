@@ -36,7 +36,7 @@ Analog force-feedback threshold (condition B) to enter force mode.
 
 ## How it works
 
-Each cycle, while not in force mode, the firmware evaluates this threshold against the filtered analog force-feedback channel (`AG300_CTL01ControlLoops.c:1723`):
+Each cycle, while not in force mode, the controller evaluates this threshold against the filtered analog force-feedback channel:
 
 | Value | Descriptions |
 |----|----|
@@ -44,9 +44,9 @@ Each cycle, while not in force mode, the firmware evaluates this threshold again
 | 0 | Second condition is not fulfilled. |
 | \> 0 | Second condition is fulfilled if analog force feedback > `ForceAInTh`. |
 
-The check is **skipped entirely if no analog input is assigned the force-feedback function** (`AG300_CTL01ControlLoops.c:1725`) — assign it with [AInMode](../../../02-keywords/05-inputs-outputs/02-analog-inputs/AInMode.md) first.
+The check is **skipped entirely if no analog input is assigned the force-feedback function** — assign it with [AInMode](../../../02-keywords/05-inputs-outputs/02-analog-inputs/AInMode.md) first.
 
-Entry into force operation mode still requires the first condition check ([CurrPosTh](../03-current-operation-mode/CurrPosTh.md) / [CurrPosThDir](../03-current-operation-mode/CurrPosThDir.md), evaluated against the position reference). When both conditions are met, the axis enters force mode via the same graceful hand-off as [GoToForceMode](GoToForceMode.md), and `ForceAInTh` is cleared to 0 to avoid undesired future switching (`AG300_CTL01ControlLoops.c:1739`); the user must reconfigure its value for the next switch. `ForceAInTh` and [ForcePosErrTh](ForcePosErrTh.md) act as parallel B-conditions — either one triggering is sufficient. See [Force operation mode](00-overview.md) for the overview.
+Entry into force operation mode still requires the first condition check ([CurrPosTh](../03-current-operation-mode/CurrPosTh.md) / [CurrPosThDir](../03-current-operation-mode/CurrPosThDir.md), evaluated against the position reference). When both conditions are met, the axis enters force mode via the same graceful hand-off as [GoToForceMode](GoToForceMode.md), and `ForceAInTh` is cleared to 0 to avoid undesired future switching; the user must reconfigure its value for the next switch. `ForceAInTh` and [ForcePosErrTh](ForcePosErrTh.md) act as parallel B-conditions — either one triggering is sufficient. See [Force operation mode](00-overview.md) for the overview.
 
 ## Examples
 

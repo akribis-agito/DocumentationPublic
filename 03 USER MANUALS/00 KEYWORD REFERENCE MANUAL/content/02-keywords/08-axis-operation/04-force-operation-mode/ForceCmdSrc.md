@@ -36,15 +36,15 @@ Selects the source of the force reference in force mode.
 
 ## How it works
 
-Each cycle the force-command generator branches on `ForceCmdSrc` (`AG300_CTL01ControlLoops.c:1126`) to build the raw force reference and to decide when to exit force mode. The firmware constants are:
+Each cycle the force-command generator branches on `ForceCmdSrc` to build the raw force reference and to decide when to exit force mode. The supported values are:
 
-| Value | Firmware constant | Source |
-|----|----|----|
-| 0 | `FORCE_COMMAND_SOURCE_ANALOG` | Analog force-reference input (the channel assigned the force-command function via [AInMode](../../../02-keywords/05-inputs-outputs/02-analog-inputs/AInMode.md)). The reference follows the analog signal; [ForceCmdHTime](ForceCmdHTime.md)`[1]` sets how long the axis stays in force mode. |
-| 1 | `FORCE_COMMAND_SOURCE_USER_DEFINED` | User-defined sequence: step through the [ForceCmdVal](ForceCmdVal.md) table, each entry held for [ForceCmdHTime](ForceCmdHTime.md) and reached at rate [ForceCmdSlope](ForceCmdSlope.md). |
-| 2 | `FORCE_COMMAND_SOURCE_USER_DEFINED_INTERPOLATED` | Same as value 1 in the current firmware. |
+| Value | Source |
+|----|----|
+| 0 | Analog force-reference input (the channel assigned the force-command function via [AInMode](../../../02-keywords/05-inputs-outputs/02-analog-inputs/AInMode.md)). The reference follows the analog signal; [ForceCmdHTime](ForceCmdHTime.md)`[1]` sets how long the axis stays in force mode. |
+| 1 | User-defined sequence: step through the [ForceCmdVal](ForceCmdVal.md) table, each entry held for [ForceCmdHTime](ForceCmdHTime.md) and reached at rate [ForceCmdSlope](ForceCmdSlope.md). |
+| 2 | Same as value 1 in the current firmware. |
 
-> **Note:** In this firmware version, values 1 and 2 share the same code path and behave identically (`AG300_CTL01ControlLoops.c:1152`); the interpolated variant is reserved for a future enhancement. Document and configure with `ForceCmdSrc = 1` for the user-defined table.
+> **Note:** In this firmware version, values 1 and 2 behave identically; the interpolated variant is reserved for a future enhancement. Document and configure with `ForceCmdSrc = 1` for the user-defined table.
 
 When `ForceCmdSrc = 0`, the analog reference can be entered/exited automatically by the mode-switch conditions described in [Force operation mode](00-overview.md). When `ForceCmdSrc = 1` or `2`, the axis exits force mode according to the [ForceCmdHTime](ForceCmdHTime.md) table (a `0` entry forces a return to position mode).
 

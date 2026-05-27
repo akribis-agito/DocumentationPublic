@@ -45,13 +45,7 @@ Configures the sign (direction) of PDPos accumulation relative to the direction 
 
 ## How it works
 
-`PDEncDir` is applied directly in the per-cycle accumulation as a sign factor `(1 − 2·PDEncDir)` (macro `M_READ_CALCULATE_PDPOS`, `AG300_CTL01ControlInterrupt.h:1265`):
-
-```text
-gllPDPos += gllPDPosDelta * (1 - 2*PDEncDir)
-```
-
-So `PDEncDir = 0` gives `+1` (the delta is added) and `PDEncDir = 1` gives `−1` (the delta is subtracted). Because the sign is applied to the already-scaled delta, it only flips direction — magnitude is unaffected.
+`PDEncDir` is applied directly in the per-cycle accumulation as a sign factor `(1 − 2·PDEncDir)` on the scaled delta. So `PDEncDir = 0` gives `+1` (the delta is added) and `PDEncDir = 1` gives `−1` (the delta is subtracted). Because the sign is applied to the already-scaled delta, it only flips direction — magnitude is unaffected.
 
 | Value | Effect on PDPos |
 |---|---|

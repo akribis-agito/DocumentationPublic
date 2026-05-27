@@ -36,15 +36,15 @@ Minimum dwell time inside the settling window before target-reached is signalled
 
 ## How it works
 
-Internally `InTargetTime` is stored and compared in **controller cycles (samples)**, not milliseconds. The profiler keeps a dwell counter that increments for every consecutive in-window cycle and resets to 0 on any out-of-window cycle; when the counter reaches `glInTargetTime` the target-reached state latches (`AG300_CTL01Profiler.c:968`, current/force mode `:10358`).
+Internally `InTargetTime` is stored and compared in **controller cycles (samples)**, not milliseconds. The controller keeps a dwell counter that increments for every consecutive in-window cycle and resets to 0 on any out-of-window cycle; when the counter reaches the configured time the target-reached state latches (in both position/velocity and current/force modes).
 
-When entered from a command the value is scaled by `SAMPLES_TO_MS_FACT = 16.384` (samples per ms at the 16384 Hz sampling rate), so the keyword is supplied in milliseconds:
+When entered from a command the value is scaled by `16.384` (samples per ms at the 16384 Hz sampling rate), so the keyword is supplied in milliseconds:
 
 $$
 samples = InTargetTime_{ms} \times 16.384
 $$
 
-The raw range is `0`…`SAMPLES_PER_10SECOND = 163840` samples (0 to 10 s). The default `INTARGETTIME_DFLT` is `SAMPLES_PER_SECOND >> 8 = 16384 / 256 = 64` samples ≈ **3.9 ms**. A value of `0` makes the target-reached condition trigger on the first in-window cycle. It is saved to flash and may be changed while in motion.
+The raw range is `0`…`163840` samples (0 to 10 s). The default is `16384 / 256 = 64` samples ≈ **3.9 ms**. A value of `0` makes the target-reached condition trigger on the first in-window cycle. It is saved to flash and may be changed while in motion.
 
 ## Examples
 

@@ -43,7 +43,7 @@ Target (maximum) velocity for point-to-point and jog motion, in user units per s
 
 ### Point-to-point: magnitude is the cruise cap
 
-In point-to-point motion the profiler takes the **magnitude** of `Speed` as the cruise ceiling (`AG300_CTL01Profiler.c:1016`, `gfSpeed = labs(glSpeed)`); the travel direction is set by the relation between [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) and the current reference, not by the sign of `Speed`. Each cycle the profiler increments its velocity by `Accel × AccelFact × Ts` until it reaches `gfSpeed`, then holds it there until the deceleration-distance lookahead (using `Decel`) forces the braking phase:
+In point-to-point motion the profiler takes the **magnitude** of `Speed` as the cruise ceiling; the travel direction is set by the relation between [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) and the current reference, not by the sign of `Speed`. Each cycle the profiler increments its velocity by `Accel × AccelFact × Ts` until it reaches the cruise ceiling, then holds it there until the deceleration-distance lookahead (using `Decel`) forces the braking phase:
 
 $$
 v_k \le |Speed| ,\qquad
@@ -54,11 +54,11 @@ If the move is too short to reach `Speed`, the profile becomes triangular and `S
 
 ### Jog: sign sets the direction
 
-In jog (and joystick-indirect velocity) mode the **signed** `Speed` is used directly as the target velocity (`AG300_CTL01Profiler.c:758`, `gfSpeed = (float) glSpeed`), so a negative `Speed` jogs in the negative direction. The axis ramps to this signed target using `Accel`, and decelerates with `Decel` when approaching a software limit or on a stop request.
+In jog (and joystick-indirect velocity) mode the **signed** `Speed` is used directly as the target velocity, so a negative `Speed` jogs in the negative direction. The axis ramps to this signed target using `Accel`, and decelerates with `Decel` when approaching a software limit or on a stop request.
 
 ### Relation to MaxVel
 
-`Speed` is the *commanded* cruise velocity for the profiler. It is distinct from the hard velocity-loop clamp [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md), which limits the velocity **reference** ([VelRef](../01-kinematics-status/VelRef.md)) downstream regardless of how the profile was generated. The frontmatter range (±1.3 × 10⁹) matches the firmware `MAX_SPEED` constant; keep `Speed` at or below `MaxVel` so the profile is not silently saturated by the velocity loop.
+`Speed` is the *commanded* cruise velocity for the profiler. It is distinct from the hard velocity-loop clamp [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md), which limits the velocity **reference** ([VelRef](../01-kinematics-status/VelRef.md)) downstream regardless of how the profile was generated. The frontmatter range (±1.3 × 10⁹) is the maximum allowed speed; keep `Speed` at or below `MaxVel` so the profile is not silently clamped by the velocity loop. When the velocity reference is clamped to `MaxVel`, the velocity-saturation bit of [StatReg](../../07-status-and-faults/StatReg.md) (bit 23) is set, so you can detect the condition.
 
 ### Live changes
 
@@ -74,7 +74,7 @@ ASpeed               ; read current value
 
 ## Changes between versions
 
-In **v4** `Speed` is a 32-bit integer (`glSpeed`). In **v5 (central-i)** it is a 64-bit integer (`gllSpeed`, `develop:CommonC/AG300_CTL01Params.c:195`), matching the 64-bit position pipeline. The profiler's use of `Speed` (magnitude in PTP, signed in jog) is unchanged. **v5 is central-i only** — on standalone `Speed` remains the v4 32-bit value.
+In **v4** `Speed` is a 32-bit integer. In **v5 (central-i)** it is a 64-bit integer, matching the 64-bit position pipeline. The profiler's use of `Speed` (magnitude in PTP, signed in jog) is unchanged. **v5 is central-i only** — on standalone `Speed` remains the v4 32-bit value.
 
 ## See also
 
@@ -83,4 +83,5 @@ In **v4** `Speed` is a 32-bit integer (`glSpeed`). In **v5 (central-i)** it is a
 - [AccelFact](AccelFact.md) — scales the accel/decel ramps (not `Speed`)
 - [Jerk](Jerk.md) — S-curve smoothing of the ramps
 - [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md) — hard velocity-loop clamp (distinct from `Speed`)
+- [StatReg](../../07-status-and-faults/StatReg.md) — bit 23 reports velocity saturation against `MaxVel`
 - [SpeedChgNew](SpeedChgNew.md) — position-triggered speed change during a move

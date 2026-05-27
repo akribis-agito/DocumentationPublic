@@ -38,9 +38,9 @@ Per-sample position offset magnitude applied during a reference offset correctio
 
 ## How it works
 
-While a correction is armed ([RefOffsetSamp](RefOffsetSamp.md) `> 0`) and the axis is in motion, the firmware adds `RefOffsetStep` to the high-precision reference accumulator `gllPosRef` on **every** servo cycle (`AG300_CTL01ControlInterrupt.c:3780`). The total injected shift is therefore about `RefOffsetStep × RefOffsetSamp`.
+While a correction is armed ([RefOffsetSamp](RefOffsetSamp.md) `> 0`) and the axis is in motion, the controller adds `RefOffsetStep` to the high-precision reference accumulator on **every** servo cycle. The total injected shift is therefore about `RefOffsetStep × RefOffsetSamp`.
 
-The value is added at the **accumulator scaling** of `gllPosRef` (the 50.14 / `2^14` fixed-point reference). As the firmware comment notes, this means `RefOffsetStep` effectively behaves like a *velocity*: a value equal to `2^14` (16384) corresponds to one position count of shift per cycle, i.e. a constant velocity bias for the duration of the ramp. Use small values; because the offset bypasses the [Accel](Accel.md)/[Decel](Decel.md) profiler limits, a large step produces a sharp velocity jump in the reference.
+The value is added at the **accumulator scaling** of the reference (the 50.14 / `2^14` fixed-point reference). This means `RefOffsetStep` effectively behaves like a *velocity*: a value equal to `2^14` (16384) corresponds to one position count of shift per cycle, i.e. a constant velocity bias for the duration of the ramp. Use small values; because the offset bypasses the [Accel](Accel.md)/[Decel](Decel.md) profiler limits, a large step produces a sharp velocity jump in the reference.
 
 A positive `RefOffsetStep` shifts the reference forward, a negative value backward. See [RefOffsetSamp](RefOffsetSamp.md) for arming and auto-clear behaviour.
 

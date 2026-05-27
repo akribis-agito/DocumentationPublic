@@ -43,13 +43,13 @@ Acceleration rate for point-to-point motion, in user units per second squared.
 
 ### Effective acceleration each cycle
 
-The profiler runs once per control cycle (16,384 Hz on v4 central-i; sample time ≈ 61 µs). On every cycle it forms the **effective acceleration** as the product of `Accel` and the integer scaling factor [AccelFact](AccelFact.md) (`AG300_CTL01Profiler.c:781`, `:1062`):
+The profiler runs once per control cycle (16,384 Hz on v4 central-i; sample time ≈ 61 µs). On every cycle it forms the **effective acceleration** as the product of `Accel` and the integer scaling factor [AccelFact](AccelFact.md):
 
 $$
 Accel_{eff} = Accel \times AccelFact
 $$
 
-In a normal acceleration phase the profiler velocity is then incremented by `Accel_eff × SAMPLE_TIME` each cycle until it reaches `Speed` (`AG300_CTL01Profiler.c:1095`):
+In a normal acceleration phase the profiler velocity is then incremented by `Accel_eff × T_s` (the control-cycle sample time) each cycle until it reaches `Speed`:
 
 $$
 v_{k} = v_{k-1} + Accel_{eff}\times T_s ,\qquad v_k \le Speed
@@ -59,7 +59,7 @@ Because both `Accel` and `AccelFact` are read fresh each cycle, changing either 
 
 ### Deceleration-distance limiting (the trapezoid)
 
-The profiler does not blindly accelerate to `Speed`. Each cycle it computes, from the remaining distance to [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md), the velocity from which it could still stop in time using `Decel` (`AG300_CTL01Profiler.c:1090`):
+The profiler does not blindly accelerate to `Speed`. Each cycle it computes, from the remaining distance to [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md), the velocity from which it could still stop in time using `Decel`:
 
 $$
 v_{dec} = -Decel_{eff}\,T_s + \sqrt{Decel_{eff}^{2}\,T_s^{2} + 2\,Decel_{eff}\,(target - posRef)\,T_s}
@@ -69,16 +69,16 @@ $$
 
 ### Jog and joystick moves
 
-The same `Accel_eff = Accel × AccelFact` construction is used in jog mode and joystick-indirect velocity mode (`AG300_CTL01Profiler.c:781`). Joystick **direct** velocity mode bypasses ramping by forcing the internal accel/decel to a very large value, so `Accel` is not used there except during a stop.
+The same `Accel_eff = Accel × AccelFact` construction is used in jog mode and joystick-indirect velocity mode. Joystick **direct** velocity mode bypasses ramping by forcing the internal accel/decel to a very large value, so `Accel` is not used there except during a stop.
 
 ### When Accel is not used
 
 - A controlled stop on a limit switch, software position limit or controlled-stop input substitutes [EmrgDec](EmrgDec.md) for the deceleration rate; `Accel` still governs any re-acceleration.
-- In third-order mode ([JerkMode](../02-motion-configuration/JerkMode.md) = 1) `Accel` is the **peak acceleration** constraint passed to the structured jerk profiler (`AG300_CTL01Profiler.c:1170`), which ramps acceleration up to it at the rate set by `JerkInAcc` rather than stepping to it instantly.
+- In third-order mode ([JerkMode](../02-motion-configuration/JerkMode.md) = 1) `Accel` is the **peak acceleration** constraint passed to the structured jerk profiler, which ramps acceleration up to it at the rate set by `JerkInAcc` rather than stepping to it instantly.
 
 ### Acceleration shaping
 
-If acceleration shaping is enabled ([AccShapeOn](AccShapeOn.md) ≠ 0) the effective acceleration is additionally multiplied by a position-dependent factor interpolated from the [AccShapeDist](AccShapeDist.md)/[AccShapeFact](AccShapeFact.md) tables (`AG300_CTL01Profiler.c:1056`), so `Accel` becomes the baseline that shaping scales.
+If acceleration shaping is enabled ([AccShapeOn](AccShapeOn.md) ≠ 0) the effective acceleration is additionally multiplied by a position-dependent factor interpolated from the [AccShapeDist](AccShapeDist.md)/[AccShapeFact](AccShapeFact.md) tables, so `Accel` becomes the baseline that shaping scales.
 
 ## Examples
 
@@ -89,7 +89,7 @@ AAccel               ; read current acceleration
 
 ## Changes between versions
 
-In **v4** `Accel` is a 32-bit integer (`glAccel`, counts/s²). In **v5 (central-i)** it is a single-precision float (`gfAccel`); the profiler construction `Accel × AccelFact`, the trapezoid limiting and the jerk interactions are otherwise unchanged (`develop:CommonC/AG300_CTL01Profiler.c:810`). **v5 is central-i only** — on standalone `Accel` remains the v4 32-bit value.
+In **v4** `Accel` is a 32-bit integer (counts/s²). In **v5 (central-i)** it is a single-precision float; the profiler construction `Accel × AccelFact`, the trapezoid limiting and the jerk interactions are otherwise unchanged. **v5 is central-i only** — on standalone `Accel` remains the v4 32-bit value.
 
 ## See also
 

@@ -38,7 +38,7 @@ Difference between force reference and force feedback.
 
 ## How it works
 
-`ForceErr` is recomputed every control cycle as the filtered reference minus the feedback (`AG300_CTL01ControlLoops.c:2812`):
+`ForceErr` is recomputed every control cycle as the filtered reference minus the feedback:
 
 $$
 ForceErr\ \lbrack unit\rbrack\  = \ ForceRef\ \lbrack unit\rbrack\  - \ Force\ \lbrack unit\rbrack
@@ -47,9 +47,9 @@ $$
 `ForceErr` serves two roles beyond closing the loop:
 
 - **In-target detection.** The force in-target check compares `|ForceErr|` against [ForceInTTol](ForceInTTol.md); the axis is settled ([ForceInTStat](ForceInTStat.md) = 4) once it stays inside that window for [ForceInTTime](ForceInTTime.md).
-- **High-error protection.** If `|ForceErr|` exceeds the internal maximum-force-error limit, the controller raises a force-error fault and turns the motor off (`AG300_CTL01ControlLoops.c:2815`).
+- **High-error protection.** If `|ForceErr|` exceeds the internal maximum-force-error limit, [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1045 (force error exceeds limit) and the motor is turned off.
 
-While the axis is not in force mode, `ForceErr` is forced to `0` (`AG300_CTL01ControlLoops.c:1549`).
+While the axis is not in force mode, `ForceErr` is forced to `0`.
 
 ## Examples
 

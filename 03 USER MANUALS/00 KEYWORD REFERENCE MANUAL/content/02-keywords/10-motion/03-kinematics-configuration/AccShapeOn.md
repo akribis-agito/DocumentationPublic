@@ -36,7 +36,7 @@ Enables acceleration shaping to reduce vibration via a shaped acceleration curve
 
 ## How it works
 
-Acceleration shaping scales the acceleration (and deceleration) used by the profiler as a function of the **remaining distance to the target**, using a 10-entry lookup table. While `AccShapeOn != 0`, each control cycle the profiler computes the distance to target `d = |AbsTrgt − PosRef|` and finds the first table segment whose distance threshold exceeds `d` (`AG300_CTL01Profiler.c:1026`–`1054`):
+Acceleration shaping scales the acceleration (and deceleration) used by the profiler as a function of the **remaining distance to the target**, using a 10-entry lookup table. While `AccShapeOn != 0`, each control cycle the profiler computes the distance to target `d = |AbsTrgt − PosRef|` and finds the first table segment whose distance threshold exceeds `d`:
 
 ```text
 if d < AccShapeDist[1]      factor = AccShapeFact[1]  / 65536
@@ -55,7 +55,7 @@ DecelFinal = Decel × AccelFact × factor
 
 So the segments are keyed by *distance from the target* (the table is consulted nearest-to-target first), letting you taper the acceleration as the axis closes in, which softens the approach and suppresses residual vibration. Beyond the largest distance threshold the factor is `1.0`, i.e. no shaping — the full acceleration is used during the bulk of the move.
 
-The [AccShapeFact](AccShapeFact.md) entries are **fixed-point fractions scaled by 65536**, so `65536` means ×1.0, `32768` means ×0.5, and `0` means no acceleration in that band. Whenever any element of [AccShapeDist](AccShapeDist.md) or [AccShapeFact](AccShapeFact.md) is written, the firmware re-sorts the (distance, factor) pairs into ascending distance order (a bubble sort in `SpAccShape`, `SpecialFuncs.c:5868`) so the lookup above always scans from the smallest distance upward — you do not have to enter the table pre-sorted.
+The [AccShapeFact](AccShapeFact.md) entries are **fixed-point fractions scaled by 65536**, so `65536` means ×1.0, `32768` means ×0.5, and `0` means no acceleration in that band. Whenever any element of [AccShapeDist](AccShapeDist.md) or [AccShapeFact](AccShapeFact.md) is written, the controller re-sorts the (distance, factor) pairs into ascending distance order so the lookup above always scans from the smallest distance upward — you do not have to enter the table pre-sorted.
 
 ![Acceleration-shaping lookup by distance to target](accshape-lookup.svg)
 

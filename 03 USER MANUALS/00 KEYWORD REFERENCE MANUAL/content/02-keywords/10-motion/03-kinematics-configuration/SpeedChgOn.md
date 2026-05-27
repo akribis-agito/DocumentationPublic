@@ -36,14 +36,14 @@ Enables the speed-change-on-the-fly feature for the axis.
 
 ## How it works
 
-Each control cycle, while `SpeedChgOn != 0`, the controller compares the post-shaping position reference (`glPosRefShapedFilt`) against [SpeedChgPos](SpeedChgPos.md) (`AG300_CTL01ControlInterrupt.c:3733`):
+Each control cycle, while `SpeedChgOn != 0`, the controller compares the post-shaping position reference against [SpeedChgPos](SpeedChgPos.md):
 
 - [SpeedChgDir](SpeedChgDir.md) `= 0` — wait for the reference to rise **above** `SpeedChgPos` (forward crossing).
 - [SpeedChgDir](SpeedChgDir.md) `= 1` — wait for the reference to fall **below** `SpeedChgPos` (reverse crossing).
 
-When the crossing is detected the firmware writes the new speed straight into the active speed setting, `glSpeed = SpeedChgNew`, and **clears `SpeedChgOn` to `0`** in the same step so the change happens exactly once (`:3740`–`:3741`). Because the new value is loaded into `Speed`, the profiler re-targets the velocity and ramps to it under the normal [Accel](Accel.md)/[Decel](Decel.md) (and jerk) limits — the speed does not step.
+When the crossing is detected the controller writes [SpeedChgNew](SpeedChgNew.md) straight into the active [Speed](Speed.md) setting, and **clears `SpeedChgOn` to `0`** in the same step so the change happens exactly once. Because the new value is loaded into `Speed`, the profiler re-targets the velocity and ramps to it under the normal [Accel](Accel.md)/[Decel](Decel.md) (and jerk) limits — the speed does not step.
 
-This is a **one-shot** trigger: to arm another change you must set `SpeedChgOn = 1` again (typically after also updating `SpeedChgPos`/`SpeedChgNew`). The trigger uses the *reference* position, not the feedback, so it fires deterministically with the planned trajectory rather than waiting for the load to physically arrive. The comparison is the same in the per-axis path and the grouped-motion path (`AG300_CTL01ControlInterrupt.c:14448`).
+This is a **one-shot** trigger: to arm another change you must set `SpeedChgOn = 1` again (typically after also updating `SpeedChgPos`/`SpeedChgNew`). The trigger uses the *reference* position, not the feedback, so it fires deterministically with the planned trajectory rather than waiting for the load to physically arrive. The comparison behaves the same for single-axis moves and grouped (coordinated) motion.
 
 ## Examples
 

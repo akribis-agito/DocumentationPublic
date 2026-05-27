@@ -34,31 +34,26 @@ Enables a digital-input trigger that automatically issues `Begin` on the axis.
 
 `BeginDInOn` makes a [Begin](Begin.md) command **wait for a digital-input rising edge** before the move actually starts. Issued by itself, `Begin` starts motion on the next control cycle; with `BeginDInOn = 1`, `Begin` instead arms the move and holds it suspended until the configured input rises. This lets a move be set up under software control but released by external hardware timing. It is an axis-related parameter (range 0–1, default 0) saved to flash, and may be changed at any time.
 
-`BeginDInOn` is the *per-axis enable*. The input that releases the move is selected separately through [DInMode](../../05-inputs-outputs/04-digital-inputs/DInMode.md), which must assign the `begin-motion` functionality (functionality code 3, `BEGIN_MOTION`) to a digital input for that axis. Both must be set: `BeginDInOn = 1` and a `DInMode` input configured as begin-motion.
+`BeginDInOn` is the *per-axis enable*. The input that releases the move is selected separately through [DInMode](../../05-inputs-outputs/04-digital-inputs/DInMode.md), which must assign the begin-motion functionality (functionality code 3) to a digital input for that axis. Both must be set: `BeginDInOn = 1` and a `DInMode` input configured as begin-motion.
 
 ## How it works
 
 ### Arming the wait
 
-When `Begin` runs with `glBeginDInOn = 1`, instead of just setting the in-motion bit it sets both the in-motion and wait-for-input bits in [MotionStat](../05-motion-status/MotionStat.md) (this happens in each motion-mode case, e.g. `AG300_CTL01Funcs.c:993`–`996`):
+When `Begin` runs with `BeginDInOn = 1`, instead of just setting the in-motion bit it sets both the in-motion and wait-for-input bits in [MotionStat](../05-motion-status/MotionStat.md):
 
 | [MotionStat](../05-motion-status/MotionStat.md) bit | When `BeginDInOn = 0` | When `BeginDInOn = 1` |
 |---|---|---|
-| bit 0 `IN_MOTION_BIT` | set | set |
-| bit 9 `IN_WAIT_FOR_INPUT_BIT` | clear | **set** |
+| bit 0 (in-motion) | set | set |
+| bit 9 (wait-for-input) | clear | **set** |
 
-All mode-specific initialization (profiler seeding, PD/initial-position capture, etc.) is done at `Begin` time, so the user must not change those inputs while waiting. While the wait bit is set the profiler holds the axis stationary and **does not advance the motion-time counter** (`AG300_CTL01Profiler.c:485`–`499`), so the wait time is not counted as part of the move.
+All mode-specific initialization (profiler seeding, PD/initial-position capture, etc.) is done at `Begin` time, so the user must not change those inputs while waiting. While the wait bit is set the profiler holds the axis stationary and **does not advance the motion-time counter**, so the wait time is not counted as part of the move.
 
 ### Releasing on the edge
 
-A digital input configured as begin-motion is evaluated in the control interrupt. On a rising edge it sets a per-axis flag (`AG300_CTL01ControlInterrupt.c:10407`–`10411`):
+A digital input configured as begin-motion is evaluated in the control interrupt. On a rising edge the controller sets a per-axis flag requesting the move to start.
 
-```text
-case BEGIN_MOTION:
-    if (input rising edge)  gsBeginMotionOnInputRise[targetAxis] = 1;
-```
-
-On the next cycle the profiler sees that flag, clears `IN_WAIT_FOR_INPUT_BIT` and lets the motion start on the following sample (`AG300_CTL01Profiler.c:502`–`526`). If a [Stop](Stop.md) or [Abort](Abort.md) arrives while still waiting, the move is ended immediately without ever starting (`AG300_CTL01Profiler.c:530`–`535`).
+On the next cycle the profiler sees that flag, clears the wait-for-input bit and lets the motion start on the following sample. If a [Stop](Stop.md) or [Abort](Abort.md) arrives while still waiting, the move is ended immediately without ever starting.
 
 The live input level can be observed through [DInPort-DInPortHigh](../../05-inputs-outputs/04-digital-inputs/DInPort-DInPortHigh.md); edge logic/inversion is set by [DInLog-DInLogHigh](../../05-inputs-outputs/04-digital-inputs/DInLog-DInLogHigh.md).
 
@@ -86,4 +81,4 @@ ABegin               ; arms the move; motion starts on the rising edge of input 
 - [DInMode](../../05-inputs-outputs/04-digital-inputs/DInMode.md) — assigns the begin-motion functionality (code 3) to an input
 - [DInPort-DInPortHigh](../../05-inputs-outputs/04-digital-inputs/DInPort-DInPortHigh.md) — digital input port status
 - [DInLog-DInLogHigh](../../05-inputs-outputs/04-digital-inputs/DInLog-DInLogHigh.md) — input logic/inversion
-- [MotionStat](../05-motion-status/MotionStat.md) — bit 9 `IN_WAIT_FOR_INPUT_BIT` set while waiting
+- [MotionStat](../05-motion-status/MotionStat.md) — bit 9 (wait-for-input) set while waiting

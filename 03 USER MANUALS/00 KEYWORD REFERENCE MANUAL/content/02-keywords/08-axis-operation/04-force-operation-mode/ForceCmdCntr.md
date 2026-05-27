@@ -43,9 +43,9 @@ Time elapsed in force mode or in the active ForceCmdVal entry.
 
 ## How it works
 
-`ForceCmdCntr` is incremented once per control cycle while the raw force reference is holding at its target (`AG300_CTL01ControlLoops.c:1308` for the table source, `:1139` for the analog source) and is compared against [ForceCmdHTime](ForceCmdHTime.md) to decide when to advance the table entry or exit force mode. It is **held at 0 while the reference is still ramping** to the target (`AG300_CTL01ControlLoops.c:1336`), so it measures hold time only, not ramp time. The internal counter is clamped at 2,000,000,000 to prevent roll-over (`AG300_CTL01ControlLoops.c:1206`).
+`ForceCmdCntr` is incremented once per control cycle while the raw force reference is holding at its target (for both the table source and the analog source) and is compared against [ForceCmdHTime](ForceCmdHTime.md) to decide when to advance the table entry or exit force mode. It is **held at 0 while the reference is still ramping** to the target, so it measures hold time only, not ramp time. The internal counter is clamped at 2,000,000,000 to prevent roll-over.
 
-When the table index advances to a new entry the counter is cleared to 0 (`AG300_CTL01ControlLoops.c:1323`); on the **last** entry it is left running so the user can read how long the axis has been holding the final value.
+When the table index advances to a new entry the counter is cleared to 0; on the **last** entry it is left running so the user can read how long the axis has been holding the final value.
 
 ## Examples
 

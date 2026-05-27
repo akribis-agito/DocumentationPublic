@@ -36,25 +36,25 @@ Down-sampling exponent for the timer clock used to measure the 1/T period in Vel
 
 It is supported only on standalone products and only when a digital incremental encoder ([EncType](../../03-encoder/01-general-settings/EncType-AuxEncType.md) `= 1`) is used. Use it together with [OneOverTOn](OneOverTOn.md) (enable) and [OneOverTGap](OneOverTGap.md) (count gap) to tune the measurement.
 
-The valid range is `0`–`7` (the value is masked to 3 bits and written to the eQEP capture-timer prescaler `QCAPCTL.CCPS`; `SpecialFuncs.c:4110`). The maximum, `7`, is the largest divider the DSP supports (`MAX_ONE_OVER_T_FREQUENCY_DIVIDER`, `AG300_CTL01ParamsCommon.h:1961`). The default is `4`.
+The valid range is `0`–`7` (the value is masked to 3 bits and written to the capture-timer prescaler). The maximum, `7`, is the largest divider the hardware supports. The default is `4`.
 
 ## How it works
 
-The system clock is 300 MHz (`SYSTEMCLOCK`, `AG300_CTL01DevInit.h:14`). The 1/T timer clock is:
+The system clock is 300 MHz. The 1/T timer clock is:
 
 $$
-Timer\ frequency\lbrack Hz\rbrack = \frac{SYSTEMCLOCK}{2^{OneOverTFreq}} = \frac{300\,000\,000}{2^{OneOverTFreq}}
+Timer\ frequency\lbrack Hz\rbrack = \frac{\text{system clock}}{2^{OneOverTFreq}} = \frac{300\,000\,000}{2^{OneOverTFreq}}
 $$
 
-A larger `OneOverTFreq` divides by a larger power of two, lowering the timer frequency. A lower timer frequency coarsens the time resolution but extends the longest period the 16-bit capture register can hold before overflow — so it lets the 1/T unit measure **slower** speeds without overflowing (`AG300_CTL01Params.h:1226`, comment: *"default is 300/16=18.75MHz, so can monitor lower speed with no overflow"*).
+A larger `OneOverTFreq` divides by a larger power of two, lowering the timer frequency. A lower timer frequency coarsens the time resolution but extends the longest period the 16-bit capture register can hold before overflow — so it lets the 1/T unit measure **slower** speeds without overflowing (the default of 300/16 = 18.75 MHz allows lower-speed monitoring with no overflow).
 
-`OneOverTFreq` combines with [OneOverTGap](OneOverTGap.md) into a precomputed factor `gfOneOverTFact = 2^OneOverTGap / 2^OneOverTFreq`, calculated once when either keyword is written (`SpecialFuncs.c:4122`). At each control interrupt the velocity is then (`AG300_CTL01ControlInterrupt.c:7685`):
+`OneOverTFreq` combines with [OneOverTGap](OneOverTGap.md) into a precomputed factor `2^OneOverTGap / 2^OneOverTFreq`, calculated once when either keyword is written. At each control cycle the velocity is then:
 
-```c
-glVel[A_AXIS][4] = ((float)(SYSTEMCLOCK / EQep1Regs.QCPRDLAT)) * gfOneOverTFact[A_AXIS];
-```
+$$
+Vel\lbrack 4\rbrack = \frac{\text{system clock}}{\text{latched timer period}} \times \frac{2^{OneOverTGap}}{2^{OneOverTFreq}}
+$$
 
-where `QCPRDLAT` is the latched timer period (in timer ticks) for the most recent gap. The sign is taken from `Vel[2]` because the 1/T unit itself does not sense direction (`:7686`–`7687`). If the capture overflowed or a direction change occurred, `Vel[4]` is forced to `0` (`:7645`–`7656`).
+where the latched timer period (in timer ticks) is for the most recent gap. The sign is taken from `Vel[2]` because the 1/T unit itself does not sense direction. If the capture overflowed or a direction change occurred, `Vel[4]` is forced to `0`.
 
 | `OneOverTFreq` | Divider `2^n` | Timer frequency | Tick period |
 |----------------|---------------|-----------------|-------------|

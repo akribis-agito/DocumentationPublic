@@ -55,7 +55,7 @@ main encoder ─► (decode) ─► PosBeforeMap ─► [error mapping] ─► [
 
 ### Simulation mode
 
-When the axis runs in **simulation** (`MotorType` = simulation) there is no physical encoder: the firmware sets the encoder reading equal to the reference, so **`Pos` follows `PosRef` exactly**. Error mapping is deliberately skipped in simulation to avoid the feedback loop (`EncoderPos = PosRef` → `Pos = f(EncoderPos)` → in motor-off `PosRef = Pos`). This lets you dry-run motion programs without hardware.
+When the axis runs in **simulation** (`MotorType` = simulation) there is no physical encoder: the controller sets the feedback equal to the reference, so **`Pos` follows `PosRef` exactly**. Error mapping is deliberately skipped in simulation to avoid creating a feedback loop with the motor-off behaviour that forces `PosRef = Pos`. This lets you dry-run motion programs without hardware.
 
 ### Motor-off behaviour
 
@@ -67,7 +67,7 @@ When an encoder error map is active ([MapType](../../04-error-mapping/MapType.md
 
 ### Modulo (continuous rotary) — ModRev
 
-If [ModRev](../../03-encoder/04-modulo-mode/ModRev.md) ≠ 0, `Pos` is kept within `[0, ModRev)`. When it would cross a boundary the firmware adds/subtracts `ModRev` from `Pos` **and shifts the entire reference frame by the same amount** — `PosRef`, the shaped/filtered references, [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md), `PDPos`, and the gear master position all move together — so the following error is preserved across the wrap and the axis can rotate continuously. The wrap is applied only when the jerk buffer is clear of pre-wrap values, and it assumes no more than half a revolution of travel per control cycle. See also [ModShort](../../03-encoder/04-modulo-mode/ModShort.md) for shortest-path targeting.
+If [ModRev](../../03-encoder/04-modulo-mode/ModRev.md) ≠ 0, `Pos` is kept within `[0, ModRev)`. When it would cross a boundary the controller adds/subtracts `ModRev` from `Pos` **and shifts the entire reference frame by the same amount** — `PosRef`, the shaped/filtered references, [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md), `PDPos`, and the gear master position all move together — so the following error is preserved across the wrap and the axis can rotate continuously. The wrap is applied only when the jerk buffer is clear of pre-wrap values, and it assumes no more than half a revolution of travel per control cycle. See also [ModShort](../../03-encoder/04-modulo-mode/ModShort.md) for shortest-path targeting.
 
 ### Dual-loop and gantry
 

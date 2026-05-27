@@ -36,12 +36,12 @@ Selects the direction in which the speed-change-on-the-fly trigger is active.
 
 ## How it works
 
-`SpeedChgDir` selects which side of the comparison against [SpeedChgPos](SpeedChgPos.md) arms the trigger (`AG300_CTL01ControlInterrupt.c:3735`):
+`SpeedChgDir` selects which side of the comparison against [SpeedChgPos](SpeedChgPos.md) arms the trigger:
 
 | SpeedChgDir | Condition that fires the change |
 |---|---|
-| 0 | Reference rises **above** `SpeedChgPos` (the firmware comment: "waiting for higher position"). Use for a forward-moving axis. |
-| 1 | Reference falls **below** `SpeedChgPos` ("waiting for lower position"). Use for a reverse-moving axis. |
+| 0 | Reference rises **above** `SpeedChgPos` (waiting for a higher position). Use for a forward-moving axis. |
+| 1 | Reference falls **below** `SpeedChgPos` (waiting for a lower position). Use for a reverse-moving axis. |
 
 Set `SpeedChgDir` to match the direction the axis will be travelling when it passes `SpeedChgPos`; if it is set to the wrong side the crossing condition is never met and no change occurs. See [SpeedChgOn](SpeedChgOn.md) for the full mechanism.
 

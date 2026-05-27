@@ -36,7 +36,7 @@ Encoder-count change (as a power of two) timed for each 1/T velocity sample.
 
 It is supported only on standalone products and only when a digital incremental encoder ([EncType](../../03-encoder/01-general-settings/EncType-AuxEncType.md) `= 1`) is used. Use it together with [OneOverTOn](OneOverTOn.md) (enable) and [OneOverTFreq](OneOverTFreq.md) (timer frequency).
 
-The valid range is `0`–`11` (the value is masked to 4 bits and written to the eQEP unit-position-event prescaler `QCAPCTL.UPPS`; `SpecialFuncs.c:4111`). The maximum, `11`, is the largest gap the DSP supports (`MAX_ONE_OVER_T_GAP_DIVIDER`, `AG300_CTL01ParamsCommon.h:1962`). The default is `2`.
+The valid range is `0`–`11` (the value is masked to 4 bits and written to the unit-position-event prescaler). The maximum, `11`, is the largest gap the hardware supports. The default is `2`.
 
 ## How it works
 
@@ -44,13 +44,13 @@ $$
 Gap\lbrack counts\rbrack = 2^{OneOverTGap}
 $$
 
-The eQEP hardware times the interval over which the encoder advances by `gap` counts, latching the timer period (`QCPRDLAT`) when the gap is reached; the internal counters then reset, ready for the next gap. On each control interrupt the firmware combines the gap and timer frequency into the velocity (`AG300_CTL01ControlInterrupt.c:7663`–`7685`):
+The timing unit times the interval over which the encoder advances by `gap` counts, latching the timer period when the gap is reached; the internal counters then reset, ready for the next gap. On each control cycle the gap and timer frequency are combined into the velocity:
 
 $$
-Vel\lbrack 4\rbrack = \frac{2^{OneOverTGap}}{2^{OneOverTFreq}} \times \frac{SYSTEMCLOCK}{QCPRDLAT}
+Vel\lbrack 4\rbrack = \frac{2^{OneOverTGap}}{2^{OneOverTFreq}} \times \frac{\text{system clock}}{\text{latched timer period}}
 $$
 
-The first factor is precomputed once as `gfOneOverTFact = 2^OneOverTGap / 2^OneOverTFreq` whenever `OneOverTGap` or [OneOverTFreq](OneOverTFreq.md) is written (`SpecialFuncs.c:4122`), so the interrupt only does the `SYSTEMCLOCK / QCPRDLAT` division and one multiply.
+The first factor (`2^OneOverTGap / 2^OneOverTFreq`) is precomputed once whenever `OneOverTGap` or [OneOverTFreq](OneOverTFreq.md) is written, so each control cycle only performs the system-clock-over-period division and one multiply.
 
 | `OneOverTGap` | Gap `2^n` (counts) |
 |---------------|--------------------|
@@ -62,7 +62,7 @@ The first factor is precomputed once as `gfOneOverTFact = 2^OneOverTGap / 2^OneO
 | … | … |
 | 11 (max) | 2048 |
 
-> **Note:** A gap of at least 4 (`OneOverTGap` ≥ 2) gives a more accurate velocity reading because it is not affected by the shift between the A and B encoder signals (which is not always exactly 90 degrees). This is why the default is `2` (`AG300_CTL01Params.h:1231`).
+> **Note:** A gap of at least 4 (`OneOverTGap` ≥ 2) gives a more accurate velocity reading because it is not affected by the shift between the A and B encoder signals (which is not always exactly 90 degrees). This is why the default is `2`.
 
 ## Examples
 

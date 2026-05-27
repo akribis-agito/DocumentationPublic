@@ -36,13 +36,13 @@ In current or force control operation mode ([OperationMode](../../08-axis-operat
 
 ## How it works
 
-In current/force mode the profiler tests the feedback velocity each cycle:
+In current/force mode the feedback velocity is tested each cycle:
 
 $$
 |Vel[1]| \le InTargetVelTh
 $$
 
-The behaviour differs from the position-mode check in one important way (`AG300_CTL01Profiler.c:10349–10365`): the comparison is re-evaluated **every cycle and is not latched**. If `|Vel[1]| > InTargetVelTh` the firmware forces `InTargetStat = 2` and zeroes the dwell counter; if it is within the window the counter advances toward `InTargetTime` and `InTargetStat` latches to 4 — but should the velocity later exceed the threshold again, the status immediately drops back to 2. The window maximum is `MAX_SPEED` and the default is `1000` (user velocity units, `INTARGETVELTH_DFLT`). It is saved to flash.
+The behaviour differs from the position-mode check in one important way: the comparison is re-evaluated **every cycle and is not latched**. If `|Vel[1]| > InTargetVelTh` the controller forces `InTargetStat = 2` and zeroes the dwell counter; if it is within the window the counter advances toward `InTargetTime` and `InTargetStat` latches to 4 — but should the velocity later exceed the threshold again, the status immediately drops back to 2. The window maximum is the maximum speed and the default is `1000` (user velocity units). It is saved to flash.
 
 ## Examples
 

@@ -39,15 +39,15 @@ Holding time for each force-command table entry.
 
 ## How it works
 
-Each cycle the generator reads the hold time for the active entry and branches on its sign (`AG300_CTL01ControlLoops.c:1156`):
+Each cycle the generator reads the hold time for the active entry and branches on its sign:
 
 | Value | Descriptions |
 |---|---|
-| < 0 | Source value is held indefinitely. The axis stays in force mode on this entry; for the table source the in-target detection still runs (`AG300_CTL01ControlLoops.c:1160`). |
-| 0 | Axis exits force operation mode and enters position operation mode (`AG300_CTL01ControlLoops.c:1235`). When [ForcePIVOn](../../11-control-tuning/07-force-control/ForcePIVOn.md) is active, the velocity integrator is seeded on the way out to avoid a current-reference jump. |
-| > 0 | Source value is held for `ForceCmdHTime`, before exiting force operation mode (`ForceCmdSrc` = 0) or proceeding to the next pair (`ForceCmdSrc` = 1 or 2, `AG300_CTL01ControlLoops.c:1311`). For `ForceCmdSrc` = 1 or 2, if [ForceCmdIndex](ForceCmdIndex.md) reaches the last index value and the last `ForceCmdHTime` entry is greater than 0, the axis holds the last `ForceCmdVal` value indefinitely. |
+| < 0 | Source value is held indefinitely. The axis stays in force mode on this entry; for the table source the in-target detection still runs. |
+| 0 | Axis exits force operation mode and enters position operation mode. When [ForcePIVOn](../../11-control-tuning/07-force-control/ForcePIVOn.md) is active, the velocity integrator is seeded on the way out to avoid a current-reference jump. |
+| > 0 | Source value is held for `ForceCmdHTime`, before exiting force operation mode (`ForceCmdSrc` = 0) or proceeding to the next pair (`ForceCmdSrc` = 1 or 2). For `ForceCmdSrc` = 1 or 2, if [ForceCmdIndex](ForceCmdIndex.md) reaches the last index value and the last `ForceCmdHTime` entry is greater than 0, the axis holds the last `ForceCmdVal` value indefinitely. |
 
-The hold time is timed by [ForceCmdCntr](ForceCmdCntr.md), which counts only while the reference is at the target value (ramp time is excluded). For the analog source only `ForceCmdHTime[1]` is consulted (`AG300_CTL01ControlLoops.c:1134`).
+The hold time is timed by [ForceCmdCntr](ForceCmdCntr.md), which counts only while the reference is at the target value (ramp time is excluded). For the analog source only `ForceCmdHTime[1]` is consulted.
 
 ## Examples
 

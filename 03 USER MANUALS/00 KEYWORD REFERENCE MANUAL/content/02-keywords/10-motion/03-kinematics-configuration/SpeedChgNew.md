@@ -36,7 +36,7 @@ New velocity applied when the axis reaches `SpeedChgPos` during a speed change o
 
 ## How it works
 
-When the trigger fires, the firmware copies `SpeedChgNew` straight into the active speed setting — `glSpeed = SpeedChgNew` (`AG300_CTL01ControlInterrupt.c:3740`) — and the profiler then ramps the velocity to this value under the normal [Accel](Accel.md)/[Decel](Decel.md) (and jerk) limits, so the speed changes smoothly rather than stepping. `SpeedChgNew` may be larger or smaller than the original [Speed](Speed.md); its sign is the new direction/magnitude in user units per second. Because the value is read only at the moment of the crossing, you may update it any time before then. See [SpeedChgOn](SpeedChgOn.md) for the full trigger mechanism.
+When the trigger fires, the controller copies `SpeedChgNew` straight into the active [Speed](Speed.md) setting, and the profiler then ramps the velocity to this value under the normal [Accel](Accel.md)/[Decel](Decel.md) (and jerk) limits, so the speed changes smoothly rather than stepping. `SpeedChgNew` may be larger or smaller than the original [Speed](Speed.md); its sign is the new direction/magnitude in user units per second. Because the value is read only at the moment of the crossing, you may update it any time before then. See [SpeedChgOn](SpeedChgOn.md) for the full trigger mechanism.
 
 ## Examples
 
