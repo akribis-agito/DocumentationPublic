@@ -31,12 +31,17 @@ Register address within the absolute encoder to be accessed by the next transact
 
 ## Overview
 
-`EncAbsAddr` specifies the register address within the absolute encoder to be accessed by the next [EncAbsSendCmd](EncAbsSendCmd.md) transaction. It is used together with [EncAbsWRType](EncAbsWRType.md) (read or write) to target the correct encoder register. It is an axis-scope parameter, not saved to flash, and cannot be changed while the motor is on or in motion.
+`EncAbsAddr` specifies the memory address inside the absolute encoder to be accessed by the next [EncAbsSendCmd](EncAbsSendCmd.md) transaction. It is used together with [EncAbsWRType](EncAbsWRType.md) (read or write) to target the correct encoder register. The valid range is 0 to 255 (8-bit). It is an axis-scope parameter, not saved to flash, and cannot be changed while the motor is on or in motion. Available on v4 firmware only.
+
+## How it works
+
+When [EncAbsSendCmd](EncAbsSendCmd.md) runs, it writes `EncAbsAddr` to the encoder-interface memory-address register before issuing the read or write command (`AG300_CTL01Funcs.c:20045`/`20056`). The address therefore selects which encoder register the subsequent transaction targets; it has no effect on its own. Set it together with [EncAbsWRType](EncAbsWRType.md) — and, for a write, [EncAbsWData](EncAbsWData.md) — then issue `EncAbsSendCmd`.
 
 ## Examples
 
 ```text
 AEncAbsAddr=16       ; target register address 16
+AEncAbsAddr          ; query the configured address
 ```
 
 ## See also
@@ -45,3 +50,4 @@ AEncAbsAddr=16       ; target register address 16
 - [EncAbsWData](EncAbsWData.md) — data to write to the addressed register
 - [EncAbsRData](EncAbsRData.md) — data read back from the addressed register
 - [EncAbsSendCmd](EncAbsSendCmd.md) — issues the transaction
+- [EncType](../01-general-settings/EncType-AuxEncType.md) — encoder type; this interface applies to the serial absolute encoder

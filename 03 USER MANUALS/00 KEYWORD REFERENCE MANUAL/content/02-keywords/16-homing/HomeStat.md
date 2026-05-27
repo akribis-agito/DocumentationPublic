@@ -28,22 +28,40 @@ overrides: {}
 ---
 # HomeStat
 
-Read-only bit-field reporting the homing status of the axis.
+Read-only state of the home digital input for the axis.
 
 ## Overview
 
-`HomeStat` is a read-only, axis-scoped status variable (not saved to flash) that reports the current status of the homing procedure as a bit-field, indicating whether the axis has been homed, whether a homing sequence is in progress, and any homing error conditions. It is read alongside [HomingStat](HomingStat.md) (homing-process status and error codes) and [HomingStep](HomingStep.md) (last completed step) when monitoring or diagnosing the homing run started by [HomingOn](HomingOn.md).
+Despite its name, `HomeStat` is *not* a homing-process status word. It reports the present logic state of the discrete input that has been assigned the **Home** function: `1` when the home input is asserted, `0` when it is not. The homing *process* is tracked separately by [HomingStat](HomingStat.md) (per-step status and error codes) and [HomingStep](HomingStep.md) (the current step).
 
-> **Documentation pending:** the individual bit assignments of `HomeStat` are not documented in the source material. Use [HomingStat](HomingStat.md) for the documented per-step status and error codes.
+`HomeStat` is updated every time the home input is sampled. A transition either way (0→1 or 1→0) is what the homing engine and [StopOnHome](StopOnHome.md) react to — see "How it works". It is an axis-scoped, read-only variable that is not saved to flash.
+
+## How it works
+
+When an input is configured with the Home function, the controller samples it and maintains `HomeStat` as the debounced level of that input. On any change of level it raises an internal one-cycle "home change" pulse; this pulse is what:
+
+- the [StopOnHome](StopOnHome.md) mechanism uses to stop a move, and
+- the "Jog until a change in the Home discrete input" homing step (instruction `11` in [HomingDef](HomingDef.md)) waits for to complete.
+
+The step `11` logic also reads `HomeStat` at the start of the move to decide direction: if `HomeStat` is `0` the configured jog speed is used as-is; if `HomeStat` is `1` the direction is inverted, so the axis always moves toward the edge of the home flag.
+
+| HomeStat | Meaning |
+|---|---|
+| 0 | The home input is not asserted. |
+| 1 | The home input is asserted. |
+
+If no input is assigned the Home function, `HomeStat` stays at its default and never changes.
 
 ## Examples
 
 ```text
-AHomeStat           ; read the homing status bit-field
+AHomeStat           ; 0 = home input not asserted, 1 = asserted
 ```
 
 ## See also
 
-- [HomingStat](HomingStat.md) — homing-process status and documented error codes
-- [HomingStep](HomingStep.md) — index of the last completed homing step
+- [StopOnHome](StopOnHome.md) — stops a move on a change of this input
+- [HomingStat](HomingStat.md) — the actual homing-process status and error codes
+- [HomingStep](HomingStep.md) — the current homing step
+- [HomingDef](HomingDef.md) — step 11 jogs until this input changes
 - [HomingOn](HomingOn.md) — starts the homing process

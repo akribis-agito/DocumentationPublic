@@ -19,6 +19,10 @@ Consider a rotary motor whose hard stop only allows motion between +90 deg and -
 
 Setting `EncAbsFL` to 90 deg and `EncAbsRL` to -90 deg informs the controller that 315 deg is out of the allowed range and should be interpreted as -45 deg instead.
 
+These limits act on the **power-up** absolute position only — the same place the standard firmware seeds the position from the absolute reading plus [EncAbsOff](EncAbsOff-AuxEncAbsOff.md) (see [Pos](../../10-motion/01-kinematics-status/Pos.md)). They are applied **after** the offset, so the order is: masked reading → direction → `+ EncAbsOff` → re-interpret against `EncAbsFL`/`EncAbsRL`. After start-up the position accumulates normally and the limits no longer take effect.
+
+> **Note:** This re-interpretation is purely a feedback initialisation aid. It does not create a software travel limit; configure motion limits separately. It is meaningful only for a restricted-stroke rotary axis whose mechanical range is narrower than one absolute revolution.
+
 ## Examples
 
 ```text
@@ -29,4 +33,6 @@ EncAbsRL=-90        ; reverse limit (customized firmware)
 ## See also
 
 - [EncAbsOff](EncAbsOff-AuxEncAbsOff.md) — absolute offset, applied before these limits
+- [EncAbsVal](EncAbsVal-AuxEncAbsVal.md) — processed absolute reading these limits re-interpret
 - [EncType](EncType-AuxEncType.md) — encoder type; these apply for absolute encoders
+- [Pos](../../10-motion/01-kinematics-status/Pos.md) — feedback position established at power-up

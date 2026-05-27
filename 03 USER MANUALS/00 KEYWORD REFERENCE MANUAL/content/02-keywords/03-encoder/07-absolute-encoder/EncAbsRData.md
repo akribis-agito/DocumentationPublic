@@ -31,7 +31,11 @@ Data returned from an absolute encoder register read transaction.
 
 ## Overview
 
-`EncAbsRData` contains the data returned from an absolute encoder register read transaction triggered by [EncAbsSendCmd](EncAbsSendCmd.md). After a successful read, the value from the encoder register addressed by [EncAbsAddr](EncAbsAddr.md) is available here. It is a read-only, axis-scope parameter that is not saved to flash.
+`EncAbsRData` contains the byte returned from an absolute encoder register read transaction triggered by [EncAbsSendCmd](EncAbsSendCmd.md). After a successful read, the value from the encoder register addressed by [EncAbsAddr](EncAbsAddr.md) is available here. The value is 8-bit (0 to 255). It is a read-only, axis-scope parameter that is not saved to flash. Available on v4 firmware only.
+
+## How it works
+
+On a read transaction `EncAbsSendCmd` waits for the encoder to respond, reads the returned byte from the encoder-interface read-data register, bit-reverses it (the encoder transmits LSB-first), and stores the result in `EncAbsRData` (`AG300_CTL01Funcs.c:20051`–`20052`). It is only updated by a read ([EncAbsWRType](EncAbsWRType.md) = 0); a write transaction leaves it unchanged. Read it after `EncAbsSendCmd` reports completion.
 
 ## Examples
 
@@ -45,3 +49,4 @@ AEncAbsRData        ; read the result of the last register read
 - [EncAbsWRType](EncAbsWRType.md) — selects read or write access
 - [EncAbsWData](EncAbsWData.md) — data to write to the addressed register
 - [EncAbsSendCmd](EncAbsSendCmd.md) — issues the transaction
+- [EncType](../01-general-settings/EncType-AuxEncType.md) — encoder type; this interface applies to the serial absolute encoder

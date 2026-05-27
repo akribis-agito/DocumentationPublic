@@ -7,7 +7,9 @@ Selects the digital event source and trigger edge for feedback logging.
 
 ## Overview
 
-`LockSrc` defines the source of the digital event that triggers event-based feedback logging, and its trigger edge. The sign of `LockSrc` selects the edge (positive for rising, negative for falling) and the absolute value selects the input source. It works together with [LockEn](LockEn-AuxLockEn.md) (to enable logging) and increments [LockCntr](LockCntr-AuxLockCntr.md) on each event. `AuxLockSrc` is the auxiliary-encoder counterpart. The value `0` is reserved.
+`LockSrc` defines the source of the digital event that triggers event-based feedback logging, and its trigger edge. The sign of `LockSrc` selects the edge (positive for rising, negative for falling) and the absolute value selects the input source. It works together with [LockEn](LockEn-AuxLockEn.md) (to enable logging) and increments [LockCntr](LockCntr-AuxLockCntr.md) on each event. `AuxLockSrc` is the auxiliary-encoder counterpart.
+
+`LockSrc` is stored in flash, so the trigger selection survives a power cycle; the source/edge are applied to the trigger hardware whenever `LockSrc` is written and whenever [LockEn](LockEn-AuxLockEn.md) is armed. The valid range is `-38` to `38`.
 
 ## How it works
 
@@ -16,10 +18,14 @@ The sign of `LockSrc` defines the trigger edge:
 | Value | Trigger edge |
 |-------|--------------|
 | > 0   | Rising edge  |
-| 0     | Reserved     |
+| 0     | Main encoder index, rising edge (see below) |
 | < 0   | Falling edge |
 
 The absolute value of `LockSrc` determines the digital event source. The mapping varies by product.
+
+### LockSrc = 0
+
+`LockSrc=0` is a convenience setting that selects the **main encoder index of this axis** with normal (rising) polarity, without having to know the per-product index value. It is honoured on firmware/FPGA versions that advertise support for it; on older versions, use the explicit index value from the tables below instead (for example `32` on the standalone AGD101, or `16` on Central-i products).
 
 For standalone products (non-Central-i):
 
@@ -89,11 +95,22 @@ For Central-i products. The feedback logging feature is unavailable for the I/O 
 | 19 | Event 3 | Event 3 | Event 3 | Event 3 | Event 3 | Event 3 |
 | 20 | Central-i remote signal | Central-i remote signal | Central-i remote signal | Central-i remote signal | Central-i remote signal | Central-i remote signal |
 
+### How the selection reaches the hardware
+
+On **standalone** products the source/edge encode directly into the per-axis strobe-settings register that drives the encoder hardware capture (QEP strobe latch): the chosen input is multiplexed onto the strobe pin and the polarity bit sets rising vs. falling. The strobe pin is shared with event generation, so selecting a `LockSrc` and arming [LockEn](LockEn-AuxLockEn.md) takes ownership of that pin from event generation.
+
+On **Central-i** products the source/edge are sent to the remote drive's FPGA lock-configuration registers (input-select bit-mask plus polarity). The remote FPGA performs the capture and the master reads back the latched position over the offline mailbox.
+
+In both cases the absolute value is converted to a zero-based input index internally (value `1` → first input), so the tables above are the authoritative source-to-input mapping.
+
 ## Examples
 
 ```text
-ALockSrc=32          ; main encoder index, rising edge (AGD101)
+ALockSrc=32          ; main encoder index, rising edge (standalone AGD101)
+ALockSrc=16          ; main encoder index, rising edge (Central-i)
+ALockSrc=0           ; main encoder index, rising edge (where supported)
 ALockSrc=-1          ; digital input 1, falling edge
+ALockSrc              ; read back the configured source/edge
 ```
 
 ## See also

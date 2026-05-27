@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="430" viewBox="0 0 760 430" font-family="sans-serif" font-size="13">
+  <rect width="760" height="430" fill="#ffffff"/>
+  <text x="380" y="26" text-anchor="middle" font-size="16" font-weight="bold">HomingDef step execution (per step, each controller cycle)</text>
+
+  <!-- HomingOn -->
+  <rect x="300" y="44" width="160" height="34" rx="6" fill="#e3f0ff" stroke="#3a6ea5"/>
+  <text x="380" y="66" text-anchor="middle">HomingOn = 1 &#8594; step = 1</text>
+
+  <!-- First cycle in step -->
+  <polygon points="380,92 470,124 380,156 290,124" fill="#fff6da" stroke="#b08900"/>
+  <text x="380" y="120" text-anchor="middle">First cycle</text>
+  <text x="380" y="136" text-anchor="middle">in step?</text>
+
+  <!-- Start: load + preconditions -->
+  <rect x="520" y="100" width="220" height="48" rx="6" fill="#eaf7ea" stroke="#3a8a3a"/>
+  <text x="630" y="120" text-anchor="middle">Check preconditions, load</text>
+  <text x="630" y="138" text-anchor="middle">kinematics, start the action</text>
+
+  <!-- Evaluate -->
+  <rect x="290" y="180" width="180" height="48" rx="6" fill="#eaf7ea" stroke="#3a8a3a"/>
+  <text x="380" y="200" text-anchor="middle">Evaluate step:</text>
+  <text x="380" y="218" text-anchor="middle">stop reason / timeout / fault</text>
+
+  <!-- Decision: done? -->
+  <polygon points="380,244 480,286 380,328 280,286" fill="#fff6da" stroke="#b08900"/>
+  <text x="380" y="282" text-anchor="middle">Completion</text>
+  <text x="380" y="298" text-anchor="middle">condition?</text>
+
+  <!-- Advance -->
+  <rect x="520" y="262" width="220" height="48" rx="6" fill="#e3f0ff" stroke="#3a6ea5"/>
+  <text x="630" y="282" text-anchor="middle">step = step + 1</text>
+  <text x="630" y="300" text-anchor="middle">(End homing &#8594; HomingStat=100)</text>
+
+  <!-- Abort -->
+  <rect x="20" y="262" width="220" height="48" rx="6" fill="#fde8e8" stroke="#b03a3a"/>
+  <text x="130" y="282" text-anchor="middle">Abort: HomingOn = 0,</text>
+  <text x="130" y="300" text-anchor="middle">HomingStat = negative code</text>
+
+  <!-- publish -->
+  <rect x="280" y="360" width="200" height="40" rx="6" fill="#f0f0f0" stroke="#777"/>
+  <text x="380" y="385" text-anchor="middle">Publish HomingStat / HomingStep</text>
+
+  <!-- arrows -->
+  <defs>
+    <marker id="a" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#444"/>
+    </marker>
+  </defs>
+  <g stroke="#444" fill="none" marker-end="url(#a)">
+    <line x1="380" y1="78" x2="380" y2="90"/>
+    <line x1="470" y1="124" x2="518" y2="124"/>
+    <line x1="290" y1="124" x2="200" y2="124"/>
+    <line x1="630" y1="148" x2="630" y2="184" /><line x1="630" y1="184" x2="472" y2="200"/>
+    <line x1="380" y1="156" x2="380" y2="178"/>
+    <line x1="380" y1="228" x2="380" y2="242"/>
+    <line x1="480" y1="286" x2="518" y2="286"/>
+    <line x1="280" y1="286" x2="242" y2="286"/>
+    <line x1="630" y1="310" x2="630" y2="382" /><line x1="630" y1="382" x2="482" y2="382"/>
+  </g>
+  <!-- labels -->
+  <text x="200" y="118" text-anchor="end" fill="#555">no</text>
+  <text x="494" y="120" fill="#555">yes</text>
+  <text x="494" y="282" fill="#555">met</text>
+  <text x="260" y="282" text-anchor="end" fill="#555">error</text>
+  <text x="392" y="174" fill="#555">not met &#8594; wait next cycle</text>
+</svg>
