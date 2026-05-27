@@ -37,7 +37,7 @@ Read-only initial A/B position offset captured when gantry mode is switched on.
 
 ## Overview
 
-`GantryOffset` is a read-only parameter. `AGantryOffset` is calculated once when `AGantryOn` is switched by the user from `0` to `1`. It captures the initial offset between the two encoder readings so that this offset is ignored in the [GantryFdbk](GantryFdbk.md) calculation, letting the gantry feedbacks start from a clean reference (see [GantryOn](../01-general-variables/GantryOn.md)).
+`GantryOffset` is a read-only parameter. `AGantryOffset` is calculated once when `AGantryOn` is switched by the user from `0` to `1`. It captures the initial difference between the two ends' position references so that this standing offset is removed from the differential ([GantryFdbk](GantryFdbk.md)) calculation. Without it, the difference between the two motors at the moment gantry mode engages would appear as a large yaw error and the controller would try to force the beam square with a step; folding the captured offset in lets the yaw feedback start from a clean zero (see the common/differential explanation under [GantryOn](../01-general-variables/GantryOn.md)). It is held unchanged for as long as gantry mode stays on and is recomputed on the next `0`→`1` transition. Reported in user units; on central-i v5 it is a 64-bit value.
 
 ## How it works
 

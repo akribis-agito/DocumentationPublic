@@ -26,16 +26,28 @@ overrides: {}
 ---
 # GantryMapSrc
 
-Selects the position source used to index the gantry map correction table.
+Selects the position source that indexes the gantry decoupling map.
 
 ## Overview
 
-`GantryMapSrc` selects the position source used as the index into the gantry map correction table. The chosen source determines which axis position is used to look up the yaw correction offset from the map. It is an axis-related parameter. The looked-up correction is reported by [GantryMapVal](GantryMapVal.md) and applied as [GantryMap](GantryMap.md); the table itself is configured by [GantryMapType](GantryMapType.md).
+`GantryMapSrc` is a pointer that selects which position drives the lookup into the gantry decoupling map ([GantryMap](GantryMap.md)). The value written is the numeric code of the source variable — typically the gantry position along the beam — using the same numbering scheme as other source-pointer keywords; the default `0` selects no source. It is axis-scoped, saved to flash, and can be set with the motor on but not while in motion.
 
-> **Documentation pending:** This parameter could not be confirmed against the firmware parameter table. Availability and attributes (access, scope, flash, range) need verification before use.
+As the gantry moves, the controller reads the live value of the selected source and uses it to interpolate the decoupling ratio from the map; that ratio is reported by [GantryMapVal](GantryMapVal.md) and applied as described in [GantryMapType](GantryMapType.md). The first map entry corresponds to source position [GantryMapInit](GantryMapInit.md), with later entries spaced one map gap apart.
+
+## How it works
+
+`GantryMapSrc` is resolved to its target variable when written, so change it only with the motor off and the system idle. Each control cycle, when the map is enabled ([GantryMapType](GantryMapType.md) = 1), the controller takes the current value of that variable, subtracts [GantryMapInit](GantryMapInit.md), divides by the map gap to get a fractional table index, and linearly interpolates between the two surrounding [GantryMap](GantryMap.md) entries. Positions below the first entry or above the last clamp to the end entries.
+
+## Examples
+
+```text
+AGantryMapSrc=652    ; index the map by a chosen gantry position source (code shown is illustrative)
+AGantryMapSrc        ; read the configured source code
+```
 
 ## See also
 
-- [GantryMap](GantryMap.md) — active map correction value
-- [GantryMapType](GantryMapType.md) — selects the map correction type
-- [GantryMapVal](GantryMapVal.md) — value read from the map at the indexed position
+- [GantryMap](GantryMap.md) — table indexed by this source
+- [GantryMapType](GantryMapType.md) — enables use of the map
+- [GantryMapVal](GantryMapVal.md) — live interpolated ratio at the indexed position
+- [GantryMapInit](GantryMapInit.md) — source position corresponding to the first table entry

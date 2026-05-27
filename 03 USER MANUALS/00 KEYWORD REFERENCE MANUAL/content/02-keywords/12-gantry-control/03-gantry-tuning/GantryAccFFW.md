@@ -39,7 +39,19 @@ Acceleration feedforward gain for the gantry yaw correction controller.
 
 ## Overview
 
-`GantryAccFFW` sets the acceleration feedforward gain for the gantry yaw correction controller. It scales the acceleration reference to produce a feedforward current that reduces yaw lag during dynamic moves. It is an axis-related parameter saved to flash and can be changed at any time. It complements the feedback gains [GantryPosGain](GantryPosGain.md) and [GantryVelGain](GantryVelGain.md) and the velocity feedforward [GantryVelFFW](GantryVelFFW.md). The allowed range is 0 to 500000 (default 0).
+`GantryAccFFW` is the acceleration feedforward gain of the gantry yaw correction loop. When gantry mode is active (see [GantryOn](../01-general-variables/GantryOn.md)) it takes the role that the ordinary [AccFFW](../../11-control-tuning/05-feedforwards/00-overview.md) plays in the per-axis loop, injecting a current term proportional to the commanded acceleration so the feedback loops are not solely responsible for accelerating the load. It is an axis-related parameter saved to flash and can be changed at any time, including while in motion and with the motor on.
+
+## How it works
+
+Acceleration feedforward is applied only in position operation mode. The controller forms the commanded acceleration from the second difference of the shaped/filtered position reference (the discrete second derivative), scales it by `GantryAccFFW`, and adds the result directly to the velocity PI output when forming the differential motor current command:
+
+$$
+CurrRef = VelPIOutput + \frac{(PosRef_{n} - 2\,PosRef_{n-1} + PosRef_{n-2}) \times GantryAccFFW}{256}
+$$
+
+Because this term is a feedforward, it depends only on the reference trajectory, not on the yaw error, so it can supply the current needed during acceleration without waiting for an error to build up in the [GantryPosGain](GantryPosGain.md) / [GantryVelGain](GantryVelGain.md) feedback loops. Note that in gantry mode the yaw current command uses the acceleration feedforward term only; the velocity feedforward [GantryVelFFW](GantryVelFFW.md) applies on controllers/firmware that include it in the yaw loop.
+
+The value is dimensionless (a feedforward scaling). The allowed range is 0 to 500000 with a default of 0, i.e. acceleration feedforward is off unless configured (on controllers where the gantry gains are a 6-element gain-scheduled array the upper range is extended; see the keyword attributes).
 
 ## Examples
 

@@ -30,9 +30,26 @@ Velocity feedforward gain for the gantry yaw correction controller.
 
 ## Overview
 
-`GantryVelFFW` sets the velocity feedforward gain for the gantry yaw correction controller. It scales the velocity reference to produce a feedforward current that reduces yaw error during motion. It is an axis-related parameter. It complements the acceleration feedforward [GantryAccFFW](GantryAccFFW.md) and the feedback gain [GantryVelGain](GantryVelGain.md).
+`GantryVelFFW` is the velocity feedforward gain of the gantry yaw correction loop. It is the yaw-loop counterpart of the ordinary velocity feedforward ([VelFFW](../../11-control-tuning/05-feedforwards/00-overview.md)): it injects a current term proportional to the commanded velocity so the load can be moved without waiting for the yaw velocity error to build up in the feedback loop. It is an axis-related parameter, readable and writable while in motion and with the motor on, and is one of the gantry tuning gains the controller substitutes for the normal control gains when gantry mode is active (see [GantryOn](../01-general-variables/GantryOn.md)).
 
-> **Documentation pending:** This parameter could not be confirmed against the firmware parameter table. Availability and attributes need verification before use.
+## How it works
+
+Velocity feedforward is applied only in position operation mode. The controller scales the commanded velocity (the rate of change of the position reference) by `GantryVelFFW` and adds the result, together with the acceleration feedforward term ([GantryAccFFW](GantryAccFFW.md)), to the velocity PI output when forming the differential motor current command ([CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md)):
+
+$$
+CurrRef = VelPIOutput + (AccFFW\ term) + \frac{VelRef \times GantryVelFFW}{65536}
+$$
+
+Because this term depends only on the reference trajectory and not on the yaw error, it supplies anticipatory current during motion that the [GantryVelGain](GantryVelGain.md) / [GantryVelKi](GantryVelKi.md) feedback loop would otherwise have to develop from accumulated error.
+
+The value is dimensionless. The default is 0 (velocity feedforward off unless configured); refer to the keyword attributes for the range on a given controller. `GantryVelFFW` belongs to the same gantry gain set as the other gantry tuning gains and is switched together with them on controllers that support gantry gain scheduling.
+
+## Examples
+
+```text
+AGantryVelFFW[1]=0  ; set yaw velocity feedforward gain (first gain set)
+AGantryVelFFW[1]    ; read the current value
+```
 
 ## See also
 

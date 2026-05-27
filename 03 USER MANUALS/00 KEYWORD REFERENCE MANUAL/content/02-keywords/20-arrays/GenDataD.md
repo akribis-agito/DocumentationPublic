@@ -28,9 +28,16 @@ Proposed 64-bit double-precision integer variant of GenData (availability unconf
 
 ## Overview
 
-`GenDataD` is described as a general-purpose double-precision integer (64-bit) variant of [GenData](GenData.md), intended to provide the same kind of shared storage — accessible by both the user program and the host — for large integer values.
+`GenDataD` is the 64-bit double-precision floating-point member of the general-data array family. It is a general-purpose, non-axis array that provides the same kind of shared storage as [GenData](GenData.md) — accessible by both the user program and the host, not linked to any controller feature, and saved to flash — but holds real (double-precision floating-point) values rather than 32-bit integers. Use it where the user program or host needs to store fractional values or magnitudes beyond the range or precision of an integer.
 
-> **Documentation pending:** `GenDataD` was not found in the firmware parameter table. Its availability and attributes (array size, scope, range, flash, indexing) are unconfirmed and must be verified before use. As with the other array keywords in this family, any array access is expected to be 1-indexed (the first usable element is `GenDataD[1]`, index 0 is reserved).
+It is readable and writable at any time, including while in motion and with the motor on. Values can be set directly with a normal write or through the controller's indirect-write mechanism. The array is 1-indexed: the first usable element is `GenDataD[1]` (index 0 is reserved and inaccessible), and there are 100 usable elements.
+
+## Examples
+
+```text
+AGenDataD[1]=3.14159265358979   ; store a double-precision value
+AGenDataD[1]                    ; read the first element
+```
 
 ## See also
 

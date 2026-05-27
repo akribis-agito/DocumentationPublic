@@ -28,9 +28,16 @@ Proposed floating-point variant of GenData (availability unconfirmed).
 
 ## Overview
 
-`GenDataF` is described as a general-purpose floating-point variant of [GenData](GenData.md), intended to provide the same kind of shared storage — accessible by both the user program and the host — for real-valued data.
+`GenDataF` is the 32-bit single-precision floating-point member of the general-data array family. It is a general-purpose, non-axis array that provides the same kind of shared storage as [GenData](GenData.md) — accessible by both the user program and the host, not linked to any controller feature, and saved to flash — but holds real (single-precision floating-point) values rather than 32-bit integers. Use it for fractional values where single precision is sufficient; for greater precision use the double-precision [GenDataD](GenDataD.md).
 
-> **Documentation pending:** `GenDataF` was not found in the firmware parameter table. Its availability and attributes (array size, scope, range, flash, indexing) are unconfirmed and must be verified before use. As with the other array keywords in this family, any array access is expected to be 1-indexed (the first usable element is `GenDataF[1]`, index 0 is reserved).
+It is readable and writable at any time, including while in motion and with the motor on. Values can be set directly with a normal write or through the controller's indirect-write mechanism. The array is 1-indexed: the first usable element is `GenDataF[1]` (index 0 is reserved and inaccessible), and there are 100 usable elements.
+
+## Examples
+
+```text
+AGenDataF[1]=1.5    ; store a single-precision value
+AGenDataF[1]        ; read the first element
+```
 
 ## See also
 

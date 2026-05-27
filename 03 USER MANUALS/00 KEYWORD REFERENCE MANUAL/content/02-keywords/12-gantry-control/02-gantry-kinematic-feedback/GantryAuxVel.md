@@ -30,11 +30,22 @@ Read-only velocity derived from the gantry auxiliary encoder.
 
 ## Overview
 
-`GantryAuxVel` is a read-only parameter that reports the velocity derived from the gantry auxiliary encoder. It provides the differential velocity information used by the gantry yaw controller. It is an axis-related status variable. As described in the [dual-loop gantry control overview](../04-dual-loop-gantry-control/00-overview.md), it is the derivative of [GantryAuxFdbk](GantryAuxFdbk.md), whose source is set by [GantryFdbkSrc](GantryFdbkSrc.md).
+`GantryAuxVel` is a read-only velocity used in **dual-loop gantry control** ([GantryDLoopOn](../01-general-variables/GantryDLoopOn.md) = 1). It is the time-derivative of [GantryAuxFdbk](GantryAuxFdbk.md) — the common-mode (mean) velocity of the two motor encoders — expressed in main-encoder counts per second. It is axis-scoped, not saved to flash, and reported in user units.
 
-> **Documentation pending:** This parameter could not be confirmed against the firmware parameter table. Availability and attributes need verification before use.
+In dual-loop gantry mode the linear position loop follows a load feedback, but the inner velocity loop is still closed on the motor-side velocity for stability; `GantryAuxVel` is that motor-side velocity. The value the velocity loop actually uses is this reading scaled by the dual-loop factor (see the [dual-loop gantry control overview](../04-dual-loop-gantry-control/00-overview.md)). In single-loop gantry mode the velocity loop uses the common-mode velocity directly and this reading is not used.
+
+## How it works
+
+Each control cycle the controller differentiates [GantryAuxFdbk](GantryAuxFdbk.md) (the mean of the two motor-encoder positions, including the captured offset) to produce `GantryAuxVel`. This keeps the inner velocity loop referenced to the motors even when the outer position loop is referenced to the load, which is what makes the dual-loop arrangement stable. The overview table shows the exact unit and scaling for each control structure.
+
+## Examples
+
+```text
+AGantryAuxVel      ; read the motor-encoder (auxiliary) gantry velocity in dual-loop mode
+```
 
 ## See also
 
+- [GantryDLoopOn](../01-general-variables/GantryDLoopOn.md) — dual-loop mode in which this velocity is used
 - [GantryAuxFdbk](GantryAuxFdbk.md) — auxiliary feedback this velocity is derived from
-- [GantryFdbkSrc](GantryFdbkSrc.md) — selects the feedback source
+- [GantryFdbkSrc](GantryFdbkSrc.md) — selects the load feedback source for the linear loop

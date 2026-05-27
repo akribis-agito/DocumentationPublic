@@ -30,9 +30,16 @@ Proposed per-axis long-long (64-bit signed integer) variant of UserParam (availa
 
 ## Overview
 
-`UserParamLL` is described as an axis-related long-long (64-bit signed integer) variant of [UserParam](UserParam.md), intended to provide the same kind of per-axis storage — accessible by both the user program and the host — for extended-precision integer values.
+`UserParamLL` is the 64-bit signed integer (long-long) member of the user-parameter array family. It is an axis-related array that provides the same kind of per-axis storage as [UserParam](UserParam.md) — accessible by both the user program and the host, and saved to flash — but holds 64-bit integers, for whole-number values that do not fit in the 32-bit range of [UserParam](UserParam.md).
 
-> **Documentation pending:** `UserParamLL` was not found in the firmware parameter table. Its availability and attributes (array size, scope, range, flash, indexing) are unconfirmed and must be verified before use. As with the other array keywords in this family, any array access is expected to be 1-indexed (the first usable element is `UserParamLL[1]`, index 0 is reserved). Because the user-parameter arrays are feature-related, some entries may be reserved internally — see [UserParam](UserParam.md).
+Like the rest of the user-parameter family, these arrays are feature-related: some entries may be used internally by controller features (the controller guarantees an entry is not shared by more than one feature at a time), so for free scratch storage in the user program, custom functions or debugging, prefer the general-data arrays such as [GenDataLL](GenDataLL.md). It is readable and writable at any time, including while in motion and with the motor on. The array is 1-indexed: the first usable element is `UserParamLL[1]` (index 0 is reserved and inaccessible); the number of usable elements is model-dependent (typically 20, fewer on smaller models). The value range spans the controller's 64-bit position word (-2251799813685248 to 2251799813685247).
+
+## Examples
+
+```text
+AUserParamLL[1]=5000000000   ; store a large 64-bit integer
+AUserParamLL[1]              ; read the first element
+```
 
 ## See also
 

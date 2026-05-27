@@ -28,24 +28,41 @@ overrides: {}
 ---
 # EventAlwaysOn
 
-Forces the event output permanently active, ignoring position and table conditions.
+Runs by-gap event generation continuously, without stopping at EventEndPos.
 
 ## Overview
 
-`EventAlwaysOn` overrides normal position-based event generation and holds the event output active regardless of the configured positions, ranges, or table. Use it to manually assert the event output (for example, to test wiring or hold a downstream device on) without changing the rest of the event configuration. Normal, position-triggered output is controlled instead by [EventOn](EventOn.md) together with [EventSelect](EventSelect.md) and [EventType](EventType.md). The current output level can be read back through [EventLoopback](EventLoopback.md).
+`EventAlwaysOn` selects continuous ("endless") operation for by-gap event generation ([EventType](EventType.md) = 1). It does **not** force the output level high; it changes when the engine *stops*. With normal (windowed) operation, by-gap pulses stop once the position passes [EventEndPos](EventEndPos.md). With `EventAlwaysOn = 1`, the generator keeps producing a pulse every [EventGap](EventGap.md) without ever reaching an end position, so it runs for as long as [EventOn](EventOn.md) remains set.
 
-It is an axis-related parameter saved to flash and can be changed at any time.
+This applies only to by-gap mode. The single-event, table, hardware-table, and trigger-now schemes are unaffected by `EventAlwaysOn`.
+
+## How it works
+
+| Value | By-gap behavior |
+|-------|-----------------|
+| 0 | Windowed: pulses run from [EventBegPos](EventBegPos.md) and stop once [EventEndPos](EventEndPos.md) is passed; [EventOn](EventOn.md) returns to `0`. |
+| 1 | Continuous: pulses repeat every [EventGap](EventGap.md) with no end position; generation continues until [EventOn](EventOn.md) is cleared. |
+
+When `EventAlwaysOn = 1`, the controller arms the by-gap engine in continuous mode at the [EventOn](EventOn.md) `0 → 1` edge, so the end-position check that would normally halt generation is bypassed. Change `EventAlwaysOn` before arming for it to take effect on the next run. The actual output state can be read back through [EventLoopback](EventLoopback.md).
+
+`EventAlwaysOn` is an axis-related parameter saved to flash and can be changed at any time.
 
 ## Examples
 
 ```text
-AEventAlwaysOn=1     ; force the event output permanently active
-AEventAlwaysOn=0     ; return to normal position-based generation
+AEventType=1         ; by-gap mode
+AEventBegPos=1000
+AEventGap=500
+AEventAlwaysOn=1     ; run continuously, ignoring EventEndPos
+AEventOn=1           ; arm (set while below EventBegPos)
+AEventAlwaysOn=0     ; return to windowed by-gap operation
 AEventAlwaysOn      ; query the current setting
 ```
 
 ## See also
 
-- [EventOn](EventOn.md) — enables normal position-triggered event generation
-- [EventSelect](EventSelect.md) — selects the event-generator operating mode
+- [EventType](EventType.md) — by-gap mode (value 1) is the one affected
+- [EventGap](EventGap.md) — spacing between successive continuous pulses
+- [EventEndPos](EventEndPos.md) — window end that is bypassed when EventAlwaysOn = 1
+- [EventOn](EventOn.md) — arms generation; clear it to stop continuous output
 - [EventLoopback](EventLoopback.md) — reads back the actual output state

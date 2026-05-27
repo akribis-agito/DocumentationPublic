@@ -36,9 +36,25 @@ Integral gain for the gantry yaw velocity loop.
 
 ## Overview
 
-`GantryVelKi` sets the integral gain of the gantry yaw velocity loop. The integral term accumulates differential velocity error over time to remove steady-state error left by the proportional gain [GantryVelGain](GantryVelGain.md). It is an axis-related, read/write parameter saved to flash and can be changed at any time. The allowed range is 0 to 100000 (default 100).
+`GantryVelKi` is the integral gain of the gantry yaw velocity loop. When gantry mode is active (see [GantryOn](../01-general-variables/GantryOn.md)) it takes the role that the ordinary [VelKi](../../11-control-tuning/04-velocity-control/00-overview.md) plays in the per-axis velocity loop. While the proportional gain [GantryVelGain](GantryVelGain.md) responds to the present yaw velocity error, `GantryVelKi` acts on the accumulated yaw velocity error so that any steady-state offset left by the proportional term is driven out. It is an axis-related, read/write parameter saved to flash and can be changed at any time, including while in motion and with the motor on.
 
-> **Note:** The imported source text for this entry was garbled (it read "Gantry Mode Position Loop Integral Gain", apparently a copy-paste from the position-loop entry). The description above is grounded in the keyword's attributes; the detailed loop description should be confirmed against current firmware.
+## How it works
+
+The yaw velocity error is the difference between the velocity command from the yaw position loop and the gantry differential velocity ([GantryVel](GantryVel.md)):
+
+$$
+VelErr = VelRef - GantryVel
+$$
+
+The controller multiplies the proportional term ($VelErr \times$ [GantryVelGain](GantryVelGain.md)) by `GantryVelKi` and a fixed internal integral-scaling factor, then accumulates it into the velocity integrator each control cycle (the accumulation is held when an anti-windup clamp is active, so the integral does not keep building while the current command is saturated):
+
+$$
+Integral \mathrel{+}= (VelErr \times GantryVelGain) \times GantryVelKi \times k_i
+$$
+
+The proportional term and this integral are summed and scaled to form the velocity PI output, which (after the velocity filters and feedforward) becomes the differential motor current command ([CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md)) on the two gantry motors.
+
+The value is dimensionless. The allowed range is 0 to 100000 with a default of 100 (on controllers where the gantry gains are a 6-element gain-scheduled array the type and range follow the keyword attributes). A value of 0 disables the integral action of the yaw velocity loop.
 
 ## Examples
 

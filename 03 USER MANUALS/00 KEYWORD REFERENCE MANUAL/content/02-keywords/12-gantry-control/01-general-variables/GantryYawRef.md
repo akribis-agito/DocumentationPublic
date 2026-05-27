@@ -31,7 +31,13 @@ Yaw correction reference commanding a differential offset between the two gantry
 
 ## Overview
 
-`GantryYawRef` sets the yaw correction reference applied to the gantry to compensate for angular misalignment between the two drive motors. A non-zero value commands a differential position correction (in user units) that drives the gantry yaw controller to reduce the yaw error. It is an axis-related parameter, not saved to flash, and can be changed at any time while gantry mode is active (see [GantryOn](GantryOn.md)). The correction is applied through the gantry tuning loop, whose response is set by gains such as [GantryPosGain](../03-gantry-tuning/GantryPosGain.md) and [GantryVelGain](../03-gantry-tuning/GantryVelGain.md). The allowed range is -20000 to 20000.
+`GantryYawRef` is the position reference for the gantry's **differential (yaw) loop** — the virtual axis that controls the difference between the two beam ends (see the common/differential explanation under [GantryOn](GantryOn.md)). Setting it to `0` commands the beam to stay square; a non-zero value (in user units) commands a deliberate skew between the two ends, used to compensate for a mechanical misalignment so the load runs true. It is axis-scoped, not saved to flash, and can be changed at any time, including in motion. The allowed range is -20000 to 20000.
+
+The yaw loop compares this reference against the differential feedback (the yaw-axis value of [GantryFdbk](../02-gantry-kinematic-feedback/GantryFdbk.md)) and drives a differential current into the two motors — adding to one and subtracting from the other — to close the error. Its response is set by the yaw-axis gains [GantryPosGain](../03-gantry-tuning/GantryPosGain.md), [GantryVelGain](../03-gantry-tuning/GantryVelGain.md) and the associated feedforward/integral terms; the resulting differential current is reported by [GantryCurrRef](GantryCurrRef.md). The reference only takes effect while gantry mode is active ([GantryOn](GantryOn.md) = 1).
+
+## How it works
+
+Each control cycle the yaw loop forms its error from `GantryYawRef` and the differential feedback, runs the yaw position and velocity loops, and produces a yaw current command. That command is then combined with the common-mode (linear) current command when the controller recombines the two virtual-axis outputs into the two physical motor currents: one motor receives linear + yaw, the other linear − yaw. Because the loops are decoupled, commanding a yaw offset shifts the squareness of the beam without translating the stage.
 
 ## Examples
 
@@ -43,6 +49,8 @@ AGantryYawRef      ; read the current yaw reference
 
 ## See also
 
-- [GantryOn](GantryOn.md) — must be enabled for the yaw correction to be applied
+- [GantryOn](GantryOn.md) — must be enabled for the yaw correction to be applied; explains common vs differential mode
+- [GantryFdbk](../02-gantry-kinematic-feedback/GantryFdbk.md) — differential (yaw) feedback this reference is compared against
+- [GantryCurrRef](GantryCurrRef.md) — differential current the yaw loop produces
 - [GantryPosGain](../03-gantry-tuning/GantryPosGain.md) — proportional gain of the yaw position loop
 - [GantryVelGain](../03-gantry-tuning/GantryVelGain.md) — proportional gain of the yaw velocity loop

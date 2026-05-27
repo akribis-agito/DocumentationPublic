@@ -34,6 +34,12 @@ Position spacing between successive events in by-gap mode.
 
 `EventGap` defines the position gap, in user units, between successive event generations in the by-gap event mode (see [EventType](EventType.md)). Events begin at [EventBegPos](EventBegPos.md) and repeat every `EventGap` until [EventEndPos](EventEndPos.md) is passed. If `EventGap` is small and the velocity is high, a large [EventPulseWid](EventPulseWid.md) may cause successive events to overlap.
 
+## How it works
+
+After each by-gap event fires, the controller adds `EventGap` to the most recent compare position to obtain the next one, then loads it as [EventNextPos](EventNextPos.md). The window direction is set by [EventBegPos](EventBegPos.md) and [EventEndPos](EventEndPos.md) (see [EventEndPos](EventEndPos.md)); use a positive `EventGap` for a window running in the positive direction. The grid of event positions is therefore `EventBegPos`, `EventBegPos + EventGap`, `EventBegPos + 2·EventGap`, …, continuing while it stays within `EventEndPos` (or indefinitely when [EventAlwaysOn](EventAlwaysOn.md) = 1).
+
+The maximum sustainable event rate is bounded by `EventGap` divided by the axis velocity: as that interval approaches the time needed to emit one pulse of width [EventPulseWid](EventPulseWid.md), pulses begin to merge.
+
 ## Examples
 
 ```text
@@ -46,4 +52,6 @@ AEventGap           ; query the configured gap
 - [EventType](EventType.md) — selects the by-gap mode
 - [EventBegPos](EventBegPos.md) — position of the first event
 - [EventEndPos](EventEndPos.md) — last position for which events are generated
+- [EventNextPos](EventNextPos.md) — next compare position (previous plus EventGap)
+- [EventAlwaysOn](EventAlwaysOn.md) — continuous by-gap generation
 - [EventPulseWid](EventPulseWid.md) — pulse width; large values can overlap at small gaps

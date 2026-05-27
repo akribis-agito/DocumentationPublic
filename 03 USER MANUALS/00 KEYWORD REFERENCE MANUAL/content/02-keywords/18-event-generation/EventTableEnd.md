@@ -34,6 +34,10 @@ Ending index of the active region within the event table.
 
 `EventTableEnd` sets the ending index of the active region within [EventTable](EventTable.md), defining the last entry used for event generation. It pairs with [EventTableBeg](EventTableBeg.md), which marks the first active entry. The index is 1-based (range 1–100). It is an axis-related parameter saved to flash and can be changed at any time.
 
+## How it works
+
+In table-driven mode ([EventType](EventType.md) = 2) the controller advances through [EventTable](EventTable.md) one index per generated pulse, starting at [EventTableBeg](EventTableBeg.md). After producing the pulse for the `EventTableEnd` entry, the next advance carries the index past `EventTableEnd` and event generation stops; the controller clears [EventOn](EventOn.md) to 0. The number of pulses a full pass produces is therefore `EventTableEnd − EventTableBeg + 1`, which you can confirm with [EventCntr](EventCntr.md).
+
 ## Examples
 
 ```text

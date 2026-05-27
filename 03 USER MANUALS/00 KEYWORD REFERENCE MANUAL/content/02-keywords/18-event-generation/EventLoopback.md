@@ -34,7 +34,16 @@ Read-only state of the event output as seen by the controller's input circuitry 
 
 ## Overview
 
-`EventLoopback` is a read-only status variable that reflects the current state of the event output signal as seen by the controller's input circuitry, providing a hardware loopback confirmation. Use it to verify that the event output is actually toggling as commanded by [EventOn](EventOn.md) or forced by [EventAlwaysOn](EventAlwaysOn.md). It is an axis-related status variable and is not saved to flash.
+`EventLoopback` is a read-only status variable that reflects the current state of the event output as seen by the controller's input circuitry, providing a hardware loopback confirmation. Use it to verify that the output is actually active when expected. It is an axis-related status variable and is not saved to flash.
+
+## How it works
+
+| Value | Meaning |
+|-------|---------|
+| 0 | Event output is idle (no pulse currently active). |
+| 1 | Event output is active (a pulse is in progress). |
+
+The controller reads the looped-back output state each control cycle, so `EventLoopback` follows the actual hardware line rather than the commanded value. Because event pulses can be very short relative to the control cycle, a single brief pulse may not be observed as a `1` on every read; use [EventCntr](EventCntr.md) to confirm how many pulses were produced. `EventLoopback` is most useful for confirming a continuously asserted or long-duration output.
 
 ## Examples
 
@@ -44,6 +53,7 @@ AEventLoopback      ; read the looped-back output state (0 or 1)
 
 ## See also
 
-- [EventAlwaysOn](EventAlwaysOn.md) — forces the output active
 - [EventOn](EventOn.md) — enables position-triggered output
-- [EventSelect](EventSelect.md) — selects the event-generator mode
+- [EventCntr](EventCntr.md) — counts pulses; use it to verify short events
+- [EventAlwaysOn](EventAlwaysOn.md) — continuous by-gap generation
+- [EventSelect](EventSelect.md) — selects which output line a pulse drives

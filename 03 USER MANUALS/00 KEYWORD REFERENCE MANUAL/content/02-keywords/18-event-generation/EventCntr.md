@@ -32,7 +32,13 @@ Counts events generated since the last EventOn; resettable by the user.
 
 ## Overview
 
-`EventCntr` counts the events that have occurred since the last time [EventOn](EventOn.md) was set. Toggling `EventOn` resets the counter; the user may also reset it directly. Use it to confirm how many event pulses were produced during a move or to verify expected event coverage against the configured table or range.
+`EventCntr` counts the events that have occurred since the last time [EventOn](EventOn.md) was armed. Use it to confirm how many event pulses were produced during a move or to verify expected event coverage against the configured table or range.
+
+## How it works
+
+The controller increments `EventCntr` by one each time the event output fires — that is, on every position crossing that produces a pulse (including the final event of a single-event or table sequence). The counter is reset to `0` on the [EventOn](EventOn.md) `0 → 1` arming edge, so each armed run starts the count from zero. The user may also reset it at any time by writing `0`.
+
+Because it is incremented per fired pulse, `EventCntr` is the reliable way to confirm short events that may be too brief to observe through [EventLoopback](EventLoopback.md).
 
 ## Examples
 

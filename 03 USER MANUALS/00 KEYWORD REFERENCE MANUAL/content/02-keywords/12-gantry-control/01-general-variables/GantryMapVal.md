@@ -24,16 +24,27 @@ overrides: {}
 ---
 # GantryMapVal
 
-Correction value read from the gantry map table at the current indexed position.
+Live decoupling ratio interpolated from the gantry map at the current position.
 
 ## Overview
 
-`GantryMapVal` holds the current correction value read from the gantry map table at the position indexed by [GantryMapSrc](GantryMapSrc.md). It reflects the yaw offset correction being applied at the current beam position. It is an axis-related parameter. The correction mode is set by [GantryMapType](GantryMapType.md), and the value that is actually applied to the yaw axis is reported by [GantryMap](GantryMap.md).
+`GantryMapVal` is the read-only decoupling ratio the controller is applying right now, interpolated from the [GantryMap](GantryMap.md) table at the position taken from [GantryMapSrc](GantryMapSrc.md). It is a ratio in the range **0.0 to 1.0** (it reads **0.5** — the symmetric split — until the map is built). It is reported on the master axis and is not saved to flash. It is meaningful only when the position-dependent map is enabled ([GantryMapType](GantryMapType.md) = 1). Available on central-i (v5).
 
-> **Documentation pending:** This parameter could not be confirmed against the firmware parameter table. Availability and read-only/read-write status need verification before use.
+`GantryMapVal` is the diagnostic that lets you confirm the map is being indexed and interpolated as intended: as the gantry moves, this value should sweep smoothly through the ratios you stored in [GantryMap](GantryMap.md).
+
+## How it works
+
+Each control cycle, when the map is active, the controller reads the source position from [GantryMapSrc](GantryMapSrc.md), finds the surrounding entries in [GantryMap](GantryMap.md) (spaced from [GantryMapInit](GantryMapInit.md) by the map gap) and linearly interpolates between them; the result is `GantryMapVal`. The controller then uses this ratio to weight both the gantry feedback combination and the split of motor currents (see [GantryMapType](GantryMapType.md)). Outside the mapped range it clamps to the first or last table entry.
+
+## Examples
+
+```text
+AGantryMapVal        ; read the live decoupling ratio at the current position
+```
 
 ## See also
 
-- [GantryMap](GantryMap.md) — active map correction value
-- [GantryMapSrc](GantryMapSrc.md) — position source used to index the map
-- [GantryMapType](GantryMapType.md) — selects the map correction type
+- [GantryMap](GantryMap.md) — table this value is interpolated from
+- [GantryMapSrc](GantryMapSrc.md) — position source used to index the table
+- [GantryMapType](GantryMapType.md) — enables use of the map
+- [GantryMapInit](GantryMapInit.md) — position corresponding to the first table entry

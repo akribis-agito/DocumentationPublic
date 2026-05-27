@@ -28,17 +28,27 @@ overrides: {}
 ---
 # EventPulseRes
 
-Sets the position resolution of the event pulse generator (minimum spacing between events).
+Selects the time unit used to interpret the event pulse width: microseconds or nanoseconds.
 
 ## Overview
 
-`EventPulseRes` sets the position resolution of the event output pulse generator, defining the minimum spacing between events in encoder counts. It works together with [EventPulseWid](EventPulseWid.md), which sets how long each pulse stays active. It is an axis-related parameter saved to flash and can be changed at any time.
+`EventPulseRes` selects the time unit in which the event output pulse width is expressed. The values in [EventPulseWid](EventPulseWid.md) and the per-entry [EventTableWid](EventTableWid.md) are interpreted as microseconds or as nanoseconds according to this setting, letting you specify either ordinary millisecond-class pulses or very short nanosecond-class pulses. It is an axis-related parameter saved to flash and can be changed at any time.
+
+## How it works
+
+| Value | Width unit for EventPulseWid / EventTableWid |
+|-------|----------------------------------------------|
+| 0 (default) | Microseconds. |
+| 1 | Nanoseconds. |
+
+The controller converts the requested width into the pulse generator's internal timebase when events are armed. To preserve precision across the full range, it automatically selects a coarse or fine internal time step depending on the requested duration, so both very short and longer pulses are timed accurately. Changing `EventPulseRes` rescales how a given numeric width is interpreted, so review [EventPulseWid](EventPulseWid.md) and any [EventTableWid](EventTableWid.md) entries after changing it.
 
 ## Examples
 
 ```text
-AEventPulseRes=1     ; set the pulse-generator resolution
-AEventPulseRes      ; query the current setting
+AEventPulseRes=0     ; widths are in microseconds (default)
+AEventPulseRes=1     ; widths are in nanoseconds
+AEventPulseRes       ; query the current setting
 ```
 
 ## See also

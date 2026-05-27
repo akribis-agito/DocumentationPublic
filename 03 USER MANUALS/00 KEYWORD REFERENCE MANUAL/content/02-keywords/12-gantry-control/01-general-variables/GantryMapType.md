@@ -26,16 +26,34 @@ overrides: {}
 ---
 # GantryMapType
 
-Selects the type of gantry map correction applied to the yaw axis.
+Enables the position-dependent gantry decoupling map.
 
 ## Overview
 
-`GantryMapType` selects the type of gantry map correction applied to the yaw axis. Different values activate different correction modes (for example, using a lookup table versus a polynomial). It is an axis-related parameter. The position used to index the map is chosen by [GantryMapSrc](GantryMapSrc.md), and the resulting correction is reported by [GantryMapVal](GantryMapVal.md) and applied as [GantryMap](GantryMap.md).
+`GantryMapType` selects how the controller splits the gantry between its two motors. With the default value `0` the gantry uses a fixed, symmetric split (each motor sits at the mid-point of the linear and yaw commands). With value `1` the controller instead uses a **position-dependent decoupling map**: a table of ratios, looked up by the position from [GantryMapSrc](GantryMapSrc.md), that shifts the effective mid-point of the gantry along the beam. This compensates for an asymmetric mechanism — for example a beam whose stiffness or geometry is not symmetric about its centre — so the linear and yaw axes stay decoupled across the full travel.
 
-> **Documentation pending:** This parameter could not be confirmed against the firmware parameter table. Availability, attributes, and the meaning of each value need verification before use.
+| `GantryMapType` | Mode | Effect |
+|:---------------:|------|--------|
+| 0 | Off (symmetric) | Fixed 50/50 split: linear feedback is the mean of the two motors; yaw current is shared equally. |
+| 1 | Mapped (central-i v5) | Decoupling ratio from the map table is applied to both the feedback combination and the motor current split. |
+
+It is axis-scoped, saved to flash, and can be changed with the motor on but not while in motion. The position used to index the map is chosen by [GantryMapSrc](GantryMapSrc.md), the active interpolated ratio is reported by [GantryMapVal](GantryMapVal.md), and the table of ratios is held in [GantryMap](GantryMap.md). Value `1` is available only on central-i (v5); the standalone product supports only `0`.
+
+## How it works
+
+When `GantryMapType` = 0 the gantry common-mode position is simply the mean of the two motor positions, and the yaw-correction current is added to one motor and subtracted from the other in equal measure. When `GantryMapType` = 1 the controller looks up a ratio *r* (between 0 and 1) from the [GantryMap](GantryMap.md) table at the current source position (reported live as [GantryMapVal](GantryMapVal.md)) and uses it both to weight how the two motor positions combine into the linear feedback and to weight how the linear and yaw current commands are distributed to the two motors. A ratio of 0.5 reproduces the symmetric behaviour; values away from 0.5 move the controlled mid-point toward one side of the beam. See [GantryMap](GantryMap.md) for the table geometry and [GantryMapSrc](GantryMapSrc.md) for the lookup index.
+
+## Examples
+
+```text
+AGantryMapType=1     ; enable the position-dependent decoupling map (central-i v5)
+AGantryMapType=0     ; use the fixed symmetric split
+AGantryMapType       ; read the active map mode
+```
 
 ## See also
 
-- [GantryMap](GantryMap.md) — active map correction value
+- [GantryMap](GantryMap.md) — table of decoupling ratios
 - [GantryMapSrc](GantryMapSrc.md) — position source used to index the map
-- [GantryMapVal](GantryMapVal.md) — value read from the map at the current position
+- [GantryMapVal](GantryMapVal.md) — live interpolated ratio read from the map
+- [GantryMapInit](GantryMapInit.md) — position at the first map entry

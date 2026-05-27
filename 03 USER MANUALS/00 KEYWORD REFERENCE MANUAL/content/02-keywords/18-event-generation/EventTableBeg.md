@@ -34,6 +34,12 @@ Starting index of the active region within the event table.
 
 `EventTableBeg` sets the starting index of the active region within [EventTable](EventTable.md), allowing a subset of the table entries to be used for event generation. It pairs with [EventTableEnd](EventTableEnd.md), which marks the last active entry. The index is 1-based (range 1–100). It is an axis-related parameter saved to flash and can be changed at any time.
 
+## How it works
+
+When table-driven events are armed with [EventOn](EventOn.md) = 1, the controller loads the [EventTable](EventTable.md) entry at the `EventTableBeg` index as the first compare position, and copies that entry's [EventTableSel](EventTableSel.md) selection and [EventTableWid](EventTableWid.md) pulse width into the active output settings. From there it advances one index per generated pulse and stops once it passes [EventTableEnd](EventTableEnd.md).
+
+`EventTableBeg` is read when events are armed, so change it before setting `EventOn` = 1. Setting `EventTableBeg` higher than `EventTableEnd` leaves no active entries and no events are generated.
+
 ## Examples
 
 ```text

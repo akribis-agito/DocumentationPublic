@@ -30,12 +30,24 @@ Read-only auxiliary-encoder feedback used to measure gantry yaw.
 
 ## Overview
 
-`GantryAuxFdbk` is a read-only parameter that reports the feedback position from the auxiliary encoder of the gantry axis. It is used by the gantry dual-loop controller to measure the yaw (misalignment) angle between the two beam ends. It is an axis-related status variable. The feedback source it derives from is selected by [GantryFdbkSrc](GantryFdbkSrc.md), and in dual-loop mode it underpins the velocity readings described in the [dual-loop gantry control overview](../04-dual-loop-gantry-control/00-overview.md).
+`GantryAuxFdbk` is a read-only feedback used in **dual-loop gantry control** ([GantryDLoopOn](../01-general-variables/GantryDLoopOn.md) = 1). In that mode the common (linear) position loop is closed on the load feedback selected by [GantryFdbkSrc](GantryFdbkSrc.md), and the two motor encoders are demoted to an *auxiliary* role: their common-mode (mean) position is reported here as `GantryAuxFdbk`, in main-encoder counts. It is the motor-side counterpart to the load-side [GantryFdbk](GantryFdbk.md), and the inner velocity loop is closed on its derivative, [GantryAuxVel](GantryAuxVel.md), scaled by the dual-loop factor. It is axis-scoped, not saved to flash, and reported in user units.
 
-> **Documentation pending:** This parameter could not be confirmed against the firmware parameter table. Availability and attributes need verification before use.
+In single-loop gantry mode this value is not used (the motor encoders form the linear feedback directly through [GantryFdbk](GantryFdbk.md)).
+
+## How it works
+
+When dual-loop gantry mode is engaged, the controller computes the same common-mode quantity as the single-loop gantry feedback — the mean of the two motor-encoder positions including the captured [GantryOffset](GantryOffset.md) — but routes it to `GantryAuxFdbk` rather than to the position loop. The position loop then follows the load feedback from [GantryFdbkSrc](GantryFdbkSrc.md). The velocity used by the loop is the time-derivative of this auxiliary feedback, scaled by the dual-loop factor; see the [dual-loop gantry control overview](../04-dual-loop-gantry-control/00-overview.md) for the full sourcing table.
+
+## Examples
+
+```text
+AGantryAuxFdbk     ; read the motor-encoder (auxiliary) gantry feedback in dual-loop mode
+```
 
 ## See also
 
-- [GantryFdbkSrc](GantryFdbkSrc.md) — selects the feedback source
+- [GantryDLoopOn](../01-general-variables/GantryDLoopOn.md) — dual-loop mode in which this feedback is used
+- [GantryFdbkSrc](GantryFdbkSrc.md) — load feedback source for the linear loop
 - [GantryAuxVel](GantryAuxVel.md) — velocity derived from this feedback
-- [GantryYawRef](../01-general-variables/GantryYawRef.md) — yaw correction reference
+- [GantryFdbk](GantryFdbk.md) — load-side common/differential gantry feedbacks
+- [GantryOffset](GantryOffset.md) — A/B offset folded into the common-mode calculation

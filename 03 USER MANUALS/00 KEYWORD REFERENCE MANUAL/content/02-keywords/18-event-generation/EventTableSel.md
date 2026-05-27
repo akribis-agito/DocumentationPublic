@@ -32,7 +32,13 @@ Per-entry selection array controlling each event table entry's characteristics.
 
 ## Overview
 
-`EventTableSel` is an array that assigns a width-value index or mode selection to each [EventTable](EventTable.md) entry, controlling per-entry pulse characteristics. It complements the global mode set by [EventSelect](EventSelect.md) and the per-entry pulse widths in [EventTableWid](EventTableWid.md). The active range of entries is bounded by [EventTableBeg](EventTableBeg.md) and [EventTableEnd](EventTableEnd.md). It is an axis-related array parameter and is not saved to flash.
+`EventTableSel` is an array that assigns a selection value (range 0–7) to each [EventTable](EventTable.md) entry, controlling that entry's output characteristics. It is the per-entry counterpart of the global [EventSelect](EventSelect.md): for table-driven events the entry's selection takes the place of the global mode at the moment its pulse is produced. The active range of entries is bounded by [EventTableBeg](EventTableBeg.md) and [EventTableEnd](EventTableEnd.md). It is an axis-related array parameter and is not saved to flash.
+
+## How it works
+
+As the controller advances through the active table range, it reads the `EventTableSel` value for the entry it is about to fire and applies it to the output pulse generator together with that entry's width from [EventTableWid](EventTableWid.md). This lets different entries drive different output configurations within one pass — for example, routing pulses to different event outputs or selecting which entries produce an active pulse versus an idle (blocked) slot. The 3-bit value (0–7) is applied per pulse; the new selection takes effect only after the previous pulse has finished, so closely spaced entries do not corrupt the pulse in progress.
+
+The first active entry's selection (at [EventTableBeg](EventTableBeg.md)) is loaded when events are armed with [EventOn](EventOn.md) = 1; each subsequent entry's selection is loaded as the table advances.
 
 ## Examples
 
