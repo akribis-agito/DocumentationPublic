@@ -1,5 +1,6 @@
 ---
 keyword: FIFOPosPush
+summary: Command that pushes a new position segment into the FIFO position queue.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # FIFOPosPush
 
-**Definition:**
+Command that pushes a new position segment into the FIFO position queue.
 
-FIFOPosPush is a command that pushes a new position segment into the FIFO position queue. The segment type is specified by its argument and the segment data is taken from the associated FIFO parameters (FIFOPosTrgt, FIFOPosPosOf, FIFOPosVelOf, FIFOPosCurrOf). It is an axis-related command function that can be issued at any time.
+## Overview
 
-**See also:**
+`FIFOPosPush` pushes a new position segment into the FIFO position queue. The segment type is specified by its argument, and the segment data is taken from the associated FIFO position parameters: [FIFOPosTrgt](FIFOPosTrgt.md), [FIFOPosPosOf](FIFOPosPosOf.md), [FIFOPosVelOf](FIFOPosVelOf.md), and [FIFOPosCurrOf](FIFOPosCurrOf.md). It can be issued at any time, including during motion.
 
-[FIFOPosFIFOEn](FIFOPosFIFOEn.md), [FIFOPosType](FIFOPosType.md), [FIFOPosClear](FIFOPosClear.md), [FIFOPosStatus](FIFOPosStatus.md)
+## Examples
+
+```text
+FIFOPosPush=0       ; push a position segment using the current FIFOPos* parameters
+```
+
+## See also
+
+- [FIFOPosFIFOEn](FIFOPosFIFOEn.md) — enable FIFO position tracking
+- [FIFOPosType](FIFOPosType.md) — select the position-tracking mode
+- [FIFOPosClear](FIFOPosClear.md) — clear the queue
+- [FIFOPosStatus](FIFOPosStatus.md) — queue status

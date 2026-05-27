@@ -1,5 +1,6 @@
 ---
 keyword: RefOffsetSamp
+summary: Number of servo samples over which a reference position offset is ramped in.
 availability:
   standalone:
   - v4
@@ -26,10 +27,19 @@ overrides: {}
 ---
 # RefOffsetSamp
 
-**Definition:**
+Number of servo samples over which a reference position offset is ramped in.
 
-RefOffsetSamp sets the number of servo samples over which the reference offset is applied when ramping in a position correction step. It works in conjunction with RefOffsetStep to spread a position offset correction gradually over time. It is an axis-related parameter, not saved to flash, and can be changed at any time.
+## Overview
 
-**See also:**
+`RefOffsetSamp` sets the number of servo samples over which a reference offset is applied when ramping in a position correction. It works together with [RefOffsetStep](RefOffsetStep.md), which sets the per-sample offset magnitude, so the two together control how gradually a position correction is introduced into the reference trajectory. It is an axis-related parameter, not saved to flash, and can be changed at any time, including during motion.
 
-[RefOffsetStep](RefOffsetStep.md)
+## Examples
+
+```text
+RefOffsetSamp=100   ; spread the offset over 100 servo samples
+RefOffsetSamp?      ; query current value
+```
+
+## See also
+
+- [RefOffsetStep](RefOffsetStep.md) — per-sample offset magnitude

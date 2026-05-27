@@ -1,8 +1,23 @@
+---
+summary: Current desired position along the CNC path for the active segment.
+---
 # CNCAPosRef/CNCBPosRef
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics.
-     The CNCB counterpart operates the same way on the second CNC engine. -->
+Current desired position along the CNC path for the active segment.
 
-The CNCAPosRef is the current desired position along the CNC path (starting from zero and
-reaching CNCAAbsTrgt at the end of the segment).
+## Overview
+
+`CNCAPosRef` (and its `CNCBPosRef` counterpart on the second CNC engine) is the current desired position along the CNC path. It starts from zero and reaches [CNCAAbsTrgt/CNCBAbsTrgt](CNCAAbsTrgt-CNCBAbsTrgt.md) at the end of the segment.
+
+Its derivative, the current vector velocity of the profiler, is reported by [CNCAdPosRef/CNCBdPosRef](CNCAdPosRef-CNCBdPosRef.md).
+
+## Examples
+
+```text
+CNCAPosRef?         ; read the current desired position along the path
+```
+
+## See also
+
+- [CNCAAbsTrgt/CNCBAbsTrgt](CNCAAbsTrgt-CNCBAbsTrgt.md) — segment target distance
+- [CNCAdPosRef/CNCBdPosRef](CNCAdPosRef-CNCBdPosRef.md) — derivative (vector velocity)

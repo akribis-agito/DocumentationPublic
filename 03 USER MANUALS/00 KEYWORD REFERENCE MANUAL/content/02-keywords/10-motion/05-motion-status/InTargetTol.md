@@ -1,5 +1,6 @@
 ---
 keyword: InTargetTol
+summary: Position settling window (PosErr) used to declare target reached.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # InTargetTol
 
-**Condition:**
+Position settling window (PosErr) used to declare target reached.
 
-It is only used when OperationMode = 2 or 3.
+## Overview
 
-**Definition:**
+In position or velocity control operation mode (`OperationMode = 2` or `3`), `InTargetTol` is the settling window that the absolute position error [PosErr](../01-kinematics-status/PosErr.md) must stay within for [InTargetTime](InTargetTime.md) before [InTargetStat](InTargetStat.md) signals that the target is reached (`InTargetStat = 4`). For current/force control the velocity-based window [InTargetVelTh](InTargetVelTh.md) is used instead.
 
-In position or velocity control operation mode, InTargetTol is the settling window which the absolute position error (PosErr) must stay within for InTargetTime, before InTargetStat signals that target is reached (InTargetStat=4).
+## Examples
+
+```text
+InTargetTol=10      ; settling window in user units (default)
+InTargetTol?        ; read current value
+```
+
+## See also
+
+- [InTargetStat](InTargetStat.md) — settling state gated by this window
+- [InTargetTime](InTargetTime.md) — minimum dwell time inside the window
+- [InTargetVelTh](InTargetVelTh.md) — velocity settling window (current/force control)

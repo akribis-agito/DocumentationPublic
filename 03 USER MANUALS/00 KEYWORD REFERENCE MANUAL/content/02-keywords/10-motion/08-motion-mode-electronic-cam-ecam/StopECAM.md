@@ -1,5 +1,6 @@
 ---
 keyword: StopECAM
+summary: Exits ECAM motion by shrinking the master range, preserving start/end segments.
 availability:
   standalone:
   - v4
@@ -26,17 +27,32 @@ overrides: {}
 ---
 # StopECAM
 
-**Definition:**
+Exits ECAM motion by shrinking the master range, preserving start/end segments.
 
-StopECAM is used to exit ECAM motion.
+## Overview
 
-However, upon receipt of such command, the axis does not quit the ECAM motion outright. Rather, the master range shrinks, where the beginning and ending pattern segments are appended to the existing cycle pattern. Only if the master value exits this new range that ECAM motion will stop.
+`StopECAM` is the command used to exit ECAM motion gracefully. Unlike the immediate [Stop](../04-motion-command/Stop.md) command, the axis does not quit ECAM outright: the master range shrinks, appending the beginning and ending pattern segments to the existing cycle pattern. ECAM motion ends only once the master value leaves this new, shrunken range. Stopping via `StopECAM` is also reported by [MotionReason](../05-motion-status/MotionReason.md) (reason code 9).
 
-For the example below (ECAMGap \> 0 and ECAMCycles = 3), the axis receives StopECAM command while the master position is in the middle of second cycle. The master range will shrink where $R > P$ and $S < Q$. Now, only when the master becomes lower than or equal to R /higher than or equal to S that the ECAM motion will end. Note that the slave position reference at R does not necessarily equal to that at P, since the cam pattern has shrunk. This is also true for S when compared to Q.
+## How it works
+
+For the example below (`ECAMGap > 0` and `ECAMCycles = 3`), the axis receives `StopECAM` while the master position is in the middle of the second cycle. The master range shrinks so that $R > P$ and $S < Q$. ECAM motion then ends only when the master becomes lower than or equal to $R$, or higher than or equal to $S$. Note that the slave position reference at $R$ does not necessarily equal that at $P$, since the cam pattern has shrunk; the same is true for $S$ compared to $Q$.
 
 ![image51.png](../../../assets/image51.png)
 
-The following picture shows the same stopping logic of StopECAM command for condition when ECAMCycles \< 0.
+The following picture shows the same stopping logic for the condition when `ECAMCycles < 0`.
 
 ![image52.png](../../../assets/image52.png)
-<span class="anchor" id="_ECAMCycCount"></span>If user wants to stop the ECAM motion immediately, [Stop](../../../02-keywords/10-motion/04-motion-command/Stop.md) command can be used, so that slave position reference will be unchanged regardless of the master value.
+
+If the user wants to stop ECAM motion immediately, the [Stop](../04-motion-command/Stop.md) command can be used instead, so that the slave position reference is unchanged regardless of the master value.
+
+## Examples
+
+```text
+StopECAM            ; gracefully exit ECAM motion
+```
+
+## See also
+
+- [Stop](../04-motion-command/Stop.md) — exit ECAM motion immediately
+- [MotionReason](../05-motion-status/MotionReason.md) — reports `StopECAM` as reason code 9
+- [Motion mode – Electronic cam (ECAM)](00-overview.md) — ECAM motion overview

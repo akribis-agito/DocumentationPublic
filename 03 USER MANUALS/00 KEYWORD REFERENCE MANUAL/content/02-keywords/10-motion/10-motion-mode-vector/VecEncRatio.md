@@ -1,5 +1,6 @@
 ---
 keyword: VecEncRatio
+summary: Per-axis encoder-resolution compensation ratio, scaled by 1/256 (256 = ratio of 1).
 availability:
   standalone:
   - v4
@@ -26,15 +27,26 @@ overrides: {}
 ---
 # VecEncRatio
 
-Used to compensate for different encoder resolutions. Each axis is scaled according to its
-resolution.
+Per-axis encoder-resolution compensation ratio, scaled by 1/256 (256 = ratio of 1).
 
-The actual ratio inside the controller is scaled by /256. So VecEncRatio=256 means a ratio of 1. A
-value of 260 means ratio of 260/256.
+## Overview
 
-Details about how to use the EncRatio: TBD (during implementation).
+`VecEncRatio` is used to compensate for different encoder resolutions among the axes participating in a vector move: each axis is scaled according to its resolution so the coordinated path stays accurate. It is an alternative to the numerator/denominator pair [VecEncFactNu](VecEncFactNu.md) / [VecEncFactDn](VecEncFactDn.md). It is saved to flash and cannot be modified while in motion.
 
-Implementation must be done in a way not to cause accumulated position errors and final target
-position must be reached accurately.
+## How it works
 
-Saved to Flash. Can't be modified while in motion. Range 256 (ratio of 1) to 25600 (ratio of 100).
+The actual ratio inside the controller is scaled by 1/256. So `VecEncRatio = 256` means a ratio of 1, and a value of `260` means a ratio of 260/256. The range is `256` (ratio of 1) to `25600` (ratio of 100).
+
+> **Documentation pending:** Detailed usage guidance was marked TBD during implementation. The implementation is intended to avoid accumulated position errors and to reach the final target position accurately; confirm against current firmware before relying on specific behavior.
+
+## Examples
+
+```text
+VecEncRatio=256     ; ratio of 1 (default)
+VecEncRatio=260     ; ratio of 260/256
+```
+
+## See also
+
+- [VecEncFactNu](VecEncFactNu.md) / [VecEncFactDn](VecEncFactDn.md) — numerator/denominator form of the ratio
+- [VecSpeed](VecSpeed.md) — commanded resultant speed

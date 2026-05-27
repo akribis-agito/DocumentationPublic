@@ -1,5 +1,6 @@
 ---
 keyword: RefOffsetStep
+summary: Per-sample position offset magnitude applied during a reference offset correction.
 availability:
   standalone:
   - v4
@@ -24,10 +25,19 @@ overrides: {}
 ---
 # RefOffsetStep
 
-**Definition:**
+Per-sample position offset magnitude applied during a reference offset correction.
 
-RefOffsetStep sets the magnitude of each incremental position offset applied per servo sample during a reference offset correction. Together with RefOffsetSamp it controls the rate at which a position correction is introduced into the reference trajectory. It is an axis-related parameter in user units, not saved to flash, and can be changed at any time.
+## Overview
 
-**See also:**
+`RefOffsetStep` sets the magnitude of each incremental position offset applied per servo sample during a reference offset correction. Together with [RefOffsetSamp](RefOffsetSamp.md), which sets the number of samples, it controls the rate at which a position correction is introduced into the reference trajectory. It is an axis-related parameter in user units, not saved to flash, and can be changed at any time, including during motion.
 
-[RefOffsetSamp](RefOffsetSamp.md)
+## Examples
+
+```text
+RefOffsetStep=10    ; offset applied per servo sample (user units)
+RefOffsetStep?      ; query current value
+```
+
+## See also
+
+- [RefOffsetSamp](RefOffsetSamp.md) — number of samples over which the offset is applied

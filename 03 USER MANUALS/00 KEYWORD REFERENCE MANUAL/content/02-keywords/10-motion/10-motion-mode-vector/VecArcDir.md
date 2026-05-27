@@ -1,5 +1,6 @@
 ---
 keyword: VecArcDir
+summary: Arc sweep direction for vector arc motion (0 = CCW, 1 = CW).
 availability:
   standalone:
   - v4
@@ -26,18 +27,31 @@ overrides: {}
 ---
 # VecArcDir
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Arc sweep direction for vector arc motion (0 = CCW, 1 = CW).
 
-For ARC vector, defines the direction of the ARC. "0" for CCW, "1" for CW.
-The VecArcDir, like all other new keywords for the vector motion, is per axis. However, only the
-VecArcCenter of the axis which was used for the Begin command will be used.
-2 axes are defined for an ARC motion. The ARC is performed at the plain of these two axes, with
-the third axis not moving.
-The two axes are defined with an important order, meaning, for example: B, C is not like C, B.
-The first axis is the X axis. The second is the Y axis. Then CCW motion is around the "Z" axis,
-where X axis is moving toward Y axis.
-**Note:**
+## Overview
 
-need to check that this definition is aligned with the CNC definition of ARC.
-Saved to Flash. Can't be modified while in motion.
+For an arc vector ([VecType](VecType.md) = 1), `VecArcDir` defines the direction of the arc: `0` for counter-clockwise (CCW), `1` for clockwise (CW). Like all vector-motion keywords it is per axis, but only the `VecArcDir` of the axis used for the [Begin](../04-motion-command/Begin.md) command takes effect. It works together with [VecArcCenter](VecArcCenter.md), which fixes the center and radius.
+
+It is saved to flash and cannot be modified while in motion.
+
+## How it works
+
+Two axes are defined for an arc motion. The arc is performed in the plane of these two axes, with the third axis not moving. The two axes are defined in a significant order; for example, `B, C` is not the same as `C, B`:
+
+- The first axis is the **X** axis.
+- The second axis is the **Y** axis.
+- CCW motion is then around the "Z" axis, with the X axis moving toward the Y axis.
+
+## Examples
+
+```text
+VecArcDir=0         ; counter-clockwise arc (default)
+VecArcDir=1         ; clockwise arc
+```
+
+## See also
+
+- [VecType](VecType.md) — selects linear vs. arc vector
+- [VecArcCenter](VecArcCenter.md) — arc center / radius definition
+- [Begin](../04-motion-command/Begin.md) — command whose axis selects the active `VecArcDir`

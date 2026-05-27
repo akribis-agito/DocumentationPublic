@@ -1,5 +1,6 @@
 ---
 keyword: FIFOCycleTime
+summary: Duration, in control samples, of the FIFO motion segment currently being executed.
 availability:
   standalone:
   - v4
@@ -24,8 +25,22 @@ overrides: {}
 ---
 # FIFOCycleTime
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Duration, in control samples, of the FIFO motion segment currently being executed.
 
-Refer to the FIFOType keyword page for a full description of the FIFO motion mode and all
-related keywords.
+## Overview
+
+`FIFOCycleTime` is the time length of each FIFO motion segment, expressed as a number of control-loop samples. It can be modified at any time the controller is ending one segment and starting a new one, allowing the segment duration to vary across the FIFO sequence.
+
+See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all related keywords.
+
+## Examples
+
+```text
+FIFOCycleTime?      ; query the current segment duration in control samples
+```
+
+## See also
+
+- [FIFOType](FIFOType.md) — full FIFO mode description
+- [FIFOPushCycle](FIFOPushCycle.md) — push a cycle-time entry into the FIFO
+- [FIFOStatus](FIFOStatus.md) — FIFO queue status

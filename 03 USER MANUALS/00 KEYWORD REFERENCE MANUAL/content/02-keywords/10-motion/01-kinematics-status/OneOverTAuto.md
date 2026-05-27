@@ -1,5 +1,6 @@
 ---
 keyword: OneOverTAuto
+summary: Reserved keyword for 1/T velocity measurement (not implemented).
 availability:
   standalone:
   - v4
@@ -25,10 +26,17 @@ overrides: {}
 ---
 # OneOverTAuto
 
-**Condition:**
+Reserved keyword for 1/T velocity measurement (not implemented).
 
-OneOverTAuto is only supported by non-Central-i products and when digital incremental encoder (EncType = 1) is used.
+## Overview
 
-**Definition:**
+`OneOverTAuto` is a reserved keyword in the 1/T velocity-measurement group. It is supported only on non-Central-i products and only when a digital incremental encoder (`EncType = 1`) is used. It relates to the other 1/T configuration keywords [OneOverTOn](OneOverTOn.md), [OneOverTFreq](OneOverTFreq.md) and [OneOverTGap](OneOverTGap.md), which together govern the `Vel[4]` measurement.
 
-OneOverTAuto is a reserved keyword.
+> **Documentation pending:** `OneOverTAuto` is currently reserved and not implemented (`implemented: not_implemented`). No functional behaviour is defined.
+
+## See also
+
+- [OneOverTOn](OneOverTOn.md) — enable/disable 1/T velocity measurement
+- [OneOverTFreq](OneOverTFreq.md) — polling-frequency down-sampling factor
+- [OneOverTGap](OneOverTGap.md) — encoder-counter gap that triggers polling save
+- [Vel](Vel.md) — feedback velocity array (`Vel[4]` is the 1/T method)

@@ -1,5 +1,6 @@
 ---
 keyword: OneOverTGap
+summary: Encoder-counter change (as a power of two) that triggers a 1/T polling save.
 availability:
   standalone:
   - v4
@@ -25,22 +26,31 @@ overrides: {}
 ---
 # OneOverTGap
 
-**Condition:**
+Encoder-counter change (as a power of two) that triggers a 1/T polling save.
 
-OneOverTGap is only supported by non-Central-i products and when digital incremental encoder (EncType = 1) is used.
+## Overview
 
-**Definition:**
+`OneOverTGap` defines the required change in the hardware encoder counter that triggers saving of the polling counter for the 1/T velocity measurement (`Vel[4]`). It is supported only on non-Central-i products and only when a digital incremental encoder (`EncType = 1`) is used. Use it together with [OneOverTOn](OneOverTOn.md) (enable) and [OneOverTFreq](OneOverTFreq.md) (polling frequency).
 
-OneOverTGap is used to define the required change/gap in hardware encoder counter that triggers the saving of polling counter.
+## How it works
 
 $$
 User\ defined\ gap = 2^{OneOverTGap}\ 
 $$
 
-The polling and delta counters will reset after saving of polling counter, for the next detection.
+The polling and delta counters reset after the polling counter is saved, ready for the next detection.
 
-**Note:**
+> **Note:** A gap of at least 4 (`OneOverTGap` ≥ 2) gives a more accurate velocity reading because it is not affected by the shift between the A and B encoder signals (which is not always exactly 90 degrees).
 
-The gap of at least 4 ( O n e O v e r T G a p ≥ 2 ) will provide a more accurate velocity reading because it will not be affected by the shift between the A and B encoder signals (which is not always exactly by 90 degrees).
+## Examples
 
-Please refer to the [Vel](../../../02-keywords/10-motion/01-kinematics-status/Vel.md) keyword for more information.
+```text
+OneOverTGap=2       ; default: gap = 2^2 = 4 counts
+OneOverTGap?        ; read current value
+```
+
+## See also
+
+- [Vel](Vel.md) — feedback velocity array (`Vel[4]` is the 1/T method)
+- [OneOverTOn](OneOverTOn.md) — enable/disable 1/T velocity measurement
+- [OneOverTFreq](OneOverTFreq.md) — polling-frequency down-sampling factor

@@ -1,5 +1,6 @@
 ---
 keyword: Pos
+summary: Main position feedback in user units; the position-loop feedback signal.
 availability:
   standalone:
   - v4
@@ -26,12 +27,28 @@ overrides: {}
 ---
 # Pos
 
-**Definition:**
+Main position feedback in user units; the position-loop feedback signal.
 
-Pos reports the encoder feedback, in terms of main user unit (configurable by UsrUnits). Since Pos is used for position loop feedback in non-gantry mode. its definition will change depending on the gantry mode and dual-loop condition.
+## Overview
+
+`Pos` reports the main encoder feedback, expressed in main user units (configurable via `UsrUnits`). Because `Pos` is the position-loop feedback in non-gantry mode, its definition changes with the gantry mode and the dual-loop condition. It is the basis for the position error [PosErr](PosErr.md) and is related to the auxiliary feedback [AuxPos](AuxPos.md).
+
+Although read-only, `Pos` can be preset to any value at any time via the [SetPosition](../03-kinematics-configuration/SetPosition.md) function (rather than writing `Pos` directly). Its value resets to `0` on power up.
+
+## How it works
 
 | Conditions | Default control (non-gantry mode) Dual-loop control (non-gantry mode) Gantry mode (regardless of dual-loop condition) | Pseudo dual-loop control (non-gantry mode) |
 |---|---|---|
 | Definition | Main encoder reading after the modulo operation block. **Unit: Main encoder count** | Auxiliary encoder reading after decoding but scaled up to main encoder unit.<br> $$Pos = AuxPos \bullet \frac{DualLoopFact}{65536}$$ **Unit: Main encoder count** |
 
-Pos can be set to any desired value at any time via [SetPosition](../../../02-keywords/10-motion/03-kinematics-configuration/SetPosition.md) function (instead of setting Pos directly). Its value is reset to 0 upon power up.
+## Examples
+
+```text
+Pos?                ; read the main position feedback
+```
+
+## See also
+
+- [PosErr](PosErr.md) — position error (`PosRef - Pos`)
+- [AuxPos](AuxPos.md) — auxiliary position feedback
+- [SetPosition](../03-kinematics-configuration/SetPosition.md) — preset the position feedback

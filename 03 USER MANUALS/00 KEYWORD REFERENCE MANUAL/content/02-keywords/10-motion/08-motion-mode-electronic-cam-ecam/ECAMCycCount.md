@@ -1,5 +1,6 @@
 ---
 keyword: ECAMCycCount
+summary: Read-only index of the current ECAM cam-pattern repetition cycle.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # ECAMCycCount
 
-**Definition:**
+Read-only index of the current ECAM cam-pattern repetition cycle.
 
-ECAMCycCount tracks the index of the cam pattern repetition cycle. It is an array of size 10, where each element corresponds to a cam pattern.
+## Overview
 
-Its value always starts with 1 upon beginning of ECAM motion, and will increment/decrement according to the value of master variable and the sign of ECAMGap.
+`ECAMCycCount` tracks the index of the cam-pattern repetition cycle during ECAM motion. It is an array of 10 cam patterns, one element per pattern. Its value starts at `1` when ECAM motion begins and increments or decrements according to the master variable and the sign of [ECAMGap](ECAMGap.md). It lets you trace how far ECAM has progressed through the cycles set by [ECAMCycles](ECAMCycles.md).
 
-Please refer to the figures in [Motion mode – Electronic cam (ECAM)](../../../02-keywords/10-motion/08-motion-mode-electronic-cam-ecam/00-overview.md) for more information.
+## Examples
+
+```text
+ECAMCycCount[1]?    ; read the current cycle index for cam pattern 1
+```
+
+Refer to the figures in [Motion mode – Electronic cam (ECAM)](00-overview.md) for more information.
+
+## See also
+
+- [ECAMCycles](ECAMCycles.md) — number of pattern occurrences
+- [ECAMGap](ECAMGap.md) — its sign sets the increment/decrement direction
+- [ECAMTableNum](ECAMTableNum.md) — selects the active cam pattern

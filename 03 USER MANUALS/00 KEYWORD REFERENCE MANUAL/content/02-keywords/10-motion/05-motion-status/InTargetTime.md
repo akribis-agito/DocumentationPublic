@@ -1,5 +1,6 @@
 ---
 keyword: InTargetTime
+summary: Minimum dwell time inside the settling window before target-reached is signalled.
 availability:
   standalone:
   - v4
@@ -26,6 +27,21 @@ overrides: {}
 ---
 # InTargetTime
 
-**Definition:**
+Minimum dwell time inside the settling window before target-reached is signalled.
 
-InTargetTime is the minimum time that the absolute value of PosErr or Vel\[1\] needs to be within InTargetTol or InTargetVelTh window, before InTargetStat signals that target is reached (InTargetStat=4).
+## Overview
+
+`InTargetTime` is the minimum time that the absolute value of the monitored signal — [PosErr](../01-kinematics-status/PosErr.md) or [Vel](../01-kinematics-status/Vel.md) `[1]` — must remain within the settling window ([InTargetTol](InTargetTol.md) or [InTargetVelTh](InTargetVelTh.md)) before [InTargetStat](InTargetStat.md) signals that the target is reached (`InTargetStat = 4`).
+
+## Examples
+
+```text
+InTargetTime=100    ; require the window to be held for the configured duration
+InTargetTime?       ; read current value
+```
+
+## See also
+
+- [InTargetStat](InTargetStat.md) — settling state this time gates the transition to "reached"
+- [InTargetTol](InTargetTol.md) — position settling window
+- [InTargetVelTh](InTargetVelTh.md) — velocity settling window

@@ -1,5 +1,6 @@
 ---
 keyword: VecPosFOn
+summary: Enables (1) the position filter defined by VecPosFDef on the vector reference output.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # VecPosFOn
 
-**Definition:**
+Enables (1) the position filter defined by VecPosFDef on the vector reference output.
 
-VecPosFOn enables the position filter on the vector motion reference output. When set to a non-zero value, the filter defined by VecPosFDef is applied to smooth the vector position reference before it reaches the individual axis servo loops. It is an axis-related parameter saved to flash, and cannot be changed while the axis is in motion.
+## Overview
 
-**See also:**
+`VecPosFOn` enables the position filter on the vector motion reference output. When set to a non-zero value, the filter defined by [VecPosFDef](VecPosFDef.md) is applied to smooth the vector position reference before it reaches the individual axis servo loops; when `0`, the reference passes through unfiltered. It is an axis-related parameter saved to flash, and cannot be changed while the axis is in motion.
 
-[VecPosFDef](VecPosFDef.md), [VecSpeed](VecSpeed.md)
+## Examples
+
+```text
+VecPosFOn=0         ; position filter disabled (default)
+VecPosFOn=1         ; apply the VecPosFDef position filter
+```
+
+## See also
+
+- [VecPosFDef](VecPosFDef.md) — filter coefficients applied when enabled
+- [VecSpeed](VecSpeed.md) — commanded resultant speed

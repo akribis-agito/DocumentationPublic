@@ -1,5 +1,6 @@
 ---
 keyword: FIFOPosFIFOEn
+summary: Enables or disables FIFO position-tracking mode.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # FIFOPosFIFOEn
 
-**Definition:**
+Enables or disables FIFO position-tracking mode.
 
-FIFOPosFIFOEn enables or disables the FIFO position tracking mode. When set to a non-zero value, the controller reads position segments from the FIFO queue and uses them as the axis reference trajectory. It is an axis-related parameter saved to flash, and cannot be changed while the axis is in motion.
+## Overview
 
-**See also:**
+`FIFOPosFIFOEn` enables or disables FIFO position-tracking mode. When set to a non-zero value, the controller reads position segments from the FIFO position queue and uses them as the axis reference trajectory. The interpretation of the segments is set by [FIFOPosType](FIFOPosType.md), and segments are loaded with [FIFOPosPush](FIFOPosPush.md). It is saved to flash and cannot be changed while the axis is in motion.
 
-[FIFOPosType](FIFOPosType.md), [FIFOPosPush](FIFOPosPush.md), [FIFOPosCycle](FIFOPosCycle.md)
+## Examples
+
+```text
+FIFOPosFIFOEn=1     ; enable FIFO position tracking
+FIFOPosFIFOEn=0     ; disable FIFO position tracking
+```
+
+## See also
+
+- [FIFOPosType](FIFOPosType.md) — select the position-tracking mode
+- [FIFOPosPush](FIFOPosPush.md) — push a position segment
+- [FIFOPosCycle](FIFOPosCycle.md) — segment cycle time

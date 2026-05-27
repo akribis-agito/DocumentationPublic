@@ -19,11 +19,10 @@ There are 2 phases of pulse and direction command.
 
 2.  Decoding (to generate position reference from digital inputs of pulse and direction)
 
-This section discusses the decoding of pulse and direction command. For more information on encoding, please refer to <span class="mark">???</span>.
+This section discusses the decoding of pulse and direction commands (generating a position reference from incoming pulse/direction inputs).
 
 In the decoding of the pulse-direction signals, each rising edge of the pulse will cause the counter to increment if direction signal is high, or decrement if direction signal is low. The decoded counter will be used as position reference or target position depending on motion mode.
 
-<span class="mark">**DN:** Please check this statement.</span>
 ![image32.png](../../../assets/image32.png)
 
 As shown in the block diagram below, the change in the counter value is scaled ([PDFact](../../../02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDFact.md) and [PDFactDen](../../../02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDFactDen.md)), sign-corrected ([PDEncDir](../../../02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDEncDir.md)) and accumulated in [PDPos](../../../02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDPos.md) (a scaled counter). This is done on every controller cycle to avoid losing track on pulse and direction signals.
@@ -42,7 +41,7 @@ After setting [MotionMode](../../../02-keywords/10-motion/02-motion-configuratio
 
 Similarly, after setting [MotionMode](../../../02-keywords/10-motion/02-motion-configuration/MotionMode.md) = 4 and commanding start of motion ([Begin](../../../02-keywords/10-motion/04-motion-command/Begin.md)), the master and slave offsets will be reset to PDPos and initial position reference once.
 
-Instead, any change in PDPos will corresponds to the same change in the target position ([AbsTrgt)](../../../02-keywords/10-motion/03-kinematics-configuration/AbsTrgt.md). AbsTrgt will be fed to second-order profile generator, that respects the maximum kinematic limits of Speed, Accel and Decel. The filter to smoothen out the scaled delta is also absent.
+Instead, any change in PDPos corresponds to the same change in the target position ([AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md)). AbsTrgt is fed to the second-order profile generator, which respects the maximum kinematic limits of Speed, Accel and Decel. The filter to smoothen out the scaled delta is also absent.
 
 **Note:**
 

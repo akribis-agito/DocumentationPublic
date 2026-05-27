@@ -1,15 +1,30 @@
+---
+summary: On-the-fly scaling of CNC path speed and acceleration/deceleration.
+---
 # CNCAPercents/CNCBPercents
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics.
-     The CNCB counterpart operates the same way on the second CNC engine. -->
+On-the-fly scaling of CNC path speed and acceleration/deceleration.
 
-Used by the user to scale the CNC speed (and acceleration/deceleration) along the CNC path. By
-affecting the speed and acceleration/deceleration, the CNCAPercents actually affects the
-duration of time that will be needed to perform the CNC motion.
-A value of 100 (%) means that the motion will be according to the values defined in the CNC FIFO
-segments. A value of 50 (%), for example, means that the CNC will be performed at twice the
-time that was needed to perform the nominal CNC motion as defined in the CNC FIFO.
-CNCAPercents can get values higher than 100 (%).
-CNCAPercents can be modified at any time, including on-the-fly during the CNC motion.
-User need to consider what value to give to CNCAPercents before starting a CNC motion.
+## Overview
+
+`CNCAPercents` (and its `CNCBPercents` counterpart on the second CNC engine) is used to scale the CNC speed (and acceleration/deceleration) along the CNC path. By affecting the speed and acceleration/deceleration, `CNCAPercents` effectively scales the time needed to perform the CNC motion.
+
+`CNCAPercents` can be modified at any time, including on-the-fly during the CNC motion. The user needs to consider what value to give to `CNCAPercents` before starting a CNC motion.
+
+## How it works
+
+- A value of `100` (%) means the motion runs according to the values defined in the CNC FIFO segments.
+- A value of `50` (%), for example, means the CNC motion is performed in twice the time needed for the nominal CNC motion as defined in the CNC FIFO.
+- `CNCAPercents` can take values higher than 100 (%).
+
+## Examples
+
+```text
+CNCAPercents=100    ; run at nominal programmed speed
+CNCAPercents=50     ; run at half speed (double the time)
+```
+
+## See also
+
+- [CNCASpeed/CNCBSpeed](CNCASpeed-CNCBSpeed.md) — desired vector speed of the active segment
+- [CNCASpeedPer/CNCBSpeedPer](CNCASpeedPer-CNCBSpeedPer.md) — speed percentage override

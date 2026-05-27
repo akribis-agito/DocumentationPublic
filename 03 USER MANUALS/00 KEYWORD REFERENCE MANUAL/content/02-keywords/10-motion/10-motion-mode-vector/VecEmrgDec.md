@@ -1,5 +1,6 @@
 ---
 keyword: VecEmrgDec
+summary: Emergency vector deceleration applied to all member axes on a stop or fault.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # VecEmrgDec
 
-**Definition:**
+Emergency vector deceleration applied to all member axes on a stop or fault.
 
-VecEmrgDec sets the emergency deceleration rate applied to all axes participating in vector motion when a stop or fault is triggered. It is typically set higher than VecDecel to halt the vector move as quickly as possible. It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
+## Overview
 
-**See also:**
+`VecEmrgDec` sets the emergency deceleration rate, in user units per second squared, applied to all axes participating in vector motion when a stop or fault is triggered. It is typically set higher than the normal [VecDecel](VecDecel.md) to halt the vector move as quickly as possible while keeping the path coordinated. It is the rate used by the [StopVec](StopVec.md) command. It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
 
-[VecDecel](VecDecel.md), [StopVec](StopVec.md)
+## Examples
+
+```text
+VecEmrgDec=100000   ; emergency vector deceleration (user units/s^2, default)
+VecEmrgDec?         ; read the current value
+```
+
+## See also
+
+- [VecDecel](VecDecel.md) — normal (controlled) vector deceleration
+- [StopVec](StopVec.md) — command that decelerates using this rate

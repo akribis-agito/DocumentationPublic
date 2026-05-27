@@ -1,5 +1,6 @@
 ---
 keyword: VecJerk
+summary: Jerk limit (0-9) for vector motion, smoothing the resultant velocity into an S-curve.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # VecJerk
 
-**Definition:**
+Jerk limit (0-9) for vector motion, smoothing the resultant velocity into an S-curve.
 
-VecJerk sets the jerk limit for vector motion, controlling the rate of change of the resultant acceleration to produce a smoother S-curve velocity profile. It is an axis-related parameter saved to flash, and cannot be changed while the axis is in motion.
+## Overview
 
-**See also:**
+`VecJerk` sets the jerk limit for vector motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 16), controlling the rate of change of the resultant acceleration to produce a smoother S-curve velocity profile. Higher smoothing reduces mechanical shock at the cost of slightly longer moves; it shapes the transitions between the [VecAccel](VecAccel.md) and [VecDecel](VecDecel.md) ramps. It is an axis-related parameter saved to flash, and cannot be changed while the axis is in motion.
 
-[VecAccel](VecAccel.md), [VecDecel](VecDecel.md), [VecSpeed](VecSpeed.md)
+## Examples
+
+```text
+VecJerk=0           ; no jerk limiting (trapezoidal profile, default)
+VecJerk=9           ; maximum S-curve smoothing
+```
+
+## See also
+
+- [VecAccel](VecAccel.md) — vector acceleration rate
+- [VecDecel](VecDecel.md) — vector deceleration rate
+- [VecSpeed](VecSpeed.md) — target resultant speed

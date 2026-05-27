@@ -1,5 +1,6 @@
 ---
 keyword: FIFOPushLinV
+summary: Pushes a constant-velocity (linear) segment into the FIFO motion queue.
 availability:
   standalone:
   - v4
@@ -26,8 +27,22 @@ overrides: {}
 ---
 # FIFOPushLinV
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Pushes a constant-velocity (linear) segment into the FIFO motion queue.
 
-Refer to the FIFOType keyword page for a full description of the FIFO motion mode and all
-related keywords.
+## Overview
+
+`FIFOPushLinV` pushes a velocity-type motion segment into the FIFO, in which the velocity reference is held constant for the segment duration. The segment starts naturally from the last position reference. It is one of the `FIFOPush*` functions used to fill the FIFO before or during motion; the push is rejected with an error if the FIFO is full.
+
+See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all related keywords.
+
+## Examples
+
+```text
+FIFOPushLinV=500000 ; push a constant-velocity segment
+```
+
+## See also
+
+- [FIFOPushLinP](FIFOPushLinP.md) — push a linear segment by position delta
+- [FIFOPushCycle](FIFOPushCycle.md) — set the segment duration
+- [FIFOType](FIFOType.md) — full FIFO mode description

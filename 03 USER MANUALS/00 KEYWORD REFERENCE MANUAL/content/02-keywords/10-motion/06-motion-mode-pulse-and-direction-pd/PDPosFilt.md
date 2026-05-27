@@ -1,5 +1,6 @@
 ---
 keyword: PDPosFilt
+summary: First-order low-pass cut-off frequency (Hz/100) smoothing PDPos in direct P/D mode.
 availability:
   standalone:
   - v4
@@ -26,12 +27,27 @@ overrides: {}
 ---
 # PDPosFilt
 
-**Condition:**
+First-order low-pass cut-off frequency (Hz/100) smoothing PDPos in direct P/D mode.
 
-PDPosFilt is only used in the direct PD motion ([MotionMode](../../../02-keywords/10-motion/02-motion-configuration/MotionMode.md) = 3).
+## Overview
 
-**Definition:**
+`PDPosFilt` is the cut-off frequency of a first-order low-pass filter applied to the change of [PDPos](PDPos.md) since the start of motion. It smooths the generated position reference so that the axis ramps rather than steps when the decoded pulse-and-direction command jumps. It is only used in **direct** P/D motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 3); indirect P/D motion uses the second-order profile generator instead and has no such filter.
 
-PDPosFilt is the first order low-pass filter cut-off frequency, in terms of Hz/100, applied onto the change of PDPos since the start of motion. It is used to smoothen the generated position reference (instead of step change).
+`PDPosFilt` is the cut-off-frequency form of the same smoothing concept as the coefficient-based [PDFiltFact](PDFiltFact.md).
 
-For example, if the required cut-off frequency is 250Hz, PDPosFilt should be 25000. By default, the cut-off frequency is 128Hz.
+## How it works
+
+The value is expressed in units of Hz/100. For example, a required cut-off frequency of 250 Hz means `PDPosFilt = 25000`. The default value of `12800` corresponds to a cut-off frequency of 128 Hz.
+
+## Examples
+
+```text
+PDPosFilt=25000     ; 250 Hz cut-off frequency
+PDPosFilt=12800     ; 128 Hz cut-off frequency (default)
+```
+
+## See also
+
+- [PDPos](PDPos.md) — counter whose change is filtered
+- [PDFiltFact](PDFiltFact.md) — coefficient-based form of the direct-mode P/D filter
+- [MotionMode](../02-motion-configuration/MotionMode.md) — selects direct (3) vs. indirect (4) P/D motion

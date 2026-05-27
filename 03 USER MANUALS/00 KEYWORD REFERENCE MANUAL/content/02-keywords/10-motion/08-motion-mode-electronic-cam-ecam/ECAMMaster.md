@@ -1,5 +1,6 @@
 ---
 keyword: ECAMMaster
+summary: Complex CAN code selecting the master-variable source for each ECAM cam pattern.
 availability:
   standalone:
   - v4
@@ -26,6 +27,20 @@ overrides: {}
 ---
 # ECAMMaster
 
-**Definition:**
+Complex CAN code selecting the master-variable source for each ECAM cam pattern.
 
-ECAMMaster is the [complex CAN code](../../../01-keyword-usage-and-syntax/complex-can-code.md) (CCC) used to define the source of the master variable. It is an array of size 10, where each element corresponds to a cam pattern.
+## Overview
+
+`ECAMMaster` is the [complex CAN code](../../../01-keyword-usage-and-syntax/complex-can-code.md) (CCC) defining the source of the master variable in ECAM motion. It is an array of 10 cam patterns, one element per pattern. As the master value changes, the axis (slave) position reference tracks the cam pattern stored in [GenData](../../20-arrays/GenData.md), spaced by [ECAMGap](ECAMGap.md).
+
+## Examples
+
+```text
+ECAMMaster[1]?      ; read the master-variable CCC for cam pattern 1
+```
+
+## See also
+
+- [ECAMGap](ECAMGap.md) — spacing of master values
+- [ECAMMasterIni](ECAMMasterIni.md) — initial master-value offset at start of motion
+- [GenData](../../20-arrays/GenData.md) — array storing the cam pattern

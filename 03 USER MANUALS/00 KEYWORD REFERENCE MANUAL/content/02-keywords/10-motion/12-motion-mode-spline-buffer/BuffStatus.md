@@ -1,5 +1,6 @@
 ---
 keyword: BuffStatus
+summary: Read-only array reporting the state of the spline buffer motion mode.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # BuffStatus
 
-**Definition:**
+Read-only array reporting the state of the spline buffer motion mode.
 
-BuffStatus is a read-only array that reports the current state of the spline buffer motion mode. The elements indicate whether the buffer is idle, executing, the current waypoint index, and any error conditions. It is an axis-related, read-only array that is not saved to flash.
+## Overview
 
-**See also:**
+`BuffStatus` is a read-only array that reports the current state of the spline buffer motion mode, such as whether the buffer is idle or executing, the current waypoint index, and any error conditions. It is used to monitor a trajectory computed by [BuffCalc](BuffCalc.md) and repeated according to [BuffCycles](BuffCycles.md). It is not saved to flash.
 
-[BuffCalc](BuffCalc.md), [BuffCycles](BuffCycles.md), [StopBuff](../04-motion-command/StopBuff.md)
+> **Documentation pending:** The meaning of each individual element of the `BuffStatus` array was not available in the source reference. Verify element assignments against current firmware before relying on specific indices.
+
+## Examples
+
+```text
+BuffStatus[1]?      ; query the first status element
+```
+
+## See also
+
+- [BuffCalc](BuffCalc.md) — pre-compute the spline coefficients
+- [BuffCycles](BuffCycles.md) — number of repetitions
+- [StopBuff](../04-motion-command/StopBuff.md) — stop spline buffer motion

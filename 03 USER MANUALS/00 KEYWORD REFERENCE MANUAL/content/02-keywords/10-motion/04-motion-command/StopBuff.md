@@ -1,5 +1,6 @@
 ---
 keyword: StopBuff
+summary: Stops spline-buffer (Buff) motion, halting playback and decelerating to rest.
 availability:
   standalone:
   - v4
@@ -26,10 +27,19 @@ overrides: {}
 ---
 # StopBuff
 
-**Definition:**
+Stops spline-buffer (Buff) motion, halting playback and decelerating to rest.
 
-StopBuff is a command that stops motion in spline-buffer (Buff) mode. It halts the spline playback and decelerates the axis to rest. It is an axis-related command function that can be issued during motion.
+## Overview
 
-**See also:**
+`StopBuff` is a command that stops motion in spline-buffer (Buff) mode: it halts the spline playback and decelerates the axis to rest. It is the buffer-mode counterpart to the general [Stop](Stop.md) command. The buffer playback state can be observed through [BuffStatus](../12-motion-mode-spline-buffer/BuffStatus.md). It can be issued during motion. It is an axis-related command function.
 
-[Stop](Stop.md), [BuffStatus](../12-motion-mode-spline-buffer/BuffStatus.md)
+## Examples
+
+```text
+StopBuff            ; stop spline-buffer playback
+```
+
+## See also
+
+- [Stop](Stop.md) — general controlled stop
+- [BuffStatus](../12-motion-mode-spline-buffer/BuffStatus.md) — spline-buffer playback status

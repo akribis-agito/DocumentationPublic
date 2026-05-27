@@ -1,5 +1,6 @@
 ---
 keyword: StopFIFO
+summary: Command that makes the currently executing FIFO segment the last one, ending the sequence.
 availability:
   standalone:
   - v4
@@ -26,5 +27,22 @@ overrides: {}
 ---
 # StopFIFO
 
-Refer to the FIFOType keyword page for a full description of the FIFO motion mode and all
-related keywords.
+Command that makes the currently executing FIFO segment the last one, ending the sequence.
+
+## Overview
+
+`StopFIFO` stops a FIFO motion by making the currently executing motion segment the last segment of the sequence. Unlike the general [Stop](../04-motion-command/Stop.md) command, which decelerates the axis to zero speed, `StopFIFO` lets the active segment complete and then ends the motion, so the FIFO trajectory finishes gracefully.
+
+See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all related keywords.
+
+## Examples
+
+```text
+StopFIFO=0          ; end the FIFO motion after the current segment
+```
+
+## See also
+
+- [Stop](../04-motion-command/Stop.md) — decelerate the axis to zero speed
+- [FIFOType](FIFOType.md) — full FIFO mode description
+- [FIFOStatus](FIFOStatus.md) — FIFO queue status

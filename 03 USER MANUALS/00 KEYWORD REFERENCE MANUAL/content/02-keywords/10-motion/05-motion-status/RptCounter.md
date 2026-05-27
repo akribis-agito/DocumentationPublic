@@ -1,5 +1,6 @@
 ---
 keyword: RptCounter
+summary: Counts repetitions made during repetitive point-to-point (PTP) motion.
 availability:
   standalone:
   - v4
@@ -26,12 +27,20 @@ overrides: {}
 ---
 # RptCounter
 
-**Condition:**
+Counts repetitions made during repetitive point-to-point (PTP) motion.
 
-RptCounter is used only when MotionMode = 2 (repetitive point-to-point (PTP) motion).
+## Overview
 
-**Definition:**
+`RptCounter` reports the number of repetitions made in repetitive PTP motion. It is used only when [MotionMode](../02-motion-configuration/MotionMode.md) `= 2` (repetitive PTP motion). How a repetition is defined depends on [RptMode](../02-motion-configuration/RptMode.md). Once `RptCounter` equals the non-zero [RptCycles](../02-motion-configuration/RptCycles.md), the repetitive PTP motion stops.
 
-RptCounter reports the number of repetitions made in the repetitive PTP motion. Please refer to RptMode on how repetition is defined.
+## Examples
 
-Once RptCounter equals the non-zero RptCycles, the repetitive PTP motion will stop.
+```text
+RptCounter?         ; read the number of repetitions completed
+```
+
+## See also
+
+- [MotionMode](../02-motion-configuration/MotionMode.md) — selects repetitive PTP motion (`= 2`)
+- [RptCycles](../02-motion-configuration/RptCycles.md) — target repetition count that stops the motion
+- [RptMode](../02-motion-configuration/RptMode.md) — defines how a repetition is counted

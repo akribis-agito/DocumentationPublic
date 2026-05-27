@@ -1,8 +1,23 @@
+---
+summary: CNC vector deceleration used for an emergency stop.
+---
 # CNCAEmrgDec/CNCBEmrgDec
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics.
-     The CNCB counterpart operates the same way on the second CNC engine. -->
+CNC vector deceleration used for an emergency stop.
 
-The CNC vector deceleration to use in case of emergency stop (hitting hardware Reverse
-/Forward Limit Switches, or reaching software RevPLim/FwdPLim position limits).
+## Overview
+
+`CNCAEmrgDec` (and its `CNCBEmrgDec` counterpart on the second CNC engine) is the CNC vector deceleration to use in case of an emergency stop. An emergency stop occurs when hitting the hardware Reverse/Forward limit switches, or when reaching the software position limits `RevPLim`/`FwdPLim`.
+
+This is distinct from the normal per-segment deceleration reported by [CNCADecel/CNCBDecel](CNCADecel-CNCBDecel.md).
+
+## Examples
+
+```text
+CNCAEmrgDec=2000000 ; vector deceleration used on emergency stop
+```
+
+## See also
+
+- [CNCADecel/CNCBDecel](CNCADecel-CNCBDecel.md) — normal active-segment deceleration
+- [StopCNCA](StopCNCA.md) — stop CNC motion on queue A

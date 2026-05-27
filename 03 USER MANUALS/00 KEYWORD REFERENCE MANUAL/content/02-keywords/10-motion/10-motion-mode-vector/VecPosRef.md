@@ -1,5 +1,6 @@
 ---
 keyword: VecPosRef
+summary: Read-only running position along the vector path (0 to VecAbsTrgt), always positive.
 availability:
   standalone:
   - v4
@@ -26,10 +27,19 @@ overrides: {}
 ---
 # VecPosRef
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Read-only running position along the vector path (0 to VecAbsTrgt), always positive.
 
-The VecPosRef is a status parameter that reports the current position reference of the vector
-motion profile (along the vector path). It starts from a value of 0 and upon end of motion,
-reaches the value of VecAbsTrgt.
-VecPosRef is always positive.
+## Overview
+
+`VecPosRef` is a status parameter that reports the current position reference of the vector motion profile, measured along the vector path. It starts from a value of 0 and, upon end of motion, reaches the value of [VecAbsTrgt](VecAbsTrgt.md). `VecPosRef` is always positive. Its time derivative is reported by [VecdPosRef](VecdPosRef.md).
+
+## Examples
+
+```text
+VecPosRef?          ; read the current position along the vector path
+```
+
+## See also
+
+- [VecAbsTrgt](VecAbsTrgt.md) — total path distance (end value of `VecPosRef`)
+- [VecdPosRef](VecdPosRef.md) — derivative of `VecPosRef` (path speed)

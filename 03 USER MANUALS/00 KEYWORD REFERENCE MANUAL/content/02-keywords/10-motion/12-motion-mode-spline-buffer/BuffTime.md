@@ -1,5 +1,6 @@
 ---
 keyword: BuffTime
+summary: Array of per-segment durations (servo samples) for the spline buffer trajectory.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # BuffTime
 
-**Definition:**
+Array of per-segment durations (servo samples) for the spline buffer trajectory.
 
-BuffTime is an array that stores the time duration (in servo samples) for each waypoint segment of the spline buffer. Together with BuffPos it defines the spline trajectory: the axis follows the position profile in BuffPos, spending BuffTime samples on each segment. It is an axis-related array, not saved to flash, and can be changed at any time.
+## Overview
 
-**See also:**
+`BuffTime` stores the time duration, in servo samples, of each waypoint segment of the spline buffer. Together with the waypoint positions in [BuffPos](BuffPos.md) it defines the spline trajectory: the axis follows the position profile, spending the corresponding number of `BuffTime` samples on each segment. The arrays are turned into spline coefficients by [BuffCalc](BuffCalc.md). It is not saved to flash and can be changed at any time.
 
-[BuffPos](BuffPos.md), [BuffCalc](BuffCalc.md), [BuffStatus](BuffStatus.md)
+## Examples
+
+```text
+BuffTime[1]=100     ; spend 100 servo samples on the first segment
+BuffTime[2]=200     ; spend 200 servo samples on the second segment
+```
+
+## See also
+
+- [BuffPos](BuffPos.md) — waypoint positions paired with these durations
+- [BuffCalc](BuffCalc.md) — pre-compute the spline coefficients
+- [BuffStatus](BuffStatus.md) — spline buffer status

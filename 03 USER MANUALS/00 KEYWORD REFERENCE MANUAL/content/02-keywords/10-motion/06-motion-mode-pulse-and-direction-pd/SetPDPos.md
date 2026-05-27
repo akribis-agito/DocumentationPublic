@@ -1,5 +1,6 @@
 ---
 keyword: SetPDPos
+summary: Command that presets/re-zeroes the pulse-and-direction position counter without moving.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # SetPDPos
 
-**Definition:**
+Command that presets/re-zeroes the pulse-and-direction position counter without moving.
 
-SetPDPos is a command that resets the pulse-and-direction input position counter to a specified value. It allows the PD position reference to be re-zeroed or preset without physically moving the axis. It is an axis-related command function that cannot be issued while the axis is in motion.
+## Overview
 
-**See also:**
+`SetPDPos` is a command that sets the pulse-and-direction input position counter [PDPos](PDPos.md) to a specified value. It lets the P/D position reference be re-zeroed or preset without physically moving the axis, which is useful when aligning the decoded counter to a known reference. It is an axis-related command function that cannot be issued while the axis is in motion.
 
-[PDSubType](PDSubType.md), [PDFact](PDFact.md), [SetPosition](../03-kinematics-configuration/SetPosition.md)
+## Examples
+
+```text
+SetPDPos=0          ; re-zero the P/D counter
+SetPDPos=100000     ; preset the P/D counter to a known value
+```
+
+## See also
+
+- [PDPos](PDPos.md) — the counter this command sets
+- [PDSubType](PDSubType.md) — P/D input signal format
+- [PDFact](PDFact.md) — P/D input scaling factor numerator
+- [SetPosition](../03-kinematics-configuration/SetPosition.md) — analogous preset for the axis position

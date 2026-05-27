@@ -1,5 +1,6 @@
 ---
 keyword: MotionMode
+summary: Selects the type of motion performed when Begin is issued.
 availability:
   standalone:
   - v4
@@ -26,11 +27,15 @@ overrides: {}
 ---
 # MotionMode
 
-**Definition:**
+Selects the type of motion performed when `Begin` is issued.
 
-MotionMode determines the type of motion that will be performed upon the Begin command. It cannot be changed until the current motion ends.
+## Overview
 
-The following table shows types of motion described by MotionMode.
+`MotionMode` determines the type of motion that will be performed when the [Begin](../04-motion-command/Begin.md) command is issued. It is the master selector for the axis motion engine, choosing between jog, point-to-point, repetitive, pulse-and-direction, gear, ECAM, and other modes. The mode also dictates which kinematic and target keywords are relevant (for example, repetitive mode uses [RptMode](RptMode.md), [RptCycles](RptCycles.md) and [RptWait](RptWait.md)). It cannot be changed until the current motion ends.
+
+## How it works
+
+The following table shows the types of motion described by `MotionMode`.
 
 | MotionMode | Descriptions |
 |---|---|
@@ -55,3 +60,19 @@ The following table shows types of motion described by MotionMode.
 | 17 | CNCB motion |
 | 18 | Spline buffer |
 | 19 | FIFO position tracking |
+
+## Examples
+
+```text
+MotionMode=1        ; point-to-point motion
+MotionMode=2        ; repetitive point-to-point motion
+MotionMode?         ; query current mode
+```
+
+## See also
+
+- [Begin](../04-motion-command/Begin.md) — starts motion in the selected mode
+- [JerkMode](JerkMode.md) — profiler order (modes 1 and 2)
+- [RptMode](RptMode.md) — repetition direction (mode 2)
+- [RptCycles](RptCycles.md) — number of repetitions (mode 2)
+- [RptWait](RptWait.md) — dwell between repetitions (mode 2)

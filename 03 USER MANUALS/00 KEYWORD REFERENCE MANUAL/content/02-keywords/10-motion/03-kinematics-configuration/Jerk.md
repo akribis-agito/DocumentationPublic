@@ -1,5 +1,6 @@
 ---
 keyword: Jerk
+summary: Rate of change of acceleration; a finite value produces an S-curve motion profile.
 availability:
   standalone:
   - v4
@@ -26,10 +27,23 @@ overrides: {}
 ---
 # Jerk
 
-**Definition:**
+Rate of change of acceleration; a finite value produces an S-curve motion profile.
 
-Jerk sets the rate of change of acceleration (third derivative of position) for point-to-point motion. A finite jerk value produces an S-curve profile that reduces mechanical vibration at the start and end of moves. It is an axis-related parameter saved to flash, and cannot be changed while the axis is in motion.
+## Overview
 
-**See also:**
+`Jerk` sets the rate of change of acceleration (the third derivative of position) for point-to-point motion. A finite jerk value produces an S-curve profile that smooths the transitions in and out of the [Accel](Accel.md) and [Decel](Decel.md) ramps, reducing mechanical vibration at the start and end of a move. Whether jerk limiting is used at all, and to what order, is governed by [JerkMode](../02-motion-configuration/JerkMode.md). Unlike most kinematic parameters, `Jerk` cannot be changed while the axis is in motion. It is an axis-related parameter saved to flash.
 
-[Accel](Accel.md), [Decel](Decel.md), [JerkInAcc](JerkInAcc.md), [JerkInDec](JerkInDec.md), [JerkMode](JerkMode.md)
+## Examples
+
+```text
+Jerk=5              ; jerk setting (S-curve smoothing)
+Jerk?               ; query current value
+```
+
+## See also
+
+- [Accel](Accel.md) — acceleration rate that jerk smooths into
+- [Decel](Decel.md) — deceleration rate that jerk smooths into
+- [JerkInAcc](JerkInAcc.md) — jerk during the acceleration phase (third-order profile)
+- [JerkInDec](JerkInDec.md) — jerk during the deceleration phase (third-order profile)
+- [JerkMode](../02-motion-configuration/JerkMode.md) — selects the profiler order

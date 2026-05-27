@@ -1,5 +1,6 @@
 ---
 keyword: SpeedChgNew
+summary: New velocity applied when the axis reaches SpeedChgPos during a speed change on the fly.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # SpeedChgNew
 
-**Definition:**
+New velocity applied when the axis reaches `SpeedChgPos` during a speed change on the fly.
 
-SpeedChgNew sets the new speed in user units per second that is applied when the axis reaches the position defined by SpeedChgPos during a speed-change-on-the-fly event. It is an axis-related parameter saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`SpeedChgNew` sets the new velocity, in user units per second, applied when the axis reaches the position defined by [SpeedChgPos](SpeedChgPos.md) during a speed-change-on-the-fly event. The feature must be enabled with [SpeedChgOn](SpeedChgOn.md), and [SpeedChgDir](SpeedChgDir.md) selects the direction in which the trigger is active. It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
 
-[SpeedChgOn](SpeedChgOn.md), [SpeedChgPos](SpeedChgPos.md), [SpeedChgDir](SpeedChgDir.md)
+## Examples
+
+```text
+SpeedChgNew=200000  ; speed to switch to (user units/s)
+SpeedChgNew?        ; query current value
+```
+
+## See also
+
+- [SpeedChgOn](SpeedChgOn.md) — enables speed change on the fly
+- [SpeedChgPos](SpeedChgPos.md) — position that triggers the change
+- [SpeedChgDir](SpeedChgDir.md) — direction in which the trigger is active

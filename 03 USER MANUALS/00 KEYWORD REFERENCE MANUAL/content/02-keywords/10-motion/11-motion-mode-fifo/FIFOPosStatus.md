@@ -1,5 +1,6 @@
 ---
 keyword: FIFOPosStatus
+summary: Read-only array reporting the state of the FIFO position-tracking queue.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # FIFOPosStatus
 
-**Definition:**
+Read-only array reporting the state of the FIFO position-tracking queue.
 
-FIFOPosStatus is a read-only array that reports the current state of the FIFO position tracking queue. The elements indicate the number of segments remaining in the queue, whether the queue is empty or full, and any error conditions. It is an axis-related, read-only array that is not saved to flash.
+## Overview
 
-**See also:**
+`FIFOPosStatus` is a read-only array that reports the current state of the FIFO position-tracking queue, such as the number of segments remaining, whether the queue is empty or full, and any error conditions. It is used to monitor the queue fed by [FIFOPosPush](FIFOPosPush.md) while position tracking is enabled by [FIFOPosFIFOEn](FIFOPosFIFOEn.md). It is not saved to flash.
 
-[FIFOPosPush](FIFOPosPush.md), [FIFOPosClear](FIFOPosClear.md), [FIFOPosFIFOEn](FIFOPosFIFOEn.md)
+> **Documentation pending:** The meaning of each individual element of the `FIFOPosStatus` array was not available in the source reference. Verify element assignments against current firmware before relying on specific indices.
+
+## Examples
+
+```text
+FIFOPosStatus[1]?   ; query the first status element
+```
+
+## See also
+
+- [FIFOPosPush](FIFOPosPush.md) — push a position segment
+- [FIFOPosClear](FIFOPosClear.md) — clear the queue
+- [FIFOPosFIFOEn](FIFOPosFIFOEn.md) — enable FIFO position tracking

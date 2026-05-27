@@ -1,5 +1,6 @@
 ---
 keyword: AbsTrgt
+summary: Absolute target position (user units) for the next point-to-point move.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # AbsTrgt
 
-**Definition:**
+Absolute target position (user units) for the next point-to-point move.
 
-AbsTrgt sets the absolute target position in user units for the next point-to-point move. When a Begin command is issued in absolute PTP mode, the axis moves to this position. It is an axis-related parameter, not saved to flash, and can be changed at any time.
+## Overview
 
-**See also:**
+`AbsTrgt` sets the absolute target position, in user units, for the next point-to-point (PTP) move. When a [Begin](../04-motion-command/Begin.md) command is issued in absolute PTP mode, the axis moves to this position. It is the absolute counterpart of [RelTrgt](RelTrgt.md), which specifies a relative distance instead. It is not saved to flash and can be changed at any time.
 
-[RelTrgt](RelTrgt.md), [Begin](../04-motion-command/Begin.md), [Targets](Targets.md)
+## Examples
+
+```text
+AbsTrgt=100000      ; move to absolute position 100000 (user units)
+```
+
+## See also
+
+- [RelTrgt](RelTrgt.md) — relative target distance
+- [Targets](Targets.md) — multi-target sequence
+- [Begin](../04-motion-command/Begin.md) — start the PTP move

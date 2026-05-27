@@ -1,5 +1,6 @@
 ---
 keyword: PDEncDir
+summary: Configures the sign (direction) of PDPos accumulation relative to the direction signal.
 availability:
   standalone:
   - v4
@@ -26,11 +27,29 @@ overrides: {}
 ---
 # PDEncDir
 
-**Definition:**
+Configures the sign (direction) of PDPos accumulation relative to the direction signal.
 
-PDEncDir configures the direction of PDPos accumulation.
+## Overview
 
-| Value | Descriptions |
+`PDEncDir` configures the direction of [PDPos](PDPos.md) accumulation, i.e. whether a logic-high direction signal causes the counter to increment or decrement. It lets the pulse-and-direction decoding sense be reversed without rewiring, complementing the magnitude scaling set by [PDFact](PDFact.md) and [PDFactDen](PDFactDen.md).
+
+> **Documentation pending:** This keyword is marked as not implemented in the current firmware. The behaviour below is described for reference; confirm against firmware before relying on it.
+
+## How it works
+
+| Value | Description |
 |---|---|
-| 0 | **Normal direction** PDPos increments by the number of pulses received multiplied by scaling if the direction signal is logic high, and decrements by such value if the direction signal is logic low. |
-| 1 | **Inverted direction** PDPos decrements by the number of pulses received multiplied by scaling if the direction signal is logic high, and increments by such value if the direction signal is logic low. |
+| 0 | **Normal direction.** PDPos increments by the number of pulses received multiplied by scaling if the direction signal is logic high, and decrements by such value if the direction signal is logic low. |
+| 1 | **Inverted direction.** PDPos decrements by the number of pulses received multiplied by scaling if the direction signal is logic high, and increments by such value if the direction signal is logic low. |
+
+## Examples
+
+```text
+PDEncDir=0          ; normal accumulation direction (default)
+PDEncDir=1          ; inverted accumulation direction
+```
+
+## See also
+
+- [PDPos](PDPos.md) — counter whose accumulation direction this sets
+- [PDFact](PDFact.md) / [PDFactDen](PDFactDen.md) — scaling-factor magnitude

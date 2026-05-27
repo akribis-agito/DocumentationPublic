@@ -1,5 +1,6 @@
 ---
 keyword: StopVec
+summary: Command that stops coordinated vector motion, decelerating all member axes with VecEmrgDec.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # StopVec
 
-**Definition:**
+Command that stops coordinated vector motion, decelerating all member axes with VecEmrgDec.
 
-StopVec is a command that stops coordinated vector motion. All participating axes decelerate together using VecEmrgDec and come to rest. It is an axis-related command function that can be issued at any time, including during motion.
+## Overview
 
-**See also:**
+`StopVec` is a command that stops coordinated vector motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 16). All participating axes (selected by [VecMemberAxes](VecMemberAxes.md)) decelerate together using the emergency deceleration rate [VecEmrgDec](VecEmrgDec.md) and come to rest, keeping the vector path coordinated as it stops. It is an axis-related command function that can be issued at any time, including during motion. For a continuous arc (see [VecNumCircles](VecNumCircles.md) = 0), `StopVec` is the means of ending the motion.
 
-[VecEmrgDec](VecEmrgDec.md), [VecMotionStat](VecMotionStat.md)
+## Examples
+
+```text
+StopVec=0           ; stop the active vector motion
+```
+
+## See also
+
+- [VecEmrgDec](VecEmrgDec.md) — deceleration rate used to stop
+- [VecMotionStat](VecMotionStat.md) — reports the resulting motion state
+- [VecPause](VecPause.md) — temporarily pause (vs. stop) vector motion

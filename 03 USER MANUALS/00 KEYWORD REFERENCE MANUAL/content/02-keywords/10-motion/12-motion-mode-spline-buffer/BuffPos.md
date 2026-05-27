@@ -1,5 +1,6 @@
 ---
 keyword: BuffPos
+summary: Array of waypoint positions (user units) that define the spline buffer trajectory.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # BuffPos
 
-**Definition:**
+Array of waypoint positions (user units) that define the spline buffer trajectory.
 
-BuffPos is an array that stores the waypoint positions in user units for the spline buffer motion profile. The controller uses these positions together with the time values in BuffTime to compute and execute a smooth spline trajectory. It is an axis-related array, not saved to flash, and can be changed at any time.
+## Overview
 
-**See also:**
+`BuffPos` stores the waypoint positions, in user units, for the spline buffer motion profile. Together with the per-segment durations in [BuffTime](BuffTime.md), it defines the trajectory: the controller fits a spline through these waypoints and executes a smooth motion between them. The waypoints are turned into spline coefficients by [BuffCalc](BuffCalc.md) before motion begins. It is not saved to flash and can be changed at any time.
 
-[BuffTime](BuffTime.md), [BuffCalc](BuffCalc.md), [BuffSplineMod](BuffSplineMod.md)
+## Examples
+
+```text
+BuffPos[1]=0        ; first waypoint position (user units)
+BuffPos[2]=10000    ; second waypoint position
+```
+
+## See also
+
+- [BuffTime](BuffTime.md) — per-segment durations paired with these waypoints
+- [BuffCalc](BuffCalc.md) — pre-compute the spline coefficients
+- [BuffSplineMod](BuffSplineMod.md) — spline interpolation mode

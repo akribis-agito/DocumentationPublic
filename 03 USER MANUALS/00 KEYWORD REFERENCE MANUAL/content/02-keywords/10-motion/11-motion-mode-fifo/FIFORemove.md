@@ -1,5 +1,6 @@
 ---
 keyword: FIFORemove
+summary: Command function that removes the last entry pushed into the FIFO motion queue.
 availability:
   standalone:
   - v4
@@ -26,8 +27,22 @@ overrides: {}
 ---
 # FIFORemove
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Command function that removes the last entry pushed into the FIFO motion queue.
 
-Refer to the FIFOType keyword page for a full description of the FIFO motion mode and all
-related keywords.
+## Overview
+
+`FIFORemove` removes an entry from the FIFO motion queue. It is the counterpart of the `FIFOPush*` functions that fill the FIFO, and is used to discard a queued entry without executing it. To empty the entire FIFO at once, use [FIFOClear](FIFOClear.md).
+
+See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all related keywords.
+
+## Examples
+
+```text
+FIFORemove=0        ; remove an entry from the FIFO
+```
+
+## See also
+
+- [FIFOClear](FIFOClear.md) — empty the entire FIFO
+- [FIFOStatus](FIFOStatus.md) — FIFO queue status
+- [FIFOType](FIFOType.md) — full FIFO mode description

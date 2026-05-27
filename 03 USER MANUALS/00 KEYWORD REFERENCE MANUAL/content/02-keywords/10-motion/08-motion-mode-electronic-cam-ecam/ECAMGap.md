@@ -1,5 +1,6 @@
 ---
 keyword: ECAMGap
+summary: Linear spacing between successive ECAM master values; its sign sets pattern direction.
 availability:
   standalone:
   - v4
@@ -26,12 +27,30 @@ overrides: {}
 ---
 # ECAMGap
 
-**Definition:**
+Linear spacing between successive ECAM master values; its sign sets pattern direction.
 
-ECAMGap is used to define the linear interval of the master values. It is an array of size 10, where each element corresponds to a cam pattern.
+## Overview
 
-Its absolute value equals to the linear spacing between successive master values, that correspond to successive GenData indices in the cam pattern look-up table. In a simple example where ECAMCycles = 1, ECAMGap = 2000, ECAMStart ≤ 400 and ECAMEnd ≥ 401, if GenData\[400\] corresponds to master position of 6554, GenData\[401\] willcorrespond to master position of 8554.
+`ECAMGap` defines the linear interval between master values. It is an array of 10 cam patterns, one element per pattern. Its absolute value is the linear spacing between successive master values that map to successive [GenData](../../20-arrays/GenData.md) indices in the cam look-up table; linear interpolation is used between intervals. Its sign sets the ordering direction of the pattern and the increment/decrement direction of [ECAMCycCount](ECAMCycCount.md).
 
-If ECAMGap is positive, the order of the cam pattern follows ascending order, where if master position increases, the corresponding GenData index will increase as well. If ECAMGap is negative, the order of the pattern will be inverted, that is if master position increases, the corresponding GenData index will decrease.
+## How it works
 
-Please refer to the figures in [Motion mode – Electronic cam (ECAM)](../../../02-keywords/10-motion/08-motion-mode-electronic-cam-ecam/00-overview.md) for more information on the ordering logics.
+In a simple example where `ECAMCycles = 1`, `ECAMGap = 2000`, `ECAMStart ≤ 400` and `ECAMEnd ≥ 401`: if `GenData[400]` corresponds to a master position of 6554, then `GenData[401]` corresponds to a master position of 8554.
+
+- If `ECAMGap` is positive, the cam pattern follows ascending order: as the master position increases, the corresponding `GenData` index increases.
+- If `ECAMGap` is negative, the order is inverted: as the master position increases, the corresponding `GenData` index decreases.
+
+## Examples
+
+```text
+ECAMGap[1]=2000     ; master-value spacing for cam pattern 1
+ECAMGap[1]?         ; read current value
+```
+
+Refer to the figures in [Motion mode – Electronic cam (ECAM)](00-overview.md) for more information on the ordering logics.
+
+## See also
+
+- [ECAMCycles](ECAMCycles.md) — number of pattern occurrences (sign also matters)
+- [ECAMCycCount](ECAMCycCount.md) — increments/decrements per the sign of `ECAMGap`
+- [GenData](../../20-arrays/GenData.md) — array storing the cam pattern

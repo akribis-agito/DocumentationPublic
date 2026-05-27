@@ -1,5 +1,6 @@
 ---
 keyword: FIFOPosCurrOf
+summary: Current (torque) feedforward offset added to every FIFO position segment.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # FIFOPosCurrOf
 
-**Definition:**
+Current (torque) feedforward offset added to every FIFO position segment.
 
-FIFOPosCurrOf sets a current (torque) feedforward offset added to every FIFO position segment. It provides a constant bias current feedforward applied to all tracked segments. It is an axis-related parameter, not saved to flash, and can be changed at any time.
+## Overview
 
-**See also:**
+`FIFOPosCurrOf` adds a current (torque) feedforward offset to every FIFO position segment, applying a constant bias current feedforward to all tracked segments. It is the current counterpart of the position offset [FIFOPosPosOf](FIFOPosPosOf.md) and the velocity offset [FIFOPosVelOf](FIFOPosVelOf.md). It is not saved to flash and can be changed at any time.
 
-[FIFOPosPosOf](FIFOPosPosOf.md), [FIFOPosVelOf](FIFOPosVelOf.md), [FIFOPosTrgt](FIFOPosTrgt.md)
+## Examples
+
+```text
+FIFOPosCurrOf=2000  ; add a uniform current feedforward bias
+```
+
+## See also
+
+- [FIFOPosPosOf](FIFOPosPosOf.md) — position offset
+- [FIFOPosVelOf](FIFOPosVelOf.md) — velocity feedforward offset
+- [FIFOPosTrgt](FIFOPosTrgt.md) — per-segment target position

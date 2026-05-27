@@ -1,5 +1,6 @@
 ---
 keyword: AccShapeOn
+summary: Enables acceleration shaping to reduce vibration via a shaped acceleration curve.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # AccShapeOn
 
-**Definition:**
+Enables acceleration shaping to reduce vibration via a shaped acceleration curve.
 
-AccShapeOn enables the acceleration-shaping feature, which modifies the acceleration profile to reduce vibration by applying a shaped (filtered) acceleration curve. When set to a non-zero value the AccShapeDist and AccShapeFact arrays define the shaping profile. It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
+## Overview
 
-**See also:**
+`AccShapeOn` enables the acceleration-shaping feature, which modifies the acceleration profile to reduce mechanical vibration by applying a shaped (filtered) acceleration curve. When set to `1`, the [AccShapeDist](AccShapeDist.md) and [AccShapeFact](AccShapeFact.md) arrays define the shaping profile applied on top of the base [Accel](Accel.md) ramp. It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
 
-[AccShapeDist](AccShapeDist.md), [AccShapeFact](AccShapeFact.md), [Accel](Accel.md)
+## Examples
+
+```text
+AccShapeOn=1        ; enable acceleration shaping
+AccShapeOn=0        ; disable acceleration shaping
+AccShapeOn?         ; query state
+```
+
+## See also
+
+- [AccShapeDist](AccShapeDist.md) — per-segment shaping distances
+- [AccShapeFact](AccShapeFact.md) — per-segment shaping factors
+- [Accel](Accel.md) — base acceleration that shaping modifies

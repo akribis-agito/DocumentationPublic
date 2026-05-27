@@ -1,5 +1,6 @@
 ---
 keyword: VelRef
+summary: Velocity-loop reference/input (position-controller output plus velocity reference).
 availability:
   standalone:
   - v4
@@ -26,8 +27,24 @@ overrides: {}
 ---
 # VelRef
 
-**Definition:**
+Velocity-loop reference/input (position-controller output plus velocity reference).
 
-VelRef is the velocity loop reference/input, in terms of main user unit per second. It is different from velocity reference (dPosRef) and is generally the sum of position controller output and velocity reference.
+## Overview
 
-Please refer to [Control tuning – Velocity control](../../../02-keywords/11-control-tuning/04-velocity-control/00-overview.md) (if normal control is used) and [Control tuning – Dual-loop control](../../../02-keywords/11-control-tuning/02-dual-loop-control/00-overview.md) (if dual-loop control is used) for its signal path/derivation.
+`VelRef` is the velocity-loop reference/input, in main user units per second. It is generally the sum of the position-controller output and the (scaled) velocity reference, and it is the input to the velocity loop.
+
+`VelRef` must not be confused with the velocity reference [dPosRef](dPosRef.md): `dPosRef` is the filtered derivative of the position reference, whereas `VelRef` also includes the position-controller output. The velocity error [VelErr](VelErr.md) is computed from `VelRef`.
+
+Refer to [Control tuning – Velocity control](../../11-control-tuning/04-velocity-control/00-overview.md) (normal control) and [Control tuning – Dual-loop control](../../11-control-tuning/02-dual-loop-control/00-overview.md) (dual-loop control) for its signal path/derivation.
+
+## Examples
+
+```text
+VelRef?             ; read the velocity-loop reference
+```
+
+## See also
+
+- [dPosRef](dPosRef.md) — velocity reference (a different signal)
+- [VelErr](VelErr.md) — velocity error (`VelRef - Vel[1]`)
+- [Vel](Vel.md) — feedback velocity array

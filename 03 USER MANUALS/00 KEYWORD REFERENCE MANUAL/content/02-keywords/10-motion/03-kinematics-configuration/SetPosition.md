@@ -1,5 +1,6 @@
 ---
 keyword: SetPosition
+summary: Redefines the axis position to a given value without moving the motor.
 availability:
   standalone:
   - v4
@@ -26,10 +27,19 @@ overrides: {}
 ---
 # SetPosition
 
-**Definition:**
+Redefines the axis position to a given value without moving the motor.
 
-SetPosition is a command that immediately sets the axis position reference and feedback registers to the specified value without moving the motor. It is used to define a new coordinate origin or to recover from a position discrepancy. It is an axis-related command function that cannot be issued while the axis is in motion.
+## Overview
 
-**See also:**
+`SetPosition` immediately sets the axis position reference and feedback registers to the specified value without commanding any motion. It is used to define a new coordinate origin or to recover from a position discrepancy. Because it rewrites the reference, it cannot be issued while the axis is in motion. To clear an accumulated position error instead of redefining the coordinate, see [ZeroPosErr](ZeroPosErr.md). It is an axis-related command function.
 
-[ZeroPosErr](ZeroPosErr.md)
+## Examples
+
+```text
+SetPosition=0       ; redefine current position as zero
+SetPosition=50000   ; redefine current position as 50000
+```
+
+## See also
+
+- [ZeroPosErr](ZeroPosErr.md) — zero the position error rather than redefine the coordinate

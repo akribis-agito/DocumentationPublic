@@ -1,5 +1,6 @@
 ---
 keyword: VecPause
+summary: Pauses (1) or resumes (0) vector motion by ramping the resultant speed to/from zero.
 availability:
   standalone:
   - v4
@@ -26,11 +27,23 @@ overrides: {}
 ---
 # VecPause
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Pauses (1) or resumes (0) vector motion by ramping the resultant speed to/from zero.
 
-A value of "1" pauses the vector motion by setting the speed to 0 (motion is decelerated till
-stopping). A value of "0" continue the motion normally (if paused before, it will accelerate to the
-VecSpeed again).
+## Overview
 
-Not Saved to Flash. At power-up gets its default value: "0".
+`VecPause` temporarily holds vector motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 16) without ending the move. A value of `1` pauses the vector motion by setting the speed to 0, decelerating until stopping. A value of `0` continues the motion normally; if previously paused, it accelerates back up to [VecSpeed](VecSpeed.md). Unlike [StopVec](StopVec.md), which terminates the move, `VecPause` lets the same move resume from where it left off.
+
+It is not saved to flash and takes its default value `0` at power-up.
+
+## Examples
+
+```text
+VecPause=1          ; pause vector motion (decelerate to a stop)
+VecPause=0          ; resume vector motion (accelerate back to VecSpeed)
+```
+
+## See also
+
+- [StopVec](StopVec.md) — terminate (rather than pause) vector motion
+- [VecSpeed](VecSpeed.md) — speed resumed to after a pause
+- [VecMotionStat](VecMotionStat.md) — vector motion status

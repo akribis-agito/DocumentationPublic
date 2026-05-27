@@ -1,5 +1,6 @@
 ---
 keyword: VecAbsTrgt
+summary: Read-only total vector path distance (always positive) from start to end of motion.
 availability:
   standalone:
   - v4
@@ -26,12 +27,22 @@ overrides: {}
 ---
 # VecAbsTrgt
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Read-only total vector path distance (always positive) from start to end of motion.
 
-The VecAbsTrgt is a status parameter that reports the target distance (from start of motion to its
-end) of the vector motion along the vector path. VecAbsTrgt is always positive.
+## Overview
 
-The VecAbsTrgt is not used to define the vector motion. This is done using the RelTrgt or AbsTrgt
+`VecAbsTrgt` is a status parameter that reports the target distance, from start of motion to its end, of the vector motion along the vector path. `VecAbsTrgt` is always positive. It is the end value that the running position reference [VecPosRef](VecPosRef.md) climbs toward as the move completes.
 
-of the member axes.
+`VecAbsTrgt` is not used to *define* the vector motion. The motion is defined using the per-axis target keywords [RelTrgt](../13-motion-mode-ptp/RelTrgt.md) or [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) of the member axes; `VecAbsTrgt` is the resultant path length computed from them.
+
+## Examples
+
+```text
+VecAbsTrgt?         ; read the total vector path distance for the move
+```
+
+## See also
+
+- [VecPosRef](VecPosRef.md) — running position along the path (ends at `VecAbsTrgt`)
+- [RelTrgt](../13-motion-mode-ptp/RelTrgt.md) / [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) — per-axis targets that define the move
+- [VecMemberAxes](VecMemberAxes.md) — axes participating in the vector

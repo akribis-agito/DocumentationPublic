@@ -1,5 +1,6 @@
 ---
 keyword: GearMaster
+summary: Complex CAN code selecting the master variable for gear motion.
 availability:
   standalone:
   - v4
@@ -26,6 +27,21 @@ overrides: {}
 ---
 # GearMaster
 
-**Definition:**
+Complex CAN code selecting the master variable for gear motion.
 
-GearMaster is the [complex CAN code](../../../01-keyword-usage-and-syntax/complex-can-code.md) of the master variable used in gear motion.
+## Overview
+
+`GearMaster` is the [complex CAN code](../../../01-keyword-usage-and-syntax/complex-can-code.md) of the master variable used in gear motion ([MotionMode](../02-motion-configuration/MotionMode.md) `= 5` or `6`). The change in the selected master variable is scaled by [MasterFact](MasterFact.md) / [MasterFactDen](MasterFactDen.md) and accumulated into [MasterPos](MasterPos.md). If the master variable participates in a modulo operation, set [MasterModRev](MasterModRev.md) accordingly.
+
+## Examples
+
+```text
+GearMaster?         ; read the complex CAN code of the master variable
+```
+
+## See also
+
+- [MasterPos](MasterPos.md) — accumulated, scaled master position
+- [MasterFact](MasterFact.md) / [MasterFactDen](MasterFactDen.md) — gear ratio numerator / denominator
+- [MasterModRev](MasterModRev.md) — modulo divisor for the master variable
+- [MotionMode](../02-motion-configuration/MotionMode.md) — selects gear motion (`= 5` or `6`)

@@ -1,5 +1,6 @@
 ---
 keyword: FIFOPosClear
+summary: Command that clears all pending segments from the FIFO position queue.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # FIFOPosClear
 
-**Definition:**
+Command that clears all pending segments from the FIFO position queue.
 
-FIFOPosClear is a command that clears all pending segments from the FIFO position queue, resetting it to empty. It is an axis-related command function that can be issued at any time, including during motion.
+## Overview
 
-**See also:**
+`FIFOPosClear` clears all pending segments from the FIFO position queue, resetting it to empty. It can be issued at any time, including during motion. It is the position-tracking counterpart of [FIFOPosPush](FIFOPosPush.md), which fills the queue.
 
-[FIFOPosPush](FIFOPosPush.md), [FIFOPosFIFOEn](FIFOPosFIFOEn.md), [FIFOPosStatus](FIFOPosStatus.md)
+## Examples
+
+```text
+FIFOPosClear=0      ; empty the FIFO position queue
+```
+
+## See also
+
+- [FIFOPosPush](FIFOPosPush.md) — push a position segment
+- [FIFOPosFIFOEn](FIFOPosFIFOEn.md) — enable FIFO position tracking
+- [FIFOPosStatus](FIFOPosStatus.md) — queue status

@@ -1,5 +1,6 @@
 ---
 keyword: SpeedChgOn
+summary: Enables the speed-change-on-the-fly feature for the axis.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # SpeedChgOn
 
-**Definition:**
+Enables the speed-change-on-the-fly feature for the axis.
 
-SpeedChgOn enables the speed-change-on-the-fly feature. When set to a non-zero value the controller monitors the axis position and, upon reaching SpeedChgPos, changes the commanded velocity to SpeedChgNew in the direction specified by SpeedChgDir. It is an axis-related parameter, not saved to flash, and can be changed at any time.
+## Overview
 
-**See also:**
+`SpeedChgOn` enables the speed-change-on-the-fly feature. When set to `1`, the controller monitors the axis position and, upon reaching [SpeedChgPos](SpeedChgPos.md), changes the commanded velocity to [SpeedChgNew](SpeedChgNew.md) in the direction specified by [SpeedChgDir](SpeedChgDir.md). It is an axis-related parameter, not saved to flash, and can be changed at any time, including during motion.
 
-[SpeedChgPos](SpeedChgPos.md), [SpeedChgNew](SpeedChgNew.md), [SpeedChgDir](SpeedChgDir.md)
+## Examples
+
+```text
+SpeedChgOn=1        ; enable speed change on the fly
+SpeedChgOn=0        ; disable
+SpeedChgOn?         ; query state
+```
+
+## See also
+
+- [SpeedChgPos](SpeedChgPos.md) — position that triggers the change
+- [SpeedChgNew](SpeedChgNew.md) — new speed applied at the trigger
+- [SpeedChgDir](SpeedChgDir.md) — direction in which the trigger is active

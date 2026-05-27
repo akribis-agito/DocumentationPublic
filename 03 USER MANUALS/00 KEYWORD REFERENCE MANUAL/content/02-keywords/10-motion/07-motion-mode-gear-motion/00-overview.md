@@ -24,9 +24,7 @@ Axis stays in this motion state indefinitely, until motion stop is requested or 
 
 After setting MotionMode = 6 and commanding start of motion ([Begin](../../../02-keywords/10-motion/04-motion-command/Begin.md)), the master and slave offsets will similarly be reset to MasterPos and initial position reference once.
 
-Instead, any change in MasterPos will corresponds to the same change in the target position ([AbsTrgt)](../../../02-keywords/10-motion/03-kinematics-configuration/AbsTrgt.md). AbsTrgt will be fed to second-order profile generator, that respects the maximum kinematic limits of Speed, Accel and Decel. The filter to smoothen out the scaled delta is also absent.
-
-<span class="mark">**DN:** This definition is for after Ao Xi’s implementation (cd38bccfd715dd0fad41f986e58ba68cf375a5df).</span>
+Instead, any change in MasterPos corresponds to the same change in the target position ([AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md)). AbsTrgt is fed to the second-order profile generator, which respects the maximum kinematic limits of Speed, Accel and Decel. The filter to smoothen out the scaled delta is also absent.
 
 **Note:**
 

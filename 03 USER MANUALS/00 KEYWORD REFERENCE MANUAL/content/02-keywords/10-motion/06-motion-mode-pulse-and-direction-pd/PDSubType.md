@@ -1,5 +1,6 @@
 ---
 keyword: PDSubType
+summary: Selects the pulse-and-direction input signal format (e.g. step/direction vs. CW/CCW).
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # PDSubType
 
-**Definition:**
+Selects the pulse-and-direction input signal format (e.g. step/direction vs. CW/CCW).
 
-PDSubType selects the sub-type of pulse-and-direction input mode, choosing between different input signal formats (for example, step/direction vs. CW/CCW pulse inputs). It is an axis-related parameter saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+## Overview
 
-**See also:**
+`PDSubType` selects the sub-type of pulse-and-direction input mode, choosing between different input signal formats (for example, step/direction vs. CW/CCW pulse inputs). It tells the decoder how to interpret the incoming pulse pair so that [PDPos](PDPos.md) accumulates correctly for the connected master device. It is an axis-related parameter saved to flash, and cannot be changed while the axis is in motion or the motor is on.
 
-[PDFact](PDFact.md), [PDFactDen](PDFactDen.md), [SetPDPos](SetPDPos.md)
+## Examples
+
+```text
+PDSubType=0         ; default input format
+PDSubType=1         ; alternate input format
+```
+
+## See also
+
+- [PDPos](PDPos.md) — counter populated according to the selected sub-type
+- [PDFact](PDFact.md) / [PDFactDen](PDFactDen.md) — input scaling factor
+- [SetPDPos](SetPDPos.md) — preset/re-zero the P/D counter

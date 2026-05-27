@@ -1,5 +1,6 @@
 ---
 keyword: VecArcCenter
+summary: Per-axis coordinate of the arc center, from which the controller derives the arc radius.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # VecArcCenter
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Per-axis coordinate of the arc center, from which the controller derives the arc radius.
 
-For ARC vector, defines the location of the arc center, so the controller can calculate the radius.
-The VecArcCenter, like all other new keywords for the vector motion, is per axis. So, the
-coordinate of the arc center are defined by the VecArcCenter of the two member axes.
-Saved to Flash. Can't be modified while in motion.
+## Overview
+
+For an arc vector ([VecType](VecType.md) = 1), `VecArcCenter` defines the location of the arc center so the controller can calculate the radius. Like all vector-motion keywords, it is per axis: the coordinate of the arc center is given by the `VecArcCenter` of the two member axes that form the arc plane. It must be set up before motion, together with [VecArcDir](VecArcDir.md) (sweep direction) and [VecNumCircles](VecNumCircles.md) (number of revolutions).
+
+It is saved to flash and cannot be modified while in motion.
+
+## Examples
+
+```text
+VecArcCenter=50000  ; this axis's coordinate of the arc center (user units)
+```
+
+## See also
+
+- [VecType](VecType.md) — selects linear vs. arc vector
+- [VecArcDir](VecArcDir.md) — arc sweep direction (CW/CCW)
+- [VecNumCircles](VecNumCircles.md) — number of full arcs to run

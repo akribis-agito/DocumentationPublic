@@ -1,5 +1,6 @@
 ---
 keyword: PDVel
+summary: Read-only rate of change of the scaled P/D counter PDPos, in P/D units per second.
 availability:
   standalone:
   - v4
@@ -26,6 +27,23 @@ overrides: {}
 ---
 # PDVel
 
-**Definition:**
+Read-only rate of change of the scaled P/D counter PDPos, in P/D units per second.
 
-PDVel is the rate of change of scaled PD counter (PDPos), in terms of pulse-direction units per second. Please refer to [PDUsrUnits](../../../02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDUsrUnits.md) for more information on query conversion.
+## Overview
+
+`PDVel` is the rate of change of the scaled pulse-and-direction counter [PDPos](PDPos.md), expressed in pulse-direction units per second. It reports how fast the decoded P/D command is moving and is useful for monitoring the velocity of an incoming pulse-and-direction stream during direct ([MotionMode](../02-motion-configuration/MotionMode.md) = 3) or indirect (`MotionMode` = 4) P/D motion.
+
+## How it works
+
+Like `PDPos`, `PDVel` is an internal-count value that is converted to pulse-direction user units when queried over a communication channel. See [PDUsrUnits](PDUsrUnits.md) for the query conversion.
+
+## Examples
+
+```text
+PDVel?              ; read the current P/D command velocity (pulse-direction units/s)
+```
+
+## See also
+
+- [PDPos](PDPos.md) — the counter whose derivative `PDVel` reports
+- [PDUsrUnits](PDUsrUnits.md) — query unit conversion

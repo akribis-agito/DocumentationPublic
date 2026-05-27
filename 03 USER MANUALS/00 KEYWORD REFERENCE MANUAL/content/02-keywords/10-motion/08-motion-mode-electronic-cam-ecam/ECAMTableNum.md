@@ -1,5 +1,6 @@
 ---
 keyword: ECAMTableNum
+summary: Selects the active ECAM cam pattern / look-up table (1-10).
 availability:
   standalone:
   - v4
@@ -26,6 +27,21 @@ overrides: {}
 ---
 # ECAMTableNum
 
-**Definition:**
+Selects the active ECAM cam pattern / look-up table (1-10).
 
-ECAMTableNum is used to select the active cam pattern/look-up table in use. Each cam pattern will have its own unique set of parameters to full define the cam pattern.
+## Overview
+
+`ECAMTableNum` selects which of the up-to-10 cam patterns (look-up tables) is active. Each cam pattern has its own set of parameters that fully define it — [ECAMStart](ECAMStart.md), [ECAMEnd](ECAMEnd.md), [ECAMStartCyc](ECAMStartCyc.md), [ECAMEndCyc](ECAMEndCyc.md), [ECAMGap](ECAMGap.md), [ECAMCycles](ECAMCycles.md), [ECAMMaster](ECAMMaster.md) and [ECAMMasterIni](ECAMMasterIni.md) — held as element-per-pattern arrays. The pattern can be changed only when the axis is not in motion.
+
+## Examples
+
+```text
+ECAMTableNum=1      ; select cam pattern 1 (default)
+ECAMTableNum?       ; read the active cam pattern
+```
+
+## See also
+
+- [ECAMStart](ECAMStart.md) / [ECAMEnd](ECAMEnd.md) — pattern bounds for the selected table
+- [ECAMGap](ECAMGap.md) — master-value spacing for the selected table
+- [Motion mode – Electronic cam (ECAM)](00-overview.md) — ECAM motion overview

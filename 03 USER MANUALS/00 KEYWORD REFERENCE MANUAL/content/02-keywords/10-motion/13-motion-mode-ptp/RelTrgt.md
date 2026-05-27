@@ -1,5 +1,6 @@
 ---
 keyword: RelTrgt
+summary: Relative target distance (user units) for the next point-to-point move.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # RelTrgt
 
-**Definition:**
+Relative target distance (user units) for the next point-to-point move.
 
-RelTrgt sets the relative target distance in user units for the next point-to-point move. When a Begin command is issued in relative PTP mode, the axis moves by this distance from its current position. It is an axis-related parameter, not saved to flash, and can be changed at any time.
+## Overview
 
-**See also:**
+`RelTrgt` sets the relative target distance, in user units, for the next point-to-point (PTP) move. When a [Begin](../04-motion-command/Begin.md) command is issued in relative PTP mode, the axis moves by this distance from its current position. It is the relative counterpart of [AbsTrgt](AbsTrgt.md), which specifies an absolute position instead. It is not saved to flash and can be changed at any time.
 
-[AbsTrgt](AbsTrgt.md), [Begin](../04-motion-command/Begin.md), [Targets](Targets.md)
+## Examples
+
+```text
+RelTrgt=5000        ; move 5000 user units from the current position
+RelTrgt=-5000       ; move 5000 user units in the negative direction
+```
+
+## See also
+
+- [AbsTrgt](AbsTrgt.md) — absolute target position
+- [Targets](Targets.md) — multi-target sequence
+- [Begin](../04-motion-command/Begin.md) — start the PTP move

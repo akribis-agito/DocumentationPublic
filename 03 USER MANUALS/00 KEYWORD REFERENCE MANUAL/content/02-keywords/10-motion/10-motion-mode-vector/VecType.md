@@ -1,5 +1,6 @@
 ---
 keyword: VecType
+summary: Selects the vector motion geometry (0 = linear, 1 = arc).
 availability:
   standalone:
   - v4
@@ -26,10 +27,23 @@ overrides: {}
 ---
 # VecType
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Selects the vector motion geometry (0 = linear, 1 = arc).
 
-Defines if the requested vector motion is linear (VecType = 0) or ARC (VecType = 1).
-Saved to Flash. Can't be modified while in motion.
+## Overview
 
-Near future need: VecType = 2 for combined ARC (main motion) and linear (other axes).
+`VecType` defines whether the requested vector motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 16) is linear (`VecType = 0`) or an arc (`VecType = 1`). It selects the geometry of the coordinated path; when arc is chosen, the move is further described by [VecArcCenter](VecArcCenter.md), [VecArcDir](VecArcDir.md) and [VecNumCircles](VecNumCircles.md). It is saved to flash and cannot be modified while in motion.
+
+> **Note:** A combined arc (main motion) plus linear (other axes) mode, `VecType = 2`, is identified as a near-future need but is outside the current range (0-1).
+
+## Examples
+
+```text
+VecType=0           ; linear vector (default)
+VecType=1           ; arc vector
+```
+
+## See also
+
+- [VecArcCenter](VecArcCenter.md) — arc center / radius (arc type)
+- [VecArcDir](VecArcDir.md) — arc sweep direction (arc type)
+- [VecMemberAxes](VecMemberAxes.md) — axes forming the vector

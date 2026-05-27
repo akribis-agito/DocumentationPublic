@@ -1,5 +1,6 @@
 ---
 keyword: AccShapeFact
+summary: Array of per-segment acceleration scaling factors for the acceleration-shaping profile.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # AccShapeFact
 
-**Definition:**
+Array of per-segment acceleration scaling factors for the acceleration-shaping profile.
 
-AccShapeFact is an array that defines the acceleration scaling factors for each segment of the acceleration-shaping profile. Each element specifies the fraction of the maximum acceleration applied during the corresponding segment defined by AccShapeDist. It is an axis-related array saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`AccShapeFact` is an array (size 11) that defines the acceleration scaling factor for each segment of the acceleration-shaping profile. Each element specifies the fraction of the maximum acceleration applied during the corresponding segment whose extent is set by [AccShapeDist](AccShapeDist.md). The shaping is only applied when [AccShapeOn](AccShapeOn.md) is enabled. It is an axis-related array saved to flash and can be changed at any time.
 
-[AccShapeOn](AccShapeOn.md), [AccShapeDist](AccShapeDist.md)
+## Examples
+
+```text
+AccShapeFact[1]=50      ; scaling factor for first segment
+AccShapeFact[2]=100     ; scaling factor for second segment
+AccShapeFact[1]?        ; query first segment factor
+```
+
+## See also
+
+- [AccShapeOn](AccShapeOn.md) — enables acceleration shaping
+- [AccShapeDist](AccShapeDist.md) — per-segment distances

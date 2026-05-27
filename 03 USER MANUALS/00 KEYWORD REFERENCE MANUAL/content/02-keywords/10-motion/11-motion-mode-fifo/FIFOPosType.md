@@ -1,5 +1,6 @@
 ---
 keyword: FIFOPosType
+summary: Selects the operating mode of the FIFO position-tracking feature.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # FIFOPosType
 
-**Definition:**
+Selects the operating mode of the FIFO position-tracking feature.
 
-FIFOPosType selects the operating mode of the FIFO position tracking feature. Different values select the source and interpretation of the position segments pushed into the FIFO (for example, absolute or incremental, with or without velocity feedforward). It is an axis-related parameter saved to flash, and cannot be changed while the axis is in motion.
+## Overview
 
-**See also:**
+`FIFOPosType` selects the operating mode of the FIFO position-tracking feature, choosing how position segments pushed into the queue are interpreted. It is the configuration keyword for the FIFO position-tracking subsystem, enabled by [FIFOPosFIFOEn](FIFOPosFIFOEn.md) and fed by [FIFOPosPush](FIFOPosPush.md). It is saved to flash and cannot be changed while the axis is in motion.
 
-[FIFOPosPush](FIFOPosPush.md), [FIFOPosFIFOEn](FIFOPosFIFOEn.md), [FIFOPosStatus](FIFOPosStatus.md)
+## Examples
+
+```text
+FIFOPosType=0       ; select FIFO position-tracking mode 0
+```
+
+## See also
+
+- [FIFOPosFIFOEn](FIFOPosFIFOEn.md) — enable FIFO position tracking
+- [FIFOPosPush](FIFOPosPush.md) — push a position segment
+- [FIFOPosStatus](FIFOPosStatus.md) — position-tracking queue status

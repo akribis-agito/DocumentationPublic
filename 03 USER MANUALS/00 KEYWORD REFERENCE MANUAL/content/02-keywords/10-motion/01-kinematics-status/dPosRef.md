@@ -1,5 +1,6 @@
 ---
 keyword: dPosRef
+summary: Velocity reference, the filtered derivative of the position reference PosRef.
 availability:
   standalone:
   - v4
@@ -26,6 +27,21 @@ overrides: {}
 ---
 # dPosRef
 
-**Definition:**
+Velocity reference, the filtered derivative of the position reference PosRef.
 
-dPosRef is the velocity reference, calculated as the filtered derivative of position reference (PosRef). The filter used is of first-order low-pass and is defined by dPosRefFilt.
+## Overview
+
+`dPosRef` is the velocity reference, computed as the filtered derivative of the position reference [PosRef](PosRef.md). The filter is a first-order low-pass filter defined by `dPosRefFilt`.
+
+`dPosRef` is the *velocity reference* and must not be confused with [VelRef](VelRef.md), the *velocity-loop reference/input*. `VelRef` is the sum of the position-controller output and the scaled velocity reference, whereas `dPosRef` is purely the derivative of `PosRef`.
+
+## Examples
+
+```text
+dPosRef?            ; read the current velocity reference
+```
+
+## See also
+
+- [PosRef](PosRef.md) — position reference, the source of this derivative
+- [VelRef](VelRef.md) — velocity-loop reference/input (a different signal)

@@ -1,5 +1,6 @@
 ---
 keyword: FIFOPosCycle
+summary: Cycle time, in servo samples, between consecutive FIFO position segments.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # FIFOPosCycle
 
-**Definition:**
+Cycle time, in servo samples, between consecutive FIFO position segments.
 
-FIFOPosCycle sets the cycle time (in servo samples) for FIFO position tracking. It defines the time interval between consecutive position segments popped from the FIFO and applied as the axis reference. It is an axis-related parameter saved to flash, and cannot be changed while the axis is in motion.
+## Overview
 
-**See also:**
+`FIFOPosCycle` sets the cycle time, in servo samples, between consecutive position segments popped from the FIFO position queue and applied as the axis reference. It controls the playback rate of the position-tracking trajectory enabled by [FIFOPosFIFOEn](FIFOPosFIFOEn.md). It is saved to flash and cannot be changed while the axis is in motion.
 
-[FIFOPosType](FIFOPosType.md), [FIFOPosPush](FIFOPosPush.md), [FIFOPosFIFOEn](FIFOPosFIFOEn.md)
+## Examples
+
+```text
+FIFOPosCycle=16     ; apply a new position segment every 16 servo samples
+```
+
+## See also
+
+- [FIFOPosType](FIFOPosType.md) — select the position-tracking mode
+- [FIFOPosPush](FIFOPosPush.md) — push a position segment
+- [FIFOPosFIFOEn](FIFOPosFIFOEn.md) — enable FIFO position tracking

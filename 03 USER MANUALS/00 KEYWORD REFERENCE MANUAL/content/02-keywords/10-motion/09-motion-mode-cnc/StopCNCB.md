@@ -1,5 +1,6 @@
 ---
 keyword: StopCNCB
+summary: Command that stops execution of the CNC motion queue B.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # StopCNCB
 
-**Definition:**
+Command that stops execution of the CNC motion queue B.
 
-StopCNCB is a command that stops execution of the CNC motion queue B. The currently executing segment is aborted and the axis decelerates to rest. It is a non-axis command function that can be issued at any time, including during motion.
+## Overview
 
-**See also:**
+`StopCNCB` is a command function that stops the CNC motion engine driving queue B. The currently executing segment is aborted and the axis decelerates to rest. Because it is a command, it can be issued at any time, including during motion.
 
-[StopCNCA](StopCNCA.md), [CNCAClear/CNCBClear](CNCAClear-CNCBClear.md), [CNCAFIFO/CNCBFIFO](CNCAFIFO-CNCBFIFO.md)
+`StopCNCB` is the second-engine counterpart of [StopCNCA](StopCNCA.md). It halts motion while leaving the queue intact, as opposed to [CNCAClear/CNCBClear](CNCAClear-CNCBClear.md), which empties the segment FIFO.
+
+## Examples
+
+```text
+StopCNCB            ; stop CNC motion on queue B
+```
+
+## See also
+
+- [StopCNCA](StopCNCA.md) — stop command for the first CNC engine
+- [CNCAClear/CNCBClear](CNCAClear-CNCBClear.md) — clear all pending segments from the queue
+- [CNCAFIFO/CNCBFIFO](CNCAFIFO-CNCBFIFO.md) — inspect queued segment data

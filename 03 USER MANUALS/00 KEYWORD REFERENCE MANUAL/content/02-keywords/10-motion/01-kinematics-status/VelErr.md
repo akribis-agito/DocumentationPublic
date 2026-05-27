@@ -1,5 +1,6 @@
 ---
 keyword: VelErr
+summary: Velocity error (reference minus feedback), used for control and protection.
 availability:
   standalone:
   - v4
@@ -26,22 +27,36 @@ overrides: {}
 ---
 # VelErr
 
-**Definition:**
+Velocity error (reference minus feedback), used for control and protection.
 
-VelErr reports the error between velocity reference and feedback, only if the axis is enabled, in position/velocity operation mode, not in open-loop condition and the axis phasing is done. The unit is in terms of main user unit per second.
+## Overview
 
-1.  Under individual (non-gantry) mode
+`VelErr` reports the error between the velocity reference and the velocity feedback, in main user units per second. It is the velocity-loop counterpart of the position error [PosErr](PosErr.md) and is used for velocity feedback control and motion protection.
+
+`VelErr` is only reported when the axis is enabled, in a position or velocity operation mode, not in open-loop, and axis phasing is done; otherwise it reports `0`.
+
+## How it works
+
+1. Under individual (non-gantry) mode:
 
 $$
 VelErr = VelRef - Vel\lbrack 1\rbrack
 $$
 
-2.  Under gantry mode
+2. Under gantry mode:
 
 $$
 VelErr = VelRef - GantryVel
 $$
 
-Otherwise, VelErr reports 0.
+## Examples
 
-VelErr is generally used for velocity feedback control and motion protection.
+```text
+VelErr?             ; read the current velocity error
+```
+
+## See also
+
+- [VelRef](VelRef.md) — velocity-loop reference (the minuend)
+- [Vel](Vel.md) — feedback velocity array (`Vel[1]` is the subtrahend in non-gantry mode)
+- [PosErr](PosErr.md) — position error counterpart

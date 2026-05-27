@@ -1,5 +1,6 @@
 ---
 keyword: VecdPosRef
+summary: Read-only derivative of the vector position reference (vector velocity), always positive.
 availability:
   standalone:
   - v4
@@ -26,9 +27,19 @@ overrides: {}
 ---
 # VecdPosRef
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Read-only derivative of the vector position reference (vector velocity), always positive.
 
-A status parameter that reports the derivative of the vector motion position reference
+## Overview
 
-(derivative of VecPosRef). VecdPosRef is always positive.
+`VecdPosRef` is a status parameter that reports the derivative of the vector motion position reference, i.e. the time derivative of [VecPosRef](VecPosRef.md). It represents the instantaneous speed along the vector path and follows the profile shaped by [VecAccel](VecAccel.md), [VecDecel](VecDecel.md) and [VecSpeed](VecSpeed.md). `VecdPosRef` is always positive.
+
+## Examples
+
+```text
+VecdPosRef?         ; read the current speed along the vector path
+```
+
+## See also
+
+- [VecPosRef](VecPosRef.md) — the position reference whose derivative this reports
+- [VecSpeed](VecSpeed.md) — commanded maximum resultant speed

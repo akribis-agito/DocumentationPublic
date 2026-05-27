@@ -1,5 +1,6 @@
 ---
 keyword: VecMemberAxes
+summary: Bit mask selecting which axes participate in the coordinated vector motion.
 availability:
   standalone:
   - v4
@@ -26,9 +27,25 @@ overrides: {}
 ---
 # VecMemberAxes
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Bit mask selecting which axes participate in the coordinated vector motion.
 
-Used (bitwise) to define the axes participating in the vector motion.
+## Overview
 
-Saved to Flash. Can't be modified while in motion.
+`VecMemberAxes` is a bit mask that defines which axes participate in the vector motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 16). Each bit corresponds to one axis, so the controller knows which axes to coordinate along the vector path and which to leave stationary. It is an axis-related parameter saved to flash and cannot be modified while in motion.
+
+## How it works
+
+Set a bit to include the corresponding axis in the vector. Bit 0 is the lowest-order axis, bit 1 the next, and so on. The range `0`-`255` allows up to eight axes to be selected. For example, the value `3` (bits 0 and 1 set) selects the first two axes.
+
+## Examples
+
+```text
+VecMemberAxes=3     ; include the first two axes (bits 0 and 1) in the vector
+VecMemberAxes?      ; read the current member-axis mask
+```
+
+## See also
+
+- [VecType](VecType.md) — linear vs. arc vector
+- [VecAbsTrgt](VecAbsTrgt.md) — resultant path distance over the member axes
+- [VecMotionStat](VecMotionStat.md) — vector motion status

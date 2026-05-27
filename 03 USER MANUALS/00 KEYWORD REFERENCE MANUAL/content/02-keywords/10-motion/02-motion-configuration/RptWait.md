@@ -1,5 +1,6 @@
 ---
 keyword: RptWait
+summary: Dwell time, in milliseconds, between repetitions of repetitive point-to-point motion.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # RptWait
 
-**Condition:**
+Dwell time, in milliseconds, between repetitions of repetitive point-to-point motion.
 
-RptWait is used only when MotionMode=2 (repetitive point-to-point (PTP) motion).
+## Overview
 
-**Definition:**
+`RptWait` is the dwell time, in milliseconds, inserted between successive point-to-point motions during a repetitive move. It is used only when [MotionMode](MotionMode.md) = 2 (repetitive point-to-point motion), and it governs the pause between the individual repetitions counted by [RptCycles](RptCycles.md). It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
 
-RptWait is the dwell time in between PTP motions, in terms of milliseconds.
+## Examples
+
+```text
+RptWait=500         ; dwell 500 ms between repetitions
+RptWait?            ; query current value
+```
+
+## See also
+
+- [MotionMode](MotionMode.md) — must be 2 for `RptWait` to apply
+- [RptCycles](RptCycles.md) — number of repetitions
+- [RptMode](RptMode.md) — repetition direction

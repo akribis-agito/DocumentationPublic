@@ -1,5 +1,6 @@
 ---
 keyword: OneOverTOn
+summary: Enables or disables the 1/T velocity measurement reported as Vel[4].
 availability:
   standalone:
   - v4
@@ -26,12 +27,21 @@ overrides: {}
 ---
 # OneOverTOn
 
-**Condition:**
+Enables or disables the 1/T velocity measurement reported as Vel[4].
 
-OneOverTOn is applicable when digital incremental encoder (EncType = 1) is used.
+## Overview
 
-**Definition:**
+`OneOverTOn` enables (`= 1`) or disables (`= 0`) the 1/T velocity measurement. When disabled, `Vel[4]` reports `0`. It applies when a digital incremental encoder (`EncType = 1`) is used. The measurement is further tuned by [OneOverTFreq](OneOverTFreq.md) (polling frequency) and [OneOverTGap](OneOverTGap.md) (counter gap).
 
-OneOverTOn is used to enable (OneOverTOn = 1) or disable (OneOverTOn = 0) the 1/T velocity measurement. Vel\[4\] reports 0 if 1/T velocity measurement is disabled.
+## Examples
 
-Please refer to the [Vel](../../../02-keywords/10-motion/01-kinematics-status/Vel.md) keyword for more information.
+```text
+OneOverTOn=1        ; enable 1/T velocity measurement
+OneOverTOn=0        ; disable (Vel[4] reports 0)
+```
+
+## See also
+
+- [Vel](Vel.md) — feedback velocity array (`Vel[4]` is the 1/T method)
+- [OneOverTFreq](OneOverTFreq.md) — polling-frequency down-sampling factor
+- [OneOverTGap](OneOverTGap.md) — encoder-counter gap that triggers polling save

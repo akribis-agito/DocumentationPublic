@@ -1,5 +1,6 @@
 ---
 keyword: ECAMEnd
+summary: GenData index where the ECAM cam pattern ends.
 availability:
   standalone:
   - v4
@@ -26,12 +27,29 @@ overrides: {}
 ---
 # ECAMEnd
 
-**Definition:**
+GenData index where the ECAM cam pattern ends.
 
-ECAMEnd defines the GenData index where the cam pattern ends. It is an array of size 10, where each element corresponds to a cam pattern.
+## Overview
 
-ECAMEnd must match the following order where the overall cam pattern is derived.
+`ECAMEnd` defines the [GenData](../../20-arrays/GenData.md) index where the cam pattern ends. It is an array of 10 cam patterns, one element per pattern. It is the upper bound of the overall pattern, paired with the lower bound [ECAMStart](ECAMStart.md), while [ECAMStartCyc](ECAMStartCyc.md) and [ECAMEndCyc](ECAMEndCyc.md) bound the repeating segment.
+
+## How it works
+
+`ECAMEnd` must satisfy the ordering from which the overall cam pattern is derived:
 
 $$
 ECAMStart \leq ECAMStartCyc < ECAMEndCyc \leq ECAMEnd
 $$
+
+## Examples
+
+```text
+ECAMEnd[1]=100      ; cam pattern 1 ends at GenData index 100
+ECAMEnd[1]?         ; read current value
+```
+
+## See also
+
+- [ECAMStart](ECAMStart.md) — start index of the overall pattern
+- [ECAMStartCyc](ECAMStartCyc.md) / [ECAMEndCyc](ECAMEndCyc.md) — bounds of the repeating segment
+- [GenData](../../20-arrays/GenData.md) — array storing the cam pattern

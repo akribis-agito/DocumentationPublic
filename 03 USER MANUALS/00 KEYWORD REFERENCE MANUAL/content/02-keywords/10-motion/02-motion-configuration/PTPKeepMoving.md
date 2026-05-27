@@ -1,5 +1,6 @@
 ---
 keyword: PTPKeepMoving
+summary: Lets a new Begin blend into the existing move instead of stopping first.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # PTPKeepMoving
 
-**Definition:**
+Lets a new `Begin` blend into the existing move instead of stopping first.
 
-PTPKeepMoving controls whether the axis continues moving toward the last target position if a new Begin command is issued before the previous move has completed. When set to a non-zero value the axis blends smoothly into the new target without stopping. It is an axis-related parameter, not saved to flash, and can be changed at any time.
+## Overview
 
-**See also:**
+`PTPKeepMoving` controls what happens when a new [Begin](../04-motion-command/Begin.md) command is issued before the previous point-to-point move has completed. When set to `1`, the axis blends smoothly into the new target ([AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) / [RelTrgt](../13-motion-mode-ptp/RelTrgt.md)) without first stopping, which is useful for on-the-fly retargeting. When `0`, a new `Begin` is only accepted after the current move finishes. It is an axis-related parameter, not saved to flash, and can be changed at any time, including during motion.
 
-[Begin](../04-motion-command/Begin.md), [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md), [RelTrgt](../13-motion-mode-ptp/RelTrgt.md)
+## Examples
+
+```text
+PTPKeepMoving=1     ; blend into a new target without stopping
+PTPKeepMoving=0     ; require the move to complete first
+PTPKeepMoving?      ; query state
+```
+
+## See also
+
+- [Begin](../04-motion-command/Begin.md) — starts (or retargets) the move
+- [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) — absolute target position
+- [RelTrgt](../13-motion-mode-ptp/RelTrgt.md) — relative target position

@@ -1,5 +1,6 @@
 ---
 keyword: BuffCalc
+summary: Command that pre-computes the spline coefficients from the buffer waypoints.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # BuffCalc
 
-**Definition:**
+Command that pre-computes the spline coefficients from the buffer waypoints.
 
-BuffCalc is a command that pre-computes the spline coefficients from the waypoint data in BuffPos and BuffTime before motion begins. It must be called after loading the waypoint arrays and before issuing a Begin command in spline buffer mode. It is an axis-related command function that cannot be issued while the axis is in motion.
+## Overview
 
-**See also:**
+`BuffCalc` pre-computes the spline coefficients from the waypoint data in [BuffPos](BuffPos.md) and [BuffTime](BuffTime.md) before motion begins. It must be called after the waypoint arrays are loaded and before a `Begin` command is issued in spline buffer mode, so the controller has a ready trajectory to execute. The interpolation mode used is set by [BuffSplineMod](BuffSplineMod.md) and the edge conditions by [BuffEdgeMode](BuffEdgeMode.md). It cannot be issued while the axis is in motion.
 
-[BuffPos](BuffPos.md), [BuffTime](BuffTime.md), [BuffSplineMod](BuffSplineMod.md), [BuffStatus](BuffStatus.md)
+## Examples
+
+```text
+BuffCalc=0          ; compute spline coefficients from BuffPos and BuffTime
+```
+
+## See also
+
+- [BuffPos](BuffPos.md) — waypoint positions
+- [BuffTime](BuffTime.md) — per-segment durations
+- [BuffSplineMod](BuffSplineMod.md) — spline interpolation mode
+- [BuffStatus](BuffStatus.md) — spline buffer status

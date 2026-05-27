@@ -1,5 +1,6 @@
 ---
 keyword: ECAMMasterIni
+summary: Offset of the starting master value relative to the ECAM range at start of motion.
 availability:
   standalone:
   - v4
@@ -26,11 +27,17 @@ overrides: {}
 ---
 # ECAMMasterIni
 
-**Definition:**
+Offset of the starting master value relative to the ECAM range at start of motion.
 
-ECAMMasterIni denotes the offset of starting master value relative to the ECAM range upon start of ECAM motion. It is an array of size 10, where each element corresponds to a cam pattern.
+## Overview
 
-ECAMMasterIni must be at least zero or positive. The value of ECAMMasterIni must be such that when the ECAM motion is started, the first repetition cycle is not exceeded.
+`ECAMMasterIni` denotes the offset of the starting master value relative to the ECAM range upon start of ECAM motion. It is an array of 10 cam patterns, one element per pattern. It positions where, within the cam range, the master begins when ECAM motion starts; its exact role depends on the sign of [ECAMGap](ECAMGap.md) and the value of [ECAMCycles](ECAMCycles.md).
+
+`ECAMMasterIni` must be zero or positive, and small enough that the first repetition cycle is not exceeded when motion starts.
+
+## How it works
+
+The maximum allowed value depends on `ECAMCycles`:
 
 | ECAMCycles | Maximum value of ECAMMasterIni                   |
 |------------|--------------------------------------------------|
@@ -47,4 +54,17 @@ ECAMMasterIni must be at least zero or positive. The value of ECAMMasterIni must
               abs(ECAMGap)\ *\ (ECAMEndCyc\  - \ ECAMStartCyc)  
               ```                                               |
 
-Please refer to the figures in [Motion mode – Electronic cam (ECAM)](../../../02-keywords/10-motion/08-motion-mode-electronic-cam-ecam/00-overview.md) for more information on the initial offset, which varies in definition according to ECAMGap and ECAMCycles.
+## Examples
+
+```text
+ECAMMasterIni[1]=0  ; start at the beginning of the ECAM range for cam pattern 1
+ECAMMasterIni[1]?   ; read current value
+```
+
+Refer to the figures in [Motion mode – Electronic cam (ECAM)](00-overview.md) for more information on the initial offset, which varies according to ECAMGap and ECAMCycles.
+
+## See also
+
+- [ECAMGap](ECAMGap.md) — spacing/direction of master values
+- [ECAMCycles](ECAMCycles.md) — number of pattern occurrences
+- [ECAMMaster](ECAMMaster.md) — selects the master variable

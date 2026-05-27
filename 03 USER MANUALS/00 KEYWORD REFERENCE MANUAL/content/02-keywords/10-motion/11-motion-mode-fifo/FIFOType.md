@@ -1,5 +1,6 @@
 ---
 keyword: FIFOType
+summary: Read-only array reporting the type of each entry stored in the FIFO motion queue.
 availability:
   standalone:
   - v4
@@ -26,55 +27,47 @@ overrides: {}
 ---
 # FIFOType
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Read-only array reporting the type of each entry stored in the FIFO motion queue.
 
-FIFO is a special motion mode in which the controller performs a sequence of linear and parabolic
-segments, as defined by the user before the motion and optionally also during the motion.
+## Overview
 
-The motion is created according to motion segments which are stored in a FIFO memory.
+`FIFOType` is the hub page for FIFO (First In, First Out) motion mode and reports the entry type of each element currently held in the FIFO. It works together with [FIFOValue](FIFOValue.md), which carries the matching data value for each entry.
 
-The motion segments definitions can be pushed to the FIFO at any time (before or during the
-motion), providing that the FIFO is not full. If the FIFO is full, the push operation is rejected with a
-suitable error.
+FIFO is a special motion mode in which the controller performs a sequence of linear and parabolic segments, defined by the user before the motion and optionally also during the motion. The motion is created from motion segments stored in a FIFO memory. Segment definitions can be pushed to the FIFO at any time (before or during the motion), provided the FIFO is not full; if the FIFO is full, the push operation is rejected with a suitable error.
 
-If, during a motion in this mode, the controller reaches the last element in the FIFO, and
-completing this motion segment, and yet no new element was pushed, the motion is automatically
-ended.
+If, during a motion in this mode, the controller reaches and completes the last element in the FIFO and no new element has been pushed, the motion is automatically ended. The motion can also be stopped using the [Stop](../04-motion-command/Stop.md) or the [StopFIFO](StopFIFO.md) functions: `Stop` decelerates to zero speed, while `StopFIFO` makes the currently executing motion segment the last segment.
 
-The motion can be also stopped using the Stop or the StopFIFO functions. The first decelerate to
-zero speed and the second makes the currently executed motion segment to be the last segment.
+This page describes the FIFO motion mode and all related keywords: [FIFOValue](FIFOValue.md), [FIFOStatus](FIFOStatus.md), [FIFOCycleTime](FIFOCycleTime.md), [FIFOPushCycle](FIFOPushCycle.md), [FIFOPushLinP](FIFOPushLinP.md), [FIFOPushLinV](FIFOPushLinV.md), [FIFOPushParP](FIFOPushParP.md), [FIFOPushParA](FIFOPushParA.md), [FIFORemove](FIFORemove.md), [FIFOClear](FIFOClear.md), and [StopFIFO](StopFIFO.md).
 
-Each motion segment can be of type Velocity or Acceleration. Velocity type segment is a segment
-in which the velocity reference is constant and Acceleration type segment is a segment in which
-the acceleration reference is constant.
+## How it works
 
-The time length of each segment (FIFOCycleTime) is a fixed value of number of control samples.
-However, it can be modified at any time that the controller is ending a given segment and starting
-a new one.
+Each motion segment can be of type **Velocity** or **Acceleration**:
 
-The FIFO is of size 512 entries. Each entry has type and value. See below for possible FIFO entry
-types. If all entries are motion entries, the FIFO can hold up to 512 motion segments. Of course, it
-can be re-filled over the communication, during the motion sequence.
+- A **Velocity** type segment is one in which the velocity reference is constant.
+- An **Acceleration** type segment is one in which the acceleration reference is constant.
 
-The controller provides variety of parameters and functions to handle the FIFO and the motion
-behavior, as described in details below.
+The time length of each segment ([FIFOCycleTime](FIFOCycleTime.md)) is a fixed number of control samples. It can be modified at any time the controller is ending one segment and starting a new one.
 
-Possible segment motions
+The FIFO holds up to 512 entries. Each entry has a type and a value. If all entries are motion entries, the FIFO can hold up to 512 motion segments. The FIFO can be re-filled over the communication channel during the motion sequence.
 
-            1. Velocity type motion segment:
+For a velocity-type motion segment:
 
-                     a. Segment duration is known in number of samples (sample time of the control
-                          loop). It is stored in the parameter FIFOCycleTime.
+- Segment duration is given in number of samples (the sample time of the control loop) and is stored in [FIFOCycleTime](FIFOCycleTime.md).
+- The segment starts naturally from the last position reference.
+- The motion can be defined by a linear position delta. The final target position is calculated from the given delta, which is scaled by the controller `SAMPLING_FREQUENCY` (typically 16384 Hz).
 
-                     b. The segment starts naturally from the last position reference.
-                     c. Motion definition can be given by one of:
+> **Documentation pending:** The full enumeration of `FIFOType` entry codes (range 0–5) and the complete segment-definition details were truncated in the source reference. Verify the exact type codes against current firmware before relying on specific values.
 
-                                i. Move linearly with given delta for position reference.
-                                         1. Final target position is calculated using the given delta. The delta
-                                              is given with scaling of the controller SAMPLING_FREQUENCY
-                                              (typically 16384 Hz). This means that a delta of 1 [count] is
+## Examples
 
-                                                                                                      Page 268
+```text
+FIFOType[1]?        ; query the type of the first FIFO entry
+```
 
-            Tel: +972-9-8909797 Fax: +972-9-8909796 email: info@agito.co.il website: www.agito.co.il
+## See also
+
+- [FIFOValue](FIFOValue.md) — value paired with each FIFO entry type
+- [FIFOStatus](FIFOStatus.md) — FIFO queue status
+- [FIFOCycleTime](FIFOCycleTime.md) — segment duration in control samples
+- [StopFIFO](StopFIFO.md) — end the current segment as the last one
+- [Stop](../04-motion-command/Stop.md) — decelerate to zero speed

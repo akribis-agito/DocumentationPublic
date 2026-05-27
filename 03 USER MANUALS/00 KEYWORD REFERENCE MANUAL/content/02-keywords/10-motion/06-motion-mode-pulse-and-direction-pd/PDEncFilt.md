@@ -1,5 +1,6 @@
 ---
 keyword: PDEncFilt
+summary: Reserved pulse-and-direction keyword; not implemented in current firmware.
 availability:
   standalone:
   - v4
@@ -26,8 +27,15 @@ overrides: {}
 ---
 # PDEncFilt
 
-<span class="mark">**DN:** It should be removed from FW.</span>
+Reserved pulse-and-direction keyword; not implemented in current firmware.
 
-**Definition:**
+## Overview
 
-PDEncFilt is a reserved keyword.
+`PDEncFilt` is a reserved keyword. It is marked as not implemented and is slated for removal from firmware.
+
+> **Documentation pending:** This keyword is reserved and not implemented. Do not use it.
+
+## See also
+
+- [PDPos](PDPos.md) — the scaled P/D counter
+- [PDEncDir](PDEncDir.md) — P/D accumulation direction

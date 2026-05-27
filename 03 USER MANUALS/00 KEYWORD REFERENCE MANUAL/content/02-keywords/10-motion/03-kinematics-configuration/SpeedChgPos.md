@@ -1,5 +1,6 @@
 ---
 keyword: SpeedChgPos
+summary: Axis position at which a speed-change-on-the-fly event is triggered.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # SpeedChgPos
 
-**Definition:**
+Axis position at which a speed-change-on-the-fly event is triggered.
 
-SpeedChgPos sets the axis position at which the speed-change-on-the-fly event is triggered when SpeedChgOn is active. When the axis reaches this position, the commanded speed is updated to SpeedChgNew. It is an axis-related parameter in user units saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`SpeedChgPos` sets the axis position, in user units, at which the speed-change-on-the-fly event is triggered when [SpeedChgOn](SpeedChgOn.md) is active. When the axis crosses this position in the direction selected by [SpeedChgDir](SpeedChgDir.md), the commanded speed is updated to [SpeedChgNew](SpeedChgNew.md). It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
 
-[SpeedChgOn](SpeedChgOn.md), [SpeedChgNew](SpeedChgNew.md), [SpeedChgDir](SpeedChgDir.md)
+## Examples
+
+```text
+SpeedChgPos=50000   ; trigger position (user units)
+SpeedChgPos?        ; query current value
+```
+
+## See also
+
+- [SpeedChgOn](SpeedChgOn.md) — enables speed change on the fly
+- [SpeedChgNew](SpeedChgNew.md) — new speed applied at the trigger
+- [SpeedChgDir](SpeedChgDir.md) — direction in which the trigger is active

@@ -1,5 +1,6 @@
 ---
 keyword: BeginDInOn
+summary: Enables a digital-input trigger that automatically issues Begin on the axis.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # BeginDInOn
 
-**Definition:**
+Enables a digital-input trigger that automatically issues `Begin` on the axis.
 
-BeginDInOn configures a digital input line that, when asserted, automatically triggers a Begin command on the axis. Setting this parameter to a non-zero value enables the hardware trigger so that the rising edge of the selected digital input starts motion without a software command. It is an axis-related parameter saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`BeginDInOn` enables a hardware trigger so that a configured digital input automatically issues a [Begin](Begin.md) command, starting motion without a software command. When set to `1`, the rising edge of the selected digital input starts the move; when `0`, the trigger is disabled. The digital input state is read through the [DInPort-DInPortHigh](../../05-inputs-outputs/04-digital-inputs/DInPort-DInPortHigh.md) registers. It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
 
-[Begin](Begin.md), [DInPort-DInPortHigh](../../05-inputs-outputs/04-digital-inputs/DInPort-DInPortHigh.md)
+## Examples
+
+```text
+BeginDInOn=1        ; enable digital-input start trigger
+BeginDInOn=0        ; disable the trigger
+BeginDInOn?         ; query state
+```
+
+## See also
+
+- [Begin](Begin.md) — the command this trigger issues
+- [DInPort-DInPortHigh](../../05-inputs-outputs/04-digital-inputs/DInPort-DInPortHigh.md) — digital input port status

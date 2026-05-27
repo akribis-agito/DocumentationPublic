@@ -1,5 +1,6 @@
 ---
 keyword: MotionSamples
+summary: Move and settle times of the last completed motion, in controller cycles.
 availability:
   standalone:
   - v4
@@ -26,15 +27,15 @@ overrides: {}
 ---
 # MotionSamples
 
-**Condition:**
+Move and settle times of the last completed motion, in controller cycles.
 
-It is only used when OperationMode = 2 or 3.
+## Overview
 
-**Definition:**
+`MotionSamples` reports the move and settle times of the last completed motion, used to characterise motion timing and settling performance. It is only used in position or velocity control operation mode (`OperationMode = 2` or `3`). Each value is a count of controller cycles (typically $T_{s} = \frac{1}{16384}\,\text{Hz} = 61.03515\,\mu s$ per cycle), so multiply by $T_{s}$ to obtain SI time. The settling components depend on [InTargetTime](InTargetTime.md).
 
-MotionSamples reports the move and settle times of the last completed motion. The value is in the unit of number of controller cycles (typically 1 cycle equals to $T_{s} = \frac{1}{16384}Hz = 61.03515\mu s$).
+## How it works
 
-Each array element represents different time, as shown.
+Each array element represents a different time:
 
 | Index | Descriptions |
 |----|----|
@@ -53,8 +54,18 @@ $$
 MotionSamples\lbrack 3\rbrack = \ MotionSamples\lbrack 2\rbrack + \frac{InTargetTime}{T_{s}}\ 
 $$
 
-**Example:**
+## Examples
 
 ![image30.emf](../../../assets/image30.emf)
 
 The plot above shows an example of MotionSamples. Since MotionSamples is in controller cycles, multiplication by sampling time (here, it is $T_{s} = 61.03515\mu s$) is needed to get the time in SI unit.
+
+```text
+MotionSamples[1]?   ; motion profile time of the last move (controller cycles)
+MotionSamples[3]?   ; total time until settled for at least InTargetTime
+```
+
+## See also
+
+- [InTargetTime](InTargetTime.md) — dwell time used in the `MotionSamples[3]` relation
+- [InTargetStat](InTargetStat.md) — settling state of the axis

@@ -1,5 +1,6 @@
 ---
 keyword: VecSpeed
+summary: Maximum vector (resultant) speed in user units/s for coordinated multi-axis motion.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # VecSpeed
 
-**Definition:**
+Maximum vector (resultant) speed in user units/s for coordinated multi-axis motion.
 
-VecSpeed sets the maximum vector (resultant) speed for coordinated multi-axis motion in user units per second. The individual axis velocities are scaled so that the vector magnitude does not exceed this value. It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
+## Overview
 
-**See also:**
+`VecSpeed` sets the maximum vector (resultant) speed for coordinated multi-axis vector motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 16), in user units per second. The individual axis velocities are scaled so that the vector magnitude does not exceed this value, which is what keeps a multi-axis path moving at a controlled feed rate. The ramps to and from this speed are governed by [VecAccel](VecAccel.md) and [VecDecel](VecDecel.md). It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
 
-[VecAccel](VecAccel.md), [VecDecel](VecDecel.md), [VecJerk](VecJerk.md)
+## Examples
+
+```text
+VecSpeed=10000      ; maximum resultant speed (user units/s, default)
+VecSpeed?           ; read the current value
+```
+
+## See also
+
+- [VecAccel](VecAccel.md) — vector acceleration rate
+- [VecDecel](VecDecel.md) — vector deceleration rate
+- [VecJerk](VecJerk.md) — jerk limit for S-curve smoothing

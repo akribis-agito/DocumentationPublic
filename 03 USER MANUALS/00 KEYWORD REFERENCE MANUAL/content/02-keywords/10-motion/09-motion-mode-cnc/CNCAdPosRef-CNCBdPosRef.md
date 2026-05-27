@@ -1,8 +1,21 @@
+---
+summary: Derivative of CNCAPosRef — the current vector velocity of the profiler.
+---
 # CNCAdPosRef/CNCBdPosRef
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics.
-     The CNCB counterpart operates the same way on the second CNC engine. -->
+Derivative of CNCAPosRef — the current vector velocity of the profiler.
 
-CNCAdPosRef is the derivative of CNCAPosRef, meaning the current vector velocity of the
-profiler.
+## Overview
+
+`CNCAdPosRef` (and its `CNCBdPosRef` counterpart on the second CNC engine) is the derivative of [CNCAPosRef/CNCBPosRef](CNCAPosRef-CNCBPosRef.md), meaning the current vector velocity of the profiler along the CNC path.
+
+## Examples
+
+```text
+CNCAdPosRef?        ; read the current vector velocity of the profiler
+```
+
+## See also
+
+- [CNCAPosRef/CNCBPosRef](CNCAPosRef-CNCBPosRef.md) — desired position along the CNC path
+- [CNCAAbsTrgt/CNCBAbsTrgt](CNCAAbsTrgt-CNCBAbsTrgt.md) — segment target distance

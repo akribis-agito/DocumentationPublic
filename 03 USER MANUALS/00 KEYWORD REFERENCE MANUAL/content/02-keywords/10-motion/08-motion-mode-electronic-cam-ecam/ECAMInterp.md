@@ -1,5 +1,6 @@
 ---
 keyword: ECAMInterp
+summary: Reserved internal ECAM keyword (not implemented).
 availability:
   standalone:
   - v4
@@ -26,6 +27,14 @@ overrides: {}
 ---
 # ECAMInterp
 
-**Definition:**
+Reserved internal ECAM keyword (not implemented).
 
-<span class="mark">ECAMInterp is a reserved internal keyword.</span>
+## Overview
+
+`ECAMInterp` is a reserved internal keyword in the ECAM motion group. Its valid range is fixed at `[0, 0]`.
+
+> **Documentation pending:** `ECAMInterp` is currently reserved and not implemented (`implemented: not_implemented`). No user-facing behaviour is defined.
+
+## See also
+
+- [Motion mode – Electronic cam (ECAM)](00-overview.md) — ECAM motion overview

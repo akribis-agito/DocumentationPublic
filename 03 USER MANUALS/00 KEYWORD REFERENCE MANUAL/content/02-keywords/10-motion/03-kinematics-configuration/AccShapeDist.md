@@ -1,5 +1,6 @@
 ---
 keyword: AccShapeDist
+summary: Array of per-segment distances defining the acceleration-shaping profile.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # AccShapeDist
 
-**Definition:**
+Array of per-segment distances defining the acceleration-shaping profile.
 
-AccShapeDist is an array that defines the positional distances of each segment in the acceleration-shaping profile. Together with AccShapeFact it specifies how the acceleration magnitude is distributed over the move to reduce mechanical vibration. It is an axis-related array saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`AccShapeDist` is an array (size 11) that defines the positional distance of each segment in the acceleration-shaping profile. Together with [AccShapeFact](AccShapeFact.md) it specifies how the acceleration magnitude is distributed over the move to reduce mechanical vibration. The shaping is only applied when [AccShapeOn](AccShapeOn.md) is enabled. It is an axis-related array saved to flash and can be changed at any time.
 
-[AccShapeOn](AccShapeOn.md), [AccShapeFact](AccShapeFact.md)
+## Examples
+
+```text
+AccShapeDist[1]=5000    ; distance of first shaping segment (user units)
+AccShapeDist[2]=8000    ; distance of second shaping segment
+AccShapeDist[1]?        ; query first segment distance
+```
+
+## See also
+
+- [AccShapeOn](AccShapeOn.md) — enables acceleration shaping
+- [AccShapeFact](AccShapeFact.md) — per-segment acceleration scaling factors

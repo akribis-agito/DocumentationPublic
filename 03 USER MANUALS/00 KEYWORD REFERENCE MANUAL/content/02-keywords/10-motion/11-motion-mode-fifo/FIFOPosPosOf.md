@@ -1,5 +1,6 @@
 ---
 keyword: FIFOPosPosOf
+summary: Position offset added to every FIFO position segment.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # FIFOPosPosOf
 
-**Definition:**
+Position offset added to every FIFO position segment.
 
-FIFOPosPosOf sets a position offset added to every FIFO position segment before it is applied as the axis reference target. It allows a global shift of the entire FIFO trajectory without modifying the individual segment data. It is an axis-related parameter, not saved to flash, and can be changed at any time.
+## Overview
 
-**See also:**
+`FIFOPosPosOf` adds a position offset to every FIFO position segment before it is applied as the axis reference target. It allows a global shift of the entire FIFO position-tracking trajectory without modifying the individual segment data in [FIFOPosTrgt](FIFOPosTrgt.md). It is the position-offset counterpart of the velocity offset [FIFOPosVelOf](FIFOPosVelOf.md) and the current offset [FIFOPosCurrOf](FIFOPosCurrOf.md). It is not saved to flash and can be changed at any time.
 
-[FIFOPosTrgt](FIFOPosTrgt.md), [FIFOPosVelOf](FIFOPosVelOf.md), [FIFOPosCurrOf](FIFOPosCurrOf.md)
+## Examples
+
+```text
+FIFOPosPosOf=5000   ; shift the whole position trajectory by 5000
+```
+
+## See also
+
+- [FIFOPosTrgt](FIFOPosTrgt.md) — per-segment target position
+- [FIFOPosVelOf](FIFOPosVelOf.md) — velocity feedforward offset
+- [FIFOPosCurrOf](FIFOPosCurrOf.md) — current feedforward offset

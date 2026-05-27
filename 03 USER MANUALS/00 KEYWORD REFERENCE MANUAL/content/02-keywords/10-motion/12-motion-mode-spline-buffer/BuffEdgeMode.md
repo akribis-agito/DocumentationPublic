@@ -1,5 +1,6 @@
 ---
 keyword: BuffEdgeMode
+summary: Selects the boundary condition at the start and end of the spline buffer trajectory.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # BuffEdgeMode
 
-**Definition:**
+Selects the boundary condition at the start and end of the spline buffer trajectory.
 
-BuffEdgeMode selects the boundary condition behaviour at the start and end of the spline buffer trajectory. It determines whether the spline enforces zero velocity, specified slope (via BuffSlopes), or free-end conditions at the trajectory edges. It is an axis-related parameter saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`BuffEdgeMode` selects the boundary-condition behaviour at the start and end of the spline buffer trajectory. It determines how the spline is constrained at the trajectory edges — for example enforcing zero velocity, using a specified slope from [BuffSlopes](BuffSlopes.md), or a free-end condition. The range is 0 to 2 with a default of 1. It is saved to flash and can be changed at any time.
 
-[BuffSlopes](BuffSlopes.md), [BuffPos](BuffPos.md), [BuffCalc](BuffCalc.md)
+> **Documentation pending:** The exact boundary condition selected by each value (0–2) was not available in the source reference. Verify the mode codes against current firmware before relying on specific values.
+
+## Examples
+
+```text
+BuffEdgeMode=1      ; default edge condition
+```
+
+## See also
+
+- [BuffSlopes](BuffSlopes.md) — edge slopes used when required by this mode
+- [BuffPos](BuffPos.md) — waypoint positions
+- [BuffCalc](BuffCalc.md) — pre-compute the spline coefficients

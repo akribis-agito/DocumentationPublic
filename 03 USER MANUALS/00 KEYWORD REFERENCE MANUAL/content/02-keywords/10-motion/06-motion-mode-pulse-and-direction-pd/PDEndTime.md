@@ -1,5 +1,6 @@
 ---
 keyword: PDEndTime
+summary: Settling-check delay (ms) after PDPos and the position reference stop changing.
 availability:
   standalone:
   - v4
@@ -26,8 +27,24 @@ overrides: {}
 ---
 # PDEndTime
 
-**Definition:**
+Settling-check delay (ms) after PDPos and the position reference stop changing.
 
-PDEndTime is the waiting time in milliseconds, since the pulse-direction counter (PDPos) and generated position reference stops changing, before starting to check for the settling status (InTargetStat).
+## Overview
 
-The timer for PDEndTime resets when PDPos or generated position reference starts changing.
+`PDEndTime` is the waiting time, in milliseconds, that must elapse after the pulse-direction counter [PDPos](PDPos.md) and the generated position reference stop changing, before the controller begins checking the settling status [InTargetStat](../05-motion-status/InTargetStat.md). Because both direct and indirect pulse-and-direction motion stay in the moving state as long as commands keep arriving, this delay prevents premature in-target reporting when a stream of pulses pauses briefly. It applies to both direct ([MotionMode](../02-motion-configuration/MotionMode.md) = 3) and indirect (`MotionMode` = 4) P/D motion.
+
+## How it works
+
+The `PDEndTime` timer resets whenever `PDPos` or the generated position reference starts changing again. Only after the input and reference have been stationary for the full `PDEndTime` does in-target checking begin.
+
+## Examples
+
+```text
+PDEndTime=16        ; wait 16 ms of no change before checking settling (default)
+PDEndTime?          ; read the current value
+```
+
+## See also
+
+- [InTargetStat](../05-motion-status/InTargetStat.md) — settling status checked after this delay
+- [PDPos](PDPos.md) — counter whose changes reset the timer

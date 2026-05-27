@@ -1,5 +1,6 @@
 ---
 keyword: MasterModRev
+summary: Modulo divisor that corrects MasterPos accumulation when the master variable wraps.
 availability:
   standalone:
   - v4
@@ -26,14 +27,29 @@ overrides: {}
 ---
 # MasterModRev
 
-**Definition:**
+Modulo divisor that corrects MasterPos accumulation when the master variable wraps.
 
-MasterModRev is the modulo divisor used to ensure the correct accumulation of MasterPos, only if GearMaster points to the variable involved in modulo operation. Master variable undergoes modulo operation if
+## Overview
 
-1.  ModRev related to the master variable is non-zero, and
+`MasterModRev` is the modulo divisor used to ensure correct accumulation of [MasterPos](MasterPos.md) when the variable selected by [GearMaster](GearMaster.md) participates in a modulo operation. The master variable undergoes a modulo operation when:
 
-2.  it is generally either [Pos](../../../02-keywords/10-motion/01-kinematics-status/Pos.md), PDPos, [MasterPos](../../../02-keywords/10-motion/07-motion-mode-gear-motion/MasterPos.md), [PosRef](../../../02-keywords/10-motion/01-kinematics-status/PosRef.md) or [AbsTrgt](../../../02-keywords/10-motion/03-kinematics-configuration/AbsTrgt.md)
+1. the `ModRev` related to the master variable is non-zero, and
+2. it is generally either [Pos](../01-kinematics-status/Pos.md), PDPos, [MasterPos](MasterPos.md), [PosRef](../01-kinematics-status/PosRef.md) or [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md).
 
-User must set MasterModRev to match the ModRev related to the master variable (manual assignment). Conversely, if the master variable does not involve in modulo operation, MasterModRev must be 0.
+You must set `MasterModRev` to match the `ModRev` of the master variable (manual assignment). If the master variable does not involve a modulo operation, `MasterModRev` must be `0`.
 
-The delta is corrected if its absolute value is more than half of MasterModRev, where master variable is assumed to have undergone modulo operation.
+## How it works
+
+The accumulated delta is corrected if its absolute value exceeds half of `MasterModRev`, in which case the master variable is assumed to have wrapped through its modulo boundary.
+
+## Examples
+
+```text
+MasterModRev=0      ; master variable has no modulo operation
+MasterModRev?       ; read current value
+```
+
+## See also
+
+- [MasterPos](MasterPos.md) — accumulated, scaled master position this divisor protects
+- [GearMaster](GearMaster.md) — selects the master variable

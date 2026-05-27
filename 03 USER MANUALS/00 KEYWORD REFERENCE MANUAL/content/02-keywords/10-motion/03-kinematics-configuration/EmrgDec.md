@@ -1,5 +1,6 @@
 ---
 keyword: EmrgDec
+summary: Emergency deceleration rate applied on Abort or fault, in user units per second squared.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # EmrgDec
 
-**Definition:**
+Emergency deceleration rate applied on `Abort` or fault, in user units per second squared.
 
-EmrgDec sets the emergency deceleration rate applied when a Stop or fault condition is triggered during motion. It is typically set higher than the normal Decel value so the axis stops as quickly as possible. It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
+## Overview
 
-**See also:**
+`EmrgDec` sets the emergency deceleration rate applied when an [Abort](../04-motion-command/Abort.md) or a fault condition halts motion. It is normally set higher than the regular [Decel](Decel.md) rate so the axis stops as quickly as possible. A controlled [Stop](../04-motion-command/Stop.md) uses `Decel`, whereas `Abort` uses `EmrgDec`. It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
 
-[Decel](Decel.md), [Accel](Accel.md), [Abort](../04-motion-command/Abort.md)
+## Examples
+
+```text
+EmrgDec=1000000     ; emergency deceleration (user units/s^2)
+EmrgDec?            ; query current value
+```
+
+## See also
+
+- [Decel](Decel.md) — normal deceleration rate
+- [Accel](Accel.md) — acceleration rate
+- [Abort](../04-motion-command/Abort.md) — command that uses this rate

@@ -1,5 +1,6 @@
 ---
 keyword: AuxVel
+summary: Auxiliary-encoder velocity feedback (backward-Euler derivative of AuxPos).
 availability:
   standalone:
   - v4
@@ -26,10 +27,27 @@ overrides: {}
 ---
 # AuxVel
 
-**Definition:**
+Auxiliary-encoder velocity feedback (backward-Euler derivative of AuxPos).
 
-AuxVel reports the backward Euler derivative of auxiliary encoder feedback (AuxPos), in terms of auxiliary user unit per second (configurable by AuxUsrUnits).
+## Overview
+
+`AuxVel` reports the velocity of the auxiliary encoder, computed as the backward-Euler derivative of the auxiliary position feedback [AuxPos](AuxPos.md). It is expressed in auxiliary user units per second (configurable via `AuxUsrUnits`). It is the auxiliary-loop counterpart of the main velocity feedback [Vel](Vel.md).
+
+## How it works
 
 $$
 AuxVel\  = \ \frac{AuxPos\left( 1 - z^{- 1} \right)}{T_{s}}
 $$
+
+where $T_{s}$ is the controller sampling time.
+
+## Examples
+
+```text
+AuxVel?             ; read the auxiliary velocity
+```
+
+## See also
+
+- [AuxPos](AuxPos.md) — auxiliary position, the source of this derivative
+- [Vel](Vel.md) — main velocity feedback array

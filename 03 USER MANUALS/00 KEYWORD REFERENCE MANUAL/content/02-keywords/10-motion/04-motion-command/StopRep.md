@@ -1,5 +1,6 @@
 ---
 keyword: StopRep
+summary: Stops repetitive (repeat) motion and clears the repeat-motion state.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # StopRep
 
-**Definition:**
+Stops repetitive (repeat) motion and clears the repeat-motion state.
 
-StopRep is a command that stops repetitive (repeat) motion initiated in the current motion mode. It decelerates the axis to rest and clears the repeat-motion state. It is an axis-related command function that can be issued during motion.
+## Overview
 
-**See also:**
+`StopRep` is a command that stops repetitive point-to-point motion (the mode selected by [MotionMode](../02-motion-configuration/MotionMode.md) = 2). It decelerates the axis to rest and clears the repeat-motion state, ending the cycle early instead of waiting for [RptCycles](../02-motion-configuration/RptCycles.md) to be reached. The repetition behaviour it terminates is configured by [RptMode](../02-motion-configuration/RptMode.md). It can be issued during motion. It is an axis-related command function.
 
-[Stop](Stop.md), [RptMode](../02-motion-configuration/RptMode.md), [RptCycles](../02-motion-configuration/RptCycles.md)
+## Examples
+
+```text
+StopRep             ; stop repetitive motion
+```
+
+## See also
+
+- [Stop](Stop.md) — general controlled stop
+- [RptMode](../02-motion-configuration/RptMode.md) — repetition direction
+- [RptCycles](../02-motion-configuration/RptCycles.md) — number of repetitions

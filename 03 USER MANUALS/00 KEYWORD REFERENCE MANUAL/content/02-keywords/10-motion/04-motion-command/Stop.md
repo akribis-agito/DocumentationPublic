@@ -1,5 +1,6 @@
 ---
 keyword: Stop
+summary: Controlled stop; decelerates the axis to rest using the normal Decel rate.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # Stop
 
-**Definition:**
+Controlled stop; decelerates the axis to rest using the normal `Decel` rate.
 
-Stop is a command that decelerates the axis to rest using the normal Decel rate and then halts motion. Unlike Abort, Stop performs a controlled deceleration. It is an axis-related command function that can be issued at any time, including during motion.
+## Overview
 
-**See also:**
+`Stop` is a command that brings the axis to rest using the normal [Decel](../03-kinematics-configuration/Decel.md) rate, performing a controlled deceleration. This contrasts with [Abort](Abort.md), which decelerates at the faster emergency rate [EmrgDec](../03-kinematics-configuration/EmrgDec.md). It can be issued at any time, including during motion. It is an axis-related command function.
 
-[Abort](Abort.md), [Decel](../03-kinematics-configuration/Decel.md), [EmrgDec](../03-kinematics-configuration/EmrgDec.md)
+## Examples
+
+```text
+Stop                ; controlled stop using the normal Decel rate
+```
+
+## See also
+
+- [Abort](Abort.md) — emergency stop using `EmrgDec`
+- [Decel](../03-kinematics-configuration/Decel.md) — deceleration rate used by `Stop`
+- [EmrgDec](../03-kinematics-configuration/EmrgDec.md) — emergency deceleration rate

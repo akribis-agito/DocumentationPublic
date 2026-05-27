@@ -1,5 +1,6 @@
 ---
 keyword: BuffSplineMod
+summary: Selects the spline interpolation mode used when executing the buffer profile.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # BuffSplineMod
 
-**Definition:**
+Selects the spline interpolation mode used when executing the buffer profile.
 
-BuffSplineMod selects the spline interpolation mode used when executing the buffer profile. Different values choose between cubic spline types or polynomial modes that affect the shape of the motion between waypoints. It is an axis-related parameter saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`BuffSplineMod` selects the spline interpolation mode applied to the waypoints in [BuffPos](BuffPos.md) and [BuffTime](BuffTime.md) when the buffer profile is executed. Different values (range 1 to 3, default 3) choose the type of curve used to interpolate between waypoints, affecting the shape of the motion. The chosen mode is applied when [BuffCalc](BuffCalc.md) computes the coefficients. It is saved to flash and can be changed at any time.
 
-[BuffPos](BuffPos.md), [BuffTime](BuffTime.md), [BuffCalc](BuffCalc.md)
+> **Documentation pending:** The specific spline type selected by each value (1–3) was not available in the source reference. Verify the mode codes against current firmware before relying on specific values.
+
+## Examples
+
+```text
+BuffSplineMod=3     ; default spline interpolation mode
+```
+
+## See also
+
+- [BuffPos](BuffPos.md) — waypoint positions
+- [BuffTime](BuffTime.md) — per-segment durations
+- [BuffCalc](BuffCalc.md) — pre-compute the spline coefficients

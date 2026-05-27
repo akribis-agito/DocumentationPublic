@@ -1,5 +1,6 @@
 ---
 keyword: FIFOPosVelOf
+summary: Velocity feedforward offset added to every FIFO position segment.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # FIFOPosVelOf
 
-**Definition:**
+Velocity feedforward offset added to every FIFO position segment.
 
-FIFOPosVelOf sets a velocity feedforward offset added to every FIFO position segment. It biases the velocity feedforward of all tracked segments uniformly. It is an axis-related parameter, not saved to flash, and can be changed at any time.
+## Overview
 
-**See also:**
+`FIFOPosVelOf` adds a velocity feedforward offset to every FIFO position segment, biasing the velocity feedforward of all tracked segments uniformly. It is the velocity counterpart of the position offset [FIFOPosPosOf](FIFOPosPosOf.md) and the current offset [FIFOPosCurrOf](FIFOPosCurrOf.md). It is not saved to flash and can be changed at any time.
 
-[FIFOPosPosOf](FIFOPosPosOf.md), [FIFOPosCurrOf](FIFOPosCurrOf.md), [FIFOPosTrgt](FIFOPosTrgt.md)
+## Examples
+
+```text
+FIFOPosVelOf=10000  ; add a uniform velocity feedforward bias
+```
+
+## See also
+
+- [FIFOPosPosOf](FIFOPosPosOf.md) — position offset
+- [FIFOPosCurrOf](FIFOPosCurrOf.md) — current feedforward offset
+- [FIFOPosTrgt](FIFOPosTrgt.md) — per-segment target position

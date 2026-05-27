@@ -1,5 +1,6 @@
 ---
 keyword: MotionReason
+summary: Records why the last motion stopped, encoded as a numeric reason code.
 availability:
   standalone:
   - v4
@@ -26,9 +27,15 @@ overrides: {}
 ---
 # MotionReason
 
-**Definition:**
+Records why the last motion stopped, encoded as a numeric reason code.
 
-MotionReason stores the reason for which the motion was stopped. MotionReason is reset to 0 upon Begin command.
+## Overview
+
+`MotionReason` stores the reason the motion was stopped and is reset to `0` upon a [Begin](../04-motion-command/Begin.md) command. It records the *original* stopping cause: if several stop conditions occur in sequence, only the first is reported. Use it together with [MotionStat](MotionStat.md) to diagnose how and why a move ended.
+
+> **Documentation pending:** `MotionReason` is `implemented: partial`; some reason codes may not yet be fully implemented in all firmware versions.
+
+## How it works
 
 | Value | Function descriptions |
 |----|----|
@@ -74,6 +81,16 @@ MotionReason stores the reason for which the motion was stopped. MotionReason is
 | 39 | Motion ended due to one member of spline buffer hit the forward/reverse limit switch |
 | 40 | Motion ended due to one member of spline buffer hit the forward/reverse software limit |
 
-**Example:**
+## Examples
 
-If the motion was ended by an abort command, but during deceleration the forward software limit was exceeded, and then the limit switch was encountered, MotionReason will have a value of 2, indicating the original reason to stop and ignoring any following events that could have stopped the motion.
+```text
+MotionReason?       ; read why the last motion stopped
+```
+
+If the motion was ended by an abort command, but during deceleration the forward software limit was exceeded, and then the limit switch was encountered, `MotionReason` will have a value of `2`, indicating the original reason to stop and ignoring any following events that could have stopped the motion.
+
+## See also
+
+- [MotionStat](MotionStat.md) — detailed bit-mapped motion status
+- [Begin](../04-motion-command/Begin.md) — resets `MotionReason` to 0
+- [Stop](../04-motion-command/Stop.md) / [StopRep](../04-motion-command/StopRep.md) — commands that set specific reason codes

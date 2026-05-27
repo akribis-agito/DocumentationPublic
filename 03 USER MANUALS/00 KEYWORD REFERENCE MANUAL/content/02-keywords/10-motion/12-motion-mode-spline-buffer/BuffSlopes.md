@@ -1,5 +1,6 @@
 ---
 keyword: BuffSlopes
+summary: Edge velocity slopes imposed on the spline buffer trajectory when required.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # BuffSlopes
 
-**Definition:**
+Edge velocity slopes imposed on the spline buffer trajectory when required.
 
-BuffSlopes is an array of up to three values that specify the velocity slopes (derivatives) imposed at the start and end of the spline buffer trajectory when BuffEdgeMode requires them. Setting these values controls the entry and exit velocity of the spline profile. It is an axis-related array saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`BuffSlopes` is an array of up to three values that specify the velocity slopes (derivatives) imposed at the start and end of the spline buffer trajectory when [BuffEdgeMode](BuffEdgeMode.md) calls for specified-slope edges. Setting these values controls the entry and exit velocity of the spline profile. It is saved to flash and can be changed at any time.
 
-[BuffEdgeMode](BuffEdgeMode.md), [BuffPos](BuffPos.md), [BuffCalc](BuffCalc.md)
+## Examples
+
+```text
+BuffSlopes[1]=0     ; start-edge slope
+BuffSlopes[2]=0     ; end-edge slope
+```
+
+## See also
+
+- [BuffEdgeMode](BuffEdgeMode.md) — selects when these slopes are applied
+- [BuffPos](BuffPos.md) — waypoint positions
+- [BuffCalc](BuffCalc.md) — pre-compute the spline coefficients

@@ -1,5 +1,6 @@
 ---
 keyword: Speed
+summary: Target (maximum) velocity for point-to-point and jog motion, in user units per second.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # Speed
 
-**Definition:**
+Target (maximum) velocity for point-to-point and jog motion, in user units per second.
 
-Speed sets the maximum velocity for point-to-point motion in user units per second. The axis accelerates up to this speed at the rate defined by Accel and decelerates to rest at the rate defined by Decel. It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
+## Overview
 
-**See also:**
+`Speed` sets the target velocity for motion in user units per second. The axis accelerates up to this speed at the rate set by [Accel](Accel.md) and decelerates to rest at the rate set by [Decel](Decel.md). It is the cruise-velocity kinematic limit the profiler stays within. In jog mode the sign of `Speed` also determines the direction of travel. It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
 
-[Accel](Accel.md), [Decel](Decel.md), [Jerk](Jerk.md)
+## Examples
+
+```text
+Speed=500000        ; target velocity (user units/s)
+Speed=-500000       ; jog in the negative direction
+Speed?              ; query current value
+```
+
+## See also
+
+- [Accel](Accel.md) — acceleration rate toward this speed
+- [Decel](Decel.md) — deceleration rate from this speed
+- [Jerk](Jerk.md) — S-curve smoothing of the ramps

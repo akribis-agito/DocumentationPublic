@@ -1,5 +1,6 @@
 ---
 keyword: JerkInAcc
+summary: Jerk applied during the acceleration phase of a third-order (infinite-snap) profile.
 availability:
   standalone:
   - v4
@@ -26,15 +27,23 @@ overrides: {}
 ---
 # JerkInAcc
 
-**Definition:**
+Jerk applied during the acceleration phase of a third-order (infinite-snap) profile.
 
-JerkInAcc sets the jerk applied during the acceleration phase of a third-order (infinite-snap) motion profile, when JerkMode = 1. It controls the rate at which acceleration itself ramps up and down during the acceleration segment. It is an axis-related parameter.
+## Overview
 
-%%
-Needs verification
-JerkInAcc was not found in the AG300_CTL01Params.c firmware parameter table. Confirm availability and parameter attributes before use.
-%%
+`JerkInAcc` sets the jerk applied during the acceleration phase of a third-order (infinite-snap) motion profile, used when [JerkMode](../02-motion-configuration/JerkMode.md) = 1. It controls the rate at which acceleration itself ramps up and down during the acceleration segment, smoothing the [Accel](Accel.md) ramp. Its deceleration-phase counterpart is [JerkInDec](JerkInDec.md). It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
 
-**See also:**
+> **Documentation pending:** `JerkInAcc` was not found in the firmware parameter table during review; confirm availability and parameter attributes before use.
 
-[JerkInDec](JerkInDec.md), [Jerk](Jerk.md), [JerkMode](../02-motion-configuration/JerkMode.md)
+## Examples
+
+```text
+JerkInAcc=2000000   ; jerk during acceleration phase
+JerkInAcc?          ; query current value
+```
+
+## See also
+
+- [JerkInDec](JerkInDec.md) — jerk during the deceleration phase
+- [Jerk](Jerk.md) — second-order jerk setting
+- [JerkMode](../02-motion-configuration/JerkMode.md) — selects the profiler order

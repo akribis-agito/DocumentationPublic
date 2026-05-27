@@ -1,5 +1,6 @@
 ---
 keyword: RptCycles
+summary: Number of repetitions for repetitive point-to-point motion; 0 repeats indefinitely.
 availability:
   standalone:
   - v4
@@ -26,12 +27,23 @@ overrides: {}
 ---
 # RptCycles
 
-**Condition:**
+Number of repetitions for repetitive point-to-point motion; `0` repeats indefinitely.
 
-RptCycles is used only when MotionMode = 2 (repetitive point-to-point (PTP) motion).
+## Overview
 
-**Definition:**
+`RptCycles` defines the number of repetitions for a repetitive point-to-point move. It is used only when [MotionMode](MotionMode.md) = 2 (repetitive point-to-point motion). What counts as one repetition depends on [RptMode](RptMode.md). Once the count reaches `RptCycles`, the motion ends; if `RptCycles=0`, the motion repeats indefinitely (until [StopRep](../04-motion-command/StopRep.md)). The running repetition count is reported by [RptCounter](../05-motion-status/RptCounter.md). It cannot be changed while the axis is in motion.
 
-RptCycles is used to define the number of repetitions required for repetitive PTP motion. Please refer to RptMode on how repetition is defined.
+## Examples
 
-Once the number of repetitions is reached, the motion will end. If RptCycles=0, the PTP motion will repeat indefinitely.
+```text
+RptCycles=10        ; perform 10 repetitions
+RptCycles=0         ; repeat indefinitely
+RptCycles?          ; query current value
+```
+
+## See also
+
+- [RptMode](RptMode.md) — defines what counts as one repetition
+- [RptWait](RptWait.md) — dwell time between repetitions
+- [RptCounter](../05-motion-status/RptCounter.md) — running repetition count
+- [StopRep](../04-motion-command/StopRep.md) — stops repetitive motion

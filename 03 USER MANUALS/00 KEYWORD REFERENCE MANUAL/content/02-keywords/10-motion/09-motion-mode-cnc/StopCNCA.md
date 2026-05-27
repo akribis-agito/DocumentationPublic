@@ -1,5 +1,6 @@
 ---
 keyword: StopCNCA
+summary: Command that stops execution of the CNC motion queue A.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # StopCNCA
 
-**Definition:**
+Command that stops execution of the CNC motion queue A.
 
-StopCNCA is a command that stops execution of the CNC motion queue A. The currently executing segment is aborted and the axis decelerates to rest. It is a non-axis command function that can be issued at any time, including during motion.
+## Overview
 
-**See also:**
+`StopCNCA` is a command function that stops the CNC motion engine driving queue A. The currently executing segment is aborted and the axis decelerates to rest. Because it is a command, it can be issued at any time, including during motion.
 
-[StopCNCB](StopCNCB.md), [CNCAClear/CNCBClear](CNCAClear-CNCBClear.md), [CNCAFIFO/CNCBFIFO](CNCAFIFO-CNCBFIFO.md)
+Use `StopCNCA` to halt motion while leaving the queue intact, as opposed to [CNCAClear/CNCBClear](CNCAClear-CNCBClear.md), which empties the segment FIFO. The companion command for the second engine is [StopCNCB](StopCNCB.md).
+
+## Examples
+
+```text
+StopCNCA            ; stop CNC motion on queue A
+```
+
+## See also
+
+- [StopCNCB](StopCNCB.md) — stop command for the second CNC engine
+- [CNCAClear/CNCBClear](CNCAClear-CNCBClear.md) — clear all pending segments from the queue
+- [CNCAFIFO/CNCBFIFO](CNCAFIFO-CNCBFIFO.md) — inspect queued segment data

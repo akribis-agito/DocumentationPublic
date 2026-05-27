@@ -1,5 +1,6 @@
 ---
 keyword: FIFOClear
+summary: Command function that empties the FIFO motion queue, discarding all entries.
 availability:
   standalone:
   - v4
@@ -26,8 +27,22 @@ overrides: {}
 ---
 # FIFOClear
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Command function that empties the FIFO motion queue, discarding all entries.
 
-Refer to the FIFOType keyword page for a full description of the FIFO motion mode and all
-related keywords.
+## Overview
+
+`FIFOClear` empties the FIFO motion queue, discarding all queued entries. It cannot be issued while the axis is in motion. To remove a single entry rather than the whole queue, use [FIFORemove](FIFORemove.md).
+
+See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all related keywords.
+
+## Examples
+
+```text
+FIFOClear=0         ; empty the FIFO queue
+```
+
+## See also
+
+- [FIFORemove](FIFORemove.md) — remove a single FIFO entry
+- [FIFOStatus](FIFOStatus.md) — FIFO queue status
+- [FIFOType](FIFOType.md) — full FIFO mode description

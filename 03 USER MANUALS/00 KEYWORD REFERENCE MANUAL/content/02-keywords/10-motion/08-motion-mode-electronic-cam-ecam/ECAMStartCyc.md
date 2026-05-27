@@ -1,5 +1,6 @@
 ---
 keyword: ECAMStartCyc
+summary: GenData index where the cyclical/repeating ECAM cam pattern starts.
 availability:
   standalone:
   - v4
@@ -26,12 +27,29 @@ overrides: {}
 ---
 # ECAMStartCyc
 
-**Definition:**
+GenData index where the cyclical/repeating ECAM cam pattern starts.
 
-ECAMStartCyc defines the GenData index where the cyclical/repeating cam pattern starts. It is an array of size 10, where each element corresponds to a cam pattern.
+## Overview
 
-ECAMStartCyc must match the following order where the overall cam pattern is derived.
+`ECAMStartCyc` defines the [GenData](../../20-arrays/GenData.md) index where the cyclical/repeating cam pattern starts. It is an array of 10 cam patterns, one element per pattern. It is the lower bound of the repeating segment that is replayed [ECAMCycles](ECAMCycles.md) times, paired with the upper bound [ECAMEndCyc](ECAMEndCyc.md). The overall pattern is bounded by [ECAMStart](ECAMStart.md) and [ECAMEnd](ECAMEnd.md).
+
+## How it works
+
+`ECAMStartCyc` must satisfy the ordering from which the overall cam pattern is derived:
 
 $$
 ECAMStart \leq ECAMStartCyc < ECAMEndCyc \leq ECAMEnd
 $$
+
+## Examples
+
+```text
+ECAMStartCyc[1]=20  ; repeating segment of cam pattern 1 starts at GenData index 20
+ECAMStartCyc[1]?    ; read current value
+```
+
+## See also
+
+- [ECAMEndCyc](ECAMEndCyc.md) — end index of the repeating segment
+- [ECAMStart](ECAMStart.md) / [ECAMEnd](ECAMEnd.md) — bounds of the overall pattern
+- [ECAMCycles](ECAMCycles.md) — number of times the repeating segment occurs

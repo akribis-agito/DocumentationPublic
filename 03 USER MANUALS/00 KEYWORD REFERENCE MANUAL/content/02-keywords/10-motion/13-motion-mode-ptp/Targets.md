@@ -1,5 +1,6 @@
 ---
 keyword: Targets
+summary: Array of target positions (user units) for multi-target point-to-point motion.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # Targets
 
-**Definition:**
+Array of target positions (user units) for multi-target point-to-point motion.
 
-Targets is an array that stores a sequence of target positions in user units for multi-target point-to-point motion. The controller moves through the entries in the array sequentially when executing a multi-segment PTP move. It is an axis-related array saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`Targets` stores a sequence of target positions, in user units, for multi-target point-to-point motion. The controller moves through the array entries in order when executing a multi-segment PTP move, allowing several destinations to be queued instead of a single [AbsTrgt](AbsTrgt.md) or [RelTrgt](RelTrgt.md). It is saved to flash and can be changed at any time.
 
-[AbsTrgt](AbsTrgt.md), [RelTrgt](RelTrgt.md), [Begin](../04-motion-command/Begin.md)
+## Examples
+
+```text
+Targets[1]=10000    ; first target position
+Targets[2]=20000    ; second target position
+```
+
+## See also
+
+- [AbsTrgt](AbsTrgt.md) — single absolute target position
+- [RelTrgt](RelTrgt.md) — single relative target distance
+- [Begin](../04-motion-command/Begin.md) — start the PTP move

@@ -1,14 +1,23 @@
+---
+summary: Per-axis resolution ratio for CNC calculations (future feature, no current effect).
+---
 # CNCAEncRatio/CNCBEncRatio
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics.
-     The CNCB counterpart operates the same way on the second CNC engine. -->
+Per-axis resolution ratio for CNC calculations (future feature, no current effect).
 
-This parameter is axis related and it should be separately set for each member axis.
+## Overview
 
-The parameter defines the ratio between the resolutions of an axis to the other axes, to allow
-accurate CNC calculations for non-identical physical resolutions of the member axes.
+`CNCAEncRatio` (and its `CNCBEncRatio` counterpart on the second CNC engine) defines the ratio between the resolution of one axis and the other member axes, to allow accurate CNC calculations when the member axes have non-identical physical resolutions. This parameter is axis related and should be set separately for each member axis.
 
-This is a future feature (the controller supports this parameter, but it has no effect on the CNC
-calculations).
-Currently, the CNC motion calculations assume identical resolution for all member axes.
+> **Documentation pending:** This is a future feature. The controller accepts the parameter, but it has no effect on the CNC calculations. Currently, the CNC motion calculations assume identical resolution for all member axes.
+
+## Examples
+
+```text
+CNCAEncRatio?       ; query the configured resolution ratio
+```
+
+## See also
+
+- [CNCAEncFactNu/CNCBEncFactNu](CNCAEncFactNu-CNCBEncFactNu.md) — encoder scale factor numerator
+- [CNCAEncFactDn/CNCBEncFactDn](CNCAEncFactDn-CNCBEncFactDn.md) — encoder scale factor denominator

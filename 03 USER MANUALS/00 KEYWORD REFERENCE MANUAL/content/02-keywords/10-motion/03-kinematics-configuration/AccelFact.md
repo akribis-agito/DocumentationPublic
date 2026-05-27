@@ -1,5 +1,6 @@
 ---
 keyword: AccelFact
+summary: Scaling factor applied to Accel to adjust effective acceleration without changing Accel.
 availability:
   standalone:
   - v4
@@ -26,10 +27,25 @@ overrides: {}
 ---
 # AccelFact
 
-**Definition:**
+Scaling factor applied to `Accel` to adjust effective acceleration without changing `Accel`.
 
-AccelFact is a scaling factor applied to the Accel value, allowing the effective acceleration to be adjusted by a ratio without changing the base Accel parameter. The actual acceleration used for motion is Accel multiplied by AccelFact. It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
+## Overview
 
-**See also:**
+`AccelFact` is a multiplier on the base [Accel](Accel.md) value, so the effective acceleration used for motion is `Accel × AccelFact`. This lets you scale acceleration by a ratio (1 to 40) without disturbing the stored `Accel` parameter, which is convenient when one base profile must be sped up or slowed down. It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
 
-[Accel](Accel.md), [Decel](Decel.md), [Speed](Speed.md)
+## How it works
+
+Effective acceleration = `Accel × AccelFact`.
+
+## Examples
+
+```text
+AccelFact=2         ; double the effective acceleration
+AccelFact?          ; query current factor
+```
+
+## See also
+
+- [Accel](Accel.md) — base acceleration that this factor multiplies
+- [Decel](Decel.md) — deceleration rate
+- [Speed](Speed.md) — target velocity

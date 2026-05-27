@@ -1,5 +1,6 @@
 ---
 keyword: Decel
+summary: Deceleration rate for point-to-point motion, in user units per second squared.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # Decel
 
-**Definition:**
+Deceleration rate for point-to-point motion, in user units per second squared.
 
-Decel sets the deceleration rate for point-to-point motion in user units per second squared. It defines how quickly the axis ramps down from the commanded Speed to rest at the end of a move. It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
+## Overview
 
-**See also:**
+`Decel` defines how quickly the axis ramps down from the commanded [Speed](Speed.md) to rest at the end of a move, and is the rate used by a controlled [Stop](../04-motion-command/Stop.md). It is the counterpart to [Accel](Accel.md) on the deceleration side and is one of the kinematic limits the motion profiler respects. For abrupt stops on fault or abort, the separate [EmrgDec](EmrgDec.md) rate is used instead. It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
 
-[Accel](Accel.md), [Speed](Speed.md), [EmrgDec](EmrgDec.md)
+## Examples
+
+```text
+Decel=200000        ; deceleration (user units/s^2)
+Decel?              ; query current deceleration
+```
+
+## See also
+
+- [Accel](Accel.md) — acceleration rate at the start of a move
+- [Speed](Speed.md) — target velocity that deceleration ramps down from
+- [EmrgDec](EmrgDec.md) — emergency deceleration for stop/fault
