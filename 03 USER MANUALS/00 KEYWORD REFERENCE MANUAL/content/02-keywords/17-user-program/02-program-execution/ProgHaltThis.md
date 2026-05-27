@@ -32,7 +32,11 @@ Halts the currently executing user program task.
 
 ## Overview
 
-`ProgHaltThis` is a command that halts the currently executing user program task — the "self-halt" form of [ProgHalt](ProgHalt.md), which targets a thread by index. As with halting in general, the task can be resumed with [ProgRun](ProgRun.md) rather than restarted, in contrast to [ProgReset](ProgReset.md). It is a non-axis command and is not saved to flash.
+`ProgHaltThis` pauses the thread that is executing it — the "self-halt" form of [ProgHalt](ProgHalt.md), which instead targets a thread by index. A thread uses it to suspend its own execution, for example at the end of a one-shot routine. As with halting in general, the thread keeps its position and stacks and can be resumed with `ProgRun[thread],0` rather than restarted, in contrast to [ProgReset](ProgReset.md). It is a non-axis command and is not saved to flash.
+
+## How it works
+
+`ProgHaltThis` is only valid when issued **from within a running user program** — sending it from a communication terminal is rejected. When executed, it clears the current thread's "execute" flag so the scheduler stops servicing it, and sets that thread's [ProgStat](ProgStat.md) to `0` (not running). The thread's program pointer is held on this same instruction (it is not advanced past `ProgHaltThis`), so the thread does not run on into whatever follows; a later `ProgRun[thread],0` resumes from the instruction after the halt point.
 
 ## Examples
 

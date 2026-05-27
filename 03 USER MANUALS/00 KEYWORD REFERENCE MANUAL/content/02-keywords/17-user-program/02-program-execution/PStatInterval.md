@@ -32,7 +32,11 @@ Time between successive parameter-statistics transmissions, in milliseconds.
 
 ## Overview
 
-`PStatInterval` sets the time interval, in milliseconds, between successive parameter-statistics transmissions while streaming is enabled by [PStatOn](PStatOn.md). The valid range is `2`–`10000` ms (default `1000`). It governs how often the parameters listed in [PStatParams](PStatParams.md) are sampled and sent over the port chosen by [PStatPort](PStatPort.md). It is a non-axis parameter and is saved to flash.
+`PStatInterval` sets the time interval, in milliseconds, between successive program-status transmissions while streaming is enabled by [PStatOn](PStatOn.md). The valid range is `2`–`10000` ms (default `1000`). It governs how often the parameters listed in [PStatParams](PStatParams.md) are sampled and sent over the port chosen by [PStatPort](PStatPort.md). It is a non-axis parameter and is saved to flash.
+
+## How it works
+
+While streaming is on, the controller sends the next batch once the elapsed time since the previous transmission exceeds `PStatInterval`. A smaller value gives more frequent updates but more traffic on the chosen [PStatPort](PStatPort.md); choose an interval that the port's bandwidth and the number of [PStatParams](PStatParams.md) entries can sustain. Because the value is saved to flash, the configured rate persists across power cycles.
 
 ## Examples
 

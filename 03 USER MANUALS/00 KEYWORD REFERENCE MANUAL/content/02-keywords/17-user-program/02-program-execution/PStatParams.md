@@ -32,12 +32,26 @@ Lists the parameters included in each periodic statistics transmission.
 
 ## Overview
 
-`PStatParams` is an array parameter that specifies which controller parameters are included in each periodic statistics transmission. Each element identifies one parameter to sample and send at the interval set by [PStatInterval](PStatInterval.md), over the port chosen by [PStatPort](PStatPort.md), whenever streaming is enabled by [PStatOn](PStatOn.md). It is a non-axis parameter and is saved to flash.
+`PStatParams` specifies which controller parameters are included in each periodic program-status transmission (up to **20 entries**, indices `[1]`–`[20]`). Each element identifies one parameter to sample and send at the interval set by [PStatInterval](PStatInterval.md), over the port chosen by [PStatPort](PStatPort.md), whenever streaming is enabled by [PStatOn](PStatOn.md). It is a non-axis array and is saved to flash (default `0`).
+
+## How it works
+
+Each element holds a **complex CAN code** that names the exact parameter to stream — the same encoding used by the snapshot and event-trigger sources:
+
+| Bits | Field |
+|---|---|
+| 0–9 | CAN code of the parameter |
+| 10–14 | Axis number (0 = A; ignored for non-axis parameters) |
+| 16–31 | Array index (for array parameters; use 0 for scalars) |
+
+For a scalar parameter on axis A the complex code is just the plain CAN code. An entry of `0` is skipped, so leave unused slots at `0`. When you set `PStatParams`, the controller validates every non-zero entry; if any entry names a parameter that cannot be resolved, the configuration is rejected — [PStatOn](PStatOn.md) reads back a negative (error) value and the offending entry is cleared. Each transmission carries the current value of every valid entry, in index order.
 
 ## Examples
 
 ```text
-APStatParams[1]=<CAN code of parameter to stream>    ; first streamed parameter
+APStatParams[1]=<complex CAN code of parameter to stream>    ; first streamed parameter
+APStatParams[2]=0    ; leave the second slot unused
+APStatParams         ; read the whole streamed-parameter list
 ```
 
 ## See also

@@ -32,7 +32,11 @@ Halts all currently active user program threads.
 
 ## Overview
 
-`ProgHaltAll` halts all currently active user program threads. As with [ProgHalt](ProgHalt.md), halting is not the same as resetting: threads can be resumed with [ProgRun](ProgRun.md). To stop all threads and also reset their pointers and stacks, use [ProgResetAll](ProgResetAll.md) instead. It is a non-axis command and is not saved to flash.
+`ProgHaltAll` pauses every user program thread in one command. As with [ProgHalt](ProgHalt.md), halting is not the same as resetting: each thread keeps its program pointer and stacks and can be resumed with `ProgRun[thread],0`. To stop all threads **and** clear their pointers and stacks, use [ProgResetAll](ProgResetAll.md) instead. It is a non-axis command and is not saved to flash.
+
+## How it works
+
+`ProgHaltAll` removes all threads from the scheduler at once by clearing every thread's "execute" flag, then sets each thread's [ProgStat](ProgStat.md) to `0` (not running). No pointers or stacks are touched, so the program state is frozen exactly where each thread stopped and can be continued individually with `ProgRun[thread],0`. The command requires a stored program; with no program loaded it is rejected.
 
 ## Examples
 
@@ -42,6 +46,7 @@ AProgHaltAll         ; halt every active user program thread
 
 ## See also
 
-- [ProgHalt](ProgHalt.md) — halt a single thread
-- [ProgHaltThis](ProgHaltThis.md) — halt the running task
+- [ProgHalt](ProgHalt.md) — pause a single thread
+- [ProgHaltThis](ProgHaltThis.md) — pause the task that issues the command
 - [ProgResetAll](ProgResetAll.md) — stop all threads and reset pointers and stacks
+- [ProgStatAll](ProgStatAll.md) — combined status of all threads

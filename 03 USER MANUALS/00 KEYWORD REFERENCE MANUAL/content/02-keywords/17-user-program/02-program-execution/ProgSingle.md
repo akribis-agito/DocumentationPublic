@@ -32,14 +32,18 @@ Single-steps a user program thread (debugger step into / step over).
 
 ## Overview
 
-`ProgSingle` is a user-program command, normally issued by the PC Suite, that executes the next line of a thread and then halts — the basis for debugger stepping. The form `ProgSingle[thread],0` behaves like "step into", while `ProgSingle[thread],1` behaves like "step over" for internal wait loops. It is used together with breakpoints set by [ProgBreakThis](ProgBreakThis.md) and position readouts from [ProgPointer](ProgPointer.md) / [ProgLine](ProgLine.md). It is a non-axis command and is not saved to flash.
+`ProgSingle[Thread no.], Step type` advances a thread by a single step and then pauses it — the basis for debugger stepping, normally issued by the Agito PCSuite. The step type selects "step into" or "step over". It is used together with breakpoints set by [ProgBreakThis](ProgBreakThis.md) and the position readouts [ProgPointer](ProgPointer.md) and [ProgLine](ProgLine.md). It is a non-axis command and is not saved to flash.
 
 ## How it works
 
-| Second argument | Behaviour |
+`ProgSingle` re-enables the chosen thread for just one step, then the scheduler halts it again and sets its [ProgStat](ProgStat.md) back to `0` (not running). Like a resume, it does not disturb the thread's pointer or stacks, so stepping picks up exactly where the thread last stopped. The thread's [ProgError](ProgError.md) is cleared at the start of each step.
+
+| Step type | Behaviour |
 |----|----|
-| 0 | Execute the next line and halt — debugger "step into" |
-| 1 | Equivalent to debugger "step over" for internal wait loops |
+| 0 | **Step into** — execute the next single low-level instruction, then halt |
+| 1 | **Step over** — keep executing until the program pointer advances, then halt; this steps over internal wait loops (such as a wait condition that re-executes the same line) instead of stopping inside them |
+
+When `ProgSingle` is issued from a communication terminal it temporarily ignores any breakpoint that sits on the very next instruction, so stepping is not blocked by a breakpoint at the current position. The command is rejected if there is no stored program, if the stored program fails its checksum, if the thread is already running, or if the thread pointer is already past the end of the program.
 
 ## Examples
 

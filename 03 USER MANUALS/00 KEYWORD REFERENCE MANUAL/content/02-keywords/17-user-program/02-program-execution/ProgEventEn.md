@@ -32,12 +32,16 @@ Enables or disables handling of an individual user program event.
 
 ## Overview
 
-`ProgEventEn` enables (`1`) or disables (`0`) the handling of a specific user program event. When an event is disabled, any pending occurrence of it is cleared and the event is not processed at all, including the sensing of the event. This is the per-event control; [ProgEventGEn](ProgEventGEn.md) is the global switch that gates all events at once. The trigger for each event is defined by [ProgEventPar](ProgEventPar.md), [ProgEventType](ProgEventType.md), [ProgEventVal](ProgEventVal.md), and [ProgEventMask](ProgEventMask.md). It is a non-axis array parameter (one element per event) and is not saved to flash.
+`ProgEventEn` enables (`1`) or disables (`0`) one specific user program event, indexed by event number. When an event is disabled, any pending occurrence of it is cleared and the event is not processed at all — including sensing — so a disabled event neither evaluates its trigger nor runs its handler. This makes it the per-event equivalent of [ProgEventOn](ProgEventOn.md) (which acts on all events), as distinct from [ProgEventGEn](ProgEventGEn.md), which only suspends servicing while leaving sensing active. The trigger for each event is defined by [ProgEventPar](ProgEventPar.md), [ProgEventType](ProgEventType.md), [ProgEventVal](ProgEventVal.md), and [ProgEventMask](ProgEventMask.md). It is a non-axis array parameter with one element per event (indices `[1]`–`[5]`, for up to 5 events) and is not saved to flash (default `0`).
+
+## How it works
+
+An event's handler runs only when all three gates are open: [ProgEventOn](ProgEventOn.md)` = 1`, [ProgEventGEn](ProgEventGEn.md)` = 1`, and `ProgEventEn` of that event `= 1`. Setting `ProgEventEn[n] = 1` arms event *n*: each control cycle the controller reads the monitored parameter ([ProgEventPar](ProgEventPar.md)), applies [ProgEventMask](ProgEventMask.md), and tests it against [ProgEventVal](ProgEventVal.md) using the condition in [ProgEventType](ProgEventType.md). When the condition is met the event becomes pending; when serviced, its handler runs on the main thread and the event re-arms after the handler's [Return](Return.md). Setting `ProgEventEn[n] = 0` immediately returns event *n* to the "waiting for trigger" state and discards any pending occurrence.
 
 ## Examples
 
 ```text
-AProgEventEn[1]=1    ; enable handling of event 1
+AProgEventEn[1]=1    ; enable (arm) event 1
 AProgEventEn[1]=0    ; disable event 1 and clear any pending occurrence
 ```
 

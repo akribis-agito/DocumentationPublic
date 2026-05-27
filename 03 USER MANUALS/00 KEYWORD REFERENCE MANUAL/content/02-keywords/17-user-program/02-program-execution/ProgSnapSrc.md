@@ -32,15 +32,32 @@ Selects which parameters the program snapshot mechanism captures.
 
 ## Overview
 
-`ProgSnapSrc` is an array parameter that configures which controller parameters are captured by the program snapshot mechanism. Each element specifies a source parameter to record when a snapshot is triggered; the captured values are read back from [ProgSnapVal](ProgSnapVal.md). It mirrors the fault-snapshot mechanism configured by [ConFltSnapSrc](../../07-status-and-faults/ConFltSnapSrc.md). It is a non-axis parameter and is saved to flash.
+`ProgSnapSrc` configures which controller parameters are captured by the program snapshot mechanism — the debugging counterpart, for user programs, of the fault snapshot configured by [ConFltSnapSrc](../../07-status-and-faults/ConFltSnapSrc.md). When a user-program thread hits a run-time error, the controller freezes a per-thread snapshot of the program's state into [ProgSnapVal](ProgSnapVal.md); `ProgSnapSrc` chooses the user-selectable parameters that go into it, so you can capture exactly the variables you need to diagnose the failure. It is a non-axis array, saved to flash (default `0`).
+
+## How it works
+
+Each thread gets **4 user-configurable source slots**. The array is laid out per thread, 4 slots each, for up to 8 threads: thread 1 uses `ProgSnapSrc[1]…[4]`, thread 2 uses `[5]…[8]`, and so on (index `[0]` is unused so indices start at 1). These four slots fill the user portion of that thread's [ProgSnapVal](ProgSnapVal.md) block; the rest of each block is filled automatically with fixed program-state values you do not configure here (see [ProgSnapVal](ProgSnapVal.md)).
+
+Each slot holds a **complex CAN code** that names the parameter to capture, encoding three fields:
+
+| Bits | Field |
+|---|---|
+| 0–9 | CAN code of the parameter |
+| 10–14 | Axis number (0 = A; ignored for non-axis parameters) |
+| 16–31 | Array index (for array parameters; use 0 for scalars) |
+
+For a scalar parameter on axis A the complex code is just the plain CAN code. Writing `0` to a slot disables it (its [ProgSnapVal](ProgSnapVal.md) entry stays at `-1`). When you set `ProgSnapSrc`, the controller validates the selection, resolves an internal pointer plus a scaling factor for fast capture, and **resets all [ProgSnapVal](ProgSnapVal.md) entries to `-1`**, discarding any previous snapshot — so configure the sources before the error you want to diagnose. Captured values for scaled parameters are stored in raw (internal) units.
 
 ## Examples
 
 ```text
-AProgSnapSrc[1]=<CAN code of parameter to capture>   ; first snapshot source
+AProgSnapSrc[1]=<complex CAN code of parameter to capture>   ; thread 1, first user snapshot source
+AProgSnapSrc[1]=0   ; disable thread 1's first user slot
+AProgSnapSrc        ; read the whole snapshot source configuration
 ```
 
 ## See also
 
 - [ProgSnapVal](ProgSnapVal.md) — values captured by the snapshot mechanism
+- [ProgError](ProgError.md) — the per-thread run-time error that triggers the capture
 - [ConFltSnapSrc](../../07-status-and-faults/ConFltSnapSrc.md) — fault-snapshot source selection

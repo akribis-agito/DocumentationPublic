@@ -32,7 +32,11 @@ Global enable for servicing all user program events.
 
 ## Overview
 
-`ProgEventGEn` globally enables (`1`) or disables (`0`) the servicing of all user program events. Unlike [ProgEventEn](ProgEventEn.md), setting `ProgEventGEn` to `0` does not disable the *sensing* of events: events are still sensed and may become pending, to be serviced once servicing is re-enabled. Use it to suspend and resume event handling as a whole without losing pending triggers. It is a non-axis scalar parameter and is not saved to flash.
+`ProgEventGEn` globally enables (`1`) or disables (`0`) the *servicing* of all user program events, without affecting whether they are sensed. Unlike [ProgEventOn](ProgEventOn.md) (which stops sensing too) and [ProgEventEn](ProgEventEn.md) (which stops sensing of one event), setting `ProgEventGEn = 0` leaves sensing fully active: events still evaluate their triggers and may move to the "pending for service" state ([ProgEventStat](ProgEventStat.md)`= 1`), but no handler runs. When `ProgEventGEn` is set back to `1`, any event that became pending in the meantime is then serviced. Use it to suspend and resume event handling as a whole without losing pending triggers. It is a non-axis scalar parameter and is not saved to flash (default `0`).
+
+## How it works
+
+For an event's handler to run, all three gates must be open at once: [ProgEventOn](ProgEventOn.md)` = 1`, `ProgEventGEn = 1`, and that event's [ProgEventEn](ProgEventEn.md)` = 1`. The handler-dispatch step (which scans events 1→5 and runs the first enabled, pending event on the main thread) is the part `ProgEventGEn` gates. Because sensing continues while `ProgEventGEn = 0`, this is the right switch for a critical section: pending events queue up and are serviced in order once you re-enable servicing.
 
 ## Examples
 

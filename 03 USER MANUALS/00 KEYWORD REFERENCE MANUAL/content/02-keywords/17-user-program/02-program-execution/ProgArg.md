@@ -36,15 +36,23 @@ Argument values passed to an indexed user program task.
 
 ## Overview
 
-`ProgArg` is an array parameter that holds the argument values passed to a user program task. Each element corresponds to one argument slot for the indexed task. It is the counterpart to [ProgArgThis](ProgArgThis.md), which a running task uses to read back its own arguments, and works together with [ProgPushArg](ProgPushArg.md), which pushes argument values onto a task's argument stack before it runs. `ProgArg` is a non-axis parameter and is not saved to flash.
+`ProgArg` reads the arguments of a thread's currently executing function from *outside* that function — it is indexed by thread number, with the argument position supplied as the command value. Where [ProgArgThis](ProgArgThis.md) lets a function read its own arguments, `ProgArg` lets the host or another context inspect any thread's current arguments, which makes it useful for monitoring and debugging. It is a non-axis parameter and is not saved to flash.
+
+## How it works
+
+`ProgArg[thread], position` resolves against the named thread's current call-stack frame and returns the value at the given argument position, using the same numbering as [ProgArgThis](ProgArgThis.md): position `1` is the last value pushed with [ProgPushArg](ProgPushArg.md) before the call, position `2` the one before it, and so on. The valid position range is `0`–`20` (`0`–`26` on central-i v5), covering the combined argument and local-variable space of a function.
+
+Because it reads the *current* frame of the selected thread, the values reflect whatever function that thread is executing at the moment of the query. Requesting a position beyond what the thread's current frame contains raises a "no operands in call stack" error.
 
 ## Examples
 
 ```text
-AProgArg[1]         ; query the first argument slot
+AProgArg[1],1       ; read argument position 1 of the function running on thread 1
+AProgArg[3],2       ; read argument position 2 of the function running on thread 3
 ```
 
 ## See also
 
-- [ProgArgThis](ProgArgThis.md) — read back the arguments received by the running task
-- [ProgPushArg](ProgPushArg.md) — push an argument value onto a task's argument stack
+- [ProgArgThis](ProgArgThis.md) — a function reading its own arguments
+- [ProgPushArg](ProgPushArg.md) — stage an argument before the call
+- [ProgCallStack](ProgCallStack.md) — full call-stack contents per thread

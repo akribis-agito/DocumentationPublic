@@ -32,15 +32,25 @@ Reports each event's state and lets a pending event be cleared.
 
 ## Overview
 
-`ProgEventStat` reports the state of each user program event. It works with the trigger definition ([ProgEventPar](ProgEventPar.md), [ProgEventType](ProgEventType.md), [ProgEventVal](ProgEventVal.md), [ProgEventMask](ProgEventMask.md)) and the enable controls ([ProgEventEn](ProgEventEn.md), [ProgEventGEn](ProgEventGEn.md)) to show where each event is in its lifecycle. While an event is being serviced it cannot be triggered again until servicing completes — that is, until the event function executes [Return](Return.md). Although the access is read/write, only `0` may be written, which the user can do to clear a pending event. It is a non-axis array parameter (one element per event) and is not saved to flash.
+`ProgEventStat` reports the state of each user program event (indices `[1]`–`[5]`, one per event). It works with the trigger definition ([ProgEventPar](ProgEventPar.md), [ProgEventType](ProgEventType.md), [ProgEventVal](ProgEventVal.md), [ProgEventMask](ProgEventMask.md)) and the enable controls ([ProgEventEn](ProgEventEn.md), [ProgEventGEn](ProgEventGEn.md)) to show where each event is in its lifecycle. While an event is being serviced it cannot be triggered again until servicing completes — that is, until the event handler executes [Return](Return.md). Although the access is read/write, only `0` may be written, which the user can do to clear a pending occurrence. It is a non-axis array parameter and is not saved to flash (default `0`).
 
 ## How it works
 
-| Value | State |
-|----|----|
-| 0 | Waiting for trigger |
-| 1 | Pending for service (triggered) |
-| 2 | In service |
+Each element steps through the lifecycle below:
+
+| Value | State | Meaning |
+|----|----|----|
+| 0 | Waiting for trigger | Armed and being evaluated each cycle; the trigger condition has not (yet) been met |
+| 1 | Pending for service (triggered) | The condition was met; the handler has not run yet |
+| 2 | In service | The handler is currently running on the main thread |
+
+State transitions:
+
+- **0 → 1** when the trigger condition is met during sensing (requires [ProgEventOn](ProgEventOn.md)` = 1` and the event's [ProgEventEn](ProgEventEn.md)` = 1`).
+- **1 → 2** when the controller dispatches the handler. This happens only while [ProgEventGEn](ProgEventGEn.md)` = 1`; the handler runs on the main thread (thread 1), and when several events are pending the lowest event number is serviced first.
+- **2 → 0** when the handler executes [Return](Return.md): the event re-arms (its baseline reading is recaptured) and resumes being sensed.
+
+Forcing an element to `0` (the only writable value) clears a pending occurrence and returns the event to the waiting state. Disabling sensing via [ProgEventOn](ProgEventOn.md)` = 0` or the event's [ProgEventEn](ProgEventEn.md)` = 0` also forces it back to `0`.
 
 ## Examples
 

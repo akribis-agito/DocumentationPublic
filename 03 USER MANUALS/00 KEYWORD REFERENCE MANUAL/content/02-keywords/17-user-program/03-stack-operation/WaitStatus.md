@@ -36,61 +36,54 @@ Holds a user program thread until a selected status reaches a required value.
 
 ## How it works
 
-The array index selects which status bit or counter the thread waits on:
+While the condition is not yet satisfied, `WaitStatus` marks the thread as waiting and yields, so the thread re-checks the status on each pass without consuming the program engine; other threads keep running. As soon as the status matches the required value, the wait ends and the thread continues with the next instruction. For the counter status types the wait ends when the counter reaches the requested value (the down-counters when they have counted down to it, the up-counters when they have counted up to it); for the bit-type status types the required value is the bit state to wait for (0 or 1).
 
-| StatusType | Description |
-|----|----|
-| 1 | CounterDown1 |
-| 2 | CounterDown2 |
-| 3 | CounterDown3 |
-| 4 | CounterDown4 |
-| 5 | CounterUp1 |
-| 6 | CounterUp2 |
-| 7 | MotionStat: In Motion Bit |
-| 8 | MotionStat: In Repetitive Wait Bit |
-| 9 | MotionStat: In Repetitive Stop Bit |
-| 10 | MotionStat: In Stop Request Bit |
-| 11 | MotionStat: In Acceleration Bit |
-| 12 | MotionStat: In Deceleration Bit |
-| 13 | MotionStat: In Wait End Smooth Bit |
-| 14 | MotionStat: In ECAM Stop Bit |
-| 15 | MotionStat: In Wait End Smooth Bit |
-| 16 | StatReg: Commutation Bit |
-| 17 | StatReg: In Target Bit |
-| 18 | RecStat: Trigger Detected Bit |
-| 19 | RecStat: Recording Completed Bit |
-| 20 | DInPort: Bit 0 (Digital Input 1) |
-| 21 | DInPort: Bit 1 (Digital Input 2) |
-| 22 | DInPort: Bit 2 (Digital Input 3) |
-| 23 | DInPort: Bit 3 (Digital Input 4) |
-| 24 | DInPort: Bit 4 (Digital Input 5) |
-| 25 | DInPort: Bit 5 (Digital Input 6) |
-| 26 | DInPort: Bit 6 (Digital Input 7) |
-| 27 | DInPort: Bit 7 (Digital Input 8) |
-| 28 | DInPort: Bit 8 (Digital Input 9) |
-| 29 | DInPort: Bit 9 (Digital Input 10) |
-| 30 | DInPort: Bit 10 (Digital Input 11) |
-| 31 | DInPort: Bit 11 (Digital Input 12) |
-| 32 | DInPort: Bit 12 (Digital Input 13) |
-| 33 | DInPort: Bit 13 (Digital Input 14) |
-| 34 | Designated input with DInMode set as “2 – Motor On + Begin” |
-| 35 | Designated input with DInMode set as “14 – Control Set Change” |
-| 36 | Designated input with DInMode set as “19 – Clear Abs Enc” |
-| 37 | Designated input with DInMode set as “5 – Clear PD Input Pulse” |
-| 38 | Designated input with DInMode set as “9 – Reverse Limit” |
-| 39 | Designated input with DInMode set as “10 – Forward Limit” |
-| 40 | Designated input with DInMode set as “11 – Torque Limit On” |
-| 41 | Designated input with DInMode set as “7 – Reset/Clear Alarm” |
-| 42 | Designated input with DInMode set as “8 – Abort Motion” |
-| 43 | Designated input with DInMode set as “16 – Mode Switch Vel/Pos” |
-| 44 | Designated input with DInMode set as “17 – Mode Switch Vel/Curr” |
-| 45 | Designated input with DInMode set as “18 – Mode Switch Pos/Curr” |
-| 46 | Designated input with DInMode set as “15 – Add Velocity Filter” |
+`WaitStatus` is axis-related: bit-type conditions that belong to a motor or axis are evaluated for the axis the running thread is currently working on (see [ChooseAxis](../02-program-execution/ChooseAxis.md)).
+
+The array index selects which status counter or bit the thread waits on:
+
+| Status type | Description | Required value |
+|----|----|----|
+| 1 | Down counter 1 | counter target (≥ 0) |
+| 2 | Down counter 2 | counter target (≥ 0) |
+| 3 | Down counter 3 | counter target (≥ 0) |
+| 4 | Down counter 4 | counter target (≥ 0) |
+| 5 | Up counter 1 | counter target (≥ 0) |
+| 6 | Up counter 2 | counter target (≥ 0) |
+| 7 | In motion | 0 or 1 |
+| 8 | In repetitive wait | 0 or 1 |
+| 9 | In repetitive stop | 0 or 1 |
+| 10 | In stop request | 0 or 1 |
+| 11 | In acceleration | 0 or 1 |
+| 12 | In deceleration | 0 or 1 |
+| 13 | In wait-end smooth | 0 or 1 |
+| 14 | In ECAM stop | 0 or 1 |
+| 15 | In FIFO stop | 0 or 1 |
+| 16 | Commutation done | 0 or 1 |
+| 17 | In target | 0 or 1 |
+| 18 | Recording trigger detected | 1 or 2 |
+| 19 | Recording completed | 1 or 2 |
+| 20 | Digital input 1 | 0 or 1 |
+| 21 | Digital input 2 | 0 or 1 |
+| 22 | Digital input 3 | 0 or 1 |
+| 23 | Digital input 4 | 0 or 1 |
+| 24 | Digital input 5 | 0 or 1 |
+| 25 | Digital input 6 | 0 or 1 |
+| 26 | Digital input 7 | 0 or 1 |
+| 27 | Digital input 8 | 0 or 1 |
+| 28 | Digital input 9 | 0 or 1 |
+| 29 | Digital input 10 | 0 or 1 |
+| 30 | Digital input 11 | 0 or 1 |
+| 31 | Digital input 12 | 0 or 1 |
+| 32 | Digital input 13 | 0 or 1 |
+| 33 | Digital input 14 | 0 or 1 |
 
 ## Examples
 
 ```text
-AWaitStatus[17],1   ; hold until the axis reaches and settles in target (StatReg In Target bit = 1)
+AWaitStatus[17],1   ; hold until the axis reaches and settles in target (In target = 1)
+AWaitStatus[7],0    ; hold until motion has stopped (In motion = 0)
+AWaitStatus[20],1   ; hold until digital input 1 is high
 ```
 
 ## See also

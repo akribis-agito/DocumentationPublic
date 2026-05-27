@@ -32,9 +32,21 @@ Per-thread breakpoint settings for user program debugging.
 
 ## Overview
 
-`ProgBreaks` is a read/write array parameter that holds breakpoint settings used when debugging a user program. The default value of `-1` indicates no breakpoint is set. It is typically managed by the PC Suite debugger together with [ProgSingle](ProgSingle.md) (single-step) and [ProgBreakThis](ProgBreakThis.md) (break the running task). It is a non-axis parameter and is not saved to flash.
+`ProgBreaks` is a read/write array that holds up to **3 breakpoints** (indices `[1]`–`[3]`) used when debugging a user program. Each element holds a program location ([ProgPointer](ProgPointer.md) value) at which execution should stop; the default `-1` means the slot is empty. The breakpoints are global — they apply to whichever thread reaches the location — and are typically managed by the PC Suite debugger together with [ProgSingle](ProgSingle.md) (single-step) and [ProgBreakThis](ProgBreakThis.md) (break the currently running task). It is a non-axis parameter and is not saved to flash.
 
-> **Documentation pending:** The per-element meaning of `ProgBreaks` is not fully described in the source reference. Refer to the User Program Language Manual for complete details.
+## How it works
+
+Before executing the next instruction of any running thread, the controller compares that thread's current program location ([ProgPointer](ProgPointer.md)) against the `ProgBreaks` list. The list is scanned from index `[1]`; the first empty slot (`-1`) terminates the scan, so set breakpoints contiguously from `[1]`. If the thread's location matches a breakpoint, that thread is halted at that instruction: it stops running but keeps its state, so you can inspect it with [ProgPointer](ProgPointer.md), [ProgCallStack](ProgCallStack.md), and the program snapshot ([ProgSnapVal](ProgSnapVal.md)), then resume with [ProgRun](ProgRun.md) or step with [ProgSingle](ProgSingle.md).
+
+A breakpoint hit on the very first instruction after a [ProgRun](ProgRun.md) or [ProgSingle](ProgSingle.md) command is ignored, so a thread sitting on a breakpoint can be resumed past it without immediately stopping again. Setting a slot to `-1` removes that breakpoint.
+
+## Examples
+
+```text
+AProgBreaks[1]=<program location to break at>  ; set the first breakpoint
+AProgBreaks[1]=-1                              ; clear the first breakpoint
+AProgBreaks                                    ; read the breakpoint list
+```
 
 ## See also
 
