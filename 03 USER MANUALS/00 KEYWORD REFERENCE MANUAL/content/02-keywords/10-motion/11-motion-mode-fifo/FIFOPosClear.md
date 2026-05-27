@@ -32,16 +32,22 @@ Command that clears all pending segments from the FIFO position queue.
 
 ## Overview
 
-`FIFOPosClear` clears all pending segments from the FIFO position queue, resetting it to empty. It can be issued at any time, including during motion. It is the position-tracking counterpart of [FIFOPosPush](FIFOPosPush.md), which fills the queue.
+`FIFOPosClear` empties the position-tracking queue, discarding every target that has been pushed but not yet consumed and resetting the free space to the full queue depth. It is the counterpart of [FIFOPosPush](FIFOPosPush.md), which fills the queue. It can be issued at any time, including during motion.
+
+## How it works
+
+Clearing resets the queue's internal bookkeeping so that all slots are free and there is no oldest or newest entry — the queue reports empty on the next read of [FIFOPosStatus](FIFOPosStatus.md). It only discards queued targets; it does not stop the axis. With the queue active ([FIFOPosFIFOEn](FIFOPosFIFOEn.md) set to `1`), clearing during motion leaves nothing to pop, so the axis holds its last working target until new targets are pushed or motion is stopped.
+
+This is the command to flush a stale trajectory before streaming a new one, or to recover after a planned set of targets is no longer wanted.
 
 ## Examples
 
 ```text
-AFIFOPosClear=0      ; empty the FIFO position queue
+AFIFOPosClear=0      ; discard all queued targets
 ```
 
 ## See also
 
-- [FIFOPosPush](FIFOPosPush.md) — push a position segment
-- [FIFOPosFIFOEn](FIFOPosFIFOEn.md) — enable FIFO position tracking
+- [FIFOPosPush](FIFOPosPush.md) — push a position target
+- [FIFOPosFIFOEn](FIFOPosFIFOEn.md) — enable queue streaming
 - [FIFOPosStatus](FIFOPosStatus.md) — queue status

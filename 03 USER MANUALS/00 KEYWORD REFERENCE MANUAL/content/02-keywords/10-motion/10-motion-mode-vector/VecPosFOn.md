@@ -32,16 +32,23 @@ Enables (1) the position filter defined by VecPosFDef on the vector reference ou
 
 ## Overview
 
-`VecPosFOn` enables the position filter on the vector motion reference output. When set to a non-zero value, the filter defined by [VecPosFDef](VecPosFDef.md) is applied to smooth the vector position reference before it reaches the individual axis servo loops; when `0`, the reference passes through unfiltered. It is an axis-related parameter saved to flash, and cannot be changed while the axis is in motion.
+`VecPosFOn` enables the position filter on the coordinated vector motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 16) reference. When set to `1`, the filter defined by [VecPosFDef](VecPosFDef.md) is applied to smooth the resultant vector position reference before it is split among the member axes; when `0` (the default), the reference passes through unfiltered. Smoothing the vector reference reduces the jerk transmitted to the mechanics on every member axis at once. It is an axis-related parameter saved to flash and cannot be changed while the axis is in motion.
+
+## How it works
+
+The filter operates on the **resultant path** reference computed by the group master (the lowest-numbered member axis — see [VecMemberAxes](VecMemberAxes.md)), so configure and enable it on the master. Because the filtered resultant is what gets distributed to each member axis, enabling it smooths all members together and keeps the coordinated path consistent.
+
+The enable flag is validated when the vector move starts: if it is set to `1`, the controller checks that [VecPosFDef](VecPosFDef.md) describes a valid filter and rejects the move if it does not. Set up [VecPosFDef](VecPosFDef.md) first, then set `VecPosFOn = 1`. Only the values `0` (off) and `1` (on) are accepted.
 
 ## Examples
 
 ```text
-AVecPosFOn=0         ; position filter disabled (default)
-AVecPosFOn=1         ; apply the VecPosFDef position filter
+AVecPosFOn[1]=0      ; position filter disabled (default)
+AVecPosFOn[1]=1      ; apply the VecPosFDef position filter to the vector reference
 ```
 
 ## See also
 
-- [VecPosFDef](VecPosFDef.md) — filter coefficients applied when enabled
+- [VecPosFDef](VecPosFDef.md) — filter definition applied when enabled
+- [VecMemberAxes](VecMemberAxes.md) — defines the group and its master axis
 - [VecSpeed](VecSpeed.md) — commanded resultant speed

@@ -31,22 +31,23 @@ Per-axis encoder-resolution compensation ratio, scaled by 1/256 (256 = ratio of 
 
 ## Overview
 
-`VecEncRatio` is used to compensate for different encoder resolutions among the axes participating in a vector move: each axis is scaled according to its resolution so the coordinated path stays accurate. It is an alternative to the numerator/denominator pair [VecEncFactNu](VecEncFactNu.md) / [VecEncFactDn](VecEncFactDn.md). It is saved to flash and cannot be modified while in motion.
+`VecEncRatio` is intended to compensate for different encoder resolutions among the axes participating in a coordinated vector move ([MotionMode](../02-motion-configuration/MotionMode.md) = 16), so that the resultant path stays geometrically accurate even when the member axes do not share the same counts-per-unit. It is the single-value form of the same compensation provided by the numerator/denominator pair [VecEncFactNu](VecEncFactNu.md) / [VecEncFactDn](VecEncFactDn.md). It is saved to flash and cannot be modified while in motion.
 
 ## How it works
 
-The actual ratio inside the controller is scaled by 1/256. So `VecEncRatio = 256` means a ratio of 1, and a value of `260` means a ratio of 260/256. The range is `256` (ratio of 1) to `25600` (ratio of 100).
+The value is interpreted as a ratio scaled by 1/256: `256` means a ratio of 1 (the default, no scaling), and a larger value gives a proportionally larger ratio — for example `260` means a ratio of 260/256. The range is `256` (ratio of 1) to `25600` (ratio of 100).
 
-> **Documentation pending:** Detailed usage guidance was marked TBD during implementation. The implementation is intended to avoid accumulated position errors and to reach the final target position accurately; confirm against current firmware before relying on specific behavior.
+> **Use the factor pair instead.** On current firmware the active per-axis vector encoder scaling is applied through the rational pair [VecEncFactNu](VecEncFactNu.md) / [VecEncFactDn](VecEncFactDn.md), which expresses the same ratio as a numerator over a denominator. Configure those two keywords for vector encoder compensation. `VecEncRatio` is retained for compatibility; prefer the factor pair for new configurations and verify behavior against your firmware before relying on `VecEncRatio` alone.
 
 ## Examples
 
 ```text
-AVecEncRatio=256     ; ratio of 1 (default)
-AVecEncRatio=260     ; ratio of 260/256
+AVecEncRatio[1]=256    ; ratio of 1 (default, no scaling)
+AVecEncRatio[1]=260    ; ratio of 260/256
 ```
 
 ## See also
 
-- [VecEncFactNu](VecEncFactNu.md) / [VecEncFactDn](VecEncFactDn.md) — numerator/denominator form of the ratio
+- [VecEncFactNu](VecEncFactNu.md) / [VecEncFactDn](VecEncFactDn.md) — numerator/denominator form actually applied to the vector path
+- [VecMemberAxes](VecMemberAxes.md) — axes forming the vector group
 - [VecSpeed](VecSpeed.md) — commanded resultant speed

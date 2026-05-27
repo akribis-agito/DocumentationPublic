@@ -41,6 +41,15 @@ Read-only total vector path distance (always positive) from start to end of moti
 
 `VecAbsTrgt` is not used to *define* the vector motion. The motion is defined using the per-axis target keywords [RelTrgt](../13-motion-mode-ptp/RelTrgt.md) or [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) of the member axes; `VecAbsTrgt` is the resultant path length computed from them.
 
+## How it works
+
+When the vector move starts, the controller resolves each member axis's start point and end point (from its absolute or relative target) and computes the total path length once, storing it as `VecAbsTrgt`. How it is computed depends on the geometry ([VecType](VecType.md)):
+
+- **Linear** ([VecType](VecType.md) = 0): the straight-line distance, i.e. the root-sum-of-squares of the per-axis travel distances. For example, a move of 3000 on one axis and 4000 on another gives `VecAbsTrgt = 5000`.
+- **Arc** ([VecType](VecType.md) = 1): the arc length, equal to the swept angle times the radius. The swept angle runs from the start angle to the end angle in the direction set by [VecArcDir](VecArcDir.md), plus a full turn (2π) for each revolution requested by [VecNumCircles](VecNumCircles.md). The radius is derived from [VecArcCenter](VecArcCenter.md).
+
+`VecAbsTrgt` is the end value of the path coordinate [VecPosRef](VecPosRef.md): the path velocity profile ramps `VecPosRef` from 0 up to `VecAbsTrgt`, and the deceleration lookahead uses the distance still remaining (`VecAbsTrgt − VecPosRef`) to time the braking. It is fixed for the duration of the move — changing a member axis's target while moving does not alter it.
+
 ## Examples
 
 ```text

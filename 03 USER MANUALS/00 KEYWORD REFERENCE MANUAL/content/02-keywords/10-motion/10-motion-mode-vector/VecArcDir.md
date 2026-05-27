@@ -44,6 +44,13 @@ Two axes are defined for an arc motion. The arc is performed in the plane of the
 - The second axis is the **Y** axis.
 - CCW motion is then around the "Z" axis, with the X axis moving toward the Y axis.
 
+`VecArcDir` decides which way the swept angle moves from the start point to the end point, and therefore how much of the circle is covered:
+
+- **CCW (`0`)** — the angle increases from the start angle to the end angle. The path length is the increasing angular gap (plus any full turns from [VecNumCircles](VecNumCircles.md)) times the radius.
+- **CW (`1`)** — the angle decreases. The path length is the complementary gap (a full turn minus the CCW gap, plus any extra turns) times the radius.
+
+So with the same start point, end point and center, switching `VecArcDir` selects the "short way" versus the "long way" round the circle. When the start and end points coincide (a full circle), CCW sweeps a complete turn while CW relies on [VecNumCircles](VecNumCircles.md) to define the revolutions. The resulting arc length is stored as [VecAbsTrgt](VecAbsTrgt.md).
+
 ## Examples
 
 ```text

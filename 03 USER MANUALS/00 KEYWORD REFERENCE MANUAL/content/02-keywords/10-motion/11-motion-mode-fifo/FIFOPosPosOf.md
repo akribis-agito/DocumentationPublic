@@ -32,16 +32,30 @@ Position offset added to every FIFO position segment.
 
 ## Overview
 
-`FIFOPosPosOf` adds a position offset to every FIFO position segment before it is applied as the axis reference target. It allows a global shift of the entire FIFO position-tracking trajectory without modifying the individual segment data in [FIFOPosTrgt](FIFOPosTrgt.md). It is the position-offset counterpart of the velocity offset [FIFOPosVelOf](FIFOPosVelOf.md) and the current offset [FIFOPosCurrOf](FIFOPosCurrOf.md). It is not saved to flash and can be changed at any time.
+`FIFOPosPosOf` is a constant position offset, in position counts, added to every streamed target before it becomes the axis position reference. It shifts the entire position-tracking trajectory bodily without changing the queued targets or [FIFOPosTrgt](FIFOPosTrgt.md). It is the position member of the three position-tracking offsets, alongside the velocity offset [FIFOPosVelOf](FIFOPosVelOf.md) and the current offset [FIFOPosCurrOf](FIFOPosCurrOf.md). It is not saved to flash and can be changed at any time, including during motion.
+
+## How it works
+
+On every sample, the interpolated target (the working target plus the interpolation toward the next target) is summed with `FIFOPosPosOf` to form the commanded position reference:
+
+```text
+position reference = interpolated target + FIFOPosPosOf
+```
+
+The sum is then clamped by the software position limits. Because the offset is applied after interpolation, changing it shifts the whole path uniformly; a step change produces a step in the reference, so change it gradually if the axis is tracking. The offset affects only the position reference and is independent of the velocity and current feedforward offsets.
+
+A common use is to apply a live correction (for example from an external sensor or a master axis) on top of a fixed streamed profile.
 
 ## Examples
 
 ```text
-AFIFOPosPosOf=5000   ; shift the whole position trajectory by 5000
+AFIFOPosPosOf=5000   ; shift the whole position trajectory by 5000 counts
+AFIFOPosPosOf=0      ; remove the offset
 ```
 
 ## See also
 
-- [FIFOPosTrgt](FIFOPosTrgt.md) — per-segment target position
+- [FIFOPosTrgt](FIFOPosTrgt.md) — working target position
 - [FIFOPosVelOf](FIFOPosVelOf.md) — velocity feedforward offset
 - [FIFOPosCurrOf](FIFOPosCurrOf.md) — current feedforward offset
+- [PosRef](../01-kinematics-status/PosRef.md) — resulting position reference

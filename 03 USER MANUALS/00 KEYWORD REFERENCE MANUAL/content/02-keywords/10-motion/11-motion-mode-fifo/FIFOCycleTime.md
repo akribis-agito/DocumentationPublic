@@ -34,18 +34,38 @@ Duration, in control samples, of the FIFO motion segment currently being execute
 
 ## Overview
 
-`FIFOCycleTime` is the time length of each FIFO motion segment, expressed as a number of control-loop samples. It can be modified at any time the controller is ending one segment and starting a new one, allowing the segment duration to vary across the FIFO sequence.
+`FIFOCycleTime` is the duration of each FIFO motion segment, expressed as a number of control-loop samples. It governs how long the controller spends interpolating across one segment before taking the next entry from the queue. The default is 65536 samples.
 
 See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all related keywords.
+
+## How it works
+
+The cycle time takes effect only at a segment boundary — when the controller finishes one segment and is about to start the next. It is not applied mid-segment, so changing it never disturbs the segment in progress.
+
+The value is updated in two ways:
+
+- **From the queue:** a cycle-time entry pushed with [FIFOPushCycle](FIFOPushCycle.md) becomes the active cycle time when the controller reaches it, and applies to every segment that follows until the next cycle-time entry. This is the normal way to vary segment lengths through a sequence.
+- **Directly:** writing `FIFOCycleTime` sets the value used by the next segment that starts.
+
+When a segment begins, its sample count-down is loaded from the cycle time (see [FIFOStatus](FIFOStatus.md) index 3) and the per-sample motion is derived from it — for a position-delta segment, for example, the requested delta is divided across this many samples.
+
+## Changes between versions
+
+| | v4 (standalone &amp; central-i) | v5 (central-i) |
+|---|---|---|
+| Accepted range | unrestricted | 1 to 65 536 000 |
+
+In **v5** the cycle time is bounded to 1–65 536 000 control samples. **v5 is central-i only.**
 
 ## Examples
 
 ```text
-AFIFOCycleTime      ; query the current segment duration in control samples
+AFIFOCycleTime            ; read the current segment duration in control samples
+AFIFOCycleTime[1]=16      ; set the next segment to last 16 control samples
 ```
 
 ## See also
 
 - [FIFOType](FIFOType.md) — full FIFO mode description
-- [FIFOPushCycle](FIFOPushCycle.md) — push a cycle-time entry into the FIFO
-- [FIFOStatus](FIFOStatus.md) — FIFO queue status
+- [FIFOPushCycle](FIFOPushCycle.md) — push a cycle-time entry into the queue
+- [FIFOStatus](FIFOStatus.md) — samples remaining in the active segment (index 3)

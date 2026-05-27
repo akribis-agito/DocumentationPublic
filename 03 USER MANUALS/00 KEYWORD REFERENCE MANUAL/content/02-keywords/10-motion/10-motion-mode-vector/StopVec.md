@@ -34,6 +34,18 @@ Command that stops coordinated vector motion, decelerating all member axes with 
 
 `StopVec` is a command that stops coordinated vector motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 16). All participating axes (selected by [VecMemberAxes](VecMemberAxes.md)) decelerate together using the emergency deceleration rate [VecEmrgDec](VecEmrgDec.md) and come to rest, keeping the vector path coordinated as it stops. It is an axis-related command function that can be issued at any time, including during motion. For a continuous arc (see [VecNumCircles](VecNumCircles.md) = 0), `StopVec` is the means of ending the motion.
 
+## How it works
+
+`StopVec` may be issued on any member axis. The controller finds the group that axis belongs to and, if the group is actively moving or paused, applies the stop to **all** member axes together so the path stays coordinated as it brakes:
+
+1. It records the stop reason on every member axis: [MotionReason](../05-motion-status/MotionReason.md) = 29 ("ended due to StopVec command").
+2. It sets the vector-stop request bit on every member axis: the [MotionStat](../05-motion-status/MotionStat.md) vector-stop bit (bit 18, mask `0x00040000`).
+3. It switches the group's internal state to "stopping", which makes the path-velocity profiler ramp the path speed down to rest at the emergency rate [VecEmrgDec](VecEmrgDec.md) (rather than the normal [VecDecel](VecDecel.md)).
+
+Because the deceleration is applied to the single path velocity and the geometry still splits it across the axes, the move follows its programmed path while slowing — it does not deviate. When the path velocity reaches zero the in-motion status bits of all member axes are cleared and the move ends. Issuing `StopVec` when the group is not in motion has no effect.
+
+A motor-off or fault on a member axis, or a member axis reaching a software position limit, stops the group by the same mechanism but with different reason codes (see [MotionReason](../05-motion-status/MotionReason.md) codes 30-34). Use [VecPause](VecPause.md) instead if you want to halt the move and later resume it from where it stopped.
+
 ## Examples
 
 ```text

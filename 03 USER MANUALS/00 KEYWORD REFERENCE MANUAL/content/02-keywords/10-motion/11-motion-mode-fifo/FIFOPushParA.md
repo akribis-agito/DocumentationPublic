@@ -32,14 +32,22 @@ Pushes a parabolic (constant-acceleration) segment into the FIFO motion queue.
 
 ## Overview
 
-`FIFOPushParA` pushes an acceleration-type motion segment into the FIFO, in which the acceleration reference is held constant for the segment duration, producing a parabolic position profile. It is the acceleration-based counterpart of [FIFOPushParP](FIFOPushParP.md), which defines the parabolic segment by position. It is one of the `FIFOPush*` functions used to fill the FIFO before or during motion; the push is rejected with an error if the FIFO is full.
+`FIFOPushParA` appends a **parabolic-by-acceleration** segment (type 4 in [FIFOType](FIFOType.md)) to the queue. The value is the acceleration reference, held constant for the duration of the segment, producing a parabolic position profile. The segment begins from the current profiler velocity. It is the acceleration-based counterpart of [FIFOPushParP](FIFOPushParP.md), which defines the segment by position delta instead.
+
+It is one of the `FIFOPush*` functions used to fill the queue before or during motion. The entry is added at the tail. If the queue is full, the push is rejected with an error.
 
 See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all related keywords.
+
+## How it works
+
+When the controller reaches this segment, it ramps the velocity by the supplied acceleration each control sample for the segment duration, advancing the position reference accordingly. The evolving velocity and acceleration are reported in [FIFOStatus](FIFOStatus.md) (indexes 4 and 5).
+
+The acceleration must be at least the smallest value the controller can resolve — one position unit per second, per second. A push with a smaller magnitude is rejected with an error at push time. The accepted range is -2 000 000 000 to 2 000 000 000.
 
 ## Examples
 
 ```text
-AFIFOPushParA=100000 ; push a constant-acceleration (parabolic) segment
+AFIFOPushParA=100000 ; queue a constant-acceleration (parabolic) segment
 ```
 
 ## See also

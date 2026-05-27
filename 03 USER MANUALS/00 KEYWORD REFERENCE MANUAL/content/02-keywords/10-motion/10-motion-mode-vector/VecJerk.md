@@ -34,6 +34,17 @@ Jerk limit (0-9) for vector motion, smoothing the resultant velocity into an S-c
 
 `VecJerk` sets the jerk limit for vector motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 16), controlling the rate of change of the resultant acceleration to produce a smoother S-curve velocity profile. Higher smoothing reduces mechanical shock at the cost of slightly longer moves; it shapes the transitions between the [VecAccel](VecAccel.md) and [VecDecel](VecDecel.md) ramps. It is an axis-related parameter saved to flash, and cannot be changed while the axis is in motion.
 
+## How it works
+
+`VecJerk` selects which path-velocity profiler the move uses, applied to the single path velocity (see [VecSpeed](VecSpeed.md)):
+
+| Value | Profile along the path |
+|----|----|
+| 0 | Trapezoidal: the path velocity ramps linearly up at [VecAccel](VecAccel.md), cruises at [VecSpeed](VecSpeed.md), and ramps linearly down at [VecDecel](VecDecel.md). Acceleration changes instantly at the corners. |
+| 1-9 | S-curve: the path velocity is shaped so acceleration itself ramps in and out, rounding the corners of the trapezoid. The setting controls how much the transitions are smoothed; higher values give gentler corners and a slightly longer move. |
+
+Because the smoothing is applied to the resultant path velocity, it benefits every member axis along the coordinated path at once, removing the step changes in acceleration that would otherwise occur at the start and end of the ramps. As the value is read when the move starts, it cannot be changed during motion.
+
 ## Examples
 
 ```text

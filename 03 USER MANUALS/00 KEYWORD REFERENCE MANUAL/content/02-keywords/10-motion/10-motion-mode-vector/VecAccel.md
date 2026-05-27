@@ -40,6 +40,18 @@ Vector acceleration rate (user units/s^2) ramping the resultant velocity up to V
 
 `VecAccel` governs the ramp-up; [VecDecel](VecDecel.md) governs the controlled ramp-down, and [VecJerk](VecJerk.md) optionally smooths the transitions into an S-curve.
 
+## How it works
+
+A vector move runs one velocity profile along the geometric path (see [VecSpeed](VecSpeed.md)); `VecAccel` is the rate at which that single path velocity is allowed to rise. With jerk smoothing off ([VecJerk](VecJerk.md) = 0) the profiler increments the path velocity by `VecAccel × Ts` each control cycle (where `Ts` is the control-cycle time) until it reaches [VecSpeed](VecSpeed.md):
+
+$$
+v_k = v_{k-1} + VecAccel \times T_s ,\qquad v_k \le VecSpeed
+$$
+
+The deceleration side is handled separately: each cycle the profiler also computes, from the remaining path distance to [VecAbsTrgt](VecAbsTrgt.md), the speed from which it could still brake to rest in time using [VecDecel](VecDecel.md), and clamps the path velocity to it. `VecAccel` therefore sets the leading slope of the trapezoid and `VecDecel` the trailing slope. With jerk smoothing on, `VecAccel` is passed as the acceleration constraint to the S-curve path profiler instead.
+
+Because the ramp shapes the **resultant** path velocity, the apparent acceleration seen on any one member axis is `VecAccel` scaled by that axis's share of the path (its direction cosine for a linear move). The value is re-read each cycle, so a change mid-move takes effect on the next cycle.
+
 ## Examples
 
 ```text

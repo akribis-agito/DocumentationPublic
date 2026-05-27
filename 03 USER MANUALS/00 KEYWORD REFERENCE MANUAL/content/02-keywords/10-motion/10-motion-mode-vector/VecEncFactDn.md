@@ -30,14 +30,23 @@ Denominator of the per-axis vector-to-encoder scaling ratio (VecEncFactNu / VecE
 
 ## Overview
 
-`VecEncFactDn` is the denominator of the encoder scaling ratio applied to the vector motion position reference for this axis. Together with [VecEncFactNu](VecEncFactNu.md) it defines the rational scale `VecEncFactNu / VecEncFactDn` mapping vector position units to axis encoder counts, so that axes with different encoder resolutions can take part in the same coordinated vector move. It is an axis-related parameter. This serves the same compensation purpose as the integer-ratio keyword [VecEncRatio](VecEncRatio.md).
+`VecEncFactDn` is the denominator of the per-axis encoder scaling ratio applied to the coordinated vector motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 16). Together with [VecEncFactNu](VecEncFactNu.md) it defines the rational scale `VecEncFactNu / VecEncFactDn`, mapping vector path units to the axis encoder counts so that axes with different encoder resolutions can take part in the same coordinated move while the resultant path stays accurate. It is an axis-related parameter saved to flash and cannot be changed while the axis is in motion. This is the numerator/denominator form of the same compensation offered by the single-value keyword [VecEncRatio](VecEncRatio.md).
 
-> **Note:** `VecEncFactDn` was not found in the AG300_CTL01Params.c firmware parameter table. Confirm availability and parameter attributes before use.
+## How it works
 
-> **Documentation pending:** Frontmatter attributes (access, range, default, etc.) are unconfirmed pending firmware verification.
+Set the pair so that `VecEncFactNu / VecEncFactDn` equals the resolution ratio needed for the axis. When numerator and denominator are equal (the default `1` / `1`), the ratio is 1 and no scaling is applied. Both keywords accept whole numbers in the range `1`-`2000`, so a wide range of rational ratios can be expressed (for example `2` here with [VecEncFactNu](VecEncFactNu.md) = `3` gives a 3/2, 1.5:1, ratio). The controller forms the ratio (and its reciprocal) when either value changes, ready to apply during the vector move. Configure the pair on each member axis before starting the move, since it cannot be changed in motion.
+
+## Examples
+
+```text
+AVecEncFactDn[1]=1     ; denominator = 1 (default)
+AVecEncFactDn[1]=2     ; with VecEncFactNu = 3 gives a 3/2 (1.5:1) scaling ratio
+AVecEncFactDn[1]       ; read the current denominator
+```
 
 ## See also
 
 - [VecEncFactNu](VecEncFactNu.md) — numerator of the scaling ratio
 - [VecEncRatio](VecEncRatio.md) — single-value encoder-resolution compensation
+- [VecMemberAxes](VecMemberAxes.md) — axes forming the vector group
 - [VecSpeed](VecSpeed.md) — commanded resultant speed
