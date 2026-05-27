@@ -42,9 +42,9 @@ $$
 
 ### Exact, drift-free ratio
 
-When the pair is set, the firmware reduces `MasterFact` and `MasterFactDen` by their greatest common divisor and precomputes the reciprocal of the denominator (`develop:CommonC/SpecialFuncs.c:5306`, `:5399`). The denominator is always kept positive — the ratio's sign lives in `MasterFact`.
+When the pair is set, the controller reduces `MasterFact` and `MasterFactDen` by their greatest common divisor and precomputes the reciprocal of the denominator. The denominator is always kept positive — the ratio's sign lives in `MasterFact`.
 
-Each control cycle the gearing macro then applies the ratio with a **quotient-and-remainder** scheme in `long double`: it carries the fractional part of the master change forward to the next cycle (`gldMasterPosPreFactFloatPoint`) so that the accumulated follower motion equals `MasterFact / MasterFactDen × master change` with no long-term rounding drift, even for ratios that are not a clean multiple of 1/65536 (`develop:CommonIncludes/AG300_CTL01ControlInterrupt.h`). This is the main advantage of the v5 numerator/denominator form over the v4 single-factor form.
+Each control cycle the controller then applies the ratio with a **quotient-and-remainder** scheme in extended-precision floating point: it carries the fractional part of the master change forward to the next cycle so that the accumulated follower motion equals `MasterFact / MasterFactDen × master change` with no long-term rounding drift, even for ratios that are not a clean multiple of 1/65536. This is the main advantage of the v5 numerator/denominator form over the v4 single-factor form.
 
 The valid range is `1 … 16777215`; it must not be zero.
 

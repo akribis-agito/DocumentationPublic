@@ -38,15 +38,15 @@ Number of repetitions for repetitive point-to-point motion; `0` repeats indefini
 
 ## How it works
 
-`Begin` resets [RptCounter](../05-motion-status/RptCounter.md) to `0` when a repetitive move starts (`AG300_CTL01Funcs.c:1164`). At the end of each individual move — after the smoothing tail (`2^Jerk` cycles) has flushed — the profiler increments `RptCounter` (`AG300_CTL01Profiler.c:446`) and then decides whether to continue:
+`Begin` resets [RptCounter](../05-motion-status/RptCounter.md) to `0` when a repetitive move starts. At the end of each individual move — after the smoothing tail (`2^Jerk` cycles) has flushed — the controller increments `RptCounter` and then decides whether to continue:
 
 ```text
 continue  if  MotionMode == 2
-          and StopRep not requested  (IN_REPETITIVE_STOP_BIT clear)
+          and StopRep not requested
           and ( RptCycles == 0  OR  RptCycles != RptCounter )
 ```
 
-(`AG300_CTL01Profiler.c:449`–`451`.) When the condition holds the axis enters the dwell state (`IN_WAITING_BIT` set, the wait counter reset) and another move follows after [RptWait](RptWait.md); otherwise all in-motion bits are cleared and the move ends. Because the comparison is `RptCycles != RptCounter`, a value of `0` never matches the counter and so repeats forever, while a positive value stops exactly when `RptCounter` reaches it.
+When the condition holds the axis enters the dwell state ([MotionStat](../05-motion-status/MotionStat.md) bit 1 set, the wait counter reset) and another move follows after [RptWait](RptWait.md); otherwise all in-motion bits are cleared and the move ends. Because the comparison is `RptCycles != RptCounter`, a value of `0` never matches the counter and so repeats forever, while a positive value stops exactly when `RptCounter` reaches it.
 
 Note how the count interacts with [RptMode](RptMode.md): in **bidirectional** mode each leg (out, then back) is one count, so a full there-and-back cycle is two counts; in **unidirectional** mode each step is one count.
 
@@ -64,4 +64,4 @@ ARptCycles          ; query current value
 - [RptWait](RptWait.md) — dwell time between repetitions
 - [RptCounter](../05-motion-status/RptCounter.md) — running repetition count (compared against `RptCycles`)
 - [StopRep](../04-motion-command/StopRep.md) — stops repetitive motion before the count is reached
-- [MotionStat](../05-motion-status/MotionStat.md) — `IN_WAITING_BIT` marks the dwell between counted repetitions
+- [MotionStat](../05-motion-status/MotionStat.md) — bit 1 marks the dwell between counted repetitions

@@ -44,7 +44,7 @@ $$
 \mathrm{\Delta}_{MasterPos} = \frac{MasterFact}{65536} \bullet \mathrm{\Delta}_{master\ variable}
 $$
 
-The firmware computes this as `(master_delta × MasterFact) << 16`, then accumulates it into the 32.32 fixed-point `MasterPos` (`AG300_CTL01ControlInterrupt.h:182`, `:192`). Converting to 64-bit *before* the multiply protects against overflow when a modulo master jumps by a large amount.
+The controller computes this as `(master_delta × MasterFact) << 16`, then accumulates it into the 32.32 fixed-point `MasterPos`. Converting to 64-bit *before* the multiply protects against overflow when a modulo master jumps by a large amount.
 
 A negative `MasterFact` reverses the follower direction relative to the master. To set ratios that are not a clean multiple of 1/65536, use the numerator/denominator pair (v5) — see *Changes between versions*.
 

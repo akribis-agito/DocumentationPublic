@@ -41,13 +41,9 @@ Flash-stored array of target positions (user units), available for user programs
 
 ## How it works
 
-`Targets` is a **storage array, not an automatic motion queue.** The firmware registers it as a flash parameter (`AG300_CTL01Params.c:1024`, backing variable `glTargets[NUMBER_OF_AXES][TARGETS_ARRAY_SIZE]`), but no motion-engine, profiler or interpreter code reads it — the only firmware that touches `glTargets` is the parameter table itself. The trajectory profiler always moves toward the single target [AbsTrgt](AbsTrgt.md); to walk through several positions you read `Targets[n]` into `AbsTrgt` yourself between moves.
+`Targets` is a **storage array, not an automatic motion queue.** It is a flash-stored parameter, but no motion engine, profiler or interpreter logic reads it — it is simply persistent storage. The trajectory profiler always moves toward the single target [AbsTrgt](AbsTrgt.md); to walk through several positions you read `Targets[n]` into `AbsTrgt` yourself between moves.
 
 ### Array size and indexing
-
-```text
-#define TARGETS_ARRAY_SIZE  4   // AG300_CTL01ParamsCommon.h:740
-```
 
 The array holds **three usable entries**. As with all keyword arrays, index `0` is reserved so that command indexes start at `1`, giving valid indexes `Targets[1]`, `Targets[2]`, `Targets[3]`. Each entry has the same full position range as `AbsTrgt`.
 

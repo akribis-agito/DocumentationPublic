@@ -38,7 +38,7 @@ First-order low-pass filter coefficient for the scaled master-position delta (di
 
 ### The filter
 
-In the direct-gear macro `M_CALC_POS_REF_GEAR_DIRECT` (`AG300_CTL01ControlInterrupt.h:283`) the geared displacement since `Begin`, `u_k = MasterPos − MasterPosInitial`, is filtered into `PosRefToMove` before being added to `PosRefInitial` to form `PosRef`:
+In direct gear motion the geared displacement since `Begin`, `u_k = MasterPos − MasterPosInitial`, is filtered into an intermediate term before being added to the reference at `Begin` to form `PosRef`:
 
 ```text
 PosRefToMove = (u_k * MasterFilt + PosRefToMove * (64 - MasterFilt)) >> 6

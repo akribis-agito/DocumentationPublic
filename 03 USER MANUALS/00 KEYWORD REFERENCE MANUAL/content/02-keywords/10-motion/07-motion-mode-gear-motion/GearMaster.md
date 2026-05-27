@@ -38,19 +38,19 @@ Complex CAN code selecting the master variable for gear motion.
 
 ### Resolution into a live pointer
 
-`GearMaster` is decoded once, when the value is set, by `SpGearMaster` (`SpecialFuncs.c:5913`). The complex CAN code is split into axis number, array index and base CAN code by `ComplexCANToTokens`, and the firmware stores a direct pointer to the chosen variable's storage:
+`GearMaster` is decoded once, when the value is set. The complex CAN code is split into axis number, array index and base CAN code, and the controller stores a direct pointer to the chosen variable's storage:
 
 ```text
-glpGearMasterPointer[axis] = &(selected keyword's global)[masterAxis][index]
+gear master pointer = &(selected keyword's value)[masterAxis][index]
 ```
 
-It also captures the variable's current value as the "previous" value so the first cycle produces a zero delta (`SpecialFuncs.c:5952`). Thereafter the gearing macro dereferences this pointer every cycle (`AG300_CTL01ControlInterrupt.h:181`) — there is no per-cycle table lookup, keeping the interrupt fast.
+It also captures the variable's current value as the "previous" value so the first cycle produces a zero delta. Thereafter the controller dereferences this pointer every cycle — there is no per-cycle table lookup, keeping the control loop fast.
 
 ![Gear-motion signal path from GearMaster to PosRef](gear-signal-path.svg)
 
 ### Special case: 64-bit axis-to-axis gearbox
 
-If all of the following hold, the firmware switches to a faster, exact path that tracks the master axis's full 64-bit reference instead of its reported 32-bit value (`SpecialFuncs.c:5926`–`5933`):
+If all of the following hold, the controller switches to a faster, exact path that tracks the master axis's full 64-bit reference instead of its reported 32-bit value:
 
 | Condition |
 |---|
@@ -59,14 +59,14 @@ If all of the following hold, the firmware switches to a faster, exact path that
 | [MotionMode](../02-motion-configuration/MotionMode.md) `= 5` (direct gear) |
 | `GearMaster` points at the post-shaping reference of another axis |
 
-In this mode (`gsTake64bitsMasterPosRef = 1`) the follower reads the master's internal `gllPosRef` directly (`AG300_CTL01ControlInterrupt.h:175`), giving a drift-free 1:1 electronic gearbox between two controlled axes.
+In this mode the follower reads the master axis's internal full-resolution position reference directly, giving a drift-free 1:1 electronic gearbox between two controlled axes.
 
 ### Relationship to the other gearing keywords
 
 - The scaled, accumulated master change is reported by [MasterPos](MasterPos.md).
 - If the selected master variable itself wraps (its `ModRev` is non-zero — e.g. a rotary [Pos](../01-kinematics-status/Pos.md) or another axis's [PosRef](../01-kinematics-status/PosRef.md)), you must set [MasterModRev](MasterModRev.md) to that wrap so the accumulation stays continuous.
 
-`GearMaster` is `OKMTRON` but **not** `OKINMOTN`: change the master selection only while the axis is not in gear motion.
+`GearMaster` can be changed while the motor is on but **not** while the axis is in motion: change the master selection only while the axis is not in gear motion.
 
 ## Examples
 

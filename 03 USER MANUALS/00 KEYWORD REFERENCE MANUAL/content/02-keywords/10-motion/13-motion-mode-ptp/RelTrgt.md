@@ -43,21 +43,19 @@ Relative target distance (user units) for the next point-to-point move.
 
 ### RelTrgt is consumed at Begin, not held
 
-The profiler never reads `RelTrgt` directly. When `Begin` runs, the firmware does:
+The profiler never reads `RelTrgt` directly. When `Begin` runs, the controller does:
 
 ```text
 if (RelTrgt != 0)
     AbsTrgt = PosRef + RelTrgt
 ```
 
-so the relative distance is added to the **reference position [PosRef](../01-kinematics-status/PosRef.md)** (not the feedback [Pos](../01-kinematics-status/Pos.md)) to form a new [AbsTrgt](AbsTrgt.md). The same line appears in every mode that accepts a relative target:
+so the relative distance is added to the **reference position [PosRef](../01-kinematics-status/PosRef.md)** (not the feedback [Pos](../01-kinematics-status/Pos.md)) to form a new [AbsTrgt](AbsTrgt.md). The same conversion is applied in every mode that accepts a relative target:
 
-| Context | Firmware site |
-|---|---|
-| PTP `Begin` | `AG300_CTL01Funcs.c:1013` |
-| Repetitive PTP `Begin` | `AG300_CTL01Funcs.c:1117` |
-| Vector motion `Begin` (per member axis) | `AG300_CTL01Funcs.c:2168` |
-| Quick begin on switch to position mode | `AG300_CTL01ControlLoops.c:2971` |
+- PTP `Begin`
+- Repetitive PTP `Begin`
+- Vector motion `Begin` (per member axis)
+- Quick begin on a switch to position mode
 
 Two consequences follow from this design:
 

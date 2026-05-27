@@ -36,11 +36,11 @@ Dwell time, in milliseconds, between repetitions of repetitive point-to-point mo
 
 ## How it works
 
-When one repetition finishes and another is due, the profiler sets the `IN_WAITING_BIT` of [MotionStat](../05-motion-status/MotionStat.md) and clears a dwell counter (`AG300_CTL01Profiler.c:453`). While that bit is set the profiler is in the dwell branch (`AG300_CTL01Profiler.c:905`): each control cycle it increments `glWaitCounter` and compares it to `RptWait` (`:922`–`:923`). Until the counter reaches `RptWait` the profiler holds the axis at rest (profiler velocity forced to zero) and runs the normal in-target/settling bookkeeping, exactly as between separate moves.
+When one repetition finishes and another is due, the controller sets bit 1 (dwell) of [MotionStat](../05-motion-status/MotionStat.md) and clears a dwell counter. While that bit is set the profiler is in the dwell branch: each control cycle it increments the dwell counter and compares it to `RptWait`. Until the counter reaches `RptWait` the profiler holds the axis at rest (profiler velocity forced to zero) and runs the normal in-target/settling bookkeeping, exactly as between separate moves.
 
-When `glWaitCounter >= RptWait` the firmware clears `IN_WAITING_BIT`, loads the next target ([RptMode](RptMode.md) decides whether that is the original start or the next step), re-arms the in-target status and friction-compensation flag, and the next move begins (`AG300_CTL01Profiler.c:926`–`947`). With `RptWait = 0` the wait branch is satisfied immediately, so the next move starts on the very next cycle with no dwell — that fast path performs the same re-initialisation inline.
+When the dwell counter reaches `RptWait` the controller clears bit 1, loads the next target ([RptMode](RptMode.md) decides whether that is the original start or the next step), re-arms the in-target status and friction-compensation flag, and the next move begins. With `RptWait = 0` the wait branch is satisfied immediately, so the next move starts on the very next cycle with no dwell.
 
-The dwell counter advances every control cycle, so although the value is documented in milliseconds the actual pause is `RptWait` cycles of the servo loop. If [StopRep](../04-motion-command/StopRep.md) (or a fault stop) arrives during the dwell, the motion ends immediately without starting the next repetition (`AG300_CTL01Profiler.c:908`–`919`).
+The dwell counter advances every control cycle, so although the value is documented in milliseconds the actual pause is `RptWait` cycles of the servo loop. If [StopRep](../04-motion-command/StopRep.md) (or a fault stop) arrives during the dwell, the motion ends immediately without starting the next repetition.
 
 ## Examples
 
@@ -54,5 +54,5 @@ ARptWait            ; query current value
 - [MotionMode](MotionMode.md) — must be 2 for `RptWait` to apply
 - [RptCycles](RptCycles.md) — number of repetitions
 - [RptMode](RptMode.md) — repetition direction
-- [MotionStat](../05-motion-status/MotionStat.md) — `IN_WAITING_BIT` (bit 1) reports the dwell
+- [MotionStat](../05-motion-status/MotionStat.md) — bit 1 reports the dwell
 - [StopRep](../04-motion-command/StopRep.md) — ends repetitive motion (also during the dwell)

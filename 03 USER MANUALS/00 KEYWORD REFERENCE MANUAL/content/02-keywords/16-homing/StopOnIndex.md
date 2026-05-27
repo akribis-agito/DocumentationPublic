@@ -39,7 +39,7 @@ Enables automatic stop of axis motion on the next encoder index pulse.
 `StopOnIndex` is evaluated by the motion profiler only while the axis is jogging. On each cycle, if `StopOnIndex` is non-zero and the encoder index is currently detected ([IndexStat](../03-encoder/02-index-detection/IndexStat-AuxIndexStat.md) active), the profiler:
 
 1. raises the in-stop-request bit so the move decelerates to a stop,
-2. sets the motion end reason to "index" (reported by [MotionReason](../10-motion/05-motion-status/MotionReason.md) as `MOTION_REASON_END_INDEX`), and
+2. sets the motion end reason to "index" (reported by [MotionReason](../10-motion/05-motion-status/MotionReason.md) = 11), and
 3. clears `StopOnIndex` back to `0`.
 
 Because the firmware auto-clears it, `StopOnIndex` is a one-shot arm: read it back as `0` to confirm the stop was triggered, then wait for [MotionStat](../10-motion/05-motion-status/MotionStat.md) to show the axis is no longer in motion. The homing engine sets this flag internally for the "Jog to index" step; the related "Move to index position" step instead does a point-to-point move to the recorded [IndexPos](../03-encoder/02-index-detection/IndexPos-AuxIndexPos.md) and therefore does not use `StopOnIndex`.

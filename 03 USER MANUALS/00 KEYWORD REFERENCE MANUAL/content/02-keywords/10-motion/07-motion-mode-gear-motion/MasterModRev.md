@@ -49,14 +49,14 @@ You must set `MasterModRev` to match the [ModRev](../../03-encoder/04-modulo-mod
 
 ### The correction
 
-When the value is set, `SpMasterModRev` (`SpecialFuncs.c:6118`) pre-computes the boundary in the interrupt's 32.32 fixed-point units and its half:
+When the value is set, the controller pre-computes the boundary in the internal 32.32 fixed-point units and its half:
 
 ```text
-gllMasterModRev     = MasterModRev << 32
-gllMasterModRevHalf = gllMasterModRev >> 1
+MasterModRev_fixed = MasterModRev << 32
+MasterModRev_half  = MasterModRev_fixed >> 1
 ```
 
-Then each cycle, if `MasterModRev ≠ 0`, the scaled delta is corrected against the half-boundary (`AG300_CTL01ControlInterrupt.h:185`–`191`):
+Then each cycle, if `MasterModRev ≠ 0`, the scaled delta is corrected against the half-boundary:
 
 ```text
 if (delta >  MasterModRevHalf)  delta -= MasterModRev   // wrapped forward

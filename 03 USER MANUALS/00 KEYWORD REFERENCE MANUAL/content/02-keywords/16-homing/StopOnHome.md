@@ -39,7 +39,7 @@ Enables automatic stop of axis motion when the home digital input changes state.
 `StopOnHome` is evaluated by the motion profiler only while the axis is jogging. On each cycle, if `StopOnHome` is non-zero and the home input has just changed state (the internal one-cycle "home change" pulse derived from [HomeStat](HomeStat.md)), the profiler:
 
 1. raises the in-stop-request bit so the move decelerates to a stop,
-2. sets the motion end reason to "home change" (reported by [MotionReason](../10-motion/05-motion-status/MotionReason.md) as `MOTION_REASON_END_HOME_CHANGE`), and
+2. sets the motion end reason to "home change" (reported by [MotionReason](../10-motion/05-motion-status/MotionReason.md) = 16), and
 3. clears `StopOnHome` back to `0`.
 
 Because the firmware auto-clears it, `StopOnHome` is a one-shot arm: read it back as `0` to confirm the stop was triggered, then wait for [MotionStat](../10-motion/05-motion-status/MotionStat.md) to show the axis is no longer in motion. The homing engine sets and relies on this flag internally for step 11; outside homing you can arm it yourself for a custom jog-to-home move.

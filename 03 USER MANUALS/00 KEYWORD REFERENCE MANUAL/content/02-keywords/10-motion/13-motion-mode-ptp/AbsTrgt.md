@@ -45,23 +45,23 @@ Absolute target position (user units) for the next point-to-point move.
 
 ### Validation at Begin
 
-When `Begin` runs in PTP mode the firmware first folds in any relative target (`if (RelTrgt != 0) AbsTrgt = PosRef + RelTrgt`, `AG300_CTL01Funcs.c:1013`), then range-checks the **resulting** `AbsTrgt` against the software travel limits and the active hardware limit switches:
+When `Begin` runs in PTP mode the controller first folds in any relative target (if [RelTrgt](RelTrgt.md) is non-zero, `AbsTrgt = PosRef + RelTrgt`), then range-checks the **resulting** `AbsTrgt` against the software travel limits and the active hardware limit switches:
 
-| Check (`AG300_CTL01Funcs.c`) | Effect if it fails |
+| Check | Effect if it fails |
 |---|---|
-| `AbsTrgt < RevPLim` or `AbsTrgt > FwdPLim` (`:1017`) | `Begin` rejected — `FINAL_TARGET_IS_OUTSIDE_OF_POS_LIMITS` |
-| Moving into a tripped FLS / RLS (`:1025`) | `Begin` rejected — `DO_NOT_ALLOW_MOTION_INTO_RLS_OR_FLS` |
+| `AbsTrgt < RevPLim` or `AbsTrgt > FwdPLim` | `Begin` rejected — final target outside the software position limits ([instruction error code](../../../04-error-codes/instruction-error-codes.md) 161) |
+| Moving into a tripped FLS / RLS | `Begin` rejected — motion direction is into an active limit switch ([instruction error code](../../../04-error-codes/instruction-error-codes.md) 162) |
 
 So an out-of-limits `AbsTrgt` does not start a clipped move — it refuses the command.
 
 ### Use by the profiler each cycle
 
-Once moving, the PTP profiler (`AG300_CTL01Profiler.c:998`–`1284`) reads `AbsTrgt` every control cycle:
+Once moving, the PTP profiler reads `AbsTrgt` every control cycle:
 
-1. It is **re-clamped** to the software limits each cycle (`glAbsTrgt = glFwdPLim` / `glRevPLim`, `:1007`–`1011`), so shrinking a limit mid-move pulls the target in.
-2. Direction is decided by comparing the target to the reference at internal 50.14 fixed point: `(AbsTrgt << 14) >= gllPosRef` ⇒ move positive, else negative (`:1078`, `:1134`).
-3. The braking point is found from a deceleration-distance square-root lookahead on the remaining distance `(AbsTrgt << 14) − gllPosRef` (`:1090`, `:1133`); with [JerkMode](../03-kinematics-configuration/JerkMode.md) on, the jerk profiler is given `AbsTrgt` directly (`:1170`).
-4. Motion ends when `|PosRef − AbsTrgt| ≤ 1` and the profiler velocity is low (`:1239`). At that point the reference is snapped exactly onto the target — `glPosRef = glAbsTrgt` (`:468`) — so there is no residual fractional offset.
+1. It is **re-clamped** to the software limits ([RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md) / [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md)) each cycle, so shrinking a limit mid-move pulls the target in.
+2. Direction is decided by comparing the target to the reference [PosRef](../01-kinematics-status/PosRef.md): if the target is at or above the reference the axis moves positive, otherwise negative.
+3. The braking point is found from a deceleration-distance lookahead on the remaining distance to the target; with [JerkMode](../03-kinematics-configuration/JerkMode.md) on, the jerk profiler is driven toward `AbsTrgt` directly.
+4. Motion ends when the reference has reached the target (`|PosRef − AbsTrgt| ≤ 1`) and the profiler velocity is low. At that point the reference is snapped exactly onto the target, so there is no residual fractional offset.
 
 ### Modes that write AbsTrgt internally
 
@@ -69,13 +69,13 @@ Once moving, the PTP profiler (`AG300_CTL01Profiler.c:998`–`1284`) reads `AbsT
 
 | Mode | How `AbsTrgt` is produced |
 |---|---|
-| Joystick position indirect | `AbsTrgt = selected analog input` each cycle (`AG300_CTL01Profiler.c:1003`) |
-| Repetitive PTP | reloaded from the stored repetitive target each segment (`:929`–`936`) |
-| Indirect gear motion (`MotionMode = 6`) | `AbsTrgt = PosRefInitial + (MasterPos − MasterPosInitial)` each cycle (`:1671`), then profiled |
+| Joystick position indirect | `AbsTrgt = selected analog input` each cycle |
+| Repetitive PTP | reloaded from the stored repetitive target each segment |
+| Indirect gear motion ([MotionMode](../02-motion-configuration/MotionMode.md) `= 6`) | `AbsTrgt` tracks the master position offset each cycle, then is profiled |
 
 ### Modulo
 
-If [ModRev](../../03-encoder/04-modulo-mode/ModRev.md) ≠ 0, when the feedback wraps the firmware shifts `AbsTrgt` together with the rest of the reference frame (`AG300_CTL01ControlInterrupt.c:3170`–`3171`), keeping the target consistent with the wrapped `PosRef`.
+If [ModRev](../../03-encoder/04-modulo-mode/ModRev.md) ≠ 0, when the feedback wraps the controller shifts `AbsTrgt` together with the rest of the reference frame, keeping the target consistent with the wrapped `PosRef`.
 
 ## Examples
 

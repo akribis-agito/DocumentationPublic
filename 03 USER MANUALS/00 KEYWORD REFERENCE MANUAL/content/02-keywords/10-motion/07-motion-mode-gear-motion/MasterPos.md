@@ -43,29 +43,29 @@ Accumulated, scaled position of the gear-motion master variable.
 
 ### Per-cycle accumulation
 
-The update lives in the interrupt macro `M_CALCULATE_VEL_AND_MASTER_POSITION` (`AG300_CTL01ControlInterrupt.h:173`–`193`). Each cycle it reads the master pointer, forms the change, scales it, applies the modulo wrap correction, and adds it to the running total:
+The update runs once per control cycle. Each cycle the controller reads the master variable, forms the change, scales it, applies the modulo wrap correction, and adds it to the running total:
 
 $$
 \mathrm{\Delta}_{MasterPos} = \frac{MasterFact}{MasterFactDen} \bullet \mathrm{\Delta}_{master\ variable}
 $$
 
 ```text
-delta      = (master_value - master_value_prev) * MasterFact   // v4: << 16, no denominator
-delta      = MasterModRev_correction(delta)                    // if MasterModRev != 0
-gllMasterPos += delta                                          // 32.32 fixed point
-glMasterPos   = gllMasterPos >> 32                             // reported value
+delta            = (master_value - master_value_prev) * MasterFact   // v4: << 16, no denominator
+delta            = MasterModRev_correction(delta)                    // if MasterModRev != 0
+MasterPos_fixed += delta                                             // 32.32 fixed point
+MasterPos        = MasterPos_fixed >> 32                             // reported value
 ```
 
 ### Fixed-point representation
 
-The internal accumulator `gllMasterPos` is a 64-bit **32.32 fixed-point** value (the same format as `PDPos`); the reported `MasterPos` is its top 32 bits (`glMasterPos = gllMasterPos >> 32`, `AG300_CTL01ControlInterrupt.h:193`). Keeping 32 fractional bits lets the gear ratio accumulate sub-unit increments without rounding drift, which matters at high `MasterFact` or for slow masters.
+The internal accumulator is a 64-bit **32.32 fixed-point** value; the reported `MasterPos` is its top 32 bits (`MasterPos = accumulator >> 32`). Keeping 32 fractional bits lets the gear ratio accumulate sub-unit increments without rounding drift, which matters at high `MasterFact` or for slow masters.
 
 ### How it drives the follower
 
-`MasterPos` is the bridge between the master and the follower's reference. At gear `Begin` the firmware snapshots `MasterPosInitial = MasterPos` and `PosRefInitial = PosRef` (`AG300_CTL01Funcs.c:1230`, `:1255`), then each cycle:
+`MasterPos` is the bridge between the master and the follower's reference. At gear `Begin` the controller snapshots `MasterPosInitial = MasterPos` and `PosRefInitial = PosRef`, then each cycle:
 
-- **Direct gear** (`MotionMode = 5`): `PosRef = PosRefInitial + lowpass(MasterPos − MasterPosInitial)`, the low-pass set by [MasterFilt](MasterFilt.md) (`AG300_CTL01ControlInterrupt.h:283`).
-- **Indirect gear** (`MotionMode = 6`): `AbsTrgt = PosRefInitial + (MasterPos − MasterPosInitial)`, which the PTP profiler then chases under [Speed](../03-kinematics-configuration/Speed.md)/[Accel](../03-kinematics-configuration/Accel.md) limits (`AG300_CTL01Profiler.c:1671`).
+- **Direct gear** (`MotionMode = 5`): `PosRef = PosRefInitial + lowpass(MasterPos − MasterPosInitial)`, the low-pass set by [MasterFilt](MasterFilt.md).
+- **Indirect gear** (`MotionMode = 6`): `AbsTrgt = PosRefInitial + (MasterPos − MasterPosInitial)`, which the PTP profiler then chases under [Speed](../03-kinematics-configuration/Speed.md)/[Accel](../03-kinematics-configuration/Accel.md) limits.
 
 Because only the change *since Begin* moves the follower, `MasterPos` accumulating while idle does not cause a jump at start.
 

@@ -40,12 +40,12 @@ Selects the type of motion performed when `Begin` is issued.
 
 ## How it works
 
-`Begin` reads `MotionMode` and branches through a `switch` on its value (`AG300_CTL01Funcs.c:968`). `MOTION_MODE_INVALID` (`-1`) is rejected with an error, and each valid value runs its own setup before setting the [`IN_MOTION_BIT`](../05-motion-status/MotionStat.md) of `MotionStat`. The firmware groups the modes into two families (see the `#define`s in `AG300_CTL01ParamsCommon.h:1968`–`1988`):
+`Begin` reads `MotionMode` and branches on its value. A value of `-1` (invalid selection) is rejected with an error, and each valid value runs its own setup before setting the in-motion bit (bit 0) of [MotionStat](../05-motion-status/MotionStat.md). The modes fall into two families:
 
-- **Indirect** modes — the controller's own profiler generates the trajectory subject to [Speed](../03-kinematics-configuration/Speed.md)/[Accel](../03-kinematics-configuration/Accel.md)/[Decel](../03-kinematics-configuration/Decel.md): jog, PTP, PTP-repetitive, PD-indirect, gear-indirect, ECAM-indirect, joystick-position-indirect. `Begin` rejects these if `|Speed| > MaxVel` (`AG300_CTL01Funcs.c:959`).
+- **Indirect** modes — the controller's own profiler generates the trajectory subject to [Speed](../03-kinematics-configuration/Speed.md)/[Accel](../03-kinematics-configuration/Accel.md)/[Decel](../03-kinematics-configuration/Decel.md): jog, PTP, PTP-repetitive, PD-indirect, gear-indirect, ECAM-indirect, joystick-position-indirect. `Begin` rejects these if `|Speed| > MaxVel`.
 - **Direct** modes — the reference is driven directly by the user's position/velocity commands (pulse-and-direction direct, gear direct, ECAM direct, FIFO, slave, CNCA/CNCB, vector, spline buffer, joystick-velocity).
 
-The following table shows the types of motion described by `MotionMode`. The numeric values are the firmware constants `MOTION_MODE_*`.
+The following table shows the types of motion described by `MotionMode`.
 
 | MotionMode | Descriptions |
 |---|---|
@@ -76,10 +76,10 @@ The following table shows the types of motion described by `MotionMode`. The num
 | | v4 (standalone &amp; central-i) | v5 (central-i) |
 |---|---|---|
 | Range | −1 … 19 | −1 … **21** |
-| Mode 20 | not defined | **`MOTION_MODE_SINE_PTP`** — AXM-defined sine point-to-point profile |
-| Mode 21 | not defined | **`MOTION_MODE_SINE_PTP_REP`** — AXM-defined sine point-to-point profile (repetitive) |
+| Mode 20 | not defined | **sine point-to-point profile** |
+| Mode 21 | not defined | **sine point-to-point profile (repetitive)** |
 
-v5 adds two sine-profile point-to-point modes (`develop:CommonIncludes/AG300_CTL01ParamsCommon.h:2199`–`2200`). **v5 is central-i only.**
+v5 adds two sine-profile point-to-point modes. **v5 is central-i only.**
 
 ## Examples
 
