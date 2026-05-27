@@ -32,17 +32,35 @@ First-order low-pass filter coefficient for the scaled master-position delta (di
 
 ## Overview
 
-`MasterFilt` defines the coefficient of a first-order low-pass filter applied to the scaled delta of [MasterPos](MasterPos.md) since the start of motion. It is only used in direct gear motion ([MotionMode](../02-motion-configuration/MotionMode.md) `= 5`); indirect gear motion (`= 6`) has no such filter. It smooths the slave's tracking of the master.
+`MasterFilt` is the coefficient of a first-order low-pass filter applied to the geared reference in **direct** gear motion ([MotionMode](../02-motion-configuration/MotionMode.md) `= 5`). It smooths how the follower tracks the master, suppressing steps caused by a coarse or pulsed master signal combined with a high gear ratio. Indirect gear motion (`= 6`) does not use it — there the PTP profiler smooths the motion instead.
 
 ## How it works
 
-The filter formula, where time $t = kT_{s}$ and $T_{s}$ is the controller sampling time (typically 61 µs):
+### The filter
+
+In the direct-gear macro `M_CALC_POS_REF_GEAR_DIRECT` (`AG300_CTL01ControlInterrupt.h:283`) the geared displacement since `Begin`, `u_k = MasterPos − MasterPosInitial`, is filtered into `PosRefToMove` before being added to `PosRefInitial` to form `PosRef`:
+
+```text
+PosRefToMove = (u_k * MasterFilt + PosRefToMove * (64 - MasterFilt)) >> 6
+PosRef       = PosRefInitial + PosRefToMove
+```
+
+The `>> 6` is a divide-by-64, so the coefficient is `MasterFilt / 64`:
 
 $$
 y_{k} = \frac{MasterFilt}{64}u_{k} + \left( 1 - \frac{MasterFilt}{64} \right)y_{k - 1}
 $$
 
-By backward-Euler estimation, `MasterFilt` can be chosen from the cut-off frequency $f_{c}$ (in Hz). By default `MasterFilt = 3`, corresponding to a 128.2 Hz cut-off frequency.
+where $t = kT_{s}$ and $T_{s}$ is the control sampling time (typically 61 µs).
+
+### Choosing the value
+
+`MasterFilt` ranges `1 … 64`. The two extremes bracket the behaviour:
+
+- `MasterFilt = 64` ⇒ coefficient 1, i.e. **no filtering** (the follower tracks the master with no lag). This is the value the firmware requires for the drift-free 64-bit axis-to-axis gearbox (see [GearMaster](GearMaster.md)).
+- small `MasterFilt` ⇒ heavy smoothing and more tracking lag.
+
+By backward-Euler estimation, `MasterFilt` can be chosen from a target cut-off frequency $f_{c}$ (Hz). The default `MasterFilt = 3` corresponds to roughly a 128 Hz cut-off:
 
 $$
 MasterFilt = 64\left( \frac{2\pi f_{c}T_{s}}{1 + 2\pi f_{c}T_{s}} \right)
@@ -51,12 +69,14 @@ $$
 ## Examples
 
 ```text
-AMasterFilt=3        ; default (~128.2 Hz cut-off)
-AMasterFilt         ; read current value
+AMasterFilt=3        ; default (~128 Hz cut-off)
+AMasterFilt=64       ; no filtering (1:1 lag-free tracking)
+AMasterFilt          ; read current value
 ```
 
 ## See also
 
-- [MasterPos](MasterPos.md) — the signal whose scaled delta is filtered
+- [MasterPos](MasterPos.md) — the geared displacement whose change is filtered
+- [MasterFact](MasterFact.md) / [MasterFactDen](MasterFactDen.md) — gear ratio applied before this filter
 - [GearMaster](GearMaster.md) — selects the master variable
 - [MotionMode](../02-motion-configuration/MotionMode.md) — `MasterFilt` applies in direct gear motion (`= 5`)

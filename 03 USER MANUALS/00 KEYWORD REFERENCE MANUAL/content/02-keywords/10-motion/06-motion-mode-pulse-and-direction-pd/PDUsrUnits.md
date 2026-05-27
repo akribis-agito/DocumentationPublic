@@ -32,20 +32,25 @@ Counts-per-user-unit scale for converting PDPos and PDVel to user units on query
 
 ## Overview
 
-`PDUsrUnits` scales the internal pulse-and-direction variables [PDPos](PDPos.md) and [PDVel](PDVel.md) from the controller's internal counts to user units when the user queries these statuses over a communication channel. It only affects the reported (queried) value, not the internal control computation. The default value `65536` represents a scale of one count per user unit.
+`PDUsrUnits` scales the internal pulse-and-direction variables [PDPos](PDPos.md) and [PDVel](PDVel.md) from the controller's internal counts to user units when these statuses are queried over a communication channel. It parallels the feedback-side [UsrUnits](../../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) but applies only to the P/D status group. It affects the reported value only, not the internal control computation. The default `65536` is a scale of one count per user unit.
 
 ## How it works
 
-For example:
+Like `UsrUnits`, `PDUsrUnits` is a **16.16 fixed-point ratio**: the effective scale is `PDUsrUnits / 65536` counts per user unit (the firmware constant `ALL_USER_UNITS_SCALING` is 65536, `ALL_USER_UNITS_SHIFTS` is 16). The keyword's unit group is `PD_USER_UNITS`, so when a P/D status is read the interpreter divides the internal count value by this ratio:
 
 $$
-Queried\ PDPos\ \lbrack user\ units\rbrack = \frac{1}{\frac{PDUsrUnits}{65536}\left\lbrack \frac{counts}{user\ units} \right\rbrack\ } \bullet \ Controller\ PDPos\ \lbrack counts\rbrack\ 
+\text{Queried PDPos [user units]} = \frac{\text{Controller PDPos [counts]}}{\big(PDUsrUnits / 65536\big)} = \text{counts} \times \frac{65536}{PDUsrUnits}
 $$
+
+The conversion is selected per-keyword from the `PD_USER_UNITS` case in the interpreter's unit-scaling logic (`AG300_CTL01Interpreter.c:847`, `1637`). When `PDUsrUnits` is an exact multiple of 65536 the firmware takes the fast integer path (shift instead of divide); otherwise it uses the full fixed-point ratio. The default `65536` means a factor of 1 (values shown directly in counts). Only `PDPos` and `PDVel` carry the `PD_USER_UNITS` flag, so this scaling does not affect any other keyword.
+
+To express "*N* internal counts = 1 user unit", set `PDUsrUnits = N × 65536`.
 
 ## Examples
 
 ```text
 APDUsrUnits=65536    ; 1 count per user unit (default)
+APDUsrUnits=327680   ; 5 counts per user unit (ratio 5 = 5 x 65536)
 APDUsrUnits         ; read the current scale
 ```
 
@@ -53,3 +58,4 @@ APDUsrUnits         ; read the current scale
 
 - [PDPos](PDPos.md) — scaled P/D counter reported in these user units
 - [PDVel](PDVel.md) — P/D velocity reported in these user units
+- [UsrUnits](../../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) — the equivalent ratio for encoder-feedback position

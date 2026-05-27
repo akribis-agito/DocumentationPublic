@@ -32,24 +32,43 @@ Numerator of the gear ratio applied to the master-variable delta.
 
 ## Overview
 
-`MasterFact` is the numerator of the scaling ratio applied to the delta of the master variable in gear motion. Together with the denominator [MasterFactDen](MasterFactDen.md) it forms the gear ratio that maps a change in the master variable to a change in the slave's profiler position reference (direct gear motion, [MotionMode](../02-motion-configuration/MotionMode.md) `= 5`) or target position [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) (indirect gear motion, `MotionMode = 6`). The scaled delta is accumulated into [MasterPos](MasterPos.md).
+`MasterFact` is the numerator of the gear ratio applied to the change of the master variable in gear motion. It maps a change in the master (selected by [GearMaster](GearMaster.md)) to a change in [MasterPos](MasterPos.md), which in turn drives the follower's position reference [PosRef](../01-kinematics-status/PosRef.md) (direct gear, [MotionMode](../02-motion-configuration/MotionMode.md) `= 5`) or its target [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) (indirect gear, `MotionMode = 6`).
 
 ## How it works
 
+### The ratio is normalised to 65536
+
+`MasterFact` is a fixed-point numerator scaled by 65536, so the default value `65536` gives a **1:1** ratio. In v4 the gearing macro applies it directly with a left shift, with no separate denominator term:
+
 $$
-\mathrm{\Delta}_{ProfilerPosRef/AbsTrgt} = \mathrm{\Delta}_{MasterPos} = \frac{MasterFact}{MasterFactDen} \bullet \mathrm{\Delta}_{master\ variable}\ 
+\mathrm{\Delta}_{MasterPos} = \frac{MasterFact}{65536} \bullet \mathrm{\Delta}_{master\ variable}
 $$
+
+The firmware computes this as `(master_delta × MasterFact) << 16`, then accumulates it into the 32.32 fixed-point `MasterPos` (`AG300_CTL01ControlInterrupt.h:182`, `:192`). Converting to 64-bit *before* the multiply protects against overflow when a modulo master jumps by a large amount.
+
+A negative `MasterFact` reverses the follower direction relative to the master. To set ratios that are not a clean multiple of 1/65536, use the numerator/denominator pair (v5) — see *Changes between versions*.
+
+### Special unity-ratio case
+
+A value of exactly `65536`, together with `MasterFilt = 64` and direct gear mode pointing at another axis's reference, enables the drift-free 64-bit axis-to-axis gearbox described under [GearMaster](GearMaster.md).
 
 ## Examples
 
 ```text
-AMasterFact=65536    ; default numerator (1:1 ratio with default denominator)
-AMasterFact         ; read current value
+AMasterFact=65536    ; 1:1 ratio (default)
+AMasterFact=131072   ; follower moves 2 master units per master unit
+AMasterFact=-65536   ; 1:1, reversed direction
+AMasterFact          ; read current value
 ```
+
+## Changes between versions
+
+In **v4** the ratio is `MasterFact / 65536` (numerator only); there is no denominator in the accumulation. In **v5 (central-i)** a true rational ratio `MasterFact / MasterFactDen` is applied with a fractional remainder carried in `long double`, so non-integer ratios are exact and free of long-term drift; see [MasterFactDen](MasterFactDen.md). **v5 is central-i only.**
 
 ## See also
 
-- [MasterFactDen](MasterFactDen.md) — denominator of the gear ratio
+- [MasterFactDen](MasterFactDen.md) — denominator of the gear ratio (v5)
 - [MasterPos](MasterPos.md) — accumulated, scaled master position
 - [GearMaster](GearMaster.md) — selects the master variable
+- [MasterFilt](MasterFilt.md) — low-pass filter on the geared reference (direct mode)
 - [MotionMode](../02-motion-configuration/MotionMode.md) — selects direct (`= 5`) or indirect (`= 6`) gear motion

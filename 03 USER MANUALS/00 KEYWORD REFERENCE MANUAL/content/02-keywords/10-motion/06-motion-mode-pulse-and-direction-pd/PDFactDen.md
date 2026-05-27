@@ -36,21 +36,26 @@ Denominator of the scaling factor applied to detected pulses before accumulation
 
 ## How it works
 
-For each controller cycle:
+Each controller cycle the increment added to [PDPos](PDPos.md) is:
 
 ```text
-PDPos increment = (pulses detected) × PDFact / PDFactDen   (then sign-corrected by PDEncDir)
+PDPos increment = (pulses this cycle) × PDFact / PDFactDen   (then signed by PDEncDir)
 ```
+
+Writing `PDFactDen` (or [PDFact](PDFact.md)) triggers `SpPDFactors` (`SpecialFuncs.c:3948`), which precomputes the float factor `gfPDFact = PDFact / PDFactDen` and the reciprocal `gfOneDivPDFactDen = 1 / PDFactDen` used for the fast per-cycle scaling in the control interrupt (`AG300_CTL01ControlInterrupt.h:1265`).
+
+The minimum value is `1` (the reciprocal `1/PDFactDen` would be undefined at 0), and the maximum is 16,777,215. Because the per-cycle remainder of the division is carried forward in 64-bit integer math, even a non-integer `PDFact/PDFactDen` ratio accumulates into `PDPos` exactly, without drift — see [PDFact](PDFact.md).
 
 ## Examples
 
 ```text
-APDFactDen=1000      ; denominator of the P/D scaling factor (default)
+APDFactDen=4         ; 4 input pulses per PDFact numerator
+APDFactDen=1000      ; default denominator (with default PDFact=1000, ratio = 1)
 APDFactDen          ; read the current denominator
 ```
 
 ## See also
 
-- [PDFact](PDFact.md) — numerator of the scaling factor
+- [PDFact](PDFact.md) — numerator of the scaling factor (and the exact-remainder mechanism)
 - [PDPos](PDPos.md) — counter the scaling is accumulated into
 - [PDEncDir](PDEncDir.md) — accumulation direction (sign)

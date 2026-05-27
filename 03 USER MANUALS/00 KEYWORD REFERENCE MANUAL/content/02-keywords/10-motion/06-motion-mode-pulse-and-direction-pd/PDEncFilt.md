@@ -32,7 +32,7 @@ Reserved pulse-and-direction keyword; not implemented in current firmware.
 
 ## Overview
 
-`PDEncFilt` is a reserved keyword. It is marked as not implemented and is slated for removal from firmware.
+`PDEncFilt` is a reserved keyword. In firmware its keyword-table entry is flagged `NOT_IMPLEMENTED` (`AG300_CTL01Params.c:834`), with all access attributes cleared, so it has no read/write behaviour. The backing variable `glPDEncFilt` exists but is never read by any control path. It was intended as a noise filter for the P/D input but the actual input filtering is handled in the FPGA decoder per [PDSubType](PDSubType.md).
 
 > **Documentation pending:** This keyword is reserved and not implemented. Do not use it.
 
@@ -40,3 +40,4 @@ Reserved pulse-and-direction keyword; not implemented in current firmware.
 
 - [PDPos](PDPos.md) — the scaled P/D counter
 - [PDEncDir](PDEncDir.md) — P/D accumulation direction
+- [PDSubType](PDSubType.md) — selects the input signal format decoded in the FPGA

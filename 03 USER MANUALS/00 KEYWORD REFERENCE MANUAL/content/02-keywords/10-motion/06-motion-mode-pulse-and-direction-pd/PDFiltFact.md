@@ -11,32 +11,46 @@ Agito controllers support motion modes in which the desired motor position is de
 
 The pulse/direction input port value can be read using the parameter [PDPos](PDPos.md). It is equal to the number of input pulses (direction taken into account) multiplied by the parameter [PDFact](PDFact.md).
 
-In the `PD_DIRECT` motion mode, `PDPos` is used to set the position reference (`PosRef`, the desired position) directly. However, to avoid large steps in `PosRef` (especially when `PDFact` is large), a first-order filter is applied to `PDPos` before it is assigned to `PosRef`. `PDFiltFact` defines the bandwidth of this first-order filter, which is why it matters most when the pulse stream is coarse or fast.
+In the `PD_DIRECT` motion mode, `PDPos` is used to set the position reference (`PosRef`, the desired position) directly. However, to avoid large steps in `PosRef` (especially when [PDFact](PDFact.md) is large), a first-order filter is applied to the change in `PDPos` before it is assigned to `PosRef`. `PDFiltFact` is the **integer coefficient** of that filter — it matters most when the pulse stream is coarse or fast.
+
+`PDFiltFact` is an internal coefficient, **not set directly by the user**: it is computed automatically from the cut-off-frequency keyword [PDPosFilt](PDPosFilt.md). Set the filter through `PDPosFilt`; `PDFiltFact` is the value the controller derives from it.
 
 ## How it works
 
-The relevant equation is:
+### The filter
+
+Each control cycle in direct mode the reference offset is updated as a first-order low-pass of the P/D delta (`AG300_CTL01Profiler.c:1251`):
 
 $$
-\text{PosRef}_k = \frac{\text{PDPos}_k \cdot \text{PDFiltFact} + \text{PosRef}_{k-1} \cdot (64 - \text{PDFiltFact})}{64}
+\text{PosRef}_k = \frac{\Delta\text{PDPos}_k \cdot \text{PDFiltFact} + \text{PosRef}_{k-1} \cdot (64 - \text{PDFiltFact})}{64}
 $$
 
-`PDFiltFact` takes values between 1 (slowest filter) and 64 (no filter at all).
+`PDFiltFact` ranges from **1** (slowest filter, heaviest smoothing) to **64** (no filtering — `PosRef` follows the delta directly). The constant 64 is a fixed historical scaling.
 
-> **Note:**
-> 1. Future versions of Agito controllers will not input the filter coefficient directly (which is not easy to calculate); instead the user will define the desired filter frequency and the controller will automatically calculate the resulting filter coefficient.
-> 2. The above equation is only an illustration. Internally, the calculations are done relative to the initial `PosRef` and `PDPos` values during the [Begin](../04-motion-command/Begin.md) function (command to start motion in `PD_DIRECT` mode).
+> **Note:** The values above operate on `PDPos` and `PosRef` *relative to* the values latched at [Begin](../04-motion-command/Begin.md) (i.e. `gllPDPosInitial` / `gllPosRefInitial`), so the filter starts from a clean zero offset at the start of motion.
+
+### How it is derived from PDPosFilt
+
+When [PDPosFilt](PDPosFilt.md) (a cut-off frequency in Hz × 100) is written, the special function `SpPDPosFilt` (`SpecialFuncs.c:5054`) converts it to the coefficient with a backward-Euler discretisation of `w / (s + w)`:
+
+$$
+\text{PDFiltFact} = 64 \cdot \frac{2\pi\,T_s\,\text{PDPosFilt}}{100 + 2\pi\,T_s\,\text{PDPosFilt}}
+$$
+
+where `Ts` is the sample time. The lower bound of `PDPosFilt` (4150) exists so the resulting `PDFiltFact` never rounds to 0.
 
 ## Examples
 
+`PDFiltFact` is not written directly; configure the filter through [PDPosFilt](PDPosFilt.md):
+
 ```text
-APDFiltFact=64       ; no filtering (PosRef follows PDPos directly)
-APDFiltFact=1        ; slowest first-order filter
+APDPosFilt=25000     ; 250 Hz cut-off -> controller computes the PDFiltFact coefficient
+APDPosFilt=12800     ; 128 Hz cut-off (default)
 ```
 
 ## See also
 
-- [PDPos](PDPos.md) — the scaled P/D counter being filtered
-- [PDPosFilt](PDPosFilt.md) — cut-off-frequency form of the direct-mode P/D filter
+- [PDPosFilt](PDPosFilt.md) — cut-off-frequency keyword that sets this coefficient
+- [PDPos](PDPos.md) — the scaled P/D counter whose change is filtered
 - [PDFact](PDFact.md) — scaling factor applied to input pulses
-- [MotionMode](../02-motion-configuration/MotionMode.md) — selects `PD_DIRECT` / `PD_INDIRECT`
+- [MotionMode](../02-motion-configuration/MotionMode.md) — selects `PD_DIRECT` (3) / `PD_INDIRECT` (4)

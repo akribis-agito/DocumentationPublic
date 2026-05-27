@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" font-family="sans-serif" font-size="13">
+  <style>
+    .box { fill:#f5f7fa; stroke:#37474f; stroke-width:1.5; }
+    .sel { fill:#fff3e0; stroke:#e65100; stroke-width:1.5; }
+    .acc { fill:#e3f2fd; stroke:#1565c0; stroke-width:1.5; }
+    .out { fill:#e8f5e9; stroke:#2e7d32; stroke-width:1.5; }
+    .lbl { fill:#263238; }
+    .cond { fill:#607d8b; font-size:11px; }
+    line { stroke:#37474f; stroke-width:1.4; marker-end:url(#a); }
+  </style>
+  <defs>
+    <marker id="a" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#37474f"/>
+    </marker>
+  </defs>
+
+  <!-- source -->
+  <rect class="sel" x="16" y="150" width="170" height="50" rx="6"/>
+  <text class="lbl" x="28" y="172">GearMaster</text>
+  <text class="cond" x="28" y="190">complex CAN code &#8594; ptr</text>
+
+  <!-- delta -->
+  <rect class="box" x="220" y="150" width="120" height="50" rx="4"/>
+  <text class="lbl" x="234" y="172">&#916; master</text>
+  <text class="cond" x="234" y="190">value &#8722; prev</text>
+
+  <!-- ratio + modrev -->
+  <rect class="box" x="372" y="142" width="150" height="66" rx="4"/>
+  <text class="lbl" x="384" y="166">&#215; MasterFact</text>
+  <text class="lbl" x="384" y="184">&#247; MasterFactDen</text>
+  <text class="cond" x="384" y="200">then MasterModRev wrap</text>
+
+  <!-- accumulate -->
+  <rect class="acc" x="558" y="150" width="180" height="50" rx="6"/>
+  <text class="lbl" x="570" y="172" font-weight="bold">MasterPos</text>
+  <text class="cond" x="570" y="190">accumulate every cycle</text>
+
+  <!-- arrows along the top chain -->
+  <line x1="186" y1="175" x2="220" y2="175"/>
+  <line x1="340" y1="175" x2="372" y2="175"/>
+  <line x1="522" y1="175" x2="558" y2="175"/>
+
+  <!-- direct branch -->
+  <rect class="box" x="500" y="40" width="150" height="50" rx="4"/>
+  <text class="lbl" x="512" y="62">MasterFilt LPF</text>
+  <text class="cond" x="512" y="80">MotionMode = 5</text>
+
+  <!-- indirect branch -->
+  <rect class="box" x="500" y="260" width="150" height="50" rx="4"/>
+  <text class="lbl" x="512" y="282">AbsTrgt + profiler</text>
+  <text class="cond" x="512" y="300">MotionMode = 6</text>
+
+  <!-- output -->
+  <rect class="out" x="668" y="150" width="76" height="0" />
+  <rect class="out" x="690" y="135" width="56" height="0" />
+
+  <line x1="648" y1="150" x2="600" y2="90"/>
+  <line x1="648" y1="200" x2="600" y2="260"/>
+
+  <rect class="out" x="690" y="40" width="60" height="50" rx="6"/>
+  <text class="lbl" x="700" y="70" font-weight="bold">PosRef</text>
+  <line x1="650" y1="65" x2="690" y2="65"/>
+
+  <rect class="out" x="690" y="260" width="60" height="50" rx="6"/>
+  <text class="lbl" x="700" y="290" font-weight="bold">PosRef</text>
+  <line x1="650" y1="285" x2="690" y2="285"/>
+</svg>

@@ -32,20 +32,27 @@ Settling-check delay (ms) after PDPos and the position reference stop changing.
 
 ## Overview
 
-`PDEndTime` is the waiting time, in milliseconds, that must elapse after the pulse-direction counter [PDPos](PDPos.md) and the generated position reference stop changing, before the controller begins checking the settling status [InTargetStat](../05-motion-status/InTargetStat.md). Because both direct and indirect pulse-and-direction motion stay in the moving state as long as commands keep arriving, this delay prevents premature in-target reporting when a stream of pulses pauses briefly. It applies to both direct ([MotionMode](../02-motion-configuration/MotionMode.md) = 3) and indirect (`MotionMode` = 4) P/D motion.
+`PDEndTime` is the waiting time, in milliseconds, that must elapse after the pulse-direction input and the generated position reference both stop changing, before the controller begins checking the settling status [InTargetStat](../05-motion-status/InTargetStat.md). Because both direct and indirect pulse-and-direction motion stay in the moving state as long as commands keep arriving, this delay prevents premature in-target reporting when a stream of pulses pauses briefly. It applies to both direct ([MotionMode](../02-motion-configuration/MotionMode.md) = 3) and indirect (`MotionMode` = 4) P/D motion.
 
 ## How it works
 
-The `PDEndTime` timer resets whenever `PDPos` or the generated position reference starts changing again. Only after the input and reference have been stationary for the full `PDEndTime` does in-target checking begin.
+The check is in `HandlePDInTarget` (`AG300_CTL01Profiler.c:7495`), called every control cycle during P/D motion:
+
+- When both the P/D delta and the reference derivative are zero (`gllPDPosDelta == 0 && glldPosRef == 0`), a counter `glPDEndMotionCounter` increments. Once it reaches `PDEndTime`, in-target checking begins (`InTargetStat` moves from "in motion" to "waiting target time", then evaluates [InTargetTol](../05-motion-status/InTargetTol.md)/`InTargetTime` as usual).
+- If *either* the input or the reference moves again, the counter is reset to 0 and `InTargetStat` returns to "in motion".
+
+`PDEndTime` is **stored internally in control samples** but exchanged with the host **in milliseconds**: the keyword has a `SAMPLES_TO_MS_FACT` scaling (16.384 samples/ms), so reading or writing it uses ms while the comparison counter counts samples. The default internal value is `SAMPLES_PER_1MSECOND` (16 samples ≈ 1 ms); the maximum is 10 s.
 
 ## Examples
 
 ```text
-APDEndTime=16        ; wait 16 ms of no change before checking settling (default)
-APDEndTime          ; read the current value
+APDEndTime=1         ; wait ~1 ms of no change before checking settling (default)
+APDEndTime=50        ; wait 50 ms of no change
+APDEndTime          ; read the current value (ms)
 ```
 
 ## See also
 
 - [InTargetStat](../05-motion-status/InTargetStat.md) — settling status checked after this delay
-- [PDPos](PDPos.md) — counter whose changes reset the timer
+- [PDPos](PDPos.md) — counter whose changes (via the P/D delta) reset the timer
+- [MotionMode](../02-motion-configuration/MotionMode.md) — applies in direct (3) and indirect (4) P/D motion

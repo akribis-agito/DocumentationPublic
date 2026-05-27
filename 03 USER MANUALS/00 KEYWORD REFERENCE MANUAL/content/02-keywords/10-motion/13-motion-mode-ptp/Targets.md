@@ -33,21 +33,42 @@ overrides:
 ---
 # Targets
 
-Array of target positions (user units) for multi-target point-to-point motion.
+Flash-stored array of target positions (user units), available for user programs.
 
 ## Overview
 
-`Targets` stores a sequence of target positions, in user units, for multi-target point-to-point motion. The controller moves through the array entries in order when executing a multi-segment PTP move, allowing several destinations to be queued instead of a single [AbsTrgt](AbsTrgt.md) or [RelTrgt](RelTrgt.md). It is saved to flash and can be changed at any time.
+`Targets` is a small, flash-backed, axis-scoped array of position values in user units. It is intended as convenient persistent storage for a set of named destinations that a [user program](../../../01-keyword-usage-and-syntax/syntax.md) can read and then load into [AbsTrgt](AbsTrgt.md) (or convert into [RelTrgt](RelTrgt.md)) before each [Begin](../04-motion-command/Begin.md). It is read/write and saved to flash, so the destinations survive a power cycle.
+
+## How it works
+
+`Targets` is a **storage array, not an automatic motion queue.** The firmware registers it as a flash parameter (`AG300_CTL01Params.c:1024`, backing variable `glTargets[NUMBER_OF_AXES][TARGETS_ARRAY_SIZE]`), but no motion-engine, profiler or interpreter code reads it — the only firmware that touches `glTargets` is the parameter table itself. The trajectory profiler always moves toward the single target [AbsTrgt](AbsTrgt.md); to walk through several positions you read `Targets[n]` into `AbsTrgt` yourself between moves.
+
+### Array size and indexing
+
+```text
+#define TARGETS_ARRAY_SIZE  4   // AG300_CTL01ParamsCommon.h:740
+```
+
+The array holds **three usable entries**. As with all keyword arrays, index `0` is reserved so that command indexes start at `1`, giving valid indexes `Targets[1]`, `Targets[2]`, `Targets[3]`. Each entry has the same full position range as `AbsTrgt`.
 
 ## Examples
 
 ```text
-ATargets[1]=10000    ; first target position
-ATargets[2]=20000    ; second target position
+ATargets[1]=10000    ; store destination 1 in flash
+ATargets[2]=20000    ; store destination 2
+ATargets[3]=30000    ; store destination 3
+AAbsTrgt=10000       ; later: load a stored destination into the active target
+ABegin               ; and move there
 ```
+
+To step through all three from a user program, copy each entry into `AbsTrgt` and `Begin` in turn, waiting for in-target between moves.
+
+## Changes between versions
+
+In **v5 (central-i)** the entries are 64-bit integers with the larger range shown in the frontmatter, matching the 64-bit position pipeline. **v5 is central-i only**, so on standalone `Targets` remains a v4 32-bit array.
 
 ## See also
 
-- [AbsTrgt](AbsTrgt.md) — single absolute target position
+- [AbsTrgt](AbsTrgt.md) — the single active target a stored value is loaded into
 - [RelTrgt](RelTrgt.md) — single relative target distance
-- [Begin](../04-motion-command/Begin.md) — start the PTP move
+- [Begin](../04-motion-command/Begin.md) — start a move toward the loaded target

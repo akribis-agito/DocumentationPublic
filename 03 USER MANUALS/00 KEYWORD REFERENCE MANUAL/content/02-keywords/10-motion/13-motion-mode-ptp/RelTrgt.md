@@ -37,17 +37,51 @@ Relative target distance (user units) for the next point-to-point move.
 
 ## Overview
 
-`RelTrgt` sets the relative target distance, in user units, for the next point-to-point (PTP) move. When a [Begin](../04-motion-command/Begin.md) command is issued in relative PTP mode, the axis moves by this distance from its current position. It is the relative counterpart of [AbsTrgt](AbsTrgt.md), which specifies an absolute position instead. It is not saved to flash and can be changed at any time.
+`RelTrgt` requests a move *relative to the current position reference*. It is the relative counterpart of [AbsTrgt](AbsTrgt.md): at [Begin](../04-motion-command/Begin.md), a non-zero `RelTrgt` is converted into an absolute target and the move then proceeds exactly like an absolute PTP move. It is not saved to flash and can be changed at any time.
+
+## How it works
+
+### RelTrgt is consumed at Begin, not held
+
+The profiler never reads `RelTrgt` directly. When `Begin` runs, the firmware does:
+
+```text
+if (RelTrgt != 0)
+    AbsTrgt = PosRef + RelTrgt
+```
+
+so the relative distance is added to the **reference position [PosRef](../01-kinematics-status/PosRef.md)** (not the feedback [Pos](../01-kinematics-status/Pos.md)) to form a new [AbsTrgt](AbsTrgt.md). The same line appears in every mode that accepts a relative target:
+
+| Context | Firmware site |
+|---|---|
+| PTP `Begin` | `AG300_CTL01Funcs.c:1013` |
+| Repetitive PTP `Begin` | `AG300_CTL01Funcs.c:1117` |
+| Vector motion `Begin` (per member axis) | `AG300_CTL01Funcs.c:2168` |
+| Quick begin on switch to position mode | `AG300_CTL01ControlLoops.c:2971` |
+
+Two consequences follow from this design:
+
+- **`RelTrgt = 0` is "use `AbsTrgt`".** A zero relative target is the signal to leave `AbsTrgt` untouched and move to the absolute target. To command a relative move that should *not* move, you cannot use `RelTrgt = 0`; the axis would instead go to whatever `AbsTrgt` currently holds.
+- **Relative to the reference, repeatable.** Because the base is `PosRef`, issuing the same `RelTrgt` again steps by the same distance from where the previous move ended, with no accumulation of following error.
+
+After conversion the resulting `AbsTrgt` is range-checked against the software limits and the limit switches exactly as for an absolute move (see [AbsTrgt](AbsTrgt.md) — *Validation at Begin*); an out-of-range relative target therefore rejects `Begin` rather than clipping.
 
 ## Examples
 
 ```text
-ARelTrgt=5000        ; move 5000 user units from the current position
-ARelTrgt=-5000       ; move 5000 user units in the negative direction
+ARelTrgt=5000        ; next Begin moves +5000 user units from the reference
+ABegin               ; perform the relative move
+ARelTrgt=-5000       ; next Begin moves 5000 user units in the negative direction
+ARelTrgt             ; read the current relative target
 ```
+
+## Changes between versions
+
+In **v5 (central-i)** `RelTrgt` is a 64-bit integer with the larger range shown in the frontmatter, matching the 64-bit position pipeline; the conversion to `AbsTrgt` is unchanged. **v5 is central-i only**, so on standalone `RelTrgt` remains the v4 32-bit value.
 
 ## See also
 
-- [AbsTrgt](AbsTrgt.md) — absolute target position
-- [Targets](Targets.md) — multi-target sequence
-- [Begin](../04-motion-command/Begin.md) — start the PTP move
+- [AbsTrgt](AbsTrgt.md) — absolute target the relative distance is converted into
+- [Targets](Targets.md) — flash-stored target array for user programs
+- [Begin](../04-motion-command/Begin.md) — converts `RelTrgt` to `AbsTrgt` and starts the move
+- [PosRef](../01-kinematics-status/PosRef.md) — the base the relative distance is added to
