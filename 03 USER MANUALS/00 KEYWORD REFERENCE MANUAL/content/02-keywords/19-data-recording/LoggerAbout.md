@@ -32,14 +32,27 @@ Reports metadata about the current continuous logger session.
 
 ## Overview
 
-`LoggerAbout` is a read-only array that reports metadata about the current logger session, including the list of logged parameters and session configuration information. It lets a host application interpret the data returned by [LoggerUpload](LoggerUpload.md) without separately re-querying the configuration. It is a non-axis status variable and is not saved to flash. The configuration it describes is set through [LoggerParams](LoggerParams.md), [LoggerGap](LoggerGap.md), and [LoggerOn](LoggerOn.md).
+`LoggerAbout` is a read-only array that reports metadata about the current logger session: the buffer-full mode in force, the time logging started, and a snapshot of the logged-parameter list. It lets a host application interpret the data returned by [LoggerUpload](LoggerUpload.md) without separately re-querying the configuration. The snapshot is taken at the moment the logger is enabled, so it reflects the configuration that the captured data was actually recorded with, even if [LoggerParams](LoggerParams.md) or [LoggerFullMod](LoggerFullMod.md) are changed afterward. It is a non-axis status variable and is not saved to flash.
 
-> **Documentation pending:** the per-index layout of the 44-element array is not specified in the source material.
+## How it works
+
+The array is 1-indexed and laid out as follows:
+
+| Index | Reports | Meaning |
+|---|---|---|
+| 1 | (reserved) | Not used in this firmware version; the sampling interval is taken live from [LoggerGap](LoggerGap.md) so it can be changed on the fly. Reads back as an uninitialized marker value. |
+| 2 | Buffer-full mode | Snapshot of [LoggerFullMod](LoggerFullMod.md) at the moment logging started: `0` stop when full, `1` overwrite oldest. |
+| 3 | Start time | Controller time stamp captured when the session started. |
+| 4 onward | Logged parameters | Snapshot of [LoggerParams](LoggerParams.md): index `4` mirrors `LoggerParams[1]`, index `5` mirrors `LoggerParams[2]`, and so on for the configured parameters. |
+
+The snapshot (indices 2 onward) is refreshed each time the logger transitions from off to on through [LoggerOn](LoggerOn.md).
 
 ## Examples
 
 ```text
-ALoggerAbout[1]     ; query the first metadata element
+ALoggerAbout[2]     ; query the buffer-full mode the session is using
+ALoggerAbout[3]     ; query the session start time stamp
+ALoggerAbout[4]     ; query the first logged parameter of the session
 ```
 
 ## See also

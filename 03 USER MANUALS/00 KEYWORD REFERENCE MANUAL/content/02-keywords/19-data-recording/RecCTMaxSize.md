@@ -7,7 +7,9 @@ Sets the maximum sample count of the continuous-time recording buffer per channe
 
 ## Overview
 
-`RecCTMaxSize` is an array that sets the maximum number of samples allocated to the continuous-time recording buffer for each recording channel. It bounds the buffer used when continuous-time recording is enabled by [RecCTEnable](RecCTEnable.md). It is a non-axis parameter saved to flash.
+`RecCTMaxSize` is an array that sets the maximum number of samples retained by the continuous (circular) recording buffer for each scope. It bounds the buffer used when continuous recording is enabled by [RecCTEnable](RecCTEnable.md). It is a non-axis parameter saved to flash.
+
+> **Note:** Continuous recording is not active in the current firmware. `RecCTMaxSize` and [RecCTEnable](RecCTEnable.md) are reserved and have no effect; use the standard triggered (one-shot) recording flow described in the [Data recording](00-overview.md) overview.
 
 ## Examples
 

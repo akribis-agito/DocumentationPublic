@@ -47,7 +47,9 @@ $$
 Period\ of\ recording\ for\ scope\ x\ \lbrack s\rbrack = \frac{RecLength\lbrack x\rbrack \bullet RecGap\lbrack x\rbrack}{Controller\ cycle\ rate\ \lbrack Hz\rbrack}
 $$
 
-The maximum value is product-dependent (see the [Data recording](00-overview.md) overview for per-product point limits). [RecTrigPos](RecTrigPos.md) splits these points into pre-trigger and post-trigger portions.
+`RecLength` sets the points captured *per parameter*. The scope buffer is shared across all recorded channels, so the binding limit is the total sample count: the number of channels selected in [RecParamA/RecParamB](RecParamA-RecParamB.md) multiplied by `RecLength` must fit the buffer. If it does not, [RecStart](RecStart.md) is rejected. Recording more channels therefore reduces the maximum usable `RecLength`. The maximum buffer size is product-dependent (see the [Data recording](00-overview.md) overview for per-product point limits).
+
+[RecTrigPos](RecTrigPos.md) splits these points into pre-trigger and post-trigger portions: the pre-trigger fraction is filled first as a rolling buffer while the scope waits for the trigger, and the remainder is captured after the trigger fires.
 
 ## Examples
 

@@ -13,7 +13,7 @@ Per-scope arrays holding recording metadata and raw (unconverted) captured data.
 
 ## How it works
 
-The metadata for each scope is stored in the first 80 entries of the array. The raw captured data, without any unit conversion, is stored in the subsequent array entries. The user can read the metadata and raw captured data subject to an overall index cap of 32079; raw captured data with an index larger than the cap (i.e. captured data number 32000 and above) is not readable via `RecDataA`/`RecDataB`. To stream the entirety of the captured data, refer to [RecUpload](RecUpload.md).
+The metadata for each scope is stored in the first 80 entries of the array. The raw captured data, without any unit conversion, is stored in the subsequent array entries, interleaved by channel in the [RecParamA/RecParamB](RecParamA-RecParamB.md) order (one sample per channel per sample tick). Every stored value is 64 bits regardless of the source type: 32-bit integers are widened to 64-bit, and floating-point values are held as their 64-bit bit pattern, so a raw float reads as an integer bit pattern rather than a number until it is reinterpreted. The user can read the metadata and raw captured data subject to an overall index cap of 32079; raw captured data with an index larger than the cap (i.e. captured data number 32000 and above) is not readable via `RecDataA`/`RecDataB`. To stream the entirety of the captured data, refer to [RecUpload](RecUpload.md).
 
 The first 80 `RecDataA`/`RecDataB` indices are described as shown.
 

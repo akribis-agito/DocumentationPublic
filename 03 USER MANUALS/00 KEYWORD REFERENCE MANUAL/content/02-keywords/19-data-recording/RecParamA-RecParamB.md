@@ -11,7 +11,11 @@ Per-scope arrays of complex CAN codes selecting the parameters to capture.
 
 ## How it works
 
-All array entries with a non-zero complex CAN code are recorded. Duplicated complex CAN codes in the array result in duplicated capture.
+When [RecStart](RecStart.md) runs, the controller scans the array from index 1 and resolves each entry until it reaches the first zero, which terminates the list. Every non-zero complex CAN code up to that point becomes a recorded channel. Duplicated complex CAN codes in the array result in duplicated capture.
+
+Each entry is validated as recording starts. An entry is rejected (and the start fails) if the code is not a valid keyword, if it names a command rather than a parameter (commands cannot be recorded), if its axis is out of range, or if the array index it points to is missing or outside that keyword's bounds. The total sample count — number of channels multiplied by [RecLength](RecLength.md) — must also fit within the scope's buffer, otherwise the start is rejected.
+
+The capture order set here is preserved end to end: it determines how samples are interleaved in the buffer and the column order returned by [RecUpload](RecUpload.md) and [RecUploadNext](RecUploadNext.md). For parameters held in user units, the controller also records each channel's scaling at start time so the upload can convert the raw samples back to user units.
 
 ## Examples
 

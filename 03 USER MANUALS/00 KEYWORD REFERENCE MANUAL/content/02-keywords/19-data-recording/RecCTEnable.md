@@ -7,7 +7,9 @@ Enables or disables continuous-time recording for each recording channel.
 
 ## Overview
 
-`RecCTEnable` is an array that enables or disables the continuous-time recording mode for each recording channel. When enabled, the channel captures data on every servo cycle, up to the size set by [RecCTMaxSize](RecCTMaxSize.md). It is a non-axis parameter saved to flash.
+`RecCTEnable` is an array that enables or disables continuous (circular) recording mode for each scope. In continuous recording the scope keeps sampling into a circular buffer that always retains the most recent samples — up to the size set by [RecCTMaxSize](RecCTMaxSize.md) — instead of stopping after a fixed [RecLength](RecLength.md). It is a non-axis parameter saved to flash.
+
+> **Note:** Continuous recording is not active in the current firmware. `RecCTEnable` and `RecCTMaxSize` are reserved and have no effect; use the standard triggered (one-shot) recording flow described in the [Data recording](00-overview.md) overview.
 
 ## Examples
 

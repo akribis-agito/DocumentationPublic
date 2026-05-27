@@ -32,12 +32,23 @@ Sets the continuous logger sampling interval in servo cycles.
 
 ## Overview
 
-`LoggerGap` sets the sampling interval of the continuous data logger in servo cycles, controlling how frequently the parameters in [LoggerParams](LoggerParams.md) are captured relative to the control loop rate. A larger value samples less often, extending the time span captured in the buffer. It is a non-axis parameter saved to flash and can be changed at any time. This is the continuous-logger counterpart of [RecGap](RecGap.md) for the recording scope.
+`LoggerGap` sets the sampling interval of the continuous data logger, controlling how frequently the parameters in [LoggerParams](LoggerParams.md) are captured. A larger value samples less often, extending the time span the buffer covers. It is a non-axis parameter saved to flash. Unlike the recording scope, the logger reads the interval live, so `LoggerGap` can be changed on the fly while logging and the new rate takes effect immediately. This is the continuous-logger counterpart of [RecGap](RecGap.md) for the recording scope.
+
+## How it works
+
+The logger evaluates whether a sample is due on a fixed internal tick of roughly 1 ms (one tick per 16 servo cycles). `LoggerGap` is the number of those ticks between successive logged samples, so the sample period is approximately:
+
+$$
+Sample\ period\ (ms) \approx LoggerGap
+$$
+
+The minimum value of `1` logs on every tick (about 1 kHz). The default of `10` corresponds to roughly one sample every 10 ms (about 100 Hz). Because the buffer holds a fixed number of samples, a larger `LoggerGap` trades time resolution for a longer total capture window before the buffer-full behavior set by [LoggerFullMod](LoggerFullMod.md) takes over.
 
 ## Examples
 
 ```text
-ALoggerGap=10        ; sample every 10 servo cycles
+ALoggerGap=10        ; sample about every 10 ms (default, ~100 Hz)
+ALoggerGap=1         ; sample on every tick (~1 ms, ~1 kHz)
 ALoggerGap          ; query the current sampling interval
 ```
 

@@ -55,6 +55,15 @@ The value returned from `RecStat` is defined as shown.
 
 For example, if RecStat\[1\] returns the value of 4, it indicates that recording of the first scope is successful, and the user can begin to stream the recorded data.
 
+The normal progression is 1 → 2 → 3 → 4:
+
+- [RecStart](RecStart.md) arms the scope at **1**, filling the pre-trigger portion set by [RecTrigPos](RecTrigPos.md) as a rolling buffer while ignoring trigger events.
+- Once enough pre-trigger points are held, the scope moves to **2** and begins evaluating the trigger condition(s) on each recorded sample.
+- When the trigger fires (or is forced with [RecTrigForce](RecTrigForce.md)), the scope advances to **3** and counts down the post-trigger points.
+- When the post-trigger points are all captured the scope settles at **4**, and the data can be uploaded.
+
+If no trigger is configured, `RecStart` jumps straight to **3**. [RecStop](RecStop.md) produces **5** if it interrupts a recording that had already triggered, or **6** if it interrupts before the trigger. Values **4**, **5** and **6** are all "finished" states from which [RecUpload](RecUpload.md) can run (status 6 has no valid triggered data and is reported as an error by the upload).
+
 ## Examples
 
 ```text

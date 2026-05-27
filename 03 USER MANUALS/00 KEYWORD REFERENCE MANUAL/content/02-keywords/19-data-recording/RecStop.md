@@ -39,6 +39,14 @@ Command that stops recording on the selected scope.
 | 1     | First scope                  |
 | 2     | Second scope (if applicable) |
 
+## How it works
+
+What `RecStop` does depends on the scope's current [RecStat](RecStat.md):
+
+- If the scope is still filling pre-trigger data or waiting for the trigger (status 1 or 2), recording ends with status 6 (stopped before trigger). No usable triggered data set exists, so [RecUpload](RecUpload.md) reports an error for that scope.
+- If the trigger has already been detected and recording is in progress (status 3), recording ends with status 5 (stopped). The metadata length in [RecDataA/RecDataB](RecDataA-RecDataB.md) is rewritten to the number of points actually captured so the upload returns only the real data.
+- If the scope is idle, already stopped, or already complete, `RecStop` does nothing and is not treated as an error.
+
 ## Examples
 
 ```text

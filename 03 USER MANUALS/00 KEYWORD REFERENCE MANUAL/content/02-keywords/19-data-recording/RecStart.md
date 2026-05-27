@@ -41,6 +41,17 @@ Command that starts recording on the selected scope.
 
 After starting, monitor progress with [RecStat](RecStat.md) and, if needed, force the trigger with [RecTrigForce](RecTrigForce.md) or abort with [RecStop](RecStop.md).
 
+## How it works
+
+`RecStart` validates the configuration, then takes a one-time snapshot of all settings into the recording's metadata so that later edits to the setup keywords do not affect the run in progress. As part of this it:
+
+- Rejects the start if the scope is already recording, if [RecLength](RecLength.md) or [RecGap](RecGap.md) is not positive, if [RecTrigPos](RecTrigPos.md) is outside 0–100, or if a trigger type is invalid or has a zero mask.
+- Walks [RecParamA/RecParamB](RecParamA-RecParamB.md) to count and resolve the channels, rejecting unknown codes, commands, and bad axis/index references, and rejecting the start if channels × `RecLength` exceeds the buffer.
+- Records each channel's data type and user-unit scaling, converts the trigger thresholds into internal units, and seeds the previous/initial trigger-source values used to detect edges and changes.
+- Computes how many points fall before the trigger (from `RecTrigPos`) and how many must follow it, then clears the buffer indices and counters.
+
+It then arms the scope by setting [RecStat](RecStat.md) to 1 (filling pre-trigger). If no trigger is configured (the first trigger type is "none"), the scope skips straight to status 3 (trigger detected) and records the full requested length immediately.
+
 ## Examples
 
 ```text

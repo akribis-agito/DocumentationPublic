@@ -47,6 +47,8 @@ The data is returned in comma-delimited format for RS232 and Ethernet communicat
 
 The first 80 values returned are the metadata. The subsequent values (81<sup>st</sup> value and above) are the recorded data, sequenced according to the [RecParamA/RecParamB](RecParamA-RecParamB.md) order, followed by the data sample order. For very large data sets, use [RecUploadNext](RecUploadNext.md) to retrieve the data in manageable packets.
 
+`RecUpload` is only valid once the recording has finished. It returns an error if the scope is still recording (status 1, 2 or 3), if no recording has been made since power-up (status 0), or if the recording was stopped before the trigger fired (status 6, which has no valid triggered data). See [RecStat](RecStat.md) for the status values. On a triggered recording the captured area is a circular buffer, so the upload uses the stored start/trigger/end indices to read the samples out in true chronological order even when the data wraps within the buffer.
+
 ## Examples
 
 ![image77.png](../../assets/image77.png)

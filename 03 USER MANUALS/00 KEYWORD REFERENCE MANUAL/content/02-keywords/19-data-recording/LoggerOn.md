@@ -32,9 +32,19 @@ Enables or disables the continuous data logger.
 
 ## Overview
 
-`LoggerOn` starts or stops the continuous data logger. When set to a non-zero value, the logger begins sampling the parameters configured in [LoggerParams](LoggerParams.md) at the rate defined by [LoggerGap](LoggerGap.md); setting it to `0` stops logging. It is a non-axis parameter and is not saved to flash, so the logger always starts disabled after power-up.
+`LoggerOn` starts or stops the continuous data logger. When set to `1`, the logger begins sampling the parameters configured in [LoggerParams](LoggerParams.md) at the rate defined by [LoggerGap](LoggerGap.md); setting it to `0` stops logging. It is a non-axis parameter and is not saved to flash, so the logger always starts disabled after power-up.
 
-Unlike the recording scope (`Rec*` keywords), the continuous logger runs in the background and is intended for long-running capture. Use [LoggerStatus](LoggerStatus.md) to monitor its state and [LoggerUpload](LoggerUpload.md) to retrieve the captured data.
+## How it works
+
+Setting `LoggerOn` from `0` to `1` prepares a fresh session in one step:
+
+1. The parameter list in [LoggerParams](LoggerParams.md) is analyzed and the packet size (time stamp plus one or two buffer slots per parameter, depending on its data size) is computed and published in [LoggerStatus](LoggerStatus.md) (index 1).
+2. The buffer is reset (free space set to full, packet identifier and lost-packets counter cleared), and the first sample is time-stamped at zero.
+3. The current [LoggerFullMod](LoggerFullMod.md), start time, and parameter list are snapshotted into [LoggerAbout](LoggerAbout.md).
+
+From then on, the logger evaluates one sample every [LoggerGap](LoggerGap.md) tick in the background, appending it to a circular buffer. When the buffer fills, the behavior selected by [LoggerFullMod](LoggerFullMod.md) applies. Setting `LoggerOn` back to `0` stops sampling immediately; data already in the buffer remains available for upload.
+
+Unlike the recording scope (`Rec*` keywords), which captures a fixed-length, trigger-aligned window and is read back in one pass, the continuous logger runs indefinitely in the background and is drained incrementally: use [LoggerStatus](LoggerStatus.md) to monitor its state and [LoggerUpload](LoggerUpload.md) to retrieve completed packets as they accumulate. The logger has no trigger configuration.
 
 ## Examples
 
