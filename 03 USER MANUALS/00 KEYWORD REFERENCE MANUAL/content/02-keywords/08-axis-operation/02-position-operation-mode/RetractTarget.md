@@ -1,5 +1,6 @@
 ---
 keyword: RetractTarget
+summary: Absolute target of the point-to-point move on entry to position mode.
 availability:
   standalone:
   - v4
@@ -26,6 +27,23 @@ overrides: {}
 ---
 # RetractTarget
 
-**Definition:**
+Absolute target of the point-to-point move on entry to position mode.
 
-RetractTarget is the absolute target used in the point-to-point motion upon entry to the position operation mode, subject to BeginOnToPos flag and RelTrgt value. If RelTrgt is not zero, the target position will be RelTrgt relative to the position reference upon position operation mode entry.
+## Overview
+
+`RetractTarget` is the absolute target used in the point-to-point motion that runs upon entry to position operation mode, subject to the [BeginOnToPos](BeginOnToPos.md) flag and the [RelTrgt](../../10-motion/13-motion-mode-ptp/RelTrgt.md) value. If `RelTrgt` is non-zero, the target position is instead `RelTrgt` relative to the position reference at the moment of entry into position mode. The move runs at [RetractSpeed](RetractSpeed.md).
+
+## Examples
+
+```text
+RetractTarget=50000 ; absolute entry-move target (user units)
+RetractSpeed=20000  ; entry-move speed
+BeginOnToPos=1      ; arm the move
+GoToPosMode         ; switch and start the move
+```
+
+## See also
+
+- [BeginOnToPos](BeginOnToPos.md) — arms the entry move
+- [RetractSpeed](RetractSpeed.md) — speed of the entry move
+- [RelTrgt](../../10-motion/13-motion-mode-ptp/RelTrgt.md) — relative-target override

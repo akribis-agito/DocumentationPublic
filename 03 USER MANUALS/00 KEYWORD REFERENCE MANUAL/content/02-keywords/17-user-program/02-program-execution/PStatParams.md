@@ -1,5 +1,6 @@
 ---
 keyword: PStatParams
+summary: Lists the parameters included in each periodic statistics transmission.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # PStatParams
 
-**Definition:**
+Lists the parameters included in each periodic statistics transmission.
 
-PStatParams is an array parameter that specifies which controller parameters are included in each periodic statistics transmission. Each element identifies one parameter to be sampled and sent at the interval configured by PStatInterval. It is a non-axis parameter saved to flash.
+## Overview
 
-**See also:**
+`PStatParams` is an array parameter that specifies which controller parameters are included in each periodic statistics transmission. Each element identifies one parameter to sample and send at the interval set by [PStatInterval](PStatInterval.md), over the port chosen by [PStatPort](PStatPort.md), whenever streaming is enabled by [PStatOn](PStatOn.md). It is a non-axis parameter and is saved to flash.
 
-[PStatOn](PStatOn.md), [PStatPort](PStatPort.md), [PStatInterval](PStatInterval.md)
+## Examples
+
+```text
+PStatParams[1]=<CAN code of parameter to stream>    ; first streamed parameter
+```
+
+## See also
+
+- [PStatOn](PStatOn.md) — enable/disable periodic statistics streaming
+- [PStatPort](PStatPort.md) — communication port used for streaming
+- [PStatInterval](PStatInterval.md) — interval between transmissions

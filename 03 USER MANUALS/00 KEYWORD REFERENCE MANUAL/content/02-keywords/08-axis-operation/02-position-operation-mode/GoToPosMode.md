@@ -1,5 +1,6 @@
 ---
 keyword: GoToPosMode
+summary: Command to gracefully enter position operation mode.
 availability:
   standalone:
   - v4
@@ -26,12 +27,25 @@ overrides: {}
 ---
 # GoToPosMode
 
-**Definition:**
+Command to gracefully enter position operation mode.
 
-GoToPosMode command instructs the controller to enter position operation mode in a graceful manner. Position value (Pos) upon receipt of command is recorded in ModeSwitchPos keyword.
+## Overview
 
-Through BeginOnToPos flag, user may choose to immediately start a point-to-point motion to target position (set by RetractTarget or RelTrgt) at a defined speed (RetractSpeed) upon receipt of GoToPosMode command.
+`GoToPosMode` instructs the controller to enter position operation mode in a graceful manner. The position value (`Pos`) at the time the command is received is recorded in [ModeSwitchPos](ModeSwitchPos.md).
 
-**Note:**
+Through the [BeginOnToPos](BeginOnToPos.md) flag, the user may choose to immediately start a point-to-point motion to a target position (set by [RetractTarget](RetractTarget.md) or [RelTrgt](../../10-motion/13-motion-mode-ptp/RelTrgt.md)) at a defined speed ([RetractSpeed](RetractSpeed.md)) upon receipt of the command. For other ways to enter position mode, see [OperationMode](../01-general-keywords/OperationMode.md).
 
-GoToPosMode cannot be used if axis is in velocity operation mode (OperationMode = 1).
+> **Note:** `GoToPosMode` cannot be used while the axis is in velocity operation mode ([OperationMode](../01-general-keywords/OperationMode.md) = 2).
+
+## Examples
+
+```text
+GoToPosMode         ; gracefully switch to position operation mode
+ModeSwitchPos?      ; read the recorded entry/exit positions
+```
+
+## See also
+
+- [BeginOnToPos](BeginOnToPos.md) — optionally run a move on entry
+- [ModeSwitchPos](ModeSwitchPos.md) — positions recorded at mode transitions
+- [OperationMode](../01-general-keywords/OperationMode.md) — the active control mode

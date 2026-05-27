@@ -1,5 +1,6 @@
 ---
 keyword: OpenLoopCurr
+summary: Current reference applied to the current loop in current open-loop mode.
 availability:
   standalone:
   - v4
@@ -26,12 +27,22 @@ overrides: {}
 ---
 # OpenLoopCurr
 
-**Condition:**
+Current reference applied to the current loop in current open-loop mode.
 
-It is only used when OpenLoopOn = 1.
+## Overview
 
-**Definition:**
+`OpenLoopCurr` is the current reference, in milliamperes, applied onto the current loop while the axis is in the current open-loop condition. It is only used when [OpenLoopOn](OpenLoopOn.md) = 1.
 
-OpenLoopCurr is the current reference, in milliamperes, applied onto the current loop if the axis is in current open-loop condition.
+This value bypasses all current references contributed by position, velocity or force control, except for cogging compensation ([UPMVelTable](../../../02-keywords/09-current-and-voltage/03-current-compensation/UPMVelTable.md)) and DC offset ([CurrRefOffset](../../../02-keywords/09-current-and-voltage/03-current-compensation/CurrRefOffset.md)). It is applied on a per-individual-motor basis, which means the decoupling matrix is not used (for example, excitation is not applied across a gantry axis).
 
-This value will bypass all the current references contributed by position, velocity or force control, except for cogging compensation ([UPMVelTable](../../../02-keywords/09-current-and-voltage/03-current-compensation/UPMVelTable.md)) and DC offset ([CurrRefOffset](../../../02-keywords/09-current-and-voltage/03-current-compensation/CurrRefOffset.md)). This value is applied per individual motor basis, which means decoupling matrix is not used (e.g. excitation not in gantry axis).
+## Examples
+
+```text
+OpenLoopOn=1        ; enter current open loop
+OpenLoopCurr=1000   ; apply 1000 mA current reference
+```
+
+## See also
+
+- [OpenLoopOn](OpenLoopOn.md) — selects the open-loop point (1 = current open loop)
+- [OpenLoopVolt](OpenLoopVolt.md) — voltage reference for voltage open loop

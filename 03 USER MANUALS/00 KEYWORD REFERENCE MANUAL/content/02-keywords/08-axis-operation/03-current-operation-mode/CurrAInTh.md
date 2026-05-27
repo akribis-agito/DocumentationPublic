@@ -1,5 +1,6 @@
 ---
 keyword: CurrAInTh
+summary: Analog force-feedback threshold (condition B) to enter current mode.
 availability:
   standalone:
   - v4
@@ -26,20 +27,32 @@ overrides: {}
 ---
 # CurrAInTh
 
-**Condition:**
+Analog force-feedback threshold (condition B) to enter current mode.
 
-It is used only while axis is in velocity or position operation mode (OperationMode = 2 or 3).
+## Overview
 
-**Definition:**
+`CurrAInTh` is the threshold analog force-feedback value used in the second condition check (condition B) to enter current operation mode. It is used only while the axis is in velocity or position operation mode ([OperationMode](../01-general-keywords/OperationMode.md) = 2 or 3). The analog force feedback is configured via [AInMode](../../../02-keywords/05-inputs-outputs/02-analog-inputs/AInMode.md) and read from `AInPort`.
 
-CurrAInTh is the threshold <span class="mark">analog force feedback</span> value used in the second condition check to enter current operation mode. Analog force feedback is defined using AInMode and is represented by AInPort.
+## How it works
 
 | Value | Descriptions |
 |----|----|
-| \< 0 | Second condition is fulfilled if analog force feedback \< CurrAInTh. |
+| \< 0 | Second condition is fulfilled if analog force feedback < `CurrAInTh`. |
 | 0 | Second condition is not fulfilled. |
-| \> 0 | Second condition is fulfilled if analog force feedback \> CurrAInTh. |
+| \> 0 | Second condition is fulfilled if analog force feedback > `CurrAInTh`. |
 
-**Note:**
+Entry into current operation mode still requires the first condition check ([CurrPosTh](CurrPosTh.md) / [CurrPosThDir](CurrPosThDir.md)). When both the first and second conditions are met, the axis enters current operation mode and `CurrAInTh` is cleared to 0 to avoid undesired future switching; the user must reconfigure its value for the next switch. See [Current operation mode](00-overview.md) for the full switching logic.
 
-Entry into current operation mode still subjects to the first condition check. If the first and second conditions are fulfilled, axis enters current operation mode and CurrAInTh is cleared to 0 to avoid undesired future switching. User needs to reconfigure its value for next switch. See Current operation mode for the overview.
+## Examples
+
+```text
+CurrAInTh=5000      ; enter current mode when force feedback > 5000
+CurrAInTh=0         ; disable this condition
+```
+
+## See also
+
+- [Current operation mode](00-overview.md) — full mode-switching conditions
+- [CurrPosTh](CurrPosTh.md) — first condition (position reference threshold)
+- [CurrPosErrTh](CurrPosErrTh.md) — alternative second condition (position error)
+- [CurrCurrTh](CurrCurrTh.md) — alternative second condition (current reference)

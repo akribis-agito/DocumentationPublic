@@ -1,5 +1,6 @@
 ---
 keyword: IdErr
+summary: Read-only direct-axis current error (IdRef − Id), three-phase only, in milliamperes.
 availability:
   standalone:
   - v4
@@ -26,16 +27,26 @@ overrides: {}
 ---
 # IdErr
 
-**Condition:**
+Read-only direct-axis current error (IdRef − Id), three-phase only, in milliamperes.
 
-IdErr is only applicable for three-phase motor (MotorType = 3 or 4). Otherwise, IdErr is 0.
+## Overview
 
-**Definition:**
+`IdErr` is the calculated current error in the direct (d) axis, in milliamperes — the difference between the reference [IdRef](IdRef.md) and the feedback [Id](Id.md). It is only applicable for three-phase motors ([MotorType](../../02-motor-and-amplifier/MotorType.md) = 3 or 4); otherwise `IdErr` is 0. It is used in three-phase dq0-domain current control.
 
-IdErr is the calculated current error in the direct axis, in milliamperes, defined as shown.
+## How it works
 
 $$
 IdErr\ \lbrack mA\rbrack\  = \ IdRef\ \lbrack mA\rbrack\  - \ Id\ \lbrack mA\rbrack
 $$
 
-It is used in three-phase motor dq0-domain current control.
+## Examples
+
+```text
+IdErr?              ; read direct-axis current error (mA)
+```
+
+## See also
+
+- [IdRef](IdRef.md) — direct-axis current reference
+- [Id](Id.md) — direct-axis feedback current
+- [IqErr](IqErr.md) — quadrature-axis current error

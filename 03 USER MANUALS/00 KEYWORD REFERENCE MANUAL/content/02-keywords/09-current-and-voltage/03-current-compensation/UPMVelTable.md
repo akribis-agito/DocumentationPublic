@@ -1,5 +1,6 @@
 ---
 keyword: UPMVelTable
+summary: Per-commutation-angle current compensation table for brushless motors (e.g. cogging compensation).
 availability:
   standalone:
   - v4
@@ -26,14 +27,25 @@ overrides: {}
 ---
 # UPMVelTable
 
-**Condition:**
+Per-commutation-angle current compensation table for brushless motors (e.g. cogging compensation).
 
-UPMVelTable is only used when MotorType = 3 or 4 (brushless motor).
+## Overview
 
-**Definition:**
+`UPMVelTable` is a parameter array that provides commutation-angle-dependent motor current compensation, for example to compensate cogging. It is only used when [MotorType](../../02-motor-and-amplifier/MotorType.md) = 3 or 4 (brushless motor). See [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md) for its application point.
 
-UPMVelTable is the parameter array that provides commutation angle related motor current compensation (e.g. for cogging compensation application).
+## How it works
 
-All array elements are 0 by default (no compensation). Each index will represent the respective commutation angle (ComtAng) by increment of 1 degree. For example, UPMVelTable\[54\] represents current compensation value when ComtAng = 54 degrees.
+All array elements default to 0 (no compensation). Each index represents the corresponding commutation angle ([ComtAng](../../15-commutation/ComtAng.md)) in 1-degree increments. For example, `UPMVelTable[54]` is the current compensation value applied when ComtAng = 54 degrees.
 
-Please refer to [Control tuning – Current control](../../../02-keywords/11-control-tuning/06-current-control/00-overview.md) for its application point.
+## Examples
+
+```text
+UPMVelTable[54]=300 ; compensation applied at commutation angle 54 degrees
+UPMVelTable[1]=0    ; no compensation at the first angle entry
+```
+
+## See also
+
+- [ComtAng](../../15-commutation/ComtAng.md) — commutation angle that indexes this table
+- [MotorType](../../02-motor-and-amplifier/MotorType.md) — must be 3 or 4 (brushless) for this to apply
+- [CurrRefOffset](CurrRefOffset.md) — motor-side current offset

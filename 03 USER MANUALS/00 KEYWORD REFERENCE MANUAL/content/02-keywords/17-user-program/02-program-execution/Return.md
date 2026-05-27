@@ -1,5 +1,6 @@
 ---
 keyword: Return
+summary: Returns from a user program function call to the line after the call.
 availability:
   standalone:
   - v4
@@ -26,8 +27,26 @@ overrides: {}
 ---
 # Return
 
-Return will cause a jump back to the user program that will continue execution on the next line
-after a function call.
-**Note:**
-Use ProgHalt at the end of the program if your program is not an endless loop. Otherwise
-execution will continue into the first function and the "return" keyword will cause an error.
+Returns from a user program function call to the line after the call.
+
+## Overview
+
+`Return` causes a jump back to the user program, continuing execution on the next line after a function call made with [ProgFuncCall](ProgFuncCall.md). It pops the most recent entry from the program-call stack ([ProgCallStack](ProgCallStack.md)) and is also used to complete an event-handler function, after which the event can be triggered again (see [ProgEventStat](ProgEventStat.md)).
+
+> **Note:** Use [ProgHalt](ProgHalt.md) at the end of the program if it is not an endless loop. Otherwise execution continues into the first function and the `Return` keyword causes an error.
+
+## Examples
+
+```text
+AProgFuncCall,1     ; call function 1
+...
+AProgFunc[1]        ; label: start of function 1
+; function body
+AReturn             ; return to the line after the call
+```
+
+## See also
+
+- [ProgFuncCall](ProgFuncCall.md) — call a function
+- [ProgFunc](ProgFunc.md) — label marking the start of a function
+- [ProgHalt](ProgHalt.md) — halt a thread (place before function definitions)

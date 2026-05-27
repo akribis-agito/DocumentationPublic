@@ -1,5 +1,6 @@
 ---
 keyword: ForceCmdSrc
+summary: Selects the source of the force reference in force mode.
 availability:
   standalone:
   - v4
@@ -26,11 +27,28 @@ overrides: {}
 ---
 # ForceCmdSrc
 
-**Definition:**
+Selects the source of the force reference in force mode.
 
-ForceCmdSrc is used to set the source of force reference (ForceRef), as shown below.
+## Overview
+
+`ForceCmdSrc` sets the source of the force reference ([ForceRef](ForceRef.md)). It is read by the mode-switching logic to decide how the force reference is generated and when the axis exits force mode (see [Force operation mode](00-overview.md)).
+
+## How it works
 
 | Value | Source |
 |----|----|
 | 0 | Analog force reference input (defined by [AInMode](../../../02-keywords/05-inputs-outputs/02-analog-inputs/AInMode.md)) |
-| 1 or 2 | User defined values (ForceCmdVal), each with specific timing (ForceCmdHTime) |
+| 1 or 2 | User-defined values ([ForceCmdVal](ForceCmdVal.md)), each with specific timing ([ForceCmdHTime](ForceCmdHTime.md)) |
+
+## Examples
+
+```text
+ForceCmdSrc=0       ; follow the analog force reference input
+ForceCmdSrc=1       ; use the user-defined ForceCmdVal table
+```
+
+## See also
+
+- [ForceCmdVal](ForceCmdVal.md) — user-defined force values (sources 1/2)
+- [ForceRef](ForceRef.md) — the resulting force reference
+- [Force operation mode](00-overview.md) — overall mode behavior

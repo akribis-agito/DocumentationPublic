@@ -1,5 +1,6 @@
 ---
 keyword: CurrCmdVal
+summary: Sequence of user-defined current references (mA) for current mode.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # CurrCmdVal
 
-**Condition:**
+Sequence of user-defined current references (mA) for current mode.
 
-This keyword is only applicable when CurrCmdSrc = 1 or 2.
+## Overview
 
-**Definition:**
+`CurrCmdVal` defines a sequence of user-defined current references, in milliamperes, applied in current operation mode. It is applicable only when [CurrCmdSrc](CurrCmdSrc.md) = 1 or 2, and each value is paired with a holding time from [CurrCmdHTime](CurrCmdHTime.md). The active entry is selected by [CurrCmdIndex](CurrCmdIndex.md), and transitions between entries can be ramped with [CurrCmdSlope](CurrCmdSlope.md).
 
-CurrCmdVal defines a sequence of user-defined current references to be used, in milliamperes. It is used in pair with holding time (CurrCmdHTime).
+## Examples
+
+```text
+CurrCmdVal[1]=364   ; first current reference (mA)
+CurrCmdVal[2]=-500  ; second current reference (mA)
+```
+
+## See also
+
+- [CurrCmdHTime](CurrCmdHTime.md) — holding time paired with each value
+- [CurrCmdIndex](CurrCmdIndex.md) — active table entry
+- [CurrCmdSlope](CurrCmdSlope.md) — ramp rate between entries
+- [CurrCmdSrc](CurrCmdSrc.md) — selects this table as the source

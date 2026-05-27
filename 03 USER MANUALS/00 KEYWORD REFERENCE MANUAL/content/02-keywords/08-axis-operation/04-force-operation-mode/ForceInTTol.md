@@ -1,5 +1,6 @@
 ---
 keyword: ForceInTTol
+summary: Settling window around the target force used for in-target status.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # ForceInTTol
 
-**Condition:**
+Settling window around the target force used for in-target status.
 
-This keyword is only applicable when [ForceCmdSrc](../../../02-keywords/08-axis-operation/04-force-operation-mode/ForceCmdSrc.md) = 1 or 2.
+## Overview
 
-**Definition:**
+`ForceInTTol` is the settling window around the target value ([ForceCmdVal](ForceCmdVal.md)), in units, used to determine the in-target status of force control. It is applicable only when [ForceCmdSrc](ForceCmdSrc.md) = 1 or 2. Together with the dwell time [ForceInTTime](ForceInTTime.md), it determines when [ForceInTStat](ForceInTStat.md) reports settled.
 
-ForceInTTol is the settling window around the target value (ForceCmdVal), in terms of units, used to determine in-target status of force control.
+## Examples
+
+```text
+ForceInTTol=10      ; settled when force error stays within ±10 units
+```
+
+## See also
+
+- [ForceInTTime](ForceInTTime.md) — required dwell time within this window
+- [ForceInTStat](ForceInTStat.md) — in-target status using this window
+- [ForceErr](ForceErr.md) — error compared against this window

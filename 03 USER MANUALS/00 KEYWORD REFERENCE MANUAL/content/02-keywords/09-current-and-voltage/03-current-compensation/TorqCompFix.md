@@ -1,5 +1,6 @@
 ---
 keyword: TorqCompFix
+summary: User-defined array of fixed loop current-compensation values, selected by TorqCompMode.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # TorqCompFix
 
-**Condition:**
+User-defined array of fixed loop current-compensation values, selected by TorqCompMode.
 
-TorqCompFix is only applicable when OperationMode = 2 or 3 (velocity or position operation mode) and TorqCompMode = 1 to 5.
+## Overview
 
-**Definition:**
+`TorqCompFix` is a user-defined array of fixed values for the loop's current compensation. The entry used depends on the [TorqCompMode](TorqCompMode.md) value (mode 1 selects `TorqCompFix[1]`, mode 2 selects `TorqCompFix[2]`, and so on). It is only applicable when [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) = 2 or 3 (velocity or position operation mode) and [TorqCompMode](TorqCompMode.md) is 1 to 5.
 
-TorqCompFix is a user-defined array for the loop’s current compensation at a fixed value. The TorqCompFix entry in use depends on the TorqCompMode value.
+## Examples
+
+```text
+TorqCompFix[1]=200  ; fixed compensation used when TorqCompMode=1
+TorqCompFix[2]=-150 ; fixed compensation used when TorqCompMode=2
+```
+
+## See also
+
+- [TorqCompMode](TorqCompMode.md) — selects which TorqCompFix entry is used
+- [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) — must be 2 or 3 for this to apply

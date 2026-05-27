@@ -1,5 +1,6 @@
 ---
 keyword: ForceInTTime
+summary: Minimum dwell time within the settling window before force control is settled.
 availability:
   standalone:
   - v4
@@ -26,12 +27,24 @@ overrides: {}
 ---
 # ForceInTTime
 
-**Condition:**
+Minimum dwell time within the settling window before force control is settled.
 
-This keyword is only applicable when [ForceCmdSrc](../../../02-keywords/08-axis-operation/04-force-operation-mode/ForceCmdSrc.md) = 1 or 2.
+## Overview
 
-**Definition:**
+`ForceInTTime` defines the minimum time, in milliseconds, that the force error ([ForceErr](ForceErr.md)) must continuously stay within the settling window ([ForceInTTol](ForceInTTol.md)) before the axis is considered settled in [ForceInTStat](ForceInTStat.md). It is applicable only when [ForceCmdSrc](ForceCmdSrc.md) = 1 or 2.
 
-ForceInTTime defines the minimum time required (in milliseconds) for force error (ForceErr) to always stay within settling window (ForceInTTol) before the axis is considered settled in ForceInTStat.
+## How it works
 
-The internal timer is active only while ForceInTStat = 3. It starts when ForceErr first enters the ForceInTTol window, and resets when ForceErr exits the window. Once ForceErr stays within the window for ForceInTTime, the axis is considered settled (ForceInTStat = 4) and the settling condition will no longer be checked.
+The internal timer is active only while [ForceInTStat](ForceInTStat.md) = 3. It starts when `ForceErr` first enters the `ForceInTTol` window, and resets when `ForceErr` exits the window. Once `ForceErr` stays within the window for `ForceInTTime`, the axis is considered settled (`ForceInTStat` = 4) and the settling condition is no longer checked.
+
+## Examples
+
+```text
+ForceInTTime=50     ; require 50 ms within the settling window
+```
+
+## See also
+
+- [ForceInTTol](ForceInTTol.md) — the settling window
+- [ForceInTStat](ForceInTStat.md) — in-target status driven by this timer
+- [ForceErr](ForceErr.md) — error checked against the window

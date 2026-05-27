@@ -1,5 +1,6 @@
 ---
 keyword: ProgEventVal
+summary: Value used for an event's trigger detection.
 availability:
   standalone:
   - v4
@@ -26,7 +27,20 @@ overrides: {}
 ---
 # ProgEventVal
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Value used for an event's trigger detection.
 
-Define the value to be used for the trigger detection.
+## Overview
+
+`ProgEventVal` defines the value used for trigger detection of an event. It is compared against the (optionally masked) monitored parameter according to the condition selected by [ProgEventType](ProgEventType.md). It is one of the four parameters that define an event trigger, alongside the source parameter [ProgEventPar](ProgEventPar.md) and the bit mask [ProgEventMask](ProgEventMask.md). It is a non-axis array parameter (one element per event) and is saved to flash.
+
+## Examples
+
+```text
+ProgEventVal[1]=100 ; trigger event 1 when the comparison against 100 is satisfied
+```
+
+## See also
+
+- [ProgEventType](ProgEventType.md) — trigger type (edge, equal, not equal, …)
+- [ProgEventPar](ProgEventPar.md) — parameter that triggers the event
+- [ProgEventMask](ProgEventMask.md) — bitwise mask applied to the trigger

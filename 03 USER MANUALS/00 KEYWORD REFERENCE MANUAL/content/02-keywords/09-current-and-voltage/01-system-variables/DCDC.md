@@ -1,5 +1,6 @@
 ---
 keyword: DCDC
+summary: Read-only array of internal logic-rail voltage measurements.
 availability:
   standalone:
   - v4
@@ -26,18 +27,34 @@ overrides: {}
 ---
 # DCDC
 
-**Definition:**
+Read-only array of internal logic-rail voltage measurements.
 
-DCDC reports the system internal logic voltage measurement values, as follows.
+## Overview
 
-| Index | Descriptions                                      |
+`DCDC` reports the drive's internal logic-supply voltage measurements as an array, one entry per rail. It is a read-only diagnostic complementing the single 5 V reading in [VLogic](VLogic.md). Not every entry is populated on every product; contact Agito for the readings applicable to a specific product.
+
+## How it works
+
+Each array index maps to a logic rail as follows.
+
+| Index | Description                                       |
 |-------|---------------------------------------------------|
-| 1     | 3.3V logic                                        |
-| 2     | 15V logic                                         |
-| 3     | -15V logic                                        |
-| 4     | 1.2V logic                                        |
-| 5     | 1.8V logic                                        |
-| 6     | Internal 10.5V or backup logic (whichever higher) |
-| 7     | 4.7V logic                                        |
+| 1     | 3.3 V logic                                       |
+| 2     | 15 V logic                                        |
+| 3     | -15 V logic                                       |
+| 4     | 1.2 V logic                                       |
+| 5     | 1.8 V logic                                       |
+| 6     | Internal 10.5 V or backup logic (whichever higher) |
+| 7     | 4.7 V logic                                       |
 
-Please contact Agito for more information on applicable readings for different products.
+## Examples
+
+```text
+DCDC[1]?            ; read the 3.3 V logic rail
+DCDC[2]?            ; read the 15 V logic rail
+```
+
+## See also
+
+- [VLogic](VLogic.md) — 5 V logic-supply voltage reading
+- [VBus](VBus.md) — amplifier DC bus voltage reading

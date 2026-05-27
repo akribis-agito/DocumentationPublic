@@ -1,5 +1,6 @@
 ---
 keyword: ProgStatAll
+summary: Returns a combined status word for all user program tasks.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # ProgStatAll
 
-**Definition:**
+Returns a combined status word for all user program tasks.
 
-ProgStatAll is a read-only parameter that returns a combined status word reflecting the execution state of all user program tasks. It is a non-axis status variable and is not saved to flash.
+## Overview
 
-**See also:**
+`ProgStatAll` is a read-only parameter that returns a combined status word reflecting the execution state of all user program tasks. It is the aggregate counterpart of [ProgStat](ProgStat.md), which reports a single thread, and is useful for a quick health check of the whole interpreter. It is a non-axis status variable and is not saved to flash.
 
-[ProgPointer](ProgPointer.md), [ProgPriority](ProgPriority.md), [ProgReset](ProgReset.md)
+## Examples
+
+```text
+ProgStatAll?        ; combined status of all user program tasks
+```
+
+## See also
+
+- [ProgStat](ProgStat.md) — running status of one thread
+- [ProgPointer](ProgPointer.md) — current instruction pointer of each task
+- [ProgPriority](ProgPriority.md) — task scheduling priority
+- [ProgReset](ProgReset.md) — reset a task to its initial state

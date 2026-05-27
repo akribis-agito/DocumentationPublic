@@ -1,5 +1,6 @@
 ---
 keyword: ProgHaltThis
+summary: Halts the currently executing user program task.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # ProgHaltThis
 
-**Definition:**
+Halts the currently executing user program task.
 
-ProgHaltThis is a command that halts the currently executing user program task. It is a non-axis command and is not saved to flash.
+## Overview
 
-**See also:**
+`ProgHaltThis` is a command that halts the currently executing user program task — the "self-halt" form of [ProgHalt](ProgHalt.md), which targets a thread by index. As with halting in general, the task can be resumed with [ProgRun](ProgRun.md) rather than restarted, in contrast to [ProgReset](ProgReset.md). It is a non-axis command and is not saved to flash.
 
-[ProgBreakThis](ProgBreakThis.md), [ProgReset](ProgReset.md), [ProgStatAll](ProgStatAll.md)
+## Examples
+
+```text
+ProgHaltThis        ; halt the task that issues this command
+```
+
+## See also
+
+- [ProgHalt](ProgHalt.md) — halt a thread by index
+- [ProgBreakThis](ProgBreakThis.md) — set a breakpoint on the running task
+- [ProgReset](ProgReset.md) — reset a task to its initial state
+- [ProgStatAll](ProgStatAll.md) — combined status of all tasks

@@ -1,5 +1,6 @@
 ---
 keyword: CurrCurrTh
+summary: Current-reference threshold (condition B) to enter current mode.
 availability:
   standalone:
   - v4
@@ -26,21 +27,30 @@ overrides: {}
 ---
 # CurrCurrTh
 
-**Condition:**
+Current-reference threshold (condition B) to enter current mode.
 
-It is used only while axis is in velocity or position operation mode (OperationMode = 2 or 3).
+## Overview
 
-**Definition:**
+`CurrCurrTh` is the threshold current reference (`CurrRef`) value used in the second condition check (condition B) to enter current operation mode. It is used only while the axis is in velocity or position operation mode ([OperationMode](../01-general-keywords/OperationMode.md) = 2 or 3). If the value is 0, the axis does not switch; otherwise the comparison direction is set by [CurrCurrThDir](CurrCurrThDir.md).
 
-CurrCurrTh is the threshold current reference (CurrRef) value used in the second condition check to enter current operation mode. If the value is 0, axis will not switch operation mode.
-
-Otherwise, the switching depends on direction keyword (CurrCurrThDir).
+## How it works
 
 | CurrCurrThDir | Descriptions                                            |
 |---------------|---------------------------------------------------------|
-| 0             | Second condition is fulfilled if CurrRef \> CurrCurrTh. |
-| 1             | Second condition is fulfilled if CurrRef \< CurrCurrTh. |
+| 0             | Second condition is fulfilled if `CurrRef` > `CurrCurrTh`. |
+| 1             | Second condition is fulfilled if `CurrRef` < `CurrCurrTh`. |
 
-**Note:**
+Entry into current operation mode still requires the first condition check ([CurrPosTh](CurrPosTh.md) / [CurrPosThDir](CurrPosThDir.md)). When both conditions are met, the axis enters current mode and `CurrCurrTh` is cleared to 0 to avoid undesired future switching; the user must reconfigure its value for the next switch. See [Current operation mode](00-overview.md) for the overview.
 
-Entry into current operation mode still subjects to the first condition check. If the first and second conditions are fulfilled, axis enters current operation mode and CurrCurrTh is cleared to 0 to avoid undesired future switching. User needs to reconfigure its value for next switch. See Current operation mode for the overview.
+## Examples
+
+```text
+CurrCurrThDir=0     ; trigger when CurrRef rises above threshold
+CurrCurrTh=2000     ; enter current mode when CurrRef > 2000 mA
+```
+
+## See also
+
+- [CurrCurrThDir](CurrCurrThDir.md) — selects the comparison direction
+- [Current operation mode](00-overview.md) — full mode-switching conditions
+- [CurrPosTh](CurrPosTh.md) — first condition (position reference threshold)

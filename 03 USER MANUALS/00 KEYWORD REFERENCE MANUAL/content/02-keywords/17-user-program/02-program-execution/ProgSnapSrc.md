@@ -1,5 +1,6 @@
 ---
 keyword: ProgSnapSrc
+summary: Selects which parameters the program snapshot mechanism captures.
 availability:
   standalone:
   - v4
@@ -26,10 +27,19 @@ overrides: {}
 ---
 # ProgSnapSrc
 
-**Definition:**
+Selects which parameters the program snapshot mechanism captures.
 
-ProgSnapSrc is an array parameter that configures which controller parameters are captured by the program snapshot mechanism. Each element specifies a source parameter to be recorded when a snapshot is triggered. It is a non-axis parameter saved to flash.
+## Overview
 
-**See also:**
+`ProgSnapSrc` is an array parameter that configures which controller parameters are captured by the program snapshot mechanism. Each element specifies a source parameter to record when a snapshot is triggered; the captured values are read back from [ProgSnapVal](ProgSnapVal.md). It mirrors the fault-snapshot mechanism configured by [ConFltSnapSrc](../../07-status-and-faults/ConFltSnapSrc.md). It is a non-axis parameter and is saved to flash.
 
-[ProgSnapVal](ProgSnapVal.md), [ConFltSnapSrc](../../07-status-and-faults/ConFltSnapSrc.md)
+## Examples
+
+```text
+ProgSnapSrc[1]=<CAN code of parameter to capture>   ; first snapshot source
+```
+
+## See also
+
+- [ProgSnapVal](ProgSnapVal.md) — values captured by the snapshot mechanism
+- [ConFltSnapSrc](../../07-status-and-faults/ConFltSnapSrc.md) — fault-snapshot source selection

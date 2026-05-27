@@ -1,5 +1,6 @@
 ---
 keyword: ForceCmdSlope
+summary: Ramp rate (unit/s) toward each force-command table entry.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # ForceCmdSlope
 
-**Condition:**
+Ramp rate (unit/s) toward each force-command table entry.
 
-This keyword is only applicable when ForceCmdSrc = 1 or 2.
+## Overview
 
-**Definition:**
+`ForceCmdSlope` defines the slope for the transition from the starting [ForceRef](ForceRef.md) value to the active [ForceCmdVal](ForceCmdVal.md) entry, in units per second. It is applicable only when [ForceCmdSrc](ForceCmdSrc.md) = 1 or 2. The holding timer [ForceCmdCntr](ForceCmdCntr.md) only begins counting from 0 once the ramp completes.
 
-ForceCmdSlope defines the slope for transition from the starting ForceRef value to the existing ForceCmdVal array entry. It is in terms of unit per second. Only after the ramping, the timer ForceCmdCntr will begin from 0.
+## Examples
+
+```text
+ForceCmdSlope[3]=700 ; ramp into entry 3 at 700 units/s
+```
+
+## See also
+
+- [ForceCmdVal](ForceCmdVal.md) — target force values
+- [ForceCmdHTime](ForceCmdHTime.md) — holding times per entry
+- [ForceCmdCntr](ForceCmdCntr.md) — timer that starts after the ramp

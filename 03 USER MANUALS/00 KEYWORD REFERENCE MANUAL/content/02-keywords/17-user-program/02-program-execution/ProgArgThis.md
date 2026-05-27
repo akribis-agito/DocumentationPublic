@@ -1,5 +1,6 @@
 ---
 keyword: ProgArgThis
+summary: Reads back the argument values received by the currently executing task.
 availability:
   standalone:
   - v4
@@ -26,10 +27,19 @@ overrides: {}
 ---
 # ProgArgThis
 
-**Definition:**
+Reads back the argument values received by the currently executing task.
 
-ProgArgThis is an array parameter that reads back the argument values received by the currently executing user program task. It provides the calling task with access to its own argument list. It is a non-axis parameter and is not saved to flash.
+## Overview
 
-**See also:**
+`ProgArgThis` is an array parameter that reads back the argument values received by the currently executing user program task, giving the task access to its own argument list. It is the in-task view of the arguments staged with [ProgPushArg](ProgPushArg.md) and stored per task in [ProgArg](ProgArg.md). `ProgArgThis` is a non-axis parameter and is not saved to flash.
 
-[ProgArg](ProgArg.md), [ProgPushArg](ProgPushArg.md)
+## Examples
+
+```text
+ProgArgThis[1]?     ; read the first argument received by the running task
+```
+
+## See also
+
+- [ProgArg](ProgArg.md) — per-task argument slots
+- [ProgPushArg](ProgPushArg.md) — push an argument value onto a task's argument stack

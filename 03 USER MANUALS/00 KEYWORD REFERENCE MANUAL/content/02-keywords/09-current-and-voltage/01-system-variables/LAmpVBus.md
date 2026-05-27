@@ -1,5 +1,6 @@
 ---
 keyword: LAmpVBus
+summary: Read-only bus-voltage measurements of the built-in linear amplifier (AmpType = 4).
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # LAmpVBus
 
-**Condition:**
+Read-only bus-voltage measurements of the built-in linear amplifier (AmpType = 4).
 
-This keyword is only used when AmpType = 4 (reserved setting).
+## Overview
 
-**Definition:**
+`LAmpVBus` reports the bus-voltage measurements of the built-in linear amplifier, in millivolts, as a read-only array. It is only used when [AmpType](../../02-motor-and-amplifier/AmpType.md) = 4 (a reserved setting). For the standard switching-amplifier bus voltage, see [VBus](VBus.md).
 
-LAmpVBus reports the bus voltage measurements of built-in linear amplifier, in millivolts.
+> **Note:** `AmpType` = 4 is a reserved setting; this reading applies only to products with a built-in linear amplifier.
+
+## Examples
+
+```text
+LAmpVBus[1]?        ; read the first linear-amplifier bus voltage (mV)
+```
+
+## See also
+
+- [VBus](VBus.md) — switching-amplifier DC bus voltage reading
+- [AmpType](../../02-motor-and-amplifier/AmpType.md) — amplifier type selection

@@ -1,5 +1,6 @@
 ---
 keyword: ProgHeap
+summary: Dynamic memory heap used by the user program runtime for variable storage.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # ProgHeap
 
-**Definition:**
+Dynamic memory heap used by the user program runtime for variable storage.
 
-ProgHeap is the dynamic memory heap used by the user program runtime for variable storage. It is an array parameter that can be read and written at any time. It is a non-axis parameter and is not saved to flash.
+## Overview
 
-**See also:**
+`ProgHeap` is the dynamic memory heap used by the user program runtime for variable storage. It is a read/write array of 51 `int32` elements that can be accessed at any time, including over communication, which makes it useful for inspecting or seeding user program variables. It is a non-axis parameter and is not saved to flash, so its contents are cleared on reset (see [ProgResetAll](ProgResetAll.md)).
 
-[ProgStatAll](ProgStatAll.md), [ProgReset](ProgReset.md)
+## Examples
+
+```text
+ProgHeap[1]?        ; read the first heap element
+ProgHeap[1]=0       ; write the first heap element
+```
+
+## See also
+
+- [ProgResetAll](ProgResetAll.md) — stop all threads and reset pointers and stacks
+- [ProgStatAll](ProgStatAll.md) — combined status of all tasks

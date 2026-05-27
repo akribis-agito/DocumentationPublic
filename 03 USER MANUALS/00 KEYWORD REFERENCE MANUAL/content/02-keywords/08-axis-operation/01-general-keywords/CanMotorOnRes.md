@@ -1,5 +1,6 @@
 ---
 keyword: CanMotorOnRes
+summary: Result code from the last CanMotorOn enable attempt.
 availability:
   standalone:
   - v4
@@ -26,10 +27,19 @@ overrides: {}
 ---
 # CanMotorOnRes
 
-**Definition:**
+Result code from the last CanMotorOn enable attempt.
 
-CanMotorOnRes is a read-only parameter that holds the result code from the last CanMotorOn command. A zero value indicates the motor was enabled successfully; non-zero values indicate the reason the enable attempt was rejected. It is an axis-related status variable that is not saved to flash.
+## Overview
 
-**See also:**
+`CanMotorOnRes` is a read-only status variable that holds the result code from the last [CanMotorOn](CanMotorOn.md) command. A zero value indicates the motor was enabled successfully; a non-zero value indicates the reason the enable attempt was rejected. It is axis-related and is not saved to flash.
 
-[CanMotorOn](CanMotorOn.md), [MotorOn](MotorOn.md)
+## Examples
+
+```text
+CanMotorOnRes?      ; 0 = enabled successfully, non-zero = rejected
+```
+
+## See also
+
+- [CanMotorOn](CanMotorOn.md) — command that produces this result
+- [MotorOn](MotorOn.md) — enable/disable state of the motor

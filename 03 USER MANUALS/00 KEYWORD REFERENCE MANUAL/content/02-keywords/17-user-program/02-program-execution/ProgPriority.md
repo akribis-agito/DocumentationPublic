@@ -1,5 +1,6 @@
 ---
 keyword: ProgPriority
+summary: Sets the scheduling priority of a user program task.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # ProgPriority
 
-**Definition:**
+Sets the scheduling priority of a user program task.
 
-ProgPriority sets the scheduling priority of a user program task. It is an array parameter indexed by task number, saved to flash, and is a non-axis parameter.
+## Overview
 
-**See also:**
+`ProgPriority` sets the scheduling priority of a user program task. It is an array parameter indexed by task number, with a valid range of `1`–`10`, and it influences how the interpreter shares execution time among concurrent tasks started with [ProgRun](ProgRun.md). It is a non-axis parameter and is saved to flash.
 
-[ProgReset](ProgReset.md), [ProgStatAll](ProgStatAll.md)
+## Examples
+
+```text
+ProgPriority[1]=5   ; set task 1 to priority 5 (range 1-10)
+```
+
+## See also
+
+- [ProgRun](ProgRun.md) — run a task as a thread
+- [ProgReset](ProgReset.md) — reset a task to its initial state
+- [ProgStatAll](ProgStatAll.md) — combined status of all tasks

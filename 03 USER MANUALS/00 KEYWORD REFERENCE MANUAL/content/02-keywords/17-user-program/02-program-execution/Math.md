@@ -1,5 +1,6 @@
 ---
 keyword: Math
+summary: Low-level user-program op that applies a math operation to the top of the numeric stack.
 availability:
   standalone:
   - v4
@@ -26,96 +27,60 @@ overrides: {}
 ---
 # Math
 
-Math is a user program low level language keyword. The syntax related to "Math" is usually
+Low-level user-program op that applies a math operation to the top of the numeric stack.
 
-generated automatically by the PC suite during compilation.
+## Overview
 
-Math will perform the mathematical operation requested on the top parameter or parameters
+`Math` is a low-level user-program keyword. The syntax around `Math` is normally generated automatically by the PC Suite during compilation, so it is rarely written by hand. `Math` performs the requested operation on the top one or two values of the numeric stack — the operands must be pushed first (see [PushParam](../03-stack-operation/PushParam.md) and [PushConstant](../03-stack-operation/PushConstant.md)), and the result is pushed back onto the stack. When `Math` is called over communication, the result is also returned through the communication channel.
 
-of the numeric stack. The number of parameters depends on the operation. For example:
+Values on the stack and over communication are integers; fractional results are rounded. Internally all operations are performed on `long long` variables, with definitions compatible with C.
 
-addition requires two parameters while negate is an operation that is performed on one
+> **Note:** `Pop1` is the first value popped from the stack (the "top" value); `Pop2` is the second value popped.
 
-parameter.
+## How it works
 
-The index value determines which operation will be performed. The operands should be pushed
+The index selects which operation is performed; the number of operands determines how many values are popped:
 
-to the stack before Math is called.
+| Index | Operation | Formula | Operands |
+|----|----|----|----|
+| 1 | Add | Result = Pop1 + Pop2 | 2 |
+| 2 | Subtract | Result = Pop2 − Pop1 | 2 |
+| 3 | Multiply | Result = Pop1 × Pop2 | 2 |
+| 4 | Divide | Result = Pop2 / Pop1 | 2 |
+| 5 | Negate | Result = −Pop1 | 1 |
+| 6 | Invert | Result = 1 / Pop1 | 1 |
+| 7 | Modulo | Result = Pop2 % Pop1 | 2 |
+| 8 | Power | Result = Pop2 ^ Pop1 (^ as power operator) | 2 |
+| 9 | Square root | Result = √(Pop1) | 1 |
+| 10 | Sine | Result = sin(Pop1) | 1 |
+| 11 | Cosine | Result = cos(Pop1) | 1 |
+| 12 | Tangent | Result = tan(Pop1) | 1 |
+| 13 | Cotangent | Result = tan⁻¹(Pop1) | 1 |
+| 14 | Inverse sine | Result = arcsin(Pop1) | 1 |
+| 15 | Inverse cosine | Result = arccos(Pop1) | 1 |
+| 16 | Inverse tangent | Result = arctan(Pop1) | 1 |
+| 17 | Bitwise NOT | Result = ~Pop1 | 1 |
+| 18 | Bitwise AND | Result = Pop1 & Pop2 | 2 |
+| 19 | Bitwise OR | Result = Pop1 \| Pop2 | 2 |
+| 20 | Bitwise XOR | Result = Pop1 ^ Pop2 (^ as XOR, as in C) | 2 |
+| 21 | Shift left | Result = Pop1 << Pop2 | 2 |
+| 22 | Shift right | Result = Pop1 >> Pop2 | 2 |
+| 23 | Absolute | Result = abs(Pop1) | 1 |
+| 24 | Logarithm | Result = log to base Pop2 of Pop1 | 2 |
+| 25 | Base-10 logarithm | Result = log10(Pop1) | 1 |
 
-The result is pushed to the numeric stack. If this function is called from communication the value
+## Examples
 
-is also sent through communication.
+```text
+; Compute 3 + 4 (operations normally emitted by the PC Suite compiler)
+PushConstant=3      ; push first operand
+PushConstant=4      ; push second operand
+Math[1]             ; index 1 = Add, result 7 is pushed back to the stack
+```
 
-Note that values in the stack and over communication are integers. Results in fractions will be
+## See also
 
-rounded.
-
-Internally all the relevant mathematical operation are performed on long long type variables.
-
-The definitions are compatible with C language.
-
-Pop1 is the first value that is popped from the stack ("top" value)
-
-Pop2 is the second value that is popped from the stack
-
-The values of math:
-
-Value Operation Type                                                 Number of parameters
-
-1           Add: Result = Pop1 + Pop2                                2
-
-2           Subtract : Result = Pop2-Pop1                            2
-
-3           Multiply: Result = Pop1 * Pop2                           2
-
-4           Divide: Result = Pop2 / Pop1                             2
-
-5           Negate: Result = -Pop1                                   1
-
-6           Invert: Result = 1/Pop1 *                                1
-
-7           Modulo: Result = Pop2%Pop1                               2
-
-8           Power: Result = Pop2^Pop1 (^ used as power 2
-
-            operator)
-
-9           Square root: Result = Square root(Pop1)                  1
-
-10          Sine: Result = sin(Pop1)*                                1
-
-11          Cosine: Result = cos(Pop1)*                              1
-
-12          Tangent: Result = tan(Pop1)*                             1
-
-13          Cotangent: Result = tan -1( Pop1)*                       1
-
-14          Inverse sine: Result = arcsin(Pop1)*                     1
-
-15          Inverse cosine: Result = arcos(Pop1)*                    1
-
-16          Inverse tangent: Result = arctan(Pop1)*                  1
-
-17          Bitwise not: Result = ~ Pop1                             1
-
-18          Bitwise and: Result = Pop1 & Pop2                        2
-
-19          Bitwise or: Result = Pop1 | Pop2                         2
-
-20          Bitwise xor: Result = Pop1 ^ Pop2 (^ used as xor as in 2
-
-            C)
-
-21          Shift left: Result = Pop1 << Pop2                        2
-
-22          Shift right: Result = Pop1 >> Pop2                       2
-
-23          Absolute: Result = abs(Pop1)                             1
-
-24          Logarithm: Result = logpop2 Pop1 *                       2
-
-25          Base 10 logarithm: Result = log10Pop1 *                  1
-
-                                                                                                      Page 392
-
-            Tel: +972-9-8909797 Fax: +972-9-8909796 email: info@agito.co.il website: www.agito.co.il
+- [PushParam](../03-stack-operation/PushParam.md) — push a parameter value onto the numeric stack
+- [PushConstant](../03-stack-operation/PushConstant.md) — push a constant onto the numeric stack
+- [PopParam](../03-stack-operation/PopParam.md) — pop the top stack value into a parameter
+- [ProgExpStack](ProgExpStack.md) — read the top of the numeric stack without popping

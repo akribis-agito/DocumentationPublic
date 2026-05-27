@@ -1,5 +1,6 @@
 ---
 keyword: Ia
+summary: Read-only measured phase A current, in milliamperes.
 availability:
   standalone:
   - v4
@@ -26,6 +27,21 @@ overrides: {}
 ---
 # Ia
 
-**Definition:**
+Read-only measured phase A current, in milliamperes.
 
-Ia reports the measured current of phase A, in milliamperes. Phase A is according to the connection scheme defined in the hardware reference guide.
+## Overview
+
+`Ia` reports the measured current of phase A, in milliamperes. Phase A is defined by the connection scheme in the hardware reference guide. It is the feedback counterpart of the phase A reference [IaRef](IaRef.md); their difference is the phase A current error [IaErr](IaErr.md).
+
+## Examples
+
+```text
+Ia?                 ; read measured phase A current (mA)
+```
+
+## See also
+
+- [IaRef](IaRef.md) — phase A current reference
+- [IaErr](IaErr.md) — phase A current error (IaRef − Ia)
+- [Ib](Ib.md) — measured phase B current
+- [MotorCurr](MotorCurr.md) — total feedback current amplitude

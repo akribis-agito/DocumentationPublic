@@ -1,5 +1,6 @@
 ---
 keyword: WaitTime
+summary: Suspends the current task for a specified time in milliseconds.
 availability:
   standalone:
   - v4
@@ -26,10 +27,18 @@ overrides: {}
 ---
 # WaitTime
 
-**Definition:**
+Suspends the current task for a specified time in milliseconds.
 
-WaitTime is a user program instruction that suspends the execution of the current task for a specified time duration in milliseconds. It can be used during motion and with the motor on. It is a non-axis command and is not saved to flash.
+## Overview
 
-**See also:**
+`WaitTime` is a user-program instruction that suspends execution of the current task for a specified time duration in milliseconds. It is the time-based counterpart of [WaitStatus](WaitStatus.md), which instead waits for a status condition. It can be used during motion and with the motor on. It is a non-axis command and is not saved to flash.
 
-[WaitStatus](WaitStatus.md)
+## Examples
+
+```text
+AWaitTime,1000      ; pause the current task for 1000 ms (1 second)
+```
+
+## See also
+
+- [WaitStatus](WaitStatus.md) — hold a task until a status reaches a value

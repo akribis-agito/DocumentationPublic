@@ -1,5 +1,6 @@
 ---
 keyword: ProgFuncCall
+summary: Calls a user program function defined by a ProgFunc label.
 availability:
   standalone:
   - v4
@@ -26,13 +27,22 @@ overrides: {}
 ---
 # ProgFuncCall
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Calls a user program function defined by a ProgFunc label.
 
-When the line AProgFuncCall,1 is reached, the program execution jumps to the location of the
-label keyword ProgFunc[1]. Return will cause a jump back to the user program that will continue
-execution on the next line.
-Use multiple ProgFunc[] labels for multiple functions.
-**Note:**
-Use ProgHalt at the end of the program if your program is not an endless loop. Otherwise
-execution will continue into the first function and the "return" keyword will cause an error.
+## Overview
+
+`ProgFuncCall` calls a user program function. When `AProgFuncCall,1` is reached, execution jumps to the location of the [ProgFunc](ProgFunc.md) label with index `1`. A [Return](Return.md) at the end of the function jumps back and continues on the next line after the call. Use multiple `ProgFunc[]` labels to define multiple functions, each invoked by its index. It is a non-axis command and is not saved to flash.
+
+> **Note:** Use [ProgHalt](ProgHalt.md) at the end of the program if it is not an endless loop. Otherwise execution continues into the first function and the `Return` keyword causes an error.
+
+## Examples
+
+```text
+AProgFuncCall,1     ; jump to ProgFunc[1]; Return resumes on the next line
+```
+
+## See also
+
+- [ProgFunc](ProgFunc.md) — label marking the start of a function
+- [Return](Return.md) — return from a function call
+- [ProgCallStack](ProgCallStack.md) — program-call stack contents

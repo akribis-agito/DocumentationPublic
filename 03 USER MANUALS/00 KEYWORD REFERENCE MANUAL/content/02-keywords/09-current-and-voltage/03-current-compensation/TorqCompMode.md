@@ -1,5 +1,6 @@
 ---
 keyword: TorqCompMode
+summary: Selects the source of the loop's current (torque) compensation in velocity/position mode.
 availability:
   standalone:
   - v4
@@ -26,22 +27,34 @@ overrides: {}
 ---
 # TorqCompMode
 
-**Condition:**
+Selects the source of the loop's current (torque) compensation in velocity/position mode.
 
-TorqCompMode is only applicable when OperationMode = 2 or 3 (velocity or position operation mode).
+## Overview
 
-**Definition:**
+`TorqCompMode` selects the source of the loop's current compensation. It is only applicable when [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) = 2 or 3 (velocity or position operation mode). When set to a fixed source it draws from the corresponding [TorqCompFix](TorqCompFix.md) entry; when set to 0 it uses an analog input. See [Control tuning – Feedforwards](../../11-control-tuning/05-feedforwards/00-overview.md) for the location of this compensation in the block diagram.
 
-TorqCompMode is used to define the source of the loop’s current compensation, as shown.
+## How it works
 
 | TorqCompMode | Current compensation value |
 |----|----|
 | -1 | 0 (no compensation) |
-| 0 | Value is from analog input (see [AInMode](../../../02-keywords/05-inputs-outputs/02-analog-inputs/AInMode.md), torque compensation selection). |
-| 1 | TorqCompFix\[1\] |
-| 2 | TorqCompFix\[2\] |
-| 3 | TorqCompFix\[3\] |
-| 4 | TorqCompFix\[4\] |
-| 5 | TorqCompFix\[5\] |
+| 0 | Value from an analog input (see [AInMode](../../05-inputs-outputs/02-analog-inputs/AInMode.md), torque-compensation selection). |
+| 1 | TorqCompFix[1] |
+| 2 | TorqCompFix[2] |
+| 3 | TorqCompFix[3] |
+| 4 | TorqCompFix[4] |
+| 5 | TorqCompFix[5] |
 
-Please refer to the block diagram in [Control tuning – Feedforwards](../../../02-keywords/11-control-tuning/05-feedforwards/00-overview.md) for location of this compensation.
+## Examples
+
+```text
+TorqCompMode=-1     ; no compensation (default)
+TorqCompMode=1      ; use TorqCompFix[1]
+TorqCompMode=0      ; use analog-input torque compensation
+```
+
+## See also
+
+- [TorqCompFix](TorqCompFix.md) — fixed compensation values selected by this mode
+- [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) — must be 2 or 3 for this to apply
+- [AInMode](../../05-inputs-outputs/02-analog-inputs/AInMode.md) — analog-input torque-compensation source

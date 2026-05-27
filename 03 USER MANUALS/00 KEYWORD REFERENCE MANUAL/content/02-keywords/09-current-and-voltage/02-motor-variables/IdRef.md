@@ -1,5 +1,6 @@
 ---
 keyword: IdRef
+summary: Read-only direct-axis current reference, used in dq0-domain control; currently always 0.
 availability:
   standalone:
   - v4
@@ -26,6 +27,20 @@ overrides: {}
 ---
 # IdRef
 
-**Definition:**
+Read-only direct-axis current reference, used in dq0-domain control; currently always 0.
 
-IdRef is the reference current of direct axis, in milliamperes used in dq0-domain current control. Currently, IdRef is always 0. Please contact Agito if application involving IdRef (e.g. flux weakening) is needed.
+## Overview
+
+`IdRef` is the reference current of the direct (d) axis, in milliamperes, used in dq0-domain current control. It is the reference regulated against the feedback [Id](Id.md), producing the error [IdErr](IdErr.md). Currently `IdRef` is always 0; contact Agito if an application involving `IdRef` (for example flux weakening) is needed.
+
+## Examples
+
+```text
+IdRef?              ; read direct-axis current reference (mA)
+```
+
+## See also
+
+- [Id](Id.md) — direct-axis feedback current
+- [IdErr](IdErr.md) — direct-axis current error
+- [IqRef](IqRef.md) — quadrature-axis current reference

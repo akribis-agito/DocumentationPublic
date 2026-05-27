@@ -1,5 +1,6 @@
 ---
 keyword: Force
+summary: Force feedback obtained from the analog input.
 availability:
   standalone:
   - v4
@@ -26,6 +27,20 @@ overrides: {}
 ---
 # Force
 
-**Definition:**
+Force feedback obtained from the analog input.
 
-Force is the force feedback obtained from analog input. It has the same value as corresponding AInPort linked to force feedback feature.
+## Overview
+
+`Force` is the force feedback obtained from the analog input. It has the same value as the corresponding `AInPort` linked to the force-feedback feature (configured via [AInMode](../../../02-keywords/05-inputs-outputs/02-analog-inputs/AInMode.md)). It is the measured quantity that the force loop drives toward [ForceRef](ForceRef.md), with the difference reported as [ForceErr](ForceErr.md).
+
+## Examples
+
+```text
+Force?              ; read the force feedback
+```
+
+## See also
+
+- [ForceRef](ForceRef.md) — force reference the loop tracks
+- [ForceErr](ForceErr.md) — ForceRef minus Force
+- [AInMode](../../../02-keywords/05-inputs-outputs/02-analog-inputs/AInMode.md) — configures the analog force-feedback input

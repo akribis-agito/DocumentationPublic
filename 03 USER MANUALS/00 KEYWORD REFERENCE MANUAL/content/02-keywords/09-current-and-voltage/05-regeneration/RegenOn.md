@@ -1,5 +1,6 @@
 ---
 keyword: RegenOn
+summary: DC bus-voltage threshold (mV) above which the regeneration resistor is activated.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # RegenOn
 
-**Definition:**
+DC bus-voltage threshold (mV) above which the regeneration resistor is activated.
 
-RegenOn sets the DC bus voltage threshold above which the regeneration (braking resistor) circuit is activated. When the bus voltage rises above this level during deceleration, the controller switches on the regen resistor to dissipate excess energy. It is a non-axis parameter saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`RegenOn` sets the DC bus-voltage threshold above which the regeneration (braking-resistor) circuit is activated. When the bus voltage [VBus](../01-system-variables/VBus.md) rises above this level during deceleration, the controller switches on the regen resistor to dissipate the excess energy. Setting `RegenOn` higher than [RegenOff](RegenOff.md) provides hysteresis to prevent rapid switching. It is saved to flash and can be changed at any time.
 
-[RegenOff](RegenOff.md), [RegenCurr](RegenCurr.md), [RegenUsed](RegenUsed.md)
+## Examples
+
+```text
+RegenOn=80000       ; activate regen above 80 V (mV)
+```
+
+## See also
+
+- [RegenOff](RegenOff.md) — deactivation threshold (provides hysteresis)
+- [RegenCurr](RegenCurr.md) — measured regen-resistor current
+- [RegenUsed](RegenUsed.md) — external vs internal regen resistor
+- [VBus](../01-system-variables/VBus.md) — bus voltage compared against this threshold

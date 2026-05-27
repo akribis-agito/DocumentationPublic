@@ -1,5 +1,6 @@
 ---
 keyword: ProgEventGEn
+summary: Global enable for servicing all user program events.
 availability:
   standalone:
   - v4
@@ -26,13 +27,21 @@ overrides: {}
 ---
 # ProgEventGEn
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Global enable for servicing all user program events.
 
-Globally enables ("1") or disables ("0") the servicing of all events. ProgEventGEn, when "0", does
+## Overview
 
-not disable the sensing of events, and events are still sensed and possibly pending, to be serviced
+`ProgEventGEn` globally enables (`1`) or disables (`0`) the servicing of all user program events. Unlike [ProgEventEn](ProgEventEn.md), setting `ProgEventGEn` to `0` does not disable the *sensing* of events: events are still sensed and may become pending, to be serviced once servicing is re-enabled. Use it to suspend and resume event handling as a whole without losing pending triggers. It is a non-axis scalar parameter and is not saved to flash.
 
-when enabled.
+## Examples
 
-Please refer to the User Program Language Manual for more information.
+```text
+ProgEventGEn=0      ; suspend servicing of all events (events still sensed)
+ProgEventGEn=1      ; resume servicing; pending events are then handled
+```
+
+## See also
+
+- [ProgEventEn](ProgEventEn.md) — per-event enable/disable
+- [ProgEventStat](ProgEventStat.md) — per-event state
+- [ProgEventOn](ProgEventOn.md) — event-handling enable

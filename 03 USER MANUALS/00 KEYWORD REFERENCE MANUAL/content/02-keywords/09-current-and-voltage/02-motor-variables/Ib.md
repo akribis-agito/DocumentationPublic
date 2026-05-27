@@ -1,5 +1,6 @@
 ---
 keyword: Ib
+summary: Read-only measured phase B current, in milliamperes.
 availability:
   standalone:
   - v4
@@ -26,6 +27,21 @@ overrides: {}
 ---
 # Ib
 
-**Definition:**
+Read-only measured phase B current, in milliamperes.
 
-Ib reports the measured current of phase B, in milliamperes. Phase B is according to the connection scheme defined in the hardware reference guide.
+## Overview
+
+`Ib` reports the measured current of phase B, in milliamperes. Phase B is defined by the connection scheme in the hardware reference guide. It is the feedback counterpart of the phase B reference [IbRef](IbRef.md); their difference is the phase B current error [IbErr](IbErr.md).
+
+## Examples
+
+```text
+Ib?                 ; read measured phase B current (mA)
+```
+
+## See also
+
+- [IbRef](IbRef.md) — phase B current reference
+- [IbErr](IbErr.md) — phase B current error (IbRef − Ib)
+- [Ia](Ia.md) — measured phase A current
+- [MotorCurr](MotorCurr.md) — total feedback current amplitude

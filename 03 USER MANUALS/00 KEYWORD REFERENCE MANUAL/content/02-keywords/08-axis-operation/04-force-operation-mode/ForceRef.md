@@ -1,5 +1,6 @@
 ---
 keyword: ForceRef
+summary: Filtered force reference used in the force control loop.
 availability:
   standalone:
   - v4
@@ -26,8 +27,22 @@ overrides: {}
 ---
 # ForceRef
 
-**Definition:**
+Filtered force reference used in the force control loop.
 
-ForceRef is the filtered force reference used in the force control loop. It follows the source defined by [ForceCmdSrc](../../../02-keywords/08-axis-operation/04-force-operation-mode/ForceCmdSrc.md) (analog input or ForceCmdVal table).
+## Overview
+
+`ForceRef` is the filtered force reference used in the force control loop. It follows the source defined by [ForceCmdSrc](ForceCmdSrc.md) (analog input or the [ForceCmdVal](ForceCmdVal.md) table). The force loop drives the feedback [Force](Force.md) toward this reference, with the difference reported as [ForceErr](ForceErr.md).
 
 Please refer to [Control tuning – Force control](../../../02-keywords/06-protections/04-force-control/00-overview.md) for more information on the filter.
+
+## Examples
+
+```text
+ForceRef?           ; read the filtered force reference
+```
+
+## See also
+
+- [ForceCmdSrc](ForceCmdSrc.md) — selects the reference source
+- [Force](Force.md) — force feedback the loop tracks
+- [ForceErr](ForceErr.md) — ForceRef minus Force

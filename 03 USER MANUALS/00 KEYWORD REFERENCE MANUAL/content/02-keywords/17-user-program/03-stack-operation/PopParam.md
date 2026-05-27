@@ -1,5 +1,6 @@
 ---
 keyword: PopParam
+summary: Pops the top value of the numeric stack into a parameter.
 availability:
   standalone:
   - v4
@@ -26,11 +27,21 @@ overrides: {}
 ---
 # PopParam
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Pops the top value of the numeric stack into a parameter.
 
-PopParam is a user program low level language keyword. It will pop the last ("top") value in the
-numeric stack of the current thread and assign it to the requested parameter. The parameter to
-be assigned is indicated by using its complex CAN code.
-Normally, the user does not need to be concerned with generating the code since the user
-program IDE environment on the PC Suite will automatically generate it during compilation.
+## Overview
+
+`PopParam` is a low-level user-program keyword. It pops the last ("top") value from the numeric stack of the current thread and assigns it to the requested parameter, which is identified by its complex CAN code. It is the inverse of [PushParam](PushParam.md), which pushes a parameter value onto the stack, and is typically used to store the result of a [Math](../02-program-execution/Math.md) operation back into a parameter. Normally the user does not generate the CAN code by hand — the PC Suite user-program IDE produces it automatically during compilation. It is a non-axis command and is not saved to flash.
+
+## Examples
+
+```text
+; Store the top stack value into a parameter (CAN code emitted by the compiler)
+PopParam=<complex CAN code of target parameter>
+```
+
+## See also
+
+- [PushParam](PushParam.md) — push a parameter value onto the numeric stack
+- [PushConstant](PushConstant.md) — push a constant onto the numeric stack
+- [Math](../02-program-execution/Math.md) — operate on values on the numeric stack

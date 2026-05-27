@@ -1,5 +1,6 @@
 ---
 keyword: RegenOff
+summary: DC bus-voltage threshold (mV) below which the regeneration resistor is deactivated.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # RegenOff
 
-**Definition:**
+DC bus-voltage threshold (mV) below which the regeneration resistor is deactivated.
 
-RegenOff sets the DC bus voltage threshold below which the regeneration circuit is deactivated. Once the bus voltage drops below this level the controller switches off the regen resistor. Setting RegenOff lower than RegenOn provides hysteresis to prevent rapid switching. It is a non-axis parameter saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`RegenOff` sets the DC bus-voltage threshold below which the regeneration circuit is deactivated. Once the bus voltage [VBus](../01-system-variables/VBus.md) drops below this level, the controller switches off the regen resistor. Setting `RegenOff` lower than [RegenOn](RegenOn.md) provides hysteresis to prevent rapid switching. It is saved to flash and can be changed at any time.
 
-[RegenOn](RegenOn.md), [RegenCurr](RegenCurr.md), [RegenUsed](RegenUsed.md)
+## Examples
+
+```text
+RegenOff=75000      ; deactivate regen below 75 V (mV)
+```
+
+## See also
+
+- [RegenOn](RegenOn.md) — activation threshold (provides hysteresis)
+- [RegenCurr](RegenCurr.md) — measured regen-resistor current
+- [RegenUsed](RegenUsed.md) — external vs internal regen resistor
+- [VBus](../01-system-variables/VBus.md) — bus voltage compared against this threshold

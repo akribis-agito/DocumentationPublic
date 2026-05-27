@@ -1,5 +1,6 @@
 ---
 keyword: GoToForceMode
+summary: Command to gracefully enter force operation mode.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # GoToForceMode
 
-**Definition:**
+Command to gracefully enter force operation mode.
 
-GoToForceMode command instructs the controller to enter force operation mode a graceful manner. The preparations include halting motion, clearing counters, variable initialisation, etc.
+## Overview
 
-**Note:**
+`GoToForceMode` instructs the controller to enter force operation mode in a graceful manner. The preparation includes halting motion, clearing counters (such as [ForceCmdCntr](ForceCmdCntr.md) and [ForceCmdIndex](ForceCmdIndex.md)), and variable initialisation. For other ways to enter force mode, see [OperationMode](../01-general-keywords/OperationMode.md).
 
-GoToForceMode cannot be used if axis is in current operation mode (OperationMode = 0).
+> **Note:** `GoToForceMode` cannot be used while the axis is in current operation mode ([OperationMode](../01-general-keywords/OperationMode.md) = 1).
+
+## Examples
+
+```text
+GoToForceMode       ; gracefully switch to force operation mode
+```
+
+## See also
+
+- [OperationMode](../01-general-keywords/OperationMode.md) — the active control mode
+- [ForceCmdSrc](ForceCmdSrc.md) — source of the force reference once in mode
+- [Force operation mode](00-overview.md) — overview of force-mode behavior

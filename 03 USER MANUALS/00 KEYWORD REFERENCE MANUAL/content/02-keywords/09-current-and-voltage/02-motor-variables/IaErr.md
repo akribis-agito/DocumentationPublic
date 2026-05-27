@@ -1,5 +1,6 @@
 ---
 keyword: IaErr
+summary: Read-only phase A current error (IaRef − Ia), in milliamperes.
 availability:
   standalone:
   - v4
@@ -26,12 +27,26 @@ overrides: {}
 ---
 # IaErr
 
-**Definition:**
+Read-only phase A current error (IaRef − Ia), in milliamperes.
 
-IaErr is the calculated current error of phase A, in milliamperes, defined as shown.
+## Overview
+
+`IaErr` is the calculated phase A current error, in milliamperes — the difference between the phase A reference [IaRef](IaRef.md) and the measured phase A current [Ia](Ia.md). It is used in single-phase motor current control, three-phase abc-domain current control and stepper phase current control.
+
+## How it works
 
 $$
 IaErr\ \lbrack mA\rbrack\  = \ IaRef\ \lbrack mA\rbrack\  - \ Ia\ \lbrack mA\rbrack
 $$
 
-It is used in single-phase motor current control, three-phase motor abc-domain current control and stepper phase current control.
+## Examples
+
+```text
+IaErr?              ; read phase A current error (mA)
+```
+
+## See also
+
+- [IaRef](IaRef.md) — phase A current reference
+- [Ia](Ia.md) — measured phase A current
+- [IbErr](IbErr.md) — phase B current error

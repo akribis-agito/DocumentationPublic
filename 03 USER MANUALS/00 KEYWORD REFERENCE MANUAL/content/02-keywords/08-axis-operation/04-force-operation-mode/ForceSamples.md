@@ -1,5 +1,6 @@
 ---
 keyword: ForceSamples
+summary: Timings of the last completed ForceCmdVal application, in controller cycles.
 availability:
   standalone:
   - v4
@@ -26,15 +27,15 @@ overrides: {}
 ---
 # ForceSamples
 
-**Condition:**
+Timings of the last completed ForceCmdVal application, in controller cycles.
 
-This keyword is only applicable when [ForceCmdSrc](../../../02-keywords/08-axis-operation/04-force-operation-mode/ForceCmdSrc.md) = 1 or 2.
+## Overview
 
-**Definition:**
+`ForceSamples` reports the timings of the last completed [ForceCmdVal](ForceCmdVal.md) application. It is applicable only when [ForceCmdSrc](ForceCmdSrc.md) = 1 or 2. The unit is the number of controller cycles (typically 1 cycle equals $T_{s} = \frac{1}{16384}Hz = 61.03515\mu s$). The settling timings derive from [ForceInTTol](ForceInTTol.md) and [ForceInTTime](ForceInTTime.md).
 
-ForceSamples reports the timings of the last completed ForceCmdVal application. The unit is in number of controller cycles (typically 1 cycle equals to $T_{s} = \frac{1}{16384}Hz = 61.03515\mu s$).
+## How it works
 
-Each array element represents different times, as shown.
+Each array element represents a different time, as shown.
 
 | Index | Descriptions |
 |----|----|
@@ -52,3 +53,16 @@ $$
 $$
 ForceSamples\lbrack 3\rbrack = \ ForceSamples\lbrack 2\rbrack + \frac{ForceInTTol}{T_{s}}\ 
 $$
+
+## Examples
+
+```text
+ForceSamples[1]?    ; move time, in controller cycles
+ForceSamples[3]?    ; move + settle + in-target time
+```
+
+## See also
+
+- [ForceInTStat](ForceInTStat.md) — in-target status
+- [ForceInTTol](ForceInTTol.md) — settling window
+- [ForceInTTime](ForceInTTime.md) — required dwell time within the window

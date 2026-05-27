@@ -1,5 +1,6 @@
 ---
 keyword: Vq
+summary: Read-only quadrature-axis PI-controller output in dq0-domain current control (three-phase only).
 availability:
   standalone:
   - v4
@@ -26,12 +27,24 @@ overrides: {}
 ---
 # Vq
 
-**Condition:**
+Read-only quadrature-axis PI-controller output in dq0-domain current control (three-phase only).
 
-Vq is only applicable for three-phase motor (MotorType = 3 or 4). Otherwise, Vq is 0.
+## Overview
 
-**Definition:**
+`Vq` is the output of the quadrature (q) axis PI controller in dq0-domain current control, in internal units. It is only applicable for three-phase motors ([MotorType](../../02-motor-and-amplifier/MotorType.md) = 3 or 4); otherwise `Vq` is 0. `Vq` is also 0 if abc-domain current control is used (see [ControlMode](ControlMode.md)). It is the quadrature-axis counterpart of [Vd](Vd.md).
 
-Vq is the output of PI controller of the quadrature axis in dq0-domain current control, in terms of internal unit. Vq is 0 if abc-domain current control is used. Please refer to [ControlMode](../../../02-keywords/09-current-and-voltage/02-motor-variables/ControlMode.md) for more information.
+## How it works
 
-For dq0-domain current control, Vd and Vq will form phase voltage commands (Va, Vb, Vc) by inverse Park transform.
+For dq0-domain current control, [Vd](Vd.md) and `Vq` form the phase voltage commands ([Va](Va.md), [Vb](Vb.md), [Vc](Vc.md)) by the inverse Park transform.
+
+## Examples
+
+```text
+Vq?                 ; read quadrature-axis PI output
+```
+
+## See also
+
+- [Vd](Vd.md) — direct-axis PI-controller output
+- [Va](Va.md), [Vb](Vb.md), [Vc](Vc.md) — phase voltage commands formed from Vd/Vq
+- [ControlMode](ControlMode.md) — selects dq0 vs abc control domain

@@ -1,5 +1,6 @@
 ---
 keyword: VLogic
+summary: Read-only 5 V logic-supply voltage; outside 4500–5500 mV disables the motor.
 availability:
   standalone:
   - v4
@@ -26,6 +27,27 @@ overrides: {}
 ---
 # VLogic
 
-**Definition:**
+Read-only 5 V logic-supply voltage; outside 4500–5500 mV disables the motor.
 
-VLogic reports the 5V logic voltage measurement in millivolts, and has internal protection. Motor is disabled if VLogic is not in the range of \[4500, 5500\] mV.
+## Overview
+
+`VLogic` reports the 5 V logic-supply voltage measurement, in millivolts. It is a read-only status value with built-in protection: if `VLogic` falls outside the range [4500, 5500] mV, the motor is disabled. It complements the bus-voltage reading [VBus](VBus.md) and the per-rail logic measurements in [DCDC](DCDC.md).
+
+## How it works
+
+The motor is disabled whenever `VLogic` is not within the range:
+
+$$
+4500\ \text{mV} \le VLogic \le 5500\ \text{mV}
+$$
+
+## Examples
+
+```text
+VLogic?             ; read the present 5 V logic voltage (mV)
+```
+
+## See also
+
+- [DCDC](DCDC.md) — per-rail internal logic-voltage measurements
+- [VBus](VBus.md) — amplifier DC bus voltage reading

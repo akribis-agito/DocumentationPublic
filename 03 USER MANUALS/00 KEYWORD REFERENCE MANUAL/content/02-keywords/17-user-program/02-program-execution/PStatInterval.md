@@ -1,5 +1,6 @@
 ---
 keyword: PStatInterval
+summary: Time between successive parameter-statistics transmissions, in milliseconds.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # PStatInterval
 
-**Definition:**
+Time between successive parameter-statistics transmissions, in milliseconds.
 
-PStatInterval sets the time interval in milliseconds between successive parameter statistics transmissions when PStatOn is active. It is a non-axis parameter saved to flash.
+## Overview
 
-**See also:**
+`PStatInterval` sets the time interval, in milliseconds, between successive parameter-statistics transmissions while streaming is enabled by [PStatOn](PStatOn.md). The valid range is `2`–`10000` ms (default `1000`). It governs how often the parameters listed in [PStatParams](PStatParams.md) are sampled and sent over the port chosen by [PStatPort](PStatPort.md). It is a non-axis parameter and is saved to flash.
 
-[PStatOn](PStatOn.md), [PStatPort](PStatPort.md), [PStatParams](PStatParams.md)
+## Examples
+
+```text
+PStatInterval=500   ; transmit parameter statistics every 500 ms
+```
+
+## See also
+
+- [PStatOn](PStatOn.md) — enable/disable periodic statistics streaming
+- [PStatPort](PStatPort.md) — communication port used for streaming
+- [PStatParams](PStatParams.md) — parameters included in each transmission

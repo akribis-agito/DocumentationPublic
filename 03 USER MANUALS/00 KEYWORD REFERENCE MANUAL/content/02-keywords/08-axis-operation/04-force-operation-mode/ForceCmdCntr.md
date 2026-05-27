@@ -1,5 +1,6 @@
 ---
 keyword: ForceCmdCntr
+summary: Time elapsed in force mode or in the active ForceCmdVal entry.
 availability:
   standalone:
   - v4
@@ -26,24 +27,28 @@ overrides: {}
 ---
 # ForceCmdCntr
 
-**Definition:**
+Time elapsed in force mode or in the active ForceCmdVal entry.
 
-ForceCmdCntr is the time elapsed, in milliseconds,
+## Overview
 
-1.  (if ForceCmdSrc = 0) under force operation mode.
+`ForceCmdCntr` is the time elapsed, in milliseconds, that drives the timing-table logic of force operation mode. Its meaning depends on [ForceCmdSrc](ForceCmdSrc.md):
 
-2.  (if ForceCmdSrc = 1 or 2) under the existing ForceCmdVal array entry. This value will reset to 0 upon switching to the next ForceCmdVal entry.
+1. If `ForceCmdSrc` = 0 (analog input): time elapsed under force operation mode.
+2. If `ForceCmdSrc` = 1 or 2 (user-defined table): time elapsed under the existing [ForceCmdVal](ForceCmdVal.md) array entry. This resets to 0 when switching to the next `ForceCmdVal` entry.
 
-ForceCmdCntr will reset to 0 only
+`ForceCmdCntr` resets to 0 upon receipt of the [GoToForceMode](GoToForceMode.md) command, upon automatic condition switching, or upon a digital input switching to force operation mode. This means that when [OperationMode](../01-general-keywords/OperationMode.md) is assigned directly, the user can preset it to any initial value and start the timer from there.
 
-1.  upon receipt of GoToForceMode command,
+> **Note:** The user can overwrite `ForceCmdCntr` at any time while in force operation mode.
 
-2.  upon automatic condition switching, or
+## Examples
 
-3.  upon digital input for switching to force operation mode.
+```text
+ForceCmdCntr?       ; read elapsed time (ms)
+ForceCmdCntr=0      ; restart the timer
+```
 
-This means if OperationMode is directly assigned, user can configure it to any initial value beforehand and begin the timer from such value.
+## See also
 
-**Note:**
-
-User can overwrite ForceCmdCntr at any time under force operation mode.
+- [ForceCmdHTime](ForceCmdHTime.md) — holding time compared against this counter
+- [ForceCmdIndex](ForceCmdIndex.md) — active table entry
+- [GoToForceMode](GoToForceMode.md) — resets this counter on entry

@@ -1,5 +1,6 @@
 ---
 keyword: CurrCmdSlope
+summary: Ramp rate (mA/s) toward each current-command table entry.
 availability:
   standalone:
   - v4
@@ -26,26 +27,22 @@ overrides: {}
 ---
 # CurrCmdSlope
 
-**Condition:**
+Ramp rate (mA/s) toward each current-command table entry.
 
-This keyword is only applicable when CurrCmdSrc = 1 or 2.
+## Overview
 
-**Definition:**
+`CurrCmdSlope` defines the slope for the transition from the starting `CurrRef` value to the active [CurrCmdVal](CurrCmdVal.md) entry, in milliamperes per second. It is applicable only when [CurrCmdSrc](CurrCmdSrc.md) = 1 or 2. The holding timer [CurrCmdCntr](CurrCmdCntr.md) only begins counting from 0 once the ramp completes.
 
-CurrCmdSlope defines the slope for transition from the starting CurrRef value to the existing CurrCmdVal array entry. It is in terms of milliampere per second. Only after the ramping, the timer CurrCmdCntr will begin from 0.
+## Examples
 
-**Example:**
+```text
+CurrCmdSlope[3]=700 ; ramp into entry 3 at 700 mA/s
+```
 
-If
+Worked example — if `CurrCmdIndex` = 2, `CurrCmdCntr` = `CurrCmdHTime[2]` (end of the current entry), `CurrRef` = `CurrCmdVal[2]` = 340, `CurrCmdVal[3]` = -500, and `CurrCmdSlope[3]` = 700, then the ramp from 340 mA to -500 mA starts and completes in 1.2 seconds.
 
-- CurrCmdIndex = 2
+## See also
 
-- CurrCmdCntr = CurrCmdHTime\[2\] (end of current entry)
-
-- CurrRef = CurrCmdVal\[2\] = 340
-
-- CurrCmdVal\[3\] = -500
-
-- CurrCmdSlope\[3\] = 700,
-
-the ramping from 340mA to -500mA will start and be completed in 1.2 seconds.
+- [CurrCmdVal](CurrCmdVal.md) — target current values
+- [CurrCmdHTime](CurrCmdHTime.md) — holding times per entry
+- [CurrCmdCntr](CurrCmdCntr.md) — timer that starts after the ramp

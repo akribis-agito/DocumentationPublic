@@ -1,5 +1,6 @@
 ---
 keyword: Lm
+summary: Motor inductance measurement, in micro-Henry (updated by PCSuite).
 availability:
   standalone:
   - v4
@@ -26,6 +27,20 @@ overrides: {}
 ---
 # Lm
 
-**Definition:**
+Motor inductance measurement, in micro-Henry (updated by PCSuite).
 
-Lm records the inductance measurement in terms of micro-Henry. PCSuite will update this value after measurement.
+## Overview
+
+`Lm` records the motor inductance measurement, in micro-Henry. PCSuite updates this value after running its resistance-and-inductance measurement. Whether the value represents phase or line-to-line data is set by [RLType](RLType.md). It is the inductance counterpart of the resistance measurement [Rm](Rm.md).
+
+## Examples
+
+```text
+Lm?                 ; read measured motor inductance (µH)
+Lm=1200             ; set the inductance value manually (µH)
+```
+
+## See also
+
+- [Rm](Rm.md) — measured motor resistance
+- [RLType](RLType.md) — selects phase vs line-to-line measurement

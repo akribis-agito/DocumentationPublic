@@ -1,5 +1,6 @@
 ---
 keyword: ModeSwitchPos
+summary: Records the position when the axis enters or exits position mode.
 availability:
   standalone:
   - v4
@@ -26,11 +27,27 @@ overrides: {}
 ---
 # ModeSwitchPos
 
-**Definition:**
+Records the position when the axis enters or exits position mode.
 
-ModeSwitchPos records the position value (Pos) when axis exits or enters position operation mode. The array element will only change upon the transition.
+## Overview
+
+`ModeSwitchPos` records the position value (`Pos`) at the moment the axis enters or exits position operation mode. Each array element changes only at the corresponding transition, so the values persist between transitions. It is recorded automatically on entry via [GoToPosMode](GoToPosMode.md) or the internal switching algorithm.
+
+## How it works
 
 | Index | Descriptions                                      |
 |-------|---------------------------------------------------|
 | 1     | Position when axis enters position operation mode |
 | 2     | Position when axis exits position operation mode  |
+
+## Examples
+
+```text
+ModeSwitchPos[1]?   ; position recorded when entering position mode
+ModeSwitchPos[2]?   ; position recorded when exiting position mode
+```
+
+## See also
+
+- [GoToPosMode](GoToPosMode.md) — records the entry position
+- [OperationMode](../01-general-keywords/OperationMode.md) — the active control mode

@@ -1,5 +1,6 @@
 ---
 keyword: ProgErase
+summary: Erases the stored user program from controller memory.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # ProgErase
 
-**Definition:**
+Erases the stored user program from controller memory.
 
-ProgErase is a command that erases the stored user program from controller memory. It cannot be executed while the axis is in motion or with the motor on. It is a non-axis command and is not saved to flash.
+## Overview
 
-**See also:**
+`ProgErase` is a command that erases the stored user program from controller memory. It is the inverse of downloading a program with [DownloadUPBin](DownloadUPBin.md). Because it removes the running program, it cannot be executed while the axis is in motion or with the motor on; stop and reset tasks first (see [ProgResetAll](ProgResetAll.md)). It is a non-axis command and is not saved to flash.
 
-[DownloadUPBin](DownloadUPBin.md), [ProgReset](ProgReset.md)
+## Examples
+
+```text
+ProgErase           ; erase the stored user program (motor off, not in motion)
+```
+
+## See also
+
+- [DownloadUPBin](DownloadUPBin.md) — download a compiled user program to the controller
+- [ProgReset](ProgReset.md) — reset a task to its initial state
+- [ProgResetAll](ProgResetAll.md) — stop all threads and reset pointers and stacks

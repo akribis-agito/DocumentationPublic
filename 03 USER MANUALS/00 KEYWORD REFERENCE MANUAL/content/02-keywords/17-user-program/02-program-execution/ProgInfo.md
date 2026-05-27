@@ -1,5 +1,6 @@
 ---
 keyword: ProgInfo
+summary: Reports the information strings embedded in the loaded user program.
 availability:
   standalone:
   - v4
@@ -26,8 +27,20 @@ overrides: {}
 ---
 # ProgInfo
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Reports the information strings embedded in the loaded user program.
 
-Inquires the list of information strings that are included with the user program: CRC value, Date,
-CUP File name and the text information (see the "#information" compiler directive)
+## Overview
+
+`ProgInfo` inquires the list of information strings included with the loaded user program: the CRC value, the date, the CUP file name, and the free-text information supplied through the `#information` compiler directive. It is used to identify which program is currently resident on the controller (compare with [ProgErase](ProgErase.md) and [DownloadUPBin](DownloadUPBin.md), which remove and load programs). It is a non-axis status command and is not saved to flash.
+
+## Examples
+
+```text
+ProgInfo?           ; report CRC, date, CUP file name and #information text
+```
+
+## See also
+
+- [DownloadUPBin](DownloadUPBin.md) — download a compiled user program
+- [ProgErase](ProgErase.md) — erase the stored user program
+- [ProgStatAll](ProgStatAll.md) — combined status of all tasks

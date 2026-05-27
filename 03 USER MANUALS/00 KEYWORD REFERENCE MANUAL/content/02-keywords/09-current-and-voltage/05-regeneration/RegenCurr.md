@@ -1,5 +1,6 @@
 ---
 keyword: RegenCurr
+summary: Read-only current flowing through the regeneration resistor.
 availability:
   standalone:
   - v4
@@ -26,10 +27,19 @@ overrides: {}
 ---
 # RegenCurr
 
-**Definition:**
+Read-only current flowing through the regeneration resistor.
 
-RegenCurr is a read-only parameter that reports the current flowing through the regeneration resistor. It allows monitoring of the power being dissipated by the regen circuit during braking. It is a non-axis status variable that is not saved to flash.
+## Overview
 
-**See also:**
+`RegenCurr` is a read-only status value that reports the current flowing through the regeneration resistor. It lets you monitor the power being dissipated by the regen circuit during braking, when the bus voltage rises above [RegenOn](RegenOn.md). It is not saved to flash.
 
-[RegenOn](RegenOn.md), [RegenOff](RegenOff.md), [RegenUsed](RegenUsed.md)
+## Examples
+
+```text
+RegenCurr?          ; read the present regen-resistor current
+```
+
+## See also
+
+- [RegenOn](RegenOn.md), [RegenOff](RegenOff.md) — regen activation/deactivation thresholds
+- [RegenUsed](RegenUsed.md) — external vs internal regen resistor

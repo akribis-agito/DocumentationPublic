@@ -1,5 +1,6 @@
 ---
 keyword: Id
+summary: Read-only direct-axis feedback current after Park transform (three-phase only), in milliamperes.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # Id
 
-**Condition:**
+Read-only direct-axis feedback current after Park transform (three-phase only), in milliamperes.
 
-Id is only applicable for three-phase motor (MotorType = 3 or 4). Otherwise, Id is 0.
+## Overview
 
-**Definition:**
+`Id` is the feedback current in the direct (d) axis after the Park transform, in milliamperes. It is only applicable for three-phase motors ([MotorType](../../02-motor-and-amplifier/MotorType.md) = 3 or 4); otherwise `Id` is 0. It is the direct-axis counterpart of [Iq](Iq.md) and is regulated against its reference [IdRef](IdRef.md) in dq0-domain current control, producing the error [IdErr](IdErr.md).
 
-Id is the feedback current after Park transform in the direct axis, in milliamperes.
+## Examples
+
+```text
+Id?                 ; read direct-axis feedback current (mA)
+```
+
+## See also
+
+- [IdRef](IdRef.md) — direct-axis current reference
+- [IdErr](IdErr.md) — direct-axis current error
+- [Iq](Iq.md) — quadrature-axis feedback current

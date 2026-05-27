@@ -1,5 +1,6 @@
 ---
 keyword: CurrCurrThDir
+summary: Trigger direction for the CurrCurrTh current-reference check.
 availability:
   standalone:
   - v4
@@ -26,12 +27,27 @@ overrides: {}
 ---
 # CurrCurrThDir
 
-**Condition:**
+Trigger direction for the CurrCurrTh current-reference check.
 
-It is used only while axis is in velocity or position operation mode (OperationMode = 2 or 3).
+## Overview
 
-**Definition:**
+`CurrCurrThDir` defines the trigger direction for the second condition check (current reference, `CurrRef`) used to enter current operation mode, together with the threshold [CurrCurrTh](CurrCurrTh.md). It is used only while the axis is in velocity or position operation mode ([OperationMode](../01-general-keywords/OperationMode.md) = 2 or 3).
 
-CurrCurrThDir defines the trigger direction for the second condition check (CurrRef) to enter current operation mode.
+## How it works
 
-See [CurrCurrTh](../../../02-keywords/08-axis-operation/03-current-operation-mode/CurrCurrTh.md) and [Current operation mode](../../../02-keywords/08-axis-operation/03-current-operation-mode/00-overview.md) for more information.
+| CurrCurrThDir | Descriptions                                            |
+|---------------|---------------------------------------------------------|
+| 0             | Second condition is fulfilled if `CurrRef` > `CurrCurrTh`. |
+| 1             | Second condition is fulfilled if `CurrRef` < `CurrCurrTh`. |
+
+## Examples
+
+```text
+CurrCurrThDir=1     ; trigger when CurrRef falls below CurrCurrTh
+CurrCurrTh=-2000    ; threshold (mA)
+```
+
+## See also
+
+- [CurrCurrTh](CurrCurrTh.md) — the current-reference threshold
+- [Current operation mode](00-overview.md) — full mode-switching conditions

@@ -1,5 +1,6 @@
 ---
 keyword: DownloadUPBin
+summary: Command that transfers a compiled user-program binary image into controller program memory.
 availability:
   standalone:
   - v4
@@ -26,10 +27,23 @@ overrides: {}
 ---
 # DownloadUPBin
 
-**Definition:**
+Command that transfers a compiled user-program binary image into controller program memory.
 
-DownloadUPBin is a command that transfers a compiled user program binary image into the controller's program memory. It cannot be executed while the axis is in motion or with the motor on. It is a non-axis command and is not saved to flash.
+## Overview
 
-**See also:**
+`DownloadUPBin` transfers a compiled user-program binary image into the controller's program memory, loading the program that the controller will subsequently execute. It is a non-axis command and is not saved to flash. Because it rewrites program memory, it cannot run while the axis is in motion or while the motor is on (`ok_in_motion: false`, `ok_motor_on: false`); stop motion and disable the motor first.
 
-[ProgErase](ProgErase.md), [ProgReset](ProgReset.md), [ProgStatAll](ProgStatAll.md)
+A typical workflow is to erase any existing program with [ProgErase](ProgErase.md), download the new image with `DownloadUPBin`, then reset the program state with [ProgReset](ProgReset.md) before running it.
+
+## Examples
+
+```text
+; Issue with the motor off and no motion in progress
+DownloadUPBin       ; transfer the compiled user-program binary into program memory
+```
+
+## See also
+
+- [ProgErase](ProgErase.md) — erase the current user program
+- [ProgReset](ProgReset.md) — reset user-program state
+- [ProgStatAll](ProgStatAll.md) — status of all user-program threads

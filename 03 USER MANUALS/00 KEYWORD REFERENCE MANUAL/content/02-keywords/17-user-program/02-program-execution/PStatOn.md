@@ -1,5 +1,6 @@
 ---
 keyword: PStatOn
+summary: Enables or disables periodic parameter-statistics streaming.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # PStatOn
 
-**Definition:**
+Enables or disables periodic parameter-statistics streaming.
 
-PStatOn enables or disables the periodic parameter statistics streaming feature. When set to a non-zero value, the controller transmits the parameters listed in PStatParams over the port configured by PStatPort at the interval set by PStatInterval. It is a non-axis parameter and is not saved to flash.
+## Overview
 
-**See also:**
+`PStatOn` enables or disables the periodic parameter-statistics streaming feature. When set to `1`, the controller transmits the parameters listed in [PStatParams](PStatParams.md) over the port configured by [PStatPort](PStatPort.md), at the interval set by [PStatInterval](PStatInterval.md). It is the master switch for the whole `PStat` group. It is a non-axis parameter and is not saved to flash.
 
-[PStatParams](PStatParams.md), [PStatPort](PStatPort.md), [PStatInterval](PStatInterval.md)
+## Examples
+
+```text
+PStatOn=1           ; start periodic statistics streaming
+PStatOn=0           ; stop streaming
+```
+
+## See also
+
+- [PStatParams](PStatParams.md) — parameters included in each transmission
+- [PStatPort](PStatPort.md) — communication port used for streaming
+- [PStatInterval](PStatInterval.md) — interval between transmissions

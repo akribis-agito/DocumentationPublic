@@ -1,5 +1,6 @@
 ---
 keyword: ForceErr
+summary: Difference between force reference and force feedback.
 availability:
   standalone:
   - v4
@@ -26,12 +27,26 @@ overrides: {}
 ---
 # ForceErr
 
-**Definition:**
+Difference between force reference and force feedback.
 
-ForceErr is the difference between force reference (ForceRef) and force feedback (Force).
+## Overview
+
+`ForceErr` is the difference between the force reference ([ForceRef](ForceRef.md)) and the force feedback ([Force](Force.md)). It is the error signal driven by the force control loop.
+
+## How it works
 
 $$
 ForceErr\ \lbrack unit\rbrack\  = \ ForceRef\ \lbrack unit\rbrack\  - \ Force\ \lbrack unit\rbrack
 $$
 
-It is used in force control loop.
+## Examples
+
+```text
+ForceErr?           ; read the current force error
+```
+
+## See also
+
+- [ForceRef](ForceRef.md) — force reference (minuend)
+- [Force](Force.md) — force feedback (subtrahend)
+- [ForceInTTol](ForceInTTol.md) — settling window applied to this error

@@ -1,5 +1,6 @@
 ---
 keyword: Rm
+summary: Motor resistance measurement, in milliohms (updated by PCSuite).
 availability:
   standalone:
   - v4
@@ -26,6 +27,20 @@ overrides: {}
 ---
 # Rm
 
-**Definition:**
+Motor resistance measurement, in milliohms (updated by PCSuite).
 
-Rm records the resistance measurement in terms of milliohm. PCSuite will update this value after measurement.
+## Overview
+
+`Rm` records the motor resistance measurement, in milliohms. PCSuite updates this value after running its resistance-and-inductance measurement. Whether the value represents phase or line-to-line data is set by [RLType](RLType.md). It is the resistance counterpart of the inductance measurement [Lm](Lm.md).
+
+## Examples
+
+```text
+Rm?                 ; read measured motor resistance (mΩ)
+Rm=1500             ; set the resistance value manually (mΩ)
+```
+
+## See also
+
+- [Lm](Lm.md) — measured motor inductance
+- [RLType](RLType.md) — selects phase vs line-to-line measurement

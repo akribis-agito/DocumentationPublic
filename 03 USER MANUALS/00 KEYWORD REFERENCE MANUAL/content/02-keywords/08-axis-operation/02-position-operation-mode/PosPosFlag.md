@@ -1,5 +1,6 @@
 ---
 keyword: PosPosFlag
+summary: Trigger direction for the position-feedback check to enter position mode.
 availability:
   standalone:
   - v4
@@ -26,12 +27,29 @@ overrides: {}
 ---
 # PosPosFlag
 
-**Condition:**
+Trigger direction for the position-feedback check to enter position mode.
 
-It is used only while axis is in current or force operation mode (OperationMode = 1 or 4).
+## Overview
 
-**Definition:**
+`PosPosFlag` defines the trigger direction for the position feedback check (`Pos`) used to switch into position operation mode. It is used only while the axis is in current or force operation mode ([OperationMode](../01-general-keywords/OperationMode.md) = 1 or 4), together with the threshold [PosPosTh](PosPosTh.md). Once the feedback check is fulfilled, `PosPosFlag` is cleared to 0, so the user must reconfigure its value for the next switch.
 
-PosPosFlag defines the trigger direction for the position feedback check (Pos) to enter position operation mode. If position feedback check is fulfilled, PosPosFlag is cleared to 0. User needs to reconfigure its value for next switch.
+## How it works
 
-See [PosPosTh](../../../02-keywords/08-axis-operation/02-position-operation-mode/PosPosTh.md), [Current operation mode](../../../02-keywords/08-axis-operation/03-current-operation-mode/00-overview.md) and [Force operation mode](../../../02-keywords/08-axis-operation/04-force-operation-mode/00-overview.md) for more information.
+| PosPosFlag | Descriptions |
+|---|---|
+| 0 | Axis remains in the existing current or force operation mode. |
+| 1 | Axis switches to position operation mode if `Pos` < `PosPosTh`. |
+| 2 | Axis switches to position operation mode if `Pos` > `PosPosTh`. |
+
+## Examples
+
+```text
+PosPosTh=100000     ; position threshold
+PosPosFlag=2        ; switch to position mode when Pos > PosPosTh
+```
+
+## See also
+
+- [PosPosTh](PosPosTh.md) — position threshold compared against Pos
+- [Current operation mode](../03-current-operation-mode/00-overview.md) — switching from current mode
+- [Force operation mode](../04-force-operation-mode/00-overview.md) — switching from force mode

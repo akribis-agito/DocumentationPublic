@@ -1,5 +1,6 @@
 ---
 keyword: PosPosTh
+summary: Position-feedback threshold used with PosPosFlag to enter position mode.
 availability:
   standalone:
   - v4
@@ -26,18 +27,31 @@ overrides: {}
 ---
 # PosPosTh
 
-**Condition:**
+Position-feedback threshold used with PosPosFlag to enter position mode.
 
-It is used only while axis is in current or force operation mode (OperationMode = 1 or 4).
+## Overview
 
-**Definition:**
+`PosPosTh` is the threshold position feedback (`Pos`) used together with [PosPosFlag](PosPosFlag.md) in the condition check to enter position operation mode. It is used only while the axis is in current or force operation mode ([OperationMode](../01-general-keywords/OperationMode.md) = 1 or 4).
 
-PosPosTh is the threshold position feedback (Pos) used together with PosPosFlag in the condition check to enter position operation mode.
+## How it works
+
+The comparison direction is selected by [PosPosFlag](PosPosFlag.md):
 
 | PosPosFlag | Descriptions                                                  |
 |------------|---------------------------------------------------------------|
-| 0          | Axis retains in the existing current or force operation mode. |
-| 1          | Axis switches to position operation mode if Pos \< PosPosTh.  |
-| 2          | Axis switches to position operation mode if Pos \> PosPosTh   |
+| 0          | Axis remains in the existing current or force operation mode. |
+| 1          | Axis switches to position operation mode if `Pos` < `PosPosTh`. |
+| 2          | Axis switches to position operation mode if `Pos` > `PosPosTh`. |
 
-See [Current operation mode](../../../02-keywords/08-axis-operation/03-current-operation-mode/00-overview.md) and [Force operation mode](../../../02-keywords/08-axis-operation/04-force-operation-mode/00-overview.md) for more information.
+## Examples
+
+```text
+PosPosTh=100000     ; position threshold (user units)
+PosPosFlag=1        ; switch when Pos < PosPosTh
+```
+
+## See also
+
+- [PosPosFlag](PosPosFlag.md) — selects the comparison direction
+- [Current operation mode](../03-current-operation-mode/00-overview.md) — switching from current mode
+- [Force operation mode](../04-force-operation-mode/00-overview.md) — switching from force mode

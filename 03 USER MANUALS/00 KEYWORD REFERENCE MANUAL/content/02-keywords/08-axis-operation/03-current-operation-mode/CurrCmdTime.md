@@ -1,6 +1,17 @@
+---
+summary: Command time for each current command, in milliseconds.
+---
 # CurrCmdTime
 
-<!-- Imported from the 2021 PDF reference. Verify against current firmware
-     behavior and update with the latest semantics. -->
+Command time for each current command, in milliseconds.
 
-Command time for each current command. The unit is milliseconds.
+## Overview
+
+`CurrCmdTime` is the command time for each current command, in milliseconds.
+
+> **Documentation pending:** This entry was imported from the 2021 PDF reference and has not been verified against current firmware. It is not listed in the [Current operation mode](00-overview.md) keyword table, where per-entry holding time is documented as [CurrCmdHTime](CurrCmdHTime.md). Verify the current keyword name and semantics before relying on this page.
+
+## See also
+
+- [CurrCmdHTime](CurrCmdHTime.md) — documented holding time per current-command entry
+- [Current operation mode](00-overview.md) — overview of current-mode keywords

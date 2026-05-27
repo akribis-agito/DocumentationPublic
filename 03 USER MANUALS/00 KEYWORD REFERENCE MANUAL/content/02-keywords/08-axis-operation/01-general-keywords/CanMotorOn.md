@@ -1,5 +1,6 @@
 ---
 keyword: CanMotorOn
+summary: Command that attempts to enable the motor after running pre-checks.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # CanMotorOn
 
-**Definition:**
+Command that attempts to enable the motor after running pre-checks.
 
-CanMotorOn is a command function that attempts to enable the motor on the axis. It performs the necessary pre-checks and, if all conditions are met, transitions the axis to the motor-on state. The result of the enable attempt can be read from CanMotorOnRes. It is an axis-related command and can be issued at any time.
+## Overview
 
-**See also:**
+`CanMotorOn` is a command function that attempts to enable the motor on the axis. It performs the necessary pre-checks and, if all conditions are met, transitions the axis to the motor-on state. It is an axis-related command and can be issued at any time.
 
-[CanMotorOnRes](CanMotorOnRes.md), [MotorOn](MotorOn.md)
+Unlike writing directly to [MotorOn](MotorOn.md), this command reports why an enable attempt was rejected: the result of the last attempt can be read from [CanMotorOnRes](CanMotorOnRes.md).
+
+## Examples
+
+```text
+CanMotorOn          ; attempt to enable the motor
+CanMotorOnRes?      ; read the result of the attempt
+```
+
+## See also
+
+- [CanMotorOnRes](CanMotorOnRes.md) — result code of the last enable attempt
+- [MotorOn](MotorOn.md) — enable/disable state of the motor

@@ -1,5 +1,6 @@
 ---
 keyword: PStatPort
+summary: Selects the communication port used for parameter-statistics streaming.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # PStatPort
 
-**Definition:**
+Selects the communication port used for parameter-statistics streaming.
 
-PStatPort selects the communication port over which the parameter statistics data is transmitted when PStatOn is active. It is a non-axis parameter saved to flash.
+## Overview
 
-**See also:**
+`PStatPort` selects the communication port over which parameter-statistics data is transmitted while streaming is enabled by [PStatOn](PStatOn.md). The valid range is `1`–`3`. It works with [PStatParams](PStatParams.md) (what is sent) and [PStatInterval](PStatInterval.md) (how often). It is a non-axis parameter and is saved to flash.
 
-[PStatOn](PStatOn.md), [PStatParams](PStatParams.md), [PStatInterval](PStatInterval.md)
+## Examples
+
+```text
+PStatPort=1         ; stream statistics over port 1 (range 1-3)
+```
+
+## See also
+
+- [PStatOn](PStatOn.md) — enable/disable periodic statistics streaming
+- [PStatParams](PStatParams.md) — parameters included in each transmission
+- [PStatInterval](PStatInterval.md) — interval between transmissions

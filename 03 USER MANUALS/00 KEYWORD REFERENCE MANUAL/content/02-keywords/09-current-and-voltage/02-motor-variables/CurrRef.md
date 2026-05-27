@@ -1,5 +1,6 @@
 ---
 keyword: CurrRef
+summary: Read-only final motor current command after all loops, compensation and injection.
 availability:
   standalone:
   - v4
@@ -26,8 +27,22 @@ overrides: {}
 ---
 # CurrRef
 
-**Definition:**
+Read-only final motor current command after all loops, compensation and injection.
 
-CurrRef is the current reference value used as input to the current control loop. It is the final current command value for the motor after the sum of control efforts (feedback loops and feedforward), current related compensation and injection, whichever applicable.
+## Overview
 
-Please refer to [Control tuning – Current control](../../../02-keywords/11-control-tuning/06-current-control/00-overview.md) for CurrRef location.
+`CurrRef` is the current reference fed into the current control loop. It is the final motor current command after summing all control efforts (feedback loops and feedforward), plus any current-related compensation and injection that apply. It differs from [CurrRefCtrl](CurrRefCtrl.md), which is the loop-side reference taken *before* the decoupling matrix, current injection and current-related compensation.
+
+See [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md) for where `CurrRef` sits in the signal path.
+
+## Examples
+
+```text
+CurrRef?            ; read the final current command (mA)
+```
+
+## See also
+
+- [CurrRefCtrl](CurrRefCtrl.md) — loop-side current reference before decoupling/compensation
+- [CurrRefOffset](../03-current-compensation/CurrRefOffset.md) — offset added on top of the motor current reference
+- [IaRef](IaRef.md), [IbRef](IbRef.md) — per-phase references derived from the current command

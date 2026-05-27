@@ -1,5 +1,6 @@
 ---
 keyword: ForceCmdVal
+summary: Sequence of user-defined force references (units) for force mode.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # ForceCmdVal
 
-**Condition:**
+Sequence of user-defined force references (units) for force mode.
 
-This keyword is only applicable when [ForceCmdSrc](../../../02-keywords/08-axis-operation/04-force-operation-mode/ForceCmdSrc.md) = 1 or 2.
+## Overview
 
-**Definition:**
+`ForceCmdVal` defines a sequence of user-defined force references, in units, applied in force operation mode. It is applicable only when [ForceCmdSrc](ForceCmdSrc.md) = 1 or 2, and each value is paired with a holding time from [ForceCmdHTime](ForceCmdHTime.md). The active entry is selected by [ForceCmdIndex](ForceCmdIndex.md), and transitions between entries can be ramped with [ForceCmdSlope](ForceCmdSlope.md).
 
-ForceCmdVal defines a sequence of user-defined force references to be used, in terms of units. It is used in pair with holding time (ForceCmdHTime).
+## Examples
+
+```text
+ForceCmdVal[1]=340  ; first force reference (units)
+ForceCmdVal[2]=-260 ; second force reference (units)
+```
+
+## See also
+
+- [ForceCmdHTime](ForceCmdHTime.md) — holding time paired with each value
+- [ForceCmdIndex](ForceCmdIndex.md) — active table entry
+- [ForceCmdSlope](ForceCmdSlope.md) — ramp rate between entries
+- [ForceCmdSrc](ForceCmdSrc.md) — selects this table as the source

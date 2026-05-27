@@ -1,5 +1,6 @@
 ---
 keyword: IbErr
+summary: Read-only phase B current error (IbRef − Ib), in milliamperes.
 availability:
   standalone:
   - v4
@@ -26,12 +27,26 @@ overrides: {}
 ---
 # IbErr
 
-**Definition:**
+Read-only phase B current error (IbRef − Ib), in milliamperes.
 
-IbErr is the calculated current error of phase B, in milliamperes, defined as shown.
+## Overview
+
+`IbErr` is the calculated phase B current error, in milliamperes — the difference between the phase B reference [IbRef](IbRef.md) and the measured phase B current [Ib](Ib.md). It is used in three-phase abc-domain current control and stepper phase current control.
+
+## How it works
 
 $$
 IbErr\ \lbrack mA\rbrack\  = \ IbRef\ \lbrack mA\rbrack\  - \ Ib\ \lbrack mA\rbrack
 $$
 
-It is used in three-phase motor abc-domain current control and stepper phase current control.
+## Examples
+
+```text
+IbErr?              ; read phase B current error (mA)
+```
+
+## See also
+
+- [IbRef](IbRef.md) — phase B current reference
+- [Ib](Ib.md) — measured phase B current
+- [IaErr](IaErr.md) — phase A current error

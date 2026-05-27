@@ -1,5 +1,6 @@
 ---
 keyword: WaitStatus
+summary: Holds a user program thread until a selected status reaches a required value.
 availability:
   standalone:
   - v4
@@ -26,11 +27,15 @@ overrides: {}
 ---
 # WaitStatus
 
-**Definition:**
+Holds a user program thread until a selected status reaches a required value.
 
-WaitStatus is a user program low level language keyword, used only in user program compilation. It cannot be commanded normally through communication channels.
+## Overview
 
-WaitStatus holds the user program thread until the status that is defined reaches the required value.
+`WaitStatus` is a low-level user-program keyword, used only in user program compilation; it cannot be commanded normally over communication channels. `WaitStatus` holds the user program thread until the selected status reaches the required value. It is the status-driven counterpart of [WaitTime](WaitTime.md), which instead waits for a fixed time. The status to wait on is chosen by the array index, and the required value is the assigned value.
+
+## How it works
+
+The array index selects which status bit or counter the thread waits on:
 
 | StatusType | Description |
 |----|----|
@@ -81,6 +86,12 @@ WaitStatus holds the user program thread until the status that is defined reache
 | 45 | Designated input with DInMode set as “18 – Mode Switch Pos/Curr” |
 | 46 | Designated input with DInMode set as “15 – Add Velocity Filter” |
 
-**Example:**
+## Examples
 
-AWaitStatus\[17\],1 can be used to hold the user program until the axis reaches and settles in the target position, before proceeding to the next line.
+```text
+AWaitStatus[17],1   ; hold until the axis reaches and settles in target (StatReg In Target bit = 1)
+```
+
+## See also
+
+- [WaitTime](WaitTime.md) — hold a task for a fixed time instead of a status

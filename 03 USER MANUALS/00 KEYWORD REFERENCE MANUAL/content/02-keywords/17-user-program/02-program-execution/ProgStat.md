@@ -1,5 +1,6 @@
 ---
 keyword: ProgStat
+summary: Reports the running status of a specified user program thread.
 availability:
   standalone:
   - v4
@@ -26,10 +27,28 @@ overrides: {}
 ---
 # ProgStat
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Reports the running status of a specified user program thread.
 
-Inquires the status of the specified program thread:
-         -1: No user program in the controller
-         0: Not running
-         1: Running
+## Overview
+
+`ProgStat` is a read-only array parameter, indexed by thread, that reports the running status of a user program thread. It is the per-thread complement of [ProgStatAll](ProgStatAll.md) (combined status of all tasks) and is used alongside [ProgError](ProgError.md) when diagnosing why a thread stopped. It is a non-axis status variable and is not saved to flash.
+
+## How it works
+
+| Value | Meaning |
+|----|----|
+| -1 | No user program in the controller |
+| 0 | Not running |
+| 1 | Running |
+
+## Examples
+
+```text
+ProgStat[1]?        ; 1 if thread 1 is running, 0 if stopped, -1 if no program
+```
+
+## See also
+
+- [ProgStatAll](ProgStatAll.md) — combined status of all tasks
+- [ProgError](ProgError.md) — last interpreter error per thread
+- [ProgRun](ProgRun.md) — run a task as a thread

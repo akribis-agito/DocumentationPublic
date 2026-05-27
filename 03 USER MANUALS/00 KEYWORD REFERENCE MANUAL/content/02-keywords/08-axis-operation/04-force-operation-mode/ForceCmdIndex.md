@@ -1,5 +1,6 @@
 ---
 keyword: ForceCmdIndex
+summary: Index of the active ForceCmdVal / ForceCmdHTime table entry.
 availability:
   standalone:
   - v4
@@ -26,24 +27,25 @@ overrides: {}
 ---
 # ForceCmdIndex
 
-**Condition:**
+Index of the active ForceCmdVal / ForceCmdHTime table entry.
 
-This keyword is only applicable when ForceCmdSrc = 1 or 2.
+## Overview
 
-**Definition:**
+`ForceCmdIndex` is the index of the [ForceCmdVal](ForceCmdVal.md) and [ForceCmdHTime](ForceCmdHTime.md) values currently in use. It is applicable only when [ForceCmdSrc](ForceCmdSrc.md) = 1 or 2 (user-defined table).
 
-ForceCmdIndex is the index of existing ForceCmdVal and ForceCmdHTime values in use.
+`ForceCmdIndex` resets to 1 upon receipt of the [GoToForceMode](GoToForceMode.md) command, upon automatic condition switching, or upon a digital input switching to force operation mode. This means that when [OperationMode](../01-general-keywords/OperationMode.md) is assigned directly, the user can preset it so the reference table starts from the desired `ForceCmdVal`/`ForceCmdHTime` pair.
 
-ForceCmdIndex will reset to 1 only
+> **Note:** The user can overwrite `ForceCmdIndex` at any time while in force operation mode. This causes an immediate switch of the `ForceCmdVal` in use, without resetting the [ForceCmdCntr](ForceCmdCntr.md) timer.
 
-1.  upon receipt of GoToForceMode command,
+## Examples
 
-2.  upon automatic condition switching, or
+```text
+ForceCmdIndex?      ; read the active table entry
+ForceCmdIndex=3     ; jump to the third entry
+```
 
-3.  upon digital input for switching to force operation mode.
+## See also
 
-This means if OperationMode is directly assigned, user can configure it to any initial value so that the reference table starts from desired ForceCmdVal and ForceCmdHTime pair.
-
-%%
-Note DN: User can overwrite ForceCmdIndex at any time under force operation mode. This will cause sudden switch of ForceCmdVal in use, without reset of ForceCmdCntr timer.
-%%
+- [ForceCmdVal](ForceCmdVal.md) — table of force values
+- [ForceCmdHTime](ForceCmdHTime.md) — holding times per entry
+- [ForceCmdCntr](ForceCmdCntr.md) — timer for the active entry

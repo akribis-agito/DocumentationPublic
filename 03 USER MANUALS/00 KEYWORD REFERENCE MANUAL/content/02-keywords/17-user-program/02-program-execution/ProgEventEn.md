@@ -1,5 +1,6 @@
 ---
 keyword: ProgEventEn
+summary: Enables or disables handling of an individual user program event.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # ProgEventEn
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Enables or disables handling of an individual user program event.
 
-Activate ("1") or disables ("0") the handling of user program events. When disabled ("0") all
-pending events are cleared and events are not handled/processed at all. This includes also the
-sensing of events.
-Please refer to the User Program Language Manual for more information.
+## Overview
+
+`ProgEventEn` enables (`1`) or disables (`0`) the handling of a specific user program event. When an event is disabled, any pending occurrence of it is cleared and the event is not processed at all, including the sensing of the event. This is the per-event control; [ProgEventGEn](ProgEventGEn.md) is the global switch that gates all events at once. The trigger for each event is defined by [ProgEventPar](ProgEventPar.md), [ProgEventType](ProgEventType.md), [ProgEventVal](ProgEventVal.md), and [ProgEventMask](ProgEventMask.md). It is a non-axis array parameter (one element per event) and is not saved to flash.
+
+## Examples
+
+```text
+ProgEventEn[1]=1    ; enable handling of event 1
+ProgEventEn[1]=0    ; disable event 1 and clear any pending occurrence
+```
+
+## See also
+
+- [ProgEventGEn](ProgEventGEn.md) — global enable for all events
+- [ProgEventStat](ProgEventStat.md) — per-event state (waiting / pending / in service)
+- [ProgEventPar](ProgEventPar.md) — parameter that triggers the event

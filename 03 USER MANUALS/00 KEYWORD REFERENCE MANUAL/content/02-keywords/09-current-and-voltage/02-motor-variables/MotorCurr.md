@@ -1,5 +1,6 @@
 ---
 keyword: MotorCurr
+summary: Read-only total feedback current vector amplitude of the motor, in milliamperes.
 availability:
   standalone:
   - v4
@@ -26,21 +27,28 @@ overrides: {}
 ---
 # MotorCurr
 
-**Definition:**
+Read-only total feedback current vector amplitude of the motor, in milliamperes.
 
-MotorCurr is the total feedback current vector amplitude of motor, in milliamperes.
+## Overview
 
-| Motor type | Descriptions |
+`MotorCurr` is the total feedback current vector amplitude of the motor, in milliamperes. It combines the measured phase/axis currents into a single magnitude whose formula depends on [MotorType](../../02-motor-and-amplifier/MotorType.md). It provides a single value for monitoring the overall current the motor is drawing.
+
+## How it works
+
+| Motor type | Formula |
 |----|----|
-| Single-phase motor (MotorType = 1 or 2) | 
-$$
-MotorCurr\ \lbrack mA\rbrack\  = \ Ia\ \lbrack mA\rbrack
-$$ |
-| Three-phase motor (MotorType = 3 or 4) | 
-$$
-MotorCurr\ \lbrack mA\rbrack\  = \ sign(Iq) \bullet \sqrt{{Iq}^{2} + {Id}^{2}}\ \lbrack mA\rbrack
-$$ |
-| Two-phase stepper motor (MotorType = 6 or 7) | 
-$$
-MotorCurr\ \lbrack mA\rbrack\  = \ \sqrt{{Ia}^{2} + {Ib}^{2}}\ \lbrack mA\rbrack
-$$ |
+| Single-phase motor (MotorType = 1 or 2) | $MotorCurr\ \lbrack mA\rbrack\ = \ Ia\ \lbrack mA\rbrack$ |
+| Three-phase motor (MotorType = 3 or 4) | $MotorCurr\ \lbrack mA\rbrack\ = \ sign(Iq) \bullet \sqrt{{Iq}^{2} + {Id}^{2}}\ \lbrack mA\rbrack$ |
+| Two-phase stepper motor (MotorType = 6 or 7) | $MotorCurr\ \lbrack mA\rbrack\ = \ \sqrt{{Ia}^{2} + {Ib}^{2}}\ \lbrack mA\rbrack$ |
+
+## Examples
+
+```text
+MotorCurr?          ; read total feedback current amplitude (mA)
+```
+
+## See also
+
+- [Ia](Ia.md), [Ib](Ib.md) — measured phase currents
+- [Iq](Iq.md), [Id](Id.md) — measured dq-axis currents
+- [MotorType](../../02-motor-and-amplifier/MotorType.md) — motor type that determines the formula

@@ -1,5 +1,6 @@
 ---
 keyword: PushParam
+summary: Pushes a parameter's value onto the numeric stack of the current thread.
 availability:
   standalone:
   - v4
@@ -26,11 +27,21 @@ overrides: {}
 ---
 # PushParam
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Pushes a parameter's value onto the numeric stack of the current thread.
 
-PushParam is a user program low level language keyword. It is used to push the value of a
-parameter into the numeric stack of the current user program thread. The parameter to be
-pushed is indicated by using its complex CAN code.
-Normally, the user does not need to be concerned with generating the code since the user
-program IDE environment on the PC Suite will automatically generate it during compilation.
+## Overview
+
+`PushParam` is a low-level user-program keyword used to push the value of a parameter onto the numeric stack of the current user program thread. The parameter is identified by its complex CAN code. It is the parameter-valued counterpart of [PushConstant](PushConstant.md) and the inverse of [PopParam](PopParam.md); pushed values are typically consumed by a [Math](../02-program-execution/Math.md) operation. Normally the user does not generate the CAN code by hand — the PC Suite user-program IDE produces it automatically during compilation. It is a non-axis command and is not saved to flash.
+
+## Examples
+
+```text
+; Push a parameter's value onto the stack (CAN code emitted by the compiler)
+PushParam=<complex CAN code of source parameter>
+```
+
+## See also
+
+- [PushConstant](PushConstant.md) — push a constant onto the numeric stack
+- [PopParam](PopParam.md) — pop the top stack value into a parameter
+- [Math](../02-program-execution/Math.md) — operate on values on the numeric stack

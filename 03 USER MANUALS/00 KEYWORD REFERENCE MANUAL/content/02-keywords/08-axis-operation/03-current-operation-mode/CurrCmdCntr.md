@@ -1,5 +1,6 @@
 ---
 keyword: CurrCmdCntr
+summary: Time elapsed in current mode or in the active CurrCmdVal entry.
 availability:
   standalone:
   - v4
@@ -26,24 +27,28 @@ overrides: {}
 ---
 # CurrCmdCntr
 
-**Definition:**
+Time elapsed in current mode or in the active CurrCmdVal entry.
 
-CurrCmdCntr is the time elapsed, in milliseconds,
+## Overview
 
-1.  (if CurrCmdSrc = 0 or 3) under current operation mode.
+`CurrCmdCntr` is the time elapsed, in milliseconds, that drives the timing-table logic of current operation mode. Its meaning depends on [CurrCmdSrc](CurrCmdSrc.md):
 
-2.  (if CurrCmdSrc = 1 or 2) under the existing CurrCmdVal array entry. This value will reset to 0 upon switching to the next CurrCmdVal entry.
+1. If `CurrCmdSrc` = 0 or 3 (analog input or slave drive): time elapsed under current operation mode.
+2. If `CurrCmdSrc` = 1 or 2 (user-defined table): time elapsed under the existing [CurrCmdVal](CurrCmdVal.md) array entry. This resets to 0 when switching to the next `CurrCmdVal` entry.
 
-CurrCmdCntr will reset to 0
+`CurrCmdCntr` resets to 0 upon receipt of the [GoToCurrMode](GoToCurrMode.md) command, upon automatic condition switching, or upon a digital input switching to current operation mode. This means that when [OperationMode](../01-general-keywords/OperationMode.md) is assigned directly, the user can preset it to any initial value and start the timer from there.
 
-1.  upon receipt of GoToCurrMode command,
+> **Note:** The user can overwrite `CurrCmdCntr` at any time while in current operation mode.
 
-2.  upon automatic condition switching, or
+## Examples
 
-3.  upon digital input for switching to current operation mode.
+```text
+CurrCmdCntr?        ; read elapsed time (ms)
+CurrCmdCntr=0       ; restart the timer
+```
 
-This means if OperationMode is directly assigned, user can configure it to any initial value beforehand and begin the timer from such value.
+## See also
 
-**Note:**
-
-User can overwrite CurrCmdCntr at any time under current operation mode.
+- [CurrCmdHTime](CurrCmdHTime.md) — holding time compared against this counter
+- [CurrCmdIndex](CurrCmdIndex.md) — active table entry
+- [GoToCurrMode](GoToCurrMode.md) — resets this counter on entry

@@ -1,5 +1,6 @@
 ---
 keyword: VBus
+summary: Read-only amplifier DC bus voltage measurement, in millivolts.
 availability:
   standalone:
   - v4
@@ -26,6 +27,21 @@ overrides: {}
 ---
 # VBus
 
-**Definition:**
+Read-only amplifier DC bus voltage measurement, in millivolts.
 
-VBus reports the amplifier bus voltage measurement in millivolts. This value is also used in bus voltage protection.
+## Overview
+
+`VBus` reports the amplifier DC bus voltage measurement, in millivolts. It is a read-only status value that reflects the supply voltage available to the power stage. The same measurement is used by the bus-voltage protection, so a low or high reading here corresponds directly to the limits set by [MinVBus](../../06-protections/02-current-and-voltage/MinVBus.md) and [MaxVBus](../../06-protections/02-current-and-voltage/MaxVBus.md). It is also the bus voltage referenced by the regeneration thresholds [RegenOn](../05-regeneration/RegenOn.md) and [RegenOff](../05-regeneration/RegenOff.md).
+
+## Examples
+
+```text
+VBus?               ; read the present bus voltage (mV)
+```
+
+## See also
+
+- [MaxVBus](../../06-protections/02-current-and-voltage/MaxVBus.md) — maximum bus-voltage protection limit
+- [MinVBus](../../06-protections/02-current-and-voltage/MinVBus.md) — minimum bus-voltage protection limit
+- [VLogic](VLogic.md) — logic-supply voltage reading
+- [DCDC](DCDC.md) — internal logic-rail measurements

@@ -1,5 +1,6 @@
 ---
 keyword: ProgReset
+summary: Resets a user program task to its initial state.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # ProgReset
 
-**Definition:**
+Resets a user program task to its initial state.
 
-ProgReset is a command that resets a user program task, returning it to its initial state. It is an array parameter (indexed by task number) and is a non-axis command not saved to flash.
+## Overview
 
-**See also:**
+`ProgReset` is a command, indexed by task number, that resets a user program task to its initial state. Unlike [ProgHalt](ProgHalt.md), which merely suspends a thread so it can resume, resetting clears its progress so a subsequent [ProgRun](ProgRun.md) starts from the beginning. To reset every thread and clear all pointers and stacks at once, use [ProgResetAll](ProgResetAll.md). It is a non-axis command and is not saved to flash.
 
-[ProgHaltThis](ProgHaltThis.md), [ProgBreakThis](ProgBreakThis.md), [ProgStatAll](ProgStatAll.md)
+## Examples
+
+```text
+AProgReset[1]       ; reset task 1 to its initial state
+```
+
+## See also
+
+- [ProgResetAll](ProgResetAll.md) — stop all threads and reset pointers and stacks
+- [ProgHaltThis](ProgHaltThis.md) — halt the running task
+- [ProgBreakThis](ProgBreakThis.md) — set a breakpoint on the running task
+- [ProgStatAll](ProgStatAll.md) — combined status of all tasks

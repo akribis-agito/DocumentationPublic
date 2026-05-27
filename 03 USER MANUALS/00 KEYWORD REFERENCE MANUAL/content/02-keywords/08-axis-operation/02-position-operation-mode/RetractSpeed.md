@@ -1,5 +1,6 @@
 ---
 keyword: RetractSpeed
+summary: Maximum velocity of the point-to-point move on entry to position mode.
 availability:
   standalone:
   - v4
@@ -26,6 +27,22 @@ overrides: {}
 ---
 # RetractSpeed
 
-**Definition:**
+Maximum velocity of the point-to-point move on entry to position mode.
 
-RetractSpeed is the maximum velocity used in the point-to-point motion upon entry to position operation mode, subject to BeginOnToPos flag.
+## Overview
+
+`RetractSpeed` is the maximum velocity used in the point-to-point motion that runs upon entry to position operation mode. The move runs only when the [BeginOnToPos](BeginOnToPos.md) flag is set, toward the target defined by [RetractTarget](RetractTarget.md).
+
+## Examples
+
+```text
+RetractSpeed=20000  ; entry-move speed (user units)
+RetractTarget=50000 ; entry-move target
+BeginOnToPos=1      ; arm the move
+GoToPosMode         ; switch and start the move
+```
+
+## See also
+
+- [BeginOnToPos](BeginOnToPos.md) — arms the entry move
+- [RetractTarget](RetractTarget.md) — target of the entry move

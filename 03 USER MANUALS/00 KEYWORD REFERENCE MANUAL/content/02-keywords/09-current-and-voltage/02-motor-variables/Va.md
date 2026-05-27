@@ -1,5 +1,6 @@
 ---
 keyword: Va
+summary: Read-only phase A voltage reference for space-vector modulation (PWM-count fraction ×1000).
 availability:
   standalone:
   - v4
@@ -26,6 +27,20 @@ overrides: {}
 ---
 # Va
 
-**Definition:**
+Read-only phase A voltage reference for space-vector modulation (PWM-count fraction ×1000).
 
-Va is the phase A voltage reference for space vector modulation, in terms fraction of full PWM count times a factor of 1000. Phase A is defined in the hardware reference guide.
+## Overview
+
+`Va` is the phase A voltage reference for space-vector modulation (SVM), expressed as a fraction of the full PWM count times a factor of 1000. Phase A is defined in the hardware reference guide. Together with [Vb](Vb.md) and [Vc](Vc.md) it forms the three-phase voltage commands sent to the modulator. In dq0-domain control these are produced from [Vd](Vd.md)/[Vq](Vq.md) by the inverse Park transform; if the current loop is bypassed (see [ControlMode](ControlMode.md) bit 2), `Va` and `Vb` equal [IaRef](IaRef.md) and [IbRef](IbRef.md).
+
+## Examples
+
+```text
+Va?                 ; read phase A SVM voltage reference
+```
+
+## See also
+
+- [Vb](Vb.md), [Vc](Vc.md) — phase B and C voltage references
+- [Vd](Vd.md), [Vq](Vq.md) — dq0 voltage outputs that form Va/Vb/Vc
+- [ControlMode](ControlMode.md) — control-domain and loop-bypass options

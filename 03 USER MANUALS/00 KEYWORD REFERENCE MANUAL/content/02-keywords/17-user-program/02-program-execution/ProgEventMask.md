@@ -1,5 +1,6 @@
 ---
 keyword: ProgEventMask
+summary: Bitwise mask applied to an event's trigger parameter and trigger value.
 availability:
   standalone:
   - v4
@@ -26,9 +27,20 @@ overrides: {}
 ---
 # ProgEventMask
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Bitwise mask applied to an event's trigger parameter and trigger value.
 
-Defines a bitwise mask to apply on the user defined event trigger parameter. The mask is also
+## Overview
 
-applied on the trigger value.
+`ProgEventMask` defines a bitwise mask that is applied to the user-defined event trigger parameter ([ProgEventPar](ProgEventPar.md)) before comparison. The same mask is also applied to the trigger value ([ProgEventVal](ProgEventVal.md)), so only the masked bits participate in the trigger condition selected by [ProgEventType](ProgEventType.md). This makes it possible to trigger an event on specific status bits rather than a whole word. It is a non-axis array parameter (one element per event) and is saved to flash.
+
+## Examples
+
+```text
+ProgEventMask[1]=0x0001   ; only bit 0 of the trigger parameter is tested for event 1
+```
+
+## See also
+
+- [ProgEventPar](ProgEventPar.md) — parameter that triggers the event
+- [ProgEventVal](ProgEventVal.md) — value used for trigger detection
+- [ProgEventType](ProgEventType.md) — trigger type (edge, equal, not equal, …)

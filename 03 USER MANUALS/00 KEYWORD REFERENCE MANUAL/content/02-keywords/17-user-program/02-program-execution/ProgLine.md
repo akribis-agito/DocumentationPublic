@@ -1,14 +1,17 @@
+---
+summary: Reports the current source line number of the executing user program task.
+---
 # ProgLine
 
-**Definition:**
+Reports the current source line number of the executing user program task.
 
-ProgLine reports the current source line number of the executing user program task, derived from debug information embedded in the compiled binary.
+## Overview
 
-%%
-Needs verification
-ProgLine was not found in the AG300_CTL01Params.c firmware parameter table. Confirm availability and parameter attributes before use.
-%%
+`ProgLine` reports the current source line number of the executing user program task, derived from the debug information embedded in the compiled binary. It is a debugging aid that complements [ProgPointer](ProgPointer.md) (the raw instruction pointer) and [ProgStatAll](ProgStatAll.md) (task status), giving a human-readable position in the original source.
 
-**See also:**
+> **Note:** `ProgLine` was not found in the firmware parameter table consulted for this reference. Confirm availability and parameter attributes against the current firmware before relying on it.
 
-[ProgPointer](ProgPointer.md), [ProgStatAll](ProgStatAll.md)
+## See also
+
+- [ProgPointer](ProgPointer.md) — current instruction pointer of each task
+- [ProgStatAll](ProgStatAll.md) — combined status of all tasks

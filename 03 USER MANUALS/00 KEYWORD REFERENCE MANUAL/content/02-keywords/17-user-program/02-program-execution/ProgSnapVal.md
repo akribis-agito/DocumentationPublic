@@ -1,5 +1,6 @@
 ---
 keyword: ProgSnapVal
+summary: Holds the values captured by the program snapshot mechanism.
 availability:
   standalone:
   - v4
@@ -26,10 +27,19 @@ overrides: {}
 ---
 # ProgSnapVal
 
-**Definition:**
+Holds the values captured by the program snapshot mechanism.
 
-ProgSnapVal is a read-only array parameter that holds the values captured by the program snapshot mechanism. Each element contains the last recorded value for the corresponding source defined in ProgSnapSrc. It is a non-axis status variable and is not saved to flash.
+## Overview
 
-**See also:**
+`ProgSnapVal` is a read-only array parameter that holds the values captured by the program snapshot mechanism. Each element contains the last recorded value for the corresponding source defined in [ProgSnapSrc](ProgSnapSrc.md). It is the snapshot counterpart of the fault-snapshot values in [ConFltSnapVal](../../07-status-and-faults/ConFltSnapVal.md). It is a non-axis status variable and is not saved to flash.
 
-[ProgSnapSrc](ProgSnapSrc.md), [ConFltSnapVal](../../07-status-and-faults/ConFltSnapVal.md)
+## Examples
+
+```text
+ProgSnapVal[1]?     ; read the value captured for the first snapshot source
+```
+
+## See also
+
+- [ProgSnapSrc](ProgSnapSrc.md) — snapshot source selection
+- [ConFltSnapVal](../../07-status-and-faults/ConFltSnapVal.md) — fault-snapshot captured values

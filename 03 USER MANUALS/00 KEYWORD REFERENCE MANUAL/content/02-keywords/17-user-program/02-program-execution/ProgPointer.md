@@ -1,5 +1,6 @@
 ---
 keyword: ProgPointer
+summary: Reports the current instruction pointer of each user program task.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # ProgPointer
 
-**Definition:**
+Reports the current instruction pointer of each user program task.
 
-ProgPointer is a read-only array parameter that reports the current instruction pointer (program counter) of each user program task. It is a non-axis status variable and is not saved to flash.
+## Overview
 
-**See also:**
+`ProgPointer` is a read-only array parameter, indexed by task, that reports the current instruction pointer (program counter) of each user program task. A value of `-1` indicates no active position. It is the low-level counterpart of [ProgLine](ProgLine.md), which maps the same position back to a source line number, and is used during debugging together with [ProgBreakThis](ProgBreakThis.md) and [ProgStatAll](ProgStatAll.md). It is a non-axis status variable and is not saved to flash.
 
-[ProgStatAll](ProgStatAll.md), [ProgLine](ProgLine.md), [ProgBreakThis](ProgBreakThis.md)
+## Examples
+
+```text
+ProgPointer[1]?     ; instruction pointer of task 1 (-1 = no active position)
+```
+
+## See also
+
+- [ProgLine](ProgLine.md) — current source line number
+- [ProgStatAll](ProgStatAll.md) — combined status of all tasks
+- [ProgBreakThis](ProgBreakThis.md) — set a breakpoint on the running task

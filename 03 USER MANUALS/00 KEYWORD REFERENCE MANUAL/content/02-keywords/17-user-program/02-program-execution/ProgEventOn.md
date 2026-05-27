@@ -1,5 +1,6 @@
 ---
 keyword: ProgEventOn
+summary: Activates or disables handling of user program events.
 availability:
   standalone:
   - v4
@@ -26,11 +27,21 @@ overrides: {}
 ---
 # ProgEventOn
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Activates or disables handling of user program events.
 
-Activate ("1") or disables ("0") the handling of user program events. When disabled ("0") all
+## Overview
 
-pending events are cleared and events are not handled/processed at all. This includes also the
+`ProgEventOn` activates (`1`) or disables (`0`) the handling of user program events. When disabled, all pending events are cleared and events are not handled or processed at all — this also stops the sensing of events. Whereas [ProgEventGEn](ProgEventGEn.md) suspends servicing while still sensing events, disabling `ProgEventOn` stops sensing entirely; [ProgEventEn](ProgEventEn.md) provides the same on/off control per individual event. It is a non-axis scalar parameter and is not saved to flash.
 
-sensing of events.
+## Examples
+
+```text
+ProgEventOn=1       ; enable event handling
+ProgEventOn=0       ; disable handling and clear all pending events
+```
+
+## See also
+
+- [ProgEventGEn](ProgEventGEn.md) — global enable that keeps sensing active
+- [ProgEventEn](ProgEventEn.md) — per-event enable/disable
+- [ProgEventStat](ProgEventStat.md) — per-event state

@@ -1,5 +1,6 @@
 ---
 keyword: ProgExpStack
+summary: Reads the top value of the numeric (expression) stack without popping it.
 availability:
   standalone:
   - v4
@@ -26,8 +27,20 @@ overrides: {}
 ---
 # ProgExpStack
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Reads the top value of the numeric (expression) stack without popping it.
 
-ProgExpStack is a user program low level language keyword. It is used to read the top number of
-the numeric stack without popping it. This keyword is most useful for debug.
+## Overview
+
+`ProgExpStack` is a low-level user-program keyword used to read the top number of the numeric stack without popping it. It is most useful for debugging, where you want to inspect what an expression has produced without disturbing the stack. Use [ProgExpDepth](ProgExpDepth.md) to find how many values are present and [ProgClrExp](ProgClrExp.md) to clear the stack. It is a non-axis array parameter and is not saved to flash.
+
+## Examples
+
+```text
+ProgExpStack?       ; peek at the top value of the numeric stack (does not pop)
+```
+
+## See also
+
+- [ProgExpDepth](ProgExpDepth.md) — highest occupied location of the numeric stack
+- [ProgClrExp](ProgClrExp.md) — clear the numeric stack
+- [PopParam](../03-stack-operation/PopParam.md) — pop the top stack value into a parameter

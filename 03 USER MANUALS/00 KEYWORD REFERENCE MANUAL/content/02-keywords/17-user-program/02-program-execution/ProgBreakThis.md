@@ -1,5 +1,6 @@
 ---
 keyword: ProgBreakThis
+summary: Sets a breakpoint on the currently executing user program task.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # ProgBreakThis
 
-**Definition:**
+Sets a breakpoint on the currently executing user program task.
 
-ProgBreakThis is a command that sets a breakpoint on the currently executing user program task, suspending its execution at the next program instruction. It is a non-axis command and is not saved to flash.
+## Overview
 
-**See also:**
+`ProgBreakThis` is a command that sets a breakpoint on the currently executing user program task, suspending its execution at the next program instruction. Unlike [ProgHaltThis](ProgHaltThis.md), which stops the task, it is intended for debugging so execution can be inspected and resumed. Use [ProgPointer](ProgPointer.md) to see where each task is suspended. It is a non-axis command and is not saved to flash.
 
-[ProgHaltThis](ProgHaltThis.md), [ProgReset](ProgReset.md), [ProgPointer](ProgPointer.md)
+## Examples
+
+```text
+ProgBreakThis       ; break the currently executing task at the next instruction
+```
+
+## See also
+
+- [ProgHaltThis](ProgHaltThis.md) — halt the running task
+- [ProgReset](ProgReset.md) — reset a task to its initial state
+- [ProgPointer](ProgPointer.md) — current instruction pointer of each task

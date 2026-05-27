@@ -1,5 +1,6 @@
 ---
 keyword: ProgClrExp
+summary: Clears the numeric (expression) stack of the current thread.
 availability:
   standalone:
   - v4
@@ -26,9 +27,20 @@ overrides: {}
 ---
 # ProgClrExp
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Clears the numeric (expression) stack of the current thread.
 
-ProgClrExp is a user program low level language keyword. It is used to clear the numeric stack of
-the current thread. It is recommended to begin new programs by using ProgClrExp.
-Please refer to the User Program Language Manual for more information.
+## Overview
+
+`ProgClrExp` is a low-level user-program keyword that clears the numeric stack of the current thread. It is recommended to begin a new program with `ProgClrExp` so that no stale values left by [PushParam](../03-stack-operation/PushParam.md), [PushConstant](../03-stack-operation/PushConstant.md), or [Math](Math.md) operations remain on the stack. It is the expression-stack counterpart of [ProgClrCall](ProgClrCall.md), which clears the program-call stack. It is a non-axis command and is not saved to flash.
+
+## Examples
+
+```text
+ProgClrExp          ; clear the numeric stack at program start
+```
+
+## See also
+
+- [ProgExpStack](ProgExpStack.md) — read the top of the numeric stack without popping
+- [ProgExpDepth](ProgExpDepth.md) — highest occupied location of the numeric stack
+- [ProgClrCall](ProgClrCall.md) — clear the program-call stack

@@ -1,5 +1,6 @@
 ---
 keyword: Vc
+summary: Read-only phase C voltage reference for space-vector modulation (PWM-count fraction ×1000).
 availability:
   standalone:
   - v4
@@ -26,6 +27,20 @@ overrides: {}
 ---
 # Vc
 
-**Definition:**
+Read-only phase C voltage reference for space-vector modulation (PWM-count fraction ×1000).
 
-Vc is the phase C voltage reference for space vector modulation, in terms fraction of full PWM count times a factor of 1000. Phase C is defined in the hardware reference guide.
+## Overview
+
+`Vc` is the phase C voltage reference for space-vector modulation (SVM), expressed as a fraction of the full PWM count times a factor of 1000. Phase C is defined in the hardware reference guide. Together with [Va](Va.md) and [Vb](Vb.md) it forms the three-phase voltage commands sent to the modulator. In dq0-domain control these are produced from [Vd](Vd.md)/[Vq](Vq.md) by the inverse Park transform.
+
+## Examples
+
+```text
+Vc?                 ; read phase C SVM voltage reference
+```
+
+## See also
+
+- [Va](Va.md), [Vb](Vb.md) — phase A and B voltage references
+- [Vd](Vd.md), [Vq](Vq.md) — dq0 voltage outputs that form Va/Vb/Vc
+- [ControlMode](ControlMode.md) — control-domain and loop-bypass options

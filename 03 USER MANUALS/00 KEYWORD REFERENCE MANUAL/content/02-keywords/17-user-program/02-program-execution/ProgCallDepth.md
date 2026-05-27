@@ -1,5 +1,6 @@
 ---
 keyword: ProgCallDepth
+summary: Reports the free space remaining in a thread's program-call stack.
 availability:
   standalone:
   - v4
@@ -26,9 +27,20 @@ overrides: {}
 ---
 # ProgCallDepth
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Reports the free space remaining in a thread's program-call stack.
 
-Inquires the empty spaces at the program calls stack of the specified thread.
+## Overview
 
-Please refer to the User Program Language Manual for more information.
+`ProgCallDepth` is a read-only array parameter, indexed by thread, that reports the number of empty (free) slots remaining in the program-call stack of the specified thread. It complements [ProgCallStack](ProgCallStack.md), which exposes the call-stack contents, and is useful for diagnosing deeply nested function calls (see [ProgFuncCall](ProgFuncCall.md)). It is a non-axis status variable and is not saved to flash.
+
+## Examples
+
+```text
+ProgCallDepth[1]?   ; free call-stack slots for thread 1
+```
+
+## See also
+
+- [ProgCallStack](ProgCallStack.md) — program-call stack contents per thread
+- [ProgFuncCall](ProgFuncCall.md) — call a user program function
+- [ProgClrCall](ProgClrCall.md) — clear the program-call stack

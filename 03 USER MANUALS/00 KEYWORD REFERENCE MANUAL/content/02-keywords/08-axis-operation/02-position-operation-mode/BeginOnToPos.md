@@ -1,5 +1,6 @@
 ---
 keyword: BeginOnToPos
+summary: One-time flag to run a point-to-point move on entering position mode.
 availability:
   standalone:
   - v4
@@ -26,8 +27,25 @@ overrides: {}
 ---
 # BeginOnToPos
 
-**Definition:**
+One-time flag to run a point-to-point move on entering position mode.
 
-BeginOnToPos is a one-time flag, which if set, will instruct the controller to perform a point-to-point motion upon entering position operation mode. After the motion, BeginOnToPos is cleared.
+## Overview
 
-The target position is defined by RetractTarget or RelTrgt, while velocity is defined by RetractSpeed. This flag only works for GoToPosMode command and internal switching algorithm. It will not work if OperationMode is changed manually.
+`BeginOnToPos` is a one-time flag which, if set, instructs the controller to perform a point-to-point motion upon entering position operation mode. After the motion, `BeginOnToPos` is cleared.
+
+The target position is defined by [RetractTarget](RetractTarget.md) (or [RelTrgt](../../10-motion/13-motion-mode-ptp/RelTrgt.md)) and the velocity by [RetractSpeed](RetractSpeed.md). This flag works only with the [GoToPosMode](GoToPosMode.md) command and the internal switching algorithm; it has no effect when [OperationMode](../01-general-keywords/OperationMode.md) is changed by direct assignment.
+
+## Examples
+
+```text
+RetractTarget=50000 ; target for the entry move
+RetractSpeed=20000  ; speed for the entry move
+BeginOnToPos=1      ; arm the entry move
+GoToPosMode         ; switch to position mode and start the move
+```
+
+## See also
+
+- [GoToPosMode](GoToPosMode.md) — command that triggers the armed move
+- [RetractTarget](RetractTarget.md) — absolute target of the entry move
+- [RetractSpeed](RetractSpeed.md) — speed of the entry move

@@ -1,5 +1,6 @@
 ---
 keyword: RegenUsed
+summary: Selects whether an external or internal regeneration resistor is used.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # RegenUsed
 
-**Definition:**
+Selects whether an external or internal regeneration resistor is used.
 
-RegenUsed selects whether an external or internal regeneration resistor is used by the controller. Setting this parameter configures the regen circuit to match the hardware configuration. It is a non-axis parameter saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+## Overview
 
-**See also:**
+`RegenUsed` selects whether the controller uses an external or internal regeneration resistor, configuring the regen circuit to match the hardware. Because it is a hardware-configuration setting, it cannot be changed while the axis is in motion or the motor is on. It is saved to flash. The thresholds [RegenOn](RegenOn.md)/[RegenOff](RegenOff.md) control when whichever resistor is selected switches in and out.
 
-[RegenOn](RegenOn.md), [RegenOff](RegenOff.md), [RegenCurr](RegenCurr.md)
+## Examples
+
+```text
+RegenUsed=1         ; use the selected regen resistor (default)
+RegenUsed?          ; read the present setting
+```
+
+## See also
+
+- [RegenOn](RegenOn.md), [RegenOff](RegenOff.md) — regen activation/deactivation thresholds
+- [RegenCurr](RegenCurr.md) — measured regen-resistor current

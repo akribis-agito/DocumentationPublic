@@ -1,5 +1,6 @@
 ---
 keyword: CurrCmdIndex
+summary: Index of the active CurrCmdVal / CurrCmdHTime table entry.
 availability:
   standalone:
   - v4
@@ -26,24 +27,25 @@ overrides: {}
 ---
 # CurrCmdIndex
 
-**Condition:**
+Index of the active CurrCmdVal / CurrCmdHTime table entry.
 
-This keyword is only applicable when CurrCmdSrc = 1 or 2.
+## Overview
 
-**Definition:**
+`CurrCmdIndex` is the index of the [CurrCmdVal](CurrCmdVal.md) and [CurrCmdHTime](CurrCmdHTime.md) values currently in use. It is applicable only when [CurrCmdSrc](CurrCmdSrc.md) = 1 or 2 (user-defined table).
 
-CurrCmdIndex is the index of existing CurrCmdVal and CurrCmdHTime values in use.
+`CurrCmdIndex` resets to 1 upon receipt of the [GoToCurrMode](GoToCurrMode.md) command, upon automatic condition switching, or upon a digital input switching to current operation mode. This means that when [OperationMode](../01-general-keywords/OperationMode.md) is assigned directly, the user can preset it so the reference table starts from the desired `CurrCmdVal`/`CurrCmdHTime` pair.
 
-CurrCmdIndex will reset to 1 only
+> **Note:** The user can overwrite `CurrCmdIndex` at any time while in current operation mode. This causes an immediate switch of the `CurrCmdVal` in use, without resetting the [CurrCmdCntr](CurrCmdCntr.md) timer.
 
-1.  upon receipt of GoToCurrMode command,
+## Examples
 
-2.  upon automatic condition switching, or
+```text
+CurrCmdIndex?       ; read the active table entry
+CurrCmdIndex=3      ; jump to the third entry
+```
 
-3.  upon digital input for switching to current operation mode.
+## See also
 
-This means if OperationMode is directly assigned, user can configure it to any initial value so that the reference table starts from desired CurrCmdVal and CurrCmdHTime pair.
-
-%%
-Note DN: User can overwrite CurrCmdIndex at any time under current operation mode. This will cause sudden switch of CurrCmdVal in use, without reset of CurrCmdCntr timer.
-%%
+- [CurrCmdVal](CurrCmdVal.md) — table of current values
+- [CurrCmdHTime](CurrCmdHTime.md) — holding times per entry
+- [CurrCmdCntr](CurrCmdCntr.md) — timer for the active entry

@@ -1,5 +1,6 @@
 ---
 keyword: ForceCmdHTime
+summary: Holding time for each force-command table entry.
 availability:
   standalone:
   - v4
@@ -26,16 +27,32 @@ overrides: {}
 ---
 # ForceCmdHTime
 
-**Definition:**
+Holding time for each force-command table entry.
 
-If ForceCmdSrc is 0 (analog input), only ForceCmdHTime\[1\] is used to define the time to stay within force operation mode.
+## Overview
 
-If ForceCmdSrc is 1 or 2, each ForceCmdHTime array element defines the holding time for the corresponding ForceCmdVal pair.
+`ForceCmdHTime` defines the holding time, in milliseconds, of the force reference in force operation mode. Its use depends on [ForceCmdSrc](ForceCmdSrc.md):
 
-ForceCmdHTime value is defined as shown.
+- If `ForceCmdSrc` = 0 (analog input): only `ForceCmdHTime[1]` is used, defining the time to stay within force operation mode.
+- If `ForceCmdSrc` = 1 or 2 (user-defined table): each array element defines the holding time for the corresponding [ForceCmdVal](ForceCmdVal.md) entry.
+
+## How it works
 
 | Value | Descriptions |
 |---|---|
 | < 0 | Source value is held indefinitely. |
 | 0 | Axis exits force operation mode and enters position operation mode. |
-| > 0 | Source value is held for ForceCmdHTime, before exiting force operation mode (ForceCmdSrc = 0) or proceeding to the next pair (ForceCmdSrc = 1 or 2). For ForceCmdSrc is 1 or 2, if ForceCmdIndex reaches last index value and last ForceCmdHTime entry is more than 0, axis will hold onto the last ForceCmdVal value indefinitely. |
+| > 0 | Source value is held for `ForceCmdHTime`, before exiting force operation mode (`ForceCmdSrc` = 0) or proceeding to the next pair (`ForceCmdSrc` = 1 or 2). For `ForceCmdSrc` = 1 or 2, if [ForceCmdIndex](ForceCmdIndex.md) reaches the last index value and the last `ForceCmdHTime` entry is greater than 0, the axis holds the last `ForceCmdVal` value indefinitely. |
+
+## Examples
+
+```text
+ForceCmdHTime[1]=400 ; hold first entry for 400 ms
+ForceCmdHTime[2]=0   ; exit force mode after the second entry
+```
+
+## See also
+
+- [ForceCmdVal](ForceCmdVal.md) — force values paired with these holding times
+- [ForceCmdIndex](ForceCmdIndex.md) — active table entry
+- [ForceCmdCntr](ForceCmdCntr.md) — elapsed time compared against this value

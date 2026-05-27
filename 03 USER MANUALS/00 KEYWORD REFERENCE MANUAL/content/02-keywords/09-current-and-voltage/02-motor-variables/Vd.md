@@ -1,5 +1,6 @@
 ---
 keyword: Vd
+summary: Read-only direct-axis PI-controller output in dq0-domain current control (three-phase only).
 availability:
   standalone:
   - v4
@@ -26,12 +27,24 @@ overrides: {}
 ---
 # Vd
 
-**Condition:**
+Read-only direct-axis PI-controller output in dq0-domain current control (three-phase only).
 
-Vd is only applicable for three-phase motor (MotorType = 3 or 4). Otherwise, Vd is 0.
+## Overview
 
-**Definition:**
+`Vd` is the output of the direct (d) axis PI controller in dq0-domain current control, in internal units. It is only applicable for three-phase motors ([MotorType](../../02-motor-and-amplifier/MotorType.md) = 3 or 4); otherwise `Vd` is 0. `Vd` is also 0 if abc-domain current control is used (see [ControlMode](ControlMode.md)). It is the direct-axis counterpart of [Vq](Vq.md).
 
-Vd is the output of PI controller of the direct axis in dq0-domain current control, in terms of internal unit. Vd is 0 if abc-domain current control is used. Please refer to [ControlMode](../../../02-keywords/09-current-and-voltage/02-motor-variables/ControlMode.md) for more information.
+## How it works
 
-For dq0-domain current control, Vd and Vq will form phase voltage commands (Va, Vb, Vc) by inverse Park transform.
+For dq0-domain current control, `Vd` and [Vq](Vq.md) form the phase voltage commands ([Va](Va.md), [Vb](Vb.md), [Vc](Vc.md)) by the inverse Park transform.
+
+## Examples
+
+```text
+Vd?                 ; read direct-axis PI output
+```
+
+## See also
+
+- [Vq](Vq.md) — quadrature-axis PI-controller output
+- [Va](Va.md), [Vb](Vb.md), [Vc](Vc.md) — phase voltage commands formed from Vd/Vq
+- [ControlMode](ControlMode.md) — selects dq0 vs abc control domain

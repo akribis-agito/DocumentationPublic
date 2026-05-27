@@ -1,5 +1,6 @@
 ---
 keyword: CurrPosThDir
+summary: Trigger direction for the CurrPosTh position-reference check.
 availability:
   standalone:
   - v4
@@ -26,12 +27,28 @@ overrides: {}
 ---
 # CurrPosThDir
 
-**Condition:**
+Trigger direction for the CurrPosTh position-reference check.
 
-It is used only while axis is in velocity or position operation mode (OperationMode = 2 or 3).
+## Overview
 
-**Definition:**
+`CurrPosThDir` defines the trigger direction for the first condition check (position reference) used to enter current operation mode, together with the threshold [CurrPosTh](CurrPosTh.md). It is used only while the axis is in velocity or position operation mode ([OperationMode](../01-general-keywords/OperationMode.md) = 2 or 3).
 
-CurrPosThDir defines the trigger direction for the first condition check to enter current operation mode.
+## How it works
 
-See [CurrPosTh](../../../02-keywords/08-axis-operation/03-current-operation-mode/CurrPosTh.md) and [Current operation mode](../../../02-keywords/08-axis-operation/03-current-operation-mode/00-overview.md) for more information.
+| CurrPosThDir | Descriptions                                         |
+|--------------|------------------------------------------------------|
+| \< 0         | First condition is fulfilled if `PosRef` < `CurrPosTh`. |
+| 0            | First condition is fulfilled (unconditionally).       |
+| \> 0         | First condition is fulfilled if `PosRef` > `CurrPosTh`. |
+
+## Examples
+
+```text
+CurrPosThDir=-1     ; trigger when PosRef < CurrPosTh
+CurrPosTh=50000     ; position-reference threshold
+```
+
+## See also
+
+- [CurrPosTh](CurrPosTh.md) — the position-reference threshold
+- [Current operation mode](00-overview.md) — full mode-switching conditions

@@ -1,5 +1,6 @@
 ---
 keyword: ProgHalt
+summary: Halts a specified user program thread; it can later be resumed where it stopped.
 availability:
   standalone:
   - v4
@@ -26,9 +27,21 @@ overrides: {}
 ---
 # ProgHalt
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Halts a specified user program thread; it can later be resumed where it stopped.
 
-"ProgHalt[Thread no.]" will halt the thread number. Halting is not the same as resetting the
-program. If ProgRun is entered again for the same thread it will continue from the point it was
-halted in.
+## Overview
+
+`ProgHalt[Thread no.]` halts the specified thread number. Halting is not the same as resetting: if [ProgRun](ProgRun.md) is issued again for the same thread, execution continues from the point where it was halted. To halt every active thread at once use [ProgHaltAll](ProgHaltAll.md), or [ProgHaltThis](ProgHaltThis.md) for the running task. It is also placed at the end of a non-looping program so execution does not run on into the function definitions (see [ProgFunc](ProgFunc.md)). It is a non-axis command and is not saved to flash.
+
+## Examples
+
+```text
+AProgHalt[1]        ; halt thread 1; ProgRun[1] later resumes from this point
+```
+
+## See also
+
+- [ProgRun](ProgRun.md) — run/resume a thread
+- [ProgHaltAll](ProgHaltAll.md) — halt all active threads
+- [ProgHaltThis](ProgHaltThis.md) — halt the running task
+- [ProgReset](ProgReset.md) — reset a task (not the same as halting)

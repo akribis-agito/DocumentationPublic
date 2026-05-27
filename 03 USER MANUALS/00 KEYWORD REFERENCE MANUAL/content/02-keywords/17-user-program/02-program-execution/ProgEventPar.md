@@ -1,5 +1,6 @@
 ---
 keyword: ProgEventPar
+summary: Selects (by complex CAN code) the controller parameter that triggers an event.
 availability:
   standalone:
   - v4
@@ -26,11 +27,20 @@ overrides: {}
 ---
 # ProgEventPar
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Selects (by complex CAN code) the controller parameter that triggers an event.
 
-Defines (using Complex CAN Code) which controller parameter to use for the triggering of this
+## Overview
 
-event. If ProgEventPar[EventNumber] is set to 0 (or to a non-valid Complex CAN code), this event
+`ProgEventPar` defines, using a complex CAN code, which controller parameter is monitored to trigger a given event. If `ProgEventPar[EventNumber]` is set to `0` (or to a non-valid complex CAN code), the event is not sensed and not handled. Together with [ProgEventType](ProgEventType.md), [ProgEventVal](ProgEventVal.md), and [ProgEventMask](ProgEventMask.md), it forms the four-part trigger definition for an event — a structure very similar to a data-recording trigger. It is a non-axis array parameter (one element per event) and is saved to flash.
 
-will not be sensed and will not be handled.
+## Examples
+
+```text
+ProgEventPar[1]=<CAN code of monitored parameter>   ; choose the trigger source for event 1
+```
+
+## See also
+
+- [ProgEventType](ProgEventType.md) — trigger type (edge, equal, not equal, …)
+- [ProgEventVal](ProgEventVal.md) — value used for trigger detection
+- [ProgEventMask](ProgEventMask.md) — bitwise mask applied to the trigger

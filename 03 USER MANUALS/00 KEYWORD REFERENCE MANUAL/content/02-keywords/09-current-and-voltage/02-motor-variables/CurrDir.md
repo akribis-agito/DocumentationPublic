@@ -1,5 +1,6 @@
 ---
 keyword: CurrDir
+summary: Flips the direction of motor excitation (0 = normal, 1 = flipped).
 availability:
   standalone:
   - v4
@@ -26,8 +27,27 @@ overrides: {}
 ---
 # CurrDir
 
-**Definition:**
+Flips the direction of motor excitation (0 = normal, 1 = flipped).
 
-CurrDir configures the direction of the motor excitation. If CurrDir = 0, motor direction is not flipped. If CurrDir = 1, motor direction is flipped.
+## Overview
 
-It is normally used together with EncDir to flip the axis direction to the desired configuration.
+`CurrDir` configures the direction of motor excitation. It is normally used together with the encoder direction setting [EncDir](../../03-encoder/01-general-settings/EncDir-AuxEncDir.md) to flip the axis into the desired physical direction. Because it changes how current is applied to the motor, it cannot be changed while the axis is in motion or the motor is on.
+
+## How it works
+
+| CurrDir | Effect |
+|---------|--------|
+| 0 | Motor direction is not flipped. |
+| 1 | Motor direction is flipped. |
+
+## Examples
+
+```text
+CurrDir=0           ; normal excitation direction
+CurrDir=1           ; flipped excitation direction
+```
+
+## See also
+
+- [EncDir / AuxEncDir](../../03-encoder/01-general-settings/EncDir-AuxEncDir.md) — encoder direction, normally set together with CurrDir
+- [ControlMode](ControlMode.md) — current/voltage control options

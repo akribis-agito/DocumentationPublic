@@ -1,5 +1,6 @@
 ---
 keyword: PushConstant
+summary: Pushes a constant value onto the numeric stack of the current thread.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # PushConstant
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Pushes a constant value onto the numeric stack of the current thread.
 
-PushConstant is a user program low level language keyword. It is used to push the value of a
-constant into the numeric stack of the current user program thread.
-Normally, the user does not need to be concerned with generating the code since the user
-program IDE environment on the PC Suite will automatically generate it during compilation.
+## Overview
+
+`PushConstant` is a low-level user-program keyword used to push the value of a constant onto the numeric stack of the current user program thread. It is the constant-literal counterpart of [PushParam](PushParam.md) (which pushes a parameter value), and the pushed values are typically consumed by a [Math](../02-program-execution/Math.md) operation or stored with [PopParam](PopParam.md). Normally the user does not generate the code by hand — the PC Suite user-program IDE produces it automatically during compilation. It is a non-axis command and is not saved to flash.
+
+## Examples
+
+```text
+PushConstant=5      ; push the constant 5 onto the numeric stack
+```
+
+## See also
+
+- [PushParam](PushParam.md) — push a parameter value onto the numeric stack
+- [PopParam](PopParam.md) — pop the top stack value into a parameter
+- [Math](../02-program-execution/Math.md) — operate on values on the numeric stack

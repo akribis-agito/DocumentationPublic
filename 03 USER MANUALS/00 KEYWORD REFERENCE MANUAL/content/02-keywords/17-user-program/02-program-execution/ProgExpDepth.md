@@ -1,5 +1,6 @@
 ---
 keyword: ProgExpDepth
+summary: Returns the highest occupied location of the numeric (expression) stack.
 availability:
   standalone:
   - v4
@@ -26,9 +27,20 @@ overrides: {}
 ---
 # ProgExpDepth
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Returns the highest occupied location of the numeric (expression) stack.
 
-ProgExpDepth is a user program low level language keyword. ProgExpDepth returns the highest
-full location of the relevant numeric stack. If the stack is empty it will return -1. If there is one
-value in the stack the highest full location is 0, etc...
+## Overview
+
+`ProgExpDepth` is a low-level user-program keyword that returns the highest full location of the relevant numeric stack. An empty stack returns `-1`; with one value on the stack the highest full location is `0`, with two values it is `1`, and so on. It is mainly a debugging aid, complementing [ProgExpStack](ProgExpStack.md) (which reads the top value) and [ProgClrExp](ProgClrExp.md) (which clears the stack). It is a non-axis array parameter and is not saved to flash.
+
+## Examples
+
+```text
+ProgExpDepth?       ; -1 if the numeric stack is empty, 0 if it holds one value
+```
+
+## See also
+
+- [ProgExpStack](ProgExpStack.md) — read the top of the numeric stack without popping
+- [ProgClrExp](ProgClrExp.md) — clear the numeric stack
+- [Math](Math.md) — operate on values on the numeric stack

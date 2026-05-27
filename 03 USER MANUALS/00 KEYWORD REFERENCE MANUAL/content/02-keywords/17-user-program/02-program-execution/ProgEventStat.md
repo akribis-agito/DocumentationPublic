@@ -1,5 +1,6 @@
 ---
 keyword: ProgEventStat
+summary: Reports each event's state and lets a pending event be cleared.
 availability:
   standalone:
   - v4
@@ -26,17 +27,29 @@ overrides: {}
 ---
 # ProgEventStat
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Reports each event's state and lets a pending event be cleared.
 
-Reports the state of this event. "0" for waiting for trigger, "1" for pending for service (triggered)
+## Overview
 
-and "2" for in service. Note that this mean that while a given event is being serviced, it can't not
+`ProgEventStat` reports the state of each user program event. It works with the trigger definition ([ProgEventPar](ProgEventPar.md), [ProgEventType](ProgEventType.md), [ProgEventVal](ProgEventVal.md), [ProgEventMask](ProgEventMask.md)) and the enable controls ([ProgEventEn](ProgEventEn.md), [ProgEventGEn](ProgEventGEn.md)) to show where each event is in its lifecycle. While an event is being serviced it cannot be triggered again until servicing completes — that is, until the event function executes [Return](Return.md). Although the access is read/write, only `0` may be written, which the user can do to clear a pending event. It is a non-axis array parameter (one element per event) and is not saved to flash.
 
-be triggered again, till servicing is completed (returning from the event function using the Return
+## How it works
 
-keyword).
+| Value | State |
+|----|----|
+| 0 | Waiting for trigger |
+| 1 | Pending for service (triggered) |
+| 2 | In service |
 
-This parameter is R/W, so user can clear a pending event ­ only the value of 0 can be written to
+## Examples
 
-this parameter).
+```text
+ProgEventStat[1]?   ; read the state of event 1
+ProgEventStat[1]=0  ; clear a pending occurrence of event 1
+```
+
+## See also
+
+- [ProgEventEn](ProgEventEn.md) — per-event enable/disable
+- [ProgEventGEn](ProgEventGEn.md) — global servicing enable
+- [Return](Return.md) — completes servicing of an event function

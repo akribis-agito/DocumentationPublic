@@ -1,5 +1,6 @@
 ---
 keyword: ProgResetAll
+summary: Stops all running threads and resets every pointer and stack.
 availability:
   standalone:
   - v4
@@ -26,7 +27,20 @@ overrides: {}
 ---
 # ProgResetAll
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Stops all running threads and resets every pointer and stack.
 
-ProgResetAll will stop any running user program threads and reset all the pointers and stacks.
+## Overview
+
+`ProgResetAll` stops any running user program threads and resets all the program pointers and stacks. It is the global form of [ProgReset](ProgReset.md): where `ProgReset` returns a single task to its initial state, `ProgResetAll` clears the entire interpreter state. Compare with [ProgHaltAll](ProgHaltAll.md), which only suspends threads without resetting them. It is a non-axis command and is not saved to flash.
+
+## Examples
+
+```text
+ProgResetAll        ; stop all threads and reset all pointers and stacks
+```
+
+## See also
+
+- [ProgReset](ProgReset.md) — reset a single task
+- [ProgHaltAll](ProgHaltAll.md) — halt all threads without resetting
+- [ProgStatAll](ProgStatAll.md) — combined status of all tasks
