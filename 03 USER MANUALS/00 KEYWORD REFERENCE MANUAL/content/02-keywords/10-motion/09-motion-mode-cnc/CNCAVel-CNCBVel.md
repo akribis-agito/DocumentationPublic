@@ -1,5 +1,5 @@
 ---
-summary: Read-only array reporting the velocity components of the CNC queue A (or B) axes.
+summary: Read-only array reporting the actual resultant path velocity of the CNC group A (or B) members.
 ---
 # CNCAVel/CNCBVel
 
@@ -21,7 +21,7 @@ The array reports:
 | 2 | Instantaneous resultant velocity — square root of the sum of the squares of the member-axis velocities. |
 | 3 | A smoothed resultant velocity — a 32-cycle moving average of index 2. |
 
-Arrays are 1-indexed, so the first valid reading is `CNCAVel[2]`. Use index 2 for the live resultant feed rate and index 3 when a less noisy reading is wanted (for example, for display). Only axes flagged as active members of the group ([MotionStat](../05-motion-status/MotionStat.md) bit 11 for group A, bit 14 for group B) contribute to the sum.
+Arrays are 1-indexed, so the first valid reading is `CNCAVel[2]`. Use index 2 for the live resultant feed rate and index 3 when a less noisy reading is wanted (for example, for display). Only axes flagged as members of the group ([MotionStat](../05-motion-status/MotionStat.md) bit 10 for group A, bit 13 for group B) contribute to the sum.
 
 The resultant that this array measures is the one driven by the commanded path speed [CNCASpeed/CNCBSpeed](CNCASpeed-CNCBSpeed.md) after the on-the-fly scaling factors [CNCASpeedPer/CNCBSpeedPer](CNCASpeedPer-CNCBSpeedPer.md) and [CNCAPercents/CNCBPercents](CNCAPercents-CNCBPercents.md) are applied.
 

@@ -45,7 +45,7 @@ A vector move normally decelerates the path velocity at [VecDecel](VecDecel.md).
 The emergency rate is selected when:
 
 - a [StopVec](StopVec.md) command is issued (sets the [MotionStat](../05-motion-status/MotionStat.md) vector-stop bit, bit 18 / `0x00040000`, and [MotionReason](../05-motion-status/MotionReason.md) = 29);
-- a member axis would cross a software position limit during the move (the move is aborted with [MotionReason](../05-motion-status/MotionReason.md) = 33 or 34, and 6 / 7 for the offending axis).
+- a member axis reaches a travel limit during the move: a hardware reverse/forward limit switch ([MotionReason](../05-motion-status/MotionReason.md) = 33) or a software position limit ([MotionReason](../05-motion-status/MotionReason.md) = 34), with 6 / 7 reported for the offending axis itself.
 
 A motor-off or fault on any member axis stops the move immediately rather than ramping at this rate.
 

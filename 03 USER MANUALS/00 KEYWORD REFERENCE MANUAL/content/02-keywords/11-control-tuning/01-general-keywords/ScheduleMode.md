@@ -34,11 +34,11 @@ Selects the gain-scheduling algorithm — the rule that decides which of the fiv
 Gain scheduling lets the controller switch its active position, velocity and feedforward gains between up to five pre-defined sets, automatically, as a function of a chosen condition (motion state, velocity, position, motor temperature, time, an external input, or CNC motion segment). `ScheduleMode` chooses which condition is used. The scheduled gains are:
 
 - [PosGain](../03-position-control/PosGain.md) — position-loop proportional gain
-- [PosKi](../03-position-control/PosKi.md) — position-loop integral gain
 - [VelGain](../04-velocity-control/VelGain.md) — velocity-loop proportional gain
 - [VelKi](../04-velocity-control/VelKi.md) — velocity-loop integral gain
 - [VelFFW](../05-feedforwards/VelFFW.md) — velocity feedforward gain
 - [AccFFW](../05-feedforwards/AccFFW.md) — acceleration feedforward gain
+- [PosKi](../03-position-control/PosKi.md) — position-loop integral gain (central-i v5 only)
 
 Each of these is an array of length 5 — one value per gain set. The active set number is reported by [ScheduleSet](ScheduleSet.md), and the gain values actually in use are reported by [ScheduleGains](ScheduleGains.md). With `ScheduleMode = 0` (no scheduling), the controller always uses set 1, i.e. the first element of each gain array.
 

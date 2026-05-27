@@ -1,6 +1,6 @@
 ---
 keyword: VecMotionStat
-summary: Read-only bit-field reporting the current vector-motion state of the axis.
+summary: Read-only enumerated value reporting the current vector-motion state (0 not in motion, 1 in motion, 2 paused, 3 stopping).
 availability:
   standalone:
   - v4
@@ -28,7 +28,7 @@ overrides: {}
 ---
 # VecMotionStat
 
-Read-only bit-field reporting the current vector-motion state of the axis.
+Read-only enumerated value reporting the current vector-motion state of the axis.
 
 ## Overview
 

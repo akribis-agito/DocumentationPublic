@@ -1,5 +1,5 @@
 ---
-summary: Speed percentage override applied to CNC motion queue A (or B).
+summary: Speed percentage override applied to CNC motion group A (or B).
 ---
 # CNCASpeedPer/CNCBSpeedPer
 

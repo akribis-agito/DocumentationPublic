@@ -1,6 +1,6 @@
 ---
 keyword: EventTableSel
-summary: Per-entry selection array controlling each event table entry's characteristics.
+summary: Per-entry array selecting which output line each event table entry's pulse drives.
 availability:
   standalone:
   - v4

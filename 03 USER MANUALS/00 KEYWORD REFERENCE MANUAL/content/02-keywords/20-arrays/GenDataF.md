@@ -1,5 +1,5 @@
 ---
-summary: Proposed floating-point variant of GenData (availability unconfirmed).
+summary: General-purpose, non-axis 32-bit single-precision floating-point array for shared user/host storage.
 keyword: GenDataF
 availability:
   standalone: []
@@ -24,7 +24,7 @@ overrides: {}
 ---
 # GenDataF
 
-Proposed floating-point variant of GenData (availability unconfirmed).
+General-purpose, non-axis 32-bit single-precision floating-point array for shared user/host storage.
 
 ## Overview
 
@@ -41,6 +41,6 @@ AGenDataF[1]        ; read the first element
 
 ## See also
 
-- [GenData](GenData.md) — 32-bit integer general-purpose array (confirmed)
-- [GenDataD](GenDataD.md) — 64-bit double-precision integer variant
+- [GenData](GenData.md) — 32-bit integer general-purpose array
+- [GenDataD](GenDataD.md) — 64-bit double-precision floating-point variant
 - [GenDataLL](GenDataLL.md) — long-long (64-bit signed integer) variant

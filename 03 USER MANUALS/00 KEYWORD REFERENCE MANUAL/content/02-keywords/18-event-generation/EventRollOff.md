@@ -60,5 +60,5 @@ On central-i v5 the rollover feature is only partially implemented. Use rollover
 ## See also
 
 - [EventRollCntr](EventRollCntr.md) — rollover position span
-- [EventSelect](EventSelect.md) — selects the event-generator mode
+- [EventSelect](EventSelect.md) — selects which output line the event pulse drives
 - [EventTable](EventTable.md) — table of event positions

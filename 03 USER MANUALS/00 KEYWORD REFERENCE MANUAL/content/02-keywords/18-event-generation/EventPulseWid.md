@@ -59,6 +59,6 @@ AEventPulseWid       ; query the current pulse width
 
 ## See also
 
-- [EventPulseRes](EventPulseRes.md) — pulse-generator position resolution
+- [EventPulseRes](EventPulseRes.md) — selects the pulse-width time unit (microseconds or nanoseconds)
 - [EventTableWid](EventTableWid.md) — per-entry pulse width override
 - [EventGap](EventGap.md) — small gaps with wide pulses can overlap

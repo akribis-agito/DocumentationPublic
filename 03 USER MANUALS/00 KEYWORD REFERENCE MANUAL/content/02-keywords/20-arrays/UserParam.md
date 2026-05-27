@@ -48,7 +48,7 @@ AUserParam[250]=0    ; highest usable index on a 250-element model
 
 ## See also
 
-- [UserParamD](UserParamD.md) — 64-bit double-precision integer variant
-- [UserParamF](UserParamF.md) — floating-point variant
+- [UserParamD](UserParamD.md) — 64-bit double-precision floating-point variant
+- [UserParamF](UserParamF.md) — 32-bit single-precision floating-point variant
 - [UserParamLL](UserParamLL.md) — long-long (64-bit signed integer) variant
 - [GenData](GenData.md) — non-axis general-purpose storage (recommended for user programs)

@@ -30,5 +30,5 @@ The comparisons between standard force control and force-over-PIV control are as
 | Gain scaling for ForceGain | 1E-6 | 1E-3 |
 | With current-wise feedforward | Yes ([ForceFFW](../../../02-keywords/11-control-tuning/07-force-control/ForceFFW.md)) | Yes ([ForceFFW](../../../02-keywords/11-control-tuning/07-force-control/ForceFFW.md)) |
 | With position-wise feedforward | No | Yes ([ForceFFWP](../../../02-keywords/11-control-tuning/07-force-control/ForceFFWP.md)) |
-| With velocity compensation | Yes ([ForceVelFFW](../../../02-keywords/11-control-tuning/07-force-control/-spanclass=-mark--ForceVelFFW--span-.md)) | Yes ([ForceVelFFW](../../../02-keywords/11-control-tuning/07-force-control/-spanclass=-mark--ForceVelFFW--span-.md)) |
+| With velocity compensation | Yes ([ForceVelFFW](../../../02-keywords/11-control-tuning/07-force-control/ForceVelFFW.md)) | Yes ([ForceVelFFW](../../../02-keywords/11-control-tuning/07-force-control/ForceVelFFW.md)) |
 | With force output filters | Yes ([ForceFiltOn](../../../02-keywords/11-control-tuning/07-force-control/ForceFiltOn.md), [ForceFiltDef](../../../02-keywords/11-control-tuning/07-force-control/ForceFiltDef.md)) | No |

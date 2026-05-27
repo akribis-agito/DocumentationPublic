@@ -1,6 +1,6 @@
 ---
 keyword: EventEndPos
-summary: Highest position for which events are generated in by-gap mode.
+summary: Bounding position at which by-gap event generation stops.
 availability:
   standalone:
   - v4
@@ -46,7 +46,7 @@ After each by-gap event fires, the controller advances the next compare point by
 ## Examples
 
 ```text
-AEventType=2         ; event generation by gap
+AEventType=1         ; event generation by gap
 AEventBegPos=1000
 AEventGap=2000
 AEventEndPos=8000

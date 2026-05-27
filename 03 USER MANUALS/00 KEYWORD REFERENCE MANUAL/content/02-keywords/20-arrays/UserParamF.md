@@ -1,5 +1,5 @@
 ---
-summary: Proposed per-axis floating-point variant of UserParam (availability unconfirmed).
+summary: Per-axis, feature-related 32-bit single-precision floating-point array for shared user/host storage.
 keyword: UserParamF
 availability:
   standalone: []
@@ -24,7 +24,7 @@ overrides: {}
 ---
 # UserParamF
 
-Proposed per-axis floating-point variant of UserParam (availability unconfirmed).
+Per-axis, feature-related 32-bit single-precision floating-point array for shared user/host storage.
 
 ## Overview
 
@@ -41,6 +41,6 @@ AUserParamF[1]      ; read the first element
 
 ## See also
 
-- [UserParam](UserParam.md) — 32-bit integer per-axis array (confirmed)
-- [UserParamD](UserParamD.md) — 64-bit double-precision integer variant
+- [UserParam](UserParam.md) — 32-bit integer per-axis array
+- [UserParamD](UserParamD.md) — 64-bit double-precision floating-point variant
 - [UserParamLL](UserParamLL.md) — long-long (64-bit signed integer) variant

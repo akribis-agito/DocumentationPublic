@@ -40,10 +40,11 @@ For each table entry the controller chooses the output pulse width as follows:
 
 | Entry value | Width used for that entry |
 |-------------|---------------------------|
-| -1 (default) | The global [EventPulseWid](EventPulseWid.md). |
+| -1 (default) | The global [EventPulseWid](EventPulseWid.md) (or the most recent positive per-entry width — see below). |
 | 0 | Toggle mode: the output changes state at the entry instead of producing a fixed-duration pulse. |
 | Positive | That value, as the pulse duration (units per [EventPulseRes](EventPulseRes.md)). |
-| Negative | That magnitude as the duration, with inverted output polarity. |
+
+The valid range for each entry is -1 to 10000000; -1 is the only negative value (it defers to the global width). Output polarity is taken from the sign of the global [EventPulseWid](EventPulseWid.md), not from the per-entry value.
 
 When an entry is `-1`, the controller does not always fall back to the global width: it carries forward the most recent positive per-entry width seen earlier in the active range, and uses the global [EventPulseWid](EventPulseWid.md) only if no positive per-entry width has been encountered yet. Set the first active entry ([EventTableBeg](EventTableBeg.md)) to `-1` if you want the whole table to follow the global width by default.
 

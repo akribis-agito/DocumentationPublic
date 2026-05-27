@@ -48,7 +48,7 @@ AGenData[1000]=0     ; highest usable index on a 1000-element model
 
 ## See also
 
-- [GenDataD](GenDataD.md) — 64-bit double-precision integer variant
-- [GenDataF](GenDataF.md) — floating-point variant
+- [GenDataD](GenDataD.md) — 64-bit double-precision floating-point variant
+- [GenDataF](GenDataF.md) — 32-bit single-precision floating-point variant
 - [GenDataLL](GenDataLL.md) — long-long (64-bit signed integer) variant
 - [UserParam](UserParam.md) — per-axis feature-related general storage

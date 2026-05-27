@@ -1,5 +1,5 @@
 ---
-summary: Reports the acceleration of the active CNC segment on queue A (or B).
+summary: Reports the acceleration of the active CNC segment on group A (or B).
 ---
 # CNCAAccel/CNCBAccel
 

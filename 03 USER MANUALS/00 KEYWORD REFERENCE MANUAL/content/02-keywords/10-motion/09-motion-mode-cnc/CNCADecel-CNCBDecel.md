@@ -1,5 +1,5 @@
 ---
-summary: Reports the deceleration of the active CNC segment on queue A (or B).
+summary: Reports the deceleration of the active CNC segment on group A (or B).
 ---
 # CNCADecel/CNCBDecel
 

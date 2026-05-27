@@ -39,7 +39,7 @@ Ramp rate (mA/s) toward each current-command table entry.
 
 ## How it works
 
-Each control cycle the firmware adds (or subtracts, depending on whether `CurrRef` is below or above the target) an increment of `CurrCmdSlope[index] x sample_time` to `CurrRef`, moving it toward `CurrCmdVal[index]`:
+Each control cycle the controller adds (or subtracts, depending on whether `CurrRef` is below or above the target) an increment of `CurrCmdSlope[index] x sample_time` to `CurrRef`, moving it toward `CurrCmdVal[index]`:
 
 - The fractional part of each per-cycle increment is carried over in an internal remainder accumulator, so the effective ramp rate is exact even when the per-cycle step is below 1 mA.
 - While `CurrRef` is still ramping (not yet equal to the target), [CurrCmdCntr](CurrCmdCntr.md) is forced to 0; only once `CurrRef` exactly equals `CurrCmdVal[index]` does the holding timer start incrementing.

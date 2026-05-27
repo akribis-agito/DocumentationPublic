@@ -1,6 +1,6 @@
 ---
 keyword: EventSelect
-summary: Chooses the operating mode of the event output generator.
+summary: Selects which output line of a multi-event output group the current event pulse drives.
 availability:
   standalone:
   - v4

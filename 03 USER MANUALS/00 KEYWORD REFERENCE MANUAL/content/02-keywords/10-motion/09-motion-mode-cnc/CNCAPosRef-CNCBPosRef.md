@@ -37,5 +37,5 @@ ACNCBPosRef         ; read the current path position on group B
 
 - [CNCAAbsTrgt/CNCBAbsTrgt](CNCAAbsTrgt-CNCBAbsTrgt.md) — active-segment length (end value of `CNCAPosRef`)
 - [CNCAdPosRef/CNCBdPosRef](CNCAdPosRef-CNCBdPosRef.md) — per-cycle change of `CNCAPosRef` (path velocity)
-- [CNCAVel/CNCBVel](CNCAVel-CNCBVel.md) — resulting per-axis / resultant velocity
+- [CNCAVel/CNCBVel](CNCAVel-CNCBVel.md) — actual resultant velocity measured from the member axes
 - [MotionStat](../05-motion-status/MotionStat.md) — CNCA membership/active bits 10-12, CNCB bits 13-15

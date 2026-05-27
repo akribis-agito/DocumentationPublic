@@ -36,7 +36,7 @@ Selects the source of the current reference in current mode.
 
 ## Overview
 
-Under current operation mode, `CurrCmdSrc` sets the source of the current command (`CurrRef`). Each control-loop cycle the firmware reads `CurrCmdSrc` in a `switch` statement and generates the current reference accordingly; the same value also governs how and when the axis automatically exits current mode back to position mode (see [Current operation mode](00-overview.md)). `CurrCmdSrc` is only consulted while the axis is actually in current mode ([OperationMode](../01-general-keywords/OperationMode.md) = 1).
+Under current operation mode, `CurrCmdSrc` sets the source of the current command (`CurrRef`). Every control cycle the controller generates the current reference from the selected source; the same value also governs how and when the axis automatically exits current mode back to position mode (see [Current operation mode](00-overview.md)). `CurrCmdSrc` is only consulted while the axis is actually in current mode ([OperationMode](../01-general-keywords/OperationMode.md) = 1).
 
 ## How it works
 

@@ -1,6 +1,6 @@
 ---
 keyword: EventAlwaysOn
-summary: Forces the event output permanently active, ignoring position and table conditions.
+summary: Runs by-gap event generation continuously, without stopping at EventEndPos.
 availability:
   standalone:
   - v4

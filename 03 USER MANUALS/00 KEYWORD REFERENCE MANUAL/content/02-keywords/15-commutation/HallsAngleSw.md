@@ -1,5 +1,5 @@
 ---
-summary: Electrical angle at which commutation switches from Hall-based to encoder-based feedback during startup.
+summary: Selects how HallsAngle table entries are interpreted (0 = Hall-state mid-point angles, 1 = Hall-state transition/switch angles).
 keyword: HallsAngleSw
 availability:
   standalone: []

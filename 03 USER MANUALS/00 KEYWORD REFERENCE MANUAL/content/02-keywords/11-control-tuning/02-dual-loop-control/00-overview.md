@@ -24,7 +24,7 @@ Under dual-loop mode, user can also force the position loop to source from the m
 
 The figure below shows the control structure under pseudo dual-loop control.
 
-<img alt="A diagram of a computer program AI-generated content may be incorrect." src="image56.png" style="width:7.152in;height:4.81921in"/>
+![Pseudo dual-loop control structure](../../../assets/image56.png)
 
 It is also possible to selectively use pseudo dual-loop or true dual-loop at a defined position range (in terms of motor feedback). The related keyword for this is DualEncMode and DualEncRange.
 
@@ -49,7 +49,7 @@ The following is the comparison of keywords/properties under different control s
 | Auxiliary velocity (AuxVel) | - | Derivative of AuxPos <br>**Unit: Auxiliary encoder count / s** | Derivative of AuxPos <br>**Unit: Auxiliary encoder count / s** |
 | Commutation | Based on Pos | Based on AuxPos | Based on AuxPos |
 
-For more information, on gantry with dual-loop control, please refer to [Gantry control – Dual-loop control](../../../02-keywords/11-control-tuning/02-dual-loop-control/00-overview.md).
+For more information on gantry with dual-loop control, please refer to [Gantry control – Dual-loop control](../../../02-keywords/12-gantry-control/04-dual-loop-gantry-control/00-overview.md).
 
 The table below shows the summary of dual loop control keywords.
 
@@ -64,4 +64,4 @@ The table below shows the summary of dual loop control keywords.
 
 **Note:**
 
-Dual-loop control is protected by DualStuckTime and DualStuckVel to ensure load and motor feedback do not have excessive velocity delta for extended period of time. See Protections – Motion – Dual loop stuck protection for more details.
+Dual-loop control is protected by [DualStuckTime](../../../02-keywords/06-protections/03-motion/dual-loop-stuck-protection/DualStuckTime.md) and [DualStuckVel](../../../02-keywords/06-protections/03-motion/dual-loop-stuck-protection/DualStuckVel.md) to ensure load and motor feedback do not have excessive velocity delta for extended period of time. See [DualStuckTime](../../../02-keywords/06-protections/03-motion/dual-loop-stuck-protection/DualStuckTime.md) and [DualStuckVel](../../../02-keywords/06-protections/03-motion/dual-loop-stuck-protection/DualStuckVel.md) for more details.

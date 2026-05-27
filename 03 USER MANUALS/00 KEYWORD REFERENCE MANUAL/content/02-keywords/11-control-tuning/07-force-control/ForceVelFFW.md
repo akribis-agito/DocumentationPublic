@@ -1,3 +1,30 @@
+---
+keyword: ForceVelFFW
+availability:
+  standalone:
+  - v4
+  central-i:
+  - v4
+  - v5
+can_code: 580
+attributes:
+  access: rw
+  scope: axis
+  flash: true
+  type: scalar
+  array_size: 1
+  data_type: int32
+  ok_in_motion: true
+  ok_motor_on: true
+  units: none
+  range:
+  - -2147483648
+  - 2147483647
+  default: 0
+  scaling: 1.0
+  implemented: final
+overrides: {}
+---
 # ForceVelFFW
 
 Velocity feedback compensation gain in the force loop.
@@ -12,7 +39,7 @@ $$
 
 where `Vel` is the velocity feedback (the value reported by [Vel](../../10-motion/01-kinematics-status/Vel.md), index 1). The internal scaling is 1E-8.
 
-Value range is `0` to `2147483647`; the default is `0`. The keyword is stored in flash and may be changed while the motor is on and in motion.
+Value range is `-2147483648` to `2147483647`; the default is `0`. The keyword is stored in flash and may be changed while the motor is on and in motion.
 
 `ForceVelFFW` is applied in both force-control structures selected by [ForcePIVOn](ForcePIVOn.md):
 

@@ -44,16 +44,18 @@ $$
 AccFFW \text{ term} + VelFFW \text{ term} \;\longrightarrow\; \boxed{\text{feedforward filter}} \;\longrightarrow\; \text{add to velocity-loop output}
 $$
 
-When bypassed, the combined feedforward output is used directly.
+When bypassed, the combined feedforward output is used directly. After changing `FFFiltOn` or [FFFiltDef](FFFiltDef.md), run [CalcFilters](../01-general-keywords/CalcFilters.md) so the controller recomputes the internal filter coefficients.
 
 ## Examples
 
 ```text
 AFFFiltOn[1]=1       ; enable the feedforward filter
 AFFFiltOn[1]=0       ; bypass the feedforward filter
+ACalcFilters         ; recompute filter coefficients
 ```
 
 ## See also
 
 - [FFFiltDef](FFFiltDef.md) — feedforward filter definition parameters
+- [CalcFilters](../01-general-keywords/CalcFilters.md) — recomputes filter coefficients after changes
 - [AccFFW](AccFFW.md) / [VelFFW](VelFFW.md) — feedforward terms the filter acts on

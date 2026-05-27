@@ -20,7 +20,7 @@ To improve motion performance, gain scheduling is available for position, veloci
 
 For non-collocated control, dual-loop control can be used to allow 2 separate feedback sources (one for position feedback and one for velocity feedback), in order to eliminate backlash.
 
-In general, this section can be divided into 7 subsections:
+In general, this section is divided into 8 subsections:
 
 1.  General keywords
 
@@ -34,15 +34,16 @@ In general, this section can be divided into 7 subsections:
 
 6.  Current control
 
-7.  Input-shaping
+7.  Force control
 
-8.  Force control (TBD)
+8.  Input-shaping
 
-<span class="mark">Depending on the OperationMode, user has to tune the following section of control keywords.</span>
-| OperationMode | Position KW | Velocity KW | Feedforward KW | Current KW | Force KW |
+Which group of control keywords is active depends on the axis [OperationMode](../../02-keywords/08-axis-operation/01-general-keywords/OperationMode.md). The table below summarises which keyword groups apply in each operation mode (for force control, also depending on [ForcePIVOn](../../02-keywords/11-control-tuning/07-force-control/ForcePIVOn.md)).
+
+| OperationMode | Position | Velocity | Feedforward | Current | Force |
 |---|---|---|---|---|---|
-| 1 (Current control) | **No** | **No** | **No** | **No** | **No** |
-| 2 (Velocity control) |  |  |  | **Yes** |  |
-| 3 ( | **Yes** | **Yes** | **Yes** | **Yes** | **No** |
-| 4 (Force control) ForcePIVOn = 0 |  |  |  | **Yes** |  |
-|  |  |  |  |  |  |
+| 1 (Current control) | No | No | No | Yes | No |
+| 2 (Velocity control) | No | Yes | No | Yes | No |
+| 3 (Position control) | Yes | Yes | Yes | Yes | No |
+| 4 (Force control, ForcePIVOn = 0) | No | No | No | Yes | Yes |
+| 4 (Force control, ForcePIVOn = 1) | Yes | Yes | Yes | Yes | Yes |

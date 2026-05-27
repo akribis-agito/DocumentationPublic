@@ -63,6 +63,6 @@ AHallsAngle[1]=120   ; set the electrical angle (deg) for Hall state 1
 ## See also
 
 - [HallsValue](HallsValue.md) — current raw Hall sensor state (the index source)
-- [HallsAngleSw](HallsAngleSw.md) — Hall-to-encoder commutation switch-over angle
+- [HallsAngleSw](HallsAngleSw.md) — selects how these entries are interpreted (state mid-point vs. transition/switch angles)
 - [HallOnlyFilt](HallOnlyFilt.md) — filter for the Hall-based commutation angle
 - [ComtMode](ComtMode.md) — selects the commutation method

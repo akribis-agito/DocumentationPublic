@@ -1,5 +1,5 @@
 ---
-summary: Proposed long-long (64-bit signed integer) variant of GenData (availability unconfirmed).
+summary: General-purpose, non-axis 64-bit signed integer array for shared user/host storage.
 keyword: GenDataLL
 availability:
   standalone: []
@@ -26,7 +26,7 @@ overrides: {}
 ---
 # GenDataLL
 
-Proposed long-long (64-bit signed integer) variant of GenData (availability unconfirmed).
+General-purpose, non-axis 64-bit signed integer array for shared user/host storage.
 
 ## Overview
 
@@ -43,6 +43,6 @@ AGenDataLL[1]                 ; read the first element
 
 ## See also
 
-- [GenData](GenData.md) — 32-bit integer general-purpose array (confirmed)
-- [GenDataD](GenDataD.md) — 64-bit double-precision integer variant
-- [GenDataF](GenDataF.md) — floating-point variant
+- [GenData](GenData.md) — 32-bit integer general-purpose array
+- [GenDataD](GenDataD.md) — 64-bit double-precision floating-point variant
+- [GenDataF](GenDataF.md) — 32-bit single-precision floating-point variant

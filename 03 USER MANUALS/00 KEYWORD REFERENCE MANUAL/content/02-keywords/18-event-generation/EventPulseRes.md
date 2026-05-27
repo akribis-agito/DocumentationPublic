@@ -1,6 +1,6 @@
 ---
 keyword: EventPulseRes
-summary: Sets the position resolution of the event pulse generator (minimum spacing between events).
+summary: Selects the time unit used to interpret the event pulse width: microseconds or nanoseconds.
 availability:
   standalone:
   - v4
@@ -54,5 +54,5 @@ AEventPulseRes       ; query the current setting
 ## See also
 
 - [EventPulseWid](EventPulseWid.md) — duration of each event pulse
-- [EventSelect](EventSelect.md) — selects the event-generator mode
+- [EventSelect](EventSelect.md) — selects which output line the event pulse drives
 - [EventTableWid](EventTableWid.md) — per-entry pulse width override

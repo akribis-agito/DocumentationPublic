@@ -45,7 +45,7 @@ These filters are used **only** in standard force control ([ForcePIVOn](ForcePIV
 
 ## How it works
 
-In standard force control the force PID output, summed with the feedforward terms ([ForceFFW](ForceFFW.md) and the velocity compensation [ForceVelFFW](-spanclass=-mark--ForceVelFFW--span-.md)), is passed in series through force filter 1 then force filter 2; the output of the second filter is the current reference. Where a filter is bypassed, the signal passes through unchanged.
+In standard force control the force PID output, summed with the feedforward terms ([ForceFFW](ForceFFW.md) and the velocity compensation [ForceVelFFW](ForceVelFFW.md)), is passed in series through force filter 1 then force filter 2; the output of the second filter is the current reference. Where a filter is bypassed, the signal passes through unchanged.
 
 Each filter is realised as a second-order (biquad) section whose type and parameters are defined by [ForceFiltDef](ForceFiltDef.md). After changing `ForceFiltOn` (or `ForceFiltDef`), run [CalcFilters](../01-general-keywords/CalcFilters.md) so the coefficients are recomputed.
 

@@ -8,15 +8,15 @@ Gain scheduling allows switching of active position, velocity and feedforward ga
 
 1.  PosGain
 
-2.  PosKi
+2.  VelGain
 
-3.  VelGain
+3.  VelKi
 
-4.  VelKi
+4.  VelFFW
 
-5.  VelFFW
+5.  AccFFW
 
-6.  AccFFW
+6.  PosKi (central-i v5 only)
 
 User can select on how gain scheduling is done through ScheduleMode. Depending on ScheduleMode, related gain scheduling parameters (e.g. SchedulePos) must be configured. Upon satisfying certain conditions, active tuning gains set will be changed from one to the other, where all schedulable gains will change at the same time. The active scheduling set and gain value can be checked through ScheduleSet and ScheduleGains.
 
@@ -29,7 +29,7 @@ The table below shows the summary of general control keywords.
 | 1 | [CalcFilters](../../../02-keywords/11-control-tuning/01-general-keywords/CalcFilters.md) | Command for customisable filter coefficient recalculation |
 | 2 | [FilterStatus](../../../02-keywords/11-control-tuning/01-general-keywords/FilterStatus.md) | Customisable filter calculation status |
 | 3 | [ScheduleGains](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleGains.md) | Schedulable gains value in use |
-| 4 | [ScheduleGntry](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleGntry.md) |  |
+| 4 | [ScheduleGntry](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleGntry.md) | Pairs gain scheduling with the gantry-control state (central-i v5 only) |
 | 5 | [ScheduleMode](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleMode.md) | Gain scheduling mode |
 | 6 | [SchedulePos](../../../02-keywords/11-control-tuning/01-general-keywords/SchedulePos.md) | Position range of position-based gain scheduling |
 | 7 | [ScheduleSet](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleSet.md) | Index of gain/tuning set in use |

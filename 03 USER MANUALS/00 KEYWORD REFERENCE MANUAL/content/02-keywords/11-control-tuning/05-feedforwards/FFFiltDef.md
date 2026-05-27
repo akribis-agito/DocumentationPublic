@@ -43,9 +43,9 @@ The feedforward filter is the single customisable filter in this group, index N 
 
 ## How it works
 
-The filter type and its parameters (cutoff/notch/pole/zero frequencies, damping ratios, etc.) are listed in the customisable filter reference. The controller computes the second-order (biquad) coefficients from these parameters and applies the filter to the combined feedforward output when [FFFiltOn](FFFiltOn.md)`[1] = 1`.
+The filter type and its parameters (cutoff/notch/pole/zero frequencies, damping ratios, etc.) are listed in the customisable filter reference. The controller computes the second-order (biquad) coefficients from these parameters and applies the filter to the combined feedforward output when [FFFiltOn](FFFiltOn.md)`[1] = 1`. After writing `FFFiltDef` (and the matching [FFFiltOn](FFFiltOn.md)), run [CalcFilters](../01-general-keywords/CalcFilters.md) so the coefficients are recomputed.
 
-Please refer to [Appendix – Customisable filter](#_Customisable_filter_(FiltDef)), with index N = 1 for the feedforward filter.
+The full parameter-by-type definitions, transfer functions and units are in the appendix: [Customisable filter (FiltDef)](../../../06-appendix/customisable-filter-filtdef.md) (index N = 1 for the feedforward filter).
 
 ## Examples
 
@@ -54,10 +54,12 @@ AFFFiltDef[1]=2      ; filter type: second-order low-pass
 AFFFiltDef[2]=85000  ; parameter 1: cutoff frequency (850 Hz, in Hz/100)
 AFFFiltDef[3]=71     ; parameter 2: damping ratio (0.71, in %)
 AFFFiltOn[1]=1       ; enable the feedforward filter
+ACalcFilters         ; recompute filter coefficients
 ```
 
 ## See also
 
 - [FFFiltOn](FFFiltOn.md) — enable/bypass the feedforward filter
+- [CalcFilters](../01-general-keywords/CalcFilters.md) — recomputes filter coefficients after changes
 - [AccFFW](AccFFW.md) / [VelFFW](VelFFW.md) — feedforward terms the filter acts on
-- [Appendix – Customisable filter](#_Customisable_filter_(FiltDef)) — full filter-type and parameter reference
+- Appendix: [Customisable filter (FiltDef)](../../../06-appendix/customisable-filter-filtdef.md) — full filter-type and parameter reference

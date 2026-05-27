@@ -1,5 +1,5 @@
 ---
-summary: Maximum allowed position error count at the end of a CNC segment before a fault.
+summary: Running count of end-of-segment auto-corrections the CNC engine has applied to keep the path continuous.
 ---
 # CNCAEndErrCnt/CNCBEndErrCnt
 

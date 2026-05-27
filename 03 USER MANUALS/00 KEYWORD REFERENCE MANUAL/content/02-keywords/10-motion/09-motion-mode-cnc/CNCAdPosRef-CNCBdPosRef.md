@@ -19,7 +19,7 @@ CNC mode advances a single scalar path velocity each control cycle and adds it t
 
 On non-motion segment types (delay, wait, set-position, filter-setup) the path does not advance, so `CNCAdPosRef` reads zero while the segment is pending. To suppress velocity spikes at the boundary of a segment whose end speed is zero, the controller may hold this value steady across that boundary rather than report a transient.
 
-`CNCAdPosRef` is the **path** (resultant) velocity; it is not the velocity of any single member axis. The individual axis velocity components and the resultant magnitude are reported by [CNCAVel/CNCBVel](CNCAVel-CNCBVel.md).
+`CNCAdPosRef` is the *commanded* **path** (resultant) velocity from the profiler; it is not the velocity of any single member axis. The *actual* resultant velocity measured from the member axes is reported by [CNCAVel/CNCBVel](CNCAVel-CNCBVel.md).
 
 ### CNCB note
 
@@ -37,4 +37,4 @@ ACNCBdPosRef        ; read the current path velocity on group B
 - [CNCAPosRef/CNCBPosRef](CNCAPosRef-CNCBPosRef.md) — path position whose rate of change this reports
 - [CNCASpeed/CNCBSpeed](CNCASpeed-CNCBSpeed.md) — commanded path speed this ramps toward
 - [CNCAEndSpeed/CNCBEndSpeed](CNCAEndSpeed-CNCBEndSpeed.md) — segment-end speed this ramps toward at the end of a segment
-- [CNCAVel/CNCBVel](CNCAVel-CNCBVel.md) — per-axis and resultant velocity
+- [CNCAVel/CNCBVel](CNCAVel-CNCBVel.md) — actual resultant velocity measured from the member axes

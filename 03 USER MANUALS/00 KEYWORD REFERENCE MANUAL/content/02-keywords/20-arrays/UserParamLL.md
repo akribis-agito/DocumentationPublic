@@ -1,5 +1,5 @@
 ---
-summary: Proposed per-axis long-long (64-bit signed integer) variant of UserParam (availability unconfirmed).
+summary: Per-axis, feature-related 64-bit signed integer array for shared user/host storage.
 keyword: UserParamLL
 availability:
   standalone: []
@@ -26,7 +26,7 @@ overrides: {}
 ---
 # UserParamLL
 
-Proposed per-axis long-long (64-bit signed integer) variant of UserParam (availability unconfirmed).
+Per-axis, feature-related 64-bit signed integer array for shared user/host storage.
 
 ## Overview
 
@@ -43,6 +43,6 @@ AUserParamLL[1]              ; read the first element
 
 ## See also
 
-- [UserParam](UserParam.md) — 32-bit integer per-axis array (confirmed)
-- [UserParamD](UserParamD.md) — 64-bit double-precision integer variant
-- [UserParamF](UserParamF.md) — floating-point variant
+- [UserParam](UserParam.md) — 32-bit integer per-axis array
+- [UserParamD](UserParamD.md) — 64-bit double-precision floating-point variant
+- [UserParamF](UserParamF.md) — 32-bit single-precision floating-point variant

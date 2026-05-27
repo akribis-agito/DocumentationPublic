@@ -56,5 +56,5 @@ AEventTableSrc       ; query the current source
 ## See also
 
 - [EventTable](EventTable.md) — table of event positions
-- [EventSelect](EventSelect.md) — selects the event-generator mode
+- [EventSelect](EventSelect.md) — selects which output line the event pulse drives
 - [EventTableBeg](EventTableBeg.md) — first active table index

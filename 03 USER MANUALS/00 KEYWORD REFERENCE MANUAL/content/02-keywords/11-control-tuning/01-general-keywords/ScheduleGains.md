@@ -44,7 +44,9 @@ Read-only array reporting the tuning gains the control loops are using right now
 | 3 | Velocity-loop proportional gain |
 | 4 | Velocity-loop integral gain |
 | 5 | Velocity feedforward gain |
-| 6 | Position-loop integral gain |
+| 6 | Position-loop integral gain (central-i v5 only) |
+
+Index 6 (the position-loop integral gain) exists only on central-i v5, where [PosKi](../03-position-control/PosKi.md) is available and schedulable. On v4 only indices 1–5 are reported.
 
 ## How it works
 

@@ -73,5 +73,5 @@ In **v5 (central-i)** `VelKi` is a floating-point value; the proportional×error
 - [VelErr](../../10-motion/01-kinematics-status/VelErr.md) — velocity error at the input of the velocity loop
 - [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md) — current command produced from the velocity-PI output
 - [PosKi](../03-position-control/PosKi.md) — integral gain of the outer (position) loop (v5)
-- [ClearIntegral](../01-general-keywords/ClearIntegral.md) — clears the loop integrators
+- [ClearIntegral](../01-general-keywords/ClearIntegral.md) — clears the velocity-loop integrator
 - [ScheduleMode](../01-general-keywords/ScheduleMode.md) — selects which array element is active

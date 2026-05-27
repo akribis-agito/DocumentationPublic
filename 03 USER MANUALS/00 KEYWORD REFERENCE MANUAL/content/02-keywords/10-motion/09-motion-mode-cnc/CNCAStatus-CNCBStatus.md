@@ -69,5 +69,5 @@ ACNCAStatus[5]      ; parameters the segment being filled still needs (0 = close
 
 - [CNCAFIFO/CNCBFIFO](CNCAFIFO-CNCBFIFO.md) — raw queued segment data
 - [CNCAPushType/CNCBPushType](CNCAPushType-CNCBPushType.md) — push a segment to the queue
-- [CNCAVel/CNCBVel](CNCAVel-CNCBVel.md) — current velocity components
+- [CNCAVel/CNCBVel](CNCAVel-CNCBVel.md) — actual resultant velocity measured from the member axes
 - [StopCNCA](StopCNCA.md) / [StopCNCB](StopCNCB.md) — stop the CNC motion

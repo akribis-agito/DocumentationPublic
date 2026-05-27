@@ -1,6 +1,6 @@
 ---
 keyword: VecNumCircles
-summary: Number of full circular arcs to run in vector arc mode (0 = run until StopVec).
+summary: Number of additional full revolutions to add to a vector arc move (0 = just the base arc, no extra turns).
 availability:
   standalone:
   - v4
@@ -28,11 +28,11 @@ overrides: {}
 ---
 # VecNumCircles
 
-Number of full circular arcs to run in vector arc mode (0 = run until StopVec).
+Number of additional full revolutions to add to a vector arc move (0 = just the base arc, no extra turns).
 
 ## Overview
 
-`VecNumCircles` sets the number of complete circular arcs to execute in vector arc motion ([VecType](VecType.md) = 1). Setting it to zero causes the arc to run indefinitely until a [StopVec](StopVec.md) command is issued, which is useful for continuous circular machining. It works together with [VecArcCenter](VecArcCenter.md) and [VecArcDir](VecArcDir.md), which define the arc geometry and direction. It is an axis-related parameter saved to flash, and cannot be changed while the axis is in motion.
+`VecNumCircles` sets how many complete revolutions are added to the base arc in vector arc motion ([VecType](VecType.md) = 1). With it set to zero the move is just the base arc swept from the start point to the end point; each unit adds one more full turn (2π) to the path. It works together with [VecArcCenter](VecArcCenter.md) and [VecArcDir](VecArcDir.md), which define the arc geometry and direction. It is an axis-related parameter saved to flash, and cannot be changed while the axis is in motion.
 
 ## How it works
 
@@ -41,20 +41,20 @@ When the arc move starts, the controller works out the angle to sweep from the s
 | Setting | Result |
 |----|----|
 | `VecNumCircles = 0`, start ≠ end | A single partial arc from the start point to the end point. |
-| `VecNumCircles = 0`, start = end | A continuous circle that keeps running and is ended by [StopVec](StopVec.md). |
-| `VecNumCircles = N` (1-100) | The base arc plus `N` additional full revolutions before stopping. |
+| `VecNumCircles = 0`, start = end | The base sweep only — for a clockwise arc this is one full turn; for a counter-clockwise arc the base sweep is zero, so add turns with `VecNumCircles`. |
+| `VecNumCircles = N` (1-100) | The base arc plus `N` additional full revolutions. |
 
-The path-velocity profile then runs along this extended path exactly as for a single arc: it accelerates, cruises and decelerates over the whole multi-turn length, so the move only slows to a stop after the final revolution (or, for a continuous circle, when [StopVec](StopVec.md) is issued). The maximum is 100 revolutions.
+The path-velocity profile then runs along this extended path exactly as for a single arc: it accelerates, cruises and decelerates over the whole multi-turn length, so the move only slows to a stop after the final revolution. A move still in progress can be ended early with [StopVec](StopVec.md). The maximum is 100 additional revolutions.
 
 ## Examples
 
 ```text
-AVecNumCircles=0     ; run continuously until StopVec (default)
-AVecNumCircles=5     ; execute five full circles, then stop
+AVecNumCircles=0     ; base arc only, no extra revolutions (default)
+AVecNumCircles=5     ; base arc plus five additional full revolutions
 ```
 
 ## See also
 
 - [VecType](VecType.md) — selects arc vector motion
 - [VecArcCenter](VecArcCenter.md) / [VecArcDir](VecArcDir.md) — arc geometry and direction
-- [StopVec](StopVec.md) — stops a continuous arc
+- [StopVec](StopVec.md) — ends a vector arc move early

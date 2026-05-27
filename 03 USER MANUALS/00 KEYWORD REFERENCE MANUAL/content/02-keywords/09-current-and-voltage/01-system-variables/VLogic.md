@@ -61,6 +61,6 @@ AVLogic             ; read the present 5 V logic voltage (mV)
 
 ## See also
 
-- [DCDC](DCDC.md) — per-rail internal logic-voltage measurements (the 5 V rail also appears at index 6)
+- [DCDC](DCDC.md) — per-rail internal logic-voltage measurements
 - [VBus](VBus.md) — amplifier DC bus voltage reading
 - [ConFlt](../../07-status-and-faults/ConFlt.md) — faults 1010 / 1011 raised by the logic-voltage protection

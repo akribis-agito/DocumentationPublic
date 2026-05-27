@@ -1,5 +1,5 @@
 ---
-summary: Reports the commanded speed at the end of the active CNC segment on queue A (or B).
+summary: Reports the commanded speed at the end of the active CNC segment on group A (or B).
 ---
 # CNCAEndSpeed/CNCBEndSpeed
 

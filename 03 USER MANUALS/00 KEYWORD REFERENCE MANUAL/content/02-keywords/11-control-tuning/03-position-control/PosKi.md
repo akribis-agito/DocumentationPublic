@@ -59,5 +59,5 @@ APosKi[1]           ; read the position-loop integral gain
 - [PosErr](../../10-motion/01-kinematics-status/PosErr.md) — position error at the input of the position loop
 - [VelRef](../../10-motion/01-kinematics-status/VelRef.md) — velocity-loop reference that the position PI output forms
 - [VelKi](../04-velocity-control/VelKi.md) — integral gain of the inner (velocity) loop
-- [ClearIntegral](../01-general-keywords/ClearIntegral.md) — clears the loop integrators
+- [ClearIntegral](../01-general-keywords/ClearIntegral.md) — clears the velocity-loop integrator
 - [ScheduleMode](../01-general-keywords/ScheduleMode.md) — selects which array element is active
