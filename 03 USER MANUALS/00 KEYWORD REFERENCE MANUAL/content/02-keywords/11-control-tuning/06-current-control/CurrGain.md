@@ -29,6 +29,53 @@ overrides:
 ---
 # CurrGain
 
-**Definition:**
+Proportional gain of the current loop.
 
-CurrGain is the proportional gain of current loop control, acting on the summation of current error and result of current error integral control.
+## Overview
+
+`CurrGain` is the proportional gain of the current loop — the innermost loop of the control cascade. It multiplies the sum of the current error and the current-error integral to produce the commanded voltage. `CurrGain` and the integral gain [CurrKi](CurrKi.md) together form the current-loop PI controller.
+
+The same `CurrGain` is applied to every current channel that the motor type requires:
+
+| Motor type | Channels controlled by `CurrGain` |
+|---|---|
+| Voice-coil / brush (single-phase) | Phase A |
+| Stepper (two-phase) | Phase A and phase B |
+| Three-phase, dq0-domain (vector) control | Quadrature (q) and direct (d) axes |
+| Three-phase, abc-domain control | Phase A and phase B |
+
+## How it works
+
+For each controlled channel the current-error integral is accumulated (scaled by [CurrKi](CurrKi.md)), the current error is added to it, and the proportional gain `CurrGain` multiplies the sum to form the channel voltage command. Taking the quadrature axis of a three-phase motor as the example (the current error is [IqErr](../../../02-keywords/09-current-and-voltage/02-motor-variables/IqErr.md), the output voltage is [Vq](../../../02-keywords/09-current-and-voltage/02-motor-variables/Vq.md)):
+
+$$
+\begin{aligned}
+Integral &\mathrel{+}= IqErr \times CurrKi \times 0.001 \times noClamp \\
+Vq &= (Integral + IqErr) \times CurrGain \times 0.001
+\end{aligned}
+$$
+
+Here `0.001` is the fixed gain scaling applied to both `CurrGain` and `CurrKi`, and `noClamp` is the anti-windup factor (see [CurrKi](CurrKi.md)). The other current channels use the identical structure with their own error and voltage terms.
+
+### Scaling, range and default
+
+| | v4 (standalone & central-i) | v5 (central-i) |
+|---|---|---|
+| Data type | 32-bit integer | 32-bit float |
+| Range | 0 to 200000 | 0 to 200000 |
+| Default | 0 | 0 |
+| Gain scaling | 0.001 | 0.001 |
+
+## Examples
+
+```text
+ACurrGain=15000      ; set current-loop proportional gain
+ACurrGain            ; read back the gain
+```
+
+## See also
+
+- [CurrKi](CurrKi.md) — current-loop integral gain (completes the PI controller)
+- [IqErr](../../../02-keywords/09-current-and-voltage/02-motor-variables/IqErr.md) — quadrature-axis current error the gain acts on
+- [Vq](../../../02-keywords/09-current-and-voltage/02-motor-variables/Vq.md) — quadrature-axis voltage the PI produces
+- [ControlMode](../../../02-keywords/09-current-and-voltage/02-motor-variables/ControlMode.md) — selects dq0 vs abc current-control domain

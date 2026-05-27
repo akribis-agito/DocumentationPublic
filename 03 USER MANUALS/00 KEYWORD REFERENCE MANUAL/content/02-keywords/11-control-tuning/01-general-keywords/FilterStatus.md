@@ -25,26 +25,48 @@ overrides: {}
 ---
 # FilterStatus
 
-**Definition:**
+Per-filter status word reporting which customisable filters have pending definition changes and whether their last calculation found a problem.
 
-FilterStatus is an array that describes the filter calculation status. Every 6 bits of the array element describes 1 filter.
+## Overview
 
-| FilterStatus[Index] | Description |
-|---|---|
-| FilterStatus[1] | Position filter (Bit 0 - 5: Position reference filter) (Bit 6 - 11: Position error filter) |
-| FilterStatus[2] | Velocity filter (Bit 0 - 5: Velocity PI output filter 1) (Bit 6 - 11: Velocity PI output filter 2) (Bit 12 - 17: Velocity PI output filter 3) (Bit 18 - 23: Velocity PI output filter 4) |
-| FilterStatus[3] | Feedforward filter (Bit 0 – 5: Feedforward filter) |
-| FilterStatus[4] | Force filter (Bit 0 - 5: Force filter 1) (Bit 6 - 11: Force filter 2) |
+`FilterStatus` is an array that reports the state of the customisable loop filters relative to their definition keywords and to the last [CalcFilters](CalcFilters.md). Each array element covers one filter group, and within each element every filter occupies a **6-bit field**. The fields describe whether a filter is waiting for recalculation and, after a [CalcFilters](CalcFilters.md), whether the filter type and parameters were valid.
 
-The 6 bits for each filter are described as shown (LSB to MSB, where n = (Filter number – 1) \* 6).
+| Index | Filter group | Field layout (each field = 6 bits) |
+|---|---|---|
+| `FilterStatus[1]` | Position filters | bits 0–5: position reference filter; bits 6–11: position error filter |
+| `FilterStatus[2]` | Velocity filters | bits 0–5: filter 1; bits 6–11: filter 2; bits 12–17: filter 3; bits 18–23: filter 4 |
+| `FilterStatus[3]` | Feedforward filter | bits 0–5: feedforward filter |
+| `FilterStatus[4]` | Force filters | bits 0–5: filter 1; bits 6–11: filter 2 |
 
-| Bit # | Description |
-|---|---|
-| n + 0 | 0 (Cleared) – Filter coefficients are updated <br>1 (Set) – FiltDef has changed, pending coefficients update |
-| n + 1 | 0 (Cleared) – No issue with the filter type <br>1 (Set) – Unknown filter type |
-| n + 2 | 0 (Cleared) – Parameter is in range <br>1 (Set) – Parameter is out of range |
-| n + 3 | 0 (Cleared) – Parameter is in range <br>1 (Set) – Parameter is out of range |
-| n + 4 | 0 (Cleared) – Parameter is in range <br>1 (Set) – Parameter is out of range |
-| n + 5 | 0 (Cleared) – Parameter is in range <br>1 (Set) – Parameter is out of range |
+## How it works
 
-Bit n + 1 to n + 5 will only refresh when CalcFilters is commanded.
+For a given filter, let `n` be the offset of its 6-bit field, where `n = (filter number − 1) × 6`. The bits within the field are:
+
+| Bit | Meaning when 0 (cleared) | Meaning when 1 (set) |
+|---|---|---|
+| `n+0` | Coefficients are up to date | Definition has changed; coefficients pending recalculation |
+| `n+1` | Filter type is recognised | Unknown filter type |
+| `n+2` | First parameter in range | First parameter out of range |
+| `n+3` | Second parameter in range | Second parameter out of range |
+| `n+4` | Third parameter in range | Third parameter out of range |
+| `n+5` | Fourth parameter in range | Fourth parameter out of range |
+
+### How the bits update
+
+- **Bit `n+0` (pending)** is set the moment a filter definition keyword for that filter is written to a value different from the one currently in use (`FiltDef` / `FiltOn` — see [CalcFilters](CalcFilters.md)). It is cleared when that filter is successfully recalculated. While any filter has bit `n+0` set, [StatReg](../../07-status-and-faults/StatReg.md) bit 26 ("filters modified") is also set.
+- **Bits `n+1` to `n+5` (validity)** are refreshed only when [CalcFilters](CalcFilters.md) is commanded. They reflect the result of validating that filter's definition at the last calculation: the type-recognition check and the per-parameter range checks. If a filter passed validation, all five bits are clear; if it failed, the offending bit(s) are set and that filter's definition is rejected (the running filter is left unchanged — see [CalcFilters](CalcFilters.md)).
+
+To read one filter's field, mask the element with `0x3F` after shifting right by `n`. For example, the position error filter (filter 2 of the position group, `n = 6`) is `(FilterStatus[1] >> 6) & 0x3F`.
+
+## Examples
+
+```text
+AFilterStatus[2]                 ; read the velocity-filter status word
+```
+
+A value of `0` in a filter's field means that filter is up to date and was last calculated without any issue. A field value of `1` (only bit `n+0` set) means the definition changed and a [CalcFilters](CalcFilters.md) is still needed.
+
+## See also
+
+- [CalcFilters](CalcFilters.md) — recalculates coefficients and refreshes the validity bits
+- [StatReg](../../07-status-and-faults/StatReg.md) — bit 26 (filters modified) summarises the pending state across all filters

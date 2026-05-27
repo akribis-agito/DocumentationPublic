@@ -27,6 +27,33 @@ overrides: {}
 ---
 # ScheduleTemp
 
-**Definition:**
+Motor-temperature thresholds that divide the temperature range into bands for temperature-based gain scheduling.
 
-ScheduleTemp is an array of temperature range for temperature-based gain scheduling (ScheduleMode = 8). ScheduleTemp must be monotonically increases along increasing array element.
+## Overview
+
+`ScheduleTemp` holds the motor-temperature band edges used when [ScheduleMode](ScheduleMode.md) is `8` (by temperature range). The values are in degrees Celsius and must increase monotonically with array index.
+
+## How it works
+
+The controller compares the measured motor temperature against the thresholds and picks a gain set:
+
+- Set 1 if temperature ≤ `ScheduleTemp[1]`
+- Set 2 if `ScheduleTemp[1]` < temperature ≤ `ScheduleTemp[2]`
+- Set 3 if `ScheduleTemp[2]` < temperature ≤ `ScheduleTemp[3]`
+- Set 4 if `ScheduleTemp[3]` < temperature ≤ `ScheduleTemp[4]`
+- Set 5 if temperature > `ScheduleTemp[4]`
+
+(Element `ScheduleTemp[5]` is part of the array but is not used as an upper edge — anything above the fourth threshold maps to set 5.)
+
+## Examples
+
+```text
+AScheduleTemp[1]=30; AScheduleTemp[2]=45; AScheduleTemp[3]=60; AScheduleTemp[4]=80
+AScheduleMode[1]=8            ; select temperature-band scheduling
+```
+
+## See also
+
+- [ScheduleMode](ScheduleMode.md) — mode 8 uses these thresholds
+- [ScheduleSet](ScheduleSet.md) — band currently selected
+- [SchedulePos](SchedulePos.md) / [ScheduleVel](ScheduleVel.md) — analogous thresholds for the other range modes

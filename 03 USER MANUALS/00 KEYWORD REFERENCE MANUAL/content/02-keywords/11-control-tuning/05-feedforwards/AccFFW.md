@@ -32,8 +32,59 @@ overrides:
 ---
 # AccFFW
 
-**Definition:**
+Acceleration feedforward gain, applied to the second derivative of the position reference.
 
-AccFFW is the acceleration feedforward gain applied onto the second derivative of position reference. The acceleration feedforward is scaled before the final summation.
+## Overview
 
-This keyword is applicable for gain scheduling. By default (no gain scheduling), the gain value of the first array element (AccFFW\[1\]) is used for control. See [ScheduleMode](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleMode.md) for more information on which array elements are used, depending on gain scheduling method.
+`AccFFW` is the acceleration feedforward gain. It multiplies the acceleration of the post-processed position reference (the second time-derivative of the shaped/filtered reference) and adds the result, ahead of feedback action, into the current reference that drives the current loop. Acting on the reference acceleration, it compensates the inertial (mass) term of the load so the controller does not have to wait for a following error to build before commanding the required accelerating force.
+
+Acceleration feedforward is applied only in position operation mode ([OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) = 3). It has no effect in velocity, force or current operation modes.
+
+`AccFFW` is an array used for gain scheduling. With no gain scheduling, the first element `AccFFW[1]` is the active value. See [ScheduleMode](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleMode.md) for which array elements are selected under each scheduling method.
+
+## How it works
+
+Each control cycle, the reference acceleration is formed as the second difference of the post-processed (shaped and filtered) position reference — the same reference signal the position loop uses:
+
+$$
+a_{ref} = ref_{k} - 2 \cdot ref_{k-1} + ref_{k-2}
+$$
+
+The acceleration feedforward term is this reference acceleration scaled by `AccFFW` and a fixed gain scaling of 1/2⁸ (= 3.90625 × 10⁻³):
+
+$$
+AccTerm = a_{ref} \times AccFFW \times \frac{1}{2^{8}}
+$$
+
+The acceleration term is summed with the velocity feedforward term (see [VelFFW](VelFFW.md)) to form the combined feedforward output. That output optionally passes through the feedforward filter ([FFFiltOn](FFFiltOn.md) / [FFFiltDef](FFFiltDef.md)) and is then added to the velocity-loop output to form the current reference [CurrRefCtrl](../../../02-keywords/09-current-and-voltage/02-motor-variables/CurrRefCtrl.md):
+
+$$
+CurrRefCtrl = (\text{velocity-loop output}) + (\text{filtered feedforward output})
+$$
+
+During the segment transitions of coordinated/vector motion the feedforward output is momentarily forced to zero to avoid current spikes from limited transition precision.
+
+### Scaling, range and default
+
+| | v4 (standalone & central-i) | v5 (central-i) |
+|---|---|---|
+| Data type | 32-bit integer | 32-bit float |
+| Range | 0 to 50000 | 0 to 1000000000 |
+| Default | 0 | 0 |
+| Gain scaling | 1/2⁸ (3.90625 × 10⁻³) | 1/2⁸ (3.90625 × 10⁻³) |
+
+With the default value `0`, acceleration feedforward is off.
+
+## Examples
+
+```text
+AAccFFW[1]=2560      ; set acceleration feedforward gain (first array element)
+AAccFFW[1]           ; read back the gain
+```
+
+## See also
+
+- [VelFFW](VelFFW.md) — velocity feedforward gain (summed with the acceleration term)
+- [FFFiltOn](FFFiltOn.md) / [FFFiltDef](FFFiltDef.md) — feedforward filter applied to the combined feedforward output
+- [CurrRefCtrl](../../../02-keywords/09-current-and-voltage/02-motor-variables/CurrRefCtrl.md) — current reference the feedforward adds into
+- [ScheduleMode](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleMode.md) — gain-scheduling selection of array elements

@@ -25,12 +25,32 @@ overrides: {}
 ---
 # DualLoopStat
 
-**Definition:**
+Read-only status of the active dual-loop control structure.
 
-DualLoopStat denotes the status of dual-loop control.
+## Overview
 
-| DualLoopOn | Descriptions                       |
-|------------|------------------------------------|
-| 0          | Default control is active          |
-| 1          | Pseudo dual-loop control is active |
-| 2          | Dual-loop control is active        |
+`DualLoopStat` reports which control structure is currently active. It reflects the run-time result of [DualLoopOn](DualLoopOn.md), [DualEncSwapOn](DualEncSwapOn.md), [DualEncMode](DualEncMode.md) and [DualEncRange](DualEncRange.md) — including range-limited switching, which can change the active structure during motion — so it may differ from the configured `DualLoopOn` value.
+
+| `DualLoopStat` | Description |
+|---|---|
+| 0 | Default control is active (both loops on the main encoder). |
+| 1 | Pseudo dual-loop control is active (position loop sourced from the auxiliary encoder, scaled to load units). |
+| 2 | Dual-loop control is active (position loop on main/load encoder, velocity loop on motor feedback). |
+
+## How it works
+
+With dual-loop disabled, `DualLoopStat` reads `0`. With dual-loop enabled and pseudo dual-loop off, it reads `2`. With pseudo dual-loop on ([DualEncSwapOn](DualEncSwapOn.md) = 1) it reads `1`.
+
+When range-limited switching is configured ([DualEncMode](DualEncMode.md) = 1), the controller switches between pseudo dual-loop and full dual-loop according to whether the motor feedback is inside the [DualEncRange](DualEncRange.md) window: inside the range `DualLoopStat` becomes `2`, outside it becomes `1`. Reading `DualLoopStat` therefore shows the structure in effect at that instant.
+
+## Examples
+
+```text
+ADualLoopStat        ; read the active dual-loop control structure
+```
+
+## See also
+
+- [DualLoopOn](DualLoopOn.md) — configure dual-loop control
+- [DualEncSwapOn](DualEncSwapOn.md) — pseudo dual-loop switch
+- [DualEncMode](DualEncMode.md) / [DualEncRange](DualEncRange.md) — range-limited switching that this status reflects

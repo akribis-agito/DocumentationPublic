@@ -27,8 +27,35 @@ overrides: {}
 ---
 # ForceRefFOn
 
-**Definition:**
+Enables the force-command reference filter.
 
-ForceRefFOn is the switch for force command first-order low-pass filter. If ForceRefFOn = 1, filter is enabled. If ForceRefFOn = 0, filter is disabled (bypassed).
+## Overview
 
-The filter is disabled by default.
+`ForceRefFOn` is the switch for the first-order low-pass filter applied to the force command:
+
+| Value | Behaviour |
+|-------|-----------|
+| 0     | Filter bypassed — the force reference equals the raw command |
+| 1     | Filter enabled — the cut-off frequency is set by [ForceRefFilt](ForceRefFilt.md) |
+
+The default is `0` (filter disabled). The keyword is stored in flash.
+
+## How it works
+
+When `ForceRefFOn = 1`, the filter coefficient is computed from [ForceRefFilt](ForceRefFilt.md) and the raw force command is low-pass filtered each cycle to produce the force reference [ForceRef](../../08-axis-operation/04-force-operation-mode/ForceRef.md). When `ForceRefFOn = 0`, the filter coefficient is set so the filter passes the command through unchanged, and `ForceRef` follows the raw command directly.
+
+Writing `ForceRefFOn` recomputes the coefficient immediately. The setting applies in both force-control structures selected by [ForcePIVOn](ForcePIVOn.md).
+
+## Examples
+
+```text
+AForceRefFOn[1]=1       ; enable the force-command reference filter
+AForceRefFOn[1]=0       ; bypass the filter
+AForceRefFOn[1]         ; read the filter switch
+```
+
+## See also
+
+- [ForceRefFilt](ForceRefFilt.md) — cut-off frequency used when this filter is enabled
+- [ForceRef](../../08-axis-operation/04-force-operation-mode/ForceRef.md) — filtered force reference
+- [Force control](00-overview.md) — force-loop structure overview

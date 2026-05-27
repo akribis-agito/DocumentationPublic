@@ -30,15 +30,40 @@ overrides:
 ---
 # ForceFiltOn
 
-**Condition:**
+Enables each of the two force-loop output filters.
 
-ForceFiltOn is only used when ForcePIVOn = 0.
+## Overview
 
-**Definition:**
+`ForceFiltOn` enables or bypasses the two force output filters. Each element controls one filter: `ForceFiltOn[Index] = 1` enables the filter, `ForceFiltOn[Index] = 0` bypasses it. The defaults are `0` (both bypassed).
 
-ForceFiltOn is used to turn on/off the force filters. If ForceFiltOn\[Index\] = 1, the filter is enabled. If ForceFiltOn\[Index\] = 0, the filter is disabled (bypassed). The indices indicate the location/order of the force filter.
-
-| Index | Descriptions   |
+| Index | Description    |
 |-------|----------------|
 | 1     | Force filter 1 |
 | 2     | Force filter 2 |
+
+These filters are used **only** in standard force control ([ForcePIVOn](ForcePIVOn.md) = 0); in force-over-PIV control (`ForcePIVOn = 1`) they have no effect.
+
+## How it works
+
+In standard force control the force PID output, summed with the feedforward terms ([ForceFFW](ForceFFW.md) and the velocity compensation [ForceVelFFW](-spanclass=-mark--ForceVelFFW--span-.md)), is passed in series through force filter 1 then force filter 2; the output of the second filter is the current reference. Where a filter is bypassed, the signal passes through unchanged.
+
+Each filter is realised as a second-order (biquad) section whose type and parameters are defined by [ForceFiltDef](ForceFiltDef.md). After changing `ForceFiltOn` (or `ForceFiltDef`), run [CalcFilters](../01-general-keywords/CalcFilters.md) so the coefficients are recomputed.
+
+## Examples
+
+```text
+AForceFiltOn[1]=1       ; enable force filter 1
+AForceFiltOn[2]=0       ; bypass force filter 2
+ACalcFilters            ; recompute filter coefficients
+```
+
+## Changes between versions
+
+In **v4** `ForceFiltOn` can only be changed with the motor off and out of motion. In **v5 (central-i)** it may also be changed while the motor is on and in motion.
+
+## See also
+
+- [ForceFiltDef](ForceFiltDef.md) — defines the type and parameters of each force filter
+- [ForcePIVOn](ForcePIVOn.md) — these filters apply only when this is 0
+- [CalcFilters](../01-general-keywords/CalcFilters.md) — recomputes filter coefficients after changes
+- [Force control](00-overview.md) — force-loop structure overview

@@ -27,8 +27,32 @@ overrides: {}
 ---
 # ScheduleSet
 
-**Definition:**
+The tuning-gain set number currently in use, in the range 1–5.
 
-ScheduleSet represents the tuning gains set number that is currently in use. The value is reset to 1 upon power cycle or when gain scheduling is disabled (ScheduleMode = 0).
+## Overview
 
-ScheduleSet will vary depending on the gain scheduling algorithm, defined by ScheduleMode (and relevant scheduling keywords). ScheduleSet can be also set manually by the user, by entering manual gain scheduling mode (ScheduleMode = 1).
+`ScheduleSet` reports which of the five gain sets is active. The active set determines the values published in [ScheduleGains](ScheduleGains.md) and applied by the control loops. In manual scheduling it is also writable, so the user can select the set directly.
+
+## How it works
+
+How `ScheduleSet` is determined depends on [ScheduleMode](ScheduleMode.md):
+
+- **No scheduling (`ScheduleMode = 0`):** held at 1.
+- **Manual (`ScheduleMode = 1`):** set by the user — either by writing `ScheduleSet` over communication, or, if a digital input is assigned the control-set-change function, by the input level (low → 1, high → 2).
+- **Automatic modes (`ScheduleMode` ≥ 2):** the controller updates it each scheduling cycle from the active rule (motion/time, in-target, velocity/position/temperature band, PD pulses, or CNC segment). In these modes the value reflects the rule and is not meant to be written by the user.
+
+`ScheduleSet` is reset to 1 on power-up and whenever scheduling is disabled (`ScheduleMode = 0`). When the gantry pairing of the scheduling mode does not match the current gantry state, the default set 1 is used (see [ScheduleGntry](ScheduleGntry.md)).
+
+In the interpolated velocity/position modes (`ScheduleMode = 9` or `10`), a value of `-1` indicates a configuration error: the four band thresholds are not strictly increasing, scheduling has been disabled, and set 1 is being used.
+
+## Examples
+
+```text
+AScheduleMode[1]=1; AScheduleSet=3      ; manual mode, then select gain set 3
+AScheduleSet                            ; read the active gain-set number
+```
+
+## See also
+
+- [ScheduleMode](ScheduleMode.md) — how the set is chosen
+- [ScheduleGains](ScheduleGains.md) — gain values for the active set

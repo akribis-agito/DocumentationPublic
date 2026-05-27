@@ -1,5 +1,38 @@
-# <span class="mark">ForceVelFFW</span>
+# ForceVelFFW
 
-**Definition:**
+Velocity feedback compensation gain in the force loop.
 
-<span class="mark">ForceVelFFW is the gain for current reference compensation based on velocity feedback (Vel\[1\]).</span>
+## Overview
+
+`ForceVelFFW` is the velocity feedback compensation gain applied to the current reference in force operation mode. It multiplies the velocity feedback and is **subtracted** from the current reference:
+
+$$
+ForceVelFFW\ term = -\ Vel \times ForceVelFFW \times 0.00000001
+$$
+
+where `Vel` is the velocity feedback (the value reported by [Vel](../../10-motion/01-kinematics-status/Vel.md), index 1). The internal scaling is 1E-8.
+
+Value range is `0` to `2147483647`; the default is `0`. The keyword is stored in flash and may be changed while the motor is on and in motion.
+
+`ForceVelFFW` is applied in both force-control structures selected by [ForcePIVOn](ForcePIVOn.md):
+
+- **Standard force control** (`ForcePIVOn = 0`): the term is combined with the PID output and the current-wise feedforward ([ForceFFW](ForceFFW.md)) before the force output filters, forming the current reference.
+- **Force-over-PIV control** (`ForcePIVOn = 1`): the term is combined with the velocity-loop output and the current-wise feedforward to form the current reference.
+
+## How it works
+
+Because the contribution opposes the velocity feedback, it acts as a velocity-proportional term at the current reference. In both structures it enters at the same summing point as the current-wise feedforward [ForceFFW](ForceFFW.md).
+
+## Examples
+
+```text
+AForceVelFFW[1]=100     ; set the velocity feedback compensation gain
+AForceVelFFW[1]         ; read the velocity feedback compensation gain
+```
+
+## See also
+
+- [ForceFFW](ForceFFW.md) — current-wise force feedforward (added at the same summing point)
+- [ForceFFWP](ForceFFWP.md) — position-wise force feedforward (force-over-PIV only)
+- [ForcePIVOn](ForcePIVOn.md) — selects the force-control structure
+- [Force control](00-overview.md) — force-loop structure overview
