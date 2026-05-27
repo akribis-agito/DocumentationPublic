@@ -44,13 +44,13 @@ $$
 y_{i} = a\,u_{i} + (1 - a)\,y_{i - 1}
 $$
 
-The coefficient $a$ is **not** `AInFilt/65536`. When `AInFilt` is written, the firmware recomputes the coefficient (`SpecialFuncs.c:4793`, `SpAInFilt`):
+The coefficient $a$ is **not** `AInFilt/65536`. The coefficient is recomputed whenever `AInFilt` is written:
 
 $$
 a = 1 - e^{-2\pi\,T_s\,R\,(AInFilt/100)}
 $$
 
-where $T_s$ is the sample time and $R$ is the analog-input update rate (`IDENTITY_ANALOG_INPUTS_UPDATE_RATE`, normally 1 — the filter runs every sample). The `AInFilt/100` term is the effective cutoff frequency in hertz: $a = 1 - e^{-2\pi f_c T_s}$ with $f_c = AInFilt/100$. The two coefficients ($a$ and $1-a$) are cached and reused each cycle, so the recurrence above costs only two multiplies.
+where $T_s$ is the sample time and $R$ is the analog-input update rate (normally 1 — the filter runs every sample). The `AInFilt/100` term is the effective cutoff frequency in hertz: $a = 1 - e^{-2\pi f_c T_s}$ with $f_c = AInFilt/100$. The two coefficients ($a$ and $1-a$) are cached and reused each cycle, so the recurrence above costs only two multiplies.
 
 A **larger** `AInFilt` means a **higher** cutoff and less filtering; a smaller value gives heavier smoothing. The lowest setting `AInFilt = 1` is ≈0.01 Hz (very heavy smoothing).
 

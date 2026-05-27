@@ -45,13 +45,13 @@ Read-only quadrature-axis feedback current (definition varies by motor type), in
 | Three-phase motor (MotorType = 3 or 4) | `Iq` is the quadrature-axis current after the combined Clarke + Park transform of the measured phase currents (see below). |
 | Two-phase stepper motor (MotorType = 6 or 7) | `Iq` equals 0. |
 
-For three-phase motors, `Iq` is computed from the measured phase currents [Ia](Ia.md) and [Ib](Ib.md) using the sine/cosine of the electrical commutation angle θ (the firmware indexes precomputed sine/cosine tables at the commutation angle, and at θ − 120°):
+For three-phase motors, `Iq` is computed from the measured phase currents [Ia](Ia.md) and [Ib](Ib.md) using the sine/cosine of the electrical commutation angle θ (evaluated at the commutation angle and at θ − 120°):
 
 $$
 Iq\ \lbrack mA\rbrack = \frac{2}{\sqrt 3}\left(Ia \cdot \cos(\theta - 120^\circ) - Ib \cdot \cos\theta\right)
 $$
 
-The factor $2/\sqrt3 \approx 1.1547$ is applied exactly as written in the firmware. θ is the electrical commutation angle from the commutation/auto-phasing logic. The direct counterpart [Id](Id.md) uses the corresponding sine terms.
+The factor $2/\sqrt3 \approx 1.1547$ is applied as written. θ is the electrical commutation angle from the commutation/auto-phasing logic. The direct counterpart [Id](Id.md) uses the corresponding sine terms.
 
 ![FOC current loop](foc-current-loop.svg)
 

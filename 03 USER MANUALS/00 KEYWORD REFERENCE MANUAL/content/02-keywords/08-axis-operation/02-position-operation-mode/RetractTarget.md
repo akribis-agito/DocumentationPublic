@@ -41,14 +41,14 @@ Absolute target of the point-to-point move on entry to position mode.
 
 ## How it works
 
-When the entry move is launched, `QuickBeginOnSwitchToPos()` selects the PTP target (`AG300_CTL01ControlLoops.c:2364`):
+When the entry move is launched, the PTP target is selected as follows:
 
 ```text
-if RelTrgt != 0:  gllAbsTrgt = gllFinalPosRef + RelTrgt   ; relative to the entry reference
-else:             gllAbsTrgt = RetractTarget              ; absolute target
+if RelTrgt != 0:  target = entry reference + RelTrgt   ; relative to the entry reference
+else:             target = RetractTarget               ; absolute target
 ```
 
-So `RetractTarget` is used **only when [RelTrgt](../../10-motion/13-motion-mode-ptp/RelTrgt.md) is 0**; otherwise it is ignored and the relative target wins. The resulting `gllAbsTrgt` is the standard point-to-point target, so the move respects the software position limits ([FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md)/[RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md)) like any other motion. The default is 0.
+So `RetractTarget` is used **only when [RelTrgt](../../10-motion/13-motion-mode-ptp/RelTrgt.md) is 0**; otherwise it is ignored and the relative target wins. The resulting target is the standard point-to-point target, so the move respects the software position limits ([FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md)/[RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md)) like any other motion. The default is 0.
 
 ## Changes between versions
 

@@ -41,12 +41,12 @@ Offset (mV) added to the analog output, used to calibrate/zero it.
 
 ## How it works
 
-`AOutOffset` is applied in both output modes, in the control interrupt, before the value is converted to a DAC code and clamped:
+`AOutOffset` is applied in both output modes, before the value is converted to a DAC code and clamped:
 
-- **Direct mode:** `DAC code = (AOutPort + AOutOffset) × AOUT_VALUE_TO_MV` (`AG300_CTL01ControlInterrupt.c:7039`).
-- **Monitoring mode:** `DAC code = ((parameter << AOutShifts) + AOutOffset) × AOUT_VALUE_TO_MV` (`AG300_CTL01ControlInterrupt.c:12414`).
+- **Direct mode:** `DAC code = (AOutPort + AOutOffset) × (mV-to-DAC factor)`.
+- **Monitoring mode:** `DAC code = ((parameter << AOutShifts) + AOutOffset) × (mV-to-DAC factor)`.
 
-Because the offset is added in the same millivolt units as the (scaled) value and only then scaled by `AOUT_VALUE_TO_MV` (−2.752457 LSB/mV), one unit of `AOutOffset` shifts the output by 1 mV. The narrow range (±500 mV on v4) is enough for calibration/zeroing, not for large signal offsets.
+Because the offset is added in the same millivolt units as the (scaled) value and only then scaled by the mV-to-DAC factor (−2.752457 LSB/mV), one unit of `AOutOffset` shifts the output by 1 mV. The narrow range (±500 mV on v4) is enough for calibration/zeroing, not for large signal offsets.
 
 ## Examples
 

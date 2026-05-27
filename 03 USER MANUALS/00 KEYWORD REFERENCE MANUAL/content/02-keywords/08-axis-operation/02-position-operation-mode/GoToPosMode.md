@@ -38,12 +38,12 @@ Command to gracefully enter position operation mode.
 
 ## How it works
 
-`GoToPosMode` is a function keyword. When commanded, the controller branches on the current [OperationMode](../01-general-keywords/OperationMode.md) (`GoToPosMode()`, `AG300_CTL01Funcs.c:17888`):
+`GoToPosMode` is a function keyword. When commanded, the controller branches on the current [OperationMode](../01-general-keywords/OperationMode.md):
 
 | Source `OperationMode` | Action |
 |---|---|
 | 1 (current) or 4 (force) | Set `OperationMode = 3` (position); record [ModeSwitchPos](ModeSwitchPos.md)[2] = `Pos`; if [BeginOnToPos](BeginOnToPos.md) = 1, clear it and start the entry move. |
-| 2 (velocity) | Rejected with error (`CANT_GO_TO_POS_FROM_VEL`). |
+| 2 (velocity) | Rejected with an error (cannot switch to position mode from velocity mode). |
 | 3 (position) | No effect (already in position mode). |
 
 ### Bumpless transfer
@@ -51,13 +51,13 @@ Command to gracefully enter position operation mode.
 The transition is bumpless because the position reference is kept aligned with the feedback the whole time the axis is in the source mode, so there is no step in position error at the instant of the switch:
 
 - **From current mode** — while in current-only control the position/velocity loops are open and the reference is held tracking the feedback, so on the switch `PosRef ≈ Pos` and position error is ~0.
-- **From force mode** — the force loop continuously regenerates the position reference relative to the position captured on force-mode entry: `gllFinalPosRef = (force-PID output × SAMPLE_TIME) + gllModeSwitchPos[axis][1]` (`AG300_CTL01ControlLoops.c:2339`). Because the reference is already where the feedback is, position control resumes without a jump.
+- **From force mode** — the force loop continuously regenerates the position reference relative to the position captured on force-mode entry (the [ModeSwitchPos](ModeSwitchPos.md)[1] anchor). Because the reference is already where the feedback is, position control resumes without a jump.
 
-The firmware comment makes this explicit: *"just change to operation mode, assuming everything was prepared at the Current (or Force) Operation Mode, each sample."* See [PosRef](../../10-motion/01-kinematics-status/PosRef.md) for the reference pipeline.
+The operation mode simply changes, assuming everything was prepared in current (or force) operation mode each cycle. See [PosRef](../../10-motion/01-kinematics-status/PosRef.md) for the reference pipeline.
 
 ### Optional entry move
 
-If [BeginOnToPos](BeginOnToPos.md) is armed, `GoToPosMode` calls the shared routine `QuickBeginOnSwitchToPos()` (`AG300_CTL01ControlLoops.c:2364`) — the same routine used by the internal switching algorithm and by [DInMode](../../05-inputs-outputs/04-digital-inputs/DInMode.md). See [BeginOnToPos](BeginOnToPos.md) for the move details.
+If [BeginOnToPos](BeginOnToPos.md) is armed, `GoToPosMode` starts the same entry move used by the internal switching algorithm and by [DInMode](../../05-inputs-outputs/04-digital-inputs/DInMode.md). See [BeginOnToPos](BeginOnToPos.md) for the move details.
 
 > **Note:** `GoToPosMode` cannot be used while the axis is in velocity operation mode ([OperationMode](../01-general-keywords/OperationMode.md) = 2).
 

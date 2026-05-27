@@ -38,14 +38,14 @@ Important: `CanMotorOn` does **not** turn the motor on. It runs the same pre-con
 
 ## How it works
 
-`CanMotorOn()` (`AG300_CTL01Funcs.c:19390`) sets `CanMotorOnRes = 1` and then walks a single-pass chain of checks, breaking out at the first failure and storing that reason code (`:19418`–`:19831`):
+`CanMotorOn` sets `CanMotorOnRes = 1` and then walks a single-pass chain of checks, breaking out at the first failure and storing that reason code:
 
-1. The **same pre-conditions checked by `MotorOn()`**, in the same order: FPGA / variant / full-scale health, Central-i port active and device is an amplifier with relay closed, overall current limit, **commutation complete**, inrush bypassed, CalcFilters succeeded, filters not modified.
-2. Then the **interrupt-level protections** that would fault the axis even at standstill: hardware-protection bits (STO1/STO2, encoder error, over-current, IPM fault, watchdog, 5 V faults, AC power phases), unknown encoder type, missing power supplies, bus over/under-voltage, logic over/under-voltage, board / IPM / motor over-temperature, and illegal modulo-with-input-shaping.
+1. The **same pre-conditions checked when enabling with [MotorOn](MotorOn.md)**, in the same order: FPGA / variant / full-scale health, Central-i port active and device is an amplifier with relay closed, overall current limit, **commutation complete**, inrush bypassed, CalcFilters succeeded, filters not modified.
+2. Then the **interrupt-level protections** that would fault the axis even at standstill: hardware-protection conditions (STO1/STO2, encoder error, over-current, IPM fault, watchdog, 5 V faults, AC power phases), unknown encoder type, missing power supplies, bus over/under-voltage, logic over/under-voltage, board / IPM / motor over-temperature, and illegal modulo-with-input-shaping.
 
-If the motor is already on, or `MotorType` = simulation, or the amplifier is a PD type, the function leaves the result at `1` (`:19437`).
+If the motor is already on, or `MotorType` = simulation, or the amplifier is a PD type, the result is left at `1`.
 
-The check is a **snapshot**: time-dependent protections (e.g. a `MaxVBus` over-voltage that needs to persist) and anything that can only happen after enabling (position/velocity-error, stall, high current) are *not* covered, so `MotorOn = 1` can still fail or the axis can trip shortly after enabling even when `CanMotorOn` returned `1` (`:19400`–`:19413`).
+The check is a **snapshot**: time-dependent protections (e.g. a `MaxVBus` over-voltage that needs to persist) and anything that can only happen after enabling (position/velocity-error, stall, high current) are *not* covered, so `MotorOn = 1` can still fail or the axis can trip shortly after enabling even when `CanMotorOn` returned `1`.
 
 ## Examples
 

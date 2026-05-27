@@ -36,17 +36,17 @@ Read-only amplifier DC bus voltage measurement, in millivolts.
 
 ## How it works
 
-On a built-in (PWM) amplifier the firmware samples the FPGA bus-voltage register once per group of 16 control cycles, converts the raw ADC reading to millivolts with a fixed scale factor, and then applies a low-pass filter to suppress measurement spikes. The filter is a first-order IIR with a roughly 8-sample (≈8 ms) time constant:
+On a built-in (PWM) amplifier the bus voltage is sampled once per group of 16 control cycles, the raw ADC reading is converted to millivolts with a fixed scale factor, and a low-pass filter is then applied to suppress measurement spikes. The filter is a first-order IIR with a roughly 8-sample (≈8 ms) time constant:
 
 $$
 VBus_{new} = \frac{VBus_{raw} + 7 \times VBus_{old}}{8}
 $$
 
-The raw-to-mV scale factor depends on the drive variant (each variant has a different sense-resistor divider and ADC reference), so the same FPGA count maps to different voltages on different hardware; the firmware bakes the correct multiplier in per product. The filtered result is the value you read as `VBus`.
+The raw-to-mV scale factor depends on the drive variant (each variant has a different sense-resistor divider and ADC reference), so the same raw count maps to different voltages on different hardware; the correct multiplier is applied per product. The filtered result is the value you read as `VBus`.
 
 On a **central-i** remote axis the amplifier does not own the ADC: the bus voltage arrives in the periodic amplifier-sync message and is scaled by a per-axis calibration factor and offset before being stored as `VBus`.
 
-Once `VBus` is updated, the firmware uses it (in `SAMPLE_4` for central-i, `SAMPLE_15` for a standalone controller) to drive regeneration switching and to set the over-/under-voltage status bits in `StatReg`; the actual disabling fault is then raised in the protection step.
+Once `VBus` is updated, the controller uses it to drive regeneration switching and to set the over-/under-voltage status bits in `StatReg`; the actual disabling fault is then raised in the protection step.
 
 ## Examples
 

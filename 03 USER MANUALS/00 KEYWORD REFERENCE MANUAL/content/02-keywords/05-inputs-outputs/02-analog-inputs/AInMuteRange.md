@@ -39,7 +39,7 @@ Second analog-input deadband (mV) per input, applied after gain.
 
 ## How it works
 
-The mute is applied to the post-gain value `y` (`AG300_CTL01ControlInterrupt.c:11947`). The comparison is **inclusive** on both edges, so a value exactly equal to the threshold is muted:
+The mute is applied to the post-gain value `y`. The comparison is **inclusive** on both edges, so a value exactly equal to the threshold is muted:
 
 | Output `y` | Result |
 |------------|--------|

@@ -36,7 +36,7 @@ Duty cycle of each user-controlled PWM output channel.
 
 ## How it works
 
-The PWM waveform is generated in the FPGA, not by the control loop. When you write `UserPWM` (or `UserPWMDiv`), the firmware immediately writes the new duty value to the FPGA's PWM duty register for that channel — on a standalone controller directly, on central-i by sending it to the remote unit. From then on the FPGA produces the waveform continuously in hardware at the configured frequency, independent of the control-interrupt rate, so the duty resolution and edge timing are not limited by the loop sample time.
+The PWM waveform is generated in hardware, not by the control loop. When you write `UserPWM` (or `UserPWMDiv`), the new duty value is applied to that channel immediately — on a standalone controller directly, on central-i by sending it to the remote unit. From then on the waveform is produced continuously in hardware at the configured frequency, independent of the control-loop rate, so the duty resolution and edge timing are not limited by the loop sample time.
 
 A `UserPWM` channel only appears on a pin once that pin's [DOutSelect](DOutSelect.md) is set to the matching UserPWM code; until then the channel runs internally but is not routed out. Because the signal is a hardware function, the [DOutPort](DOutPort.md) / [DOutMode](DOutMode.md) value for that output is irrelevant.
 

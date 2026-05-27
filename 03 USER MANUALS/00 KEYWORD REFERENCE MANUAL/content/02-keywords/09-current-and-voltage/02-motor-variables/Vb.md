@@ -48,7 +48,7 @@ Read-only phase B voltage reference for space-vector modulation (PWM-count fract
 | Brush (single-phase) motor | $Vb\ = \ -Va$ (phase B mirrors phase A). |
 | Current loop bypassed (ControlMode bit 2 = 1) | $Vb\ = \ IbRef$. |
 
-The same post-processing as [Va](Va.md) then applies: brushless `Vc = -(Va + Vb)`, the enhanced-speed-range midpoint subtraction (ControlMode bit 0), and saturation to the maximum PWM amplitude (firmware `glMaxPWM`) which sets the voltage-saturation bit in [StatReg](../../07-status-and-faults/StatReg.md).
+The same post-processing as [Va](Va.md) then applies: brushless `Vc = -(Va + Vb)`, the enhanced-speed-range midpoint subtraction (ControlMode bit 0), and saturation to the maximum PWM amplitude which sets the voltage-saturation bit ([StatReg](../../07-status-and-faults/StatReg.md) bit 22).
 
 ## Examples
 

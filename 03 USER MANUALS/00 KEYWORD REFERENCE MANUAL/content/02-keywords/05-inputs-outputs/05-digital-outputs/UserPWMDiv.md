@@ -36,7 +36,7 @@ Period divisor setting the PWM frequency for all user PWM channels.
 
 ## How it works
 
-The PWM timebase is generated in the FPGA. When you write `UserPWMDiv` (or [UserPWM](UserPWM.md)), the firmware writes the new divisor to the FPGA's PWM-divider register — directly on a standalone controller, or by sending it to the remote unit on central-i. The FPGA then divides its internal clock by this value to set the PWM period, so the divisor scales the period monotonically: larger divisor → longer period → lower frequency. The exact frequency for a given divisor is fixed by the FPGA clock and is product-specific; consult the product manual for the resulting frequencies.
+The PWM timebase is generated in hardware. When you write `UserPWMDiv` (or [UserPWM](UserPWM.md)), the new divisor is applied — directly on a standalone controller, or by sending it to the remote unit on central-i. The hardware then divides its internal clock by this value to set the PWM period, so the divisor scales the period monotonically: larger divisor → longer period → lower frequency. The exact frequency for a given divisor is fixed by the hardware clock and is product-specific; consult the product manual for the resulting frequencies.
 
 Because the divisor sets the shared timebase, it applies to both UserPWM channels at once — you cannot give the two channels different frequencies, only different duty cycles. Changing the divisor does not change the duty *fraction* (the 0–4095 [UserPWM](UserPWM.md) value), only the period over which that fraction is measured.
 

@@ -16,17 +16,17 @@ Bit-packed state of the digital inputs after debounce and logic inversion.
 
 ## How it works
 
-Every control cycle the interrupt reads the debounced input word(s) straight from the FPGA and XORs in the [DInLog](DInLog-DInLogHigh.md) inversion mask before storing the result, so what you read already reflects both the debounce and the polarity setting (`AG300_CTL01ControlInterrupt.c:1364`–`1374`):
+Every control cycle the debounced input word(s) are read from hardware and the [DInLog](DInLog-DInLogHigh.md) inversion mask is XORed in before the result is stored, so what you read already reflects both the debounce and the polarity setting:
 
 ```text
-glDInPortPrev = glDInPort;                         ; keep last value for edge detection
-glDInPort     = (FPGA low word | FPGA high word) ^ glDInLog;
-glDInPortHigh = (FPGA extended word)             ^ glDInLogHigh;
+DInPortPrev = DInPort;                       ; keep last value for edge detection
+DInPort     = (raw low word | raw high word) ^ DInLog;
+DInPortHigh = (raw extended word)            ^ DInLogHigh;
 ```
 
-The previous value is saved first (`glDInPortPrev`), which is how the function dispatch (see [DInMode](DInMode.md)) detects rising and falling edges. On a Central-i master the words instead come from the remote unit's synchronized I/O mirror, but the XOR-with-`DInLog` step is identical.
+The previous value is saved first, which is how the function dispatch (see [DInMode](DInMode.md)) detects rising and falling edges. On a Central-i master the words instead come from the remote unit's synchronized I/O mirror, but the XOR-with-`DInLog` step is identical.
 
-`DInPort` is updated at the 1 kHz rate; the underlying raw signal is sampled and debounced far faster in the FPGA (see [DInFilt](DInFilt.md)).
+`DInPort` is updated at the 1 kHz rate; the underlying raw signal is sampled and debounced far faster in hardware (see [DInFilt](DInFilt.md)).
 
 ## Examples
 

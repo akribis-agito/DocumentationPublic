@@ -38,11 +38,11 @@ Voltage reference applied to the modulation in voltage open-loop mode.
 
 ## How it works
 
-When [OpenLoopOn](OpenLoopOn.md) = 2 and the motor is on, the interrupt injects a **sinusoid onto phase A only**: `glVa = OpenLoopVolt × sin(phase)`, with phases B and C held at zero (`AG300_CTL01ControlInterrupt.c:6507`–`:6516`). The phase advances each cycle at the rate set by [InjectFreq](../../13-injection/InjectFreq.md). Because the current loop is bypassed, this directly excites the motor windings with a known voltage waveform.
+When [OpenLoopOn](OpenLoopOn.md) = 2 and the motor is on, the controller injects a **sinusoid onto phase A only**, with phases B and C held at zero. The phase advances each cycle at the rate set by [InjectFreq](../../13-injection/InjectFreq.md). Because the current loop is bypassed, this directly excites the motor windings with a known voltage waveform.
 
-The primary use is **motor resistance and inductance (R/L) measurement**: the firmware assumes the frequency is high enough that the rotor barely moves and the amplitude is small enough not to draw excessive current. To enforce the latter the value is a PWM scaling (units `scaling`, factor `PWM_PERCENT_FACT`) and is **clamped to a maximum of 20 % PWM** (`OPENLOOPVOLT_MAX = MAX_PWM_RANGE × 0.20`); the minimum is `0`. The frontmatter shows `range: null` because the absolute limit depends on the drive's PWM period.
+The primary use is **motor resistance and inductance (R/L) measurement**: the controller assumes the frequency is high enough that the rotor barely moves and the amplitude is small enough not to draw excessive current. To enforce the latter the value is a PWM scaling (units `scaling`) and is **clamped to a maximum of 20 % PWM**; the minimum is `0`. The frontmatter shows `range: null` because the absolute limit depends on the drive's PWM period.
 
-The value is **forced to 0** whenever `OpenLoopOn ≠ 2` or the motor is disabled (`AG300_CTL01ControlInterrupt.c:6519`, and the `M_MOTOR_OFF` macro), so no residual excitation remains when you leave the mode.
+The value is **forced to 0** whenever `OpenLoopOn ≠ 2` or the motor is disabled, so no residual excitation remains when you leave the mode.
 
 ## Examples
 
@@ -53,7 +53,7 @@ AOpenLoopVolt[1]=500 ; set the injection amplitude (PWM scaling, capped at 20%)
 
 ## Changes between versions
 
-In **v5 (central-i)** `OpenLoopVolt` is stored as a 32-bit float (`gfOpenLoopVolt`) rather than the v4 integer, and uses the remote PWM scaling factor; the 20 % PWM cap and the phase-A sinusoid behaviour are unchanged. **v5 is central-i only** — on the standalone product `OpenLoopVolt` remains the v4 integer value.
+In **v5 (central-i)** `OpenLoopVolt` is stored as a 32-bit float rather than the v4 integer, and uses the remote PWM scaling factor; the 20 % PWM cap and the phase-A sinusoid behaviour are unchanged. **v5 is central-i only** — on the standalone product `OpenLoopVolt` remains the v4 integer value.
 
 ## See also
 

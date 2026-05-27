@@ -37,7 +37,7 @@ Read-only total feedback current vector amplitude of the motor, in milliamperes.
 
 `MotorCurr` is the total feedback current vector amplitude of the motor, in milliamperes. It combines the measured phase currents into a single magnitude whose formula depends on the motor group selected by [MotorType](../../02-motor-and-amplifier/MotorType.md), then takes the sign convention described below. It provides a single value for monitoring the overall current the motor is drawing.
 
-The value is computed each control-loop sample from the measured phase currents [Ia](Ia.md), [Ib](Ib.md) (and the derived phase C current `Ic = -(Ia + Ib)` for three-phase motors). The reported value is taken after the [CurrDir](CurrDir.md) inversion (firmware `glMotorCurrFinal`).
+The value is computed each control-loop sample from the measured phase currents [Ia](Ia.md), [Ib](Ib.md) (and the derived phase C current `Ic = -(Ia + Ib)` for three-phase motors). The reported value is taken after the [CurrDir](CurrDir.md) inversion.
 
 ## How it works
 
@@ -53,7 +53,7 @@ The three-phase magnitude $\sqrt{\tfrac{2}{3}({Ia}^{2}+{Ib}^{2}+{Ic}^{2})}$ assu
 
 **CurrDir inversion.** After the magnitude and sign are formed, the reported value is negated when [CurrDir](CurrDir.md) = 1 (flipped excitation direction) and passed through unchanged when CurrDir = 0.
 
-The unsigned magnitude (firmware `glMotorCurrAbs`) and its square (`gfMotorCurrSquare`) are reused internally for the motor I²T power protection and for the stuck-motor and dynamic-braking logic; `MotorCurr` exposes the signed result.
+The unsigned magnitude and its square are reused internally for the motor I²T power protection and for the stuck-motor and dynamic-braking logic; `MotorCurr` exposes the signed result.
 
 ## Examples
 

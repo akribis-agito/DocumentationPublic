@@ -32,29 +32,29 @@ Assigns a control function to each analog input, with per-axis targeting.
 
 `AInMode` assigns a functionality to an analog input — it routes the *conditioned* reading of an input (the result of the [conditioning chain](00-overview.md): filter, offset, deadband, gain, mute) to a specific control function such as a velocity command, current command, or force feedback. The array **index** selects the input (e.g. `AInMode[2]` configures analog input 2). The value is a 32-bit field: the lower 16 bits choose the function, the upper 16 bits choose which axes consume it.
 
-`AInMode` is saved to flash. Changing it does not move data each cycle; instead the firmware rebuilds an internal routing table (see below) whenever the keyword is written.
+`AInMode` is saved to flash. Changing it does not move data each cycle; instead an internal routing table (see below) is rebuilt whenever the keyword is written.
 
 ## How it works
 
-When `AInMode` is written the firmware re-parses every input and rebuilds a routing table `stAInFunctionality[axis][function]` (`SpecialFuncs.c:1494`, `SpAInMode`). Each entry holds a pointer to the conditioned reading (`AInPort[1..4]`) and the raw reading (`AInPort[5..8]`) of the input assigned to that function, plus an `sIsDefined` flag. Functions that are not assigned point at a constant zero, so an unconfigured function reads `0` rather than stale data. The table is double-buffered and copied into the live table with interrupts disabled, so a control cycle never sees a half-updated routing (`SpecialFuncs.c:1571`).
+When `AInMode` is written, every input is re-parsed and an internal routing table is rebuilt. Each function holds a reference to the conditioned reading ([AInPort](AInPort.md)[1..4]) and the raw reading ([AInPort](AInPort.md)[5..8]) of the input assigned to it, plus a defined/undefined flag. Functions that are not assigned read a constant zero, so an unconfigured function reads `0` rather than stale data. The table is updated atomically so a control cycle never sees a half-updated routing.
 
-The **lower 16 bits** select the function (`AG300_CTL01ParamsCommon.h:2486`, `MAX_ANALOG_INPUT_MODE = 10`):
+The **lower 16 bits** select the function (valid range 0–10):
 
-| Lower 16-bit value | Firmware constant | Functionality | Consumed by |
-|--------------------|-------------------|---------------|-------------|
-| 0 | `ANALOG_USER_INPUT` | General input – no control function | Read via `AInPort` only |
-| 1 | `ANALOG_VELOCITY_COMMAND` | Velocity command | Velocity-control mode sets the velocity reference from this input (`AG300_CTL01ControlLoops.c:475`) |
-| 2 | `ANALOG_CURRENT_COMMAND` | Current command | Current-mode current reference (`AG300_CTL01ControlLoops.c:969`) |
-| 3 | `ANALOG_FORCE_FEEDBACK` | Force feedback | Force feedback `Force`/`gfForce`; also the value tested by [CurrAInTh](../../08-axis-operation/03-current-operation-mode/CurrAInTh.md) and [ForceAInTh](../../08-axis-operation/04-force-operation-mode/ForceAInTh.md) (`AG300_CTL01ControlInterrupt.c:2382`) |
-| 4 | `ANALOG_FORCE_COMMAND` | Force command | Force-mode force reference (`AG300_CTL01ControlLoops.c:1131`) |
-| 5 | `ANALOG_JOYSTICK_INPUT` | Joystick input | Jog / position target in the profiler (`AG300_CTL01Profiler.c:767`) |
-| 6 | `ANALOG_TORQUE_COMP_INPUT` | Torque compensation | Added to the current reference (`AG300_CTL01ControlLoops.c:907`) |
-| 7 | `ANALOG_INPUT_REVERSE_TORQUE_LIMIT` | Reverse (negative) current limit | Clamps the current reference (`AG300_CTL01ControlLoops.c:1897`) |
-| 8 | `ANALOG_INPUT_FORWARD_TORQUE_LIMIT` | Forward (positive) current limit | Clamps the current reference (`AG300_CTL01ControlLoops.c:1887`) |
-| 9 | `ANALOG_INPUT_TACHO_FEEDBACK` | Tachometer feedback | Velocity feedback for dual-loop (`AG300_CTL01ControlInterrupt.c:3270`) |
-| 10 | `ANALOG_INPUT_POSITION_FEEDBACK` | Position feedback | Main/aux encoder position from the *raw* reading (`AG300_CTL01ControlInterrupt.c:2178`) |
+| Lower 16-bit value | Functionality | Consumed by |
+|--------------------|---------------|-------------|
+| 0 | General input – no control function | Read via `AInPort` only |
+| 1 | Velocity command | Velocity-control mode sets the velocity reference from this input |
+| 2 | Current command | Current-mode current reference |
+| 3 | Force feedback | Force feedback `Force`; also the value tested by [CurrAInTh](../../08-axis-operation/03-current-operation-mode/CurrAInTh.md) and [ForceAInTh](../../08-axis-operation/04-force-operation-mode/ForceAInTh.md) |
+| 4 | Force command | Force-mode force reference |
+| 5 | Joystick input | Jog / position target in the profiler |
+| 6 | Torque compensation | Added to the current reference |
+| 7 | Reverse (negative) current limit | Clamps the current reference |
+| 8 | Forward (positive) current limit | Clamps the current reference |
+| 9 | Tachometer feedback | Velocity feedback for dual-loop |
+| 10 | Position feedback | Main/aux encoder position from the *raw* reading |
 
-Writing a function value greater than 10 is rejected: the firmware zeroes that `AInMode` entry and logs `AINMODE_OUT_OF_RANGE` (`SpecialFuncs.c:1532`).
+Writing a function value greater than 10 is rejected: that `AInMode` entry is zeroed and an out-of-range condition is logged.
 
 The **upper 16 bits** select which axes consume the function — each bit is one axis, and multiple bits may be set so one physical input can drive several axes:
 
@@ -62,9 +62,9 @@ The **upper 16 bits** select which axes consume the function — each bit is one
 |-------------|----|----|----|----|----|----|----|----|
 | Axis | A | B | C | D | E | F | G | H |
 
-If the upper 16 bits are **all zero**, the function is assigned to axis A — preserved for backward compatibility (`SpecialFuncs.c:1543`).
+If the upper 16 bits are **all zero**, the function is assigned to axis A — preserved for backward compatibility.
 
-> Note: position feedback (function 10) uses the **raw** reading (`lpSrcAinFromHW`, `AInPort[5..8]`), not the conditioned one; the filter/offset/gain stages do not apply to it.
+> Note: position feedback (function 10) uses the **raw** reading ([AInPort](AInPort.md)[5..8]), not the conditioned one; the filter/offset/gain stages do not apply to it.
 
 ## Examples
 

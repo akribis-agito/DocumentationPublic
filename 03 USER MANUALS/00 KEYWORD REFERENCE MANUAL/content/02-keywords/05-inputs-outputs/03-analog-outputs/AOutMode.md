@@ -43,16 +43,16 @@ In monitoring mode the emulated parameter is treated as millivolts, scaled by [A
 
 ## How it works
 
-Writing `AOutMode[Index]` runs the special function `SpAOutMode` (`SpecialFuncs.c:4866`), which does two things:
+Writing `AOutMode[Index]` does two things:
 
-1. **Sets the per-output direct/monitor flag** `gsUseAOutPort[]`. The output is forced into direct mode (flag = 1) when the value is `0`, or when the related amplifier is an analog-current-command / built-in-linear type (in which case the DAC is driving the amplifier current command regardless). Otherwise the flag is cleared (flag = 0) and the output is in monitoring mode (`SpecialFuncs.c:4877`–`4883`).
+1. **Sets the per-output direct/monitor flag.** The output is forced into direct mode when the value is `0`, or when the related amplifier is an analog-current-command / built-in-linear type (in which case the DAC is driving the amplifier current command regardless). Otherwise the output is placed in monitoring mode.
 
-2. **Resolves the CCC to a parameter pointer.** The Complex CAN code packs three things — a CAN keyword code, an axis selector, and an array index — which `ComplexCANToTokens` unpacks (`SpecialFuncs.c:4886`). The firmware then validates the keyword code, axis, array index and that the target is a parameter, and stores the address of that parameter's global into the analog-output pointer (e.g. `glpAnalogOutput1VariablePointer`). If the CCC is invalid, the pointer is aimed at a constant zero so the output rests at 0 mV (`SpecialFuncs.c:4889`–`4932`).
+2. **Resolves the CCC to a parameter.** The Complex CAN code packs three things — a CAN keyword code, an axis selector, and an array index — which are unpacked and validated (keyword code, axis, array index, and that the target is a parameter). The output then tracks that parameter. If the CCC is invalid, the output rests at 0 mV.
 
-Each control cycle, for an output in monitoring mode (`gsUseAOutPort == 0`), the interrupt reads the pointed-to parameter, shifts it by [AOutShifts](AOutShifts.md), adds [AOutOffset](AOutOffset.md), converts to a DAC code and clamps it (`AG300_CTL01ControlInterrupt.c:12407`–`12426`):
+Each control cycle, for an output in monitoring mode, the monitored parameter is read, shifted by [AOutShifts](AOutShifts.md), offset by [AOutOffset](AOutOffset.md), converted to a DAC code and clamped:
 
 $$
-\text{DAC code} = \big((\text{parameter} \ll \text{AOutShifts}) + \text{AOutOffset}\big) \times \text{AOUT\_VALUE\_TO\_MV}
+\text{DAC code} = \big((\text{parameter} \ll \text{AOutShifts}) + \text{AOutOffset}\big) \times \text{(mV-to-DAC factor)}
 $$
 
 (A negative `AOutShifts` shifts right instead.) Because the emulated parameter is treated as millivolts, choose `AOutShifts` so the parameter's internal range maps usefully onto ±11905 mV.

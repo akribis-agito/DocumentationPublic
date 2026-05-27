@@ -44,7 +44,7 @@ Analog force-feedback threshold (condition B) to enter current mode.
 | 0 | Second condition is not fulfilled. |
 | \> 0 | Second condition is fulfilled if analog force feedback > `CurrAInTh`. |
 
-This check is **only evaluated if an analog input is actually configured as force feedback**: the firmware first verifies that the `ANALOG_FORCE_FEEDBACK` function is defined (via [AInMode](../../../02-keywords/05-inputs-outputs/02-analog-inputs/AInMode.md)), and reads the filtered value of that input. If no input is assigned that function, `CurrAInTh` has no effect regardless of its value.
+This check is **only evaluated if an analog input is actually configured as force feedback**: the controller first verifies that an analog input is assigned the force-feedback function (via [AInMode](../../../02-keywords/05-inputs-outputs/02-analog-inputs/AInMode.md)), and reads the filtered value of that input. If no input is assigned that function, `CurrAInTh` has no effect regardless of its value.
 
 `CurrAInTh` is one of three interchangeable condition-B checks (the others being [CurrPosErrTh](CurrPosErrTh.md) and [CurrCurrTh](CurrCurrTh.md)); any one of them satisfying its comparison triggers the switch, provided condition A has already passed.
 

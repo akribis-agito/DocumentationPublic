@@ -47,7 +47,7 @@ Unlike [Va](Va.md) and [Vb](Vb.md), phase C is not produced by its own current l
 | Brush (single-phase) motor | $Vc\ = \ 0$ (only phases A and B are driven, with `Vb = -Va`). |
 | Two-phase stepper motor | $Vc\ = \ 0$ before the enhanced-speed-range step (the motor return lines connect to the amplifier C leg). |
 
-After it is formed, `Vc` is subject to the same post-processing as the other phases: the enhanced-speed-range midpoint subtraction (ControlMode bit 0, which can make `Vc` non-zero for steppers), and saturation to the maximum PWM amplitude (firmware `glMaxPWM`) which sets the voltage-saturation bit in [StatReg](../../07-status-and-faults/StatReg.md).
+After it is formed, `Vc` is subject to the same post-processing as the other phases: the enhanced-speed-range midpoint subtraction (ControlMode bit 0, which can make `Vc` non-zero for steppers), and saturation to the maximum PWM amplitude which sets the voltage-saturation bit ([StatReg](../../07-status-and-faults/StatReg.md) bit 22).
 
 ## Examples
 

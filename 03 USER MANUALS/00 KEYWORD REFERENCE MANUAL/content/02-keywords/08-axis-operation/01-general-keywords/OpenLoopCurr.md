@@ -40,11 +40,11 @@ This value bypasses all current references contributed by position, velocity or 
 
 ## How it works
 
-While [OpenLoopOn](OpenLoopOn.md) = 1 and the motor is on, the control loop assigns `glCurrRef = glOpenLoopCurr` each cycle, then adds anti-cogging (`AG300_CTL01ControlLoops.c:1848`–`1863`). The closed current loop then regulates the motor phase currents to this reference, so the motor produces a (roughly) constant force/torque set directly by the value — useful for commissioning, friction and force checks, and verifying current direction.
+While [OpenLoopOn](OpenLoopOn.md) = 1 and the motor is on, the control loop uses this value as the current reference each cycle, then adds anti-cogging. The closed current loop then regulates the motor phase currents to this reference, so the motor produces a (roughly) constant force/torque set directly by the value — useful for commissioning, friction and force checks, and verifying current direction.
 
-The magnitude is in milliamperes. The allowed range tracks the drive's full-scale current command (`OPENLOOPCURR_MIN`/`MAX = ±MAX_CURRENT_COMMAND`), shown as ±64000 mA in the frontmatter for the largest full scale; smaller drives clamp to their own full scale.
+The magnitude is in milliamperes. The allowed range tracks the drive's full-scale current command (±full-scale current command), shown as ±64000 mA in the frontmatter for the largest full scale; smaller drives clamp to their own full scale.
 
-The value is **forced to 0** whenever `OpenLoopOn ≠ 1` or the motor is disabled (`AG300_CTL01ControlLoops.c:1854`, and the `M_MOTOR_OFF` macro), so there is no residual current command when you leave the mode.
+The value is **forced to 0** whenever `OpenLoopOn ≠ 1` or the motor is disabled, so there is no residual current command when you leave the mode.
 
 ## Examples
 
@@ -55,7 +55,7 @@ AOpenLoopCurr[1]=1000 ; apply a 1000 mA current reference
 
 ## Changes between versions
 
-In **v5 (central-i)** `OpenLoopCurr` is stored as a 32-bit float (`gfOpenLoopCurr`) rather than the v4 integer, so a fractional milliampere reference can be commanded; the range and behaviour are otherwise unchanged. **v5 is central-i only** — on the standalone product `OpenLoopCurr` remains the v4 integer value.
+In **v5 (central-i)** `OpenLoopCurr` is stored as a 32-bit float rather than the v4 integer, so a fractional milliampere reference can be commanded; the range and behaviour are otherwise unchanged. **v5 is central-i only** — on the standalone product `OpenLoopCurr` remains the v4 integer value.
 
 ## See also
 

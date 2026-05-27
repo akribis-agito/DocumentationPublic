@@ -36,7 +36,7 @@ Trigger direction for the position-feedback check to enter position mode.
 
 ## How it works
 
-Each control cycle, while the axis is commutated and in current or force mode, the firmware evaluates (`AG300_CTL01ControlLoops.c:958` for current mode, `:1125` for force mode):
+Each control cycle, while the axis is commutated and in current or force mode, the controller evaluates:
 
 | PosPosFlag | Condition checked | Result |
 |---|---|---|
@@ -44,7 +44,7 @@ Each control cycle, while the axis is commutated and in current or force mode, t
 | 1 | [Pos](../../10-motion/01-kinematics-status/Pos.md) &lt; [PosPosTh](PosPosTh.md) | Switch to position mode. |
 | 2 | [Pos](../../10-motion/01-kinematics-status/Pos.md) &gt; [PosPosTh](PosPosTh.md) | Switch to position mode. |
 
-When the condition fires, the firmware in the same cycle:
+When the condition fires, the controller in the same cycle:
 
 1. sets `OperationMode = 3` (position);
 2. clears `PosPosFlag = 0` (one-shot — re-arm for the next switch);

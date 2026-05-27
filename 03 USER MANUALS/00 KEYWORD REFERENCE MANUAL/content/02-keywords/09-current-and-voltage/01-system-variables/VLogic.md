@@ -36,14 +36,14 @@ Read-only 5 V logic-supply voltage; outside 4500–5500 mV disables the motor.
 
 ## How it works
 
-`VLogic` is sampled once per group of 16 control cycles from the FPGA logic-voltage register and converted to millivolts with a per-variant scale factor (the divider and ADC reference differ between products, so each variant uses its own multiplier). On variants that have no 5 V sense, and on central-i remote units whose FPGA reports a firmware version below 3, the firmware substitutes a fixed `5000` mV so the protection cannot false-trip. On a central-i amplifier the 5 V reading instead arrives in the amplifier-sync message and is scaled by a per-axis calibration factor and offset.
+`VLogic` is sampled once per group of 16 control cycles and converted to millivolts with a per-variant scale factor (the divider and ADC reference differ between products, so each variant uses its own multiplier). On variants that have no 5 V sense, and on older central-i remote units, a fixed `5000` mV is substituted so the protection cannot false-trip. On a central-i amplifier the 5 V reading instead arrives in the amplifier-sync message and is scaled by a per-axis calibration factor and offset.
 
-Once per protection cycle the firmware checks the measured value against two fixed limits (these are firmware constants, **not** user-settable):
+Once per protection cycle the measured value is checked against two fixed limits (these are built-in limits, **not** user-settable):
 
 | Condition | Fault | [ConFlt](../../07-status-and-faults/ConFlt.md) code |
 |-----------|-------|------|
-| `VLogic > 5500` mV | Logic voltage too high | 1010 (`CON_FLT_LOGIC_OVER_VOLTAGE`) |
-| `VLogic < 4500` mV | Logic voltage too low | 1011 (`CON_FLT_LOGIC_UNDER_VOLTAGE`) |
+| `VLogic > 5500` mV | Logic voltage too high | 1010 |
+| `VLogic < 4500` mV | Logic voltage too low | 1011 |
 
 Either condition turns the motor off and logs the fault. The acceptable band is therefore:
 

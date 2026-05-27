@@ -43,18 +43,18 @@ Assigns a software function to each digital input, with per-axis targeting.
 
 **Example:** `CDInMode[2] = 65545` (binary `…0001 0000 0000 0000 1001`):
 - Index → 2 (digital input 2)
-- Lower 16 bits → 9 (reverse limit switch, `REV_LIMIT`)
+- Lower 16 bits → 9 (reverse limit switch)
 - Bit 16 set → axis B
 
 …so digital input 2 (of axis C) acts as the reverse-limit-switch input for axis B.
 
 ### Dispatch mechanism
 
-When `DInMode[]` is written, the special function `SpDInMode` builds an internal table (`stDinFunctionality[]`) of active functionalities — each entry holds the function code, the input bit mask, and the target axis. The control interrupt walks this table, comparing the current input word against the previous one ([DInPort](DInPort-DInPortHigh.md) vs `glDInPortPrev`) to detect **rising** and **falling** edges, then runs the function's action (`AG300_CTL01ControlInterrupt.c:10370`–`11007`). Inputs used for these functions are sampled in groups once every 16 interrupts.
+When `DInMode[]` is written, an internal table of active functionalities is built — each entry holds the function code, the input bit mask, and the target axis. Each control cycle this table is walked, comparing the current input word against the previous one ([DInPort](DInPort-DInPortHigh.md)) to detect **rising** and **falling** edges, then running the function's action. Inputs used for these functions are sampled in groups once every 16 interrupts.
 
 ### Functionality codes
 
-The lower 16 bits select one of the following functions (from the `glDInMode` `#define`s in `AG300_CTL01ParamsCommon.h:2386`–`2415`). The "Edge / level" and "Action" columns summarize what the dispatch does.
+The lower 16 bits select one of the following functions. The "Edge / level" and "Action" columns summarize what the dispatch does.
 
 | Code | Name | Edge / level | Action |
 |------|------|--------------|--------|
@@ -82,7 +82,7 @@ The lower 16 bits select one of the following functions (from the `glDInMode` `#
 | 21 | Home | level | Sets/clears the home state and [StatReg](../../07-status-and-faults/StatReg.md) home bit; toggling raises a home-change pulse. |
 | 22 | Mode switch POS ↔ FORCE | rising / falling | Switches between position and force mode (rising → position, falling → force). |
 | 23 | Hall A | — | Marks this input as Hall A (Hall B/C assumed on the next inputs); HW routing, no dispatch action. |
-| 24 | Fault input | level (on) | While on and motor on, disables the motor with fault [ConFlt](../../07-status-and-faults/ConFlt.md) = external fault input. |
+| 24 | Fault input | level (on) | While on and motor on, disables the motor with fault [ConFlt](../../07-status-and-faults/ConFlt.md) = 1050 (external fault input activated). |
 | 25 | Homing on input | rising | Triggers `HomingOn = 1` to start a homing sequence. |
 | 26 | Fault input — controlled stop | level (on) | While on, performs a controlled stop and disables the motor at the end. |
 
@@ -94,7 +94,7 @@ The lower 16 bits select one of the following functions (from the `glDInMode` `#
 
 ## Changes between versions
 
-Central-i v5 adds one functionality code: **27 — Heidenhain limits** (`HEIDENHAIN_LIMITS`). It is not present in v4 / standalone (where the highest code is 26). All codes 0–26 above are unchanged.
+Central-i v5 adds one functionality code: **27 — Heidenhain limits**. It is not present in v4 / standalone (where the highest code is 26). All codes 0–26 above are unchanged.
 
 ## See also
 

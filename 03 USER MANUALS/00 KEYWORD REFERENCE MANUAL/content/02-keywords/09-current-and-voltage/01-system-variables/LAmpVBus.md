@@ -36,16 +36,16 @@ Read-only bus-voltage measurements of the built-in linear amplifier (AmpType = 4
 
 ## How it works
 
-A linear amplifier runs from a split (bipolar) supply, so it has a positive and a negative motor rail. When `AmpType` = 4, the firmware samples both rails from the FPGA in the current-read step and scales each raw reading to millivolts:
+A linear amplifier runs from a split (bipolar) supply, so it has a positive and a negative motor rail. When `AmpType` = 4, both rails are sampled in the current-read step and each raw reading is scaled to millivolts:
 
 | Index | Rail | Description                              |
 |-------|------|------------------------------------------|
 | 1     | +Vm  | Positive linear-amplifier bus voltage    |
 | 2     | −Vm  | Negative linear-amplifier bus voltage (reported as a negative value) |
 
-The array is sized for two rails plus an unused index 0 (so that communication indexes start at 1). The negative rail is read from a separate FPGA register and negated, so a healthy −Vm reads as a negative millivolt value.
+The array is sized for two rails plus an unused index 0 (so that communication indexes start at 1). The negative rail is read separately and negated, so a healthy −Vm reads as a negative millivolt value.
 
-> **Note:** on a linear amplifier the bus-voltage protection limits ([MinVBus](../../06-protections/02-current-and-voltage/MinVBus.md) / [MaxVBus](../../06-protections/02-current-and-voltage/MaxVBus.md)) and the [VBus](VBus.md) reading do not apply; the firmware explicitly bypasses the standard VBus path for this amplifier type.
+> **Note:** on a linear amplifier the bus-voltage protection limits ([MinVBus](../../06-protections/02-current-and-voltage/MinVBus.md) / [MaxVBus](../../06-protections/02-current-and-voltage/MaxVBus.md)) and the [VBus](VBus.md) reading do not apply; the standard VBus path is bypassed for this amplifier type.
 
 ## Examples
 

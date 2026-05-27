@@ -39,13 +39,13 @@ Read-only direct-axis feedback current after Park transform (three-phase only), 
 
 ## How it works
 
-`Id` is computed from the measured phase currents [Ia](Ia.md) and [Ib](Ib.md) by a combined Clarke + Park transform, using the sine and cosine of the electrical commutation angle θ. The firmware evaluates θ by indexing precomputed sine/cosine tables at the commutation angle, also producing the −120° shifted pair used for the phase-B term:
+`Id` is computed from the measured phase currents [Ia](Ia.md) and [Ib](Ib.md) by a combined Clarke + Park transform, using the sine and cosine of the electrical commutation angle θ (evaluated at the commutation angle, together with the −120° shifted pair used for the phase-B term):
 
 $$
 Id\ \lbrack mA\rbrack = \frac{2}{\sqrt 3}\left(Ib \cdot \sin\theta - Ia \cdot \sin(\theta - 120^\circ)\right)
 $$
 
-The factor $2/\sqrt3 \approx 1.1547$ is applied as written in the firmware. θ is the electrical commutation angle from the commutation/auto-phasing logic (the same angle that produces the phase references). The quadrature counterpart [Iq](Iq.md) uses the cosine terms.
+The factor $2/\sqrt3 \approx 1.1547$ is applied as written. θ is the electrical commutation angle from the commutation/auto-phasing logic (the same angle that produces the phase references). The quadrature counterpart [Iq](Iq.md) uses the cosine terms.
 
 The current-loop gains that act on the resulting error are [CurrGain](../../11-control-tuning/06-current-control/00-overview.md) and CurrKi (see [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md)); this page does not give tuning guidance.
 

@@ -38,7 +38,7 @@ Read-only phase B current reference, in milliamperes (definition varies by motor
 
 ## How it works
 
-Like [IaRef](IaRef.md), the phase B reference is the commutation projection of the direction-corrected scalar current reference (firmware `CurrRefFinal`), which is the limited current reference after the [CurrDir](CurrDir.md) sign is applied:
+Like [IaRef](IaRef.md), the phase B reference is the commutation projection of the direction-corrected scalar current reference `CurrRefFinal`, which is the limited current reference after the [CurrDir](CurrDir.md) sign is applied:
 
 | Motor group (MotorType) | Phase B reference |
 |----|----|

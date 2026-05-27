@@ -40,24 +40,24 @@ The value `1` means **all pre-checks passed** — enabling the axis (with `Motor
 
 ## How it works
 
-`CanMotorOn()` writes this variable. The non-fault rejection codes are interpreter error numbers (`AG300_CTL01Interpreter.h`); the rest are `CON_FLT_*` controller fault codes. Representative values:
+The non-fault rejection codes are controller error numbers; the rest are controller fault codes. Representative values:
 
-| Value | Internal name | Meaning |
-|---|---|---|
-| 1 | — | **All checks passed** — enabling would currently succeed. |
-| 31 | `NOT_ALLOWED_BEFORE_COMMUTATION` | Commutation / auto-phasing has not been done yet. |
-| 86 | `NOT_ALLOWED_WHILE_INRUSH_RESISTOR_ACTIVE` | Inrush charge relay has not closed yet. |
-| 87 | `NOT_ALLOWED_IF_CALC_FILTERS_FAILED` | The last `CalcFilters` failed. |
-| 102 | `NOT_ALLOWED_IF_FILTERS_MODIFIED` | Loop filters were changed without re-running `CalcFilters`. |
-| 159 | `CI_PORT_NOT_ACTIVE` | Central-i port is not active/connected. |
-| 175 | `CI_DEVICE_NOT_AMPLIFIER` | The Central-i device is not an amplifier. |
-| 186 | `CI_DEVICE_RELAY_OFF` | Remote amplifier relay is still open. |
-| 241 | `DRV02_TOO_HIGH_OVERALL_CURRENT` | Sum of `ContCL` across axes exceeds the hardware limit. |
-| 244 | `FAULTY_FPGA` | A faulty FPGA was detected. |
-| 245 / 250 / 268 | `AG100_FPGA_FW_DONOT_MATCH` / `AGD301_FPGA_FW_DONOT_MATCH` / `DYNBRK_FPGA_FW_DONOT_MATCH` | FPGA version does not match the firmware. |
-| ≥ 1000 | `CON_FLT_*` | A standing controller fault would block enabling (STO, encoder error, over-current, bus voltage, over-temperature, …). See [Controller error codes](../../../04-error-codes/controller-error-codes.md). |
+| Value | Meaning |
+|---|---|
+| 1 | **All checks passed** — enabling would currently succeed. |
+| 31 | Commutation / auto-phasing has not been done yet. |
+| 86 | Inrush charge relay has not closed yet. |
+| 87 | The last [CalcFilters](../../11-control-tuning/01-general-keywords/CalcFilters.md) failed. |
+| 102 | Loop filters were changed without re-running [CalcFilters](../../11-control-tuning/01-general-keywords/CalcFilters.md). |
+| 159 | Central-i port is not active/connected. |
+| 175 | The Central-i device is not an amplifier. |
+| 186 | Remote amplifier relay is still open. |
+| 241 | Sum of [ContCL](../../06-protections/02-current-and-voltage/ContCL.md) across axes exceeds the hardware limit. |
+| 244 | A faulty FPGA was detected. |
+| 245 / 250 / 268 | FPGA version does not match the firmware. |
+| ≥ 1000 | A standing controller fault would block enabling (STO, encoder error, over-current, bus voltage, over-temperature, …). See [Controller error codes](../../../04-error-codes/controller-error-codes.md). |
 
-The list is not exhaustive — the firmware comments note that some protections may not be analysed by `CanMotorOn`, and because checks run in a fixed order only the **first** failure is reported.
+The list is not exhaustive — some protections may not be analysed by `CanMotorOn`, and because checks run in a fixed order only the **first** failure is reported.
 
 ## Examples
 

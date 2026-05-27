@@ -39,12 +39,12 @@ Per-output sink/source mode for single-ended digital outputs (bitfield).
 
 ## How it works
 
-`DOutType` decides which physical driver carries each output. The control interrupt first builds the final output word (`DOutPort XOR DOutLog`), then routes only the open-collector bits by type:
+`DOutType` decides which physical driver carries each output. The final output word (`DOutPort XOR DOutLog`) is built first, then only the open-collector bits are routed by type:
 
-- **Sink driver** gets the bits where `DOutType = 0`: `(~DOutType) & DOutPortFinal` (masked to the open-collector outputs).
-- **Source driver** gets the bits where `DOutType = 1`: `DOutType & DOutPortFinal` (same mask).
+- **Sink driver** gets the bits where `DOutType = 0`: `(~DOutType) & (final output word)` (masked to the open-collector outputs).
+- **Source driver** gets the bits where `DOutType = 1`: `DOutType & (final output word)` (same mask).
 
-So an output bit only drives current through the driver its type selects; the other driver sees `0` for that bit. When you change `DOutType`, the firmware also writes the FPGA source-control register (on a standalone controller) or sends the new type word to the remote unit (on central-i) so the hardware stage matches immediately.
+So an output bit only drives current through the driver its type selects; the other driver sees `0` for that bit. When you change `DOutType`, the hardware output stage is updated immediately (directly on a standalone controller, or by sending the new type word to the remote unit on central-i) so the hardware stage matches.
 
 `DOutType` is the same setting shown as sink/source selection on the single-ended digital-output signal path in the [digital-outputs overview](00-overview.md).
 

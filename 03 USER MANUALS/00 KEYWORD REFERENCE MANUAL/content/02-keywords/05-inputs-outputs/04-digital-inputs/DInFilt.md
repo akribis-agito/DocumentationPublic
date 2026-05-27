@@ -32,19 +32,19 @@ Software debounce filter for all digital inputs on an axis.
 
 ## Overview
 
-`DInFilt` sets a debounce filter: a raw digital input must hold the same value for `DInFilt` consecutive samples before the change is asserted; otherwise the input keeps its previous state. For example, `DInFilt = 3` requires three consecutive readings of "1" before a "1" is asserted. It is the first stage of the [digital-input signal path](00-overview.md), and runs in the FPGA at the raw sampling rate (much faster than the 1 kHz [DInPort](DInPort-DInPortHigh.md) update).
+`DInFilt` sets a debounce filter: a raw digital input must hold the same value for `DInFilt` consecutive samples before the change is asserted; otherwise the input keeps its previous state. For example, `DInFilt = 3` requires three consecutive readings of "1" before a "1" is asserted. It is the first stage of the [digital-input signal path](00-overview.md), and runs in hardware at the raw sampling rate (much faster than the 1 kHz [DInPort](DInPort-DInPortHigh.md) update).
 
 `DInFilt` is a single value that applies to **all** digital inputs of the axis/module (e.g. `CDInFilt` applies to all inputs of axis/module C). Debouncing improves noise immunity at the cost of reducing the effective sampling rate by the filter factor.
 
 ## How it works
 
-Writing `DInFilt` runs the special function `SpDInFilt` (`SpecialFuncs.c:4648`), which is what actually pushes the value down to the hardware: it masks the value to its low 4 bits (`& 0xF`, giving the 0–15 range) and writes it into the FPGA filter register. The register packs the filter setting for several axes — 4 bits each — into one word (`SpecialFuncs.c:4653`–`4655`):
+Writing `DInFilt` pushes the value down to the hardware: it masks the value to its low 4 bits (`& 0xF`, giving the 0–15 range) and writes it into the hardware filter register. The register packs the filter setting for several axes — 4 bits each — into one word:
 
 ```text
-FPGA filter reg = (DInFilt[C] & 0xF) << 8 | (DInFilt[B] & 0xF) << 4 | (DInFilt[A] & 0xF);
+filter reg = (DInFilt[C] & 0xF) << 8 | (DInFilt[B] & 0xF) << 4 | (DInFilt[A] & 0xF);
 ```
 
-So the debounce is performed in the FPGA, not in the control-loop software. A value of `0` disables debouncing.
+So the debounce is performed in hardware, not in the control-loop software. A value of `0` disables debouncing.
 
 ## Examples
 

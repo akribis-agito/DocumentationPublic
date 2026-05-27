@@ -38,14 +38,14 @@ Bit-packed selection of current/voltage control options (SVM limit, vector vs ph
 
 ## How it works
 
-The bits are 0-based. The value is treated as a bit-mask; the firmware default is `0x1` (bit 0 set, all others reset).
+The bits are 0-based. The value is treated as a bit-mask; the default is `0x1` (bit 0 set, all others reset).
 
-| Bit | Mask | Constant | Function |
-|---|---|---|---|
-| 0 | 0x1 | `ENHANCED_SPEED_RANGE_SET` | **Space-vector modulation limit (enhanced speed range).** Default **set (1)**. When set, the firmware enlarges the allowed voltage-vector limit by a factor of $(2/\sqrt3)^2$ on the squared limit (and injects a third-harmonic / mid-point offset into the phase voltages), letting the line-to-line voltage reach up to ≈0.866·VBus instead of ≈0.75·VBus. When reset (0), the smaller limit applies. |
-| 1 | 0x2 | `AVOID_VECTOR_CONTROL_SET` | **Vector control.** Default 0. If reset (0), current control of a brushless motor runs in the dq0 domain (vector control on [Iq](Iq.md)/[Id](Id.md), producing [Vq](Vq.md)/[Vd](Vd.md)). If set (1), control runs in the abc domain (phase control directly on [Ia](Ia.md)/[Ib](Ib.md), producing [Va](Va.md)/[Vb](Vb.md)). |
-| 2 | 0x4 | `AVOID_CURRENT_CONTROL_SET` | **Current control loop bypass.** Default 0. If reset (0), the current PI loop is used. If set (1), the loop is bypassed and the phase voltage references for SVM are taken directly from the phase current references — that is, [Va](Va.md) = [IaRef](IaRef.md) and [Vb](Vb.md) = [IbRef](IbRef.md). |
-| 3 | 0x8 | `CURRENT_I2T_MAKES_FAULT_SET` | **Action taken for I2T protection.** Default 0. If reset (0), triggering motor I²T protection clamps the current reference at [ContCL](../../06-protections/02-current-and-voltage/ContCL.md) until the filtered I² value falls below (ContCL)². If set (1), triggering I²T protection disables the motor, reports an error code and records it to ErrLog. If the current control loop is bypassed (bit 2 set), triggering I²T protection always disables the motor regardless of this bit (firmware mask `CURRENT_I2T_MAKES_FAULT_CASES` = 0x0C). |
+| Bit | Mask | Function |
+|---|---|---|
+| 0 | 0x1 | **Space-vector modulation limit (enhanced speed range).** Default **set (1)**. When set, the allowed voltage-vector limit is enlarged by a factor of $(2/\sqrt3)^2$ on the squared limit (and a third-harmonic / mid-point offset is injected into the phase voltages), letting the line-to-line voltage reach up to ≈0.866·VBus instead of ≈0.75·VBus. When reset (0), the smaller limit applies. |
+| 1 | 0x2 | **Vector control.** Default 0. If reset (0), current control of a brushless motor runs in the dq0 domain (vector control on [Iq](Iq.md)/[Id](Id.md), producing [Vq](Vq.md)/[Vd](Vd.md)). If set (1), control runs in the abc domain (phase control directly on [Ia](Ia.md)/[Ib](Ib.md), producing [Va](Va.md)/[Vb](Vb.md)). |
+| 2 | 0x4 | **Current control loop bypass.** Default 0. If reset (0), the current PI loop is used. If set (1), the loop is bypassed and the phase voltage references for SVM are taken directly from the phase current references — that is, [Va](Va.md) = [IaRef](IaRef.md) and [Vb](Vb.md) = [IbRef](IbRef.md). |
+| 3 | 0x8 | **Action taken for I2T protection.** Default 0. If reset (0), triggering motor I²T protection clamps the current reference at [ContCL](../../06-protections/02-current-and-voltage/ContCL.md) until the filtered I² value falls below (ContCL)². If set (1), triggering I²T protection disables the motor, reports an error code and records it to ErrLog. If the current control loop is bypassed (bit 2 set), triggering I²T protection always disables the motor regardless of this bit. |
 
 Note that bits 1 and 2 only apply where a current loop runs in the controller — see [AmpType](../../02-motor-and-amplifier/AmpType.md). For an external current-command amplifier the current loop runs in the drive, not in the controller, so the current limits are still applied to the reference but these domain/bypass bits do not select the loop.
 

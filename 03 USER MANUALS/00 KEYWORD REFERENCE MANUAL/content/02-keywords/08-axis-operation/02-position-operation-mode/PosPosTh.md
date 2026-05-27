@@ -41,7 +41,7 @@ Position-feedback threshold used with PosPosFlag to enter position mode.
 
 ## How it works
 
-Each control cycle, while commutated and in current/force mode, the firmware compares [Pos](../../10-motion/01-kinematics-status/Pos.md) against `PosPosTh` in the direction chosen by [PosPosFlag](PosPosFlag.md) (`AG300_CTL01ControlLoops.c:958`, `:1125`):
+Each control cycle, while commutated and in current/force mode, the controller compares [Pos](../../10-motion/01-kinematics-status/Pos.md) against `PosPosTh` in the direction chosen by [PosPosFlag](PosPosFlag.md):
 
 | PosPosFlag | Condition | Result |
 |------------|-----------|--------|

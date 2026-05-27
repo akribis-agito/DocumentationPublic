@@ -39,7 +39,7 @@ Read-only quadrature-axis PI-controller output in dq0-domain current control (th
 
 ## How it works
 
-`Vq` is the output of the quadrature-axis current PI controller, computed from the error [IqErr](IqErr.md). The firmware accumulates the integral (scaled by CurrKi) and adds the proportional term (scaled by CurrGain):
+`Vq` is the output of the quadrature-axis current PI controller, computed from the error [IqErr](IqErr.md). The integral is accumulated (scaled by CurrKi) and the proportional term (scaled by CurrGain) is added:
 
 $$
 \begin{aligned}
@@ -48,7 +48,7 @@ Vq &= (IqIntegral + IqErr) \cdot CurrGain \cdot 0.001
 \end{aligned}
 $$
 
-`0.001` is the fixed gain scaling applied in firmware; `noClamp` is the anti-windup flag (0 freezes the integral during voltage saturation, 1 otherwise).
+`0.001` is the fixed gain scaling; `noClamp` is the anti-windup flag (0 freezes the integral during voltage saturation, 1 otherwise).
 
 **Vector saturation.** Before the inverse Park transform, `Vq` and [Vd](Vd.md) are limited as a vector against the maximum PWM magnitude. If $Vq^2 + Vd^2$ exceeds the squared limit (the limit is multiplied by $4/3$ when the enhanced-speed-range bit of [ControlMode](ControlMode.md) is set), both `Vq` and `Vd` are scaled by the same factor so the sine-wave shape is preserved, and the voltage-saturation status bit in [StatReg](../../07-status-and-faults/StatReg.md) is set.
 

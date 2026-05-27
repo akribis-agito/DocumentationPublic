@@ -39,9 +39,9 @@ Maximum velocity of the point-to-point move on entry to position mode.
 
 ## How it works
 
-When the entry move is launched, `QuickBeginOnSwitchToPos()` copies `RetractSpeed` directly into the active PTP move speed: `gllSpeed[axis] = gllRetractSpeed[axis]` (`AG300_CTL01ControlLoops.c:2371`). The move then runs as an ordinary point-to-point profile — `RetractSpeed` sets only the cruise (maximum) velocity; acceleration, deceleration and jerk are taken from the axis' normal motion-profile settings.
+When the entry move is launched, `RetractSpeed` is copied directly into the active PTP move speed. The move then runs as an ordinary point-to-point profile — `RetractSpeed` sets only the cruise (maximum) velocity; acceleration, deceleration and jerk are taken from the axis' normal motion-profile settings.
 
-The keyword is signed and may be negative; the value is the commanded speed for the profiler, which moves toward the target regardless of sign. The default is 1000. The range is symmetric about zero (`±MAX_SPEED`/`±MAX_SPEED_WIDE` in firmware); see the frontmatter for the exact limits.
+The keyword is signed and may be negative; the value is the commanded speed for the profiler, which moves toward the target regardless of sign. The default is 1000. The range is symmetric about zero; see the frontmatter for the exact limits.
 
 ## Changes between versions
 

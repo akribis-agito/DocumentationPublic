@@ -51,8 +51,8 @@ How `Va` is produced depends on the motor group and the [ControlMode](ControlMod
 After `Va` is formed:
 
 - **Phase C / completion.** For brushless motors `Vc = -(Va + Vb)` so the three phase voltages sum to zero. For brush motors `Vb = -Va` and `Vc = 0`; for steppers `Vc = 0`.
-- **Enhanced speed range.** If [ControlMode](ControlMode.md) bit 0 is set (default), the firmware subtracts the midpoint of the phase voltages from all phases (a common-mode / third-harmonic injection), which raises the usable line-to-line voltage.
-- **Saturation.** Each phase is clamped to the maximum PWM amplitude (firmware `glMaxPWM`); in vector mode the Vq/Vd vector is scaled before this so the sinusoidal relationship is preserved. Saturation sets the voltage-saturation bit in [StatReg](../../07-status-and-faults/StatReg.md).
+- **Enhanced speed range.** If [ControlMode](ControlMode.md) bit 0 is set (default), the midpoint of the phase voltages is subtracted from all phases (a common-mode / third-harmonic injection), which raises the usable line-to-line voltage.
+- **Saturation.** Each phase is clamped to the maximum PWM amplitude; in vector mode the Vq/Vd vector is scaled before this so the sinusoidal relationship is preserved. Saturation sets the voltage-saturation bit ([StatReg](../../07-status-and-faults/StatReg.md) bit 22).
 
 **Scaling.** `Va` is reported with the SVM scaling: a value of 1000 equals the full PWM count for the platform, so the internal PWM command is `Va × (PWM count per 1000)`. The factor depends on the hardware/PWM clock period.
 

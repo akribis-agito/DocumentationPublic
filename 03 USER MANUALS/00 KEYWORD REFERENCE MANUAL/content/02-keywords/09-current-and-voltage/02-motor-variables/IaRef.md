@@ -38,7 +38,7 @@ Read-only phase A current reference, in milliamperes (definition varies by motor
 
 ## How it works
 
-All three derivations start from the direction-corrected scalar current reference (firmware `CurrRefFinal`), which is the limited current reference after the [CurrDir](CurrDir.md) sign is applied. The commutation then projects it onto phase A:
+All three derivations start from the direction-corrected scalar current reference `CurrRefFinal`, which is the limited current reference after the [CurrDir](CurrDir.md) sign is applied. The commutation then projects it onto phase A:
 
 | Motor group (MotorType) | Phase A reference |
 |----|----|

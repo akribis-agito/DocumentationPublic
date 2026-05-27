@@ -45,7 +45,7 @@ Read-only quadrature-axis current error (IqRef − Iq), definition varies by mot
 | Three-phase motor (MotorType = 3 or 4) | `IqErr` is the q-axis error used in dq0-domain current control: $IqErr\ [mA] = IqRef\ [mA] - Iq\ [mA]$. |
 | Two-phase stepper motor (MotorType = 6 or 7) | `IqErr` equals 0. |
 
-For three-phase motors, `IqErr` drives the quadrature-axis current PI controller, whose output is [Vq](Vq.md). The firmware integrates the error (scaled by CurrKi) and adds it to the proportional term (scaled by CurrGain):
+For three-phase motors, `IqErr` drives the quadrature-axis current PI controller, whose output is [Vq](Vq.md). The error is integrated (scaled by CurrKi) and added to the proportional term (scaled by CurrGain):
 
 $$
 \begin{aligned}
@@ -54,7 +54,7 @@ Vq &= (IqIntegral + IqErr) \cdot CurrGain \cdot 0.001
 \end{aligned}
 $$
 
-Here `0.001` is the fixed gain scaling applied in firmware, and `noClamp` is the anti-windup flag (set to 0 to freeze the integral while the combined [Vq](Vq.md)/[Vd](Vd.md) output is voltage-saturated, 1 otherwise). The gain keywords CurrGain and CurrKi are documented under [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md); this page does not give tuning guidance.
+Here `0.001` is the fixed gain scaling, and `noClamp` is the anti-windup flag (set to 0 to freeze the integral while the combined [Vq](Vq.md)/[Vd](Vd.md) output is voltage-saturated, 1 otherwise). The gain keywords CurrGain and CurrKi are documented under [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md); this page does not give tuning guidance.
 
 ## Examples
 

@@ -36,12 +36,12 @@ DC bus-voltage threshold (mV) above which the regeneration resistor is activated
 
 ## How it works
 
-Once per regeneration step (the per-axis `SAMPLE_4` step on central-i, or the controller-wide `SAMPLE_15` step on a standalone controller), and only when [RegenUsed](RegenUsed.md) ≠ 0, the firmware compares the filtered bus voltage against the two thresholds:
+Once per regeneration step (per-axis on central-i, controller-wide on a standalone controller), and only when [RegenUsed](RegenUsed.md) ≠ 0, the controller compares the filtered bus voltage against the two thresholds:
 
 | Condition | Action |
 |-----------|--------|
-| `VBus ≥ RegenOn`  | Set the FPGA "activate regeneration" command bit (chopper ON) and set [StatReg](../../07-status-and-faults/StatReg.md) bit 1 (regeneration active) |
-| `VBus ≤ RegenOff` | Clear the FPGA regeneration command bit (chopper OFF) and clear `StatReg` bit 1 |
+| `VBus ≥ RegenOn`  | Turn the regeneration chopper ON and set [StatReg](../../07-status-and-faults/StatReg.md) bit 1 (regeneration active) |
+| `VBus ≤ RegenOff` | Turn the regeneration chopper OFF and clear `StatReg` bit 1 |
 | `RegenOff < VBus < RegenOn` | No change — the chopper holds its current state |
 
 The middle row is the dead-band: between the two thresholds nothing changes, so the chopper does not chatter on every small ripple. For this to work you must set **`RegenOn` > `RegenOff`**; if they are equal there is no hysteresis, and `RegenOn` < `RegenOff` is not a valid configuration. On a standalone controller the regen circuit is not per-axis — when it activates, `StatReg` bit 1 is set on all axes at once.

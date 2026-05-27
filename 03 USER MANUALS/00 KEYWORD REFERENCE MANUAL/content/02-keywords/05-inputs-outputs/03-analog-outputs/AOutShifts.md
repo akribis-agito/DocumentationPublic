@@ -35,12 +35,12 @@ Power-of-two scaling applied to the monitored parameter on an analog output.
 
 ## How it works
 
-Each control cycle, for an output in monitoring mode, the interrupt takes the monitored parameter and applies an arithmetic bit shift before adding the offset and converting to a DAC code (`AG300_CTL01ControlInterrupt.c:12409`–`12414`):
+Each control cycle, for an output in monitoring mode, the monitored parameter has an arithmetic bit shift applied before adding the offset and converting to a DAC code:
 
 ```text
 if (AOutShifts < 0)  value = parameter >> (-AOutShifts);   // shift right (divide)
 else                 value = parameter <<   AOutShifts;    // shift left  (multiply)
-DAC code = (value + AOutOffset) * AOUT_VALUE_TO_MV;
+DAC code = (value + AOutOffset) * (mV-to-DAC factor);
 ```
 
 A **positive** value shifts left — multiplying the value by $2^{AOutShifts}$. A **negative** value shifts right — dividing by $2^{|AOutShifts|}$. The range ±31 reflects the width of the 32-bit shift.

@@ -40,16 +40,16 @@ Under current operation mode, `CurrCmdSrc` sets the source of the current comman
 
 ## How it works
 
-The firmware dispatches on the value as follows:
+The controller generates the current reference according to the value as follows:
 
 | Value | Source | Generation mechanism |
 |----|----|----|
 | 0 | Analog current command input | `CurrRef` is set directly from the filtered analog input configured as the current command (see [AInMode](../../../02-keywords/05-inputs-outputs/02-analog-inputs/AInMode.md)). The axis stays in current mode for [CurrCmdHTime](CurrCmdHTime.md)`[1]` (or indefinitely if it is negative). |
 | 1 | User-defined table | `CurrRef` steps through the [CurrCmdVal](CurrCmdVal.md) table, ramping toward each entry at [CurrCmdSlope](CurrCmdSlope.md) and holding it for [CurrCmdHTime](CurrCmdHTime.md), advancing via [CurrCmdIndex](CurrCmdIndex.md). |
-| 2 | User-defined table (interpolated) | Same handling as value 1 in current firmware — the source code notes interpolated handling is reserved for a future release. |
+| 2 | User-defined table (interpolated) | Same handling as value 1 in current firmware — interpolated handling is reserved for a future release. |
 | 3 | Master axis current command | `CurrRef` is copied from the master axis' `CurrRef` (master selected by [CurrRefMaster](CurrRefMaster.md)). Timed by [CurrCmdHTime](CurrCmdHTime.md)`[1]` exactly like the analog source. **central-i v5 only.** |
 
-Any unexpected value forces `CurrRef` to 0 (the `default` branch of the firmware switch).
+Any unexpected value forces `CurrRef` to 0.
 
 > **Note:** Values 1 and 2 currently behave identically. Value 3 (master-axis slave drive) exists only in the central-i v5 firmware; the standalone/v4 firmware accepts `CurrCmdSrc` of 0–2 only.
 
@@ -62,7 +62,7 @@ ACurrCmdSrc=3        ; follow a master axis (slave drive, central-i v5)
 
 ## Changes between versions
 
-central-i v5 adds source value 3 (`CURRENT_COMMAND_SOURCE_CURRREF_MASTER_AXIS`), extending the valid range to 0–3 (standalone/v4: 0–2). Source 3 makes the axis a slave drive that copies the master axis' current reference; see [CurrRefMaster](CurrRefMaster.md).
+central-i v5 adds source value 3 (master-axis current command), extending the valid range to 0–3 (standalone/v4: 0–2). Source 3 makes the axis a slave drive that copies the master axis' current reference; see [CurrRefMaster](CurrRefMaster.md).
 
 ## See also
 

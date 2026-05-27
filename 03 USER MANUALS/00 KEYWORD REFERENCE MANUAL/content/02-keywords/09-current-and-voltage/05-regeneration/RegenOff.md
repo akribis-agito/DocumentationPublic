@@ -36,7 +36,7 @@ DC bus-voltage threshold (mV) below which the regeneration resistor is deactivat
 
 ## How it works
 
-`RegenOff` is the partner of [RegenOn](RegenOn.md); both are evaluated in the same regeneration step (per-axis `SAMPLE_4` on central-i, controller-wide `SAMPLE_15` on a standalone controller) whenever [RegenUsed](RegenUsed.md) ≠ 0:
+`RegenOff` is the partner of [RegenOn](RegenOn.md); both are evaluated in the same regeneration step (per-axis on central-i, controller-wide on a standalone controller) whenever [RegenUsed](RegenUsed.md) ≠ 0:
 
 | Condition | Action |
 |-----------|--------|

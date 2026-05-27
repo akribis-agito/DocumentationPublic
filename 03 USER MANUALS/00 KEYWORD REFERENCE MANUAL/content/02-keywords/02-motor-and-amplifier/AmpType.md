@@ -47,25 +47,25 @@ Because `AmpType` is an axis-scope parameter saved to flash, it cannot be change
 
 `AmpType` decides whether the axis closes its **own current loop** or delegates it. For the built-in PWM amplifier and the linear-adapter the controller runs the full internal current/commutation loop and drives the power stage directly. For every other mode the axis is flagged as **driven externally**: the internal current loop is skipped and the controller only emits a command signal (analog current, analog velocity, or pulse-direction) for the external amplifier to act on. Changing `AmpType` re-arms commutation for a brushless motor (the [StatReg](../07-status-and-faults/StatReg.md) commutation bit is cleared until re-phasing completes).
 
-| AmpType | Internal symbol | Amplifier mode | Current loop |
-|----|----|----|----|
-| 0 | `BUILT_IN_PWM` | Built-in PWM amplifier — controller drives the power stage directly. | Internal |
-| 1 | `RESERVED` | Reserved (was central-i). Do not use. | — |
-| 2 | `ANALOG_CURR_CMD` | External amplifier, analog **current** command. The current reference ([CurrRef](../09-current-and-voltage/02-motor-variables/CurrRef.md)) is scaled to an analog-output voltage via [AAmpFullScale](AAmpFullScale.md). | External |
-| 3 | `PD` | External amplifier, digital **pulse-direction (PD)** command. The controller outputs step/direction pulses; many checks (current loop, commutation) are bypassed. | External |
-| 4 | `BUILT_IN_LINEAR` | Built-in **linear** amplifier (reserved product). Analog current command scaled by [LAmpFullScale](LAmpFullScale.md). | Internal |
-| 5 | `ANALOG_VEL_CMD` | External amplifier, analog **velocity** command. The velocity reference ([VelRef](../10-motion/01-kinematics-status/VelRef.md)) is scaled to an analog-output voltage via [AAmpFullScale](AAmpFullScale.md). | External |
-| 7 | `LINEAR_ADAPTER` | External **linear adapter**: the controller still runs its internal commutation/current loop and outputs the two phase-current references ([IaRef](../09-current-and-voltage/02-motor-variables/IaRef.md)/[IbRef](../09-current-and-voltage/02-motor-variables/IbRef.md)) as analog voltages (scaled by [AAmpFullScale](AAmpFullScale.md)). | Internal |
+| AmpType | Amplifier mode | Current loop |
+|----|----|----|
+| 0 | Built-in PWM amplifier — controller drives the power stage directly. | Internal |
+| 1 | Reserved (was central-i). Do not use. | — |
+| 2 | External amplifier, analog **current** command. The current reference ([CurrRef](../09-current-and-voltage/02-motor-variables/CurrRef.md)) is scaled to an analog-output voltage via [AAmpFullScale](AAmpFullScale.md). | External |
+| 3 | External amplifier, digital **pulse-direction (PD)** command. The controller outputs step/direction pulses; many checks (current loop, commutation) are bypassed. | External |
+| 4 | Built-in **linear** amplifier (reserved product). Analog current command scaled by [LAmpFullScale](LAmpFullScale.md). | Internal |
+| 5 | External amplifier, analog **velocity** command. The velocity reference ([VelRef](../10-motion/01-kinematics-status/VelRef.md)) is scaled to an analog-output voltage via [AAmpFullScale](AAmpFullScale.md). | External |
+| 7 | External **linear adapter**: the controller still runs its internal commutation/current loop and outputs the two phase-current references ([IaRef](../09-current-and-voltage/02-motor-variables/IaRef.md)/[IbRef](../09-current-and-voltage/02-motor-variables/IbRef.md)) as analog voltages (scaled by [AAmpFullScale](AAmpFullScale.md)). | Internal |
 
 In **v5 (central-i)** two more modes exist:
 
-| AmpType | Internal symbol | Amplifier mode |
-|----|----|----|
-| 6 | `PD_WITH_FEEDBACK` | Digital pulse-direction command with position feedback. |
-| 8 | `VRD_SPI` | Digital SPI phase-current reference (IaRef/IbRef) command. |
+| AmpType | Amplifier mode |
+|----|----|
+| 6 | Digital pulse-direction command with position feedback. |
+| 8 | Digital SPI phase-current reference (IaRef/IbRef) command. |
 
 > [!note]
-> Value 6 falls in the v4 0–7 range numerically but `PD_WITH_FEEDBACK` is only defined in v5 firmware; on v4, modes 6 and 8 are not available.
+> Value 6 falls in the v4 0–7 range numerically but mode 6 is only available on v5; on v4, modes 6 and 8 are not available.
 
 ### Output scaling for the external modes
 

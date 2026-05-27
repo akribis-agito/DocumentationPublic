@@ -38,23 +38,23 @@ The flag is honoured only on the transitions that prepare a clean entry into pos
 
 ## How it works
 
-Every path that switches the axis into position mode checks `glBeginOnToPos`; if it is non-zero the firmware clears it and calls the shared routine `QuickBeginOnSwitchToPos()` (`AG300_CTL01ControlLoops.c:2364`). The call sites are:
+Every path that switches the axis into position mode checks `BeginOnToPos`; if it is non-zero the controller clears it and starts the shared entry move. The entry paths are:
 
-| Entry path | Firmware site |
-|---|---|
-| `GoToPosMode` command | `AG300_CTL01Funcs.c:17908` |
-| Internal switch from current mode | `AG300_CTL01ControlLoops.c:1109` |
-| Internal switch from force mode | `AG300_CTL01ControlLoops.c:1424` |
-| `DInMode` position/current input (rising edge) | `AG300_CTL01ControlInterrupt.c:9066` |
-| `DInMode` position/force input (rising edge) | `AG300_CTL01ControlInterrupt.c:9158` |
+| Entry path |
+|---|
+| `GoToPosMode` command |
+| Internal switch from current mode |
+| Internal switch from force mode |
+| `DInMode` position/current input (rising edge) |
+| `DInMode` position/force input (rising edge) |
 
 ### The entry move
 
-`QuickBeginOnSwitchToPos()` sets up and starts a standard point-to-point move:
+The entry move is set up and started as a standard point-to-point move:
 
-1. **Target** — if [RelTrgt](../../10-motion/13-motion-mode-ptp/RelTrgt.md) ≠ 0, the absolute target is `gllFinalPosRef + RelTrgt` (relative to the reference at entry); otherwise it is the absolute [RetractTarget](RetractTarget.md). The result is written to the PTP target `gllAbsTrgt`.
-2. **Speed** — the move speed `gllSpeed` is set to [RetractSpeed](RetractSpeed.md).
-3. **Start** — if a conditional-start input is armed (`glBeginDInOn` ≠ 0) the motion is flagged `IN_MOTION | IN_WAIT_FOR_INPUT` and actually begins on the input's rising edge; otherwise it starts immediately. Acceleration/deceleration and jerk come from the axis' normal PTP profile settings; the friction-compensation flag is set and the motion-samples counter is reset.
+1. **Target** — if [RelTrgt](../../10-motion/13-motion-mode-ptp/RelTrgt.md) ≠ 0, the absolute target is the reference at entry plus `RelTrgt` (relative to the reference at entry); otherwise it is the absolute [RetractTarget](RetractTarget.md).
+2. **Speed** — the move speed is set to [RetractSpeed](RetractSpeed.md).
+3. **Start** — if a conditional-start input is armed, the motion waits for input and actually begins on the input's rising edge; otherwise it starts immediately. Acceleration/deceleration and jerk come from the axis' normal PTP profile settings; friction compensation is applied and the motion-samples counter is reset.
 
 Because this is an ordinary PTP move, it obeys the software position limits ([FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md)/[RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md)) like any other motion.
 

@@ -30,24 +30,24 @@ Per-output logic inversion (XOR) applied to the final digital-output state.
 
 ## Overview
 
-`DOutLog` inverts the logic of selected digital outputs, as a bitfield (0-based: bit 0 = output 1). Each bit: `0` = default, `1` = inverted. The inversion is applied after [DOutPort](DOutPort.md) (and after any hardware/software function), producing the internal `DOutPortFinal` that drives the physical outputs.
+`DOutLog` inverts the logic of selected digital outputs, as a bitfield (0-based: bit 0 = output 1). Each bit: `0` = default, `1` = inverted. The inversion is applied after [DOutPort](DOutPort.md) (and after any hardware/software function), producing the final output word that drives the physical outputs.
 
 ## How it works
 
-Every control cycle, just before writing the physical pins, the firmware XORs the output word with `DOutLog`:
+Every control cycle, just before writing the physical pins, the output word is XORed with `DOutLog`:
 
 $$
-DOutPortFinal = DOutPort \oplus DOutLog
+\text{Final output word} = DOutPort \oplus DOutLog
 $$
 
-A `1` bit in `DOutLog` inverts that output; a `0` bit passes it through unchanged. The result, `DOutPortFinal`, is what the FPGA discrete-output register receives. On products with selectable sink/source pins, `DOutPortFinal` is computed first, then split by [DOutType](DOutType.md) into the sink-driver and source-driver registers — so polarity is applied **before** the sink/source routing.
+A `1` bit in `DOutLog` inverts that output; a `0` bit passes it through unchanged. The result is what the hardware discrete-output stage receives. On products with selectable sink/source pins, the final word is computed first, then split by [DOutType](DOutType.md) into the sink and source drivers — so polarity is applied **before** the sink/source routing.
 
-**Example:** with `DOutPort = 7` (`…0111`) and `DOutLog = 3` (`…0011`), `DOutPortFinal = 4` (`…0100`) — bits 0 and 1 (outputs 1 and 2) are inverted.
+**Example:** with `DOutPort = 7` (`…0111`) and `DOutLog = 3` (`…0011`), the final output word is `4` (`…0100`) — bits 0 and 1 (outputs 1 and 2) are inverted.
 
 ## Notes
 
 1. `DOutLog` is applied to the final word, so it inverts outputs regardless of how the underlying `DOutPort` bit was set — manual writes, [DOutPortSBit/CBit/TBit](DOutPortSBit-DOutPortCBit-DOutPortTBit.md), or a [DOutMode](DOutMode.md) software function all see the same inversion.
-2. It does not affect outputs routed to a *hardware* function via [DOutSelect](DOutSelect.md) (events, P/D, UserPWM), which bypass the `DOutPort`/`DOutLog` word in the FPGA.
+2. It does not affect outputs routed to a *hardware* function via [DOutSelect](DOutSelect.md) (events, P/D, UserPWM), which bypass the `DOutPort`/`DOutLog` word in hardware.
 3. Saved to flash, so polarity persists across power cycles.
 
 ## See also

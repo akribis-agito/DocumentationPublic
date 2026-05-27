@@ -39,7 +39,7 @@ First analog-input deadband (mV) per input.
 
 ## How it works
 
-The deadband is applied to the offset-corrected value `u` (`AG300_CTL01ControlInterrupt.c:11936`):
+The deadband is applied to the offset-corrected value `u`:
 
 | Input `u` | Output |
 |-----------|--------|

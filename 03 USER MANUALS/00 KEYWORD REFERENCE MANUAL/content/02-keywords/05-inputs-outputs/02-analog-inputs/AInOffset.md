@@ -39,7 +39,7 @@ Offset (mV) added to each analog input.
 
 ## How it works
 
-In the per-cycle conditioning code the offset is added to the filtered reading before any deadband or gain (`AG300_CTL01ControlInterrupt.c:11933`):
+In the per-cycle conditioning, the offset is added to the filtered reading before any deadband or gain:
 
 $$
 y = u + AInOffset

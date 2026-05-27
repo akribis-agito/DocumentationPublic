@@ -39,13 +39,13 @@ DC gain (×65536 fixed-point) applied to each analog input.
 
 ## How it works
 
-In the per-cycle conditioning code the deadband output is multiplied by `AInGain` scaled by 1/65536 (`AG300_CTL01ControlInterrupt.c:11944`):
+In the per-cycle conditioning, the deadband output is multiplied by `AInGain` scaled by 1/65536:
 
 $$
 y = \frac{AInGain}{65536}\,u
 $$
 
-The scale factor `1/65536` is the constant `DIVIDE_BY_65536`; both input and output are in millivolts. A negative `AInGain` inverts the input. For unity gain, set `AInGain = 65536`.
+Both input and output are in millivolts. A negative `AInGain` inverts the input. For unity gain, set `AInGain = 65536`.
 
 ## Examples
 

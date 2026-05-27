@@ -5,16 +5,16 @@
     </marker>
   </defs>
 
-  <!-- MOTOR_OFF state -->
+  <!-- Motor OFF state -->
   <rect x="40" y="150" width="200" height="90" rx="10" fill="#eef3fb" stroke="#3b6ea5" stroke-width="2"/>
-  <text x="140" y="178" text-anchor="middle" font-weight="bold">MOTOR_OFF</text>
+  <text x="140" y="178" text-anchor="middle" font-weight="bold">Motor OFF</text>
   <text x="140" y="200" text-anchor="middle" font-size="11">loops inactive, integrals = 0</text>
   <text x="140" y="216" text-anchor="middle" font-size="11">PosRef tracks Pos</text>
   <text x="140" y="232" text-anchor="middle" font-size="11">no power to motor</text>
 
-  <!-- MOTOR_ON state -->
+  <!-- Motor ON state -->
   <rect x="520" y="150" width="200" height="90" rx="10" fill="#eaf6ec" stroke="#3a8f4f" stroke-width="2"/>
-  <text x="620" y="178" text-anchor="middle" font-weight="bold">MOTOR_ON</text>
+  <text x="620" y="178" text-anchor="middle" font-weight="bold">Motor ON</text>
   <text x="620" y="200" text-anchor="middle" font-size="11">loops active per OperationMode</text>
   <text x="620" y="216" text-anchor="middle" font-size="11">ConFlt = 0, MotorReason = 0</text>
   <text x="620" y="232" text-anchor="middle" font-size="11">brake released</text>

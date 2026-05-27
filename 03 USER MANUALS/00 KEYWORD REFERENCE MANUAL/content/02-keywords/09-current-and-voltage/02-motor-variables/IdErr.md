@@ -45,7 +45,7 @@ $$
 IdErr\ \lbrack mA\rbrack\  = \ IdRef\ \lbrack mA\rbrack\  - \ Id\ \lbrack mA\rbrack
 $$
 
-It then drives the direct-axis current PI controller, whose output is [Vd](Vd.md). The firmware integrates the error (scaled by CurrKi) and adds it to the proportional term (scaled by CurrGain):
+It then drives the direct-axis current PI controller, whose output is [Vd](Vd.md). The error is integrated (scaled by CurrKi) and added to the proportional term (scaled by CurrGain):
 
 $$
 \begin{aligned}
@@ -54,7 +54,7 @@ Vd &= (IdIntegral + IdErr) \cdot CurrGain \cdot 0.001
 \end{aligned}
 $$
 
-Here `0.001` is the fixed gain scaling applied in firmware, and `noClamp` is the anti-windup flag (0 freezes the integral while the output is voltage-saturated, 1 otherwise). Since [IdRef](IdRef.md) is currently always 0, `IdErr = −Id`. The gain keywords CurrGain and CurrKi are documented under [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md); this page does not give tuning guidance.
+Here `0.001` is the fixed gain scaling, and `noClamp` is the anti-windup flag (0 freezes the integral while the output is voltage-saturated, 1 otherwise). Since [IdRef](IdRef.md) is currently always 0, `IdErr = −Id`. The gain keywords CurrGain and CurrKi are documented under [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md); this page does not give tuning guidance.
 
 ## Examples
 

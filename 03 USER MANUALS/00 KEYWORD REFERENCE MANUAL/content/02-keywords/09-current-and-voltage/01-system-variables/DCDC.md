@@ -48,9 +48,9 @@ The array has 8 elements (index 0 is unused so that communication indexes start 
 | 6     | Internal 10.5 V or backup logic (whichever higher) |
 | 7     | 4.7 V logic                                        |
 
-The rails are sampled across two control sub-cycles (the 3.3 V / ±15 V group in one step, the 1.2 V / 1.8 V group in the next), each raw FPGA reading being scaled to millivolts with a fixed per-rail multiplier. Which rails are actually sampled is product-dependent:
+The rails are sampled across two control sub-cycles (the 3.3 V / ±15 V group in one step, the 1.2 V / 1.8 V group in the next), each raw reading being scaled to millivolts with a fixed per-rail multiplier. Which rails are actually sampled is product-dependent:
 
-- On products that do not sense a given rail, the firmware substitutes the nominal value (for example 3300 mV for the 3.3 V rail, ±15000 mV for the ±15 V rails, 1200 / 1800 mV for the 1.2 V / 1.8 V rails) so the reading is still plausible rather than zero.
+- On products that do not sense a given rail, the nominal value is substituted (for example 3300 mV for the 3.3 V rail, ±15000 mV for the ±15 V rails, 1200 / 1800 mV for the 1.2 V / 1.8 V rails) so the reading is still plausible rather than zero.
 - The −15 V reading is corrected for the 3.3 V loading on some products, so it is a computed rather than a directly read value.
 - On a **central-i** remote axis, index 6 (backup / logic) and index 1 (3.3 V) are filled from the amplifier-sync message, each scaled by a per-axis calibration factor and offset; the 5 V reading from that same message is stored in [VLogic](VLogic.md) instead.
 
