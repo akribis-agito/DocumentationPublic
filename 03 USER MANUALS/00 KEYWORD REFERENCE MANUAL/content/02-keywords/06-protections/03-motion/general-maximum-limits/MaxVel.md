@@ -40,18 +40,18 @@ Maximum closed-loop velocity; exceeding it (+25% buffer) disables the axis.
 
 ## How it works
 
-**1. Velocity-reference saturation (every control sample).** In the velocity loop the generated reference `VelRef` is clamped to ±`MaxVel` (firmware `CommonC/AG300_CTL01ControlLoops.c:642`). When clamping occurs the `STAT_REG_VEL_SAT` bit (`0x00800000`) is set in [StatReg](../../../07-status-and-faults/StatReg.md) to flag that the velocity reference was saturated.
+**1. Velocity-reference saturation (every control sample).** In the velocity loop the generated velocity reference is clamped to ±`MaxVel`. When clamping occurs the velocity-saturation bit of [StatReg](../../../07-status-and-faults/StatReg.md) (bit 23, `0x00800000`) is set to flag that the velocity reference was saturated.
 
-**2. Overspeed fault trip (every control sample).** The measured feedback velocity `Vel[1]` is checked against `MaxVel` plus a 25% margin (firmware `CommonC/AG300_CTL01ControlInterrupt.c:4812`):
+**2. Overspeed fault trip (every control sample).** The measured feedback velocity is checked against `MaxVel` plus a 25% margin:
 
-```c
-if (labs(Vel[1]) > ((MaxVel >> 3) * 10))   // (MaxVel/8)*10 = MaxVel x 1.25
-    MotorOffAndAddToErrorLog(axis, CON_FLT_HIGH_VELOCITY, true);
+```text
+if |Vel| > MaxVel × 1.25
+    turn the axis off and log the fault
 ```
 
-`(MaxVel >> 3) * 10` is `MaxVel × 1.25` (the shift-then-multiply form avoids 32-bit overflow at very high `MaxVel`). When exceeded, the axis is turned off immediately and `CON_FLT_HIGH_VELOCITY` (code `1019`) is recorded in [ConFlt](../../../07-status-and-faults/ConFlt.md).
+When exceeded, the axis is turned off immediately and [ConFlt](../../../07-status-and-faults/ConFlt.md) records fault code 1019 (velocity too high).
 
-**3. Command-time validation.** A motion cannot be *started* in the indirect/profiled modes (Jog, PTP, PD/Gear/eCam indirect, position joystick indirect) if the commanded `Speed` exceeds `MaxVel` — `Begin` returns `MAXVEL_PROTECTION` (error 271) (firmware `CommonC/AG300_CTL01Funcs.c:959`). Likewise, setting `Speed` larger than `MaxVel` while already in motion is rejected with `SPEED_HIGHER_THAN_MAXVEL` (error 269) (`CommonC/AG300_CTL01Interpreter.c:2379`). Direct modes (e.g. pulse-and-direction direct) are not gated this way because the user drives the reference directly; for those, mechanisms 1 and 2 still apply.
+**3. Command-time validation.** A motion cannot be *started* in the indirect/profiled modes (Jog, PTP, PD/Gear/eCam indirect, position joystick indirect) if the commanded `Speed` exceeds `MaxVel` — `Begin` is rejected (error 271). Likewise, setting `Speed` larger than `MaxVel` while already in motion is rejected (error 269). Direct modes (e.g. pulse-and-direction direct) are not gated this way because the user drives the reference directly; for those, mechanisms 1 and 2 still apply.
 
 ## Examples
 
@@ -64,5 +64,5 @@ AMaxVel[1]            ; read back the limit
 
 - [MaxVelErr](MaxVelErr.md) — velocity-following-error trip (a different fault)
 - [MaxAcc](MaxAcc.md) — acceleration limit
-- [StatReg](../../../07-status-and-faults/StatReg.md) — `VEL_SAT` bit set when `VelRef` is clamped to `MaxVel`
-- [ConFlt](../../../07-status-and-faults/ConFlt.md) — records `CON_FLT_HIGH_VELOCITY` (1019) on overspeed trip
+- [StatReg](../../../07-status-and-faults/StatReg.md) — velocity-saturation bit (bit 23) set when the velocity reference is clamped to `MaxVel`
+- [ConFlt](../../../07-status-and-faults/ConFlt.md) — records fault code 1019 (velocity too high) on overspeed trip

@@ -38,7 +38,7 @@ It is **not** a feedback-path delay and does not delay the tracked value itself 
 
 ## How it works
 
-`SpVEnc` (`SpecialFuncs.c:5180`) converts `VEncDelay` from microseconds into FPGA clocks (`VEncDelay × FPGA_CLOCK_IN_US`) and stores it as the "clocks-to-first-pulse" value. Each control cycle, when the emitted direction sign changes, the firmware loads `2 × VEncDelay` worth of clocks before the first pulse of the new direction (`AG300_CTL01ControlInterrupt.c`, around line 6391); when the direction is unchanged, no extra delay is inserted.
+When `VEncDelay` is written, the controller converts it from microseconds into hardware clocks (microseconds × clocks-per-microsecond) and stores it as the "clocks-to-first-pulse" value. Each control cycle, when the emitted direction sign changes, the controller loads `2 × VEncDelay` worth of clocks before the first pulse of the new direction; when the direction is unchanged, no extra delay is inserted.
 
 For A-quad-B output (`VEncType = 1`) the delay is forced to **0** — quadrature channels are never switched simultaneously, so no direction-setup time is required.
 

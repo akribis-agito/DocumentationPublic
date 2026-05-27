@@ -39,16 +39,16 @@ Maximum open-loop (injection) velocity error; exceeding it disables the axis.
 
 ## How it works
 
-`MaxVelErrOL` and `MaxVelErr` feed the **same** velocity-error check (`CommonC/AG300_CTL01ControlLoops.c:670`). The `SpOpenLoop()` handler (`CommonC/SpecialFuncs.c:5654`) selects which one is active by copying it into the working variable `MaxVelErrInternal` and setting bit 1 of `gsMaxErrStat`:
+`MaxVelErrOL` and `MaxVelErr` feed the **same** velocity-error check. The loop state selects which one is active by switching the threshold and recording whether open-loop limiting is in effect:
 
-| Condition | `MaxVelErrInternal` set to | `gsMaxErrStat` bit 1 |
-|-----------|----------------------------|----------------------|
-| Open-loop mode on (`OpenLoopOn`) | `MaxVelErrOL` | set |
-| Injection at CurrRef / ForceRef point | `MaxVelErrOL` (CurrRef) | set (CurrRef) |
-| Injection at VelRef / PosRef point | `MaxVelErr` | clear |
-| Normal closed loop | `MaxVelErr` | clear |
+| Condition | Active threshold | Open-loop limiting |
+|-----------|------------------|--------------------|
+| Open-loop mode on (`OpenLoopOn`) | `MaxVelErrOL` | yes |
+| Injection at CurrRef / ForceRef point | `MaxVelErrOL` (CurrRef) | yes (CurrRef) |
+| Injection at VelRef / PosRef point | `MaxVelErr` | no |
+| Normal closed loop | `MaxVelErr` | no |
 
-When the loop finds `|VelErr| > MaxVelErrInternal`, bit 1 of `gsMaxErrStat` decides the fault: set → `CON_FLT_HIGH_VEL_ERR_OL` (code `1056`); clear → `CON_FLT_HIGH_VEL_ERR` (code `1021`). The axis is turned off immediately. As with the closed-loop check, the protection is active only in Position/Velocity/force-over-PIV operation and is bypassed for velocity-command (analog) amplifiers. On return to normal operation the internal threshold is restored to `MaxVelErr` (`AG300_CTL01ControlLoops.c:2648`).
+When the loop finds the velocity error exceeds the active threshold, the open-loop flag decides the fault: open-loop → [ConFlt](../../../07-status-and-faults/ConFlt.md) fault code 1056 (open-loop velocity error too high); closed-loop → fault code 1021 (velocity error too high). The axis is turned off immediately. As with the closed-loop check, the protection is active only in Position/Velocity/force-over-PIV operation and is bypassed for velocity-command (analog) amplifiers. On return to normal operation the active threshold is restored to `MaxVelErr`.
 
 ## Examples
 
@@ -62,4 +62,4 @@ AMaxVelErrOL[1]            ; read back the limit
 - [MaxVelErr](MaxVelErr.md) — closed-loop velocity-error limit (the alternate threshold)
 - [MaxPosErrOL](MaxPosErrOL.md) — open-loop position-error limit
 - [VelErr](../../../10-motion/01-kinematics-status/VelErr.md) — the measured error this limit acts on
-- [ConFlt](../../../07-status-and-faults/ConFlt.md) — records `CON_FLT_HIGH_VEL_ERR_OL` (1056)
+- [ConFlt](../../../07-status-and-faults/ConFlt.md) — records fault code 1056 (open-loop velocity error too high)

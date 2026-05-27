@@ -23,9 +23,9 @@ Selects the encoder feedback type for the axis.
 | 7     | Analog position feedback                | Others                      |
 | 8     | Absolute – Tamagawa                     | Absolute encoder            |
 
-The values map to the firmware `ENCODER_TYPE_*` constants (`AG300_CTL01ParamsCommon.h`): `UNKNOWN`=0, `INCREMENTAL`=1, `SSI`=2, `ENDAT`=3, `SIN_COS`=4, `NIKON_17_BITS`=5, `BISS_C`=6, `POTENTIOMETER`=7 (analog position feedback), `TAMAGAWA`=8. Whether a given type is actually supported depends on the product hardware; selecting an unsupported type raises `ENCODER_TYPE_NOT_SUPPORTED`.
+Whether a given type is actually supported depends on the product hardware; selecting an unsupported type is rejected.
 
-For a digital incremental encoder, also refer to [EncSubType](EncSubType-AuxEncSubType.md) and [EncFilt](EncFilt-AuxEncFilt.md). `EncSubType` selects the incremental decoding scheme: A/B quadrature (0), pulse/direction (1), C0/C1 (2), or up/down (3). The incremental path is the one gated by `glEncType == ENCODER_TYPE_INCREMENTAL` in the control interrupt, and is also the only type for which [EncDir](EncDir-AuxEncDir.md) and [EncFilt](EncFilt-AuxEncFilt.md) apply.
+For a digital incremental encoder, also refer to [EncSubType](EncSubType-AuxEncSubType.md) and [EncFilt](EncFilt-AuxEncFilt.md). `EncSubType` selects the incremental decoding scheme: A/B quadrature (0), pulse/direction (1), C0/C1 (2), or up/down (3). The incremental type (`EncType=1`) is also the only type for which [EncDir](EncDir-AuxEncDir.md) and [EncFilt](EncFilt-AuxEncFilt.md) apply.
 
 For an absolute encoder, also refer to [EncAbsBits](EncAbsBits-AuxEncAbsBits.md), [EncAbsMB](EncAbsMB-AuxEncAbsMB.md), [EncAbsOff](EncAbsOff-AuxEncAbsOff.md) and [EncAbsVal](EncAbsVal-AuxEncAbsVal.md). With an absolute encoder the feedback [Pos](../../10-motion/01-kinematics-status/Pos.md) is initialised from the absolute reading at power-up rather than starting at zero.
 
@@ -35,9 +35,9 @@ For an analog SIN/COS encoder, also refer to [SinCosSetup](SinCosSetup-AuxSinCos
 
 | | v4 (standalone & central-i) | v5 (central-i) |
 |---|---|---|
-| Tamagawa (value 8) | Defined (`LAST_ENCODER_TYPE`=8) | Tamagawa absent from the core type list (`LAST_ENCODER_TYPE`=7) |
+| Tamagawa (value 8) | Defined (types enumerated up to value 8) | Tamagawa absent from the core type list (types enumerated up to value 7) |
 
-In **v5** the core firmware enumerates encoder types up to value 7 (Potentiometer); value 8 (Tamagawa) is present in the v4 list. As always, supported types are ultimately determined by the product hardware. **v5 is central-i only.**
+In **v5** the core firmware enumerates encoder types up to value 7 (analog position feedback); value 8 (Tamagawa) is present in the v4 list. As always, supported types are ultimately determined by the product hardware. **v5 is central-i only.**
 
 ## Examples
 

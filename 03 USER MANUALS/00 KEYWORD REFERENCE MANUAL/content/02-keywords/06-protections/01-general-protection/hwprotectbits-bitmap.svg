@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" font-family="sans-serif" font-size="12">
   <rect x="0" y="0" width="760" height="300" fill="#ffffff"/>
   <text x="20" y="26" font-size="15" font-weight="bold">HWProtectBits / ProtectMask &#8211; standalone (AG300) layout</text>
-  <text x="20" y="46" fill="#555">Read from FPGA PROTECTIONS1 register; lower 16 bits are meaningful.</text>
+  <text x="20" y="46" fill="#555">Hardware protection signals; lower 16 bits are meaningful.</text>
 
   <!-- bit cells, bit 0 on the right -->
   <g>

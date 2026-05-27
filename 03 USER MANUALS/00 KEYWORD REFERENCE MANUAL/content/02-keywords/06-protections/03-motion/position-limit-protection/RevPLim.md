@@ -43,9 +43,9 @@ Unlike the hardware limit switches reported by `LimitsStat` (physical inputs), `
 
 ## How it works
 
-The reverse limit is the mirror image of the forward limit; the same four mechanisms apply (firmware `CommonC/AG300_CTL01Profiler.c` and `CommonC/AG300_CTL01Funcs.c`):
+The reverse limit is the mirror image of the forward limit; the same four mechanisms apply:
 
-**1. Pre-emptive braking.** For a negative-direction profile the distance-to-stop velocity is computed against `RevPLim` (`AG300_CTL01Profiler.c:835`):
+**1. Pre-emptive braking.** For a negative-direction profile the distance-to-stop velocity is computed against `RevPLim`:
 
 ```text
 DecelerationSpeed = Decel·T - sqrt(Decel²·T² + 2·Decel·(PosRef - RevPLim))
@@ -53,16 +53,16 @@ DecelerationSpeed = Decel·T - sqrt(Decel²·T² + 2·Decel·(PosRef - RevPLim))
 
 The profiled velocity is clamped to this so the axis arrives at `RevPLim` at zero speed.
 
-**2. Stop request when the reference crosses the limit.** If the shaped/filtered reference passes below `RevPLim` while moving backward (`AG300_CTL01Profiler.c:563`), the `IN_STOP_REQUEST` bit is set in [MotionStat](../../../10-motion/05-motion-status/MotionStat.md) and `MotionReason = MOTION_REASON_END_REV_PLIM` (code `6`) is recorded; the stop then uses `EmrgDec` (`AG300_CTL01Profiler.c:783`).
+**2. Stop request when the reference crosses the limit.** If the shaped/filtered reference passes below `RevPLim` while moving backward, a stop request is raised in [MotionStat](../../../10-motion/05-motion-status/MotionStat.md) and [MotionReason](../../../10-motion/05-motion-status/MotionReason.md) = 6 (motion ended at the reverse software limit) is recorded; the stop then uses `EmrgDec`.
 
-**3. Hard clamp.** The reference and absolute target are clamped to be no lower than `RevPLim` in the profiler modes (e.g. `AG300_CTL01Profiler.c:1010`, `:1201`, `:1328`, `:1609`, `:2020`) and in the control-interrupt streaming path (`CommonIncludes/AG300_CTL01ControlInterrupt.h:291`).
+**3. Hard clamp.** The reference and absolute target are clamped to be no lower than `RevPLim` in the profiler modes and in the control-interrupt streaming path.
 
-**4. Begin-time rejection.** A motion is rejected with `CANT_START_MOTION_IF_OUT_OF_POS_LIMITS` if `PosRef` is already below `RevPLim` and the motion mode cannot drive back inside (`AG300_CTL01Funcs.c:952`).
+**4. Begin-time rejection.** A motion is rejected if the position reference is already below `RevPLim` and the motion mode cannot drive back inside (the axis cannot start a motion while outside the position limits).
 
-| MotionReason | Value | Meaning |
-|--------------|-------|---------|
-| `MOTION_REASON_END_REV_PLIM` | 6 | Motion stopped at the reverse software limit |
-| `MOTION_REASON_END_FWD_PLIM` | 7 | Motion stopped at the forward software limit |
+| MotionReason | Meaning |
+|--------------|---------|
+| 6 | Motion stopped at the reverse software limit |
+| 7 | Motion stopped at the forward software limit |
 
 ### Data type by version
 
@@ -79,5 +79,5 @@ ARevPLim[1]             ; read back the reverse soft limit
 
 - [FwdPLim](FwdPLim.md) — forward software travel limit (upper bound of the same range)
 - [LimitsStat](LimitsStat.md) — hardware limit-switch status (physical RLS/FLS inputs)
-- [MotionStat](../../../10-motion/05-motion-status/MotionStat.md) — carries the `IN_STOP_REQUEST` bit set when the limit is hit
-- [MotionReason](../../../10-motion/05-motion-status/MotionReason.md) — records reason code 6 (`MOTION_REASON_END_REV_PLIM`) when motion ends here
+- [MotionStat](../../../10-motion/05-motion-status/MotionStat.md) — carries the stop-request bit set when the limit is hit
+- [MotionReason](../../../10-motion/05-motion-status/MotionReason.md) — records reason code 6 when motion ends here

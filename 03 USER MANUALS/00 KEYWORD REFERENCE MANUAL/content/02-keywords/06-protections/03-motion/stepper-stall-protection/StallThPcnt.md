@@ -36,11 +36,11 @@ Stepper stall threshold as a percentage (10–90%, default 50%).
 
 ## How it works
 
-Each control sample the firmware multiplies the speed-dependent expected-metric fit by `StallThPcnt/100` when forming [StallTh](StallTh.md) (firmware `CommonC/AG300_CTL01ControlLoops.c:2526`):
+Each control sample the firmware multiplies the speed-dependent expected-metric fit by `StallThPcnt/100` when forming [StallTh](StallTh.md):
 
-```c
-ThFiltInput = (StallThPcnt * ldPosRefBitShifted) * 0.01 * 0.001
-              * (StallCnst[1]*ldPosRefBitShifted + StallCnst[2]) - 10000;
+```text
+threshold input = (StallThPcnt * speed) * 0.01 * 0.001
+                  * (StallCnst[1]*speed + StallCnst[2]) - 10000;
 ```
 
 The `* 0.01` term is the `/100` that turns the percentage into a fraction. A stall is then declared when `StallVal < StallTh`.
@@ -50,7 +50,7 @@ Because `StallTh` rises with `StallThPcnt`:
 - **Higher `StallThPcnt`** raises the threshold, so it is easier for `StallVal` to fall below it → **more sensitive** (and more prone to false trips).
 - **Lower `StallThPcnt`** lowers the threshold → **less sensitive** (the metric must collapse further before a stall is flagged).
 
-The valid range is 10–90 % (firmware `STALLTHPCNT_MIN`/`MAX`), default 50 %.
+The valid range is 10–90 %, default 50 %.
 
 ## Examples
 

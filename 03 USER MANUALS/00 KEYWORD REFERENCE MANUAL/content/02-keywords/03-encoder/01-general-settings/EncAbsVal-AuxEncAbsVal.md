@@ -11,11 +11,11 @@ Read-only absolute encoder reading after bit-masking and direction handling.
 
 ## How it works
 
-Each control cycle the firmware reads the raw absolute word from the encoder interface, then (`ControlInterrupt.c:2071`–`2078`):
+Each control cycle the firmware reads the raw absolute word from the encoder interface, then:
 
 1. Right-shifts it by [EncAbsMB](EncAbsMB-AuxEncAbsMB.md) to drop the unused low bits.
 2. If [EncDir](EncDir-AuxEncDir.md) is reversed, mirrors it within one full turn: `Reading = ReadingCycle − Reading`, where `ReadingCycle = 2^(EncAbsBits − EncAbsMB)`.
-3. Stores the result in `EncAbsVal` (`ControlInterrupt.c:2078`).
+3. Stores the result in `EncAbsVal`.
 
 So `EncAbsVal` is the masked, direction-corrected reading — exactly the value the firmware then offsets by [EncAbsOff](EncAbsOff-AuxEncAbsOff.md) and accumulates into the position at power-up (see [EncAbsOff](EncAbsOff-AuxEncAbsOff.md) and [Pos](../../10-motion/01-kinematics-status/Pos.md)). It is exposed so that an application can read the live absolute word and take decisions (such as computing the offset needed to make a chosen physical point read zero). Writing to `EncAbsVal` is rejected — it is read-only.
 
@@ -24,7 +24,7 @@ So `EncAbsVal` is the masked, direction-corrected reading — exactly the value 
 
 ### Auxiliary encoder (AuxEncAbsVal)
 
-`AuxEncAbsVal` is the masked and direction-handled auxiliary absolute reading, captured the same way (`ControlInterrupt.c:2276`).
+`AuxEncAbsVal` is the masked and direction-handled auxiliary absolute reading, captured the same way.
 
 ## Examples
 

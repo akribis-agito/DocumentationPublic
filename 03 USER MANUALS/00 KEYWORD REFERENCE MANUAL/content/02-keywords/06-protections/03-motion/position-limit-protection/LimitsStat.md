@@ -36,14 +36,14 @@ Read-only bitfield reporting reverse/forward limit-switch activation.
 
 ## How it works
 
-The control interrupt updates `LimitsStat` whenever a limit-switch input changes state, OR-ing in the appropriate bit when the switch becomes active and masking it out when it clears (firmware `CommonC/AG300_CTL01ControlInterrupt.c:10645`, `:10659`, and `:11159`/`:11173`). The bit masks are defined in `CommonIncludes/AG300_CTL01ParamsCommon.h:457`:
+The controller updates `LimitsStat` whenever a limit-switch input changes state, setting the appropriate bit when the switch becomes active and clearing it when the switch releases:
 
-| `#define` | Value | Action |
-|-----------|-------|--------|
-| `RLS_SET` | `0x0001` | OR-ed in when the reverse limit switch becomes active |
-| `FLS_SET` | `0x0002` | OR-ed in when the forward limit switch becomes active |
-| `RLS_CLEAR` | `0xFFFE` | AND mask that clears the RLS bit |
-| `FLS_CLEAR` | `0xFFFD` | AND mask that clears the FLS bit |
+| Value | Action |
+|-------|--------|
+| `0x0001` | Set when the reverse limit switch becomes active |
+| `0x0002` | Set when the forward limit switch becomes active |
+| `0xFFFE` | Mask that clears the RLS bit |
+| `0xFFFD` | Mask that clears the FLS bit |
 
 ### Bit layout
 
@@ -64,14 +64,14 @@ The control interrupt updates `LimitsStat` whenever a limit-switch input changes
 
 ### Effect on motion
 
-The profiler reads these bits to brake the axis on contact (firmware `CommonC/AG300_CTL01Profiler.c`):
+The profiler reads these bits to brake the axis on contact:
 
-- Moving forward into an active `FLS_SET` requests a stop with `MotionReason = MOTION_REASON_END_FLS` (code `5`) (`AG300_CTL01Profiler.c:574`).
-- Moving backward into an active `RLS_SET` requests a stop with `MotionReason = MOTION_REASON_END_RLS` (code `4`) (`AG300_CTL01Profiler.c:647`).
-- These stops use the emergency deceleration `EmrgDec` (`AG300_CTL01Profiler.c:783`).
-- A `Begin` is rejected (`DO_NOT_ALLOW_MOTION_INTO_RLS_OR_FLS`) if the axis is already inside a limit switch and the commanded direction is further into it.
+- Moving forward into an active forward limit switch requests a stop with [MotionReason](../../../10-motion/05-motion-status/MotionReason.md) = 5 (motion ended at the forward limit switch).
+- Moving backward into an active reverse limit switch requests a stop with [MotionReason](../../../10-motion/05-motion-status/MotionReason.md) = 4 (motion ended at the reverse limit switch).
+- These stops use the emergency deceleration `EmrgDec`.
+- A `Begin` is rejected if the axis is already inside a limit switch and the commanded direction is further into it.
 
-Homing also inspects `LimitsStat` (e.g. `AG300_CTL01Homing.c:233`) to detect and react to switch contact during a homing sequence.
+Homing also inspects `LimitsStat` to detect and react to switch contact during a homing sequence.
 
 ## Examples
 

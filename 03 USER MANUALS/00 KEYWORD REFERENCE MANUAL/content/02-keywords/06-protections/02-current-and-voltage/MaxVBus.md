@@ -39,9 +39,9 @@ Maximum allowed bus voltage; sustained excess disables the axis.
 The bus voltage (`VBus`) is checked periodically (every 16th control cycle). On each check:
 
 - If `VBus ≥ MaxVBus`, an over-voltage timer is accumulated (and [StatReg](../../07-status-and-faults/StatReg.md) bit 3 is set); otherwise the timer is reset to 0.
-- When the timer reaches [MaxVBusTime](MaxVBusTime.md) while still over the limit, the axis is disabled and [ConFlt](../../07-status-and-faults/ConFlt.md) is set to `1008` (`CON_FLT_BUS_OVER_VOLTAGE`, "Bus Voltage too high").
+- When the timer reaches [MaxVBusTime](MaxVBusTime.md) while still over the limit, the axis is disabled and [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1008 (bus voltage too high).
 
-This time-windowed trip tolerates brief over-voltage transients (e.g. regeneration spikes). For warning purposes the firmware also reports a multi-level VBus warning in `StatReg` (bits 7–8) as `VBus` approaches the limit, at 0.88 / 0.92 / 0.96 × `MaxVBus` (low / medium / high).
+This time-windowed trip tolerates brief over-voltage transients (e.g. regeneration spikes). For warning purposes the drive also reports a multi-level VBus warning in `StatReg` (bits 7–8) as `VBus` approaches the limit, at 0.88 / 0.92 / 0.96 × `MaxVBus` (low / medium / high).
 
 ## Examples
 

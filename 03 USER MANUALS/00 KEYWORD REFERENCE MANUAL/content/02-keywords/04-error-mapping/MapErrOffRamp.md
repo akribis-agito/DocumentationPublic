@@ -38,7 +38,7 @@ It is an axis-scoped parameter saved to flash and can be changed at any time, in
 
 ## How it works
 
-The rate is in **encoder counts per second**. Each control cycle the firmware moves the applied offset toward the [MapErrOffset](MapErrOffset.md) target by `MapErrOffRamp × SampleTime` counts (i.e. `MapErrOffRamp / SAMPLES_PER_SECOND` counts per cycle), clamping exactly onto the target on the cycle it would overshoot. The default `16384` equals one sampling-rate unit, so at the base sample rate the offset moves about 16384 counts per second. Setting a small value makes a deliberate, slow trim; a large value approaches a step.
+The rate is in **encoder counts per second**. Each control cycle the controller moves the applied offset toward the [MapErrOffset](MapErrOffset.md) target by `MapErrOffRamp × SampleTime` counts (i.e. `MapErrOffRamp / (samples per second)` counts per cycle), clamping exactly onto the target on the cycle it would overshoot. The default `16384` equals one sampling-rate unit, so at the base sample rate the offset moves about 16384 counts per second. Setting a small value makes a deliberate, slow trim; a large value approaches a step.
 
 ## Examples
 

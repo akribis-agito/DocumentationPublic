@@ -36,7 +36,7 @@ Selects the source signal used to generate the virtual encoder position.
 
 ## How it works
 
-`VEncSrc` is **not a small enumerated list** — it is an encoded *keyword command code* (a "complex CAN" token combining a keyword, its axis, and array index). The firmware resolves it at configuration time (`SpVEnc` → `GetPointerToComplexCAN`, `AG300_CTL01Funcs.c:25411`) into a direct pointer and data type (32-bit/64-bit integer, float, or double). Each control cycle the virtual encoder reads through that pointer, so any readable controller variable can be the source — for example another axis's position [Pos](../../10-motion/01-kinematics-status/Pos.md) or reference [PosRef](../../10-motion/01-kinematics-status/PosRef.md).
+`VEncSrc` is **not a small enumerated list** — it is an encoded *keyword command code* combining a keyword, its axis, and array index. The controller resolves it at configuration time to the corresponding internal variable and its data type (32-bit/64-bit integer, float, or double). Each control cycle the virtual encoder reads that variable, so any readable controller variable can be the source — for example another axis's position [Pos](../../10-motion/01-kinematics-status/Pos.md) or reference [PosRef](../../10-motion/01-kinematics-status/PosRef.md).
 
 If the chosen source itself wraps under modulo ([ModRev](../04-modulo-mode/ModRev.md)), the firmware detects the wrap (a jump greater than half the source's modulo span) and compensates the tracking memories so the generated output stays continuous.
 

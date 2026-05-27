@@ -36,20 +36,20 @@ Tuning constants for stepper stall detection.
 
 ## How it works
 
-When building the threshold [StallTh](StallTh.md) each sample, the firmware evaluates the fit `slope·speed + intercept` (firmware `CommonC/AG300_CTL01ControlLoops.c:2526`, with array indices `STALL_CONST_A = 1` and `STALL_CONST_B = 2`):
+When building the threshold [StallTh](StallTh.md) each sample, the firmware evaluates the fit `slope·speed + intercept`:
 
-```c
-fit = StallCnst[1]*ldPosRefBitShifted + StallCnst[2];   // slope*speed + intercept
+```text
+fit = StallCnst[1] * speed + StallCnst[2]    ; slope*speed + intercept
 ```
 
-where `ldPosRefBitShifted` is the (bit-shifted) absolute commanded speed.
+where `speed` is the (bit-shifted) absolute commanded speed.
 
-| Element | Firmware index | Role |
-|---------|----------------|------|
-| `StallCnst[1]` | `STALL_CONST_A` (1) | **Slope** — how fast the expected metric grows with speed |
-| `StallCnst[2]` | `STALL_CONST_B` (2) | **Intercept** — the expected metric at (near) zero speed |
+| Element | Role |
+|---------|------|
+| `StallCnst[1]` | **Slope** — how fast the expected metric grows with speed |
+| `StallCnst[2]` | **Intercept** — the expected metric at (near) zero speed |
 
-The resulting fit is then scaled by [StallThPcnt](StallThPcnt.md) and offset to form [StallTh](StallTh.md). The array is sized 3 (`STALL_CONST_ARRAY_SIZE`); only the slope and intercept entries above participate in the threshold formula.
+The resulting fit is then scaled by [StallThPcnt](StallThPcnt.md) and offset to form [StallTh](StallTh.md). The array is sized 3; only the slope and intercept entries above participate in the threshold formula.
 
 These coefficients are determined for a specific motor/load by characterising the healthy `StallVal` at several speeds and fitting a line. Until they are set appropriately for the application, stall detection will not track speed correctly.
 

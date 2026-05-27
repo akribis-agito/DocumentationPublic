@@ -40,10 +40,10 @@ Hard limit on motor current; exceeding it disables the axis.
 
 ## How it works
 
-Every control cycle the firmware compares `|MotorCurr|` against `MaxMotorCurr` and runs a debounce counter:
+Every control cycle the drive compares `|MotorCurr|` against `MaxMotorCurr` and runs a debounce counter:
 
 - If `|MotorCurr| > MaxMotorCurr`, an over-current counter increments; otherwise it resets to 0.
-- When the counter reaches **4 consecutive samples (≈ 0.25 ms)**, the axis is disabled and [ConFlt](../../07-status-and-faults/ConFlt.md) is set to `1016` (`CON_FLT_MOTOR_CURRENT`, "Motor current too high"), with a snapshot and an `ErrLog` entry.
+- When the counter reaches **4 consecutive samples (≈ 0.25 ms)**, the axis is disabled and [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1016 (motor current too high), with a snapshot and an [ErrLog](../../07-status-and-faults/ErrLog.md) entry.
 
 The short 4-sample window rejects single-cycle measurement spikes while still tripping quickly on a genuine over-current. Because it monitors the total motor current, use [MaxPhaseCurr](MaxPhaseCurr.md) in addition to catch per-phase faults (e.g. stalls) where the total may look acceptable.
 

@@ -25,7 +25,7 @@ $$
 correction = e_i + frac \times (e_{i+1} - e_i)
 $$
 
-For 2D this is done bilinearly (4 entries), for 3D trilinearly (8 entries). The result, plus the [MapErrOffset](MapErrOffset.md) component, is scaled by the engage ramp and added to `EncoderPos` to form `Pos`. Outside the mapped range the value is **clamped** to the first or last entry (no extrapolation).
+For 2D this is done bilinearly (4 entries), for 3D trilinearly (8 entries). The result, plus the [MapErrOffset](MapErrOffset.md) component, is scaled by the engage ramp and added to the uncorrected feedback ([PosBeforeMap](PosBeforeMap.md)) to form `Pos`. Outside the mapped range the value is **clamped** to the first or last entry (no extrapolation).
 
 ### Continuous index space and bank boundaries
 

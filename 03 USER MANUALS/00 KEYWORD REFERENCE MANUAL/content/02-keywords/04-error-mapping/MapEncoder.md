@@ -38,9 +38,9 @@ Selects which axis encoder drives each error-mapping dimension.
 
 ## How it works
 
-Each element encodes both the *axis* and the *main-or-auxiliary* selection in one integer. The firmware decodes it during background setup into a pointer to the chosen encoder's pre-correction reading:
+Each element encodes both the *axis* and the *main-or-auxiliary* selection in one integer. The controller decodes it during background setup to select the chosen encoder's pre-correction reading:
 
-- **Odd value** → the **main** encoder (`EncoderPos`) of axis number `value >> 1`.
+- **Odd value** → the **main** encoder of axis number `value >> 1`.
 - **Even value** → the **auxiliary** encoder ([AuxPos](../10-motion/01-kinematics-status/AuxPos.md)) of axis number `(value >> 1) − 1`.
 
 So the mapping is:
@@ -53,7 +53,7 @@ So the mapping is:
 | 4 | Axis B auxiliary encoder |
 | … | … (pattern repeats per axis) |
 
-The default is `1` (this axis's own main encoder). For the table-building/correction routine to accept the map, `MapEncoder[1]` **must** point to this axis's own main encoder; for 2D/3D, the second/third entries must point to **main** encoders of standing, motor-on axes (a wrong selection raises a "must be main encoders" / "must be first encoder" event). The valid range spans `1 … NUMBER_OF_AXES × 2`; on a single-axis controller only `1` and `2` are meaningful.
+The default is `1` (this axis's own main encoder). For the table-building/correction routine to accept the map, `MapEncoder[1]` **must** point to this axis's own main encoder; for 2D/3D, the second/third entries must point to **main** encoders of standing, motor-on axes (a wrong selection raises a "must be main encoders" / "must be first encoder" event). The valid range spans `1 … (number of axes) × 2`; on a single-axis controller only `1` and `2` are meaningful.
 
 ## Examples
 

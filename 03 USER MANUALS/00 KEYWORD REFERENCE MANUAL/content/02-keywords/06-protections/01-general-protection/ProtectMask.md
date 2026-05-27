@@ -41,15 +41,15 @@ So the default `ProtectMask = 0` leaves every (maskable) protection active. Sett
 
 ## How it works
 
-`ProtectMask` is not used directly in the control loop; instead, whenever it (or [PowerSupply](../02-current-and-voltage/PowerSupply.md)) changes, the firmware re-computes the FPGA / amplifier fault-enable register from it. The value written to the hardware is, in effect:
+`ProtectMask` is not used directly in the control loop; instead, whenever it (or [PowerSupply](../02-current-and-voltage/PowerSupply.md)) changes, the drive re-computes the hardware fault-enable settings from it. The enable applied to the hardware is, in effect:
 
 ```text
-hardware_enable = (ALL_PROTECTIONS & ~ProtectMask) | NON_MASKABLE
+hardware_enable = (all maskable protections & ~ProtectMask) | non-maskable protections
 ```
 
-That is: start from "all protections suggested on", clear the bits you set in `ProtectMask`, then force the non-maskable protections back on. This is why a `1` in `ProtectMask` *removes* a protection and why certain critical protections (the non-maskable set) cannot be disabled no matter what you write.
+That is: start from "all protections on", clear the bits you set in `ProtectMask`, then force the non-maskable protections back on. This is why a `1` in `ProtectMask` *removes* a protection and why certain critical protections (the non-maskable set) cannot be disabled no matter what you write.
 
-On a standalone drive the result is written to the FPGA protections-mask register; on **Central-i (v5)** the equivalent enable word is sent to the remote amplifier (`AmpFaultEnable`). The power-phase protections are additionally gated by [PowerSupply](../02-current-and-voltage/PowerSupply.md) so that unused AC phases are not protected against.
+On a standalone drive the result is applied locally; on **Central-i (v5)** the equivalent enable word is sent to the remote amplifier. The power-phase protections are additionally gated by [PowerSupply](../02-current-and-voltage/PowerSupply.md) so that unused AC phases are not protected against.
 
 When an enabled protection condition appears in [HWProtectBits](HWProtectBits.md), the axis is disabled and the corresponding [ConFlt](../../07-status-and-faults/ConFlt.md) fault code is raised.
 

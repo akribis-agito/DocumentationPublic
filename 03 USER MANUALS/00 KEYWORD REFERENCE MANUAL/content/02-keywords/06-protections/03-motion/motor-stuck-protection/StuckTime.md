@@ -36,17 +36,17 @@ Duration the stuck condition must persist before the axis is flagged stuck.
 
 ## How it works
 
-The firmware keeps an internal `StuckCounter` (firmware `CommonC/AG300_CTL01ControlInterrupt.c:4736`):
+The firmware keeps an internal sample counter:
 
-```c
-StuckCounter++;
-if (StuckCounter >= StuckTime)
-    MotorOffAndAddToErrorLog(axis, CON_FLT_MOTOR_STUCK, true);
+```text
+increment the stuck counter
+if the stuck counter has reached StuckTime
+    turn the axis off and log the fault
 ```
 
 - The counter increments by one each control sample for as long as the AND-ed [StuckCurr](StuckCurr.md)/[StuckVel](StuckVel.md) condition is true.
 - The instant any sample breaks the condition, the counter is reset to `0`. The fault therefore requires a single unbroken run of `StuckTime`; intermittent stalls do not accumulate.
-- When the counter reaches `StuckTime`, the axis is turned off and `CON_FLT_MOTOR_STUCK` (code `1007`) is logged in [ConFlt](../../../07-status-and-faults/ConFlt.md).
+- When the counter reaches `StuckTime`, the axis is turned off and [ConFlt](../../../07-status-and-faults/ConFlt.md) records fault code 1007 (motor stuck).
 
 ![Motor-stuck detection logic](stuck-logic.svg)
 
@@ -63,4 +63,4 @@ AStuckTime[1]         ; read back
 
 - [StuckCurr](StuckCurr.md) — current threshold; also lists the mode bypasses
 - [StuckVel](StuckVel.md) — velocity threshold
-- [ConFlt](../../../07-status-and-faults/ConFlt.md) — records `CON_FLT_MOTOR_STUCK` (1007)
+- [ConFlt](../../../07-status-and-faults/ConFlt.md) — records fault code 1007 (motor stuck)

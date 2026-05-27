@@ -36,17 +36,17 @@ Ratio between feedback encoder counts and the quadrature pulses emitted on the e
 
 ## How it works
 
-`EmulRat` is applied by the FPGA emulation block. Writing the keyword runs the special handler `SpEmulRat` (`SpecialFuncs.c:4702`), which programs the per-axis emulation factor register and an output multiplexer that sets the A/B phase order:
+`EmulRat` is applied by the emulation hardware. Writing the keyword programs the per-axis emulation factor and the A/B phase order:
 
-| `EmulRat` | Emulation factor register | A/B phase (direction) |
+| `EmulRat` | Emulation factor | A/B phase (direction) |
 |---|---|---|
 | > 0 | `EmulRat − 1` | normal |
 | 0 | `0` (behaves like a factor of 1) | normal |
-| < 0 | `~EmulRat` (i.e. `−EmulRat − 1`) | inverted (A and B swapped) |
+| < 0 | `−EmulRat − 1` | inverted (A and B swapped) |
 
 The hardware emits one quadrature edge per (factor + 1) internal counts, so a positive `EmulRat = N` divides the feedback by `N`. A value of 0 collapses to the same behaviour as `EmulRat = 1` (factor 0 — pass-through). A negative value uses the magnitude as the divide ratio while inverting the A/B phase, which reverses the apparent count direction at the downstream device.
 
-On older FPGA revisions the emulation output also has to be muxed onto the differential output pins (the handler selects emulation vs. plain differential outputs); on current FPGA revisions the output mux is configured per axis as part of the same write.
+On older hardware revisions the emulation output also has to be muxed onto the differential output pins (selecting emulation vs. plain differential outputs); on current revisions the output mux is configured per axis as part of the same write.
 
 ## Examples
 

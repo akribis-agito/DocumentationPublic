@@ -36,19 +36,19 @@ Declares the drive's power-supply type so protections behave correctly.
 
 | Value | Supply type |
 |-------|-------------|
-| 1 | Single-phase AC (`SINGLE_PHASE`) |
-| 2 | DC — low-voltage / development supply (`LOW_DC`) |
-| 3 | Three-phase AC (`THREE_PHASE`) |
+| 1 | Single-phase AC |
+| 2 | DC — low-voltage supply |
+| 3 | Three-phase AC |
 
 ## How it works
 
 `PowerSupply` selects which power-input phases the drive monitors for "phase missing":
 
-- **Three-phase:** both the A&ndash;C and B&ndash;C phase-missing flags are checked. If either is set, the axis is disabled with [ConFlt](../../07-status-and-faults/ConFlt.md) = `1054` (`CON_FLT_MOTOR_AC_POWER_CUTOFF`, "At least one required phase of the AC Power inputs was cut off").
-- **Single-phase:** only the B&ndash;C phase-missing flag is checked (raises the same fault `1054`).
-- **DC (`LOW_DC`):** the AC-phase checks are not applied.
+- **Three-phase:** both the A&ndash;C and B&ndash;C phase-missing flags are checked. If either is set, the axis is disabled and [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1054 (at least one required phase of the AC power inputs was cut off).
+- **Single-phase:** only the B&ndash;C phase-missing flag is checked (raises the same fault code 1054).
+- **DC:** the AC-phase checks are not applied.
 
-`PowerSupply` also feeds the protection-mask logic: when [ProtectMask](../01-general-protection/ProtectMask.md) (or `PowerSupply`) changes, the firmware re-derives the hardware fault-enable word and gates the AC-power-phase bits according to the declared supply type, so phases that the supply does not use are not flagged as missing. (On standalone AG100 drives this is done with dedicated power-phase mask bits; on Central-i the enable word is sent to the remote amplifier.)
+`PowerSupply` also feeds the protection-mask logic: when [ProtectMask](../01-general-protection/ProtectMask.md) (or `PowerSupply`) changes, the drive re-derives the hardware fault-enable word and gates the AC-power-phase bits according to the declared supply type, so phases that the supply does not use are not flagged as missing. (On standalone AG100 drives this is done with dedicated power-phase mask bits; on Central-i the enable word is sent to the remote amplifier.)
 
 ## Examples
 

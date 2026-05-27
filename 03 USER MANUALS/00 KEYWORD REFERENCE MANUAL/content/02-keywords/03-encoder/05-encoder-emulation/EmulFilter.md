@@ -36,7 +36,7 @@ Digital filter applied to the encoder emulation output signal.
 
 ## How it works
 
-`EmulFilter` and [EmulIndexType](EmulIndexType.md) share a single per-axis FPGA emulation-setting register, written by the special handler `SpEmulation` (`SpecialFuncs.c:431`). The register is packed as:
+`EmulFilter` and [EmulIndexType](EmulIndexType.md) share a single per-axis emulation-setting register. The register is packed as:
 
 | Bits | Field | Source |
 |---|---|---|

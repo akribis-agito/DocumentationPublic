@@ -40,18 +40,18 @@ Maximum allowable motor temperature (PT100 sensor); exceeding it faults.
 
 ### Over-temperature fault
 
-Once per millisecond, while the motor is on and not in simulation, the firmware checks:
+Once per millisecond, while the motor is on and not in simulation, the controller checks:
 
 ```text
 if (MotorTempUsed != 0  &&  MotorTemp > MaxMotorTemp)
-    → disable axis, ConFlt = 1040 (CON_FLT_HIGH_MOTOR_TEMP), append to ErrLog
+    → disable axis, raise the motor over-temperature fault, append to ErrLog
 ```
 
-(Firmware: `AG300_CTL01ControlInterrupt.c:10303`–`:10306` and `:10329`–`:10332`; the same check also runs in the comm/funcs path at `AG300_CTL01Funcs.c:19815`–`:19817`.) The action is a latching fault via `MotorOffAndAddToErrorLog(...)`: the axis is disabled, [ConFlt](../../07-status-and-faults/ConFlt.md) is set to `1040`, a snapshot is captured, and the fault is logged. The fault clears when the axis is re-enabled.
+The action is a latching fault: the axis is disabled, [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1040 (motor temperature too high), a snapshot is captured, and the fault is logged. The fault clears when the axis is re-enabled.
 
 ### Graduated warning bands (StatReg)
 
-Before tripping, the firmware sets the motor-temperature **warning** field in [StatReg](../../07-status-and-faults/StatReg.md) (bits 15–16) at three sub-thresholds derived from `MaxMotorTemp`. Whenever you write `MaxMotorTemp` the firmware recomputes the band edges (`SpMaxMotorTemp`, `SpecialFuncs.c:5173`):
+Before tripping, the controller sets the motor-temperature **warning** field in [StatReg](../../07-status-and-faults/StatReg.md) (bits 15–16) at three sub-thresholds derived from `MaxMotorTemp`. Whenever you write `MaxMotorTemp` the band edges are recomputed:
 
 | `MotorTemp` band | StatReg warning level | PCSuite LED |
 |------------------|----------------------|-------------|
@@ -61,7 +61,7 @@ Before tripping, the firmware sets the motor-temperature **warning** field in [S
 | > 0.96 × MaxMotorTemp | 3 — high | red |
 | > MaxMotorTemp | — fault (`ConFlt = 1040`) | — |
 
-(Bands evaluated at `AG300_CTL01ControlInterrupt.c:9585`–`:9603`.) So the warning ramps up well before the fault, giving early indication on the status panel.
+So the warning ramps up well before the fault, giving early indication on the status panel.
 
 ## Examples
 

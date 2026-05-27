@@ -9,25 +9,25 @@ Dynamic braking rapidly slows the motor by shorting the motor phases (through th
 
 ### Engagement conditions
 
-Each control cycle (slot `SAMPLE_7`), the firmware engages the dynamic brake only when **all** of these hold (`AG300_CTL01ControlInterrupt.c:12290`–`:12368`):
+Each control cycle the drive engages the dynamic brake only when **all** of these hold:
 
 1. `DynBrakeOn ≠ 0` (feature enabled);
 2. the motor is **off** (`MotorOn = 0`); and
 3. no [ConFlt](../../07-status-and-faults/ConFlt.md) prohibits dynamic braking (per a per-fault permission table).
 
-When engaged, the firmware sets the FPGA "activate dynamic brake" command bit and sets [StatReg](../../07-status-and-faults/StatReg.md) **bit 28** (dynamic brake active); the high-side MOSFETs are forced off in the FPGA and only the low-side devices are PWM-driven. If any condition fails the brake is released and the status bit cleared. On the PWM amplifier the dynamic brake is supported on axes A and B (and C on the 3-axis product).
+When engaged, the drive activates the dynamic brake and sets [StatReg](../../07-status-and-faults/StatReg.md) **bit 28** (dynamic brake active); the high-side MOSFETs are forced off and only the low-side devices are PWM-driven. If any condition fails the brake is released and the status bit cleared. On the PWM amplifier the dynamic brake is supported on axes A and B (and C on the 3-axis product).
 
 ### Braking duty-cycle and current limiting
 
-While engaged, the shorting duty cycle is computed each cycle from how much headroom remains below the current limit (`AG300_CTL01ControlInterrupt.c:6752`):
+While engaged, the shorting duty cycle is computed each cycle from how much headroom remains below the current limit:
 
 $$
 DynBrk = \frac{PeakCL_{limited} - |MotorCurr|}{PeakCL_{limited}} \times DynBrkRef \times scaler
 $$
 
-- The result is clamped to `[0, DynBrkRef]`, so as the braking current rises toward the [PeakCL](../02-current-and-voltage/PeakCL.md)/[ContCL](../02-current-and-voltage/ContCL.md) limit the duty cycle automatically backs off — this is the firmware "internally reducing the duty cycle to keep current within limits."
-- `scaler` is a soft-start ramp (`gfDynBrkInitScaler`) that starts at **0.1** (`DYN_BRK_INIT_SCALAR`) and increments by **0.3** per cycle up to 1.0, so braking engages gradually rather than as a step (`:6754`–`:6755`).
-- **Bus-voltage protection:** if the bus voltage reaches [MaxVBus](../02-current-and-voltage/MaxVBus.md) (for longer than [MaxVBusTime](../02-current-and-voltage/MaxVBusTime.md)) or [MaxVBusAbs](../02-current-and-voltage/MaxVBusAbs.md), the duty cycle is forced to 0 to avoid pumping energy back into an already-high bus (`:6762`–`:6764`).
+- The result is clamped to `[0, DynBrkRef]`, so as the braking current rises toward the [PeakCL](../02-current-and-voltage/PeakCL.md)/[ContCL](../02-current-and-voltage/ContCL.md) limit the duty cycle automatically backs off — the drive internally reduces the duty cycle to keep current within limits.
+- `scaler` is a soft-start ramp that starts at **0.1** and increments by **0.3** per cycle up to 1.0, so braking engages gradually rather than as a step.
+- **Bus-voltage protection:** if the bus voltage reaches [MaxVBus](../02-current-and-voltage/MaxVBus.md) (for longer than [MaxVBusTime](../02-current-and-voltage/MaxVBusTime.md)) or [MaxVBusAbs](../02-current-and-voltage/MaxVBusAbs.md), the duty cycle is forced to 0 to avoid pumping energy back into an already-high bus.
 
 ## DynBrakeOn
 
@@ -40,9 +40,9 @@ Enables or disables dynamic braking. Default 0 (disabled).
 
 ## DynBrkRef
 
-Sets the maximum shorting duty cycle used for dynamic braking — the strongest-braking ceiling that the headroom formula above scales down from. Larger = stronger braking. Its range/default is the full PWM range (`MAX_PWM_RANGE × 2`). If the braking current would exceed [ContCL](../02-current-and-voltage/ContCL.md)/[PeakCL](../02-current-and-voltage/PeakCL.md), the controller internally reduces the applied duty cycle to keep the current within limits.
+Sets the maximum shorting duty cycle used for dynamic braking — the strongest-braking ceiling that the headroom formula above scales down from. Larger = stronger braking. Its range/default spans the full PWM range. If the braking current would exceed [ContCL](../02-current-and-voltage/ContCL.md)/[PeakCL](../02-current-and-voltage/PeakCL.md), the controller internally reduces the applied duty cycle to keep the current within limits.
 
-> **`DynBrakeSpeed` not found:** an earlier draft listed a `DynBrakeSpeed` keyword. No such global or keyword-table entry exists in the reviewed v4 (LTS) firmware; the soft-start "speed" of engagement is fixed by the `gfDynBrkInitScaler` ramp (0.1 → 1.0 in 0.3 steps) described above and is not user-configurable.
+> **`DynBrakeSpeed` not found:** an earlier draft listed a `DynBrakeSpeed` keyword. No such keyword exists in the v4 (LTS) firmware; the soft-start "speed" of engagement is fixed by the ramp (0.1 → 1.0 in 0.3 steps) described above and is not user-configurable.
 
 ## See also
 

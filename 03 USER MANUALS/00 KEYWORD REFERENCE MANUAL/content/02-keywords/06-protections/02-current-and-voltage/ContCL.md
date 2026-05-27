@@ -59,11 +59,11 @@ $$
 | $I_{filt}^{2} > ContCL^{2}$ | I²t limitation engages |
 | $I_{filt}^{2} < 0.90 \times ContCL^{2}$ | I²t limitation releases |
 
-The 10 % hysteresis prevents rapid chattering at the threshold. While the limitation is engaged, the effective peak limit used by the current-command saturation (`gfLimitedPeakCL`) is lowered from `PeakCL` to the effective continuous value, and [StatReg](../../07-status-and-faults/StatReg.md) bit 25 ("power limit") is set.
+The 10 % hysteresis prevents rapid chattering at the threshold. While the limitation is engaged, the effective peak limit used by the current-command saturation is lowered from `PeakCL` to the effective continuous value, and [StatReg](../../07-status-and-faults/StatReg.md) bit 25 ("power limit") is set.
 
 ### Limitation vs. fault
 
-By default the I²t event is a *current limitation* (the command is clamped to the continuous level). If the current loop is **not** active, or if you set the relevant bit of `ControlMode` (the "I²t makes fault" option), the event instead **disables the axis** and raises [ConFlt](../../07-status-and-faults/ConFlt.md) = `1044` (`CON_FLT_MOTOR_I2T`, "Motor current over I2T").
+By default the I²t event is a *current limitation* (the command is clamped to the continuous level). If the current loop is **not** active, or if you set the relevant bit of `ControlMode` (the "I²t makes fault" option), the event instead **disables the axis** and [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1044 (motor current over I²t).
 
 > **Note:** if `ContCL` is set equal to or higher than `PeakCL`, the controller internally uses an effective continuous limit of `PeakCL / 2`. The stored `ContCL` value is not changed automatically, and an entry is logged to `ErrLog`.
 

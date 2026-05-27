@@ -38,24 +38,22 @@ Current threshold for motor-stuck detection.
 
 ## How it works
 
-Every control sample the firmware evaluates the stuck condition (firmware `CommonC/AG300_CTL01ControlInterrupt.c:4731`):
+Every control sample the firmware evaluates the stuck condition:
 
-```c
-if ((labs(Vel[3]) <= StuckVel) && (MotorCurrAbs >= StuckCurr) && (mode is eligible))
-{
-    StuckCounter++;
-    if (StuckCounter >= StuckTime)
-        MotorOffAndAddToErrorLog(axis, CON_FLT_MOTOR_STUCK, true);
-}
+```text
+if |Vel[3]| <= StuckVel  and  |MotorCurr| >= StuckCurr  and mode is eligible
+    increment the stuck counter
+    if the stuck counter has reached StuckTime
+        turn the axis off and log the fault
 else
-    StuckCounter = 0;
+    reset the stuck counter to 0
 ```
 
 ![Motor-stuck detection logic](stuck-logic.svg)
 
-- The two conditions are **AND**-ed: the absolute filtered velocity `Vel[3]` must be `<= StuckVel` **and** the absolute motor current `MotorCurrAbs` must be `>= StuckCurr`.
-- While both hold, an internal `StuckCounter` increments once per sample; any sample that breaks the condition resets it to `0`. The fault therefore fires only on a *continuous* run of `StuckTime` samples.
-- On trip, the axis is turned off and `CON_FLT_MOTOR_STUCK` (code `1007`) is recorded in [ConFlt](../../../07-status-and-faults/ConFlt.md).
+- The two conditions are **AND**-ed: the absolute filtered velocity `Vel[3]` must be `<= StuckVel` **and** the absolute motor current must be `>= StuckCurr`.
+- While both hold, an internal counter increments once per sample; any sample that breaks the condition resets it to `0`. The fault therefore fires only on a *continuous* run of `StuckTime` samples.
+- On trip, the axis is turned off and [ConFlt](../../../07-status-and-faults/ConFlt.md) records fault code 1007 (motor stuck).
 - Detection is **bypassed** for stepper motors, and for Current-Control-Only, Force-control, commutation/auto-phasing in progress, and motor-learn modes — situations where high current at low speed is expected.
 
 ## Examples
@@ -69,4 +67,4 @@ AStuckCurr[1]         ; read back the threshold
 
 - [StuckVel](StuckVel.md) — velocity threshold (the other half of the AND)
 - [StuckTime](StuckTime.md) — how long the condition must persist
-- [ConFlt](../../../07-status-and-faults/ConFlt.md) — records `CON_FLT_MOTOR_STUCK` (1007)
+- [ConFlt](../../../07-status-and-faults/ConFlt.md) — records fault code 1007 (motor stuck)

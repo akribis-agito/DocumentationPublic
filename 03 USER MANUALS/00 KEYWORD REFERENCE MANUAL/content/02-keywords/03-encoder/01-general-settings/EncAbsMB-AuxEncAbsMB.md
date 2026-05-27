@@ -13,7 +13,7 @@ Range 0–8, default 0 (no bits removed).
 
 ## How it works
 
-In the control interrupt, the very first operation applied to a fresh absolute reading is the right-shift (`ControlInterrupt.c:2071`):
+The very first operation applied to a fresh absolute reading each control cycle is the right-shift:
 
 $$Reading_{masked} = Reading_{raw} \gg EncAbsMB$$
 
@@ -23,16 +23,16 @@ This happens before direction handling, before [EncAbsVal](EncAbsVal-AuxEncAbsVa
 
 $$ReadingCycle = 2^{(EncAbsBits - EncAbsMB)}$$
 
-precomputed when `EncAbsMB` (or [EncAbsBits](EncAbsBits-AuxEncAbsBits.md)) is written (`SpecialFuncs.c:840`). Increasing `EncAbsMB` by 1 halves `ReadingCycle`, which is consistent: discarding a low bit halves the number of distinct counts in the word. The accumulator uses `ReadingCycle` (and its 25 %/75 % marks) to detect when the masked reading wraps and to add or subtract a full cycle so the position counts continuously (`ControlInterrupt.c:2165`).
+precomputed when `EncAbsMB` (or [EncAbsBits](EncAbsBits-AuxEncAbsBits.md)) is written. Increasing `EncAbsMB` by 1 halves `ReadingCycle`, which is consistent: discarding a low bit halves the number of distinct counts in the word. The accumulator uses `ReadingCycle` (and its 25 %/75 % marks) to detect when the masked reading wraps and to add or subtract a full cycle so the position counts continuously.
 
-Because `EncAbsMB` changes the count-to-electrical-angle scaling, changing it on a brushless motor invalidates commutation and the firmware flags that commutation must be repeated (`SpecialFuncs.c:846`).
+Because `EncAbsMB` changes the count-to-electrical-angle scaling, changing it on a brushless motor invalidates commutation and the controller flags that commutation must be repeated.
 
 > [!note]
 > `EncAbsMB` removes bits from the **bottom** (least significant) of the word. The remaining low bits represent the single-turn position and the high bits the multi-turn count, as shown in the [EncAbsBits](EncAbsBits-AuxEncAbsBits.md) bit-layout figure.
 
 ### Auxiliary encoder (AuxEncAbsMB)
 
-`AuxEncAbsMB` right-shifts the auxiliary absolute reading by the same rule (`ControlInterrupt.c:2269`) and feeds the auxiliary rollover modulus `2^(AuxEncAbsBits − AuxEncAbsMB)` (`SpecialFuncs.c:883`).
+`AuxEncAbsMB` right-shifts the auxiliary absolute reading by the same rule and feeds the auxiliary rollover modulus `2^(AuxEncAbsBits − AuxEncAbsMB)`.
 
 ## Examples
 

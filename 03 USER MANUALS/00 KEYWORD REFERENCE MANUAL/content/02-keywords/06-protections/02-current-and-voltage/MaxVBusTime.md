@@ -36,9 +36,9 @@ How long bus voltage may stay outside the MinVBus/MaxVBus limits before tripping
 
 ## How it works
 
-The firmware keeps an over-voltage timer (`glMaxVBusCounter`). On each periodic bus check, if `VBus ≥ MaxVBus` the timer is accumulated, otherwise it is reset to 0. When the timer reaches `MaxVBusTime` while still over the limit, the [MaxVBus](MaxVBus.md) trip fires ([ConFlt](../../07-status-and-faults/ConFlt.md) = `1008`). With the default `MaxVBusTime = 0` the over-voltage trip is effectively immediate on the next check.
+The drive keeps an over-voltage timer. On each periodic bus check, if `VBus ≥ MaxVBus` the timer is accumulated, otherwise it is reset to 0. When the timer reaches `MaxVBusTime` while still over the limit, the [MaxVBus](MaxVBus.md) trip fires ([ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1008). With the default `MaxVBusTime = 0` the over-voltage trip is effectively immediate on the next check.
 
-> **Note:** the firmware uses this same counter mechanism only for the *over*-voltage ([MaxVBus](MaxVBus.md)) path. The under-voltage ([MinVBus](MinVBus.md)) trip and the absolute ceiling ([MaxVBusAbs](MaxVBusAbs.md)) act without this delay.
+> **Note:** the drive uses this delay mechanism only for the *over*-voltage ([MaxVBus](MaxVBus.md)) path. The under-voltage ([MinVBus](MinVBus.md)) trip and the absolute ceiling ([MaxVBusAbs](MaxVBusAbs.md)) act without this delay.
 
 ## Examples
 

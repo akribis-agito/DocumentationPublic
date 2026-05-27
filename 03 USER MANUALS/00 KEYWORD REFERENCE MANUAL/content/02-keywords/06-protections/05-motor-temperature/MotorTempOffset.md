@@ -12,7 +12,7 @@ Offset applied to the motor temperature reading (cable-resistance compensation).
 
 > **Condition:** only applicable with a temperature sensor selected — i.e. [MotorTempUsed](MotorTempUsed.md) ≠ 0.
 
-> **Implementation note:** the raw motor-temperature reading is produced by the fixed linear ADC-to-°C conversion described in [MotorTemp](MotorTemp.md) (`AG300_CTL01ControlInterrupt.c:12275`). A dedicated `MotorTempOffset` global is **not referenced** in the v4 (LTS) control code that was reviewed, so on this firmware the documented cable-compensation offset may not yet be applied in the reading path. Confirm with Agito whether your product/firmware applies it.
+> **Implementation note:** the raw motor-temperature reading is produced by the fixed linear ADC-to-°C conversion described in [MotorTemp](MotorTemp.md). On v4 (LTS) firmware the documented cable-compensation offset may not yet be applied in the reading path. Confirm with Agito whether your product/firmware applies it.
 
 ## See also
 

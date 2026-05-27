@@ -36,7 +36,7 @@ Velocity threshold for motor-stuck detection.
 
 ## How it works
 
-Each control sample, the firmware checks `labs(Vel[3]) <= StuckVel` **AND** `MotorCurrAbs >= StuckCurr` (firmware `CommonC/AG300_CTL01ControlInterrupt.c:4731`). `Vel[3]` is the deeply filtered velocity, so brief jitter does not defeat the "stuck" test. While both conditions hold, an internal counter increments; when it reaches [StuckTime](StuckTime.md) the axis is turned off with `CON_FLT_MOTOR_STUCK` (code `1007`). Any sample that breaks the condition resets the counter to zero.
+Each control sample, the firmware checks `|Vel[3]| <= StuckVel` **AND** absolute motor current `>= StuckCurr`. `Vel[3]` is the deeply filtered velocity, so brief jitter does not defeat the "stuck" test. While both conditions hold, an internal counter increments; when it reaches [StuckTime](StuckTime.md) the axis is turned off and [ConFlt](../../../07-status-and-faults/ConFlt.md) records fault code 1007 (motor stuck). Any sample that breaks the condition resets the counter to zero.
 
 ![Motor-stuck detection logic](stuck-logic.svg)
 
@@ -53,4 +53,4 @@ AStuckVel[1]          ; read back the threshold
 
 - [StuckCurr](StuckCurr.md) — current threshold (the other half of the AND); also lists the mode bypasses
 - [StuckTime](StuckTime.md) — how long the condition must persist
-- [ConFlt](../../../07-status-and-faults/ConFlt.md) — records `CON_FLT_MOTOR_STUCK` (1007)
+- [ConFlt](../../../07-status-and-faults/ConFlt.md) — records fault code 1007 (motor stuck)

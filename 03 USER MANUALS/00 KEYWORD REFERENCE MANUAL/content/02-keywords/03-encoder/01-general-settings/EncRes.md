@@ -47,8 +47,8 @@ Together with the pole pairs ([PolePrs](../../02-motor-and-amplifier/PolePrs.md)
 
 `EncRes` is a scaling constant used by several internal calculations rather than a quantity that is read back:
 
-- **Commutation electrical cycle.** The firmware computes the counts per electrical cycle as $EncRes / PolePrs$ (`SpecialFuncs.c:3860`). This defines how the measured position maps onto the electrical angle for sinusoidal commutation, so an incorrect `EncRes` mis-aligns the commutation angle (see the warning above). For a stepper, the steps-per-count factor is derived as $PolePrs \times electricalCycle / EncRes$ (`SpecialFuncs.c:3926`).
-- **Speed-unit conversion (BEMF feed-forward and reporting).** `EncRes` converts internal counts/s into engineering speed (`SpecialFuncs.c:6169` onward):
+- **Commutation electrical cycle.** The firmware computes the counts per electrical cycle as $EncRes / PolePrs$. This defines how the measured position maps onto the electrical angle for sinusoidal commutation, so an incorrect `EncRes` mis-aligns the commutation angle (see the warning above). For a stepper, the steps-per-count factor is derived as $PolePrs \times electricalCycle / EncRes$.
+- **Speed-unit conversion (BEMF feed-forward and reporting).** `EncRes` converts internal counts/s into engineering speed:
   - Linear motor: $magneticPitch[\text{m}] / EncRes$ — counts/s to m/s (here `EncRes` is counts per magnetic pitch).
   - Rotary motor / DC brush: $60 / EncRes$ — counts/s to rpm (here `EncRes` is counts per revolution).
   - Voice coil: $1 / EncRes$; `EncRes` has no physical commutation role and may be left at any value.

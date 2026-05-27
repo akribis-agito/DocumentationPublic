@@ -36,22 +36,22 @@ Maximum allowable force error in closed-loop force control; exceeding it faults.
 
 ## How it works
 
-In the force control loop the firmware forms the force error from the filtered force reference and the measured force, then tests its absolute value against an **internal** limit:
+In the force control loop the drive forms the force error from the filtered force reference and the measured force, then tests its absolute value against the active force-error limit:
 
 ```text
-ForceErr = ForceRefFiltered − Force
-if (|ForceErr| > MaxForceErrInternal)
+ForceErr = (filtered force reference) − (measured force)
+if (|ForceErr| > active force-error limit)
     → disable axis, append to ErrLog
 ```
 
-(Firmware: `AG300_CTL01ControlLoops.c:2812`–`:2824`, and the PIV-loop variant at `:2915`–`:2925`.) The fault code raised depends on whether the loop is currently closed or open (selected by the `gsMaxErrStat` flags):
+The fault code raised depends on whether the loop is currently closed or open:
 
-| Situation | Internal limit used | ConFlt raised |
-|-----------|---------------------|---------------|
-| Closed-loop force control | `MaxForceErr` | **1045** — `CON_FLT_HIGH_FORCE_ERR` |
-| Open-loop / injection at the force reference | [MaxForceErrOL](MaxForceErrOL.md) | 1057 — `CON_FLT_HIGH_FORCE_ERR_OL` |
+| Situation | Limit used | ConFlt code shown |
+|-----------|------------|-------------------|
+| Closed-loop force control | `MaxForceErr` | 1045 (force error too high) |
+| Open-loop / injection at the force reference | [MaxForceErrOL](MaxForceErrOL.md) | 1057 (open-loop force error too high) |
 
-The active value `MaxForceErrInternal` is set to `MaxForceErr` for normal closed-loop operation and switched to [MaxForceErrOL](MaxForceErrOL.md) when open-loop or signal injection is engaged at the force-reference point (`SpecialFuncs.c:5654` `SpOpenLoop`; `AG300_CTL01ControlLoops.c:2649`). Separately, if no analog force feedback is defined the loop faults with `1046` (`CON_FLT_NO_FORCE_FEEDBACK`).
+The active force-error limit is set to `MaxForceErr` for normal closed-loop operation and switched to [MaxForceErrOL](MaxForceErrOL.md) when open-loop or signal injection is engaged at the force-reference point. Separately, if no analog force feedback is defined the loop faults with [ConFlt](../../07-status-and-faults/ConFlt.md) code 1046 (no force feedback).
 
 ## Examples
 

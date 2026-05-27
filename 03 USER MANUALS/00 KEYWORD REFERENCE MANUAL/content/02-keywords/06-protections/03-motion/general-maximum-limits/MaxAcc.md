@@ -45,13 +45,13 @@ Maximum allowable acceleration/deceleration, checked before a motion starts.
 
 ## How it works
 
-On **standalone / v4**, `MaxAcc` is **not implemented as an enforced limit**. The keyword table marks it `implemented: partial` with access flags of `0` (not user-writable), and the backing global `glMaxAcc[]` is declared and stored but is never read by the profiler, control loops, or command validation (firmware: the only reference to `glMaxAcc[]` in `CommonC` is its definition at `CommonC/AG300_CTL01Params.c:136`). In other words, setting it has no effect on this variant. Per-axis acceleration limiting for coordinated (CNC) motion is handled by a separate CNC mechanism, not by this keyword.
+On **standalone / v4**, `MaxAcc` is **not implemented as an enforced limit**. The keyword table marks it `implemented: partial` with access flags of `0` (not user-writable); the stored value is never read by the profiler, control loops, or command validation. In other words, setting it has no effect on this variant. Per-axis acceleration limiting for coordinated (CNC) motion is handled by a separate CNC mechanism, not by this keyword.
 
 > Honest note: the frontmatter for this keyword reflects this — `implemented: partial` and `access: 0` on standalone/v4. Do not rely on `MaxAcc` to clamp or reject motions on these variants.
 
 ## Changes between versions
 
-On **central-i v5** `MaxAcc` becomes a fully implemented, writable limit: the frontmatter `central-i.v5` override changes it to `access: rw`, `data_type: float32`, `units: user`, `implemented: final`, with a default of `10000000`, and it is usable while the motor is on and in motion. The enforcement logic for this lives in the central-i v5 build (not present in the standalone/v4 firmware branch documented here).
+On **central-i v5** `MaxAcc` becomes a fully implemented, writable limit: the frontmatter `central-i.v5` override changes it to `access: rw`, `data_type: float32`, `units: user`, `implemented: final`, with a default of `10000000`, and it is usable while the motor is on and in motion. The enforcement logic for this is present only in the central-i v5 firmware.
 
 ## Examples
 

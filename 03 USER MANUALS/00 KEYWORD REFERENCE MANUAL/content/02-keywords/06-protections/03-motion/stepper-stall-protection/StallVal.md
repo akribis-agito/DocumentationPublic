@@ -36,19 +36,19 @@ Read-only current value of the stepper stall-detection metric.
 
 ## How it works
 
-The metric is computed every control sample inside the stepper current-loop branch (firmware `CommonC/AG300_CTL01ControlLoops.c:2517`). First the sum of the squared phase-voltage differences is formed:
+The metric is computed every control sample inside the stepper current-loop branch. First the sum of the squared phase-voltage differences is formed:
 
-```c
-VoltSquaredSum = (Va-Vc)*(Va-Vc) + (Vb-Vc)*(Vb-Vc);
+```text
+voltage sum = (Va-Vc)² + (Vb-Vc)²
 ```
 
-then it is passed through a first-order low-pass filter (`SMOOTHING_FACTOR_STALL_FILTER = 0.005`, ≈13 Hz cutoff) to produce `StallVal`:
+then it is passed through a first-order low-pass filter (smoothing factor `0.005`, ≈13 Hz cutoff) to produce `StallVal`:
 
-```c
-StallVal = VoltSquaredSum*0.005 + 0.995*StallValPrev;
+```text
+StallVal = voltage sum * 0.005 + 0.995 * previous StallVal
 ```
 
-`Va`, `Vb`, `Vc` are the (post-saturation) phase voltages of the stepper. While the motor tracks its commanded electrical angle, these phase-voltage differences stay high; when the rotor falls out of step (stalls), the effective contribution drops and `StallVal` falls. A stall is declared when `StallVal` drops **below** the computed threshold [StallTh](StallTh.md) (`AG300_CTL01ControlLoops.c:2531`). `StallVal` is reset to `0` when the motor is off (`AG300_CTL01ControlLoops.c:2695`).
+`Va`, `Vb`, `Vc` are the (post-saturation) phase voltages of the stepper. While the motor tracks its commanded electrical angle, these phase-voltage differences stay high; when the rotor falls out of step (stalls), the effective contribution drops and `StallVal` falls. A stall is declared when `StallVal` drops **below** the computed threshold [StallTh](StallTh.md). `StallVal` is reset to `0` when the motor is off.
 
 > Note: this metric is produced only for stepper motors driven by the internal amplifier; it is not generated for servo or external-amplifier configurations.
 

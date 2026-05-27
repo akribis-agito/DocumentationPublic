@@ -43,10 +43,10 @@ Selects the motor temperature-sensor type.
 
 ## How it works
 
-The motor-temperature checks are all guarded by `if (glMotorTempUsed[axis] != 0)`:
+The motor-temperature checks are all guarded by a `MotorTempUsed != 0` test:
 
-- **Fault** — the over-temperature trip against [MaxMotorTemp](MaxMotorTemp.md) runs only when `MotorTempUsed ≠ 0` (`AG300_CTL01ControlInterrupt.c:10303`, `:10329`).
-- **Warning** — the [StatReg](../../07-status-and-faults/StatReg.md) bits-15–16 warning bands are evaluated only when `MotorTempUsed ≠ 0`; otherwise the warning field is cleared (`AG300_CTL01ControlInterrupt.c:9584`–`:9585`).
+- **Fault** — the over-temperature trip against [MaxMotorTemp](MaxMotorTemp.md) runs only when `MotorTempUsed ≠ 0`.
+- **Warning** — the [StatReg](../../07-status-and-faults/StatReg.md) bits-15–16 warning bands are evaluated only when `MotorTempUsed ≠ 0`; otherwise the warning field is cleared.
 
 The comparison uses `≠ 0` rather than `== 1`, so the gate is purely on/off.
 

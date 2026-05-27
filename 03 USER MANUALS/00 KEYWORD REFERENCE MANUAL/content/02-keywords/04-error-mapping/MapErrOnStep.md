@@ -38,13 +38,13 @@ It is an axis-scoped parameter saved to flash and can be changed at any time, in
 
 ## How it works
 
-The firmware maintains a ramp **counter** that runs from `0` (correction off) up to a full-scale value equal to the controller's samples-per-second. The applied correction is scaled by `counter / SAMPLES_PER_SECOND`, so the counter is effectively a 0…1 blend factor between the uncorrected feedback and the fully-corrected feedback. `MapErrOnStep` is the amount the counter changes **per control cycle**:
+The controller maintains a ramp **counter** that runs from `0` (correction off) up to a full-scale value equal to the controller's samples-per-second. The applied correction is scaled by `counter / (samples per second)`, so the counter is effectively a 0…1 blend factor between the uncorrected feedback and the fully-corrected feedback. `MapErrOnStep` is the amount the counter changes **per control cycle**:
 
 - **Engaging** ([MapType](MapType.md) set 1/2/3): the counter increments by `MapErrOnStep` each cycle until it saturates at full scale.
 - **Disengaging** ([MapType](MapType.md) set 0): the counter decrements by `MapErrOnStep` each cycle; when it reaches 0 the internal mapping type reverts to off.
 - **`MapErrOnStep = 0` (default):** the counter jumps straight to full scale on engage / to 0 on disengage — an immediate, single-cycle switch (no ramp).
 
-Larger steps engage faster; the maximum (`16384`) at the base sample rate fully engages in roughly one second. Because full scale equals samples-per-second, a step of `N` engages over about `SAMPLES_PER_SECOND / N` cycles.
+Larger steps engage faster; the maximum (`16384`) at the base sample rate fully engages in roughly one second. Because full scale equals samples-per-second, a step of `N` engages over about `(samples per second) / N` cycles.
 
 ## Examples
 

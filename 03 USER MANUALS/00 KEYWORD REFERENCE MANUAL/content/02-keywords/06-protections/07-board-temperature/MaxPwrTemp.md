@@ -41,14 +41,14 @@ Maximum allowed power-stage temperature (°C); exceeding it triggers protection.
 Once per millisecond, while the motor is on and not in simulation:
 
 ```text
-if (PwrTemp > MaxPwrTemp)   →   disable axis, ConFlt = 1018 (CON_FLT_HIGH_IPM_TEMP), append to ErrLog
+if (PwrTemp > MaxPwrTemp)   →   disable axis, raise the power over-temperature fault, append to ErrLog
 ```
 
-(Firmware: `AG300_CTL01ControlInterrupt.c:10299` and `:10325`; also `AG300_CTL01Funcs.c:19808`.) The axis is disabled via `MotorOffAndAddToErrorLog(...)`, [ConFlt](../../07-status-and-faults/ConFlt.md) is set to `1018`, and the event is logged. The fault clears on re-enable.
+The axis is disabled, [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1018 (IPM temperature too high), and the event is logged. The fault clears on re-enable.
 
 ### Graduated warning bands (StatReg)
 
-Whenever you write `MaxPwrTemp`, the firmware recomputes three derived band edges (`SpMaxPwrTemp`, `SpecialFuncs.c:5163`) at 88 / 92 / 96 % of the limit. These feed the combined power/board-temperature warning field in [StatReg](../../07-status-and-faults/StatReg.md) (bits 11–12) — the reported level is the higher of the `PwrTemp` and [BoardTemp](BoardTemp.md) contributions:
+Whenever you write `MaxPwrTemp`, three derived band edges are recomputed at 88 / 92 / 96 % of the limit. These feed the combined power/board-temperature warning field in [StatReg](../../07-status-and-faults/StatReg.md) (bits 11–12) — the reported level is the higher of the `PwrTemp` and [BoardTemp](BoardTemp.md) contributions:
 
 | `PwrTemp` band | StatReg warning level | PCSuite LED |
 |----------------|----------------------|-------------|
@@ -58,7 +58,6 @@ Whenever you write `MaxPwrTemp`, the firmware recomputes three derived band edge
 | > 0.96 × MaxPwrTemp | 3 — high | red |
 | > MaxPwrTemp | fault (`ConFlt = 1018`) | — |
 
-(Bands evaluated at `AG300_CTL01ControlInterrupt.c:9556`–`:9579` and `:11598`–`:11606`.)
 
 > **Note:** the controller-board over-temperature limit ([BoardTemp](BoardTemp.md)) is a *fixed* 75 °C constant — only the power-stage limit is user-settable through this keyword.
 

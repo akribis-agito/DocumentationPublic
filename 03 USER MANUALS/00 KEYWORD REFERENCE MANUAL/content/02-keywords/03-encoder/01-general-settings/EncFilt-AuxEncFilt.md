@@ -7,11 +7,11 @@ Digital filter applied to the incremental encoder A/B/Z input channels.
 
 ## Overview
 
-`EncFilt` specifies the digital filter to apply on the encoder input channels A, B and Z. The filter is implemented in hardware (FPGA) and its definition varies according to product. It is only used when the encoder type ([EncType](EncType-AuxEncType.md)) is 1 (digital incremental encoder); for the filter of SIN/COS encoders refer to [SinCosSetup](SinCosSetup-AuxSinCosSet.md). The filter rejects noise on the quadrature inputs by qualifying a logic level only after several consecutive identical samples, at the cost of lowering the maximum input frequency (and therefore the maximum supported axis speed). `AuxEncFilt` is the auxiliary-encoder counterpart and operates the same way.
+`EncFilt` specifies the digital filter to apply on the encoder input channels A, B and Z. The filter is implemented in hardware and its definition varies according to product. It is only used when the encoder type ([EncType](EncType-AuxEncType.md)) is 1 (digital incremental encoder); for the filter of SIN/COS encoders refer to [SinCosSetup](SinCosSetup-AuxSinCosSet.md). The filter rejects noise on the quadrature inputs by qualifying a logic level only after several consecutive identical samples, at the cost of lowering the maximum input frequency (and therefore the maximum supported axis speed). `AuxEncFilt` is the auxiliary-encoder counterpart and operates the same way.
 
 ## How it works
 
-`EncFilt` is written into the encoder input-qualification filter in the decode hardware. On the **AG300 controller** it sets the DSP input-qualification divider (firmware default 10, maximum 255). On **Central-i remote units** it is a 3-bit field packed into the remote encoder configuration word and sent to the remote FPGA (firmware default 2, maximum 7). Like [EncDir](EncDir-AuxEncDir.md) and [EncSubType](EncSubType-AuxEncSubType.md), it only takes effect for the incremental encoder path (`EncType=1`).
+`EncFilt` is written into the encoder input-qualification filter in the decode hardware. On the **AG300 controller** it sets the DSP input-qualification divider (firmware default 10, maximum 255). On **Central-i remote units** it is a 3-bit field packed into the remote encoder configuration word and sent to the remote unit (firmware default 2, maximum 7). Like [EncDir](EncDir-AuxEncDir.md) and [EncSubType](EncSubType-AuxEncSubType.md), it only takes effect for the incremental encoder path (`EncType=1`).
 
 For the **AG300 controller**, the filter is characterized as follows:
 

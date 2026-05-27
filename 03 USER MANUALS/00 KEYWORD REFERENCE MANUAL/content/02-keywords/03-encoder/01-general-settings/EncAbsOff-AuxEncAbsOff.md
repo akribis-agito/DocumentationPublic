@@ -13,7 +13,7 @@ Offset added to the absolute encoder reading at power-up.
 
 ## How it works
 
-During the first control cycles after power-up (or, on central-i, the first cycles after the encoder is configured), the firmware seeds the accumulated position directly from the absolute reading plus this offset, instead of starting from zero (`ControlInterrupt.c:2089` / central-i `:2100`):
+During the first control cycles after power-up (or, on central-i, the first cycles after the encoder is configured), the firmware seeds the accumulated position directly from the absolute reading plus this offset, instead of starting from zero:
 
 $$EncoderPos_{init} = Reading_{masked} + EncAbsOff$$
 
@@ -21,11 +21,11 @@ where `Reading_masked` is the raw reading after the [EncAbsMB](EncAbsMB-AuxEncAb
 
 So `EncAbsOff` shifts where the encoder's absolute zero lands in the controller's position frame. To place machine zero at a chosen physical point, set `EncAbsOff` to the negative of the masked reading observed at that point (read it from [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)).
 
-Changing `EncAbsOff` on a brushless motor invalidates commutation (it shifts the position-to-electrical-angle relationship), so the firmware flags that commutation must be repeated (`SpecialFuncs.c:803`).
+Changing `EncAbsOff` on a brushless motor invalidates commutation (it shifts the position-to-electrical-angle relationship), so the controller flags that commutation must be repeated.
 
 ### Auxiliary encoder (AuxEncAbsOff)
 
-`AuxEncAbsOff` seeds the auxiliary accumulated position the same way at power-up — `AuxPos_init = Reading_masked + AuxEncAbsOff` (`ControlInterrupt.c:2287`) — establishing the auxiliary feedback at a known value without homing.
+`AuxEncAbsOff` seeds the auxiliary accumulated position the same way at power-up — `AuxPos_init = Reading_masked + AuxEncAbsOff` — establishing the auxiliary feedback at a known value without homing.
 
 ## Examples
 

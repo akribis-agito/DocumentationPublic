@@ -36,21 +36,18 @@ Maximum closed-loop position error; exceeding it disables the axis.
 
 ## How it works
 
-The check runs every control sample in the position loop (firmware `CommonC/AG300_CTL01ControlLoops.c:434`):
+The check runs every control sample in the position loop:
 
-```c
-if (labs(PosErr) > MaxPosErrInternal)
-{
-    if (gsMaxErrStat & 0x01) MotorOffAndAddToErrorLog(axis, CON_FLT_HIGH_POS_ERR_OL, true);
-    else                     MotorOffAndAddToErrorLog(axis, CON_FLT_HIGH_POS_ERR,    true);
-}
+```text
+if |PosErr| > active threshold
+    turn the axis off and log the fault
 ```
 
 Key points:
 
-- The threshold actually used is **`MaxPosErrInternal`**, not `MaxPosErr` directly. `MaxPosErrInternal` is switched between `MaxPosErr` (closed loop) and [MaxPosErrOL](MaxPosErrOL.md) (open loop / injection) by the `SpOpenLoop()` handler (`CommonC/SpecialFuncs.c:5654`). In normal closed-loop operation `MaxPosErrInternal = MaxPosErr` and `gsMaxErrStat` bit 0 is clear, so a violation raises `CON_FLT_HIGH_POS_ERR` (code `1020`). In open loop, bit 0 of `gsMaxErrStat` is set and the same condition instead raises `CON_FLT_HIGH_POS_ERR_OL` (code `1055`).
-- `PosErr` is forced to `0` (so this protection never trips) for an open-loop stepper, and whenever the axis is not in a position-control / force-over-PIV mode (`AG300_CTL01ControlLoops.c:427`). The protection is therefore effective only when a position loop is actually closed.
-- On a violation the axis is turned off immediately (`MotorOffAndAddToErrorLog`), and the fault's configured stop behaviour applies.
+- The threshold actually used is switched between `MaxPosErr` (closed loop) and [MaxPosErrOL](MaxPosErrOL.md) (open loop / injection) depending on the loop state. In normal closed-loop operation the closed-loop threshold applies, so a violation records [ConFlt](../../../07-status-and-faults/ConFlt.md) fault code 1020 (position error too high). In open loop the open-loop threshold applies and the same condition instead records fault code 1055 (open-loop position error too high).
+- The position error is forced to `0` (so this protection never trips) for an open-loop stepper, and whenever the axis is not in a position-control / force-over-PIV mode. The protection is therefore effective only when a position loop is actually closed.
+- On a violation the axis is turned off immediately, and the fault's configured stop behaviour applies.
 
 ## Examples
 
@@ -64,4 +61,4 @@ AMaxPosErr[1]         ; read back the limit
 - [PosErr](../../../10-motion/01-kinematics-status/PosErr.md) — the measured position error this limit acts on
 - [MaxPosErrOL](MaxPosErrOL.md) — open-loop position-error limit (the alternate threshold)
 - [MaxVelErr](MaxVelErr.md) — companion velocity-following-error limit
-- [ConFlt](../../../07-status-and-faults/ConFlt.md) — records `CON_FLT_HIGH_POS_ERR` (1020) / `..._OL` (1055)
+- [ConFlt](../../../07-status-and-faults/ConFlt.md) — records fault code 1020 (closed loop) / 1055 (open loop)

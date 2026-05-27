@@ -49,7 +49,7 @@ Selects how the current command (CurrRef) is saturated.
 Each control cycle the current command (`CurrRef`) is saturated in two stages:
 
 1. **Directional clamp** — for modes 1, 2 and 3 the firmware first clamps `CurrRef` to the selected directional limits. Mode 0 skips this stage.
-2. **Absolute clamp** — `CurrRef` is then always clamped to ±[PeakCL](PeakCL.md) (specifically to the I²t-adjusted `gfLimitedPeakCL`).
+2. **Absolute clamp** — `CurrRef` is then always clamped to ±[PeakCL](PeakCL.md) (specifically to the I²t-adjusted effective peak limit).
 
 Because the `PeakCL` clamp is applied in every mode, no directional limit can raise the command above `PeakCL`; the modes only let you make the limit *tighter* or asymmetric.
 

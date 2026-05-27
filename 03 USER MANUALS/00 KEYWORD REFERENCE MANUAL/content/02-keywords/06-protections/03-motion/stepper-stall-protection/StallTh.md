@@ -36,26 +36,26 @@ Read-only stepper stall-detection threshold.
 
 ## How it works
 
-The threshold is built each sample from the commanded velocity `dPosRef`, the percentage [StallThPcnt](StallThPcnt.md), and the two [StallCnst](StallCnst.md) coefficients, then low-pass filtered (firmware `CommonC/AG300_CTL01ControlLoops.c:2525`):
+The threshold is built each sample from the commanded velocity, the percentage [StallThPcnt](StallThPcnt.md), and the two [StallCnst](StallCnst.md) coefficients, then low-pass filtered:
 
-```c
-ldPosRefBitShifted = labs(dPosRef) >> (StepBits - 2);   // scaled commanded speed, shifted to avoid overflow
+```text
+speed = |commanded velocity| >> (StepBits - 2)   ; scaled commanded speed, shifted to avoid overflow
 
-ThFiltInput = (StallThPcnt * ldPosRefBitShifted) * 0.01 * 0.001
-              * (StallCnst[1]*ldPosRefBitShifted + StallCnst[2])
-              - STALL_THRESHOLD_OFFSET;                 // STALL_THRESHOLD_OFFSET = 10000
+threshold input = (StallThPcnt * speed) * 0.01 * 0.001
+                  * (StallCnst[1]*speed + StallCnst[2])
+                  - 10000                          ; fixed offset
 
-StallTh = ThFiltInput*0.005 + 0.995*StallThPrev;        // same ~13 Hz LPF as StallVal
+StallTh = threshold input * 0.005 + 0.995 * previous StallTh   ; same ~13 Hz LPF as StallVal
 ```
 
 In words:
 
 - `StallCnst[1]·speed + StallCnst[2]` is a **linear fit of the expected metric vs. speed** (slope and intercept) — see [StallCnst](StallCnst.md). This makes the threshold track how the healthy `StallVal` is expected to grow with speed.
 - That fit is scaled by `StallThPcnt/100` (the `× 0.01`) and a fixed `× 0.001`, so `StallThPcnt` sets *what fraction* of the expected healthy value counts as "stalled" — a lower percentage means a lower threshold and therefore less-sensitive detection.
-- A fixed `STALL_THRESHOLD_OFFSET` of `10000` is subtracted to reduce false triggers.
+- A fixed offset of `10000` is subtracted to reduce false triggers.
 - The result is filtered with the same 0.005 smoothing factor as `StallVal`, so threshold and metric move on the same time scale.
 
-`StallTh` is read-only and is reset to `0` when the motor is off (`AG300_CTL01ControlLoops.c:2696`).
+`StallTh` is read-only and is reset to `0` when the motor is off.
 
 ## Examples
 

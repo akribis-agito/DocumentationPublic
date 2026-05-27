@@ -36,12 +36,12 @@ Sets the output format or signal type of the virtual encoder.
 
 ## How it works
 
-`VEncType` maps to the firmware `VENC_TYPE_*` constants and is written into the FPGA virtual-encoder settings register (`SpVEnc`, `SpecialFuncs.c:5148`):
+`VEncType` selects the output signal format the controller drives onto the virtual-encoder hardware:
 
-| Value | Firmware constant | Output signal |
-|---|---|---|
-| 0 | `VENC_TYPE_PD` | Pulse + direction (one pulse line, one direction line). |
-| 1 | `VENC_TYPE_AQB` | A-quad-B quadrature (two phase-shifted channels). |
+| Value | Output signal |
+|---|---|
+| 0 | Pulse + direction (one pulse line, one direction line). |
+| 1 | A-quad-B quadrature (two phase-shifted channels). |
 
 The format affects how [VEncDelay](VEncDelay.md) is used: a setup delay (clocks-to-first-pulse on a direction change) is applied only for pulse/direction (`VEncType=0`). For A-quad-B the delay is forced to 0, since A and B are never switched simultaneously and no inter-line setup time is needed.
 

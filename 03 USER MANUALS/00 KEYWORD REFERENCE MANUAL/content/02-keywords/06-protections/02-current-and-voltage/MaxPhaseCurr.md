@@ -40,10 +40,10 @@ Hard limit on motor phase current; exceeding it disables the axis.
 
 ## How it works
 
-Every control cycle the firmware checks each phase current against `MaxPhaseCurr`, each with its own debounce counter:
+Every control cycle the drive checks each phase current against `MaxPhaseCurr`, each with its own debounce counter:
 
 - For each phase, if `|Iphase| > MaxPhaseCurr` the phase counter increments; otherwise it resets to 0.
-- When any phase counter reaches **4 consecutive samples (≈ 0.25 ms)**, the axis is disabled and [ConFlt](../../07-status-and-faults/ConFlt.md) is set to the matching phase code — `1013` (`CON_FLT_PHASE_A_CURRENT`), `1014` (phase B) or `1015` (phase C) — with a snapshot and an `ErrLog` entry.
+- When any phase counter reaches **4 consecutive samples (≈ 0.25 ms)**, the axis is disabled and [ConFlt](../../07-status-and-faults/ConFlt.md) shows the matching phase fault code — 1013 (phase A), 1014 (phase B) or 1015 (phase C) — with a snapshot and an [ErrLog](../../07-status-and-faults/ErrLog.md) entry.
 
 This is the per-phase counterpart of [MaxMotorCurr](MaxMotorCurr.md), which trips on the total motor current using the same 4-sample / 0.25 ms debounce.
 

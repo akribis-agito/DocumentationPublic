@@ -38,31 +38,31 @@ Read-only controller-board temperature (°C).
 
 ### Measurement
 
-On controller-type products the board sensor is read over I²C: the FPGA's I²C module is pre-configured (in `InitFPGA()`) to read the temperature device, and the result is copied to `BoardTemp` each background pass. A reading of 255 means "no sensor connected" (e.g. AGC301, where the sensor lives on the amplifier board) and is reported as 0 °C (`AG300_CTL01Controller.c:2640`–`:2645`).
+On controller-type products the board sensor is read over I²C: the I²C module is pre-configured at startup to read the temperature device, and the result is copied to `BoardTemp` each background pass. A reading of 255 means "no sensor connected" (e.g. AGC301, where the sensor lives on the amplifier board) and is reported as 0 °C.
 
 ### Over-temperature protection (fixed limit)
 
-Unlike [PwrTemp](PwrTemp.md)/[MaxPwrTemp](MaxPwrTemp.md), the board-temperature fault uses a **fixed firmware constant**, not a user keyword. While the motor is on and not in simulation:
+Unlike [PwrTemp](PwrTemp.md)/[MaxPwrTemp](MaxPwrTemp.md), the board-temperature fault uses a **fixed limit of 75 °C**, not a user keyword. While the motor is on and not in simulation:
 
 ```text
-if (BoardTemp > MAX_BOARD_TEMP)   →   disable axis, ConFlt = 1060 (CON_FLT_HIGH_BOARD_TEMP)
+if (BoardTemp > 75 °C)   →   disable axis, raise the board over-temperature fault
 ```
 
-with `MAX_BOARD_TEMP = 75 °C` (`AG300_CTL01ParamsCommon.h:977`; checked at `AG300_CTL01ControlInterrupt.c:10295`/`:10321` and `AG300_CTL01Funcs.c:19801`).
+[ConFlt](../../07-status-and-faults/ConFlt.md) then shows fault code 1060 (board temperature too high).
 
 ### Warning bands (shared with PwrTemp)
 
 `BoardTemp` contributes to the same **power/board-temperature** warning field in [StatReg](../../07-status-and-faults/StatReg.md) (bits 11–12) as `PwrTemp` — the warning level is the higher of the two. The fixed board-temperature band edges are:
 
-| `BoardTemp` band | Constant | StatReg level | PCSuite LED |
-|------------------|----------|---------------|-------------|
-| < 66 °C | `MAX_BOARD_TEMP_0_88` | 0 — none | off |
-| 66…69 °C | `MAX_BOARD_TEMP_0_92` | 1 — low | yellow |
-| 69…72 °C | `MAX_BOARD_TEMP_0_96` | 2 — medium | orange |
-| > 72 °C | — | 3 — high | red |
-| > 75 °C | `MAX_BOARD_TEMP` | fault (`ConFlt = 1060`) | — |
+| `BoardTemp` band | StatReg level | PCSuite LED |
+|------------------|---------------|-------------|
+| < 66 °C | 0 — none | off |
+| 66…69 °C | 1 — low | yellow |
+| 69…72 °C | 2 — medium | orange |
+| > 72 °C | 3 — high | red |
+| > 75 °C | fault (`ConFlt` = 1060) | — |
 
-(Constants `AG300_CTL01ParamsCommon.h:978`–`:980`; bands evaluated at `AG300_CTL01ControlInterrupt.c:9570`–`:9579` and `:11598`–`:11606`. On newer Central-i remote units the board-temperature band edges come from a per-axis `glBoardTempMax[]` table instead of these constants.)
+On newer Central-i remote units the board-temperature band edges come from a per-axis limit instead of these fixed values.
 
 ## Examples
 

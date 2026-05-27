@@ -36,25 +36,21 @@ Maximum tolerated velocity difference between the two dual-loop feedbacks.
 
 ## How it works
 
-The check runs each control sample, but **only when dual-loop is enabled** (`DualLoopOn != 0`) (firmware `CommonC/AG300_CTL01ControlInterrupt.c:4752`):
+The check runs each control sample, but **only when dual-loop is enabled** (`DualLoopOn` non-zero):
 
-```c
-if (DualLoopOn != 0)
-{
-    if (labs(Vel[2] - (long) DualLoopSpeed) > DualStuckVel)
-    {
-        DualStuckCounter++;
-        if (DualStuckCounter >= DualStuckTime)
-            MotorOffAndAddToErrorLog(axis, CON_FLT_DUAL_STUCK, true);
-    }
+```text
+if dual-loop is enabled
+    if |Vel[2] - dual-loop speed| > DualStuckVel
+        increment the dual-stuck counter
+        if the dual-stuck counter has reached DualStuckTime
+            turn the axis off and log the fault
     else
-        DualStuckCounter = 0;
-}
+        reset the dual-stuck counter to 0
 ```
 
 - The compared quantity is the absolute difference between the position-loop feedback velocity `Vel[2]` and the internally computed dual-loop speed (the velocity-loop feedback expressed in the same units). A healthy coupling keeps the two velocities close; a slipped, broken, or badly scaled coupling makes them diverge.
-- While the difference exceeds `DualStuckVel`, an internal `DualStuckCounter` increments; any sample within tolerance resets it to `0`. The fault fires only on a continuous run of [DualStuckTime](DualStuckTime.md) samples.
-- On trip the axis is turned off and `CON_FLT_DUAL_STUCK` (code `1049`) is recorded in [ConFlt](../../../07-status-and-faults/ConFlt.md).
+- While the difference exceeds `DualStuckVel`, an internal counter increments; any sample within tolerance resets it to `0`. The fault fires only on a continuous run of [DualStuckTime](DualStuckTime.md) samples.
+- On trip the axis is turned off and [ConFlt](../../../07-status-and-faults/ConFlt.md) records fault code 1049 (dual-loop stuck).
 
 The default is `40000` count/s. Because the gate is `DualLoopOn`, this protection has no effect on single-loop axes.
 
@@ -68,4 +64,4 @@ ADualStuckVel[1]         ; read back the threshold
 ## See also
 
 - [DualStuckTime](DualStuckTime.md) — how long the mismatch may persist
-- [ConFlt](../../../07-status-and-faults/ConFlt.md) — records `CON_FLT_DUAL_STUCK` (1049)
+- [ConFlt](../../../07-status-and-faults/ConFlt.md) — records fault code 1049 (dual-loop stuck)

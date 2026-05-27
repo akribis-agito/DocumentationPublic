@@ -36,16 +36,16 @@ Consecutive cycles the dual-loop feedback mismatch may persist before tripping.
 
 ## How it works
 
-When dual-loop is enabled, each control sample the firmware tests whether the two feedbacks' velocity difference exceeds [DualStuckVel](DualStuckVel.md) (firmware `CommonC/AG300_CTL01ControlInterrupt.c:4756`):
+When dual-loop is enabled, each control sample the firmware tests whether the two feedbacks' velocity difference exceeds [DualStuckVel](DualStuckVel.md):
 
-```c
-DualStuckCounter++;
-if (DualStuckCounter >= DualStuckTime)
-    MotorOffAndAddToErrorLog(axis, CON_FLT_DUAL_STUCK, true);
+```text
+increment the dual-stuck counter
+if the dual-stuck counter has reached DualStuckTime
+    turn the axis off and log the fault
 ```
 
-- The internal `DualStuckCounter` increments once per sample for as long as the mismatch exceeds `DualStuckVel`; any in-tolerance sample resets it to `0`. The fault requires a single unbroken run of `DualStuckTime`.
-- On reaching the threshold, the axis is turned off and `CON_FLT_DUAL_STUCK` (code `1049`) is recorded in [ConFlt](../../../07-status-and-faults/ConFlt.md).
+- The internal counter increments once per sample for as long as the mismatch exceeds `DualStuckVel`; any in-tolerance sample resets it to `0`. The fault requires a single unbroken run of `DualStuckTime`.
+- On reaching the threshold, the axis is turned off and [ConFlt](../../../07-status-and-faults/ConFlt.md) records fault code 1049 (dual-loop stuck).
 - The whole check is gated on `DualLoopOn`, so on single-loop axes the counter never runs.
 
 A larger `DualStuckTime` tolerates longer transient divergences (e.g. during aggressive transients where the two feedbacks momentarily disagree); a smaller value reacts faster to a genuinely slipping or broken coupling.
@@ -60,4 +60,4 @@ ADualStuckTime[1]        ; read back
 ## See also
 
 - [DualStuckVel](DualStuckVel.md) — the tolerated velocity-difference threshold
-- [ConFlt](../../../07-status-and-faults/ConFlt.md) — records `CON_FLT_DUAL_STUCK` (1049)
+- [ConFlt](../../../07-status-and-faults/ConFlt.md) — records fault code 1049 (dual-loop stuck)

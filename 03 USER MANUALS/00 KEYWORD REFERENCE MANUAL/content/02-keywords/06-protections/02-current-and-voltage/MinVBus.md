@@ -36,9 +36,9 @@ Minimum allowed bus voltage; sustained shortfall disables the axis.
 
 ## How it works
 
-On each periodic bus-voltage check the firmware compares `VBus` with `MinVBus`:
+On each periodic bus-voltage check the drive compares `VBus` with `MinVBus`:
 
-- If `VBus ≤ MinVBus`, the axis is disabled and [ConFlt](../../07-status-and-faults/ConFlt.md) is set to `1009` (`CON_FLT_BUS_UNDER_VOLTAGE`, "Bus Voltage too low").
+- If `VBus ≤ MinVBus`, the axis is disabled and [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1009 (bus voltage too low).
 - As `VBus` approaches the limit from above, a multi-level under-voltage warning is reported in [StatReg](../../07-status-and-faults/StatReg.md) (bits 7–8) at 1.12 / 1.08 / 1.04 × `MinVBus` (low / medium / high); at or below `MinVBus`, bit 4 (under-MinVBus) is set.
 
 > **Note:** unlike the over-voltage trip, the under-voltage trip is **immediate** — it does *not* use the [MaxVBusTime](MaxVBusTime.md) delay.

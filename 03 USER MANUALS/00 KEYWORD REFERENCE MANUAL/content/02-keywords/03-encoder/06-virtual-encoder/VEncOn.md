@@ -43,18 +43,18 @@ This is different from the fixed encoder-emulation outputs ([EmulRat](../05-enco
 | VEncOn | State |
 |---|---|
 | 0 | Virtual encoder disabled; emulation output registers cleared. |
-| 1 | Virtual encoder enabled; each control cycle the firmware reads the source, scales it, and drives the FPGA to emit the corresponding number of edges. |
+| 1 | Virtual encoder enabled; each control cycle the controller reads the source, scales it, and drives the encoder-emulation hardware to emit the corresponding number of edges. |
 
-Each control cycle (`AG300_CTL01ControlInterrupt.c`, around line 6296) the firmware:
+Each control cycle the controller:
 
 1. Reads the source variable selected by [VEncSrc](VEncSrc.md) (handling its data type and any [ModRev](../04-modulo-mode/ModRev.md) roll-over of the source).
 2. Multiplies it by [VEncFact](VEncFact.md) to move into the output plane.
-3. Runs a PI tracking controller plus feed-forward so the emitted count `VEncValue × VEncFactDen` follows the scaled source with minimal lag, and computes the number of edges (`VEncDelta`) to emit this cycle.
-4. Writes the pulse count, 50% duty period, and "clocks-to-first-pulse" (from [VEncDelay](VEncDelay.md)) to the FPGA.
+3. Runs a PI tracking controller plus feed-forward so the emitted count (scaled by `VEncFactDen`) follows the scaled source with minimal lag, and computes the number of edges to emit this cycle.
+4. Writes the pulse count, 50% duty period, and "clocks-to-first-pulse" (from [VEncDelay](VEncDelay.md)) to the hardware.
 
-If the required number of pulses in one cycle exceeds the hardware limit while the motor is on, the axis faults (`CON_FLT_VENC_MAX_NUM_PULSES_EXCEEDED`).
+If the required number of pulses in one cycle exceeds the hardware limit while the motor is on, the axis faults: [ConFlt](../../07-status-and-faults/ConFlt.md) reports the virtual-encoder maximum-pulses-exceeded fault.
 
-> **Availability:** in the current firmware the full generation path is implemented for the **AG300 controller**; the Central-i remote-output path is product-dependent (see firmware notes in `SpVEnc`).
+> **Availability:** in the current firmware the full generation path is implemented for the **AG300 controller**; the Central-i remote-output path is product-dependent.
 
 ## Examples
 

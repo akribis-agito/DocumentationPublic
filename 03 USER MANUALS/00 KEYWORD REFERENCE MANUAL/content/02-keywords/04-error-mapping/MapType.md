@@ -38,22 +38,22 @@ The geometry of the map is defined by [MapStartPos](MapStartPos.md), [MapPosGap]
 
 ## How it works
 
-`MapType` is read once per control cycle in the feedback pipeline (in the control interrupt) to choose the correction branch. The supported values are fixed in firmware:
+`MapType` is read once per control cycle in the feedback pipeline to choose the correction branch. The supported values are:
 
 | `MapType` | Mode | Lookup dimensions | Interpolation |
 |:---------:|------|-------------------|---------------|
-| 0 | Off (`NO_ENCODER_MAPPING`) | none — `Pos = PosBeforeMap` | none |
-| 1 | 1D (`ENCODER_MAPPING_1D`) | first encoder only | linear (2-point) |
-| 2 | 2D (`ENCODER_MAPPING_2D`) | first encoder = row, second = column | bilinear (4-point) |
-| 3 | 3D (`ENCODER_MAPPING_3D`) | first/second/third encoders | trilinear (8-point) |
+| 0 | Off | none — `Pos = PosBeforeMap` | none |
+| 1 | 1D | first encoder only | linear (2-point) |
+| 2 | 2D | first encoder = row, second = column | bilinear (4-point) |
+| 3 | 3D | first/second/third encoders | trilinear (8-point) |
 
-Each cycle the firmware records `PosBeforeMap = EncoderPos` (the decoded main encoder), then — if the motor is **not** in simulation — runs the selected branch to compute a correction and forms `Pos = EncoderPos + (ramped correction)`. `DeltaPos` is recomputed afterwards so the velocity estimate also reflects the corrected position. In **simulation** mode mapping is skipped entirely (`Pos = EncoderPos`) to avoid the closed loop `EncoderPos = PosRef → Pos = f(EncoderPos) → PosRef = Pos` that would form in motor-off.
+Each cycle the controller records `PosBeforeMap` (the decoded main-encoder position), then — if the motor is **not** in simulation — runs the selected branch to compute a correction and forms `Pos = PosBeforeMap + (ramped correction)`. `DeltaPos` is recomputed afterwards so the velocity estimate also reflects the corrected position. In **simulation** mode mapping is skipped entirely (`Pos = PosBeforeMap`) to avoid the closed loop that would otherwise form in motor-off, where the corrected position feeds back into the commanded position.
 
 ### Internal vs. requested type, and the engage/disengage ramp
 
-Writing `MapType` does **not** switch the correction on or off abruptly. The firmware keeps a separate internal copy (`gsMapTypeInternal`) and a 0..1 ramp counter:
+Writing `MapType` does **not** switch the correction on or off abruptly. The controller keeps a separate internal copy of the active type and a 0..1 ramp counter:
 
-- **Engaging** (write `MapType` 1/2/3 from 0): the internal type is set immediately and the ramp counter starts at 0, climbing toward full scale at a rate set by [MapErrOnStep](MapErrOnStep.md). Until it reaches full scale the correction is scaled by `counter / SAMPLES_PER_SECOND`, so the correction (and the [MapErrOffset](MapErrOffset.md) component) fades in smoothly with no position step.
+- **Engaging** (write `MapType` 1/2/3 from 0): the internal type is set immediately and the ramp counter starts at 0, climbing toward full scale at a rate set by [MapErrOnStep](MapErrOnStep.md). Until it reaches full scale the correction is scaled by `counter / (samples per second)`, so the correction (and the [MapErrOffset](MapErrOffset.md) component) fades in smoothly with no position step.
 - **Disengaging** (write `MapType` 0): the user value goes to 0 but the internal type stays active and the correction ramps **down**; only when the counter reaches 0 does the internal type revert to off. With `MapErrOnStep = 0` the change is immediate (one cycle).
 
 This ramp logic is shared by all of `MapType`, [MapErrOnStep](MapErrOnStep.md), [MapErrOffset](MapErrOffset.md), and [MapErrOffRamp](MapErrOffRamp.md). Engaging can also be performed automatically during a homing sequence.

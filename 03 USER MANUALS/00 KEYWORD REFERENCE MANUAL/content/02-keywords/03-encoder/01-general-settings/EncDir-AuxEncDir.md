@@ -15,8 +15,8 @@ Sets the counting direction of the encoder feedback.
 
 The direction reversal is applied in the **quadrature decode hardware**, not as a software post-step:
 
-- **AG300 controller** — `EncDir` is written into the eQEP decoder control register's quadrature-swap bit (`EQepRegs.QDECCTL.bit.SWAP = EncDir`, `SpecialFuncs.c:304`). Setting it swaps the A and B channels in hardware, inverting the decoded count direction.
-- **Central-i remote units** — `EncDir` is packed into the remote encoder configuration word (bit 8) sent to the remote FPGA (`SpecialFuncs.c:330`), where the FPGA applies the same swap.
+- **AG300 controller** — `EncDir` is written into the decoder control register's quadrature-swap bit. Setting it swaps the A and B channels in hardware, inverting the decoded count direction.
+- **Central-i remote units** — `EncDir` is packed into the remote encoder configuration word (bit 8) sent to the remote unit, where the hardware applies the same swap.
 
 Because the swap happens at the decoder, the effect is equivalent to negating the per-cycle count delta:
 

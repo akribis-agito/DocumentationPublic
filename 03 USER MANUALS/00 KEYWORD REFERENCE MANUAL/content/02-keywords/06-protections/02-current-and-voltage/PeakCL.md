@@ -41,9 +41,9 @@ Peak current limit, used for both current-command saturation and I²t protection
 
 ## How it works
 
-Every control cycle the firmware forms `gfLimitedPeakCL` — the effective absolute current-command limit — and applies it via `ControlLoopCurrentSaturateCurrRef()`. Normally `gfLimitedPeakCL = PeakCL`; while the [I²t](ContCL.md) limitation is engaged it drops to the effective continuous value. When the command is clamped, [StatReg](../../07-status-and-faults/StatReg.md) bit 21 (current saturation) is set.
+Every control cycle the drive forms the effective absolute current-command limit and applies it as the current-command saturation bound. Normally this limit equals `PeakCL`; while the [I²t](ContCL.md) limitation is engaged it drops to the effective continuous value. When the command is clamped, [StatReg](../../07-status-and-faults/StatReg.md) bit 21 (current saturation) is set.
 
-`PeakCL` also seeds the multi-level current warnings reported in `StatReg`: the firmware precomputes 0.88·`PeakCL`, 0.92·`PeakCL` and 0.96·`PeakCL` as the low / medium / high warning thresholds.
+`PeakCL` also seeds the multi-level current warnings reported in `StatReg`: the drive precomputes 0.88·`PeakCL`, 0.92·`PeakCL` and 0.96·`PeakCL` as the low / medium / high warning thresholds.
 
 `PeakCL` must be greater than [ContCL](ContCL.md); if `ContCL` ≥ `PeakCL` the firmware uses an effective continuous limit of `PeakCL / 2` (see [ContCL](ContCL.md)).
 

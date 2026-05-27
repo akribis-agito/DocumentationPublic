@@ -40,25 +40,25 @@ Read-only power-stage temperature (°C).
 
 The IPM temperature is sensed as an analog voltage and converted to °C through a lookup against a calibration curve (the IPM thermistor is non-linear, so a fixed formula is not used). Two product paths exist:
 
-| Product | Method | Firmware |
-|---------|--------|----------|
-| AG100-class amplifier | Each cycle the raw IPM voltage is scaled to mV (`glPwrTempMiliVolt`) and a **table search** walks `glThermistorVoltage[]` (indexed `−40…+119 °C`, one entry per degree) up or down from the previous estimate until the voltage bracket is found. | `AG300_CTL01ControlInterrupt.c:12199`; search at `AG300_CTL01Controller.c:2563`–`:2588` |
-| Central-i (master) | For each axis, the synced ADC reading is **linearly interpolated** between the two nearest points of a per-axis 10-point calibration table (`CITemperatureTables[]`). | `AG300_CTL01Controller.c:2595`–`:2617` |
+| Product | Method |
+|---------|--------|
+| AG100-class amplifier | Each cycle the raw IPM voltage is scaled to mV and a **table search** walks a calibration curve (indexed `−40…+119 °C`, one entry per degree) up or down from the previous estimate until the voltage bracket is found. |
+| Central-i (master) | For each axis, the synced ADC reading is **linearly interpolated** between the two nearest points of a per-axis 10-point calibration table. |
 
 The reading is clamped to the valid range (the AG100 search stops at −39 / +119 °C, keeping one guard point at each end).
 
 ### Invalid-reading handling
 
-If the STO2 or IPM-fault hardware-protection bits are set, the IPM voltage cannot be measured. The firmware then forces `PwrTemp = −40 °C` as a sentinel ("can't measure") and re-arms a fresh search for when the protection clears (`AG300_CTL01Controller.c:2551`–`:2554`). During the first few milliseconds after STO2 is plugged in, `PwrTemp` can read spuriously high due to IPM behaviour — the fan logic accounts for this.
+If the STO2 or IPM-fault hardware-protection bits are set, the IPM voltage cannot be measured. The controller then forces `PwrTemp = −40 °C` as a sentinel ("can't measure") and re-arms a fresh search for when the protection clears. During the first few milliseconds after STO2 is plugged in, `PwrTemp` can read spuriously high due to IPM behaviour — the fan logic accounts for this.
 
 ### Fan control
 
 `PwrTemp` drives the power-stage cooling fan with hysteresis:
 
-| Product | Fan ON at | Fan OFF at | Firmware |
-|---------|-----------|-----------|----------|
-| AG100 | ≥ 50 °C (or during the first 5 ms after power-up) | ≤ 45 °C | `AG300_CTL01ControlInterrupt.c:12374`–`:12377` |
-| Central-i | ≥ 50 °C | ≤ 45 °C | `AG300_CTL01ControlInterrupt.c:13409`/`:13423` |
+| Product | Fan ON at | Fan OFF at |
+|---------|-----------|-----------|
+| AG100 | ≥ 50 °C (or during the first 5 ms after power-up) | ≤ 45 °C |
+| Central-i | ≥ 50 °C | ≤ 45 °C |
 
 ### Protection
 

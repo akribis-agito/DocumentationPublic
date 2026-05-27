@@ -36,12 +36,12 @@ Maximum allowable force error in open-loop force control; exceeding it faults.
 
 ## How it works
 
-The force loop applies a single internal limit (`MaxForceErrInternal`) to `|ForceErr|`; the firmware swaps that limit to `MaxForceErrOL` whenever the force path is **open-loop or being signal-injected**, and to [MaxForceErr](MaxForceErr.md) for normal closed-loop control. The switch is made by `SpOpenLoop` (`SpecialFuncs.c:5654`), which selects the open-loop limits when:
+The force loop applies a single active force-error limit to `|ForceErr|`; the drive swaps that limit to `MaxForceErrOL` whenever the force path is **open-loop or being signal-injected**, and to [MaxForceErr](MaxForceErr.md) for normal closed-loop control. The open-loop limit is selected when:
 
 - [OpenLoopOn](../../08-axis-operation/01-general-keywords/OpenLoopOn.md) is enabled, **or**
 - a direct signal-injection mode is active at the current-reference or force-reference injection point ([InjectType](../../13-injection/InjectType.md) / [InjectPoint](../../13-injection/InjectPoint.md)).
 
-When the limit is exceeded in this state, the loop disables the axis with [ConFlt](../../07-status-and-faults/ConFlt.md) = **1057** (`CON_FLT_HIGH_FORCE_ERR_OL`), distinguishing it from the closed-loop fault 1045 (`AG300_CTL01ControlLoops.c:2819`–`:2824`). Writing the keyword takes effect through the same `SpOpenLoop` special function (the keyword carries the `SpOpenLoop` handler in the parameter table), so changing it re-evaluates which limit is active.
+When the limit is exceeded in this state, the loop disables the axis and [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1057 (open-loop force error too high), distinguishing it from the closed-loop fault code 1045. Writing the keyword re-evaluates which limit is active, so the change takes effect immediately.
 
 ## Examples
 

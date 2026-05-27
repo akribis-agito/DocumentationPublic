@@ -11,11 +11,11 @@ Ratio between a desired user unit and encoder counts for reading position and it
 
 ## How it works
 
-`UsrUnits` is stored as a **16.16 fixed-point ratio**: the effective scale factor is `UsrUnits / 65536` (the firmware constant `ALL_USER_UNITS_SCALING` is 65536, `ALL_USER_UNITS_SHIFTS` is 16). The default `UsrUnits = 65536` therefore means a factor of 1 (values shown directly in counts).
+`UsrUnits` is stored as a **16.16 fixed-point ratio**: the effective scale factor is `UsrUnits / 65536` (the fixed-point scaling is 65536, i.e. 16 fractional bits). The default `UsrUnits = 65536` therefore means a factor of 1 (values shown directly in counts).
 
 $$\text{user value} = \frac{\text{counts}}{\big(UsrUnits / 65536\big)} = \text{counts} \times \frac{65536}{UsrUnits}$$
 
-When `UsrUnits` is an exact integer multiple of 65536, the firmware takes the fast accurate path and divides the count value by `UsrUnits >> 16` with rounding (`AG300_CTL01Interpreter.c:1687`); otherwise it uses the full fixed-point ratio. Writes (e.g. setting a target) are scaled the inverse way (multiplied by the ratio). The same factor applies to all derivatives, so velocity is reported in user-units/s and acceleration in user-units/s².
+When `UsrUnits` is an exact integer multiple of 65536, the firmware takes the fast accurate path and divides the count value by `UsrUnits >> 16` with rounding; otherwise it uses the full fixed-point ratio. Writes (e.g. setting a target) are scaled the inverse way (multiplied by the ratio). The same factor applies to all derivatives, so velocity is reported in user-units/s and acceleration in user-units/s².
 
 To express "*N* encoder counts = 1 user unit", set `UsrUnits = N × 65536`.
 

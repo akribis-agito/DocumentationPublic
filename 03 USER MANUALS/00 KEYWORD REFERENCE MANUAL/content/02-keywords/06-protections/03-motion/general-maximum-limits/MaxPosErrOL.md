@@ -38,16 +38,16 @@ Maximum open-loop (injection) position error; exceeding it disables the axis.
 
 ## How it works
 
-`MaxPosErrOL` and `MaxPosErr` feed the **same** position-error check in the control loop (`CommonC/AG300_CTL01ControlLoops.c:434`). Which one is in force at any instant is selected by the `SpOpenLoop()` handler (`CommonC/SpecialFuncs.c:5654`), which copies the chosen limit into the internal working variable `MaxPosErrInternal` and sets a flag bit in `gsMaxErrStat`:
+`MaxPosErrOL` and `MaxPosErr` feed the **same** position-error check in the control loop. Which one is in force at any instant is selected by the loop state, which switches the active threshold and records whether open-loop limiting is in effect:
 
-| Condition | `MaxPosErrInternal` set to | `gsMaxErrStat` bit 0 |
-|-----------|----------------------------|----------------------|
-| Open-loop mode on (`OpenLoopOn`) | `MaxPosErrOL` | set |
-| Injection at CurrRef or ForceRef point | `MaxPosErrOL` | set |
-| Injection at VelRef / PosRef point | `MaxPosErr` | not set (PosRef) / set per case |
-| Normal closed loop | `MaxPosErr` | clear |
+| Condition | Active threshold | Open-loop limiting |
+|-----------|------------------|--------------------|
+| Open-loop mode on (`OpenLoopOn`) | `MaxPosErrOL` | yes |
+| Injection at CurrRef or ForceRef point | `MaxPosErrOL` | yes |
+| Injection at VelRef / PosRef point | `MaxPosErr` | no (PosRef) / per case |
+| Normal closed loop | `MaxPosErr` | no |
 
-When the loop later finds `|PosErr| > MaxPosErrInternal`, bit 0 of `gsMaxErrStat` decides which fault is logged: set → `CON_FLT_HIGH_POS_ERR_OL` (code `1055`); clear → `CON_FLT_HIGH_POS_ERR` (code `1020`). Either way the axis is turned off immediately. On returning to normal operation (or when the motor goes off during injection), `MaxPosErrInternal` is restored to `MaxPosErr` and `gsMaxErrStat` is cleared (`AG300_CTL01ControlLoops.c:2647`).
+When the loop later finds the position error exceeds the active threshold, the open-loop flag decides which fault is logged: open-loop → [ConFlt](../../../07-status-and-faults/ConFlt.md) fault code 1055 (open-loop position error too high); closed-loop → fault code 1020 (position error too high). Either way the axis is turned off immediately. On returning to normal operation (or when the motor goes off during injection), the active threshold is restored to `MaxPosErr` and the open-loop flag is cleared.
 
 ## Examples
 
@@ -61,4 +61,4 @@ AMaxPosErrOL[1]           ; read back the limit
 - [MaxPosErr](MaxPosErr.md) — closed-loop position-error limit (the alternate threshold)
 - [MaxVelErrOL](MaxVelErrOL.md) — open-loop velocity-error limit
 - [PosErr](../../../10-motion/01-kinematics-status/PosErr.md) — the measured error this limit acts on
-- [ConFlt](../../../07-status-and-faults/ConFlt.md) — records `CON_FLT_HIGH_POS_ERR_OL` (1055)
+- [ConFlt](../../../07-status-and-faults/ConFlt.md) — records fault code 1055 (open-loop position error too high)
