@@ -32,7 +32,21 @@ Read-only amplifier DC bus voltage measurement, in millivolts.
 
 ## Overview
 
-`VBus` reports the amplifier DC bus voltage measurement, in millivolts. It is a read-only status value that reflects the supply voltage available to the power stage. The same measurement is used by the bus-voltage protection, so a low or high reading here corresponds directly to the limits set by [MinVBus](../../06-protections/02-current-and-voltage/MinVBus.md) and [MaxVBus](../../06-protections/02-current-and-voltage/MaxVBus.md). It is also the bus voltage referenced by the regeneration thresholds [RegenOn](../05-regeneration/RegenOn.md) and [RegenOff](../05-regeneration/RegenOff.md).
+`VBus` reports the amplifier DC bus voltage measurement, in millivolts. It is a read-only status value that reflects the supply voltage available to the power stage. The same measurement drives every bus-voltage decision in the firmware: the protection limits [MinVBus](../../06-protections/02-current-and-voltage/MinVBus.md) / [MaxVBus](../../06-protections/02-current-and-voltage/MaxVBus.md) / [MaxVBusAbs](../../06-protections/02-current-and-voltage/MaxVBusAbs.md), the regeneration thresholds [RegenOn](../05-regeneration/RegenOn.md) / [RegenOff](../05-regeneration/RegenOff.md), and the multi-level VBus warning reported in [StatReg](../../07-status-and-faults/StatReg.md).
+
+## How it works
+
+On a built-in (PWM) amplifier the firmware samples the FPGA bus-voltage register once per group of 16 control cycles, converts the raw ADC reading to millivolts with a fixed scale factor, and then applies a low-pass filter to suppress measurement spikes. The filter is a first-order IIR with a roughly 8-sample (≈8 ms) time constant:
+
+$$
+VBus_{new} = \frac{VBus_{raw} + 7 \times VBus_{old}}{8}
+$$
+
+The raw-to-mV scale factor depends on the drive variant (each variant has a different sense-resistor divider and ADC reference), so the same FPGA count maps to different voltages on different hardware; the firmware bakes the correct multiplier in per product. The filtered result is the value you read as `VBus`.
+
+On a **central-i** remote axis the amplifier does not own the ADC: the bus voltage arrives in the periodic amplifier-sync message and is scaled by a per-axis calibration factor and offset before being stored as `VBus`.
+
+Once `VBus` is updated, the firmware uses it (in `SAMPLE_4` for central-i, `SAMPLE_15` for a standalone controller) to drive regeneration switching and to set the over-/under-voltage status bits in `StatReg`; the actual disabling fault is then raised in the protection step.
 
 ## Examples
 
@@ -42,7 +56,9 @@ AVBus               ; read the present bus voltage (mV)
 
 ## See also
 
-- [MaxVBus](../../06-protections/02-current-and-voltage/MaxVBus.md) — maximum bus-voltage protection limit
-- [MinVBus](../../06-protections/02-current-and-voltage/MinVBus.md) — minimum bus-voltage protection limit
+- [MaxVBus](../../06-protections/02-current-and-voltage/MaxVBus.md) — maximum bus-voltage protection limit (uses this measurement)
+- [MinVBus](../../06-protections/02-current-and-voltage/MinVBus.md) — minimum bus-voltage protection limit (uses this measurement)
+- [RegenOn](../05-regeneration/RegenOn.md), [RegenOff](../05-regeneration/RegenOff.md) — regeneration thresholds compared against `VBus`
+- [StatReg](../../07-status-and-faults/StatReg.md) — bits 3/4/6 (over/under VBus) and bits 7–8 (VBus warning level)
 - [VLogic](VLogic.md) — logic-supply voltage reading
 - [DCDC](DCDC.md) — internal logic-rail measurements

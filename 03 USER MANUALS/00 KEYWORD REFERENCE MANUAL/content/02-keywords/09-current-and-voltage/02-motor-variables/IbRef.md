@@ -38,11 +38,15 @@ Read-only phase B current reference, in milliamperes (definition varies by motor
 
 ## How it works
 
-| Motor type | Description |
+Like [IaRef](IaRef.md), the phase B reference is the commutation projection of the direction-corrected scalar current reference (firmware `CurrRefFinal`), which is the limited current reference after the [CurrDir](CurrDir.md) sign is applied:
+
+| Motor group (MotorType) | Phase B reference |
 |----|----|
-| Single-phase motor (MotorType = 1 or 2) | `IbRef` equals 0. |
-| Three-phase motor (MotorType = 3 or 4) | `IbRef` equals the phase B result of the inverse Park transform of [IqRef](IqRef.md) and [IdRef](IdRef.md). It is used in abc-domain current control. |
-| Two-phase stepper motor (MotorType = 6 or 7) | `IbRef` equals the phase B result after stepper-motor calculation and direction correction of [CurrRefCtrl](CurrRefCtrl.md). |
+| Single-phase / brush motor (MotorType = 1, 2) | $IbRef\ = \ 0$ (only phase A is driven). |
+| Three-phase brushless motor (MotorType = 3, 4) | $IbRef\ = \ CurrRefFinal \cdot \sin(\theta - 120^\circ)$, where $\theta$ is the commutation angle — the phase B result of the inverse transform of [IqRef](IqRef.md) (= `CurrRefFinal`) and [IdRef](IdRef.md) (= 0). Active when current control runs in the abc domain ([ControlMode](ControlMode.md) bit 1 set). |
+| Two-phase stepper motor (MotorType = 6, 7) | $IbRef\ = \ CurrRefFinal \cdot \cos(\theta_{step})$, where $\theta_{step}$ is the stepper electrical angle. The two stepper phases are driven in quadrature (sin/cos). |
+
+`IbRef` is bounded to ±64000 mA. Its difference from the measured [Ib](Ib.md) gives [IbErr](IbErr.md), the input to the phase B current loop.
 
 ## Examples
 
@@ -55,4 +59,6 @@ AIbRef              ; read phase B current reference (mA)
 - [Ib](Ib.md) — measured phase B current
 - [IbErr](IbErr.md) — phase B current error
 - [IaRef](IaRef.md) — phase A current reference
+- [IqRef](IqRef.md), [IdRef](IdRef.md) — dq references that this phase reference is the inverse transform of (brushless)
+- [CurrDir](CurrDir.md) — direction correction applied before projection onto the phase
 - [MotorType](../../02-motor-and-amplifier/MotorType.md) — motor type that determines the derivation

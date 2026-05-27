@@ -36,6 +36,10 @@ Motor inductance measurement, in micro-Henry (updated by PCSuite).
 
 `Lm` records the motor inductance measurement, in micro-Henry. PCSuite updates this value after running its resistance-and-inductance measurement. Whether the value represents phase or line-to-line data is set by [RLType](RLType.md). It is the inductance counterpart of the resistance measurement [Rm](Rm.md).
 
+## How it works
+
+`Lm` is a stored, flash-backed axis parameter holding an inductance value in micro-Henry (valid range 1 to 1000000 µH, default 1000 µH). In the firmware it is a plain storage register: the resistance-and-inductance measurement (run from PCSuite) writes the measured value here, and it can also be read or set over the command interface. The firmware control loop does not read `Lm` to drive the current loop directly — it is the recorded measurement result, interpreted together with [RLType](RLType.md) (phase vs line-to-line) and paired with [Rm](Rm.md).
+
 ## Examples
 
 ```text

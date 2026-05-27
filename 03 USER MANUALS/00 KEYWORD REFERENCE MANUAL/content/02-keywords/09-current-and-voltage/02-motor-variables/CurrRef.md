@@ -38,6 +38,16 @@ Read-only final motor current command after all loops, compensation and injectio
 
 See [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md) for where `CurrRef` sits in the signal path.
 
+## How it works
+
+In position/velocity operation the firmware builds `CurrRef` by summing the velocity-loop PI output with the feedforward terms (acceleration and velocity feedforward), then adds the applicable current-related compensation and injection — torque compensation, FIFO position-current offset, and the repetitive/UPM current tables. In current operation mode `CurrRef` is instead driven directly from the selected current command source (analog input or a command array).
+
+`CurrRef` is then limited: first by the active current-limit mode, then absolutely against the peak current limit ([PeakCL](../../06-protections/02-current-and-voltage/PeakCL.md), as reduced by I²t toward [ContCL](../../06-protections/02-current-and-voltage/ContCL.md)). Reaching a limit sets the current-saturation status bit in [StatReg](../../07-status-and-faults/StatReg.md). Finally the sign is corrected by [CurrDir](CurrDir.md) to produce the loop-side command that becomes [IqRef](IqRef.md) (three-phase) or [IaRef](IaRef.md) (brush):
+
+$$
+CurrRefFinal = \pm\,CurrRef \quad (\text{sign from CurrDir})
+$$
+
 ## Examples
 
 ```text
@@ -48,4 +58,7 @@ ACurrRef            ; read the final current command (mA)
 
 - [CurrRefCtrl](CurrRefCtrl.md) — loop-side current reference before decoupling/compensation
 - [CurrRefOffset](../03-current-compensation/CurrRefOffset.md) — offset added on top of the motor current reference
+- [CurrDir](CurrDir.md) — sets the sign of the direction correction applied to CurrRef
+- [IqRef](IqRef.md) — q-axis reference taken from the direction-corrected CurrRef (three-phase)
 - [IaRef](IaRef.md), [IbRef](IbRef.md) — per-phase references derived from the current command
+- [StatReg](../../07-status-and-faults/StatReg.md) — reports the current-saturation status bit

@@ -37,6 +37,10 @@ Read-only loop-side current reference, taken before the decoupling matrix, injec
 
 See [Control tuning – Velocity control](../../11-control-tuning/04-velocity-control/00-overview.md), [Control tuning – Feedforwards](../../11-control-tuning/05-feedforwards/00-overview.md) and [Control tuning – Force control](../../11-control-tuning/07-force-control/00-overview.md) for where `CurrRefCtrl` sits in the signal path.
 
+## How it works
+
+`CurrRefCtrl` reports the current reference on the loop side, before the decoupling matrix, current injection and current-related compensation are applied. The compensated and injected result, after current limiting and the [CurrDir](CurrDir.md) sign correction, becomes the final motor current command [CurrRef](CurrRef.md). On the motor side that command becomes the q-axis reference [IqRef](IqRef.md) for three-phase motors or the phase-A reference [IaRef](IaRef.md) for brush motors. `CurrRefCtrl` is reported only on central-i (v5).
+
 ## Examples
 
 ```text

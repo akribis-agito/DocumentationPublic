@@ -30,7 +30,19 @@ Current reference offset (mA) applied on top of the motor's current reference.
 
 ## Overview
 
-`CurrRefOffset` is the current reference offset, in milliamperes, applied on top of the motor's current reference. Because it is added on the motor side (after the decoupling matrix), it is the motor-side counterpart of the loop-side torque compensation [TorqCompMode](TorqCompMode.md)/[TorqCompFix](TorqCompFix.md). See [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md) for its application point.
+`CurrRefOffset` is the current reference offset, in milliamperes, applied on top of the motor's current reference. Because it is added in the current loop (not in the position/velocity loop), it is the current-loop counterpart of the loop-side torque compensation [TorqCompMode](TorqCompMode.md)/[TorqCompFix](TorqCompFix.md). See [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md) for its application point.
+
+## How it works
+
+In the current control loop, while the motor is enabled and commutation (auto-phasing) is complete, the firmware **adds** `CurrRefOffset` directly to the current reference each control cycle:
+
+$$
+CurrRef \mathrel{+}= CurrRefOffset
+$$
+
+The offset is applied after the brushless anti-cogging term ([UPMVelTable](UPMVelTable.md)) and before the current limitations and saturation handling, so it is a constant bias on the current reference that is still subject to the current limits downstream. The firmware deliberately applies it only after commutation is complete: any current injection that introduces a DC offset must wait for phasing, otherwise an enabled-but-unphased motor could run away.
+
+This keyword exists only on central-i v5, where the current reference is floating-point. Its range is bounded by the current-command range (its limits are derived from the drive's maximum current command).
 
 ## Examples
 

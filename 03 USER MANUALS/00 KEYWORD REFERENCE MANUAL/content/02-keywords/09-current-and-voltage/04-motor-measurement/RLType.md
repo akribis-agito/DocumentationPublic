@@ -36,10 +36,12 @@ Selects whether PCSuite R/L measurements are reported as phase (0) or line-to-li
 
 ## How it works
 
+`RLType` is a stored, flash-backed axis parameter that flags how the recorded [Rm](Rm.md) and [Lm](Lm.md) values are to be read. It is a two-value selector, defaulting to 1 (line-to-line):
+
 | RLType | Measurement type  |
 |--------|-------------------|
 | 0      | Phase data        |
-| 1      | Line-to-line data |
+| 1      | Line-to-line data (default) |
 
 ## Examples
 

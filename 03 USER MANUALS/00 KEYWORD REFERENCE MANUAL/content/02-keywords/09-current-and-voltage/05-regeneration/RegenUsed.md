@@ -32,16 +32,31 @@ Selects whether an external or internal regeneration resistor is used.
 
 ## Overview
 
-`RegenUsed` selects whether the controller uses an external or internal regeneration resistor, configuring the regen circuit to match the hardware. Because it is a hardware-configuration setting, it cannot be changed while the axis is in motion or the motor is on. It is saved to flash. The thresholds [RegenOn](RegenOn.md)/[RegenOff](RegenOff.md) control when whichever resistor is selected switches in and out.
+`RegenUsed` configures whether the regeneration (braking-resistor) circuit is used, matching the controller to the connected hardware. It is a 0/1 setting (default 1). Because it is a hardware-configuration setting, it cannot be changed while the axis is in motion or the motor is on, and it is saved to flash. The thresholds [RegenOn](RegenOn.md) / [RegenOff](RegenOff.md) only take effect when `RegenUsed` is non-zero.
+
+## How it works
+
+`RegenUsed` is an enable gate for the whole regeneration mechanism. In the regeneration step (per-axis `SAMPLE_4` on central-i, controller-wide `SAMPLE_15` on a standalone controller) the firmware evaluates the [RegenOn](RegenOn.md) / [RegenOff](RegenOff.md) thresholds **only if `RegenUsed` ≠ 0**:
+
+| `RegenUsed` | Behaviour |
+|-------------|-----------|
+| 0 | Regeneration disabled. The brake-chopper command bit and [StatReg](../../07-status-and-faults/StatReg.md) bit 1 are forced clear, the threshold comparisons are skipped, and the "regeneration active" digital output always reads inactive. |
+| 1 (default) | Regeneration enabled. The chopper switches according to the `RegenOn` / `RegenOff` hysteresis around [VBus](../01-system-variables/VBus.md). |
+
+Writing `RegenUsed = 0` takes effect immediately: a dedicated handler clears the chopper command and the regeneration status bit (on every axis on a standalone controller) at the moment the value is written, so an already-active resistor is switched off without waiting for the next regen step.
+
+> **Note:** disabling regeneration removes the bus-voltage dissipation path. With no regen resistor, hard decelerations can drive [VBus](../01-system-variables/VBus.md) into the over-voltage protection ([MaxVBus](../../06-protections/02-current-and-voltage/MaxVBus.md) / [MaxVBusAbs](../../06-protections/02-current-and-voltage/MaxVBusAbs.md)) and trip the axis.
 
 ## Examples
 
 ```text
-ARegenUsed=1         ; use the selected regen resistor (default)
-ARegenUsed          ; read the present setting
+ARegenUsed=1         ; enable the regen circuit (default)
+ARegenUsed=0         ; disable regeneration (chopper forced off)
+ARegenUsed           ; read the present setting
 ```
 
 ## See also
 
-- [RegenOn](RegenOn.md), [RegenOff](RegenOff.md) — regen activation/deactivation thresholds
+- [RegenOn](RegenOn.md), [RegenOff](RegenOff.md) — regen activation/deactivation thresholds (active only when this is non-zero)
 - [RegenCurr](RegenCurr.md) — measured regen-resistor current
+- [StatReg](../../07-status-and-faults/StatReg.md) — bit 1 reports regeneration active

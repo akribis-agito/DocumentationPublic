@@ -39,7 +39,30 @@ Read-only direct-axis PI-controller output in dq0-domain current control (three-
 
 ## How it works
 
-For dq0-domain current control, `Vd` and [Vq](Vq.md) form the phase voltage commands ([Va](Va.md), [Vb](Vb.md), [Vc](Vc.md)) by the inverse Park transform.
+`Vd` is the output of the direct-axis current PI controller, computed from the error [IdErr](IdErr.md). The firmware accumulates the integral (scaled by CurrKi) and adds the proportional term (scaled by CurrGain):
+
+$$
+\begin{aligned}
+IdIntegral &\mathrel{+}= IdErr \cdot CurrKi \cdot 0.001 \cdot noClamp \\
+Vd &= (IdIntegral + IdErr) \cdot CurrGain \cdot 0.001
+\end{aligned}
+$$
+
+`0.001` is the fixed gain scaling applied in firmware; `noClamp` is the anti-windup flag (0 freezes the integral during voltage saturation, 1 otherwise).
+
+**Vector saturation.** Before the inverse Park transform, `Vd` and [Vq](Vq.md) are limited as a vector against the maximum PWM magnitude. If $Vq^2 + Vd^2$ exceeds the squared limit (the limit is multiplied by $4/3$ when the enhanced-speed-range bit of [ControlMode](ControlMode.md) is set), both `Vd` and `Vq` are scaled by the same factor so the sine-wave shape is preserved, and the voltage-saturation status bit in [StatReg](../../07-status-and-faults/StatReg.md) is set.
+
+**Inverse Park.** `Vd` and `Vq` then form the phase voltage commands by the inverse Park transform, using the sine/cosine of the electrical commutation angle θ:
+
+$$
+\begin{aligned}
+Va &= Vq \cdot \sin\theta + Vd \cdot \cos\theta \\
+Vb &= Vq \cdot \sin(\theta - 120^\circ) + Vd \cdot \cos(\theta - 120^\circ) \\
+Vc &= -(Va + Vb)
+\end{aligned}
+$$
+
+A common-mode (space-vector) offset is then applied to [Va](Va.md), [Vb](Vb.md), [Vc](Vc.md) before PWM. The current-loop gains CurrGain and CurrKi are documented under [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md); this page does not give tuning guidance.
 
 ## Examples
 
@@ -50,5 +73,7 @@ AVd                 ; read direct-axis PI output
 ## See also
 
 - [Vq](Vq.md) — quadrature-axis PI-controller output
-- [Va](Va.md), [Vb](Vb.md), [Vc](Vc.md) — phase voltage commands formed from Vd/Vq
-- [ControlMode](ControlMode.md) — selects dq0 vs abc control domain
+- [IdErr](IdErr.md) — direct-axis error that drives the d-axis PI
+- [Va](Va.md), [Vb](Vb.md), [Vc](Vc.md) — phase voltage commands formed from Vd/Vq by inverse Park
+- [ControlMode](ControlMode.md) — selects dq0 vs abc control domain and enhanced speed range
+- [StatReg](../../07-status-and-faults/StatReg.md) — reports the voltage-saturation status bit

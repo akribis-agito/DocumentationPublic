@@ -35,7 +35,13 @@ Read-only current flowing through the regeneration resistor.
 
 ## Overview
 
-`RegenCurr` is a read-only status value that reports the current flowing through the regeneration resistor. It lets you monitor the power being dissipated by the regen circuit during braking, when the bus voltage rises above [RegenOn](RegenOn.md). It is not saved to flash.
+`RegenCurr` is a read-only status value that reports the current flowing through the regeneration (braking) resistor. It lets you monitor how much energy the regen circuit is dissipating during braking, when the bus voltage has risen above [RegenOn](RegenOn.md) and the brake-chopper transistor is conducting. It reads near zero when the chopper is off. It is not saved to flash.
+
+## How it works
+
+On products that have regen-current sensing, the firmware reads the regen-current FPGA register once per group of control cycles and converts the raw ADC count to a current with a fixed scale-and-offset. The conversion is an affine map of the form `RegenCurr = offset − gain × reading` — i.e. the sensor sits around a mid-scale zero point, so the raw count is scaled by a fixed gain and subtracted from a constant offset to give a signed result. Products without regen-current sensing do not update this value.
+
+The value is meaningful only while regeneration is active (when [StatReg](../../07-status-and-faults/StatReg.md) bit 1 is set); at other times the resistor is disconnected and the reading reflects only the sensor's zero point.
 
 ## Examples
 
@@ -43,7 +49,12 @@ Read-only current flowing through the regeneration resistor.
 ARegenCurr          ; read the present regen-resistor current
 ```
 
+## Changes between versions
+
+On central-i v5 `RegenCurr` is reported as a **floating-point** value (`float32`, no fixed integer range) rather than the scaled integer used on v4. The underlying measurement is the same; only the data type returned over communication changes, so a v5 read may include a fractional part.
+
 ## See also
 
 - [RegenOn](RegenOn.md), [RegenOff](RegenOff.md) — regen activation/deactivation thresholds
-- [RegenUsed](RegenUsed.md) — external vs internal regen resistor
+- [RegenUsed](RegenUsed.md) — enables the regen circuit
+- [StatReg](../../07-status-and-faults/StatReg.md) — bit 1 indicates regeneration is active

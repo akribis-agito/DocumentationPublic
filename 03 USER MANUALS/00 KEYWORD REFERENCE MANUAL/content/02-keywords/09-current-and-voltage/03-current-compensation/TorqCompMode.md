@@ -36,15 +36,23 @@ Selects the source of the loop's current (torque) compensation in velocity/posit
 
 ## How it works
 
-| TorqCompMode | Current compensation value |
+The compensation is applied in the position/velocity control loop, immediately after the current reference is formed from the velocity-PI output (and any force/feedforward terms). The selected compensation term is **added** to the current reference. Because this happens inside the position/velocity loop and not in the current loop, it only takes effect in velocity or position operation mode (in current operation mode the reference is overwritten downstream, so this term has no effect).
+
+Mode selection works as a switch on the `TorqCompMode` value:
+
+| TorqCompMode | Current compensation value added |
 |----|----|
-| -1 | 0 (no compensation) |
-| 0 | Value from an analog input (see [AInMode](../../05-inputs-outputs/02-analog-inputs/AInMode.md), torque-compensation selection). |
+| -1 | 0 (no compensation — default; also the result for any out-of-range value) |
+| 0 | Value from the analog input assigned to torque compensation (filtered analog-input value; see [AInMode](../../05-inputs-outputs/02-analog-inputs/AInMode.md), torque-compensation selection). |
 | 1 | TorqCompFix[1] |
 | 2 | TorqCompFix[2] |
 | 3 | TorqCompFix[3] |
 | 4 | TorqCompFix[4] |
 | 5 | TorqCompFix[5] |
+
+For the fixed-value modes the firmware indexes the [TorqCompFix](TorqCompFix.md) array directly with the mode number, so mode `N` selects `TorqCompFix[N]`.
+
+The compensation term is in the same units as the motor current reference ([CurrRef](../02-motor-variables/CurrRef.md)). On central-i v5 the current reference and the fixed-value array are floating-point; on v4 they are integer. The selection logic and value table are identical across versions.
 
 ## Examples
 

@@ -36,19 +36,30 @@ Flips the direction of motor excitation (0 = normal, 1 = flipped).
 
 ## How it works
 
-| CurrDir | Effect |
-|---------|--------|
-| 0 | Motor direction is not flipped. |
-| 1 | Motor direction is flipped. |
+`CurrDir` acts as a sign on the current path between the velocity/current loop and the commutation. After the current reference (firmware `glCurrRef`) has been limited, the firmware forms the final reference used by the current loop:
+
+$$
+CurrRefFinal\ = \begin{cases} +CurrRef & CurrDir = 0 \\ -CurrRef & CurrDir = 1 \end{cases}
+$$
+
+`CurrRefFinal` is the value the commutation then resolves into the phase references [IaRef](IaRef.md)/[IbRef](IbRef.md) (and [IqRef](IqRef.md) for brushless motors), so flipping `CurrDir` reverses the direction in which the commanded current drives the motor. The reported total current [MotorCurr](MotorCurr.md) is negated by the same flag, so it stays consistent with the commanded direction. The measured per-phase currents [Ia](Ia.md)/[Ib](Ib.md) and the dq currents [Iq](Iq.md)/[Id](Id.md) themselves are **not** negated by `CurrDir`; with `CurrDir` = 1 they appear with inverted sign relative to their references.
+
+| CurrDir | Constant | Effect |
+|---------|----------|--------|
+| 0 | `NORMAL_CURRREF_DIRECTION` | Motor direction is not flipped; `CurrRefFinal = CurrRef`. |
+| 1 | `INVERTED_CURRREF_DIRECTION` | Motor direction is flipped; `CurrRefFinal = -CurrRef`. |
 
 ## Examples
 
 ```text
 ACurrDir=0           ; normal excitation direction
 ACurrDir=1           ; flipped excitation direction
+ACurrDir              ; read the current excitation-direction setting
 ```
 
 ## See also
 
 - [EncDir / AuxEncDir](../../03-encoder/01-general-settings/EncDir-AuxEncDir.md) — encoder direction, normally set together with CurrDir
+- [MotorCurr](MotorCurr.md) — total current, negated by the same CurrDir flag
+- [IaRef](IaRef.md), [IbRef](IbRef.md) — phase references derived from the direction-corrected current reference
 - [ControlMode](ControlMode.md) — current/voltage control options

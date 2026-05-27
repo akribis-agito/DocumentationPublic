@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="300" viewBox="0 0 860 300" font-family="sans-serif" font-size="12">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#333"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="860" height="300" fill="#ffffff"/>
+  <text x="430" y="20" text-anchor="middle" font-weight="bold">Three-phase (FOC) current loop &#8212; brushless motor</text>
+
+  <!-- IqRef/IdRef source -->
+  <rect x="10" y="60" width="120" height="46" fill="#eef3fb" stroke="#3b6ea5"/>
+  <text x="70" y="80" text-anchor="middle">IqRef = CurrRefFinal</text>
+  <text x="70" y="98" text-anchor="middle">IdRef = 0</text>
+
+  <!-- summing -->
+  <circle cx="190" cy="83" r="16" fill="#fff" stroke="#333"/>
+  <text x="190" y="88" text-anchor="middle">&#8722;</text>
+  <line x1="130" y1="83" x2="173" y2="83" stroke="#333" marker-end="url(#arrow)"/>
+
+  <!-- PI -->
+  <rect x="240" y="60" width="120" height="46" fill="#eef3fb" stroke="#3b6ea5"/>
+  <text x="300" y="80" text-anchor="middle">Current PI</text>
+  <text x="300" y="98" text-anchor="middle">CurrGain, CurrKi</text>
+  <line x1="206" y1="83" x2="233" y2="83" stroke="#333" marker-end="url(#arrow)"/>
+  <text x="222" y="76" text-anchor="middle">IqErr</text>
+
+  <!-- Vq Vd -->
+  <text x="378" y="80" text-anchor="middle">Vq</text>
+  <text x="378" y="98" text-anchor="middle">Vd</text>
+
+  <!-- inverse Park -->
+  <rect x="410" y="60" width="130" height="46" fill="#eef3fb" stroke="#3b6ea5"/>
+  <text x="475" y="80" text-anchor="middle">Inverse Park</text>
+  <text x="475" y="98" text-anchor="middle">(angle &#952;)</text>
+  <line x1="360" y1="83" x2="403" y2="83" stroke="#333" marker-end="url(#arrow)"/>
+
+  <!-- SVM / amplifier -->
+  <rect x="600" y="60" width="130" height="46" fill="#eef3fb" stroke="#3b6ea5"/>
+  <text x="665" y="80" text-anchor="middle">Va,Vb,Vc + SVM</text>
+  <text x="665" y="98" text-anchor="middle">amplifier / motor</text>
+  <line x1="540" y1="83" x2="593" y2="83" stroke="#333" marker-end="url(#arrow)"/>
+
+  <!-- feedback: Ia Ib measured -->
+  <rect x="600" y="200" width="130" height="46" fill="#f3eeee" stroke="#a5553b"/>
+  <text x="665" y="220" text-anchor="middle">Measure Ia, Ib</text>
+  <text x="665" y="238" text-anchor="middle">(phase currents)</text>
+  <line x1="665" y1="106" x2="665" y2="200" stroke="#333" marker-end="url(#arrow)"/>
+
+  <!-- Park forward -->
+  <rect x="410" y="200" width="130" height="46" fill="#f3eeee" stroke="#a5553b"/>
+  <text x="475" y="220" text-anchor="middle">Park (forward)</text>
+  <text x="475" y="238" text-anchor="middle">&#8594; Iq, Id</text>
+  <line x1="600" y1="223" x2="543" y2="223" stroke="#333" marker-end="url(#arrow)"/>
+
+  <!-- feedback to summing -->
+  <line x1="410" y1="223" x2="190" y2="223" stroke="#333"/>
+  <line x1="190" y1="223" x2="190" y2="99" stroke="#333" marker-end="url(#arrow)"/>
+  <text x="300" y="216" text-anchor="middle">Iq, Id (feedback)</text>
+</svg>

@@ -36,6 +36,10 @@ Motor resistance measurement, in milliohms (updated by PCSuite).
 
 `Rm` records the motor resistance measurement, in milliohms. PCSuite updates this value after running its resistance-and-inductance measurement. Whether the value represents phase or line-to-line data is set by [RLType](RLType.md). It is the resistance counterpart of the inductance measurement [Lm](Lm.md).
 
+## How it works
+
+`Rm` is a stored, flash-backed axis parameter holding a resistance value in milliohms (valid range 1 to 100000 mΩ, default 1000 mΩ). In the firmware it is a plain storage register: the resistance-and-inductance measurement (run from PCSuite) writes the measured value here, and it can also be read or set over the command interface. The firmware control loop does not read `Rm` to drive the current loop directly — it is the recorded measurement result, interpreted together with [RLType](RLType.md) (phase vs line-to-line) and paired with [Lm](Lm.md).
+
 ## Examples
 
 ```text
