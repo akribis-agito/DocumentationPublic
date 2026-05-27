@@ -4,7 +4,6 @@ summary: Partially-implemented diagnostic function reserved for Agito R&D.
 availability:
   standalone:
   - v4
-  - v5
   central-i:
   - v4
   - v5

@@ -4,7 +4,6 @@ summary: Writes all flash-saveable parameters from volatile memory to flash.
 availability:
   standalone:
   - v4
-  - v5
   central-i:
   - v4
   - v5

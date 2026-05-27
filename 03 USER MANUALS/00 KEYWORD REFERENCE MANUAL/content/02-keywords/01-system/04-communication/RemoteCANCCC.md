@@ -4,7 +4,6 @@ summary: CAN command code (parameter identifier) for a remote write issued by Re
 availability:
   standalone:
   - v4
-  - v5
   central-i:
   - v4
   - v5

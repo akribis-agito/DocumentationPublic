@@ -4,7 +4,6 @@ summary: Per-axis array reporting the live Central-i port state, error counters,
 availability:
   standalone:
   - v4
-  - v5
   central-i:
   - v4
   - v5

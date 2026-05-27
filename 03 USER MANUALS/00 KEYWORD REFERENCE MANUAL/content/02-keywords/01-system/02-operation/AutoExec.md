@@ -4,7 +4,6 @@ summary: When set, runs the user program automatically on power-up or restart.
 availability:
   standalone:
   - v4
-  - v5
   central-i:
   - v4
   - v5

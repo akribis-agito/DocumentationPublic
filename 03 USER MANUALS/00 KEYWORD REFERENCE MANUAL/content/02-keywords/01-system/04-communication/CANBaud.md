@@ -4,7 +4,6 @@ summary: CAN bus baud rate, selected from a fixed table.
 availability:
   standalone:
   - v4
-  - v5
   central-i:
   - v4
   - v5

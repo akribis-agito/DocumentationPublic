@@ -4,7 +4,6 @@ summary: Command that initiates a Central-i link on the selected axis port.
 availability:
   standalone:
   - v4
-  - v5
   central-i:
   - v4
   - v5

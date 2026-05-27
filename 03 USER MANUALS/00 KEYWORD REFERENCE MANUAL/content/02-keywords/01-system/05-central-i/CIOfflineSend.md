@@ -4,7 +4,6 @@ summary: Command that transmits the Central-i offline data package on the select
 availability:
   standalone:
   - v4
-  - v5
   central-i: []
 can_code: 502
 attributes:
@@ -24,6 +23,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+removed_in:
+- v5
 ---
 # CIOfflineSend
 

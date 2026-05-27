@@ -4,7 +4,6 @@ summary: Performs a software power cycle; flash parameters are reloaded on resta
 availability:
   standalone:
   - v4
-  - v5
   central-i:
   - v4
   - v5

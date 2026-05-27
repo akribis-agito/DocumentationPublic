@@ -24,9 +24,11 @@ panel + availability matrix; the body is the article.
   if the CAN code differs by version, the differing cell's `can_code` appears inside its
   `overrides` entry (render it like any divergent field). Real example: `ProductSN` is 468
   in v4, 348 in v5.
-- `availability: { standalone: [v4, v5...], central-i: [...] }` — which product × version
-  cells exist. A keyword present in only one version (e.g. `HWTimer = [v5]`) renders with
-  the others marked "not available".
+- `availability: { standalone: [v4...], central-i: [...] }` — which product × version
+  cells exist. A keyword present in only one version (e.g. `HWTimer` central-i `[v5]`)
+  renders with the others marked "not available". **v5 is central-i only** (v5 moved to
+  64-bit and dropped the standalone product), so `standalone` never contains `v5` — the
+  standalone × v5 matrix cell is always N/A.
 - `attributes` — facts for the primary cell: `access` (ro/rw), `scope` (axis/non-axis),
   `flash` (bool), `type` (scalar/array), `array_size`, `data_type`
   (int32/float32/int64/float64), `ok_in_motion`, `ok_motor_on`, `units` (user/none/func),

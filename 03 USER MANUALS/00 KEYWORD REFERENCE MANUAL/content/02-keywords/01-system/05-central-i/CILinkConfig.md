@@ -4,7 +4,6 @@ summary: Per-axis array configuring the physical and protocol parameters of a Ce
 availability:
   standalone:
   - v4
-  - v5
   central-i:
   - v4
   - v5

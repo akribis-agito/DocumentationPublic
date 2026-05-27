@@ -4,7 +4,6 @@ summary: TCP port for Ethernet communication (Agito controllers support port 500
 availability:
   standalone:
   - v4
-  - v5
   central-i:
   - v4
   - v5

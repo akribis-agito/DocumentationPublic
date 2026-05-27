@@ -4,7 +4,6 @@ summary: CAN base address of the controller node.
 availability:
   standalone:
   - v4
-  - v5
   central-i:
   - v4
   - v5

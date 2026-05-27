@@ -4,7 +4,6 @@ summary: Read-only array describing the controller — product type, serial numb
 availability:
   standalone:
   - v4
-  - v5
   central-i:
   - v4
   - v5
@@ -14,7 +13,7 @@ attributes:
   scope: non-axis
   flash: false
   type: array
-  array_size: 75
+  array_size: 63
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
@@ -26,10 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  standalone.v4:
-    array_size: 63
-  central-i.v4:
-    array_size: 63
+  central-i.v5:
+    array_size: 75
 ---
 # Identity
 

@@ -4,7 +4,6 @@ summary: Per-axis array of identifying information returned by the connected Cen
 availability:
   standalone:
   - v4
-  - v5
   central-i:
   - v4
   - v5
@@ -14,7 +13,7 @@ attributes:
   scope: axis
   flash: false
   type: array
-  array_size: 24
+  array_size: 23
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
@@ -26,10 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  standalone.v4:
-    array_size: 23
-  central-i.v4:
-    array_size: 23
+  central-i.v5:
+    array_size: 24
 ---
 # CIIdentity
 

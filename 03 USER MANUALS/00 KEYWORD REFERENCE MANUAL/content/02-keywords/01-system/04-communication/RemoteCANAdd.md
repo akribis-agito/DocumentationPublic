@@ -4,7 +4,6 @@ summary: Target CAN node address for a remote write issued by RemoteCANSend.
 availability:
   standalone:
   - v4
-  - v5
   central-i:
   - v4
   - v5

@@ -50,9 +50,13 @@ fields:
     required: true
     description: Which (product, version) cells this keyword exists in.
     properties:
-      standalone: { type: list, items: version }   # e.g. [v4, v5]
-      central-i:  { type: list, items: version }
-    note: An empty list means the keyword is not available on that product.
+      standalone: { type: list, items: version }   # e.g. [v4]
+      central-i:  { type: list, items: version }    # e.g. [v4, v5]
+    note: >
+      An empty list means the keyword is not available on that product. NOTE:
+      v5 is central-i only (v5 moved to 64-bit and dropped the standalone
+      product), so `standalone` never contains `v5` — the matrix cell
+      standalone x v5 is always N/A.
 
   attributes:
     type: object

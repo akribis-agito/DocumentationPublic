@@ -4,7 +4,6 @@ summary: Two independent up-counters incremented every controller cycle.
 availability:
   standalone:
   - v4
-  - v5
   central-i:
   - v4
   - v5

@@ -4,7 +4,6 @@ summary: Read-only checksum over the controller's parameter set, for verifying c
 availability:
   standalone:
   - v4
-  - v5
   central-i:
   - v4
   - v5

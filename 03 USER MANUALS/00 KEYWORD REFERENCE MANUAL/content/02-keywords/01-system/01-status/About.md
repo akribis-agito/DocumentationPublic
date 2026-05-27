@@ -4,7 +4,6 @@ summary: Internal command (Agito PCSuite) that returns all controller parameters
 availability:
   standalone:
   - v4
-  - v5
   central-i:
   - v4
   - v5

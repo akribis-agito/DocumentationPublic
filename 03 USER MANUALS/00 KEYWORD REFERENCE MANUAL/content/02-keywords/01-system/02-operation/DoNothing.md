@@ -4,7 +4,6 @@ summary: No-op command used to check communication responsiveness.
 availability:
   standalone:
   - v4
-  - v5
   central-i:
   - v4
   - v5
