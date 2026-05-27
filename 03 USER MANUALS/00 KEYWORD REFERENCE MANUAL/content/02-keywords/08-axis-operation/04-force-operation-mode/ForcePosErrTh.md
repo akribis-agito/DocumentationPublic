@@ -36,13 +36,15 @@ Position-error threshold (condition B) to enter force mode.
 
 ## How it works
 
+Each cycle, while not in force mode, the firmware compares the position error against this threshold (`AG300_CTL01ControlLoops.c:1695`):
+
 | Value | Descriptions                                              |
 |-------|-----------------------------------------------------------|
 | \< 0  | Second condition is fulfilled if `PosErr` < `ForcePosErrTh`. |
 | 0     | Second condition is not fulfilled.                        |
 | \> 0  | Second condition is fulfilled if `PosErr` > `ForcePosErrTh`. |
 
-Entry into force operation mode still requires the first condition check ([CurrPosTh](../03-current-operation-mode/CurrPosTh.md) / [CurrPosThDir](../03-current-operation-mode/CurrPosThDir.md)). When both conditions are met, the axis enters force mode and `ForcePosErrTh` is cleared to 0 to avoid undesired future switching; the user must reconfigure its value for the next switch. See [Force operation mode](00-overview.md) for the overview.
+Entry into force operation mode still requires the first condition check ([CurrPosTh](../03-current-operation-mode/CurrPosTh.md) / [CurrPosThDir](../03-current-operation-mode/CurrPosThDir.md), evaluated against the position reference). When both conditions are met, the axis enters force mode via the same graceful hand-off as [GoToForceMode](GoToForceMode.md), and `ForcePosErrTh` is cleared to 0 to avoid undesired future switching (`AG300_CTL01ControlLoops.c:1704`); the user must reconfigure its value for the next switch. `ForcePosErrTh` and [ForceAInTh](ForceAInTh.md) act as parallel B-conditions — either one triggering is sufficient. See [Force operation mode](00-overview.md) for the overview.
 
 ## Examples
 

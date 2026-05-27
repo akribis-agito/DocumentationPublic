@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 380" font-family="sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 z" fill="#333"/>
+    </marker>
+  </defs>
+
+  <!-- MOTOR_OFF state -->
+  <rect x="40" y="150" width="200" height="90" rx="10" fill="#eef3fb" stroke="#3b6ea5" stroke-width="2"/>
+  <text x="140" y="178" text-anchor="middle" font-weight="bold">MOTOR_OFF</text>
+  <text x="140" y="200" text-anchor="middle" font-size="11">loops inactive, integrals = 0</text>
+  <text x="140" y="216" text-anchor="middle" font-size="11">PosRef tracks Pos</text>
+  <text x="140" y="232" text-anchor="middle" font-size="11">no power to motor</text>
+
+  <!-- MOTOR_ON state -->
+  <rect x="520" y="150" width="200" height="90" rx="10" fill="#eaf6ec" stroke="#3a8f4f" stroke-width="2"/>
+  <text x="620" y="178" text-anchor="middle" font-weight="bold">MOTOR_ON</text>
+  <text x="620" y="200" text-anchor="middle" font-size="11">loops active per OperationMode</text>
+  <text x="620" y="216" text-anchor="middle" font-size="11">ConFlt = 0, MotorReason = 0</text>
+  <text x="620" y="232" text-anchor="middle" font-size="11">brake released</text>
+
+  <!-- enable transition (top) -->
+  <path d="M240,170 C360,90 420,90 520,170" fill="none" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="380" y="70" text-anchor="middle" font-weight="bold">MotorOn = 1 / CanMotorOn</text>
+  <text x="380" y="88" text-anchor="middle" font-size="11">pre-checks pass: FPGA/port ok, commutation done,</text>
+  <text x="380" y="103" text-anchor="middle" font-size="11">inrush bypassed, filters valid &amp; not modified</text>
+  <text x="380" y="121" text-anchor="middle" font-size="11">then: smoothing preset, bootstrap charge, enable, brake release</text>
+
+  <!-- disable transition (bottom) -->
+  <path d="M520,220 C420,300 360,300 240,220" fill="none" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="380" y="320" text-anchor="middle" font-weight="bold">MotorOn = 0  (MotorReason 3/4)</text>
+  <text x="380" y="338" text-anchor="middle" font-size="11">fault forces off (ConFlt set, MotorReason 1) | digital input (MotorReason 2)</text>
+
+  <!-- self reject -->
+  <path d="M70,150 C40,110 90,110 110,148" fill="none" stroke="#a33" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="120" y="118" text-anchor="middle" font-size="11" fill="#a33">enable rejected: stays off,</text>
+  <text x="120" y="133" text-anchor="middle" font-size="11" fill="#a33">CanMotorOnRes = error code</text>
+</svg>

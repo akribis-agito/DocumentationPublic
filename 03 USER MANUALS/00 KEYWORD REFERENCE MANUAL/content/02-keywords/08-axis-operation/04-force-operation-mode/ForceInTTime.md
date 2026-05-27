@@ -36,7 +36,9 @@ Minimum dwell time within the settling window before force control is settled.
 
 ## How it works
 
-The internal timer is active only while [ForceInTStat](ForceInTStat.md) = 3. It starts when `ForceErr` first enters the `ForceInTTol` window, and resets when `ForceErr` exits the window. Once `ForceErr` stays within the window for `ForceInTTime`, the axis is considered settled (`ForceInTStat` = 4) and the settling condition is no longer checked.
+The internal dwell counter (`glForceInTrgtCounter`) is active only while [ForceInTStat](ForceInTStat.md) = 3. Each cycle the firmware tests `|ForceErr| <= ForceInTTol`; if true it increments the counter, otherwise it re-zeroes it (`AG300_CTL01ControlLoops.c:1178`). Once the counter reaches `ForceInTTime` the axis is considered settled (`ForceInTStat` = 4, `AG300_CTL01ControlLoops.c:1181`) and the settling condition is no longer checked for that command entry.
+
+A value of `0` means the axis is declared settled as soon as `ForceErr` first enters the window (no dwell required).
 
 ## Examples
 

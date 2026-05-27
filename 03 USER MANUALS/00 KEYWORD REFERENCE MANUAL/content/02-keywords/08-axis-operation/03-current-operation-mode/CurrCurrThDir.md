@@ -41,6 +41,8 @@ Trigger direction for the CurrCurrTh current-reference check.
 | 0             | Second condition is fulfilled if `CurrRef` > `CurrCurrTh`. |
 | 1             | Second condition is fulfilled if `CurrRef` < `CurrCurrTh`. |
 
+The direction only has an effect when [CurrCurrTh](CurrCurrTh.md) is non-zero (a `CurrCurrTh` of 0 disarms the check entirely). Unlike [CurrPosThDir](CurrPosThDir.md), this keyword is **not** cleared by the firmware when the switch triggers — only `CurrCurrTh` and `CurrPosThDir` are zeroed — so the chosen direction persists for the next time you re-arm the threshold.
+
 ## Examples
 
 ```text

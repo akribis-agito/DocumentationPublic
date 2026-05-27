@@ -42,6 +42,8 @@ Trigger direction for the CurrPosTh position-reference check.
 | 0            | First condition is fulfilled (unconditionally).       |
 | \> 0         | First condition is fulfilled if `PosRef` > `CurrPosTh`. |
 
+This keyword doubles as the master enable for automatic entry: because a value of 0 makes condition A always pass, the firmware uses "`CurrPosThDir` = 0" both as the bypass-the-position-gate setting and as the disarmed state. When any condition-B threshold triggers a switch into current mode, the firmware clears `CurrPosThDir` back to 0 to prevent an immediate re-trigger on the next cycle; re-set it (together with a condition-B threshold) to arm the next automatic switch.
+
 ## Examples
 
 ```text

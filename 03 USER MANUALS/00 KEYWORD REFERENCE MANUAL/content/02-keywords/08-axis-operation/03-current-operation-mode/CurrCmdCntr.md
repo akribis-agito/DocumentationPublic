@@ -39,6 +39,13 @@ Time elapsed in current mode or in the active CurrCmdVal entry.
 
 `CurrCmdCntr` resets to 0 upon receipt of the [GoToCurrMode](GoToCurrMode.md) command, upon automatic condition switching, or upon a digital input switching to current operation mode. This means that when [OperationMode](../01-general-keywords/OperationMode.md) is assigned directly, the user can preset it to any initial value and start the timer from there.
 
+## How it works
+
+The counter advances by one per control cycle. The exact value of one count in milliseconds therefore follows the control-loop sample time. Its behaviour depends on the source:
+
+- **Sources 0 and 3 (analog / master axis):** the counter starts incrementing immediately on mode entry and is compared against [CurrCmdHTime](CurrCmdHTime.md)`[1]`.
+- **Sources 1 and 2 (user table):** while `CurrRef` is ramping toward the active [CurrCmdVal](CurrCmdVal.md) entry the counter is held at 0; it only begins counting once `CurrRef` reaches the entry, and is reset to 0 when the index advances to the next entry. When the table is exhausted and the index is clamped to the last entry, the counter is **not** reset — so it keeps growing and reveals how long the axis has held the final value.
+
 > **Note:** The user can overwrite `CurrCmdCntr` at any time while in current operation mode.
 
 ## Examples

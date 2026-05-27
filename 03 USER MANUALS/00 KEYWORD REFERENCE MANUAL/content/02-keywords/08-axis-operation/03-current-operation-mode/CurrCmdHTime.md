@@ -43,7 +43,9 @@ Holding time for each current-command table entry.
 |---|---|
 | < 0 | Source value is held indefinitely. |
 | 0 | Axis exits current operation mode and enters position operation mode. |
-| > 0 | Source value is held for `CurrCmdHTime`, before exiting current operation mode (`CurrCmdSrc` = 0 or 3) or proceeding to the next pair (`CurrCmdSrc` = 1 or 2). For `CurrCmdSrc` = 1 or 2, if [CurrCmdIndex](CurrCmdIndex.md) reaches the last index value and the last `CurrCmdHTime` entry is greater than 0, the axis holds the last `CurrCmdVal` value indefinitely. |
+| > 0 | Source value is held for `CurrCmdHTime`, before exiting current operation mode (`CurrCmdSrc` = 0 or 3) or proceeding to the next pair (`CurrCmdSrc` = 1 or 2). For `CurrCmdSrc` = 1 or 2, if [CurrCmdIndex](CurrCmdIndex.md) reaches the last usable entry (20) and that entry's `CurrCmdHTime` is greater than 0, the axis holds the last `CurrCmdVal` value indefinitely. |
+
+The holding time is accumulated by the [CurrCmdCntr](CurrCmdCntr.md) counter, which advances once per control cycle. For sources 1 and 2 the counter only starts after `CurrRef` has finished ramping to the entry's [CurrCmdVal](CurrCmdVal.md) (see [CurrCmdSlope](CurrCmdSlope.md)); for sources 0 and 3 it starts immediately on mode entry. When the counter reaches `CurrCmdHTime[1]` (sources 0/3) the axis switches to position mode; when it reaches `CurrCmdHTime[index]` (sources 1/2) the axis advances to the next table entry.
 
 ## Examples
 

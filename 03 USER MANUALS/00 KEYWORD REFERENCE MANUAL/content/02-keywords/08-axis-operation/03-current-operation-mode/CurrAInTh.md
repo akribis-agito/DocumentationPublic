@@ -44,7 +44,11 @@ Analog force-feedback threshold (condition B) to enter current mode.
 | 0 | Second condition is not fulfilled. |
 | \> 0 | Second condition is fulfilled if analog force feedback > `CurrAInTh`. |
 
-Entry into current operation mode still requires the first condition check ([CurrPosTh](CurrPosTh.md) / [CurrPosThDir](CurrPosThDir.md)). When both the first and second conditions are met, the axis enters current operation mode and `CurrAInTh` is cleared to 0 to avoid undesired future switching; the user must reconfigure its value for the next switch. See [Current operation mode](00-overview.md) for the full switching logic.
+This check is **only evaluated if an analog input is actually configured as force feedback**: the firmware first verifies that the `ANALOG_FORCE_FEEDBACK` function is defined (via [AInMode](../../../02-keywords/05-inputs-outputs/02-analog-inputs/AInMode.md)), and reads the filtered value of that input. If no input is assigned that function, `CurrAInTh` has no effect regardless of its value.
+
+`CurrAInTh` is one of three interchangeable condition-B checks (the others being [CurrPosErrTh](CurrPosErrTh.md) and [CurrCurrTh](CurrCurrTh.md)); any one of them satisfying its comparison triggers the switch, provided condition A has already passed.
+
+Entry into current operation mode still requires the first condition check ([CurrPosTh](CurrPosTh.md) / [CurrPosThDir](CurrPosThDir.md)). When both the first and second conditions are met, the axis enters current operation mode and the firmware clears `CurrAInTh` to 0 (and clears [CurrPosThDir](CurrPosThDir.md)) to avoid undesired future switching; the user must reconfigure its value for the next switch. See [Current operation mode](00-overview.md) for the full switching logic.
 
 ## Examples
 

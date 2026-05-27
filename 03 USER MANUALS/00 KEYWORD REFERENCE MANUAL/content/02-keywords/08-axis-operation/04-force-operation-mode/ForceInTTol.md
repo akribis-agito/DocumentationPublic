@@ -34,6 +34,10 @@ Settling window around the target force used for in-target status.
 
 `ForceInTTol` is the settling window around the target value ([ForceCmdVal](ForceCmdVal.md)), in units, used to determine the in-target status of force control. It is applicable only when [ForceCmdSrc](ForceCmdSrc.md) = 1 or 2. Together with the dwell time [ForceInTTime](ForceInTTime.md), it determines when [ForceInTStat](ForceInTStat.md) reports settled.
 
+## How it works
+
+The window is **symmetric**: each cycle (while [ForceInTStat](ForceInTStat.md) = 3) the firmware tests the force error against ±`ForceInTTol`, i.e. `ForceErr <= ForceInTTol && ForceErr >= -ForceInTTol` (`AG300_CTL01ControlLoops.c:1178`). Because the target force is held by the (filtered) [ForceRef](ForceRef.md), `ForceErr` is the deviation of the [Force](Force.md) feedback from the commanded value, so the window is effectively `|measured force − target force| <= ForceInTTol`. While inside the window the [ForceInTTime](ForceInTTime.md) dwell counter accumulates; leaving the window resets it.
+
 ## Examples
 
 ```text

@@ -37,9 +37,11 @@ Position-reference threshold (condition A) to enter current mode.
 
 ## Overview
 
-`CurrPosTh` is the threshold position reference (`PosRef`) value used in the first condition check (condition A) to enter current operation mode. It is used only while the axis is in velocity or position operation mode ([OperationMode](../01-general-keywords/OperationMode.md) = 2 or 3). The comparison direction is set by [CurrPosThDir](CurrPosThDir.md).
+`CurrPosTh` is the threshold position reference (`PosRef`) value used in the first condition check (condition A) to enter current operation mode. It is used only while the axis is in velocity or position operation mode ([OperationMode](../01-general-keywords/OperationMode.md) = 2 or 3). The comparison direction is set by [CurrPosThDir](CurrPosThDir.md), and the comparison is made against the *commanded* position reference `PosRef`, not the actual feedback position.
 
 ## How it works
+
+Condition A is a **gate**: the firmware evaluates it first each cycle, and only if it passes does it go on to evaluate the condition-B thresholds. The direction keyword [CurrPosThDir](CurrPosThDir.md) decides the comparison (and `0` makes condition A always pass, i.e. it disables the position gate):
 
 | CurrPosThDir | Descriptions                                         |
 |--------------|------------------------------------------------------|
@@ -47,7 +49,7 @@ Position-reference threshold (condition A) to enter current mode.
 | 0            | First condition is fulfilled (unconditionally).       |
 | \> 0         | First condition is fulfilled if `PosRef` > `CurrPosTh`. |
 
-Entry into current operation mode still requires the second condition check (one of [CurrPosErrTh](CurrPosErrTh.md), [CurrAInTh](CurrAInTh.md) or [CurrCurrTh](CurrCurrTh.md)). When both conditions are met, the axis enters current mode and `CurrPosTh` is cleared to 0 to avoid undesired future switching; the user must reconfigure its value for the next switch. See [Current operation mode](00-overview.md) for the overview.
+Entry into current operation mode still requires the second condition check (one of [CurrPosErrTh](CurrPosErrTh.md), [CurrAInTh](CurrAInTh.md) or [CurrCurrTh](CurrCurrTh.md)) to be satisfied in the same cycle. When both conditions are met, the axis enters current mode and the firmware clears [CurrPosThDir](CurrPosThDir.md) to 0 (which makes the position gate pass unconditionally) and clears the condition-B threshold that triggered the switch. `CurrPosTh` itself keeps its value; to fully re-arm the same position gate for a later switch, set `CurrPosThDir` and a condition-B threshold again. See [Current operation mode](00-overview.md) for the overview.
 
 ## Examples
 

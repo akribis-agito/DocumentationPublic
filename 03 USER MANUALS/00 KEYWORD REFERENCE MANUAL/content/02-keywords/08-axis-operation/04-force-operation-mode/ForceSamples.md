@@ -32,28 +32,32 @@ Timings of the last completed ForceCmdVal application, in controller cycles.
 
 ## Overview
 
-`ForceSamples` reports the timings of the last completed [ForceCmdVal](ForceCmdVal.md) application. It is applicable only when [ForceCmdSrc](ForceCmdSrc.md) = 1 or 2. The unit is the number of controller cycles (typically 1 cycle equals $T_{s} = \frac{1}{16384}Hz = 61.03515\mu s$). The settling timings derive from [ForceInTTol](ForceInTTol.md) and [ForceInTTime](ForceInTTime.md).
+`ForceSamples` reports the timings of the last completed [ForceCmdVal](ForceCmdVal.md) application, the force-mode counterpart of [MotionSamples](../../10-motion/05-motion-status/MotionSamples.md). It is applicable only when [ForceCmdSrc](ForceCmdSrc.md) = 1 or 2. The unit is the number of controller cycles, where one cycle is the sample period $T_{s} = \frac{1}{16384\ \text{Hz}} \approx 61.035\ \mu s$. The four timings are recorded together the moment [ForceInTStat](ForceInTStat.md) reaches 4 (settled), using the internal cycle counter `glForceSampleCounter` and the dwell time [ForceInTTime](ForceInTTime.md) (`AG300_CTL01ControlLoops.c:1188`).
+
+Each element is initialised to `-1` (`MOTION_SAMPLES_VALUE_NOT_VALID`) when the motor is disabled, so `-1` means "no completed application yet" (`AG300_CTL01ControlInterrupt.h:573`). The array uses indices 1 to 4 (index 0 is unused).
 
 ## How it works
 
-Each array element represents a different time, as shown.
+Each array element represents a different elapsed time, measured from the start of the new target-force application (when the index advanced to this entry):
 
-| Index | Descriptions |
-|----|----|
-| 1 | The time for ForceRef to reach the target value (ForceCmdVal), starting from its initial value. It is analogous to move time. |
-| 2 | The time since the start of new target force application until the time when ForceErr **begins to** settle into the ForceInTTol for at least ForceInTTime. It is analogous to move and settle time. |
-| 3 | The time since the start of new target force application until the time when ForceErr **settles** into the ForceInTTol for at least ForceInTTime. It is analogous to move, settle and in-target time. |
-| 4 | The time since ForceRef equals to target value (ForceCmdVal) until the axis **begins to** settle into the ForceInTTol for at least ForceInTTime. It is analogous to settle time. |
+| Index | Firmware constant | Descriptions |
+|----|----|----|
+| 1 | `MOTION_SAMPLES_PROFILER_INDEX` | Time for the raw force reference to reach the target value (ForceCmdVal) from its initial value — the ramp / "move" time. |
+| 2 | `MOTION_SAMPLES_TILL_TARGET_INDEX` | Time until `ForceErr` **first enters** the ForceInTTol window (and stays long enough to ultimately settle) — "move and settle" time. |
+| 3 | `MOTION_SAMPLES_TILL_IN_TARGET_INDEX` | Time until `ForceErr` is **declared settled** (inside ForceInTTol for at least ForceInTTime) — "move, settle and in-target" time. |
+| 4 | `MOTION_SAMPLES_SETTLING_TIME_INDEX` | Time from the raw reference reaching the target until `ForceErr` first enters the ForceInTTol window — the "settle" time alone. |
 
-In summary,
+In summary (matching the firmware computation at `AG300_CTL01ControlLoops.c:1188`–`1195`):
 
 $$
 ForceSamples\lbrack 2\rbrack = \ ForceSamples\lbrack 1\rbrack + \ ForceSamples\lbrack 4\rbrack
 $$
 
 $$
-ForceSamples\lbrack 3\rbrack = \ ForceSamples\lbrack 2\rbrack + \frac{ForceInTTol}{T_{s}}\ 
+ForceSamples\lbrack 3\rbrack = \ ForceSamples\lbrack 2\rbrack + \ ForceInTTime
 $$
+
+(`ForceInTTime` is expressed in the same controller-cycle units as the samples.)
 
 ## Examples
 
@@ -64,6 +68,7 @@ AForceSamples[3]    ; move + settle + in-target time
 
 ## See also
 
-- [ForceInTStat](ForceInTStat.md) — in-target status
+- [ForceInTStat](ForceInTStat.md) — in-target status (samples recorded when it reaches 4)
 - [ForceInTTol](ForceInTTol.md) — settling window
 - [ForceInTTime](ForceInTTime.md) — required dwell time within the window
+- [MotionSamples](../../10-motion/05-motion-status/MotionSamples.md) — equivalent timings for position/velocity moves

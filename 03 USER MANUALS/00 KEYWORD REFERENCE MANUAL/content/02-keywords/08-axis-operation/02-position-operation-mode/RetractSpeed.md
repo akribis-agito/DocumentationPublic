@@ -35,12 +35,22 @@ Maximum velocity of the point-to-point move on entry to position mode.
 
 ## Overview
 
-`RetractSpeed` is the maximum velocity used in the point-to-point motion that runs upon entry to position operation mode. The move runs only when the [BeginOnToPos](BeginOnToPos.md) flag is set, toward the target defined by [RetractTarget](RetractTarget.md).
+`RetractSpeed` is the maximum velocity, in user units/s, of the point-to-point move that runs on entry to position operation mode. The move runs only when [BeginOnToPos](BeginOnToPos.md) is armed, toward the target defined by [RetractTarget](RetractTarget.md) (or [RelTrgt](../../10-motion/13-motion-mode-ptp/RelTrgt.md)). It is a flash-stored setting, so it persists across power cycles.
+
+## How it works
+
+When the entry move is launched, `QuickBeginOnSwitchToPos()` copies `RetractSpeed` directly into the active PTP move speed: `gllSpeed[axis] = gllRetractSpeed[axis]` (`AG300_CTL01ControlLoops.c:2371`). The move then runs as an ordinary point-to-point profile — `RetractSpeed` sets only the cruise (maximum) velocity; acceleration, deceleration and jerk are taken from the axis' normal motion-profile settings.
+
+The keyword is signed and may be negative; the value is the commanded speed for the profiler, which moves toward the target regardless of sign. The default is 1000. The range is symmetric about zero (`±MAX_SPEED`/`±MAX_SPEED_WIDE` in firmware); see the frontmatter for the exact limits.
+
+## Changes between versions
+
+In **v5 (central-i)** the motion pipeline is 64-bit, so `RetractSpeed` is held as a 64-bit value; the speed-copy behaviour is unchanged. **v5 is central-i only**, so on standalone `RetractSpeed` remains the v4 32-bit value.
 
 ## Examples
 
 ```text
-ARetractSpeed=20000  ; entry-move speed (user units)
+ARetractSpeed=20000  ; entry-move speed (user units/s)
 ARetractTarget=50000 ; entry-move target
 ABeginOnToPos=1      ; arm the move
 AGoToPosMode         ; switch and start the move
@@ -50,3 +60,5 @@ AGoToPosMode         ; switch and start the move
 
 - [BeginOnToPos](BeginOnToPos.md) — arms the entry move
 - [RetractTarget](RetractTarget.md) — target of the entry move
+- [RelTrgt](../../10-motion/13-motion-mode-ptp/RelTrgt.md) — relative-target override for the entry move
+- [GoToPosMode](GoToPosMode.md) — one of the commands that triggers the move

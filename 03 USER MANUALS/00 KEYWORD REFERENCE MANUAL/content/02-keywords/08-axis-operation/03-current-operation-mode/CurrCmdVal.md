@@ -36,12 +36,29 @@ Sequence of user-defined current references (mA) for current mode.
 
 `CurrCmdVal` defines a sequence of user-defined current references, in milliamperes, applied in current operation mode. It is applicable only when [CurrCmdSrc](CurrCmdSrc.md) = 1 or 2, and each value is paired with a holding time from [CurrCmdHTime](CurrCmdHTime.md). The active entry is selected by [CurrCmdIndex](CurrCmdIndex.md), and transitions between entries can be ramped with [CurrCmdSlope](CurrCmdSlope.md).
 
+## How it works
+
+The array holds **20 usable entries, indexed 1 to 20** (element 0 is unused so that the table indexes can start at 1). Each control cycle the firmware reads the entry pointed to by [CurrCmdIndex](CurrCmdIndex.md):
+
+1. `CurrRef` ramps toward `CurrCmdVal[index]` at the rate set by [CurrCmdSlope](CurrCmdSlope.md)`[index]` (the ramp counter [CurrCmdCntr](CurrCmdCntr.md) is held at 0 while ramping).
+2. Once `CurrRef` reaches `CurrCmdVal[index]`, the holding timer [CurrCmdCntr](CurrCmdCntr.md) starts counting up and is compared against [CurrCmdHTime](CurrCmdHTime.md)`[index]` to decide when to advance to the next entry or exit current mode.
+
+The current value is applied verbatim as the current loop reference (in mA); positive and negative values correspond to the two current directions. The range is symmetric: standalone/v4 stores integer milliamperes; central-i v5 stores the value as a 32-bit float (see Changes between versions).
+
+The diagram below shows a two-entry sequence (`CurrCmdVal[1]` = 364 mA held 500 ms, then ramp to `CurrCmdVal[2]` = -500 mA held 1000 ms, with `CurrCmdHTime[3]` = 0 ending the sequence). The holding timer [CurrCmdCntr](CurrCmdCntr.md) only runs during the flat hold segments — it is held at 0 throughout each ramp.
+
+![CurrCmdVal sequence timing](currcmdval-sequence.svg)
+
 ## Examples
 
 ```text
 ACurrCmdVal[1]=364   ; first current reference (mA)
 ACurrCmdVal[2]=-500  ; second current reference (mA)
 ```
+
+## Changes between versions
+
+central-i v5 stores each `CurrCmdVal` entry as a 32-bit float (standalone/v4: 32-bit integer milliamperes). The table size (20 entries) and indexing are unchanged.
 
 ## See also
 

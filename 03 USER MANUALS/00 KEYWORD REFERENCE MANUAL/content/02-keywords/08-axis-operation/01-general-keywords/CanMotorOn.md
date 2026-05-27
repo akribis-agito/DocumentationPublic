@@ -32,18 +32,32 @@ Command that attempts to enable the motor after running pre-checks.
 
 ## Overview
 
-`CanMotorOn` is a command function that attempts to enable the motor on the axis. It performs the necessary pre-checks and, if all conditions are met, transitions the axis to the motor-on state. It is an axis-related command and can be issued at any time.
+`CanMotorOn` is a command function that tests whether the axis *could* be enabled and reports the result in [CanMotorOnRes](CanMotorOnRes.md). It is an axis-related command and can be issued at any time.
 
-Unlike writing directly to [MotorOn](MotorOn.md), this command reports why an enable attempt was rejected: the result of the last attempt can be read from [CanMotorOnRes](CanMotorOnRes.md).
+Important: `CanMotorOn` does **not** turn the motor on. It runs the same pre-condition checks that `MotorOn = 1` would run, but instead of enabling it writes either `1` (all checks passed — enabling would succeed) or the error/fault code of the first failed check into [CanMotorOnRes](CanMotorOnRes.md). To actually enable the axis you still write [MotorOn](MotorOn.md) `= 1`. Use `CanMotorOn` first when you want to know *why* an enable would be refused without provoking an error response.
+
+## How it works
+
+`CanMotorOn()` (`AG300_CTL01Funcs.c:19390`) sets `CanMotorOnRes = 1` and then walks a single-pass chain of checks, breaking out at the first failure and storing that reason code (`:19418`–`:19831`):
+
+1. The **same pre-conditions checked by `MotorOn()`**, in the same order: FPGA / variant / full-scale health, Central-i port active and device is an amplifier with relay closed, overall current limit, **commutation complete**, inrush bypassed, CalcFilters succeeded, filters not modified.
+2. Then the **interrupt-level protections** that would fault the axis even at standstill: hardware-protection bits (STO1/STO2, encoder error, over-current, IPM fault, watchdog, 5 V faults, AC power phases), unknown encoder type, missing power supplies, bus over/under-voltage, logic over/under-voltage, board / IPM / motor over-temperature, and illegal modulo-with-input-shaping.
+
+If the motor is already on, or `MotorType` = simulation, or the amplifier is a PD type, the function leaves the result at `1` (`:19437`).
+
+The check is a **snapshot**: time-dependent protections (e.g. a `MaxVBus` over-voltage that needs to persist) and anything that can only happen after enabling (position/velocity-error, stall, high current) are *not* covered, so `MotorOn = 1` can still fail or the axis can trip shortly after enabling even when `CanMotorOn` returned `1` (`:19400`–`:19413`).
 
 ## Examples
 
 ```text
-ACanMotorOn          ; attempt to enable the motor
-ACanMotorOnRes      ; read the result of the attempt
+ACanMotorOn          ; run the pre-checks (does not enable the motor)
+ACanMotorOnRes      ; 1 = enabling would succeed, otherwise the reject/fault code
+AMotorOn[1]=1        ; actually enable the axis
 ```
 
 ## See also
 
-- [CanMotorOnRes](CanMotorOnRes.md) — result code of the last enable attempt
-- [MotorOn](MotorOn.md) — enable/disable state of the motor
+- [CanMotorOnRes](CanMotorOnRes.md) — result code this command writes
+- [MotorOn](MotorOn.md) — the keyword that actually enables/disables the motor
+- [ConFlt](../../07-status-and-faults/ConFlt.md) — fault codes that `CanMotorOnRes` can echo back
+- [StatReg](../../07-status-and-faults/StatReg.md) — commutation / filter status bits the checks read

@@ -32,7 +32,20 @@ Command to gracefully enter current operation mode.
 
 ## Overview
 
-`GoToCurrMode` instructs the controller to enter current operation mode in a graceful manner. The preparation includes halting motion, clearing counters (such as [CurrCmdCntr](CurrCmdCntr.md) and [CurrCmdIndex](CurrCmdIndex.md)), and variable initialisation. For other ways to enter current mode, see [OperationMode](../01-general-keywords/OperationMode.md).
+`GoToCurrMode` instructs the controller to enter current operation mode in a graceful manner. For other ways to enter current mode, see [OperationMode](../01-general-keywords/OperationMode.md).
+
+## How it works
+
+When the command is received the firmware performs the following, all with interrupts disabled so the transition is atomic:
+
+1. **Already in current mode** — does nothing and replies OK.
+2. **Member of a CNC (multi-axis) motion** — refuses the command and returns an error; you cannot enter current mode from a coordinated motion.
+3. **Otherwise:**
+   - If the axis is in motion, motion is ended immediately with the reason code "end / go-to-current" and the profiler sample time is stored.
+   - [CurrCmdIndex](CurrCmdIndex.md) is reset to 1 (first table entry) and [CurrCmdCntr](CurrCmdCntr.md) is reset to 0.
+   - [OperationMode](../01-general-keywords/OperationMode.md) is set to current control (value 1), the current position is recorded as the mode-switch position, and the in-target counter is cleared.
+
+`GoToCurrMode` does **not** clear the [CurrCmdVal](CurrCmdVal.md), [CurrCmdSlope](CurrCmdSlope.md) or [CurrCmdHTime](CurrCmdHTime.md) tables — those keep their configured values so the sequence runs from entry 1 on each entry into the mode. This is the same preparation the firmware performs when current mode is entered automatically by a threshold condition.
 
 ## Examples
 

@@ -42,7 +42,9 @@ Position-error threshold (condition B) to enter current mode.
 | 0     | Second condition is not fulfilled.                       |
 | \> 0  | Second condition is fulfilled if `PosErr` > `CurrPosErrTh`. |
 
-Entry into current operation mode still requires the first condition check ([CurrPosTh](CurrPosTh.md) / [CurrPosThDir](CurrPosThDir.md)). When both conditions are met, the axis enters current mode and `CurrPosErrTh` is cleared to 0 to avoid undesired future switching; the user must reconfigure its value for the next switch. See [Current operation mode](00-overview.md) for the overview.
+`CurrPosErrTh` is one of three interchangeable condition-B checks; the others are [CurrAInTh](CurrAInTh.md) (analog force feedback) and [CurrCurrTh](CurrCurrTh.md) (current reference). The firmware evaluates all armed condition-B checks each cycle and switches if **any** of them is satisfied (logical OR among B), provided the condition-A position gate has already passed.
+
+Entry into current operation mode still requires the first condition check ([CurrPosTh](CurrPosTh.md) / [CurrPosThDir](CurrPosThDir.md)) to pass in the same cycle. When both conditions are met, the axis enters current mode and the firmware clears `CurrPosErrTh` to 0 (and clears [CurrPosThDir](CurrPosThDir.md)) to avoid undesired future switching; the user must reconfigure its value for the next switch. See [Current operation mode](00-overview.md) for the overview.
 
 ## Examples
 
