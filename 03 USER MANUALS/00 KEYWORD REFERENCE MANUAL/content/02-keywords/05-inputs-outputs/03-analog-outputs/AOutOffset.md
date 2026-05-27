@@ -37,15 +37,30 @@ Offset (mV) added to the analog output, used to calibrate/zero it.
 
 ## Overview
 
-`AOutOffset` adds a fixed offset, in millivolts, to the analog output — the final stage of the [analog-output signal path](00-overview.md), applied after scaling. The array index is the analog-output number (e.g. `AOutOffset[2]` is analog output 2). Use it to calibrate or zero the output of a channel.
+`AOutOffset` adds a fixed offset, in millivolts, to the analog output — applied after scaling but before the millivolt-to-DAC-code conversion of the [analog-output signal path](00-overview.md). The array index is the analog-output number (1-based: `AOutOffset[1]` is analog output 1). Use it to calibrate or zero the output of a channel.
+
+## How it works
+
+`AOutOffset` is applied in both output modes, in the control interrupt, before the value is converted to a DAC code and clamped:
+
+- **Direct mode:** `DAC code = (AOutPort + AOutOffset) × AOUT_VALUE_TO_MV` (`AG300_CTL01ControlInterrupt.c:7039`).
+- **Monitoring mode:** `DAC code = ((parameter << AOutShifts) + AOutOffset) × AOUT_VALUE_TO_MV` (`AG300_CTL01ControlInterrupt.c:12414`).
+
+Because the offset is added in the same millivolt units as the (scaled) value and only then scaled by `AOUT_VALUE_TO_MV` (−2.752457 LSB/mV), one unit of `AOutOffset` shifts the output by 1 mV. The narrow range (±500 mV on v4) is enough for calibration/zeroing, not for large signal offsets.
 
 ## Examples
 
 ```text
 AAOutOffset[1]=-12   ; trim analog output 1 by -12 mV to zero it
+AAOutOffset[1]        ; read back the offset
 ```
+
+## Changes between versions
+
+On Central-i v5 `AOutOffset` is a `float32` and the range widens to ±700 mV (v4 / standalone: `int32`, ±500 mV). The role and signal-path position are unchanged.
 
 ## See also
 
-- [AOutPort](AOutPort.md) — commanded value (direct mode)
-- [AOutShifts](AOutShifts.md) — scaling (monitoring mode)
+- [AOutPort](AOutPort.md) — commanded value (direct mode); offset is added to it
+- [AOutShifts](AOutShifts.md) — scaling applied before the offset (monitoring mode)
+- [analog-output overview](00-overview.md) — full signal path

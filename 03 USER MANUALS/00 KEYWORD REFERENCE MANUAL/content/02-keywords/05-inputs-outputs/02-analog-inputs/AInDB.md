@@ -35,14 +35,19 @@ First analog-input deadband (mV) per input.
 
 ## Overview
 
-`AInDB` sets the **first** deadband, in millivolts, applied to an analog input — the deadband stage between offset and gain in the [analog-input signal path](00-overview.md). The array index is the analog-input number (e.g. `AInDB[3]` is analog input 3). Inputs within the deadband are forced to zero, suppressing noise around 0 mV.
+`AInDB` sets the **first** deadband, in millivolts, applied to an analog input — the deadband stage between offset ([AInOffset](AInOffset.md)) and gain ([AInGain](AInGain.md)) in the [analog-input signal path](00-overview.md). The array index is the analog-input number (e.g. `AInDB[3]` is analog input 3). Inputs within the deadband are forced to zero, suppressing noise around 0 mV; outside the band the offset-corrected value is **subtracted by the deadband width** so the output is continuous (no step) at the band edge.
 
 ## How it works
 
-| abs(Input) | Output |
-|------------|--------|
-| ≤ AInDB | 0 |
-| > AInDB | Input − Sign(Input)·AInDB |
+The deadband is applied to the offset-corrected value `u` (`AG300_CTL01ControlInterrupt.c:11936`):
+
+| Input `u` | Output |
+|-----------|--------|
+| `u > AInDB` | `u − AInDB` |
+| `u < −AInDB` | `u + AInDB` |
+| otherwise (within the band) | `0` |
+
+So the deadband **shifts** the signal rather than clipping it: at exactly the edge the output is 0 and grows linearly outside, giving a continuous characteristic. Because this stage runs before the gain, the deadband width is specified at the input (post-offset) side in mV.
 
 For example, with a 20 mV deadband, the output (mV) as a function of the input (mV) is:
 

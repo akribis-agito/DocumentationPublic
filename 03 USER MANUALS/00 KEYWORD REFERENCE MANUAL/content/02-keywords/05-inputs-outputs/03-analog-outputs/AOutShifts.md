@@ -31,24 +31,37 @@ Power-of-two scaling applied to the monitored parameter on an analog output.
 
 ## Overview
 
-`AOutShifts` scales the monitored parameter (see [AOutMode](AOutMode.md)) by a power of two, to fit it into the output's dynamic range. The array index is the analog-output number (e.g. `AOutShifts[1]` applies to analog output 1). This is the scaling stage of the [analog-output signal path](00-overview.md) in monitoring mode.
+`AOutShifts` scales the monitored parameter (see [AOutMode](AOutMode.md)) by a power of two, to fit it into the output's dynamic range. The array index is the analog-output number (1-based: `AOutShifts[1]` applies to analog output 1). This is the scaling stage of the [analog-output signal path](00-overview.md) and applies **only in monitoring mode** — in direct command mode the output follows [AOutPort](AOutPort.md) and `AOutShifts` is not used.
 
 ## How it works
 
-A **positive** value shifts left — multiplying the value by $2^{AOutShifts}$. A **negative** value shifts right — dividing by $2^{|AOutShifts|}$.
+Each control cycle, for an output in monitoring mode, the interrupt takes the monitored parameter and applies an arithmetic bit shift before adding the offset and converting to a DAC code (`AG300_CTL01ControlInterrupt.c:12409`–`12414`):
+
+```text
+if (AOutShifts < 0)  value = parameter >> (-AOutShifts);   // shift right (divide)
+else                 value = parameter <<   AOutShifts;    // shift left  (multiply)
+DAC code = (value + AOutOffset) * AOUT_VALUE_TO_MV;
+```
+
+A **positive** value shifts left — multiplying the value by $2^{AOutShifts}$. A **negative** value shifts right — dividing by $2^{|AOutShifts|}$. The range ±31 reflects the width of the 32-bit shift.
 
 $$
 \text{Analog output [mV]} = \text{Monitored parameter [internal units]} \times 2^{\text{AOutShifts}}
 $$
+
+Because the shift is on a signed integer, a right shift truncates toward negative infinity. Pick a shift so the parameter's working range maps usefully onto the ±11905 mV output span.
 
 ## Examples
 
 ```text
 AAOutShifts[1]=2     ; multiply the monitored value by 4
 AAOutShifts[1]=-3    ; divide the monitored value by 8
+AAOutShifts[1]        ; read back the shift
 ```
 
 ## See also
 
-- [AOutMode](AOutMode.md) — selects the monitored parameter
-- [AOutOffset](AOutOffset.md) — output offset (applied after scaling)
+- [AOutMode](AOutMode.md) — selects the monitored parameter (shift applies only in monitoring mode)
+- [AOutOffset](AOutOffset.md) — output offset (added after this scaling, before the DAC conversion)
+- [AOutPort](AOutPort.md) — direct-mode value (not affected by this shift)
+- [analog-output overview](00-overview.md) — full signal path

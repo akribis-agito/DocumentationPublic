@@ -53,6 +53,15 @@ Selects the hardware function (or software control) routed to each digital outpu
 | 14 | Reserved | Reserved |
 | 15 | Reserved | Central-i remote signal |
 
+## How it works
+
+`DOutSelect` programs a per-output multiplexer in the FPGA that chooses what feeds each physical output pin. When you write `DOutSelect`, the firmware packs the per-output codes — **4 bits per output** — into the FPGA discrete-output MUX registers (on a standalone controller) or sends them to the remote unit (on central-i). Because each output gets a 4-bit selector, the value range is `0`–`15`.
+
+- Code `0` connects the output to the **software layer** — the `DOutPort` bit (with [DOutLog](DOutLog.md) / [DOutType](DOutType.md) applied), optionally driven by a [DOutMode](DOutMode.md) function. This is the path the software updates each control cycle at the loop rate.
+- Any non-zero code connects the output to a **hardware function** generated directly in the FPGA (position events, encoder/pulse-direction signals, UserPWM). These run at the FPGA clock rate, far faster than the control loop, so the software `DOutPort`/`DOutMode` value is irrelevant for that output while a hardware function is selected.
+
+The selector is a routing MUX only; it does not change the signal's polarity or stage — [DOutLog](DOutLog.md) and [DOutType](DOutType.md) still apply to the software path, and the [UserPWM](UserPWM.md) duty/divider still govern a PWM output.
+
 ## Examples
 
 ```text
