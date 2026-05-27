@@ -32,25 +32,47 @@ Command that transmits a CAN write to a remote node using the RemoteCAN* registe
 
 ## Overview
 
-`RemoteCANSend` transmits a CAN write message to a remote node. It uses the three RemoteCAN registers set beforehand:
+`RemoteCANSend` performs a single CAN access to a remote node, letting one controller act as a CAN master toward another. It uses the three RemoteCAN registers set beforehand:
 
 1. [RemoteCANAdd](RemoteCANAdd.md) — the target node's CAN address
-2. [RemoteCANCCC](RemoteCANCCC.md) — the parameter (CAN command code) to write
-3. [RemoteCANVal](RemoteCANVal.md) — the value to write
+2. [RemoteCANCCC](RemoteCANCCC.md) — the encoded parameter (Complex CAN Code) to access
+3. [RemoteCANVal](RemoteCANVal.md) — the value to write, or where a read result is returned
 
-Set those three, then execute `RemoteCANSend` to perform the remote write. It can be executed during motion.
+The value you assign to `RemoteCANSend` selects the kind of access:
+
+| RemoteCANSend | Access | Effect |
+|---|---|---|
+| 1 | Assignment (write) | Writes [RemoteCANVal](RemoteCANVal.md) to the remote parameter |
+| 2 | Inquiry (read) | Reads the remote parameter; the returned value is stored back in [RemoteCANVal](RemoteCANVal.md) |
+| 3 | Function | Executes the remote parameter as a function/command |
+
+## How it works
+
+`RemoteCANSend` must be executed from inside a **user program** — it is rejected if issued directly over a normal communication channel, because it blocks the issuing thread while it waits for the remote node. On execution the controller:
+
+1. Programs its remote-access mailboxes to transmit to [RemoteCANAdd](RemoteCANAdd.md) and receive replies at `RemoteCANAdd + 1`.
+2. Builds the request frame from [RemoteCANCCC](RemoteCANCCC.md) (and, for a write, [RemoteCANVal](RemoteCANVal.md)) and transmits it.
+3. Waits for the remote node's acknowledgement and reply, with a timeout of about 100 ms at each stage. If the reply does not arrive in time the access ends with a remote-access timeout error.
+4. Interprets the reply: a write/function expects an "OK" acknowledgement; an inquiry expects a value, which is decoded and written into [RemoteCANVal](RemoteCANVal.md). If the remote node returns an error, the error code is reported and also placed in [RemoteCANVal](RemoteCANVal.md).
+
+It can be executed during motion.
+
+> Platform note: this transaction is implemented on the standalone/controller (C2000) platform. On the central-i (Zynq) platform the remote-CAN master transaction is not yet implemented.
 
 ## Examples
 
 ```text
 ARemoteCANAdd=128    ; target node
-ARemoteCANCCC=100    ; parameter to write on the remote node
-ARemoteCANVal=5000   ; value
-ARemoteCANSend=1     ; send the write
+ARemoteCANCCC=100    ; encoded parameter on the remote node
+ARemoteCANVal=5000   ; value (used for a write)
+ARemoteCANSend=1     ; perform a write
+
+ARemoteCANSend=2     ; perform a read; afterwards ARemoteCANVal holds the returned value
 ```
 
 ## See also
 
 - [RemoteCANAdd](RemoteCANAdd.md) — target node address
-- [RemoteCANCCC](RemoteCANCCC.md) — parameter identifier
-- [RemoteCANVal](RemoteCANVal.md) — value to write
+- [RemoteCANCCC](RemoteCANCCC.md) — encoded parameter to access
+- [RemoteCANVal](RemoteCANVal.md) — value written, or value returned on a read
+- [SendToCntrlr](SendToCntrlr.md) — relay a value to another controller over serial

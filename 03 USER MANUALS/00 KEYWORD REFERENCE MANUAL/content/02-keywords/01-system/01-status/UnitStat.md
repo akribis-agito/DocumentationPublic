@@ -36,6 +36,12 @@ Read-only bitfield reporting the unit's hardware and firmware health.
 
 Read `UnitStat` after a firmware or FPGA update, or when diagnosing why a unit will not operate, to confirm the images are consistent and no hardware fault is present.
 
+## How it works
+
+`UnitStat` is a single 32-bit word built up during start-up. As the controller initialises it checks each hardware/image condition in turn and **OR**s the corresponding bit into the word when the condition is true; conditions that are re-checked later (such as the dynamic-brake firmware/FPGA match) clear their own bit when they pass. A clean unit therefore reads `0`. Each flag is product-specific — a bit is only set on the products where that check applies — so an unset bit means either "not faulted" or "not applicable to this model".
+
+The firmware also uses the word internally: for example, a faulty-FPGA bit prevents the unit from coming online. Host software reads the word after programming to confirm the firmware and FPGA images are a matched, valid set.
+
 ## Status bits
 
 | Bit | Status |

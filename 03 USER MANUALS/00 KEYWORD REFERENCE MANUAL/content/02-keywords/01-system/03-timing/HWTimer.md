@@ -30,7 +30,21 @@ High-resolution free-running counter for measuring short intervals.
 
 ## Overview
 
-`HWTimer` is a fast free-running counter that ticks every 1/433 of a microsecond (about 433 counts per microsecond). Read it at two moments and subtract to measure the elapsed time between events with sub-microsecond resolution. The counter wraps after roughly 9.9 seconds, so it is intended for short intervals; for longer or coarse timing use [Time](Time.md).
+`HWTimer` is a fast, read-only, free-running counter for timing short intervals at sub-microsecond resolution. It ticks about 433 times per microsecond (one count roughly every 1/433 µs). Read it at two moments and subtract the two readings to get the elapsed time between events. The counter wraps after roughly 9.9 seconds, so it is intended for short intervals only; for longer or coarse timing use [Time](Time.md), and for counting in whole control cycles use [CounterUp](CounterUp.md) / [CounterDown](CounterDown.md).
+
+`HWTimer` exists only on the central-i platform (firmware v5).
+
+## How it works
+
+`HWTimer` is not a software counter that the firmware increments; reading it returns the current value of a hardware timer register on the processor. That register counts continuously at the processor's timer clock (about 433 MHz), which is why it offers far finer resolution than the one-second [Time](Time.md) tick or the per-cycle counters.
+
+To convert a difference of two readings into time:
+
+$$
+\Delta t\ [\mu s] = \dfrac{HWTimer_{end} - HWTimer_{start}}{433}
+$$
+
+Because the value is a 32-bit register, it rolls over after about $2^{32} / (433 \times 10^6) \approx 9.9$ seconds. As long as the interval being measured is shorter than that and the subtraction is done with unsigned/wrapping arithmetic, a single rollover between the two readings still yields the correct difference. Intervals longer than one full wrap cannot be measured with `HWTimer`.
 
 ## Examples
 
@@ -38,7 +52,9 @@ High-resolution free-running counter for measuring short intervals.
 AHWTimer            ; read the counter at event A, again at event B, then subtract
 ```
 
+Read `AHWTimer` immediately before and after a short operation; the count difference divided by 433 gives the duration in microseconds.
+
 ## See also
 
-- [Time](Time.md) — seconds since power-on
+- [Time](Time.md) — seconds since power-on (coarse, one-second resolution)
 - [CounterUp](CounterUp.md) / [CounterDown](CounterDown.md) — cycle-based counters

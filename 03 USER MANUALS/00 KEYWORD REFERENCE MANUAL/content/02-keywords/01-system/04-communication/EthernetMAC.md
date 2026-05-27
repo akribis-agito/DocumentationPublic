@@ -32,20 +32,27 @@ Controller MAC address, stored as decimal octets one per array element.
 
 ## Overview
 
-`EthernetMAC` holds the controller's MAC address as six octets in **decimal**, one per array element. Each controller on the same network must have a unique MAC address. It is saved to flash. For example, `00-B0-D0-63-C2-26` is stored as:
+`EthernetMAC` holds the controller's MAC address as six octets stored in **decimal**, one per array element. (The array is dimensioned so the usable indices start at `[1]`; index `[0]` is not used.) MAC addresses are normally written in hexadecimal, so each pair of hex digits must be converted to its decimal value before writing it here. Each controller on the same network must have a unique MAC address. It is saved to flash and read during start-up, so set the octets, [Save](../02-operation/Save.md), and [Reset](../02-operation/Reset.md) to apply.
+
+For example, the placeholder address `AA:BB:CC:DD:EE:FF` is stored as:
 
 | Element | Hex | Decimal |
 |---------|-----|---------|
-| EthernetMAC[1] | 00 | 0 |
-| EthernetMAC[2] | B0 | 176 |
-| EthernetMAC[3] | D0 | 208 |
-| EthernetMAC[4] | 63 | 99 |
-| EthernetMAC[5] | C2 | 194 |
-| EthernetMAC[6] | 26 | 38 |
+| EthernetMAC[1] | AA | 170 |
+| EthernetMAC[2] | BB | 187 |
+| EthernetMAC[3] | CC | 204 |
+| EthernetMAC[4] | DD | 221 |
+| EthernetMAC[5] | EE | 238 |
+| EthernetMAC[6] | FF | 255 |
+
+## How it works
+
+The firmware reads the six decimal octets and assembles them into the hardware MAC address the network interface advertises. To convert a hex octet to decimal, multiply the first hex digit by 16 and add the second (for example `CC` = 12 × 16 + 12 = 204).
 
 ## Examples
 
 ```text
+AEthernetMAC[1]=170 ; first octet (AA in hex)
 AEthernetMAC[3]     ; read the third octet (decimal)
 ```
 

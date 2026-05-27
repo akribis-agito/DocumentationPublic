@@ -32,16 +32,26 @@ Value to write to the remote controller's parameter on RemoteCANSend.
 
 ## Overview
 
-`RemoteCANVal` holds the value that will be written to the remote controller's parameter — identified by [RemoteCANCCC](RemoteCANCCC.md) — when [RemoteCANSend](RemoteCANSend.md) is executed. It is a transient register and is **not** saved to flash.
+`RemoteCANVal` is the data register of a remote-CAN access. Its role depends on the kind of access requested by [RemoteCANSend](RemoteCANSend.md):
+
+- On a **write** (assignment), it supplies the value written to the remote parameter identified by [RemoteCANCCC](RemoteCANCCC.md).
+- On a **read** (inquiry), the firmware overwrites it with the value returned by the remote node, so after the access completes you read the result back from `RemoteCANVal`.
+
+It is a transient register and is **not** saved to flash. The default is -1.
+
+## How it works
+
+For a write, set `RemoteCANVal` before calling `RemoteCANSend`; the firmware packs it into the outgoing CAN frame. For a read, its prior contents are irrelevant — when the reply arrives the firmware decodes the returned value and stores it here. If the remote node reports an error instead of a normal reply, `RemoteCANVal` receives the returned error code rather than a parameter value.
 
 ## Examples
 
 ```text
-ARemoteCANVal=5000   ; value to send to the remote parameter
+ARemoteCANVal=5000   ; value to send on a write access
+ARemoteCANVal        ; after a read access, holds the value returned by the remote node
 ```
 
 ## See also
 
 - [RemoteCANAdd](RemoteCANAdd.md) — target node address
-- [RemoteCANCCC](RemoteCANCCC.md) — parameter identifier to write
-- [RemoteCANSend](RemoteCANSend.md) — execute the remote write
+- [RemoteCANCCC](RemoteCANCCC.md) — encoded parameter to access
+- [RemoteCANSend](RemoteCANSend.md) — execute the remote access (write / read / function)

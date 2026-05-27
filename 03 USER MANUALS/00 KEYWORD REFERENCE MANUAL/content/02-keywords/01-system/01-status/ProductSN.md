@@ -34,24 +34,24 @@ Two-element array holding the unit's hardware version and production serial numb
 
 ## Overview
 
-`ProductSN` stores the controller's hardware version and production serial number and persists them to flash, so they survive power cycles and uniquely identify a physical unit for production and field service.
-
-The array is 1-indexed:
+`ProductSN` stores the controller's hardware version and production serial number and persists them to flash, so they survive power cycles and uniquely identify a physical unit for production and field service. The array is declared with three slots; element `[0]` is unused so that communication indices start at 1, leaving two usable elements:
 
 | Index | Contents |
 |-------|----------|
 | [1] | Hardware version number |
 | [2] | Production serial number — a concatenation of year (2 digits), week (2 digits) and unit count (4 digits) |
 
-On power-up, after the controller loads its keywords, it copies `ProductSN[1]` and `ProductSN[2]` into the [Identity](Identity.md) array — into `Identity[3]` (hardware version) and `Identity[2]` (serial number) respectively — where host software reads them to display the unit's serial number.
+## How it works
+
+`ProductSN` is held in flash. On power-up, after the controller loads its keywords from flash, it copies `ProductSN[1]` and `ProductSN[2]` into the [Identity](Identity.md) array — into `Identity[3]` (hardware version) and `Identity[2]` (serial number) respectively — where host software reads them to display the unit's serial number. The same copy is repeated whenever `ProductSN` is written, so `Identity` always tracks the stored value.
 
 ## Writing the serial number (elevated permission)
 
-`ProductSN` is intended to be programmed once, during production. Writing any element requires the controller to be in an **elevated (burn-in) permission** state; otherwise the controller rejects the write with:
+`ProductSN` is intended to be programmed once, during production. The write is guarded: the controller only accepts a write to `ProductSN` while it is in an **elevated (burn-in) permission** state. Without that permission the write is rejected with:
 
 > Communication error **328** — "Setting Product Serial Number is not allowed without Elevated Permissions."
 
-As a safeguard, the elevated-permission state is cleared automatically immediately after a `ProductSN` element is written, so each write must be individually authorized. In normal use, integrators and end users only ever **read** `ProductSN`.
+As a safeguard, the firmware clears the elevated-permission state immediately upon accepting a `ProductSN` write, so the permission only ever authorises a **single** write — programming both elements requires re-authorising before each one. In normal use, integrators and end users only ever **read** `ProductSN`.
 
 ## Examples
 

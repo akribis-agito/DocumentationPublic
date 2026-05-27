@@ -32,16 +32,26 @@ Target CAN node address for a remote write issued by RemoteCANSend.
 
 ## Overview
 
-`RemoteCANAdd` specifies the CAN node address of the remote controller that will receive a message when [RemoteCANSend](RemoteCANSend.md) is executed. It is saved to flash and works together with [RemoteCANCCC](RemoteCANCCC.md) (the parameter to write) and [RemoteCANVal](RemoteCANVal.md) (the value) to form the outgoing transaction.
+`RemoteCANAdd` specifies the CAN node address of the remote controller that a [RemoteCANSend](RemoteCANSend.md) transaction targets. It is one of three registers that describe a remote access: `RemoteCANAdd` (which node), [RemoteCANCCC](RemoteCANCCC.md) (which parameter), and [RemoteCANVal](RemoteCANVal.md) (the value). It is saved to flash. The valid range is the full 11-bit CAN identifier space (0–2047); the default is 128.
+
+## How it works
+
+When `RemoteCANSend` runs, the controller programs its remote-access CAN mailboxes from `RemoteCANAdd`:
+
+- it **transmits** the request to the address in `RemoteCANAdd`, and
+- it **receives** the remote node's reply at `RemoteCANAdd + 1`.
+
+This +0 / +1 request/reply pairing mirrors the receive/reply layout the controller itself uses for its own [CANAddr](CANAddr.md), so `RemoteCANAdd` should be set to the *base* receive address of the remote node.
 
 ## Examples
 
 ```text
-ARemoteCANAdd=128    ; address of the remote node to write to
+ARemoteCANAdd=128    ; address of the remote node to access
 ```
 
 ## See also
 
-- [RemoteCANCCC](RemoteCANCCC.md) — parameter identifier to write
-- [RemoteCANVal](RemoteCANVal.md) — value to write
-- [RemoteCANSend](RemoteCANSend.md) — execute the remote write
+- [RemoteCANCCC](RemoteCANCCC.md) — encoded parameter (CAN command code) to access
+- [RemoteCANVal](RemoteCANVal.md) — value written, or value returned on a read
+- [RemoteCANSend](RemoteCANSend.md) — execute the remote access
+- [CANAddr](CANAddr.md) — this controller's own CAN address

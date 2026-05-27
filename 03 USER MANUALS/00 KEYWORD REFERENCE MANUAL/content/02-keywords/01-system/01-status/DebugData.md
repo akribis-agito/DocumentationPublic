@@ -32,7 +32,19 @@ Array reserved for Agito feature development and testing.
 
 ## Overview
 
-`DebugData` is a 200-element scratch array reserved for Agito feature development and testing. Its contents and meaning are not fixed and may change between firmware builds, so it should not be used in production integrations.
+`DebugData` is a large scratch array reserved for Agito feature development and testing (200 elements on most builds, larger on some). Its contents and meaning are **not fixed** and may change between firmware builds, so it should not be used in production integrations.
+
+## How it works
+
+`DebugData` is a single shared, non-axis array that firmware modules read and write directly to expose internal values or to inject test conditions during development. Individual elements are addressed by named indices inside the firmware, so what any given element means depends entirely on the build. Examples of the kinds of uses it serves include capturing control-interrupt timing (counters latched at the start, mid-point and end of the real-time interrupt), simulating digital-input states for testing, reporting the I²t motor-power-limit value, and snapshotting profiler / position-reference signals for waveform demonstrations.
+
+Because these assignments are added and removed as features are developed, the array carries no stable, documented layout. Treat any value read from `DebugData` as meaningful only in the context of the exact firmware build that produced it.
+
+## Examples
+
+```text
+ADebugData[1]       ; read a development scratch value (meaning is build-specific)
+```
 
 ## See also
 

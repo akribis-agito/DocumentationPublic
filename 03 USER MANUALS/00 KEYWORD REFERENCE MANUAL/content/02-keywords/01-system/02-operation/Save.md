@@ -32,9 +32,27 @@ Writes all flash-saveable parameters from volatile memory to flash.
 
 ## Overview
 
-`Save` persists parameters to non-volatile (flash) memory. It first erases the previous parameter area in flash, then copies every flash-saveable parameter from volatile memory into it — so the stored set always reflects the controller's current configuration. Settings that are not saved are lost on the next power cycle or [Load](Load.md).
+`Save` persists parameters to non-volatile (flash) memory. It first erases the dedicated parameter area in flash, then walks the keyword table and copies every flash-saveable parameter from volatile (RAM) memory into it — so the stored set always reflects the controller's current configuration. Settings that are not saved are lost on the next power cycle or [Load](Load.md).
 
-Saving is **not allowed while the motor is enabled**. Whether a given parameter is included depends on its `flash` attribute (shown in each keyword's Quick Facts).
+`Save` is a **command** (it takes no value). It is **not allowed while the motor is enabled or in motion** — the interpreter rejects it with an error in those states, and the operation blocks the main loop for the duration of the write. Whether a given parameter is included depends on its `flash` attribute (shown in each keyword's Quick Facts); read-only and live-status keywords are not saved.
+
+## How it works
+
+`Save` runs in three phases:
+
+1. **Erase.** The parameter blocks in flash are erased first. If the erase or any subsequent program step fails, `Save` aborts and returns an error rather than leaving a partial set.
+2. **Write records.** The firmware scans the keyword table by CAN code. For each parameter whose `flash` attribute is set, it writes a self-describing record so the data can be re-read correctly even if a future firmware revision changes the parameter's size or axis layout. For axis-related parameters the record is repeated once per axis. Each record is:
+
+   | Field | Size | Contents |
+   |-------|------|----------|
+   | CAN code | 1 word | Parameter's CAN code, with the axis number packed into the upper bits |
+   | Element count | 1 word | Number of array members (1 for a scalar) |
+   | Value(s) | 2 words each | The 32-bit value of each element |
+
+   While writing, a running **parameter checksum** is accumulated over the values (the [ParamCS](../01-status/ParamCS.md) words). Three checksum variants are kept so a host can compare configuration while ignoring volatile identity fields such as the network IP/MAC address.
+3. **Finalize.** After the last parameter, `Save` writes a marker recording the last CAN code stored (used by [Load](Load.md) to know where the saved set ends) and a whole-area additive checksum that `Load` re-verifies on every restore. If flash fills before the table is exhausted, `Save` returns a "flash full" error.
+
+Because the operation can take a noticeable time, the firmware refreshes the watchdog and signals progress on the status LED while it runs. Index 0 of every array is deliberately excluded from the checksum and from host upload (arrays are 1-indexed).
 
 ## Examples
 
@@ -44,6 +62,7 @@ ASave                ; persist current parameters to flash (motor must be off)
 
 ## See also
 
-- [Load](Load.md) — reload parameters from flash
-- [Reset](Reset.md) — software power cycle
-- [ParamCS](../01-status/ParamCS.md) — checksum to verify stored configuration
+- [Load](Load.md) — reload parameters from flash (and re-verify the checksum written here)
+- [SaveUser](SaveUser.md) — save to a separate user area instead of the main set
+- [Reset](Reset.md) — software power cycle; reloads the saved set on restart
+- [ParamCS](../01-status/ParamCS.md) — the parameter checksum this command computes

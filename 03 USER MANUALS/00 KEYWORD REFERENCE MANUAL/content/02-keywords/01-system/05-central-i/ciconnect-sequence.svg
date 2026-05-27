@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="660" height="250" font-family="Segoe UI,Arial,sans-serif" font-size="12">
+  <text x="10" y="18" font-size="13" font-weight="bold">CIConnect — connection sequence (master side)</text>
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#5a6573"/></marker>
+  </defs>
+  <g>
+    <rect x="20"  y="50" width="110" height="42" rx="6" fill="#eef2f5" stroke="#8a929b"/>
+    <text x="75"  y="68" text-anchor="middle">Reset</text>
+    <text x="75"  y="83" text-anchor="middle" font-size="9" fill="#7b8794">reset remote, enable link</text>
+
+    <rect x="170" y="50" width="120" height="42" rx="6" fill="#fff3d6" stroke="#d9a441"/>
+    <text x="230" y="65" text-anchor="middle">Get device</text>
+    <text x="230" y="80" text-anchor="middle" font-size="9" fill="#9a6700">read type/version</text>
+
+    <rect x="330" y="50" width="140" height="42" rx="6" fill="#fff3d6" stroke="#d9a441"/>
+    <text x="400" y="65" text-anchor="middle">Configure</text>
+    <text x="400" y="80" text-anchor="middle" font-size="9" fill="#9a6700">timing, sync mailbox</text>
+
+    <rect x="510" y="50" width="130" height="42" rx="6" fill="#e7f8ee" stroke="#0f7a3d"/>
+    <text x="575" y="65" text-anchor="middle">Sync (connected)</text>
+    <text x="575" y="80" text-anchor="middle" font-size="9" fill="#0f7a3d">CIStatus[1] = 3</text>
+
+    <rect x="330" y="150" width="140" height="42" rx="6" fill="#f6c9c2" stroke="#c0392b"/>
+    <text x="400" y="168" text-anchor="middle">Error</text>
+    <text x="400" y="183" text-anchor="middle" font-size="9" fill="#c0392b">CIStatus[1] = 2, code in [6]</text>
+
+    <rect x="20" y="150" width="130" height="42" rx="6" fill="#eef2f5" stroke="#8a929b"/>
+    <text x="85" y="168" text-anchor="middle">Disconnected</text>
+    <text x="85" y="183" text-anchor="middle" font-size="9" fill="#7b8794">CIStatus[1] = 0</text>
+  </g>
+  <g stroke="#5a6573" stroke-width="1.4" fill="none" marker-end="url(#a)">
+    <line x1="130" y1="71" x2="168" y2="71"/>
+    <line x1="290" y1="71" x2="328" y2="71"/>
+    <line x1="470" y1="71" x2="508" y2="71"/>
+    <line x1="230" y1="92" x2="380" y2="150"/>
+    <line x1="400" y1="92" x2="400" y2="150"/>
+    <line x1="575" y1="92" x2="470" y2="156"/>
+    <path d="M330,180 C220,196 150,184 150,176"/>
+  </g>
+  <text x="240" y="128" font-size="9" fill="#c0392b">device mismatch / unsupported</text>
+  <text x="478" y="130" font-size="9" fill="#c0392b">link error</text>
+  <text x="175" y="146" font-size="9" fill="#5a6573">CIDisconnect</text>
+</svg>

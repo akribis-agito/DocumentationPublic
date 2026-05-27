@@ -32,12 +32,26 @@ Read-only register encoding the connection state of all Central-i ports.
 
 ## Overview
 
-`CIGlobalStat` is a read-only, non-axis register that summarises the connection state of every Central-i port in one value. Each port occupies two bits:
+`CIGlobalStat` is a read-only, non-axis register that summarises the connection state of every Central-i port in one value, so the host can poll system-wide status without reading [CIStatus](CIStatus.md) on each axis. Each port occupies **two bits**, packed by port number:
 
-- the **low** bit is set when the port is connected;
-- the **high** bit indicates the port is operating in simulation (offline) mode.
+- the **low** (even) bit of the pair is set when the port is connected;
+- the **high** (odd) bit of the pair is set when the port is connected to a *simulated* device ([CIDeviceType](CIDeviceType.md) set to a simulation class).
 
-Reading this single value gives a system-wide overview without querying each axis with [CIStatus](CIStatus.md).
+## How it works
+
+For port `n` (counting from 0), the connected bit is bit `2n` and the simulation bit is bit `2n+1`:
+
+| Port | Connected bit | Simulation bit | Connected mask |
+|------|---------------|----------------|----------------|
+| 0 | 0 | 1 | 0x00000001 |
+| 1 | 2 | 3 | 0x00000004 |
+| 2 | 4 | 5 | 0x00000010 |
+| 3 | 6 | 7 | 0x00000040 |
+| n | 2n | 2n+1 | `1 << (2n)` |
+
+The firmware sets the connected bit when a port reaches the synchronised state (via [CIConnect](CIConnect.md) or [CIAutoConnect](CIAutoConnect.md)) and clears it on reset/[CIDisconnect](CIDisconnect.md). The simulation bit is set or cleared when the port comes up against a simulated device type. A port whose pair reads `01` (binary) is a live link; `11` is a connected simulation; `00` is disconnected.
+
+To test one port, mask with its connected bit — for example port 1 is connected when `(CIGlobalStat & 0x4)` is non-zero.
 
 ## Examples
 
@@ -45,7 +59,10 @@ Reading this single value gives a system-wide overview without querying each axi
 ACIGlobalStat       ; system-wide Central-i connection state
 ```
 
+In a user program, check whether port 0 is connected by masking with `0x1`, and whether it is a simulation by masking with `0x2`.
+
 ## See also
 
-- [CIStatus](CIStatus.md) — detailed per-axis link state
-- [CIConnect](CIConnect.md) / [CIDisconnect](CIDisconnect.md) — change the connection
+- [CIStatus](CIStatus.md) — detailed per-axis link state and error codes
+- [CIConnect](CIConnect.md) / [CIDisconnect](CIDisconnect.md) — set/clear the connected bit
+- [CIDeviceType](CIDeviceType.md) — selects whether a port reports as simulation
