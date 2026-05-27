@@ -38,13 +38,19 @@ When `MotorReason` reports a controller fault (value `1`), read [ConFlt](ConFlt.
 
 ## How it works
 
-| Value | Description |
-|---|---|
-| 0 | **NONE** |
-| 1 | **CONFLT** A controller fault triggered caused the axis to be disabled. Check ConFlt for more details. |
-| 2 | **Digital Input** A command was sent via a digital input to disable the axis. |
-| 3 | **User Program (IDE+)** A command was sent via the user program to disable the axis. |
-| 4 | **Communication** A command was sent via the communication channel to disable the axis. |
+`MotorReason` holds the reason for the **last** disable. It is set at the moment the axis goes from enabled to disabled, and reset to `0` (NONE) whenever the axis is enabled (`MotorOn=1`), so while the axis is running it reads `0`.
+
+| Value | Internal name | Description |
+|---|---|---|
+| 0 | `MOTOR_OFF_REASON_NONE` | **NONE** — no disable recorded, or the axis is enabled. |
+| 1 | `MOTOR_OFF_REASON_FLT` | **CONFLT** — a controller fault disabled the axis. Read [ConFlt](ConFlt.md) for the specific code. |
+| 2 | `MOTOR_OFF_REASON_IO` | **Digital Input** — a digital input configured to disable the axis was activated. |
+| 3 | `MOTOR_OFF_REASON_UPROG` | **User Program (IDE+)** — a `MotorOn=0` command came from the user program. |
+| 4 | `MOTOR_OFF_REASON_COMM` | **Communication** — a `MotorOn=0` command came over the communication channel. |
+
+The fault reason (`1`) is set specifically when the axis transitions to disabled while a [ConFlt](ConFlt.md) is present, which distinguishes a fault-driven shutdown from a deliberate disable command (reasons `2`–`4`).
+
+Note: the array default reported in the parameter table is `-1`, but the firmware initialises and resets the live value to `0` (NONE); in normal operation you will only see values `0`–`4`.
 
 ## Examples
 

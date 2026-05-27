@@ -32,9 +32,23 @@ Reports the motion and settling state of the axis (disabled, moving, settling, r
 
 ## Overview
 
-`InTargetStat` reports the motion and settling state of the axis. The exact meaning of each value depends on the `OperationMode`: in position/velocity control the settling check uses [PosErr](../01-kinematics-status/PosErr.md) against [InTargetTol](InTargetTol.md), while in current/force control it uses [Vel](../01-kinematics-status/Vel.md) `[1]` against [InTargetVelTh](InTargetVelTh.md). In all cases the in-window condition must persist for at least [InTargetTime](InTargetTime.md) before the axis reports "target reached" (`InTargetStat = 4`).
+`InTargetStat` reports the motion and settling state of the axis as a single value 0–4. The exact meaning of each value depends on the [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md): in position/velocity control the settling check uses [PosErr](../01-kinematics-status/PosErr.md) against [InTargetTol](InTargetTol.md), while in current/force control it uses [Vel](../01-kinematics-status/Vel.md) `[1]` against [InTargetVelTh](InTargetVelTh.md). In all cases the in-window condition must persist for at least [InTargetTime](InTargetTime.md) before the axis reports "target reached" (`InTargetStat = 4`).
+
+The five values are the firmware constants `IN_TARGET_STATUS_*` (`AG300_CTL01ParamsCommon.h:1920–1924`):
+
+| Value | Constant | Meaning |
+|----|----|----|
+| 0 | `IN_TARGET_STATUS_MOTOR_OFF` | Motor disabled. Set when the axis is turned off (`AG300_CTL01ControlLoops.c:2658`). |
+| 1 | `IN_TARGET_STATUS_MOTOR_ON` | Motor enabled, no motion yet (`AG300_CTL01Funcs.c:17272`). |
+| 2 | `IN_TARGET_STATUS_IN_MOTION` | In motion (position/velocity), or velocity above threshold (current/force). Set at `Begin` (`AG300_CTL01ControlLoops.c:3010`). |
+| 3 | `IN_TARGET_STATUS_WAITING_TARGET_TIME` | Inside the settling window but [InTargetTime](InTargetTime.md) has not yet elapsed (`AG300_CTL01Profiler.c:959`). |
+| 4 | `IN_TARGET_STATUS_TARGET_REACHED` | Target reached — inside the window for at least InTargetTime (`AG300_CTL01Profiler.c:973`). |
 
 ## How it works
+
+After a position/velocity move the profiler advances the state machine each cycle (`AG300_CTL01Profiler.c:957–986`): on the first cycle after motion it moves `2 → 3` and clears the dwell counter; while in state 3 it increments the counter whenever `|PosErr| <= InTargetTol` and re-zeroes it the moment the error leaves the window; once the counter reaches `InTargetTime` it latches state 4. **In position/velocity control state 4 is sticky** — once reached it stays at 4 until the next motion is commanded or the axis is disabled, even if `|PosErr|` later exceeds `InTargetTol`.
+
+In **current/force control** the check is recomputed every cycle from `|Vel[1]|` against `InTargetVelTh` and is **not** latched (`AG300_CTL01Profiler.c:10349–10365`): if the velocity rises back above the threshold the state immediately drops from 4 (or 3) back to 2, and the dwell counter restarts. This is why value 2 in current/force mode reads as "velocity out of range" rather than "in motion".
 
 | InTargetStat | OperationMode = 2 (Velocity control) OperationMode = 3 (Position control) Keyword to monitor: PosErr Settling window: InTargetTol | OperationMode = 1 (Current control) OperationMode = 4 (Force control) Keyword to monitor: Vel[1] Settling window: InTargetVelTh |
 |---|---|---|
@@ -70,4 +84,6 @@ AInTargetStat       ; read the current settling state
 - [InTargetTol](InTargetTol.md) — settling window (position/velocity control)
 - [InTargetVelTh](InTargetVelTh.md) — settling window (current/force control)
 - [InTargetTime](InTargetTime.md) — minimum dwell time inside the window
+- [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) — selects which signal/window the settling check uses
 - [MotionStat](MotionStat.md) — detailed bit-mapped motion status
+- [MotionSamples](MotionSamples.md) — settling times computed from the same state machine

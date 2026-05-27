@@ -36,6 +36,12 @@ Counts repetitions made during repetitive point-to-point (PTP) motion.
 
 `RptCounter` reports the number of repetitions made in repetitive PTP motion. It is used only when [MotionMode](../02-motion-configuration/MotionMode.md) `= 2` (repetitive PTP motion). How a repetition is defined depends on [RptMode](../02-motion-configuration/RptMode.md). Once `RptCounter` equals the non-zero [RptCycles](../02-motion-configuration/RptCycles.md), the repetitive PTP motion stops.
 
+## How it works
+
+`RptCounter` is reset to `0` when a new motion is commanded (the `Begin` handler resets it alongside `MotionReason` and `InTargetStat`, `AG300_CTL01Funcs.c:1164`). The profiler then increments it by one at the end of each repetition — specifically once the end-of-smoothing wait for a repetition has elapsed, and only while in `MOTION_MODE_PTP_REP` (`AG300_CTL01Profiler.c:446`).
+
+After incrementing, the profiler decides whether to start another repetition: it continues only if no [StopRep](../04-motion-command/StopRep.md) is pending and either [RptCycles](../02-motion-configuration/RptCycles.md) `= 0` (run indefinitely) or `RptCounter ≠ RptCycles` (`AG300_CTL01Profiler.c:449–461`). When `RptCounter` reaches a non-zero `RptCycles` the motion ends instead of looping. The next target for each repetition is set from [RptMode](../02-motion-configuration/RptMode.md): mode 1 reflects the target about the current reference (back-and-forth), otherwise it returns toward the previous start position (`AG300_CTL01Profiler.c:930–936`).
+
 ## Examples
 
 ```text
@@ -47,3 +53,4 @@ ARptCounter         ; read the number of repetitions completed
 - [MotionMode](../02-motion-configuration/MotionMode.md) — selects repetitive PTP motion (`= 2`)
 - [RptCycles](../02-motion-configuration/RptCycles.md) — target repetition count that stops the motion
 - [RptMode](../02-motion-configuration/RptMode.md) — defines how a repetition is counted
+- [StopRep](../04-motion-command/StopRep.md) — ends repetitive PTP motion after the current repetition

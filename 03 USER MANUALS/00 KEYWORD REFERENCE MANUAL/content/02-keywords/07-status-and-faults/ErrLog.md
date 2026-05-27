@@ -32,37 +32,52 @@ Read-only circular log of recent errors with their timestamps.
 
 ## Overview
 
-`ErrLog` holds the controller's error log. It is a unit-wide (non-axis), read-only array of 65 elements that records errors as they occur, together with the time each one happened, so you can reconstruct the sequence of faults after a problem. It is not saved to flash. Each positive [ConFlt](ConFlt.md) value is appended here automatically, and the entire log can be wiped with [ClearErr](ClearErr.md).
+`ErrLog` holds the controller's error log. It is a unit-wide (non-axis), read-only array that records errors as they occur, together with the time each one happened, so you can reconstruct the sequence of faults after a problem. It is not saved to flash. Each positive [ConFlt](ConFlt.md) value is appended here automatically — as are other internal errors such as bad user-program loads and communication errors — and the entire log can be wiped with [ClearErr](ClearErr.md).
 
 The easiest way to read `ErrLog` is with the Agito PCSuite software, which translates each error code to text and converts the power-on time to a clock reading using the PC clock.
 
 ## How it works
 
-When an error occurs, two values are saved in `ErrLog`:
+Each error occupies **two** consecutive array elements (a "pair"):
 
-- Axis and error code
-- Error time (in seconds, counting from when the unit was powered on)
+- **Element 1 of the pair** — the tagged error code (source tag in the upper 8 bits, error code in the lower 24 bits).
+- **Element 2 of the pair** — the error time, in seconds since the unit was powered on (a copy of [Time](../01-system/03-timing/Time.md) at the instant of logging).
 
-The axis and error code of the first error are logged in `ErrLog[1]`, and the error time of the first error is in `ErrLog[2]`. Subsequent errors are saved in higher array locations, `ErrLog[3]` and `ErrLog[4]`, and so on. When the end of the array is reached, the log circles back to the first entry and overwrites it.
+The first error is therefore in `ErrLog[1]` / `ErrLog[2]`, the second in `ErrLog[3]` / `ErrLog[4]`, and so on. The array holds **32 event pairs** (64 used elements; index `[0]` is unused so that the first usable index is `[1]`). When the buffer is full it wraps back to `ErrLog[1]` and overwrites the oldest pair — it is a circular log, so it always keeps the most recent 32 events but has no overflow flag.
 
-The axis and error code are stored together: the axis information (see table below) occupies the upper 8 bits, and the error code (see [Controller error codes](../../04-error-codes/controller-error-codes.md)) occupies the lower 24 bits.
+### Tagged error code (pair element 1)
 
-| Axis | A | B | C | D | E | F | G | H | I | J | K | L |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Value (upper 8 bit) | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 |
+The lower 24 bits are the error code (for controller faults, the same value as [ConFlt](ConFlt.md) — see [Controller error codes](../../04-error-codes/controller-error-codes.md)). The upper 8 bits identify the source:
 
-The time of the error in `ErrLog` is in seconds since power on.
+| Upper 8 bits | Source |
+|---|---|
+| 0 | Not axis-related (unit-wide error) |
+| 1 | Axis A |
+| 2 | Axis B |
+| 3 | Axis C |
+| 4 | Axis D |
+| 5 | Axis E |
+| 6 | Axis F |
+| 7 | Axis G |
+| 8 | Axis H |
+| 16 + *n* | User-program thread *n* (e.g. 17 = thread 1) |
+
+To split a logged value: `code = ErrLog[k] & 0xFFFFFF` and `source = (ErrLog[k] >> 24) & 0xFF`. Note this differs from the 1-based axis letters elsewhere — here axis A is reported as **1**, not 0, and source 0 means a non-axis error.
 
 ## Examples
 
 ```text
-AErrLog[1]          ; axis + error code of the first logged error
+AErrLog[1]          ; tagged source + error code of the first logged error
 AErrLog[2]          ; time (s since power-on) of the first logged error
+AErrLog[3]          ; tagged source + error code of the second logged error
 AErrLog             ; read the full log
 ```
+
+To decode the first entry: error code = `AErrLog[1] & 0xFFFFFF`, source = `(AErrLog[1] >> 24) & 0xFF` (1 = axis A, 0 = non-axis).
 
 ## See also
 
 - [ClearErr](ClearErr.md) — clear all entries from this log
 - [ConFlt](ConFlt.md) — per-axis fault code appended to this log
 - [Controller error codes](../../04-error-codes/controller-error-codes.md) — meaning of each error code
+- [Time](../01-system/03-timing/Time.md) — power-on time used for the timestamp element

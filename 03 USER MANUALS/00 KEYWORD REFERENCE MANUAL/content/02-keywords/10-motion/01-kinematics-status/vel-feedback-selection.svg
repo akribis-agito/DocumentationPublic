@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" font-family="sans-serif" font-size="13">
+  <style>
+    .box { fill:#f5f7fa; stroke:#37474f; stroke-width:1.5; }
+    .sel { fill:#fff3e0; stroke:#e65100; stroke-width:1.5; }
+    .out { fill:#e8f5e9; stroke:#2e7d32; stroke-width:1.5; }
+    .lbl { fill:#263238; }
+    .cond { fill:#607d8b; font-size:11px; }
+    line { stroke:#37474f; stroke-width:1.4; marker-end:url(#a); }
+  </style>
+  <defs>
+    <marker id="a" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#37474f"/>
+    </marker>
+  </defs>
+
+  <!-- sources -->
+  <rect class="box" x="20" y="20" width="180" height="34" rx="4"/>
+  <text class="lbl" x="30" y="41">main enc Vel[2] = &#916;Pos &#215; Fs</text>
+
+  <rect class="box" x="20" y="80" width="180" height="34" rx="4"/>
+  <text class="lbl" x="30" y="101">aux Vel &#215; DualLoopFact</text>
+
+  <rect class="box" x="20" y="140" width="180" height="34" rx="4"/>
+  <text class="lbl" x="30" y="161">analog tacho input</text>
+
+  <rect class="box" x="20" y="200" width="180" height="34" rx="4"/>
+  <text class="lbl" x="30" y="221">GantryVel</text>
+
+  <!-- selector -->
+  <rect class="sel" x="300" y="95" width="150" height="64" rx="6"/>
+  <text class="lbl" x="316" y="122">select per</text>
+  <text class="lbl" x="316" y="140">loop config</text>
+
+  <!-- output -->
+  <rect class="out" x="520" y="100" width="100" height="54" rx="6"/>
+  <text class="lbl" x="548" y="132" font-weight="bold">Vel[1]</text>
+
+  <!-- arrows with conditions -->
+  <line x1="200" y1="37" x2="300" y2="108"/>
+  <text class="cond" x="208" y="62">normal</text>
+
+  <line x1="200" y1="97" x2="300" y2="120"/>
+  <text class="cond" x="208" y="92">DualLoopOn=1</text>
+
+  <line x1="200" y1="157" x2="300" y2="135"/>
+  <text class="cond" x="208" y="178">DualLoopOn=2</text>
+
+  <line x1="200" y1="217" x2="300" y2="150"/>
+  <text class="cond" x="208" y="240">gantry on (A/B)</text>
+
+  <line x1="450" y1="127" x2="520" y2="127"/>
+
+  <text class="cond" x="520" y="180">to velocity loop (VelErr = VelRef &#8722; Vel[1])</text>
+</svg>

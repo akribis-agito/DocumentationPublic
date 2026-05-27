@@ -32,7 +32,17 @@ Position settling window (PosErr) used to declare target reached.
 
 ## Overview
 
-In position or velocity control operation mode (`OperationMode = 2` or `3`), `InTargetTol` is the settling window that the absolute position error [PosErr](../01-kinematics-status/PosErr.md) must stay within for [InTargetTime](InTargetTime.md) before [InTargetStat](InTargetStat.md) signals that the target is reached (`InTargetStat = 4`). For current/force control the velocity-based window [InTargetVelTh](InTargetVelTh.md) is used instead.
+In position or velocity control operation mode ([OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) `= 2` or `3`), `InTargetTol` is the settling window that the absolute position error [PosErr](../01-kinematics-status/PosErr.md) must stay within for [InTargetTime](InTargetTime.md) before [InTargetStat](InTargetStat.md) signals that the target is reached (`InTargetStat = 4`). For current/force control the velocity-based window [InTargetVelTh](InTargetVelTh.md) is used instead.
+
+## How it works
+
+The settling check is a direct magnitude comparison done each control cycle by the profiler:
+
+$$
+|PosErr| \le InTargetTol
+$$
+
+While the comparison is true the firmware increments the dwell counter; the moment `|PosErr|` leaves the window the counter is reset to 0 (`AG300_CTL01Profiler.c:965–986`). Only when the counter has accumulated `InTargetTime` worth of consecutive in-window cycles does `InTargetStat` latch to 4. `InTargetTol` is in user units (the same units as `PosErr`); the firmware compares against the raw stored value, so a value of `0` requires an exact-zero position error. The default is `10` counts (`INTARGETTOL_DFLT`). It is saved to flash and may be changed while in motion.
 
 ## Examples
 
@@ -46,3 +56,5 @@ AInTargetTol        ; read current value
 - [InTargetStat](InTargetStat.md) — settling state gated by this window
 - [InTargetTime](InTargetTime.md) — minimum dwell time inside the window
 - [InTargetVelTh](InTargetVelTh.md) — velocity settling window (current/force control)
+- [PosErr](../01-kinematics-status/PosErr.md) — the signal compared against this window
+- [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) — selects position- vs velocity-based settling

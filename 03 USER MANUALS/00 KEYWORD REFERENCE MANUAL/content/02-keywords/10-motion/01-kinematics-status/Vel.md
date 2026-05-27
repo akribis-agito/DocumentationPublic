@@ -43,6 +43,36 @@ Feedback-velocity array; each element is a different velocity-estimation method.
 
 ## How it works
 
+### Array elements
+
+All elements are in main user units per second. The base estimate is the per-cycle position change scaled by the sample frequency: `Vel[2] = DeltaPos << SAMPLE_FREQUENCY_TWO_POWER` (`AG300_CTL01ControlInterrupt.c:3229`), i.e. `ΔPos × samples-per-second`.
+
+| Index | Method | Source |
+|-------|--------|--------|
+| `Vel[1]` | **Velocity-loop feedback** — the value actually used to close the velocity loop. Selected per loop configuration (see below). | `AG300_CTL01ControlInterrupt.c:3287` |
+| `Vel[2]` | Simple backward derivative of the main encoder (`ΔPos × Fs`). | `:3229` |
+| `Vel[3]` | Moving average of `Vel[2]` over 32 samples (`gllVelHistorySum >> 5`). | `:3291`–`3295` |
+| `Vel[4]` | **1/T measurement** — position change measured over a precisely-timed interval; see [OneOverTOn](OneOverTOn.md). | `:8951`–`8963` |
+
+`Vel[0]` is not produced by the control cycle. The keyword is read in axis-prefix syntax as `AVel[n]`.
+
+### How Vel[1] is selected
+
+`Vel[1]` is the velocity used by the velocity loop, so its meaning follows the dual-loop / gantry configuration (`AG300_CTL01ControlInterrupt.c:3248`–`3287` and the `M_CALCULATE_VEL_AND_MASTER_POSITION` macro in `AG300_CTL01ControlInterrupt.h:137`):
+
+| Configuration | `Vel[1]` source |
+|---------------|-----------------|
+| Normal (no dual-loop, no gantry) | `Vel[2]` — main-encoder derivative |
+| Dual-loop ([DualLoopOn](../../11-control-tuning/02-dual-loop-control/DualLoopOn.md) = 1) | Auxiliary-encoder velocity scaled by `gfDualLoopFdbkGain` (from [DualLoopFact](../../11-control-tuning/02-dual-loop-control/DualLoopFact.md)) |
+| Analog-tacho dual-loop (`DualLoopOn` = 2) | Filtered analog tacho input |
+| Gantry on (axes A/B) | Gantry velocity ([GantryVel](../../12-gantry-control/03-gantry-tuning/GantryVel.md)) |
+
+The comment notes `Vel[1]` was historically taken after a bi-quad filter; the current firmware assigns it directly from the selected feedback (it is the raw selected velocity, not separately filtered) — `AG300_CTL01ControlInterrupt.c:3287`.
+
+![Vel[1] feedback selection](vel-feedback-selection.svg)
+
+### 1/T measurement (Vel[4])
+
 > **Note:**
 >
 > 1. Vertical lines denote the controller sampling-time instances.
@@ -60,8 +90,15 @@ AVel[1]             ; read the velocity-loop feedback
 AVel[4]             ; read the 1/T velocity measurement
 ```
 
+## Changes between versions
+
+In **v5 (central-i)** the velocity array is 64-bit (`gllVel`) and `Vel[1]` is selected the same way (main / dual-loop aux / analog tacho / gantry). The data type and range differences are shown in the frontmatter. **v5 is central-i only**, so on standalone `Vel` remains the v4 32-bit array.
+
 ## See also
 
-- [VelErr](VelErr.md) — velocity error (`VelRef - Vel[1]`)
-- [OneOverTOn](OneOverTOn.md) / [OneOverTFreq](OneOverTFreq.md) / [OneOverTGap](OneOverTGap.md) — configure the `Vel[4]` 1/T method
+- [VelErr](VelErr.md) — velocity error (`VelRef − Vel[1]`)
 - [VelRef](VelRef.md) — velocity-loop reference/input
+- [OneOverTOn](OneOverTOn.md) / [OneOverTFreq](OneOverTFreq.md) / [OneOverTGap](OneOverTGap.md) — configure the `Vel[4]` 1/T method
+- [DualLoopOn](../../11-control-tuning/02-dual-loop-control/DualLoopOn.md) / [DualLoopFact](../../11-control-tuning/02-dual-loop-control/DualLoopFact.md) — change what `Vel[1]` measures
+- [GantryVel](../../12-gantry-control/03-gantry-tuning/GantryVel.md) — `Vel[1]` source in gantry mode
+- [AuxVel](AuxVel.md) — auxiliary velocity (the dual-loop feedback before scaling)
