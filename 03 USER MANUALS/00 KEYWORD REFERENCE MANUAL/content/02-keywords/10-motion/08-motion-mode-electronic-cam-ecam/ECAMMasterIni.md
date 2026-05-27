@@ -43,6 +43,11 @@ Offset of the starting master value relative to the ECAM range at start of motio
 
 ## How it works
 
+When ECAM motion starts ([Begin](../04-motion-command/Begin.md)) the controller snapshots the live master value as the origin of the master range. `ECAMMasterIni` shifts where that snapshot sits *inside* the range: with `ECAMMasterIni = 0` the master begins exactly at the start of the range (`GenData[ECAMStart]` for positive [ECAMGap](ECAMGap.md)); a positive value places the starting point further into the pattern by that many master units, so the follower begins partway along the cam profile. The follower's reference is offset at start so it does not jump regardless of `ECAMMasterIni`.
+
+- For positive [ECAMGap](ECAMGap.md) the offset is measured forward from the start of the range; for negative `ECAMGap` it is measured against the negated master, so the same positive value still places the start point further into the pattern.
+- For negative [ECAMCycles](ECAMCycles.md) (bidirectional cam), `ECAMMasterIni` positions the *middle* of the repeating region — the point the master is expected to sit at when motion starts — so the pattern can extend in both directions.
+
 The maximum allowed value depends on `ECAMCycles`:
 
 | ECAMCycles | Maximum value of ECAMMasterIni                   |
@@ -69,8 +74,16 @@ AECAMMasterIni[1]   ; read current value
 
 Refer to the figures in [Motion mode – Electronic cam (ECAM)](00-overview.md) for more information on the initial offset, which varies according to ECAMGap and ECAMCycles.
 
+## Changes between versions
+
+| | v4 (standalone &amp; central-i) | v5 (central-i) |
+|---|---|---|
+| Data type / range | 32-bit, `-2147483648` … `2147483647` | 64-bit, `-2251799813685248` … `2251799813685247` |
+
+In **v5** `ECAMMasterIni` is a 64-bit value with the wider range shown in the frontmatter, matching the 64-bit master positions used in that version; its meaning and the maximum-value rules above are unchanged. **v5 is central-i only.**
+
 ## See also
 
-- [ECAMGap](ECAMGap.md) — spacing/direction of master values
+- [ECAMGap](ECAMGap.md) — spacing/direction of master values and the master-to-index mapping
 - [ECAMCycles](ECAMCycles.md) — number of pattern occurrences
 - [ECAMMaster](ECAMMaster.md) — selects the master variable

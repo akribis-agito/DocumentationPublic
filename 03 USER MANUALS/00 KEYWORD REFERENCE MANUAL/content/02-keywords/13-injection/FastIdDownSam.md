@@ -40,7 +40,16 @@ $$
 Rate\ of\ generation\ of\ new\ binary\ value\ \lbrack Hz\rbrack = \ \frac{Controller\ cycle\ rate\lbrack Hz\rbrack}{2^{FastIdDownSam}}
 $$
 
-For example, with `FastIdDownSam = 1`, a new binary value is produced every 2 controller cycles.
+Each PRBS bit is held at the output for $2^{FastIdDownSam}$ controller cycles before the next bit is taken from the sequence, so the factor stretches the sequence in time without changing its bit pattern. The allowed values give the following rates:
+
+| Value | Controller cycles per PRBS bit |
+|-------|--------------------------------|
+| 0 | 1 |
+| 1 | 2 |
+| 2 | 4 |
+| 3 | 8 (default) |
+
+For example, with `FastIdDownSam = 1`, a new binary value is produced every 2 controller cycles. Changing this factor takes effect for subsequent bits; [FastIdInit](FastIdInit.md) restarts the sequence from its first bit but leaves this factor unchanged.
 
 ## Examples
 

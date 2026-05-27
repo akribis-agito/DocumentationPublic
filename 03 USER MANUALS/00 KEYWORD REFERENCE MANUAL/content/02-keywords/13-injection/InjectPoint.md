@@ -43,6 +43,17 @@ Selects which command signal the injected waveform is applied to.
 | 2 | Position command | see [Control tuning – Position control](../../02-keywords/11-control-tuning/03-position-control/00-overview.md) |
 | 3 | Force command | see [Control tuning – Force control](../../02-keywords/06-protections/04-force-control/00-overview.md) |
 
+The injected value enters the selected command at the point where that loop's reference is formed. With a **direct** [InjectType](InjectType.md) the upstream signal is discarded and the command becomes the injection value alone; with an **additive** type the injection is summed onto the command coming from the upstream loop. The amplitude scaling depends on the selected point:
+
+| Value | Amplitude keyword | Amplitude unit |
+|-------|-------------------|----------------|
+| 0 | [InjectCurrAmp](InjectCurrAmp.md) (plus [InjectCurrDC](InjectCurrDC.md) offset) | mA |
+| 1 | [InjectVelAmp](InjectVelAmp.md) | user velocity units (depends on dual-loop setting) |
+| 2 | [InjectPosAmp](InjectPosAmp.md) | main user position units |
+| 3 | [InjectForceA](InjectForceA.md) | internal force units |
+
+For velocity-command injection the injection is the term that substitutes for or adds to the velocity-loop reference [VelRef](../10-motion/01-kinematics-status/VelRef.md). For current-command injection, while the motor is unphased the [InjectCurrDC](InjectCurrDC.md) offset is suppressed to avoid an uncontrolled steady current. The pulse waveform ([InjectType](InjectType.md) = 5) is only valid at the current command (`InjectPoint = 0`).
+
 ## Examples
 
 ```text
@@ -59,3 +70,4 @@ AInjectPoint        ; query the current injection point
 - [InjectPosAmp](InjectPosAmp.md) — amplitude for position-command injection (InjectPoint = 2)
 - [InjectForceA](InjectForceA.md) — amplitude for force-command injection (InjectPoint = 3)
 - [InjectedValue](InjectedValue.md) — current injected value
+- [VelRef](../10-motion/01-kinematics-status/VelRef.md) — velocity-loop reference modified by velocity-command injection

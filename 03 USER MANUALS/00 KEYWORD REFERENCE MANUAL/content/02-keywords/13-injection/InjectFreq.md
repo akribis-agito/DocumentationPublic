@@ -38,6 +38,8 @@ Frequency of the injected sine or square wave, in Hz/100.
 
 The frequency in Hz is `InjectFreq / 100`. For example, an 11.2 Hz wave requires `InjectFreq = 1120`.
 
+Internally the controller advances a phase angle every controller cycle by an amount proportional to `InjectFreq`, wrapping at one full turn. For a **sine** waveform the phase indexes an internal sine table (with interpolation between table entries) so the output is a smooth sinusoid at the set frequency; for a **square** waveform the output is +amplitude for the first half of each phase cycle and −amplitude for the second half. The same frequency therefore controls both shapes. Because the step is taken once per controller cycle, very high frequencies are represented by fewer samples per period; the chirp waveform ([InjectChirpF](InjectChirpF.md)) uses a separate mechanism that guarantees a minimum number of samples per sine.
+
 ## Examples
 
 ```text

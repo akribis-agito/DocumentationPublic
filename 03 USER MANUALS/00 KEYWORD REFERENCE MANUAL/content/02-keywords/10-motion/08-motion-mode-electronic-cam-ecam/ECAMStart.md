@@ -42,6 +42,18 @@ $$
 ECAMStart \leq ECAMStartCyc < ECAMEndCyc \leq ECAMEnd
 $$
 
+The four index keywords divide the cam pattern into three parts that the controller plays back as the master advances:
+
+| Segment | Index range | Role |
+|----|----|----|
+| Leading (one-shot) | `ECAMStart` … `ECAMStartCyc` | Played once as the master enters the range; acts as a lead-in/acceleration segment. |
+| Repeating | `ECAMStartCyc` … `ECAMEndCyc` | Replayed `abs(ECAMCycles)` times (see [ECAMCycles](ECAMCycles.md)). |
+| Trailing (one-shot) | `ECAMEndCyc` … `ECAMEnd` | Played once as the master leaves the cycles; acts as a lead-out/deceleration segment. |
+
+`ECAMStart` is the very first entry of the pattern. While the master sits at or below the master position that maps to `ECAMStart` (the *pre-start* region), the follower reference is clamped to `GenData[ECAMStart]` (for positive [ECAMGap](ECAMGap.md)) so it holds steady rather than running off the table; with negative `ECAMGap` the roles of `ECAMStart` and `ECAMEnd` as the clamped ends are swapped. If a [StopECAM](StopECAM.md) is pending when the master reaches this clamp, the motion ends there.
+
+If `ECAMCycles = 1` there is no repetition, so `ECAMStartCyc` and `ECAMEndCyc` are not used and the whole pattern is simply `ECAMStart` … `ECAMEnd`.
+
 ## Examples
 
 ```text
@@ -53,4 +65,5 @@ AECAMStart[1]       ; read current value
 
 - [ECAMEnd](ECAMEnd.md) — end index of the overall pattern
 - [ECAMStartCyc](ECAMStartCyc.md) / [ECAMEndCyc](ECAMEndCyc.md) — bounds of the repeating segment
+- [ECAMGap](ECAMGap.md) — master-to-index mapping and direction
 - [GenData](../../20-arrays/GenData.md) — array storing the cam pattern

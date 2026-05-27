@@ -42,6 +42,12 @@ $$
 ECAMStart \leq ECAMStartCyc < ECAMEndCyc \leq ECAMEnd
 $$
 
+`ECAMStartCyc` and [ECAMEndCyc](ECAMEndCyc.md) bound the repeating segment that is replayed `abs(ECAMCycles)` times (see [ECAMStart](ECAMStart.md) for the leading / repeating / trailing segment model). As the master advances past `ECAMEndCyc`, the controller wraps the master window back by one cycle width, replays the segment from `ECAMStartCyc` again, and steps [ECAMCycCount](ECAMCycCount.md). The master spacing of one cycle equals `abs(ECAMGap) * (ECAMEndCyc - ECAMStartCyc)`.
+
+To keep the follower moving continuously across cycles even when `GenData[ECAMStartCyc]` and `GenData[ECAMEndCyc]` differ, the controller adds the height difference `GenData[ECAMEndCyc] - GenData[ECAMStartCyc]` to an accumulated slave offset on each completed cycle (and subtracts it when stepping backwards). The follower therefore advances by that amount per cycle instead of snapping back to the segment's first value.
+
+If the master jumps by more than one full cycle width in a single control cycle, the controller cannot resolve which cycle it belongs to and faults the axis (motor off).
+
 ## Examples
 
 ```text
@@ -52,5 +58,6 @@ AECAMStartCyc[1]    ; read current value
 ## See also
 
 - [ECAMEndCyc](ECAMEndCyc.md) — end index of the repeating segment
-- [ECAMStart](ECAMStart.md) / [ECAMEnd](ECAMEnd.md) — bounds of the overall pattern
+- [ECAMStart](ECAMStart.md) / [ECAMEnd](ECAMEnd.md) — bounds of the overall pattern (segment model)
 - [ECAMCycles](ECAMCycles.md) — number of times the repeating segment occurs
+- [ECAMCycCount](ECAMCycCount.md) — current cycle index, stepped at each wrap

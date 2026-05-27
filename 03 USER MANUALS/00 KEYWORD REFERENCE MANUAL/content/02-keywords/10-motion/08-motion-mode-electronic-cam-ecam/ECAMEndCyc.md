@@ -42,6 +42,10 @@ $$
 ECAMStart \leq ECAMStartCyc < ECAMEndCyc \leq ECAMEnd
 $$
 
+`ECAMEndCyc` is the upper bound of the repeating segment that begins at [ECAMStartCyc](ECAMStartCyc.md) (see [ECAMStart](ECAMStart.md) for the leading / repeating / trailing segment model). One full cycle spans `abs(ECAMGap) * (ECAMEndCyc - ECAMStartCyc)` in master units. When the master crosses the position that maps to `ECAMEndCyc`, the controller wraps to the next cycle: it steps [ECAMCycCount](ECAMCycCount.md) and accumulates the slave-position offset `GenData[ECAMEndCyc] - GenData[ECAMStartCyc]` so the follower continues smoothly instead of jumping back to the segment's start value. After the last cycle the controller plays the trailing one-shot segment from `ECAMEndCyc` to [ECAMEnd](ECAMEnd.md).
+
+In the endless modes (`ECAMCycles = 2147483647` or `-2147483648`) the master wraps within this `ECAMStartCyc … ECAMEndCyc` window indefinitely; table entries between `ECAMEndCyc` and `ECAMEnd` are ignored. See [ECAMCycles](ECAMCycles.md).
+
 ## Examples
 
 ```text
@@ -52,5 +56,6 @@ AECAMEndCyc[1]      ; read current value
 ## See also
 
 - [ECAMStartCyc](ECAMStartCyc.md) — start index of the repeating segment
-- [ECAMStart](ECAMStart.md) / [ECAMEnd](ECAMEnd.md) — bounds of the overall pattern
+- [ECAMStart](ECAMStart.md) / [ECAMEnd](ECAMEnd.md) — bounds of the overall pattern (segment model)
 - [ECAMCycles](ECAMCycles.md) — number of times the repeating segment occurs
+- [ECAMCycCount](ECAMCycCount.md) — current cycle index, stepped at each wrap

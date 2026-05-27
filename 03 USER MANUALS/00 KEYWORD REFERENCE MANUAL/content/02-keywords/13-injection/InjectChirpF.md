@@ -41,6 +41,10 @@ Initial and final frequencies of the chirp injection, in Hz/100.
 
 The frequency in Hz is the stored value divided by 100. For example, an initial chirp frequency of 5 Hz requires `InjectChirpF[1] = 500`.
 
+Whenever this array (or [InjectType](InjectType.md)) is written, the controller precomputes the sweep so that the instantaneous frequency rises **linearly** from the initial to the final frequency over one chirp period, then snaps back to the initial frequency and repeats. The chirp period is derived from the final frequency so that each individual sine within the sweep is represented by at least 16 samples (see [InjectType](InjectType.md) for the period formula). Because the sweep is recomputed on write, both array entries should be set before the chirp is started; the final frequency also determines how long the sweep takes.
+
+Both frequencies must lie within the keyword range (0.1 Hz to 1000 Hz, i.e. stored 10 to 100000). The waveform amplitude comes from the amplitude keyword tied to the selected [InjectPoint](InjectPoint.md).
+
 ## Examples
 
 ```text

@@ -32,10 +32,20 @@ Reserved internal ECAM keyword (not implemented).
 
 ## Overview
 
-`ECAMInterp` is a reserved internal keyword in the ECAM motion group. Its valid range is fixed at `[0, 0]`.
+`ECAMInterp` is a reserved keyword in the ECAM motion group, intended to select the interpolation mode used between cam-table entries. It is an array of 10 cam patterns, one element per pattern. Its valid range is fixed at `[0, 0]`, so the only accepted value is `0`.
 
-> **Documentation pending:** `ECAMInterp` is currently reserved and not implemented (`implemented: not_implemented`). No user-facing behaviour is defined.
+The interpolation between successive [GenData](../../20-arrays/GenData.md) entries is currently always **linear** — the controller blends the two neighbouring table values by the fractional master position (see [ECAMGap](ECAMGap.md) for the mapping). No alternative interpolation mode is selectable.
+
+> **Documentation pending:** `ECAMInterp` is currently reserved and not implemented (`implemented: not_implemented`). It accepts only `0`; no value-dependent behaviour is defined.
+
+## Examples
+
+```text
+AECAMInterp[1]      ; read the (reserved) interpolation mode for cam pattern 1
+```
 
 ## See also
 
+- [ECAMGap](ECAMGap.md) — master-to-index mapping and the linear interpolation applied
+- [GenData](../../20-arrays/GenData.md) — array storing the cam pattern
 - [Motion mode – Electronic cam (ECAM)](00-overview.md) — ECAM motion overview

@@ -35,7 +35,9 @@ DC offset added to current-command injection in direct mode, in mA.
 
 ## Overview
 
-`InjectCurrDC` is the DC offset of the injected current value, in mA. It applies only when [InjectPoint](InjectPoint.md) selects the current command (`InjectPoint = 0`) and [InjectType](InjectType.md) selects a direct injection mode. It shifts the waveform set by [InjectCurrAmp](InjectCurrAmp.md) about a non-zero current level.
+`InjectCurrDC` is the DC offset of the injected current value, in mA. It applies only when [InjectPoint](InjectPoint.md) selects the current command (`InjectPoint = 0`). It shifts the waveform set by [InjectCurrAmp](InjectCurrAmp.md) about a non-zero current level, so the injected current oscillates around the DC offset rather than around zero.
+
+The offset is added to the current command in both direct and additive [InjectType](InjectType.md) modes. The controller applies it only after commutation/phasing of the motor is complete; while the motor is unphased the DC term is suppressed (the waveform is still injected, but without the offset) to avoid an uncontrolled steady current.
 
 ## Examples
 
