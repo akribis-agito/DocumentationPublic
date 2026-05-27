@@ -1,5 +1,6 @@
 ---
 keyword: EventAlwaysOn
+summary: Forces the event output permanently active, ignoring position and table conditions.
 availability:
   standalone:
   - v4
@@ -26,10 +27,24 @@ overrides: {}
 ---
 # EventAlwaysOn
 
-**Definition:**
+Forces the event output permanently active, ignoring position and table conditions.
 
-EventAlwaysOn forces the event output to be permanently active regardless of position or table conditions. It is an axis-related parameter saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`EventAlwaysOn` overrides normal position-based event generation and holds the event output active regardless of the configured positions, ranges, or table. Use it to manually assert the event output (for example, to test wiring or hold a downstream device on) without changing the rest of the event configuration. Normal, position-triggered output is controlled instead by [EventOn](EventOn.md) together with [EventSelect](EventSelect.md) and [EventType](EventType.md). The current output level can be read back through [EventLoopback](EventLoopback.md).
 
-[EventSelect](EventSelect.md), [EventOn](EventOn.md), [EventLoopback](EventLoopback.md)
+It is an axis-related parameter saved to flash and can be changed at any time.
+
+## Examples
+
+```text
+EventAlwaysOn=1     ; force the event output permanently active
+EventAlwaysOn=0     ; return to normal position-based generation
+EventAlwaysOn?      ; query the current setting
+```
+
+## See also
+
+- [EventOn](EventOn.md) — enables normal position-triggered event generation
+- [EventSelect](EventSelect.md) — selects the event-generator operating mode
+- [EventLoopback](EventLoopback.md) — reads back the actual output state

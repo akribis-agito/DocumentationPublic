@@ -1,5 +1,6 @@
 ---
 keyword: InjectCurrDC
+summary: DC offset added to current-command injection in direct mode, in mA.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # InjectCurrDC
 
-**Condition:**
+DC offset added to current-command injection in direct mode, in mA.
 
-InjectCurrDC is only applicable for injection at current command (InjectPoint = 0), in direct injection mode (see InjectType for more information).
+## Overview
 
-**Definition:**
+`InjectCurrDC` is the DC offset of the injected current value, in mA. It applies only when [InjectPoint](InjectPoint.md) selects the current command (`InjectPoint = 0`) and [InjectType](InjectType.md) selects a direct injection mode. It shifts the waveform set by [InjectCurrAmp](InjectCurrAmp.md) about a non-zero current level.
 
-InjectCurrDC is the offset of the current injection value, in terms of mA.
+## Examples
+
+```text
+InjectCurrDC=500        ; 500 mA DC offset
+InjectCurrDC=0          ; no offset (default)
+InjectCurrDC?           ; query the current DC offset
+```
+
+## See also
+
+- [InjectPoint](InjectPoint.md) — must be 0 for current-command injection
+- [InjectType](InjectType.md) — selects the waveform and direct/additive mode
+- [InjectCurrAmp](InjectCurrAmp.md) — amplitude of the current injection

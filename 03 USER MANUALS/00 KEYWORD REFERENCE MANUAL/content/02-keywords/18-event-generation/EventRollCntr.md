@@ -1,5 +1,6 @@
 ---
 keyword: EventRollCntr
+summary: Position span after which the event position counter wraps around (rollover threshold).
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # EventRollCntr
 
-**Definition:**
+Position span after which the event position counter wraps around (rollover threshold).
 
-EventRollCntr sets the rollover counter threshold for the event generation mechanism, defining the position span after which the event position counter wraps around. It is an axis-related parameter expressed in user units, saved to flash, and can be changed at any time.
+## Overview
 
-**See also:**
+`EventRollCntr` sets the rollover threshold for the event-generation mechanism, defining the position span, in user units, after which the event position counter wraps around. It is used with [EventRollOff](EventRollOff.md), which shifts the event grid after each rollover, to support cyclic or rotary applications. It is an axis-related parameter saved to flash and can be changed at any time.
 
-[EventRollOff](EventRollOff.md), [EventSelect](EventSelect.md), [EventTable](EventTable.md)
+## Examples
+
+```text
+EventRollCntr=360000    ; wrap the event counter every 360000 user units
+EventRollCntr?          ; query the current rollover threshold
+```
+
+## See also
+
+- [EventRollOff](EventRollOff.md) — offset applied on rollover
+- [EventSelect](EventSelect.md) — selects the event-generator mode
+- [EventTable](EventTable.md) — table of event positions

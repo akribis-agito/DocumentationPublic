@@ -23,13 +23,27 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+summary: Rate at which the map error offset ramps toward its target.
 ---
 # MapErrOffRamp
 
-**Definition:**
+Rate at which the map error offset ramps toward its target.
 
-MapErrOffRamp sets the rate at which the map error offset (MapErrOffset) is ramped toward its target value when a map correction change is commanded. A higher value causes the offset to converge more quickly. It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
+## Overview
 
-**See also:**
+`MapErrOffRamp` sets the rate at which [MapErrOffset](MapErrOffset.md) is ramped toward its target value when the map correction changes. Ramping the offset rather than applying it as a step avoids an abrupt position jump in the corrected feedback. A higher value makes the offset converge more quickly. It works alongside [MapErrOnStep](MapErrOnStep.md), which sets the step applied when mapping engages, and [MapType](MapType.md), which enables the mapping.
 
-[MapErrOffset](MapErrOffset.md), [MapErrOnStep](MapErrOnStep.md), [MapType](MapType.md)
+It is an axis-scoped parameter saved to flash and can be changed at any time, including during motion.
+
+## Examples
+
+```text
+MapErrOffRamp=16384 ; default convergence rate
+MapErrOffRamp?      ; query the current ramp rate
+```
+
+## See also
+
+- [MapErrOffset](MapErrOffset.md) — the offset this keyword ramps
+- [MapErrOnStep](MapErrOnStep.md) — step size applied when mapping engages
+- [MapType](MapType.md) — enables the error mapping

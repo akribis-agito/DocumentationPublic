@@ -1,5 +1,6 @@
 ---
 keyword: FastIdDownSam
+summary: Downsampling factor that sets the PRBS new-value generation rate.
 availability:
   standalone:
   - v4
@@ -26,18 +27,31 @@ overrides: {}
 ---
 # FastIdDownSam
 
-**Condition:**
+Downsampling factor that sets the PRBS new-value generation rate.
 
-FastIdDownSam is only applicable for PRBS injection (InjectType = 6 or 7).
+## Overview
 
-**Definition:**
+`FastIdDownSam` sets the downsampling factor for the PRBS (pseudorandom binary sequence) generation rate. It applies only when [InjectType](InjectType.md) selects PRBS injection (`InjectType = 6 or 7`). A larger value slows the rate at which new binary values are produced relative to the controller cycle rate. The PRBS sequence index can be reset with [FastIdInit](FastIdInit.md).
 
-FastIdDownSam defines the downsampling factor for generation rate of PRBS, as shown.
+## How it works
 
 $$
 Rate\ of\ generation\ of\ new\ binary\ value\ \lbrack Hz\rbrack = \ \frac{Controller\ cycle\ rate\lbrack Hz\rbrack}{2^{FastIdDownSam}}
 $$
 
-Please refer to InjectType for more information on the PRBS waveform.
+For example, with `FastIdDownSam = 1`, a new binary value is produced every 2 controller cycles.
 
-<span class="mark">**DN:** This value is not reset by PCSuite.</span>
+## Examples
+
+```text
+FastIdDownSam=1     ; new value every 2 controller cycles
+FastIdDownSam=3     ; new value every 8 controller cycles (default)
+FastIdDownSam?      ; query the current downsampling factor
+```
+
+> **Note:** this value is not reset by PCSuite.
+
+## See also
+
+- [InjectType](InjectType.md) — selects the PRBS waveform
+- [FastIdInit](FastIdInit.md) — resets the PRBS sequence index

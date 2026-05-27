@@ -1,5 +1,6 @@
 ---
 keyword: EventTable
+summary: Array of absolute positions at which event output pulses are generated.
 availability:
   standalone:
   - v4
@@ -26,10 +27,23 @@ overrides: {}
 ---
 # EventTable
 
-**Definition:**
+Array of absolute positions at which event output pulses are generated.
 
-EventTable is an array of positions at which event output pulses are generated. Each element defines an absolute position trigger point in user units. It is an axis-related array parameter and is not saved to flash.
+## Overview
 
-**See also:**
+`EventTable` is an array of positions at which event output pulses are generated in the table-driven event mode (see [EventType](EventType.md)). Each element defines an absolute position trigger point in user units; entries should be ordered from low to high. The active range of the table is bounded by [EventTableBeg](EventTableBeg.md) and [EventTableEnd](EventTableEnd.md), and corrected positions are produced by [EventCorrect](EventCorrect.md) into [EventTableCor](EventTableCor.md). It is an axis-related array parameter and is not saved to flash.
 
-[EventTableCor](EventTableCor.md), [EventTableSel](EventTableSel.md), [EventTableSrc](EventTableSrc.md), [EventTableWid](EventTableWid.md)
+## Examples
+
+```text
+EventTable[1]=1000      ; first table position (user units)
+EventTable[2]=3000      ; second table position
+EventTable[1]?          ; query the first table entry
+```
+
+## See also
+
+- [EventTableCor](EventTableCor.md) — corrected positions after EventCorrect
+- [EventTableSel](EventTableSel.md) — per-entry selection
+- [EventTableSrc](EventTableSrc.md) — position source for table evaluation
+- [EventTableWid](EventTableWid.md) — per-entry pulse width override

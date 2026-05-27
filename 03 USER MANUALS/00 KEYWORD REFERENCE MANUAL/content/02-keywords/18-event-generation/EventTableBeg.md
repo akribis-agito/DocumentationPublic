@@ -1,5 +1,6 @@
 ---
 keyword: EventTableBeg
+summary: Starting index of the active region within the event table.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # EventTableBeg
 
-**Definition:**
+Starting index of the active region within the event table.
 
-EventTableBeg sets the starting index of the active region within the event table, allowing a subset of the table entries to be used for event generation. It is an axis-related parameter saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`EventTableBeg` sets the starting index of the active region within [EventTable](EventTable.md), allowing a subset of the table entries to be used for event generation. It pairs with [EventTableEnd](EventTableEnd.md), which marks the last active entry. The index is 1-based (range 1–100). It is an axis-related parameter saved to flash and can be changed at any time.
 
-[EventTableEnd](EventTableEnd.md), [EventTable](EventTable.md), [EventTableSel](EventTableSel.md)
+## Examples
+
+```text
+EventTableBeg=1     ; start event generation at the first table entry
+EventTableBeg?      ; query the configured start index
+```
+
+## See also
+
+- [EventTableEnd](EventTableEnd.md) — last active table index
+- [EventTable](EventTable.md) — table of event positions
+- [EventTableSel](EventTableSel.md) — per-entry selection

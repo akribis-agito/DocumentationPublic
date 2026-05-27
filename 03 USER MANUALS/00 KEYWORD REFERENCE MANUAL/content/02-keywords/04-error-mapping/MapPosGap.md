@@ -23,13 +23,27 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+summary: Encoder-count spacing between adjacent error-mapping points.
 ---
 # MapPosGap
 
-**Definition:**
+Encoder-count spacing between adjacent error-mapping points.
 
-MapPosGap is a per-segment array that sets the position spacing between consecutive correction entries within each error-mapping segment. A larger gap means fewer correction points are used to cover the segment's positional range. It is an axis-related array saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+## Overview
 
-**See also:**
+`MapPosGap` is a per-dimension array that sets the position spacing, in encoder counts, between consecutive correction points along each error-mapping dimension. A larger gap spreads the same number of points across a wider positional range, giving coarser resolution. Together with [MapStartPos](MapStartPos.md) (start) and [MapLength](MapLength.md) (count) it defines the coordinates of the points stored in [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md).
 
-[MapLength](MapLength.md), [MapStartPos](MapStartPos.md), [MapTable/MapTableB/MapTableC/MapTableD/MapTableE](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md)
+It is an axis-scoped array saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+
+## Examples
+
+```text
+MapPosGap[1]=1000   ; correction points 1000 encoder counts apart
+MapPosGap[1]?       ; query the spacing for the first dimension
+```
+
+## See also
+
+- [MapLength](MapLength.md) — number of correction points per dimension
+- [MapStartPos](MapStartPos.md) — start position of each dimension
+- [MapTable/MapTableB/MapTableC/MapTableD/MapTableE](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) — correction values at each point

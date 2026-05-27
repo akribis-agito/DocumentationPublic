@@ -1,5 +1,6 @@
 ---
 keyword: InjectType
+summary: Selects the injection waveform shape and whether it is direct or additive.
 availability:
   standalone:
   - v4
@@ -26,9 +27,13 @@ overrides: {}
 ---
 # InjectType
 
-**Definition:**
+Selects the injection waveform shape and whether it is direct or additive.
 
-InjectType defines the injection waveform and mode.
+## Overview
+
+`InjectType` defines both the shape of the injected test waveform and its injection mode (direct or additive). It works together with [InjectPoint](InjectPoint.md), which selects where in the loop the waveform is applied. Depending on the waveform chosen, an additional waveform-specific keyword must be configured: [InjectFreq](InjectFreq.md) for sine/square, [InjectChirpF](InjectChirpF.md) for chirp, [InjectTimeOn](InjectTimeOn.md) for pulse, and [FastIdDownSam](FastIdDownSam.md) / [FastIdInit](FastIdInit.md) for PRBS. The injection amplitude always comes from the amplitude keyword tied to the selected `InjectPoint`.
+
+## How it works
 
 | Value | Waveforms | Injection mode |
 |---|---|---|
@@ -43,14 +48,39 @@ InjectType defines the injection waveform and mode.
 | 8 | Chirp | Direct |
 | 9 | Chirp | Additive |
 
-Each waveform shape is described as shown.
+### Waveform descriptions
 
-**Note:**
+- **Sinusoid** — Amplitude is set by the amplitude keyword specific to the injection location ([InjectPoint](InjectPoint.md)); frequency is set by [InjectFreq](InjectFreq.md). The phase starts from 0 at the start of injection.
+- **Square wave** — Amplitude is set by the amplitude keyword specific to the injection location; frequency is set by [InjectFreq](InjectFreq.md). The initial value is the positive amplitude value.
+- **PRBS** — Generation of binary values from a pre-defined random binary sequence (8192 binary values). The sequence repeats once the index reaches the end. The generation rate depends on the controller cycle rate (typically 16.384 kHz) and the down-sampling keyword [FastIdDownSam](FastIdDownSam.md). For example, if `FastIdDownSam = 1`, a new binary value is produced every 2 controller cycles. Injection amplitude is determined by the keyword tied to the injection location.
+- **Chirp** — A sinusoidal waveform with increasing frequency. Once the frequency reaches the maximum value, the chirp repeats. The initial and final frequencies are defined by the [InjectChirpF](InjectChirpF.md) array, while the injection amplitude is determined by the keyword tied to the injection location. The period of the chirp is defined as shown.
 
-Waveform Descriptions Sinusoid The sinusoid amplitude is defined by amplitude keywords specific to the injection location (InjectPoint). Its frequency is defined by InjectFreq. The phase starts from 0 at the start of injection. To illustrate with current command injection, Square wave The square wave amplitude is defined by amplitude keywords specific to the injection location. Its frequency is defined by InjectFreq. The initial value is the positive amplitude value. To illustrate with position command injection, PRBS PRBS is the generation of binary values from a pre-defined random binary sequence (8192 binary values). The sequence repeats once the index reaches the end. The generation rate depends on the controller cycle rate (typically 16.384kHz) and the down-sampling keyword (FastIdDownSam). Injection amplitude is determined by specific keyword tied to the injection location. For example, if FastIdDownSam = 1, new binary value is produced every 2 controller cycles. Chirp Chirp is the sinusoidal waveform with increasing frequency. Once the frequency reaches the maximum value, the chirp repeats. The initial and final frequencies are defined by InjectChirpF array, while the injection amplitude is determined by specific keyword tied to the injection location. The period of the chirp is defined as shown. $$Period\ of\ chirp\ \lbrack s\rbrack = \ 0.5*int\left( \max\left( \frac{1}{16 \bullet T_{s} \bullet f_{final}},1 \right) \right)\ \ $$ For example, the chirp below starts from 1Hz and ends with 200Hz, where chirp period is 2.5s.
+$$Period\ of\ chirp\ \lbrack s\rbrack = \ 0.5*int\left( \max\left( \frac{1}{16 \bullet T_{s} \bullet f_{final}},1 \right) \right)\ \ $$
 
-The mode of injection is described as shown. At appropriate injection locations, direct injection will be akin to open-loop injection.
+For example, a chirp that starts from 1 Hz and ends with 200 Hz has a chirp period of 2.5 s.
+
+### Injection mode
+
+At appropriate injection locations, direct injection is akin to open-loop injection.
 
 | Direct injection (preceding signal is cut-off/ignored) | Additive injection (preceding signal is summed with the injection signal) |
 |:--:|:--:|
 | <img alt="A white circle with red x and black text AI-generated content may be incorrect." src="image70.png" style="width:2.94528in;height:0.86944in"/> | <img alt="A white circle with a black background AI-generated content may be incorrect." src="image71.png" style="width:2.96944in;height:0.86728in"/> |
+
+## Examples
+
+```text
+InjectType=2        ; additive sinusoid injection
+InjectType=6        ; direct PRBS injection
+InjectType=0        ; disable injection
+InjectType?         ; query the current waveform/mode
+```
+
+## See also
+
+- [InjectPoint](InjectPoint.md) — selects the injection location in the loop
+- [InjectFreq](InjectFreq.md) — frequency for sine/square waveforms
+- [InjectChirpF](InjectChirpF.md) — start/end frequencies for chirp
+- [InjectTimeOn](InjectTimeOn.md) — pulse duration
+- [FastIdDownSam](FastIdDownSam.md) — PRBS generation downsampling factor
+- [FastIdInit](FastIdInit.md) — resets the PRBS sequence index

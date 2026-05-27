@@ -1,5 +1,6 @@
 ---
 keyword: EventRollOff
+summary: Position offset applied to the event grid each time the event counter rolls over.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # EventRollOff
 
-**Definition:**
+Position offset applied to the event grid each time the event counter rolls over.
 
-EventRollOff sets the position offset applied when the event counter rolls over, allowing the event grid to be shifted after each cycle. It is an axis-related parameter expressed in user units, saved to flash, and can be changed at any time.
+## Overview
 
-**See also:**
+`EventRollOff` sets the position offset, in user units, applied when the event counter rolls over, allowing the event grid to be shifted after each cycle. It works together with [EventRollCntr](EventRollCntr.md), which defines the rollover span. It is an axis-related parameter saved to flash and can be changed at any time.
 
-[EventRollCntr](EventRollCntr.md), [EventSelect](EventSelect.md), [EventTable](EventTable.md)
+## Examples
+
+```text
+EventRollOff=100    ; shift the event grid by 100 user units on each rollover
+EventRollOff?       ; query the current offset
+```
+
+## See also
+
+- [EventRollCntr](EventRollCntr.md) — rollover position span
+- [EventSelect](EventSelect.md) — selects the event-generator mode
+- [EventTable](EventTable.md) — table of event positions

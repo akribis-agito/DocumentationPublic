@@ -1,5 +1,6 @@
 ---
 keyword: InjectFreq
+summary: Frequency of the injected sine or square wave, in Hz/100.
 availability:
   standalone:
   - v4
@@ -26,12 +27,26 @@ overrides: {}
 ---
 # InjectFreq
 
-**Condition:**
+Frequency of the injected sine or square wave, in Hz/100.
 
-InjectFreq is only applicable for sine and square wave injection (InjectType = 1, 2, 3 or 4).
+## Overview
 
-**Definition:**
+`InjectFreq` sets the frequency of the injected sine or square wave, expressed in units of Hz/100 (so the stored value is the frequency in Hz multiplied by 100). It applies only when [InjectType](InjectType.md) selects a sine or square waveform (`InjectType = 1, 2, 3 or 4`). The waveform amplitude comes from the amplitude keyword tied to the selected [InjectPoint](InjectPoint.md).
 
-InjectFreq is the frequency of the sine/square wave, in terms of Hz/100.
+## How it works
 
-For example, if the sine wave frequency is 11.2Hz, InjectFreq should be 1120. Please refer to InjectType for more information on the sine and square waves.
+The frequency in Hz is `InjectFreq / 100`. For example, an 11.2 Hz wave requires `InjectFreq = 1120`.
+
+## Examples
+
+```text
+InjectFreq=1120     ; 11.2 Hz sine/square wave
+InjectFreq=200      ; 2 Hz
+InjectFreq?         ; query the current injection frequency
+```
+
+## See also
+
+- [InjectType](InjectType.md) — selects the sine/square waveform that uses this frequency
+- [InjectChirpF](InjectChirpF.md) — start/end frequencies for chirp injection
+- [InjectPoint](InjectPoint.md) — selects the injection location

@@ -23,13 +23,30 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+summary: Selects the error-mapping dimension (off, 1D, 2D, or 3D).
 ---
 # MapType
 
-**Definition:**
+Selects the error-mapping dimension (off, 1D, 2D, or 3D).
 
-MapType selects the error-mapping correction mode applied to the axis position feedback. Setting this to a non-zero value activates position error compensation using the correction values stored in the MapTable arrays. It is an axis-related parameter, not saved to flash, and cannot be changed while the axis is in motion.
+## Overview
 
-**See also:**
+`MapType` selects the error-mapping correction mode applied to the axis position feedback. Error mapping corrects the measured feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)) rather than the command ([PosRef](../10-motion/01-kinematics-status/PosRef.md)), so a non-zero value enables position-error compensation using the correction values stored in the [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) arrays. The valid range is `0` to `3`, corresponding to mapping off, 1D, 2D, and 3D.
 
-[MapTable/MapTableB/MapTableC/MapTableD/MapTableE](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md), [MapEncoder](MapEncoder.md), [MapStartIndex](MapStartIndex.md), [PosBeforeMap](PosBeforeMap.md)
+The geometry of the map is defined by [MapStartPos](MapStartPos.md), [MapPosGap](MapPosGap.md), and [MapLength](MapLength.md); [MapEncoder](MapEncoder.md) chooses the encoder source per segment; and [MapStartIndex](MapStartIndex.md) selects the first active segment. The uncorrected position is available as [PosBeforeMap](PosBeforeMap.md) for diagnostics. `MapType` is axis-scoped, is not saved to flash, and cannot be changed while the axis is in motion.
+
+## Examples
+
+```text
+MapType=1           ; enable 1D error mapping
+MapType=0           ; disable error mapping
+MapType?            ; query the active mapping mode
+```
+
+## See also
+
+- [MapTable/MapTableB/MapTableC/MapTableD/MapTableE](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) — correction values applied by mapping
+- [MapEncoder](MapEncoder.md) — encoder source used for each map segment
+- [MapStartIndex](MapStartIndex.md) — first active map segment
+- [PosBeforeMap](PosBeforeMap.md) — feedback position before correction is applied
+- [Pos](../10-motion/01-kinematics-status/Pos.md) — corrected feedback position that mapping adjusts

@@ -1,5 +1,6 @@
 ---
 keyword: EventTableSel
+summary: Per-entry selection array controlling each event table entry's characteristics.
 availability:
   standalone:
   - v4
@@ -26,10 +27,23 @@ overrides: {}
 ---
 # EventTableSel
 
-**Definition:**
+Per-entry selection array controlling each event table entry's characteristics.
 
-EventTableSel is an array that assigns a width value index or mode selection to each event table entry, controlling per-entry pulse characteristics. It is an axis-related array parameter and is not saved to flash.
+## Overview
 
-**See also:**
+`EventTableSel` is an array that assigns a width-value index or mode selection to each [EventTable](EventTable.md) entry, controlling per-entry pulse characteristics. It complements the global mode set by [EventSelect](EventSelect.md) and the per-entry pulse widths in [EventTableWid](EventTableWid.md). The active range of entries is bounded by [EventTableBeg](EventTableBeg.md) and [EventTableEnd](EventTableEnd.md). It is an axis-related array parameter and is not saved to flash.
 
-[EventTable](EventTable.md), [EventTableWid](EventTableWid.md), [EventTableBeg](EventTableBeg.md), [EventTableEnd](EventTableEnd.md)
+## Examples
+
+```text
+EventTableSel[1]=1      ; selection for the first table entry
+EventTableSel[2]=0      ; selection for the second table entry
+EventTableSel[1]?       ; query the first entry's selection
+```
+
+## See also
+
+- [EventTable](EventTable.md) — table of event positions
+- [EventTableWid](EventTableWid.md) — per-entry pulse width override
+- [EventTableBeg](EventTableBeg.md) — first active table index
+- [EventTableEnd](EventTableEnd.md) — last active table index

@@ -1,5 +1,6 @@
 ---
 keyword: EventGap
+summary: Position spacing between successive events in by-gap mode.
 availability:
   standalone:
   - v4
@@ -26,8 +27,22 @@ overrides: {}
 ---
 # EventGap
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Position spacing between successive events in by-gap mode.
 
-EventGap defines the position gap between event generations. Note that if Event Gap is small,
-and the velocity is high, a high PulseWidth may cause events to overlap.
+## Overview
+
+`EventGap` defines the position gap, in user units, between successive event generations in the by-gap event mode (see [EventType](EventType.md)). Events begin at [EventBegPos](EventBegPos.md) and repeat every `EventGap` until [EventEndPos](EventEndPos.md) is passed. If `EventGap` is small and the velocity is high, a large [EventPulseWid](EventPulseWid.md) may cause successive events to overlap.
+
+## Examples
+
+```text
+EventGap=2000       ; generate an event every 2000 user units
+EventGap?           ; query the configured gap
+```
+
+## See also
+
+- [EventType](EventType.md) — selects the by-gap mode
+- [EventBegPos](EventBegPos.md) — position of the first event
+- [EventEndPos](EventEndPos.md) — last position for which events are generated
+- [EventPulseWid](EventPulseWid.md) — pulse width; large values can overlap at small gaps

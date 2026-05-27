@@ -1,5 +1,6 @@
 ---
 keyword: HallsAngle
+summary: Array mapping each Hall-sensor state to the electrical angle used for commutation.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # HallsAngle
 
-**Definition:**
+Array mapping each Hall-sensor state to the electrical angle used for commutation.
 
-HallsAngle is an array that stores the commutation angle associated with each Hall-sensor state transition. Each element maps one of the six valid Hall state combinations to the corresponding electrical angle used for FOC commutation. It is an axis-related array saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+## Overview
 
-**See also:**
+`HallsAngle` is an array that stores the commutation angle associated with each Hall-sensor state. Each valid Hall state combination (the six legal states reported by [HallsValue](HallsValue.md)) is mapped to the corresponding electrical angle used for commutation. This table lets the controller derive the motor electrical angle directly from the Hall sensors. The raw angle can be smoothed with [HallOnlyFilt](HallOnlyFilt.md) when running in Hall-only commutation mode (selected via [ComtMode](ComtMode.md)), and the resulting angle is reported by [ComtAng](ComtAng.md). Being an array, axis-scope, and flash-saved, it cannot be changed while the motor is on or in motion (per-element range 0–360).
 
-[HallsValue](HallsValue.md), [HallsAngleSw](HallsAngleSw.md), [HallOnlyFilt](HallOnlyFilt.md)
+## Examples
+
+```text
+HallsAngle[1]?      ; query the angle mapped to the first Hall state
+HallsAngle[1]=30    ; set the electrical angle (deg) for that Hall state
+```
+
+## See also
+
+- [HallsValue](HallsValue.md) — current raw Hall sensor state (the index source)
+- [HallsAngleSw](HallsAngleSw.md) — Hall-to-encoder commutation switch-over angle
+- [HallOnlyFilt](HallOnlyFilt.md) — filter for the Hall-based commutation angle
+- [ComtMode](ComtMode.md) — selects the commutation method

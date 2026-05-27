@@ -23,13 +23,27 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+summary: Current position-error offset applied on top of the map correction.
 ---
 # MapErrOffset
 
-**Definition:**
+Current position-error offset applied on top of the map correction.
 
-MapErrOffset holds a temporary position-error offset that is added to the map correction during an active offset ramping operation. It reflects the current correction offset being applied and is cleared when the ramp completes. It is an axis-related parameter, not saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+## Overview
 
-**See also:**
+`MapErrOffset` holds a position-error offset that is added to the map correction. When the active correction changes (for example as error mapping is engaged), the offset is ramped toward its target rather than applied as a step; `MapErrOffset` reflects the value currently in effect during that transition. The convergence behaviour is governed by [MapErrOffRamp](MapErrOffRamp.md) (ramp rate) and [MapErrOnStep](MapErrOnStep.md) (step size when applied on engagement). The underlying mapping is enabled by [MapType](MapType.md).
 
-[MapErrOffRamp](MapErrOffRamp.md), [MapErrOnStep](MapErrOnStep.md), [MapType](MapType.md)
+It is an axis-scoped parameter, not saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+
+## Examples
+
+```text
+MapErrOffset?       ; read the offset currently applied to the map correction
+MapErrOffset=0      ; clear the applied offset
+```
+
+## See also
+
+- [MapErrOffRamp](MapErrOffRamp.md) — rate at which this offset converges
+- [MapErrOnStep](MapErrOnStep.md) — step size applied when mapping engages
+- [MapType](MapType.md) — enables the error mapping this offset modifies

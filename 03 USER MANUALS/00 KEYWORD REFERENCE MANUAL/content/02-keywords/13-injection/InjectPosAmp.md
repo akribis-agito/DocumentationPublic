@@ -1,5 +1,6 @@
 ---
 keyword: InjectPosAmp
+summary: Amplitude of position-command injection, in main user units.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # InjectPosAmp
 
-**Condition:**
+Amplitude of position-command injection, in main user units.
 
-InjectPosAmp is only applicable for injection at position command (InjectPoint = 2).
+## Overview
 
-**Definition:**
+`InjectPosAmp` is the amplitude of the injected waveform when injecting at the position command, expressed in the main user unit (configurable by `UsrUnits`). It applies only when [InjectPoint](InjectPoint.md) selects the position command (`InjectPoint = 2`). The waveform shape is chosen by [InjectType](InjectType.md).
 
-InjectPosAmp is the amplitude of the position injection, in terms of main user unit (configurable by UsrUnits).
+## Examples
+
+```text
+InjectPosAmp=100        ; position injection amplitude (default)
+InjectPosAmp?           ; query the current position injection amplitude
+```
+
+## See also
+
+- [InjectPoint](InjectPoint.md) — must be 2 for position-command injection
+- [InjectType](InjectType.md) — selects the waveform shape

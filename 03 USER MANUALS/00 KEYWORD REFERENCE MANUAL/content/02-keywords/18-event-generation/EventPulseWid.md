@@ -1,5 +1,6 @@
 ---
 keyword: EventPulseWid
+summary: Duration of the event output pulse in microseconds.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # EventPulseWid
 
-**Definition:**
+Duration of the event output pulse in microseconds.
 
-EventPulseWid sets the duration of the event output pulse in microseconds. It determines how long the output signal stays active after each event trigger. It is an axis-related parameter saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`EventPulseWid` sets the duration of the event output pulse, in microseconds, determining how long the output signal stays active after each event trigger. With small [EventGap](EventGap.md) values at high velocity, a large pulse width can cause successive pulses to overlap. Per-entry overrides for table-driven events are set with [EventTableWid](EventTableWid.md). It is an axis-related parameter saved to flash and can be changed at any time.
 
-[EventPulseRes](EventPulseRes.md), [EventTableWid](EventTableWid.md), [EventSelect](EventSelect.md)
+## Examples
+
+```text
+EventPulseWid=50    ; 50 us output pulse (default)
+EventPulseWid?      ; query the current pulse width
+```
+
+## See also
+
+- [EventPulseRes](EventPulseRes.md) — pulse-generator position resolution
+- [EventTableWid](EventTableWid.md) — per-entry pulse width override
+- [EventGap](EventGap.md) — small gaps with wide pulses can overlap

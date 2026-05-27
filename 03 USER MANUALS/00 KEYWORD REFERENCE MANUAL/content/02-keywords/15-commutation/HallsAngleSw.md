@@ -1,14 +1,18 @@
+---
+summary: Electrical angle at which commutation switches from Hall-based to encoder-based feedback during startup.
+---
 # HallsAngleSw
 
-**Definition:**
+Electrical angle at which commutation switches from Hall-based to encoder-based feedback during startup.
 
-HallsAngleSw sets the electrical angle at which the commutation switches from Hall-sensor-based to encoder-based feedback during startup. Below this angle threshold the controller uses the Hall sensors for commutation; above it, it transitions to encoder-based commutation. It is an axis-related parameter.
+## Overview
 
-%%
-Needs verification
-HallsAngleSw was not found in the AG300_CTL01Params.c firmware parameter table. Confirm availability and parameter attributes before use.
-%%
+`HallsAngleSw` sets the electrical angle at which commutation switches from Hall-sensor-based to encoder-based feedback during startup. Below this angle threshold the controller uses the Hall sensors ([HallsValue](HallsValue.md), [HallsAngle](HallsAngle.md)) for commutation; above it, it transitions to encoder-based commutation. It is described as an axis-related parameter.
 
-**See also:**
+> **Documentation pending:** `HallsAngleSw` was not found in the AG300_CTL01Params.c firmware parameter table. Its availability and parameter attributes (including frontmatter) are unverified and must be confirmed before use.
 
-[HallsAngle](HallsAngle.md), [HallsValue](HallsValue.md), [HallOnlyFilt](HallOnlyFilt.md)
+## See also
+
+- [HallsAngle](HallsAngle.md) — electrical angle mapped to each Hall state
+- [HallsValue](HallsValue.md) — current raw Hall sensor state
+- [HallOnlyFilt](HallOnlyFilt.md) — filter for the Hall-based commutation angle

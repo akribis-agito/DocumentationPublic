@@ -23,13 +23,29 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+summary: Starting position of each error-mapping dimension, in encoder counts.
 ---
 # MapStartPos
 
-**Definition:**
+Starting position of each error-mapping dimension, in encoder counts.
 
-MapStartPos is a per-segment array that defines the starting position of each error-mapping segment in encoder counts. Together with MapLength and MapPosGap it fully describes the positional extent and resolution of each map segment. It is an axis-related array saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+## Overview
 
-**See also:**
+`MapStartPos` is a per-dimension array that defines the position of the first correction point of each error-mapping dimension, in encoder counts. Together with [MapPosGap](MapPosGap.md) (spacing between points) and [MapLength](MapLength.md) (number of points) it fully describes the coordinates of the error-mapping points covered by the [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) entries. [MapEncoder](MapEncoder.md) selects which encoder each dimension is referenced to.
 
-[MapLength](MapLength.md), [MapPosGap](MapPosGap.md), [MapEncoder](MapEncoder.md), [MapTable/MapTableB/MapTableC/MapTableD/MapTableE](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md)
+It is an axis-scoped array saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+
+## Examples
+
+```text
+MapStartPos[1]=0        ; first dimension starts at encoder count 0
+MapStartPos[1]=-50000   ; first dimension starts at -50000 counts
+MapStartPos[1]?         ; query the start position of the first dimension
+```
+
+## See also
+
+- [MapLength](MapLength.md) — number of correction points per dimension
+- [MapPosGap](MapPosGap.md) — spacing between correction points
+- [MapEncoder](MapEncoder.md) — encoder source for each dimension
+- [MapTable/MapTableB/MapTableC/MapTableD/MapTableE](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) — correction values at each point

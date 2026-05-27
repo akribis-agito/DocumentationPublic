@@ -1,5 +1,6 @@
 ---
 keyword: EventLoopback
+summary: Read-only state of the event output as seen by the controller's input circuitry (hardware loopback).
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # EventLoopback
 
-**Definition:**
+Read-only state of the event output as seen by the controller's input circuitry (hardware loopback).
 
-EventLoopback is a read-only parameter that reflects the current state of the event output signal as seen by the controller's input circuitry, providing a hardware loopback confirmation. It is an axis-related status variable and is not saved to flash.
+## Overview
 
-**See also:**
+`EventLoopback` is a read-only status variable that reflects the current state of the event output signal as seen by the controller's input circuitry, providing a hardware loopback confirmation. Use it to verify that the event output is actually toggling as commanded by [EventOn](EventOn.md) or forced by [EventAlwaysOn](EventAlwaysOn.md). It is an axis-related status variable and is not saved to flash.
 
-[EventAlwaysOn](EventAlwaysOn.md), [EventSelect](EventSelect.md), [EventOn](EventOn.md)
+## Examples
+
+```text
+EventLoopback?      ; read the looped-back output state (0 or 1)
+```
+
+## See also
+
+- [EventAlwaysOn](EventAlwaysOn.md) — forces the output active
+- [EventOn](EventOn.md) — enables position-triggered output
+- [EventSelect](EventSelect.md) — selects the event-generator mode

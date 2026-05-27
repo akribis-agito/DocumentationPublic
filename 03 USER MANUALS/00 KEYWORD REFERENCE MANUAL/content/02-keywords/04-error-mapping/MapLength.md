@@ -23,13 +23,27 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+summary: Number of correction points along each error-mapping dimension.
 ---
 # MapLength
 
-**Definition:**
+Number of correction points along each error-mapping dimension.
 
-MapLength is a per-segment array that specifies the number of correction entries in each error-mapping segment. It defines how many positions within the segment are covered by the corresponding MapTable entries. It is an axis-related array saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+## Overview
 
-**See also:**
+`MapLength` is a per-dimension array that specifies how many correction points exist along each error-mapping dimension. Together with [MapStartPos](MapStartPos.md) (where the points begin) and [MapPosGap](MapPosGap.md) (how far apart they are) it defines the positional extent covered by the [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) entries. The number of map points determines how many `MapTable` entries are consumed by the dimension (the value ranges from `1` to `60000`).
 
-[MapStartPos](MapStartPos.md), [MapPosGap](MapPosGap.md), [MapTable/MapTableB/MapTableC/MapTableD/MapTableE](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md)
+It is an axis-scoped array saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+
+## Examples
+
+```text
+MapLength[1]=100    ; first dimension has 100 correction points
+MapLength[1]?       ; query the number of points in the first dimension
+```
+
+## See also
+
+- [MapStartPos](MapStartPos.md) — start position of each dimension
+- [MapPosGap](MapPosGap.md) — spacing between correction points
+- [MapTable/MapTableB/MapTableC/MapTableD/MapTableE](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) — correction values at each point

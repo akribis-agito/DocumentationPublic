@@ -23,13 +23,29 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+summary: MapTable index where the active error-mapping data begins.
 ---
 # MapStartIndex
 
-**Definition:**
+MapTable index where the active error-mapping data begins.
 
-MapStartIndex sets the index of the first active segment in the error-mapping configuration. Only map segments at or above this index are applied during position correction, allowing portions of the map table to be selectively disabled. It is an axis-related parameter saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+## Overview
 
-**See also:**
+`MapStartIndex` sets the [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) index at which the active error-mapping data begins. The correction values for a given map are not required to start at the first table element, so this lets several maps share the table region or lets unused leading entries be skipped. Correction proceeds from this index across the points defined by [MapStartPos](MapStartPos.md), [MapPosGap](MapPosGap.md), and [MapLength](MapLength.md), for the dimensions selected by [MapType](MapType.md). The valid range is `1` to `300000`.
 
-[MapType](MapType.md), [MapStartPos](MapStartPos.md), [MapLength](MapLength.md), [MapEncoder](MapEncoder.md)
+It is an axis-scoped parameter saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+
+## Examples
+
+```text
+MapStartIndex=1     ; mapping data starts at MapTable[1]
+MapStartIndex=5000  ; mapping data starts at MapTable[5000]
+MapStartIndex?      ; query the current start index
+```
+
+## See also
+
+- [MapType](MapType.md) — selects 1D/2D/3D mapping
+- [MapStartPos](MapStartPos.md) — start position of each dimension
+- [MapLength](MapLength.md) — number of points per dimension
+- [MapTable/MapTableB/MapTableC/MapTableD/MapTableE](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) — table that this index points into

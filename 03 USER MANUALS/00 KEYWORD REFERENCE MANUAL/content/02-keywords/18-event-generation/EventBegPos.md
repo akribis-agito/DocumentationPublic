@@ -1,5 +1,6 @@
 ---
 keyword: EventBegPos
+summary: Position of the first generated event in single-event and by-gap modes.
 availability:
   standalone:
   - v4
@@ -26,8 +27,22 @@ overrides: {}
 ---
 # EventBegPos
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Position of the first generated event in single-event and by-gap modes.
 
-EventBegPos is the position of the first event that will be generated in modes 1 and 2 (single
-event or by gap).
+## Overview
+
+`EventBegPos` is the position, in user units, of the first event that is generated in the single-event and by-gap event modes (see [EventType](EventType.md)). In by-gap mode it is the starting position from which subsequent events are spaced by [EventGap](EventGap.md) up to [EventEndPos](EventEndPos.md). For correct behavior, [EventOn](EventOn.md) should be set while the motor is at a position smaller than `EventBegPos`.
+
+## Examples
+
+```text
+EventBegPos=1000    ; first event at position 1000 (user units)
+EventBegPos?        ; query the configured start position
+```
+
+## See also
+
+- [EventType](EventType.md) — selects single-event vs. by-gap vs. table modes
+- [EventGap](EventGap.md) — spacing between events in by-gap mode
+- [EventEndPos](EventEndPos.md) — last position for which events are generated
+- [EventOn](EventOn.md) — arms event generation

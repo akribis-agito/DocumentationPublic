@@ -1,5 +1,6 @@
 ---
 keyword: EventCntr
+summary: Counts events generated since the last EventOn; resettable by the user.
 availability:
   standalone:
   - v4
@@ -26,8 +27,20 @@ overrides: {}
 ---
 # EventCntr
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Counts events generated since the last EventOn; resettable by the user.
 
-EventCntr count the events that occurred since the last EventOn. Toggling EventOn will reset the
-counter. This counter can also be reset by the user.
+## Overview
+
+`EventCntr` counts the events that have occurred since the last time [EventOn](EventOn.md) was set. Toggling `EventOn` resets the counter; the user may also reset it directly. Use it to confirm how many event pulses were produced during a move or to verify expected event coverage against the configured table or range.
+
+## Examples
+
+```text
+EventCntr?          ; read the number of events since the last EventOn
+EventCntr=0         ; reset the counter
+```
+
+## See also
+
+- [EventOn](EventOn.md) — toggling it resets this counter
+- [EventNextPos](EventNextPos.md) — position of the next event to be generated

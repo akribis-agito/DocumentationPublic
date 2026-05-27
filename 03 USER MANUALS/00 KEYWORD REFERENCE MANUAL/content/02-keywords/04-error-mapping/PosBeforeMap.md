@@ -23,13 +23,26 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+summary: Read-only feedback position before error-mapping correction.
 ---
 # PosBeforeMap
 
-**Definition:**
+Read-only feedback position before error-mapping correction.
 
-PosBeforeMap reports the raw axis position in user units before any error-mapping correction has been applied. It is useful for diagnostics and for verifying the map correction that is being added to the feedback position. It is a read-only, axis-related status variable that is not saved to flash.
+## Overview
 
-**See also:**
+`PosBeforeMap` reports the axis position from the encoder, in user units, **before** any error-mapping correction has been applied. The corrected value is reported by [Pos](../10-motion/01-kinematics-status/Pos.md); the difference between the two is the correction contributed by the [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) arrays when mapping is enabled with [MapType](MapType.md). Comparing `PosBeforeMap` with `Pos` is useful for diagnostics and for verifying the map correction being added to the feedback.
 
-[MapType](MapType.md), [MapTable/MapTableB/MapTableC/MapTableD/MapTableE](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md)
+It is a read-only, axis-scoped status variable that is not saved to flash.
+
+## Examples
+
+```text
+PosBeforeMap?       ; read the uncorrected feedback position
+```
+
+## See also
+
+- [Pos](../10-motion/01-kinematics-status/Pos.md) — feedback position after correction; difference equals the map correction
+- [MapType](MapType.md) — enables the correction that creates the difference
+- [MapTable/MapTableB/MapTableC/MapTableD/MapTableE](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) — correction values applied to the feedback

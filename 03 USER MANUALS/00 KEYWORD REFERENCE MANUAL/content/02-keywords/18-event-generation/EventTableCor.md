@@ -1,5 +1,6 @@
 ---
 keyword: EventTableCor
+summary: Read-only array of corrected event positions produced by EventCorrect.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # EventTableCor
 
-**Definition:**
+Read-only array of corrected event positions produced by EventCorrect.
 
-EventTableCor is a read-only array that holds the corrected event positions after applying the position correction computed by EventCorrect. It mirrors EventTable but with mapping offsets applied. It is an axis-related array status variable expressed in user units and is not saved to flash.
+## Overview
 
-**See also:**
+`EventTableCor` is a read-only array that holds the corrected event positions after applying the position correction computed by [EventCorrect](EventCorrect.md). It mirrors [EventTable](EventTable.md) but with mapping offsets applied, expressed in user units. It is an axis-related array status variable and is not saved to flash.
 
-[EventTable](EventTable.md), [EventCorrect](EventCorrect.md), [EventTableSel](EventTableSel.md)
+## Examples
+
+```text
+EventTableCor[1]?   ; read the first corrected event position
+EventTableCor[2]?   ; read the second corrected event position
+```
+
+## See also
+
+- [EventTable](EventTable.md) — uncorrected source positions
+- [EventCorrect](EventCorrect.md) — command that computes the correction
+- [EventTableSel](EventTableSel.md) — per-entry selection

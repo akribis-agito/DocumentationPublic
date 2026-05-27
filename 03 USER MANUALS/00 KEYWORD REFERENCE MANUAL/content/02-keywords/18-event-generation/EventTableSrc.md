@@ -1,5 +1,6 @@
 ---
 keyword: EventTableSrc
+summary: Selects the position source used to evaluate event table triggers.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # EventTableSrc
 
-**Definition:**
+Selects the position source used to evaluate event table triggers.
 
-EventTableSrc selects the position source used to evaluate event table triggers, such as the command position, actual position, or an external encoder. It is an axis-related parameter saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`EventTableSrc` selects the position source used to evaluate [EventTable](EventTable.md) triggers (for example, the command position versus the actual position). The choice determines which feedback the comparator watches when generating table-driven events. It is an axis-related parameter saved to flash and can be changed at any time.
 
-[EventTable](EventTable.md), [EventSelect](EventSelect.md), [EventTableBeg](EventTableBeg.md)
+## Examples
+
+```text
+EventTableSrc=0     ; select the position source (default)
+EventTableSrc=1     ; select the alternate position source
+EventTableSrc?      ; query the current source
+```
+
+## See also
+
+- [EventTable](EventTable.md) — table of event positions
+- [EventSelect](EventSelect.md) — selects the event-generator mode
+- [EventTableBeg](EventTableBeg.md) — first active table index

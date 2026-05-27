@@ -1,5 +1,6 @@
 ---
 keyword: EventSelect
+summary: Chooses the operating mode of the event output generator.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # EventSelect
 
-**Definition:**
+Chooses the operating mode of the event output generator.
 
-EventSelect chooses the operating mode of the event output generator, such as table-driven, periodic, or always-on operation. It is an axis-related parameter saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`EventSelect` chooses the operating mode of the event output generator, such as table-driven, periodic, or always-on operation. It sits above the per-move settings: [EventType](EventType.md) selects the position-trigger scheme (single, by-gap, or table), and [EventOn](EventOn.md) arms generation. It is an axis-related parameter saved to flash and can be changed at any time.
 
-[EventAlwaysOn](EventAlwaysOn.md), [EventTable](EventTable.md), [EventTableSel](EventTableSel.md), [EventOn](EventOn.md)
+## Examples
+
+```text
+EventSelect=1       ; select the event-generator mode (default)
+EventSelect?        ; query the current mode
+```
+
+## See also
+
+- [EventAlwaysOn](EventAlwaysOn.md) — forces the output permanently active
+- [EventType](EventType.md) — single / by-gap / table position-trigger scheme
+- [EventTableSel](EventTableSel.md) — per-entry table selection
+- [EventOn](EventOn.md) — arms event generation

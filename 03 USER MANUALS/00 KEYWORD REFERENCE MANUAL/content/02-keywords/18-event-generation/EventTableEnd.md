@@ -1,5 +1,6 @@
 ---
 keyword: EventTableEnd
+summary: Ending index of the active region within the event table.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # EventTableEnd
 
-**Definition:**
+Ending index of the active region within the event table.
 
-EventTableEnd sets the ending index of the active region within the event table, defining the last entry used for event generation. It is an axis-related parameter saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`EventTableEnd` sets the ending index of the active region within [EventTable](EventTable.md), defining the last entry used for event generation. It pairs with [EventTableBeg](EventTableBeg.md), which marks the first active entry. The index is 1-based (range 1–100). It is an axis-related parameter saved to flash and can be changed at any time.
 
-[EventTableBeg](EventTableBeg.md), [EventTable](EventTable.md), [EventTableSel](EventTableSel.md)
+## Examples
+
+```text
+EventTableEnd=10    ; use table entries up to index 10
+EventTableEnd?      ; query the configured end index
+```
+
+## See also
+
+- [EventTableBeg](EventTableBeg.md) — first active table index
+- [EventTable](EventTable.md) — table of event positions
+- [EventTableSel](EventTableSel.md) — per-entry selection

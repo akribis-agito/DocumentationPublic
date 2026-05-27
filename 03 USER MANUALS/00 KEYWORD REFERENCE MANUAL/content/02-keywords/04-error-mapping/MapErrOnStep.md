@@ -23,13 +23,28 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+summary: Step size used to apply the map correction when mapping engages.
 ---
 # MapErrOnStep
 
-**Definition:**
+Step size used to apply the map correction when mapping engages.
 
-MapErrOnStep sets the incremental step size used when the error-mapping correction is applied on a step-by-step basis rather than in a single jump. It controls how quickly the map correction converges when the mapping feature is activated. It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
+## Overview
 
-**See also:**
+`MapErrOnStep` sets the incremental step size used when the error-mapping correction is brought in gradually instead of in a single jump. This smooths the transition when mapping is activated, controlling how quickly the correction converges. It complements [MapErrOffRamp](MapErrOffRamp.md) (ramp rate of the applied offset) and acts on [MapErrOffset](MapErrOffset.md) (the offset currently in effect). The mapping itself is enabled by [MapType](MapType.md). The valid range is `0` to `16384`, where `0` (the default) applies no incremental stepping.
 
-[MapErrOffset](MapErrOffset.md), [MapErrOffRamp](MapErrOffRamp.md), [MapType](MapType.md)
+It is an axis-scoped parameter saved to flash and can be changed at any time, including during motion.
+
+## Examples
+
+```text
+MapErrOnStep=0      ; default: no incremental stepping
+MapErrOnStep=1000   ; bring the correction in 1000 counts at a time
+MapErrOnStep?       ; query the current step size
+```
+
+## See also
+
+- [MapErrOffset](MapErrOffset.md) — the offset that steps in
+- [MapErrOffRamp](MapErrOffRamp.md) — ramp rate of the applied offset
+- [MapType](MapType.md) — enables the error mapping

@@ -1,5 +1,6 @@
 ---
 keyword: InjectCurrAmp
+summary: Amplitude of current-command injection, in mA.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # InjectCurrAmp
 
-**Condition:**
+Amplitude of current-command injection, in mA.
 
-InjectCurrAmp is only applicable for injection at current command (InjectPoint = 0).
+## Overview
 
-**Definition:**
+`InjectCurrAmp` is the amplitude of the injected waveform when injecting at the current command, in mA. It applies only when [InjectPoint](InjectPoint.md) selects the current command (`InjectPoint = 0`). The waveform shape is chosen by [InjectType](InjectType.md); for direct injection a DC offset can be added with [InjectCurrDC](InjectCurrDC.md).
 
-InjectCurrAmp is the amplitude of the current injection, in terms of mA.
+## Examples
+
+```text
+InjectCurrAmp=2133      ; 2133 mA injection amplitude (default)
+InjectCurrAmp?          ; query the current injection amplitude
+```
+
+## See also
+
+- [InjectPoint](InjectPoint.md) — must be 0 for current-command injection
+- [InjectType](InjectType.md) — selects the waveform shape
+- [InjectCurrDC](InjectCurrDC.md) — DC offset for direct current injection

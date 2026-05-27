@@ -1,5 +1,6 @@
 ---
 keyword: InjectVelAmp
+summary: Amplitude of velocity-command injection; units depend on dual-loop setting.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # InjectVelAmp
 
-**Condition:**
+Amplitude of velocity-command injection; units depend on dual-loop setting.
 
-InjectVelAmp is only applicable for injection at velocity command (InjectPoint = 3).
+## Overview
 
-**Definition:**
+`InjectVelAmp` is the amplitude of the injected waveform when injecting at the velocity command. It applies only when [InjectPoint](InjectPoint.md) selects the velocity command (`InjectPoint = 1`). The waveform shape is chosen by [InjectType](InjectType.md). The amplitude unit depends on the dual-loop setting; see [Control tuning – Dual-loop control](../../02-keywords/11-control-tuning/02-dual-loop-control/00-overview.md) for more information.
 
-InjectVelAmp is the amplitude of the velocity injection, where its unit depends on the dual loop setting. Please refer to [Control tuning – Dual-loop control](../../02-keywords/11-control-tuning/02-dual-loop-control/00-overview.md) for more information.
+## Examples
+
+```text
+InjectVelAmp=10000      ; velocity injection amplitude (default)
+InjectVelAmp?           ; query the current velocity injection amplitude
+```
+
+## See also
+
+- [InjectPoint](InjectPoint.md) — must be 1 for velocity-command injection
+- [InjectType](InjectType.md) — selects the waveform shape
+- [Control tuning – Dual-loop control](../../02-keywords/11-control-tuning/02-dual-loop-control/00-overview.md) — determines the amplitude unit

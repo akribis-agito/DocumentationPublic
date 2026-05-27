@@ -1,5 +1,6 @@
 ---
 keyword: EventEndPos
+summary: Highest position for which events are generated in by-gap mode.
 availability:
   standalone:
   - v4
@@ -26,19 +27,28 @@ overrides: {}
 ---
 # EventEndPos
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Highest position for which events are generated in by-gap mode.
 
-EventEndPos is the highest position for which events will be generated when using EventType = 2
-(by gap). EventEndPos does not have to be a location where an event is generated.
-**Example:**
-EventType = 2 // Event generation by gap
-EventBegPos = 1000
-EventGap = 2000
-EventEndPos = 8000
-EventOn = 1 // This assignment must be made in a position that is smaller than EventBegPos
-to prevent unexpected behavior.
-This sequence will cause the event out to be "ON" for the duration defined by PulseWidth when
-passing in the following positions: 1000, 3000, 5000, 7000.
-After passing position 8000 no more events are generated, and EventOn should be toggled to
-restart generating events.
+## Overview
+
+`EventEndPos` is the highest position, in user units, for which events are generated in the by-gap event mode (see [EventType](EventType.md)). It bounds the series of events that start at [EventBegPos](EventBegPos.md) and repeat every [EventGap](EventGap.md). `EventEndPos` does not have to coincide with a position where an event is actually generated. After this position is passed, no more events are produced and [EventOn](EventOn.md) must be toggled to restart generation.
+
+## Examples
+
+```text
+EventType=2         ; event generation by gap
+EventBegPos=1000
+EventGap=2000
+EventEndPos=8000
+EventOn=1           ; set this while the axis is at a position smaller than EventBegPos
+                    ; to prevent unexpected behavior
+```
+
+With the sequence above, the event output turns on for the duration set by [EventPulseWid](EventPulseWid.md) when passing positions 1000, 3000, 5000, and 7000. After passing position 8000 no more events are generated, and `EventOn` must be toggled to restart.
+
+## See also
+
+- [EventType](EventType.md) — selects the by-gap mode
+- [EventBegPos](EventBegPos.md) — position of the first event
+- [EventGap](EventGap.md) — spacing between events
+- [EventOn](EventOn.md) — must be toggled to restart after EventEndPos is passed

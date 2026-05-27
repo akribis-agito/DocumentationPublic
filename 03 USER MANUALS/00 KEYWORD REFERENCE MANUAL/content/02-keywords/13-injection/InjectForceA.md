@@ -1,5 +1,6 @@
 ---
 keyword: InjectForceA
+summary: Amplitude of force-command injection, in internal force units.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # InjectForceA
 
-**Condition:**
+Amplitude of force-command injection, in internal force units.
 
-InjectForceA is only applicable for injection at force command (InjectPoint = 3).
+## Overview
 
-**Definition:**
+`InjectForceA` is the amplitude of the injected waveform when injecting at the force command, expressed in the internal force unit. It applies only when [InjectPoint](InjectPoint.md) selects the force command (`InjectPoint = 3`). The waveform shape is chosen by [InjectType](InjectType.md).
 
-InjectForceA is the amplitude of the force injection, in terms of internal force unit.
+## Examples
+
+```text
+InjectForceA=10000      ; force injection amplitude (internal force units)
+InjectForceA?           ; query the current force injection amplitude
+```
+
+## See also
+
+- [InjectPoint](InjectPoint.md) — must be 3 for force-command injection
+- [InjectType](InjectType.md) — selects the waveform shape

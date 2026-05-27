@@ -1,5 +1,6 @@
 ---
 keyword: EventNextPos
+summary: Read-only position at which the next event pulse will be generated.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # EventNextPos
 
-**Definition:**
+Read-only position at which the next event pulse will be generated.
 
-EventNextPos is a read-only parameter that reports the position at which the next event output pulse will be generated, based on the current event table and selection. It is an axis-related status variable expressed in user units and is not saved to flash.
+## Overview
 
-**See also:**
+`EventNextPos` is a read-only status variable that reports the position, in user units, at which the next event output pulse will be generated, based on the current event table and selection. Use it to monitor where the next event is expected and to confirm the generator is advancing through the configured positions. It is an axis-related status variable and is not saved to flash.
 
-[EventTable](EventTable.md), [EventTableSel](EventTableSel.md), [EventSelect](EventSelect.md)
+## Examples
+
+```text
+EventNextPos?       ; read the position of the next pending event
+```
+
+## See also
+
+- [EventTable](EventTable.md) — table of event positions
+- [EventTableSel](EventTableSel.md) — per-entry selection within the table
+- [EventCntr](EventCntr.md) — count of events generated so far

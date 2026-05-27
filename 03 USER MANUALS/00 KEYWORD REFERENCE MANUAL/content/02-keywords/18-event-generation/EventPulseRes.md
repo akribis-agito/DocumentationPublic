@@ -1,5 +1,6 @@
 ---
 keyword: EventPulseRes
+summary: Sets the position resolution of the event pulse generator (minimum spacing between events).
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # EventPulseRes
 
-**Definition:**
+Sets the position resolution of the event pulse generator (minimum spacing between events).
 
-EventPulseRes sets the position resolution of the event output pulse generator, defining the minimum spacing between events in encoder counts. It is an axis-related parameter saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`EventPulseRes` sets the position resolution of the event output pulse generator, defining the minimum spacing between events in encoder counts. It works together with [EventPulseWid](EventPulseWid.md), which sets how long each pulse stays active. It is an axis-related parameter saved to flash and can be changed at any time.
 
-[EventPulseWid](EventPulseWid.md), [EventSelect](EventSelect.md), [EventTableWid](EventTableWid.md)
+## Examples
+
+```text
+EventPulseRes=1     ; set the pulse-generator resolution
+EventPulseRes?      ; query the current setting
+```
+
+## See also
+
+- [EventPulseWid](EventPulseWid.md) — duration of each event pulse
+- [EventSelect](EventSelect.md) — selects the event-generator mode
+- [EventTableWid](EventTableWid.md) — per-entry pulse width override

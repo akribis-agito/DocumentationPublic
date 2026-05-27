@@ -1,5 +1,6 @@
 ---
 keyword: EventCorrect
+summary: Command that recalculates corrected event-table positions from the current axis position and mapping.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # EventCorrect
 
-**Definition:**
+Command that recalculates corrected event-table positions from the current axis position and mapping.
 
-EventCorrect is a command that recalculates and corrects the event table positions based on the current axis position and mapping. It cannot be executed while the axis is in motion. It is an axis-related command and is not saved to flash.
+## Overview
 
-**See also:**
+`EventCorrect` is a command that recalculates and corrects the event-table positions based on the current axis position and mapping, writing the result to [EventTableCor](EventTableCor.md). It cannot be executed while the axis is in motion (`ok_in_motion: false`). It is an axis-related command and is not saved to flash. Use it to realign the table-driven event grid after the reference position has shifted.
 
-[EventTable](EventTable.md), [EventTableCor](EventTableCor.md), [EventSelect](EventSelect.md)
+## Examples
+
+```text
+EventCorrect        ; recompute the corrected event-table positions
+```
+
+## See also
+
+- [EventTable](EventTable.md) — source positions being corrected
+- [EventTableCor](EventTableCor.md) — holds the corrected positions
+- [EventSelect](EventSelect.md) — selects the event-generator mode

@@ -1,5 +1,6 @@
 ---
 keyword: FastIdInit
+summary: Resets the PRBS sequence index to the first pre-defined binary value.
 availability:
   standalone:
   - v4
@@ -26,14 +27,19 @@ overrides: {}
 ---
 # FastIdInit
 
-**Condition:**
+Resets the PRBS sequence index to the first pre-defined binary value.
 
-FastIdInit is only applicable for PRBS injection (InjectType = 6 or 7).
+## Overview
 
-**Definition:**
+`FastIdInit` resets the PRBS (pseudorandom binary sequence) index back to the first pre-defined binary value, so injection restarts from the beginning of the sequence. It applies only when [InjectType](InjectType.md) selects PRBS injection (`InjectType = 6 or 7`). It does not reset the PRBS downsampling factor [FastIdDownSam](FastIdDownSam.md).
 
-FastIdInit resets the PRBS sequence index to the first pre-defined binary value. Please refer to InjectType for more information on PRBS waveform.
+## Examples
 
-**Note:**
+```text
+FastIdInit          ; reset the PRBS sequence index
+```
 
-FastIdInit does not reset the PRBS downsampling factor ( FastIdDownSam ).
+## See also
+
+- [InjectType](InjectType.md) — selects the PRBS waveform
+- [FastIdDownSam](FastIdDownSam.md) — PRBS generation downsampling factor (not reset by FastIdInit)

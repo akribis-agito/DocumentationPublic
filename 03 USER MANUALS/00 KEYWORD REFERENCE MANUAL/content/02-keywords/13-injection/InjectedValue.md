@@ -1,5 +1,6 @@
 ---
 keyword: InjectedValue
+summary: Read-only readout of the present injection value; units follow the injection point.
 availability:
   standalone:
   - v4
@@ -26,6 +27,19 @@ overrides: {}
 ---
 # InjectedValue
 
-**Definition:**
+Read-only readout of the present injection value; units follow the injection point.
 
-InjectedValue is the existing injection value, where its unit depends on the injection points.
+## Overview
+
+`InjectedValue` is a read-only readout of the current injection value being applied to the loop. Its unit depends on the active injection location selected by [InjectPoint](InjectPoint.md) (for example, mA for current-command injection). It is useful for monitoring or logging the injected waveform during system identification or step-response testing.
+
+## Examples
+
+```text
+InjectedValue?      ; read the present injection value
+```
+
+## See also
+
+- [InjectPoint](InjectPoint.md) — determines the unit of this value
+- [InjectType](InjectType.md) — selects the waveform being injected

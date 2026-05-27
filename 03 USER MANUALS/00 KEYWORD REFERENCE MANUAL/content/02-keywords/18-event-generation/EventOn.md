@@ -1,5 +1,6 @@
 ---
 keyword: EventOn
+summary: Arms event generation; loads the first compare position and is mutually exclusive with Lock.
 availability:
   standalone:
   - v4
@@ -26,11 +27,24 @@ overrides: {}
 ---
 # EventOn
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Arms event generation; loads the first compare position and is mutually exclusive with Lock.
 
-EventOn = 1 will load the first position according to the EventType to the position comparator
-and turn on the events. EventOn = 1 should be entered when the motor is in a position that is
-smaller than the first requested event to prevent unexpected behavior.
-Event and Lock are mutually exclusive functionalities. EventOn = 1 will automatically cause
-LockEN to become 0.
+## Overview
+
+`EventOn = 1` loads the first position (according to [EventType](EventType.md)) into the position comparator and turns event generation on. It should be set while the motor is at a position smaller than the first requested event to prevent unexpected behavior. Toggling `EventOn` also resets [EventCntr](EventCntr.md).
+
+Event and Lock are mutually exclusive functions: setting `EventOn = 1` automatically forces `LockEN` to `0`.
+
+## Examples
+
+```text
+EventOn=1           ; arm event generation (set while below the first event position)
+EventOn=0           ; disable event generation
+EventOn?            ; query the current state
+```
+
+## See also
+
+- [EventType](EventType.md) — determines which position is loaded first
+- [EventCntr](EventCntr.md) — reset when EventOn is toggled
+- [EventAlwaysOn](EventAlwaysOn.md) — forces the output active regardless of position

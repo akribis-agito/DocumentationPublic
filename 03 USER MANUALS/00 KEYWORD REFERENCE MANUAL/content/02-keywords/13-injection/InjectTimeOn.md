@@ -1,5 +1,6 @@
 ---
 keyword: InjectTimeOn
+summary: Pulse duration for pulse injection, in milliseconds.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # InjectTimeOn
 
-**Condition:**
+Pulse duration for pulse injection, in milliseconds.
 
-InjectTimeOn is only applicable for pulse injection (InjectType = 5).
+## Overview
 
-**Definition:**
+`InjectTimeOn` defines the on-time (duration) of a pulse injection, in milliseconds. It applies only when [InjectType](InjectType.md) selects the pulse waveform (`InjectType = 5`), which is reserved for current-command injection. The pulse amplitude comes from [InjectCurrAmp](InjectCurrAmp.md), and the injection location is set by [InjectPoint](InjectPoint.md).
 
-InjectTimeOn defines the pulse duration, in terms of milliseconds.
+## Examples
+
+```text
+InjectTimeOn=10     ; 10 ms pulse
+InjectTimeOn?       ; query the current pulse duration
+```
+
+## See also
+
+- [InjectType](InjectType.md) — selects the pulse waveform (InjectType = 5)
+- [InjectCurrAmp](InjectCurrAmp.md) — amplitude of the current pulse
+- [InjectPoint](InjectPoint.md) — selects the injection location
