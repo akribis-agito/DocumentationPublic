@@ -37,18 +37,48 @@ Main position feedback in user units; the position-loop feedback signal.
 
 ## Overview
 
-`Pos` reports the main encoder feedback in main user units (configurable via [UsrUnits](../../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md)). It is the position-loop feedback signal in non-gantry mode, so it is the basis for the position error [PosErr](PosErr.md) (`PosErr = PosRef − Pos`) and is related to the auxiliary feedback [AuxPos](AuxPos.md).
+`Pos` is the main position feedback and, in normal (non-gantry) operation, the **position-loop feedback signal** — so it is the basis for the position error [PosErr](PosErr.md) (`PosErr = PosRef − Pos`). It is reported in user units (set by [UsrUnits](../../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md)); the internal pipeline (mapping, modulo) operates in main-encoder counts.
 
-Although read-only, `Pos` can be preset to any value at any time via [SetPosition](../03-kinematics-configuration/SetPosition.md) (do not write `Pos` directly). It resets to `0` on power-up.
+`Pos` is read-only but is not simply "the encoder." It is the **output of a feedback pipeline** and is reshaped by several mechanisms (simulation, error mapping, modulo, dual-loop, gantry) described below. It resets to `0` on power-up and can be **preset** with [SetPosition](../03-kinematics-configuration/SetPosition.md) (do not write `Pos` directly); with an absolute encoder it is initialised from the absolute reading at startup.
 
 ## How it works
 
-What `Pos` represents depends on the control configuration:
+### Feedback pipeline
+
+Each control cycle `Pos` is produced from the decoded main-encoder reading in stages:
+
+```text
+main encoder ─► (decode) ─► PosBeforeMap ─► [error mapping] ─► [modulo ModRev] ─► Pos
+```
+
+[PosBeforeMap](../../04-error-mapping/PosBeforeMap.md) holds the value **before** correction (for diagnostics). With no error map and no modulo, `Pos` equals the decoded encoder reading.
+
+### Simulation mode
+
+When the axis runs in **simulation** (`MotorType` = simulation) there is no physical encoder: the firmware sets the encoder reading equal to the reference, so **`Pos` follows `PosRef` exactly**. Error mapping is deliberately skipped in simulation to avoid the feedback loop (`EncoderPos = PosRef` → `Pos = f(EncoderPos)` → in motor-off `PosRef = Pos`). This lets you dry-run motion programs without hardware.
+
+### Motor-off behaviour
+
+While the motor is off, the controller forces `PosRef = Pos`, so the reference tracks the live feedback. This guarantees zero position error at the instant the motor is enabled, preventing a jump.
+
+### Error mapping
+
+When an encoder error map is active ([MapType](../../04-error-mapping/MapType.md) = 1D/2D/3D), `Pos = PosBeforeMap + correction`, with the correction interpolated from the map table. The correction is **ramped in/out** so engaging or changing the map does not produce a position step.
+
+### Modulo (continuous rotary) — ModRev
+
+If [ModRev](../../03-encoder/04-modulo-mode/ModRev.md) ≠ 0, `Pos` is kept within `[0, ModRev)`. When it would cross a boundary the firmware adds/subtracts `ModRev` from `Pos` **and shifts the entire reference frame by the same amount** — `PosRef`, the shaped/filtered references, [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md), `PDPos`, and the gear master position all move together — so the following error is preserved across the wrap and the axis can rotate continuously. The wrap is applied only when the jerk buffer is clear of pre-wrap values, and it assumes no more than half a revolution of travel per control cycle. See also [ModShort](../../03-encoder/04-modulo-mode/ModShort.md) for shortest-path targeting.
+
+### Dual-loop and gantry
+
+What `Pos` represents also depends on the loop configuration:
 
 | Configuration | `Pos` definition |
 |---------------|------------------|
-| Default control, dual-loop control, or gantry mode (non-gantry except pseudo dual-loop) | Main encoder reading after the modulo block. Unit: main encoder count. |
-| Pseudo dual-loop control (non-gantry) | Auxiliary encoder reading, decoded and scaled to main-encoder units: $$Pos = AuxPos \times \frac{DualLoopFact}{65536}$$ Unit: main encoder count. |
+| Default, dual-loop, or gantry (all except pseudo dual-loop) | Decoded main-encoder reading (post-mapping/modulo). |
+| Pseudo dual-loop (non-gantry) | Auxiliary encoder, scaled to main-encoder units: $$Pos = AuxPos \times \frac{DualLoopFact}{65536}$$ |
+
+In gantry mode the position loop uses [GantryFdbk](../../12-gantry-control/02-gantry-kinematic-feedback/GantryFdbk.md) (the common-mode position) rather than a single-axis `Pos`.
 
 ## Changes between versions
 
@@ -57,17 +87,21 @@ What `Pos` represents depends on the control configuration:
 | Data type | 32-bit integer (`long`) | **64-bit integer (`long long`)** |
 | Range | ±2,147,483,647 | ±2,251,799,813,685,247 (2⁵¹−1) |
 
-In **v5** the position pipeline moved to **64-bit** calculations, so `Pos` is a 64-bit value with a far larger range (capped at 2⁵¹−1 because PCSuite records data in `double`). This lets a single axis accumulate far more travel without wrapping. **v5 is central-i only** — the standalone product is not supported on v5, so on standalone `Pos` remains the v4 32-bit value.
+In **v5** the position pipeline moved to **64-bit** calculations, so `Pos` is a 64-bit value with a far larger range (capped at 2⁵¹−1 because PCSuite records data in `double`), allowing far more accumulated travel without wrapping. **v5 is central-i only** — the standalone product is not supported on v5, so on standalone `Pos` remains the v4 32-bit value.
 
 ## Examples
 
 ```text
-APos                ; read the main position feedback (axis A)
+APos                ; read axis A's main position feedback
 ```
 
 ## See also
 
-- [PosErr](PosErr.md) — position error (`PosRef − Pos`)
-- [PosRef](PosRef.md) — position reference
-- [AuxPos](AuxPos.md) — auxiliary position feedback
-- [SetPosition](../03-kinematics-configuration/SetPosition.md) — preset the position feedback
+- [PosRef](PosRef.md) — position reference; [PosErr](PosErr.md) — `PosRef − Pos`
+- [PosBeforeMap](../../04-error-mapping/PosBeforeMap.md) — feedback before error-mapping correction
+- [AuxPos](AuxPos.md) — auxiliary feedback (used in pseudo dual-loop)
+- [ModRev](../../03-encoder/04-modulo-mode/ModRev.md) / [ModShort](../../03-encoder/04-modulo-mode/ModShort.md) — modulo (continuous-rotation) mode
+- [MapType](../../04-error-mapping/MapType.md) — encoder error mapping
+- [SetPosition](../03-kinematics-configuration/SetPosition.md) — preset the feedback
+- [GantryFdbk](../../12-gantry-control/02-gantry-kinematic-feedback/GantryFdbk.md) — gantry common-mode position
+- [UsrUnits](../../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) — user-unit scaling
