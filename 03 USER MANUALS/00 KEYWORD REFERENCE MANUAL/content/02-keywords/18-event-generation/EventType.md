@@ -46,28 +46,7 @@ Events are pulses on a designated output generated when the actual feedback posi
 
 The by-gap scheme produces a regular pulse train across the window:
 
-<svg xmlns="http://www.w3.org/2000/svg" width="560" height="170" viewBox="0 0 560 170" role="img" aria-label="By-gap event pulse train between EventBegPos and EventEndPos">
-  <line x1="40" y1="120" x2="540" y2="120" stroke="#444" stroke-width="1"/>
-  <polygon points="540,120 532,116 532,124" fill="#444"/>
-  <text x="500" y="140" font-family="sans-serif" font-size="12" fill="#444">position</text>
-  <!-- pulses at Beg, Beg+Gap, Beg+2Gap, Beg+3Gap -->
-  <g stroke="#1f6feb" stroke-width="2" fill="none">
-    <path d="M100,120 L100,60 L112,60 L112,120"/>
-    <path d="M210,120 L210,60 L222,60 L222,120"/>
-    <path d="M320,120 L320,60 L332,60 L332,120"/>
-    <path d="M430,120 L430,60 L442,60 L442,120"/>
-  </g>
-  <!-- window markers -->
-  <line x1="100" y1="50" x2="100" y2="130" stroke="#cb2431" stroke-width="1" stroke-dasharray="3,3"/>
-  <line x1="470" y1="50" x2="470" y2="130" stroke="#cb2431" stroke-width="1" stroke-dasharray="3,3"/>
-  <text x="70" y="45" font-family="sans-serif" font-size="11" fill="#cb2431">EventBegPos</text>
-  <text x="442" y="45" font-family="sans-serif" font-size="11" fill="#cb2431">EventEndPos</text>
-  <!-- gap arrow -->
-  <line x1="112" y1="150" x2="210" y2="150" stroke="#444" stroke-width="1"/>
-  <polygon points="112,150 120,146 120,154" fill="#444"/>
-  <polygon points="210,150 202,146 202,154" fill="#444"/>
-  <text x="135" y="146" font-family="sans-serif" font-size="11" fill="#444">EventGap</text>
-</svg>
+![By-gap event pulse train between begin and end positions](eventtype-pulse-train.svg)
 
 ## Examples
 
