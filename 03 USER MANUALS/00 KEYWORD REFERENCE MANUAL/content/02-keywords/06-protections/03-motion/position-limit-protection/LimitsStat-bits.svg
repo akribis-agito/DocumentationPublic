@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="150" viewBox="0 0 520 150" font-family="sans-serif">
+  <text x="10" y="24" font-size="15" font-weight="bold">LimitsStat bit layout (32-bit)</text>
+  <!-- bit 0 -->
+  <rect x="380" y="50" width="60" height="40" fill="#cfe8ff" stroke="#333"/>
+  <text x="410" y="75" font-size="13" text-anchor="middle">bit 1</text>
+  <rect x="440" y="50" width="60" height="40" fill="#cfe8ff" stroke="#333"/>
+  <text x="470" y="75" font-size="13" text-anchor="middle">bit 0</text>
+  <!-- unused -->
+  <rect x="20" y="50" width="360" height="40" fill="#eeeeee" stroke="#333"/>
+  <text x="200" y="75" font-size="13" text-anchor="middle">bits 2-31 (unused, 0)</text>
+  <!-- labels -->
+  <text x="410" y="110" font-size="12" text-anchor="middle" fill="#0050a0">FLS</text>
+  <text x="410" y="126" font-size="11" text-anchor="middle">0x0002</text>
+  <text x="470" y="110" font-size="12" text-anchor="middle" fill="#0050a0">RLS</text>
+  <text x="470" y="126" font-size="11" text-anchor="middle">0x0001</text>
+</svg>

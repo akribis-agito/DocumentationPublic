@@ -32,14 +32,32 @@ Consecutive cycles the dual-loop feedback mismatch may persist before tripping.
 
 ## Overview
 
-`DualStuckTime` is the maximum number of consecutive controller cycles (1 cycle ≈ 61 µs) for which the velocity difference between the two dual-loop feedbacks may exceed [DualStuckVel](DualStuckVel.md). If `DualStuckVel` is exceeded for `DualStuckTime` consecutive cycles, the axis is disabled and an error is reported.
+`DualStuckTime` is how long the dual-loop feedback mismatch may persist before the dual-stuck fault fires. The keyword carries a samples-to-milliseconds scaling, and internally it is compared against a sample counter (1 control sample ≈ 61 µs). The default is `4096`.
+
+## How it works
+
+When dual-loop is enabled, each control sample the firmware tests whether the two feedbacks' velocity difference exceeds [DualStuckVel](DualStuckVel.md) (firmware `CommonC/AG300_CTL01ControlInterrupt.c:4756`):
+
+```c
+DualStuckCounter++;
+if (DualStuckCounter >= DualStuckTime)
+    MotorOffAndAddToErrorLog(axis, CON_FLT_DUAL_STUCK, true);
+```
+
+- The internal `DualStuckCounter` increments once per sample for as long as the mismatch exceeds `DualStuckVel`; any in-tolerance sample resets it to `0`. The fault requires a single unbroken run of `DualStuckTime`.
+- On reaching the threshold, the axis is turned off and `CON_FLT_DUAL_STUCK` (code `1049`) is recorded in [ConFlt](../../../07-status-and-faults/ConFlt.md).
+- The whole check is gated on `DualLoopOn`, so on single-loop axes the counter never runs.
+
+A larger `DualStuckTime` tolerates longer transient divergences (e.g. during aggressive transients where the two feedbacks momentarily disagree); a smaller value reacts faster to a genuinely slipping or broken coupling.
 
 ## Examples
 
 ```text
-ADualStuckTime=4096  ; cycles the feedback mismatch may persist before tripping
+ADualStuckTime[1]=4096   ; how long the feedback mismatch may persist before tripping
+ADualStuckTime[1]        ; read back
 ```
 
 ## See also
 
 - [DualStuckVel](DualStuckVel.md) — the tolerated velocity-difference threshold
+- [ConFlt](../../../07-status-and-faults/ConFlt.md) — records `CON_FLT_DUAL_STUCK` (1049)

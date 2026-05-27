@@ -32,15 +32,35 @@ Duration the stuck condition must persist before the axis is flagged stuck.
 
 ## Overview
 
-`StuckTime` is the duration used for motor-stuck detection: the high-current / low-velocity condition (current above [StuckCurr](StuckCurr.md) while velocity stays below [StuckVel](StuckVel.md)) must persist for `StuckTime` before the axis is declared stuck.
+`StuckTime` is how long the stuck condition must hold continuously before the motor-stuck fault fires. The stuck condition is current at or above [StuckCurr](StuckCurr.md) **and** speed at or below [StuckVel](StuckVel.md). The keyword carries a samples-to-milliseconds scaling, so the value is expressed as a time; internally it is compared against a sample counter. The default is `4096`.
+
+## How it works
+
+The firmware keeps an internal `StuckCounter` (firmware `CommonC/AG300_CTL01ControlInterrupt.c:4736`):
+
+```c
+StuckCounter++;
+if (StuckCounter >= StuckTime)
+    MotorOffAndAddToErrorLog(axis, CON_FLT_MOTOR_STUCK, true);
+```
+
+- The counter increments by one each control sample for as long as the AND-ed [StuckCurr](StuckCurr.md)/[StuckVel](StuckVel.md) condition is true.
+- The instant any sample breaks the condition, the counter is reset to `0`. The fault therefore requires a single unbroken run of `StuckTime`; intermittent stalls do not accumulate.
+- When the counter reaches `StuckTime`, the axis is turned off and `CON_FLT_MOTOR_STUCK` (code `1007`) is logged in [ConFlt](../../../07-status-and-faults/ConFlt.md).
+
+![Motor-stuck detection logic](stuck-logic.svg)
+
+The control loop runs at a fixed sample rate, so larger `StuckTime` tolerates a longer momentary stall before tripping. Setting it small makes the protection react quickly but increases the chance of nuisance trips during legitimate high-load, low-speed phases.
 
 ## Examples
 
 ```text
-AStuckTime=4096      ; how long the stuck condition must hold
+AStuckTime[1]=4096    ; how long the stuck condition must hold continuously
+AStuckTime[1]         ; read back
 ```
 
 ## See also
 
-- [StuckCurr](StuckCurr.md) — current threshold
+- [StuckCurr](StuckCurr.md) — current threshold; also lists the mode bypasses
 - [StuckVel](StuckVel.md) — velocity threshold
+- [ConFlt](../../../07-status-and-faults/ConFlt.md) — records `CON_FLT_MOTOR_STUCK` (1007)

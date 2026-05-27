@@ -36,16 +36,36 @@ Maximum tolerated velocity difference between the two dual-loop feedbacks.
 
 ## How it works
 
-$$
-\text{Absolute velocity difference} = \left| Vel[2] - \frac{AuxVel \cdot DualLoopFact}{65536} \right|
-$$
+The check runs each control sample, but **only when dual-loop is enabled** (`DualLoopOn != 0`) (firmware `CommonC/AG300_CTL01ControlInterrupt.c:4752`):
+
+```c
+if (DualLoopOn != 0)
+{
+    if (labs(Vel[2] - (long) DualLoopSpeed) > DualStuckVel)
+    {
+        DualStuckCounter++;
+        if (DualStuckCounter >= DualStuckTime)
+            MotorOffAndAddToErrorLog(axis, CON_FLT_DUAL_STUCK, true);
+    }
+    else
+        DualStuckCounter = 0;
+}
+```
+
+- The compared quantity is the absolute difference between the position-loop feedback velocity `Vel[2]` and the internally computed dual-loop speed (the velocity-loop feedback expressed in the same units). A healthy coupling keeps the two velocities close; a slipped, broken, or badly scaled coupling makes them diverge.
+- While the difference exceeds `DualStuckVel`, an internal `DualStuckCounter` increments; any sample within tolerance resets it to `0`. The fault fires only on a continuous run of [DualStuckTime](DualStuckTime.md) samples.
+- On trip the axis is turned off and `CON_FLT_DUAL_STUCK` (code `1049`) is recorded in [ConFlt](../../../07-status-and-faults/ConFlt.md).
+
+The default is `40000` count/s. Because the gate is `DualLoopOn`, this protection has no effect on single-loop axes.
 
 ## Examples
 
 ```text
-ADualStuckVel=40000  ; max tolerated feedback velocity mismatch (count/s)
+ADualStuckVel[1]=40000   ; max tolerated feedback velocity mismatch (count/s)
+ADualStuckVel[1]         ; read back the threshold
 ```
 
 ## See also
 
 - [DualStuckTime](DualStuckTime.md) — how long the mismatch may persist
+- [ConFlt](../../../07-status-and-faults/ConFlt.md) — records `CON_FLT_DUAL_STUCK` (1049)

@@ -32,11 +32,38 @@ Tuning constants for stepper stall detection.
 
 ## Overview
 
-`StallCnst` is an array of constants that tune the stepper stall-detection algorithm selected by [StallCfg](StallCfg.md).
+`StallCnst` is an array holding the coefficients of a **linear fit of the expected stall metric versus commanded speed**. The stall-threshold calculation uses them to predict the healthy [StallVal](StallVal.md) at the current speed, so that a genuine collapse (stall) can be distinguished from the normal speed dependence of the metric.
 
-> **Documentation pending:** the meaning of each element is not yet documented. Contact Agito for details until this section is completed.
+## How it works
+
+When building the threshold [StallTh](StallTh.md) each sample, the firmware evaluates the fit `slope·speed + intercept` (firmware `CommonC/AG300_CTL01ControlLoops.c:2526`, with array indices `STALL_CONST_A = 1` and `STALL_CONST_B = 2`):
+
+```c
+fit = StallCnst[1]*ldPosRefBitShifted + StallCnst[2];   // slope*speed + intercept
+```
+
+where `ldPosRefBitShifted` is the (bit-shifted) absolute commanded speed.
+
+| Element | Firmware index | Role |
+|---------|----------------|------|
+| `StallCnst[1]` | `STALL_CONST_A` (1) | **Slope** — how fast the expected metric grows with speed |
+| `StallCnst[2]` | `STALL_CONST_B` (2) | **Intercept** — the expected metric at (near) zero speed |
+
+The resulting fit is then scaled by [StallThPcnt](StallThPcnt.md) and offset to form [StallTh](StallTh.md). The array is sized 3 (`STALL_CONST_ARRAY_SIZE`); only the slope and intercept entries above participate in the threshold formula.
+
+These coefficients are determined for a specific motor/load by characterising the healthy `StallVal` at several speeds and fitting a line. Until they are set appropriately for the application, stall detection will not track speed correctly.
+
+## Examples
+
+```text
+AStallCnst[1]=...     ; slope of the expected-metric-vs-speed fit
+AStallCnst[2]=...     ; intercept of the fit
+AStallCnst[1]         ; read back the slope
+```
 
 ## See also
 
+- [StallTh](StallTh.md) — threshold that uses these coefficients
+- [StallThPcnt](StallThPcnt.md) — percentage that scales the fit
+- [StallVal](StallVal.md) — the metric these coefficients model
 - [StallCfg](StallCfg.md) — stall-detection mode
-- [StallThPcnt](StallThPcnt.md) — stall threshold percentage

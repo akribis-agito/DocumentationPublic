@@ -32,19 +32,24 @@ Rate at which the map error offset ramps toward its target.
 
 ## Overview
 
-`MapErrOffRamp` sets the rate at which [MapErrOffset](MapErrOffset.md) is ramped toward its target value when the map correction changes. Ramping the offset rather than applying it as a step avoids an abrupt position jump in the corrected feedback. A higher value makes the offset converge more quickly. It works alongside [MapErrOnStep](MapErrOnStep.md), which sets the step applied when mapping engages, and [MapType](MapType.md), which enables the mapping.
+`MapErrOffRamp` sets the slew rate at which the *applied* offset converges to the [MapErrOffset](MapErrOffset.md) target. Slewing the offset rather than applying it as a step avoids an abrupt position jump in the corrected feedback. A higher value converges faster. It is distinct from [MapErrOnStep](MapErrOnStep.md), which controls the separate engage/disengage ramp of the whole correction, and [MapType](MapType.md), which enables the mapping.
 
 It is an axis-scoped parameter saved to flash and can be changed at any time, including during motion.
+
+## How it works
+
+The rate is in **encoder counts per second**. Each control cycle the firmware moves the applied offset toward the [MapErrOffset](MapErrOffset.md) target by `MapErrOffRamp × SampleTime` counts (i.e. `MapErrOffRamp / SAMPLES_PER_SECOND` counts per cycle), clamping exactly onto the target on the cycle it would overshoot. The default `16384` equals one sampling-rate unit, so at the base sample rate the offset moves about 16384 counts per second. Setting a small value makes a deliberate, slow trim; a large value approaches a step.
 
 ## Examples
 
 ```text
-AMapErrOffRamp=16384 ; default convergence rate
-AMapErrOffRamp      ; query the current ramp rate
+AMapErrOffRamp=16384 ; default slew rate (~16384 counts/s at base rate)
+AMapErrOffRamp       ; read the current slew rate
 ```
 
 ## See also
 
-- [MapErrOffset](MapErrOffset.md) — the offset this keyword ramps
-- [MapErrOnStep](MapErrOnStep.md) — step size applied when mapping engages
+- [MapErrOffset](MapErrOffset.md) — the target offset this keyword slews toward
+- [MapErrOnStep](MapErrOnStep.md) — separate engage/disengage ramp of the whole correction
 - [MapType](MapType.md) — enables the error mapping
+- [Pos](../10-motion/01-kinematics-status/Pos.md) — corrected feedback affected by the offset

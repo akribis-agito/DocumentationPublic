@@ -32,16 +32,35 @@ Selects which axis encoder drives each error-mapping dimension.
 
 ## Overview
 
-`MapEncoder` is a per-dimension array that selects which axis's encoder is used as the position reference for the error-mapping table. For multi-dimensional maps ([MapType](MapType.md) = 2 or 3) each element points the corresponding map axis at a chosen encoder, so a correction can depend on more than one axis's position. Each element accepts a value of `1` or `2`.
+`MapEncoder` is a per-dimension array that selects which encoder supplies the *uncorrected* position used to look up the error-mapping table. Index `[1]` is the first (and for 1D, only) dimension; `[2]` and `[3]` add the second and third dimensions for [MapType](MapType.md) = 2 and 3. The looked-up encoder reading is what indexes the table — see [MapStartPos](MapStartPos.md)/[MapPosGap](MapPosGap.md)/[MapLength](MapLength.md) for how the index is formed — so a 2D/3D map can make the correction depend on more than one axis's position.
 
-`MapEncoder` works with the segment-geometry keywords [MapStartPos](MapStartPos.md), [MapPosGap](MapPosGap.md), and [MapLength](MapLength.md), and with the correction values in [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md). It is an axis-scoped array saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+`MapEncoder` is an axis-scoped array saved to flash and cannot be changed in motion or motor-on.
+
+## How it works
+
+Each element encodes both the *axis* and the *main-or-auxiliary* selection in one integer. The firmware decodes it during background setup into a pointer to the chosen encoder's pre-correction reading:
+
+- **Odd value** → the **main** encoder (`EncoderPos`) of axis number `value >> 1`.
+- **Even value** → the **auxiliary** encoder ([AuxPos](../10-motion/01-kinematics-status/AuxPos.md)) of axis number `(value >> 1) − 1`.
+
+So the mapping is:
+
+| Value | Source encoder |
+|:-----:|----------------|
+| 1 | Axis A main encoder |
+| 2 | Axis A auxiliary encoder |
+| 3 | Axis B main encoder |
+| 4 | Axis B auxiliary encoder |
+| … | … (pattern repeats per axis) |
+
+The default is `1` (this axis's own main encoder). For the table-building/correction routine to accept the map, `MapEncoder[1]` **must** point to this axis's own main encoder; for 2D/3D, the second/third entries must point to **main** encoders of standing, motor-on axes (a wrong selection raises a "must be main encoders" / "must be first encoder" event). The valid range spans `1 … NUMBER_OF_AXES × 2`; on a single-axis controller only `1` and `2` are meaningful.
 
 ## Examples
 
 ```text
-AMapEncoder[1]=1     ; first map dimension uses encoder 1
-AMapEncoder[2]=2     ; second map dimension uses encoder 2
-AMapEncoder[1]      ; query the encoder selected for the first dimension
+AMapEncoder[1]=1     ; first dimension uses this axis's main encoder (typical)
+AMapEncoder[2]=3     ; second dimension uses axis B's main encoder (2D map)
+AMapEncoder[1]       ; read the encoder selected for the first dimension
 ```
 
 ## See also
@@ -50,3 +69,5 @@ AMapEncoder[1]      ; query the encoder selected for the first dimension
 - [MapStartPos](MapStartPos.md) — start position of each map segment
 - [MapLength](MapLength.md) — number of correction entries per segment
 - [MapTable/MapTableB/MapTableC/MapTableD/MapTableE](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) — correction values indexed by the mapped position
+- [Pos](../10-motion/01-kinematics-status/Pos.md) / [PosBeforeMap](PosBeforeMap.md) — corrected and pre-correction feedback
+- [AuxPos](../10-motion/01-kinematics-status/AuxPos.md) — auxiliary encoder reading, selectable as a map source

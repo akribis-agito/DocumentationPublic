@@ -32,15 +32,30 @@ Encoder-count spacing between adjacent error-mapping points.
 
 ## Overview
 
-`MapPosGap` is a per-dimension array that sets the position spacing, in encoder counts, between consecutive correction points along each error-mapping dimension. A larger gap spreads the same number of points across a wider positional range, giving coarser resolution. Together with [MapStartPos](MapStartPos.md) (start) and [MapLength](MapLength.md) (count) it defines the coordinates of the points stored in [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md).
+`MapPosGap` is a per-dimension array (`[1]`/`[2]`/`[3]`) that sets the position spacing, in encoder counts, between consecutive correction points along each error-mapping dimension. A larger gap spreads the same number of points ([MapLength](MapLength.md)) across a wider range, giving coarser resolution; a smaller gap gives finer correction over a shorter range. Together with [MapStartPos](MapStartPos.md) (start) and [MapLength](MapLength.md) (count) it defines the lookup grid of [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md).
 
 It is an axis-scoped array saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+
+## How it works
+
+The gap is the denominator that converts an encoder reading to a table index:
+
+$$
+index_f = \frac{PosBeforeCorrection - MapStartPos[d]}{MapPosGap[d]}
+$$
+
+To keep this cheap in the real-time control interrupt, the firmware precomputes the reciprocal `1 / MapPosGap[d]` (as a single-precision float) whenever `MapPosGap` is written, and multiplies by it each cycle. Two consequences follow:
+
+- **Must not be zero.** A zero gap would divide by zero, so the firmware silently substitutes the default `1000` if you set it to 0.
+- **Upper limit 8,000,000.** The reciprocal is held in a 32-bit float (24-bit mantissa); the range is capped so the gap is represented exactly and the index stays accurate.
+
+The integer part of `index_f` selects the lower grid point; the fractional part is the interpolation weight toward the next point.
 
 ## Examples
 
 ```text
 AMapPosGap[1]=1000   ; correction points 1000 encoder counts apart
-AMapPosGap[1]       ; query the spacing for the first dimension
+AMapPosGap[1]        ; read the spacing for the first dimension
 ```
 
 ## See also
@@ -48,3 +63,4 @@ AMapPosGap[1]       ; query the spacing for the first dimension
 - [MapLength](MapLength.md) — number of correction points per dimension
 - [MapStartPos](MapStartPos.md) — start position of each dimension
 - [MapTable/MapTableB/MapTableC/MapTableD/MapTableE](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) — correction values at each point
+- [Pos](../10-motion/01-kinematics-status/Pos.md) / [PosBeforeMap](PosBeforeMap.md) — corrected and pre-correction feedback

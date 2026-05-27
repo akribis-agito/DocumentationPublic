@@ -32,12 +32,34 @@ Configures the stepper stall-detection mode.
 
 ## Overview
 
-`StallCfg` selects the stepper stall-detection mode (one of three settings, range 0–2). It is part of the stepper stall-protection group together with [StallThPcnt](StallThPcnt.md), [StallCnst](StallCnst.md), and the read-only status keywords [StallStat](StallStat.md), [StallVal](StallVal.md), and [StallTh](StallTh.md).
+`StallCfg` enables stepper stall detection and selects what happens on a stall. It is the master switch for the whole stepper stall-protection group ([StallThPcnt](StallThPcnt.md), [StallCnst](StallCnst.md), and the read-only [StallStat](StallStat.md), [StallVal](StallVal.md), [StallTh](StallTh.md)).
 
-> **Documentation pending:** the meaning of each mode value is not yet documented. Contact Agito for details until this section is completed.
+## How it works
+
+`StallCfg` gates the per-sample stall logic. When it is `0` the detection block is skipped entirely; otherwise the metric/threshold are computed and a stall is declared when `StallVal < StallTh` (firmware `CommonC/AG300_CTL01ControlLoops.c:2522`):
+
+| Value | `#define` | Behaviour |
+|-------|-----------|-----------|
+| 0 | `STALL_DETECTION_OFF` | Detection disabled; metric and threshold are not evaluated |
+| 1 | `STALL_DETECTION_ON_ALERT_ONLY` | Detection runs; on stall, [StallStat](StallStat.md) is set and the `StatReg` stall bit is set, but the motor is **not** turned off |
+| 2 | `STALL_DETECTION_ON_WITH_MOTOR_OFF` | Detection runs; on stall, the above status is set **and** the axis is turned off with `CON_FLT_STALL_DETECTED_AND_MOTOR_OFF` (code `1065`) |
+
+On a detected stall the firmware always sets [StallStat](StallStat.md) `= 1` and OR-s `STAT_REG_STALL` (`0x80000000`, bit 31) into [StatReg](../../../07-status-and-faults/StatReg.md). Only in mode 2 does it additionally call `MotorOffAndAddToErrorLog(...)` (`AG300_CTL01ControlLoops.c:2534`). When the metric recovers, the stall bit is cleared and `StallStat` returns to `0`.
+
+Stall detection only operates on stepper motors driven by the internal amplifier.
+
+## Examples
+
+```text
+AStallCfg[1]=2        ; enable stall detection and turn motor off on stall
+AStallCfg[1]=1        ; alert-only (set status, keep running)
+AStallCfg[1]=0        ; disable
+```
 
 ## See also
 
-- [StallStat](StallStat.md) — stall status
-- [StallThPcnt](StallThPcnt.md) — stall threshold (percent)
-- [StallCnst](StallCnst.md) — stall-detection constants
+- [StallStat](StallStat.md) — stall status flag set when a stall is detected
+- [StallThPcnt](StallThPcnt.md) — stall sensitivity (percent)
+- [StallCnst](StallCnst.md) — speed-dependent threshold coefficients
+- [StatReg](../../../07-status-and-faults/StatReg.md) — bit 31 (`0x80000000`) set on stall
+- [ConFlt](../../../07-status-and-faults/ConFlt.md) — records `CON_FLT_STALL_DETECTED_AND_MOTOR_OFF` (1065) in mode 2

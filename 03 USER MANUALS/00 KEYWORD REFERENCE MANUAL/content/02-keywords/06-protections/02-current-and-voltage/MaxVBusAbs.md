@@ -32,7 +32,16 @@ Absolute bus-voltage ceiling; exceeding it disables the axis instantly.
 
 ## Overview
 
-`MaxVBusAbs` is the maximum allowable absolute bus voltage. If the bus voltage exceeds `MaxVBusAbs`, the axis is **instantaneously** disabled and an error is reported to the fault register `ConFlt`. This is the no-delay counterpart to [MaxVBus](MaxVBus.md), which tolerates excess for up to [MaxVBusTime](MaxVBusTime.md).
+`MaxVBusAbs` is the maximum allowable absolute bus voltage, in mV. If the bus voltage exceeds `MaxVBusAbs`, the axis is **instantaneously** disabled — there is no time window. This is the no-delay counterpart to [MaxVBus](MaxVBus.md), which tolerates excess for up to [MaxVBusTime](MaxVBusTime.md).
+
+## How it works
+
+On each periodic bus-voltage check the firmware compares `VBus` directly with `MaxVBusAbs`:
+
+- If `VBus > MaxVBusAbs`, the axis is disabled immediately and [ConFlt](../../07-status-and-faults/ConFlt.md) is set to `1023` (`CON_FLT_BUS_OVER_VOLTAGE_ABS`, "Bus Voltage too high — exceed absolute limitation").
+- If `VBus ≥ MaxVBusAbs`, [StatReg](../../07-status-and-faults/StatReg.md) bit 6 (over-MaxVBusAbs) is set as a status indication.
+
+Because no timer is involved, set `MaxVBusAbs` above [MaxVBus](MaxVBus.md) so that the time-windowed limit acts first on normal transients, with `MaxVBusAbs` as the hard backstop.
 
 ## Examples
 
@@ -44,3 +53,5 @@ AMaxVBusAbs=90000    ; instantaneous over-voltage ceiling (mV)
 
 - [MaxVBus](MaxVBus.md) — time-delayed over-voltage limit
 - [MaxVBusTime](MaxVBusTime.md) — delay used by MaxVBus / MinVBus
+- [ConFlt](../../07-status-and-faults/ConFlt.md) — fault 1023 raised on trip
+- [StatReg](../../07-status-and-faults/StatReg.md) — bit 6 flags over-MaxVBusAbs

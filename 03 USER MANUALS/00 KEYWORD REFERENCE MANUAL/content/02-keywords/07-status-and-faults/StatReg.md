@@ -59,7 +59,7 @@ Read-only bitfield reporting general axis status, saturations, limits and multi-
 | 21 | Current saturation | Current command is saturated ([PeakCL](../06-protections/02-current-and-voltage/PeakCL.md)/[ContCL](../06-protections/02-current-and-voltage/ContCL.md)) |
 | 22 | Voltage saturation | Output voltage saturated (Va/Vb/Vc reached [MaxPWM](../06-protections/02-current-and-voltage/MaxPWM.md)) |
 | 23 | Velocity saturation | Velocity command saturated ([MaxVel](../06-protections/03-motion/general-maximum-limits/MaxVel.md)) |
-| 24–25 | — | Reserved |
+| 24–25 | Other-warning code | 2-bit code (bit 24 = LSB, bit 25 = MSB): `0` none, `2` power limit reached (I²t / [ContCL](../06-protections/02-current-and-voltage/ContCL.md)); values `1` and `3` reserved |
 | 26 | Filters modified | Loop filters changed since last `CalcFilters` |
 | 27 | Calc-filters failed | The last filter calculation failed |
 | 28 | Dynamic brake | Dynamic brake is active |

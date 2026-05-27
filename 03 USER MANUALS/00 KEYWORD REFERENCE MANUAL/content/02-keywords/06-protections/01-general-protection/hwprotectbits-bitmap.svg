@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" font-family="sans-serif" font-size="12">
+  <rect x="0" y="0" width="760" height="300" fill="#ffffff"/>
+  <text x="20" y="26" font-size="15" font-weight="bold">HWProtectBits / ProtectMask &#8211; standalone (AG300) layout</text>
+  <text x="20" y="46" fill="#555">Read from FPGA PROTECTIONS1 register; lower 16 bits are meaningful.</text>
+
+  <!-- bit cells, bit 0 on the right -->
+  <g>
+    <!-- helper: draw 16 cells -->
+    <rect x="40"  y="70" width="44" height="40" fill="#eef3fb" stroke="#33598f"/>
+    <rect x="84"  y="70" width="44" height="40" fill="#eef3fb" stroke="#33598f"/>
+    <rect x="128" y="70" width="44" height="40" fill="#eef3fb" stroke="#33598f"/>
+    <rect x="172" y="70" width="44" height="40" fill="#eef3fb" stroke="#33598f"/>
+    <rect x="216" y="70" width="44" height="40" fill="#eef3fb" stroke="#33598f"/>
+    <rect x="260" y="70" width="44" height="40" fill="#eef3fb" stroke="#33598f"/>
+    <rect x="304" y="70" width="44" height="40" fill="#eef3fb" stroke="#33598f"/>
+    <rect x="348" y="70" width="44" height="40" fill="#eef3fb" stroke="#33598f"/>
+    <rect x="392" y="70" width="44" height="40" fill="#fbeeee" stroke="#8f3333"/>
+    <rect x="436" y="70" width="44" height="40" fill="#fbeeee" stroke="#8f3333"/>
+    <rect x="480" y="70" width="44" height="40" fill="#fbeeee" stroke="#8f3333"/>
+    <rect x="524" y="70" width="44" height="40" fill="#fbeeee" stroke="#8f3333"/>
+    <rect x="568" y="70" width="44" height="40" fill="#fbeeee" stroke="#8f3333"/>
+    <rect x="612" y="70" width="44" height="40" fill="#fbeeee" stroke="#8f3333"/>
+    <rect x="656" y="70" width="44" height="40" fill="#fbeeee" stroke="#8f3333"/>
+    <rect x="700" y="70" width="44" height="40" fill="#fbeeee" stroke="#8f3333"/>
+  </g>
+
+  <!-- bit numbers (15 .. 0 left to right) -->
+  <g font-size="11" text-anchor="middle" fill="#333">
+    <text x="62"  y="95">15</text>
+    <text x="106" y="95">14</text>
+    <text x="150" y="95">13</text>
+    <text x="194" y="95">12</text>
+    <text x="238" y="95">11</text>
+    <text x="282" y="95">10</text>
+    <text x="326" y="95">9</text>
+    <text x="370" y="95">8</text>
+    <text x="414" y="95">7</text>
+    <text x="458" y="95">6</text>
+    <text x="502" y="95">5</text>
+    <text x="546" y="95">4</text>
+    <text x="590" y="95">3</text>
+    <text x="634" y="95">2</text>
+    <text x="678" y="95">1</text>
+    <text x="722" y="95">0</text>
+  </g>
+
+  <!-- short labels under cells -->
+  <g font-size="9" text-anchor="middle" fill="#444">
+    <text x="62"  y="126">PwrBC</text>
+    <text x="106" y="126">PwrAC</text>
+    <text x="150" y="126">5Viso</text>
+    <text x="194" y="126">IPM</text>
+    <text x="238" y="126">5Vflt</text>
+    <text x="282" y="126">AmpTyp</text>
+    <text x="326" y="126">WDog</text>
+    <text x="370" y="126">STO2</text>
+    <text x="414" y="126">OCb</text>
+    <text x="458" y="126">OCa</text>
+    <text x="502" y="126">AuxEnc</text>
+    <text x="546" y="126">MainEnc</text>
+    <text x="590" y="126">Inrush</text>
+    <text x="634" y="126">&#8212;</text>
+    <text x="678" y="126">&#8212;</text>
+    <text x="722" y="126">STO1</text>
+  </g>
+
+  <text x="40" y="170" font-size="11" fill="#555">Blue cells (bits 8&#8211;15) are AG100/three-phase specific; presence depends on hardware.</text>
+  <text x="40" y="188" font-size="11" fill="#555">Each bit set = that hardware fault is active. ProtectMask uses the same bit positions.</text>
+
+  <text x="40" y="226" font-size="13" font-weight="bold">ProtectMask semantics</text>
+  <text x="40" y="246" font-size="11" fill="#333">ProtectMask bit = 1  &#8594;  protection is DISABLED (masked out, will not fault).</text>
+  <text x="40" y="264" font-size="11" fill="#333">ProtectMask bit = 0  &#8594;  protection is ENABLED (default; condition disables the axis).</text>
+  <text x="40" y="282" font-size="11" fill="#777">Non-maskable bits remain forced on regardless of ProtectMask.</text>
+</svg>

@@ -32,7 +32,59 @@ Read-only bitfield reporting active hardware protection conditions.
 
 ## Overview
 
-`HWProtectBits` is a read-only bitfield reporting the current state of the controller's hardware protection inputs. Each bit corresponds to a specific hardware protection condition (such as over-current, over-voltage, or a hardware enable signal). It is axis-related, updated live, and not saved to flash. Which of these conditions actually trigger a fault is selected by [ProtectMask](ProtectMask.md).
+`HWProtectBits` is a read-only bitfield reporting the live state of the drive's hardware protection signals, as read directly from the FPGA. Each bit corresponds to one hardware fault source (over-current, encoder fault, watchdog, STO/safety inputs, missing power phases, and so on). It is axis-scoped, updated every control cycle, and not saved to flash.
+
+Which of these conditions are actually allowed to disable the axis is selected by [ProtectMask](ProtectMask.md); `HWProtectBits` itself only *reports*. The value captured at the moment of a fault is also stored in the diagnostic snapshot ([ConFltSnapVal](../../07-status-and-faults/ConFltSnapVal.md) records `HWProtectBits` as one of its fixed fields).
+
+![HWProtectBits bit layout](hwprotectbits-bitmap.svg)
+
+## How it works
+
+Each control cycle the firmware copies the FPGA protections register into `glHWProtectBits`. The bit assignment differs between the two hardware families:
+
+- **Standalone (AG300):** read from the FPGA `PROTECTIONS1` register — the lower 16 bits are meaningful.
+- **Central-i (v5):** the bits are extracted from the remote amplifier's status word (masked with the faults mask, i.e. all status bits except the encoder-index bits), so the bit positions follow the Central-i layout shown in the second table below.
+
+### Standalone (AG300) bit table
+
+| Bit | Mask | Condition |
+|-----|------|-----------|
+| 0 | 0x0001 | STO1 (safe-torque-off input 1) active |
+| 1 | 0x0002 | Linear-amplifier over-voltage / inrush-resistor in use (hardware-dependent reuse of this bit) |
+| 2 | 0x0004 | Main-encoder error |
+| 3 | 0x0008 | Auxiliary-encoder error |
+| 4 | 0x0010 | Over-current, phase A |
+| 5 | 0x0020 | Over-current, phase B |
+| 6 | 0x0040 | STO2 / VCC-drive (or STO2 on AG100) |
+| 7 | 0x0080 | Hardware watchdog |
+| 8 | 0x0100 | Linear-amplifier continuous over-current / over-current phase C (hardware-dependent) |
+| 9 | 0x0200 | Linear/PWM amplifier-type conflict or amplifier-type error |
+| 10 | 0x0400 | 5 V supply fault (encoder / I/O 5 V current limit) |
+| 11 | 0x0800 | Logic AC present (AG100) |
+| 12 | 0x1000 | IPM fault (AG100) |
+| 13 | 0x2000 | 5 V isolated supply (AG100) |
+| 14 | 0x4000 | Power AC, A&ndash;C phases (AG100) |
+| 15 | 0x8000 | Power AC, B&ndash;C phases (AG100) |
+
+Bits 8&ndash;15 are reused for different signals depending on the drive model (AG100 vs. linear-amplifier vs. AG300-CTL02 builds); the meaning shown is for the common build.
+
+### Central-i (v5) bit table
+
+| Bit | Mask | Condition |
+|-----|------|-----------|
+| 7 | 0x0080 | Inrush resistor still engaged (motor-on not yet allowed) |
+| 8 | 0x0100 | STO1 active |
+| 9 | 0x0200 | STO2 / VCC-drive |
+| 10 | 0x0400 | Main-encoder error |
+| 11 | 0x0800 | Auxiliary-encoder error |
+| 12 | 0x1000 | Over-current |
+| 13 | 0x2000 | IPM fault |
+| 14 | 0x4000 | 5 V isolated supply fault |
+| 15 | 0x8000 | Watchdog |
+
+The Central-i status word additionally carries power-phase / logic-power flags that are folded into `HWProtectBits` (`PWR_BC_MISSING` 0x10, `PWR_AC_MISSING` 0x20, `LOGPWR_AB_MISSING` 0x40, peripheral 5 V fault 0x08). The power-related bits are treated specially: they are gated by the declared [PowerSupply](../02-current-and-voltage/PowerSupply.md) type, so a phase that the supply does not use is not reported as missing.
+
+When an enabled bit (see [ProtectMask](ProtectMask.md)) is set, the axis is disabled and the matching [ConFlt](../../07-status-and-faults/ConFlt.md) code is raised — for example a 5 V-fault bit raises fault `1047`, STO1 raises the STO fault, and an over-current bit raises an over-current fault. See [Controller error codes](../../../04-error-codes/controller-error-codes.md) for the full mapping.
 
 ## Examples
 
@@ -40,6 +92,12 @@ Read-only bitfield reporting active hardware protection conditions.
 AHWProtectBits      ; read the active hardware protection conditions
 ```
 
+Test a specific condition by masking: on a standalone drive, "STO1 active" is `AHWProtectBits & 0x0001`, and "main-encoder error" is `AHWProtectBits & 0x0004`.
+
 ## See also
 
-- [ProtectMask](ProtectMask.md) — enables which protections trigger a fault
+- [ProtectMask](ProtectMask.md) — selects which of these bits are allowed to fault the axis
+- [ConFlt](../../07-status-and-faults/ConFlt.md) — fault code raised when an enabled protection bit sets
+- [ConFltSnapVal](../../07-status-and-faults/ConFltSnapVal.md) — captures `HWProtectBits` at the moment of a fault
+- [PowerSupply](../02-current-and-voltage/PowerSupply.md) — gates the power-phase bits
+- [Controller error codes](../../../04-error-codes/controller-error-codes.md) — meaning of each fault code

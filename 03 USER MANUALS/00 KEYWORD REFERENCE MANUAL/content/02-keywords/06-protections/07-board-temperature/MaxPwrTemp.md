@@ -32,15 +32,46 @@ Maximum allowed power-stage temperature (°C); exceeding it triggers protection.
 
 ## Overview
 
-`MaxPwrTemp` is the maximum allowed temperature, in °C, for the power-generating components of the product. When [PwrTemp](PwrTemp.md) approaches or exceeds this limit, the controller's over-temperature protection acts to prevent damage.
+`MaxPwrTemp` is the maximum allowed temperature, in °C, for the power stage (IPM). When [PwrTemp](PwrTemp.md) approaches or exceeds this limit the over-temperature protection acts to prevent damage. It is axis-scoped, saved to flash, and may be changed at any time (range 20…80 °C, default 65 °C).
+
+## How it works
+
+### Over-temperature fault
+
+Once per millisecond, while the motor is on and not in simulation:
+
+```text
+if (PwrTemp > MaxPwrTemp)   →   disable axis, ConFlt = 1018 (CON_FLT_HIGH_IPM_TEMP), append to ErrLog
+```
+
+(Firmware: `AG300_CTL01ControlInterrupt.c:10299` and `:10325`; also `AG300_CTL01Funcs.c:19808`.) The axis is disabled via `MotorOffAndAddToErrorLog(...)`, [ConFlt](../../07-status-and-faults/ConFlt.md) is set to `1018`, and the event is logged. The fault clears on re-enable.
+
+### Graduated warning bands (StatReg)
+
+Whenever you write `MaxPwrTemp`, the firmware recomputes three derived band edges (`SpMaxPwrTemp`, `SpecialFuncs.c:5163`) at 88 / 92 / 96 % of the limit. These feed the combined power/board-temperature warning field in [StatReg](../../07-status-and-faults/StatReg.md) (bits 11–12) — the reported level is the higher of the `PwrTemp` and [BoardTemp](BoardTemp.md) contributions:
+
+| `PwrTemp` band | StatReg warning level | PCSuite LED |
+|----------------|----------------------|-------------|
+| < 0.88 × MaxPwrTemp | 0 — none | off |
+| 0.88…0.92 × MaxPwrTemp | 1 — low | yellow |
+| 0.92…0.96 × MaxPwrTemp | 2 — medium | orange |
+| > 0.96 × MaxPwrTemp | 3 — high | red |
+| > MaxPwrTemp | fault (`ConFlt = 1018`) | — |
+
+(Bands evaluated at `AG300_CTL01ControlInterrupt.c:9556`–`:9579` and `:11598`–`:11606`.)
+
+> **Note:** the controller-board over-temperature limit ([BoardTemp](BoardTemp.md)) is a *fixed* 75 °C constant — only the power-stage limit is user-settable through this keyword.
 
 ## Examples
 
 ```text
-AMaxPwrTemp=65       ; power-stage over-temperature limit (°C)
+AMaxPwrTemp[1]=65    ; trip axis A if the IPM exceeds 65 °C
+AMaxPwrTemp          ; read the current limit
 ```
 
 ## See also
 
 - [PwrTemp](PwrTemp.md) — measured power-stage temperature
-- [BoardTemp](BoardTemp.md) — controller-board temperature
+- [BoardTemp](BoardTemp.md) — controller-board temperature (fixed 75 °C limit)
+- [StatReg](../../07-status-and-faults/StatReg.md) — bits 11–12 carry the warning level
+- [ConFlt](../../07-status-and-faults/ConFlt.md) — fault code 1018 (IPM temperature too high)
