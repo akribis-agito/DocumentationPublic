@@ -6,6 +6,7 @@ availability:
   - v4
   central-i:
   - v4
+  - v5
 can_code: 226
 attributes:
   access: rw
@@ -23,7 +24,11 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: partial
-overrides: {}
+overrides:
+  central-i.v5:
+    range:
+    - 0
+    - 8
 ---
 # AmpType
 

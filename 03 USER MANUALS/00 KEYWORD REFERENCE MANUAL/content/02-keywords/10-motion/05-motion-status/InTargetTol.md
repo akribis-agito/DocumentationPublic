@@ -6,6 +6,7 @@ availability:
   - v4
   central-i:
   - v4
+  - v5
 can_code: 265
 attributes:
   access: rw

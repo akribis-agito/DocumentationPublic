@@ -6,6 +6,7 @@ availability:
   - v4
   central-i:
   - v4
+  - v5
 can_code: 721
 attributes:
   access: rw
@@ -23,7 +24,13 @@ attributes:
   default: 1000000
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  central-i.v5:
+    data_type: float32
+    units: user
+    range: null
+    default: null
+    can_code: 566
 ---
 # JerkInDec
 

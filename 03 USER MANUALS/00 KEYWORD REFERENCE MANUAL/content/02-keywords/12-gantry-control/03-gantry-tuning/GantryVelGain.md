@@ -6,6 +6,7 @@ availability:
   - v4
   central-i:
   - v4
+  - v5
 can_code: 656
 attributes:
   access: rw
@@ -23,7 +24,14 @@ attributes:
   default: 100
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  central-i.v5:
+    type: array
+    array_size: 6
+    data_type: float32
+    range:
+    - 0
+    - 100000000
 ---
 # GantryVelGain
 

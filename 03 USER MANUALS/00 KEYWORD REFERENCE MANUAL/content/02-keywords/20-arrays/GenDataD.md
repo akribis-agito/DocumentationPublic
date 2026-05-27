@@ -1,5 +1,26 @@
 ---
 summary: Proposed 64-bit double-precision integer variant of GenData (availability unconfirmed).
+keyword: GenDataD
+availability:
+  standalone: []
+  central-i:
+  - v5
+can_code: 773
+attributes:
+  access: rw
+  scope: non-axis
+  flash: true
+  type: array
+  array_size: 101
+  data_type: float64
+  ok_in_motion: true
+  ok_motor_on: true
+  units: none
+  range: null
+  default: null
+  scaling: 1.0
+  implemented: final
+overrides: {}
 ---
 # GenDataD
 

@@ -1,5 +1,26 @@
 ---
 summary: Correction value read from the gantry map table at the current indexed position.
+keyword: GantryMapVal
+availability:
+  standalone: []
+  central-i:
+  - v5
+can_code: 750
+attributes:
+  access: ro
+  scope: axis
+  flash: false
+  type: scalar
+  array_size: 1
+  data_type: float64
+  ok_in_motion: true
+  ok_motor_on: true
+  units: none
+  range: null
+  default: null
+  scaling: 1.0
+  implemented: final
+overrides: {}
 ---
 # GantryMapVal
 

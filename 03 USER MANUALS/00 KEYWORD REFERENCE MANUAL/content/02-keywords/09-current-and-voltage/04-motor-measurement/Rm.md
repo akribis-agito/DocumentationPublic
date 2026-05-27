@@ -6,6 +6,7 @@ availability:
   - v4
   central-i:
   - v4
+  - v5
 can_code: 373
 attributes:
   access: rw
@@ -23,7 +24,9 @@ attributes:
   default: 1000
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  central-i.v5:
+    data_type: float32
 ---
 # Rm
 

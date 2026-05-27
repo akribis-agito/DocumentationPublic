@@ -6,6 +6,7 @@ availability:
   - v4
   central-i:
   - v4
+  - v5
 can_code: 81
 attributes:
   access: '0'
@@ -23,7 +24,16 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: partial
-overrides: {}
+overrides:
+  central-i.v5:
+    access: rw
+    data_type: float32
+    ok_in_motion: true
+    ok_motor_on: true
+    units: user
+    range: null
+    default: 10000000
+    implemented: final
 ---
 # MaxAcc
 

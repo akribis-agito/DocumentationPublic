@@ -6,6 +6,7 @@ availability:
   - v4
   central-i:
   - v4
+  - v5
 can_code: 15
 attributes:
   access: ro
@@ -23,7 +24,10 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  central-i.v5:
+    data_type: float32
+    range: null
 ---
 # Vc
 

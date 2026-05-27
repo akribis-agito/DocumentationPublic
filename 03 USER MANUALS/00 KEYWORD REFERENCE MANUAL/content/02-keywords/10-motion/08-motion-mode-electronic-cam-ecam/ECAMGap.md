@@ -6,6 +6,7 @@ availability:
   - v4
   central-i:
   - v4
+  - v5
 can_code: 304
 attributes:
   access: rw
@@ -23,7 +24,11 @@ attributes:
   default: 100
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  central-i.v5:
+    range:
+    - -2147483647
+    - 2147483647
 ---
 # ECAMGap
 

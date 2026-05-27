@@ -23,6 +23,8 @@ attributes:
   scaling: 1.0
   implemented: not_implemented
 overrides: {}
+removed_in:
+- v5
 ---
 # OneOverTAuto
 

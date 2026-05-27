@@ -1,5 +1,28 @@
 ---
 summary: Initial and final frequencies of the chirp injection, in Hz/100.
+keyword: InjectChirpF
+availability:
+  standalone: []
+  central-i:
+  - v5
+can_code: 716
+attributes:
+  access: rw
+  scope: axis
+  flash: true
+  type: array
+  array_size: 3
+  data_type: int32
+  ok_in_motion: true
+  ok_motor_on: true
+  units: none
+  range:
+  - 10
+  - 100000
+  default: 1000
+  scaling: 1.0
+  implemented: final
+overrides: {}
 ---
 # InjectChirpF
 

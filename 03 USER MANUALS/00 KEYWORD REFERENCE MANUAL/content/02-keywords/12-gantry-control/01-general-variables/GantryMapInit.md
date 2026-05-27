@@ -1,5 +1,28 @@
 ---
 summary: Initialises the gantry map correction feature before gantry motion.
+keyword: GantryMapInit
+availability:
+  standalone: []
+  central-i:
+  - v5
+can_code: 752
+attributes:
+  access: rw
+  scope: axis
+  flash: true
+  type: scalar
+  array_size: 1
+  data_type: int64
+  ok_in_motion: false
+  ok_motor_on: true
+  units: none
+  range:
+  - -2251799813685248
+  - 2251799813685247
+  default: 0
+  scaling: 1.0
+  implemented: final
+overrides: {}
 ---
 # GantryMapInit
 

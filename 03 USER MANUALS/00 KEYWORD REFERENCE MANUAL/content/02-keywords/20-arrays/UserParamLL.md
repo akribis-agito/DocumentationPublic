@@ -1,5 +1,28 @@
 ---
 summary: Proposed per-axis long-long (64-bit signed integer) variant of UserParam (availability unconfirmed).
+keyword: UserParamLL
+availability:
+  standalone: []
+  central-i:
+  - v5
+can_code: 774
+attributes:
+  access: rw
+  scope: axis
+  flash: true
+  type: array
+  array_size: 21
+  data_type: int64
+  ok_in_motion: true
+  ok_motor_on: true
+  units: none
+  range:
+  - -2251799813685248
+  - 2251799813685247
+  default: null
+  scaling: 1.0
+  implemented: final
+overrides: {}
 ---
 # UserParamLL
 

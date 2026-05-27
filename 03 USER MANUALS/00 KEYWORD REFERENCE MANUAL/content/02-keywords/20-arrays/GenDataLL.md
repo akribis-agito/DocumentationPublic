@@ -1,5 +1,28 @@
 ---
 summary: Proposed long-long (64-bit signed integer) variant of GenData (availability unconfirmed).
+keyword: GenDataLL
+availability:
+  standalone: []
+  central-i:
+  - v5
+can_code: 775
+attributes:
+  access: rw
+  scope: non-axis
+  flash: true
+  type: array
+  array_size: 101
+  data_type: int64
+  ok_in_motion: true
+  ok_motor_on: true
+  units: none
+  range:
+  - -2251799813685248
+  - 2251799813685247
+  default: null
+  scaling: 1.0
+  implemented: final
+overrides: {}
 ---
 # GenDataLL
 

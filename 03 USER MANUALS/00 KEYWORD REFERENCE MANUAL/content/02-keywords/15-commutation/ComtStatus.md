@@ -6,6 +6,7 @@ availability:
   - v4
   central-i:
   - v4
+  - v5
 can_code: 143
 attributes:
   access: ro
@@ -23,7 +24,9 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  central-i.v5:
+    array_size: 4
 ---
 # ComtStatus
 

@@ -1,5 +1,26 @@
 ---
 summary: Proposed per-axis floating-point variant of UserParam (availability unconfirmed).
+keyword: UserParamF
+availability:
+  standalone: []
+  central-i:
+  - v5
+can_code: 718
+attributes:
+  access: rw
+  scope: axis
+  flash: true
+  type: array
+  array_size: 21
+  data_type: float32
+  ok_in_motion: true
+  ok_motor_on: true
+  units: none
+  range: null
+  default: null
+  scaling: 1.0
+  implemented: final
+overrides: {}
 ---
 # UserParamF
 

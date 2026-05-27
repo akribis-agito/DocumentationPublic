@@ -5,6 +5,7 @@ availability:
   - v4
   central-i:
   - v4
+  - v5
 can_code: 323
 attributes:
   access: rw
@@ -22,7 +23,12 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  central-i.v5:
+    data_type: int64
+    range:
+    - -2251799813685248
+    - 2251799813685247
 summary: Starting position of each error-mapping dimension, in encoder counts.
 ---
 # MapStartPos

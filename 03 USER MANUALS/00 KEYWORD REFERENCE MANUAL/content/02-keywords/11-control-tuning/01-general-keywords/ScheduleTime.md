@@ -5,6 +5,7 @@ availability:
   - v4
   central-i:
   - v4
+  - v5
 can_code: 262
 attributes:
   access: rw
@@ -20,7 +21,11 @@ attributes:
   default: null
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  central-i.v5:
+    range:
+    - 0
+    - 655360
 ---
 # ScheduleTime
 

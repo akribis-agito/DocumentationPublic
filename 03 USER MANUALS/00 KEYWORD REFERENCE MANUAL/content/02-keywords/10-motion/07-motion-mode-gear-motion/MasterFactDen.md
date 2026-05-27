@@ -1,5 +1,28 @@
 ---
 summary: Denominator of the gear ratio applied to the master-variable delta.
+keyword: MasterFactDen
+availability:
+  standalone: []
+  central-i:
+  - v5
+can_code: 632
+attributes:
+  access: rw
+  scope: axis
+  flash: true
+  type: scalar
+  array_size: 1
+  data_type: int32
+  ok_in_motion: true
+  ok_motor_on: true
+  units: none
+  range:
+  - 1
+  - 16777215
+  default: 65536
+  scaling: 1.0
+  implemented: final
+overrides: {}
 ---
 # MasterFactDen
 

@@ -1,5 +1,28 @@
 ---
 summary: Read-only velocity derived from the gantry auxiliary encoder.
+keyword: GantryAuxVel
+availability:
+  standalone: []
+  central-i:
+  - v5
+can_code: 677
+attributes:
+  access: ro
+  scope: axis
+  flash: false
+  type: scalar
+  array_size: 1
+  data_type: int64
+  ok_in_motion: true
+  ok_motor_on: true
+  units: user
+  range:
+  - -2251799813685248
+  - 2251799813685247
+  default: 0
+  scaling: 1.0
+  implemented: final
+overrides: {}
 ---
 # GantryAuxVel
 

@@ -23,6 +23,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+removed_in:
+- v5
 ---
 # OneOverTGap
 

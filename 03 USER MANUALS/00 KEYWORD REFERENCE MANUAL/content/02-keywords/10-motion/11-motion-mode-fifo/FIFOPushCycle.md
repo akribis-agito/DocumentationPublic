@@ -6,6 +6,7 @@ availability:
   - v4
   central-i:
   - v4
+  - v5
 can_code: 284
 attributes:
   access: rw
@@ -21,7 +22,11 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  central-i.v5:
+    range:
+    - 1
+    - 65536000
 ---
 # FIFOPushCycle
 

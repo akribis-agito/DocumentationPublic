@@ -1,5 +1,28 @@
 ---
 summary: Enables dual-loop (position + yaw) gantry control mode.
+keyword: GantryDLoopOn
+availability:
+  standalone: []
+  central-i:
+  - v5
+can_code: 675
+attributes:
+  access: rw
+  scope: axis
+  flash: true
+  type: scalar
+  array_size: 1
+  data_type: int32
+  ok_in_motion: false
+  ok_motor_on: false
+  units: none
+  range:
+  - 0
+  - 1
+  default: 0
+  scaling: 1.0
+  implemented: final
+overrides: {}
 ---
 # GantryDLoopOn
 

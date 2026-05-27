@@ -1,5 +1,28 @@
 ---
 summary: Intended to zero the axis position error; availability and behaviour unconfirmed.
+keyword: ZeroPosErr
+availability:
+  standalone: []
+  central-i:
+  - v5
+can_code: 669
+attributes:
+  access: ro
+  scope: axis
+  flash: false
+  type: scalar
+  array_size: 1
+  data_type: int32
+  ok_in_motion: true
+  ok_motor_on: true
+  units: func
+  range:
+  - 0
+  - 0
+  default: 0
+  scaling: 1.0
+  implemented: final
+overrides: {}
 ---
 # ZeroPosErr
 

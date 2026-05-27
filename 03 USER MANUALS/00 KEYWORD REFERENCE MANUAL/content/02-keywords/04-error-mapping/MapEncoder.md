@@ -5,6 +5,7 @@ availability:
   - v4
   central-i:
   - v4
+  - v5
 can_code: 322
 attributes:
   access: rw

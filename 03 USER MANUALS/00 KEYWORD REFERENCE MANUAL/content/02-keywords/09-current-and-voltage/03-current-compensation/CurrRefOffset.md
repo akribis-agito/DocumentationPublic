@@ -1,5 +1,28 @@
 ---
 summary: Current reference offset (mA) applied on top of the motor's current reference.
+keyword: CurrRefOffset
+availability:
+  standalone: []
+  central-i:
+  - v5
+can_code: 599
+attributes:
+  access: rw
+  scope: axis
+  flash: true
+  type: scalar
+  array_size: 1
+  data_type: float32
+  ok_in_motion: true
+  ok_motor_on: true
+  units: none
+  range:
+  - -6400
+  - 6400
+  default: 0
+  scaling: 1.0
+  implemented: final
+overrides: {}
 ---
 # CurrRefOffset
 

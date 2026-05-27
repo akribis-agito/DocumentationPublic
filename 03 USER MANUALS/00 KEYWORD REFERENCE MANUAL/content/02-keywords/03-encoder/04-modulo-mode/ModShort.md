@@ -6,6 +6,7 @@ availability:
   - v4
   central-i:
   - v4
+  - v5
 can_code: 149
 attributes:
   access: '0'
@@ -23,7 +24,14 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: not_implemented
-overrides: {}
+overrides:
+  central-i.v5:
+    access: rw
+    units: none
+    range:
+    - 0
+    - 3
+    implemented: final
 ---
 # ModShort
 
