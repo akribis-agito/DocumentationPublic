@@ -1,5 +1,6 @@
 ---
 keyword: StepInPosCurr
+summary: Stepper phase current command, in mA, held while the motor is at standstill.
 availability:
   standalone:
   - v4
@@ -26,10 +27,24 @@ overrides: {}
 ---
 # StepInPosCurr
 
-**Condition:**
+Stepper phase current command, in mA, held while the motor is at standstill.
 
-This keyword is only used when MotorType = 6 or 7.
+## Overview
 
-**Definition:**
+`StepInPosCurr` is the phase current command, in milliampere, applied to a stepper motor while it is **at standstill** (the holding current). It is typically set lower than the in-motion current to reduce heating and power consumption while still holding position. The companion keyword [StepInMotCurr](StepInMotCurr.md) sets the higher current used during motion.
 
-StepInPosCurr is the phase current command (in milliampere) when stepper motor is in standstill (holding current).
+This keyword only applies when [MotorType](MotorType.md) is 6 (open-loop stepper) or 7 (closed-loop stepper). It is axis-scope and flash-saved, but may be changed while the motor is on and in motion. A value of 0 applies no holding current.
+
+## Examples
+
+```text
+StepInPosCurr=500       ; 500 mA holding current at standstill
+StepInPosCurr=0         ; no holding current
+StepInPosCurr?          ; query the current value
+```
+
+## See also
+
+- [StepInMotCurr](StepInMotCurr.md) — stepper phase current while in motion (stepping current)
+- [MotorType](MotorType.md) — must be 6 or 7 (stepper) for this keyword to apply
+- [StepBits](StepBits.md) — steps per electrical cycle

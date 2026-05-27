@@ -1,5 +1,6 @@
 ---
 keyword: IdenResults
+summary: Read-only array holding the calculated input/output relations from sine sweep identification.
 availability:
   standalone:
   - v4
@@ -26,15 +27,15 @@ overrides: {}
 ---
 # IdenResults
 
-**Condition:**
+Read-only array holding the calculated input/output relations from sine sweep identification.
 
-IdenResults is only applicable to sine sweep identification.
+## Overview
 
-**Definition:**
+`IdenResults` stores the calculated relations between the recorded input and output vectors. It applies only to sine sweep identification and is updated after a [CalcIden](CalcIden.md) operation completes. The fundamental (first harmonic) frequency refers to the frequency defined in [InjectFreq](../13-injection/InjectFreq.md). The values feed the auto-tuning and filter-design algorithms via [PlantModel](PlantModel.md).
 
-IdenResults stores the calculated relations between the recorded input and output vectors. It is updated after CalcIden operation completes. Fundamental/first harmonic frequency refers to the frequency defined in [InjectFreq](../../02-keywords/13-injection/InjectFreq.md).
+## How it works
 
-The details of each array entry are as shown.
+The details of each array entry are as shown (array is 1-indexed).
 
 | Index | Descriptions |
 |----|----|
@@ -48,8 +49,21 @@ The details of each array entry are as shown.
 | 8, 19 | Amplitude of input fundamental sine wave |
 | 11, 22 | Amplitude of output fundamental sine wave, scaled up by 1000 |
 
-For standard identification, there will only be 1 input and 1 output vectors, with results populated in array indices 1 to 11.
+For standard identification, there will only be 1 input and 1 output vector, with results populated in array indices 1 to 11.
 
-For dual loop system plant identification, there will be 1 input and 2 output vectors. The relationship between the first output and the input, and second output and the input will be on the indices 1 to 11 and 12 to 22, respectively.
+For dual-loop system plant identification, there will be 1 input and 2 output vectors. The relationship between the first output and the input, and the second output and the input, will be on indices 1 to 11 and 12 to 22, respectively.
 
-The results are acquired by PCSuite after CalcIden operation following each sine excitation. Please contact Agito if more information is needed.
+The results are acquired by PCSuite after the [CalcIden](CalcIden.md) operation following each sine excitation. Please contact Agito if more information is needed.
+
+## Examples
+
+```text
+IdenResults?        ; read all calculated identification results
+IdenResults[5]?     ; read amplitude ratio (dB) of output over input at fundamental
+```
+
+## See also
+
+- [CalcIden](CalcIden.md) — calculates and populates these results
+- [InjectFreq](../13-injection/InjectFreq.md) — fundamental sine frequency the results refer to
+- [PlantModel](PlantModel.md) — identified plant model built for tuning

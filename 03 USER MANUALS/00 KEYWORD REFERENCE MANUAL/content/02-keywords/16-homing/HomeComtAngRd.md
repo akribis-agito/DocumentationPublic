@@ -1,5 +1,6 @@
 ---
 keyword: HomeComtAngRd
+summary: Read-only array of commutation angles captured at the home position.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # HomeComtAngRd
 
-**Definition:**
+Read-only array of commutation angles captured at the home position.
 
-HomeComtAngRd is a read-only array that holds the commutation angle values recorded at the home position during a homing sequence when HomeComtAngOn is active. These values can be saved and used to restore the commutation angle on subsequent power-ups via HomeComtAngWr. It is an axis-related, read-only array that is not saved to flash.
+## Overview
 
-**See also:**
+`HomeComtAngRd` is a read-only array (3 elements) holding the commutation-angle values recorded at the home position during a homing sequence while [HomeComtAngOn](HomeComtAngOn.md) is active. Each value is an electrical angle in the range 0–35999. A recorded value can be noted and later written to [HomeComtAngWr](HomeComtAngWr.md) to restore the commutation angle on subsequent power-ups, avoiding a repeat homing sequence. It is an axis-scoped, read-only array that is not saved to flash.
 
-[HomeComtAngOn](HomeComtAngOn.md), [HomeComtAngWr](HomeComtAngWr.md)
+## Examples
+
+```text
+HomeComtAngRd[1]?   ; read the first captured commutation angle
+HomeComtAngRd?      ; read the full captured-angle array
+```
+
+## See also
+
+- [HomeComtAngOn](HomeComtAngOn.md) — enables capture into this array
+- [HomeComtAngWr](HomeComtAngWr.md) — writes a stored angle back to restore commutation

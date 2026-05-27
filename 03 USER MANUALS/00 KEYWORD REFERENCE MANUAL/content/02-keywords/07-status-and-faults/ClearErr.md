@@ -1,5 +1,6 @@
 ---
 keyword: ClearErr
+summary: Command that clears the controller error log (ErrLog).
 availability:
   standalone:
   - v4
@@ -26,6 +27,21 @@ overrides: {}
 ---
 # ClearErr
 
-**Definition:**
+Command that clears the controller error log (ErrLog).
 
-ClearErr is a command that clears ErrLog array.
+## Overview
+
+`ClearErr` empties the [ErrLog](ErrLog.md) array, discarding all recorded error entries and their timestamps. Use it after you have reviewed or exported the log so that newly logged errors start from a clean slate.
+
+`ClearErr` is a non-axis command (it acts on the unit-wide log) and takes no value — issuing the keyword runs the command. It is not saved to flash and may be issued at any time, including while a motor is enabled or in motion.
+
+## Examples
+
+```text
+ClearErr            ; clear all entries from the error log
+```
+
+## See also
+
+- [ErrLog](ErrLog.md) — the error log this command clears
+- [ConFlt](ConFlt.md) — the per-axis fault code; positive values are appended to ErrLog

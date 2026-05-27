@@ -1,5 +1,6 @@
 ---
 keyword: LAmpFullScale
+summary: Reserved selection of the full-scale current range for a specific built-in linear amplifier product.
 availability:
   standalone:
   - v4
@@ -26,16 +27,33 @@ overrides: {}
 ---
 # LAmpFullScale
 
-**Condition:** 
+Reserved selection of the full-scale current range for a specific built-in linear amplifier product.
 
-This keyword is only used when AmpType = 4 (reserved setting).
+## Overview
 
-**Definition:**
+`LAmpFullScale` selects the full-scale current-reference range of a specific built-in **linear amplifier** product, expressed as the current that corresponds to a 10 V output. It only applies when [AmpType](AmpType.md) = 4, which is itself a reserved (linear-amplifier) setting — so on standard products this keyword has no effect.
 
-LAmpFullScale is a reserved keyword for specific built-in linear amplifier product. It is used to select choice of full-scale current reference (CurrRef) over 10V output.
+Being axis-scope and flash-saved, it is set during configuration and cannot be changed while the motor is on or in motion.
 
-| LAmpFullScale | Full scale options |
+> [!note]
+> `AmpType = 4` is a reserved setting for a specific linear-amplifier product. Use this keyword only on hardware that supports it; contact Agito if unsure.
+
+## How it works
+
+| LAmpFullScale | Full-scale current over 10 V |
 |---------------|--------------------|
-| 0             | 0.4A over 10V      |
-| 1             | 1.2A over 10V      |
-| 2             | 3.0A over 10V      |
+| 0             | 0.4 A over 10 V    |
+| 1             | 1.2 A over 10 V    |
+| 2             | 3.0 A over 10 V    |
+
+## Examples
+
+```text
+LAmpFullScale=1     ; 1.2 A corresponds to full-scale (10 V) output
+LAmpFullScale?      ; query the current selection
+```
+
+## See also
+
+- [AmpType](AmpType.md) — must be 4 (reserved linear amplifier) for this keyword to apply
+- [AAmpFullScale](AAmpFullScale.md) — full-scale scaling for external amplifier modes

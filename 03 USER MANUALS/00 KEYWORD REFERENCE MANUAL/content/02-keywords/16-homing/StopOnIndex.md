@@ -1,5 +1,6 @@
 ---
 keyword: StopOnIndex
+summary: Enables automatic stop of axis motion on the next encoder index pulse.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # StopOnIndex
 
-**Definition:**
+Enables automatic stop of axis motion on the next encoder index pulse.
 
-StopOnIndex configures the encoder index pulse to automatically stop axis motion when detected. When set to a non-zero value, the next encoder index pulse causes the axis to halt, which is useful for homing procedures that reference the encoder index position. It is an axis-related parameter, not saved to flash, and can be changed at any time.
+## Overview
 
-**See also:**
+`StopOnIndex` enables the index stop function. When set to a non-zero value, the next encoder index pulse causes the axis to halt, which is useful for homing procedures that reference the encoder index position — see the "Jog to index" and "Move to index position" steps in [HomingDef](HomingDef.md). It works analogously to [StopOnHome](StopOnHome.md), which stops on the home digital input instead. It is an axis-scoped parameter, not saved to flash, and can be changed at any time.
 
-[StopOnHome](StopOnHome.md), [HomeStat](HomeStat.md)
+## Examples
+
+```text
+StopOnIndex=1       ; halt the axis on the next encoder index pulse
+StopOnIndex?        ; 0 = disabled, 1 = enabled
+```
+
+## See also
+
+- [StopOnHome](StopOnHome.md) — equivalent stop on the home digital input
+- [HomeStat](HomeStat.md) — homing status bit-field
+- [HomingDef](HomingDef.md) — homing steps that reference the index

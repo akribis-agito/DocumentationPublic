@@ -1,5 +1,6 @@
 ---
 keyword: StepBits
+summary: Sets the number of steps per electrical cycle for a stepper motor, controlling full-, half-, or micro-stepping.
 availability:
   standalone:
   - v4
@@ -26,18 +27,35 @@ overrides: {}
 ---
 # StepBits
 
-**Condition:**
+Sets the number of steps per electrical cycle for a stepper motor, controlling full-, half-, or micro-stepping.
 
-This keyword is only used when MotorType = 6 or 7.
+## Overview
 
-**Definition:**
+`StepBits` defines the number of steps per electrical cycle for a stepper motor, which sets how finely each full-step excitation sequence is subdivided. Higher values give finer microstepping and smoother motion at the cost of less torque per step.
 
-StepBits is used to define the number of steps per electrical cycle, where
+This keyword only applies when [MotorType](MotorType.md) is 6 (open-loop stepper) or 7 (closed-loop stepper). It feeds into the resolution and counts-per-revolution formulas described under [MotorType](MotorType.md), and works alongside [PolePrs](PolePrs.md) for closed-loop steppers. Being axis-scope and flash-saved, it cannot be changed while the motor is on or in motion.
+
+## How it works
+
+The number of steps per electrical cycle is
 
 $$
 Steps\ per\ electrical\ cycle = 2^{StepBits}\ \lbrack step\ count\rbrack
 $$
 
-StepBits = 2 and StepBits = 3 correspond to full-stepping (4 steps per electrical cycle) and half-stepping (8 steps per electrical cycle) respectively.
+`StepBits = 2` and `StepBits = 3` correspond to full-stepping (4 steps per electrical cycle) and half-stepping (8 steps per electrical cycle) respectively. Microstepping is achieved by increasing `StepBits` above 2 (up to the maximum of 16).
 
-Microstepping can be achieved by increasing StepBits above value of 2.
+## Examples
+
+```text
+StepBits=2          ; full-stepping (4 steps per electrical cycle)
+StepBits=3          ; half-stepping (8 steps per electrical cycle)
+StepBits=8          ; microstepping (256 steps per electrical cycle)
+StepBits?           ; query the current setting
+```
+
+## See also
+
+- [MotorType](MotorType.md) — must be 6 or 7 (stepper) for this keyword to apply
+- [PolePrs](PolePrs.md) — electrical cycles per revolution for closed-loop steppers
+- [StepInMotCurr](StepInMotCurr.md) / [StepInPosCurr](StepInPosCurr.md) — stepper phase currents in motion / at standstill

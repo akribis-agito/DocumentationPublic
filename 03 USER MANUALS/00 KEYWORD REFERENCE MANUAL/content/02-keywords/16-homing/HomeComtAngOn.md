@@ -1,5 +1,6 @@
 ---
 keyword: HomeComtAngOn
+summary: Enables capture of the commutation angle at the home position during homing.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # HomeComtAngOn
 
-**Definition:**
+Enables capture of the commutation angle at the home position during homing.
 
-HomeComtAngOn enables the automatic commutation angle capture feature during homing. When set to a non-zero value, the controller records the commutation angle at the home position into HomeComtAngWr, which can later be restored with HomeComtAngWr to avoid a homing sequence on subsequent power-ups. It is an axis-related parameter, not saved to flash, and can be changed at any time.
+## Overview
 
-**See also:**
+`HomeComtAngOn` enables the automatic commutation-angle capture feature during homing. When set to a non-zero value, the controller records the commutation angle at the home position into the read-only [HomeComtAngRd](HomeComtAngRd.md) array. A captured value can later be written to [HomeComtAngWr](HomeComtAngWr.md) so commutation is restored at the correct electrical angle on subsequent power-ups, avoiding a full homing sequence. It is an axis-scoped parameter, not saved to flash, and can be changed at any time.
 
-[HomeComtAngWr](HomeComtAngWr.md), [HomeComtAngRd](HomeComtAngRd.md), [HomeStat](HomeStat.md)
+## Examples
+
+```text
+HomeComtAngOn=1     ; capture the commutation angle at home during homing
+HomeComtAngOn?      ; 0 = disabled, 1 = enabled
+```
+
+## See also
+
+- [HomeComtAngRd](HomeComtAngRd.md) — read-only array holding the captured angle(s)
+- [HomeComtAngWr](HomeComtAngWr.md) — writes a stored angle back to restore commutation
+- [HomeStat](HomeStat.md) — homing status bit-field

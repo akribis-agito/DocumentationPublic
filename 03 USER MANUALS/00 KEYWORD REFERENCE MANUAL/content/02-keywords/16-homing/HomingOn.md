@@ -1,5 +1,6 @@
 ---
 keyword: HomingOn
+summary: Starts and reports the active homing process for the axis.
 availability:
   standalone:
   - v4
@@ -26,6 +27,23 @@ overrides: {}
 ---
 # HomingOn
 
-HomingOn parameter is cleared to “0” upon power on or reset.
+Starts and reports the active homing process for the axis.
 
-When HomingOn is set to “1”, the controller will start the homing process according to the HomingDef while reporting its status on the HomingStat parameter. HomingOn parameter is cleared by the controller upon completion of the homing process (whether successfully or due to some error).
+## Overview
+
+`HomingOn` is the trigger for the built-in homing process. It is cleared to `0` on power-on or reset. Writing `1` starts the homing sequence defined in [HomingDef](HomingDef.md), with progress and any error reported by [HomingStat](HomingStat.md). The controller clears `HomingOn` back to `0` automatically when the process finishes — whether it completed successfully or was aborted by an error.
+
+Because it cannot be written while the axis is in motion, `HomingOn` is set to begin a homing run from a stationary state. Together with [HomingDef](HomingDef.md) (the step definitions) and [HomingStat](HomingStat.md) (the status), it forms the core of the homing interface.
+
+## Examples
+
+```text
+HomingOn=1          ; start the homing process defined by HomingDef
+HomingOn?           ; 1 while homing is active, cleared to 0 when done
+```
+
+## See also
+
+- [HomingDef](HomingDef.md) — defines the homing steps that run
+- [HomingStat](HomingStat.md) — reports progress and error status of the run
+- [HomingStep](HomingStep.md) — index of the last completed step

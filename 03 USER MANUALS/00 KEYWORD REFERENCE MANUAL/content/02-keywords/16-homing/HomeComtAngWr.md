@@ -1,5 +1,6 @@
 ---
 keyword: HomeComtAngWr
+summary: Sets the commutation angle applied at the home position to skip a homing sequence.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # HomeComtAngWr
 
-**Definition:**
+Sets the commutation angle applied at the home position to skip a homing sequence.
 
-HomeComtAngWr sets the commutation angle to be applied when the axis is initialised at its home position, bypassing a full homing sequence. Writing a previously captured angle (from HomeComtAngRd) allows the controller to resume commutation at the correct electrical angle without re-running homing. It is an axis-related parameter saved to flash, and cannot be changed while the axis is in motion.
+## Overview
 
-**See also:**
+`HomeComtAngWr` sets the commutation angle (electrical angle, 0–35999) to apply when the axis is initialised at its home position, bypassing a full homing sequence. Writing a previously captured angle — read from [HomeComtAngRd](HomeComtAngRd.md) after a capture enabled by [HomeComtAngOn](HomeComtAngOn.md) — lets the controller resume commutation at the correct electrical angle without re-running homing. It is an axis-scoped parameter saved to flash, so the value persists across power cycles, and it cannot be changed while the axis is in motion.
 
-[HomeComtAngOn](HomeComtAngOn.md), [HomeComtAngRd](HomeComtAngRd.md)
+## Examples
+
+```text
+HomeComtAngWr=12000 ; apply this commutation angle at the home position
+HomeComtAngWr?      ; read the configured commutation angle
+```
+
+## See also
+
+- [HomeComtAngRd](HomeComtAngRd.md) — source of the captured angle to write here
+- [HomeComtAngOn](HomeComtAngOn.md) — enables capturing the angle during homing

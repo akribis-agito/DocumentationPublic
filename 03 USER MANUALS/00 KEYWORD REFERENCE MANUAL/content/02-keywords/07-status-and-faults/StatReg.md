@@ -1,5 +1,6 @@
 ---
 keyword: StatReg
+summary: Read-only bitfield reporting general axis status and warnings.
 availability:
   standalone:
   - v4
@@ -26,15 +27,25 @@ overrides: {}
 ---
 # StatReg
 
-StatReg reports the general statuses of the axis, in terms of bit field. Some statuses are described using more than one bit. To get a specific status, use the following formula
+Read-only bitfield reporting general axis status and warnings.
+
+## Overview
+
+`StatReg` reports the general statuses of an axis as a bitfield. It is an axis-scoped, read-only register that is not saved to flash, so it always reflects the live state of the axis. Some statuses are encoded across more than one bit (for example, warnings that have several severity levels), so a mask-and-shift is needed to extract an individual status.
+
+Agito PCSuite uses the bit values of this register to drive the LEDs in its status panel. Warning statuses with four levels (none, low, medium, high) are shown as a multi-color LED (off, yellow, orange, red, respectively).
+
+> **Documentation pending:** This keyword is marked `implemented: partial`. The complete bit-field map (bit offsets, masks, and the meaning of each status field) is not yet documented here. The notes below are the recommended follow-up checks for the warning statuses but are not yet mapped to specific bits. Use Agito PCSuite, which translates `StatReg` into named statuses, until the bit table is finalized.
+
+## How it works
+
+To extract a specific status, use the following formula:
 
 $$
 Status = (StatReg\ \&\ Bit\ mask) \gg Bit\ offset
 $$
 
-The table shows bit fields of StatReg and their meanings.
-
-**Note:**
+Recommended checks when a warning status is set:
 
 1. Check whether protections MaxVBus and MinVBus are set appropriately.
 2. Check if warning is due to voltage exceeding limits during deceleration phase.
@@ -58,6 +69,17 @@ The table shows bit fields of StatReg and their meanings.
 20. AnomDtctCnfg[2]
 21. UPMRptLevel
 22. PlantModel
+
+## Examples
+
+```text
+StatReg?            ; read the full axis status bitfield
+```
+
+## See also
+
+- [ConFlt](ConFlt.md) — axis fault code (separate from these status/warning bits)
+- [MaxVBus](../06-protections/02-current-and-voltage/MaxVBus.md) / [MinVBus](../06-protections/02-current-and-voltage/MinVBus.md) — bus-voltage limits referenced by the voltage warnings
 
 **Note:**
 

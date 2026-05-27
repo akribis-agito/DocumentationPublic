@@ -1,5 +1,6 @@
 ---
 keyword: StopOnHome
+summary: Enables automatic stop of axis motion when the home digital input is asserted.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # StopOnHome
 
-**Definition:**
+Enables automatic stop of axis motion when the home digital input is asserted.
 
-StopOnHome configures which digital home input, when asserted, will automatically stop axis motion. Setting this to a non-zero value enables the home-switch stop function so that the axis halts when the home signal is detected during a move. It is an axis-related parameter, not saved to flash, and can be changed at any time.
+## Overview
 
-**See also:**
+`StopOnHome` enables the home-switch stop function. When set to a non-zero value, the axis automatically halts when the home digital input is asserted during a move. It is typically used in homing procedures that reference the home switch — see the "Jog until a change in the Home discrete input" step in [HomingDef](HomingDef.md) — and works analogously to [StopOnIndex](StopOnIndex.md), which stops on the encoder index pulse instead. It is an axis-scoped parameter, not saved to flash, and can be changed at any time.
 
-[StopOnIndex](StopOnIndex.md), [HomeStat](HomeStat.md)
+## Examples
+
+```text
+StopOnHome=1        ; halt the axis when the home input is detected
+StopOnHome?         ; 0 = disabled, 1 = enabled
+```
+
+## See also
+
+- [StopOnIndex](StopOnIndex.md) — equivalent stop on the encoder index pulse
+- [HomeStat](HomeStat.md) — homing status bit-field
+- [HomingDef](HomingDef.md) — homing steps that reference the home input

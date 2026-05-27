@@ -1,5 +1,6 @@
 ---
 keyword: HomingStep
+summary: Read-only index of the last completed step in the homing sequence.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # HomingStep
 
-**Definition:**
+Read-only index of the last completed step in the homing sequence.
 
-HomingStep is a read-only parameter that reports the index of the last completed step in the homing sequence. It can be monitored to track progress through a multi-step homing procedure. It is an axis-related, read-only status variable that is not saved to flash.
+## Overview
 
-**See also:**
+`HomingStep` is a read-only, axis-scoped status variable (not saved to flash) that reports the index of the last completed step in the homing sequence. Monitor it to track progress through a multi-step homing procedure defined by [HomingDef](HomingDef.md). It complements [HomingStat](HomingStat.md), which reports the overall status (in-progress step, success, or error code) of the run started by [HomingOn](HomingOn.md).
 
-[HomeStat](HomeStat.md), [HomingOn](HomingOn.md), [HomingDef](HomingDef.md)
+## Examples
+
+```text
+HomingStep?         ; index of the last completed homing step
+```
+
+## See also
+
+- [HomingStat](HomingStat.md) — overall status and error codes of the homing run
+- [HomingOn](HomingOn.md) — starts the homing process
+- [HomingDef](HomingDef.md) — defines the steps being counted

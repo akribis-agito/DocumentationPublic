@@ -1,5 +1,6 @@
 ---
 keyword: PlantModel
+summary: Array of identified plant-model coefficients used by auto-tuning and velocity filter design.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # PlantModel
 
-**Definition:**
+Array of identified plant-model coefficients used by auto-tuning and velocity filter design.
 
-PlantModel is an array that stores the identified plant model coefficients used by the auto-tuning and velocity filter design algorithms. The coefficients describe the mechanical transfer function of the axis as determined by the identification procedure. It is an axis-related array saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`PlantModel` stores the identified plant-model coefficients used by the auto-tuning and velocity filter design algorithms. The coefficients describe the mechanical transfer function of the axis as determined by the identification procedure (see [CalcIden](CalcIden.md) and [IdenResults](IdenResults.md)). It is an axis-related array saved to flash and can be changed at any time.
 
-[CalcIden](CalcIden.md), [IdenResults](IdenResults.md)
+## Examples
+
+```text
+PlantModel?         ; read all identified plant-model coefficients
+PlantModel[1]?      ; read the first coefficient
+```
+
+## See also
+
+- [CalcIden](CalcIden.md) — runs the sine-sweep calculation
+- [IdenResults](IdenResults.md) — raw input/output relations feeding the model
