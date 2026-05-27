@@ -10,7 +10,7 @@ from .defines import DefineTable
 from .frontmatter import render_doc, split_doc
 from .manifest import render_manifest
 from .merge import VersionAlreadyRecorded, merge_version
-from .model import PRODUCTS
+from .model import PRODUCTS, product_supported
 from .table_parser import parse_params
 
 
@@ -54,7 +54,11 @@ def run(argv: list[str]) -> int:
         path = docs.get(mnemonic)
         if path is None:
             continue  # undocumented -> handled by the manifest below
-        scan_cells = {p: tables.get(p, {}).get(mnemonic) for p in PRODUCTS}
+        scan_cells = {
+            p: (tables.get(p, {}).get(mnemonic)
+                if product_supported(p, args.version) else None)
+            for p in PRODUCTS
+        }
         fm, body = split_doc(path.read_text())
         fm.setdefault("keyword", mnemonic)
         try:

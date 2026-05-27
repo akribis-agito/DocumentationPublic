@@ -21,6 +21,19 @@ def cell_key(product: str, version: str) -> str:
     return f"{product}.{version}"
 
 
+def product_supported(product: str, version: str) -> bool:
+    """Whether a (product, version) combination is a supported/shipped product.
+
+    v5 moved the controller to 64-bit calculations and dropped the standalone
+    product; v5 is central-i only. The develop branch still *compiles* a
+    standalone (CONTROLLER) keyword table, but it is not a supported product, so
+    the generator must not record standalone availability on a v5 scan.
+    """
+    if version == "v5" and product == "standalone":
+        return False
+    return True
+
+
 def infer_data_type(record: dict) -> str:
     """Numeric type of a keyword.
 

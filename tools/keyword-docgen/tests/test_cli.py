@@ -27,6 +27,27 @@ def run_v4(docs, mode="append"):
     ])
 
 
+def run_v5(docs, mode="append"):
+    return run([
+        mode, "--version", "v5",
+        "--params", str(FIX / "params_sample_develop.c"),
+        "--defines", str(FIX / "defs.h"),
+        "--docs-root", str(docs),
+        "--manifest", str(docs / "_manifest" / "undocumented.md"),
+    ])
+
+
+def test_v5_scan_does_not_record_standalone(tmp_path):
+    # v5 is central-i only: a v5 scan must not add standalone availability,
+    # even though the develop source still has a CONTROLLER (standalone) table.
+    docs = setup_docs(tmp_path)
+    run_v4(docs)
+    run_v5(docs)
+    fm, _ = split_doc((docs / "02-keywords/11-control-tuning/PosGain.md").read_text())
+    assert fm["availability"]["standalone"] == ["v4"]          # no v5 for standalone
+    assert fm["availability"]["central-i"] == ["v4", "v5"]      # central-i gains v5
+
+
 def test_updates_existing_doc_frontmatter(tmp_path):
     docs = setup_docs(tmp_path)
     run_v4(docs)
