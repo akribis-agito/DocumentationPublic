@@ -1,5 +1,6 @@
 ---
 keyword: RecStat
+summary: Reports the recording status of each scope.
 availability:
   standalone:
   - v4
@@ -26,16 +27,20 @@ overrides: {}
 ---
 # RecStat
 
-**Definition:**
+Reports the recording status of each scope.
 
-RecStat reports the recording status of each scope.
+## Overview
+
+`RecStat` reports the recording status of each scope, allowing a host to track progress from pre-trigger fill through completion before calling [RecUpload](RecUpload.md). It is the read-back counterpart to the [RecStart](RecStart.md) / [RecStop](RecStop.md) commands. Each array index selects a scope.
 
 | Index | Descriptions                 |
 |-------|------------------------------|
 | 1     | First scope                  |
 | 2     | Second scope (if applicable) |
 
-The definition of value returned from RecStat is as shown.
+## How it works
+
+The value returned from `RecStat` is defined as shown.
 
 | Value | Status |
 |----|----|
@@ -47,4 +52,17 @@ The definition of value returned from RecStat is as shown.
 | 5 | Recording is stopped. |
 | 6 | Recording is stopped before trigger is detected. |
 
-For example, if RecStat\[1\] returns the value of 4, it indicates that recording of first scope is successful, where user can begin to stream the recorded data.
+For example, if RecStat\[1\] returns the value of 4, it indicates that recording of the first scope is successful, and the user can begin to stream the recorded data.
+
+## Examples
+
+```text
+RecStat[1]?         ; query the recording status of the first scope
+```
+
+## See also
+
+- [RecStart](RecStart.md) — start recording
+- [RecStop](RecStop.md) — stop recording
+- [RecTrigPos](RecTrigPos.md) — pre-trigger data (status 1)
+- [RecUpload](RecUpload.md) — stream data once status is 4

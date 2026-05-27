@@ -1,5 +1,6 @@
 ---
 keyword: RecUploadNext
+summary: Retrieves a scope's recorded data in successive fixed-size packets.
 availability:
   standalone:
   - v4
@@ -26,18 +27,20 @@ overrides: {}
 ---
 # RecUploadNext
 
-**Definition:**
+Retrieves a scope's recorded data in successive fixed-size packets.
 
-RecUploadNext is used to instruct the controller to return the data packet containing successive chunk of the metadata and user-unit scaled recorded data. This command allows the large size of data to be split into smaller, more manageable data packets, transmitted through repeated calling of such command.
+## Overview
 
-Each RecUploadNext index refers to a different scope.
+`RecUploadNext` instructs the controller to return a data packet containing the next successive chunk of the metadata and user-unit scaled recorded data. It allows a large data set to be split into smaller, more manageable packets transmitted through repeated calls, which is the practical alternative to [RecUpload](RecUpload.md) when the recording is too large to stream in one transfer. Each array index refers to a different scope.
 
 | Index | Descriptions                 |
 |-------|------------------------------|
 | 1     | First scope                  |
 | 2     | Second scope (if applicable) |
 
-RecUploadNext argument determines instruction to the controller in regard to the data packet.
+## How it works
+
+The `RecUploadNext` argument determines the instruction to the controller regarding the data packet.
 
 | Argument | Instructions |
 |----|----|
@@ -54,9 +57,7 @@ The packet header stores the information in bit-field described below.
 | Byte no. | 7…4 | 3 | 2 | 1…0 |
 | Properties | Reserved | Number of recordings made by the controller since power up (reset to 0 upon power up) | Is the current packet the last packet? (0 – No, 1 – Yes) | Packet ID (0 to 65535) |
 
-<span class="mark">**DN:** Issue with 5 million points (not enough ID)</span>
-
-**Example:**
+## Examples
 
 ![image78.png](../../assets/image78.png)
 
@@ -72,3 +73,9 @@ The information from the packet headers is analysed as shown.
 | 4 | 184549376 (repeat) | 11 | 0 | 0 |
 
 It can be observed that the first call returns the first 40 entries of metadata, the second call returns the next 40 entries of metadata, and the third call returns the recorded data (16 datapoints in total).
+
+## See also
+
+- [RecUpload](RecUpload.md) — single-transfer upload
+- [RecStat](RecStat.md) — recording status (must be completed/stopped)
+- [RecParamA/RecParamB](RecParamA-RecParamB.md) — order of recorded parameters

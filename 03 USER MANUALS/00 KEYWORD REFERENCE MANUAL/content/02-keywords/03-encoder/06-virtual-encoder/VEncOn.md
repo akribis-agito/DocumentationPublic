@@ -1,5 +1,6 @@
 ---
 keyword: VEncOn
+summary: Enables or disables the software-generated virtual encoder for the axis.
 availability:
   standalone:
   - v4
@@ -26,10 +27,29 @@ overrides: {}
 ---
 # VEncOn
 
-**Definition:**
+Enables or disables the software-generated virtual encoder for the axis.
 
-VEncOn enables or disables the virtual encoder for the axis. When set to a non-zero value, the controller uses the software-generated virtual encoder position (defined by VEncSrc, VEncType, VEncFact, VEncFactDen, and VEncDelay) as the encoder feedback source. It is an axis-related parameter saved to flash.
+## Overview
 
-**See also:**
+`VEncOn` enables or disables the virtual encoder for the axis. When set to 1, the controller uses the software-generated virtual encoder position as the feedback source, where the position is derived from the source selected by [VEncSrc](VEncSrc.md), formatted by [VEncType](VEncType.md), scaled by [VEncFact](VEncFact.md) / [VEncFactDen](VEncFactDen.md), and delayed by [VEncDelay](VEncDelay.md). It is an axis-scope parameter saved to flash and can be changed while the motor is on or in motion.
 
-[VEncSrc](VEncSrc.md), [VEncType](VEncType.md), [VEncFact](VEncFact.md), [VEncFactDen](VEncFactDen.md), [VEncDelay](VEncDelay.md)
+## How it works
+
+| VEncOn | State |
+|---|---|
+| 0 | Virtual encoder disabled |
+| 1 | Virtual encoder enabled |
+
+## Examples
+
+```text
+VEncOn=1            ; enable the virtual encoder
+VEncOn=0            ; disable the virtual encoder
+```
+
+## See also
+
+- [VEncSrc](VEncSrc.md) — source signal for the virtual encoder
+- [VEncType](VEncType.md) — output format of the virtual encoder
+- [VEncFact](VEncFact.md) / [VEncFactDen](VEncFactDen.md) — scaling ratio numerator / denominator
+- [VEncDelay](VEncDelay.md) — delay applied to the virtual encoder output

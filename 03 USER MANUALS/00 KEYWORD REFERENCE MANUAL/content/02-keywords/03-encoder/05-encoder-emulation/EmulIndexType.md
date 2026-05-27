@@ -1,5 +1,6 @@
 ---
 keyword: EmulIndexType
+summary: Selects the type of index pulse generated on the encoder emulation output.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # EmulIndexType
 
-**Definition:**
+Selects the type of index pulse generated on the encoder emulation output.
 
-EmulIndexType selects the type of index pulse generated on the encoder emulation output. The options typically include a single pulse per revolution at a fixed position or a gated index. It is an axis-related parameter saved to flash.
+## Overview
 
-**See also:**
+`EmulIndexType` selects the type of index (Z) pulse generated on the encoder emulation output. The value range is 0 to 1, with a default of 0. It works together with [EmulRat](EmulRat.md) (output ratio) and [EmulFilter](EmulFilter.md) (output filtering) to configure the emulated encoder interface. It is an axis-scope parameter saved to flash and can be changed while the motor is on or in motion.
 
-[EmulRat](EmulRat.md), [EmulFilter](EmulFilter.md)
+> **Documentation pending:** the exact behaviour of each option value (0 and 1) is not documented here.
+
+## Examples
+
+```text
+EmulIndexType=0     ; default index pulse type
+```
+
+## See also
+
+- [EmulRat](EmulRat.md) — ratio between feedback counts and emulated quadrature output
+- [EmulFilter](EmulFilter.md) — filter applied to the emulated output

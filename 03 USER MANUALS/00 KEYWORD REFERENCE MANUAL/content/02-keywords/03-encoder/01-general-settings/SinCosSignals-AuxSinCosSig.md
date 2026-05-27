@@ -1,80 +1,66 @@
+---
+summary: Read-only array reporting the status of the SIN/COS signal interpolation.
+---
 # SinCosSignals/AuxSinCosSig
 
-**Condition:**
+Read-only array reporting the status of the SIN/COS signal interpolation.
 
-SinCosSignals is only used when EncType=4 (SIN/COS encoder).
+## Overview
 
-**Definition:**
+`SinCosSignals` is a read-only parameter array that displays the status of the SIN/COS signal interpolation. It is only used when the encoder type ([EncType](EncType-AuxEncType.md)) is 4 (SIN/COS encoder). Depending on the product, each array element represents a different status, which is useful for inspecting raw signal levels and quadrant decoding during calibration. `AuxSinCosSig` is the auxiliary-encoder counterpart.
 
-SinCosSignals is a read-only parameter array that displays the status of the SIN/COS signals interpolation. Depending on the product, each array element represents different statuses.
+For all Agito products with SIN/COS support except AGFB01, `SinCosSignals` is operational only when the analog test mode is entered (`SinCosSetup[20] = 1`).
 
-The descriptions below are for all Agito products with SIN/COS encoder support, except for AGFB01. SinCosSignals is operational only when analog test mode state is entered (SinCosSetup\[20\] = 1).
+## How it works
 
-| Index | Descriptions |
-|----|----|
-| 1 | Raw SIN+ signal reading, in millivolt (mV) |
-| 2 | Raw SIN- signal reading, in millivolt (mV) |
-| 3 | Difference between raw SIN+ and SIN- readings, in millivolt \[mV\]. This equals to SinCosSignals\[1\] – SinCosSignals\[2\] |
-| 4 | Raw COS+ signal reading, in millivolt (mV) |
-| 5 | Raw COS- signal reading, in millivolt (mV) |
-| 6 | Difference between raw COS+ and COS- readings, in millivolt \[mV\]. This equals to SinCosSignals\[4\] – SinCosSignals\[5\] |
+For all Agito products with SIN/COS encoder support **except AGFB01**:
 
-The descriptions below are for AGFB01.
+| Index | Description |
+|---|---|
+| 1 | Raw SIN+ signal reading, in millivolts (mV) |
+| 2 | Raw SIN- signal reading, in millivolts (mV) |
+| 3 | Difference between raw SIN+ and SIN- readings, in mV. Equals `SinCosSignals[1] - SinCosSignals[2]` |
+| 4 | Raw COS+ signal reading, in millivolts (mV) |
+| 5 | Raw COS- signal reading, in millivolts (mV) |
+| 6 | Difference between raw COS+ and COS- readings, in mV. Equals `SinCosSignals[4] - SinCosSignals[5]` |
 
-| Index | Descriptions |  |  |  |  |  |  |
-|---|---|---|---|---|---|---|---|
-| 1 | **Quadrant alignment status** **Default:** 0 The quadrant inferred from comparator is checked against the quadrant inferred from atan2 operation of raw SIN/COS signals. Value State 0 Ok -1 Fail (invalid quadrant difference) | Value | State | 0 | Ok | -1 | Fail (invalid quadrant difference) |
-| Value | State |  |  |  |  |  |  |
-| 0 | Ok |  |  |  |  |  |  |
-| -1 | Fail (invalid quadrant difference) |  |  |  |  |  |  |
-</td>
-</tr>
-<tr>
-<td>2</td>
-<td><p><strong>Raw quadrant counter from digital path of SIN/COS signals</strong></p>
-<p><strong>Default:</strong> 0</p>
-<p>SIN/COS signals are passed through comparators to form digital A/B signals. An internal counter will count the number of quadrants passed, while respecting the direction.</p>
-<p>For example, if quadrant passes from 2 to 3, counter will increment. If quadrant passes from 2 to 1, counter will decrement.</p></td>
-</tr>
-<tr>
-<td>3</td>
-<td><p><strong>Raw sine signal reading</strong></p>
-<p><strong>Default:</strong> 0</p>
-<p>This value is raw sine reading in terms of microvolt (µV), after amplitude and phase offsets as defined by SinCosSignals.</p></td>
-</tr>
-<tr>
-<td>4</td>
-<td><p><strong>Quadrant code determined from the comparators (digital path)</strong></p>
-<p><strong>Default:</strong> 0</p>
-<p>The quadrant is determined from the digital path of the SIN/COS encoder where SIN/COS signals are passed through comparators (compared to 0) to form digital A/B signals.</p>
-<p>SinCosSignals[4] represents the quadrant in code value (not quadrant number), as follows.</p>
-| Quadrant code | Quadrant | Comparator A value (for SIN) | Comparator B value (for COS) | Angle [degrees] |
+For **AGFB01**:
+
+| Index | Description |
+|---|---|
+| 1 | **Quadrant alignment status** (default 0). The quadrant inferred from the comparator is checked against the quadrant inferred from the atan2 operation of the raw SIN/COS signals. `0` = Ok; `-1` = Fail (invalid quadrant difference). |
+| 2 | **Raw quadrant counter from digital path** (default 0). SIN/COS signals are passed through comparators to form digital A/B signals; an internal counter counts the number of quadrants passed, respecting direction. For example, passing from quadrant 2 to 3 increments the counter, while passing from 2 to 1 decrements it. |
+| 3 | **Raw sine signal reading** (default 0), in microvolts (µV), after the amplitude and phase offsets defined by `SinCosSetup`. |
+| 4 | **Quadrant code from the comparators (digital path)** (default 0). Determined where SIN/COS signals are compared to 0 to form digital A/B signals. Reported as a quadrant code (not quadrant number); see the table below. |
+| 5 | **Quadrant code from the SIN/COS values (analog path)** (default 0). Determined where the angle is computed by the atan2 formula. Reported as a quadrant code (not quadrant number); see the table below. |
+| 6 | **Raw cosine signal reading** (default 0), in microvolts (µV), after the amplitude and phase offsets defined by `SinCosSetup`. |
+
+Quadrant code for `SinCosSignals[4]` (digital / comparator path):
+
+| Quadrant code | Quadrant | Comparator A (SIN) | Comparator B (COS) | Angle [degrees] |
 |---|---|---|---|---|
 | 3 | First | 1 (SIN > 0) | 1 (COS > 0) | [0, 90) |
 | 2 | Second | 1 (SIN > 0) | 0 (COS ≤ 0) | [90, 180) |
 | 1 | Third | 0 (SIN ≤ 0) | 0 (COS ≤ 0) | [180, 270) |
 | 0 | Fourth | 0 (SIN ≤ 0) | 1 (COS > 0) | [270, 360) |
-</td>
-</tr>
-<tr>
-<td>5</td>
-<td><p><strong>Quadrant code determined from the SIN/COS values (analog path)</strong></p>
-<p><strong>Default:</strong> 0</p>
-<p>The quadrant is determined from the analog path of the SIN/COS encoder where the angle is determined by the atan2 formula.</p>
-<p>SinCosSignals[5] represents the quadrant in code value (not quadrant number), as follows.</p>
+
+Quadrant code for `SinCosSignals[5]` (analog / atan2 path):
+
 | Quadrant code | Quadrant | SIN sign | COS sign | Angle [degrees] |
 |---|---|---|---|---|
 | 3 | First | + | + | [0, 90) |
 | 2 | Second | + | - | [90, 180) |
 | 1 | Third | - | - | [180, 270) |
 | 0 | Fourth | - | + | [270, 360) |
-</td>
-</tr>
-<tr>
-<td>6</td>
-<td><p><strong>Raw cosine signal reading</strong></p>
-<p><strong>Default:</strong> 0</p>
-<p>This value is raw cosine reading in terms of microvolt (µV), after amplitude and phase offsets as defined by SinCosSignals.</p></td>
-</tr>
-</tbody>
-</table>
+
+## Examples
+
+```text
+SinCosSignals[3]?       ; read the SIN+ minus SIN- difference (mV)
+SinCosSignals[6]?       ; read the COS+ minus COS- difference (mV)
+```
+
+## See also
+
+- [EncType](EncType-AuxEncType.md) — encoder type; `SinCosSignals` applies for `EncType=4`
+- [SinCosSetup](SinCosSetup-AuxSinCosSet.md) — SIN/COS configuration array (enables test mode via index 20)

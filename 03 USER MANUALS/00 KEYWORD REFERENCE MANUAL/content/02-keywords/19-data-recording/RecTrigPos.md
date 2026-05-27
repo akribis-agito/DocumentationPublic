@@ -1,5 +1,6 @@
 ---
 keyword: RecTrigPos
+summary: Percentage of RecLength captured before the trigger (pre-trigger data).
 availability:
   standalone:
   - v4
@@ -26,15 +27,28 @@ overrides: {}
 ---
 # RecTrigPos
 
-**Definition:**
+Percentage of RecLength captured before the trigger (pre-trigger data).
 
-RecTrigPos defines the percentage of data points out of RecLength to capture before the trigger condition(s) activate. It is normally used for debugging process to allow monitoring of pre-trigger data.
+## Overview
+
+`RecTrigPos` defines the percentage of data points, out of [RecLength](RecLength.md), to capture before the trigger condition(s) activate. It is normally used during debugging to allow monitoring of the data leading up to the trigger event. Each array index selects a scope.
 
 | Index | Descriptions                 |
 |-------|------------------------------|
 | 1     | First scope                  |
 | 2     | Second scope (if applicable) |
 
-**Example:**
+## Examples
 
-If RecLength\[1\] = 16384 and RecTrigPos\[1\] = 10, the first scope will have 1638 pre-trigger data points and 14746 post-trigger data points.
+```text
+RecTrigPos[1]=10    ; reserve 10% of RecLength for pre-trigger data
+RecTrigPos[1]?      ; query the first scope pre-trigger percentage
+```
+
+If `RecLength[1] = 16384` and `RecTrigPos[1] = 10`, the first scope will have 1638 pre-trigger data points and 14746 post-trigger data points.
+
+## See also
+
+- [RecLength](RecLength.md) — total data points per parameter
+- [RecStat](RecStat.md) — reports when pre-trigger data is filled
+- [RecTrigTyp](RecTrigTyp.md) — trigger activation type

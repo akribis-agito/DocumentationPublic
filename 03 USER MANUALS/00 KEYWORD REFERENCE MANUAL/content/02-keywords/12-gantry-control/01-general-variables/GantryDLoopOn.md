@@ -1,14 +1,18 @@
+---
+summary: Enables dual-loop (position + yaw) gantry control mode.
+---
 # GantryDLoopOn
 
-**Definition:**
+Enables dual-loop (position + yaw) gantry control mode.
 
-GantryDLoopOn enables the dual-loop (position + yaw) control mode for the gantry axis. When set to a non-zero value, the controller adds a yaw correction current to the two gantry drive motors to maintain alignment. It is an axis-related parameter.
+## Overview
 
-%%
-Needs verification
-GantryDLoopOn was not found in the AG300_CTL01Params.c firmware parameter table. Confirm availability and parameter attributes before use.
-%%
+`GantryDLoopOn` enables the dual-loop (position + yaw) control mode for the gantry axis. When set to a non-zero value, the controller adds a yaw correction current to the two gantry drive motors to maintain alignment. It is an axis-related parameter. Dual-loop gantry control draws feedback from the two main encoders together with the source selected by [GantryFdbkSrc](../02-gantry-kinematic-feedback/GantryFdbkSrc.md); see the [dual-loop gantry control overview](../04-dual-loop-gantry-control/00-overview.md) for how the feedback sources differ between modes.
 
-**See also:**
+> **Documentation pending:** This parameter could not be confirmed against the firmware parameter table. Availability and attributes (access, scope, flash, range) need verification before use.
 
-[GantryOn](GantryOn.md), [GantryYawRef](GantryYawRef.md), [GantryPosGain](../03-gantry-tuning/GantryPosGain.md)
+## See also
+
+- [GantryOn](GantryOn.md) — enables gantry MIMO control
+- [GantryYawRef](GantryYawRef.md) — yaw correction reference
+- [GantryPosGain](../03-gantry-tuning/GantryPosGain.md) — yaw position-loop gain

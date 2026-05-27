@@ -1,14 +1,18 @@
+---
+summary: Proposed 64-bit double-precision integer variant of GenData (availability unconfirmed).
+---
 # GenDataD
 
-**Definition:**
+Proposed 64-bit double-precision integer variant of GenData (availability unconfirmed).
 
-GenDataD is a general-purpose double-precision integer (64-bit) array variant of GenData, providing shared storage for large integer values accessible by the user program and host.
+## Overview
 
-%%
-Needs verification
-GenDataD was not found in the AG300_CTL01Params.c firmware parameter table. Confirm availability and parameter attributes before use.
-%%
+`GenDataD` is described as a general-purpose double-precision integer (64-bit) variant of [GenData](GenData.md), intended to provide the same kind of shared storage — accessible by both the user program and the host — for large integer values.
 
-**See also:**
+> **Documentation pending:** `GenDataD` was not found in the firmware parameter table. Its availability and attributes (array size, scope, range, flash, indexing) are unconfirmed and must be verified before use. As with the other array keywords in this family, any array access is expected to be 1-indexed (the first usable element is `GenDataD[1]`, index 0 is reserved).
 
-[GenData](GenData.md), [GenDataF](GenDataF.md), [GenDataLL](GenDataLL.md)
+## See also
+
+- [GenData](GenData.md) — 32-bit integer general-purpose array (confirmed)
+- [GenDataF](GenDataF.md) — floating-point variant
+- [GenDataLL](GenDataLL.md) — long-long (64-bit signed integer) variant

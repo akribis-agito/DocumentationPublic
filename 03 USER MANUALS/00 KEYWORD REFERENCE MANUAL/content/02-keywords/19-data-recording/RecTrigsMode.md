@@ -1,5 +1,6 @@
 ---
 keyword: RecTrigsMode
+summary: Selects parallel (logical) or serial trigger detection per scope.
 availability:
   standalone:
   - v4
@@ -26,18 +27,35 @@ overrides: {}
 ---
 # RecTrigsMode
 
-**Definition:**
+Selects parallel (logical) or serial trigger detection per scope.
 
-RecTrigsMode defines the trigger detection mode, with each scope supporting up to 3 triggers.
+## Overview
+
+`RecTrigsMode` defines the trigger detection mode, with each scope supporting up to 3 triggers. In parallel mode, triggers are combined logically via [RecTrigsLogic](RecTrigsLogic.md); in serial mode, triggers must occur in sequence. Each array index selects a scope.
 
 | Index | Descriptions                 |
 |-------|------------------------------|
 | 1     | First scope                  |
 | 2     | Second scope (if applicable) |
 
-Its value definitions are as shown. Please refer to [Data recording](../../02-keywords/19-data-recording/00-overview.md) for the flowchart.
+## How it works
+
+Its value definitions are as shown. Please refer to [Data recording](00-overview.md) for the flowchart.
 
 | Value | Detection mode               |
 |-------|------------------------------|
 | 1     | Parallel (logical) detection |
 | 2     | Serial detection             |
+
+## Examples
+
+```text
+RecTrigsMode[1]=1   ; first scope uses parallel (logical) detection
+RecTrigsMode[1]=2   ; first scope uses serial detection
+```
+
+## See also
+
+- [RecTrigsLogic](RecTrigsLogic.md) — logic joining triggers in parallel mode
+- [RecTrigTyp](RecTrigTyp.md) — trigger activation type
+- [RecTrigSrc](RecTrigSrc.md) — trigger source variable

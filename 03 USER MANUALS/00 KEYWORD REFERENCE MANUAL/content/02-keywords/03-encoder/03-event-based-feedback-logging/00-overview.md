@@ -26,8 +26,4 @@ In case LockValTable and LockTimeTable are full, the recording will progress to 
 **Note:**
 
 1. The logging mechanism works only for main encoder. Please contact Agito if this feature is required for auxiliary encoder.
-2. For non-Central-i products, event-based position logging feature and event generation feature are mutually exclusive. Enabling one feature will automatically disable the other. For example, enabling event generation (EventOn = 1) will automatically disable event-based feedback logging (LockEn = 0).
-
-%%
-**DN:** CJ, let’s discuss this. 64-bit not implemented.
-%%
+2. For non-Central-i products, the event-based position logging feature and the event generation feature are mutually exclusive. Enabling one automatically disables the other. For example, enabling event generation ([EventOn](../../18-event-generation/EventOn.md) = 1) will automatically disable event-based feedback logging (`LockEn = 0`).

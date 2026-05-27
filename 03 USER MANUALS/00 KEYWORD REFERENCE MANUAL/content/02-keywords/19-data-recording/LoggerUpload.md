@@ -1,5 +1,6 @@
 ---
 keyword: LoggerUpload
+summary: Command that transfers the logged data buffer to the host.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # LoggerUpload
 
-**Definition:**
+Command that transfers the logged data buffer to the host.
 
-LoggerUpload is a command that initiates the transfer of the logged data buffer from the controller to the host. It can be invoked while the logger is active or after it has stopped. It is a non-axis command and is not saved to flash.
+## Overview
 
-**See also:**
+`LoggerUpload` is a command that initiates transfer of the logged data buffer from the controller to the host. It can be invoked while the logger started by [LoggerOn](LoggerOn.md) is active or after it has stopped. It is the continuous-logger counterpart of [RecUpload](RecUpload.md) for the recording scope. It is a non-axis command and is not saved to flash. Use [LoggerAbout](LoggerAbout.md) to interpret the uploaded contents.
 
-[LoggerOn](LoggerOn.md), [LoggerStatus](LoggerStatus.md), [LoggerAbout](LoggerAbout.md)
+## Examples
+
+```text
+LoggerUpload        ; stream the logged data buffer to the host
+```
+
+## See also
+
+- [LoggerOn](LoggerOn.md) — start/stop the logger
+- [LoggerStatus](LoggerStatus.md) — logger run state and buffer fill
+- [LoggerAbout](LoggerAbout.md) — session metadata
+- [RecUpload](RecUpload.md) — equivalent upload for the recording scope

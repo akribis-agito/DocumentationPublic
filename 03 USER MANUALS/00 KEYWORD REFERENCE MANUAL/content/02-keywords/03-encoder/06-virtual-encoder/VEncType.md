@@ -1,5 +1,6 @@
 ---
 keyword: VEncType
+summary: Sets the output format or signal type of the virtual encoder.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # VEncType
 
-**Definition:**
+Sets the output format or signal type of the virtual encoder.
 
-VEncType sets the output format or signal type for the virtual encoder. Different values select the unit convention or encoding mode used when the virtual encoder position is emitted. It is an axis-related parameter saved to flash.
+## Overview
 
-**See also:**
+`VEncType` sets the output format or signal type for the virtual encoder. Different values select the encoding mode used when the virtual encoder position (built from [VEncSrc](VEncSrc.md), [VEncFact](VEncFact.md) / [VEncFactDen](VEncFactDen.md), and [VEncDelay](VEncDelay.md)) is emitted. The value range is 0 to 1, with a default of 0. It is an axis-scope parameter saved to flash and can be changed while the motor is on or in motion.
 
-[VEncOn](VEncOn.md), [VEncSrc](VEncSrc.md), [VEncFact](VEncFact.md), [VEncFactDen](VEncFactDen.md)
+> **Documentation pending:** the exact behaviour of each option value (0 and 1) is not documented here.
+
+## Examples
+
+```text
+VEncType=0          ; default virtual encoder output format
+```
+
+## See also
+
+- [VEncOn](VEncOn.md) — enables the virtual encoder
+- [VEncSrc](VEncSrc.md) — source signal for the virtual encoder
+- [VEncFact](VEncFact.md) / [VEncFactDen](VEncFactDen.md) — scaling ratio numerator / denominator

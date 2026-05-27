@@ -1,5 +1,6 @@
 ---
 keyword: ModShort
+summary: Selects the path of motion (normal, positive-only, negative-only, or shortest) for absolute PTP under modulo mode (not implemented in current firmware).
 availability:
   standalone:
   - v4
@@ -26,21 +27,32 @@ overrides: {}
 ---
 # ModShort
 
-**Definition:**
+Selects the path of motion for absolute PTP under modulo mode.
 
-ModShort defines the path of motion taken in absolute point-to-point (PTP) motion when modulo mode is enabled (ModRev ≠ 0). It is used for general motion (when MotionMode = 1 or 2) or during homing (when HomingDef\[1, 11, …, 141\] = 12).
+## Overview
 
-| Value | Descriptions |
+`ModShort` defines the path of motion taken in absolute point-to-point (PTP) motion when modulo mode is enabled (`ModRev ≠ 0`). It is used for general motion ([MotionMode](../../10-motion/02-motion-configuration/MotionMode.md) = 1 or 2) or during homing ([HomingDef](../../16-homing/HomingDef.md)[1, 11, …, 141] = 12). It complements [ModRev](ModRev.md), which enables modulo wrapping. Being axis-scope and flash-saved, it cannot be changed while the motor is on or in motion.
+
+> **Documentation pending:** `ModShort` is flagged `not_implemented` in the current firmware. Confirm availability before use.
+
+## How it works
+
+| Value | Description |
 |---|---|
-| 0 | Axis will move to the target position similar to linear axis (additional revolution(s) if absolute position delta is more than ModRev). |
-| 1 | Axis will move to the target only in negative direction. If the target is higher than current position, axis will take the shortest negative only path to the target. Otherwise, axis will move to the target position similar to linear axis (additional revolution(s) if absolute position delta is more than ModRev). |
-| 2 | Axis will move to the target only in positive direction. If the target is lower than current position, axis will take the shortest positive only path to the target. Otherwise, axis will move to the target position similar to linear axis (additional revolution(s) if absolute position delta is more than ModRev). |
-| 3 | Axis will move to the target in the shortest path. Axis will not move additional revolution(s) even if absolute position delta is more than ModRev. |
+| 0 | Axis moves to the target like a linear axis (taking additional revolution(s) if the absolute position delta is more than `ModRev`). |
+| 1 | Axis moves to the target in the negative direction only. If the target is higher than the current position, the axis takes the shortest negative-only path to the target. Otherwise it moves like a linear axis (additional revolution(s) if the delta exceeds `ModRev`). |
+| 2 | Axis moves to the target in the positive direction only. If the target is lower than the current position, the axis takes the shortest positive-only path to the target. Otherwise it moves like a linear axis (additional revolution(s) if the delta exceeds `ModRev`). |
+| 3 | Axis moves to the target by the shortest path. It does not take additional revolution(s) even if the absolute position delta is more than `ModRev`. |
 
-**Example:**
+## Examples
 
-Assuming we command a point-to-point motion,
+```text
+ModShort=0          ; normal (linear-like) path
+ModShort=3          ; shortest path
+```
 
-**Note:**
+## See also
 
-Conditions Path of motion Position delta is positive (absolute value more than 0.5*ModRev). ModShort = 0 (normal) ModShort = 2 (positive only) ModShort = 1 (negative only) ModShort = 3 (shortest path) Position delta is positive (absolute value less than 0.5*ModRev). ModShort = 0 (normal) ModShort = 2 (positive only) ModShort = 3 (shortest path) ModShort = 1 (negative only) Position delta is negative (absolute value more than 0.5*ModRev). ModShort = 0 (normal) ModShort = 1 (negative only) ModShort = 2 (positive only) ModShort = 3 (shortest path) Position delta is negative (absolute value less than 0.5*ModRev). ModShort = 0 (normal) ModShort = 1 (negative only) ModShort = 3 (shortest path) ModShort = 2 (positive only)
+- [ModRev](ModRev.md) — enables modulo mode that `ModShort` operates within
+- [MotionMode](../../10-motion/02-motion-configuration/MotionMode.md) — motion mode in which `ModShort` applies
+- [HomingDef](../../16-homing/HomingDef.md) — homing definition that can invoke `ModShort`

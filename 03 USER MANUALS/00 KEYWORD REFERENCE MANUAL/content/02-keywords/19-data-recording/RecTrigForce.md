@@ -1,5 +1,6 @@
 ---
 keyword: RecTrigForce
+summary: Command that overrides trigger detection and forces recording to proceed.
 availability:
   standalone:
   - v4
@@ -26,15 +27,26 @@ overrides: {}
 ---
 # RecTrigForce
 
-**Definition:**
+Command that overrides trigger detection and forces recording to proceed.
 
-RecTrigForce will overrule the trigger detection and force the recording to continue. Forced trigger will occur regardless of whether RecTrigForce is called while pre-trigger data is filled, or while the scope is waiting trigger (after filling pre-trigger data).
+## Overview
+
+`RecTrigForce` overrules trigger detection and forces the recording to continue as if the trigger condition were met. The forced trigger occurs regardless of whether `RecTrigForce` is called while pre-trigger data is being filled or while the scope is waiting for the trigger (after pre-trigger data is filled). It is useful when the configured trigger ([RecTrigTyp](RecTrigTyp.md), [RecTrigSrc](RecTrigSrc.md)) does not fire. Each array index selects a scope.
 
 | Index | Descriptions                 |
 |-------|------------------------------|
 | 1     | First scope                  |
 | 2     | Second scope (if applicable) |
 
-For example, RecTrigForce\[1\] will force-trigger the first scope.
+## Examples
 
-<span class="anchor" id="_RecTrigMask"></span>
+```text
+RecTrigForce[1]     ; force-trigger the first scope
+RecTrigForce[2]     ; force-trigger the second scope
+```
+
+## See also
+
+- [RecStart](RecStart.md) — start recording
+- [RecStat](RecStat.md) — recording status
+- [RecTrigTyp](RecTrigTyp.md) — trigger activation type

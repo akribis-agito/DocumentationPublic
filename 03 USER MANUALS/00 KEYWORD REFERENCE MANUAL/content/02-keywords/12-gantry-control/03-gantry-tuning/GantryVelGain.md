@@ -1,5 +1,6 @@
 ---
 keyword: GantryVelGain
+summary: Proportional velocity gain for the gantry yaw correction controller.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # GantryVelGain
 
-**Definition:**
+Proportional velocity gain for the gantry yaw correction controller.
 
-GantryVelGain sets the proportional velocity gain for the gantry yaw correction controller. It scales the differential velocity error to produce a corrective current that damps yaw oscillation. It is an axis-related parameter saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`GantryVelGain` sets the proportional velocity gain for the gantry yaw correction controller. It scales the differential velocity error to produce a corrective current that damps yaw oscillation. It is an axis-related parameter saved to flash and can be changed at any time. It works alongside the integral term [GantryVelKi](GantryVelKi.md) and the position-loop gain [GantryPosGain](GantryPosGain.md). The allowed range is 0 to 100000 (default 100).
 
-[GantryPosGain](GantryPosGain.md), [GantryAccFFW](GantryAccFFW.md), [GantryVelFFW](GantryVelFFW.md)
+## Examples
+
+```text
+AGantryVelGain=150  ; set yaw velocity proportional gain
+AGantryVelGain?     ; read the current gain
+```
+
+## See also
+
+- [GantryVelKi](GantryVelKi.md) — yaw velocity-loop integral gain
+- [GantryPosGain](GantryPosGain.md) — yaw position-loop proportional gain
+- [GantryAccFFW](GantryAccFFW.md) — acceleration feedforward gain
+- [GantryVelFFW](GantryVelFFW.md) — velocity feedforward gain

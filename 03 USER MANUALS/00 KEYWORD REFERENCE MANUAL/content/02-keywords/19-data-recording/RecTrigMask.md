@@ -1,5 +1,6 @@
 ---
 keyword: RecTrigMask
+summary: Bitwise mask applied to trigger source and comparison values.
 availability:
   standalone:
   - v4
@@ -26,11 +27,13 @@ overrides: {}
 ---
 # RecTrigMask
 
-**Definition:**
+Bitwise mask applied to trigger source and comparison values.
 
-RecTrigMask masks the bits of the values used in trigger comparison operation. Trigger source value (from RecTrigSrc) and trigger comparison values (RecTrigVal and RecTrigValMax) will be masked.
+## Overview
 
-Masking allows the trigger to activate based on single or multiple selected bits. Each index of RecTrigMask refers to a different trigger of different scope.
+`RecTrigMask` masks the bits of the values used in the trigger comparison operation. The trigger source value (from [RecTrigSrc](RecTrigSrc.md)) and the trigger comparison values ([RecTrigVal](RecTrigVal.md) and [RecTrigValMax](RecTrigValMax.md)) are all masked before comparison. This lets a trigger activate based on single or multiple selected bits of a status word. Each index of `RecTrigMask` refers to a different trigger of a different scope.
+
+## How it works
 
 | Index | Scope no. | Trigger |
 |---|---|---|
@@ -41,17 +44,15 @@ Masking allows the trigger to activate based on single or multiple selected bits
 | 5 | 2 (Second) | 2 |
 | 6 | 2 (Second) | 3 |
 
-Masking is only applicable if the trigger source (RecTrigSrc) is of fixed-point data type (32-bit int or 64-bit long). By default, RecTrigMask value is -1 (0 x FFFF FFFF FFFF FFFF), where no bits are masked and trigger comparison operation uses the unaltered values. The masking is done using bitwise AND operation.
+Masking is only applicable if the trigger source ([RecTrigSrc](RecTrigSrc.md)) is of a fixed-point data type (32-bit int or 64-bit long). By default, the `RecTrigMask` value is -1 (0xFFFFFFFFFFFFFFFF), where no bits are masked and the trigger comparison uses the unaltered values. The masking is done using a bitwise AND operation.
 
 $$
 Masked\ value\  = (Original\ value)\ \&\ \left( RecTrigMask\lbrack x\rbrack \right)
 $$
 
-<span class="mark">**DN:** Issue with the RecTrigMask range (masking issue).</span>
+## Examples
 
-**Example:**
-
-Assuming the second trigger of first scope is to be activated upon the rising edge of acceleration bit of axis A MotionStat, the following settings are required:
+Assuming the second trigger of the first scope is to be activated upon the rising edge of the acceleration bit of axis A `MotionStat`, the following settings are required:
 
 1.  RecTrigTyp\[2\] = 5 (rising edge)
 
@@ -60,3 +61,10 @@ Assuming the second trigger of first scope is to be activated upon the rising ed
 3.  RecTrigMask\[2\] = 16 (masking bit 4)
 
 4.  RecTrigVal\[2\] = 0 (to trigger when rising edge above this value is detected)
+
+## See also
+
+- [RecTrigSrc](RecTrigSrc.md) — trigger source variable
+- [RecTrigVal](RecTrigVal.md) — comparison value
+- [RecTrigValMax](RecTrigValMax.md) — range upper bound
+- [RecTrigTyp](RecTrigTyp.md) — trigger activation type

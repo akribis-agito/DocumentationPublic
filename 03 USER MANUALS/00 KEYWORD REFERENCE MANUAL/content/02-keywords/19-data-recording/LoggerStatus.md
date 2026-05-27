@@ -1,5 +1,6 @@
 ---
 keyword: LoggerStatus
+summary: Reports the current state of the continuous data logger.
 availability:
   standalone:
   - v4
@@ -26,10 +27,23 @@ overrides: {}
 ---
 # LoggerStatus
 
-**Definition:**
+Reports the current state of the continuous data logger.
 
-LoggerStatus is a read-only array parameter that reports the current state of the data logger, including whether it is active, the number of samples collected, and buffer fill level. It is a non-axis status variable and is not saved to flash.
+## Overview
 
-**See also:**
+`LoggerStatus` is a read-only array that reports the current state of the data logger, including whether it is active, the number of samples collected, and the buffer fill level. It lets a host poll the logger started by [LoggerOn](LoggerOn.md) to decide when to call [LoggerUpload](LoggerUpload.md). It is a non-axis status variable and is not saved to flash. The buffer-full behavior it reflects is governed by [LoggerFullMod](LoggerFullMod.md).
 
-[LoggerOn](LoggerOn.md), [LoggerFullMod](LoggerFullMod.md), [LoggerAbout](LoggerAbout.md)
+> **Documentation pending:** the per-index layout of the 6-element array is not specified in the source material.
+
+## Examples
+
+```text
+LoggerStatus[1]?    ; query the first status element
+```
+
+## See also
+
+- [LoggerOn](LoggerOn.md) — start/stop the logger
+- [LoggerFullMod](LoggerFullMod.md) — buffer-full behavior
+- [LoggerAbout](LoggerAbout.md) — session metadata
+- [LoggerUpload](LoggerUpload.md) — retrieve logged data

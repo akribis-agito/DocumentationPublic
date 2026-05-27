@@ -1,5 +1,6 @@
 ---
 keyword: VEncSrc
+summary: Selects the source signal used to generate the virtual encoder position.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # VEncSrc
 
-**Definition:**
+Selects the source signal used to generate the virtual encoder position.
 
-VEncSrc selects the source signal used to generate the virtual encoder output. The chosen source is scaled and delayed according to the other VEnc parameters to produce the virtual encoder position. It is an axis-related parameter saved to flash.
+## Overview
 
-**See also:**
+`VEncSrc` selects the source signal used to generate the virtual encoder output. The chosen source is formatted by [VEncType](VEncType.md), scaled by [VEncFact](VEncFact.md) / [VEncFactDen](VEncFactDen.md), and delayed by [VEncDelay](VEncDelay.md) to produce the virtual encoder position used when the virtual encoder is enabled ([VEncOn](VEncOn.md) = 1). It is an axis-scope parameter saved to flash and can be changed while the motor is on or in motion.
 
-[VEncOn](VEncOn.md), [VEncType](VEncType.md), [VEncFact](VEncFact.md), [VEncFactDen](VEncFactDen.md)
+> **Documentation pending:** the mapping of `VEncSrc` values to specific source signals is not documented here.
+
+## Examples
+
+```text
+VEncSrc?            ; query the configured virtual encoder source
+```
+
+## See also
+
+- [VEncOn](VEncOn.md) — enables the virtual encoder
+- [VEncType](VEncType.md) — output format of the virtual encoder
+- [VEncFact](VEncFact.md) / [VEncFactDen](VEncFactDen.md) — scaling ratio numerator / denominator

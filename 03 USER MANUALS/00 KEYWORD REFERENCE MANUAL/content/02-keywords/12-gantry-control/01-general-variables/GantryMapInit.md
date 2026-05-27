@@ -1,14 +1,18 @@
+---
+summary: Initialises the gantry map correction feature before gantry motion.
+---
 # GantryMapInit
 
-**Definition:**
+Initialises the gantry map correction feature before gantry motion.
 
-GantryMapInit initialises the gantry map correction feature. It is typically written once to set up the map table before gantry motion begins. It is an axis-related parameter.
+## Overview
 
-%%
-Needs verification
-GantryMapInit was not found in the AG300_CTL01Params.c firmware parameter table. Confirm availability and parameter attributes before use.
-%%
+`GantryMapInit` initialises the gantry map correction feature. It is typically written once to set up the map table before gantry motion begins. It is an axis-related parameter. Once initialised, the map is described by [GantryMapType](GantryMapType.md), indexed by [GantryMapSrc](GantryMapSrc.md), and its active output is reported by [GantryMap](GantryMap.md) and [GantryMapVal](GantryMapVal.md).
 
-**See also:**
+> **Documentation pending:** This parameter could not be confirmed against the firmware parameter table. Availability and attributes (access, scope, flash, range) need verification before use.
 
-[GantryMap](GantryMap.md), [GantryMapType](GantryMapType.md), [GantryMapVal](GantryMapVal.md)
+## See also
+
+- [GantryMap](GantryMap.md) — active map correction value
+- [GantryMapType](GantryMapType.md) — selects the map correction type
+- [GantryMapVal](GantryMapVal.md) — value read from the map at the current position

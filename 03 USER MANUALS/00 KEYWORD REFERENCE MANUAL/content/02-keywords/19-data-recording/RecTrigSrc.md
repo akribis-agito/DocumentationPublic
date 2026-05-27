@@ -1,5 +1,6 @@
 ---
 keyword: RecTrigSrc
+summary: Complex CAN code of the trigger source variable for each trigger.
 availability:
   standalone:
   - v4
@@ -26,9 +27,11 @@ overrides: {}
 ---
 # RecTrigSrc
 
-**Definition:**
+Complex CAN code of the trigger source variable for each trigger.
 
-RecTrigSrc defines the [complex CAN code](../../01-keyword-usage-and-syntax/complex-can-code.md) of the trigger source variable. Each index refers to a different trigger.
+## Overview
+
+`RecTrigSrc` defines the [complex CAN code](../../01-keyword-usage-and-syntax/complex-can-code.md) of the variable whose value is monitored by each trigger. The trigger compares this source value (after masking by [RecTrigMask](RecTrigMask.md)) against [RecTrigVal](RecTrigVal.md) / [RecTrigValMax](RecTrigValMax.md) according to [RecTrigTyp](RecTrigTyp.md). Each index refers to a different trigger.
 
 | Index | Scope no. | Trigger |
 |---|---|---|
@@ -39,8 +42,15 @@ RecTrigSrc defines the [complex CAN code](../../01-keyword-usage-and-syntax/comp
 | 5 | 2 (Second) | 2 |
 | 6 | 2 (Second) | 3 |
 
-It is possible to use the same variable as trigger source and recorded variable at the same time.
+It is possible to use the same variable as both a trigger source and a recorded variable at the same time.
 
-**Example:**
+## Examples
 
-RecTrigSrc\[4\] = 2 will mean APos is to be used as trigger source for trigger 1 of the second scope.
+`RecTrigSrc[4] = 2` means `APos` is used as the trigger source for trigger 1 of the second scope.
+
+## See also
+
+- [RecTrigTyp](RecTrigTyp.md) — trigger activation type
+- [RecTrigMask](RecTrigMask.md) — bitwise mask on the source value
+- [RecTrigVal](RecTrigVal.md) — comparison value
+- [RecParamA/RecParamB](RecParamA-RecParamB.md) — parameters to capture

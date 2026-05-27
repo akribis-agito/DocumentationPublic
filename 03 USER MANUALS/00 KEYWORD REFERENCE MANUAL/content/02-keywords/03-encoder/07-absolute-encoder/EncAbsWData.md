@@ -1,5 +1,6 @@
 ---
 keyword: EncAbsWData
+summary: Data value to be written to the absolute encoder register on a write transaction.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # EncAbsWData
 
-**Definition:**
+Data value to be written to the absolute encoder register on a write transaction.
 
-EncAbsWData holds the data value to be written to the absolute encoder register when a write transaction is issued via EncAbsSendCmd. Load this parameter with the desired value before calling EncAbsSendCmd with EncAbsWRType set to write. It is an axis-related parameter, not saved to flash, and cannot be changed while the motor is on or in motion.
+## Overview
 
-**See also:**
+`EncAbsWData` holds the data value to be written to the absolute encoder register when a write transaction is issued via [EncAbsSendCmd](EncAbsSendCmd.md). Load this parameter with the desired value before calling `EncAbsSendCmd` with [EncAbsWRType](EncAbsWRType.md) set to write. It is an axis-scope parameter, not saved to flash, and cannot be changed while the motor is on or in motion.
 
-[EncAbsAddr](EncAbsAddr.md), [EncAbsWRType](EncAbsWRType.md), [EncAbsRData](EncAbsRData.md), [EncAbsSendCmd](EncAbsSendCmd.md)
+## Examples
+
+```text
+EncAbsWData=200     ; value to write to the addressed register
+```
+
+## See also
+
+- [EncAbsAddr](EncAbsAddr.md) — register address for the write
+- [EncAbsWRType](EncAbsWRType.md) — selects read or write access
+- [EncAbsRData](EncAbsRData.md) — data read back on a read transaction
+- [EncAbsSendCmd](EncAbsSendCmd.md) — issues the transaction

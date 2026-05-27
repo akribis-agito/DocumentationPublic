@@ -1,5 +1,6 @@
 ---
 keyword: EncAbsSendCmd
+summary: Command that initiates a register read/write transaction to the absolute encoder.
 availability:
   standalone:
   - v4
@@ -26,10 +27,23 @@ overrides: {}
 ---
 # EncAbsSendCmd
 
-**Definition:**
+Command that initiates a register read/write transaction to the absolute encoder.
 
-EncAbsSendCmd is a command that initiates a register read or write transaction to the absolute encoder using the address, data, and type set in EncAbsAddr, EncAbsWData, and EncAbsWRType. After the transaction completes, EncAbsRData holds the result of a read operation. It is an axis-related command function.
+## Overview
 
-**See also:**
+`EncAbsSendCmd` is a command function that initiates a register read or write transaction to the absolute encoder using the address, data, and type set in [EncAbsAddr](EncAbsAddr.md), [EncAbsWData](EncAbsWData.md), and [EncAbsWRType](EncAbsWRType.md). After the transaction completes, [EncAbsRData](EncAbsRData.md) holds the result of a read operation. It is an axis-scope command function.
 
-[EncAbsAddr](EncAbsAddr.md), [EncAbsWRType](EncAbsWRType.md), [EncAbsWData](EncAbsWData.md), [EncAbsRData](EncAbsRData.md)
+## Examples
+
+```text
+EncAbsWRType=0      ; configure for a read
+EncAbsAddr=16       ; target register 16
+EncAbsSendCmd       ; execute the transaction; result in EncAbsRData
+```
+
+## See also
+
+- [EncAbsAddr](EncAbsAddr.md) — register address for the transaction
+- [EncAbsWRType](EncAbsWRType.md) — selects read or write access
+- [EncAbsWData](EncAbsWData.md) — data to write on a write transaction
+- [EncAbsRData](EncAbsRData.md) — data read back on a read transaction

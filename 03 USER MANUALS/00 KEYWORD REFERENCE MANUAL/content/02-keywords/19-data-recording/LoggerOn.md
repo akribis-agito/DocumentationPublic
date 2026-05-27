@@ -1,5 +1,6 @@
 ---
 keyword: LoggerOn
+summary: Enables or disables the continuous data logger.
 availability:
   standalone:
   - v4
@@ -26,10 +27,25 @@ overrides: {}
 ---
 # LoggerOn
 
-**Definition:**
+Enables or disables the continuous data logger.
 
-LoggerOn enables or disables the continuous data logger. When set to a non-zero value, the logger begins sampling the parameters configured in LoggerParams at the rate defined by LoggerGap. It is a non-axis parameter and is not saved to flash.
+## Overview
 
-**See also:**
+`LoggerOn` starts or stops the continuous data logger. When set to a non-zero value, the logger begins sampling the parameters configured in [LoggerParams](LoggerParams.md) at the rate defined by [LoggerGap](LoggerGap.md); setting it to `0` stops logging. It is a non-axis parameter and is not saved to flash, so the logger always starts disabled after power-up.
 
-[LoggerParams](LoggerParams.md), [LoggerGap](LoggerGap.md), [LoggerStatus](LoggerStatus.md), [LoggerUpload](LoggerUpload.md)
+Unlike the recording scope (`Rec*` keywords), the continuous logger runs in the background and is intended for long-running capture. Use [LoggerStatus](LoggerStatus.md) to monitor its state and [LoggerUpload](LoggerUpload.md) to retrieve the captured data.
+
+## Examples
+
+```text
+LoggerOn=1          ; start the continuous logger
+LoggerOn=0          ; stop the continuous logger
+LoggerOn?           ; query whether the logger is running
+```
+
+## See also
+
+- [LoggerParams](LoggerParams.md) — parameters the logger records
+- [LoggerGap](LoggerGap.md) — logger sampling interval
+- [LoggerStatus](LoggerStatus.md) — logger run state
+- [LoggerUpload](LoggerUpload.md) — retrieve logged data

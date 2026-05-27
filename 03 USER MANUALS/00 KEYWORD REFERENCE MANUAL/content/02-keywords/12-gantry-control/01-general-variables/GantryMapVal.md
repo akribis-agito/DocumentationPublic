@@ -1,14 +1,18 @@
+---
+summary: Correction value read from the gantry map table at the current indexed position.
+---
 # GantryMapVal
 
-**Definition:**
+Correction value read from the gantry map table at the current indexed position.
 
-GantryMapVal holds the current correction value read from the gantry map table at the position indexed by GantryMapSrc. It reflects the yaw offset correction being applied at the current beam position. It is an axis-related parameter.
+## Overview
 
-%%
-Needs verification
-GantryMapVal was not found in the AG300_CTL01Params.c firmware parameter table. Confirm availability and read-only/read-write status before use.
-%%
+`GantryMapVal` holds the current correction value read from the gantry map table at the position indexed by [GantryMapSrc](GantryMapSrc.md). It reflects the yaw offset correction being applied at the current beam position. It is an axis-related parameter. The correction mode is set by [GantryMapType](GantryMapType.md), and the value that is actually applied to the yaw axis is reported by [GantryMap](GantryMap.md).
 
-**See also:**
+> **Documentation pending:** This parameter could not be confirmed against the firmware parameter table. Availability and read-only/read-write status need verification before use.
 
-[GantryMap](GantryMap.md), [GantryMapSrc](GantryMapSrc.md), [GantryMapType](GantryMapType.md)
+## See also
+
+- [GantryMap](GantryMap.md) — active map correction value
+- [GantryMapSrc](GantryMapSrc.md) — position source used to index the map
+- [GantryMapType](GantryMapType.md) — selects the map correction type

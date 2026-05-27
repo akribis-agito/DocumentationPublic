@@ -1,5 +1,6 @@
 ---
 keyword: GantryAccFFW
+summary: Acceleration feedforward gain for the gantry yaw correction controller.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # GantryAccFFW
 
-**Definition:**
+Acceleration feedforward gain for the gantry yaw correction controller.
 
-GantryAccFFW sets the acceleration feedforward gain for the gantry yaw correction controller. It scales the acceleration reference to produce a feedforward current that reduces yaw lag during dynamic moves. It is an axis-related parameter saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`GantryAccFFW` sets the acceleration feedforward gain for the gantry yaw correction controller. It scales the acceleration reference to produce a feedforward current that reduces yaw lag during dynamic moves. It is an axis-related parameter saved to flash and can be changed at any time. It complements the feedback gains [GantryPosGain](GantryPosGain.md) and [GantryVelGain](GantryVelGain.md) and the velocity feedforward [GantryVelFFW](GantryVelFFW.md). The allowed range is 0 to 500000 (default 0).
 
-[GantryPosGain](GantryPosGain.md), [GantryVelGain](GantryVelGain.md), [GantryYawRef](../01-general-variables/GantryYawRef.md)
+## Examples
+
+```text
+AGantryAccFFW=1000  ; set acceleration feedforward gain
+AGantryAccFFW?      ; read the current gain
+```
+
+## See also
+
+- [GantryPosGain](GantryPosGain.md) — yaw position-loop proportional gain
+- [GantryVelGain](GantryVelGain.md) — yaw velocity-loop proportional gain
+- [GantryVelFFW](GantryVelFFW.md) — velocity feedforward gain
+- [GantryYawRef](../01-general-variables/GantryYawRef.md) — yaw correction reference

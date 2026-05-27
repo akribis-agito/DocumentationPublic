@@ -1,11 +1,32 @@
+---
+summary: Sets the counting direction of the encoder feedback.
+---
 # EncDir/AuxEncDir
 
-**Condition:**
+Sets the counting direction of the encoder feedback.
 
-EncDir is only used when EncType is not 4 (i.e. not SIN/COS encoder). For EncType = 4, please refer to [SinCosSetup](../../../02-keywords/03-encoder/01-general-settings/SinCosSetup-AuxSinCosSet.md) to configure the encoder direction.
+## Overview
 
-**Definition:**
+`EncDir` configures the direction of the encoder reading. The controller increments or decrements the position ([Pos](../../10-motion/01-kinematics-status/Pos.md)) by the delta of the raw position feedback at every controller cycle (hardware interrupt): if `EncDir=0` the delta is added, if `EncDir=1` the delta is subtracted. This lets the encoder count be aligned with the desired positive motion direction.
 
-EncDir configures the direction of the encoder reading. The controller increments/decrements the position (Pos) by the delta of raw position feedback at every controller cycle (hardware interrupt). If EncDir = 0, controller will increment the delta. If EncDir = 1, controller will decrement the delta.
+`EncDir` is only used when the encoder type ([EncType](EncType-AuxEncType.md)) is not 4 (SIN/COS). For SIN/COS encoders (`EncType=4`), configure direction through [SinCosSetup](SinCosSetup-AuxSinCosSet.md) instead. During setup it is important to configure `EncDir` to get the desired direction before performing motor phasing. `AuxEncDir` is the auxiliary-encoder counterpart and operates the same way.
 
-In the setup process, it is important to configure EncDir to get the desired direction first before performing the motor phasing.
+## How it works
+
+| EncDir | Effect on position |
+|---|---|
+| 0 | Position is incremented by the raw feedback delta each controller cycle. |
+| 1 | Position is decremented by the raw feedback delta each controller cycle. |
+
+## Examples
+
+```text
+EncDir=0            ; count in the encoder's native direction
+EncDir=1            ; reverse the counting direction
+```
+
+## See also
+
+- [EncType](EncType-AuxEncType.md) — encoder type; `EncDir` does not apply to `EncType=4`
+- [SinCosSetup](SinCosSetup-AuxSinCosSet.md) — direction setting for SIN/COS encoders
+- [Pos](../../10-motion/01-kinematics-status/Pos.md) — feedback position affected by `EncDir`

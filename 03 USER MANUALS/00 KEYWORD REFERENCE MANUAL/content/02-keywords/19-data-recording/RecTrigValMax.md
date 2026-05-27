@@ -1,5 +1,6 @@
 ---
 keyword: RecTrigValMax
+summary: Upper bound for range-based trigger activation logic (RecTrigTyp 9–12).
 availability:
   standalone:
   - v4
@@ -26,13 +27,11 @@ overrides: {}
 ---
 # RecTrigValMax
 
-**Condition:**
+Upper bound for range-based trigger activation logic (RecTrigTyp 9–12).
 
-RecTrigValMax is only applicable if the corresponding trigger activation logic is range-related (RecTrigTyp = 9, 10, 11 or 12).
+## Overview
 
-**Definition:**
-
-RecTrigValMax stores the maximum value for the selected trigger activation logics. Each index refers to a different trigger.
+`RecTrigValMax` stores the maximum (upper-bound) value for range-based trigger activation logic. It is only applicable when the corresponding [RecTrigTyp](RecTrigTyp.md) is range-related (`9`, `10`, `11`, or `12`), pairing with [RecTrigVal](RecTrigVal.md) as the lower bound. Each index refers to a different trigger.
 
 | Index | Scope no. | Trigger |
 |---|---|---|
@@ -43,4 +42,17 @@ RecTrigValMax stores the maximum value for the selected trigger activation logic
 | 5 | 2 (Second) | 2 |
 | 6 | 2 (Second) | 3 |
 
-Please refer to RecTrigTyp on how the maximum value is used.
+Please refer to [RecTrigTyp](RecTrigTyp.md) on how the maximum value is used.
+
+## Examples
+
+```text
+RecTrigValMax[1]=2000   ; range upper bound for trigger 1 of the first scope
+RecTrigValMax[1]?       ; query the upper bound of trigger 1 (first scope)
+```
+
+## See also
+
+- [RecTrigTyp](RecTrigTyp.md) — trigger activation type (range types 9–12)
+- [RecTrigVal](RecTrigVal.md) — range lower bound
+- [RecTrigSrc](RecTrigSrc.md) — trigger source variable

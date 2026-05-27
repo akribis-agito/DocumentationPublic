@@ -1,5 +1,6 @@
 ---
 keyword: RecTrigVal
+summary: Comparison value used in trigger activation logic for each trigger.
 availability:
   standalone:
   - v4
@@ -26,9 +27,11 @@ overrides: {}
 ---
 # RecTrigVal
 
-**Definition:**
+Comparison value used in trigger activation logic for each trigger.
 
-RecTrigVal stores the comparison value for trigger activation logic. Each index refers to a different trigger.
+## Overview
+
+`RecTrigVal` stores the comparison value used in the trigger activation logic selected by [RecTrigTyp](RecTrigTyp.md). For range types it is the lower bound, paired with [RecTrigValMax](RecTrigValMax.md) as the upper bound. The value is compared against the masked trigger source value. Each index refers to a different trigger.
 
 | Index | Scope no. | Trigger |
 |---|---|---|
@@ -39,4 +42,18 @@ RecTrigVal stores the comparison value for trigger activation logic. Each index 
 | 5 | 2 (Second) | 2 |
 | 6 | 2 (Second) | 3 |
 
-Please refer to RecTrigTyp on how the comparison value is used.
+Please refer to [RecTrigTyp](RecTrigTyp.md) on how the comparison value is used.
+
+## Examples
+
+```text
+RecTrigVal[1]=1000  ; comparison value for trigger 1 of the first scope
+RecTrigVal[1]?      ; query the comparison value of trigger 1 (first scope)
+```
+
+## See also
+
+- [RecTrigTyp](RecTrigTyp.md) — trigger activation type
+- [RecTrigValMax](RecTrigValMax.md) — range upper bound
+- [RecTrigSrc](RecTrigSrc.md) — trigger source variable
+- [RecTrigMask](RecTrigMask.md) — bitwise mask on the values

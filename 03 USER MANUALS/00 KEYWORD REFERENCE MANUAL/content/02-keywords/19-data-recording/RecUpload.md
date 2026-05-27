@@ -1,5 +1,6 @@
 ---
 keyword: RecUpload
+summary: Streams a scope's metadata and user-unit scaled recorded data to the host.
 availability:
   standalone:
   - v4
@@ -26,22 +27,26 @@ overrides: {}
 ---
 # RecUpload
 
-**Definition:**
+Streams a scope's metadata and user-unit scaled recorded data to the host.
 
-RecUpload will instruct the controller to stream/return all the metadata and user-unit scaled recorded data. Each RecUpload index refers to a different scope.
+## Overview
+
+`RecUpload` instructs the controller to stream all the metadata and the user-unit scaled recorded data for a scope. Unlike [RecDataA/RecDataB](RecDataA-RecDataB.md), which expose the raw, unconverted buffer, `RecUpload` applies unit conversions and returns the full data set. Each array index refers to a different scope.
 
 | Index | Descriptions                 |
 |-------|------------------------------|
 | 1     | First scope                  |
 | 2     | Second scope (if applicable) |
 
-RecUpload can only be run after the data recording is completed or stopped.
+`RecUpload` can only be run after data recording is completed or stopped (see [RecStat](RecStat.md)).
 
-The data will be returned in comma delimited format for RS232 and Ethernet communication. In CAN, each value will be uploaded as 9-byte message (8 bytes for value, 1 byte for ASCII comma).
+## How it works
 
-The first 80 values returned are the metadata. The subsequent values (81<sup>st</sup> value and above) are the recorded data, sequenced according to the RecParamA/RecParamB order, and followed by the data sample order.
+The data is returned in comma-delimited format for RS232 and Ethernet communication. Over CAN, each value is uploaded as a 9-byte message (8 bytes for the value, 1 byte for the ASCII comma).
 
-**Example:**
+The first 80 values returned are the metadata. The subsequent values (81<sup>st</sup> value and above) are the recorded data, sequenced according to the [RecParamA/RecParamB](RecParamA-RecParamB.md) order, followed by the data sample order. For very large data sets, use [RecUploadNext](RecUploadNext.md) to retrieve the data in manageable packets.
+
+## Examples
 
 ![image77.png](../../assets/image77.png)
 
@@ -55,3 +60,10 @@ In the example, APosRef and AVel\[1\] are recorded. After the first 80 metadata 
 | 4 | 2 | 0 |
 | 5 | 2 | 65536 |
 | and so on… | and so on… | and so on… |
+
+## See also
+
+- [RecUploadNext](RecUploadNext.md) — packetized upload for large data sets
+- [RecDataA/RecDataB](RecDataA-RecDataB.md) — raw, unconverted buffer
+- [RecStat](RecStat.md) — recording status (must be completed/stopped)
+- [RecParamA/RecParamB](RecParamA-RecParamB.md) — order of recorded parameters

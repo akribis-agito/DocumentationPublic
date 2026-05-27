@@ -1,5 +1,6 @@
 ---
 keyword: VEncDelay
+summary: Fixed delay between the source signal and the virtual encoder output.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # VEncDelay
 
-**Definition:**
+Fixed delay between the source signal and the virtual encoder output.
 
-VEncDelay introduces a fixed delay between the source signal and the virtual encoder output. This can be used to compensate for latency in the feedback path or to synchronise the virtual encoder with an external process. It is an axis-related parameter saved to flash.
+## Overview
 
-**See also:**
+`VEncDelay` introduces a fixed delay between the source signal ([VEncSrc](VEncSrc.md)) and the virtual encoder output. It can be used to compensate for latency in the feedback path or to synchronise the virtual encoder with an external process. The value range is 0 to 25, with a default of 0 (no delay). It is an axis-scope parameter saved to flash and can be changed while the motor is on or in motion.
 
-[VEncOn](VEncOn.md), [VEncSrc](VEncSrc.md), [VEncFact](VEncFact.md), [VEncFactDen](VEncFactDen.md)
+## Examples
+
+```text
+VEncDelay=0         ; no delay
+VEncDelay=5         ; apply a fixed delay
+```
+
+## See also
+
+- [VEncOn](VEncOn.md) — enables the virtual encoder
+- [VEncSrc](VEncSrc.md) — source signal that is delayed
+- [VEncFact](VEncFact.md) / [VEncFactDen](VEncFactDen.md) — scaling ratio numerator / denominator

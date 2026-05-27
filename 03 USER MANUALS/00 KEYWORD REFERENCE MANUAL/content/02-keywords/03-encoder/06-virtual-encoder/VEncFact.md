@@ -1,5 +1,6 @@
 ---
 keyword: VEncFact
+summary: Numerator of the scaling ratio applied to the virtual encoder source signal.
 availability:
   standalone:
   - v4
@@ -26,10 +27,24 @@ overrides: {}
 ---
 # VEncFact
 
-**Definition:**
+Numerator of the scaling ratio applied to the virtual encoder source signal.
 
-VEncFact is the numerator of the scaling ratio applied to the virtual encoder source signal. The effective scale factor is VEncFact / VEncFactDen, allowing the virtual encoder position to be mapped from the source units to the desired output resolution. It is an axis-related parameter saved to flash.
+## Overview
 
-**See also:**
+`VEncFact` is the numerator of the scaling ratio applied to the virtual encoder source signal. The effective scale factor is `VEncFact / VEncFactDen`, which maps the virtual encoder position from the source units to the desired output resolution. It is used with [VEncFactDen](VEncFactDen.md) (the denominator) when the virtual encoder is enabled ([VEncOn](VEncOn.md) = 1). It is an axis-scope parameter saved to flash and can be changed while the motor is on or in motion.
 
-[VEncFactDen](VEncFactDen.md), [VEncOn](VEncOn.md), [VEncSrc](VEncSrc.md)
+## How it works
+
+$$Scale\ factor = \frac{VEncFact}{VEncFactDen}$$
+
+## Examples
+
+```text
+VEncFact=65536          ; unity scale when VEncFactDen=65536
+```
+
+## See also
+
+- [VEncFactDen](VEncFactDen.md) — denominator of the scaling ratio
+- [VEncOn](VEncOn.md) — enables the virtual encoder
+- [VEncSrc](VEncSrc.md) — source signal that is scaled

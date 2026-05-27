@@ -18,8 +18,6 @@ In case of multiple scopes, each scope runs independently from the other. Each s
 | 1         | RecDataA, RecParamA    |
 | 2         | RecDataB, RecParamB    |
 
-<span class="mark">**DN:** Is it recommended to change remove RecDataB for product without second scope?</span>
-
 The common procedure in setting up a scope is as follows.
 
 1.  Any ongoing recording process is stopped by using [RecStop](../../02-keywords/19-data-recording/RecStop.md) command.
@@ -61,6 +59,4 @@ The common procedure in setting up a scope is as follows.
 3. for parameter of 64-bit long data type, the data is stored normally.
 4. for parameter of 64-bit double data type, the data is type-punned to 64-bit long and stored.
 
-<span class="mark">**DN:** Other implementations</span>
-<span class="mark">RecCTEnable</span>
-<span class="mark">RecCTMaxSize</span>
+**Continuous recording:** see [RecCTEnable](RecCTEnable.md) and [RecCTMaxSize](RecCTMaxSize.md).

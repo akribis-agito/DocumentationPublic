@@ -1,5 +1,6 @@
 ---
 keyword: RecLength
+summary: Number of data points captured per parameter per scope (recording period).
 availability:
   standalone:
   - v4
@@ -26,17 +27,36 @@ overrides: {}
 ---
 # RecLength
 
-**Definition:**
+Number of data points captured per parameter per scope (recording period).
 
-RecLength is an array that defines the number of data points to capture per parameter, thereby determining the period of the recording.
+## Overview
+
+`RecLength` is an array that defines the number of data points to capture per parameter, thereby determining the period of the recording. Combined with the down-sampling factor [RecGap](RecGap.md), it sets how long a scope records. Each array index selects a scope.
 
 | Index | Descriptions                 |
 |-------|------------------------------|
 | 1     | First scope                  |
 | 2     | Second scope (if applicable) |
 
-The period of data recording is as shown.
+## How it works
+
+The recording period is:
 
 $$
 Period\ of\ recording\ for\ scope\ x\ \lbrack s\rbrack = \frac{RecLength\lbrack x\rbrack \bullet RecGap\lbrack x\rbrack}{Controller\ cycle\ rate\ \lbrack Hz\rbrack}
 $$
+
+The maximum value is product-dependent (see the [Data recording](00-overview.md) overview for per-product point limits). [RecTrigPos](RecTrigPos.md) splits these points into pre-trigger and post-trigger portions.
+
+## Examples
+
+```text
+RecLength[1]=16384  ; capture 16384 points per parameter on the first scope
+RecLength[1]?       ; query the first scope record length
+```
+
+## See also
+
+- [RecGap](RecGap.md) — down-sampling factor (sets the frequency)
+- [RecTrigPos](RecTrigPos.md) — pre-trigger fraction of RecLength
+- [RecStart](RecStart.md) — start recording once setup is complete

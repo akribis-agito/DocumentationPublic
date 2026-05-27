@@ -1,5 +1,6 @@
 ---
 keyword: EmulFilter
+summary: Digital filter applied to the encoder emulation output signal.
 availability:
   standalone:
   - v4
@@ -26,10 +27,20 @@ overrides: {}
 ---
 # EmulFilter
 
-**Definition:**
+Digital filter applied to the encoder emulation output signal.
 
-EmulFilter sets the digital filter applied to the encoder emulation output signal. A higher value applies more filtering to reduce high-frequency noise on the emulated quadrature output. It is an axis-related parameter saved to flash.
+## Overview
 
-**See also:**
+`EmulFilter` sets the digital filter applied to the encoder emulation output. A higher value applies more filtering to reduce high-frequency noise on the emulated quadrature output. It works together with [EmulRat](EmulRat.md) (output ratio) and [EmulIndexType](EmulIndexType.md) (index pulse type) to configure the emulated encoder interface. It is an axis-scope parameter saved to flash and can be changed while the motor is on or in motion.
 
-[EmulRat](EmulRat.md), [EmulIndexType](EmulIndexType.md)
+## Examples
+
+```text
+EmulFilter=3        ; default filtering level
+EmulFilter=0        ; no filtering
+```
+
+## See also
+
+- [EmulRat](EmulRat.md) — ratio between feedback counts and emulated quadrature output
+- [EmulIndexType](EmulIndexType.md) — index pulse type on the emulated output

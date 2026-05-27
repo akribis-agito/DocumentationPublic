@@ -1,16 +1,21 @@
+---
+summary: Per-scope arrays holding recording metadata and raw (unconverted) captured data.
+---
 # RecDataA/RecDataB
 
-**Definition:**
+Per-scope arrays holding recording metadata and raw (unconverted) captured data.
 
-RecDataA and RecDataB store the recording metadata and raw captured data, for the first and the second scope respectively.
+## Overview
 
-**Note:**
+`RecDataA` and `RecDataB` store the recording metadata and raw captured data for the first and second scope respectively. Unlike [RecUpload](RecUpload.md), which applies unit conversion, these arrays expose the unconverted buffer directly, which is useful for custom analysis software.
 
-For products with only single scope, querying RecDataB will equal to querying RecDataA.
+> **Note:** For products with only a single scope, querying `RecDataB` is equivalent to querying `RecDataA`.
 
-The metadata for each scope are stored in the first 80 entries of the array. The raw captured data, without any unit conversion, are stored in the subsequent array entries. User can view the metadata and the raw captured data, subject to overall index cap of 32079. Raw captured data with index larger than the cap (i.e. captured data number 32000 and above) are not readable by user via RecDataA/RecDataB. To stream the entirety of captured data, please refer to [RecUpload](../../02-keywords/19-data-recording/RecUpload.md).
+## How it works
 
-The first 80 RecDataA/RecDataB indices are described as shown.
+The metadata for each scope is stored in the first 80 entries of the array. The raw captured data, without any unit conversion, is stored in the subsequent array entries. The user can read the metadata and raw captured data subject to an overall index cap of 32079; raw captured data with an index larger than the cap (i.e. captured data number 32000 and above) is not readable via `RecDataA`/`RecDataB`. To stream the entirety of the captured data, refer to [RecUpload](RecUpload.md).
+
+The first 80 `RecDataA`/`RecDataB` indices are described as shown.
 
 | Index | Descriptions |
 |---|---|
@@ -30,8 +35,15 @@ The first 80 RecDataA/RecDataB indices are described as shown.
 | 24 | Index of the first recorded element when all triggers occur |
 | 25 | Index of the expected last recorded element |
 | 26 - 45 | Complex CAN codes of the recorded parameters |
-| 46 | Trigger mode (RecTrigMode) |
+| 46 | Trigger mode (RecTrigsMode) |
 | 47 – 48 | Trigger logics (RecTrigsLogic) |
 | 49 - 55 | Reserved |
 | 56 - 75 | User unit of the recorded parameters |
 | 76 – 80 | Reserved |
+
+## See also
+
+- [RecUpload](RecUpload.md) — stream the full, converted data set
+- [RecParamA/RecParamB](RecParamA-RecParamB.md) — parameters captured per scope
+- [RecStop](RecStop.md) — updates metadata length when recording is interrupted
+- [RecStat](RecStat.md) — recording status

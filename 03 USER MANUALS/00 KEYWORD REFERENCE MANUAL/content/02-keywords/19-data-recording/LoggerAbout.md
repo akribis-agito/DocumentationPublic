@@ -1,5 +1,6 @@
 ---
 keyword: LoggerAbout
+summary: Reports metadata about the current continuous logger session.
 availability:
   standalone:
   - v4
@@ -26,10 +27,23 @@ overrides: {}
 ---
 # LoggerAbout
 
-**Definition:**
+Reports metadata about the current continuous logger session.
 
-LoggerAbout is a read-only array parameter that reports metadata about the current logger session, including the list of logged parameters and session configuration information. It is a non-axis status variable and is not saved to flash.
+## Overview
 
-**See also:**
+`LoggerAbout` is a read-only array that reports metadata about the current logger session, including the list of logged parameters and session configuration information. It lets a host application interpret the data returned by [LoggerUpload](LoggerUpload.md) without separately re-querying the configuration. It is a non-axis status variable and is not saved to flash. The configuration it describes is set through [LoggerParams](LoggerParams.md), [LoggerGap](LoggerGap.md), and [LoggerOn](LoggerOn.md).
 
-[LoggerOn](LoggerOn.md), [LoggerParams](LoggerParams.md), [LoggerStatus](LoggerStatus.md)
+> **Documentation pending:** the per-index layout of the 44-element array is not specified in the source material.
+
+## Examples
+
+```text
+LoggerAbout[1]?     ; query the first metadata element
+```
+
+## See also
+
+- [LoggerOn](LoggerOn.md) — start/stop the logger
+- [LoggerParams](LoggerParams.md) — parameters the logger records
+- [LoggerStatus](LoggerStatus.md) — logger run state
+- [LoggerUpload](LoggerUpload.md) — retrieve logged data

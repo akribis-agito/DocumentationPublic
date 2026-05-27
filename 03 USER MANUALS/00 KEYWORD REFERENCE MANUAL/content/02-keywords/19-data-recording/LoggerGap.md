@@ -1,5 +1,6 @@
 ---
 keyword: LoggerGap
+summary: Sets the continuous logger sampling interval in servo cycles.
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # LoggerGap
 
-**Definition:**
+Sets the continuous logger sampling interval in servo cycles.
 
-LoggerGap sets the sampling interval of the continuous data logger in servo cycles, controlling how frequently data is captured relative to the control loop rate. It is a non-axis parameter saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`LoggerGap` sets the sampling interval of the continuous data logger in servo cycles, controlling how frequently the parameters in [LoggerParams](LoggerParams.md) are captured relative to the control loop rate. A larger value samples less often, extending the time span captured in the buffer. It is a non-axis parameter saved to flash and can be changed at any time. This is the continuous-logger counterpart of [RecGap](RecGap.md) for the recording scope.
 
-[LoggerOn](LoggerOn.md), [LoggerParams](LoggerParams.md), [LoggerFullMod](LoggerFullMod.md)
+## Examples
+
+```text
+LoggerGap=10        ; sample every 10 servo cycles
+LoggerGap?          ; query the current sampling interval
+```
+
+## See also
+
+- [LoggerOn](LoggerOn.md) — start/stop the logger
+- [LoggerParams](LoggerParams.md) — parameters the logger records
+- [LoggerFullMod](LoggerFullMod.md) — buffer-full behavior
+- [RecGap](RecGap.md) — equivalent down-sampling for the recording scope

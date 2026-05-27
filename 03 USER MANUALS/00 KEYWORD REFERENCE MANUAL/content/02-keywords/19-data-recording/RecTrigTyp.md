@@ -1,5 +1,6 @@
 ---
 keyword: RecTrigTyp
+summary: Trigger activation logic (edge, comparison, or range) for each trigger.
 availability:
   standalone:
   - v4
@@ -26,9 +27,11 @@ overrides: {}
 ---
 # RecTrigTyp
 
-**Definition:**
+Trigger activation logic (edge, comparison, or range) for each trigger.
 
-RecTrigTyp defines how the trigger is activated (trigger type). Each index refers to a different trigger.
+## Overview
+
+`RecTrigTyp` defines how each trigger is activated (the trigger type). It selects the comparison applied between the trigger source value ([RecTrigSrc](RecTrigSrc.md), subject to masking by [RecTrigMask](RecTrigMask.md)) and the comparison values [RecTrigVal](RecTrigVal.md) and [RecTrigValMax](RecTrigValMax.md). Each index refers to a different trigger.
 
 | Index | Scope no. | Trigger |
 |---|---|---|
@@ -39,7 +42,9 @@ RecTrigTyp defines how the trigger is activated (trigger type). Each index refer
 | 5 | 2 (Second) | 2 |
 | 6 | 2 (Second) | 3 |
 
-Each RecTrigTyp refers to different trigger activation logic. The trigger source value originates from variable pointed by RecTrigSrc, subject to masking.
+## How it works
+
+Each `RecTrigTyp` value selects a different trigger activation logic. The trigger source value originates from the variable pointed to by [RecTrigSrc](RecTrigSrc.md), subject to masking.
 
 | Value | Trigger activation logic |
 |----|----|
@@ -57,6 +62,18 @@ Each RecTrigTyp refers to different trigger activation logic. The trigger source
 | 11 | Activated upon the entry of source value into the range of (RecTrigVal, RecTrigValMax) |
 | 12 | Activated upon the exit of source value into the range of (RecTrigVal, RecTrigValMax) |
 
-**Note:**
+## Examples
 
-RecTrigTyp[2] = 0, RecTrigTyp[3] = 0, RecTrigsLogic[1] = 1, RecTrigsLogic[2] = 1 and RecTrigMode[1] = 1 are normally commanded to achieve single trigger setting for the first scope. Similar commands can be made for the second scope.
+```text
+RecTrigTyp[2]=5     ; trigger 2 (first scope) on rising edge above RecTrigVal
+RecTrigTyp[1]?      ; query the activation type of trigger 1 (first scope)
+```
+
+> **Note:** `RecTrigTyp[2] = 0`, `RecTrigTyp[3] = 0`, `RecTrigsLogic[1] = 1`, `RecTrigsLogic[2] = 1` and `RecTrigsMode[1] = 1` are normally commanded to achieve a single-trigger setting for the first scope. Similar commands can be made for the second scope.
+
+## See also
+
+- [RecTrigSrc](RecTrigSrc.md) — trigger source variable
+- [RecTrigVal](RecTrigVal.md) — comparison value
+- [RecTrigValMax](RecTrigValMax.md) — range upper bound (types 9–12)
+- [RecTrigMask](RecTrigMask.md) — bitwise mask on the source value

@@ -12,7 +12,6 @@ with assumption that index pulse is normally 1 encoder pitch wide.
 
 Index detection works similarly for auxiliary encoder (description regarding the main encoder also applies to the auxiliary encoder).
 
-Index detection is a feature subset of [event-based feedback logging](../../../02-keywords/03-encoder/03-event-based-feedback-logging/00-overview.md) (which offers broader use cases).
-%%
-KKK: CJ/Eyal/Alon, let’s discuss this. Auxiliary encoder not implemented.
-%%
+Index detection is a feature subset of [event-based feedback logging](../03-event-based-feedback-logging/00-overview.md) (which offers broader use cases).
+
+> **Note:** The auxiliary-encoder index detection is not implemented in the current firmware.

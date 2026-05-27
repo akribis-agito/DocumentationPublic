@@ -1,5 +1,6 @@
 ---
 keyword: LoggerFullMod
+summary: Selects logger behavior when its buffer fills (overwrite or stop).
 availability:
   standalone:
   - v4
@@ -26,10 +27,22 @@ overrides: {}
 ---
 # LoggerFullMod
 
-**Definition:**
+Selects logger behavior when its buffer fills (overwrite or stop).
 
-LoggerFullMod sets the behavior of the continuous data logger when its buffer becomes full, selecting between overwrite (circular) or stop modes. It is a non-axis parameter saved to flash and can be changed at any time.
+## Overview
 
-**See also:**
+`LoggerFullMod` sets the behavior of the continuous data logger when its buffer becomes full, selecting between an overwrite (circular) mode and a stop mode. This determines whether long-running logging keeps the most recent samples or freezes at the first full buffer. It is a non-axis parameter saved to flash and can be changed at any time. It works together with [LoggerOn](LoggerOn.md), [LoggerGap](LoggerGap.md), and is observed through [LoggerStatus](LoggerStatus.md).
 
-[LoggerOn](LoggerOn.md), [LoggerStatus](LoggerStatus.md), [LoggerGap](LoggerGap.md)
+> **Documentation pending:** the mapping of the two values (range `0`–`1`) to the overwrite/circular and stop modes is not specified in the source material.
+
+## Examples
+
+```text
+LoggerFullMod?      ; query the current buffer-full mode
+```
+
+## See also
+
+- [LoggerOn](LoggerOn.md) — start/stop the logger
+- [LoggerStatus](LoggerStatus.md) — logger run state and buffer fill
+- [LoggerGap](LoggerGap.md) — logger sampling interval

@@ -1,5 +1,6 @@
 ---
 keyword: EncAbsRData
+summary: Data returned from an absolute encoder register read transaction.
 availability:
   standalone:
   - v4
@@ -26,10 +27,21 @@ overrides: {}
 ---
 # EncAbsRData
 
-**Definition:**
+Data returned from an absolute encoder register read transaction.
 
-EncAbsRData contains the data returned from an absolute encoder register read transaction triggered by EncAbsSendCmd. After a successful read, the value from the encoder register addressed by EncAbsAddr is available here. It is a read-only, axis-related parameter that is not saved to flash.
+## Overview
 
-**See also:**
+`EncAbsRData` contains the data returned from an absolute encoder register read transaction triggered by [EncAbsSendCmd](EncAbsSendCmd.md). After a successful read, the value from the encoder register addressed by [EncAbsAddr](EncAbsAddr.md) is available here. It is a read-only, axis-scope parameter that is not saved to flash.
 
-[EncAbsAddr](EncAbsAddr.md), [EncAbsWRType](EncAbsWRType.md), [EncAbsWData](EncAbsWData.md), [EncAbsSendCmd](EncAbsSendCmd.md)
+## Examples
+
+```text
+EncAbsRData?        ; read the result of the last register read
+```
+
+## See also
+
+- [EncAbsAddr](EncAbsAddr.md) — register address that was read
+- [EncAbsWRType](EncAbsWRType.md) — selects read or write access
+- [EncAbsWData](EncAbsWData.md) — data to write to the addressed register
+- [EncAbsSendCmd](EncAbsSendCmd.md) — issues the transaction

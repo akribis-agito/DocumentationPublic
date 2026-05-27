@@ -1,5 +1,6 @@
 ---
 keyword: GantryOffset
+summary: Read-only initial A/B position offset captured when gantry mode is switched on.
 availability:
   standalone:
   - v4
@@ -26,19 +27,36 @@ overrides: {}
 ---
 # GantryOffset
 
-<!-- Imported from the 2021 PDF reference. Verify against current
-     firmware behavior and update with the latest semantics. -->
+Read-only initial A/B position offset captured when gantry mode is switched on.
 
-The GantryOffset is a read-only parameter.
+## Overview
 
-AGantryOffset is calculated once when AGantryOn is switched by the user from 0 to 1.
-AGantryOffset = APosRef ­ BPosRef.
+`GantryOffset` is a read-only parameter. `AGantryOffset` is calculated once when `AGantryOn` is switched by the user from `0` to `1`. It captures the initial offset between the two encoder readings so that this offset is ignored in the [GantryFdbk](GantryFdbk.md) calculation, letting the gantry feedbacks start from a clean reference (see [GantryOn](../01-general-variables/GantryOn.md)).
 
-The GantryOffset is later used for the calculation of the GantryFdbk readings, so that the initial
-offset between the readings of the two encoders is ignored.
+## How it works
 
-The actual calculation is:
-AGantryFdbk is equal to (APos + BPos + AGantryOffset) / 2
-BGantryFdbk is equal to (APos ­ BPos - AGantryOffset)
+The offset is captured as:
 
-?GantryOffset with "?" not equal to "A" has no use and will always returns a value of 0.
+```text
+AGantryOffset = APosRef - BPosRef
+```
+
+It is then folded into the gantry feedbacks:
+
+```text
+AGantryFdbk = (APos + BPos + AGantryOffset) / 2
+BGantryFdbk = (APos - BPos - AGantryOffset)
+```
+
+`?GantryOffset` with `?` not equal to `A` has no use and always returns `0`.
+
+## Examples
+
+```text
+AGantryOffset?      ; read the captured A/B offset
+```
+
+## See also
+
+- [GantryFdbk](GantryFdbk.md) — gantry feedbacks that apply this offset
+- [GantryOn](../01-general-variables/GantryOn.md) — captures the offset on the 0→1 transition

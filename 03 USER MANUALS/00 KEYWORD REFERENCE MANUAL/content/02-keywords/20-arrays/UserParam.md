@@ -1,5 +1,6 @@
 ---
 keyword: UserParam
+summary: Per-axis, feature-related 32-bit integer array for shared user/host storage.
 availability:
   standalone:
   - v4
@@ -26,10 +27,27 @@ overrides: {}
 ---
 # UserParam
 
-**Definition:**
+Per-axis, feature-related 32-bit integer array for shared user/host storage.
 
-UserParam is an axis-related general-purpose integer array that provides per-axis storage accessible by the user program and host. It can be read and written at any time and is saved to flash.
+## Overview
 
-**See also:**
+`UserParam` is an axis-related general-purpose integer array that provides per-axis storage accessible by both the user program and the host. It can be read and written at any time and is saved to flash.
 
-[UserParamD](UserParamD.md), [UserParamF](UserParamF.md), [UserParamLL](UserParamLL.md), [GenData](GenData.md)
+Unlike the [GenData](GenData.md) family, the user-parameter arrays are feature-related: some entries are used internally to store temporary variables (for example, in the homing sequence and CNC motion variables). The controller guarantees that any given entry is not used by more than one feature at a time, but because some entries are reserved by features, it is not recommended to use `UserParam` for the user program, custom functions, or debugging — use [GenData](GenData.md) for that. `UserParam` is the 32-bit integer member of the family; see [UserParamD](UserParamD.md), [UserParamF](UserParamF.md) and [UserParamLL](UserParamLL.md) for other data types.
+
+The array is 1-indexed: the first usable element is `UserParam[1]`. With `array_size` of 251, the highest usable index is `UserParam[250]` (index 0 is reserved and inaccessible).
+
+## Examples
+
+```text
+UserParam[1]=5      ; store a value in the first element
+UserParam[1]?       ; read the first element
+UserParam[250]=0    ; highest usable index
+```
+
+## See also
+
+- [UserParamD](UserParamD.md) — 64-bit double-precision integer variant
+- [UserParamF](UserParamF.md) — floating-point variant
+- [UserParamLL](UserParamLL.md) — long-long (64-bit signed integer) variant
+- [GenData](GenData.md) — non-axis general-purpose storage (recommended for user programs)

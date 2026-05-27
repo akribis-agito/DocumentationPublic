@@ -1,5 +1,6 @@
 ---
 keyword: RecTrigsLogic
+summary: Logical operator joining trigger conditions in parallel detection.
 availability:
   standalone:
   - v4
@@ -26,13 +27,13 @@ overrides: {}
 ---
 # RecTrigsLogic
 
-**Condition:**
+Logical operator joining trigger conditions in parallel detection.
 
-RecTrigsLogic is only applicable for parallel (logical) trigger detection (RecTrigsMode = 1).
+## Overview
 
-**Definition:**
+`RecTrigsLogic` defines how multiple trigger conditions are logically joined to form the overall trigger condition for parallel (logical) trigger detection. It is only applicable when [RecTrigsMode](RecTrigsMode.md) = 1 (parallel detection). Each index joins a different pair of triggers.
 
-RecTrigsLogic defines how multiple trigger conditions are logically joined to form the overall logic condition for parallel trigger detection. Each index will join a different set of triggers.
+## How it works
 
 | Index | Scope no. | Logic between |
 |---|---|---|
@@ -48,13 +49,11 @@ The value of RecTrigsLogic determines the logical operator used.
 | 1     | && (AND)         |
 | 2     | \|\| (OR)        |
 
-**Note:**
+> **Note:** Logical operators (AND, OR) are left-associative (operation is performed from left to right).
 
-Logical operators (AND, OR) are left-associative (operation is performed from left to right).
+## Examples
 
-**Example:**
-
-If RecTrigsLogic\[1\] = 1 and RecTrigsLogics\[2\] = 2, the overall trigger logic condition for the first scope is
+If `RecTrigsLogic[1] = 1` and `RecTrigsLogic[2] = 2`, the overall trigger logic condition for the first scope is
 
 $$
 (Trigger\ 1)\ \&\&\ (Trigger\ 2)\ ||\ (Trigger\ 3)
@@ -65,3 +64,9 @@ The overall trigger will occur only if either
 1.  trigger 1 and trigger 2 are activated, or
 
 2.  trigger 3 is activated
+
+## See also
+
+- [RecTrigsMode](RecTrigsMode.md) — selects parallel vs serial detection
+- [RecTrigTyp](RecTrigTyp.md) — trigger activation type
+- [RecTrigSrc](RecTrigSrc.md) — trigger source variable

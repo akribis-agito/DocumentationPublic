@@ -1,5 +1,6 @@
 ---
 keyword: RecStart
+summary: Command that starts recording on the selected scope.
 availability:
   standalone:
   - v4
@@ -26,13 +27,29 @@ overrides: {}
 ---
 # RecStart
 
-**Definition:**
+Command that starts recording on the selected scope.
 
-RecStart commands the selected scope to start recording, according to the configured setup and trigger keywords. Once recording is started, changing of the setup or trigger keywords will not affect the recording process.
+## Overview
+
+`RecStart` commands the selected scope to start recording, according to the configured setup and trigger keywords. Once recording is started, changing the setup or trigger keywords ([RecParamA/RecParamB](RecParamA-RecParamB.md), [RecGap](RecGap.md), [RecLength](RecLength.md), and the trigger keywords) will not affect the recording in progress. Each array index selects a scope.
 
 | Index | Descriptions                 |
 |-------|------------------------------|
 | 1     | First scope                  |
 | 2     | Second scope (if applicable) |
 
-For example, RecStart\[2\] command will start the recording of second scope.
+After starting, monitor progress with [RecStat](RecStat.md) and, if needed, force the trigger with [RecTrigForce](RecTrigForce.md) or abort with [RecStop](RecStop.md).
+
+## Examples
+
+```text
+RecStart[1]         ; start recording on the first scope
+RecStart[2]         ; start recording on the second scope
+```
+
+## See also
+
+- [RecStat](RecStat.md) — recording status
+- [RecStop](RecStop.md) — stop recording
+- [RecTrigForce](RecTrigForce.md) — force the trigger
+- [RecParamA/RecParamB](RecParamA-RecParamB.md) — parameters to capture

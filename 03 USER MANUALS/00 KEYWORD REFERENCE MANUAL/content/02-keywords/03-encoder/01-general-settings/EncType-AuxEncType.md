@@ -1,12 +1,19 @@
+---
+summary: Selects the encoder feedback type (incremental, SIN/COS, absolute, or analog).
+---
 # EncType/AuxEncType
 
-**Definition:**
+Selects the encoder feedback type for the axis.
 
-EncType defines the encoder feedback type as listed below.
+## Overview
+
+`EncType` defines the encoder feedback type. It tells the controller how to read and decode the position feedback hardware connected to the axis, which in turn determines which additional configuration keywords apply (subtype and filter for incremental, absolute-encoder parameters, or SIN/COS setup). `AuxEncType` is the auxiliary-encoder counterpart and operates the same way.
+
+## How it works
 
 | Value | Encoder type                            | Category                    |
 |-------|-----------------------------------------|-----------------------------|
-| 0     | Reserved                                | \-                          |
+| 0     | Reserved                                | -                           |
 | 1     | Incremental – TTL                       | Digital incremental encoder |
 | 2     | Absolute – SSI (not supported)          | Absolute encoder            |
 | 3     | Absolute – EnDat 2.2                    | Absolute encoder            |
@@ -16,8 +23,23 @@ EncType defines the encoder feedback type as listed below.
 | 7     | Analog position feedback                | Others                      |
 | 8     | Absolute – Tamagawa                     | Absolute encoder            |
 
-For digital incremental encoder, please also refer to the [EncSubType](../../../02-keywords/03-encoder/01-general-settings/EncSubType-AuxEncSubType.md) and [EncFilt](../../../02-keywords/03-encoder/01-general-settings/EncFilt-AuxEncFilt.md).
+For a digital incremental encoder, also refer to [EncSubType](EncSubType-AuxEncSubType.md) and [EncFilt](EncFilt-AuxEncFilt.md).
 
-For absolute encoder, please also refer to the parameters [EncAbsBits](../../../02-keywords/03-encoder/01-general-settings/EncAbsBits-AuxEncAbsBits.md), [EncAbsMB](../../../02-keywords/03-encoder/01-general-settings/EncAbsMB-AuxEncAbsMB.md), [EncAbsOff](../../../02-keywords/03-encoder/01-general-settings/EncAbsOff-AuxEncAbsOff.md) and [EncAbsVal](../../../02-keywords/03-encoder/01-general-settings/EncAbsVal-AuxEncAbsVal.md).
+For an absolute encoder, also refer to [EncAbsBits](EncAbsBits-AuxEncAbsBits.md), [EncAbsMB](EncAbsMB-AuxEncAbsMB.md), [EncAbsOff](EncAbsOff-AuxEncAbsOff.md) and [EncAbsVal](EncAbsVal-AuxEncAbsVal.md).
 
-For analog SIN/COS encoder, please also refer to the parameters [SinCosSetup](../../../02-keywords/03-encoder/01-general-settings/SinCosSetup-AuxSinCosSet.md) and [SinCosSignals](../../../02-keywords/03-encoder/01-general-settings/SinCosSignals-AuxSinCosSig.md).
+For an analog SIN/COS encoder, also refer to [SinCosSetup](SinCosSetup-AuxSinCosSet.md) and [SinCosSignals](SinCosSignals-AuxSinCosSig.md).
+
+## Examples
+
+```text
+EncType=1           ; incremental TTL encoder
+EncType=4           ; SIN/COS encoder
+EncType=6           ; BiSS-C absolute encoder
+```
+
+## See also
+
+- [EncSubType](EncSubType-AuxEncSubType.md) — incremental encoder subtype (`EncType=1`)
+- [EncFilt](EncFilt-AuxEncFilt.md) — incremental input filter (`EncType=1`)
+- [SinCosSetup](SinCosSetup-AuxSinCosSet.md) / [SinCosSignals](SinCosSignals-AuxSinCosSig.md) — SIN/COS configuration and status (`EncType=4`)
+- [EncAbsBits](EncAbsBits-AuxEncAbsBits.md) — absolute encoder bit count (absolute types)
