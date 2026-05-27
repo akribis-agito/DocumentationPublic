@@ -34,6 +34,10 @@ New velocity applied when the axis reaches `SpeedChgPos` during a speed change o
 
 `SpeedChgNew` sets the new velocity, in user units per second, applied when the axis reaches the position defined by [SpeedChgPos](SpeedChgPos.md) during a speed-change-on-the-fly event. The feature must be enabled with [SpeedChgOn](SpeedChgOn.md), and [SpeedChgDir](SpeedChgDir.md) selects the direction in which the trigger is active. It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
 
+## How it works
+
+When the trigger fires, the firmware copies `SpeedChgNew` straight into the active speed setting — `glSpeed = SpeedChgNew` (`AG300_CTL01ControlInterrupt.c:3740`) — and the profiler then ramps the velocity to this value under the normal [Accel](Accel.md)/[Decel](Decel.md) (and jerk) limits, so the speed changes smoothly rather than stepping. `SpeedChgNew` may be larger or smaller than the original [Speed](Speed.md); its sign is the new direction/magnitude in user units per second. Because the value is read only at the moment of the crossing, you may update it any time before then. See [SpeedChgOn](SpeedChgOn.md) for the full trigger mechanism.
+
 ## Examples
 
 ```text

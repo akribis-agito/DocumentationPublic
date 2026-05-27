@@ -41,16 +41,20 @@ Selects the path of motion for absolute PTP under modulo mode.
 
 `ModShort` defines the path of motion taken in absolute point-to-point (PTP) motion when modulo mode is enabled (`ModRev ≠ 0`). It is used for general motion ([MotionMode](../../10-motion/02-motion-configuration/MotionMode.md) = 1 or 2) or during homing ([HomingDef](../../16-homing/HomingDef.md)[1, 11, …, 141] = 12). It complements [ModRev](ModRev.md), which enables modulo wrapping. Being axis-scope and flash-saved, it cannot be changed while the motor is on or in motion.
 
-> **Documentation pending:** `ModShort` is flagged `not_implemented` in the current firmware. Confirm availability before use.
+> **Availability:** `ModShort` is implemented on **central-i v5 only** (range 0–3). On v4 (standalone and central-i) it is not implemented and has no effect — an absolute PTP move always goes to the literal target.
 
 ## How it works
 
-| Value | Description |
-|---|---|
-| 0 | Axis moves to the target like a linear axis (taking additional revolution(s) if the absolute position delta is more than `ModRev`). |
-| 1 | Axis moves to the target in the negative direction only. If the target is higher than the current position, the axis takes the shortest negative-only path to the target. Otherwise it moves like a linear axis (additional revolution(s) if the delta exceeds `ModRev`). |
-| 2 | Axis moves to the target in the positive direction only. If the target is lower than the current position, the axis takes the shortest positive-only path to the target. Otherwise it moves like a linear axis (additional revolution(s) if the delta exceeds `ModRev`). |
-| 3 | Axis moves to the target by the shortest path. It does not take additional revolution(s) even if the absolute position delta is more than `ModRev`. |
+`ModShort` is evaluated once when an absolute PTP target is commanded (no relative target). It rewrites the absolute target [AbsTrgt](../../10-motion/13-motion-mode-ptp/AbsTrgt.md) relative to the current reference before the move begins (`AG300_CTL01Funcs.c`, around lines 1194 and 1330):
+
+| Value | Description | Firmware action |
+|---|---|---|
+| 0 | Axis moves to the target like a linear axis (taking additional revolution(s) if the absolute position delta is more than `ModRev`). | `AbsTrgt` unchanged — move to the literal target. |
+| 1 | Negative direction only. If the target is higher than the current position, take the shortest negative-only path; otherwise move like a linear axis. | If `AbsTrgt > FinalPosRef`, subtract `ModRev` from `AbsTrgt`. |
+| 2 | Positive direction only. If the target is lower than the current position, take the shortest positive-only path; otherwise move like a linear axis. | If `AbsTrgt < FinalPosRef`, add `ModRev` to `AbsTrgt`. |
+| 3 | Shortest path. Does not take additional revolution(s) even if the absolute position delta is more than `ModRev`. | Compute `delta = (AbsTrgt − FinalPosRef + ModRev) mod ModRev`; if `delta ≤ ModRev/2` move `+delta`, else move `−(ModRev − delta)`. |
+
+For value 3 the firmware folds the requested delta into one revolution and chooses the direction whose distance is at most half a revolution, so the axis never travels more than `ModRev/2` to reach the target.
 
 ## Examples
 
@@ -58,6 +62,14 @@ Selects the path of motion for absolute PTP under modulo mode.
 AModShort=0          ; normal (linear-like) path
 AModShort=3          ; shortest path
 ```
+
+## Changes between versions
+
+| | v4 (standalone & central-i) | v5 (central-i) |
+|---|---|---|
+| Access | not implemented (no effect) | read/write, range 0–3 |
+
+The path-selection logic (the `switch (glModShort)` blocks in `AG300_CTL01Funcs.c`) exists only on the v5 firmware; it is absent on v4. **v5 is central-i only.**
 
 ## See also
 

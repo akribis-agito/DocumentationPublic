@@ -32,13 +32,33 @@ Array of per-segment acceleration scaling factors for the acceleration-shaping p
 
 ## Overview
 
-`AccShapeFact` is an array (size 11) that defines the acceleration scaling factor for each segment of the acceleration-shaping profile. Each element specifies the fraction of the maximum acceleration applied during the corresponding segment whose extent is set by [AccShapeDist](AccShapeDist.md). The shaping is only applied when [AccShapeOn](AccShapeOn.md) is enabled. It is an axis-related array saved to flash and can be changed at any time.
+`AccShapeFact` is an array (10 usable entries, indices 1–10) that defines the acceleration scaling factor for each segment of the acceleration-shaping profile. Each element specifies the fraction of the maximum acceleration applied during the corresponding segment whose distance-to-target band is set by [AccShapeDist](AccShapeDist.md). The shaping is only applied when [AccShapeOn](AccShapeOn.md) is enabled. It is an axis-related array saved to flash and can be changed at any time.
+
+## How it works
+
+When the remaining distance to target falls within a band defined by [AccShapeDist](AccShapeDist.md), the matching `AccShapeFact` entry is read as a **fixed-point fraction scaled by 65536** and multiplied into the acceleration and deceleration limits for that cycle (`AG300_CTL01Profiler.c:1034`, using `DIVIDE_BY_65536 = 1/65536`):
+
+```text
+factor      = AccShapeFact[n] / 65536
+AccelFinal  = Accel × AccelFact × factor
+DecelFinal  = Decel × AccelFact × factor
+```
+
+| AccShapeFact value | Resulting factor |
+|---|---|
+| 65536 | ×1.0 (full acceleration) |
+| 49152 | ×0.75 |
+| 32768 | ×0.5 |
+| 16384 | ×0.25 |
+| 0 | ×0 (no acceleration in this band) |
+
+The factors are paired with their distances and re-sorted into ascending distance order whenever the table is written (`SpAccShape`, `SpecialFuncs.c:5868`), so the value in `AccShapeFact[n]` always travels with `AccShapeDist[n]`. The array size is 11 to allow 1-based command indexing; only indices 1–10 are used. See [AccShapeOn](AccShapeOn.md) for the full mechanism.
 
 ## Examples
 
 ```text
-AAccShapeFact[1]=50      ; scaling factor for first segment
-AAccShapeFact[2]=100     ; scaling factor for second segment
+AAccShapeFact[1]=32768   ; first (nearest-target) band runs at half acceleration
+AAccShapeFact[2]=65536   ; second band at full acceleration
 AAccShapeFact[1]        ; query first segment factor
 ```
 

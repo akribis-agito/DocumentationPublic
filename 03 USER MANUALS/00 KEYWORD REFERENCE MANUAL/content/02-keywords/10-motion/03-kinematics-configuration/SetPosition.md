@@ -39,6 +39,28 @@ Redefines the axis position to a given value without moving the motor.
 
 `SetPosition` immediately sets the axis position reference and feedback registers to the specified value without commanding any motion. It is used to define a new coordinate origin or to recover from a position discrepancy. Because it rewrites the reference, it cannot be issued while the axis is in motion. To clear an accumulated position error instead of redefining the coordinate, see [ZeroPosErr](ZeroPosErr.md). It is an axis-related command function.
 
+## How it works
+
+`SetPosition` writes the requested value into **both the feedback chain and the entire reference chain in the same atomic step** (`SetPosition`, `AG300_CTL01Funcs.c:7131`), so the coordinate is redefined without any jump in following error:
+
+- Feedback side: `glEncoderPos`, [Pos](../01-kinematics-status/Pos.md) (`glPos`) and `glPosPrev` are all set to the value.
+- Reference side: [PosRef](../01-kinematics-status/PosRef.md) (`glPosRef`), the shaped and shaped-filtered references and all of their 64-bit history/previous-sample variables are set to the value, and the high-precision accumulator `gllPosRef` is rebuilt from it.
+
+Because [Pos](../01-kinematics-status/Pos.md) and [PosRef](../01-kinematics-status/PosRef.md) are moved by the **same offset**, the position error [PosErr](../01-kinematics-status/PosErr.md) (`PosRef − Pos`) is **preserved**, not zeroed — `SetPosition` relabels the coordinate, it does not pull the reference onto the feedback. (To instead zero the error by snapping the reference to the feedback, use [ZeroPosErr](ZeroPosErr.md).)
+
+When the motor is **on**, the smoothing buffer must also be re-seeded with the new value; to do so without disabling interrupts for the whole loop the firmware temporarily forces [Jerk](Jerk.md) to `0`, refills the `2^Jerk` moving-average history with the new value, then restores `Jerk` (`AG300_CTL01Funcs.c:7187`–`7229`). When the motor is **off** this is unnecessary because the reference already tracks the feedback.
+
+### Conditions
+
+`SetPosition` is rejected (no change made) if any of the following hold (`SetPositionConditions`, `AG300_CTL01Funcs.c:20591`):
+
+- Encoder **error mapping** is active — disable it first ([MapType](../../04-error-mapping/MapType.md)).
+- **Auto-gain** is on (it uses the position filter).
+- The requested value is **outside the software position limits** [RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md) … [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md).
+- The motor is **on** and **input shaping** is on (its buffers are too large to re-seed).
+
+It is also blocked while the axis is in motion (`ok_in_motion: false`).
+
 ## Examples
 
 ```text
@@ -48,4 +70,8 @@ ASetPosition=50000   ; redefine current position as 50000
 
 ## See also
 
-- [ZeroPosErr](ZeroPosErr.md) — zero the position error rather than redefine the coordinate
+- [ZeroPosErr](ZeroPosErr.md) — zero the position error (snap reference to feedback) rather than redefine the coordinate
+- [Pos](../01-kinematics-status/Pos.md) / [PosRef](../01-kinematics-status/PosRef.md) — both moved together by `SetPosition`
+- [PosErr](../01-kinematics-status/PosErr.md) — preserved (not zeroed) by `SetPosition`
+- [MapType](../../04-error-mapping/MapType.md) — error mapping must be off
+- [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md) / [RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md) — value must lie within these

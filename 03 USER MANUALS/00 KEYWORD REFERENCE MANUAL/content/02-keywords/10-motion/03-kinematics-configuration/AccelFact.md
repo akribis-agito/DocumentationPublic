@@ -32,21 +32,37 @@ Scaling factor applied to `Accel` to adjust effective acceleration without chang
 
 ## Overview
 
-`AccelFact` is a multiplier on the base [Accel](Accel.md) value, so the effective acceleration used for motion is `Accel × AccelFact`. This lets you scale acceleration by a ratio (1 to 40) without disturbing the stored `Accel` parameter, which is convenient when one base profile must be sped up or slowed down. It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
+`AccelFact` is an integer multiplier (range 1–40, default 1) applied to **both** [Accel](Accel.md) and [Decel](Decel.md), so the effective acceleration and deceleration used by the profiler are `Accel × AccelFact` and `Decel × AccelFact`. It lets you scale a stored ramp profile up or down by a whole-number ratio without disturbing the stored `Accel`/`Decel` values — handy when one base recipe must be run faster or slower. It is read/write, axis-scoped and saved to flash, and can be changed at any time, including during motion.
 
 ## How it works
 
-Effective acceleration = `Accel × AccelFact`.
+Every control cycle the profiler multiplies both the acceleration and deceleration rates by `AccelFact` before using them (`AG300_CTL01Profiler.c:781`, `:1062`–`1063`, `:1068`):
+
+$$
+Accel_{eff} = Accel \times AccelFact ,\qquad
+Decel_{eff} = Decel \times AccelFact
+$$
+
+Key points mined from the profiler:
+
+- **Applies to the emergency rate too.** When [EmrgDec](EmrgDec.md) replaces `Decel` on a limit/abort/controlled stop, that value is also multiplied by `AccelFact` (`AG300_CTL01Profiler.c:1068`), so emergency stops scale with the factor as well.
+- **Whole-number only.** `AccelFact` is an integer 1–40; the upper bound is described in the firmware as "just a number, maybe even too big" (`AG300_CTL01Params.h:1110`). Fractional scaling is not possible — adjust `Accel`/`Decel` directly for finer control.
+- **Live.** Because the multiply happens each cycle, changing `AccelFact` mid-move re-scales the ramp slopes on the next cycle.
+- **Carries into both profiler orders.** The scaled `Accel_eff`/`Decel_eff` are what the second-order ramp uses directly, and what is passed to the third-order jerk profiler as the peak-acceleration/peak-deceleration constraints (`AG300_CTL01Profiler.c:1170`).
+
+It is dimensionless (no user-unit scaling) and does **not** scale [Speed](Speed.md) or the jerk settings — only the accel/decel rates.
 
 ## Examples
 
 ```text
-AAccelFact=2         ; double the effective acceleration
-AAccelFact          ; query current factor
+AAccelFact=2         ; double the effective acceleration and deceleration
+AAccelFact=1         ; restore base rates (default)
+AAccelFact           ; read current factor
 ```
 
 ## See also
 
-- [Accel](Accel.md) — base acceleration that this factor multiplies
-- [Decel](Decel.md) — deceleration rate
-- [Speed](Speed.md) — target velocity
+- [Accel](Accel.md) — base acceleration this factor multiplies
+- [Decel](Decel.md) — base deceleration this factor multiplies
+- [EmrgDec](EmrgDec.md) — emergency rate, also scaled by this factor
+- [Speed](Speed.md) — cruise velocity (not affected by `AccelFact`)

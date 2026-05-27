@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="300" viewBox="0 0 560 300" font-family="sans-serif" font-size="13">
+  <!-- axes -->
+  <line x1="60" y1="240" x2="540" y2="240" stroke="#333" stroke-width="1.5"/>
+  <line x1="60" y1="240" x2="60" y2="30" stroke="#333" stroke-width="1.5"/>
+  <text x="20" y="45" fill="#333">vel</text>
+  <text x="510" y="262" fill="#333">time</text>
+
+  <!-- Speed level guide -->
+  <line x1="60" y1="70" x2="540" y2="70" stroke="#bbb" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="64" y="64" fill="#1565c0">Speed</text>
+
+  <!-- Trapezoid (Jerk = 0): straight ramps -->
+  <polyline points="60,240 180,70 360,70 480,240" fill="none" stroke="#1565c0" stroke-width="2"/>
+  <!-- S-curve (Jerk &gt; 0): rounded transitions -->
+  <path d="M60,240 C120,240 130,90 180,70 L360,70 C410,90 420,240 480,240"
+        fill="none" stroke="#e65100" stroke-width="2" stroke-dasharray="6 4"/>
+
+  <!-- accel slope label -->
+  <text x="95" y="150" fill="#1565c0">Accel</text>
+  <!-- decel slope label -->
+  <text x="420" y="150" fill="#1565c0">Decel</text>
+
+  <!-- legend -->
+  <line x1="300" y1="270" x2="330" y2="270" stroke="#1565c0" stroke-width="2"/>
+  <text x="336" y="274" fill="#333">Jerk = 0 (trapezoid)</text>
+  <line x1="60" y1="270" x2="90" y2="270" stroke="#e65100" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="96" y="274" fill="#333">Jerk &gt; 0 (S-curve)</text>
+</svg>

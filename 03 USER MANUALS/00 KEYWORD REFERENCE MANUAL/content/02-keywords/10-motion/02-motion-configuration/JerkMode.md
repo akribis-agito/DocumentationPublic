@@ -46,6 +46,10 @@ Selects the point-to-point motion profiler order (2nd or 3rd order).
 | 0 | 2 (Infinite jerk) | Speed, Accel, Decel, Jerk |
 | 1 | 3 (Infinite snap) | Speed, Accel, Decel, Jerk, JerkInAcc, JerkInDec |
 
+Each control cycle the profiler copies `JerkMode` into a working value, `glJerkModeInternal`, and the trajectory generator branches on it (`AG300_CTL01Profiler.c:1073`, `:1076`, `:1236`): with `JerkModeInternal = 0` (`TRUE_JERK_OFF`) it uses the second-order square-root deceleration law, and with `= 1` (`TRUE_JERK_ON`) it runs the full jerk profiler whose completion is detected by the profiler segment state. The firmware also **overrides** the order to second-order (`TRUE_JERK_OFF`) for the duration of a limit/controlled stop, so an emergency-deceleration stop is taken without jerk limitation regardless of `JerkMode` (`AG300_CTL01Profiler.c:1069`).
+
+Independently of the profiler order, the [Jerk](../03-kinematics-configuration/Jerk.md) keyword sets a moving-average smoothing tail of `2^Jerk` cycles that the profiler flushes at the end of every move (the `IN_WAIT_END_SMOOTH_BIT` phase of [MotionStat](../05-motion-status/MotionStat.md)).
+
 ## Examples
 
 ```text

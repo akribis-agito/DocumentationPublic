@@ -41,11 +41,15 @@ Being axis-scope and flash-saved, it is set during configuration and cannot be c
 
 ## How it works
 
-| LAmpFullScale | Full-scale current over 10 V |
-|---------------|--------------------|
-| 0             | 0.4 A over 10 V    |
-| 1             | 1.2 A over 10 V    |
-| 2             | 3.0 A over 10 V    |
+Selecting a range does two things in firmware: it sets the analog scaling factor `10000 / FullScale[mA]` (mV per mA, so a current reference equal to full-scale gives 10 V), and it programs the linear-amplifier hardware gain bits so the amplifier's current sense matches the selected range. Lower full-scale ranges give finer current resolution; higher ranges allow more current.
+
+| LAmpFullScale | Full-scale current over 10 V | Scaling factor |
+|---------------|--------------------|----------------|
+| 0             | 0.4 A over 10 V    | 10000 / 400 = 25 mV/mA |
+| 1             | 1.2 A over 10 V    | 10000 / 1200 ≈ 8.33 mV/mA |
+| 2             | 3.0 A over 10 V    | 10000 / 3000 ≈ 3.33 mV/mA |
+
+The factor and gain bits are recomputed whenever `LAmpFullScale` or [AmpType](AmpType.md) changes (only while `AmpType = 4`). The linear amplifier serves two axes; the other axes' settings do not affect it.
 
 ## Examples
 

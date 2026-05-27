@@ -32,18 +32,25 @@ Selects the source signal used to generate the virtual encoder position.
 
 ## Overview
 
-`VEncSrc` selects the source signal used to generate the virtual encoder output. The chosen source is formatted by [VEncType](VEncType.md), scaled by [VEncFact](VEncFact.md) / [VEncFactDen](VEncFactDen.md), and delayed by [VEncDelay](VEncDelay.md) to produce the virtual encoder position used when the virtual encoder is enabled ([VEncOn](VEncOn.md) = 1). It is an axis-scope parameter saved to flash and can be changed while the motor is on or in motion.
+`VEncSrc` selects the internal variable that the virtual encoder tracks. The selected variable is scaled by [VEncFact](VEncFact.md) / [VEncFactDen](VEncFactDen.md), emitted in the format set by [VEncType](VEncType.md), and (for pulse/direction) timed with [VEncDelay](VEncDelay.md), to produce the generated encoder signal when the virtual encoder is enabled ([VEncOn](VEncOn.md) = 1). It is an axis-scope parameter saved to flash and can be changed while the motor is on or in motion.
 
-> **Documentation pending:** the mapping of `VEncSrc` values to specific source signals is not documented here.
+## How it works
+
+`VEncSrc` is **not a small enumerated list** — it is an encoded *keyword command code* (a "complex CAN" token combining a keyword, its axis, and array index). The firmware resolves it at configuration time (`SpVEnc` → `GetPointerToComplexCAN`, `AG300_CTL01Funcs.c:25411`) into a direct pointer and data type (32-bit/64-bit integer, float, or double). Each control cycle the virtual encoder reads through that pointer, so any readable controller variable can be the source — for example another axis's position [Pos](../../10-motion/01-kinematics-status/Pos.md) or reference [PosRef](../../10-motion/01-kinematics-status/PosRef.md).
+
+If the chosen source itself wraps under modulo ([ModRev](../04-modulo-mode/ModRev.md)), the firmware detects the wrap (a jump greater than half the source's modulo span) and compensates the tracking memories so the generated output stays continuous.
+
+The numeric value to write for a given source is the keyword's command code; obtain it from PCSuite or the keyword reference rather than guessing.
 
 ## Examples
 
 ```text
-AVEncSrc            ; query the configured virtual encoder source
+AVEncSrc            ; query the configured virtual encoder source code
 ```
 
 ## See also
 
 - [VEncOn](VEncOn.md) — enables the virtual encoder
-- [VEncType](VEncType.md) — output format of the virtual encoder
+- [VEncType](VEncType.md) — output signal format
 - [VEncFact](VEncFact.md) / [VEncFactDen](VEncFactDen.md) — scaling ratio numerator / denominator
+- [Pos](../../10-motion/01-kinematics-status/Pos.md) / [PosRef](../../10-motion/01-kinematics-status/PosRef.md) — typical source variables

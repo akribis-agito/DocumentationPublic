@@ -32,11 +32,13 @@ Denominator of the scaling ratio applied to the virtual encoder source signal.
 
 ## Overview
 
-`VEncFactDen` is the denominator of the scaling ratio applied to the virtual encoder source signal. Together with [VEncFact](VEncFact.md) it defines the exact rational scale factor (`VEncFact / VEncFactDen`) used to convert the source position into the virtual encoder output when the virtual encoder is enabled ([VEncOn](VEncOn.md) = 1). It is an axis-scope parameter saved to flash and can be changed while the motor is on or in motion.
+`VEncFactDen` is the denominator of the scaling ratio applied to the virtual encoder source. Together with [VEncFact](VEncFact.md) it defines the exact rational scale factor (`VEncFact / VEncFactDen`) used to convert the source variable into the emitted encoder count when the virtual encoder is enabled ([VEncOn](VEncOn.md) = 1). Its range is 1 to 500,000,000 and it must be positive (direction inversion is done via a negative [VEncFact](VEncFact.md)). It is an axis-scope parameter saved to flash and can be changed while the motor is on or in motion.
 
 ## How it works
 
-$$Scale\ factor = \frac{VEncFact}{VEncFactDen}$$
+$$Output\ count = Source \times \frac{VEncFact}{VEncFactDen}$$
+
+The firmware keeps a precomputed `1 / VEncFactDen` for the per-cycle tracking calculation (updated by `SpVEncFact` in `SpecialFuncs.c`). The default `VEncFactDen = 65536` (with `VEncFact = 65536`) gives unity scaling and matches the fixed `/65536` factor used by older firmware.
 
 ## Examples
 
@@ -46,6 +48,6 @@ AVEncFactDen=65536       ; unity scale when VEncFact=65536
 
 ## See also
 
-- [VEncFact](VEncFact.md) — numerator of the scaling ratio
+- [VEncFact](VEncFact.md) — numerator of the scaling ratio (set negative to invert direction)
 - [VEncOn](VEncOn.md) — enables the virtual encoder
-- [VEncSrc](VEncSrc.md) — source signal that is scaled
+- [VEncSrc](VEncSrc.md) — source variable that is scaled

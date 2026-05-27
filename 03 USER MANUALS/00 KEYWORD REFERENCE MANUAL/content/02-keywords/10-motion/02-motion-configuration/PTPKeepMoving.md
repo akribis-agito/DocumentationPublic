@@ -34,6 +34,14 @@ Lets a new `Begin` blend into the existing move instead of stopping first.
 
 `PTPKeepMoving` controls what happens when a new [Begin](../04-motion-command/Begin.md) command is issued before the previous point-to-point move has completed. When set to `1`, the axis blends smoothly into the new target ([AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) / [RelTrgt](../13-motion-mode-ptp/RelTrgt.md)) without first stopping, which is useful for on-the-fly retargeting. When `0`, a new `Begin` is only accepted after the current move finishes. It is an axis-related parameter, not saved to flash, and can be changed at any time, including during motion.
 
+## How it works
+
+In a normal point-to-point move the profiler declares the motion finished once it reaches the target and its speed is low enough — it sets `IN_WAIT_END_SMOOTH_BIT` and eventually clears the in-motion bits of [MotionStat](../05-motion-status/MotionStat.md). With `PTPKeepMoving = 1` the firmware **skips that end-of-motion test entirely**: the condition that ends a PTP move is gated by `glPTPKeepMoving[axis] != 1` (`AG300_CTL01Profiler.c:1234`), so the axis stays in the in-motion state and the profiler keeps tracking [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) indefinitely (the same gate also keeps the endless joystick-position modes running).
+
+Because the motion never reports "done", a fresh `Begin` (with a new `AbsTrgt`/`RelTrgt`) retargets the already-running profiler, and the profiler ramps toward the new target from the current speed instead of starting from rest — producing the blend. With `PTPKeepMoving = 0` the move completes normally, so a `Begin` issued during it is governed by the usual in-motion rules.
+
+This affects only point-to-point modes ([MotionMode](MotionMode.md) `= 1`); it has no effect on jog, gear, ECAM or the other modes.
+
 ## Examples
 
 ```text
@@ -47,3 +55,5 @@ APTPKeepMoving      ; query state
 - [Begin](../04-motion-command/Begin.md) — starts (or retargets) the move
 - [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) — absolute target position
 - [RelTrgt](../13-motion-mode-ptp/RelTrgt.md) — relative target position
+- [MotionMode](MotionMode.md) — applies only to point-to-point (mode 1)
+- [MotionStat](../05-motion-status/MotionStat.md) — the in-motion bits that `PTPKeepMoving` keeps set

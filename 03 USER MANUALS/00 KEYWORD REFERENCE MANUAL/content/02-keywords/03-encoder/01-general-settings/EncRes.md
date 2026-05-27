@@ -43,6 +43,18 @@ Together with the pole pairs ([PolePrs](../../02-motor-and-amplifier/PolePrs.md)
 > [!warning]
 > `PolePrs` and `EncRes` are used to calculate encoder counts per pole pair for commutation. Incorrect values will cause the commutation process to fail or pass incorrectly, which may result in unexpected behaviour such as high motor current or a runaway condition. This can cause severe damage to the controller, motor, or any other system parts connected to the motor.
 
+## How it works
+
+`EncRes` is a scaling constant used by several internal calculations rather than a quantity that is read back:
+
+- **Commutation electrical cycle.** The firmware computes the counts per electrical cycle as $EncRes / PolePrs$ (`SpecialFuncs.c:3860`). This defines how the measured position maps onto the electrical angle for sinusoidal commutation, so an incorrect `EncRes` mis-aligns the commutation angle (see the warning above). For a stepper, the steps-per-count factor is derived as $PolePrs \times electricalCycle / EncRes$ (`SpecialFuncs.c:3926`).
+- **Speed-unit conversion (BEMF feed-forward and reporting).** `EncRes` converts internal counts/s into engineering speed (`SpecialFuncs.c:6169` onward):
+  - Linear motor: $magneticPitch[\text{m}] / EncRes$ — counts/s to m/s (here `EncRes` is counts per magnetic pitch).
+  - Rotary motor / DC brush: $60 / EncRes$ — counts/s to rpm (here `EncRes` is counts per revolution).
+  - Voice coil: $1 / EncRes$; `EncRes` has no physical commutation role and may be left at any value.
+
+`EncRes` is the *raw* encoder resolution; per-axis unit display scaling for [Pos](../../10-motion/01-kinematics-status/Pos.md) and its derivatives is handled separately by [UsrUnits](UsrUnits-AuxUsrUnits.md).
+
 ## Examples
 
 ```text
@@ -55,3 +67,5 @@ AEncRes             ; query the configured encoder resolution
 - [MotorType](../../02-motor-and-amplifier/MotorType.md) — determines how `EncRes` is interpreted
 - [PolePrs](../../02-motor-and-amplifier/PolePrs.md) — pole pairs, combined with `EncRes` for commutation
 - [EncType](EncType-AuxEncType.md) — encoder feedback type
+- [UsrUnits](UsrUnits-AuxUsrUnits.md) — user-unit display scaling applied on top of the raw counts
+- [Pos](../../10-motion/01-kinematics-status/Pos.md) — feedback position measured in encoder counts
