@@ -7,3 +7,7 @@
 #define POSKI_MIN           0
 #define POSKI_MAX           1000
 #define POSKI_DFLT          5
+#define LONG64_MAX          2251799813685247
+#define LONG64_MIN          -2251799813685248
+#define POS64_MAX           (long double) LONG64_MAX
+#define POS64_MIN           (long double) LONG64_MIN

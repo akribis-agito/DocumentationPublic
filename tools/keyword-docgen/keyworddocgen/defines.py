@@ -65,9 +65,16 @@ class DefineTable:
                 return str(inner)
             raise ValueError(f"unknown symbol: {name}")
 
+        # Strip C casts such as "(long double)", "(long long)", "(unsigned long)"
+        # which appear on develop's 64-bit range macros, e.g. POS_MAX = (long double) LONG64_MAX.
+        expr = re.sub(
+            r"\(\s*(?:unsigned\s+|signed\s+)?"
+            r"(?:long|short|int|char|float|double)(?:\s+(?:long|double|int|char))*\s*\)",
+            " ", expr,
+        )
         try:
             substituted = re.sub(r"[A-Za-z_]\w*", repl, expr)
-            node = ast.parse(substituted, mode="eval").body
+            node = ast.parse(substituted.strip(), mode="eval").body
             return self._eval(node)
         except (ValueError, SyntaxError, TypeError):
             return None

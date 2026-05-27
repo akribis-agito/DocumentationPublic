@@ -31,3 +31,11 @@ def test_non_numeric_returns_none():
 
 def test_unknown_symbol_returns_none():
     assert make_table().resolve("NOPE") is None
+
+
+def test_strips_c_casts_on_64bit_ranges():
+    # develop writes 64-bit range macros as "(long double) LONG64_MAX"
+    t = make_table()
+    assert t.resolve("POS64_MAX") == 2251799813685247
+    assert t.resolve("POS64_MIN") == -2251799813685248
+    assert t.resolve("(long long) LONG64_MAX") == 2251799813685247
