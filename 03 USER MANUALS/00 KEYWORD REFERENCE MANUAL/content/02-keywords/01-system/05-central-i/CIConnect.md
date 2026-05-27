@@ -38,7 +38,7 @@ Command that initiates a Central-i link on the selected axis port.
 ## Examples
 
 ```text
-CIConnect           ; bring up the Central-i link on the selected axis
+ACIConnect           ; bring up the Central-i link on the selected axis
 ```
 
 ## See also

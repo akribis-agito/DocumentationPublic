@@ -46,8 +46,8 @@ To pass the signal through unfiltered ($y_{i} = u_{i}$), set `AInFilt = 65536`.
 ## Examples
 
 ```text
-AInFilt[1]=10000    ; moderate low-pass filtering on analog input 1
-AInFilt[1]=65536    ; no filtering
+AAInFilt[1]=10000    ; moderate low-pass filtering on analog input 1
+AAInFilt[1]=65536    ; no filtering
 ```
 
 ## See also

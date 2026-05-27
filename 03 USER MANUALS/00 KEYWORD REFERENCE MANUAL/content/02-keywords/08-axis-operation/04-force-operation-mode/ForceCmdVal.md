@@ -36,8 +36,8 @@ Sequence of user-defined force references (units) for force mode.
 ## Examples
 
 ```text
-ForceCmdVal[1]=340  ; first force reference (units)
-ForceCmdVal[2]=-260 ; second force reference (units)
+AForceCmdVal[1]=340  ; first force reference (units)
+AForceCmdVal[2]=-260 ; second force reference (units)
 ```
 
 ## See also

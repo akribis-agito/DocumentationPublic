@@ -44,7 +44,7 @@ Read-only quadrature-axis feedback current (definition varies by motor type), in
 ## Examples
 
 ```text
-Iq?                 ; read quadrature-axis feedback current (mA)
+AIq                 ; read quadrature-axis feedback current (mA)
 ```
 
 ## See also

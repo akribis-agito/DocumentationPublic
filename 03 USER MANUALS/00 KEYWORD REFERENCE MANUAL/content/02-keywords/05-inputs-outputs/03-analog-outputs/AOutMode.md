@@ -43,8 +43,8 @@ In monitoring mode the emulated parameter is treated as millivolts, scaled by [A
 ## Examples
 
 ```text
-AOutMode[1]=0       ; direct command mode
-AOutMode[1]=<CCC>   ; monitor a parameter (use its Complex CAN code)
+AAOutMode[1]=0       ; direct command mode
+AAOutMode[1]=<CCC>   ; monitor a parameter (use its Complex CAN code)
 ```
 
 ## See also

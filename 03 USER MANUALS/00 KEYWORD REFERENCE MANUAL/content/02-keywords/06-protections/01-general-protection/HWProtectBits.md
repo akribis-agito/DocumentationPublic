@@ -36,7 +36,7 @@ Read-only bitfield reporting active hardware protection conditions.
 ## Examples
 
 ```text
-HWProtectBits?      ; read the active hardware protection conditions
+AHWProtectBits      ; read the active hardware protection conditions
 ```
 
 ## See also

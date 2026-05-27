@@ -38,7 +38,7 @@ Yaw correction reference commanding a differential offset between the two gantry
 ```text
 AGantryYawRef=500   ; command a yaw correction offset (user units)
 AGantryYawRef=0     ; remove the yaw correction
-AGantryYawRef?      ; read the current yaw reference
+AGantryYawRef      ; read the current yaw reference
 ```
 
 ## See also

@@ -38,9 +38,9 @@ Unlike the recording scope (`Rec*` keywords), the continuous logger runs in the 
 ## Examples
 
 ```text
-LoggerOn=1          ; start the continuous logger
-LoggerOn=0          ; stop the continuous logger
-LoggerOn?           ; query whether the logger is running
+ALoggerOn=1          ; start the continuous logger
+ALoggerOn=0          ; stop the continuous logger
+ALoggerOn           ; query whether the logger is running
 ```
 
 ## See also

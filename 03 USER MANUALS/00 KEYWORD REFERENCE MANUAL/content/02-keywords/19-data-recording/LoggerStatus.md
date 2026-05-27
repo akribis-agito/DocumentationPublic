@@ -38,7 +38,7 @@ Reports the current state of the continuous data logger.
 ## Examples
 
 ```text
-LoggerStatus[1]?    ; query the first status element
+ALoggerStatus[1]    ; query the first status element
 ```
 
 ## See also

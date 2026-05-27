@@ -36,7 +36,7 @@ Read-only measured phase A current, in milliamperes.
 ## Examples
 
 ```text
-Ia?                 ; read measured phase A current (mA)
+AIa                 ; read measured phase A current (mA)
 ```
 
 ## See also

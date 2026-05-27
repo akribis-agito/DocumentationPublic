@@ -36,7 +36,7 @@ Settling window around the target force used for in-target status.
 ## Examples
 
 ```text
-ForceInTTol=10      ; settled when force error stays within ±10 units
+AForceInTTol=10      ; settled when force error stays within ±10 units
 ```
 
 ## See also

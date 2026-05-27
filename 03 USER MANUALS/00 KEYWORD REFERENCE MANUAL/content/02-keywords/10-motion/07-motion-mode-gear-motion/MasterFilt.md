@@ -50,8 +50,8 @@ $$
 ## Examples
 
 ```text
-MasterFilt=3        ; default (~128.2 Hz cut-off)
-MasterFilt?         ; read current value
+AMasterFilt=3        ; default (~128.2 Hz cut-off)
+AMasterFilt         ; read current value
 ```
 
 ## See also

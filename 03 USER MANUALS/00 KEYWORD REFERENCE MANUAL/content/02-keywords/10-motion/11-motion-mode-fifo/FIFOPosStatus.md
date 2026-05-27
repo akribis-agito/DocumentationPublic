@@ -38,7 +38,7 @@ Read-only array reporting the state of the FIFO position-tracking queue.
 ## Examples
 
 ```text
-FIFOPosStatus[1]?   ; query the first status element
+AFIFOPosStatus[1]   ; query the first status element
 ```
 
 ## See also

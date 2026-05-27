@@ -36,8 +36,8 @@ Motor inductance measurement, in micro-Henry (updated by PCSuite).
 ## Examples
 
 ```text
-Lm?                 ; read measured motor inductance (µH)
-Lm=1200             ; set the inductance value manually (µH)
+ALm                 ; read measured motor inductance (µH)
+ALm=1200             ; set the inductance value manually (µH)
 ```
 
 ## See also

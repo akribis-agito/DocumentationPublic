@@ -44,8 +44,8 @@ Trigger direction for the CurrPosTh position-reference check.
 ## Examples
 
 ```text
-CurrPosThDir=-1     ; trigger when PosRef < CurrPosTh
-CurrPosTh=50000     ; position-reference threshold
+ACurrPosThDir=-1     ; trigger when PosRef < CurrPosTh
+ACurrPosTh=50000     ; position-reference threshold
 ```
 
 ## See also

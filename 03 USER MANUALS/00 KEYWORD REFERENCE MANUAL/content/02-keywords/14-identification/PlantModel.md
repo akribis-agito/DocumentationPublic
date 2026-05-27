@@ -36,8 +36,8 @@ Array of identified plant-model coefficients used by auto-tuning and velocity fi
 ## Examples
 
 ```text
-PlantModel?         ; read all identified plant-model coefficients
-PlantModel[1]?      ; read the first coefficient
+APlantModel         ; read all identified plant-model coefficients
+APlantModel[1]      ; read the first coefficient
 ```
 
 ## See also

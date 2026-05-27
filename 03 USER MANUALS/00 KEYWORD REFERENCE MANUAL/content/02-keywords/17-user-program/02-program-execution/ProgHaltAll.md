@@ -36,7 +36,7 @@ Halts all currently active user program threads.
 ## Examples
 
 ```text
-ProgHaltAll         ; halt every active user program thread
+AProgHaltAll         ; halt every active user program thread
 ```
 
 ## See also

@@ -48,7 +48,7 @@ If the user wants to stop ECAM motion immediately, the [Stop](../04-motion-comma
 ## Examples
 
 ```text
-StopECAM            ; gracefully exit ECAM motion
+AStopECAM            ; gracefully exit ECAM motion
 ```
 
 ## See also

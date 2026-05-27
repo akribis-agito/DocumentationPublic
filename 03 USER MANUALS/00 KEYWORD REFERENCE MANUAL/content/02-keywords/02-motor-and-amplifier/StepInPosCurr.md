@@ -38,9 +38,9 @@ This keyword only applies when [MotorType](MotorType.md) is 6 (open-loop stepper
 ## Examples
 
 ```text
-StepInPosCurr=500       ; 500 mA holding current at standstill
-StepInPosCurr=0         ; no holding current
-StepInPosCurr?          ; query the current value
+AStepInPosCurr=500       ; 500 mA holding current at standstill
+AStepInPosCurr=0         ; no holding current
+AStepInPosCurr          ; query the current value
 ```
 
 ## See also

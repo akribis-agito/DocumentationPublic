@@ -36,7 +36,7 @@ Command to gracefully enter current operation mode.
 ## Examples
 
 ```text
-GoToCurrMode        ; gracefully switch to current operation mode
+AGoToCurrMode        ; gracefully switch to current operation mode
 ```
 
 ## See also

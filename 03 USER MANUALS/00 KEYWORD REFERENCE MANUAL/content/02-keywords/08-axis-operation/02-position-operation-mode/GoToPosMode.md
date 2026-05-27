@@ -40,8 +40,8 @@ Through the [BeginOnToPos](BeginOnToPos.md) flag, the user may choose to immedia
 ## Examples
 
 ```text
-GoToPosMode         ; gracefully switch to position operation mode
-ModeSwitchPos?      ; read the recorded entry/exit positions
+AGoToPosMode         ; gracefully switch to position operation mode
+AModeSwitchPos      ; read the recorded entry/exit positions
 ```
 
 ## See also

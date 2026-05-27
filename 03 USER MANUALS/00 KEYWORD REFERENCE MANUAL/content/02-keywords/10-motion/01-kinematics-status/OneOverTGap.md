@@ -45,8 +45,8 @@ The polling and delta counters reset after the polling counter is saved, ready f
 ## Examples
 
 ```text
-OneOverTGap=2       ; default: gap = 2^2 = 4 counts
-OneOverTGap?        ; read current value
+AOneOverTGap=2       ; default: gap = 2^2 = 4 counts
+AOneOverTGap        ; read current value
 ```
 
 ## See also

@@ -38,7 +38,7 @@ Selects the type of index pulse generated on the encoder emulation output.
 ## Examples
 
 ```text
-EmulIndexType=0     ; default index pulse type
+AEmulIndexType=0     ; default index pulse type
 ```
 
 ## See also

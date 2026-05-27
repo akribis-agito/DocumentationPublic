@@ -36,8 +36,8 @@ Voltage reference applied to the modulation in voltage open-loop mode.
 ## Examples
 
 ```text
-OpenLoopOn=2        ; enter voltage open loop
-OpenLoopVolt=500    ; apply voltage reference
+AOpenLoopOn=2        ; enter voltage open loop
+AOpenLoopVolt=500    ; apply voltage reference
 ```
 
 ## See also

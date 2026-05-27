@@ -42,7 +42,7 @@ So `LimitsStat = 1` → RLS active; `LimitsStat = 2` → FLS active.
 ## Examples
 
 ```text
-LimitsStat?         ; 1 = RLS active, 2 = FLS active, 3 = both
+ALimitsStat         ; 1 = RLS active, 2 = FLS active, 3 = both
 ```
 
 ## See also

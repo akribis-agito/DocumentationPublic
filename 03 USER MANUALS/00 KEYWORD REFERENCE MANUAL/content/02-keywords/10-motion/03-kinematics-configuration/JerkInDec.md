@@ -38,8 +38,8 @@ Jerk applied during the deceleration phase of a third-order (infinite-snap) prof
 ## Examples
 
 ```text
-JerkInDec=2000000   ; jerk during deceleration phase
-JerkInDec?          ; query current value
+AJerkInDec=2000000   ; jerk during deceleration phase
+AJerkInDec          ; query current value
 ```
 
 ## See also

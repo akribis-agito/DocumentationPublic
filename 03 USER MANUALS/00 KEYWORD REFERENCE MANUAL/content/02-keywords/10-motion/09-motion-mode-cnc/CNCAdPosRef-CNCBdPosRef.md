@@ -12,7 +12,7 @@ Derivative of CNCAPosRef — the current vector velocity of the profiler.
 ## Examples
 
 ```text
-CNCAdPosRef?        ; read the current vector velocity of the profiler
+ACNCAdPosRef        ; read the current vector velocity of the profiler
 ```
 
 ## See also

@@ -40,7 +40,7 @@ Reloads all parameters from flash into volatile memory, discarding unsaved chang
 ## Examples
 
 ```text
-Load                ; reload all flash-saved parameters, discarding unsaved edits
+ALoad                ; reload all flash-saved parameters, discarding unsaved edits
 ```
 
 ## See also

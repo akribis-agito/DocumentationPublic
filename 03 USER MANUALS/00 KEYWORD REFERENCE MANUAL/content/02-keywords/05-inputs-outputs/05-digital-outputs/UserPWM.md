@@ -36,7 +36,7 @@ Duty cycle of each user-controlled PWM output channel.
 ## Examples
 
 ```text
-UserPWM[1]=2048     ; ~50% duty cycle on PWM channel 1
+AUserPWM[1]=2048     ; ~50% duty cycle on PWM channel 1
 ```
 
 ## See also

@@ -36,7 +36,7 @@ Read-only direct-axis feedback current after Park transform (three-phase only), 
 ## Examples
 
 ```text
-Id?                 ; read direct-axis feedback current (mA)
+AId                 ; read direct-axis feedback current (mA)
 ```
 
 ## See also

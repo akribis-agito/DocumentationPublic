@@ -38,7 +38,7 @@ Value to write to the remote controller's parameter on RemoteCANSend.
 ## Examples
 
 ```text
-RemoteCANVal=5000   ; value to send to the remote parameter
+ARemoteCANVal=5000   ; value to send to the remote parameter
 ```
 
 ## See also

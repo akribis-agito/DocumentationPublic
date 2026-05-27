@@ -50,8 +50,8 @@ Its value definitions are as shown. Please refer to [Data recording](00-overview
 ## Examples
 
 ```text
-RecTrigsMode[1]=1   ; first scope uses parallel (logical) detection
-RecTrigsMode[1]=2   ; first scope uses serial detection
+ARecTrigsMode[1]=1   ; first scope uses parallel (logical) detection
+ARecTrigsMode[1]=2   ; first scope uses serial detection
 ```
 
 ## See also

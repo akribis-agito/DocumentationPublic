@@ -38,9 +38,9 @@ Event and Lock are mutually exclusive functions: setting `EventOn = 1` automatic
 ## Examples
 
 ```text
-EventOn=1           ; arm event generation (set while below the first event position)
-EventOn=0           ; disable event generation
-EventOn?            ; query the current state
+AEventOn=1           ; arm event generation (set while below the first event position)
+AEventOn=0           ; disable event generation
+AEventOn            ; query the current state
 ```
 
 ## See also

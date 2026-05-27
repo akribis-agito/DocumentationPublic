@@ -14,7 +14,7 @@ Ratio between a desired user unit and encoder counts for reading position and it
 If the user wants to see the position reading in mm and every 5 encoder counts equal 1 mm, set `UsrUnits` to 5. The position is then reported in mm, velocity in mm/s, and acceleration in mm/s².
 
 ```text
-UsrUnits=5          ; 5 encoder counts per user unit (e.g. 1 mm)
+AUsrUnits=5          ; 5 encoder counts per user unit (e.g. 1 mm)
 ```
 
 ## See also

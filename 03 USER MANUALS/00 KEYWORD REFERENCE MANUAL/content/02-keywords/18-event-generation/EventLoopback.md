@@ -36,7 +36,7 @@ Read-only state of the event output as seen by the controller's input circuitry 
 ## Examples
 
 ```text
-EventLoopback?      ; read the looped-back output state (0 or 1)
+AEventLoopback      ; read the looped-back output state (0 or 1)
 ```
 
 ## See also

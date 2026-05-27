@@ -61,7 +61,7 @@ The example shows how InTargetStat changes with different motion phases, under p
 | 1.39 to 1.73 | 4 | Target reached. |
 
 ```text
-InTargetStat?       ; read the current settling state
+AInTargetStat       ; read the current settling state
 ```
 
 ## See also

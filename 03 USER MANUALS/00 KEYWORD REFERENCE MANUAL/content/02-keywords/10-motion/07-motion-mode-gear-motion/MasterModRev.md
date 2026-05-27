@@ -45,8 +45,8 @@ The accumulated delta is corrected if its absolute value exceeds half of `Master
 ## Examples
 
 ```text
-MasterModRev=0      ; master variable has no modulo operation
-MasterModRev?       ; read current value
+AMasterModRev=0      ; master variable has no modulo operation
+AMasterModRev       ; read current value
 ```
 
 ## See also

@@ -36,7 +36,7 @@ Position offset added to every FIFO position segment.
 ## Examples
 
 ```text
-FIFOPosPosOf=5000   ; shift the whole position trajectory by 5000
+AFIFOPosPosOf=5000   ; shift the whole position trajectory by 5000
 ```
 
 ## See also

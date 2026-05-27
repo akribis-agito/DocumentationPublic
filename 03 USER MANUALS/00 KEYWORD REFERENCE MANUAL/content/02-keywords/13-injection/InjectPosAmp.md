@@ -36,8 +36,8 @@ Amplitude of position-command injection, in main user units.
 ## Examples
 
 ```text
-InjectPosAmp=100        ; position injection amplitude (default)
-InjectPosAmp?           ; query the current position injection amplitude
+AInjectPosAmp=100        ; position injection amplitude (default)
+AInjectPosAmp           ; query the current position injection amplitude
 ```
 
 ## See also

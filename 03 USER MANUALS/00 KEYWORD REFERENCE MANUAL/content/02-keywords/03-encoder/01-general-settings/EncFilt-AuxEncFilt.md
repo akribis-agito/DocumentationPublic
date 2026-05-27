@@ -88,8 +88,8 @@ For **Central-i remote units**, the filter is characterized as follows:
 ## Examples
 
 ```text
-EncFilt=0           ; no filtering (highest input frequency)
-EncFilt=3           ; apply filtering to reject noise
+AEncFilt=0           ; no filtering (highest input frequency)
+AEncFilt=3           ; apply filtering to reject noise
 ```
 
 ## See also

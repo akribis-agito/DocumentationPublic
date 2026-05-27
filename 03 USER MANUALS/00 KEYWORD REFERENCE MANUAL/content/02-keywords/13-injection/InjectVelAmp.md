@@ -36,8 +36,8 @@ Amplitude of velocity-command injection; units depend on dual-loop setting.
 ## Examples
 
 ```text
-InjectVelAmp=10000      ; velocity injection amplitude (default)
-InjectVelAmp?           ; query the current velocity injection amplitude
+AInjectVelAmp=10000      ; velocity injection amplitude (default)
+AInjectVelAmp           ; query the current velocity injection amplitude
 ```
 
 ## See also

@@ -43,8 +43,8 @@ Time elapsed in force mode or in the active ForceCmdVal entry.
 ## Examples
 
 ```text
-ForceCmdCntr?       ; read elapsed time (ms)
-ForceCmdCntr=0      ; restart the timer
+AForceCmdCntr       ; read elapsed time (ms)
+AForceCmdCntr=0      ; restart the timer
 ```
 
 ## See also

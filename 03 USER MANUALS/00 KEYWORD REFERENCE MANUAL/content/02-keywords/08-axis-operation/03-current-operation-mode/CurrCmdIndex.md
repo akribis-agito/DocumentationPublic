@@ -40,8 +40,8 @@ Index of the active CurrCmdVal / CurrCmdHTime table entry.
 ## Examples
 
 ```text
-CurrCmdIndex?       ; read the active table entry
-CurrCmdIndex=3      ; jump to the third entry
+ACurrCmdIndex       ; read the active table entry
+ACurrCmdIndex=3      ; jump to the third entry
 ```
 
 ## See also

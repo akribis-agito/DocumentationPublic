@@ -36,7 +36,7 @@ Clears the numeric (expression) stack of the current thread.
 ## Examples
 
 ```text
-ProgClrExp          ; clear the numeric stack at program start
+AProgClrExp          ; clear the numeric stack at program start
 ```
 
 ## See also

@@ -14,7 +14,7 @@ The filter it defines is enabled by [CNCAPosFOn/CNCBPosFOn](CNCAPosFOn-CNCBPosFO
 ## Examples
 
 ```text
-CNCAPosFDef[1]?     ; read the first position-filter coefficient (arrays are 1-indexed)
+ACNCAPosFDef[1]     ; read the first position-filter coefficient (arrays are 1-indexed)
 ```
 
 ## See also

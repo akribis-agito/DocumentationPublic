@@ -36,7 +36,7 @@ Command that pushes a new position segment into the FIFO position queue.
 ## Examples
 
 ```text
-FIFOPosPush=0       ; push a position segment using the current FIFOPos* parameters
+AFIFOPosPush=0       ; push a position segment using the current FIFOPos* parameters
 ```
 
 ## See also

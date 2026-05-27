@@ -16,9 +16,9 @@ Recording proceeds through the array and stops at the first zero entry. To recor
 ## Examples
 
 ```text
-RecParam[1]=1026    ; record this parameter
-RecParam[2]=0       ; terminate the list (only RecParam[1] is recorded)
-RecParam[1]?        ; query the first recorded parameter code
+ARecParam[1]=1026    ; record this parameter
+ARecParam[2]=0       ; terminate the list (only RecParam[1] is recorded)
+ARecParam[1]        ; query the first recorded parameter code
 ```
 
 ## See also

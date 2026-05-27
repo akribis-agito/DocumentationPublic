@@ -36,7 +36,7 @@ Stops spline-buffer (Buff) motion, halting playback and decelerating to rest.
 ## Examples
 
 ```text
-StopBuff            ; stop spline-buffer playback
+AStopBuff            ; stop spline-buffer playback
 ```
 
 ## See also

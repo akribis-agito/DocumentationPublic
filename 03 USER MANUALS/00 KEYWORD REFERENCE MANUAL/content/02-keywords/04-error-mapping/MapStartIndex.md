@@ -38,9 +38,9 @@ It is an axis-scoped parameter saved to flash, and cannot be changed while the a
 ## Examples
 
 ```text
-MapStartIndex=1     ; mapping data starts at MapTable[1]
-MapStartIndex=5000  ; mapping data starts at MapTable[5000]
-MapStartIndex?      ; query the current start index
+AMapStartIndex=1     ; mapping data starts at MapTable[1]
+AMapStartIndex=5000  ; mapping data starts at MapTable[5000]
+AMapStartIndex      ; query the current start index
 ```
 
 ## See also

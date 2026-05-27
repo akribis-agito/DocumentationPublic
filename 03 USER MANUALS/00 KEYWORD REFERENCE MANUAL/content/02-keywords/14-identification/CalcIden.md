@@ -40,7 +40,7 @@ The input and output data must each contain at least 30 and at most 250 data poi
 ## Examples
 
 ```text
-CalcIden            ; calculate the sine-sweep relation; results land in IdenResults
+ACalcIden            ; calculate the sine-sweep relation; results land in IdenResults
 ```
 
 ## See also

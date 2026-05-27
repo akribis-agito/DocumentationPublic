@@ -36,7 +36,7 @@ Lists the parameters included in each periodic statistics transmission.
 ## Examples
 
 ```text
-PStatParams[1]=<CAN code of parameter to stream>    ; first streamed parameter
+APStatParams[1]=<CAN code of parameter to stream>    ; first streamed parameter
 ```
 
 ## See also

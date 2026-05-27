@@ -36,8 +36,8 @@ Edge velocity slopes imposed on the spline buffer trajectory when required.
 ## Examples
 
 ```text
-BuffSlopes[1]=0     ; start-edge slope
-BuffSlopes[2]=0     ; end-edge slope
+ABuffSlopes[1]=0     ; start-edge slope
+ABuffSlopes[2]=0     ; end-edge slope
 ```
 
 ## See also

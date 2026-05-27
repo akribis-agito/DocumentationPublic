@@ -38,8 +38,8 @@ This value bypasses all current references contributed by position, velocity or 
 ## Examples
 
 ```text
-OpenLoopOn=1        ; enter current open loop
-OpenLoopCurr=1000   ; apply 1000 mA current reference
+AOpenLoopOn=1        ; enter current open loop
+AOpenLoopCurr=1000   ; apply 1000 mA current reference
 ```
 
 ## See also

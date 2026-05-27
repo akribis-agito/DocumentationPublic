@@ -42,7 +42,7 @@ $$
 ## Examples
 
 ```text
-MasterPos?          ; read the accumulated scaled master position
+AMasterPos          ; read the accumulated scaled master position
 ```
 
 ## See also

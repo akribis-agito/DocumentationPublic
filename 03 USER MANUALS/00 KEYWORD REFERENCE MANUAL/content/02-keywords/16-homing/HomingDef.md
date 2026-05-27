@@ -169,10 +169,10 @@ The following tables detail the parameters for each instruction.
 ## Examples
 
 ```text
-HomingDef[1]=1      ; step 1 instruction: jog to limit
-HomingDef[2]=-50000 ; step 1 jog speed (negative = toward reverse limit)
-HomingDef[11]=0     ; step 2 instruction: end homing
-HomingDef[1]?       ; read the instruction of step 1
+AHomingDef[1]=1      ; step 1 instruction: jog to limit
+AHomingDef[2]=-50000 ; step 1 jog speed (negative = toward reverse limit)
+AHomingDef[11]=0     ; step 2 instruction: end homing
+AHomingDef[1]       ; read the instruction of step 1
 ```
 
 ## See also

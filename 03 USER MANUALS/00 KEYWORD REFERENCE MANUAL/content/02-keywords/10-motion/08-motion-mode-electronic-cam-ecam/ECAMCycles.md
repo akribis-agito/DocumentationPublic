@@ -47,8 +47,8 @@ Number of occurrences of the cyclical ECAM cam pattern (and endless modes).
 ## Examples
 
 ```text
-ECAMCycles[1]=3     ; 3 occurrences of the cyclical pattern for cam pattern 1
-ECAMCycles[1]?      ; read current value
+AECAMCycles[1]=3     ; 3 occurrences of the cyclical pattern for cam pattern 1
+AECAMCycles[1]      ; read current value
 ```
 
 Refer to the figures in [Motion mode – Electronic cam (ECAM)](00-overview.md) for more information on the patterning logics.

@@ -36,7 +36,7 @@ Register address within the absolute encoder to be accessed by the next transact
 ## Examples
 
 ```text
-EncAbsAddr=16       ; target register address 16
+AEncAbsAddr=16       ; target register address 16
 ```
 
 ## See also

@@ -36,7 +36,7 @@ Position reference into the position loop, after profiler post-processing.
 ## Examples
 
 ```text
-PosRef?             ; read the current position reference
+APosRef             ; read the current position reference
 ```
 
 ## See also

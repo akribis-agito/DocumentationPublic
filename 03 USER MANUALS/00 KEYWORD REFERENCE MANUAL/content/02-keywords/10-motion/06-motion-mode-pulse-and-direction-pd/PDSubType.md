@@ -36,8 +36,8 @@ Selects the pulse-and-direction input signal format (e.g. step/direction vs. CW/
 ## Examples
 
 ```text
-PDSubType=0         ; default input format
-PDSubType=1         ; alternate input format
+APDSubType=0         ; default input format
+APDSubType=1         ; alternate input format
 ```
 
 ## See also

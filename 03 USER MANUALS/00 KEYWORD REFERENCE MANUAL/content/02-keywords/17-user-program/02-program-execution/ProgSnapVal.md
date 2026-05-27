@@ -36,7 +36,7 @@ Holds the values captured by the program snapshot mechanism.
 ## Examples
 
 ```text
-ProgSnapVal[1]?     ; read the value captured for the first snapshot source
+AProgSnapVal[1]     ; read the value captured for the first snapshot source
 ```
 
 ## See also

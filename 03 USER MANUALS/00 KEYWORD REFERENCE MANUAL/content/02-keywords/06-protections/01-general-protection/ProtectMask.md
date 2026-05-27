@@ -34,7 +34,7 @@ Bitfield enabling which hardware protection conditions trigger a fault.
 ## Examples
 
 ```text
-ProtectMask?        ; read which hardware protections are enabled
+AProtectMask        ; read which hardware protections are enabled
 ```
 
 ## See also

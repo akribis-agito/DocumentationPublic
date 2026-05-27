@@ -36,8 +36,8 @@ Jerk limit (0-9) for vector motion, smoothing the resultant velocity into an S-c
 ## Examples
 
 ```text
-VecJerk=0           ; no jerk limiting (trapezoidal profile, default)
-VecJerk=9           ; maximum S-curve smoothing
+AVecJerk=0           ; no jerk limiting (trapezoidal profile, default)
+AVecJerk=9           ; maximum S-curve smoothing
 ```
 
 ## See also

@@ -43,9 +43,9 @@ Selects whether repetitive point-to-point motion is bidirectional or unidirectio
 ## Examples
 
 ```text
-RptMode=0           ; bidirectional (to-and-fro)
-RptMode=1           ; unidirectional (stepping away)
-RptMode?            ; query current value
+ARptMode=0           ; bidirectional (to-and-fro)
+ARptMode=1           ; unidirectional (stepping away)
+ARptMode            ; query current value
 ```
 
 ## See also

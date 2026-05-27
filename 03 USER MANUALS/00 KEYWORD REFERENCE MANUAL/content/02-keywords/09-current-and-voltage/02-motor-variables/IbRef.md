@@ -44,7 +44,7 @@ Read-only phase B current reference, in milliamperes (definition varies by motor
 ## Examples
 
 ```text
-IbRef?              ; read phase B current reference (mA)
+AIbRef              ; read phase B current reference (mA)
 ```
 
 ## See also

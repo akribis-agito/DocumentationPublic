@@ -51,8 +51,8 @@ The maximum value is product-dependent (see the [Data recording](00-overview.md)
 ## Examples
 
 ```text
-RecLength[1]=16384  ; capture 16384 points per parameter on the first scope
-RecLength[1]?       ; query the first scope record length
+ARecLength[1]=16384  ; capture 16384 points per parameter on the first scope
+ARecLength[1]       ; query the first scope record length
 ```
 
 ## See also

@@ -38,7 +38,7 @@ See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all r
 ## Examples
 
 ```text
-FIFORemove=0        ; remove an entry from the FIFO
+AFIFORemove=0        ; remove an entry from the FIFO
 ```
 
 ## See also

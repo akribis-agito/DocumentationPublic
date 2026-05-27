@@ -36,7 +36,7 @@ Data returned from an absolute encoder register read transaction.
 ## Examples
 
 ```text
-EncAbsRData?        ; read the result of the last register read
+AEncAbsRData        ; read the result of the last register read
 ```
 
 ## See also

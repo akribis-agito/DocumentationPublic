@@ -36,7 +36,7 @@ Command that pre-computes the spline coefficients from the buffer waypoints.
 ## Examples
 
 ```text
-BuffCalc=0          ; compute spline coefficients from BuffPos and BuffTime
+ABuffCalc=0          ; compute spline coefficients from BuffPos and BuffTime
 ```
 
 ## See also

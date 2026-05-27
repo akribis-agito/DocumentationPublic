@@ -36,7 +36,7 @@ Maximum allowable force error in closed-loop force control; exceeding it faults.
 ## Examples
 
 ```text
-MaxForceErr=2000    ; max closed-loop force error before fault
+AMaxForceErr=2000    ; max closed-loop force error before fault
 ```
 
 ## See also

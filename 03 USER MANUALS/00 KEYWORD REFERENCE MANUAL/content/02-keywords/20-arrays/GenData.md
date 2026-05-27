@@ -40,9 +40,9 @@ The array is 1-indexed: the first usable element is `GenData[1]`. With `array_si
 ## Examples
 
 ```text
-GenData[1]=100      ; store 100 in the first element
-GenData[1]?         ; read the first element
-GenData[1000]=0     ; highest usable index
+AGenData[1]=100      ; store 100 in the first element
+AGenData[1]         ; read the first element
+AGenData[1000]=0     ; highest usable index
 ```
 
 ## See also

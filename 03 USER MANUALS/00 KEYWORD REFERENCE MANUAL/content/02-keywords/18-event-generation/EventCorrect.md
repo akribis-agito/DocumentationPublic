@@ -36,7 +36,7 @@ Command that recalculates corrected event-table positions from the current axis 
 ## Examples
 
 ```text
-EventCorrect        ; recompute the corrected event-table positions
+AEventCorrect        ; recompute the corrected event-table positions
 ```
 
 ## See also

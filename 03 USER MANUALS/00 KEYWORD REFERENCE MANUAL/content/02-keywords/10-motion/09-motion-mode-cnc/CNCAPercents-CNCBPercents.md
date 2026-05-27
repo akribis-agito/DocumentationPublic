@@ -20,8 +20,8 @@ On-the-fly scaling of CNC path speed and acceleration/deceleration.
 ## Examples
 
 ```text
-CNCAPercents=100    ; run at nominal programmed speed
-CNCAPercents=50     ; run at half speed (double the time)
+ACNCAPercents=100    ; run at nominal programmed speed
+ACNCAPercents=50     ; run at half speed (double the time)
 ```
 
 ## See also

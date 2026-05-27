@@ -36,7 +36,7 @@ Force feedback obtained from the analog input.
 ## Examples
 
 ```text
-Force?              ; read the force feedback
+AForce              ; read the force feedback
 ```
 
 ## See also

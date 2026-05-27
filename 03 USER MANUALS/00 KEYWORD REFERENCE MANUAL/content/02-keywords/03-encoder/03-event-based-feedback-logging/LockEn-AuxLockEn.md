@@ -19,8 +19,8 @@ Enables or disables event-based feedback logging.
 ## Examples
 
 ```text
-LockEn=1            ; enable event-based feedback logging
-LockEn=0            ; disable logging
+ALockEn=1            ; enable event-based feedback logging
+ALockEn=0            ; disable logging
 ```
 
 ## See also

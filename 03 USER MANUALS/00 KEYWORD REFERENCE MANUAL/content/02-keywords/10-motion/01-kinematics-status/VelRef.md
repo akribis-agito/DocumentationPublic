@@ -40,7 +40,7 @@ Refer to [Control tuning – Velocity control](../../11-control-tuning/04-veloci
 ## Examples
 
 ```text
-VelRef?             ; read the velocity-loop reference
+AVelRef             ; read the velocity-loop reference
 ```
 
 ## See also

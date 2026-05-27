@@ -36,8 +36,8 @@ Position span after which the event position counter wraps around (rollover thre
 ## Examples
 
 ```text
-EventRollCntr=360000    ; wrap the event counter every 360000 user units
-EventRollCntr?          ; query the current rollover threshold
+AEventRollCntr=360000    ; wrap the event counter every 360000 user units
+AEventRollCntr          ; query the current rollover threshold
 ```
 
 ## See also

@@ -36,9 +36,9 @@ Array of per-segment distances defining the acceleration-shaping profile.
 ## Examples
 
 ```text
-AccShapeDist[1]=5000    ; distance of first shaping segment (user units)
-AccShapeDist[2]=8000    ; distance of second shaping segment
-AccShapeDist[1]?        ; query first segment distance
+AAccShapeDist[1]=5000    ; distance of first shaping segment (user units)
+AAccShapeDist[2]=8000    ; distance of second shaping segment
+AAccShapeDist[1]        ; query first segment distance
 ```
 
 ## See also

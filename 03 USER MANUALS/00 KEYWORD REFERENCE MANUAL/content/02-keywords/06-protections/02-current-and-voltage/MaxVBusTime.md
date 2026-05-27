@@ -36,7 +36,7 @@ How long bus voltage may stay outside the MinVBus/MaxVBus limits before tripping
 ## Examples
 
 ```text
-MaxVBusTime=1000    ; allow brief out-of-range excursions before tripping
+AMaxVBusTime=1000    ; allow brief out-of-range excursions before tripping
 ```
 
 ## See also

@@ -36,9 +36,9 @@ DC offset added to current-command injection in direct mode, in mA.
 ## Examples
 
 ```text
-InjectCurrDC=500        ; 500 mA DC offset
-InjectCurrDC=0          ; no offset (default)
-InjectCurrDC?           ; query the current DC offset
+AInjectCurrDC=500        ; 500 mA DC offset
+AInjectCurrDC=0          ; no offset (default)
+AInjectCurrDC           ; query the current DC offset
 ```
 
 ## See also

@@ -36,7 +36,7 @@ Selects the operating mode of the FIFO position-tracking feature.
 ## Examples
 
 ```text
-FIFOPosType=0       ; select FIFO position-tracking mode 0
+AFIFOPosType=0       ; select FIFO position-tracking mode 0
 ```
 
 ## See also

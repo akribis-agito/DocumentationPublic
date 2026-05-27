@@ -36,8 +36,8 @@ Sets the commutation angle applied at the home position to skip a homing sequenc
 ## Examples
 
 ```text
-HomeComtAngWr=12000 ; apply this commutation angle at the home position
-HomeComtAngWr?      ; read the configured commutation angle
+AHomeComtAngWr=12000 ; apply this commutation angle at the home position
+AHomeComtAngWr      ; read the configured commutation angle
 ```
 
 ## See also

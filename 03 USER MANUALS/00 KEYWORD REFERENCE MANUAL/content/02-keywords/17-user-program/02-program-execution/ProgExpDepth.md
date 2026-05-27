@@ -36,7 +36,7 @@ Returns the highest occupied location of the numeric (expression) stack.
 ## Examples
 
 ```text
-ProgExpDepth?       ; -1 if the numeric stack is empty, 0 if it holds one value
+AProgExpDepth       ; -1 if the numeric stack is empty, 0 if it holds one value
 ```
 
 ## See also

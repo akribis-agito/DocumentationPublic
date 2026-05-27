@@ -36,7 +36,7 @@ See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all r
 ## Examples
 
 ```text
-FIFOPushCycle=16    ; push a segment-duration entry of 16 control samples
+AFIFOPushCycle=16    ; push a segment-duration entry of 16 control samples
 ```
 
 ## See also

@@ -36,7 +36,7 @@ Minimum allowed bus voltage; sustained shortfall disables the axis.
 ## Examples
 
 ```text
-MinVBus=18000       ; 18 V minimum bus voltage (mV)
+AMinVBus=18000       ; 18 V minimum bus voltage (mV)
 ```
 
 ## See also

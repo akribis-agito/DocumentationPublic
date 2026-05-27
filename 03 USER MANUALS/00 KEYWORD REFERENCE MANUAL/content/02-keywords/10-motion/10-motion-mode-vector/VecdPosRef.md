@@ -36,7 +36,7 @@ Read-only derivative of the vector position reference (vector velocity), always 
 ## Examples
 
 ```text
-VecdPosRef?         ; read the current speed along the vector path
+AVecdPosRef         ; read the current speed along the vector path
 ```
 
 ## See also

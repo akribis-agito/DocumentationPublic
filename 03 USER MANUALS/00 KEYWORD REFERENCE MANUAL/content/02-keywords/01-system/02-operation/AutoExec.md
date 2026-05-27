@@ -40,9 +40,9 @@ Because `AutoExec` is saved to flash, run [Save](Save.md) before resetting so th
 ## Examples
 
 ```text
-AutoExec=1          ; run the user program automatically at startup
-AutoExec?           ; query the current setting
-Save                ; persist to flash, then Reset to apply
+AAutoExec=1          ; run the user program automatically at startup
+AAutoExec           ; query the current setting
+ASave                ; persist to flash, then Reset to apply
 ```
 
 ## See also

@@ -36,8 +36,8 @@ Acceleration rate for point-to-point motion, in user units per second squared.
 ## Examples
 
 ```text
-Accel=200000        ; acceleration (user units/s^2)
-Accel?              ; query current acceleration
+AAccel=200000        ; acceleration (user units/s^2)
+AAccel              ; query current acceleration
 ```
 
 ## See also

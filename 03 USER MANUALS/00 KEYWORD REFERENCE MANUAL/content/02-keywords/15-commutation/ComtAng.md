@@ -38,7 +38,7 @@ Commutation keeps the applied current vector offset from the magnetic field so t
 ## Examples
 
 ```text
-ComtAng?            ; query the instantaneous commutation angle (deg x100)
+AComtAng            ; query the instantaneous commutation angle (deg x100)
 ```
 
 ## See also

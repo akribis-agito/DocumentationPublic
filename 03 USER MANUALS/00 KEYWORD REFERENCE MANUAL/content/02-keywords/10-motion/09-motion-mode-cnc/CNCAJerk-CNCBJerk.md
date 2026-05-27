@@ -14,7 +14,7 @@ Jerk (smoothing) for the CNC vector motion profile (future feature, no current e
 ## Examples
 
 ```text
-CNCAJerk?           ; query the configured jerk value
+ACNCAJerk           ; query the configured jerk value
 ```
 
 ## See also

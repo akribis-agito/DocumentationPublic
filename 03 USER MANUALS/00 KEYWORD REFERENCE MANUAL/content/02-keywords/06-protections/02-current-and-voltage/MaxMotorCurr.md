@@ -38,7 +38,7 @@ Hard limit on motor current; exceeding it disables the axis.
 ## Examples
 
 ```text
-MaxMotorCurr=50000  ; trip if motor current exceeds 50 A (mA units)
+AMaxMotorCurr=50000  ; trip if motor current exceeds 50 A (mA units)
 ```
 
 ## See also

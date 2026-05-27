@@ -64,9 +64,9 @@ The following table shows the types of motion described by `MotionMode`.
 ## Examples
 
 ```text
-MotionMode=1        ; point-to-point motion
-MotionMode=2        ; repetitive point-to-point motion
-MotionMode?         ; query current mode
+AMotionMode=1        ; point-to-point motion
+AMotionMode=2        ; repetitive point-to-point motion
+AMotionMode         ; query current mode
 ```
 
 ## See also

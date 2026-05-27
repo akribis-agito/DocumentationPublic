@@ -36,7 +36,7 @@ Reports the information strings embedded in the loaded user program.
 ## Examples
 
 ```text
-ProgInfo?           ; report CRC, date, CUP file name and #information text
+AProgInfo           ; report CRC, date, CUP file name and #information text
 ```
 
 ## See also

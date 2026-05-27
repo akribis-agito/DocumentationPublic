@@ -48,9 +48,9 @@ Selects the source of the loop's current (torque) compensation in velocity/posit
 ## Examples
 
 ```text
-TorqCompMode=-1     ; no compensation (default)
-TorqCompMode=1      ; use TorqCompFix[1]
-TorqCompMode=0      ; use analog-input torque compensation
+ATorqCompMode=-1     ; no compensation (default)
+ATorqCompMode=1      ; use TorqCompFix[1]
+ATorqCompMode=0      ; use analog-input torque compensation
 ```
 
 ## See also

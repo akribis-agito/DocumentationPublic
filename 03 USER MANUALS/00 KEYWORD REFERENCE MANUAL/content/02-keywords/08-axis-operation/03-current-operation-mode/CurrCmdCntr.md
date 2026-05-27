@@ -43,8 +43,8 @@ Time elapsed in current mode or in the active CurrCmdVal entry.
 ## Examples
 
 ```text
-CurrCmdCntr?        ; read elapsed time (ms)
-CurrCmdCntr=0       ; restart the timer
+ACurrCmdCntr        ; read elapsed time (ms)
+ACurrCmdCntr=0       ; restart the timer
 ```
 
 ## See also

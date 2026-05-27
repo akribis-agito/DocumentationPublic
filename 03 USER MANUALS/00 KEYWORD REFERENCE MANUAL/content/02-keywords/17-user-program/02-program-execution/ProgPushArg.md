@@ -36,7 +36,7 @@ Pushes a value onto the argument stack of a target user program task.
 ## Examples
 
 ```text
-ProgPushArg=10      ; push the value 10 as the next argument for the target task
+AProgPushArg=10      ; push the value 10 as the next argument for the target task
 ```
 
 ## See also

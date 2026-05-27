@@ -14,7 +14,7 @@ Unlike [StopCNCA](StopCNCA.md)/[StopCNCB](StopCNCB.md), which halt motion but le
 ## Examples
 
 ```text
-CNCAClear           ; flush all queued segments from FIFO A
+ACNCAClear           ; flush all queued segments from FIFO A
 ```
 
 ## See also

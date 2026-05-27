@@ -36,7 +36,7 @@ Counts repetitions made during repetitive point-to-point (PTP) motion.
 ## Examples
 
 ```text
-RptCounter?         ; read the number of repetitions completed
+ARptCounter         ; read the number of repetitions completed
 ```
 
 ## See also

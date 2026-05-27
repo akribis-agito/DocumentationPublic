@@ -36,8 +36,8 @@ Dynamic memory heap used by the user program runtime for variable storage.
 ## Examples
 
 ```text
-ProgHeap[1]?        ; read the first heap element
-ProgHeap[1]=0       ; write the first heap element
+AProgHeap[1]        ; read the first heap element
+AProgHeap[1]=0       ; write the first heap element
 ```
 
 ## See also

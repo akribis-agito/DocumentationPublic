@@ -40,9 +40,9 @@ The array is 1-indexed: the first usable element is `UserParam[1]`. With `array_
 ## Examples
 
 ```text
-UserParam[1]=5      ; store a value in the first element
-UserParam[1]?       ; read the first element
-UserParam[250]=0    ; highest usable index
+AUserParam[1]=5      ; store a value in the first element
+AUserParam[1]       ; read the first element
+AUserParam[250]=0    ; highest usable index
 ```
 
 ## See also

@@ -44,8 +44,8 @@ For unity gain, set `AInGain = 65536`.
 ## Examples
 
 ```text
-AInGain[1]=131072   ; gain of 2.0 on analog input 1
-AInGain[1]=65536    ; unity gain
+AAInGain[1]=131072   ; gain of 2.0 on analog input 1
+AAInGain[1]=65536    ; unity gain
 ```
 
 ## See also

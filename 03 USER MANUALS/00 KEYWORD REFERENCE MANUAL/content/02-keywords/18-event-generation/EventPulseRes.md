@@ -36,8 +36,8 @@ Sets the position resolution of the event pulse generator (minimum spacing betwe
 ## Examples
 
 ```text
-EventPulseRes=1     ; set the pulse-generator resolution
-EventPulseRes?      ; query the current setting
+AEventPulseRes=1     ; set the pulse-generator resolution
+AEventPulseRes      ; query the current setting
 ```
 
 ## See also

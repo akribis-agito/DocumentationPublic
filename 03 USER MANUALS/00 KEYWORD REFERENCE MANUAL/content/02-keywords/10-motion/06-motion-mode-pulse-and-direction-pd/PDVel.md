@@ -40,7 +40,7 @@ Like `PDPos`, `PDVel` is an internal-count value that is converted to pulse-dire
 ## Examples
 
 ```text
-PDVel?              ; read the current P/D command velocity (pulse-direction units/s)
+APDVel              ; read the current P/D command velocity (pulse-direction units/s)
 ```
 
 ## See also

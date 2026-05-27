@@ -45,8 +45,8 @@ Configures the sign (direction) of PDPos accumulation relative to the direction 
 ## Examples
 
 ```text
-PDEncDir=0          ; normal accumulation direction (default)
-PDEncDir=1          ; inverted accumulation direction
+APDEncDir=0          ; normal accumulation direction (default)
+APDEncDir=1          ; inverted accumulation direction
 ```
 
 ## See also

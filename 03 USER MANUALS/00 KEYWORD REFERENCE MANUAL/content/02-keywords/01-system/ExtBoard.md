@@ -38,7 +38,7 @@ Selects the hardware configuration of the attached external expansion board.
 ## Examples
 
 ```text
-ExtBoard?           ; query the configured expansion-board type
+AExtBoard           ; query the configured expansion-board type
 ```
 
 ## See also

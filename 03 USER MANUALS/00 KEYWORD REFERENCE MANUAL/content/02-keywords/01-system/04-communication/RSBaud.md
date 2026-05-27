@@ -60,7 +60,7 @@ See the communication manual for more information.
 ## Examples
 
 ```text
-RSBaud[1]=4         ; set the micro-USB port to 115200 bit/s
+ARSBaud[1]=4         ; set the micro-USB port to 115200 bit/s
 ```
 
 ## See also

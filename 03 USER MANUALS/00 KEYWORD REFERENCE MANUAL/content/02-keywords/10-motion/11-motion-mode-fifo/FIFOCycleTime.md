@@ -36,7 +36,7 @@ See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all r
 ## Examples
 
 ```text
-FIFOCycleTime?      ; query the current segment duration in control samples
+AFIFOCycleTime      ; query the current segment duration in control samples
 ```
 
 ## See also

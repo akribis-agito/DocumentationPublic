@@ -36,8 +36,8 @@ Digital filter applied to the encoder emulation output signal.
 ## Examples
 
 ```text
-EmulFilter=3        ; default filtering level
-EmulFilter=0        ; no filtering
+AEmulFilter=3        ; default filtering level
+AEmulFilter=0        ; no filtering
 ```
 
 ## See also

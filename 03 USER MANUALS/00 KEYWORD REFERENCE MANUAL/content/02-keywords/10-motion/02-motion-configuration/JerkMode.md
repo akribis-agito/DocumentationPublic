@@ -45,9 +45,9 @@ Selects the point-to-point motion profiler order (2nd or 3rd order).
 ## Examples
 
 ```text
-JerkMode=0          ; second-order profile
-JerkMode=1          ; third-order profile
-JerkMode?           ; query current value
+AJerkMode=0          ; second-order profile
+AJerkMode=1          ; third-order profile
+AJerkMode           ; query current value
 ```
 
 ## See also

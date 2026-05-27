@@ -44,8 +44,8 @@ Reports each event's state and lets a pending event be cleared.
 ## Examples
 
 ```text
-ProgEventStat[1]?   ; read the state of event 1
-ProgEventStat[1]=0  ; clear a pending occurrence of event 1
+AProgEventStat[1]   ; read the state of event 1
+AProgEventStat[1]=0  ; clear a pending occurrence of event 1
 ```
 
 ## See also

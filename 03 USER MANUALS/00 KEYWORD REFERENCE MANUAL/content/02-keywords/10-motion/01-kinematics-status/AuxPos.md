@@ -38,8 +38,8 @@ Although `AuxPos` is writable, it can only be set to a desired value while the a
 ## Examples
 
 ```text
-AuxPos?             ; read the auxiliary encoder position
-AuxPos=0            ; preset to zero (axis must be disabled)
+AAuxPos             ; read the auxiliary encoder position
+AAuxPos=0            ; preset to zero (axis must be disabled)
 ```
 
 ## See also

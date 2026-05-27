@@ -38,9 +38,9 @@ Selects which axis encoder drives each error-mapping dimension.
 ## Examples
 
 ```text
-MapEncoder[1]=1     ; first map dimension uses encoder 1
-MapEncoder[2]=2     ; second map dimension uses encoder 2
-MapEncoder[1]?      ; query the encoder selected for the first dimension
+AMapEncoder[1]=1     ; first map dimension uses encoder 1
+AMapEncoder[2]=2     ; second map dimension uses encoder 2
+AMapEncoder[1]      ; query the encoder selected for the first dimension
 ```
 
 ## See also

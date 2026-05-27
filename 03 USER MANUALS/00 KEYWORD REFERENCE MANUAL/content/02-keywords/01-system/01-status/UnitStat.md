@@ -55,7 +55,7 @@ Read `UnitStat` after a firmware or FPGA update, or when diagnosing why a unit w
 ## Examples
 
 ```text
-UnitStat?           ; read the current unit status word
+AUnitStat           ; read the current unit status word
 ```
 
 ## See also

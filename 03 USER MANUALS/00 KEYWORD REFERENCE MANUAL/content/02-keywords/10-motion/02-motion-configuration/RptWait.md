@@ -36,8 +36,8 @@ Dwell time, in milliseconds, between repetitions of repetitive point-to-point mo
 ## Examples
 
 ```text
-RptWait=500         ; dwell 500 ms between repetitions
-RptWait?            ; query current value
+ARptWait=500         ; dwell 500 ms between repetitions
+ARptWait            ; query current value
 ```
 
 ## See also

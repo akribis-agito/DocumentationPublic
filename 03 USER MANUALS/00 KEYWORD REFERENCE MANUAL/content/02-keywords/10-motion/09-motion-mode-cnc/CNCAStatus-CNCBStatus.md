@@ -18,7 +18,7 @@ Please refer to the Motion Modes – CNC section for more detailed information.
 ## Examples
 
 ```text
-CNCAStatus[1]?      ; read the first status element (arrays are 1-indexed)
+ACNCAStatus[1]      ; read the first status element (arrays are 1-indexed)
 ```
 
 ## See also

@@ -38,7 +38,7 @@ Sets the output format or signal type of the virtual encoder.
 ## Examples
 
 ```text
-VEncType=0          ; default virtual encoder output format
+AVEncType=0          ; default virtual encoder output format
 ```
 
 ## See also

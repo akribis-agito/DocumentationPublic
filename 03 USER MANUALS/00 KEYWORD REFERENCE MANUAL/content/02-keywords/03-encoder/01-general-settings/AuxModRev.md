@@ -38,7 +38,7 @@ Modulo revolution divisor for the auxiliary encoder (not implemented in current 
 ## Examples
 
 ```text
-AuxModRev?          ; query the configured auxiliary modulo divisor
+AAuxModRev          ; query the configured auxiliary modulo divisor
 ```
 
 ## See also

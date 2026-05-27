@@ -38,8 +38,8 @@ It is an axis-scoped parameter saved to flash and can be changed at any time, in
 ## Examples
 
 ```text
-MapErrOffRamp=16384 ; default convergence rate
-MapErrOffRamp?      ; query the current ramp rate
+AMapErrOffRamp=16384 ; default convergence rate
+AMapErrOffRamp      ; query the current ramp rate
 ```
 
 ## See also

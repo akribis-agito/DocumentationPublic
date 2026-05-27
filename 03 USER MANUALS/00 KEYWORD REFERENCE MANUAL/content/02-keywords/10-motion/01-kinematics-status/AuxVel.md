@@ -44,7 +44,7 @@ where $T_{s}$ is the controller sampling time.
 ## Examples
 
 ```text
-AuxVel?             ; read the auxiliary velocity
+AAuxVel             ; read the auxiliary velocity
 ```
 
 ## See also

@@ -36,8 +36,8 @@ Enables automatic stop of axis motion when the home digital input is asserted.
 ## Examples
 
 ```text
-StopOnHome=1        ; halt the axis when the home input is detected
-StopOnHome?         ; 0 = disabled, 1 = enabled
+AStopOnHome=1        ; halt the axis when the home input is detected
+AStopOnHome         ; 0 = disabled, 1 = enabled
 ```
 
 ## See also

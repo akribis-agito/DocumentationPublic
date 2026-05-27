@@ -36,7 +36,7 @@ Command that transmits the Central-i offline data package on the selected axis p
 ## Examples
 
 ```text
-CIOfflineSend       ; send the configured offline data package
+ACIOfflineSend       ; send the configured offline data package
 ```
 
 ## See also

@@ -46,8 +46,8 @@ Entry into current operation mode still requires the second condition check (one
 ## Examples
 
 ```text
-CurrPosThDir=1      ; first condition triggers when PosRef > CurrPosTh
-CurrPosTh=100000    ; position-reference threshold (user units)
+ACurrPosThDir=1      ; first condition triggers when PosRef > CurrPosTh
+ACurrPosTh=100000    ; position-reference threshold (user units)
 ```
 
 ## See also

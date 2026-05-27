@@ -36,7 +36,7 @@ Offset (mV) added to the analog output, used to calibrate/zero it.
 ## Examples
 
 ```text
-AOutOffset[1]=-12   ; trim analog output 1 by -12 mV to zero it
+AAOutOffset[1]=-12   ; trim analog output 1 by -12 mV to zero it
 ```
 
 ## See also

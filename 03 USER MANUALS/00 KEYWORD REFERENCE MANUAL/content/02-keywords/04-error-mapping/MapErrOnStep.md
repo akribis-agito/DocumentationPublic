@@ -38,9 +38,9 @@ It is an axis-scoped parameter saved to flash and can be changed at any time, in
 ## Examples
 
 ```text
-MapErrOnStep=0      ; default: no incremental stepping
-MapErrOnStep=1000   ; bring the correction in 1000 counts at a time
-MapErrOnStep?       ; query the current step size
+AMapErrOnStep=0      ; default: no incremental stepping
+AMapErrOnStep=1000   ; bring the correction in 1000 counts at a time
+AMapErrOnStep       ; query the current step size
 ```
 
 ## See also

@@ -36,7 +36,7 @@ Complex CAN code selecting the master variable for gear motion.
 ## Examples
 
 ```text
-GearMaster?         ; read the complex CAN code of the master variable
+AGearMaster         ; read the complex CAN code of the master variable
 ```
 
 ## See also

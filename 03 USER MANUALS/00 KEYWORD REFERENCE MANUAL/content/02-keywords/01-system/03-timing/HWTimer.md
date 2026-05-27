@@ -36,7 +36,7 @@ High-resolution free-running counter for measuring short intervals.
 ## Examples
 
 ```text
-HWTimer?            ; read the counter at event A, again at event B, then subtract
+AHWTimer            ; read the counter at event A, again at event B, then subtract
 ```
 
 ## See also

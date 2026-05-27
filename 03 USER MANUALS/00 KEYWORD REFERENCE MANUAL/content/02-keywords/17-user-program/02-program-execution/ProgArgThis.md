@@ -36,7 +36,7 @@ Reads back the argument values received by the currently executing task.
 ## Examples
 
 ```text
-ProgArgThis[1]?     ; read the first argument received by the running task
+AProgArgThis[1]     ; read the first argument received by the running task
 ```
 
 ## See also

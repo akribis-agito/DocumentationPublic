@@ -38,7 +38,7 @@ Read-only safety interlock that, when set, blocks firmware download.
 ## Examples
 
 ```text
-DontDownload?       ; check whether firmware download is currently blocked
+ADontDownload       ; check whether firmware download is currently blocked
 ```
 
 ## See also

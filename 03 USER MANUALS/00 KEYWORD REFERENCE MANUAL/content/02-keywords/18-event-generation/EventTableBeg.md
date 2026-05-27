@@ -36,8 +36,8 @@ Starting index of the active region within the event table.
 ## Examples
 
 ```text
-EventTableBeg=1     ; start event generation at the first table entry
-EventTableBeg?      ; query the configured start index
+AEventTableBeg=1     ; start event generation at the first table entry
+AEventTableBeg      ; query the configured start index
 ```
 
 ## See also

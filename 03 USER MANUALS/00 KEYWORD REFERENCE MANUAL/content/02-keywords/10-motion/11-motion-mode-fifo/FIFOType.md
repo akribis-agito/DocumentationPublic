@@ -61,7 +61,7 @@ For a velocity-type motion segment:
 ## Examples
 
 ```text
-FIFOType[1]?        ; query the type of the first FIFO entry
+AFIFOType[1]        ; query the type of the first FIFO entry
 ```
 
 ## See also

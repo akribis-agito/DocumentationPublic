@@ -37,7 +37,7 @@ Pops the top value of the numeric stack into a parameter.
 
 ```text
 ; Store the top stack value into a parameter (CAN code emitted by the compiler)
-PopParam=<complex CAN code of target parameter>
+APopParam=<complex CAN code of target parameter>
 ```
 
 ## See also

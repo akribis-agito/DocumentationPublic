@@ -36,7 +36,7 @@ Read-only index of the last completed step in the homing sequence.
 ## Examples
 
 ```text
-HomingStep?         ; index of the last completed homing step
+AHomingStep         ; index of the last completed homing step
 ```
 
 ## See also

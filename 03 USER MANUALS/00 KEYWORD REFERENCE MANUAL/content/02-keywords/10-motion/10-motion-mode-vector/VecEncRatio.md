@@ -42,8 +42,8 @@ The actual ratio inside the controller is scaled by 1/256. So `VecEncRatio = 256
 ## Examples
 
 ```text
-VecEncRatio=256     ; ratio of 1 (default)
-VecEncRatio=260     ; ratio of 260/256
+AVecEncRatio=256     ; ratio of 1 (default)
+AVecEncRatio=260     ; ratio of 260/256
 ```
 
 ## See also

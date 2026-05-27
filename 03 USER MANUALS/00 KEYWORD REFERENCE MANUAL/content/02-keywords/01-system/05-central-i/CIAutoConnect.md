@@ -38,7 +38,7 @@ When enabled, establishes the Central-i connection automatically at power-up.
 ## Examples
 
 ```text
-CIAutoConnect=1     ; auto-connect this axis's Central-i port at startup
+ACIAutoConnect=1     ; auto-connect this axis's Central-i port at startup
 ```
 
 ## See also

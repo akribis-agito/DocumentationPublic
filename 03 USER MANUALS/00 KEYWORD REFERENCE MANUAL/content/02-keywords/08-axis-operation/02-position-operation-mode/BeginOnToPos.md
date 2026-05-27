@@ -38,10 +38,10 @@ The target position is defined by [RetractTarget](RetractTarget.md) (or [RelTrgt
 ## Examples
 
 ```text
-RetractTarget=50000 ; target for the entry move
-RetractSpeed=20000  ; speed for the entry move
-BeginOnToPos=1      ; arm the entry move
-GoToPosMode         ; switch to position mode and start the move
+ARetractTarget=50000 ; target for the entry move
+ARetractSpeed=20000  ; speed for the entry move
+ABeginOnToPos=1      ; arm the entry move
+AGoToPosMode         ; switch to position mode and start the move
 ```
 
 ## See also

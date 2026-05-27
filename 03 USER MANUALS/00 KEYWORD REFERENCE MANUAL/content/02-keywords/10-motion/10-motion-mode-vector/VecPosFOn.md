@@ -36,8 +36,8 @@ Enables (1) the position filter defined by VecPosFDef on the vector reference ou
 ## Examples
 
 ```text
-VecPosFOn=0         ; position filter disabled (default)
-VecPosFOn=1         ; apply the VecPosFDef position filter
+AVecPosFOn=0         ; position filter disabled (default)
+AVecPosFOn=1         ; apply the VecPosFDef position filter
 ```
 
 ## See also

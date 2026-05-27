@@ -36,7 +36,7 @@ Returns a combined status word for all user program tasks.
 ## Examples
 
 ```text
-ProgStatAll?        ; combined status of all user program tasks
+AProgStatAll        ; combined status of all user program tasks
 ```
 
 ## See also

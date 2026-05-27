@@ -36,8 +36,8 @@ Positive current-command limit (used when CurrLimMode = 3).
 ## Examples
 
 ```text
-CurrLimMode=3
-CurrLimFwd=40000    ; positive current limit (mA)
+ACurrLimMode=3
+ACurrLimFwd=40000    ; positive current limit (mA)
 ```
 
 ## See also

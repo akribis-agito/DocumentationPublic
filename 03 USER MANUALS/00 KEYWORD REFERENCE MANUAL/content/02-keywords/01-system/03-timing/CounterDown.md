@@ -38,8 +38,8 @@ Two independent down-counters decremented every controller cycle.
 ## Examples
 
 ```text
-CounterDown[1]=1000 ; count down 1000 controller cycles
-CounterDown[1]?     ; read the remaining count
+ACounterDown[1]=1000 ; count down 1000 controller cycles
+ACounterDown[1]     ; read the remaining count
 ```
 
 ## See also

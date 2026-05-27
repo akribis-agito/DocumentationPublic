@@ -51,9 +51,9 @@ Together with [RecLength](RecLength.md), `RecGap` also determines the total reco
 ## Examples
 
 ```text
-RecGap[1]=1         ; first scope records at full controller cycle rate
-RecGap[2]=10        ; second scope records at 1/10 of the cycle rate
-RecGap[1]?          ; query the first scope down-sampling factor
+ARecGap[1]=1         ; first scope records at full controller cycle rate
+ARecGap[2]=10        ; second scope records at 1/10 of the cycle rate
+ARecGap[1]          ; query the first scope down-sampling factor
 ```
 
 ## See also

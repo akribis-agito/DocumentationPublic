@@ -40,8 +40,8 @@ The `PDEndTime` timer resets whenever `PDPos` or the generated position referenc
 ## Examples
 
 ```text
-PDEndTime=16        ; wait 16 ms of no change before checking settling (default)
-PDEndTime?          ; read the current value
+APDEndTime=16        ; wait 16 ms of no change before checking settling (default)
+APDEndTime          ; read the current value
 ```
 
 ## See also

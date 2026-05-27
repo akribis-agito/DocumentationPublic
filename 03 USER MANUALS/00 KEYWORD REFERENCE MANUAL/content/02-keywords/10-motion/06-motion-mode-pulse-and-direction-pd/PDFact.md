@@ -46,8 +46,8 @@ PDPos increment = (pulses detected) × PDFact / PDFactDen   (then sign-corrected
 ## Examples
 
 ```text
-PDFact=1000         ; numerator of the P/D scaling factor (default)
-PDFact?             ; read the current numerator
+APDFact=1000         ; numerator of the P/D scaling factor (default)
+APDFact             ; read the current numerator
 ```
 
 ## See also

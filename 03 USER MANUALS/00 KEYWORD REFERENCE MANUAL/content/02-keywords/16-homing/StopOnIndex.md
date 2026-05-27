@@ -36,8 +36,8 @@ Enables automatic stop of axis motion on the next encoder index pulse.
 ## Examples
 
 ```text
-StopOnIndex=1       ; halt the axis on the next encoder index pulse
-StopOnIndex?        ; 0 = disabled, 1 = enabled
+AStopOnIndex=1       ; halt the axis on the next encoder index pulse
+AStopOnIndex        ; 0 = disabled, 1 = enabled
 ```
 
 ## See also

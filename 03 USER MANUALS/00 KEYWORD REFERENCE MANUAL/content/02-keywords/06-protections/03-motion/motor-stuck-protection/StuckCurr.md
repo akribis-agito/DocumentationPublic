@@ -36,7 +36,7 @@ Current threshold for motor-stuck detection.
 ## Examples
 
 ```text
-StuckCurr=4000      ; current above which a non-moving motor counts as stuck (mA)
+AStuckCurr=4000      ; current above which a non-moving motor counts as stuck (mA)
 ```
 
 ## See also

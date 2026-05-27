@@ -38,8 +38,8 @@ It is an axis-scoped array saved to flash, and cannot be changed while the axis 
 ## Examples
 
 ```text
-MapLength[1]=100    ; first dimension has 100 correction points
-MapLength[1]?       ; query the number of points in the first dimension
+AMapLength[1]=100    ; first dimension has 100 correction points
+AMapLength[1]       ; query the number of points in the first dimension
 ```
 
 ## See also

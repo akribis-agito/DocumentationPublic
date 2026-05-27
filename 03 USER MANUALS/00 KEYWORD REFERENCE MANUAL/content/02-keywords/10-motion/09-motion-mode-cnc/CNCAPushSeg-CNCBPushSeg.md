@@ -14,7 +14,7 @@ Pushes a complete CNC segment (type and parameters) in one Ethernet message.
 ## Examples
 
 ```text
-CNCAPushSeg=...     ; push a full segment (type + parameters) over Ethernet
+ACNCAPushSeg=...     ; push a full segment (type + parameters) over Ethernet
 ```
 
 ## See also

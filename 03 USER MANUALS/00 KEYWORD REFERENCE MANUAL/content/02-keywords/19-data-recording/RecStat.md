@@ -57,7 +57,7 @@ For example, if RecStat\[1\] returns the value of 4, it indicates that recording
 ## Examples
 
 ```text
-RecStat[1]?         ; query the recording status of the first scope
+ARecStat[1]         ; query the recording status of the first scope
 ```
 
 ## See also

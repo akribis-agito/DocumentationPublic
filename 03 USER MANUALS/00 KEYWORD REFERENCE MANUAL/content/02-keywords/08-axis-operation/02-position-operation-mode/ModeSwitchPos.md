@@ -43,8 +43,8 @@ Records the position when the axis enters or exits position mode.
 ## Examples
 
 ```text
-ModeSwitchPos[1]?   ; position recorded when entering position mode
-ModeSwitchPos[2]?   ; position recorded when exiting position mode
+AModeSwitchPos[1]   ; position recorded when entering position mode
+AModeSwitchPos[2]   ; position recorded when exiting position mode
 ```
 
 ## See also

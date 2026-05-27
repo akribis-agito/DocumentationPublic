@@ -60,8 +60,8 @@ $$
 ## Examples
 
 ```text
-AAmpFullScale=5000      ; 5000 mA corresponds to full-scale (10 V) analog output
-AAmpFullScale?          ; query the current full-scale value
+AAAmpFullScale=5000      ; 5000 mA corresponds to full-scale (10 V) analog output
+AAAmpFullScale          ; query the current full-scale value
 ```
 
 ## See also

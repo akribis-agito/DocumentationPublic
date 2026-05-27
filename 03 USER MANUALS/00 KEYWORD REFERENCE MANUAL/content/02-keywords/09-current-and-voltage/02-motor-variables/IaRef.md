@@ -44,7 +44,7 @@ Read-only phase A current reference, in milliamperes (definition varies by motor
 ## Examples
 
 ```text
-IaRef?              ; read phase A current reference (mA)
+AIaRef              ; read phase A current reference (mA)
 ```
 
 ## See also

@@ -40,7 +40,7 @@ Saving is **not allowed while the motor is enabled**. Whether a given parameter 
 ## Examples
 
 ```text
-Save                ; persist current parameters to flash (motor must be off)
+ASave                ; persist current parameters to flash (motor must be off)
 ```
 
 ## See also

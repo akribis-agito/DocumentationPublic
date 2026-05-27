@@ -36,8 +36,8 @@ Array of target positions (user units) for multi-target point-to-point motion.
 ## Examples
 
 ```text
-Targets[1]=10000    ; first target position
-Targets[2]=20000    ; second target position
+ATargets[1]=10000    ; first target position
+ATargets[2]=20000    ; second target position
 ```
 
 ## See also

@@ -36,8 +36,8 @@ Emergency deceleration rate applied on `Abort` or fault, in user units per secon
 ## Examples
 
 ```text
-EmrgDec=1000000     ; emergency deceleration (user units/s^2)
-EmrgDec?            ; query current value
+AEmrgDec=1000000     ; emergency deceleration (user units/s^2)
+AEmrgDec            ; query current value
 ```
 
 ## See also

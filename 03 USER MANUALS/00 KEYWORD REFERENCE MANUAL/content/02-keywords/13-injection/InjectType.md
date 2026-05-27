@@ -70,10 +70,10 @@ At appropriate injection locations, direct injection is akin to open-loop inject
 ## Examples
 
 ```text
-InjectType=2        ; additive sinusoid injection
-InjectType=6        ; direct PRBS injection
-InjectType=0        ; disable injection
-InjectType?         ; query the current waveform/mode
+AInjectType=2        ; additive sinusoid injection
+AInjectType=6        ; direct PRBS injection
+AInjectType=0        ; disable injection
+AInjectType         ; query the current waveform/mode
 ```
 
 ## See also

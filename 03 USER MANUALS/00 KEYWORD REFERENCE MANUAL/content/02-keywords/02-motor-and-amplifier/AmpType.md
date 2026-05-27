@@ -55,9 +55,9 @@ Because `AmpType` is an axis-scope parameter saved to flash, it cannot be change
 ## Examples
 
 ```text
-AmpType=0           ; use the built-in PWM amplifier
-AmpType=2           ; external amplifier, analog current-reference command
-AmpType?            ; query the current amplifier mode
+AAmpType=0           ; use the built-in PWM amplifier
+AAmpType=2           ; external amplifier, analog current-reference command
+AAmpType            ; query the current amplifier mode
 ```
 
 ## See also

@@ -36,7 +36,7 @@ Command that clears all pending segments from the FIFO position queue.
 ## Examples
 
 ```text
-FIFOPosClear=0      ; empty the FIFO position queue
+AFIFOPosClear=0      ; empty the FIFO position queue
 ```
 
 ## See also

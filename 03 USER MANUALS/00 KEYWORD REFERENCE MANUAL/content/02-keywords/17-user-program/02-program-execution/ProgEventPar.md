@@ -36,7 +36,7 @@ Selects (by complex CAN code) the controller parameter that triggers an event.
 ## Examples
 
 ```text
-ProgEventPar[1]=<CAN code of monitored parameter>   ; choose the trigger source for event 1
+AProgEventPar[1]=<CAN code of monitored parameter>   ; choose the trigger source for event 1
 ```
 
 ## See also

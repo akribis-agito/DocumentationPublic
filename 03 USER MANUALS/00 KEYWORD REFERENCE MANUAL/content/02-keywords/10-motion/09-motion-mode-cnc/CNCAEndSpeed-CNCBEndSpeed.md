@@ -14,7 +14,7 @@ The end-of-segment behaviour that determines how this speed is applied is select
 ## Examples
 
 ```text
-CNCAEndSpeed?       ; read the active segment end speed
+ACNCAEndSpeed       ; read the active segment end speed
 ```
 
 ## See also

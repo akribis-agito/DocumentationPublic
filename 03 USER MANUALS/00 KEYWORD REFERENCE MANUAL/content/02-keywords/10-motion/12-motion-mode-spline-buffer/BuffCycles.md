@@ -36,8 +36,8 @@ Number of times the spline buffer trajectory is repeated.
 ## Examples
 
 ```text
-BuffCycles=1        ; run the trajectory once (default)
-BuffCycles=10       ; repeat the trajectory ten times
+ABuffCycles=1        ; run the trajectory once (default)
+ABuffCycles=10       ; repeat the trajectory ten times
 ```
 
 ## See also

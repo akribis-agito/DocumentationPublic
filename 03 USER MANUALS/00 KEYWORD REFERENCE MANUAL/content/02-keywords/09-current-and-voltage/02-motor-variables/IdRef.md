@@ -36,7 +36,7 @@ Read-only direct-axis current reference, used in dq0-domain control; currently a
 ## Examples
 
 ```text
-IdRef?              ; read direct-axis current reference (mA)
+AIdRef              ; read direct-axis current reference (mA)
 ```
 
 ## See also

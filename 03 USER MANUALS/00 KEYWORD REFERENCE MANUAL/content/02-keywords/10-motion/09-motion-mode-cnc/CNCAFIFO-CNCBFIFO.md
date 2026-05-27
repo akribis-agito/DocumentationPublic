@@ -14,7 +14,7 @@ Segments are loaded into the FIFO with [CNCAPushType/CNCBPushType](CNCAPushType-
 ## Examples
 
 ```text
-CNCAFIFO[1]?        ; read the first queued segment word (arrays are 1-indexed)
+ACNCAFIFO[1]        ; read the first queued segment word (arrays are 1-indexed)
 ```
 
 ## See also

@@ -40,7 +40,7 @@ For dq0-domain current control, [Vd](Vd.md) and `Vq` form the phase voltage comm
 ## Examples
 
 ```text
-Vq?                 ; read quadrature-axis PI output
+AVq                 ; read quadrature-axis PI output
 ```
 
 ## See also

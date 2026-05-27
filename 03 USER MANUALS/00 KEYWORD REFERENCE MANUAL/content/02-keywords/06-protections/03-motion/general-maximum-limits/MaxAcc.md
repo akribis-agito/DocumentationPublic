@@ -36,7 +36,7 @@ Maximum allowable acceleration/deceleration, checked before a motion starts.
 ## Examples
 
 ```text
-MaxAcc=2000000      ; reject motions whose accel/decel exceeds this
+AMaxAcc=2000000      ; reject motions whose accel/decel exceeds this
 ```
 
 ## See also

@@ -36,7 +36,7 @@ Stops all running threads and resets every pointer and stack.
 ## Examples
 
 ```text
-ProgResetAll        ; stop all threads and reset all pointers and stacks
+AProgResetAll        ; stop all threads and reset all pointers and stacks
 ```
 
 ## See also

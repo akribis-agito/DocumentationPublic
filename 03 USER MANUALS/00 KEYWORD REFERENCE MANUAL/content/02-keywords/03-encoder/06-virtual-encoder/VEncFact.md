@@ -40,7 +40,7 @@ $$Scale\ factor = \frac{VEncFact}{VEncFactDen}$$
 ## Examples
 
 ```text
-VEncFact=65536          ; unity scale when VEncFactDen=65536
+AVEncFact=65536          ; unity scale when VEncFactDen=65536
 ```
 
 ## See also

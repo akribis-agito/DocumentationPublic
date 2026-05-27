@@ -38,7 +38,7 @@ Performs a software power cycle; flash parameters are reloaded on restart.
 ## Examples
 
 ```text
-Reset               ; software power cycle (motor must be off)
+AReset               ; software power cycle (motor must be off)
 ```
 
 ## See also

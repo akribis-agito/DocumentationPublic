@@ -45,10 +45,10 @@ Controller IP address, stored one octet per array element.
 ## Examples
 
 ```text
-EthernetIP[1]=172
-EthernetIP[2]=1
-EthernetIP[3]=1
-EthernetIP[4]=50    ; sets 172.1.1.50 (Save + Reset to apply)
+AEthernetIP[1]=172
+AEthernetIP[2]=1
+AEthernetIP[3]=1
+AEthernetIP[4]=50    ; sets 172.1.1.50 (Save + Reset to apply)
 ```
 
 ## See also

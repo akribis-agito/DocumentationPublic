@@ -36,8 +36,8 @@ Sequence of user-defined current references (mA) for current mode.
 ## Examples
 
 ```text
-CurrCmdVal[1]=364   ; first current reference (mA)
-CurrCmdVal[2]=-500  ; second current reference (mA)
+ACurrCmdVal[1]=364   ; first current reference (mA)
+ACurrCmdVal[2]=-500  ; second current reference (mA)
 ```
 
 ## See also

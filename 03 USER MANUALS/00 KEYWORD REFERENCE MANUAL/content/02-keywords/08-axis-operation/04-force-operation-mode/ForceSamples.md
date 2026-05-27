@@ -57,8 +57,8 @@ $$
 ## Examples
 
 ```text
-ForceSamples[1]?    ; move time, in controller cycles
-ForceSamples[3]?    ; move + settle + in-target time
+AForceSamples[1]    ; move time, in controller cycles
+AForceSamples[3]    ; move + settle + in-target time
 ```
 
 ## See also

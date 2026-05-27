@@ -40,8 +40,8 @@ The parameter to inspect is selected by its CAN code (the valid range, 0–1023,
 ## Examples
 
 ```text
-ParamAbout=100      ; select the parameter with CAN code 100 (PosGain)
-ParamAbout?         ; read back its descriptor
+AParamAbout=100      ; select the parameter with CAN code 100 (PosGain)
+AParamAbout         ; read back its descriptor
 ```
 
 ## See also

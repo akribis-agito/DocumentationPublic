@@ -55,8 +55,8 @@ Selects the hardware function (or software control) routed to each digital outpu
 ## Examples
 
 ```text
-DOutSelect[3]=0     ; output 3 is software-controlled (uses DOutMode[3])
-DOutSelect[4]=2     ; output 4 = Main Event #1 (Central-i) / A event #1 (standalone)
+ADOutSelect[3]=0     ; output 3 is software-controlled (uses DOutMode[3])
+ADOutSelect[4]=2     ; output 4 = Main Event #1 (Central-i) / A event #1 (standalone)
 ```
 
 ## See also

@@ -38,7 +38,7 @@ Command to gracefully enter force operation mode.
 ## Examples
 
 ```text
-GoToForceMode       ; gracefully switch to force operation mode
+AGoToForceMode       ; gracefully switch to force operation mode
 ```
 
 ## See also

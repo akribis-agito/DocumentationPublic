@@ -40,9 +40,9 @@ Some keywords are only writable or callable when the axis is disabled — refer 
 ## Examples
 
 ```text
-MotorOn=1           ; enable the motor
-MotorOn=0           ; disable the motor
-MotorOn?            ; read servo status (0 = off, 1 = on)
+AMotorOn=1           ; enable the motor
+AMotorOn=0           ; disable the motor
+AMotorOn            ; read servo status (0 = off, 1 = on)
 ```
 
 ## See also

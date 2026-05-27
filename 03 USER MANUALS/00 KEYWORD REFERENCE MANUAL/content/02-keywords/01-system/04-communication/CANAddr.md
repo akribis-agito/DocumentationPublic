@@ -43,7 +43,7 @@ where N = 0, 1, 2, …. `CANAddr` is saved to flash. See the communication manua
 ## Examples
 
 ```text
-CANAddr=64          ; set the CAN base address (a multiple of 16)
+ACANAddr=64          ; set the CAN base address (a multiple of 16)
 ```
 
 ## See also

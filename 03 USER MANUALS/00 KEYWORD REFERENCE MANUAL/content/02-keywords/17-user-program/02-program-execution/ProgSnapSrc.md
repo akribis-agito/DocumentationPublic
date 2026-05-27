@@ -36,7 +36,7 @@ Selects which parameters the program snapshot mechanism captures.
 ## Examples
 
 ```text
-ProgSnapSrc[1]=<CAN code of parameter to capture>   ; first snapshot source
+AProgSnapSrc[1]=<CAN code of parameter to capture>   ; first snapshot source
 ```
 
 ## See also

@@ -38,7 +38,7 @@ See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all r
 ## Examples
 
 ```text
-StopFIFO=0          ; end the FIFO motion after the current segment
+AStopFIFO=0          ; end the FIFO motion after the current segment
 ```
 
 ## See also

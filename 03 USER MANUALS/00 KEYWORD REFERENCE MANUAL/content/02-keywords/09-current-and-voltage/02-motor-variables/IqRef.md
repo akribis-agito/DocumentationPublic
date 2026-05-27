@@ -44,7 +44,7 @@ Read-only quadrature-axis current reference (definition varies by motor type), i
 ## Examples
 
 ```text
-IqRef?              ; read quadrature-axis current reference (mA)
+AIqRef              ; read quadrature-axis current reference (mA)
 ```
 
 ## See also

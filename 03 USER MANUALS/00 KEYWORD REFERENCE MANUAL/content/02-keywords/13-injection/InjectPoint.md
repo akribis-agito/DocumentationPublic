@@ -45,9 +45,9 @@ Selects which command signal the injected waveform is applied to.
 ## Examples
 
 ```text
-InjectPoint=0       ; inject at the current command
-InjectPoint=2       ; inject at the position command
-InjectPoint?        ; query the current injection point
+AInjectPoint=0       ; inject at the current command
+AInjectPoint=2       ; inject at the position command
+AInjectPoint        ; query the current injection point
 ```
 
 ## See also

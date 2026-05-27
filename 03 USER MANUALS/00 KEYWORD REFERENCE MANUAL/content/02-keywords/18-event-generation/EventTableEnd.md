@@ -36,8 +36,8 @@ Ending index of the active region within the event table.
 ## Examples
 
 ```text
-EventTableEnd=10    ; use table entries up to index 10
-EventTableEnd?      ; query the configured end index
+AEventTableEnd=10    ; use table entries up to index 10
+AEventTableEnd      ; query the configured end index
 ```
 
 ## See also

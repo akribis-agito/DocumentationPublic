@@ -23,8 +23,8 @@ Any user command to stop the motion (`StopCNCA`, `Stop`, and `Abort`) forces the
 ## Examples
 
 ```text
-CNCAStepMode=1      ; halt at the end of each segment
-CNCAStepMode=0      ; resume free execution of segments
+ACNCAStepMode=1      ; halt at the end of each segment
+ACNCAStepMode=0      ; resume free execution of segments
 ```
 
 ## See also

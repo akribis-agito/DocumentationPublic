@@ -38,8 +38,8 @@ Vector acceleration rate (user units/s^2) ramping the resultant velocity up to V
 ## Examples
 
 ```text
-VecAccel=100000     ; vector acceleration (user units/s^2, default)
-VecAccel?           ; read the current value
+AVecAccel=100000     ; vector acceleration (user units/s^2, default)
+AVecAccel           ; read the current value
 ```
 
 ## See also

@@ -42,7 +42,7 @@ $$
 ## Examples
 
 ```text
-IaErr?              ; read phase A current error (mA)
+AIaErr              ; read phase A current error (mA)
 ```
 
 ## See also

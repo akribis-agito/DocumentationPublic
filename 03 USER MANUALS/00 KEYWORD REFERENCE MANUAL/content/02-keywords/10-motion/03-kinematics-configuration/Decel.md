@@ -36,8 +36,8 @@ Deceleration rate for point-to-point motion, in user units per second squared.
 ## Examples
 
 ```text
-Decel=200000        ; deceleration (user units/s^2)
-Decel?              ; query current deceleration
+ADecel=200000        ; deceleration (user units/s^2)
+ADecel              ; query current deceleration
 ```
 
 ## See also

@@ -38,7 +38,7 @@ Maximum allowable motor temperature (PT100 sensor); exceeding it faults.
 ## Examples
 
 ```text
-MaxMotorTemp=80     ; trip if motor temperature exceeds 80 °C
+AMaxMotorTemp=80     ; trip if motor temperature exceeds 80 °C
 ```
 
 ## See also

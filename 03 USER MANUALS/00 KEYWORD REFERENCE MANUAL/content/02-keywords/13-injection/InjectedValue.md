@@ -36,7 +36,7 @@ Read-only readout of the present injection value; units follow the injection poi
 ## Examples
 
 ```text
-InjectedValue?      ; read the present injection value
+AInjectedValue      ; read the present injection value
 ```
 
 ## See also

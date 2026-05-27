@@ -38,7 +38,7 @@ Reports the last interpreter error code for each user program thread.
 ## Examples
 
 ```text
-ProgError[1]?       ; interpreter error code for thread 1 (0 = no error)
+AProgError[1]       ; interpreter error code for thread 1 (0 = no error)
 ```
 
 ## See also

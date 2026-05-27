@@ -38,7 +38,7 @@ Selects the role/class of the Central-i port on an axis.
 ## Examples
 
 ```text
-CIDeviceType?       ; query the configured Central-i role for this axis
+ACIDeviceType       ; query the configured Central-i role for this axis
 ```
 
 ## See also

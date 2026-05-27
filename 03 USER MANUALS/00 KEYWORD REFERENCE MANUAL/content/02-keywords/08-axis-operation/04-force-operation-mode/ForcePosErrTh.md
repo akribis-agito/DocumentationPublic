@@ -46,8 +46,8 @@ Entry into force operation mode still requires the first condition check ([CurrP
 ## Examples
 
 ```text
-ForcePosErrTh=5000  ; enter force mode when PosErr > 5000
-ForcePosErrTh=0     ; disable this condition
+AForcePosErrTh=5000  ; enter force mode when PosErr > 5000
+AForcePosErrTh=0     ; disable this condition
 ```
 
 ## See also

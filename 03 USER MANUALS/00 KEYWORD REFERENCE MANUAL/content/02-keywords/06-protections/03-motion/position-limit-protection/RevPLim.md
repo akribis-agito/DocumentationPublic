@@ -36,7 +36,7 @@ Reverse software travel limit; reference position is capped here.
 ## Examples
 
 ```text
-RevPLim=-1000000    ; reverse soft limit (counts)
+ARevPLim=-1000000    ; reverse soft limit (counts)
 ```
 
 ## See also

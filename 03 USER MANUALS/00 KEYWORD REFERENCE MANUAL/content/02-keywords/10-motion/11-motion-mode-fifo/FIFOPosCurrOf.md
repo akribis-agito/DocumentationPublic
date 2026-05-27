@@ -36,7 +36,7 @@ Current (torque) feedforward offset added to every FIFO position segment.
 ## Examples
 
 ```text
-FIFOPosCurrOf=2000  ; add a uniform current feedforward bias
+AFIFOPosCurrOf=2000  ; add a uniform current feedforward bias
 ```
 
 ## See also

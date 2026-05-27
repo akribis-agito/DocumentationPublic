@@ -36,7 +36,7 @@ Read-only measured phase B current, in milliamperes.
 ## Examples
 
 ```text
-Ib?                 ; read measured phase B current (mA)
+AIb                 ; read measured phase B current (mA)
 ```
 
 ## See also

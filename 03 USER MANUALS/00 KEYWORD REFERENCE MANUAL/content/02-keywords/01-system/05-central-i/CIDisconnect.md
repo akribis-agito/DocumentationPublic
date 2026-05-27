@@ -38,7 +38,7 @@ Command that terminates the active Central-i link on the selected axis port.
 ## Examples
 
 ```text
-CIDisconnect        ; tear down the Central-i link on the selected axis
+ACIDisconnect        ; tear down the Central-i link on the selected axis
 ```
 
 ## See also

@@ -36,8 +36,8 @@ Negative current-command limit (used when CurrLimMode = 3).
 ## Examples
 
 ```text
-CurrLimMode=3
-CurrLimRev=40000    ; magnitude of the negative current limit (mA)
+ACurrLimMode=3
+ACurrLimRev=40000    ; magnitude of the negative current limit (mA)
 ```
 
 ## See also

@@ -14,8 +14,8 @@ It complements [CNCAPercents/CNCBPercents](CNCAPercents-CNCBPercents.md), the ot
 ## Examples
 
 ```text
-CNCASpeedPer=100    ; run at programmed segment speeds
-CNCASpeedPer=50     ; slow all segments to half speed
+ACNCASpeedPer=100    ; run at programmed segment speeds
+ACNCASpeedPer=50     ; slow all segments to half speed
 ```
 
 ## See also

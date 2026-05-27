@@ -36,7 +36,7 @@ Velocity feedforward offset added to every FIFO position segment.
 ## Examples
 
 ```text
-FIFOPosVelOf=10000  ; add a uniform velocity feedforward bias
+AFIFOPosVelOf=10000  ; add a uniform velocity feedforward bias
 ```
 
 ## See also

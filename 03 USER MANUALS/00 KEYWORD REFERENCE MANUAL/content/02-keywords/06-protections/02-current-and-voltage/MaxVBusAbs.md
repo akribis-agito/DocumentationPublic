@@ -36,7 +36,7 @@ Absolute bus-voltage ceiling; exceeding it disables the axis instantly.
 ## Examples
 
 ```text
-MaxVBusAbs=90000    ; instantaneous over-voltage ceiling (mV)
+AMaxVBusAbs=90000    ; instantaneous over-voltage ceiling (mV)
 ```
 
 ## See also

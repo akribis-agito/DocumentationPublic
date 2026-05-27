@@ -34,7 +34,7 @@ Bitfield configuring each bi-directional I/O pin as an input or an output.
 ## Examples
 
 ```text
-BiDirConfig?        ; read the current direction configuration
+ABiDirConfig        ; read the current direction configuration
 ```
 
 ## See also

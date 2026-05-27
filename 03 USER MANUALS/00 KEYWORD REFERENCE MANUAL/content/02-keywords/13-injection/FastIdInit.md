@@ -36,7 +36,7 @@ Resets the PRBS sequence index to the first pre-defined binary value.
 ## Examples
 
 ```text
-FastIdInit          ; reset the PRBS sequence index
+AFastIdInit          ; reset the PRBS sequence index
 ```
 
 ## See also

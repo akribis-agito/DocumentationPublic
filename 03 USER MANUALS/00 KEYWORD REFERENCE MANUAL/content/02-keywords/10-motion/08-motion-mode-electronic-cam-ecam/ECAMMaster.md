@@ -36,7 +36,7 @@ Complex CAN code selecting the master-variable source for each ECAM cam pattern.
 ## Examples
 
 ```text
-ECAMMaster[1]?      ; read the master-variable CCC for cam pattern 1
+AECAMMaster[1]      ; read the master-variable CCC for cam pattern 1
 ```
 
 ## See also

@@ -36,8 +36,8 @@ Duration of the event output pulse in microseconds.
 ## Examples
 
 ```text
-EventPulseWid=50    ; 50 us output pulse (default)
-EventPulseWid?      ; query the current pulse width
+AEventPulseWid=50    ; 50 us output pulse (default)
+AEventPulseWid      ; query the current pulse width
 ```
 
 ## See also

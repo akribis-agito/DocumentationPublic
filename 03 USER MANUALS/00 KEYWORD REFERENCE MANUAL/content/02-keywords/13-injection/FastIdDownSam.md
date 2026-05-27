@@ -44,9 +44,9 @@ For example, with `FastIdDownSam = 1`, a new binary value is produced every 2 co
 ## Examples
 
 ```text
-FastIdDownSam=1     ; new value every 2 controller cycles
-FastIdDownSam=3     ; new value every 8 controller cycles (default)
-FastIdDownSam?      ; query the current downsampling factor
+AFastIdDownSam=1     ; new value every 2 controller cycles
+AFastIdDownSam=3     ; new value every 8 controller cycles (default)
+AFastIdDownSam      ; query the current downsampling factor
 ```
 
 > **Note:** this value is not reset by PCSuite.

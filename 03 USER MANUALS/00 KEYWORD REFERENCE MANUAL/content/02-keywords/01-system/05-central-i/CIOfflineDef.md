@@ -38,7 +38,7 @@ Per-axis array defining which parameters are included in the Central-i offline d
 ## Examples
 
 ```text
-CIOfflineDef[1]?    ; read the first offline-dataset definition element
+ACIOfflineDef[1]    ; read the first offline-dataset definition element
 ```
 
 ## See also

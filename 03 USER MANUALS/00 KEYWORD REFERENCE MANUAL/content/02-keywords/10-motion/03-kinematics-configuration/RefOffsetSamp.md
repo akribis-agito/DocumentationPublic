@@ -36,8 +36,8 @@ Number of servo samples over which a reference position offset is ramped in.
 ## Examples
 
 ```text
-RefOffsetSamp=100   ; spread the offset over 100 servo samples
-RefOffsetSamp?      ; query current value
+ARefOffsetSamp=100   ; spread the offset over 100 servo samples
+ARefOffsetSamp      ; query current value
 ```
 
 ## See also

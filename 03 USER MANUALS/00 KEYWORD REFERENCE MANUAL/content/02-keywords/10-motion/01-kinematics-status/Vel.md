@@ -50,8 +50,8 @@ Refer to [Control tuning – Dual-loop control](../../11-control-tuning/02-dual-
 ## Examples
 
 ```text
-Vel[1]?             ; read the velocity-loop feedback
-Vel[4]?             ; read the 1/T velocity measurement
+AVel[1]             ; read the velocity-loop feedback
+AVel[4]             ; read the 1/T velocity measurement
 ```
 
 ## See also

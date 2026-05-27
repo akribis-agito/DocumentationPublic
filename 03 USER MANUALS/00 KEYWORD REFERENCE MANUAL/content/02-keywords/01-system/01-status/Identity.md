@@ -90,9 +90,9 @@ Read-only array describing the controller: identification, versions, limits and 
 ## Examples
 
 ```text
-Identity[1]?        ; product-type code
-Identity[2]?        ; production serial number
-Identity[16]?       ; number of axes
+AIdentity[1]        ; product-type code
+AIdentity[2]        ; production serial number
+AIdentity[16]       ; number of axes
 ```
 
 ## See also

@@ -36,7 +36,7 @@ Sets a breakpoint on the currently executing user program task.
 ## Examples
 
 ```text
-ProgBreakThis       ; break the currently executing task at the next instruction
+AProgBreakThis       ; break the currently executing task at the next instruction
 ```
 
 ## See also

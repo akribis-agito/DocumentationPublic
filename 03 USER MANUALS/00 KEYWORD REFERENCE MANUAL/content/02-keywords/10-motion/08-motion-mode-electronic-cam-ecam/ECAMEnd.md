@@ -44,8 +44,8 @@ $$
 ## Examples
 
 ```text
-ECAMEnd[1]=100      ; cam pattern 1 ends at GenData index 100
-ECAMEnd[1]?         ; read current value
+AECAMEnd[1]=100      ; cam pattern 1 ends at GenData index 100
+AECAMEnd[1]         ; read current value
 ```
 
 ## See also

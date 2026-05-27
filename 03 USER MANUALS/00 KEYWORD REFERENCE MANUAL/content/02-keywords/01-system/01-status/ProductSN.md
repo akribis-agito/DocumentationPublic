@@ -59,8 +59,8 @@ As a safeguard, the elevated-permission state is cleared automatically immediate
 ## Examples
 
 ```text
-ProductSN[1]?       ; read the hardware version
-ProductSN[2]?       ; read the production serial number
+AProductSN[1]       ; read the hardware version
+AProductSN[2]       ; read the production serial number
 ```
 
 ## See also

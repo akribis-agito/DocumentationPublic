@@ -14,7 +14,7 @@ Its derivative, the current vector velocity of the profiler, is reported by [CNC
 ## Examples
 
 ```text
-CNCAPosRef?         ; read the current desired position along the path
+ACNCAPosRef         ; read the current desired position along the path
 ```
 
 ## See also

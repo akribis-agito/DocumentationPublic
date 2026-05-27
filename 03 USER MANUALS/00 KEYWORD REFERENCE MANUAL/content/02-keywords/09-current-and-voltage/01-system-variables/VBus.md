@@ -36,7 +36,7 @@ Read-only amplifier DC bus voltage measurement, in millivolts.
 ## Examples
 
 ```text
-VBus?               ; read the present bus voltage (mV)
+AVBus               ; read the present bus voltage (mV)
 ```
 
 ## See also

@@ -36,8 +36,8 @@ Chooses the operating mode of the event output generator.
 ## Examples
 
 ```text
-EventSelect=1       ; select the event-generator mode (default)
-EventSelect?        ; query the current mode
+AEventSelect=1       ; select the event-generator mode (default)
+AEventSelect        ; query the current mode
 ```
 
 ## See also

@@ -36,7 +36,7 @@ Absolute target position (user units) for the next point-to-point move.
 ## Examples
 
 ```text
-AbsTrgt=100000      ; move to absolute position 100000 (user units)
+AAbsTrgt=100000      ; move to absolute position 100000 (user units)
 ```
 
 ## See also

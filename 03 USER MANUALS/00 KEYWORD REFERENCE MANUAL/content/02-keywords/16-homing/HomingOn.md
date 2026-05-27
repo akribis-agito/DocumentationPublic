@@ -38,8 +38,8 @@ Because it cannot be written while the axis is in motion, `HomingOn` is set to b
 ## Examples
 
 ```text
-HomingOn=1          ; start the homing process defined by HomingDef
-HomingOn?           ; 1 while homing is active, cleared to 0 when done
+AHomingOn=1          ; start the homing process defined by HomingDef
+AHomingOn           ; 1 while homing is active, cleared to 0 when done
 ```
 
 ## See also

@@ -12,7 +12,7 @@ Distance to move along the CNC path for the currently active segment.
 ## Examples
 
 ```text
-CNCAAbsTrgt?        ; query the target distance of the active segment
+ACNCAAbsTrgt        ; query the target distance of the active segment
 ```
 
 ## See also

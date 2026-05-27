@@ -42,7 +42,7 @@ When queried over a communication channel, `PDPos` is represented in pulse-direc
 ## Examples
 
 ```text
-PDPos?              ; read the current scaled P/D counter (pulse-direction units)
+APDPos              ; read the current scaled P/D counter (pulse-direction units)
 ```
 
 ## See also

@@ -36,7 +36,7 @@ Maximum allowed bus voltage; sustained excess disables the axis.
 ## Examples
 
 ```text
-MaxVBus=80000       ; 80 V maximum bus voltage (mV)
+AMaxVBus=80000       ; 80 V maximum bus voltage (mV)
 ```
 
 ## See also

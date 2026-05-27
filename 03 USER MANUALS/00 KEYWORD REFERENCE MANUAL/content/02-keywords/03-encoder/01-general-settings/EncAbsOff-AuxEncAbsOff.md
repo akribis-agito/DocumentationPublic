@@ -12,7 +12,7 @@ Offset added to the raw absolute encoder reading.
 ## Examples
 
 ```text
-EncAbsOff=1000      ; add an offset of 1000 to the raw absolute reading
+AEncAbsOff=1000      ; add an offset of 1000 to the raw absolute reading
 ```
 
 ## See also

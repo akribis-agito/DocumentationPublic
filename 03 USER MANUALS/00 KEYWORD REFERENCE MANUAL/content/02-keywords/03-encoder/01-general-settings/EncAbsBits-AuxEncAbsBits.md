@@ -12,7 +12,7 @@ Number of bits of the absolute encoder reading.
 ## Examples
 
 ```text
-EncAbsBits=26       ; 26-bit absolute encoder
+AEncAbsBits=26       ; 26-bit absolute encoder
 ```
 
 ## See also

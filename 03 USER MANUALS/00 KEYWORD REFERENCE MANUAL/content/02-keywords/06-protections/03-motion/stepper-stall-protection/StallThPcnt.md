@@ -38,7 +38,7 @@ Stepper stall threshold as a percentage (10–90%, default 50%).
 ## Examples
 
 ```text
-StallThPcnt=50      ; stall threshold at 50%
+AStallThPcnt=50      ; stall threshold at 50%
 ```
 
 ## See also

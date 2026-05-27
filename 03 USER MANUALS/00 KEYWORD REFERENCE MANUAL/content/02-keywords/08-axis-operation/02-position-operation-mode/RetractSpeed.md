@@ -36,10 +36,10 @@ Maximum velocity of the point-to-point move on entry to position mode.
 ## Examples
 
 ```text
-RetractSpeed=20000  ; entry-move speed (user units)
-RetractTarget=50000 ; entry-move target
-BeginOnToPos=1      ; arm the move
-GoToPosMode         ; switch and start the move
+ARetractSpeed=20000  ; entry-move speed (user units)
+ARetractTarget=50000 ; entry-move target
+ABeginOnToPos=1      ; arm the move
+AGoToPosMode         ; switch and start the move
 ```
 
 ## See also

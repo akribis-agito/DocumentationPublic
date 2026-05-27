@@ -52,7 +52,7 @@ $$
 ## Examples
 
 ```text
-PosErr?             ; read the current position error
+APosErr             ; read the current position error
 ```
 
 ## See also

@@ -36,7 +36,7 @@ Forward software travel limit; reference position is capped here.
 ## Examples
 
 ```text
-FwdPLim=1000000     ; forward soft limit (counts)
+AFwdPLim=1000000     ; forward soft limit (counts)
 ```
 
 ## See also

@@ -92,8 +92,8 @@ For Central-i products. The feedback logging feature is unavailable for the I/O 
 ## Examples
 
 ```text
-LockSrc=32          ; main encoder index, rising edge (AGD101)
-LockSrc=-1          ; digital input 1, falling edge
+ALockSrc=32          ; main encoder index, rising edge (AGD101)
+ALockSrc=-1          ; digital input 1, falling edge
 ```
 
 ## See also

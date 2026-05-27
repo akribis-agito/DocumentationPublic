@@ -38,7 +38,7 @@ Sets the direction of the Central-i multiplexer (which port the shared bus route
 ## Examples
 
 ```text
-CiMuxDir=1          ; route the shared Central-i bus to the configured port
+ACiMuxDir=1          ; route the shared Central-i bus to the configured port
 ```
 
 ## See also

@@ -46,8 +46,8 @@ Entry into current operation mode still requires the first condition check ([Cur
 ## Examples
 
 ```text
-CurrPosErrTh=5000   ; enter current mode when PosErr > 5000
-CurrPosErrTh=0      ; disable this condition
+ACurrPosErrTh=5000   ; enter current mode when PosErr > 5000
+ACurrPosErrTh=0      ; disable this condition
 ```
 
 ## See also

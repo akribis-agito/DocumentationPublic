@@ -36,9 +36,9 @@ Per-entry pulse width array; -1 uses the global EventPulseWid.
 ## Examples
 
 ```text
-EventTableWid[1]=-1     ; first entry uses the global EventPulseWid
-EventTableWid[2]=100    ; second entry uses a 100 us pulse
-EventTableWid[2]?       ; query the second entry's pulse width
+AEventTableWid[1]=-1     ; first entry uses the global EventPulseWid
+AEventTableWid[2]=100    ; second entry uses a 100 us pulse
+AEventTableWid[2]       ; query the second entry's pulse width
 ```
 
 ## See also

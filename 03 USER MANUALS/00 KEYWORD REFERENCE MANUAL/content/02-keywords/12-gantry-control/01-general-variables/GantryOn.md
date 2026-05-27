@@ -42,7 +42,7 @@ When gantry mode is on, motion of the gantry stage is commanded by moving the A 
 ```text
 AGantryOn=1         ; enable gantry MIMO control (A and B coordinated)
 AGantryOn=0         ; disable gantry mode; axes controlled independently
-AGantryOn?          ; read whether gantry mode is active
+AGantryOn          ; read whether gantry mode is active
 ```
 
 ## See also

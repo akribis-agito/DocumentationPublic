@@ -36,7 +36,7 @@ DC bus-voltage threshold (mV) below which the regeneration resistor is deactivat
 ## Examples
 
 ```text
-RegenOff=75000      ; deactivate regen below 75 V (mV)
+ARegenOff=75000      ; deactivate regen below 75 V (mV)
 ```
 
 ## See also

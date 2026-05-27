@@ -14,7 +14,7 @@ Per-axis resolution ratio for CNC calculations (future feature, no current effec
 ## Examples
 
 ```text
-CNCAEncRatio?       ; query the configured resolution ratio
+ACNCAEncRatio       ; query the configured resolution ratio
 ```
 
 ## See also

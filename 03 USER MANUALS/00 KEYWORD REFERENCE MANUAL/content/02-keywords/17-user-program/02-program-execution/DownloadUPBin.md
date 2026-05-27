@@ -39,7 +39,7 @@ A typical workflow is to erase any existing program with [ProgErase](ProgErase.m
 
 ```text
 ; Issue with the motor off and no motion in progress
-DownloadUPBin       ; transfer the compiled user-program binary into program memory
+ADownloadUPBin       ; transfer the compiled user-program binary into program memory
 ```
 
 ## See also

@@ -36,8 +36,8 @@ User-defined array of fixed loop current-compensation values, selected by TorqCo
 ## Examples
 
 ```text
-TorqCompFix[1]=200  ; fixed compensation used when TorqCompMode=1
-TorqCompFix[2]=-150 ; fixed compensation used when TorqCompMode=2
+ATorqCompFix[1]=200  ; fixed compensation used when TorqCompMode=1
+ATorqCompFix[2]=-150 ; fixed compensation used when TorqCompMode=2
 ```
 
 ## See also

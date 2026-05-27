@@ -19,7 +19,7 @@ Flag indicating whether the encoder index pulse has been detected.
 ## Examples
 
 ```text
-IndexStat?          ; check whether the index has been detected
+AIndexStat          ; check whether the index has been detected
 ```
 
 ## See also

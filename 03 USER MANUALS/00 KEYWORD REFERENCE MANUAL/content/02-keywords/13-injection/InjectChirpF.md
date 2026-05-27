@@ -21,9 +21,9 @@ The frequency in Hz is the stored value divided by 100. For example, an initial 
 ## Examples
 
 ```text
-InjectChirpF[1]=100     ; start at 1 Hz
-InjectChirpF[2]=20000   ; end at 200 Hz
-InjectChirpF[1]?        ; query the initial frequency
+AInjectChirpF[1]=100     ; start at 1 Hz
+AInjectChirpF[2]=20000   ; end at 200 Hz
+AInjectChirpF[1]        ; query the initial frequency
 ```
 
 ## See also

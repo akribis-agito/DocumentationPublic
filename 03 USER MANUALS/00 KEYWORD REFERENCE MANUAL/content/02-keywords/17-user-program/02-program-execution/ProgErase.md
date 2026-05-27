@@ -36,7 +36,7 @@ Erases the stored user program from controller memory.
 ## Examples
 
 ```text
-ProgErase           ; erase the stored user program (motor off, not in motion)
+AProgErase           ; erase the stored user program (motor off, not in motion)
 ```
 
 ## See also

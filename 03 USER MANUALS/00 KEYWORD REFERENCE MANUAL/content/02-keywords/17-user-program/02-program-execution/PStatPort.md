@@ -36,7 +36,7 @@ Selects the communication port used for parameter-statistics streaming.
 ## Examples
 
 ```text
-PStatPort=1         ; stream statistics over port 1 (range 1-3)
+APStatPort=1         ; stream statistics over port 1 (range 1-3)
 ```
 
 ## See also

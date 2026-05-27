@@ -38,7 +38,7 @@ CAN command code (parameter identifier) for a remote write issued by RemoteCANSe
 ## Examples
 
 ```text
-RemoteCANCCC=100    ; write the remote node's parameter with CAN code 100
+ARemoteCANCCC=100    ; write the remote node's parameter with CAN code 100
 ```
 
 ## See also

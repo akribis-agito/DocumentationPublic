@@ -36,9 +36,9 @@ Enables a digital-input trigger that automatically issues `Begin` on the axis.
 ## Examples
 
 ```text
-BeginDInOn=1        ; enable digital-input start trigger
-BeginDInOn=0        ; disable the trigger
-BeginDInOn?         ; query state
+ABeginDInOn=1        ; enable digital-input start trigger
+ABeginDInOn=0        ; disable the trigger
+ABeginDInOn         ; query state
 ```
 
 ## See also

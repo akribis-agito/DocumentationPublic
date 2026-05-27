@@ -38,7 +38,7 @@ Reports metadata about the current continuous logger session.
 ## Examples
 
 ```text
-LoggerAbout[1]?     ; query the first metadata element
+ALoggerAbout[1]     ; query the first metadata element
 ```
 
 ## See also

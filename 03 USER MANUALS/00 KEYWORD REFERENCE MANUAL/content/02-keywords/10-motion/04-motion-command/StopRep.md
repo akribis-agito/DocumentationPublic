@@ -36,7 +36,7 @@ Stops repetitive (repeat) motion and clears the repeat-motion state.
 ## Examples
 
 ```text
-StopRep             ; stop repetitive motion
+AStopRep             ; stop repetitive motion
 ```
 
 ## See also

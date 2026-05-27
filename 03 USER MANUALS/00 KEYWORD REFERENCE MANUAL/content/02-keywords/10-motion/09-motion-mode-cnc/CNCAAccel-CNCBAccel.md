@@ -14,7 +14,7 @@ It pairs with [CNCADecel/CNCBDecel](CNCADecel-CNCBDecel.md), which reports the s
 ## Examples
 
 ```text
-CNCAAccel?          ; read the active segment acceleration
+ACNCAAccel          ; read the active segment acceleration
 ```
 
 ## See also

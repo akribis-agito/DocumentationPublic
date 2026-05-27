@@ -36,7 +36,7 @@ Consecutive cycles the dual-loop feedback mismatch may persist before tripping.
 ## Examples
 
 ```text
-DualStuckTime=4096  ; cycles the feedback mismatch may persist before tripping
+ADualStuckTime=4096  ; cycles the feedback mismatch may persist before tripping
 ```
 
 ## See also

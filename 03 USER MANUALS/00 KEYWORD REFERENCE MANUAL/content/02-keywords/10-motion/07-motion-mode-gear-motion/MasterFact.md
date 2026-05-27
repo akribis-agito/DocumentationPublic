@@ -42,8 +42,8 @@ $$
 ## Examples
 
 ```text
-MasterFact=65536    ; default numerator (1:1 ratio with default denominator)
-MasterFact?         ; read current value
+AMasterFact=65536    ; default numerator (1:1 ratio with default denominator)
+AMasterFact         ; read current value
 ```
 
 ## See also

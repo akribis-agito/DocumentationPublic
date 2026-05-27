@@ -36,7 +36,7 @@ Pushes a constant value onto the numeric stack of the current thread.
 ## Examples
 
 ```text
-PushConstant=5      ; push the constant 5 onto the numeric stack
+APushConstant=5      ; push the constant 5 onto the numeric stack
 ```
 
 ## See also

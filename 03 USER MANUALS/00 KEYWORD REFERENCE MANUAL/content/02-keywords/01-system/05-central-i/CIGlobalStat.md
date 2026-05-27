@@ -43,7 +43,7 @@ Reading this single value gives a system-wide overview without querying each axi
 ## Examples
 
 ```text
-CIGlobalStat?       ; system-wide Central-i connection state
+ACIGlobalStat       ; system-wide Central-i connection state
 ```
 
 ## See also

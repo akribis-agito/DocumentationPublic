@@ -12,8 +12,8 @@ Current reference offset (mA) applied on top of the motor's current reference.
 ## Examples
 
 ```text
-CurrRefOffset=500   ; add a 500 mA offset to the motor current reference
-CurrRefOffset?      ; read the present offset
+ACurrRefOffset=500   ; add a 500 mA offset to the motor current reference
+ACurrRefOffset      ; read the present offset
 ```
 
 ## See also

@@ -47,8 +47,8 @@ Please refer to [RecTrigTyp](RecTrigTyp.md) on how the maximum value is used.
 ## Examples
 
 ```text
-RecTrigValMax[1]=2000   ; range upper bound for trigger 1 of the first scope
-RecTrigValMax[1]?       ; query the upper bound of trigger 1 (first scope)
+ARecTrigValMax[1]=2000   ; range upper bound for trigger 1 of the first scope
+ARecTrigValMax[1]       ; query the upper bound of trigger 1 (first scope)
 ```
 
 ## See also

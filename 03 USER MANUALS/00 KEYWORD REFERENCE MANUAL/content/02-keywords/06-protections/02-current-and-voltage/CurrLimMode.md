@@ -46,7 +46,7 @@ Selects how the current command (CurrRef) is saturated.
 ## Examples
 
 ```text
-CurrLimMode=3       ; use CurrLimFwd / CurrLimRev as the limits
+ACurrLimMode=3       ; use CurrLimFwd / CurrLimRev as the limits
 ```
 
 ## See also

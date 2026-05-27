@@ -36,8 +36,8 @@ Array of waypoint positions (user units) that define the spline buffer trajector
 ## Examples
 
 ```text
-BuffPos[1]=0        ; first waypoint position (user units)
-BuffPos[2]=10000    ; second waypoint position
+ABuffPos[1]=0        ; first waypoint position (user units)
+ABuffPos[2]=10000    ; second waypoint position
 ```
 
 ## See also

@@ -40,8 +40,8 @@ Effective acceleration = `Accel × AccelFact`.
 ## Examples
 
 ```text
-AccelFact=2         ; double the effective acceleration
-AccelFact?          ; query current factor
+AAccelFact=2         ; double the effective acceleration
+AAccelFact          ; query current factor
 ```
 
 ## See also

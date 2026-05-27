@@ -38,8 +38,8 @@ It is an axis-scoped array saved to flash, and cannot be changed while the axis 
 ## Examples
 
 ```text
-MapPosGap[1]=1000   ; correction points 1000 encoder counts apart
-MapPosGap[1]?       ; query the spacing for the first dimension
+AMapPosGap[1]=1000   ; correction points 1000 encoder counts apart
+AMapPosGap[1]       ; query the spacing for the first dimension
 ```
 
 ## See also

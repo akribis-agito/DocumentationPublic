@@ -12,7 +12,7 @@ Numerator of the CNC queue A (or B) encoder scaling ratio.
 ## Examples
 
 ```text
-CNCAEncFactNu=1     ; numerator of the CNC position scale factor
+ACNCAEncFactNu=1     ; numerator of the CNC position scale factor
 ```
 
 ## See also

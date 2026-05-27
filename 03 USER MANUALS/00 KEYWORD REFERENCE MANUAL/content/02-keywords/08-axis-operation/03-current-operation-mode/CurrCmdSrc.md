@@ -44,8 +44,8 @@ Under current operation mode, `CurrCmdSrc` sets the source of the current comman
 ## Examples
 
 ```text
-CurrCmdSrc=1        ; use the user-defined CurrCmdVal table
-CurrCmdSrc=3        ; follow a master axis (slave drive)
+ACurrCmdSrc=1        ; use the user-defined CurrCmdVal table
+ACurrCmdSrc=3        ; follow a master axis (slave drive)
 ```
 
 ## See also

@@ -36,7 +36,7 @@ Maximum open-loop (injection) velocity error; exceeding it disables the axis.
 ## Examples
 
 ```text
-MaxVelErrOL=20000000 ; max open-loop velocity error (user units)
+AMaxVelErrOL=20000000 ; max open-loop velocity error (user units)
 ```
 
 ## See also

@@ -38,7 +38,7 @@ No-op command used to check communication responsiveness.
 ## Examples
 
 ```text
-DoNothing           ; issue a no-op; a normal acknowledgement confirms the link
+ADoNothing           ; issue a no-op; a normal acknowledgement confirms the link
 ```
 
 ## See also

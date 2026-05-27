@@ -38,8 +38,8 @@ This keyword only applies when [MotorType](MotorType.md) is 6 (open-loop stepper
 ## Examples
 
 ```text
-StepInMotCurr=2000      ; 2000 mA phase current while moving
-StepInMotCurr?          ; query the current value
+AStepInMotCurr=2000      ; 2000 mA phase current while moving
+AStepInMotCurr          ; query the current value
 ```
 
 ## See also

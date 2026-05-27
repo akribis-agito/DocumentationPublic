@@ -38,9 +38,9 @@ The array is 1-indexed: `LoggerParams[1]` is the first logged parameter. Metadat
 ## Examples
 
 ```text
-LoggerParams[1]=2     ; first logged parameter
-LoggerParams[2]=1026  ; second logged parameter
-LoggerParams[1]?      ; query the first logged parameter
+ALoggerParams[1]=2     ; first logged parameter
+ALoggerParams[2]=1026  ; second logged parameter
+ALoggerParams[1]      ; query the first logged parameter
 ```
 
 ## See also

@@ -52,7 +52,7 @@ $$
 ## Examples
 
 ```text
-VelErr?             ; read the current velocity error
+AVelErr             ; read the current velocity error
 ```
 
 ## See also

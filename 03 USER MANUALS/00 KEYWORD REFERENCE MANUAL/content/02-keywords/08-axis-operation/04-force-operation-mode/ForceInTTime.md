@@ -40,7 +40,7 @@ The internal timer is active only while [ForceInTStat](ForceInTStat.md) = 3. It 
 ## Examples
 
 ```text
-ForceInTTime=50     ; require 50 ms within the settling window
+AForceInTTime=50     ; require 50 ms within the settling window
 ```
 
 ## See also

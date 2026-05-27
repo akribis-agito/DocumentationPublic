@@ -21,8 +21,8 @@ Selects the digital incremental encoder subtype.
 ## Examples
 
 ```text
-EncSubType=0        ; A quad B (AqB) encoder
-EncSubType=1        ; pulse-direction encoder
+AEncSubType=0        ; A quad B (AqB) encoder
+AEncSubType=1        ; pulse-direction encoder
 ```
 
 ## See also

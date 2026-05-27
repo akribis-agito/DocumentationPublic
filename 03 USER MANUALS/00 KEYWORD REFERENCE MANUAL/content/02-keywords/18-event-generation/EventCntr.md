@@ -36,8 +36,8 @@ Counts events generated since the last EventOn; resettable by the user.
 ## Examples
 
 ```text
-EventCntr?          ; read the number of events since the last EventOn
-EventCntr=0         ; reset the counter
+AEventCntr          ; read the number of events since the last EventOn
+AEventCntr=0         ; reset the counter
 ```
 
 ## See also

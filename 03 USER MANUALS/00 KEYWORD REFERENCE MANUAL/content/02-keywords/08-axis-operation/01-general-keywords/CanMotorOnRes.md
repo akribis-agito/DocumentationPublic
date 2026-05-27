@@ -36,7 +36,7 @@ Result code from the last CanMotorOn enable attempt.
 ## Examples
 
 ```text
-CanMotorOnRes?      ; 0 = enabled successfully, non-zero = rejected
+ACanMotorOnRes      ; 0 = enabled successfully, non-zero = rejected
 ```
 
 ## See also

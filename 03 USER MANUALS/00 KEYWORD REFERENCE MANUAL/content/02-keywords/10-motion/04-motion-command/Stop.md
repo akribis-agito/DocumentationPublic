@@ -36,7 +36,7 @@ Controlled stop; decelerates the axis to rest using the normal `Decel` rate.
 ## Examples
 
 ```text
-Stop                ; controlled stop using the normal Decel rate
+AStop                ; controlled stop using the normal Decel rate
 ```
 
 ## See also

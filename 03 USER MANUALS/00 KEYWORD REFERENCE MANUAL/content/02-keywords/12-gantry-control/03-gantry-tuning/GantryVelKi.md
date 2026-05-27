@@ -39,7 +39,7 @@ Integral gain for the gantry yaw velocity loop.
 
 ```text
 AGantryVelKi=50     ; set yaw velocity integral gain
-AGantryVelKi?       ; read the current gain
+AGantryVelKi       ; read the current gain
 ```
 
 ## See also

@@ -48,9 +48,9 @@ This keyword only applies when [MotorType](MotorType.md) is 3 (linear DC brushle
 ## Examples
 
 ```text
-PolePrs=1           ; linear DC brushless motor (must be 1)
-PolePrs=4           ; rotary brushless: 4 pole pairs per revolution
-PolePrs?            ; query the configured pole-pair count
+APolePrs=1           ; linear DC brushless motor (must be 1)
+APolePrs=4           ; rotary brushless: 4 pole pairs per revolution
+APolePrs            ; query the configured pole-pair count
 ```
 
 ## See also

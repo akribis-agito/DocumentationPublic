@@ -56,7 +56,7 @@ The `-3` error reflects an axis fault during a step; the cause is reported by [C
 ## Examples
 
 ```text
-HomingStat?         ; 0 = not homed, >0 = step in progress, 100 = done, <0 = error
+AHomingStat         ; 0 = not homed, >0 = step in progress, 100 = done, <0 = error
 ```
 
 ## See also

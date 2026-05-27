@@ -36,7 +36,7 @@ Argument values passed to an indexed user program task.
 ## Examples
 
 ```text
-ProgArg[1]?         ; query the first argument slot
+AProgArg[1]         ; query the first argument slot
 ```
 
 ## See also

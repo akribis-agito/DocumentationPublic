@@ -36,7 +36,7 @@ Time between successive parameter-statistics transmissions, in milliseconds.
 ## Examples
 
 ```text
-PStatInterval=500   ; transmit parameter statistics every 500 ms
+APStatInterval=500   ; transmit parameter statistics every 500 ms
 ```
 
 ## See also

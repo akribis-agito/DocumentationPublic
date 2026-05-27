@@ -36,8 +36,8 @@ Read-only array of commutation angles captured at the home position.
 ## Examples
 
 ```text
-HomeComtAngRd[1]?   ; read the first captured commutation angle
-HomeComtAngRd?      ; read the full captured-angle array
+AHomeComtAngRd[1]   ; read the first captured commutation angle
+AHomeComtAngRd      ; read the full captured-angle array
 ```
 
 ## See also

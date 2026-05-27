@@ -14,8 +14,8 @@ Counts digital events and serves as the index into the feedback-logging history 
 ## Examples
 
 ```text
-LockCntr?           ; read the number of events logged
-LockCntr=0          ; reset the history-array index
+ALockCntr           ; read the number of events logged
+ALockCntr=0          ; reset the history-array index
 ```
 
 ## See also

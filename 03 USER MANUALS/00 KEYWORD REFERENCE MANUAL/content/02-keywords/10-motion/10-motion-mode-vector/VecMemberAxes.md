@@ -40,8 +40,8 @@ Set a bit to include the corresponding axis in the vector. Bit 0 is the lowest-o
 ## Examples
 
 ```text
-VecMemberAxes=3     ; include the first two axes (bits 0 and 1) in the vector
-VecMemberAxes?      ; read the current member-axis mask
+AVecMemberAxes=3     ; include the first two axes (bits 0 and 1) in the vector
+AVecMemberAxes      ; read the current member-axis mask
 ```
 
 ## See also

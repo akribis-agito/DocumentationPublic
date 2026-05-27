@@ -42,8 +42,8 @@ The value is expressed in units of Hz/100. For example, a required cut-off frequ
 ## Examples
 
 ```text
-PDPosFilt=25000     ; 250 Hz cut-off frequency
-PDPosFilt=12800     ; 128 Hz cut-off frequency (default)
+APDPosFilt=25000     ; 250 Hz cut-off frequency
+APDPosFilt=12800     ; 128 Hz cut-off frequency (default)
 ```
 
 ## See also

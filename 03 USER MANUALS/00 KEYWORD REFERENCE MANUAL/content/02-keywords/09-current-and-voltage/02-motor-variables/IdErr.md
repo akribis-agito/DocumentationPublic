@@ -42,7 +42,7 @@ $$
 ## Examples
 
 ```text
-IdErr?              ; read direct-axis current error (mA)
+AIdErr              ; read direct-axis current error (mA)
 ```
 
 ## See also

@@ -22,7 +22,7 @@ Setting `EncAbsFL` to 90 deg and `EncAbsRL` to -90 deg informs the controller th
 ## Examples
 
 ```text
-EncAbsFL=90         ; forward limit (customized firmware)
+AEncAbsFL=90         ; forward limit (customized firmware)
 EncAbsRL=-90        ; reverse limit (customized firmware)
 ```
 

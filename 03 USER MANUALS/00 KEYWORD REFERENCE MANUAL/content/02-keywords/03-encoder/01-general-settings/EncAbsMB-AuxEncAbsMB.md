@@ -18,7 +18,7 @@ $$Reading_{masked} = Reading_{raw} \gg EncAbsMB$$
 ## Examples
 
 ```text
-EncAbsMB=2          ; discard the 2 least significant bits of the reading
+AEncAbsMB=2          ; discard the 2 least significant bits of the reading
 ```
 
 ## See also

@@ -42,7 +42,7 @@ Per-axis array of identifying information returned by the connected Central-i de
 ## Examples
 
 ```text
-CIIdentity[1]?      ; read the first identity word of the connected device
+ACIIdentity[1]      ; read the first identity word of the connected device
 ```
 
 ## See also

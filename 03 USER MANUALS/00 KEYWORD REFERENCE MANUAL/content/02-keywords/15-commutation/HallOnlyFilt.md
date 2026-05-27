@@ -36,8 +36,8 @@ Digital filter applied to the Hall-sensor-based commutation angle in Hall-only c
 ## Examples
 
 ```text
-HallOnlyFilt=10     ; apply moderate filtering to the Hall-based angle
-HallOnlyFilt?       ; query the current filter setting
+AHallOnlyFilt=10     ; apply moderate filtering to the Hall-based angle
+AHallOnlyFilt       ; query the current filter setting
 ```
 
 ## See also

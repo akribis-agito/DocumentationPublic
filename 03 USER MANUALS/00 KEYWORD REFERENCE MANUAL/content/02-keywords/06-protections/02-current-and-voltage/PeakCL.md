@@ -36,7 +36,7 @@ Peak current limit, used for both current-command saturation and I²t protection
 ## Examples
 
 ```text
-PeakCL=64000        ; peak current limit (mA)
+APeakCL=64000        ; peak current limit (mA)
 ```
 
 ## See also

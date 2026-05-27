@@ -38,9 +38,9 @@ It is an axis-scoped array of 5 elements, read/write and saved to flash, so your
 ## Examples
 
 ```text
-ConFltSnapSrc[1]=33     ; capture the parameter with CAN code 33 (e.g. StatReg) first
-ConFltSnapSrc[1]?       ; query which parameter the first slot will capture
-ConFltSnapSrc?          ; query the whole 5-element snapshot source list
+AConFltSnapSrc[1]=33     ; capture the parameter with CAN code 33 (e.g. StatReg) first
+AConFltSnapSrc[1]       ; query which parameter the first slot will capture
+AConFltSnapSrc          ; query the whole 5-element snapshot source list
 ```
 
 ## See also

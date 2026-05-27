@@ -36,8 +36,8 @@ Position of the first generated event in single-event and by-gap modes.
 ## Examples
 
 ```text
-EventBegPos=1000    ; first event at position 1000 (user units)
-EventBegPos?        ; query the configured start position
+AEventBegPos=1000    ; first event at position 1000 (user units)
+AEventBegPos        ; query the configured start position
 ```
 
 ## See also

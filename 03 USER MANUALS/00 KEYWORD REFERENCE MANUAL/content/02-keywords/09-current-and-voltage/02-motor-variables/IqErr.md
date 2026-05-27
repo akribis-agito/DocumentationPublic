@@ -44,7 +44,7 @@ Read-only quadrature-axis current error (IqRef − Iq), definition varies by mot
 ## Examples
 
 ```text
-IqErr?              ; read quadrature-axis current error (mA)
+AIqErr              ; read quadrature-axis current error (mA)
 ```
 
 ## See also

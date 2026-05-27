@@ -47,8 +47,8 @@ Please refer to [RecTrigTyp](RecTrigTyp.md) on how the comparison value is used.
 ## Examples
 
 ```text
-RecTrigVal[1]=1000  ; comparison value for trigger 1 of the first scope
-RecTrigVal[1]?      ; query the comparison value of trigger 1 (first scope)
+ARecTrigVal[1]=1000  ; comparison value for trigger 1 of the first scope
+ARecTrigVal[1]      ; query the comparison value of trigger 1 (first scope)
 ```
 
 ## See also

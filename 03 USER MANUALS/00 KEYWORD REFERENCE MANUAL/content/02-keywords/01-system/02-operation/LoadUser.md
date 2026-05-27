@@ -13,7 +13,7 @@ Restores the user-saved parameter set from flash into the active parameters.
 ## Examples
 
 ```text
-LoadUser            ; restore the user-saved parameter set (motor must be stopped)
+ALoadUser            ; restore the user-saved parameter set (motor must be stopped)
 ```
 
 ## See also

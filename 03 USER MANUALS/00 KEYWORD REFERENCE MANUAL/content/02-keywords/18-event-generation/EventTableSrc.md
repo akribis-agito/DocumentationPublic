@@ -36,9 +36,9 @@ Selects the position source used to evaluate event table triggers.
 ## Examples
 
 ```text
-EventTableSrc=0     ; select the position source (default)
-EventTableSrc=1     ; select the alternate position source
-EventTableSrc?      ; query the current source
+AEventTableSrc=0     ; select the position source (default)
+AEventTableSrc=1     ; select the alternate position source
+AEventTableSrc      ; query the current source
 ```
 
 ## See also

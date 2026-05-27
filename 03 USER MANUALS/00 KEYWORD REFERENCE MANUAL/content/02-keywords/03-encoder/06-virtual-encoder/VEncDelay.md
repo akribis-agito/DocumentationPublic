@@ -36,8 +36,8 @@ Fixed delay between the source signal and the virtual encoder output.
 ## Examples
 
 ```text
-VEncDelay=0         ; no delay
-VEncDelay=5         ; apply a fixed delay
+AVEncDelay=0         ; no delay
+AVEncDelay=5         ; apply a fixed delay
 ```
 
 ## See also

@@ -44,7 +44,7 @@ The drive may run up to `PeakCL` for up to `PeakTime`; sustained current is then
 ## Examples
 
 ```text
-ContCL=16000        ; continuous current limit (mA)
+AContCL=16000        ; continuous current limit (mA)
 ```
 
 ## See also

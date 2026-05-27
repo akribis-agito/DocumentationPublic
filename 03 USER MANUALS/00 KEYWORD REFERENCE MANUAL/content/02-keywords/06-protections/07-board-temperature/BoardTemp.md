@@ -36,7 +36,7 @@ Read-only controller-board temperature (°C).
 ## Examples
 
 ```text
-BoardTemp?          ; controller board temperature (°C)
+ABoardTemp          ; controller board temperature (°C)
 ```
 
 ## See also

@@ -46,8 +46,8 @@ Entry into current operation mode still requires the first condition check ([Cur
 ## Examples
 
 ```text
-CurrAInTh=5000      ; enter current mode when force feedback > 5000
-CurrAInTh=0         ; disable this condition
+ACurrAInTh=5000      ; enter current mode when force feedback > 5000
+ACurrAInTh=0         ; disable this condition
 ```
 
 ## See also

@@ -36,9 +36,9 @@ Lets a new `Begin` blend into the existing move instead of stopping first.
 ## Examples
 
 ```text
-PTPKeepMoving=1     ; blend into a new target without stopping
-PTPKeepMoving=0     ; require the move to complete first
-PTPKeepMoving?      ; query state
+APTPKeepMoving=1     ; blend into a new target without stopping
+APTPKeepMoving=0     ; require the move to complete first
+APTPKeepMoving      ; query state
 ```
 
 ## See also

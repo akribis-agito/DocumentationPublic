@@ -36,8 +36,8 @@ In position or velocity control operation mode (`OperationMode = 2` or `3`), `In
 ## Examples
 
 ```text
-InTargetTol=10      ; settling window in user units (default)
-InTargetTol?        ; read current value
+AInTargetTol=10      ; settling window in user units (default)
+AInTargetTol        ; read current value
 ```
 
 ## See also

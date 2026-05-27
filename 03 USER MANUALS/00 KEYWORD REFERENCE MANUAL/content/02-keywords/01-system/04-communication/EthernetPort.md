@@ -38,7 +38,7 @@ TCP port for Ethernet communication (Agito controllers support port 50000).
 ## Examples
 
 ```text
-EthernetPort?       ; query the configured port (50000)
+AEthernetPort       ; query the configured port (50000)
 ```
 
 ## See also

@@ -36,7 +36,7 @@ Maximum closed-loop velocity error; exceeding it disables the axis.
 ## Examples
 
 ```text
-MaxVelErr=100000    ; max velocity error (user units)
+AMaxVelErr=100000    ; max velocity error (user units)
 ```
 
 ## See also

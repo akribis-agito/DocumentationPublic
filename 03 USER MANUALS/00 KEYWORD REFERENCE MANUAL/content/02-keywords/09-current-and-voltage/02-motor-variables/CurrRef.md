@@ -38,7 +38,7 @@ See [Control tuning – Current control](../../11-control-tuning/06-current-cont
 ## Examples
 
 ```text
-CurrRef?            ; read the final current command (mA)
+ACurrRef            ; read the final current command (mA)
 ```
 
 ## See also

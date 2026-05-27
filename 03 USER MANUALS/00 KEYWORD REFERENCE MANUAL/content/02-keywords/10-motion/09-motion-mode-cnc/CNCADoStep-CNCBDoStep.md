@@ -23,7 +23,7 @@ Upon beginning a CNCA motion (using the `Begin` message), the value of `CNCADoSt
 ## Examples
 
 ```text
-CNCADoStep=1        ; release the next segment while in step mode
+ACNCADoStep=1        ; release the next segment while in step mode
 ```
 
 ## See also

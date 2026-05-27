@@ -38,7 +38,7 @@ See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all r
 ## Examples
 
 ```text
-FIFOPushLinP=10000  ; push a linear segment with a position delta of 10000
+AFIFOPushLinP=10000  ; push a linear segment with a position delta of 10000
 ```
 
 ## See also

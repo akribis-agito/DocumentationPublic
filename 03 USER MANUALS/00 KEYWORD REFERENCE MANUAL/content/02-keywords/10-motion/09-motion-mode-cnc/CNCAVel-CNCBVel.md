@@ -14,7 +14,7 @@ The overall vector speed that drives these components is set by [CNCASpeed/CNCBS
 ## Examples
 
 ```text
-CNCAVel[1]?         ; read the first axis velocity component (arrays are 1-indexed)
+ACNCAVel[1]         ; read the first axis velocity component (arrays are 1-indexed)
 ```
 
 ## See also

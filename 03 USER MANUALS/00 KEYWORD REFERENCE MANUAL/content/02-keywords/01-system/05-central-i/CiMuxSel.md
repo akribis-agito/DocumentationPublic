@@ -38,7 +38,7 @@ Per-axis array selecting which physical port is routed through the Central-i mul
 ## Examples
 
 ```text
-CiMuxSel[1]?        ; read the first multiplexer selection element for this axis
+ACiMuxSel[1]        ; read the first multiplexer selection element for this axis
 ```
 
 ## See also

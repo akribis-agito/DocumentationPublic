@@ -61,6 +61,10 @@ panel + availability matrix; the body is the article.
 - Relative `.md` links between keyword files.
 - Diagrams: drawio exported as `.drawio.svg`, embedded as images.
 - LaTeX for equations; some pages use `desmos-graph` code blocks.
+- Command/example syntax in `## Examples` blocks: keywords are addressed with an
+  **axis-letter prefix** (e.g. `APos`, `APosGain[1]`); read is the bare prefixed keyword
+  (no `?` suffix), write is `AKeyword[index]=value`. Every keyword takes a prefix, including
+  non-axis ones (for those the letter is don't-care).
 
 ## Status
 

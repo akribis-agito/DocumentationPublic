@@ -44,7 +44,7 @@ Although read-only, `Pos` can be preset to any value at any time via the [SetPos
 ## Examples
 
 ```text
-Pos?                ; read the main position feedback
+APos                ; read the main position feedback
 ```
 
 ## See also

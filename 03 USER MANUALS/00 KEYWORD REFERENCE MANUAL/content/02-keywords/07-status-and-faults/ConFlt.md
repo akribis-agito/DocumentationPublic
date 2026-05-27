@@ -45,8 +45,8 @@ Holds the controller error code that disabled the axis.
 ## Examples
 
 ```text
-ConFlt?             ; read the current fault code (0 = no fault)
-ConFlt=0            ; clear the fault status
+AConFlt             ; read the current fault code (0 = no fault)
+AConFlt=0            ; clear the fault status
 ```
 
 ## See also

@@ -44,8 +44,8 @@ $$
 ## Examples
 
 ```text
-ECAMEndCyc[1]=80    ; repeating segment of cam pattern 1 ends at GenData index 80
-ECAMEndCyc[1]?      ; read current value
+AECAMEndCyc[1]=80    ; repeating segment of cam pattern 1 ends at GenData index 80
+AECAMEndCyc[1]      ; read current value
 ```
 
 ## See also

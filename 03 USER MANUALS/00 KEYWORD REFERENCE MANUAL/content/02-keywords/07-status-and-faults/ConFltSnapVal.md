@@ -38,8 +38,8 @@ It is an axis-scoped, read-only array that is not saved to flash. The default el
 ## Examples
 
 ```text
-ConFltSnapVal[1]?   ; read the value captured for the first configured source
-ConFltSnapVal?      ; read the full captured snapshot
+AConFltSnapVal[1]   ; read the value captured for the first configured source
+AConFltSnapVal      ; read the full captured snapshot
 ```
 
 ## See also

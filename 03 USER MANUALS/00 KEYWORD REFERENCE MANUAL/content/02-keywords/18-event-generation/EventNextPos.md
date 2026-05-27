@@ -36,7 +36,7 @@ Read-only position at which the next event pulse will be generated.
 ## Examples
 
 ```text
-EventNextPos?       ; read the position of the next pending event
+AEventNextPos       ; read the position of the next pending event
 ```
 
 ## See also

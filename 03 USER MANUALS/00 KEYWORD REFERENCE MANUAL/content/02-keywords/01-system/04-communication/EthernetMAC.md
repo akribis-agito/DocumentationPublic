@@ -47,7 +47,7 @@ Controller MAC address, stored as decimal octets one per array element.
 ## Examples
 
 ```text
-EthernetMAC[3]?     ; read the third octet (decimal)
+AEthernetMAC[3]     ; read the third octet (decimal)
 ```
 
 ## See also

@@ -36,8 +36,8 @@ Enables or disables periodic parameter-statistics streaming.
 ## Examples
 
 ```text
-PStatOn=1           ; start periodic statistics streaming
-PStatOn=0           ; stop streaming
+APStatOn=1           ; start periodic statistics streaming
+APStatOn=0           ; stop streaming
 ```
 
 ## See also

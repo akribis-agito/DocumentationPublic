@@ -44,8 +44,8 @@ $$
 ## Examples
 
 ```text
-ECAMStart[1]=1      ; cam pattern 1 starts at GenData index 1
-ECAMStart[1]?       ; read current value
+AECAMStart[1]=1      ; cam pattern 1 starts at GenData index 1
+AECAMStart[1]       ; read current value
 ```
 
 ## See also

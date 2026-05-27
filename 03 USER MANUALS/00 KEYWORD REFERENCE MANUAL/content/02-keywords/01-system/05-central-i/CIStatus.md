@@ -38,7 +38,7 @@ Per-axis array reporting the live state of the Central-i port.
 ## Examples
 
 ```text
-CIStatus[1]?        ; read the first status word for this axis's port
+ACIStatus[1]        ; read the first status word for this axis's port
 ```
 
 ## See also

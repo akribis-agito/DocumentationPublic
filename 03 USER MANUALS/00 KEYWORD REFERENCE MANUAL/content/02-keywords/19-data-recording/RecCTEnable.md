@@ -12,8 +12,8 @@ Enables or disables continuous-time recording for each recording channel.
 ## Examples
 
 ```text
-RecCTEnable[1]=1    ; enable continuous-time recording on the first channel
-RecCTEnable[1]?     ; query the continuous-time recording state
+ARecCTEnable[1]=1    ; enable continuous-time recording on the first channel
+ARecCTEnable[1]     ; query the continuous-time recording state
 ```
 
 ## See also

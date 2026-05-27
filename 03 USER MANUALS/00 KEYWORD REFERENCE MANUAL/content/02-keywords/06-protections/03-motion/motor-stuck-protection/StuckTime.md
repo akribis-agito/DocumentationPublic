@@ -36,7 +36,7 @@ Duration the stuck condition must persist before the axis is flagged stuck.
 ## Examples
 
 ```text
-StuckTime=4096      ; how long the stuck condition must hold
+AStuckTime=4096      ; how long the stuck condition must hold
 ```
 
 ## See also

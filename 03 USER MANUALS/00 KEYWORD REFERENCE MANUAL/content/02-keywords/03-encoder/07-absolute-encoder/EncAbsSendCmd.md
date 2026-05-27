@@ -36,9 +36,9 @@ Command that initiates a register read/write transaction to the absolute encoder
 ## Examples
 
 ```text
-EncAbsWRType=0      ; configure for a read
-EncAbsAddr=16       ; target register 16
-EncAbsSendCmd       ; execute the transaction; result in EncAbsRData
+AEncAbsWRType=0      ; configure for a read
+AEncAbsAddr=16       ; target register 16
+AEncAbsSendCmd       ; execute the transaction; result in EncAbsRData
 ```
 
 ## See also

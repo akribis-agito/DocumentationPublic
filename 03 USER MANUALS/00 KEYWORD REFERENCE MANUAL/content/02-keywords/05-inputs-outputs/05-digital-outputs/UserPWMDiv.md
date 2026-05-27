@@ -36,7 +36,7 @@ Period divisor setting the PWM frequency for all user PWM channels.
 ## Examples
 
 ```text
-UserPWMDiv=9        ; default period divisor
+AUserPWMDiv=9        ; default period divisor
 ```
 
 ## See also

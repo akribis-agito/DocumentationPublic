@@ -36,8 +36,8 @@ Array of per-segment durations (servo samples) for the spline buffer trajectory.
 ## Examples
 
 ```text
-BuffTime[1]=100     ; spend 100 servo samples on the first segment
-BuffTime[2]=200     ; spend 200 servo samples on the second segment
+ABuffTime[1]=100     ; spend 100 servo samples on the first segment
+ABuffTime[2]=200     ; spend 200 servo samples on the second segment
 ```
 
 ## See also

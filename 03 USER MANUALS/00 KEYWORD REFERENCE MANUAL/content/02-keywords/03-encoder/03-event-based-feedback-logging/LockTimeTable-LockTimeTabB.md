@@ -23,7 +23,7 @@ History arrays storing the controller-cycle time of each logged digital event.
 When an event triggers feedback logging and `LockCntr` reaches 70000, `LockTimeTabB[5000]` is used to store the logging time.
 
 ```text
-LockTimeTable[1]?       ; read the time stamp of the first logged event
+ALockTimeTable[1]       ; read the time stamp of the first logged event
 ```
 
 ## See also

@@ -73,9 +73,9 @@ The index selects which operation is performed; the number of operands determine
 
 ```text
 ; Compute 3 + 4 (operations normally emitted by the PC Suite compiler)
-PushConstant=3      ; push first operand
-PushConstant=4      ; push second operand
-Math[1]             ; index 1 = Add, result 7 is pushed back to the stack
+APushConstant=3      ; push first operand
+APushConstant=4      ; push second operand
+AMath[1]             ; index 1 = Add, result 7 is pushed back to the stack
 ```
 
 ## See also

@@ -36,7 +36,7 @@ Cycle time, in servo samples, between consecutive FIFO position segments.
 ## Examples
 
 ```text
-FIFOPosCycle=16     ; apply a new position segment every 16 servo samples
+AFIFOPosCycle=16     ; apply a new position segment every 16 servo samples
 ```
 
 ## See also

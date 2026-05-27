@@ -90,9 +90,9 @@ In closed-loop stepper control, encoder feedback is used and position is defined
 ## Examples
 
 ```text
-MotorType=4         ; rotary DC brushless motor
-MotorType=6         ; open-loop stepper motor
-MotorType?          ; query the configured motor type
+AMotorType=4         ; rotary DC brushless motor
+AMotorType=6         ; open-loop stepper motor
+AMotorType          ; query the configured motor type
 ```
 
 ## See also

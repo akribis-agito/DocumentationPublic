@@ -38,7 +38,7 @@ Defines the trigger type (edge, equal, not equal, …) for an event.
 ## Examples
 
 ```text
-ProgEventType[1]=1  ; set the trigger type for event 1
+AProgEventType[1]=1  ; set the trigger type for event 1
 ```
 
 ## See also

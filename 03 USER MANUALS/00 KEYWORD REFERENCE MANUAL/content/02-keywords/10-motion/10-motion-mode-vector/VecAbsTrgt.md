@@ -38,7 +38,7 @@ Read-only total vector path distance (always positive) from start to end of moti
 ## Examples
 
 ```text
-VecAbsTrgt?         ; read the total vector path distance for the move
+AVecAbsTrgt         ; read the total vector path distance for the move
 ```
 
 ## See also

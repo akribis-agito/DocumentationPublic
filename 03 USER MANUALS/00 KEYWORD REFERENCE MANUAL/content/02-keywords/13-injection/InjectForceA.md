@@ -36,8 +36,8 @@ Amplitude of force-command injection, in internal force units.
 ## Examples
 
 ```text
-InjectForceA=10000      ; force injection amplitude (internal force units)
-InjectForceA?           ; query the current force injection amplitude
+AInjectForceA=10000      ; force injection amplitude (internal force units)
+AInjectForceA           ; query the current force injection amplitude
 ```
 
 ## See also

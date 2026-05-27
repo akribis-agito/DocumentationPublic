@@ -36,7 +36,7 @@ Read-only running position along the vector path (0 to VecAbsTrgt), always posit
 ## Examples
 
 ```text
-VecPosRef?          ; read the current position along the vector path
+AVecPosRef          ; read the current position along the vector path
 ```
 
 ## See also

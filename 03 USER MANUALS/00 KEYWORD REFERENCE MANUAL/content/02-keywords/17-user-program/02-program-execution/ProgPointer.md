@@ -36,7 +36,7 @@ Reports the current instruction pointer of each user program task.
 ## Examples
 
 ```text
-ProgPointer[1]?     ; instruction pointer of task 1 (-1 = no active position)
+AProgPointer[1]     ; instruction pointer of task 1 (-1 = no active position)
 ```
 
 ## See also

@@ -49,8 +49,8 @@ Being axis-scope and flash-saved, it is set during configuration and cannot be c
 ## Examples
 
 ```text
-LAmpFullScale=1     ; 1.2 A corresponds to full-scale (10 V) output
-LAmpFullScale?      ; query the current selection
+ALAmpFullScale=1     ; 1.2 A corresponds to full-scale (10 V) output
+ALAmpFullScale      ; query the current selection
 ```
 
 ## See also

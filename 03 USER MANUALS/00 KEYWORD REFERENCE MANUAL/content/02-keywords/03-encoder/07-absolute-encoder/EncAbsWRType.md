@@ -36,8 +36,8 @@ Selects read or write access for the next absolute encoder register transaction.
 ## Examples
 
 ```text
-EncAbsWRType=0      ; read access
-EncAbsWRType=1      ; write access
+AEncAbsWRType=0      ; read access
+AEncAbsWRType=1      ; write access
 ```
 
 ## See also

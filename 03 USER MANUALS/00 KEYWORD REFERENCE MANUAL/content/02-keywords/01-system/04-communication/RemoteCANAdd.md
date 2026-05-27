@@ -38,7 +38,7 @@ Target CAN node address for a remote write issued by RemoteCANSend.
 ## Examples
 
 ```text
-RemoteCANAdd=128    ; address of the remote node to write to
+ARemoteCANAdd=128    ; address of the remote node to write to
 ```
 
 ## See also

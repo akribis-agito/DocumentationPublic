@@ -38,7 +38,7 @@ Selects the boundary condition at the start and end of the spline buffer traject
 ## Examples
 
 ```text
-BuffEdgeMode=1      ; default edge condition
+ABuffEdgeMode=1      ; default edge condition
 ```
 
 ## See also

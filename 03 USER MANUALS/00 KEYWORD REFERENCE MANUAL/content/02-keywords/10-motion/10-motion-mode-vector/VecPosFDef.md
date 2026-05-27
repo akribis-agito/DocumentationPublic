@@ -36,8 +36,8 @@ Array defining the position-filter coefficients applied to the vector reference 
 ## Examples
 
 ```text
-VecPosFDef[1]=0     ; first filter coefficient (1-indexed array element)
-VecPosFDef[1]?      ; read the first filter coefficient
+AVecPosFDef[1]=0     ; first filter coefficient (1-indexed array element)
+AVecPosFDef[1]      ; read the first filter coefficient
 ```
 
 ## See also

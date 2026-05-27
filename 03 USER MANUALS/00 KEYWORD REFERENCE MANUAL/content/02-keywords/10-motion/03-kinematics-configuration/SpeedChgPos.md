@@ -36,8 +36,8 @@ Axis position at which a speed-change-on-the-fly event is triggered.
 ## Examples
 
 ```text
-SpeedChgPos=50000   ; trigger position (user units)
-SpeedChgPos?        ; query current value
+ASpeedChgPos=50000   ; trigger position (user units)
+ASpeedChgPos        ; query current value
 ```
 
 ## See also

@@ -36,8 +36,8 @@ Redefines the axis position to a given value without moving the motor.
 ## Examples
 
 ```text
-SetPosition=0       ; redefine current position as zero
-SetPosition=50000   ; redefine current position as 50000
+ASetPosition=0       ; redefine current position as zero
+ASetPosition=50000   ; redefine current position as 50000
 ```
 
 ## See also

@@ -36,8 +36,8 @@ Number of full circular arcs to run in vector arc mode (0 = run until StopVec).
 ## Examples
 
 ```text
-VecNumCircles=0     ; run continuously until StopVec (default)
-VecNumCircles=5     ; execute five full circles, then stop
+AVecNumCircles=0     ; run continuously until StopVec (default)
+AVecNumCircles=5     ; execute five full circles, then stop
 ```
 
 ## See also

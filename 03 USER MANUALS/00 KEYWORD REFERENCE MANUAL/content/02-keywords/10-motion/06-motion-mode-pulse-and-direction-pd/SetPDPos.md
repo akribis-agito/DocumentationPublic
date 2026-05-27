@@ -36,8 +36,8 @@ Command that presets/re-zeroes the pulse-and-direction position counter without 
 ## Examples
 
 ```text
-SetPDPos=0          ; re-zero the P/D counter
-SetPDPos=100000     ; preset the P/D counter to a known value
+ASetPDPos=0          ; re-zero the P/D counter
+ASetPDPos=100000     ; preset the P/D counter to a known value
 ```
 
 ## See also

@@ -36,8 +36,8 @@ Motor resistance measurement, in milliohms (updated by PCSuite).
 ## Examples
 
 ```text
-Rm?                 ; read measured motor resistance (mΩ)
-Rm=1500             ; set the resistance value manually (mΩ)
+ARm                 ; read measured motor resistance (mΩ)
+ARm=1500             ; set the resistance value manually (mΩ)
 ```
 
 ## See also

@@ -38,8 +38,8 @@ Vector deceleration rate (user units/s^2) ramping the resultant velocity down to
 ## Examples
 
 ```text
-VecDecel=100000     ; vector deceleration (user units/s^2, default)
-VecDecel?           ; read the current value
+AVecDecel=100000     ; vector deceleration (user units/s^2, default)
+AVecDecel           ; read the current value
 ```
 
 ## See also

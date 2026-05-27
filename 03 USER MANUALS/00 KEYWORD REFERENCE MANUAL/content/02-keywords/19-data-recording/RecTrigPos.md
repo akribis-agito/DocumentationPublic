@@ -41,8 +41,8 @@ Percentage of RecLength captured before the trigger (pre-trigger data).
 ## Examples
 
 ```text
-RecTrigPos[1]=10    ; reserve 10% of RecLength for pre-trigger data
-RecTrigPos[1]?      ; query the first scope pre-trigger percentage
+ARecTrigPos[1]=10    ; reserve 10% of RecLength for pre-trigger data
+ARecTrigPos[1]      ; query the first scope pre-trigger percentage
 ```
 
 If `RecLength[1] = 16384` and `RecTrigPos[1] = 10`, the first scope will have 1638 pre-trigger data points and 14746 post-trigger data points.

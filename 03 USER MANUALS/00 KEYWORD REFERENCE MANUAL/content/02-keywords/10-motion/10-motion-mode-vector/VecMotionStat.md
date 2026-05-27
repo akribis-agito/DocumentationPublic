@@ -36,7 +36,7 @@ Read-only bit-field reporting the current vector-motion state of the axis.
 ## Examples
 
 ```text
-VecMotionStat?      ; read the current vector-motion state bit-field
+AVecMotionStat      ; read the current vector-motion state bit-field
 ```
 
 ## See also

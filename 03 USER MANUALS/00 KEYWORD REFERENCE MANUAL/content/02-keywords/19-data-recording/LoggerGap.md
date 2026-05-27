@@ -36,8 +36,8 @@ Sets the continuous logger sampling interval in servo cycles.
 ## Examples
 
 ```text
-LoggerGap=10        ; sample every 10 servo cycles
-LoggerGap?          ; query the current sampling interval
+ALoggerGap=10        ; sample every 10 servo cycles
+ALoggerGap          ; query the current sampling interval
 ```
 
 ## See also

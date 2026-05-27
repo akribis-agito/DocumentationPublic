@@ -17,8 +17,8 @@ This differs from [StopCNCA](StopCNCA.md), which aborts the motion rather than p
 ## Examples
 
 ```text
-CNCAPause=1         ; pause: decelerate to zero vector velocity
-CNCAPause=0         ; resume normal CNC motion
+ACNCAPause=1         ; pause: decelerate to zero vector velocity
+ACNCAPause=0         ; resume normal CNC motion
 ```
 
 ## See also

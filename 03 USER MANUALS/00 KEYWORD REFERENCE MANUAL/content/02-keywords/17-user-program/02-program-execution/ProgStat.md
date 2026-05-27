@@ -44,7 +44,7 @@ Reports the running status of a specified user program thread.
 ## Examples
 
 ```text
-ProgStat[1]?        ; 1 if thread 1 is running, 0 if stopped, -1 if no program
+AProgStat[1]        ; 1 if thread 1 is running, 0 if stopped, -1 if no program
 ```
 
 ## See also

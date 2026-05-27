@@ -36,9 +36,9 @@ Number of repetitions for repetitive point-to-point motion; `0` repeats indefini
 ## Examples
 
 ```text
-RptCycles=10        ; perform 10 repetitions
-RptCycles=0         ; repeat indefinitely
-RptCycles?          ; query current value
+ARptCycles=10        ; perform 10 repetitions
+ARptCycles=0         ; repeat indefinitely
+ARptCycles          ; query current value
 ```
 
 ## See also

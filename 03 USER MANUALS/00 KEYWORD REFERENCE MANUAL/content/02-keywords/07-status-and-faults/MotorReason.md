@@ -48,7 +48,7 @@ When `MotorReason` reports a controller fault (value `1`), read [ConFlt](ConFlt.
 ## Examples
 
 ```text
-MotorReason?        ; 1 = controller fault, 2 = digital input, 3 = user program, 4 = communication
+AMotorReason        ; 1 = controller fault, 2 = digital input, 3 = user program, 4 = communication
 ```
 
 ## See also

@@ -36,7 +36,7 @@ Maximum closed-loop velocity; exceeding it (+25% buffer) disables the axis.
 ## Examples
 
 ```text
-MaxVel=500000       ; maximum velocity (user units)
+AMaxVel=500000       ; maximum velocity (user units)
 ```
 
 ## See also

@@ -36,7 +36,7 @@ Immediately stops motion using the emergency deceleration rate (`EmrgDec`).
 ## Examples
 
 ```text
-Abort               ; emergency-stop the axis
+AAbort               ; emergency-stop the axis
 ```
 
 ## See also

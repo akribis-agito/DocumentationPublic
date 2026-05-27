@@ -38,7 +38,7 @@ For PWM amplifiers, `MaxPWM` limits the maximum duty cycle of the PWM drive — 
 With a 48 V bus and default `MaxPWM = 900`, to cap the output at 30% duty cycle (14.4 V) set:
 
 ```text
-MaxPWM=300          ; limit to 30% duty cycle -> ~14.4 V on a 48 V bus
+AMaxPWM=300          ; limit to 30% duty cycle -> ~14.4 V on a 48 V bus
 ```
 
 ## See also

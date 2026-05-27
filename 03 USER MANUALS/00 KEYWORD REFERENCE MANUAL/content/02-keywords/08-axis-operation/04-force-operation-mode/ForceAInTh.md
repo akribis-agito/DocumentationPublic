@@ -46,8 +46,8 @@ Entry into force operation mode still requires the first condition check ([CurrP
 ## Examples
 
 ```text
-ForceAInTh=5000     ; enter force mode when force feedback > 5000
-ForceAInTh=0        ; disable this condition
+AForceAInTh=5000     ; enter force mode when force feedback > 5000
+AForceAInTh=0        ; disable this condition
 ```
 
 ## See also

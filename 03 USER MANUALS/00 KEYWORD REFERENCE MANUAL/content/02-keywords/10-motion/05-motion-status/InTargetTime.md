@@ -36,8 +36,8 @@ Minimum dwell time inside the settling window before target-reached is signalled
 ## Examples
 
 ```text
-InTargetTime=100    ; require the window to be held for the configured duration
-InTargetTime?       ; read current value
+AInTargetTime=100    ; require the window to be held for the configured duration
+AInTargetTime       ; read current value
 ```
 
 ## See also

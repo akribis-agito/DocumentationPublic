@@ -42,7 +42,7 @@ $$
 ## Examples
 
 ```text
-DualStuckVel=40000  ; max tolerated feedback velocity mismatch (count/s)
+ADualStuckVel=40000  ; max tolerated feedback velocity mismatch (count/s)
 ```
 
 ## See also

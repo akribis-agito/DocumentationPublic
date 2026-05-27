@@ -38,7 +38,7 @@ See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all r
 ## Examples
 
 ```text
-FIFOClear=0         ; empty the FIFO queue
+AFIFOClear=0         ; empty the FIFO queue
 ```
 
 ## See also

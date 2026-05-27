@@ -40,7 +40,7 @@ See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all r
 ## Examples
 
 ```text
-FIFOStatus[1]?      ; query the first status element
+AFIFOStatus[1]      ; query the first status element
 ```
 
 ## See also

@@ -36,9 +36,9 @@ Per-entry selection array controlling each event table entry's characteristics.
 ## Examples
 
 ```text
-EventTableSel[1]=1      ; selection for the first table entry
-EventTableSel[2]=0      ; selection for the second table entry
-EventTableSel[1]?       ; query the first entry's selection
+AEventTableSel[1]=1      ; selection for the first table entry
+AEventTableSel[2]=0      ; selection for the second table entry
+AEventTableSel[1]       ; query the first entry's selection
 ```
 
 ## See also

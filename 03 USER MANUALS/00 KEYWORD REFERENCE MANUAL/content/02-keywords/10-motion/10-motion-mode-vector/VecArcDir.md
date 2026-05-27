@@ -46,8 +46,8 @@ Two axes are defined for an arc motion. The arc is performed in the plane of the
 ## Examples
 
 ```text
-VecArcDir=0         ; counter-clockwise arc (default)
-VecArcDir=1         ; clockwise arc
+AVecArcDir=0         ; counter-clockwise arc (default)
+AVecArcDir=1         ; clockwise arc
 ```
 
 ## See also

@@ -43,7 +43,7 @@ Second analog-input deadband (mV) per input, applied after gain.
 ## Examples
 
 ```text
-AInMuteRange[1]=10  ; mute analog input 1 within ±10 mV of zero
+AAInMuteRange[1]=10  ; mute analog input 1 within ±10 mV of zero
 ```
 
 ## See also

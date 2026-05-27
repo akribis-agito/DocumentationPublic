@@ -36,7 +36,7 @@ DC bus-voltage threshold (mV) above which the regeneration resistor is activated
 ## Examples
 
 ```text
-RegenOn=80000       ; activate regen above 80 V (mV)
+ARegenOn=80000       ; activate regen above 80 V (mV)
 ```
 
 ## See also

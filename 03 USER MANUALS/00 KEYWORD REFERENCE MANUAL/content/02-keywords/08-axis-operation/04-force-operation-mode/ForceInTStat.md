@@ -46,7 +46,7 @@ In-target status of force control for the user-defined reference table.
 ## Examples
 
 ```text
-ForceInTStat?       ; 4 = settled in target, 2 = still ramping
+AForceInTStat       ; 4 = settled in target, 2 = still ramping
 ```
 
 ## See also

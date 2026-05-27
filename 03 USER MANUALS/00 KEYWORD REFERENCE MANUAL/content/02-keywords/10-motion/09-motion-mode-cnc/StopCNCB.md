@@ -38,7 +38,7 @@ Command that stops execution of the CNC motion queue B.
 ## Examples
 
 ```text
-StopCNCB            ; stop CNC motion on queue B
+AStopCNCB            ; stop CNC motion on queue B
 ```
 
 ## See also

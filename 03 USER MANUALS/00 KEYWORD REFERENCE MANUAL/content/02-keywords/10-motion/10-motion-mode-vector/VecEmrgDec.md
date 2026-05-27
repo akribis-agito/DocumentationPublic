@@ -36,8 +36,8 @@ Emergency vector deceleration applied to all member axes on a stop or fault.
 ## Examples
 
 ```text
-VecEmrgDec=100000   ; emergency vector deceleration (user units/s^2, default)
-VecEmrgDec?         ; read the current value
+AVecEmrgDec=100000   ; emergency vector deceleration (user units/s^2, default)
+AVecEmrgDec         ; read the current value
 ```
 
 ## See also

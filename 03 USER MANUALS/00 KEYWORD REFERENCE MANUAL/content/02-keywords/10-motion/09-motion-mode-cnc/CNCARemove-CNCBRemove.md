@@ -19,7 +19,7 @@ Function that removes the last segment from the CNC FIFO A (or B).
 ## Examples
 
 ```text
-CNCARemove          ; remove the last segment from FIFO A
+ACNCARemove          ; remove the last segment from FIFO A
 ```
 
 ## See also

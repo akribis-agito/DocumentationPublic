@@ -32,9 +32,9 @@ For an analog SIN/COS encoder, also refer to [SinCosSetup](SinCosSetup-AuxSinCos
 ## Examples
 
 ```text
-EncType=1           ; incremental TTL encoder
-EncType=4           ; SIN/COS encoder
-EncType=6           ; BiSS-C absolute encoder
+AEncType=1           ; incremental TTL encoder
+AEncType=4           ; SIN/COS encoder
+AEncType=6           ; BiSS-C absolute encoder
 ```
 
 ## See also

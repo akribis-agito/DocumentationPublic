@@ -36,7 +36,7 @@ Reports the free space remaining in a thread's program-call stack.
 ## Examples
 
 ```text
-ProgCallDepth[1]?   ; free call-stack slots for thread 1
+AProgCallDepth[1]   ; free call-stack slots for thread 1
 ```
 
 ## See also

@@ -38,7 +38,7 @@ Read-only seconds elapsed since power-on.
 ## Examples
 
 ```text
-Time?               ; seconds since power-on
+ATime               ; seconds since power-on
 ```
 
 ## See also

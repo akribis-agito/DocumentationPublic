@@ -43,8 +43,8 @@ Selects whether PCSuite R/L measurements are reported as phase (0) or line-to-li
 ## Examples
 
 ```text
-RLType=1            ; report line-to-line data (default)
-RLType=0            ; report phase data
+ARLType=1            ; report line-to-line data (default)
+ARLType=0            ; report phase data
 ```
 
 ## See also

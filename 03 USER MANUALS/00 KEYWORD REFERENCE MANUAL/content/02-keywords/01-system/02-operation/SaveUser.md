@@ -13,7 +13,7 @@ Saves current parameters to a dedicated user area in flash, separate from defaul
 ## Examples
 
 ```text
-SaveUser            ; save the current parameters to the user area (motor must be off)
+ASaveUser            ; save the current parameters to the user area (motor must be off)
 ```
 
 ## See also

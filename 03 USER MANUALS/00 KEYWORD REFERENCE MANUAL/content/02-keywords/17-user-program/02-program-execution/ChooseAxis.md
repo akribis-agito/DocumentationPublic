@@ -38,9 +38,9 @@ It works alongside the thread/task model exposed by [ProgTask](ProgTask.md), whi
 ## Examples
 
 ```text
-ChooseAxis[1]=0     ; thread 1 operates on axis 0
-ChooseAxis[2]=1     ; thread 2 operates on axis 1
-ChooseAxis[1]?      ; query the axis assigned to thread 1
+AChooseAxis[1]=0     ; thread 1 operates on axis 0
+AChooseAxis[2]=1     ; thread 2 operates on axis 1
+AChooseAxis[1]      ; query the axis assigned to thread 1
 ```
 
 ## See also

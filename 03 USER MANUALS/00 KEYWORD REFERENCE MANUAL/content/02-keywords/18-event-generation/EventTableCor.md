@@ -36,8 +36,8 @@ Read-only array of corrected event positions produced by EventCorrect.
 ## Examples
 
 ```text
-EventTableCor[1]?   ; read the first corrected event position
-EventTableCor[2]?   ; read the second corrected event position
+AEventTableCor[1]   ; read the first corrected event position
+AEventTableCor[2]   ; read the second corrected event position
 ```
 
 ## See also

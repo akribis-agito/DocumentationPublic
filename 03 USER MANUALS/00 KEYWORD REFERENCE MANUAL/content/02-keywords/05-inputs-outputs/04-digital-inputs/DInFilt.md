@@ -38,7 +38,7 @@ Software debounce filter for all digital inputs on an axis.
 ## Examples
 
 ```text
-DInFilt=3           ; require 3 consecutive matching samples
+ADInFilt=3           ; require 3 consecutive matching samples
 ```
 
 ## See also

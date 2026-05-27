@@ -30,9 +30,9 @@ The arrays form a single continuous index space. Indexing is 1-based within each
 ## Examples
 
 ```text
-MapTable[1]=12      ; correction value at the first map point (encoder counts)
-MapTable[1]?        ; query the correction at the first map point
-MapTableB[1]?       ; query the entry that follows MapTable[65536]
+AMapTable[1]=12      ; correction value at the first map point (encoder counts)
+AMapTable[1]        ; query the correction at the first map point
+AMapTableB[1]       ; query the entry that follows MapTable[65536]
 ```
 
 ## See also

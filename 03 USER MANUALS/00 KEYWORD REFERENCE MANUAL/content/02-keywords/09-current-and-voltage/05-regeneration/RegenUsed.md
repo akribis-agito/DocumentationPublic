@@ -36,8 +36,8 @@ Selects whether an external or internal regeneration resistor is used.
 ## Examples
 
 ```text
-RegenUsed=1         ; use the selected regen resistor (default)
-RegenUsed?          ; read the present setting
+ARegenUsed=1         ; use the selected regen resistor (default)
+ARegenUsed          ; read the present setting
 ```
 
 ## See also

@@ -57,7 +57,7 @@ x=-20|black|dashed
 ## Examples
 
 ```text
-AInDB[1]=20         ; ±20 mV deadband on analog input 1
+AAInDB[1]=20         ; ±20 mV deadband on analog input 1
 ```
 
 ## See also

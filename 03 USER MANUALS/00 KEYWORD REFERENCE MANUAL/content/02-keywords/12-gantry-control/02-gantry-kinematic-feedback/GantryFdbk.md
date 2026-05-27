@@ -49,8 +49,8 @@ BGantryFdbk = (APos - BPos - AGantryOffset)
 ## Examples
 
 ```text
-AGantryFdbk?        ; read the mean (common) gantry position
-BGantryFdbk?        ; read the differential (yaw) gantry position
+AGantryFdbk        ; read the mean (common) gantry position
+BGantryFdbk        ; read the differential (yaw) gantry position
 ```
 
 ## See also

@@ -44,10 +44,10 @@ Set those three, then execute `RemoteCANSend` to perform the remote write. It ca
 ## Examples
 
 ```text
-RemoteCANAdd=128    ; target node
-RemoteCANCCC=100    ; parameter to write on the remote node
-RemoteCANVal=5000   ; value
-RemoteCANSend=1     ; send the write
+ARemoteCANAdd=128    ; target node
+ARemoteCANCCC=100    ; parameter to write on the remote node
+ARemoteCANVal=5000   ; value
+ARemoteCANSend=1     ; send the write
 ```
 
 ## See also

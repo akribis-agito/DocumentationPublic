@@ -20,8 +20,8 @@ Index of the master axis whose current reference a slave drive copies.
 ## Examples
 
 ```text
-CurrCmdSrc=3        ; follow a master axis (slave drive)
-CurrRefMaster=0     ; copy current reference from axis A
+ACurrCmdSrc=3        ; follow a master axis (slave drive)
+ACurrRefMaster=0     ; copy current reference from axis A
 ```
 
 ## See also

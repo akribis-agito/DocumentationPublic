@@ -38,7 +38,7 @@ See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all r
 ## Examples
 
 ```text
-FIFOPushLinV=500000 ; push a constant-velocity segment
+AFIFOPushLinV=500000 ; push a constant-velocity segment
 ```
 
 ## See also

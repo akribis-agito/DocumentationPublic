@@ -36,7 +36,7 @@ Read-only raw Hall-sensor state, reported as a 3-bit value (bits CBA).
 ## Examples
 
 ```text
-HallsValue?         ; query the current raw Hall state (1-6)
+AHallsValue         ; query the current raw Hall state (1-6)
 ```
 
 ## See also

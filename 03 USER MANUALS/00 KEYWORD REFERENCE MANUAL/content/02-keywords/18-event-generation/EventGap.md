@@ -36,8 +36,8 @@ Position spacing between successive events in by-gap mode.
 ## Examples
 
 ```text
-EventGap=2000       ; generate an event every 2000 user units
-EventGap?           ; query the configured gap
+AEventGap=2000       ; generate an event every 2000 user units
+AEventGap           ; query the configured gap
 ```
 
 ## See also

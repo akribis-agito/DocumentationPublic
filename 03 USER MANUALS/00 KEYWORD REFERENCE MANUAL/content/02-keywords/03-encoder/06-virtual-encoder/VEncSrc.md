@@ -38,7 +38,7 @@ Selects the source signal used to generate the virtual encoder position.
 ## Examples
 
 ```text
-VEncSrc?            ; query the configured virtual encoder source
+AVEncSrc            ; query the configured virtual encoder source
 ```
 
 ## See also

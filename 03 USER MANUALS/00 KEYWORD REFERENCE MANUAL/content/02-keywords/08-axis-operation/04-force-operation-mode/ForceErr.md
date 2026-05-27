@@ -42,7 +42,7 @@ $$
 ## Examples
 
 ```text
-ForceErr?           ; read the current force error
+AForceErr           ; read the current force error
 ```
 
 ## See also

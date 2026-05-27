@@ -36,7 +36,7 @@ Command that transfers the logged data buffer to the host.
 ## Examples
 
 ```text
-LoggerUpload        ; stream the logged data buffer to the host
+ALoggerUpload        ; stream the logged data buffer to the host
 ```
 
 ## See also

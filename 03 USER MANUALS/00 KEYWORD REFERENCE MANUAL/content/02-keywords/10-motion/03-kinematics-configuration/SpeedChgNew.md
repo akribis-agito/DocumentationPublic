@@ -36,8 +36,8 @@ New velocity applied when the axis reaches `SpeedChgPos` during a speed change o
 ## Examples
 
 ```text
-SpeedChgNew=200000  ; speed to switch to (user units/s)
-SpeedChgNew?        ; query current value
+ASpeedChgNew=200000  ; speed to switch to (user units/s)
+ASpeedChgNew        ; query current value
 ```
 
 ## See also

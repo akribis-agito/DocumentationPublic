@@ -44,8 +44,8 @@ Trigger direction for the position-feedback check to enter position mode.
 ## Examples
 
 ```text
-PosPosTh=100000     ; position threshold
-PosPosFlag=2        ; switch to position mode when Pos > PosPosTh
+APosPosTh=100000     ; position threshold
+APosPosFlag=2        ; switch to position mode when Pos > PosPosTh
 ```
 
 ## See also

@@ -36,7 +36,7 @@ Starts motion on the axis according to the current motion mode and target settin
 ## Examples
 
 ```text
-Begin               ; start motion with the current mode and targets
+ABegin               ; start motion with the current mode and targets
 ```
 
 ## See also

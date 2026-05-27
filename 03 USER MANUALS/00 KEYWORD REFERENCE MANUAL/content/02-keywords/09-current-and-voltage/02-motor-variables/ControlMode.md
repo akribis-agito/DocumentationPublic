@@ -49,9 +49,9 @@ The bits are 0-based. Each bit defaults to 0 (reset).
 ## Examples
 
 ```text
-ControlMode=2       ; bit 1 set: abc-domain (phase) current control
-ControlMode=1       ; bit 0 set: allow line-to-line voltage up to 0.866*VBus
-ControlMode?        ; read the current configuration
+AControlMode=2       ; bit 1 set: abc-domain (phase) current control
+AControlMode=1       ; bit 0 set: allow line-to-line voltage up to 0.866*VBus
+AControlMode        ; read the current configuration
 ```
 
 ## See also

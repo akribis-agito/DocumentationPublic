@@ -34,8 +34,8 @@ Per-sample position offset magnitude applied during a reference offset correctio
 ## Examples
 
 ```text
-RefOffsetStep=10    ; offset applied per servo sample (user units)
-RefOffsetStep?      ; query current value
+ARefOffsetStep=10    ; offset applied per servo sample (user units)
+ARefOffsetStep      ; query current value
 ```
 
 ## See also

@@ -38,8 +38,8 @@ Unlike writing directly to [MotorOn](MotorOn.md), this command reports why an en
 ## Examples
 
 ```text
-CanMotorOn          ; attempt to enable the motor
-CanMotorOnRes?      ; read the result of the attempt
+ACanMotorOn          ; attempt to enable the motor
+ACanMotorOnRes      ; read the result of the attempt
 ```
 
 ## See also

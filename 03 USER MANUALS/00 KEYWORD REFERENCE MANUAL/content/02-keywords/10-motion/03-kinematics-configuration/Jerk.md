@@ -36,8 +36,8 @@ Rate of change of acceleration; a finite value produces an S-curve motion profil
 ## Examples
 
 ```text
-Jerk=5              ; jerk setting (S-curve smoothing)
-Jerk?               ; query current value
+AJerk=5              ; jerk setting (S-curve smoothing)
+AJerk               ; query current value
 ```
 
 ## See also

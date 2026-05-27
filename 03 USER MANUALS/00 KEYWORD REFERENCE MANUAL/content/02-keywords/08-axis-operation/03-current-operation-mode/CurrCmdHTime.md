@@ -47,8 +47,8 @@ Holding time for each current-command table entry.
 ## Examples
 
 ```text
-CurrCmdHTime[1]=500 ; hold first entry for 500 ms
-CurrCmdHTime[2]=0   ; exit current mode after the second entry
+ACurrCmdHTime[1]=500 ; hold first entry for 500 ms
+ACurrCmdHTime[2]=0   ; exit current mode after the second entry
 ```
 
 ## See also

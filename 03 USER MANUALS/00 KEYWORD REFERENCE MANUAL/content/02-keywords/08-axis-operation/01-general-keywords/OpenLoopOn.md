@@ -44,9 +44,9 @@ Opens the control loop at a chosen point (none, current, or voltage).
 ## Examples
 
 ```text
-OpenLoopOn=1        ; current open loop, drive with OpenLoopCurr
-OpenLoopOn=2        ; voltage open loop, drive with OpenLoopVolt
-OpenLoopOn=0        ; close all loops (normal operation)
+AOpenLoopOn=1        ; current open loop, drive with OpenLoopCurr
+AOpenLoopOn=2        ; voltage open loop, drive with OpenLoopVolt
+AOpenLoopOn=0        ; close all loops (normal operation)
 ```
 
 ## See also

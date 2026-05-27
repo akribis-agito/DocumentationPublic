@@ -14,7 +14,7 @@ After selecting the type, the segment's parameters are supplied with [CNCAPushPa
 ## Examples
 
 ```text
-CNCAPushType=1      ; push a new segment of the selected type into FIFO A
+ACNCAPushType=1      ; push a new segment of the selected type into FIFO A
 ```
 
 ## See also

@@ -48,10 +48,10 @@ $$
 ## Examples
 
 ```text
-StepBits=2          ; full-stepping (4 steps per electrical cycle)
-StepBits=3          ; half-stepping (8 steps per electrical cycle)
-StepBits=8          ; microstepping (256 steps per electrical cycle)
-StepBits?           ; query the current setting
+AStepBits=2          ; full-stepping (4 steps per electrical cycle)
+AStepBits=3          ; half-stepping (8 steps per electrical cycle)
+AStepBits=8          ; microstepping (256 steps per electrical cycle)
+AStepBits           ; query the current setting
 ```
 
 ## See also

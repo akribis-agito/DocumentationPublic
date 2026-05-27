@@ -36,7 +36,7 @@ Maximum allowed power-stage temperature (°C); exceeding it triggers protection.
 ## Examples
 
 ```text
-MaxPwrTemp=65       ; power-stage over-temperature limit (°C)
+AMaxPwrTemp=65       ; power-stage over-temperature limit (°C)
 ```
 
 ## See also

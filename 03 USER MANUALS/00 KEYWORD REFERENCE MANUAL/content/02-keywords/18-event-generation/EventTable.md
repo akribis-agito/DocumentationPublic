@@ -36,9 +36,9 @@ Array of absolute positions at which event output pulses are generated.
 ## Examples
 
 ```text
-EventTable[1]=1000      ; first table position (user units)
-EventTable[2]=3000      ; second table position
-EventTable[1]?          ; query the first table entry
+AEventTable[1]=1000      ; first table position (user units)
+AEventTable[2]=3000      ; second table position
+AEventTable[1]          ; query the first table entry
 ```
 
 ## See also

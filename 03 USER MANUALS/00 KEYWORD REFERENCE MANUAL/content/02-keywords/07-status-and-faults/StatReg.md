@@ -73,7 +73,7 @@ Recommended checks when a warning status is set:
 ## Examples
 
 ```text
-StatReg?            ; read the full axis status bitfield
+AStatReg            ; read the full axis status bitfield
 ```
 
 ## See also

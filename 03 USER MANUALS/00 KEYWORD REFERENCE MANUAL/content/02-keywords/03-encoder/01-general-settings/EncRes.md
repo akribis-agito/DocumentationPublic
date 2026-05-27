@@ -45,8 +45,8 @@ Together with the pole pairs ([PolePrs](../../02-motor-and-amplifier/PolePrs.md)
 ## Examples
 
 ```text
-EncRes=10000        ; 10000 counts per revolution (rotary) or per pitch (linear)
-EncRes?             ; query the configured encoder resolution
+AEncRes=10000        ; 10000 counts per revolution (rotary) or per pitch (linear)
+AEncRes             ; query the configured encoder resolution
 ```
 
 ## See also

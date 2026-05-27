@@ -38,8 +38,8 @@ Selects the vector motion geometry (0 = linear, 1 = arc).
 ## Examples
 
 ```text
-VecType=0           ; linear vector (default)
-VecType=1           ; arc vector
+AVecType=0           ; linear vector (default)
+AVecType=1           ; arc vector
 ```
 
 ## See also

@@ -54,8 +54,8 @@ The table shows the modulo operation output for a `ModRev` of 3000:
 | -40 | 3000 | 2960 |
 
 ```text
-ModRev=3000         ; wrap feedback to [0, 2999]
-ModRev=0            ; disable modulo mode
+AModRev=3000         ; wrap feedback to [0, 2999]
+AModRev=0            ; disable modulo mode
 ```
 
 ## See also

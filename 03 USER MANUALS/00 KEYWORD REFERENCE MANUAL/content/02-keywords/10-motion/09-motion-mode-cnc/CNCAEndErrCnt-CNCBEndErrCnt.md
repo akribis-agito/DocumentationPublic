@@ -14,7 +14,7 @@ It works with [CNCAEndSegMod/CNCBEndSegMod](CNCAEndSegMod-CNCBEndSegMod.md), whi
 ## Examples
 
 ```text
-CNCAEndErrCnt=1000  ; max end-of-segment position error before fault
+ACNCAEndErrCnt=1000  ; max end-of-segment position error before fault
 ```
 
 ## See also

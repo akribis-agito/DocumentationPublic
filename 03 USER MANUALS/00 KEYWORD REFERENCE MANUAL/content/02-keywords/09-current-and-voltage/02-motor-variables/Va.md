@@ -36,7 +36,7 @@ Read-only phase A voltage reference for space-vector modulation (PWM-count fract
 ## Examples
 
 ```text
-Va?                 ; read phase A SVM voltage reference
+AVa                 ; read phase A SVM voltage reference
 ```
 
 ## See also

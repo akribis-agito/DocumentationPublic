@@ -12,7 +12,7 @@ Records the feedback position of the most recent logged digital event.
 ## Examples
 
 ```text
-LockVal?            ; read the position of the most recent event
+ALockVal            ; read the position of the most recent event
 ```
 
 ## See also

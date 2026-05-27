@@ -12,7 +12,7 @@ Enables the position filter on the CNC queue A (or B) reference output.
 ## Examples
 
 ```text
-CNCAPosFOn=1        ; enable the CNC position filter
+ACNCAPosFOn=1        ; enable the CNC position filter
 ```
 
 ## See also

@@ -41,8 +41,8 @@ Command that overrides trigger detection and forces recording to proceed.
 ## Examples
 
 ```text
-RecTrigForce[1]     ; force-trigger the first scope
-RecTrigForce[2]     ; force-trigger the second scope
+ARecTrigForce[1]     ; force-trigger the first scope
+ARecTrigForce[2]     ; force-trigger the second scope
 ```
 
 ## See also

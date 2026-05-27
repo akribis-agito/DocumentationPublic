@@ -68,8 +68,8 @@ The array holds the following elements (1-indexed):
 ## Examples
 
 ```text
-ComtStatus[1]?      ; query the phasing status
-ComtStatus[2]?      ; successful consecutive steps ("jump to zero" mode)
+AComtStatus[1]      ; query the phasing status
+AComtStatus[2]      ; successful consecutive steps ("jump to zero" mode)
 ```
 
 ## See also

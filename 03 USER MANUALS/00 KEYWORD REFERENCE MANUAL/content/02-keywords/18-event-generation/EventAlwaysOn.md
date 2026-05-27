@@ -38,9 +38,9 @@ It is an axis-related parameter saved to flash and can be changed at any time.
 ## Examples
 
 ```text
-EventAlwaysOn=1     ; force the event output permanently active
-EventAlwaysOn=0     ; return to normal position-based generation
-EventAlwaysOn?      ; query the current setting
+AEventAlwaysOn=1     ; force the event output permanently active
+AEventAlwaysOn=0     ; return to normal position-based generation
+AEventAlwaysOn      ; query the current setting
 ```
 
 ## See also

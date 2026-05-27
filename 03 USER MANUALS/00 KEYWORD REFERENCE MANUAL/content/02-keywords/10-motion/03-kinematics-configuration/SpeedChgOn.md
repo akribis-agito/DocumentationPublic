@@ -36,9 +36,9 @@ Enables the speed-change-on-the-fly feature for the axis.
 ## Examples
 
 ```text
-SpeedChgOn=1        ; enable speed change on the fly
-SpeedChgOn=0        ; disable
-SpeedChgOn?         ; query state
+ASpeedChgOn=1        ; enable speed change on the fly
+ASpeedChgOn=0        ; disable
+ASpeedChgOn         ; query state
 ```
 
 ## See also

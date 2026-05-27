@@ -21,8 +21,8 @@ Sets the counting direction of the encoder feedback.
 ## Examples
 
 ```text
-EncDir=0            ; count in the encoder's native direction
-EncDir=1            ; reverse the counting direction
+AEncDir=0            ; count in the encoder's native direction
+AEncDir=1            ; reverse the counting direction
 ```
 
 ## See also

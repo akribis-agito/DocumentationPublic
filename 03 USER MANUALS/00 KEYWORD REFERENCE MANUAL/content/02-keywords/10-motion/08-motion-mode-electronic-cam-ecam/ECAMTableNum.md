@@ -36,8 +36,8 @@ Selects the active ECAM cam pattern / look-up table (1-10).
 ## Examples
 
 ```text
-ECAMTableNum=1      ; select cam pattern 1 (default)
-ECAMTableNum?       ; read the active cam pattern
+AECAMTableNum=1      ; select cam pattern 1 (default)
+AECAMTableNum       ; read the active cam pattern
 ```
 
 ## See also

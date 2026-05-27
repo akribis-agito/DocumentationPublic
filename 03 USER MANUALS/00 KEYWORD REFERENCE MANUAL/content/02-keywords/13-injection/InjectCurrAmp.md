@@ -36,8 +36,8 @@ Amplitude of current-command injection, in mA.
 ## Examples
 
 ```text
-InjectCurrAmp=2133      ; 2133 mA injection amplitude (default)
-InjectCurrAmp?          ; query the current injection amplitude
+AInjectCurrAmp=2133      ; 2133 mA injection amplitude (default)
+AInjectCurrAmp          ; query the current injection amplitude
 ```
 
 ## See also

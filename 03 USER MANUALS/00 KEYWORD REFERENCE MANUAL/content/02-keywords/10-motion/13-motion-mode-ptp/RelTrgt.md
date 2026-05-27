@@ -36,8 +36,8 @@ Relative target distance (user units) for the next point-to-point move.
 ## Examples
 
 ```text
-RelTrgt=5000        ; move 5000 user units from the current position
-RelTrgt=-5000       ; move 5000 user units in the negative direction
+ARelTrgt=5000        ; move 5000 user units from the current position
+ARelTrgt=-5000       ; move 5000 user units in the negative direction
 ```
 
 ## See also

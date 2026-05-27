@@ -12,7 +12,7 @@ Records the latest position at which the encoder index was detected.
 ## Examples
 
 ```text
-IndexPos?           ; read the position of the last detected index
+AIndexPos           ; read the position of the last detected index
 ```
 
 ## See also

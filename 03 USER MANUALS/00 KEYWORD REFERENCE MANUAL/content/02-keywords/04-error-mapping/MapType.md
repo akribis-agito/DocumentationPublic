@@ -38,9 +38,9 @@ The geometry of the map is defined by [MapStartPos](MapStartPos.md), [MapPosGap]
 ## Examples
 
 ```text
-MapType=1           ; enable 1D error mapping
-MapType=0           ; disable error mapping
-MapType?            ; query the active mapping mode
+AMapType=1           ; enable 1D error mapping
+AMapType=0           ; disable error mapping
+AMapType            ; query the active mapping mode
 ```
 
 ## See also

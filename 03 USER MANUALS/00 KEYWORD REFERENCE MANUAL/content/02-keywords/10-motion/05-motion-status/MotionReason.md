@@ -84,7 +84,7 @@ Records why the last motion stopped, encoded as a numeric reason code.
 ## Examples
 
 ```text
-MotionReason?       ; read why the last motion stopped
+AMotionReason       ; read why the last motion stopped
 ```
 
 If the motion was ended by an abort command, but during deceleration the forward software limit was exceeded, and then the limit switch was encountered, `MotionReason` will have a value of `2`, indicating the original reason to stop and ignoring any following events that could have stopped the motion.

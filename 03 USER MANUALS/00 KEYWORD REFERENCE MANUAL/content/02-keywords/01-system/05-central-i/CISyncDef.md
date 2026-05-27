@@ -38,7 +38,7 @@ Per-axis array defining the parameters exchanged synchronously each control cycl
 ## Examples
 
 ```text
-CISyncDef[1]?       ; read the first synchronous-data definition element
+ACISyncDef[1]       ; read the first synchronous-data definition element
 ```
 
 ## See also

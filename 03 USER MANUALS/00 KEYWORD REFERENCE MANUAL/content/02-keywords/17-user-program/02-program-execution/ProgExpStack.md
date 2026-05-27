@@ -36,7 +36,7 @@ Reads the top value of the numeric (expression) stack without popping it.
 ## Examples
 
 ```text
-ProgExpStack?       ; peek at the top value of the numeric stack (does not pop)
+AProgExpStack       ; peek at the top value of the numeric stack (does not pop)
 ```
 
 ## See also

@@ -36,8 +36,8 @@ Enables or disables handling of an individual user program event.
 ## Examples
 
 ```text
-ProgEventEn[1]=1    ; enable handling of event 1
-ProgEventEn[1]=0    ; disable event 1 and clear any pending occurrence
+AProgEventEn[1]=1    ; enable handling of event 1
+AProgEventEn[1]=0    ; disable event 1 and clear any pending occurrence
 ```
 
 ## See also

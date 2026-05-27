@@ -40,8 +40,8 @@ All array elements default to 0 (no compensation). Each index represents the cor
 ## Examples
 
 ```text
-UPMVelTable[54]=300 ; compensation applied at commutation angle 54 degrees
-UPMVelTable[1]=0    ; no compensation at the first angle entry
+AUPMVelTable[54]=300 ; compensation applied at commutation angle 54 degrees
+AUPMVelTable[1]=0    ; no compensation at the first angle entry
 ```
 
 ## See also

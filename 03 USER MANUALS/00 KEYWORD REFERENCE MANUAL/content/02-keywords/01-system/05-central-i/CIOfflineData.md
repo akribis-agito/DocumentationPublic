@@ -38,7 +38,7 @@ Per-axis array holding the payload sent during a Central-i offline (simulation) 
 ## Examples
 
 ```text
-CIOfflineData[1]=0  ; set the first element of the offline payload
+ACIOfflineData[1]=0  ; set the first element of the offline payload
 ```
 
 ## See also

@@ -36,8 +36,8 @@ Pulse duration for pulse injection, in milliseconds.
 ## Examples
 
 ```text
-InjectTimeOn=10     ; 10 ms pulse
-InjectTimeOn?       ; query the current pulse duration
+AInjectTimeOn=10     ; 10 ms pulse
+AInjectTimeOn       ; query the current pulse duration
 ```
 
 ## See also

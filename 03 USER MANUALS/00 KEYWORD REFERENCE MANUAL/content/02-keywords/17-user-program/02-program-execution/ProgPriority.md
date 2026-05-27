@@ -36,7 +36,7 @@ Sets the scheduling priority of a user program task.
 ## Examples
 
 ```text
-ProgPriority[1]=5   ; set task 1 to priority 5 (range 1-10)
+AProgPriority[1]=5   ; set task 1 to priority 5 (range 1-10)
 ```
 
 ## See also

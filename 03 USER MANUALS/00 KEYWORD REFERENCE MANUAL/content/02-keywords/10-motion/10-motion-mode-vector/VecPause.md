@@ -38,8 +38,8 @@ It is not saved to flash and takes its default value `0` at power-up.
 ## Examples
 
 ```text
-VecPause=1          ; pause vector motion (decelerate to a stop)
-VecPause=0          ; resume vector motion (accelerate back to VecSpeed)
+AVecPause=1          ; pause vector motion (decelerate to a stop)
+AVecPause=0          ; resume vector motion (accelerate back to VecSpeed)
 ```
 
 ## See also

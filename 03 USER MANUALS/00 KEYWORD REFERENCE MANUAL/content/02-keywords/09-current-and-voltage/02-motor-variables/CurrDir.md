@@ -43,8 +43,8 @@ Flips the direction of motor excitation (0 = normal, 1 = flipped).
 ## Examples
 
 ```text
-CurrDir=0           ; normal excitation direction
-CurrDir=1           ; flipped excitation direction
+ACurrDir=0           ; normal excitation direction
+ACurrDir=1           ; flipped excitation direction
 ```
 
 ## See also

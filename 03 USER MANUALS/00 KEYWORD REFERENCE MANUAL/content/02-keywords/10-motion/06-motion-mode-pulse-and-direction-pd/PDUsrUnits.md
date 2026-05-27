@@ -44,8 +44,8 @@ $$
 ## Examples
 
 ```text
-PDUsrUnits=65536    ; 1 count per user unit (default)
-PDUsrUnits?         ; read the current scale
+APDUsrUnits=65536    ; 1 count per user unit (default)
+APDUsrUnits         ; read the current scale
 ```
 
 ## See also

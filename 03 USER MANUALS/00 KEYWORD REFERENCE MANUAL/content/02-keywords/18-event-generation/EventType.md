@@ -46,10 +46,10 @@ Events are pulses on a designated output generated when the actual feedback posi
 ## Examples
 
 ```text
-EventType=0         ; single event at EventBegPos
-EventType=1         ; event by gap
-EventType=2         ; events by table
-EventType?          ; query the current compare scheme
+AEventType=0         ; single event at EventBegPos
+AEventType=1         ; event by gap
+AEventType=2         ; events by table
+AEventType          ; query the current compare scheme
 ```
 
 ## See also

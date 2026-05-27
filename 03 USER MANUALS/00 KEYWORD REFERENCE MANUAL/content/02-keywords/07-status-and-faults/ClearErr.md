@@ -38,7 +38,7 @@ Command that clears the controller error log (ErrLog).
 ## Examples
 
 ```text
-ClearErr            ; clear all entries from the error log
+AClearErr            ; clear all entries from the error log
 ```
 
 ## See also

@@ -14,7 +14,7 @@ To push a complete segment (type and parameters) in a single message over Ethern
 ## Examples
 
 ```text
-CNCAPushParam=1000  ; push one segment parameter into the FIFO
+ACNCAPushParam=1000  ; push one segment parameter into the FIFO
 ```
 
 ## See also

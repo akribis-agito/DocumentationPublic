@@ -30,8 +30,8 @@ $$
 ## Examples
 
 ```text
-PDFiltFact=64       ; no filtering (PosRef follows PDPos directly)
-PDFiltFact=1        ; slowest first-order filter
+APDFiltFact=64       ; no filtering (PosRef follows PDPos directly)
+APDFiltFact=1        ; slowest first-order filter
 ```
 
 ## See also

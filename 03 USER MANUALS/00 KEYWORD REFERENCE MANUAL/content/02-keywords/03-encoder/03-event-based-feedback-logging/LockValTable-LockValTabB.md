@@ -23,7 +23,7 @@ History arrays storing the feedback position of each logged digital event.
 When an event triggers feedback logging and `LockCntr` reaches 71000, `LockValTabB[6000]` is used to store the updated `LockVal`.
 
 ```text
-LockValTable[1]?        ; read the position of the first logged event
+ALockValTable[1]        ; read the position of the first logged event
 ```
 
 ## See also

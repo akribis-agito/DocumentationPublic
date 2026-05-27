@@ -36,11 +36,11 @@ Highest position for which events are generated in by-gap mode.
 ## Examples
 
 ```text
-EventType=2         ; event generation by gap
-EventBegPos=1000
-EventGap=2000
-EventEndPos=8000
-EventOn=1           ; set this while the axis is at a position smaller than EventBegPos
+AEventType=2         ; event generation by gap
+AEventBegPos=1000
+AEventGap=2000
+AEventEndPos=8000
+AEventOn=1           ; set this while the axis is at a position smaller than EventBegPos
                     ; to prevent unexpected behavior
 ```
 

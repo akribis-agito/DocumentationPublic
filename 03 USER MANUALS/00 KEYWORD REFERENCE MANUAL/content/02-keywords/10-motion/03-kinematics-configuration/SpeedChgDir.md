@@ -36,9 +36,9 @@ Selects the direction in which the speed-change-on-the-fly trigger is active.
 ## Examples
 
 ```text
-SpeedChgDir=0       ; trigger active in one direction
-SpeedChgDir=1       ; trigger active in the other direction
-SpeedChgDir?        ; query current value
+ASpeedChgDir=0       ; trigger active in one direction
+ASpeedChgDir=1       ; trigger active in the other direction
+ASpeedChgDir        ; query current value
 ```
 
 ## See also

@@ -36,7 +36,7 @@ Halts the currently executing user program task.
 ## Examples
 
 ```text
-ProgHaltThis        ; halt the task that issues this command
+AProgHaltThis        ; halt the task that issues this command
 ```
 
 ## See also

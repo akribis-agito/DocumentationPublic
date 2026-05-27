@@ -38,7 +38,7 @@ Per-axis array configuring the physical and protocol parameters of a Central-i p
 ## Examples
 
 ```text
-CILinkConfig[1]?    ; read the first link-configuration element
+ACILinkConfig[1]    ; read the first link-configuration element
 ```
 
 ## See also

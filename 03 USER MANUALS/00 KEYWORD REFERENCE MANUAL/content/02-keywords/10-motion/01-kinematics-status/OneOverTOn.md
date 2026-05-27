@@ -36,8 +36,8 @@ Enables or disables the 1/T velocity measurement reported as Vel[4].
 ## Examples
 
 ```text
-OneOverTOn=1        ; enable 1/T velocity measurement
-OneOverTOn=0        ; disable (Vel[4] reports 0)
+AOneOverTOn=1        ; enable 1/T velocity measurement
+AOneOverTOn=0        ; disable (Vel[4] reports 0)
 ```
 
 ## See also

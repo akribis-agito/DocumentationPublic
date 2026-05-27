@@ -61,8 +61,8 @@ $$
 The plot above shows an example of MotionSamples. Since MotionSamples is in controller cycles, multiplication by sampling time (here, it is $T_{s} = 61.03515\mu s$) is needed to get the time in SI unit.
 
 ```text
-MotionSamples[1]?   ; motion profile time of the last move (controller cycles)
-MotionSamples[3]?   ; total time until settled for at least InTargetTime
+AMotionSamples[1]   ; motion profile time of the last move (controller cycles)
+AMotionSamples[3]   ; total time until settled for at least InTargetTime
 ```
 
 ## See also

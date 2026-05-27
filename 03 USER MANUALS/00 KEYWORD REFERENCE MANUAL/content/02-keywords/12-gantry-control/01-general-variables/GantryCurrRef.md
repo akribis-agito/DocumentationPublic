@@ -36,7 +36,7 @@ Read-only current (torque) reference of the gantry yaw correction.
 ## Examples
 
 ```text
-AGantryCurrRef?     ; read the gantry yaw current reference
+AGantryCurrRef     ; read the gantry yaw current reference
 ```
 
 ## See also

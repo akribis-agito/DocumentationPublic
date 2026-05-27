@@ -36,9 +36,9 @@ Enables acceleration shaping to reduce vibration via a shaped acceleration curve
 ## Examples
 
 ```text
-AccShapeOn=1        ; enable acceleration shaping
-AccShapeOn=0        ; disable acceleration shaping
-AccShapeOn?         ; query state
+AAccShapeOn=1        ; enable acceleration shaping
+AAccShapeOn=0        ; disable acceleration shaping
+AAccShapeOn         ; query state
 ```
 
 ## See also

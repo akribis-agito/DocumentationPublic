@@ -38,7 +38,7 @@ It is saved to flash and cannot be modified while in motion.
 ## Examples
 
 ```text
-VecArcCenter=50000  ; this axis's coordinate of the arc center (user units)
+AVecArcCenter=50000  ; this axis's coordinate of the arc center (user units)
 ```
 
 ## See also

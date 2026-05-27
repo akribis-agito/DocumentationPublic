@@ -12,8 +12,8 @@ Sets the maximum sample count of the continuous-time recording buffer per channe
 ## Examples
 
 ```text
-RecCTMaxSize[1]=16500   ; allocate up to 16500 samples on the first channel
-RecCTMaxSize[1]?        ; query the configured buffer size
+ARecCTMaxSize[1]=16500   ; allocate up to 16500 samples on the first channel
+ARecCTMaxSize[1]        ; query the configured buffer size
 ```
 
 ## See also

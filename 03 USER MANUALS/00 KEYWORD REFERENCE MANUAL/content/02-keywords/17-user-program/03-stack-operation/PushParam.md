@@ -37,7 +37,7 @@ Pushes a parameter's value onto the numeric stack of the current thread.
 
 ```text
 ; Push a parameter's value onto the stack (CAN code emitted by the compiler)
-PushParam=<complex CAN code of source parameter>
+APushParam=<complex CAN code of source parameter>
 ```
 
 ## See also

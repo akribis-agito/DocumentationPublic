@@ -38,7 +38,7 @@ It is a read-only, axis-scoped status variable that is not saved to flash.
 ## Examples
 
 ```text
-PosBeforeMap?       ; read the uncorrected feedback position
+APosBeforeMap       ; read the uncorrected feedback position
 ```
 
 ## See also

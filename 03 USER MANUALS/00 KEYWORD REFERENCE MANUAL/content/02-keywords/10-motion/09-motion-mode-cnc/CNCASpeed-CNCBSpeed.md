@@ -12,7 +12,7 @@ Desired vector speed along the CNC path for the active segment.
 ## Examples
 
 ```text
-CNCASpeed?          ; read the desired vector speed of the active segment
+ACNCASpeed          ; read the desired vector speed of the active segment
 ```
 
 ## See also

@@ -36,7 +36,7 @@ Ratio between feedback encoder counts and the quadrature pulses emitted on the e
 ## Examples
 
 ```text
-EmulRat=4           ; one quadrature step per 4 feedback counts
+AEmulRat=4           ; one quadrature step per 4 feedback counts
 ```
 
 ## See also

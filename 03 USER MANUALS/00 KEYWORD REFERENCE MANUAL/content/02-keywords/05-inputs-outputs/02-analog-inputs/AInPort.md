@@ -41,8 +41,8 @@ Read-only analog-input readings — processed values and raw ADC values.
 ## Examples
 
 ```text
-AInPort[1]?         ; processed reading of analog input 1
-AInPort[5]?         ; raw (post-ADC) reading of analog input 1
+AAInPort[1]         ; processed reading of analog input 1
+AAInPort[5]         ; raw (post-ADC) reading of analog input 1
 ```
 
 ## See also

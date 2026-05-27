@@ -17,7 +17,7 @@ See [Control tuning – Velocity control](../../11-control-tuning/04-velocity-co
 ## Examples
 
 ```text
-CurrRefCtrl?        ; read the loop-side current reference
+ACurrRefCtrl        ; read the loop-side current reference
 ```
 
 ## See also

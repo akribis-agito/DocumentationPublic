@@ -40,8 +40,8 @@ Index of the active ForceCmdVal / ForceCmdHTime table entry.
 ## Examples
 
 ```text
-ForceCmdIndex?      ; read the active table entry
-ForceCmdIndex=3     ; jump to the third entry
+AForceCmdIndex      ; read the active table entry
+AForceCmdIndex=3     ; jump to the third entry
 ```
 
 ## See also

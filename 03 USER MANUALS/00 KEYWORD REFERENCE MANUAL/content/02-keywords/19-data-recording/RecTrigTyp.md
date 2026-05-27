@@ -65,8 +65,8 @@ Each `RecTrigTyp` value selects a different trigger activation logic. The trigge
 ## Examples
 
 ```text
-RecTrigTyp[2]=5     ; trigger 2 (first scope) on rising edge above RecTrigVal
-RecTrigTyp[1]?      ; query the activation type of trigger 1 (first scope)
+ARecTrigTyp[2]=5     ; trigger 2 (first scope) on rising edge above RecTrigVal
+ARecTrigTyp[1]      ; query the activation type of trigger 1 (first scope)
 ```
 
 > **Note:** `RecTrigTyp[2] = 0`, `RecTrigTyp[3] = 0`, `RecTrigsLogic[1] = 1`, `RecTrigsLogic[2] = 1` and `RecTrigsMode[1] = 1` are normally commanded to achieve a single-trigger setting for the first scope. Similar commands can be made for the second scope.

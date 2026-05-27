@@ -46,8 +46,8 @@ The comparison direction is selected by [PosPosFlag](PosPosFlag.md):
 ## Examples
 
 ```text
-PosPosTh=100000     ; position threshold (user units)
-PosPosFlag=1        ; switch when Pos < PosPosTh
+APosPosTh=100000     ; position threshold (user units)
+APosPosFlag=1        ; switch when Pos < PosPosTh
 ```
 
 ## See also

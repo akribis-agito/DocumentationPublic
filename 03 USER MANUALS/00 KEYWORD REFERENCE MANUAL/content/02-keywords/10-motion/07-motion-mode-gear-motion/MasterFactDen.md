@@ -18,7 +18,7 @@ $$
 ## Examples
 
 ```text
-MasterFactDen?      ; read the gear-ratio denominator
+AMasterFactDen      ; read the gear-ratio denominator
 ```
 
 ## See also

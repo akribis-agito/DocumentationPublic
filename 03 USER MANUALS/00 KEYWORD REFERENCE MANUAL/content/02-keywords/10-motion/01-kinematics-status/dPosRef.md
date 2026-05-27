@@ -38,7 +38,7 @@ Velocity reference, the filtered derivative of the position reference PosRef.
 ## Examples
 
 ```text
-dPosRef?            ; read the current velocity reference
+AdPosRef            ; read the current velocity reference
 ```
 
 ## See also

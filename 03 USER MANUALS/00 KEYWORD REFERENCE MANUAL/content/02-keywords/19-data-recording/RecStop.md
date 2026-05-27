@@ -41,8 +41,8 @@ Command that stops recording on the selected scope.
 ## Examples
 
 ```text
-RecStop[1]          ; stop recording on the first scope
-RecStop[2]          ; stop recording on the second scope
+ARecStop[1]          ; stop recording on the first scope
+ARecStop[2]          ; stop recording on the second scope
 ```
 
 ## See also

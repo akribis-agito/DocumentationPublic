@@ -50,8 +50,8 @@ Each array index maps to a logic rail as follows.
 ## Examples
 
 ```text
-DCDC[1]?            ; read the 3.3 V logic rail
-DCDC[2]?            ; read the 15 V logic rail
+ADCDC[1]            ; read the 3.3 V logic rail
+ADCDC[2]            ; read the 15 V logic rail
 ```
 
 ## See also

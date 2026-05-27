@@ -12,7 +12,7 @@ Raw absolute encoder value after bit-masking and direction handling.
 ## Examples
 
 ```text
-EncAbsVal?          ; read the processed raw absolute value
+AEncAbsVal          ; read the processed raw absolute value
 ```
 
 ## See also

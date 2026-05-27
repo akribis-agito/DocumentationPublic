@@ -38,7 +38,7 @@ CAN address used when the controller runs in a daisy-chain topology.
 ## Examples
 
 ```text
-ChainAddress=1      ; assign a chain position, then Save and Reset to apply
+AChainAddress=1      ; assign a chain position, then Save and Reset to apply
 ```
 
 ## See also

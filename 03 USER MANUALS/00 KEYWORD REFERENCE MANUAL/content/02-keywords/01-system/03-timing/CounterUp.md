@@ -38,8 +38,8 @@ Two independent up-counters incremented every controller cycle.
 ## Examples
 
 ```text
-CounterUp[1]?       ; read the first up-counter
-CounterUp[1]=0      ; reset the first up-counter
+ACounterUp[1]       ; read the first up-counter
+ACounterUp[1]=0      ; reset the first up-counter
 ```
 
 ## See also

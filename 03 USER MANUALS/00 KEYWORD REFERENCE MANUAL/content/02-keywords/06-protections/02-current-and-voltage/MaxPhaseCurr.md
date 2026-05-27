@@ -38,7 +38,7 @@ Hard limit on motor phase current; exceeding it disables the axis.
 ## Examples
 
 ```text
-MaxPhaseCurr=50000  ; per-phase over-current trip (mA)
+AMaxPhaseCurr=50000  ; per-phase over-current trip (mA)
 ```
 
 ## See also

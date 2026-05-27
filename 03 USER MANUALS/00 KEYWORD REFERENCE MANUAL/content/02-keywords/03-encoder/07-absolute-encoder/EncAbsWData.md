@@ -36,7 +36,7 @@ Data value to be written to the absolute encoder register on a write transaction
 ## Examples
 
 ```text
-EncAbsWData=200     ; value to write to the addressed register
+AEncAbsWData=200     ; value to write to the addressed register
 ```
 
 ## See also

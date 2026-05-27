@@ -43,8 +43,8 @@ Enables or disables the software-generated virtual encoder for the axis.
 ## Examples
 
 ```text
-VEncOn=1            ; enable the virtual encoder
-VEncOn=0            ; disable the virtual encoder
+AVEncOn=1            ; enable the virtual encoder
+AVEncOn=0            ; disable the virtual encoder
 ```
 
 ## See also

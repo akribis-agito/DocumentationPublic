@@ -36,8 +36,8 @@ Enables capture of the commutation angle at the home position during homing.
 ## Examples
 
 ```text
-HomeComtAngOn=1     ; capture the commutation angle at home during homing
-HomeComtAngOn?      ; 0 = disabled, 1 = enabled
+AHomeComtAngOn=1     ; capture the commutation angle at home during homing
+AHomeComtAngOn      ; 0 = disabled, 1 = enabled
 ```
 
 ## See also

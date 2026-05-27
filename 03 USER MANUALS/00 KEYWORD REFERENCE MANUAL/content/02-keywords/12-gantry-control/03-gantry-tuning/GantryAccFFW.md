@@ -37,7 +37,7 @@ Acceleration feedforward gain for the gantry yaw correction controller.
 
 ```text
 AGantryAccFFW=1000  ; set acceleration feedforward gain
-AGantryAccFFW?      ; read the current gain
+AGantryAccFFW      ; read the current gain
 ```
 
 ## See also

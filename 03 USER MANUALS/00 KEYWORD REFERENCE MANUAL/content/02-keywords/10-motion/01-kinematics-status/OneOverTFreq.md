@@ -43,8 +43,8 @@ A higher `OneOverTFreq` divides the base frequency by a larger power of two, low
 ## Examples
 
 ```text
-OneOverTFreq=4      ; default down-sampling exponent
-OneOverTFreq?       ; read current value
+AOneOverTFreq=4      ; default down-sampling exponent
+AOneOverTFreq       ; read current value
 ```
 
 ## See also

@@ -55,9 +55,9 @@ The time of the error in `ErrLog` is in seconds since power on.
 ## Examples
 
 ```text
-ErrLog[1]?          ; axis + error code of the first logged error
-ErrLog[2]?          ; time (s since power-on) of the first logged error
-ErrLog?             ; read the full log
+AErrLog[1]          ; axis + error code of the first logged error
+AErrLog[2]          ; time (s since power-on) of the first logged error
+AErrLog             ; read the full log
 ```
 
 ## See also

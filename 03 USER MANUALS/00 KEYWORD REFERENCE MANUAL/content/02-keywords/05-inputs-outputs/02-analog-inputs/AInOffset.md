@@ -42,7 +42,7 @@ $$
 ## Examples
 
 ```text
-AInOffset[1]=-50    ; subtract 50 mV of bias from analog input 1
+AAInOffset[1]=-50    ; subtract 50 mV of bias from analog input 1
 ```
 
 ## See also

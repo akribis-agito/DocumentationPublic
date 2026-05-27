@@ -36,7 +36,7 @@ Velocity threshold for motor-stuck detection.
 ## Examples
 
 ```text
-StuckVel=40000      ; stuck if velocity stays below this (user units)
+AStuckVel=40000      ; stuck if velocity stays below this (user units)
 ```
 
 ## See also

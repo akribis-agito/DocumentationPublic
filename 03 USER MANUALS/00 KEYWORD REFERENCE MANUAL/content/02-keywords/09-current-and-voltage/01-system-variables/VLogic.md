@@ -44,7 +44,7 @@ $$
 ## Examples
 
 ```text
-VLogic?             ; read the present 5 V logic voltage (mV)
+AVLogic             ; read the present 5 V logic voltage (mV)
 ```
 
 ## See also

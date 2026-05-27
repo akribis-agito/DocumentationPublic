@@ -38,7 +38,7 @@ See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all r
 ## Examples
 
 ```text
-FIFOPushParA=100000 ; push a constant-acceleration (parabolic) segment
+AFIFOPushParA=100000 ; push a constant-acceleration (parabolic) segment
 ```
 
 ## See also

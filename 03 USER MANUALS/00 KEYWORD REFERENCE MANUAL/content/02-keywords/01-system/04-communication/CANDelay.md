@@ -38,7 +38,7 @@ Delay, in samples, applied to CAN messages.
 ## Examples
 
 ```text
-CANDelay=6          ; delay CAN messages by 6 samples
+ACANDelay=6          ; delay CAN messages by 6 samples
 ```
 
 ## See also

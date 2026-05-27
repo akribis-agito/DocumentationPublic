@@ -36,7 +36,7 @@ Bitwise mask applied to an event's trigger parameter and trigger value.
 ## Examples
 
 ```text
-ProgEventMask[1]=0x0001   ; only bit 0 of the trigger parameter is tested for event 1
+AProgEventMask[1]=0x0001   ; only bit 0 of the trigger parameter is tested for event 1
 ```
 
 ## See also

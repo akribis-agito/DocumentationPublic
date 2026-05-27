@@ -36,7 +36,7 @@ Ramp rate (mA/s) toward each current-command table entry.
 ## Examples
 
 ```text
-CurrCmdSlope[3]=700 ; ramp into entry 3 at 700 mA/s
+ACurrCmdSlope[3]=700 ; ramp into entry 3 at 700 mA/s
 ```
 
 Worked example — if `CurrCmdIndex` = 2, `CurrCmdCntr` = `CurrCmdHTime[2]` (end of the current entry), `CurrRef` = `CurrCmdVal[2]` = 340, `CurrCmdVal[3]` = -500, and `CurrCmdSlope[3]` = 700, then the ramp from 340 mA to -500 mA starts and completes in 1.2 seconds.

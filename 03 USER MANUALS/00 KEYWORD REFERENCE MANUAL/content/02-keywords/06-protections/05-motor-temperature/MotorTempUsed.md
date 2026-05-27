@@ -42,7 +42,7 @@ Selects the motor temperature-sensor type.
 ## Examples
 
 ```text
-MotorTempUsed=1     ; PT100 sensor
+AMotorTempUsed=1     ; PT100 sensor
 ```
 
 ## See also

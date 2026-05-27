@@ -37,7 +37,7 @@ Proportional velocity gain for the gantry yaw correction controller.
 
 ```text
 AGantryVelGain=150  ; set yaw velocity proportional gain
-AGantryVelGain?     ; read the current gain
+AGantryVelGain     ; read the current gain
 ```
 
 ## See also

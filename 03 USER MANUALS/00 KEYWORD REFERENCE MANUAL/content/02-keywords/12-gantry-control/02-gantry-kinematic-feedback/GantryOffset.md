@@ -53,7 +53,7 @@ BGantryFdbk = (APos - BPos - AGantryOffset)
 ## Examples
 
 ```text
-AGantryOffset?      ; read the captured A/B offset
+AGantryOffset      ; read the captured A/B offset
 ```
 
 ## See also

@@ -43,8 +43,8 @@ Selects the source of the force reference in force mode.
 ## Examples
 
 ```text
-ForceCmdSrc=0       ; follow the analog force reference input
-ForceCmdSrc=1       ; use the user-defined ForceCmdVal table
+AForceCmdSrc=0       ; follow the analog force reference input
+AForceCmdSrc=1       ; use the user-defined ForceCmdVal table
 ```
 
 ## See also

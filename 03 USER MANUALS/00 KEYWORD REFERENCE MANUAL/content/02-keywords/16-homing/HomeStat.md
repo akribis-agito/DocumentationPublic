@@ -38,7 +38,7 @@ Read-only bit-field reporting the homing status of the axis.
 ## Examples
 
 ```text
-HomeStat?           ; read the homing status bit-field
+AHomeStat           ; read the homing status bit-field
 ```
 
 ## See also

@@ -38,9 +38,9 @@ It is an axis-scoped array saved to flash, and cannot be changed while the axis 
 ## Examples
 
 ```text
-MapStartPos[1]=0        ; first dimension starts at encoder count 0
-MapStartPos[1]=-50000   ; first dimension starts at -50000 counts
-MapStartPos[1]?         ; query the start position of the first dimension
+AMapStartPos[1]=0        ; first dimension starts at encoder count 0
+AMapStartPos[1]=-50000   ; first dimension starts at -50000 counts
+AMapStartPos[1]         ; query the start position of the first dimension
 ```
 
 ## See also

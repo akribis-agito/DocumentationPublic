@@ -38,7 +38,7 @@ Read-only command returning firmware version and build information.
 ## Examples
 
 ```text
-FWInfo?             ; return the firmware version/build block
+AFWInfo             ; return the firmware version/build block
 ```
 
 ## See also

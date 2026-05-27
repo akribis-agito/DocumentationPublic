@@ -36,7 +36,7 @@ Value used for an event's trigger detection.
 ## Examples
 
 ```text
-ProgEventVal[1]=100 ; trigger event 1 when the comparison against 100 is satisfied
+AProgEventVal[1]=100 ; trigger event 1 when the comparison against 100 is satisfied
 ```
 
 ## See also

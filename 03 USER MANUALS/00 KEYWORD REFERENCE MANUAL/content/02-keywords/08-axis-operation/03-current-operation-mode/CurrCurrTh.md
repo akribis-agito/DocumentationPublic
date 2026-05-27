@@ -45,8 +45,8 @@ Entry into current operation mode still requires the first condition check ([Cur
 ## Examples
 
 ```text
-CurrCurrThDir=0     ; trigger when CurrRef rises above threshold
-CurrCurrTh=2000     ; enter current mode when CurrRef > 2000 mA
+ACurrCurrThDir=0     ; trigger when CurrRef rises above threshold
+ACurrCurrTh=2000     ; enter current mode when CurrRef > 2000 mA
 ```
 
 ## See also

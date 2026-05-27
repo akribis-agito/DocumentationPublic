@@ -36,7 +36,7 @@ Command that stops coordinated vector motion, decelerating all member axes with 
 ## Examples
 
 ```text
-StopVec=0           ; stop the active vector motion
+AStopVec=0           ; stop the active vector motion
 ```
 
 ## See also

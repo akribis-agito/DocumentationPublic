@@ -36,7 +36,7 @@ Maximum open-loop (injection) position error; exceeding it disables the axis.
 ## Examples
 
 ```text
-MaxPosErrOL=1000000 ; max open-loop position error (user units)
+AMaxPosErrOL=1000000 ; max open-loop position error (user units)
 ```
 
 ## See also

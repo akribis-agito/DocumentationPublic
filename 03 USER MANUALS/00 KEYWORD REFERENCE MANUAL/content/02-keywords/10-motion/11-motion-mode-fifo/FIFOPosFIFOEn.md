@@ -36,8 +36,8 @@ Enables or disables FIFO position-tracking mode.
 ## Examples
 
 ```text
-FIFOPosFIFOEn=1     ; enable FIFO position tracking
-FIFOPosFIFOEn=0     ; disable FIFO position tracking
+AFIFOPosFIFOEn=1     ; enable FIFO position tracking
+AFIFOPosFIFOEn=0     ; disable FIFO position tracking
 ```
 
 ## See also

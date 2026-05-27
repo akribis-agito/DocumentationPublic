@@ -36,8 +36,8 @@ Maximum vector (resultant) speed in user units/s for coordinated multi-axis moti
 ## Examples
 
 ```text
-VecSpeed=10000      ; maximum resultant speed (user units/s, default)
-VecSpeed?           ; read the current value
+AVecSpeed=10000      ; maximum resultant speed (user units/s, default)
+AVecSpeed           ; read the current value
 ```
 
 ## See also

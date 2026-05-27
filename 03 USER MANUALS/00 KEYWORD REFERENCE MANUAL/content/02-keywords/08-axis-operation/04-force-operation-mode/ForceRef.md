@@ -38,7 +38,7 @@ Please refer to [Control tuning – Force control](../../../02-keywords/06-prote
 ## Examples
 
 ```text
-ForceRef?           ; read the filtered force reference
+AForceRef           ; read the filtered force reference
 ```
 
 ## See also

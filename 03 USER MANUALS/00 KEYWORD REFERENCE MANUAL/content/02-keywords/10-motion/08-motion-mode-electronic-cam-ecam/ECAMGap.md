@@ -43,8 +43,8 @@ In a simple example where `ECAMCycles = 1`, `ECAMGap = 2000`, `ECAMStart ≤ 400
 ## Examples
 
 ```text
-ECAMGap[1]=2000     ; master-value spacing for cam pattern 1
-ECAMGap[1]?         ; read current value
+AECAMGap[1]=2000     ; master-value spacing for cam pattern 1
+AECAMGap[1]         ; read current value
 ```
 
 Refer to the figures in [Motion mode – Electronic cam (ECAM)](00-overview.md) for more information on the ordering logics.

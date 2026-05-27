@@ -64,7 +64,7 @@ Each bit reports a motion state when set (`= 1`); when cleared (`= 0`) it repres
 ## Examples
 
 ```text
-MotionStat?         ; read the current motion status word
+AMotionStat         ; read the current motion status word
 ```
 
 ## See also

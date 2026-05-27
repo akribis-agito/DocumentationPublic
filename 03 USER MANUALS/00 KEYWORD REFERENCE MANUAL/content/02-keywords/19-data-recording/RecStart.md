@@ -43,8 +43,8 @@ After starting, monitor progress with [RecStat](RecStat.md) and, if needed, forc
 ## Examples
 
 ```text
-RecStart[1]         ; start recording on the first scope
-RecStart[2]         ; start recording on the second scope
+ARecStart[1]         ; start recording on the first scope
+ARecStart[2]         ; start recording on the second scope
 ```
 
 ## See also

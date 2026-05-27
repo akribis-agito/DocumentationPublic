@@ -36,8 +36,8 @@ Array mapping each Hall-sensor state to the electrical angle used for commutatio
 ## Examples
 
 ```text
-HallsAngle[1]?      ; query the angle mapped to the first Hall state
-HallsAngle[1]=30    ; set the electrical angle (deg) for that Hall state
+AHallsAngle[1]      ; query the angle mapped to the first Hall state
+AHallsAngle[1]=30    ; set the electrical angle (deg) for that Hall state
 ```
 
 ## See also

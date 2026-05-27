@@ -40,9 +40,9 @@ The frequency in Hz is `InjectFreq / 100`. For example, an 11.2 Hz wave requires
 ## Examples
 
 ```text
-InjectFreq=1120     ; 11.2 Hz sine/square wave
-InjectFreq=200      ; 2 Hz
-InjectFreq?         ; query the current injection frequency
+AInjectFreq=1120     ; 11.2 Hz sine/square wave
+AInjectFreq=200      ; 2 Hz
+AInjectFreq         ; query the current injection frequency
 ```
 
 ## See also

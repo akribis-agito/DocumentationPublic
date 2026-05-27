@@ -36,8 +36,8 @@ Position offset applied to the event grid each time the event counter rolls over
 ## Examples
 
 ```text
-EventRollOff=100    ; shift the event grid by 100 user units on each rollover
-EventRollOff?       ; query the current offset
+AEventRollOff=100    ; shift the event grid by 100 user units on each rollover
+AEventRollOff       ; query the current offset
 ```
 
 ## See also

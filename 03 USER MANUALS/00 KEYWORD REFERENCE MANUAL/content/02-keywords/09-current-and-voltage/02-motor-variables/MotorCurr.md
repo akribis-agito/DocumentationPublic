@@ -44,7 +44,7 @@ Read-only total feedback current vector amplitude of the motor, in milliamperes.
 ## Examples
 
 ```text
-MotorCurr?          ; read total feedback current amplitude (mA)
+AMotorCurr          ; read total feedback current amplitude (mA)
 ```
 
 ## See also

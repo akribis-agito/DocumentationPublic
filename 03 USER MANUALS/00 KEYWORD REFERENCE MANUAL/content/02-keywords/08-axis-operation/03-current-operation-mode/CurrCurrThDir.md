@@ -43,8 +43,8 @@ Trigger direction for the CurrCurrTh current-reference check.
 ## Examples
 
 ```text
-CurrCurrThDir=1     ; trigger when CurrRef falls below CurrCurrTh
-CurrCurrTh=-2000    ; threshold (mA)
+ACurrCurrThDir=1     ; trigger when CurrRef falls below CurrCurrTh
+ACurrCurrTh=-2000    ; threshold (mA)
 ```
 
 ## See also

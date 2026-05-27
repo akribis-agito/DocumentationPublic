@@ -14,7 +14,7 @@ The end-of-segment speed it governs is reported by [CNCAEndSpeed/CNCBEndSpeed](C
 ## Examples
 
 ```text
-CNCAEndSegMod=0     ; select end-of-segment transition mode
+ACNCAEndSegMod=0     ; select end-of-segment transition mode
 ```
 
 ## See also

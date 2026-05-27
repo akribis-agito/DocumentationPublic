@@ -49,8 +49,8 @@ When a search-based commutation method is used:
 ## Examples
 
 ```text
-ComtMode[5]=1282    ; perform commutation automatically after power-on/reset
-ComtMode[1]?        ; query a single array element
+AComtMode[5]=1282    ; perform commutation automatically after power-on/reset
+AComtMode[1]        ; query a single array element
 ```
 
 ## See also

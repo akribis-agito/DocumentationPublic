@@ -36,7 +36,7 @@ Maximum allowable force error in open-loop force control; exceeding it faults.
 ## Examples
 
 ```text
-MaxForceErrOL=50000 ; max open-loop force error before fault
+AMaxForceErrOL=50000 ; max open-loop force error before fault
 ```
 
 ## See also

@@ -38,7 +38,7 @@ Receive buffer for Central-i offline log data from device port B.
 ## Examples
 
 ```text
-OfflineBLog[1]?     ; read the first word of captured port-B log data
+AOfflineBLog[1]     ; read the first word of captured port-B log data
 ```
 
 ## See also

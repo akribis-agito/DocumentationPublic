@@ -38,7 +38,7 @@ If the motor's trip time is rated at a trip current different from the peak curr
 ## Examples
 
 ```text
-PeakTime=500        ; time allowed at peak current
+APeakTime=500        ; time allowed at peak current
 ```
 
 ## See also

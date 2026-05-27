@@ -36,9 +36,9 @@ Array of per-segment acceleration scaling factors for the acceleration-shaping p
 ## Examples
 
 ```text
-AccShapeFact[1]=50      ; scaling factor for first segment
-AccShapeFact[2]=100     ; scaling factor for second segment
-AccShapeFact[1]?        ; query first segment factor
+AAccShapeFact[1]=50      ; scaling factor for first segment
+AAccShapeFact[2]=100     ; scaling factor for second segment
+AAccShapeFact[1]        ; query first segment factor
 ```
 
 ## See also

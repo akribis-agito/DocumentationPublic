@@ -58,8 +58,8 @@ The results are acquired by PCSuite after the [CalcIden](CalcIden.md) operation 
 ## Examples
 
 ```text
-IdenResults?        ; read all calculated identification results
-IdenResults[5]?     ; read amplitude ratio (dB) of output over input at fundamental
+AIdenResults        ; read all calculated identification results
+AIdenResults[5]     ; read amplitude ratio (dB) of output over input at fundamental
 ```
 
 ## See also

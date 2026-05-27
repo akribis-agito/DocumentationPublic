@@ -37,7 +37,7 @@ Proportional position gain for the gantry yaw correction controller.
 
 ```text
 AGantryPosGain=200  ; set yaw position proportional gain
-AGantryPosGain?     ; read the current gain
+AGantryPosGain     ; read the current gain
 ```
 
 ## See also

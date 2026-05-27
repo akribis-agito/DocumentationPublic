@@ -47,9 +47,9 @@ For graceful transitions, prefer the dedicated commands [GoToCurrMode](../03-cur
 ## Examples
 
 ```text
-OperationMode=3     ; position control mode (default)
-OperationMode=1     ; current control mode
-OperationMode?      ; read the active control mode
+AOperationMode=3     ; position control mode (default)
+AOperationMode=1     ; current control mode
+AOperationMode      ; read the active control mode
 ```
 
 ## See also

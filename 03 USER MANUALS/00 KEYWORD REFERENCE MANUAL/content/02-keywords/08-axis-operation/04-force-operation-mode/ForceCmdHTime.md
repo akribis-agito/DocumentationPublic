@@ -47,8 +47,8 @@ Holding time for each force-command table entry.
 ## Examples
 
 ```text
-ForceCmdHTime[1]=400 ; hold first entry for 400 ms
-ForceCmdHTime[2]=0   ; exit force mode after the second entry
+AForceCmdHTime[1]=400 ; hold first entry for 400 ms
+AForceCmdHTime[2]=0   ; exit force mode after the second entry
 ```
 
 ## See also

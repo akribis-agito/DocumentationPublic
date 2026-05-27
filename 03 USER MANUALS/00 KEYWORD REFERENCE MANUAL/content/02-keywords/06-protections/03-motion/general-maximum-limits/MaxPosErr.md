@@ -36,7 +36,7 @@ Maximum closed-loop position error; exceeding it disables the axis.
 ## Examples
 
 ```text
-MaxPosErr=5000      ; max following error (user units)
+AMaxPosErr=5000      ; max following error (user units)
 ```
 
 ## See also

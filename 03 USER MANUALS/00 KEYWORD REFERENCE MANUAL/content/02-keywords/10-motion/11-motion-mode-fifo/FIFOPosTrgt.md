@@ -36,7 +36,7 @@ Target position carried by the next FIFO position segment.
 ## Examples
 
 ```text
-FIFOPosTrgt=100000  ; set the target position for the next FIFOPosPush
+AFIFOPosTrgt=100000  ; set the target position for the next FIFOPosPush
 ```
 
 ## See also

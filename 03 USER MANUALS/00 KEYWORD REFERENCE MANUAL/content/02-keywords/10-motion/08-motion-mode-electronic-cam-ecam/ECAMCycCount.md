@@ -36,7 +36,7 @@ Read-only index of the current ECAM cam-pattern repetition cycle.
 ## Examples
 
 ```text
-ECAMCycCount[1]?    ; read the current cycle index for cam pattern 1
+AECAMCycCount[1]    ; read the current cycle index for cam pattern 1
 ```
 
 Refer to the figures in [Motion mode – Electronic cam (ECAM)](00-overview.md) for more information.

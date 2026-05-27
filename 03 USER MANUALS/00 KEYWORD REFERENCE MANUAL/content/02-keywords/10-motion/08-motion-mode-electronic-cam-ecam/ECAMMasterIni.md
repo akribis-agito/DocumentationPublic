@@ -57,8 +57,8 @@ The maximum allowed value depends on `ECAMCycles`:
 ## Examples
 
 ```text
-ECAMMasterIni[1]=0  ; start at the beginning of the ECAM range for cam pattern 1
-ECAMMasterIni[1]?   ; read current value
+AECAMMasterIni[1]=0  ; start at the beginning of the ECAM range for cam pattern 1
+AECAMMasterIni[1]   ; read current value
 ```
 
 Refer to the figures in [Motion mode – Electronic cam (ECAM)](00-overview.md) for more information on the initial offset, which varies according to ECAMGap and ECAMCycles.

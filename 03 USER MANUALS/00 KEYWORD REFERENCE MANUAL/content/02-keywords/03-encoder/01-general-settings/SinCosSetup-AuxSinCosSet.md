@@ -284,10 +284,10 @@ Denotes the status of the SIN/COS encoder settings in the encoder chip. This is 
 ## Examples
 
 ```text
-SinCosSetup[1]=2        ; signal gain
-SinCosSetup[6]=7        ; interpolation factor 2^(16-7) = 512 counts per cycle
-SinCosSetup[20]=1       ; enter analog test mode (TMA) for calibration
-SinCosSetup[21]?        ; query chip settings status
+ASinCosSetup[1]=2        ; signal gain
+ASinCosSetup[6]=7        ; interpolation factor 2^(16-7) = 512 counts per cycle
+ASinCosSetup[20]=1       ; enter analog test mode (TMA) for calibration
+ASinCosSetup[21]        ; query chip settings status
 ```
 
 ## See also

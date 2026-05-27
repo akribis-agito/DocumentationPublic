@@ -47,8 +47,8 @@ Selects the path of motion for absolute PTP under modulo mode.
 ## Examples
 
 ```text
-ModShort=0          ; normal (linear-like) path
-ModShort=3          ; shortest path
+AModShort=0          ; normal (linear-like) path
+AModShort=3          ; shortest path
 ```
 
 ## See also

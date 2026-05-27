@@ -36,8 +36,8 @@ In current or force control operation mode (`OperationMode = 1` or `4`), `InTarg
 ## Examples
 
 ```text
-InTargetVelTh=1000  ; velocity window in user units/s (default)
-InTargetVelTh?      ; read current value
+AInTargetVelTh=1000  ; velocity window in user units/s (default)
+AInTargetVelTh      ; read current value
 ```
 
 ## See also

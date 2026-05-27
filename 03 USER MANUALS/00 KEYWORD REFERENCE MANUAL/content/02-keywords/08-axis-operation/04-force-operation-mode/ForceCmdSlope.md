@@ -36,7 +36,7 @@ Ramp rate (unit/s) toward each force-command table entry.
 ## Examples
 
 ```text
-ForceCmdSlope[3]=700 ; ramp into entry 3 at 700 units/s
+AForceCmdSlope[3]=700 ; ramp into entry 3 at 700 units/s
 ```
 
 ## See also

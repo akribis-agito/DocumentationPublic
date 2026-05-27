@@ -36,8 +36,8 @@ Global enable for servicing all user program events.
 ## Examples
 
 ```text
-ProgEventGEn=0      ; suspend servicing of all events (events still sensed)
-ProgEventGEn=1      ; resume servicing; pending events are then handled
+AProgEventGEn=0      ; suspend servicing of all events (events still sensed)
+AProgEventGEn=1      ; resume servicing; pending events are then handled
 ```
 
 ## See also

@@ -38,8 +38,8 @@ It is an axis-scoped parameter, not saved to flash, and cannot be changed while 
 ## Examples
 
 ```text
-MapErrOffset?       ; read the offset currently applied to the map correction
-MapErrOffset=0      ; clear the applied offset
+AMapErrOffset       ; read the offset currently applied to the map correction
+AMapErrOffset=0      ; clear the applied offset
 ```
 
 ## See also

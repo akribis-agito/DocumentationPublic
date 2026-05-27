@@ -38,7 +38,7 @@ Use `StopCNCA` to halt motion while leaving the queue intact, as opposed to [CNC
 ## Examples
 
 ```text
-StopCNCA            ; stop CNC motion on queue A
+AStopCNCA            ; stop CNC motion on queue A
 ```
 
 ## See also

@@ -44,8 +44,8 @@ $$
 ## Examples
 
 ```text
-AOutShifts[1]=2     ; multiply the monitored value by 4
-AOutShifts[1]=-3    ; divide the monitored value by 8
+AAOutShifts[1]=2     ; multiply the monitored value by 4
+AAOutShifts[1]=-3    ; divide the monitored value by 8
 ```
 
 ## See also

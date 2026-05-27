@@ -36,7 +36,7 @@ Read-only power-stage temperature (°C).
 ## Examples
 
 ```text
-PwrTemp?            ; power-stage temperature (°C)
+APwrTemp            ; power-stage temperature (°C)
 ```
 
 ## See also

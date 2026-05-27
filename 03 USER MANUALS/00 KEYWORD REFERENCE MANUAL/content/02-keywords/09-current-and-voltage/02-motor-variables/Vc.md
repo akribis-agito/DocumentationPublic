@@ -36,7 +36,7 @@ Read-only phase C voltage reference for space-vector modulation (PWM-count fract
 ## Examples
 
 ```text
-Vc?                 ; read phase C SVM voltage reference
+AVc                 ; read phase C SVM voltage reference
 ```
 
 ## See also

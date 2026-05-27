@@ -36,10 +36,10 @@ Absolute target of the point-to-point move on entry to position mode.
 ## Examples
 
 ```text
-RetractTarget=50000 ; absolute entry-move target (user units)
-RetractSpeed=20000  ; entry-move speed
-BeginOnToPos=1      ; arm the move
-GoToPosMode         ; switch and start the move
+ARetractTarget=50000 ; absolute entry-move target (user units)
+ARetractSpeed=20000  ; entry-move speed
+ABeginOnToPos=1      ; arm the move
+AGoToPosMode         ; switch and start the move
 ```
 
 ## See also

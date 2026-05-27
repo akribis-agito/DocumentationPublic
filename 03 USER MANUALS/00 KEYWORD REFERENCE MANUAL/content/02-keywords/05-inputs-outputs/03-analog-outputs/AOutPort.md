@@ -36,8 +36,8 @@ Commanded analog-output value (mV) in direct command mode.
 ## Examples
 
 ```text
-AOutMode[1]=0       ; direct command mode
-AOutPort[1]=5000    ; drive analog output 1 to 5000 mV
+AAOutMode[1]=0       ; direct command mode
+AAOutPort[1]=5000    ; drive analog output 1 to 5000 mV
 ```
 
 ## See also

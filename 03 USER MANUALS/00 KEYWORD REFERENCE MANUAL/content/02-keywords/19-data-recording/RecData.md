@@ -16,7 +16,7 @@ The values of `RecData` can be accessed individually by querying `RecData[n]`. T
 ## Examples
 
 ```text
-RecData[1]?         ; query the first raw element of the latest recording
+ARecData[1]         ; query the first raw element of the latest recording
 ```
 
 ## See also

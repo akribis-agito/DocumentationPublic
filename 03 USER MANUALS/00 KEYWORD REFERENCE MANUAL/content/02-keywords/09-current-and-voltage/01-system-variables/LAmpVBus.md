@@ -38,7 +38,7 @@ Read-only bus-voltage measurements of the built-in linear amplifier (AmpType = 4
 ## Examples
 
 ```text
-LAmpVBus[1]?        ; read the first linear-amplifier bus voltage (mV)
+ALAmpVBus[1]        ; read the first linear-amplifier bus voltage (mV)
 ```
 
 ## See also

@@ -42,7 +42,7 @@ Declares the drive's power-supply type so protections behave correctly.
 ## Examples
 
 ```text
-PowerSupply=2       ; DC supply
+APowerSupply=2       ; DC supply
 ```
 
 ## See also

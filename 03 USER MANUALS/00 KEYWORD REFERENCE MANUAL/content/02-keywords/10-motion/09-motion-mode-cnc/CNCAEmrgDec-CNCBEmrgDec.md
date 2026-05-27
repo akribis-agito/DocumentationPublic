@@ -14,7 +14,7 @@ This is distinct from the normal per-segment deceleration reported by [CNCADecel
 ## Examples
 
 ```text
-CNCAEmrgDec=2000000 ; vector deceleration used on emergency stop
+ACNCAEmrgDec=2000000 ; vector deceleration used on emergency stop
 ```
 
 ## See also

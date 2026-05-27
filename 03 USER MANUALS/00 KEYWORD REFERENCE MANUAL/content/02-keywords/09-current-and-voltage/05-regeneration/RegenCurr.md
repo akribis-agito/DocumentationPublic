@@ -36,7 +36,7 @@ Read-only current flowing through the regeneration resistor.
 ## Examples
 
 ```text
-RegenCurr?          ; read the present regen-resistor current
+ARegenCurr          ; read the present regen-resistor current
 ```
 
 ## See also

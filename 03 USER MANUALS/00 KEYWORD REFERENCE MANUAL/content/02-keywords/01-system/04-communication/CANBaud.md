@@ -49,7 +49,7 @@ See the communication manual for more information.
 ## Examples
 
 ```text
-CANBaud=6           ; 1 Mbit/s
+ACANBaud=6           ; 1 Mbit/s
 ```
 
 ## See also

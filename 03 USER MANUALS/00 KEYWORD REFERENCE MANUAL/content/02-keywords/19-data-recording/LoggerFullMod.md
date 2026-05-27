@@ -38,7 +38,7 @@ Selects logger behavior when its buffer fills (overwrite or stop).
 ## Examples
 
 ```text
-LoggerFullMod?      ; query the current buffer-full mode
+ALoggerFullMod      ; query the current buffer-full mode
 ```
 
 ## See also

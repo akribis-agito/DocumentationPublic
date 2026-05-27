@@ -38,7 +38,7 @@ Selects the spline interpolation mode used when executing the buffer profile.
 ## Examples
 
 ```text
-BuffSplineMod=3     ; default spline interpolation mode
+ABuffSplineMod=3     ; default spline interpolation mode
 ```
 
 ## See also

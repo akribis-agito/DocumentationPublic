@@ -38,7 +38,7 @@ Read-only array reporting the state of the spline buffer motion mode.
 ## Examples
 
 ```text
-BuffStatus[1]?      ; query the first status element
+ABuffStatus[1]      ; query the first status element
 ```
 
 ## See also

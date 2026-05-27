@@ -36,9 +36,9 @@ Target (maximum) velocity for point-to-point and jog motion, in user units per s
 ## Examples
 
 ```text
-Speed=500000        ; target velocity (user units/s)
-Speed=-500000       ; jog in the negative direction
-Speed?              ; query current value
+ASpeed=500000        ; target velocity (user units/s)
+ASpeed=-500000       ; jog in the negative direction
+ASpeed              ; query current value
 ```
 
 ## See also

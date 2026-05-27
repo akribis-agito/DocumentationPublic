@@ -56,8 +56,8 @@ Quadrant code for `SinCosSignals[5]` (analog / atan2 path):
 ## Examples
 
 ```text
-SinCosSignals[3]?       ; read the SIN+ minus SIN- difference (mV)
-SinCosSignals[6]?       ; read the COS+ minus COS- difference (mV)
+ASinCosSignals[3]       ; read the SIN+ minus SIN- difference (mV)
+ASinCosSignals[6]       ; read the COS+ minus COS- difference (mV)
 ```
 
 ## See also

@@ -38,7 +38,7 @@ Read-only checksum over the controller's parameter set, for verifying configurat
 ## Examples
 
 ```text
-ParamCS[1]?         ; read the first word of the parameter checksum
+AParamCS[1]         ; read the first word of the parameter checksum
 ```
 
 ## See also
