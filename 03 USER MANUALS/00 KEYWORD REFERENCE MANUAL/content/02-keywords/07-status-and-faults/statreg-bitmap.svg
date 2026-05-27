@@ -83,7 +83,7 @@
 <text x="644.0" y="68" font-size="7" text-anchor="middle">INIT</text>
 <rect x="656" y="44" width="23" height="30" fill="#f6c9c2" stroke="#8a929b" stroke-width="0.6"/>
 <text x="668.0" y="56" font-size="8" text-anchor="middle">4</text>
-<text x="668.0" y="68" font-size="7" text-anchor="middle">V<min</text>
+<text x="668.0" y="68" font-size="7" text-anchor="middle">V&lt;min</text>
 <rect x="680" y="44" width="23" height="30" fill="#f6c9c2" stroke="#8a929b" stroke-width="0.6"/>
 <text x="692.0" y="56" font-size="8" text-anchor="middle">3</text>
 <text x="692.0" y="68" font-size="7" text-anchor="middle">V>max</text>
