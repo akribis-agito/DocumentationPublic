@@ -59,9 +59,9 @@ $$
 
 ## Examples
 
-![image30.emf](../../../assets/image30.emf)
+![MotionSamples timing relations](motionsamples-timeline.svg)
 
-The plot above shows an example of MotionSamples. Since MotionSamples is in controller cycles, multiplication by sampling time (here, it is $T_{s} = 61.03515\mu s$) is needed to get the time in SI unit.
+The diagram above shows how the MotionSamples entries relate in time. Since MotionSamples is in controller cycles, multiplication by sampling time (here, it is $T_{s} = 61.03515\mu s$) is needed to get the time in SI unit.
 
 ```text
 AMotionSamples[1]   ; motion profile time of the last move (controller cycles)

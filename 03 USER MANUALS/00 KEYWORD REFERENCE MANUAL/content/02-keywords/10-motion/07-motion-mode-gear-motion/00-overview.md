@@ -4,7 +4,7 @@ This section extends from direct gear motion ([MotionMode](../../../02-keywords/
 
 Gear motion mode is normally used for virtual gear application where the controlled axis (as virtual slave) must move proportionally with respect to another axis (virtual master), scaled by a factor.
 
-![image35.png](../../../assets/image35.png)
+![Gear motion: from master variable to follower reference](gear-signal-path.svg)
 
 The master variable is referred to (pointed) by the [GearMaster](../../../02-keywords/10-motion/07-motion-mode-gear-motion/GearMaster.md) variable. The change in the master variable undergoes optional modulo handling and is scaled (by [MasterFact](../../../02-keywords/10-motion/07-motion-mode-gear-motion/MasterFact.md) and [MasterFactDen](../../../02-keywords/10-motion/07-motion-mode-gear-motion/MasterFactDen.md)). Finally, the scaled value is accumulated in [MasterPos](../../../02-keywords/10-motion/07-motion-mode-gear-motion/MasterPos.md). This operation is done at every controller cycle regardless of the state of motion or the motion mode ([MotionMode](../../../02-keywords/10-motion/02-motion-configuration/MotionMode.md)).
 

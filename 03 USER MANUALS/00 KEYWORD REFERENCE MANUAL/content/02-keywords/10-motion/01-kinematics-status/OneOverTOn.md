@@ -52,12 +52,12 @@ The actual velocity is derived from the latched timer period; see [OneOverTFreq]
 ## Examples
 
 ```text
-AOneOverTOn[1]=1     ; enable 1/T velocity measurement on axis 1
-AOneOverTOn[1]=0     ; disable (Vel[4] reports 0 on standalone)
-AOneOverTOn[1]       ; read current value
+AOneOverTOn=1        ; enable 1/T velocity measurement on axis A
+AOneOverTOn=0        ; disable (Vel[4] reports 0 on standalone)
+AOneOverTOn          ; read current value
 ```
 
-After enabling, read the result with `AVel[1][4]` (the 1/T element of the velocity array).
+After enabling, read the result with `AVel[4]` (the 1/T element of the velocity array).
 
 ## Changes between versions
 

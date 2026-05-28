@@ -72,9 +72,9 @@ A higher timer frequency (lower `OneOverTFreq`) gives finer velocity resolution 
 ## Examples
 
 ```text
-AOneOverTFreq[1]=4   ; default: 18.75 MHz timer on axis 1
-AOneOverTFreq[1]=0   ; full 300 MHz timer (finest resolution, overflows sooner)
-AOneOverTFreq[1]     ; read current value
+AOneOverTFreq=4      ; default: 18.75 MHz timer on axis A
+AOneOverTFreq=0      ; full 300 MHz timer (finest resolution, overflows sooner)
+AOneOverTFreq        ; read current value
 ```
 
 ## See also

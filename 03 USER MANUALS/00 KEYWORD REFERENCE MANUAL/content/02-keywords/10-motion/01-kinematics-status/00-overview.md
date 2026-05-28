@@ -1,12 +1,14 @@
 # Kinematics status
 
-This section describes kinematic status keywords, commonly used in position and velocity controls. They can be divided into:
+This section describes kinematic status keywords, commonly used in position and velocity controls. The diagram below shows how they relate: the encoder produces the position feedback [Pos](Pos.md) and velocity feedback [Vel](Vel.md); the profiler (or an external input) produces the position reference [PosRef](PosRef.md) and its derivative [dPosRef](dPosRef.md); and the difference of reference and feedback gives the error signals [PosErr](PosErr.md) and [VelErr](VelErr.md) that drive the control loops.
+
+![Kinematic feedback, reference and error signal flow](feedback-pipeline.svg)
+
+The keywords can be divided into:
 
 1.  Kinematic feedback
 
-Kinematic feedback are derived from the [encoder](../../../02-keywords/03-encoder/00-overview.md) feedback, after [modulo operation](../../../02-keywords/03-encoder/04-modulo-mode/00-overview.md), [error mapping](../../../02-keywords/04-error-mapping/00-overview.md), [dual-loop control](../../../02-keywords/11-control-tuning/02-dual-loop-control/00-overview.md) routing/scaling and user-unit scaling (if applicable). Generally, the signal paths of main kinematic feedback are as shown with the yellow blocks being optional operations (passthrough if not applicable).
-
-![image26.png](../../../assets/image26.png)
+Kinematic feedback are derived from the [encoder](../../../02-keywords/03-encoder/00-overview.md) feedback, after [modulo operation](../../../02-keywords/03-encoder/04-modulo-mode/00-overview.md), [error mapping](../../../02-keywords/04-error-mapping/00-overview.md), [dual-loop control](../../../02-keywords/11-control-tuning/02-dual-loop-control/00-overview.md) routing/scaling and user-unit scaling (if applicable).
 
 **Note:**
 
@@ -17,10 +19,6 @@ Kinematic feedback are derived from the [encoder](../../../02-keywords/03-encode
 2.  Kinematic reference
 
 Kinematic references originate from the motion profiler or external input, depending on OperationMode and MotionMode. After the optional post-processing (offset, moving average, input shaping, injection and filter), the final position reference ([PosRef](../../../02-keywords/10-motion/01-kinematics-status/PosRef.md)) is generated. Velocity reference ([dPosRef](../../../02-keywords/10-motion/01-kinematics-status/dPosRef.md)) (not to be confused with velocity loop reference) is calculated by using filtered derivative.
-
-A typical signal path for position and velocity reference is as shown.
-
-<img alt="A screenshot of a computer AI-generated content may be incorrect." src="image27.png" style="width:6.03235in;height:2.90972in"/>
 
 **Note:**
 

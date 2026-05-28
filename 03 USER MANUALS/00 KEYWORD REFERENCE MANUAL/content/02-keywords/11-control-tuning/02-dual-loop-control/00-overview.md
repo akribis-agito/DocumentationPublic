@@ -33,9 +33,10 @@ The table below shows the summary on how to achieve the desired control structur
 | DualLoopOn | DualEncSwapOn | DualEncMode | Type of control |
 |---|---|---|---|
 | 0 | - | - | Default control. |
-| 1 | 0 | - | Dual-loop control. |
+| 1 | 0 | - | Dual-loop control (velocity feedback from the auxiliary/motor encoder). |
 | 1 | 1 | 0 | Pseudo dual-loop control. |
 | 1 | 1 | 1 | Dual-loop control if within the position range of DualEncRange. Pseudo dual-loop control if outside of the position range. |
+| 2 | - | - | Dual-loop control with velocity feedback from an analog tachometer input. |
 
 The following is the comparison of keywords/properties under different control structures.
 

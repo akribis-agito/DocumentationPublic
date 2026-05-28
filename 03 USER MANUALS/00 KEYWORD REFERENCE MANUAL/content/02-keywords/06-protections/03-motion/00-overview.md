@@ -8,5 +8,9 @@ Motion protection prevents possible damage to the stage/motor even if current/vo
 | 2 | **Kinematics protection** MaxVel and MaxAcc specify the maximum absolute values of velocity and acceleration, respectively. |
 | 3 | **Kinematics error protection** MaxPosErr and MaxVelErr specify the maximum position and velocity errors, respectively, while the axis is in closed-loop condition. MaxPosErrOL and MaxVelErrOL specify the same things, but with axis is open-loop condition. |
 | 4 | **Stuck protection** StuckCurr, StuckVel, StuckTime specify the conditions for which a motor is considered stuck. |
-| 5 | **Dual-loop protection** **Condition:** This feature is only applicable when dual-loop control is enabled (DualLoopOn is non-zero, or GantryDLoopOn is non-zero). In dual-loop conditions, the velocity difference of both feedback sources must not exceed DualStuckVel for DualStuckTime. This will protect against the case where one or both feedback sources returning abnormal values. |
+| 5 | **Dual-loop protection** **Condition:** This feature is only applicable when dual-loop control is enabled (DualLoopOn is non-zero). In dual-loop conditions, the velocity difference of both feedback sources must not exceed DualStuckVel for DualStuckTime. This will protect against the case where one or both feedback sources returning abnormal values. |
 | 6 | **Stalling protection** For stepper motors driven by the internal amplifier, a stall metric (StallVal) derived from the phase voltages is compared against a speed-dependent threshold (StallTh). StallCfg enables detection and selects whether a stall only sets a status (StallStat and the StatReg stall bit) or also disables the axis. |
+
+While the axis is moving, the profiler continuously enforces these limits — braking to a stop at the software/hardware travel limits, and tripping on excessive following error:
+
+![Motion protection while moving: the profiler decelerates to a stop at FwdPLim / RevPLim and at limit switches (LimitsStat), and trips the axis when position or velocity error exceeds MaxPosErr / MaxVelErr](motion-protection-flow.svg)

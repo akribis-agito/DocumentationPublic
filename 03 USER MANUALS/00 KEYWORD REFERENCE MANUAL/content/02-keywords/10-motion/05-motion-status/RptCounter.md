@@ -40,7 +40,7 @@ Counts repetitions made during repetitive point-to-point (PTP) motion.
 
 `RptCounter` is reset to `0` when a new motion is commanded (the `Begin` handler resets it alongside `MotionReason` and `InTargetStat`). The controller then increments it by one at the end of each repetition — specifically once the end-of-smoothing wait for a repetition has elapsed, and only while in repetitive PTP mode.
 
-After incrementing, the controller decides whether to start another repetition: it continues only if no [StopRep](../04-motion-command/StopRep.md) is pending and either [RptCycles](../02-motion-configuration/RptCycles.md) `= 0` (run indefinitely) or `RptCounter ≠ RptCycles`. When `RptCounter` reaches a non-zero `RptCycles` the motion ends instead of looping. The next target for each repetition is set from [RptMode](../02-motion-configuration/RptMode.md): mode 1 reflects the target about the current reference (back-and-forth), otherwise it returns toward the previous start position.
+After incrementing, the controller decides whether to start another repetition: it continues only if no [StopRep](../04-motion-command/StopRep.md) is pending and either [RptCycles](../02-motion-configuration/RptCycles.md) `= 0` (run indefinitely) or `RptCounter ≠ RptCycles`. When `RptCounter` reaches a non-zero `RptCycles` the motion ends instead of looping. The next target for each repetition is set from [RptMode](../02-motion-configuration/RptMode.md): mode `0` (bidirectional) returns toward the start position so the axis moves to-and-fro, while mode `1` (unidirectional) advances by the same delta each repetition so the axis keeps stepping in one direction.
 
 ## Examples
 

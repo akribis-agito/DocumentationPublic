@@ -13,7 +13,7 @@ Denominator of the CNC queue A (or B) encoder scaling ratio.
 
 Set the pair so that `CNCAEncFactNu / CNCAEncFactDn` equals the resolution ratio needed for the axis. When numerator and denominator are equal (the default `1` / `1`), the ratio is 1 and no scaling is applied. Both keywords accept whole numbers in the range `1`-`2000`, so a wide range of rational ratios can be expressed — for example `2` here with [CNCAEncFactNu/CNCBEncFactNu](CNCAEncFactNu-CNCBEncFactNu.md) = `3` gives a 3/2 (1.5:1) ratio.
 
-When either value changes, the controller forms both the ratio and its reciprocal for the axis, ready for use during the path. The ratio is applied as the path runs: the engine uses it to convert each axis's position reference into the queued path units and uses the reciprocal to convert the queued segment coordinates back into per-axis position commands. Configure the pair on each member axis before starting the move, since it cannot be changed in motion.
+The ratio is applied as the path runs: the engine uses it to convert each axis's position reference into the queued path units, and applies it the other way to convert the queued segment coordinates back into per-axis position commands. Configure the pair on each member axis before starting the move, since it cannot be changed in motion.
 
 ## Examples
 

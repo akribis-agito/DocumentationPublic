@@ -34,7 +34,7 @@ Denominator of the per-axis vector-to-encoder scaling ratio (VecEncFactNu / VecE
 
 ## How it works
 
-Set the pair so that `VecEncFactNu / VecEncFactDn` equals the resolution ratio needed for the axis. When numerator and denominator are equal (the default `1` / `1`), the ratio is 1 and no scaling is applied. Both keywords accept whole numbers in the range `1`-`2000`, so a wide range of rational ratios can be expressed (for example `2` here with [VecEncFactNu](VecEncFactNu.md) = `3` gives a 3/2, 1.5:1, ratio). The controller forms the ratio (and its reciprocal) when either value changes, ready to apply during the vector move. Configure the pair on each member axis before starting the move, since it cannot be changed in motion.
+Set the pair so that `VecEncFactNu / VecEncFactDn` equals the resolution ratio needed for the axis. When numerator and denominator are equal (the default `1` / `1`), the ratio is 1 and no scaling is applied. Both keywords accept whole numbers in the range `1`-`2000`, so a wide range of rational ratios can be expressed (for example `2` here with [VecEncFactNu](VecEncFactNu.md) = `3` gives a 3/2, 1.5:1, ratio). The ratio is applied during the vector move. Configure the pair on each member axis before starting the move, since it cannot be changed in motion.
 
 ## Examples
 

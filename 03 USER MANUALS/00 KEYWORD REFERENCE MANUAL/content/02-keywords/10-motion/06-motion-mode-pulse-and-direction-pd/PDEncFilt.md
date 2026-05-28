@@ -32,7 +32,7 @@ Reserved pulse-and-direction keyword; not implemented in current firmware.
 
 ## Overview
 
-`PDEncFilt` is a reserved keyword. Its keyword-table entry is flagged as not implemented, with all access attributes cleared, so it has no read/write behaviour. It was intended as a noise filter for the P/D input but the actual input filtering is handled in the FPGA decoder per [PDSubType](PDSubType.md).
+`PDEncFilt` is a reserved keyword. It is flagged as not implemented and has no read/write behaviour. It was intended as a noise filter for the P/D input, but input filtering is instead handled by the input format selected with [PDSubType](PDSubType.md).
 
 > **Documentation pending:** This keyword is reserved and not implemented. Do not use it.
 
@@ -40,4 +40,4 @@ Reserved pulse-and-direction keyword; not implemented in current firmware.
 
 - [PDPos](PDPos.md) — the scaled P/D counter
 - [PDEncDir](PDEncDir.md) — P/D accumulation direction
-- [PDSubType](PDSubType.md) — selects the input signal format decoded in the FPGA
+- [PDSubType](PDSubType.md) — selects the input signal format

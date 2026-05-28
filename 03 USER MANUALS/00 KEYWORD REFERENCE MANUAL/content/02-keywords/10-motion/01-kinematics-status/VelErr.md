@@ -75,7 +75,7 @@ AVelErr             ; read the current velocity error
 
 ## Changes between versions
 
-In **v5 (central-i)** `VelErr` is 64-bit (`VelErr = VelRef − Vel[1]`) and is compared against a scaled 64-bit `MaxVelErr`; the zeroing conditions and the PI usage are otherwise the same. `VelErr` is reported as a 32-bit value in v5 (no range override). **v5 is central-i only.**
+In **v5 (central-i)** `VelErr` is a 64-bit value (`VelErr = VelRef − Vel[1]`) with the larger range shown in the frontmatter, and is compared against a scaled 64-bit `MaxVelErr`; the zeroing conditions and the PI usage are otherwise the same. **v5 is central-i only.**
 
 ## See also
 

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="250" viewBox="0 0 700 250" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="20" y="22" font-size="14" font-weight="bold">Repetitive point-to-point motion flow (MotionMode = 2)</text>
+
+  <!-- Begin -->
+  <rect x="20" y="80" width="90" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="65" y="100" text-anchor="middle">Begin</text>
+  <text x="65" y="116" text-anchor="middle" font-size="11" fill="#5b6b7b">RptCounter=0</text>
+
+  <!-- Move -->
+  <rect x="160" y="80" width="110" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="215" y="100" text-anchor="middle">Move to target</text>
+  <text x="215" y="116" text-anchor="middle" font-size="11" fill="#5b6b7b">per RptMode</text>
+
+  <!-- Count -->
+  <rect x="320" y="80" width="120" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="380" y="100" text-anchor="middle">RptCounter + 1</text>
+  <text x="380" y="116" text-anchor="middle" font-size="11" fill="#5b6b7b">at end of move</text>
+
+  <!-- Decision -->
+  <rect x="490" y="76" width="160" height="52" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="570" y="98" text-anchor="middle" font-size="12">RptCycles reached</text>
+  <text x="570" y="114" text-anchor="middle" font-size="12">or StopRep?</text>
+
+  <!-- Dwell -->
+  <rect x="320" y="180" width="120" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="380" y="201" text-anchor="middle">Dwell</text>
+  <text x="380" y="217" text-anchor="middle" font-size="11" fill="#5b6b7b">RptWait ms</text>
+
+  <!-- End -->
+  <rect x="560" y="180" width="90" height="44" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="605" y="206" text-anchor="middle">End motion</text>
+
+  <!-- arrows -->
+  <line x1="110" y1="102" x2="160" y2="102" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="270" y1="102" x2="320" y2="102" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="440" y1="102" x2="490" y2="102" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <!-- no -> dwell -->
+  <line x1="500" y1="128" x2="430" y2="180" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="478" y="160" fill="#5b6b7b" font-size="11">no</text>
+  <!-- dwell -> move -->
+  <line x1="320" y1="195" x2="215" y2="124" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <!-- yes -> end -->
+  <line x1="600" y1="128" x2="605" y2="180" stroke="#e0736b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="618" y="160" fill="#e0736b" font-size="11">yes</text>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="210" viewBox="0 0 680 210" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="340" y="22" text-anchor="middle" font-size="14" font-weight="bold">Event-based feedback logging</text>
+
+  <rect x="20" y="75" width="150" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="95" y="100" text-anchor="middle" font-weight="bold">Digital event</text>
+  <text x="95" y="118" text-anchor="middle" font-size="10" fill="#444">LockSrc, edge</text>
+
+  <rect x="215" y="75" width="160" height="60" rx="6" fill="#ffffff" stroke="#8a929b" stroke-width="1"/>
+  <text x="295" y="98" text-anchor="middle" font-size="12" font-weight="bold">On each event</text>
+  <text x="295" y="116" text-anchor="middle" font-size="10" fill="#666">LockCntr++ , log LockVal</text>
+
+  <rect x="420" y="45" width="240" height="42" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="540" y="71" text-anchor="middle" font-size="11">LockValTable -> LockTimeTable (position, time)</text>
+
+  <rect x="420" y="120" width="240" height="42" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="540" y="146" text-anchor="middle" font-size="11">overflow to LockValTabB / LockTimeTabB</text>
+
+  <g stroke="#5b6b7b" stroke-width="1.4" fill="none" marker-end="url(#arrow)">
+    <line x1="170" y1="105" x2="211" y2="105"/>
+    <line x1="375" y1="98" x2="416" y2="70"/>
+    <line x1="540" y1="87" x2="540" y2="116"/>
+  </g>
+  <text x="200" y="190" text-anchor="middle" font-size="10" fill="#666">Enabled by LockEn = 1</text>
+</svg>

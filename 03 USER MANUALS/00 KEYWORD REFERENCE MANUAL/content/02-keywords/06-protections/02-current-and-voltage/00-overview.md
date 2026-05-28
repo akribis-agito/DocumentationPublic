@@ -9,8 +9,12 @@ Agito controller has several current and voltage protection mechanisms.
 | 3 | **Motor current protection** Absolute value of motor current (MotorCurr) is monitored against maximum motor current (MaxMotorCurr). If absolute value of MotorCurr exceeds MaxMotorCurr for 4 consecutive controller cycles, axis is disabled with an error code at ConFlt. |
 | 4 | **Phase current protection** Absolute value of motor phase current is monitored against maximum phase motor current (MaxPhaseCurr). If absolute value of phase current exceeds MaxPhaseCurr for 0.25ms, axis is disabled with an error code at ConFlt. This protection is needed in cases such as stalling, where motor current is below protection rating, but phase current is above safe value. |
 | 5 | **PWM duty cycle protection** For PWM drives, maximum duty cycle of PWM can be limited by MaxPWM parameter. Default MaxPWM value corresponds to 100% PWM duty cycle. |
-| 6 | **Bus voltage protection** Bus voltage is monitored with maximum limit of MaxVBus and minimum limit of MinVBus. Any out-of-range condition for time greater than MaxVBusTime will result in axis disabling with an error code at ConFlt. Bus voltage is also monitored against MaxVBusAbs value. If absolute bus voltage value exceeds this limit, axis will be instantaneously disabled, and an error is thrown to ConFlt. |
+| 6 | **Bus voltage protection** Bus voltage is monitored with maximum limit of MaxVBus and minimum limit of MinVBus. An over-voltage above MaxVBus for time greater than MaxVBusTime disables the axis with an error code at ConFlt; an under-voltage at or below MinVBus disables the axis immediately. Bus voltage is also monitored against MaxVBusAbs value. If absolute bus voltage value exceeds this limit, axis will be instantaneously disabled, and an error is thrown to ConFlt. |
 | 7 | **Drive power supply protection** The drive input power terminals will be monitored against disconnection. User will have to enter the type of power supply in use (PowerSupply) in configuration page to ensure correct pins are checked. |
+
+The bus-voltage protection (item 6) is layered into bands around the normal operating range:
+
+![Bus-voltage protection bands: over MaxVBusAbs trips instantly, over MaxVBus for longer than MaxVBusTime trips, and at or below MinVBus trips instantly](vbus-bands.svg)
 
 <u>I2t protection for Agito controller:</u>
 

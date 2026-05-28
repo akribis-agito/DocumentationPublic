@@ -50,17 +50,17 @@ After a position/velocity move the controller advances the settling state machin
 
 In **current/force control** the check is recomputed every cycle from `|Vel[1]|` against `InTargetVelTh` and is **not** latched: if the velocity rises back above the threshold the state immediately drops from 4 (or 3) back to 2, and the dwell counter restarts. This is why value 2 in current/force mode reads as "velocity out of range" rather than "in motion".
 
-| InTargetStat | OperationMode = 2 (Velocity control) OperationMode = 3 (Position control) Keyword to monitor: PosErr Settling window: InTargetTol | OperationMode = 1 (Current control) OperationMode = 4 (Force control) Keyword to monitor: Vel[1] Settling window: InTargetVelTh |
+| InTargetStat | Velocity control (`OperationMode = 2`) / Position control (`OperationMode = 3`) — monitors `PosErr`, window `InTargetTol` | Current control (`OperationMode = 1`) / Force control (`OperationMode = 4`) — monitors `Vel[1]`, window `InTargetVelTh` |
 |---|---|---|
 | 0 | **Motor disabled** | **Motor disabled** |
 | 1 | **Motor enabled** | **Motor enabled** |
-| 2 | **In motion** | **Velocity out of range** *a**b**s*(*V**e**l*[1]) > *I**n**T**a**r**g**e**t**V**e**l**T**h* |
-| 3 | **Settling** Axis is settling / axis has settled but is pending InTargetTime to elapse. | **Velocity within range** *a**b**s*(*V**e**l*[1]) ≤ *I**n**T**a**r**g**e**t**V**e**l**T**h*, but is pending InTargetTime to elapse. |
-| 4 | **Target reached** Axis has settled within InTargetTol for at least InTargetTime. Once InTargetStat = 4, it will remain so until the next motion is commanded/ axis is disabled, even if position error exits the settling window, where *a**b**s*(*P**o**s**E**r**r*) > *I**n**T**a**r**g**e**t**T**o**l*. | **Target reached** *a**b**s*(*V**e**l*[1]) ≤ *I**n**T**a**r**g**e**t**V**e**l**T**h* for at least InTargetTime. |
+| 2 | **In motion** | **Velocity out of range** — `abs(Vel[1]) > InTargetVelTh` |
+| 3 | **Settling** — axis is settling (or has settled but `InTargetTime` has not yet elapsed). | **Velocity within range** — `abs(Vel[1]) <= InTargetVelTh`, but `InTargetTime` has not yet elapsed. |
+| 4 | **Target reached** — settled within `InTargetTol` for at least `InTargetTime`. Once `InTargetStat = 4` it stays there until the next motion is commanded or the axis is disabled, even if `abs(PosErr)` later exceeds `InTargetTol`. | **Target reached** — `abs(Vel[1]) <= InTargetVelTh` for at least `InTargetTime`. |
 
 ## Examples
 
-<img alt="A screenshot of a graph AI-generated content may be incorrect." src="image29.png" style="width:5.40395in;height:5.06583in"/>
+![InTargetStat over a move under position control](intargetstat-timeline.svg)
 
 The example shows how InTargetStat changes with different motion phases, under position control operation mode (OperationMode=3).
 

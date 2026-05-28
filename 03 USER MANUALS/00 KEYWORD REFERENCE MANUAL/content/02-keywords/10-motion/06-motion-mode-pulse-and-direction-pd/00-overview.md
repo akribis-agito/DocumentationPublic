@@ -6,7 +6,7 @@ Pulse and direction command is a traditional method to decouple the controller t
 
 With this, controllers with profiling algorithm for specific applications (e.g. CNC machine or laser cutter) can be used with any stage system that supports this mode of command. It allows for flexibility in pairing of drivers of different sizes and types.
 
-<img alt="A diagram of a device AI-generated content may be incorrect." src="image31.png" style="width:6.14955in;height:3.54617in"/>
+![Pulse-and-direction motion: from input to position reference](pd-input-chain.svg)
 
 **Note:**
 

@@ -2,6 +2,8 @@
 
 Agito allows logging of encoder feedback value based on digital event defined by LockSrc. This feature is enabled by LockEn. After enabling this feature (LockEn = 1), an internal timer (LockTimer) will start from 0.
 
+![Event-based feedback logging: a digital event (LockSrc, edge) increments LockCntr and logs LockVal each time it occurs; the captured position and time are stored in LockValTable and LockTimeTable, overflowing into the B tables when full](lock-capture.svg)
+
 Each digital event will cause this sequence of actions:
 
 1.  LockCntr to increment

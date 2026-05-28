@@ -1,6 +1,10 @@
 # Virtual encoder
 
-A virtual encoder is a software-driven encoder-signal generator: when enabled, the controller emits a real quadrature or pulse/direction signal on the axis's encoder-emulation outputs that tracks a selectable internal source variable, scaled and delayed as configured. It does not replace the axis's own position feedback; it produces an output signal that a downstream device can read. This is useful for passing a software-defined source to another device, for simulation, or for synchronising with an external process. The keywords in this section configure the virtual encoder:
+A virtual encoder is a software-driven encoder-signal generator: when enabled, the controller emits a real quadrature or pulse/direction signal on the axis's encoder-emulation outputs that tracks a selectable internal source variable, scaled and delayed as configured. It does not replace the axis's own position feedback; it produces an output signal that a downstream device can read. This is useful for passing a software-defined source to another device, for simulation, or for synchronising with an external process.
+
+![Virtual encoder as a signal generator: a selectable source variable (VEncSrc) is scaled and tracked (VEncFact/VEncFactDen, VEncDelay) and emitted as a quadrature or pulse/direction output (VEncType) to a downstream device; it generates a signal rather than acting as a feedback source](virtual-encoder-generator.svg)
+
+The keywords in this section configure the virtual encoder:
 
 - [VEncOn](VEncOn.md) — enables or disables the virtual encoder
 - [VEncSrc](VEncSrc.md) — selects the source signal

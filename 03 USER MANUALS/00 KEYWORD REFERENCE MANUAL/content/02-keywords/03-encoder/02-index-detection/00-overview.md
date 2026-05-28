@@ -2,6 +2,8 @@
 
 Only incremental encoder (digital incremental AqB, SIN/COS, etc.) has index or reference mark. The index signal is used generally for homing application. Agito controller checks for the index mark at every controller cycle and upon detection, records down the encoder feedback to IndexPos and raise the IndexStat flag.
 
+![Index capture: the encoder index pulse is polled every controller cycle (so the axis must move slowly enough to catch it); on detection the controller records IndexPos as the feedback position and sets IndexStat to 1](index-capture.svg)
+
 This index detection method relies on duration of index signal pulse being long enough for the polling to detect the change. Therefore, to avoid missing an index, axis must move at a low speed. Generally,
 
 $$

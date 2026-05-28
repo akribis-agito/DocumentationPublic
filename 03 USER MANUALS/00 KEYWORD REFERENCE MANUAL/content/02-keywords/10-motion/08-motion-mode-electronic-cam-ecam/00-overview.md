@@ -4,7 +4,7 @@ This section extends from direct ECAM motion ([MotionMode](../../../02-keywords/
 
 Cam-follower mechanism is roller bearing system where the follower (slave) tracks the cam lobe profile. The cam (also known as master) is driven by a motor. Electronic cam (ECAM) motion is an electronic equivalent of such mechanical system.
 
-![image38.png](../../../assets/image38.png)
+![Electronic cam motion: from master variable through the cam table to the follower reference](ecam-lookup.svg)
 
 For ECAM motion, axis behaves as a slave to a user-defined master variable (its complex CAN code is defined by [ECAMMaster](../../../02-keywords/10-motion/08-motion-mode-electronic-cam-ecam/ECAMMaster.md)). As master value changes, the axis position reference will track a cam pattern (1D look-up table) that maps to a range of evenly, linearly spaced master values, with the gap defined by [ECAMGap](../../../02-keywords/10-motion/08-motion-mode-electronic-cam-ecam/ECAMGap.md). Linear interpolation on the look-up table is used if the master value is in between the discrete intervals.
 

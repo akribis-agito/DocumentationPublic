@@ -2,6 +2,8 @@
 
 This category groups the keywords that configure and read the axis position feedback and the related signal interfaces. Some products support a main encoder and an auxiliary encoder per axis; the auxiliary-encoder keywords carry an additional `Aux` prefix and behave like their main-encoder counterparts.
 
+![Position feedback path: the encoder feeds counts and interpolation (EncDir, EncFilt, EncRes) into a raw EncoderPos, which is transformed by modulo, absolute offset and error mapping into the axis feedback position Pos](feedback-path.svg)
+
 The keywords are organised into the following sub-sections:
 
 - **General settings** — feedback type and decoding, direction, input filtering, resolution, user-unit scaling, absolute-encoder configuration, and SIN/COS setup. See the [general-settings overview](01-general-settings/00-overview.md).

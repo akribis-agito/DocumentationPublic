@@ -38,19 +38,19 @@ Numerator of the gear ratio applied to the master-variable delta.
 
 ### The ratio is normalised to 65536
 
-`MasterFact` is a fixed-point numerator scaled by 65536, so the default value `65536` gives a **1:1** ratio. In v4 the gearing macro applies it directly with a left shift, with no separate denominator term:
+`MasterFact` is a numerator relative to a base of 65536, so the default value `65536` gives a **1:1** ratio. In v4 it is applied directly, with no separate denominator term:
 
 $$
 \mathrm{\Delta}_{MasterPos} = \frac{MasterFact}{65536} \bullet \mathrm{\Delta}_{master\ variable}
 $$
 
-The controller computes this as `(master_delta × MasterFact) << 16`, then accumulates it into the 32.32 fixed-point `MasterPos`. Converting to 64-bit *before* the multiply protects against overflow when a modulo master jumps by a large amount.
+The scaled change is accumulated into `MasterPos` each cycle.
 
 A negative `MasterFact` reverses the follower direction relative to the master. To set ratios that are not a clean multiple of 1/65536, use the numerator/denominator pair (v5) — see *Changes between versions*.
 
 ### Special unity-ratio case
 
-A value of exactly `65536`, together with `MasterFilt = 64` and direct gear mode pointing at another axis's reference, enables the drift-free 64-bit axis-to-axis gearbox described under [GearMaster](GearMaster.md).
+A value of exactly `65536`, together with `MasterFilt = 64` and direct gear mode pointing at another axis's reference, enables the drift-free axis-to-axis gearbox described under [GearMaster](GearMaster.md).
 
 ## Examples
 
@@ -63,7 +63,7 @@ AMasterFact          ; read current value
 
 ## Changes between versions
 
-In **v4** the ratio is `MasterFact / 65536` (numerator only); there is no denominator in the accumulation. In **v5 (central-i)** a true rational ratio `MasterFact / MasterFactDen` is applied with a fractional remainder carried in `long double`, so non-integer ratios are exact and free of long-term drift; see [MasterFactDen](MasterFactDen.md). **v5 is central-i only.**
+In **v4** the ratio is `MasterFact / 65536` (numerator only); there is no denominator in the accumulation. In **v5 (central-i)** the full rational ratio `MasterFact / MasterFactDen` is applied, carrying the fractional remainder, so non-integer ratios are exact and free of long-term drift; see [MasterFactDen](MasterFactDen.md). **v5 is central-i only.**
 
 ## See also
 

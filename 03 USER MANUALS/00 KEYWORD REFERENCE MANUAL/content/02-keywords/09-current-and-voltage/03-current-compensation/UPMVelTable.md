@@ -41,7 +41,7 @@ Per-commutation-angle current compensation table for brushless motors (e.g. cogg
 The compensation is applied in the current control loop while the motor is enabled and commutation (auto-phasing) is complete. Two conditions must hold for the table to be used:
 
 1. The motor is a brushless type (so a commutation angle exists — brush motors have no commutation angle).
-2. The anti-cogging feature is enabled by its on/off flag (`UPMVelOn` ≠ 0).
+2. The anti-cogging feature is enabled by its on/off flag ([UPMVelOn](../../../03-special-features/upm/UPMVelOn.md) ≠ 0).
 
 When enabled, each control cycle the firmware reads the present commutation angle ([ComtAng](../../15-commutation/ComtAng.md)), converts it from radians to degrees and rounds to the nearest whole degree, then uses that as the array index. The value found there is **added** to the current reference:
 

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" viewBox="0 0 760 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <!-- Input -->
+  <text x="70" y="86" text-anchor="middle">Profiler position</text>
+  <text x="70" y="102" text-anchor="middle">reference</text>
+  <line x1="120" y1="95" x2="168" y2="95" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <!-- Shaper block -->
+  <rect x="170" y="60" width="150" height="70" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="245" y="88" text-anchor="middle">Input shaper</text>
+  <text x="245" y="106" text-anchor="middle">(FIR convolution)</text>
+
+  <line x1="320" y1="95" x2="368" y2="95" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <!-- Sum -->
+  <rect x="370" y="70" width="50" height="50" rx="25" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="395" y="100" text-anchor="middle">&#931;</text>
+
+  <line x1="420" y1="95" x2="468" y2="95" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="600" y="86" text-anchor="middle">Shaped reference</text>
+  <text x="600" y="102" text-anchor="middle">to position loop</text>
+  <rect x="470" y="70" width="0" height="0"/>
+
+  <!-- Three impulse taps feeding the sum -->
+  <!-- tap A0 at 0 -->
+  <rect x="170" y="160" width="60" height="34" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="200" y="182" text-anchor="middle">A&#8320;</text>
+  <text x="200" y="216" text-anchor="middle">delay 0</text>
+
+  <!-- tap A1 at T/2 -->
+  <rect x="290" y="160" width="60" height="34" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="320" y="182" text-anchor="middle">A&#8321;</text>
+  <text x="320" y="216" text-anchor="middle">delay T/2</text>
+
+  <!-- tap A2 at T -->
+  <rect x="410" y="160" width="60" height="34" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="440" y="182" text-anchor="middle">A&#8322;</text>
+  <text x="440" y="216" text-anchor="middle">delay T</text>
+
+  <!-- arrows from taps up into sum -->
+  <line x1="200" y1="160" x2="200" y2="140" stroke="#5b6b7b" stroke-width="1.4"/>
+  <line x1="200" y1="140" x2="375" y2="140" stroke="#5b6b7b" stroke-width="1.4"/>
+  <line x1="375" y1="140" x2="382" y2="124" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="320" y1="160" x2="320" y2="148" stroke="#5b6b7b" stroke-width="1.4"/>
+  <line x1="320" y1="148" x2="390" y2="148" stroke="#5b6b7b" stroke-width="1.4"/>
+  <line x1="390" y1="148" x2="393" y2="124" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="440" y1="160" x2="440" y2="140" stroke="#5b6b7b" stroke-width="1.4"/>
+  <line x1="440" y1="140" x2="412" y2="140" stroke="#5b6b7b" stroke-width="1.4"/>
+  <line x1="412" y1="140" x2="406" y2="124" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <!-- note -->
+  <text x="320" y="258" text-anchor="middle" fill="#5b6b7b">Impulses spaced at 0, half period (T/2) and one full period (T);</text>
+  <text x="320" y="276" text-anchor="middle" fill="#5b6b7b">amplitudes A&#8320;+A&#8321;+A&#8322; = 1, so steady reference is unchanged.</text>
+</svg>

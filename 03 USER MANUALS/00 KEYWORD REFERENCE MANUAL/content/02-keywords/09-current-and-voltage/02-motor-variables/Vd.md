@@ -39,16 +39,16 @@ Read-only direct-axis PI-controller output in dq0-domain current control (three-
 
 ## How it works
 
-`Vd` is the output of the direct-axis current PI controller, computed from the error [IdErr](IdErr.md). The integral is accumulated (scaled by CurrKi) and the proportional term (scaled by CurrGain) is added:
+`Vd` is the output of the direct-axis current PI controller, computed from the error [IdErr](IdErr.md). The integral is accumulated (scaled by the integral gain [CurrKi](../../11-control-tuning/06-current-control/CurrKi.md)) and the proportional term (scaled by the loop gain [CurrGain](../../11-control-tuning/06-current-control/CurrGain.md)) is added:
 
 $$
 \begin{aligned}
-IdIntegral &\mathrel{+}= IdErr \cdot CurrKi \cdot 0.001 \cdot noClamp \\
-Vd &= (IdIntegral + IdErr) \cdot CurrGain \cdot 0.001
+I_{\Sigma} &\mathrel{+}= IdErr \cdot CurrKi \cdot 0.001 \cdot a_{aw} \\
+Vd &= (I_{\Sigma} + IdErr) \cdot CurrGain \cdot 0.001
 \end{aligned}
 $$
 
-`0.001` is the fixed gain scaling; `noClamp` is the anti-windup flag (0 freezes the integral during voltage saturation, 1 otherwise).
+$I_{\Sigma}$ is the running integral; `0.001` is the fixed gain scaling; $a_{aw}$ is the anti-windup gate (0 freezes the integral during voltage saturation, 1 otherwise).
 
 **Vector saturation.** Before the inverse Park transform, `Vd` and [Vq](Vq.md) are limited as a vector against the maximum PWM magnitude. If $Vq^2 + Vd^2$ exceeds the squared limit (the limit is multiplied by $4/3$ when the enhanced-speed-range bit of [ControlMode](ControlMode.md) is set), both `Vd` and `Vq` are scaled by the same factor so the sine-wave shape is preserved, and the voltage-saturation status bit in [StatReg](../../07-status-and-faults/StatReg.md) is set.
 
@@ -62,7 +62,7 @@ Vc &= -(Va + Vb)
 \end{aligned}
 $$
 
-A common-mode (space-vector) offset is then applied to [Va](Va.md), [Vb](Vb.md), [Vc](Vc.md) before PWM. The current-loop gains CurrGain and CurrKi are documented under [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md); this page does not give tuning guidance.
+A common-mode (space-vector) offset is then applied to [Va](Va.md), [Vb](Vb.md), [Vc](Vc.md) before PWM. The current-loop gains [CurrGain](../../11-control-tuning/06-current-control/CurrGain.md) and [CurrKi](../../11-control-tuning/06-current-control/CurrKi.md) are documented under [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md); this page does not give tuning guidance.
 
 ## Examples
 

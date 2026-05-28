@@ -1,6 +1,6 @@
 ---
 keyword: Abort
-summary: Immediately stops motion using the emergency deceleration rate (EmrgDec).
+summary: Immediately ends motion by clearing the motion state; no profiler deceleration ramp.
 availability:
   standalone:
   - v4

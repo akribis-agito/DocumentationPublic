@@ -43,7 +43,7 @@ Read-only running position along the vector path (0 to VecAbsTrgt), always posit
 
 `VecPosRef` is the master coordinate of the whole vector move. A vector move runs a single velocity profile along the path; each control cycle the controller advances the path velocity (shaped by [VecSpeed](VecSpeed.md), [VecAccel](VecAccel.md), [VecDecel](VecDecel.md) and [VecJerk](VecJerk.md)) and accumulates it into `VecPosRef`, so this one number climbs monotonically from 0 to [VecAbsTrgt](VecAbsTrgt.md).
 
-The accumulation is carried internally at higher precision (a fixed-point value scaled by `2^14`) so that fractional path motion builds up without drift; `VecPosRef` is reported by rounding that accumulator back to user units. An optional path-position filter can be applied to smooth the reference before it is split across the axes.
+The accumulation is carried internally at higher precision so that fractional path motion builds up without drift; `VecPosRef` is reported by rounding that value back to user units. An optional path-position filter can be applied to smooth the reference before it is split across the axes.
 
 Each cycle the controller converts `VecPosRef` into the per-axis position references according to the geometry ([VecType](VecType.md)):
 

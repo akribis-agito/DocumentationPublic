@@ -36,9 +36,9 @@ Read-only rate of change of the scaled P/D counter PDPos, in P/D units per secon
 
 ## How it works
 
-`PDVel` is not differentiated from `PDPos` after the fact; it is taken directly from the **per-cycle scaled delta** computed during P/D decoding. The controller derives `PDVel` from that cycle's scaled 32.32 delta by shifting it down into the reference rate (a right shift of `32 − 14`). Because the delta already carries the [PDFact](PDFact.md)/[PDFactDen](PDFactDen.md) scaling, the [PDEncDir](PDEncDir.md) sign, and the carried-forward fractional remainder, `PDVel` reflects the same scaling and direction as `PDPos`. It is the change per control cycle expressed at the reference's 50.14 rate, i.e. an internal velocity in counts per second.
+`PDVel` is not differentiated from `PDPos` after the fact; it is taken directly from the **per-cycle scaled change** computed during P/D decoding. Because that change already carries the [PDFact](PDFact.md)/[PDFactDen](PDFactDen.md) scaling, the [PDEncDir](PDEncDir.md) sign, and the carried-forward fractional remainder, `PDVel` reflects the same scaling and direction as `PDPos`. It is the change per controller cycle expressed as a velocity.
 
-`PDVel` is used internally as well as for monitoring: in direct mode the profiler copies it into its velocity estimate so direction-dependent decisions (e.g. limit-switch handling, friction-compensation sign) work, and the by-pulses gain-scheduling mode switches control sets whenever `PDVel` is non-zero.
+In direct mode the velocity also feeds direction-dependent decisions (for example limit-switch handling and friction-compensation sign), so `PDVel` reflects the instantaneous P/D command rate.
 
 Like `PDPos`, `PDVel` is an internal-count value converted to pulse-direction user units when queried over a communication channel — see [PDUsrUnits](PDUsrUnits.md).
 

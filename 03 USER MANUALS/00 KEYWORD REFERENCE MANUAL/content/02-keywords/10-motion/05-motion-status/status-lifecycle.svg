@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="230" viewBox="0 0 700 230" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="20" y="22" font-size="14" font-weight="bold">Motion status lifecycle</text>
+
+  <!-- Idle -->
+  <rect x="20" y="90" width="100" height="46" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="70" y="111" text-anchor="middle">Idle</text>
+  <text x="70" y="127" text-anchor="middle" font-size="11" fill="#5b6b7b">Stat=0, InTgt=1</text>
+
+  <!-- In motion -->
+  <rect x="160" y="90" width="120" height="46" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="220" y="111" text-anchor="middle">In motion</text>
+  <text x="220" y="127" text-anchor="middle" font-size="11" fill="#5b6b7b">bit 0=1, InTgt=2</text>
+
+  <!-- Settling -->
+  <rect x="320" y="90" width="120" height="46" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="380" y="111" text-anchor="middle">Settling</text>
+  <text x="380" y="127" text-anchor="middle" font-size="11" fill="#5b6b7b">InTgt=3</text>
+
+  <!-- Reached -->
+  <rect x="480" y="90" width="120" height="46" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="540" y="111" text-anchor="middle">Target reached</text>
+  <text x="540" y="127" text-anchor="middle" font-size="11" fill="#5b6b7b">InTgt=4</text>
+
+  <!-- arrows -->
+  <line x1="120" y1="113" x2="160" y2="113" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="140" y="103" text-anchor="middle" fill="#5b6b7b" font-size="11">Begin</text>
+  <line x1="280" y1="113" x2="320" y2="113" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="300" y="103" text-anchor="middle" fill="#5b6b7b" font-size="11">profile ends</text>
+  <line x1="440" y1="113" x2="480" y2="113" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="460" y="103" text-anchor="middle" fill="#5b6b7b" font-size="11">InTargetTime</text>
+
+  <text x="350" y="180" text-anchor="middle" fill="#5b6b7b" font-size="11">Stop / Abort clears the in-motion bits; MotionReason records why the move ended.</text>
+</svg>

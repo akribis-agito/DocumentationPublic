@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="660" height="300" viewBox="0 0 660 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="330" y="22" text-anchor="middle" font-size="14" font-weight="bold">Central-i network</text>
+
+  <!-- Master controller -->
+  <rect x="30" y="70" width="170" height="160" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="115" y="94" text-anchor="middle" font-weight="bold">Master controller</text>
+  <rect x="48" y="110" width="60" height="36" rx="6" fill="#ffffff" stroke="#8a929b" stroke-width="1"/>
+  <text x="78" y="132" text-anchor="middle" font-size="11">Port 1</text>
+  <rect x="122" y="110" width="60" height="36" rx="6" fill="#ffffff" stroke="#8a929b" stroke-width="1"/>
+  <text x="152" y="132" text-anchor="middle" font-size="11">Port 2</text>
+  <text x="115" y="172" text-anchor="middle" font-size="10" fill="#444">CIConnect brings a</text>
+  <text x="115" y="188" text-anchor="middle" font-size="10" fill="#444">port up; CIStatus[1]</text>
+  <text x="115" y="204" text-anchor="middle" font-size="10" fill="#444">reports its state</text>
+
+  <!-- Remote units -->
+  <rect x="430" y="55" width="200" height="80" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="530" y="80" text-anchor="middle" font-weight="bold">Remote amplifier unit</text>
+  <text x="530" y="100" text-anchor="middle" font-size="10" fill="#444">drives motor / encoder</text>
+  <text x="530" y="116" text-anchor="middle" font-size="10" fill="#444">reports back via CIIdentity</text>
+
+  <rect x="430" y="165" width="200" height="80" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="530" y="190" text-anchor="middle" font-weight="bold">Remote amplifier unit</text>
+  <text x="530" y="210" text-anchor="middle" font-size="10" fill="#444">one per master port</text>
+  <text x="530" y="226" text-anchor="middle" font-size="10" fill="#444">connect state per axis</text>
+
+  <!-- links -->
+  <g stroke="#5b6b7b" stroke-width="1.6" fill="none" marker-end="url(#arrow)">
+    <line x1="108" y1="128" x2="426" y2="95"/>
+    <line x1="182" y1="128" x2="426" y2="205"/>
+  </g>
+  <g stroke="#5b6b7b" stroke-width="1.2" fill="none" marker-end="url(#arrow)">
+    <line x1="426" y1="108" x2="190" y2="138"/>
+    <line x1="426" y1="218" x2="190" y2="146"/>
+  </g>
+  <text x="300" y="100" text-anchor="middle" font-size="10" fill="#5b6b7b">link: cyclic data + offline mailbox</text>
+  <text x="300" y="252" text-anchor="middle" font-size="10" fill="#5b6b7b">position / status / identity back to master</text>
+</svg>

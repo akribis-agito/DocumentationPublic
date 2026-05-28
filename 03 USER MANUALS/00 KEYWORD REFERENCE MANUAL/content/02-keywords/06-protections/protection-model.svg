@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="330" viewBox="0 0 720 330" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="20" y="26" font-size="15" font-weight="bold">The protection model</text>
+
+  <!-- monitored quantities -->
+  <rect x="20" y="50" width="170" height="170" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="105" y="72" text-anchor="middle" font-weight="bold">Monitored quantities</text>
+  <text x="105" y="98" text-anchor="middle">motor &amp; phase current</text>
+  <text x="105" y="120" text-anchor="middle">bus voltage</text>
+  <text x="105" y="142" text-anchor="middle">velocity / position error</text>
+  <text x="105" y="164" text-anchor="middle">motor &amp; board temperature</text>
+  <text x="105" y="186" text-anchor="middle">force error</text>
+  <text x="105" y="208" text-anchor="middle">hardware signals</text>
+
+  <!-- threshold checks -->
+  <rect x="250" y="80" width="160" height="110" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="330" y="106" text-anchor="middle" font-weight="bold">Threshold checks</text>
+  <text x="330" y="132" text-anchor="middle">compare against limit</text>
+  <text x="330" y="154" text-anchor="middle">over time window /</text>
+  <text x="330" y="172" text-anchor="middle">debounce count</text>
+
+  <!-- gating note -->
+  <rect x="250" y="210" width="160" height="64" rx="6" fill="#f4f7fb" stroke="#9fb4cc" stroke-width="1.2"/>
+  <text x="330" y="234" text-anchor="middle" font-weight="bold">Gating</text>
+  <text x="330" y="256" text-anchor="middle">HWProtectBits /</text>
+  <text x="330" y="272" text-anchor="middle">ProtectMask</text>
+
+  <!-- on trip outcomes -->
+  <rect x="470" y="50" width="230" height="64" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="585" y="74" text-anchor="middle" font-weight="bold">Trip: disable axis</text>
+  <text x="585" y="96" text-anchor="middle">raise ConFlt fault code</text>
+
+  <rect x="470" y="130" width="230" height="56" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="585" y="154" text-anchor="middle" font-weight="bold">Status / warning</text>
+  <text x="585" y="174" text-anchor="middle">set StatReg bit</text>
+
+  <rect x="470" y="202" width="230" height="56" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="585" y="226" text-anchor="middle" font-weight="bold">Limit (no trip)</text>
+  <text x="585" y="246" text-anchor="middle">clamp current / voltage</text>
+
+  <!-- arrows -->
+  <line x1="190" y1="135" x2="248" y2="135" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="330" y1="190" x2="330" y2="208" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="410" y1="110" x2="468" y2="84" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="410" y1="135" x2="468" y2="155" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="410" y1="165" x2="468" y2="225" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+
+  <text x="20" y="300" fill="#555" font-size="11">Most limit-exceeded conditions disable the axis and report a code on ConFlt; some current/voltage</text>
+  <text x="20" y="318" fill="#555" font-size="11">protections limit the value instead of tripping. ProtectMask can disable maskable hardware protections.</text>
+</svg>

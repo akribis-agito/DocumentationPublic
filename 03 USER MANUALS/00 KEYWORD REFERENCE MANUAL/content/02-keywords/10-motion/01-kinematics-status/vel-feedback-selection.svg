@@ -15,7 +15,7 @@
 
   <!-- sources -->
   <rect class="box" x="20" y="20" width="180" height="34" rx="4"/>
-  <text class="lbl" x="30" y="41">main enc Vel[2] = &#916;Pos &#215; Fs</text>
+  <text class="lbl" x="30" y="41">main enc Vel[2] = &#916;Pos &#215; samples/s</text>
 
   <rect class="box" x="20" y="80" width="180" height="34" rx="4"/>
   <text class="lbl" x="30" y="101">aux Vel &#215; DualLoopFact</text>

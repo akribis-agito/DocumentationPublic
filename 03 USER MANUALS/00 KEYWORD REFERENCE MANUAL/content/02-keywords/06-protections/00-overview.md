@@ -1,6 +1,10 @@
 # Protections
 
-Keywords that protect the motor, amplifier, and machine by limiting operation and tripping faults when limits are exceeded. The category is organised by what is protected:
+Keywords that protect the motor, amplifier, and machine by limiting operation and tripping faults when limits are exceeded. Each protection monitors a quantity, checks it against a limit (often over a time window or debounce count), and on a trip disables the axis and raises a [ConFlt](../07-status-and-faults/ConFlt.md) fault code and/or sets a [StatReg](../07-status-and-faults/StatReg.md) status bit. Which hardware protections are active is gated by [HWProtectBits](01-general-protection/HWProtectBits.md) / [ProtectMask](01-general-protection/ProtectMask.md).
+
+![The protection model: monitored quantities are checked against thresholds and, on a trip, disable the axis and raise a ConFlt fault or set a StatReg bit; some current/voltage protections limit the value instead](protection-model.svg)
+
+The category is organised by what is protected:
 
 - **General protection** — which hardware protections are active and enabled ([HWProtectBits](01-general-protection/HWProtectBits.md), [ProtectMask](01-general-protection/ProtectMask.md)).
 - **Current and voltage** — current limiting via the I²t scheme ([ContCL](02-current-and-voltage/ContCL.md) / [PeakCL](02-current-and-voltage/PeakCL.md) / [PeakTime](02-current-and-voltage/PeakTime.md)), current-command limits ([CurrLimMode](02-current-and-voltage/CurrLimMode.md), [CurrLimFwd](02-current-and-voltage/CurrLimFwd.md), [CurrLimRev](02-current-and-voltage/CurrLimRev.md)), over-current trips ([MaxMotorCurr](02-current-and-voltage/MaxMotorCurr.md), [MaxPhaseCurr](02-current-and-voltage/MaxPhaseCurr.md)), bus-voltage limits ([MinVBus](02-current-and-voltage/MinVBus.md) / [MaxVBus](02-current-and-voltage/MaxVBus.md) / [MaxVBusTime](02-current-and-voltage/MaxVBusTime.md) / [MaxVBusAbs](02-current-and-voltage/MaxVBusAbs.md)), plus [MaxPWM](02-current-and-voltage/MaxPWM.md) and [PowerSupply](02-current-and-voltage/PowerSupply.md).

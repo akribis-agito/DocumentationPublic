@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="280" viewBox="0 0 680 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="20" y="26" font-size="15" font-weight="bold">Two independent braking mechanisms</text>
+
+  <!-- Dynamic brake column -->
+  <text x="170" y="58" text-anchor="middle" font-weight="bold">Dynamic brake (electrical)</text>
+  <rect x="40" y="70" width="260" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="170" y="90" text-anchor="middle">DynBrakeOn &#8800; 0 AND motor off</text>
+  <text x="170" y="108" text-anchor="middle">AND fault permits braking?</text>
+
+  <rect x="40" y="150" width="260" height="56" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="170" y="174" text-anchor="middle">short phases (low-side devices),</text>
+  <text x="170" y="192" text-anchor="middle">duty backs off near current limit</text>
+
+  <rect x="40" y="226" width="260" height="40" rx="6" fill="#f4f7fb" stroke="#9fb4cc" stroke-width="1.2"/>
+  <text x="170" y="251" text-anchor="middle">StatReg bit 28 (dynamic brake active)</text>
+
+  <line x1="170" y1="120" x2="170" y2="148" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="170" y1="206" x2="170" y2="224" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+
+  <!-- Static brake column -->
+  <text x="510" y="58" text-anchor="middle" font-weight="bold">Static brake (holding)</text>
+  <rect x="380" y="70" width="260" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="510" y="90" text-anchor="middle">BrakeMode + motor-on state</text>
+  <text x="510" y="108" text-anchor="middle">(de-energized = engaged)</text>
+
+  <rect x="380" y="150" width="260" height="56" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="510" y="174" text-anchor="middle">release before motion;</text>
+  <text x="510" y="192" text-anchor="middle">engage to hold when off</text>
+
+  <rect x="380" y="226" width="260" height="40" rx="6" fill="#f4f7fb" stroke="#9fb4cc" stroke-width="1.2"/>
+  <text x="510" y="251" text-anchor="middle">StatReg bit 29 (lock requested)</text>
+
+  <line x1="510" y1="120" x2="510" y2="148" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="510" y1="206" x2="510" y2="224" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+</svg>

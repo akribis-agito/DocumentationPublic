@@ -43,22 +43,13 @@ Accumulated, scaled position of the gear-motion master variable.
 
 ### Per-cycle accumulation
 
-The update runs once per control cycle. Each cycle the controller reads the master variable, forms the change, scales it, applies the modulo wrap correction, and adds it to the running total:
+The update runs once per controller cycle. Each cycle the controller reads the master variable, forms the change since the previous cycle, scales it, applies the modulo wrap correction (if [MasterModRev](MasterModRev.md) ≠ 0), and adds it to the running total:
 
 $$
 \mathrm{\Delta}_{MasterPos} = \frac{MasterFact}{MasterFactDen} \bullet \mathrm{\Delta}_{master\ variable}
 $$
 
-```text
-delta            = (master_value - master_value_prev) * MasterFact   // v4: << 16, no denominator
-delta            = MasterModRev_correction(delta)                    // if MasterModRev != 0
-MasterPos_fixed += delta                                             // 32.32 fixed point
-MasterPos        = MasterPos_fixed >> 32                             // reported value
-```
-
-### Fixed-point representation
-
-The internal accumulator is a 64-bit **32.32 fixed-point** value; the reported `MasterPos` is its top 32 bits (`MasterPos = accumulator >> 32`). Keeping 32 fractional bits lets the gear ratio accumulate sub-unit increments without rounding drift, which matters at high `MasterFact` or for slow masters.
+The accumulation keeps sub-unit precision so the gear ratio builds up without rounding drift, which matters at high `MasterFact` or for slow masters.
 
 ### How it drives the follower
 
@@ -77,7 +68,7 @@ AMasterPos          ; read the accumulated scaled master position
 
 ## Changes between versions
 
-In **v5 (central-i)** `MasterPos` is reported as a 64-bit value with the larger range shown in the frontmatter. The v5 accumulation also applies a true `MasterFact / MasterFactDen` ratio (with a fractional remainder carried in `long double`) and supports 32-bit, 64-bit and floating-point master variables; v4 applies only `MasterFact` (numerator, scaled by 65536) to a 32-bit master. **v5 is central-i only**, so on standalone `MasterPos` remains the v4 32-bit value.
+In **v5 (central-i)** `MasterPos` is reported as a 64-bit value with the larger range shown in the frontmatter. The v5 accumulation applies the full `MasterFact / MasterFactDen` ratio (carrying the fractional remainder) and supports 32-bit, 64-bit and floating-point master variables; v4 applies only the `MasterFact` numerator (scaled relative to a base of 65536) to a 32-bit master. **v5 is central-i only**, so on standalone `MasterPos` remains the v4 32-bit value.
 
 ## See also
 

@@ -40,7 +40,7 @@ When one repetition finishes and another is due, the controller sets bit 1 (dwel
 
 When the dwell counter reaches `RptWait` the controller clears bit 1, loads the next target ([RptMode](RptMode.md) decides whether that is the original start or the next step), re-arms the in-target status and friction-compensation flag, and the next move begins. With `RptWait = 0` the wait branch is satisfied immediately, so the next move starts on the very next cycle with no dwell.
 
-The dwell counter advances every control cycle, so although the value is documented in milliseconds the actual pause is `RptWait` cycles of the servo loop. If [StopRep](../04-motion-command/StopRep.md) (or a fault stop) arrives during the dwell, the motion ends immediately without starting the next repetition.
+The value you set is in milliseconds; the controller converts it to a whole number of servo cycles and the dwell counter (which advances every control cycle) counts up to that converted target, so the actual pause is `RptWait` milliseconds. If [StopRep](../04-motion-command/StopRep.md) (or a fault stop) arrives during the dwell, the motion ends immediately without starting the next repetition.
 
 ## Examples
 

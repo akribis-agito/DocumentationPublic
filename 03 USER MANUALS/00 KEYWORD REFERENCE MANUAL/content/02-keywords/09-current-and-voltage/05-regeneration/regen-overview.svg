@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="340" viewBox="0 0 640 340" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="320" y="26" text-anchor="middle" font-size="15" font-weight="bold">Regeneration: bus-voltage hysteresis and the regen transistor</text>
+
+  <!-- axes -->
+  <line x1="90" y1="270" x2="560" y2="270" stroke="#5b6b7b" stroke-width="1.2"/>
+  <line x1="90" y1="270" x2="90" y2="70" stroke="#5b6b7b" stroke-width="1.2"/>
+  <text x="320" y="300" text-anchor="middle">Bus voltage</text>
+  <text x="40" y="160" text-anchor="middle" transform="rotate(-90 40 160)">Regen transistor</text>
+
+  <!-- state guides -->
+  <text x="60" y="105" fill="#5b6b7b">ON</text>
+  <text x="56" y="245" fill="#5b6b7b">OFF</text>
+  <line x1="90" y1="100" x2="560" y2="100" stroke="#d6dde6" stroke-dasharray="3,3"/>
+  <line x1="90" y1="240" x2="560" y2="240" stroke="#d6dde6" stroke-dasharray="3,3"/>
+
+  <!-- thresholds -->
+  <line x1="250" y1="80" x2="250" y2="284" stroke="#5b8def" stroke-dasharray="4,4"/>
+  <text x="250" y="312" text-anchor="middle" fill="#5b8def">RegenOff</text>
+  <line x1="420" y1="80" x2="420" y2="284" stroke="#e0736b" stroke-dasharray="4,4"/>
+  <text x="420" y="312" text-anchor="middle" fill="#e0736b">RegenOn</text>
+
+  <!-- rising path: OFF until RegenOn, then ON -->
+  <polyline points="120,240 420,240 420,100 540,100" fill="none" stroke="#e0736b" stroke-width="2.4"/>
+  <!-- falling path: ON until RegenOff, then OFF -->
+  <polyline points="540,100 250,100 250,240 120,240" fill="none" stroke="#5b8def" stroke-width="2.4"/>
+
+  <text x="320" y="232" text-anchor="middle" font-size="11" fill="#e0736b">rising bus &#8594; turns ON at RegenOn</text>
+  <text x="200" y="92" text-anchor="middle" font-size="11" fill="#5b8def">falling bus &#8594; turns OFF at RegenOff</text>
+  <text x="320" y="58" text-anchor="middle" font-size="11" fill="#5b6b7b">RegenOn &gt; RegenOff gives the dead-band that prevents chatter</text>
+</svg>

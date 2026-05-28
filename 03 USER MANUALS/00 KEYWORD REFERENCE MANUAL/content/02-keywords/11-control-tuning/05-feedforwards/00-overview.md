@@ -2,7 +2,7 @@
 
 The following block diagram shows the typical feedforward control structure (including all the internal scaling).
 
-![image59.png](../../../assets/image59.png)
+![Feedforward structure: reference acceleration through AccFFW and reference velocity through VelFFW, summed and filtered into the current reference](feedforward-structure.svg)
 
 Feedforward is the control effort that acts in advance, according to the motion profile to reduce position error during motion. This is different from reactive feedback control that forms control effort only when there is error.
 

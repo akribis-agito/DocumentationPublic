@@ -1,6 +1,8 @@
 # Motion mode – First in first out (FIFO)
 
-FIFO motion mode lets the user push a sequence of motion segments into a queue, which the controller then executes in order. Segments can be pushed before or during the motion, and the queue holds up to 512 entries.
+FIFO motion mode lets the user push a sequence of motion segments into a queue, which the controller then executes in order. Segments can be pushed before or during the motion, and the queue holds up to 128 entries.
+
+![FIFO motion: the host fills a point queue that the controller drains each cycle time into the reference](fifo-pipeline.svg)
 
 Two related subsystems are documented in this section:
 

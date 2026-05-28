@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="280" viewBox="0 0 600 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="300" y="22" text-anchor="middle" font-size="14" font-weight="bold">Modulo mode: feedback wraps within [0, ModRev-1]</text>
+
+  <!-- axes -->
+  <line x1="60" y1="230" x2="540" y2="230" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="60" y1="230" x2="60" y2="55" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="300" y="262" text-anchor="middle" font-size="11" fill="#444">continuous one-direction motion (time)</text>
+  <text x="24" y="145" text-anchor="middle" font-size="11" fill="#444" transform="rotate(-90 24 145)">Pos</text>
+
+  <!-- ModRev wrap line -->
+  <line x1="60" y1="70" x2="540" y2="70" stroke="#e0736b" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="544" y="74" font-size="11" fill="#e0736b">ModRev</text>
+  <text x="44" y="234" text-anchor="end" font-size="11" fill="#444">0</text>
+
+  <!-- sawtooth -->
+  <polyline points="60,230 180,70 180,230 300,70 300,230 420,70 420,230 510,110"
+            fill="none" stroke="#5b8def" stroke-width="2.2"/>
+
+  <!-- wrap annotation -->
+  <text x="195" y="150" font-size="11" fill="#e0736b">wrap: Pos subtracts ModRev</text>
+  <text x="195" y="166" font-size="10" fill="#666">references shift too, so PosErr is preserved</text>
+</svg>

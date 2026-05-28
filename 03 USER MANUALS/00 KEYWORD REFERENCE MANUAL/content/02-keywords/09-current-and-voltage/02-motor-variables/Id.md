@@ -47,7 +47,7 @@ $$
 
 The factor $2/\sqrt3 \approx 1.1547$ is applied as written. θ is the electrical commutation angle from the commutation/auto-phasing logic (the same angle that produces the phase references). The quadrature counterpart [Iq](Iq.md) uses the cosine terms.
 
-The current-loop gains that act on the resulting error are [CurrGain](../../11-control-tuning/06-current-control/00-overview.md) and CurrKi (see [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md)); this page does not give tuning guidance.
+The current-loop gains that act on the resulting error are [CurrGain](../../11-control-tuning/06-current-control/CurrGain.md) and [CurrKi](../../11-control-tuning/06-current-control/CurrKi.md) (see [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md)); this page does not give tuning guidance.
 
 ![FOC current loop](foc-current-loop.svg)
 

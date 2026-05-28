@@ -45,25 +45,16 @@ You must set `MasterModRev` to match the [ModRev](../../03-encoder/04-modulo-mod
 
 ### Why it is needed
 
-[MasterPos](MasterPos.md) accumulates the *change* of the master each cycle (`master_value − master_value_prev`). If the master is a continuous-rotation variable that wraps at its modulo boundary, one wrap produces an apparent change of nearly a full `ModRev` in a single cycle — a huge false delta that would jolt the follower. `MasterModRev` tells the accumulator the size of that boundary so it can recognise and unwrap the jump.
+[MasterPos](MasterPos.md) accumulates the *change* of the master each cycle. If the master is a continuous-rotation variable that wraps at its modulo boundary, one wrap produces an apparent change of nearly a full `ModRev` in a single cycle — a huge false change that would jolt the follower. `MasterModRev` tells the accumulator the size of that boundary so it can recognise and unwrap the jump.
 
 ### The correction
 
-When the value is set, the controller pre-computes the boundary in the internal 32.32 fixed-point units and its half:
+Each cycle, if `MasterModRev ≠ 0`, the change is compared against half the boundary:
 
-```text
-MasterModRev_fixed = MasterModRev << 32
-MasterModRev_half  = MasterModRev_fixed >> 1
-```
+- a change greater than `+MasterModRev/2` is treated as a forward wrap and `MasterModRev` is subtracted;
+- a change less than `−MasterModRev/2` is treated as a backward wrap and `MasterModRev` is added.
 
-Then each cycle, if `MasterModRev ≠ 0`, the scaled delta is corrected against the half-boundary:
-
-```text
-if (delta >  MasterModRevHalf)  delta -= MasterModRev   // wrapped forward
-if (delta < -MasterModRevHalf)  delta += MasterModRev   // wrapped backward
-```
-
-A change larger than half a revolution is therefore interpreted as a wrap in the opposite direction and unwrapped, so `MasterPos` stays continuous across the master's modulo boundary. This assumes the master moves no more than half its `ModRev` per control cycle — the same assumption the follower's own modulo handling makes.
+A change larger than half a revolution is therefore interpreted as a wrap in the opposite direction and unwrapped, so `MasterPos` stays continuous across the master's modulo boundary. This assumes the master moves no more than half its `ModRev` per controller cycle — the same assumption the follower's own modulo handling makes.
 
 ## Examples
 
@@ -75,7 +66,7 @@ AMasterModRev            ; read current value
 
 ## Changes between versions
 
-In **v5 (central-i)** `MasterModRev` is a 64-bit value (the boundary is carried as `long double` in the v5 gearing path). The wrap-correction logic is the same. **v5 is central-i only.**
+In **v5 (central-i)** `MasterModRev` is a 64-bit value. The wrap-correction logic is the same. **v5 is central-i only.**
 
 ## See also
 

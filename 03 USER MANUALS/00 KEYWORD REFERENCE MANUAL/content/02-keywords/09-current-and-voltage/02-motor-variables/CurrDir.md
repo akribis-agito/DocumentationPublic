@@ -36,18 +36,18 @@ Flips the direction of motor excitation (0 = normal, 1 = flipped).
 
 ## How it works
 
-`CurrDir` acts as a sign on the current path between the velocity/current loop and the commutation. After the current reference has been limited, the controller forms the final reference used by the current loop:
+`CurrDir` acts as a sign on the current path between the velocity/current loop and the commutation. After the current reference has been limited, the controller forms the direction-corrected reference used by the current loop:
 
 $$
-CurrRefFinal\ = \begin{cases} +CurrRef & CurrDir = 0 \\ -CurrRef & CurrDir = 1 \end{cases}
+CurrRef_{dir}\ = \begin{cases} +CurrRef & CurrDir = 0 \\ -CurrRef & CurrDir = 1 \end{cases}
 $$
 
-`CurrRefFinal` is the value the commutation then resolves into the phase references [IaRef](IaRef.md)/[IbRef](IbRef.md) (and [IqRef](IqRef.md) for brushless motors), so flipping `CurrDir` reverses the direction in which the commanded current drives the motor. The reported total current [MotorCurr](MotorCurr.md) is negated by the same flag, so it stays consistent with the commanded direction. The measured per-phase currents [Ia](Ia.md)/[Ib](Ib.md) and the dq currents [Iq](Iq.md)/[Id](Id.md) themselves are **not** negated by `CurrDir`; with `CurrDir` = 1 they appear with inverted sign relative to their references.
+This direction-corrected reference is the value the commutation then resolves into the phase references [IaRef](IaRef.md)/[IbRef](IbRef.md) (and [IqRef](IqRef.md) for brushless motors), so flipping `CurrDir` reverses the direction in which the commanded current drives the motor. The reported total current [MotorCurr](MotorCurr.md) is negated by the same flag, so it stays consistent with the commanded direction. The measured per-phase currents [Ia](Ia.md)/[Ib](Ib.md) and the dq currents [Iq](Iq.md)/[Id](Id.md) themselves are **not** negated by `CurrDir`; with `CurrDir` = 1 they appear with inverted sign relative to their references.
 
 | CurrDir | Effect |
 |---------|--------|
-| 0 | Motor direction is not flipped; `CurrRefFinal = CurrRef`. |
-| 1 | Motor direction is flipped; `CurrRefFinal = -CurrRef`. |
+| 0 | Motor direction is not flipped; the direction-corrected reference equals `+CurrRef`. |
+| 1 | Motor direction is flipped; the direction-corrected reference equals `−CurrRef`. |
 
 ## Examples
 

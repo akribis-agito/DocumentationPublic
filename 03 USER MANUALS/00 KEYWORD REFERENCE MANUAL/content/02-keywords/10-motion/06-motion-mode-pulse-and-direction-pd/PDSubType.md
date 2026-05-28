@@ -32,18 +32,18 @@ Selects the pulse-and-direction input signal format (e.g. step/direction vs. CW/
 
 ## Overview
 
-`PDSubType` selects how the FPGA decoder interprets the two input lines, so that [PDPos](PDPos.md) accumulates correctly for the connected master. There are two formats: classic pulse-and-direction (one pulse line + one direction line) and A-quad-B incremental (two quadrature lines). It is an axis-related parameter saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+`PDSubType` selects how the controller interprets the two input lines, so that [PDPos](PDPos.md) accumulates correctly for the connected master. There are two formats: classic pulse-and-direction (one pulse line + one direction line) and A-quad-B incremental (two quadrature lines). It is an axis-related parameter saved to flash, and cannot be changed while the axis is in motion or the motor is on.
 
 ## How it works
 
-The decode happens in the FPGA, not in software. When `PDSubType` is written, the controller writes the per-axis bits into the FPGA's pulse-and-direction settings register; it then just reads the resulting signed pulse delta each cycle (see [PDPos](PDPos.md)).
+`PDSubType` sets the input format the controller uses to decode the two input lines into the per-cycle pulse count (see [PDPos](PDPos.md)).
 
 | Value | Input format | Description |
 |---|---|---|
 | 0 | **Pulse and Direction** (default) | One line carries step pulses, the other carries the direction level. Each pulse advances the counter; the direction line sets the sign. |
 | 1 | **AqB Incremental** | Two 90°-out-of-phase quadrature channels (A and B), as from an incremental encoder. The decoder derives both count and direction from the phase relationship. |
 
-The range is 0–1; no other formats are defined. On multi-axis controllers each axis's bit is packed into the same register (axis A in bit 0, B in bit 1, C in bit 2), so the controller rewrites the combined word whenever any axis changes.
+The range is 0–1; no other formats are defined. The format is configured per axis.
 
 ## Examples
 

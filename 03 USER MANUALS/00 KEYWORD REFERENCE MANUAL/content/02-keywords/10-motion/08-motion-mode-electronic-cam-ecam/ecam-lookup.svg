@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="200" viewBox="0 0 820 200" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <!-- master -->
+  <rect x="12" y="70" width="150" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="87" y="95" text-anchor="middle">Master variable</text>
+  <text x="87" y="113" text-anchor="middle" font-size="11">(ECAMMaster)</text>
+
+  <!-- cam table lookup -->
+  <rect x="232" y="62" width="200" height="76" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="332" y="86" text-anchor="middle">Cam-table lookup</text>
+  <text x="332" y="104" text-anchor="middle" font-size="11">GenData, ECAMGap spacing,</text>
+  <text x="332" y="120" text-anchor="middle" font-size="11">linear interpolation</text>
+
+  <!-- follower reference -->
+  <rect x="502" y="70" width="160" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="582" y="95" text-anchor="middle">Follower</text>
+  <text x="582" y="113" text-anchor="middle" font-size="11">position reference</text>
+
+  <!-- cycles note -->
+  <rect x="232" y="158" width="200" height="34" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="332" y="180" text-anchor="middle" font-size="11">repeats per ECAMCycles</text>
+
+  <!-- arrows -->
+  <line x1="162" y1="100" x2="230" y2="100" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="432" y1="100" x2="500" y2="100" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="332" y1="138" x2="332" y2="156" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+</svg>

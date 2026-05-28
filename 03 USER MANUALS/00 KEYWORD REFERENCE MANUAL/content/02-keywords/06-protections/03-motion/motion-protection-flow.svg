@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="320" viewBox="0 0 700 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="20" y="26" font-size="15" font-weight="bold">Motion protection while moving</text>
+
+  <!-- profiler -->
+  <rect x="20" y="50" width="150" height="56" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="95" y="74" text-anchor="middle" font-weight="bold">Profiler</text>
+  <text x="95" y="94" text-anchor="middle">generates motion</text>
+
+  <!-- soft limit branch -->
+  <rect x="230" y="44" width="200" height="68" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="330" y="66" text-anchor="middle" font-weight="bold">Approaching FwdPLim / RevPLim?</text>
+  <text x="330" y="88" text-anchor="middle">check distance-to-stop</text>
+  <text x="330" y="104" text-anchor="middle">each sample</text>
+
+  <rect x="490" y="44" width="190" height="68" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="585" y="68" text-anchor="middle" font-weight="bold">Decelerate to stop</text>
+  <text x="585" y="90" text-anchor="middle">at the limit position;</text>
+  <text x="585" y="106" text-anchor="middle">MotionReason set</text>
+
+  <!-- following error branch -->
+  <rect x="230" y="150" width="200" height="68" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="330" y="172" text-anchor="middle" font-weight="bold">Position/velocity error</text>
+  <text x="330" y="194" text-anchor="middle">over MaxPosErr / MaxVelErr</text>
+  <text x="330" y="210" text-anchor="middle">(or the OL limits)?</text>
+
+  <rect x="490" y="150" width="190" height="68" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="585" y="180" text-anchor="middle" font-weight="bold">Trip: disable axis</text>
+  <text x="585" y="202" text-anchor="middle">raise ConFlt fault code</text>
+
+  <!-- limit switch / stuck branch -->
+  <rect x="230" y="240" width="200" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="330" y="264" text-anchor="middle" font-weight="bold">Limit switch (LimitsStat)</text>
+  <text x="330" y="286" text-anchor="middle">hit in travel direction?</text>
+
+  <rect x="490" y="240" width="190" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="585" y="264" text-anchor="middle" font-weight="bold">Emergency decel stop</text>
+  <text x="585" y="286" text-anchor="middle">MotionReason set</text>
+
+  <!-- arrows -->
+  <line x1="170" y1="78" x2="228" y2="78" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="95" y1="106" x2="95" y2="184" stroke="#5b6b7b"/>
+  <line x1="95" y1="184" x2="228" y2="184" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="95" y1="106" x2="95" y2="270" stroke="#5b6b7b"/>
+  <line x1="95" y1="270" x2="228" y2="270" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="430" y1="78" x2="488" y2="78" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="430" y1="184" x2="488" y2="184" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="430" y1="270" x2="488" y2="270" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+</svg>

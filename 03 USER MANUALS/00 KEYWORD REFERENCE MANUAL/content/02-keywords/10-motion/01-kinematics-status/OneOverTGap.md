@@ -67,9 +67,9 @@ The first factor (`2^OneOverTGap / 2^OneOverTFreq`) is precomputed once whenever
 ## Examples
 
 ```text
-AOneOverTGap[1]=2    ; default: gap = 2^2 = 4 counts on axis 1
-AOneOverTGap[1]=4    ; gap = 16 counts (steadier reading, slower update)
-AOneOverTGap[1]      ; read current value
+AOneOverTGap=2       ; default: gap = 2^2 = 4 counts on axis A
+AOneOverTGap=4       ; gap = 16 counts (steadier reading, slower update)
+AOneOverTGap         ; read current value
 ```
 
 ## See also

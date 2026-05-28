@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="320" viewBox="0 0 600 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="20" y="26" font-size="15" font-weight="bold">Motor-temperature bands (when MotorTempUsed &#8800; 0)</text>
+
+  <!-- temperature axis -->
+  <line x1="150" y1="50" x2="150" y2="300" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <text x="120" y="52" text-anchor="end" font-weight="bold">MotorTemp</text>
+
+  <!-- fault zone -->
+  <rect x="160" y="56" width="300" height="40" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="310" y="81" text-anchor="middle">over MaxMotorTemp &#8594; trip (ConFlt 1040)</text>
+
+  <!-- high warning -->
+  <rect x="160" y="104" width="300" height="36" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="310" y="127" text-anchor="middle">&gt; 0.96 &#215; MaxMotorTemp &#8594; high (red)</text>
+
+  <!-- medium warning -->
+  <rect x="160" y="148" width="300" height="36" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="310" y="171" text-anchor="middle">0.92&#8211;0.96 &#215; &#8594; medium (orange)</text>
+
+  <!-- low warning -->
+  <rect x="160" y="192" width="300" height="36" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="310" y="215" text-anchor="middle">0.88&#8211;0.92 &#215; &#8594; low (yellow)</text>
+
+  <!-- normal -->
+  <rect x="160" y="236" width="300" height="40" rx="6" fill="#f4f7fb" stroke="#9fb4cc" stroke-width="1.2"/>
+  <text x="310" y="261" text-anchor="middle">&lt; 0.88 &#215; MaxMotorTemp &#8594; no warning</text>
+
+  <text x="20" y="300" fill="#555" font-size="11">Warning level is reported in StatReg bits 15&#8211;16; with MotorTempUsed = 0 the reading and all checks are skipped.</text>
+</svg>

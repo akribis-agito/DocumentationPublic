@@ -44,9 +44,7 @@ Each controller cycle the increment added to [PDPos](PDPos.md) is:
 PDPos increment = (pulses this cycle) × PDFact / PDFactDen   (then signed by PDEncDir)
 ```
 
-When either `PDFact` or `PDFactDen` is written, the controller precomputes a floating-point factor `PDFact / PDFactDen` and the reciprocal `1 / PDFactDen`. The control interrupt uses the precomputed factor for the fast per-cycle multiply.
-
-**No counts are lost to rounding.** Because `PDFact/PDFactDen` is generally fractional, the float multiply leaves a remainder; the controller computes the exact remainder each cycle with full 64-bit integer math and carries it into the next cycle. Over time the accumulated `PDPos` therefore matches the exact rational scaling rather than drifting — `PDFact` and `PDFactDen` are kept as separate integers (rather than one float) precisely so this exact remainder can be computed.
+**No counts are lost to rounding.** Because `PDFact/PDFactDen` is generally fractional, scaling leaves a remainder; the controller carries that remainder into the next cycle. Over time the accumulated `PDPos` therefore matches the exact rational scaling rather than drifting — `PDFact` and `PDFactDen` are kept as separate integers (rather than one combined value) precisely so this exact remainder can be tracked.
 
 The value range is ±16,777,215. A **negative** `PDFact` reverses the sense of accumulation; this is independent of the [PDEncDir](PDEncDir.md) sign (the two combine).
 

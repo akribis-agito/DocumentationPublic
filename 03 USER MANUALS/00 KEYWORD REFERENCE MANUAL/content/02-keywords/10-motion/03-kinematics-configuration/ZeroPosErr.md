@@ -1,5 +1,5 @@
 ---
-summary: Intended to zero the axis position error; availability and behaviour unconfirmed.
+summary: Zeroes the axis position error by snapping the position reference onto the feedback (v5 central-i).
 keyword: ZeroPosErr
 availability:
   standalone: []

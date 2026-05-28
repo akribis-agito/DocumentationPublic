@@ -50,7 +50,7 @@ All elements are in main user units per second. The base estimate is the per-cyc
 | Index | Method |
 |-------|--------|
 | `Vel[1]` | **Velocity-loop feedback** — the value actually used to close the velocity loop. Selected per loop configuration (see below). |
-| `Vel[2]` | Simple backward derivative of the main encoder (`ΔPos × Fs`). |
+| `Vel[2]` | Simple backward derivative of the main encoder (`ΔPos × samples-per-second`). |
 | `Vel[3]` | Moving average of `Vel[2]` over 32 samples. |
 | `Vel[4]` | **1/T measurement** — position change measured over a precisely-timed interval; see [OneOverTOn](OneOverTOn.md). |
 

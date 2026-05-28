@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="260" viewBox="0 0 640 260" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="20" y="22" font-size="14" font-weight="bold">InTargetStat over a move (position control)</text>
+
+  <!-- axes -->
+  <line x1="60" y1="210" x2="610" y2="210" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="60" y1="210" x2="60" y2="45" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="615" y="226" text-anchor="end">time</text>
+  <text x="20" y="50">InTargetStat</text>
+
+  <!-- value gridlines and labels -->
+  <text x="50" y="200" text-anchor="end" fill="#5b6b7b">0</text>
+  <text x="50" y="165" text-anchor="end" fill="#5b6b7b">1</text>
+  <text x="50" y="130" text-anchor="end" fill="#5b6b7b">2</text>
+  <text x="50" y="95" text-anchor="end" fill="#5b6b7b">3</text>
+  <text x="50" y="60" text-anchor="end" fill="#5b6b7b">4</text>
+
+  <!-- step trace: 0,1,2,3,4,2,3,4 -->
+  <polyline points="60,196 110,196 110,161 160,161 160,126 230,126 230,91 300,91 300,56 430,56 430,126 480,126 480,91 540,91 540,56 600,56"
+            fill="none" stroke="#5b8def" stroke-width="2.2"/>
+
+  <!-- phase labels -->
+  <text x="85"  y="245" text-anchor="middle" fill="#5b6b7b" font-size="11">off</text>
+  <text x="135" y="245" text-anchor="middle" fill="#5b6b7b" font-size="11">enabled</text>
+  <text x="195" y="245" text-anchor="middle" fill="#5b6b7b" font-size="11">moving</text>
+  <text x="265" y="245" text-anchor="middle" fill="#5b6b7b" font-size="11">settling</text>
+  <text x="365" y="245" text-anchor="middle" fill="#5b6b7b" font-size="11">reached</text>
+  <text x="510" y="245" text-anchor="middle" fill="#5b6b7b" font-size="11">2nd move</text>
+
+  <text x="365" y="44" text-anchor="middle" fill="#2e7d32" font-size="11">stays at 4 even if PosErr leaves InTargetTol</text>
+</svg>

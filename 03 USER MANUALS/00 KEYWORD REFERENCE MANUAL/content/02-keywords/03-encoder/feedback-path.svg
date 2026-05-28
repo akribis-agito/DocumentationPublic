@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="240" viewBox="0 0 700 240" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="350" y="22" text-anchor="middle" font-size="14" font-weight="bold">Position feedback path</text>
+
+  <!-- Encoder -->
+  <rect x="20" y="70" width="120" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="80" y="96" text-anchor="middle" font-weight="bold">Encoder</text>
+  <text x="80" y="114" text-anchor="middle" font-size="10" fill="#444">incremental / SIN-COS</text>
+
+  <!-- Counts / interpolation -->
+  <rect x="170" y="70" width="140" height="60" rx="6" fill="#ffffff" stroke="#8a929b" stroke-width="1"/>
+  <text x="240" y="92" text-anchor="middle" font-size="12" font-weight="bold">Counts /</text>
+  <text x="240" y="108" text-anchor="middle" font-size="12" font-weight="bold">interpolation</text>
+  <text x="240" y="124" text-anchor="middle" font-size="10" fill="#666">EncDir, EncFilt, EncRes</text>
+
+  <!-- EncoderPos -->
+  <rect x="340" y="70" width="120" height="60" rx="6" fill="#ffffff" stroke="#8a929b" stroke-width="1"/>
+  <text x="400" y="96" text-anchor="middle" font-size="12" font-weight="bold">EncoderPos</text>
+  <text x="400" y="114" text-anchor="middle" font-size="10" fill="#666">raw count position</text>
+
+  <!-- transforms -->
+  <rect x="490" y="60" width="120" height="80" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="550" y="84" text-anchor="middle" font-size="12" font-weight="bold">Transforms</text>
+  <text x="550" y="102" text-anchor="middle" font-size="10" fill="#444">modulo (ModRev)</text>
+  <text x="550" y="116" text-anchor="middle" font-size="10" fill="#444">absolute offset</text>
+  <text x="550" y="130" text-anchor="middle" font-size="10" fill="#444">error map</text>
+
+  <!-- Pos -->
+  <rect x="490" y="170" width="120" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="550" y="192" text-anchor="middle" font-weight="bold">Pos</text>
+  <text x="550" y="208" text-anchor="middle" font-size="10" fill="#444">axis feedback position</text>
+
+  <!-- arrows -->
+  <g stroke="#5b6b7b" stroke-width="1.4" fill="none" marker-end="url(#arrow)">
+    <line x1="140" y1="100" x2="166" y2="100"/>
+    <line x1="310" y1="100" x2="336" y2="100"/>
+    <line x1="460" y1="100" x2="486" y2="100"/>
+    <line x1="550" y1="140" x2="550" y2="166"/>
+  </g>
+</svg>

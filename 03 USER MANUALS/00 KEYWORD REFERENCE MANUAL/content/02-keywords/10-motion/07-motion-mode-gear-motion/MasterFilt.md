@@ -38,14 +38,7 @@ First-order low-pass filter coefficient for the scaled master-position delta (di
 
 ### The filter
 
-In direct gear motion the geared displacement since `Begin`, `u_k = MasterPos − MasterPosInitial`, is filtered into an intermediate term before being added to the reference at `Begin` to form `PosRef`:
-
-```text
-PosRefToMove = (u_k * MasterFilt + PosRefToMove * (64 - MasterFilt)) >> 6
-PosRef       = PosRefInitial + PosRefToMove
-```
-
-The `>> 6` is a divide-by-64, so the coefficient is `MasterFilt / 64`:
+In direct gear motion the geared displacement since `Begin`, $u_{k} = MasterPos − MasterPosInitial$, is passed through a first-order low-pass filter before being added to the reference latched at `Begin` to form `PosRef`. The filter coefficient is `MasterFilt / 64`:
 
 $$
 y_{k} = \frac{MasterFilt}{64}u_{k} + \left( 1 - \frac{MasterFilt}{64} \right)y_{k - 1}
@@ -57,7 +50,7 @@ where $t = kT_{s}$ and $T_{s}$ is the control sampling time (typically 61 µs).
 
 `MasterFilt` ranges `1 … 64`. The two extremes bracket the behaviour:
 
-- `MasterFilt = 64` ⇒ coefficient 1, i.e. **no filtering** (the follower tracks the master with no lag). This is the value the firmware requires for the drift-free 64-bit axis-to-axis gearbox (see [GearMaster](GearMaster.md)).
+- `MasterFilt = 64` ⇒ coefficient 1, i.e. **no filtering** (the follower tracks the master with no lag). This is the value required for the drift-free axis-to-axis gearbox (see [GearMaster](GearMaster.md)).
 - small `MasterFilt` ⇒ heavy smoothing and more tracking lag.
 
 By backward-Euler estimation, `MasterFilt` can be chosen from a target cut-off frequency $f_{c}$ (Hz). The default `MasterFilt = 3` corresponds to roughly a 128 Hz cut-off:

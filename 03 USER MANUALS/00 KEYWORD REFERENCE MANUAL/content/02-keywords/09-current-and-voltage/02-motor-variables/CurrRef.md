@@ -45,7 +45,7 @@ In position/velocity operation the firmware builds `CurrRef` by summing the velo
 `CurrRef` is then limited: first by the active current-limit mode, then absolutely against the peak current limit ([PeakCL](../../06-protections/02-current-and-voltage/PeakCL.md), as reduced by I²t toward [ContCL](../../06-protections/02-current-and-voltage/ContCL.md)). Reaching a limit sets the current-saturation status bit in [StatReg](../../07-status-and-faults/StatReg.md). Finally the sign is corrected by [CurrDir](CurrDir.md) to produce the loop-side command that becomes [IqRef](IqRef.md) (three-phase) or [IaRef](IaRef.md) (brush):
 
 $$
-CurrRefFinal = \pm\,CurrRef \quad (\text{sign from CurrDir})
+CurrRef_{dir} = \pm\,CurrRef \quad (\text{sign from CurrDir})
 $$
 
 ## Examples

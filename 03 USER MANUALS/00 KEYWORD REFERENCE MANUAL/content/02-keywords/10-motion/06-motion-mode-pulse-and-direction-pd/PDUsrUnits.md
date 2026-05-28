@@ -36,13 +36,13 @@ Counts-per-user-unit scale for converting PDPos and PDVel to user units on query
 
 ## How it works
 
-Like `UsrUnits`, `PDUsrUnits` is a **16.16 fixed-point ratio**: the effective scale is `PDUsrUnits / 65536` counts per user unit (the fixed scaling base is 65536, i.e. a 16-bit shift). When a P/D status is read the controller divides the internal count value by this ratio:
+Like `UsrUnits`, `PDUsrUnits` is a ratio relative to a base of `65536`: the effective scale is `PDUsrUnits / 65536` counts per user unit. When a P/D status is read the controller divides the internal count value by this ratio:
 
 $$
 \text{Queried PDPos [user units]} = \frac{\text{Controller PDPos [counts]}}{\big(PDUsrUnits / 65536\big)} = \text{counts} \times \frac{65536}{PDUsrUnits}
 $$
 
-The conversion is selected per-keyword by the controller's unit-scaling logic for the P/D status group. When `PDUsrUnits` is an exact multiple of 65536 the controller takes the fast integer path (shift instead of divide); otherwise it uses the full fixed-point ratio. The default `65536` means a factor of 1 (values shown directly in counts). Only `PDPos` and `PDVel` belong to the P/D user-units group, so this scaling does not affect any other keyword.
+The default `65536` means a factor of 1 (values shown directly in counts). Only `PDPos` and `PDVel` belong to the P/D user-units group, so this scaling does not affect any other keyword.
 
 To express "*N* internal counts = 1 user unit", set `PDUsrUnits = N × 65536`.
 
