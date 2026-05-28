@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="300" viewBox="0 0 720 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="360" y="22" text-anchor="middle" font-size="15" font-weight="bold">Angle-indexed compensation (e.g. cogging)</text>
+
+  <!-- axes -->
+  <line x1="70" y1="160" x2="680" y2="160" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="70" y1="50" x2="70" y2="250" stroke="#5b6b7b" stroke-width="1.2"/>
+  <text x="676" y="178" text-anchor="end" font-size="11" fill="#444">commutation angle (deg)</text>
+  <text x="38" y="56" font-size="11" fill="#444">+I</text>
+  <text x="38" y="248" font-size="11" fill="#444">&#8722;I</text>
+  <text x="64" y="164" text-anchor="end" font-size="11" fill="#444">0</text>
+
+  <!-- angle ticks -->
+  <g font-size="10" fill="#666">
+    <line x1="222" y1="156" x2="222" y2="164" stroke="#5b6b7b"/>
+    <text x="222" y="180" text-anchor="middle">90</text>
+    <line x1="374" y1="156" x2="374" y2="164" stroke="#5b6b7b"/>
+    <text x="374" y="180" text-anchor="middle">180</text>
+    <line x1="526" y1="156" x2="526" y2="164" stroke="#5b6b7b"/>
+    <text x="526" y="180" text-anchor="middle">270</text>
+    <line x1="678" y1="156" x2="678" y2="164" stroke="#5b6b7b"/>
+    <text x="678" y="180" text-anchor="middle">360</text>
+  </g>
+
+  <!-- raw cogging disturbance (ripple): a few cycles of low-amplitude ripple -->
+  <path d="M 70 160 Q 89 120 108 160 Q 127 200 146 160 Q 165 120 184 160 Q 203 200 222 160 Q 241 120 260 160 Q 279 200 298 160 Q 317 120 336 160 Q 355 200 374 160 Q 393 120 412 160 Q 431 200 450 160 Q 469 120 488 160 Q 507 200 526 160 Q 545 120 564 160 Q 583 200 602 160 Q 621 120 640 160 Q 659 200 678 160"
+        fill="none" stroke="#e0736b" stroke-width="1.8" stroke-dasharray="4 2"/>
+  <text x="350" y="110" text-anchor="middle" fill="#e0736b" font-size="11">cogging disturbance vs angle (without compensation)</text>
+
+  <!-- compensation curve (the inverse - anti-cogging current added to CurrRef) -->
+  <path d="M 70 160 Q 89 200 108 160 Q 127 120 146 160 Q 165 200 184 160 Q 203 120 222 160 Q 241 200 260 160 Q 279 120 298 160 Q 317 200 336 160 Q 355 120 374 160 Q 393 200 412 160 Q 431 120 450 160 Q 469 200 488 160 Q 507 120 526 160 Q 545 200 564 160 Q 583 120 602 160 Q 621 200 640 160 Q 659 120 678 160"
+        fill="none" stroke="#5b8def" stroke-width="2.2"/>
+  <text x="350" y="225" text-anchor="middle" fill="#5b8def" font-size="11">UPMVelTable[round(angle)]: equal-and-opposite anti-cogging current</text>
+
+  <!-- worked example callout -->
+  <rect x="30" y="252" width="660" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="40" y="276" font-size="11" fill="#222">Table has one entry per whole degree (indices 1..360). Each cycle: angle is read, rounded to nearest degree, and that entry is added to CurrRef.</text>
+</svg>

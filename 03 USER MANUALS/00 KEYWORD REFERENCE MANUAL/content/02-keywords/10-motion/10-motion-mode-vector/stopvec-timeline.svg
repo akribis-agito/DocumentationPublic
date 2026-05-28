@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="280" viewBox="0 0 820 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="410" y="22" text-anchor="middle" font-weight="bold">StopVec timeline: status bits and reason code as the path decelerates with VecEmrgDec</text>
+
+  <!-- StopVec command marker -->
+  <line x1="380" y1="50" x2="380" y2="220" stroke="#e0736b" stroke-width="1.4" stroke-dasharray="4 3"/>
+  <text x="380" y="46" text-anchor="middle" font-size="11" fill="#e0736b">StopVec issued</text>
+
+  <!-- vector path velocity track -->
+  <text x="12" y="80" font-weight="bold">VecdPosRef</text>
+  <line x1="100" y1="120" x2="780" y2="120" stroke="#5b6b7b" stroke-width="1"/>
+  <path d="M100 120 L160 80 L380 80 L500 120 L780 120" fill="none" stroke="#5b8def" stroke-width="2.2"/>
+  <text x="240" y="74" font-size="11" fill="#5b6b7b">cruising at VecSpeed</text>
+  <text x="440" y="106" font-size="11" fill="#5b6b7b">braking at VecEmrgDec</text>
+
+  <!-- MotionStat bit 18 track -->
+  <text x="12" y="172" font-weight="bold">MotionStat bit 18 (0x00040000)</text>
+  <line x1="100" y1="180" x2="780" y2="180" stroke="#5b6b7b" stroke-width="1"/>
+  <path d="M100 180 L380 180 L380 160 L500 160 L500 180 L780 180" fill="none" stroke="#5b8def" stroke-width="2"/>
+  <text x="440" y="156" font-size="11" fill="#5b6b7b">set</text>
+
+  <!-- MotionReason track -->
+  <text x="12" y="222" font-weight="bold">MotionReason</text>
+  <line x1="100" y1="232" x2="780" y2="232" stroke="#5b6b7b" stroke-width="1"/>
+  <text x="240" y="252" text-anchor="middle" font-size="11" fill="#5b6b7b">previous reason</text>
+  <text x="440" y="252" text-anchor="middle" font-size="11" fill="#e0736b">= 29 (StopVec)</text>
+  <text x="640" y="252" text-anchor="middle" font-size="11" fill="#5b6b7b">(latched)</text>
+
+  <!-- caption -->
+  <text x="410" y="272" text-anchor="middle" font-size="11" fill="#5b6b7b">All vector members report the same bit and reason; bits clear once the path velocity reaches zero.</text>
+</svg>

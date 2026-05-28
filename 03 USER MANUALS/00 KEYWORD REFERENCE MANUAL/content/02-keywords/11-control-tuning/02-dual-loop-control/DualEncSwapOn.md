@@ -42,6 +42,8 @@ In pseudo dual-loop control, both the position and the velocity loop use the mot
 
 ## How it works
 
+![Pseudo dual-loop: the motor encoder is the only feedback in use; it is scaled to load units to feed the position loop and used directly by the velocity loop](dual-loop-swap-pseudo.svg)
+
 Under pseudo dual-loop, the position feedback [Pos](../../../02-keywords/10-motion/01-kinematics-status/Pos.md) is formed from the auxiliary feedback [AuxPos](../../../02-keywords/10-motion/01-kinematics-status/AuxPos.md) scaled by the dual-loop factor:
 
 $$

@@ -46,6 +46,8 @@ if (mode is position-control, velocity-control, or force-over-PIV)
     turn the axis off and log the fault   (skipped for velocity-command amplifiers)
 ```
 
+![Following-error trip threshold: the absolute error rises until it crosses the active limit; on that sample the axis is disabled and a ConFlt code is logged. The open-loop limits are higher to tolerate the larger natural error during injection or open-loop operation.](following-error-trip.svg)
+
 Key points:
 
 - The threshold actually used is switched between `MaxVelErr` (closed loop) and [MaxVelErrOL](MaxVelErrOL.md) (open loop / injection) depending on the loop state. In closed loop, a violation records [ConFlt](../../../07-status-and-faults/ConFlt.md) fault code 1021 (velocity error too high); in open loop, it records fault code 1056 (open-loop velocity error too high).

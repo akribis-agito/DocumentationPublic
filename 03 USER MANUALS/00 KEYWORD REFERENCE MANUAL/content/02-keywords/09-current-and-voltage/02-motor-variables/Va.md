@@ -60,6 +60,10 @@ The full reference-to-voltage chain (shared by all phase variables) is:
 
 ![abc/dq current-loop signal path](current-loop-signal-path.svg)
 
+The three phase commands are three sinusoids 120° apart in the electrical angle θ, so Vc is fully determined by Va and Vb:
+
+![Three balanced phase voltages 120 degrees apart across one electrical cycle](three-phase-waveforms.svg)
+
 ## Examples
 
 ```text

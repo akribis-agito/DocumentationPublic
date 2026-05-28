@@ -49,6 +49,8 @@ The bits are 0-based. The value is treated as a bit-mask; the default is `0x1` (
 
 Note that bits 1 and 2 only apply where a current loop runs in the controller — see [AmpType](../../02-motor-and-amplifier/AmpType.md). For an external current-command amplifier the current loop runs in the drive, not in the controller, so the current limits are still applied to the reference but these domain/bypass bits do not select the loop.
 
+![ControlMode bit map: bit 0 enables enhanced speed range, bit 1 switches to abc-domain control, bit 2 bypasses the current PI loop, bit 3 makes the I2T action disable the motor instead of clamping](controlmode-bits.svg)
+
 ## Examples
 
 ```text

@@ -55,6 +55,8 @@ Selects the injection waveform shape and whether it is direct or additive.
 
 In every case the injected value the controller is currently applying can be read back through [InjectedValue](InjectedValue.md), and its sign convention and amplitude follow the keyword tied to the selected `InjectPoint`.
 
+![Injection waveform shapes: a smooth sinusoid for the sine modes, an alternating high-low rectangular wave for the square modes, a single rectangular pulse held for InjectTimeOn for the current-only pulse mode, an irregular two-level toggling waveform for the PRBS modes, and a sinusoid whose frequency rises linearly across the sweep for the chirp modes](inject-waveforms.svg)
+
 ### Waveform descriptions
 
 - **Sinusoid** — Amplitude is set by the amplitude keyword specific to the injection location ([InjectPoint](InjectPoint.md)); frequency is set by [InjectFreq](InjectFreq.md). A phase angle is advanced every controller cycle by an amount proportional to `InjectFreq`, wrapped at one full turn, and the sine value is read from an internal sine table with linear interpolation between table entries so the waveform stays smooth at any frequency. The phase starts from 0 when injection begins, so the waveform starts at zero crossing rising.

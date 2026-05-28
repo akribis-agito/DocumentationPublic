@@ -42,10 +42,20 @@ The control interrupt runs at a fixed sample rate (16384 samples per second). A 
 
 `Time` is a signed 32-bit value. Incrementing once per second it would take on the order of decades of continuous run-time to approach its positive maximum (2147483647), so rollover is not a practical concern.
 
+Worked examples (uptime conversions):
+
+| `Time` value | Elapsed run-time |
+|-------------:|------------------|
+| 60           | 1 minute         |
+| 3600         | 1 hour           |
+| 86400        | 1 day            |
+| 604800       | 1 week           |
+| 2147483647   | ≈ 68 years (signed 32-bit maximum) |
+
 ## Examples
 
 ```text
-ATime               ; seconds since power-on
+ATime               ; seconds since power-on (e.g. 86400 -> 1 day of uptime)
 ```
 
 Measure how long an operation took, at one-second resolution, by reading `ATime` before and after and subtracting.

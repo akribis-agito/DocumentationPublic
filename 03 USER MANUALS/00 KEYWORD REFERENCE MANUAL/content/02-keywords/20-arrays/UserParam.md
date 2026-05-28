@@ -36,6 +36,8 @@ Per-axis, feature-related 32-bit integer array for shared user/host storage.
 
 Unlike the [GenData](GenData.md) family, the user-parameter arrays are feature-related: some entries are used internally to store temporary variables (for example, in the homing sequence and for CNC motion variables). The controller guarantees that any given entry is not used by more than one feature at a time, but because some entries are reserved by features, it is not recommended to use `UserParam` for the user program, custom functions, or debugging — use [GenData](GenData.md) for that. `UserParam` is the 32-bit integer member of the family; see [UserParamF](UserParamF.md) (32-bit floating-point), [UserParamD](UserParamD.md) (64-bit double-precision floating-point) and [UserParamLL](UserParamLL.md) (64-bit signed integer) for the other data types.
 
+![General-purpose array families: the UserParam row holds the four per-axis variants (UserParam, UserParamF, UserParamD, UserParamLL) some of whose entries are reserved internally, and the GenData row holds the four non-axis variants recommended for user programs](array-family-types.svg)
+
 Each element holds a 32-bit signed integer, so the value range is -2147483648 to 2147483647 and the default is 0. The array is 1-indexed: the first usable element is `UserParam[1]` (index 0 is reserved and inaccessible). The number of usable elements is model-dependent — 250 on most models, 50 on smaller ones.
 
 ## Examples

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="340" viewBox="0 0 680 340" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="340" y="22" text-anchor="middle" font-size="15" font-weight="bold">ForceCmdVal sequence (ForceCmdSrc = 1)</text>
+
+  <!-- axes -->
+  <line x1="80" y1="180" x2="630" y2="180" stroke="#5b6b7b" stroke-width="1"/>
+  <line x1="80" y1="50" x2="80" y2="310" stroke="#5b6b7b" stroke-width="1.2"/>
+  <text x="72" y="54" text-anchor="end">raw ForceRef (units)</text>
+  <text x="630" y="198" text-anchor="end">time (ms)</text>
+
+  <!-- value gridlines -->
+  <text x="72" y="98" text-anchor="end">340</text>
+  <line x1="77" y1="94" x2="83" y2="94" stroke="#5b6b7b"/>
+  <text x="72" y="184" text-anchor="end">0</text>
+  <text x="72" y="268" text-anchor="end">-260</text>
+  <line x1="77" y1="264" x2="83" y2="264" stroke="#5b6b7b"/>
+
+  <!-- raw ForceRef trace: ramp to 340, hold 400ms, ramp to -260, hold 500ms, exit -->
+  <polyline fill="none" stroke="#5b8def" stroke-width="2.5" points="80,180 130,94 280,94 360,264 540,264"/>
+  <polyline fill="none" stroke="#5b8def" stroke-width="2.5" stroke-dasharray="5,4" points="540,264 570,180"/>
+
+  <!-- phase separators -->
+  <line x1="130" y1="50" x2="130" y2="310" stroke="#c9d6e3" stroke-dasharray="3,3"/>
+  <line x1="280" y1="50" x2="280" y2="310" stroke="#c9d6e3" stroke-dasharray="3,3"/>
+  <line x1="360" y1="50" x2="360" y2="310" stroke="#c9d6e3" stroke-dasharray="3,3"/>
+  <line x1="540" y1="50" x2="540" y2="310" stroke="#c9d6e3" stroke-dasharray="3,3"/>
+
+  <!-- phase labels -->
+  <text x="105" y="326" text-anchor="middle" fill="#5b6b7b" font-size="11">ramp</text>
+  <text x="205" y="326" text-anchor="middle" fill="#5b6b7b" font-size="11">hold 400 ms (entry 1)</text>
+  <text x="320" y="326" text-anchor="middle" fill="#5b6b7b" font-size="11">ramp</text>
+  <text x="450" y="326" text-anchor="middle" fill="#5b6b7b" font-size="11">hold 500 ms (entry 2)</text>
+  <text x="575" y="326" text-anchor="middle" fill="#5b6b7b" font-size="11">exit</text>
+
+  <!-- annotations -->
+  <text x="140" y="86" fill="#3a6bd6" font-size="11">ForceCmdVal[1] = 340</text>
+  <text x="370" y="282" fill="#3a6bd6" font-size="11">ForceCmdVal[2] = -260</text>
+
+  <!-- exit note -->
+  <text x="555" y="118" text-anchor="middle" fill="#5b6b7b" font-size="11">ForceCmdHTime[3] = 0</text>
+  <text x="560" y="134" text-anchor="middle" fill="#5b6b7b" font-size="11">&#8594; position mode</text>
+
+  <!-- counter / in-target notes -->
+  <text x="205" y="114" text-anchor="middle" fill="#8a97a5" font-size="11">ForceCmdCntr counts during hold</text>
+  <text x="320" y="250" text-anchor="middle" fill="#8a97a5" font-size="11">ForceCmdCntr = 0 while ramping</text>
+  <text x="205" y="138" text-anchor="middle" fill="#8a97a5" font-size="11">ForceInTStat: 3 settling &#8594; 4 settled</text>
+</svg>

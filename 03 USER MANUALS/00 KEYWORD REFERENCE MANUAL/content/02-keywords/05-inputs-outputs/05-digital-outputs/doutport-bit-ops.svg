@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="280" viewBox="0 0 720 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="360" y="22" text-anchor="middle" font-size="15" font-weight="bold">DOutPortSBit / CBit / TBit &#8212; atomic bit-access example</text>
+  <text x="360" y="40" text-anchor="middle" font-size="11" fill="#5b6b7b">Each operation builds mask = 1 &lt;&lt; (index &#8722; 1) and applies it to DOutPort with interrupts off.</text>
+
+  <!-- Initial state -->
+  <rect x="20" y="70" width="160" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="100" y="90" text-anchor="middle" font-weight="bold">Initial</text>
+  <text x="100" y="106" text-anchor="middle" font-size="11">DOutPort = 6 (0110)</text>
+
+  <!-- Step 1: SBit[4] -->
+  <rect x="220" y="70" width="160" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="300" y="90" text-anchor="middle">DOutPortSBit[4]</text>
+  <text x="300" y="106" text-anchor="middle" font-size="11">OR mask 1000 &#8594; 1110 (14)</text>
+
+  <!-- Step 2: CBit[2] -->
+  <rect x="220" y="140" width="160" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="300" y="160" text-anchor="middle">DOutPortCBit[2]</text>
+  <text x="300" y="176" text-anchor="middle" font-size="11">AND-NOT 0010 &#8594; 0100 (4)</text>
+
+  <!-- Step 3: TBit[3] -->
+  <rect x="220" y="210" width="160" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="300" y="230" text-anchor="middle">DOutPortTBit[3]</text>
+  <text x="300" y="246" text-anchor="middle" font-size="11">XOR 0100 &#8594; 0010 (2)</text>
+
+  <!-- Result column -->
+  <rect x="430" y="70" width="270" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="565" y="90" text-anchor="middle" font-weight="bold">Outputs after the call</text>
+  <text x="565" y="106" text-anchor="middle" font-size="11">outputs 2, 3, 4 on (1, 5+ off)</text>
+
+  <rect x="430" y="140" width="270" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="565" y="160" text-anchor="middle" font-weight="bold">After CBit on the initial state</text>
+  <text x="565" y="176" text-anchor="middle" font-size="11">output 3 on; 1, 2, 4+ off</text>
+
+  <rect x="430" y="210" width="270" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="565" y="230" text-anchor="middle" font-weight="bold">After TBit on the initial state</text>
+  <text x="565" y="246" text-anchor="middle" font-size="11">output 2 on; 1, 3, 4+ off</text>
+
+  <!-- arrows -->
+  <line x1="180" y1="92" x2="220" y2="92" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="380" y1="92" x2="430" y2="92" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="180" y1="92" x2="200" y2="92" stroke="#5b6b7b" stroke-width="1.2"/>
+  <line x1="200" y1="92" x2="200" y2="162" stroke="#5b6b7b" stroke-width="1.2"/>
+  <line x1="200" y1="162" x2="220" y2="162" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="200" y1="162" x2="200" y2="232" stroke="#5b6b7b" stroke-width="1.2"/>
+  <line x1="200" y1="232" x2="220" y2="232" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="380" y1="162" x2="430" y2="162" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="380" y1="232" x2="430" y2="232" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+</svg>

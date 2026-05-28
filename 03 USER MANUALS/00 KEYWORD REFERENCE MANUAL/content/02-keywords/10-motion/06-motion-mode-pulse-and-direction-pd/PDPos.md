@@ -38,6 +38,10 @@ Read-only scaled pulse-and-direction counter, accumulated every controller cycle
 
 ![Pulse-and-direction input chain](pd-input-chain.svg)
 
+The waveform below shows how each rising pulse edge changes `PDPos` by `PDFact / PDFactDen`, and how the direction line flips the sign:
+
+![Pulse and direction timing: pulses increment PDPos by the scaling factor; the direction line sets the sign](pd-timing.svg)
+
 ## How it works
 
 ### Per-cycle accumulation

@@ -43,7 +43,7 @@ The expanded trajectory produced by [BuffCalc](BuffCalc.md) is one cycle. During
 - Each control cycle the playback index advances by one. When it passes the last interpolated point of the cycle, the index wraps back to the first point and the cycle counter is incremented.
 - The move ends when the cycle counter exceeds `BuffCycles` — i.e. after `BuffCycles` complete passes. At that point the controller clears the in-motion state for every member axis and the move finishes normally.
 
-Because the waypoint positions are applied **relative to the start of each cycle**, repeated cycles chain end-to-end: if the trajectory's last waypoint differs from its first, each repeat continues from where the previous one ended (a net advance per cycle), rather than snapping back.
+Because the waypoint positions are applied **relative to the start of each cycle**, repeated cycles chain end-to-end: if the trajectory's last waypoint differs from its first, each repeat continues from where the previous one ended (a net advance per cycle), rather than snapping back. For example, if `BuffPos` ranges from `0` to `5000` over one cycle and `BuffCycles = 4`, the axis advances by `5000` user units per cycle, ending `20000` user units beyond the position captured at `Begin`.
 
 ### Ending early
 

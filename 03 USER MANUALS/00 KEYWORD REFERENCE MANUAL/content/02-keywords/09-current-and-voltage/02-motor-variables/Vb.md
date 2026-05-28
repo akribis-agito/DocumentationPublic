@@ -50,6 +50,10 @@ Read-only phase B voltage reference for space-vector modulation (PWM-count fract
 
 The same post-processing as [Va](Va.md) then applies: brushless `Vc = -(Va + Vb)`, the enhanced-speed-range midpoint subtraction (ControlMode bit 0), and saturation to the maximum PWM amplitude which sets the voltage-saturation bit ([StatReg](../../07-status-and-faults/StatReg.md) bit 22).
 
+Vb lags Va by 120° of electrical angle, and Vc lags Vb by a further 120°:
+
+![Three balanced phase voltages 120 degrees apart across one electrical cycle](three-phase-waveforms.svg)
+
 ## Examples
 
 ```text

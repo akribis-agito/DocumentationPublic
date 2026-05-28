@@ -47,6 +47,8 @@ The correction is applied **only during active motion**. If the motion ends (or 
 
 Writing a fresh `RefOffsetSamp` (with a non-zero [RefOffsetStep](RefOffsetStep.md)) re-arms the correction.
 
+![Reference-offset per-cycle injection](refoffset-timeline.svg)
+
 ## Examples
 
 ```text

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="660" height="260" viewBox="0 0 660 260" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="20" y="22" font-size="14" font-weight="bold">PosErr sign convention: PosErr = PosRef &#8722; Pos</text>
+
+  <!-- axis -->
+  <line x1="40" y1="170" x2="620" y2="170" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="625" y="174" fill="#5b6b7b">position</text>
+
+  <!-- left case: reference ahead of feedback (PosErr > 0) -->
+  <text x="160" y="55" text-anchor="middle" font-weight="bold" fill="#2e7d32">PosErr &gt; 0 (reference ahead)</text>
+  <text x="160" y="72" text-anchor="middle" font-size="11" fill="#5b6b7b">load is lagging the command</text>
+
+  <line x1="80" y1="165" x2="80" y2="178" stroke="#5b6b7b"/>
+  <text x="80" y="195" text-anchor="middle" font-size="12">Pos</text>
+  <circle cx="80" cy="170" r="5" fill="#5b8def"/>
+
+  <line x1="220" y1="165" x2="220" y2="178" stroke="#5b6b7b"/>
+  <text x="220" y="195" text-anchor="middle" font-size="12">PosRef</text>
+  <circle cx="220" cy="170" r="5" fill="#e0736b"/>
+
+  <line x1="80" y1="140" x2="220" y2="140" stroke="#2e7d32" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="150" y="133" text-anchor="middle" fill="#2e7d32" font-size="12">+PosErr</text>
+
+  <text x="160" y="225" text-anchor="middle" font-size="11" fill="#5b6b7b">controller pushes forward to catch up</text>
+
+  <!-- right case: feedback ahead of reference (PosErr < 0) -->
+  <text x="490" y="55" text-anchor="middle" font-weight="bold" fill="#c62828">PosErr &lt; 0 (feedback ahead)</text>
+  <text x="490" y="72" text-anchor="middle" font-size="11" fill="#5b6b7b">load overshot or is being pushed</text>
+
+  <line x1="430" y1="165" x2="430" y2="178" stroke="#5b6b7b"/>
+  <text x="430" y="195" text-anchor="middle" font-size="12">PosRef</text>
+  <circle cx="430" cy="170" r="5" fill="#e0736b"/>
+
+  <line x1="560" y1="165" x2="560" y2="178" stroke="#5b6b7b"/>
+  <text x="560" y="195" text-anchor="middle" font-size="12">Pos</text>
+  <circle cx="560" cy="170" r="5" fill="#5b8def"/>
+
+  <line x1="560" y1="140" x2="430" y2="140" stroke="#c62828" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="495" y="133" text-anchor="middle" fill="#c62828" font-size="12">&#8722;PosErr</text>
+
+  <text x="490" y="225" text-anchor="middle" font-size="11" fill="#5b6b7b">controller pulls back toward the reference</text>
+
+  <text x="330" y="248" text-anchor="middle" fill="#5b6b7b" font-size="11">|PosErr| crossing MaxPosErr disables the axis (fault 1020).</text>
+</svg>

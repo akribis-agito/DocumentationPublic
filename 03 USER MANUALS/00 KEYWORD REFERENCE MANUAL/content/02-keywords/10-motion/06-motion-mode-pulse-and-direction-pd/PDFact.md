@@ -48,6 +48,10 @@ PDPos increment = (pulses this cycle) × PDFact / PDFactDen   (then signed by PD
 
 The value range is ±16,777,215. A **negative** `PDFact` reverses the sense of accumulation; this is independent of the [PDEncDir](PDEncDir.md) sign (the two combine).
 
+### Worked example
+
+A stepper master sends 10 000 pulses per revolution; the follower axis is configured for 4 000 PDPos counts per revolution. The scaling needed is `4000 / 10000 = 2 / 5`. Set `PDFact = 2`, `PDFactDen = 5`. If the master then streams pulses at 50 kHz, `PDPos` advances at `50000 × 2/5 = 20000` counts per second, exactly the follower's nominal feed rate, with no long-term drift because the fractional remainder of `2/5` per pulse is carried forward each cycle.
+
 ## Examples
 
 To scale so that 4 input pulses advance `PDPos` by 1 count, set `PDFact = 1`, `PDFactDen = 4`:

@@ -43,6 +43,8 @@ Velocity-loop reference/input (position-controller output plus velocity referenc
 
 `VelRef` is built only while the motor is on, commutation is done, the axis is not in simulation and the amplifier is not a position-drive. The construction proceeds in stages.
 
+![VelRef assembly stages](velref-assembly.svg)
+
 ### 1. Position-controller output + velocity feed-forward
 
 The base value is the position gain acting on [PosErr](PosErr.md) plus a velocity feed-forward term derived from [dPosRef](dPosRef.md):
@@ -75,6 +77,19 @@ If [InjectPoint](../../13-injection/InjectPoint.md) targets the velocity referen
 ### 4. Saturation to MaxVel
 
 Finally `VelRef` is hard-limited to ±[MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md). On saturation the velocity-saturation bit of [StatReg](../../07-status-and-faults/StatReg.md) (bit 23) is set, along with the general "any saturation" flag. This clamp is why `VelRef` reports within ±1.3e9 rather than the full 32-bit range.
+
+### Worked example
+
+With `PosErr = 20`, `PosGain = 50`, `dPosRef = 100000` user units/s, `VelTrackFact = 1024` and `MaxVel = 1000000`, the construction is:
+
+```text
+PosErr * PosGain                       = 20 * 50           = 1000
+dPosRef * VelTrackFact / 1024          = 100000 * 1024/1024 = 100000
+VelRef (before clamp)                                       = 101000
+VelRef (after MaxVel clamp)                                 = 101000  ; within ±MaxVel
+```
+
+If the same situation arose with `MaxVel = 50000`, the clamp would cap `VelRef = 50000` and bit 23 of `StatReg` (velocity saturation) would set on that cycle.
 
 ## Examples
 

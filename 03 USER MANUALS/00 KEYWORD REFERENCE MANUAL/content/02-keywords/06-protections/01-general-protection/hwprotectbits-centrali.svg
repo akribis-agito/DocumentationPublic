@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="220" viewBox="0 0 760 220" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <text x="20" y="26" font-size="15" font-weight="bold">HWProtectBits &#8211; Central-i (v5) bit layout</text>
+  <text x="20" y="46" fill="#555" font-size="11">Bits extracted from the remote amplifier&#8217;s status word; lower bits 3&#8211;6 carry power/peripheral flags folded in by the master.</text>
+
+  <!-- 16 cells, bit 15 on the left, bit 0 on the right -->
+  <g>
+    <rect x="40"  y="64" width="44" height="40" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="84"  y="64" width="44" height="40" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="128" y="64" width="44" height="40" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="172" y="64" width="44" height="40" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="216" y="64" width="44" height="40" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="260" y="64" width="44" height="40" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="304" y="64" width="44" height="40" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="348" y="64" width="44" height="40" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="392" y="64" width="44" height="40" rx="4" fill="#f4f7fb" stroke="#9fb4cc" stroke-width="1.2"/>
+    <rect x="436" y="64" width="44" height="40" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="480" y="64" width="44" height="40" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="524" y="64" width="44" height="40" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="568" y="64" width="44" height="40" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="612" y="64" width="44" height="40" rx="4" fill="#f4f7fb" stroke="#9fb4cc" stroke-width="1.2"/>
+    <rect x="656" y="64" width="44" height="40" rx="4" fill="#f4f7fb" stroke="#9fb4cc" stroke-width="1.2"/>
+    <rect x="700" y="64" width="44" height="40" rx="4" fill="#f4f7fb" stroke="#9fb4cc" stroke-width="1.2"/>
+  </g>
+
+  <!-- bit numbers (15 .. 0 left to right) -->
+  <g font-size="12" text-anchor="middle" fill="#333">
+    <text x="62"  y="89">15</text>
+    <text x="106" y="89">14</text>
+    <text x="150" y="89">13</text>
+    <text x="194" y="89">12</text>
+    <text x="238" y="89">11</text>
+    <text x="282" y="89">10</text>
+    <text x="326" y="89">9</text>
+    <text x="370" y="89">8</text>
+    <text x="414" y="89">7</text>
+    <text x="458" y="89">6</text>
+    <text x="502" y="89">5</text>
+    <text x="546" y="89">4</text>
+    <text x="590" y="89">3</text>
+    <text x="634" y="89">2</text>
+    <text x="678" y="89">1</text>
+    <text x="722" y="89">0</text>
+  </g>
+
+  <!-- short labels under cells (bit 0 rightmost) -->
+  <g font-size="9" text-anchor="middle" fill="#444">
+    <text x="62"  y="122">WDog</text>
+    <text x="106" y="122">5Viso</text>
+    <text x="150" y="122">IPM</text>
+    <text x="194" y="122">OvrCurr</text>
+    <text x="238" y="122">AuxEnc</text>
+    <text x="282" y="122">MainEnc</text>
+    <text x="326" y="122">STO2</text>
+    <text x="370" y="122">STO1</text>
+    <text x="414" y="122">Inrush</text>
+    <text x="458" y="122">LogAB</text>
+    <text x="502" y="122">PwrAC</text>
+    <text x="546" y="122">PwrBC</text>
+    <text x="590" y="122">5Vflt</text>
+    <text x="634" y="122">&#8211;</text>
+    <text x="678" y="122">&#8211;</text>
+    <text x="722" y="122">&#8211;</text>
+  </g>
+
+  <text x="40" y="158" font-size="11" fill="#555">Lighter cells (bits 0&#8211;2 here) are unused in this layout; power-phase bits 4&#8211;5 are gated by PowerSupply so an unused phase is not reported.</text>
+  <text x="40" y="178" font-size="11" fill="#555">ProtectMask uses the same bit positions: mask bit = 1 disables that protection. Non-maskable critical protections remain forced on.</text>
+  <text x="40" y="200" font-size="11" fill="#555">Watchdog (bit 15), IPM fault (bit 13) and over-current (bit 12) are typically non-maskable; check Agito documentation for your specific build.</text>
+</svg>

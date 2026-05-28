@@ -43,6 +43,8 @@ if |PosErr| > active threshold
     turn the axis off and log the fault
 ```
 
+![Following-error trip threshold: the absolute error rises until it crosses the active limit; on that sample the axis is disabled and a ConFlt code is logged. The open-loop limits are higher to tolerate the larger natural error during injection or open-loop operation.](following-error-trip.svg)
+
 Key points:
 
 - The threshold actually used is switched between `MaxPosErr` (closed loop) and [MaxPosErrOL](MaxPosErrOL.md) (open loop / injection) depending on the loop state. In normal closed-loop operation the closed-loop threshold applies, so a violation records [ConFlt](../../../07-status-and-faults/ConFlt.md) fault code 1020 (position error too high). In open loop the open-loop threshold applies and the same condition instead records fault code 1055 (open-loop position error too high).

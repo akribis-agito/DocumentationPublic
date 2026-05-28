@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="660" height="360" viewBox="0 0 660 360" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="20" y="26" font-size="15" font-weight="bold">I&#178;t trip curve &#8211; how ContCL / PeakCL / PeakTime relate</text>
+
+  <!-- axes -->
+  <line x1="80" y1="60" x2="80" y2="290" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="80" y1="290" x2="600" y2="290" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <text x="68" y="58" text-anchor="end" font-weight="bold">I&#178;_filt</text>
+  <text x="600" y="308" text-anchor="end" font-weight="bold">time</text>
+
+  <!-- PeakCL^2 reference line (top) -->
+  <line x1="80" y1="80" x2="590" y2="80" stroke="#9fb4cc" stroke-dasharray="4 3"/>
+  <text x="600" y="84" fill="#555" font-size="12">PeakCL&#178;</text>
+
+  <!-- ContCL^2 threshold line (mid) -->
+  <line x1="80" y1="170" x2="590" y2="170" stroke="#e0736b" stroke-dasharray="6 4" stroke-width="1.4"/>
+  <text x="600" y="174" fill="#b35047" font-size="12">ContCL&#178;</text>
+
+  <!-- filtered response: I_p^2 * (1 - e^(-t/tau)) reaching ContCL^2 at PeakTime -->
+  <!-- using y(0)=290, asymptote y=80 (PeakCL^2). y(PeakTime)=170 -->
+  <path d="M80,290
+           C 150,280 200,240 260,210
+           C 320,185 360,175 400,170
+           C 460,165 510,158 590,145"
+        fill="none" stroke="#2c6ed5" stroke-width="2"/>
+
+  <!-- intersection at PeakTime -->
+  <line x1="400" y1="290" x2="400" y2="170" stroke="#9fb4cc" stroke-dasharray="3 3"/>
+  <circle cx="400" cy="170" r="4" fill="#e0736b"/>
+  <text x="408" y="164" fill="#b35047">trip / limit engages</text>
+
+  <!-- PeakTime label on x axis -->
+  <text x="400" y="308" text-anchor="middle" fill="#333">PeakTime</text>
+
+  <!-- annotation: applied step -->
+  <text x="100" y="76" fill="#2c6ed5">applied step at PeakCL &#8594; I&#178;_filt charges toward PeakCL&#178;</text>
+
+  <!-- engage / release zone legend -->
+  <g transform="translate(20,320)">
+    <text x="0" y="0" font-weight="bold">Engage / release:</text>
+    <text x="0" y="18" fill="#333">I&#178;_filt &gt; ContCL&#178; &#8594; I&#178;t limitation engages (or trips, if configured)</text>
+    <text x="0" y="34" fill="#333">I&#178;_filt &lt; 0.90 &#215; ContCL&#178; &#8594; limitation releases (10% hysteresis)</text>
+  </g>
+</svg>

@@ -48,6 +48,8 @@ Redefines the axis position to a given value without moving the motor.
 
 Because [Pos](../01-kinematics-status/Pos.md) and [PosRef](../01-kinematics-status/PosRef.md) are moved by the **same offset**, the position error [PosErr](../01-kinematics-status/PosErr.md) (`PosRef − Pos`) is **preserved**, not zeroed — `SetPosition` relabels the coordinate, it does not pull the reference onto the feedback. (To instead zero the error by snapping the reference to the feedback, use [ZeroPosErr](ZeroPosErr.md).)
 
+![SetPosition vs ZeroPosErr](setpos-vs-zeroerr.svg)
+
 When the motor is **on**, the smoothing buffer must also be re-seeded with the new value; to do so without disrupting the control loop the controller temporarily forces [Jerk](Jerk.md) to `0`, refills the `2^Jerk` moving-average history with the new value, then restores `Jerk`. When the motor is **off** this is unnecessary because the reference already tracks the feedback.
 
 ### Conditions

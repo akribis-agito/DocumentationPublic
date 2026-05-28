@@ -64,6 +64,8 @@ Each motion segment lasts a fixed number of control-loop samples, given by [FIFO
 - A **linear** (velocity-type) segment holds a constant velocity, so the position reference advances by a fixed step each sample. For a *position-delta* segment the per-sample step is the delta divided by the cycle time, so the requested delta is reached exactly at the end of the segment, starting from the previous position reference.
 - A **parabolic** (acceleration-type) segment holds a constant acceleration: the velocity ramps linearly and the position follows a parabola. The segment begins from the current profiler velocity. For a *position-delta* segment the acceleration is computed so the requested delta is reached at the end of the segment.
 
+![Position-reference shape of one linear segment vs one parabolic segment over a single FIFOCycleTime](fifo-segment-shapes.svg)
+
 When a segment ends, the controller frees that slot, advances to the next entry, and pulls entries until it reaches the next motion segment. A cycle-time entry (type 5) is consumed in passing: it updates the segment duration for the segments that follow and does not itself produce motion. Because cycle time is only applied between segments, it can be changed throughout the sequence to vary segment lengths.
 
 ![FIFO fill-at-tail, drain-at-head pipeline](fifo-pipeline.svg)

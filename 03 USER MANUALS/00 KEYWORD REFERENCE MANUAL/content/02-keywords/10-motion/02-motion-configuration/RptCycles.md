@@ -58,6 +58,8 @@ ARptCycles=0         ; repeat indefinitely
 ARptCycles          ; query current value
 ```
 
+A worked example. With `RptMode = 0` (bidirectional) and `RptCycles = 4`, the axis does two round-trips: out, back, out, back (4 legs total). With `RptMode = 1` (unidirectional) and `RptCycles = 4`, the axis advances by the same delta four times (one direction only).
+
 ## See also
 
 - [RptMode](RptMode.md) — defines what counts as one repetition

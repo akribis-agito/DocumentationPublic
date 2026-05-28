@@ -52,7 +52,9 @@ profiler ─► raw reference ─► (offset / moving-average) ─► smoothed r
          ─► [input shaping] ─► shaped reference ─► [injection] ─► [filter] ─► shaped+filtered reference ─► position loop
 ```
 
-`PosRef` is reported from the shaped stage (the higher-precision value shifted back down to user units, with rounding). The fully post-processed value that the position loop actually subtracts the feedback from is the shaped-and-filtered reference, so the reported `PosRef` is one snapshot of this chain rather than the literal loop input after shaping/filtering.
+![PosRef post-processing pipeline](posref-pipeline.svg)
+
+`PosRef` is reported from the shaped stage (the higher-precision value shifted back down to user units, with rounding). The fully post-processed value that the position loop actually subtracts the feedback from is the shaped-and-filtered reference, so the reported `PosRef` is one snapshot of this chain rather than the literal loop input after shaping/filtering — there can be a small per-cycle offset between what `PosRef` reads and what `PosErr` is computed against when input shaping, injection or the position filter is active.
 
 ### Software position-limit clamping
 

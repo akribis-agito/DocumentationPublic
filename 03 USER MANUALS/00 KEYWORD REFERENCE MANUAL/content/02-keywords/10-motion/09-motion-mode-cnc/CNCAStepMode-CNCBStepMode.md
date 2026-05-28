@@ -24,6 +24,8 @@ The CNC engine checks `CNCAStepMode` each control cycle as it processes the queu
 
 Because the value is read continuously, you can enter step mode mid-path: set it to `1` and the engine halts at the end of the segment currently being executed. Writing `0` again leaves step mode and lets the engine run the remaining segments freely from that point.
 
+![Step-mode timeline: each segment decelerates to a full stop, then waits for a CNCADoStep = 1 write before the next segment is released](cnc-stepmode.svg)
+
 Any command that stops the motion — [StopCNCA](StopCNCA.md) (or `StopCNCB`), a general [Stop](../04-motion-command/Stop.md), or an `Abort` — automatically forces `CNCAStepMode` back to `0`. This guarantees the stop request is honoured immediately; otherwise an engine waiting in step mode would not respond to the request.
 
 While a CNCA path is running, the axes report it through [MotionStat](../05-motion-status/MotionStat.md) (bit 11 / mask `0x800` for CNCA, bit 14 / mask `0x4000` for CNCB).

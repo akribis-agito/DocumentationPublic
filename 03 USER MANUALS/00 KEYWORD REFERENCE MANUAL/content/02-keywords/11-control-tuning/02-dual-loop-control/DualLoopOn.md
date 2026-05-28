@@ -45,6 +45,8 @@ Enables and configures dual-loop control.
 
 When dual-loop is enabled, the load feedback should be connected to the main feedback port and the motor feedback to the auxiliary feedback port. The position and velocity feedback may have different resolutions, so the velocity-loop signals are unit-matched using the scaling factor [DualLoopFact](DualLoopFact.md).
 
+![Dual-loop split: load encoder closes the position loop, motor encoder closes the velocity loop](dual-loop-feedback-split.svg)
+
 With `DualLoopOn = 1`, the velocity feedback is taken from the auxiliary-encoder velocity and scaled to the unit chosen by `DualLoopFact`; commutation is derived from the auxiliary (motor) encoder rather than the main encoder. With `DualLoopOn = 2`, the velocity feedback is the filtered analog tachometer signal instead.
 
 The active result is reported by [DualLoopStat](DualLoopStat.md). The pseudo dual-loop variant ([DualEncSwapOn](DualEncSwapOn.md)) and the range-limited variant ([DualEncMode](DualEncMode.md) / [DualEncRange](DualEncRange.md)) further modify which feedback the position loop uses.

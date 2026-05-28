@@ -53,6 +53,8 @@ The default of every element is `-1`, meaning "not configured". When the table i
 
 **Switch-angle map** (`HallsAngleSw = 1`, central-i v5 only) — each entry is the electrical angle at the *transition* between adjacent states. Default transition angles: 30°, 90°, 150°, 210°, 270°, 330°.
 
+![Two interpretations of HallsAngle: in middle-angle mode each entry is the angle at the centre of its 60-degree Hall sector (60, 120, 180, 240, 300, 360); in switch-angle mode each entry is the angle at the boundary where one Hall state changes to the next (30, 90, 150, 210, 270, 330)](hallsangle-maps.svg)
+
 ## Examples
 
 ```text

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="290" viewBox="0 0 720 290" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="20" y="26" font-size="15" font-weight="bold">Current-command (CurrRef) saturation &#8211; two stages</text>
+
+  <!-- input -->
+  <rect x="20" y="100" width="120" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="80" y="124" text-anchor="middle">raw CurrRef</text>
+  <text x="80" y="142" text-anchor="middle" font-size="11" fill="#555">from outer loops</text>
+
+  <!-- stage 1: directional clamp -->
+  <rect x="180" y="80" width="220" height="90" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="290" y="102" text-anchor="middle" font-weight="bold">Stage 1 &#8211; directional clamp</text>
+  <text x="290" y="122" text-anchor="middle" font-size="11">CurrLimMode = 1 &#8594; analog inputs</text>
+  <text x="290" y="138" text-anchor="middle" font-size="11">CurrLimMode = 2 &#8594; single analog input</text>
+  <text x="290" y="154" text-anchor="middle" font-size="11">CurrLimMode = 3 &#8594; [&#8722;CurrLimRev, +CurrLimFwd]</text>
+
+  <!-- stage 2: absolute clamp -->
+  <rect x="440" y="80" width="200" height="90" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="540" y="102" text-anchor="middle" font-weight="bold">Stage 2 &#8211; absolute clamp</text>
+  <text x="540" y="122" text-anchor="middle" font-size="11">always applied:</text>
+  <text x="540" y="138" text-anchor="middle" font-size="11">|CurrRef| &#8804; PeakCL</text>
+  <text x="540" y="154" text-anchor="middle" font-size="11" fill="#555">(I&#178;t reduces effective peak)</text>
+
+  <!-- arrows -->
+  <line x1="140" y1="125" x2="178" y2="125" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="400" y1="125" x2="438" y2="125" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="640" y1="125" x2="690" y2="125" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+
+  <!-- output label -->
+  <text x="700" y="129" text-anchor="end" fill="#333" font-size="11">to current loop</text>
+
+  <!-- bypass note -->
+  <rect x="180" y="200" width="220" height="60" rx="6" fill="#f4f7fb" stroke="#9fb4cc" stroke-width="1.2"/>
+  <text x="290" y="222" text-anchor="middle" font-weight="bold">Mode 0 (default)</text>
+  <text x="290" y="240" text-anchor="middle" font-size="11">Stage 1 is skipped &#8211;</text>
+  <text x="290" y="254" text-anchor="middle" font-size="11">only the PeakCL clamp applies</text>
+
+  <!-- StatReg flag -->
+  <rect x="440" y="200" width="200" height="60" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="540" y="222" text-anchor="middle" font-weight="bold">When clamped at any stage:</text>
+  <text x="540" y="244" text-anchor="middle" font-size="11">StatReg bit 21 set (current saturation)</text>
+
+  <line x1="290" y1="170" x2="290" y2="198" stroke="#5b6b7b" stroke-dasharray="3 3"/>
+  <line x1="540" y1="170" x2="540" y2="198" stroke="#5b6b7b" stroke-dasharray="3 3"/>
+
+  <text x="20" y="282" fill="#555" font-size="11">A torque-limit digital-input function can bypass Stage 1, leaving only the PeakCL clamp in effect.</text>
+</svg>

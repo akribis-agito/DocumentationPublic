@@ -51,6 +51,10 @@ $$
 
 So `UPMVelTable[54]` is the current compensation value applied when the commutation angle rounds to 54 degrees. The table holds one entry per whole degree over a full electrical cycle (0–360 degrees); it is 1-indexed, so the valid compensation entries begin at index `1`. All array elements default to 0 (no compensation).
 
+To cancel an angle-periodic disturbance (such as cogging torque), populate `UPMVelTable` with the *opposite* current pattern — the angle-by-angle anti-cogging current that, when summed into `CurrRef`, leaves the net torque flat:
+
+![Angle-indexed compensation: the cogging disturbance appears as a periodic ripple vs commutation angle, and UPMVelTable is populated with the equal-and-opposite current values so the sum is flat across angle](cogging-compensation.svg)
+
 The added term is in the same units as the current reference ([CurrRef](../02-motor-variables/CurrRef.md)). On central-i v5 the table and reference are floating-point; on v4 they are integer. The indexing and the conditions for application are identical across versions.
 
 ## Examples

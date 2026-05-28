@@ -43,7 +43,9 @@ Selects the direction in which the speed-change-on-the-fly trigger is active.
 | 0 | Reference rises **above** `SpeedChgPos` (waiting for a higher position). Use for a forward-moving axis. |
 | 1 | Reference falls **below** `SpeedChgPos` (waiting for a lower position). Use for a reverse-moving axis. |
 
-Set `SpeedChgDir` to match the direction the axis will be travelling when it passes `SpeedChgPos`; if it is set to the wrong side the crossing condition is never met and no change occurs. See [SpeedChgOn](SpeedChgOn.md) for the full mechanism.
+Set `SpeedChgDir` to match the direction the axis will be travelling when it passes `SpeedChgPos`; if it is set to the wrong side the crossing condition is never met and no change occurs. See [SpeedChgOn](SpeedChgOn.md) for the full mechanism and a timeline.
+
+For example, when jogging forward and you want to slow down once past `SpeedChgPos = 80000`, set `SpeedChgDir = 0` (fire on forward crossing). For a backward jog that should speed up past `SpeedChgPos = 20000`, set `SpeedChgDir = 1`.
 
 ## Examples
 

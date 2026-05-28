@@ -50,6 +50,8 @@ StallVal = voltage sum * 0.005 + 0.995 * previous StallVal
 
 `Va`, `Vb`, `Vc` are the (post-saturation) phase voltages of the stepper. While the motor tracks its commanded electrical angle, these phase-voltage differences stay high; when the rotor falls out of step (stalls), the effective contribution drops and `StallVal` falls. A stall is declared when `StallVal` drops **below** the computed threshold [StallTh](StallTh.md). `StallVal` is reset to `0` when the motor is off.
 
+![Stepper stall detection sketch: a healthy StallVal stays well above the StallTh line; when the rotor loses step, StallVal collapses below StallTh and the stall outcome is taken from StallCfg](stall-detect.svg)
+
 > Note: this metric is produced only for stepper motors driven by the internal amplifier; it is not generated for servo or external-amplifier configurations.
 
 ## Examples

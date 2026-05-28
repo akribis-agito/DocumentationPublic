@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="220" viewBox="0 0 720 220" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
+    </marker>
+  </defs>
+
+  <text x="360" y="22" text-anchor="middle" font-weight="bold">ConFlt value layout</text>
+
+  <!-- number line baseline -->
+  <line x1="40" y1="110" x2="680" y2="110" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <!-- segment: no fault (0) -->
+  <rect x="40" y="86" width="80" height="48" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="80" y="105" text-anchor="middle">0</text>
+  <text x="80" y="122" text-anchor="middle" font-size="11">no fault</text>
+
+  <!-- gap to base -->
+  <text x="160" y="115" text-anchor="middle" font-size="11" fill="#5b6b7b">(reserved)</text>
+
+  <!-- base 1000 marker -->
+  <line x1="200" y1="100" x2="200" y2="120" stroke="#5b6b7b" stroke-width="1"/>
+  <text x="200" y="142" text-anchor="middle" font-size="11">base = 1000</text>
+
+  <!-- controller fault range -->
+  <rect x="200" y="86" width="300" height="48" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="350" y="105" text-anchor="middle">1001 ... 1xxx</text>
+  <text x="350" y="122" text-anchor="middle" font-size="11">controller fault codes (positive)</text>
+
+  <!-- v5 user range -->
+  <rect x="520" y="86" width="160" height="48" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="600" y="105" text-anchor="middle">-3000 ... -1</text>
+  <text x="600" y="122" text-anchor="middle" font-size="11">user-written (v5 only)</text>
+
+  <!-- callouts -->
+  <text x="80" y="76" text-anchor="middle" font-size="11" fill="#5b6b7b">cleared by</text>
+  <text x="80" y="62" text-anchor="middle" font-size="11" fill="#5b6b7b">MotorOn=1</text>
+
+  <text x="350" y="76" text-anchor="middle" font-size="11" fill="#5b6b7b">set by controller on disabling fault;</text>
+  <text x="350" y="62" text-anchor="middle" font-size="11" fill="#5b6b7b">cannot be written by host (write rejected)</text>
+
+  <text x="600" y="76" text-anchor="middle" font-size="11" fill="#5b6b7b">application-level</text>
+  <text x="600" y="62" text-anchor="middle" font-size="11" fill="#5b6b7b">disable reason</text>
+
+  <!-- example codes row -->
+  <text x="40" y="178" font-weight="bold">Examples</text>
+  <text x="40" y="198" font-size="12">1001 abort &#160;&#160; 1003 encoder &#160;&#160; 1008 V&gt;max &#160;&#160; 1020 PosErr &#160;&#160; 1024 STO1 &#160;&#160; 1040 motor temp &#160;&#160; 1081 watchdog</text>
+</svg>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="260" viewBox="0 0 780 260" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="390" y="22" text-anchor="middle" font-weight="bold">Range-limited dual-loop switching (DualEncMode = 1)</text>
+
+  <!-- Pseudo region (left) -->
+  <rect x="40" y="80" width="200" height="60" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="140" y="106" text-anchor="middle">Pseudo dual-loop</text>
+  <text x="140" y="124" text-anchor="middle" fill="#5b6b7b">DualLoopStat = 1</text>
+
+  <!-- True region (centre) -->
+  <rect x="240" y="80" width="300" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="390" y="106" text-anchor="middle">True dual-loop</text>
+  <text x="390" y="124" text-anchor="middle" fill="#5b6b7b">DualLoopStat = 2</text>
+
+  <!-- Pseudo region (right) -->
+  <rect x="540" y="80" width="200" height="60" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="640" y="106" text-anchor="middle">Pseudo dual-loop</text>
+  <text x="640" y="124" text-anchor="middle" fill="#5b6b7b">DualLoopStat = 1</text>
+
+  <!-- Number line -->
+  <line x1="40"  y1="170" x2="760" y2="170" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="760" y="188" text-anchor="end">AuxPos (motor encoder counts)</text>
+
+  <!-- Boundary ticks -->
+  <line x1="240" y1="164" x2="240" y2="194" stroke="#5b6b7b" stroke-width="1.4"/>
+  <text x="240" y="210" text-anchor="middle">DualEncRange[1]</text>
+
+  <line x1="540" y1="164" x2="540" y2="194" stroke="#5b6b7b" stroke-width="1.4"/>
+  <text x="540" y="210" text-anchor="middle">DualEncRange[2]</text>
+
+  <text x="390" y="248" text-anchor="middle" fill="#5b6b7b">A position offset is maintained at each crossing so the switch does not produce a step.</text>
+</svg>

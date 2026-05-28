@@ -43,6 +43,8 @@ Unlike the hardware limit switches reported by `LimitsStat` (which are physical 
 
 ## How it works
 
+![Velocity-vs-position sketch: inside the legal travel band the profiled Vel runs at the commanded value, then the pre-emptive distance-to-stop clamp curves it down to zero exactly at FwdPLim](soft-limit-decel.svg)
+
 The profiler enforces the forward limit in several layered ways:
 
 **1. Pre-emptive braking (planned stop at the limit).** When a point-to-point / jog profile is running, the profiler continuously computes the maximum velocity from which it could still stop exactly at `FwdPLim` using the active deceleration, via a square-root distance-to-stop formula:

@@ -23,8 +23,11 @@ To express "*N* encoder counts = 1 user unit", set `UsrUnits = N × 65536`.
 
 To read position in mm when 5 encoder counts equal 1 mm, set the ratio to 5 — i.e. `UsrUnits = 5 × 65536 = 327680`. Position is then reported in mm, velocity in mm/s, and acceleration in mm/s².
 
+A second worked case: a rotary motor with `EncRes = 10000` counts/revolution that you want to read in degrees. One degree corresponds to `10000 / 360 ≈ 27.78` counts, so set `UsrUnits = 27.78 × 65536 ≈ 1820445`. The host then sees positions in degrees, velocities in deg/s, and accelerations in deg/s².
+
 ```text
-AUsrUnits=327680     ; 5 counts per user unit (ratio 5 = 5 x 65536)
+AUsrUnits=327680     ; 5 counts per user unit (ratio 5 = 5 x 65536) — mm with 5 counts/mm
+AUsrUnits=1820445    ; degrees on a rotary motor with EncRes = 10000
 AUsrUnits=65536      ; factor 1 — report directly in encoder counts (default)
 ```
 

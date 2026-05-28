@@ -56,4 +56,4 @@ AScheduleMode[1]=8            ; select temperature-band scheduling
 
 - [ScheduleMode](ScheduleMode.md) — mode 8 uses these thresholds
 - [ScheduleSet](ScheduleSet.md) — band currently selected
-- [SchedulePos](SchedulePos.md) / [ScheduleVel](ScheduleVel.md) — analogous thresholds for the other range modes
+- [SchedulePos](SchedulePos.md) / [ScheduleVel](ScheduleVel.md) — analogous thresholds for the other range modes (the band-mapping diagram is on [ScheduleVel](ScheduleVel.md))

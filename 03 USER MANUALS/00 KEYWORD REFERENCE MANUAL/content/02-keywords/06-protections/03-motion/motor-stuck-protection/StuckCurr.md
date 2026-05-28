@@ -56,6 +56,8 @@ else
 - On trip, the axis is turned off and [ConFlt](../../../07-status-and-faults/ConFlt.md) records fault code 1007 (motor stuck).
 - Detection is **bypassed** for stepper motors, and for Current-Control-Only, Force-control, commutation/auto-phasing in progress, and motor-learn modes — situations where high current at low speed is expected.
 
+> **Worked example:** with `StuckCurr = 4000` (4 A), `StuckVel = 40000` (user units/s) and `StuckTime` of a few thousand samples, suppose the motor hits a hard endstop while jogging at 6 A. The current rises above 4 A and the filtered velocity collapses below 40 000; both AND conditions become true. The internal sample counter runs up, and when it reaches `StuckTime` the axis is disabled with `ConFlt = 1007`. If the obstruction releases (so the velocity rises above `StuckVel`) before the counter reaches `StuckTime`, the counter resets and no fault is raised.
+
 ## Examples
 
 ```text

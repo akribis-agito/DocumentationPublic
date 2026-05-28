@@ -44,6 +44,8 @@ $$
 
 The behaviour differs from the position-mode check in one important way: the comparison is re-evaluated **every cycle and is not latched**. If `|Vel[1]| > InTargetVelTh` the controller forces `InTargetStat = 2` and zeroes the dwell counter; if it is within the window the counter advances toward `InTargetTime` and `InTargetStat` latches to 4 — but should the velocity later exceed the threshold again, the status immediately drops back to 2. The window maximum is the maximum speed and the default is `1000` (user velocity units). It is saved to flash.
 
+The dwell-counter mechanic is the same as for the position-based settling check; see the timing diagram on the [InTargetTol](InTargetTol.md) page (substitute `|Vel[1]|` for `|PosErr|` and `InTargetVelTh` for `InTargetTol`). The key difference is that in current/force mode the resulting state-4 latch is *not sticky* — it falls back to 2 the instant the velocity leaves the window.
+
 ## Examples
 
 ```text

@@ -46,6 +46,8 @@ Starting from `DOutPort = 6` (`0b0110`):
 | `DOutPortCBit[2]` | clear bit 1 | 4 (`0b0100`) |
 | `DOutPortTBit[3]` | toggle bit 2 | 2 (`0b0010`) |
 
+![DOutPortSBit / CBit / TBit applied to DOutPort = 6, showing the resulting output bits](doutport-bit-ops.svg)
+
 ## See also
 
 - [DOutPort](DOutPort.md) — the underlying output bitfield these modify

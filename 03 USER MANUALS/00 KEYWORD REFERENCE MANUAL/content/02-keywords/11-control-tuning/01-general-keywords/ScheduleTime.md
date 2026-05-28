@@ -39,6 +39,8 @@ The dwell time, in milliseconds, used by the time-based gain-scheduling modes to
 
 In each of the time-based modes, the controller runs a timer that resets while the triggering condition is active and accumulates once it clears. The active gain set is held at an intermediate value until the timer reaches `ScheduleTime`, after which the controller switches to the steady-state set:
 
+![Time-based dwell: trigger clears, timer counts to ScheduleTime, gain set then switches to steady-state](schedule-time-dwell.svg)
+
 - **Optimal settling by time (2):** while in motion, set 1; after motion stops, set 2 is held for `ScheduleTime`, then set 3.
 - **Quiet standing (6):** set 2 while in motion and for `ScheduleTime` after motion stops, then set 1 once stationary longer than `ScheduleTime`.
 - **By PD pulses (7):** set 2 while pulse-and-direction velocity is non-zero; set 1 resumes once pulses have been absent continuously for `ScheduleTime`.
@@ -50,6 +52,16 @@ In each of the time-based modes, the controller runs a timer that resets while t
 AScheduleTime=50             ; 50 ms hold-off for the time-based schedule modes
 AScheduleMode[1]=2           ; optimal settling by time, using ScheduleTime
 ```
+
+### Worked example: 50 ms settling window
+
+With `ScheduleMode = 2` and `ScheduleTime = 50`, the timeline at the end of a move is:
+
+- `t = 0` (motion stops): timer starts; active set jumps from set 1 to set 2.
+- `t = 0` to `t = 50 ms`: set 2 remains active (intermediate settling gains).
+- `t = 50 ms` onward: timer has reached `ScheduleTime`; active set switches to set 3 and stays there until the next motion starts.
+
+If a new motion begins before the 50 ms expires, the timer resets and the active set goes back to set 1 immediately.
 
 ## See also
 

@@ -48,6 +48,10 @@ The hardware emits one quadrature edge per (factor + 1) internal counts, so a po
 
 On older hardware revisions the emulation output also has to be muxed onto the differential output pins (selecting emulation vs. plain differential outputs); on current revisions the output mux is configured per axis as part of the same write.
 
+![Encoder emulation A/B/Z waveforms: with EmulRat = 4 the hardware emits one A/B quadrature edge for every 4 feedback counts, so the downstream device sees one-quarter the feedback resolution](emul-rat-waveform.svg)
+
+**Worked example.** With a rotary motor at [EncRes](../01-general-settings/EncRes.md) = 10000 counts/revolution and `EmulRat = 4`, the emulated output emits one A/B quadrature edge for every 4 feedback counts. Per revolution that is `10000 / 4 = 2500` A/B edges (≈ 625 full A/B cycles). Setting `EmulRat = -4` keeps the same 1:4 ratio but swaps A/B, so the downstream device counts in the opposite direction.
+
 ## Examples
 
 ```text

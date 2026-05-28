@@ -44,6 +44,8 @@ Command that stops coordinated vector motion, decelerating all member axes with 
 
 Because the deceleration is applied to the single path velocity and the geometry still splits it across the axes, the move follows its programmed path while slowing — it does not deviate. When the path velocity reaches zero the in-motion status bits of all member axes are cleared and the move ends. Issuing `StopVec` when the group is not in motion has no effect.
 
+![StopVec timeline showing the vector-stop bit being set, MotionReason latching to 29, and the path braking at VecEmrgDec](stopvec-timeline.svg)
+
 A motor-off or fault on a member axis, or a member axis reaching a software position limit, stops the group by the same mechanism but with different reason codes (see [MotionReason](../05-motion-status/MotionReason.md) codes 30-34). Use [VecPause](VecPause.md) instead if you want to halt the move and later resume it from where it stopped.
 
 ## Examples

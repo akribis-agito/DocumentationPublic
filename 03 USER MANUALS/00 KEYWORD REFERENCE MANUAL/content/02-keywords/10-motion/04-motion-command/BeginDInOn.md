@@ -55,6 +55,8 @@ A digital input configured as begin-motion is evaluated in the control interrupt
 
 On the next cycle the profiler sees that flag, clears the wait-for-input bit and lets the motion start on the following sample. If a [Stop](Stop.md) or [Abort](Abort.md) arrives while still waiting, the move is ended immediately without ever starting.
 
+![BeginDInOn wait-then-release timeline](begindinon-timeline.svg)
+
 The live input level can be observed through [DInPort-DInPortHigh](../../05-inputs-outputs/04-digital-inputs/DInPort-DInPortHigh.md); edge logic/inversion is set by [DInLog-DInLogHigh](../../05-inputs-outputs/04-digital-inputs/DInLog-DInLogHigh.md).
 
 ## Examples

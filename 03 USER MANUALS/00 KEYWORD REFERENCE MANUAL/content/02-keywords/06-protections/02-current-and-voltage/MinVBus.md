@@ -43,6 +43,8 @@ On each periodic bus-voltage check the drive compares `VBus` with `MinVBus`:
 
 > **Note:** unlike the over-voltage trip, the under-voltage trip is **immediate** — it does *not* use the [MaxVBusTime](MaxVBusTime.md) delay.
 
+> **Worked example:** with `MinVBus = 18000` (18 V), if `VBus` momentarily drops to 17 V on the next bus check the axis is disabled and `ConFlt = 1009`. Even a single sub-`MinVBus` sample trips; there is no debounce or time window. For a category-level view of where this fits relative to the over-voltage band and `MaxVBusAbs` ceiling, see the [bus-voltage protection bands](00-overview.md).
+
 ## Examples
 
 ```text

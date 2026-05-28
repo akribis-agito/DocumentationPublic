@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="330" viewBox="0 0 700 330" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="20" y="26" font-size="15" font-weight="bold">Software travel limits &#8211; planned deceleration to the limit</text>
+
+  <!-- top: velocity vs position -->
+  <text x="20" y="56" font-weight="bold" fill="#333">velocity vs. position</text>
+
+  <!-- axes -->
+  <line x1="80" y1="70" x2="80" y2="200" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="80" y1="200" x2="660" y2="200" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <text x="68" y="68" text-anchor="end" font-size="12" fill="#333">Vel</text>
+  <text x="660" y="218" text-anchor="end" font-size="12" fill="#333">PosRef</text>
+
+  <!-- RevPLim and FwdPLim markers -->
+  <line x1="140" y1="70" x2="140" y2="210" stroke="#e0736b" stroke-dasharray="6 4" stroke-width="1.4"/>
+  <text x="140" y="228" text-anchor="middle" fill="#b35047">RevPLim</text>
+  <line x1="600" y1="70" x2="600" y2="210" stroke="#e0736b" stroke-dasharray="6 4" stroke-width="1.4"/>
+  <text x="600" y="228" text-anchor="middle" fill="#b35047">FwdPLim</text>
+
+  <!-- legal travel band -->
+  <rect x="140" y="70" width="460" height="130" fill="#eaf2fb" opacity="0.4"/>
+
+  <!-- commanded constant Vel -->
+  <line x1="140" y1="110" x2="450" y2="110" stroke="#9fb4cc" stroke-dasharray="3 3"/>
+  <text x="145" y="105" font-size="11" fill="#666">commanded Vel</text>
+
+  <!-- Profiler clamp: from some point, velocity ramps down to 0 at FwdPLim, sqrt-shape -->
+  <path d="M140,110 L450,110 Q 525,110 600,200" fill="none" stroke="#2c6ed5" stroke-width="2"/>
+  <circle cx="600" cy="200" r="4" fill="#2c6ed5"/>
+  <text x="500" y="100" fill="#2c6ed5" font-size="11">profiler decelerates &#8594; v = 0 at limit</text>
+
+  <!-- BOTTOM half: layered enforcement -->
+  <text x="20" y="262" font-weight="bold" fill="#333">Layered enforcement (continuous, each control sample):</text>
+  <g font-size="11" fill="#333" transform="translate(20,272)">
+    <text x="0" y="14">1. Pre-emptive braking &#8211; clamp profiled Vel to the &#8220;could still stop at the limit&#8221; distance-to-stop speed.</text>
+    <text x="0" y="30">2. Stop request &#8211; if the reference crosses the limit, raise MotionStat stop and set MotionReason = 7 (Fwd) / 6 (Rev); stop uses EmrgDec.</text>
+    <text x="0" y="46">3. Hard clamp &#8211; the reference and absolute target are clamped so they never pass the limit.</text>
+  </g>
+</svg>

@@ -68,6 +68,14 @@ AVelGain[1]=1200    ; set the velocity-loop proportional gain (first scheduling 
 AVelGain[1]         ; read the velocity-loop proportional gain
 ```
 
+### Worked example: proportional contribution at a velocity error
+
+With `VelGain = 1200` and a velocity error `VelErr = 50` (in velocity-loop units), the proportional term entering the PI sum is:
+
+`proportional = VelErr x VelGain = 50 x 1200 = 60000`
+
+This product enters the PI sum (together with the integral) and is then converted to current-command units by the fixed internal scaling before passing through the velocity filters and feedforwards.
+
 ## Changes between versions
 
 In **v5 (central-i)** `VelGain` is a floating-point value (same `0` to `1000000000` range concept, wider span); the proportional×error → PI → current-command path is otherwise the same. **v5 is central-i only.**

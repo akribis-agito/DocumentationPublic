@@ -72,6 +72,10 @@ ASpeed=-500000       ; jog in the negative direction
 ASpeed               ; read current value
 ```
 
+### Worked example
+
+With `Speed = 500000`, `Accel = 1000000` and `Decel = 1000000` (all in user units), a long PTP move spends `500000 / 1000000 = 0.5 s` accelerating, then cruises at 500000 until the deceleration-distance lookahead pulls it down over another 0.5 s. Travel during the accel ramp is `½ × 500000 × 0.5 = 125000` user units; the same on the decel side. If the requested travel is less than `2 × 125000 = 250000` units, the move never reaches `Speed` and is triangular instead.
+
 ## Changes between versions
 
 In **v4** `Speed` is a 32-bit integer. In **v5 (central-i)** it is a 64-bit integer, matching the 64-bit position pipeline. The profiler's use of `Speed` (magnitude in PTP, signed in jog) is unchanged. **v5 is central-i only** — on standalone `Speed` remains the v4 32-bit value.

@@ -62,6 +62,8 @@ For dual-loop system plant identification, there will be 1 input and 2 output ve
 
 The results are acquired by PCSuite after the [CalcIden](CalcIden.md) operation following each sine excitation. Please contact Agito if more information is needed.
 
+![IdenResults captures one point of the identified frequency response: a magnitude value (IdenResults[5] in dB) and a phase value (IdenResults[6] in deg/100) at the fundamental frequency InjectFreq; PCSuite sweeps InjectFreq and concatenates these points into the full magnitude and phase Bode plot used downstream by tuning and filter design](idenresults-bode-points.svg)
+
 ## Examples
 
 ```text

@@ -40,6 +40,8 @@ Holds the controller error code that disabled the axis.
 
 `ConFlt` is an axis-scoped register that is not saved to flash, so it always reflects the live fault state of that axis. It works together with the diagnostic snapshot pair [ConFltSnapSrc](ConFltSnapSrc.md) / [ConFltSnapVal](ConFltSnapVal.md), which freeze selected parameter values at the moment a fault occurs, and with [MotorReason](MotorReason.md), which reports the broader category of why the axis was disabled.
 
+![ConFlt value layout: zero means no fault, positive values 1001 and above are controller faults set by the firmware, and on v5 negative values in the range -3000 to -1 can be written by the application to record a user-defined disable reason](confl-code-ranges.svg)
+
 ## How it works
 
 When the controller detects a disabling fault it performs four actions together, atomically, for the affected axis:

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="280" viewBox="0 0 780 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
+    </marker>
+  </defs>
+
+  <text x="20" y="20" font-weight="bold">General-purpose array families — pick by scope and data type</text>
+
+  <!-- column headers -->
+  <text x="220" y="60" text-anchor="middle" font-weight="bold" font-size="12">int32</text>
+  <text x="360" y="60" text-anchor="middle" font-weight="bold" font-size="12">float32</text>
+  <text x="500" y="60" text-anchor="middle" font-weight="bold" font-size="12">float64 (double)</text>
+  <text x="650" y="60" text-anchor="middle" font-weight="bold" font-size="12">int64 (long-long)</text>
+
+  <!-- Row 1: GenData family (non-axis) -->
+  <rect x="20" y="80" width="180" height="74" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="110" y="106" text-anchor="middle" font-weight="bold">GenData family</text>
+  <text x="110" y="124" text-anchor="middle" font-size="11">scope: non-axis (shared)</text>
+  <text x="110" y="140" text-anchor="middle" font-size="11">recommended for user programs</text>
+
+  <rect x="160" y="80" width="120" height="74" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="220" y="118" text-anchor="middle">GenData</text>
+  <text x="220" y="138" text-anchor="middle" font-size="11" fill="#5b6b7b">up to ~1000-5000</text>
+
+  <rect x="300" y="80" width="120" height="74" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="360" y="118" text-anchor="middle">GenDataF</text>
+
+  <rect x="440" y="80" width="120" height="74" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="500" y="118" text-anchor="middle">GenDataD</text>
+
+  <rect x="580" y="80" width="180" height="74" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="670" y="118" text-anchor="middle">GenDataLL</text>
+
+  <!-- Row 2: UserParam family (axis) -->
+  <rect x="20" y="170" width="180" height="74" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="110" y="196" text-anchor="middle" font-weight="bold">UserParam family</text>
+  <text x="110" y="214" text-anchor="middle" font-size="11">scope: per-axis</text>
+  <text x="110" y="230" text-anchor="middle" font-size="11">some entries reserved internally</text>
+
+  <rect x="160" y="170" width="120" height="74" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="220" y="208" text-anchor="middle">UserParam</text>
+  <text x="220" y="228" text-anchor="middle" font-size="11" fill="#5b6b7b">up to ~50-250</text>
+
+  <rect x="300" y="170" width="120" height="74" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="360" y="208" text-anchor="middle">UserParamF</text>
+
+  <rect x="440" y="170" width="120" height="74" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="500" y="208" text-anchor="middle">UserParamD</text>
+
+  <rect x="580" y="170" width="180" height="74" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="670" y="208" text-anchor="middle">UserParamLL</text>
+
+  <!-- footer note -->
+  <text x="400" y="270" text-anchor="middle" font-size="11" fill="#5b6b7b">All eight arrays are 1-indexed, read/write at any time, and saved to flash by Save.</text>
+</svg>

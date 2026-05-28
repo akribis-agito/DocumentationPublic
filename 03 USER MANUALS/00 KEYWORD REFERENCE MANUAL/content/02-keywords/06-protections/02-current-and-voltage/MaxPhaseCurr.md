@@ -45,6 +45,8 @@ Every control cycle the drive checks each phase current against `MaxPhaseCurr`, 
 - For each phase, if `|Iphase| > MaxPhaseCurr` the phase counter increments; otherwise it resets to 0.
 - When any phase counter reaches **4 consecutive samples (≈ 0.25 ms)**, the axis is disabled and [ConFlt](../../07-status-and-faults/ConFlt.md) shows the matching phase fault code — 1013 (phase A), 1014 (phase B) or 1015 (phase C) — with a snapshot and an [ErrLog](../../07-status-and-faults/ErrLog.md) entry.
 
+![Sample-by-sample over-current debounce: the counter increments on each consecutive over-limit sample and resets to 0 on any below-limit sample; only 4 unbroken over-limit samples cause a trip](overcurrent-debounce.svg)
+
 This is the per-phase counterpart of [MaxMotorCurr](MaxMotorCurr.md), which trips on the total motor current using the same 4-sample / 0.25 ms debounce.
 
 ## Changes between versions

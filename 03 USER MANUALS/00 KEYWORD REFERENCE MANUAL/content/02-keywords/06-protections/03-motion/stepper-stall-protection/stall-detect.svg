@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="330" viewBox="0 0 700 330" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="20" y="26" font-size="15" font-weight="bold">Stepper stall detection &#8211; StallVal collapses below StallTh</text>
+
+  <!-- axes -->
+  <line x1="70" y1="60" x2="70" y2="240" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="70" y1="240" x2="660" y2="240" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <text x="58" y="58" text-anchor="end" font-weight="bold">value</text>
+  <text x="660" y="258" text-anchor="end" font-weight="bold">time</text>
+
+  <!-- StallTh threshold line (smooth, slightly speed-dependent) -->
+  <path d="M70,170 L660,160" fill="none" stroke="#e0736b" stroke-dasharray="6 4" stroke-width="1.4"/>
+  <text x="670" y="164" fill="#b35047" font-size="12" text-anchor="end">StallTh</text>
+  <text x="80" y="158" fill="#b35047" font-size="11">(speed&#8209;dependent, scaled by StallThPcnt)</text>
+
+  <!-- StallVal trace: healthy high, drops below threshold at some time -->
+  <path d="M70,100 C 150,95 220,98 280,100 L 320,105 C 360,160 380,200 420,215 L 660,220"
+        fill="none" stroke="#2c6ed5" stroke-width="2"/>
+
+  <!-- crossing -->
+  <circle cx="370" cy="170" r="4" fill="#e0736b"/>
+  <text x="378" y="155" fill="#b35047">StallVal &lt; StallTh &#8594; stall detected</text>
+
+  <!-- stall region shading -->
+  <rect x="370" y="160" width="290" height="80" fill="#fdecea" opacity="0.4"/>
+
+  <!-- side label -->
+  <text x="100" y="92" fill="#2c6ed5" font-size="11">StallVal (filtered phase-voltage metric, ~13 Hz LPF)</text>
+
+  <!-- actions table -->
+  <g transform="translate(20,272)">
+    <text x="0" y="0" font-weight="bold">Outcome (per StallCfg):</text>
+    <text x="0" y="18" fill="#333">StallCfg = 0  &#8594; detection disabled (no comparison made)</text>
+    <text x="0" y="34" fill="#333">StallCfg = 1  &#8594; StallStat = 1, StatReg bit 31 set (motor stays on)</text>
+    <text x="0" y="50" fill="#333">StallCfg = 2  &#8594; the above AND axis is turned off, ConFlt 1065 (stall fault)</text>
+  </g>
+</svg>

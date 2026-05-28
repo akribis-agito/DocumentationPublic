@@ -46,6 +46,8 @@ Positions are interpreted as **relative to the position reference at the moment 
 
 [BuffCalc](BuffCalc.md) fits a spline (type chosen by [BuffSplineMod](BuffSplineMod.md), edges by [BuffEdgeMode](BuffEdgeMode.md)/[BuffSlopes](BuffSlopes.md)) through the waypoints and **pre-expands it into one interpolated point per servo sample**, stored internally. During motion the profiler does no curve math: each control cycle it simply reads the next pre-computed point, adds the captured origin, and feeds it to the position loop as [PosRef](../01-kinematics-status/PosRef.md). Because the whole curve is expanded ahead of time, the total number of stored samples per cycle equals the last [BuffTime](BuffTime.md) value, and that value is limited by the controller's internal capacity (see [BuffTime](BuffTime.md)).
 
+![Five waypoints with the linear and cubic-spline curves fitted through them](spline-waypoints.svg)
+
 For multi-axis spline moves the same time base ([BuffTime](BuffTime.md) of the primary axis) is shared by all member axes, while each member axis carries its own `BuffPos` waypoints — so all axes stay synchronized in time while tracing independent position profiles.
 
 ## Examples

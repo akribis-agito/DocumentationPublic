@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="360" viewBox="0 0 780 360" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="390" y="22" text-anchor="middle" font-weight="bold">FilterStatus[2] (velocity filters) — four 6-bit fields packed into one word</text>
+
+  <!-- 24-bit overall strip: 4 fields of 6 bits each -->
+  <rect x="80"  y="50" width="150" height="46" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="155" y="72" text-anchor="middle">filter 1</text>
+  <text x="155" y="88" text-anchor="middle" fill="#5b6b7b">bits 0-5</text>
+
+  <rect x="230" y="50" width="150" height="46" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="305" y="72" text-anchor="middle">filter 2</text>
+  <text x="305" y="88" text-anchor="middle" fill="#5b6b7b">bits 6-11</text>
+
+  <rect x="380" y="50" width="150" height="46" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="455" y="72" text-anchor="middle">filter 3</text>
+  <text x="455" y="88" text-anchor="middle" fill="#5b6b7b">bits 12-17</text>
+
+  <rect x="530" y="50" width="150" height="46" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="605" y="72" text-anchor="middle">filter 4</text>
+  <text x="605" y="88" text-anchor="middle" fill="#5b6b7b">bits 18-23</text>
+
+  <!-- zoom into filter 2 -->
+  <line x1="305" y1="96" x2="305" y2="130" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="305" y="148" text-anchor="middle" fill="#5b6b7b">one 6-bit field (filter 2, n = 6)</text>
+
+  <!-- six bit boxes for field -->
+  <rect x="80"  y="160" width="100" height="40" rx="4" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="130" y="178" text-anchor="middle">bit n+0</text>
+  <text x="130" y="194" text-anchor="middle" fill="#5b6b7b">pending</text>
+
+  <rect x="180" y="160" width="100" height="40" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="230" y="178" text-anchor="middle">bit n+1</text>
+  <text x="230" y="194" text-anchor="middle" fill="#5b6b7b">unknown type</text>
+
+  <rect x="280" y="160" width="100" height="40" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="330" y="178" text-anchor="middle">bit n+2</text>
+  <text x="330" y="194" text-anchor="middle" fill="#5b6b7b">param 1 bad</text>
+
+  <rect x="380" y="160" width="100" height="40" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="430" y="178" text-anchor="middle">bit n+3</text>
+  <text x="430" y="194" text-anchor="middle" fill="#5b6b7b">param 2 bad</text>
+
+  <rect x="480" y="160" width="100" height="40" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="530" y="178" text-anchor="middle">bit n+4</text>
+  <text x="530" y="194" text-anchor="middle" fill="#5b6b7b">param 3 bad</text>
+
+  <rect x="580" y="160" width="100" height="40" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="630" y="178" text-anchor="middle">bit n+5</text>
+  <text x="630" y="194" text-anchor="middle" fill="#5b6b7b">param 4 bad</text>
+
+  <!-- bit roles legend -->
+  <text x="380" y="240" text-anchor="middle">bit n+0 is set when a definition keyword for that filter changed and the coefficients have not been recomputed.</text>
+  <text x="380" y="260" text-anchor="middle">bits n+1 .. n+5 are refreshed only by CalcFilters; any one set means the last calculation rejected the filter.</text>
+
+  <!-- read formula -->
+  <rect x="100" y="290" width="560" height="48" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="380" y="310" text-anchor="middle" font-weight="bold">field = (FilterStatus[group] &gt;&gt; n) &amp; 0x3F,  where n = (filter number - 1) &#215; 6</text>
+  <text x="380" y="328" text-anchor="middle" fill="#5b6b7b">A field value of 0 means the filter is up to date and validated cleanly.</text>
+</svg>

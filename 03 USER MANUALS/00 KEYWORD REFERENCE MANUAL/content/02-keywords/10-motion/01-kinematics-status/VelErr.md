@@ -41,6 +41,12 @@ Velocity error (reference minus feedback), used for control and protection.
 
 `VelErr` is only reported when the axis is enabled and in a position or velocity operation mode (or force-over-PIV) and not open-loop; otherwise it is forced to `0`.
 
+### Sign convention
+
+`VelErr` follows the same reference-minus-feedback sign rule as [PosErr](PosErr.md): a positive value means the commanded velocity is higher than the measured velocity (load is lagging — the loop accelerates), a negative value means the load is going faster than commanded (the loop brakes). The sign of `VelErr` is the sign of the corrective torque/current the velocity loop will apply.
+
+For example, with `VelRef = 50000` user units/s and `Vel[1] = 49500`, `VelErr = +500`; with `Vel[1] = 50200`, `VelErr = -200`.
+
 ## How it works
 
 `VelErr` is computed each control cycle as the (saturated) velocity reference minus the velocity-loop feedback `Vel[1]`:

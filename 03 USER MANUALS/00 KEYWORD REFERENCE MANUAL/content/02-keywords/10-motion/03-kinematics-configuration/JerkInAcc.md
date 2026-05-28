@@ -54,6 +54,8 @@ When `JerkMode = 1`, the profiler runs the structured jerk profiler each cycle, 
 
 A larger `JerkInAcc` makes acceleration reach the `Accel` limit faster (sharper, shorter S transition); a smaller value spreads the transition over more time for gentler motion.
 
+![Third-order velocity and acceleration profile segments](jerkinacc-segments.svg)
+
 ### Units and internal scaling (v4)
 
 On v4 `JerkInAcc` is a dimensionless integer with range 100–1,000,000,000 (default 1,000,000). The controller multiplies the value by a fixed factor of 1000 before applying it in the profiler, so the effective jerk constraint in counts/s³ is:

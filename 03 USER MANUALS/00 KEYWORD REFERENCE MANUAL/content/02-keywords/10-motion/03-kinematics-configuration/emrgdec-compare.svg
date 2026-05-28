@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="260" viewBox="0 0 700 260" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="20" y="22" font-size="14" font-weight="bold">Normal stop (Decel) vs emergency stop (EmrgDec) velocity ramps</text>
+
+  <!-- axes -->
+  <line x1="60" y1="200" x2="670" y2="200" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="60" y1="200" x2="60"  y2="55"  stroke="#5b6b7b" stroke-width="1.2"/>
+  <text x="40" y="80" fill="#5b6b7b" font-size="11">vel</text>
+  <text x="670" y="218" text-anchor="end" fill="#5b6b7b" font-size="11">time</text>
+
+  <!-- Cruise line -->
+  <line x1="60" y1="80" x2="220" y2="80" stroke="#bbb" stroke-dasharray="3,3"/>
+  <text x="64" y="74" fill="#5b6b7b" font-size="11">cruise</text>
+
+  <!-- Stop event marker -->
+  <line x1="220" y1="55" x2="220" y2="210" stroke="#e0736b" stroke-dasharray="3,3"/>
+  <text x="220" y="48" text-anchor="middle" fill="#e0736b" font-size="11">stop event</text>
+
+  <!-- Normal Stop ramp (Decel) -->
+  <line x1="60" y1="80" x2="220" y2="80" stroke="#5b8def" stroke-width="2"/>
+  <line x1="220" y1="80" x2="500" y2="200" stroke="#5b8def" stroke-width="2"/>
+  <text x="360" y="138" fill="#5b8def" font-size="11">Stop &#8594; Decel (gentler)</text>
+
+  <!-- Emergency Stop ramp (EmrgDec, steeper) -->
+  <line x1="220" y1="80" x2="340" y2="200" stroke="#e0736b" stroke-width="2" stroke-dasharray="6 3"/>
+  <text x="280" y="120" fill="#e0736b" font-size="11">limit / controlled-stop-input</text>
+  <text x="280" y="135" fill="#e0736b" font-size="11">&#8594; EmrgDec (steeper, no jerk)</text>
+
+  <!-- legend -->
+  <text x="370" y="240" text-anchor="middle" fill="#5b6b7b" font-size="11">Both rates are multiplied by AccelFact each cycle; EmrgDec also bypasses jerk smoothing.</text>
+</svg>

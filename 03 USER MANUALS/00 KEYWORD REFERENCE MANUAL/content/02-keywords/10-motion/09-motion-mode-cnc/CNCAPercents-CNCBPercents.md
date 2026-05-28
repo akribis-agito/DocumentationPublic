@@ -28,6 +28,8 @@ Scaling speed by `P/100` and the ramps by the square of `P/100` is exactly what 
 - `P = 50` (%) — speed is halved and accel/decel are quartered, so the motion takes twice the nominal time.
 - `P` greater than 100 (%) is allowed and speeds the motion up.
 
+For example, if a segment is programmed with `CNCASpeed = 200000` user units/s and `CNCAAccel = 100000` user units/s², setting `CNCAPercents = 50` runs that segment with a cruise of `100000` user units/s and an acceleration of `25000` user units/s² — the velocity-time profile keeps the same shape, simply stretched to twice the duration. `CNCAPercents = 200` halves the duration: cruise rises to `400000` user units/s with acceleration scaled to `400000` user units/s².
+
 Because the factor is re-applied every cycle, changing `CNCAPercents` mid-path re-targets the speed and ramps on the next cycle. This is broader than [CNCASpeedPer/CNCBSpeedPer](CNCASpeedPer-CNCBSpeedPer.md), which scales the speed only and leaves the ramps unchanged. The two multiply together for the net speed factor.
 
 ### CNCB note

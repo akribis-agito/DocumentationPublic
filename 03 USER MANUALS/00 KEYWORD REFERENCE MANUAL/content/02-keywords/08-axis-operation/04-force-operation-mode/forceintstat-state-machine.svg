@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="290" viewBox="0 0 760 290" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="380" y="22" text-anchor="middle" font-size="15" font-weight="bold">ForceInTStat state machine</text>
+
+  <!-- States -->
+  <rect x="20" y="80" width="120" height="64" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="80" y="106" text-anchor="middle" font-weight="bold">0</text>
+  <text x="80" y="124" text-anchor="middle" font-size="11">motor off</text>
+
+  <rect x="170" y="80" width="120" height="64" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="230" y="106" text-anchor="middle" font-weight="bold">1</text>
+  <text x="230" y="124" text-anchor="middle" font-size="11">motor on, no</text>
+  <text x="230" y="138" text-anchor="middle" font-size="11">command yet</text>
+
+  <rect x="320" y="80" width="120" height="64" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="380" y="106" text-anchor="middle" font-weight="bold">2</text>
+  <text x="380" y="124" text-anchor="middle" font-size="11">raw ref ramping</text>
+  <text x="380" y="138" text-anchor="middle" font-size="11">toward target</text>
+
+  <rect x="470" y="80" width="120" height="64" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="530" y="106" text-anchor="middle" font-weight="bold">3</text>
+  <text x="530" y="124" text-anchor="middle" font-size="11">at target, settling</text>
+  <text x="530" y="138" text-anchor="middle" font-size="11">dwell counter runs</text>
+
+  <rect x="620" y="80" width="120" height="64" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="680" y="106" text-anchor="middle" font-weight="bold">4</text>
+  <text x="680" y="124" text-anchor="middle" font-size="11">settled (latched)</text>
+  <text x="680" y="138" text-anchor="middle" font-size="11">ForceSamples recorded</text>
+
+  <!-- Forward transitions -->
+  <line x1="140" y1="112" x2="170" y2="112" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="155" y="100" text-anchor="middle" font-size="10">motor on</text>
+
+  <line x1="290" y1="112" x2="320" y2="112" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="305" y="100" text-anchor="middle" font-size="10">new entry</text>
+
+  <line x1="440" y1="112" x2="470" y2="112" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="455" y="100" text-anchor="middle" font-size="10">raw ref = target</text>
+
+  <line x1="590" y1="112" x2="620" y2="112" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="605" y="100" text-anchor="middle" font-size="10">dwell &#8805; ForceInTTime</text>
+
+  <!-- 3 self-loop: window exit re-zeroes counter -->
+  <path d="M510,144 C490,180 570,180 550,144" fill="none" stroke="#e0736b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="530" y="195" text-anchor="middle" font-size="10" fill="#c0392b">|ForceErr| &gt; ForceInTTol</text>
+  <text x="530" y="208" text-anchor="middle" font-size="10" fill="#c0392b">dwell counter &#8594; 0</text>
+
+  <!-- 4 back to 2 on new entry (re-ramping) -->
+  <path d="M680,144 C680,210 380,210 380,150" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="530" y="232" text-anchor="middle" font-size="10">index advances &#8594; new target &#8594; back to ramping (2)</text>
+
+  <!-- Any state back to 0 on motor off -->
+  <path d="M80,144 C80,260 380,260 380,260" fill="none" stroke="#5b6b7b" stroke-width="1.2"/>
+  <text x="200" y="276" text-anchor="middle" font-size="10">motor off (from any state) &#8594; 0</text>
+
+  <!-- Once at 4 settling not rechecked -->
+  <text x="680" y="170" text-anchor="middle" font-size="10" fill="#5b6b7b">state 4 is latched until</text>
+  <text x="680" y="184" text-anchor="middle" font-size="10" fill="#5b6b7b">a new ForceCmdVal or motor-off</text>
+</svg>

@@ -34,6 +34,8 @@ Zeroes the axis position error by snapping the position reference onto the curre
 
 The typical use is to relieve a standing position error when the load is stuck or pressing against an object — the reference is pulled to where the motor actually is so the servo stops fighting the obstruction.
 
+![SetPosition vs ZeroPosErr](setpos-vs-zeroerr.svg)
+
 ## How it works
 
 `ZeroPosErr` does nothing when the motor is off (the reference already tracks the feedback in that state). When the motor is on, it samples the current feedback `Pos` and writes it into the **entire reference chain** — `PosRef`, the shaped and shaped-filtered references and all of their 64-bit history, plus the high-precision reference accumulator — leaving `Pos` unchanged. The result is `PosRef = Pos`, i.e. `PosErr = 0`. As in [SetPosition](SetPosition.md), it temporarily forces [Jerk](Jerk.md) to `0` to re-seed the smoothing buffer and resets the reference filter history.

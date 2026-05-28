@@ -57,6 +57,14 @@ AForceVelFFW[1]=100     ; set the velocity feedback compensation gain
 AForceVelFFW[1]         ; read the velocity feedback compensation gain
 ```
 
+### Worked example: sign and magnitude of the contribution
+
+With `ForceVelFFW = 100` and a velocity feedback `Vel[1] = 5000` (user velocity units), the term added at the current-reference summing point is:
+
+`-Vel x ForceVelFFW x 1E-8 = -5000 x 100 x 1E-8 = -0.005` (current units)
+
+If the axis is moving in the opposite direction (`Vel[1] = -5000`) the term becomes `+0.005`. Because the term is subtracted, it always opposes the direction of motion, acting like an extra viscous drag in the current command and supplying the steady-state current needed to overcome velocity-proportional load.
+
 ## See also
 
 - [ForceFFW](ForceFFW.md) — current-wise force feedforward (added at the same summing point)

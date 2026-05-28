@@ -46,6 +46,8 @@ The boundary condition matters only for the parabolic and cubic fits ([BuffSplin
 
 In all modes the trajectory positions remain relative to the start point; only the edge derivatives change. Mode 2 is the right choice for smooth cyclic motion; mode 1 for a self-contained move that starts and ends at rest; mode 0 when the entry/exit speed must be set explicitly.
 
+![The three BuffEdgeMode options shown side by side: natural, specified-slope and continuous-repeat edges](buff-edgemode.svg)
+
 ## Examples
 
 ```text

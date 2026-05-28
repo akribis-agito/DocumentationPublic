@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="280" viewBox="0 0 720 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="360" y="22" text-anchor="middle" font-size="15" font-weight="bold">Phase voltage commands across one electrical cycle</text>
+
+  <!-- axes -->
+  <line x1="70" y1="150" x2="700" y2="150" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="70" y1="50" x2="70" y2="250" stroke="#5b6b7b" stroke-width="1.2"/>
+  <text x="694" y="168" text-anchor="end" font-size="11" fill="#444">electrical angle &#952;</text>
+  <text x="36" y="56" font-size="11" fill="#444">+</text>
+  <text x="36" y="248" font-size="11" fill="#444">&#8722;</text>
+  <text x="64" y="154" text-anchor="end" font-size="11" fill="#444">0</text>
+
+  <!-- zero line ticks -->
+  <line x1="220" y1="146" x2="220" y2="154" stroke="#5b6b7b"/>
+  <text x="220" y="170" text-anchor="middle" font-size="11" fill="#444">120&#176;</text>
+  <line x1="370" y1="146" x2="370" y2="154" stroke="#5b6b7b"/>
+  <text x="370" y="170" text-anchor="middle" font-size="11" fill="#444">240&#176;</text>
+  <line x1="520" y1="146" x2="520" y2="154" stroke="#5b6b7b"/>
+  <text x="520" y="170" text-anchor="middle" font-size="11" fill="#444">360&#176;</text>
+
+  <!-- Va sine: sin(theta) -->
+  <path d="M 70 150 Q 107 60 145 60 Q 182 60 220 150 Q 257 240 295 240 Q 332 240 370 150 Q 407 60 445 60 Q 482 60 520 150 Q 557 240 595 240 Q 632 240 670 150"
+        fill="none" stroke="#5b8def" stroke-width="2.2"/>
+  <text x="148" y="50" text-anchor="middle" fill="#5b8def" font-weight="bold">Va = sin(&#952;)</text>
+
+  <!-- Vb sine: sin(theta - 120) -->
+  <path d="M 70 90 Q 95 90 145 150 Q 195 210 220 210 Q 245 210 295 150 Q 345 90 370 90 Q 395 90 445 150 Q 495 210 520 210 Q 545 210 595 150 Q 645 90 670 90"
+        fill="none" stroke="#e0736b" stroke-width="2.2"/>
+  <text x="300" y="222" text-anchor="middle" fill="#e0736b" font-weight="bold">Vb = sin(&#952; &#8722; 120&#176;)</text>
+
+  <!-- Vc sine: sin(theta + 120) = sin(theta - 240) -->
+  <path d="M 70 210 Q 120 210 145 150 Q 170 90 220 90 Q 270 90 295 150 Q 320 210 370 210 Q 420 210 445 150 Q 470 90 520 90 Q 570 90 595 150 Q 620 210 670 210"
+        fill="none" stroke="#5b6b7b" stroke-width="2.2" stroke-dasharray="6 3"/>
+  <text x="475" y="80" text-anchor="middle" fill="#5b6b7b" font-weight="bold">Vc = &#8722;(Va + Vb)</text>
+
+  <text x="360" y="265" text-anchor="middle" font-size="11" fill="#444">three balanced phases, 120&#176; apart; sum is zero (Vc completes the set)</text>
+</svg>

@@ -47,6 +47,8 @@ $$
 
 Both input and output are in millivolts. A negative `AInGain` inverts the input. For unity gain, set `AInGain = 65536`.
 
+![AInGain transfer characteristic: unity, 2x, and inverted](aingain-transfer.svg)
+
 ## Examples
 
 ```text

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="340" viewBox="0 0 640 340" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b8def"/></marker>
+    <marker id="arrowRed" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#e0736b"/></marker>
+  </defs>
+
+  <text x="320" y="24" text-anchor="middle" font-size="15" font-weight="bold">dq rotating frame vs stationary abc frame</text>
+
+  <!-- origin -->
+  <circle cx="280" cy="180" r="3" fill="#222"/>
+
+  <!-- stationary abc axes (light grey) -->
+  <line x1="280" y1="180" x2="430" y2="180" stroke="#9aa4b1" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="438" y="184" font-size="12" fill="#5b6b7b">a axis (Ia)</text>
+
+  <!-- b axis: 120 deg from a, counter-clockwise => angle 120, dx = cos120 = -0.5, dy = -sin120 = -0.866 -->
+  <line x1="280" y1="180" x2="205" y2="50" stroke="#9aa4b1" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="170" y="44" font-size="12" fill="#5b6b7b">b axis (Ib)</text>
+
+  <!-- c axis: 240 deg, dx = cos240 = -0.5, dy = -sin240 = +0.866 -->
+  <line x1="280" y1="180" x2="205" y2="310" stroke="#9aa4b1" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="170" y="324" font-size="12" fill="#5b6b7b">c axis (Ic)</text>
+
+  <!-- rotor angle theta: q is orthogonal to flux. Let theta = 35 deg (above x-axis) for the d axis.
+       d unit: (cos t, -sin t) = (0.819, -0.574); times 140 = (115, -80) -> tip (395, 100)
+       q unit: (-sin t, -cos t) = (-0.574, -0.819); times 140 = (-80, -115) -> tip (200, 65) -->
+  <line x1="280" y1="180" x2="395" y2="100" stroke="#5b8def" stroke-width="2.2" marker-end="url(#arrowBlue)"/>
+  <text x="400" y="92" font-size="13" fill="#5b8def" font-weight="bold">d axis (Id, flux)</text>
+
+  <line x1="280" y1="180" x2="200" y2="65" stroke="#e0736b" stroke-width="2.2" marker-end="url(#arrowRed)"/>
+  <text x="140" y="60" font-size="13" fill="#e0736b" font-weight="bold">q axis (Iq, torque)</text>
+
+  <!-- angle arc theta between a-axis and d-axis -->
+  <path d="M 340 180 A 60 60 0 0 1 329 146" fill="none" stroke="#444" stroke-width="1"/>
+  <text x="345" y="160" font-size="12" fill="#444">&#952;</text>
+
+  <!-- current vector example: along q -->
+  <line x1="280" y1="180" x2="220" y2="93" stroke="#222" stroke-width="2" stroke-dasharray="4 2"/>
+  <circle cx="220" cy="93" r="3.5" fill="#222"/>
+  <text x="222" y="86" font-size="11" fill="#222">I (commanded along q; Id = 0)</text>
+
+  <!-- note box -->
+  <rect x="20" y="240" width="600" height="80" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="30" y="262" font-size="12" fill="#222">d axis is aligned with the rotor flux; q axis leads d by 90&#176;.</text>
+  <text x="30" y="282" font-size="12" fill="#222">Park transform of Ia,Ib at angle &#952; gives Iq (torque-producing) and Id (flux-producing).</text>
+  <text x="30" y="302" font-size="12" fill="#222">Holding Id = 0 puts all current on the q axis, i.e. all torque-producing, no field weakening.</text>
+</svg>

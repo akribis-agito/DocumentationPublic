@@ -45,6 +45,8 @@ Writing `DOutMode` does not act on it directly each cycle. Instead a compact **f
 
 This table is then walked and each function applied, spread across three consecutive control cycles (about six functions per cycle) to bound the per-cycle cost. For each entry the selected status is evaluated and the output's [DOutPort](DOutPort.md) bit is either **set** (status true) or **cleared** (status false). Because the function drives `DOutPort`, [DOutLog](DOutLog.md) polarity and [DOutType](DOutType.md) sink/source routing still apply on top, exactly as for a manual output. This also means a `DOutMode`-driven output overwrites any value you write to that `DOutPort` bit by hand.
 
+![DOutMode routing: controller status sources drive the functionality table, which sets DOutPort bits feeding DOutLog and DOutType](doutmode-source-routing.svg)
+
 The function code maps to a controller status as follows:
 
 | Value | Function | Status source (set when…) |

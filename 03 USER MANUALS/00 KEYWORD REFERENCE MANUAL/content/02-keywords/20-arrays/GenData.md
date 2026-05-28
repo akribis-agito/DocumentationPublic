@@ -36,6 +36,8 @@ General-purpose, non-axis 32-bit integer array for shared user/host storage.
 
 `GenData` is the 32-bit integer member of the general-data family: [GenDataF](GenDataF.md) (32-bit floating-point), [GenDataD](GenDataD.md) (64-bit double-precision floating-point) and [GenDataLL](GenDataLL.md) (64-bit signed integer) provide the same kind of shared storage for the other data types. For per-axis storage that the controller also uses internally for certain features, see [UserParam](UserParam.md). Values can be set directly with a normal write, or indirectly through the controller's indirect-write mechanism.
 
+![General-purpose array families: the GenData row holds the four non-axis variants (GenData int32, GenDataF float32, GenDataD float64, GenDataLL int64) recommended for user programs, and the UserParam row holds the four per-axis variants (UserParam, UserParamF, UserParamD, UserParamLL) some of whose entries are reserved internally](array-family-types.svg)
+
 Each element holds a 32-bit signed integer, so the value range is -2147483648 to 2147483647 and the default is 0. The array is 1-indexed: the first usable element is `GenData[1]` (index 0 is reserved and inaccessible). The number of usable elements depends on the controller model — 1000 on most models, and up to 5000 on larger models with external memory.
 
 ## Examples

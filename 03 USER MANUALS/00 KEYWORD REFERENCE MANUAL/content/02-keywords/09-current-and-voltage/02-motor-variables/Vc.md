@@ -49,6 +49,10 @@ Unlike [Va](Va.md) and [Vb](Vb.md), phase C is not produced by its own current l
 
 After it is formed, `Vc` is subject to the same post-processing as the other phases: the enhanced-speed-range midpoint subtraction (ControlMode bit 0, which can make `Vc` non-zero for steppers), and saturation to the maximum PWM amplitude which sets the voltage-saturation bit ([StatReg](../../07-status-and-faults/StatReg.md) bit 22).
 
+For three-phase motors `Vc` is the third 120°-spaced phase that completes the balanced set (`Va + Vb + Vc = 0`):
+
+![Three balanced phase voltages 120 degrees apart across one electrical cycle](three-phase-waveforms.svg)
+
 ## Examples
 
 ```text

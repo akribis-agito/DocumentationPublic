@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="270" viewBox="0 0 700 270" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="20" y="22" font-size="14" font-weight="bold">Stop vs Abort: profiler velocity at command time</text>
+
+  <!-- axes -->
+  <line x1="60" y1="200" x2="660" y2="200" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="60" y1="200" x2="60"  y2="55"  stroke="#5b6b7b" stroke-width="1.2"/>
+  <text x="40" y="80" fill="#5b6b7b" font-size="11">profiler v</text>
+  <text x="660" y="218" text-anchor="end" fill="#5b6b7b" font-size="11">time</text>
+
+  <!-- cruise -->
+  <line x1="60" y1="80" x2="300" y2="80" stroke="#5b8def" stroke-width="2"/>
+  <text x="64" y="74" fill="#5b8def" font-size="11">cruise</text>
+
+  <!-- command marker -->
+  <line x1="300" y1="55" x2="300" y2="210" stroke="#e0736b" stroke-dasharray="3,3"/>
+  <text x="300" y="48" text-anchor="middle" fill="#e0736b" font-size="11">command issued</text>
+
+  <!-- Stop: controlled ramp to zero on Decel -->
+  <line x1="300" y1="80"  x2="540" y2="200" stroke="#5b8def" stroke-width="2"/>
+  <text x="430" y="138" fill="#5b8def" font-size="11">Stop: ramp on Decel (bit 3 set, reason 1)</text>
+
+  <!-- Abort: vertical drop -->
+  <line x1="300" y1="80" x2="300" y2="200" stroke="#e0736b" stroke-width="2.4"/>
+  <text x="310" y="170" fill="#e0736b" font-size="11">Abort: profiler v &#8594; 0,</text>
+  <text x="310" y="184" fill="#e0736b" font-size="11">PosRef frozen (MotionStat=0, reason 2)</text>
+
+  <text x="360" y="240" text-anchor="middle" fill="#5b6b7b" font-size="11">Stop hands the deceleration to the profiler; Abort ends the motion in the same call. EmrgDec is reserved for limit/controlled-input reasons.</text>
+</svg>

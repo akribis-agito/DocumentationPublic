@@ -36,6 +36,14 @@ Position error (reference minus feedback), used for control and protection.
 
 `PosErr` is only reported when the axis is enabled (motor on, commutation done) and in a position operation mode that is not open-loop; otherwise it is forced to `0`. It then drives the position controller, the high-position-error protection, settling/in-target, homing and operation-mode switching.
 
+![PosErr sign convention](poserr-sign.svg)
+
+### Sign convention
+
+`PosErr` is **reference minus feedback**. A positive value means the reference is ahead of where the load actually is (the axis is lagging the command); a negative value means the load has gone past the commanded reference (overshoot, or being externally pushed forward). The controller drives a positive `PosErr` with a positive velocity reference, so the sign of `PosErr` is also the sign of the corrective motion the loop will apply.
+
+A worked example: with `PosRef = 10000` and `Pos = 9985`, `PosErr = +15` user units, the loop adds `15 × PosGain` to the velocity reference to close the gap. With `Pos = 10003`, `PosErr = -3`, the loop pulls back by `3 × PosGain`.
+
 ## How it works
 
 Each control cycle `PosErr` is computed from the post-processed (shaped+filtered) reference minus the feedback:

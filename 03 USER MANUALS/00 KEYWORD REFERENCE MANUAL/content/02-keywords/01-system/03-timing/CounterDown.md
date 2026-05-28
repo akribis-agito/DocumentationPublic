@@ -36,18 +36,24 @@ Two independent down-counters decremented every controller cycle.
 
 ## How it works
 
-The two counters are decremented together, once per control loop, in the same place the firmware maintains its other periodic timers. The control loop runs about 1024 times per second (roughly once per millisecond), so a value written to a counter elapses in approximately that many milliseconds. Each counter is guarded so it only decrements while positive; once it hits 0 it holds there until written again.
+The two counters are decremented together inside the control interrupt, in the same place the firmware maintains its other periodic timers. The control interrupt runs at **16384 samples per second** (one tick every ~61 µs), so a value written to a counter elapses in (value / 16384) seconds. Each counter is guarded so it only decrements while positive; once it hits 0 it holds there until written again.
 
-This makes `CounterDown` a convenient self-clearing timer or delay inside a user program: write the number of cycles to wait, then test for the counter being 0 to detect that the interval has elapsed. For example, writing 1000 counts down roughly one second.
+This makes `CounterDown` a convenient self-clearing timer or delay inside a user program: write the number of cycles to wait, then test for the counter being 0 to detect that the interval has elapsed.
+
+Worked examples:
+
+- `ACounterDown[1] = 16384` counts down for exactly one second.
+- `ACounterDown[1] = 16` counts down for about 1 ms (16 / 16384 ≈ 977 µs).
+- `ACounterDown[1] = 1000` counts down for about 61 ms (1000 / 16384 ≈ 0.061 s).
 
 For one-second-resolution wall-clock timing use [Time](Time.md); for sub-microsecond intervals use [HWTimer](HWTimer.md); for a free-running count that increases use [CounterUp](CounterUp.md).
 
 ## Examples
 
 ```text
-ACounterDown[1]=1000 ; count down 1000 control cycles (about 1 second)
-ACounterDown[1]      ; read the remaining count; 0 means the interval has elapsed
-ACounterDown[2]=50   ; second, independent down-counter (about 50 ms)
+ACounterDown[1]=16384 ; count down 16384 control cycles (exactly 1 second)
+ACounterDown[1]       ; read the remaining count; 0 means the interval has elapsed
+ACounterDown[2]=820   ; second, independent down-counter (about 50 ms; 820 / 16384 ≈ 0.050 s)
 ```
 
 ## See also

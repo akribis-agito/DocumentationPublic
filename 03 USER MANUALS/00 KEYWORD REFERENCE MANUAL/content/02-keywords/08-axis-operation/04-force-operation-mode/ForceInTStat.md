@@ -52,6 +52,8 @@ The state machine advances inside the force-command generator:
 
 Once state 4 is reached the settling condition is **no longer checked** for that entry, so it is effectively latched until the force command changes (the raw reference ramps to a new [ForceCmdVal](ForceCmdVal.md), returning to state 2) or the motor is disabled (state 0). This mirrors the sticky behavior of [InTargetStat](../../10-motion/05-motion-status/InTargetStat.md) = 4 in position control.
 
+![ForceInTStat state machine](forceintstat-state-machine.svg)
+
 > **Note:** `ForceInTStat` reflects the table source only. With the analog source ([ForceCmdSrc](ForceCmdSrc.md) = 0) there is no defined target to settle on, so the in-target detection is not run.
 
 ## Examples

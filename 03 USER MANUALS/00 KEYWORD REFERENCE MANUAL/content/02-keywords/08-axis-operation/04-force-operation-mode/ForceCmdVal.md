@@ -42,6 +42,10 @@ While `ForceCmdSrc = 1` or `2`, each cycle the generator reads the entry at [For
 
 The sequence end is governed entirely by [ForceCmdHTime](ForceCmdHTime.md): a `0` hold time exits force mode and returns to position mode at that entry; a negative hold time holds that value indefinitely. If the index reaches the last array element (20) with a positive hold time, the axis holds that last value indefinitely rather than rolling over. See [Force operation mode](00-overview.md) for fully worked sequence examples.
 
+The diagram below shows a two-entry sequence (`ForceCmdVal[1]` = 340 held 400 ms, then ramp to `ForceCmdVal[2]` = -260 held 500 ms, with `ForceCmdHTime[3]` = 0 ending the sequence). [ForceCmdCntr](ForceCmdCntr.md) runs only during the flat hold segments — it is held at 0 throughout each ramp.
+
+![ForceCmdVal sequence timing](forcecmdval-sequence.svg)
+
 ## Examples
 
 ```text

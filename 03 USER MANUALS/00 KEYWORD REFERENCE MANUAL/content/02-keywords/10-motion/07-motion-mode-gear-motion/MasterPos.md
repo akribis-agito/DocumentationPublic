@@ -51,6 +51,8 @@ $$
 
 The accumulation keeps sub-unit precision so the gear ratio builds up without rounding drift, which matters at high `MasterFact` or for slow masters.
 
+![Gear ratio worked example: master +5000 units becomes follower +3000 units at MasterFact/MasterFactDen = 3/5](gear-ratio.svg)
+
 ### How it drives the follower
 
 `MasterPos` is the bridge between the master and the follower's reference. At gear `Begin` the controller snapshots `MasterPosInitial = MasterPos` and `PosRefInitial = PosRef`, then each cycle:

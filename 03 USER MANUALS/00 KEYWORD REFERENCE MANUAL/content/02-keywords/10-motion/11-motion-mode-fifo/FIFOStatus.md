@@ -58,6 +58,8 @@ The queue holds 128 usable entries, so the number of queued (used) entries is `1
 
 Poll element 2 while streaming to keep at least one segment queued ahead of the one being played.
 
+![Free-slot timeline showing fill, full and drain phases of the FIFO queue](fifo-status-timeline.svg)
+
 ## Examples
 
 ```text

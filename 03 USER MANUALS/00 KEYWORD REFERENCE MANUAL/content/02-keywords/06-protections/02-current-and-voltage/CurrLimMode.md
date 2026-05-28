@@ -51,6 +51,8 @@ Each control cycle the current command (`CurrRef`) is saturated in two stages:
 1. **Directional clamp** — for modes 1, 2 and 3 the firmware first clamps `CurrRef` to the selected directional limits. Mode 0 skips this stage.
 2. **Absolute clamp** — `CurrRef` is then always clamped to ±[PeakCL](PeakCL.md) (specifically to the I²t-adjusted effective peak limit).
 
+![Two-stage current-command saturation: an optional directional clamp (modes 1, 2, 3) followed by the always-on PeakCL absolute clamp; current saturation is reported in StatReg bit 21](currlim-stages.svg)
+
 Because the `PeakCL` clamp is applied in every mode, no directional limit can raise the command above `PeakCL`; the modes only let you make the limit *tighter* or asymmetric.
 
 The whole `CurrLimMode` mechanism (the directional stage) can be cancelled at runtime by a digital input configured for the torque-limit function — when that input is active the directional limits are bypassed and only the `PeakCL` clamp remains. Whenever the command is clamped, [StatReg](../../07-status-and-faults/StatReg.md) bit 21 (current saturation) is set.

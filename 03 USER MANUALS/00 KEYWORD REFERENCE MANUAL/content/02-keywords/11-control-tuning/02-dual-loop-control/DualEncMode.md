@@ -45,6 +45,8 @@ When `DualEncMode = 1`, each control cycle the controller compares the motor (au
 
 A position offset is maintained across the switch so the transition does not produce a position step.
 
+![True dual-loop runs while AuxPos lies between DualEncRange[1] and DualEncRange[2]; pseudo dual-loop runs outside that window](dual-enc-range-switch.svg)
+
 ## Examples
 
 ```text

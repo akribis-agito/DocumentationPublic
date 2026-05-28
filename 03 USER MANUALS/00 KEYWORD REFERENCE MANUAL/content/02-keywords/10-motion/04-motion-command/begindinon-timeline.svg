@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="300" viewBox="0 0 720 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="20" y="22" font-size="14" font-weight="bold">BeginDInOn = 1: Begin arms; profiler waits for the input rising edge</text>
+
+  <!-- timeline -->
+  <line x1="40" y1="60" x2="700" y2="60" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="700" y="78" text-anchor="end" fill="#5b6b7b" font-size="11">time</text>
+
+  <!-- event ticks -->
+  <line x1="80"  y1="52" x2="80"  y2="68" stroke="#5b6b7b"/>
+  <text x="80"  y="44" text-anchor="middle" fill="#5b6b7b" font-size="11">Begin</text>
+  <line x1="380" y1="52" x2="380" y2="68" stroke="#e0736b"/>
+  <text x="380" y="44" text-anchor="middle" fill="#e0736b" font-size="11">input rising edge</text>
+  <line x1="610" y1="52" x2="610" y2="68" stroke="#5b6b7b"/>
+  <text x="610" y="44" text-anchor="middle" fill="#5b6b7b" font-size="11">target reached</text>
+
+  <!-- bit 0 in-motion -->
+  <text x="20" y="115" font-size="11">bit 0</text>
+  <polyline points="40,130 80,130 80,110 610,110 610,130 700,130" fill="none" stroke="#5b8def" stroke-width="2"/>
+
+  <!-- bit 9 wait-for-input -->
+  <text x="20" y="170" font-size="11">bit 9</text>
+  <polyline points="40,185 80,185 80,165 380,165 380,185 700,185" fill="none" stroke="#e0736b" stroke-width="2"/>
+
+  <!-- motion-time counter (not advancing while bit 9 set) -->
+  <text x="20" y="230" font-size="11">motion-time counter</text>
+  <polyline points="40,260 80,260 80,260 380,260 380,260 610,200 700,200" fill="none" stroke="#5b6b7b" stroke-width="2"/>
+  <text x="220" y="252" text-anchor="middle" fill="#5b6b7b" font-size="11">held at 0 (not counted as motion)</text>
+  <text x="490" y="223" text-anchor="middle" fill="#5b6b7b" font-size="11">advances</text>
+
+  <text x="360" y="285" text-anchor="middle" fill="#5b6b7b" font-size="11">Stop or Abort during the wait ends the move immediately without ever starting.</text>
+</svg>

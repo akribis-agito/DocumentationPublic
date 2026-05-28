@@ -49,6 +49,8 @@ Maximum open-loop (injection) position error; exceeding it disables the axis.
 
 When the loop later finds the position error exceeds the active threshold, the open-loop flag decides which fault is logged: open-loop → [ConFlt](../../../07-status-and-faults/ConFlt.md) fault code 1055 (open-loop position error too high); closed-loop → fault code 1020 (position error too high). Either way the axis is turned off immediately. On returning to normal operation (or when the motor goes off during injection), the active threshold is restored to `MaxPosErr` and the open-loop flag is cleared.
 
+![Following-error trip threshold: the absolute error rises until it crosses the active limit; on that sample the axis is disabled and a ConFlt code is logged. The open-loop limits are higher to tolerate the larger natural error during injection or open-loop operation.](following-error-trip.svg)
+
 ## Examples
 
 ```text

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="330" viewBox="0 0 720 330" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="20" y="22" font-size="14" font-weight="bold">SetPosition vs ZeroPosErr (before &#8594; after, on a standing PosErr)</text>
+
+  <!-- Common before state caption -->
+  <text x="20" y="50" font-weight="bold" fill="#5b6b7b">Before (both):</text>
+  <text x="170" y="50" fill="#5b6b7b">Pos = 1000, PosRef = 1015, PosErr = +15</text>
+
+  <!-- Left panel: SetPosition=500 -->
+  <text x="180" y="90" text-anchor="middle" font-weight="bold">SetPosition = 500</text>
+  <text x="180" y="108" text-anchor="middle" font-size="11" fill="#5b6b7b">relabels the coordinate; PosErr is preserved</text>
+  <line x1="40" y1="190" x2="320" y2="190" stroke="#5b6b7b" stroke-width="1.2"/>
+  <text x="40" y="210" font-size="11" fill="#5b6b7b">0</text>
+  <text x="200" y="210" font-size="11" fill="#5b6b7b">500</text>
+
+  <!-- before markers (faded) -->
+  <circle cx="120" cy="190" r="5" fill="#5b8def" opacity="0.35"/>
+  <text x="120" y="178" text-anchor="middle" font-size="11" fill="#5b8def" opacity="0.7">Pos (was 1000)</text>
+  <circle cx="135" cy="190" r="5" fill="#e0736b" opacity="0.35"/>
+  <text x="160" y="225" text-anchor="middle" font-size="11" fill="#e0736b" opacity="0.7">PosRef (was 1015)</text>
+
+  <!-- after markers shifted to 500/515 (same offset of 15 preserved) -->
+  <circle cx="220" cy="190" r="6" fill="#5b8def"/>
+  <text x="220" y="158" text-anchor="middle" font-size="11" fill="#5b8def">Pos = 500</text>
+  <circle cx="237" cy="190" r="6" fill="#e0736b"/>
+  <text x="280" y="158" text-anchor="middle" font-size="11" fill="#e0736b">PosRef = 515</text>
+  <text x="180" y="248" text-anchor="middle" font-size="11" font-weight="bold" fill="#2e7d32">After: PosErr = +15 (unchanged)</text>
+
+  <!-- Right panel: ZeroPosErr -->
+  <text x="540" y="90" text-anchor="middle" font-weight="bold">ZeroPosErr</text>
+  <text x="540" y="108" text-anchor="middle" font-size="11" fill="#5b6b7b">snaps PosRef onto current Pos; PosErr &#8594; 0</text>
+  <line x1="400" y1="190" x2="680" y2="190" stroke="#5b6b7b" stroke-width="1.2"/>
+  <text x="400" y="210" font-size="11" fill="#5b6b7b">0</text>
+  <text x="600" y="210" font-size="11" fill="#5b6b7b">1000</text>
+
+  <!-- before -->
+  <circle cx="560" cy="190" r="5" fill="#5b8def" opacity="0.35"/>
+  <text x="560" y="178" text-anchor="middle" font-size="11" fill="#5b8def" opacity="0.7">Pos = 1000</text>
+  <circle cx="577" cy="190" r="5" fill="#e0736b" opacity="0.35"/>
+  <text x="600" y="225" text-anchor="middle" font-size="11" fill="#e0736b" opacity="0.7">PosRef (was 1015)</text>
+
+  <!-- after: Pos stays at 1000, PosRef pulled to 1000 -->
+  <circle cx="560" cy="190" r="7" fill="#5b8def"/>
+  <circle cx="560" cy="190" r="3" fill="#e0736b"/>
+  <text x="560" y="248" text-anchor="middle" font-size="11" font-weight="bold" fill="#2e7d32">After: Pos = PosRef = 1000, PosErr = 0</text>
+
+  <text x="360" y="295" text-anchor="middle" fill="#5b6b7b" font-size="11">SetPosition is a coordinate rebrand. ZeroPosErr is a one-shot error relief (e.g. against an obstruction).</text>
+  <text x="360" y="312" text-anchor="middle" fill="#5b6b7b" font-size="11">Both are rejected while error mapping or auto-gain is on, or if the result would leave the software limits.</text>
+</svg>

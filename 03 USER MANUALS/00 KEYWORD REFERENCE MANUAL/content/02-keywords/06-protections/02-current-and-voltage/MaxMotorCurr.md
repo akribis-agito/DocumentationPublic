@@ -45,6 +45,8 @@ Every control cycle the drive compares `|MotorCurr|` against `MaxMotorCurr` and 
 - If `|MotorCurr| > MaxMotorCurr`, an over-current counter increments; otherwise it resets to 0.
 - When the counter reaches **4 consecutive samples (≈ 0.25 ms)**, the axis is disabled and [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1016 (motor current too high), with a snapshot and an [ErrLog](../../07-status-and-faults/ErrLog.md) entry.
 
+![Sample-by-sample over-current debounce: the counter increments on each consecutive over-limit sample and resets to 0 on any below-limit sample; only 4 unbroken over-limit samples cause a trip](overcurrent-debounce.svg)
+
 The short 4-sample window rejects single-cycle measurement spikes while still tripping quickly on a genuine over-current. Because it monitors the total motor current, use [MaxPhaseCurr](MaxPhaseCurr.md) in addition to catch per-phase faults (e.g. stalls) where the total may look acceptable.
 
 ## Changes between versions

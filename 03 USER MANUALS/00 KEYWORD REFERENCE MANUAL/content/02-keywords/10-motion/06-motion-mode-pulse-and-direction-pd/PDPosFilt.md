@@ -50,6 +50,8 @@ where `Ts` is the control sample time and `w = 2π·(PDPosFilt/100)`. The minimu
 
 The filter applies only in **direct** P/D motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 3); indirect P/D motion uses the second-order profile generator and has no such filter.
 
+![Position reference for a high vs. low PDPosFilt cut-off applied to the same incoming PDPos staircase](pd-filter.svg)
+
 ## Examples
 
 ```text

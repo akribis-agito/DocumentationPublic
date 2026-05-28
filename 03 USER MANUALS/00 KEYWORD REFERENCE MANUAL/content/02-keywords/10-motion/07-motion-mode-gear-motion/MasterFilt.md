@@ -59,6 +59,8 @@ $$
 MasterFilt = 64\left( \frac{2\pi f_{c}T_{s}}{1 + 2\pi f_{c}T_{s}} \right)
 $$
 
+For example, at the typical 61 µs sample time, picking `MasterFilt = 16` (coefficient 16/64 = 0.25) gives a first-order pole at roughly `f_c = 0.25 / (2π × 61 µs) ≈ 650 Hz`, a moderate smoothing that still tracks fast master changes. Reducing it to `MasterFilt = 3` drops the cut-off back to ~128 Hz, giving a visibly slower follower for the same master step but rejecting more high-frequency noise on the master signal.
+
 ## Examples
 
 ```text

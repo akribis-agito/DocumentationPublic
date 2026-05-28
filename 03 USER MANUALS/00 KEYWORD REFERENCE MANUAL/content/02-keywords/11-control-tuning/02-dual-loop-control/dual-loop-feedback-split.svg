@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="330" viewBox="0 0 820 330" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="410" y="22" text-anchor="middle" font-weight="bold">Dual-loop feedback split (DualLoopOn = 1)</text>
+
+  <!-- Position loop block -->
+  <rect x="40" y="60" width="180" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="130" y="84" text-anchor="middle">Position loop</text>
+  <text x="130" y="102" text-anchor="middle" fill="#5b6b7b">PosGain (+PosKi v5)</text>
+
+  <line x1="220" y1="90" x2="258" y2="90" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <!-- Velocity loop block -->
+  <rect x="260" y="60" width="180" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="350" y="84" text-anchor="middle">Velocity loop</text>
+  <text x="350" y="102" text-anchor="middle" fill="#5b6b7b">VelGain / VelKi</text>
+
+  <line x1="440" y1="90" x2="478" y2="90" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <!-- Current loop block -->
+  <rect x="480" y="60" width="170" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="565" y="84" text-anchor="middle">Current loop</text>
+  <text x="565" y="102" text-anchor="middle" fill="#5b6b7b">CurrGain / CurrKi</text>
+
+  <line x1="650" y1="90" x2="690" y2="90" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <!-- Motor + Load drawing -->
+  <rect x="690" y="60" width="100" height="60" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="740" y="84" text-anchor="middle">Motor</text>
+  <text x="740" y="102" text-anchor="middle" fill="#5b6b7b">+ compliant</text>
+
+  <line x1="740" y1="120" x2="740" y2="150" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <rect x="690" y="152" width="100" height="50" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="740" y="174" text-anchor="middle">Load</text>
+
+  <!-- Feedback paths -->
+  <!-- Motor encoder feedback to velocity loop -->
+  <text x="430" y="240" text-anchor="middle">Motor encoder (auxiliary)</text>
+  <line x1="430" y1="248" x2="430" y2="220" stroke="#5b6b7b" stroke-width="1.4"/>
+  <line x1="430" y1="220" x2="690" y2="220" stroke="#5b6b7b" stroke-width="1.4"/>
+  <line x1="690" y1="220" x2="690" y2="130" stroke="#5b6b7b" stroke-width="1.4"/>
+  <line x1="690" y1="130" x2="350" y2="130" stroke="#5b6b7b" stroke-width="1.4"/>
+  <line x1="350" y1="130" x2="350" y2="122" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="450" y="148" fill="#5b6b7b">velocity feedback via DualLoopFact</text>
+
+  <!-- Load encoder feedback to position loop -->
+  <text x="130" y="298" text-anchor="middle">Load encoder (main)</text>
+  <line x1="130" y1="282" x2="130" y2="240" stroke="#5b6b7b" stroke-width="1.4"/>
+  <line x1="130" y1="240" x2="780" y2="240" stroke="#5b6b7b" stroke-width="1.4"/>
+  <line x1="780" y1="240" x2="780" y2="190" stroke="#5b6b7b" stroke-width="1.4"/>
+  <line x1="780" y1="190" x2="270" y2="190" stroke="#5b6b7b" stroke-width="1.4"/>
+  <line x1="270" y1="190" x2="270" y2="160" stroke="#5b6b7b" stroke-width="1.4"/>
+  <line x1="270" y1="160" x2="130" y2="160" stroke="#5b6b7b" stroke-width="1.4"/>
+  <line x1="130" y1="160" x2="130" y2="122" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="540" y="258" fill="#5b6b7b">position feedback (Pos)</text>
+
+  <text x="410" y="320" text-anchor="middle" fill="#5b6b7b">Backlash between motor and load is bridged: the load encoder closes the position loop, the motor encoder damps velocity.</text>
+</svg>

@@ -45,6 +45,21 @@ When the crossing is detected the controller writes [SpeedChgNew](SpeedChgNew.md
 
 This is a **one-shot** trigger: to arm another change you must set `SpeedChgOn = 1` again (typically after also updating `SpeedChgPos`/`SpeedChgNew`). The trigger uses the *reference* position, not the feedback, so it fires deterministically with the planned trajectory rather than waiting for the load to physically arrive. The comparison behaves the same for single-axis moves and grouped (coordinated) motion.
 
+![Speed change on the fly timeline](speedchg-timeline.svg)
+
+### Worked example
+
+To slow a forward jog from 500000 to 100000 user units/s when the axis crosses position 80000:
+
+```text
+ASpeedChgNew=100000  ; new cruise speed
+ASpeedChgPos=80000   ; trigger position
+ASpeedChgDir=0       ; fire on forward crossing
+ASpeedChgOn=1        ; arm (auto-clears when it fires)
+```
+
+The axis decelerates from 500000 to 100000 at `Decel × AccelFact` and `SpeedChgOn` reads back as `0` after the change.
+
 ## Examples
 
 ```text

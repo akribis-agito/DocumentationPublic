@@ -40,6 +40,8 @@ Array of per-segment durations (servo samples) for the spline buffer trajectory.
 
 Although `BuffTime` is often described as "time per segment", the values are **cumulative time stamps**. Index `[1]` is the time of the first waypoint, `[2]` the time of the second, and so on, all measured in servo samples from `t = 0`. The controller spends `BuffTime[i] − BuffTime[i-1]` samples interpolating from waypoint `i-1` to waypoint `i`. One servo sample equals one control cycle, so 100 samples is 100 control periods of motion.
 
+At a 16 384 Hz control rate, `BuffTime[1] = 1638` corresponds to 100 ms and `BuffTime[2] = 4915` to 300 ms — so the first segment lasts about 100 ms and the second about 200 ms. The whole pre-expanded trajectory holds `BuffTime[last]` interpolated points, which is also reported as `BuffStatus[6]`.
+
 ### Validation performed by BuffCalc
 
 When [BuffCalc](BuffCalc.md) runs it checks the `BuffTime` array and rejects the computation (returning an error) unless all of the following hold:

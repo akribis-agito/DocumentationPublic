@@ -52,6 +52,8 @@ $$
 
 (`PeakTime` is in ms.) The discrete filter is then run every control cycle on `MotorCurr²`.
 
+![I-squared filtered response charging from zero toward PeakCL squared and reaching ContCL squared exactly at PeakTime; the engage and release thresholds are marked](i2t-curve.svg)
+
 ### Engage / release (hysteresis)
 
 | Condition | Action |

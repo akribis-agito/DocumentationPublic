@@ -47,6 +47,8 @@ At the first sample of each cycle the controller pops the next target from the q
 
 A host streaming targets must push them at a rate that keeps the queue supplied at the chosen cycle length; otherwise the queue drains and the axis holds its last target. Queue occupancy can be monitored through [FIFOPosStatus](FIFOPosStatus.md).
 
+For example, with `FIFOPosCycle = 164` (≈ 10 ms at 16 384 Hz), the host should push roughly 100 targets per second to keep the trajectory streaming smoothly; if it falls behind and the queue empties, the axis simply holds the last consumed target until new ones arrive.
+
 ## Examples
 
 ```text

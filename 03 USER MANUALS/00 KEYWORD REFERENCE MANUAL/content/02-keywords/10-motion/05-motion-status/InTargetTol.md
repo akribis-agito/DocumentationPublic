@@ -44,6 +44,10 @@ $$
 
 While the comparison is true the dwell counter is incremented; the moment `|PosErr|` leaves the window the counter is reset to 0. Only when the counter has accumulated `InTargetTime` worth of consecutive in-window cycles does `InTargetStat` latch to 4. `InTargetTol` is in user units (the same units as `PosErr`); the comparison is against the raw stored value, so a value of `0` requires an exact-zero position error. The default is `10` counts. It is saved to flash and may be changed while in motion.
 
+![InTargetTol settling window and dwell counter](intargettol-window.svg)
+
+A practical tuning rule: set `InTargetTol` to the largest position error your application can tolerate as "settled" — too tight and the dwell counter keeps resetting (the axis never reports reached); too loose and the system reports reached before the load has actually stopped moving. `InTargetTime` then governs how long the error must hold inside that band.
+
 ## Examples
 
 ```text

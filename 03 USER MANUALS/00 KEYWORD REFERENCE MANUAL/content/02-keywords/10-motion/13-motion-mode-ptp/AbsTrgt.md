@@ -41,6 +41,8 @@ Absolute target position (user units) for the next point-to-point move.
 
 `AbsTrgt` is more than a user setpoint: it is also the internal target that several other motion modes write into each cycle, so it is the single "where do I want the reference to be" variable for all profiled-position motion.
 
+![AbsTrgt vs RelTrgt geometry](abstrgt-vs-reltrgt.svg)
+
 ## How it works
 
 ### Validation at Begin

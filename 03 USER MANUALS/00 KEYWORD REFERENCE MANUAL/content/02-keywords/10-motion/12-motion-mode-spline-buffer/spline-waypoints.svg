@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="280" viewBox="0 0 820 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="410" y="22" text-anchor="middle" font-weight="bold">Spline fit: waypoints (BuffPos / BuffTime) and the interpolated reference</text>
+
+  <!-- axes -->
+  <line x1="80" y1="220" x2="780" y2="220" stroke="#5b6b7b" stroke-width="1"/>
+  <line x1="80" y1="60" x2="80" y2="220" stroke="#5b6b7b" stroke-width="1"/>
+  <text x="420" y="252" text-anchor="middle" font-size="11">time (BuffTime samples)</text>
+  <text x="50" y="140" text-anchor="middle" font-size="11" transform="rotate(-90 50 140)">position (BuffPos)</text>
+
+  <!-- waypoints at (t=0,p=0), (200,80), (400,40), (600,150), (780,180) projected to canvas coords -->
+  <!-- map: x = 80 + (t / 780 * 700), y = 220 - (p / 200 * 160) -->
+  <!-- point 1 (0,0) -> (80,220) -->
+  <!-- point 2 (200,80) -> (80+179=259, 220-64=156) -->
+  <!-- point 3 (400,40) -> (438, 188) -->
+  <!-- point 4 (600,150) -> (618, 100) -->
+  <!-- point 5 (780,180) -> (780, 76) -->
+
+  <!-- linear segments (light dashed) -->
+  <path d="M80 220 L259 156 L438 188 L618 100 L780 76" fill="none" stroke="#bbb" stroke-dasharray="5 4" stroke-width="1.4"/>
+  <text x="500" y="146" font-size="11" fill="#888">linear (BuffSplineMod = 1)</text>
+
+  <!-- cubic spline (smooth curve through points) -->
+  <path d="M80 220 C 140 200 200 130 259 156 S 360 195 438 188 S 540 100 618 100 S 740 80 780 76" fill="none" stroke="#5b8def" stroke-width="2.2"/>
+  <text x="430" y="78" font-size="11" fill="#5b8def">cubic spline (default, BuffSplineMod = 3)</text>
+
+  <!-- waypoint markers -->
+  <g fill="#e0736b">
+    <circle cx="80" cy="220" r="4.5"/>
+    <circle cx="259" cy="156" r="4.5"/>
+    <circle cx="438" cy="188" r="4.5"/>
+    <circle cx="618" cy="100" r="4.5"/>
+    <circle cx="780" cy="76" r="4.5"/>
+  </g>
+  <text x="80" y="240" font-size="11">[1]</text>
+  <text x="259" y="148" text-anchor="middle" font-size="11">[2]</text>
+  <text x="438" y="206" text-anchor="middle" font-size="11">[3]</text>
+  <text x="618" y="92" text-anchor="middle" font-size="11">[4]</text>
+  <text x="775" y="68" text-anchor="end" font-size="11">[5]</text>
+
+  <!-- caption -->
+  <text x="410" y="272" text-anchor="middle" font-size="11" fill="#5b6b7b">BuffCalc fits the chosen curve through every BuffPos waypoint and pre-expands it to one point per servo sample.</text>
+</svg>

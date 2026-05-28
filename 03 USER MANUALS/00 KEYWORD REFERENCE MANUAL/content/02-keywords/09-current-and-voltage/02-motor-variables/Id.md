@@ -47,6 +47,12 @@ $$
 
 The factor $2/\sqrt3 \approx 1.1547$ is applied as written. θ is the electrical commutation angle from the commutation/auto-phasing logic (the same angle that produces the phase references). The quadrature counterpart [Iq](Iq.md) uses the cosine terms.
 
+In the rotating dq frame the d axis is aligned with the rotor flux (so Id is the flux/field component) and the q axis leads it by 90°. The whole frame rotates with θ relative to the stationary abc phases; Id and Iq are simply the projections of the measured current vector onto these two axes:
+
+![dq rotating frame: d axis aligned with the rotor flux, q axis 90 degrees ahead, both rotating with the electrical angle theta relative to the stationary abc axes](dq-rotating-frame.svg)
+
+With [IdRef](IdRef.md) held at 0 (the default current firmware behaviour) the d-axis PI drives Id toward zero, so all commanded current sits on the q axis and is torque-producing.
+
 The current-loop gains that act on the resulting error are [CurrGain](../../11-control-tuning/06-current-control/CurrGain.md) and [CurrKi](../../11-control-tuning/06-current-control/CurrKi.md) (see [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md)); this page does not give tuning guidance.
 
 ![FOC current loop](foc-current-loop.svg)

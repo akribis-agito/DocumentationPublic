@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="380" viewBox="0 0 860 380" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="430" y="22" text-anchor="middle" font-weight="bold">ForcePIVOn selects the force-loop topology</text>
+
+  <!-- Top row: ForcePIVOn = 0 -->
+  <text x="50" y="60" font-weight="bold">ForcePIVOn = 0 (standard)</text>
+  <text x="50" y="78" fill="#5b6b7b">force loop sits over the current loop</text>
+
+  <rect x="50"  y="100" width="120" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="110" y="120" text-anchor="middle">Force PID</text>
+  <text x="110" y="138" text-anchor="middle" fill="#5b6b7b">on ForceErr</text>
+
+  <line x1="170" y1="125" x2="208" y2="125" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <rect x="210" y="100" width="50" height="50" rx="25" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="235" y="130" text-anchor="middle">&#931;</text>
+
+  <text x="235" y="180" text-anchor="middle" fill="#5b6b7b">+ ForceFFW</text>
+  <text x="235" y="196" text-anchor="middle" fill="#5b6b7b">+ ForceVelFFW</text>
+  <line x1="235" y1="166" x2="235" y2="152" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <line x1="260" y1="125" x2="298" y2="125" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <rect x="300" y="100" width="160" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="380" y="120" text-anchor="middle">Force output filters</text>
+  <text x="380" y="138" text-anchor="middle" fill="#5b6b7b">ForceFiltOn 1, 2</text>
+
+  <line x1="460" y1="125" x2="498" y2="125" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <rect x="500" y="100" width="140" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="570" y="120" text-anchor="middle">Current loop</text>
+
+  <line x1="640" y1="125" x2="678" y2="125" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <rect x="680" y="100" width="110" height="50" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="735" y="130" text-anchor="middle">Motor</text>
+
+  <text x="380" y="170" text-anchor="middle" fill="#5b6b7b">ForceGain scaling: 1E-6</text>
+
+  <!-- Bottom row: ForcePIVOn = 1 -->
+  <text x="50" y="232" font-weight="bold">ForcePIVOn = 1 (force-over-PIV)</text>
+  <text x="50" y="250" fill="#5b6b7b">force loop wraps the position + velocity cascade</text>
+
+  <rect x="50"  y="272" width="120" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="110" y="292" text-anchor="middle">Force PID</text>
+  <text x="110" y="310" text-anchor="middle" fill="#5b6b7b">on ForceErr</text>
+
+  <line x1="170" y1="297" x2="208" y2="297" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <rect x="210" y="272" width="50" height="50" rx="25" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="235" y="302" text-anchor="middle">&#931;</text>
+
+  <text x="235" y="352" text-anchor="middle" fill="#5b6b7b">+ ForceFFWP</text>
+  <line x1="235" y1="342" x2="235" y2="324" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <line x1="260" y1="297" x2="298" y2="297" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <rect x="300" y="272" width="160" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="380" y="292" text-anchor="middle">to position reference</text>
+  <text x="380" y="310" text-anchor="middle" fill="#5b6b7b">via x sample time + entry</text>
+
+  <line x1="460" y1="297" x2="498" y2="297" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <rect x="500" y="272" width="140" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="570" y="292" text-anchor="middle">Position + velocity</text>
+  <text x="570" y="310" text-anchor="middle">cascade</text>
+
+  <line x1="640" y1="297" x2="678" y2="297" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <rect x="680" y="272" width="110" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="735" y="292" text-anchor="middle">Current loop</text>
+  <text x="735" y="310" text-anchor="middle" fill="#5b6b7b">+ ForceFFW, ForceVelFFW</text>
+
+  <text x="380" y="345" text-anchor="middle" fill="#5b6b7b">ForceGain scaling: 1E-3. Force output filters are not used here.</text>
+</svg>

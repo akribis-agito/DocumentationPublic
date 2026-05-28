@@ -46,6 +46,10 @@ When the pair is set, the controller reduces `MasterFact` and `MasterFactDen` by
 
 Each control cycle the controller then applies the ratio with a **quotient-and-remainder** scheme in extended-precision floating point: it carries the fractional part of the master change forward to the next cycle so that the accumulated follower motion equals `MasterFact / MasterFactDen × master change` with no long-term rounding drift, even for ratios that are not a clean multiple of 1/65536. This is the main advantage of the v5 numerator/denominator form over the v4 single-factor form.
 
+### Worked example
+
+A virtual-master rotary encoder reports 360 000 counts per revolution; the follower is geared at 7 follower units per 11 master units. Set `MasterFact = 7`, `MasterFactDen = 11`. If the master rotates at 360 000 counts/s (1 rev/s), `MasterPos` accumulates at `360000 × 7/11 ≈ 229 091` follower units/s. Per-cycle the controller scales the master change by `7/11` and carries the leftover fraction into the next cycle, so over any window of N cycles the accumulated follower change matches `7N/11` exactly.
+
 The valid range is `1 … 16777215`; it must not be zero.
 
 ## Examples

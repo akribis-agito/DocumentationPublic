@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="300" viewBox="0 0 720 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="20" y="22" font-size="14" font-weight="bold">AbsTrgt vs RelTrgt: absolute target vs relative distance from PosRef</text>
+
+  <!-- shared axis -->
+  <line x1="40" y1="100" x2="680" y2="100" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="60"  y="118" text-anchor="middle" fill="#5b6b7b" font-size="11">0</text>
+  <text x="680" y="118" text-anchor="middle" fill="#5b6b7b" font-size="11">position (user units)</text>
+
+  <!-- starting reference at 30000 -->
+  <circle cx="220" cy="100" r="6" fill="#5b8def"/>
+  <text x="220" y="86" text-anchor="middle" font-size="11" fill="#5b8def">PosRef (e.g. 30000)</text>
+
+  <!-- AbsTrgt at 80000 -->
+  <circle cx="500" cy="100" r="6" fill="#e0736b"/>
+  <text x="500" y="86" text-anchor="middle" font-size="11" fill="#e0736b">AbsTrgt = 80000</text>
+
+  <!-- Absolute arrow from current to target -->
+  <path d="M 60 140 L 500 140" fill="none" stroke="#5b6b7b" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="280" y="158" text-anchor="middle" fill="#5b6b7b" font-size="11">AbsTrgt is the destination in the coordinate frame (measured from 0)</text>
+
+  <!-- Relative arrow showing the delta from PosRef -->
+  <path d="M 220 195 L 500 195" fill="none" stroke="#2e7d32" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="360" y="213" text-anchor="middle" fill="#2e7d32" font-size="11">RelTrgt = +50000 (measured from PosRef)</text>
+
+  <!-- conversion -->
+  <text x="370" y="248" text-anchor="middle" fill="#5b6b7b" font-size="11">At Begin: if RelTrgt &#8800; 0, AbsTrgt = PosRef + RelTrgt (here 30000 + 50000 = 80000). The move then proceeds exactly as an absolute PTP.</text>
+  <text x="370" y="270" text-anchor="middle" fill="#5b6b7b" font-size="11">Begin rejects the move if the resulting AbsTrgt is outside the software position limits or against an active limit switch.</text>
+</svg>

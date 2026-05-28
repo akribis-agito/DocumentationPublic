@@ -50,6 +50,8 @@ Emergency deceleration rate applied on `Abort` or fault, in user units per secon
 
 When `EmrgDec` is selected, the profiler also forces `JerkMode` internally to OFF for that stop, so the emergency deceleration is applied **without jerk smoothing** — the priority is to stop quickly, not smoothly.
 
+![Normal stop vs emergency stop velocity ramp](emrgdec-compare.svg)
+
 Like the other rates, `EmrgDec` is multiplied by [AccelFact](AccelFact.md) each cycle, and the deceleration-distance lookahead then uses this scaled value so the axis still decelerates to rest at the limit/target rather than overshooting.
 
 ### Relationship to Abort

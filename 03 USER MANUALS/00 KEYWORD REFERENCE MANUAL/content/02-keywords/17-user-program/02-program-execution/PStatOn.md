@@ -38,6 +38,8 @@ Enables or disables periodic parameter-statistics streaming.
 
 While `PStatOn` is set, the controller tracks the time since the last transmission and, once it exceeds [PStatInterval](PStatInterval.md), sends one batch containing the current values of every configured [PStatParams](PStatParams.md) entry over the selected [PStatPort](PStatPort.md). Streaming runs in the background and yields to incoming commands, so it does not block normal communication on the port.
 
+![PStat streaming timeline: while PStatOn is 1 the controller emits one batch every PStatInterval milliseconds on PStatPort; each batch contains the current values of the non-zero PStatParams entries in index order](pstat-stream-timeline.svg)
+
 If a [PStatParams](PStatParams.md) entry names a parameter that cannot be resolved, the controller rejects the configuration: it reads back a negative (error) value instead of `0`/`1` and the offending entry is cleared. In that case, correct [PStatParams](PStatParams.md) and re-enable `PStatOn`.
 
 ## Examples

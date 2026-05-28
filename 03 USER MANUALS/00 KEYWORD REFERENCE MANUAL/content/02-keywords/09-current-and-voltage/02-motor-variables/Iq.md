@@ -53,6 +53,10 @@ $$
 
 The factor $2/\sqrt3 \approx 1.1547$ is applied as written. θ is the electrical commutation angle from the commutation/auto-phasing logic. The direct counterpart [Id](Id.md) uses the corresponding sine terms.
 
+In the rotating dq frame the q axis carries the torque-producing component and is orthogonal to the rotor flux on the d axis. Iq and Id are the projections of the measured current vector onto this rotating frame, indexed by θ:
+
+![dq rotating frame: d axis aligned with the rotor flux, q axis 90 degrees ahead, both rotating with the electrical angle theta relative to the stationary abc axes](dq-rotating-frame.svg)
+
 ![FOC current loop](foc-current-loop.svg)
 
 ## Examples

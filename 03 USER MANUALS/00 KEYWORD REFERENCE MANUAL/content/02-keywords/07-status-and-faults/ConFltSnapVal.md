@@ -45,6 +45,8 @@ It is an axis-scoped, read-only array that is not saved to flash. The default el
 
 The whole snapshot is captured in one shot at the instant a fault is raised (the same event that sets [ConFlt](ConFlt.md), disables the axis, and appends to [ErrLog](ErrLog.md)). The array has a **fixed layout**: only slots `[1]`–`[4]` come from your [ConFltSnapSrc](ConFltSnapSrc.md) configuration; slots `[5]`–`[14]` always capture the same hard-coded system parameters regardless of configuration.
 
+![ConFltSnapVal layout: slots 1 to 4 hold the four user-selected parameters chosen by ConFltSnapSrc, and slots 5 to 14 hold the fixed system parameters captured automatically on every fault](confltsnapval-layout.svg)
+
 | Index | Captured value | Source |
 |---|---|---|
 | [1] | User-selected parameter 1 | [ConFltSnapSrc](ConFltSnapSrc.md)[1] |

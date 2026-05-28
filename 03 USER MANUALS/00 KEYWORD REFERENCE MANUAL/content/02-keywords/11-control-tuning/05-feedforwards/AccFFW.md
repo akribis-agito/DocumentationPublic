@@ -82,6 +82,14 @@ AAccFFW[1]=2560      ; set acceleration feedforward gain (first array element)
 AAccFFW[1]           ; read back the gain
 ```
 
+### Worked example: contribution at a peak reference acceleration
+
+With `AccFFW = 2560` (v4 integer) and a reference acceleration of `a_ref = 1000` (user units/s² per cycle, as the second difference of the reference), the acceleration feedforward term contributed to the current reference is:
+
+`AccTerm = 1000 x 2560 x (1 / 256) = 10000` (current units)
+
+The feedforward injects this current ahead of the loop, so the velocity loop does not have to develop a following error to produce the accelerating current.
+
 ## See also
 
 - [VelFFW](VelFFW.md) — velocity feedforward gain (summed with the acceleration term)

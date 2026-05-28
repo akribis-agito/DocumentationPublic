@@ -54,6 +54,8 @@ When `JerkMode = 1`, the profiler uses `JerkInDec` in the structured jerk profil
 
 A larger `JerkInDec` reaches the `Decel` limit faster (sharper, shorter braking transition); a smaller value spreads it over more time for a gentler stop.
 
+![Third-order velocity and acceleration profile segments](jerkinacc-segments.svg)
+
 ### Units and internal scaling (v4)
 
 On v4 `JerkInDec` is a dimensionless integer with range 100–1,000,000,000 (default 1,000,000). The controller multiplies it by a fixed factor of 1000 before use, so the effective jerk constraint in counts/s³ is:

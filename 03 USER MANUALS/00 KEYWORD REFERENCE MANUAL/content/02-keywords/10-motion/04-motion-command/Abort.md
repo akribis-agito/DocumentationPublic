@@ -50,6 +50,8 @@ For a normal single-axis move, `Abort` (under interrupts disabled) ends the moti
 
 Clearing [MotionStat](../05-motion-status/MotionStat.md) to 0 is what makes the stop immediate: with no motion bit set, the profiler's no-motion branch zeroes its velocity and holds [PosRef](../01-kinematics-status/PosRef.md), so no further trajectory is generated.
 
+![Stop vs Abort: profiler velocity at command time](stop-vs-abort.svg)
+
 ### Group motion
 
 If the axis belongs to a group, `Abort` tears the whole group down at once:

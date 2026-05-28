@@ -64,6 +64,14 @@ APosGain[1]=350     ; set the position-loop proportional gain (first scheduling 
 APosGain[1]         ; read the position-loop proportional gain
 ```
 
+### Worked example: reading off the steady-state following error
+
+With `PosGain = 350`, `VelTrackFact = 1024` (unity feed-forward), and the axis tracking a constant velocity reference of `dPosRef = 20000` user units/s, if at steady state the velocity loop perfectly follows `VelRef`, the position error needed for the position loop to balance any residual contribution can be read off:
+
+`VelRef = PosErr x PosGain + dPosRef x VelTrackFact / 1024`
+
+At steady state along a constant slew, `VelRef ≈ dPosRef` and the proportional term `PosErr x PosGain` only has to cover the small difference. With zero velocity feed-forward (`VelTrackFact = 0`), the position loop alone must supply all of `VelRef`, so `PosErr = VelRef / PosGain = 20000 / 350 ≈ 57.1` user units. The same axis with unity feed-forward typically shows a fraction of that error.
+
 ## Changes between versions
 
 In **v4** the position loop is purely proportional: its output is `PosErr × PosGain`. In **v5 (central-i)** `PosGain` is a floating-point value with a wider range (`0` to `1000000`), the position error can first pass through a second-order position-error filter, and an optional position integral term ([PosKi](PosKi.md)) is added to the `PosGain` output before it forms `VelRef`. **v5 is central-i only.**

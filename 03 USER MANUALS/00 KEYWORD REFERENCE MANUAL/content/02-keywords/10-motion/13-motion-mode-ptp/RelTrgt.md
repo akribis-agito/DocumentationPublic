@@ -39,6 +39,8 @@ Relative target distance (user units) for the next point-to-point move.
 
 `RelTrgt` requests a move *relative to the current position reference*. It is the relative counterpart of [AbsTrgt](AbsTrgt.md): at [Begin](../04-motion-command/Begin.md), a non-zero `RelTrgt` is converted into an absolute target and the move then proceeds exactly like an absolute PTP move. It is not saved to flash and can be changed at any time.
 
+![AbsTrgt vs RelTrgt geometry](abstrgt-vs-reltrgt.svg)
+
 ## How it works
 
 ### RelTrgt is consumed at Begin, not held

@@ -43,6 +43,8 @@ Selects whether repetitive point-to-point motion is bidirectional or unidirectio
 | 0 | **Bidirectional motion** Axis will move to AbsTrgt (or relative location defined by RelTrgt) and then back to initial location. 1 repetition number equals to 1 motion to AbsTrgt (or relative location defined by RelTrgt), or 1 motion back to initial position This means RptCycles = 2 equals to one set of to-and-fro motion. |
 | 1 | **Unidirectional motion** Axis will always move at the position delta of (AbsTrgt – initial position) or RelTrgt, where axis will move further and further away. 1 repetition number equals 1 delta motion. |
 
+![RptMode bidirectional vs unidirectional geometry](rptmode-geometry.svg)
+
 ### How the return target is computed
 
 When the move begins, the controller records the starting reference and sets up the *next* repetition target according to `RptMode` (re-applied at each dwell):

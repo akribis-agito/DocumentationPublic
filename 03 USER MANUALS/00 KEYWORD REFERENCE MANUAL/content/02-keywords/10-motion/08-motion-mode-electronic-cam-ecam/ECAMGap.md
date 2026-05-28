@@ -59,6 +59,10 @@ The slave (follower) position reference is then linearly interpolated between th
 PosRef = C + GenData[i1] + frac * (GenData[i2] - GenData[i1]) + cycle_offset
 ```
 
+![Linear interpolation between two ECAM table entries as the master moves through one ECAMGap interval](ecam-interp.svg)
+
+For a worked example, take `ECAMGap = 1000`, `GenData[i1] = 2000`, `GenData[i1+1] = 5000`. When the master sits 400 units past the position that maps to `GenData[i1]`, `frac = 400 / 1000 = 0.4` and the follower offset (before adding `C` and `cycle_offset`) is `2000 + 0.4 × (5000 − 2000) = 3200`.
+
 `C` is set so the follower does not jump at start: it is the follower's position when [Begin](../04-motion-command/Begin.md) is issued, less the table value at the starting master position (which is positioned by [ECAMMasterIni](ECAMMasterIni.md)). `cycle_offset` accumulates the height difference of the repeating segment across completed cycles (see [ECAMStartCyc](ECAMStartCyc.md) / [ECAMEndCyc](ECAMEndCyc.md)) so the follower advances continuously even when a cycle's first and last table values differ.
 
 Because the interpolation is computed at full internal precision, consecutive cam-table entries may not differ by more than a fixed limit (`131071` user units); a pattern that violates this is rejected at [Begin](../04-motion-command/Begin.md).

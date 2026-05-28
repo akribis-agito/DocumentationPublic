@@ -50,6 +50,10 @@ Time to wait, in milliseconds, after releasing (energizing) the brake before all
 
 > Both times are stored internally in control samples and must not be set to 0 in `BrakeMode = 3`, or the timing logic would not behave as intended.
 
+## Timing diagram (BrakeMode = 3)
+
+![Three-lane timing diagram for BrakeMode 3: on an enable command the brake is released immediately and the motor is armed after BrakeRelTime; on a disable command the brake is engaged immediately and the motor is turned off after BrakeLockTime](brake-timing.svg)
+
 ## See also
 
 - [Dynamic brake](Dynamicbrake.md) — fast electrical braking (shorting the phases)

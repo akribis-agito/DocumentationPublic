@@ -42,6 +42,8 @@ Because the motion never reports "done", a fresh `Begin` (with a new `AbsTrgt`/`
 
 This affects only point-to-point modes ([MotionMode](MotionMode.md) `= 1`); it has no effect on jog, gear, ECAM or the other modes.
 
+![PTPKeepMoving blend vs restart](ptpkeepmoving-blend.svg)
+
 ## Examples
 
 ```text
@@ -49,6 +51,19 @@ APTPKeepMoving=1     ; blend into a new target without stopping
 APTPKeepMoving=0     ; require the move to complete first
 APTPKeepMoving      ; query state
 ```
+
+### Worked example: on-the-fly retarget
+
+```text
+AMotionMode=1        ; PTP
+APTPKeepMoving=1     ; allow blend
+AAbsTrgt=100000      ; first target
+ABegin               ; start the move
+; ... while the axis is still moving toward 100000:
+AAbsTrgt=140000      ; profiler retargets to the new value, no stop, no re-Begin
+```
+
+Without `PTPKeepMoving = 1` the second `AAbsTrgt` would simply be parked for the next move — the running move would still target the original 100000. With it set, the profiler reads the updated `AbsTrgt` each cycle and ramps the axis to the new destination, blending the trajectory.
 
 ## See also
 

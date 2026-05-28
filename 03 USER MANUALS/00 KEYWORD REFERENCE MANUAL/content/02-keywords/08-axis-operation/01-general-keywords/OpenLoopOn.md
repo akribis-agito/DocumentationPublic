@@ -44,6 +44,8 @@ Opens the control loop at a chosen point (none, current, or voltage).
 | 1 | At the current reference, just before the current loop | [OpenLoopCurr](OpenLoopCurr.md) becomes the current reference. |
 | 2 | At the phase-voltage output, just before PWM modulation | [OpenLoopVolt](OpenLoopVolt.md) sets the amplitude of an injected sinusoid. |
 
+![Where OpenLoopOn cuts the control cascade](openloop-cut-points.svg)
+
 ### Current open loop (1)
 
 Each cycle the controller overwrites the current reference with the user value from [OpenLoopCurr](OpenLoopCurr.md). The position, velocity and force loops above are bypassed; only cogging compensation ([UPMVelTable](../../09-current-and-voltage/03-current-compensation/UPMVelTable.md)) is still added on top, and the DC current offset still applies. The current loop itself stays closed and regulates the motor to that reference.

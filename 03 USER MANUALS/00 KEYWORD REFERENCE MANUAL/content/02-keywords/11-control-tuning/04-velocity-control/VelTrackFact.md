@@ -56,6 +56,14 @@ AVelTrackFact=0     ; disable velocity feed-forward
 AVelTrackFact       ; read the velocity feed-forward factor
 ```
 
+### Worked example: contribution at a constant-velocity slew
+
+With `VelTrackFact = 1024` (unity), `PosGain = 400`, and during a constant-velocity slew the filtered reference velocity is `dPosRef = 20000` (user units/s). Suppose the position error has settled to `PosErr = 5`. The velocity-loop reference is:
+
+`VelRef = 5 x 400 + (20000 x 1024) / 1024 = 2000 + 20000 = 22000` (user velocity units)
+
+The feedforward term (`20000`) supplies most of `VelRef`, so the position loop only has to make up `2000` to cover the residual error. Setting `VelTrackFact = 0` would force the position loop to produce the full `22000` from error alone, raising the steady-state following error.
+
 ## See also
 
 - [dPosRef](../../10-motion/01-kinematics-status/dPosRef.md) — reference velocity that `VelTrackFact` scales

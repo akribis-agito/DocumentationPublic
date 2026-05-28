@@ -43,6 +43,8 @@ Unlike the hardware limit switches reported by `LimitsStat` (physical inputs), `
 
 ## How it works
 
+![Velocity-vs-position sketch: inside the legal travel band the profiled Vel runs at the commanded value, then the pre-emptive distance-to-stop clamp curves it down to zero exactly at the soft limit; the same shape applies in reverse for RevPLim](soft-limit-decel.svg)
+
 The reverse limit is the mirror image of the forward limit; the same four mechanisms apply:
 
 **1. Pre-emptive braking.** For a negative-direction profile the distance-to-stop velocity is computed against `RevPLim`:

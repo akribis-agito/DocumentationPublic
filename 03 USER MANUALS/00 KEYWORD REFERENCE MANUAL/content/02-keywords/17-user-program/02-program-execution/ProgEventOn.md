@@ -53,6 +53,9 @@ Two further switches gate this engine alongside `ProgEventOn`: [ProgEventGEn](Pr
 
 Three conditions must all be true for a triggered event to actually run its handler: `ProgEventOn = 1`, [ProgEventGEn](ProgEventGEn.md)` = 1`, and [ProgEventEn](ProgEventEn.md) of that event `= 1`. The full pipeline is:
 
+![User-program event lifecycle: each event moves from waiting-for-trigger to pending-for-service when its condition is met, then to in-service when scheduled (events 1..5 are scanned in order with the lowest number winning), and finally back to waiting-for-trigger when the handler returns; all three of ProgEventOn, ProgEventGEn and ProgEventEn[n] must be 1 to run the handler](progevent-arming-timeline.svg)
+
+
 1. **Sense (evaluate).** While sensing is enabled, the controller evaluates each defined event every control cycle: it reads the monitored parameter, applies the mask, and tests the condition selected by [ProgEventType](ProgEventType.md) against [ProgEventVal](ProgEventVal.md). An event is evaluated only while it is in the "waiting for trigger" state.
 2. **Fire.** When the condition is met, the event moves to the "pending for service" state (reported by [ProgEventStat](ProgEventStat.md)`= 1`).
 3. **Run the handler.** The handler runs on the main program thread (thread 1). Each pass, the controller scans events 1→5 and services the first one that is enabled and pending, so a lower event number takes precedence when several are pending at once. The handler is called like a function: the current execution point is pushed onto the call stack and execution jumps to the event's handler; the event moves to the "in service" state (`ProgEventStat = 2`).

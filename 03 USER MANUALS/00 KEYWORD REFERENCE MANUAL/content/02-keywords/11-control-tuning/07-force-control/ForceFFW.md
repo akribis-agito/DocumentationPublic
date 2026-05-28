@@ -57,6 +57,14 @@ AForceFFW[1]=1000       ; set the current-wise force feedforward gain
 AForceFFW[1]            ; read the current-wise force feedforward gain
 ```
 
+### Worked example: contribution at a steady force command
+
+With `ForceFFW = 1000` and a (filtered) force reference `ForceRef = 50` (force units), the current contribution from this feedforward path is:
+
+`ForceFFW term = 50 x 1000 x 0.001 = 50` (current units)
+
+The PID then only has to act on the residual error between the actual force and the command, leaving the steady-state component to the feedforward.
+
 ## See also
 
 - [ForceFFWP](ForceFFWP.md) — position-wise force feedforward (force-over-PIV only)

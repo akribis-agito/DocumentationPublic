@@ -44,6 +44,10 @@ When the controller reaches this segment, it computes the constant acceleration 
 
 If the delta and cycle time resolve to an acceleration below the smallest the controller can represent (one position unit per second, per second), the segment faults the motion.
 
+### Worked example
+
+With `FIFOCycleTime = 16384` samples (≈ 1 s at 16384 Hz), a previous velocity of `0`, and `FIFOPushParP = 20000`, the controller picks the constant acceleration that travels 20 000 units in 1 s starting from rest: `a = 2 × 20000 / 1² = 40000` units/s². The velocity ramps linearly from 0 to 40 000 units/s over the segment, and the position follows the matching parabola, hitting exactly 20 000 units of travel at the final sample.
+
 ## Examples
 
 ```text

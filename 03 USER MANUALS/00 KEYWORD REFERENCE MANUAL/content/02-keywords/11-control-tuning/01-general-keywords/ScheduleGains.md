@@ -65,6 +65,10 @@ AScheduleGains[3]      ; read the velocity-loop proportional gain currently appl
 AScheduleGains[1]      ; read the position-loop proportional gain currently applied
 ```
 
+### Worked example: confirming the active scheduling set
+
+With velocity-band scheduling (`ScheduleMode = 4`) and `PosGain[1..3] = 400, 400, 250` configured, suppose the axis is stationary so [ScheduleSet](ScheduleSet.md) reads `1`. Then `ScheduleGains[1]` reads `400` (= `PosGain[1]`). After commanding a fast move that puts the speed into the third velocity band, `ScheduleSet` reads `3` and `ScheduleGains[1]` reads `250` (= `PosGain[3]`). The change in `ScheduleGains` confirms that the controller has actually switched the running gain, not merely the set number.
+
 ## See also
 
 - [ScheduleSet](ScheduleSet.md) — active gain-set number that selects these values

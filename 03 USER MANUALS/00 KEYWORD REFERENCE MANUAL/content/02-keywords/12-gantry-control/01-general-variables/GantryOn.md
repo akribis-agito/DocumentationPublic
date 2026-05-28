@@ -59,7 +59,7 @@ On the `0`→`1` transition the controller captures the current difference betwe
 
 ### Both motors must stay on
 
-While gantry mode is active, if one motor of the pair turns off the controller deliberately turns off the other as well and records a fault on it (reported through [ConFlt](../../07-status-and-faults/ConFlt.md) as the other gantry member turning off unexpectedly), because a single-sided gantry is not safe to drive. Both motors must also be phased (commutated) for the gantry to remain engaged.
+While gantry mode is active, if one motor of the pair turns off the controller deliberately turns off the other as well and records [ConFlt](../../07-status-and-faults/ConFlt.md) fault code **1061** (other gantry member axis got motor off) on the side that was forced down, because a single-sided gantry is not safe to drive. Both motors must also be phased (commutated) for the gantry to remain engaged.
 
 ## Examples
 

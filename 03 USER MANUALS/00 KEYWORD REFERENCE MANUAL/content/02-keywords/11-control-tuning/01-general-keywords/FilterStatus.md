@@ -38,6 +38,8 @@ Per-filter status word reporting which customisable filters have pending definit
 | `FilterStatus[3]` | Feedforward filter | bits 0–5: feedforward filter |
 | `FilterStatus[4]` | Force filters | bits 0–5: filter 1; bits 6–11: filter 2 |
 
+![Velocity-filter status word: four packed 6-bit fields, each carrying a pending bit and per-parameter validity bits](filter-status-bitfield.svg)
+
 ## How it works
 
 For a given filter, let `n` be the offset of its 6-bit field, where `n = (filter number − 1) × 6`. The bits within the field are:
@@ -65,6 +67,19 @@ AFilterStatus[2]                 ; read the velocity-filter status word
 ```
 
 A value of `0` in a filter's field means that filter is up to date and was last calculated without any issue. A field value of `1` (only bit `n+0` set) means the definition changed and a [CalcFilters](CalcFilters.md) is still needed.
+
+### Worked example: reading individual filter fields
+
+Suppose `FilterStatus[2]` reads `0x000041` (decimal `65`). In binary that is `0000 0000 0000 0000 0000 0000 0100 0001`. Splitting into 6-bit fields from the least-significant side:
+
+| Filter | Field bits | Field value | Meaning |
+|---|---|---|---|
+| 1 | bits 0–5 | `000001` | pending (bit 0 set); validity bits clear |
+| 2 | bits 6–11 | `000001` | pending; validity bits clear |
+| 3 | bits 12–17 | `000000` | up to date and last calculation passed |
+| 4 | bits 18–23 | `000000` | up to date and last calculation passed |
+
+So velocity filters 1 and 2 have new definitions waiting for a `CalcFilters`, while filters 3 and 4 are already running their current definitions. After issuing `CalcFilters`, if both new definitions are valid the word reads `0x000000`.
 
 ## See also
 

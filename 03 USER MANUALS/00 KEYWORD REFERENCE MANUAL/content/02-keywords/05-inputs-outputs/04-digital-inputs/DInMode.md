@@ -41,16 +41,18 @@ Assigns a software function to each digital input, with per-axis targeting.
 |------|---|---|---|---|---|---|---|---|---|---|---|---|
 | Value, Bit# | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 |
 
-**Example:** `CDInMode[2] = 65545` (binary `…0001 0000 0000 0000 1001`):
+**Example:** `CDInMode[2] = 131081` (binary `…0010 0000 0000 0000 1001`):
 - Index → 2 (digital input 2)
 - Lower 16 bits → 9 (reverse limit switch)
-- Bit 16 set → axis B
+- Bit 17 set → axis B
 
-…so digital input 2 (of axis C) acts as the reverse-limit-switch input for axis B.
+…so digital input 2 (of axis C) acts as the reverse-limit-switch input for axis B. (To target axis A instead, set bit 16 — value `65545` — or leave the upper 16 bits at 0; both forms select axis A.)
 
 ### Dispatch mechanism
 
 When `DInMode[]` is written, an internal table of active functionalities is built — each entry holds the function code, the input bit mask, and the target axis. Each control cycle this table is walked, comparing the current input word against the previous one ([DInPort](DInPort-DInPortHigh.md)) to detect **rising** and **falling** edges, then running the function's action. Inputs used for these functions are sampled in groups once every 16 interrupts.
+
+![DInMode dispatch: edge-detected DInPort drives the active functions table, which fans out to per-function actions](dinmode-dispatch.svg)
 
 ### Functionality codes
 

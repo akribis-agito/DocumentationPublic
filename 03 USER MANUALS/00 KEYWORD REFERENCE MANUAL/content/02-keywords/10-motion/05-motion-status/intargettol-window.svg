@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="320" viewBox="0 0 720 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="20" y="22" font-size="14" font-weight="bold">InTargetTol settling window and the dwell counter</text>
+
+  <!-- PosErr trace axes -->
+  <line x1="60" y1="170" x2="700" y2="170" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="60" y1="60"  x2="60"  y2="220" stroke="#5b6b7b" stroke-width="1.2"/>
+  <text x="40" y="76" fill="#5b6b7b" font-size="11">|PosErr|</text>
+  <text x="700" y="188" text-anchor="end" fill="#5b6b7b" font-size="11">time (cycles)</text>
+
+  <!-- Window band: 0 to InTargetTol -->
+  <rect x="60" y="155" width="640" height="30" fill="#eaf2fb" opacity="0.55"/>
+  <line x1="60" y1="155" x2="700" y2="155" stroke="#5b8def" stroke-dasharray="3,3"/>
+  <text x="70" y="148" fill="#5b8def" font-size="11">+InTargetTol</text>
+
+  <!-- PosErr trace: leaves window once, comes back, finally stays in -->
+  <polyline points="60,90 140,140 220,160 280,140 340,160 400,135 470,162 540,165 700,168"
+            fill="none" stroke="#e0736b" stroke-width="2"/>
+  <text x="220" y="120" fill="#e0736b" font-size="11">|PosErr|</text>
+
+  <!-- Out-of-window marker -->
+  <circle cx="220" cy="160" r="4" fill="#e0736b"/>
+  <text x="220" y="210" text-anchor="middle" fill="#e0736b" font-size="11">enters window</text>
+  <circle cx="280" cy="140" r="4" fill="#e0736b"/>
+  <text x="280" y="210" text-anchor="middle" fill="#c62828" font-size="11">leaves &#8594; counter = 0</text>
+  <circle cx="470" cy="162" r="4" fill="#e0736b"/>
+  <text x="470" y="210" text-anchor="middle" fill="#e0736b" font-size="11">re-enters, counter restarts</text>
+
+  <!-- dwell-counter sub-plot -->
+  <line x1="60" y1="290" x2="700" y2="290" stroke="#5b6b7b" stroke-width="1.2"/>
+  <line x1="60" y1="290" x2="60"  y2="240" stroke="#5b6b7b" stroke-width="1.2"/>
+  <text x="40" y="254" fill="#5b6b7b" font-size="11">counter</text>
+
+  <!-- counter trace: ramps up while in, drops to zero when out -->
+  <polyline points="60,290 220,290 280,250 280,290 470,290 700,245"
+            fill="none" stroke="#5b8def" stroke-width="2"/>
+  <text x="630" y="240" fill="#2e7d32" font-size="11">reaches InTargetTime &#8594; InTargetStat = 4</text>
+</svg>

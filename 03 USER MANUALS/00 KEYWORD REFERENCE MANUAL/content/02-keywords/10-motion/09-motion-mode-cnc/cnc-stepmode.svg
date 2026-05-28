@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="280" viewBox="0 0 820 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="410" y="22" text-anchor="middle" font-weight="bold">CNC step mode: each segment runs to a full stop, then waits for CNCADoStep = 1</text>
+
+  <!-- velocity track -->
+  <text x="12" y="62" font-weight="bold">Path velocity</text>
+  <line x1="100" y1="150" x2="780" y2="150" stroke="#5b6b7b" stroke-width="1"/>
+  <line x1="100" y1="60" x2="100" y2="150" stroke="#5b6b7b" stroke-width="1"/>
+
+  <!-- three triangular pulses (each = one segment, decelerating to 0 at boundary) -->
+  <path d="M100 150 L160 80 L240 150" fill="none" stroke="#5b8def" stroke-width="2"/>
+  <path d="M340 150 L400 80 L480 150" fill="none" stroke="#5b8def" stroke-width="2"/>
+  <path d="M580 150 L640 80 L720 150" fill="none" stroke="#5b8def" stroke-width="2"/>
+
+  <!-- segment labels -->
+  <text x="170" y="170" text-anchor="middle" font-size="11" fill="#5b6b7b">segment 1</text>
+  <text x="410" y="170" text-anchor="middle" font-size="11" fill="#5b6b7b">segment 2</text>
+  <text x="650" y="170" text-anchor="middle" font-size="11" fill="#5b6b7b">segment 3</text>
+
+  <!-- wait gaps -->
+  <rect x="240" y="140" width="100" height="20" fill="#fdecea" stroke="#e0736b" stroke-dasharray="3 3"/>
+  <text x="290" y="155" text-anchor="middle" font-size="11" fill="#e0736b">wait</text>
+  <rect x="480" y="140" width="100" height="20" fill="#fdecea" stroke="#e0736b" stroke-dasharray="3 3"/>
+  <text x="530" y="155" text-anchor="middle" font-size="11" fill="#e0736b">wait</text>
+
+  <!-- CNCADoStep markers -->
+  <text x="12" y="222" font-weight="bold">CNCADoStep</text>
+  <line x1="100" y1="240" x2="780" y2="240" stroke="#5b6b7b" stroke-width="1"/>
+  <!-- pulses on writes -->
+  <line x1="290" y1="240" x2="290" y2="210" stroke="#e0736b" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="290" y="205" text-anchor="middle" font-size="11" fill="#e0736b">write = 1</text>
+  <line x1="530" y1="240" x2="530" y2="210" stroke="#e0736b" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="530" y="205" text-anchor="middle" font-size="11" fill="#e0736b">write = 1</text>
+
+  <!-- caption -->
+  <text x="410" y="268" text-anchor="middle" font-size="11" fill="#5b6b7b">CNCADoStep self-clears once the controller releases the next segment; the engine then halts again at that segment's end.</text>
+</svg>

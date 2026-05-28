@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="320" viewBox="0 0 600 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="300" y="22" text-anchor="middle" font-size="15" font-weight="bold">AOutShifts mapping (monitoring mode)</text>
+
+  <!-- axes -->
+  <line x1="60" y1="180" x2="540" y2="180" stroke="#5b6b7b" stroke-width="1"/>
+  <line x1="300" y1="50" x2="300" y2="300" stroke="#5b6b7b" stroke-width="1"/>
+  <text x="530" y="200" text-anchor="end">parameter (internal units)</text>
+  <text x="308" y="60" text-anchor="start">analog output (mV)</text>
+
+  <!-- y ticks at +/-5000 -->
+  <text x="290" y="184" text-anchor="end">0</text>
+  <line x1="296" y1="100" x2="304" y2="100" stroke="#5b6b7b"/>
+  <text x="290" y="104" text-anchor="end" font-size="11">+5000</text>
+  <line x1="296" y1="260" x2="304" y2="260" stroke="#5b6b7b"/>
+  <text x="290" y="264" text-anchor="end" font-size="11">-5000</text>
+
+  <!-- x ticks at +/-1000 -->
+  <line x1="200" y1="176" x2="200" y2="184" stroke="#5b6b7b"/>
+  <text x="200" y="200" text-anchor="middle" font-size="11">-1000</text>
+  <line x1="400" y1="176" x2="400" y2="184" stroke="#5b6b7b"/>
+  <text x="400" y="200" text-anchor="middle" font-size="11">+1000</text>
+
+  <!-- shift = 0 (1x): y = u, from -1000 to +1000 mV -->
+  <line x1="200" y1="260" x2="400" y2="100" stroke="#5b8def" stroke-width="2"/>
+  <text x="420" y="105" font-size="11" fill="#3a6bd6">AOutShifts = 0 (&#215;1)</text>
+
+  <!-- shift = +2 (4x): y = 4u; saturates -->
+  <line x1="240" y1="260" x2="360" y2="100" stroke="#5b8def" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="370" y="80" font-size="11" fill="#3a6bd6">AOutShifts = +2 (&#215;4) &#8212; steeper</text>
+
+  <!-- shift = -1 (0.5x): y = u/2; gentler -->
+  <line x1="160" y1="220" x2="440" y2="140" stroke="#e0736b" stroke-width="2"/>
+  <text x="450" y="143" font-size="11" fill="#c0392b">AOutShifts = -1 (&#247;2)</text>
+
+  <!-- formula -->
+  <text x="300" y="295" text-anchor="middle" font-size="12">analog output [mV] = parameter &#215; 2^AOutShifts + AOutOffset</text>
+  <text x="300" y="312" text-anchor="middle" font-size="11" fill="#5b6b7b">DAC clamps to &#177;11905 mV. Replaced by AOutGain (float) on Central-i v5.</text>
+</svg>

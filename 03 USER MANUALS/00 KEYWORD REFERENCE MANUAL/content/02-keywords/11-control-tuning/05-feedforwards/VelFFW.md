@@ -78,6 +78,14 @@ AVelFFW[1]=65536     ; set velocity feedforward gain (first array element)
 AVelFFW[1]           ; read back the gain
 ```
 
+### Worked example: contribution at a constant slew
+
+With `VelFFW = 65536` (a unit-effective gain after the internal 1/2^16 scaling) and a reference velocity `dPosRef = 50000` (user velocity units), the velocity feedforward term contributed to the current reference is:
+
+`VelTerm = 50000 x 65536 x (1 / 65536) = 50000` (current units)
+
+The same `VelTerm` is added whether the position loop has any error or not, so the steady current required to sustain the slew is supplied by the feedforward and the velocity loop only acts on the residual.
+
 ## See also
 
 - [AccFFW](AccFFW.md) — acceleration feedforward gain (summed with the velocity term)

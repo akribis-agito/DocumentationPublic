@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="280" viewBox="0 0 820 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="410" y="22" text-anchor="middle" font-weight="bold">BuffEdgeMode: how the spline is constrained at the first and last waypoint</text>
+
+  <!-- Three subplots side by side: natural (1), specified slope (0), continuous repeat (2) -->
+
+  <!-- 1) Natural (zero curvature at edges) -->
+  <text x="160" y="58" text-anchor="middle" font-weight="bold">1 = natural (default)</text>
+  <line x1="60" y1="220" x2="260" y2="220" stroke="#5b6b7b" stroke-width="1"/>
+  <line x1="60" y1="80" x2="60" y2="220" stroke="#5b6b7b" stroke-width="1"/>
+  <!-- gentle S curve from (60,180) to (260,100) starting and ending nearly flat -->
+  <path d="M60 180 C 100 180 150 110 160 110 S 220 100 260 100" fill="none" stroke="#5b8def" stroke-width="2.2"/>
+  <circle cx="60" cy="180" r="4" fill="#e0736b"/>
+  <circle cx="260" cy="100" r="4" fill="#e0736b"/>
+  <text x="160" y="244" text-anchor="middle" font-size="11" fill="#5b6b7b">edge derivatives relaxed</text>
+
+  <!-- 2) Specified slope (clamped) -->
+  <text x="410" y="58" text-anchor="middle" font-weight="bold">0 = specified slope</text>
+  <line x1="310" y1="220" x2="510" y2="220" stroke="#5b6b7b" stroke-width="1"/>
+  <line x1="310" y1="80" x2="310" y2="220" stroke="#5b6b7b" stroke-width="1"/>
+  <!-- enters with non-zero slope and leaves with non-zero slope -->
+  <path d="M310 200 C 340 160 380 130 410 125 S 490 110 510 90" fill="none" stroke="#5b8def" stroke-width="2.2"/>
+  <circle cx="310" cy="200" r="4" fill="#e0736b"/>
+  <circle cx="510" cy="90" r="4" fill="#e0736b"/>
+  <!-- slope tangents -->
+  <line x1="310" y1="200" x2="350" y2="170" stroke="#e0736b" stroke-width="1.4" stroke-dasharray="3 2"/>
+  <line x1="510" y1="90" x2="470" y2="120" stroke="#e0736b" stroke-width="1.4" stroke-dasharray="3 2"/>
+  <text x="410" y="244" text-anchor="middle" font-size="11" fill="#5b6b7b">edge velocity = BuffSlopes</text>
+
+  <!-- 3) Multi-cycle (continuous repeat) -->
+  <text x="660" y="58" text-anchor="middle" font-weight="bold">2 = continuous repeat</text>
+  <line x1="560" y1="220" x2="760" y2="220" stroke="#5b6b7b" stroke-width="1"/>
+  <line x1="560" y1="80" x2="560" y2="220" stroke="#5b6b7b" stroke-width="1"/>
+  <!-- a continuous wave-like curve that joins smoothly between repeats -->
+  <path d="M560 150 C 600 100 640 200 660 150 S 720 100 760 150" fill="none" stroke="#5b8def" stroke-width="2.2"/>
+  <!-- next-cycle dashed continuation -->
+  <path d="M760 150 C 780 165 800 130 800 150" fill="none" stroke="#5b8def" stroke-width="1.6" stroke-dasharray="4 3"/>
+  <circle cx="560" cy="150" r="4" fill="#e0736b"/>
+  <circle cx="760" cy="150" r="4" fill="#e0736b"/>
+  <text x="660" y="244" text-anchor="middle" font-size="11" fill="#5b6b7b">edges match mid-cycle slopes</text>
+
+  <!-- caption -->
+  <text x="410" y="272" text-anchor="middle" font-size="11" fill="#5b6b7b">Linear interpolation (BuffSplineMod = 1) has no free edge derivative and ignores this setting.</text>
+</svg>

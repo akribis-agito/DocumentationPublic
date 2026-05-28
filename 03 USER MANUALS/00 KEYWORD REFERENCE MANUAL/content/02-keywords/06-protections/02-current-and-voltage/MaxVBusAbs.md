@@ -43,6 +43,8 @@ On each periodic bus-voltage check the drive compares `VBus` directly with `MaxV
 
 Because no timer is involved, set `MaxVBusAbs` above [MaxVBus](MaxVBus.md) so that the time-windowed limit acts first on normal transients, with `MaxVBusAbs` as the hard backstop.
 
+> **Worked example:** with `MaxVBus = 80000` (80 V), `MaxVBusTime = 200` (ms) and `MaxVBusAbs = 90000` (90 V), a regeneration spike to 82 V is tolerated for up to 200 ms (`ConFlt = 1008` only after that). A spike to 91 V trips immediately on the next bus check with `ConFlt = 1023`, regardless of `MaxVBusTime`.
+
 ## Examples
 
 ```text

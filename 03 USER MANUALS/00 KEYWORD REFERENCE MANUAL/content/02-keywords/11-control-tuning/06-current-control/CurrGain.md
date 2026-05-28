@@ -73,6 +73,14 @@ ACurrGain=15000      ; set current-loop proportional gain
 ACurrGain            ; read back the gain
 ```
 
+### Worked example: q-axis voltage from a current error
+
+With `CurrGain = 15000`, `CurrKi = 0` and an instantaneous q-axis error `IqErr = 200` (current units, with no accumulated integral), the q-axis voltage command produced by the current PI is:
+
+`Vq = (0 + 200) x 15000 x 0.001 = 3000` (voltage units)
+
+If the integral term has built up to, say, `Integral = 500`, the voltage becomes `(500 + 200) x 15000 x 0.001 = 10500`. The same arithmetic with `CurrGain = 0` produces zero voltage from any error and the loop becomes open.
+
 ## See also
 
 - [CurrKi](CurrKi.md) — current-loop integral gain (completes the PI controller)

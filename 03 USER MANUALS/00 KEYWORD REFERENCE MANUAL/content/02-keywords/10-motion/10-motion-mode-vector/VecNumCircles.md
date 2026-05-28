@@ -46,6 +46,12 @@ When the arc move starts, the controller works out the angle to sweep from the s
 
 The path-velocity profile then runs along this extended path exactly as for a single arc: it accelerates, cruises and decelerates over the whole multi-turn length, so the move only slows to a stop after the final revolution. A move still in progress can be ended early with [StopVec](StopVec.md). The maximum is 100 additional revolutions.
 
+![Base arc vs. base arc plus extra full revolutions added by VecNumCircles](vec-numcircles.svg)
+
+### Worked example
+
+A 90° base arc on a 50 mm radius with `VecNumCircles = 2` runs `(π/2 + 2 × 2π) × 50 ≈ 707 mm` of path. At `VecSpeed = 200` mm/s the move (ignoring ramps) takes about 3.5 s; one single velocity profile spans the whole 707 mm and only the trailing ramp brakes back to rest after the final revolution.
+
 ## Examples
 
 ```text

@@ -60,6 +60,21 @@ AShapingDamp[1]=3277      ; damping ratio 0.05
 AShapingOn=1              ; enable input shaping
 ```
 
+### Worked example: impulse timing and amplitudes for a 50 Hz / 0.05 damping mode
+
+For `ShapingFreq[1]` = 50 Hz and `ShapingDamp[1]` = 0.05 (ζ = 0.05):
+
+- Period T = 1 / 50 Hz = 20 ms
+- Impulse positions: 0 ms, T/2 = 10 ms, T = 20 ms
+- K = exp(-0.05 x π / √(1 - 0.05²)) ≈ 0.855
+- 1 + 2K + K² ≈ 3.441
+- A₀ ≈ 1 / 3.441 ≈ 0.291
+- A₁ ≈ 2 x 0.855 / 3.441 ≈ 0.497
+- A₂ ≈ 0.855² / 3.441 ≈ 0.213
+- Sum: A₀ + A₁ + A₂ ≈ 1.001 (rounding); exactly 1 in the controller's fixed-point form.
+
+The shaper therefore adds the original reference (weight 0.291), the same reference delayed by 10 ms (weight 0.497) and again delayed by 20 ms (weight 0.213). A step from 0 to a setpoint reaches the setpoint after 20 ms, but the residual oscillation at 50 Hz is cancelled.
+
 ## See also
 
 - [ShapingFreq](ShapingFreq.md) — resonance frequency / frequencies to suppress

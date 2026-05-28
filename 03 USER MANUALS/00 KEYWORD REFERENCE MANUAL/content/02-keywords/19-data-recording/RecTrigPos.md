@@ -34,6 +34,8 @@ Percentage of RecLength captured before the trigger (pre-trigger data).
 
 `RecTrigPos` defines the percentage of data points, out of [RecLength](RecLength.md), to capture before the trigger condition(s) activate. It is normally used during debugging to allow monitoring of the data leading up to the trigger event. Each array index selects a scope.
 
+![RecTrigPos splits RecLength into a pre-trigger portion (RecTrigPos percent of RecLength) that captures the samples leading up to the trigger, and a post-trigger portion (the remainder) that captures the samples after the trigger fires](rectrigpos-buffer.svg)
+
 | Index | Descriptions                 |
 |-------|------------------------------|
 | 1     | First scope                  |

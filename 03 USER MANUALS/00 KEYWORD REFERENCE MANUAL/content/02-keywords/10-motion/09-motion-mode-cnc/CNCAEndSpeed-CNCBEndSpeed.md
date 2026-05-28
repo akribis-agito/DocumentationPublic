@@ -23,6 +23,8 @@ The controller forces `CNCAEndSpeed` to **0** in cases where the path must come 
 
 The end-of-segment transition (blend versus stop) is selected by [CNCAEndSegMod/CNCBEndSegMod](CNCAEndSegMod-CNCBEndSegMod.md).
 
+![CNC segment chain showing two cornering blends and a final stop driven by CNCAEndSpeed](cnc-endspeed.svg)
+
 ### CNCB note
 
 `CNCBEndSpeed` reports the identical quantity for the independent second CNC group.

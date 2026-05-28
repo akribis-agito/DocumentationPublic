@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="310" viewBox="0 0 720 310" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="360" y="22" text-anchor="middle" font-size="15" font-weight="bold">Emulation output: one quadrature step per EmulRat feedback counts</text>
+
+  <!-- shared time axis baseline -->
+  <line x1="80" y1="280" x2="700" y2="280" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="700" y="297" text-anchor="end" font-size="11" fill="#444">feedback counts</text>
+
+  <!-- count ticks at every 4 -->
+  <g font-size="10" fill="#666">
+    <line x1="80"  y1="276" x2="80"  y2="284" stroke="#5b6b7b"/><text x="80"  y="298" text-anchor="middle">0</text>
+    <line x1="160" y1="276" x2="160" y2="284" stroke="#5b6b7b"/><text x="160" y="298" text-anchor="middle">4</text>
+    <line x1="240" y1="276" x2="240" y2="284" stroke="#5b6b7b"/><text x="240" y="298" text-anchor="middle">8</text>
+    <line x1="320" y1="276" x2="320" y2="284" stroke="#5b6b7b"/><text x="320" y="298" text-anchor="middle">12</text>
+    <line x1="400" y1="276" x2="400" y2="284" stroke="#5b6b7b"/><text x="400" y="298" text-anchor="middle">16</text>
+    <line x1="480" y1="276" x2="480" y2="284" stroke="#5b6b7b"/><text x="480" y="298" text-anchor="middle">20</text>
+    <line x1="560" y1="276" x2="560" y2="284" stroke="#5b6b7b"/><text x="560" y="298" text-anchor="middle">24</text>
+    <line x1="640" y1="276" x2="640" y2="284" stroke="#5b6b7b"/><text x="640" y="298" text-anchor="middle">28</text>
+  </g>
+
+  <!-- channel A (top): quadrature, one full A cycle per 4 counts. Period 4 counts = 80 px. -->
+  <text x="50" y="76" text-anchor="middle" font-weight="bold" fill="#5b8def">A</text>
+  <polyline points="80,90 120,90 120,60 200,60 200,90 280,90 280,60 360,60 360,90 440,90 440,60 520,60 520,90 600,90 600,60 680,60 680,90 700,90"
+            fill="none" stroke="#5b8def" stroke-width="2.2"/>
+
+  <!-- channel B (middle): shifted by 1 count = 20 px (quarter cycle of A) -->
+  <text x="50" y="156" text-anchor="middle" font-weight="bold" fill="#e0736b">B</text>
+  <polyline points="80,170 100,170 100,140 180,140 180,170 260,170 260,140 340,140 340,170 420,170 420,140 500,140 500,170 580,170 580,140 660,140 660,170 700,170"
+            fill="none" stroke="#e0736b" stroke-width="2.2"/>
+
+  <!-- channel Z (bottom): one Z pulse per revolution; here just a short pulse near zero -->
+  <text x="50" y="226" text-anchor="middle" font-weight="bold" fill="#5b6b7b">Z</text>
+  <polyline points="80,240 100,240 100,210 120,210 120,240 700,240"
+            fill="none" stroke="#5b6b7b" stroke-width="2.2"/>
+
+  <!-- annotation: EmulRat = 4 means one quadrature step per 4 counts -->
+  <line x1="80" y1="100" x2="120" y2="100" stroke="#222" stroke-width="1"/>
+  <line x1="80" y1="96" x2="80" y2="104" stroke="#222" stroke-width="1"/>
+  <line x1="120" y1="96" x2="120" y2="104" stroke="#222" stroke-width="1"/>
+  <text x="100" y="115" text-anchor="middle" font-size="10" fill="#222">4 counts</text>
+
+  <text x="360" y="46" text-anchor="middle" font-size="11" fill="#444">Example: EmulRat = 4 &#8594; one A/B quadrature edge per 4 feedback counts (90&#176; on A means 4 feedback counts).</text>
+  <text x="360" y="262" text-anchor="middle" font-size="11" fill="#444">Negative EmulRat keeps the same ratio but swaps A and B, reversing the apparent direction at the downstream device.</text>
+</svg>

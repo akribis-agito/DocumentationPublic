@@ -55,6 +55,10 @@ AdPosRefFilt=450000 ; low-pass the reference velocity at 4500 Hz
 AdPosRefFilt        ; read the reference-velocity filter cutoff
 ```
 
+### Worked example: choosing a cut-off
+
+Suppose the motion profile generates reference-velocity steps with significant content up to a few kHz, and the position loop is operating with a bandwidth around 200 Hz. A cut-off of `dPosRefFilt = 100000` (1000 Hz) leaves the velocity feed-forward following all profile content the position loop can react to while filtering quantisation jitter above 1 kHz. Increasing the cut-off above the bypass threshold (`dPosRefFilt > 819200`, i.e. 8192 Hz) — for example the default `1000000` — leaves the reference velocity unfiltered.
+
 ## See also
 
 - [dPosRef](../../10-motion/01-kinematics-status/dPosRef.md) — reference velocity that this filter smooths

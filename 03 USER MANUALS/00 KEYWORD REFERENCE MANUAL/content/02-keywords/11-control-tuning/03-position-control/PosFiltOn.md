@@ -43,6 +43,8 @@ Enables or bypasses the two position-loop filters.
 
 `PosFiltOn[Index] = 1` enables the corresponding filter; `PosFiltOn[Index] = 0` bypasses it (the signal passes through unchanged). The range is `0` to `1`, default `0` (both filters bypassed).
 
+![The two position-loop filters: post-profiler shapes the reference before the error sum; position-error shapes the error before the position gain](posfilton-signal-points.svg)
+
 ## How it works
 
 Each enabled filter applies the second-order (biquad) response built from its [PosFiltDef](PosFiltDef.md) parameters:

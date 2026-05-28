@@ -51,6 +51,8 @@ $$
 
 Because the shift is on a signed integer, a right shift truncates toward negative infinity. Pick a shift so the parameter's working range maps usefully onto the ±11905 mV output span.
 
+![AOutShifts mapping for shift = 0 (unity), +2 (4x) and -1 (halved)](aoutshifts-transfer.svg)
+
 ## Changes between versions
 
 `AOutShifts` is the v4 mechanism (standalone and Central-i). On **Central-i v5** it is replaced by the floating-point gain [AOutGain](AOutGain.md), which allows any real multiplier instead of only powers of two.

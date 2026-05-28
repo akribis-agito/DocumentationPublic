@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="280" viewBox="0 0 720 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="20" y="22" font-size="14" font-weight="bold">Jerk: 2^Jerk-cycle moving-average filter that smooths the velocity ramp</text>
+
+  <!-- velocity axes -->
+  <line x1="50" y1="200" x2="700" y2="200" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="50" y1="200" x2="50" y2="60" stroke="#5b6b7b" stroke-width="1.2"/>
+  <text x="30" y="80" fill="#5b6b7b" font-size="11">vel</text>
+  <text x="700" y="218" text-anchor="end" fill="#5b6b7b" font-size="11">time (cycles)</text>
+
+  <!-- raw trapezoid (Jerk = 0): step-corner ramps -->
+  <polyline points="50,200 130,90 530,90 610,200" fill="none" stroke="#5b6b7b" stroke-width="1.6" stroke-dasharray="5 3"/>
+  <text x="135" y="84" fill="#5b6b7b" font-size="11">Jerk = 0 (raw trapezoid, sharp corners)</text>
+
+  <!-- smoothed (Jerk > 0): rounded -->
+  <path d="M50,200 C90,200 100,100 130,90 C150,86 510,86 530,90 C560,100 570,200 610,200"
+        fill="none" stroke="#5b8def" stroke-width="2.2"/>
+  <text x="135" y="120" fill="#5b8def" font-size="11">Jerk &gt; 0 (S-curve via boxcar smoothing)</text>
+
+  <!-- window indicator near leading corner -->
+  <line x1="100" y1="225" x2="160" y2="225" stroke="#e0736b" stroke-width="2"/>
+  <text x="130" y="245" text-anchor="middle" fill="#e0736b" font-size="11">N = 2^Jerk cycles</text>
+
+  <!-- end-of-move smoothing tail -->
+  <line x1="580" y1="225" x2="640" y2="225" stroke="#e0736b" stroke-width="2"/>
+  <text x="610" y="245" text-anchor="middle" fill="#e0736b" font-size="11">end-of-move tail</text>
+
+  <text x="370" y="270" text-anchor="middle" fill="#5b6b7b" font-size="11">Move extends by ~N cycles; the controller flushes the tail before clearing the in-motion bits.</text>
+</svg>

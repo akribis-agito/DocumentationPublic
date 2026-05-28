@@ -46,6 +46,9 @@ Unlike most kinematic parameters, `Jerk` **cannot be changed while the axis is i
 
 The profiler always produces a trapezoidal position reference. After the profiler, the controller runs that reference through a **circular-buffer moving-average filter** before it becomes the smoothed reference the loops follow. Each cycle the newest reference is pushed into a history buffer and a running sum is updated; the smoothed output is the sum divided by the window length:
 
+![Jerk boxcar smoothing turns the trapezoid into an S-curve](jerk-boxcar.svg)
+
+
 $$
 posRef_{smooth} = \frac{1}{N}\sum_{i=0}^{N-1} posRef_{k-i} ,\qquad N = 2^{Jerk}
 $$

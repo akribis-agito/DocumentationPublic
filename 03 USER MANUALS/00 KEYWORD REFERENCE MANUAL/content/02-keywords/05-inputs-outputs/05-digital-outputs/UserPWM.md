@@ -40,6 +40,8 @@ The PWM waveform is generated in hardware, not by the control loop. When you wri
 
 A `UserPWM` channel only appears on a pin once that pin's [DOutSelect](DOutSelect.md) is set to the matching UserPWM code; until then the channel runs internally but is not routed out. Because the signal is a hardware function, the [DOutPort](DOutPort.md) / [DOutMode](DOutMode.md) value for that output is irrelevant.
 
+![UserPWM waveform at 25% and 50% duty, sharing the same UserPWMDiv period](userpwm-waveform.svg)
+
 ## Examples
 
 ```text

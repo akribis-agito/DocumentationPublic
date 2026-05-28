@@ -36,7 +36,7 @@ Axis position at which a speed-change-on-the-fly event is triggered.
 
 ## How it works
 
-The crossing test compares `SpeedChgPos` against the **post-shaping position reference**, not the measured feedback. This is the same value that drives the position loop, so the change fires deterministically when the planned trajectory passes `SpeedChgPos`, slightly ahead of where the load physically arrives. With [SpeedChgDir](SpeedChgDir.md) `= 0` the event fires when the reference rises above `SpeedChgPos`; with `= 1` it fires when the reference falls below it. The value is in the same user units as [PosRef](../01-kinematics-status/PosRef.md). See [SpeedChgOn](SpeedChgOn.md) for the full mechanism.
+The crossing test compares `SpeedChgPos` against the **post-shaping position reference**, not the measured feedback. This is the same value that drives the position loop, so the change fires deterministically when the planned trajectory passes `SpeedChgPos`, slightly ahead of where the load physically arrives. With [SpeedChgDir](SpeedChgDir.md) `= 0` the event fires when the reference rises above `SpeedChgPos`; with `= 1` it fires when the reference falls below it. The value is in the same user units as [PosRef](../01-kinematics-status/PosRef.md). See [SpeedChgOn](SpeedChgOn.md) for the full mechanism and the timeline diagram.
 
 ## Examples
 

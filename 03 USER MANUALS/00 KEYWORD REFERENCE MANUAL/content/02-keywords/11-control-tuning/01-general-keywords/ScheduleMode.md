@@ -46,6 +46,8 @@ Each of these is an array of length 5 — one value per gain set. The active set
 
 Once per scheduling cycle the controller evaluates the rule selected by `ScheduleMode` and writes the resulting set number into [ScheduleSet](ScheduleSet.md). All scheduled gains then change together to that set; the values are published in [ScheduleGains](ScheduleGains.md) and used by the control loops. Scheduling is evaluated only while the axis is in normal operation.
 
+![Scheduler picks one of five gain sets from the active rule and publishes the resulting gains to the control loops](schedule-mode-selector.svg)
+
 ### Mode value table
 
 | Value | Mode | Set selected by | Configuration keyword(s) |
@@ -79,6 +81,19 @@ AScheduleMode[1]=8         ; schedule gains by motor temperature band
 AScheduleMode[1]=0         ; disable scheduling (always use gain set 1)
 AScheduleMode[1]           ; read the active scheduling mode
 ```
+
+### Worked example: settling by time
+
+Use case: hold a stiff gain set while moving, then switch to a lower-bandwidth set after the move ends so post-motion noise does not amplify.
+
+```text
+APosGain[1]=400; APosGain[2]=400; APosGain[3]=250                   ; high during motion, lower once settled
+AVelGain[1]=1200; AVelGain[2]=1200; AVelGain[3]=900
+AScheduleTime=80                                                    ; 80 ms dwell after motion stops
+AScheduleMode[1]=2                                                  ; optimal settling by time
+```
+
+Behaviour: set 1 is in use whenever the axis is moving; the moment motion stops, set 2 is held for `ScheduleTime` (80 ms) as an intermediate; then the controller switches to set 3 for the stationary period.
 
 ## See also
 

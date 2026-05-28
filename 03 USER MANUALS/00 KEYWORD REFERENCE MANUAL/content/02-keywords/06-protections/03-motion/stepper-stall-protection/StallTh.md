@@ -57,6 +57,8 @@ In words:
 
 `StallTh` is read-only and is reset to `0` when the motor is off.
 
+![Stepper stall detection sketch: a healthy StallVal stays well above the StallTh line; when the rotor loses step, StallVal collapses below StallTh and the stall outcome is taken from StallCfg](stall-detect.svg)
+
 ## Examples
 
 ```text

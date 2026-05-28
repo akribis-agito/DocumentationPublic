@@ -66,4 +66,4 @@ AScheduleMode[1]=5            ; select position-band scheduling
 
 - [ScheduleMode](ScheduleMode.md) — modes 5 and 10 use these thresholds
 - [ScheduleSet](ScheduleSet.md) — band currently selected
-- [ScheduleVel](ScheduleVel.md) / [ScheduleTemp](ScheduleTemp.md) — analogous thresholds for the other range modes
+- [ScheduleVel](ScheduleVel.md) / [ScheduleTemp](ScheduleTemp.md) — analogous thresholds for the other range modes (the band-mapping diagram is on [ScheduleVel](ScheduleVel.md))
