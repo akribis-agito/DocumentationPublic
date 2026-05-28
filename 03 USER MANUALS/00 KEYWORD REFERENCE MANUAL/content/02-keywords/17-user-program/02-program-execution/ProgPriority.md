@@ -1,6 +1,6 @@
 ---
 keyword: ProgPriority
-summary: Sets the scheduling priority of a user program task.
+summary: Sets the scheduling priority (service interval) of a user program thread.
 availability:
   standalone:
   - v4
@@ -28,7 +28,7 @@ overrides: {}
 ---
 # ProgPriority
 
-Sets the scheduling priority of a user program task.
+Sets the scheduling priority (service interval) of a user program thread.
 
 ## Overview
 

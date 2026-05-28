@@ -75,7 +75,7 @@ If `[6]` smoothing is enabled, the search voltage is ramped toward its final val
 
 Methods `3`, `4` and `6` derive the angle from the Hall sensors via the [HallsValue](HallsValue.md) → [HallsAngle](HallsAngle.md) mapping. Methods `3` and `4` start from the Hall angle (a "rough" commutation, [ComtStatus](ComtStatus.md) `300`/`400`) and then refine it: method `3` waits for the encoder index pulse (electrical-angle zero) and method `4` waits for the next Hall transition. Method `6` (Hall-only) uses the Hall angle continuously, optionally smoothed by [HallOnlyFilt](HallOnlyFilt.md). Method `2` reads a previously stored absolute-encoder zero (index `[4]`) and needs no motion.
 
-![image73.emf](../../assets/image73.emf)
+![Hall-start-then-refine commutation: a rough angle from the Hall state lets the axis begin, then the controller refines it to a fine angle at the next index pulse (method 3) or Hall transition (method 4)](hall-encoder-switching.svg)
 
 ## Examples
 

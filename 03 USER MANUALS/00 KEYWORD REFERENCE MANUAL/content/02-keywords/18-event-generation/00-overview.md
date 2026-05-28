@@ -2,6 +2,8 @@
 
 The event-generation feature lets the controller produce digital pulses on a designated output when the feedback position reaches a compare position. It is used for position-synchronized output triggering (for example, firing a camera, marker, or external device at precise positions along a move).
 
+![Event generation: position-compare engine](event-engine.svg)
+
 Configure the generator with these keywords:
 
 - Master switch and mode: [EventOn](EventOn.md), [EventSelect](EventSelect.md), [EventType](EventType.md), [EventAlwaysOn](EventAlwaysOn.md)

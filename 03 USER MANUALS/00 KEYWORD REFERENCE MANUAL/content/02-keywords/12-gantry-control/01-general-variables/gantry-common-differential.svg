@@ -1,42 +1,51 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" font-family="sans-serif" font-size="13">
-  <rect x="0" y="0" width="640" height="360" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="380" viewBox="0 0 720 380" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
+    </marker>
+  </defs>
 
-  <!-- Encoders in -->
-  <rect x="20" y="40" width="120" height="34" fill="#eef3fb" stroke="#3b6ea5"/>
-  <text x="80" y="62" text-anchor="middle">Motor A encoder</text>
-  <rect x="20" y="286" width="120" height="34" fill="#eef3fb" stroke="#3b6ea5"/>
-  <text x="80" y="308" text-anchor="middle">Motor B encoder</text>
+  <!-- Motor feedbacks in -->
+  <rect x="20" y="60" width="130" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="85" y="85" text-anchor="middle">Motor A end</text>
+  <rect x="20" y="280" width="130" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="85" y="305" text-anchor="middle">Motor B end</text>
 
-  <!-- Transform to common / differential -->
-  <rect x="200" y="150" width="150" height="60" fill="#f3f0fa" stroke="#6a4fa5"/>
-  <text x="275" y="174" text-anchor="middle">Transform</text>
-  <text x="275" y="192" text-anchor="middle">mean / difference</text>
+  <!-- Transform -->
+  <rect x="210" y="155" width="160" height="70" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="290" y="183" text-anchor="middle">Transform</text>
+  <text x="290" y="201" text-anchor="middle">mean &amp; difference</text>
+  <text x="290" y="217" text-anchor="middle" fill="#5b6b7b" font-size="11">into two virtual axes</text>
 
-  <line x1="140" y1="57" x2="200" y2="165" stroke="#555"/>
-  <line x1="140" y1="303" x2="200" y2="195" stroke="#555"/>
+  <line x1="150" y1="80" x2="210" y2="170" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="150" y1="300" x2="210" y2="210" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
 
-  <!-- Common-mode loop -->
-  <rect x="400" y="40" width="200" height="44" fill="#eafaef" stroke="#3b8a4f"/>
-  <text x="500" y="60" text-anchor="middle">Common (linear) loop</text>
-  <text x="500" y="77" text-anchor="middle">follows your move command</text>
+  <!-- Common loop -->
+  <rect x="420" y="40" width="200" height="62" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="520" y="64" text-anchor="middle">Common (linear) loop</text>
+  <text x="520" y="82" text-anchor="middle" fill="#5b6b7b" font-size="11">mean &#8212; follows the move</text>
+  <text x="520" y="96" text-anchor="middle" fill="#5b6b7b" font-size="11">command on the master axis</text>
 
-  <!-- Differential-mode loop -->
-  <rect x="400" y="276" width="200" height="44" fill="#fdf0ec" stroke="#a5503b"/>
-  <text x="500" y="296" text-anchor="middle">Differential (yaw) loop</text>
-  <text x="500" y="313" text-anchor="middle">holds beam square (GantryYawRef)</text>
+  <!-- Differential loop -->
+  <rect x="420" y="278" width="200" height="62" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="520" y="302" text-anchor="middle">Differential (yaw) loop</text>
+  <text x="520" y="320" text-anchor="middle" fill="#5b6b7b" font-size="11">difference &#8212; holds the beam</text>
+  <text x="520" y="334" text-anchor="middle" fill="#5b6b7b" font-size="11">square at GantryYawRef</text>
 
-  <line x1="350" y1="168" x2="400" y2="62" stroke="#555"/>
-  <line x1="350" y1="192" x2="400" y2="298" stroke="#555"/>
+  <line x1="370" y1="172" x2="420" y2="80" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="370" y1="208" x2="420" y2="300" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
 
   <!-- Recombine -->
-  <rect x="400" y="150" width="150" height="60" fill="#f3f0fa" stroke="#6a4fa5"/>
-  <text x="475" y="174" text-anchor="middle">Recombine to</text>
-  <text x="475" y="192" text-anchor="middle">motor currents</text>
+  <rect x="420" y="155" width="200" height="70" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="520" y="180" text-anchor="middle">Recombine</text>
+  <text x="520" y="198" text-anchor="middle" fill="#5b6b7b" font-size="11">A current = linear + yaw</text>
+  <text x="520" y="214" text-anchor="middle" fill="#5b6b7b" font-size="11">B current = linear &#8722; yaw</text>
 
-  <line x1="500" y1="84" x2="490" y2="150" stroke="#555"/>
-  <line x1="500" y1="276" x2="490" y2="210" stroke="#555"/>
+  <line x1="520" y1="102" x2="520" y2="155" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="520" y1="278" x2="520" y2="225" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
 
   <!-- Outputs -->
-  <text x="565" y="140" text-anchor="middle">A = linear + yaw</text>
-  <text x="565" y="232" text-anchor="middle">B = linear - yaw</text>
+  <rect x="660" y="168" width="44" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="682" y="195" text-anchor="middle" font-size="11">to A</text>
+  <line x1="620" y1="190" x2="660" y2="190" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
 </svg>

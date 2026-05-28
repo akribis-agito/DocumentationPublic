@@ -6,6 +6,10 @@ There are multiple ways to control the digital outputs.
 2.  Software function assignment (via DOutMode)
 3.  Manual value assignment (via DOutPort, DOutPortSBit, DOutPortCBit, DOutPortTBit)
 
+![Digital-output control sources feeding the polarity and sink/source stages on the way to the pin](digital-output-overview.svg)
+
+A manual value or a software function sets the output state, which then passes through the polarity (DOutLog) and sink/source (DOutType) stages to the pin. A hardware function selected with DOutSelect drives the pin directly and bypasses those stages.
+
 Digital outputs are represented by bits in a single signal variable (0-based indexing). This applies for DOutPort, DOutLog and DOutType.
 
 | Bit \# | Corresponds to |

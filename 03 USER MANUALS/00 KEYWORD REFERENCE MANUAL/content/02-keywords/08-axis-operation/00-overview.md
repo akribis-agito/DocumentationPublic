@@ -2,6 +2,10 @@
 
 Depending on application, user can operate in different control mode (e.g. position control mode for point-to-point motion, current control mode for slave driver application, etc.).
 
+The axis is first enabled or disabled with [MotorOn](01-general-keywords/MotorOn.md); once enabled, [OperationMode](01-general-keywords/OperationMode.md) selects which control loops are active.
+
+![Axis operation model: enabled/disabled and the four operation modes](axis-operation-model.svg)
+
 User can choose to switch the control mode (OperationMode)
 
 1.  manually
@@ -29,7 +33,7 @@ The following table shows the summary of axis operation keywords.
 | 5   | General keywords        | [OpenLoopVolt](01-general-keywords/OpenLoopVolt.md)   | Voltage reference applied to the modulation in voltage open-loop mode. |
 | 6   | General keywords        | [CanMotorOn](01-general-keywords/CanMotorOn.md)       | Command that attempts to enable the motor after running pre-checks. |
 | 7   | General keywords        | [CanMotorOnRes](01-general-keywords/CanMotorOnRes.md) | Result code from the last CanMotorOn enable attempt. |
-| 8   | Position operation mode | [BeginOnToPos](02-position-operation-mode/BeginOnToPos.md)   | Enables the motor and switches to position mode in one step. |
+| 8   | Position operation mode | [BeginOnToPos](02-position-operation-mode/BeginOnToPos.md)   | One-time flag to run a point-to-point move on entering position mode. |
 | 9   | Position operation mode | [GoToPosMode](02-position-operation-mode/GoToPosMode.md)     | Gracefully switches the axis into position control mode. |
 | 10  | Position operation mode | [ModeSwitchPos](02-position-operation-mode/ModeSwitchPos.md) | Position thresholds for automatic entry to / exit from position mode. |
 | 11  | Position operation mode | [PosPosFlag](02-position-operation-mode/PosPosFlag.md)       | Reports whether the axis is within the in-position threshold. |

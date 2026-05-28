@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="350" viewBox="0 0 700 350" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="350" y="24" text-anchor="middle" font-size="15" font-weight="bold">Force mode: reference and in-target</text>
+
+  <!-- source -->
+  <rect x="30" y="56" width="160" height="110" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="110" y="80" text-anchor="middle" font-weight="bold">Reference source</text>
+  <text x="110" y="102" text-anchor="middle" font-size="11">ForceCmdSrc selects:</text>
+  <text x="110" y="122" text-anchor="middle" font-size="11">0 analog input</text>
+  <text x="110" y="140" text-anchor="middle" font-size="11">1 / 2 user table</text>
+
+  <!-- generation -->
+  <rect x="240" y="56" width="180" height="110" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="330" y="80" text-anchor="middle" font-weight="bold">ForceRef generation</text>
+  <text x="330" y="102" text-anchor="middle" font-size="11">ramp at ForceCmdSlope</text>
+  <text x="330" y="120" text-anchor="middle" font-size="11">to ForceCmdVal entry,</text>
+  <text x="330" y="138" text-anchor="middle" font-size="11">hold for ForceCmdHTime,</text>
+  <text x="330" y="156" text-anchor="middle" font-size="11">then reference filter</text>
+
+  <!-- force loop -->
+  <rect x="470" y="74" width="200" height="74" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="570" y="100" text-anchor="middle" font-weight="bold">Force loop</text>
+  <text x="570" y="122" text-anchor="middle" font-size="11">drives Force toward ForceRef</text>
+  <text x="570" y="138" text-anchor="middle" font-size="11">ForceErr = ForceRef &#8722; Force</text>
+
+  <path d="M190,111 L238,111" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M420,111 L468,111" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- in-target -->
+  <rect x="240" y="222" width="360" height="100" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="420" y="246" text-anchor="middle" font-weight="bold">In-target detection (ForceInTStat)</text>
+  <text x="420" y="268" text-anchor="middle" font-size="11">2 ramping &#8594; 3 settling (|ForceErr| within ForceInTTol)</text>
+  <text x="420" y="286" text-anchor="middle" font-size="11">&#8594; 4 settled once held for ForceInTTime</text>
+  <text x="420" y="304" text-anchor="middle" font-size="11">timings recorded in ForceSamples</text>
+
+  <path d="M570,148 L570,200 L420,200 L420,220" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="420" y="194" text-anchor="middle" font-size="10">force error tracked each cycle</text>
+</svg>

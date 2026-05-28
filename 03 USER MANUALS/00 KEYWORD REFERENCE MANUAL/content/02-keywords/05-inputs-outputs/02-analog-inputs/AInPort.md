@@ -46,9 +46,7 @@ The index is fixed to the physical input — `AInPort[1]` is always analog input
 
 ## How it works
 
-![Analog-input conditioning chain](conditioning-chain.svg)
-
-Each control cycle, the ADC reading for one input is taken into a floating-point working value, stored unchanged in the raw entry (`AInPort[5..8]`), then run through the conditioning chain and stored in the processed entry (`AInPort[1..4]`). The raw count is scaled to millivolts by a fixed hardware factor (e.g. ±12500 mV over ±32768 counts), so both halves of `AInPort` are in mV.
+Each control cycle, the ADC reading for one input is taken into a working value, stored unchanged in the raw entry (`AInPort[5]`–`AInPort[8]`), then run through the conditioning chain and stored in the processed entry (`AInPort[1]`–`AInPort[4]`). See the [analog-input signal path](00-overview.md) for the conditioning stages. The raw count is scaled to millivolts by a fixed hardware factor (e.g. ±12500 mV over ±32768 counts), so both halves of `AInPort` are in mV.
 
 The four inputs are not all conditioned on the same cycle: one input is processed per sample slot, so each input is refreshed at the analog-input update rate rather than every single cycle.
 
@@ -63,5 +61,5 @@ AAInPort[5]         ; raw (post-ADC) reading of analog input 1
 
 ## See also
 
-- [AInFilt](AInFilt.md), [AInOffset](AInOffset.md), [AInDB](AInDB.md), [AInGain](AInGain.md), [AInMuteRange](AInMuteRange.md) — the processing chain that produces `AInPort[1..4]`
+- [AInFilt](AInFilt.md), [AInOffset](AInOffset.md), [AInDB](AInDB.md), [AInGain](AInGain.md), [AInMuteRange](AInMuteRange.md) — the processing chain that produces `AInPort[1]`–`AInPort[4]`
 - [AInMode](AInMode.md) — assign a function to an analog input

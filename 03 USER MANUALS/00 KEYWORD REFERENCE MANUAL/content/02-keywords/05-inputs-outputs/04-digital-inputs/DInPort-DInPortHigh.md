@@ -18,13 +18,14 @@ Bit-packed state of the digital inputs after debounce and logic inversion.
 
 Every control cycle the debounced input word(s) are read from hardware and the [DInLog](DInLog-DInLogHigh.md) inversion mask is XORed in before the result is stored, so what you read already reflects both the debounce and the polarity setting:
 
-```text
-DInPortPrev = DInPort;                       ; keep last value for edge detection
-DInPort     = (raw low word | raw high word) ^ DInLog;
-DInPortHigh = (raw extended word)            ^ DInLogHigh;
-```
+$$
+DInPort = (\text{debounced inputs}) \oplus DInLog
+$$
+$$
+DInPortHigh = (\text{debounced inputs 33–64}) \oplus DInLogHigh
+$$
 
-The previous value is saved first, which is how the function dispatch (see [DInMode](DInMode.md)) detects rising and falling edges. On a Central-i master the words instead come from the remote unit's synchronized I/O mirror, but the XOR-with-`DInLog` step is identical.
+The previous cycle's value is retained before the update, which is how the function dispatch (see [DInMode](DInMode.md)) detects rising and falling edges. On a Central-i master the words instead come from the remote unit's synchronized I/O mirror, but the XOR-with-`DInLog` step is identical.
 
 `DInPort` is updated at the 1 kHz rate; the underlying raw signal is sampled and debounced far faster in hardware (see [DInFilt](DInFilt.md)).
 

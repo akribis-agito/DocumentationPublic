@@ -1,8 +1,10 @@
 # Data recording
 
-Data recording allows user to record time series of any set of parameters in which, the recorded data are stored within the controller, and they can be streamed to the PC afterwards.
+Data recording lets the user record a time series of any set of parameters. The recorded data are stored within the controller and can be streamed to the PC afterwards.
 
-Depending on the products, the number of scope and the maximum data points per scope vary. The following table shows the summary of the recording capability of each product.
+![Data recording: the recorder pipeline](recorder-pipeline.svg)
+
+Depending on the product, the number of scopes and the maximum data points per scope vary. The following table shows the summary of the recording capability of each product.
 
 | Properties | Limits |
 |---|---|
@@ -32,13 +34,13 @@ The common procedure in setting up a scope is as follows.
 
     1.  Parallel (logical) trigger detection
 
-> ![rec-start-flow-combined.drawio.svg](../../02-keywords/19-data-recording/rec-start-flow-combined.drawio.svg)
+> ![Parallel (logical) trigger detection flow from RecStart to end of recording](rec-start-flow-combined.drawio.svg)
 >
-> The logics joining the trigger conditions are configurable by [RecTrigsLogic](../../02-keywords/19-data-recording/RecTrigsLogic.md).
+> The logics joining the trigger conditions are configurable by [RecTrigsLogic](RecTrigsLogic.md).
 
 2.  Serial trigger detection
 
-> ![rec-start-flow-separate.drawio.svg](../../02-keywords/19-data-recording/rec-start-flow-separate.drawio.svg)
+> ![Serial trigger detection flow with triggers checked one after another](rec-start-flow-separate.drawio.svg)
 
 6.  For each trigger, the type of trigger (e.g. rising edge, greater than, etc.) is chosen through [RecTrigTyp](../../02-keywords/19-data-recording/RecTrigTyp.md). For single trigger application, RecTrigsMode, RecTrigsLogic and RecTrigTyp have to be configured to ignore the second and third trigger. Such configuration is supported by PCSuite.
 

@@ -6,7 +6,7 @@ Error mapping corrects systematic position errors by adding a stored correction 
 
 Error mapping works by correcting the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), not the command ([PosRef](../10-motion/01-kinematics-status/PosRef.md)). [PosBeforeMap](PosBeforeMap.md) is the position value from the encoder **before** error-mapping correction, while [Pos](../10-motion/01-kinematics-status/Pos.md) is the position value **after** correction. The difference between them is the correction contributed by the map.
 
-![1D error-mapping correction summed onto the feedback position](error-mapping-sum.drawio.svg)
+![Error-mapping pipeline: raw feedback position is used to look up the MapTable on the position grid, the result is interpolated and ramped into a correction, and the correction is added to the raw position to form the corrected position](error-mapping-pipeline.svg)
 
 The category keywords fit together as follows:
 

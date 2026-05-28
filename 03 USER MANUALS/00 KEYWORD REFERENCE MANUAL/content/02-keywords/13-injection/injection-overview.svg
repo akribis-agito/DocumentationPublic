@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="300" viewBox="0 0 720 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="20" y="26" font-size="15" font-weight="bold">Where the test signal is injected</text>
+  <text x="20" y="44" fill="#555" font-size="11">InjectType selects the waveform and mode; InjectPoint selects the loop reference it acts on</text>
+
+  <!-- waveform generator -->
+  <rect x="20" y="70" width="180" height="90" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="110" y="92" text-anchor="middle" font-weight="bold">Waveform generator</text>
+  <text x="110" y="114" text-anchor="middle" font-size="11">sine / square / pulse /</text>
+  <text x="110" y="130" text-anchor="middle" font-size="11">PRBS / chirp</text>
+  <text x="110" y="150" text-anchor="middle" font-size="11">amplitude per InjectPoint</text>
+
+  <!-- summing node -->
+  <circle cx="320" cy="115" r="20" fill="#fff" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="320" y="121" text-anchor="middle" font-size="18">+</text>
+  <text x="320" y="160" text-anchor="middle" fill="#555" font-size="11">additive: sum onto reference</text>
+  <text x="320" y="176" text-anchor="middle" fill="#555" font-size="11">direct: replace the reference</text>
+
+  <!-- reference points -->
+  <rect x="470" y="62" width="230" height="28" rx="5" fill="#f4f7fb" stroke="#9fb4cc" stroke-width="1.1"/>
+  <text x="585" y="81" text-anchor="middle" font-size="12">Position reference (InjectPoint 2)</text>
+
+  <rect x="470" y="100" width="230" height="28" rx="5" fill="#f4f7fb" stroke="#9fb4cc" stroke-width="1.1"/>
+  <text x="585" y="119" text-anchor="middle" font-size="12">Velocity reference (InjectPoint 1)</text>
+
+  <rect x="470" y="138" width="230" height="28" rx="5" fill="#f4f7fb" stroke="#9fb4cc" stroke-width="1.1"/>
+  <text x="585" y="157" text-anchor="middle" font-size="12">Current reference (InjectPoint 0)</text>
+
+  <rect x="470" y="176" width="230" height="28" rx="5" fill="#f4f7fb" stroke="#9fb4cc" stroke-width="1.1"/>
+  <text x="585" y="195" text-anchor="middle" font-size="12">Force reference (InjectPoint 3)</text>
+
+  <!-- arrows -->
+  <line x1="200" y1="115" x2="298" y2="115" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="340" y1="108" x2="468" y2="78" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="340" y1="114" x2="468" y2="114" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="340" y1="120" x2="468" y2="150" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="340" y1="124" x2="468" y2="188" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+
+  <text x="20" y="244" fill="#555" font-size="11">The generator produces the selected waveform at the amplitude tied to the chosen InjectPoint. It is summed onto</text>
+  <text x="20" y="260" fill="#555" font-size="11">(additive) or substituted for (direct) one loop reference. The applied value is reported by InjectedValue. These</text>
+  <text x="20" y="276" fill="#555" font-size="11">signals are used for frequency-response identification and time-domain (step-response) checks.</text>
+</svg>

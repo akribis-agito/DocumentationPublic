@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="300" viewBox="0 0 720 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
+    </marker>
+  </defs>
+
+  <text x="360" y="26" text-anchor="middle" font-size="15" font-weight="bold">Numeric stack: how an expression is evaluated</text>
+
+  <!-- Push -->
+  <rect x="30" y="100" width="150" height="80" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="105" y="128" text-anchor="middle" font-weight="bold">PushConstant</text>
+  <text x="105" y="148" text-anchor="middle" font-weight="bold">PushParam</text>
+  <text x="105" y="168" text-anchor="middle" font-size="11">place operands</text>
+
+  <!-- Stack -->
+  <rect x="250" y="70" width="150" height="140" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="325" y="92" text-anchor="middle" font-weight="bold">Numeric stack</text>
+  <rect x="270" y="104" width="110" height="26" fill="#fff" stroke="#999"/>
+  <text x="325" y="121" text-anchor="middle" font-size="11">top operand</text>
+  <rect x="270" y="130" width="110" height="26" fill="#fff" stroke="#999"/>
+  <text x="325" y="147" text-anchor="middle" font-size="11">next operand</text>
+  <rect x="270" y="156" width="110" height="26" fill="#fff" stroke="#999"/>
+  <text x="325" y="173" text-anchor="middle" font-size="11">...</text>
+  <text x="325" y="200" text-anchor="middle" font-size="10.5" fill="#777">per thread</text>
+
+  <!-- Operate -->
+  <rect x="470" y="100" width="150" height="80" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="545" y="124" text-anchor="middle" font-weight="bold">Math</text>
+  <text x="545" y="144" text-anchor="middle" font-weight="bold">Compare</text>
+  <text x="545" y="164" text-anchor="middle" font-size="11">pop, combine, push result</text>
+
+  <!-- Pop -->
+  <rect x="285" y="240" width="150" height="46" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="360" y="263" text-anchor="middle" font-weight="bold">PopParam</text>
+  <text x="360" y="279" text-anchor="middle" font-size="11">store result back</text>
+
+  <!-- arrows -->
+  <path d="M180,140 L246,140" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M404,140 L466,140" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M520,180 C500,215 420,215 380,238" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M320,238 C300,215 320,200 325,184" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+</svg>

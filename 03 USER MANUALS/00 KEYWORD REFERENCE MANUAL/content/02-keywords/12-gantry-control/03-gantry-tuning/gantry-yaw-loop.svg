@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" viewBox="0 0 760 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
+    </marker>
+  </defs>
+
+  <!-- Reference -->
+  <rect x="15" y="120" width="110" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="70" y="140" text-anchor="middle" font-size="11">GantryYawRef</text>
+  <text x="70" y="156" text-anchor="middle" fill="#5b6b7b" font-size="11">yaw target</text>
+
+  <!-- Position loop -->
+  <rect x="170" y="110" width="150" height="64" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="245" y="132" text-anchor="middle">Yaw position loop</text>
+  <text x="245" y="149" text-anchor="middle" fill="#5b6b7b" font-size="11">GantryPosGain</text>
+  <text x="245" y="164" text-anchor="middle" fill="#5b6b7b" font-size="11">GantryPosKi</text>
+
+  <!-- Velocity loop -->
+  <rect x="370" y="110" width="150" height="64" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="445" y="132" text-anchor="middle">Yaw velocity loop</text>
+  <text x="445" y="149" text-anchor="middle" fill="#5b6b7b" font-size="11">GantryVelGain</text>
+  <text x="445" y="164" text-anchor="middle" fill="#5b6b7b" font-size="11">GantryVelKi</text>
+
+  <!-- Feedforwards -->
+  <rect x="370" y="20" width="150" height="60" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="445" y="44" text-anchor="middle" font-size="12">Feedforwards</text>
+  <text x="445" y="60" text-anchor="middle" fill="#5b6b7b" font-size="11">GantryVelFFW</text>
+  <text x="445" y="74" text-anchor="middle" fill="#5b6b7b" font-size="11">GantryAccFFW</text>
+
+  <!-- Output -->
+  <rect x="575" y="110" width="170" height="64" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="660" y="138" text-anchor="middle">Differential current</text>
+  <text x="660" y="156" text-anchor="middle" fill="#5b6b7b" font-size="11">GantryCurrRef (yaw axis)</text>
+
+  <!-- Feedback -->
+  <rect x="300" y="230" width="290" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="445" y="250" text-anchor="middle" font-size="11">Yaw feedback: GantryFdbk (difference)</text>
+  <text x="445" y="266" text-anchor="middle" fill="#5b6b7b" font-size="11">velocity GantryVel</text>
+
+  <line x1="125" y1="142" x2="170" y2="142" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="320" y1="142" x2="370" y2="142" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="520" y1="142" x2="575" y2="142" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="445" y1="80" x2="445" y2="110" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- feedback path -->
+  <line x1="445" y1="174" x2="445" y2="230" stroke="#5b6b7b" stroke-width="1.2"/>
+  <line x1="300" y1="252" x2="245" y2="252" stroke="#5b6b7b" stroke-width="1.2"/>
+  <line x1="245" y1="252" x2="245" y2="174" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+</svg>

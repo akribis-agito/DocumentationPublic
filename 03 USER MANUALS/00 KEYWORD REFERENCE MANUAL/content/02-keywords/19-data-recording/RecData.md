@@ -7,6 +7,8 @@ Array holding the metadata and raw values of the latest recording.
 
 ## Overview
 
+> **Note:** `RecData` does not appear as a controller keyword in the firmware consulted for this reference — only the per-scope [RecDataA/RecDataB](RecDataA-RecDataB.md) variants are available on the controller. This page is retained for the legacy/single-buffer name; confirm availability against the current firmware before relying on `RecData` directly.
+
 `RecData` is an array that holds all the information pertaining to the latest recording. This data is best viewed as a graph using Agito's PC Suite. The information here is mainly useful for a user that wants to write their own software to analyze the data.
 
 Use [RecUpload](RecUpload.md) to receive a comma-delimited list of the values in `RecData`. Note that `RecUpload` does not only upload the values as they are but also converts them, where needed, to values that are useful to the user. Some of the conversions use internal ratios, so the user cannot repeat them.

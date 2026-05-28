@@ -51,7 +51,7 @@ The first 80 values returned are the metadata. The subsequent values (81<sup>st<
 
 ## Examples
 
-![image77.png](../../assets/image77.png)
+![Example RecUpload console output: the metadata block followed by the recorded data values](../../assets/image77.png)
 
 In the example, APosRef and AVel\[1\] are recorded. After the first 80 metadata values, the recorded data can be extracted as shown.
 

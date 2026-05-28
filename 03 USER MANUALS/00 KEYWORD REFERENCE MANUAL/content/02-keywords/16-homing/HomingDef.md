@@ -1,6 +1,6 @@
 ---
 keyword: HomingDef
-summary: Array defining up to 15 homing steps, each an instruction plus its parameters.
+summary: Array defining up to 20 homing steps, each an instruction plus its parameters.
 availability:
   standalone:
   - v4

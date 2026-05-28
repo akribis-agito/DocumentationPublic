@@ -36,7 +36,7 @@ Assigns a control function to each analog input, with per-axis targeting.
 
 ## How it works
 
-When `AInMode` is written, every input is re-parsed and an internal routing table is rebuilt. Each function holds a reference to the conditioned reading ([AInPort](AInPort.md)[1..4]) and the raw reading ([AInPort](AInPort.md)[5..8]) of the input assigned to it, plus a defined/undefined flag. Functions that are not assigned read a constant zero, so an unconfigured function reads `0` rather than stale data. The table is updated atomically so a control cycle never sees a half-updated routing.
+When `AInMode` is written, every input is re-parsed and an internal routing table is rebuilt. Each function holds a reference to the conditioned reading ([AInPort](AInPort.md)`[1]`–`[4]`) and the raw reading ([AInPort](AInPort.md)`[5]`–`[8]`) of the input assigned to it, plus a defined/undefined flag. Functions that are not assigned read a constant zero, so an unconfigured function reads `0` rather than stale data. The table is updated atomically so a control cycle never sees a half-updated routing.
 
 The **lower 16 bits** select the function (valid range 0–10):
 
@@ -64,7 +64,7 @@ The **upper 16 bits** select which axes consume the function — each bit is one
 
 If the upper 16 bits are **all zero**, the function is assigned to axis A — preserved for backward compatibility.
 
-> Note: position feedback (function 10) uses the **raw** reading ([AInPort](AInPort.md)[5..8]), not the conditioned one; the filter/offset/gain stages do not apply to it.
+> Note: position feedback (function 10) uses the **raw** reading ([AInPort](AInPort.md)`[5]`–`[8]`), not the conditioned one; the filter/offset/gain stages do not apply to it.
 
 ## Examples
 

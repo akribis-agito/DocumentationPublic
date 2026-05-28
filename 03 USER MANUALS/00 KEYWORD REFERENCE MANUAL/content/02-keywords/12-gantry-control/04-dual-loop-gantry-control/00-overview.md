@@ -2,6 +2,8 @@
 
 In dual-loop gantry control the controller closes the linear position loop on a separate load-side feedback rather than on the two main motor encoders. The load feedback is selected by the [GantryFdbkSrc](../02-gantry-kinematic-feedback/GantryFdbkSrc.md) pointer, while the two main motor encoders are kept for the inner velocity loop and the yaw (differential) loop.
 
+![Dual-loop gantry feedback arrangement: load feedback for the linear loop, motor encoders for the inner velocity and yaw loops](gantry-dual-loop.svg)
+
 In the table below the feedback selected by [GantryFdbkSrc](../02-gantry-kinematic-feedback/GantryFdbkSrc.md) is denoted "encoder C". The table compares how each feedback and velocity term is sourced under the three control structures.
 
 | Feedback keywords | Default control | Dual-loop control | Pseudo dual-loop control |

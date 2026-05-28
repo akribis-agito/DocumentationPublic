@@ -1,5 +1,7 @@
 # Arrays
 
+![General-purpose arrays: the user program and host read and write two families of flash-saved arrays. The GenData family (GenData, GenDataF, GenDataD, GenDataLL) is non-axis free scratch storage recommended for user programs and debugging; the UserParam family (UserParam, UserParamF, UserParamD, UserParamLL) is per-axis and feature-related, with some entries reserved internally, so it should be avoided for user programs](arrays-overview.svg)
+
 General arrays of various data types (GenData, GenDataD, GenDataF and GenDataLL) can be written and read by the user. Normally, they are not linked to any feature in the controller. Therefore, they can be used for
 
 1.  User program (as program variables)

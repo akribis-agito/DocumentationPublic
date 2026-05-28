@@ -2,7 +2,7 @@
 
 This section describes specific keywords for position operation mode.
 
-User can enter position operation mode by OperationMode assignment,
+User can enter position operation mode by
 
 1.  [OperationMode](../../../02-keywords/08-axis-operation/01-general-keywords/OperationMode.md) keyword assignment,
 
@@ -11,6 +11,8 @@ User can enter position operation mode by OperationMode assignment,
 3.  condition assignment, or
 
 4.  digital input (velocity operation mode to position operation mode, as defined by [DInMode](../../../02-keywords/05-inputs-outputs/04-digital-inputs/DInMode.md))
+
+![Entry into position mode, the PosPos conditional switch, and the optional entry move](position-mode-entry.svg)
 
 For **condition assignment**, only feedback position (Pos) threshold is supported for entry from current or force operation mode. The related keywords are PosPosFlag and PosPosTh. Position operation mode is also entered once axis reaches the end of timing table for current or force command.
 

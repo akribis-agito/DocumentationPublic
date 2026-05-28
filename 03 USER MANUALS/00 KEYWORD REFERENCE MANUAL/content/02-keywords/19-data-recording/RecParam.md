@@ -7,6 +7,8 @@ Array of complex CAN codes selecting the parameters to record.
 
 ## Overview
 
+> **Note:** `RecParam` does not appear as a controller keyword in the firmware consulted for this reference — only the per-scope [RecParamA/RecParamB](RecParamA-RecParamB.md) variants are available on the controller. This page is retained for the legacy/single-buffer name; confirm availability against the current firmware before relying on `RecParam` directly.
+
 `RecParam` is an array that holds the [complex CAN codes](../../01-keyword-usage-and-syntax/complex-can-code.md) of the parameters (channels) to record. It can hold up to 20 parameters. Recording walks the array in order and captures every entry up to (but not including) the first zero, so a zero entry terminates the list. For per-scope selection on products with separate scope buffers, see [RecParamA/RecParamB](RecParamA-RecParamB.md).
 
 ## How it works

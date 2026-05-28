@@ -60,7 +60,7 @@ The packet header stores the information in bit-field described below.
 
 ## Examples
 
-![image78.png](../../assets/image78.png)
+![Example RecUploadNext console output: successive packets, each starting with a header value](../../assets/image78.png)
 
 In the example, only 8 data points per parameter (2 parameters in total) are captured in the first scope. Compared to RecUpload, RecUploadNext split the metadata and data into successive chunks.
 

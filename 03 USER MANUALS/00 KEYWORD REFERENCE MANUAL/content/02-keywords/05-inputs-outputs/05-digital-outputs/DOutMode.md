@@ -70,7 +70,7 @@ The function code maps to a controller status as follows:
 | 18 | Reverse limit switch (RLS) active | `LimitsStat` RLS bit set |
 | 19 | Forward limit switch (FLS) active | `LimitsStat` FLS bit set |
 | 20 | Homing done | [HomingStat](../../16-homing/HomingStat.md) = finished-successfully |
-| 21 | Force-in-target status | `ForceInTrgtStat` = target-reached |
+| 21 | Force-in-target status | [ForceInTStat](../../08-axis-operation/04-force-operation-mode/ForceInTStat.md) = target-reached |
 
 ¹ Valid only for motion modes that use the built-in profiler (e.g. indirect Pulse/Direction does; direct Pulse/Direction does not).
 

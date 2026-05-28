@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="340" viewBox="0 0 720 340" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
+    </marker>
+  </defs>
+
+  <text x="360" y="26" text-anchor="middle" font-size="15" font-weight="bold">Data recording: the recorder pipeline</text>
+
+  <!-- pipeline blocks -->
+  <rect x="20" y="60" width="130" height="70" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="85" y="86" text-anchor="middle" font-weight="bold">Select params</text>
+  <text x="85" y="104" text-anchor="middle" font-size="11">RecParamA /</text>
+  <text x="85" y="120" text-anchor="middle" font-size="11">RecParamB</text>
+
+  <rect x="180" y="60" width="130" height="70" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="245" y="86" text-anchor="middle" font-weight="bold">Sample</text>
+  <text x="245" y="104" text-anchor="middle" font-size="11">down-sampled</text>
+  <text x="245" y="120" text-anchor="middle" font-size="11">by RecGap</text>
+
+  <rect x="340" y="60" width="130" height="70" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="405" y="86" text-anchor="middle" font-weight="bold">Buffer</text>
+  <text x="405" y="104" text-anchor="middle" font-size="11">RecLength points</text>
+  <text x="405" y="120" text-anchor="middle" font-size="11">per param</text>
+
+  <rect x="500" y="60" width="130" height="70" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="565" y="86" text-anchor="middle" font-weight="bold">Trigger</text>
+  <text x="565" y="104" text-anchor="middle" font-size="11">RecStart, then</text>
+  <text x="565" y="120" text-anchor="middle" font-size="11">trigger condition</text>
+
+  <rect x="500" y="180" width="130" height="70" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="565" y="206" text-anchor="middle" font-weight="bold">Upload</text>
+  <text x="565" y="224" text-anchor="middle" font-size="11">when RecStat = 4,</text>
+  <text x="565" y="240" text-anchor="middle" font-size="11">RecUpload to host</text>
+
+  <!-- arrows -->
+  <path d="M150,95 L176,95" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M310,95 L336,95" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M470,95 L496,95" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M565,130 L565,176" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- separate logger -->
+  <line x1="20" y1="285" x2="700" y2="285" stroke="#ccc" stroke-width="1" stroke-dasharray="4,4"/>
+  <text x="20" y="305" font-size="11" fill="#777">Separate from the recorder:</text>
+  <rect x="180" y="290" width="360" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="360" y="315" text-anchor="middle" font-size="11">Logger continuously logs selected parameters (LoggerOn, LoggerParams, LoggerUpload)</text>
+</svg>

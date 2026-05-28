@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="350" viewBox="0 0 720 350" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="20" y="26" font-size="15" font-weight="bold">The status and fault model</text>
+
+  <!-- controller cycle -->
+  <rect x="20" y="50" width="170" height="120" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="105" y="74" text-anchor="middle" font-weight="bold">Controller cycle</text>
+  <text x="105" y="98" text-anchor="middle">monitors current, voltage,</text>
+  <text x="105" y="116" text-anchor="middle">error, temperature,</text>
+  <text x="105" y="134" text-anchor="middle">limits and switches</text>
+  <text x="105" y="156" text-anchor="middle" fill="#555" font-size="11">every cycle</text>
+
+  <!-- normal status path -->
+  <rect x="270" y="50" width="180" height="68" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="360" y="74" text-anchor="middle" font-weight="bold">StatReg</text>
+  <text x="360" y="94" text-anchor="middle">per-cycle status bits</text>
+  <text x="360" y="110" text-anchor="middle" fill="#555" font-size="11">warnings, limits, saturations</text>
+
+  <!-- fault detected -->
+  <rect x="270" y="150" width="180" height="56" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="360" y="174" text-anchor="middle" font-weight="bold">Disabling fault detected</text>
+  <text x="360" y="194" text-anchor="middle" fill="#555" font-size="11">a limit is exceeded</text>
+
+  <!-- four atomic actions -->
+  <rect x="510" y="40" width="190" height="44" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="605" y="58" text-anchor="middle" font-weight="bold">Motor off</text>
+  <text x="605" y="76" text-anchor="middle" font-size="11">MotorReason = controller fault</text>
+
+  <rect x="510" y="96" width="190" height="44" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="605" y="114" text-anchor="middle" font-weight="bold">Fault code set</text>
+  <text x="605" y="132" text-anchor="middle" font-size="11">ConFlt = code (1001 and up)</text>
+
+  <rect x="510" y="152" width="190" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="605" y="170" text-anchor="middle" font-weight="bold">Snapshot captured</text>
+  <text x="605" y="188" text-anchor="middle" font-size="11">ConFltSnapVal frozen</text>
+
+  <rect x="510" y="208" width="190" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="605" y="226" text-anchor="middle" font-weight="bold">Logged</text>
+  <text x="605" y="244" text-anchor="middle" font-size="11">ErrLog entry + time</text>
+
+  <!-- arrows -->
+  <line x1="190" y1="90" x2="268" y2="84" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="190" y1="130" x2="268" y2="172" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="450" y1="172" x2="508" y2="62" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="450" y1="176" x2="508" y2="118" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="450" y1="180" x2="508" y2="174" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="450" y1="184" x2="508" y2="230" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+
+  <text x="466" y="150" text-anchor="middle" fill="#555" font-size="11">together,</text>
+  <text x="466" y="164" text-anchor="middle" fill="#555" font-size="11">in one step</text>
+
+  <text x="20" y="296" fill="#555" font-size="11">Each cycle the controller reports status in StatReg. When a disabling fault is detected it acts atomically: the axis</text>
+  <text x="20" y="314" fill="#555" font-size="11">goes off (MotorReason records why), the code is stored in ConFlt, a diagnostic snapshot is frozen in ConFltSnapVal,</text>
+  <text x="20" y="332" fill="#555" font-size="11">and the event is appended to ErrLog with its time. Re-enabling the axis clears ConFlt and MotorReason.</text>
+</svg>

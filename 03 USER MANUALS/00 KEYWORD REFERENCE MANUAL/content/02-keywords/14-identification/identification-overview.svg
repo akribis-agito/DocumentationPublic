@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="220" viewBox="0 0 700 220" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="20" y="26" font-size="15" font-weight="bold">Identifying the input-output relationship</text>
+
+  <!-- input -->
+  <rect x="20" y="60" width="120" height="56" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="80" y="84" text-anchor="middle" font-weight="bold">Input</text>
+  <text x="80" y="104" text-anchor="middle" font-size="11">excitation signal</text>
+
+  <!-- plant -->
+  <rect x="200" y="60" width="140" height="56" rx="6" fill="#f4f7fb" stroke="#9fb4cc" stroke-width="1.2"/>
+  <text x="270" y="84" text-anchor="middle" font-weight="bold">System (plant)</text>
+  <text x="270" y="104" text-anchor="middle" font-size="11">the axis under test</text>
+
+  <!-- output -->
+  <rect x="400" y="60" width="120" height="56" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="460" y="84" text-anchor="middle" font-weight="bold">Output</text>
+  <text x="460" y="104" text-anchor="middle" font-size="11">measured response</text>
+
+  <!-- identified model -->
+  <rect x="560" y="48" width="120" height="80" rx="6" fill="#eaf7ea" stroke="#3a8a3a" stroke-width="1.2"/>
+  <text x="620" y="72" text-anchor="middle" font-weight="bold">Identified</text>
+  <text x="620" y="90" text-anchor="middle" font-size="11">frequency response</text>
+  <text x="620" y="106" text-anchor="middle" font-size="11">/ plant model</text>
+
+  <!-- arrows -->
+  <line x1="140" y1="88" x2="198" y2="88" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="340" y1="88" x2="398" y2="88" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="520" y1="88" x2="558" y2="88" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+
+  <text x="20" y="166" fill="#555" font-size="11">A known input excites the axis; the measured output is compared with the input to characterise how the system</text>
+  <text x="20" y="182" fill="#555" font-size="11">responds across frequency. The result is an identified frequency response or plant model used for control tuning.</text>
+  <text x="20" y="198" fill="#555" font-size="11">For sine-sweep identification, CalcIden computes the per-frequency relation into IdenResults; PlantModel holds the model.</text>
+</svg>

@@ -46,7 +46,7 @@ The mute is applied to the post-gain value `y`. The comparison is **inclusive** 
 | `−AInMuteRange ≤ y ≤ AInMuteRange` | `0` |
 | otherwise | `y` (unchanged) |
 
-This leaves a step discontinuity at the band edge (the value jumps from 0 to ±`AInMuteRange`), in contrast to [AInDB](AInDB.md) which is continuous. The result is what is stored in `AInPort[1..4]` and routed to control functions by [AInMode](AInMode.md).
+This leaves a step discontinuity at the band edge (the value jumps from 0 to ±`AInMuteRange`), in contrast to [AInDB](AInDB.md) which is continuous. The result is what is stored in `AInPort[1]`–`AInPort[4]` and routed to control functions by [AInMode](AInMode.md).
 
 ## Examples
 
