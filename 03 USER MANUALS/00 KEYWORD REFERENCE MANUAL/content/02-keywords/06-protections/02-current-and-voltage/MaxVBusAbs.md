@@ -38,7 +38,7 @@ Absolute bus-voltage ceiling; exceeding it disables the axis instantly.
 
 On each periodic bus-voltage check the drive compares `VBus` directly with `MaxVBusAbs`:
 
-- If `VBus > MaxVBusAbs`, the axis is disabled immediately and [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1023 (bus voltage too high — absolute limit exceeded).
+- If `VBus ≥ MaxVBusAbs`, the axis is disabled immediately and [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1023 (bus voltage too high — absolute limit exceeded).
 - If `VBus ≥ MaxVBusAbs`, [StatReg](../../07-status-and-faults/StatReg.md) bit 6 (over-MaxVBusAbs) is set as a status indication.
 
 Because no timer is involved, set `MaxVBusAbs` above [MaxVBus](MaxVBus.md) so that the time-windowed limit acts first on normal transients, with `MaxVBusAbs` as the hard backstop.

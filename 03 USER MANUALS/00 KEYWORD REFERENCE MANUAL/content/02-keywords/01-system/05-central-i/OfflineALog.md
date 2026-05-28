@@ -1,6 +1,6 @@
 ---
 keyword: OfflineALog
-summary: Receive buffer for Central-i offline log data from device port A.
+summary: Rolling log of Central-i offline (mailbox) messages on channel A, the firmware-driven channel.
 availability:
   standalone:
   - v4

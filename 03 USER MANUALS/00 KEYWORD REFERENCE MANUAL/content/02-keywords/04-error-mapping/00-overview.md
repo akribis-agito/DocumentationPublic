@@ -6,7 +6,7 @@ Error mapping corrects systematic position errors by adding a stored correction 
 
 Error mapping works by correcting the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), not the command ([PosRef](../10-motion/01-kinematics-status/PosRef.md)). [PosBeforeMap](PosBeforeMap.md) is the position value from the encoder **before** error-mapping correction, while [Pos](../10-motion/01-kinematics-status/Pos.md) is the position value **after** correction. The difference between them is the correction contributed by the map.
 
-![error-mapping-sum.drawio.svg](../../02-keywords/04-error-mapping/error-mapping-sum.drawio.svg)
+![1D error-mapping correction summed onto the feedback position](error-mapping-sum.drawio.svg)
 
 The category keywords fit together as follows:
 
@@ -17,8 +17,9 @@ The category keywords fit together as follows:
 - [MapStartIndex](MapStartIndex.md) selects the `MapTable` index where the active map begins.
 - [MapErrOffset](MapErrOffset.md), [MapErrOffRamp](MapErrOffRamp.md), and [MapErrOnStep](MapErrOnStep.md) govern how the correction is ramped in when mapping engages, avoiding an abrupt position jump.
 
-| MapTable Index | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-| X Enc |  |  |  |  |  | a |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| Y Enc |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| Z Enc |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+The correction values are stored as one flat, 1-based list starting at [MapStartIndex](MapStartIndex.md). For multi-dimensional maps the **first** dimension varies fastest. For example, a 2D map of 3 first-dimension points by 2 second-dimension points occupies six consecutive table entries laid out like this:
+
+| Second dimension | First-dim point 1 | First-dim point 2 | First-dim point 3 |
+|------------------|:--:|:--:|:--:|
+| Point 1 | `MapTable[1]` | `MapTable[2]` | `MapTable[3]` |
+| Point 2 | `MapTable[4]` | `MapTable[5]` | `MapTable[6]` |

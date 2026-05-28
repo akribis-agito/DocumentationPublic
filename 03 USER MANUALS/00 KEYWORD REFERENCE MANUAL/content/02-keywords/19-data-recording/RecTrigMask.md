@@ -50,7 +50,9 @@ Bitwise mask applied to trigger source and comparison values.
 | 5 | 2 (Second) | 2 |
 | 6 | 2 (Second) | 3 |
 
-Masking is only applicable if the trigger source ([RecTrigSrc](RecTrigSrc.md)) is of a fixed-point data type (32-bit int or 64-bit long). By default, the `RecTrigMask` value is -1 (0xFFFFFFFFFFFFFFFF), where no bits are masked and the trigger comparison uses the unaltered values. The masking is done using a bitwise AND operation.
+Masking is only applicable if the trigger source ([RecTrigSrc](RecTrigSrc.md)) is of a fixed-point data type (32-bit int or 64-bit long). By default, the `RecTrigMask` value is -1 (all bits set), where no bits are masked and the trigger comparison uses the unaltered values. The masking is done using a bitwise AND operation.
+
+> **Note:** In v4 the mask is a 32-bit integer. In v5 (Central-i) it is a 64-bit integer, allowing all bits of a 64-bit trigger source to be masked.
 
 $$
 Masked\ value\  = (Original\ value)\ \&\ \left( RecTrigMask\lbrack x\rbrack \right)

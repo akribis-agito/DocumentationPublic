@@ -1,6 +1,6 @@
 ---
 keyword: MinVBus
-summary: Minimum allowed bus voltage; sustained shortfall disables the axis.
+summary: Minimum allowed bus voltage; dropping to or below it immediately disables the axis.
 availability:
   standalone:
   - v4
@@ -28,7 +28,7 @@ overrides: {}
 ---
 # MinVBus
 
-Minimum allowed bus voltage; sustained shortfall disables the axis.
+Minimum allowed bus voltage; dropping to or below it immediately disables the axis.
 
 ## Overview
 

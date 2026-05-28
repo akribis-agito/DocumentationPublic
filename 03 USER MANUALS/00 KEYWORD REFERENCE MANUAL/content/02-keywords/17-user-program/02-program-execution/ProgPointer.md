@@ -46,7 +46,7 @@ The pointer is reported as a **byte offset from the start of the stored program*
 After each instruction completes, the controller advances the thread's pointer to the next instruction, so reading `ProgPointer` while a thread runs tracks its progress. Two cases hold the pointer in place rather than advancing it:
 
 - **On a run-time error**, the pointer is left on the failing instruction (see [ProgError](ProgError.md)), so it can be inspected or re-executed.
-- **On [ProgHaltThis](ProgHaltThis.md)**, the pointer is held on the halt instruction so execution does not run on; a later resume continues from the instruction after it.
+- **On [ProgHaltThis](ProgHaltThis.md)**, the pointer is held on the halt instruction so execution does not run on; because the pointer stays on that line, a later `ProgRun[thread],0` re-executes the `ProgHaltThis` and halts again unless the pointer is first moved.
 
 Breakpoints from [ProgBreaks](ProgBreaks.md) are matched against this same offset: when a thread's pointer reaches a breakpoint value, the thread is halted. Resetting a thread with [ProgReset](ProgReset.md) sets its pointer back to the start of the main program.
 

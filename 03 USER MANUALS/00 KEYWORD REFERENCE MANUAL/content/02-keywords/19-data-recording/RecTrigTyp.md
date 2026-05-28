@@ -56,12 +56,12 @@ Each `RecTrigTyp` value selects a different trigger activation logic. The trigge
 | 4 | Activated when the source value is less than RecTrigVal |
 | 5 | Activated upon the rising edge of source value beyond RecTrigVal. |
 | 6 | Activated upon the falling edge of source value below RecTrigVal. |
-| 7 | Immediate trigger (no trigger source needed) |
+| 7 | Manual trigger only (activated solely by [RecTrigForce](RecTrigForce.md); no trigger source needed) |
 | 8 | Activated when the source value is different from its value at the start of recording |
 | 9 | Activated when the source value is within the range of (RecTrigVal, RecTrigValMax) |
 | 10 | Activated when the source value is not within the range of (RecTrigVal, RecTrigValMax) |
 | 11 | Activated upon the entry of source value into the range of (RecTrigVal, RecTrigValMax) |
-| 12 | Activated upon the exit of source value into the range of (RecTrigVal, RecTrigValMax) |
+| 12 | Activated upon the exit of source value out of the range of (RecTrigVal, RecTrigValMax) |
 
 ## Examples
 

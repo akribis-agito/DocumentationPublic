@@ -16,7 +16,7 @@ Label keyword marking the start of a callable user program task.
 - A **task** ([ProgTask](ProgTask.md)) is *launched as a thread* by [ProgRun](ProgRun.md). It then runs concurrently with other threads, each thread getting a share of execution time governed by [ProgPriority](ProgPriority.md). A task is the unit of independent, parallel execution.
 - A **function** ([ProgFunc](ProgFunc.md)) is *called and returned from* within a single thread via [ProgFuncCall](ProgFuncCall.md) / [Return](Return.md), using that thread's call stack.
 
-Task and thread numbers are independent: the task number selects which `ProgTask[]` label to run, and the thread number is the slot it runs in. The same task may be run in different threads, and the special task number `-1` runs the main program (the code at the start of the file); see [ProgRun](ProgRun.md). A task ends at [ProgHalt](ProgHalt.md); without it, execution simply continues into the following lines of the file.
+Task and thread numbers are independent: the task number selects which `ProgTask[]` label to run, and the thread number is the slot it runs in. The same task may be run in different threads, and task number `1` runs the main program (the code at the start of the file); see [ProgRun](ProgRun.md). A task ends at [ProgHalt](ProgHalt.md); without it, execution simply continues into the following lines of the file.
 
 > **Note:** If `ProgHalt` is not used, execution continues linearly into the next line in the file.
 

@@ -36,7 +36,7 @@ Halts the currently executing user program task.
 
 ## How it works
 
-`ProgHaltThis` is only valid when issued **from within a running user program** — sending it from a communication terminal is rejected. When executed, it clears the current thread's "execute" flag so the scheduler stops servicing it, and sets that thread's [ProgStat](ProgStat.md) to `0` (not running). The thread's program pointer is held on this same instruction (it is not advanced past `ProgHaltThis`), so the thread does not run on into whatever follows; a later `ProgRun[thread],0` resumes from the instruction after the halt point.
+`ProgHaltThis` is only valid when issued **from within a running user program** — sending it from a communication terminal is rejected. When executed, it clears the current thread's "execute" flag so the scheduler stops servicing it, and sets that thread's [ProgStat](ProgStat.md) to `0` (not running). The thread's program pointer is held on the `ProgHaltThis` line itself (it is not advanced past it), so the thread does not run on into whatever follows. Because the pointer stays on the halt line, resuming the thread with `ProgRun[thread],0` re-executes the `ProgHaltThis` and halts again; to continue past it, move the pointer first (for example reset the thread with [ProgReset](ProgReset.md) and run the desired task, or run a different task).
 
 ## Examples
 

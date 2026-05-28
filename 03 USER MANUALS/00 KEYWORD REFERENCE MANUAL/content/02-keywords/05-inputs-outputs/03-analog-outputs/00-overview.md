@@ -4,13 +4,13 @@ The analog outputs can be configured to output a commanded value (direct command
 
 In **direct command mode** (AOutMode = 0), AOutPort is the commanded value and AOutOffset is used to calibrate/zero the output.
 
-![analog-output-basic.drawio.svg](../../../02-keywords/05-inputs-outputs/03-analog-outputs/analog-output-basic.drawio.svg)
+![Analog output in direct command mode, driven by AOutPort with an AOutOffset](analog-output-basic.drawio.svg)
 
-In **monitoring mode**, AOutMode selects the parameter to be emulated. The parameter to be emulated is assumed to be in millivolts (mV). For example, if position reference is to be output where PosRef = 4562 counts, then the value entering the signal path is in 4562mV.
+In **monitoring mode**, AOutMode selects the parameter to be emulated. The parameter to be emulated is assumed to be in millivolts (mV). For example, if position reference is to be output where PosRef = 4562 counts, then the value entering the signal path is 4562 mV.
 
 The value is scaled with a bit-shifting operation (AOutShifts), before added with an offset (AOutOffset) to produce the final analog output value. The value is converted into physical signal by the DAC.
 
-![analog-output-emulation.drawio.svg](../../../02-keywords/05-inputs-outputs/03-analog-outputs/analog-output-emulation.drawio.svg)
+![Analog output in monitoring mode, emulating a parameter scaled by AOutShifts and offset by AOutOffset](analog-output-emulation.drawio.svg)
 
 The overall formula for analog output is given by,
 

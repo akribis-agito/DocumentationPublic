@@ -1,6 +1,6 @@
 ---
 keyword: ParamAbout
-summary: Function returning a parameter's metadata (CAN code, name, attributes, range, default).
+summary: Function returning a single parameter's minimum, maximum and default values, selected by CAN code.
 availability:
   standalone:
   - v4

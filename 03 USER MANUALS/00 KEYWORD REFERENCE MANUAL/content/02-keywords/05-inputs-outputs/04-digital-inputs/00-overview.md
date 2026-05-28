@@ -4,7 +4,7 @@ The state of the digital inputs can be read from DInPort. Functionalities may be
 
 For digital inputs, the signal path is as shown.
 
-![digital-input-chain.drawio.svg](../../../02-keywords/05-inputs-outputs/04-digital-inputs/digital-input-chain.drawio.svg)
+![Digital-input signal path: debounce filter, optional inversion, then DInPort](digital-input-chain.drawio.svg)
 
 First, the raw digital signals are passed through a debounce filter, the debounce time is configured via DInFilt. Next, the signals are passed through an optional inversion block, which is configured via DInLog. Finally, the information is stored in DInPort.
 

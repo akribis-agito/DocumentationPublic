@@ -1,8 +1,8 @@
 # Dual-loop gantry control
 
-For gantry dual-loop control, rather than 2 main encoders and 1 auxiliary encoder, the controller will source from 2 main encoders and the value pointed by GantryFdbkSrc pointer.
+In dual-loop gantry control the controller closes the linear position loop on a separate load-side feedback rather than on the two main motor encoders. The load feedback is selected by the [GantryFdbkSrc](../02-gantry-kinematic-feedback/GantryFdbkSrc.md) pointer, while the two main motor encoders are kept for the inner velocity loop and the yaw (differential) loop.
 
-We let GantryFdbkSrc will be denoted by encoder C. The following is the comparison of keywords/properties under different control structures.
+In the table below the feedback selected by [GantryFdbkSrc](../02-gantry-kinematic-feedback/GantryFdbkSrc.md) is denoted "encoder C". The table compares how each feedback and velocity term is sourced under the three control structures.
 
 | Feedback keywords | Default control | Dual-loop control | Pseudo dual-loop control |
 |---|---|---|---|

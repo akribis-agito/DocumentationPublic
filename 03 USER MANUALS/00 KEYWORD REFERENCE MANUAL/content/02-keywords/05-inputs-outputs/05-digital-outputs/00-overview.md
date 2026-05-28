@@ -32,13 +32,13 @@ Manual value assignment is also executed on the software layer. To manually assi
 
 For single-ended digital outputs, the signal path is as shown.
 
-![digital-output-single-ended](digital-output-single-ended.drawio.svg)
+![Single-ended digital-output signal path with sink/source selection](digital-output-single-ended.drawio.svg)
 
 The single-ended digital outputs support both sink and source mode. This is configured via DOutType.
 
 For bi-directional differential IO’s, the signal path is as shown.
 
-![digital-output-bidirectional](digital-output-bidirectional.drawio.svg)
+![Bi-directional differential I/O signal path with BiDirConfig direction control](digital-output-bidirectional.drawio.svg)
 
 Some pins are bi-directional IO’s, they can be configured to be in output mode or input mode. In output mode, the input will still be connected, so read-back is possible. In input mode, the output is not driving the voltage.
 

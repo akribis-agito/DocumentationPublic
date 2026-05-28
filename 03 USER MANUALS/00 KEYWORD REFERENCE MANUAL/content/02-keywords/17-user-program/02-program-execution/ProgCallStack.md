@@ -48,7 +48,7 @@ Reading a location above the highest occupied slot, or outside the `0`–99 rang
 ## Examples
 
 ```text
-AProgCallStack[1],0     ; read the deepest occupied slot of thread 1
+AProgCallStack[1],0     ; read the base slot (location 0) of thread 1's call stack
 AProgCallStack[1],1     ; read the next slot up
 ```
 

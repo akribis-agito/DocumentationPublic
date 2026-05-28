@@ -51,6 +51,10 @@ $$
 
 Because the shift is on a signed integer, a right shift truncates toward negative infinity. Pick a shift so the parameter's working range maps usefully onto the ±11905 mV output span.
 
+## Changes between versions
+
+`AOutShifts` is the v4 mechanism (standalone and Central-i). On **Central-i v5** it is replaced by the floating-point gain [AOutGain](AOutGain.md), which allows any real multiplier instead of only powers of two.
+
 ## Examples
 
 ```text
@@ -62,6 +66,7 @@ AAOutShifts[1]        ; read back the shift
 ## See also
 
 - [AOutMode](AOutMode.md) — selects the monitored parameter (shift applies only in monitoring mode)
+- [AOutGain](AOutGain.md) — the v5 floating-point gain that replaces this shift
 - [AOutOffset](AOutOffset.md) — output offset (added after this scaling, before the DAC conversion)
 - [AOutPort](AOutPort.md) — direct-mode value (not affected by this shift)
 - [analog-output overview](00-overview.md) — full signal path

@@ -45,7 +45,7 @@ It is a read-only, axis-scoped status variable that is not saved to flash.
 
 `PosBeforeMap` is captured **every** control cycle, at the start of the error-mapping stage, as a snapshot of the decoded main-encoder reading — *before* the correction branch runs. It is recorded unconditionally, so:
 
-- With mapping **off** (`MapType = 0`), `Pos = PosBeforeMap` (no correction). The two reading equal.
+- With mapping **off** (`MapType = 0`), `Pos = PosBeforeMap` (no correction). The two readings are equal.
 - With mapping **on**, the firmware computes the interpolated correction from the [MapEncoder](MapEncoder.md)-selected source and forms `Pos = PosBeforeMap + correction` (correction scaled by the engage ramp; see [MapErrOnStep](MapErrOnStep.md)).
 - In **simulation** mode the correction is skipped, so again `Pos = PosBeforeMap`.
 

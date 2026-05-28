@@ -48,7 +48,7 @@ Whenever the output voltage is clamped, the firmware records a saturation factor
 With a 48 V bus and default `MaxPWM = 900`, to cap the output at 30% duty cycle (14.4 V) set:
 
 ```text
-AMaxPWM=300          ; limit to 30% duty cycle -> ~14.4 V on a 48 V bus
+AMaxPWM=300          ; limit to 30% duty cycle (~14.4 V on a 48 V bus)
 ```
 
 ## See also

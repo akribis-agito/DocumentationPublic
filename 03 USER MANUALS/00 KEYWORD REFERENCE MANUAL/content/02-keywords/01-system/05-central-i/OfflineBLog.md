@@ -1,6 +1,6 @@
 ---
 keyword: OfflineBLog
-summary: Receive buffer for Central-i offline log data from device port B.
+summary: Rolling log of Central-i offline (mailbox) messages on channel B, the host channel used by CIOfflineSend.
 availability:
   standalone:
   - v4

@@ -47,7 +47,12 @@ It is possible to use the same variable as both a trigger source and a recorded 
 
 ## Examples
 
-`RecTrigSrc[4] = 2` means `APos` is used as the trigger source for trigger 1 of the second scope.
+```text
+ARecTrigSrc[4]=2     ; use APos as the source for trigger 1 of the second scope
+ARecTrigSrc[1]      ; query the source of trigger 1 (first scope)
+```
+
+In the example above, `ARecTrigSrc[4]=2` selects `APos` as the trigger source for trigger 1 of the second scope.
 
 ## See also
 

@@ -45,9 +45,9 @@ Two further switches gate this engine alongside `ProgEventOn`: [ProgEventGEn](Pr
 
 | Control | Scope | Effect of setting to 0 |
 |---|---|---|
-| `ProgEventOn` | all events | Stops sensing **and** servicing; clears all pending occurrences |
+| `ProgEventOn` | all events | Stops sensing **and** servicing; clears all pending occurrences (forces every event back to "waiting for trigger") |
 | [ProgEventGEn](ProgEventGEn.md) | all events | Stops servicing only; events are still sensed and may become pending |
-| [ProgEventEn](ProgEventEn.md) | one event | Stops sensing and servicing of that one event; clears its pending occurrence |
+| [ProgEventEn](ProgEventEn.md) | one event | Stops servicing of that one event only; the event is still sensed and may become pending, but is not serviced while disabled |
 
 ## How it works
 

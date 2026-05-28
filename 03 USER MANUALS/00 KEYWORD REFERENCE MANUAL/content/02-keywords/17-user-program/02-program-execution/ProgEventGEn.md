@@ -32,7 +32,7 @@ Global enable for servicing all user program events.
 
 ## Overview
 
-`ProgEventGEn` globally enables (`1`) or disables (`0`) the *servicing* of all user program events, without affecting whether they are sensed. Unlike [ProgEventOn](ProgEventOn.md) (which stops sensing too) and [ProgEventEn](ProgEventEn.md) (which stops sensing of one event), setting `ProgEventGEn = 0` leaves sensing fully active: events still evaluate their triggers and may move to the "pending for service" state ([ProgEventStat](ProgEventStat.md)`= 1`), but no handler runs. When `ProgEventGEn` is set back to `1`, any event that became pending in the meantime is then serviced. Use it to suspend and resume event handling as a whole without losing pending triggers. It is a non-axis scalar parameter and is not saved to flash (default `0`).
+`ProgEventGEn` globally enables (`1`) or disables (`0`) the *servicing* of all user program events, without affecting whether they are sensed. Unlike [ProgEventOn](ProgEventOn.md) (which gates sensing as well as servicing, and clears all pending occurrences when set to 0), `ProgEventGEn` gates servicing only. Like the per-event servicing gate [ProgEventEn](ProgEventEn.md), setting `ProgEventGEn = 0` leaves sensing fully active: events still evaluate their triggers and may move to the "pending for service" state ([ProgEventStat](ProgEventStat.md)`= 1`), but no handler runs. When `ProgEventGEn` is set back to `1`, any event that became pending in the meantime is then serviced. Use it to suspend and resume event handling as a whole without losing pending triggers. It is a non-axis scalar parameter and is not saved to flash (default `0`).
 
 ## How it works
 

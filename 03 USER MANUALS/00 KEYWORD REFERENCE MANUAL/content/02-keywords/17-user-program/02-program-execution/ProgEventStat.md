@@ -46,11 +46,11 @@ Each element steps through the lifecycle below:
 
 State transitions:
 
-- **0 → 1** when the trigger condition is met during sensing (requires [ProgEventOn](ProgEventOn.md)` = 1` and the event's [ProgEventEn](ProgEventEn.md)` = 1`).
-- **1 → 2** when the controller dispatches the handler. This happens only while [ProgEventGEn](ProgEventGEn.md)` = 1`; the handler runs on the main thread (thread 1), and when several events are pending the lowest event number is serviced first.
+- **0 → 1** when the trigger condition is met during sensing (sensing requires [ProgEventOn](ProgEventOn.md)` = 1`; it does not depend on [ProgEventEn](ProgEventEn.md), so an event can become pending even while its servicing is disabled).
+- **1 → 2** when the controller dispatches the handler. This happens only while both [ProgEventGEn](ProgEventGEn.md)` = 1` and the event's [ProgEventEn](ProgEventEn.md)` = 1`; the handler runs on the main thread (thread 1), and when several events are pending the lowest event number is serviced first.
 - **2 → 0** when the handler executes [Return](Return.md): the event re-arms (its baseline reading is recaptured) and resumes being sensed.
 
-Forcing an element to `0` (the only writable value) clears a pending occurrence and returns the event to the waiting state. Disabling sensing via [ProgEventOn](ProgEventOn.md)` = 0` or the event's [ProgEventEn](ProgEventEn.md)` = 0` also forces it back to `0`.
+Forcing an element to `0` (the only writable value) clears a pending occurrence and returns the event to the waiting state. Setting [ProgEventOn](ProgEventOn.md)` = 0` also forces every event's state back to `0`.
 
 ## Examples
 

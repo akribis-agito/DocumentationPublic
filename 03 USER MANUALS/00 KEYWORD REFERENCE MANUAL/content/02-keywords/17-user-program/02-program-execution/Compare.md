@@ -57,7 +57,7 @@ The index selects both the comparison and the operand data type. The same eight 
 
 The "Zero" and "Not zero" operations take a single operand (`pop1`); all other operations take two. The operands must already be on the stack, and they are removed by the comparison. The single `1` or `0` result it pushes is exactly what a conditional [Jump](Jump.md) (operation 8, "jump if zero", or operation 9, "jump if not zero") then consumes — so a relational test followed by a conditional jump is how the compiler builds `if`, `while`, and `for` constructs.
 
-![Compare then Jump on the numeric stack: operands are pushed, Compare pops them and pushes 1 or 0, and a conditional Jump consumes that result to branch or fall through](compare-jump-flow.svg)
+![Compare then Jump on the numeric stack](compare-jump-flow.svg)
 
 ## Examples
 

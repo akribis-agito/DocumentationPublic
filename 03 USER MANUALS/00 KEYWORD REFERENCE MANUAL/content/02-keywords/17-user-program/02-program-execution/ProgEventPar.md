@@ -36,7 +36,7 @@ Selects (by complex CAN code) the controller parameter that triggers an event.
 
 ## How it works
 
-Each element holds a **complex CAN code** that names the exact parameter to monitor, not just a bare CAN code. The complex value packs three fields:
+Each element holds a [complex CAN code](../../../01-keyword-usage-and-syntax/complex-can-code.md) that names the exact parameter to monitor, not just a bare CAN code. The complex value packs three fields:
 
 | Bits | Field |
 |---|---|

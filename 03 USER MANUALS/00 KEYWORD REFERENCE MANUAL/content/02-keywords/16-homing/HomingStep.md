@@ -1,6 +1,6 @@
 ---
 keyword: HomingStep
-summary: Read-only index of the last completed step in the homing sequence.
+summary: Read-only number of the homing step the engine has reached.
 availability:
   standalone:
   - v4
@@ -38,7 +38,7 @@ Read-only index of the homing step the engine has reached.
 
 The homing engine keeps an internal 1-based step pointer. Each control cycle it copies that pointer into `HomingStep`. When a step completes the pointer is incremented, so `HomingStep` moves to the next step to be processed; when homing ends it holds the step number that was reached at the end. While `HomingStat` is also reporting the active step, the two carry the same number; after homing ends, `HomingStat` switches to `100` (success) or a negative error code while `HomingStep` keeps the final step number.
 
-The pointer is primed at `1` whenever homing is not running, so the first value seen after [HomingOn](HomingOn.md) is set is step 1.
+`HomingStep` retains the last step number reached while homing is not running — it is not reset to `1` between runs — so read it together with [HomingStat](HomingStat.md) (which reports `0` before the first run after power-on or reset).
 
 ## Examples
 

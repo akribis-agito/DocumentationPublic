@@ -54,10 +54,7 @@ To protect the motor, it is recommended to use more conservative ContCL, PeakCL 
 
 The controller tripping mechanism works by continuously obtaining $I^{2}$ (through MotorCurr parameter) and filtering this value with low-pass filter with time constant $\tau$. If the filtered result is higher than ${I_{c}}^{2}$, I2t trip event is triggered.
 
-<img alt="A black and white screen with white text AI-generated content may be incorrect." src="image23.png" style="width:5.8031in;height:1.02454in"/>
-
-
-![[I2t-tripping-mechanism.svg]]
+![I2t tripping mechanism: MotorCurr is squared and low-pass filtered, then compared against the squared continuous current limit to trigger the I2t trip event](I2t-tripping-mechanism.svg)
 
 The low-pass filter, in continuous form, is
 
@@ -81,7 +78,7 @@ This low-pass filter obtains the equivalent continuous power dissipated at the m
 
 **Example:**
 
-<img alt="A graph of a graph of a function AI-generated content may be incorrect." src="image24.png" style="width:6.68479in;height:3.61458in"/>
+![Simulated I2t example showing the desired current command, the filtered squared current against the I2t threshold, and the resulting current-command limiting](../../../assets/image24.png)
 
 In this simulated example, the following parameters are used.
 

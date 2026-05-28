@@ -30,7 +30,7 @@ Read-only auxiliary-encoder feedback used to measure gantry yaw.
 
 ## Overview
 
-`GantryAuxFdbk` is a read-only feedback used in **dual-loop gantry control** ([GantryDLoopOn](../01-general-variables/GantryDLoopOn.md) = 1). In that mode the common (linear) position loop is closed on the load feedback selected by [GantryFdbkSrc](GantryFdbkSrc.md), and the two motor encoders are demoted to an *auxiliary* role: their common-mode (mean) position is reported here as `GantryAuxFdbk`, in main-encoder counts. It is the motor-side counterpart to the load-side [GantryFdbk](GantryFdbk.md), and the inner velocity loop is closed on its derivative, [GantryAuxVel](GantryAuxVel.md), scaled by the dual-loop factor. It is axis-scoped, not saved to flash, and reported in user units.
+`GantryAuxFdbk` is a read-only feedback used in **dual-loop gantry control** ([GantryDLoopOn](../01-general-variables/GantryDLoopOn.md) = 1). In that mode the common (linear) position loop is closed on the load feedback selected by [GantryFdbkSrc](GantryFdbkSrc.md), and the two motor encoders are demoted to an *auxiliary* role: their common-mode (mean) position is reported here as `GantryAuxFdbk`. It is the motor-side counterpart to the load-side [GantryFdbk](GantryFdbk.md), and the inner velocity loop is closed on its derivative, [GantryAuxVel](GantryAuxVel.md), scaled by the dual-loop factor. It is axis-scoped, not saved to flash, and reported in user units.
 
 In single-loop gantry mode this value is not used (the motor encoders form the linear feedback directly through [GantryFdbk](GantryFdbk.md)).
 

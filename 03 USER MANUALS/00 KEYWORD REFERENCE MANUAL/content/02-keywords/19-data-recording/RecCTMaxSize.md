@@ -14,7 +14,7 @@ Sets the maximum sample count of the continuous-time recording buffer per channe
 ## Examples
 
 ```text
-ARecCTMaxSize[1]=16500   ; allocate up to 16500 samples on the first channel
+ARecCTMaxSize[1]=16500   ; allocate up to 16500 samples on the first scope
 ARecCTMaxSize[1]        ; query the configured buffer size
 ```
 

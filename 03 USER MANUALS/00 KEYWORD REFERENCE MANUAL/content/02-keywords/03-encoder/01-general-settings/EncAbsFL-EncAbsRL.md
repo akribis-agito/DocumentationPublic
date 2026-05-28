@@ -9,7 +9,7 @@ Forward/reverse limits that re-interpret an out-of-range absolute encoder positi
 
 `EncAbsFL` and `EncAbsRL` offset the absolute encoder position at power-on so that a reading near the top of the unsigned range is interpreted as a small negative position instead. `EncAbsFL` defines the forward limit and `EncAbsRL` defines the reverse limit of the allowed travel. They are applied after the absolute offset ([EncAbsOff](EncAbsOff-AuxEncAbsOff.md)). This is intended for a rotary motor with an absolute encoder whose stroke is restricted by a hard stop.
 
-> **Note:** These keywords are a customization (originally for a Korea project) and are only implemented in customized firmware versions. Confirm availability before use.
+> **Note:** These keywords are a customization and are only implemented in customized firmware versions. Confirm availability before use.
 
 ## How it works
 
@@ -27,7 +27,7 @@ These limits act on the **power-up** absolute position only — the same place t
 
 ```text
 AEncAbsFL=90         ; forward limit (customized firmware)
-EncAbsRL=-90        ; reverse limit (customized firmware)
+AEncAbsRL=-90        ; reverse limit (customized firmware)
 ```
 
 ## See also

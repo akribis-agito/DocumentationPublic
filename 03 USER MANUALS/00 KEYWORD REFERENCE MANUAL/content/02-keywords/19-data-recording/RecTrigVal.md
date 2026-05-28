@@ -49,6 +49,8 @@ Comparison value used in trigger activation logic for each trigger.
 
 Please refer to [RecTrigTyp](RecTrigTyp.md) on how the comparison value is used.
 
+> **Note:** In v4 the comparison value is a 32-bit integer. In v5 (Central-i) it is a 64-bit floating-point value, so non-integer thresholds can be specified directly.
+
 ## Examples
 
 ```text

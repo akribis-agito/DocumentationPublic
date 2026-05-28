@@ -57,7 +57,7 @@ The value you assign to `RemoteCANSend` selects the kind of access:
 
 It can be executed during motion.
 
-> Platform note: this transaction is implemented on the standalone/controller (C2000) platform. On the central-i (Zynq) platform the remote-CAN master transaction is not yet implemented.
+> Platform note: this transaction is implemented on the standalone/controller platform. On the central-i platform the remote-CAN master transaction is not yet implemented.
 
 ## Examples
 

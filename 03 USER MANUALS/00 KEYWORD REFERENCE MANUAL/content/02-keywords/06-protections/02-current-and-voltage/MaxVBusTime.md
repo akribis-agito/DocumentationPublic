@@ -1,6 +1,6 @@
 ---
 keyword: MaxVBusTime
-summary: How long bus voltage may stay outside the MinVBus/MaxVBus limits before tripping.
+summary: How long bus voltage may stay above the MaxVBus limit before tripping.
 availability:
   standalone:
   - v4
@@ -28,7 +28,7 @@ overrides: {}
 ---
 # MaxVBusTime
 
-How long bus voltage may stay outside the MinVBus/MaxVBus limits before tripping.
+How long bus voltage may stay above the MaxVBus limit before tripping.
 
 ## Overview
 

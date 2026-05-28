@@ -30,7 +30,7 @@ Read-only velocity derived from the gantry auxiliary encoder.
 
 ## Overview
 
-`GantryAuxVel` is a read-only velocity used in **dual-loop gantry control** ([GantryDLoopOn](../01-general-variables/GantryDLoopOn.md) = 1). It is the time-derivative of [GantryAuxFdbk](GantryAuxFdbk.md) — the common-mode (mean) velocity of the two motor encoders — expressed in main-encoder counts per second. It is axis-scoped, not saved to flash, and reported in user units.
+`GantryAuxVel` is a read-only velocity used in **dual-loop gantry control** ([GantryDLoopOn](../01-general-variables/GantryDLoopOn.md) = 1). It is the time-derivative of [GantryAuxFdbk](GantryAuxFdbk.md) — the common-mode (mean) velocity of the two motor encoders. It is axis-scoped, not saved to flash, and reported in user units.
 
 In dual-loop gantry mode the linear position loop follows a load feedback, but the inner velocity loop is still closed on the motor-side velocity for stability; `GantryAuxVel` is that motor-side velocity. The value the velocity loop actually uses is this reading scaled by the dual-loop factor (see the [dual-loop gantry control overview](../04-dual-loop-gantry-control/00-overview.md)). In single-loop gantry mode the velocity loop uses the common-mode velocity directly and this reading is not used.
 

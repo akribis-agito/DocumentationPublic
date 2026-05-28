@@ -49,6 +49,8 @@ Upper bound for range-based trigger activation logic (RecTrigTyp 9–12).
 
 Please refer to [RecTrigTyp](RecTrigTyp.md) on how the maximum value is used.
 
+> **Note:** In v4 the upper-bound value is a 32-bit integer. In v5 (Central-i) it is a 64-bit floating-point value, so non-integer range bounds can be specified directly.
+
 ## Examples
 
 ```text

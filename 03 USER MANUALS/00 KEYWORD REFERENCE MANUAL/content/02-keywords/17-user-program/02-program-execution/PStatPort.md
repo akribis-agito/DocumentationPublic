@@ -32,7 +32,7 @@ Selects the communication port used for parameter-statistics streaming.
 
 ## Overview
 
-`PStatPort` selects the communication port over which program-status data is transmitted while streaming is enabled by [PStatOn](PStatOn.md). It works with [PStatParams](PStatParams.md) (what is sent) and [PStatInterval](PStatInterval.md) (how often). It is a non-axis parameter and is saved to flash (default `1`).
+`PStatPort` selects the communication port over which program-status data is transmitted while streaming is enabled by [PStatOn](PStatOn.md). It works with [PStatParams](PStatParams.md) (what is sent) and [PStatInterval](PStatInterval.md) (how often). It is a non-axis parameter and is saved to flash (default `1`, CAN).
 
 ## How it works
 
@@ -40,17 +40,17 @@ The value selects which physical link the background streamer uses:
 
 | Value | Port |
 |---|---|
-| 1 | Serial port (mini connector) |
-| 2 | Serial port (RJ45 connector) |
-| 3 | CAN |
+| 1 | CAN |
+| 2 | Serial port (mini connector) |
+| 3 | Serial port (RJ45 connector) |
 
-On a serial port, status streaming yields to outgoing command replies so it does not interfere with normal request/response traffic; on CAN, the batch is sent as status messages. Pick a port whose available bandwidth suits your chosen [PStatInterval](PStatInterval.md) and number of [PStatParams](PStatParams.md) entries.
+On a serial port, status streaming yields to outgoing command replies so it does not interfere with normal request/response traffic; on CAN (the default), the batch is sent as status messages. Pick a port whose available bandwidth suits your chosen [PStatInterval](PStatInterval.md) and number of [PStatParams](PStatParams.md) entries.
 
 ## Examples
 
 ```text
-APStatPort=1         ; stream over the serial port (mini connector)
-APStatPort=3         ; stream over CAN
+APStatPort=1         ; stream over CAN (default)
+APStatPort=2         ; stream over the serial port (mini connector)
 ```
 
 ## See also

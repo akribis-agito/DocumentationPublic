@@ -36,7 +36,7 @@ Lists the parameters included in each periodic statistics transmission.
 
 ## How it works
 
-Each element holds a **complex CAN code** that names the exact parameter to stream — the same encoding used by the snapshot and event-trigger sources:
+Each element holds a [complex CAN code](../../../01-keyword-usage-and-syntax/complex-can-code.md) that names the exact parameter to stream — the same encoding used by the snapshot and event-trigger sources:
 
 | Bits | Field |
 |---|---|

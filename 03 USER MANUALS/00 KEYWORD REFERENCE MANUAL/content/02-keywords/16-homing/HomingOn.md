@@ -58,4 +58,4 @@ AHomingOn           ; 1 while homing is active, cleared to 0 when done
 
 - [HomingDef](HomingDef.md) — defines the homing steps that run
 - [HomingStat](HomingStat.md) — reports progress and error status of the run
-- [HomingStep](HomingStep.md) — index of the last completed step
+- [HomingStep](HomingStep.md) — the homing step number the engine has reached

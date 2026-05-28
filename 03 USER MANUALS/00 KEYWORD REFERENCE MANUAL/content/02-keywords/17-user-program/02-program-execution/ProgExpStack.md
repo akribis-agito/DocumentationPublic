@@ -1,6 +1,6 @@
 ---
 keyword: ProgExpStack
-summary: Reads the top value of the numeric (expression) stack without popping it.
+summary: Reads a value on the numeric (expression) stack without popping it.
 availability:
   standalone:
   - v4
@@ -28,7 +28,7 @@ overrides: {}
 ---
 # ProgExpStack
 
-Reads the top value of the numeric (expression) stack without popping it.
+Reads a value on the numeric (expression) stack without popping it.
 
 ## Overview
 
@@ -38,7 +38,7 @@ Reads the top value of the numeric (expression) stack without popping it.
 
 `ProgExpStack[thread], location` reads one location of the selected thread's numeric stack by its position, counted from the base (location `0` is the deepest value). The read is non-destructive — the stack contents and depth are unchanged.
 
-Locations are valid from `0` up to the highest occupied location; the stack holds up to 50 values. Reading a location above the current top, or outside the valid range, raises a stack-range error. To inspect the top value, read the highest occupied location (the count reported by [ProgExpDepth](ProgExpDepth.md) gives you that position). A location holding a floating-point value is returned as a raw bit pattern for the host to interpret as a float; matching variant keywords read the same locations directly as floating-point, 64-bit integer or double-precision.
+Locations are valid from `0` up to the highest occupied location; the stack holds up to 50 values. Reading a location above the current top, or outside the valid range, raises a stack-range error. [ProgExpDepth](ProgExpDepth.md) reports how many slots are still free, so the highest occupied location is `50` minus the free count, minus one. A location holding a floating-point value is returned as a raw bit pattern for the host to interpret as a float; matching variant keywords read the same locations directly as floating-point, 64-bit integer or double-precision.
 
 ## Examples
 
@@ -48,6 +48,6 @@ AProgExpStack[1],0  ; read the deepest value on thread 1's numeric stack
 
 ## See also
 
-- [ProgExpDepth](ProgExpDepth.md) — occupancy of the numeric stack
+- [ProgExpDepth](ProgExpDepth.md) — free space remaining in the numeric stack
 - [ProgClrExp](ProgClrExp.md) — clear the numeric stack
 - [PopParam](../03-stack-operation/PopParam.md) — pop the top stack value into a parameter

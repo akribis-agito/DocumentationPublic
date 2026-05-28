@@ -49,6 +49,6 @@ AProgClrExp[1]      ; clear the numeric stack of thread 1 at program start
 ## See also
 
 - [ProgExpStack](ProgExpStack.md) — read a value on the numeric stack without popping
-- [ProgExpDepth](ProgExpDepth.md) — occupancy of the numeric stack
+- [ProgExpDepth](ProgExpDepth.md) — free space remaining in the numeric stack
 - [PopParam](../03-stack-operation/PopParam.md) — pop the top stack value into a parameter
 - [ProgClrCall](ProgClrCall.md) — clear the program-call stack

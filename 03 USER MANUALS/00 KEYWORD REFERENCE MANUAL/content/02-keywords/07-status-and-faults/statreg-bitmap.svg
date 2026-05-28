@@ -18,12 +18,12 @@
 <rect x="128" y="44" width="23" height="30" fill="#e2e4e8" stroke="#8a929b" stroke-width="0.6"/>
 <text x="140.0" y="56" font-size="8" text-anchor="middle">26</text>
 <text x="140.0" y="68" font-size="7" text-anchor="middle">FmodD</text>
-<rect x="152" y="44" width="23" height="30" fill="#f0f1f3" stroke="#8a929b" stroke-width="0.6"/>
+<rect x="152" y="44" width="23" height="30" fill="#fde7b3" stroke="#8a929b" stroke-width="0.6"/>
 <text x="164.0" y="56" font-size="8" text-anchor="middle">25</text>
-<text x="164.0" y="68" font-size="7" text-anchor="middle">-</text>
-<rect x="176" y="44" width="23" height="30" fill="#f0f1f3" stroke="#8a929b" stroke-width="0.6"/>
+<text x="164.0" y="68" font-size="7" text-anchor="middle">OWn</text>
+<rect x="176" y="44" width="23" height="30" fill="#fde7b3" stroke="#8a929b" stroke-width="0.6"/>
 <text x="188.0" y="56" font-size="8" text-anchor="middle">24</text>
-<text x="188.0" y="68" font-size="7" text-anchor="middle">-</text>
+<text x="188.0" y="68" font-size="7" text-anchor="middle">OWn</text>
 <rect x="200" y="44" width="23" height="30" fill="#f7d7b0" stroke="#8a929b" stroke-width="0.6"/>
 <text x="212.0" y="56" font-size="8" text-anchor="middle">23</text>
 <text x="212.0" y="68" font-size="7" text-anchor="middle">Wsat</text>
@@ -96,6 +96,8 @@
 <rect x="752" y="44" width="23" height="30" fill="#cfe9d4" stroke="#8a929b" stroke-width="0.6"/>
 <text x="764.0" y="56" font-size="8" text-anchor="middle">0</text>
 <text x="764.0" y="68" font-size="7" text-anchor="middle">CMT</text>
+<line x1="152" y1="77" x2="199" y2="77" stroke="#9a6700" stroke-width="1"/>
+<text x="175.5" y="87" font-size="7" text-anchor="middle" fill="#9a6700">Other code</text>
 <line x1="560" y1="77" x2="607" y2="77" stroke="#9a6700" stroke-width="1"/>
 <text x="583.5" y="87" font-size="7" text-anchor="middle" fill="#9a6700">VBus lvl</text>
 <line x1="512" y1="77" x2="559" y2="77" stroke="#9a6700" stroke-width="1"/>

@@ -32,7 +32,7 @@ Enables or disables the software-generated virtual encoder for the axis.
 
 ## Overview
 
-`VEncOn` enables or disables the virtual encoder for the axis. The virtual encoder (firmware: "True Virtual Encoder") is an **encoder-signal generator**: when enabled, the controller emits a real quadrature or pulse/direction signal on the axis's hardware encoder-emulation outputs that **tracks an internal source variable** in real time. The source is selected by [VEncSrc](VEncSrc.md), the output signal format by [VEncType](VEncType.md), the source-to-output scale by [VEncFact](VEncFact.md) / [VEncFactDen](VEncFactDen.md), and a pulse/direction setup delay by [VEncDelay](VEncDelay.md). It is an axis-scope parameter saved to flash and can be changed while the motor is on or in motion.
+`VEncOn` enables or disables the virtual encoder for the axis. The virtual encoder is an **encoder-signal generator**: when enabled, the controller emits a real quadrature or pulse/direction signal on the axis's hardware encoder-emulation outputs that **tracks an internal source variable** in real time. The source is selected by [VEncSrc](VEncSrc.md), the output signal format by [VEncType](VEncType.md), the source-to-output scale by [VEncFact](VEncFact.md) / [VEncFactDen](VEncFactDen.md), and a pulse/direction setup delay by [VEncDelay](VEncDelay.md). It is an axis-scope parameter saved to flash and can be changed while the motor is on or in motion.
 
 This is different from the fixed encoder-emulation outputs ([EmulRat](../05-encoder-emulation/EmulRat.md)), which always mirror the axis's own feedback: the virtual encoder can track *any* selectable source variable.
 

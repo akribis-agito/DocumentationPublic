@@ -48,4 +48,4 @@ AProgInfo           ; report CRC, date, CUP file name and #information text
 
 - [DownloadUPBin](DownloadUPBin.md) — download a compiled user program
 - [ProgErase](ProgErase.md) — erase the stored user program
-- [ProgStatAll](ProgStatAll.md) — combined status of all tasks
+- [ProgStatAll](ProgStatAll.md) — combined status of all threads

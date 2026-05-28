@@ -55,7 +55,7 @@ Clearing:
 
 - `ConFlt` is automatically cleared to `0` when the axis is re-enabled (`MotorOn=1`).
 - You may write `0` to `ConFlt` to clear the fault status manually. Clearing `ConFlt` does **not** clear [ErrLog](ErrLog.md) or [ConFltSnapVal](ConFltSnapVal.md) — those persist for diagnosis.
-- The writable range is `0…0`: `0` is the only value you can write. You cannot write a positive value to simulate a fault, and writing a non-zero value is rejected.
+- In v4 the writable range is `0…0`: `0` is the only value you can write. You cannot write a positive value to simulate a fault, and writing a non-zero value is rejected. (In v5 you may also write negative values — see [Changes between versions](#changes-between-versions).)
 
 ### Some common fault codes
 
@@ -93,6 +93,8 @@ The v5 (Central-i) firmware defines additional fault codes that do not exist in 
 | 1080 | No phasing is detected |
 
 The mechanism (set on fault, cleared on re-enable, appended to `ErrLog`) is identical in both versions.
+
+In v5 the writable range is extended to `-3000…0`. Positive fault codes are still set only by the controller, but you may write a **negative** value yourself to record an application-level reason for disabling the axis (a user-defined message to your higher-level application). `0` still clears the fault status, and a positive value cannot be written.
 
 ## See also
 

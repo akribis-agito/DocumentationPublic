@@ -1,6 +1,6 @@
 ---
 keyword: VEncDelay
-summary: Fixed delay between the source signal and the virtual encoder output.
+summary: Pulse/direction setup delay (us) between a direction change and the first virtual-encoder pulse.
 availability:
   standalone:
   - v4

@@ -52,8 +52,8 @@ The array is organized as one **10-element block per thread** (up to 8 threads):
 | 3 | User-selected parameter 3 | [ProgSnapSrc](ProgSnapSrc.md) slot 3 |
 | 4 | User-selected parameter 4 | [ProgSnapSrc](ProgSnapSrc.md) slot 4 |
 | 5 | Program location ([ProgPointer](ProgPointer.md)) | fixed |
-| 6 | Expression-stack depth in use ([ProgExpDepth](ProgExpDepth.md)) | fixed |
-| 7 | Call-stack depth in use ([ProgCallDepth](ProgCallDepth.md)) | fixed |
+| 6 | Free space in the numeric (expression) stack ([ProgExpDepth](ProgExpDepth.md)) | fixed |
+| 7 | Free space in the call stack ([ProgCallDepth](ProgCallDepth.md)) | fixed |
 | 8 | Reserved | fixed |
 | 9 | Run-time error code ([ProgError](ProgError.md)) | fixed |
 | 10 | Capture time (s since power-on) | fixed |

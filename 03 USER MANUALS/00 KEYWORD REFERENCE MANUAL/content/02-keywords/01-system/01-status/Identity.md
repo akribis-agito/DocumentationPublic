@@ -104,6 +104,8 @@ The product type is a small numeric code identifying the model. The codes corres
 | 13 | AGD101EC |
 | 14 | AGD156EC |
 
+Additional internal type codes exist for non-standard products; the codes above are the ones returned by the standard customer models.
+
 ### Feature-flag words (indices 25 and 62)
 
 `Identity[25]` and `Identity[62]` are bitfields in which each bit advertises support for a specific firmware capability. Host software tests these bits to decide which features are available, rather than inferring capability from the firmware version number. Word 1 (`Identity[25]`) carries the bulk of the flags — for example learn-commutation, additional CNC segment features, vector motion mode, true-jerk CNC, smooth auto-phase, dynamic (indirect) array indexing, and Halls-only commutation. Word 2 (`Identity[62]`) carries newer flags as word 1 fills up.

@@ -1,9 +1,9 @@
 ---
-summary: Enables or disables continuous-time recording for each recording channel.
+summary: Enables or disables continuous-time recording for each scope.
 ---
 # RecCTEnable
 
-Enables or disables continuous-time recording for each recording channel.
+Enables or disables continuous-time recording for each scope.
 
 ## Overview
 
@@ -14,7 +14,7 @@ Enables or disables continuous-time recording for each recording channel.
 ## Examples
 
 ```text
-ARecCTEnable[1]=1    ; enable continuous-time recording on the first channel
+ARecCTEnable[1]=1    ; enable continuous-time recording on the first scope
 ARecCTEnable[1]     ; query the continuous-time recording state
 ```
 

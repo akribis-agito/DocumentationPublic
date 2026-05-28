@@ -1,5 +1,5 @@
 ---
-summary: Dynamic braking — rapidly stops the motor by shorting its phases (DynBrakeOn, DynBrkRef, DynBrakeSpeed).
+summary: Dynamic braking — rapidly stops the motor by shorting its phases (DynBrakeOn, DynBrkRef).
 ---
 # Dynamic brake
 
