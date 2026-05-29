@@ -42,7 +42,7 @@ Read-only controller-board temperature (°C).
 
 ### Measurement
 
-On controller-type products the board sensor is read over I²C: the I²C module is pre-configured at startup to read the temperature device, and the result is copied to `BoardTemp` each background pass. A reading of 255 means "no sensor connected" (e.g. AGC301, where the sensor lives on the amplifier board) and is reported as 0 °C.
+On controller-type products the board sensor is read over I²C: the I²C module is pre-configured at startup to read the temperature device, and the result is copied to `BoardTemp` each background pass. A reading of 255 means "no sensor connected" (e.g. AGC301, where the sensor lives on the amplifier board) and is reported as 0 °C. On the Central-i master the board-temperature read is not currently active, so `BoardTemp` stays at its default there.
 
 ### Over-temperature protection (fixed limit)
 
@@ -66,7 +66,7 @@ if (BoardTemp > 75 °C)   →   disable axis, raise the board over-temperature f
 | > 72 °C | 3 — high | red |
 | > 75 °C | fault (`ConFlt` = 1060) | — |
 
-On newer Central-i remote units the board-temperature band edges come from a per-axis limit instead of these fixed values.
+On newer Central-i remote units the board-temperature WARNING band edges are derived (at 88 / 92 / 96 %) from a per-axis limit reported by the remote unit, instead of the fixed 66 / 69 / 72 °C values; the board over-temperature FAULT limit stays the fixed 75 °C on both standalone and Central-i.
 
 ### Edge cases
 
@@ -76,6 +76,7 @@ On newer Central-i remote units the board-temperature band edges come from a per
 - **Fixed limit:** the board limit is **not** configurable on standalone v4 — it is the fixed 75 °C constant. Only [MaxPwrTemp](MaxPwrTemp.md) is user-settable.
 - **Shared warning field:** [StatReg](../../07-status-and-faults/StatReg.md) bits 11–12 carry the higher of [PwrTemp](PwrTemp.md) and `BoardTemp` warning levels.
 - **Clearing the fault:** ConFlt code 1060 clears on re-enable ([MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../07-status-and-faults/ErrLog.md) entry persists.
+- **Which axis tripped:** the matching [ErrLog](../../07-status-and-faults/ErrLog.md) entry is tagged with the axis that tripped — the source tag in the upper 8 bits carries the 1-based axis number (axis A = 1) alongside fault code 1060 in the lower bits — so on a multi-axis unit you can tell which axis faulted.
 - **HWProtectBits / ProtectMask:** the board over-temperature trip is not maskable through [ProtectMask](../01-general-protection/ProtectMask.md).
 
 ## Examples

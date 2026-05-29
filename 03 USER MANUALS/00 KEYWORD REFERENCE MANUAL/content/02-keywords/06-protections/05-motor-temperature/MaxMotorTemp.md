@@ -40,7 +40,7 @@ Maximum allowable motor temperature (PT100 sensor); exceeding it faults.
 
 ### Over-temperature fault
 
-Once per millisecond, while the motor is on and not in simulation, the controller checks:
+The control loop runs at ~16 kHz, and the over-temperature check is evaluated once per ~1 ms (the warning bands are updated on a separate ~1 ms sub-phase of the same cycle). Once per millisecond, while the motor is on and not in simulation, the controller checks:
 
 ```text
 if (MotorTempUsed != 0  &&  MotorTemp > MaxMotorTemp)
@@ -65,11 +65,12 @@ So the warning ramps up well before the fault, giving early indication on the st
 
 ### Edge cases
 
-- **Motor off:** the fault check is gated on motor-on (the doc statement above), so over-temperature does **not** trip with the motor off — the sensor would still be live but a thermal soak only fails the next time you re-enable.
+- **Motor off:** the fault check is gated on motor-on (the doc statement above), so over-temperature does **not** trip with the motor off — the sensor would still be live but a thermal soak only fails the next time you re-enable. The warning bands (StatReg bits 15–16) continue to update even with the motor off, so you can watch the temperature climb on the status panel; only the trip itself is suppressed until the next re-enable.
 - **Sensor not selected:** with [MotorTempUsed](MotorTempUsed.md) = `0` both the fault check and the warning bands are skipped entirely, and the warning field is cleared.
 - **Simulation mode:** the trip is skipped in simulation (no real sensor).
-- **Range overflow:** writes outside `10…150` are clamped to the keyword `range`; whenever you write `MaxMotorTemp` the warning band edges are recomputed.
+- **Range overflow:** writes outside `10…150` are **rejected** (out-of-range error) and the stored value is left unchanged — the limit is not clamped. Whenever a valid write of `MaxMotorTemp` is accepted, the warning band edges are recomputed.
 - **Clearing the fault:** ConFlt code 1040 clears on re-enable ([MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../07-status-and-faults/ErrLog.md) entry persists.
+- **Which axis tripped:** the matching [ErrLog](../../07-status-and-faults/ErrLog.md) entry is tagged with the axis that tripped — the source tag in the upper 8 bits carries the 1-based axis number (axis A = 1) alongside fault code 1040 in the lower bits — so on a multi-axis unit you can tell which axis faulted.
 - **HWProtectBits / ProtectMask:** the motor over-temperature trip is not maskable through [ProtectMask](../01-general-protection/ProtectMask.md).
 
 ## Examples

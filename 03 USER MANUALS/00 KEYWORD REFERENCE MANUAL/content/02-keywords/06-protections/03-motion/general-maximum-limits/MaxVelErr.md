@@ -54,6 +54,7 @@ Key points:
 - The protection is active **only** in position-control, velocity-control, or force-over-PIV operation. In other modes the velocity error is forced to `0`, so the check cannot trip.
 - It is **bypassed for velocity-command (analog) amplifiers** ([AmpType](../../../02-motor-and-amplifier/AmpType.md) = analog velocity command), because the external drive closes its own velocity loop.
 - On a violation the axis is turned off immediately.
+- **Requires commutation.** This check lives in the same position/velocity-loop block as the position following-error trip and only runs once commutation is established — [StatReg](../../../07-status-and-faults/StatReg.md) bit 0 (commutation done) is set. On a brushless motor that has not yet completed auto-phasing the loop is not closed, so the velocity following-error trip cannot fire. Note this is unlike the [MaxVel](MaxVel.md) overspeed trip, which does not require commutation (it runs once the motor is on for a real motor on a current-commanded amplifier, regardless of commutation state).
 
 ### Edge cases
 

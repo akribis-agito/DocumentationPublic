@@ -19,7 +19,7 @@ A typical setup for catching mechanical jam on a horizontal stage:
 ```text
 AStuckCurr[1]=4000      ; treat >= 4 A as "drive is pushing hard"
 AStuckVel[1]=40000      ; treat <= 40000 user units/s as "not moving"
-AStuckTime[1]=4096      ; require ~250 ms of unbroken stuck condition
+AStuckTime[1]=250       ; require 250 ms of unbroken stuck condition
 ```
 
 Drive the axis into a hard endstop or simulate a jam:

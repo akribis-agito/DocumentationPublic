@@ -40,7 +40,7 @@ Read-only measured motor temperature in °C (flagged not implemented in the keyw
 
 ### Measurement pipeline (sensor → °C)
 
-On products that sample an RTD, the controller reads the raw ADC word each control cycle and converts it directly to °C with a fixed linear formula (no user scaling, `scaling = 1.0`):
+On products that sample an RTD, the controller samples the raw RTD ADC word once per protection cycle (about once per millisecond) and converts it directly to °C with a fixed linear formula (no user scaling, `scaling = 1.0`):
 
 $$
 \text{MotorTemp} = 133 - \left\lfloor \frac{ADC \times 393}{2^{n}} \right\rfloor

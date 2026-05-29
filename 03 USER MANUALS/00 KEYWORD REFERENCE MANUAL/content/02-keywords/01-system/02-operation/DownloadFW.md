@@ -42,7 +42,7 @@ The [DontDownload](../01-status/DontDownload.md) flag, when set, blocks firmware
 
 `DownloadFW` hands control from the running firmware to the on-board boot program, which performs the actual image transfer. The sequence is:
 
-1. **Password handshake.** The controller requests a password and waits for the host to send the expected reply over the same link the command arrived on (USB/serial, CAN, or Ethernet). PCSuite supplies this automatically. A wrong reply returns a password error; no reply within the timeout returns a timeout error — in either case the controller stays in normal operation.
+1. **Password handshake.** The controller requests a password and waits for the host to send the expected reply over the same link the command arrived on (USB/serial, CAN, or Ethernet). PCSuite supplies this automatically. A wrong reply returns a password error; no reply within about 10 seconds returns a timeout error — in either case the controller stays in normal operation.
 2. **Quiesce hardware.** On success the serial bus is closed and the FPGA is reset so the drive outputs are taken to a safe state, and the I/O pins are returned to the mode the boot program expects.
 3. **Jump to boot.** The firmware records which interface initiated the download and jumps to the boot program, which receives and writes the new image. The download tool then restarts the unit; on the next start-up the controller runs the new firmware.
 

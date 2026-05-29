@@ -46,6 +46,8 @@ When `ChainAddress` is not `-1`, each command on the serial bus must begin with 
 
 A bare carriage return after the address (no command) is treated as a do-nothing keep-alive. The valid range is therefore `-1` (disabled) and `0`–`8`, where `8` is reserved as the quiet broadcast address. The address actually in use is reported through the identification data.
 
+The addressing applies to the **RJ45 serial port only**. The serial mini-USB port has no address-prefix handling, so it always responds to commands without an address digit, whatever `ChainAddress` is set to. When `ChainAddress` is not `-1`, the RJ45 port is brought up as an RS-485 half-duplex link at start-up: the controller drives the bus's transmit-enable (direction) line only while it is replying, and releases it otherwise. That half-duplex direction switching is what lets several units share a single twisted pair without their transmitters colliding.
+
 Because the address is read only at start-up, you cannot move a controller to a new chain position on the fly — you must Save and Reset.
 
 ## Examples

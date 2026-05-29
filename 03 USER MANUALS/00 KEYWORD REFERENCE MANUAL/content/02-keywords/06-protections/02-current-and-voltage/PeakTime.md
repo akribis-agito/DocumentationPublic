@@ -50,6 +50,8 @@ A larger `PeakTime` gives a longer τ — the motor is allowed to dwell at peak 
 
 > **Note (Central-i):** for some remote amplifier sub-types the firmware clamps `PeakTime` to 1500 ms internally.
 
+> **Note (illegal I²t parameters):** if any of `PeakTime`, [ContCL](ContCL.md) or [PeakCL](PeakCL.md) is left at 0 when the I²t constants are computed, the firmware cannot solve for τ. It then forces a safe configuration — `PeakTime` to its default of 500 ms, and `ContCL`/`PeakCL` to their minimum values — and logs a warning to the [ErrLog](../../07-status-and-faults/ErrLog.md). Set all three keywords to valid, non-zero values to keep the I²t protection you intend.
+
 If the motor's trip time is rated at a trip current different from the peak current, compute the equivalent peak-current time from the motor's trip-curve formula before setting `PeakTime`.
 
 ## Examples

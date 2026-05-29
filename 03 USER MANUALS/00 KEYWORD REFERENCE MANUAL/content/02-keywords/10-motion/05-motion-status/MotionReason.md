@@ -139,6 +139,6 @@ Interpretation:
 - [Stop](../04-motion-command/Stop.md) / [Abort](../04-motion-command/Abort.md) / [StopRep](../04-motion-command/StopRep.md) — commands that set reason codes 1 / 2 / 3
 - [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md) / [RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md) — software limits behind reason codes 6 / 7
 - [LimitsStat](../../06-protections/03-motion/position-limit-protection/LimitsStat.md) — hardware limit switches behind reason codes 4 / 5
-- [EmrgDec](../03-kinematics-configuration/EmrgDec.md) — substituted for `Decel` on limit-related reasons (4 / 5 / 6 / 7)
+- [EmrgDec](../03-kinematics-configuration/EmrgDec.md) — substituted for `Decel` on limit-related and controlled-stop-by-input reasons (4 / 5 / 6 / 7 / 28)
 - [ConFlt](../../07-status-and-faults/ConFlt.md) — fault entry usually paired with the fault/disable cluster (reasons 8, 21, 22, 28)
 - [MotorReason](../../07-status-and-faults/MotorReason.md) — explains why the motor was disabled when `MotionReason` = 8

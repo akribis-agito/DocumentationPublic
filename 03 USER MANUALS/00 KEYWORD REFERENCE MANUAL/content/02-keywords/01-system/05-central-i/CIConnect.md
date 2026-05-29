@@ -38,7 +38,9 @@ Configure the port first — the expected device role ([CIDeviceType](CIDeviceTy
 
 ## How it works
 
-`CIConnect` does not block until the link is up. It validates the request, then arms a per-port state machine that the firmware advances (during boot it is driven to completion in a loop; once interrupts are running it advances one step per control cycle). The reported state is visible in `CIStatus[1]` — see [CIStatus](CIStatus.md) for the full state table.
+`CIConnect` does not block until the link is up. It validates the request, then arms a per-port state machine that the firmware advances in the background: one connection step is taken per background pass until the port reaches connected (`CIStatus[1] = 3`) or fault (`2`), at which point the request is cleared. (The live, per-cycle synchronous data exchange runs separately, in the control interrupt, only once the port is connected.) At power-up the same sequence is instead driven to completion in a tight loop, because the background loop and control interrupt are not yet running — see *Power-up* under [Edge cases](#edge-cases). The reported state is visible in `CIStatus[1]` — see [CIStatus](CIStatus.md) for the full state table.
+
+When a port reaches the connected state the firmware re-applies any per-device special parameters and opens a short settling window (about 150 control cycles) before relying on the remote's front-end, so the first readings stabilise before the link is treated as fully live.
 
 ![CIConnect sequence](ciconnect-sequence.svg)
 

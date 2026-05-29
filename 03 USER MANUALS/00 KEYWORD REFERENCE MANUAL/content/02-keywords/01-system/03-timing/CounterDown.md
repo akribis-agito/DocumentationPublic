@@ -36,7 +36,7 @@ Two independent down-counters decremented every controller cycle.
 
 ## How it works
 
-The two counters are decremented together inside the control interrupt, in the same place the firmware maintains its other periodic timers. The control interrupt runs at **16384 samples per second** (one tick every ~61 µs), so a value written to a counter elapses in (value / 16384) seconds. Each counter is guarded so it only decrements while positive; once it hits 0 it holds there until written again.
+The two counters are decremented together inside the control interrupt, in the same place the firmware maintains its other periodic timers. The control interrupt runs at **16384 samples per second** (one tick every 61.04 µs), so a value written to a counter elapses in (value / 16384) seconds. Each counter is guarded so it only decrements while positive; once it hits 0 it holds there until written again.
 
 This makes `CounterDown` a convenient self-clearing timer or delay inside a user program: write the number of cycles to wait, then test for the counter being 0 to detect that the interval has elapsed.
 

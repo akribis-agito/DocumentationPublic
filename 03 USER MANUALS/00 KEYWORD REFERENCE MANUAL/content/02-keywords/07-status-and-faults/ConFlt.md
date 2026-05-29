@@ -36,7 +36,7 @@ Holds the controller error code that disabled the axis.
 
 ## Overview
 
-`ConFlt` stores the error code that caused the axis to be disabled. A value of `0` means no fault is present; any positive value is a controller fault code. Fault codes are numbered from a base of `1000`, so the first real fault is `1001` (abort signal) and the codes run up contiguously from there — see [Controller error codes](../../04-error-codes/controller-error-codes.md) for the full list and their meanings.
+`ConFlt` stores the error code that caused the axis to be disabled. A value of `0` means no fault is present; any positive value is a controller fault code. Fault codes are numbered from a base of `1000` and run up contiguously from there — see [Controller error codes](../../04-error-codes/controller-error-codes.md) for the full list and their meanings. Note that `1001` (abort signal) is a reserved/legacy code that the current firmware does not raise; the lowest codes you will actually see are the active protections such as `1003` (encoder error), `1020` (position error) and the bus-voltage and over-current faults.
 
 `ConFlt` is an axis-scoped register that is not saved to flash, so it always reflects the live fault state of that axis. It works together with the diagnostic snapshot pair [ConFltSnapSrc](ConFltSnapSrc.md) / [ConFltSnapVal](ConFltSnapVal.md), which freeze selected parameter values at the moment a fault occurs, and with [MotorReason](MotorReason.md), which reports the broader category of why the axis was disabled.
 
@@ -50,6 +50,8 @@ When the controller detects a disabling fault it performs four actions together,
 2. `ConFlt` is loaded with the fault code.
 3. A diagnostic snapshot is captured into [ConFltSnapVal](ConFltSnapVal.md).
 4. The fault is appended to the controller [ErrLog](ErrLog.md), tagged with the axis letter, together with the power-on time.
+
+Exception: the CPU background-loop watchdog fault (`1081`) does not follow the full sequence. When it trips, the controller forces every axis off and writes `ConFlt=1081` on each axis whose `ConFlt` was still `0` (it never overwrites a fault already present), but for `1081` it does **not** capture a fresh [ConFltSnapVal](ConFltSnapVal.md) snapshot and does **not** append a `1081` entry to [ErrLog](ErrLog.md). So an axis taken down only by `1081` has no matching snapshot or log pair for it: the snapshot still holds whatever was last captured (its default of `-1` if that axis had never faulted before, otherwise the stale values from an earlier fault). If you read `ConFlt=1081` on several axes at once with no matching `1081` snapshot or log entry, that is expected.
 
 Separately, when the axis transitions to disabled while a fault is present, [MotorReason](MotorReason.md) is set to `1` (controller fault).
 

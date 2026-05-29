@@ -55,6 +55,7 @@ When the loop later finds the position error exceeds the active threshold, the o
 
 - **Motor off:** the position loop and the limit check do not run; the error is forced to `0` on motor-off.
 - **Mode dependency:** the underlying `PosErr` is forced to `0` for open-loop steppers, and in any mode that is not position-control or force-over-PIV. In those cases the check cannot trip regardless of the active threshold.
+- **Requires commutation:** like the closed-loop check (see [MaxPosErr](MaxPosErr.md)), the position-error trip runs only once commutation is established ([StatReg](../../../07-status-and-faults/StatReg.md) bit 0 set), so it cannot fire on a brushless motor that has not yet completed auto-phasing.
 - **Range overflow:** writes outside the keyword `range` are clamped to the range; the in-force internal limit is recomputed each time `MaxPosErrOL`/`MaxPosErr`/`OpenLoopOn`/`InjectType`/`InjectPoint` changes.
 - **Clearing the fault:** ConFlt code 1055 clears on re-enable ([MotorOn](../../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../../07-status-and-faults/ErrLog.md) entry persists.
 - **HWProtectBits / ProtectMask:** open-loop following-error trips are not maskable through [ProtectMask](../../01-general-protection/ProtectMask.md) (that mask covers hardware-protection bits only).

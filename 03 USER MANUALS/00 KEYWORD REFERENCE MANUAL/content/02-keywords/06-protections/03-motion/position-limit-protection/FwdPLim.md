@@ -61,10 +61,16 @@ where `T` is the control sample time and `k` is the firmware's sample-frequency-
 
 **4. Begin-time rejection.** A motion cannot be started in the "outside the limits, pointing further out" case: if the position reference is already beyond `FwdPLim`/`RevPLim` and the motion mode is not one of the direct/jog modes that can drive back inside, `Begin` is rejected (the axis cannot start a motion while outside the position limits).
 
+**Direction gating — moving away from a limit is always allowed.** The forward checks (both the software limit, comparing the shaped/filtered commanded position reference against `FwdPLim`, and the hardware FLS test) only run while the profiled velocity is positive; the reverse checks (against `RevPLim`, and the hardware RLS test) only run while it is negative. Because the limit check is gated by the velocity sign, an axis already sitting on an active limit can be driven *away* from it — a reverse move off `FwdPLim`, or a forward move off `RevPLim` — without re-raising the stop request or re-writing [MotionReason](../../../10-motion/05-motion-status/MotionReason.md). Only motion *toward* the limit it is on is stopped.
+
 | MotionReason | Meaning |
 |--------------|---------|
 | 7 | Motion stopped at the forward software limit |
 | 6 | Motion stopped at the reverse software limit |
+
+### Live status vs. stop reason
+
+Beyond the one-shot [MotionReason](../../../10-motion/05-motion-status/MotionReason.md) 6/7 logged at the stop event, the controller also reports a continuous, pollable flag in [StatReg](../../../07-status-and-faults/StatReg.md): bit 20 is set whenever the shaped/filtered position reference is past `FwdPLim` and bit 19 whenever it is below `RevPLim` (both cleared otherwise, re-evaluated every control cycle). These are status only and raise no [ConFlt](../../../07-status-and-faults/ConFlt.md). See [StatReg](../../../07-status-and-faults/StatReg.md) bits 19/20.
 
 ### Data type by version
 

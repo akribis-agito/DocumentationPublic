@@ -57,6 +57,7 @@ When the loop finds the velocity error exceeds the active threshold, the open-lo
 
 - **Motor off:** the velocity loop and the limit check do not run; `VelErr` is reset to `0`.
 - **Mode dependency:** `VelErr` is forced to `0` outside position-control, velocity-control, and force-over-PIV operation, so the check cannot trip in those modes regardless of threshold.
+- **Requires commutation:** like the closed-loop check (see [MaxVelErr](MaxVelErr.md)), the velocity-error trip runs only once commutation is established ([StatReg](../../../07-status-and-faults/StatReg.md) bit 0 set), so it cannot fire on a brushless motor that has not yet completed auto-phasing.
 - **Velocity-command amplifier bypass:** the trip is skipped entirely when [AmpType](../../../02-motor-and-amplifier/AmpType.md) is the analog-velocity-command amplifier — the external drive closes its own velocity loop.
 - **Range overflow:** writes outside the keyword `range` are clamped; the active internal limit is recomputed each time `MaxVelErrOL`/`MaxVelErr`/`OpenLoopOn`/`InjectType`/`InjectPoint` changes.
 - **Clearing the fault:** ConFlt code 1056 clears on re-enable ([MotorOn](../../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../../07-status-and-faults/ErrLog.md) entry persists.

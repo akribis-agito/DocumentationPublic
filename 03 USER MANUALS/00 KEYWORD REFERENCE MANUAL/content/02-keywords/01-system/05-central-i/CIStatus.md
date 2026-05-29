@@ -39,12 +39,12 @@ Per-axis array reporting the live Central-i port state, error counters, and last
 | Index | Field | Meaning |
 |-------|-------|---------|
 | [1] | State machine | Connection state — see the state table below |
-| [2] | Mailbox-1 error count | Number of mailbox-1 (asynchronous) errors |
-| [3] | Mailbox-2 error count | Number of mailbox-2 (asynchronous) errors |
-| [4] | Sync error count | Number of synchronous-message (per-cycle) errors |
+| [2] | Reserved | Always reads `0` |
+| [3] | Offline error count | Count of offline (non-cyclic) errors: connection-sequence faults (codes 5–14), a failed offline message send (code 5), and failed background reads from the remote (code 10) |
+| [4] | Sync error count | Number of synchronous-message (per-cycle) errors (codes 1–4) |
 | [5] | Last error time | Time of the last error (seconds since power-on, cf. [Time](../03-timing/Time.md)) |
 | [6] | Last error code | Code of the last error — see the error-code table below |
-| [7] | Port frequency | Central-i port frequency |
+| [7] | Port frequency | Central-i channel bit-rate in MHz (default `10`) |
 
 ### Connection state — `CIStatus[1]`
 
@@ -75,6 +75,12 @@ Per-axis array reporting the live Central-i port state, error counters, and last
 | 12 | Device read from E² differs from FPGA (contact Agito) |
 | 13 | Amplifier requires `AmpType` = built-in PWM |
 | 14 | Adapter requires `AmpType` = linear-remote |
+
+### What sets the fault state
+
+A connected port leaves state `3` and enters state `2` (fault) when the per-cycle synchronous reply from the remote is not received in time. The firmware treats this as a lost link: it turns the motor off with controller fault [ConFlt](../../07-status-and-faults/ConFlt.md) = 1043, clears the port's connected bit in [CIGlobalStat](CIGlobalStat.md), removes the motor-on command to the remote, and drives the amplifier output to its mid-scale (zero-torque) value. `CIStatus[4]` (sync error count) is incremented, `CIStatus[5]` records the time, and `CIStatus[6]` is set to `4` (synchronous error timeout).
+
+The other synchronous errors — first-part CRC (`CIStatus[6] = 1`), second-part CRC (`CIStatus[6] = 2`), and message-not-sent (`CIStatus[6] = 3`) — are only counted in `CIStatus[4]` and recorded in `CIStatus[5]`/`[6]`; they do not by themselves fault the axis, and the link keeps running. Synchronous errors in the first few control cycles immediately after a connection are ignored (the firmware suppresses them for the first 4 cycles).
 
 ## Examples
 

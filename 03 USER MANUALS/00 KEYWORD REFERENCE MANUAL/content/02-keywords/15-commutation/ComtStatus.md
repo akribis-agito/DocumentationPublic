@@ -75,6 +75,10 @@ The array holds the following elements (1-indexed):
 
 The illegal-Hall errors (`-7`, `-9` … `-12`) are raised when [HallsValue](HallsValue.md) reads `0` or `7` (the two combinations outside the legal range 1–6), or when the observed Hall sequence does not match the expected order.
 
+### Burn-in mode (status `600`)
+
+While burn-in motion is active (see [BurnInMode](../../03-special-features/burn-in/BurnInMode.md)) the phasing status reads `600`. In this mode the controller drives a *virtual* commutation for a brushless motor: the electrical angle is advanced at a fixed electrical frequency (set by [BurnInFreq](../../03-special-features/burn-in/BurnInFreq.md)), with no position feedback. The commutation-complete bit of [StatReg](../07-status-and-faults/StatReg.md) (bit 0) is set so the axis can run during the test. When burn-in mode is turned off, because the motor may have moved while its angle was driven open-loop, the phasing status becomes `-5` (parameter modified — commutation is required), so a fresh commutation must run before normal motion resumes.
+
 ## Examples
 
 ```text

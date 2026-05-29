@@ -58,6 +58,8 @@ To protect the motor, it is recommended to use more conservative ContCL, PeakCL 
 
 The controller tripping mechanism works by continuously obtaining $I^{2}$ (through MotorCurr parameter) and filtering this value with low-pass filter with time constant $\tau$. If the filtered result is higher than ${I_{c}}^{2}$, I2t trip event is triggered.
 
+The squared value fed into the I2t filter is exactly `MotorCurr`-squared. For a brushless (3-phase) motor the controller forms `MotorCurr` as the amplitude of the motor-current phasor, $\text{MotorCurr}=\sqrt{\tfrac{2}{3}\,(I_a^{2}+I_b^{2}+I_c^{2})}$; for a brush motor / voice coil `MotorCurr` $=|I_a|$; for a stepper `MotorCurr` $=\sqrt{I_a^{2}+I_b^{2}}$. Because the peak/continuous limits ([PeakCL](PeakCL.md)/[ContCL](ContCL.md)) are themselves specified as phase currents, the filter compares directly against `ContCL`-squared with no extra scaling.
+
 ![I2t tripping mechanism: MotorCurr is squared and low-pass filtered, then compared against the squared continuous current limit to trigger the I2t trip event](I2t-tripping-mechanism.svg)
 
 The low-pass filter, in continuous form, is

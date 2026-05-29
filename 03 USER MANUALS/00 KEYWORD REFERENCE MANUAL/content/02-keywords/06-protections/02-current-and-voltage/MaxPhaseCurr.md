@@ -51,7 +51,7 @@ This is the per-phase counterpart of [MaxMotorCurr](MaxMotorCurr.md), which trip
 
 ### Edge cases
 
-- **Motor off:** the per-phase over-current checks run only while the motor is on. On motor-off the firmware resets all three phase counters, so the next motor-on starts from a clean state.
+- **Motor off / non-current modes:** the per-phase over-current checks run only while the motor is on **and** the current loop is actually driving the phases — they are skipped for the simulation motor type (see [MotorType](../../02-motor-and-amplifier/MotorType.md)) and for the position-detector (PD) amplifier type (see [AmpType](../../02-motor-and-amplifier/AmpType.md)), where the current loop is bypassed. Whenever the checks are skipped (motor off, simulation, or PD), the firmware resets all three phase counters, so the next time the checks resume they start from a clean state.
 - **Mode dependency:** the trip runs regardless of operation mode (it is a hardware-safety check, not a closed-loop-state check).
 - **Single-phase motors / voice coils:** only the total motor current `MotorCurr` is monitored (against [MaxMotorCurr](MaxMotorCurr.md)); the per-phase trip does not apply.
 - **Range overflow:** writes outside `0…76000` (v4) are clamped to the keyword `range`.

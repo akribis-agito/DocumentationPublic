@@ -32,7 +32,7 @@ Consecutive cycles the dual-loop feedback mismatch may persist before tripping.
 
 ## Overview
 
-`DualStuckTime` is how long the dual-loop feedback mismatch may persist before the dual-stuck fault fires. The keyword carries a samples-to-milliseconds scaling, and internally it is compared against a sample counter (1 control sample ≈ 15.26 µs, i.e. value/65.536 ms). The default is `4096`.
+`DualStuckTime` is how long the dual-loop feedback mismatch may persist before the dual-stuck fault fires. You set it in milliseconds; the keyword carries a samples-to-milliseconds scaling, and internally it is compared against a sample counter (1 control sample ≈ 61.0 µs at the standard 16 kHz control rate; the value you set in ms is stored internally as value·16.384 samples). The default is `4096`.
 
 ## How it works
 

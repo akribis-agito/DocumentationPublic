@@ -45,6 +45,8 @@ Each error occupies **two** consecutive array elements (a "pair"):
 
 The first error is therefore in `ErrLog[1]` / `ErrLog[2]`, the second in `ErrLog[3]` / `ErrLog[4]`, and so on. The array holds **128 event pairs** (256 used elements; index `[0]` is unused so that the first usable index is `[1]`). When the buffer is full it wraps back to `ErrLog[1]` and overwrites the oldest pair — it is a circular log, so it always keeps the most recent 128 events but has no overflow flag.
 
+The buffer length scales with the unit's axis count: it is 64 entries per axis plus one unused leading element (`64 x axes + 1`). On this product that is 257 elements = 128 event pairs (256 used; index `[0]` is unused); a unit with a different number of axes has proportionally more or fewer pairs (for example a 3-axis unit is 193 elements = 96 pairs). In all cases it wraps after the last pair, overwriting the oldest, with no overflow flag.
+
 ![Two views of ErrLog: the top row shows the 256-element ring as 128 pairs of (code, time), wrapping after pair 128 and overwriting the oldest pair; the bottom row shows the 32-bit layout of pair element 1, with the source tag in the upper 8 bits and the error code in the lower 24 bits](errlog-ring-pairs.svg)
 
 ### Tagged error code (pair element 1)

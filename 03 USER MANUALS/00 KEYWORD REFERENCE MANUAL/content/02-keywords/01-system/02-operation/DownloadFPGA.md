@@ -42,7 +42,7 @@ A firmware/FPGA version mismatch is reported by [UnitStat](../01-status/UnitStat
 
 `DownloadFPGA` follows the same path as [DownloadFW](DownloadFW.md) — it just targets the FPGA configuration image instead of the processor firmware:
 
-1. **Password handshake.** The controller requests a password and waits for the host to reply over the link the command arrived on (USB/serial, CAN, or Ethernet). PCSuite supplies this automatically; a wrong reply or a timeout leaves the unit in normal operation.
+1. **Password handshake.** The controller requests a password and waits for the host to reply over the link the command arrived on (USB/serial, CAN, or Ethernet). PCSuite supplies this automatically; a wrong reply, or no reply within about 10 seconds, leaves the unit in normal operation.
 2. **Quiesce hardware.** On success the serial bus is closed and the FPGA is reset so the drive outputs are safe, and the I/O pins are set to the mode the boot program expects.
 3. **Jump to boot.** The firmware records the originating interface and hands over to the boot program, which receives and writes the new FPGA image, then restarts the unit.
 

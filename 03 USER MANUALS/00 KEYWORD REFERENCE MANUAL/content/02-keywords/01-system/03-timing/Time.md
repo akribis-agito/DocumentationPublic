@@ -42,6 +42,8 @@ The control interrupt runs at a fixed sample rate (16384 samples per second). A 
 
 `Time` is a signed 32-bit value. Incrementing once per second it would take on the order of decades of continuous run-time to approach its positive maximum (2147483647), so rollover is not a practical concern.
 
+Note on accuracy: `Time` measures elapsed seconds by counting the controller's own control-loop samples (16384 nominal samples = one second), not against a separate real-time clock. The physical sample rate is slightly faster than the nominal 16384 Hz, so `Time` advances a little faster than true wall-clock time. The error is small but accumulates over long uptimes — on the order of seconds per day — so `Time` is suitable for relative elapsed-time measurement and coarse timestamping, but should not be relied on as an accurate absolute clock over long periods.
+
 Worked examples (uptime conversions):
 
 | `Time` value | Elapsed run-time |

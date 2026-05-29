@@ -64,6 +64,7 @@ APosBeforeMap        ; read the uncorrected feedback position
 - **Simulation motor** — mapping is skipped; `PosBeforeMap` equals `Pos`.
 - **Main encoder only** — always reflects this axis's main encoder, regardless of the source [MapEncoder](MapEncoder.md) selects for the lookup.
 - **Motor off** — sampled every cycle regardless; useful for diagnostics with the servo off.
+- **With modulus ([ModRev](../03-encoder/04-modulo-mode/ModRev.md) ≠ 0)** — on v5 (central-i), `PosBeforeMap` is re-captured *after* the modulus wrap, so it reflects the rolled-over (in-range) encoder value on the cycle a wrap occurs. On v4 it is captured once *before* the wrap, so it can momentarily read just outside the modulus range on the wrap cycle. The difference is observable only while modulus is active.
 - **Platform** — v5 widens to 64-bit; v4 is 32-bit. Units are user units in both cases.
 
 ## Changes between versions

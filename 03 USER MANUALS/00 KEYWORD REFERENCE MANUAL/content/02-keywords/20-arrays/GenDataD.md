@@ -30,7 +30,7 @@ General-purpose, non-axis 64-bit double-precision floating-point array for share
 
 `GenDataD` is the 64-bit double-precision floating-point member of the general-data array family. It is a general-purpose, non-axis array that provides the same kind of shared storage as [GenData](GenData.md) — accessible by both the user program and the host, not linked to any controller feature, and saved to flash — but holds real (double-precision floating-point) values rather than 32-bit integers. Use it where the user program or host needs to store fractional values or magnitudes beyond the range or precision of an integer.
 
-It is readable and writable at any time, including while in motion and with the motor on. Values can be set directly with a normal write or through the controller's indirect-write mechanism. The array is 1-indexed: the first usable element is `GenDataD[1]` (index 0 is reserved and inaccessible), and there are 100 usable elements.
+It is readable and writable at any time, including while in motion and with the motor on. Values are set with a normal write. The host-side indirect-write mechanism (`IndirectArray` / `IndirectIndex` / `IndirectValue` with `IndirectDo`) cannot target this array; it writes only the 32-bit integer [GenData](GenData.md). Within a user program, an element can still be addressed with a computed (run-time) index — see [Addressing](GenData.md#addressing). The array is 1-indexed: the first usable element is `GenDataD[1]` (index 0 is reserved and inaccessible), and there are 100 usable elements.
 
 ## Examples
 

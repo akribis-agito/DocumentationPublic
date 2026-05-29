@@ -48,8 +48,8 @@ Each bit reports a motion state when set (`= 1`); when cleared (`= 0`) it repres
 | 1 | 0x00000002 | Axis is dwelling between repetitions of point-to-point repetitive motion. Set when the previous repetition ends, cleared after [RptWait](../02-motion-configuration/RptWait.md) cycles. Only used when [MotionMode](../02-motion-configuration/MotionMode.md) `= 2`. |
 | 2 | 0x00000004 | Axis is ending its repetitive motion following a [StopRep](../04-motion-command/StopRep.md) command. |
 | 3 | 0x00000008 | A [Stop](../04-motion-command/Stop.md) (decelerate-to-stop) has been requested; the target speed is ramped to zero. |
-| 4 | 0x00000010 | Axis is accelerating (profile speed rising). Bits 4 and 5 are mutually exclusive. |
-| 5 | 0x00000020 | Axis is decelerating (profile speed falling). |
+| 4 | 0x00000010 | Axis is accelerating (profile speed rising). Bits 4 and 5 are mutually exclusive: during constant-velocity cruise (the profile speed has reached [Speed](../03-kinematics-configuration/Speed.md) and is neither rising nor falling) both bits are cleared. |
+| 5 | 0x00000020 | Axis is decelerating (profile speed falling, or reversing toward an opposite-sign target). This bit is also forced on whenever the profile speed is clamped to the deceleration-to-software-limit profile — i.e. it reports the pre-emptive braking toward [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md)/[RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md) even when no [Stop](../04-motion-command/Stop.md) has been commanded. |
 | 6 | 0x00000040 | Axis is in the profile-smoothing tail: the target has been reached but the jerk/smoothing filter is still flushing for `2^Jerk` cycles before the motion is declared finished. See [Jerk](../03-kinematics-configuration/Jerk.md). |
 | 7 | 0x00000080 | Axis is ending its ECAM motion (following a StopECAM command). |
 | 8 | 0x00000100 | Axis is ending its FIFO motion (following a StopFIFO command). |
@@ -85,6 +85,8 @@ Some bits are common to every motion; others appear only in specific [MotionMode
 | End-of-motion clear mask | `0xFFFC0000` (clears bits 0–17) | `0xFFE00000` (clears bits 0–20) |
 
 In **v5** a new bit 20 reports that a jog move is ending because it is approaching a software position limit, and the end-of-motion clear mask was widened accordingly. **v5 is central-i only.**
+
+Bit 20 is set only for jog moves, on the cycle the profiler speed is clamped to the deceleration profile that brings the axis to a stop exactly at [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md)/[RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md), and it is set together with the deceleration bit (5). Once the jog has decelerated to a near-zero profiler speed (a small fixed threshold) the move enters the end-of-smoothing wait and ends with [MotionReason](MotionReason.md) = 41. In other motion modes the same software-limit clamp sets only the deceleration bit (5) and never bit 20.
 
 ## Examples
 

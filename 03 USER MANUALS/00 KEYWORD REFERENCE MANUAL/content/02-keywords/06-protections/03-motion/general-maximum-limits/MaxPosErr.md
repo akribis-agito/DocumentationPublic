@@ -50,6 +50,7 @@ Key points:
 - The threshold actually used is switched between `MaxPosErr` (closed loop) and [MaxPosErrOL](MaxPosErrOL.md) (open loop / injection) depending on the loop state. In normal closed-loop operation the closed-loop threshold applies, so a violation records [ConFlt](../../../07-status-and-faults/ConFlt.md) ConFlt code 1020 (position error too high). In open loop the open-loop threshold applies and the same condition instead records ConFlt code 1055 (open-loop position error too high). See [MaxPosErrOL](MaxPosErrOL.md) for the full table of which condition selects which threshold.
 - The position error is forced to `0` (so this protection never trips) for an open-loop stepper, and whenever the axis is not in a position-control / force-over-PIV mode. The protection is therefore effective only when a position loop is actually closed.
 - On a violation the axis is turned off immediately, and the fault's configured stop behaviour applies.
+- **Requires commutation.** The position-loop block that hosts this check only runs once commutation is established — [StatReg](../../../07-status-and-faults/StatReg.md) bit 0 (commutation done) is set. On a brushless motor that has not yet completed auto-phasing the position loop is not closed, so the following-error trip cannot fire. Note this is unlike the [MaxVel](MaxVel.md) overspeed trip, which does not require commutation (it runs once the motor is on for a real motor on a current-commanded amplifier, regardless of commutation state).
 
 ### Edge cases
 

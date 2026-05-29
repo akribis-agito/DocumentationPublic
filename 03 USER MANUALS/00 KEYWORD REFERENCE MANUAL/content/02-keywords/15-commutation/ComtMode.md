@@ -46,7 +46,7 @@ The resulting electrical angle is reported by [ComtAng](ComtAng.md), and progres
 
 | Index | Setting | Values / meaning |
 |---|---|---|
-| `[1]` | Commutation **method** | `0` search "jump to zero"; `2` absolute encoder; `3` Hall + special-encoder switching (waits for index pulse for fine adjustment); `4` Hall + encoder switching (waits for a Hall transition for fine adjustment); `5` minimal-jumps search; `6` Hall-only |
+| `[1]` | Commutation **method** | `0` search "jump to zero"; `2` absolute encoder; `3` special-encoder switching, fixed built-in code→angle table, not [HallsAngle](HallsAngle.md) (waits for index pulse for fine adjustment); `4` Hall + encoder switching (waits for a Hall transition for fine adjustment); `5` minimal-jumps search; `6` Hall-only |
 | `[2]` | Voltage increment per step (search methods) | Output-voltage step added each iteration. Default `1` |
 | `[3]` | Number of steps (search methods) | Step count over which the search voltage is ramped/applied |
 | `[4]` | Absolute-encoder zero reference | Stored encoder position of electrical-angle zero (written by the controller when method `2` finishes; saved to flash) |
@@ -69,11 +69,23 @@ When a search-based commutation method is used (for example "jump to zero" or mi
 2. The motor moves only slightly until the correct commutation offset is found, after which the motor returns to its starting position.
 3. On success the commutation-complete bit of [StatReg](../07-status-and-faults/StatReg.md) (bit 0) is set and [ComtStatus](ComtStatus.md) reads `100`; on failure `ComtStatus` reads a negative error code.
 
+The search voltage and step count are configured by `[2]` (voltage increment per step) and `[3]` (number of steps), and the required accuracy by `[18]`. For the "jump to zero" method (`[1]=0`) the search is declared successful after **3 consecutive** jumps land inside the accepted size window; the count of consecutive in-window jumps is reported by [ComtStatus](ComtStatus.md)`[2]`. The search fails with [ComtStatus](ComtStatus.md) `-3` if the accumulated jumps exceed one full electrical revolution (360°, i.e. twelve 30° steps) without succeeding.
+
+On central-i v5 the minimal-jumps search uses the extended elements (see [below](#changes-between-versions)) to bound the attempt: it fails (also `-3`) when the number of jumps exceeds the **maximum attempted jumps** (`[31]`), or when the jumps still remaining can no longer reach the **minimum required successful jumps** (`[32]`); success requires the in-window jump count to reach that `[32]` minimum.
+
 If `[6]` smoothing is enabled, the search voltage is ramped toward its final value (reaching it after the time at index `[7]`) rather than applied as a step, which prevents a gravity-loaded axis from dropping when commutation begins.
 
 ### Hall- and encoder-based methods
 
-Methods `3`, `4` and `6` derive the angle from the Hall sensors via the [HallsValue](HallsValue.md) → [HallsAngle](HallsAngle.md) mapping. Methods `3` and `4` start from the Hall angle (a "rough" commutation, [ComtStatus](ComtStatus.md) `300`/`400`) and then refine it: method `3` waits for the encoder index pulse (electrical-angle zero) and method `4` waits for the next Hall transition. Method `6` (Hall-only) uses the Hall angle continuously, optionally smoothed by [HallOnlyFilt](HallOnlyFilt.md). Method `2` reads a previously stored absolute-encoder zero (index `[4]`) and needs no motion.
+Methods `4` and `6` derive the rough angle from the Hall sensors via the [HallsValue](HallsValue.md) → [HallsAngle](HallsAngle.md) mapping. Method `3` is for special encoders that report a Hall-like code directly: it uses a **fixed, built-in** code → angle table (it does **not** read [HallsAngle](HallsAngle.md)), mapping the six legal codes to 90, 210, 150, 330, 30 and 270 electrical degrees respectively, accurate to within ±30°. Methods `3` and `4` start from this rough angle (a "rough" commutation, [ComtStatus](ComtStatus.md) `300`/`400`) and then refine it; method `6` (Hall-only) uses the Hall angle continuously, optionally smoothed by [HallOnlyFilt](HallOnlyFilt.md). Method `2` reads a previously stored absolute-encoder zero (index `[4]`) and needs no motion.
+
+The refinement works as follows:
+
+- **Method `4`** (status `400`, *waiting for a Hall change*): on the next Hall transition that is *adjacent* — where the [HallsAngle](HallsAngle.md) entries of the new and previous states differ by less than 90° (i.e. ignoring the wrap-around edge) — the offset is set to the **midpoint** of those two states' [HallsAngle](HallsAngle.md) entries, and [ComtStatus](ComtStatus.md) advances to `100` (finished).
+- **Method `3`** (status `300`, *waiting for the index pulse*): when the encoder index is detected the offset is fixed to electrical-angle **zero** (the index marks commutation angle 0 in these special encoders) and [ComtStatus](ComtStatus.md) advances to `100`.
+
+> [!note]
+> Because method `3` reads the special-encoder code latched in hardware once and then clears the latch, a software reset or a re-commutation request (`[5]`) issued without an intervening power cycle finds the latch empty and fails with [ComtStatus](ComtStatus.md) `-6` (amplifier power cycle is required). It is the only method that does **not** consult [HallsAngle](HallsAngle.md).
 
 ![Hall-start-then-refine commutation: a rough angle from the Hall state lets the axis begin, then the controller refines it to a fine angle at the next index pulse (method 3) or Hall transition (method 4)](hall-encoder-switching.svg)
 
@@ -89,7 +101,7 @@ AComtMode[1]        ; query the configured commutation method
 
 ## Changes between versions
 
-On central-i v5 the array is extended to 33 elements (vs. 25 on v4/standalone), adding parameters for the minimal-jumps search such as a final detent current, a maximum number of attempted jumps, and a minimum number of required successful jumps. The core method/mode behavior described above is unchanged.
+On central-i v5 the array is extended to 33 elements (vs. 25 on v4/standalone), adding parameters for the minimal-jumps search such as a final detent current, the **maximum number of attempted jumps** (`[31]`) and the **minimum number of required successful jumps** (`[32]`). The core method/mode behavior described above is unchanged.
 
 ## See also
 

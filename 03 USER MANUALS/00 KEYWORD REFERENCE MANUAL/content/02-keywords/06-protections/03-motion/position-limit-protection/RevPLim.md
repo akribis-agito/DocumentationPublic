@@ -66,6 +66,10 @@ The profiled velocity is clamped to this so the axis arrives at `RevPLim` at zer
 | 6 | Motion stopped at the reverse software limit |
 | 7 | Motion stopped at the forward software limit |
 
+### Live status vs. stop reason
+
+Beyond the one-shot [MotionReason](../../../10-motion/05-motion-status/MotionReason.md) 6/7 logged at the stop event, the controller also reports a continuous, pollable flag in [StatReg](../../../07-status-and-faults/StatReg.md): bit 19 is set whenever the shaped/filtered position reference is below `RevPLim` and bit 20 whenever it is past `FwdPLim` (both cleared otherwise, re-evaluated every control cycle). These are status only and raise no [ConFlt](../../../07-status-and-faults/ConFlt.md). See [StatReg](../../../07-status-and-faults/StatReg.md) bits 19/20.
+
 ### Data type by version
 
 On central-i v5 the limit is stored as a 64-bit position, extending the usable travel range beyond the 32-bit range used on standalone/v4 (see the frontmatter `range` override). The braking and clamping logic is otherwise identical.

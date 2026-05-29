@@ -38,7 +38,7 @@ The array is 5 long but index 0 is unused — communication indexes start at 1, 
 
 ## How it works
 
-The controller runs a free-running cycle counter from the start of each motion and captures snapshots of it into the array as the move progresses. The counter is clamped at 2,000,000,000 to avoid overflow. Each array element represents a different time:
+The controller runs a free-running cycle counter from the start of each motion and captures snapshots of it into the array as the move progresses. The counter is clamped at 2,000,000,000 to avoid overflow. It advances every cycle the axis is in motion and during the post-motion settling wait (until the InTargetTime dwell is satisfied); it does **not** advance while the move is suspended waiting for the [BeginDInOn](../04-motion-command/BeginDInOn.md) input edge ([MotionStat](MotionStat.md) bit 9), so that input-wait time is not counted as part of the motion time. Each array element represents a different time:
 
 | Index | Descriptions |
 |----|----|

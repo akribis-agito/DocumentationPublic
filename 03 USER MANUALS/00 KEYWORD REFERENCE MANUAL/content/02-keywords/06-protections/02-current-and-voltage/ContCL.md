@@ -68,6 +68,8 @@ The 10 % hysteresis prevents rapid chattering at the threshold. While the limita
 By default the I²t event is a *current limitation* (the command is clamped to the continuous level). If the current loop is **not** active, or if you set the relevant bit of `ControlMode` (the "I²t makes fault" option), the event instead **disables the axis** and [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1044 (motor current over I²t).
 
 > **Note:** if `ContCL` is set equal to or higher than `PeakCL`, the controller internally uses an effective continuous limit of `PeakCL / 2`. The stored `ContCL` value is not changed automatically.
+>
+> The engage threshold ($\text{ContCL}^{2}$), the release threshold ($0.90\times\text{ContCL}^{2}$), the filter time constant $\tau$, and the clamp level all use the *effective* continuous current. Normally that equals `ContCL`. If `ContCL` is set greater than or equal to [PeakCL](PeakCL.md), the effective continuous current becomes `PeakCL / 2` for all of these, while the stored `ContCL` value is left unchanged.
 
 ### Edge cases
 

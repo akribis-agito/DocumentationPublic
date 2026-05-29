@@ -7,7 +7,7 @@ Keywords that report the live status of an axis and record why and how it faulte
 The category contains:
 
 - **Live status** — [StatReg](StatReg.md), the 32-bit per-axis status word (warnings, limits, saturations, brake, homing and stall).
-- **Fault code** — [ConFlt](ConFlt.md), the code that disabled the axis (`0` = no fault; codes are numbered from `1001`). See [Controller error codes](../../04-error-codes/controller-error-codes.md) for the full list.
+- **Fault code** — [ConFlt](ConFlt.md), the code that disabled the axis (`0` = no fault; codes are numbered from a base of `1000`). See [Controller error codes](../../04-error-codes/controller-error-codes.md) for the full list.
 - **Disable reason** — [MotorReason](MotorReason.md), distinguishing a fault from a deliberate disable command.
 - **Fault snapshot** — [ConFltSnapSrc](ConFltSnapSrc.md) selects which parameters are captured, and [ConFltSnapVal](ConFltSnapVal.md) holds the values frozen at the moment of the fault.
 - **Error log** — [ErrLog](ErrLog.md), the unit-wide circular log of recent errors and their times, cleared with [ClearErr](ClearErr.md).
@@ -27,7 +27,7 @@ When an axis trips, four pieces of state are written in one atomic step: [MotorO
    AConFltSnapSrc[4]=0                   ; disable slot 4
    ```
 
-2. **After a fault occurs, read the fault code.** [ConFlt](ConFlt.md) is `0` when no fault is present and a positive code (numbered from `1001`) when the axis was disabled by the controller. [MotorReason](MotorReason.md) reads `1` for a controller-fault disable, distinguishing it from a deliberate `MotorOn=0` command (`3` from a user program, `4` from communication) or a digital-input disable (`2`):
+2. **After a fault occurs, read the fault code.** [ConFlt](ConFlt.md) is `0` when no fault is present and a positive code (numbered from a base of `1000`) when the axis was disabled by the controller. [MotorReason](MotorReason.md) reads `1` for a controller-fault disable, distinguishing it from a deliberate `MotorOn=0` command (`3` from a user program, `4` from communication) or a digital-input disable (`2`):
 
    ```text
    AConFlt                ; fault code (e.g. 1020 = position-error limit)

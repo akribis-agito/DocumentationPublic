@@ -36,11 +36,11 @@ Velocity threshold for motor-stuck detection.
 
 ## How it works
 
-Each control sample, the firmware checks `|Vel[3]| <= StuckVel` **AND** absolute motor current `>= StuckCurr`. `Vel[3]` is the deeply filtered velocity, so brief jitter does not defeat the "stuck" test. While both conditions hold, an internal counter increments; when it reaches [StuckTime](StuckTime.md) the axis is turned off and [ConFlt](../../../07-status-and-faults/ConFlt.md) records ConFlt code 1007 (motor stuck). Any sample that breaks the condition resets the counter to zero.
+Each control sample, the firmware checks `|Vel[3]| <= StuckVel` **AND** absolute motor current `>= StuckCurr`. `Vel[3]` is a moving average of the main-encoder velocity `Vel[2]` over the most recent 32 control samples (≈ 2 ms at the standard 16 kHz control rate), so brief jitter does not defeat the "stuck" test. While both conditions hold, an internal counter increments; when it reaches [StuckTime](StuckTime.md) the axis is turned off and [ConFlt](../../../07-status-and-faults/ConFlt.md) records ConFlt code 1007 (motor stuck). Any sample that breaks the condition resets the counter to zero.
 
 ![Motor-stuck detection logic](stuck-logic.svg)
 
-Setting `StuckVel` higher makes the "not moving" test more permissive (the motor can be creeping and still count as stuck); setting it to `0` requires the motor to be essentially stationary. Detection is bypassed for stepper motors and for current-only / force-control / auto-phasing / motor-learn modes (see [StuckCurr](StuckCurr.md)).
+Setting `StuckVel` higher makes the "not moving" test more permissive (the motor can be creeping and still count as stuck); setting it to `0` requires the motor to be essentially stationary. Detection is bypassed for stepper motors and for current-only / force-control / auto-phasing / motor-learn modes, and the whole check runs only behind the outer gate (motor on, a real — non-simulation — motor, on a current-commanded amplifier, i.e. not a pulse-and-direction amplifier; see [StuckCurr](StuckCurr.md)).
 
 ### Edge cases
 

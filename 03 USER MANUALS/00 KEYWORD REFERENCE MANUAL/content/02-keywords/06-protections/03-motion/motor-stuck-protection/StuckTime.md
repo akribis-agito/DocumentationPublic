@@ -32,7 +32,7 @@ Duration the stuck condition must persist before the axis is flagged stuck.
 
 ## Overview
 
-`StuckTime` is how long the stuck condition must hold continuously before the motor-stuck fault fires. The stuck condition is current at or above [StuckCurr](StuckCurr.md) **and** speed at or below [StuckVel](StuckVel.md). The keyword carries a samples-to-milliseconds scaling, so the value is expressed as a time; internally it is compared against a sample counter. The default is `4096`.
+`StuckTime` is how long the stuck condition must hold continuously before the motor-stuck fault fires. The stuck condition is current at or above [StuckCurr](StuckCurr.md) **and** speed at or below [StuckVel](StuckVel.md). The keyword carries a samples-to-milliseconds scaling, so you set the value in milliseconds; internally it is compared against a sample counter. When you write the keyword the value (in ms) is multiplied by 16.384 to obtain the internal sample count, and when you read it back the displayed value equals the internal sample count divided by 16.384 — so it round-trips in ms. (At the standard 16 kHz control rate 1 control sample ≈ 61.0 µs, so 250 ms ≈ 4096 internal samples.) The default of 250 ms corresponds to 4096 internal samples.
 
 ## How it works
 
@@ -51,7 +51,7 @@ if the stuck counter has reached StuckTime
 ### Edge cases
 
 - **Motor off:** detection does not run; the counter is reset to `0` on motor-off.
-- **Mode dependency:** same bypass list as [StuckCurr](StuckCurr.md) — effective only in position-control / velocity-control on non-stepper motors.
+- **Mode dependency:** same bypass list as [StuckCurr](StuckCurr.md) — effective only in position-control / velocity-control on non-stepper motors, and only behind the outer gate (motor on, a real — non-simulation — motor, on a current-commanded amplifier rather than a pulse-and-direction amplifier).
 - **`StuckTime = 0`:** the counter reaches the limit on the first sample where the condition is true, so the protection trips immediately (no debouncing).
 - **Range overflow:** writes outside `0…2147483647` are clamped to the keyword `range`.
 - **Clearing the fault:** ConFlt code 1007 clears on re-enable ([MotorOn](../../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../../07-status-and-faults/ErrLog.md) entry persists.
@@ -64,8 +64,8 @@ The control loop runs at a fixed sample rate, so larger `StuckTime` tolerates a 
 ## Examples
 
 ```text
-AStuckTime[1]=4096    ; how long the stuck condition must hold continuously
-AStuckTime[1]         ; read back
+AStuckTime[1]=250     ; require 250 ms of unbroken stuck condition (the default)
+AStuckTime[1]         ; read back (returns the value in ms)
 ```
 
 ## See also

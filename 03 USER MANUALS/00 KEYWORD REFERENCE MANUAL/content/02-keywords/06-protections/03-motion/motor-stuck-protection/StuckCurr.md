@@ -55,6 +55,7 @@ else
 - While both hold, an internal counter increments once per sample; any sample that breaks the condition resets it to `0`. The fault therefore fires only on a *continuous* run of [StuckTime](StuckTime.md) samples.
 - On trip, the axis is turned off and [ConFlt](../../../07-status-and-faults/ConFlt.md) records ConFlt code 1007 (motor stuck).
 - Detection is **bypassed** for stepper motors, and for current-control-only ([OperationMode](../../../08-axis-operation/01-general-keywords/OperationMode.md) = current-only), force-control, commutation/auto-phasing in progress, and motor-learn modes — situations where high current at low speed is expected.
+- The whole stuck check (together with the dual-stuck and overspeed checks) sits behind an outer amplifier/motor gate: it runs only when the motor is on ([MotorOn](../../../08-axis-operation/01-general-keywords/MotorOn.md) = 1), the motor is a real motor (not a [simulation](../../../02-motor-and-amplifier/MotorType.md) motor), and the amplifier is a current-commanded amplifier — it does **not** run on a pulse-and-direction (step/direction) amplifier ([AmpType](../../../02-motor-and-amplifier/AmpType.md)). On central-i v5 the gate additionally excludes the pulse-and-direction-with-feedback amplifier. Outside this gate the internal counter is held reset.
 
 ### Edge cases
 

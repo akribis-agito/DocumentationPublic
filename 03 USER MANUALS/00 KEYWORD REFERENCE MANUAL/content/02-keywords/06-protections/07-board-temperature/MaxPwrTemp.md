@@ -72,6 +72,7 @@ Whenever you write `MaxPwrTemp`, three derived band edges are recomputed at 88 /
 - **Mode dependency:** the trip runs regardless of operation mode whenever the motor is on.
 - **Range overflow:** writes outside `20…80` are rejected (out-of-range error) and the stored value is unchanged; whenever a valid write of `MaxPwrTemp` is accepted the warning band edges are recomputed.
 - **Clearing the fault:** ConFlt code 1018 clears on re-enable ([MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../07-status-and-faults/ErrLog.md) entry persists.
+- **Which axis tripped:** the matching [ErrLog](../../07-status-and-faults/ErrLog.md) entry is tagged with the axis that tripped — the source tag in the upper 8 bits carries the 1-based axis number (axis A = 1) alongside fault code 1018 in the lower bits — so on a multi-axis unit you can tell which axis faulted.
 - **Shared warning field:** [StatReg](../../07-status-and-faults/StatReg.md) bits 11–12 report the higher of the [PwrTemp](PwrTemp.md) and [BoardTemp](BoardTemp.md) warning levels.
 - **HWProtectBits / ProtectMask:** the IPM over-temperature trip is not maskable through [ProtectMask](../01-general-protection/ProtectMask.md). The separate hardware [HWProtectBits](../01-general-protection/HWProtectBits.md) IPM-fault bit (ConFlt code 1027) is gated by [ProtectMask](../01-general-protection/ProtectMask.md).
 
