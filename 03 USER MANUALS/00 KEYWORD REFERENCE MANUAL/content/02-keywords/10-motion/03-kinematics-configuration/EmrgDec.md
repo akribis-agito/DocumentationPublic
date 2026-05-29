@@ -1,6 +1,6 @@
 ---
 keyword: EmrgDec
-summary: Emergency deceleration rate applied on Abort or fault, in user units per second squared.
+summary: Emergency deceleration rate applied on a limit-switch, software-limit or controlled-stop-input halt, in user units per second squared.
 availability:
   standalone:
   - v4

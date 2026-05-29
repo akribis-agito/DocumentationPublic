@@ -52,7 +52,7 @@ Before any motion-mode handling, `Begin` validates the axis state. The first fai
 | Not in position operation mode | 156 |
 | Static brake locked and in use | 114 |
 | Reference already outside software limits and mode is not jog/PTP/velocity-joystick | 164 |
-| [Speed](../03-kinematics-configuration/Speed.md) exceeds [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md) in an indirect mode (jog/PTP/PTP-rep/PD-indirect/gear-indirect/ECAM-indirect/joystick-pos-indirect) | 271 |
+| [Speed](../03-kinematics-configuration/Speed.md) exceeds [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md) in an indirect mode (jog/PTP/PTP-rep/PD-indirect/gear-indirect/joystick-pos-indirect) | 271 |
 
 A gantry edge transition that is not yet ready also rejects the command.
 

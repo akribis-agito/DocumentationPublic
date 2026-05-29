@@ -36,7 +36,7 @@ Sets the scheduling priority (service interval) of a user program thread.
 
 ## How it works
 
-The interpreter runs threads cooperatively, one line at a time. On each scheduling pass it advances round-robin to the next active thread and executes a single program line for it before moving on, so by default all running threads make progress at an equal rate.
+The interpreter runs threads cooperatively, one low-level instruction at a time. On each scheduling pass it advances round-robin to the next active thread and executes a single low-level instruction for it before moving on, so by default all running threads make progress at an equal rate.
 
 `ProgPriority` changes that rate by acting as an *interval*: each thread carries a counter that increments every time the scheduler reaches it, and a line is executed only when the counter reaches the thread's `ProgPriority` value, after which the counter resets. The effect is:
 
@@ -49,7 +49,7 @@ In other words, a **lower** number gives a thread a **larger** share of executio
 
 ```text
 AProgPriority[1]=1   ; thread 1 at full rate (default, highest effective priority)
-AProgPriority[2]=5   ; thread 2 runs one line every 5th scheduling pass
+AProgPriority[2]=5   ; thread 2 runs one low-level instruction every 5th scheduling pass
 ```
 
 ## See also

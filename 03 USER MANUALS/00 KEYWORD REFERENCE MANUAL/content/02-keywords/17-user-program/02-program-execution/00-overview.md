@@ -1,6 +1,6 @@
 # Program execution
 
-This section covers the keywords that load, run, stop, debug and instrument a user program. A user program runs as one or more independent **threads** under a built-in cooperative scheduler — up to 8 threads on a standalone controller and up to 12 on a Central-i master. Each thread executes a **task** (the code after a [ProgTask](ProgTask.md) label; task 1 is the main program) and keeps its own program pointer, call stack and numeric stack, so several tasks can run side by side. The scheduler advances each active thread by one line per pass, biased by [ProgPriority](ProgPriority.md).
+This section covers the keywords that load, run, stop, debug and instrument a user program. A user program runs as one or more independent **threads** under a built-in cooperative scheduler — up to 8 threads on a standalone controller and up to 12 on a Central-i master. Each thread executes a **task** (the code after a [ProgTask](ProgTask.md) label; task 1 is the main program) and keeps its own program pointer, call stack and numeric stack, so several tasks can run side by side. The scheduler advances each active thread by one low-level instruction (one program-pointer step) per pass, biased by [ProgPriority](ProgPriority.md).
 
 ![User-program engine: cooperative multi-thread scheduler](program-engine.svg)
 

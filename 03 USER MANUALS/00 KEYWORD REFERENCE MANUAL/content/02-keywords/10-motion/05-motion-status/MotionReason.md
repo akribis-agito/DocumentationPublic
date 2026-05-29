@@ -54,7 +54,7 @@ The codes cluster into a handful of families, and reading the cluster usually te
 | 5 | Motion ended due to forward limit switch detection. |
 | 6 | Motion ended due to reverse software limit. |
 | 7 | Motion ended due to forward software limit. |
-| 8 | Motion ended due to disabled motor. |
+| 8 | Motion ended due to disabled motor (see [MotorReason](../../07-status-and-faults/MotorReason.md) for why the axis was disabled). |
 | 9 | Motion ended due to StopECAM command (for ECAM motions only). |
 | 10 | Motion ended due to StopFIFO command (for FIFO motions only). |
 | 11 | Motion ended due to detected index (for jogging only). |
@@ -141,3 +141,4 @@ Interpretation:
 - [LimitsStat](../../06-protections/03-motion/position-limit-protection/LimitsStat.md) — hardware limit switches behind reason codes 4 / 5
 - [EmrgDec](../03-kinematics-configuration/EmrgDec.md) — substituted for `Decel` on limit-related reasons (4 / 5 / 6 / 7)
 - [ConFlt](../../07-status-and-faults/ConFlt.md) — fault entry usually paired with the fault/disable cluster (reasons 8, 21, 22, 28)
+- [MotorReason](../../07-status-and-faults/MotorReason.md) — explains why the motor was disabled when `MotionReason` = 8

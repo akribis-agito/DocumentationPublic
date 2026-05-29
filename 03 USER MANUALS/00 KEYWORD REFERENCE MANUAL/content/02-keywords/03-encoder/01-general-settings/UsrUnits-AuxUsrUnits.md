@@ -9,6 +9,8 @@ Ratio between a desired user unit and encoder counts for reading position and it
 
 `UsrUnits` allows the user to read and write position and its derivatives in units other than encoder counts. It scales the values exchanged with the host (position, velocity, acceleration) so they can be expressed in a convenient engineering unit (e.g. mm) rather than raw counts. The internal control loop always works in counts; `UsrUnits` is applied only at the communication/display layer. `AuxUsrUnits` is the auxiliary-encoder counterpart and operates the same way on the auxiliary feedback position and its derivatives.
 
+> **Note (central-i v5)** — `UsrUnits`/`AuxUsrUnits` is the embedded per-axis scaling. central-i v5 also offers an alternative *global engineering-units feature*, enabled per axis with [UserUnitsEn](../../21-engineering-units/UserUnitsEn.md), which expresses keyword values in configurable engineering units. The two systems are mutually exclusive on the same axis: with `UserUnitsEn = 1` and `UsrUnits`/`AuxUsrUnits` left at a non-default value, accessing an affected keyword is rejected with error `338`. Leave the embedded scaling at its default or set `UserUnitsEn` back to 0 to resolve the conflict.
+
 ## How it works
 
 `UsrUnits` is stored as a **16.16 fixed-point ratio**: the effective scale factor is `UsrUnits / 65536` (the fixed-point scaling is 65536, i.e. 16 fractional bits). The default `UsrUnits = 65536` therefore means a factor of 1 (values shown directly in counts).
@@ -35,3 +37,5 @@ AUsrUnits=65536      ; factor 1 — report directly in encoder counts (default)
 
 - [EncRes](EncRes.md) — raw encoder resolution in counts per pitch or revolution
 - [Pos](../../10-motion/01-kinematics-status/Pos.md) — feedback position, reported scaled by `UsrUnits`
+- [UserUnitsEn](../../21-engineering-units/UserUnitsEn.md) — central-i v5 global engineering-units feature, mutually exclusive with this embedded scaling (error `338`)
+- [Engineering Units overview](../../21-engineering-units/00-overview.md) — the global Group / Factor / Unit model

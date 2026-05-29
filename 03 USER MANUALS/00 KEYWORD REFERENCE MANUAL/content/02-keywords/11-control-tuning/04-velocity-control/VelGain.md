@@ -36,7 +36,7 @@ Proportional gain of the velocity loop — the factor that multiplies the veloci
 
 ## Overview
 
-`VelGain` is the proportional gain of the inner (velocity) loop in the PIV cascade. Each control cycle it multiplies the velocity error [VelErr](../../10-motion/01-kinematics-status/VelErr.md) to form the proportional part of the velocity-PI output. That output (proportional plus the [VelKi](VelKi.md) integral, after the velocity filters) becomes the motor current command [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md) that drives the current loop.
+`VelGain` is the proportional gain of the inner (velocity) loop in the PIV cascade. Each control cycle it multiplies the velocity error [VelErr](../../10-motion/01-kinematics-status/VelErr.md) to form the proportional part of the velocity-PI output. That output (proportional plus the [VelKi](VelKi.md) integral, after the velocity filters), with the acceleration and velocity feedforwards added in position mode, forms the loop-side current reference (reported as [CurrRefCtrl](../../09-current-and-voltage/02-motor-variables/CurrRefCtrl.md) on central-i v5). After current compensation and injection this becomes the final motor current command [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md) that drives the current loop.
 
 `VelGain` is an array, so it can take part in gain scheduling. Without gain scheduling the first element `VelGain[1]` is used for control. See [ScheduleMode](../01-general-keywords/ScheduleMode.md).
 
@@ -54,10 +54,10 @@ $$
 \text{VelPIOutput} = \big( \text{proportional} + \text{integral} \big) \cdot k_{\text{scale}}
 $$
 
-The integral is the running accumulation of `proportional × VelKi` (see [VelKi](VelKi.md)). `VelPIOutput` then passes through the velocity filters ([VelFiltOn](VelFiltOn.md) / [VelFiltDef](VelFiltDef.md)) and, in position mode, has the acceleration and velocity feed-forwards added to form the current command [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md).
+The integral is the running accumulation of `proportional × VelKi` (see [VelKi](VelKi.md)). `VelPIOutput` then passes through the velocity filters ([VelFiltOn](VelFiltOn.md) / [VelFiltDef](VelFiltDef.md)) and, in position mode, has the acceleration and velocity feed-forwards added to form the loop-side current reference (reported as [CurrRefCtrl](../../09-current-and-voltage/02-motor-variables/CurrRefCtrl.md) on central-i v5); after current compensation and injection this becomes the final motor current command [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md).
 
 - **What it multiplies:** the velocity error [VelErr](../../10-motion/01-kinematics-status/VelErr.md).
-- **Where it sums:** its product is added to the velocity integral; the sum (after internal scaling and the velocity filters) becomes [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md).
+- **Where it sums:** its product is added to the velocity integral; the sum (after internal scaling and the velocity filters, plus the feedforwards in position mode) forms the loop-side current reference reported as [CurrRefCtrl](../../09-current-and-voltage/02-motor-variables/CurrRefCtrl.md) on central-i v5, and after compensation/injection the final command [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md).
 - **Scaling / units:** applied as a multiplier (scaling factor 1.0); the combined PI result is brought to current-command units by a fixed internal scaling.
 
 ### Scaling, range and default
@@ -128,7 +128,8 @@ In **v5 (central-i)** `VelGain` is a floating-point value with a wider range (`0
 - [VelRef](../../10-motion/01-kinematics-status/VelRef.md) — velocity-loop reference
 - [VelKi](VelKi.md) — velocity integral gain summed with the `VelGain` term
 - [ClearIntegral](../01-general-keywords/ClearIntegral.md) — zeroes the velocity-loop integrator
-- [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md) — current command produced from the velocity-PI output
+- [CurrRefCtrl](../../09-current-and-voltage/02-motor-variables/CurrRefCtrl.md) — loop-side current reference (velocity-PI output plus feedforwards), reported on central-i v5
+- [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md) — final motor current command after compensation/injection
 - [VelFiltOn](VelFiltOn.md) / [VelFiltDef](VelFiltDef.md) — velocity-loop filters on the PI output
 - [PosGain](../03-position-control/PosGain.md) — proportional gain of the outer (position) loop
 - [StatReg](../../07-status-and-faults/StatReg.md) — bit 21 (current sat) / bit 22 (voltage sat) / bit 23 (velocity sat)

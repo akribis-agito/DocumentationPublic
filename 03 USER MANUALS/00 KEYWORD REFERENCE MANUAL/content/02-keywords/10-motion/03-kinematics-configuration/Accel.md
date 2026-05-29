@@ -89,7 +89,7 @@ If acceleration shaping is enabled ([AccShapeOn](AccShapeOn.md) ≠ 0) the effec
 - **Simulation mode (`MotorType` = 5):** unchanged; the profiler runs in simulation.
 - **ModRev wrap:** unrelated — `Accel` is a kinematic rate, not a position.
 - **Active fault:** the axis is disabled and the profiler is stopped; the next `Begin` re-reads `Accel`.
-- **Other motion modes:** `Accel` is consumed by jog, PTP, repetitive PTP, PD-indirect, gear-indirect, ECAM-indirect and joystick-indirect modes. Direct modes (PD, gear, ECAM, FIFO, CNC, vector, joystick-position-direct/velocity-direct, slave, spline) ignore `Accel` because the user supplies the position commands directly; the exception is a controlled stop in those modes, which uses [EmrgDec](EmrgDec.md) rather than `Accel`.
+- **Other motion modes:** `Accel` is consumed by jog, PTP, repetitive PTP, PD-indirect, gear-indirect and joystick-indirect modes. Direct modes (PD, gear, ECAM, FIFO, CNC, vector, joystick-position-direct/velocity-direct, slave, spline) ignore `Accel` because the user supplies the position commands directly; the exception is a controlled stop in those modes, which uses [EmrgDec](EmrgDec.md) rather than `Accel`.
 - **Joystick velocity direct (`MotionMode = 14`):** internally `Accel` is set very high so the response is essentially a step; the user `Accel` is only used during a stop ramp.
 - **Cannot be zero:** the minimum is `100` user units/s² to keep the profiler arithmetic finite.
 

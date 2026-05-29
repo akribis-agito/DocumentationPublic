@@ -64,3 +64,4 @@ AMotorReason        ; 1 = controller fault, 2 = digital input, 3 = user program,
 - [ConFlt](ConFlt.md) — the specific fault code when MotorReason is 1 (controller fault)
 - [ConFltSnapVal](ConFltSnapVal.md) — parameter snapshot captured at the fault
 - [MotorOn](../08-axis-operation/01-general-keywords/MotorOn.md) — enabling the axis resets MotorReason to 0
+- [MotionReason](../10-motion/05-motion-status/MotionReason.md) — value 8 marks the motion that the disable cut short

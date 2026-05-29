@@ -52,7 +52,7 @@ Within each 5-element block the layout is:
 | 1st | Type of filter (`0` = none, `1` = first-order low-pass, `2` = second-order low-pass, `3` = second-order low-pass with one zero, `4`/`5` = first/second-order lead-lag, `6`/`7` = first/second-order lead-lag by phase, `8` = notch, `9` = complex lead-lag) |
 | 2nd–5th | Parameters 1 to 4 (frequencies in Hz/100, damping ratios in %, phase in degrees, notch depth in dB — depending on type) |
 
-Each enabled filter is realised as a second-order (biquad) section applied in series to the velocity-PI output (the [VelGain](VelGain.md) + [VelKi](VelKi.md) result) on its way to the current command [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md). After writing `VelFiltDef` (and the matching [VelFiltOn](VelFiltOn.md)), run [CalcFilters](../01-general-keywords/CalcFilters.md) so the coefficients are recomputed.
+Each enabled filter is realised as a second-order (biquad) section applied in series to the velocity-PI output (the [VelGain](VelGain.md) + [VelKi](VelKi.md) result) on its way, with the feedforwards in position mode, to the loop-side current reference (reported as [CurrRefCtrl](../../09-current-and-voltage/02-motor-variables/CurrRefCtrl.md) on central-i v5) and ultimately the motor current command [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md). After writing `VelFiltDef` (and the matching [VelFiltOn](VelFiltOn.md)), run [CalcFilters](../01-general-keywords/CalcFilters.md) so the coefficients are recomputed.
 
 The full parameter-by-type definitions, transfer functions and units are in the appendix: [Customisable filter (FiltDef)](../../../06-appendix/customisable-filter-filtdef.md).
 
@@ -77,6 +77,7 @@ In **v4** `VelFiltDef` can only be changed with the motor off and out of motion.
 - [VelFiltOn](VelFiltOn.md) — enables each velocity filter defined here
 - [CalcFilters](../01-general-keywords/CalcFilters.md) — recomputes filter coefficients after changes
 - [VelGain](VelGain.md) / [VelKi](VelKi.md) — produce the PI output these filters shape
-- [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md) — current command after the velocity filters
+- [CurrRefCtrl](../../09-current-and-voltage/02-motor-variables/CurrRefCtrl.md) — loop-side current reference the filtered output feeds (central-i v5)
+- [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md) — final motor current command after compensation/injection
 - [PosFiltDef](../03-position-control/PosFiltDef.md) — position-loop filter definitions
 - Appendix: [Customisable filter (FiltDef)](../../../06-appendix/customisable-filter-filtdef.md)

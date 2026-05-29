@@ -33,7 +33,7 @@ Integral gain of the velocity loop — accumulates the scaled velocity-controlle
 
 ## Overview
 
-`VelKi` is the integral gain of the inner (velocity) loop in the PIV cascade. Together with [VelGain](VelGain.md) it makes the velocity controller a PI controller: `VelGain` provides the proportional term and `VelKi` accumulates that proportional term over time. The proportional term plus the integral form the velocity-PI output, which (after the velocity filters and feed-forwards) becomes the motor current command [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md).
+`VelKi` is the integral gain of the inner (velocity) loop in the PIV cascade. Together with [VelGain](VelGain.md) it makes the velocity controller a PI controller: `VelGain` provides the proportional term and `VelKi` accumulates that proportional term over time. The proportional term plus the integral form the velocity-PI output, which (after the velocity filters, plus the acceleration and velocity feed-forwards in position mode) forms the loop-side current reference (reported as [CurrRefCtrl](../../09-current-and-voltage/02-motor-variables/CurrRefCtrl.md) on central-i v5); after current compensation and injection this becomes the final motor current command [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md).
 
 `VelKi` is an array, so it can take part in gain scheduling. Without gain scheduling the first element `VelKi[1]` is used for control. See [ScheduleMode](../01-general-keywords/ScheduleMode.md).
 
@@ -52,7 +52,7 @@ $$
 where $k_{i}$ and $k_{\text{scale}}$ are fixed internal scalings.
 
 - **What it multiplies:** the velocity-controller proportional output (`VelErr × VelGain`), before that product enters the integral accumulator.
-- **Where it sums:** the accumulated integral is added to the proportional term to form the velocity-PI output that becomes [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md).
+- **Where it sums:** the accumulated integral is added to the proportional term to form the velocity-PI output that, with the feedforwards in position mode, forms the loop-side current reference (reported as [CurrRefCtrl](../../09-current-and-voltage/02-motor-variables/CurrRefCtrl.md) on central-i v5) and after compensation/injection the final command [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md).
 - **Anti-windup:** the integral saturation value is controlled internally. When the current command saturates (at a torque/current limit) and the error has the same sign as the output, integration is halted for that cycle so the integral does not wind up. The integral is also preloaded when switching operation modes so the current command does not jump.
 
 ### Range and default
@@ -111,7 +111,8 @@ In **v5 (central-i)** `VelKi` is a floating-point value; the proportional×error
 
 - [VelGain](VelGain.md) — proportional gain whose output `VelKi` integrates
 - [VelErr](../../10-motion/01-kinematics-status/VelErr.md) — velocity error at the input of the velocity loop
-- [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md) — current command produced from the velocity-PI output
+- [CurrRefCtrl](../../09-current-and-voltage/02-motor-variables/CurrRefCtrl.md) — loop-side current reference (velocity-PI output plus feedforwards), reported on central-i v5
+- [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md) — final motor current command after compensation/injection
 - [PosKi](../03-position-control/PosKi.md) — integral gain of the outer (position) loop (v5)
 - [ClearIntegral](../01-general-keywords/ClearIntegral.md) — clears the velocity-loop integrator
 - [StatReg](../../07-status-and-faults/StatReg.md) — bit 21 (current saturation) reports when anti-windup is engaged

@@ -34,7 +34,7 @@ Enables or bypasses the velocity-loop filters that act on the velocity-PI output
 
 ## Overview
 
-`VelFiltOn` enables the velocity-loop filters defined by [VelFiltDef](VelFiltDef.md). The filters are applied in series to the velocity-PI output (the [VelGain](VelGain.md) + [VelKi](VelKi.md) result) before it becomes the motor current command [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md). Each enabled filter shapes that signal — for example a notch to suppress a mechanical resonance.
+`VelFiltOn` enables the velocity-loop filters defined by [VelFiltDef](VelFiltDef.md). The filters are applied in series to the velocity-PI output (the [VelGain](VelGain.md) + [VelKi](VelKi.md) result) before it contributes, with the feedforwards in position mode, to the loop-side current reference (reported as [CurrRefCtrl](../../09-current-and-voltage/02-motor-variables/CurrRefCtrl.md) on central-i v5) and ultimately the motor current command [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md). Each enabled filter shapes that signal — for example a notch to suppress a mechanical resonance.
 
 | Index | Filter |
 |-------|--------|
@@ -45,7 +45,7 @@ Enables or bypasses the velocity-loop filters that act on the velocity-PI output
 
 ## How it works
 
-The velocity-PI output is passed through the enabled filters in order, each realised as a second-order (biquad) section from its [VelFiltDef](VelFiltDef.md) parameters. A disabled stage passes its input straight through to the next stage. The output of the final stage (plus the acceleration/velocity feed-forwards in position mode) forms [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md).
+The velocity-PI output is passed through the enabled filters in order, each realised as a second-order (biquad) section from its [VelFiltDef](VelFiltDef.md) parameters. A disabled stage passes its input straight through to the next stage. The output of the final stage (plus the acceleration/velocity feed-forwards in position mode) forms the loop-side current reference (reported as [CurrRefCtrl](../../09-current-and-voltage/02-motor-variables/CurrRefCtrl.md) on central-i v5); after current compensation and injection this becomes the final command [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md).
 
 After changing `VelFiltOn` or [VelFiltDef](VelFiltDef.md), run [CalcFilters](../01-general-keywords/CalcFilters.md) so the controller recomputes the internal filter coefficients.
 
@@ -66,6 +66,7 @@ In **v4** `VelFiltOn` can only be changed with the motor off and out of motion. 
 - [VelFiltDef](VelFiltDef.md) — defines each velocity filter's type and parameters
 - [CalcFilters](../01-general-keywords/CalcFilters.md) — recomputes filter coefficients after changes
 - [VelGain](VelGain.md) / [VelKi](VelKi.md) — produce the PI output these filters shape
-- [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md) — current command after the velocity filters
+- [CurrRefCtrl](../../09-current-and-voltage/02-motor-variables/CurrRefCtrl.md) — loop-side current reference the filtered output feeds (central-i v5)
+- [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md) — final motor current command after compensation/injection
 - [PosFiltOn](../03-position-control/PosFiltOn.md) — position-loop filter enables
 - Appendix: [Customisable filter (FiltDef)](../../../06-appendix/customisable-filter-filtdef.md)

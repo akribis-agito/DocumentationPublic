@@ -40,7 +40,7 @@ Argument values passed to an indexed user program task.
 
 ## How it works
 
-`ProgArg[thread], position` resolves against the named thread's current call-stack frame and returns the value at the given argument position, using the same numbering as [ProgArgThis](ProgArgThis.md): position `1` is the last value pushed with [ProgPushArg](ProgPushArg.md) before the call, position `2` the one before it, and so on. The valid position range is `0`–`20` (`0`–`26` on central-i v5), covering the combined argument and local-variable space of a function.
+`ProgArg[thread], position` resolves against the named thread's current call-stack frame and returns the value at the given argument position, using the same numbering as [ProgArgThis](ProgArgThis.md): position `1` is the last value pushed with [ProgPushArg](ProgPushArg.md) before the call, position `2` the one before it, and so on. The valid position range is `0`–`20` (`0`–`26` on central-i v5), covering the combined argument and local-variable space of a function; position `1` is the first (last-pushed) argument, while position `0` addresses the frame-reference/return slot rather than a user-supplied argument.
 
 Because it reads the *current* frame of the selected thread, the values reflect whatever function that thread is executing at the moment of the query. Requesting a position beyond what the thread's current frame contains raises a "no operands in call stack" error.
 

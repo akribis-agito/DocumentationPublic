@@ -84,7 +84,7 @@ In third-order mode ([JerkMode](../02-motion-configuration/JerkMode.md) = 1) `De
 - **Simulation mode (`MotorType` = 5):** unchanged; the profiler runs in simulation.
 - **ModRev wrap:** unrelated — `Decel` is a kinematic rate, not a position.
 - **Active fault:** the axis is disabled and the profiler is stopped; the next `Begin` re-reads `Decel`.
-- **Other motion modes:** consumed by jog, PTP, repetitive PTP, PD-indirect, gear-indirect, ECAM-indirect and joystick-indirect modes. Direct modes drive position commands directly and ignore `Decel`, except during a controlled stop.
+- **Other motion modes:** consumed by jog, PTP, repetitive PTP, PD-indirect, gear-indirect and joystick-indirect modes. Direct modes drive position commands directly and ignore `Decel`, except during a controlled stop.
 - **Joystick velocity direct (`MotionMode = 14`):** internally the deceleration is set very high (essentially instant); the user `Decel` is only used during a stop ramp.
 - **Cannot be zero:** the minimum is `100` user units/s² to keep the profiler arithmetic finite.
 
@@ -104,7 +104,7 @@ In **v4** `Decel` is a 32-bit integer; in **v5 (central-i)** it is a single-prec
 - [Accel](Accel.md) — acceleration rate (leading slope of the trapezoid)
 - [Speed](Speed.md) — cruise velocity the ramp decelerates from
 - [AccelFact](AccelFact.md) — integer multiplier applied to `Decel`
-- [EmrgDec](EmrgDec.md) — emergency deceleration used on abort/fault/limit stops
+- [EmrgDec](EmrgDec.md) — emergency deceleration used on limit-switch / software-limit / controlled-stop-input stops
 - [Jerk](Jerk.md) — second-order S-curve smoothing of the ramp
 - [JerkInDec](JerkInDec.md) — deceleration-phase jerk in third-order mode
 - [JerkMode](../02-motion-configuration/JerkMode.md) — selects second- vs third-order profiling

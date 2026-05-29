@@ -59,7 +59,7 @@ It is dimensionless (no user-unit scaling) and does **not** scale [Speed](Speed.
 - **Simulation mode (`MotorType` = 5):** unchanged.
 - **ModRev wrap:** unrelated.
 - **Active fault:** the axis is disabled; the next `Begin` re-reads `AccelFact`.
-- **Other motion modes:** consumed by all profiler-driven modes (jog/PTP/PD-indirect/gear-indirect/ECAM-indirect/joystick-indirect) and applied to both normal `Decel` and `EmrgDec`. Direct modes ignore `AccelFact` because they do not use `Accel`/`Decel`.
+- **Other motion modes:** consumed by all profiler-driven modes (jog/PTP/PD-indirect/gear-indirect/joystick-indirect) and applied to both normal `Decel` and `EmrgDec`. Direct modes ignore `AccelFact` because they do not use `Accel`/`Decel`.
 - **`AccelFact = 1`:** the default; rates are used as configured.
 
 ## Examples

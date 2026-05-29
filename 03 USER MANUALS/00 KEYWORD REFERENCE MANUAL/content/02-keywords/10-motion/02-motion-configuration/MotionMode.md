@@ -42,7 +42,7 @@ Selects the type of motion performed when `Begin` is issued.
 
 `Begin` reads `MotionMode` and branches on its value. A value of `-1` (invalid selection) is rejected with an error, and each valid value runs its own setup before setting the in-motion bit (bit 0) of [MotionStat](../05-motion-status/MotionStat.md). The modes fall into two families:
 
-- **Indirect** modes — the controller's own profiler generates the trajectory subject to [Speed](../03-kinematics-configuration/Speed.md)/[Accel](../03-kinematics-configuration/Accel.md)/[Decel](../03-kinematics-configuration/Decel.md): jog, PTP, PTP-repetitive, PD-indirect, gear-indirect, ECAM-indirect, joystick-position-indirect. `Begin` rejects these if `|Speed| > MaxVel`.
+- **Indirect** modes — the controller's own profiler generates the trajectory subject to [Speed](../03-kinematics-configuration/Speed.md)/[Accel](../03-kinematics-configuration/Accel.md)/[Decel](../03-kinematics-configuration/Decel.md): jog, PTP, PTP-repetitive, PD-indirect, gear-indirect, joystick-position-indirect. `Begin` rejects these if `|Speed| > MaxVel`.
 - **Direct** modes — the reference is driven directly by the user's position/velocity commands (pulse-and-direction direct, gear direct, ECAM direct, FIFO, slave, CNCA/CNCB, vector, spline buffer, joystick-velocity).
 
 The following table shows the types of motion described by `MotionMode`.

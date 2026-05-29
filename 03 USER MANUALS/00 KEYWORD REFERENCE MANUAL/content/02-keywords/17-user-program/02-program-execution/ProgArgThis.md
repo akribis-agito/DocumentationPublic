@@ -47,7 +47,7 @@ Reading an index returns that slot's value; writing an index stores into it, whi
 
 `ProgArgThis` is only valid from within a running user program (it addresses the current call frame); issuing it from a plain communication command is rejected with a run-time error.
 
-The array spans the function's combined argument and local-variable space: up to 20 entries on smaller models and up to 26 on larger ones (the sum of input arguments, output arguments and local variables for one function). Reading an index beyond what the current frame contains raises a "no operands in call stack" error.
+The array spans the function's combined argument and local-variable space: up to 20 entries on v4 and up to 26 on central-i v5 (the sum of input arguments, output arguments and local variables for one function). Reading an index beyond what the current frame contains raises a "no operands in call stack" error.
 
 The integer form shown here is the most common; matching variant keywords read or write the same slots as floating-point, 64-bit integer or double-precision values.
 

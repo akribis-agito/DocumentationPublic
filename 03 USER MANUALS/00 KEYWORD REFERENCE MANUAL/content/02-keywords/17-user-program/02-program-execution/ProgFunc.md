@@ -13,7 +13,7 @@ Label keyword marking the start of a user program function.
 
 `ProgFunc[]` is a label marking a program location, not an executed command — it records where a function begins so that [ProgFuncCall](ProgFuncCall.md) can jump to it by index. The function index is the link between the two: `AProgFuncCall,3` always jumps to `AProgFunc[3]`.
 
-A function may receive input arguments and return output values. Arguments are staged on the calling thread's call stack with [ProgPushArg](ProgPushArg.md) before the call, read inside the function with [ProgArgThis](ProgArgThis.md), and any output values are placed back on the numeric stack by [Return](Return.md). The sum of input arguments, output arguments and local variables for one function is limited (up to 26 entries on larger models, up to 20 on smaller ones); see [ProgArgThis](ProgArgThis.md).
+A function may receive input arguments and return output values. Arguments are staged on the calling thread's call stack with [ProgPushArg](ProgPushArg.md) before the call, read inside the function with [ProgArgThis](ProgArgThis.md), and any output values are placed back on the numeric stack by [Return](Return.md). The sum of input arguments, output arguments and local variables for one function is limited (up to 26 entries on central-i v5, up to 20 on v4); see [ProgArgThis](ProgArgThis.md).
 
 Because labels only mark locations, execution *falls through* into a function body if the preceding code reaches it linearly. Place a [ProgHalt](ProgHalt.md) (or an endless loop) before the first `ProgFunc[]` label so the main program does not run into the functions — doing so would reach a [Return](Return.md) with an empty call stack and raise an error.
 
