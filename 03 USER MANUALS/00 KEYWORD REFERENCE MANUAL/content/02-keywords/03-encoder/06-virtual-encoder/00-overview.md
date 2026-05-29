@@ -11,3 +11,5 @@ The keywords in this section configure the virtual encoder:
 - [VEncType](VEncType.md) — sets the output format
 - [VEncFact](VEncFact.md) / [VEncFactDen](VEncFactDen.md) — numerator / denominator of the scaling ratio
 - [VEncDelay](VEncDelay.md) — fixed delay applied to the output
+- [VEncModRev](VEncModRev.md) — source modulo span keeping the output continuous across roll-over
+- [VEncValue](VEncValue.md) — read-only accumulated count emitted by the virtual encoder

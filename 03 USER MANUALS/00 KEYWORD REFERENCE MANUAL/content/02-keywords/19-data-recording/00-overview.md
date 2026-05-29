@@ -65,7 +65,7 @@ The common procedure in setting up a scope is as follows.
 
 ## Walk-through: capture a settling event
 
-To diagnose how an axis settles after a move, set scope 1 to capture a small window before and after the moment a velocity ([AVel[1]](../10-motion/01-kinematics-status/Vel.md)) trigger fires, then stream the result to the host.
+To diagnose how an axis settles after a move, set scope 1 to capture a small window before and after the moment a velocity ([Vel](../10-motion/01-kinematics-status/Vel.md), element `[1]`) trigger fires, then stream the result to the host.
 
 1. **Stop anything previously running**, then select the channels you want recorded. Each entry is a [complex CAN code](../../01-keyword-usage-and-syntax/complex-can-code.md); end the list with `0`:
 

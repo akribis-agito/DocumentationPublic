@@ -9,6 +9,7 @@ Configure the generator with these keywords:
 - Master switch and mode: [EventOn](EventOn.md), [EventSelect](EventSelect.md), [EventType](EventType.md), [EventAlwaysOn](EventAlwaysOn.md)
 - Position ranges (single / by gap): [EventBegPos](EventBegPos.md), [EventEndPos](EventEndPos.md), [EventGap](EventGap.md)
 - Pulse shape: [EventPulseWid](EventPulseWid.md), [EventPulseRes](EventPulseRes.md)
+- Suppress (central-i v4 only): [EventSuppress](EventSuppress.md) — momentarily suppresses event-pulse emission in the remote drive's compare hardware
 - Position tables: [EventTable](EventTable.md), [EventTableBeg](EventTableBeg.md), [EventTableEnd](EventTableEnd.md), [EventTableSel](EventTableSel.md), [EventTableSrc](EventTableSrc.md), [EventTableWid](EventTableWid.md), [EventTableCor](EventTableCor.md), [EventCorrect](EventCorrect.md)
 - Rollover: [EventRollCntr](EventRollCntr.md), [EventRollOff](EventRollOff.md)
 - Status: [EventCntr](EventCntr.md), [EventNextPos](EventNextPos.md), [EventLoopback](EventLoopback.md)

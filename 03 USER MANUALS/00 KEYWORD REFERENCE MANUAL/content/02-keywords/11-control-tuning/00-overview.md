@@ -20,7 +20,7 @@ To improve motion performance, gain scheduling is available for position, veloci
 
 For non-collocated control, dual-loop control can be used to allow 2 separate feedback sources (one for position feedback and one for velocity feedback), in order to eliminate backlash.
 
-In general, this section is divided into 8 subsections:
+In general, this section is divided into 10 subsections:
 
 1.  General keywords
 
@@ -37,6 +37,10 @@ In general, this section is divided into 8 subsections:
 7.  Force control
 
 8.  Input-shaping
+
+9.  Compensation filter (central-i v5 only)
+
+10. Stability diagnostics (central-i v5 only)
 
 Which group of control keywords is active depends on the axis [OperationMode](../../02-keywords/08-axis-operation/01-general-keywords/OperationMode.md). The table below summarises which keyword groups apply in each operation mode (for force control, also depending on [ForcePIVOn](../../02-keywords/11-control-tuning/07-force-control/ForcePIVOn.md)).
 

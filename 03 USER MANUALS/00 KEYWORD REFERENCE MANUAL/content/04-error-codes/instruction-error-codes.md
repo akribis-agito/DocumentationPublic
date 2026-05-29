@@ -85,10 +85,10 @@ The following is the list of instruction error codes and their descriptions.
 | 74 | The ECAM table indexes are not organized in growing values |
 | 75 | The ECAM (master) gap has an illegal value of zero |
 | 76 | The ECAM number of requested cycles has an illegal value of zero |
-| 77 | ECAM master source with a CAN code out of range |
-| 78 | ECAM master source from a invalid axis |
-| 79 | Wrong index in ECAM master source |
-| 80 | ECAM master source can't be a function |
+| 77 | ECAM, Gear master or virtual encoder source with a CAN code out of range |
+| 78 | ECAM, Gear master or virtual encoder source from an invalid axis |
+| 79 | Wrong index in ECAM, Gear master or virtual encoder source |
+| 80 | ECAM, Gear master or virtual encoder source can't be a function |
 | 81 | ECAM required range of master is outside of the limits of +/-2,000,000,000 |
 | 82 | ECAM table includes at least two consecutive values that differs too much<br> from each other |
 | 83 | Assigning a value to position is not allowed while Error Mapping is activated |
@@ -156,9 +156,9 @@ The following is the list of instruction error codes and their descriptions.
 | 145 | Helix segment definitions create inconsistent end point |
 | 146 | An error occurred in RJ45 RS232 receive |
 | 147 | An error occurred in mini USB RS232 receive |
-| 148 | Out of range filter definitions (frequency), at the EPP model-range filter |
-| 149 | Out of range filter definitions (damping), at the EPP model-range filter |
-| 150 | EPP function not done,for the motion length out of memory |
+| 148 | Reserved, contact Agito |
+| 149 | Reserved, contact Agito |
+| 150 | UPM Repetitive function not done, for the motion length plus extended UPMRptTime out of memory |
 | 151 | Error in remote Central-i unit communication |
 | 152 | The detected Central-i device type is not the same as the user entered |
 | 153 | The Central-i transmit buffer is full |
@@ -244,7 +244,7 @@ The following is the list of instruction error codes and their descriptions.
 | 233 | This keyword is supported only for User1 special product |
 | 234 | At least one of the plant model entries is illegal |
 | 235 | Download Firmware is only available via Ethernet connection |
-| 236 | No valid plant model (PlantModel[]) for EPP calculation |
+| 236 | No valid plant model (PlantModel[]) for UPM Repetitive calculation |
 | 237 | This functionality is not yet supported by this FW version |
 | 238 | The remote CAN Access failed due to time-out when waiting for send or receive to/from the remote unit |
 | 239 | The remote CAN Access replied with an error (error code is stored at RemoteCANVal) |

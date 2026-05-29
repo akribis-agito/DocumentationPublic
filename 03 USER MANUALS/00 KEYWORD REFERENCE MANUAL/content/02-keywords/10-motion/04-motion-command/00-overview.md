@@ -14,3 +14,4 @@ Below is the summary of keywords that can control the motion state.
 | 4 | [Abort](Abort.md) | Immediately ends motion by clearing the motion state. |
 | 5 | [StopRep](StopRep.md) | Ends repetitive point-to-point motion after the current repetition. |
 | 6 | [StopBuff](StopBuff.md) | Ends spline-buffer motion at the end of the current playback cycle. |
+| 7 | [CommitMotion](CommitMotion.md) | Commits a staged on-the-fly change to a running sine PTP move (`MotionMode` 20 / 21); central-i v5 only. |

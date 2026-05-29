@@ -10,11 +10,11 @@ The complex CAN code bits are divided into the following bit fields:
 | Bits \#10 – 14          | Axis number (0 represents first axis/axis “A”)  |
 | Bits \#16 – 31          | Index of the array (if the keyword is an array) |
 
-For example, if keyword DInPort\[4\] is to be represented (CAN code = 35, axis number = 3 (axis D), array index = 4) , then complex CAN code = 35 + (3\<\<10) + (4\<\<16) = 35 + 3 \* 2<sup>10</sup> + 4 \* 2<sup>16</sup> = 265251.
+For example, if keyword AInPort\[4\] is to be represented (CAN code = 35, axis number = 3 (axis D), array index = 4) , then complex CAN code = 35 + (3\<\<10) + (4\<\<16) = 35 + 3 \* 2<sup>10</sup> + 4 \* 2<sup>16</sup> = 265251.
 
-The following table illustrates the complex CAN code of DInPort\[4\].
+The following table illustrates the complex CAN code of AInPort\[4\].
 
-**Combined**: `0x00040A23` = `265251`
+**Combined**: `0x00040C23` = `265251`
 
 The following are variables that utilise complex CAN code.
 

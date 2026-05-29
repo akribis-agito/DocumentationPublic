@@ -28,6 +28,7 @@ The keywords are organised into the following sub-sections:
 | [EncAbsMB/AuxEncAbsMB](01-general-settings/EncAbsMB-AuxEncAbsMB.md) | Number of least significant bits removed from the absolute encoder reading. |
 | [EncAbsOff/AuxEncAbsOff](01-general-settings/EncAbsOff-AuxEncAbsOff.md) | Offset added to the absolute encoder reading at power-up. |
 | [EncAbsVal/AuxEncAbsVal](01-general-settings/EncAbsVal-AuxEncAbsVal.md) | Raw absolute encoder value after bit-masking and direction handling. |
+| [EncStatReg](01-general-settings/EncStatReg.md) | Read-only status register reporting absolute-encoder health bits. |
 | [EncAbsFL/EncAbsRL](01-general-settings/EncAbsFL-EncAbsRL.md) | Forward/reverse limits that re-interpret an out-of-range absolute position at power-on (customized firmware only). |
 | [AuxModRev](01-general-settings/AuxModRev.md) | Modulo revolution divisor for the auxiliary encoder (not implemented in current firmware). |
 | [SinCosSetup/AuxSinCosSet](01-general-settings/SinCosSetup-AuxSinCosSet.md) | Parameter array configuring the SIN/COS encoder. |
@@ -76,6 +77,8 @@ The keywords are organised into the following sub-sections:
 | [VEncFact](06-virtual-encoder/VEncFact.md) | Numerator of the scaling ratio applied to the virtual encoder source signal. |
 | [VEncFactDen](06-virtual-encoder/VEncFactDen.md) | Denominator of the scaling ratio applied to the virtual encoder source signal. |
 | [VEncDelay](06-virtual-encoder/VEncDelay.md) | Pulse/direction setup delay between a direction change and the first virtual-encoder pulse. |
+| [VEncValue](06-virtual-encoder/VEncValue.md) | Read-only accumulated count emitted by the virtual encoder. |
+| [VEncModRev](06-virtual-encoder/VEncModRev.md) | Source modulo span keeping the virtual-encoder output continuous across roll-over. |
 
 ## Absolute encoder
 
@@ -86,3 +89,4 @@ The keywords are organised into the following sub-sections:
 | [EncAbsWData](07-absolute-encoder/EncAbsWData.md) | Data value to be written to the absolute encoder register on a write transaction. |
 | [EncAbsRData](07-absolute-encoder/EncAbsRData.md) | Data returned from an absolute encoder register read transaction. |
 | [EncAbsSendCmd](07-absolute-encoder/EncAbsSendCmd.md) | Command that initiates a register read/write transaction to the absolute encoder. |
+| [EncAbsErrTime](07-absolute-encoder/EncAbsErrTime.md) | Cycles an absolute-encoder error/CRC condition may persist before the axis faults; -1 disables. |

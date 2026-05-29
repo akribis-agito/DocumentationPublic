@@ -19,7 +19,7 @@ The common/differential transform and recombination are illustrated in the diagr
 
 The two motors must be powered, phased, and the yaw axis must not be commanded independently before `GantryOn` is set. The full engagement sequence on a master `A` / yaw `B` pair is:
 
-1. **Bring both motors up.** Both `A` and `B` must have completed commutation (`AComtStatus[1]` and `BComtStatus[1]` both `100`) and have their motors enabled. Until then, [GantryOn](01-general-variables/GantryOn.md) is rejected and will not stay set:
+1. **Bring both motors up.** Turn both `A` and `B` motors on first. [GantryOn](01-general-variables/GantryOn.md) is automatically cleared to `0` whenever either motor turns off, so engage it only after both motors are on. Both motors must also have completed commutation (`AComtStatus[1]` and `BComtStatus[1]` both `100`) for the gantry to drive current correctly, but commutation is not what keeps `GantryOn` set:
 
    ```text
    AMotorOn=1           ; enable the master motor

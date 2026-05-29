@@ -15,8 +15,9 @@ The following table shows the summary of motor and amplifier keywords.
 | 1   | [AAmpFullScale](../../02-keywords/02-motor-and-amplifier/AAmpFullScale.md) | Full-scale output value for external amplifier            |
 | 2   | [AmpType](../../02-keywords/02-motor-and-amplifier/AmpType.md)             | Axis amplifier mode                                       |
 | 3   | [LAmpFullScale](../../02-keywords/02-motor-and-amplifier/LAmpFullScale.md) | Full-scale output selection for built-in linear amplifier |
-| 4   | [MotorType](../../02-keywords/02-motor-and-amplifier/MotorType.md)         | Axis motor type                                           |
-| 5   | [PolePrs](../../02-keywords/02-motor-and-amplifier/PolePrs.md)             | Number of pole pairs of the motor                         |
-| 6   | [StepBits](../../02-keywords/02-motor-and-amplifier/StepBits.md)           | Number of stepping bits per electrical cycle              |
-| 7   | [StepInMotCurr](../../02-keywords/02-motor-and-amplifier/StepInMotCurr.md) | Stepper phase current used in motion                      |
-| 8   | [StepInPosCurr](../../02-keywords/02-motor-and-amplifier/StepInPosCurr.md) | Stepper phase current used in standstill                  |
+| 4   | [MagneticPitch](../../02-keywords/02-motor-and-amplifier/MagneticPitch.md) | Linear-motor magnetic pitch in millimetres                |
+| 5   | [MotorType](../../02-keywords/02-motor-and-amplifier/MotorType.md)         | Axis motor type                                           |
+| 6   | [PolePrs](../../02-keywords/02-motor-and-amplifier/PolePrs.md)             | Number of pole pairs of the motor                         |
+| 7   | [StepBits](../../02-keywords/02-motor-and-amplifier/StepBits.md)           | Number of stepping bits per electrical cycle              |
+| 8   | [StepInMotCurr](../../02-keywords/02-motor-and-amplifier/StepInMotCurr.md) | Stepper phase current used in motion                      |
+| 9   | [StepInPosCurr](../../02-keywords/02-motor-and-amplifier/StepInPosCurr.md) | Stepper phase current used in standstill                  |

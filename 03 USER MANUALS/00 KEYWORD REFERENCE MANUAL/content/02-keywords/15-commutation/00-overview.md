@@ -2,11 +2,11 @@
 
 Commutation is the process of finding the electrical-angle offset of a DC brushless motor (with at least 3 phases). It ensures that, as the controller alternates the phase currents during motion, the applied current vector stays 90 electrical degrees from the magnetic field so that force/torque is produced efficiently.
 
-![Establishing the electrical angle: ComtMode selects the method (search, Hall, absolute encoder or minimal-jumps search); when commutation completes ComtStatus reads 100 and StatReg bit 0 is set, which allows normal motion; ComtAng reports the angle in effect](commutation-overview.svg)
+![Establishing the electrical angle: ComtMode selects the method (search, Hall, absolute encoder or minimal-jumps search); StatReg bit 0 is set and normal motion allowed once a usable angle exists (the rough Hall angle at ComtStatus 300/400 for methods 3/4, or 100 / not-required 200 otherwise); ComtAng reports the angle in effect](commutation-overview.svg)
 
 To commutate correctly the controller must know the motor electrical angle. This can come directly from Hall sensors, from a previously stored absolute-encoder reference, or be found by a search that applies a small command and observes the response. In the absence of Hall sensors the angle must be derived from the encoder, which is generally not aligned with the motor electrical phase, so an initialization (phasing) process is needed to align the two.
 
-When commutation runs is configured by [ComtMode](ComtMode.md) (after power-on, on motor-on, both, or manual only); the process can also be re-triggered on request. Until commutation completes, the commutation-complete bit of [StatReg](../07-status-and-faults/StatReg.md) (bit 0) stays cleared and normal motion is blocked.
+When commutation runs is configured by [ComtMode](ComtMode.md) (after power-on, on motor-on, both, or manual only); the process can also be re-triggered on request. The commutation-complete bit of [StatReg](../07-status-and-faults/StatReg.md) (bit 0) gates normal motion: for most methods it is set when commutation finishes ([ComtStatus](ComtStatus.md) `100`) or is not required (`200`), but for the Hall-start switching methods (`ComtMode[1]=3` or `4`) it is set already at the rough stage (`ComtStatus` `300`/`400`) so the axis can move immediately. The bit stays cleared, blocking normal motion, only before any usable angle is available (status `0`/`1`) or when commutation has failed (a negative status).
 
 The category contains:
 
@@ -46,9 +46,9 @@ A typical setup for a brushless motor with Hall sensors and an encoder index is 
    AComtStatus[1]           ; 1, then 300 (rough done), then 100 (fine done)
    ```
 
-   The axis can already produce torque while `AComtStatus[1]` is `300`, so a small motion is needed to bring the encoder index under the read head if it has not been crossed yet. When the index pulse arrives, the controller snaps the commutation angle to the index reference, sets [StatReg](../07-status-and-faults/StatReg.md) bit 0 (commutation complete), and `AComtStatus[1]` reads `100`.
+   For this method the controller sets [StatReg](../07-status-and-faults/StatReg.md) bit 0 (commutation complete) already at the rough stage (`AComtStatus[1]` = `300`), so the axis can produce torque and move immediately — a small motion can be commanded to bring the encoder index under the read head if it has not been crossed yet. When the index pulse arrives, the controller snaps the commutation angle to the index reference and `AComtStatus[1]` reads `100`; this refines the angle but does not itself change bit 0, which was already set.
 
-4. **Verify and proceed.** Normal motion is blocked until `StatReg` bit 0 is set:
+4. **Verify and proceed.** For this method `StatReg` bit 0 is already set at the rough stage (status `300`), so normal motion is enabled before the index refines the angle:
 
    ```text
    AComtAng                 ; the resulting electrical angle in use
