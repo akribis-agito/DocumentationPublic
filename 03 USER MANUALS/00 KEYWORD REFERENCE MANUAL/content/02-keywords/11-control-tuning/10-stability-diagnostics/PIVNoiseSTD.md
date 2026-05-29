@@ -1,6 +1,6 @@
 ---
 keyword: PIVNoiseSTD
-summary: "PIV noise spread threshold for standstill noise/jitter detection, in percent of the peak current limit."
+summary: PIV noise spread threshold for standstill noise/jitter detection, in percent of the peak current limit.
 availability:
   standalone: []
   central-i:
@@ -16,8 +16,10 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range: null
-  default: null
+  range:
+  - 0.01
+  - 100.0
+  default: 2.0
   scaling: 1.0
   implemented: final
 overrides: {}

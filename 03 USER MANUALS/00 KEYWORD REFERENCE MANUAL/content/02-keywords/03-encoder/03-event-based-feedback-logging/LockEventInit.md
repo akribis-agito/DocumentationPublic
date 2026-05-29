@@ -1,6 +1,6 @@
 ---
 keyword: LockEventInit
-summary: "Initializes the unified lock/event configuration by learning the firmware-to-hardware capture offset (mode 1 only)."
+summary: Initializes the unified lock/event configuration by learning the firmware-to-hardware capture offset (mode 1 only).
 availability:
   standalone: []
   central-i:

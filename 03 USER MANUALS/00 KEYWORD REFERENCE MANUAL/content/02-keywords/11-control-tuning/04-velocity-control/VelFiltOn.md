@@ -12,7 +12,7 @@ attributes:
   scope: axis
   flash: true
   type: array
-  array_size: 5
+  array_size: 3
   data_type: int32
   ok_in_motion: false
   ok_motor_on: false

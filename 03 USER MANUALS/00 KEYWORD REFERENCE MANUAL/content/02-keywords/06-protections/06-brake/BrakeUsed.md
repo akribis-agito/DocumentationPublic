@@ -1,6 +1,6 @@
 ---
 keyword: BrakeUsed
-summary: "Enables or disables control of an external static (holding) brake."
+summary: Enables or disables control of an external static (holding) brake.
 availability:
   standalone:
   - v4

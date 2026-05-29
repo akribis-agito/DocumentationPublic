@@ -1,6 +1,6 @@
 ---
 keyword: CompTbleCrrct
-summary: "Per-unit contact-point correction that shifts the compensation table along the position axis."
+summary: Per-unit contact-point correction that shifts the compensation table along the position axis.
 availability:
   standalone: []
   central-i:

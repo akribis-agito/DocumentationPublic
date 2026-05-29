@@ -22,6 +22,7 @@ Run once per branch checkout, asserting the version manually.
                 /path/to/Firmware-Main/CommonIncludes/AG300_CTL01ParamsCommon.h \
                 /path/to/Firmware-Main/CommonIncludes/CentraliLib.h \
                 /path/to/Firmware-Main/CommonIncludes/AG300_CTL01Interpreter.h \
+                /path/to/Firmware-Main/CommonIncludes/AG300_CTL01UProgFuncs.h \
       --docs-root "03 USER MANUALS/00 KEYWORD REFERENCE MANUAL/content" \
       --manifest  "03 USER MANUALS/00 KEYWORD REFERENCE MANUAL/content/_manifest/undocumented.md"
 
@@ -30,10 +31,18 @@ Run once per branch checkout, asserting the version manually.
 
 - `append` errors if the version is already recorded in a doc (safe first add).
 - `overwrite` re-scans and replaces that version's facts (idempotent refresh).
-- **Pass `AG300_CTL01Interpreter.h` in `--defines`.** On develop the 64-bit range
-  macros expand to `(long double) LONG64_MAX`, and `LONG64_MAX`/`LONG64_MIN`
-  (= ±(2^51 − 1)) are defined there. Omitting it silently regresses every 64-bit
-  keyword's `range`/`default` to `null` (and the v5 `overrides` that carry them).
+- **Pass the full `--defines` header set.** Range/default/scaling macros chain across
+  several headers; omitting one silently regresses the affected keywords to `null`:
+  - `AG300_CTL01Interpreter.h` — `LONG64_MAX`/`LONG64_MIN` (= ±(2^51 − 1)); the 64-bit
+    range macros expand to `(long double) LONG64_MAX`.
+  - `AG300_CTL01UProgFuncs.h` — `USER_PROGRAM_NUMERIC_STACK_DEPTH`,
+    `USER_PROGRAM_CALL_STACK_DEPTH`, etc., used by the user-program stack keyword ranges.
+- The resolver handles floats (e.g. scaling `1.526`, float defaults, `1000.0f`), treats
+  the float-type limit `±3.4e38` (`FLOAT_MIN`/`FLOAT_MAX` and aliases) as unbounded
+  (`range: null`), and `overwrite` never downgrades a previously-resolved numeric
+  range/default to `null` when a re-scan can't resolve it (e.g. a constant that moved
+  from `#define` to an enum). A few constants are firmware enums, not `#define`s
+  (`MAX_FUNCS`, `MAX_TASKS`, the PWM-range terms), so those ranges rely on that guard.
 
 ## Tests
 

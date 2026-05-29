@@ -18,7 +18,9 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range: null
+  range:
+  - 0
+  - 65535
   default: 0
   scaling: 1.0
   implemented: final

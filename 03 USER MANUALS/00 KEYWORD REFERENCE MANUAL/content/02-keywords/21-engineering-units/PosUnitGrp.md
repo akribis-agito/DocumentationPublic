@@ -1,6 +1,6 @@
 ---
 keyword: PosUnitGrp
-summary: "Read-only list of the keywords that belong to the position unit group."
+summary: Read-only list of the keywords that belong to the position unit group.
 availability:
   standalone: []
   central-i:

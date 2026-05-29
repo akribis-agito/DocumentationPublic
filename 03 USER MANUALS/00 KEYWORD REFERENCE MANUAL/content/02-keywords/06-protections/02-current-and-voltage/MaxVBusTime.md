@@ -10,7 +10,7 @@ availability:
 can_code: 93
 attributes:
   access: rw
-  scope: axis
+  scope: non-axis
   flash: true
   type: scalar
   array_size: 1
@@ -22,9 +22,13 @@ attributes:
   - 0
   - 50000
   default: 0
-  scaling: 1.0
+  scaling: 65.536
   implemented: final
-overrides: {}
+overrides:
+  central-i.v4:
+    scope: axis
+  central-i.v5:
+    scope: axis
 ---
 # MaxVBusTime
 

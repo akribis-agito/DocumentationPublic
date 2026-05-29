@@ -1,6 +1,6 @@
 ---
 keyword: FrcUnitGrp
-summary: "Read-only list of the keywords that belong to the force unit group."
+summary: Read-only list of the keywords that belong to the force unit group.
 availability:
   standalone: []
   central-i:

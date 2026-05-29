@@ -1,6 +1,6 @@
 ---
 keyword: AnomDtctLL
-summary: "Lower-limit table defining the bottom of the expected band the filtered signal is checked against, per monitored motion."
+summary: Lower-limit table defining the bottom of the expected band the filtered signal is checked against, per monitored motion.
 availability:
   standalone: []
   central-i:

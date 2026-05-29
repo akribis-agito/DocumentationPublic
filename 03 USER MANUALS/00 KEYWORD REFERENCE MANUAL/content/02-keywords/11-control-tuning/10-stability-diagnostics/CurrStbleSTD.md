@@ -1,6 +1,6 @@
 ---
 keyword: CurrStbleSTD
-summary: "Current-loop spread threshold for stability detection, in percent of the peak current limit."
+summary: Current-loop spread threshold for stability detection, in percent of the peak current limit.
 availability:
   standalone: []
   central-i:

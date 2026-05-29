@@ -1,6 +1,6 @@
 ---
 keyword: UserUnitsEn
-summary: "Master enable for the global engineering-units feature on an axis."
+summary: Master enable for the global engineering-units feature on an axis.
 availability:
   standalone: []
   central-i:

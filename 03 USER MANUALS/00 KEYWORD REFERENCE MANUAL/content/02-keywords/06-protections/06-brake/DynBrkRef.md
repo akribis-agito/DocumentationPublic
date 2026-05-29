@@ -1,6 +1,6 @@
 ---
 keyword: DynBrkRef
-summary: "Sets the maximum strength (shorting duty-cycle ceiling) of dynamic braking."
+summary: Sets the maximum strength (shorting duty-cycle ceiling) of dynamic braking.
 availability:
   standalone:
   - v4
@@ -20,7 +20,7 @@ attributes:
   units: scaling
   range: null
   default: null
-  scaling: 1.0
+  scaling: 2.288
   implemented: final
 overrides: {}
 ---

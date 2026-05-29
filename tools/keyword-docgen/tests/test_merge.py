@@ -73,6 +73,28 @@ def test_absent_keyword_records_removed_in():
     assert fm["availability"]["standalone"] == ["v4"]
 
 
+def test_overwrite_keeps_known_value_when_rescan_returns_null():
+    # A symbol that moved from #define to enum (or a missing header) scans as null;
+    # overwrite must NOT downgrade a previously-resolved range/default to null.
+    fm = merge_version({}, scan_present(range=[0, 20], default=5), "v5", mode="append")
+    fm = merge_version(fm, scan_present(range=None, default=None), "v5", mode="overwrite")
+    assert fm["attributes"]["range"] == [0, 20]
+    assert fm["attributes"]["default"] == 5
+
+
+def test_overwrite_still_applies_a_real_range_change():
+    fm = merge_version({}, scan_present(range=[0, 20]), "v5", mode="append")
+    fm = merge_version(fm, scan_present(range=[0, 30]), "v5", mode="overwrite")
+    assert fm["attributes"]["range"] == [0, 30]
+
+
+def test_overwrite_fills_in_a_newly_resolved_value():
+    # null -> a real value is a legitimate improvement, not blocked by the guard
+    fm = merge_version({}, scan_present(range=None), "v5", mode="append")
+    fm = merge_version(fm, scan_present(range=[0, 20]), "v5", mode="overwrite")
+    assert fm["attributes"]["range"] == [0, 20]
+
+
 def test_preserves_existing_summary_and_category():
     fm = {"summary": "Proportional gain.", "category": "control-tuning"}
     fm = merge_version(fm, scan_present(), "v4", mode="append")

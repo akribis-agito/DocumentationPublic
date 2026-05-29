@@ -23,8 +23,10 @@ attributes:
   - 2147483647
   default: 0
   scaling: 1.0
-  implemented: final
+  implemented: '0'
 overrides:
+  central-i.v4:
+    implemented: final
   central-i.v5:
     implemented: partial
 ---

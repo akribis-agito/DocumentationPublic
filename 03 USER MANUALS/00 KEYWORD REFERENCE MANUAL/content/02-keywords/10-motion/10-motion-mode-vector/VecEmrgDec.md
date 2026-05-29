@@ -27,8 +27,9 @@ attributes:
 overrides:
   central-i.v5:
     data_type: float32
-    range: null
-    default: null
+    range:
+    - 100.0
+    - 686700000000.0
 ---
 # VecEmrgDec
 

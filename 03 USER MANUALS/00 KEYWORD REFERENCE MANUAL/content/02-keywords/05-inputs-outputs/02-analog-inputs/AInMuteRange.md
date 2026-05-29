@@ -10,7 +10,7 @@ availability:
 can_code: 377
 attributes:
   access: rw
-  scope: axis
+  scope: non-axis
   flash: true
   type: array
   array_size: 5
@@ -25,7 +25,10 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
+  central-i.v4:
+    scope: axis
   central-i.v5:
+    scope: axis
     data_type: float32
     range: null
 ---

@@ -21,7 +21,7 @@ attributes:
   range:
   - -2147483648
   - 2147483647
-  default: null
+  default: 4294967295
   scaling: 1.0
   implemented: final
 overrides:
@@ -30,6 +30,7 @@ overrides:
     range:
     - -2251799813685248
     - 2251799813685247
+    default: null
 ---
 # ProgEventMask
 

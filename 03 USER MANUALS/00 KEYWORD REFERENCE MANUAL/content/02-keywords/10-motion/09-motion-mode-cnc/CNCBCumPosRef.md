@@ -1,6 +1,6 @@
 ---
 keyword: CNCBCumPosRef
-summary: "Cumulative commanded path position of CNC group B across all segments since the motion started."
+summary: Cumulative commanded path position of CNC group B across all segments since the motion started.
 availability:
   standalone: []
   central-i:

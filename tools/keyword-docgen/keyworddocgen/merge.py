@@ -15,6 +15,20 @@ class VersionAlreadyRecorded(Exception):
     """Raised by append when the version is already present in the doc."""
 
 
+_FLOAT_TYPE_LIMIT = 3.0e38
+
+
+def _is_finite(value) -> bool:
+    """True for a real numeric range/default we should not lose — excludes None
+    and the float-type-limit sentinel (+/-3.4e38), which means 'unbounded'."""
+    if value is None:
+        return False
+    nums = value if isinstance(value, list) else [value]
+    return all(
+        isinstance(n, (int, float)) and abs(n) < _FLOAT_TYPE_LIMIT for n in nums
+    )
+
+
 def _reconstruct_cells(fm: dict) -> dict[tuple[str, str], dict]:
     """Rebuild {(product, version): {"attrs": {...}, "can_code": int}} from the
     primary attributes/can_code plus per-cell overrides. `can_code` may appear
@@ -55,11 +69,20 @@ def merge_version(fm: dict, scan_cells: dict, version: str, mode: str) -> dict:
 
     # Drop any prior cells for this version, then apply the scan.
     for product in PRODUCTS:
-        cells.pop((product, version), None)
+        prior = cells.pop((product, version), None)
         cell = scan_cells.get(product)
         if cell is not None:
+            attrs = dict(cell["attributes"])
+            # No-regression guard: a re-scan that can no longer resolve a numeric
+            # range/default (e.g. a constant moved from #define to enum, or a
+            # header is missing) must not downgrade a previously-known value to
+            # null. Keep the prior finite value instead.
+            if prior is not None:
+                for field in ("range", "default"):
+                    if attrs.get(field) is None and _is_finite(prior["attrs"].get(field)):
+                        attrs[field] = prior["attrs"][field]
             cells[(product, version)] = {
-                "attrs": cell["attributes"],
+                "attrs": attrs,
                 "can_code": cell["can_code"],
             }
 

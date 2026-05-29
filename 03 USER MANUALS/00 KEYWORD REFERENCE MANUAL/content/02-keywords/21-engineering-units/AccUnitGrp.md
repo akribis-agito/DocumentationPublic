@@ -1,6 +1,6 @@
 ---
 keyword: AccUnitGrp
-summary: "Read-only list of the keywords that belong to the acceleration unit group."
+summary: Read-only list of the keywords that belong to the acceleration unit group.
 availability:
   standalone: []
   central-i:

@@ -9,7 +9,7 @@ availability:
 can_code: 221
 attributes:
   access: rw
-  scope: axis
+  scope: non-axis
   flash: true
   type: array
   array_size: 5
@@ -23,7 +23,9 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  central-i.v4:
+    scope: axis
 ---
 # AOutShifts
 

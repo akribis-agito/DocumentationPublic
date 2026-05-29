@@ -1,6 +1,6 @@
 ---
 keyword: PosUnitFct
-summary: "Scale factor between internal position units and the selected position engineering unit."
+summary: Scale factor between internal position units and the selected position engineering unit.
 availability:
   standalone: []
   central-i:

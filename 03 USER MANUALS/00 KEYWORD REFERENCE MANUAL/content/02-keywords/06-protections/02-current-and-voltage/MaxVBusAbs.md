@@ -10,7 +10,7 @@ availability:
 can_code: 94
 attributes:
   access: rw
-  scope: axis
+  scope: non-axis
   flash: true
   type: scalar
   array_size: 1
@@ -24,7 +24,11 @@ attributes:
   default: 95000
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  central-i.v4:
+    scope: axis
+  central-i.v5:
+    scope: axis
 ---
 # MaxVBusAbs
 

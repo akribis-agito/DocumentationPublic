@@ -1,6 +1,6 @@
 ---
 keyword: MagneticPitch
-summary: "Linear-motor magnetic pitch in millimetres, used to convert speed from counts/s to m/s for the back-EMF feed-forward."
+summary: Linear-motor magnetic pitch in millimetres, used to convert speed from counts/s to m/s for the back-EMF feed-forward.
 availability:
   standalone: []
   central-i:
@@ -16,8 +16,10 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range: null
-  default: null
+  range:
+  - 0.0
+  - 1000.0
+  default: 0.0
   scaling: 1.0
   implemented: final
 overrides: {}

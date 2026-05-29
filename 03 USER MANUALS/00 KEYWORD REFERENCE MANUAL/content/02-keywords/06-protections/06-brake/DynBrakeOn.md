@@ -1,6 +1,6 @@
 ---
 keyword: DynBrakeOn
-summary: "Enables electrical dynamic braking when the motor is off."
+summary: Enables electrical dynamic braking when the motor is off.
 availability:
   standalone:
   - v4

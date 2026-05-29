@@ -11,3 +11,13 @@
 #define LONG64_MIN          -2251799813685248
 #define POS64_MAX           (long double) LONG64_MAX
 #define POS64_MIN           (long double) LONG64_MIN
+#define PWM_FACT            1.526
+#define FILTFREQ_MIN        1.0f
+#define FILTFREQ_MAX        1000.0f
+#define FILTFREQ_DFLT       200.0f
+#define STD_MIN             0.01f
+#define FLOAT_MAX           3.40282e+38
+#define FLOAT_MIN           -3.40282e+38
+#define VQ_MAX              FLOAT_MAX
+#define VQ_MIN              FLOAT_MIN
+#define INT_DIV             (POSGAIN_MAX / 2)

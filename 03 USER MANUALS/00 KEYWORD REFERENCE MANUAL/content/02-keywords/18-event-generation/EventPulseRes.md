@@ -1,6 +1,6 @@
 ---
 keyword: EventPulseRes
-summary: "Selects the time unit used to interpret the event pulse width: microseconds or nanoseconds."
+summary: 'Selects the time unit used to interpret the event pulse width: microseconds or nanoseconds.'
 availability:
   standalone:
   - v4

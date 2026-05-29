@@ -18,15 +18,13 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: user
-  range: null
+  range:
+  - -655360
+  - 655360
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    range:
-    - -655360
-    - 655360
+overrides: {}
 ---
 # RefOffsetStep
 

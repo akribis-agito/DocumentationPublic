@@ -1,6 +1,6 @@
 ---
 keyword: VecJerkInAcc
-summary: "Jerk limit (user units) for the acceleration phase of a jerk-limited vector move."
+summary: Jerk limit (user units) for the acceleration phase of a jerk-limited vector move.
 availability:
   standalone: []
   central-i:
@@ -16,8 +16,10 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: user
-  range: null
-  default: null
+  range:
+  - 10000.0
+  - 1.0e+20
+  default: 100000000.0
   scaling: 1.0
   implemented: final
 overrides: {}

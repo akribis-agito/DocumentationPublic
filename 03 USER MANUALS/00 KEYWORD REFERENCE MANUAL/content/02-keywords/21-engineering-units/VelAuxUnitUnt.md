@@ -1,6 +1,6 @@
 ---
 keyword: VelAuxUnitUnt
-summary: "Free-text unit label for auxiliary-encoder velocity, one character per array element."
+summary: Free-text unit label for auxiliary-encoder velocity, one character per array element.
 availability:
   standalone: []
   central-i:

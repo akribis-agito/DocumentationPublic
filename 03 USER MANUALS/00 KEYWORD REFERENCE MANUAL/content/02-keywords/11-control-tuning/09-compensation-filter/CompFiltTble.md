@@ -1,6 +1,6 @@
 ---
 keyword: CompFiltTble
-summary: "Compensation table holding the expected force at each evenly spaced table position."
+summary: Compensation table holding the expected force at each evenly spaced table position.
 availability:
   standalone: []
   central-i:
@@ -17,7 +17,7 @@ attributes:
   ok_motor_on: true
   units: none
   range: null
-  default: null
+  default: 0.0
   scaling: 1.0
   implemented: final
 overrides: {}

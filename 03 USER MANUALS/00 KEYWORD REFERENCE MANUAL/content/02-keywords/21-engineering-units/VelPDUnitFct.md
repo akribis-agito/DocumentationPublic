@@ -1,6 +1,6 @@
 ---
 keyword: VelPDUnitFct
-summary: "Scale factor applied to pulse-and-direction velocity values when Global User Units is enabled."
+summary: Scale factor applied to pulse-and-direction velocity values when Global User Units is enabled.
 availability:
   standalone: []
   central-i:

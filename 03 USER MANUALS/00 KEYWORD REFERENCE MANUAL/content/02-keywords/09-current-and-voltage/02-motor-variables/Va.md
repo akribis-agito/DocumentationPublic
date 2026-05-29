@@ -22,12 +22,15 @@ attributes:
   - -2147483648
   - 2147483647
   default: 0
-  scaling: 1.0
+  scaling: 1.144
   implemented: final
 overrides:
+  central-i.v4:
+    scaling: 1.526
   central-i.v5:
     data_type: float32
     range: null
+    scaling: 1.526
 ---
 # Va
 

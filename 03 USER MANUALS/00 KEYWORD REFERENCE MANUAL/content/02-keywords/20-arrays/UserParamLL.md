@@ -19,7 +19,7 @@ attributes:
   range:
   - -2251799813685248
   - 2251799813685247
-  default: null
+  default: 0.0
   scaling: 1.0
   implemented: final
 overrides: {}

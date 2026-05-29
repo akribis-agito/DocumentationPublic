@@ -24,7 +24,9 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  central-i.v5:
+    array_size: 10001
 ---
 # GenData
 

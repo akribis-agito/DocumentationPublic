@@ -1,6 +1,6 @@
 ---
 keyword: VdFFW
-summary: "Read-only direct-axis voltage feedforward output added to the d-axis voltage command."
+summary: Read-only direct-axis voltage feedforward output added to the d-axis voltage command.
 availability:
   standalone: []
   central-i:
@@ -18,7 +18,7 @@ attributes:
   units: scaling
   range: null
   default: 0
-  scaling: 1.0
+  scaling: 1.526
   implemented: final
 overrides: {}
 ---

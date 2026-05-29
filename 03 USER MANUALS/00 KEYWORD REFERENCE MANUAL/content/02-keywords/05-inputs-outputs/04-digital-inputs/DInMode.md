@@ -10,7 +10,7 @@ availability:
 can_code: 225
 attributes:
   access: rw
-  scope: axis
+  scope: non-axis
   flash: true
   type: array
   array_size: 33
@@ -22,7 +22,11 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  central-i.v4:
+    scope: axis
+  central-i.v5:
+    scope: axis
 ---
 # DInMode
 

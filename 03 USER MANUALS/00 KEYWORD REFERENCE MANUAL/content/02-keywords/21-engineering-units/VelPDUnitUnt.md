@@ -1,6 +1,6 @@
 ---
 keyword: VelPDUnitUnt
-summary: "Free-text unit label for pulse-and-direction velocity, one character per array element."
+summary: Free-text unit label for pulse-and-direction velocity, one character per array element.
 availability:
   standalone: []
   central-i:

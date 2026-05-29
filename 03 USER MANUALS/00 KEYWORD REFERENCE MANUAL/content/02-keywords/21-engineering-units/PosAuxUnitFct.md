@@ -1,6 +1,6 @@
 ---
 keyword: PosAuxUnitFct
-summary: "Scale factor applied to auxiliary-encoder position values when Global User Units is enabled."
+summary: Scale factor applied to auxiliary-encoder position values when Global User Units is enabled.
 availability:
   standalone: []
   central-i:

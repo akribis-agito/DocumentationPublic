@@ -1,6 +1,6 @@
 ---
 keyword: ProgArgThisLL
-summary: "Reads or writes the current function's argument and local-variable slots as 64-bit signed integers."
+summary: Reads or writes the current function's argument and local-variable slots as 64-bit signed integers.
 availability:
   standalone: []
   central-i:
@@ -11,7 +11,7 @@ attributes:
   scope: non-axis
   flash: false
   type: array
-  array_size: 1
+  array_size: 27
   data_type: int64
   ok_in_motion: true
   ok_motor_on: true
@@ -19,7 +19,7 @@ attributes:
   range:
   - -2251799813685248
   - 2251799813685247
-  default: null
+  default: 0.0
   scaling: 1.0
   implemented: final
 overrides: {}

@@ -1,6 +1,6 @@
 ---
 keyword: GantryMapGap
-summary: "Spacing in source-position units between consecutive entries of the gantry decoupling map."
+summary: Spacing in source-position units between consecutive entries of the gantry decoupling map.
 availability:
   standalone: []
   central-i:

@@ -25,6 +25,7 @@ attributes:
   implemented: final
 overrides:
   central-i.v5:
+    array_size: 11
     ok_in_motion: true
     ok_motor_on: true
 ---

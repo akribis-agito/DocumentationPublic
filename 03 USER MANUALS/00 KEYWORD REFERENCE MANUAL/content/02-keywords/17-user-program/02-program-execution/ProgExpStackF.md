@@ -1,6 +1,6 @@
 ---
 keyword: ProgExpStackF
-summary: "Reads a value on the numeric (expression) stack as a 32-bit floating-point (float), without popping it."
+summary: Reads a value on the numeric (expression) stack as a 32-bit floating-point (float), without popping it.
 availability:
   standalone: []
   central-i:
@@ -11,12 +11,14 @@ attributes:
   scope: non-axis
   flash: false
   type: array
-  array_size: 1
+  array_size: 10
   data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: func
-  range: null
+  range:
+  - 0
+  - 51
   default: 0
   scaling: 1.0
   implemented: partial

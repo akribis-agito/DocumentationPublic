@@ -19,7 +19,7 @@ attributes:
   units: none
   range:
   - 1
-  - 2
+  - 8
   default: 1
   scaling: 1.0
   implemented: final

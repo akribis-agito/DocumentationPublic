@@ -21,7 +21,7 @@ attributes:
   range:
   - 0
   - 15
-  default: null
+  default: 1
   scaling: 1.0
   implemented: partial
 overrides: {}

@@ -1,6 +1,6 @@
 ---
 keyword: PreCruiseSpd
-summary: "Speed held during the pre-cruise stage of a sine point-to-point move (user units)."
+summary: Speed held during the pre-cruise stage of a sine point-to-point move (user units).
 availability:
   standalone: []
   central-i:

@@ -1,6 +1,6 @@
 ---
 keyword: CurrStbleStat
-summary: "Read-only status array exposing the live statistics and thresholds of the current-loop stability detector."
+summary: Read-only status array exposing the live statistics and thresholds of the current-loop stability detector.
 availability:
   standalone: []
   central-i:

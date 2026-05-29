@@ -1,6 +1,6 @@
 ---
 keyword: CurrStbleErr
-summary: "Current-loop tracking-error threshold for stability detection, in percent of the peak current limit."
+summary: Current-loop tracking-error threshold for stability detection, in percent of the peak current limit.
 availability:
   standalone: []
   central-i:

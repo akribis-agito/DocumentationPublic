@@ -1,6 +1,6 @@
 ---
 keyword: CompTbleInit
-summary: "Position, in encoder counts, of the first point of the compensation table."
+summary: Position, in encoder counts, of the first point of the compensation table.
 availability:
   standalone: []
   central-i:

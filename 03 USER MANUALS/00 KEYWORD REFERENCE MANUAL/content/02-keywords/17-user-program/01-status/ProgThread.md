@@ -1,6 +1,6 @@
 ---
 keyword: ProgThread
-summary: "Reports the user-program thread number that is currently executing."
+summary: Reports the user-program thread number that is currently executing.
 availability:
   standalone: []
   central-i:
@@ -16,7 +16,9 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range: null
+  range:
+  - 1
+  - 10
   default: 1
   scaling: 1.0
   implemented: final

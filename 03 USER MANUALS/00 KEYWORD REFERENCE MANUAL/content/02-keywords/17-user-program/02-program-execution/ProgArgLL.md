@@ -1,6 +1,6 @@
 ---
 keyword: ProgArgLL
-summary: "Reads a thread's current function argument slot as a 64-bit signed integer, from outside the function."
+summary: Reads a thread's current function argument slot as a 64-bit signed integer, from outside the function.
 availability:
   standalone: []
   central-i:
@@ -11,12 +11,14 @@ attributes:
   scope: non-axis
   flash: false
   type: array
-  array_size: 1
+  array_size: 9
   data_type: int64
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range: null
+  range:
+  - 0
+  - 26
   default: 0
   scaling: 1.0
   implemented: final

@@ -1,6 +1,6 @@
 ---
 keyword: EncAbsErrTime
-summary: "Number of control cycles an absolute-encoder error/warning/CRC condition may persist before the axis faults; -1 disables monitoring."
+summary: Number of control cycles an absolute-encoder error/warning/CRC condition may persist before the axis faults; -1 disables monitoring.
 availability:
   standalone:
   - v4

@@ -14,7 +14,7 @@ def parse():
 def test_parses_develop_format_two_products():
     t = parse()
     assert set(t) == {"standalone", "central-i"}
-    assert set(t["standalone"]) == {"PosGain", "PosKi", "AInPort"}
+    assert set(t["standalone"]) == {"PosGain", "PosKi", "AInPort", "CompFiltFreq", "VqFFW"}
 
 
 def test_develop_posgain_attributes_and_int64_datatype():
@@ -41,3 +41,19 @@ def test_develop_datatype_tokens():
 
 def test_develop_skips_sentinel():
     assert "ZZZZ" not in parse()["standalone"]
+
+
+def test_develop_float_range_default_and_scaling():
+    # specific float min/max/default resolve; float scaling macro resolves
+    a = parse()["standalone"]["CompFiltFreq"]["attributes"]
+    assert a["data_type"] == "float32"
+    assert a["range"] == [1.0, 1000.0]
+    assert a["default"] == 200.0
+    assert a["scaling"] == 1.526
+
+
+def test_develop_float_type_sentinel_range_is_null():
+    # FLOAT_MIN/FLOAT_MAX is the float-type limit, not a real bound -> unbounded
+    a = parse()["standalone"]["VqFFW"]["attributes"]
+    assert a["range"] is None
+    assert a["scaling"] == 1.526

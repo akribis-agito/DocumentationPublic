@@ -1,6 +1,6 @@
 ---
 keyword: AccUnitFct
-summary: "Scale factor between internal acceleration units and the selected acceleration engineering unit."
+summary: Scale factor between internal acceleration units and the selected acceleration engineering unit.
 availability:
   standalone: []
   central-i:

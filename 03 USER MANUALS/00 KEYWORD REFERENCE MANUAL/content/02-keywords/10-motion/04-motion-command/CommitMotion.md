@@ -1,6 +1,6 @@
 ---
 keyword: CommitMotion
-summary: "Command that commits a staged on-the-fly change to a running sine point-to-point move."
+summary: Command that commits a staged on-the-fly change to a running sine point-to-point move.
 availability:
   standalone: []
   central-i:

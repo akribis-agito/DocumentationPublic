@@ -27,7 +27,7 @@ attributes:
 overrides:
   central-i.v5:
     data_type: float32
-    default: null
+    default: 2133.3333333333335
 ---
 # InjectCurrAmp
 

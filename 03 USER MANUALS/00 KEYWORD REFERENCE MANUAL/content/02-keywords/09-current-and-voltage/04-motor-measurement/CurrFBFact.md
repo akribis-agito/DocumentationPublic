@@ -1,6 +1,6 @@
 ---
 keyword: CurrFBFact
-summary: "Scale factor (micro-units) mapping a remote analog current-sense input to motor current, for the linear-adapter remote amplifier."
+summary: Scale factor (micro-units) mapping a remote analog current-sense input to motor current, for the linear-adapter remote amplifier.
 availability:
   standalone: []
   central-i:

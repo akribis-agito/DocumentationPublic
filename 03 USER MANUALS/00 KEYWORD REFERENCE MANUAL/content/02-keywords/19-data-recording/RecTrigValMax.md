@@ -28,7 +28,6 @@ overrides:
   central-i.v5:
     data_type: float64
     range: null
-    default: null
 ---
 # RecTrigValMax
 

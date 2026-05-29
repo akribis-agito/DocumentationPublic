@@ -1,6 +1,6 @@
 ---
 keyword: PushConstantD
-summary: "Pushes a 64-bit floating-point (double) constant onto the numeric stack of the current thread."
+summary: Pushes a 64-bit floating-point (double) constant onto the numeric stack of the current thread.
 availability:
   standalone: []
   central-i:

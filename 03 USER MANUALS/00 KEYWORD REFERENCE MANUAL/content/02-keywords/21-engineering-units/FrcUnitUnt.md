@@ -1,6 +1,6 @@
 ---
 keyword: FrcUnitUnt
-summary: "Display label (name) of the force engineering unit, stored as a short text string."
+summary: Display label (name) of the force engineering unit, stored as a short text string.
 availability:
   standalone: []
   central-i:

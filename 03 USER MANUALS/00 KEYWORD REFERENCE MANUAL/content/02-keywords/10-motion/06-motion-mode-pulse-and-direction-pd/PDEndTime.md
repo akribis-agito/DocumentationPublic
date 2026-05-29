@@ -22,7 +22,7 @@ attributes:
   - 0
   - 163840
   default: 16
-  scaling: 1.0
+  scaling: 65.536
   implemented: final
 overrides: {}
 ---

@@ -1,6 +1,6 @@
 ---
 keyword: EventSuppress
-summary: "Command that momentarily suppresses event-pulse generation in the remote drive's compare hardware."
+summary: Command that momentarily suppresses event-pulse generation in the remote drive's compare hardware.
 availability:
   standalone: []
   central-i:

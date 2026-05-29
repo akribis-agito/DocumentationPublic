@@ -1,6 +1,6 @@
 ---
 keyword: CompFiltFreq
-summary: "Cut-off frequency, in hertz, of the compensation filter's first-order low-pass stage."
+summary: Cut-off frequency, in hertz, of the compensation filter's first-order low-pass stage.
 availability:
   standalone: []
   central-i:
@@ -16,8 +16,10 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range: null
-  default: null
+  range:
+  - 1.0
+  - 1000.0
+  default: 200.0
   scaling: 1.0
   implemented: final
 overrides: {}

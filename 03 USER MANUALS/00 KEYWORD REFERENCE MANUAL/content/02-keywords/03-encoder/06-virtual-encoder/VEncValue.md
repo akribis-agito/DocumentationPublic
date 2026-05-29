@@ -1,6 +1,6 @@
 ---
 keyword: VEncValue
-summary: "Read-only accumulated count emitted by the virtual encoder, tracking the scaled source signal."
+summary: Read-only accumulated count emitted by the virtual encoder, tracking the scaled source signal.
 availability:
   standalone:
   - v4

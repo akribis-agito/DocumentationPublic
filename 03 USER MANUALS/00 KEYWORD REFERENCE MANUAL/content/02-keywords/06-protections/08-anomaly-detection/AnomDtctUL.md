@@ -1,6 +1,6 @@
 ---
 keyword: AnomDtctUL
-summary: "Upper-limit table defining the top of the expected band the filtered signal is checked against, per monitored motion."
+summary: Upper-limit table defining the top of the expected band the filtered signal is checked against, per monitored motion.
 availability:
   standalone: []
   central-i:

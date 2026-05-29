@@ -1,6 +1,6 @@
 ---
 keyword: AnomDtctGap
-summary: "Number of control cycles each limit-table point spans before the detector advances, set per monitored motion."
+summary: Number of control cycles each limit-table point spans before the detector advances, set per monitored motion.
 availability:
   standalone: []
   central-i:

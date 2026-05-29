@@ -1,6 +1,6 @@
 ---
 keyword: PIVNoiseWSize
-summary: "Length, in milliseconds, of the sliding window over which the PIV noise statistic is computed."
+summary: Length, in milliseconds, of the sliding window over which the PIV noise statistic is computed.
 availability:
   standalone: []
   central-i:
@@ -16,8 +16,10 @@ attributes:
   ok_in_motion: false
   ok_motor_on: false
   units: none
-  range: null
-  default: null
+  range:
+  - 5.0
+  - 125.0
+  default: 30.0
   scaling: 1.0
   implemented: final
 overrides: {}

@@ -1,6 +1,6 @@
 ---
 keyword: LockEventStat
-summary: "Reports the initialization state of the lock/event subsystem."
+summary: Reports the initialization state of the lock/event subsystem.
 availability:
   standalone: []
   central-i:

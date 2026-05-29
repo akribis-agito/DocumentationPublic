@@ -1,6 +1,6 @@
 ---
 keyword: ExtCurrFBSca
-summary: "Scale factor converting an external analog current-sense input into motor current feedback (applied to both phases)."
+summary: Scale factor converting an external analog current-sense input into motor current feedback (applied to both phases).
 availability:
   standalone: []
   central-i:
@@ -16,8 +16,10 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range: null
-  default: null
+  range:
+  - -20.0
+  - 20.0
+  default: 0.4
   scaling: 1.0
   implemented: final
 overrides: {}

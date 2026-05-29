@@ -1,6 +1,6 @@
 ---
 keyword: BEMFConst
-summary: "Motor back-EMF constant used to compute the speed-proportional voltage feedforward."
+summary: Motor back-EMF constant used to compute the speed-proportional voltage feedforward.
 availability:
   standalone: []
   central-i:
@@ -16,8 +16,10 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range: null
-  default: null
+  range:
+  - 0.0
+  - 10000.0
+  default: 0.0
   scaling: 1.0
   implemented: final
 overrides: {}

@@ -1,6 +1,6 @@
 ---
 keyword: EncStatReg
-summary: "Read-only status register reporting absolute-encoder health bits (disconnect, error, warning, CRC)."
+summary: Read-only status register reporting absolute-encoder health bits (disconnect, error, warning, CRC).
 availability:
   standalone:
   - v4

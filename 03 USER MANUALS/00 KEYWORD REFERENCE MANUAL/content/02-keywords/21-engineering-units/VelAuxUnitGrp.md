@@ -1,6 +1,6 @@
 ---
 keyword: VelAuxUnitGrp
-summary: "Read-only list of the auxiliary-encoder velocity keywords that share the auxiliary velocity user-unit scaling and label."
+summary: Read-only list of the auxiliary-encoder velocity keywords that share the auxiliary velocity user-unit scaling and label.
 availability:
   standalone: []
   central-i:

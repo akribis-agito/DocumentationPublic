@@ -1,6 +1,6 @@
 ---
 keyword: AnomDtctSt
-summary: "Read-only status array reporting the detector state, filtered signal value, active band, and active motion."
+summary: Read-only status array reporting the detector state, filtered signal value, active band, and active motion.
 availability:
   standalone: []
   central-i:

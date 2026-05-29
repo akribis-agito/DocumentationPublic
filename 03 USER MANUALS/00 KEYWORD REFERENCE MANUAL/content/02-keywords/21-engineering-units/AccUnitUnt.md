@@ -1,6 +1,6 @@
 ---
 keyword: AccUnitUnt
-summary: "Display label (name) of the acceleration engineering unit, stored as a short text string."
+summary: Display label (name) of the acceleration engineering unit, stored as a short text string.
 availability:
   standalone: []
   central-i:

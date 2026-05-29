@@ -1,6 +1,6 @@
 ---
 keyword: LockEventMode
-summary: "Selects the lock/event operating mode: legacy auto-init (0) or the unified scheme that requires LockEventInit (1)."
+summary: 'Selects the lock/event operating mode: legacy auto-init (0) or the unified scheme that requires LockEventInit (1).'
 availability:
   standalone: []
   central-i:

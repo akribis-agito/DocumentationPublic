@@ -1,6 +1,6 @@
 ---
 keyword: CompTbleGap
-summary: "Position spacing, in encoder counts, between adjacent compensation-table points."
+summary: Position spacing, in encoder counts, between adjacent compensation-table points.
 availability:
   standalone: []
   central-i:

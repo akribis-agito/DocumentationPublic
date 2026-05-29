@@ -10,7 +10,7 @@ availability:
 can_code: 495
 attributes:
   access: rw
-  scope: axis
+  scope: non-axis
   flash: true
   type: scalar
   array_size: 1
@@ -18,12 +18,17 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range: null
+  range:
+  - 4294967295
+  - 2147483647
   default: 0
   scaling: 1.0
   implemented: final
 overrides:
+  central-i.v4:
+    scope: axis
   central-i.v5:
+    scope: axis
     range:
     - -2147483648
     - 2147483647

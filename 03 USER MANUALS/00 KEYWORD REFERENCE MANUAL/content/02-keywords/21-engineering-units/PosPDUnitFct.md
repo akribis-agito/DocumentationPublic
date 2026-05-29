@@ -1,6 +1,6 @@
 ---
 keyword: PosPDUnitFct
-summary: "Scale factor applied to pulse-and-direction position values when Global User Units is enabled."
+summary: Scale factor applied to pulse-and-direction position values when Global User Units is enabled.
 availability:
   standalone: []
   central-i:

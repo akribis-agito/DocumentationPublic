@@ -1,6 +1,6 @@
 ---
 keyword: ProgPushArgF
-summary: "Pushes a 32-bit floating-point (float) value onto the running thread's argument stack ahead of a function call."
+summary: Pushes a 32-bit floating-point (float) value onto the running thread's argument stack ahead of a function call.
 availability:
   standalone: []
   central-i:

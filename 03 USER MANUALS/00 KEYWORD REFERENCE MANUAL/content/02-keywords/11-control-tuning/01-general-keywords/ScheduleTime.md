@@ -17,15 +17,13 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: scaling
-  range: null
+  range:
+  - 0
+  - 655360
   default: null
-  scaling: 1.0
+  scaling: 65.536
   implemented: final
-overrides:
-  central-i.v5:
-    range:
-    - 0
-    - 655360
+overrides: {}
 ---
 # ScheduleTime
 

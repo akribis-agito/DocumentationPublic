@@ -1,6 +1,6 @@
 ---
 keyword: VelUnitFct
-summary: "Scale factor between internal velocity units and the selected velocity engineering unit."
+summary: Scale factor between internal velocity units and the selected velocity engineering unit.
 availability:
   standalone: []
   central-i:

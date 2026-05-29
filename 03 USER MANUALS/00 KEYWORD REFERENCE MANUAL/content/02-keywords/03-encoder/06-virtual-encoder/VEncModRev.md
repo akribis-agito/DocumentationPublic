@@ -1,6 +1,6 @@
 ---
 keyword: VEncModRev
-summary: "Modulo span (counts per revolution) of the virtual-encoder source, so the generator stays continuous across source roll-over."
+summary: Modulo span (counts per revolution) of the virtual-encoder source, so the generator stays continuous across source roll-over.
 availability:
   standalone:
   - v4

@@ -1,6 +1,6 @@
 ---
 keyword: CompFiltOn
-summary: "Enables the compensation filter that blends measured force with a position-predicted force."
+summary: Enables the compensation filter that blends measured force with a position-predicted force.
 availability:
   standalone: []
   central-i:

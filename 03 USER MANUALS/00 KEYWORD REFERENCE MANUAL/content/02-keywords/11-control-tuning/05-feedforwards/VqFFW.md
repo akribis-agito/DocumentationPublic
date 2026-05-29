@@ -1,6 +1,6 @@
 ---
 keyword: VqFFW
-summary: "Read-only quadrature-axis voltage feedforward output added to the q-axis voltage command."
+summary: Read-only quadrature-axis voltage feedforward output added to the q-axis voltage command.
 availability:
   standalone: []
   central-i:
@@ -18,7 +18,7 @@ attributes:
   units: scaling
   range: null
   default: 0
-  scaling: 1.0
+  scaling: 1.526
   implemented: final
 overrides: {}
 ---

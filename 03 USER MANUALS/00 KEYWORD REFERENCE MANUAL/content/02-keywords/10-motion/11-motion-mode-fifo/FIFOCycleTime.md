@@ -18,15 +18,13 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range: null
+  range:
+  - 1
+  - 65536000
   default: 65536
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    range:
-    - 1
-    - 65536000
+overrides: {}
 ---
 # FIFOCycleTime
 

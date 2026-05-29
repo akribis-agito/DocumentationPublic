@@ -1,6 +1,6 @@
 ---
 keyword: PreCruRelTrgt
-summary: "Pre-cruise target as a distance from the start of a sine point-to-point move (user units)."
+summary: Pre-cruise target as a distance from the start of a sine point-to-point move (user units).
 availability:
   standalone: []
   central-i:

@@ -18,7 +18,9 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: func
-  range: null
+  range:
+  - 0
+  - 131072
   default: 0
   scaling: 1.0
   implemented: partial

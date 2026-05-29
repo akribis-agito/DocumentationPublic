@@ -1,6 +1,6 @@
 ---
 keyword: GantrySwapSrc
-summary: "Selects the position source that decides on-the-fly switching between dual-loop and single-loop gantry control."
+summary: Selects the position source that decides on-the-fly switching between dual-loop and single-loop gantry control.
 availability:
   standalone: []
   central-i:

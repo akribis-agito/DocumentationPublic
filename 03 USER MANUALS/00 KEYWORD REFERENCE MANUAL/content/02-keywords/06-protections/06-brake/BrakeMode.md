@@ -1,6 +1,6 @@
 ---
 keyword: BrakeMode
-summary: "Selects how the static (holding) brake is engaged and released."
+summary: Selects how the static (holding) brake is engaged and released.
 availability:
   standalone:
   - v4

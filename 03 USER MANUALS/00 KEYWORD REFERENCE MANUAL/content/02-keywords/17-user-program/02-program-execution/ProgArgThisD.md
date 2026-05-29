@@ -1,6 +1,6 @@
 ---
 keyword: ProgArgThisD
-summary: "Reads or writes the current function's argument and local-variable slots as 64-bit floating-point (double) values."
+summary: Reads or writes the current function's argument and local-variable slots as 64-bit floating-point (double) values.
 availability:
   standalone: []
   central-i:
@@ -11,13 +11,13 @@ attributes:
   scope: non-axis
   flash: false
   type: array
-  array_size: 1
+  array_size: 27
   data_type: float64
   ok_in_motion: true
   ok_motor_on: true
   units: none
   range: null
-  default: null
+  default: 0.0
   scaling: 1.0
   implemented: final
 overrides: {}

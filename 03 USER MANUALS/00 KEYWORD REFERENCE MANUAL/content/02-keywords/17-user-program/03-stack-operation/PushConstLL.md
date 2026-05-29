@@ -1,6 +1,6 @@
 ---
 keyword: PushConstLL
-summary: "Pushes a 64-bit signed integer constant onto the numeric stack of the current thread."
+summary: Pushes a 64-bit signed integer constant onto the numeric stack of the current thread.
 availability:
   standalone: []
   central-i:

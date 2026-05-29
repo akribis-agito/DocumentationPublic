@@ -31,7 +31,9 @@ overrides:
     ok_in_motion: true
     ok_motor_on: true
     units: user
-    range: null
+    range:
+    - 100.0
+    - 686700000000.0
     default: 10000000
     implemented: final
 ---

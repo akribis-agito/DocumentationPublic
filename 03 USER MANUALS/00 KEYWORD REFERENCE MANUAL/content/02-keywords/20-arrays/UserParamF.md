@@ -17,7 +17,7 @@ attributes:
   ok_motor_on: true
   units: none
   range: null
-  default: null
+  default: 0.0
   scaling: 1.0
   implemented: final
 overrides: {}

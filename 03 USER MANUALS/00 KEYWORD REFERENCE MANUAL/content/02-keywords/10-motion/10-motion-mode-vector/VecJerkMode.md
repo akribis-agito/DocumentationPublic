@@ -1,6 +1,6 @@
 ---
 keyword: VecJerkMode
-summary: "Selects how jerk limiting is applied to vector motion: 0 trapezoidal, 1 jerk-limited S-curve."
+summary: 'Selects how jerk limiting is applied to vector motion: 0 trapezoidal, 1 jerk-limited S-curve.'
 availability:
   standalone: []
   central-i:

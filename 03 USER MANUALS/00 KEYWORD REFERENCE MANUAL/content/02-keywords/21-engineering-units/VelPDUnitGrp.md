@@ -1,6 +1,6 @@
 ---
 keyword: VelPDUnitGrp
-summary: "Read-only list of the pulse-and-direction velocity keywords that share the P/D velocity user-unit scaling and label."
+summary: Read-only list of the pulse-and-direction velocity keywords that share the P/D velocity user-unit scaling and label.
 availability:
   standalone: []
   central-i:

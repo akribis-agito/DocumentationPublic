@@ -24,7 +24,11 @@ attributes:
   default: 100
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  central-i.v5:
+    range:
+    - 0
+    - 10000
 ---
 # ECAMEndCyc
 

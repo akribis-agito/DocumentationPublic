@@ -1,6 +1,6 @@
 ---
 keyword: PosAuxUnitGrp
-summary: "Read-only list of the auxiliary-encoder position keywords that share the auxiliary position user-unit scaling and label."
+summary: Read-only list of the auxiliary-encoder position keywords that share the auxiliary position user-unit scaling and label.
 availability:
   standalone: []
   central-i:

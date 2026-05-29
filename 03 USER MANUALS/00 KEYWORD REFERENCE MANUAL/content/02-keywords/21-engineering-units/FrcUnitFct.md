@@ -1,6 +1,6 @@
 ---
 keyword: FrcUnitFct
-summary: "Scale factor between internal force units and the selected force engineering unit."
+summary: Scale factor between internal force units and the selected force engineering unit.
 availability:
   standalone: []
   central-i:

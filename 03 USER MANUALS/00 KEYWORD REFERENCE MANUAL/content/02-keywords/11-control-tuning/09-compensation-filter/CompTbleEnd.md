@@ -1,6 +1,6 @@
 ---
 keyword: CompTbleEnd
-summary: "Highest compensation-table index that is in use, bounding the table domain."
+summary: Highest compensation-table index that is in use, bounding the table domain.
 availability:
   standalone: []
   central-i:

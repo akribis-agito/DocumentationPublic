@@ -1,6 +1,6 @@
 ---
 keyword: AuxAsPDPosOn
-summary: "Routes the pulse-and-direction inputs into the auxiliary encoder feedback (dual-loop), instead of the default cross-axis auxiliary source."
+summary: Routes the pulse-and-direction inputs into the auxiliary encoder feedback (dual-loop), instead of the default cross-axis auxiliary source.
 availability:
   standalone: []
   central-i:

@@ -22,9 +22,13 @@ attributes:
   - 0
   - 1470
   default: null
-  scaling: 1.0
+  scaling: 1.144
   implemented: final
-overrides: {}
+overrides:
+  central-i.v4:
+    scaling: 1.526
+  central-i.v5:
+    scaling: 1.526
 ---
 # MaxPWM
 

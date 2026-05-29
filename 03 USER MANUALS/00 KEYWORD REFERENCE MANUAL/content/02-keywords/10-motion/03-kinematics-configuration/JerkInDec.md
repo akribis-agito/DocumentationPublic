@@ -28,8 +28,10 @@ overrides:
   central-i.v5:
     data_type: float32
     units: user
-    range: null
-    default: null
+    range:
+    - 10000.0
+    - 1.0e+20
+    default: 100000000.0
     can_code: 566
 ---
 # JerkInDec

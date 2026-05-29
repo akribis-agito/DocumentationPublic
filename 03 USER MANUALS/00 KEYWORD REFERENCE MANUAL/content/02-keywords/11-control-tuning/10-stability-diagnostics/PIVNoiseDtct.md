@@ -1,6 +1,6 @@
 ---
 keyword: PIVNoiseDtct
-summary: "Enables run-time detection of excessive noise or jitter in the position/velocity loops while the axis is held at standstill."
+summary: Enables run-time detection of excessive noise or jitter in the position/velocity loops while the axis is held at standstill.
 availability:
   standalone: []
   central-i:

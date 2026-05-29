@@ -31,6 +31,12 @@ _FLASH = {"FLASH": True, "NOFLASH": False}
 _SCOPE = {"AXIS": "axis", "NON_AXIS": "non-axis"}
 _IMPL = {"FINAL": "final", "PARTIAL": "partial"}
 _UNITS = {"USER_UNITS": "user", "NO_USER_UNITS": "none", "FUNC_UNITS": "func"}
+# The float-type limit (+/-3.4e38, FLOAT_MIN/FLOAT_MAX and aliases like VQ_MIN/VQ_MAX)
+# is not a real bound; a keyword whose min/max resolves to it accepts any float, so
+# its range is reported as null (unbounded). Detected by value so aliases are caught.
+_FLOAT_TYPE_LIMIT = 3.0e38
+
+
 # develop bParamType tokens
 _DATA_TYPE = {
     "0": "int32", "LONG32": "int32",
@@ -138,6 +144,15 @@ def _iter_entries(table_block: str):
             buf.append(ch)
 
 
+def _range(lo, hi):
+    """Build a [lo, hi] range, or None when unresolved or at the float-type limit."""
+    if lo is None or hi is None:
+        return None
+    if abs(lo) >= _FLOAT_TYPE_LIMIT or abs(hi) >= _FLOAT_TYPE_LIMIT:
+        return None
+    return [lo, hi]
+
+
 def _attrs_from_tokens(
     units_tok, access_tok, motion_tok, motoron_tok, array_tok, flash_tok,
     axis_tok, impl_tok, maxidx, lo, hi, dflt, scaling, data_type,
@@ -154,7 +169,7 @@ def _attrs_from_tokens(
         "ok_in_motion": motion_tok == "OKINMOTN",
         "ok_motor_on": motoron_tok == "OKMTRON",
         "units": _UNITS.get(units_tok, units_tok.lower()),
-        "range": [lo, hi] if lo is not None and hi is not None else None,
+        "range": _range(lo, hi),
         "default": dflt,
         "scaling": float(scaling) if scaling is not None else 1.0,
         "implemented": _IMPL.get(impl_tok, impl_tok.lower()),

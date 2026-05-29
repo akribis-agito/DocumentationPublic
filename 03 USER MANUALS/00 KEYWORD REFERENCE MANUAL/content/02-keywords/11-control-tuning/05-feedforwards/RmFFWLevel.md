@@ -1,6 +1,6 @@
 ---
 keyword: RmFFWLevel
-summary: "Percentage level applied to the resistive (R i) voltage feedforward contribution."
+summary: Percentage level applied to the resistive (R i) voltage feedforward contribution.
 availability:
   standalone: []
   central-i:
@@ -16,8 +16,10 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range: null
-  default: null
+  range:
+  - 0.0
+  - 200.0
+  default: 0.0
   scaling: 1.0
   implemented: final
 overrides: {}

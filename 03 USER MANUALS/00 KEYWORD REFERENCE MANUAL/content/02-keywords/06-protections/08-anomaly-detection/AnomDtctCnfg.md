@@ -1,6 +1,6 @@
 ---
 keyword: AnomDtctCnfg
-summary: "Configuration array for anomaly detection: monitored source, filter pole, stop behavior, and motion selection."
+summary: 'Configuration array for anomaly detection: monitored source, filter pole, stop behavior, and motion selection.'
 availability:
   standalone: []
   central-i:

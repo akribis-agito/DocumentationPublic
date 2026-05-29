@@ -20,7 +20,7 @@ attributes:
   units: none
   range:
   - 0
-  - 16500
+  - 30500
   default: 0
   scaling: 1.0
   implemented: final

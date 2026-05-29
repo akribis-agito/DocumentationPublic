@@ -16,8 +16,10 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range: null
-  default: null
+  range:
+  - 0.0
+  - 1.0
+  default: 0.5
   scaling: 1.0
   implemented: final
 overrides: {}

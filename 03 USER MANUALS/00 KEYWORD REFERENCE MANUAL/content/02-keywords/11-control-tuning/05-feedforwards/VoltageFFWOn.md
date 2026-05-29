@@ -1,6 +1,6 @@
 ---
 keyword: VoltageFFWOn
-summary: "Master enable for voltage feedforward in the current/voltage loop."
+summary: Master enable for voltage feedforward in the current/voltage loop.
 availability:
   standalone: []
   central-i:

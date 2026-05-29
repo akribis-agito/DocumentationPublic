@@ -1,6 +1,6 @@
 ---
 keyword: VelUnitUnt
-summary: "Display label (name) of the velocity engineering unit, stored as a short text string."
+summary: Display label (name) of the velocity engineering unit, stored as a short text string.
 availability:
   standalone: []
   central-i:

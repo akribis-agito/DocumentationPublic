@@ -1,6 +1,6 @@
 ---
 keyword: PreCruAbsTrgt
-summary: "Absolute position of the pre-cruise target for a sine point-to-point move (user units)."
+summary: Absolute position of the pre-cruise target for a sine point-to-point move (user units).
 availability:
   standalone: []
   central-i:

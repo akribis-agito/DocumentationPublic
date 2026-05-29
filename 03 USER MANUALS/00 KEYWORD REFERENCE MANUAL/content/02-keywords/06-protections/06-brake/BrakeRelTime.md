@@ -1,6 +1,6 @@
 ---
 keyword: BrakeRelTime
-summary: "Delay after releasing the static brake before motion is allowed (BrakeMode 3)."
+summary: Delay after releasing the static brake before motion is allowed (BrakeMode 3).
 availability:
   standalone:
   - v4
@@ -22,7 +22,7 @@ attributes:
   - 655
   - 13107
   default: 1638
-  scaling: 1.0
+  scaling: 65.536
   implemented: final
 overrides: {}
 ---
