@@ -36,7 +36,7 @@ Pushes a constant value onto the numeric stack of the current thread.
 
 ## How it works
 
-`PushConstant` places the literal value carried by the instruction onto the top of the current thread's numeric stack, growing the stack by one entry. No parameter look-up, axis resolution, or unit scaling is involved — the value is taken exactly as given. Pushing onto a full stack reports a stack-full error. A companion operation pushes floating-point literals; the integer form documented here pushes a 32-bit integer constant.
+`PushConstant` places the literal value carried by the instruction onto the top of the current thread's numeric stack, growing the stack by one entry. No parameter look-up, axis resolution, or unit scaling is involved — the value is taken exactly as given. Each thread's numeric stack holds up to 50 values; pushing onto a full stack reports a stack-full error. The free space remaining can be read with [ProgExpDepth](../02-program-execution/ProgExpDepth.md). A companion operation pushes floating-point literals; the integer form documented here pushes a 32-bit integer constant.
 
 ## Examples
 

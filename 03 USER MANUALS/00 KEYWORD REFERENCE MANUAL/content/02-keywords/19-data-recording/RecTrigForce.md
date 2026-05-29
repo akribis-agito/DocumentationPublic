@@ -32,7 +32,9 @@ Command that overrides trigger detection and forces recording to proceed.
 
 ## Overview
 
-`RecTrigForce` overrules trigger detection and forces the recording to continue as if the trigger condition were met. The forced trigger occurs regardless of whether `RecTrigForce` is called while pre-trigger data is being filled or while the scope is waiting for the trigger (after pre-trigger data is filled). It is useful when the configured trigger ([RecTrigTyp](RecTrigTyp.md), [RecTrigSrc](RecTrigSrc.md)) does not fire. Each array index selects a scope.
+`RecTrigForce` overrules trigger detection and forces the recording to continue as if the trigger condition were met. It is useful when the configured trigger ([RecTrigTyp](RecTrigTyp.md), [RecTrigSrc](RecTrigSrc.md)) does not fire. Each array index selects a scope.
+
+`RecTrigForce` can be issued at any time after [RecStart](RecStart.md). If the scope is still filling pre-trigger data ([RecStat](RecStat.md) 1), the force is latched and takes effect on the first recorded sample once the pre-trigger portion is filled and the scope begins waiting for the trigger ([RecStat](RecStat.md) 2); it does not shorten the pre-trigger fill. If the scope is already waiting for the trigger ([RecStat](RecStat.md) 2), it fires on the next recorded sample. The forced-trigger flag is cleared by the next [RecStart](RecStart.md).
 
 | Index | Descriptions                 |
 |-------|------------------------------|

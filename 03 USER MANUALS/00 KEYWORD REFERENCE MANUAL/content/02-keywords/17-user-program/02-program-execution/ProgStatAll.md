@@ -45,7 +45,9 @@ The controller recomputes this summary about once a second by scanning every thr
 | 1 | At least one thread is running (and none has an error) |
 | 2 | At least one thread has stopped on an error |
 
-When `ProgStatAll` reads `2`, read [ProgStat](ProgStat.md) and [ProgError](ProgError.md) per thread to find which thread failed and why. Because it is updated on a one-second cycle, very short-lived run states may not always be visible here; for an immediate per-thread reading use [ProgStat](ProgStat.md).
+The summary is built by starting at `-1` (no program), promoting to `0` once a program is present, setting `1` if any thread's [ProgStat](ProgStat.md) is running, and setting `2` as soon as any thread is found with a non-zero [ProgError](ProgError.md). The error condition is detected from `ProgError`, not from any "error" value of `ProgStat` (which has none), so error (`2`) outranks running (`1`) regardless of the order in which threads are scanned.
+
+A consequence worth noting: a thread that stopped on an error reads [ProgStat](ProgStat.md) `= 0` (its `ProgStat` was set to "not running" when it halted), yet `ProgStatAll` still reads `2` because the non-zero [ProgError](ProgError.md) is what raises the summary. When `ProgStatAll` reads `2`, read `ProgError` per thread to find which thread failed and why. Because it is updated on a one-second cycle, very short-lived run states may not always be visible here; for an immediate per-thread reading use [ProgStat](ProgStat.md).
 
 ## Examples
 

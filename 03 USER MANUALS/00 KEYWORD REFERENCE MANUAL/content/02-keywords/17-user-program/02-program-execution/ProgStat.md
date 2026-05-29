@@ -36,7 +36,7 @@ Reports the running status of a specified user program thread.
 
 ## How it works
 
-The controller maintains the status of each thread as the scheduler services it, and also updates it the moment a thread is started, paused, reset or stops on an error, so the value is current even for inactive threads:
+The controller maintains the status of each thread as the scheduler services it:
 
 | Value | Meaning |
 |----|----|
@@ -44,7 +44,9 @@ The controller maintains the status of each thread as the scheduler services it,
 | 0 | Loaded but this thread is not running (stopped, halted, reset, or stopped on error) |
 | 1 | This thread is running |
 
-When a thread stops because of a run-time error, `ProgStat` returns to `0` and the cause is left in [ProgError](ProgError.md) for that thread. To distinguish a clean stop from an error stop, read `ProgError` for the same index.
+Running (`1`) is not written the instant the thread is started; it is set when the scheduler next services that thread's line. Because servicing is gated by [ProgPriority](ProgPriority.md) — a higher priority value makes a thread wait more scheduler passes between lines — there can be a short delay between starting a thread and `ProgStat` reading `1`. The `0` value is written promptly on every stop path (halt, reset, breakpoint, single-step, and error-halt). Starting a thread (for example with [ProgRun](ProgRun.md)) also clears that thread's [ProgError](ProgError.md) to `0`.
+
+When a thread stops because of a run-time error, `ProgStat` returns to `0` — there is no distinct "error" value — and the cause is left in [ProgError](ProgError.md) for that thread. To distinguish a clean stop from an error stop, read `ProgError` for the same index.
 
 ## Examples
 

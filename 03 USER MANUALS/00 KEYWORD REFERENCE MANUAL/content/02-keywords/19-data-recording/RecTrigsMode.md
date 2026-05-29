@@ -48,9 +48,11 @@ Its value definitions are as shown. Please refer to [Data recording](00-overview
 | 1     | Parallel (logical) detection |
 | 2     | Serial detection             |
 
-In **parallel** mode, all configured triggers are evaluated every cycle and combined into a single boolean expression using the operators set in [RecTrigsLogic](RecTrigsLogic.md); the recording trigger fires as soon as that combined expression becomes true.
+In **parallel** mode, all configured triggers are evaluated on every recorded sample (that is, once every [RecGap](RecGap.md) controller cycles, not on every controller cycle) and combined into a single boolean expression using the operators set in [RecTrigsLogic](RecTrigsLogic.md); the recording trigger fires as soon as that combined expression becomes true. Because triggers are tested only on the cycles where a sample is taken, a larger [RecGap](RecGap.md) reduces the time resolution at which the trigger condition is detected.
 
 In **serial** mode the triggers must fire in order: trigger 1 first, then trigger 2, then trigger 3. The scope waits at trigger 1 until it activates, then advances to wait for trigger 2, and so on; the overall recording trigger fires only after the last defined trigger has activated. [RecTrigsLogic](RecTrigsLogic.md) has no effect in serial mode.
+
+In serial trigger mode (`RecTrigsMode` = 2) the forced-trigger flag set by [RecTrigForce](RecTrigForce.md) remains set until the next [RecStart](RecStart.md), and the scope advances one trigger of the serial sequence per recorded sample. A single `RecTrigForce` therefore satisfies all remaining triggers in the sequence in turn, completing the entire serial chain within a few recorded samples rather than only the trigger currently being awaited.
 
 For a single-trigger setup, configure only trigger 1 and set the unused triggers to an inactive type (see the note on [RecTrigTyp](RecTrigTyp.md)).
 

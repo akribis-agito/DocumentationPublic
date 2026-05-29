@@ -45,7 +45,7 @@ Trigger activation logic (edge, comparison, or range) for each trigger.
 
 ## How it works
 
-Each `RecTrigTyp` value selects a different trigger activation logic. The trigger source value originates from the variable pointed to by [RecTrigSrc](RecTrigSrc.md), subject to masking.
+Each `RecTrigTyp` value selects a different trigger activation logic. The trigger source value originates from the variable pointed to by [RecTrigSrc](RecTrigSrc.md), subject to masking. Masking by [RecTrigMask](RecTrigMask.md) applies only when the trigger source is an integer type (32-bit int or 64-bit long); for floating-point trigger sources the mask is ignored and the comparison is performed on the native value (see [RecTrigMask](RecTrigMask.md)).
 
 | Value | Trigger activation logic |
 |----|----|

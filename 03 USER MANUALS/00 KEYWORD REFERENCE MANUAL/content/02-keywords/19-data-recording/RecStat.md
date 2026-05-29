@@ -62,6 +62,8 @@ The normal progression is 1 → 2 → 3 → 4:
 - When the trigger fires (or is forced with [RecTrigForce](RecTrigForce.md)), the scope advances to **3** and counts down the post-trigger points.
 - When the post-trigger points are all captured the scope settles at **4**, and the data can be uploaded.
 
+The pre-trigger and post-trigger portions together always total [RecLength](RecLength.md) points per recorded channel. When the trigger fires, the scope captures a fixed number of post-trigger points equal to ([RecLength](RecLength.md) minus the pre-trigger points set by [RecTrigPos](RecTrigPos.md)) per channel and then settles at status 4, so the completed capture spans exactly [RecLength](RecLength.md) per channel no matter how long the scope waited at status 2. For a no-trigger start ([RecTrigTyp](RecTrigTyp.md) = 0), which jumps straight to status 3, the full [RecLength](RecLength.md) per channel is recorded as post-trigger data.
+
 If no trigger is configured, `RecStart` jumps straight to **3**. [RecStop](RecStop.md) produces **5** if it interrupts a recording that had already triggered, or **6** if it interrupts before the trigger. Values **4**, **5** and **6** are all "finished" states from which [RecUpload](RecUpload.md) can run (status 6 has no valid triggered data and is reported as an error by the upload).
 
 ## Examples

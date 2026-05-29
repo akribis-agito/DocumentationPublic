@@ -36,7 +36,7 @@ This keyword is available from v5 (central-i).
 
 `PushConstantD` places the literal value carried by the instruction onto the top of the current thread's numeric stack, growing the stack by one entry. No parameter look-up, axis resolution, or unit scaling is involved — the value is taken exactly as given. Pushing onto a full stack reports a stack-full error.
 
-The only difference from [PushConstant](PushConstant.md) is the data type pushed: `PushConstantD` pushes a 64-bit floating-point (double) literal rather than a 32-bit integer constant. The stack slot is the same; the typed forms simply control how the value is stored so it is interpreted correctly when consumed.
+The only difference from [PushConstant](PushConstant.md) is the data type pushed: `PushConstantD` pushes a 64-bit floating-point (double) literal rather than a 32-bit integer constant. The stack slot is the same; the typed forms simply control how the value is stored so it is interpreted correctly when consumed. A 64-bit value still occupies a single one of the thread's 50 stack slots, exactly like a 32-bit one, so it counts as one entry against the stack-full limit.
 
 ## Examples
 

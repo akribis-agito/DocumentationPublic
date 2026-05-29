@@ -40,8 +40,10 @@ Pops the top value of the numeric stack into a parameter.
 
 Two patterns are common in compiled code:
 
-- **Direct store.** The target parameter is named directly in the instruction, and the top stack value is written to it.
-- **Store through a computed target.** The program can compute which parameter to write — for example, the encoded reference of the destination is itself left on the stack so that the assignment uses a pointer rather than a fixed target. This is how the compiler implements assignment to an element whose index was calculated at run time.
+- **Direct store.** The target parameter is named directly in the instruction, and the top stack value is written to it. This consumes one stack entry. Popping from an empty stack reports a stack-empty error.
+- **Store through a computed target.** The program can compute which parameter to write — for example, the encoded reference of the destination is itself left on the stack so that the assignment uses a pointer rather than a fixed target. This is how the compiler implements assignment to an element whose index was calculated at run time. In this form the top entry is consumed as the destination reference and the value beneath it is then stored, so a computed-target store consumes two stack entries rather than one; if fewer than two values are present it reports a no-operands error.
+
+When the target is an array element and the index is left unspecified, `PopParam` first pops one value to use as the array index (this again requires at least two entries, reporting a no-operands error otherwise) and then stores the value beneath it into the indexed element. This mirrors the indirect (computed) array index handled by [PushParam](PushParam.md).
 
 As with [PushParam](PushParam.md), when the reference does not name a specific axis the axis is taken from the thread's [ChooseAxis](../02-program-execution/ChooseAxis.md) entry.
 

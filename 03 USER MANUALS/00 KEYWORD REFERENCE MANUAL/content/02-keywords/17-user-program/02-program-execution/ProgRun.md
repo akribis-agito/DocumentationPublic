@@ -36,7 +36,7 @@ Runs (or resumes) a task as a given thread number.
 
 ## How it works
 
-The controller runs user program threads under a built-in round-robin scheduler. There are up to **8 threads** on a standalone controller and up to **12** on a Central-i master; index them `[1]` through `[8]` (or `[12]`). On each scheduler pass the controller advances every active thread by **one low-level instruction**, so the threads share the processor cooperatively. How often each thread is serviced relative to the others is governed by [ProgPriority](ProgPriority.md).
+The controller runs user program threads under a built-in round-robin scheduler. There are up to **8 threads** on a standalone controller and up to **12** on a Central-i master; index them `[1]` through `[8]` (or `[12]`). On each scheduler pass the controller advances round-robin to the next active thread that is due and executes **one low-level instruction** for that single thread, then moves on — so the threads share the processor cooperatively, one instruction per pass. How often each thread is reached relative to the others is governed by [ProgPriority](ProgPriority.md).
 
 The **value** passed to `ProgRun` chooses the task:
 
