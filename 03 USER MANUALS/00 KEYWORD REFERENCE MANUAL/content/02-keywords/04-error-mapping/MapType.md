@@ -74,7 +74,7 @@ AMapType             ; read the active mapping mode
 
 - **Motion in progress** — `ok_in_motion = false`. Writes during motion are rejected; the change must be made while the axis is standing.
 - **Phasing complete** — mapping operates on the post-commutation feedback path; in practice the axis must already be commutated for mapping to make sense.
-- **Simulation motor** — mapping is **skipped entirely** when [MotorType](../03-motor-type/MotorType.md) = simulation, because feeding the corrected position back into the simulated encoder would close a loop with the position reference. `Pos = PosBeforeMap` in this case regardless of `MapType`.
+- **Simulation motor** — mapping is **skipped entirely** when [MotorType](../02-motor-and-amplifier/MotorType.md) = simulation, because feeding the corrected position back into the simulated encoder would close a loop with the position reference. `Pos = PosBeforeMap` in this case regardless of `MapType`.
 - **Wrong dimension** — values outside `0`–`3` are rejected at the parameter table.
 - **Multi-dim (`MapType` = 2 or 3)** — additional encoder axes referenced by [MapEncoder](MapEncoder.md)`[2]`/`[3]` must be motor-on, not moving, and pointing at **main** encoders; otherwise the table build raises a "must be main encoders" / "must be first encoder" event.
 - **First-encoder constraint** — [MapEncoder](MapEncoder.md)`[1]` must point at this axis's own main encoder; otherwise the table build is rejected.

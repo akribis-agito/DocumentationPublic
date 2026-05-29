@@ -40,7 +40,7 @@ $$
 \text{VelErr} = \text{VelRef} - \text{GantryVel}
 $$
 
-- **Master axis (linear loop)** — `VelRef` is produced by the linear position loop; the error is acted on by the standard [VelGain](../../11-control-tuning/02-velocity-loop/VelGain.md) / [VelKi](../../11-control-tuning/02-velocity-loop/VelKi.md). In dual-loop mode the value is the auxiliary (motor-side) velocity scaled by the dual-loop factor — see [GantryAuxVel](../02-gantry-kinematic-feedback/GantryAuxVel.md).
+- **Master axis (linear loop)** — `VelRef` is produced by the linear position loop; the error is acted on by the standard [VelGain](../../11-control-tuning/04-velocity-control/VelGain.md) / [VelKi](../../11-control-tuning/04-velocity-control/VelKi.md). In dual-loop mode the value is the auxiliary (motor-side) velocity scaled by the dual-loop factor — see [GantryAuxVel](../02-gantry-kinematic-feedback/GantryAuxVel.md).
 - **Yaw axis (yaw loop)** — `VelRef` is produced by the yaw position loop ([GantryPosGain](GantryPosGain.md) / [GantryPosKi](GantryPosKi.md)); the error is acted on by [GantryVelGain](GantryVelGain.md) and [GantryVelKi](GantryVelKi.md).
 
 `GantryVel` is reported in user units. The [dual-loop gantry control overview](../04-dual-loop-gantry-control/00-overview.md) describes how `GantryVel` is computed under each control structure (including the `DualLoopFact` scaling) relative to [GantryAuxVel](../02-gantry-kinematic-feedback/GantryAuxVel.md).

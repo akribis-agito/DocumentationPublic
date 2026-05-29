@@ -69,7 +69,7 @@ AForceSamples[3]    ; move + settle + in-target time
 ### Edge cases
 
 - **Motor off** — all four elements are reset to `-1`. A read returns `-1` until the next settle completes.
-- **Not in force mode** ([OperationMode](../../01-general-keywords/OperationMode.md) ≠ 6) — the force-command engine does not run, so `ForceSamples` is not updated; values stay at whatever was last latched.
+- **Not in force mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 6) — the force-command engine does not run, so `ForceSamples` is not updated; values stay at whatever was last latched.
 - **`ForceCmdSrc` = 0 (analog source)** — there is no defined target to settle on; the in-target detection is not run and `ForceSamples` stays at `-1`.
 - **Never settled** — if [ForceInTStat](ForceInTStat.md) never reaches `4` (force never settles within the window for the dwell), no timings are recorded and the values stay at `-1`.
 - **Out-of-range index** — `ForceSamples` is 1-indexed with valid indices `[1]`–`[4]`; index `[0]` is invalid.

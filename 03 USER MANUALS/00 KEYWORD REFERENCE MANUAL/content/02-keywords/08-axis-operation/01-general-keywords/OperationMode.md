@@ -77,7 +77,7 @@ AOperationMode      ; read the active control mode
 - **Direct vs `GoTo*`** — direct assignment changes the flag but does not preload loop state; loops will jump unless the integrals already match. Direct assignment also does not reset [CurrCmdIndex](../03-current-operation-mode/CurrCmdIndex.md) / [ForceCmdIndex](../04-force-operation-mode/ForceCmdIndex.md), so a paused sequence resumes from its last entry on re-entry.
 - **Velocity ↔ position** — there is **no `GoToVelMode`**. To go from velocity to position you must disable the motor, write `OperationMode = 3`, re-enable. [GoToPosMode](../02-position-operation-mode/GoToPosMode.md) is rejected from velocity mode.
 - **Velocity ↔ current / force** — only direct assignment (motor-off) is allowed; the `GoTo*` commands do not transition from velocity.
-- **Force-over-PIV** — when [ForcePIVOn](../04-force-operation-mode/ForcePIVOn.md) = 1 and `OperationMode = 4`, all four loops are active (position + velocity + force + current).
+- **Force-over-PIV** — when [ForcePIVOn](../../11-control-tuning/07-force-control/ForcePIVOn.md) = 1 and `OperationMode = 4`, all four loops are active (position + velocity + force + current).
 - **Open-loop overrides** — when [OpenLoopOn](OpenLoopOn.md) ≠ 0, the position/velocity/force loops are bypassed regardless of `OperationMode`; restore loop control by setting `OpenLoopOn = 0`.
 - **Save** — flash-saveable; the controller comes up in the last persisted mode after a reset.
 

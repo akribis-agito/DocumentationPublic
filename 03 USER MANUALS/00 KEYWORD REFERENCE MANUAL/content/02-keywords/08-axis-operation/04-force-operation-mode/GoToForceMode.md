@@ -62,7 +62,7 @@ AGoToForceMode       ; gracefully switch to force operation mode
 - **From velocity mode** — accepted; force loop seeding works the same way (`CurrRef` is in a defined state).
 - **From position mode** — accepted (the common case); the in-motion check is honoured.
 - **Motor off** — accepted; the mode flag changes but no power is applied until `MotorOn = 1`.
-- **PIV mode** ([ForcePIVOn](ForcePIVOn.md) = 1) — the force integrator is seeded to `0` rather than from `CurrRef`; the PIV structure does its own integral handling.
+- **PIV mode** ([ForcePIVOn](../../11-control-tuning/07-force-control/ForcePIVOn.md) = 1) — the force integrator is seeded to `0` rather than from `CurrRef`; the PIV structure does its own integral handling.
 - **Tables intact** — `ForceCmdVal` / `ForceCmdSlope` / `ForceCmdHTime` are not cleared; the dispatcher always restarts from `ForceCmdIndex = 1`.
 - **Direct assignment vs `GoToForceMode`** — writing [OperationMode](../01-general-keywords/OperationMode.md) = `4` does **not** reset `ForceCmdIndex` / `ForceCmdCntr`; it can resume an in-progress sequence. `GoToForceMode` always restarts from entry 1.
 - **Atomic** — the firmware disables interrupts around the integrator seed and mode flip so the change is visible to all loops in a single control cycle.

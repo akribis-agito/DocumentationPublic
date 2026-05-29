@@ -58,7 +58,7 @@ AGantryPosKi[1]     ; read the current value
 - **Zero gain** — disables integral action; the yaw position loop runs as P + feedforward only.
 - **Wind-up at engagement** — the firmware halves the velocity-loop integral across the master/yaw split when gantry engages; a large `GantryPosKi` can wind up the integral quickly during early settling.
 - **Wrong axis** — consulted on the yaw axis of the pair; writes on the master or a non-gantry axis are accepted but not used.
-- **Gain set selection** — the active set is chosen by the gain-scheduling subsystem (see [ScheduleMode](../../11-control-tuning/06-scheduled-gains/ScheduleMode.md)); reads return the value of the active set's storage.
+- **Gain set selection** — the active set is chosen by the gain-scheduling subsystem (see [ScheduleMode](../../11-control-tuning/01-general-keywords/ScheduleMode.md)); reads return the value of the active set's storage.
 - **Save** — flash-saveable.
 - **Platform** — v5 central-i only. There is no `GantryPosKi` on v4.
 
