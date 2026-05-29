@@ -28,9 +28,9 @@
   <text x="335" y="268" text-anchor="middle" font-size="11">(per-rail DCDC)</text>
 
   <line x1="160" y1="86" x2="256" y2="86" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
-  <line x1="160" y1="200" x2="256" y2="182" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
-  <line x1="95" y1="108" x2="95" y2="250" stroke="#5b6b7b" stroke-width="1.4" fill="none"/>
-  <line x1="95" y1="254" x2="256" y2="254" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="160" y1="202" x2="256" y2="182" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <!-- bus supply also drives the internal rails: route around the Logic supply box via x=200 -->
+  <path d="M160,96 L200,96 L200,254 L256,254" fill="none" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
 
   <!-- readings / use -->
   <rect x="520" y="44" width="160" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>

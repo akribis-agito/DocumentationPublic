@@ -51,9 +51,9 @@
   <path d="M680,144 C680,210 380,210 380,150" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
   <text x="530" y="232" text-anchor="middle" font-size="10">index advances &#8594; new target &#8594; back to ramping (2)</text>
 
-  <!-- Any state back to 0 on motor off -->
-  <path d="M80,144 C80,260 380,260 380,260" fill="none" stroke="#5b6b7b" stroke-width="1.2"/>
-  <text x="200" y="276" text-anchor="middle" font-size="10">motor off (from any state) &#8594; 0</text>
+  <!-- Any state back to 0 on motor off (drawn as a long curve back to state 0) -->
+  <path d="M230,144 C230,250 80,250 80,150" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="155" y="270" text-anchor="middle" font-size="10">motor off (from any state) &#8594; 0</text>
 
   <!-- Once at 4 settling not rechecked -->
   <text x="680" y="170" text-anchor="middle" font-size="10" fill="#5b6b7b">state 4 is latched until</text>

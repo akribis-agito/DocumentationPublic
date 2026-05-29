@@ -1,24 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="520" height="160" viewBox="0 0 520 160" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="LimitsStat 32-bit layout: bits 2 through 31 are unused and read zero; bit 1 is FLS (forward limit switch active, mask 0x0002); bit 0 is RLS (reverse limit switch active, mask 0x0001).">
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="200" viewBox="0 0 560 200" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="LimitsStat 32-bit layout: bits 2 through 31 are unused and read zero; bit 1 is FLS (forward limit switch active, mask 0x0002); bit 0 is RLS (reverse limit switch active, mask 0x0001).">
   <title>LimitsStat bit layout (32-bit)</title>
   <text x="20" y="26" font-size="15" font-weight="bold">LimitsStat bit layout (32-bit)</text>
 
   <!-- unused -->
-  <rect x="20" y="54" width="360" height="44" rx="6" fill="#f4f7fb" stroke="#9fb4cc" stroke-width="1.2"/>
-  <text x="200" y="81" text-anchor="middle" fill="#555">bits 2&#8211;31 (unused, 0)</text>
+  <rect x="20" y="54" width="380" height="80" rx="6" fill="#f4f7fb" stroke="#9fb4cc" stroke-width="1.2"/>
+  <text x="210" y="84" text-anchor="middle" fill="#555" font-size="12">bits 2&#8211;31</text>
+  <text x="210" y="106" text-anchor="middle" fill="#777" font-size="11">unused (read 0)</text>
 
-  <!-- bit 1 -->
-  <rect x="380" y="54" width="60" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-  <text x="410" y="81" text-anchor="middle">bit 1</text>
-  <!-- bit 0 -->
-  <rect x="440" y="54" width="60" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-  <text x="470" y="81" text-anchor="middle">bit 0</text>
+  <!-- bit 1 (FLS) -->
+  <rect x="400" y="54" width="70" height="80" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="435" y="76" text-anchor="middle" font-size="11" fill="#555">bit 1</text>
+  <text x="435" y="100" text-anchor="middle" font-weight="bold">FLS</text>
+  <text x="435" y="120" text-anchor="middle" font-size="10" fill="#555">0x0002</text>
 
-  <!-- labels -->
-  <text x="410" y="120" text-anchor="middle" font-weight="bold">FLS</text>
-  <text x="410" y="138" text-anchor="middle" fill="#555">0x0002</text>
-  <text x="470" y="120" text-anchor="middle" font-weight="bold">RLS</text>
-  <text x="470" y="138" text-anchor="middle" fill="#555">0x0001</text>
+  <!-- bit 0 (RLS) -->
+  <rect x="470" y="54" width="70" height="80" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="505" y="76" text-anchor="middle" font-size="11" fill="#555">bit 0</text>
+  <text x="505" y="100" text-anchor="middle" font-weight="bold">RLS</text>
+  <text x="505" y="120" text-anchor="middle" font-size="10" fill="#555">0x0001</text>
 
-  <text x="20" y="120" fill="#555" font-size="11">FLS = forward limit switch active</text>
-  <text x="20" y="138" fill="#555" font-size="11">RLS = reverse limit switch active</text>
+  <!-- legend -->
+  <text x="20" y="160" fill="#555" font-size="11">FLS = forward limit switch active</text>
+  <text x="20" y="180" fill="#555" font-size="11">RLS = reverse limit switch active</text>
 </svg>
