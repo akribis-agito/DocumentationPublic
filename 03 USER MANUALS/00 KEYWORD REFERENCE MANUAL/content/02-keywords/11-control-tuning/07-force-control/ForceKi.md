@@ -38,7 +38,7 @@ Integral gain of the force-loop PID controller.
 Each control cycle the integrator accumulates the gained force error scaled by `ForceKi`:
 
 $$
-integrator = integrator + gained\ error \times ForceKi \times 0.001
+\text{integrator} = \text{integrator} + \text{gained error} \cdot \text{ForceKi} \cdot 0.001
 $$
 
 where the *gained error* is the force error after the [ForceGain](ForceGain.md) stage. The integrator value is the I contribution to the PID output.

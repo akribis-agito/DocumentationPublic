@@ -46,7 +46,7 @@ Accumulated, scaled position of the gear-motion master variable.
 The update runs once per controller cycle. Each cycle the controller reads the master variable, forms the change since the previous cycle, scales it, applies the modulo wrap correction (if [MasterModRev](MasterModRev.md) ≠ 0), and adds it to the running total:
 
 $$
-\mathrm{\Delta}_{MasterPos} = \frac{MasterFact}{MasterFactDen} \bullet \mathrm{\Delta}_{master\ variable}
+\Delta_{\text{MasterPos}} = \frac{\text{MasterFact}}{\text{MasterFactDen}} \cdot \Delta_{\text{master variable}}
 $$
 
 The accumulation keeps sub-unit precision so the gear ratio builds up without rounding drift, which matters at high `MasterFact` or for slow masters.

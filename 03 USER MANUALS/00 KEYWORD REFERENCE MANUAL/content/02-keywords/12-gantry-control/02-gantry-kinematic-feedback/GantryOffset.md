@@ -54,7 +54,7 @@ AGantryFdbk = (APos + BPos + AGantryOffset) / 2
 BGantryFdbk = (APos - BPos - AGantryOffset)
 ```
 
-`?GantryOffset` with `?` not equal to `A` has no use and always returns `0`.
+Reading `GantryOffset` on any axis other than the master `A` has no use and always returns `0`.
 
 ## Examples
 

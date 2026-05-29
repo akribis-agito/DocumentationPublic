@@ -45,11 +45,11 @@ The amplitude is built from the measured phase currents according to the motor g
 
 | Motor group (MotorType) | Magnitude formula | Sign |
 |----|----|----|
-| Single-phase / brush motor (MotorType = 1 brush, 2 voice coil) | $\left\| MotorCurr \right\|\ \lbrack mA\rbrack\ = \ \left\| Ia \right\|\ \lbrack mA\rbrack$ | Sign of [Ia](Ia.md) (value is `Ia` directly). |
-| Three-phase brushless motor (MotorType = 3 linear, 4 rotary) | $\left\| MotorCurr \right\|\ \lbrack mA\rbrack\ = \ \sqrt{\tfrac{2}{3}\left({Ia}^{2} + {Ib}^{2} + {Ic}^{2}\right)}\ \lbrack mA\rbrack$ | Sign of [Iq](Iq.md): positive when $Iq \geq 0$, otherwise negative. |
-| Two-phase stepper motor (MotorType = 6 open loop, 7 closed loop) | $\left\| MotorCurr \right\|\ \lbrack mA\rbrack\ = \ \sqrt{{Ia}^{2} + {Ib}^{2}}\ \lbrack mA\rbrack$ | Always positive (a stepper has no current sign; direction is carried by the commutation angle). |
+| Single-phase / brush motor (MotorType = 1 brush, 2 voice coil) | $\left\| \text{MotorCurr} \right\|\ \lbrack mA\rbrack\ = \ \left\| \text{Ia} \right\|\ \lbrack mA\rbrack$ | Sign of [Ia](Ia.md) (value is `Ia` directly). |
+| Three-phase brushless motor (MotorType = 3 linear, 4 rotary) | $\left\| \text{MotorCurr} \right\|\ \lbrack mA\rbrack\ = \ \sqrt{\frac{2}{3}\left(\text{Ia}^{2} + \text{Ib}^{2} + \text{Ic}^{2}\right)}\ \lbrack mA\rbrack$ | Sign of [Iq](Iq.md): positive when $\text{Iq} \geq 0$, otherwise negative. |
+| Two-phase stepper motor (MotorType = 6 open loop, 7 closed loop) | $\left\| \text{MotorCurr} \right\|\ \lbrack mA\rbrack\ = \ \sqrt{\text{Ia}^{2} + \text{Ib}^{2}}\ \lbrack mA\rbrack$ | Always positive (a stepper has no current sign; direction is carried by the commutation angle). |
 
-The three-phase magnitude $\sqrt{\tfrac{2}{3}({Ia}^{2}+{Ib}^{2}+{Ic}^{2})}$ assumes sinusoidal commutation; for a balanced three-phase set it equals the dq-frame magnitude $\sqrt{{Iq}^{2}+{Id}^{2}}$ formed from [Iq](Iq.md)/[Id](Id.md).
+The three-phase magnitude $\sqrt{\frac{2}{3}(\text{Ia}^{2}+\text{Ib}^{2}+\text{Ic}^{2})}$ assumes sinusoidal commutation; for a balanced three-phase set it equals the dq-frame magnitude $\sqrt{\text{Iq}^{2}+\text{Id}^{2}}$ formed from [Iq](Iq.md)/[Id](Id.md).
 
 **CurrDir inversion.** After the magnitude and sign are formed, the reported value is negated when [CurrDir](CurrDir.md) = 1 (flipped excitation direction) and passed through unchanged when CurrDir = 0.
 

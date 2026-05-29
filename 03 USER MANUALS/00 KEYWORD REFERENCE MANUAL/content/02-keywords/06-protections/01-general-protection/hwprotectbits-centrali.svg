@@ -58,12 +58,12 @@
     <text x="502" y="122">PwrAC</text>
     <text x="546" y="122">PwrBC</text>
     <text x="590" y="122">5Vflt</text>
-    <text x="634" y="122">&#8211;</text>
+    <text x="634" y="122">icNQ</text>
     <text x="678" y="122">&#8211;</text>
     <text x="722" y="122">&#8211;</text>
   </g>
 
-  <text x="40" y="158" font-size="11" fill="#555">Lighter cells (bits 0&#8211;2 here) are unused in this layout; power-phase bits 4&#8211;5 are gated by PowerSupply so an unused phase is not reported.</text>
+  <text x="40" y="158" font-size="11" fill="#555">Bit 2 (icNQ) is the sine/cosine encoder error; bits 0&#8211;1 are reserved (encoder indexes, not included). Power-phase bits 4&#8211;5 are gated by PowerSupply so an unused phase is not reported.</text>
   <text x="40" y="178" font-size="11" fill="#555">ProtectMask uses the same bit positions: mask bit = 1 disables that protection. Non-maskable critical protections remain forced on.</text>
   <text x="40" y="200" font-size="11" fill="#555">Watchdog (bit 15), IPM fault (bit 13) and over-current (bit 12) are typically non-maskable; check Agito documentation for your specific build.</text>
 </svg>

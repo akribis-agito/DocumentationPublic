@@ -47,13 +47,13 @@ Together with the pole pairs ([PolePrs](../../02-motor-and-amplifier/PolePrs.md)
 
 `EncRes` is a scaling constant used by several internal calculations rather than a quantity that is read back:
 
-- **Commutation electrical cycle.** The firmware computes the counts per electrical cycle as $EncRes / PolePrs$. This defines how the measured position maps onto the electrical angle for sinusoidal commutation, so an incorrect `EncRes` mis-aligns the commutation angle (see the warning above). For a stepper, the steps-per-count factor is derived as $PolePrs \times electricalCycle / EncRes$.
+- **Commutation electrical cycle.** The firmware computes the counts per electrical cycle as $\frac{\text{EncRes}}{\text{PolePrs}}$. This defines how the measured position maps onto the electrical angle for sinusoidal commutation, so an incorrect `EncRes` mis-aligns the commutation angle (see the warning above). For a stepper, the steps-per-count factor is derived as $\frac{\text{PolePrs} \cdot \text{electricalCycle}}{\text{EncRes}}$.
 
   *Worked example.* A rotary brushless motor with `EncRes = 10000` and [PolePrs](../../02-motor-and-amplifier/PolePrs.md) `= 4` has `10000 / 4 = 2500` counts per electrical cycle. The commutation angle advances one full electrical revolution (0 → 360° electrical) every 2500 mechanical counts; the motor turns one mechanical revolution every 4 electrical cycles.
 - **Speed-unit conversion (BEMF feed-forward and reporting).** `EncRes` converts internal counts/s into engineering speed:
-  - Linear motor: $magneticPitch[\text{m}] / EncRes$ — counts/s to m/s (here `EncRes` is counts per magnetic pitch).
-  - Rotary motor / DC brush: $60 / EncRes$ — counts/s to rpm (here `EncRes` is counts per revolution).
-  - Voice coil: $1 / EncRes$; `EncRes` has no physical commutation role and may be left at any value.
+  - Linear motor: $\frac{\text{magneticPitch}\,[\text{m}]}{\text{EncRes}}$ — counts/s to m/s (here `EncRes` is counts per magnetic pitch).
+  - Rotary motor / DC brush: $\frac{60}{\text{EncRes}}$ — counts/s to rpm (here `EncRes` is counts per revolution).
+  - Voice coil: $\frac{1}{\text{EncRes}}$; `EncRes` has no physical commutation role and may be left at any value.
 
 `EncRes` is the *raw* encoder resolution; per-axis unit display scaling for [Pos](../../10-motion/01-kinematics-status/Pos.md) and its derivatives is handled separately by [UsrUnits](UsrUnits-AuxUsrUnits.md).
 

@@ -83,7 +83,7 @@ The bus-voltage, current, power/board-temperature, saturation, and motor-tempera
 To extract a single status, mask and shift:
 
 $$
-Status = (StatReg\ \&\ Bit\ mask) \gg Bit\ offset
+Status = (\text{StatReg}\ \&\ \text{Bit mask}) \gg \text{Bit offset}
 $$
 
 For a single-bit status the result is 0 or 1; for a 2-bit warning field the result is the 0–3 severity level. For example, the bus-voltage warning level is `(StatReg & 0x180) >> 7`, and "voltage saturation" is `(StatReg & 0x400000) >> 22`.

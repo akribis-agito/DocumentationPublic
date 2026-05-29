@@ -39,7 +39,7 @@ In position or velocity control operation mode ([OperationMode](../../08-axis-op
 The settling check is a direct magnitude comparison done each control cycle:
 
 $$
-|PosErr| \le InTargetTol
+|\text{PosErr}| \le \text{InTargetTol}
 $$
 
 While the comparison is true the dwell counter is incremented; the moment `|PosErr|` leaves the window the counter is reset to 0. Only when the counter has accumulated `InTargetTime` worth of consecutive in-window cycles does `InTargetStat` latch to 4. `InTargetTol` is in user units (the same units as `PosErr`); the comparison is against the raw stored value, so a value of `0` requires an exact-zero position error. The default is `10` counts. It is saved to flash and may be changed while in motion.

@@ -42,14 +42,14 @@ Integral gain of the velocity loop — accumulates the scaled velocity-controlle
 Each control cycle the velocity error [VelErr](../../10-motion/01-kinematics-status/VelErr.md) is multiplied by [VelGain](VelGain.md) to form the proportional term. `VelKi` then multiplies that proportional term and the result is added into a running velocity integral:
 
 $$
-\text{integral} \mathrel{+}= \big( VelErr \times VelGain \big) \times VelKi \times k_{i}
+\text{integral} \mathrel{+}= \big( \text{VelErr} \cdot \text{VelGain} \big) \cdot \text{VelKi} \cdot k_{i}
 $$
 
 $$
-\text{VelPIOutput} = \big( VelErr \times VelGain + \text{integral} \big) \times k_{scale}
+\text{VelPIOutput} = \big( \text{VelErr} \cdot \text{VelGain} + \text{integral} \big) \cdot k_{\text{scale}}
 $$
 
-where $k_i$ and $k_{scale}$ are fixed internal scalings.
+where $k_{i}$ and $k_{\text{scale}}$ are fixed internal scalings.
 
 - **What it multiplies:** the velocity-controller proportional output (`VelErr × VelGain`), before that product enters the integral accumulator.
 - **Where it sums:** the accumulated integral is added to the proportional term to form the velocity-PI output that becomes [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md).

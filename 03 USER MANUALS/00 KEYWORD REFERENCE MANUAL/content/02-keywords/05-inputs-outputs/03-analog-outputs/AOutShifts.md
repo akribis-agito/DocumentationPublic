@@ -43,10 +43,10 @@ else                 value = parameter <<   AOutShifts;    // shift left  (multi
 DAC code = (value + AOutOffset) * (mV-to-DAC factor);
 ```
 
-A **positive** value shifts left — multiplying the value by $2^{AOutShifts}$. A **negative** value shifts right — dividing by $2^{|AOutShifts|}$. The range ±31 reflects the width of the 32-bit shift.
+A **positive** value shifts left — multiplying the value by $2^{\text{AOutShifts}}$. A **negative** value shifts right — dividing by $2^{|\text{AOutShifts}|}$. The range ±31 reflects the width of the 32-bit shift.
 
 $$
-\text{Analog output [mV]} = \text{Monitored parameter [internal units]} \times 2^{\text{AOutShifts}}
+\text{Analog output [mV]} = \text{Monitored parameter [internal units]} \cdot 2^{\text{AOutShifts}}
 $$
 
 Because the shift is on a signed integer, a right shift truncates toward negative infinity. Pick a shift so the parameter's working range maps usefully onto the ±11905 mV output span.

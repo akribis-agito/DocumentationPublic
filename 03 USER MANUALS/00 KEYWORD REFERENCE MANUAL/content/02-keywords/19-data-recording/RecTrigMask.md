@@ -55,7 +55,7 @@ Masking is only applicable if the trigger source ([RecTrigSrc](RecTrigSrc.md)) i
 > **Note:** In v4 the mask is a 32-bit integer. In v5 (Central-i) it is a 64-bit integer, allowing all bits of a 64-bit trigger source to be masked.
 
 $$
-Masked\ value\  = (Original\ value)\ \&\ \left( RecTrigMask\lbrack x\rbrack \right)
+\text{Masked value} = (\text{Original value})\ \&\ \left( \text{RecTrigMask}[x] \right)
 $$
 
 ## Examples

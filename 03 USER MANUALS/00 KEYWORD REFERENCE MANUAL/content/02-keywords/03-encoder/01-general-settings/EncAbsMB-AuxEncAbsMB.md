@@ -15,13 +15,13 @@ Range 0–8, default 0 (no bits removed).
 
 The very first operation applied to a fresh absolute reading each control cycle is the right-shift:
 
-$$Reading_{masked} = Reading_{raw} \gg EncAbsMB$$
+$$\text{Reading}_{\text{masked}} = \text{Reading}_{\text{raw}} \gg \text{EncAbsMB}$$
 
 This happens before direction handling, before [EncAbsVal](EncAbsVal-AuxEncAbsVal.md) is captured, and before the offset and accumulation. So every downstream value already reflects the masked reading.
 
 `EncAbsMB` also shifts the rollover modulus. The width of one full turn of the *masked* word is
 
-$$ReadingCycle = 2^{(EncAbsBits - EncAbsMB)}$$
+$$\text{ReadingCycle} = 2^{\,\text{EncAbsBits} - \text{EncAbsMB}}$$
 
 precomputed when `EncAbsMB` (or [EncAbsBits](EncAbsBits-AuxEncAbsBits.md)) is written. Increasing `EncAbsMB` by 1 halves `ReadingCycle`, which is consistent: discarding a low bit halves the number of distinct counts in the word. The accumulator uses `ReadingCycle` (and its 25 %/75 % marks) to detect when the masked reading wraps and to add or subtract a full cycle so the position counts continuously.
 

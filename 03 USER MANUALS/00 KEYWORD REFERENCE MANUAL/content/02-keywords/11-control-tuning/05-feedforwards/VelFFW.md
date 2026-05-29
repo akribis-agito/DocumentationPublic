@@ -49,13 +49,13 @@ Velocity feedforward is applied only in position operation mode ([OperationMode]
 Each control cycle the velocity feedforward term is the reference velocity [dPosRef](../../../02-keywords/10-motion/01-kinematics-status/dPosRef.md) scaled by `VelFFW` and a fixed gain scaling of 1/2¹⁶ (= 1.52587890625 × 10⁻⁵):
 
 $$
-VelTerm = dPosRef \times VelFFW \times \frac{1}{2^{16}}
+\text{VelTerm} = \frac{\text{dPosRef} \cdot \text{VelFFW}}{2^{16}}
 $$
 
-The velocity term is summed with the acceleration feedforward term (see [AccFFW](AccFFW.md)) to form the combined feedforward output. That output optionally passes through the feedforward filter ([FFFiltOn](FFFiltOn.md) / [FFFiltDef](FFFiltDef.md)) and is then added to the velocity-loop output to form the current reference [CurrRefCtrl](../../../02-keywords/09-current-and-voltage/02-motor-variables/CurrRefCtrl.md):
+The velocity term is summed with the acceleration feedforward term (see [AccFFW](AccFFW.md)) to form the combined feedforward output. That output optionally passes through the feedforward filter ([FFFiltOn](FFFiltOn.md) / [FFFiltDef](FFFiltDef.md), central-i v5) and is then added to the velocity-loop output to form the current reference [CurrRefCtrl](../../../02-keywords/09-current-and-voltage/02-motor-variables/CurrRefCtrl.md):
 
 $$
-CurrRefCtrl = (\text{velocity-loop output}) + (\text{filtered feedforward output})
+\text{CurrRefCtrl} = (\text{velocity-loop output}) + (\text{filtered feedforward output})
 $$
 
 During the segment transitions of coordinated/vector motion the feedforward output is momentarily forced to zero to avoid current spikes from limited transition precision.

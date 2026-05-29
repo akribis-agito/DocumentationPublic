@@ -38,13 +38,13 @@ Read-only phase B current reference, in milliamperes (definition varies by motor
 
 ## How it works
 
-Like [IaRef](IaRef.md), the phase B reference is the commutation projection of the direction-corrected scalar current reference $CurrRef_{dir}$, which is the limited current reference after the [CurrDir](CurrDir.md) sign is applied:
+Like [IaRef](IaRef.md), the phase B reference is the commutation projection of the direction-corrected scalar current reference $\text{CurrRef}_{dir}$, which is the limited current reference after the [CurrDir](CurrDir.md) sign is applied:
 
 | Motor group (MotorType) | Phase B reference |
 |----|----|
-| Single-phase / brush motor (MotorType = 1, 2) | $IbRef\ = \ 0$ (only phase A is driven). |
-| Three-phase brushless motor (MotorType = 3, 4) | $IbRef\ = \ CurrRef_{dir} \cdot \sin(\theta - 120^\circ)$, where $\theta$ is the commutation angle — the phase B result of the inverse transform of $IqRef = CurrRef_{dir}$ and [IdRef](IdRef.md) (= 0). Active when current control runs in the abc domain ([ControlMode](ControlMode.md) bit 1 set). |
-| Two-phase stepper motor (MotorType = 6, 7) | $IbRef\ = \ CurrRef_{dir} \cdot \cos(\theta_{step})$, where $\theta_{step}$ is the stepper electrical angle. The two stepper phases are driven in quadrature (sin/cos). |
+| Single-phase / brush motor (MotorType = 1, 2) | $\text{IbRef}\ = \ 0$ (only phase A is driven). |
+| Three-phase brushless motor (MotorType = 3, 4) | $\text{IbRef}\ = \ \text{CurrRef}_{dir} \cdot \sin(\theta - 120^\circ)$, where $\theta$ is the commutation angle — the phase B result of the inverse transform of $\text{IqRef} = \text{CurrRef}_{dir}$ and [IdRef](IdRef.md) (= 0). Active when current control runs in the abc domain ([ControlMode](ControlMode.md) bit 1 set). |
+| Two-phase stepper motor (MotorType = 6, 7) | $\text{IbRef}\ = \ \text{CurrRef}_{dir} \cdot \cos(\theta_{step})$, where $\theta_{step}$ is the stepper electrical angle. The two stepper phases are driven in quadrature (sin/cos). |
 
 `IbRef` is bounded to ±64000 mA. Its difference from the measured [Ib](Ib.md) gives [IbErr](IbErr.md), the input to the phase B current loop.
 

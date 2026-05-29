@@ -39,7 +39,7 @@ Position-wise force feedforward gain (force-over-PIV control only).
 In force-over-PIV mode it multiplies the change in the filtered force reference relative to its value at the moment force operation mode was entered, and the result is added to the force PID output before that sum is converted to a position reference:
 
 $$
-ForceFFWP\ term = ForceFFWP \times (ForceRef - ForceRef_{entry})
+\text{ForceFFWP term} = \text{ForceFFWP} \cdot (\text{ForceRef} - \text{ForceRef}_{\text{entry}})
 $$
 
 Here `ForceRef` is the filtered reference [ForceRef](../../08-axis-operation/04-force-operation-mode/ForceRef.md) and `ForceRef_entry` is the internally recorded filtered reference captured at the instant force mode was entered. The gain is applied with an internal scaling of 1.0 (used as entered).

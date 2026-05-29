@@ -65,7 +65,7 @@ In every case the injected value the controller is currently applying can be rea
 - **PRBS** — A pseudorandom binary sequence whose output toggles between +amplitude and −amplitude. The sequence is read from a fixed, pre-defined table of 8192 bits (a maximal-length sequence; the table is held as 512 sixteen-bit words and consumed most-significant-bit first). When the end of the table is reached the index wraps and the sequence repeats. The rate at which a new bit is taken is the controller cycle rate divided down by [FastIdDownSam](FastIdDownSam.md); [FastIdInit](FastIdInit.md) restarts the sequence from its first bit. Injection amplitude is the keyword tied to the injection location.
 - **Chirp** — A sinusoid whose frequency increases linearly from the initial to the final frequency set in the [InjectChirpF](InjectChirpF.md) array, then repeats from the start. It uses the same interpolated sine table as the sinusoid waveform, but instead of a fixed per-cycle phase step the phase step itself grows each cycle, giving a constantly rising frequency. The sweep length (chirp period) is derived from the final frequency:
 
-$$Period\ of\ chirp\ \lbrack s\rbrack = \ 0.5*int\left( \max\left( \frac{1}{16 \bullet T_{s} \bullet f_{final}},1 \right) \right)\ \ $$
+$$\text{Period of chirp}\ [\text{s}] = 0.5 \cdot \text{int}\!\left( \max\!\left( \frac{1}{16 \cdot T_{s} \cdot f_{final}},\,1 \right) \right)$$
 
 where $T_{s}$ is the controller cycle time and $f_{final}$ is the final frequency in Hz. The sweep is built so each sine in the sweep is represented by at least 16 samples. For example, a chirp that starts from 1 Hz and ends with 200 Hz has a chirp period of 2.5 s.
 

@@ -4,11 +4,11 @@ Motor stuck protection works by comparing the current and velocity over a period
 
 Criterion for stuck condition check:
 
-- $abs(Vel\lbrack 3\rbrack)\  < \ StuckVel$, **and**
+- $abs(\text{Vel}\lbrack 3\rbrack)\  < \ \text{StuckVel}$, **and**
 
-- $abs(MotorCurr)\  > \ StuckCurr$
+- $abs(\text{MotorCurr})\  > \ \text{StuckCurr}$
 
-for StuckTime.
+for `StuckTime`.
 
 This means that the axis is exerting force but not moving. The check is done over a period of time to ensure that the stuck condition persists, and to prevent false detection during acceleration or deceleration.
 

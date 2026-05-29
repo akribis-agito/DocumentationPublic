@@ -38,7 +38,7 @@ For PWM amplifiers, `MaxPWM` limits the maximum duty cycle of the PWM drive — 
 
 `MaxPWM` is applied as the saturation limit on the output voltages inside the current loop, in two ways:
 
-- **Vector magnitude.** For brushless motors the firmware limits the magnitude of the output voltage vector so that $\sqrt{V_q^{2}+V_d^{2}} \le$ `MaxPWM` (using a precomputed `MaxPWM²`). If the enhanced-speed-range option is enabled in `ControlMode`, the squared budget is scaled by 4/3 (space-vector over-modulation).
+- **Vector magnitude.** For brushless motors the firmware limits the magnitude of the output voltage vector so that $\sqrt{V_q^{2}+V_d^{2}} \le \text{MaxPWM}$ (using a precomputed `MaxPWM²`). If the enhanced-speed-range option is enabled in `ControlMode`, the squared budget is scaled by $\frac{4}{3}$ (space-vector over-modulation).
 - **Per-phase clamp.** Each phase output (`Va`, `Vb`, `Vc`) is independently clamped to ±`MaxPWM`.
 
 Whenever the output voltage is clamped, the firmware records a saturation factor and sets [StatReg](../../07-status-and-faults/StatReg.md) bit 22 (voltage saturation). `MaxPWM` is a *limit*, not a trip — exceeding the demand simply saturates the output; it does not raise a [ConFlt](../../07-status-and-faults/ConFlt.md) fault.

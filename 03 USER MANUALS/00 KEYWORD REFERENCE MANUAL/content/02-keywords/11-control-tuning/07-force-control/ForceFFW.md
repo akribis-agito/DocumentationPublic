@@ -36,7 +36,7 @@ Current-wise force feedforward gain.
 `ForceFFW` is the current-wise force feedforward gain. It multiplies the filtered force reference [ForceRef](../../08-axis-operation/04-force-operation-mode/ForceRef.md) and contributes directly to the current reference, in parallel with the force PID output:
 
 $$
-ForceFFW\ term = ForceRef \times ForceFFW \times 0.001
+\text{ForceFFW term} = \text{ForceRef} \cdot \text{ForceFFW} \cdot 0.001
 $$
 
 The internal scaling is 1E-3. Value range is `0` to `1000000`; the default is `0`. The keyword is stored in flash and may be changed while the motor is on and in motion.

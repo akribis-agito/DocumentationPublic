@@ -42,7 +42,7 @@ This keyword only applies when [MotorType](MotorType.md) is 6 (open-loop stepper
 
 Each control cycle the firmware selects the stepper current from the motion status: when the axis is **not** moving ([MotionStat](../10-motion/05-motion-status/MotionStat.md) is zero, or it is only waiting for an input to start) it uses `StepInPosCurr`; while moving it uses [StepInMotCurr](StepInMotCurr.md). The selected value scales the phase-current vectors held against the present electrical angle θ:
 
-$$IaRef = StepInPosCurr \cdot \sin\theta \qquad IbRef = StepInPosCurr \cdot \cos\theta$$
+$$\text{IaRef} = \text{StepInPosCurr} \cdot \sin\theta \qquad \text{IbRef} = \text{StepInPosCurr} \cdot \cos\theta$$
 
 so the motor holds its position with reduced heating. A 2-phase current loop drives Ia/Ib to these references; with `StepInPosCurr = 0` no holding current flows and the motor can be back-driven.
 

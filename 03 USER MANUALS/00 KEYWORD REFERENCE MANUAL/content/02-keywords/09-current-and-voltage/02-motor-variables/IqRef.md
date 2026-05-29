@@ -47,7 +47,7 @@ Read-only quadrature-axis current reference (definition varies by motor type), i
 In the three-phase current loop the firmware assigns the q-axis reference directly from the direction-corrected motor current command:
 
 $$
-IqRef\ \lbrack mA\rbrack = \pm\,CurrRef
+\text{IqRef}\ \lbrack mA\rbrack = \pm\,\text{CurrRef}
 $$
 
 where the sign is set by [CurrDir](CurrDir.md) (`+` for the normal direction, `−` for the inverted direction). `CurrRef` is the [final motor current command](CurrRef.md) after the loops, compensation and injection; on the loop side it traces back to [CurrRefCtrl](CurrRefCtrl.md). The d-axis reference [IdRef](IdRef.md) is held at 0, so all commanded current is on the torque-producing q axis. `IqRef` is then differenced with the feedback [Iq](Iq.md) to form [IqErr](IqErr.md).

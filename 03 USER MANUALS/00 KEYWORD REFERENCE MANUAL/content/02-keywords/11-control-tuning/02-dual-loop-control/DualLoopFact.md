@@ -48,22 +48,22 @@ To keep precision, the controller chooses where to apply the scaling based on wh
 
 In both cases the reference and the feedback end up in the same unit — the finer-resolution of the two — so the velocity loop operates on matched signals.
 
-The scaling factor in use, k will be
+The scaling factor in use, $k$ will be
 
 $$
-k = \frac{65536}{DualLoopFact}
+k = \frac{65536}{\text{DualLoopFact}}
 $$
 
 $k$ is defined as follows.
 
 $$
-k = \frac{Motor\ feedback\ count\ per\ physical\ unit}{Load\ feedback\ count\ per\ physical\ unit} = \frac{Load\ feedback\ physical\ unit\ per\ count\ }{Motor\ feedback\ physical\ unit\ per\ count\ }
+k = \frac{\text{motor feedback count per physical unit}}{\text{load feedback count per physical unit}} = \frac{\text{load feedback physical unit per count}}{\text{motor feedback physical unit per count}}
 $$
 
 DualLoopFact is therefore
 
 $$
-DualLoopFact = \frac{65536\  \bullet Motor\ feedback\ physical\ unit\ per\ count\ }{Load\ feedback\ physical\ unit\ per\ count\ }
+\text{DualLoopFact} = \frac{65536 \cdot \text{motor feedback physical unit per count}}{\text{load feedback physical unit per count}}
 $$
 
 ## Examples
@@ -75,7 +75,7 @@ The load feedback uses 200nm SINCOS encoder at 8192x interpolation factor (24.41
 Then,
 
 $$
-DualLoopFact = \frac{65536\  \bullet 0.97656\ }{24.41*0.001\ } = 2621440
+\text{DualLoopFact} = \frac{65536 \cdot 0.97656}{24.41 \cdot 0.001} = 2621440
 $$
 
 ```text

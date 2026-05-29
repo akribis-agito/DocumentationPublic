@@ -69,7 +69,7 @@ ACalcFilters            ; recompute filter coefficients
 
 ## Changes between versions
 
-In **v4** `PosFiltDef` can only be changed with the motor off and out of motion. In **v5 (central-i)** it may also be changed while the motor is on and in motion.
+In **v4** only the post-profiler filter (filter 1, elements `[1]`–`[5]`) is supported; the position-error filter (filter 2, elements `[6]`–`[10]`) is **central-i v5 only**. On v4 `PosFiltDef` can only be changed with the motor off and out of motion. On **v5 (central-i)** both filters are available and `PosFiltDef` may also be changed while the motor is on and in motion.
 
 ## See also
 

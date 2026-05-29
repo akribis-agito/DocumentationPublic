@@ -44,7 +44,7 @@ Number of data points captured per parameter per scope (recording period).
 The recording period is:
 
 $$
-Period\ of\ recording\ for\ scope\ x\ \lbrack s\rbrack = \frac{RecLength\lbrack x\rbrack \bullet RecGap\lbrack x\rbrack}{Controller\ cycle\ rate\ \lbrack Hz\rbrack}
+\text{Period of recording for scope } x\ [\text{s}] = \frac{\text{RecLength}[x] \cdot \text{RecGap}[x]}{\text{Controller cycle rate}\ [\text{Hz}]}
 $$
 
 `RecLength` sets the points captured *per parameter*. The scope buffer is shared across all recorded channels, so the binding limit is the total sample count: the number of channels selected in [RecParamA/RecParamB](RecParamA-RecParamB.md) multiplied by `RecLength` must fit the buffer. If it does not, [RecStart](RecStart.md) is rejected. Recording more channels therefore reduces the maximum usable `RecLength`. The maximum buffer size is product-dependent (see the [Data recording](00-overview.md) overview for per-product point limits).

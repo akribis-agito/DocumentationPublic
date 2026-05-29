@@ -64,7 +64,7 @@ APosFiltOn[2]       ; read the position-error filter enable state
 
 ## Changes between versions
 
-In **v4** `PosFiltOn` can only be changed with the motor off and out of motion. In **v5 (central-i)** it may also be changed while the motor is on and in motion.
+In **v4** only `PosFiltOn[1]` (the post-profiler filter) is supported; the position-error filter `PosFiltOn[2]` is **central-i v5 only**. On v4 `PosFiltOn` can only be changed with the motor off and out of motion. On **v5 (central-i)** both indices are available and `PosFiltOn` may also be changed while the motor is on and in motion.
 
 ## See also
 

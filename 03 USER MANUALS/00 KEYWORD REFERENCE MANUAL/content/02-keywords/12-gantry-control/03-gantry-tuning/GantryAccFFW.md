@@ -46,7 +46,7 @@ Acceleration feedforward gain for the gantry yaw correction controller.
 Acceleration feedforward is applied only in position operation mode. The controller forms the commanded acceleration from the second difference of the shaped/filtered position reference (the discrete second derivative), scales it by `GantryAccFFW`, and adds the result directly to the velocity PI output when forming the differential motor current command:
 
 $$
-CurrRef = VelPIOutput + \frac{(PosRef_{n} - 2\,PosRef_{n-1} + PosRef_{n-2}) \times GantryAccFFW}{256}
+\text{CurrRef} = \text{VelPIOutput} + \frac{(\text{PosRef}_{n} - 2\,\text{PosRef}_{n-1} + \text{PosRef}_{n-2}) \cdot \text{GantryAccFFW}}{256}
 $$
 
 Because this term is a feedforward, it depends only on the reference trajectory, not on the yaw error, so it can supply the current needed during acceleration without waiting for an error to build up in the [GantryPosGain](GantryPosGain.md) / [GantryVelGain](GantryVelGain.md) feedback loops. Note that in gantry mode the yaw current command uses the acceleration feedforward term only; the velocity feedforward [GantryVelFFW](GantryVelFFW.md) applies on controllers/firmware that include it in the yaw loop.

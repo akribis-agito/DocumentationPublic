@@ -41,7 +41,7 @@ Enables or bypasses the feedforward filter.
 When enabled, the filter is a second-order (biquad) section whose coefficients are computed from the parameters in [FFFiltDef](FFFiltDef.md). It is placed on the combined feedforward signal:
 
 $$
-AccFFW \text{ term} + VelFFW \text{ term} \;\longrightarrow\; \boxed{\text{feedforward filter}} \;\longrightarrow\; \text{add to velocity-loop output}
+\text{AccFFW term} + \text{VelFFW term} \;\longrightarrow\; \boxed{\text{feedforward filter}} \;\longrightarrow\; \text{add to velocity-loop output}
 $$
 
 When bypassed, the combined feedforward output is used directly. After changing `FFFiltOn` or [FFFiltDef](FFFiltDef.md), run [CalcFilters](../01-general-keywords/CalcFilters.md) so the controller recomputes the internal filter coefficients.

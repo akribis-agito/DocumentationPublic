@@ -42,7 +42,7 @@ DC gain (×65536 fixed-point) applied to each analog input.
 In the per-cycle conditioning, the deadband output is multiplied by `AInGain` scaled by 1/65536:
 
 $$
-y = \frac{AInGain}{65536}\,u
+y = \frac{\text{AInGain}}{65536}\,u
 $$
 
 Both input and output are in millivolts. A negative `AInGain` inverts the input. For unity gain, set `AInGain = 65536`.

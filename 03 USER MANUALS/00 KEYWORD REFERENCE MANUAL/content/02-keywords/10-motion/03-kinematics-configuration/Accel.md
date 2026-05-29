@@ -46,13 +46,13 @@ Acceleration rate for point-to-point motion, in user units per second squared.
 The profiler runs once per control cycle (16,384 Hz on v4 central-i; sample time ≈ 61 µs). On every cycle it forms the **effective acceleration** as the product of `Accel` and the integer scaling factor [AccelFact](AccelFact.md):
 
 $$
-Accel_{eff} = Accel \times AccelFact
+\text{Accel}_{\text{eff}} = \text{Accel} \cdot \text{AccelFact}
 $$
 
 In a normal acceleration phase the profiler velocity is then incremented by `Accel_eff × T_s` (the control-cycle sample time) each cycle until it reaches `Speed`:
 
 $$
-v_{k} = v_{k-1} + Accel_{eff}\times T_s ,\qquad v_k \le Speed
+v_{k} = v_{k-1} + \text{Accel}_{\text{eff}} \cdot T_s ,\qquad v_k \le \text{Speed}
 $$
 
 Because both `Accel` and `AccelFact` are read fresh each cycle, changing either mid-move changes the slope of the velocity ramp immediately.
@@ -62,7 +62,7 @@ Because both `Accel` and `AccelFact` are read fresh each cycle, changing either 
 The profiler does not blindly accelerate to `Speed`. Each cycle it computes, from the remaining distance to [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md), the velocity from which it could still stop in time using `Decel`:
 
 $$
-v_{dec} = -Decel_{eff}\,T_s + \sqrt{Decel_{eff}^{2}\,T_s^{2} + 2\,Decel_{eff}\,(target - posRef)\,T_s}
+v_{\text{dec}} = -\text{Decel}_{\text{eff}}\,T_s + \sqrt{\text{Decel}_{\text{eff}}^{2}\,T_s^{2} + 2\,\text{Decel}_{\text{eff}}\,(\text{target} - \text{PosRef})\,T_s}
 $$
 
 `Accel` raises the velocity toward `Speed`; this `v_dec` clamp lowers it as the target nears. The two together produce the classic trapezoidal (or triangular, on a short move) velocity profile. `Accel` therefore sets the **leading slope** of the trapezoid; `Decel` sets the trailing slope.

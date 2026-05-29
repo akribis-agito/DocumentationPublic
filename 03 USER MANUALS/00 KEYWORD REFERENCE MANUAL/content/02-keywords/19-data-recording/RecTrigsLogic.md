@@ -57,7 +57,7 @@ The value of RecTrigsLogic determines the logical operator used.
 If `RecTrigsLogic[1] = 1` and `RecTrigsLogic[2] = 2`, the overall trigger logic condition for the first scope is
 
 $$
-(Trigger\ 1)\ \&\&\ (Trigger\ 2)\ ||\ (Trigger\ 3)
+(\text{Trigger 1})\ \&\&\ (\text{Trigger 2})\ ||\ (\text{Trigger 3})
 $$
 
 The overall trigger will occur only if either

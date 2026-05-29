@@ -42,7 +42,7 @@ Auxiliary-encoder velocity feedback (backward-Euler derivative of AuxPos).
 ## How it works
 
 $$
-AuxVel\  = \ \frac{AuxPos\left( 1 - z^{- 1} \right)}{T_{s}}
+\text{AuxVel} = \frac{\text{AuxPos}\left(1 - z^{-1}\right)}{T_{s}}
 $$
 
 where $T_{s}$ is the controller sampling time. This is implemented as the per-cycle change of [AuxPos](AuxPos.md) scaled by the sample frequency, i.e. `ΔAuxPos × samples-per-second`, which equals `ΔAuxPos / Tₛ`. This is the same single-difference method used for the main `Vel[2]`; there is no moving-average or 1/T variant for the auxiliary encoder.

@@ -38,7 +38,7 @@ Numerator of the scaling ratio applied to the virtual encoder source signal.
 
 The emitted encoder count tracks the source value scaled by this rational factor:
 
-$$Output\ count = Source \times \frac{VEncFact}{VEncFactDen}$$
+$$\text{Output count} = \text{Source} \cdot \frac{\text{VEncFact}}{\text{VEncFactDen}}$$
 
 Internally the firmware first multiplies the source by `VEncFact` into a 64-bit "output plane", then a tracking controller drives the emitted count so that `count × VEncFactDen` follows `source × VEncFact`. The default `VEncFact = VEncFactDen = 65536` gives unity scaling and preserves backward compatibility with older firmware that used a fixed `/65536` factor.
 

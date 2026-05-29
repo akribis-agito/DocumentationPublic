@@ -37,10 +37,10 @@ Downsampling factor that sets the PRBS new-value generation rate.
 ## How it works
 
 $$
-Rate\ of\ generation\ of\ new\ binary\ value\ \lbrack Hz\rbrack = \ \frac{Controller\ cycle\ rate\lbrack Hz\rbrack}{2^{FastIdDownSam}}
+\text{Rate of generation of new binary value}\ [\text{Hz}] = \frac{\text{Controller cycle rate}\ [\text{Hz}]}{2^{\text{FastIdDownSam}}}
 $$
 
-Each PRBS bit is held at the output for $2^{FastIdDownSam}$ controller cycles before the next bit is taken from the sequence, so the factor stretches the sequence in time without changing its bit pattern. The allowed values give the following rates:
+Each PRBS bit is held at the output for $2^{\text{FastIdDownSam}}$ controller cycles before the next bit is taken from the sequence, so the factor stretches the sequence in time without changing its bit pattern. The allowed values give the following rates:
 
 | Value | Controller cycles per PRBS bit |
 |-------|--------------------------------|

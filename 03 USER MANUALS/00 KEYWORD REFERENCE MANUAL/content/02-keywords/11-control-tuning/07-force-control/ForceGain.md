@@ -43,7 +43,7 @@ Proportional gain of the force-loop PID controller.
 The scaled product is the gained error:
 
 $$
-gained\ error = ForceErr \times ForceGain \times scaling
+\text{gained error} = \text{ForceErr} \cdot \text{ForceGain} \cdot \text{scaling}
 $$
 
 This gained error is the P contribution of the PID output, and it is also the signal that the integral ([ForceKi](ForceKi.md)) and derivative ([ForceKd](ForceKd.md)) terms act on.

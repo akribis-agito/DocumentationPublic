@@ -37,7 +37,7 @@ Per-output logic inversion (XOR) applied to the final digital-output state.
 Every control cycle, just before writing the physical pins, the output word is XORed with `DOutLog`:
 
 $$
-\text{Final output word} = DOutPort \oplus DOutLog
+\text{Final output word} = \text{DOutPort} \oplus \text{DOutLog}
 $$
 
 A `1` bit in `DOutLog` inverts that output; a `0` bit passes it through unchanged. The result is what the hardware discrete-output stage receives. On products with selectable sink/source pins, the final word is computed first, then split by [DOutType](DOutType.md) into the sink and source drivers — so polarity is applied **before** the sink/source routing.

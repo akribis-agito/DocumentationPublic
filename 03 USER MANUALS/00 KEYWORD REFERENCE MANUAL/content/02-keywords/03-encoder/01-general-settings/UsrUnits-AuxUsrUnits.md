@@ -13,7 +13,7 @@ Ratio between a desired user unit and encoder counts for reading position and it
 
 `UsrUnits` is stored as a **16.16 fixed-point ratio**: the effective scale factor is `UsrUnits / 65536` (the fixed-point scaling is 65536, i.e. 16 fractional bits). The default `UsrUnits = 65536` therefore means a factor of 1 (values shown directly in counts).
 
-$$\text{user value} = \frac{\text{counts}}{\big(UsrUnits / 65536\big)} = \text{counts} \times \frac{65536}{UsrUnits}$$
+$$\text{user value} = \frac{\text{counts}}{\bigl(\text{UsrUnits} / 65536\bigr)} = \text{counts} \cdot \frac{65536}{\text{UsrUnits}}$$
 
 When `UsrUnits` is an exact integer multiple of 65536, the firmware takes the fast accurate path and divides the count value by `UsrUnits >> 16` with rounding; otherwise it uses the full fixed-point ratio. Writes (e.g. setting a target) are scaled the inverse way (multiplied by the ratio). The same factor applies to all derivatives, so velocity is reported in user-units/s and acceleration in user-units/s².
 

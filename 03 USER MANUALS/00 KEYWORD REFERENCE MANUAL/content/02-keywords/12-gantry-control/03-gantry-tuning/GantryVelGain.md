@@ -46,13 +46,13 @@ Proportional velocity gain for the gantry yaw correction controller.
 In gantry mode the yaw velocity error is the difference between the velocity command from the yaw position loop and the gantry differential velocity ([GantryVel](GantryVel.md)) rather than the single-axis velocity:
 
 $$
-VelErr = VelRef - GantryVel
+\text{VelErr} = \text{VelRef} - \text{GantryVel}
 $$
 
 `GantryVelGain` scales this yaw velocity error to produce the proportional term of the velocity PI controller:
 
 $$
-P = VelErr \times GantryVelGain
+P = \text{VelErr} \cdot \text{GantryVelGain}
 $$
 
 This proportional term is summed with the integral term scaled by [GantryVelKi](GantryVelKi.md); the combined PI output is then passed through the velocity-loop filters and an internal scaling factor, and finally added to the feedforward terms to form the differential motor current command ([CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md)) applied to the two gantry motors. Raising `GantryVelGain` increases the current produced per unit of yaw velocity error.

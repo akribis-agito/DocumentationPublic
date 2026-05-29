@@ -43,22 +43,22 @@ Read-only quadrature-axis PI-controller output in dq0-domain current control (th
 
 $$
 \begin{aligned}
-I_{\Sigma} &\mathrel{+}= IqErr \cdot CurrKi \cdot 0.001 \cdot a_{aw} \\
-Vq &= (I_{\Sigma} + IqErr) \cdot CurrGain \cdot 0.001
+I_{\Sigma} &\mathrel{+}= \text{IqErr} \cdot \text{CurrKi} \cdot 0.001 \cdot a_{aw} \\
+\text{Vq} &= (I_{\Sigma} + \text{IqErr}) \cdot \text{CurrGain} \cdot 0.001
 \end{aligned}
 $$
 
 $I_{\Sigma}$ is the running integral; `0.001` is the fixed gain scaling; $a_{aw}$ is the anti-windup gate (0 freezes the integral during voltage saturation, 1 otherwise).
 
-**Vector saturation.** Before the inverse Park transform, `Vq` and [Vd](Vd.md) are limited as a vector against the maximum PWM magnitude. If $Vq^2 + Vd^2$ exceeds the squared limit (the limit is multiplied by $4/3$ when the enhanced-speed-range bit of [ControlMode](ControlMode.md) is set), both `Vq` and `Vd` are scaled by the same factor so the sine-wave shape is preserved, and the voltage-saturation status bit in [StatReg](../../07-status-and-faults/StatReg.md) is set.
+**Vector saturation.** Before the inverse Park transform, `Vq` and [Vd](Vd.md) are limited as a vector against the maximum PWM magnitude. If $\text{Vq}^2 + \text{Vd}^2$ exceeds the squared limit (the limit is multiplied by $\frac{4}{3}$ when the enhanced-speed-range bit of [ControlMode](ControlMode.md) is set), both `Vq` and `Vd` are scaled by the same factor so the sine-wave shape is preserved, and the voltage-saturation status bit in [StatReg](../../07-status-and-faults/StatReg.md) is set.
 
 **Inverse Park.** `Vq` and `Vd` then form the phase voltage commands by the inverse Park transform, using the sine/cosine of the electrical commutation angle θ:
 
 $$
 \begin{aligned}
-Va &= Vq \cdot \sin\theta + Vd \cdot \cos\theta \\
-Vb &= Vq \cdot \sin(\theta - 120^\circ) + Vd \cdot \cos(\theta - 120^\circ) \\
-Vc &= -(Va + Vb)
+\text{Va} &= \text{Vq} \cdot \sin\theta + \text{Vd} \cdot \cos\theta \\
+\text{Vb} &= \text{Vq} \cdot \sin(\theta - 120^\circ) + \text{Vd} \cdot \cos(\theta - 120^\circ) \\
+\text{Vc} &= -(\text{Va} + \text{Vb})
 \end{aligned}
 $$
 

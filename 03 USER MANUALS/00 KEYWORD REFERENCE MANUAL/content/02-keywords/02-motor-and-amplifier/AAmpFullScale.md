@@ -41,7 +41,7 @@ This keyword applies to the external/linear analog command modes of [AmpType](Am
 The firmware turns `AAmpFullScale` into a fixed scaling factor
 
 $$
-factor\ \left\lbrack \frac{mV}{mA\ or\ count/s} \right\rbrack = \frac{10000}{AAmpFullScale}
+factor\ \left\lbrack \frac{mV}{mA\ or\ count/s} \right\rbrack = \frac{10000}{\text{AAmpFullScale}}
 $$
 
 so that a reference equal to `AAmpFullScale` produces exactly 10 000 mV (10 V) on the analog output. The factor is recomputed whenever [AmpType](AmpType.md) or `AAmpFullScale` changes. Each control cycle the analog output is `factor × reference`; when the motor is off the output is forced to 0.
@@ -57,7 +57,7 @@ The reference that gets scaled — and therefore the unit of `AAmpFullScale` —
 For example, with `AmpType = 2`, `AAmpFullScale = 5000` (mA), and a current reference of 3000 mA:
 
 $$
-AOutPort = \frac{CurrRef}{AAmpFullScale} \bullet 10000 = \frac{3000}{5000} \bullet 10000 = 6000\ \lbrack mV\rbrack
+AOutPort = \frac{\text{CurrRef}}{\text{AAmpFullScale}} \cdot 10000 = \frac{3000}{5000} \cdot 10000 = 6000\ \lbrack mV\rbrack
 $$
 
 producing 6000 mV on the [AOutPort](../05-inputs-outputs/03-analog-outputs/AOutPort.md). In linear-adapter mode (7) the same factor is applied independently to the two phase-current references, driving two analog channels.

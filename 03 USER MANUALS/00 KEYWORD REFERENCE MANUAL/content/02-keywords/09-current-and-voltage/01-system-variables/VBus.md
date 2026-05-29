@@ -39,7 +39,7 @@ Read-only amplifier DC bus voltage measurement, in millivolts.
 On a built-in (PWM) amplifier the bus voltage is sampled once per group of 16 control cycles, the raw ADC reading is converted to millivolts with a fixed scale factor, and a low-pass filter is then applied to suppress measurement spikes. The filter is a first-order IIR with a roughly 8-sample (≈8 ms) time constant:
 
 $$
-VBus_{new} = \frac{VBus_{raw} + 7 \times VBus_{old}}{8}
+\text{VBus}_{new} = \frac{\text{VBus}_{raw} + 7 \cdot \text{VBus}_{old}}{8}
 $$
 
 The raw-to-mV scale factor depends on the drive variant (each variant has a different sense-resistor divider and ADC reference), so the same raw count maps to different voltages on different hardware; the correct multiplier is applied per product. The filtered result is the value you read as `VBus`.

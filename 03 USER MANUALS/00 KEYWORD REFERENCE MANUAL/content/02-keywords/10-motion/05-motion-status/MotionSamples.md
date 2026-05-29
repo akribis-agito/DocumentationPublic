@@ -32,7 +32,7 @@ Move and settle times of the last completed motion, in controller cycles.
 
 ## Overview
 
-`MotionSamples` reports the move and settle times of the last completed motion, used to characterise motion timing and settling performance. It is only meaningful in position or velocity control operation mode ([OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) `= 2` or `3`). Each value is a count of controller cycles (the standard sampling rate is 16384 Hz, $T_{s} = \frac{1}{16384}\,\text{Hz} = 61.03515\,\mu s$ per cycle), so multiply by $T_{s}$ to obtain SI time. The settling components depend on [InTargetTime](InTargetTime.md).
+`MotionSamples` reports the move and settle times of the last completed motion, used to characterise motion timing and settling performance. It is only meaningful in position or velocity control operation mode ([OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) `= 2` or `3`). Each value is a count of controller cycles (the standard sampling rate is 16384 Hz, $T_{s} = \frac{1}{16384}\,\text{s} \approx 61.0\,\mu s$ per cycle), so multiply by $T_{s}$ to obtain SI time. The settling components depend on [InTargetTime](InTargetTime.md).
 
 The array is 5 long but index 0 is unused — communication indexes start at 1, so only `[1]`…`[4]` carry data. Each element defaults to `-1`, which also matches the keyword's minimum/default; `-1` means "no motion has been performed yet" and the four entries are reset to `-1` when the motor is disabled.
 
@@ -50,18 +50,18 @@ The controller runs a free-running cycle counter from the start of each motion a
 Indexes 2–4 are written together in a single cycle when [InTargetStat](InTargetStat.md) latches to 4, so they are consistent. In summary,
 
 $$
-MotionSamples\lbrack 2\rbrack = \ MotionSamples\lbrack 1\rbrack + \ MotionSamples\lbrack 4\rbrack
+\text{MotionSamples}[2] = \text{MotionSamples}[1] + \text{MotionSamples}[4]
 $$
 
 $$
-MotionSamples\lbrack 3\rbrack = \ MotionSamples\lbrack 2\rbrack + \frac{InTargetTime}{T_{s}}\ 
+\text{MotionSamples}[3] = \text{MotionSamples}[2] + \frac{\text{InTargetTime}}{T_{s}}
 $$
 
 ## Examples
 
 ![MotionSamples timing relations](motionsamples-timeline.svg)
 
-The diagram above shows how the MotionSamples entries relate in time. Since MotionSamples is in controller cycles, multiplication by sampling time (here, it is $T_{s} = 61.03515\mu s$) is needed to get the time in SI unit.
+The diagram above shows how the MotionSamples entries relate in time. Since MotionSamples is in controller cycles, multiplication by sampling time (here, $T_{s} \approx 61.0\,\mu s$) is needed to get the time in SI unit.
 
 ```text
 AMotionSamples[1]   ; motion profile time of the last move (controller cycles)

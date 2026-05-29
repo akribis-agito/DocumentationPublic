@@ -40,7 +40,7 @@ The factor in use is `VelTrackFact/1024`, so a value of `1024` applies a unity f
 `VelTrackFact` scales [dPosRef](../../10-motion/01-kinematics-status/dPosRef.md) and the scaled value is summed with the position-controller output (the [PosGain](../03-position-control/PosGain.md) term) to form [VelRef](../../10-motion/01-kinematics-status/VelRef.md):
 
 $$
-VelRef = PosErr \times PosGain + \frac{dPosRef \times VelTrackFact}{1024}
+\text{VelRef} = \text{PosErr} \cdot \text{PosGain} + \frac{\text{dPosRef} \cdot \text{VelTrackFact}}{1024}
 $$
 
 - **What it multiplies:** the filtered reference velocity [dPosRef](../../10-motion/01-kinematics-status/dPosRef.md) (the derivative of the position reference, after the [dPosRefFilt](dPosRefFilt.md) low-pass filter).

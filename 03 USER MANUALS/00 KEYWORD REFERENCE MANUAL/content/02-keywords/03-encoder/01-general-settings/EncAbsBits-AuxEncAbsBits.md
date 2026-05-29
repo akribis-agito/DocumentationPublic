@@ -22,7 +22,7 @@ Range 12–45 bits, default 22.
 
 **2. It defines the rollover modulus used when the position is accumulated.** Each control cycle the absolute reading is turned into an incremental delta, and the firmware needs to know the value at which the unsigned word wraps. That modulus is precomputed once, when `EncAbsBits` or [EncAbsMB](EncAbsMB-AuxEncAbsMB.md) is written, as
 
-$$ReadingCycle = 2^{(EncAbsBits - EncAbsMB)}$$
+$$\text{ReadingCycle} = 2^{\,\text{EncAbsBits} - \text{EncAbsMB}}$$
 
 `ReadingCycle` is the size of one full turn of the masked absolute word. If `EncAbsBits ≥ 32` the firmware sets `ReadingCycle = 0` (no software wrap handling — the value fills the 32-bit word).
 

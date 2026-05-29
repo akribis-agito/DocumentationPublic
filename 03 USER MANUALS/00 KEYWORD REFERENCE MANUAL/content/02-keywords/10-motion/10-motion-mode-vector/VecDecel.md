@@ -47,7 +47,7 @@ A vector move runs one velocity profile along the geometric path (see [VecSpeed]
 - **End-of-path braking.** Each control cycle the profiler computes, from the path distance still remaining to [VecAbsTrgt](VecAbsTrgt.md), the highest path speed from which it could still come to rest exactly at the end using `VecDecel`, and clamps the path velocity to that value. This is what curves the cruise phase down into the stop at the end of the move:
 
 $$
-v_{dec} = -VecDecel\,T_s + \sqrt{VecDecel^{2}\,T_s^{2} + 2\,VecDecel\,(VecAbsTrgt - VecPosRef)}
+v_{dec} = -\text{VecDecel} \cdot T_s + \sqrt{\text{VecDecel}^{2} \cdot T_s^{2} + 2 \cdot \text{VecDecel} \cdot (\text{VecAbsTrgt} - \text{VecPosRef})}
 $$
 
 - **Speed reductions.** When [VecSpeed](VecSpeed.md) is lowered mid-move, or a [VecPause](VecPause.md) is requested, the path velocity ramps down at `VecDecel`.

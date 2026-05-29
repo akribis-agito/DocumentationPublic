@@ -42,10 +42,10 @@ Read-only direct-axis feedback current after Park transform (three-phase only), 
 `Id` is computed from the measured phase currents [Ia](Ia.md) and [Ib](Ib.md) by a combined Clarke + Park transform, using the sine and cosine of the electrical commutation angle θ (evaluated at the commutation angle, together with the −120° shifted pair used for the phase-B term):
 
 $$
-Id\ \lbrack mA\rbrack = \frac{2}{\sqrt 3}\left(Ib \cdot \sin\theta - Ia \cdot \sin(\theta - 120^\circ)\right)
+\text{Id}\ \lbrack mA\rbrack = \frac{2}{\sqrt 3}\left(\text{Ib} \cdot \sin\theta - \text{Ia} \cdot \sin(\theta - 120^\circ)\right)
 $$
 
-The factor $2/\sqrt3 \approx 1.1547$ is applied as written. θ is the electrical commutation angle from the commutation/auto-phasing logic (the same angle that produces the phase references). The quadrature counterpart [Iq](Iq.md) uses the cosine terms.
+The factor $\frac{2}{\sqrt3} \approx 1.1547$ is applied as written. θ is the electrical commutation angle from the commutation/auto-phasing logic (the same angle that produces the phase references). The quadrature counterpart [Iq](Iq.md) uses the cosine terms.
 
 In the rotating dq frame the d axis is aligned with the rotor flux (so Id is the flux/field component) and the q axis leads it by 90°. The whole frame rotates with θ relative to the stationary abc phases; Id and Iq are simply the projections of the measured current vector onto these two axes:
 

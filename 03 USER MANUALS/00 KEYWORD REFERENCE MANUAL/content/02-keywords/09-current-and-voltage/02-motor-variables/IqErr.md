@@ -42,15 +42,15 @@ Read-only quadrature-axis current error (IqRef − Iq), definition varies by mot
 | Motor type | Description |
 |---|---|
 | Single-phase / brush motor (MotorType = 1 or 2) | `IqErr` equals [IaErr](IaErr.md) (brush motors close the loop on phase A). |
-| Three-phase motor (MotorType = 3 or 4) | `IqErr` is the q-axis error used in dq0-domain current control: $IqErr\ [mA] = IqRef\ [mA] - Iq\ [mA]$. |
+| Three-phase motor (MotorType = 3 or 4) | `IqErr` is the q-axis error used in dq0-domain current control: $\text{IqErr}\ [mA] = \text{IqRef}\ [mA] - \text{Iq}\ [mA]$. |
 | Two-phase stepper motor (MotorType = 6 or 7) | `IqErr` equals 0. |
 
 For three-phase motors, `IqErr` drives the quadrature-axis current PI controller, whose output is [Vq](Vq.md). The error is integrated (scaled by the integral gain [CurrKi](../../11-control-tuning/06-current-control/CurrKi.md)) and added to the proportional term (scaled by the loop gain [CurrGain](../../11-control-tuning/06-current-control/CurrGain.md)):
 
 $$
 \begin{aligned}
-I_{\Sigma} &\mathrel{+}= IqErr \cdot CurrKi \cdot 0.001 \cdot a_{aw} \\
-Vq &= (I_{\Sigma} + IqErr) \cdot CurrGain \cdot 0.001
+I_{\Sigma} &\mathrel{+}= \text{IqErr} \cdot \text{CurrKi} \cdot 0.001 \cdot a_{aw} \\
+\text{Vq} &= (I_{\Sigma} + \text{IqErr}) \cdot \text{CurrGain} \cdot 0.001
 \end{aligned}
 $$
 

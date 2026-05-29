@@ -50,8 +50,8 @@ For each controlled channel the current-error integral is accumulated (scaled by
 
 $$
 \begin{aligned}
-Integral &\mathrel{+}= IqErr \times CurrKi \times 0.001 \times noClamp \\
-Vq &= (Integral + IqErr) \times CurrGain \times 0.001
+\text{Integral} &\mathrel{+}= \text{IqErr} \cdot \text{CurrKi} \cdot 0.001 \cdot \text{noClamp} \\
+\text{Vq} &= (\text{Integral} + \text{IqErr}) \cdot \text{CurrGain} \cdot 0.001
 \end{aligned}
 $$
 

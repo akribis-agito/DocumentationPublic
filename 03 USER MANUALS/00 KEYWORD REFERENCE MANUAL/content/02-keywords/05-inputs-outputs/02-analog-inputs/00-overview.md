@@ -8,7 +8,7 @@ The raw electrical input (`AInPort[5-8]`) is passed through an analog second-ord
 The overall formula for analog input is given by,
 
 $$
-AInPort\ \lbrack mV\rbrack = p\left( \frac{AInGain}{65536}*\ h\left( g\left( f\left( Raw\ input\ \lbrack mV\rbrack \right) \right) + AInOffset\ \lbrack mV\rbrack \right)\  \right)
+\text{AInPort}\ [\text{mV}] = p\!\left( \frac{\text{AInGain}}{65536} \cdot h\!\left( g\!\left( f\!\left( \text{Raw input}\ [\text{mV}] \right) \right) + \text{AInOffset}\ [\text{mV}] \right) \right)
 $$
 
 where $f$, $g$, $h$ and $p$ are functions of analog filter, digital filter, first deadband filter and second deadband filter, respectively.

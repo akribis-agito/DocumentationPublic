@@ -71,7 +71,7 @@ If the upper 16 bits are **all zero**, the function is assigned to axis A — pr
 To use analog input 2 of axis C as the force feedback of axis A:
 
 $$
-CAInMode\lbrack 2\rbrack\ = \ 3\ + \ 2\hat{}16\ = \ 65539
+\text{CAInMode}[2] = 3 + 2^{16} = 65539
 $$
 
 ```text

@@ -37,7 +37,7 @@ Floating-point scale applied to the monitored parameter on an analog output (v5)
 Each control cycle, for an output in monitoring mode, the monitored parameter is multiplied by `AOutGain`, then the offset is added and the result converted to a DAC code:
 
 $$
-\text{DAC code} = \big(\text{parameter} \times \text{AOutGain} + \text{AOutOffset}\big) \times \text{(mV-to-DAC factor)}
+\text{DAC code} = \big(\text{parameter} \cdot \text{AOutGain} + \text{AOutOffset}\big) \cdot \text{(mV-to-DAC factor)}
 $$
 
 Because the emulated parameter is treated as millivolts, choose `AOutGain` so the parameter's working range maps usefully onto the ±11905 mV output span. A negative gain inverts the output.

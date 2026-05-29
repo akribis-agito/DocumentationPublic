@@ -39,7 +39,7 @@ Maximum time allowed at peak current; sets the I²t time constant.
 The firmware solves for the filter time constant so that a worst-case step to `PeakCL` reaches the continuous threshold `ContCL²` after exactly `PeakTime`:
 
 $$
-\frac{1}{\tau} = \frac{\ln\!\left(1 - \dfrac{ContCL^{2}}{PeakCL^{2}}\right)}{-\,PeakTime \times 0.001}
+\frac{1}{\tau} = \frac{\ln\!\left(1 - \dfrac{\text{ContCL}^{2}}{\text{PeakCL}^{2}}\right)}{-\,\text{PeakTime} \times 0.001}
 $$
 
 A larger `PeakTime` gives a longer τ — the motor is allowed to dwell at peak current for longer before the limitation (or trip) occurs. See [ContCL](ContCL.md) for the full mechanism.

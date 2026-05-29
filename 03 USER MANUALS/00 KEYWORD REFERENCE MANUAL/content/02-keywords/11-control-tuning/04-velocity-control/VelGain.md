@@ -47,11 +47,11 @@ In gantry mode the gantry-specific velocity gain is used in place of `VelGain` f
 The velocity controller acts on [VelErr](../../10-motion/01-kinematics-status/VelErr.md) (the velocity reference [VelRef](../../10-motion/01-kinematics-status/VelRef.md) minus the velocity feedback). The proportional term and the integral are summed and scaled internally to produce the velocity-PI output:
 
 $$
-\text{proportional} = VelErr \times VelGain
+\text{proportional} = \text{VelErr} \cdot \text{VelGain}
 $$
 
 $$
-\text{VelPIOutput} = \big( \text{proportional} + \text{integral} \big) \times k_{scale}
+\text{VelPIOutput} = \big( \text{proportional} + \text{integral} \big) \cdot k_{\text{scale}}
 $$
 
 The integral is the running accumulation of `proportional × VelKi` (see [VelKi](VelKi.md)). `VelPIOutput` then passes through the velocity filters ([VelFiltOn](VelFiltOn.md) / [VelFiltDef](VelFiltDef.md)) and, in position mode, has the acceleration and velocity feed-forwards added to form the current command [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md).

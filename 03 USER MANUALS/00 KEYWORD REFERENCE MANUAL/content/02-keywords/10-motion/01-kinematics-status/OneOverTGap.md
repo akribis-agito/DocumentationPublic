@@ -41,13 +41,13 @@ The valid range is `0`–`11` (the value is masked to 4 bits and written to the 
 ## How it works
 
 $$
-Gap\lbrack counts\rbrack = 2^{OneOverTGap}
+\text{Gap}\,[\text{counts}] = 2^{\text{OneOverTGap}}
 $$
 
 The timing unit times the interval over which the encoder advances by `gap` counts, latching the timer period when the gap is reached; the internal counters then reset, ready for the next gap. On each control cycle the gap and timer frequency are combined into the velocity:
 
 $$
-Vel\lbrack 4\rbrack = \frac{2^{OneOverTGap}}{2^{OneOverTFreq}} \times \frac{\text{system clock}}{\text{latched timer period}}
+\text{Vel}[4] = \frac{2^{\text{OneOverTGap}}}{2^{\text{OneOverTFreq}}} \cdot \frac{\text{system clock}}{\text{latched timer period}}
 $$
 
 The first factor (`2^OneOverTGap / 2^OneOverTFreq`) is precomputed once whenever `OneOverTGap` or [OneOverTFreq](OneOverTFreq.md) is written, so each control cycle only performs the system-clock-over-period division and one multiply.

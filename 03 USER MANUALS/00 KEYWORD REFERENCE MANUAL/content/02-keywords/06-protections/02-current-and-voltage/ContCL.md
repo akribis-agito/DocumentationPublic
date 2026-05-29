@@ -47,7 +47,7 @@ The I²t scheme runs a first-order low-pass filter on the squared motor current 
 When any of `ContCL`, `PeakCL` or `PeakTime` changes, the firmware recomputes the filter constant so that a step from zero up to `PeakCL` reaches `ContCL²` after exactly `PeakTime`:
 
 $$
-\frac{1}{\tau} = \frac{\ln\!\left(1 - \dfrac{ContCL^{2}}{PeakCL^{2}}\right)}{-\,PeakTime \times 0.001}
+\frac{1}{\tau} = \frac{\ln\!\left(1 - \dfrac{\text{ContCL}^{2}}{\text{PeakCL}^{2}}\right)}{-\,\text{PeakTime} \times 0.001}
 $$
 
 (`PeakTime` is in ms.) The discrete filter is then run every control cycle on `MotorCurr²`.
@@ -58,8 +58,8 @@ $$
 
 | Condition | Action |
 |-----------|--------|
-| $I_{filt}^{2} > ContCL^{2}$ | I²t limitation engages |
-| $I_{filt}^{2} < 0.90 \times ContCL^{2}$ | I²t limitation releases |
+| $I_{filt}^{2} > \text{ContCL}^{2}$ | I²t limitation engages |
+| $I_{filt}^{2} < 0.90 \times \text{ContCL}^{2}$ | I²t limitation releases |
 
 The 10 % hysteresis prevents rapid chattering at the threshold. While the limitation is engaged, the effective peak limit used by the current-command saturation is lowered from `PeakCL` to the effective continuous value, and [StatReg](../../07-status-and-faults/StatReg.md) bit 25 ("power limit") is set.
 

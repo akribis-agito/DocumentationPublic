@@ -21,31 +21,31 @@ For the **standalone controller**, the filter is characterized as follows:
 
    - If `EncFilt` is 0:
 
-     $$Filter\ frequency = DSP\ clock\ frequency = 300\ \lbrack MHz\rbrack$$
+     $$\text{Filter frequency} = \text{DSP clock frequency} = 300\ [\text{MHz}]$$
 
    - If `EncFilt` is not 0:
 
-     $$Filter\ frequency = 300/(2*EncFilt)\ \lbrack MHz\rbrack$$
+     $$\text{Filter frequency} = \frac{300}{2 \cdot \text{EncFilt}}\ [\text{MHz}]$$
 
 3. The maximum theoretical input frequency (when no noise is present) is as follows.
 
    - If `EncFilt` is 0:
 
-     $$Max\ input\ frequency = 300/12\ \lbrack MHz\rbrack$$
+     $$\text{Max input frequency} = \frac{300}{12}\ [\text{MHz}]$$
 
    - If `EncFilt` is not 0:
 
-     $$Max\ input\ frequency = 300/(2*12*EncFilt)\ \lbrack MHz\rbrack$$
+     $$\text{Max input frequency} = \frac{300}{2 \cdot 12 \cdot \text{EncFilt}}\ [\text{MHz}]$$
 
 4. The maximum theoretical supported speed (when no noise is present) is as follows.
 
    - If `EncFilt` is 0:
 
-     $$Max\ theoretical\ supported\ speed = (4*3E8)/12\ \lbrack count/s\rbrack = 1.0E8\ \lbrack count/s\rbrack$$
+     $$\text{Max theoretical supported speed} = \frac{4 \cdot 3 \cdot 10^{8}}{12}\ [\text{count/s}] = 1.0 \cdot 10^{8}\ [\text{count/s}]$$
 
    - If `EncFilt` is not 0:
 
-     $$Max\ theoretical\ supported\ speed = \frac{4*3E8}{2*12*EncFilt}\left\lbrack \frac{count}{s} \right\rbrack = 5E7/EncFilt\ \lbrack count/s\rbrack$$
+     $$\text{Max theoretical supported speed} = \frac{4 \cdot 3 \cdot 10^{8}}{2 \cdot 12 \cdot \text{EncFilt}}\ \left[\frac{\text{count}}{\text{s}}\right] = \frac{5 \cdot 10^{7}}{\text{EncFilt}}\ [\text{count/s}]$$
 
 5. From the filter point of view and disregarding hardware limitations, the highest filter frequency is 300 MHz, and the highest input frequency is 25 MHz when `EncFilt=0`, assuming no noise.
 
@@ -55,15 +55,15 @@ For **Central-i remote units**, the filter is characterized as follows:
 
 2. The filter frequency (sampling frequency) is determined by the `EncFilt` parameter.
 
-   $$Filter\ frequency = 100/2^{(EncFilt + 1)}\ \lbrack MHz\rbrack$$
+   $$\text{Filter frequency} = \frac{100}{2^{\,\text{EncFilt} + 1}}\ [\text{MHz}]$$
 
 3. The maximum theoretical input frequency (when no noise is present) is as follows.
 
-   $$Max\ input\ frequency = 100/(8*2^{(EncFilt + 1)})\ \lbrack MHz\rbrack$$
+   $$\text{Max input frequency} = \frac{100}{8 \cdot 2^{\,\text{EncFilt} + 1}}\ [\text{MHz}]$$
 
 4. The maximum theoretical supported speed (when no noise is present) is as follows.
 
-   $$Max\ theoretical\ supported\ speed = (4*1E8)/(8*2^{(EncFilt + 1)})\ \lbrack count/s\rbrack$$
+   $$\text{Max theoretical supported speed} = \frac{4 \cdot 10^{8}}{8 \cdot 2^{\,\text{EncFilt} + 1}}\ [\text{count/s}]$$
 
 5. The table below summarises the respective frequencies and supported speed.
 

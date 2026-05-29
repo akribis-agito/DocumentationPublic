@@ -48,10 +48,10 @@ Read-only quadrature-axis feedback current (definition varies by motor type), in
 For three-phase motors, `Iq` is computed from the measured phase currents [Ia](Ia.md) and [Ib](Ib.md) using the sine/cosine of the electrical commutation angle θ (evaluated at the commutation angle and at θ − 120°):
 
 $$
-Iq\ \lbrack mA\rbrack = \frac{2}{\sqrt 3}\left(Ia \cdot \cos(\theta - 120^\circ) - Ib \cdot \cos\theta\right)
+\text{Iq}\ \lbrack mA\rbrack = \frac{2}{\sqrt 3}\left(\text{Ia} \cdot \cos(\theta - 120^\circ) - \text{Ib} \cdot \cos\theta\right)
 $$
 
-The factor $2/\sqrt3 \approx 1.1547$ is applied as written. θ is the electrical commutation angle from the commutation/auto-phasing logic. The direct counterpart [Id](Id.md) uses the corresponding sine terms.
+The factor $\frac{2}{\sqrt3} \approx 1.1547$ is applied as written. θ is the electrical commutation angle from the commutation/auto-phasing logic. The direct counterpart [Id](Id.md) uses the corresponding sine terms.
 
 In the rotating dq frame the q axis carries the torque-producing component and is orthogonal to the rotor flux on the d axis. Iq and Id are the projections of the measured current vector onto this rotating frame, indexed by θ:
 

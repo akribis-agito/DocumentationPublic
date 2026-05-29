@@ -41,7 +41,7 @@ Read-only direct-axis current reference, used in dq0-domain control; currently a
 In the three-phase current loop the firmware sets the direct-axis reference to zero unconditionally:
 
 $$
-IdRef\ \lbrack mA\rbrack = 0
+\text{IdRef}\ \lbrack mA\rbrack = 0
 $$
 
 so the d-axis PI controller drives [Id](Id.md) toward zero. A non-zero `IdRef` (for field weakening) is not produced by the current firmware. For brush and stepper motors the d axis is unused and `IdRef` is 0. Contact Agito if an application involving a non-zero `IdRef` (for example flux weakening) is needed.

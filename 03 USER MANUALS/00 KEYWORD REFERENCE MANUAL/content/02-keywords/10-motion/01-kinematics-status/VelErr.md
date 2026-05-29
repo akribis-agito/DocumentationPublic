@@ -54,13 +54,13 @@ For example, with `VelRef = 50000` user units/s and `Vel[1] = 49500`, `VelErr = 
 1. Under individual (non-gantry) mode:
 
 $$
-VelErr = VelRef - Vel\lbrack 1\rbrack
+\text{VelErr} = \text{VelRef} - \text{Vel}[1]
 $$
 
 2. Under gantry mode:
 
 $$
-VelErr = VelRef - GantryVel
+\text{VelErr} = \text{VelRef} - \text{GantryVel}
 $$
 
 Because the subtrahend is [Vel](Vel.md)`[1]`, what `VelErr` measures against changes with the loop configuration: `Vel[1]` is the main-encoder velocity normally, the (scaled) auxiliary velocity under dual-loop, an analog tacho under analog-tacho dual-loop, or the gantry velocity in gantry mode.

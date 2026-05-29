@@ -39,7 +39,7 @@ Sets the continuous logger sampling interval in servo cycles.
 The logger evaluates whether a sample is due on a fixed internal tick of roughly 1 ms (one tick per 16 servo cycles). `LoggerGap` is the number of those ticks between successive logged samples, so the sample period is approximately:
 
 $$
-Sample\ period\ (ms) \approx LoggerGap
+\text{Sample period}\ [\text{ms}] \approx \text{LoggerGap}
 $$
 
 The minimum value of `1` logs on every tick (about 1 kHz). The default of `10` corresponds to roughly one sample every 10 ms (about 100 Hz). Because the buffer holds a fixed number of samples, a larger `LoggerGap` trades time resolution for a longer total capture window before the buffer-full behavior set by [LoggerFullMod](LoggerFullMod.md) takes over.

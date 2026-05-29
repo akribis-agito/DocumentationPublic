@@ -39,7 +39,7 @@ GenData index where the ECAM cam pattern starts.
 `ECAMStart` must satisfy the ordering from which the overall cam pattern is derived:
 
 $$
-ECAMStart \leq ECAMStartCyc < ECAMEndCyc \leq ECAMEnd
+\text{ECAMStart} \leq \text{ECAMStartCyc} < \text{ECAMEndCyc} \leq \text{ECAMEnd}
 $$
 
 The four index keywords divide the cam pattern into three parts that the controller plays back as the master advances:

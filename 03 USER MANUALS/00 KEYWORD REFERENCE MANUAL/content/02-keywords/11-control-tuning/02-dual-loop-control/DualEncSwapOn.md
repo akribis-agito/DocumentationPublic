@@ -47,7 +47,7 @@ In pseudo dual-loop control, both the position and the velocity loop use the mot
 Under pseudo dual-loop, the position feedback [Pos](../../../02-keywords/10-motion/01-kinematics-status/Pos.md) is formed from the auxiliary feedback [AuxPos](../../../02-keywords/10-motion/01-kinematics-status/AuxPos.md) scaled by the dual-loop factor:
 
 $$
-Pos = AuxPos \times \frac{DualLoopFact}{65536}
+\text{Pos} = \text{AuxPos} \cdot \frac{\text{DualLoopFact}}{65536}
 $$
 
 so the position loop sees the motor motion expressed in load units. A position offset is captured at the moment of switching so that engaging or leaving pseudo dual-loop does not produce a position step.

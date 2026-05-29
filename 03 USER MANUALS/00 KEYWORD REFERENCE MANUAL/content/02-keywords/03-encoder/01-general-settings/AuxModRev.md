@@ -32,7 +32,7 @@ Modulo revolution divisor for the auxiliary encoder (not implemented in current 
 
 ## Overview
 
-`AuxModRev` is the modulo revolution divisor for the auxiliary encoder, the auxiliary-encoder counterpart of [ModRev](../04-modulo-mode/ModRev.md) for the main encoder. When set to a non-zero value it is intended to wrap the auxiliary encoder position to the range $[0, AuxModRev - 1]$. It is an axis-scope parameter saved to flash and cannot be changed while the motor is on or in motion.
+`AuxModRev` is the modulo revolution divisor for the auxiliary encoder, the auxiliary-encoder counterpart of [ModRev](../04-modulo-mode/ModRev.md) for the main encoder. When set to a non-zero value it is intended to wrap the auxiliary encoder position to the range $[0,\ \text{AuxModRev} - 1]$. It is an axis-scope parameter saved to flash and cannot be changed while the motor is on or in motion.
 
 > **Availability:** `AuxModRev` is flagged `not_implemented` in the current firmware. The parameter is defined and stored, but the control loop does not act on it — the per-cycle modulo wrap acts on the main encoder ([Pos](../../10-motion/01-kinematics-status/Pos.md)) only. Setting `AuxModRev` therefore has no effect on the auxiliary feedback ([AuxPos](../../10-motion/01-kinematics-status/AuxPos.md)). Modulo mode is currently supported on the main encoder only; contact Agito if auxiliary-encoder modulo is required.
 

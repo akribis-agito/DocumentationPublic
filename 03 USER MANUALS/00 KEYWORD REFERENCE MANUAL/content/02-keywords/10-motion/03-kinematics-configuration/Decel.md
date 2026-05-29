@@ -48,7 +48,7 @@ Deceleration rate for point-to-point motion, in user units per second squared.
 Each control cycle the profiler forms the effective deceleration as the product of `Decel` and [AccelFact](AccelFact.md):
 
 $$
-Decel_{eff} = Decel \times AccelFact
+\text{Decel}_{\text{eff}} = \text{Decel} \cdot \text{AccelFact}
 $$
 
 ### Deceleration-distance lookahead
@@ -56,7 +56,7 @@ $$
 `Decel` is the rate the profiler plans its stop with. Every cycle it computes the velocity from which the axis could still come to rest exactly at [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) using `Decel_eff`:
 
 $$
-v_{dec} = -Decel_{eff}\,T_s + \sqrt{Decel_{eff}^{2}\,T_s^{2} + 2\,Decel_{eff}\,(target - posRef)\,T_s}
+v_{\text{dec}} = -\text{Decel}_{\text{eff}}\,T_s + \sqrt{\text{Decel}_{\text{eff}}^{2}\,T_s^{2} + 2\,\text{Decel}_{\text{eff}}\,(\text{target} - \text{PosRef})\,T_s}
 $$
 
 When the rising profiler velocity exceeds this `v_dec`, the profiler clamps to `v_dec` and the motion enters its deceleration phase (the deceleration motion-status bit is set). `Decel` therefore sets the **trailing slope** of the trapezoidal velocity profile. A larger `Decel` lets the axis run at `Speed` longer before braking; a smaller `Decel` starts braking earlier and from a lower velocity.

@@ -37,7 +37,7 @@ Current reference offset (mA) applied on top of the motor's current reference.
 In the current control loop, while the motor is enabled and commutation (auto-phasing) is complete, the firmware **adds** `CurrRefOffset` directly to the current reference each control cycle:
 
 $$
-CurrRef \mathrel{+}= CurrRefOffset
+\text{CurrRef} \mathrel{+}= \text{CurrRefOffset}
 $$
 
 The offset is applied after the brushless anti-cogging term ([UPMVelTable](UPMVelTable.md)) and before the current limitations and saturation handling, so it is a constant bias on the current reference that is still subject to the current limits downstream. The firmware deliberately applies it only after commutation is complete: any current injection that introduces a DC offset must wait for phasing, otherwise an enabled-but-unphased motor could run away.

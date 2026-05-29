@@ -17,15 +17,15 @@ Both arrays are 1-indexed and written at the same index as their time-stamp comp
 
 | Condition | Array used | Corresponding index |
 |:--:|:--:|:--:|
-| $1 \leq LockCntr \leq 50$ | LockValTable | $LockCntr$ |
-| $51 \leq LockCntr \leq 100$ | LockValTabB | $LockCntr - 50$ |
+| $1 \leq \text{LockCntr} \leq 50$ | LockValTable | $\text{LockCntr}$ |
+| $51 \leq \text{LockCntr} \leq 100$ | LockValTabB | $\text{LockCntr} - 50$ |
 
 **Central-i** (65000 + 65000 = 130000 events):
 
 | Condition | Array used | Corresponding index |
 |:--:|:--:|:--:|
-| $1 \leq LockCntr \leq 65000$ | LockValTable | $LockCntr$ |
-| $65001 \leq LockCntr \leq 130000$ | LockValTabB | $LockCntr - 65000$ |
+| $1 \leq \text{LockCntr} \leq 65000$ | LockValTable | $\text{LockCntr}$ |
+| $65001 \leq \text{LockCntr} \leq 130000$ | LockValTabB | $\text{LockCntr} - 65000$ |
 
 Once both arrays are full, position logging stops while [LockCntr](LockCntr-AuxLockCntr.md) and [LockVal](LockVal-AuxLockVal.md) keep updating.
 

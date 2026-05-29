@@ -47,19 +47,19 @@ Acceleration feedforward is applied only in position operation mode ([OperationM
 Each control cycle, the reference acceleration is formed as the second difference of the post-processed (shaped and filtered) position reference — the same reference signal the position loop uses:
 
 $$
-a_{ref} = ref_{k} - 2 \cdot ref_{k-1} + ref_{k-2}
+a_{\text{ref}} = \text{ref}_{k} - 2 \cdot \text{ref}_{k-1} + \text{ref}_{k-2}
 $$
 
-The acceleration feedforward term is this reference acceleration scaled by `AccFFW` and a fixed gain scaling of 1/2⁸ (= 3.90625 × 10⁻³):
+The acceleration feedforward term is this reference acceleration scaled by `AccFFW` and a fixed gain scaling of $1/2^{8}$ (= 3.90625 × 10⁻³):
 
 $$
-AccTerm = a_{ref} \times AccFFW \times \frac{1}{2^{8}}
+\text{AccTerm} = \frac{a_{\text{ref}} \cdot \text{AccFFW}}{2^{8}}
 $$
 
-The acceleration term is summed with the velocity feedforward term (see [VelFFW](VelFFW.md)) to form the combined feedforward output. That output optionally passes through the feedforward filter ([FFFiltOn](FFFiltOn.md) / [FFFiltDef](FFFiltDef.md)) and is then added to the velocity-loop output to form the current reference [CurrRefCtrl](../../../02-keywords/09-current-and-voltage/02-motor-variables/CurrRefCtrl.md):
+The acceleration term is summed with the velocity feedforward term (see [VelFFW](VelFFW.md)) to form the combined feedforward output. That output optionally passes through the feedforward filter ([FFFiltOn](FFFiltOn.md) / [FFFiltDef](FFFiltDef.md), central-i v5) and is then added to the velocity-loop output to form the current reference [CurrRefCtrl](../../../02-keywords/09-current-and-voltage/02-motor-variables/CurrRefCtrl.md):
 
 $$
-CurrRefCtrl = (\text{velocity-loop output}) + (\text{filtered feedforward output})
+\text{CurrRefCtrl} = (\text{velocity-loop output}) + (\text{filtered feedforward output})
 $$
 
 During the segment transitions of coordinated/vector motion the feedforward output is momentarily forced to zero to avoid current spikes from limited transition precision.

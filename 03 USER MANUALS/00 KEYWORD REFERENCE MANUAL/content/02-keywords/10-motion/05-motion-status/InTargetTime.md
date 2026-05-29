@@ -41,7 +41,7 @@ Internally `InTargetTime` is stored and compared in **controller cycles (samples
 When entered from a command the value is scaled by `16.384` (samples per ms at the 16384 Hz sampling rate), so the keyword is supplied in milliseconds:
 
 $$
-samples = InTargetTime_{ms} \times 16.384
+\text{samples} = \text{InTargetTime}_{\text{ms}} \cdot 16.384
 $$
 
 The raw range is `0`…`163840` samples (0 to 10 s). The default is `16384 / 256 = 64` samples ≈ **3.9 ms**. A value of `0` makes the target-reached condition trigger on the first in-window cycle. It is saved to flash and may be changed while in motion.

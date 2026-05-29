@@ -22,7 +22,7 @@ When engaged, the drive activates the dynamic brake and sets [StatReg](../../07-
 While engaged, the shorting duty cycle is computed each cycle from how much headroom remains below the current limit:
 
 $$
-DynBrk = \frac{PeakCL_{limited} - |MotorCurr|}{PeakCL_{limited}} \times DynBrkRef \times scaler
+\text{DynBrk} = \frac{\text{PeakCL}_{limited} - |\text{MotorCurr}|}{\text{PeakCL}_{limited}} \times \text{DynBrkRef} \times scaler
 $$
 
 - The result is clamped to `[0, DynBrkRef]`, so as the braking current rises toward the [PeakCL](../02-current-and-voltage/PeakCL.md)/[ContCL](../02-current-and-voltage/ContCL.md) limit the duty cycle automatically backs off — the drive internally reduces the duty cycle to keep current within limits.

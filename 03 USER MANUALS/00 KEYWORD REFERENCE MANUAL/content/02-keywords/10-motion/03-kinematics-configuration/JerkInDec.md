@@ -61,7 +61,7 @@ A larger `JerkInDec` reaches the `Decel` limit faster (sharper, shorter braking 
 On v4 `JerkInDec` is a dimensionless integer with range 100–1,000,000,000 (default 1,000,000). The controller multiplies it by a fixed factor of 1000 before use, so the effective jerk constraint in counts/s³ is:
 
 $$
-jerk_{dec} = JerkInDec \times 1000
+\text{jerk}_{\text{dec}} = \text{JerkInDec} \cdot 1000
 $$
 
 ### Emergency stops

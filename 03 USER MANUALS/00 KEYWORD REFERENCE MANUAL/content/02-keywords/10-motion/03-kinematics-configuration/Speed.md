@@ -46,8 +46,8 @@ Target (maximum) velocity for point-to-point and jog motion, in user units per s
 In point-to-point motion the profiler takes the **magnitude** of `Speed` as the cruise ceiling; the travel direction is set by the relation between [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) and the current reference, not by the sign of `Speed`. Each cycle the profiler increments its velocity by `Accel × AccelFact × Ts` until it reaches the cruise ceiling, then holds it there until the deceleration-distance lookahead (using `Decel`) forces the braking phase:
 
 $$
-v_k \le |Speed| ,\qquad
-v_k = v_{k-1} + Accel_{eff}\times T_s \ \ \text{(accel phase)}
+v_k \le |\text{Speed}| ,\qquad
+v_k = v_{k-1} + \text{Accel}_{\text{eff}} \cdot T_s \ \ \text{(accel phase)}
 $$
 
 If the move is too short to reach `Speed`, the profile becomes triangular and `Speed` is never attained.

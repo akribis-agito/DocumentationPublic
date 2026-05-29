@@ -38,7 +38,7 @@ Damping ratio of each resonance suppressed by the input shaper.
 The damping ratio is stored scaled by 65536 — the stored value equals the damping ratio multiplied by 65536:
 
 $$
-ShapingDamp = \zeta \times 65536
+\text{ShapingDamp} = \zeta \cdot 65536
 $$
 
 | | Value |
@@ -57,7 +57,7 @@ $$
 K = e^{\,-\zeta \pi / \sqrt{1 - \zeta^{2}}}
 $$
 
-and the three impulse amplitudes for the corresponding resonance are formed from `K`:
+and the three impulse amplitudes for the corresponding resonance are formed from $K$:
 
 $$
 A_0 = \frac{1}{1 + 2K + K^2}, \quad A_1 = \frac{2K}{1 + 2K + K^2}, \quad A_2 = \frac{K^2}{1 + 2K + K^2}

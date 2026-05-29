@@ -46,7 +46,7 @@ The compensation is applied in the current control loop while the motor is enabl
 When enabled, each control cycle the firmware reads the present commutation angle ([ComtAng](../../15-commutation/ComtAng.md)), converts it from radians to degrees and rounds to the nearest whole degree, then uses that as the array index. The value found there is **added** to the current reference:
 
 $$
-CurrRef \mathrel{+}= UPMVelTable[\,\mathrm{round}(ComtAng_{deg})\,]
+\text{CurrRef} \mathrel{+}= \text{UPMVelTable}[\,\mathrm{round}(\text{ComtAng}_{deg})\,]
 $$
 
 So `UPMVelTable[54]` is the current compensation value applied when the commutation angle rounds to 54 degrees. The table holds one entry per whole degree over a full electrical cycle (0–360 degrees); it is 1-indexed, so the valid compensation entries begin at index `1`. All array elements default to 0 (no compensation).

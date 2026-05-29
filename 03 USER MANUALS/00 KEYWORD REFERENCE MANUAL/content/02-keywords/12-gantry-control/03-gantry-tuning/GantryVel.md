@@ -37,7 +37,7 @@ Read-only differential velocity of the gantry yaw axis.
 Each control cycle the controller derives `GantryVel` from the gantry feedback and uses it as the velocity term in the yaw velocity PI loop:
 
 $$
-VelErr = VelRef - GantryVel
+\text{VelErr} = \text{VelRef} - \text{GantryVel}
 $$
 
 where `VelRef` is the velocity command produced by the yaw position loop ([GantryPosGain](GantryPosGain.md) / [GantryPosKi](GantryPosKi.md)) and the resulting yaw velocity error is acted on by [GantryVelGain](GantryVelGain.md) and [GantryVelKi](GantryVelKi.md). `GantryVel` is reported in user units. The [dual-loop gantry control overview](../04-dual-loop-gantry-control/00-overview.md) describes how `GantryVel` is computed under each control structure (including the `DualLoopFact` scaling) relative to [GantryAuxVel](../02-gantry-kinematic-feedback/GantryAuxVel.md).

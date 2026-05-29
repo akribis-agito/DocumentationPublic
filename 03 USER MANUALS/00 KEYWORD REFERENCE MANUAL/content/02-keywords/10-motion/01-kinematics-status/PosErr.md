@@ -51,13 +51,13 @@ Each control cycle `PosErr` is computed from the post-processed (shaped+filtered
 1. Under individual (non-gantry) mode:
 
 $$
-PosErr = PosRef - Pos
+\text{PosErr} = \text{PosRef} - \text{Pos}
 $$
 
 2. Under gantry mode (axes A/B with gantry on):
 
 $$
-PosErr = PosRef - GantryFdbk
+\text{PosErr} = \text{PosRef} - \text{GantryFdbk}
 $$
 
 ### When it is forced to zero

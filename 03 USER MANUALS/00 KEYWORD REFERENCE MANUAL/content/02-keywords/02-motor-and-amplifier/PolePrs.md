@@ -40,11 +40,11 @@ This keyword only applies when [MotorType](MotorType.md) is 3 (linear DC brushle
 
 For brushless motors, `PolePrs` together with [EncRes](../03-encoder/01-general-settings/EncRes.md) defines the **electrical cycle** used for commutation. The controller pre-computes the counts per electrical cycle as
 
-$$Counts\ per\ electrical\ cycle = \frac{EncRes}{PolePrs}$$
+$$Counts\ per\ electrical\ cycle = \frac{\text{EncRes}}{\text{PolePrs}}$$
 
-and converts a feedback position into an electrical angle by multiplying its position-within-cycle by $2\pi / (EncRes/PolePrs)$. That angle drives the inverse-Park transformation that produces the three phase voltages. A wrong `PolePrs` therefore mis-scales the electrical angle, so commutation fails and the motor can run away — set it correctly before enabling.
+and converts a feedback position into an electrical angle by multiplying its position-within-cycle by $2\pi / (\text{EncRes}/\text{PolePrs})$. That angle drives the inverse-Park transformation that produces the three phase voltages. A wrong `PolePrs` therefore mis-scales the electrical angle, so commutation fails and the motor can run away — set it correctly before enabling.
 
-For closed-loop steppers, `PolePrs` (electrical cycles per revolution) and [StepBits](StepBits.md) define the *steps-per-count* factor used to convert the velocity reference into stepping increments: $StepsPerCount = PolePrs \cdot 2^{StepBits} / EncRes$.
+For closed-loop steppers, `PolePrs` (electrical cycles per revolution) and [StepBits](StepBits.md) define the *steps-per-count* factor used to convert the velocity reference into stepping increments: $\text{StepsPerCount} = \text{PolePrs} \cdot 2^{\text{StepBits}} / \text{EncRes}$.
 
 `PolePrs` is interpreted differently per motor type:
 
@@ -52,7 +52,7 @@ For closed-loop steppers, `PolePrs` (electrical cycles per revolution) and [Step
 | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 3 (Linear DC brushless) | PolePrs is the number of pole pairs per magnetic period. In short, user must always set PolePrs = 1 for linear brushless motor.                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | 4 (Rotary DC brushless) | PolePrs is the number of pole pairs per mechanical revolution of rotary motor.                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| 7 (Stepper closed loop) | PolePrs is the number of electrical cycles (1 electrical cycle = 1 set of full-step excitation sequence) per mechanical revolution of 2-phase stepper motor. In 1 electrical cycle, there are total of 4 full steps. Normally, stepper motor manufacturers specify the resolution in terms of physical angle per one full step. This means in 1 revolution, the number of electrical cycles is $$PolePrs = \ \ \frac{360\lbrack physical\ deg\rbrack}{4 \bullet Manufacturer\ step\ angle\left\lbrack \frac{physical\ deg}{step\ count} \right\rbrack}$$ |
+| 7 (Stepper closed loop) | PolePrs is the number of electrical cycles (1 electrical cycle = 1 set of full-step excitation sequence) per mechanical revolution of 2-phase stepper motor. In 1 electrical cycle, there are total of 4 full steps. Normally, stepper motor manufacturers specify the resolution in terms of physical angle per one full step. This means in 1 revolution, the number of electrical cycles is $$\text{PolePrs} = \ \ \frac{360\lbrack physical\ deg\rbrack}{4 \cdot Manufacturer\ step\ angle\left\lbrack \frac{physical\ deg}{step\ count} \right\rbrack}$$ |
 
 ## Examples
 

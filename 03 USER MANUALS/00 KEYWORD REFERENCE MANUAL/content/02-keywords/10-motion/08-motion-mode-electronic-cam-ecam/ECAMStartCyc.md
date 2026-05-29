@@ -39,7 +39,7 @@ GenData index where the cyclical/repeating ECAM cam pattern starts.
 `ECAMStartCyc` must satisfy the ordering from which the overall cam pattern is derived:
 
 $$
-ECAMStart \leq ECAMStartCyc < ECAMEndCyc \leq ECAMEnd
+\text{ECAMStart} \leq \text{ECAMStartCyc} < \text{ECAMEndCyc} \leq \text{ECAMEnd}
 $$
 
 `ECAMStartCyc` and [ECAMEndCyc](ECAMEndCyc.md) bound the repeating segment that is replayed `abs(ECAMCycles)` times (see [ECAMStart](ECAMStart.md) for the leading / repeating / trailing segment model). As the master advances past `ECAMEndCyc`, the controller wraps the master window back by one cycle width, replays the segment from `ECAMStartCyc` again, and steps [ECAMCycCount](ECAMCycCount.md). The master spacing of one cycle equals `abs(ECAMGap) * (ECAMEndCyc - ECAMStartCyc)`.

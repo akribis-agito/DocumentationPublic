@@ -36,7 +36,7 @@ Enables gantry MIMO control on the A axis, slaving the A and B axes together.
 
 When gantry mode is on, motion of the gantry stage is commanded by moving the A axis. The gantry feedbacks reported by [GantryFdbk](../02-gantry-kinematic-feedback/GantryFdbk.md) and the initial offset captured in [GantryOffset](../02-gantry-kinematic-feedback/GantryOffset.md) are referenced to this mode, and the yaw correction set by [GantryYawRef](GantryYawRef.md) is applied while it is active.
 
-`GantryOn` is set on the master (linear) axis, which is the even axis of each pair — A is the master and B the yaw axis; on a multi-axis controller C/E/G can likewise be masters with D/F/H as their yaw axes. `?GantryOn` on a yaw axis returns an error. The two axes of a pair must always be used together. `AGantryOn` is automatically cleared to `0` whenever either motor of the pair turns off, so gantry mode is normally enabled only after both motors have been turned on and phased. It is axis-scoped and not saved to flash.
+`GantryOn` is set on the master (linear) axis, which is the even axis of each pair — A is the master and B the yaw axis; on a multi-axis controller C/E/G can likewise be masters with D/F/H as their yaw axes. Writing `GantryOn` on a yaw axis (`BGantryOn=1`, etc.) returns an error. The two axes of a pair must always be used together. `AGantryOn` is automatically cleared to `0` whenever either motor of the pair turns off, so gantry mode is normally enabled only after both motors have been turned on and phased. It is axis-scoped and not saved to flash.
 
 ## How it works
 

@@ -61,7 +61,7 @@ A larger `JerkInAcc` makes acceleration reach the `Accel` limit faster (sharper,
 On v4 `JerkInAcc` is a dimensionless integer with range 100–1,000,000,000 (default 1,000,000). The controller multiplies the value by a fixed factor of 1000 before applying it in the profiler, so the effective jerk constraint in counts/s³ is:
 
 $$
-jerk_{acc} = JerkInAcc \times 1000
+\text{jerk}_{\text{acc}} = \text{JerkInAcc} \cdot 1000
 $$
 
 ### Emergency stops

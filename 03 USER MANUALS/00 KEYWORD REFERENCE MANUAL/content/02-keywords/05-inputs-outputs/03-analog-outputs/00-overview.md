@@ -15,13 +15,13 @@ The value is scaled with a bit-shifting operation (AOutShifts), before added wit
 The overall formula for analog output is given by,
 
 $$
-Analog\ Output\ \lbrack mV\rbrack = Parameter\ \lbrack mV\rbrack*2\hat{}AOutShifts\ \  + AOutOffset\ \lbrack mV\rbrack
+\text{Analog Output}\ [\text{mV}] = \text{Parameter}\ [\text{mV}] \cdot 2^{\text{AOutShifts}} + \text{AOutOffset}\ [\text{mV}]
 $$
 
 On **Central-i v5** the power-of-two scaler is replaced by a floating-point gain ([AOutGain](AOutGain.md)) that allows any real multiplier:
 
 $$
-Analog\ Output\ \lbrack mV\rbrack = Parameter\ \lbrack mV\rbrack \times AOutGain\ + AOutOffset\ \lbrack mV\rbrack
+\text{Analog Output}\ [\text{mV}] = \text{Parameter}\ [\text{mV}] \cdot \text{AOutGain} + \text{AOutOffset}\ [\text{mV}]
 $$
 
 The DAC has a scale of approximately −2.752457 LSB/mV, so the full-scale output is ±11905 mV.

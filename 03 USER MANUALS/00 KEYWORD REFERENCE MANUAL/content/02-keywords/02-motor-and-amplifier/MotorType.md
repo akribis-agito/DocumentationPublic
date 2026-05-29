@@ -67,51 +67,51 @@ Changing `MotorType` while it is a brushless type re-arms commutation — the co
 
 For brushless motors the electrical angle is derived from the feedback. The controller pre-computes one electrical cycle as
 
-$$Counts\ per\ electrical\ cycle = \frac{EncRes}{PolePrs}$$
+$$Counts\ per\ electrical\ cycle = \frac{\text{EncRes}}{\text{PolePrs}}$$
 
-and a feedback position is converted to electrical radians by multiplying its position-within-cycle by $2\pi / (EncRes/PolePrs)$. The three phase voltages (Va, Vb, Vc) are then produced from the q/d current references through the inverse-Park transformation using this angle. A wrong [PolePrs](PolePrs.md) or [EncRes](../03-encoder/01-general-settings/EncRes.md) therefore mis-scales the electrical angle and commutation will not work.
+and a feedback position is converted to electrical radians by multiplying its position-within-cycle by $2\pi / (\text{EncRes}/\text{PolePrs})$. The three phase voltages ($\text{Va}$, $\text{Vb}$, $\text{Vc}$) are then produced from the q/d current references through the inverse-Park transformation using this angle. A wrong [PolePrs](PolePrs.md) or [EncRes](../03-encoder/01-general-settings/EncRes.md) therefore mis-scales the electrical angle and commutation will not work.
 
 ### Open-loop stepper (MotorType = 6)
 
 A 2-phase stepper motor, requiring 3 pins (phase A, phase B, and the joined phase A/B return). One electrical cycle (one full-step excitation sequence) contains 4 full steps. Manufacturers normally specify resolution as physical angle per full step. On the Agito controller the number of steps per electrical cycle is defined by [StepBits](StepBits.md) (minimum 2, i.e. 4 full steps).
 
-The number of position counts (for [PosRef](../10-motion/01-kinematics-status/PosRef.md), [AbsTrgt](../10-motion/13-motion-mode-ptp/AbsTrgt.md), etc.) per electrical cycle is $2^{StepBits}$.
+The number of position counts (for [PosRef](../10-motion/01-kinematics-status/PosRef.md), [AbsTrgt](../10-motion/13-motion-mode-ptp/AbsTrgt.md), etc.) per electrical cycle is $2^{\text{StepBits}}$.
 
 The physical resolution is
 
-$$Resolution\ \left\lbrack \frac{physical\ deg}{count} \right\rbrack = \ \frac{4 \bullet Manufacturer\ step\ angle\left\lbrack \frac{physical\ deg}{count} \right\rbrack}{2^{StepBits}}$$
+$$Resolution\ \left\lbrack \frac{physical\ deg}{count} \right\rbrack = \ \frac{4 \cdot Manufacturer\ step\ angle\left\lbrack \frac{physical\ deg}{count} \right\rbrack}{2^{\text{StepBits}}}$$
 
 and the number of counts per revolution is
 
-$$Counts\ per\ revolution = \ \ \frac{360\lbrack physical\ deg\rbrack \bullet 2^{StepBits}}{4 \bullet Manufacturer\ step\ angle\left\lbrack \frac{physical\ deg}{count} \right\rbrack}$$
+$$Counts\ per\ revolution = \ \ \frac{360\lbrack physical\ deg\rbrack \cdot 2^{\text{StepBits}}}{4 \cdot Manufacturer\ step\ angle\left\lbrack \frac{physical\ deg}{count} \right\rbrack}$$
 
 In open-loop stepper control, no position feedback is used ([Pos](../10-motion/01-kinematics-status/Pos.md) = 0 and [PosErr](../10-motion/01-kinematics-status/PosErr.md) = 0). The user commands motion by changing the position reference ([PosRef](../10-motion/01-kinematics-status/PosRef.md)), which is used to determine the stepping currents for phases A and B and to track the stepper location.
 
-The stepping currents are generated each control cycle from the position-within-electrical-cycle. The firmware masks `PosRef` to the cycle (`PosRef & (2^StepBits − 1)`), converts that to an electrical angle θ = position × 2π/2^StepBits, and sets the two phase-current references from a sine/cosine lookup scaled by the active stepping current ([StepInMotCurr](StepInMotCurr.md) / [StepInPosCurr](StepInPosCurr.md), held in the current reference):
+The stepping currents are generated each control cycle from the position-within-electrical-cycle. The firmware masks `PosRef` to the cycle (`PosRef & (2^StepBits − 1)`), converts that to an electrical angle $\theta = \text{position} \cdot 2\pi/2^{\text{StepBits}}$, and sets the two phase-current references from a sine/cosine lookup scaled by the active stepping current ([StepInMotCurr](StepInMotCurr.md) / [StepInPosCurr](StepInPosCurr.md), held in the current reference):
 
-$$IaRef = I \cdot \sin\theta \qquad IbRef = I \cdot \cos\theta$$
+$$\text{IaRef} = I \cdot \sin\theta \qquad \text{IbRef} = I \cdot \cos\theta$$
 
-A 2-phase current loop then closes on Ia and Ib, producing phase voltages Va and Vb with **Vc = 0** (phase A/B returns are tied to the amplifier's C phase). The q/d (Park) components are unused for steppers and reported as zero.
+A 2-phase current loop then closes on $\text{Ia}$ and $\text{Ib}$, producing phase voltages $\text{Va}$ and $\text{Vb}$ with **$\text{Vc} = 0$** (phase A/B returns are tied to the amplifier's C phase). The q/d (Park) components are unused for steppers and reported as zero.
 
 ### Closed-loop stepper (MotorType = 7)
 
 Same 2-phase stepper hardware as above (3 pins; 4 full steps per electrical cycle; steps per electrical cycle defined by [StepBits](StepBits.md), minimum 2).
 
-The number of steps per electrical cycle is $2^{StepBits}$ [step count].
+The number of steps per electrical cycle is $2^{\text{StepBits}}$ [step count].
 
 The physical resolution is
 
-$$Resolution\ \left\lbrack \frac{physical\ deg}{step\ count} \right\rbrack = \ \frac{4 \bullet Manufacturer\ step\ angle\left\lbrack \frac{physical\ deg}{step\ count} \right\rbrack}{2^{StepBits}}$$
+$$Resolution\ \left\lbrack \frac{physical\ deg}{step\ count} \right\rbrack = \ \frac{4 \cdot Manufacturer\ step\ angle\left\lbrack \frac{physical\ deg}{step\ count} \right\rbrack}{2^{\text{StepBits}}}$$
 
 and the number of steps per revolution is
 
-$$Steps\ per\ revolution = \ \ \frac{360\lbrack physical\ deg\rbrack \bullet 2^{StepBits}}{4 \bullet Manufacturer\ step\ angle\left\lbrack \frac{physical\ deg}{step\ count} \right\rbrack}$$
+$$Steps\ per\ revolution = \ \ \frac{360\lbrack physical\ deg\rbrack \cdot 2^{\text{StepBits}}}{4 \cdot Manufacturer\ step\ angle\left\lbrack \frac{physical\ deg}{step\ count} \right\rbrack}$$
 
 In closed-loop stepper control, encoder feedback is used and position is defined in encoder counts (not step counts). Both the pole pairs per revolution ([PolePrs](PolePrs.md)) and the encoder count per revolution ([EncRes](../03-encoder/01-general-settings/EncRes.md)) must be provided. Only the position closed loop is used: [VelRef](../10-motion/01-kinematics-status/VelRef.md) is the sum of the position-loop output and the position derivative.
 
 The controller pre-computes a *steps-per-count* factor
 
-$$Steps\ per\ count = \frac{PolePrs \cdot 2^{StepBits}}{EncRes}$$
+$$Steps\ per\ count = \frac{\text{PolePrs} \cdot 2^{\text{StepBits}}}{\text{EncRes}}$$
 
 and each cycle converts `VelRef` (in count/s) to a step-count increment per sample, accumulates it into the stepper electrical-cycle position (wrapping within one electrical cycle), and then runs the **same** phase-current generation as open-loop stepper (mask to `2^StepBits − 1`, sine/cosine lookup scaled by the stepping current, then the Ia/Ib current loop with Vc = 0). A `MaxVel` that allows more than one electrical cycle of travel per control cycle is masked off, so set [MaxVel](../06-protections/03-motion/general-maximum-limits/MaxVel.md) sensibly.
 

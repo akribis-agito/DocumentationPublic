@@ -41,10 +41,10 @@ It is an axis-scoped array saved to flash, and cannot be changed while the axis 
 The gap is the denominator that converts an encoder reading to a table index:
 
 $$
-index_f = \frac{PosBeforeCorrection - MapStartPos[d]}{MapPosGap[d]}
+\text{index}_f = \frac{\text{PosBeforeCorrection} - \text{MapStartPos}[d]}{\text{MapPosGap}[d]}
 $$
 
-To keep this cheap in the real-time control interrupt, the firmware precomputes the reciprocal `1 / MapPosGap[d]` (as a single-precision float) whenever `MapPosGap` is written, and multiplies by it each cycle. Two consequences follow:
+To keep this cheap in the real-time control interrupt, the controller precomputes the reciprocal $1 / \text{MapPosGap}[d]$ (as a single-precision float) whenever `MapPosGap` is written, and multiplies by it each cycle. Two consequences follow:
 
 - **Must not be zero.** A zero gap would divide by zero, so the firmware silently substitutes the default `1000` if you set it to 0.
 - **Upper limit 8,000,000.** The reciprocal is held in a 32-bit float (24-bit mantissa); the range is capped so the gap is represented exactly and the index stays accurate.

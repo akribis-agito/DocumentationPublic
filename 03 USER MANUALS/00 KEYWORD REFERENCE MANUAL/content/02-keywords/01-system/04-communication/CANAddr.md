@@ -37,7 +37,7 @@ CAN base address of the controller node.
 At start-up the firmware combines the stored base address with the controller's hardware address DIP switches to form the **CAN initial address**:
 
 $$
-initial\ address = CANAddr + 16 \times (DIP\ address)
+\text{initial address} = \text{CANAddr} + 16 \cdot (\text{DIP address})
 $$
 
 From that initial address the controller assigns its CAN mailboxes:

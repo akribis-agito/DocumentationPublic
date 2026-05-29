@@ -40,7 +40,7 @@ The unit is Hz/100. For example, a cutoff of 4500 Hz is entered as `dPosRefFilt 
 The position reference is differenced cycle-to-cycle to obtain the raw reference velocity; that signal is passed through a single-pole low-pass filter whose corner is `dPosRefFilt`. The filter coefficient is derived from the cutoff and the control sample time, so a lower `dPosRefFilt` smooths the feed-forward more (at the cost of more lag), while a higher value tracks the raw reference velocity more closely. The filtered result is the [dPosRef](../../10-motion/01-kinematics-status/dPosRef.md) that [VelTrackFact](VelTrackFact.md) scales:
 
 $$
-VelRef = PosErr \times PosGain + \frac{dPosRef \times VelTrackFact}{1024}
+\text{VelRef} = \text{PosErr} \cdot \text{PosGain} + \frac{\text{dPosRef} \cdot \text{VelTrackFact}}{1024}
 $$
 
 - **Range / default:** `20000` to `1000000` (i.e. 200 Hz to 10000 Hz), default `1000000`.

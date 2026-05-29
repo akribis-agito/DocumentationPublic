@@ -38,7 +38,7 @@ Integral gain of the position loop (central-i v5) — accumulates the scaled pos
 Each control cycle the (filtered) position error is multiplied by [PosGain](PosGain.md) to form the proportional term. `PosKi` then multiplies that proportional term and the result is added into a running position integral. The proportional term plus the position integral, together with the velocity feed-forward, form the velocity-loop reference:
 
 $$
-VelRef = \left( PosErr \times PosGain \right) + \text{integral}\!\left( PosErr \times PosGain \times PosKi \right) + \frac{dPosRef \times VelTrackFact}{1024}
+\text{VelRef} = \left( \text{PosErr} \cdot \text{PosGain} \right) + \int \left( \text{PosErr} \cdot \text{PosGain} \cdot \text{PosKi} \right) \, dt + \frac{\text{dPosRef} \cdot \text{VelTrackFact}}{1024}
 $$
 
 - **What it multiplies:** the position-controller proportional output (`PosErr × PosGain`), before that product enters the integral accumulator.

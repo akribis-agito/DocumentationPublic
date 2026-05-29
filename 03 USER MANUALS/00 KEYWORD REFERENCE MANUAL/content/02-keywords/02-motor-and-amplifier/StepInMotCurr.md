@@ -42,7 +42,7 @@ This keyword only applies when [MotorType](MotorType.md) is 6 (open-loop stepper
 
 Each control cycle the firmware picks the stepper current from the motion status: if the axis is moving — [MotionStat](../10-motion/05-motion-status/MotionStat.md) is non-zero and **not** merely waiting for an input to start — it uses `StepInMotCurr`; otherwise it uses [StepInPosCurr](StepInPosCurr.md). The selected value becomes the current reference magnitude that scales the phase-current sine/cosine vectors:
 
-$$IaRef = StepInMotCurr \cdot \sin\theta \qquad IbRef = StepInMotCurr \cdot \cos\theta$$
+$$\text{IaRef} = \text{StepInMotCurr} \cdot \sin\theta \qquad \text{IbRef} = \text{StepInMotCurr} \cdot \cos\theta$$
 
 where the electrical angle θ comes from the commanded position (see [StepBits](StepBits.md)). A 2-phase current loop then drives Ia/Ib to these references. So `StepInMotCurr` directly sets the torque-producing current envelope during moves.
 

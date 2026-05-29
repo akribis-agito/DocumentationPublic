@@ -43,12 +43,12 @@ Read-only phase B voltage reference for space-vector modulation (PWM-count fract
 
 | Case | Source of Vb |
 |----|----|
-| Brushless, vector (dq0) control (ControlMode bit 1 = 0) | Inverse transform of the dq0 voltage outputs: $Vb\ = \ Vq \cdot \sin(\theta - 120^\circ) + Vd \cdot \cos(\theta - 120^\circ)$, with [Vd](Vd.md)/[Vq](Vq.md) from the dq current loops. |
+| Brushless, vector (dq0) control (ControlMode bit 1 = 0) | Inverse transform of the dq0 voltage outputs: $\text{Vb}\ = \ \text{Vq} \cdot \sin(\theta - 120^\circ) + \text{Vd} \cdot \cos(\theta - 120^\circ)$, with [Vd](Vd.md)/[Vq](Vq.md) from the dq current loops. |
 | Brushless or stepper, abc (phase) control (ControlMode bit 1 = 1) | Output of the phase B current PI loop on [IbErr](IbErr.md) ([CurrKi](../../11-control-tuning/06-current-control/CurrKi.md) integral + proportional, scaled by [CurrGain](../../11-control-tuning/06-current-control/CurrGain.md)). |
-| Brush (single-phase) motor | $Vb\ = \ -Va$ (phase B mirrors phase A). |
-| Current loop bypassed (ControlMode bit 2 = 1) | $Vb\ = \ IbRef$. |
+| Brush (single-phase) motor | $\text{Vb}\ = \ -\text{Va}$ (phase B mirrors phase A). |
+| Current loop bypassed (ControlMode bit 2 = 1) | $\text{Vb}\ = \ \text{IbRef}$. |
 
-The same post-processing as [Va](Va.md) then applies: brushless `Vc = -(Va + Vb)`, the enhanced-speed-range midpoint subtraction (ControlMode bit 0), and saturation to the maximum PWM amplitude which sets the voltage-saturation bit ([StatReg](../../07-status-and-faults/StatReg.md) bit 22).
+The same post-processing as [Va](Va.md) then applies: brushless $\text{Vc} = -(\text{Va} + \text{Vb})$, the enhanced-speed-range midpoint subtraction (ControlMode bit 0), and saturation to the maximum PWM amplitude which sets the voltage-saturation bit ([StatReg](../../07-status-and-faults/StatReg.md) bit 22).
 
 Vb lags Va by 120° of electrical angle, and Vc lags Vb by a further 120°:
 

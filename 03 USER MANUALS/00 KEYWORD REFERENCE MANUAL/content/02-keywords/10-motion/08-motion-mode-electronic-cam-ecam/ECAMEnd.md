@@ -39,7 +39,7 @@ GenData index where the ECAM cam pattern ends.
 `ECAMEnd` must satisfy the ordering from which the overall cam pattern is derived:
 
 $$
-ECAMStart \leq ECAMStartCyc < ECAMEndCyc \leq ECAMEnd
+\text{ECAMStart} \leq \text{ECAMStartCyc} < \text{ECAMEndCyc} \leq \text{ECAMEnd}
 $$
 
 `ECAMEnd` is the last entry of the pattern, terminating the trailing one-shot segment that runs from `ECAMEndCyc` to `ECAMEnd` after all repeating cycles complete (see the segment table in [ECAMStart](ECAMStart.md)). While the master sits at or beyond the master position that maps to `ECAMEnd` (the *post-end* region), the follower reference is clamped to `GenData[ECAMEnd]` (for positive [ECAMGap](ECAMGap.md)) so the follower holds steady at the end of the profile; with negative `ECAMGap` the clamped ends are swapped with `ECAMStart`. If a [StopECAM](StopECAM.md) is pending when the master reaches this clamp, the motion ends there.

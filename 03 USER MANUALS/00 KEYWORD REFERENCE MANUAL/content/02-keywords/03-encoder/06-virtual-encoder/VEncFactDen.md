@@ -36,7 +36,7 @@ Denominator of the scaling ratio applied to the virtual encoder source signal.
 
 ## How it works
 
-$$Output\ count = Source \times \frac{VEncFact}{VEncFactDen}$$
+$$\text{Output count} = \text{Source} \cdot \frac{\text{VEncFact}}{\text{VEncFactDen}}$$
 
 The firmware keeps a precomputed `1 / VEncFactDen` for the per-cycle tracking calculation, updated whenever the scaling factor is written. The default `VEncFactDen = 65536` (with `VEncFact = 65536`) gives unity scaling and matches the fixed `/65536` factor used by older firmware.
 

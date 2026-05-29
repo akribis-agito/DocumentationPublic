@@ -27,12 +27,13 @@ The table below shows the summary of general control keywords.
 | No. | Keywords | Summary |
 |----|----|----|
 | 1 | [CalcFilters](../../../02-keywords/11-control-tuning/01-general-keywords/CalcFilters.md) | Command for customisable filter coefficient recalculation |
-| 2 | [FilterStatus](../../../02-keywords/11-control-tuning/01-general-keywords/FilterStatus.md) | Customisable filter calculation status |
-| 3 | [ScheduleGains](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleGains.md) | Schedulable gains value in use |
-| 4 | [ScheduleGntry](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleGntry.md) | Pairs gain scheduling with the gantry-control state (central-i v5 only) |
-| 5 | [ScheduleMode](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleMode.md) | Gain scheduling mode |
-| 6 | [SchedulePos](../../../02-keywords/11-control-tuning/01-general-keywords/SchedulePos.md) | Position range of position-based gain scheduling |
-| 7 | [ScheduleSet](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleSet.md) | Index of gain/tuning set in use |
-| 8 | [ScheduleTemp](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleTemp.md) | Temperature range of temperature-based gain scheduling |
-| 9 | [ScheduleTime](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleTime.md) | Timing variable for gain scheduling |
-| 10 | [ScheduleVel](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleVel.md) | Velocity range of velocity-based gain scheduling |
+| 2 | [ClearIntegral](../../../02-keywords/11-control-tuning/01-general-keywords/ClearIntegral.md) | Command that zeroes the velocity-loop integrator |
+| 3 | [FilterStatus](../../../02-keywords/11-control-tuning/01-general-keywords/FilterStatus.md) | Customisable filter calculation status |
+| 4 | [ScheduleGains](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleGains.md) | Schedulable gains value in use |
+| 5 | [ScheduleGntry](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleGntry.md) | Pairs gain scheduling with the gantry-control state (central-i v5 only) |
+| 6 | [ScheduleMode](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleMode.md) | Gain scheduling mode |
+| 7 | [SchedulePos](../../../02-keywords/11-control-tuning/01-general-keywords/SchedulePos.md) | Position range of position-based gain scheduling |
+| 8 | [ScheduleSet](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleSet.md) | Index of gain/tuning set in use |
+| 9 | [ScheduleTemp](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleTemp.md) | Temperature range of temperature-based gain scheduling |
+| 10 | [ScheduleTime](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleTime.md) | Timing variable for gain scheduling |
+| 11 | [ScheduleVel](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleVel.md) | Velocity range of velocity-based gain scheduling |

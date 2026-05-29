@@ -50,11 +50,11 @@ Each array element represents a different elapsed time, measured from the start 
 In summary:
 
 $$
-ForceSamples\lbrack 2\rbrack = \ ForceSamples\lbrack 1\rbrack + \ ForceSamples\lbrack 4\rbrack
+\text{ForceSamples}[2] = \text{ForceSamples}[1] + \text{ForceSamples}[4]
 $$
 
 $$
-ForceSamples\lbrack 3\rbrack = \ ForceSamples\lbrack 2\rbrack + \ ForceInTTime
+\text{ForceSamples}[3] = \text{ForceSamples}[2] + \text{ForceInTTime}
 $$
 
 (`ForceInTTime` is expressed in the same controller-cycle units as the samples.)

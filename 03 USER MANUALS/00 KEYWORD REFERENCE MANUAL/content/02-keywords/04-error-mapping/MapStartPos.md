@@ -46,7 +46,7 @@ It is an axis-scoped array saved to flash, and cannot be changed while the axis 
 Each control cycle the firmware takes the selected encoder's uncorrected reading and converts it to a fractional table index for that dimension:
 
 $$
-index_f = \frac{PosBeforeCorrection - MapStartPos[d]}{MapPosGap[d]}
+\text{index}_f = \frac{\text{PosBeforeCorrection} - \text{MapStartPos}[d]}{\text{MapPosGap}[d]}
 $$
 
 The covered range of dimension `d` is therefore `MapStartPos[d]` up to `MapStartPos[d] + (MapLength[d] − 1) × MapPosGap[d]`. Readings **at or below** `MapStartPos[d]` clamp to the first point of that dimension; readings at or above the top clamp to the last point — outside the range the correction is held flat (no extrapolation). So `MapStartPos` should be set so the table brackets the full travel you want corrected.

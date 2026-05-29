@@ -11,7 +11,7 @@ For ECAM motion, axis behaves as a slave to a user-defined master variable (its 
 The cam pattern is stored in [GenData](../../../02-keywords/20-arrays/GenData.md), with the starting and ending indices being [ECAMStart](../../../02-keywords/10-motion/08-motion-mode-electronic-cam-ecam/ECAMStart.md) and [ECAMEnd](../../../02-keywords/10-motion/08-motion-mode-electronic-cam-ecam/ECAMEnd.md) respectively. If part/all of the pattern repeats, user can define the starting and ending indices of the repeating pattern through [ECAMStartCyc](../../../02-keywords/10-motion/08-motion-mode-electronic-cam-ecam/ECAMStartCyc.md) and [ECAMEndCyc](../../../02-keywords/10-motion/08-motion-mode-electronic-cam-ecam/ECAMEndCyc.md), and the number of occurrences through [ECAMCycles](../../../02-keywords/10-motion/08-motion-mode-electronic-cam-ecam/ECAMCycles.md). The indices follow the order as shown.
 
 $$
-ECAMStart \leq ECAMStartCyc < ECAMEndCyc \leq ECAMEnd
+\text{ECAMStart} \leq \text{ECAMStartCyc} < \text{ECAMEndCyc} \leq \text{ECAMEnd}
 $$
 
 User can trace the current cycle index by using [ECAMCycCount](../../../02-keywords/10-motion/08-motion-mode-electronic-cam-ecam/ECAMCycCount.md).
@@ -29,9 +29,9 @@ There are a few selectable configurations of ECAM motion, which are illustrated 
 ![image39.png](../../../assets/image39.png)
 ![image40.png](../../../assets/image40.png)
 
-> If ECAMCycles is positive, the number of similar patterns will be $ECAMCycles$, with ECAMCycCount spanning from 1 to ECAMCycles.
+> If ECAMCycles is positive, the number of similar patterns will be $\text{ECAMCycles}$, with ECAMCycCount spanning from 1 to ECAMCycles.
 >
-> If ECAMGap is positive, the array index will follow ascending order from ECAMStart to ECAMEnd (similarly from ECAMStartCyc to ECAMEndCyc for repetition) as the master value increases. If the master value goes below or beyond the range of values, slave position reference will clamp to the $C\  + \ GenData\lbrack ECAMStart\rbrack$ or $C\  + \ GenData\lbrack ECAMEnd\rbrack$, respectively.
+> If ECAMGap is positive, the array index will follow ascending order from ECAMStart to ECAMEnd (similarly from ECAMStartCyc to ECAMEndCyc for repetition) as the master value increases. If the master value goes below or beyond the range of values, slave position reference will clamp to the $C + \text{GenData}[\text{ECAMStart}]$ or $C + \text{GenData}[\text{ECAMEnd}]$, respectively.
 >
 > Under this combination of ECAMCycles and ECAMGap, the starting master position can be defined by a combination of master value upon the start of ECAM motion and [ECAMMasterIni](../../../02-keywords/10-motion/08-motion-mode-electronic-cam-ecam/ECAMMasterIni.md).
 
@@ -40,9 +40,9 @@ There are a few selectable configurations of ECAM motion, which are illustrated 
 ![image41.png](../../../assets/image41.png)
 ![image42.png](../../../assets/image42.png)
 
-> If ECAMCycles is positive, the number of similar patterns will be $ECAMCycles$, with ECAMCycCount spanning from 1 to ECAMCycles.
+> If ECAMCycles is positive, the number of similar patterns will be $\text{ECAMCycles}$, with ECAMCycCount spanning from 1 to ECAMCycles.
 >
-> If ECAMGap is negative, the array index will follow descending order from ECAMEnd to ECAMStart (similarly from ECAMStartCyc to ECAMEndCyc for repetition) as the master value increases. If the master value goes below or beyond the range of values, slave position reference will clamp to the $C\  + \ GenData\lbrack ECAMEnd\rbrack$ or $C\  + \ GenData\lbrack ECAMStart\rbrack$, respectively.
+> If ECAMGap is negative, the array index will follow descending order from ECAMEnd to ECAMStart (similarly from ECAMStartCyc to ECAMEndCyc for repetition) as the master value increases. If the master value goes below or beyond the range of values, slave position reference will clamp to the $C + \text{GenData}[\text{ECAMEnd}]$ or $C + \text{GenData}[\text{ECAMStart}]$, respectively.
 >
 > Under this combination of ECAMCycles and ECAMGap, the ending master position can be defined by a combination of master value upon the start of ECAM motion and ECAMMasterIni.
 
@@ -51,18 +51,18 @@ There are a few selectable configurations of ECAM motion, which are illustrated 
 ![image43.png](../../../assets/image43.png)
 ![image44.png](../../../assets/image44.png)
 
-> If ECAMCycles is negative, the number of similar patterns will be $2*abs(ECAMCycles)$, with ECAMCycCount spanning from -ECAMCycles + 1 to ECAMCycles. The middle location of the repeating pattern will be defined by a combination of master value upon the start of ECAM motion and ECAMMasterIni.
+> If ECAMCycles is negative, the number of similar patterns will be $2 \cdot |\text{ECAMCycles}|$, with ECAMCycCount spanning from -ECAMCycles + 1 to ECAMCycles. The middle location of the repeating pattern will be defined by a combination of master value upon the start of ECAM motion and ECAMMasterIni.
 >
-> Under positive ECAMGap, the array index will follow ascending order from ECAMStart to ECAMEnd (similarly from ECAMStartCyc to ECAMEndCyc for repetition) as the master value increases. If the master value goes below or beyond the range of values, slave position reference will clamp to the $C\  + \ GenData\lbrack ECAMStart\rbrack$ or $C\  + \ GenData\lbrack ECAMEnd\rbrack$, respectively.
+> Under positive ECAMGap, the array index will follow ascending order from ECAMStart to ECAMEnd (similarly from ECAMStartCyc to ECAMEndCyc for repetition) as the master value increases. If the master value goes below or beyond the range of values, slave position reference will clamp to the $C + \text{GenData}[\text{ECAMStart}]$ or $C + \text{GenData}[\text{ECAMEnd}]$, respectively.
 
 4.  ECAMGap \> 0 and ECAMCycles \< 0
 
 > ![image45.png](../../../assets/image45.png)
 ![image46.png](../../../assets/image46.png)
 
-> If ECAMCycles is negative, the number of similar patterns will be $2*abs(ECAMCycles)$, with ECAMCycCount spanning from -ECAMCycles + 1 to ECAMCycles. The middle location of the repeating pattern will be defined by a combination of master value upon the start of ECAM motion and ECAMMasterIni.
+> If ECAMCycles is negative, the number of similar patterns will be $2 \cdot |\text{ECAMCycles}|$, with ECAMCycCount spanning from -ECAMCycles + 1 to ECAMCycles. The middle location of the repeating pattern will be defined by a combination of master value upon the start of ECAM motion and ECAMMasterIni.
 >
-> With negative ECAMGap, the array index will follow descending order from ECAMEnd to ECAMStart (similarly from ECAMEndCyc to ECAMStartCyc for repetition) as the master value increases. If the master value goes below or beyond the range of values, slave position reference will clamp to the $C\  + \ GenData\lbrack ECAMEnd\rbrack$ or $C\  + \ GenData\lbrack ECAMStart\rbrack$, respectively.
+> With negative ECAMGap, the array index will follow descending order from ECAMEnd to ECAMStart (similarly from ECAMEndCyc to ECAMStartCyc for repetition) as the master value increases. If the master value goes below or beyond the range of values, slave position reference will clamp to the $C + \text{GenData}[\text{ECAMEnd}]$ or $C + \text{GenData}[\text{ECAMStart}]$, respectively.
 
 5.  ECAMGap \> 0 and ECAMCycles = 2147483647 (Endless ECAM)
 

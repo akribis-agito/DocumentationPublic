@@ -36,7 +36,7 @@ Digital filter applied to the Hall-sensor-based commutation angle in Hall-only c
 
 ## How it works
 
-In Hall-only commutation the angle would otherwise jump abruptly each time the Hall state changes (every 60° electrical), producing voltage/current spikes. `HallOnlyFilt` applies a first-order low-pass filter that blends the new Hall-derived angle with the previous cycle's filtered angle. With the setting expressed as a fraction `k = HallOnlyFilt / 100`:
+In Hall-only commutation the angle would otherwise jump abruptly each time the Hall state changes (every 60° electrical), producing voltage/current spikes. `HallOnlyFilt` applies a first-order low-pass filter that blends the new Hall-derived angle with the previous cycle's filtered angle. With the setting expressed as a fraction $k = \frac{\text{HallOnlyFilt}}{100}$:
 
 $$
 \theta_{filtered} = (1 - k)\cdot\theta_{hall} + k\cdot\theta_{previous}

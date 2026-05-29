@@ -19,15 +19,15 @@ Both arrays are 1-indexed. On each event the firmware increments [LockCntr](Lock
 
 | Condition | Array used | Corresponding index |
 |:--:|:--:|:--:|
-| $1 \leq LockCntr \leq 50$ | LockTimeTable | $LockCntr$ |
-| $51 \leq LockCntr \leq 100$ | LockTimeTabB | $LockCntr - 50$ |
+| $1 \leq \text{LockCntr} \leq 50$ | LockTimeTable | $\text{LockCntr}$ |
+| $51 \leq \text{LockCntr} \leq 100$ | LockTimeTabB | $\text{LockCntr} - 50$ |
 
 **Central-i** (65000 + 65000 = 130000 events):
 
 | Condition | Array used | Corresponding index |
 |:--:|:--:|:--:|
-| $1 \leq LockCntr \leq 65000$ | LockTimeTable | $LockCntr$ |
-| $65001 \leq LockCntr \leq 130000$ | LockTimeTabB | $LockCntr - 65000$ |
+| $1 \leq \text{LockCntr} \leq 65000$ | LockTimeTable | $\text{LockCntr}$ |
+| $65001 \leq \text{LockCntr} \leq 130000$ | LockTimeTabB | $\text{LockCntr} - 65000$ |
 
 Once both arrays are full, time-stamp logging stops while [LockCntr](LockCntr-AuxLockCntr.md) and [LockVal](LockVal-AuxLockVal.md) keep updating.
 

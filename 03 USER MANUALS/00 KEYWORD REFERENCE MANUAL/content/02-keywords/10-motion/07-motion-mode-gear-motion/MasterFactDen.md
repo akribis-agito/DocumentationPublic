@@ -37,7 +37,7 @@ Denominator of the gear ratio applied to the master-variable delta.
 ## How it works
 
 $$
-\mathrm{\Delta}_{MasterPos} = \frac{MasterFact}{MasterFactDen} \bullet \mathrm{\Delta}_{master\ variable}
+\Delta_{\text{MasterPos}} = \frac{\text{MasterFact}}{\text{MasterFactDen}} \cdot \Delta_{\text{master variable}}
 $$
 
 ### Exact, drift-free ratio

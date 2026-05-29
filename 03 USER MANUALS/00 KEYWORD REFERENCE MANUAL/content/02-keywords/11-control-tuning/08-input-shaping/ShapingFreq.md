@@ -40,7 +40,7 @@ The first frequency must be non-zero for the shaper to act. The second frequency
 Frequencies are stored scaled by 65536 — the stored value equals the frequency in Hz multiplied by 65536:
 
 $$
-ShapingFreq = f_{Hz} \times 65536
+\text{ShapingFreq} = f_{\text{Hz}} \cdot 65536
 $$
 
 | | Value |

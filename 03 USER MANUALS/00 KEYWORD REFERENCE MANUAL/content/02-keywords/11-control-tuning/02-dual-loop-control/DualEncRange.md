@@ -43,7 +43,7 @@ The bounds are in motor (auxiliary) encoder counts. The third array element is r
 Each control cycle, with range-limited mode active, the controller tests the motor feedback against the two bounds:
 
 $$
-DualEncRange[1] \le AuxPos \le DualEncRange[2]
+\text{DualEncRange}[1] \le \text{AuxPos} \le \text{DualEncRange}[2]
 $$
 
 When the condition holds, true dual-loop control is active and [DualLoopStat](DualLoopStat.md) reads `2`; when it does not hold, pseudo dual-loop control is active and [DualLoopStat](DualLoopStat.md) reads `1`. A position offset is maintained across the boundary so the switch does not produce a position step.

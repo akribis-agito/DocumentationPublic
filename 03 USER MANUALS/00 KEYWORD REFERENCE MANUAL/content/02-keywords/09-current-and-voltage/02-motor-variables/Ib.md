@@ -42,10 +42,10 @@ Read-only measured phase B current, in milliamperes.
 Each control-loop sample the firmware reads the phase B current-sense ADC, converts the raw count to milliamperes with the hardware current-sensing factor, and subtracts the per-axis zero-current calibration offset measured at start-up:
 
 $$
-Ib\ \lbrack mA\rbrack\ = \ (ADC_{B}\ \times\ k_{sense})\ -\ I_{0,B}
+\text{Ib}\ \lbrack mA\rbrack\ = \ (ADC_{B}\ \cdot\ k_{sense})\ -\ I_{0,B}
 $$
 
-where $k_{sense}$ is the hardware current-sensing factor and $I_{0,B}$ is the per-axis zero-current offset. For three-phase brushless motors only two of the three phases are sampled directly; the remaining phase is derived from $Ia + Ib + Ic = 0$ (for example $Ic = -(Ia + Ib)$), so on some hardware variants `Ib` is the derived phase rather than a measured one. For single-phase (brush / voice-coil) motors only phase A carries current and `Ib` is held at 0. `Ib` is then used to form the dq currents [Iq](Iq.md)/[Id](Id.md) and the magnitude [MotorCurr](MotorCurr.md), and it is checked against the per-phase over-current protection [MaxPhaseCurr](../../06-protections/02-current-and-voltage/MaxPhaseCurr.md).
+where $k_{sense}$ is the hardware current-sensing factor and $I_{0,B}$ is the per-axis zero-current offset. For three-phase brushless motors only two of the three phases are sampled directly; the remaining phase is derived from $\text{Ia} + \text{Ib} + \text{Ic} = 0$ (for example $\text{Ic} = -(\text{Ia} + \text{Ib})$), so on some hardware variants `Ib` is the derived phase rather than a measured one. For single-phase (brush / voice-coil) motors only phase A carries current and `Ib` is held at 0. `Ib` is then used to form the dq currents [Iq](Iq.md)/[Id](Id.md) and the magnitude [MotorCurr](MotorCurr.md), and it is checked against the per-phase over-current protection [MaxPhaseCurr](../../06-protections/02-current-and-voltage/MaxPhaseCurr.md).
 
 ## Examples
 

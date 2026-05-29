@@ -45,7 +45,7 @@ Each analog-output index maps to one physical DAC channel: index 1 → DAC chann
 In direct command mode the DAC code is computed each cycle as
 
 $$
-\text{DAC code} = (\text{AOutPort} + \text{AOutOffset}) \times \text{(mV-to-DAC factor)}
+\text{DAC code} = (\text{AOutPort} + \text{AOutOffset}) \cdot \text{(mV-to-DAC factor)}
 $$
 
 then clamped to the DAC range before being written to the channel. Note that [AOutOffset](AOutOffset.md) is added in the same millivolt units **before** the LSB conversion. The per-output decision between direct and monitoring mode is set when [AOutMode](AOutMode.md) is written: direct mode is forced when `AOutMode = 0`, or when the amplifier is an analog-current-command / built-in-linear type (the DAC is then driving the amplifier's current command).

@@ -43,7 +43,7 @@ The valid range is `0`–`7` (the value is masked to 3 bits and written to the c
 The system clock is 300 MHz. The 1/T timer clock is:
 
 $$
-Timer\ frequency\lbrack Hz\rbrack = \frac{\text{system clock}}{2^{OneOverTFreq}} = \frac{300\,000\,000}{2^{OneOverTFreq}}
+\text{Timer frequency}\,[\text{Hz}] = \frac{\text{system clock}}{2^{\text{OneOverTFreq}}} = \frac{300\,000\,000}{2^{\text{OneOverTFreq}}}
 $$
 
 A larger `OneOverTFreq` divides by a larger power of two, lowering the timer frequency. A lower timer frequency coarsens the time resolution but extends the longest period the 16-bit capture register can hold before overflow — so it lets the 1/T unit measure **slower** speeds without overflowing (the default of 300/16 = 18.75 MHz allows lower-speed monitoring with no overflow).
@@ -51,7 +51,7 @@ A larger `OneOverTFreq` divides by a larger power of two, lowering the timer fre
 `OneOverTFreq` combines with [OneOverTGap](OneOverTGap.md) into a precomputed factor `2^OneOverTGap / 2^OneOverTFreq`, calculated once when either keyword is written. At each control cycle the velocity is then:
 
 $$
-Vel\lbrack 4\rbrack = \frac{\text{system clock}}{\text{latched timer period}} \times \frac{2^{OneOverTGap}}{2^{OneOverTFreq}}
+\text{Vel}[4] = \frac{\text{system clock}}{\text{latched timer period}} \cdot \frac{2^{\text{OneOverTGap}}}{2^{\text{OneOverTFreq}}}
 $$
 
 where the latched timer period (in timer ticks) is for the most recent gap. The sign is taken from `Vel[2]` because the 1/T unit itself does not sense direction. If the capture overflowed or a direction change occurred, `Vel[4]` is forced to `0`.

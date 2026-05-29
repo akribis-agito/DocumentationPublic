@@ -44,7 +44,7 @@ Down-sampling factor per scope that sets the recording frequency.
 The data recording frequency is:
 
 $$
-Data\ recording\ frequency\ of\ scope\ x\ \lbrack Hz\rbrack = \frac{Controller\ cycle\ rate\ \lbrack Hz\rbrack}{RecGap\lbrack x\rbrack}
+\text{Data recording frequency of scope } x\ [\text{Hz}] = \frac{\text{Controller cycle rate}\ [\text{Hz}]}{\text{RecGap}[x]}
 $$
 
 Internally the scope keeps a down-counter that is reloaded with `RecGap` and decremented once per controller cycle; a sample of every recorded channel is taken only on the cycle when the counter reaches zero, after which it reloads. So `RecGap[x]=1` records on every cycle, `RecGap[x]=10` records on every tenth cycle, and so on. `RecGap` is read once when [RecStart](RecStart.md) runs and is fixed for the duration of that recording.

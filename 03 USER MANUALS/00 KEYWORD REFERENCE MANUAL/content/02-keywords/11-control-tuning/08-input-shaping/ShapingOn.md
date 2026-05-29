@@ -45,10 +45,10 @@ Enables or disables input shaping on the axis.
 The shaper is a finite-impulse-response (FIR) operation on the post-profiler position reference. For a single resonance it applies three impulses, spaced at 0, half the resonance period and one full period:
 
 $$
-shaped_k = A_0 \cdot ref_k + A_1 \cdot ref_{k-N} + A_2 \cdot ref_{k-2N}
+\text{shaped}_k = A_0 \cdot \text{ref}_k + A_1 \cdot \text{ref}_{k-N} + A_2 \cdot \text{ref}_{k-2N}
 $$
 
-where the half-period spacing `N` corresponds to one half-cycle of the resonance frequency. The impulse amplitudes are derived from the damping ratio (see [ShapingFreq](ShapingFreq.md) and [ShapingDamp](ShapingDamp.md)) and always sum to 1, so a steady reference passes through unchanged and only the dynamic transient is reshaped. With two resonance frequencies defined, the two three-impulse sequences are convolved into a nine-impulse sequence.
+where the half-period spacing $N$ corresponds to one half-cycle of the resonance frequency. The impulse amplitudes are derived from the damping ratio (see [ShapingFreq](ShapingFreq.md) and [ShapingDamp](ShapingDamp.md)) and always sum to 1, so a steady reference passes through unchanged and only the dynamic transient is reshaped. With two resonance frequencies defined, the two three-impulse sequences are convolved into a nine-impulse sequence.
 
 The shaper's history buffer is initialised to the current reference when the motor is enabled, so motion starts cleanly.
 

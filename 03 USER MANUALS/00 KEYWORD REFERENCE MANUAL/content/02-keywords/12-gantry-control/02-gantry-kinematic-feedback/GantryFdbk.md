@@ -54,7 +54,7 @@ The differential value is deliberately **not** divided by two: keeping the full 
 
 When the position-dependent decoupling map is enabled ([GantryMapType](../01-general-variables/GantryMapType.md) = 1) the common-mode feedback is no longer a plain 50/50 mean: the two motor positions are blended using the map ratio ([GantryMapVal](../01-general-variables/GantryMapVal.md)) so the effective linear measurement point can be moved along the beam. In dual-loop gantry mode ([GantryDLoopOn](../01-general-variables/GantryDLoopOn.md) = 1) the master value instead reflects the load feedback selected by [GantryFdbkSrc](GantryFdbkSrc.md), and the motor-encoder mean is reported separately as [GantryAuxFdbk](GantryAuxFdbk.md).
 
-`?GantryFdbk` on an axis that is neither a gantry master nor a gantry yaw axis has no use and always returns `0`.
+Reading `GantryFdbk` on an axis that is neither a gantry master nor a gantry yaw axis has no use and always returns `0`.
 
 ## Examples
 

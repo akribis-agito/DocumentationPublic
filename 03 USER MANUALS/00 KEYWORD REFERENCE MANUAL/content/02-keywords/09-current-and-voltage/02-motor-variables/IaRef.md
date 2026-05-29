@@ -38,13 +38,13 @@ Read-only phase A current reference, in milliamperes (definition varies by motor
 
 ## How it works
 
-All three derivations start from the direction-corrected scalar current reference $CurrRef_{dir}$, which is the limited current reference after the [CurrDir](CurrDir.md) sign is applied. The commutation then projects it onto phase A:
+All three derivations start from the direction-corrected scalar current reference $\text{CurrRef}_{dir}$, which is the limited current reference after the [CurrDir](CurrDir.md) sign is applied. The commutation then projects it onto phase A:
 
 | Motor group (MotorType) | Phase A reference |
 |----|----|
-| Single-phase / brush motor (MotorType = 1, 2) | $IaRef\ = \ CurrRef_{dir}$ (the whole current reference goes to phase A). |
-| Three-phase brushless motor (MotorType = 3, 4) | $IaRef\ = \ CurrRef_{dir} \cdot \sin(\theta)$, where $\theta$ is the commutation angle. This is the inverse transform of the dq reference with $IqRef = CurrRef_{dir}$ and [IdRef](IdRef.md) = 0. It is the active reference when current control runs in the abc domain ([ControlMode](ControlMode.md) bit 1 set). |
-| Two-phase stepper motor (MotorType = 6, 7) | $IaRef\ = \ CurrRef_{dir} \cdot \sin(\theta_{step})$, where $\theta_{step}$ is the stepper electrical angle (from the position reference in open loop, or from the integrated velocity reference in closed loop). |
+| Single-phase / brush motor (MotorType = 1, 2) | $\text{IaRef}\ = \ \text{CurrRef}_{dir}$ (the whole current reference goes to phase A). |
+| Three-phase brushless motor (MotorType = 3, 4) | $\text{IaRef}\ = \ \text{CurrRef}_{dir} \cdot \sin(\theta)$, where $\theta$ is the commutation angle. This is the inverse transform of the dq reference with $\text{IqRef} = \text{CurrRef}_{dir}$ and [IdRef](IdRef.md) = 0. It is the active reference when current control runs in the abc domain ([ControlMode](ControlMode.md) bit 1 set). |
+| Two-phase stepper motor (MotorType = 6, 7) | $\text{IaRef}\ = \ \text{CurrRef}_{dir} \cdot \sin(\theta_{step})$, where $\theta_{step}$ is the stepper electrical angle (from the position reference in open loop, or from the integrated velocity reference in closed loop). |
 
 `IaRef` is bounded to ±64000 mA. Its difference from the measured [Ia](Ia.md) gives [IaErr](IaErr.md), the input to the phase A current loop.
 

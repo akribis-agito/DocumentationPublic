@@ -41,7 +41,7 @@ Commutation keeps the applied current vector offset from the magnetic field so t
 Each control cycle the controller computes the electrical angle from the active source, then reports it here in hundredths of a degree:
 
 $$
-ComtAng = round\!\left(\theta_{elec}\;[\text{rad}] \times \frac{360}{2\pi} \times 100\right)
+\text{ComtAng} = \mathrm{round}\!\left(\theta_{elec}\;[\text{rad}] \times \frac{360}{2\pi} \times 100\right)
 $$
 
 For encoder-based commutation the angle comes from the feedback position within one electrical cycle (counts per electrical cycle = [EncRes](../03-encoder/01-general-settings/EncRes.md) / [PolePrs](../02-motor-and-amplifier/PolePrs.md), see [MotorType](../02-motor-and-amplifier/MotorType.md)); for Hall-based methods it comes from the [HallsValue](HallsValue.md) → [HallsAngle](HallsAngle.md) mapping (optionally smoothed by [HallOnlyFilt](HallOnlyFilt.md)). The reported value is meaningful only once commutation has completed (commutation-complete bit of [StatReg](../07-status-and-faults/StatReg.md), bit 0; [ComtStatus](ComtStatus.md) = `100`). `ComtAng` is reported for brushless motor types only; brush, voice-coil, simulation, and stepper types have no commutation angle.

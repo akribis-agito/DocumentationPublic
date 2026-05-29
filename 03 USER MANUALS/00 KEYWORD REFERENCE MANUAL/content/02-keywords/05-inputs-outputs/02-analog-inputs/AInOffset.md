@@ -42,7 +42,7 @@ Offset (mV) added to each analog input.
 In the per-cycle conditioning, the offset is added to the filtered reading before any deadband or gain:
 
 $$
-y = u + AInOffset
+y = u + \text{AInOffset}
 $$
 
 Because the offset is added *before* the first deadband, the deadband is applied around the corrected zero, not the raw zero — so nulling a sensor's bias with `AInOffset` also centres the deadband correctly.

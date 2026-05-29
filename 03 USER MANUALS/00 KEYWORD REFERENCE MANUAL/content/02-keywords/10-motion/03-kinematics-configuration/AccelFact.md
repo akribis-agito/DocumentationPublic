@@ -39,8 +39,8 @@ Scaling factor applied to `Accel` to adjust effective acceleration without chang
 Every control cycle the profiler multiplies both the acceleration and deceleration rates by `AccelFact` before using them:
 
 $$
-Accel_{eff} = Accel \times AccelFact ,\qquad
-Decel_{eff} = Decel \times AccelFact
+\text{Accel}_{\text{eff}} = \text{Accel} \cdot \text{AccelFact} ,\qquad
+\text{Decel}_{\text{eff}} = \text{Decel} \cdot \text{AccelFact}
 $$
 
 Key behavioral points:

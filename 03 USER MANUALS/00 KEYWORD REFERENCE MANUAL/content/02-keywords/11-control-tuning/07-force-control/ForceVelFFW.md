@@ -34,7 +34,7 @@ Velocity feedback compensation gain in the force loop.
 `ForceVelFFW` is the velocity feedback compensation gain applied to the current reference in force operation mode. It multiplies the velocity feedback and is **subtracted** from the current reference:
 
 $$
-ForceVelFFW\ term = -\ Vel \times ForceVelFFW \times 0.00000001
+\text{ForceVelFFW term} = -\,\text{Vel} \cdot \text{ForceVelFFW} \cdot 0.00000001
 $$
 
 where `Vel` is the velocity feedback (the value reported by [Vel](../../10-motion/01-kinematics-status/Vel.md), index 1). The internal scaling is 1E-8.

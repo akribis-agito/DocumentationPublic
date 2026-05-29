@@ -52,7 +52,7 @@ Writing `AOutMode[Index]` does two things:
 Each control cycle, for an output in monitoring mode, the monitored parameter is read, shifted by [AOutShifts](AOutShifts.md), offset by [AOutOffset](AOutOffset.md), converted to a DAC code and clamped:
 
 $$
-\text{DAC code} = \big((\text{parameter} \ll \text{AOutShifts}) + \text{AOutOffset}\big) \times \text{(mV-to-DAC factor)}
+\text{DAC code} = \big((\text{parameter} \ll \text{AOutShifts}) + \text{AOutOffset}\big) \cdot \text{(mV-to-DAC factor)}
 $$
 
 (A negative `AOutShifts` shifts right instead.) Because the emulated parameter is treated as millivolts, choose `AOutShifts` so the parameter's internal range maps usefully onto ±11905 mV.

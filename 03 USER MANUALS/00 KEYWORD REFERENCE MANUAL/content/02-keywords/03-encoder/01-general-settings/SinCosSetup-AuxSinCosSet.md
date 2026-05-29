@@ -89,9 +89,9 @@ Defines the SIN/COS encoder interpolation factor.
 
 | Value | Interpolation factor |
 |---|---|
-| 3 – 13 | $2^{(16 - Value)}$ |
+| 3 – 13 | $2^{\,16 - \text{Value}}$ |
 
-For example, `SinCosSetup[6]=7` interpolates each SIN or COS cycle to $2^{(16-7)} = 512$ counts per cycle.
+For example, `SinCosSetup[6]=7` interpolates each SIN or COS cycle to $2^{\,16-7} = 512$ counts per cycle.
 
 ### [7] Hysteresis threshold (default 0)
 
@@ -118,7 +118,7 @@ Defines the maximum input frequency for the SIN/COS signals. In the formula belo
 | Value | Hex value | Frequency factor, P | Maximum input frequency [kHz] |
 |---|---|---|---|
 | 4 | 0x0004 | - | 1200 / Q |
-| 16642 | 0x4102 | 0 | $(2000 * 2^{P}) / Q$ |
+| 16642 | 0x4102 | 0 | $\frac{2000 \cdot 2^{P}}{Q}$ |
 | 16898 | 0x4202 | 1 | |
 | 17154 | 0x4302 | 2 | |
 | 18178 | 0x4702 | 3 | |

@@ -45,7 +45,7 @@ Vector acceleration rate (user units/s^2) ramping the resultant velocity up to V
 A vector move runs one velocity profile along the geometric path (see [VecSpeed](VecSpeed.md)); `VecAccel` is the rate at which that single path velocity is allowed to rise. With jerk smoothing off ([VecJerk](VecJerk.md) = 0) the profiler increments the path velocity by `VecAccel × Ts` each control cycle (where `Ts` is the control-cycle time) until it reaches [VecSpeed](VecSpeed.md):
 
 $$
-v_k = v_{k-1} + VecAccel \times T_s ,\qquad v_k \le VecSpeed
+v_k = v_{k-1} + \text{VecAccel} \cdot T_s ,\qquad v_k \le \text{VecSpeed}
 $$
 
 The deceleration side is handled separately: each cycle the profiler also computes, from the remaining path distance to [VecAbsTrgt](VecAbsTrgt.md), the speed from which it could still brake to rest in time using [VecDecel](VecDecel.md), and clamps the path velocity to it. `VecAccel` therefore sets the leading slope of the trapezoid and `VecDecel` the trailing slope. With jerk smoothing on, `VecAccel` is passed as the acceleration constraint to the S-curve path profiler instead.

@@ -41,10 +41,10 @@ High-resolution free-running counter for measuring short intervals.
 To convert a difference of two readings into time:
 
 $$
-\Delta t\ [\mu s] = \dfrac{HWTimer_{end} - HWTimer_{start}}{433}
+\Delta t\ [\mu\text{s}] = \dfrac{\text{HWTimer}_{\text{end}} - \text{HWTimer}_{\text{start}}}{433}
 $$
 
-Because the value is a 32-bit register, it rolls over after about $2^{32} / (433 \times 10^6) \approx 9.9$ seconds. As long as the interval being measured is shorter than that and the subtraction is done with unsigned/wrapping arithmetic, a single rollover between the two readings still yields the correct difference. Intervals longer than one full wrap cannot be measured with `HWTimer`.
+Because the value is a 32-bit register, it rolls over after about $2^{32} / (433 \cdot 10^6) \approx 9.9$ seconds. As long as the interval being measured is shorter than that and the subtraction is done with unsigned/wrapping arithmetic, a single rollover between the two readings still yields the correct difference. Intervals longer than one full wrap cannot be measured with `HWTimer`.
 
 ## Examples
 

@@ -45,8 +45,8 @@
 
   <!-- short labels under cells (bit 0 rightmost) -->
   <g font-size="9" text-anchor="middle" fill="#444">
-    <text x="62"  y="122">PwrAC</text>
-    <text x="106" y="122">PwrAC</text>
+    <text x="62"  y="122">PwBC</text>
+    <text x="106" y="122">PwAC</text>
     <text x="150" y="122">5Viso</text>
     <text x="194" y="122">IPM</text>
     <text x="238" y="122">LogicAC</text>

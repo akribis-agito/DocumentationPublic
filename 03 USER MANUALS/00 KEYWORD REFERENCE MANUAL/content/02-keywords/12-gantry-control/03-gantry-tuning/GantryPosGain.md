@@ -46,13 +46,13 @@ Proportional position gain for the gantry yaw correction controller.
 In gantry mode the yaw position error is the difference between the shaped/filtered position reference and the gantry (differential) feedback rather than the single-axis feedback:
 
 $$
-PosErr = PosRef_{shaped} - GantryFdbk
+\text{PosErr} = \text{PosRef}_{\text{shaped}} - \text{GantryFdbk}
 $$
 
 `GantryPosGain` then scales this yaw position error to form the velocity command that is passed into the yaw velocity loop (the built-in velocity-tracking feedforward term is added on top, exactly as in the ordinary position loop):
 
 $$
-VelRef = PosErr \times GantryPosGain + \left(\frac{PosRef \times VelTrackFact}{1024}\right)
+\text{VelRef} = \text{PosErr} \cdot \text{GantryPosGain} + \frac{\text{PosRef} \cdot \text{VelTrackFact}}{1024}
 $$
 
 Increasing `GantryPosGain` raises the differential velocity (and hence corrective current) produced per unit of yaw position error. The resulting velocity command feeds the yaw velocity PI loop set by [GantryVelGain](GantryVelGain.md) / [GantryVelKi](GantryVelKi.md), whose output becomes the differential portion of the motor current command ([CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md)) on the two gantry motors. The yaw correction reference itself is set by [GantryYawRef](../01-general-variables/GantryYawRef.md).

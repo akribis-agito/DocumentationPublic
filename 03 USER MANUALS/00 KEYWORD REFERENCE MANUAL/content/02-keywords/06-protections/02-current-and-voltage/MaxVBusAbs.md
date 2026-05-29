@@ -54,6 +54,6 @@ AMaxVBusAbs=90000    ; instantaneous over-voltage ceiling (mV)
 ## See also
 
 - [MaxVBus](MaxVBus.md) — time-delayed over-voltage limit
-- [MaxVBusTime](MaxVBusTime.md) — delay used by MaxVBus / MinVBus
+- [MaxVBusTime](MaxVBusTime.md) — delay used by MaxVBus (not by MinVBus or MaxVBusAbs)
 - [ConFlt](../../07-status-and-faults/ConFlt.md) — fault 1023 raised on trip
 - [StatReg](../../07-status-and-faults/StatReg.md) — bit 6 flags over-MaxVBusAbs

@@ -50,7 +50,7 @@ The profiler always produces a trapezoidal position reference. After the profile
 
 
 $$
-posRef_{smooth} = \frac{1}{N}\sum_{i=0}^{N-1} posRef_{k-i} ,\qquad N = 2^{Jerk}
+\text{PosRef}_{\text{smooth}} = \frac{1}{N}\sum_{i=0}^{N-1} \text{PosRef}_{k-i} ,\qquad N = 2^{\text{Jerk}}
 $$
 
 The division is implemented as a right shift by `Jerk` bits, so the window length is exactly **2^Jerk control cycles**.

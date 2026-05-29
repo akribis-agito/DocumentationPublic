@@ -43,13 +43,13 @@ Integral gain for the gantry yaw velocity loop.
 The yaw velocity error is the difference between the velocity command from the yaw position loop and the gantry differential velocity ([GantryVel](GantryVel.md)):
 
 $$
-VelErr = VelRef - GantryVel
+\text{VelErr} = \text{VelRef} - \text{GantryVel}
 $$
 
-The controller multiplies the proportional term ($VelErr \times$ [GantryVelGain](GantryVelGain.md)) by `GantryVelKi` and a fixed internal integral-scaling factor, then accumulates it into the velocity integrator each control cycle (the accumulation is held when an anti-windup clamp is active, so the integral does not keep building while the current command is saturated):
+The controller multiplies the proportional term ($\text{VelErr} \cdot$ [GantryVelGain](GantryVelGain.md)) by `GantryVelKi` and a fixed internal integral-scaling factor, then accumulates it into the velocity integrator each control cycle (the accumulation is held when an anti-windup clamp is active, so the integral does not keep building while the current command is saturated):
 
 $$
-Integral \mathrel{+}= (VelErr \times GantryVelGain) \times GantryVelKi \times k_i
+\text{Integral} \mathrel{+}= (\text{VelErr} \cdot \text{GantryVelGain}) \cdot \text{GantryVelKi} \cdot k_i
 $$
 
 The proportional term and this integral are summed and scaled to form the velocity PI output, which (after the velocity filters and feedforward) becomes the differential motor current command ([CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md)) on the two gantry motors.

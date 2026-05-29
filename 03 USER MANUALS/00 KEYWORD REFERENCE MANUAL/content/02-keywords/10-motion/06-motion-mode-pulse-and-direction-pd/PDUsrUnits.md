@@ -39,7 +39,7 @@ Counts-per-user-unit scale for converting PDPos and PDVel to user units on query
 Like `UsrUnits`, `PDUsrUnits` is a ratio relative to a base of `65536`: the effective scale is `PDUsrUnits / 65536` counts per user unit. When a P/D status is read the controller divides the internal count value by this ratio:
 
 $$
-\text{Queried PDPos [user units]} = \frac{\text{Controller PDPos [counts]}}{\big(PDUsrUnits / 65536\big)} = \text{counts} \times \frac{65536}{PDUsrUnits}
+\text{Queried PDPos [user units]} = \frac{\text{Controller PDPos [counts]}}{\big(\text{PDUsrUnits} / 65536\big)} = \text{counts} \cdot \frac{65536}{\text{PDUsrUnits}}
 $$
 
 The default `65536` means a factor of 1 (values shown directly in counts). Only `PDPos` and `PDVel` belong to the P/D user-units group, so this scaling does not affect any other keyword.

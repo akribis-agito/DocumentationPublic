@@ -15,7 +15,7 @@ Offset added to the absolute encoder reading at power-up.
 
 During the first control cycles after power-up (or, on central-i, the first cycles after the encoder is configured), the firmware seeds the accumulated position directly from the absolute reading plus this offset, instead of starting from zero:
 
-$$EncoderPos_{init} = Reading_{masked} + EncAbsOff$$
+$$\text{EncoderPos}_{\text{init}} = \text{Reading}_{\text{masked}} + \text{EncAbsOff}$$
 
 where `Reading_masked` is the raw reading after the [EncAbsMB](EncAbsMB-AuxEncAbsMB.md) right-shift and [EncDir](EncDir-AuxEncDir.md) direction handling (the same value reported as [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)). At the same time the delta is forced to 0 and the previous-reading register is primed, so the axis starts at `EncoderPos_init` with no spurious jump. This seeded value flows through the normal feedback pipeline (error mapping, modulo) to become [Pos](../../10-motion/01-kinematics-status/Pos.md). After the initial cycles the offset is no longer added; the position simply accumulates the per-cycle deltas.
 

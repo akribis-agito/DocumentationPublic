@@ -32,7 +32,7 @@ Modulo divisor; wraps the feedback (and references) to the range [0, ModRev-1] w
 
 ## Overview
 
-`ModRev` defines the divisor used in the modulo operation. When non-zero, modulo mode wraps the feedback position to the range $[0,\ ModRev - 1]$, which lets a rotary axis move in one direction indefinitely without the feedback exceeding the numerical limit. When `ModRev=0`, modulo operation is disabled. Being axis-scope and flash-saved, it cannot be changed while the motor is on or in motion. The shortest-path behaviour in PTP motion is selected by [ModShort](ModShort.md).
+`ModRev` defines the divisor used in the modulo operation. When non-zero, modulo mode wraps the feedback position to the range $[0,\ \text{ModRev} - 1]$, which lets a rotary axis move in one direction indefinitely without the feedback exceeding the numerical limit. When `ModRev=0`, modulo operation is disabled. Being axis-scope and flash-saved, it cannot be changed while the motor is on or in motion. The shortest-path behaviour in PTP motion is selected by [ModShort](ModShort.md).
 
 When the feedback ([Pos](../../10-motion/01-kinematics-status/Pos.md)) crosses a modulo boundary, the firmware does not simply wrap `Pos` in isolation: it **shifts the entire position reference frame by `ModRev` in the same direction** so the following error is preserved across the wrap and motion stays continuous. The position reference ([PosRef](../../10-motion/01-kinematics-status/PosRef.md)), the absolute target ([AbsTrgt](../../10-motion/13-motion-mode-ptp/AbsTrgt.md)), the position before mapping ([PosBeforeMap](../../04-error-mapping/PosBeforeMap.md)), the pulse/direction position ([PDPos](../../10-motion/06-motion-mode-pulse-and-direction-pd/PDPos.md)), the gear master position ([MasterPos](../../10-motion/07-motion-mode-gear-motion/MasterPos.md)), and every internal shaped/filtered reference are all moved together. See [Pos](../../10-motion/01-kinematics-status/Pos.md) for how this fits the feedback pipeline.
 
@@ -41,7 +41,7 @@ When the feedback ([Pos](../../10-motion/01-kinematics-status/Pos.md)) crosses a
 | ModRev value | Description |
 |:--:|:--|
 | 0 | Modulo operation is disabled. |
-| ≠ 0 | Modulo operation is enabled, with feedback wrapped to the range $[0,\ ModRev - 1]$. |
+| ≠ 0 | Modulo operation is enabled, with feedback wrapped to the range $[0,\ \text{ModRev} - 1]$. |
 
 ![Modulo wrap: feedback sawtooths within [0, ModRev) while the reference frame shifts with it](modrev-wrap.svg)
 
@@ -57,7 +57,7 @@ Because the whole reference frame moves together, `PosErr = PosRef − Pos` is u
 ### Assumptions and limits
 
 - **Half-revolution per cycle.** The wrap subtracts/adds exactly one `ModRev` per control cycle, assuming the axis travels no more than half of `ModRev` in a single cycle. If exceeded, the position still converges back into range after a few cycles, but behaviour near the boundary is not guaranteed.
-- **Jerk buffer.** The wrap is held off until the jerk buffer is clear of pre-wrap values. For truly endless motion the time for one full `ModRev` at max speed must exceed the jerk time ($2^{Jerk}$ samples) — set `ModRev` large enough.
+- **Jerk buffer.** The wrap is held off until the jerk buffer is clear of pre-wrap values. For truly endless motion the time for one full `ModRev` at max speed must exceed the jerk time ($2^{\text{Jerk}}$ samples) — set `ModRev` large enough.
 - **Input shaping must be off.** Modulo is incompatible with input shaping ([ShapingOn](../../11-control-tuning/08-input-shaping/ShapingOn.md)); the controller faults on motor-on if both are enabled.
 - **Software limits.** `ModRev` must lie within the software position limits — it is rejected if `ModRev < RevPLim` or `ModRev > FwdPLim`.
 - **ECAM coupling.** When an axis is an active ECAM slave whose master is `Pos`/`PosRef`, the slave wraps only together with its master (coupled roll-over), not independently.

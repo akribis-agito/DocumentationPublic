@@ -38,7 +38,7 @@ Derivative gain of the force-loop PID controller.
 Each control cycle the derivative term acts on the change in the gained force error between this cycle and the previous one:
 
 $$
-D = ForceKd \times (gained\ error - gained\ error_{prev}) \times 0.001
+D = \text{ForceKd} \cdot (\text{gained error} - \text{gained error}_{\text{prev}}) \cdot 0.001
 $$
 
 where the *gained error* is the force error after the [ForceGain](ForceGain.md) stage and the subscript *prev* denotes its value on the previous cycle. This is the D contribution to the PID output.

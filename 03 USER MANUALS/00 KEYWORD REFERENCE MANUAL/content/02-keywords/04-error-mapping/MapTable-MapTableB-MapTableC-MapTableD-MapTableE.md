@@ -19,10 +19,10 @@ All variants are saved to flash and cannot be changed while the axis is in motio
 
 ### How a stored value becomes a correction
 
-Each control cycle the firmware turns the source encoder reading into a fractional index (see [MapPosGap](MapPosGap.md)), reads the bracketing table entries, and **linearly interpolates**:
+Each control cycle the controller turns the source encoder reading into a fractional index (see [MapPosGap](MapPosGap.md)), reads the bracketing table entries, and **linearly interpolates**:
 
 $$
-correction = e_i + frac \times (e_{i+1} - e_i)
+\text{correction} = e_i + \text{frac} \cdot (e_{i+1} - e_i)
 $$
 
 For 2D this is done bilinearly (4 entries), for 3D trilinearly (8 entries). The result, plus the [MapErrOffset](MapErrOffset.md) component, is scaled by the engage ramp and added to the uncorrected feedback ([PosBeforeMap](PosBeforeMap.md)) to form `Pos`. Outside the mapped range the value is **clamped** to the first or last entry (no extrapolation).

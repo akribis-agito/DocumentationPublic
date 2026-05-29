@@ -41,7 +41,7 @@ Numerator of the gear ratio applied to the master-variable delta.
 `MasterFact` is a numerator relative to a base of 65536, so the default value `65536` gives a **1:1** ratio. In v4 it is applied directly, with no separate denominator term:
 
 $$
-\mathrm{\Delta}_{MasterPos} = \frac{MasterFact}{65536} \bullet \mathrm{\Delta}_{master\ variable}
+\Delta_{\text{MasterPos}} = \frac{\text{MasterFact}}{65536} \cdot \Delta_{\text{master variable}}
 $$
 
 The scaled change is accumulated into `MasterPos` each cycle.

@@ -38,13 +38,13 @@ First-order low-pass filter coefficient for the scaled master-position delta (di
 
 ### The filter
 
-In direct gear motion the geared displacement since `Begin`, $u_{k} = MasterPos − MasterPosInitial$, is passed through a first-order low-pass filter before being added to the reference latched at `Begin` to form `PosRef`. The filter coefficient is `MasterFilt / 64`:
+In direct gear motion the geared displacement since `Begin`, $u_{k} = \text{MasterPos} - \text{MasterPosInitial}$, is passed through a first-order low-pass filter before being added to the reference latched at `Begin` to form `PosRef`. The filter coefficient is `MasterFilt / 64`:
 
 $$
-y_{k} = \frac{MasterFilt}{64}u_{k} + \left( 1 - \frac{MasterFilt}{64} \right)y_{k - 1}
+y_{k} = \frac{\text{MasterFilt}}{64} \cdot u_{k} + \left( 1 - \frac{\text{MasterFilt}}{64} \right) \cdot y_{k - 1}
 $$
 
-where $t = kT_{s}$ and $T_{s}$ is the control sampling time (typically 61 µs).
+where $t = k \cdot T_{s}$ and $T_{s}$ is the control sampling time (typically 61 µs).
 
 ### Choosing the value
 
@@ -56,7 +56,7 @@ where $t = kT_{s}$ and $T_{s}$ is the control sampling time (typically 61 µs).
 By backward-Euler estimation, `MasterFilt` can be chosen from a target cut-off frequency $f_{c}$ (Hz). The default `MasterFilt = 3` corresponds to roughly a 128 Hz cut-off:
 
 $$
-MasterFilt = 64\left( \frac{2\pi f_{c}T_{s}}{1 + 2\pi f_{c}T_{s}} \right)
+\text{MasterFilt} = 64 \cdot \left( \frac{2\pi \cdot f_{c} \cdot T_{s}}{1 + 2\pi \cdot f_{c} \cdot T_{s}} \right)
 $$
 
 For example, at the typical 61 µs sample time, picking `MasterFilt = 16` (coefficient 16/64 = 0.25) gives a first-order pole at roughly `f_c = 0.25 / (2π × 61 µs) ≈ 650 Hz`, a moderate smoothing that still tracks fast master changes. Reducing it to `MasterFilt = 3` drops the cut-off back to ~128 Hz, giving a visibly slower follower for the same master step but rejecting more high-frequency noise on the master signal.

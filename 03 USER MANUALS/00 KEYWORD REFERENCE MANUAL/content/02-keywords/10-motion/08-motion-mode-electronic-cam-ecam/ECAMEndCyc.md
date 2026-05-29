@@ -39,7 +39,7 @@ GenData index where the cyclical/repeating ECAM cam pattern ends.
 `ECAMEndCyc` must satisfy the ordering from which the overall cam pattern is derived:
 
 $$
-ECAMStart \leq ECAMStartCyc < ECAMEndCyc \leq ECAMEnd
+\text{ECAMStart} \leq \text{ECAMStartCyc} < \text{ECAMEndCyc} \leq \text{ECAMEnd}
 $$
 
 `ECAMEndCyc` is the upper bound of the repeating segment that begins at [ECAMStartCyc](ECAMStartCyc.md) (see [ECAMStart](ECAMStart.md) for the leading / repeating / trailing segment model). One full cycle spans `abs(ECAMGap) * (ECAMEndCyc - ECAMStartCyc)` in master units. When the master crosses the position that maps to `ECAMEndCyc`, the controller wraps to the next cycle: it steps [ECAMCycCount](ECAMCycCount.md) and accumulates the slave-position offset `GenData[ECAMEndCyc] - GenData[ECAMStartCyc]` so the follower continues smoothly instead of jumping back to the segment's start value. After the last cycle the controller plays the trailing one-shot segment from `ECAMEndCyc` to [ECAMEnd](ECAMEnd.md).

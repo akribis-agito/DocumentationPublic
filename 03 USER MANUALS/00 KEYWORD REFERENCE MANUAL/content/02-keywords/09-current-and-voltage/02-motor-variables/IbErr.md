@@ -40,7 +40,7 @@ Read-only phase B current error (IbRef − Ib), in milliamperes.
 ## How it works
 
 $$
-IbErr\ \lbrack mA\rbrack\  = \ IbRef\ \lbrack mA\rbrack\  - \ Ib\ \lbrack mA\rbrack
+\text{IbErr}\ \lbrack mA\rbrack\  = \ \text{IbRef}\ \lbrack mA\rbrack\  - \ \text{Ib}\ \lbrack mA\rbrack
 $$
 
 Where the phase B current loop is active, `IbErr` is the input to the phase B PI controller: it is integrated with the integral gain ([CurrKi](../../11-control-tuning/06-current-control/CurrKi.md)) and summed with the proportional term scaled by the loop gain ([CurrGain](../../11-control-tuning/06-current-control/CurrGain.md)) to produce the phase B voltage command [Vb](Vb.md). For brushless motors run in dq0 (vector) mode the loop instead acts on [IqErr](IqErr.md)/[IdErr](IdErr.md), and `IbErr` is still computed for monitoring.

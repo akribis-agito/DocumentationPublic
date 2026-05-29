@@ -46,7 +46,7 @@ Velocity reference, the filtered derivative of the position reference PosRef.
 Each control cycle, while the motor is on, the controller takes the per-cycle change of the fully post-processed reference (the shaped+filtered position reference, the same signal the position loop uses) and optionally low-pass-filters it:
 
 $$
-\Delta = \text{shaped/filtered reference} - \text{previous shaped/filtered reference}
+\Delta = (\text{shaped/filtered reference}) - (\text{previous shaped/filtered reference})
 $$
 
 - **No filter** ([dPosRefFilt](../../11-control-tuning/04-velocity-control/dPosRefFilt.md) coefficient = 1.0): `dPosRef = Δ` directly.
@@ -54,7 +54,7 @@ $$
 
 When the motor is off, `dPosRef` (and its scaled filter state) is reset to `0` so the filter starts clean on the next enable. As a special case, for member axes of a CNCA/B or vector motion whose master tells them to skip the calculation, `dPosRef` is left unchanged to avoid spikes at the end of segments ending at zero speed.
 
-`dPosRef` then becomes the velocity feed-forward in [VelRef](VelRef.md): `VelRef = PosErr·PosGain + (dPosRef·VelTrackFact)/1024`, where [VelTrackFact](../../11-control-tuning/04-velocity-control/VelTrackFact.md) scales how much feed-forward is applied.
+`dPosRef` then becomes the velocity feed-forward in [VelRef](VelRef.md): $\text{VelRef} = \text{PosErr} \cdot \text{PosGain} + \frac{\text{dPosRef} \cdot \text{VelTrackFact}}{1024}$, where [VelTrackFact](../../11-control-tuning/04-velocity-control/VelTrackFact.md) scales how much feed-forward is applied.
 
 ## Examples
 

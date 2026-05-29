@@ -7,13 +7,13 @@ Modulo mode allows the encoder feedback to wrap within a range of value (from 0 
 Modulo mode can be used with moving averaged smoothing ([Jerk](../../../02-keywords/10-motion/03-kinematics-configuration/Jerk.md)) under the condition that the time to move 1 modulo divisor ([ModRev](../../../02-keywords/03-encoder/04-modulo-mode/ModRev.md)) must be longer than the moving time window defined by Jerk. Typically, modulo divisor is defined for 1 revolution. For example,
 
 $$
-ModRev\ \lbrack counts\rbrack \geq \frac{Speed\left\lbrack \frac{counts}{s} \right\rbrack \bullet 2^{Jerk}\lbrack cycles\rbrack}{Controller\ cycle\ frequency\ \lbrack Hz\rbrack}
+\text{ModRev}\ [\text{counts}] \geq \frac{\text{Speed}\,\left[\frac{\text{counts}}{\text{s}}\right] \cdot 2^{\,\text{Jerk}}\,[\text{cycles}]}{\text{Controller cycle frequency}\ [\text{Hz}]}
 $$
 
 To prevent overflow, modulo divisor must be selected such that the sum of moving window value not exceeding numerical limit. For 64-bit position firmware,
 
 $$
-ModRev\ \lbrack counts\rbrack \bullet 2^{Jerk}\lbrack cycles\rbrack \leq 2^{63} - 1
+\text{ModRev}\ [\text{counts}] \cdot 2^{\,\text{Jerk}}\,[\text{cycles}] \leq 2^{63} - 1
 $$
 
 **Note:**

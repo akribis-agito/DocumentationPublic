@@ -39,7 +39,13 @@ Read-only current flowing through the regeneration resistor.
 
 ## How it works
 
-On products that have regen-current sensing, the regen current is read once per group of control cycles and the raw ADC count is converted to a current with a fixed scale-and-offset. The conversion is an affine map of the form `RegenCurr = offset − gain × reading` — i.e. the sensor sits around a mid-scale zero point, so the raw count is scaled by a fixed gain and subtracted from a constant offset to give a signed result. Products without regen-current sensing do not update this value.
+On products that have regen-current sensing, the regen current is read once per group of control cycles and the raw ADC count is converted to a current with a fixed scale-and-offset. The conversion is an affine map of the form
+
+$$
+\text{RegenCurr} = \text{offset} - \text{gain} \cdot \text{reading}
+$$
+
+— i.e. the sensor sits around a mid-scale zero point, so the raw count is scaled by a fixed gain and subtracted from a constant offset to give a signed result. Products without regen-current sensing do not update this value.
 
 The value is meaningful only while regeneration is active (when [StatReg](../../07-status-and-faults/StatReg.md) bit 1 is set); at other times the resistor is disconnected and the reading reflects only the sensor's zero point.
 

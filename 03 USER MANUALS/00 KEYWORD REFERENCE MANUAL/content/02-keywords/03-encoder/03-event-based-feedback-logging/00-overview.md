@@ -18,7 +18,7 @@ For non-digital incremental encoder (SIN/COS, absolute, etc.), the feedback logg
 For polling method, to avoid missing an index, axis must move at a low speed. Generally,
 
 $$
-Speed\ \left\lbrack \frac{count}{s} \right\rbrack = Count\ per\ encoder\ pitch\  \bullet Controller\ sampling\ frequency
+\text{Speed}\ \left[\frac{\text{count}}{\text{s}}\right] = \text{Count per encoder pitch} \cdot \text{Controller sampling frequency}
 $$
 
 with assumption that index pulse is normally 1 encoder pitch wide.

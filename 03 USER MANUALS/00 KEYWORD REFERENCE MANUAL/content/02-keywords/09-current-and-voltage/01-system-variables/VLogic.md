@@ -48,7 +48,7 @@ Once per protection cycle the measured value is checked against two fixed limits
 Either condition turns the motor off and logs the fault. The acceptable band is therefore:
 
 $$
-4500\ \text{mV} \le VLogic \le 5500\ \text{mV}
+4500\ \text{mV} \le \text{VLogic} \le 5500\ \text{mV}
 $$
 
 > **Note:** the over-voltage limit is exclusive (`> 5500`) and the under-voltage limit is exclusive (`< 4500`), so the boundary values 4500 mV and 5500 mV are still accepted.

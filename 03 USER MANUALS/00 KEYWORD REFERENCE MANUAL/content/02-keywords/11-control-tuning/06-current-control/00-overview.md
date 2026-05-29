@@ -12,7 +12,7 @@ For **voice coil or brushed motor**, the controller only has to control 1 phase 
 
 For **stepper motor**, current loop is similar to voice coil motor, except the controller has to control 2 separate phase currents (phase A and B). Phase A and B will have the same current loop structure as above.
 
-For **3-phase brushless motor**, the controller has to control 3 current values, with amplifier acting as a power inverter. Ultimately by means of Kirchoff’s current law ($I_{a} + I_{b} + I_{c} = 0$), the controller only needs to control 2 current values ($I_{a}$, $I_{b}$) with the third value inferred from the former 2 (same for voltage).
+For **3-phase brushless motor**, the controller has to control 3 current values, with amplifier acting as a power inverter. Ultimately by means of Kirchhoff's current law ($I_{a} + I_{b} + I_{c} = 0$), the controller only needs to control 2 current values ($I_{a}$, $I_{b}$) with the third value inferred from the former 2 (same for voltage).
 
 User can also operate in dq0 space by Park transform, controlling direct and quadrature current values. Selection on which 3-phase current control mode to use is done by [ControlMode](../../../02-keywords/09-current-and-voltage/02-motor-variables/ControlMode.md) keyword.
 

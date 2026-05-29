@@ -39,7 +39,7 @@ Delay, in samples, applied to CAN messages.
 The controller keeps a countdown that ticks down by 1 on every control interrupt (the sampling clock runs at 16384 samples per second, so one sample is about 61 µs). Before transmitting a CAN message the firmware waits until the countdown reaches 0, then immediately reloads it with the `CANDelay` value. The wait happens **between** sends rather than being added to a send already in progress, so `CANDelay` enforces a minimum interval from one transmit request to the next:
 
 $$
-minimum\ spacing \approx CANDelay \times 61\ \mu s
+\text{minimum spacing} \approx \text{CANDelay} \cdot 61\ \mu\text{s}
 $$
 
 A value of 0 disables the spacing (messages are sent as fast as the bus allows). The maximum is 1000 samples (roughly 61 ms). See the communication manual for guidance on when a delay is needed.

@@ -41,7 +41,7 @@ Difference between force reference and force feedback.
 `ForceErr` is recomputed every control cycle as the filtered reference minus the feedback:
 
 $$
-ForceErr\ \lbrack unit\rbrack\  = \ ForceRef\ \lbrack unit\rbrack\  - \ Force\ \lbrack unit\rbrack
+\text{ForceErr}\ [\text{unit}] = \text{ForceRef}\ [\text{unit}] - \text{Force}\ [\text{unit}]
 $$
 
 `ForceErr` serves two roles beyond closing the loop:

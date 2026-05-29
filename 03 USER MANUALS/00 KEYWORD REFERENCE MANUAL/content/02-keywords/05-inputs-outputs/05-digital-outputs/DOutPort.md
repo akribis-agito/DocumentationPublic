@@ -41,7 +41,7 @@ Bit-packed manual state of the digital outputs (before DOutLog inversion).
 `DOutPort` is the single word driven onto the physical output pins every cycle. At the end of each control cycle the *final* output word is computed and written straight to the hardware discrete-output stage:
 
 $$
-\text{Final output word} = DOutPort \oplus DOutLog
+\text{Final output word} = \text{DOutPort} \oplus \text{DOutLog}
 $$
 
 So `DOutPort` is the raw on/off intent and [DOutLog](DOutLog.md) is the per-bit polarity applied on top of it. On controllers whose output stage has selectable sink/source pins (open-collector outputs), the final word is then split by [DOutType](DOutType.md): the sink driver gets the bits where `DOutType = 0` and the source driver gets the bits where `DOutType = 1`. Differential outputs occupy the high bits of the same word.

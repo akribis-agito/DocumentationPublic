@@ -47,7 +47,7 @@ In gantry mode the gantry-specific position gain is used in place of `PosGain` f
 The position controller acts on [PosErr](../../10-motion/01-kinematics-status/PosErr.md) (the position reference minus the position feedback). The proportional output is then summed with the velocity feed-forward (the scaled reference velocity [dPosRef](../../10-motion/01-kinematics-status/dPosRef.md)) to form the velocity-loop reference:
 
 $$
-VelRef = PosErr \times PosGain + \frac{dPosRef \times VelTrackFact}{1024}
+\text{VelRef} = \text{PosErr} \cdot \text{PosGain} + \frac{\text{dPosRef} \cdot \text{VelTrackFact}}{1024}
 $$
 
 The product is computed in extended precision and then clamped to the storable range before becoming `VelRef`. `VelRef` is afterwards hard-limited to ±[MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md).

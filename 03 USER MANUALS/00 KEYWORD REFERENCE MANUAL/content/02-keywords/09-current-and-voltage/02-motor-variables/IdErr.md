@@ -42,19 +42,19 @@ Read-only direct-axis current error (IdRef − Id), three-phase only, in milliam
 `IdErr` is the difference between the d-axis reference and feedback:
 
 $$
-IdErr\ \lbrack mA\rbrack\  = \ IdRef\ \lbrack mA\rbrack\  - \ Id\ \lbrack mA\rbrack
+\text{IdErr}\ \lbrack mA\rbrack\  = \ \text{IdRef}\ \lbrack mA\rbrack\  - \ \text{Id}\ \lbrack mA\rbrack
 $$
 
 It then drives the direct-axis current PI controller, whose output is [Vd](Vd.md). The error is integrated (scaled by the integral gain [CurrKi](../../11-control-tuning/06-current-control/CurrKi.md)) and added to the proportional term (scaled by the loop gain [CurrGain](../../11-control-tuning/06-current-control/CurrGain.md)):
 
 $$
 \begin{aligned}
-I_{\Sigma} &\mathrel{+}= IdErr \cdot CurrKi \cdot 0.001 \cdot a_{aw} \\
-Vd &= (I_{\Sigma} + IdErr) \cdot CurrGain \cdot 0.001
+I_{\Sigma} &\mathrel{+}= \text{IdErr} \cdot \text{CurrKi} \cdot 0.001 \cdot a_{aw} \\
+\text{Vd} &= (I_{\Sigma} + \text{IdErr}) \cdot \text{CurrGain} \cdot 0.001
 \end{aligned}
 $$
 
-Here $I_{\Sigma}$ is the running integral, `0.001` is the fixed gain scaling, and $a_{aw}$ is the anti-windup gate (0 freezes the integral while the output is voltage-saturated, 1 otherwise). Since [IdRef](IdRef.md) is currently always 0, $IdErr = -Id$. The gain keywords [CurrGain](../../11-control-tuning/06-current-control/CurrGain.md) and [CurrKi](../../11-control-tuning/06-current-control/CurrKi.md) are documented under [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md); this page does not give tuning guidance.
+Here $I_{\Sigma}$ is the running integral, `0.001` is the fixed gain scaling, and $a_{aw}$ is the anti-windup gate (0 freezes the integral while the output is voltage-saturated, 1 otherwise). Since [IdRef](IdRef.md) is currently always 0, $\text{IdErr} = -\text{Id}$. The gain keywords [CurrGain](../../11-control-tuning/06-current-control/CurrGain.md) and [CurrKi](../../11-control-tuning/06-current-control/CurrKi.md) are documented under [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md); this page does not give tuning guidance.
 
 ## Examples
 

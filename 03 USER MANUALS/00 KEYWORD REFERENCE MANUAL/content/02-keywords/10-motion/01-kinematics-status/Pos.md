@@ -76,7 +76,7 @@ What `Pos` represents also depends on the loop configuration:
 | Configuration | `Pos` definition |
 |---------------|------------------|
 | Default, dual-loop, or gantry (all except pseudo dual-loop) | Decoded main-encoder reading (post-mapping/modulo). |
-| Pseudo dual-loop (non-gantry) | Auxiliary encoder, scaled to main-encoder units: $$Pos = AuxPos \times \frac{DualLoopFact}{65536}$$ |
+| Pseudo dual-loop (non-gantry) | Auxiliary encoder, scaled to main-encoder units: $$\text{Pos} = \text{AuxPos} \cdot \frac{\text{DualLoopFact}}{65536}$$ |
 
 In gantry mode the position loop uses [GantryFdbk](../../12-gantry-control/02-gantry-kinematic-feedback/GantryFdbk.md) (the common-mode position) rather than a single-axis `Pos`.
 

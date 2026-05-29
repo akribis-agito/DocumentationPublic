@@ -50,7 +50,7 @@ Velocity-loop reference/input (position-controller output plus velocity referenc
 The base value is the position gain acting on [PosErr](PosErr.md) plus a velocity feed-forward term derived from [dPosRef](dPosRef.md):
 
 $$
-VelRef = PosErr \times PosGain + \frac{dPosRef \times VelTrackFact}{1024}
+\text{VelRef} = \text{PosErr} \cdot \text{PosGain} + \frac{\text{dPosRef} \cdot \text{VelTrackFact}}{1024}
 $$
 
 In gantry mode the gantry position gain is used instead of [PosGain](../../11-control-tuning/03-position-control/PosGain.md). The product is computed in 64-bit and then clamped into the 32-bit range before being stored.

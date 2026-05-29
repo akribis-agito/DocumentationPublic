@@ -50,20 +50,11 @@ When ECAM motion starts ([Begin](../04-motion-command/Begin.md)) the controller 
 
 The maximum allowed value depends on `ECAMCycles`:
 
-| ECAMCycles | Maximum value of ECAMMasterIni                   |
-|------------|--------------------------------------------------|
-| 1          |                                                  
-              ``` math                                          
-              abs(ECAMGap)\ *\ (ECAMEnd\  - \ ECAMStart)        
-              ```                                               |
-| \> 1       |                                                  
-              ``` math                                          
-              abs(ECAMGap)\ *\ (ECAMEndCyc\  - \ ECAMStart)     
-              ```                                               |
-| \< 0       |                                                  
-              ``` math                                          
-              abs(ECAMGap)\ *\ (ECAMEndCyc\  - \ ECAMStartCyc)  
-              ```                                               |
+| ECAMCycles | Maximum value of ECAMMasterIni |
+|------------|--------------------------------|
+| 1          | $\lvert\text{ECAMGap}\rvert \cdot (\text{ECAMEnd} - \text{ECAMStart})$ |
+| \> 1       | $\lvert\text{ECAMGap}\rvert \cdot (\text{ECAMEndCyc} - \text{ECAMStart})$ |
+| \< 0       | $\lvert\text{ECAMGap}\rvert \cdot (\text{ECAMEndCyc} - \text{ECAMStartCyc})$ |
 
 ## Examples
 

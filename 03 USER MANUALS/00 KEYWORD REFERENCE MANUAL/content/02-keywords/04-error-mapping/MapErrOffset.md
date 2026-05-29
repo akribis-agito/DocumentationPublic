@@ -41,7 +41,7 @@ It is an axis-scoped parameter, not saved to flash, and cannot be changed while 
 The value you write is the **target**; the firmware does not apply it as a step. Internally it keeps a separate *actual* offset that slews toward `MapErrOffset` by a fixed amount each control cycle:
 
 $$
-actual \mathrel{+}= MapErrOffRamp \times SampleTime \quad \text{(toward the target, clamped on arrival)}
+\text{actual} \mathrel{+}= \text{MapErrOffRamp} \cdot \text{SampleTime} \quad \text{(toward the target, clamped on arrival)}
 $$
 
 So [MapErrOffRamp](MapErrOffRamp.md) sets the slew rate (counts per second) and `MapErrOffset` sets the destination. Each cycle the *actual* offset is added to the interpolated correction, and the sum is then scaled by the engage ramp (see [MapErrOnStep](MapErrOnStep.md)) before being added to the feedback to form [Pos](../10-motion/01-kinematics-status/Pos.md). Ramping in this way means changing `MapErrOffset` produces a smooth move of the corrected position rather than a jump. The actual offset is reset to 0 whenever mapping is off or in simulation.
