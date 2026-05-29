@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="680" height="220" viewBox="0 0 680 220" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Hall start then refine: a rough angle is taken from the Hall state (ComtStatus 300 or 400) so motion can begin; on the next index pulse (method 3) or Hall transition (method 4) the angle is refined to its final value with ComtStatus 100.">
+<svg xmlns="http://www.w3.org/2000/svg" width="767" height="223" viewBox="0 -3 767 223" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Hall start then refine: a rough angle is taken from the Hall state (ComtStatus 300 or 400) so motion can begin; on the next index pulse (method 3) or Hall transition (method 4) the angle is refined to its final value with ComtStatus 100.">
   <title>Hall-start commutation refined by index or Hall change</title>
   <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
 

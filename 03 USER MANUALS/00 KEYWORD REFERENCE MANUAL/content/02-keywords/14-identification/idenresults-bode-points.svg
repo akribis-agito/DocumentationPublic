@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="780" height="330" viewBox="0 0 780 330" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="IdenResults Bode point: one CalcIden run produces a single frequency point at InjectFreq with magnitude stored in IdenResults[5] (dB divided by 100) and phase in IdenResults[6] (degrees divided by 100). PCSuite sweeps InjectFreq and concatenates points into the full Bode plot.">
+<svg xmlns="http://www.w3.org/2000/svg" width="885" height="367" viewBox="-20 -34 885 367" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="IdenResults Bode point: one CalcIden run produces a single frequency point at InjectFreq with magnitude stored in IdenResults[5] (dB divided by 100) and phase in IdenResults[6] (degrees divided by 100). PCSuite sweeps InjectFreq and concatenates points into the full Bode plot.">
   <title>IdenResults — one frequency point of the Bode plot</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
