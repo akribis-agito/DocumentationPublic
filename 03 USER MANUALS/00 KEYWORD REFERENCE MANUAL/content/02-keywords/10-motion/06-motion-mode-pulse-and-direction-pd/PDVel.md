@@ -40,6 +40,8 @@ Read-only rate of change of the scaled P/D counter PDPos, in P/D units per secon
 
 In direct mode the velocity also feeds direction-dependent decisions (for example limit-switch handling and friction-compensation sign), so `PDVel` reflects the instantaneous P/D command rate.
 
+Numerically, `PDVel` is the per-cycle change in `PDPos` multiplied by the fixed sample rate of **16,384 Hz** (the scaled change is taken over one ~61 us cycle and expressed per second). Because of this, when the incoming pulse rate is low you may see `PDVel` step between discrete values from one cycle to the next — for example, a steady one pulse per cycle (with `PDFact/PDFactDen = 1`) reads as about 16,384 units/s — rather than varying smoothly. The controller carries the fractional part of the scaled change forward between cycles, so over time `PDVel` resolves finer gradations than a single per-cycle step and tracks the true average rate.
+
 Like `PDPos`, `PDVel` is an internal-count value converted to pulse-direction user units when queried over a communication channel — see [PDUsrUnits](PDUsrUnits.md).
 
 ## Examples

@@ -52,7 +52,13 @@ Each control cycle the controller:
 3. Runs a PI tracking controller plus feed-forward so the emitted count (scaled by `VEncFactDen`) follows the scaled source with minimal lag, and computes the number of edges to emit this cycle.
 4. Writes the pulse count, 50% duty period, and "clocks-to-first-pulse" (from [VEncDelay](VEncDelay.md)) to the hardware.
 
-If the required number of pulses in one cycle exceeds the hardware limit while the motor is on, the axis faults: [ConFlt](../../07-status-and-faults/ConFlt.md) reports the virtual-encoder maximum-pulses-exceeded fault.
+The edges computed for a cycle are spread evenly across that one control cycle and re-armed each cycle, so the output is re-clocked every cycle rather than free-running. The control cycle runs at roughly 16.4 kHz (about 61 microseconds per cycle), so the effective output rate is the number of edges emitted in a cycle taken over that fixed ~61 microsecond window: emitting *N* edges in a cycle corresponds to *N* x 16,384 edges per second.
+
+If the required number of pulses in one cycle exceeds the hardware limit while the motor is on, the axis faults: [ConFlt](../../07-status-and-faults/ConFlt.md) reports the virtual-encoder maximum-pulses-exceeded fault. The per-cycle limit is roughly a few thousand edges (the exact figure depends on the product's internal clock), because each edge needs both an on and an off half-period within the cycle; the limit is therefore about half the number of clock counts available in one control cycle.
+
+### Hardware behavior
+
+The virtual encoder and the fixed encoder-emulation output ([EmulRat](../05-encoder-emulation/EmulRat.md)) drive the **same physical A/B output pins**. When `VEncOn` = 1 the virtual encoder takes over those A/B pins; when `VEncOn` = 0 the A/B pins revert to the fixed emulation path. The index (Z) line is not switched by `VEncOn` — it continues to come from the encoder-emulation path regardless of the virtual-encoder state.
 
 > **Availability:** in the current firmware the full generation path is implemented for the **standalone controller**; the Central-i remote-output path is product-dependent.
 

@@ -38,6 +38,8 @@ Position spacing between successive events in by-gap mode.
 
 After each by-gap event fires, the controller adds `EventGap` to the most recent compare position to obtain the next one, then loads it as [EventNextPos](EventNextPos.md). The window direction is set by [EventBegPos](EventBegPos.md) and [EventEndPos](EventEndPos.md) (see [EventEndPos](EventEndPos.md)); use a positive `EventGap` for a window running in the positive direction. The grid of event positions is therefore `EventBegPos`, `EventBegPos + EventGap`, `EventBegPos + 2·EventGap`, …, continuing while it stays within `EventEndPos` (or indefinitely when [EventAlwaysOn](EventAlwaysOn.md) = 1).
 
+When by-gap generation is armed, the number of events for the window is |([EventEndPos](EventEndPos.md) - [EventBegPos](EventBegPos.md)) / EventGap| + 1, and generation stops automatically after that many pulses (unless [EventAlwaysOn](EventAlwaysOn.md) = 1). The sign of `EventGap` only selects the direction the compare position advances; its magnitude sets the spacing. A negative `EventGap` therefore steps the grid in the negative direction, matching a window where `EventEndPos` is below `EventBegPos`.
+
 The maximum sustainable event rate is bounded by `EventGap` divided by the axis velocity: as that interval approaches the time needed to emit one pulse of width [EventPulseWid](EventPulseWid.md), pulses begin to merge.
 
 ## Examples

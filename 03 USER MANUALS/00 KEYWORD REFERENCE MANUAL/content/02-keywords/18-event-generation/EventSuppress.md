@@ -40,7 +40,9 @@ This keyword is present on **central-i v4**. It is not part of the v5 keyword se
 
 When `EventSuppress` is issued, the controller sends the suppress control to the remote drive's compare hardware as a momentary action — it asserts the suppress control and then releases it. The command always reports success once the remote messages have been queued; there is no readable on/off state associated with it (reading the keyword is not a status query — it is a command).
 
-Use `EventSuppress` together with the event-generation configuration: arm generation with [EventOn](EventOn.md) and shape the pulse with [EventPulseWid](EventPulseWid.md), then issue `EventSuppress` when you need the compare hardware to skip emitting an output.
+Use `EventSuppress` together with the event-generation configuration: arm generation with [EventOn](EventOn.md) and shape the pulse with [EventPulseWid](EventPulseWid.md), then issue `EventSuppress` when you need to abort an output that is currently being emitted.
+
+The suppress action is edge-triggered and acts on a pulse that is currently being emitted: if a pulse is active when the command arrives, the compare hardware immediately ends that pulse, returns the output to its idle level, and clears the remaining width count. Because it acts only on an in-progress pulse, `EventSuppress` is a momentary abort of the current output rather than a block on a future event; the next configured position crossing fires normally. If no pulse is active when the command is issued, it has no visible effect.
 
 ## Examples
 

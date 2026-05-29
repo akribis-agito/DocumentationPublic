@@ -43,7 +43,12 @@ Selects the type of index pulse generated on the encoder emulation output.
 | 0–3 | Output filter level | [EmulFilter](EmulFilter.md) |
 | 4–5 | Index pulse type | `EmulIndexType` |
 
-`EmulIndexType` is written into bits 4–5 of the register (masked to 2 bits); the keyword value range exposed to the user is 0–1. Writing either keyword re-packs and re-writes the whole register, so both settings take effect together. The bit field selects how the emulated Z pulse is generated; the individual values are not labelled, so the precise pulse shape produced by 0 versus 1 is determined by the emulation hardware.
+`EmulIndexType` is written into bits 4–5 of the register (masked to 2 bits); the keyword value range exposed to the user is 0–1. Writing either keyword re-packs and re-writes the whole register, so both settings take effect together. The bit field selects how the emulated Z pulse is generated:
+
+| Value | Emulated index (Z) behavior |
+|---|---|
+| 0 | Pass-through. The incoming index pulse is emitted directly on the emulated index output, unchanged. |
+| 1 | Regenerated and aligned. The index pulse is re-derived from the emulated A/B quadrature edges and asserted across a fixed, narrow span (a few emulated edges wide), so its edges line up with the emulated quadrature output rather than the raw incoming index. |
 
 ## Examples
 

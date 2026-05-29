@@ -41,6 +41,10 @@ When a trigger is detected: latch position → store into `LockVal` → incremen
 
 On non-Central-i products the capture trigger and the event-generation output share the same hardware pin, so the two features cannot be active at once. Arming `LockEn=1` automatically clears event generation (`EventOn=0`), and arming event generation automatically clears `LockEn`. This restriction does not apply to Central-i products.
 
+### Capture and event generation share one channel (Central-i)
+
+On Central-i, capture and event generation can both be active at the same time, but the master reads each captured position from the remote drive over a single shared communication channel that also carries event-output updates. The two features therefore take turns on that channel: when both are busy, servicing one can delay the other by one or more control cycles. This lowers the maximum sustained capture/event rate when capture and event generation run together, compared with running either one alone.
+
 ## Examples
 
 ```text

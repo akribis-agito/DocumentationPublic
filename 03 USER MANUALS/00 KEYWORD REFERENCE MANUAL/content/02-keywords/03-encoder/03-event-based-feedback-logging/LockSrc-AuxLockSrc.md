@@ -103,6 +103,15 @@ On **Central-i** products the source/edge are sent to the remote drive's FPGA lo
 
 In both cases the absolute value is converted to a zero-based input index internally (value `1` → first input), so the tables above are the authoritative source-to-input mapping.
 
+### Source latency (which sources trigger fastest)
+
+Not all trigger sources reach the capture logic with the same latency:
+
+- **Discrete digital inputs and bidirectional differential I/O** pass through a configurable input debounce/glitch filter before they can trigger a capture. This filter rejects short noise pulses, but it also adds a small, filter-dependent delay between the physical edge and the latched capture. The delay scales with how the input filtering is configured.
+- **Encoder index lines and Hall-sensor lines** feed the capture logic essentially raw, with no debounce stage, so they trigger with the lowest latency.
+
+This is why an encoder index is preferred when you need the most precise registration: it captures the feedback position with minimal and consistent delay relative to the true edge, whereas a filtered discrete input trades a little timing precision for noise immunity.
+
 ## Examples
 
 ```text

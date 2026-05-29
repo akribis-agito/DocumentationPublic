@@ -55,6 +55,10 @@ The reading and scaling are done once per axis every controller cycle. Each cycl
 
 Because the fractional remainder is carried forward, a fractional `PDFact/PDFactDen` ratio does not drift, and accumulating every cycle guarantees no pulses are dropped between reads. [PDVel](PDVel.md) is derived from the same per-cycle scaled change.
 
+### Hardware behavior
+
+The decoding hardware keeps a running step counter that is latched and reset to zero once per controller cycle, so what the firmware reads each cycle is the **net signed step count accumulated since the previous cycle** (the step-up count minus the step-down count). That per-cycle delta is a signed 16-bit value, i.e. it can represent a net change of -32768 to +32767 steps in a single cycle. The controller cycle runs at a fixed 16,384 Hz (about 61 microseconds per cycle), so the per-cycle delta cannot reach its 16-bit limit at any realistic input pulse rate — this is why the every-cycle read guarantees no pulses are lost between reads. The raw 16-bit delta is the input to the scaling, sign and accumulation steps above; `PDPos` itself accumulates in a much wider register and is not limited to 16 bits.
+
 ### How PDPos becomes the reference
 
 `Begin` latches the current `PDPos` value so motion is measured **relative to the instant motion started**:

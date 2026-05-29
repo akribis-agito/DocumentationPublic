@@ -48,6 +48,10 @@ The by-gap scheme produces a regular pulse train across the window:
 
 ![By-gap event pulse train between begin and end positions](eventtype-pulse-train.svg)
 
+### Hardware behavior
+
+A compare match is edge-detected: exactly one output action is produced each time the feedback position crosses a compare position, so the axis must move away from a compare position and re-reach it before that position can fire again. When [EventPulseWid](EventPulseWid.md) selects toggle mode, the output flips state on each event and holds that state until the next event (it is not re-armed per pulse); it returns to the idle level when generation is disarmed — that is, once the end position or count is reached, or the unit is reset.
+
 ## Examples
 
 ```text

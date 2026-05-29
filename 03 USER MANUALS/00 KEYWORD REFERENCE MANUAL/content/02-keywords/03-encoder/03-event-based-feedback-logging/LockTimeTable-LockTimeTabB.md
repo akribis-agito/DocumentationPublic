@@ -9,7 +9,9 @@ History arrays storing the controller-cycle time of each logged digital event.
 
 `LockTimeTable` and `LockTimeTabB` store the time at which each trigger event occurs, expressed as the number of control cycles elapsed since feedback logging was enabled (the elapsed-cycle timer is reset to 0 when [LockEn](LockEn-AuxLockEn.md) goes from disabled to enabled, and increments once per control cycle). They are the time-stamp companions of the position history arrays [LockValTable](LockValTable-LockValTabB.md) / `LockValTabB`, written at the same index, [LockCntr](LockCntr-AuxLockCntr.md). When `LockTimeTable` fills, recording continues into `LockTimeTabB`.
 
-To convert a stored value to seconds, multiply by the control-cycle period (the control sampling interval).
+To convert a stored value to seconds, multiply by the control-cycle period (the control sampling interval). On standard products the control loop runs at 16384 Hz, so each count is 1/16384 s ≈ 61.035 µs; on fast-sampling products it runs at 65536 Hz, so each count is 1/65536 s ≈ 15.259 µs. For example, a stored value of 1000 on a standard product corresponds to 1000 × 61.035 µs ≈ 61.0 ms after logging was enabled.
+
+The time stamp is the elapsed-cycle count itself, so its resolution is exactly one control cycle. Two events captured in different cycles always differ by at least one count, and an event's time stamp reflects the cycle in which it was serviced rather than the exact sub-cycle instant of the trigger edge. Because at most one event is recorded per control cycle (see [LockCntr](LockCntr-AuxLockCntr.md)), any trigger edges that fall within the same cycle share that single time stamp.
 
 ## How it works
 

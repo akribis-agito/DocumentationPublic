@@ -50,6 +50,9 @@ Together with the pole pairs ([PolePrs](../../02-motor-and-amplifier/PolePrs.md)
 - **Commutation electrical cycle.** The firmware computes the counts per electrical cycle as $\frac{\text{EncRes}}{\text{PolePrs}}$. This defines how the measured position maps onto the electrical angle for sinusoidal commutation, so an incorrect `EncRes` mis-aligns the commutation angle (see the warning above). For a stepper, the steps-per-count factor is derived as $\frac{\text{PolePrs} \cdot \text{electricalCycle}}{\text{EncRes}}$.
 
   *Worked example.* A rotary brushless motor with `EncRes = 10000` and [PolePrs](../../02-motor-and-amplifier/PolePrs.md) `= 4` has `10000 / 4 = 2500` counts per electrical cycle. The commutation angle advances one full electrical revolution (0 → 360° electrical) every 2500 mechanical counts; the motor turns one mechanical revolution every 4 electrical cycles.
+
+> [!note]
+> For a digital A-quad-B incremental encoder ([EncType](EncType-AuxEncType.md)`=1`, subtype 0), `EncRes` is expressed in **counts**, not in encoder *lines*. The controller uses x4 (four-edge) quadrature decoding: it produces one count on every transition of the A/B pair, so a single A/B cycle (one encoder line/period) yields **four counts**. A 2500-line encoder therefore gives `2500 × 4 = 10000` counts per revolution, so set `EncRes = 10000`. Quote the encoder's line count (sometimes called pulses-per-revolution, PPR) and multiply by four to obtain the value for `EncRes`.
 - **Speed-unit conversion (BEMF feed-forward and reporting).** `EncRes` converts internal counts/s into engineering speed:
   - Linear motor: $\frac{\text{magneticPitch}\,[\text{m}]}{\text{EncRes}}$ — counts/s to m/s (here `EncRes` is counts per magnetic pitch).
   - Rotary motor / DC brush: $\frac{60}{\text{EncRes}}$ — counts/s to rpm (here `EncRes` is counts per revolution).

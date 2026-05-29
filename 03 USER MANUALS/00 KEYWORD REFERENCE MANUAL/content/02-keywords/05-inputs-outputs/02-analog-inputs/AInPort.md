@@ -56,6 +56,8 @@ Update rate depends on the platform:
 - **Standalone (CONTROLLER) v4** — all four inputs are conditioned every single sample (16 384 Hz). On the AG100 single-axis variant, only inputs 1–2 exist.
 - **Central-i v4 / v5** — the four inputs are conditioned one per 16-sample slot, so each input is refreshed at roughly 1 024 Hz on each connected remote unit.
 
+The analog-input converter is a 16-bit converter and the reading is signed (two's complement), so the raw entry spans the full −32768…+32767 count range. On standalone products each control cycle the converter takes one new fully-settled sample per input: the conversion is started by the controller's sample tick and completes in roughly 4–5 µs, far inside the ~61 µs control cycle (16 384 Hz), and there is no internal oversampling or block-averaging — `AInPort[5]`–`AInPort[8]` is a single point sample of the input captured each cycle. (On central-i remote I/O the four inputs are refreshed in rotation as described above, roughly 1 024 Hz per input, but each value is still a single point sample, not a block average.) To smooth noisy inputs, use the digital filter [AInFilt](AInFilt.md) rather than relying on converter averaging.
+
 The processed value is what control functions consume once an input is routed with [AInMode](AInMode.md); the raw value is used directly only by the analog position-feedback function ([AInMode](AInMode.md) code 10). Both are read-only.
 
 ## Examples

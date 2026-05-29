@@ -40,7 +40,21 @@ Period divisor setting the PWM frequency for all user PWM channels.
 
 ## How it works
 
-The PWM timebase is generated in hardware. When you write `UserPWMDiv` (or [UserPWM](UserPWM.md)), the new divisor is applied — directly on a standalone controller, or by sending it to the remote unit on central-i. The hardware then divides its internal clock by this value to set the PWM period, so the divisor scales the period monotonically: larger divisor → longer period → lower frequency. The exact frequency for a given divisor is fixed by the hardware clock and is product-specific; consult the product manual for the resulting frequencies.
+The PWM timebase is generated in hardware. When you write `UserPWMDiv` (or [UserPWM](UserPWM.md)), the new divisor is applied — directly on a standalone controller, or by sending it to the remote unit on central-i. The hardware divides its base clock by `2^(UserPWMDiv+1)` to advance a 4096-count period counter, so each PWM period spans `2^(UserPWMDiv+1) × 4096` base-clock cycles. The divisor therefore scales the period monotonically by powers of two: larger divisor → longer period → lower frequency. The 12-bit period counter also fixes the duty resolution at 4096 steps regardless of divisor.
+
+On products whose PWM timebase runs from a 50 MHz hardware clock, the resulting frequency is:
+
+```text
+PWM frequency = 50 MHz / (2^(UserPWMDiv + 1) × 4096)
+```
+
+| `UserPWMDiv` | Approximate frequency (50 MHz timebase) |
+|--------------|------------------------------------------|
+| 0            | ≈ 6.10 kHz |
+| 9 (default)  | ≈ 11.9 Hz |
+| 15 (max)     | ≈ 0.19 Hz |
+
+The exact frequency is product-specific; use the formula above with the timebase clock for your product.
 
 Because the divisor sets the shared timebase, it applies to both UserPWM channels at once — you cannot give the two channels different frequencies, only different duty cycles. Changing the divisor does not change the duty *fraction* (the 0–4095 [UserPWM](UserPWM.md) value), only the period over which that fraction is measured.
 

@@ -28,6 +28,10 @@ While `LockCntr` is within the first table's capacity the event is stored in [Lo
 
 `LockCntr` itself is a 32-bit counter and does not wrap in any practical run; it is the *table index* that is bounded by the capacities above.
 
+### One event recorded per control cycle
+
+The counter is serviced once per control cycle, and at most one event is recorded per cycle. If more than one trigger edge occurs within a single control cycle, the hardware keeps only the most recent captured position from that cycle, and `LockCntr` advances by exactly one — the earlier edges within that same cycle are not counted or stored separately. To capture every edge as a distinct entry, keep the trigger rate well below one event per control cycle (as a practical rule of thumb, below one event per two control cycles leaves margin against this timing limit). Beyond that rate, closely spaced edges are coalesced into a single logged event.
+
 ## Examples
 
 ```text

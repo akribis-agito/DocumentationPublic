@@ -55,6 +55,8 @@ then clamped to the DAC range before being written to the channel. Note that [AO
 
 `AOutPort` is written to flash, is array-typed, and may be changed in motion and with the motor on.
 
+The analog output is produced by a 16-bit DAC. Each control cycle the controller computes a fresh DAC code and writes it to the channel; the channel is refreshed once per cycle (16 384 Hz, ~61 µs) and the new code is loaded in roughly 1.5 µs. The output is therefore a stepwise (sample-and-hold) signal that updates at the control rate, not a continuously interpolated waveform — a commanded change appears at the output within one control cycle.
+
 ## Examples
 
 ```text
@@ -67,7 +69,7 @@ AAOutPort[1]          ; read back the commanded value
 
 - **Index 0** — invalid; valid indices are `AOutPort[1]`–`AOutPort[4]`. `AOutPort[0]` does not exist.
 - **Wrong mode** — `AOutPort` is only read by the DAC when [AOutMode](AOutMode.md)`[i] = 0`. Writing it while `AOutMode[i] ≠ 0` stores the value but the output continues to follow the monitored parameter; the stored value takes effect the moment `AOutMode[i]` is set back to `0`.
-- **Out of range** — writes outside ±11905 mV are rejected by the parameter table; the DAC code is also clamped each cycle.
+- **Out of range** — writes outside ±11905 mV are rejected by the parameter table; the DAC code is also clamped each cycle. The clamp saturates rather than wraps: a value (or `AOutPort + AOutOffset` sum) beyond ±11905 mV pins the output flat at the corresponding rail and holds it there until the value returns in range — it does not roll over to the opposite rail. Because `AOutOffset` is inside this limit, a large offset can rail an otherwise in-range `AOutPort`.
 - **2-output products** — only `AOutPort[1]` and `AOutPort[2]` drive physical channels; `AOutPort[3]` / `AOutPort[4]` accept writes but do not reach any DAC.
 - **Amplifier override** — when the amplifier is an analog-current-command or built-in-linear type, the DAC is owned by the amplifier current command; `AOutPort` writes are stored but do not reach the pin.
 - **Motor on/off** — independent of `MotorOn`; the DAC follows `AOutPort` whether the servo is enabled or not.
