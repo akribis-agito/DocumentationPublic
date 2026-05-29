@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="250" viewBox="0 0 760 250" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Anomaly detection pipeline: a monitored signal is low-pass filtered each control cycle, compared against the per-motion upper and lower limit tables, and on an out-of-band sample the detector trips a controlled stop or a fault.">
+  <title>Anomaly detection pipeline</title>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="20" y="26" font-size="15" font-weight="bold">Anomaly detection pipeline</text>
+
+  <!-- source -->
+  <rect x="20" y="60" width="150" height="80" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="95" y="92" text-anchor="middle" font-weight="bold">Monitored signal</text>
+  <text x="95" y="114" text-anchor="middle">selected by</text>
+  <text x="95" y="132" text-anchor="middle">AnomDtctCnfg[1]</text>
+
+  <!-- filter -->
+  <rect x="210" y="60" width="150" height="80" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="285" y="92" text-anchor="middle" font-weight="bold">Low-pass filter</text>
+  <text x="285" y="114" text-anchor="middle">pole set by</text>
+  <text x="285" y="132" text-anchor="middle">AnomDtctCnfg[2]</text>
+
+  <!-- compare -->
+  <rect x="400" y="60" width="160" height="80" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="480" y="88" text-anchor="middle" font-weight="bold">Compare to band</text>
+  <text x="480" y="110" text-anchor="middle">AnomDtctLL &lt;= signal</text>
+  <text x="480" y="128" text-anchor="middle">&lt;= AnomDtctUL</text>
+
+  <!-- trip -->
+  <rect x="600" y="60" width="140" height="80" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="670" y="88" text-anchor="middle" font-weight="bold">Out of band</text>
+  <text x="670" y="110" text-anchor="middle">controlled stop</text>
+  <text x="670" y="128" text-anchor="middle">or ConFlt 1067</text>
+
+  <!-- status -->
+  <rect x="210" y="180" width="350" height="46" rx="6" fill="#f4f7fb" stroke="#9fb4cc" stroke-width="1.2"/>
+  <text x="385" y="208" text-anchor="middle">AnomDtctSt reports state, filtered value, and active band</text>
+
+  <line x1="170" y1="100" x2="206" y2="100" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="360" y1="100" x2="396" y2="100" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="560" y1="100" x2="596" y2="100" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="480" y1="140" x2="480" y2="178" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+</svg>

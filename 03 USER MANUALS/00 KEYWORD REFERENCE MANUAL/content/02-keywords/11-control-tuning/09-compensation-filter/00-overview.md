@@ -1,0 +1,27 @@
+# Compensation-filter
+
+The compensation filter improves the force signal used by force control by combining two independent estimates of force: the force measured directly by the analog force-feedback sensor, and an expected force predicted from the axis position through a stored compensation table. The two estimates are merged with a complementary filter so that the slow, position-dependent component comes from the table while the fast, dynamic component comes from the live sensor.
+
+This is useful when the relationship between position and force is well characterised (for example a known spring-like contact), but the raw sensor signal is noisy. The table supplies a smooth low-frequency baseline, and the live sensor supplies the high-frequency detail.
+
+![Compensation pipeline: position drives a table lookup that predicts force, which a complementary filter blends with the measured force](compensation-pipeline.svg)
+
+The pipeline works as follows. The current axis position is looked up in the compensation table to produce an expected force. The table is a one-dimensional array of force values sampled at evenly spaced positions; the lookup linearly interpolates between the two nearest table points. The difference between the measured force and the table-predicted force is passed through a first-order low-pass filter, and the filtered difference is added back to the table-predicted force to form the force value handed to force control. As a result, near steady state the output follows the table, while transient changes pass through largely unfiltered.
+
+The compensation feature is available from v5 (central-i v5).
+
+The compensation table is defined over a position domain. [CompTbleInit](CompTbleInit.md) sets the position of the first table point, [CompTbleGap](CompTbleGap.md) sets the position spacing between adjacent points, and [CompTbleEnd](CompTbleEnd.md) sets the last table index that is in use. [CompFiltTble](CompFiltTble.md) holds the expected-force value at each table point. Because different physical units can make contact at slightly different positions, [CompTbleCrrct](CompTbleCrrct.md) shifts the whole table by the difference between the contact position recorded when the table was created and the contact position of the present unit.
+
+The filter itself is enabled by [CompFiltOn](CompFiltOn.md), and its low-pass cut-off is set by [CompFiltFreq](CompFiltFreq.md). When the axis position is outside the table domain, compensation is not applied and the measured force is used unchanged.
+
+The following is the summary of compensation-filter keywords.
+
+| No. | Keywords | Summary |
+|----|----|----|
+| 1 | [CompFiltOn](CompFiltOn.md) | Compensation filter enable switch |
+| 2 | [CompFiltFreq](CompFiltFreq.md) | Low-pass cut-off frequency of the complementary filter |
+| 3 | [CompFiltTble](CompFiltTble.md) | Expected force at each table point |
+| 4 | [CompTbleInit](CompTbleInit.md) | Position of the first table point |
+| 5 | [CompTbleEnd](CompTbleEnd.md) | Last table index in use |
+| 6 | [CompTbleGap](CompTbleGap.md) | Position spacing between adjacent table points |
+| 7 | [CompTbleCrrct](CompTbleCrrct.md) | Per-unit contact-point correction that shifts the table |

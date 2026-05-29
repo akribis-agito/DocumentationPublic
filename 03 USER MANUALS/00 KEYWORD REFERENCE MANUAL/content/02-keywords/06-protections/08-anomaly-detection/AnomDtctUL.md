@@ -1,5 +1,6 @@
 ---
 keyword: AnomDtctUL
+summary: "Upper-limit table defining the top of the expected band the filtered signal is checked against, per monitored motion."
 availability:
   standalone: []
   central-i:
@@ -25,4 +26,45 @@ overrides: {}
 ---
 # AnomDtctUL
 
-<!-- body pending -->
+Upper-limit table defining the top of the expected band the filtered signal is checked against, per monitored motion.
+
+## Overview
+
+`AnomDtctUL` is the upper boundary of the expected band for anomaly detection. Together with the lower-limit table [AnomDtctLL](AnomDtctLL.md) it describes the normal shape of a monitored signal as a motion progresses. When the filtered monitored signal rises above the upper limit in force at that point of the motion, the detector trips (see [AnomDtctCnfg](AnomDtctCnfg.md) for the stop behavior).
+
+The table is large because it stores a full profile for each of several monitored motions, sampled point by point along each motion.
+
+This keyword is available from v5 (central-i).
+
+## How it works
+
+The table is divided into one block per monitored motion (up to four motions). Each block holds up to 256 points that the detector walks through as the motion plays out. As the motion progresses, the detector advances one point at a time; [AnomDtctGap](AnomDtctGap.md) sets how many control cycles each point is held before moving to the next.
+
+The array is 1-indexed (index 0 is reserved); the highest usable index is one less than the frontmatter `array_size`. The blocks are laid out consecutively:
+
+| Index range | Monitored motion |
+| --- | --- |
+| 1 – 256 | motion 0 |
+| 257 – 512 | motion 1 |
+| 513 – 768 | motion 2 |
+| 769 – 1024 | motion 3 |
+
+The value at each index is compared in the native units of the selected monitored signal (`AnomDtctUL` itself carries no unit conversion). The current motion's active upper limit is mirrored to [AnomDtctSt](AnomDtctSt.md) element 4 so you can read what the detector is comparing against.
+
+Populate the table with an upper envelope that sits comfortably above the signal seen during a known-good motion, leaving margin for normal cycle-to-cycle variation. The lower envelope goes in [AnomDtctLL](AnomDtctLL.md).
+
+## Examples
+
+```text
+AAnomDtctUL[1]=12000     ; upper limit at the first point of motion 0
+AAnomDtctUL[2]=12500     ; ... next point
+AAnomDtctUL[257]=8000    ; first point of motion 1's block
+AAnomDtctUL[1]           ; read the first upper-limit point
+```
+
+## See also
+
+- [AnomDtctLL](AnomDtctLL.md) — lower boundary of the band
+- [AnomDtctGap](AnomDtctGap.md) — control cycles spanned by each table point
+- [AnomDtctCnfg](AnomDtctCnfg.md) — monitored source and motion selection
+- [AnomDtctSt](AnomDtctSt.md) — active limits and filtered value

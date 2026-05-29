@@ -156,8 +156,8 @@ The following is the list of instruction error codes and their descriptions.
 | 145 | Helix segment definitions create inconsistent end point |
 | 146 | An error occurred in RJ45 RS232 receive |
 | 147 | An error occurred in mini USB RS232 receive |
-| 148 | Out of range filter definitions (frequency), at EPPMODELRANGE_FILTER_1 |
-| 149 | Out of range filter definitions (damping), at EPPMODELRANGE_FILTER_1 |
+| 148 | Out of range filter definitions (frequency), at the EPP model-range filter |
+| 149 | Out of range filter definitions (damping), at the EPP model-range filter |
 | 150 | EPP function not done,for the motion length out of memory |
 | 151 | Error in remote Central-i unit communication |
 | 152 | The detected Central-i device type is not the same as the user entered |
@@ -245,3 +245,112 @@ The following is the list of instruction error codes and their descriptions.
 | 234 | At least one of the plant model entries is illegal |
 | 235 | Download Firmware is only available via Ethernet connection |
 | 236 | No valid plant model (PlantModel[]) for EPP calculation |
+| 237 | This functionality is not yet supported by this FW version |
+| 238 | The remote CAN Access failed due to time-out when waiting for send or receive to/from the remote unit |
+| 239 | The remote CAN Access replied with an error (error code is stored at RemoteCANVal) |
+| 240 | The remote CAN Access receive a reply it can't interpret |
+| 241 | The overall (sum) of continuous current limitation (ContCL) of all axes is too high (greater than 28,000mA) |
+| 242 | This function is not supported in this controller type |
+| 243 | Download FPGA encountered an unknown FPGA type |
+| 244 | A faulty FPGA has been detected. try to re-download the FPGA code, or consult Agito support |
+| 245 | The FPGA in this unit does not match the FW (variant and full scale), consult Agito support |
+| 246 | Out of range filter definitions, at CNC/Vector position filter |
+| 247 | A parameter (one of: enable/disable, filter type, filter parameters) within CNC 'Modify CNC Position Filter' segment is out of range |
+| 248 | This communication channel is blocked due to LCU mode |
+| 249 | Trying to begin CNCB, but it is not supported in this product |
+| 250 | The FPGA in this unit does not match this new FW (support for large arrays), consult Agito support for newer FPGA version |
+| 251 | You are running a single flash FW on double flash board. Please download a correct version |
+| 252 | You are running a double flash FW on single flash board. Please download a correct version |
+| 253 | First entry of BuffTime[] should not be zero |
+| 254 | Can't find a zero value in BuffTime[] to indicate end of valid values |
+| 255 | BuffTime[] must include time values that are monotonously growing |
+| 256 | The cycle time is longer than the available memory in internal buffers |
+| 257 | The primary axis (used to send the BuffCalc) must be a member axis (defined by the index of BuffCalc[&lt;index&gt;]) |
+| 258 | Begin command must be sent to the primary axis as was defined during BuffCalc |
+| 259 | One or more of the spline buffer raw data parameters (BuffTime, BuffPos, BuffSplineMod...) were modified (or after power on or load from Flash) and BuffCalc was not executed to update internal buffers |
+| 260 | One or more of the members axes, as was defined during BuffCalc is not ready for the motion (must be enabled and MotionMode=18 and not in motion) |
+| 261 | One or more of the members axes, as was defined during BuffCalc is already moving member of another Spline Buffer motion |
+| 262 | Arc center definition gives different radiuses to start and end points |
+| 263 | Vector Arc direction parameter is out of range |
+| 264 | Vector speed parameter out of range |
+| 265 | Arc has Number of Full Cycles parameter out of range (must be 0 or positive) |
+| 266 | The master vector axis must be the smallest member axis (A &lt; B &lt; C ...) |
+| 267 | ModRev value is out of SW position range |
+| 268 | The FPGA in this unit does not match this new FW (New dynamic braking implementation), consult Agito support for newer FPGA version |
+| 269 | Speed can't be set higher than MaxVel |
+| 270 | MaxVel can't be set lower than Speed |
+| 271 | Can't start a motion if the desired maximal speed of the motion command (Speed) is higher than the MaxVel limitation |
+| 272 | The EtherCAT is not synchronized or is not in the suitable motion mode (CSP) |
+| 273 | Trying to push an item into the internal FIFO buffer of FIFO Position Tracking mode, but it is full |
+| 274 | 3D ARC must have 3 non-collinear points to define the trajectory of the ARC |
+| 275 | ConFlt Snapshot parameter with invalid CAN code |
+| 276 | ConFlt Snapshot parameter with invalid axes |
+| 277 | ConFlt Snapshot parameter with invalid index |
+| 278 | ConFlt Snapshot parameter can't be function |
+| 279 | ProgSnap Snapshot parameter with invalid CAN code |
+| 280 | ProgSnap Snapshot parameter with invalid axes |
+| 281 | ProgSnap Snapshot parameter with invalid index |
+| 282 | ProgSnap Snapshot parameter can't be function |
+| 283 | Selection between DInPort/AinPort within CNC segment is out of range |
+| 284 | Axis selection for DInPort/AinPort within CNC segment is out of range |
+| 285 | Trigger type of Wait Input CNC segment is out of range |
+| 286 | Index for AInPort within CNC segment is out of range |
+| 287 | The ASCII bulk message is too long |
+| 288 | 3D Arc feature is supported for Central-i products only |
+| 289 | Variable type mismatch (long / float) |
+| 290 | Math operation input out of range (log of negative, etc.) |
+| 291 | CNC segment is too short. Please reduce the End speed of previous segment or increase the target of the current segment |
+| 292 | Can't start a motion after gantry on/off. Wait ~40msec after the transition |
+| 293 | This communication channel is blocked due to Panel mode |
+| 294 | There is no valid Draw Control project, or no draw control function for this scheme |
+| 295 | Trying to use draw control but there is no draw control project or scheme for this axis. Consult Agito. |
+| 296 | Trying to assign DrawMode that is different from the one set in the scheme. |
+| 297 | Download or erase a Draw Control project is supported over Ethernet only. |
+| 298 | Download or erase a Draw Control project while one of the schemes is not in DrawMode equal 0 or -1. |
+| 299 | Wrong password entered. Download draw control process aborted |
+| 300 | Timeout during draw control download process |
+| 301 | This Draw Control functionality is allowed only for AGM800 |
+| 302 | Draw Control download failed as AZDoNotUse[] items are not properly configured. Call Agito. |
+| 303 | Gantry with dual loop is not allowed when DualLoopOn is not zero |
+| 304 | Access to 64 bits keywords is not allowed over CAN Bus |
+| 305 | The referenced keyword must be of type Long64 |
+| 306 | This keyword is not allowed if the axis is in motion of type CNCA or CNCB or Vector |
+| 307 | This keyword is allowed only when the axis is in Position Operation Mode |
+| 310 | Dual-loop is not allowed when Gantry with dual-loop is on |
+| 311 | Trying to set Speed, or Accel or Decel, outside the limits defined by Orbit FR for this system |
+| 312 | Pushed CNC segment has Axis parameter out of range |
+| 313 | Pushed CNC segment has Event Pulse Resolution parameter out of range |
+| 314 | Pushed CNC segment has Event Pulse Width parameter out of range |
+| 315 | Pushed CNC segment has Event Type parameter out of range |
+| 316 | Pushed CNC segment has Event Select parameter out of range |
+| 317 | Pushed CNC segment has Pos Event Source (see EncSinCosHWEn) parameter out of range |
+| 318 | Pushed CNC segment has EventTableEnd parameter out of range |
+| 319 | Pushed CNC segment has Is Pre Configured Table parameter out of range |
+| 320 | Pushed CNC segment has EventTableBeg parameter out of range |
+| 321 | Pushed CNC segment has Invalid EventTable |
+| 322 | Pushed CNC segment has non-zero dummy parameter |
+| 323 | The ECAMMasterIni parameter is out of the master range for one ECAM cycle |
+| 324 | Can't start a motion if the desired maximal acceleration of the motion command (Accel) is higher than the MaxAcc limitation |
+| 325 | Out of range filter definitions, at Force filter number 1 |
+| 326 | Out of range filter definitions, at Force filter number 2 |
+| 328 | Setting Product Serial Number is not allowed without Elevated Permissions |
+| 329 | SetPosition is not allowed for the Yaw axis in gantry mode |
+| 330 | AbsTrgt out of range in the current ModShort Mode |
+| 331 | Out of range filter definitions, at feedforward filter |
+| 334 | Using LockEventInit when LockEventMode is 0 (backward compatible mode) makes no sense. Please check your lock/event configuration logic |
+| 335 | Can't enable Lock or Event if LockEventMode is 1, and LockEventInit was not executed |
+| 336 | DrawRunBack requested with axis letter with no scheme or no valid scheme related to it |
+| 337 | DrawRunBack requested for scheme that is not defined for Background execution, see DrawMode |
+| 338 | Global User Units feature is mutually exclusive with embedded controller user units. Please disable one of the scaling factors |
+| 339 | Cannot start recording without any parameter to record |
+| 340 | UPMRptCalc is not allowed when UPM state is not Idle. Please check the UPMState before calling UPMRptCalc |
+| 380 | Total stroke cannot be zero |
+| 381 | Total stroke and cruise stroke must be in the same direction |
+| 382 | Speed defined cannot be zero |
+| 383 | Total stroke must be higher than pre-cruise stroke |
+| 384 | Pre-cruise stroke is insufficient to achieve cruise velocity |
+| 385 | Stopping stroke is insufficient to achieve zero velocity |
+| 386 | Profile calculation has no solution |
+| 387 | Waiting time for background calculation is longer than remaining motion/dwell time |
+| 388 | Waiting time for background calculation too short as recalculation is not finished by the waiting time |
+| 800 | The parameter assignment or function call are not valid with one of SparkOn[x] on |

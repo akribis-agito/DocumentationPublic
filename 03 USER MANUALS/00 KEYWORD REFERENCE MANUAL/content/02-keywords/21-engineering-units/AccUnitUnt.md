@@ -1,5 +1,6 @@
 ---
 keyword: AccUnitUnt
+summary: "Display label (name) of the acceleration engineering unit, stored as a short text string."
 availability:
   standalone: []
   central-i:
@@ -25,4 +26,31 @@ overrides: {}
 ---
 # AccUnitUnt
 
-<!-- body pending -->
+Display label (name) of the acceleration engineering unit, stored as a short text string.
+
+## Overview
+
+`AccUnitUnt` holds the **name of the acceleration engineering unit** — the text label that goes with the scale factor in [AccUnitFct](AccUnitFct.md), for example `mm/s2` or `deg/s2`. It documents which unit the acceleration group (see [AccUnitGrp](AccUnitGrp.md)) is being presented in. The label is descriptive: it is shown alongside values but does not itself perform any conversion — the numeric conversion is set by [AccUnitFct](AccUnitFct.md).
+
+This keyword is available from central-i v5 only.
+
+## How it works
+
+`AccUnitUnt` is a per-axis array stored in flash that holds the unit label as a short text string. Each array element holds one character of the name (a character code in the range 0–255). The array is 1-indexed: the first character is at element [1] and element [0] is reserved and not used. The label can hold up to 10 characters, so the highest usable index is one less than the array size; a shorter label is terminated within the available length.
+
+You typically set the label through a host tool that writes the whole string at once; the per-character array layout is how it is stored on the controller.
+
+## Examples
+
+```text
+AAccUnitUnt[1]      ; read the first character of the acceleration unit label
+AAccUnitUnt[2]      ; read the second character
+```
+
+## See also
+
+- [00-overview](00-overview.md) — the Group / Factor / Unit model
+- [AccUnitFct](AccUnitFct.md) — acceleration scale factor (the numeric conversion)
+- [AccUnitGrp](AccUnitGrp.md) — keywords the unit applies to
+- [UserUnitsEn](UserUnitsEn.md) — master enable
+- [PosUnitUnt](PosUnitUnt.md) · [VelUnitUnt](VelUnitUnt.md) · [FrcUnitUnt](FrcUnitUnt.md) — the other quantity unit labels

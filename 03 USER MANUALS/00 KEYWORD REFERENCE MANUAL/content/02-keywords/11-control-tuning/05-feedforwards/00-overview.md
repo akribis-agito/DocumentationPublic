@@ -18,3 +18,17 @@ The following is the summary of feedforward keywords.
 | 2   | [FFFiltOn](../../../02-keywords/11-control-tuning/05-feedforwards/FFFiltOn.md) | Feedforward filter switch                |
 | 3   | [FFFiltDef](../../../02-keywords/11-control-tuning/05-feedforwards/FFFiltDef.md)   | Feedforward filter definition parameters |
 | 4   | [VelFFW](../../../02-keywords/11-control-tuning/05-feedforwards/VelFFW.md)      | Velocity feedforward gain                |
+
+## Voltage feedforward (central-i v5)
+
+A separate, model-based feedforward acts inside the current/voltage loop rather than on the position profile. From the motor's electrical model it estimates the terminal voltage needed to drive the commanded current and adds it ahead of the current PI controllers, improving current tracking at high speed and during fast current changes. These keywords are available from central-i v5.
+
+| No. | Keywords | Summary |
+|-----|----------|---------|
+| 5   | [VoltageFFWOn](../../../02-keywords/11-control-tuning/05-feedforwards/VoltageFFWOn.md)   | Master enable for voltage feedforward |
+| 6   | [RmFFWLevel](../../../02-keywords/11-control-tuning/05-feedforwards/RmFFWLevel.md)       | Level of the resistive (R·i) term |
+| 7   | [LmFFWLevel](../../../02-keywords/11-control-tuning/05-feedforwards/LmFFWLevel.md)       | Level of the inductive (L·di/dt) term |
+| 8   | [BEMFConst](../../../02-keywords/11-control-tuning/05-feedforwards/BEMFConst.md)         | Motor back-EMF constant |
+| 9   | [BEMFFFWLevel](../../../02-keywords/11-control-tuning/05-feedforwards/BEMFFFWLevel.md)   | Level of the back-EMF term |
+| 10  | [VqFFW](../../../02-keywords/11-control-tuning/05-feedforwards/VqFFW.md)                 | Q-axis voltage feedforward output (read-only) |
+| 11  | [VdFFW](../../../02-keywords/11-control-tuning/05-feedforwards/VdFFW.md)                 | D-axis voltage feedforward output (read-only) |

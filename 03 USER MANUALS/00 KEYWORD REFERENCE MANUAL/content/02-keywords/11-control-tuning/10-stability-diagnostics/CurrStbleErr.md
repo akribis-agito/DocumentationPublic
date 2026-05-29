@@ -1,5 +1,6 @@
 ---
 keyword: CurrStbleErr
+summary: "Current-loop tracking-error threshold for stability detection, in percent of the peak current limit."
 availability:
   standalone: []
   central-i:
@@ -25,4 +26,35 @@ overrides: {}
 ---
 # CurrStbleErr
 
-<!-- body pending -->
+Current-loop tracking-error threshold for stability detection, in percent of the peak current limit.
+
+## Overview
+
+`CurrStbleErr` sets one of the two thresholds used by the current-loop stability detector ([CurrStbleDtct](CurrStbleDtct.md)). It is the tracking-error threshold: the smallest average current tracking error that, combined with an oscillating current spread, is treated as evidence of an unstable current loop.
+
+The value is a percentage of the axis peak current limit ([PeakCL](../../06-protections/02-current-and-voltage/PeakCL.md)). A larger value makes the detector less sensitive (the loop must mistrack more before it trips); a smaller value makes it trip on smaller errors. The default is 2 (i.e. 2% of the peak current limit).
+
+This keyword is available from v5 (central-i) only.
+
+## How it works
+
+The detector measures the average magnitude of the difference between the commanded current reference and the measured motor current over its sliding window. A fault is raised only when this average error exceeds the `CurrStbleErr` threshold *and* the current spread test (see [CurrStbleSTD](CurrStbleSTD.md)) is also satisfied at the same time. Requiring both conditions avoids tripping on a quiet loop that simply has a steady offset, or on a noisy reference that the loop is in fact tracking well.
+
+Internally the percentage is converted to a current threshold by scaling against the peak current limit, so changing [PeakCL](../../06-protections/02-current-and-voltage/PeakCL.md) automatically rescales the effective error threshold. The value is saved to flash and can be changed while the axis is in motion and while the motor is on; the new threshold is applied the next time the detector is (re)enabled with the motor on.
+
+The threshold currently in effect can be read back from element 5 of [CurrStbleStat](CurrStbleStat.md).
+
+## Examples
+
+```text
+ACurrStbleErr=2       ; tracking-error threshold = 2% of peak current limit (default)
+ACurrStbleErr=5       ; less sensitive: require a larger tracking error
+ACurrStbleErr[1]      ; read back the configured percentage
+```
+
+## See also
+
+- [CurrStbleDtct](CurrStbleDtct.md) — enable the current-loop stability detector
+- [CurrStbleSTD](CurrStbleSTD.md) — current-loop spread threshold (the other trip condition)
+- [CurrStbleStat](CurrStbleStat.md) — current-loop stability detector status array
+- [PeakCL](../../06-protections/02-current-and-voltage/PeakCL.md) — peak current limit the threshold is scaled to

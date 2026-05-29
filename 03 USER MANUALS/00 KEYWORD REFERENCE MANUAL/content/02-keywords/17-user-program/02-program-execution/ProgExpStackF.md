@@ -1,5 +1,6 @@
 ---
 keyword: ProgExpStackF
+summary: "Reads a value on the numeric (expression) stack as a 32-bit floating-point (float), without popping it."
 availability:
   standalone: []
   central-i:
@@ -16,11 +17,39 @@ attributes:
   ok_motor_on: true
   units: func
   range: null
-  default: null
+  default: 0
   scaling: 1.0
   implemented: partial
 overrides: {}
 ---
 # ProgExpStackF
 
-<!-- body pending -->
+Reads a value on the numeric (expression) stack as a 32-bit floating-point (float), without popping it.
+
+## Overview
+
+`ProgExpStackF` is the single-precision floating-point form of [ProgExpStack](ProgExpStack.md). Indexed by thread, it reads one value on the numeric (expression) stack and returns it interpreted as a 32-bit floating-point (float), without popping it. It is most useful for debugging, where you want to inspect what an expression has produced without disturbing the stack. Use [ProgExpDepth](ProgExpDepth.md) to find how much space is free and [ProgClrExp](ProgClrExp.md) to clear the stack. It is a non-axis array parameter and is not saved to flash.
+
+This keyword is available from v5 (central-i).
+
+## How it works
+
+`ProgExpStackF[thread], location` reads one location of the selected thread's numeric stack by its position, counted from the base (location `0` is the deepest value). The read is non-destructive — the stack contents and depth are unchanged.
+
+The only difference from [ProgExpStack](ProgExpStack.md) is the data type returned: `ProgExpStackF` reports the location directly as a 32-bit floating-point (float) value, rather than as a 32-bit integer or a raw bit pattern. The underlying stack location is the same; the typed forms simply control how the bits are interpreted, so use the variant that matches the type the value was stored as.
+
+Locations are valid from `0` up to the highest occupied location; the stack holds up to 50 values. Reading a location above the current top, or outside the valid range, raises a stack-range error. [ProgExpDepth](ProgExpDepth.md) reports how many slots are still free, so the highest occupied location is `50` minus the free count, minus one.
+
+## Examples
+
+```text
+AProgExpStackF[1],0 ; read the deepest value on thread 1's numeric stack as a float
+```
+
+## See also
+
+- [ProgExpStack](ProgExpStack.md) — the base (32-bit integer) form
+- [ProgExpStackD](ProgExpStackD.md) — 64-bit floating-point (double) form
+- [ProgExpStckLL](ProgExpStckLL.md) — 64-bit integer form
+- [ProgExpDepth](ProgExpDepth.md) — free space remaining in the numeric stack
+- [ProgClrExp](ProgClrExp.md) — clear the numeric stack

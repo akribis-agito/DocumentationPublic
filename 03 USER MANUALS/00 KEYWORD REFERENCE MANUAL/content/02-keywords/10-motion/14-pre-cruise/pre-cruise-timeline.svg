@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="280" viewBox="0 0 560 280" font-family="sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#333"/>
+    </marker>
+  </defs>
+
+  <!-- axes -->
+  <line x1="60" y1="40" x2="60" y2="230" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="60" y1="230" x2="530" y2="230" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="20" y="50">speed</text>
+  <text x="500" y="252">time</text>
+
+  <!-- pre-cruise speed level -->
+  <line x1="60" y1="70" x2="220" y2="70" stroke="#5b8def" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="64" y="64">PreCruiseSpd</text>
+  <!-- cruise speed level -->
+  <line x1="60" y1="140" x2="430" y2="140" stroke="#5b8def" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="64" y="134">Speed (cruise)</text>
+
+  <!-- speed profile: rest -> pre-cruise -> cruise -> rest -->
+  <path d="M60,230 C95,230 105,70 140,70 L200,70 C235,70 245,140 280,140 L350,140 C395,140 405,230 430,230"
+        fill="none" stroke="#e0736b" stroke-width="2.5"/>
+
+  <!-- stage boundaries -->
+  <line x1="140" y1="70" x2="140" y2="230" stroke="#bbb" stroke-width="0.75"/>
+  <line x1="200" y1="70" x2="200" y2="230" stroke="#bbb" stroke-width="0.75"/>
+  <line x1="280" y1="140" x2="280" y2="230" stroke="#bbb" stroke-width="0.75"/>
+  <line x1="350" y1="140" x2="350" y2="230" stroke="#bbb" stroke-width="0.75"/>
+
+  <!-- stage labels -->
+  <text x="100" y="248" text-anchor="middle">1</text>
+  <text x="170" y="248" text-anchor="middle">2</text>
+  <text x="240" y="248" text-anchor="middle">3</text>
+  <text x="315" y="248" text-anchor="middle">4</text>
+  <text x="390" y="248" text-anchor="middle">5</text>
+
+  <!-- pre-cruise stroke bracket -->
+  <line x1="60" y1="36" x2="220" y2="36" stroke="#333" stroke-width="0.75"/>
+  <text x="140" y="30" text-anchor="middle">pre-cruise stroke (to pre-cruise target)</text>
+
+  <!-- legend -->
+  <text x="60" y="272">1 accel  2 hold pre-cruise  3 slow to cruise  4 hold cruise  5 stop at target</text>
+</svg>
