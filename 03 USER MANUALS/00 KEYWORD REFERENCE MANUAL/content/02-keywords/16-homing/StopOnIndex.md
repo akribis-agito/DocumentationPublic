@@ -42,7 +42,9 @@ Enables automatic stop of axis motion on the next encoder index pulse.
 2. sets the motion end reason to "index" (reported by [MotionReason](../10-motion/05-motion-status/MotionReason.md) = 11), and
 3. clears `StopOnIndex` back to `0`.
 
-Because the firmware auto-clears it, `StopOnIndex` is a one-shot arm: read it back as `0` to confirm the stop was triggered, then wait for [MotionStat](../10-motion/05-motion-status/MotionStat.md) to show the axis is no longer in motion. The homing engine sets this flag internally for the "Jog to index" step; the related "Move to index position" step instead does a point-to-point move to the recorded [IndexPos](../03-encoder/02-index-detection/IndexPos-AuxIndexPos.md) and therefore does not use `StopOnIndex`.
+Because the firmware auto-clears it, `StopOnIndex` is a one-shot arm: read it back as `0` to confirm the stop was triggered, then wait for [MotionStat](../10-motion/05-motion-status/MotionStat.md) to show the axis is no longer in motion.
+
+Note that raising the in-stop-request bit triggers a normal deceleration to a stop, so the axis comes to rest *past* the index by its deceleration distance — it does not stop exactly on the index. The exact index location is captured separately (in [IndexPos](../03-encoder/02-index-detection/IndexPos-AuxIndexPos.md)). This is why homing uses two steps: the "Jog to index" step arms `StopOnIndex` to halt motion shortly after the index, and the "Move to index position" step then does a point-to-point move to the recorded [IndexPos](../03-encoder/02-index-detection/IndexPos-AuxIndexPos.md) to land precisely on it. That second step targets the captured position directly and therefore does not use `StopOnIndex`.
 
 ## Examples
 

@@ -78,7 +78,16 @@ Each waveform exists in a **direct** and an **additive** variant (the pulse is d
 | Direct | The preceding signal at the injection point is ignored; the command becomes the injection value alone (for current injection, plus the [InjectCurrDC](InjectCurrDC.md) offset). |
 | Additive | The injection value is summed onto the existing command coming from the upstream loop. |
 
-At appropriate injection locations, direct injection is therefore akin to opening the loop at that point. When a direct waveform is selected, the controller relaxes the relevant maximum following-error limits to their open-loop values for the duration of the injection, so that intentionally large open-loop excursions do not trip a following-error fault. Which limits are relaxed depends on the injection point: current-command direct injection relaxes the position, velocity and force following-error limits; velocity-command and force-command direct injection relax a subset; position-command direct injection ([InjectPoint](InjectPoint.md) = 2) keeps the normal limits, because the position reference is still being commanded. Additive injection always leaves the normal following-error limits in place.
+At appropriate injection locations, direct injection is therefore akin to opening the loop at that point. When a direct waveform is selected, the controller relaxes the relevant maximum following-error limits to their open-loop values for the duration of the injection, so that intentionally large open-loop excursions do not trip a following-error fault. Which limits are relaxed depends on the injection point:
+
+| Injection point | Limits relaxed to open-loop values |
+|---|---|
+| Current command ([InjectPoint](InjectPoint.md) = 0) | position, velocity and force following-error limits |
+| Velocity command ([InjectPoint](InjectPoint.md) = 1) | position following-error limit only |
+| Force command ([InjectPoint](InjectPoint.md) = 3) | position and velocity following-error limits (the force limit stays normal) |
+| Position command ([InjectPoint](InjectPoint.md) = 2) | none — all normal limits stay in place, because the position reference is still being commanded |
+
+The relaxed values are taken from the open-loop limit keywords [MaxPosErrOL](../06-protections/03-motion/general-maximum-limits/MaxPosErrOL.md), [MaxVelErrOL](../06-protections/03-motion/general-maximum-limits/MaxVelErrOL.md) and [MaxForceErrOL](../06-protections/04-force-control/MaxForceErrOL.md). The relaxation is recomputed whenever `InjectType` or [InjectPoint](InjectPoint.md) is written, and also when the position or force following-error limit keywords [MaxPosErr](../06-protections/03-motion/general-maximum-limits/MaxPosErr.md) / [MaxForceErr](../06-protections/04-force-control/MaxForceErr.md) or their open-loop variants [MaxPosErrOL](../06-protections/03-motion/general-maximum-limits/MaxPosErrOL.md) / [MaxForceErrOL](../06-protections/04-force-control/MaxForceErrOL.md) (or [MaxVelErr](../06-protections/03-motion/general-maximum-limits/MaxVelErr.md)) are changed; writing [MaxVelErrOL](../06-protections/03-motion/general-maximum-limits/MaxVelErrOL.md) on its own does not retrigger it. Additive injection always leaves the normal following-error limits in place.
 
 ![Direct vs additive injection summing](inject-mode.svg)
 

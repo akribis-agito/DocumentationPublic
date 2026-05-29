@@ -55,7 +55,7 @@ This decoupling means a translation command does not induce yaw and a yaw correc
 
 ### Engagement and the offset
 
-On the `0`→`1` transition the controller captures the current difference between the two ends as [GantryOffset](../02-gantry-kinematic-feedback/GantryOffset.md) and folds it into the feedbacks so the yaw feedback starts from a clean zero without forcing the beam square. The yaw axis's own reference is zeroed and the pair is brought into MIMO control smoothly. Leaving the controller could not start motion until this transition completes.
+On the `0`→`1` transition the controller captures the current difference between the two ends as [GantryOffset](../02-gantry-kinematic-feedback/GantryOffset.md) and folds it into the feedbacks so the yaw feedback starts from a clean zero without forcing the beam square. The yaw axis's own reference and reference-filter history are reset to a clean zero in the same cycle, and the master and yaw velocity (and position) integrators are re-shared into common/differential form, so the pair enters MIMO control without a step. Jerk smoothing is then briefly paused while its history refills (see the Smoothing pause edge case below).
 
 ### Both motors must stay on
 
@@ -79,7 +79,7 @@ AGantryOn          ; read whether gantry mode is active
 - **Pair not commutated** — gantry will not produce useful behaviour if either motor's commutation is not done; check [StatReg](../../07-status-and-faults/StatReg.md) bit 0 on both members.
 - **Decoupling map** ([GantryMapType](GantryMapType.md) = 1, v5 only) — at engagement the firmware applies the map ratio to the feedback combination; transient ratio inaccuracy on engagement is smoothed by the gantry-ready-for-smoothing counter.
 - **Dual-loop gantry** ([GantryDLoopOn](GantryDLoopOn.md) = 1, v5 only) — at engagement the firmware also computes the dual-loop offset against the load feedback so the linear position does not jump.
-- **Smoothing pause** — after every `0 → 1` or `1 → 0` transition the controller temporarily disables jerk smoothing on the pair while the smoothing buffer refills with the new reference; expect a brief tracking blip.
+- **Smoothing pause** — after every `0 → 1` or `1 → 0` transition the controller temporarily disables jerk smoothing on the pair while the smoothing buffer refills with the new reference; expect a brief tracking blip. The bypass lasts a fixed number of control cycles equal to the jerk-smoothing history length: on central-i this is 8192 cycles (0.5 s at the default 16384 samples/s sampling rate), and on standalone it is 512 cycles (≈31 ms at the same rate). Smoothing resumes automatically once that many cycles have elapsed.
 - **Save** — not flash-saveable; comes up `0` at every reset (user must enable after motors are on).
 - **Platform** — v4 supports only A–B; v5 central-i supports A–B, C–D, E–F, G–H.
 

@@ -36,7 +36,7 @@ Amplitude of position-command injection, in main user units.
 
 ## How it works
 
-This value sets the peak magnitude the waveform reaches at the position reference: a sine swings between +`InjectPosAmp` and −`InjectPosAmp`, a square and PRBS toggle between those two levels. At the position command the supported waveforms are **sine, square and PRBS** (the pulse and chirp waveforms are not used at this point). In **direct** mode the waveform is added to the position reference captured when injection began, replacing the motion-profiler output from that point; in **additive** mode it is summed onto the live profiler output. The present level can be read back with [InjectedValue](InjectedValue.md).
+This value sets the peak magnitude the waveform reaches at the position reference: a sine swings between +`InjectPosAmp` and −`InjectPosAmp`, a square and PRBS toggle between those two levels. At the position command the supported waveforms are **sine, square and PRBS** in v4; **chirp** ([InjectType](InjectType.md) = 8 or 9) is additionally supported at the position command in v5 (central-i only). The pulse waveform is current-command only and is never applied here. In **direct** mode the waveform is added to the position reference captured when injection began, replacing the motion-profiler output from that point; in **additive** mode it is summed onto the live profiler output. The present level can be read back with [InjectedValue](InjectedValue.md).
 
 ## Examples
 

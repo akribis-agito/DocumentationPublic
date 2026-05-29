@@ -36,7 +36,9 @@ Amplitude of velocity-command injection; units depend on dual-loop setting.
 
 ## How it works
 
-This value sets the peak magnitude the waveform reaches at the velocity-loop reference [VelRef](../10-motion/01-kinematics-status/VelRef.md): a sine swings between +`InjectVelAmp` and −`InjectVelAmp`, a square and PRBS toggle between those two levels. In **direct** mode ([InjectType](InjectType.md) = 1, 3, 6 or 8) this waveform becomes `VelRef`, replacing the position-loop output; in **additive** mode it is summed onto `VelRef`. The resulting reference is still clamped to the velocity limit ([MaxVel](../06-protections/03-motion/general-maximum-limits/MaxVel.md)) as usual. The present level can be read back with [InjectedValue](InjectedValue.md).
+This value sets the peak magnitude the waveform reaches at the velocity-loop reference [VelRef](../10-motion/01-kinematics-status/VelRef.md): a sine swings between +`InjectVelAmp` and −`InjectVelAmp`, a square and PRBS toggle between those two levels. The available velocity-command waveforms are sine, square and PRBS in v4; **chirp** is added in v5 (central-i only). In **direct** mode ([InjectType](InjectType.md) = 1, 3 or 6, and 8 in v5) this waveform becomes `VelRef`, replacing the position-loop output; in **additive** mode it is summed onto `VelRef`. The resulting reference is still clamped to the velocity limit ([MaxVel](../06-protections/03-motion/general-maximum-limits/MaxVel.md)) as usual in both versions. The present level can be read back with [InjectedValue](InjectedValue.md).
+
+In **v4 only**, the PRBS waveform at the velocity command additionally adds the [InjectCurrDC](InjectCurrDC.md) offset to the velocity reference (in both direct and additive PRBS modes); v5 applies the PRBS value alone with no DC term.
 
 ## Examples
 

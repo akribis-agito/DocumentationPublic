@@ -40,6 +40,10 @@ Array defining up to 20 homing steps, each an instruction plus its parameters.
 
 Steps run strictly in order, one per "first cycle" then evaluated each controller cycle until the step's completion condition is met, at which point the engine advances to the next step. Motion steps (jog/PTP) start a move, then wait for it to stop for the expected [MotionReason](../10-motion/05-motion-status/MotionReason.md); the wrong end-of-motion reason aborts with [HomingStat](HomingStat.md) = `-4`. Every motion step also has a timeout parameter (in controller cycles); exceeding it aborts with `-2`. For the duration of a homing run the engine overrides the axis kinematics with each step's parameters and forces jerk mode off, restoring the original values when homing ends (see [HomingOn](HomingOn.md)).
 
+Timeouts and the wait count are measured in controller cycles. A step sets its counter to zero on its first cycle and increments it on each following cycle; it aborts (or, for the wait step, advances) when the counter exceeds the parameter value. A step that completes on its first cycle therefore cannot time out. Because the comparison is strict, the "Wait N controller cycles" step (instruction `7`) advances when its counter first exceeds N, i.e. on the cycle after the counter reaches N.
+
+The "Set position" step (instruction `6`) and both "Move to hard stop" steps (instructions `9` and `10`) complete the actual position change through a background request rather than inline: on the first cycle the step raises a set-position request and starts its timeout counter; on the following cycles it advances to the next step once the request has been carried out (the engine sees the request flag cleared) or aborts with [HomingStat](HomingStat.md) = `-2` if its timeout elapses first. The work is deferred to the background loop because it requires time for smoothing re-initialization.
+
 ![Homing step execution flow](homing-sequence.svg)
 
 The instruction stored in the first element of each step (`HomingDef[1, 11, …, 191]`) selects what that step does:
@@ -76,7 +80,7 @@ The remaining elements of each step (`HomingDef[2, 12, …, 192]`, `HomingDef[3,
 
 | HomingDef[Index] | Value descriptions |
 |---|---|
-| HomingDef[1, 11, …, 191] = 1 | Jog into limit. Jog with the kinematics below; completes when the motion stops on the limit switch in the direction of travel. |
+| HomingDef[1, 11, …, 191] = 1 | Jog into limit. Jog with the kinematics below; completes only when the motion stops on the limit switch in the direction of travel — forward speed must end on FLS, reverse speed on RLS. Any other end-of-motion reason, including stopping on the opposite limit, aborts with [HomingStat](HomingStat.md) = `-4`. |
 | HomingDef[2, 12, …, 192] | Jog speed (sign is the direction, and selects which limit — forward or reverse — to look for). |
 | HomingDef[3, 13, …, 193] | Jog acceleration/deceleration. |
 | HomingDef[4, 14, …, 194] | Jog emergency deceleration. |
@@ -129,7 +133,7 @@ The remaining elements of each step (`HomingDef[2, 12, …, 192]`, `HomingDef[3,
 
 | HomingDef[Index] | Value descriptions |
 |---|---|
-| HomingDef[1, 11, …, 191] = 9 | Move to hard stop (detected by motor stuck). Jog with the kinematics below until the motor is judged stuck: absolute velocity below the velocity threshold and absolute current at or above the current threshold, held continuously for the stuck time. The motion is then aborted and the position set to the given value. The sign of the maximum-speed parameter sets the direction. **Note:** aborts with [HomingStat](HomingStat.md) = `-9` if the conditions for [SetPosition](../10-motion/03-kinematics-configuration/SetPosition.md) are not met. |
+| HomingDef[1, 11, …, 191] = 9 | Move to hard stop (detected by motor stuck). Jog with the kinematics below until the motor is judged stuck: absolute velocity below the velocity threshold and absolute current at or above the current threshold, held continuously for the stuck time. The motion is then ended immediately at the stop (no deceleration ramp — unlike a limit/index/home stop) and the position is set to the given value via the background request. The sign of the maximum-speed parameter sets the direction. **Note:** aborts with [HomingStat](HomingStat.md) = `-9` if the conditions for [SetPosition](../10-motion/03-kinematics-configuration/SetPosition.md) are not met. |
 | HomingDef[2, 12, …, 192] | Maximum speed (sign sets direction). |
 | HomingDef[3, 13, …, 193] | Maximum acceleration/deceleration. |
 | HomingDef[4, 14, …, 194] | Emergency deceleration. |
@@ -141,7 +145,7 @@ The remaining elements of each step (`HomingDef[2, 12, …, 192]`, `HomingDef[3,
 
 | HomingDef[Index] | Value descriptions |
 |---|---|
-| HomingDef[1, 11, …, 191] = 10 | Move to hard stop (detected by high position error). Jog with the kinematics below until the absolute position error exceeds the given threshold, then abort the motion and set the position to the given value. The sign of the maximum-speed parameter sets the direction. **Note:** aborts with [HomingStat](HomingStat.md) = `-9` if the conditions for [SetPosition](../10-motion/03-kinematics-configuration/SetPosition.md) are not met. |
+| HomingDef[1, 11, …, 191] = 10 | Move to hard stop (detected by high position error). Jog with the kinematics below until the absolute position error exceeds the given threshold, then end the motion immediately at the stop (no deceleration ramp — unlike a limit/index/home stop) and set the position to the given value via the background request. The sign of the maximum-speed parameter sets the direction. **Note:** aborts with [HomingStat](HomingStat.md) = `-9` if the conditions for [SetPosition](../10-motion/03-kinematics-configuration/SetPosition.md) are not met. |
 | HomingDef[2, 12, …, 192] | Maximum speed (sign sets direction). |
 | HomingDef[3, 13, …, 193] | Maximum acceleration/deceleration. |
 | HomingDef[4, 14, …, 194] | Emergency deceleration. |

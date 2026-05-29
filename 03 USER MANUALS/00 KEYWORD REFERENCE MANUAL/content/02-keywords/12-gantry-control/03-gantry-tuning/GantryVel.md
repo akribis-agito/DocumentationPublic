@@ -30,7 +30,7 @@ Read-only gantry velocity feedback — common (linear) on the master axis and di
 
 ## Overview
 
-`GantryVel` is a read-only variable that reports the gantry velocity feedback used by the gantry velocity loops while [GantryOn](../01-general-variables/GantryOn.md) is `1`. On the **master axis** it is the common-mode (linear) velocity — the mean of the two member-axis velocities; on the **yaw axis** it is the differential velocity (the difference between the two member-axis velocities). It is an axis-related status variable, valid while in motion and with the motor on, and is not saved to flash.
+`GantryVel` is a read-only variable that reports the gantry velocity feedback used by the gantry velocity loops while [GantryOn](../01-general-variables/GantryOn.md) is `1`. On each axis it is the per-cycle time derivative of that axis's gantry feedback ([GantryFdbk](../02-gantry-kinematic-feedback/GantryFdbk.md)): on the **master axis** it is the derivative of the common-mode (linear) feedback, and on the **yaw axis** it is the derivative of the differential (yaw) feedback. Because the master feedback is the common-mode combination of the two ends, its derivative equals the mean of the member-axis velocities only when the decoupling split is symmetric; with the position-dependent decoupling map ([GantryMapType](../01-general-variables/GantryMapType.md) = 1) the master feedback is map-blended, so `GantryVel` follows that blended combination rather than a plain mean. It is an axis-related status variable, valid while in motion and with the motor on, and is not saved to flash.
 
 ## How it works
 

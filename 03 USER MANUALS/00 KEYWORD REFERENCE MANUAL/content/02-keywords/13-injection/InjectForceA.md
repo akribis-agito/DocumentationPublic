@@ -36,7 +36,7 @@ Amplitude of force-command injection, in internal force units.
 
 ## How it works
 
-This value sets the peak magnitude the waveform reaches at the force command: a sine swings between +`InjectForceA` and −`InjectForceA`, a square and PRBS toggle between those two levels. At the force command the supported waveforms are **sine, square, PRBS and chirp** (the pulse is current-command only). In **direct** mode the waveform is added to the force reference captured when injection began, so the command follows that fixed baseline plus the waveform; in **additive** mode it is summed onto the live force command. The present level can be read back with [InjectedValue](InjectedValue.md).
+This value sets the peak magnitude the waveform reaches at the force command: a sine swings between +`InjectForceA` and −`InjectForceA`, a square and PRBS toggle between those two levels. At the force command the supported waveforms are **sine, square and PRBS** in v4; **chirp** ([InjectType](InjectType.md) = 8 or 9) is additionally supported at the force command in v5 (central-i only). The pulse is current-command only and is never applied here. In **direct** mode the waveform is added to the force reference captured when injection began, so the command follows that fixed baseline plus the waveform; in **additive** mode it is summed onto the live force command. The present level can be read back with [InjectedValue](InjectedValue.md).
 
 ## Examples
 
