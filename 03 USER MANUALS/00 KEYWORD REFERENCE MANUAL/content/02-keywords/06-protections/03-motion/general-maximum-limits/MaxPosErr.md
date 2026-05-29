@@ -58,9 +58,29 @@ AMaxPosErr[1]=5000    ; max following error (user units)
 AMaxPosErr[1]         ; read back the limit
 ```
 
+### Walk-through: tune and verify a following-error trip
+
+Set the limit close to the largest tracking error the application should ever see, then exercise the worst-case move and confirm the trip behaviour before deploying:
+
+```text
+AMaxPosErr[1]=2000    ; chosen well above the expected steady-state |PosErr|
+APosErr               ; sample the live error in normal operation; should stay << MaxPosErr
+```
+
+Run the worst-case profile (highest `Speed`/`Accel`, heaviest load) and re-sample `APosErr` at several points during the move. If the headroom is too thin, either raise the position gain (so the lag shrinks) or raise `MaxPosErr`. To confirm the trip path itself, command a move into a mechanical obstruction:
+
+```text
+AConFlt                       ; expect 1020 (closed-loop position error too high)
+AMotionReason                 ; expect 8 (motor disabled)
+APosErr                       ; last value before the trip; will be > MaxPosErr
+```
+
+The axis is disabled in the same control sample the threshold is crossed, so there is no ramp; if a soft stop is needed instead, leave headroom and rely on a software [FwdPLim](../position-limit-protection/FwdPLim.md)/[RevPLim](../position-limit-protection/RevPLim.md) to brake first.
+
 ## See also
 
 - [PosErr](../../../10-motion/01-kinematics-status/PosErr.md) — the measured position error this limit acts on
 - [MaxPosErrOL](MaxPosErrOL.md) — open-loop position-error limit (the alternate threshold)
 - [MaxVelErr](MaxVelErr.md) — companion velocity-following-error limit
 - [ConFlt](../../../07-status-and-faults/ConFlt.md) — records fault code 1020 (closed loop) / 1055 (open loop)
+- [MotionReason](../../../10-motion/05-motion-status/MotionReason.md) — records reason 8 (motor disabled) when this trip fires

@@ -83,5 +83,7 @@ In **v4** the position loop is purely proportional: its output is `PosErr × Pos
 - [PosKi](PosKi.md) — position integral gain (v5) acting on the `PosGain` output
 - [PosFiltOn](PosFiltOn.md) / [PosFiltDef](PosFiltDef.md) — optional position-loop filters
 - [VelTrackFact](../04-velocity-control/VelTrackFact.md) — scales the velocity feed-forward summed with the `PosGain` output
+- [AccFFW](../05-feedforwards/AccFFW.md) / [VelFFW](../05-feedforwards/VelFFW.md) — paired feedforwards added downstream of the position loop
 - [VelGain](../04-velocity-control/VelGain.md) — proportional gain of the inner (velocity) loop
+- [StatReg](../../07-status-and-faults/StatReg.md) — bit 23 (velocity saturation) when the position-loop output exceeds MaxVel
 - [ScheduleMode](../01-general-keywords/ScheduleMode.md) — selects which array element is active

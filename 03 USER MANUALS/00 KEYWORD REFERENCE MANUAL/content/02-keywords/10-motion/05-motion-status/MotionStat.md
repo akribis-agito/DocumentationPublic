@@ -70,6 +70,12 @@ Several combined masks are useful: `0x00010009` (bits 0+3+16) tests "in motion b
 
 To test a single bit, mask `MotionStat` with the bit value — e.g. "in motion" is `MotionStat & 0x1`, "decelerating" is `(MotionStat & 0x20) >> 5`.
 
+### Which bits apply in which mode
+
+Some bits are common to every motion; others appear only in specific [MotionMode](../02-motion-configuration/MotionMode.md) values (the "ending …" bits, repetitive-dwell bit 1, group bits 10–15/19, etc.). Use this map to predict which bits to expect when reading `MotionStat` for a given mode:
+
+![MotionStat bits set per MotionMode](motionstat-mode-map.svg)
+
 ## Changes between versions
 
 | | v4 (standalone &amp; central-i) | v5 (central-i) |

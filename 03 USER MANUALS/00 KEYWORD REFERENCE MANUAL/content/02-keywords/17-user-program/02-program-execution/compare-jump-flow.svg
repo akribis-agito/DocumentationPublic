@@ -1,9 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="320" font-family="sans-serif" font-size="13">
-  <rect x="0" y="0" width="760" height="320" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="330" viewBox="0 0 760 330" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
+    </marker>
+  </defs>
+
   <text x="380" y="24" text-anchor="middle" font-size="15" font-weight="bold">Building a conditional: Compare then Jump on the numeric stack</text>
 
   <!-- Step 1: push operands -->
-  <rect x="30" y="60" width="150" height="70" rx="6" fill="#e3f2fd" stroke="#1565c0"/>
+  <rect x="30" y="60" width="150" height="70" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
   <text x="105" y="86" text-anchor="middle">PushConstant /</text>
   <text x="105" y="104" text-anchor="middle">PushParam &#215;2</text>
   <text x="105" y="122" text-anchor="middle" font-size="11" fill="#555">left, then right operand</text>
@@ -16,11 +21,11 @@
   <text x="250" y="118" text-anchor="middle" font-size="10" fill="#777">numeric stack</text>
 
   <!-- arrow -->
-  <line x1="290" y1="88" x2="330" y2="88" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+  <path d="M290,88 L326,88" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
 
   <!-- Step 2: Compare -->
-  <rect x="330" y="60" width="150" height="70" rx="6" fill="#e8f5e9" stroke="#2e7d32"/>
-  <text x="405" y="84" text-anchor="middle">Compare[op]</text>
+  <rect x="330" y="60" width="150" height="70" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="405" y="84" text-anchor="middle" font-weight="bold">Compare[op]</text>
   <text x="405" y="102" text-anchor="middle" font-size="11" fill="#555">pops 2, pushes</text>
   <text x="405" y="118" text-anchor="middle" font-size="11" fill="#555">1 (true) or 0 (false)</text>
 
@@ -30,33 +35,27 @@
   <text x="545" y="118" text-anchor="middle" font-size="10" fill="#777">result</text>
 
   <!-- arrow -->
-  <line x1="580" y1="88" x2="620" y2="88" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+  <path d="M580,88 L616,88" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
 
   <!-- Step 3: Jump -->
-  <rect x="610" y="60" width="130" height="70" rx="6" fill="#fff3e0" stroke="#e65100"/>
-  <text x="675" y="84" text-anchor="middle">Jump[8 or 9]</text>
+  <rect x="610" y="60" width="130" height="70" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="675" y="84" text-anchor="middle" font-weight="bold">Jump[8 or 9]</text>
   <text x="675" y="102" text-anchor="middle" font-size="11" fill="#555">pops result;</text>
   <text x="675" y="118" text-anchor="middle" font-size="11" fill="#555">branch or fall through</text>
 
   <!-- branch outcomes -->
-  <line x1="675" y1="130" x2="675" y2="170" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
-  <rect x="470" y="180" width="190" height="44" rx="6" fill="#fbe9e7" stroke="#e65100"/>
+  <path d="M675,130 L675,170" fill="none" stroke="#5b6b7b" stroke-width="1.2"/>
+  <rect x="470" y="180" width="190" height="44" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
   <text x="565" y="200" text-anchor="middle" font-size="12">condition met &#8594; jump</text>
   <text x="565" y="216" text-anchor="middle" font-size="11" fill="#555">program pointer = target</text>
-  <rect x="680" y="180" width="60" height="44" rx="6" fill="#f5f5f5" stroke="#999"/>
+  <rect x="680" y="180" width="60" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
   <text x="710" y="200" text-anchor="middle" font-size="11">else</text>
   <text x="710" y="216" text-anchor="middle" font-size="11" fill="#555">next line</text>
-  <line x1="630" y1="160" x2="565" y2="180" stroke="#333" stroke-width="1.2" marker-end="url(#a)"/>
-  <line x1="700" y1="160" x2="710" y2="180" stroke="#333" stroke-width="1.2" marker-end="url(#a)"/>
+  <path d="M630,160 L565,180" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M700,160 L710,180" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
 
   <!-- note -->
   <text x="30" y="265" font-size="12">Each thread has its own numeric stack. Operands are pushed left-to-right, so the right operand is on top (pop1).</text>
   <text x="30" y="285" font-size="12">"Jump if zero" (8) takes the branch when the comparison was false; "Jump if not zero" (9) when it was true.</text>
   <text x="30" y="305" font-size="12">This Compare + Jump pattern is how the compiler builds if / while / for control flow.</text>
-
-  <defs>
-    <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-      <path d="M0,0 L6,3 L0,6 Z" fill="#333"/>
-    </marker>
-  </defs>
 </svg>

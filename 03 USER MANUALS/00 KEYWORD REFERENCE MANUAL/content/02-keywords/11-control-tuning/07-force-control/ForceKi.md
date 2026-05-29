@@ -60,5 +60,7 @@ AForceKi[1]             ; read the force-loop integral gain
 
 - [ForceGain](ForceGain.md) — force-loop proportional gain (provides the gained error this term accumulates)
 - [ForceKd](ForceKd.md) — force-loop derivative gain
+- [ForcePIVOn](ForcePIVOn.md) — selects the force-control structure (changes which downstream limits clamp this integrator)
 - [ForceErr](../../08-axis-operation/04-force-operation-mode/ForceErr.md) — error driven toward zero by the loop
+- [StatReg](../../07-status-and-faults/StatReg.md) — saturation bits show when downstream loops are clamped (anti-windup engaged)
 - [Force control](00-overview.md) — force-loop structure overview

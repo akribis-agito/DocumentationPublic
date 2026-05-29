@@ -86,6 +86,7 @@ In **v4** `Speed` is a 32-bit integer. In **v5 (central-i)** it is a 64-bit inte
 - [Decel](Decel.md) — deceleration rate from this speed
 - [AccelFact](AccelFact.md) — scales the accel/decel ramps (not `Speed`)
 - [Jerk](Jerk.md) — S-curve smoothing of the ramps
-- [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md) — hard velocity-loop clamp (distinct from `Speed`)
+- [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md) — hard velocity-loop clamp (distinct from `Speed`); `Begin` rejects `Speed > MaxVel` in indirect modes
 - [StatReg](../../07-status-and-faults/StatReg.md) — bit 23 reports velocity saturation against `MaxVel`
 - [SpeedChgNew](SpeedChgNew.md) — position-triggered speed change during a move
+- [Begin](../04-motion-command/Begin.md) — reads `Speed` and arms the move

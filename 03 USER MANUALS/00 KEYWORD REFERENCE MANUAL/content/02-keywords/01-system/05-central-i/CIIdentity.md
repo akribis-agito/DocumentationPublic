@@ -40,6 +40,8 @@ Per-axis array of identifying information returned by the connected Central-i de
 
 The elements describe the remote unit's class, firmware/FPGA versions, channel counts (how many digital and analog inputs/outputs it has), and the headline electrical ratings. Tools such as Agito PCSuite read these to present the correct interface for the connected device and to scale its I/O.
 
+![CIIdentity array — fields grouped by purpose](ciidentity-field-map.svg)
+
 | Index | Field | Meaning |
 |-------|-------|---------|
 | [1] | Device class | Remote class as reported (amplifier / I/O / simulation) — see [CIDeviceType](CIDeviceType.md) |

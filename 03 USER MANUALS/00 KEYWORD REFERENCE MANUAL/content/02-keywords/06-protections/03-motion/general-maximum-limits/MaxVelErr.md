@@ -66,5 +66,7 @@ AMaxVelErr[1]          ; read back the limit
 
 - [VelErr](../../../10-motion/01-kinematics-status/VelErr.md) — the measured velocity error this limit acts on
 - [MaxVelErrOL](MaxVelErrOL.md) — open-loop velocity-error limit (the alternate threshold)
-- [MaxPosErr](MaxPosErr.md) — companion position-following-error limit
+- [MaxPosErr](MaxPosErr.md) — companion position-following-error limit (see its walk-through; same trip pattern)
+- [VelRef](../../../10-motion/01-kinematics-status/VelRef.md) / [Vel](../../../10-motion/01-kinematics-status/Vel.md) — operands of `VelErr`
 - [ConFlt](../../../07-status-and-faults/ConFlt.md) — records fault code 1021 (closed loop) / 1056 (open loop)
+- [MotionReason](../../../10-motion/05-motion-status/MotionReason.md) — records reason 8 (motor disabled) when this trip fires

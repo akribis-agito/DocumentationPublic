@@ -56,6 +56,8 @@ Each element reports one piece of the position-tracking state:
 
 The number of queued targets waiting to play is the queue depth minus the free count at index 7.
 
+![FIFOPosStatus indexes 1-4 as cubic-spline control points around the current cycle](fifopos-controlpoints.svg)
+
 ### Motion / limits state (index 10)
 
 | Value | Meaning |

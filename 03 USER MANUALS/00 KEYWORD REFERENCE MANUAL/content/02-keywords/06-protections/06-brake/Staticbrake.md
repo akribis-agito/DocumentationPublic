@@ -54,6 +54,35 @@ Time to wait, in milliseconds, after releasing (energizing) the brake before all
 
 ![Three-lane timing diagram for BrakeMode 3: on an enable command the brake is released immediately and the motor is armed after BrakeRelTime; on a disable command the brake is engaged immediately and the motor is turned off after BrakeLockTime](brake-timing.svg)
 
+## Walk-through: automatic brake handoff on enable/disable (BrakeMode 3)
+
+A typical vertical-axis setup uses `BrakeMode = 3` so the static brake covers the windows where the motor is off:
+
+```text
+ABrakeUsed=1            ; enable the brake feature
+ABrakeMode=3            ; automatic by MotorOn state
+ABrakeRelTime=200       ; wait 200 ms after release before allowing motion
+ABrakeLockTime=350      ; engage brake then wait 350 ms before disabling the motor
+```
+
+On enable (`AMotorOn = 1`):
+
+```text
+AStatReg                ; bit 29 clears (release requested)
+                        ; for BrakeRelTime ms the motor is energized but motion is held off
+```
+
+After `BrakeRelTime` elapses the axis can move. Verify by issuing `ABegin` immediately after `AMotorOn = 1` — motion should not start before the brake has released.
+
+On disable (`AMotorOn = 0`):
+
+```text
+AStatReg                ; bit 29 sets (lock requested) immediately
+                        ; motor stays energized for BrakeLockTime ms, then disables
+```
+
+If the load drops on disable, increase `BrakeLockTime` so the brake fully engages before the motor torque is removed. If motion stutters at the start of a move, increase `BrakeRelTime` so the brake is fully open before the profiler starts.
+
 ## See also
 
 - [Dynamic brake](Dynamicbrake.md) — fast electrical braking (shorting the phases)

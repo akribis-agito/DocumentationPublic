@@ -70,6 +70,29 @@ AMaxMotorTemp[1]=80    ; trip axis A if motor temperature exceeds 80 °C
 AMaxMotorTemp          ; read the current limit
 ```
 
+### Walk-through: verify the warning bands ramp before the trip
+
+Confirm the sensor is enabled, set the trip ceiling, then watch the warning bands climb on a thermal soak (long duty cycle):
+
+```text
+AMotorTempUsed[1]=1    ; enable the PT100/RTD sensor
+AMaxMotorTemp[1]=80    ; over-temperature trip at 80 deg C
+AMotorTemp             ; sample the live temperature
+AStatReg               ; bits 15-16 carry the 4-level warning
+```
+
+During a sustained high-duty move:
+
+| Reading | Expected StatReg bits 15-16 | PCSuite LED |
+|---|---|---|
+| `MotorTemp < 70` | 0 (none) | off |
+| `70 <= MotorTemp < 74` | 1 (low) | yellow |
+| `74 <= MotorTemp < 77` | 2 (medium) | orange |
+| `77 < MotorTemp <= 80` | 3 (high) | red |
+| `MotorTemp > 80` | trip: `AConFlt = 1040`, axis disabled | — |
+
+If `AMotorTemp` reads the default `25` even under load, [MotorTempUsed](MotorTempUsed.md) is probably still `0` (sensor disabled) — the warning and trip checks are then both skipped.
+
 ## See also
 
 - [MotorTemp](MotorTemp.md) — measured motor temperature

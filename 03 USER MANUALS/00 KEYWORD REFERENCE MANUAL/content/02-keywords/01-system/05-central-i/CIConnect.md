@@ -61,6 +61,30 @@ ACIConnect           ; bring up the Central-i link on the selected axis
 ACIStatus[1]         ; then poll: 1 = in process, 3 = connected, 2 = fault
 ```
 
+### Walk-through: connect a Central-i unit
+
+Bring up the link, poll until it is connected (or report the fault), then confirm the remote device matches what you expected.
+
+```text
+ACIDeviceType=...    ; (one-time) configure the expected device class for this port
+ACILinkConfig=...    ; (one-time) configure the link timing for this port
+                     ; both must be saved to flash if you want them to persist
+ACIConnect           ; arm the connect sequence (motor must be off)
+ACIStatus[1]         ; poll: 1 = in process; loop until it leaves 1
+                     ; then check the result
+ACIStatus[1]         ; expect 3 = connected
+                     ; if it is 2 (fault):
+ACIStatus[6]         ;   read the last error code (see CIStatus table)
+ACIStatus[5]         ;   time of the last error (seconds since power-on)
+                     ; on success, confirm the remote identity
+ACIIdentity[1]       ; device class (matches CIDeviceType)
+ACIIdentity[2]       ; device sub-type
+ACIIdentity[5]       ; digital input count reported by the remote
+ACIGlobalStat        ; the port's connected bit is now set in the system-wide summary
+```
+
+Common failures: `CIStatus[6] = 9` means the remote does not match `CIDeviceType`; `11`/`13`/`14` mean the remote needs a specific `AmpType`; `6` flags an unsupported Central-i engine version. For an automatic version of this sequence at power-up, set [CIAutoConnect](CIAutoConnect.md).
+
 ## See also
 
 - [CIAutoConnect](CIAutoConnect.md) — run this sequence automatically at power-up

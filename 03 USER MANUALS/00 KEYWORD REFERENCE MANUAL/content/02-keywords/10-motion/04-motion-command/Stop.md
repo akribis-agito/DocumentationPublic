@@ -66,7 +66,9 @@ AStop                ; controlled stop using the normal Decel rate
 ## See also
 
 - [Abort](Abort.md) — immediate stop (clears motion at once; not a `Decel` ramp)
+- [Begin](Begin.md) — the command this `Stop` ends
 - [Decel](../03-kinematics-configuration/Decel.md) — deceleration rate used by `Stop`
+- [Jerk](../03-kinematics-configuration/Jerk.md) / [JerkInDec](../03-kinematics-configuration/JerkInDec.md) — smooth the `Stop` trailing slope
 - [EmrgDec](../03-kinematics-configuration/EmrgDec.md) — emergency rate (used for limit/fault stops, not by `Stop`)
 - [MotionStat](../05-motion-status/MotionStat.md) — bit 3 (stop-request) set by `Stop`
 - [MotionReason](../05-motion-status/MotionReason.md) — reason code 1 set by `Stop`

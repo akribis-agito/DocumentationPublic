@@ -59,7 +59,8 @@ APeakCL=64000        ; peak current limit (mA)
 
 ## See also
 
-- [ContCL](ContCL.md) — continuous current limit (must be below PeakCL)
+- [ContCL](ContCL.md) — continuous current limit (must be below `PeakCL`); see the I&#178;t walk-through there
 - [PeakTime](PeakTime.md) — time allowed at peak current
 - [CurrLimMode](CurrLimMode.md) — selects how the current command is limited
-- [StatReg](../../07-status-and-faults/StatReg.md) — bit 21 flags current-command saturation
+- [MaxMotorCurr](MaxMotorCurr.md) — instantaneous over-current trip (distinct from `PeakCL`-based limiting)
+- [StatReg](../../07-status-and-faults/StatReg.md) — bit 21 flags current-command saturation; bit 25 flags active I&#178;t power limit

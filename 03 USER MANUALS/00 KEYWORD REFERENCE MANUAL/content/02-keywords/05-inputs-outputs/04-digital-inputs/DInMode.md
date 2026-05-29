@@ -94,6 +94,37 @@ The lower 16 bits select one of the following functions. The "Edge / level" and 
 2. At most **20** special functions may be assigned across the digital inputs; beyond that, only the first 20 are operational. A function applied to two axes counts as two.
 3. Functions are evaluated in ascending index order; a duplicate functionality on a later input is ignored (except general-purpose input). No error is raised, but PCSuite shows a warning.
 
+## Examples
+
+### Walk-through: wire and use a home switch on digital input 3
+
+Configure DI 3 as the home-state input for axis A: pick the port, assign the function, set fail-safe polarity, and add debounce. After the wiring is in place, the input's level drives the home bit and `Pos`-based homing logic.
+
+```text
+AMotorOn=0                ; configure with the motor off
+ADInMode[3]=21            ; function 21 = home (level); applies to this axis (upper bits 0 = axis A)
+ADInLog=4                 ; bit 2 set — invert DI 3 so a disconnected switch (low) is treated as "not home"
+ADInFilt=3                ; 3-sample hardware debounce (raise if the switch is electrically noisy)
+ASave                     ; persist (DInMode and DInLog are flash-saveable; DInFilt too)
+AReset                    ; some DInMode functions only attach on power-up — restart the controller
+                          ; ... then verify ...
+ADInPort                  ; read the live input word; bit 2 reflects DI 3 after filter and inversion
+AStatReg                  ; the home bit in StatReg tracks the input level
+```
+
+Use the same pattern for limit switches (function 9 = RLS, 10 = FLS) — these feed [LimitsStat](../../06-protections/03-motion/position-limit-protection/LimitsStat.md) and trigger the limit-handler deceleration in the consumer keyword [MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md).
+
+### Walk-through: drive a motion start from a digital input
+
+Pair `DInMode = 3` (begin motion) with [BeginDInOn](../../10-motion/04-motion-command/BeginDInOn.md) so a button press launches an armed move.
+
+```text
+ADInMode[4]=3             ; DI 4 = begin motion (rising edge)
+ABeginDInOn=1             ; arm: the next rising edge of DI 4 releases the queued move
+                          ; ... rising edge on DI 4 ...
+AMotionStat               ; motion has started — non-zero
+```
+
 ## Changes between versions
 
 Central-i v5 adds one functionality code: **27 — Heidenhain limits**. It is not present in v4 / standalone (where the highest code is 26). All codes 0–26 above are unchanged.

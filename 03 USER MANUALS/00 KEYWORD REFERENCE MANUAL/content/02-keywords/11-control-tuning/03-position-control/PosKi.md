@@ -53,11 +53,40 @@ APosKi[1]=2.5       ; enable a position-loop integral term (first scheduling ele
 APosKi[1]           ; read the position-loop integral gain
 ```
 
+### Walk-through: add a position integral and observe the steady-state effect
+
+This scenario adds the v5 position integral on top of an already-tuned proportional position loop and uses the velocity-saturation status bit to confirm the loop is not running into [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md).
+
+1. **Confirm the proportional position loop is in place**:
+
+   ```text
+   APosGain[1]                  ; should be non-zero
+   ```
+
+2. **Add the integral term** (held in set 1 when scheduling is off):
+
+   ```text
+   APosKi[1]=2.5
+   ```
+
+3. **Command a steady-state hold** (axis stationary at a target). With `PosGain` alone, any constant residual force (gravity, friction bias) would leave a small `PosErr`; with `PosKi > 0` the accumulator builds until the `PosGain*PosErr + integral` sum is large enough to balance it, driving the steady-state error toward zero.
+
+4. **Check [StatReg](../../07-status-and-faults/StatReg.md) bit 23** while the integrator is rising:
+
+   ```text
+   (AStatReg & 0x800000) >> 23   ; velocity saturation
+   ```
+
+   If bit 23 reads `1`, the position-loop PI output is asking for more than `MaxVel`, the velocity reference is being clamped and the integrator anti-windup is engaged for that cycle. If it stays `0`, the integral is building up freely.
+
+> **Note.** [ClearIntegral](../01-general-keywords/ClearIntegral.md) only zeroes the *velocity*-loop integrator; the position-loop integrator carries through that command. To restart the position integral cleanly, disable the motor and re-enable, or temporarily set `PosKi = 0`.
+
 ## See also
 
 - [PosGain](PosGain.md) — proportional gain whose output `PosKi` integrates
 - [PosErr](../../10-motion/01-kinematics-status/PosErr.md) — position error at the input of the position loop
 - [VelRef](../../10-motion/01-kinematics-status/VelRef.md) — velocity-loop reference that the position PI output forms
 - [VelKi](../04-velocity-control/VelKi.md) — integral gain of the inner (velocity) loop
-- [ClearIntegral](../01-general-keywords/ClearIntegral.md) — clears the velocity-loop integrator
+- [ClearIntegral](../01-general-keywords/ClearIntegral.md) — clears the velocity-loop integrator (does **not** affect the position integrator)
+- [StatReg](../../07-status-and-faults/StatReg.md) — bit 23 (velocity saturation) shows when the PI output is clamped
 - [ScheduleMode](../01-general-keywords/ScheduleMode.md) — selects which array element is active

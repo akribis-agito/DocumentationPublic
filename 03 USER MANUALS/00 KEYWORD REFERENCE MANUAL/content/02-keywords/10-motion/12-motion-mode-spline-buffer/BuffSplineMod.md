@@ -56,6 +56,44 @@ ABuffSplineMod=2     ; parabolic (continuous velocity)
 ABuffSplineMod=3     ; cubic spline (default, smoothest)
 ```
 
+### Walk-through: define waypoints and play one cubic-spline cycle
+
+Load four waypoints into [BuffPos](BuffPos.md) and [BuffTime](BuffTime.md) (with a zero terminator), fit a cubic spline, then run one cycle. Axis A is assumed to be the primary axis of a single-member group and is motor-on but not in motion.
+
+```text
+; --- 1) Load the waypoint positions (one entry per knot) ---
+ABuffPos[1]=0
+ABuffPos[2]=5000
+ABuffPos[3]=8000
+ABuffPos[4]=10000
+
+; --- 2) Load the matching time stamps (strictly increasing, zero-terminated) ---
+ABuffTime[1]=200              ; servo-sample index of waypoint 1
+ABuffTime[2]=600              ; of waypoint 2
+ABuffTime[3]=900              ; of waypoint 3
+ABuffTime[4]=1200             ; of waypoint 4 (== samples per cycle, BuffStatus[6])
+ABuffTime[5]=0                ; terminator -- required
+
+; --- 3) Choose the curve shape and how many times the cycle repeats ---
+ABuffSplineMod=3              ; 1 = linear, 2 = parabolic, 3 = cubic (default)
+ABuffEdgeMode=0               ; start/end boundary condition (see BuffEdgeMode)
+ABuffCycles=1                 ; play the cycle once
+
+; --- 4) Pre-compute the trajectory on the primary axis ---
+ABuffCalc=0                   ; rejected if BuffTime is not validly populated
+
+; --- 5) Arm spline-buffer motion ---
+AMotionMode=18                ; 18 = spline buffer
+ABegin                        ; controller streams the stored points to PosRef
+
+; --- 6) Observe the playback ---
+ABuffStatus[4]                ; cycle currently playing (1..BuffCycles)
+ABuffStatus[5]                ; in-cycle sample index (1..BuffStatus[6])
+ABuffStatus[6]                ; samples per cycle (= last BuffTime value)
+```
+
+Changes to `BuffPos`, `BuffTime`, `BuffSplineMod`, `BuffEdgeMode` or `BuffSlopes` mark the trajectory "stale": the next `Begin` is rejected until `BuffCalc` is re-run. End the move at the next cycle boundary with [StopBuff](../04-motion-command/StopBuff.md).
+
 ## See also
 
 - [BuffEdgeMode](BuffEdgeMode.md) — start/end boundary condition applied to the parabolic/cubic fit

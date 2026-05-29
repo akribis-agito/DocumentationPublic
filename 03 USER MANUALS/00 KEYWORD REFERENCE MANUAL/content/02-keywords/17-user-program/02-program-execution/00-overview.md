@@ -60,3 +60,43 @@ The following table summarizes the program-execution keywords.
 | 48 | [PStatParams](PStatParams.md) | Parameters included in each periodic transmission. |
 | 49 | [PStatPort](PStatPort.md) | Communication port used for streaming. |
 | 50 | [PStatInterval](PStatInterval.md) | Interval between transmissions. |
+
+## Walk-through: run a numbered task with an event handler
+
+A common pattern is to launch a long-running task on its own thread and let a separate event handler react to a controller condition while the task runs. The pieces wire together as follows.
+
+1. Load the compiled program ([DownloadUPBin](DownloadUPBin.md)) and verify it is present ([ProgInfo](ProgInfo.md)). The program contains a [ProgTask](ProgTask.md) label for the task you want to run (say, task `5`) and a [ProgFunc](ProgFunc.md)-style handler reached only when an event fires.
+2. Configure the event you want serviced — for example, fire event 1 whenever [StatReg](../../07-status-and-faults/StatReg.md) bit 17 (RLS) goes active. The four trigger parameters are non-axis arrays indexed by event number:
+
+   ```text
+   AProgEventPar[1]=<complex CAN code of StatReg on axis A>   ; what to watch
+   AProgEventMask[1]=131072                                   ; mask: bit 17
+   AProgEventType[1]=5                                        ; rising-edge condition
+   AProgEventVal[1]=0                                         ; cross from 0 to non-zero
+   AProgEventEn[1]=1                                          ; enable servicing of event 1
+   ```
+
+3. Arm the event system as a whole, then start the task on a thread:
+
+   ```text
+   AProgEventOn=1     ; master switch: sense + service all enabled events
+   AProgRun[2],5      ; run task 5 as thread 2 (thread 1 stays free to service events)
+   ```
+
+4. While the task runs, poll its status with [ProgStat](ProgStat.md). When the watched condition occurs, the controller moves event 1 to "pending for service" ([ProgEventStat](ProgEventStat.md) = `1`), runs the handler on thread 1, and re-arms the event when the handler executes [Return](Return.md):
+
+   ```text
+   AProgStat[2]            ; 1 while task 5 is running, 0 when finished or stopped
+   AProgEventStat[1]       ; 0 waiting, 1 pending, 2 in service
+   AProgError[2]           ; non-zero if thread 2 stopped on an error
+   ```
+
+5. To pause and resume thread 2 without losing its place, halt it then run it again with task value `0`; to force it to start over from the beginning, reset it first:
+
+   ```text
+   AProgHalt[2]            ; pause thread 2 (event servicing on thread 1 is unaffected)
+   AProgRun[2],0           ; resume thread 2 from where it stopped
+   AProgReset[2]           ; ... or reset thread 2 so the next ProgRun starts at task 1
+   ```
+
+Setting `AProgEventOn=0` at any time forces every event back to "waiting for trigger" and discards anything pending; per-event control (without losing pending state) uses [ProgEventEn](ProgEventEn.md), and the global servicing gate is [ProgEventGEn](ProgEventGEn.md).

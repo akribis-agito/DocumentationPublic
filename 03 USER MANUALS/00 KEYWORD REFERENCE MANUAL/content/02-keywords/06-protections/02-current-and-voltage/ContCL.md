@@ -79,9 +79,30 @@ In **v4** `ContCL` is a 32-bit integer; in **v5** (central-i only) it is a 32-bi
 AContCL=16000        ; continuous current limit (mA)
 ```
 
+### Walk-through: configure the I&#178;t scheme and watch it engage
+
+A full I&#178;t setup is three keywords; check the engagement on a sustained-load move:
+
+```text
+APeakCL=4000          ; peak current limit (mA)
+AContCL=2000          ; continuous limit (mA)
+APeakTime=1000        ; allowed time at PeakCL before engage (ms)
+```
+
+When the motor is held at or near `PeakCL` (e.g. accelerating a heavy load), I&#178;_filt climbs toward `PeakCL&#178;` and crosses `ContCL&#178;` after approximately `PeakTime`. From that instant the [PeakCL](PeakCL.md) clamp drops to the continuous level and:
+
+```text
+AStatReg                      ; bit 25 (power limit) set while engaged
+                              ; bit 21 (current saturation) set while CurrRef is being clamped
+```
+
+The limitation releases once `I²_filt` drops below `0.90 × ContCL²` (10% hysteresis). If `ControlMode` is configured for "I&#178;t makes fault" (or the current loop is not active), the same crossing instead disables the axis with `AConFlt = 1044` and the move ends with `AMotionReason = 8`.
+
 ## See also
 
 - [PeakCL](PeakCL.md) — peak current limit (and I²t upper bound)
 - [PeakTime](PeakTime.md) — time allowed at peak current (sets τ)
-- [StatReg](../../07-status-and-faults/StatReg.md) — bit 25 flags active I²t power limitation
+- [CurrLimMode](CurrLimMode.md) — controls how the saturated current command interacts with `PeakCL`
+- [MaxMotorCurr](MaxMotorCurr.md) — instantaneous over-current trip (separate from I²t)
+- [StatReg](../../07-status-and-faults/StatReg.md) — bit 25 flags active I²t power limitation, bit 21 flags current saturation
 - [ConFlt](../../07-status-and-faults/ConFlt.md) — fault 1044 when I²t is configured to trip

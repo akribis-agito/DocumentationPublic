@@ -60,5 +60,7 @@ APeakTime=500        ; 500 ms allowed at peak current
 
 ## See also
 
-- [ContCL](ContCL.md) — continuous current limit (and I²t diagram)
+- [ContCL](ContCL.md) — continuous current limit (and I²t walk-through)
 - [PeakCL](PeakCL.md) — peak current limit
+- [StatReg](../../07-status-and-faults/StatReg.md) — bit 25 flags I²t power limit, bit 21 flags current saturation
+- [ConFlt](../../07-status-and-faults/ConFlt.md) — fault 1044 if I²t is configured to trip after `PeakTime` elapses

@@ -70,4 +70,5 @@ The feedforward term (`20000`) supplies most of `VelRef`, so the position loop o
 - [dPosRefFilt](dPosRefFilt.md) — low-pass filter applied to `dPosRef` before this scaling
 - [VelRef](../../10-motion/01-kinematics-status/VelRef.md) — velocity-loop reference that the scaled feed-forward joins
 - [PosGain](../03-position-control/PosGain.md) — position gain whose output the feed-forward is added to
-- [VelFFW](../05-feedforwards/VelFFW.md) — velocity feed-forward into the current command
+- [PosKi](../03-position-control/PosKi.md) — position integral whose output joins the same summing point (v5)
+- [VelFFW](../05-feedforwards/VelFFW.md) — velocity feed-forward into the current command (the parallel path)

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="220" viewBox="0 0 560 220" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+  <text x="280" y="22" text-anchor="middle" font-size="14" font-weight="bold">ProductSN[2] format — production serial number</text>
+  <text x="280" y="40" text-anchor="middle" font-size="11" fill="#5b6b7b">8-digit decimal concatenation: YYWWNNNN</text>
+
+  <!-- year field -->
+  <rect x="80" y="62" width="120" height="48" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="140" y="84" text-anchor="middle">Year</text>
+  <text x="140" y="100" text-anchor="middle" font-size="11" fill="#5b6b7b">2 digits</text>
+
+  <!-- week field -->
+  <rect x="220" y="62" width="120" height="48" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="280" y="84" text-anchor="middle">Week</text>
+  <text x="280" y="100" text-anchor="middle" font-size="11" fill="#5b6b7b">2 digits</text>
+
+  <!-- count field -->
+  <rect x="360" y="62" width="160" height="48" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="440" y="84" text-anchor="middle">Unit count</text>
+  <text x="440" y="100" text-anchor="middle" font-size="11" fill="#5b6b7b">4 digits</text>
+
+  <!-- example bracket -->
+  <text x="80" y="142" font-size="12" fill="#5b6b7b">Example layout</text>
+  <text x="80" y="162" font-family="monospace" font-size="16">YY  WW  NNNN</text>
+  <text x="80" y="182" font-family="monospace" font-size="11" fill="#5b6b7b">year week sequence</text>
+
+  <!-- copy arrows -->
+  <line x1="280" y1="200" x2="280" y2="212" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="280" y="218" text-anchor="middle" font-size="11" fill="#5b6b7b">at power-up &#8594; Identity[2]</text>
+</svg>

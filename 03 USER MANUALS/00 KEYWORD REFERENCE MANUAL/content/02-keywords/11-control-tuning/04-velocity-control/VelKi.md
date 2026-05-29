@@ -56,12 +56,43 @@ where $k_i$ and $k_{scale}$ are fixed internal scalings.
 - **Anti-windup:** the integral saturation value is controlled internally. When the current command saturates (at a torque/current limit) and the error has the same sign as the output, integration is halted for that cycle so the integral does not wind up. The integral is also preloaded when switching operation modes so the current command does not jump.
 - **Range / default:** `0` to `20000`, default `0` (no integral action; velocity loop is purely proportional).
 
+![Velocity PI structure: VelErr fans out to a VelGain (P) path and a VelKi (I) path; the I path passes through an anti-windup gate that freezes the accumulator when the current command saturates, then the two paths sum to form the velocity-PI output](velocity-pi-antiwindup.svg)
+
 ## Examples
 
 ```text
 AVelKi[1]=80        ; set the velocity-loop integral gain (first scheduling element)
 AVelKi[1]           ; read the velocity-loop integral gain
 ```
+
+### Walk-through: confirm anti-windup is doing its job
+
+When a move pushes the velocity-loop output into the current limit, the integrator should freeze instead of accumulating further. The [StatReg](../../07-status-and-faults/StatReg.md) saturation bits are the way to confirm that path is exercising correctly.
+
+1. **Start from a clean integrator** (axis stationary, motor on):
+
+   ```text
+   AClearIntegral
+   ```
+
+2. **Command a fast move** that you expect to clip the current. Read the status word during the move:
+
+   ```text
+   AStatReg
+   (AStatReg & 0x200000) >> 21   ; bit 21 - current saturation
+   ```
+
+   While bit 21 reads `1`, the velocity-PI output is being clamped at the peak-current limit and the anti-windup gate is set to `0`, so the integrator stops accumulating for those cycles.
+
+3. **Watch saturation clear**. As the axis decelerates or the limit is removed, bit 21 returns to `0`, the gate reopens to `1`, and the integral resumes normal accumulation from the value it held during saturation - it has not wound up.
+
+4. **Force a clean restart** after the test, before the next move that should start without any standing integral:
+
+   ```text
+   AClearIntegral                ; integrator back to zero (axis must be stationary)
+   ```
+
+The same sequence applies to the [ForceKi](../07-force-control/ForceKi.md) integrator in force operation mode, with bit 21 (current saturation) being replaced by the downstream loop limits described on that page.
 
 ## Changes between versions
 
@@ -74,4 +105,5 @@ In **v5 (central-i)** `VelKi` is a floating-point value; the proportional×error
 - [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md) — current command produced from the velocity-PI output
 - [PosKi](../03-position-control/PosKi.md) — integral gain of the outer (position) loop (v5)
 - [ClearIntegral](../01-general-keywords/ClearIntegral.md) — clears the velocity-loop integrator
+- [StatReg](../../07-status-and-faults/StatReg.md) — bit 21 (current saturation) reports when anti-windup is engaged
 - [ScheduleMode](../01-general-keywords/ScheduleMode.md) — selects which array element is active

@@ -96,3 +96,5 @@ AMotionMode         ; query current mode
 - [RptMode](RptMode.md) — repetition direction (mode 2)
 - [RptCycles](RptCycles.md) — number of repetitions (mode 2)
 - [RptWait](RptWait.md) — dwell between repetitions (mode 2)
+- [MotionStat](../05-motion-status/MotionStat.md) — which status bits each mode sets (see the mode-bits map there)
+- [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) / [RelTrgt](../13-motion-mode-ptp/RelTrgt.md) — targets for PTP modes (1 and 2)

@@ -39,6 +39,8 @@ Because element 7 reports free words against the queue's full capacity:
 
 Poll element 7 while streaming and keep at least one closed segment queued ahead of the one playing.
 
+![CNC queue states: empty, filling, running, full, drain and underrun, tracked via CNCAStatus indexes](cnc-queue-state.svg)
+
 ### CNC motion status bit-field (element 10)
 
 Element 10 is `0` when the engine is not in motion, `-1` when not valid, otherwise a bit-field:

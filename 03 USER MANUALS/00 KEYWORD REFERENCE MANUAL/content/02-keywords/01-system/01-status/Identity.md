@@ -42,6 +42,8 @@ The array is populated once at power-up while the controller initialises. Fixed 
 
 A host typically reads `Identity[1]` to learn the model, `Identity[16]` to learn the axis count, and the two feature-flag words to decide which optional behaviours to enable.
 
+![Identity array — fields grouped by purpose](identity-field-map.svg)
+
 ## Index reference
 
 | Index | Field | Notes |

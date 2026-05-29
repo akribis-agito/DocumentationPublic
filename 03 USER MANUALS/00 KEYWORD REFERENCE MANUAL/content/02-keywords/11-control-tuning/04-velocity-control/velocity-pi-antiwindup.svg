@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="260" viewBox="0 0 640 260" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
+    </marker>
+  </defs>
+
+  <!-- VelErr input -->
+  <rect x="14" y="110" width="86" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="57" y="135" text-anchor="middle">VelErr</text>
+
+  <!-- VelGain (P) -->
+  <rect x="140" y="50" width="100" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="190" y="75" text-anchor="middle">x VelGain</text>
+
+  <!-- VelKi multiplier on the I path -->
+  <rect x="140" y="170" width="100" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="190" y="195" text-anchor="middle">x VelKi</text>
+
+  <!-- Anti-windup gate -->
+  <rect x="270" y="170" width="80" height="40" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="310" y="190" text-anchor="middle">anti-</text>
+  <text x="310" y="204" text-anchor="middle">windup</text>
+
+  <!-- Integrator (accumulator) -->
+  <rect x="370" y="170" width="100" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="420" y="195" text-anchor="middle">accumulate</text>
+
+  <!-- Summing junction -->
+  <circle cx="510" cy="130" r="14" fill="#ffffff" stroke="#5b6b7b" stroke-width="1.2"/>
+  <text x="510" y="134" text-anchor="middle">+</text>
+
+  <!-- Output -->
+  <rect x="554" y="110" width="78" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="593" y="135" text-anchor="middle">VelPI out</text>
+
+  <!-- Arrows: VelErr fans out to P and I paths -->
+  <path d="M100,130 L120,130 L120,70 L140,70" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M100,130 L120,130 L120,190 L140,190" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- P path to summing -->
+  <path d="M240,70 L490,70 L490,118" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- I path: VelKi -> gate -> accumulate -> sum -->
+  <path d="M240,190 L270,190" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M350,190 L370,190" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M470,190 L510,190 L510,144" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- Sum to output -->
+  <path d="M524,130 L554,130" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- Saturation feedback to anti-windup -->
+  <path d="M593,150 L593,236 L310,236 L310,210" fill="none" stroke="#e0736b" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="450" y="252" text-anchor="middle" fill="#a04030">saturation at current limit -&gt; freeze integrator</text>
+
+  <!-- Path labels -->
+  <text x="190" y="42" text-anchor="middle" fill="#5b6b7b">P path</text>
+  <text x="190" y="162" text-anchor="middle" fill="#5b6b7b">I path</text>
+</svg>

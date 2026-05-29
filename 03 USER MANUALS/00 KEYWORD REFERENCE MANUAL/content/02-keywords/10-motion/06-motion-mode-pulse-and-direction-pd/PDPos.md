@@ -80,6 +80,34 @@ When queried over a communication channel, `PDPos` is converted from internal co
 APDPos              ; read the current scaled P/D counter (pulse-direction units)
 ```
 
+### Walk-through: configure a direct pulse-and-direction follower
+
+A typical bring-up of a P/D follower (axis A, motor off, no motion in progress). The example uses direct P/D motion (`MotionMode = 3`); for indirect motion use `MotionMode = 4` and replace `PDPosFilt` with the usual `Speed` / `Accel` / `Decel` kinematics.
+
+```text
+; --- 1) Set the input format and scaling (once, with motor off) ---
+APDSubType=0         ; 0 = pulse + direction, 1 = A-quad-B
+APDFact=1            ; numerator   of the pulses-in / counts-out ratio
+APDFactDen=1         ; denominator of the same ratio
+APDEncDir=0          ; sign of the accumulation (0 add, 1 subtract)
+APDPosFilt=12800     ; low-pass cut-off (Hz x 100), default 128 Hz; direct mode only
+
+; --- 2) Optionally clear the counter so it starts at zero ---
+ASetPDPos=0          ; preset PDPos to 0
+
+; --- 3) Arm direct P/D motion ---
+AMotionMode=3        ; 3 = direct P/D, 4 = indirect P/D
+AMotorOn=1
+ABegin               ; latches PDPos at start; from now PosRef tracks (PDPos - latched)
+
+; --- 4) While running, observe the counter and the follower ---
+APDPos               ; current scaled counter (advances with incoming pulses)
+APDVel               ; rate of change of PDPos
+APosRef              ; follower reference -- in direct mode this tracks the PDPos delta
+```
+
+If `APDPos` increments but `APosRef` does not move, check `PDEncDir`, `PDFact / PDFactDen` and that `MotionMode` is 3 (or 4) and `Begin` has been issued.
+
 ## See also
 
 - [PDVel](PDVel.md) — rate of change of `PDPos`

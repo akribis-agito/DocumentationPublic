@@ -102,3 +102,4 @@ Behaviour: set 1 is in use whenever the axis is moving; the moment motion stops,
 - [SchedulePos](SchedulePos.md) / [ScheduleVel](ScheduleVel.md) / [ScheduleTemp](ScheduleTemp.md) — band thresholds for range modes
 - [ScheduleTime](ScheduleTime.md) — timing used by the time-based modes
 - [ScheduleGntry](ScheduleGntry.md) — pairing of scheduling with gantry control state
+- [PosGain](../03-position-control/PosGain.md) / [VelGain](../04-velocity-control/VelGain.md) / [VelKi](../04-velocity-control/VelKi.md) / [VelFFW](../05-feedforwards/VelFFW.md) / [AccFFW](../05-feedforwards/AccFFW.md) / [PosKi](../03-position-control/PosKi.md) — gain arrays whose elements this mode selects

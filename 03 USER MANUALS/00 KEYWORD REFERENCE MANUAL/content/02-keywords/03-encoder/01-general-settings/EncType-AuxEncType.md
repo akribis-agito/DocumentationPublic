@@ -47,6 +47,25 @@ AEncType=4           ; SIN/COS encoder
 AEncType=6           ; BiSS-C absolute encoder
 ```
 
+### Walk-through: set up an absolute encoder at boot
+
+A typical absolute-encoder commissioning sequence. The example uses a 26-bit BiSS-C device with a 12-bit multi-turn count and no offset; adapt the values to your encoder's datasheet.
+
+```text
+AMotorOn=0                ; motor off — these keywords change the feedback pipeline
+AEncType=6                ; absolute, BiSS-C (use 3 for EnDat 2.2, 8 for Tamagawa)
+AEncAbsBits=26            ; total bit count of the absolute word
+AEncAbsMB=12              ; bits at the top that form the multi-turn count
+AEncAbsOff=0              ; offset added to the masked reading at power-up
+ASave                     ; persist the encoder configuration to flash
+AReset                    ; software power cycle so the encoder is configured cleanly
+                          ; ... then check the seeded position ...
+AEncAbsVal                ; raw masked, direction-handled absolute reading
+APos                      ; Pos seeded from (EncAbsVal + EncAbsOff) — no homing required
+```
+
+To place machine zero at a chosen physical point: park the axis there, read `EncAbsVal`, then set `EncAbsOff` to the negation of that reading and `Save`/`Reset`. On a brushless motor, changing any of these invalidates commutation, so the controller flags that commutation must be repeated.
+
 ## See also
 
 - [EncSubType](EncSubType-AuxEncSubType.md) — incremental encoder subtype (`EncType=1`)

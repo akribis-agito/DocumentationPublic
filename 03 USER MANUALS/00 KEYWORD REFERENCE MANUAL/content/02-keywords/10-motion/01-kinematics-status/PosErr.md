@@ -90,6 +90,9 @@ In **v4** `PosErr` feeds a pure-proportional position controller (`VelRef = PosG
 - [PosRef](PosRef.md) — position reference (the minuend)
 - [Pos](Pos.md) — position feedback (the subtrahend in non-gantry mode)
 - [GantryFdbk](../../12-gantry-control/02-gantry-kinematic-feedback/GantryFdbk.md) — common-mode feedback used in gantry mode
-- [MaxPosErr](../../06-protections/03-motion/general-maximum-limits/MaxPosErr.md) — error threshold that disables the axis
+- [PosGain](../../11-control-tuning/03-position-control/PosGain.md) — proportional gain that scales `PosErr` into the velocity reference
+- [MaxPosErr](../../06-protections/03-motion/general-maximum-limits/MaxPosErr.md) — error threshold that disables the axis (closed loop)
+- [MaxPosErrOL](../../06-protections/03-motion/general-maximum-limits/MaxPosErrOL.md) — open-loop equivalent of the trip
 - [VelRef](VelRef.md) — velocity-loop reference produced from `PosErr`
 - [InTargetTol](../05-motion-status/InTargetTol.md) — settling window compared against `PosErr`
+- [StatReg](../../07-status-and-faults/StatReg.md) — bit 23 (velocity saturation) commonly accompanies a large `PosErr`

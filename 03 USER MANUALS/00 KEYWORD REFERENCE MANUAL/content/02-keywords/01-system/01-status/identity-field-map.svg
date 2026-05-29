@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="380" viewBox="0 0 720 380" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+  <text x="360" y="22" text-anchor="middle" font-size="14" font-weight="bold">Identity[] field map</text>
+  <text x="360" y="40" text-anchor="middle" font-size="11" fill="#5b6b7b">1-indexed; grouped by purpose</text>
+
+  <!-- Product identity block -->
+  <rect x="20" y="60" width="220" height="100" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="130" y="80" text-anchor="middle" font-weight="bold">Product identity</text>
+  <text x="32" y="100" font-size="11">[1] Product type</text>
+  <text x="32" y="116" font-size="11">[2] Serial number</text>
+  <text x="32" y="132" font-size="11">[3] Hardware version</text>
+  <text x="32" y="148" font-size="11">[6]&#8211;[8] Mfg date / tester / customer</text>
+
+  <!-- Versions block -->
+  <rect x="260" y="60" width="220" height="100" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="370" y="80" text-anchor="middle" font-weight="bold">Versions</text>
+  <text x="272" y="100" font-size="11">[4] Firmware (combined)</text>
+  <text x="272" y="116" font-size="11">[5] FPGA (combined)</text>
+  <text x="272" y="132" font-size="11">[17] Boot version</text>
+  <text x="272" y="148" font-size="11">[26]&#8211;[35] Decomposed FW/FPGA</text>
+
+  <!-- Capability flags block -->
+  <rect x="500" y="60" width="200" height="100" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="600" y="80" text-anchor="middle" font-weight="bold">Capability flags</text>
+  <text x="512" y="100" font-size="11">[25] Feature flags, word 1</text>
+  <text x="512" y="116" font-size="11">[62] Feature flags, word 2</text>
+  <text x="512" y="140" font-size="10" fill="#5b6b7b">Host reads bits to detect</text>
+  <text x="512" y="152" font-size="10" fill="#5b6b7b">optional firmware features</text>
+
+  <!-- Hardware limits block -->
+  <rect x="20" y="180" width="220" height="100" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="130" y="200" text-anchor="middle" font-weight="bold">Hardware limits</text>
+  <text x="32" y="220" font-size="11">[9] Continuous current limit</text>
+  <text x="32" y="236" font-size="11">[10] Peak current limit</text>
+  <text x="32" y="252" font-size="11">[11]&#8211;[12] Bus voltage range</text>
+  <text x="32" y="268" font-size="11">[13] Current-loop frequency</text>
+
+  <!-- Axes / buffers block -->
+  <rect x="260" y="180" width="220" height="100" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="370" y="200" text-anchor="middle" font-weight="bold">Axes &amp; buffers</text>
+  <text x="272" y="220" font-size="11">[14] Max recording length</text>
+  <text x="272" y="236" font-size="11">[15] Max recording vectors</text>
+  <text x="272" y="252" font-size="11">[16] Number of axes</text>
+  <text x="272" y="268" font-size="11">[23] Central-i: servo axes</text>
+
+  <!-- Network identity block -->
+  <rect x="500" y="180" width="200" height="100" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="600" y="200" text-anchor="middle" font-weight="bold">Active network</text>
+  <text x="512" y="220" font-size="11">[36] DIP switches</text>
+  <text x="512" y="236" font-size="11">[37]&#8211;[38] CAN address / baud</text>
+  <text x="512" y="252" font-size="11">[39]&#8211;[41] Serial baud / RS-485</text>
+  <text x="512" y="268" font-size="11">[42]&#8211;[52] IP / MAC / port</text>
+
+  <!-- Misc block -->
+  <rect x="20" y="300" width="460" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="250" y="320" text-anchor="middle" font-weight="bold">Other</text>
+  <text x="32" y="340" font-size="11">[18]&#8211;[19] User-program limits</text>
+  <text x="32" y="354" font-size="11">[20] Max internal PWM</text>
+  <text x="252" y="340" font-size="11">[21] Number of parameters</text>
+  <text x="252" y="354" font-size="11">[22] Active comm channel</text>
+
+  <!-- Sensitive note -->
+  <rect x="500" y="300" width="200" height="60" rx="6" fill="#fff7e6" stroke="#d9a441" stroke-width="1.2"/>
+  <text x="600" y="320" text-anchor="middle" font-size="11" font-weight="bold">Per-unit (varies)</text>
+  <text x="600" y="338" text-anchor="middle" font-size="10" fill="#5b6b7b">[2] serial &amp; [42]&#8211;[51]</text>
+  <text x="600" y="350" text-anchor="middle" font-size="10" fill="#5b6b7b">network values are device-specific</text>
+</svg>

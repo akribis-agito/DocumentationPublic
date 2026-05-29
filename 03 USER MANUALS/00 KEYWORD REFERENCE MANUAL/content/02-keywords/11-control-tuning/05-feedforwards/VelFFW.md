@@ -93,4 +93,5 @@ The same `VelTerm` is added whether the position loop has any error or not, so t
 - [FFFiltOn](FFFiltOn.md) / [FFFiltDef](FFFiltDef.md) — feedforward filter applied to the combined feedforward output
 - [CurrRefCtrl](../../../02-keywords/09-current-and-voltage/02-motor-variables/CurrRefCtrl.md) — current reference the feedforward adds into
 - [VelTrackFact](../04-velocity-control/VelTrackFact.md) — velocity feedforward into the velocity-loop reference (a different path)
+- [VelGain](../04-velocity-control/VelGain.md) — velocity loop whose tracking error this feedforward reduces
 - [ScheduleMode](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleMode.md) — gain-scheduling selection of array elements

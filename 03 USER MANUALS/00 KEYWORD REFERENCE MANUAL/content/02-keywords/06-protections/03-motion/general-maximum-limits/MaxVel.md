@@ -62,7 +62,9 @@ AMaxVel[1]            ; read back the limit
 
 ## See also
 
+- [Speed](../../../10-motion/03-kinematics-configuration/Speed.md) — commanded cruise velocity; `Begin` rejects `Speed > MaxVel` in indirect modes
 - [MaxVelErr](MaxVelErr.md) — velocity-following-error trip (a different fault)
 - [MaxAcc](MaxAcc.md) — acceleration limit
+- [VelRef](../../../10-motion/01-kinematics-status/VelRef.md) — the signal that is saturated against `MaxVel`
 - [StatReg](../../../07-status-and-faults/StatReg.md) — velocity-saturation bit (bit 23) set when the velocity reference is clamped to `MaxVel`
 - [ConFlt](../../../07-status-and-faults/ConFlt.md) — records fault code 1019 (velocity too high) on overspeed trip

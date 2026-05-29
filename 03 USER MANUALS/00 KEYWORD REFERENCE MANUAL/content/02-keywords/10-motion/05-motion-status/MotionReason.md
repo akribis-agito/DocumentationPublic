@@ -40,6 +40,10 @@ Records why the last motion stopped, encoded as a numeric reason code.
 
 Each code is written by a distinct stop path. Codes 4–7 come from the controller's limit handling (hardware RLS/FLS and software [RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md)/[FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md) checks), homing codes 13/15/16 come from the homing sequence, and the CNCA/CNCB/vector/spline "one member …" codes (18–40) are written when a group-member axis stops, aborts, or hits a limit.
 
+The codes cluster into a handful of families, and reading the cluster usually tells you what to look at next (the limit/fault clusters in red are also the ones that select [EmrgDec](../03-kinematics-configuration/EmrgDec.md) and typically pair with a [ConFlt](../../07-status-and-faults/ConFlt.md) entry):
+
+![MotionReason value clusters by stop source](motionreason-clusters.svg)
+
 | Value | Meaning |
 |----|----|
 | 0 | Current motion still not ended, or motion ended normally. |
@@ -101,9 +105,28 @@ AMotionReason       ; read why the last motion stopped
 
 If the motion was ended by an abort command, but during deceleration the forward software limit was exceeded, and then the limit switch was encountered, `MotionReason` will have a value of `2`, indicating the original reason to stop and ignoring any following events that could have stopped the motion.
 
+### Walk-through: confirm a soft-limit trip
+
+A common diagnostic flow after a PTP move ends unexpectedly is to read `MotionReason` together with [LimitsStat](../../06-protections/03-motion/position-limit-protection/LimitsStat.md) and the motion-status bits in [MotionStat](MotionStat.md):
+
+```text
+AMotionStat                   ; expect 0 if motion ended; non-zero if a stop is still ramping
+AMotionReason                 ; first stop cause for the move
+ALimitsStat                   ; physical RLS/FLS state at the moment of inspection
+```
+
+Interpretation:
+
+- `MotionReason = 7` and `LimitsStat = 0` — the move stopped at the **forward software limit** ([FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md)); no hardware switch was hit. The stop used [EmrgDec](../03-kinematics-configuration/EmrgDec.md).
+- `MotionReason = 5` and `LimitsStat = 2` — the **forward limit switch** is active and stopped the move; the FLS bit is still set, so the axis is sitting on the switch.
+- `MotionReason = 1` and `LimitsStat = 0` — the move ended normally via [Stop](../04-motion-command/Stop.md); no protection event.
+
 ## See also
 
 - [MotionStat](MotionStat.md) — detailed bit-mapped motion status
 - [Begin](../04-motion-command/Begin.md) — resets `MotionReason` to 0
 - [Stop](../04-motion-command/Stop.md) / [Abort](../04-motion-command/Abort.md) / [StopRep](../04-motion-command/StopRep.md) — commands that set reason codes 1 / 2 / 3
 - [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md) / [RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md) — software limits behind reason codes 6 / 7
+- [LimitsStat](../../06-protections/03-motion/position-limit-protection/LimitsStat.md) — hardware limit switches behind reason codes 4 / 5
+- [EmrgDec](../03-kinematics-configuration/EmrgDec.md) — substituted for `Decel` on limit-related reasons (4 / 5 / 6 / 7)
+- [ConFlt](../../07-status-and-faults/ConFlt.md) — fault entry usually paired with the fault/disable cluster (reasons 8, 21, 22, 28)

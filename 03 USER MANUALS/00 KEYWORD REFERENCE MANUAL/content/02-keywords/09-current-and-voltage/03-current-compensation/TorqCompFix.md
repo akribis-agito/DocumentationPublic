@@ -53,3 +53,5 @@ ATorqCompFix[2]=-150 ; fixed compensation used when TorqCompMode=2
 
 - [TorqCompMode](TorqCompMode.md) — selects which TorqCompFix entry is used
 - [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) — must be 2 or 3 for this to apply
+- [CurrRefOffset](CurrRefOffset.md) — current-side bias (applied later in the chain than this loop-side compensation)
+- [CurrRef](../02-motor-variables/CurrRef.md) — current reference that the selected entry biases

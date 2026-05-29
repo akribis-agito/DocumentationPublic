@@ -62,8 +62,42 @@ ATorqCompMode=1      ; use TorqCompFix[1]
 ATorqCompMode=0      ; use analog-input torque compensation
 ```
 
+### Walk-through: select a fixed compensation value
+
+The fixed-source modes (1-5) read from [TorqCompFix](TorqCompFix.md) indexed by the mode number. The example below applies a constant 200 mA bias to balance a known steady load (gravity on a vertical axis, for example) while in position operation mode.
+
+1. **Make sure the axis is in a mode that uses this compensation.** Compensation is only applied when [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) is `2` (velocity) or `3` (position):
+
+   ```text
+   AOperationMode=3
+   ```
+
+2. **Store the value to use in the chosen slot of [TorqCompFix](TorqCompFix.md)** (the array index must match the `TorqCompMode` value):
+
+   ```text
+   ATorqCompFix[1]=200
+   ```
+
+3. **Select that slot**:
+
+   ```text
+   ATorqCompMode=1
+   ```
+
+4. **Verify it is taking effect** by reading the loop-side current reference [CurrRefCtrl](../02-motor-variables/CurrRefCtrl.md) (v5) at standstill: it should carry the 200 mA offset on top of whatever the velocity PI is producing.
+
+5. **Switch back to no compensation** at the end of the test:
+
+   ```text
+   ATorqCompMode=-1
+   ```
+
+> **Loop vs motor side.** This compensation is added *inside* the position/velocity loop (before the current loop). For a current-side bias - one that is added directly to the final motor current reference, regardless of operation mode - use [CurrRefOffset](CurrRefOffset.md) instead.
+
 ## See also
 
 - [TorqCompFix](TorqCompFix.md) — fixed compensation values selected by this mode
 - [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) — must be 2 or 3 for this to apply
 - [AInMode](../../05-inputs-outputs/02-analog-inputs/AInMode.md) — analog-input torque-compensation source
+- [CurrRefOffset](CurrRefOffset.md) — current-side offset (different application point)
+- [CurrRefCtrl](../02-motor-variables/CurrRefCtrl.md) — loop-side current reference where this compensation is summed

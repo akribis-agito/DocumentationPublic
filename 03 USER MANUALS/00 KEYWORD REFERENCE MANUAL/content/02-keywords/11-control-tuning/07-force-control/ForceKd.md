@@ -56,5 +56,7 @@ AForceKd[1]             ; read the force-loop derivative gain
 
 - [ForceGain](ForceGain.md) — force-loop proportional gain (provides the gained error differenced here)
 - [ForceKi](ForceKi.md) — force-loop integral gain
+- [ForcePIVOn](ForcePIVOn.md) — selects the force-control structure
 - [ForceErr](../../08-axis-operation/04-force-operation-mode/ForceErr.md) — error driven toward zero by the loop
+- [ForceRefFilt](ForceRefFilt.md) — first-order low-pass on the reference (shapes what the D term sees)
 - [Force control](00-overview.md) — force-loop structure overview

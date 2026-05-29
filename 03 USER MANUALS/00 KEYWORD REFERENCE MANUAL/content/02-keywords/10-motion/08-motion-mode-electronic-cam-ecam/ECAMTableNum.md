@@ -48,12 +48,53 @@ Because the parameters are latched at start, changing `ECAMTableNum` mid-motion 
 ## Examples
 
 ```text
-AECAMTableNum=1      ; select cam pattern 1 (default)
-AECAMTableNum       ; read the active cam pattern
+AECAMTableNum[1]=1   ; select cam pattern 1 (default)
+AECAMTableNum[1]     ; read the active cam pattern
 ```
+
+### Walk-through: define and run one ECAM cycle
+
+Load a small cam table into [GenData](../../20-arrays/GenData.md) at indices 1-5, configure cam pattern 1 to use those entries, and run a single cycle following axis B's [PosRef](../01-kinematics-status/PosRef.md). Axis A is assumed motor-on and not in motion.
+
+```text
+; --- 1) Load the cam pattern points into GenData ---
+AGenData[1]=0
+AGenData[2]=2500
+AGenData[3]=5000
+AGenData[4]=2500
+AGenData[5]=0
+
+; --- 2) Bind cam pattern 1 to the loaded indices ---
+AECAMTableNum[1]=1            ; select cam pattern 1 (the [1] is the pattern slot)
+AECAMStart[1]=1               ; first GenData index of the pattern
+AECAMEnd[1]=5                 ; last  GenData index of the pattern
+AECAMStartCyc[1]=1            ; start of the repeating segment
+AECAMEndCyc[1]=5              ; end   of the repeating segment
+AECAMGap[1]=1000              ; master step between adjacent table indices
+AECAMCycles[1]=1              ; run the cycle once
+AECAMMaster[1]=...            ; complex CAN code pointing at axis B's PosRef
+AECAMMasterIni[1]=0           ; cam alignment at Begin (see ECAMMasterIni)
+
+; --- 3) Arm ECAM motion on axis A ---
+AMotionMode=7                 ; 7 = ECAM
+ABegin                        ; controller latches the table, then follows the master
+
+; --- 4) Observe the follower ---
+AECAMCycCount                 ; current cycle index (1..ECAMCycles)
+APosRef                       ; follower reference shaped by the cam lookup
+```
+
+`Begin` is rejected if the indices for pattern 1 do not satisfy
+`ECAMStart <= ECAMStartCyc < ECAMEndCyc <= ECAMEnd`,
+if any of `ECAMStart`, `ECAMEnd`, `ECAMStartCyc`, `ECAMEndCyc`, `ECAMGap` or `ECAMCycles` is 0, or if `ECAMMaster` does not point at a valid variable.
 
 ## See also
 
 - [ECAMStart](ECAMStart.md) / [ECAMEnd](ECAMEnd.md) — pattern bounds for the selected table
-- [ECAMGap](ECAMGap.md) — master-value spacing for the selected table
+- [ECAMStartCyc](ECAMStartCyc.md) / [ECAMEndCyc](ECAMEndCyc.md) — repeating-segment bounds within the pattern
+- [ECAMGap](ECAMGap.md) / [ECAMCycles](ECAMCycles.md) — master spacing and repetition count for the selected table
+- [ECAMMaster](ECAMMaster.md) / [ECAMMasterIni](ECAMMasterIni.md) — master selection and initial alignment
+- [ECAMCycCount](ECAMCycCount.md) — current-cycle index for the active pattern
+- [GenData](../../20-arrays/GenData.md) — array that stores the cam pattern points
+- [StopECAM](StopECAM.md) — exit ECAM motion while preserving the shrunk range
 - [Motion mode – Electronic cam (ECAM)](00-overview.md) — ECAM motion overview

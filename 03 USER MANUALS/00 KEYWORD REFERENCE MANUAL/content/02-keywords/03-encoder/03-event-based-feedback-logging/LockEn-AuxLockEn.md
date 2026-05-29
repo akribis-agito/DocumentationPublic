@@ -48,6 +48,25 @@ ALockEn=1            ; enable event-based feedback logging (resets LockCntr and 
 ALockEn=0            ; disable logging
 ```
 
+### Walk-through: configure a Lock capture for registration
+
+Set up a registration mark on digital input 1 (rising edge), arm the capture, then observe each mark's feedback position. The example uses a standalone product — for Central-i, see the source table in [LockSrc](LockSrc-AuxLockSrc.md).
+
+```text
+AMotorOn=0           ; on standalone products, LockEn takes the capture pin from event generation
+ALockSrc=1           ; trigger source = digital input 1, rising edge
+ALockEn=1            ; arm capture; LockCntr and the elapsed-cycle timer reset to 0
+                     ; ... drive the axis past the marks ...
+ALockCntr            ; count of marks captured so far
+ALockVal             ; feedback position of the most recent mark
+ALockValTable[1]     ; position of the first mark
+ALockValTable[2]     ; position of the second mark
+ALockTimeTable[1]    ; control cycles elapsed at the first mark
+ALockEn=0            ; disarm when done (LockVal and LockCntr keep their last values)
+```
+
+For digital incremental and SIN/COS encoders the position is latched in hardware at the exact trigger edge, so `LockVal` is precise to the trigger instant — ideal for product registration. For absolute encoders the value is the most recently polled `Pos`, so keep axis speed low enough that the trigger does not pass between control cycles.
+
 ## See also
 
 - [LockSrc](LockSrc-AuxLockSrc.md) — selects the trigger source and edge

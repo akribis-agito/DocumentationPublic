@@ -55,6 +55,27 @@ For warning purposes the drive also reports a multi-level VBus warning in `StatR
 AMaxVBus=80000       ; 80 V maximum bus voltage (mV)
 ```
 
+### Walk-through: lay out the bus-voltage protection band
+
+Set the three bus-voltage limits so the timed and instant ceilings are stacked correctly and the under-voltage trip catches brown-out:
+
+```text
+AMinVBus=18000        ; 18 V brown-out floor (immediate trip)
+AMaxVBus=80000        ; 80 V timed ceiling
+AMaxVBusTime=200      ; 200 ms window for sustained over-voltage
+AMaxVBusAbs=90000     ; 90 V hard backstop (immediate trip)
+```
+
+Run the worst-case regen scenario (rapid decel of a heavy load) and watch the warning bands and trip codes:
+
+```text
+AStatReg                       ; bit 3 set while over MaxVBus (timer running)
+                               ; bits 7-8 give the 4-level warning (0.88 / 0.92 / 0.96 of MaxVBus)
+AConFlt                        ; 1008 timed over-voltage, 1023 absolute over-voltage, 1009 under-voltage
+```
+
+If a 90 V regen spike is seen on the bus, raise `MaxVBusAbs` or reduce the deceleration so the spike stays inside the timed band; if the timed trip (1008) fires repeatedly, lengthen `MaxVBusTime` only after confirming the supply and brake resistor can absorb the regen energy.
+
 ## See also
 
 - [MinVBus](MinVBus.md) — minimum bus voltage

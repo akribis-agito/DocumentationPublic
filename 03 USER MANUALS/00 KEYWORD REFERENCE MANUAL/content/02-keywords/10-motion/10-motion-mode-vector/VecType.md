@@ -54,6 +54,47 @@ AVecType=0           ; linear vector (default)
 AVecType=1           ; arc vector
 ```
 
+### Walk-through: run a linear-then-arc path on axes A and B
+
+Vector motion is set per move and runs once `Begin` is issued on the lowest-numbered member axis. The recipe below runs a straight line first, then a circular arc, on a two-axis group `{A, B}`. Each move is configured, started, and allowed to finish before the next move is set up; `VecType` cannot be changed while in motion.
+
+```text
+; ===== Move 1: linear from current point to (15000, 5000) =====
+; --- 1) Configure the group on the lowest-numbered axis (A) ---
+AVecMemberAxes[1]=3           ; bit 0 (A) + bit 1 (B) = 3
+AVecType=0                    ; 0 = linear
+
+; --- 2) Set the per-axis end points using AbsTrgt ---
+AAbsTrgt=15000                ; axis A end point
+BAbsTrgt=5000                 ; axis B end point
+
+; --- 3) Set the path-velocity profile on the master (axis A) ---
+AVecSpeed=8000
+AVecAccel=20000
+AVecDecel=20000
+
+; --- 4) Arm the vector move ---
+AMotionMode=16                ; 16 = vector
+ABegin                        ; controller computes VecAbsTrgt and runs the path
+
+; --- 5) Observe the path while it runs ---
+AVecPosRef                    ; running position along the path (0 -> VecAbsTrgt)
+AVecAbsTrgt                   ; total path distance (here sqrt(dA^2 + dB^2))
+; ... wait for in-motion to clear ...
+
+; ===== Move 2: clockwise arc, one extra full revolution =====
+AVecType=1                    ; 1 = arc (requires exactly two member axes)
+AVecArcCenter=15000           ; arc-centre coordinate on axis A (per-axis scalar)
+BVecArcCenter=10000           ; arc-centre coordinate on axis B (per-axis scalar)
+AVecArcDir=1                  ; sweep direction (see VecArcDir)
+AVecNumCircles=1              ; one extra full revolution added to the swept angle
+AAbsTrgt=20000                ; arc end point, axis A
+BAbsTrgt=10000                ; arc end point, axis B
+ABegin
+```
+
+If the move is rejected at `Begin`, check that `VecMemberAxes` includes the issuing axis, that the master axis is the lowest-numbered member, and (for arcs) that the start and end points sit on the same radius from `VecArcCenter`.
+
 ## See also
 
 - [VecArcCenter](VecArcCenter.md) — arc center / radius (arc type)

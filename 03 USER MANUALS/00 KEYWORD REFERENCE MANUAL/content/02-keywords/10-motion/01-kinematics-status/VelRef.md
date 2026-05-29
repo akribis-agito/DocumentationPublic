@@ -109,4 +109,5 @@ In **v5 (central-i)** `VelRef` is a 64-bit value limited to ±`MaxVel`, and the 
 - [PosErr](PosErr.md) / [PosGain](../../11-control-tuning/03-position-control/PosGain.md) — position-controller inputs
 - [VelTrackFact](../../11-control-tuning/04-velocity-control/VelTrackFact.md) — velocity feed-forward gain
 - [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md) — saturation limit
+- [StatReg](../../07-status-and-faults/StatReg.md) — bit 23 (velocity saturation) flags clamping against `MaxVel`
 - [DualLoopFact](../../11-control-tuning/02-dual-loop-control/DualLoopFact.md) — dual-loop command scaling

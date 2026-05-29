@@ -77,9 +77,33 @@ AFwdPLim[1]=1000000    ; forward soft limit (counts)
 AFwdPLim[1]            ; read back the forward soft limit
 ```
 
+### Walk-through: confirm a forward soft-limit trip
+
+To validate that the forward software limit is actually enforced, drive a jog past it and inspect the stop reason:
+
+```text
+AFwdPLim[1]=100000    ; set the forward soft limit
+AMotionMode=0         ; jog
+ASpeed=50000          ; positive sign drives toward FwdPLim
+ABegin                ; jog forward
+```
+
+The profiler's pre-emptive braking decelerates the axis so the reference arrives at `100000` at zero speed. Once stopped, inspect:
+
+```text
+AMotionStat                   ; expect 0 (motion ended)
+AMotionReason                 ; expect 7 (forward software limit)
+ALimitsStat                   ; expect 0 (no hardware switch active)
+APosRef                       ; clamped at FwdPLim (100000)
+```
+
+If `MotionReason` reports `5` (forward limit switch) instead of `7`, an external FLS engaged first — check [LimitsStat](LimitsStat.md) bit 1. The stop in either case used [EmrgDec](../../../10-motion/03-kinematics-configuration/EmrgDec.md), not the normal `Decel`.
+
 ## See also
 
 - [RevPLim](RevPLim.md) — reverse software travel limit (lower bound of the same range)
 - [LimitsStat](LimitsStat.md) — hardware limit-switch status (physical RLS/FLS inputs)
 - [MotionStat](../../../10-motion/05-motion-status/MotionStat.md) — carries the stop-request bit set when the limit is hit
 - [MotionReason](../../../10-motion/05-motion-status/MotionReason.md) — records reason code 7 when motion ends here
+- [EmrgDec](../../../10-motion/03-kinematics-configuration/EmrgDec.md) — emergency rate used by this stop (not the normal `Decel`)
+- [Decel](../../../10-motion/03-kinematics-configuration/Decel.md) — the rate used by pre-emptive braking before the limit is reached

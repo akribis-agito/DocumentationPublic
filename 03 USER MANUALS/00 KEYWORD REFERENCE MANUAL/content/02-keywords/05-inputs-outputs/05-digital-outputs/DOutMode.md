@@ -86,6 +86,26 @@ ADOutMode[3]=14      ; output 3 follows "regeneration active"
 ADOutMode[1]=0       ; hand output 1 back to manual DOutPort control
 ```
 
+### Walk-through: drive a digital output from a fault
+
+Light an indicator on digital output 5 whenever the axis is in fault, with the lamp wired so it is **off** when active (i.e. inverted polarity).
+
+```text
+AMotorOn=0                ; configure with the motor off
+ADOutSelect=0             ; (default) output 5 is under software control, not a hardware function
+ADOutMode[5]=9            ; function 9 = fault/alarm status (set when ConFlt is non-zero)
+ADOutLog=16               ; bit 4 set — invert output 5's final polarity for the lamp wiring
+ADOutType=0               ; (default routing) — adjust per product if sink/source matters
+ASave                     ; DOutMode, DOutLog and DOutType are flash-saveable
+                          ; ... force a fault to test ...
+AConFlt                   ; non-zero — function 9 sets DOutPort bit 4
+ADOutPort                 ; read back the bit driven by the function
+```
+
+The function-table dispatch sets/clears the `DOutPort` bit each cycle, then [DOutLog](DOutLog.md) inverts it (so the lamp is on when there is no fault and off when faulted), and [DOutType](DOutType.md) routes it to the chosen sink/source pin on products that support that split.
+
+To track a *system-wide* condition rather than the local axis, use the upper-16-bit axis selector. For example `ADOutMode[5]=65545` (`65536 + 9`) wires output 5 of this axis to axis B's fault status.
+
 ## See also
 
 - [DOutSelect](DOutSelect.md) — must be 0 for DOutMode to apply (hardware function otherwise)

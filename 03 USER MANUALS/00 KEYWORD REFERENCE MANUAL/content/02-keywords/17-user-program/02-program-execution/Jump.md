@@ -57,8 +57,15 @@ The conditional operations mirror the comparison set used by [Compare](Compare.m
 
 In compiled programs the most common pattern is a [Compare](Compare.md) (which leaves `1` or `0` on the stack) followed by a "jump if zero" (operation 8) or "jump if not zero" (operation 9): the comparison forms the condition and the jump implements the branch. Together they build the `if`, `while`, and `for` structures of the high-level program.
 
+![Compare then Jump on the numeric stack](compare-jump-flow.svg)
+
+So:
+- `Compare` + `Jump[8]` ("jump if zero") implements `if (condition is false) goto target` — the natural shape of `if (cond) {...}` where the compiler skips the body when the condition fails.
+- `Compare` + `Jump[9]` ("jump if not zero") implements `if (condition is true) goto target` — used for loop-back edges in `while` and `for`.
+
 ## See also
 
 - [Compare](Compare.md) — produces the condition values used for conditional jumps
 - [Math](Math.md) — arithmetic/bitwise operations on the numeric stack
 - [ProgPointer](ProgPointer.md) — current program-execution pointer
+- [PushParam](../03-stack-operation/PushParam.md) / [PushConstant](../03-stack-operation/PushConstant.md) — push operands before Compare

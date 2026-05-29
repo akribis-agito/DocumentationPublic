@@ -48,6 +48,10 @@ $$
 CurrRef_{dir} = \pm\,CurrRef \quad (\text{sign from CurrDir})
 $$
 
+When the unclamped command would exceed `PeakCL` (or the I²t-reduced `ContCL` when continuous protection has tripped), `CurrRef` is held at the limit and the saturation status bit is set for those cycles:
+
+![CurrRef trace clamped against +/- PeakCL: the blue dashed unclamped command would exceed the red dashed PeakCL line, so the delivered CurrRef (solid) is held at PeakCL and StatReg bit 21 (current saturation) is set during the clipped interval](current-limit-clip.svg)
+
 ## Examples
 
 ```text
@@ -58,7 +62,9 @@ ACurrRef            ; read the final current command (mA)
 
 - [CurrRefCtrl](CurrRefCtrl.md) — loop-side current reference before decoupling/compensation
 - [CurrRefOffset](../03-current-compensation/CurrRefOffset.md) — offset added on top of the motor current reference
+- [UPMVelTable](../03-current-compensation/UPMVelTable.md) — angle-indexed compensation added in the same chain
 - [CurrDir](CurrDir.md) — sets the sign of the direction correction applied to CurrRef
 - [IqRef](IqRef.md) — q-axis reference taken from the direction-corrected CurrRef (three-phase)
 - [IaRef](IaRef.md), [IbRef](IbRef.md) — per-phase references derived from the current command
-- [StatReg](../../07-status-and-faults/StatReg.md) — reports the current-saturation status bit
+- [PeakCL](../../06-protections/02-current-and-voltage/PeakCL.md) / [ContCL](../../06-protections/02-current-and-voltage/ContCL.md) — current limits CurrRef is clamped against
+- [StatReg](../../07-status-and-faults/StatReg.md) — bit 21 reports the current-saturation status

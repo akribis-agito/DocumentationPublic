@@ -88,5 +88,6 @@ In **v5 (central-i)** `VelErr` is a 64-bit value (`VelErr = VelRef − Vel[1]`) 
 - [VelRef](VelRef.md) — velocity-loop reference (the minuend)
 - [Vel](Vel.md) — feedback velocity array (`Vel[1]` is the subtrahend in non-gantry mode)
 - [GantryVel](../../12-gantry-control/03-gantry-tuning/GantryVel.md) — feedback used in gantry mode
-- [MaxVelErr](../../06-protections/03-motion/general-maximum-limits/MaxVelErr.md) — error threshold that disables the axis
+- [MaxVelErr](../../06-protections/03-motion/general-maximum-limits/MaxVelErr.md) — closed-loop error threshold that disables the axis
+- [MaxVelErrOL](../../06-protections/03-motion/general-maximum-limits/MaxVelErrOL.md) — open-loop equivalent
 - [PosErr](PosErr.md) — position error counterpart

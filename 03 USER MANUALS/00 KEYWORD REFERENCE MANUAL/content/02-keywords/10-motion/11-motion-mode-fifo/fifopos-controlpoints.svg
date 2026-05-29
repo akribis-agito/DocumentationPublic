@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="260" viewBox="0 0 780 260" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="390" y="22" text-anchor="middle" font-weight="bold">FIFOPosStatus[1..4]: cubic-spline control points along the time axis</text>
+
+  <!-- axes -->
+  <line x1="60" y1="170" x2="730" y2="170" stroke="#5b6b7b" stroke-width="1"/>
+  <text x="700" y="190" text-anchor="middle" font-size="11">time</text>
+
+  <!-- Cycle boundaries -->
+  <line x1="160" y1="60" x2="160" y2="180" stroke="#bbb" stroke-dasharray="3 3"/>
+  <line x1="340" y1="60" x2="340" y2="180" stroke="#bbb" stroke-dasharray="3 3"/>
+  <line x1="520" y1="60" x2="520" y2="180" stroke="#bbb" stroke-dasharray="3 3"/>
+  <line x1="700" y1="60" x2="700" y2="180" stroke="#bbb" stroke-dasharray="3 3"/>
+
+  <text x="160" y="200" text-anchor="middle" font-size="11" fill="#5b6b7b">start of</text>
+  <text x="160" y="214" text-anchor="middle" font-size="11" fill="#5b6b7b">previous cycle</text>
+  <text x="340" y="200" text-anchor="middle" font-size="11" fill="#5b6b7b">start of</text>
+  <text x="340" y="214" text-anchor="middle" font-size="11" fill="#5b6b7b">current cycle</text>
+  <text x="520" y="200" text-anchor="middle" font-size="11" fill="#5b6b7b">end of</text>
+  <text x="520" y="214" text-anchor="middle" font-size="11" fill="#5b6b7b">current cycle</text>
+  <text x="700" y="200" text-anchor="middle" font-size="11" fill="#5b6b7b">end of</text>
+  <text x="700" y="214" text-anchor="middle" font-size="11" fill="#5b6b7b">next cycle</text>
+
+  <!-- Spline curve passing through control points -->
+  <path d="M160 130 C220 110, 280 95, 340 100 C400 105, 470 130, 520 120 C580 110, 660 85, 700 80" fill="none" stroke="#5b8def" stroke-width="2"/>
+
+  <!-- Control point markers + index labels -->
+  <circle cx="160" cy="130" r="6" fill="#5b8def"/>
+  <text x="160" y="116" text-anchor="middle" font-size="11" fill="#5b6b7b">[1]</text>
+
+  <circle cx="340" cy="100" r="6" fill="#5b8def"/>
+  <text x="340" y="86" text-anchor="middle" font-size="11" fill="#5b6b7b">[2]</text>
+
+  <circle cx="520" cy="120" r="6" fill="#5b8def"/>
+  <text x="520" y="106" text-anchor="middle" font-size="11" fill="#5b6b7b">[3]</text>
+
+  <circle cx="700" cy="80" r="6" fill="#5b8def"/>
+  <text x="700" y="66" text-anchor="middle" font-size="11" fill="#5b6b7b">[4]</text>
+
+  <!-- "interpolated here" shading between [2] and [3] -->
+  <rect x="340" y="60" width="180" height="110" fill="#eaf2fb" opacity="0.35"/>
+  <text x="430" y="76" text-anchor="middle" font-size="11" fill="#5b6b7b">interpolated this cycle</text>
+
+  <!-- caption -->
+  <text x="390" y="245" text-anchor="middle" font-size="11" fill="#5b6b7b">[1] history, [2] cycle start, [3] cycle end, [4] look-ahead. Position is fitted between [2] and [3] using all four as cubic-spline control points.</text>
+</svg>

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="380" viewBox="0 0 780 380" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="20" y="24" font-size="15" font-weight="bold">MotionStat bits set per MotionMode</text>
+  <text x="20" y="42" fill="#555" font-size="12">Bits 0, 3, 4, 5, 6, 9 and 16 apply to every motion. Other bits are mode-gated:</text>
+
+  <!-- header column -->
+  <rect x="20" y="60" width="180" height="36" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="110" y="83" text-anchor="middle" font-weight="bold">Common to every mode</text>
+
+  <!-- common bits row -->
+  <g font-size="12">
+    <rect x="210" y="60" width="80" height="36" rx="6" fill="#fff" stroke="#9fb4cc"/>
+    <text x="250" y="83" text-anchor="middle">bit 0 in-motion</text>
+    <rect x="300" y="60" width="80" height="36" rx="6" fill="#fff" stroke="#9fb4cc"/>
+    <text x="340" y="83" text-anchor="middle">bit 3 stop-req</text>
+    <rect x="390" y="60" width="80" height="36" rx="6" fill="#fff" stroke="#9fb4cc"/>
+    <text x="430" y="83" text-anchor="middle">bit 4 accel</text>
+    <rect x="480" y="60" width="80" height="36" rx="6" fill="#fff" stroke="#9fb4cc"/>
+    <text x="520" y="83" text-anchor="middle">bit 5 decel</text>
+    <rect x="570" y="60" width="80" height="36" rx="6" fill="#fff" stroke="#9fb4cc"/>
+    <text x="610" y="83" text-anchor="middle">bit 6 smooth tail</text>
+    <rect x="660" y="60" width="100" height="36" rx="6" fill="#fff" stroke="#9fb4cc"/>
+    <text x="710" y="78" text-anchor="middle">bit 9 wait-input</text>
+    <text x="710" y="92" text-anchor="middle" fill="#555" font-size="11">(BeginDInOn)</text>
+  </g>
+
+  <!-- Mode 2: PTP-repetitive -->
+  <rect x="20" y="110" width="180" height="36" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="110" y="133" text-anchor="middle" font-weight="bold">PTP-repetitive (mode 2)</text>
+  <rect x="210" y="110" width="170" height="36" rx="6" fill="#fff" stroke="#9fb4cc"/>
+  <text x="295" y="133" text-anchor="middle">bit 1 dwell between reps</text>
+  <rect x="390" y="110" width="170" height="36" rx="6" fill="#fff" stroke="#9fb4cc"/>
+  <text x="475" y="133" text-anchor="middle">bit 2 ending (StopRep)</text>
+
+  <!-- Mode 7/8: ECAM -->
+  <rect x="20" y="156" width="180" height="36" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="110" y="179" text-anchor="middle" font-weight="bold">ECAM (modes 7, 8)</text>
+  <rect x="210" y="156" width="170" height="36" rx="6" fill="#fff" stroke="#9fb4cc"/>
+  <text x="295" y="179" text-anchor="middle">bit 7 ending (StopECAM)</text>
+
+  <!-- Mode 9: FIFO -->
+  <rect x="20" y="202" width="180" height="36" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="110" y="225" text-anchor="middle" font-weight="bold">FIFO (mode 9)</text>
+  <rect x="210" y="202" width="170" height="36" rx="6" fill="#fff" stroke="#9fb4cc"/>
+  <text x="295" y="225" text-anchor="middle">bit 8 ending (StopFIFO)</text>
+
+  <!-- Mode 11/17: CNCA / CNCB -->
+  <rect x="20" y="248" width="180" height="36" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="110" y="271" text-anchor="middle" font-weight="bold">CNCA / CNCB (11, 17)</text>
+  <rect x="210" y="248" width="170" height="36" rx="6" fill="#fff" stroke="#9fb4cc"/>
+  <text x="295" y="271" text-anchor="middle">bits 10/11/12 CNCA member/active/ending</text>
+  <rect x="390" y="248" width="170" height="36" rx="6" fill="#fff" stroke="#9fb4cc"/>
+  <text x="475" y="271" text-anchor="middle">bits 13/14/15 CNCB member/active/ending</text>
+
+  <!-- Mode 16: Vector -->
+  <rect x="20" y="294" width="180" height="36" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="110" y="317" text-anchor="middle" font-weight="bold">Vector (mode 16)</text>
+  <rect x="210" y="294" width="170" height="36" rx="6" fill="#fff" stroke="#9fb4cc"/>
+  <text x="295" y="317" text-anchor="middle">bit 18 ending (StopVec)</text>
+  <rect x="390" y="294" width="170" height="36" rx="6" fill="#fff" stroke="#9fb4cc"/>
+  <text x="475" y="317" text-anchor="middle">bit 19 vector member</text>
+
+  <!-- Mode 18: Spline -->
+  <rect x="20" y="340" width="180" height="36" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="110" y="363" text-anchor="middle" font-weight="bold">Spline buffer (mode 18)</text>
+  <rect x="210" y="340" width="170" height="36" rx="6" fill="#fff" stroke="#9fb4cc"/>
+  <text x="295" y="363" text-anchor="middle">bit 17 ending (StopBuff)</text>
+
+  <!-- side note: bit 16 / 20 -->
+  <text x="580" y="160" font-weight="bold">Any mode</text>
+  <text x="580" y="178" fill="#333">bit 16 fault-driven stop</text>
+  <text x="580" y="196" fill="#333">(stop-with-motor-off)</text>
+  <text x="580" y="222" font-weight="bold">Jog only (v5)</text>
+  <text x="580" y="240" fill="#333">bit 20 ending at soft limit</text>
+</svg>

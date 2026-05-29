@@ -96,3 +96,4 @@ In **v4** `Decel` is a 32-bit integer; in **v5 (central-i)** it is a single-prec
 - [JerkInDec](JerkInDec.md) — deceleration-phase jerk in third-order mode
 - [JerkMode](../02-motion-configuration/JerkMode.md) — selects second- vs third-order profiling
 - [Stop](../04-motion-command/Stop.md) — controlled stop (uses `Decel`)
+- [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md) / [RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md) — software limits use the `Decel` lookahead for pre-emptive braking

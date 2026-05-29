@@ -77,7 +77,42 @@ Segment type ordering rules: a "set initial positions" segment (type 7) is accep
 ACNCAPushType=value  ; open a new segment of the encoded type/axes in FIFO A
 ```
 
-For a linear move on axes A and B (type 1, axis-1 = 0, axis-2 = 1, remaining slots = 15), the value is `0x010FFFFF` followed by four `CNCAPushParam` writes (target A, target B, speed, end speed).
+For a linear move on axes A and B (type 1, axis-1 = 0, axis-2 = 1, remaining slots = 15), the value is `0x0101FFFF` followed by four `CNCAPushParam` writes (target A, target B, speed, end speed).
+
+### Walk-through: queue and run a two-line move on queue A
+
+Push two consecutive linear segments on axes A and B, then start the motion. The second segment has `EndSpeed = 0` so the path stops on the last segment without an underrun. The motion uses an A-B linear move (type 1, two involved axes), so each `PushType` is followed by exactly `2 + 2 = 4` `PushParam` writes: target A, target B, path speed, end speed.
+
+```text
+; --- 1) Make sure the queue is empty before staging a fresh path ---
+ACNCAClear                    ; clear any leftovers from the previous run
+
+; --- 2) Push segment 1: A -> 10000, B -> 5000, path 4000, end 4000 ---
+ACNCAPushType=0x0101FFFF      ; type 1 = linear, axes A (0) and B (1)
+ACNCAPushParam=10000          ; target A
+ACNCAPushParam=5000           ; target B
+ACNCAPushParam=4000           ; path speed
+ACNCAPushParam=4000           ; end speed (still moving into segment 2)
+
+; --- 3) Push segment 2: A -> 20000, B -> 5000, path 4000, end 0 (stop) ---
+ACNCAPushType=0x0101FFFF
+ACNCAPushParam=20000
+ACNCAPushParam=5000
+ACNCAPushParam=4000
+ACNCAPushParam=0              ; end speed 0 -> path stops on this segment
+
+; --- 4) Confirm both segments are fully formed before Begin ---
+ACNCAStatus[5]                ; 0 = last pushed segment is closed (ready)
+
+; --- 5) Arm the CNC engine and watch the queue drain ---
+AMotionMode=11                ; CNCA motion (CNCB = 17)
+ABegin                        ; engine starts playing the oldest queued segment
+ACNCAStatus[10]               ; CNC motion bit-field (bit 0 set while moving)
+ACNCAStatus[7]                ; free words -- grows as each segment drains
+ACNCAStatus[6]                ; queue position of the segment currently playing
+```
+
+Keep pushing while `Begin` runs to chain longer paths -- the engine underruns if it needs a new segment but the queue holds no closed one. Use [StopCNCA](StopCNCA.md) to decelerate the path cleanly before the queue empties; use [CNCAClear](CNCAClear-CNCBClear.md) to flush pending segments after a stop.
 
 ## See also
 

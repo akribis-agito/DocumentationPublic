@@ -59,3 +59,4 @@ AInTargetTime       ; read current value
 - [InTargetTol](InTargetTol.md) — position settling window
 - [InTargetVelTh](InTargetVelTh.md) — velocity settling window
 - [MotionSamples](MotionSamples.md) — uses this dwell time in its `[3]` relation
+- [PosErr](../01-kinematics-status/PosErr.md) — the signal whose dwell inside the window is counted (position/velocity modes)

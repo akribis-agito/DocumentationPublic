@@ -71,6 +71,33 @@ AGearMaster          ; read the current master complex CAN code
 
 The value is a complex CAN code; build it with the [complex CAN code](../../../01-keyword-usage-and-syntax/complex-can-code.md) rules for the keyword, axis and index you want to follow.
 
+### Walk-through: run electronic gearing on a master encoder
+
+Configure axis A as a 1:2 follower of axis B's reference, using the direct gear path with the exact axis-to-axis fast track described above. Both axes are assumed motor-on but not in motion; encode the master selection per the [complex CAN code](../../../01-keyword-usage-and-syntax/complex-can-code.md) rules.
+
+```text
+; --- 1) Select the master variable on the follower (axis A) ---
+AGearMaster=...      ; complex CAN code identifying axis B's PosRef
+
+; --- 2) Set the gear ratio numerator / denominator ---
+AMasterFact=65536    ; 65536 = unity numerator (required for the fast axis-to-axis path)
+AMasterFactDen=2     ; ratio = 65536 / 2  -> follower moves half a master count per count
+AMasterFilt=64       ; 64 = pass-through (required for the fast path)
+
+; --- 3) (Optional) Tell the controller the master wraps, if it does ---
+AMasterModRev=0      ; set to the master's wrap value if the master variable wraps
+
+; --- 4) Arm direct gear motion ---
+AMotionMode=5        ; 5 = direct gear, 6 = indirect gear
+ABegin               ; latches MasterPos at start; follower now tracks the master delta
+
+; --- 5) Observe the follower while the master moves ---
+AMasterPos           ; scaled, accumulated master position since Begin
+APosRef              ; follower reference -- should mirror MasterPos
+```
+
+The follower exits gear motion on `Stop`, `Abort`, or when the motor is disabled. To change the master selection, leave gear motion first; `GearMaster` is rejected while the axis is in motion.
+
 ## See also
 
 - [MasterPos](MasterPos.md) — accumulated, scaled master position

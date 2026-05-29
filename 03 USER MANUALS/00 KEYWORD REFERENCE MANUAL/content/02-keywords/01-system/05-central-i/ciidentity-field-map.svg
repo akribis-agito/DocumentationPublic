@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="320" viewBox="0 0 680 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+  <text x="340" y="22" text-anchor="middle" font-size="14" font-weight="bold">CIIdentity[] field map</text>
+  <text x="340" y="40" text-anchor="middle" font-size="11" fill="#5b6b7b">populated by CIConnect; per-axis; 1-indexed</text>
+
+  <!-- Device class -->
+  <rect x="20" y="60" width="200" height="84" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="120" y="80" text-anchor="middle" font-weight="bold">Device class</text>
+  <text x="32" y="100" font-size="11">[1] Device class</text>
+  <text x="32" y="116" font-size="11">[2] Sub-type</text>
+  <text x="32" y="132" font-size="11">[3] Central-i engine version</text>
+
+  <!-- Channel counts -->
+  <rect x="240" y="60" width="200" height="84" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="340" y="80" text-anchor="middle" font-weight="bold">Channel counts</text>
+  <text x="252" y="100" font-size="11">[5] Digital inputs</text>
+  <text x="252" y="116" font-size="11">[6]&#8211;[7] Digital outputs</text>
+  <text x="252" y="132" font-size="11">[8] Analog inputs &#160; [9] Analog out</text>
+
+  <!-- Electrical ratings -->
+  <rect x="460" y="60" width="200" height="84" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="560" y="80" text-anchor="middle" font-weight="bold">Electrical ratings</text>
+  <text x="472" y="100" font-size="11">[10] Continuous current</text>
+  <text x="472" y="116" font-size="11">[11] Peak current</text>
+  <text x="472" y="132" font-size="11">[12]&#8211;[13] Bus voltage range</text>
+
+  <!-- Versions block -->
+  <rect x="20" y="164" width="420" height="100" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="230" y="184" text-anchor="middle" font-weight="bold">Application / FPGA version</text>
+  <text x="32" y="204" font-size="11">[4] Combined app/FPGA word</text>
+  <text x="32" y="220" font-size="11">[14] Mid-PWM reference</text>
+  <text x="32" y="236" font-size="11">[15]&#8211;[19] Decomposed: major / minor / patch /</text>
+  <text x="32" y="252" font-size="11">&#160; &#160; &#160; &#160; &#160; &#160; &#160;owner / sub-version</text>
+
+  <!-- Comm / amp / FPGA-size block -->
+  <rect x="460" y="164" width="200" height="100" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="560" y="184" text-anchor="middle" font-weight="bold">Communication &amp; HW</text>
+  <text x="472" y="204" font-size="11">[20] Communication version</text>
+  <text x="472" y="220" font-size="11">[21] Amplifier version</text>
+  <text x="472" y="236" font-size="11">[22] FPGA size descriptor</text>
+
+  <!-- v5 extension -->
+  <rect x="20" y="284" width="640" height="28" rx="6" fill="#fff7e6" stroke="#d9a441" stroke-width="1.2"/>
+  <text x="32" y="302" font-size="11" fill="#5b6b7b">Central-i v5: array extended to 24 elements; adds [23] amplifier variant. [1]&#8211;[22] unchanged.</text>
+</svg>

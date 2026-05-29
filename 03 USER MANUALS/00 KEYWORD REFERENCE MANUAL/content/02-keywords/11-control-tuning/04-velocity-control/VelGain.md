@@ -76,6 +76,41 @@ With `VelGain = 1200` and a velocity error `VelErr = 50` (in velocity-loop units
 
 This product enters the PI sum (together with the integral) and is then converted to current-command units by the fixed internal scaling before passing through the velocity filters and feedforwards.
 
+### Walk-through: configure the PI velocity loop and verify saturation via StatReg
+
+This recipe sets up the inner velocity loop alongside the outer position loop, then uses the status word to confirm whether the controller is driving the loop into a limit.
+
+1. **Set the proportional gain** (first scheduling element used when no scheduling is active):
+
+   ```text
+   AVelGain[1]=1200
+   ```
+
+2. **Add an integral term** for steady-state velocity error rejection. The integral is anti-wound automatically when the output saturates (see [VelKi](VelKi.md)):
+
+   ```text
+   AVelKi[1]=80
+   ```
+
+3. **Clear any integrator history** carried over from earlier tests, so the loop starts from a known state (axis must be stationary):
+
+   ```text
+   AClearIntegral
+   ```
+
+4. **Command a move and observe [StatReg](../../07-status-and-faults/StatReg.md)**. Three saturation bits matter here:
+
+   ```text
+   AStatReg                      ; read whole status word
+   (AStatReg & 0x200000) >> 21   ; current saturation (bit 21) - current command hit PeakCL/ContCL
+   (AStatReg & 0x400000) >> 22   ; voltage saturation (bit 22) - phase voltage hit MaxPWM
+   (AStatReg & 0x800000) >> 23   ; velocity saturation (bit 23) - VelRef hit MaxVel
+   ```
+
+   If bit 23 reads `1`, the position-loop output (or the velocity feed-forward) is asking for more speed than [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md) allows, so the velocity loop is being driven from a clamped reference. If bit 21 reads `1`, the velocity-PI output is being clamped at the current limit and the velocity-loop integrator is being held by the anti-windup gate inside [VelKi](VelKi.md) until saturation clears.
+
+5. **If a notch is needed** to clean the velocity-PI output before it forms the current command, define one in [VelFiltDef](VelFiltDef.md), enable it in [VelFiltOn](VelFiltOn.md), then run [CalcFilters](../01-general-keywords/CalcFilters.md) so the new coefficients take effect.
+
 ## Changes between versions
 
 In **v5 (central-i)** `VelGain` is a floating-point value (same `0` to `1000000000` range concept, wider span); the proportional×error → PI → current-command path is otherwise the same. **v5 is central-i only.**
@@ -85,7 +120,9 @@ In **v5 (central-i)** `VelGain` is a floating-point value (same `0` to `10000000
 - [VelErr](../../10-motion/01-kinematics-status/VelErr.md) — velocity error that `VelGain` multiplies
 - [VelRef](../../10-motion/01-kinematics-status/VelRef.md) — velocity-loop reference
 - [VelKi](VelKi.md) — velocity integral gain summed with the `VelGain` term
+- [ClearIntegral](../01-general-keywords/ClearIntegral.md) — zeroes the velocity-loop integrator
 - [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md) — current command produced from the velocity-PI output
 - [VelFiltOn](VelFiltOn.md) / [VelFiltDef](VelFiltDef.md) — velocity-loop filters on the PI output
 - [PosGain](../03-position-control/PosGain.md) — proportional gain of the outer (position) loop
+- [StatReg](../../07-status-and-faults/StatReg.md) — bit 21 (current sat) / bit 22 (voltage sat) / bit 23 (velocity sat)
 - [ScheduleMode](../01-general-keywords/ScheduleMode.md) — selects which array element is active

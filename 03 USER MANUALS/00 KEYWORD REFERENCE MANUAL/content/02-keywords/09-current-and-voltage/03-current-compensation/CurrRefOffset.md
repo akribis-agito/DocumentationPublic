@@ -54,4 +54,5 @@ ACurrRefOffset      ; read the present offset
 ## See also
 
 - [CurrRef](../02-motor-variables/CurrRef.md) — final motor current command the offset is applied to
-- [TorqCompMode](TorqCompMode.md), [TorqCompFix](TorqCompFix.md) — loop-side current compensation
+- [TorqCompMode](TorqCompMode.md), [TorqCompFix](TorqCompFix.md) — loop-side current compensation (applied earlier, only in position/velocity mode)
+- [UPMVelTable](UPMVelTable.md) — angle-indexed current compensation (applied just before this constant offset)

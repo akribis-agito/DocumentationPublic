@@ -53,6 +53,29 @@ When the command is received the firmware performs the following, all with inter
 AGoToCurrMode        ; gracefully switch to current operation mode
 ```
 
+### Walk-through: switch to current mode for a force test
+
+Apply a small commanded current to verify mechanical/coil polarity or stick a known force on the actuator. Start from position mode with the motor on, hand off to current mode using the table source, and observe the result.
+
+```text
+AOperationMode            ; expect 3 (position) — start from a safe known state
+AMotorOn                  ; expect 1 (servo on)
+ACurrCmdSrc=1             ; use the user-defined CurrCmdVal table
+ACurrCmdVal[1]=500        ; first table entry — 500 mA (adjust to your motor and rig)
+ACurrCmdHTime[1]=2000     ; hold for 2000 control cycles
+ACurrCmdVal[2]=0          ; second entry — back to zero
+ACurrCmdHTime[2]=1000     ; hold for 1000 cycles
+ACurrCmdHTime[3]=0        ; HTime = 0 ends the sequence
+AGoToCurrMode             ; graceful switch; CurrCmdIndex resets to 1, CurrCmdCntr to 0
+                          ; ... observe the response ...
+AMotorCurr                ; live motor current feedback (mA)
+ACurrCmdCntr              ; ramp/hold counter for the active entry
+                          ; ... when done ...
+AGoToPosMode              ; bumpless return to position control
+```
+
+`GoToCurrMode` is rejected from CNC (multi-axis) motion and does nothing if the axis is already in current mode. It also leaves the `CurrCmdVal` / `CurrCmdSlope` / `CurrCmdHTime` tables intact — the sequence always restarts from entry 1.
+
 ## See also
 
 - [OperationMode](../01-general-keywords/OperationMode.md) — the active control mode

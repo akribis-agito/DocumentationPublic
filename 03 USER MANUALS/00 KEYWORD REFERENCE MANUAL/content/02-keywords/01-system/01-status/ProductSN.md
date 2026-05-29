@@ -41,6 +41,8 @@ Two-element array holding the unit's hardware version and production serial numb
 | [1] | Hardware version number |
 | [2] | Production serial number — a concatenation of year (2 digits), week (2 digits) and unit count (4 digits) |
 
+![ProductSN[2] format — year, week, unit-count fields](productsn-format.svg)
+
 ## How it works
 
 `ProductSN` is held in flash. On power-up, after the controller loads its keywords from flash, it copies `ProductSN[1]` and `ProductSN[2]` into the [Identity](Identity.md) array — into `Identity[3]` (hardware version) and `Identity[2]` (serial number) respectively — where host software reads them to display the unit's serial number. The same copy is repeated whenever `ProductSN` is written, so `Identity` always tracks the stored value.

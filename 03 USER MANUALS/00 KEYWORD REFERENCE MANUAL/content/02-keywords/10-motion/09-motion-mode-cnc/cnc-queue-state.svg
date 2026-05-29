@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="240" viewBox="0 0 820 240" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <text x="410" y="22" text-anchor="middle" font-weight="bold">CNCAStatus queue states: empty &#8594; filling &#8594; running &#8594; full &#8594; drain &#8594; underrun</text>
+
+  <!-- Five state boxes -->
+  <rect x="40"  y="80" width="130" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="105" y="105" text-anchor="middle" font-weight="bold">empty</text>
+  <text x="105" y="125" text-anchor="middle" font-size="11">[7] = capacity</text>
+
+  <rect x="200" y="80" width="130" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="265" y="103" text-anchor="middle" font-weight="bold">filling</text>
+  <text x="265" y="121" text-anchor="middle" font-size="11">[5] &gt; 0 segment</text>
+  <text x="265" y="135" text-anchor="middle" font-size="11">push in progress</text>
+
+  <rect x="360" y="80" width="130" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="425" y="103" text-anchor="middle" font-weight="bold">running</text>
+  <text x="425" y="121" text-anchor="middle" font-size="11">[10] bit 0 set</text>
+  <text x="425" y="135" text-anchor="middle" font-size="11">[6] advances</text>
+
+  <rect x="520" y="80" width="130" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="585" y="103" text-anchor="middle" font-weight="bold">full</text>
+  <text x="585" y="121" text-anchor="middle" font-size="11">[7] = 0</text>
+  <text x="585" y="135" text-anchor="middle" font-size="11">next push rejected</text>
+
+  <rect x="680" y="80" width="120" height="60" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="740" y="105" text-anchor="middle" font-weight="bold" fill="#a8443a">underrun</text>
+  <text x="740" y="125" text-anchor="middle" font-size="11">motion ends</text>
+
+  <!-- Arrows between boxes -->
+  <line x1="170" y1="110" x2="196" y2="110" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="330" y1="110" x2="356" y2="110" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="490" y1="110" x2="516" y2="110" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- running -> underrun (curved arrow above) -->
+  <path d="M460 80 C520 40, 680 40, 740 80" fill="none" stroke="#e0736b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="600" y="50" text-anchor="middle" font-size="11" fill="#a8443a">queue empty mid-play</text>
+
+  <!-- full -> running (drain) feedback -->
+  <path d="M585 140 C585 180, 425 180, 425 140" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="505" y="200" text-anchor="middle" font-size="11" fill="#5b6b7b">drain: [7] grows as segments finish</text>
+
+  <!-- captions under arrows -->
+  <text x="183" y="74" text-anchor="middle" font-size="11" fill="#5b6b7b">PushType</text>
+  <text x="343" y="74" text-anchor="middle" font-size="11" fill="#5b6b7b">Begin</text>
+  <text x="503" y="74" text-anchor="middle" font-size="11" fill="#5b6b7b">[7] &#8594; 0</text>
+
+  <!-- legend -->
+  <text x="410" y="228" text-anchor="middle" font-size="11" fill="#5b6b7b">Indexes refer to CNCAStatus[i]. Keep one closed segment ([5]=0) queued ahead of the one playing to avoid underrun.</text>
+</svg>

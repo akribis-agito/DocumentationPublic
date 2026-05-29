@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="430" viewBox="0 0 780 430" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="20" y="24" font-size="15" font-weight="bold">MotionReason &#8211; value clusters by stop source</text>
+
+  <!-- Cluster 1: User commands (1-3, 14, 17) -->
+  <rect x="20" y="50" width="230" height="150" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="135" y="70" text-anchor="middle" font-weight="bold">User commands</text>
+  <text x="35" y="92" fill="#333">1 &#8211; Stop</text>
+  <text x="35" y="110" fill="#333">2 &#8211; Abort</text>
+  <text x="35" y="128" fill="#333">3 &#8211; StopRep</text>
+  <text x="35" y="146" fill="#333">14 &#8211; GoToCurrMode</text>
+  <text x="35" y="164" fill="#333">17 &#8211; GoToForceMode</text>
+  <text x="35" y="186" fill="#555" font-size="11">written by the command handler itself</text>
+
+  <!-- Cluster 2: Limit / travel (4-7) -->
+  <rect x="270" y="50" width="230" height="150" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="385" y="70" text-anchor="middle" font-weight="bold" fill="#b35047">Limit &#38; travel</text>
+  <text x="285" y="92" fill="#333">4 &#8211; reverse limit switch</text>
+  <text x="285" y="110" fill="#333">5 &#8211; forward limit switch</text>
+  <text x="285" y="128" fill="#333">6 &#8211; reverse software limit</text>
+  <text x="285" y="146" fill="#333">7 &#8211; forward software limit</text>
+  <text x="285" y="164" fill="#b35047">41 &#8211; either soft limit (v5 only)</text>
+  <text x="285" y="186" fill="#555" font-size="11">stop uses EmrgDec, not Decel</text>
+
+  <!-- Cluster 3: Fault / disable (8, 21-22, 28) -->
+  <rect x="520" y="50" width="240" height="150" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="640" y="70" text-anchor="middle" font-weight="bold" fill="#b35047">Fault / input</text>
+  <text x="535" y="92" fill="#333">8 &#8211; motor disabled</text>
+  <text x="535" y="110" fill="#333">21 &#8211; stop by input signal</text>
+  <text x="535" y="128" fill="#333">22 &#8211; abort by input signal</text>
+  <text x="535" y="146" fill="#333">28 &#8211; controlled stop by input</text>
+  <text x="535" y="186" fill="#555" font-size="11">a ConFlt code is also typically set</text>
+
+  <!-- Cluster 4: Homing & mode events (11, 13, 15, 16) -->
+  <rect x="20" y="220" width="230" height="120" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="135" y="240" text-anchor="middle" font-weight="bold">Homing &#38; mode events</text>
+  <text x="35" y="262" fill="#333">11 &#8211; index detected (jog)</text>
+  <text x="35" y="280" fill="#333">13 &#8211; timeout at homing</text>
+  <text x="35" y="298" fill="#333">15 &#8211; hardstop at homing</text>
+  <text x="35" y="316" fill="#333">16 &#8211; home switch change</text>
+
+  <!-- Cluster 5: Mode-specific stops (9, 10, 12, 25, 29, 35) -->
+  <rect x="270" y="220" width="230" height="120" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="385" y="240" text-anchor="middle" font-weight="bold">Mode-specific Stop&#8230;</text>
+  <text x="285" y="262" fill="#333">9 &#8211; StopECAM (ECAM)</text>
+  <text x="285" y="280" fill="#333">10 &#8211; StopFIFO (FIFO)</text>
+  <text x="285" y="298" fill="#333">12 / 25 &#8211; StopCNCA / StopCNCB</text>
+  <text x="285" y="316" fill="#333">29 &#8211; StopVec, 35 &#8211; StopBuff</text>
+
+  <!-- Cluster 6: Group "one member ..." codes (18-20, 23-24, 26-27, 30-34, 36-40) -->
+  <rect x="520" y="220" width="240" height="120" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="640" y="240" text-anchor="middle" font-weight="bold">Group &#8220;one member&#8230;&#8221;</text>
+  <text x="535" y="262" fill="#333">18&#8211;20, 23&#8211;24 &#8211; CNCA member</text>
+  <text x="535" y="280" fill="#333">25&#8211;27 &#8211; CNCB member</text>
+  <text x="535" y="298" fill="#333">30&#8211;34 &#8211; vector member</text>
+  <text x="535" y="316" fill="#333">36&#8211;40 &#8211; spline-buffer member</text>
+
+  <!-- Notes -->
+  <text x="20" y="370" font-weight="bold">Reading the code</text>
+  <text x="20" y="390" fill="#333">&#8226; Code 0 means the motion is still running or ended normally; any non-zero value records the original stop cause.</text>
+  <text x="20" y="408" fill="#333">&#8226; The first stop wins: a later limit or fault does not overwrite an earlier Stop/Abort code on the same move.</text>
+  <text x="20" y="426" fill="#333">&#8226; Codes in the red clusters select EmrgDec (limit) or trigger a ConFlt fault entry alongside.</text>
+</svg>

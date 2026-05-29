@@ -85,5 +85,8 @@ If the integral term has built up to, say, `Integral = 500`, the voltage becomes
 
 - [CurrKi](CurrKi.md) — current-loop integral gain (completes the PI controller)
 - [IqErr](../../../02-keywords/09-current-and-voltage/02-motor-variables/IqErr.md) — quadrature-axis current error the gain acts on
+- [IaErr](../../../02-keywords/09-current-and-voltage/02-motor-variables/IaErr.md) / [IbErr](../../../02-keywords/09-current-and-voltage/02-motor-variables/IbErr.md) — phase-domain errors the same gain acts on
 - [Vq](../../../02-keywords/09-current-and-voltage/02-motor-variables/Vq.md) — quadrature-axis voltage the PI produces
 - [ControlMode](../../../02-keywords/09-current-and-voltage/02-motor-variables/ControlMode.md) — selects dq0 vs abc current-control domain
+- [StatReg](../../../02-keywords/07-status-and-faults/StatReg.md) — bit 22 (voltage saturation) shows when the PI output is clamped by [MaxPWM](../../../02-keywords/06-protections/02-current-and-voltage/MaxPWM.md)
+- [VelGain](../04-velocity-control/VelGain.md) — proportional gain of the next loop out (velocity) feeding this current loop

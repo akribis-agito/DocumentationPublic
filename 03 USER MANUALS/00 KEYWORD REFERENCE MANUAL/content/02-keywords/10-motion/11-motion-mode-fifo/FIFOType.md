@@ -93,6 +93,35 @@ AFIFOPushLinP=10000 ; constant-velocity segment, travel 10000 units
 AFIFOPushParP=20000 ; parabolic segment, travel 20000 units
 ```
 
+### Walk-through: stream points to keep motion running without underrun
+
+Queue a few segments, start motion, then keep pushing while monitoring [FIFOStatus](FIFOStatus.md) so the queue never empties. The cycle-time entry sets how long each following segment lasts; change it between segments to vary the playback rate.
+
+```text
+; --- 1) Start from a clean queue ---
+AFIFOClear=0                  ; empty the queue (free count returns to 128)
+
+; --- 2) Prime the queue: cycle time + three motion segments ---
+AFIFOPushCycle=20             ; each following segment lasts 20 control samples
+AFIFOPushLinP=10000           ; constant-velocity, travel 10000 units
+AFIFOPushLinP=10000           ; same
+AFIFOPushParP=20000           ; parabolic, travel 20000 units
+
+; --- 3) Arm FIFO motion (FIFOType is the hub for FIFO mode) ---
+AMotionMode=9                 ; 9 = FIFO segment motion
+ABegin                        ; controller starts draining the queue at FIFOCycleTime
+
+; --- 4) Streaming loop: keep at least one closed segment queued ahead ---
+;     read free count, push if there is room (full = 0, empty = 128)
+AFIFOStatus[2]                ; free entries -- pace pushes against this
+AFIFOPushLinP=10000           ; push next segment while there is room
+
+; --- 5) End cleanly ---
+AStopFIFO=0                   ; play the active segment to completion, then end
+```
+
+The motion ends gracefully (underrun) if the engine reaches the last queued segment with nothing behind it. To stop earlier with a deceleration ramp, use [Stop](../04-motion-command/Stop.md) instead of `StopFIFO`. The companion FIFO-position-tracking subsystem (see [FIFOPosType](FIFOPosType.md), [FIFOPosPush](FIFOPosPush.md), [FIFOPosStatus](FIFOPosStatus.md)) uses the same fill / drain pattern but streams **absolute target positions** under `MotionMode = 19`.
+
 ## See also
 
 - [FIFOValue](FIFOValue.md) — value paired with each FIFO entry type

@@ -65,7 +65,8 @@ AIqRef              ; read quadrature-axis current reference (mA)
 - [Iq](Iq.md) — quadrature-axis feedback current
 - [IqErr](IqErr.md) — quadrature-axis current error (IqRef − Iq)
 - [IdRef](IdRef.md) — direct-axis current reference (held at 0)
-- [CurrRef](CurrRef.md) — final motor current command that IqRef is taken from
+- [CurrRef](CurrRef.md) — final motor current command that IqRef is taken from (clamped against [PeakCL](../../06-protections/02-current-and-voltage/PeakCL.md)/[ContCL](../../06-protections/02-current-and-voltage/ContCL.md))
 - [CurrRefCtrl](CurrRefCtrl.md) — loop-side current reference (before decoupling/compensation)
 - [CurrDir](CurrDir.md) — sets the sign of the direction correction
 - [IaRef](IaRef.md) — phase A reference that IqRef equals for brush motors
+- [StatReg](../../07-status-and-faults/StatReg.md) — bit 21 reports current saturation upstream of IqRef

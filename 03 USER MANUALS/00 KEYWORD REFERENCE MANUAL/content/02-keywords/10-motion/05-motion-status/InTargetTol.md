@@ -62,3 +62,4 @@ AInTargetTol        ; read current value
 - [InTargetVelTh](InTargetVelTh.md) — velocity settling window (current/force control)
 - [PosErr](../01-kinematics-status/PosErr.md) — the signal compared against this window
 - [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) — selects position- vs velocity-based settling
+- [MaxPosErr](../../06-protections/03-motion/general-maximum-limits/MaxPosErr.md) — protection limit on the same signal (trip, not settle)

@@ -91,6 +91,24 @@ AMotorOn=0           ; disable the motor
 AMotorOn            ; read servo status (0 = off, 1 = on)
 ```
 
+### Walk-through: power up an axis and verify ready
+
+A safe enable sequence: confirm the configured mode, pre-flight the pre-conditions, enable, and check the result.
+
+```text
+AOperationMode=3          ; position control mode (default)
+                          ; OperationMode is flash-saveable and only writable while disabled
+ACanMotorOn               ; pre-check; does not enable the motor
+ACanMotorOnRes            ; expect 1 (would enable). Any other value is the reject/fault code:
+                          ;   – inspect ConFlt, StatReg (commutation / filter bits), UnitStat
+AMotorOn=1                ; enable; rejected if any pre-condition still fails
+AMotorOn                  ; expect 1 = on
+AStatReg                  ; commutation-done bit set; filter-modified / calc-failed bits clear
+AConFlt                   ; expect 0 (no fault)
+```
+
+If `MotorOn = 1` is rejected after `CanMotorOn` returned 1, the cause is a time-dependent or post-enable protection: read [ConFlt](../../07-status-and-faults/ConFlt.md), [MotorReason](../../07-status-and-faults/MotorReason.md) and [StatReg](../../07-status-and-faults/StatReg.md) for the snapshot. To disable cleanly, write `AMotorOn=0` — the static brake (if "automatic by MotorOn") locks first, then the servo powers down and `MotorReason` is recorded.
+
 ## See also
 
 - [CanMotorOn](CanMotorOn.md) — enable the motor with pre-checks

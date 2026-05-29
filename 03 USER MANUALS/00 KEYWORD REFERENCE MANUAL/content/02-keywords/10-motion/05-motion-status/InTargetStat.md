@@ -84,6 +84,8 @@ AInTargetStat       ; read the current settling state
 - [InTargetTol](InTargetTol.md) — settling window (position/velocity control)
 - [InTargetVelTh](InTargetVelTh.md) — settling window (current/force control)
 - [InTargetTime](InTargetTime.md) — minimum dwell time inside the window
+- [PosErr](../01-kinematics-status/PosErr.md) — signal compared against `InTargetTol` in position/velocity modes
+- [Vel](../01-kinematics-status/Vel.md) — `Vel[1]` is the signal compared against `InTargetVelTh` in current/force modes
 - [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) — selects which signal/window the settling check uses
 - [MotionStat](MotionStat.md) — detailed bit-mapped motion status
 - [MotionSamples](MotionSamples.md) — settling times computed from the same state machine

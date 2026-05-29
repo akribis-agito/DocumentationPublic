@@ -64,8 +64,41 @@ AUPMVelTable[54]=300 ; compensation applied at commutation angle 54 degrees
 AUPMVelTable[1]=0    ; no compensation at the first angle entry
 ```
 
+### Walk-through: write a small anti-cogging entry by entry
+
+This recipe writes a few entries into the table to balance an observed cogging ripple at one electrical angle. The same pattern repeats around the cycle, but only the principle is shown here.
+
+1. **Confirm the motor is brushless** ([MotorType](../../02-motor-and-amplifier/MotorType.md) = 3 or 4) - the table is only used in that case.
+
+2. **Enable the angle-indexed compensation** via its on/off flag:
+
+   ```text
+   AUPMVelOn=1
+   ```
+
+3. **Identify the disturbance.** From a recording of commutation angle ([ComtAng](../../15-commutation/ComtAng.md)) and current draw at constant velocity, observe the cogging current ripple as a function of angle. For each whole-degree angle θ where the ripple is +I, the compensation entry should be -I; where it is -I, the entry should be +I.
+
+4. **Write the entries** (one whole degree at a time, 1-indexed, valid range 1 to 361):
+
+   ```text
+   AUPMVelTable[54]=300        ; +300 at 54 deg cancels a -300 cogging ripple
+   AUPMVelTable[55]=280
+   AUPMVelTable[56]=200
+   ; ... continue around the electrical cycle
+   ```
+
+5. **Repeat the test recording** to confirm the residual ripple has shrunk. Adjust individual entries that are still off.
+
+6. **Disable temporarily for comparison** without losing the table contents:
+
+   ```text
+   AUPMVelOn=0
+   ```
+
 ## See also
 
 - [ComtAng](../../15-commutation/ComtAng.md) — commutation angle that indexes this table
+- [UPMVelOn](../../../03-special-features/upm/UPMVelOn.md) — enables/disables this table at run time
 - [MotorType](../../02-motor-and-amplifier/MotorType.md) — must be 3 or 4 (brushless) for this to apply
-- [CurrRefOffset](CurrRefOffset.md) — motor-side current offset
+- [CurrRef](../02-motor-variables/CurrRef.md) — current reference this table adds into
+- [CurrRefOffset](CurrRefOffset.md) — motor-side current offset (constant bias rather than angle-indexed)

@@ -87,6 +87,37 @@ ABegin               ; move there (PTP mode)
 AAbsTrgt             ; read the current target
 ```
 
+### Walk-through: set up a PTP move with custom kinematics and verify settling
+
+A complete PTP cycle — configure profile, command the move, poll for settling, then read the stop reason:
+
+```text
+AMotionMode=1        ; point-to-point
+ASpeed=500000        ; cruise velocity
+AAccel=1000000       ; leading slope
+ADecel=1000000       ; trailing slope
+AJerk=0              ; trapezoid (set non-zero for S-curve smoothing)
+AAbsTrgt=100000      ; absolute target (user units)
+ABegin               ; start the move
+```
+
+While the move runs:
+
+```text
+AMotionStat                   ; bit 0 set = in motion; bit 5 set during decel; bit 6 during smoothing tail
+AInTargetStat                 ; 2 in motion, 3 settling, 4 target reached
+```
+
+After the move:
+
+```text
+AInTargetStat                 ; expect 4 (target reached) once |PosErr| <= InTargetTol for InTargetTime
+AMotionReason                 ; expect 0 (normal end); non-zero = something stopped it (see MotionReason)
+APosErr                       ; final position error in user units
+```
+
+If [InTargetStat](../05-motion-status/InTargetStat.md) does not reach 4, either [InTargetTol](../05-motion-status/InTargetTol.md) is too tight (the dwell counter keeps resetting) or the loop is unsettled. If [MotionReason](../05-motion-status/MotionReason.md) is non-zero, the move was cut short — codes 4–7 point at limits, 1–3 at user commands, and the rest at the clusters shown on the [MotionReason](../05-motion-status/MotionReason.md) page.
+
 ## Changes between versions
 
 In **v5 (central-i)** `AbsTrgt` is a 64-bit integer with the larger range shown in the frontmatter, matching the 64-bit position pipeline; the validation and profiler use are unchanged. **v5 is central-i only**, so on standalone `AbsTrgt` remains the v4 32-bit value.

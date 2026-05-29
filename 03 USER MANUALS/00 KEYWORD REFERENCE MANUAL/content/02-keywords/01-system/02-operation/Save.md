@@ -60,6 +60,22 @@ Because the operation can take a noticeable time, the firmware refreshes the wat
 ASave                ; persist current parameters to flash (motor must be off)
 ```
 
+### Walk-through: save the current config and restart
+
+Persist your edits to flash, restart the controller, and confirm the saved set is what came back. The motor must be off throughout.
+
+```text
+AMotorOn=0           ; ensure the motor is off (Save is rejected otherwise)
+AParamCS[1]          ; (optional) note the pre-save checksum for comparison
+ASave                ; persist all flash-saveable parameters to flash
+AParamCS[1]          ; checksum after save — reflects what was written
+AReset               ; software power cycle; firmware auto-runs Load on restart
+                     ; ... reconnect, then ...
+AParamCS[1]          ; same value as the post-save checksum — confirms a clean restore
+```
+
+If `ParamCS[1]` before and after `Reset` matches the post-`Save` value, the parameters you saved are the parameters running on the controller. To compare functional configuration across units while ignoring the per-unit network identity, use `ParamCS[1]`; to verify an exact match including IP and MAC, use `ParamCS[3]`.
+
 ## See also
 
 - [Load](Load.md) — reload parameters from flash (and re-verify the checksum written here)

@@ -63,10 +63,39 @@ AForceGain[1]=120       ; set the force-loop proportional gain
 AForceGain[1]           ; read the force-loop proportional gain
 ```
 
+### Walk-through: configure a force-over-PIV PID
+
+Force-over-PIV control (`ForcePIVOn = 1`) wraps the force PID around the existing position+velocity cascade. The three force-loop gains share the same gained-error signal and must be set together. The example below assumes a tuned PIV cascade and adds the force loop.
+
+1. **Select the force-over-PIV structure** (motor off, axis stationary):
+
+   ```text
+   AForcePIVOn[1]=1
+   ```
+
+2. **Set the three PID terms** of the outer force loop:
+
+   ```text
+   AForceGain[1]=120        ; P term (scaled by 1e-3 in force-over-PIV)
+   AForceKi[1]=50           ; I term (scaled by 1e-3)
+   AForceKd[1]=200          ; D term (scaled by 1e-3)
+   ```
+
+3. **Add position-wise feedforward** so the force loop does not have to chase the steady weight of the load:
+
+   ```text
+   AForceFFWP[1]=...
+   ```
+
+4. **Enter force operation mode** and command a force setpoint. The force PID output plus the feedforward becomes a position reference scaled by the controller sampling time, added to the entry position, then driven by the inner position/velocity loops. Saturation feedback into the integrator anti-windup comes from the inner-loop limits (see [ForceKi](ForceKi.md)).
+
+> **Note on scaling.** Switching [ForcePIVOn](ForcePIVOn.md) between 0 and 1 changes the internal scaling of `ForceGain` (1E-6 vs 1E-3), so the same numeric value gives a 1000-fold different effective gain - re-tune after switching structures.
+
 ## See also
 
-- [ForceKi](ForceKi.md) — force-loop integral gain
-- [ForceKd](ForceKd.md) — force-loop derivative gain
+- [ForceKi](ForceKi.md) — force-loop integral gain (uses the same gained error)
+- [ForceKd](ForceKd.md) — force-loop derivative gain (uses the same gained error)
 - [ForcePIVOn](ForcePIVOn.md) — selects the force-control structure (sets the ForceGain scaling)
 - [ForceErr](../../08-axis-operation/04-force-operation-mode/ForceErr.md) — error signal multiplied by ForceGain
+- [ForceFFW](ForceFFW.md) / [ForceFFWP](ForceFFWP.md) / [ForceVelFFW](ForceVelFFW.md) — feedforward terms summed at the loop output
 - [Force control](00-overview.md) — force-loop structure overview

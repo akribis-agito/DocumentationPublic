@@ -90,9 +90,34 @@ With `AccFFW = 2560` (v4 integer) and a reference acceleration of `a_ref = 1000`
 
 The feedforward injects this current ahead of the loop, so the velocity loop does not have to develop a following error to produce the accelerating current.
 
+### Walk-through: pair acceleration and velocity feedforwards
+
+`AccFFW` and [VelFFW](VelFFW.md) are summed at the same point in the loop (the combined feedforward output added to the velocity-loop output to form the current reference). They are usually configured together.
+
+1. **Enable both feedforwards on set 1** (no scheduling). Begin with both zero, then write the value you have computed or measured:
+
+   ```text
+   AAccFFW[1]=2560
+   AVelFFW[1]=65536
+   ```
+
+2. **Optionally apply the feedforward filter** to smooth the combined feedforward output (helpful if the reference is quantised or noisy):
+
+   ```text
+   AFFFiltDef[1]=1; AFFFiltDef[2]=100000   ; first-order low-pass at 1 kHz
+   AFFFiltOn[1]=1
+   ACalcFilters
+   ```
+
+3. **Run a profiled move** and read the loop-side current reference [CurrRefCtrl](../../../02-keywords/09-current-and-voltage/02-motor-variables/CurrRefCtrl.md) (v5) to see the feedforward contribution riding on top of the velocity-PI output. During the constant-acceleration phase the `AccFFW` term dominates; during the constant-velocity phase the `VelFFW` term does.
+
+4. **Watch [StatReg](../../../02-keywords/07-status-and-faults/StatReg.md) bit 21** (current saturation). A correctly sized feedforward pair reduces the following error that the position/velocity loops have to develop, so the current command is less likely to saturate during the acceleration phase.
+
 ## See also
 
 - [VelFFW](VelFFW.md) — velocity feedforward gain (summed with the acceleration term)
 - [FFFiltOn](FFFiltOn.md) / [FFFiltDef](FFFiltDef.md) — feedforward filter applied to the combined feedforward output
 - [CurrRefCtrl](../../../02-keywords/09-current-and-voltage/02-motor-variables/CurrRefCtrl.md) — current reference the feedforward adds into
+- [PosGain](../03-position-control/PosGain.md) — position-loop gain whose error this feedforward helps suppress
+- [VelTrackFact](../04-velocity-control/VelTrackFact.md) — velocity feedforward into the velocity-loop reference (a parallel path)
 - [ScheduleMode](../../../02-keywords/11-control-tuning/01-general-keywords/ScheduleMode.md) — gain-scheduling selection of array elements

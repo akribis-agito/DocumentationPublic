@@ -95,6 +95,35 @@ ASpeed=50000         ; cruise speed
 ABegin               ; start the move
 ```
 
+### Walk-through: full PTP setup, command, and settling verification
+
+A complete cycle — set kinematics, command the move, poll until settled, then check the stop reason:
+
+```text
+AMotorOn=1            ; enable the axis (precondition for Begin)
+AMotionMode=1         ; PTP
+ASpeed=500000         ; cruise velocity (must be <= MaxVel in indirect modes)
+AAccel=1000000        ; leading slope
+ADecel=1000000        ; trailing slope
+AJerk=0               ; trapezoid; set non-zero for S-curve smoothing
+AInTargetTol=50       ; settling window (user units)
+AInTargetTime=20      ; minimum dwell (ms)
+AAbsTrgt=100000       ; absolute target
+ABegin                ; start the move
+```
+
+Poll during and after the move:
+
+```text
+AMotionStat                   ; bit 0 = in motion; bit 4 accel, bit 5 decel, bit 6 smoothing tail
+AInTargetStat                 ; 2 in motion -> 3 settling -> 4 reached
+AInTargetStat                 ; once 4, the move is fully settled
+AMotionReason                 ; expect 0 (normal end); see MotionReason for non-zero codes
+APosErr                       ; final tracking error in user units
+```
+
+If `Begin` was *rejected*, no motion bits ever set — inspect [ErrLog](../../07-status-and-faults/ErrLog.md) for the rejection code (e.g. 39 motor off, 161 target out of soft limits, 271 `Speed` over `MaxVel`).
+
 ## Changes between versions
 
 In **v5 (central-i)** `Begin` adds two pre-condition checks and supports additional motion modes:

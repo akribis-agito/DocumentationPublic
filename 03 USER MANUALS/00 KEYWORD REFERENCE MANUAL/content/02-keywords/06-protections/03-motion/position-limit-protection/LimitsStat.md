@@ -79,8 +79,28 @@ Homing also inspects `LimitsStat` to detect and react to switch contact during a
 ALimitsStat         ; 0 = none, 1 = RLS, 2 = FLS, 3 = both
 ```
 
+### Walk-through: confirm a limit-switch trip
+
+```text
+AMotionMode=0         ; jog
+ASpeed=50000          ; positive sign drives toward the forward limit switch
+ABegin                ; jog forward into the FLS
+```
+
+When the FLS engages, the profiler raises a stop request and brakes with [EmrgDec](../../../10-motion/03-kinematics-configuration/EmrgDec.md). Inspect:
+
+```text
+ALimitsStat                   ; expect bit 1 set -> value 2 (FLS active)
+AMotionReason                 ; expect 5 (forward limit switch)
+AMotionStat                   ; expect 0 after the stop settles
+```
+
+If `MotionReason = 7` instead, the software limit [FwdPLim](FwdPLim.md) trips first, before the switch — the soft limit is inside the switch position. Re-issuing `ABegin` while the FLS bit is still set is rejected; the axis must first jog off the switch in the opposite direction.
+
 ## See also
 
 - [FwdPLim](FwdPLim.md) / [RevPLim](RevPLim.md) — software travel limits (firmware-computed, distinct from these physical switches)
 - [MotionStat](../../../10-motion/05-motion-status/MotionStat.md) — carries the stop request set when a switch is hit
 - [MotionReason](../../../10-motion/05-motion-status/MotionReason.md) — records reason codes 4 (RLS) and 5 (FLS) when motion ends on a limit switch
+- [EmrgDec](../../../10-motion/03-kinematics-configuration/EmrgDec.md) — emergency rate used when the profiler brakes on a switch
+- [DInMode](../../../05-inputs-outputs/04-digital-inputs/DInMode.md) — assigns the digital inputs that drive these bits

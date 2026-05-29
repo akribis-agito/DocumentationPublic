@@ -77,9 +77,12 @@ ARevPLim[1]=-1000000    ; reverse soft limit (counts)
 ARevPLim[1]             ; read back the reverse soft limit
 ```
 
+The verification flow is the mirror image of the forward one — see [FwdPLim](FwdPLim.md) **Walk-through: confirm a forward soft-limit trip**, but jog with negative `Speed` and expect `MotionReason = 6`.
+
 ## See also
 
-- [FwdPLim](FwdPLim.md) — forward software travel limit (upper bound of the same range)
+- [FwdPLim](FwdPLim.md) — forward software travel limit (upper bound of the same range; includes the walk-through)
 - [LimitsStat](LimitsStat.md) — hardware limit-switch status (physical RLS/FLS inputs)
 - [MotionStat](../../../10-motion/05-motion-status/MotionStat.md) — carries the stop-request bit set when the limit is hit
 - [MotionReason](../../../10-motion/05-motion-status/MotionReason.md) — records reason code 6 when motion ends here
+- [EmrgDec](../../../10-motion/03-kinematics-configuration/EmrgDec.md) — emergency rate used by this stop (not the normal `Decel`)
