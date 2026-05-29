@@ -65,3 +65,4 @@ ACNCBCumPosRef       ; read the total commanded path distance on group B
 - [CNCAdPosRef/CNCBdPosRef](CNCAdPosRef-CNCBdPosRef.md) — per-cycle change of the path position (path velocity)
 - [CNCBCumPosRef](CNCBCumPosRef.md) — the same cumulative coordinate on the second CNC group
 - [CNCAAbsTrgt/CNCBAbsTrgt](CNCAAbsTrgt-CNCBAbsTrgt.md) — active-segment length added to the total when the segment completes
+- [VEncSrc](../../03-encoder/06-virtual-encoder/VEncSrc.md) - selects a variable (e.g. this cumulative path position) as the source of a virtual encoder

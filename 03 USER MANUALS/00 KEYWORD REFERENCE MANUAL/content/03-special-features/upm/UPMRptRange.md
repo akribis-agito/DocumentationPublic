@@ -6,6 +6,8 @@ UPMRptRange sets the frequency range, in Hz, of the UPM repetitive compensation 
 
 Changing UPMRptRange (like changing the plant model) does not take effect immediately: it marks the UPM repetitive coefficients as needing recalculation. Run UPMCalcCoeff afterward to recompute the coefficients from the new range before the next UPMRptCalc. This pending state is surfaced only as an indication; it does not block enabling the motor.
 
+This keyword name is used from v5 (central-i); on v4 the same setting is UPMRptLevel (expressed as a percentage).
+
 **See also:**
 
 [UPMCalcCoeff](UPMCalcCoeff.md), [UPMRptOn](UPMRptOn.md), [UPMRptCalc](UPMRptCalc.md), [UPMRptLevel](UPMRptLevel.md), [UPMRptState](UPMRptState.md)

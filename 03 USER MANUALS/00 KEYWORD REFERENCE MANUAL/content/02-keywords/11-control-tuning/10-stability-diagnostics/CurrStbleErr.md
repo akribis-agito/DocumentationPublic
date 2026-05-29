@@ -40,7 +40,7 @@ This keyword is available from v5 (central-i) only.
 
 The detector measures the average magnitude of the difference between the commanded current reference and the measured motor current over its sliding window. A fault is raised only when this average error exceeds the `CurrStbleErr` threshold *and* the current spread test (see [CurrStbleSTD](CurrStbleSTD.md)) is also satisfied at the same time. Requiring both conditions avoids tripping on a quiet loop that simply has a steady offset, or on a noisy reference that the loop is in fact tracking well.
 
-Internally the percentage is converted to a current threshold by scaling against the peak current limit, so changing [PeakCL](../../06-protections/02-current-and-voltage/PeakCL.md) automatically rescales the effective error threshold. The value is saved to flash and can be changed while the axis is in motion and while the motor is on; the new threshold is applied the next time the detector is (re)enabled with the motor on.
+Internally the percentage is converted to a current threshold by scaling against the peak current limit, so changing [PeakCL](../../06-protections/02-current-and-voltage/PeakCL.md) automatically rescales the effective error threshold. The value is saved to flash and can be changed while the axis is in motion and while the motor is on. The effective tracking-error threshold is recomputed immediately whenever the value is written — including while the detector is already running and the motor is on — and takes effect on the next control cycle; no re-enable is required.
 
 The threshold currently in effect can be read back from element 5 of [CurrStbleStat](CurrStbleStat.md).
 

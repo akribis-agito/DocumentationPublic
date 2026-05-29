@@ -49,7 +49,7 @@ The setting is stored in flash, so it persists across power cycles.
 
 The global engineering-units feature and the embedded per-axis [UsrUnits](../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) / `AuxUsrUnits` scaling are **mutually exclusive on the same axis**. Both express keyword values in something other than raw internal units, so only one may be active at a time.
 
-The controller enforces this on writes. When you assign a value to a keyword that belongs to one of the global unit groups, the assignment is rejected with error code `338` if both of the following are true for that axis:
+The controller enforces this whenever an affected keyword is accessed. Reading or writing a keyword that belongs to one of the global unit groups is rejected with error code `338` if both of the following are true for that axis:
 
 - `UserUnitsEn` is set to 1, and
 - the corresponding embedded scaling (`UsrUnits` for main-feedback keywords, or the auxiliary / pulse-direction variants for their respective keywords) is set to a non-default value.

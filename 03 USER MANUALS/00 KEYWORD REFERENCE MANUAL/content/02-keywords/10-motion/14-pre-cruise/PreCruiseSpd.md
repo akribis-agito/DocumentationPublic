@@ -41,7 +41,7 @@ A pre-cruise stage is inserted only when `PreCruiseSpd` is **greater than** the 
 - If `PreCruiseSpd` &gt; `Speed`, the move runs the opening stroke fast and then steps **down** to the cruise speed to finish — accelerate to pre-cruise speed, hold it, slow to cruise speed, hold cruise speed, decelerate to the target.
 - If `PreCruiseSpd` is **less than or equal to** `Speed` (including the default `0`), there is no faster stage to run first, so the pre-cruise speed is effectively capped and the move reduces to an ordinary sine point-to-point profile at the cruise speed.
 
-The acceleration, deceleration and jerk shaping of every stage use the same [Accel](../03-kinematics-configuration/Accel.md), [Decel](../03-kinematics-configuration/Decel.md) and jerk settings as a normal sine point-to-point move. At `Begin` the controller checks that the pre-cruise stroke is long enough to reach `PreCruiseSpd` and slow back to the cruise speed; if not, the move is rejected (pre-cruise stroke insufficient, [instruction error code](../../../04-error-codes/instruction-error-codes.md) 384).
+The acceleration, deceleration and jerk shaping of every stage use the same [Accel](../03-kinematics-configuration/Accel.md), [Decel](../03-kinematics-configuration/Decel.md) and jerk settings as a normal sine point-to-point move. At `Begin` the controller checks that the pre-cruise stroke is long enough to accelerate from rest to the cruise speed; if not, the move is rejected (pre-cruise stroke insufficient, [instruction error code](../../../04-error-codes/instruction-error-codes.md) 384).
 
 ## Examples
 
@@ -52,7 +52,7 @@ APreCruiseSpd=800000   ; faster pre-cruise speed (> Speed, so a pre-cruise stage
 APreCruRelTrgt=200000  ; pre-cruise stroke
 ARelTrgt=500000        ; total move distance
 ABegin                 ; start the move
-APreCruiseSpd[1]       ; read back the pre-cruise speed
+APreCruiseSpd          ; read back the pre-cruise speed
 ```
 
 To disable the pre-cruise stage on a configured axis, set the pre-cruise speed at or below the cruise speed:

@@ -50,7 +50,7 @@ Each control cycle the controller inspects the absolute-encoder status bits ([En
 The two recoverable groups are counted separately:
 
 - **CRC errors** (status bit 4). On expiry, [ConFlt](../../07-status-and-faults/ConFlt.md) reports fault `1069`.
-- **Error / warning** (status bit 1 / the warning condition). On expiry, [ConFlt](../../07-status-and-faults/ConFlt.md) reports fault `1068`.
+- **Error / warning** (status bit 1, or the warning condition at bit 3). On expiry, [ConFlt](../../07-status-and-faults/ConFlt.md) reports fault `1068`.
 
 A clean cycle (no abnormal bit) resets the counters, so only a *continuous* condition lasting longer than `EncAbsErrTime` produces a fault — short noise glitches are ridden through by extrapolation.
 

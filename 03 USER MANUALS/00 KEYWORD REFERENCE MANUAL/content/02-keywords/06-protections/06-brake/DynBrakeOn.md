@@ -43,18 +43,19 @@ Dynamic braking is a purely electrical brake: it shorts the motor phases (throug
 
 ## How it works
 
-When `DynBrakeOn ≠ 0`, the axis engages the dynamic brake each control cycle only while **all** of these hold:
+When `DynBrakeOn ≠ 0`, the axis engages the dynamic brake each control cycle while these hold:
 
-1. `DynBrakeOn ≠ 0`;
-2. the motor is **off** ([MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 0); and
-3. no active fault prohibits dynamic braking (certain [ConFlt](../../07-status-and-faults/ConFlt.md) conditions, such as a ground short or power-stage fault, forbid it).
+1. `DynBrakeOn ≠ 0`; and
+2. the motor is **off** ([MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 0).
 
-While engaged, the axis sets [StatReg](../../07-status-and-faults/StatReg.md) bit 28 (dynamic brake active) and modulates the shorting duty cycle to keep the braking current within the [PeakCL](../02-current-and-voltage/PeakCL.md)/[ContCL](../02-current-and-voltage/ContCL.md) limits; [DynBrkRef](DynBrkRef.md) sets the strongest-braking ceiling. If the motor is re-enabled, a forbidding fault appears, or the bus voltage gets too high, the brake releases and bit 28 clears.
+On the secondary controller axes (axis B, and axis C on the 3-axis product), engagement is additionally inhibited while an active fault forbids dynamic braking (certain [ConFlt](../../07-status-and-faults/ConFlt.md) conditions, such as a ground short or power-stage fault). On the primary axis (axis A) and on Central-i amplifier axes, engagement depends only on the two conditions above — a forbidding fault does **not** block engagement there.
+
+While engaged, the axis sets [StatReg](../../07-status-and-faults/StatReg.md) bit 28 (dynamic brake active) and modulates the shorting duty cycle to keep the braking current within the [PeakCL](../02-current-and-voltage/PeakCL.md)/[ContCL](../02-current-and-voltage/ContCL.md) limits; [DynBrkRef](DynBrkRef.md) sets the strongest-braking ceiling. If the motor is re-enabled, dynamic braking disengages and bit 28 clears. If instead the bus voltage gets too high, the over-voltage protection forces the braking duty cycle to 0 so the brake stops applying torque, but bit 28 stays set (the brake is still "active", just not driving current) until the motor is re-enabled. On the secondary axes (B, and C on the 3-axis product) a forbidding fault also disengages the brake and clears bit 28; on the primary axis (A) and Central-i axes a forbidding fault does not clear bit 28.
 
 Notes:
 
 - Dynamic braking never fights an active current loop — it engages only when the motor is off.
-- Engagement does not depend on [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md); it depends only on `DynBrakeOn`, the motor-off state, and the per-fault permission.
+- Engagement does not depend on [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md); it depends on `DynBrakeOn` and the motor-off state, plus the per-fault permission on the secondary axes (B, and C on the 3-axis product). The primary axis (A) and Central-i amplifier axes ignore the per-fault permission and engage on `DynBrakeOn` and motor-off alone.
 - With `DynBrakeOn = 0`, the brake never engages and [StatReg](../../07-status-and-faults/StatReg.md) bit 28 never sets.
 - On the PWM amplifier, dynamic braking is supported on axes A and B (and C on the 3-axis product).
 

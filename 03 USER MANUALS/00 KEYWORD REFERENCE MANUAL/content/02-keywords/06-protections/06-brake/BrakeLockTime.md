@@ -42,10 +42,11 @@ The value is a time in **milliseconds**, settable from about **10 ms to 800 ms**
 
 In [BrakeMode](BrakeMode.md) = 3, when the motor is disabled (and the axis is currently enabled), the sequence:
 
-1. commands the static brake to lock (de-energize) and sets the lock request in [StatReg](../../07-status-and-faults/StatReg.md) bit 29;
-2. arms a timer for `BrakeLockTime` while the motor stays energized;
-3. waits for the timer to elapse — the motor continues to hold the load during this window;
-4. only then disables the motor.
+1. commands the static brake to lock (de-energize) and arms a timer for `BrakeLockTime` while the motor stays energized;
+2. keeps the motor energized until the timer elapses — the motor continues to hold the load during this window;
+3. when the timer elapses, sets the lock request in [StatReg](../../07-status-and-faults/StatReg.md) bit 29 and disables the motor.
+
+The bit-29 set and the motor disable happen together when the lock timer elapses, not at the moment the lock is commanded.
 
 `BrakeLockTime` protects the **stop → disable** transition; the complementary [BrakeRelTime](BrakeRelTime.md) protects the **enable → motion** transition. Do not set `BrakeLockTime` to 0 in mode 3 — the timing logic relies on a non-zero delay; keep it at least a few milliseconds (the minimum is around 10 ms).
 

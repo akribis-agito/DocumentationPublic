@@ -42,7 +42,7 @@ The value ranges from 2 to 63 and defaults to 2. With the default of 2, only the
 
 ## Examples
 
-Use the first ten table points (segments spanning indices 1 through 10):
+Use table points 1 through 10 (nine interpolation segments):
 
 ```
 ACompTbleEnd[1]=10

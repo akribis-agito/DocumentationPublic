@@ -46,7 +46,7 @@ Use it as a precondition check before arming [LockEn](LockEn-AuxLockEn.md) or [E
 | 1 | Unified mode ([LockEventMode](LockEventMode.md) = 1) and initialized: [LockEventInit](LockEventInit.md) has been run and the subsystem is ready to arm. |
 | -1 | Unified mode ([LockEventMode](LockEventMode.md) = 1) but not yet initialized: run [LockEventInit](LockEventInit.md) before arming Lock or Event. |
 
-A `-1` reading appears when [LockEventMode](LockEventMode.md) is set to `1` and the offset has not been computed since power-up, or when a configuration change (such as changing the encoder hardware source) has invalidated a previously computed offset. In that state, arming [LockEn](LockEn-AuxLockEn.md) or [EventOn](../../18-event-generation/EventOn.md) is rejected until [LockEventInit](LockEventInit.md) is run.
+A `-1` reading appears when [LockEventMode](LockEventMode.md) is set to `1` and the offset has not been computed since power-up, or when a configuration change has invalidated a previously computed offset. In particular, a change to `EncSinCosHWEn` (the encoder/lock-event capture-source selector) is detected automatically and returns this status to `-1`. In that state, arming [LockEn](LockEn-AuxLockEn.md) or [EventOn](../../18-event-generation/EventOn.md) is rejected until [LockEventInit](LockEventInit.md) is run.
 
 ## Examples
 

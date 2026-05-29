@@ -38,9 +38,9 @@ This keyword is available from v5 (central-i).
 
 ## How it works
 
-The table is divided into one block per monitored motion (up to four motions). Each block holds up to 256 points that the detector walks through as the motion plays out. As the motion progresses, the detector advances one point at a time; [AnomDtctGap](AnomDtctGap.md) sets how many control cycles each point is held before moving to the next.
+The table is divided into one block per monitored motion (up to four motions). Each block holds up to 256 points. As the motion progresses, the detector advances one point at a time; [AnomDtctGap](AnomDtctGap.md) sets how many control cycles each point is held before moving to the next. The comparison begins at the **second** slot of each motion's block and advances one slot per gap window — the first slot of each block (index 1, 257, 513, 769) holds a value but is never compared against the signal.
 
-The array is 1-indexed (index 0 is reserved); the highest usable index is one less than the frontmatter `array_size`. The blocks are laid out consecutively, matching [AnomDtctUL](AnomDtctUL.md):
+The array is 1-indexed (index 0 is reserved); the highest usable index is one less than the frontmatter `array_size`. The blocks are laid out consecutively, matching [AnomDtctUL](AnomDtctUL.md) (the index ranges below show where values are *stored*):
 
 | Index range | Monitored motion |
 | --- | --- |
@@ -56,10 +56,10 @@ Populate the table with a lower envelope that sits comfortably below the signal 
 ## Examples
 
 ```text
-AAnomDtctLL[1]=-12000    ; lower limit at the first point of motion 0
-AAnomDtctLL[2]=-12500    ; ... next point
-AAnomDtctLL[257]=-8000   ; first point of motion 1's block
-AAnomDtctLL[1]           ; read the first lower-limit point
+AAnomDtctLL[1]=-12000    ; first stored slot of motion 0 (not compared; the walk starts at index 2)
+AAnomDtctLL[2]=-12500    ; first compared lower-limit point of motion 0
+AAnomDtctLL[257]=-8000   ; first stored slot of motion 1's block (not compared; comparison starts at index 258)
+AAnomDtctLL[2]           ; read the first compared lower-limit point
 ```
 
 ## See also

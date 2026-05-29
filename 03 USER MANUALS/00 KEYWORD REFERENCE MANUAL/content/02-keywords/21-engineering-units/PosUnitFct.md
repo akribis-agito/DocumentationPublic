@@ -34,7 +34,7 @@ This keyword is available from central-i v5 only.
 
 ## How it works
 
-`PosUnitFct` is a per-axis, double-precision factor stored in flash. Its default value is `1`, which represents no rescaling relative to the controller's internal position units. Set it to the number of **internal position units that correspond to one engineering unit** — a raw value is divided by this factor for display, and a value you enter in the engineering unit is multiplied by it. For example, if one millimetre equals 1000 internal counts, set `PosUnitFct` to `1000` and label the unit `mm` with [PosUnitUnt](PosUnitUnt.md).
+`PosUnitFct` is a per-axis, double-precision factor stored in flash. Its default value is `1`, which represents no rescaling relative to the controller's internal position units. Set it to relate the internal position unit to the engineering unit you label with [PosUnitUnt](PosUnitUnt.md), so that the whole position group is presented consistently.
 
 A single factor covers the whole position group, so position, position error, references, targets, limits, and the other members listed by [PosUnitGrp](PosUnitGrp.md) all share the same conversion.
 

@@ -49,7 +49,7 @@ The distance from the start of the move to this target is the **pre-cruise strok
 |---|---|
 | Pre-cruise target lies in the same direction as the final target | rejected — total and pre-cruise stroke must be in the same direction (error 381) |
 | Final target is beyond the pre-cruise target | rejected — total stroke must be longer than the pre-cruise stroke (error 383) |
-| Pre-cruise stroke long enough to reach pre-cruise speed and slow back to cruise speed | rejected — pre-cruise stroke insufficient (error 384) |
+| Pre-cruise stroke long enough to accelerate from rest to the cruise speed | rejected — pre-cruise stroke insufficient (error 384) |
 
 ## Examples
 
@@ -63,7 +63,7 @@ APreCruRelTrgt=0       ; use the absolute pre-cruise target below
 APreCruAbsTrgt=200000  ; run fast up to here
 AAbsTrgt=500000        ; final destination
 ABegin                 ; start the move
-APreCruAbsTrgt[1]      ; read back the pre-cruise target
+APreCruAbsTrgt         ; read back the pre-cruise target
 ```
 
 ## See also

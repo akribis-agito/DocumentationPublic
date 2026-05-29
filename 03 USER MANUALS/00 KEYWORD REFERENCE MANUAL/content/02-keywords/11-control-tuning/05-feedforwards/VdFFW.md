@@ -48,13 +48,13 @@ where the terms are, in order:
 |------|---------------|--------|
 | $R_{\text{ffw}}\,i_{d,\text{ref}}$ | Resistive drop: voltage to push the commanded d-axis current through the winding resistance | [Rm](../../../02-keywords/09-current-and-voltage/04-motor-measurement/Rm.md) scaled by [RmFFWLevel](RmFFWLevel.md) |
 | $L_{\text{ffw}}\,f_s\,(i_{d,\text{ref}} - i_{d,\text{ref,prev}})$ | Inductive term (L·di/dt): voltage to change the d-axis current at the commanded rate, using the change in reference current over one control period ($f_s$ is the control sample rate) | [Lm](../../../02-keywords/09-current-and-voltage/04-motor-measurement/Lm.md) scaled by [LmFFWLevel](LmFFWLevel.md) |
-| $-X_{\text{ffw}}\,i_{q,\text{ref}}\,\omega$ | Cross-coupling: the speed-dependent coupling from the q-axis current into the d axis (derived from the inductance term), with opposite sign to the q-axis cross term | [Lm](../../../02-keywords/09-current-and-voltage/04-motor-measurement/Lm.md) / [LmFFWLevel](LmFFWLevel.md) |
+| $-X_{\text{ffw}}\,i_{q,\text{ref}}\,\omega$ | Cross-coupling: the speed-dependent coupling from the q-axis current into the d axis, with opposite sign to the q-axis cross term | Derived from [Lm](../../../02-keywords/09-current-and-voltage/04-motor-measurement/Lm.md) (per-phase inductance), the bus voltage and the electrical cycle together with motor speed. **Not** scaled by [LmFFWLevel](LmFFWLevel.md), unlike the L·di/dt inductive term. |
 
 The d-axis feedforward has no back-EMF term: the speed-proportional back-EMF voltage acts on the q axis only and appears in [VqFFW](VqFFW.md).
 
 If [VoltageFFWOn](VoltageFFWOn.md) is non-zero, `VdFFW` is then added to the d-axis PI output [Vd](../../../02-keywords/09-current-and-voltage/02-motor-variables/Vd.md). The resulting d-axis and q-axis voltages are limited together as a vector against the maximum PWM magnitude and transformed to the phase voltages (see [Vd](../../../02-keywords/09-current-and-voltage/02-motor-variables/Vd.md) for the saturation and inverse-Park detail). The d-axis feedforward is not applied to brush motors, which control on a single axis only.
 
-`VdFFW` is reset to 0 when the current loop is reset. The level scalings ([RmFFWLevel](RmFFWLevel.md), [LmFFWLevel](LmFFWLevel.md)) default to 0, so with default settings every term is zero and `VdFFW` reads 0.
+`VdFFW` is reset to 0 when the current loop is reset. With default level scalings ([RmFFWLevel](RmFFWLevel.md), [LmFFWLevel](LmFFWLevel.md) default to 0) the resistive and inductive terms are zero (`VdFFW` has no back-EMF term), but the d-q cross-coupling term is governed by [Lm](../../../02-keywords/09-current-and-voltage/04-motor-measurement/Lm.md), the bus voltage and the electrical cycle (not by `LmFFWLevel`) and so can be non-zero during motion. `VdFFW` therefore reads 0 only at standstill (zero speed) or when the q-axis reference current is zero; this cross term is summed into the d-axis voltage only when [VoltageFFWOn](VoltageFFWOn.md) is non-zero.
 
 ## Examples
 

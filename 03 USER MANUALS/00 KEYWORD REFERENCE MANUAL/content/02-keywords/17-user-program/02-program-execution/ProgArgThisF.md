@@ -41,6 +41,8 @@ A function's arguments live on the call stack relative to the current frame. `Pr
 
 The only difference from [ProgArgThis](ProgArgThis.md) is the data type: `ProgArgThisF` reads and writes the slot as a 32-bit floating-point (float) value rather than a 32-bit integer. The underlying call-stack slots are the same — the typed forms select how the bits in a slot are interpreted — so a function chooses the variant that matches the type it stored. Reading an index returns that slot's value; writing an index stores into it, which is how a function keeps local variables and prepares output values before [Return](Return.md). The index is resolved against the *current* frame, so the values automatically refer to the right function even when functions are nested.
 
+Like the base keyword, `ProgArgThisF` is only valid from within a running user program (it addresses the current call frame); issuing it from a plain communication command is rejected with a run-time error.
+
 The array spans the function's combined argument and local-variable space (the sum of input arguments, output arguments and local variables for one function). Reading an index beyond what the current frame contains raises a "no operands in call stack" error.
 
 ## Examples

@@ -32,7 +32,7 @@ Cut-off frequency, in hertz, of the compensation filter's first-order low-pass s
 
 When the compensation filter is enabled with [CompFiltOn](CompFiltOn.md), the difference between the measured force and the force predicted from the compensation table is passed through a first-order low-pass filter before being added back to the predicted force. `CompFiltFreq` sets that filter's cut-off frequency in hertz.
 
-A higher cut-off lets more of the measured force's high-frequency content through, so the output tracks the live sensor more closely. A lower cut-off leans more heavily on the smooth, table-predicted force.
+The low-pass acts on the difference between the measured force and the table-predicted force. A higher cut-off lets the output follow the measured force sensor over a wider (faster) band; a lower cut-off restricts the sensor to only the slowest corrections and lets the smooth, table-predicted force govern the faster variation.
 
 This keyword is available from v5 (central-i v5).
 

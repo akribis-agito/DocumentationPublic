@@ -32,7 +32,7 @@ PIV noise spread threshold for standstill noise/jitter detection, in percent of 
 
 `PIVNoiseSTD` sets the spread (standard-deviation) threshold used by the PIV noise detector ([PIVNoiseDtct](PIVNoiseDtct.md)). It defines how much the current reference is allowed to swing while the axis is held at standstill before the swing is treated as excessive noise or jitter.
 
-The value is a percentage of the axis peak current limit ([PeakCL](../../06-protections/02-current-and-voltage/PeakCL.md)). A larger value makes the detector tolerate more standstill noise; a smaller value makes it trip on a quieter signal.
+The value is a percentage of the axis peak current limit ([PeakCL](../../06-protections/02-current-and-voltage/PeakCL.md)). A larger value makes the detector tolerate more standstill noise; a smaller value makes it trip on a quieter signal. The default is 2 (i.e. 2% of the peak current limit), and the accepted range is 0.01 to 100 percent.
 
 This keyword is available from v5 (central-i) only.
 
@@ -42,7 +42,7 @@ While the detector is enabled and the axis has been at a commanded standstill lo
 
 When the measured spread exceeds the threshold, the controller turns the motor off and logs fault code 1072, visible in [ConFlt](../../07-status-and-faults/ConFlt.md).
 
-The value is saved to flash and can be changed while the axis is in motion and while the motor is on; the new threshold is applied the next time the detector is (re)enabled with the motor on. The active threshold can be read back from element 2 of [PIVNoiseStat](PIVNoiseStat.md).
+The value is saved to flash and can be changed while the axis is in motion and while the motor is on. The threshold is recomputed immediately on write — including while the detector is already running and the motor is on — and takes effect on the next control cycle; no re-enable is required. The active threshold can be read back from element 2 of [PIVNoiseStat](PIVNoiseStat.md).
 
 ## Examples
 

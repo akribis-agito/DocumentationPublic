@@ -41,6 +41,8 @@ There are two ways to learn that offset:
 
 The setting is stored in flash, so the selected mode survives a power cycle. The default is `0` (legacy behavior).
 
+> **Only `0` and `1` are supported operating values.** Although the keyword's numeric range extends down to `-1`, `-1` is not a valid operating mode: in it there is no automatic offset learning on arming, no [LockEventInit](LockEventInit.md) initialization, and arming is not blocked. That combination can leave the capture offset uncomputed and produce incorrect captured positions, so `-1` should not be used.
+
 ## How it works
 
 | Value | Meaning |
@@ -57,7 +59,7 @@ Writing `LockEventMode` immediately re-evaluates [LockEventStat](LockEventStat.m
 
 ### When re-initialization is needed (mode 1)
 
-Any configuration change that alters the capture source invalidates a previously learned offset. For example, changing the encoder hardware source clears the "initialized" condition and returns [LockEventStat](LockEventStat.md) to the not-initialized state, so [LockEventInit](LockEventInit.md) must be run again before arming. The firmware can only detect some such changes automatically, so as a rule run [LockEventInit](LockEventInit.md) after any change to the lock/event source configuration and before the capture source starts moving.
+Any configuration change that alters the capture source invalidates a previously learned offset. In particular, a change to `EncSinCosHWEn` (the encoder/lock-event capture-source selector) clears the "initialized" condition and returns [LockEventStat](LockEventStat.md) to the not-initialized state, so [LockEventInit](LockEventInit.md) must be run again before arming. The firmware can only detect some such changes automatically, so as a rule run [LockEventInit](LockEventInit.md) after any change to the lock/event source configuration and before the capture source starts moving.
 
 ## Examples
 

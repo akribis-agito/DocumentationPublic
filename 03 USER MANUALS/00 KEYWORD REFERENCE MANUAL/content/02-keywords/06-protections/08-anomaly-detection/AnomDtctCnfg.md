@@ -44,9 +44,23 @@ This keyword is available from v5 (central-i).
 | 2 | **Filter pole frequency**, in Hz. Sets the cut-off of the second-order low-pass filter applied to the monitored signal. If left at or below `0` it defaults to 200 Hz. Writing this element recalculates the filter immediately. |
 | 10 | **Stop behavior on detection.** `0` = disable the axis with fault code 1067 on [ConFlt](../../07-status-and-faults/ConFlt.md); `1` = command a controlled stop instead of tripping a fault. |
 | 11 | **Motion case** (reserved). Present in the configuration array but not acted on by the detector in the firmware consulted for this reference. |
-| 12 | **Motion sequence.** Selects which monitored-motion pattern the detector tracks. The detector steps through the motions in the selected sequence as successive point-to-point moves complete, and applies the matching section of the [AnomDtctUL](AnomDtctUL.md) / [AnomDtctLL](AnomDtctLL.md) tables to each. |
+| 12 | **Motion sequence.** Selects which monitored-motion pattern the detector tracks. The detector steps through the motions in the selected sequence on the start of each new move, and applies the matching section of the [AnomDtctUL](AnomDtctUL.md) / [AnomDtctLL](AnomDtctLL.md) tables to each. See the value table below. |
 
 Indices 3 through 9 are not used by the detector in the firmware consulted for this reference.
+
+The motion-sequence value in element 12 selects a single monitored motion or a chain of motions. As each successive move begins, the detector advances to the next motion in the chain and wraps back to the start of the chain at the end of the sequence:
+
+| Value | Motion sequence |
+| --- | --- |
+| 0 | motion 0 only (default) |
+| 1 | motion 1 only |
+| 2 | motion 2 only |
+| 3 | motion 3 only |
+| 4 | motions 0 then 1 |
+| 5 | motions 0, 1, 2 |
+| 6 | motions 0, 1, 2, 3 |
+
+The meaningful range is 0–6; the default is 0 (track single motion 0).
 
 The monitored signal is sampled once per control cycle, filtered, and reported in [AnomDtctSt](AnomDtctSt.md) element 2. The expected band for the active motion is taken from the upper/lower limit tables, advancing one table point every [AnomDtctGap](AnomDtctGap.md) cycles for that motion.
 
@@ -56,7 +70,7 @@ The monitored signal is sampled once per control cycle, filtered, and reported i
 AAnomDtctCnfg[1]=<complex CAN code of monitored signal>   ; choose the source
 AAnomDtctCnfg[2]=150     ; filter pole at 150 Hz
 AAnomDtctCnfg[10]=1      ; controlled stop on detection (no fault)
-AAnomDtctCnfg[12]=1      ; select motion sequence 1
+AAnomDtctCnfg[12]=1      ; track single motion 1 only
 AAnomDtctCnfg[2]         ; read the configured filter pole
 ```
 

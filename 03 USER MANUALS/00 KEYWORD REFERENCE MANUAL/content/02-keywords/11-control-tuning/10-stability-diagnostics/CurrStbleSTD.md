@@ -45,7 +45,9 @@ The detector tracks the spread of the measured motor current over a sliding wind
 
 When the motor-current spread is above this combined limit *and* the tracking error exceeds its threshold ([CurrStbleErr](CurrStbleErr.md)), the detector turns the motor off and logs fault code 1071, visible in [ConFlt](../../07-status-and-faults/ConFlt.md).
 
-The percentage is scaled against the peak current limit and squared internally (because spread is compared on a variance basis), so the comparison floor tracks [PeakCL](../../06-protections/02-current-and-voltage/PeakCL.md) automatically. The value is saved to flash and can be changed while the axis is in motion and while the motor is on; it is applied the next time the detector is (re)enabled with the motor on. The active spread threshold can be read back from element 4 of [CurrStbleStat](CurrStbleStat.md).
+The percentage is scaled against the peak current limit and squared internally (because spread is compared on a variance basis), so the comparison floor tracks [PeakCL](../../06-protections/02-current-and-voltage/PeakCL.md) automatically. The value is saved to flash and can be changed while the axis is in motion and while the motor is on. The spread threshold is recomputed immediately on write — including while the detector is already running and the motor is on — and takes effect on the next control cycle; no re-enable is required.
+
+Element 4 of [CurrStbleStat](CurrStbleStat.md) reports the combined/effective trip limit — the larger of the `CurrStbleSTD`-derived floor and a fixed multiple of the commanded-reference spread — not the `CurrStbleSTD` floor by itself.
 
 ## Examples
 

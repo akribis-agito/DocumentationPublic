@@ -45,6 +45,8 @@ A function's arguments live on the call stack relative to the current frame. `Pr
 
 Reading an index returns that slot's value; writing an index stores into it, which is how a function keeps local variables and how it prepares output values before [Return](Return.md). The index is resolved against the *current* frame, so the values automatically refer to the right function even when functions are nested.
 
+`ProgArgThis` is only valid from within a running user program (it addresses the current call frame); issuing it from a plain communication command is rejected with a run-time error.
+
 The array spans the function's combined argument and local-variable space: up to 20 entries on smaller models and up to 26 on larger ones (the sum of input arguments, output arguments and local variables for one function). Reading an index beyond what the current frame contains raises a "no operands in call stack" error.
 
 The integer form shown here is the most common; matching variant keywords read or write the same slots as floating-point, 64-bit integer or double-precision values.

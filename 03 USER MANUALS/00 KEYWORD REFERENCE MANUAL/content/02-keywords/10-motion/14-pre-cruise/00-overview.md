@@ -35,7 +35,7 @@ When `Begin` is issued the controller checks the geometry before starting. If a 
 |---|---|
 | Total stroke and pre-cruise stroke point in the same direction | rejected — pre-cruise target must lie on the way to the final target (error 381) |
 | Total stroke is longer than the pre-cruise stroke | rejected — the final target must be beyond the pre-cruise target (error 383) |
-| Pre-cruise stroke is long enough to reach the pre-cruise speed and slow back to cruise speed | rejected — pre-cruise stroke insufficient (error 384) |
+| Pre-cruise stroke is long enough to accelerate from rest to the cruise speed | rejected — pre-cruise stroke insufficient (error 384) |
 | Remaining stroke is long enough to decelerate to rest | rejected — stopping stroke insufficient (error 385) |
 
 See the [instruction error codes](../../../04-error-codes/instruction-error-codes.md) page for the meaning of instruction error codes returned by `Begin`.

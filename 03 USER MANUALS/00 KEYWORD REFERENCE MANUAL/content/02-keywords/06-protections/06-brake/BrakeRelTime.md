@@ -43,11 +43,10 @@ The value is a time in **milliseconds**, settable from about **10 ms to 800 ms**
 In [BrakeMode](BrakeMode.md) = 3, the standard motor-on sequence:
 
 1. enables the motor;
-2. commands the static brake to release (energize) and clears the lock request in [StatReg](../../07-status-and-faults/StatReg.md) bit 29;
-3. arms a timer for `BrakeRelTime` and waits for it to elapse;
-4. only then returns, allowing motion to be commanded.
+2. commands the static brake to release (energize) and arms a timer for `BrakeRelTime`;
+3. when that timer elapses, the lock request in [StatReg](../../07-status-and-faults/StatReg.md) bit 29 is cleared and motion is allowed.
 
-Because the wait happens inside the enable sequence, motion you queue immediately after enabling the axis will not begin until the brake-release window has passed.
+The bit-29 clear is performed when the release timer elapses, not at the moment the release is commanded. Until then, motion you queue immediately after enabling the axis will not begin — it waits for the brake-release window to pass.
 
 `BrakeRelTime` protects the **enable → motion** transition; the complementary [BrakeLockTime](BrakeLockTime.md) protects the **stop → disable** transition. Do not set `BrakeRelTime` to 0 in mode 3 — the timing logic relies on a non-zero delay; keep it at least a few milliseconds (the minimum is around 10 ms).
 

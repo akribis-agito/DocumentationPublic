@@ -44,7 +44,7 @@ When [VecJerkMode](VecJerkMode.md) = 1, the path velocity is produced by an S-cu
 
 The value is read at `Begin` to initialise the profiler and is also re-applied each control cycle, so a change made mid-move takes effect on the following cycle.
 
-There is an internal upper bound: if the requested jerk is so high that the acceleration would reach its limit within a single control cycle, the controller clamps the effective jerk to the largest value that still fits one cycle. Setting a very large `VecJerkInAcc` therefore makes the acceleration ramp essentially immediate (close to a trapezoidal corner) rather than producing an out-of-range result.
+There is an internal upper bound on the effective jerk. If the requested jerk is large enough that the acceleration would build up to its limit within roughly two control cycles, the controller clamps it to that ceiling. Setting a very large `VecJerkInAcc` therefore makes the acceleration ramp essentially immediate (close to a trapezoidal corner) rather than producing an out-of-range result.
 
 The usable range and default are given in the frontmatter; the minimum is a small positive value, so jerk limiting in the acceleration phase is always finite when the mode is on.
 

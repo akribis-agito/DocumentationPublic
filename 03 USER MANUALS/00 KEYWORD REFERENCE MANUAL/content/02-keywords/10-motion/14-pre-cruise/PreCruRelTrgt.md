@@ -51,7 +51,7 @@ A pre-cruise stage is only run when the pre-cruise speed is higher than the crui
 |---|---|
 | Pre-cruise stroke points toward the final target | rejected — total and pre-cruise stroke must be in the same direction (error 381) |
 | Final target is beyond the pre-cruise target | rejected — total stroke must be longer than the pre-cruise stroke (error 383) |
-| Pre-cruise stroke long enough to reach pre-cruise speed and slow back to cruise speed | rejected — pre-cruise stroke insufficient (error 384) |
+| Pre-cruise stroke long enough to accelerate from rest to the cruise speed | rejected — pre-cruise stroke insufficient (error 384) |
 
 ## Examples
 
@@ -64,7 +64,7 @@ APreCruiseSpd=800000   ; faster pre-cruise speed
 APreCruRelTrgt=200000  ; run fast for the first 200000 units
 ARelTrgt=500000        ; total move distance
 ABegin                 ; start the move
-APreCruRelTrgt[1]      ; read back the pre-cruise distance
+APreCruRelTrgt         ; read back the pre-cruise distance
 ```
 
 To switch a configured axis back to an absolute pre-cruise target, clear this keyword:

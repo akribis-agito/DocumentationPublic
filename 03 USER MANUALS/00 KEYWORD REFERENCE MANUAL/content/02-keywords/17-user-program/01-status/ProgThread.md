@@ -38,6 +38,8 @@ This keyword is available from v5 (central-i).
 
 The controller schedules the active threads in a rotating order, executing a line of one thread each cycle (subject to each thread's [ProgPriority](../02-program-execution/ProgPriority.md)). `ProgThread` reports the number of whichever thread is the current one. Thread numbering starts at `1`; the main thread is thread `1`. When read from inside a running user program, the value is that program's own thread number, which makes it the natural way for shared code to discover which thread it is running on.
 
+`ProgThread` is intended to be read from within a running program, where it returns that program's own thread number. A value read directly by a host does not identify a specific running thread.
+
 The default value is `1`. The reported number stays within the supported thread range for the model.
 
 ## Examples

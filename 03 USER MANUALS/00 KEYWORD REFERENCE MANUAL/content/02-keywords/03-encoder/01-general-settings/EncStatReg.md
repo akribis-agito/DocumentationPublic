@@ -44,17 +44,17 @@ The controller reads the encoder-interface status each cycle and retains only th
 |---|---|---|
 | 0 | `0x00000001` | Encoder did not respond / looks disconnected. |
 | 1 | `0x00000002` | Encoder error bit asserted (read-head or scale problem reported by the encoder). |
-| 2 | `0x00000004` | Encoder warning asserted (a degraded but non-fatal condition reported by the encoder). |
+| 3 | `0x00000008` | Encoder warning asserted (a degraded but non-fatal condition reported by the encoder). |
 | 4 | `0x00000010` | CRC of the encoder data frame failed (likely high noise on the link). |
 
-The encoder warning (bit 2, mask `0x00000004`) is signalled separately from the error bit but is handled together with it for fault purposes. To confirm a clean encoder, test for the absence of all of these health bits rather than relying on any single bit.
+The encoder warning (bit 3, mask `0x00000008`) is signalled separately from the error bit but is handled together with it for fault purposes. To confirm a clean encoder, test for the absence of all of these health bits rather than relying on any single bit.
 
 How the bits are acted upon depends on [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md), the abnormal-condition timeout:
 
 - **Disconnect (bit 0, without CRC):** if the motor is on, the axis is taken off immediately and [ConFlt](../../07-status-and-faults/ConFlt.md) reports fault `1070`. On a brushless motor the commutation status is also invalidated (it must re-phase), because the motor may have moved while the encoder was disconnected.
 - **CRC error (bit 4):** while the condition persists the controller extrapolates the position and counts the cycles. If the condition lasts longer than [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md) cycles and the motor is on, the axis is taken off and [ConFlt](../../07-status-and-faults/ConFlt.md) reports fault `1069`.
 - **Error or warning (bit 1, or the warning condition):** handled the same way against the same timeout; on expiry [ConFlt](../../07-status-and-faults/ConFlt.md) reports fault `1068`.
-- When no abnormal bit is present, the error counters reset and the affected status bits are cleared.
+- When no abnormal bit is present, the error counters reset.
 
 Setting [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md) to `-1` disables the error/warning/CRC monitoring (the bits may still be reported, but they do not trigger a fault). The disconnect handling is independent of `EncAbsErrTime`.
 
