@@ -14,7 +14,7 @@
 
   <!-- cruise -->
   <line x1="60" y1="80" x2="300" y2="80" stroke="#5b8def" stroke-width="2"/>
-  <text x="64" y="74" fill="#5b8def" font-size="11">cruise</text>
+  <text x="150" y="74" fill="#5b8def" font-size="11">cruise</text>
 
   <!-- command marker -->
   <line x1="300" y1="55" x2="300" y2="210" stroke="#e0736b" stroke-dasharray="3,3"/>

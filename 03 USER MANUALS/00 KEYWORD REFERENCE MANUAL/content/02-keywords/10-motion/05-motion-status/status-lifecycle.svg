@@ -28,11 +28,11 @@
 
   <!-- arrows -->
   <line x1="120" y1="113" x2="160" y2="113" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
-  <text x="140" y="103" text-anchor="middle" fill="#5b6b7b" font-size="11">Begin</text>
+  <text x="140" y="82" text-anchor="middle" fill="#5b6b7b" font-size="11">Begin</text>
   <line x1="280" y1="113" x2="320" y2="113" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
-  <text x="300" y="103" text-anchor="middle" fill="#5b6b7b" font-size="11">profile ends</text>
+  <text x="300" y="82" text-anchor="middle" fill="#5b6b7b" font-size="11">profile ends</text>
   <line x1="440" y1="113" x2="480" y2="113" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
-  <text x="460" y="103" text-anchor="middle" fill="#5b6b7b" font-size="11">InTargetTime</text>
+  <text x="460" y="82" text-anchor="middle" fill="#5b6b7b" font-size="11">InTargetTime</text>
 
   <text x="350" y="180" text-anchor="middle" fill="#5b6b7b" font-size="11">Stop / Abort clears the in-motion bits; MotionReason records why the move ended.</text>
 </svg>

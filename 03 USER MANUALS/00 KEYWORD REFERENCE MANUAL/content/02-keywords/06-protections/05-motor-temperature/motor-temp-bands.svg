@@ -28,5 +28,5 @@
   <rect x="160" y="236" width="300" height="40" rx="6" fill="#f4f7fb" stroke="#9fb4cc" stroke-width="1.2"/>
   <text x="310" y="261" text-anchor="middle">&lt; 0.88 &#215; MaxMotorTemp &#8594; no warning</text>
 
-  <text x="20" y="300" fill="#555" font-size="11">Warning level is reported in StatReg bits 15&#8211;16; with MotorTempUsed = 0 the reading and all checks are skipped.</text>
+  <text x="20" y="313" fill="#555" font-size="11">Warning level is reported in StatReg bits 15&#8211;16; with MotorTempUsed = 0 the reading and all checks are skipped.</text>
 </svg>

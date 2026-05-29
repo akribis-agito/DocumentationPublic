@@ -54,6 +54,7 @@ A larger `DualStuckTime` tolerates longer transient divergences (e.g. during agg
 
 - **Motor off:** the dual-loop check stops running and its internal counter holds (freezes) its last value. The counter is cleared only at power-up and whenever a sample falls back within tolerance while the motor is on, not on motor-off.
 - **`DualLoopOn = 0`:** the entire dual-stuck path is skipped — the counter never runs.
+- **Pseudo dual-loop ([DualEncSwapOn](../../../11-control-tuning/02-dual-loop-control/DualEncSwapOn.md) = 1):** the check is suspended while pseudo dual-loop is active and runs only while true dual-loop is engaged ([DualLoopStat](../../../11-control-tuning/02-dual-loop-control/DualLoopStat.md) = 2); under range-limited switching ([DualEncMode](../../../11-control-tuning/02-dual-loop-control/DualEncMode.md) = 1) it is therefore active only inside the true dual-loop range. With `DualEncSwapOn = 0` it is always active whenever `DualLoopOn` is non-zero.
 - **`DualStuckTime = 0`:** the counter reaches the limit on the first over-tolerance sample, so the protection trips immediately (no debouncing).
 - **Range overflow:** writes outside `0…2147483647` are rejected with an out-of-range error; the stored value is left unchanged.
 - **Clearing the fault:** ConFlt code 1049 clears on re-enable ([MotorOn](../../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../../07-status-and-faults/ErrLog.md) entry persists.

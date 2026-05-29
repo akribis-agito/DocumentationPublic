@@ -56,7 +56,7 @@ When the motor is **on**, the smoothing buffer must also be re-seeded with the n
 
 `SetPosition` is rejected (no change made) if any of the following hold:
 
-- Encoder **error mapping** is active — disable it first ([MapType](../../04-error-mapping/MapType.md)).
+- Encoder **error mapping** is active — disable it first ([MapType](../../04-error-mapping/MapType.md)). The rejection (error code **83**, "assigning a value to position is not allowed while error mapping is activated") is keyed to the **internal** mapping state, not the user-written [MapType](../../04-error-mapping/MapType.md). After you write `MapType = 0`, mapping ramps down over [MapErrOnStep](../../04-error-mapping/MapErrOnStep.md) cycles, and `SetPosition` stays rejected for the whole ramp-down until the internal type has fully reverted to off. With [MapErrOnStep](../../04-error-mapping/MapErrOnStep.md) = 0 the disengage is immediate (one cycle), so `SetPosition` is accepted right away.
 - **Auto-gain** is on (it uses the position filter).
 - The requested value is **outside the software position limits** [RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md) … [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md).
 - The motor is **on** and **input shaping** is on (its buffers are too large to re-seed).

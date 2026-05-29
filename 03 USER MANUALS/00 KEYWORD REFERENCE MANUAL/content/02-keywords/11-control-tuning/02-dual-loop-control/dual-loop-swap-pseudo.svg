@@ -42,8 +42,8 @@
 
   <!-- branch 2: raw to velocity loop -->
   <line x1="740" y1="210" x2="740" y2="248" stroke="#5b6b7b" stroke-width="1.4"/>
-  <line x1="740" y1="248" x2="350" y2="248" stroke="#5b6b7b" stroke-width="1.4"/>
-  <line x1="350" y1="248" x2="350" y2="122" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="740" y1="248" x2="270" y2="248" stroke="#5b6b7b" stroke-width="1.4"/>
+  <line x1="270" y1="248" x2="270" y2="122" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
   <text x="430" y="240" fill="#5b6b7b">velocity feedback</text>
 
   <text x="410" y="282" text-anchor="middle" fill="#5b6b7b">A single feedback drives both loops; an internal offset is captured at the switch so engaging is bumpless.</text>

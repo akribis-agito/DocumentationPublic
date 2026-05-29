@@ -29,7 +29,7 @@
 
   <!-- q axis -->
   <line x1="280" y1="180" x2="200" y2="65" stroke="#e0736b" stroke-width="2.2" marker-end="url(#arrowRed)"/>
-  <text x="140" y="60" font-size="13" fill="#e0736b" font-weight="bold">q axis (Iq, torque)</text>
+  <text x="45" y="60" font-size="13" fill="#e0736b" font-weight="bold">q axis (Iq, torque)</text>
 
   <!-- angle arc theta -->
   <path d="M 340 180 A 60 60 0 0 1 329 146" fill="none" stroke="#444" stroke-width="1"/>

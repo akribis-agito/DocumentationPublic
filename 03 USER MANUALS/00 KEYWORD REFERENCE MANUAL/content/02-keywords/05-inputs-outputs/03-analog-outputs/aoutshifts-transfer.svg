@@ -7,7 +7,7 @@
   <!-- axes -->
   <line x1="60" y1="180" x2="540" y2="180" stroke="#5b6b7b" stroke-width="1"/>
   <line x1="300" y1="50" x2="300" y2="300" stroke="#5b6b7b" stroke-width="1"/>
-  <text x="530" y="200" text-anchor="end">parameter (internal units)</text>
+  <text x="530" y="218" text-anchor="end">parameter (internal units)</text>
   <text x="308" y="60" text-anchor="start">analog output (mV)</text>
 
   <!-- y ticks at +/-5000 -->

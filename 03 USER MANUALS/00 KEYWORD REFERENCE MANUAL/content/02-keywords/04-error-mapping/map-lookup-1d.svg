@@ -52,8 +52,8 @@
   <text x="260" y="252" text-anchor="middle" font-size="11" fill="#e0736b">interpolate between e[2] and e[3]</text>
 
   <!-- clamps -->
-  <text x="60" y="92" font-size="10" fill="#5b6b7b">below grid &#8594; clamp to e[1]</text>
-  <text x="700" y="92" text-anchor="end" font-size="10" fill="#5b6b7b">above grid &#8594; clamp to e[L]</text>
+  <text x="60" y="80" font-size="10" fill="#5b6b7b">below grid &#8594; clamp to e[1]</text>
+  <text x="700" y="80" text-anchor="end" font-size="10" fill="#5b6b7b">above grid &#8594; clamp to e[L]</text>
 
   <!-- formula block -->
   <rect x="40" y="280" width="680" height="64" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>

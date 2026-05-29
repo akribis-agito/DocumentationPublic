@@ -83,3 +83,23 @@ The following is the list of controller error codes and their descriptions.
 | 1072 | High noise/jitter detected (v5 only) |
 | 1080 | No phasing is detected (v5 only) |
 | 1081 | CPU background loop watchdog timeout |
+
+## Trip conditions for the common protections
+
+Each protection that disables an axis has a defined trip condition tied to a customer keyword. Some faults trip on a single sample that crosses the limit; others must hold the condition for a debounce period (counted in controller samples) before the fault is raised. The most frequently seen codes are summarised below; the limits named here are the documented keywords you adjust.
+
+| Code | Trips when | Debounce |
+|---|---|---|
+| 1003 | The hardware reports the main encoder disconnected or in error | Immediate (hardware) |
+| 1007 | Speed stays at/below [StuckVel](../02-keywords/06-protections/03-motion/motor-stuck-protection/StuckVel.md) while the motor current stays at/above [StuckCurr](../02-keywords/06-protections/03-motion/motor-stuck-protection/StuckCurr.md) | Held for [StuckTime](../02-keywords/06-protections/03-motion/motor-stuck-protection/StuckTime.md) samples |
+| 1008 | Bus voltage exceeds [MaxVBus](../02-keywords/06-protections/02-current-and-voltage/MaxVBus.md) | Held for [MaxVBusTime](../02-keywords/06-protections/02-current-and-voltage/MaxVBusTime.md) samples |
+| 1009 | Bus voltage at/below [MinVBus](../02-keywords/06-protections/02-current-and-voltage/MinVBus.md) | Immediate (single sample) |
+| 1013–1016 | A phase or motor current exceeds its over-current limit | Held for 4 consecutive samples |
+| 1018 | Power-stage temperature exceeds [MaxPwrTemp](../02-keywords/06-protections/07-board-temperature/MaxPwrTemp.md) | Single sample |
+| 1019 | Velocity feedback magnitude exceeds 1.25 × [MaxVel](../02-keywords/06-protections/03-motion/general-maximum-limits/MaxVel.md) | Single sample |
+| 1020 | Position error magnitude exceeds [MaxPosErr](../02-keywords/06-protections/03-motion/general-maximum-limits/MaxPosErr.md) (open-loop variant `1055`) | Single sample |
+| 1021 | Velocity error magnitude exceeds [MaxVelErr](../02-keywords/06-protections/03-motion/general-maximum-limits/MaxVelErr.md) (open-loop variant `1056`) | Single sample |
+| 1023 | Bus voltage exceeds the absolute limit [MaxVBusAbs](../02-keywords/06-protections/02-current-and-voltage/MaxVBusAbs.md) | Immediate (no debounce) |
+| 1040 | Motor temperature exceeds [MaxMotorTemp](../02-keywords/06-protections/05-motor-temperature/MaxMotorTemp.md); only when a motor temperature sensor is in use ([MotorTempUsed](../02-keywords/06-protections/05-motor-temperature/MotorTempUsed.md) ≠ 0) | Single sample |
+| 1049 | Dual-loop velocity difference exceeds [DualStuckVel](../02-keywords/06-protections/03-motion/dual-loop-stuck-protection/DualStuckVel.md) | Held for [DualStuckTime](../02-keywords/06-protections/03-motion/dual-loop-stuck-protection/DualStuckTime.md) samples |
+| 1060 | Product temperature ([BoardTemp](../02-keywords/06-protections/07-board-temperature/BoardTemp.md)) exceeds a fixed internal limit (not adjustable) | Single sample |

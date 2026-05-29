@@ -22,6 +22,6 @@
   <line x1="172" y1="100" x2="260" y2="100" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
   <line x1="442" y1="100" x2="530" y2="100" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
 
-  <text x="352" y="80" text-anchor="middle" font-size="11" fill="#5b6b7b">tail</text>
+  <text x="352" y="60" text-anchor="middle" font-size="11" fill="#5b6b7b">tail</text>
   <text x="352" y="158" text-anchor="middle" font-size="11" fill="#5b6b7b">push at the tail, consume from the head each cycle</text>
 </svg>

@@ -30,13 +30,13 @@
 
   <!-- links -->
   <g stroke="#5b6b7b" stroke-width="1.6" fill="none" marker-end="url(#arrow)">
-    <line x1="108" y1="128" x2="426" y2="95"/>
+    <line x1="78" y1="108" x2="426" y2="95"/>
     <line x1="182" y1="128" x2="426" y2="205"/>
   </g>
   <g stroke="#5b6b7b" stroke-width="1.2" fill="none" marker-end="url(#arrow)">
     <line x1="426" y1="108" x2="190" y2="138"/>
     <line x1="426" y1="218" x2="190" y2="146"/>
   </g>
-  <text x="300" y="100" text-anchor="middle" font-size="10" fill="#5b6b7b">link: cyclic data + offline mailbox</text>
+  <text x="300" y="88" text-anchor="middle" font-size="10" fill="#5b6b7b">link: cyclic data + offline mailbox</text>
   <text x="300" y="252" text-anchor="middle" font-size="10" fill="#5b6b7b">position / status / identity back to master</text>
 </svg>
