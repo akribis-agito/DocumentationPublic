@@ -33,6 +33,14 @@ If CurrCmdSrc = 0 or 3, upon current mode entry, the current reference (CurrRef)
 
 If CurrCmdSrc = 1 or 2, upon current mode entry, the CurrRef will successively follow each CurrCmdVal element value according to CurrCmdHTime timing table. User can also define individual ramp rate to each CurrCmdVal value through CurrCmdSlope. The timing only starts once CurrRef equals CurrCmdVal. These following examples illustrate its process flow.
 
+Whatever the source, the generated current reference is not sent to the current loop unchanged. After the source value is produced it passes through the same final output stage used in every mode that drives current:
+
+1.  **Current limiting** — the reference is clamped by the limits selected with [CurrLimMode](../../06-protections/02-current-and-voltage/CurrLimMode.md) (fixed [CurrLimFwd](../../06-protections/02-current-and-voltage/CurrLimFwd.md)/[CurrLimRev](../../06-protections/02-current-and-voltage/CurrLimRev.md), or analog torque-limit inputs), then by the absolute symmetric limit ±[PeakCL](../../06-protections/02-current-and-voltage/PeakCL.md) (which drops to the effective continuous value while I²t limiting is active). When the command is clamped, the current-saturation status ([StatReg](../../07-status-and-faults/StatReg.md) bit 21) is set.
+
+2.  **Direction** — the limited reference is then inverted by [CurrDir](../../09-current-and-voltage/02-motor-variables/CurrDir.md) before it reaches the current loop.
+
+This stage is gated by current control being enabled, not by the operation mode, so a commanded value above the active limit is clipped regardless of which CurrCmdSrc produced it.
+
 **Example 1:** Holding first two CurrCmdVal values for limited time
 
 | Index | CurrCmdHTime \[Index\] | CurrCmdVal \[Index\] |

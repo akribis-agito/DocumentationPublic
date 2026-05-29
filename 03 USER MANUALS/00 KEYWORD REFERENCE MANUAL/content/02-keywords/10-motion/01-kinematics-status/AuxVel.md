@@ -47,7 +47,7 @@ $$
 
 where $T_{s}$ is the controller sampling time. This is implemented as the per-cycle change of [AuxPos](AuxPos.md) scaled by the sample frequency, i.e. `ΔAuxPos × samples-per-second`, which equals `ΔAuxPos / Tₛ`. This is the same single-difference method used for the main `Vel[2]`; there is no moving-average or 1/T variant for the auxiliary encoder.
 
-In **dual-loop** ([DualLoopOn](../../11-control-tuning/02-dual-loop-control/DualLoopOn.md) = 1) `AuxVel` (scaled by [DualLoopFact](../../11-control-tuning/02-dual-loop-control/DualLoopFact.md)) becomes the velocity-loop feedback [Vel](Vel.md)`[1]`.
+In **dual-loop** ([DualLoopOn](../../11-control-tuning/02-dual-loop-control/DualLoopOn.md) = 1) `AuxVel` becomes the velocity-loop feedback [Vel](Vel.md)`[1]`. When [DualLoopFact](../../11-control-tuning/02-dual-loop-control/DualLoopFact.md) ≥ 1 the feedback is scaled by $\frac{\text{DualLoopFact}}{65536}$ so `Vel[1]` is expressed in main-encoder units; when `DualLoopFact` < 1 the feedback gain is 1.0, so `Vel[1]` stays in auxiliary-encoder units and the velocity-loop command is scaled by $\frac{1}{\text{DualLoopFact}/65536}$ instead.
 
 ### Edge cases
 

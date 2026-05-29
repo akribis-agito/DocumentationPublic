@@ -45,7 +45,7 @@ Feedback-velocity array; each element is a different velocity-estimation method.
 
 ### Array elements
 
-All elements are in main user units per second. The base estimate is the per-cycle position change scaled by the sample frequency, i.e. `ΔPos × samples-per-second`.
+All elements are in main user units per second. The base estimate is the per-cycle position change scaled by the sample frequency, i.e. `ΔPos × samples-per-second`. Because the sample rate is a power of two, this scaling is implemented as a left-shift (by 14 bits at the standalone sample rate, by 16 bits at the fast-sampling rate) rather than a multiply.
 
 | Index | Method |
 |-------|--------|
@@ -56,22 +56,28 @@ All elements are in main user units per second. The base estimate is the per-cyc
 
 `Vel[0]` is not produced by the control cycle. The keyword is read in axis-prefix syntax as `AVel[n]`.
 
+`Vel[3]` is an exact 32-sample sliding-window average of `Vel[2]`, not an exponential filter: each cycle the oldest of 32 stored samples is replaced with the newest and a running sum is divided by 32. At the standalone sample rate the 32-sample window spans about 2 ms; at the fast-sampling rate it spans about 0.5 ms. The window history and running sum are cleared only once, at controller start-up — they are *not* reset on motor-off or on a fault, so `Vel[3]` carries the last samples across those transitions until the window fills again.
+
 ### How Vel[1] is selected
 
 `Vel[1]` is the velocity used by the velocity loop, so its meaning follows the dual-loop / gantry configuration. Dual-loop takes precedence; if dual-loop is off, gantry overrides on axes A/B; otherwise `Vel[1]` follows the main-encoder derivative.
 
 | Priority | Configuration | `Vel[1]` source |
 |---|---------------|-----------------|
-| 1 | Dual-loop ([DualLoopOn](../../11-control-tuning/02-dual-loop-control/DualLoopOn.md) = 1) | [AuxVel](AuxVel.md) scaled by [DualLoopFact](../../11-control-tuning/02-dual-loop-control/DualLoopFact.md) (the gain $\frac{\text{DualLoopFact}}{65536}$) |
+| 1 | Dual-loop ([DualLoopOn](../../11-control-tuning/02-dual-loop-control/DualLoopOn.md) = 1) | [AuxVel](AuxVel.md) $\times \frac{\text{DualLoopFact}}{65536}$ when [DualLoopFact](../../11-control-tuning/02-dual-loop-control/DualLoopFact.md) $\ge 1$ (`Vel[1]` is in main-encoder units). When `DualLoopFact` $< 1$ the feedback gain is 1.0, so `Vel[1]` stays in auxiliary-encoder units and the velocity-loop *command* ([VelRef](VelRef.md)) is scaled by $\frac{1}{\text{DualLoopFact}/65536}$ instead. |
 | 2 | Analog-tacho dual-loop (`DualLoopOn` = 2) | Filtered analog tacho input |
 | 3 | Gantry on (axes A/B, no dual-loop) | Gantry velocity ([GantryVel](../../12-gantry-control/03-gantry-tuning/GantryVel.md)) |
 | 4 | Normal (no dual-loop, no gantry) | `Vel[2]` — main-encoder derivative |
 
 `Vel[1]` is assigned directly from the selected feedback (it is the raw selected velocity, not separately filtered). The cast is the only post-processing applied; any velocity filtering is done downstream in the velocity controller.
 
+Whether `Vel[1]` (and the velocity reference) is expressed in main-encoder or auxiliary-encoder units depends on [DualLoopFact](../../11-control-tuning/02-dual-loop-control/DualLoopFact.md): with `DualLoopFact` ≥ 1 the feedback is scaled to main-encoder units; with `DualLoopFact` < 1 the feedback is left in auxiliary-encoder units and the command is scaled instead. Both sides are always brought to the same units.
+
 ![Vel[1] feedback selection](vel-feedback-selection.svg)
 
 ### 1/T measurement (Vel[4])
+
+`Vel[1]`, `Vel[2]` and `Vel[3]` are computed in the first half of the control sample, *before* the position, velocity, acceleration and current control filters run, because they feed the control loop. `Vel[4]` is computed in the second half of the sample, *after* the control filters, because its 1/T calculation involves a division that is comparatively slow and the result is used only for display and recording, never for control. [OneOverTOn](OneOverTOn.md) gates only whether that division is performed each cycle (to save processing time): when 1/T measurement is off the division is skipped and `Vel[4]` reports `0`.
 
 > **Note:**
 >

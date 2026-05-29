@@ -51,6 +51,8 @@ The controller generates the current reference according to the value as follows
 
 Any unexpected value forces `CurrRef` to 0.
 
+Whichever source is selected, the generated `CurrRef` then passes through the shared current-output stage: it is clamped by the current limits ([CurrLimMode](../../06-protections/02-current-and-voltage/CurrLimMode.md) / [PeakCL](../../06-protections/02-current-and-voltage/PeakCL.md), setting [StatReg](../../07-status-and-faults/StatReg.md) bit 21 when saturated) and inverted by [CurrDir](../../09-current-and-voltage/02-motor-variables/CurrDir.md) before it reaches the current loop. A value above the active limit is clipped regardless of source.
+
 > **Note:** Values 1 and 2 currently behave identically. Value 3 (master-axis slave drive) exists only in the central-i v5 firmware; the standalone/v4 firmware accepts `CurrCmdSrc` of 0–2 only.
 
 ## Examples

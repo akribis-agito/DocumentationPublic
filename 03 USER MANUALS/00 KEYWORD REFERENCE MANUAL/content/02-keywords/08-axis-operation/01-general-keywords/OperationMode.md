@@ -57,6 +57,7 @@ The control loops read the operation mode each cycle:
 - **Velocity error** is forced to zero unless the mode is position control, velocity control, or force-over-PIV. The velocity-loop integral is only advanced in those modes; in other modes the integral is kept loaded but not used, so switching back is bump-free.
 - In velocity control the velocity reference is taken straight from the analog velocity command, overwriting the position-loop output.
 - The high-position-error and high-velocity-error protections ([MaxPosErr](../../06-protections/03-motion/general-maximum-limits/MaxPosErr.md) / [MaxVelErr](../../06-protections/03-motion/general-maximum-limits/MaxVelErr.md)) only run in the modes where that error is meaningful — they are not evaluated where the error is held at zero.
+- Whichever mode is active, the current reference produced at the bottom of the cascade passes through a shared output stage before reaching the current loop: it is clamped by the current limits ([CurrLimMode](../../06-protections/02-current-and-voltage/CurrLimMode.md) / [PeakCL](../../06-protections/02-current-and-voltage/PeakCL.md), setting [StatReg](../../07-status-and-faults/StatReg.md) bit 21 when saturated) and then inverted by [CurrDir](../../09-current-and-voltage/02-motor-variables/CurrDir.md). This stage is gated only by current control being enabled, so it applies identically in current, velocity, position and force modes.
 
 ### Changing mode
 

@@ -41,11 +41,13 @@ Selects how the axis drives its motor — built-in amplifier or an external ampl
 Because `AmpType` is an axis-scope parameter saved to flash, it cannot be changed while the motor is on or in motion; set it during axis configuration (typically from the PCSuite setup page), then `Save`.
 
 > [!note] Status: partial
-> The frontmatter marks `AmpType` as `partial`. On v4 the firmware range is 0–7; v5 (central-i) extends it to 0–8. Selecting a value the product does not support raises an "AmpType value not allowed for this product" fault.
+> The frontmatter marks `AmpType` as `partial`. On v4 the firmware range is 0–7; v5 (central-i) extends it to 0–8. Selecting a value the product does not support is rejected at motor-on with controller fault [1053](../../04-error-codes/controller-error-codes.md) ("AmpType value not allowed for this product").
 
 ## How it works
 
-`AmpType` decides whether the axis closes its **own current loop** or delegates it. For the built-in PWM amplifier and the linear-adapter the controller runs the full internal current/commutation loop and drives the power stage directly. For every other mode the axis is flagged as **driven externally**: the internal current loop is skipped and the controller only emits a command signal (analog current, analog velocity, or pulse-direction) for the external amplifier to act on. Changing `AmpType` re-arms commutation for a brushless motor (the [StatReg](../07-status-and-faults/StatReg.md) commutation bit is cleared until re-phasing completes).
+`AmpType` decides whether the axis closes its **own current loop** or delegates it. For the **internally-commutated** modes — built-in PWM amplifier (0), linear adapter (7), and (v5) digital SPI (8) — the controller runs the full internal current/commutation loop and either drives the power stage directly (0) or emits the resulting phase-current references for an external power stage (7, 8). For the remaining modes the axis is flagged as **driven externally**: the internal current loop is skipped and the controller only emits a command signal (analog current, analog velocity, or pulse-direction) for the external amplifier to close the loop on.
+
+Changing `AmpType` re-arms commutation **only for the internally-commutated modes** on a brushless motor: the [StatReg](../07-status-and-faults/StatReg.md) commutation bit is cleared and re-phasing is required before motor-on. For the externally-driven modes the axis is no longer treated as a brushless motor for commutation, so this re-arm is skipped.
 
 | AmpType | Amplifier mode | Current loop |
 |----|----|----|
@@ -59,10 +61,10 @@ Because `AmpType` is an axis-scope parameter saved to flash, it cannot be change
 
 In **v5 (central-i)** two more modes exist:
 
-| AmpType | Amplifier mode |
-|----|----|
-| 6 | Digital pulse-direction command with position feedback. |
-| 8 | Digital SPI phase-current reference (IaRef/IbRef) command. |
+| AmpType | Amplifier mode | Current loop |
+|----|----|----|
+| 6 | Digital pulse-direction command with position feedback. Driven externally. | External |
+| 8 | Digital SPI: the controller runs its internal commutation/current loop and outputs the two phase-current references ([IaRef](../09-current-and-voltage/02-motor-variables/IaRef.md)/[IbRef](../09-current-and-voltage/02-motor-variables/IbRef.md)) as digital SPI codes — the digital counterpart of the analog linear adapter (mode 7). Because it stays internally commutated, commutation/auto-phasing and current-loop tuning apply as for a brushless motor. | Internal |
 
 > [!note]
 > Value 6 falls in the v4 0–7 range numerically but mode 6 is only available on v5; on v4, modes 6 and 8 are not available.
@@ -70,6 +72,19 @@ In **v5 (central-i)** two more modes exist:
 ### Output scaling for the external modes
 
 For the analog command modes (2, 5, and the linear adapter 7, and built-in linear 4) the analog-output voltage is the reference times a fixed factor `10000 / FullScale` (so full-scale reference → 10 000 mV = 10 V). The factor is recomputed whenever `AmpType`, [AAmpFullScale](AAmpFullScale.md), or [LAmpFullScale](LAmpFullScale.md) changes. When the motor is off, the analog output is forced to zero. See [AAmpFullScale](AAmpFullScale.md) for the per-mode units and worked example.
+
+### Allowed values per remote unit (v5 central-i)
+
+On v5 (central-i), the connection manager validates `AmpType` against the class of remote unit detected on the link:
+
+| Remote-unit class | Allowed `AmpType` |
+|---|---|
+| Built-in amplifier unit | 0 (built-in PWM) |
+| Analog / pulse-direction adapter | 2 (analog current), 3 (PD), 5 (analog velocity), 6 (PD with feedback) |
+| Linear / digital-SPI adapter | 7 (linear adapter), 8 (digital SPI) |
+| Remote I/O unit | any `AmpType` |
+
+If the configured `AmpType` does not match the detected unit (or the unit type is unknown), the device is disconnected and its [CIStatus](../01-system/05-central-i/CIStatus.md) / [CIIdentity](../01-system/05-central-i/CIIdentity.md) are cleared. The v4 device set is narrower (it has no mode-6/8 and only one such adapter class mapping to mode 7).
 
 ## Examples
 

@@ -42,7 +42,7 @@ Selects the type of motion performed when `Begin` is issued.
 
 `Begin` reads `MotionMode` and branches on its value. A value of `-1` (invalid selection) is rejected with an error, and each valid value runs its own setup before setting the in-motion bit (bit 0) of [MotionStat](../05-motion-status/MotionStat.md). The modes fall into two families:
 
-- **Indirect** modes — the controller's own profiler generates the trajectory subject to [Speed](../03-kinematics-configuration/Speed.md)/[Accel](../03-kinematics-configuration/Accel.md)/[Decel](../03-kinematics-configuration/Decel.md): jog, PTP, PTP-repetitive, PD-indirect, gear-indirect, joystick-position-indirect. `Begin` rejects these if `|Speed| > MaxVel`.
+- **Indirect** modes — the controller's own profiler generates the trajectory subject to [Speed](../03-kinematics-configuration/Speed.md)/[Accel](../03-kinematics-configuration/Accel.md)/[Decel](../03-kinematics-configuration/Decel.md): jog, PTP, PTP-repetitive, PD-indirect, gear-indirect, eCam-indirect, joystick-position-indirect. `Begin` rejects these with error code 271 if `|Speed|` exceeds [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md). On central-i v5, `Begin` additionally rejects jog and the PTP-family modes (PTP, PTP-repetitive, and the v5 sine PTP modes 20/21) with error code 324 if `Accel` or `Decel` exceeds [MaxAcc](../../06-protections/03-motion/general-maximum-limits/MaxAcc.md). The MaxAcc gate does **not** apply to the PD/gear/eCam/joystick indirect modes.
 - **Direct** modes — the reference is driven directly by the user's position/velocity commands (pulse-and-direction direct, gear direct, ECAM direct, FIFO, slave, CNCA/CNCB, vector, spline buffer, joystick-velocity).
 
 The following table shows the types of motion described by `MotionMode`.
@@ -79,7 +79,7 @@ The following table shows the types of motion described by `MotionMode`.
 | Mode 20 | not defined | **sine point-to-point profile** |
 | Mode 21 | not defined | **sine point-to-point profile (repetitive)** |
 
-v5 adds two sine-profile point-to-point modes. **v5 is central-i only.**
+v5 adds two sine-profile point-to-point modes. Like the other PTP-family modes, the sine modes (20/21) are gated by `Begin` on both [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md) (error 271) and [MaxAcc](../../06-protections/03-motion/general-maximum-limits/MaxAcc.md) (error 324). **v5 is central-i only.**
 
 ## Examples
 

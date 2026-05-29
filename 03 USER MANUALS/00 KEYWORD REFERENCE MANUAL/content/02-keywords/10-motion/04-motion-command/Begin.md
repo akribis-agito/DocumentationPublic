@@ -52,9 +52,10 @@ Before any motion-mode handling, `Begin` validates the axis state. The first fai
 | Not in position operation mode | 156 |
 | Static brake locked and in use | 114 |
 | Reference already outside software limits and mode is not jog/PTP/velocity-joystick | 164 |
-| [Speed](../03-kinematics-configuration/Speed.md) exceeds [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md) in an indirect mode (jog/PTP/PTP-rep/PD-indirect/gear-indirect/joystick-pos-indirect) | 271 |
-
-A gantry edge transition that is not yet ready also rejects the command.
+| [Speed](../03-kinematics-configuration/Speed.md) exceeds [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md) in an indirect mode (jog/PTP/PTP-rep/PD-indirect/gear-indirect/eCam-indirect/joystick-pos-indirect) | 271 |
+| (central-i v5) Commanded [Accel](../03-kinematics-configuration/Accel.md) or [Decel](../03-kinematics-configuration/Decel.md) exceeds [MaxAcc](../../06-protections/03-motion/general-maximum-limits/MaxAcc.md) in a jog or PTP-family mode (PTP, PTP-rep, and the v5 sine PTP modes 20/21) | 324 |
+| Gantry transition in progress (the axis is not yet ready for the smoothing transition) | 292 |
+| [MotionMode](../02-motion-configuration/MotionMode.md) is not a valid motion mode | 48 |
 
 ### Mode-specific validation and initialization
 
@@ -131,10 +132,10 @@ If `Begin` was *rejected*, no motion bits ever set — inspect [ErrLog](../../07
 - **Simulation mode (`MotorType` = 5):** allowed; the simulation path still runs the profiler and updates synthetic feedback.
 - **ModRev wrap:** allowed; the wrap continues to be applied to the reference during the move.
 - **Active fault:** rejected because the motor is off.
-- **Already in motion (`ok_in_motion: false`):** the interpreter rejects the command before it reaches the handler.
-- **PTP retargeting with `PTPKeepMoving = 1`:** the original move never reports "done"; issuing `Begin` again with a new target is the intended way to retarget — the profiler ramps to the new target without first stopping.
+- **Already in motion (`ok_in_motion: false`):** the interpreter rejects the command with error 21 (not allowed in motion) before it reaches the handler. The in-motion gate tests the **whole** [MotionStat](../05-motion-status/MotionStat.md) word for non-zero, not just the in-motion bit (bit 0). A leftover or stale status bit — for example the repetitive-stop bit (bit 2) or a multi-axis group-member bit (CNCA bit 10, CNCB bit 13, vector bit 19) — therefore makes the gate read "in motion" and reject `Begin` even with the axis physically at rest.
+- **PTP retargeting with `PTPKeepMoving = 1`:** the original move never reports "done" — the profiler skips its end-of-motion test while `PTPKeepMoving = 1`, so the axis stays in motion. Retarget by writing a new [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) (or [RelTrgt](../13-motion-mode-ptp/RelTrgt.md)) on the fly (both are `ok_in_motion: true`); the profiler ramps to the new target without first stopping. Do **not** re-issue `Begin` to retarget — `Begin` is `ok_in_motion: false` and a second `Begin` during motion is rejected with error 21 (not allowed in motion) before it reaches the handler.
 - **`BeginDInOn = 1`:** `Begin` is accepted and bit 9 of [MotionStat](../05-motion-status/MotionStat.md) (wait-for-input) is set; the profiler does not start until the configured digital input rises.
-- **Gantry:** the gantry transition-in-progress flag rejects `Begin` until the gantry is ready.
+- **Gantry:** while a gantry smoothing transition is in progress the axis is not yet ready, and `Begin` is rejected with error 292 until the gantry is ready.
 - **Multi-axis modes (CNCA, CNCB, vector, spline-buffer):** `Begin` on a member axis arms the master; the per-mode validation differs from PTP.
 
 ## Changes between versions
@@ -143,8 +144,8 @@ In **v5 (central-i)** `Begin` adds two pre-condition checks and supports additio
 
 | | v4 (standalone &amp; central-i) | v5 (central-i) |
 |---|---|---|
-| MaxAcc check | none | rejected if [Accel](../03-kinematics-configuration/Accel.md) or [Decel](../03-kinematics-configuration/Decel.md) exceeds [MaxAcc](../../06-protections/03-motion/general-maximum-limits/MaxAcc.md) (PTP/jog/sine modes) |
-| Commutation check | none | rejected if the motor is not yet phased |
+| MaxAcc check | none | rejected (error 324) if [Accel](../03-kinematics-configuration/Accel.md) or [Decel](../03-kinematics-configuration/Decel.md) exceeds [MaxAcc](../../06-protections/03-motion/general-maximum-limits/MaxAcc.md) (jog / PTP / PTP-rep / sine PTP / sine PTP-rep modes) |
+| Commutation check | none | rejected (error 31) if the motor is not yet phased ([StatReg](../../07-status-and-faults/StatReg.md) commutation bit 0 clear). In gantry mode both the master and its paired axis must be phased |
 | Sine PTP modes | not present | sine PTP and sine PTP-repetitive modes recognized |
 | Position limits / speed | 32-bit | 64-bit |
 

@@ -16,3 +16,14 @@ Below is the summary of all relevant keywords.
 | 6 | [RptWait](RptWait.md) | Dwell time, in milliseconds, between repetitions. |
 
 The running repetition count is reported by [RptCounter](../05-motion-status/RptCounter.md) in the motion-status section.
+
+## Shaping keywords versus limit keywords
+
+Two groups of keywords interact with a move, and they have distinct roles:
+
+- **Shaping keywords** — [Speed](../03-kinematics-configuration/Speed.md), [Accel](../03-kinematics-configuration/Accel.md) and [Decel](../03-kinematics-configuration/Decel.md) define the trajectory the profiler generates in the *profiled* (indirect) modes: the cruise velocity it ramps toward and the acceleration/deceleration slopes it plans. These are the only kinematic values the profiler itself uses to build the trajectory.
+- **Limit keywords** — [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md) and [MaxAcc](../../06-protections/03-motion/general-maximum-limits/MaxAcc.md) are protection ceilings. The profiler does **not** read them when generating the trajectory; they act in two separate places instead:
+  - **At `Begin` (admission check).** [Begin](../04-motion-command/Begin.md) rejects an indirect move whose `Speed` exceeds `MaxVel` with error code 271, and on central-i v5 also rejects a jog or PTP-family move whose `Accel` or `Decel` exceeds `MaxAcc` with error code 324.
+  - **In the velocity loop (continuous clamp).** Every control sample the velocity reference is hard-clamped to ±`MaxVel`; when it clamps, the velocity-saturation bit of [StatReg](../../07-status-and-faults/StatReg.md) (bit 23) is set. Because the clamped reference is the position-controller output plus velocity feedforward — not the raw profiled cruise speed — this clamp can engage even when `Speed` is at or below `MaxVel` (for example, on a large following error). Watch [StatReg](../../07-status-and-faults/StatReg.md) bit 23 and [VelRef](../01-kinematics-status/VelRef.md) to detect it.
+
+The practical rule: keep `Speed` at or below `MaxVel` and (on v5) `Accel`/`Decel` at or below `MaxAcc` so the move passes the `Begin` admission check, and keep margin so the downstream velocity clamp does not engage during transients.

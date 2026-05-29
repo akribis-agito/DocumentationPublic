@@ -62,8 +62,15 @@ $$
 
 producing 6000 mV on the [AOutPort](../05-inputs-outputs/03-analog-outputs/AOutPort.md). In linear-adapter mode (7) the same factor is applied independently to the two phase-current references, driving two analog channels.
 
-> [!note]
-> v5 (central-i) adds `AmpType = 8` (digital SPI phase-current command). On the SPI interface the command is sent as a digital code rather than an analog voltage; the full-scale handling for mode 8 is product-specific — contact Agito.
+### Digital SPI command (AmpType = 8, v5 central-i)
+
+In v5, `AmpType = 8` drives a digital-SPI adapter. The controller still commutates internally and converts the same two phase-current references ([IaRef](../09-current-and-voltage/02-motor-variables/IaRef.md)/[IbRef](../09-current-and-voltage/02-motor-variables/IbRef.md)) as the linear adapter (mode 7), but emits each as a 16-bit SPI code (0…65535) instead of an analog voltage. The scaling factor uses a digital full code rather than 10 000 mV:
+
+$$
+factor\ \left\lbrack \frac{count}{mA} \right\rbrack = \frac{32768}{\text{AAmpFullScale}}
+$$
+
+The mid-code 32768 represents 0 A; a phase current is mapped to `32768 + factor × PhaseCurr` and saturated to the 0…65535 range. A phase current equal to `AAmpFullScale` therefore reaches the top of the range (a half-swing of 32768 counts above mid-code).
 
 ## Examples
 
