@@ -54,7 +54,7 @@ The parameter checksum ([ParamCS](../01-status/ParamCS.md)) is recomputed during
 ## Edge cases
 
 - **Motor on / in motion.** Rejected — the interpreter returns an error. Stop the axis and disable the motor first; the same restriction applies at power-up if the firmware was somehow asked to reload during operation.
-- **Checksum mismatch.** Reported as an error and every flash-saveable parameter is reset to its default rather than half-loaded.
+- **Checksum mismatch.** `Load` reports a checksum error and does not load the stored set. At power-up a checksum mismatch additionally causes every flash-saveable parameter to be reset to its default (rather than a partial set); issued manually, `Load` returns the error and leaves the current live values unchanged.
 - **Firmware upgrade (different parameter layout).** Per-parameter mismatches (array grew/shrank, axis count decreased) are handled gracefully and noted as warnings in [ErrLog](../../07-status-and-faults/ErrLog.md). A parameter that no longer has the `flash` attribute in the new firmware is simply skipped on load.
 - **Central-i disconnect.** `Load` restores the master's own parameters; it does not push them to remote units. Per-port settings ([CIDeviceType](../05-central-i/CIDeviceType.md), [CILinkConfig](../05-central-i/CILinkConfig.md), …) take effect on the next [CIConnect](../05-central-i/CIConnect.md).
 

@@ -53,7 +53,7 @@ On **standalone / v4**, `MaxAcc` is **not implemented as an enforced limit**. Th
 
 ## Changes between versions
 
-On **central-i v5** `MaxAcc` becomes a fully implemented, writable limit: the frontmatter `central-i.v5` override changes it to `access: rw`, `data_type: float32`, `units: user`, `implemented: final`, with a default of `10000000`, and it is usable while the motor is on and in motion. The enforcement logic for this is present only in the central-i v5 firmware.
+On **central-i v5**, `MaxAcc` becomes a writable, enforced limit that is checked when a motion starts. If the commanded acceleration or deceleration of the motion would exceed `MaxAcc`, the controller refuses to begin the move and reports a start-of-motion error (mirroring how [MaxVel](MaxVel.md) gates the commanded Speed). This start-of-motion check applies to point-to-point and jog-style profiled moves; it does not apply to indirect modes (gear, pulse-and-direction, eCam, joystick, CNC), where the acceleration/deceleration is driven by external inputs or a master and is not governed by `MaxAcc`. There is no runtime acceleration clamp or trip — `MaxAcc` only gates the start of a move.
 
 ## Examples
 

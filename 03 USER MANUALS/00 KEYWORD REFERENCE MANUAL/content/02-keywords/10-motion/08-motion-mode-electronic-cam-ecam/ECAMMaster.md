@@ -42,7 +42,7 @@ The master source is resolved once, when ECAM motion starts ([Begin](../04-motio
 
 - The master value is sampled every cycle and the change since the previous cycle is accumulated into an internal master position. Tracking the delta lets ECAM work even when the master source wraps past its numeric limits — useful for endless cam motion (see [ECAMCycles](ECAMCycles.md)) driven by a free-running counter or auxiliary position.
 - The accumulated master position is then mapped, through [ECAMGap](ECAMGap.md), to a fractional index into the cam table; the slave reference is read from [GenData](../../20-arrays/GenData.md) at that index with linear interpolation between entries (see [ECAMGap](ECAMGap.md) for the index calculation).
-- The master can be a 32-bit or 64-bit integer, a single-precision or a double-precision value; the controller reads it in its native type.
+- On **v5** the master can be a 32-bit or 64-bit integer, a single-precision or a double-precision value, and the controller reads it in its native type. On **v4** the master source is always read as a 32-bit value, so a 64-bit, single-precision, or double-precision master source is only read correctly on v5.
 
 If the source keyword's CCC is invalid (unknown keyword, out-of-range axis, out-of-range index, or a command instead of a parameter), the [Begin](../04-motion-command/Begin.md) is rejected with an error and ECAM motion does not start.
 

@@ -36,7 +36,7 @@ Read-only power-stage temperature (°C).
 
 ## Overview
 
-`PwrTemp` reports the temperature, in °C, of the IPM (intelligent power module) inside the power stage. It is read-only, axis-scoped, and not saved to flash. The protection limit is [MaxPwrTemp](MaxPwrTemp.md); the power-stage cooling fan is also driven from this value.
+`PwrTemp` reports the temperature, in °C, of the IPM (intelligent power module) inside the power stage. It is read-only and not saved to flash — non-axis on standalone (one value across axes), per-axis on Central-i. The protection limit is [MaxPwrTemp](MaxPwrTemp.md); the power-stage cooling fan is also driven from this value.
 
 ## How it works
 
@@ -61,7 +61,7 @@ If the STO2 or IPM-fault hardware-protection bits are set, the IPM voltage canno
 
 | Product | Fan ON at | Fan OFF at |
 |---------|-----------|-----------|
-| AG100 | ≥ 50 °C (or during the first 5 ms after power-up) | ≤ 45 °C |
+| AG100 | ≥ 50 °C (or during the first 5 seconds after power-up) | ≤ 45 °C |
 | Central-i | ≥ 50 °C | ≤ 45 °C |
 
 ### Protection

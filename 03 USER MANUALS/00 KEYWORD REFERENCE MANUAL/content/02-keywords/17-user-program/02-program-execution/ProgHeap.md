@@ -1,6 +1,6 @@
 ---
 keyword: ProgHeap
-summary: Dynamic memory heap used by the user program runtime for variable storage.
+summary: Controller-wide, volatile read/write int32 array providing shared storage for the user program and communication.
 availability:
   standalone:
   - v4
@@ -28,23 +28,23 @@ overrides: {}
 ---
 # ProgHeap
 
-Dynamic memory heap used by the user program runtime for variable storage.
+Controller-wide, volatile read/write `int32` array providing shared storage for the user program and communication.
 
 ## Overview
 
-`ProgHeap` is the memory heap used by the user program runtime for variable storage. It is a read/write `int32` array that can be accessed at any time, including over communication, which makes it useful for inspecting or seeding user program variables. It is a non-axis parameter and is not saved to flash, so it is volatile: its contents do not survive a power cycle (the default value is `0`).
+`ProgHeap` is a controller-wide read/write `int32` array that provides shared storage accessible both to the user program and over communication. It can be accessed at any time, including over communication, which makes it useful for exchanging values with a running user program. It is a non-axis parameter and is not saved to flash, so it is volatile: its contents do not survive a power cycle (the default value is `0`).
 
 ## How it works
 
-`ProgHeap` is a single shared storage area for the whole controller, not a per-thread structure — unlike the per-thread call stack ([ProgCallStack](ProgCallStack.md)) and numeric stack ([ProgExpStack](ProgExpStack.md)). It backs the persistent (non-stack) variables a user program allocates and is where those variables physically live, so reading or writing an element directly inspects or sets a program variable.
+`ProgHeap` is a single shared storage area for the whole controller, not a per-thread structure — unlike the per-thread call stack ([ProgCallStack](ProgCallStack.md)) and numeric stack ([ProgExpStack](ProgExpStack.md)). The same elements are visible to the user program and over communication, so it can be used to pass values between them.
 
-The array is 1-indexed: the first usable element is `ProgHeap[1]`, with 50 usable elements (index 0 is reserved). Each element is a 32-bit signed integer, so the value range is -2147483648 to 2147483647. Because it is not saved to flash, the heap is volatile and starts from `0` after each power-up. For storage that survives a power cycle, use the general-data arrays instead (see [GenData](../../20-arrays/GenData.md)).
+The array is 1-indexed: the first usable element is `ProgHeap[1]`, with 50 usable elements (index 0 is reserved so that communication indexes start at 1). Each element is a 32-bit signed integer, so the value range is -2147483648 to 2147483647. Because it is not saved to flash, it is volatile and starts from `0` after each power-up. For storage that survives a power cycle, use the general-data arrays instead (see [GenData](../../20-arrays/GenData.md)).
 
 ## Examples
 
 ```text
-AProgHeap[1]        ; read the first heap element
-AProgHeap[1]=0      ; write the first heap element
+AProgHeap[1]        ; read the first element
+AProgHeap[1]=0      ; write the first element
 ```
 
 ## See also

@@ -78,7 +78,7 @@ Each waveform exists in a **direct** and an **additive** variant (the pulse is d
 | Direct | The preceding signal at the injection point is ignored; the command becomes the injection value alone (for current injection, plus the [InjectCurrDC](InjectCurrDC.md) offset). |
 | Additive | The injection value is summed onto the existing command coming from the upstream loop. |
 
-At appropriate injection locations, direct injection is therefore akin to opening the loop at that point. When a direct waveform is selected, the controller also switches the relevant maximum following-error limits to their open-loop values for the duration of the injection, so that intentionally large open-loop excursions do not trip a following-error fault. Additive injection leaves the normal following-error limits in place.
+At appropriate injection locations, direct injection is therefore akin to opening the loop at that point. When a direct waveform is selected, the controller relaxes the relevant maximum following-error limits to their open-loop values for the duration of the injection, so that intentionally large open-loop excursions do not trip a following-error fault. Which limits are relaxed depends on the injection point: current-command direct injection relaxes the position, velocity and force following-error limits; velocity-command and force-command direct injection relax a subset; position-command direct injection ([InjectPoint](InjectPoint.md) = 2) keeps the normal limits, because the position reference is still being commanded. Additive injection always leaves the normal following-error limits in place.
 
 ![Direct vs additive injection summing](inject-mode.svg)
 

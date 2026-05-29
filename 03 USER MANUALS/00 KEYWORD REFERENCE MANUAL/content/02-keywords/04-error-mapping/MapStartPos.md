@@ -62,7 +62,7 @@ AMapStartPos[1]          ; read the start position of the first dimension
 ### Edge cases
 
 - **Index 0** — invalid; valid indices are `MapStartPos[1]` (1D), `[2]` (2D), `[3]` (3D). `MapStartPos[0]` does not exist.
-- **Motor on / in motion at write** — rejected (`MPNOMOTN`, `MPNOMTR`). Configure with the motor off.
+- **Motor on / in motion at write** — rejected while the motor is on or the axis is in motion. Configure with the motor off.
 - **`MapType = 0`** — the value is stored but not consulted; only the active dimensions of [MapType](MapType.md) are used (1D → only `[1]`; 2D → `[1]` and `[2]`; 3D → all three).
 - **Below the range** — readings ≤ `MapStartPos` clamp to the first correction entry (held flat, no extrapolation).
 - **Beyond the range** — readings ≥ `MapStartPos + (MapLength − 1) × MapPosGap` clamp to the last correction entry.

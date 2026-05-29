@@ -32,7 +32,7 @@ The mode does not run a kinematic profiler, so it is not subject to [Speed](../0
 
 ### Ending the motion
 
-The mode runs until the axis is disabled or the master (axis B) stops moving. Unlike direct gear motion ([MotionMode](../02-motion-configuration/MotionMode.md) `= 5`), this mode does not implement the standard `Stop`/`Abort` deceleration path — to end it, disable the slave axis or set a new `MotionMode` after the motion has ended.
+The mode stays in motion until the axis is disabled or a new `MotionMode` is set; if the master (axis B) stops moving, the follower reference simply stops changing while the axis remains in motion. Unlike direct gear motion ([MotionMode](../02-motion-configuration/MotionMode.md) `= 5`), this mode does not implement the standard `Stop`/`Abort` deceleration path — to end it, disable the slave axis or set a new `MotionMode` after the motion has ended.
 
 ## Availability and restrictions
 

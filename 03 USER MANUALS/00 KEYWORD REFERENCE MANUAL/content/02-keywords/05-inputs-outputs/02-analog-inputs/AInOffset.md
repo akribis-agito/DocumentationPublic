@@ -59,7 +59,7 @@ AAInOffset[1]=0      ; no offset
 
 ### Edge cases
 
-- **Index 0** — invalid; valid indices are `AInOffset[1]`–`AInOffset[4]` (plus `[5]` reserved). `AInOffset[0]` does not exist.
+- **Index 0** — invalid; valid indices are `AInOffset[1]`–`AInOffset[4]`. `AInOffset[0]` is the reserved comm/internal slot (not user-accessible) and `AInOffset[5]` does not exist.
 - **Large offsets** — there is no clipping at this stage; the post-offset value flows into the deadband and gain stages with full float resolution.
 - **Sign convention** — added (not subtracted); use a negative `AInOffset` to remove a positive bias.
 - **Motor on/off and mode independence** — the offset runs every cycle regardless of `MotorOn` or [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md); all consumers see the corrected value.

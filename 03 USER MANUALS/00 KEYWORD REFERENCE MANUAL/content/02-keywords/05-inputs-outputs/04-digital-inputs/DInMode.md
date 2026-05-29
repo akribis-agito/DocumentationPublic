@@ -116,7 +116,7 @@ ADInPort                  ; read the live input word; bit 2 reflects DI 3 after 
 AStatReg                  ; the home bit in StatReg tracks the input level
 ```
 
-Use the same pattern for limit switches (function 9 = RLS, 10 = FLS) — these feed [LimitsStat](../../06-protections/03-motion/position-limit-protection/LimitsStat.md) and trigger the limit-handler deceleration in the consumer keyword [MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md).
+Use the same pattern for limit switches (function 9 = RLS, 10 = FLS) — these feed [LimitsStat](../../06-protections/03-motion/position-limit-protection/LimitsStat.md), and when the axis is moving into an active limit the limit handler decelerates it.
 
 ### Walk-through: drive a motion start from a digital input
 

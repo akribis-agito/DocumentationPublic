@@ -41,7 +41,7 @@ When the arc move starts, the controller works out the angle to sweep from the s
 | Setting | Result |
 |----|----|
 | `VecNumCircles = 0`, start ≠ end | A single partial arc from the start point to the end point. |
-| `VecNumCircles = 0`, start = end | The base sweep only — for a clockwise arc this is one full turn; for a counter-clockwise arc the base sweep is zero, so add turns with `VecNumCircles`. |
+| `VecNumCircles = 0`, start = end | One full turn (2π) for both clockwise and counter-clockwise arcs; use `VecNumCircles` to add further revolutions. |
 | `VecNumCircles = N` (1-100) | The base arc plus `N` additional full revolutions. |
 
 The path-velocity profile then runs along this extended path exactly as for a single arc: it accelerates, cruises and decelerates over the whole multi-turn length, so the move only slows to a stop after the final revolution. A move still in progress can be ended early with [StopVec](StopVec.md). The maximum is 100 additional revolutions.

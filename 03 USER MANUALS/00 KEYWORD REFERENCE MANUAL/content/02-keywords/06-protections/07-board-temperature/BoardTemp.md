@@ -36,7 +36,7 @@ Read-only controller-board temperature (°C).
 
 ## Overview
 
-`BoardTemp` reports the temperature of the controller board, measured by an on-board digital sensor, in °C. It is read-only, axis-scoped, not saved to flash, and available at all times. For the power-stage (IPM) temperature, see [PwrTemp](PwrTemp.md).
+`BoardTemp` reports the temperature of the controller board, measured by an on-board digital sensor, in °C. It is read-only, not saved to flash, and available at all times — non-axis on standalone (one value across axes), per-axis on Central-i. For the power-stage (IPM) temperature, see [PwrTemp](PwrTemp.md).
 
 ## How it works
 

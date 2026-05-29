@@ -52,7 +52,7 @@ The sequence is:
 
 `CIConnect` rejects the request up front (returning an error, without changing state) when the port is already connected, when an amplifier device type is requested on a port that cannot drive a motor, or when the configured [CIDeviceType](CIDeviceType.md) class is incompatible with the axis's `AmpType`.
 
-A simulation device type (see [CIDeviceType](CIDeviceType.md)) skips the physical sequence: the port is marked connected immediately and [CIIdentity](CIIdentity.md) is filled with default channel counts so tools show a plausible interface.
+A simulation device type (see [CIDeviceType](CIDeviceType.md)) skips the physical sequence: the port is marked connected immediately, [CIIdentity](CIIdentity.md) is filled with default channel counts so tools show a plausible interface, and the port's connected bit is set in [CIGlobalStat](CIGlobalStat.md).
 
 ## Examples
 
@@ -91,7 +91,7 @@ Common failures: `CIStatus[6] = 9` means the remote does not match `CIDeviceType
 - **Already connected.** Rejected up front (no state change) — disconnect with [CIDisconnect](CIDisconnect.md) before reconnecting.
 - **Power-up.** When [CIAutoConnect](CIAutoConnect.md) is set for a port the firmware runs this same sequence during start-up, driving the state machine in a tight loop because interrupts are not yet active. The host can poll [CIStatus](CIStatus.md) afterwards.
 - **Standalone product.** Central-i is the master-side feature; on a standalone controller there are no Central-i ports to connect, so the keyword has no effect there. v5 firmware is central-i only.
-- **Simulation device type.** With [CIDeviceType](CIDeviceType.md) set to a simulation class the physical reset/get-device/configure phases are skipped: the port is marked connected immediately, [CIIdentity](CIIdentity.md) is filled with default channel counts, and the [CIGlobalStat](CIGlobalStat.md) simulation bit for that port is set alongside its connected bit.
+- **Simulation device type.** With [CIDeviceType](CIDeviceType.md) set to a simulation class the physical reset/get-device/configure phases are skipped: the port is marked connected immediately, [CIIdentity](CIIdentity.md) is filled with default channel counts, and the port's connected bit is set in [CIGlobalStat](CIGlobalStat.md). The [CIGlobalStat](CIGlobalStat.md) simulation (high) bit is not set by connect; that bit is governed by [MotorType](../../02-motor-and-amplifier/MotorType.md) = simulation.
 - **Device-type mismatch with axis.** Requesting an amplifier class on a port that cannot drive a motor, or a class incompatible with the axis's `AmpType`, is rejected before the sequence starts — [CIStatus](CIStatus.md)`[6]` carries the specific error code (9, 11, 13, or 14).
 
 ## See also

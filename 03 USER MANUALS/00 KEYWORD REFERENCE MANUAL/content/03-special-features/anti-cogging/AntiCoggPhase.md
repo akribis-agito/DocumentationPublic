@@ -1,13 +1,10 @@
 # AntiCoggPhase
 
+*Legacy keywords*
+
 **Definition:**
 
-AntiCoggPhase sets the phase offset applied to the anti-cogging compensation table lookup, allowing the correction waveform to be aligned with the actual cogging torque profile.
-
-%%
-Needs verification
-AntiCoggPhase was not found in the AG300_CTL01Params.c firmware parameter table. Confirm availability and parameter attributes before use.
-%%
+AntiCoggPhase set the phase offset applied to the anti-cogging compensation. This keyword was removed in a later firmware release and is no longer available; the related functionality was superseded by anti-disturbance functionality.
 
 **See also:**
 

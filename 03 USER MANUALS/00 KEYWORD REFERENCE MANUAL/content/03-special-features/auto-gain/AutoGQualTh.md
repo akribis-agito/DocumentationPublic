@@ -2,7 +2,7 @@
 
 **Definition:**
 
-AutoGQualTh sets the quality threshold that an identification segment must exceed for its result to be accepted and averaged into the inertia estimate. Segments with a quality metric below this value are discarded. It is an axis-related parameter saved to flash and can be changed at any time.
+AutoGQualTh sets the maximum allowed value of the identification quality metric (an estimation-error figure expressed as a percentage, where lower is better). A segment's result is accepted and folded into the estimate only when its quality metric is at or below this threshold; segments whose metric exceeds the threshold are discarded. It is an axis-related parameter saved to flash and can be changed at any time.
 
 **See also:**
 

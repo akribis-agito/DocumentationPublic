@@ -69,7 +69,7 @@ With the thresholds above and the axis moving in the negative direction at `-120
 
 The same magnitudes apply for positive motion. If the user only needs three bands they can place the unused thresholds well outside the working speed range so they never bind.
 
-In interpolated mode (`ScheduleMode = 9`), at the same |velocity| = 120000 the active gain is a linear blend between set 2 (at `ScheduleVel[2] = 50000`) and set 3 (at `ScheduleVel[3] = 200000`), with the blend fraction (120000 − 50000) / (200000 − 50000) = 0.467 toward set 3.
+In interpolated mode (`ScheduleMode = 9`), at the same |velocity| = 120000 the active gain is a linear blend between set 3 (the base, anchored at `ScheduleVel[2] = 50000`) and set 4 (anchored at `ScheduleVel[3] = 200000`), with the blend fraction (120000 − 50000) / (200000 − 50000) = 0.467 toward set 4.
 
 ## See also
 

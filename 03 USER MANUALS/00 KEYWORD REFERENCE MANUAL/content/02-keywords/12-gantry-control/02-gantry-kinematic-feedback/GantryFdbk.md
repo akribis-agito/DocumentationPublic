@@ -64,7 +64,7 @@ BGantryFdbk        ; read the differential (yaw) gantry position
 ### Edge cases
 
 - **Gantry off** — `GantryFdbk` is not updated. The values reflect the last gantry-on cycle, or `0` if gantry has never been enabled. Use [Pos](../../10-motion/01-kinematics-status/Pos.md) directly when gantry is off.
-- **Motor off** — either member axis going to motor-off forces `GantryOn` back to `0` for the pair and stops the feedback update; if A and B disagree on motor state a `CON_FLT_GANTRY_MEMBER_UNEXPECTED_MOTOR_OFF` is recorded on the still-enabled axis.
+- **Motor off** — either member axis going to motor-off forces `GantryOn` back to `0` for the pair and stops the feedback update; if A and B disagree on motor state it records [ConFlt](../../07-status-and-faults/ConFlt.md) code `1061` (other gantry member axis got motor off) on the still-enabled axis.
 - **Non-gantry axis** — reading on an axis that is neither the master nor the yaw axis returns `0`.
 - **Dual loop** ([GantryDLoopOn](../01-general-variables/GantryDLoopOn.md) = 1) — the master value reflects the load feedback selected by [GantryFdbkSrc](GantryFdbkSrc.md); the motor-encoder mean appears on [GantryAuxFdbk](GantryAuxFdbk.md).
 - **Decoupling map** ([GantryMapType](../01-general-variables/GantryMapType.md) = 1, v5 only) — the common-mode value is a position-blended mean rather than the plain 50/50 mean.

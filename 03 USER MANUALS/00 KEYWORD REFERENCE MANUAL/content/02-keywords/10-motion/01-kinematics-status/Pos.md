@@ -75,7 +75,7 @@ If [ModRev](../../03-encoder/04-modulo-mode/ModRev.md) ≠ 0, `Pos` is kept with
 - **Simulation mode (`MotorType` = 5):** `Pos` is forced to equal `PosRef` (no physical encoder).
 - **Active fault:** the encoder pipeline keeps updating `Pos`; the loop is shut down but the feedback remains valid for inspecting the stopped position.
 - **Out-of-range write:** `Pos` is read-only — write attempts are rejected by the parameter system. Use [SetPosition](../03-kinematics-configuration/SetPosition.md) to preset.
-- **ModRev wrap during a jerk-buffered move:** the wrap is held until `glNumberOfWrongValuesInJerkBufferBecauseOfModulus` clears, so back-and-forth motion near the wrap edge can momentarily skip a wrap; this is benign.
+- **ModRev wrap during a jerk-buffered move:** the wrap is performed only when the jerk buffer holds no pre-wrap values, so back-and-forth motion near the wrap edge can momentarily skip a wrap; this is benign.
 - **Dual-loop:** in pseudo dual-loop `Pos` is the scaled [AuxPos](AuxPos.md); in true dual-loop and in gantry the position loop uses `Pos`/[GantryFdbk](../../12-gantry-control/02-gantry-kinematic-feedback/GantryFdbk.md) and `Pos` still reads the main encoder.
 
 ### Dual-loop and gantry

@@ -126,7 +126,7 @@ If `Begin` was *rejected*, no motion bits ever set — inspect [ErrLog](../../07
 
 ### Edge cases
 
-- **Motor off:** rejected with error 39 (`MUST_BE_MOTOR_ON_FOR_MOTION`).
+- **Motor off:** rejected with error 39 (motor must be on for motion).
 - **Out-of-range "write":** `Begin` is a function with no value; the keyword carries no payload to validate.
 - **Simulation mode (`MotorType` = 5):** allowed; the simulation path still runs the profiler and updates synthetic feedback.
 - **ModRev wrap:** allowed; the wrap continues to be applied to the reference during the move.

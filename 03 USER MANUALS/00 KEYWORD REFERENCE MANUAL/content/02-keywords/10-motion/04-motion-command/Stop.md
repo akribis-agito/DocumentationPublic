@@ -53,7 +53,7 @@ When the profiler velocity reaches zero with the stop request pending, the motio
 
 If the axis is a member of a group, `Stop` requests the stop along the whole group instead of the single axis:
 
-- **CNCA / CNCB member**: requests the stop on every member axis and on the CNC path; the commanding axis gets [MotionReason](../05-motion-status/MotionReason.md) = 1 (Stop command), the other members [MotionReason](../05-motion-status/MotionReason.md) = 19 (one CNCA member stopped) / 25 for CNCB. CNC step mode is disabled so the stop can proceed.
+- **CNCA / CNCB member**: requests the stop on every member axis and on the CNC path; the commanding axis gets [MotionReason](../05-motion-status/MotionReason.md) = 1 (Stop command), the other members [MotionReason](../05-motion-status/MotionReason.md) = 19 (one CNC member stopped). CNC step mode is disabled so the stop can proceed.
 - **Vector member**: requests the stop on all members and sets the master vector status to stopping; the commanding axis gets [MotionReason](../05-motion-status/MotionReason.md) = 1 (Stop command), the other members [MotionReason](../05-motion-status/MotionReason.md) = 31 (one vector member stopped).
 - **Spline-buffer member**: requests the stop on all buffer members; the commanding axis gets [MotionReason](../05-motion-status/MotionReason.md) = 1 (Stop command), the other members [MotionReason](../05-motion-status/MotionReason.md) = 37 (one spline-buffer member stopped). (To stop a buffer move at the end of its current cycle instead of immediately decelerating, use [StopBuff](StopBuff.md).)
 

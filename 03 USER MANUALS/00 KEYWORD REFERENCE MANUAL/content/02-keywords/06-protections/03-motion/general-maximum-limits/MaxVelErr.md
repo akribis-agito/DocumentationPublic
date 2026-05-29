@@ -59,7 +59,7 @@ Key points:
 
 - **Motor off:** the velocity loop and the limit check do not run; `VelErr` is reset to `0` on motor-off.
 - **Mode dependency:** `VelErr` is forced to `0` outside position-control, velocity-control, and force-over-PIV operation, so the trip cannot fire in those modes — including current-control-only and force-control-only.
-- **AMP_TYPE bypass:** the trip is skipped entirely when [AmpType](../../../02-motor-and-amplifier/AmpType.md) is the analog-velocity-command (external velocity-loop) amplifier — the drive does not check its own follower's velocity error.
+- **Velocity-command amplifier bypass:** the trip is skipped entirely when [AmpType](../../../02-motor-and-amplifier/AmpType.md) is the analog-velocity-command (external velocity-loop) amplifier — the drive does not check its own follower's velocity error.
 - **Stepper open loop:** `VelErr` is forced to `0` for [MotorType](../../../02-motor-and-amplifier/MotorType.md) = stepper open-loop.
 - **Open-loop / injection:** during [OpenLoopOn](../../../08-axis-operation/01-general-keywords/OpenLoopOn.md) ≠ 0, or direct injection at the current-reference or force-reference point, the active limit becomes [MaxVelErrOL](MaxVelErrOL.md) and the fault becomes ConFlt code 1056. Injection at the velocity- or position-reference point keeps the limit on `MaxVelErr`.
 - **Range overflow:** writes outside `0…1300000000` (v4) are clamped; the internal limit in force is updated on the next change to `MaxVelErr`/`MaxVelErrOL`/`OpenLoopOn`/`InjectType`/`InjectPoint`.

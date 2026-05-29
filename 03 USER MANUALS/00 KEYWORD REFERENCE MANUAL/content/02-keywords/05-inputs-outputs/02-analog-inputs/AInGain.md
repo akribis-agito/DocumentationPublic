@@ -62,7 +62,7 @@ AAInGain[1]=-65536   ; invert analog input 1
 
 ### Edge cases
 
-- **Index 0** — invalid; valid indices are `AInGain[1]`–`AInGain[4]` (plus `[5]` reserved). `AInGain[0]` does not exist.
+- **Index 0** — invalid; valid indices are `AInGain[1]`–`AInGain[4]`. `AInGain[0]` is the reserved comm/internal slot (not user-accessible) and `AInGain[5]` does not exist.
 - **Zero gain** — `AInGain = 0` zeroes the post-gain stage (the input is fully muted regardless of [AInMuteRange](AInMuteRange.md)).
 - **Negative gain** — inverts the signal; the post-gain deadband ([AInMuteRange](AInMuteRange.md)) is symmetric around zero so it still mutes around `0`, not around the inverted level.
 - **Saturation** — the post-gain value is held as `float`; once stored in `AInPort[1]–[4]` it is converted to `int32` (or scaled `float32` on v5) and may saturate at the storage range.

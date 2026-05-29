@@ -61,7 +61,7 @@ AMapPosGap[1]        ; read the spacing for the first dimension
 ### Edge cases
 
 - **Index 0** — invalid; valid indices are `MapPosGap[1]`/`[2]`/`[3]`. `MapPosGap[0]` does not exist.
-- **Motor on / in motion at write** — rejected (`MPNOMOTN`, `MPNOMTR`).
+- **Motor on / in motion at write** — rejected while the motor is on or the axis is in motion.
 - **Zero value** — silently substituted with the default `1000` so the reciprocal stays defined.
 - **Out of range** — values outside `1`–`8 000 000` are rejected (the 8 M ceiling guarantees exact float reciprocal).
 - **`MapType = 0`** — value stored but not consulted.

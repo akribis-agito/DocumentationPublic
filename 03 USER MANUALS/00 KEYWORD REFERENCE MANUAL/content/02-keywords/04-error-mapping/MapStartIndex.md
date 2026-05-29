@@ -56,7 +56,7 @@ AMapStartIndex       ; read the current start index
 
 ### Edge cases
 
-- **Motor on / in motion at write** — rejected (`MPNOMOTN`, `MPNOMTR`).
+- **Motor on / in motion at write** — rejected while the motor is on or the axis is in motion.
 - **Out of range** — values outside `1`–`300 000` are rejected.
 - **Past the table** — values beyond the combined bank size dispatch to uninitialised memory; combine carefully with [MapLength](MapLength.md).
 - **`MapType = 0`** — value stored but not consulted.

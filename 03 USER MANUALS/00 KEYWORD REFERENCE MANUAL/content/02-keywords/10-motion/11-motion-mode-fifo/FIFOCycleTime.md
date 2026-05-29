@@ -44,13 +44,11 @@ The cycle time takes effect only at a segment boundary — when the controller f
 
 When a segment begins, its sample count-down is loaded from the cycle time (see [FIFOStatus](FIFOStatus.md) index 3) and the per-sample motion is derived from it — for a position-delta segment, for example, the requested delta is divided across this many samples.
 
-## Changes between versions
+## Range
 
-| | v4 (standalone &amp; central-i) | v5 (central-i) |
-|---|---|---|
-| Accepted range | unrestricted | 1 to 65 536 000 |
+The cycle time is bounded to between 1 control sample and 1000 seconds' worth of control samples on all firmware versions. The upper limit scales with the controller's control-loop sample rate — for example, 65 536 000 samples on a 65 536-sample/second controller, or 16 384 000 samples on a 16 384-sample/second controller. There is no version-dependent difference in the accepted range.
 
-In **v5** the cycle time is bounded to 1–65 536 000 control samples. **v5 is central-i only.**
+Standalone controllers support this keyword on v4; central-i supports it on v4 and v5.
 
 ## Examples
 

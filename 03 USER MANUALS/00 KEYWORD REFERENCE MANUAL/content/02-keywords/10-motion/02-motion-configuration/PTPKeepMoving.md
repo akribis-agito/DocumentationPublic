@@ -40,7 +40,7 @@ In a normal point-to-point move the profiler declares the motion finished once i
 
 Because the motion never reports "done", a fresh `Begin` (with a new `AbsTrgt`/`RelTrgt`) retargets the already-running profiler, and the profiler ramps toward the new target from the current speed instead of starting from rest — producing the blend. With `PTPKeepMoving = 0` the move completes normally, so a `Begin` issued during it is governed by the usual in-motion rules.
 
-This affects only point-to-point motion ([MotionMode](MotionMode.md) `= 1`); the joystick-position modes (`MotionMode = 12` and `13`) are independently endless and are not influenced by `PTPKeepMoving`. It has no effect on jog, repetitive PTP, gear, ECAM or the other modes.
+The same point-to-point profiler is shared by single PTP ([MotionMode](MotionMode.md) `= 1`) and repetitive PTP (`MotionMode = 2`), so `PTPKeepMoving` is consulted in both. For repetitive PTP it should be left at `0`: setting it to `1` suppresses the end-of-segment completion, so a segment never reports done, [RptCounter](../05-motion-status/RptCounter.md) never increments, and the repetition cannot advance. The joystick-position modes (`MotionMode = 12` and `13`) are independently endless and are not influenced by `PTPKeepMoving`. It has no effect on jog, gear, ECAM or the other modes.
 
 ![PTPKeepMoving blend vs restart](ptpkeepmoving-blend.svg)
 
@@ -72,7 +72,7 @@ Without `PTPKeepMoving = 1` the second `AAbsTrgt` would simply be parked for the
 - **Simulation mode (`MotorType` = 5):** behaviour is identical (the profiler runs in simulation).
 - **ModRev wrap:** blends work through a wrap because the wrap shifts both `AbsTrgt` and the reference state by `ModRev` together; the blend ramps toward the post-wrap target.
 - **Active fault:** the axis is disabled and the in-motion bits are cleared regardless of `PTPKeepMoving`.
-- **Repetitive PTP (`MotionMode = 2`):** `PTPKeepMoving` is **not** consulted in the repetitive end-of-segment test — repetition is governed by [RptCounter](../05-motion-status/RptCounter.md)/[RptCycles](RptCycles.md) and [StopRep](../04-motion-command/StopRep.md).
+- **Repetitive PTP (`MotionMode = 2`):** leave `PTPKeepMoving = 0`. Because the repetitive mode shares the PTP profiler and its end-of-segment test, setting `PTPKeepMoving = 1` suppresses segment completion and stops the repetition advancing — [RptCounter](../05-motion-status/RptCounter.md) never increments. Repetition is otherwise governed by [RptCounter](../05-motion-status/RptCounter.md)/[RptCycles](RptCycles.md) and [StopRep](../04-motion-command/StopRep.md).
 - **Stop/Abort:** `Stop` and `Abort` end the motion regardless of `PTPKeepMoving` (the stop-request bit takes priority).
 
 ## See also

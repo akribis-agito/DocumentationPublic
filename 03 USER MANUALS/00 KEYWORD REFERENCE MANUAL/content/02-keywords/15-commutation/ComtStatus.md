@@ -36,7 +36,7 @@ Read-only array reporting the actual commutation (phasing) status of the axis.
 
 `ComtStatus` is a read-only array that reports the actual commutation status of the axis. It is used to monitor the commutation process configured by [ComtMode](ComtMode.md) and to diagnose failures: a positive value of 100 indicates a successfully finished commutation, intermediate values indicate progress, and negative values are error codes. Being read-only and not flash-saved, it can be read at any time, including while the motor is on or in motion. The resulting electrical angle is reported by [ComtAng](ComtAng.md).
 
-When the phasing status reaches `100` (finished) the commutation-complete bit of [StatReg](../07-status-and-faults/StatReg.md) (bit 0) is set; while phasing is in progress or has failed, that bit stays cleared and normal motion is blocked.
+When the phasing status reaches `100` (finished) the commutation-complete bit of [StatReg](../07-status-and-faults/StatReg.md) (bit 0) is set. For the Hall-start switching methods (`ComtMode[1]=3` or `4`), the bit is set once a usable rough Hall angle is established (status `300`/`400`) and stays set through refinement to `100`, so the axis can already run. Status `200` (commutation not required) also sets the bit. The bit stays cleared only before any usable angle is available (status `0`/`1`) or when commutation has failed (a negative status), in which case normal motion is blocked.
 
 ## How it works
 
@@ -45,8 +45,8 @@ The array holds the following elements (1-indexed):
 | Index | Description |
 |---|---|
 | `[1]` | Phasing status. Default 0. See the value table below. |
-| `[2]` | Number of consecutive successful jumps during the minimal-jumps search method (`ComtMode[1]=5`). Default 0; the search completes after 3 consecutive in-range jumps. |
-| `[3]` | Reserved (central-i v5 adds a fourth element used to report bidirectional-search state; not used on v4/standalone). |
+| `[2]` | Number of consecutive successful jumps during the "jump to zero" search method (`ComtMode[1]=0`). Default 0; the search completes after 3 consecutive in-range jumps. |
+| `[3]` | Bidirectional-search state (central-i v5 only). Reports the progress of a bidirectional commutation search: `0` unused, `1` armed, `2` first direction finished, `3` both directions finished. This index does not exist on v4/standalone. |
 
 `ComtStatus[1]` (phasing status) values:
 
@@ -69,6 +69,9 @@ The array holds the following elements (1-indexed):
 | -7 | Illegal halls sequence detected. |
 | -8 | Central-I failure during commutation process. |
 | -9, -10, -11, -12 | Illegal halls sequence is detected during learn process. |
+| -14 | Commutation failed: incorrect direction detected during the search (central-i v5 only). |
+| -15 | Commutation failed: a hard stop was reached during the search (central-i v5 only). |
+| -16 | Commutation failed: no Hall transition was found during fine Hall learning (central-i v5 only). |
 
 The illegal-Hall errors (`-7`, `-9` … `-12`) are raised when [HallsValue](HallsValue.md) reads `0` or `7` (the two combinations outside the legal range 1–6), or when the observed Hall sequence does not match the expected order.
 
@@ -76,7 +79,7 @@ The illegal-Hall errors (`-7`, `-9` … `-12`) are raised when [HallsValue](Hall
 
 ```text
 AComtStatus[1]      ; query the phasing status
-AComtStatus[2]      ; consecutive successful jumps (minimal-jumps search method)
+AComtStatus[2]      ; consecutive successful jumps ("jump to zero" search method)
 ```
 
 ## See also

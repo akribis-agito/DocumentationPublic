@@ -32,9 +32,7 @@ Selects the vector motion geometry (0 = linear, 1 = arc).
 
 ## Overview
 
-`VecType` defines whether the requested vector motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 16) is linear (`VecType = 0`) or an arc (`VecType = 1`). It selects the geometry of the coordinated path; when arc is chosen, the move is further described by [VecArcCenter](VecArcCenter.md), [VecArcDir](VecArcDir.md) and [VecNumCircles](VecNumCircles.md). It is saved to flash and cannot be modified while in motion.
-
-> **Note:** A combined arc (main motion) plus linear (other axes) mode, `VecType = 2`, is identified as a near-future need but is outside the current range (0-1).
+`VecType` defines whether the requested vector motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 16) is linear (`VecType = 0`) or an arc (`VecType = 1`). It selects the geometry of the coordinated path; when arc is chosen, the move is further described by [VecArcCenter](VecArcCenter.md), [VecArcDir](VecArcDir.md) and [VecNumCircles](VecNumCircles.md). It is saved to flash and cannot be modified while in motion. Only values 0 (linear) and 1 (arc) are accepted.
 
 ## How it works
 

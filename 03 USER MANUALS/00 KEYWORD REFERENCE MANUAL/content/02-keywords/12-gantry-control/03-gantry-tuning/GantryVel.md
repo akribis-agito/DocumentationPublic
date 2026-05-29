@@ -56,7 +56,7 @@ BGantryVel          ; on the yaw axis:    differential (yaw) gantry velocity
 
 - **Gantry off** ([GantryOn](../01-general-variables/GantryOn.md) = 0) — not updated; the last value while gantry was on is held.
 - **At gantry-on transition** — forced to `0` on both axes for one cycle while the velocity history primes.
-- **Motor off** — the gantry calculation halts; a mid-flight loss of one member (`A` or `B`) on motor-off forces the other off with `CON_FLT_GANTRY_MEMBER_UNEXPECTED_MOTOR_OFF`.
+- **Motor off** — the gantry calculation halts; a mid-flight loss of one member (`A` or `B`) on motor-off forces the other member off and reports [ConFlt](../../07-status-and-faults/ConFlt.md) fault `1061` ("other gantry member axis got motor off").
 - **Non-gantry axis** — reading on an axis that is neither master nor yaw returns `0`.
 - **Platform** — v5 central-i only.
 

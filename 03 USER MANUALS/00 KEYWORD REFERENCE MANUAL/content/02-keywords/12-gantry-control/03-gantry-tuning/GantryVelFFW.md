@@ -37,7 +37,7 @@ Velocity feedforward gain for the gantry yaw correction controller.
 Velocity feedforward is applied only in position operation mode. The controller scales the commanded velocity (the rate of change of the position reference) by `GantryVelFFW` and adds the result, together with the acceleration feedforward term ([GantryAccFFW](GantryAccFFW.md)), to the velocity PI output when forming the differential motor current command ([CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md)):
 
 $$
-\text{CurrRef} = \text{VelPIOutput} + (\text{AccFFW term}) + \frac{\text{VelRef} \cdot \text{GantryVelFFW}}{65536}
+\text{CurrRef} = \text{VelPIOutput} + (\text{AccFFW term}) + \frac{\text{dPosRef} \cdot \text{GantryVelFFW}}{65536}
 $$
 
 Because this term depends only on the reference trajectory and not on the yaw error, it supplies anticipatory current during motion that the [GantryVelGain](GantryVelGain.md) / [GantryVelKi](GantryVelKi.md) feedback loop would otherwise have to develop from accumulated error.
@@ -53,7 +53,7 @@ AGantryVelFFW[1]    ; read the current value
 
 ### Edge cases
 
-- **Index 0** — invalid; valid indices are `GantryVelFFW[1]`–`GantryVelFFW[5]` (gain sets), with `[6]` as the active-set storage slot.
+- **Index 0** — invalid; valid indices are `GantryVelFFW[1]`–`GantryVelFFW[5]` (gain sets). The active set is selected by gain scheduling.
 - **Gantry off** ([GantryOn](../01-general-variables/GantryOn.md) = 0) — writes accepted; the gain has no effect until gantry is engaged.
 - **Wrong mode** — feedforward is applied only when the position-loop reference advances; in current/force-only modes the term contributes nothing.
 - **Zero gain** — disables yaw velocity feedforward.

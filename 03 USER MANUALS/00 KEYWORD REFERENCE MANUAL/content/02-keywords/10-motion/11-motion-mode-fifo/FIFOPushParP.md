@@ -46,7 +46,9 @@ If the delta and cycle time resolve to an acceleration of magnitude below 16 384
 
 ### Worked example
 
-With `FIFOCycleTime = 16384` samples (≈ 1 s at 16384 Hz), a previous velocity of `0`, and `FIFOPushParP = 20000`, the controller picks the constant acceleration that travels 20 000 units in 1 s starting from rest: `a = 2 × 20000 / 1² = 40000` units/s². The velocity ramps linearly from 0 to 40 000 units/s over the segment, and the position follows the matching parabola, hitting exactly 20 000 units of travel at the final sample.
+The shape is easiest to picture in continuous terms: with `FIFOCycleTime = 16384` samples (≈ 1 s at 16384 Hz), a previous velocity of `0`, and `FIFOPushParP = 20000`, the ideal constant acceleration that travels 20 000 units in 1 s starting from rest is `a = 2 × 20000 / 1² = 40000` units/s². The velocity ramps linearly from 0 toward that figure and the position follows the matching parabola.
+
+In firmware the per-sample velocity step is derived with integer arithmetic — the position delta is divided by the cycle time as integers — so the resolved acceleration is quantized and does not always match the textbook value above. If the resolved magnitude falls below 16 384 counts/s² (one control-sample frequency at the standard 16 384 Hz rate — the smallest acceleration the per-sample velocity step can resolve), the segment faults the motion (motor off). The 20 000-unit-over-16 384-sample case shown here in fact resolves to a sub-threshold acceleration and would fault; it is given only to convey the parabola shape, not as a runnable point. For a segment that clears the threshold, choose a delta and cycle time whose integer-resolved acceleration is well above 16 384 counts/s² — for example a 200 000 000-unit delta over a 16 384-sample (≈ 1 s) cycle resolves to roughly 24 000 counts/s² — and read its acceleration as an approximate, quantized figure rather than the exact `2 × delta / t²` value.
 
 ## Examples
 

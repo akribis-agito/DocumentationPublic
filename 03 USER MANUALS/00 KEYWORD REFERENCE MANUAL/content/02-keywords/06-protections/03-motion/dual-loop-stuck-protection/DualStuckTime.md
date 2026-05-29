@@ -32,7 +32,7 @@ Consecutive cycles the dual-loop feedback mismatch may persist before tripping.
 
 ## Overview
 
-`DualStuckTime` is how long the dual-loop feedback mismatch may persist before the dual-stuck fault fires. The keyword carries a samples-to-milliseconds scaling, and internally it is compared against a sample counter (1 control sample ≈ 61 µs). The default is `4096`.
+`DualStuckTime` is how long the dual-loop feedback mismatch may persist before the dual-stuck fault fires. The keyword carries a samples-to-milliseconds scaling, and internally it is compared against a sample counter (1 control sample ≈ 15.26 µs, i.e. value/65.536 ms). The default is `4096`.
 
 ## How it works
 
@@ -52,10 +52,10 @@ A larger `DualStuckTime` tolerates longer transient divergences (e.g. during agg
 
 ### Edge cases
 
-- **Motor off:** the dual-loop check does not run; the counter is reset on motor-off.
+- **Motor off:** the dual-loop check stops running and its internal counter holds (freezes) its last value. The counter is cleared only at power-up and whenever a sample falls back within tolerance while the motor is on, not on motor-off.
 - **`DualLoopOn = 0`:** the entire dual-stuck path is skipped — the counter never runs.
 - **`DualStuckTime = 0`:** the counter reaches the limit on the first over-tolerance sample, so the protection trips immediately (no debouncing).
-- **Range overflow:** writes outside `0…2147483647` are clamped to the keyword `range`.
+- **Range overflow:** writes outside `0…2147483647` are rejected with an out-of-range error; the stored value is left unchanged.
 - **Clearing the fault:** ConFlt code 1049 clears on re-enable ([MotorOn](../../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../../07-status-and-faults/ErrLog.md) entry persists.
 - **HWProtectBits / ProtectMask:** the dual-loop-stuck trip is not maskable through [ProtectMask](../../01-general-protection/ProtectMask.md) (that mask covers hardware-protection bits only).
 

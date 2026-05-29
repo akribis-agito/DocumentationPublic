@@ -97,7 +97,7 @@ During a sustained high-duty move:
 | `MotorTemp < 70` | 0 (none) | off |
 | `70 <= MotorTemp < 74` | 1 (low) | yellow |
 | `74 <= MotorTemp < 77` | 2 (medium) | orange |
-| `77 < MotorTemp <= 80` | 3 (high) | red |
+| `77 <= MotorTemp <= 80` | 3 (high) | red |
 | `MotorTemp > 80` | trip: `AConFlt = 1040`, axis disabled | — |
 
 If `AMotorTemp` reads the default `25` even under load, [MotorTempUsed](MotorTempUsed.md) is probably still `0` (sensor disabled) — the warning and trip checks are then both skipped.
@@ -106,6 +106,5 @@ If `AMotorTemp` reads the default `25` even under load, [MotorTempUsed](MotorTem
 
 - [MotorTemp](MotorTemp.md) — measured motor temperature
 - [MotorTempUsed](MotorTempUsed.md) — sensor-type selection (gates this limit)
-- [MotorTempOffset](MotorTempOffset.md) — reading offset (cable compensation)
 - [StatReg](../../07-status-and-faults/StatReg.md) — bits 15–16 carry the 4-level warning
 - [ConFlt](../../07-status-and-faults/ConFlt.md) — fault code 1040 raised on over-temperature

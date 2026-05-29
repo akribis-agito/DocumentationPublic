@@ -34,7 +34,7 @@ Number of motor magnet pole pairs, interpreted according to the motor type, for 
 
 `PolePrs` defines the number of magnet pole pairs (one pole pair = one north plus one south pole). Its exact meaning depends on the configured [MotorType](MotorType.md). Setting the correct value is essential for feedback and commutation to work normally and to prevent possible damage.
 
-This keyword only applies when [MotorType](MotorType.md) is 3 (linear DC brushless), 4 (rotary DC brushless), or 7 (closed-loop stepper). For linear brushless motors (type 3) the controller automatically forces `PolePrs = 1`. Being axis-scope and flash-saved, it cannot be changed while the motor is on or in motion. Changing `PolePrs` on a brushless motor re-arms commutation (the [StatReg](../07-status-and-faults/StatReg.md) commutation bit is cleared until the axis re-phases).
+This keyword only applies when [MotorType](MotorType.md) is 3 (linear DC brushless), 4 (rotary DC brushless), or 7 (closed-loop stepper). For linear brushless motors (type 3) you must always set `PolePrs = 1` yourself — the controller does not force it. Being axis-scope and flash-saved, it cannot be changed while the motor is on or in motion. Changing `PolePrs` on a brushless motor re-arms commutation (the [StatReg](../07-status-and-faults/StatReg.md) commutation bit is cleared until the axis re-phases).
 
 ## How it works
 

@@ -55,9 +55,9 @@ AGoToForceMode       ; gracefully switch to force operation mode
 
 ### Edge cases
 
-- **From current mode** — rejected with `CANT_GO_TO_FORCE_FROM_CURR`. Pass through position mode first (e.g. via [GoToPosMode](../02-position-operation-mode/GoToPosMode.md)) before calling `GoToForceMode`.
+- **From current mode** — rejected; you cannot enter force mode directly from current mode (only from position or velocity mode). Pass through position mode first (e.g. via [GoToPosMode](../02-position-operation-mode/GoToPosMode.md)) before calling `GoToForceMode`.
 - **Already in force mode** — no-op; returns OK.
-- **CNC member** (`CNCA_MEMBER` or `CNCB_MEMBER`) — rejected with `CANT_GO_TO_CURRENT_OR_FORCE_WHEN_CNC`.
+- **CNC member** — rejected; force mode cannot be entered while the axis is a member of a CNC motion group (see [MotionStat](../../10-motion/05-motion-status/MotionStat.md) bits 10 and 13). Stop the CNC group first.
 - **Vector member** — not blocked here (only the [DInMode](../../05-inputs-outputs/04-digital-inputs/DInMode.md) code 22 dispatch refuses vector members).
 - **From velocity mode** — accepted; force loop seeding works the same way (`CurrRef` is in a defined state).
 - **From position mode** — accepted (the common case); the in-motion check is honoured.

@@ -69,6 +69,5 @@ AMotorTemp          ; read axis A's motor temperature (°C)
 
 - [MaxMotorTemp](MaxMotorTemp.md) — over-temperature fault limit (and warning thresholds)
 - [MotorTempUsed](MotorTempUsed.md) — sensor-type selection (gates the reading and protection)
-- [MotorTempOffset](MotorTempOffset.md) — reading offset (cable-resistance compensation)
 - [StatReg](../../07-status-and-faults/StatReg.md) — bits 15–16 report the motor-temperature warning level
 - [ConFlt](../../07-status-and-faults/ConFlt.md) — fault code 1040 (motor temperature too high)

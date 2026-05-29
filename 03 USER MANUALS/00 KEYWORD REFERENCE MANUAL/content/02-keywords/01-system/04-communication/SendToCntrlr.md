@@ -46,12 +46,12 @@ For writing an arbitrary parameter on a remote node, the [RemoteCAN](RemoteCANSe
 AGenData[<destination index>] = <value of local GenData[<source index>]>
 ```
 
-In other words, it reads the value of the local [GenData](../../20-arrays/GenData.md) element named by the source index and sends a command that writes that value into the *same-named* `GenData` element on the controller wired to the serial port. The transfer is fixed to the `GenData` array; the index selects which element on each side. Because it transmits a text command and does not parse a reply back into a parameter, it is best suited to pushing a working value to a downstream controller in a chained setup.
+In other words, it reads the value of the local [GenData](../../20-arrays/GenData.md) element named by the source index and sends a command that writes that value into the `GenData` element named by the destination index on the controller wired to the serial port. The transfer is fixed to the `GenData` array, but the destination and source indices are independent — they need not refer to the same element number on each side. Because it transmits a text command and does not parse a reply back into a parameter, it is best suited to pushing a working value to a downstream controller in a chained setup.
 
 ## Examples
 
 ```text
-ASendToCntrlr[5]=5   ; send local GenData[5] to the remote controller's GenData[5]
+ASendToCntrlr[5]=5   ; send local GenData[5] to the remote controller's GenData[5] (destination 5, source 5)
 ```
 
 ## See also

@@ -72,7 +72,7 @@ Bits 8&ndash;15 are reused for different signals depending on the drive model (A
 
 | Bit | Mask | Condition |
 |-----|------|-----------|
-| 2 | 0x0004 | Encoder sine/cosine (icNQC) error |
+| 2 | 0x0004 | Encoder sine/cosine error |
 | 7 | 0x0080 | Inrush resistor still engaged (motor-on not yet allowed) |
 | 8 | 0x0100 | STO1 active |
 | 9 | 0x0200 | STO2 / VCC-drive |
@@ -85,7 +85,7 @@ Bits 8&ndash;15 are reused for different signals depending on the drive model (A
 
 ![HWProtectBits Central-i bit layout (lower 16 bits) with status-word bits in the upper byte and the folded power/peripheral flags in bits 3 to 6](hwprotectbits-centrali.svg)
 
-The Central-i status word additionally carries power-phase / logic-power flags that are folded into `HWProtectBits` (sine/cosine encoder (icNQ) error 0x04, peripheral 5 V fault 0x08, B&ndash;C power phase missing 0x10, A&ndash;C power phase missing 0x20, A&ndash;B logic power missing 0x40). The power-related bits are treated specially: they are gated by the declared [PowerSupply](../02-current-and-voltage/PowerSupply.md) type, so a phase that the supply does not use is not reported as missing. Bits 0&ndash;1 of the remote status are encoder-index flags and are masked out (not part of `HWProtectBits`).
+The Central-i status word additionally carries power-phase / logic-power flags that are folded into `HWProtectBits` (sine/cosine encoder error 0x04, peripheral 5 V fault 0x08, B&ndash;C power phase missing 0x10, A&ndash;C power phase missing 0x20, A&ndash;B logic power missing 0x40). The power-related bits are treated specially: they are gated by the declared [PowerSupply](../02-current-and-voltage/PowerSupply.md) type, so a phase that the supply does not use is not reported as missing. Bits 0&ndash;1 of the remote status are encoder-index flags and are masked out (not part of `HWProtectBits`).
 
 When an enabled bit (see [ProtectMask](ProtectMask.md)) is set, the axis is disabled and the matching [ConFlt](../../07-status-and-faults/ConFlt.md) code is raised — for example a 5 V-fault bit raises ConFlt code 1047 (5 V supply fault), STO1 raises ConFlt code 1024 (STO1 activated), STO2/VCC raises ConFlt code 1034, watchdog raises ConFlt code 1004, an over-current bit raises ConFlt code 1025 (motor A), 1036 (motor B), or 1059 (motor C), and a missing AC phase raises ConFlt code 1054. See [Controller error codes](../../../04-error-codes/controller-error-codes.md) for the full mapping.
 

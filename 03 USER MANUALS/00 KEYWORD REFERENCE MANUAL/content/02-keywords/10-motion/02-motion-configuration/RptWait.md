@@ -52,7 +52,7 @@ The value you set is in milliseconds; the controller converts it to a whole numb
 - **Other motion modes:** `RptWait` is ignored outside [MotionMode](MotionMode.md) `= 2`.
 - **`RptWait = 0`:** no dwell — the next move starts on the very next control cycle. The settling/in-target bookkeeping that normally runs during the dwell is folded into the move transition.
 - **Stop/Abort during dwell:** [Stop](../04-motion-command/Stop.md), [Abort](../04-motion-command/Abort.md) and [StopRep](../04-motion-command/StopRep.md) all end the repetition at the next cycle (no further motion).
-- **Can change in motion:** unlike `RptCycles`/`RptMode`, `RptWait` is `OKINMOTN` — changing it during a dwell takes effect immediately (compared against the running counter).
+- **Can change in motion:** unlike `RptCycles`/`RptMode`, `RptWait` can be changed while the axis is in motion — changing it during a dwell takes effect immediately (compared against the running counter).
 
 ## Examples
 

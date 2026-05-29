@@ -53,7 +53,7 @@ ASpeedChgPos        ; query current value
 - **ModRev wrap:** because the wrap shifts both the reference and `SpeedChgPos` would need to be in the modulo frame, set `SpeedChgPos` inside `[0, ModRev)`. A trigger at, say, `2 × ModRev` is unreachable.
 - **Active fault:** value is preserved; with motion stopped, the trigger does not fire.
 - **Already past trigger when armed:** the trigger fires on the next cycle (the comparison is level-based, not edge-based).
-- **Other motion modes:** trigger fires in any mode that updates [PosRefShapedFilt](../01-kinematics-status/PosRef.md); however the consequent write to [Speed](Speed.md) only matters in modes that use `Speed`.
+- **Other motion modes:** trigger fires in any mode that updates [PosRef](../01-kinematics-status/PosRef.md); however the consequent write to [Speed](Speed.md) only matters in modes that use `Speed`.
 
 ## See also
 

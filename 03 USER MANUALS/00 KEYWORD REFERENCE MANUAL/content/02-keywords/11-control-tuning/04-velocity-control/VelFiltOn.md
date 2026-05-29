@@ -40,8 +40,6 @@ Enables or bypasses the velocity-loop filters that act on the velocity-PI output
 |-------|--------|
 | 1 | Velocity filter 1 |
 | 2 | Velocity filter 2 |
-| 3 | Velocity filter 3 |
-| 4 | Velocity filter 4 |
 
 `VelFiltOn[Index] = 1` enables the corresponding filter; `VelFiltOn[Index] = 0` bypasses it (the signal passes through unchanged). Range `0` to `1`, default `0` (all bypassed).
 

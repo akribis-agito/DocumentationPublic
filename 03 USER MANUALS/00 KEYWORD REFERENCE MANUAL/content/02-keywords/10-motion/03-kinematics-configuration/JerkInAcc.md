@@ -78,7 +78,7 @@ The third-order profiler is bypassed for limit-switch, software-limit and contro
 - **ModRev wrap:** the third-order profiler tracks the wrap through its internal state; the jerk constraint is unaffected.
 - **Active fault:** the axis is disabled; on re-enable and next `Begin`, `JerkInAcc` is re-read.
 - **Other motion modes:** consumed only by the structured jerk profiler under PTP / repetitive PTP with [JerkMode](../02-motion-configuration/JerkMode.md) = 1. Jog (`MotionMode = 0`), the indirect modes, and any direct mode all ignore it.
-- **Live change in motion:** allowed (`OKINMOTN`), but takes effect at the start of the next profiler segment, not mid-segment, because the segment time is computed up front.
+- **Live change in motion:** allowed, but takes effect at the start of the next profiler segment, not mid-segment, because the segment time is computed up front.
 
 ## Examples
 

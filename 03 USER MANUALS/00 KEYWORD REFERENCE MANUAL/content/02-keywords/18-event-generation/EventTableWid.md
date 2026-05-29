@@ -36,25 +36,41 @@ Per-entry pulse width array; -1 uses the global EventPulseWid.
 
 ## How it works
 
-For each table entry the controller chooses the output pulse width as follows:
+The width behavior is decided first by the value at the begin entry — the entry at the [EventTableBeg](EventTableBeg.md) index — which sets the mode for the whole event session:
+
+| Begin-entry value | Behavior for the whole active range |
+|-------------------|-------------------------------------|
+| 0 | **Toggle mode** for the entire session: each event changes the output state instead of producing a fixed-duration pulse. Per-entry widths are not applied. |
+| -1 (default) | The global [EventPulseWid](EventPulseWid.md) is used for **every** event; per-entry widths are ignored. |
+| Positive | **Per-entry widths** are used, with carry-forward (see below). |
+
+When the begin entry is positive, each entry's width is resolved as follows:
 
 | Entry value | Width used for that entry |
 |-------------|---------------------------|
-| -1 (default) | The global [EventPulseWid](EventPulseWid.md) (or the most recent positive per-entry width — see below). |
-| 0 | Toggle mode: the output changes state at the entry instead of producing a fixed-duration pulse. |
-| Positive | That value, as the pulse duration (units per [EventPulseRes](EventPulseRes.md)). |
+| Positive | That value, as the pulse duration (units per [EventPulseRes](EventPulseRes.md)). It also becomes the carried-forward width for later `-1` entries. |
+| -1 | The most recent positive per-entry width seen earlier in the active range; if none has been seen yet, the global [EventPulseWid](EventPulseWid.md). |
+| 0 | A zero-width pulse for that entry. A `0` on a non-begin entry does **not** toggle — toggle mode is enabled only when the begin entry itself is `0`. |
 
-The valid range for each entry is -1 to 10000000; -1 is the only negative value (it defers to the global width). Output polarity is taken from the sign of the global [EventPulseWid](EventPulseWid.md), not from the per-entry value.
+The valid range for each entry is -1 to 10000000; -1 is the only negative value (it defers to the global width). Output polarity is taken from the sign of the width actually in use for the entry: a per-entry width is always non-negative, so inversion happens only when an entry defers (via `-1`) to a negative global [EventPulseWid](EventPulseWid.md). A positive per-entry width never inverts, even if the global is negative.
 
-When an entry is `-1`, the controller does not always fall back to the global width: it carries forward the most recent positive per-entry width seen earlier in the active range, and uses the global [EventPulseWid](EventPulseWid.md) only if no positive per-entry width has been encountered yet. Set the first active entry ([EventTableBeg](EventTableBeg.md)) to `-1` if you want the whole table to follow the global width by default.
+Set the begin entry ([EventTableBeg](EventTableBeg.md) index) to `-1` if you want the whole table to follow the global width by default, or to `0` to put the whole session in toggle mode.
 
 ## Examples
 
 ```text
-AEventTableWid[1]=-1     ; first entry uses the global EventPulseWid
-AEventTableWid[2]=100    ; second entry uses a 100 us pulse
-AEventTableWid[3]=0      ; third entry toggles the output instead of pulsing
+; Per-entry widths (begin entry positive): set the begin entry to a width
+AEventTableWid[1]=50     ; begin entry: 50-unit pulse; enables per-entry mode
+AEventTableWid[2]=100    ; second entry uses a 100-unit pulse
+AEventTableWid[3]=0      ; third entry produces a zero-width pulse (does NOT toggle)
 AEventTableWid[2]        ; query the second entry's pulse width
+
+; Global width for the whole range: set the begin entry to -1
+AEventTableWid[1]=-1     ; whole active range uses the global EventPulseWid;
+                         ; per-entry values on other entries are ignored
+
+; Toggle mode for the whole session: set the begin entry to 0
+AEventTableWid[1]=0      ; every event toggles the output instead of pulsing
 ```
 
 ## See also

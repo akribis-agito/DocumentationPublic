@@ -2,7 +2,7 @@
 
 **Definition:**
 
-SpringTable is an array that holds the spring compensation correction values indexed by position segments between SpringPLow and SpringPHigh. Each element defines the feedforward current correction at the corresponding position. It is an axis-related array parameter saved to flash and can be changed at any time.
+SpringTable is a reserved, not-yet-implemented array keyword (size 41, with usable indices 1 through 40). It currently has no effect on spring compensation. The active compensation is the linear model defined by [SpringPLow](SpringPLow.md), [SpringPHigh](SpringPHigh.md), [SpringPosFFW](SpringPosFFW.md), and [SpringCurrFFW](SpringCurrFFW.md). When implemented, its entries would hold per-segment current corrections, 1-indexed. It is an axis-related array parameter saved to flash and can be changed at any time.
 
 **See also:**
 

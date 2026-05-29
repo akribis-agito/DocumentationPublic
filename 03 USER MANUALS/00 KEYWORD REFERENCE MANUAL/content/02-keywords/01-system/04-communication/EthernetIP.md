@@ -47,6 +47,10 @@ For example, the address `192.168.0.10` is stored as:
 
 The firmware reassembles the four octets into the dotted-quad address used by the network stack when Ethernet starts up. Set all four elements to define a valid address before saving; a partially-written address (some octets left at their previous values) will produce an unintended address.
 
+If all four octets are left at 0 (the never-configured state), the controller falls back to a built-in default address of `172.1.1.101`, so an out-of-the-box controller is still reachable on the network.
+
+The controller's hardware-address DIP setting is added to the last octet when forming the address. On standalone controllers this offset is applied to the active address (`EthernetIP[4]` + DIP address), so several identical units on one subnet get distinct addresses. On Central-i the controller answers on the stored octets as written; the DIP offset is reflected only in the reported (identity) address.
+
 ## Examples
 
 ```text

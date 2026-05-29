@@ -53,7 +53,7 @@ Because `AmpType` is an axis-scope parameter saved to flash, it cannot be change
 | 1 | Reserved (was central-i). Do not use. | — |
 | 2 | External amplifier, analog **current** command. The current reference ([CurrRef](../09-current-and-voltage/02-motor-variables/CurrRef.md)) is scaled to an analog-output voltage via [AAmpFullScale](AAmpFullScale.md). | External |
 | 3 | External amplifier, digital **pulse-direction (PD)** command. The controller outputs step/direction pulses; many checks (current loop, commutation) are bypassed. | External |
-| 4 | Built-in **linear** amplifier (reserved product). Analog current command scaled by [LAmpFullScale](LAmpFullScale.md). | Internal |
+| 4 | Built-in **linear** amplifier (reserved product). The axis is driven externally: it skips the internal current loop and only emits an analog **current** command — the current reference scaled by [LAmpFullScale](LAmpFullScale.md) (same command path as mode 2). | External |
 | 5 | External amplifier, analog **velocity** command. The velocity reference ([VelRef](../10-motion/01-kinematics-status/VelRef.md)) is scaled to an analog-output voltage via [AAmpFullScale](AAmpFullScale.md). | External |
 | 7 | External **linear adapter**: the controller still runs its internal commutation/current loop and outputs the two phase-current references ([IaRef](../09-current-and-voltage/02-motor-variables/IaRef.md)/[IbRef](../09-current-and-voltage/02-motor-variables/IbRef.md)) as analog voltages (scaled by [AAmpFullScale](AAmpFullScale.md)). | Internal |
 

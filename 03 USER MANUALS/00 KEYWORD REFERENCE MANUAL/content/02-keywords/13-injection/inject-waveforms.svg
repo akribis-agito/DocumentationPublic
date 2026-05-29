@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="780" height="500" viewBox="0 0 780 500" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="InjectType waveforms: sine (1 and 2) with frequency from InjectFreq; square (3 and 4) starting at positive amplitude with equal half-periods; pulse (5, current only) — one rectangular pulse of width InjectTimeOn then back to zero; PRBS (6 and 7) toggling pseudo-randomly between plus and minus amplitude at bit rate equal to sample rate divided by FastIdDownSam; chirp (8 and 9, v5 only) sweeping linearly from InjectChirpF[1] to InjectChirpF[2] and repeating.">
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="500" viewBox="0 0 780 500" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="InjectType waveforms: sine (1 and 2) with frequency from InjectFreq; square (3 and 4) starting at positive amplitude with equal half-periods; pulse (5, current only) — one rectangular pulse of width InjectTimeOn then back to zero; PRBS (6 and 7) toggling pseudo-randomly between plus and minus amplitude at bit rate equal to sample rate divided by 2^FastIdDownSam; chirp (8 and 9, v5 only) sweeping linearly from InjectChirpF[1] to InjectChirpF[2] and repeating.">
   <title>InjectType waveforms</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
@@ -49,7 +49,7 @@
     <line x1="20" y1="90" x2="340" y2="90" stroke="#5b6b7b"/>
     <line x1="20" y1="40" x2="20" y2="140" stroke="#5b6b7b"/>
     <path d="M 20 45 L 50 45 L 50 135 L 80 135 L 80 45 L 130 45 L 130 135 L 160 135 L 160 45 L 190 45 L 190 135 L 240 135 L 240 45 L 270 45 L 270 135 L 310 135 L 310 45 L 340 45" fill="none" stroke="#e0736b" stroke-width="1.6"/>
-    <text x="180" y="160" text-anchor="middle" font-size="11">toggles &#177; amplitude; bit rate = sample rate / FastIdDownSam</text>
+    <text x="180" y="160" text-anchor="middle" font-size="11">toggles &#177; amplitude; bit rate = sample rate / 2^FastIdDownSam</text>
   </g>
 
   <!-- Chirp -->

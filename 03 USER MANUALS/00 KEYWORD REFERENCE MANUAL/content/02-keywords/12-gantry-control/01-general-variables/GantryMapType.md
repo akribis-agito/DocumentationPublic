@@ -54,7 +54,7 @@ AGantryMapType       ; read the active map mode
 ### Edge cases
 
 - **In motion at write** — rejected (`NOMOTN`); may be changed with the motor on.
-- **`GantryMapType = 1` without a configured table** — the map reads zeros and the gantry shifts hard to one side; configure [GantryMap](GantryMap.md), [GantryMapSrc](GantryMapSrc.md), [GantryMapInit](GantryMapInit.md) and the map gap before enabling.
+- **`GantryMapType = 1` without a configured table** — every entry comes up at its default `0.5`, so an unconfigured table reproduces the symmetric 50/50 split; configure [GantryMap](GantryMap.md), [GantryMapSrc](GantryMapSrc.md), [GantryMapInit](GantryMapInit.md) and the map gap before relying on a position-dependent split.
 - **Map type changed during gantry-on** — the change takes effect on the next cycle without a smooth ramp; commanding a step in the linear-yaw split can momentarily disturb the beam. Prefer changing the type with [GantryOn](GantryOn.md) = 0.
 - **Out of range** — values outside the platform's supported range are rejected (v5 central-i: 0–1; v4 / standalone: 0 only).
 - **Set on wrong axis** — read on the master axis only; writes elsewhere are stored but ignored.

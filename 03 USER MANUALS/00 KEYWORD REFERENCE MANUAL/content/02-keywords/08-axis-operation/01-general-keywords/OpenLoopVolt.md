@@ -43,7 +43,7 @@ Voltage reference applied to the modulation in voltage open-loop mode.
 
 When [OpenLoopOn](OpenLoopOn.md) = 2 and the motor is on, the controller injects a **sinusoid onto phase A only**, with phases B and C held at zero. The phase advances each cycle at the rate set by [InjectFreq](../../13-injection/InjectFreq.md). Because the current loop is bypassed, this directly excites the motor windings with a known voltage waveform.
 
-The primary use is **motor resistance and inductance (R/L) measurement**: the controller assumes the frequency is high enough that the rotor barely moves and the amplitude is small enough not to draw excessive current. To enforce the latter the value is a PWM scaling (units `scaling`) and is **clamped to a maximum of 20 % PWM**; the minimum is `0`. The frontmatter shows `range: null` because the absolute limit depends on the drive's PWM period.
+The primary use is **motor resistance and inductance (R/L) measurement**: the controller assumes the frequency is high enough that the rotor barely moves and the amplitude is small enough not to draw excessive current. To enforce the latter the value is a PWM scaling (units `scaling`) and is **capped at a maximum of 20 % PWM**; the minimum is `0`. Writes above the cap are rejected as out-of-range rather than clamped. The frontmatter shows `range: null` because the absolute limit depends on the drive's PWM period.
 
 The value is **forced to 0** whenever `OpenLoopOn ≠ 2` or the motor is disabled, so no residual excitation remains when you leave the mode.
 
@@ -59,7 +59,7 @@ AOpenLoopVolt=500    ; set the injection amplitude (PWM scaling, capped at 20%)
 - **Wrong mode** ([OpenLoopOn](OpenLoopOn.md) ≠ 2) — the value is **forced to `0` every cycle**; the modulator does not use it.
 - **Motor off** — the value is forced to `0` every motor-off cycle.
 - **In motion at write** — rejected (`NOMOTN`).
-- **Above 20 % PWM** — clamped at the 20 % cap; the configured value is stored but the modulator uses the clamp.
+- **Above 20 % PWM** — values above the 20 % PWM cap are rejected (out-of-range); the write does not take effect and the previous value is kept.
 - **Negative value** — rejected; the parameter accepts only non-negative amplitudes.
 - **Frequency missing** — without [InjectFreq](../../13-injection/InjectFreq.md) set, the injected sinusoid does not advance and the windings see a DC voltage on phase A only.
 - **Phase B/C** — held at `0`; the injection is single-phase by design so the motor barely moves.

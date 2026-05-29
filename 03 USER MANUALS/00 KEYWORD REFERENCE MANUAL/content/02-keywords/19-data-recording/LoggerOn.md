@@ -38,7 +38,7 @@ Enables or disables the continuous data logger.
 
 Setting `LoggerOn` from `0` to `1` prepares a fresh session in one step:
 
-1. The parameter list in [LoggerParams](LoggerParams.md) is analyzed and the packet size (time stamp plus one or two buffer slots per parameter, depending on its data size) is computed and published in [LoggerStatus](LoggerStatus.md) (index 1).
+1. The parameter list in [LoggerParams](LoggerParams.md) is analyzed and the packet size (a time stamp plus one buffer slot per configured parameter) is computed and published in [LoggerStatus](LoggerStatus.md) (index 1).
 2. The buffer is reset (free space set to full, packet identifier and lost-packets counter cleared), and the first sample is time-stamped at zero.
 3. The current [LoggerFullMod](LoggerFullMod.md), start time, and parameter list are snapshotted into [LoggerAbout](LoggerAbout.md).
 

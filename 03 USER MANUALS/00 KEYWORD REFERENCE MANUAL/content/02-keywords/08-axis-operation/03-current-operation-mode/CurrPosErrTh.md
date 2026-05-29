@@ -55,7 +55,7 @@ ACurrPosErrTh=0      ; disable this condition
 
 ### Edge cases
 
-- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ∉ {2, 3}) — the threshold is **not evaluated**.
+- **Mode dependence** — although the condition-B threshold engine runs in both velocity ([OperationMode](../01-general-keywords/OperationMode.md) = 2) and position (`OperationMode` = 3) operation mode, `CurrPosErrTh` can only ever trigger in position mode. The position error (`PosErr`) is held at `0` in velocity mode (and outside position mode generally), so neither the `PosErr > value` nor the `PosErr < value` comparison can be satisfied there.
 - **Zero value** — disables this condition (only condition A and the other condition-B keywords matter).
 - **After trigger** — both `CurrPosErrTh` and [CurrPosThDir](CurrPosThDir.md) are cleared to `0` to prevent repeat triggers. Re-arm by writing both again.
 - **Sign sensitivity** — a positive threshold fires on `PosErr > value`; a negative threshold fires on `PosErr < value`.

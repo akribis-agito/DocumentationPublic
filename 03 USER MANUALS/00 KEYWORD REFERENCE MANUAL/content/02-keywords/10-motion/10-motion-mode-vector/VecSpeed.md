@@ -44,7 +44,7 @@ A vector move runs a single velocity profile **along the path** rather than per 
 The same profiler logic used for point-to-point motion is applied to the path scalar:
 
 - In the trapezoidal case (jerk off, [VecJerk](VecJerk.md) = 0) the path velocity is incremented by `VecAccel × Ts` each cycle until it reaches `VecSpeed`, held there, and then forced down by a deceleration-distance lookahead computed from the remaining path distance and `VecDecel`, producing a trapezoidal (or, on a short path, triangular) profile.
-- With jerk smoothing the same `VecSpeed` is passed as the peak path speed to the S-curve profiler.
+- On firmware that supports vector jerk shaping, enabling it (via [VecJerkMode](VecJerkMode.md)) routes the same `VecSpeed` in as the peak path speed of an S-curve profiler; otherwise the vector path is trapezoidal.
 
 Because the profile is generated for the resultant path and then split across the member axes by the geometry ([VecType](VecType.md)), no single member axis necessarily moves at `VecSpeed` — only the geometric resultant does. For example, a linear vector move with `3000` travel on one axis and `4000` travel on a second has a path length of `5000`; with `VecSpeed = 1000` user units/s the resultant feed rate cruises at 1000 user units/s, while the two member axes individually cruise at `1000 × 3/5 = 600` and `1000 × 4/5 = 800` user units/s. The controller re-reads `VecSpeed` every cycle, so raising or lowering it mid-move re-targets the path velocity on the next cycle. [VecPause](VecPause.md) temporarily forces the path-velocity target to 0; [StopVec](StopVec.md) does the same but ends the move.
 

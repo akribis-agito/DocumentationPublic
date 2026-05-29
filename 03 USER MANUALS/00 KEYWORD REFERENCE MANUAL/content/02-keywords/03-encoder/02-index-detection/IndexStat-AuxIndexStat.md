@@ -36,7 +36,7 @@ AIndexStat          ; check whether the index was detected this cycle
 ## Edge cases
 
 - **Motor off.** Detection runs whenever the encoder signal is being read; the index can be detected (and `IndexPos` captured) even with the motor disabled, provided the axis is being moved by hand.
-- **Slow vs fast motion.** Because the index is polled once per control cycle, it must remain asserted longer than one sample to be seen. Keep speed below `EncoderCountsPerPitch × ControllerSampleRate` (assuming a 1-pitch-wide index) — see [the section overview](00-overview.md).
+- **Slow vs fast motion.** Because the index is polled once per control cycle, it must remain asserted longer than one sample to be seen. Keep speed below (encoder counts per pitch) × (controller sampling frequency), assuming a 1-pitch-wide index — see [the section overview](00-overview.md).
 - **Encoder type.** Only meaningful for `EncType=1` (incremental) and `EncType=4` (SIN/COS). Absolute encoders carry no index mark, so `IndexStat` will not set.
 - **Auxiliary on multi-axis hardware.** `AuxIndexStat` is wired only on single-axis hardware variants; on multi-axis controllers the auxiliary index is not detected — `AuxIndexStat` will not assert.
 - **Central-i.** The remote drive flags the index in its per-axis status word; the master mirrors that into `IndexStat` each cycle, with the same one-cycle detection rule.

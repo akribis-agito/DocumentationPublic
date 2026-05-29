@@ -78,7 +78,7 @@ AOpenLoopOn=0        ; close all loops (normal operation)
 - **Motor off after engage** — `OpenLoopCurr` and `OpenLoopVolt` are forced to `0` on every motor-off cycle, so no residual drive sits in either value.
 - **Mismatched drive variable** — `OpenLoopCurr` is also forced to `0` whenever `OpenLoopOn ≠ 1`, and `OpenLoopVolt` is forced to `0` whenever `OpenLoopOn ≠ 2`; you cannot leave a stale drive value behind.
 - **Error limits** — while `OpenLoopOn ≠ 0` the wider open-loop limits replace the normal position/velocity/force error limits; clearing `OpenLoopOn` restores the normal limits on the same cycle.
-- **Voltage mode amplitude** — `OpenLoopVolt` is capped at 20 % PWM to protect the motor; values above the cap are clamped.
+- **Voltage mode amplitude** — `OpenLoopVolt` is capped at 20 % PWM to protect the motor; values above the cap are rejected (out-of-range).
 - **Mode independence** — `OpenLoopOn` overrides whatever [OperationMode](OperationMode.md) is configured; the position / velocity / force loops are bypassed regardless of `OperationMode`.
 - **Simulation** — open-loop drive still injects values into the controller pipeline; on a simulated motor the result is a numerical-only response.
 - **Save** — not flash-saveable; restarts at `0` after every reset.

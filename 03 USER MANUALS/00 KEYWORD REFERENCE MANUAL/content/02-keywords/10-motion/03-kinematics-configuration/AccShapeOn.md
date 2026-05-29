@@ -66,7 +66,7 @@ The [AccShapeFact](AccShapeFact.md) entries are **fixed-point fractions scaled b
 - **Simulation mode (`MotorType` = 5):** unchanged.
 - **ModRev wrap:** the distance `|AbsTrgt − PosRef|` is computed after the wrap shifts both values together, so shaping behaves consistently through a wrap.
 - **Active fault:** the axis is disabled; on re-enable and next `Begin`, `AccShapeOn` is re-read.
-- **Other motion modes:** consumed only by the PTP-family profiler (jog, PTP, repetitive PTP). Direct modes and the structured jerk profiler (third-order [JerkMode](../02-motion-configuration/JerkMode.md)) ignore `AccShapeOn`.
+- **Other motion modes:** consumed by the PTP-family profiler (jog, PTP, repetitive PTP). The shaping factor is applied to the acceleration/deceleration before the profiler branches on [JerkMode](../02-motion-configuration/JerkMode.md), so it also affects the third-order jerk profiler (`JerkMode = 1`) for these moves. The non-profiler direct modes ignore `AccShapeOn`.
 - **Live change in motion:** allowed; takes effect on the next control cycle.
 - **Shaping with EmrgDec:** when [EmrgDec](EmrgDec.md) replaces `Decel` for a limit/controlled-stop halt, the shaping factor is **not** applied (the stop uses the unshaped `EmrgDec × AccelFact`).
 

@@ -1,6 +1,6 @@
 ---
 keyword: OfflineALog
-summary: Rolling log of Central-i offline (mailbox) messages on channel A, the firmware-driven channel.
+summary: Reserved offline (mailbox) message log for Central-i offline mailbox 1; not currently populated by the firmware, so it stays at 0.
 availability:
   standalone:
   - v4
@@ -28,15 +28,17 @@ overrides: {}
 ---
 # OfflineALog
 
-Rolling log of Central-i offline messages sent on offline mailbox A (the firmware-driven channel).
+Reserved offline (mailbox) message log for Central-i **offline mailbox 1**; not currently populated by the firmware.
 
 ## Overview
 
-`OfflineALog` is a non-axis array that records the most recent Central-i **offline** (mailbox) transactions on **offline channel A** — the first offline mailbox, which the firmware uses for its own traffic (during [CIConnect](CIConnect.md), and from the control interrupt and background). The host reads it to inspect what offline messages were exchanged and their results. The companion log for the second mailbox — the host channel used by [CIOfflineSend](CIOfflineSend.md) — is [OfflineBLog](OfflineBLog.md).
+`OfflineALog` is a non-axis array that is **reserved** as the log for Central-i **offline mailbox 1** (the priority, firmware-driven channel). It is **not currently populated** by the firmware, so all of its elements stay at their default of `0`; reading it does not return offline-message data.
+
+The offline transactions that are actually logged are recorded in [OfflineBLog](OfflineBLog.md) (offline mailbox 2). Use that log to inspect the offline messages that were exchanged and their results.
 
 ## How it works
 
-The buffer holds up to **5 messages of 9 fields** each (45 used elements; index `[0]` is unused so logging starts at `[1]`). Each new message advances a write index, overwriting the oldest entry in turn. Within each message slot the nine fields are, in order:
+The array is dimensioned the same way as [OfflineBLog](OfflineBLog.md): up to **5 messages of 9 fields** each (45 used elements, indices `[1]`…`[45]`). Because nothing currently writes to it, every element reads `0`. The intended per-message field layout (which [OfflineBLog](OfflineBLog.md) does populate) is, in order:
 
 | Offset in slot | Field | Meaning |
 |----------------|-------|---------|
@@ -50,18 +52,17 @@ The buffer holds up to **5 messages of 9 fields** each (45 used elements; index 
 | +8 | Sample counter | Sample counter at send time |
 | +9 | Port | Axis/port number the message went to |
 
-So message *k* (k = 0…4) occupies elements `[9k+1]` … `[9k+9]`. The same field layout is used for [OfflineBLog](OfflineBLog.md).
+Message slot *k* (k = 0…4) would occupy elements `[9k+1]` … `[9k+9]`. The same field layout is populated for [OfflineBLog](OfflineBLog.md).
 
 ## Examples
 
 ```text
-AOfflineALog[3]     ; opcode of the first logged message
-AOfflineALog[6]     ; its acknowledge/error code (0 = ok)
-AOfflineALog[12]    ; opcode of the second logged message ([9*1+3])
+AOfflineALog[3]     ; reserved slot; currently reads 0 (not populated)
+AOfflineALog[12]    ; reserved slot; currently reads 0 (not populated)
 ```
 
 ## See also
 
-- [OfflineBLog](OfflineBLog.md) — log for offline mailbox B (the host channel)
+- [OfflineBLog](OfflineBLog.md) — the offline mailbox 2 log, which is the one the firmware actually populates
 - [CIOfflineData](CIOfflineData.md) / [CIOfflineSend](CIOfflineSend.md) — offline transactions
 - [CIStatus](CIStatus.md) — offline error counters and last-error code

@@ -61,7 +61,7 @@ When the motor is off, `dPosRef` (and its scaled filter state) is reset to `0` s
 - **Motor off:** `dPosRef` and its internal scaled-by-16 filter state are both reset to `0`; the next motor-on starts the filter clean.
 - **Simulation mode (`MotorType` = 5):** the calculation runs as usual (the comment in firmware explicitly notes it must run in simulation so the synthetic loop tracks ramps).
 - **CNC / vector member axes:** if the CNC or vector master asks to skip the `dPosRef` calculation for member axes, `dPosRef` is left unchanged for that cycle to avoid an end-of-segment spike at zero end-speed.
-- **ModRev wrap:** the wrap shifts both `gllPosRefShapedFilt` and `gllPosRefShapedFiltPrev` by the same amount in the same cycle, so the per-cycle delta — and therefore `dPosRef` — is preserved through the wrap.
+- **ModRev wrap:** the wrap shifts both the current shaped+filtered reference and its previous-cycle value by the same amount in the same cycle, so the per-cycle delta — and therefore `dPosRef` — is preserved through the wrap.
 - **Out-of-range write:** `dPosRef` is read-only.
 - **Active fault:** axis disabled — `dPosRef` is held at `0` (same as motor-off path).
 - **Gantry:** `dPosRef` is computed per axis from each axis's reference; it does not get a gantry common/phase split.

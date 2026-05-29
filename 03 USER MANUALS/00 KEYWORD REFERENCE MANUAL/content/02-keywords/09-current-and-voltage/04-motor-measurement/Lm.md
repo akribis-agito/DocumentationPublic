@@ -38,7 +38,9 @@ Motor inductance measurement, in micro-Henry (updated by PCSuite).
 
 ## How it works
 
-`Lm` is a stored, flash-backed axis parameter holding an inductance value in micro-Henry (valid range 1 to 1000000 µH, default 1000 µH). In the firmware it is a plain storage register: the resistance-and-inductance measurement (run from PCSuite) writes the measured value here, and it can also be read or set over the command interface. The firmware control loop does not read `Lm` to drive the current loop directly — it is the recorded measurement result, interpreted together with [RLType](RLType.md) (phase vs line-to-line) and paired with [Rm](Rm.md).
+`Lm` is a stored, flash-backed axis parameter holding an inductance value in micro-Henry (valid range 1 to 1000000 µH, default 1000 µH). The resistance-and-inductance measurement (run from PCSuite) writes the measured value here, and it can also be read or set over the command interface. The value is the recorded measurement result, interpreted together with [RLType](RLType.md) (phase vs line-to-line) and paired with [Rm](Rm.md).
+
+On v4 `Lm` is a stored measurement the control loop does not use. On central-i v5 the stored `Lm` value is also used to compute the inductive (L·dI/dt) voltage feed-forward term and a cross-coupling compensation term that are added to the current-loop output when voltage feed-forward is enabled. See [LmFFWLevel](../../11-control-tuning/05-feedforwards/LmFFWLevel.md) and [VoltageFFWOn](../../11-control-tuning/05-feedforwards/VoltageFFWOn.md).
 
 ## Examples
 

@@ -57,9 +57,9 @@ Independently of the profiler order, the [Jerk](../03-kinematics-configuration/J
 - **Simulation mode (`MotorType` = 5):** the profiler runs identically in simulation.
 - **ModRev wrap:** unrelated to `JerkMode`; both profiler orders handle wrap the same way.
 - **Active fault:** the axis is disabled; on re-enable and the next `Begin`, the current `JerkMode` is read again.
-- **Controlled stop ([Stop](../04-motion-command/Stop.md)) or limit-triggered stop:** `JerkMode` is forced to `0` (second-order) internally for the duration of the stop ramp, regardless of the user setting — emergency decelerations always use the square-root law.
+- **Hardware/software limit stop or controlled-stop-by-input:** `JerkMode` is forced to `0` (second-order) internally for the duration of the stop ramp, regardless of the user setting — these emergency decelerations always use the square-root law. An ordinary [Stop](../04-motion-command/Stop.md) command is **not** in this group: a plain `Stop` decelerates with the configured `JerkMode` and the normal [Decel](../03-kinematics-configuration/Decel.md).
 - **Other motion modes:** `JerkMode` is ignored outside PTP (1) and repetitive PTP (2); jog, gear, ECAM, PD, CNC, vector, joystick, FIFO, spline-buffer and slave each use their own trajectory law.
-- **Cannot change in motion:** writes are rejected while [MotionStat](../05-motion-status/MotionStat.md) is non-zero (the `NOMOTN` flag in the parameter table).
+- **Cannot change in motion:** writes are rejected while [MotionStat](../05-motion-status/MotionStat.md) is non-zero.
 
 ## Examples
 

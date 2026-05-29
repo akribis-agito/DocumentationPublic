@@ -2,7 +2,7 @@
 
 **Definition:**
 
-SpringPHigh sets the upper position boundary in user units for the spring compensation region. Above this position, the spring compensation feedforward is held at its maximum value. It is an axis-related parameter saved to flash and can be changed at any time.
+SpringPHigh sets the upper position boundary, in user units, of the spring compensation region. Spring compensation is applied only while the position reference is within the band [SpringPLow](SpringPLow.md) to SpringPHigh; above SpringPHigh no spring current is added. It is an axis-related parameter saved to flash and can be changed at any time.
 
 **See also:**
 

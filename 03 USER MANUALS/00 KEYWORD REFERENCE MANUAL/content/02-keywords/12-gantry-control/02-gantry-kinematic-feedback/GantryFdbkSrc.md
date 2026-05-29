@@ -52,7 +52,7 @@ AGantryFdbkSrc       ; read the configured source code
 - **Source = 0 (default)** — no load source is bound; if dual-loop is enabled the load-feedback pointer reads zero and the linear loop has no meaningful feedback. Configure a valid source before enabling gantry.
 - **Invalid CAN code** — the pointer resolution falls back to a safe zero pointer; the linear loop reads `0` and behaves as if standing.
 - **Set on wrong axis** — consulted on the master axis only; writes elsewhere are stored but ignored.
-- **Engagement offset** — at gantry engagement the firmware computes an offset between the load source and the current `PosRefShapedFilt` so the reported linear position does not jump.
+- **Engagement offset** — at gantry engagement the controller computes an offset between the load source and the current [PosRef](../../10-motion/01-kinematics-status/PosRef.md) so the reported linear position does not jump.
 - **Save** — flash-saveable; the pointer is re-resolved at boot.
 - **Platform** — v5 central-i only.
 

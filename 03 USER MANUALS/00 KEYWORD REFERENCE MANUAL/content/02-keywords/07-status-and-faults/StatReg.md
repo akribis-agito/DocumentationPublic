@@ -64,7 +64,7 @@ Read-only bitfield reporting general axis status, saturations, limits and multi-
 | 27 | Calc-filters failed | The last filter calculation failed |
 | 28 | Dynamic brake | Dynamic brake is active |
 | 29 | Static brake | Static-brake lock is requested |
-| 30 | Homing done | Homing has completed |
+| 30 | Home input | Home input (switch) is active; mirrors [HomeStat](../16-homing/HomeStat.md) |
 | 31 | Stall | Stall detected |
 
 ### Severity (2-bit warning fields)

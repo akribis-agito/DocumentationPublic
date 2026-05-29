@@ -36,7 +36,7 @@ Read-only rate of change of the scaled P/D counter PDPos, in P/D units per secon
 
 ## How it works
 
-`PDVel` is not differentiated from `PDPos` after the fact; it is taken directly from the **per-cycle scaled change** computed during P/D decoding. Because that change already carries the [PDFact](PDFact.md)/[PDFactDen](PDFactDen.md) scaling, the [PDEncDir](PDEncDir.md) sign, and the carried-forward fractional remainder, `PDVel` reflects the same scaling and direction as `PDPos`. It is the change per controller cycle expressed as a velocity.
+`PDVel` is not differentiated from `PDPos` after the fact; it is taken directly from the **per-cycle scaled change** computed during P/D decoding. That change already carries the [PDFact](PDFact.md)/[PDFactDen](PDFactDen.md) scaling (including the sign of `PDFact`), the natural direction of the incoming pulse/direction stream, and the carried-forward fractional remainder, so `PDVel` matches `PDPos` in scaling and in stream direction. It does **not**, however, reflect the [PDEncDir](PDEncDir.md) inversion, which is applied to the `PDPos` accumulator only. It is the change per controller cycle expressed as a velocity.
 
 In direct mode the velocity also feeds direction-dependent decisions (for example limit-switch handling and friction-compensation sign), so `PDVel` reflects the instantaneous P/D command rate.
 
@@ -52,4 +52,4 @@ APDVel              ; read the current P/D command velocity (pulse-direction uni
 
 - [PDPos](PDPos.md) — the counter whose per-cycle delta `PDVel` reports
 - [PDUsrUnits](PDUsrUnits.md) — query unit conversion
-- [PDEncDir](PDEncDir.md) — sets the sign that `PDVel` inherits
+- [PDEncDir](PDEncDir.md) — inverts `PDPos` accumulation only; does not affect `PDVel`

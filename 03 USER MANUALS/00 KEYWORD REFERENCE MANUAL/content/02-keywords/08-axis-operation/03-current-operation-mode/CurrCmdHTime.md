@@ -61,7 +61,7 @@ ACurrCmdHTime[2]=0   ; exit current mode after the second entry
 - **Zero value** — exits current mode to position mode at the end of the corresponding `CurrCmdVal` entry. **`CurrCmdHTime[1] = 0` with `CurrCmdSrc` = 0 / 3 returns to position mode immediately** on entering current mode.
 - **Negative value** — holds the value indefinitely; only an explicit mode change ([GoToPosMode](../02-position-operation-mode/GoToPosMode.md), `OperationMode` direct write, or DInMode) leaves the entry.
 - **End of table** — when `CurrCmdIndex` reaches `20` and that entry's `CurrCmdHTime > 0`, the firmware holds the last value indefinitely rather than advancing past 20.
-- **Counter saturation** — [CurrCmdCntr](CurrCmdCntr.md) is clamped at 2 000 000 000 to avoid roll-over; very long holds remain comparable to `CurrCmdHTime`.
+- **Counter maximum** — `2 000 000 000` is the largest value a user may *write* to [CurrCmdCntr](CurrCmdCntr.md), not a runtime cap. While in current operation mode the counter simply accumulates once per control cycle, with no runtime saturation.
 - **HTime > CurrCmdHTime max** — values outside ±2 000 000 000 are rejected.
 - **Save** — flash-saveable.
 

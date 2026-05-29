@@ -45,7 +45,7 @@ Each control cycle the controller adds (or subtracts, depending on whether `Curr
 - While `CurrRef` is still ramping (not yet equal to the target), [CurrCmdCntr](CurrCmdCntr.md) is forced to 0; only once `CurrRef` exactly equals `CurrCmdVal[index]` does the holding timer start incrementing.
 - When the ramp reaches or overshoots the target in a cycle, `CurrRef` is snapped to `CurrCmdVal[index]` and the remainder accumulator is cleared.
 
-Because the slope is applied independently per entry, the rate into each `CurrCmdVal` step can differ. The minimum value is 1 (a slope of 0 is not allowed, which guarantees the ramp always progresses).
+Because the slope is applied independently per entry, the rate into each `CurrCmdVal` step can differ. On standalone/v4 the minimum value is 1 (a slope of 0 is not allowed, which guarantees the ramp always progresses); central-i v5 lowers the minimum to a near-zero value, so fractional sub-1 mA/s slopes are allowed (see [Changes between versions](#changes-between-versions)).
 
 ## Examples
 
@@ -59,7 +59,7 @@ Worked example — if `CurrCmdIndex` = 2, `CurrCmdCntr` = `CurrCmdHTime[2]` (end
 
 - **Index 0** — invalid; valid indices are `CurrCmdSlope[1]`–`CurrCmdSlope[20]`. `CurrCmdSlope[0]` does not exist.
 - **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 1 or [CurrCmdSrc](CurrCmdSrc.md) ∉ {1, 2}) — the slope is **not consulted**; stored but unused.
-- **Out of range** — `0` and negative values are rejected; the minimum is `1` to guarantee progress.
+- **Out of range** — `0` and negative values are rejected. On standalone/v4 the minimum is `1` to guarantee progress; central-i v5 lowers the minimum to a near-zero value, allowing fractional sub-1 mA/s slopes.
 - **Large slope** — values that would produce a per-cycle step larger than the remaining distance to the target cause `CurrRef` to snap to the target on the next cycle; the holding timer starts immediately.
 - **Reload mid-ramp** — writing a new slope on the active entry changes the rate from the next cycle; the remainder accumulator is preserved so there is no discontinuity.
 - **Save** — flash-saveable.
@@ -67,7 +67,7 @@ Worked example — if `CurrCmdIndex` = 2, `CurrCmdCntr` = `CurrCmdHTime[2]` (end
 
 ## Changes between versions
 
-central-i v5 stores `CurrCmdSlope` as a 32-bit float and removes the fixed upper range limit (standalone/v4: 32-bit integer, range 1 to 2147483647).
+central-i v5 stores `CurrCmdSlope` as a 32-bit float. This both removes the fixed upper range limit and lowers the minimum from 1 to a near-zero value, so fractional sub-1 mA/s slopes become possible (standalone/v4: 32-bit integer, range 1 to 2147483647).
 
 ## See also
 

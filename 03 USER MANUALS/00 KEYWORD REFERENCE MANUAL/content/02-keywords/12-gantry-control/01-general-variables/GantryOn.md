@@ -74,12 +74,12 @@ AGantryOn          ; read whether gantry mode is active
 - **In motion at write** — rejected (`NOMOTN`). Stop both members first.
 - **Out of range** — values outside `0`–`1` are rejected.
 - **Either motor off** — the master-axis `GantryOn` is forced to `0` automatically when either member's motor turns off. To re-engage, turn both motors back on, finish their commutation, then write `GantryOn = 1` again.
-- **Mid-engage member trip** — if one motor of an engaged pair turns off mid-cycle, the firmware forces the other off and records [ConFlt](../../07-status-and-faults/ConFlt.md) = `CON_FLT_GANTRY_MEMBER_UNEXPECTED_MOTOR_OFF` (code 1061) on the still-enabled side, then clears the pair's gantry state.
+- **Mid-engage member trip** — if one motor of an engaged pair turns off mid-cycle, the firmware forces the other off and records [ConFlt](../../07-status-and-faults/ConFlt.md) fault code 1061 (other gantry member axis got motor off) on the side that was forced down, then clears the pair's gantry state.
 - **Written on yaw axis** — the parameter table accepts the write but the gantry engine only reads the master-axis storage; the write has no functional effect.
 - **Pair not commutated** — gantry will not produce useful behaviour if either motor's commutation is not done; check [StatReg](../../07-status-and-faults/StatReg.md) bit 0 on both members.
 - **Decoupling map** ([GantryMapType](GantryMapType.md) = 1, v5 only) — at engagement the firmware applies the map ratio to the feedback combination; transient ratio inaccuracy on engagement is smoothed by the gantry-ready-for-smoothing counter.
 - **Dual-loop gantry** ([GantryDLoopOn](GantryDLoopOn.md) = 1, v5 only) — at engagement the firmware also computes the dual-loop offset against the load feedback so the linear position does not jump.
-- **Smoothing pause** — after every `0 → 1` or `1 → 0` transition the controller temporarily disables jerk smoothing on the pair for `JERK_MAX_HISTORY_SIZE` cycles while the smoothing buffer refills with the new reference; expect a brief tracking blip.
+- **Smoothing pause** — after every `0 → 1` or `1 → 0` transition the controller temporarily disables jerk smoothing on the pair while the smoothing buffer refills with the new reference; expect a brief tracking blip.
 - **Save** — not flash-saveable; comes up `0` at every reset (user must enable after motors are on).
 - **Platform** — v4 supports only A–B; v5 central-i supports A–B, C–D, E–F, G–H.
 

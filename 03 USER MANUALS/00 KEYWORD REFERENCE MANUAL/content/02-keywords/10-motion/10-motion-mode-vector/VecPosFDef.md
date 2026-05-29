@@ -36,7 +36,7 @@ Array defining the position-filter coefficients applied to the vector reference 
 
 ## How it works
 
-The array uses the controller's standard customisable position-filter definition: the first element selects the filter **type** and the remaining elements supply up to five **parameters** for that type. A type of `0` (the default) means no filter, so the reference passes through unchanged. When a filter type is selected and [VecPosFOn](VecPosFOn.md) = 1, the controller derives the working coefficients from these parameters at the start of the vector move and applies a second-order (biquad-style) smoothing filter to the resultant path reference. The same definition convention is used elsewhere on the controller for customisable position filters.
+The array uses the controller's standard customisable position-filter definition: element [1] selects the filter **type** and elements [2]-[5] supply up to four **parameters** for that type. A type of `0` (the default) means no filter, so the reference passes through unchanged. When a filter type is selected and [VecPosFOn](VecPosFOn.md) = 1, the controller derives the working coefficients from these parameters at the start of the vector move and applies a second-order (biquad-style) smoothing filter to the resultant path reference. The same definition convention is used elsewhere on the controller for customisable position filters.
 
 Because the filter acts on the resultant path of the group master (the lowest-numbered member axis — see [VecMemberAxes](VecMemberAxes.md)), define it on the master. The definition is checked when the move starts: an invalid combination of type and parameters causes the move to be rejected, so verify the values before enabling the filter with [VecPosFOn](VecPosFOn.md).
 

@@ -79,9 +79,9 @@ AGoToPosMode              ; bumpless return to position control
 ### Edge cases
 
 - **Already in current mode** — no-op, returns OK.
-- **CNC member** (`CNCA_MEMBER` or `CNCB_MEMBER`) — rejected with `CANT_GO_TO_CURRENT_OR_FORCE_WHEN_CNC`. Stop the CNC group first.
+- **CNC member** ([MotionStat](../../10-motion/05-motion-status/MotionStat.md) bit 10 = CNCA member, or bit 13 = CNCB member) — rejected with error 191 ("Can't go to Current or Force mode when in CNC motion"). Stop the CNC group first.
 - **Vector member** — not blocked at this entry point (only the [DInMode](../../05-inputs-outputs/04-digital-inputs/DInMode.md) code 18 dispatch blocks vector members). Issuing `GoToCurrMode` on a vector member is accepted; consider explicitly stopping the vector first.
-- **In motion** — accepted; the motion ends immediately with `MotionReason = MOTION_REASON_END_GO_TO_CURR` and `MotionSamples[1]` is updated.
+- **In motion** — accepted; the motion ends immediately with [MotionReason](../../10-motion/05-motion-status/MotionReason.md) = 14 (motion ended due to the GoToCurrMode command) and `MotionSamples[1]` is updated.
 - **From velocity mode** — accepted; no special preparation is run (the velocity loop continues to feed the current loop until the new mode's current command takes over).
 - **From force mode** — accepted; force-mode state is left as-is and `OperationMode` flips to current; the previously running force-command sequence stops being applied.
 - **Motor off** — accepted; the mode flag changes but no power is applied until `MotorOn = 1`.

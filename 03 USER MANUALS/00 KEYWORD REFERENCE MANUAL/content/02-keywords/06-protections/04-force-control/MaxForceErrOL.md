@@ -49,7 +49,7 @@ When the limit is exceeded in this state, the loop disables the axis and [ConFlt
 
 - **Motor off:** the force loop does not run; the open-loop limit is not checked.
 - **Closed-loop operation:** with [OpenLoopOn](../../08-axis-operation/01-general-keywords/OpenLoopOn.md) = 0 and no direct current-reference injection, this limit is inactive — the trip uses [MaxForceErr](MaxForceErr.md) (ConFlt code 1045) instead.
-- **Range overflow:** writes outside `0…327680` are clamped to the keyword range; the in-force internal limit is updated immediately on write.
+- **Range overflow:** a write outside `0…327680` is rejected with an out-of-range error and the limit keeps its previous value; an accepted write re-runs the limit selection immediately, so if open-loop force operation is active the new value takes effect at once.
 - **Clearing the fault:** ConFlt code 1057 clears on re-enable ([MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../07-status-and-faults/ErrLog.md) entry persists.
 - **HWProtectBits / ProtectMask:** open-loop force-error trips are not maskable through [ProtectMask](../01-general-protection/ProtectMask.md) (that mask covers hardware-protection bits only).
 

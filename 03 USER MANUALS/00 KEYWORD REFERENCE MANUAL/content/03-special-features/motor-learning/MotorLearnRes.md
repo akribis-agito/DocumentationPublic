@@ -2,7 +2,7 @@
 
 **Definition:**
 
-MotorLearnRes is a read-only parameter that reports the current residual error or convergence metric of the motor learning algorithm, indicating how well the learned correction table matches the measured non-linearity. It is an axis-related status variable and is not saved to flash.
+MotorLearnRes is a read-only result reported after a motor-learning pass completes: the encoder resolution measured during the pass, expressed in encoder counts per electrical cycle for a rotary motor and as the estimated resolution for a linear motor. It is an axis-related status variable and is not saved to flash.
 
 **See also:**
 

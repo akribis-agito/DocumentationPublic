@@ -32,7 +32,7 @@ Reserved pulse-and-direction keyword; not implemented in current firmware.
 
 ## Overview
 
-`PDEncFilt` is a reserved keyword. It is flagged as not implemented and has no read/write behaviour. It was intended as a noise filter for the P/D input, but input filtering is instead handled by the input format selected with [PDSubType](PDSubType.md).
+`PDEncFilt` is a reserved keyword. It is flagged as not implemented and has no read/write behaviour. It was intended as a noise filter for the P/D input, but that function was never implemented, so the keyword has no effect. The P/D input format itself is selected with [PDSubType](PDSubType.md).
 
 > **Documentation pending:** This keyword is reserved and not implemented. Do not use it.
 

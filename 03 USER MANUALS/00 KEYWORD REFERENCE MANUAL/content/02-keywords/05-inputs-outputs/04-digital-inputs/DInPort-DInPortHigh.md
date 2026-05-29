@@ -25,7 +25,7 @@ $$
 \text{DInPortHigh} = (\text{debounced inputs 33–64}) \oplus \text{DInLogHigh}
 $$
 
-The previous cycle's value is retained before the update, which is how the function dispatch (see [DInMode](DInMode.md)) detects rising and falling edges. On a Central-i master the words instead come from the remote unit's synchronized I/O mirror, but the XOR-with-`DInLog` step is identical.
+To detect rising and falling edges, the function dispatch (see [DInMode](DInMode.md)) samples the inputs in groups once every 16 interrupts and compares each snapshot against the previous one. On a Central-i master the words instead come from the remote unit's synchronized I/O mirror, but the XOR-with-`DInLog` step is identical.
 
 `DInPort` is refreshed every control cycle at the controller's loop rate; the underlying raw signal is sampled and debounced far faster in hardware (see [DInFilt](DInFilt.md)).
 
@@ -49,7 +49,7 @@ For a bi-directional I/O configured as an output (see [BiDirConfig](../01-genera
 - **`DInPortHigh` on small platforms** — products without inputs 33–64 always return `0` on `DInPortHigh`; the keyword exists for software portability.
 - **Motor on/off** — sampling and debouncing run continuously regardless of `MotorOn`.
 - **Mode independence** — values are valid in every [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md); functions configured by [DInMode](DInMode.md) only consult the bits in the modes where they apply.
-- **Edge detection** — the dispatch in [DInMode](DInMode.md) compares the present and previous cycle's `DInPort`; a debounce filter that holds a transition for fewer cycles than the loop rate may miss an edge.
+- **Edge detection** — the dispatch in [DInMode](DInMode.md) compares the present and previous input snapshots, which are taken in groups once every 16 interrupts (not consecutive control cycles); a transition shorter than that 16-interrupt sampling window may be missed.
 - **Central-i mirror lag** — on a central-i master the input word comes from the synchronized I/O mirror; expect one mirror-period of latency relative to the remote pin.
 
 ## See also

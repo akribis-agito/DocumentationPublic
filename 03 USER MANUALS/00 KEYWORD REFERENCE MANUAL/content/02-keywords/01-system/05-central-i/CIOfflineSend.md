@@ -57,7 +57,7 @@ ACIOfflineData[4]      ; value returned by the remote
 
 ## Edge cases
 
-- **Port disconnected.** v5 does not require the port to be connected before `CIOfflineSend` is called; in earlier firmware the call was rejected on a disconnected port. In either case, with no remote responding the transaction ends with a communication timeout and the error is captured in [CIOfflineData](CIOfflineData.md)`[5]`.
+- **Port disconnected.** `CIOfflineSend` does not gate on connection state, so it can be issued on a disconnected port. With no remote responding the transaction simply ends with a communication timeout and the error is captured in [CIOfflineData](CIOfflineData.md)`[5]`.
 - **Motor on / in motion.** The command is permitted while the motor is on or moving — the offline mailbox is independent of the control loop. The reply still arrives in [CIOfflineData](CIOfflineData.md) on the same cycle window.
 - **Power-up.** The offline channel is only usable after [CIConnect](CIConnect.md) (or [CIAutoConnect](CIAutoConnect.md)) has brought the port up; before that, no remote is addressable and the call times out.
 - **Simulated device.** With [CIDeviceType](CIDeviceType.md) set to a simulation class the port is marked connected but there is no real remote — `CIOfflineSend` will time out, and the simulated-port path is intended for host tooling, not for real register access.
@@ -65,9 +65,9 @@ ACIOfflineData[4]      ; value returned by the remote
 
 ## Changes between versions
 
-The transaction is present in both v4 and v5. v5 (the central-i-only, 64-bit firmware) loosened the connection precondition so the call no longer requires the port to be marked active before it is sent (the reply still has to come back within the timeout to succeed). The request/response field layout in [CIOfflineData](CIOfflineData.md) and the logging into [OfflineBLog](OfflineBLog.md) are unchanged.
+The transaction is present and behaves the same in both v4 and v5: it does not gate on connection state, and the reply has to come back within the timeout to succeed. The request/response field layout in [CIOfflineData](CIOfflineData.md) and the logging into [OfflineBLog](OfflineBLog.md) are unchanged between versions.
 
-> **Frontmatter flag.** The generator-populated frontmatter currently lists this keyword as `removed_in: v5`, but the v5 (`develop`) firmware still defines and uses `CIOfflineSend` (CAN code 502, function on `CI_MASTER`). The generator's removed-in classification should be re-run; the body has been corrected to match the firmware.
+> **Frontmatter flag.** The generator-populated frontmatter currently lists this keyword as `removed_in: v5`, but v5 still defines and uses `CIOfflineSend` (CAN code 502). The generator's removed-in classification should be re-run; the body has been corrected to match the firmware.
 
 ## See also
 

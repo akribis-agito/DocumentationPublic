@@ -66,7 +66,7 @@ AMapEncoder[1]       ; read the encoder selected for the first dimension
 ### Edge cases
 
 - **Index 0** — invalid; valid indices are `MapEncoder[1]`/`[2]`/`[3]`.
-- **Motor on / in motion at write** — rejected (`MPNOMOTN`, `MPNOMTR`).
+- **Motor on / in motion at write** — rejected while the motor is on or the axis is in motion.
 - **Out of range** — values outside `1`–`number-of-axes × 2` are rejected.
 - **`MapEncoder[1]` wrong** — must point at this axis's own main encoder for the table build to accept the map; otherwise the build raises a "must be first encoder" event.
 - **2D/3D requires main encoders** — additional encoders for 2D/3D must be **main** encoders of motor-on, standing axes; auxiliary encoders for `[2]`/`[3]` are rejected with a "must be main encoders" event.

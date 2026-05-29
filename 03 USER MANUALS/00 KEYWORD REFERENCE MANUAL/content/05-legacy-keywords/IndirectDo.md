@@ -2,7 +2,7 @@
 
 **Definition:**
 
-IndirectDo is a command that executes the indirect array access operation. When triggered, it reads from or writes to the element of the array identified by IndirectArray at the index specified by IndirectIndex, transferring the data through IndirectValue. It is a non-axis command and is not saved to flash.
+IndirectDo is a command that executes the indirect array write operation. When triggered, it stores the value held in IndirectValue into the element at the index specified by IndirectIndex of the array selected by IndirectArray. It is a non-axis command and is not saved to flash.
 
 **See also:**
 

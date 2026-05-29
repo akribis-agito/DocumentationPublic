@@ -53,7 +53,7 @@ AGantryPosKi[1]     ; read the current value
 
 ### Edge cases
 
-- **Index 0** — invalid; valid indices are `GantryPosKi[1]`–`GantryPosKi[5]` (gain set 1 through 5; index 6 is the array slot for the active gain).
+- **Index 0** — invalid; valid indices are `GantryPosKi[1]`–`GantryPosKi[5]` (gain set 1 through 5). The active set is selected by gain scheduling.
 - **Gantry off** ([GantryOn](../01-general-variables/GantryOn.md) = 0) — writes accepted; the gain has no effect until gantry is engaged.
 - **Zero gain** — disables integral action; the yaw position loop runs as P + feedforward only.
 - **Wind-up at engagement** — the firmware halves the velocity-loop integral across the master/yaw split when gantry engages; a large `GantryPosKi` can wind up the integral quickly during early settling.

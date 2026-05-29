@@ -39,7 +39,7 @@ Read-only status of the active dual-loop control structure.
 
 ## How it works
 
-With dual-loop disabled, `DualLoopStat` reads `0`. With dual-loop enabled and pseudo dual-loop off, it reads `2`. With pseudo dual-loop on ([DualEncSwapOn](DualEncSwapOn.md) = 1) it reads `1`.
+With dual-loop disabled, `DualLoopStat` reads `0`. With [DualLoopOn](DualLoopOn.md) = 1 (auxiliary-encoder velocity feedback) and pseudo dual-loop off, it reads `2`. With pseudo dual-loop on ([DualEncSwapOn](DualEncSwapOn.md) = 1) it reads `1`. With [DualLoopOn](DualLoopOn.md) = 2 (analog-tachometer velocity feedback) it reads `0`.
 
 When range-limited switching is configured ([DualEncMode](DualEncMode.md) = 1), the controller switches between pseudo dual-loop and full dual-loop according to whether the motor feedback is inside the [DualEncRange](DualEncRange.md) window: inside the range `DualLoopStat` becomes `2`, outside it becomes `1`. Reading `DualLoopStat` therefore shows the structure in effect at that instant.
 

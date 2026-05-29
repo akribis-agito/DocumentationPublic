@@ -57,7 +57,7 @@ For every filter flagged as pending, the controller:
 
 1. **Validates the definition.** The filter type must be a known type; each parameter must be within its allowed range. The result is written to that filter's field in [FilterStatus](FilterStatus.md): bit `n+1` is set if the filter type is unknown, and bits `n+2`–`n+5` are set per out-of-range parameter.
 2. **On success**, computes the new coefficients, switches the running filter to them, clears that filter's history buffer (so the new filter starts clean), clears the pending-recalculation flag, and records the accepted definition as the new reference for future change-detection.
-3. **On failure** (unknown type or out-of-range parameter), the controller rejects that filter's changes. The filter type and its first defining parameter revert to the last values that were accepted; the remaining changed parameters are left as written but are not applied. The filter therefore keeps running with its previous, valid coefficients. An error is logged and returned.
+3. **On failure** (unknown type or out-of-range parameter), the controller rejects that filter's changes. The whole definition reverts to the last accepted state: the filter on/off flag, the filter type, and all four defining parameters are restored to the values from the last successful calculation. The filter therefore keeps running with its previous, valid coefficients. An error is logged and returned. (This validate-and-revert behaviour is present on central-i v5 only.)
 
 After processing all of an axis's filters, the controller returns a single reply: an error if any filter failed validation, otherwise success.
 
@@ -69,7 +69,7 @@ On firmware where the enable sequence checks these bits, the axis cannot be enab
 
 ### Order of messages matters
 
-Because `CalcFilters` validates whatever is present at the moment it runs, all the parameters of a filter must be set **before** `CalcFilters` in the same message. If `CalcFilters` runs before the full definition is in place, the partially defined filter is validated as-is. If that partial definition is invalid, it is rejected (type and first parameter revert; later parameters remain as unapplied changes), and the previously running filter is kept.
+Because `CalcFilters` validates whatever is present at the moment it runs, all the parameters of a filter must be set **before** `CalcFilters` in the same message. If `CalcFilters` runs before the full definition is in place, the partially defined filter is validated as-is. If that partial definition is invalid, it is rejected (the on/off flag, type, and all four parameters revert to the last accepted definition), and the previously running filter is kept. Parameters written after `CalcFilters` are not seen by that calculation, so they take effect only when a later `CalcFilters` validates them.
 
 The example below configures velocity filter 1 as a notch at 450 Hz, 6 dB depth, 40 Hz width.
 
@@ -81,7 +81,7 @@ The example below configures velocity filter 1 as a notch at 450 Hz, 6 dB depth,
 | `VelFiltDef[3]` | 0 | 6 | 0 |
 | `VelFiltDef[4]` | 0 | 4000 | 0 |
 | `VelFiltDef[5]` | 0 | 0 | 0 |
-| Result | Velocity filter 1 = low-pass at 200 Hz, on | Notch at 450 Hz, 6 dB, 40 Hz width, on. **Accepted.** | Notch definition incomplete (depth 0, width 0) — **rejected as an invalid notch.** `VelFiltDef[1]` and `[2]` revert to their previous values (the filter stays a low-pass); `VelFiltDef[3]` and `[4]` remain as unapplied changes. |
+| Result | Velocity filter 1 = low-pass at 200 Hz, on | Notch at 450 Hz, 6 dB, 40 Hz width, on. **Accepted.** | Notch definition incomplete (depth 0, width 0) — **rejected as an invalid notch.** The definition reverts to the last accepted state (the filter stays a low-pass). `VelFiltDef[3]` and `[4]` are then written, but having arrived after `CalcFilters` they were not part of this validation and are not applied until the next `CalcFilters`. |
 
 - Good order: `VelFiltDef[1]=8; VelFiltDef[2]=45000; VelFiltDef[3]=6; VelFiltDef[4]=4000; CalcFilters`
 - Bad order: `VelFiltDef[1]=8; VelFiltDef[2]=45000; CalcFilters; VelFiltDef[3]=6; VelFiltDef[4]=4000`

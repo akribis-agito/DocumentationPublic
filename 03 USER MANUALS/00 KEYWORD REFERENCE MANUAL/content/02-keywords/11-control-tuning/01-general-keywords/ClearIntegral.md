@@ -63,7 +63,7 @@ A common use is to clear residual integrator state between successive tuning mov
    AClearIntegral
    ```
 
-3. **Verify the clear took effect** by reading the loop's downstream signals on the next sample - for example [CurrRefCtrl](../../09-current-and-voltage/02-motor-variables/CurrRefCtrl.md) will no longer carry any prior integrator contribution. Any anti-windup state captured during the previous move (see the saturation bits in [StatReg](../../07-status-and-faults/StatReg.md)) is also released.
+3. **Verify the clear took effect** by reading the loop's downstream signals on the next sample - for example [CurrRefCtrl](../../09-current-and-voltage/02-motor-variables/CurrRefCtrl.md) will no longer carry any prior integrator contribution.
 
 4. **Issue the next command**. The velocity loop will accumulate fresh integral from zero.
 
@@ -74,5 +74,5 @@ A common use is to clear residual integrator state between successive tuning mov
 - [VelKi](../04-velocity-control/VelKi.md) — velocity-loop integral gain that drives this integrator
 - [PosKi](../03-position-control/PosKi.md) — position-loop integral gain (not affected by this command)
 - [CurrKi](../06-current-control/CurrKi.md) — current-loop integral gain (not affected by this command)
-- [StatReg](../../07-status-and-faults/StatReg.md) — anti-windup state via bits 21-23
+- [StatReg](../../07-status-and-faults/StatReg.md) — bits 21-23 report current/voltage/velocity saturation status (not affected by this command)
 - [MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) — loop integrators are zeroed automatically while the motor is off

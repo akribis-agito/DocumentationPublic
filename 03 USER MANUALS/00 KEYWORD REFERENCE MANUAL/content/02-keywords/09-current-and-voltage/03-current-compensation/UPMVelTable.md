@@ -78,7 +78,7 @@ This recipe writes a few entries into the table to balance an observed cogging r
 
 3. **Identify the disturbance.** From a recording of commutation angle ([ComtAng](../../15-commutation/ComtAng.md)) and current draw at constant velocity, observe the cogging current ripple as a function of angle. For each whole-degree angle θ where the ripple is +I, the compensation entry should be -I; where it is -I, the entry should be +I.
 
-4. **Write the entries** (one whole degree at a time, 1-indexed, valid range 1 to 361):
+4. **Write the entries** (one whole degree at a time, 1-indexed, valid range 1 to 360):
 
    ```text
    AUPMVelTable[54]=300        ; +300 at 54 deg cancels a -300 cogging ripple

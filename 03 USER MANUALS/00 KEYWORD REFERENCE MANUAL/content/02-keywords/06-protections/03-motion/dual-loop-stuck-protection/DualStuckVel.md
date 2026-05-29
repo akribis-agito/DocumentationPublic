@@ -56,10 +56,10 @@ The default is `40000` count/s. Because the gate is `DualLoopOn`, this protectio
 
 ### Edge cases
 
-- **Motor off:** the dual-loop check does not run (the loop block runs only with the motor enabled); the internal counter is reset on motor-off.
+- **Motor off:** the dual-loop check does not run; the loop block runs only with the motor enabled, so on motor-off the internal counter is held (not cleared); it is cleared at power-up and on any in-tolerance sample while running.
 - **`DualLoopOn = 0`:** the entire dual-stuck path is skipped — single-loop axes are never tripped by this protection regardless of value.
 - **Mode dependency:** dual-loop stuck runs in every operation mode whenever `DualLoopOn` is non-zero (it is not bypassed by the current/force/auto-phasing modes that gate [motor-stuck](../motor-stuck-protection/00-overview.md)).
-- **Range overflow:** writes outside `0…1300000000` are clamped to the keyword `range`.
+- **Range overflow:** writes outside `0…1300000000` are rejected with an out-of-range error; the stored value is left unchanged.
 - **Clearing the fault:** ConFlt code 1049 clears on re-enable ([MotorOn](../../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../../07-status-and-faults/ErrLog.md) entry persists.
 - **HWProtectBits / ProtectMask:** the dual-loop-stuck trip is not maskable through [ProtectMask](../../01-general-protection/ProtectMask.md) (that mask covers hardware-protection bits only).
 

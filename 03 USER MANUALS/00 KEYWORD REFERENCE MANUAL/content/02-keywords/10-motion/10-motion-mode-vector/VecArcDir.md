@@ -49,7 +49,7 @@ Two axes are defined for an arc motion. The arc is performed in the plane of the
 - **CCW (`0`)** — the angle increases from the start angle to the end angle. The path length is the increasing angular gap (plus any full turns from [VecNumCircles](VecNumCircles.md)) times the radius.
 - **CW (`1`)** — the angle decreases. The path length is the complementary gap (a full turn minus the CCW gap, plus any extra turns) times the radius.
 
-So with the same start point, end point and center, switching `VecArcDir` selects the "short way" versus the "long way" round the circle. When the start and end points coincide (a full circle), CCW sweeps a complete turn while CW relies on [VecNumCircles](VecNumCircles.md) to define the revolutions. The resulting arc length is stored as [VecAbsTrgt](VecAbsTrgt.md).
+So with the same start point, end point and center, switching `VecArcDir` selects the "short way" versus the "long way" round the circle. When the start and end points coincide (a full circle), both CCW and CW sweep exactly one complete turn (2π) on their own; use [VecNumCircles](VecNumCircles.md) to add further revolutions in either direction. The resulting arc length is stored as [VecAbsTrgt](VecAbsTrgt.md).
 
 ## Examples
 

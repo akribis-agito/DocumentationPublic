@@ -56,7 +56,7 @@ For an immediate end during a dwell or mid-leg, use [Stop](Stop.md) (controlled 
 ### Edge cases
 
 - **Motor off:** accepted but no effect (no motion).
-- **Not in motion:** the bit is set but cleared by the next `Begin`.
+- **Not in motion:** the repetitive-stop bit (bit 2) is set unconditionally and is **not** cleared by [Begin](Begin.md) — `Begin` only sets the in-motion bit. The bit is cleared only when a move ends. A stale bit 2 left set while the axis is idle therefore survives into the next repetitive move and ends it after its first repetition. Issue `StopRep` only while a repetitive move is actually running.
 - **Out-of-range "write":** function has no value.
 - **Simulation mode (`MotorType` = 5):** unchanged.
 - **ModRev wrap:** unrelated — `StopRep` does not touch the reference.

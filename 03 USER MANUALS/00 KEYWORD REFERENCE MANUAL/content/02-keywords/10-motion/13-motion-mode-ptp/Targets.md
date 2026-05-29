@@ -62,7 +62,7 @@ To step through all three from a user program, copy each entry into `AbsTrgt` an
 ### Edge cases
 
 - **Motor off:** values are held in flash; reading/writing is unaffected.
-- **Out-of-range write:** the parameter system clamps to ±2³¹−1 (v4) or ±2⁵¹−1 (v5); values outside are rejected.
+- **Out-of-range write:** a value outside the data-type range (±2³¹−1 v4, ±2⁵¹−1 v5) is rejected with an error and the stored entry is left unchanged; there is no clamping.
 - **Index `[0]` / `[4]`:** the keyword has 3 usable entries `[1]` … `[3]`. Indexes outside this range return an error.
 - **Simulation mode (`MotorType` = 5):** unchanged — `Targets` is pure storage.
 - **ModRev wrap:** values are stored as raw user units; loading a value outside `[0, ModRev)` into `AbsTrgt` will be valid but the controller's wrap behaviour will adjust the reference frame as the move proceeds.

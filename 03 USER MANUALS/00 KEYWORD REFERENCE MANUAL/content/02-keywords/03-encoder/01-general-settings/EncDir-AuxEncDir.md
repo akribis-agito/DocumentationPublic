@@ -16,7 +16,7 @@ Sets the counting direction of the encoder feedback.
 For an **incremental** encoder the direction reversal is applied in the **quadrature decode hardware**, not as a software post-step:
 
 - **Standalone controller** — `EncDir` is written into the decoder control register's quadrature-swap bit. Setting it swaps the A and B channels in hardware, inverting the decoded count direction.
-- **Central-i remote units** — `EncDir` is packed into the remote encoder configuration word (bit 8) sent to the remote unit, where the hardware applies the same swap.
+- **Central-i remote units** — `EncDir` is packed into the remote encoder configuration word at bit 24 (`EncDir << 8` within the upper 16-bit half-word) sent to the remote unit, where the hardware applies the same swap.
 
 For an **absolute** encoder there is no quadrature decoder to swap, so the firmware applies the reversal in software each cycle: after the raw word has been right-shifted by [EncAbsMB](EncAbsMB-AuxEncAbsMB.md), the masked reading is replaced with `ReadingCycle − reading` when `EncDir = 1`. The net effect on [Pos](../../10-motion/01-kinematics-status/Pos.md) is the same as for an incremental encoder.
 
@@ -36,9 +36,9 @@ AEncDir=1            ; reverse the counting direction
 
 ## Edge cases
 
-- **Motor on / in motion.** Writes are rejected — the keyword's `NOMTRON` / `NOMOTN` attributes prevent a direction change while the axis is enabled or moving. Disable the motor first; on a brushless motor you will then need to re-phase.
+- **Motor on / in motion.** Writes are rejected while the motor is on or the axis is in motion. Disable the motor first; on a brushless motor you will then need to re-phase.
 - **Encoder type 4 (SIN/COS).** `EncDir` is ignored; set direction via [SinCosSetup](SinCosSetup-AuxSinCosSet.md) index [10] instead.
-- **Incremental vs absolute.** For incremental (`EncType=1`) the reversal happens in the decode hardware (A/B swap on standalone, configuration bit 8 on Central-i). For absolute encoders (`EncType=3/6/8`) the reversal is applied in software each cycle as `ReadingCycle − reading` after the [EncAbsMB](EncAbsMB-AuxEncAbsMB.md) right-shift; net effect on [Pos](../../10-motion/01-kinematics-status/Pos.md) is the same.
+- **Incremental vs absolute.** For incremental (`EncType=1`) the reversal happens in the decode hardware (A/B swap on standalone, configuration bit 24 on Central-i). For absolute encoders (`EncType=3/6/8`) the reversal is applied in software each cycle as `ReadingCycle − reading` after the [EncAbsMB](EncAbsMB-AuxEncAbsMB.md) right-shift; net effect on [Pos](../../10-motion/01-kinematics-status/Pos.md) is the same.
 - **Power-up / Save / Reset.** The setting is flash-saved; the hardware-swap or software-reversal is applied during initialisation, so a fresh value takes effect after [Save](../../01-system/02-operation/Save.md) + [Reset](../../01-system/02-operation/Reset.md).
 - **Central-i disconnect.** The direction bit is packed into the remote encoder configuration word and sent during [CIConnect](../../01-system/05-central-i/CIConnect.md); on a disconnected port the remote keeps its last-applied direction.
 

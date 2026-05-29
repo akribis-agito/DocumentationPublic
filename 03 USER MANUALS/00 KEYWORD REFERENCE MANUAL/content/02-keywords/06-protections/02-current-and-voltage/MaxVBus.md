@@ -55,7 +55,7 @@ For warning purposes the drive also reports a multi-level VBus warning in [StatR
 
 - **Motor off:** the bus-voltage check still runs (this protects the drive hardware, not just the moving motor) — a sustained over-voltage trips even when no axis is enabled.
 - **Mode dependency:** the trip runs regardless of operation mode.
-- **`MaxVBusTime = 0`:** the trip fires on the first bus check at or above `MaxVBus`, effectively instant (same speed as [MaxVBusAbs](MaxVBusAbs.md) but using `MaxVBus` as the threshold).
+- **`MaxVBusTime = 0`:** the trip fires on the first bus check above `MaxVBus`, effectively instant (same speed as [MaxVBusAbs](MaxVBusAbs.md) but using `MaxVBus` as the threshold).
 - **Range overflow:** writes outside `12000…95000` (mV) are clamped to the keyword `range`. Set `MaxVBus` below [MaxVBusAbs](MaxVBusAbs.md) so the timed band acts first on normal regen transients.
 - **Clearing the fault:** ConFlt code 1008 clears on re-enable ([MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../07-status-and-faults/ErrLog.md) entry persists.
 - **HWProtectBits / ProtectMask:** the bus-voltage trip is not maskable through [ProtectMask](../01-general-protection/ProtectMask.md).

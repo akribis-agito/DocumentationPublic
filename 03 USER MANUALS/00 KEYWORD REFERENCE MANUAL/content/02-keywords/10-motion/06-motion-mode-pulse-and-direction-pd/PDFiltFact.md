@@ -9,7 +9,7 @@ First-order filter coefficient (1-64) smoothing PDPos into PosRef in direct P/D 
 
 Agito controllers support motion modes in which the desired motor position is defined by the pulse/direction input port. Refer to the [MotionMode](../02-motion-configuration/MotionMode.md) parameter, direct (3) and indirect (4) P/D motion modes.
 
-The pulse/direction input port value can be read using the parameter [PDPos](PDPos.md). It is equal to the number of input pulses (direction taken into account) multiplied by the parameter [PDFact](PDFact.md).
+The pulse/direction input port value can be read using the parameter [PDPos](PDPos.md). It is equal to the number of input pulses (direction taken into account) multiplied by the scaling ratio [PDFact](PDFact.md)/[PDFactDen](PDFactDen.md).
 
 In direct P/D motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 3), `PDPos` is used to set the position reference (`PosRef`, the desired position) directly. However, to avoid large steps in `PosRef` (especially when [PDFact](PDFact.md) is large), a first-order filter is applied to the change in `PDPos` before it is assigned to `PosRef`. `PDFiltFact` is the **integer coefficient** of that filter — it matters most when the pulse stream is coarse or fast.
 

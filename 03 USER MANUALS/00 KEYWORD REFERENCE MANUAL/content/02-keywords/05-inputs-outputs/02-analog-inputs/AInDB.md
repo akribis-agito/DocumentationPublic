@@ -74,7 +74,7 @@ AAInDB[1]=20         ; ±20 mV deadband on analog input 1
 
 ### Edge cases
 
-- **Index 0** — invalid; valid indices are `AInDB[1]`–`AInDB[4]` (plus `[5]` reserved). `AInDB[0]` does not exist.
+- **Index 0** — invalid; valid indices are `AInDB[1]`–`AInDB[4]`. `AInDB[0]` is the reserved comm/internal slot (not user-accessible) and `AInDB[5]` does not exist.
 - **Out of range** — negative values are not accepted (range begins at `0`); a zero `AInDB` disables this stage entirely.
 - **At the band edge** — the upper comparison is strict (`u > AInDB`) and the lower strict (`u < −AInDB`), so a value exactly at `±AInDB` is forced to `0` (the band is inclusive on its boundary).
 - **Interaction with [AInOffset](AInOffset.md)** — the band is centred on the offset-corrected zero; tune `AInOffset` first to null any DC bias.

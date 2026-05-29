@@ -93,9 +93,9 @@ The codes cluster into a handful of families, and reading the cluster usually te
 | | v4 (standalone &amp; central-i) | v5 (central-i) |
 |---|---|---|
 | Highest reason code | 40 | **41** |
-| Value 41 | not defined | Motion ended at a forward *or* reverse software position limit (a single combined code). |
+| Value 41 | not defined | A jog move ended because it decelerated to a stop at a forward or reverse software position limit (the reason code paired with [MotionStat](MotionStat.md) bit 20). |
 
-In **v5** a combined software-limit reason code 41 was added. Codes 0–40 are unchanged. **v5 is central-i only.**
+In **v5** a jog-specific software-limit reason code 41 was added (forward or reverse). Codes 0–40 are unchanged. **v5 is central-i only.**
 
 ## Examples
 

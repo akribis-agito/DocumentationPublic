@@ -27,7 +27,6 @@ The waypoint buffer ([BuffPos](BuffPos.md) / [BuffTime](BuffTime.md)) is **produ
 | Build | Usable waypoints |
 |---|---|
 | Standalone drives (AGD series) | 5 — the spline-buffer feature is effectively not usable on these products |
-| Central-i AGM800 (C2000 processor) | 50 |
-| Central-i AGM800 (Zynq processor) | 10 000 |
+| Central-i AGM800 | 50 or 10 000, depending on the hardware variant |
 
 The keyword frontmatter shows the largest array size; on smaller builds the same keyword exists but its usable range is reduced.

@@ -54,8 +54,10 @@ $$
 $$
 
 $$
-\text{MotionSamples}[3] = \text{MotionSamples}[2] + \frac{\text{InTargetTime}}{T_{s}}
+\text{MotionSamples}[3] = \text{MotionSamples}[2] + \text{InTargetTime}
 $$
+
+Here `InTargetTime` means its internal value in controller cycles (samples) — the same units as the rest of `MotionSamples` — so no division by $T_{s}$ is needed. Note that the [InTargetTime](InTargetTime.md) keyword is entered and displayed in milliseconds and converted to samples internally via the sampling-rate scaling factor.
 
 ## Examples
 

@@ -66,7 +66,7 @@ If [RelTrgt](../13-motion-mode-ptp/RelTrgt.md) ≠ 0 the absolute target is firs
 - **Other motion modes:** `RptMode` is ignored outside [MotionMode](MotionMode.md) `= 2`.
 - **`RptCycles = 1`:** the move runs once (the "out" leg in bidirectional, the first step in unidirectional) and then ends — the value of `RptMode` does not change that one-shot behaviour, but it does change the next target that would be computed (just not used).
 - **`RptWait = 0`:** the move flows directly from one repetition into the next with no dwell; `RptMode` still chooses bidirectional/unidirectional in exactly the same way.
-- **Cannot change in motion:** writes are rejected while the axis is in motion (the `NOMOTN` flag).
+- **Cannot change in motion:** writes are rejected while the axis is in motion.
 
 ## Examples
 

@@ -97,7 +97,7 @@ For Central-i products. The feedback logging feature is unavailable for the I/O 
 
 ### How the selection reaches the hardware
 
-On **standalone** products the source/edge encode directly into the per-axis strobe-settings register that drives the encoder hardware capture (QEP strobe latch): the chosen input is multiplexed onto the strobe pin and the polarity bit sets rising vs. falling. The strobe pin is shared with event generation, so selecting a `LockSrc` and arming [LockEn](LockEn-AuxLockEn.md) takes ownership of that pin from event generation.
+On **standalone** products the source/edge encode directly into the per-axis strobe-settings register that drives the encoder hardware capture: the chosen input is multiplexed onto the strobe pin and the polarity bit sets rising vs. falling. The strobe pin is shared with event generation, so selecting a `LockSrc` and arming [LockEn](LockEn-AuxLockEn.md) takes ownership of that pin from event generation.
 
 On **Central-i** products the source/edge are sent to the remote drive's FPGA lock-configuration registers (input-select bit-mask plus polarity). The remote FPGA performs the capture and the master reads back the latched position over the offline mailbox.
 

@@ -49,13 +49,13 @@ AEncType=6           ; BiSS-C absolute encoder
 
 ### Walk-through: set up an absolute encoder at boot
 
-A typical absolute-encoder commissioning sequence. The example uses a 26-bit BiSS-C device with a 12-bit multi-turn count and no offset; adapt the values to your encoder's datasheet.
+A typical absolute-encoder commissioning sequence. The example uses a 26-bit BiSS-C device, discarding the 4 least-significant (fine/unused) bits, and no offset; adapt the values to your encoder's datasheet.
 
 ```text
 AMotorOn=0                ; motor off — these keywords change the feedback pipeline
 AEncType=6                ; absolute, BiSS-C (use 3 for EnDat 2.2, 8 for Tamagawa)
 AEncAbsBits=26            ; total bit count of the absolute word
-AEncAbsMB=12              ; bits at the top that form the multi-turn count
+AEncAbsMB=4               ; discard the 4 least-significant (unused/fine) bits
 AEncAbsOff=0              ; offset added to the masked reading at power-up
 ASave                     ; persist the encoder configuration to flash
 AReset                    ; software power cycle so the encoder is configured cleanly

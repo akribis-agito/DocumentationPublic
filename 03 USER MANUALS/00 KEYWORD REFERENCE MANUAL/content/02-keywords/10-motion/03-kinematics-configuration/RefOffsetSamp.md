@@ -51,7 +51,7 @@ Writing a fresh `RefOffsetSamp` (with a non-zero [RefOffsetStep](RefOffsetStep.m
 
 ### Edge cases
 
-- **Motor off:** the injection only runs while `IN_MOTION_AND_STOP_BITS_SET == IN_MOTION_BIT_SET`; with the motor off there is no motion so no injection occurs. The countdown is preserved.
+- **Motor off:** the injection only runs while the axis is in motion and not in a stop process; with the motor off there is no motion so no injection occurs. The countdown is preserved.
 - **Out-of-range write:** the parameter system rejects negative values; range is `0`–`2³¹−1`.
 - **Simulation mode (`MotorType` = 5):** the injection runs in simulation; the synthetic feedback follows the offset reference.
 - **ModRev wrap:** the offset is added directly to the high-precision reference accumulator; if the resulting reference crosses the modulo boundary, the wrap fires normally and the offset persists in the wrapped frame.

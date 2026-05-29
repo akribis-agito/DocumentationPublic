@@ -42,13 +42,11 @@ See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all r
 
 A push writes the supplied value into the next free queue slot, tags it as a cycle-time entry, and decrements the free-entry count reported by [FIFOStatus](FIFOStatus.md) (index 2). Because a cycle-time entry occupies a queue slot, interleaving many of them reduces the number of slots left for motion segments (128 usable in total).
 
-## Changes between versions
+## Range
 
-| | v4 (standalone &amp; central-i) | v5 (central-i) |
-|---|---|---|
-| Accepted range | unrestricted | 1 to 65 536 000 |
+The pushed cycle time is bounded to between 1 control sample and 1000 seconds' worth of control samples on all firmware versions; values outside that range are rejected. The upper limit scales with the controller's control-loop sample rate — for example, 65 536 000 samples on a 65 536-sample/second controller, or 16 384 000 samples on a 16 384-sample/second controller. There is no version-dependent difference in the accepted range.
 
-In **v5** the pushed cycle time is bounded to 1–65 536 000 control samples. **v5 is central-i only.**
+Standalone controllers support this keyword on v4; central-i supports it on v4 and v5.
 
 ## Examples
 

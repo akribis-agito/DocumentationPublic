@@ -38,7 +38,7 @@ Array of commutation settings that configure how the motor electrical angle is e
 
 The *method* element (index `[1]`) selects how the angle is found; depending on the method, the angle may be derived from Hall sensors (see [HallsAngle](HallsAngle.md), [HallsValue](HallsValue.md), [HallOnlyFilt](HallOnlyFilt.md)), from the encoder readings, or from an absolute encoder. The *mode* element (index `[19]`) selects *when* the commutation process runs (power-on, motor-on, both, or manual only). Being an array, axis-scope, and flash-saved, `ComtMode` cannot be changed while the motor is on or in motion.
 
-The resulting electrical angle is reported by [ComtAng](ComtAng.md), and progress/outcome is reported by [ComtStatus](ComtStatus.md). While commutation has not yet finished, the commutation-complete bit of [StatReg](../07-status-and-faults/StatReg.md) (bit 0) stays cleared and the axis cannot run normal motion.
+The resulting electrical angle is reported by [ComtAng](ComtAng.md), and progress/outcome is reported by [ComtStatus](ComtStatus.md). The commutation-complete bit of [StatReg](../07-status-and-faults/StatReg.md) (bit 0) gates normal motion: for the Hall-start switching methods (`ComtMode[1]=3` or `4`) it is set once a usable rough Hall angle is established ([ComtStatus](ComtStatus.md) `300`/`400`) and stays set through refinement to `100`; otherwise it is set when commutation finishes (`100`) or is not required (`200`). The bit stays cleared, blocking normal motion, only before any usable angle is available ([ComtStatus](ComtStatus.md) `0`/`1`) or when commutation has failed.
 
 ## How it works
 

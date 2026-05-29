@@ -21,7 +21,7 @@ The capture order set here is preserved end to end: it determines how samples ar
 
 | RecParamA indices | 1 | 2 | 3 | 4 | 5 – 20 |
 |---|---|---|---|---|---|
-| Value (Complex CAN codes) | 1026 (BPos) | 65565 (BVel[1]) | 0 | 1050 (BCurrRef) | 0 |
+| Value (Complex CAN codes) | 1026 (BPos) | 66565 (BVel[1]) | 1050 (BCurrRef) | 0 | 0 |
 
 When recording on the first scope is started with the array definition above, all of BPos, BVel\[1\] and BCurrRef are captured.
 

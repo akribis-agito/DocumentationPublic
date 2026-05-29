@@ -1,13 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="780" height="320" viewBox="0 0 780 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="ErrLog stores 32 event pairs in a circular buffer of 64 elements; the upper 8 bits of each code element tag the source axis or thread, the lower 24 bits hold the error code.">
-  <title>ErrLog 32-pair circular buffer and tagged code layout</title>
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="320" viewBox="0 0 780 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="ErrLog stores 128 event pairs in a circular buffer of 256 elements; the upper 8 bits of each code element tag the source axis or thread, the lower 24 bits hold the error code.">
+  <title>ErrLog 128-pair circular buffer and tagged code layout</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
     </marker>
   </defs>
 
-  <!-- Top: ring of 32 pairs (64 elements) -->
-  <text x="20" y="20" font-weight="bold">ErrLog: 32 event pairs in a circular buffer (64 used elements; index [0] unused)</text>
+  <!-- Top: ring of 128 pairs (256 elements) -->
+  <text x="20" y="20" font-weight="bold">ErrLog: 128 event pairs in a circular buffer (256 used elements; index [0] unused)</text>
 
   <!-- pair cells -->
   <g>
@@ -30,19 +30,19 @@
     <text x="305" y="68" text-anchor="middle">. . .</text>
 
     <rect x="340" y="40" width="60" height="44" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-    <text x="370" y="58" text-anchor="middle" font-size="11">[61]</text>
+    <text x="370" y="58" text-anchor="middle" font-size="11">[253]</text>
     <text x="370" y="73" text-anchor="middle" font-size="10">code</text>
 
     <rect x="400" y="40" width="60" height="44" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-    <text x="430" y="58" text-anchor="middle" font-size="11">[62]</text>
+    <text x="430" y="58" text-anchor="middle" font-size="11">[254]</text>
     <text x="430" y="73" text-anchor="middle" font-size="10">time</text>
 
     <rect x="460" y="40" width="60" height="44" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-    <text x="490" y="58" text-anchor="middle" font-size="11">[63]</text>
+    <text x="490" y="58" text-anchor="middle" font-size="11">[255]</text>
     <text x="490" y="73" text-anchor="middle" font-size="10">code</text>
 
     <rect x="520" y="40" width="60" height="44" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-    <text x="550" y="58" text-anchor="middle" font-size="11">[64]</text>
+    <text x="550" y="58" text-anchor="middle" font-size="11">[256]</text>
     <text x="550" y="73" text-anchor="middle" font-size="10">time</text>
   </g>
 
@@ -53,8 +53,8 @@
   <!-- pair brackets -->
   <text x="80" y="100" text-anchor="middle" font-size="11" fill="#5b6b7b">pair 1</text>
   <text x="210" y="100" text-anchor="middle" font-size="11" fill="#5b6b7b">pair 2</text>
-  <text x="400" y="100" text-anchor="middle" font-size="11" fill="#5b6b7b">pair 31</text>
-  <text x="520" y="100" text-anchor="middle" font-size="11" fill="#5b6b7b">pair 32</text>
+  <text x="400" y="100" text-anchor="middle" font-size="11" fill="#5b6b7b">pair 127</text>
+  <text x="520" y="100" text-anchor="middle" font-size="11" fill="#5b6b7b">pair 128</text>
 
   <!-- Bottom: tagged code element layout -->
   <text x="20" y="160" font-weight="bold">Element 1 of a pair (tagged code) — 32-bit layout</text>

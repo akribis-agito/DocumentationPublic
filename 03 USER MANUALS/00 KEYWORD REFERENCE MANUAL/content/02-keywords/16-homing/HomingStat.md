@@ -48,7 +48,7 @@ The per-step error checks include: the axis was unexpectedly already in motion w
 |----|----|
 | 0 | No homing was done after power on or reset. |
 | Positive value (not 100) | Homing is in process. The value is the number of the step currently being processed. |
-| -1 | Aborted due to a wrong parameter in the HomingDef array (parameters of each step are checked at the start of that step). |
+| -1 | Reserved. A generic "wrong parameter in HomingDef" abort code that the current firmware does not report; an invalid step is instead caught by the step-specific aborts below (for example an unrecognized step instruction reports `-5`). |
 | -2 | Aborted due to timeout during one of the homing steps (the step's "maximum time" parameter elapsed). |
 | -3 | Aborted due to unexpected motor off. During a step the axis was disabled (e.g. by a fault reflected in ConFlt) and the step could not complete. |
 | -4 | Aborted due to wrong motion reason. A step that expects a specific end-of-motion reason (RLS, FLS, index, reached target, home change…) saw a different reason. |

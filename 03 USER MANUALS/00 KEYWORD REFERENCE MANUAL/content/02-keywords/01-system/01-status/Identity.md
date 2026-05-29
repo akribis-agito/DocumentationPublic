@@ -135,7 +135,7 @@ AIdentity[25]       ; feature-flag word 1
 
 ## Changes between versions
 
-On Central-i v5 the array is larger (`array_size` = 75, vs 63 on v4 — see the frontmatter). The additional indices expose extra version information used by the Central-i system: a Central-i master version (decomposed major/minor/patch/owner/sub-version plus a combined value), the actual and expected EtherCAT-slave-information (ESI) version numbers, and the sizes of the firmware's print buffers. Indices [1]–[62] keep the same meaning on both versions.
+On Central-i v5 the array is larger (`array_size` = 75, vs 63 on v4 — see the frontmatter). The additional indices expose extra version information used by the Central-i system: a Central-i master version (decomposed major/minor/patch/owner/sub-version plus a combined value), the actual and expected EtherCAT-slave-information (ESI) version numbers, and the sizes of the firmware's print buffers. The documented indices [1]–[55] and [62] keep the same meaning on both versions. On Central-i v5 a few additional internal fields appear at [56]–[61] that are not used by host software and are not documented here.
 
 ## See also
 

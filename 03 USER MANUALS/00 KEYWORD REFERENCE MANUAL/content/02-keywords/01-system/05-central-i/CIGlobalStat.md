@@ -35,7 +35,7 @@ Read-only register encoding the connection state of all Central-i ports.
 `CIGlobalStat` is a read-only, non-axis register that summarises the connection state of every Central-i port in one value, so the host can poll system-wide status without reading [CIStatus](CIStatus.md) on each axis. Each port occupies **two bits**, packed by port number:
 
 - the **low** (even) bit of the pair is set when the port is connected;
-- the **high** (odd) bit of the pair is set when the port is connected to a *simulated* device ([CIDeviceType](CIDeviceType.md) set to a simulation class).
+- the **high** (odd) bit of the pair is set when that axis is in *simulation* mode ([MotorType](../../02-motor-and-amplifier/MotorType.md) set to simulation, value 5).
 
 ## How it works
 
@@ -49,7 +49,7 @@ For port `n` (counting from 0), the connected bit is bit `2n` and the simulation
 | 3 | 6 | 7 | 0x00000040 |
 | n | 2n | 2n+1 | `1 << (2n)` |
 
-The firmware sets the connected bit when a port reaches the synchronised state (via [CIConnect](CIConnect.md) or [CIAutoConnect](CIAutoConnect.md)) and clears it on reset/[CIDisconnect](CIDisconnect.md). The simulation bit is set or cleared when the port comes up against a simulated device type. A port whose pair reads `01` (binary) is a live link; `11` is a connected simulation; `00` is disconnected.
+The firmware sets the connected bit when a port reaches the synchronised state (via [CIConnect](CIConnect.md) or [CIAutoConnect](CIAutoConnect.md)) and clears it on reset/[CIDisconnect](CIDisconnect.md). The simulation bit is governed independently: it is set when that axis's [MotorType](../../02-motor-and-amplifier/MotorType.md) is set to simulation (value 5) and cleared otherwise; it is updated when `MotorType` is written and does not depend on [CIConnect](CIConnect.md)/[CIDisconnect](CIDisconnect.md). A port whose pair reads `01` (binary) is a live link; `11` is a connected simulation axis; `00` is disconnected.
 
 To test one port, mask with its connected bit — for example port 1 is connected when `(CIGlobalStat & 0x4)` is non-zero.
 
@@ -65,4 +65,4 @@ In a user program, check whether port 0 is connected by masking with `0x1`, and 
 
 - [CIStatus](CIStatus.md) — detailed per-axis link state and error codes
 - [CIConnect](CIConnect.md) / [CIDisconnect](CIDisconnect.md) — set/clear the connected bit
-- [CIDeviceType](CIDeviceType.md) — selects whether a port reports as simulation
+- [MotorType](../../02-motor-and-amplifier/MotorType.md) — value 5 (simulation) drives the per-port simulation bit

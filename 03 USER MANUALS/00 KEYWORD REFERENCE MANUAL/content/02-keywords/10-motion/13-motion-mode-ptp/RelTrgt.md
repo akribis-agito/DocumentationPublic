@@ -84,7 +84,7 @@ ARelTrgt             ; read the current relative target
 - **Active fault:** value is preserved.
 - **Other motion modes:** the conversion is performed only in modes that consume `AbsTrgt` (PTP, repetitive PTP, vector). Other modes ignore `RelTrgt`.
 - **`RelTrgt = 0`:** the next `Begin` uses `AbsTrgt` as-is (treats 0 as "use absolute target"). To explicitly stay put, set `AbsTrgt = PosRef` instead.
-- **Live change in motion:** allowed; the new value is parked until the next `Begin`. The in-progress move continues to its original target.
+- **Live change in motion:** behaviour depends on [PTPKeepMoving](../02-motion-configuration/PTPKeepMoving.md). With `PTPKeepMoving = 0` the new value is parked until the next `Begin` and the in-progress move continues to its original target. With `PTPKeepMoving = 1` a write to `RelTrgt` during a move adds it to the active [AbsTrgt](AbsTrgt.md) immediately (`AbsTrgt = AbsTrgt + RelTrgt`), retargeting the running move on the fly.
 
 ## Changes between versions
 

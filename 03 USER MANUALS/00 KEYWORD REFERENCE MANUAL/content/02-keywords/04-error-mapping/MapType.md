@@ -53,7 +53,7 @@ Each cycle the controller records `PosBeforeMap` (the decoded main-encoder posit
 
 Writing `MapType` does **not** switch the correction on or off abruptly. The controller keeps a separate internal copy of the active type and a 0..1 ramp counter:
 
-- **Engaging** (write `MapType` 1/2/3 from 0): the internal type is set immediately and the ramp counter starts at 0, climbing toward full scale (one sample-rate period, `SAMPLES_PER_SECOND` — e.g. `16384` on C2000 builds) at a rate set by [MapErrOnStep](MapErrOnStep.md). Until it reaches full scale the correction is scaled by `counter / SAMPLES_PER_SECOND`, so the correction (and the [MapErrOffset](MapErrOffset.md) component) fades in smoothly with no position step.
+- **Engaging** (write `MapType` 1/2/3 from 0): the internal type is set immediately and the ramp counter starts at 0, climbing toward a full scale of `16384` (one second at the 16 kHz base sampling rate) at a rate set by [MapErrOnStep](MapErrOnStep.md). Until it reaches full scale the correction is scaled by `counter / 16384`, so the correction (and the [MapErrOffset](MapErrOffset.md) component) fades in smoothly with no position step.
 - **Disengaging** (write `MapType` 0): the user value goes to 0 but the internal type stays active and the correction ramps **down**; only when the counter reaches 0 does the internal type revert to off. With [MapErrOnStep](MapErrOnStep.md) = 0 the engage / disengage transition is immediate (one cycle).
 
 This ramp logic is shared by all of `MapType`, [MapErrOnStep](MapErrOnStep.md), [MapErrOffset](MapErrOffset.md), and [MapErrOffRamp](MapErrOffRamp.md). Engaging can also be performed automatically during a homing sequence.

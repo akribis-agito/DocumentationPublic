@@ -60,8 +60,8 @@ else
 
 - **Motor off:** detection does not run; the internal counter is reset to `0` on motor-off, so the next motor-on starts from a clean state.
 - **Mode dependency:** the bypass list (current-only, force-control, auto-phasing, motor-learn, any stepper) means stuck protection is effective only in position-control and velocity-control modes with a non-stepper motor.
-- **Force over PIV:** the bypass on `FORCE_CONTROL` is checked against [OperationMode](../../../08-axis-operation/01-general-keywords/OperationMode.md); a force-over-PIV configuration that runs in position-control mode still has stuck detection active.
-- **Range overflow:** `StuckCurr` writes outside `0…64000` are clamped to the keyword `range`; on Central-i the maximum is additionally clamped to the remote amplifier's `lMaxCurrentCommand`.
+- **Force over PIV:** the force-control bypass is checked against [OperationMode](../../../08-axis-operation/01-general-keywords/OperationMode.md) (force-control mode); a force-over-PIV configuration that runs in position-control mode still has stuck detection active.
+- **Range overflow:** `StuckCurr` writes outside `0…64000` are clamped to the keyword `range`; on Central-i the maximum is additionally clamped to the remote amplifier's maximum current command.
 - **Clearing the fault:** ConFlt code 1007 clears on re-enable ([MotorOn](../../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../../07-status-and-faults/ErrLog.md) entry persists.
 - **HWProtectBits / ProtectMask:** the motor-stuck trip is not maskable through [ProtectMask](../../01-general-protection/ProtectMask.md) (that mask covers hardware-protection bits only).
 

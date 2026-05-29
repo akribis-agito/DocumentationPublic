@@ -68,14 +68,14 @@ $$
 
 ## Examples
 
-The motor feedback uses 4µm SINCOS encoder at 4096x interpolation factor (0.97656nm per count).
+The motor feedback uses 4µm SINCOS encoder at 4096x interpolation factor (4000 nm / 4096 = 0.9765625 nm per count).
 
-The load feedback uses 200nm SINCOS encoder at 8192x interpolation factor (24.41pm per count).
+The load feedback uses 200nm SINCOS encoder at 8192x interpolation factor (200 nm / 8192 = 0.0244140625 nm per count).
 
 Then,
 
 $$
-\text{DualLoopFact} = \frac{65536 \cdot 0.97656}{24.41 \cdot 0.001} = 2621440
+\text{DualLoopFact} = \frac{65536 \cdot 0.9765625}{0.0244140625} = 2621440
 $$
 
 ```text

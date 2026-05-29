@@ -34,14 +34,12 @@ Defines the type and parameters of each velocity-loop filter.
 
 ## Overview
 
-`VelFiltDef` holds the definition of the velocity-loop filters that [VelFiltOn](VelFiltOn.md) enables. Each filter is described by up to 5 consecutive array elements (a type code plus up to four parameters), so filter N occupies elements `VelFiltDef[N*5-4]` through `VelFiltDef[N*5]`:
+`VelFiltDef` holds the definition of the two velocity-loop filters that [VelFiltOn](VelFiltOn.md) enables. Each filter is described by up to 5 consecutive array elements (a type code plus up to four parameters), so filter N occupies elements `VelFiltDef[N*5-4]` through `VelFiltDef[N*5]`:
 
 | Filter (N) | Description | Array elements |
 |---|---|---|
 | 1 | Velocity filter 1 | `VelFiltDef[1]` … `VelFiltDef[5]` |
 | 2 | Velocity filter 2 | `VelFiltDef[6]` … `VelFiltDef[10]` |
-| 3 | Velocity filter 3 | `VelFiltDef[11]` … `VelFiltDef[15]` |
-| 4 | Velocity filter 4 | `VelFiltDef[16]` … `VelFiltDef[20]` |
 
 For each filter, the first element is the **type of filter** and the next four are **parameters 1 to 4** whose meaning depends on the type.
 

@@ -53,7 +53,7 @@ Starting from `DOutPort = 6` (`0b0110`):
 - **Output under software control required** — these operate on the `DOutPort` bit; if the addressed output is driven by a function ([DOutMode](DOutMode.md)`[i] ≠ 0`) or hardware route ([DOutSelect](DOutSelect.md)`[i] ≠ 0`), the function/route rewrites the bit on the next control cycle and the manual change is lost.
 - **Motor on/off** — these operations are independent of `MotorOn`; the bit is set/cleared/toggled regardless of servo state.
 - **Mode independence** — these operations are independent of [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) and are accepted while in motion.
-- **Out-of-range index** — `index − 1` is shifted left into a 32-bit word; indices outside the physical output range still execute the bitwise operation but address a non-routed bit.
+- **Out-of-range index** — an array index of 0, or an index above the keyword's array bound (> array_size − 1), is rejected with an out-of-range error and the bit operation is not performed. On central-i an index within the array bound but beyond the connected remote unit's physical output count is accepted and executes, addressing a bit that is not routed to a physical pin.
 - **Inverted output** ([DOutLog](DOutLog.md) bit set for this output) — the polarity inversion is applied after the manual bit value reaches the pin, so a "set" command can produce a low pin level.
 - **Simulation** — operates the same way; no hardware effect.
 

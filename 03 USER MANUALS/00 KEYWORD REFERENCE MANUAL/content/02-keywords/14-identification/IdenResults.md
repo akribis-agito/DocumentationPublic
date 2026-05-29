@@ -42,7 +42,7 @@ Read-only array holding the calculated input/output relations from sine sweep id
 
 ## How it works
 
-The details of each array entry are as shown (array is 1-indexed).
+The details of each array entry are as shown (array is 1-indexed). The lower index of each pair (1-11) holds the single result set available on all variants. The higher index of each pair (12-22) exists only on central-i v5, where it holds a second result set (see dual-loop note below).
 
 | Index | Descriptions |
 |----|----|
@@ -50,15 +50,15 @@ The details of each array entry are as shown (array is 1-indexed).
 | 2, 13 | Imaginary magnitude ratio of output over input at fundamental sine frequency |
 | 3, 14 | Harmonic quality (amplitude ratio of second harmonic to first/fundamental harmonic), in terms of percentage |
 | 4, 15 | Noise quality (RMS value of the error between actual output and modelled output, over the amplitude of output fundamental sine wave), in terms of percentage |
-| 5, 16 | Amplitude ratio of output over input fundamental sine waves, in terms of dB |
+| 5, 16 | Amplitude ratio of output over input fundamental sine waves, in terms of dB/100 (the raw value is dB scaled up by 100; PCSuite divides by 100 to display dB) |
 | 6, 17 | Phase difference between output and input fundamental sine waves, in terms of deg/100 |
 | 7, 18 | Amplitude of output fundamental sine wave |
 | 8, 19 | Amplitude of input fundamental sine wave |
 | 11, 22 | Amplitude of output fundamental sine wave, scaled up by 1000 |
 
-For standard identification, there will only be 1 input and 1 output vector, with results populated in array indices 1 to 11.
+For standard identification, there is 1 input and 1 output vector, with results populated in array indices 1 to 11. On v4 (standalone v4 and central-i v4) only this single result set in indices 1 to 11 exists.
 
-For dual-loop system plant identification, there will be 1 input and 2 output vectors. The relationship between the first output and the input, and the second output and the input, will be on indices 1 to 11 and 12 to 22, respectively.
+Dual-loop system plant identification and the second result set in indices 12 to 22 apply to central-i v5 only. In that case there is 1 input and 2 output vectors: the relationship between the first output and the input is on indices 1 to 11, and the relationship between the second output and the input is on indices 12 to 22.
 
 The results are acquired by PCSuite after the [CalcIden](CalcIden.md) operation following each sine excitation. Please contact Agito if more information is needed.
 

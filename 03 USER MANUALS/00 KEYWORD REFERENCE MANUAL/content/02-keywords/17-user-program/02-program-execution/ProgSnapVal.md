@@ -43,7 +43,7 @@ Holds the values captured by the program snapshot mechanism.
 
 The snapshot is taken in one shot at the moment a user-program thread raises a run-time error — the same event that sets that thread's [ProgError](ProgError.md), appends to [ErrLog](../../07-status-and-faults/ErrLog.md), and halts the thread.
 
-The array is organized as one **10-element block per thread** (up to 8 threads): thread 1 occupies `ProgSnapVal[1]…[10]`, thread 2 `[11]…[20]`, and so on (index `[0]` is unused so indices start at 1). Within each thread's block the layout is fixed; only the first four entries come from your [ProgSnapSrc](ProgSnapSrc.md) configuration:
+The array is organized as one **10-element block per thread** (up to 8 threads on a standalone controller, or 12 on a Central-i master): thread 1 occupies `ProgSnapVal[1]…[10]`, thread 2 `[11]…[20]`, and so on (index `[0]` is unused so indices start at 1). Within each thread's block the layout is fixed; only the first four entries come from your [ProgSnapSrc](ProgSnapSrc.md) configuration:
 
 | Slot in block | Captured value | Source |
 |---|---|---|

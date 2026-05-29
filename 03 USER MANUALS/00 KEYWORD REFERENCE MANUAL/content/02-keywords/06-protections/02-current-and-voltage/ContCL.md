@@ -67,14 +67,14 @@ The 10 % hysteresis prevents rapid chattering at the threshold. While the limita
 
 By default the I²t event is a *current limitation* (the command is clamped to the continuous level). If the current loop is **not** active, or if you set the relevant bit of `ControlMode` (the "I²t makes fault" option), the event instead **disables the axis** and [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1044 (motor current over I²t).
 
-> **Note:** if `ContCL` is set equal to or higher than `PeakCL`, the controller internally uses an effective continuous limit of `PeakCL / 2`. The stored `ContCL` value is not changed automatically, and an entry is logged to [ErrLog](../../07-status-and-faults/ErrLog.md).
+> **Note:** if `ContCL` is set equal to or higher than `PeakCL`, the controller internally uses an effective continuous limit of `PeakCL / 2`. The stored `ContCL` value is not changed automatically.
 
 ### Edge cases
 
 - **Motor off:** the I²t filter and the engagement check continue to run; the filter input is normally the live `MotorCurr` so the filtered value decays back toward 0 once current ceases.
 - **Mode dependency:** I²t works whenever the current loop is active (or when an external amplifier follows `CurrRef`). With no current loop active and no external-amplifier following, the I²t event raises a fault rather than limiting (because there is no command path to clamp).
 - **Engage / release hysteresis:** engages at $I_{filt}^{2} > \text{ContCL}^{2}$, releases at $I_{filt}^{2} < 0.90 \times \text{ContCL}^{2}$ (10 % hysteresis prevents chatter).
-- **`ContCL ≥ PeakCL`:** the effective continuous limit is silently set to `PeakCL / 2` — a misconfiguration, not a feature. Confirm with [ErrLog](../../07-status-and-faults/ErrLog.md) and correct `ContCL` and [PeakCL](PeakCL.md).
+- **`ContCL ≥ PeakCL`:** the effective continuous limit is silently set to `PeakCL / 2` — a misconfiguration, not a feature. Correct `ContCL` and [PeakCL](PeakCL.md).
 - **Range overflow:** writes outside `10…32000` (v4) are clamped to the keyword `range`.
 - **Clearing the fault (when configured to trip):** ConFlt code 1044 clears on re-enable ([MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../07-status-and-faults/ErrLog.md) entry persists.
 - **HWProtectBits / ProtectMask:** the I²t trip is not maskable through [ProtectMask](../01-general-protection/ProtectMask.md).

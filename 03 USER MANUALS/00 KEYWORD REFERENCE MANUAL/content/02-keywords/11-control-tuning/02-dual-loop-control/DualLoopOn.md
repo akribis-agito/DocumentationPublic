@@ -69,7 +69,7 @@ The configured value of `DualLoopOn` and the structure that is actually running 
    ADualLoopFact=65536               ; set load:motor scaling (65536 = ratio of 1)
    ```
 
-2. **Read the active structure** to confirm dual-loop is in effect (expect `2` for full dual-loop, `1` for pseudo dual-loop, `0` for default):
+2. **Read the active structure** to confirm dual-loop is in effect. With this `DualLoopOn = 1` example, expect `2` for full dual-loop or `1` if pseudo dual-loop is on. `0` means the default control structure — or that `DualLoopOn = 2` (analog-tachometer velocity feedback), which also reads `0`:
 
    ```text
    ADualLoopStat                     ; expect 2 if pseudo dual-loop is off

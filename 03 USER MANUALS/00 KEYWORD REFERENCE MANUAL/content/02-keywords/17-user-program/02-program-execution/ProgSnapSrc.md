@@ -36,7 +36,7 @@ Selects which parameters the program snapshot mechanism captures.
 
 ## How it works
 
-Each thread gets **4 user-configurable source slots**. The array is laid out per thread, 4 slots each, for up to 8 threads: thread 1 uses `ProgSnapSrc[1]…[4]`, thread 2 uses `[5]…[8]`, and so on (index `[0]` is unused so indices start at 1). These four slots fill the user portion of that thread's [ProgSnapVal](ProgSnapVal.md) block; the rest of each block is filled automatically with fixed program-state values you do not configure here (see [ProgSnapVal](ProgSnapVal.md)).
+Each thread gets **4 user-configurable source slots**. The array is laid out per thread, 4 slots each, for up to 8 threads on a standalone controller, or 12 on a Central-i master: thread 1 uses `ProgSnapSrc[1]…[4]`, thread 2 uses `[5]…[8]`, and so on (index `[0]` is unused so indices start at 1). These four slots fill the user portion of that thread's [ProgSnapVal](ProgSnapVal.md) block; the rest of each block is filled automatically with fixed program-state values you do not configure here (see [ProgSnapVal](ProgSnapVal.md)).
 
 Each slot holds a [complex CAN code](../../../01-keyword-usage-and-syntax/complex-can-code.md) that names the parameter to capture, encoding three fields:
 

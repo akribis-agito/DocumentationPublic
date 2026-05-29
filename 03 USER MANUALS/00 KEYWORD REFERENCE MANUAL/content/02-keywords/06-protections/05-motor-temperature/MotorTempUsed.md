@@ -39,7 +39,7 @@ Selects the motor temperature-sensor type.
 | 0 | None — motor-temperature reading and protection disabled |
 | 1 | PT100 / RTD sensor on the temperature-sensor input |
 
-> **Range note:** in this firmware the keyword range is `0…1` (PT100/RTD only); there is no separate "thermostat" selection. A thermostat is instead wired as a digital input and handled by the I/O / fault logic, not by `MotorTempUsed`.
+> **Range note:** in this firmware the keyword range is `0…1` (PT100/RTD only); there is no separate "thermostat" selection in this keyword.
 
 ## How it works
 
@@ -61,5 +61,4 @@ AMotorTempUsed=0       ; disable motor-temperature reading and protection
 
 - [MotorTemp](MotorTemp.md) — measured temperature
 - [MaxMotorTemp](MaxMotorTemp.md) — over-temperature fault limit
-- [MotorTempOffset](MotorTempOffset.md) — reading offset
 - [StatReg](../../07-status-and-faults/StatReg.md) — motor-temperature warning bits (15–16)

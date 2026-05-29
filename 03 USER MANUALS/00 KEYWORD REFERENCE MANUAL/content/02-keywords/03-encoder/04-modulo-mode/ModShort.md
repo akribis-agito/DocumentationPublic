@@ -1,6 +1,6 @@
 ---
 keyword: ModShort
-summary: Selects the path of motion (normal, positive-only, negative-only, or shortest) for absolute PTP under modulo mode (not implemented in current firmware).
+summary: Selects the path of motion (normal, positive-only, negative-only, or shortest) for absolute PTP under modulo mode; implemented on central-i v5 only.
 availability:
   standalone:
   - v4

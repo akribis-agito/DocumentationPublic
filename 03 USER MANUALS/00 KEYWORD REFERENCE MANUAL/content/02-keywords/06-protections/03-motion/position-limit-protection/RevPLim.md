@@ -57,7 +57,7 @@ The profiled velocity is clamped to this so the axis arrives at `RevPLim` at zer
 
 **2. Stop request when the reference crosses the limit.** If the shaped/filtered reference passes below `RevPLim` while moving backward, a stop request is raised in [MotionStat](../../../10-motion/05-motion-status/MotionStat.md) and [MotionReason](../../../10-motion/05-motion-status/MotionReason.md) = 6 (motion ended at the reverse software limit) is recorded; the stop then uses `EmrgDec`.
 
-**3. Hard clamp.** The reference and absolute target are clamped to be no lower than `RevPLim` in the profiler modes and in the control-interrupt streaming path.
+**3. Hard clamp.** The reference and absolute target are clamped to be no lower than `RevPLim` in the profiler modes, including the buffered/streaming (FIFO) motion path.
 
 **4. Begin-time rejection.** A motion is rejected if the position reference is already below `RevPLim` and the motion mode cannot drive back inside (the axis cannot start a motion while outside the position limits).
 

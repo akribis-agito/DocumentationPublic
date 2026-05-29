@@ -73,7 +73,7 @@ Per-axis array reporting the live Central-i port state, error counters, and last
 | 10 | Error reading index from device |
 | 11 | Adapter requires `AmpType` = analog |
 | 12 | Device read from E² differs from FPGA (contact Agito) |
-| 13 | Adapter requires `AmpType` = PWM |
+| 13 | Amplifier requires `AmpType` = built-in PWM |
 | 14 | Adapter requires `AmpType` = linear-remote |
 
 ## Examples

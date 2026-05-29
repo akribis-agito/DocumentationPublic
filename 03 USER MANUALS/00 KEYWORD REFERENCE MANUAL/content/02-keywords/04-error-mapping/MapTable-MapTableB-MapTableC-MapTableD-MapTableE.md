@@ -52,7 +52,7 @@ AMapTableB[1]        ; read the first entry of the second bank
 ### Edge cases
 
 - **Index 0** — invalid; valid indices are `[1…N]` where `N` is the bank size.
-- **Motor on / in motion at write** — rejected (`MPNOMOTN`, `MPNOMTR`).
+- **Motor on / in motion at write** — rejected while the motor is on or the axis is in motion.
 - **Out of range index** — rejected by the parameter table; refer to the product's bank sizes.
 - **Mapping off** ([MapType](MapType.md) = 0) — the tables are stored but not consulted.
 - **Simulation motor** — mapping is skipped entirely; tables are stored but produce no correction.

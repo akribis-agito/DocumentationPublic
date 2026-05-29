@@ -71,8 +71,8 @@ The profiler reads `Speed` every cycle, so raising or lowering it mid-move makes
 - **Simulation mode (`MotorType` = 5):** unchanged.
 - **ModRev wrap:** unrelated — `Speed` is a rate, not a position.
 - **Active fault:** the axis is disabled; the next `Begin` re-reads `Speed` and re-checks against `MaxVel`.
-- **`Speed = 0`:** for jog, the axis just decelerates/stays at rest; for PTP, the move is rejected at `Begin` because the profiler cannot make progress.
-- **`|Speed| > MaxVel` at `Begin`:** rejected for indirect modes (jog, PTP, repetitive PTP, PD-indirect, gear-indirect, ECAM-indirect, joystick-position-indirect) with `MAXVEL_PROTECTION`; the user must lower `Speed` or raise [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md). Direct modes accept any `Speed` because the user supplies position commands directly.
+- **`Speed = 0`:** for jog, the axis just decelerates/stays at rest; for PTP, the `Begin` is accepted and the move enters the in-motion state, but the axis does not advance because the cruise speed is zero — it remains stalled until `Speed` is raised.
+- **`|Speed| > MaxVel` at `Begin`:** rejected for indirect modes (jog, PTP, repetitive PTP, PD-indirect, gear-indirect, ECAM-indirect, joystick-position-indirect) with instruction error 271 (commanded `Speed` exceeds the `MaxVel` limit); the user must lower `Speed` or raise [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md). Direct modes accept any `Speed` because the user supplies position commands directly.
 - **Live raise above `MaxVel` during a move:** the profiler will ramp toward the new value, but the velocity loop will clamp [VelRef](../01-kinematics-status/VelRef.md) to `MaxVel` and set the velocity-saturation bit; the system does not fault.
 - **Jog with `Speed = 0` mid-move:** the axis decelerates to rest at `Decel`.
 

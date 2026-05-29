@@ -45,7 +45,7 @@ A positive `RefOffsetStep` shifts the reference forward, a negative value backwa
 ### Edge cases
 
 - **Motor off / not in motion:** the value is held; no injection occurs (the countdown is also held).
-- **Out-of-range write:** v4 has no explicit range clamp; v5 clamps to ±655360.
+- **Out-of-range write:** clamped to the ±(sample-rate × 10) range shown in the frontmatter (the same clamp in v4 and v5).
 - **Simulation mode (`MotorType` = 5):** unchanged.
 - **ModRev wrap:** as for [RefOffsetSamp](RefOffsetSamp.md); the offset rides through the wrap.
 - **Active fault:** the value is preserved but the countdown is cleared.
@@ -63,7 +63,7 @@ ARefOffsetStep      ; query current value
 
 ## Changes between versions
 
-In **v5 (central-i)** `RefOffsetStep` gains an explicit clamp of ±655360 (shown in the frontmatter range); the injection mechanism is otherwise unchanged. **v5 is central-i only.**
+The ±(sample-rate × 10) range clamp (shown in the frontmatter range) applies in both v4 and v5; the injection mechanism is unchanged. **v5 is central-i only.**
 
 ## See also
 

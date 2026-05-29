@@ -52,7 +52,7 @@ Index 6 (the position-loop integral gain) exists only on central-i v5, where [Po
 
 Each control cycle, the controller determines the active set number ([ScheduleSet](ScheduleSet.md)) from the rule chosen by [ScheduleMode](ScheduleMode.md), then loads `ScheduleGains` from that set:
 
-- In the stepped modes, the six elements are copied from the corresponding gain arrays at the active set index — for example `ScheduleGains[2]` = [AccFFW](../05-feedforwards/AccFFW.md)`[set]`.
+- In the stepped modes, the scheduled-gain elements (five on v4, six on central-i v5) are copied from the corresponding gain arrays at the active set index — for example `ScheduleGains[2]` = [AccFFW](../05-feedforwards/AccFFW.md)`[set]`.
 - In the interpolated modes (velocity or position range), each element is computed by linear interpolation between the two sets that bound the current measurement, so the reported values move continuously rather than in steps.
 - When the axis is using gantry-paired scheduling, the gains are taken from the gantry tuning arrays instead of the standard ones (see [ScheduleGntry](ScheduleGntry.md)).
 

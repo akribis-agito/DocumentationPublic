@@ -41,7 +41,7 @@ Selects the hardware function (or software control) routed to each digital outpu
 | Value | Standalone | Central-i slaves |
 |-------|------------|------------------|
 | 0 | Software (using DOutMode) | Software (using DOutMode) |
-| 1 | Reserved | Reserved |
+| 1 | Encoder emulation | Reserved |
 | 2 | A event #1 | Main event #1 |
 | 3 | A event #2 | Main event #2 |
 | 4 | A event #3 | Main event #3 |

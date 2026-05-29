@@ -67,8 +67,8 @@ AAInFilt[1]=100      ; ~1 Hz cutoff (heavy smoothing)
 
 ### Edge cases
 
-- **Index 0** — invalid; the array is 1-indexed (`AInFilt[1]`–`AInFilt[4]` on standalone/v4, plus `AInFilt[5]` reserved). `AInFilt[0]` does not exist.
-- **Out of range** — values are clamped to `[1, 50000]` by the parameter table; assigning outside this range returns an error.
+- **Index 0** — invalid; the array is 1-indexed (`AInFilt[1]`–`AInFilt[4]` on standalone/v4). `AInFilt[0]` is the reserved comm/internal slot (not user-accessible) and `AInFilt[5]` does not exist.
+- **Out of range** — `AInFilt` accepts values in `[1, 50000]`; a write outside this range is rejected with an out-of-range error and the stored value is left unchanged (it is not clamped).
 - **Motor on/off** — the filter runs continuously regardless of `MotorOn`; the cached coefficients are valid at every cycle.
 - **Mode independence** — the filter is applied before any [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md)-specific use of the analog reading; the value is filtered the same way in position, velocity, current and force modes.
 - **Write while running** — when `AInFilt[i]` is written the cached `a` and `1−a` coefficients are recomputed; the running output history is **not** reset, so the response transitions smoothly from the old to the new cutoff.

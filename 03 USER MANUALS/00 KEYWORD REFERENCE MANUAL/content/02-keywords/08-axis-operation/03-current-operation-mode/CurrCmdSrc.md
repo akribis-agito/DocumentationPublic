@@ -63,7 +63,7 @@ ACurrCmdSrc=3        ; follow a master axis (slave drive, central-i v5)
 ### Edge cases
 
 - **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 1) — `CurrCmdSrc` is **not consulted**; writes take effect immediately but the new source only applies once the axis enters current mode.
-- **Out of range** — values outside the valid range (`0`–`2` on v4, `0`–`3` on v5) are accepted by the parameter table but the current generator forces `CurrRef = 0` on any unexpected value.
+- **Out of range** — values outside the valid range (`0`–`2` on v4, `0`–`3` on v5) are **rejected** by the parameter table with an out-of-range error, not accepted. (The current generator's fallback that forces `CurrRef = 0` on an unexpected source value is an internal safeguard, not the path taken for a user write the table has already refused.)
 - **Source 0 with no analog mapping** — if no analog input is mapped to function 2 (current command) via [AInMode](../../05-inputs-outputs/02-analog-inputs/AInMode.md), `CurrRef` reads as `0`.
 - **Source 3 on v4** — rejected by the v4 parameter table (max value is 2); attempting `CurrCmdSrc = 3` returns an out-of-range error.
 - **Master loss (source 3)** — if [CurrRefMaster](CurrRefMaster.md) points to a stopped or invalid axis the slave's `CurrRef` mirrors whatever the master holds (typically `0`).

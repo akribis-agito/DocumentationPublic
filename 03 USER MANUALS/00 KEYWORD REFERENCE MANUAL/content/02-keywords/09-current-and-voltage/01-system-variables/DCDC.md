@@ -49,7 +49,7 @@ The array has 8 elements (index 0 is unused so that communication indexes start 
 | 3     | -15 V logic                                        |
 | 4     | 1.2 V logic                                        |
 | 5     | 1.8 V logic                                        |
-| 6     | Internal 10.5 V or backup logic (whichever higher) |
+| 6     | Backup or logic supply                             |
 | 7     | 4.7 V logic                                        |
 
 The rails are sampled across two control sub-cycles (the 3.3 V / ±15 V group in one step, the 1.2 V / 1.8 V group in the next), each raw reading being scaled to millivolts with a fixed per-rail multiplier. Which rails are actually sampled is product-dependent:

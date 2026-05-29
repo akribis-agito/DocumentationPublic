@@ -42,7 +42,7 @@ See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all r
 
 When the controller reaches this segment, it ramps the velocity by the supplied acceleration each control sample for the segment duration, advancing the position reference accordingly. The evolving velocity and acceleration are reported in [FIFOStatus](FIFOStatus.md) (indexes 4 and 5).
 
-The supplied magnitude must be at least one *control-sample frequency* (`SAMPLES_PER_SECOND`, i.e. 16 384 counts/s² at the standard 16 384 Hz control rate). This is the smallest acceleration the per-sample velocity step can resolve. A push with `|value| < 16 384` is rejected with an error at push time. The accepted range is -2 000 000 000 to 2 000 000 000.
+The supplied magnitude must be at least one *control-sample frequency* (16 384 counts/s² at the standard 16 384 Hz control rate). This is the smallest acceleration the per-sample velocity step can resolve. A push with `|value| < 16 384` is rejected with an error at push time. The accepted range is -2 000 000 000 to 2 000 000 000.
 
 ## Examples
 

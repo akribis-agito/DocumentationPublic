@@ -36,7 +36,7 @@ Motor-feedback position range within which true dual-loop control is used.
 | `DualEncRange[1]` | Lower bound of the position range |
 | `DualEncRange[2]` | Upper bound of the position range |
 
-The bounds are in motor (auxiliary) encoder counts. The third array element is reserved.
+The bounds are in motor (auxiliary) encoder counts. Only `DualEncRange[1]` (lower) and `DualEncRange[2]` (upper) are used.
 
 ## How it works
 

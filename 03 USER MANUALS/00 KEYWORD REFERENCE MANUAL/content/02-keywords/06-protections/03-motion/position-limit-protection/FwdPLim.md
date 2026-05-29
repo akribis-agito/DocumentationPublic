@@ -57,7 +57,7 @@ where `T` is the control sample time and `k` is the firmware's sample-frequency-
 
 **2. Stop request when the reference crosses the limit.** If the shaped/filtered reference does pass `FwdPLim` while moving forward, the profiler raises a stop request in [MotionStat](../../../10-motion/05-motion-status/MotionStat.md) and records [MotionReason](../../../10-motion/05-motion-status/MotionReason.md) = 7 (motion ended at the forward software limit). When that reason is active, the stop uses the emergency deceleration `EmrgDec` rather than the normal `Decel`.
 
-**3. Hard clamp of the reference.** In multiple profiler modes the position reference and the absolute target are hard-clamped so they can never exceed `FwdPLim`. The same clamp is also applied inside the control interrupt's PVT/streaming path.
+**3. Hard clamp of the reference.** In multiple profiler modes the position reference and the absolute target are hard-clamped so they can never exceed `FwdPLim`. The same hard clamp is also applied in the buffered/streaming (FIFO) motion path.
 
 **4. Begin-time rejection.** A motion cannot be started in the "outside the limits, pointing further out" case: if the position reference is already beyond `FwdPLim`/`RevPLim` and the motion mode is not one of the direct/jog modes that can drive back inside, `Begin` is rejected (the axis cannot start a motion while outside the position limits).
 

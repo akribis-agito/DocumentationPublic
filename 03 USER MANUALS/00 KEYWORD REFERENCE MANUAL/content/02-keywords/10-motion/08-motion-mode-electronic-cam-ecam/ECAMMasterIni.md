@@ -39,7 +39,7 @@ Offset of the starting master value relative to the ECAM range at start of motio
 
 `ECAMMasterIni` denotes the offset of the starting master value relative to the ECAM range upon start of ECAM motion. It is an array of 10 cam patterns, one element per pattern. It positions where, within the cam range, the master begins when ECAM motion starts; its exact role depends on the sign of [ECAMGap](ECAMGap.md) and the value of [ECAMCycles](ECAMCycles.md).
 
-`ECAMMasterIni` must be zero or positive, and small enough that the first repetition cycle is not exceeded when motion starts.
+The sign rule for `ECAMMasterIni` differs by version. On **v4** its sign must match [ECAMGap](ECAMGap.md): when `ECAMGap` is positive `ECAMMasterIni` must be zero or positive, and when `ECAMGap` is negative `ECAMMasterIni` must be zero or negative. On **v5** `ECAMMasterIni` must always be zero or positive, regardless of the `ECAMGap` sign. In both versions it must be small enough that the first repetition cycle is not exceeded when motion starts.
 
 ## How it works
 
@@ -48,9 +48,12 @@ When ECAM motion starts ([Begin](../04-motion-command/Begin.md)) the controller 
 - For positive [ECAMGap](ECAMGap.md) the offset is measured forward from the start of the range; for negative `ECAMGap` it is measured against the negated master, so the same positive value still places the start point further into the pattern.
 - For negative [ECAMCycles](ECAMCycles.md) (bidirectional cam), `ECAMMasterIni` positions the *middle* of the repeating region — the point the master is expected to sit at when motion starts — so the pattern can extend in both directions.
 
-The maximum allowed value depends on `ECAMCycles`:
+The maximum allowed magnitude depends on the version:
 
-| ECAMCycles | Maximum value of ECAMMasterIni |
+- On **v4** a single magnitude bound applies for every `ECAMCycles` value: $\lvert\text{ECAMMasterIni}\rvert \le \lvert\text{ECAMGap}\rvert \cdot (\text{ECAMEnd} - \text{ECAMStart})$.
+- On **v5** the bound depends on `ECAMCycles`:
+
+| ECAMCycles | Maximum value of ECAMMasterIni (v5) |
 |------------|--------------------------------|
 | 1          | $\lvert\text{ECAMGap}\rvert \cdot (\text{ECAMEnd} - \text{ECAMStart})$ |
 | \> 1       | $\lvert\text{ECAMGap}\rvert \cdot (\text{ECAMEndCyc} - \text{ECAMStart})$ |
@@ -71,7 +74,7 @@ Refer to the figures in [Motion mode – Electronic cam (ECAM)](00-overview.md) 
 |---|---|---|
 | Data type / range | 32-bit, `-2147483648` … `2147483647` | 64-bit, `-2251799813685248` … `2251799813685247` |
 
-In **v5** `ECAMMasterIni` is a 64-bit value with the wider range shown in the frontmatter, matching the 64-bit master positions used in that version; its meaning and the maximum-value rules above are unchanged. **v5 is central-i only.**
+In **v4** (standalone and central-i) `ECAMMasterIni` is validated against a single magnitude bound — its absolute value may not exceed $\lvert\text{ECAMGap}\rvert \cdot (\text{ECAMEnd} - \text{ECAMStart})$ for every `ECAMCycles` value — and its sign must follow `ECAMGap` (zero-or-positive when `ECAMGap` is positive, zero-or-negative when `ECAMGap` is negative). In **v5** `ECAMMasterIni` is a 64-bit value with the wider range shown in the frontmatter, matching the 64-bit master positions used in that version; v5 also introduced the per-`ECAMCycles` maximum-value bounds shown in the table above and requires `ECAMMasterIni` to be zero-or-positive regardless of the `ECAMGap` sign. **v5 is central-i only.**
 
 ## See also
 

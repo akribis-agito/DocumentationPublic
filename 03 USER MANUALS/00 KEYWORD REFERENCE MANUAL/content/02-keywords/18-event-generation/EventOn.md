@@ -34,7 +34,7 @@ Arms event generation; loads the first compare position and is mutually exclusiv
 
 `EventOn = 1` arms the position-compare engine: the controller loads the first compare position (according to [EventType](EventType.md)) and starts watching the feedback position so an output pulse is fired each time a configured compare position is crossed. It should be set while the axis is at a position before the first requested event (smaller than [EventBegPos](EventBegPos.md) when moving in the positive direction) to prevent unexpected behavior.
 
-Arming is a `0 → 1` edge: writing `EventOn = 1` while it is already `1` does nothing. The `0 → 1` transition resets [EventCntr](EventCntr.md) to `0` and clears the corrected-table offset.
+Arming is a `0 → 1` edge: writing `EventOn = 1` while it is already `1` does nothing. The `0 → 1` transition resets [EventCntr](EventCntr.md) to `0` (and, on standalone products, clears the position-capture enable since the two functions share the same pin).
 
 ## How it works
 

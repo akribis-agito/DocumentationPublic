@@ -1,13 +1,10 @@
 # AntiCoggOn
 
+*Legacy keywords*
+
 **Definition:**
 
-AntiCoggOn enables or disables the anti-cogging compensation feature. When active, a precomputed cogging torque correction is injected into the current command as a function of rotor position.
-
-%%
-Needs verification
-AntiCoggOn was not found in the AG300_CTL01Params.c firmware parameter table. Confirm availability and parameter attributes before use.
-%%
+AntiCoggOn was a switch for the anti-cogging compensation feature. This keyword was removed in a later firmware release and is no longer available; the related functionality was superseded by anti-disturbance functionality.
 
 **See also:**
 

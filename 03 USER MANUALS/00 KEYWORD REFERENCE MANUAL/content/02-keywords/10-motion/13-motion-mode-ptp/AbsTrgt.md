@@ -74,6 +74,7 @@ Once moving, the PTP profiler reads `AbsTrgt` every control cycle:
 | Joystick position indirect | `AbsTrgt = selected analog input` each cycle |
 | Repetitive PTP | reloaded from the stored repetitive target each segment |
 | Indirect gear motion ([MotionMode](../02-motion-configuration/MotionMode.md) `= 6`) | `AbsTrgt` tracks the master position offset each cycle, then is profiled |
+| Indirect pulse-and-direction ([MotionMode](../02-motion-configuration/MotionMode.md) `= 4`) | `AbsTrgt` tracks the pulse-and-direction input each cycle, then is profiled |
 
 ### Modulo
 
@@ -121,11 +122,11 @@ If [InTargetStat](../05-motion-status/InTargetStat.md) does not reach 4, either 
 ### Edge cases
 
 - **Motor off:** value is held; no validation runs.
-- **Out-of-range write:** the parameter system clamps to the data-type range; the `Begin`-time and per-cycle limit checks then refuse moves that target outside `[RevPLim, FwdPLim]`.
+- **Out-of-range write:** a value outside the data-type range is rejected with an error (the value is left unchanged); the `Begin`-time and per-cycle limit checks then refuse moves that target outside `[RevPLim, FwdPLim]`.
 - **Simulation mode (`MotorType` = 5):** unchanged.
 - **ModRev wrap:** `AbsTrgt` is shifted by `ModRev` together with the rest of the reference frame at each wrap.
 - **Active fault:** axis disabled; value is preserved.
-- **Other motion modes:** in joystick-position-indirect, repetitive PTP and gear-indirect modes the controller *writes* `AbsTrgt` each cycle — user writes are overwritten. In direct modes (PD, gear-direct, ECAM, FIFO, CNC, vector, spline, slave) `AbsTrgt` is not consulted.
+- **Other motion modes:** in joystick-position-indirect, repetitive PTP, gear-indirect and pulse-and-direction-indirect modes the controller *writes* `AbsTrgt` each cycle — user writes are overwritten. In direct modes (pulse-and-direction-direct, gear-direct, ECAM, FIFO, CNC, vector, spline, slave) `AbsTrgt` is not consulted.
 - **`PTPKeepMoving = 1`:** writing a new `AbsTrgt` during a move retargets the profiler (the original move never reports "done").
 - **Live change in motion without `PTPKeepMoving`:** the new value is parked for the next `Begin`; the in-progress move continues to its original target.
 

@@ -2,7 +2,7 @@
 
 **Definition:**
 
-IndirectValue transfers the data for the indirect access operation. Before executing IndirectDo for a write, set IndirectValue to the value to be stored; after a read operation IndirectDo, IndirectValue contains the retrieved element value. It is a non-axis parameter and is not saved to flash.
+IndirectValue holds the source value for the indirect access operation. Set IndirectValue to the value to be stored before executing IndirectDo, which writes it into the selected array element. It is a non-axis parameter and is not saved to flash.
 
 **See also:**
 

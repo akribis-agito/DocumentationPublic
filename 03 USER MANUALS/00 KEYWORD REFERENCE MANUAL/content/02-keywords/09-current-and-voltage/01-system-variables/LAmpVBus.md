@@ -32,7 +32,7 @@ Read-only bus-voltage measurements of the built-in linear amplifier (AmpType = 4
 
 ## Overview
 
-`LAmpVBus` reports the two bus-voltage rails of the built-in linear amplifier, in millivolts, as a read-only array. It applies only when [AmpType](../../02-motor-and-amplifier/AmpType.md) = 4 (built-in linear amplifier). For the standard switching (PWM) amplifier bus voltage, see [VBus](VBus.md), which is not populated on a linear amplifier.
+`LAmpVBus` reports the two bus-voltage rails of the built-in linear amplifier, in millivolts, as a read-only array. It applies only when [AmpType](../../02-motor-and-amplifier/AmpType.md) = 4 (built-in linear amplifier). For the standard switching (PWM) amplifier bus voltage, see [VBus](VBus.md).
 
 ## How it works
 
@@ -45,7 +45,7 @@ A linear amplifier runs from a split (bipolar) supply, so it has a positive and 
 
 The array is sized for two rails plus an unused index 0 (so that communication indexes start at 1). The negative rail is read separately and negated, so a healthy −Vm reads as a negative millivolt value.
 
-> **Note:** on a linear amplifier the bus-voltage protection limits ([MinVBus](../../06-protections/02-current-and-voltage/MinVBus.md) / [MaxVBus](../../06-protections/02-current-and-voltage/MaxVBus.md)) and the [VBus](VBus.md) reading do not apply; the standard VBus path is bypassed for this amplifier type.
+> **Note:** on a built-in linear amplifier (`AmpType` = 4) the bus-voltage protection limits ([MinVBus](../../06-protections/02-current-and-voltage/MinVBus.md) / [MaxVBus](../../06-protections/02-current-and-voltage/MaxVBus.md)) still run and [VBus](VBus.md) is still sampled. The standard VBus path is bypassed only for the linear adapter (`AmpType` = 7) on a central-i system, where the bus-voltage reading and its protections are not available.
 
 ## Examples
 
@@ -56,5 +56,5 @@ ALAmpVBus[2]        ; read the -Vm linear-amplifier bus voltage (mV, negative)
 
 ## See also
 
-- [VBus](VBus.md) — switching-amplifier DC bus voltage reading (not used on a linear amplifier)
+- [VBus](VBus.md) — switching-amplifier DC bus voltage reading
 - [AmpType](../../02-motor-and-amplifier/AmpType.md) — amplifier type selection (= 4 selects the linear amplifier)

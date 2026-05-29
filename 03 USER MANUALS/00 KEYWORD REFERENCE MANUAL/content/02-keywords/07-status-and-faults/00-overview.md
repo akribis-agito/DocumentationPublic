@@ -47,7 +47,7 @@ When an axis trips, four pieces of state are written in one atomic step: [MotorO
    AConFltSnapVal[1]      ; first user-selected parameter (here: StatReg, again)
    ```
 
-4. **Reconstruct the timeline from [ErrLog](ErrLog.md).** The log is a 32-event ring of `(tagged code, time)` pairs (64 elements). The lower 24 bits of the code element are the error number; the upper 8 bits identify the source (`0` = non-axis, `1..8` = axis A..H, `16 + n` = user-program thread `n`). The companion element is the timestamp in seconds since power-on:
+4. **Reconstruct the timeline from [ErrLog](ErrLog.md).** The log is a 128-event ring of `(tagged code, time)` pairs (256 elements). The lower 24 bits of the code element are the error number; the upper 8 bits identify the source (`0` = non-axis, `1..8` = axis A..H, `16 + n` = user-program thread `n`). The companion element is the timestamp in seconds since power-on:
 
    ```text
    AErrLog[1]             ; tagged code of the first logged error

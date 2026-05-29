@@ -57,7 +57,7 @@ When the loop finds the velocity error exceeds the active threshold, the open-lo
 
 - **Motor off:** the velocity loop and the limit check do not run; `VelErr` is reset to `0`.
 - **Mode dependency:** `VelErr` is forced to `0` outside position-control, velocity-control, and force-over-PIV operation, so the check cannot trip in those modes regardless of threshold.
-- **AMP_TYPE bypass:** the trip is skipped entirely when the amplifier is configured as `AMP_TYPE_ANALOG_VEL_CMD` (the external drive closes its own velocity loop).
+- **Velocity-command amplifier bypass:** the trip is skipped entirely when [AmpType](../../../02-motor-and-amplifier/AmpType.md) is the analog-velocity-command amplifier — the external drive closes its own velocity loop.
 - **Range overflow:** writes outside the keyword `range` are clamped; the active internal limit is recomputed each time `MaxVelErrOL`/`MaxVelErr`/`OpenLoopOn`/`InjectType`/`InjectPoint` changes.
 - **Clearing the fault:** ConFlt code 1056 clears on re-enable ([MotorOn](../../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../../07-status-and-faults/ErrLog.md) entry persists.
 - **HWProtectBits / ProtectMask:** open-loop following-error trips are not maskable through [ProtectMask](../../01-general-protection/ProtectMask.md) (that mask covers hardware-protection bits only).

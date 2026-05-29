@@ -60,7 +60,7 @@ The array index selects which status counter or bit the thread waits on:
 | 14 | In ECAM stop | 0 or 1 |
 | 15 | In FIFO stop | 0 or 1 |
 | 16 | Commutation done | 0 or 1 |
-| 17 | In target | 0 or 1 (the wait always ends when the axis settles in target, i.e. when [InTargetStat](../../10-motion/05-motion-status/InTargetStat.md) reaches `4` — `TARGET_REACHED`; the supplied value is range-checked but does not change the condition tested) |
+| 17 | In target | 0 or 1 (the wait always ends when the axis settles in target, i.e. when [InTargetStat](../../10-motion/05-motion-status/InTargetStat.md) reaches `4` (target reached); the supplied value is range-checked but does not change the condition tested) |
 | 18 | Recording trigger detected | scope number `1` or `2` — the wait ends when [RecStat](../../19-data-recording/RecStat.md) of that scope reaches `3` (trigger detected) |
 | 19 | Recording completed | scope number `1` or `2` — the wait ends when [RecStat](../../19-data-recording/RecStat.md) of that scope reaches `4` (recording complete); a stop without a trigger leaves the status at `5` or `6` and the wait does **not** end |
 | 20 | Digital input 1 | 0 or 1 |

@@ -59,9 +59,9 @@ When an enabled protection condition appears in [HWProtectBits](HWProtectBits.md
 
 - **Motor off:** writes take effect immediately (the keyword is `ok_in_motion: true`, `ok_motor_on: true`). The hardware re-derives the enable word whenever `ProtectMask` (or [PowerSupply](../02-current-and-voltage/PowerSupply.md)) changes.
 - **Mode dependency:** the mask is applied unconditionally to all maskable hardware-protection bits.
-- **Non-maskable protections:** STO1/STO2, IPM-fault, dead-time, ground-short, watchdog and other safety-critical conditions are forced back on regardless of `ProtectMask`. Setting the corresponding bit has no effect — these protections cannot be disabled.
+- **Non-maskable protections:** STO1 (bit 0), STO2/VCC (bit 6), over-current (bits 4 and 5), the 5 V supply fault (bit 10), IPM-fault (bit 12 on AG100), the hardware watchdog (bit 7) and the other safety-critical conditions are forced back on regardless of `ProtectMask`. Only the main-encoder (bit 2) and auxiliary-encoder (bit 3) error protections are maskable; setting any other bit has no effect — those protections cannot be disabled.
 - **Software protections out of scope:** `ProtectMask` does **not** mask software-level trips (following-error / overspeed / over-temperature / I²t / motor-stuck / dual-stuck / stall / force-error / position-limit). Those run independently and cannot be disabled with this mask.
-- **Range overflow:** the keyword has no explicit numeric `range` in the parameter table — write any 32-bit value; bits that map to non-existent protections are silently ignored.
+- **Range:** the usable range is `0..65535` (`0x0000..0xFFFF`) — only the lower 16 bits are meaningful, and the value is applied as a 16-bit mask. Bits that map to non-existent protections are silently ignored.
 - **Snapshot on fault:** the value of [HWProtectBits](HWProtectBits.md) at the moment of a fault is captured in [ConFltSnapVal](../../07-status-and-faults/ConFltSnapVal.md)`[11]`.
 
 ## Examples

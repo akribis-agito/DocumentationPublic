@@ -41,7 +41,7 @@ Records the position when the axis enters or exits position mode.
 
 ## How it works
 
-`ModeSwitchPos` is a 1-indexed array of size 2:
+`ModeSwitchPos` is a 1-indexed array (size 3; only indices 1 and 2 are used — index 0 is reserved and not accessible):
 
 | Index | Latched value (`Pos` at the transition) |
 |-------|------------------------------------------|

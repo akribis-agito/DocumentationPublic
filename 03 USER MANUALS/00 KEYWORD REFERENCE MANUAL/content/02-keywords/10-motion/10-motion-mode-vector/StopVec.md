@@ -46,7 +46,7 @@ Because the deceleration is applied to the single path velocity and the geometry
 
 ![StopVec timeline showing the vector-stop bit being set, MotionReason latching to 29, and the path braking to zero](stopvec-timeline.svg)
 
-A motor-off or fault on a member axis, or a member axis reaching a hardware limit switch or software position limit, **does** raise the emergency-deceleration flag, so those events brake at [VecEmrgDec](VecEmrgDec.md) instead — see the reason codes 30-34 in [MotionReason](../05-motion-status/MotionReason.md). Use [VecPause](VecPause.md) instead of `StopVec` if you want to halt the move and later resume it from where it stopped.
+A member axis reaching a **software position limit** during the move raises the emergency-deceleration flag and brakes the path at [VecEmrgDec](VecEmrgDec.md) (the offending axis reports [MotionReason](../05-motion-status/MotionReason.md) = 6/7, the other members report [MotionReason](../05-motion-status/MotionReason.md) = 34); a controlled stop by an input signal does the same (the commanded axis reports [MotionReason](../05-motion-status/MotionReason.md) = 28). A member motor-off or fault instead **ends the move immediately with no ramp** ([MotionReason](../05-motion-status/MotionReason.md) = 30). A hardware reverse/forward limit switch is not handled through the vector emergency-deceleration path. Use [VecPause](VecPause.md) instead of `StopVec` if you want to halt the move and later resume it from where it stopped.
 
 ## Examples
 

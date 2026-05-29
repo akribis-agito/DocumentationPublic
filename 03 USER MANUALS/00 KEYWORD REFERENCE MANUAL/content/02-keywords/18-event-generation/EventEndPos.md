@@ -28,7 +28,7 @@ overrides: {}
 ---
 # EventEndPos
 
-Highest position for which events are generated in by-gap mode.
+Bounding position at which by-gap event generation stops.
 
 ## Overview
 

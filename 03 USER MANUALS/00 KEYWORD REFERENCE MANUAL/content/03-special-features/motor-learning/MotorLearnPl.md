@@ -2,7 +2,7 @@
 
 **Definition:**
 
-MotorLearnPl is a read-only parameter that reports the current position index within the learning table where the algorithm is actively collecting data, indicating the progress of the learning pass. It is an axis-related status variable and is not saved to flash.
+MotorLearnPl is a read-only result reported after a motor-learning pass completes. For a rotary motor it is the learned number of pole pairs; for a linear motor it is reported as 1. It is an axis-related status variable and is not saved to flash.
 
 **See also:**
 

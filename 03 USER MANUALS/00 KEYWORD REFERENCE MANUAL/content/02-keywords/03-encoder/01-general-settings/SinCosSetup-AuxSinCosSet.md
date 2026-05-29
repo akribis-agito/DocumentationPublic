@@ -252,14 +252,14 @@ Only operational when the interpolation factor ≥ 16 (`SinCosSetup[6] ≤ 12`).
 
 ### [19] Test mode (default 0)
 
-Only operational when `SinCosSetup[9]=0`. Determines what signal appears on the Z incremental signal that goes to the DSP.
+Only operational when `SinCosSetup[9]=0`. Determines what signal appears on the Z incremental signal that goes to the DSP. The selectable range is 0–7; a value greater than 7 is rejected as out of range (the chip settings are not written and `SinCosSetup[21]` reports 1).
 
-| Value | Signal on Z | Value | Signal on Z |
-|---|---|---|---|
-| 0 | Z | 8 | CLK |
-| 1 | A xor B | 9 | DIVC |
-| 2 | ENCLK | 10 | PZERO - NZERO |
-| 3 | NLOCK | 11 | TP |
+| Value | Signal on Z |
+|---|---|
+| 0 | Z |
+| 1 | A xor B |
+| 2 | ENCLK |
+| 3 | NLOCK |
 
 ### [20] Analog test mode state (default 0)
 

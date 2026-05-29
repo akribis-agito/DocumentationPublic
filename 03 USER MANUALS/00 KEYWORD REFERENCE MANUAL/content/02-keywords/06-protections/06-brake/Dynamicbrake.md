@@ -9,11 +9,12 @@ Dynamic braking rapidly slows the motor by shorting the motor phases (through th
 
 ### Engagement conditions
 
-Each control cycle the drive engages the dynamic brake only when **all** of these hold:
+Each control cycle the drive engages the dynamic brake only when **both** of these hold:
 
-1. `DynBrakeOn ≠ 0` (feature enabled);
-2. the motor is **off** (`MotorOn = 0`); and
-3. no [ConFlt](../../07-status-and-faults/ConFlt.md) prohibits dynamic braking (per a per-fault permission table).
+1. `DynBrakeOn ≠ 0` (feature enabled); and
+2. the motor is **off** (`MotorOn = 0`).
+
+A third condition — that no active [ConFlt](../../07-status-and-faults/ConFlt.md) prohibits dynamic braking (per a per-fault permission table) — applies **only** on the secondary axes (B, and C on the 3-axis product) of the PWM amplifier. On the primary axis (A) of the PWM amplifier and on **all** axes of central-controller products this per-fault check is bypassed, so the brake engages whenever `MotorOn = 0` and `DynBrakeOn ≠ 0`, regardless of any active `ConFlt`.
 
 When engaged, the drive activates the dynamic brake and sets [StatReg](../../07-status-and-faults/StatReg.md) **bit 28** (dynamic brake active); the high-side MOSFETs are forced off and only the low-side devices are PWM-driven. If any condition fails the brake is released and the status bit cleared. On the PWM amplifier the dynamic brake is supported on axes A and B (and C on the 3-axis product).
 
@@ -47,8 +48,8 @@ Sets the maximum shorting duty cycle used for dynamic braking — the strongest-
 ### Edge cases
 
 - **Motor on:** the dynamic brake is engaged **only** when the motor is off — it cannot fight an active current-loop output.
-- **Mode dependency:** engagement is independent of [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md); it only depends on `MotorOn`, `DynBrakeOn`, and the per-fault permission table.
-- **Forbidden by some faults:** specific [ConFlt](../../07-status-and-faults/ConFlt.md) codes prohibit dynamic braking through a per-fault permission table (e.g. ground-short, IPM fault) — in those cases the brake is held released even if `DynBrakeOn ≠ 0`.
+- **Mode dependency:** engagement is independent of [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md); it depends on `MotorOn`, `DynBrakeOn`, and — on the PWM amplifier's secondary axes (B, and C on the 3-axis product) only — the per-fault permission table.
+- **Forbidden by some faults:** on the PWM amplifier's secondary axes (B, and C on the 3-axis product), specific [ConFlt](../../07-status-and-faults/ConFlt.md) codes prohibit dynamic braking through a per-fault permission table (e.g. ground-short, IPM fault) — in those cases the brake is held released even if `DynBrakeOn ≠ 0`. This per-fault gating is bypassed on the primary axis (A) of the PWM amplifier and on central-controller products, where the brake still engages with an active `ConFlt`.
 - **Bus over-voltage:** if the bus voltage reaches [MaxVBus](../02-current-and-voltage/MaxVBus.md) (for longer than [MaxVBusTime](../02-current-and-voltage/MaxVBusTime.md)) or [MaxVBusAbs](../02-current-and-voltage/MaxVBusAbs.md), the duty cycle is forced to `0` to avoid pumping more regen energy onto an already-high bus.
 - **`DynBrakeOn = 0`:** the brake never engages and [StatReg](../../07-status-and-faults/StatReg.md) bit 28 never sets.
 - **Range overflow / silent saturation:** the computed duty cycle is clamped to `[0, DynBrkRef]` each cycle; writes to `DynBrkRef` outside the keyword `range` are clamped.
