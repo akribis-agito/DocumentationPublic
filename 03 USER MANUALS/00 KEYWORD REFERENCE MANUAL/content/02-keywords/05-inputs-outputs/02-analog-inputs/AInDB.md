@@ -69,6 +69,17 @@ x=-20|black|dashed
 AAInDB[1]=20         ; ±20 mV deadband on analog input 1
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `AInDB[1]`–`AInDB[4]` (plus `[5]` reserved). `AInDB[0]` does not exist.
+- **Out of range** — negative values are not accepted (range begins at `0`); a zero `AInDB` disables this stage entirely.
+- **At the band edge** — the upper comparison is strict (`u > AInDB`) and the lower strict (`u < −AInDB`), so a value exactly at `±AInDB` is forced to `0` (the band is inclusive on its boundary).
+- **Interaction with [AInOffset](AInOffset.md)** — the band is centred on the offset-corrected zero; tune `AInOffset` first to null any DC bias.
+- **Interaction with [AInGain](AInGain.md)** — the band width is specified in input (post-offset) mV, before gain; after gain, the equivalent threshold seen on `AInPort` is `AInDB × AInGain / 65536`.
+- **Motor on/off and mode independence** — runs every cycle regardless of `MotorOn` or [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md).
+- **Save** — `AInDB` is flash-saveable.
+- **Platform** — central-i v5 stores the value as `float32`; behaviour is unchanged.
+
 ## See also
 
 - [AInMuteRange](AInMuteRange.md) — second deadband (after gain)

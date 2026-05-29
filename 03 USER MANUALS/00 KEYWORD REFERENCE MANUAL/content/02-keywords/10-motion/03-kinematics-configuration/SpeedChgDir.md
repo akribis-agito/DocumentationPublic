@@ -55,6 +55,15 @@ ASpeedChgDir=1       ; fire when reference falls below SpeedChgPos (reverse)
 ASpeedChgDir        ; query current value
 ```
 
+### Edge cases
+
+- **Motor off:** value is held.
+- **Out-of-range write:** the parameter system rejects values outside `0`–`1`.
+- **Simulation mode (`MotorType` = 5):** trigger fires normally.
+- **ModRev wrap:** the comparison side does not change at a wrap. Note that a forward-moving axis wrapping near `SpeedChgPos = 0` will cross from `ModRev` down to `0` *and back up*; the trigger will then fire on the first such crossing in the configured direction.
+- **Active fault:** value preserved.
+- **Wrong direction:** if `SpeedChgDir` selects the opposite side of the actual motion, the trigger never fires. The keyword does not detect motion direction itself — it is a comparison side, not a "wait for direction".
+
 ## See also
 
 - [SpeedChgOn](SpeedChgOn.md) — enables speed change on the fly

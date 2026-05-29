@@ -79,6 +79,17 @@ The example shows how InTargetStat changes with different motion phases, under p
 AInTargetStat       ; read the current settling state
 ```
 
+### Edge cases
+
+- **Motor off:** value is forced to `0` (motor disabled).
+- **Out-of-range "write":** `InTargetStat` is read-only.
+- **Simulation mode (`MotorType` = 5):** the state machine runs identically (`PosErr` is forced zero so the axis is always within `InTargetTol`).
+- **ModRev wrap:** the wrap shifts both reference and feedback, so `|PosErr|` is preserved through the wrap and does not falsely exit the window.
+- **Active fault:** the motor goes off, value drops to `0`.
+- **Position/velocity control (OperationMode = 2 or 3):** value 4 is sticky — once reached, the state holds at 4 until the next `Begin` or motor disable, even if `|PosErr|` later exceeds `InTargetTol`.
+- **Current/force control (OperationMode = 1 or 4):** value is **not** sticky — every cycle the check is recomputed from `|Vel[1]|`, so the state can drop from 4 back to 3 or 2 immediately if the velocity rises again.
+- **Repetitive PTP between legs:** during the dwell the state machine is run by the dwell branch — value can reach 4 within the dwell if the axis settles in time, then drops to 2 when the next leg starts.
+
 ## See also
 
 - [InTargetTol](InTargetTol.md) — settling window (position/velocity control)

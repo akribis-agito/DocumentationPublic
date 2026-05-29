@@ -55,7 +55,7 @@ There are a few selectable configurations of ECAM motion, which are illustrated 
 >
 > Under positive ECAMGap, the array index will follow ascending order from ECAMStart to ECAMEnd (similarly from ECAMStartCyc to ECAMEndCyc for repetition) as the master value increases. If the master value goes below or beyond the range of values, slave position reference will clamp to the $C + \text{GenData}[\text{ECAMStart}]$ or $C + \text{GenData}[\text{ECAMEnd}]$, respectively.
 
-4.  ECAMGap \> 0 and ECAMCycles \< 0
+4.  ECAMGap \< 0 and ECAMCycles \< 0
 
 > ![image45.png](../../../assets/image45.png)
 ![image46.png](../../../assets/image46.png)

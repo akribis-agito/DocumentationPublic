@@ -75,6 +75,17 @@ ARelTrgt=-5000       ; next Begin moves 5000 user units in the negative directio
 ARelTrgt             ; read the current relative target
 ```
 
+### Edge cases
+
+- **Motor off:** value is held; no validation runs.
+- **Out-of-range write:** the parameter system clamps to the data-type range; the validation happens after conversion to `AbsTrgt` at `Begin`.
+- **Simulation mode (`MotorType` = 5):** unchanged.
+- **ModRev wrap:** at `Begin` the conversion uses the current `PosRef` (already inside `[0, ModRev)` if modulo is active); the resulting `AbsTrgt` may exceed `ModRev` but the wrap logic will shift everything together as the move proceeds.
+- **Active fault:** value is preserved.
+- **Other motion modes:** the conversion is performed only in modes that consume `AbsTrgt` (PTP, repetitive PTP, vector). Other modes ignore `RelTrgt`.
+- **`RelTrgt = 0`:** the next `Begin` uses `AbsTrgt` as-is (treats 0 as "use absolute target"). To explicitly stay put, set `AbsTrgt = PosRef` instead.
+- **Live change in motion:** allowed; the new value is parked until the next `Begin`. The in-progress move continues to its original target.
+
 ## Changes between versions
 
 In **v5 (central-i)** `RelTrgt` is a 64-bit integer with the larger range shown in the frontmatter, matching the 64-bit position pipeline; the conversion to `AbsTrgt` is unchanged. **v5 is central-i only**, so on standalone `RelTrgt` remains the v4 32-bit value.

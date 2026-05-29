@@ -50,10 +50,10 @@ The profiler enforces the forward limit in several layered ways:
 **1. Pre-emptive braking (planned stop at the limit).** When a point-to-point / jog profile is running, the profiler continuously computes the maximum velocity from which it could still stop exactly at `FwdPLim` using the active deceleration, via a square-root distance-to-stop formula:
 
 ```text
-DecelerationSpeed = -Decel·T + sqrt(Decel²·T² + 2·Decel·(FwdPLim·2^16 - PosRef)·T)
+DecelerationSpeed = -Decel·T + sqrt(Decel²·T² + 2·Decel·(FwdPLim·2^k - PosRef)·T)
 ```
 
-If the profiled velocity exceeds `DecelerationSpeed`, it is clamped to it, so the axis ramps down and arrives at `FwdPLim` at zero speed rather than overshooting.
+where `T` is the control sample time and `k` is the firmware's sample-frequency-two-power constant (14 on the default 16 kHz build, 16 on the fast-sampling 65 kHz build). If the profiled velocity exceeds `DecelerationSpeed`, it is clamped to it, so the axis ramps down and arrives at `FwdPLim` at zero speed rather than overshooting.
 
 **2. Stop request when the reference crosses the limit.** If the shaped/filtered reference does pass `FwdPLim` while moving forward, the profiler raises a stop request in [MotionStat](../../../10-motion/05-motion-status/MotionStat.md) and records [MotionReason](../../../10-motion/05-motion-status/MotionReason.md) = 7 (motion ended at the forward software limit). When that reason is active, the stop uses the emergency deceleration `EmrgDec` rather than the normal `Decel`.
 
@@ -69,6 +69,15 @@ If the profiled velocity exceeds `DecelerationSpeed`, it is clamped to it, so th
 ### Data type by version
 
 On central-i v5 the limit is stored as a 64-bit position, extending the usable travel range well beyond the 32-bit range used on standalone/v4 (see the frontmatter `range` override). The braking and clamping logic is otherwise identical.
+
+### Edge cases
+
+- **Motor off:** the profiler is not running, so no pre-emptive braking occurs. The hard clamp on the position reference and the `Begin`-time rejection are still active when motion is later started.
+- **Mode dependency:** the pre-emptive braking and stop-request mechanisms apply to indirect/profiled motion modes (Jog, PTP, etc.). Direct streaming modes (e.g. pulse-and-direction direct) drive the reference outside the profiler — the hard clamp still pins it to `FwdPLim`, but you do not get a pre-emptive ramp.
+- **Limit not reached but reference past it:** the hard clamp applies on every cycle, so the reference position cannot exceed `FwdPLim` even if the profiler is misconfigured.
+- **No fault raised:** position-limit braking is a controlled deceleration; it does **not** raise a [ConFlt](../../../07-status-and-faults/ConFlt.md) and does not interact with [ProtectMask](../../01-general-protection/ProtectMask.md). The cause appears in [MotionReason](../../../10-motion/05-motion-status/MotionReason.md) only.
+- **Cannot change while in motion:** `FwdPLim` is gated `ok_in_motion: false` — writes are rejected during motion.
+- **Range overflow:** v4 keyword range is `−2147483648…2147483647`; v5 extends to ±2^51 (see frontmatter `central-i.v5` override).
 
 ## Examples
 

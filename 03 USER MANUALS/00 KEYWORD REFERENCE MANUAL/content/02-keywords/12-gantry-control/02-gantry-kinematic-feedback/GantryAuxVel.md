@@ -44,6 +44,15 @@ Each control cycle the controller differentiates [GantryAuxFdbk](GantryAuxFdbk.m
 AGantryAuxVel      ; read the motor-encoder (auxiliary) gantry velocity in dual-loop mode
 ```
 
+### Edge cases
+
+- **Single-loop gantry** ([GantryDLoopOn](../01-general-variables/GantryDLoopOn.md) = 0) — not updated. The velocity loop uses [GantryVel](../03-gantry-tuning/GantryVel.md) directly.
+- **Gantry off** ([GantryOn](../01-general-variables/GantryOn.md) = 0) — not updated; last value is held until the next gantry-on cycle.
+- **At gantry on transition** — forced to `0` on entry while the feedback history primes; first usable derivative appears one cycle later.
+- **Motor off** — gantry pair calculation halts; if A and B disagree on motor state the controller forces the still-on member off (`CON_FLT_GANTRY_MEMBER_UNEXPECTED_MOTOR_OFF`).
+- **Non-master axis** — reading on any axis other than a gantry master returns `0`.
+- **Platform** — v5 central-i only.
+
 ## See also
 
 - [GantryDLoopOn](../01-general-variables/GantryDLoopOn.md) — dual-loop mode in which this velocity is used

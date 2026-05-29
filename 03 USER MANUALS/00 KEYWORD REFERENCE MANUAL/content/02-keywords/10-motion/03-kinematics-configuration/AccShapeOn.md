@@ -59,6 +59,17 @@ The [AccShapeFact](AccShapeFact.md) entries are **fixed-point fractions scaled b
 
 ![Acceleration-shaping lookup by distance to target](accshape-lookup.svg)
 
+### Edge cases
+
+- **Motor off:** value is held; no profiler computation runs.
+- **Out-of-range write:** the parameter system rejects values outside `0`–`1`.
+- **Simulation mode (`MotorType` = 5):** unchanged.
+- **ModRev wrap:** the distance `|AbsTrgt − PosRef|` is computed after the wrap shifts both values together, so shaping behaves consistently through a wrap.
+- **Active fault:** the axis is disabled; on re-enable and next `Begin`, `AccShapeOn` is re-read.
+- **Other motion modes:** consumed only by the PTP-family profiler (jog, PTP, repetitive PTP). Direct modes and the structured jerk profiler (third-order [JerkMode](../02-motion-configuration/JerkMode.md)) ignore `AccShapeOn`.
+- **Live change in motion:** allowed; takes effect on the next control cycle.
+- **Shaping with EmrgDec:** when [EmrgDec](EmrgDec.md) replaces `Decel` for a limit/controlled-stop halt, the shaping factor is **not** applied (the stop uses the unshaped `EmrgDec × AccelFact`).
+
 ## Examples
 
 ```text

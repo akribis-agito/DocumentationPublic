@@ -57,6 +57,15 @@ Note that `PosBeforeMap` always tracks the **main** encoder of this axis, even i
 APosBeforeMap        ; read the uncorrected feedback position
 ```
 
+### Edge cases
+
+- **Read-only** — writes are rejected.
+- **Mapping off** — `PosBeforeMap` equals [Pos](../10-motion/01-kinematics-status/Pos.md); their difference is `0`.
+- **Simulation motor** — mapping is skipped; `PosBeforeMap` equals `Pos`.
+- **Main encoder only** — always reflects this axis's main encoder, regardless of the source [MapEncoder](MapEncoder.md) selects for the lookup.
+- **Motor off** — sampled every cycle regardless; useful for diagnostics with the servo off.
+- **Platform** — v5 widens to 64-bit; v4 is 32-bit. Units are user units in both cases.
+
 ## Changes between versions
 
 | | v4 (standalone & central-i) | v5 (central-i) |

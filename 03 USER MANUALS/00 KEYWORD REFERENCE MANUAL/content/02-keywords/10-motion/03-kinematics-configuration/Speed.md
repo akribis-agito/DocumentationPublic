@@ -64,6 +64,18 @@ In jog (and joystick-indirect velocity) mode the **signed** `Speed` is used dire
 
 The profiler reads `Speed` every cycle, so raising or lowering it mid-move makes the axis accelerate or decelerate toward the new cruise value on the next cycle. (For position-triggered speed changes during a move, see [SpeedChgNew](SpeedChgNew.md)/[SpeedChgOn](SpeedChgOn.md)/[SpeedChgPos](SpeedChgPos.md).)
 
+### Edge cases
+
+- **Motor off:** value is held; no profiler computation runs.
+- **Out-of-range write:** the parameter system clamps writes to ±1.3 × 10⁹; values outside are rejected.
+- **Simulation mode (`MotorType` = 5):** unchanged.
+- **ModRev wrap:** unrelated — `Speed` is a rate, not a position.
+- **Active fault:** the axis is disabled; the next `Begin` re-reads `Speed` and re-checks against `MaxVel`.
+- **`Speed = 0`:** for jog, the axis just decelerates/stays at rest; for PTP, the move is rejected at `Begin` because the profiler cannot make progress.
+- **`|Speed| > MaxVel` at `Begin`:** rejected for indirect modes (jog, PTP, repetitive PTP, PD-indirect, gear-indirect, ECAM-indirect, joystick-position-indirect) with `MAXVEL_PROTECTION`; the user must lower `Speed` or raise [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md). Direct modes accept any `Speed` because the user supplies position commands directly.
+- **Live raise above `MaxVel` during a move:** the profiler will ramp toward the new value, but the velocity loop will clamp [VelRef](../01-kinematics-status/VelRef.md) to `MaxVel` and set the velocity-saturation bit; the system does not fault.
+- **Jog with `Speed = 0` mid-move:** the axis decelerates to rest at `Decel`.
+
 ## Examples
 
 ```text

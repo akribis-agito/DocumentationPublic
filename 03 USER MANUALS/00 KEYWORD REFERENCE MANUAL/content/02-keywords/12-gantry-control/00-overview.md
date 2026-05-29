@@ -33,7 +33,7 @@ The two motors must be powered, phased, and the yaw axis must not be commanded i
    AGantryOffset        ; read back the captured A/B offset (set at the 0->1 transition)
    ```
 
-3. **Verify the feedbacks.** The master value of [GantryFdbk](02-gantry-kinematic-feedback/GantryFdbk.md) is the common (mean) gantry position the linear loop follows; the yaw-axis value is the differential reading the yaw loop drives to [GantryYawRef](01-general-variables/GantryYawRef.md). Both are calculated every cycle and are safe to read at any time:
+3. **Verify the feedbacks.** The master value of [GantryFdbk](02-gantry-kinematic-feedback/GantryFdbk.md) is the common (mean) gantry position the linear loop follows; the yaw-axis value is the differential reading the yaw loop drives to [GantryYawRef](01-general-variables/GantryYawRef.md). The feedbacks are recomputed every cycle **only while gantry is on**; before the first engagement they read `0`, and after disengagement they hold their last value until the next engagement.
 
    ```text
    AGantryFdbk          ; mean (common) gantry position

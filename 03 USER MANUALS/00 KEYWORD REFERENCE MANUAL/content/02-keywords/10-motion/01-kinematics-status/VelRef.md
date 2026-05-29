@@ -91,6 +91,16 @@ VelRef (after MaxVel clamp)                                 = 101000  ; within �
 
 If the same situation arose with `MaxVel = 50000`, the clamp would cap `VelRef = 50000` and bit 23 of `StatReg` (velocity saturation) would set on that cycle.
 
+### Edge cases
+
+- **Motor off / commutation not done / amplifier is a position-drive / simulation:** `VelRef` is not assembled this cycle — its previous value persists in memory but is not driven into the velocity loop.
+- **Active fault:** the axis is disabled — `VelRef` is not assembled.
+- **ModRev wrap:** `VelRef` is built from `PosErr` and `dPosRef`, both of which are preserved across the wrap, so `VelRef` is continuous across the wrap.
+- **Out-of-range write:** `VelRef` is read-only.
+- **Dual-loop:** the dual-loop command-gain scaling is applied to the assembled `VelRef` before the `MaxVel` clamp.
+- **Gantry:** the gantry position gain replaces [PosGain](../../11-control-tuning/03-position-control/PosGain.md) in step 1; the rest of the pipeline is per-axis.
+- **Saturation:** the `MaxVel` clamp also sets [StatReg](../../07-status-and-faults/StatReg.md) bit 23 and the general "any saturation" flag — useful to flag tuning issues even when no fault is generated.
+
 ## Examples
 
 ```text

@@ -50,6 +50,15 @@ A `1` bit in `DOutLog` inverts that output; a `0` bit passes it through unchange
 2. It does not affect outputs routed to a *hardware* function via [DOutSelect](DOutSelect.md) (events, P/D, UserPWM), which bypass the `DOutPort`/`DOutLog` word in hardware.
 3. Saved to flash, so polarity persists across power cycles.
 
+### Edge cases
+
+- **Hardware-function outputs** — bits where [DOutSelect](DOutSelect.md) is non-zero **bypass** `DOutLog`; polarity for those pins is set in the hardware function itself.
+- **Bits beyond the product's output count** — stored in the 32-bit word but have no pin to affect.
+- **Motor on/off** — independent of `MotorOn`; inversion runs every cycle.
+- **Mode independence** — independent of [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md).
+- **Read-back** — reads the inversion mask; combine with `DOutPort` to compute the final pin level.
+- **Save** — flash-saveable; reapplied at boot.
+
 ## See also
 
 - [DOutPort](DOutPort.md) — pre-inversion output state (the operand XORed with DOutLog)

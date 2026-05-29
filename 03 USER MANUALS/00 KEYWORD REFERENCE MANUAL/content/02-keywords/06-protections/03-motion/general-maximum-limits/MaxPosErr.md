@@ -47,9 +47,18 @@ if |PosErr| > active threshold
 
 Key points:
 
-- The threshold actually used is switched between `MaxPosErr` (closed loop) and [MaxPosErrOL](MaxPosErrOL.md) (open loop / injection) depending on the loop state. In normal closed-loop operation the closed-loop threshold applies, so a violation records [ConFlt](../../../07-status-and-faults/ConFlt.md) fault code 1020 (position error too high). In open loop the open-loop threshold applies and the same condition instead records fault code 1055 (open-loop position error too high).
+- The threshold actually used is switched between `MaxPosErr` (closed loop) and [MaxPosErrOL](MaxPosErrOL.md) (open loop / injection) depending on the loop state. In normal closed-loop operation the closed-loop threshold applies, so a violation records [ConFlt](../../../07-status-and-faults/ConFlt.md) ConFlt code 1020 (position error too high). In open loop the open-loop threshold applies and the same condition instead records ConFlt code 1055 (open-loop position error too high). See [MaxPosErrOL](MaxPosErrOL.md) for the full table of which condition selects which threshold.
 - The position error is forced to `0` (so this protection never trips) for an open-loop stepper, and whenever the axis is not in a position-control / force-over-PIV mode. The protection is therefore effective only when a position loop is actually closed.
 - On a violation the axis is turned off immediately, and the fault's configured stop behaviour applies.
+
+### Edge cases
+
+- **Motor off:** the position loop and the limit check do not run; on motor-off the error is reset.
+- **Mode dependency:** `PosErr` is forced to `0` outside position-control and force-over-PIV operation, and for open-loop steppers ([MotorType](../../../02-motor-and-amplifier/MotorType.md) = stepper open-loop), so the check cannot trip in those configurations.
+- **Open-loop / injection:** during [OpenLoopOn](../../../08-axis-operation/01-general-keywords/OpenLoopOn.md) ≠ 0 or any direct injection at the current-, velocity-, or force-reference point, the active limit becomes [MaxPosErrOL](MaxPosErrOL.md) and the fault becomes ConFlt code 1055. Only direct injection at the position-reference point keeps the limit on `MaxPosErr`.
+- **Range overflow:** writes outside `0…80000000` (v4) are clamped to the keyword `range`; the internal limit in force is updated on the next change to `MaxPosErr`/`MaxPosErrOL`/`OpenLoopOn`/`InjectType`/`InjectPoint`.
+- **Clearing the fault:** ConFlt code 1020 clears on re-enable ([MotorOn](../../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../../07-status-and-faults/ErrLog.md) entry persists.
+- **HWProtectBits / ProtectMask:** the following-error trip is not maskable through [ProtectMask](../../01-general-protection/ProtectMask.md) (that mask covers hardware-protection bits only).
 
 ## Examples
 

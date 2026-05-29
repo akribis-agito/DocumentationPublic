@@ -55,6 +55,16 @@ AAOutOffset[1]=-12   ; trim analog output 1 by -12 mV to zero it
 AAOutOffset[1]        ; read back the offset
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `AOutOffset[1]`–`AOutOffset[4]`. `AOutOffset[0]` does not exist.
+- **Out of range** — values outside ±500 mV (v4) or ±700 mV (v5) are rejected by the parameter table.
+- **Mode independence** — applied in both direct (`AOutMode = 0`) and monitoring (`AOutMode ≠ 0`) modes.
+- **Saturation** — the post-offset DAC code is clamped at the ±11905 mV output span; a large offset can clip an otherwise in-range value.
+- **Motor on/off** — runs every cycle regardless of `MotorOn`.
+- **Save** — flash-saveable; reloaded at boot.
+- **Platform** — v4 stores as `int32` with ±500 mV range; v5 stores as `float32` with ±700 mV range.
+
 ## Changes between versions
 
 On Central-i v5 `AOutOffset` is a `float32` and the range widens to ±700 mV (v4 / standalone: `int32`, ±500 mV). The role and signal-path position are unchanged.

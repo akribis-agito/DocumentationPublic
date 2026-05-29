@@ -44,6 +44,17 @@ The value is added at the **accumulator scaling** of the reference (the 50.14 / 
 
 A positive `RefOffsetStep` shifts the reference forward, a negative value backward. See [RefOffsetSamp](RefOffsetSamp.md) for arming and auto-clear behaviour.
 
+### Edge cases
+
+- **Motor off / not in motion:** the value is held; no injection occurs (the countdown is also held).
+- **Out-of-range write:** v4 has no explicit range clamp; v5 clamps to ±655360.
+- **Simulation mode (`MotorType` = 5):** unchanged.
+- **ModRev wrap:** as for [RefOffsetSamp](RefOffsetSamp.md); the offset rides through the wrap.
+- **Active fault:** the value is preserved but the countdown is cleared.
+- **Large value (velocity-bias semantics):** because `RefOffsetStep` is added to the 50.14-scaled accumulator, a value of `16384` is one count of position bias per cycle (equivalent to ~16384 counts/sec at the standard sample rate). Set values larger than this carefully — they translate to large velocity steps in the reference and can saturate the velocity loop.
+- **`RefOffsetStep = 0` with non-zero `RefOffsetSamp`:** the countdown still runs but injects nothing — a no-op.
+- **Other motion modes:** runs in any mode that sets the in-motion bit.
+
 ## Examples
 
 ```text

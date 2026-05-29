@@ -48,6 +48,15 @@ AGantryCurrRef     ; read the common-mode (linear) gantry current command
 BGantryCurrRef     ; read the differential (yaw) gantry current command
 ```
 
+### Edge cases
+
+- **Gantry off** ([GantryOn](GantryOn.md) = 0) — the gantry loops are not running; `GantryCurrRef` holds its last value (or `0` if gantry has never engaged).
+- **Motor off** — the values reflect the recombination buffer but the actual motor currents are `0` because the current loops are not powered.
+- **Non-gantry axis** — reading on an axis that is not a master or yaw axis returns `0`.
+- **Decoupling map** ([GantryMapType](GantryMapType.md) = 1, v5 only) — the recombination ratio is no longer 50/50; the per-virtual command shown here is unchanged but the per-motor split downstream uses [GantryMapVal](GantryMapVal.md).
+- **Read-only** — writes are rejected.
+- **Platform** — v5 central-i reports as `float32`; v4 as `int32`.
+
 ## See also
 
 - [GantryYawRef](GantryYawRef.md) — yaw correction reference that the differential current responds to

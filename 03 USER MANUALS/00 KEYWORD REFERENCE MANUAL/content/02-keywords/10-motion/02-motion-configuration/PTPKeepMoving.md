@@ -36,11 +36,11 @@ Lets a new `Begin` blend into the existing move instead of stopping first.
 
 ## How it works
 
-In a normal point-to-point move the profiler declares the motion finished once it reaches the target and its speed is low enough — it enters the profile-smoothing tail ([MotionStat](../05-motion-status/MotionStat.md) bit 6) and eventually clears the in-motion bits of `MotionStat`. With `PTPKeepMoving = 1` the controller **skips that end-of-motion test entirely**, so the axis stays in the in-motion state and the profiler keeps tracking [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) indefinitely (the same behaviour also keeps the endless joystick-position modes running).
+In a normal point-to-point move the profiler declares the motion finished once it reaches the target and its speed is low enough — it enters the profile-smoothing tail ([MotionStat](../05-motion-status/MotionStat.md) bit 6) and eventually clears the in-motion bits of `MotionStat`. With `PTPKeepMoving = 1` the controller **skips that end-of-motion test entirely**, so the axis stays in the in-motion state and the profiler keeps tracking [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) indefinitely.
 
 Because the motion never reports "done", a fresh `Begin` (with a new `AbsTrgt`/`RelTrgt`) retargets the already-running profiler, and the profiler ramps toward the new target from the current speed instead of starting from rest — producing the blend. With `PTPKeepMoving = 0` the move completes normally, so a `Begin` issued during it is governed by the usual in-motion rules.
 
-This affects only point-to-point modes ([MotionMode](MotionMode.md) `= 1`); it has no effect on jog, gear, ECAM or the other modes.
+This affects only point-to-point motion ([MotionMode](MotionMode.md) `= 1`); the joystick-position modes (`MotionMode = 12` and `13`) are independently endless and are not influenced by `PTPKeepMoving`. It has no effect on jog, repetitive PTP, gear, ECAM or the other modes.
 
 ![PTPKeepMoving blend vs restart](ptpkeepmoving-blend.svg)
 
@@ -64,6 +64,16 @@ AAbsTrgt=140000      ; profiler retargets to the new value, no stop, no re-Begin
 ```
 
 Without `PTPKeepMoving = 1` the second `AAbsTrgt` would simply be parked for the next move — the running move would still target the original 100000. With it set, the profiler reads the updated `AbsTrgt` each cycle and ramps the axis to the new destination, blending the trajectory.
+
+### Edge cases
+
+- **Motor off:** the parameter is held; it is read on the next `Begin`.
+- **Out-of-range write:** the parameter system clamps writes to `0` or `1`; other values are rejected.
+- **Simulation mode (`MotorType` = 5):** behaviour is identical (the profiler runs in simulation).
+- **ModRev wrap:** blends work through a wrap because the wrap shifts both `AbsTrgt` and the reference state by `ModRev` together; the blend ramps toward the post-wrap target.
+- **Active fault:** the axis is disabled and the in-motion bits are cleared regardless of `PTPKeepMoving`.
+- **Repetitive PTP (`MotionMode = 2`):** `PTPKeepMoving` is **not** consulted in the repetitive end-of-segment test — repetition is governed by [RptCounter](../05-motion-status/RptCounter.md)/[RptCycles](RptCycles.md) and [StopRep](../04-motion-command/StopRep.md).
+- **Stop/Abort:** `Stop` and `Abort` end the motion regardless of `PTPKeepMoving` (the stop-request bit takes priority).
 
 ## See also
 

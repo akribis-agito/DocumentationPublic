@@ -58,6 +58,16 @@ AMapPosGap[1]=1000   ; correction points 1000 encoder counts apart
 AMapPosGap[1]        ; read the spacing for the first dimension
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `MapPosGap[1]`/`[2]`/`[3]`. `MapPosGap[0]` does not exist.
+- **Motor on / in motion at write** — rejected (`MPNOMOTN`, `MPNOMTR`).
+- **Zero value** — silently substituted with the default `1000` so the reciprocal stays defined.
+- **Out of range** — values outside `1`–`8 000 000` are rejected (the 8 M ceiling guarantees exact float reciprocal).
+- **`MapType = 0`** — value stored but not consulted.
+- **Save** — flash-saveable; the reciprocal is recomputed on every write and at power-up.
+- **Platform** — same on standalone v4, central-i v4 and central-i v5.
+
 ## See also
 
 - [MapLength](MapLength.md) — number of correction points per dimension

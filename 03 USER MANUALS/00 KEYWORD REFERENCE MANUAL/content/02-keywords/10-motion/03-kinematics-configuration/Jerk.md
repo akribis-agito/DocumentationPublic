@@ -86,6 +86,18 @@ The moving-average is bypassed for motion modes that do not use the profiler (P/
 
 Under continuous-rotation modulo ([ModRev](../../03-encoder/04-modulo-mode/ModRev.md) ≠ 0) the history buffer can hold pre-wrap values; the controller tracks how many buffer entries are "wrong" because of a wrap and corrects the running sum accordingly, and only performs the modulo wrap once the jerk buffer is clear of such values.
 
+### Edge cases
+
+- **Motor off:** value is held; smoothing is bypassed while the axis is disabled.
+- **Out-of-range write:** the parameter system rejects values outside `0`–`9` (standard) or `0`–`13` (Zynq).
+- **Simulation mode (`MotorType` = 5):** smoothing runs identically.
+- **ModRev wrap:** described above — the wrap is delayed until the buffer clears of pre-wrap samples.
+- **Active fault:** the axis is disabled; the history buffer is cleared on next motion.
+- **Other motion modes:** smoothing is bypassed for direct modes (PD-direct, gear-direct, ECAM-direct, FIFO, slave, CNC, vector, spline-buffer) and during current/force operation mode. It is also temporarily forced to `0` during commutation/auto-phasing, and restored afterward.
+- **Cannot change in motion:** writes are rejected while the axis is in motion (`NOMOTN` flag).
+- **`Jerk = 0`:** filter window is 1 sample — the smoothed reference equals the raw reference and no smoothing is applied.
+- **Third-order profiler:** `Jerk` is ignored entirely when [JerkMode](../02-motion-configuration/JerkMode.md) = 1; the structured jerk profiler uses [JerkInAcc](JerkInAcc.md)/[JerkInDec](JerkInDec.md) instead.
+
 ## Examples
 
 ```text

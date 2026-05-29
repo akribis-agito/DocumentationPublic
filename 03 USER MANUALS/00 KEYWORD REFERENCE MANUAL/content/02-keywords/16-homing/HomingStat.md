@@ -59,7 +59,7 @@ The per-step error checks include: the axis was unexpectedly already in motion w
 | -9 | Aborted because the conditions for SetPosition were not met. Relevant to the "Set position" and the two "Move to hard stop" steps. |
 | -10 | Aborted due to a not-allowed motion mode requested by the "write to MotionMode" step. |
 | -11 | Aborted due to a not-allowed map type requested by the "write to MapType" step. |
-| -12 | Aborted because phasing (commutation initialization) was not yet done when an "Enable the motor" step ran. |
+| -12 | Aborted because phasing (commutation initialization) was not yet done when an "Enable (or disable) the motor" step ran (the check runs regardless of whether the request is enable or disable: ComtStatus must be past the in-process state). |
 | 100 | The homing process completed successfully. |
 
 The `-3` error reflects an axis fault during a step; the cause is reported by [ConFlt](../07-status-and-faults/ConFlt.md). The `-9` error refers to the preconditions of [SetPosition](../10-motion/03-kinematics-configuration/SetPosition.md).

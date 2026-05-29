@@ -49,6 +49,17 @@ AGantryMap[1]=0.5    ; set the first entry to the symmetric split
 AGantryMapVal        ; read the live interpolated ratio at the current position
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `GantryMap[1]`–`GantryMap[1024]`. `GantryMap[0]` does not exist.
+- **In motion at write** — rejected (`NOMOTN`). The map may be edited with the motor on but not during a move.
+- **Map type off** ([GantryMapType](GantryMapType.md) = 0) — the table is stored but **not consulted**; the gantry uses the symmetric 50/50 split.
+- **Outside the table range** — positions before [GantryMapInit](GantryMapInit.md) clamp to entry 1; positions past entry 1024 clamp to the last populated entry.
+- **Out-of-range values** — entries outside `[0.0, 1.0]` are accepted by the parameter table but produce unphysical splits; treat 0.5 as the symmetric default.
+- **Set on wrong axis** — the engine reads `GantryMap` on the **master** axis. Writes elsewhere are accepted but never consulted.
+- **Save** — flash-saveable; large table that persists across reboots.
+- **Platform** — v5 central-i only.
+
 ## See also
 
 - [GantryMapType](GantryMapType.md) — enables use of this table

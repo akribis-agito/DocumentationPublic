@@ -42,6 +42,15 @@ Each control cycle, when the map is active, the controller reads the source posi
 AGantryMapVal        ; read the live decoupling ratio at the current position
 ```
 
+### Edge cases
+
+- **Map type off** ([GantryMapType](GantryMapType.md) = 0) — `GantryMapVal` is not updated by the lookup; it holds whatever value the table interpolation last produced (typically `0.5`).
+- **Source not configured** ([GantryMapSrc](GantryMapSrc.md) = 0) — the lookup reads from a zero pointer and produces the first table entry; treat the readout with caution.
+- **Outside the table** — values past the last entry clamp to the last entry; below the first entry clamp to the first entry. The diagnostic will plateau when the gantry leaves the mapped range.
+- **Read-only** — writes are rejected.
+- **Non-master axis** — reading on an axis that is not a gantry master returns the master's most recent value or `0` if no master is configured.
+- **Platform** — v5 central-i only.
+
 ## See also
 
 - [GantryMap](GantryMap.md) — table this value is interpolated from

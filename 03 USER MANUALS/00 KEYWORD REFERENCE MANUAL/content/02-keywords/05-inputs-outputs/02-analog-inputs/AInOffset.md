@@ -54,6 +54,16 @@ AAInOffset[1]=-50    ; subtract 50 mV of bias from analog input 1
 AAInOffset[1]=0      ; no offset
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `AInOffset[1]`–`AInOffset[4]` (plus `[5]` reserved). `AInOffset[0]` does not exist.
+- **Large offsets** — there is no clipping at this stage; the post-offset value flows into the deadband and gain stages with full float resolution.
+- **Sign convention** — added (not subtracted); use a negative `AInOffset` to remove a positive bias.
+- **Motor on/off and mode independence** — the offset runs every cycle regardless of `MotorOn` or [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md); all consumers see the corrected value.
+- **Interaction with [AInDB](AInDB.md)** — because the offset is applied first, the deadband window is centred on the offset-corrected zero, not the raw sensor zero.
+- **Save** — `AInOffset` is flash-saveable.
+- **Platform** — central-i v5 stores the value as `float32`; the formula and units are unchanged.
+
 ## See also
 
 - [AInFilt](AInFilt.md) — filter stage applied before the offset

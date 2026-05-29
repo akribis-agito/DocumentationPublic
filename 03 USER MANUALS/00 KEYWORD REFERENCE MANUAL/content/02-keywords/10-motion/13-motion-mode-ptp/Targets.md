@@ -59,6 +59,17 @@ ABegin               ; and move there
 
 To step through all three from a user program, copy each entry into `AbsTrgt` and `Begin` in turn, waiting for in-target between moves.
 
+### Edge cases
+
+- **Motor off:** values are held in flash; reading/writing is unaffected.
+- **Out-of-range write:** the parameter system clamps to ±2³¹−1 (v4) or ±2⁵¹−1 (v5); values outside are rejected.
+- **Index `[0]` / `[4]`:** the keyword has 3 usable entries `[1]` … `[3]`. Indexes outside this range return an error.
+- **Simulation mode (`MotorType` = 5):** unchanged — `Targets` is pure storage.
+- **ModRev wrap:** values are stored as raw user units; loading a value outside `[0, ModRev)` into `AbsTrgt` will be valid but the controller's wrap behaviour will adjust the reference frame as the move proceeds.
+- **Active fault:** values are preserved (flash-backed).
+- **Other motion modes:** the array is mode-independent. The intended use is PTP, but the user can copy entries into any signed-int position keyword.
+- **Live change in motion:** allowed; the change is to the storage entry only and does not affect any move in progress (because the profiler does not read `Targets`).
+
 ## Changes between versions
 
 In **v5 (central-i)** the entries are 64-bit integers with the larger range shown in the frontmatter, matching the 64-bit position pipeline. **v5 is central-i only**, so on standalone `Targets` remains a v4 32-bit array.

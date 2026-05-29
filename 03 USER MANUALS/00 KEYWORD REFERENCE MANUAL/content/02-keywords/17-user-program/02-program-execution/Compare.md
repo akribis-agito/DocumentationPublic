@@ -42,7 +42,7 @@ Throughout this page, `pop1` is the value popped first (the top of the stack) an
 
 ## How it works
 
-The index selects both the comparison and the operand data type. The same eight comparisons are available for each of the four data types — 32-bit integer (the default), 32-bit floating point, 64-bit integer, and 64-bit double-precision floating point — so the operation index ranges from 2 to 33. The numbering starts at 2 for compatibility with the operation numbering used by related keywords.
+The index selects both the comparison and the operand data type. On v4 (standalone and Central-i) the eight comparisons are available for **32-bit integer** operands only — operation index `2`–`9`. On Central-i v5 the same eight comparisons are also provided for **32-bit float** (`10`–`17`), **64-bit integer** (`18`–`25`) and **64-bit double-precision float** (`26`–`33`), so the operation index ranges from `2` to `33`. The numbering starts at 2 for compatibility with the operation numbering used by related keywords; using a float/long/double index on a v4 controller is rejected as an out-of-range operation.
 
 | Operation | 32-bit integer | float | 64-bit integer | double | True if |
 | --------- | -------------- | ----- | -------------- | ------ | ------- |

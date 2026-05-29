@@ -65,6 +65,17 @@ AAOutShifts[1]=-3    ; divide the monitored value by 8
 AAOutShifts[1]        ; read back the shift
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `AOutShifts[1]`–`AOutShifts[4]`. `AOutShifts[0]` does not exist.
+- **Out of range** — values outside ±31 are rejected by the parameter table.
+- **Wrong mode** ([AOutMode](AOutMode.md) = 0, direct command) — `AOutShifts` is **not used**; the DAC follows [AOutPort](AOutPort.md) directly.
+- **Right-shift sign** — the firmware uses an arithmetic right shift on a signed integer, so negative values round **toward negative infinity** (e.g. `−1 >> 1 = −1`), not toward zero. Watch out near 0 with very heavy right shifts.
+- **Saturation** — the post-shift, post-offset DAC code is clamped to the ±11905 mV output span.
+- **Motor on/off** — runs every cycle regardless of `MotorOn`.
+- **Save** — flash-saveable; reloaded at boot.
+- **Platform** — standalone v4 and central-i v4 only. On central-i v5 use [AOutGain](AOutGain.md) for any real multiplier.
+
 ## See also
 
 - [AOutMode](AOutMode.md) — selects the monitored parameter (shift applies only in monitoring mode)

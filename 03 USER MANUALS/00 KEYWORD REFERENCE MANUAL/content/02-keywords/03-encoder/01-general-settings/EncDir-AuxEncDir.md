@@ -34,6 +34,14 @@ AEncDir=0            ; count in the encoder's native direction
 AEncDir=1            ; reverse the counting direction
 ```
 
+## Edge cases
+
+- **Motor on / in motion.** Writes are rejected — the keyword's `NOMTRON` / `NOMOTN` attributes prevent a direction change while the axis is enabled or moving. Disable the motor first; on a brushless motor you will then need to re-phase.
+- **Encoder type 4 (SIN/COS).** `EncDir` is ignored; set direction via [SinCosSetup](SinCosSetup-AuxSinCosSet.md) index [10] instead.
+- **Incremental vs absolute.** For incremental (`EncType=1`) the reversal happens in the decode hardware (A/B swap on standalone, configuration bit 8 on Central-i). For absolute encoders (`EncType=3/6/8`) the reversal is applied in software each cycle as `ReadingCycle − reading` after the [EncAbsMB](EncAbsMB-AuxEncAbsMB.md) right-shift; net effect on [Pos](../../10-motion/01-kinematics-status/Pos.md) is the same.
+- **Power-up / Save / Reset.** The setting is flash-saved; the hardware-swap or software-reversal is applied during initialisation, so a fresh value takes effect after [Save](../../01-system/02-operation/Save.md) + [Reset](../../01-system/02-operation/Reset.md).
+- **Central-i disconnect.** The direction bit is packed into the remote encoder configuration word and sent during [CIConnect](../../01-system/05-central-i/CIConnect.md); on a disconnected port the remote keeps its last-applied direction.
+
 ## See also
 
 - [EncType](EncType-AuxEncType.md) — encoder type; `EncDir` does not apply to `EncType=4`

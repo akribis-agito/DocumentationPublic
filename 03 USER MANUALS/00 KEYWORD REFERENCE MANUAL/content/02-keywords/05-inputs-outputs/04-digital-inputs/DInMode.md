@@ -78,13 +78,13 @@ The lower 16 bits select one of the following functions. The "Edge / level" and 
 | 15 | Add filter | level | Enables/disables the second velocity bi-quad filter. |
 | 16 | Mode switch VEL ↔ POS | level (motor off) | While the motor is off, selects velocity vs position [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md). |
 | 17 | Mode switch VEL ↔ CUR | level (motor off) | While the motor is off, selects velocity vs current mode. |
-| 18 | Mode switch POS ↔ CUR | rising / falling | Switches between position and current mode (rising → position, falling → current). |
+| 18 | Mode switch POS ↔ CUR | rising / falling | Rising edge switches to position **only if currently in current mode**; falling edge switches to current **only if currently in position mode and the axis is not a CNC or vector member**. Has no effect from velocity or force mode. |
 | 19 | Clear absolute encoder | — | Defined; no action in the dispatch (empty case). |
 | 20 | Change speed | rising | Applies the queued new speed (`SpeedChgNew` → `Speed`). |
 | 21 | Home | level | Sets/clears the home state and [StatReg](../../07-status-and-faults/StatReg.md) home bit; toggling raises a home-change pulse. |
-| 22 | Mode switch POS ↔ FORCE | rising / falling | Switches between position and force mode (rising → position, falling → force). |
+| 22 | Mode switch POS ↔ FORCE | rising / falling | Rising edge switches to position **only if currently in force mode**; falling edge switches to force **only if currently in position mode and the axis is not a CNC or vector member**. Has no effect from velocity or current mode. |
 | 23 | Hall A | — | Marks this input as Hall A (Hall B/C assumed on the next inputs); HW routing, no dispatch action. |
-| 24 | Fault input | level (on) | While on and motor on, disables the motor with fault [ConFlt](../../07-status-and-faults/ConFlt.md) = 1050 (external fault input activated). |
+| 24 | Fault input | level (on) | While on and the motor is on (and not a simulated motor), disables the motor with fault [ConFlt](../../07-status-and-faults/ConFlt.md) = 1050 (external fault input activated). Ignored on simulation motors. |
 | 25 | Homing on input | rising | Triggers `HomingOn = 1` to start a homing sequence. |
 | 26 | Fault input — controlled stop | level (on) | While on, performs a controlled stop and disables the motor at the end. |
 
@@ -124,6 +124,17 @@ ABeginDInOn=1             ; arm: the next rising edge of DI 4 releases the queue
                           ; ... rising edge on DI 4 ...
 AMotionStat               ; motion has started — non-zero
 ```
+
+### Edge cases
+
+- **Motor off** — input-driven mode switches in codes 16 (VEL↔POS) and 17 (VEL↔CUR) **only act while the motor is off**; an edge while the motor is on is silently ignored. Codes 18 (POS↔CUR) and 22 (POS↔FORCE) act on edge regardless of motor state but only if the axis is already in one of the two participating modes.
+- **CNC / vector member** — codes 18 and 22 will not fall through to current or force while the axis is a member of a CNC or vector group; the dispatch silently skips the transition.
+- **Simulation motor** — code 24 (fault input) is ignored on simulated motors; the motor stays on even with the fault input asserted.
+- **Out-of-range function code** — values not listed in the table are ignored at dispatch (no error, no action).
+- **More than 20 active functions** — only the first 20 dispatch entries are operational; later assignments are silently inactive at dispatch time.
+- **Duplicate function on another input** — only the lower-index input is acted on; the later duplicate is dropped (except function 0 = general-purpose). PCSuite issues a configuration warning.
+- **Save / Reset** — some codes only attach (or release) on power-up; after editing `DInMode` you must [Save](../../01-system/02-operation/Save.md) and [Reset](../../01-system/02-operation/Reset.md).
+- **Platform** — code 27 (Heidenhain limits) is central-i v5 only; codes 0–26 are common to all platforms.
 
 ## Changes between versions
 

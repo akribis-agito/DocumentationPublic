@@ -53,6 +53,16 @@ ACurrCmdSrc=3        ; follow a master axis (slave drive)
 ACurrRefMaster=0     ; copy current reference from axis A
 ```
 
+### Edge cases
+
+- **Motor on / in motion at write** — rejected. Configure with the motor off.
+- **`CurrCmdSrc ≠ 3`** — the value is stored but the slave does not follow anything.
+- **Self-reference** — pointing at the same axis as the slave produces a stuck `CurrRef = 0` (the loop references itself).
+- **Master axis not in current mode** — the slave still copies `CurrRef[master]`; if the master is in position or velocity mode, the slave follows whatever the position / velocity loop holds in `CurrRef`.
+- **Out of range** — values beyond the number of axes are rejected.
+- **Save** — flash-saveable.
+- **Platform** — v5 central-i only.
+
 ## See also
 
 - [CurrCmdSrc](CurrCmdSrc.md) — selects master-axis current command (value 3)

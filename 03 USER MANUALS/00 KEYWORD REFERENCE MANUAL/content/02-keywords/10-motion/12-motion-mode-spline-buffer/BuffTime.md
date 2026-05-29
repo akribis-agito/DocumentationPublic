@@ -34,6 +34,8 @@ Array of per-segment durations (servo samples) for the spline buffer trajectory.
 
 `BuffTime` stores the **time stamp of each waypoint**, expressed as a count of servo (control) samples measured from the start of the trajectory. Entry `[i]` is the time at which the matching position waypoint [BuffPos](BuffPos.md)`[i]` is reached, so the duration of a segment is the difference between consecutive entries. Together with [BuffPos](BuffPos.md) it defines the spline trajectory. The arrays are expanded into the interpolated reference by [BuffCalc](BuffCalc.md). `BuffTime` is not saved to flash and can be changed at any time, but the change only takes effect after [BuffCalc](BuffCalc.md) is run again.
 
+> **Product limit.** The usable length of `BuffTime` is the same as for `BuffPos` and depends on the product (see the [section overview](00-overview.md#product-availability)). The last (largest) time stamp must also fit in the internal interpolation-buffer capacity, which is much smaller on standalone drives than on AGM800.
+
 ## How it works
 
 ### Cumulative time stamps, not per-segment durations

@@ -50,6 +50,13 @@ Please refer to [Control tuning – Force control](../../11-control-tuning/07-fo
 AForceRef           ; read the filtered force reference
 ```
 
+### Edge cases
+
+- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 4) — `ForceRef` is held equal to [Force](Force.md) so the next force-mode entry is bumpless.
+- **Motor off** — `ForceRef` tracks `Force`; the loop is not running.
+- **Sequence timing vs filter** — in-target / sequence timing is keyed to the **unfiltered** reference; do not compare `ForceRef` directly to [ForceCmdVal](ForceCmdVal.md) for sequence-step decisions.
+- **Read-only** — writes are rejected.
+
 ## See also
 
 - [ForceCmdSrc](ForceCmdSrc.md) — selects the reference source

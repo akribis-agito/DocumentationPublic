@@ -31,11 +31,11 @@ overrides:
 ---
 # EmrgDec
 
-Emergency deceleration rate applied on `Abort` or fault, in user units per second squared.
+Emergency deceleration rate applied on a limit-switch, software-limit or controlled-stop-input halt, in user units per second squared.
 
 ## Overview
 
-`EmrgDec` is the deceleration rate the profiler substitutes for [Decel](Decel.md) when a move is halted by an emergency or limit condition rather than by a normal [Stop](../04-motion-command/Stop.md). It is usually set higher than `Decel` so the axis comes to rest as quickly as it safely can. It is read/write, axis-scoped, saved to flash, and can be changed at any time, including during motion.
+`EmrgDec` is the deceleration rate the profiler substitutes for [Decel](Decel.md) when a move is halted by a limit switch, a software position limit, or a controlled-stop input rather than by a normal [Stop](../04-motion-command/Stop.md). It is usually set higher than `Decel` so the axis comes to rest as quickly as it safely can. [Abort](../04-motion-command/Abort.md) is a separate path — it clears the in-motion bits instantly and does not consult `EmrgDec`. It is read/write, axis-scoped, saved to flash, and can be changed at any time, including during motion.
 
 ## How it works
 
@@ -56,7 +56,17 @@ Like the other rates, `EmrgDec` is multiplied by [AccelFact](AccelFact.md) each 
 
 ### Relationship to Abort
 
-An [Abort](../04-motion-command/Abort.md) halts motion immediately. Note that the `EmrgDec`-rate path is driven by the [MotionReason](../05-motion-status/MotionReason.md) conditions above (limit switches = 4 / 5, software limits = 6 / 7, and controlled stop by input = 28); a normal `Stop` ([MotionReason](../05-motion-status/MotionReason.md) = 1) uses `Decel`. Set `EmrgDec ≥ Decel` so that any of these emergency stops is at least as aggressive as a normal one.
+An [Abort](../04-motion-command/Abort.md) halts motion immediately by clearing the in-motion bits — there is no profiler ramp at all, and neither `Decel` nor `EmrgDec` is consulted. The position loop holds at the last commanded reference; the motor stays enabled. The `EmrgDec`-rate path is therefore driven only by the [MotionReason](../05-motion-status/MotionReason.md) conditions above (limit switches = 4 / 5, software limits = 6 / 7, and controlled stop by input = 28); a normal `Stop` ([MotionReason](../05-motion-status/MotionReason.md) = 1) uses `Decel`. Set `EmrgDec ≥ Decel` so that any of these emergency stops is at least as aggressive as a normal one.
+
+### Edge cases
+
+- **Motor off:** value is held; the profiler does not run.
+- **Out-of-range write:** the parameter system clamps to `100`–`2,000,000,000`; values outside are rejected.
+- **Simulation mode (`MotorType` = 5):** unchanged; simulation runs the same profiler.
+- **ModRev wrap:** unrelated; `EmrgDec` is a rate, not a position.
+- **Active fault that disables the axis:** the motor is disabled immediately by the fault path (no profiler ramp); `EmrgDec` is only used for the *controlled* limit/software-limit/controlled-stop-input cases where the motor is intentionally kept enabled while ramping down.
+- **Other motion modes:** the EmrgDec substitution is performed by the PTP-family profiler (jog/PTP/PTP-rep/joystick); direct modes (PD/gear/ECAM/CNC/vector/FIFO/spline/slave) handle stops in their own way and may not consult `EmrgDec`.
+- **Cannot be zero:** the minimum is `100` user units/s² to keep the profiler arithmetic finite.
 
 ## Examples
 

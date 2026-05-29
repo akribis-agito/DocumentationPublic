@@ -51,6 +51,14 @@ ACurrPosThDir=-1     ; trigger when PosRef < CurrPosTh
 ACurrPosTh=50000     ; position-reference threshold
 ```
 
+### Edge cases
+
+- **Zero value** — condition A always passes; the position threshold is effectively bypassed and only the condition-B keywords drive the switch.
+- **After any trigger** — automatically cleared to `0` on entry to current mode (alongside whichever condition-B threshold fired). Re-arm by writing both again.
+- **Wrong mode** — not evaluated outside [OperationMode](../01-general-keywords/OperationMode.md) 2 / 3.
+- **Out of range** — values outside `-1`–`1` are rejected.
+- **Save** — not flash-saveable; reset to `0` at boot.
+
 ## See also
 
 - [CurrPosTh](CurrPosTh.md) — the position-reference threshold

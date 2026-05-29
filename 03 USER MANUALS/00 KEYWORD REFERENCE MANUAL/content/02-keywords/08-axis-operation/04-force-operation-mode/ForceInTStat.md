@@ -62,6 +62,16 @@ Once state 4 is reached the settling condition is **no longer checked** for that
 AForceInTStat       ; 4 = settled in target, 2 = still ramping
 ```
 
+### Edge cases
+
+- **Motor off** — latched to `0`. Going motor-on re-arms to `1`.
+- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 4) — the force-command engine does not run; `ForceInTStat` is not updated and holds its last value until the next entry into force mode.
+- **`ForceCmdSrc` = 0 (analog source)** — there is no defined target to settle on, so the state machine does not run; `ForceInTStat` stays at the motor-on state (`1`).
+- **State 4 is sticky** — once `4` is reached, leaving the tolerance window does **not** drop the state. Only a new ramp (state `2`) or motor-off (state `0`) clears it.
+- **Tolerance change at runtime** — increasing [ForceInTTol](ForceInTTol.md) does not retroactively enter state `3` if the force happened to be within the new window earlier; the state machine looks forward only.
+- **`ForceInTTime` = 0** — state `3` advances to `4` on the first in-window cycle (dwell of zero).
+- **Read-only** — writes are rejected.
+
 ## See also
 
 - [ForceInTTol](ForceInTTol.md) — settling window

@@ -51,6 +51,19 @@ AOpenLoopOn=2        ; enter voltage open loop
 AOpenLoopVolt=500    ; set the injection amplitude (PWM scaling, capped at 20%)
 ```
 
+### Edge cases
+
+- **Wrong mode** ([OpenLoopOn](OpenLoopOn.md) ≠ 2) — the value is **forced to `0` every cycle**; the modulator does not use it.
+- **Motor off** — the value is forced to `0` every motor-off cycle.
+- **In motion at write** — rejected (`NOMOTN`).
+- **Above 20 % PWM** — clamped at the 20 % cap; the configured value is stored but the modulator uses the clamp.
+- **Negative value** — rejected; the parameter accepts only non-negative amplitudes.
+- **Frequency missing** — without [InjectFreq](../../13-injection/InjectFreq.md) set, the injected sinusoid does not advance and the windings see a DC voltage on phase A only.
+- **Phase B/C** — held at `0`; the injection is single-phase by design so the motor barely moves.
+- **Simulation** — accepted; produces a numerical-only excitation on the simulated phase A.
+- **Save** — not flash-saveable; restarts at `0` after reset.
+- **Platform** — v5 stores as `float32` and uses the remote PWM scaling factor; v4 stores as `int32`. The 20 % cap is unchanged.
+
 ## Changes between versions
 
 In **v5 (central-i)** `OpenLoopVolt` is stored as a 32-bit float rather than the v4 integer, and uses the remote PWM scaling factor; the 20 % PWM cap and the phase-A sinusoid behaviour are unchanged. **v5 is central-i only** — on the standalone product `OpenLoopVolt` remains the v4 integer value.

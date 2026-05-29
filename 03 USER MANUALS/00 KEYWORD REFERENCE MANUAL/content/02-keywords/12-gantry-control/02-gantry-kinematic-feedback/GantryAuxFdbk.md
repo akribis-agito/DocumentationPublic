@@ -44,6 +44,14 @@ When dual-loop gantry mode is engaged, the controller computes the same common-m
 AGantryAuxFdbk     ; read the motor-encoder (auxiliary) gantry feedback in dual-loop mode
 ```
 
+### Edge cases
+
+- **Single-loop gantry** ([GantryDLoopOn](../01-general-variables/GantryDLoopOn.md) = 0) — not updated. The motor-encoder mean is reported directly as [GantryFdbk](GantryFdbk.md) on the master axis.
+- **Gantry off** ([GantryOn](../01-general-variables/GantryOn.md) = 0) — not updated. Last value is held until the next gantry-on cycle.
+- **Motor off** — the gantry calculation halts for the pair; if A and B disagree on motor state the controller forces the still-on member off and records `CON_FLT_GANTRY_MEMBER_UNEXPECTED_MOTOR_OFF`.
+- **Non-master axis** — reading on any axis other than a gantry master returns `0`.
+- **Platform** — v5 central-i only; not available on v4 or standalone.
+
 ## See also
 
 - [GantryDLoopOn](../01-general-variables/GantryDLoopOn.md) — dual-loop mode in which this feedback is used

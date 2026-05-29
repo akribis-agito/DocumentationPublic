@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="220" viewBox="0 0 820 220" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Direct slave signal path: axis B position reference per cycle change is scaled by MasterFact over 65536 and added directly to axis A position reference. No GearMaster, MasterPos, MasterFilt, MasterFactDen or MasterModRev are involved.">
+  <title>Direct slave (MotionMode = 10) signal path</title>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+
+  <!-- Master: axis B reference -->
+  <rect x="12" y="80" width="180" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="102" y="105" text-anchor="middle">Axis B reference</text>
+  <text x="102" y="123" text-anchor="middle" font-size="11">(per-cycle change)</text>
+
+  <!-- Scaling: MasterFact / 65536 -->
+  <rect x="232" y="80" width="200" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="332" y="101" text-anchor="middle">Scale</text>
+  <text x="332" y="119" text-anchor="middle" font-size="11">&#215; MasterFact / 65536</text>
+  <text x="332" y="135" text-anchor="middle" font-size="11">(v5: floating-point ratio)</text>
+
+  <!-- Adder onto axis A reference -->
+  <rect x="472" y="80" width="180" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="562" y="105" text-anchor="middle">Add to axis A</text>
+  <text x="562" y="123" text-anchor="middle" font-size="11">position reference</text>
+
+  <!-- Output: axis A reference -->
+  <rect x="692" y="80" width="116" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="750" y="105" text-anchor="middle">Axis A</text>
+  <text x="750" y="123" text-anchor="middle" font-size="11">reference</text>
+
+  <!-- Not used note (callout) -->
+  <rect x="180" y="172" width="460" height="34" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1"/>
+  <text x="410" y="193" text-anchor="middle" font-size="11" fill="#5b6b7b">Not used: GearMaster, MasterPos, MasterFilt, MasterFactDen, MasterModRev</text>
+
+  <!-- arrows -->
+  <line x1="192" y1="110" x2="230" y2="110" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="432" y1="110" x2="470" y2="110" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="652" y1="110" x2="690" y2="110" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+</svg>

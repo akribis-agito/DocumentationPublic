@@ -56,6 +56,18 @@ ACurrCmdVal[1]=364   ; first current reference (mA)
 ACurrCmdVal[2]=-500  ; second current reference (mA)
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `CurrCmdVal[1]`–`CurrCmdVal[20]`. `CurrCmdVal[0]` does not exist.
+- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 1 or [CurrCmdSrc](CurrCmdSrc.md) ∉ {1, 2}) — the table is **not consulted**; writes are stored but the current loop does not use them.
+- **Out of range** — values outside the drive's ±full-scale current command (typically ±64000 mA) are rejected by the parameter table.
+- **Motor off** — the table is not applied; on motor-on the dispatcher starts from `CurrCmdIndex` (without reset unless `GoToCurrMode` is used).
+- **Sequence end via HTime = 0** — the dispatcher exits current mode when it encounters a [CurrCmdHTime](CurrCmdHTime.md) of `0`; the corresponding `CurrCmdVal` is reached but not held.
+- **HTime negative** — holds indefinitely at that entry.
+- **Reload while running** — writing a new value at the active index while in current mode takes effect on the next ramp/hold cycle; `CurrRef` ramps toward the new value at the current slope.
+- **Save** — flash-saveable.
+- **Platform** — v5 stores as `float32` (fractional mA); v4 stores as `int32`.
+
 ## Changes between versions
 
 central-i v5 stores each `CurrCmdVal` entry as a 32-bit float (standalone/v4: 32-bit integer milliamperes). The table size (20 entries) and indexing are unchanged.

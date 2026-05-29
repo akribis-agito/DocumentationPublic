@@ -49,6 +49,15 @@ Every control cycle the drive checks each phase current against `MaxPhaseCurr`, 
 
 This is the per-phase counterpart of [MaxMotorCurr](MaxMotorCurr.md), which trips on the total motor current using the same 4-sample / 0.25 ms debounce.
 
+### Edge cases
+
+- **Motor off:** the per-phase over-current checks run only while the motor is on. On motor-off the firmware resets all three phase counters, so the next motor-on starts from a clean state.
+- **Mode dependency:** the trip runs regardless of operation mode (it is a hardware-safety check, not a closed-loop-state check).
+- **Single-phase motors / voice coils:** only the total motor current `MotorCurr` is monitored (against [MaxMotorCurr](MaxMotorCurr.md)); the per-phase trip does not apply.
+- **Range overflow:** writes outside `0…76000` (v4) are clamped to the keyword `range`.
+- **Clearing the fault:** ConFlt codes 1013 / 1014 / 1015 clear on re-enable ([MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../07-status-and-faults/ErrLog.md) entry persists.
+- **HWProtectBits / ProtectMask:** the per-phase over-current trip is not maskable through [ProtectMask](../01-general-protection/ProtectMask.md). The separate hardware over-current bits in [HWProtectBits](../01-general-protection/HWProtectBits.md) (raising ConFlt code 1025 / 1036 / 1059 on the silicon-level fault) are gated by [ProtectMask](../01-general-protection/ProtectMask.md).
+
 ## Changes between versions
 
 In **v4** `MaxPhaseCurr` is a 32-bit integer; in **v5** (central-i only) it is a 32-bit float (`float32`). The over-current trip mechanism is unchanged.

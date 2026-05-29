@@ -53,6 +53,17 @@ AInTargetVelTh=1000  ; velocity window in user units/s (default)
 AInTargetVelTh      ; read current value
 ```
 
+### Edge cases
+
+- **Motor off:** value held; `InTargetStat = 0` so no check is made.
+- **Out-of-range write:** the parameter system clamps to `0`–`1.3 × 10⁹`; negative values are rejected.
+- **Simulation mode (`MotorType` = 5):** `Vel[1]` reflects the simulated reference; the check runs normally.
+- **ModRev wrap:** the wrap preserves `ΔPos`, so `|Vel[1]|` does not spike at the wrap.
+- **Active fault:** axis disabled, `InTargetStat = 0`.
+- **Other motion modes:** the velocity-based settling applies only when `OperationMode` is current (1) or force (4); in position/velocity mode [InTargetTol](InTargetTol.md) is used instead.
+- **`InTargetVelTh = 0`:** requires exact-zero velocity — unreachable on a physical axis with any disturbance.
+- **Not sticky:** value 4 in current/force mode drops back to 2 as soon as the velocity exceeds the threshold again — unlike position/velocity mode, which latches.
+
 ## See also
 
 - [InTargetStat](InTargetStat.md) — settling state gated by this window

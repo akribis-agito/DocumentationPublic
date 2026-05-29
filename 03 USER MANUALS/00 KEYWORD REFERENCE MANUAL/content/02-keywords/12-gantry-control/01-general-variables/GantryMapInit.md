@@ -45,6 +45,16 @@ AGantryMapInit=0     ; first map entry corresponds to source position 0
 AGantryMapInit       ; read the configured start position
 ```
 
+### Edge cases
+
+- **In motion at write** — rejected (`NOMOTN`). May be changed with the motor on.
+- **Map type off** ([GantryMapType](GantryMapType.md) = 0) — stored but **not consulted**.
+- **Position before init** — indexing falls below entry 1 and is clamped to entry 1; the controller does not extrapolate left of the start.
+- **Position past last entry** — clamped to the last populated entry; consider increasing [GantryMap](GantryMap.md) entries or moving `GantryMapInit` if the working range exceeds the table.
+- **Set on wrong axis** — read on the master axis only; writes elsewhere are stored but ignored.
+- **Save** — flash-saveable; reloaded at boot.
+- **Platform** — v5 central-i only.
+
 ## See also
 
 - [GantryMap](GantryMap.md) — decoupling-ratio table whose first entry this positions

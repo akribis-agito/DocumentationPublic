@@ -53,6 +53,20 @@ Because the command resets [ForceCmdIndex](ForceCmdIndex.md) and [ForceCmdCntr](
 AGoToForceMode       ; gracefully switch to force operation mode
 ```
 
+### Edge cases
+
+- **From current mode** — rejected with `CANT_GO_TO_FORCE_FROM_CURR`. Pass through position mode first (e.g. via [GoToPosMode](../02-position-operation-mode/GoToPosMode.md)) before calling `GoToForceMode`.
+- **Already in force mode** — no-op; returns OK.
+- **CNC member** (`CNCA_MEMBER` or `CNCB_MEMBER`) — rejected with `CANT_GO_TO_CURRENT_OR_FORCE_WHEN_CNC`.
+- **Vector member** — not blocked here (only the [DInMode](../../05-inputs-outputs/04-digital-inputs/DInMode.md) code 22 dispatch refuses vector members).
+- **From velocity mode** — accepted; force loop seeding works the same way (`CurrRef` is in a defined state).
+- **From position mode** — accepted (the common case); the in-motion check is honoured.
+- **Motor off** — accepted; the mode flag changes but no power is applied until `MotorOn = 1`.
+- **PIV mode** ([ForcePIVOn](ForcePIVOn.md) = 1) — the force integrator is seeded to `0` rather than from `CurrRef`; the PIV structure does its own integral handling.
+- **Tables intact** — `ForceCmdVal` / `ForceCmdSlope` / `ForceCmdHTime` are not cleared; the dispatcher always restarts from `ForceCmdIndex = 1`.
+- **Direct assignment vs `GoToForceMode`** — writing [OperationMode](../01-general-keywords/OperationMode.md) = `4` does **not** reset `ForceCmdIndex` / `ForceCmdCntr`; it can resume an in-progress sequence. `GoToForceMode` always restarts from entry 1.
+- **Atomic** — the firmware disables interrupts around the integrator seed and mode flip so the change is visible to all loops in a single control cycle.
+
 ## See also
 
 - [OperationMode](../01-general-keywords/OperationMode.md) — the active control mode

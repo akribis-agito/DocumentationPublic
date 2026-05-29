@@ -35,7 +35,7 @@ Deceleration rate for point-to-point motion, in user units per second squared.
 
 ## Overview
 
-`Decel` is the deceleration limit the trajectory profiler uses to ramp the axis down from the commanded [Speed](Speed.md) to rest at the end of a move. It is the counterpart to [Accel](Accel.md) and is also the rate used by a controlled [Stop](../04-motion-command/Stop.md). For an [Abort](../04-motion-command/Abort.md) or a fault-driven halt the separate, usually larger [EmrgDec](EmrgDec.md) rate is used instead. Like `Accel`, `Decel` is scaled by [AccelFact](AccelFact.md) and smoothed by [Jerk](Jerk.md) / [JerkInDec](JerkInDec.md) according to [JerkMode](../02-motion-configuration/JerkMode.md).
+`Decel` is the deceleration limit the trajectory profiler uses to ramp the axis down from the commanded [Speed](Speed.md) to rest at the end of a move. It is the counterpart to [Accel](Accel.md) and is also the rate used by a controlled [Stop](../04-motion-command/Stop.md). On a limit switch (RLS/FLS), a software position limit (FwdPLim/RevPLim), or a controlled-stop input, the profiler substitutes the separate, usually larger [EmrgDec](EmrgDec.md) rate. An [Abort](../04-motion-command/Abort.md), by contrast, does **not** use either rate — it instantaneously clears the in-motion bits, leaving the position loop to hold the last reference. Like `Accel`, `Decel` is scaled by [AccelFact](AccelFact.md) and smoothed by [Jerk](Jerk.md) / [JerkInDec](JerkInDec.md) according to [JerkMode](../02-motion-configuration/JerkMode.md).
 
 `Decel` is read/write, axis-scoped and saved to flash. It can be changed at any time, including during motion — the profiler re-reads it every control cycle.
 
@@ -69,11 +69,22 @@ In jog/joystick moves the same `Decel`-based lookahead is computed against the s
 
 ### When EmrgDec replaces Decel
 
-When the motion ends because of a limit switch, a software position limit, or a controlled-stop input, the profiler substitutes [EmrgDec](EmrgDec.md) for `Decel` and disables jerk smoothing for that stop. A normal [Stop](../04-motion-command/Stop.md) command keeps using `Decel`; only [Abort](../04-motion-command/Abort.md)/fault paths use `EmrgDec`.
+When the motion ends because of a limit switch (RLS/FLS), a software position limit ([FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md)/[RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md)) or the controlled-stop input, the profiler substitutes [EmrgDec](EmrgDec.md) for `Decel` and disables jerk smoothing (`JerkMode` is forced to `0`) for that stop. A normal [Stop](../04-motion-command/Stop.md) command keeps using `Decel`. [Abort](../04-motion-command/Abort.md) is different again — it does not ramp at all (the in-motion bits are cleared immediately and the position loop holds at the last reference); neither `Decel` nor `EmrgDec` is consulted.
 
 ### Third-order mode
 
 In third-order mode ([JerkMode](../02-motion-configuration/JerkMode.md) = 1) `Decel` is the **peak deceleration** constraint passed to the structured jerk profiler; the deceleration is itself ramped at the rate set by [JerkInDec](JerkInDec.md).
+
+### Edge cases
+
+- **Motor off:** the value is held; no profiler computation runs.
+- **Out-of-range write:** the parameter system clamps writes to `100`–`2,000,000,000`; values outside are rejected.
+- **Simulation mode (`MotorType` = 5):** unchanged; the profiler runs in simulation.
+- **ModRev wrap:** unrelated — `Decel` is a kinematic rate, not a position.
+- **Active fault:** the axis is disabled and the profiler is stopped; the next `Begin` re-reads `Decel`.
+- **Other motion modes:** consumed by jog, PTP, repetitive PTP, PD-indirect, gear-indirect, ECAM-indirect and joystick-indirect modes. Direct modes drive position commands directly and ignore `Decel`, except during a controlled stop.
+- **Joystick velocity direct (`MotionMode = 14`):** internally the deceleration is set very high (essentially instant); the user `Decel` is only used during a stop ramp.
+- **Cannot be zero:** the minimum is `100` user units/s² to keep the profiler arithmetic finite.
 
 ## Examples
 

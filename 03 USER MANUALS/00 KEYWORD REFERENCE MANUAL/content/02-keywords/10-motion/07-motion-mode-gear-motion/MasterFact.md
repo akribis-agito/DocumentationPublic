@@ -48,9 +48,9 @@ The scaled change is accumulated into `MasterPos` each cycle.
 
 A negative `MasterFact` reverses the follower direction relative to the master. To set ratios that are not a clean multiple of 1/65536, use the numerator/denominator pair (v5) — see *Changes between versions*.
 
-### Special unity-ratio case
+### Note on the separate direct-slave mode
 
-A value of exactly `65536`, together with `MasterFilt = 64` and direct gear mode pointing at another axis's reference, enables the drift-free axis-to-axis gearbox described under [GearMaster](GearMaster.md).
+The direct-slave motion mode ([MotionMode](../02-motion-configuration/MotionMode.md) `= 10`, see [MotionMode10](MotionMode10.md)) also uses `MasterFact` as its scaling factor, but reads it directly without going through `MasterPos` or `MasterFilt`. It is a separate mechanism from gear motion (`MotionMode = 5` and `= 6`) — see [MotionMode10](MotionMode10.md) for that mode's input convention.
 
 ## Examples
 
@@ -72,3 +72,4 @@ In **v4** the ratio is `MasterFact / 65536` (numerator only); there is no denomi
 - [GearMaster](GearMaster.md) — selects the master variable
 - [MasterFilt](MasterFilt.md) — low-pass filter on the geared reference (direct mode)
 - [MotionMode](../02-motion-configuration/MotionMode.md) — selects direct (`= 5`) or indirect (`= 6`) gear motion
+- [MotionMode10](MotionMode10.md) — separate direct-slave mode that also reads `MasterFact`

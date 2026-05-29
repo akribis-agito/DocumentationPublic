@@ -58,16 +58,16 @@ All elements are in main user units per second. The base estimate is the per-cyc
 
 ### How Vel[1] is selected
 
-`Vel[1]` is the velocity used by the velocity loop, so its meaning follows the dual-loop / gantry configuration:
+`Vel[1]` is the velocity used by the velocity loop, so its meaning follows the dual-loop / gantry configuration. Dual-loop takes precedence; if dual-loop is off, gantry overrides on axes A/B; otherwise `Vel[1]` follows the main-encoder derivative.
 
-| Configuration | `Vel[1]` source |
-|---------------|-----------------|
-| Normal (no dual-loop, no gantry) | `Vel[2]` — main-encoder derivative |
-| Dual-loop ([DualLoopOn](../../11-control-tuning/02-dual-loop-control/DualLoopOn.md) = 1) | Auxiliary-encoder velocity scaled by [DualLoopFact](../../11-control-tuning/02-dual-loop-control/DualLoopFact.md) |
-| Analog-tacho dual-loop (`DualLoopOn` = 2) | Filtered analog tacho input |
-| Gantry on (axes A/B) | Gantry velocity ([GantryVel](../../12-gantry-control/03-gantry-tuning/GantryVel.md)) |
+| Priority | Configuration | `Vel[1]` source |
+|---|---------------|-----------------|
+| 1 | Dual-loop ([DualLoopOn](../../11-control-tuning/02-dual-loop-control/DualLoopOn.md) = 1) | [AuxVel](AuxVel.md) scaled by [DualLoopFact](../../11-control-tuning/02-dual-loop-control/DualLoopFact.md) (the gain $\frac{\text{DualLoopFact}}{65536}$) |
+| 2 | Analog-tacho dual-loop (`DualLoopOn` = 2) | Filtered analog tacho input |
+| 3 | Gantry on (axes A/B, no dual-loop) | Gantry velocity ([GantryVel](../../12-gantry-control/03-gantry-tuning/GantryVel.md)) |
+| 4 | Normal (no dual-loop, no gantry) | `Vel[2]` — main-encoder derivative |
 
-`Vel[1]` is assigned directly from the selected feedback (it is the raw selected velocity, not separately filtered).
+`Vel[1]` is assigned directly from the selected feedback (it is the raw selected velocity, not separately filtered). The cast is the only post-processing applied; any velocity filtering is done downstream in the velocity controller.
 
 ![Vel[1] feedback selection](vel-feedback-selection.svg)
 
@@ -82,6 +82,15 @@ All elements are in main user units per second. The base estimate is the per-cyc
 > 5. In between the second and third control interrupts, the hardware updates twice as a 1 position-count change happens twice. The first updated value is 7200 polling counts; the second updated value is 4800 polling counts.
 
 Refer to [Control tuning – Dual-loop control](../../11-control-tuning/02-dual-loop-control/00-overview.md) for more information about the types of dual-loop control.
+
+### Edge cases
+
+- **Motor off:** `Vel[2]` and `Vel[3]` continue updating from the encoder (so back-driving the load while disabled produces a non-zero reading). `Vel[1]` follows the same source as when enabled. `Vel[4]` follows [OneOverTOn](OneOverTOn.md) regardless of motor state.
+- **Simulation mode (`MotorType` = 5):** [Pos](Pos.md) tracks [PosRef](PosRef.md), so `Vel[2]/[3]` reflect the *reference* velocity. `Vel[4]` is `0` because there is no hardware to time encoder transitions.
+- **ModRev wrap:** the controller subtracts/adds [ModRev](../../03-encoder/04-modulo-mode/ModRev.md) from `Pos` and from `PosPrev` together at the wrap, so `ΔPos` does not see the wrap jump and `Vel[2]/[3]` stay continuous through the wrap.
+- **Out-of-range:** `Vel` is read-only; nothing to write. Internally the controller saturates the velocity-loop reference (rather than `Vel[1]`) if `|Vel[1]|` exceeds about 25 percent above [MaxVel](../03-kinematics-configuration/Speed.md), and clears the velocity buffer; this typically only occurs during a fault.
+- **Active fault:** all four array elements continue to update — they are derived from the encoder, not from the control loop, so they remain valid diagnostics after a fault.
+- **Gantry:** as noted above, with gantry on `Vel[1]` becomes [GantryVel](../../12-gantry-control/03-gantry-tuning/GantryVel.md) (linear-mode velocity on A, phase velocity on B); `Vel[2]/[3]/[4]` are still per-axis.
 
 ## Examples
 

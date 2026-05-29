@@ -66,7 +66,17 @@ $$
 
 ### Emergency stops
 
-The third-order profiler is bypassed for emergency/limit stops: those force the internal jerk mode OFF and decelerate with [EmrgDec](EmrgDec.md) without jerk shaping, so `JerkInAcc` does not apply to an emergency stop.
+The third-order profiler is bypassed for limit-switch, software-limit and controlled-stop-input stops: those force the internal jerk mode OFF and decelerate with [EmrgDec](EmrgDec.md) without jerk shaping, so `JerkInAcc` does not apply to such a stop. [Abort](../04-motion-command/Abort.md) does not ramp at all and is also unaffected by `JerkInAcc`.
+
+### Edge cases
+
+- **Motor off:** value is held; profiler does not run.
+- **Out-of-range write:** the parameter system clamps to `100`–`1,000,000,000`; values outside are rejected.
+- **Simulation mode (`MotorType` = 5):** unchanged.
+- **ModRev wrap:** the third-order profiler tracks the wrap through its internal state; the jerk constraint is unaffected.
+- **Active fault:** the axis is disabled; on re-enable and next `Begin`, `JerkInAcc` is re-read.
+- **Other motion modes:** consumed only by the structured jerk profiler under PTP / repetitive PTP with [JerkMode](../02-motion-configuration/JerkMode.md) = 1. Jog (`MotionMode = 0`), the indirect modes, and any direct mode all ignore it.
+- **Live change in motion:** allowed (`OKINMOTN`), but takes effect at the start of the next profiler segment, not mid-segment, because the segment time is computed up front.
 
 ## Examples
 

@@ -33,6 +33,14 @@ Because the inversion happens before edge detection and the [DInMode](DInMode.md
 
 Typically used for limit switches for fail-safe reasons: configure so that a disconnected switch (input low) triggers a fault.
 
+### Edge cases
+
+- **Central-i remote bit count** — only bits corresponding to the remote's actual digital-input count are writable; extra bits are masked off.
+- **`DInLogHigh` on small platforms** — products without inputs 33–64 ignore `DInLogHigh`; the keyword exists for software portability.
+- **Applied before edge detection** — inverting a limit / fault input flips the active sense of the matching [DInMode](DInMode.md) function.
+- **Motor on/off** — independent of `MotorOn`; inversion runs every cycle.
+- **Save** — flash-saveable; persistent across reboots.
+
 ## See also
 
 - [DInPort-DInPortHigh](DInPort-DInPortHigh.md) — resulting input states (after this XOR)

@@ -123,7 +123,7 @@ The remaining elements of each step (`HomingDef[2, 12, …, 192]`, `HomingDef[3,
 
 | HomingDef[Index] | Value descriptions |
 |---|---|
-| HomingDef[1, 11, …, 191] = 8 | Enable (or disable) the motor. **Note:** enabling requires that phasing (commutation initialization) is already done, otherwise the homing aborts with [HomingStat](HomingStat.md) = `-12`. |
+| HomingDef[1, 11, …, 191] = 8 | Enable (or disable) the motor. **Note:** phasing (commutation initialization) must already be finished before this step runs, regardless of whether the request is to enable or disable — if [ComtStatus](../15-commutation/ComtStatus.md)`[1]` is still `0` (not done yet) or `1` (in process) the homing aborts with [HomingStat](HomingStat.md) = `-12`. Also aborts if the axis is in motion when the step starts ([HomingStat](HomingStat.md) = `-6`). |
 | HomingDef[2, 12, …, 192] | 0 to disable ([MotorOn](../08-axis-operation/01-general-keywords/MotorOn.md) = 0), 1 to enable (MotorOn = 1). |
 | HomingDef[3, 13, …, 193] | Timeout [controller cycles]. |
 

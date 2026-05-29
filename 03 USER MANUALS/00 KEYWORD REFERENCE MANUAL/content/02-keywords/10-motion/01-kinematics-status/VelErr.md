@@ -51,19 +51,11 @@ For example, with `VelRef = 50000` user units/s and `Vel[1] = 49500`, `VelErr = 
 
 `VelErr` is computed each control cycle as the (saturated) velocity reference minus the velocity-loop feedback `Vel[1]`:
 
-1. Under individual (non-gantry) mode:
-
 $$
 \text{VelErr} = \text{VelRef} - \text{Vel}[1]
 $$
 
-2. Under gantry mode:
-
-$$
-\text{VelErr} = \text{VelRef} - \text{GantryVel}
-$$
-
-Because the subtrahend is [Vel](Vel.md)`[1]`, what `VelErr` measures against changes with the loop configuration: `Vel[1]` is the main-encoder velocity normally, the (scaled) auxiliary velocity under dual-loop, an analog tacho under analog-tacho dual-loop, or the gantry velocity in gantry mode.
+Because the subtrahend is [Vel](Vel.md)`[1]`, what `VelErr` actually measures against changes with the loop configuration: `Vel[1]` is the main-encoder derivative normally, the (scaled) [AuxVel](AuxVel.md) under dual-loop, an analog tacho under analog-tacho dual-loop, or [GantryVel](../../12-gantry-control/03-gantry-tuning/GantryVel.md) in gantry mode (axes A/B). The error formula itself does not branch on configuration — the configuration changes `Vel[1]` upstream.
 
 ### When it is forced to zero
 
@@ -72,6 +64,16 @@ Because the subtrahend is [Vel](Vel.md)`[1]`, what `VelErr` measures against cha
 ### High velocity-error protection
 
 After computing `VelErr` the controller checks its magnitude against [MaxVelErr](../../06-protections/03-motion/general-maximum-limits/MaxVelErr.md) while in position/velocity/force-PIV mode; on exceedance it disables the axis and [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1021 (velocity error exceeds limit). This check is skipped for analog-velocity-command amplifiers. Otherwise `VelErr` drives the velocity PI (gain × error, accumulated into the velocity integral).
+
+### Edge cases
+
+- **Motor off / commutation not done:** the velocity loop is not run; the integral is held; `VelErr` is forced to `0` by the conditions above.
+- **Simulation mode (`MotorType` = 5):** the simulation path runs the loop with synthetic feedback; `VelErr` follows `VelRef − Vel[1]` normally.
+- **Current operation mode:** `VelErr` is **still computed** (not forced to zero) so the velocity-PI integral stays preloaded; this prevents a current-command jump when the axis returns to position or velocity mode. The high-error trip is skipped in this case.
+- **ModRev wrap:** because `Vel[1]` is constructed from `ΔPos` after the wrap correction (see [Vel](Vel.md)), the wrap does not appear in `Vel[1]` and so does not produce a spike in `VelErr`.
+- **Out-of-range write:** `VelErr` is read-only — writes are rejected.
+- **Active fault:** the axis is disabled — `VelErr` is forced to `0`; the [ConFlt](../../07-status-and-faults/ConFlt.md) snapshot fields capture the moment-of-trip value.
+- **Gantry:** with gantry on, `Vel[1] = GantryVel` (the gantry common/phase velocity), so `VelErr` is automatically the gantry velocity error.
 
 ## Examples
 

@@ -85,6 +85,15 @@ ACIGlobalStat        ; the port's connected bit is now set in the system-wide su
 
 Common failures: `CIStatus[6] = 9` means the remote does not match `CIDeviceType`; `11`/`13`/`14` mean the remote needs a specific `AmpType`; `6` flags an unsupported Central-i engine version. For an automatic version of this sequence at power-up, set [CIAutoConnect](CIAutoConnect.md).
 
+## Edge cases
+
+- **Motor on / in motion.** Rejected — `CIConnect` cannot be issued while the motor is enabled or moving. Stop the axis and disable the motor first.
+- **Already connected.** Rejected up front (no state change) — disconnect with [CIDisconnect](CIDisconnect.md) before reconnecting.
+- **Power-up.** When [CIAutoConnect](CIAutoConnect.md) is set for a port the firmware runs this same sequence during start-up, driving the state machine in a tight loop because interrupts are not yet active. The host can poll [CIStatus](CIStatus.md) afterwards.
+- **Standalone product.** Central-i is the master-side feature; on a standalone controller there are no Central-i ports to connect, so the keyword has no effect there. v5 firmware is central-i only.
+- **Simulation device type.** With [CIDeviceType](CIDeviceType.md) set to a simulation class the physical reset/get-device/configure phases are skipped: the port is marked connected immediately, [CIIdentity](CIIdentity.md) is filled with default channel counts, and the [CIGlobalStat](CIGlobalStat.md) simulation bit for that port is set alongside its connected bit.
+- **Device-type mismatch with axis.** Requesting an amplifier class on a port that cannot drive a motor, or a class incompatible with the axis's `AmpType`, is rejected before the sequence starts — [CIStatus](CIStatus.md)`[6]` carries the specific error code (9, 11, 13, or 14).
+
 ## See also
 
 - [CIAutoConnect](CIAutoConnect.md) — run this sequence automatically at power-up

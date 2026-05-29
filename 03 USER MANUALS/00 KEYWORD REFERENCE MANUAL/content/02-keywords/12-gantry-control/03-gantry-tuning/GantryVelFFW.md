@@ -51,6 +51,17 @@ AGantryVelFFW[1]=0  ; set yaw velocity feedforward gain (first gain set)
 AGantryVelFFW[1]    ; read the current value
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `GantryVelFFW[1]`–`GantryVelFFW[5]` (gain sets), with `[6]` as the active-set storage slot.
+- **Gantry off** ([GantryOn](../01-general-variables/GantryOn.md) = 0) — writes accepted; the gain has no effect until gantry is engaged.
+- **Wrong mode** — feedforward is applied only when the position-loop reference advances; in current/force-only modes the term contributes nothing.
+- **Zero gain** — disables yaw velocity feedforward.
+- **Wrong axis** — consulted on the yaw axis of the pair; writes on the master or a non-gantry axis are accepted but not used.
+- **Out of range** — values outside `0`–`50000` per-element are rejected.
+- **Save** — flash-saveable.
+- **Platform** — v5 central-i only. There is no `GantryVelFFW` on v4.
+
 ## See also
 
 - [GantryVelGain](GantryVelGain.md) — yaw velocity-loop proportional gain

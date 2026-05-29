@@ -50,6 +50,14 @@ Declares the drive's power-supply type so protections behave correctly.
 
 `PowerSupply` also feeds the protection-mask logic: when [ProtectMask](../01-general-protection/ProtectMask.md) (or `PowerSupply`) changes, the drive re-derives the hardware fault-enable word and gates the AC-power-phase bits according to the declared supply type, so phases that the supply does not use are not flagged as missing. (On standalone AG100 drives this is done with dedicated power-phase mask bits; on Central-i the enable word is sent to the remote amplifier.)
 
+### Edge cases
+
+- **Motor off / motor on:** the keyword is gated `ok_in_motion: false`, `ok_motor_on: false` — change it only with the motor disabled and not in motion. The re-derivation of the protection-enable word happens on the next write.
+- **Mismatched declaration:** declaring `PowerSupply = 2` (DC) on hardware actually wired for AC suppresses the AC-phase-missing fault — your protection is effectively disabled. Always declare the actual supply type.
+- **Effect on [HWProtectBits](../01-general-protection/HWProtectBits.md):** unused-phase bits are not just masked from tripping — they are gated out of the live `HWProtectBits` report itself on Central-i.
+- **Three-phase pin set:** the firmware checks both A–C and B–C phases; either one missing raises [ConFlt](../../07-status-and-faults/ConFlt.md) code 1054 (one or more required AC phases cut off).
+- **Range overflow:** writes outside `1…3` are clamped to the keyword `range`.
+
 ## Examples
 
 ```text

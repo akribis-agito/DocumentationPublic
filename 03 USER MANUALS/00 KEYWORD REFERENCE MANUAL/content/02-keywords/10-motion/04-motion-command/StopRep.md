@@ -49,7 +49,21 @@ Ends repetitive point-to-point motion after the repetition in progress, instead 
 
 Repetitive motion alternates between a moving phase and a dwell (the waiting bit, held for [RptWait](../02-motion-configuration/RptWait.md) cycles), counting completed repetitions in [RptCounter](../05-motion-status/RptCounter.md). At the end of each repetition's smoothing tail the profiler decides whether to start another one. That decision requires the repetitive-stop bit to be **clear**: a new repetition is started only while the repetitive-stop bit is clear and [RptCycles](../02-motion-configuration/RptCycles.md) is either 0 (endless) or not yet reached; otherwise the motion ends and all motion bits are cleared.
 
-So once `StopRep` has set the bit, the next time a repetition finishes the profiler ends the move instead of starting the dwell. If the bit is set while the axis is already in the inter-repetition dwell, the dwell is ended and the motion is cleared on that cycle. Either way [MotionReason](../05-motion-status/MotionReason.md) keeps the value `3`. The direction/return behaviour of the repetitions is configured by [RptMode](../02-motion-configuration/RptMode.md).
+So once `StopRep` has set the bit, the next time a repetition finishes the profiler ends the move instead of starting the dwell. If the bit is set while the axis is already in the inter-repetition dwell, the dwell **still runs to completion**, the next leg is run normally, and the move then ends at the end of that leg's smoothing tail — `StopRep` is checked only at the post-smoothing decision point. [MotionReason](../05-motion-status/MotionReason.md) keeps the value `3` either way. The direction/return behaviour of the repetitions is configured by [RptMode](../02-motion-configuration/RptMode.md).
+
+For an immediate end during a dwell or mid-leg, use [Stop](Stop.md) (controlled deceleration) or [Abort](Abort.md) (immediate).
+
+### Edge cases
+
+- **Motor off:** accepted but no effect (no motion).
+- **Not in motion:** the bit is set but cleared by the next `Begin`.
+- **Out-of-range "write":** function has no value.
+- **Simulation mode (`MotorType` = 5):** unchanged.
+- **ModRev wrap:** unrelated — `StopRep` does not touch the reference.
+- **Active fault:** axis disabled; the bit is preserved across re-enable.
+- **Other motion modes:** `StopRep` only matters in [MotionMode](../02-motion-configuration/MotionMode.md) `= 2`; in other modes the bit is set but unused.
+- **`RptCycles = 0` (endless):** `StopRep` is the principal way to end the endless loop short of `Stop`/`Abort`.
+- **Already at last repetition:** `StopRep` is harmless (the move would end anyway).
 
 ## Examples
 

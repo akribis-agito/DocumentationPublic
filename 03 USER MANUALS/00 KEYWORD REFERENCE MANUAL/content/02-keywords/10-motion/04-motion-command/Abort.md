@@ -62,6 +62,19 @@ If the axis belongs to a group, `Abort` tears the whole group down at once:
 
 In all cases the profiler run time is latched into [MotionSamples](../05-motion-status/MotionSamples.md) for every affected axis.
 
+### Edge cases
+
+- **Motor off:** `Abort` is accepted but has no effect (no motion to end).
+- **Not in motion:** `Abort` updates no state — the function checks the in-motion bit first.
+- **Out-of-range "write":** function has no value.
+- **Simulation mode (`MotorType` = 5):** allowed; the simulated motion ends immediately.
+- **ModRev wrap:** the reference freezes at its current value; the wrap state is unchanged.
+- **Active fault:** the motor is already disabled; `Abort` has no further effect.
+- **`PTPKeepMoving = 1`:** `Abort` overrides the keep-moving flag (it clears `MotionStat` directly).
+- **During dwell of repetitive PTP (`MotionMode = 2`):** the dwell is abandoned and the repetition is ended.
+- **Member of CNCA / CNCB / vector / spline-buffer:** the whole group is torn down; per-axis reasons listed above.
+- **Physical behaviour:** because the reference is frozen rather than ramped, the load decelerates only by the natural lag of the velocity loop while the loop holds the now-static reference. Inertial loads can carry significant kinetic energy past the freeze point; use [Stop](Stop.md) for a planned ramp.
+
 ## Examples
 
 ```text

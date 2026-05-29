@@ -45,6 +45,15 @@ Because no timer is involved, set `MaxVBusAbs` above [MaxVBus](MaxVBus.md) so th
 
 > **Worked example:** with `MaxVBus = 80000` (80 V), `MaxVBusTime = 200` (ms) and `MaxVBusAbs = 90000` (90 V), a regeneration spike to 82 V is tolerated for up to 200 ms (`ConFlt = 1008` only after that). A spike to 91 V trips immediately on the next bus check with `ConFlt = 1023`, regardless of `MaxVBusTime`.
 
+### Edge cases
+
+- **Motor off:** the absolute-ceiling check still runs (drive-level protection).
+- **Mode dependency:** the trip runs regardless of operation mode.
+- **No delay:** `MaxVBusTime` does not apply here — `MaxVBusAbs` is unconditional and acts on the next bus check.
+- **Range overflow:** writes outside `12000…95000` (mV) are clamped. Set above [MaxVBus](MaxVBus.md) so the timed band acts first.
+- **Clearing the fault:** ConFlt code 1023 clears on re-enable ([MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../07-status-and-faults/ErrLog.md) entry persists.
+- **HWProtectBits / ProtectMask:** the absolute over-voltage trip is not maskable through [ProtectMask](../01-general-protection/ProtectMask.md).
+
 ## Examples
 
 ```text

@@ -10,7 +10,7 @@ With this, controllers with profiling algorithm for specific applications (e.g. 
 
 **Note:**
 
-1. Pulse and direction motion mode is only available for non-Central-i products, namely AGD101, AGD155, AGD200 and AGD301.
+1. The pulse-and-direction decoding hardware is implemented in the FPGA of the standalone drives only — namely AGD101, AGD155, AGD200 and AGD301. The PD-related keywords appear in the central-i (AGM800) parameter table as well, but the FPGA write-back of [PDSubType](PDSubType.md) is not yet implemented on central-i, so the feature is effectively limited to standalone products in current firmware.
 2. The pulse and direction input pins are hard coded for each product, where the input pins must be of differential type. No DInMode setting is needed, as the following digital inputs will be automatically assumed as pulse and direction inputs.
 
 There are 2 phases of pulse and direction command.

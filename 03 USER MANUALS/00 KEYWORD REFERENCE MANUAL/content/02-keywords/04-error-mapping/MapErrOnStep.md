@@ -54,6 +54,15 @@ AMapErrOnStep=16     ; gentle fade-in over ~1024 cycles (~62 ms at 16 kHz)
 AMapErrOnStep        ; read the current step size
 ```
 
+### Edge cases
+
+- **Out of range** — values outside `0`–`16384` are rejected.
+- **Zero step** — engage / disengage is immediate (one cycle); the correction can produce a position step in the feedback.
+- **In motion** — accepted; the ramp continues to advance during motion, so it is safe to change `MapType` while moving as long as the step is small enough to absorb the correction discontinuity.
+- **`MapType = 0` already** — writes are accepted but the ramp counter sits at `0` until `MapType` is set non-zero.
+- **Internal state** — the ramp counter and internal map type are shared with [MapErrOffset](MapErrOffset.md) / [MapErrOffRamp](MapErrOffRamp.md); a fast `MapErrOnStep` engage during an active `MapErrOffset` ramp produces a faster-than-expected total change.
+- **Save** — flash-saveable.
+
 ## See also
 
 - [MapErrOffset](MapErrOffset.md) — constant offset added to the correction

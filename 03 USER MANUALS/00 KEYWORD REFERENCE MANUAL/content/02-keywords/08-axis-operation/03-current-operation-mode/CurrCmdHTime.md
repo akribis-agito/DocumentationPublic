@@ -54,6 +54,17 @@ ACurrCmdHTime[1]=500 ; hold first entry for 500 ms
 ACurrCmdHTime[2]=0   ; exit current mode after the second entry
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `CurrCmdHTime[1]`–`CurrCmdHTime[20]`. `CurrCmdHTime[0]` does not exist.
+- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 1) — the table is **not consulted**; values are stored but not timed.
+- **Zero value** — exits current mode to position mode at the end of the corresponding `CurrCmdVal` entry. **`CurrCmdHTime[1] = 0` with `CurrCmdSrc` = 0 / 3 returns to position mode immediately** on entering current mode.
+- **Negative value** — holds the value indefinitely; only an explicit mode change ([GoToPosMode](../02-position-operation-mode/GoToPosMode.md), `OperationMode` direct write, or DInMode) leaves the entry.
+- **End of table** — when `CurrCmdIndex` reaches `20` and that entry's `CurrCmdHTime > 0`, the firmware holds the last value indefinitely rather than advancing past 20.
+- **Counter saturation** — [CurrCmdCntr](CurrCmdCntr.md) is clamped at 2 000 000 000 to avoid roll-over; very long holds remain comparable to `CurrCmdHTime`.
+- **HTime > CurrCmdHTime max** — values outside ±2 000 000 000 are rejected.
+- **Save** — flash-saveable.
+
 ## See also
 
 - [CurrCmdVal](CurrCmdVal.md) — current values paired with these holding times

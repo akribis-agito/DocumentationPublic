@@ -66,6 +66,15 @@ ACanMotorOn         ; run the checks
 ACanMotorOnRes      ; 1 = would enable; 31 = needs commutation; >=1000 = standing fault
 ```
 
+### Edge cases
+
+- **No CanMotorOn run** — at power-up `CanMotorOnRes = 0`. **`0` is not "success"** — only `1` indicates all checks would pass; treat `0` as "unknown" until `CanMotorOn` has been called.
+- **Stale result** — the value reflects the **last** `CanMotorOn` call; conditions can change between the check and a `MotorOn = 1`.
+- **Motor on / simulation / PD amp** — the firmware short-circuits to `1` in these cases without running the full chain; do not rely on it as a real check while the motor is on.
+- **First failure only** — only the first failing check is reported; clearing one reason may reveal another on the next `CanMotorOn` call.
+- **Read-only** — writes are rejected.
+- **Save** — not flash-saveable.
+
 ## See also
 
 - [CanMotorOn](CanMotorOn.md) — command that produces this result

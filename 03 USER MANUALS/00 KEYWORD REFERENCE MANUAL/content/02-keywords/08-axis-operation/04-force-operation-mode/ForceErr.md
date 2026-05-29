@@ -57,6 +57,13 @@ While the axis is not in force mode, `ForceErr` is forced to `0`.
 AForceErr           ; read the current force error
 ```
 
+### Edge cases
+
+- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 4) — forced to `0`; reading it returns `0` regardless of what `ForceRef − Force` would compute.
+- **Motor off** — held at `0` (the loop is not running).
+- **High-error trip** — exceeding the internal max-force-error limit fires `ConFlt = 1045` and disables the motor; this protection runs only while in force mode.
+- **Read-only** — writes are rejected.
+
 ## See also
 
 - [ForceRef](ForceRef.md) — filtered force reference (minuend)

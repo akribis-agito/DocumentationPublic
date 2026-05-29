@@ -40,10 +40,12 @@ In general, this section is divided into 8 subsections:
 
 Which group of control keywords is active depends on the axis [OperationMode](../../02-keywords/08-axis-operation/01-general-keywords/OperationMode.md). The table below summarises which keyword groups apply in each operation mode (for force control, also depending on [ForcePIVOn](../../02-keywords/11-control-tuning/07-force-control/ForcePIVOn.md)).
 
-| OperationMode | Position | Velocity | Feedforward | Current | Force |
+| OperationMode | Position | Velocity | Feedforward (AccFFW / VelFFW) | Current | Force |
 |---|---|---|---|---|---|
 | 1 (Current control) | No | No | No | Yes | No |
 | 2 (Velocity control) | No | Yes | No | Yes | No |
 | 3 (Position control) | Yes | Yes | Yes | Yes | No |
 | 4 (Force control, ForcePIVOn = 0) | No | No | No | Yes | Yes |
-| 4 (Force control, ForcePIVOn = 1) | Yes | Yes | Yes | Yes | Yes |
+| 4 (Force control, ForcePIVOn = 1) | Yes | Yes | No | Yes | Yes |
+
+The position-loop feedforwards [AccFFW](../../02-keywords/11-control-tuning/05-feedforwards/AccFFW.md) and [VelFFW](../../02-keywords/11-control-tuning/05-feedforwards/VelFFW.md) act only when `OperationMode = 3`. In force-over-PIV mode the position and velocity loops still run, but the feedforward terms added to the current reference are the force-loop feedforwards [ForceFFW](../../02-keywords/11-control-tuning/07-force-control/ForceFFW.md) and [ForceVelFFW](../../02-keywords/11-control-tuning/07-force-control/ForceVelFFW.md), not the position-loop ones.

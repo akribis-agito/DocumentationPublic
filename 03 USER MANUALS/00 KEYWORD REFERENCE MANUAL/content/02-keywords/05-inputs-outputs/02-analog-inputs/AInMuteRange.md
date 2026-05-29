@@ -55,6 +55,17 @@ AAInMuteRange[1]=10  ; mute analog input 1 within ±10 mV of zero
 AAInMuteRange[1]=0   ; no mute (default)
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `AInMuteRange[1]`–`AInMuteRange[4]` (plus `[5]` reserved). `AInMuteRange[0]` does not exist.
+- **Out of range** — negative values are not accepted (range begins at `0`); a zero `AInMuteRange` disables this stage entirely.
+- **Mute is on the post-gain side** — the threshold is specified in `AInPort` mV (after [AInGain](AInGain.md)). Setting a mute around the noise floor after gain is straightforward; multiply by `65536 / AInGain` to translate from pre-gain to post-gain mV.
+- **Step discontinuity** — values just outside the band pass through at full magnitude, so the transition `0 → ±AInMuteRange` is sharp; if continuity matters use [AInDB](AInDB.md) instead.
+- **Negative [AInGain](AInGain.md)** — the mute is symmetric around `0`, so inversion in `AInGain` does not need any change to `AInMuteRange`.
+- **Motor on/off and mode independence** — runs every cycle regardless of `MotorOn` or [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md).
+- **Save** — `AInMuteRange` is flash-saveable.
+- **Platform** — central-i v5 stores the value as `float32`; behaviour is unchanged.
+
 ## See also
 
 - [AInDB](AInDB.md) — first deadband, before the gain (continuous, subtractive)

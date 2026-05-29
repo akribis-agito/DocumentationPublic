@@ -63,6 +63,15 @@ Before tripping, the controller sets the motor-temperature **warning** field in 
 
 So the warning ramps up well before the fault, giving early indication on the status panel.
 
+### Edge cases
+
+- **Motor off:** the fault check is gated on motor-on (the doc statement above), so over-temperature does **not** trip with the motor off — the sensor would still be live but a thermal soak only fails the next time you re-enable.
+- **Sensor not selected:** with [MotorTempUsed](MotorTempUsed.md) = `0` both the fault check and the warning bands are skipped entirely, and the warning field is cleared.
+- **Simulation mode:** the trip is skipped in simulation (no real sensor).
+- **Range overflow:** writes outside `10…150` are clamped to the keyword `range`; whenever you write `MaxMotorTemp` the warning band edges are recomputed.
+- **Clearing the fault:** ConFlt code 1040 clears on re-enable ([MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../07-status-and-faults/ErrLog.md) entry persists.
+- **HWProtectBits / ProtectMask:** the motor over-temperature trip is not maskable through [ProtectMask](../01-general-protection/ProtectMask.md).
+
 ## Examples
 
 ```text

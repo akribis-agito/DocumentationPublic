@@ -55,6 +55,16 @@ AForceAInTh=5000     ; enter force mode when force feedback > 5000
 AForceAInTh=0        ; disable this condition
 ```
 
+### Edge cases
+
+- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ∉ {2, 3}) — not evaluated.
+- **Zero value** — disables this condition.
+- **No analog force feedback configured** — silently skipped when no [AInMode](../../05-inputs-outputs/02-analog-inputs/AInMode.md) maps function 3 (force feedback).
+- **After trigger** — `ForceAInTh` is cleared to `0` on entry to force mode to avoid repeat triggers; re-arm by writing again.
+- **Out of range** — values outside ±100000 are rejected.
+- **Motor off** — the threshold engine does not run.
+- **Save** — not flash-saveable.
+
 ## See also
 
 - [Force operation mode](00-overview.md) — full mode-switching conditions

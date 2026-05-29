@@ -46,6 +46,14 @@ A value of `0` means the axis is declared settled as soon as `ForceErr` first en
 AForceInTTime=50     ; require 50 ms within the settling window
 ```
 
+### Edge cases
+
+- **Wrong mode / source** — only used when [OperationMode](../01-general-keywords/OperationMode.md) = 4 and [ForceCmdSrc](ForceCmdSrc.md) ∈ {1, 2}; ignored otherwise.
+- **Zero value** — settling latches as soon as the error enters [ForceInTTol](ForceInTTol.md) for one cycle (dwell of zero).
+- **Tolerance excursion** — leaving the window during the dwell re-zeros the dwell counter; the dwell must accumulate consecutively.
+- **Out of range** — values outside `0`–`163840` are rejected.
+- **Save** — flash-saveable.
+
 ## See also
 
 - [ForceInTTol](ForceInTTol.md) — the settling window

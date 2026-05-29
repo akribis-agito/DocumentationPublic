@@ -60,6 +60,18 @@ ARptCycles          ; query current value
 
 A worked example. With `RptMode = 0` (bidirectional) and `RptCycles = 4`, the axis does two round-trips: out, back, out, back (4 legs total). With `RptMode = 1` (unidirectional) and `RptCycles = 4`, the axis advances by the same delta four times (one direction only).
 
+### Edge cases
+
+- **Motor off:** value is held; read on the next `Begin`.
+- **Out-of-range write:** the parameter system rejects negative values; valid range is `0`–`2^31−1`.
+- **Simulation mode (`MotorType` = 5):** unchanged.
+- **ModRev wrap:** unrelated; the cycle counter is incremented per-leg regardless of wrap events during the leg.
+- **Active fault:** the axis is disabled and the running repetition is abandoned; on re-enable and next `Begin`, [RptCounter](../05-motion-status/RptCounter.md) is reset to `0`.
+- **Other motion modes:** `RptCycles` is ignored outside [MotionMode](MotionMode.md) `= 2`; non-repetitive PTP completes once regardless.
+- **`RptCycles = 0`:** repeats forever; only [StopRep](../04-motion-command/StopRep.md) (or [Stop](../04-motion-command/Stop.md)/[Abort](../04-motion-command/Abort.md)/a fault) ends it.
+- **Cannot change in motion:** writes are rejected while the axis is in motion; queueing a new value only takes effect on the next `Begin`.
+- **Value reduced below current RptCounter (between moves):** because the test is `RptCycles != RptCounter`, lowering `RptCycles` to a value already exceeded by `RptCounter` would only stop the move on the *next* increment — but this is moot because `RptCycles` cannot be written while in motion; if the axis is between `Begin`s, the next `Begin` resets `RptCounter` anyway.
+
 ## See also
 
 - [RptMode](RptMode.md) — defines what counts as one repetition

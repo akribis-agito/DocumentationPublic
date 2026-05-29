@@ -63,6 +63,18 @@ If the axis is a member of a group, `Stop` requests the stop along the whole gro
 AStop                ; controlled stop using the normal Decel rate
 ```
 
+### Edge cases
+
+- **Motor off:** `Stop` is accepted but has no effect (there is no profiler running).
+- **Not in motion:** `Stop` updates no state — the function checks the in-motion bit before setting the stop-request bit.
+- **Out-of-range "write":** function has no value.
+- **Simulation mode (`MotorType` = 5):** allowed; the simulated profiler ramps down.
+- **ModRev wrap:** the ramp-down works through a wrap; the profiler stops at zero velocity wherever the wrap leaves it.
+- **Active fault:** the axis is disabled — `Stop` is a no-op (the motor-off path overrides the ramp).
+- **During dwell of repetitive PTP (`MotionMode = 2`):** the stop request is honored and ends the repetition; the dwell's wait counter is abandoned.
+- **PTPKeepMoving = 1:** `Stop` still ends the move; the keep-moving flag is overridden by the stop-request bit.
+- **Member of CNCA / CNCB / vector / spline-buffer:** the whole group is requested to stop; per-axis reasons are listed above.
+
 ## See also
 
 - [Abort](Abort.md) — immediate stop (clears motion at once; not a `Decel` ramp)

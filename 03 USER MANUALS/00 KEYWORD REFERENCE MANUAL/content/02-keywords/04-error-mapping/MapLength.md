@@ -55,6 +55,15 @@ AMapLength[1]=100    ; first dimension has 100 correction points
 AMapLength[1]        ; read the number of points in the first dimension
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `MapLength[1]`/`[2]`/`[3]`.
+- **Motor on / in motion at write** — rejected (`MPNOMOTN`, `MPNOMTR`).
+- **Out of range** — values outside `1`–`60 000` per dimension are rejected.
+- **Product overflow** — for 2D/3D the **product** of dimensions must fit within the combined [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) banks starting at [MapStartIndex](MapStartIndex.md); the parameter table does not pre-check this product, so an oversize map will read uninitialised entries.
+- **`MapType = 0`** — value stored but not consulted.
+- **Save** — flash-saveable.
+
 ## See also
 
 - [MapStartPos](MapStartPos.md) — start position of each dimension

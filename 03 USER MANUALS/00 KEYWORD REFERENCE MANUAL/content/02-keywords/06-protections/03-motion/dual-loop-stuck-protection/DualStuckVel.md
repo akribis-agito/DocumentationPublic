@@ -50,9 +50,18 @@ if dual-loop is enabled
 
 - The compared quantity is the absolute difference between the position-loop feedback velocity `Vel[2]` and the internally computed dual-loop speed (the velocity-loop feedback expressed in the same units). A healthy coupling keeps the two velocities close; a slipped, broken, or badly scaled coupling makes them diverge.
 - While the difference exceeds `DualStuckVel`, an internal counter increments; any sample within tolerance resets it to `0`. The fault fires only on a continuous run of [DualStuckTime](DualStuckTime.md) samples.
-- On trip the axis is turned off and [ConFlt](../../../07-status-and-faults/ConFlt.md) records fault code 1049 (dual-loop stuck).
+- On trip the axis is turned off and [ConFlt](../../../07-status-and-faults/ConFlt.md) records ConFlt code 1049 (dual-loop stuck).
 
 The default is `40000` count/s. Because the gate is `DualLoopOn`, this protection has no effect on single-loop axes.
+
+### Edge cases
+
+- **Motor off:** the dual-loop check does not run (the loop block runs only with the motor enabled); the internal counter is reset on motor-off.
+- **`DualLoopOn = 0`:** the entire dual-stuck path is skipped — single-loop axes are never tripped by this protection regardless of value.
+- **Mode dependency:** dual-loop stuck runs in every operation mode whenever `DualLoopOn` is non-zero (it is not bypassed by the current/force/auto-phasing modes that gate [motor-stuck](../motor-stuck-protection/00-overview.md)).
+- **Range overflow:** writes outside `0…1300000000` are clamped to the keyword `range`.
+- **Clearing the fault:** ConFlt code 1049 clears on re-enable ([MotorOn](../../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../../07-status-and-faults/ErrLog.md) entry persists.
+- **HWProtectBits / ProtectMask:** the dual-loop-stuck trip is not maskable through [ProtectMask](../../01-general-protection/ProtectMask.md) (that mask covers hardware-protection bits only).
 
 ## Examples
 

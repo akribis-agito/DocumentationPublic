@@ -44,6 +44,15 @@ Sets the maximum shorting duty cycle used for dynamic braking — the strongest-
 
 > **`DynBrakeSpeed` not found:** an earlier draft listed a `DynBrakeSpeed` keyword. No such keyword exists in the v4 (LTS) firmware; the soft-start "speed" of engagement is fixed by the ramp (0.1 → 1.0 in 0.3 steps) described above and is not user-configurable.
 
+### Edge cases
+
+- **Motor on:** the dynamic brake is engaged **only** when the motor is off — it cannot fight an active current-loop output.
+- **Mode dependency:** engagement is independent of [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md); it only depends on `MotorOn`, `DynBrakeOn`, and the per-fault permission table.
+- **Forbidden by some faults:** specific [ConFlt](../../07-status-and-faults/ConFlt.md) codes prohibit dynamic braking through a per-fault permission table (e.g. ground-short, IPM fault) — in those cases the brake is held released even if `DynBrakeOn ≠ 0`.
+- **Bus over-voltage:** if the bus voltage reaches [MaxVBus](../02-current-and-voltage/MaxVBus.md) (for longer than [MaxVBusTime](../02-current-and-voltage/MaxVBusTime.md)) or [MaxVBusAbs](../02-current-and-voltage/MaxVBusAbs.md), the duty cycle is forced to `0` to avoid pumping more regen energy onto an already-high bus.
+- **`DynBrakeOn = 0`:** the brake never engages and [StatReg](../../07-status-and-faults/StatReg.md) bit 28 never sets.
+- **Range overflow / silent saturation:** the computed duty cycle is clamped to `[0, DynBrkRef]` each cycle; writes to `DynBrkRef` outside the keyword `range` are clamped.
+
 ## See also
 
 - [Static brake](Staticbrake.md) — holding-brake control

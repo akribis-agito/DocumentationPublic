@@ -54,6 +54,15 @@ ACurrCurrThDir=0     ; trigger when CurrRef rises above threshold
 ACurrCurrTh=2000     ; enter current mode when CurrRef > 2000 mA
 ```
 
+### Edge cases
+
+- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ∉ {2, 3}) — not evaluated.
+- **Zero value** — disables this condition.
+- **After trigger** — both `CurrCurrTh` and [CurrPosThDir](CurrPosThDir.md) are cleared to `0`; the user must re-arm both for the next switch.
+- **Direction** — comparison sense set by [CurrCurrThDir](CurrCurrThDir.md); `0` defaults to a rising-edge crossing.
+- **Motor off** — the threshold engine does not run.
+- **Save** — flash-saveable.
+
 ## See also
 
 - [CurrCurrThDir](CurrCurrThDir.md) — selects the comparison direction

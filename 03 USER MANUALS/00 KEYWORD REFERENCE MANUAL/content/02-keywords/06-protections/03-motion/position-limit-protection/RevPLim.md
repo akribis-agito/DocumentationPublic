@@ -70,6 +70,16 @@ The profiled velocity is clamped to this so the axis arrives at `RevPLim` at zer
 
 On central-i v5 the limit is stored as a 64-bit position, extending the usable travel range beyond the 32-bit range used on standalone/v4 (see the frontmatter `range` override). The braking and clamping logic is otherwise identical.
 
+> **Formula note (asymmetry):** the reverse-direction firmware formula above does not include the `·2^k` position scaling or the trailing `·T` factor that appear in the forward-direction formula on [FwdPLim](FwdPLim.md). This asymmetry is present in the firmware itself, not an editorial difference.
+
+### Edge cases
+
+- **Motor off:** the profiler is not running, so no pre-emptive braking occurs. The hard clamp on the position reference and the `Begin`-time rejection are still active when motion is later started.
+- **Mode dependency:** the pre-emptive braking and stop-request mechanisms apply to indirect/profiled motion modes. Direct streaming modes drive the reference outside the profiler — the hard clamp still pins it to `RevPLim`, but you do not get a pre-emptive ramp.
+- **No fault raised:** position-limit braking is a controlled deceleration; it does **not** raise a [ConFlt](../../../07-status-and-faults/ConFlt.md) and does not interact with [ProtectMask](../../01-general-protection/ProtectMask.md). The cause appears in [MotionReason](../../../10-motion/05-motion-status/MotionReason.md) only.
+- **Cannot change while in motion:** `RevPLim` is gated `ok_in_motion: false` — writes are rejected during motion.
+- **Range overflow:** v4 keyword range is `−2147483648…2147483647`; v5 extends to ±2^51 (see frontmatter `central-i.v5` override).
+
 ## Examples
 
 ```text

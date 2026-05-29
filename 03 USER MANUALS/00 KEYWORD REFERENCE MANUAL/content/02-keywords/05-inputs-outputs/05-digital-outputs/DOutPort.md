@@ -63,6 +63,18 @@ ADOutPort            ; read the present manual output word
 2. Not saved to flash — re-apply manual states after power-up.
 3. The final physical state is `DOutPort XOR DOutLog`, then routed by `DOutType` on products with selectable sink/source outputs.
 
+### Edge cases
+
+- **Output under function control** — bits where [DOutMode](DOutMode.md)`[x] ≠ 0` or [DOutSelect](DOutSelect.md)`[x] ≠ 0` are rewritten every cycle by the controller; manual writes to those bits are overwritten on the next cycle.
+- **Bits beyond the product's output count** — accepted by the parameter table (the storage is 32-bit) but have no effect at the pin.
+- **Race against the controller** — direct `DOutPort = DOutPort | mask` is unsafe; use [DOutPortSBit/CBit/TBit](DOutPortSBit-DOutPortCBit-DOutPortTBit.md) for atomic single-bit changes.
+- **Motor on/off** — manual outputs are independent of `MotorOn`; the bit drives the pin whether the servo is on or not.
+- **Mode independence** — independent of [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md).
+- **Read after function update** — reading `DOutPort` returns the bits the controller is **actually driving**, which includes function outputs; do not assume the read value is what you last wrote.
+- **Inverted polarity** — the pin level is `DOutPort XOR DOutLog`; reading `DOutPort` shows the pre-inversion value.
+- **Bi-directional pins** — pins routed as outputs by [BiDirConfig](../01-general-keywords/BiDirConfig.md) reflect the value as in [DInPort](../04-digital-inputs/DInPort-DInPortHigh.md) when read back as inputs.
+- **Save** — not flash-saveable; reset to defaults at every reboot.
+
 ## See also
 
 - [DOutPortSBit-DOutPortCBit-DOutPortTBit](DOutPortSBit-DOutPortCBit-DOutPortTBit.md) — interrupt-safe set/clear/toggle of one bit

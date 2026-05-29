@@ -106,6 +106,17 @@ The function-table dispatch sets/clears the `DOutPort` bit each cycle, then [DOu
 
 To track a *system-wide* condition rather than the local axis, use the upper-16-bit axis selector. For example `ADOutMode[5]=65545` (`65536 + 9`) wires output 5 of this axis to axis B's fault status.
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `DOutMode[1]`–`DOutMode[16]`. `DOutMode[0]` does not exist.
+- **DOutSelect ≠ 0** — `DOutMode` is **not consulted**; the output is driven by the hardware function selected by [DOutSelect](DOutSelect.md), regardless of the assigned `DOutMode` function.
+- **More than 18 active functions** — beyond the hard limit the extra entries are dropped and a warning is logged at table-build time.
+- **Out-of-range axis selector** — a source-axis number above the number of axes is rejected with a warning; the entry is ignored at table-build time.
+- **Unimplemented functions** — codes `7` (end of motion), `10` (warnings), `11` (current saturation), `17` (reserved) do not drive the output even when assigned.
+- **In-motion / accel / decel** — only valid for motion modes that use the built-in profiler; direct pulse / direction does not advance these bits.
+- **Manual write to a function bit** — overwritten on the next cycle by the function; if you want manual control, set `DOutMode = 0` first.
+- **Save / Reset** — flash-saveable; the table is rebuilt at every write and at boot.
+
 ## See also
 
 - [DOutSelect](DOutSelect.md) — must be 0 for DOutMode to apply (hardware function otherwise)

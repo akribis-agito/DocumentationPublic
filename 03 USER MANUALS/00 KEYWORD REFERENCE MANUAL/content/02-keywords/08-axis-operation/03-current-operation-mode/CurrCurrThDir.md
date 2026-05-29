@@ -50,6 +50,12 @@ ACurrCurrThDir=1     ; trigger when CurrRef falls below CurrCurrTh
 ACurrCurrTh=-2000    ; threshold (mA)
 ```
 
+### Edge cases
+
+- **Wrong mode** — not evaluated outside [OperationMode](../01-general-keywords/OperationMode.md) 2 / 3.
+- **Out of range** — values outside `0`–`1` are rejected.
+- **Save** — flash-saveable.
+
 ## See also
 
 - [CurrCurrTh](CurrCurrTh.md) — the current-reference threshold

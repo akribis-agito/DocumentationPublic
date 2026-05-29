@@ -66,6 +66,15 @@ AGantryVelGain=150  ; set yaw velocity proportional gain
 AGantryVelGain     ; read the current gain
 ```
 
+### Edge cases
+
+- **Gantry off** — writes accepted; the gain has no effect until [GantryOn](../01-general-variables/GantryOn.md) = 1.
+- **Zero gain** — disables proportional velocity action; the yaw loop becomes integral + feedforward only.
+- **Wrong axis** — consulted on the yaw axis of the pair; writes on the master or a non-gantry axis are accepted but not used.
+- **Out of range** — values outside `0`–`100000` (v4) / `0`–`100000000` (v5 per-element) are rejected.
+- **Save** — flash-saveable.
+- **Platform** — v5 stores as a 6-element gain-scheduled `float32` array; v4 stores as a single `int32`. Same formula applies on both branches.
+
 ## See also
 
 - [GantryVelKi](GantryVelKi.md) — yaw velocity-loop integral gain

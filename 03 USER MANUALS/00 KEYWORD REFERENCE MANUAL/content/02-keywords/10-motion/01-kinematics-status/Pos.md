@@ -67,7 +67,16 @@ When an encoder error map is active ([MapType](../../04-error-mapping/MapType.md
 
 ### Modulo (continuous rotary) — ModRev
 
-If [ModRev](../../03-encoder/04-modulo-mode/ModRev.md) ≠ 0, `Pos` is kept within `[0, ModRev)`. When it would cross a boundary the controller adds/subtracts `ModRev` from `Pos` **and shifts the entire reference frame by the same amount** — `PosRef`, the shaped/filtered references, [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md), `PDPos`, and the gear master position all move together — so the following error is preserved across the wrap and the axis can rotate continuously. The wrap is applied only when the jerk buffer is clear of pre-wrap values, and it assumes no more than half a revolution of travel per control cycle. See also [ModShort](../../03-encoder/04-modulo-mode/ModShort.md) for shortest-path targeting.
+If [ModRev](../../03-encoder/04-modulo-mode/ModRev.md) ≠ 0, `Pos` is kept within `[0, ModRev)`. When the reading would cross a boundary (`Pos ≥ ModRev` going positive, or `Pos < 0` going negative) the controller subtracts/adds `ModRev` from `Pos` **and shifts the entire reference frame by the same amount** — `PosRef`, the shaped/filtered references, [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md), `PDPos`, and the gear master position all move together — so the following error is preserved across the wrap and the axis can rotate continuously. The wrap is applied only when the jerk buffer is clear of pre-wrap values, and it assumes no more than half a modulus distance of travel per control cycle. For a stepper open-loop motor the wrap edge is detected on the reference rather than on `Pos` (there is no closed-loop feedback to compare). See also [ModShort](../../03-encoder/04-modulo-mode/ModShort.md) for shortest-path targeting.
+
+### Edge cases
+
+- **Motor off:** `Pos` continues to track the encoder reading (so an external push moves `Pos`); the controller forces `PosRef = Pos` so [PosErr](PosErr.md) stays zero.
+- **Simulation mode (`MotorType` = 5):** `Pos` is forced to equal `PosRef` (no physical encoder).
+- **Active fault:** the encoder pipeline keeps updating `Pos`; the loop is shut down but the feedback remains valid for inspecting the stopped position.
+- **Out-of-range write:** `Pos` is read-only — write attempts are rejected by the parameter system. Use [SetPosition](../03-kinematics-configuration/SetPosition.md) to preset.
+- **ModRev wrap during a jerk-buffered move:** the wrap is held until `glNumberOfWrongValuesInJerkBufferBecauseOfModulus` clears, so back-and-forth motion near the wrap edge can momentarily skip a wrap; this is benign.
+- **Dual-loop:** in pseudo dual-loop `Pos` is the scaled [AuxPos](AuxPos.md); in true dual-loop and in gantry the position loop uses `Pos`/[GantryFdbk](../../12-gantry-control/02-gantry-kinematic-feedback/GantryFdbk.md) and `Pos` still reads the main encoder.
 
 ### Dual-loop and gantry
 

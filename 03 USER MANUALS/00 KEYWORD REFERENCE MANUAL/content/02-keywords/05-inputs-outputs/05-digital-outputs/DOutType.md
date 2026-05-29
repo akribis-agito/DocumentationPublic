@@ -55,6 +55,14 @@ ADOutType=9          ; binary …1001 — outputs 1 and 4 source mode; rest sink
 ADOutType            ; read the present sink/source configuration
 ```
 
+### Edge cases
+
+- **Differential outputs** — `DOutType` bits for these pins are ignored; the high-side bits of the output word feed the differential drivers directly.
+- **Non-configurable outputs** — products without a configurable sink/source stage ignore `DOutType` entirely; the type is fixed in hardware.
+- **Hardware-function outputs** — bits where [DOutSelect](DOutSelect.md) ≠ 0 still respect the sink/source split if the hardware path uses the open-collector stage; check the product manual.
+- **Motor on/off** — independent of `MotorOn`.
+- **Save** — flash-saveable; reloaded into the hardware stage at boot.
+
 ## See also
 
 - [DOutPort](DOutPort.md) / [DOutLog](DOutLog.md) — produce the word that is split by type

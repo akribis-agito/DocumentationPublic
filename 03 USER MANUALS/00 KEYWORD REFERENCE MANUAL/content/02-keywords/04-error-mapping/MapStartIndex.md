@@ -54,6 +54,15 @@ AMapStartIndex=5000  ; mapping data starts 5000 entries in (may fall in a later 
 AMapStartIndex       ; read the current start index
 ```
 
+### Edge cases
+
+- **Motor on / in motion at write** — rejected (`MPNOMOTN`, `MPNOMTR`).
+- **Out of range** — values outside `1`–`300 000` are rejected.
+- **Past the table** — values beyond the combined bank size dispatch to uninitialised memory; combine carefully with [MapLength](MapLength.md).
+- **`MapType = 0`** — value stored but not consulted.
+- **1-based** — `MapStartIndex = 1` points at `MapTable[1]`. Index `0` is invalid.
+- **Save** — flash-saveable.
+
 ## See also
 
 - [MapType](MapType.md) — selects 1D/2D/3D mapping

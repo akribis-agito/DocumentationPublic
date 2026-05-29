@@ -34,6 +34,8 @@ Array of waypoint positions (user units) that define the spline buffer trajector
 
 `BuffPos` stores the waypoint positions, in user units, for the spline-buffer motion profile. Each entry is one knot of the trajectory; together with the per-segment durations in [BuffTime](BuffTime.md) (one entry per waypoint, sharing the same index), it defines the shape of the move. The controller fits a spline through these waypoints and plays it back as a smooth position reference. The arrays are turned into a ready-to-run trajectory by [BuffCalc](BuffCalc.md) before motion begins. `BuffPos` is not saved to flash and can be changed at any time, but a change does not take effect until [BuffCalc](BuffCalc.md) is run again.
 
+> **Product limit.** The usable length of `BuffPos` depends on the product (see the [section overview](00-overview.md#product-availability)): 5 entries on standalone AGD drives (effectively unusable), 50 entries on AGM800/C2000 builds, 10 000 entries on AGM800/Zynq builds. The frontmatter `array_size` shows the largest size.
+
 ## How it works
 
 ### Waypoints, indexing and the implicit origin

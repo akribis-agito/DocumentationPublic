@@ -42,18 +42,9 @@ Complex CAN code selecting the master variable for gear motion.
 
 ![Gear-motion signal path from GearMaster to PosRef](gear-signal-path.svg)
 
-### Special case: axis-to-axis gearbox
+### A separate "direct slave" motion mode also exists
 
-If all of the following hold, the controller switches to an exact path that tracks the master axis's full-resolution reference instead of its reported value:
-
-| Condition |
-|---|
-| [MasterFact](MasterFact.md) `= 65536` (unity numerator) |
-| [MasterFilt](MasterFilt.md) `= 64` (filter pass-through) |
-| [MotionMode](../02-motion-configuration/MotionMode.md) `= 5` (direct gear) |
-| `GearMaster` points at the post-shaping reference of another axis |
-
-In this mode the follower reads the master axis's full-resolution position reference directly, giving a drift-free 1:1 electronic gearbox between two controlled axes.
+`GearMaster`, `MasterFact`/`MasterFactDen`, `MasterFilt` and `MasterPos` all belong to gear motion ([MotionMode](../02-motion-configuration/MotionMode.md) `= 5` and `= 6`). The controller also implements a separate, narrower motion mode — direct slave ([MotionMode](../02-motion-configuration/MotionMode.md) `= 10`, see [MotionMode10](MotionMode10.md)) — that builds a follower reference from another axis's reference directly, without going through `GearMaster`, `MasterPos` or `MasterFilt`. It is not the same mechanism as gear motion and does not use this keyword.
 
 ### Relationship to the other gearing keywords
 
@@ -73,27 +64,27 @@ The value is a complex CAN code; build it with the [complex CAN code](../../../0
 
 ### Walk-through: run electronic gearing on a master encoder
 
-Configure axis A as a 1:1 follower of axis B's reference, using the direct gear path with the exact axis-to-axis fast track described above. Both axes are assumed motor-on but not in motion; encode the master selection per the [complex CAN code](../../../01-keyword-usage-and-syntax/complex-can-code.md) rules. The fast axis-to-axis path requires `MasterFact = 65536`; for non-unity ratios use `MasterFact` alone on v4, or `MasterFact / MasterFactDen` on v5 (central-i).
+Configure axis A as a 1:1 follower of a master variable using direct gear motion. The example below uses unity numerator and pass-through filter, but any ratio and any filter coefficient is valid; non-unity ratios use `MasterFact` alone on v4, or `MasterFact / MasterFactDen` on v5 (central-i). Both axes are assumed motor-on but not in motion; encode the master selection per the [complex CAN code](../../../01-keyword-usage-and-syntax/complex-can-code.md) rules.
 
 ```text
 ; --- 1) Select the master variable on the follower (axis A) ---
-AGearMaster=...      ; complex CAN code identifying axis B's PosRef
+AGearMaster[1]=...   ; complex CAN code identifying the master variable
 
 ; --- 2) Set the gear ratio numerator (and denominator on v5) ---
-AMasterFact=65536    ; 65536 = unity numerator (required for the fast axis-to-axis path)
-AMasterFactDen=65536 ; v5 (central-i) only -- exact rational denominator, default 65536
-AMasterFilt=64       ; 64 = pass-through (required for the fast path)
+AMasterFact[1]=65536    ; 65536 = unity numerator (1:1)
+AMasterFactDen[1]=65536 ; v5 (central-i) only -- exact rational denominator, default 65536
+AMasterFilt[1]=64       ; 64 = pass-through (no smoothing); lower for more smoothing
 
 ; --- 3) (Optional) Tell the controller the master wraps, if it does ---
-AMasterModRev=0      ; set to the master's wrap value if the master variable wraps
+AMasterModRev[1]=0      ; set to the master's wrap value if the master variable wraps
 
 ; --- 4) Arm direct gear motion ---
-AMotionMode=5        ; 5 = direct gear, 6 = indirect gear
-ABegin               ; latches MasterPos at start; follower now tracks the master delta
+AMotionMode[1]=5        ; 5 = direct gear, 6 = indirect gear
+ABegin                  ; latches MasterPos at start; follower now tracks the master delta
 
 ; --- 5) Observe the follower while the master moves ---
-AMasterPos           ; scaled, accumulated master position since Begin
-APosRef              ; follower reference -- should mirror MasterPos
+AMasterPos[1]           ; scaled, accumulated master position since Begin
+APosRef[1]              ; follower reference -- should mirror filtered MasterPos
 ```
 
 The follower exits gear motion on `Stop`, `Abort`, or when the motor is disabled. To change the master selection, leave gear motion first; `GearMaster` is rejected while the axis is in motion.
@@ -105,4 +96,5 @@ The follower exits gear motion on `Stop`, `Abort`, or when the motor is disabled
 - [MasterFilt](MasterFilt.md) — low-pass filter on the geared reference (direct mode)
 - [MasterModRev](MasterModRev.md) — modulo divisor for the master variable
 - [MotionMode](../02-motion-configuration/MotionMode.md) — selects gear motion (`= 5` or `6`)
+- [MotionMode10](MotionMode10.md) — separate direct-slave motion mode (`MotionMode = 10`) that does not use `GearMaster`
 - [complex CAN code](../../../01-keyword-usage-and-syntax/complex-can-code.md) — how the master is encoded

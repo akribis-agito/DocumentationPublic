@@ -49,7 +49,14 @@ else
     StallStat = 0
 ```
 
-So `StallStat` is set whenever the filtered metric [StallVal](StallVal.md) drops below the computed threshold [StallTh](StallTh.md), in **both** alert-only (`StallCfg = 1`) and motor-off (`StallCfg = 2`) modes. It mirrors bit 31 of [StatReg](../../../07-status-and-faults/StatReg.md) (`0x80000000`). When the metric recovers above the threshold the flag clears automatically. With detection disabled (`StallCfg = 0`) the flag is not updated; it is reset to `0` when the motor goes off.
+So `StallStat` is set whenever the filtered metric [StallVal](StallVal.md) drops below the computed threshold [StallTh](StallTh.md), in **both** alert-only ([StallCfg](StallCfg.md) = 1) and motor-off ([StallCfg](StallCfg.md) = 2) modes. It mirrors bit 31 of [StatReg](../../../07-status-and-faults/StatReg.md) (`0x80000000`). When the metric recovers above the threshold the flag clears automatically. With detection disabled ([StallCfg](StallCfg.md) = 0) the flag is not updated; it is reset to `0` when the motor goes off.
+
+### Edge cases
+
+- **Motor off:** the detection block does not run; `StallStat`, [StallVal](StallVal.md), and [StallTh](StallTh.md) are all reset to `0`.
+- **Non-stepper / external amplifier:** the metric is not generated, so `StallStat` stays at `0` regardless of [StallCfg](StallCfg.md).
+- **Untuned [StallCnst](StallCnst.md):** if the speed-fit coefficients are at defaults, `StallTh` does not track speed correctly and `StallStat` may toggle unpredictably.
+- **Mode 2 (motor-off):** the axis is disabled with [ConFlt](../../../07-status-and-faults/ConFlt.md) code 1065; `StallStat` clears on re-enable (along with the [StatReg](../../../07-status-and-faults/StatReg.md) bit 31).
 
 ## Examples
 

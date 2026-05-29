@@ -53,6 +53,17 @@ AForceCmdVal[1]=340  ; first force reference (units)
 AForceCmdVal[2]=-260 ; second force reference (units)
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `ForceCmdVal[1]`–`ForceCmdVal[20]`.
+- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 4 or [ForceCmdSrc](ForceCmdSrc.md) ∉ {1, 2}) — the table is **not consulted**.
+- **HTime = 0** — the dispatcher exits force mode at the corresponding entry; the value is reached but not held.
+- **HTime negative** — holds the value indefinitely.
+- **End of table (index 20 with positive HTime)** — the firmware holds the last value indefinitely rather than rolling over.
+- **Reload while running** — writing a new value at the active index takes effect on the next ramp/hold cycle; `ForceRef` ramps toward the new value at the current slope.
+- **In-target detection** — settling/dwell is evaluated only for the table sources (1/2); see [ForceInTStat](ForceInTStat.md).
+- **Save** — flash-saveable.
+
 ## See also
 
 - [ForceCmdHTime](ForceCmdHTime.md) — holding time paired with each value

@@ -62,6 +62,18 @@ AAccShapeFact[2]=65536   ; second band at full acceleration
 AAccShapeFact[1]        ; query first segment factor
 ```
 
+### Edge cases
+
+- **Motor off:** values are held; no profiler runs.
+- **Out-of-range write:** the parameter system rejects negative values; range is `0`–`2³¹−1` (values above `65536` are accepted and act as a multiplier greater than 1, scaling the acceleration above the configured `Accel`).
+- **Index `[0]`:** does not exist in user-visible space; the keyword is 1-indexed. Reading `[0]` returns an error.
+- **Simulation mode (`MotorType` = 5):** unchanged.
+- **ModRev wrap:** the shaping factor is selected per-cycle from the distance band; the wrap leaves the distance-to-target unchanged.
+- **Active fault:** the axis is disabled; the table is preserved.
+- **Other motion modes:** only the PTP-family profiler consults the table.
+- **Live change in motion:** allowed; the controller re-sorts after each write, and the new factor takes effect on the next cycle.
+- **`AccShapeFact = 0`:** zero acceleration in that band — the profiler will simply hold its current velocity through that band, neither accelerating nor decelerating, until it exits the band. This can extend the move time and is rarely what the user wants.
+
 ## See also
 
 - [AccShapeOn](AccShapeOn.md) — enables acceleration shaping

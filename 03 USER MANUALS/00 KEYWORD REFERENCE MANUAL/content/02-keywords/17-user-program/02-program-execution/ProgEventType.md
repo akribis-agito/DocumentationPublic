@@ -46,7 +46,7 @@ Each control cycle, for an event that is armed and waiting, the controller takes
 | 4 | Less than | value &lt; threshold |
 | 5 | Rising edge | value crosses up through threshold (previous &le; threshold, now &gt; threshold) |
 | 6 | Falling edge | value crosses down through threshold (previous &ge; threshold, now &lt; threshold) |
-| 7 | Manual | never fires automatically; the program triggers it itself |
+| 7 | Manual | **not supported for program events** — the sensing loop does nothing for this type and the only writable value of [ProgEventStat](ProgEventStat.md) is `0`, so an event with type `7` can never become pending. The value is reserved for parallel numbering with the data-recorder trigger types. |
 | 8 | Changed | value differs from the value captured when the event was armed |
 
 Notes:

@@ -41,7 +41,7 @@ Low-level user-program op that branches execution to another point in the progra
 - Operation `1` is an **unconditional** jump — execution always continues at the target.
 - The **conditional** operations pop their operand(s) from the numeric stack and jump only if the condition holds; otherwise execution falls through to the next instruction.
 
-The conditional operations mirror the comparison set used by [Compare](Compare.md), and like `Compare` they are provided for each operand data type — 32-bit integer (the default), 32-bit floating point, 64-bit integer, and 64-bit double-precision floating point. As in `Compare`, `pop1` is the value popped first (top of stack) and `pop2` the one beneath it; two-operand tests read as `pop2 (operator) pop1`.
+The conditional operations mirror the comparison set used by [Compare](Compare.md). On v4 (standalone and Central-i) the conditional operations cover **32-bit integer** operands only — indices `2`–`9`. On Central-i v5 the same eight tests are also provided for **32-bit float** (`10`–`17`), **64-bit integer** (`18`–`25`) and **64-bit double-precision float** (`26`–`33`). As in `Compare`, `pop1` is the value popped first (top of stack) and `pop2` the one beneath it; two-operand tests read as `pop2 (operator) pop1`. Selecting a float/long/double index on a v4 controller is rejected as an out-of-range operation.
 
 | Operation | 32-bit integer | float | 64-bit integer | double | Jump if |
 | --------- | -------------- | ----- | -------------- | ------ | ------- |

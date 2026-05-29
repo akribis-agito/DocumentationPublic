@@ -38,16 +38,26 @@ Maximum open-loop (injection) position error; exceeding it disables the axis.
 
 ## How it works
 
-`MaxPosErrOL` and `MaxPosErr` feed the **same** position-error check in the control loop. Which one is in force at any instant is selected by the loop state, which switches the active threshold and records whether open-loop limiting is in effect:
+`MaxPosErrOL` and [MaxPosErr](MaxPosErr.md) feed the **same** position-error check in the control loop. Which one is in force at any instant is selected by the loop state, which switches the active threshold and records whether open-loop limiting is in effect (the firmware uses an internal flag with bit 0 = position open-loop, bit 1 = velocity open-loop, bit 2 = force open-loop):
 
 | Condition | Active threshold | Open-loop limiting |
 |-----------|------------------|--------------------|
-| Open-loop mode on (`OpenLoopOn`) | `MaxPosErrOL` | yes |
-| Injection at CurrRef or ForceRef point | `MaxPosErrOL` | yes |
-| Injection at VelRef / PosRef point | `MaxPosErr` | no (PosRef) / per case |
-| Normal closed loop | `MaxPosErr` | no |
+| Open-loop mode on ([OpenLoopOn](../../../08-axis-operation/01-general-keywords/OpenLoopOn.md) ≠ 0) | `MaxPosErrOL` | yes |
+| Direct injection at current- or velocity- or force-reference point ([InjectType](../../../13-injection/InjectType.md) is a direct type; [InjectPoint](../../../13-injection/InjectPoint.md) = `0`/`1`/`3`) | `MaxPosErrOL` | yes |
+| Direct injection at the position-reference point ([InjectPoint](../../../13-injection/InjectPoint.md) = `2`) | [MaxPosErr](MaxPosErr.md) | no |
+| Normal closed loop | [MaxPosErr](MaxPosErr.md) | no |
 
-When the loop later finds the position error exceeds the active threshold, the open-loop flag decides which fault is logged: open-loop → [ConFlt](../../../07-status-and-faults/ConFlt.md) fault code 1055 (open-loop position error too high); closed-loop → fault code 1020 (position error too high). Either way the axis is turned off immediately. On returning to normal operation (or when the motor goes off during injection), the active threshold is restored to `MaxPosErr` and the open-loop flag is cleared.
+Important: even a velocity-reference injection treats position as open-loop, because the closed position loop no longer drives `VelRef`. The position limit therefore swaps to `MaxPosErrOL` whenever injection runs at the current-, velocity-, **or** force-reference point — only position-reference injection (and pure closed-loop) keeps the position limit on `MaxPosErr`.
+
+When the loop later finds the position error exceeds the active threshold, the open-loop flag decides which fault is logged: open-loop → [ConFlt](../../../07-status-and-faults/ConFlt.md) ConFlt code 1055 (open-loop position error too high); closed-loop → ConFlt code 1020 (position error too high). Either way the axis is turned off immediately. On returning to normal operation (or when the motor goes off during injection), the active threshold is restored to [MaxPosErr](MaxPosErr.md) and the open-loop flag is cleared.
+
+### Edge cases
+
+- **Motor off:** the position loop and the limit check do not run; the error is forced to `0` on motor-off.
+- **Mode dependency:** the underlying `PosErr` is forced to `0` for open-loop steppers, and in any mode that is not position-control or force-over-PIV. In those cases the check cannot trip regardless of the active threshold.
+- **Range overflow:** writes outside the keyword `range` are clamped to the range; the in-force internal limit is recomputed each time `MaxPosErrOL`/`MaxPosErr`/`OpenLoopOn`/`InjectType`/`InjectPoint` changes.
+- **Clearing the fault:** ConFlt code 1055 clears on re-enable ([MotorOn](../../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../../07-status-and-faults/ErrLog.md) entry persists.
+- **HWProtectBits / ProtectMask:** open-loop following-error trips are not maskable through [ProtectMask](../../01-general-protection/ProtectMask.md) (that mask covers hardware-protection bits only).
 
 ![Following-error trip threshold: the absolute error rises until it crosses the active limit; on that sample the axis is disabled and a ConFlt code is logged. The open-loop limits are higher to tolerate the larger natural error during injection or open-loop operation.](following-error-trip.svg)
 

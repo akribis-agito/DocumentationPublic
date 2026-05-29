@@ -40,7 +40,19 @@ When one repetition finishes and another is due, the controller sets bit 1 (dwel
 
 When the dwell counter reaches `RptWait` the controller clears bit 1, loads the next target ([RptMode](RptMode.md) decides whether that is the original start or the next step), re-arms the in-target status and friction-compensation flag, and the next move begins. With `RptWait = 0` the wait branch is satisfied immediately, so the next move starts on the very next cycle with no dwell.
 
-The value you set is in milliseconds; the controller converts it to a whole number of servo cycles and the dwell counter (which advances every control cycle) counts up to that converted target, so the actual pause is `RptWait` milliseconds. If [StopRep](../04-motion-command/StopRep.md) (or a fault stop) arrives during the dwell, the motion ends immediately without starting the next repetition.
+The value you set is in milliseconds; the controller converts it to a whole number of servo cycles using the sample-time scaling factor (the dwell counter advances every control cycle and counts up to that converted target), so the actual pause is approximately `RptWait` milliseconds rounded to the nearest control cycle. If [StopRep](../04-motion-command/StopRep.md) (or a fault stop) arrives during the dwell, the motion ends immediately without starting the next repetition.
+
+### Edge cases
+
+- **Motor off:** value is held; the dwell branch is not entered while the axis is disabled.
+- **Out-of-range write:** the parameter system rejects negative values; range is `0`–`2^31−1` in scaled units.
+- **Simulation mode (`MotorType` = 5):** unchanged.
+- **ModRev wrap:** unrelated; the dwell counter is independent of position.
+- **Active fault:** the axis is disabled and the dwell ends immediately; the repetition is abandoned.
+- **Other motion modes:** `RptWait` is ignored outside [MotionMode](MotionMode.md) `= 2`.
+- **`RptWait = 0`:** no dwell — the next move starts on the very next control cycle. The settling/in-target bookkeeping that normally runs during the dwell is folded into the move transition.
+- **Stop/Abort during dwell:** [Stop](../04-motion-command/Stop.md), [Abort](../04-motion-command/Abort.md) and [StopRep](../04-motion-command/StopRep.md) all end the repetition at the next cycle (no further motion).
+- **Can change in motion:** unlike `RptCycles`/`RptMode`, `RptWait` is `OKINMOTN` — changing it during a dwell takes effect immediately (compared against the running counter).
 
 ## Examples
 

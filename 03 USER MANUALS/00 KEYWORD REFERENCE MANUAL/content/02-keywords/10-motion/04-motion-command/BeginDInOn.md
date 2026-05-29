@@ -77,6 +77,18 @@ AAbsTrgt=100000      ; target
 ABegin               ; arms the move; motion starts on the rising edge of input 3
 ```
 
+### Edge cases
+
+- **Motor off:** the value is held; the wait-for-input bit will be set on the next `Begin` once the motor is enabled.
+- **Out-of-range write:** the parameter system rejects values outside `0`–`1`.
+- **Simulation mode (`MotorType` = 5):** unchanged; the wait/release behaviour is unaffected.
+- **ModRev wrap:** unrelated.
+- **Active fault:** the axis is disabled; the arm is preserved on re-enable for the next `Begin`.
+- **No begin-motion input configured:** if `BeginDInOn = 1` but no [DInMode](../../05-inputs-outputs/04-digital-inputs/DInMode.md) input is assigned code 3 for this axis, the move will wait indefinitely.
+- **Stop/Abort while waiting:** ends the move immediately without starting; bit 9 is cleared along with bit 0.
+- **Other motion modes:** the trigger applies to any mode — the input edge releases the wait regardless of `MotionMode`.
+- **Edge already high at `Begin`:** the controller waits for a **rising edge**, not a level; an already-high input must drop and rise to release the wait.
+
 ## See also
 
 - [Begin](Begin.md) — the command whose start this trigger defers

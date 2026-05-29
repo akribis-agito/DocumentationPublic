@@ -57,6 +57,16 @@ ACurrAInTh=5000      ; enter current mode when force feedback > 5000
 ACurrAInTh=0         ; disable this condition
 ```
 
+### Edge cases
+
+- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ∉ {2, 3}) — not evaluated.
+- **Zero value** — disables this condition.
+- **No analog force feedback configured** — if no [AInMode](../../05-inputs-outputs/02-analog-inputs/AInMode.md) is set to function 3 (force feedback), the condition is **silently skipped**; no trigger ever fires.
+- **After trigger** — both `CurrAInTh` and [CurrPosThDir](CurrPosThDir.md) are cleared to `0` to prevent repeat triggers.
+- **Sign sensitivity** — positive threshold fires on `value > threshold`; negative fires on `value < threshold`.
+- **Motor off** — the threshold engine does not run.
+- **Save** — flash-saveable.
+
 ## See also
 
 - [Current operation mode](00-overview.md) — full mode-switching conditions

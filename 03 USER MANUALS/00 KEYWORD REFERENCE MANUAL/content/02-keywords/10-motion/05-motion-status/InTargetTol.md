@@ -55,6 +55,17 @@ AInTargetTol=10      ; settling window in user units (default)
 AInTargetTol        ; read current value
 ```
 
+### Edge cases
+
+- **Motor off:** value is held; `InTargetStat` is `0` and the comparison is not used.
+- **Out-of-range write:** the parameter system clamps to `0`–`2³¹−1`; negative values are rejected.
+- **Simulation mode (`MotorType` = 5):** `PosErr` is forced to zero, so the window is always satisfied.
+- **ModRev wrap:** `PosErr` is preserved through the wrap, so the comparison is not falsely violated.
+- **Active fault:** axis disabled, `InTargetStat = 0`.
+- **Other motion modes:** the window applies to any mode in position/velocity OperationMode; in current/force mode [InTargetVelTh](InTargetVelTh.md) is used instead.
+- **`InTargetTol = 0`:** requires exact-zero `PosErr` — practically unreachable on a real axis; use only with simulated drives.
+- **Very large `InTargetTol`:** the axis can be declared "reached" while still moving — keep below the smallest tolerated stop error.
+
 ## See also
 
 - [InTargetStat](InTargetStat.md) — settling state gated by this window

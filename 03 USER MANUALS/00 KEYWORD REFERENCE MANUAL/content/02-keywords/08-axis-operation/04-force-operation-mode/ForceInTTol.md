@@ -44,6 +44,14 @@ The window is **symmetric**: each cycle (while [ForceInTStat](ForceInTStat.md) =
 AForceInTTol=10      ; settled when force error stays within ±10 units
 ```
 
+### Edge cases
+
+- **Wrong mode / source** — only used when [OperationMode](../01-general-keywords/OperationMode.md) = 4 and [ForceCmdSrc](ForceCmdSrc.md) ∈ {1, 2}; ignored otherwise.
+- **Zero value** — effectively requires zero error; settling almost never latches.
+- **Out of range** — negative values rejected; max is `2 147 483 647`.
+- **State 4 already reached** — increasing `ForceInTTol` does not re-arm settling; the state machine evaluates the window only before reaching state 4.
+- **Save** — flash-saveable.
+
 ## See also
 
 - [ForceInTTime](ForceInTTime.md) — required dwell time within this window

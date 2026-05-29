@@ -63,6 +63,15 @@ ABeginOnToPos=1      ; arm the move
 AGoToPosMode         ; switch and start the move
 ```
 
+### Edge cases
+
+- **`RelTrgt ≠ 0`** — `RetractTarget` is ignored; the move is taken relative to the reference at entry.
+- **Not used unless armed** — only consulted when [BeginOnToPos](BeginOnToPos.md) is set and an entry-mode switch occurs.
+- **Position-limit clipping** — outside [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md)/[RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md) the move is clipped to the limit.
+- **Out of range** — values outside the platform range are rejected.
+- **Save** — flash-saveable.
+- **Platform** — v5 widens to 64-bit; v4 is 32-bit.
+
 ## See also
 
 - [BeginOnToPos](BeginOnToPos.md) — arms the entry move

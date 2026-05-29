@@ -45,10 +45,19 @@ if the dual-stuck counter has reached DualStuckTime
 ```
 
 - The internal counter increments once per sample for as long as the mismatch exceeds `DualStuckVel`; any in-tolerance sample resets it to `0`. The fault requires a single unbroken run of `DualStuckTime`.
-- On reaching the threshold, the axis is turned off and [ConFlt](../../../07-status-and-faults/ConFlt.md) records fault code 1049 (dual-loop stuck).
+- On reaching the threshold, the axis is turned off and [ConFlt](../../../07-status-and-faults/ConFlt.md) records ConFlt code 1049 (dual-loop stuck).
 - The whole check is gated on `DualLoopOn`, so on single-loop axes the counter never runs.
 
 A larger `DualStuckTime` tolerates longer transient divergences (e.g. during aggressive transients where the two feedbacks momentarily disagree); a smaller value reacts faster to a genuinely slipping or broken coupling.
+
+### Edge cases
+
+- **Motor off:** the dual-loop check does not run; the counter is reset on motor-off.
+- **`DualLoopOn = 0`:** the entire dual-stuck path is skipped — the counter never runs.
+- **`DualStuckTime = 0`:** the counter reaches the limit on the first over-tolerance sample, so the protection trips immediately (no debouncing).
+- **Range overflow:** writes outside `0…2147483647` are clamped to the keyword `range`.
+- **Clearing the fault:** ConFlt code 1049 clears on re-enable ([MotorOn](../../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../../07-status-and-faults/ErrLog.md) entry persists.
+- **HWProtectBits / ProtectMask:** the dual-loop-stuck trip is not maskable through [ProtectMask](../../01-general-protection/ProtectMask.md) (that mask covers hardware-protection bits only).
 
 ## Examples
 

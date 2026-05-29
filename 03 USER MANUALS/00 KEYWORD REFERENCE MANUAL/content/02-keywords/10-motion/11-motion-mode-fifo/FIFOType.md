@@ -76,7 +76,7 @@ If the controller finishes the last available segment and the queue is empty, th
 
 ### Limits
 
-- A parabolic-by-acceleration segment must request an acceleration at or above the smallest value the controller can resolve (one position unit per second, per second). A push below that is rejected with an error, and a queued segment that resolves to too small an acceleration also faults the motion.
+- A parabolic-by-acceleration segment must request an acceleration of magnitude at least one control-sample frequency (16 384 counts/s² at the standard 16 384 Hz control rate) — this is the smallest acceleration the per-sample velocity step can resolve. A push below that is rejected with an error, and a queued segment that resolves to too small an acceleration also faults the motion.
 - This mode performs no jerk smoothing: a [Stop](../04-motion-command/Stop.md) decelerates linearly to zero and ends immediately on reaching zero speed.
 
 ## Examples

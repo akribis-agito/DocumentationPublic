@@ -48,6 +48,14 @@ AUserPWMDiv=4        ; smaller divisor → shorter period → higher PWM frequen
 AUserPWMDiv          ; read the present divisor
 ```
 
+### Edge cases
+
+- **Out of range** — values outside `0`–`15` are rejected.
+- **Shared timebase** — applies to both [UserPWM](UserPWM.md) channels at once; no per-channel frequency.
+- **Duty preserved** — changing the divisor preserves the `0–4095` duty fraction but rescales the on-time accordingly.
+- **Motor on/off** — independent of `MotorOn`.
+- **Save** — flash-saveable; reapplied at boot.
+
 ## See also
 
 - [UserPWM](UserPWM.md) — per-channel duty cycle (the fraction this period applies to)

@@ -68,6 +68,17 @@ AGoToPosMode         ; gracefully switch to position operation mode
 AModeSwitchPos[2]   ; read the position recorded on entry to position mode
 ```
 
+### Edge cases
+
+- **From velocity mode** — rejected with `CANT_GO_TO_POS_FROM_VEL`. The doc-recommended path is to disable the motor, set [OperationMode](../01-general-keywords/OperationMode.md) = 3, then re-enable.
+- **Already in position mode** — no-op; returns OK.
+- **Motor off** — accepted; the mode flag changes but no power is applied until `MotorOn = 1`.
+- **In motion (current or force)** — the source mode's command sequence stops being applied at the switch; the entry move (if [BeginOnToPos](BeginOnToPos.md) = 1) starts immediately, otherwise the axis holds at `Pos`.
+- **CNC / vector member** — not blocked at this entry point; consider stopping the group first to avoid the rest of the group entering an unexpected state.
+- **`BeginOnToPos` self-clearing** — when an entry move launches, `BeginOnToPos` is reset to `0`; arm it again for the next entry.
+- **Mode-switch position anchor** — [ModeSwitchPos](ModeSwitchPos.md)`[2]` is overwritten on every successful entry; previous values are lost.
+- **DInMode parallel** — [DInMode](../../05-inputs-outputs/04-digital-inputs/DInMode.md) codes 18 and 22 perform the same transition on edge but only from current/force respectively (and refuse vector/CNC members).
+
 ## See also
 
 - [BeginOnToPos](BeginOnToPos.md) — optionally run a move on entry

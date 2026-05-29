@@ -53,6 +53,15 @@ ACurrCmdIndex       ; read the active table entry
 ACurrCmdIndex=3      ; jump to the third entry
 ```
 
+### Edge cases
+
+- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 1 or [CurrCmdSrc](CurrCmdSrc.md) ∉ {1, 2}) — `CurrCmdIndex` is **not consulted**; writes are stored and will take effect on next entry into current mode.
+- **Out of range** — values outside `1`–`20` are rejected by the parameter table.
+- **Mid-ramp write** — overwriting the index while a ramp is in progress switches to the new target value on the next cycle without resetting [CurrCmdCntr](CurrCmdCntr.md); the next ramp starts from the current `CurrRef`.
+- **Clamped at 20** — the firmware does **not** reset the counter when clamped, so the user can monitor how long the axis has been on the last entry.
+- **GoToCurrMode** — always resets `CurrCmdIndex = 1`; direct `OperationMode = 1` does not.
+- **Save** — not flash-saveable.
+
 ## See also
 
 - [CurrCmdVal](CurrCmdVal.md) — table of current values

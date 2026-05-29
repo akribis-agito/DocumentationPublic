@@ -50,6 +50,16 @@ AUserPWM[2]=1024     ; ~25% duty cycle on PWM channel 2
 AUserPWM[1]          ; read channel 1 duty
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `UserPWM[1]` and `UserPWM[2]`. `UserPWM[0]` does not exist.
+- **Out of range** — values outside `0`–`4095` are rejected.
+- **Channel not routed** — without [DOutSelect](DOutSelect.md) set to the matching UserPWM code, the channel runs internally but never reaches a pin.
+- **`UserPWMDiv` shared** — both channels share the same period; you cannot give them different frequencies.
+- **Boundary values** — `0` produces a constant-low pin; `4095` produces a near-constant-high pin (one sample of low per cycle to keep the duty-cycle representable).
+- **Motor on/off** — independent of `MotorOn`.
+- **Save** — flash-saveable; reapplied to the hardware at boot.
+
 ## See also
 
 - [UserPWMDiv](UserPWMDiv.md) — PWM period / frequency shared by both channels

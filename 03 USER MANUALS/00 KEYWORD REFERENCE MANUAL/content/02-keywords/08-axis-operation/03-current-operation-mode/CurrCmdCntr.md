@@ -55,6 +55,16 @@ ACurrCmdCntr        ; read elapsed time (ms)
 ACurrCmdCntr=0       ; restart the timer
 ```
 
+### Edge cases
+
+- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 1) — the counter is not advanced; the value reflects the last cycle in current mode.
+- **Sources 1/2 during ramp** — held at `0` while [CurrCmdSlope](CurrCmdSlope.md) is ramping `CurrRef`; only starts counting once `CurrRef = CurrCmdVal[index]`.
+- **Saturation** — clamped at `2 000 000 000` to avoid roll-over; further holds appear as a plateau.
+- **Clamped index (20)** — when [CurrCmdIndex](CurrCmdIndex.md) sits at `20`, the counter is **not** reset; it keeps growing.
+- **Manual write** — writing `CurrCmdCntr` while in current mode is allowed; useful to restart a hold or to advance to the next entry early.
+- **GoToCurrMode** — resets the counter to `0`; direct `OperationMode = 1` does not.
+- **Save** — not flash-saveable.
+
 ## See also
 
 - [CurrCmdHTime](CurrCmdHTime.md) — holding time compared against this counter

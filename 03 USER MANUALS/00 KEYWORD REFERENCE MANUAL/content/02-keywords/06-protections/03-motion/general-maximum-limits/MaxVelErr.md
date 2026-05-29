@@ -50,10 +50,21 @@ if (mode is position-control, velocity-control, or force-over-PIV)
 
 Key points:
 
-- The threshold actually used is switched between `MaxVelErr` (closed loop) and [MaxVelErrOL](MaxVelErrOL.md) (open loop / injection) depending on the loop state. In closed loop, a violation records [ConFlt](../../../07-status-and-faults/ConFlt.md) fault code 1021 (velocity error too high); in open loop, it records fault code 1056 (open-loop velocity error too high).
-- The protection is active **only** in Position-control, Velocity-control, or force-over-PIV operation. In other modes the velocity error is forced to `0`, so the check cannot trip.
-- It is **bypassed for velocity-command (analog) amplifiers**, because the drive closes its own velocity loop.
+- The threshold actually used is switched between `MaxVelErr` (closed loop) and [MaxVelErrOL](MaxVelErrOL.md) (open loop / injection) depending on the loop state. In closed loop, a violation records [ConFlt](../../../07-status-and-faults/ConFlt.md) ConFlt code 1021 (velocity error too high); in open loop, it records ConFlt code 1056 (open-loop velocity error too high). See [MaxVelErrOL](MaxVelErrOL.md) for the full table of which condition selects which threshold.
+- The protection is active **only** in position-control, velocity-control, or force-over-PIV operation. In other modes the velocity error is forced to `0`, so the check cannot trip.
+- It is **bypassed for velocity-command (analog) amplifiers** ([AmpType](../../../02-motor-and-amplifier/AmpType.md) = analog velocity command), because the external drive closes its own velocity loop.
 - On a violation the axis is turned off immediately.
+
+### Edge cases
+
+- **Motor off:** the velocity loop and the limit check do not run; `VelErr` is reset to `0` on motor-off.
+- **Mode dependency:** `VelErr` is forced to `0` outside position-control, velocity-control, and force-over-PIV operation, so the trip cannot fire in those modes — including current-control-only and force-control-only.
+- **AMP_TYPE bypass:** the trip is skipped entirely when [AmpType](../../../02-motor-and-amplifier/AmpType.md) is the analog-velocity-command (external velocity-loop) amplifier — the drive does not check its own follower's velocity error.
+- **Stepper open loop:** `VelErr` is forced to `0` for [MotorType](../../../02-motor-and-amplifier/MotorType.md) = stepper open-loop.
+- **Open-loop / injection:** during [OpenLoopOn](../../../08-axis-operation/01-general-keywords/OpenLoopOn.md) ≠ 0, or direct injection at the current-reference or force-reference point, the active limit becomes [MaxVelErrOL](MaxVelErrOL.md) and the fault becomes ConFlt code 1056. Injection at the velocity- or position-reference point keeps the limit on `MaxVelErr`.
+- **Range overflow:** writes outside `0…1300000000` (v4) are clamped; the internal limit in force is updated on the next change to `MaxVelErr`/`MaxVelErrOL`/`OpenLoopOn`/`InjectType`/`InjectPoint`.
+- **Clearing the fault:** ConFlt code 1021 clears on re-enable ([MotorOn](../../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../../07-status-and-faults/ErrLog.md) entry persists.
+- **HWProtectBits / ProtectMask:** the following-error trip is not maskable through [ProtectMask](../../01-general-protection/ProtectMask.md) (that mask covers hardware-protection bits only).
 
 ## Examples
 

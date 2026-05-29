@@ -50,7 +50,7 @@ where $t = k \cdot T_{s}$ and $T_{s}$ is the control sampling time (typically 61
 
 `MasterFilt` ranges `1 … 64`. The two extremes bracket the behaviour:
 
-- `MasterFilt = 64` ⇒ coefficient 1, i.e. **no filtering** (the follower tracks the master with no lag). This is the value required for the drift-free axis-to-axis gearbox (see [GearMaster](GearMaster.md)).
+- `MasterFilt = 64` ⇒ coefficient 1, i.e. **no filtering** (the follower tracks the master with no lag).
 - small `MasterFilt` ⇒ heavy smoothing and more tracking lag.
 
 By backward-Euler estimation, `MasterFilt` can be chosen from a target cut-off frequency $f_{c}$ (Hz). The default `MasterFilt = 3` corresponds to roughly a 128 Hz cut-off:
@@ -75,3 +75,4 @@ AMasterFilt          ; read current value
 - [MasterFact](MasterFact.md) / [MasterFactDen](MasterFactDen.md) — gear ratio applied before this filter
 - [GearMaster](GearMaster.md) — selects the master variable
 - [MotionMode](../02-motion-configuration/MotionMode.md) — `MasterFilt` applies in direct gear motion (`= 5`)
+- [MotionMode10](MotionMode10.md) — separate direct-slave mode; does **not** use `MasterFilt`

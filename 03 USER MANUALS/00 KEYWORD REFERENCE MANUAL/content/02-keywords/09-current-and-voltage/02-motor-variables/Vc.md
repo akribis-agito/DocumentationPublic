@@ -53,6 +53,14 @@ For three-phase motors `Vc` is the third 120°-spaced phase that completes the b
 
 ![Three balanced phase voltages 120 degrees apart across one electrical cycle](three-phase-waveforms.svg)
 
+### Edge cases
+
+- **Motor off.** When [MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) is 0 the current loop is reset and `Vc` is forced to 0.
+- **Brush motor.** `Vc` stays at 0 regardless of [ControlMode](ControlMode.md) (brush does not run the enhanced-speed-range midpoint step).
+- **Stepper motor.** `Vc` starts at 0 and is then offset by the negative phase midpoint when [ControlMode](ControlMode.md) bit 0 is set; on saturation `Vc` is scaled together with `Va` and `Vb` to preserve the relationship.
+- **Brushless current loop bypassed ([ControlMode](ControlMode.md) bit 2 = 1).** `Vc` is still completed as $-(\text{Va} + \text{Vb})$ using the bypassed-mode `Va`, `Vb` values.
+- **Simulation.** Same formula as on hardware.
+
 ## Examples
 
 ```text

@@ -48,9 +48,12 @@ The index is fixed to the physical input — `AInPort[1]` is always analog input
 
 Each control cycle, the ADC reading for one input is taken into a working value, stored unchanged in the raw entry (`AInPort[5]`–`AInPort[8]`), then run through the conditioning chain and stored in the processed entry (`AInPort[1]`–`AInPort[4]`). See the [analog-input signal path](00-overview.md) for the conditioning stages. The raw count is scaled to millivolts by a fixed hardware factor (e.g. ±12500 mV over ±32768 counts), so both halves of `AInPort` are in mV.
 
-The four inputs are not all conditioned on the same cycle: one input is processed per sample slot, so each input is refreshed at the analog-input update rate rather than every single cycle.
+Update rate depends on the platform:
 
-The processed value is what control functions consume once an input is routed with [AInMode](AInMode.md); the raw value is used directly only by the analog position-feedback function. Both are read-only.
+- **Standalone (CONTROLLER) v4** — all four inputs are conditioned every single sample (16 384 Hz). On the AG100 single-axis variant, only inputs 1–2 exist.
+- **Central-i v4 / v5** — the four inputs are conditioned one per 16-sample slot, so each input is refreshed at roughly 1 024 Hz on each connected remote unit.
+
+The processed value is what control functions consume once an input is routed with [AInMode](AInMode.md); the raw value is used directly only by the analog position-feedback function ([AInMode](AInMode.md) code 10). Both are read-only.
 
 ## Examples
 
@@ -58,6 +61,15 @@ The processed value is what control functions consume once an input is routed wi
 AAInPort[1]         ; processed reading of analog input 1
 AAInPort[5]         ; raw (post-ADC) reading of analog input 1
 ```
+
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `AInPort[1]`–`AInPort[8]`. `AInPort[0]` does not exist.
+- **2-input products (AG100)** — only `AInPort[1]`, `AInPort[2]`, `AInPort[5]`, `AInPort[6]` are populated; indices 3, 4, 7, 8 read `0`.
+- **Motor on/off and mode independence** — sampling and conditioning run every cycle regardless of `MotorOn` or [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md); the values are valid even when the axis is disabled.
+- **Reading the raw value** — `AInPort[5]`–`AInPort[8]` are the millivolt-scaled ADC value before any filter / offset / deadband / gain / mute, useful when a function (e.g. [AInMode](AInMode.md) code 10 position feedback) needs the unprocessed reading.
+- **Read-only** — writes to `AInPort` are rejected; modify the input behaviour via [AInGain](AInGain.md) / [AInOffset](AInOffset.md) / [AInDB](AInDB.md) / [AInMuteRange](AInMuteRange.md) / [AInFilt](AInFilt.md).
+- **Platform** — on central-i v5 the values are 32-bit floats with the same mV scaling.
 
 ## See also
 

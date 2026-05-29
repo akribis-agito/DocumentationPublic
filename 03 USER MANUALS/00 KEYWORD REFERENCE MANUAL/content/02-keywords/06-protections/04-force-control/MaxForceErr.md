@@ -48,10 +48,19 @@ The fault code raised depends on whether the loop is currently closed or open:
 
 | Situation | Limit used | ConFlt code shown |
 |-----------|------------|-------------------|
-| Closed-loop force control | `MaxForceErr` | 1045 (force error too high) |
-| Open-loop / injection at the force reference | [MaxForceErrOL](MaxForceErrOL.md) | 1057 (open-loop force error too high) |
+| Closed-loop force control | `MaxForceErr` | ConFlt code 1045 (force error too high) |
+| [OpenLoopOn](../../08-axis-operation/01-general-keywords/OpenLoopOn.md) ≠ 0, or direct signal injection at the current-reference point | [MaxForceErrOL](MaxForceErrOL.md) | ConFlt code 1057 (open-loop force error too high) |
+| Direct signal injection at the velocity-, position-, or **force-**reference point | `MaxForceErr` (force stays closed-loop) | ConFlt code 1045 |
 
-The active force-error limit is set to `MaxForceErr` for normal closed-loop operation and switched to [MaxForceErrOL](MaxForceErrOL.md) when open-loop or signal injection is engaged at the force-reference point. Separately, if no analog force feedback is defined the loop faults with [ConFlt](../../07-status-and-faults/ConFlt.md) code 1046 (no force feedback).
+Important: injecting **at the force-reference point** keeps the force-error limit on `MaxForceErr`, not `MaxForceErrOL` — only the position- and velocity-error limits switch to their open-loop counterparts in that case. The open-loop swap of the force limit happens only when [OpenLoopOn](../../08-axis-operation/01-general-keywords/OpenLoopOn.md) is non-zero, or when a direct signal-injection mode is active at the current-reference point ([InjectType](../../13-injection/InjectType.md) = a direct type and [InjectPoint](../../13-injection/InjectPoint.md) = current reference). Separately, if no analog force feedback is defined the loop faults with [ConFlt](../../07-status-and-faults/ConFlt.md) code 1046 (no force feedback).
+
+### Edge cases
+
+- **Motor off:** the force loop does not run, so the limit is not checked; the error is reset and re-initialised on the next motor-on.
+- **No analog force feedback defined:** the loop faults with [ConFlt](../../07-status-and-faults/ConFlt.md) code 1046 the instant force control runs, regardless of how small the error is.
+- **Mode dependency:** the check is part of the closed force-control loop. In modes that do not run that loop (e.g. current-control-only without force over PIV) the error is forced to zero and the limit cannot trip.
+- **Clearing the fault:** ConFlt code 1045 clears on re-enable ([MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../07-status-and-faults/ErrLog.md) entry persists.
+- **HWProtectBits / ProtectMask:** force-error trips are not maskable through [ProtectMask](../01-general-protection/ProtectMask.md) (that mask covers hardware-protection bits only).
 
 ## Examples
 

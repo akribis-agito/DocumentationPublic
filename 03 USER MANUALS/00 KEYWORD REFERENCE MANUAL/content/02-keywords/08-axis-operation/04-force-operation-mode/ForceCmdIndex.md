@@ -51,6 +51,15 @@ AForceCmdIndex      ; read the active table entry
 AForceCmdIndex=3     ; jump to the third entry
 ```
 
+### Edge cases
+
+- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 4 or [ForceCmdSrc](ForceCmdSrc.md) ∉ {1, 2}) — `ForceCmdIndex` is **not consulted**.
+- **Out of range** — values outside `1`–`20` are rejected.
+- **Mid-ramp write** — overwriting the index switches to the new target on the next cycle without resetting [ForceCmdCntr](ForceCmdCntr.md).
+- **GoToForceMode** — always resets `ForceCmdIndex = 1`; direct `OperationMode = 4` does not.
+- **End of table** — clamped at `20`; the firmware does not reset the counter when clamped.
+- **Save** — not flash-saveable.
+
 ## See also
 
 - [ForceCmdVal](ForceCmdVal.md) — table of force values

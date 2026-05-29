@@ -45,6 +45,17 @@ AGantryFdbkSrc=<code> ; point the linear loop at a chosen load-side feedback sou
 AGantryFdbkSrc       ; read the configured source code
 ```
 
+### Edge cases
+
+- **Motor on / in motion at write** — rejected (`NOMOTN`, `NOMTRON`).
+- **Single-loop mode** ([GantryDLoopOn](../01-general-variables/GantryDLoopOn.md) = 0) — `GantryFdbkSrc` is **not consulted**; the linear loop closes on the motor-encoder common-mode and the source pointer sits unused.
+- **Source = 0 (default)** — no load source is bound; if dual-loop is enabled the load-feedback pointer reads zero and the linear loop has no meaningful feedback. Configure a valid source before enabling gantry.
+- **Invalid CAN code** — the pointer resolution falls back to a safe zero pointer; the linear loop reads `0` and behaves as if standing.
+- **Set on wrong axis** — consulted on the master axis only; writes elsewhere are stored but ignored.
+- **Engagement offset** — at gantry engagement the firmware computes an offset between the load source and the current `PosRefShapedFilt` so the reported linear position does not jump.
+- **Save** — flash-saveable; the pointer is re-resolved at boot.
+- **Platform** — v5 central-i only.
+
 ## See also
 
 - [GantryDLoopOn](../01-general-variables/GantryDLoopOn.md) — enables the dual-loop mode that uses this source

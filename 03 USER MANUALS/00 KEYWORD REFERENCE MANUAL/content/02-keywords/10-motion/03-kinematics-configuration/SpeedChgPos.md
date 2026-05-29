@@ -45,6 +45,16 @@ ASpeedChgPos=50000   ; trigger position (user units)
 ASpeedChgPos        ; query current value
 ```
 
+### Edge cases
+
+- **Motor off:** value is held; no trigger fires.
+- **Out-of-range write:** the parameter system rejects values outside ±2³¹−1.
+- **Simulation mode (`MotorType` = 5):** trigger fires normally; the simulated reference advances through `SpeedChgPos` just as a real one would.
+- **ModRev wrap:** because the wrap shifts both the reference and `SpeedChgPos` would need to be in the modulo frame, set `SpeedChgPos` inside `[0, ModRev)`. A trigger at, say, `2 × ModRev` is unreachable.
+- **Active fault:** value is preserved; with motion stopped, the trigger does not fire.
+- **Already past trigger when armed:** the trigger fires on the next cycle (the comparison is level-based, not edge-based).
+- **Other motion modes:** trigger fires in any mode that updates [PosRefShapedFilt](../01-kinematics-status/PosRef.md); however the consequent write to [Speed](Speed.md) only matters in modes that use `Speed`.
+
 ## See also
 
 - [SpeedChgOn](SpeedChgOn.md) — enables speed change on the fly

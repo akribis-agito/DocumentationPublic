@@ -43,6 +43,14 @@ For PWM amplifiers, `MaxPWM` limits the maximum duty cycle of the PWM drive — 
 
 Whenever the output voltage is clamped, the firmware records a saturation factor and sets [StatReg](../../07-status-and-faults/StatReg.md) bit 22 (voltage saturation). `MaxPWM` is a *limit*, not a trip — exceeding the demand simply saturates the output; it does not raise a [ConFlt](../../07-status-and-faults/ConFlt.md) fault.
 
+### Edge cases
+
+- **Motor off:** the saturation does not actively clamp (no phase voltages are being driven), but the limit takes effect immediately on the next motor-on.
+- **Mode dependency:** the per-phase clamp applies whenever the current loop produces phase outputs (servo or stepper internal amplifier).
+- **External amplifier:** `MaxPWM` has no effect when the drive is configured for an external amplifier (analog current or analog velocity command — the phase outputs are not driven by the internal current loop).
+- **Range overflow:** writes outside `0…1470` (0.1 % units, i.e. up to ~147 %) are clamped to the keyword `range`. Note the keyword units are 0.1 %, not %: `1000` = 100 %.
+- **HWProtectBits / ProtectMask:** voltage saturation is not a trip and not maskable.
+
 ## Examples
 
 With a 48 V bus and default `MaxPWM = 900`, to cap the output at 30% duty cycle (14.4 V) set:

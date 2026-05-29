@@ -80,7 +80,7 @@ A common pattern is to launch a long-running task on its own thread and let a se
 
    ```text
    AProgEventOn=1     ; master switch: sense + service all enabled events
-   AProgRun[2],5      ; run task 5 as thread 2 (thread 1 stays free to service events)
+   AProgRun[2],5      ; run task 5 as thread 2; event handlers always run on thread 1 (hard-wired in firmware), so launching long-running work on any other thread leaves thread 1 free to service events
    ```
 
 4. While the task runs, poll its status with [ProgStat](ProgStat.md). When the watched condition occurs, the controller moves event 1 to "pending for service" ([ProgEventStat](ProgEventStat.md) = `1`), runs the handler on thread 1, and re-arms the event when the handler executes [Return](Return.md):

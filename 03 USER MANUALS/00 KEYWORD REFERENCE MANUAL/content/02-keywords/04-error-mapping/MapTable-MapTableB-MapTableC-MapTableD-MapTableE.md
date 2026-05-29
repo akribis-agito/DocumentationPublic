@@ -49,6 +49,17 @@ AMapTable[1]         ; read the correction at the first map point
 AMapTableB[1]        ; read the first entry of the second bank
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `[1…N]` where `N` is the bank size.
+- **Motor on / in motion at write** — rejected (`MPNOMOTN`, `MPNOMTR`).
+- **Out of range index** — rejected by the parameter table; refer to the product's bank sizes.
+- **Mapping off** ([MapType](MapType.md) = 0) — the tables are stored but not consulted.
+- **Simulation motor** — mapping is skipped entirely; tables are stored but produce no correction.
+- **Beyond mapped range** — readings outside `[MapStartPos, MapStartPos + (MapLength − 1) × MapPosGap]` clamp to the boundary entry; no extrapolation.
+- **Encoder counts only** — units are pre-correction encoder counts of the source [MapEncoder](MapEncoder.md), not user units.
+- **Save** — flash-saveable; large tables persist across reboots.
+
 ## See also
 
 - [MapType](MapType.md) — enables mapping and selects 1D/2D/3D

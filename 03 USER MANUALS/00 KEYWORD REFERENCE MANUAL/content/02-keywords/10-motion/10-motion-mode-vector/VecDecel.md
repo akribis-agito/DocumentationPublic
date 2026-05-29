@@ -52,7 +52,7 @@ $$
 
 - **Speed reductions.** When [VecSpeed](VecSpeed.md) is lowered mid-move, or a [VecPause](VecPause.md) is requested, the path velocity ramps down at `VecDecel`.
 
-The deceleration shapes the **resultant** path velocity; the rate seen on any one member axis is `VecDecel` scaled by that axis's share of the path. `VecDecel` is the normal rate; a [StopVec](StopVec.md) command or a fault substitutes the faster [VecEmrgDec](VecEmrgDec.md) instead. With jerk smoothing on ([VecJerk](VecJerk.md) ≠ 0), `VecDecel` is passed as the deceleration constraint to the S-curve path profiler.
+The deceleration shapes the **resultant** path velocity; the rate seen on any one member axis is `VecDecel` scaled by that axis's share of the path. `VecDecel` is the normal rate and is also what [StopVec](StopVec.md) uses to brake the path; only a limit-switch / software-position-limit event substitutes the faster [VecEmrgDec](VecEmrgDec.md) instead. With jerk smoothing on ([VecJerk](VecJerk.md) ≠ 0), `VecDecel` is passed as the deceleration constraint to the S-curve path profiler.
 
 ## Examples
 

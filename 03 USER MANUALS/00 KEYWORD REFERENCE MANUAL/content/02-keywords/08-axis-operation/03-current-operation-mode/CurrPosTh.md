@@ -58,6 +58,17 @@ ACurrPosThDir=1      ; first condition triggers when PosRef > CurrPosTh
 ACurrPosTh=100000    ; position-reference threshold (user units)
 ```
 
+### Edge cases
+
+- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ∉ {2, 3}) — the condition is **not evaluated**; the threshold has no effect in current or force mode.
+- **Motor off** — the threshold engine does not run; values are accepted but no transition fires until the motor is re-enabled in velocity or position mode.
+- **`CurrPosThDir = 0`** — condition A passes unconditionally; the position threshold itself is ignored (only condition B drives the switch).
+- **After trigger** — on entry to current mode the firmware clears [CurrPosThDir](CurrPosThDir.md) to `0` (not `CurrPosTh` itself) and clears the condition-B threshold that fired. Re-arm by writing `CurrPosThDir` and a B-threshold again.
+- **Compares the command, not the feedback** — uses `PosRef` (commanded), so the trigger is consistent regardless of position error or tracking lag.
+- **`PosRef` reset at re-enable** — at motor-on the position reference tracks `Pos`, so a stale threshold based on a previous `PosRef` may suddenly become true immediately on re-enable.
+- **Save** — flash-saveable; persistent across reboot.
+- **Platform** — v5 central-i widens to 64-bit; v4 is 32-bit. Units and behaviour are unchanged.
+
 ## See also
 
 - [CurrPosThDir](CurrPosThDir.md) — selects the comparison direction

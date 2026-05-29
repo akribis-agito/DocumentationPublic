@@ -60,6 +60,18 @@ ASpeedChgOn=1        ; arm (auto-clears when it fires)
 
 The axis decelerates from 500000 to 100000 at `Decel × AccelFact` and `SpeedChgOn` reads back as `0` after the change.
 
+### Edge cases
+
+- **Motor off:** the comparison runs but `Speed` has no effect; the trigger may fire if the reference happens to cross, leaving `SpeedChgOn = 0`. In practice, arm this only while in motion.
+- **Out-of-range write:** the parameter system rejects values outside `0`–`1`.
+- **Simulation mode (`MotorType` = 5):** the reference moves normally in simulation and the trigger fires normally.
+- **ModRev wrap:** the comparison uses the post-shaping reference after the wrap shifts it, so trigger positions are interpreted in the same modulo frame as the current reference. A trigger position outside `[0, ModRev)` will not be reached unless the rotation accumulates enough to cross it.
+- **Active fault:** the axis is disabled and the comparison continues, but with no motion the trigger usually does not fire; `SpeedChgOn` value is preserved across re-enable.
+- **Already past trigger when armed:** the trigger fires on the next cycle (the comparison is "above" / "below", not "edge crossing").
+- **Other motion modes:** the trigger overrides `Speed`, so it only has visible effect in modes that use `Speed` (jog, PTP, repetitive PTP, indirect modes). In direct modes `Speed` is not used, so the trigger writes a value that is ignored.
+- **Live change in motion:** allowed; arming during a move is the intended use.
+- **One-shot:** fires exactly once per arm; re-set `SpeedChgOn = 1` to re-arm.
+
 ## Examples
 
 ```text

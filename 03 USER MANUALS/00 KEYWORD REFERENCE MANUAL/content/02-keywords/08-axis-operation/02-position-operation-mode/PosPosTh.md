@@ -62,6 +62,16 @@ APosPosTh=100000     ; position threshold (user units)
 APosPosFlag=1        ; switch when Pos < PosPosTh
 ```
 
+### Edge cases
+
+- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ∉ {1, 4}) — not evaluated.
+- **[PosPosFlag](PosPosFlag.md) = 0** — disarmed; `PosPosTh` is stored but never compared.
+- **Compares feedback, not reference** — uses `Pos`; works correctly even when the position reference has not yet been advanced because the loop has not engaged.
+- **Persistence after trigger** — `PosPosTh` is **not** cleared on switch; only [PosPosFlag](PosPosFlag.md) is. Re-arm by writing `PosPosFlag` again.
+- **Out of range** — values outside the platform range are rejected.
+- **Save** — flash-saveable.
+- **Platform** — v5 widens to 64-bit; v4 is 32-bit.
+
 ## See also
 
 - [PosPosFlag](PosPosFlag.md) — arms the check and selects the comparison direction

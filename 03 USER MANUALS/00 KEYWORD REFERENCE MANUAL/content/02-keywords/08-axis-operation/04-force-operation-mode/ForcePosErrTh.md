@@ -53,6 +53,15 @@ AForcePosErrTh=5000  ; enter force mode when PosErr > 5000
 AForcePosErrTh=0     ; disable this condition
 ```
 
+### Edge cases
+
+- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 3) — not evaluated; force entry from velocity mode is not gated by this condition.
+- **Zero value** — disables this condition.
+- **After trigger** — cleared to `0` on entry to force mode to avoid repeat triggers.
+- **Out of range** — values outside ±327680 are rejected.
+- **Motor off** — the threshold engine does not run.
+- **Save** — not flash-saveable.
+
 ## See also
 
 - [Force operation mode](00-overview.md) — full mode-switching conditions

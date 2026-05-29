@@ -53,6 +53,17 @@ AInTargetTime=100    ; hold the settling window for the configured duration (ms)
 AInTargetTime       ; read current value
 ```
 
+### Edge cases
+
+- **Motor off:** value is held; the state machine is at `0` so it is not consulted.
+- **Out-of-range write:** the parameter system clamps to the scaled `0`–`10 s` range; negative values are rejected.
+- **Simulation mode (`MotorType` = 5):** unchanged; `PosErr` is zero so the dwell counter starts incrementing from the first cycle.
+- **ModRev wrap:** unrelated.
+- **Active fault:** axis disabled; the dwell counter is reset.
+- **Other motion modes:** the dwell applies in any mode (the state machine runs regardless of motion mode).
+- **`InTargetTime = 0`:** the target-reached state latches on the very first in-window cycle; useful for very fast point-to-point work where settling is not the bottleneck.
+- **Live change in motion:** allowed; the new value takes effect for subsequent settling decisions but does not reset the in-progress counter.
+
 ## See also
 
 - [InTargetStat](InTargetStat.md) — settling state this time gates the transition to "reached"

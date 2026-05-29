@@ -68,16 +68,16 @@ The index selects which operation is performed and on which data type; the numbe
 
 > **Integer set limitations:** Invert (`1 / Pop1`), the trigonometric functions, logarithm, base-10 logarithm and exponential have no integer result — index `6` (invert) reports "operation not implemented", and the trigonometric/logarithmic indices on the integer set do not produce a value. Use the floating-point or double variants for these (see below).
 
-Higher index ranges repeat the operation set for the other data types and add casts:
+Higher index ranges repeat the operation set for the other data types and add casts. **These are Central-i v5 only**: on v4 (standalone and Central-i) the maximum operation index is `31`, and selecting any index from `32` upward is rejected as an out-of-range operation.
 
-| Index range | Data type / purpose |
-|----|----|
-| 32–53 | 32-bit floating-point operations (full arithmetic, trigonometry in radians, logarithm, base-10 logarithm, exponential, two-argument arctangent, modulo, power, invert, square root, absolute) |
-| 54–58 | Cast 32-bit integer to/from float; round, floor and ceiling of a float |
-| 59–77 | 64-bit integer operations (arithmetic, bitwise, shifts, logical, square root, absolute) |
-| 78–99 | 64-bit double-precision floating-point operations (same coverage as the float set) |
-| 100–109 | Casts between 32-bit integer, 64-bit integer, float and double |
-| 110–112 | Round, floor and ceiling of a double |
+| Index range | Data type / purpose | Available on |
+|----|----|----|
+| 32–53 | 32-bit floating-point operations (full arithmetic, trigonometry in radians, logarithm, base-10 logarithm, exponential, two-argument arctangent, modulo, power, invert, square root, absolute) | v5 only |
+| 54–58 | Cast 32-bit integer to/from float; round, floor and ceiling of a float | v5 only |
+| 59–77 | 64-bit integer operations (arithmetic, bitwise, shifts, logical, square root, absolute) | v5 only |
+| 78–99 | 64-bit double-precision floating-point operations (same coverage as the float set) | v5 only |
+| 100–109 | Casts between 32-bit integer, 64-bit integer, float and double | v5 only |
+| 110–112 | Round, floor and ceiling of a double | v5 only |
 
 Values are integers in the integer variants; in the floating-point and double variants the operands and result carry their floating-point representation. It is the program's (normally the compiler's) responsibility to use the variant that matches the operand types.
 

@@ -68,6 +68,18 @@ AMotionSamples[1]   ; motion profile time of the last move (controller cycles)
 AMotionSamples[3]   ; total time until settled for at least InTargetTime
 ```
 
+### Edge cases
+
+- **Motor off:** all four entries are reset to `-1` (not-valid sentinel).
+- **Out-of-range "write":** `MotionSamples` is read-only.
+- **Index `[0]`:** unused; the keyword is 1-indexed. Reading `[0]` returns an error.
+- **Simulation mode (`MotorType` = 5):** entries are written from the same counters; values reflect the simulated profiler timing.
+- **ModRev wrap:** unrelated — `MotionSamples` measures time, not position.
+- **Active fault:** the axis is disabled (motor off path), so entries are cleared to `-1`.
+- **Other motion modes:** the timing entries are captured for any mode that runs the profiler and reaches the settling state. Direct modes (PD/gear/ECAM/FIFO/CNC/vector/spline/slave) and the joystick-direct modes may not generate all entries because they have no defined "end of profile" segment.
+- **Counter saturation:** the cycle counter clamps at 2,000,000,000 (~33 hours at 16,384 Hz). Beyond this point the times reported stay at the cap.
+- **Move interrupted before settling:** `[2]`/`[3]`/`[4]` may remain `-1` (or stale from the previous move until the motor is cycled).
+
 ## See also
 
 - [InTargetTime](InTargetTime.md) — dwell time used in the `MotionSamples[3]` relation

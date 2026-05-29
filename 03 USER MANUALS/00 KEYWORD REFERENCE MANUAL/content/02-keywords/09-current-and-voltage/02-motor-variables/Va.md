@@ -43,16 +43,17 @@ How `Va` is produced depends on the motor group and the [ControlMode](ControlMod
 
 | Case | Source of Va |
 |----|----|
-| Brushless, vector (dq0) control (ControlMode bit 1 = 0) | Inverse transform of the dq0 voltage outputs: $\text{Va}\ = \ \text{Vq} \cdot \sin(\theta) + \text{Vd} \cdot \cos(\theta)$, where $\theta$ is the commutation angle and [Vd](Vd.md)/[Vq](Vq.md) come from the dq current loops. |
-| Brushless or stepper, abc (phase) control (ControlMode bit 1 = 1) | Output of the phase A current PI loop on [IaErr](IaErr.md): integral term ([CurrKi](../../11-control-tuning/06-current-control/CurrKi.md)) plus proportional term, scaled by the loop gain ([CurrGain](../../11-control-tuning/06-current-control/CurrGain.md)). |
-| Brush (single-phase) motor | Output of the phase A current PI loop on [IaErr](IaErr.md). |
-| Current loop bypassed (ControlMode bit 2 = 1) | $\text{Va}\ = \ \text{IaRef}$ — the phase current reference is used directly as the voltage command. |
+| Brushless, vector (dq0) control ([MotorType](../../02-motor-and-amplifier/MotorType.md) = 3 or 4, [ControlMode](ControlMode.md) bit 1 = 0, bit 2 = 0) | Inverse transform of the dq0 voltage outputs: $\text{Va}\ = \ \text{Vq} \cdot \sin(\theta) + \text{Vd} \cdot \cos(\theta)$, where $\theta$ is the commutation angle and [Vd](Vd.md)/[Vq](Vq.md) come from the dq current loops. |
+| Brushless, abc (phase) control ([MotorType](../../02-motor-and-amplifier/MotorType.md) = 3 or 4, [ControlMode](ControlMode.md) bit 1 = 1, bit 2 = 0) | Output of the phase A current PI loop on [IaErr](IaErr.md): integral term ([CurrKi](../../11-control-tuning/06-current-control/CurrKi.md)) plus proportional term, scaled by the loop gain ([CurrGain](../../11-control-tuning/06-current-control/CurrGain.md)). [Vq](Vq.md) and [Vd](Vd.md) are forced to 0. |
+| Stepper motor ([MotorType](../../02-motor-and-amplifier/MotorType.md) = 6 or 7) | Output of the phase A current PI loop on [IaErr](IaErr.md), with [IaRef](IaRef.md) generated as $\text{CurrRef} \cdot \sin(\text{stepper electrical angle})$. The stepper path is always per-phase (abc-domain) and ignores [ControlMode](ControlMode.md) bits 1 and 2. |
+| Brush / voice-coil motor ([MotorType](../../02-motor-and-amplifier/MotorType.md) = 1 or 2, [ControlMode](ControlMode.md) bit 2 = 0) | Output of the phase A current PI loop on [IaErr](IaErr.md). [ControlMode](ControlMode.md) bit 1 is not used. |
+| Brushless or brush, current loop bypassed ([ControlMode](ControlMode.md) bit 2 = 1) | $\text{Va}\ = \ \text{IaRef}$ — the phase current reference is used directly as the voltage command. (Stepper motors ignore this bit.) |
 
 After `Va` is formed:
 
-- **Phase C / completion.** For brushless motors $\text{Vc} = -(\text{Va} + \text{Vb})$ so the three phase voltages sum to zero. For brush motors $\text{Vb} = -\text{Va}$ and $\text{Vc} = 0$; for steppers $\text{Vc} = 0$.
-- **Enhanced speed range.** If [ControlMode](ControlMode.md) bit 0 is set (default), the midpoint of the phase voltages is subtracted from all phases (a common-mode / third-harmonic injection), which raises the usable line-to-line voltage.
-- **Saturation.** Each phase is clamped to the maximum PWM amplitude; in vector mode the Vq/Vd vector is scaled before this so the sinusoidal relationship is preserved. Saturation sets the voltage-saturation bit ([StatReg](../../07-status-and-faults/StatReg.md) bit 22).
+- **Phase completion.** For brushless motors $\text{Vc} = -(\text{Va} + \text{Vb})$ so the three phase voltages sum to zero. For brush motors $\text{Vb} = -\text{Va}$ and $\text{Vc} = 0$. For stepper motors $\text{Vb}$ comes from its own phase-B PI loop and $\text{Vc} = 0$ (the motor return lines connect to the amplifier C leg).
+- **Enhanced speed range.** If [ControlMode](ControlMode.md) bit 0 is set (default), the midpoint of the phase voltages is subtracted from all phases (a common-mode / third-harmonic-style injection), which raises the usable line-to-line voltage. This step runs for brushless and stepper motors; brush motors skip it.
+- **Saturation.** Each phase is clamped to the maximum PWM amplitude ([MaxPWM](../../06-protections/02-current-and-voltage/MaxPWM.md)); in brushless vector mode the [Vq](Vq.md)/[Vd](Vd.md) vector is scaled before the inverse transform so the sinusoidal relationship is preserved. Saturation sets the voltage-saturation bit ([StatReg](../../07-status-and-faults/StatReg.md) bit 22).
 
 **Scaling.** `Va` is reported with the SVM scaling: a value of 1000 equals the full PWM count for the platform, so the internal PWM command is $\text{Va} \cdot (\text{PWM count per }1000)$. The factor depends on the hardware/PWM clock period.
 
@@ -63,6 +64,14 @@ The full reference-to-voltage chain (shared by all phase variables) is:
 The three phase commands are three sinusoids 120° apart in the electrical angle θ, so Vc is fully determined by Va and Vb:
 
 ![Three balanced phase voltages 120 degrees apart across one electrical cycle](three-phase-waveforms.svg)
+
+### Edge cases
+
+- **Motor off.** When [MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) is 0 the current loop is reset and `Va` is forced to 0.
+- **Force / position / current operation modes.** The current loop runs identically in all modes; only the source of [CurrRef](CurrRef.md) differs.
+- **Open-loop voltage mode.** When the open-loop voltage command is active ([OpenLoopVolt](../../08-axis-operation/01-general-keywords/OpenLoopVolt.md) / [OpenLoopCurr](../../08-axis-operation/01-general-keywords/OpenLoopCurr.md)), `Va` reflects that command path rather than the closed loop.
+- **Simulation.** In simulation `Va` follows the same formulas, since the entire loop runs on the simulated phase currents.
+- **External current-command amplifier ([AmpType](../../02-motor-and-amplifier/AmpType.md) = current-command).** The current loop runs in the drive instead of the controller, and `Va` here does not represent the drive's phase A voltage.
 
 ## Examples
 

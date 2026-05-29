@@ -41,26 +41,35 @@ Read-only initial A/B position offset captured when gantry mode is switched on.
 
 ## How it works
 
-The offset is captured as:
+The offset is captured at the `0 → 1` transition as the difference of the **shaped, filtered** position references on the two members (i.e. after smoothing / shaping / filtering, the value the position loop will actually track):
 
 ```text
-AGantryOffset = APosRef - BPosRef
+AGantryOffset = APosRefShapedFilt - BPosRefShapedFilt
 ```
 
-It is then folded into the gantry feedbacks:
+It is then folded into the gantry feedbacks every cycle while gantry is on:
 
 ```text
 AGantryFdbk = (APos + BPos + AGantryOffset) / 2
 BGantryFdbk = (APos - BPos - AGantryOffset)
 ```
 
-Reading `GantryOffset` on any axis other than the master `A` has no use and always returns `0`.
+Reading `GantryOffset` on any axis other than the master (`A`, or `C`/`E`/`G` on v5) has no use and always returns `0`.
 
 ## Examples
 
 ```text
 AGantryOffset      ; read the captured A/B offset
 ```
+
+### Edge cases
+
+- **Gantry off** ([GantryOn](../01-general-variables/GantryOn.md) = 0) — the offset is held at its last captured value (or `0` if gantry has never engaged); it is not recomputed.
+- **Captured per engagement** — every `0 → 1` transition re-snaps the offset. If the load drifts while gantry is off, the next engagement captures the new mechanical relationship and the yaw loop again starts from zero.
+- **Read-only** — writes are rejected.
+- **Wrong axis** — only the master-axis storage is meaningful; reads on other axes return `0`.
+- **Pre-engagement value** — the offset captured at the `0 → 1` transition is taken from `PosRefShapedFilt`, not from `Pos`, so a stationary axis (where reference equals feedback) sees `Pos[A] - Pos[B]`; a moving axis with non-zero tracking error sees the shaped-reference difference instead.
+- **Platform** — v5 widens the storage to 64-bit and supports multiple gantry pairs ([GantryOn](../01-general-variables/GantryOn.md) on A / C / E / G).
 
 ## See also
 

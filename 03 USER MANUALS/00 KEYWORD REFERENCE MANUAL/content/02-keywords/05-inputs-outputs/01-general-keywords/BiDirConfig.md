@@ -56,6 +56,15 @@ ABiDirConfig        ; read the current direction configuration
 ABiDirConfig=0      ; default configuration (all pins in their default direction)
 ```
 
+### Edge cases
+
+- **Per-pin polarity** — set bit = "input" on some hardware, "output" on others; **always verify** with the product manual.
+- **Bits beyond the available pins** — accepted by the parameter table but ignored at the hardware register.
+- **Changing direction at runtime** — accepted; the pin is reconfigured immediately, but any wired-up logic on the other side may see a transient before settling.
+- **Motor on/off** — independent of `MotorOn`.
+- **Save** — flash-saveable; reloaded into the hardware direction register at boot.
+- **Platform** — central-i sends the value as an assign message to the addressed remote unit; standalone writes directly to the FPGA register.
+
 ## See also
 
 - [DInPort-DInPortHigh](../04-digital-inputs/DInPort-DInPortHigh.md) — digital-input port states (where bi-directional pins set as inputs appear)

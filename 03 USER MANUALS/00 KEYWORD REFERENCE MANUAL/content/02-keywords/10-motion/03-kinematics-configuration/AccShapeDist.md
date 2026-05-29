@@ -53,6 +53,18 @@ AAccShapeDist[2]=8000    ; next band: 5000 .. 8000 user units
 AAccShapeDist[1]        ; query first segment distance
 ```
 
+### Edge cases
+
+- **Motor off:** values are held; no profiler runs.
+- **Out-of-range write:** the parameter system clamps to `0`–`2³¹−1` (v4) or `0`–`2⁵¹−1` (v5); negative values are rejected.
+- **Index `[0]`:** does not exist in user-visible space; the keyword is 1-indexed (entries `[1]` … `[10]`). Reading `[0]` returns an error.
+- **Simulation mode (`MotorType` = 5):** unchanged.
+- **ModRev wrap:** the distance `|AbsTrgt − PosRef|` is in main-encoder units after wrap, so shaping bands behave consistently.
+- **Active fault:** the axis is disabled; the table is preserved across the fault.
+- **Other motion modes:** only the PTP-family profiler consults the table; ignored elsewhere.
+- **Live change in motion:** allowed; the controller re-sorts the (distance, factor) pairs after each write, so the lookup uses the new table on the next cycle.
+- **Duplicate or zero distances:** after re-sort, multiple entries with the same threshold collapse into the first one encountered; zero-distance entries are valid (act as the very-near band).
+
 ## Changes between versions
 
 In **v5 (central-i)** the distance thresholds are 64-bit (matching the 64-bit position pipeline), giving the larger range shown in the frontmatter; the shaping mechanism is otherwise unchanged. **v5 is central-i only**, so on standalone the thresholds remain the v4 32-bit values.

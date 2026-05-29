@@ -36,7 +36,7 @@ As the gantry moves, the controller reads the live value of the selected source 
 
 ## How it works
 
-`GantryMapSrc` is resolved to its target variable when written, so change it only with the motor off and the system idle. Each control cycle, when the map is enabled ([GantryMapType](GantryMapType.md) = 1), the controller takes the current value of that variable, subtracts [GantryMapInit](GantryMapInit.md), divides by the map gap to get a fractional table index, and linearly interpolates between the two surrounding [GantryMap](GantryMap.md) entries. Positions below the first entry or above the last clamp to the end entries.
+`GantryMapSrc` is resolved to its target variable's pointer when written, so the controller can read the live value cheaply each cycle. The parameter table allows the write with the motor on but rejects it while in motion (`NOMOTN`); for safety the standard practice is to configure the source before enabling [GantryOn](GantryOn.md). Each control cycle, when the map is enabled ([GantryMapType](GantryMapType.md) = 1), the controller takes the current value of that variable, subtracts [GantryMapInit](GantryMapInit.md), divides by the map gap to get a fractional table index, and linearly interpolates between the two surrounding [GantryMap](GantryMap.md) entries. Positions below the first entry or above the last clamp to the end entries.
 
 ## Examples
 
@@ -44,6 +44,16 @@ As the gantry moves, the controller reads the live value of the selected source 
 AGantryMapSrc=<code>  ; index the map by a chosen gantry position source (use the CAN code of that source)
 AGantryMapSrc        ; read the configured source code
 ```
+
+### Edge cases
+
+- **In motion at write** — rejected (`NOMOTN`).
+- **Map type off** ([GantryMapType](GantryMapType.md) = 0) — stored but **not consulted**.
+- **Source = 0 (default)** — no source is bound; the map is effectively unusable until a valid CAN code is written.
+- **Invalid CAN code** — the pointer resolution falls back to a safe zero pointer; the map reads `0` and the interpolation produces the first table entry.
+- **Set on wrong axis** — read on the master axis only; writes elsewhere are stored but ignored.
+- **Save** — flash-saveable; the pointer is re-resolved at boot.
+- **Platform** — v5 central-i only.
 
 ## See also
 

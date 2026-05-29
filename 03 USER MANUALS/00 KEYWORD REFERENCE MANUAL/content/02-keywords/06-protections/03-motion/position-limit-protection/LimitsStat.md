@@ -73,6 +73,15 @@ The profiler reads these bits to brake the axis on contact:
 
 Homing also inspects `LimitsStat` to detect and react to switch contact during a homing sequence.
 
+### Edge cases
+
+- **Motor off:** the bits still update from the live digital-input states; you can read them at any time to confirm switch wiring before enabling the axis.
+- **Mode dependency:** the deceleration response to a switch hit applies in indirect/profiled motion modes. Direct streaming modes (the user drives the reference) honour the bits only through `Begin`-time rejection — the live profiler is not present to brake.
+- **Both bits set:** if both RLS and FLS are active (value `3`), the stage is between two close switches or one is mis-wired — no motion can `Begin` in either direction until you jog off.
+- **DIn polarity:** the active level of each switch is set in [DInMode](../../../05-inputs-outputs/04-digital-inputs/DInMode.md); reversing polarity there inverts the bits here without rewiring.
+- **No fault raised:** limit-switch braking is a controlled deceleration; it does **not** raise a [ConFlt](../../../07-status-and-faults/ConFlt.md). The cause appears in [MotionReason](../../../10-motion/05-motion-status/MotionReason.md) only.
+- **HWProtectBits / ProtectMask:** the hardware limit switches are independent of [HWProtectBits](../../01-general-protection/HWProtectBits.md) — they are normal digital inputs, not silicon-level protection.
+
 ## Examples
 
 ```text

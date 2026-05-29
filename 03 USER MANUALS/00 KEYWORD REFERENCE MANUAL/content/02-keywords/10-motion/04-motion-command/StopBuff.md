@@ -57,6 +57,18 @@ The profiler checks the request only at the **first sample of a playback cycle**
 AStopBuff            ; end spline-buffer playback at the end of the current cycle
 ```
 
+### Edge cases
+
+- **Motor off:** accepted but no effect.
+- **Not in spline-buffer motion:** no effect.
+- **Out-of-range "write":** function has no value.
+- **Simulation mode (`MotorType` = 5):** unchanged.
+- **ModRev wrap:** unrelated.
+- **Active fault:** axis disabled; the request is preserved on the primary axis variable.
+- **Other motion modes:** only spline-buffer mode honours `StopBuff`; in any other mode it is a no-op.
+- **Single-cycle buffer:** issuing `StopBuff` mid-cycle still waits for the cycle boundary; the move ends after the current cycle completes.
+- **Immediate halt required:** use [Abort](Abort.md) (immediate freeze of the reference) or [Stop](Stop.md) (controlled ramp via `Decel`).
+
 ## See also
 
 - [Stop](Stop.md) — controlled stop (decelerates buffer members over `Decel`)

@@ -54,6 +54,14 @@ AMapErrOffset=0      ; clear the offset (slews back to 0 at MapErrOffRamp)
 AMapErrOffset=500    ; bias the corrected position by 500 counts
 ```
 
+### Edge cases
+
+- **Motor on / in motion at write** — rejected (`NOMOTN`, `NOMTRON`); use [MapErrOffRamp](MapErrOffRamp.md) to control the slew instead.
+- **Mapping off** ([MapType](MapType.md) = 0) — the **actual** internal offset is forced to `0`; writes to `MapErrOffset` are stored but do not affect the feedback until mapping is re-engaged.
+- **Simulation motor** — mapping is skipped entirely in simulation, so the actual offset is held at `0` regardless.
+- **`MapErrOffRamp = 0`** — the actual offset never slews; changing `MapErrOffset` has no effect until `MapErrOffRamp` is non-zero.
+- **Save** — not flash-saveable; reset to `0` on every boot.
+
 ## See also
 
 - [MapErrOffRamp](MapErrOffRamp.md) — slew rate at which the applied offset converges to this target

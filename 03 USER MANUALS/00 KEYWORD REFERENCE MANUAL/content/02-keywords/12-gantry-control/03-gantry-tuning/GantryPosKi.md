@@ -51,6 +51,17 @@ AGantryPosKi[1]=0   ; set yaw position integral gain (first gain set)
 AGantryPosKi[1]     ; read the current value
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `GantryPosKi[1]`–`GantryPosKi[5]` (gain set 1 through 5; index 6 is the array slot for the active gain).
+- **Gantry off** ([GantryOn](../01-general-variables/GantryOn.md) = 0) — writes accepted; the gain has no effect until gantry is engaged.
+- **Zero gain** — disables integral action; the yaw position loop runs as P + feedforward only.
+- **Wind-up at engagement** — the firmware halves the velocity-loop integral across the master/yaw split when gantry engages; a large `GantryPosKi` can wind up the integral quickly during early settling.
+- **Wrong axis** — consulted on the yaw axis of the pair; writes on the master or a non-gantry axis are accepted but not used.
+- **Gain set selection** — the active set is chosen by the gain-scheduling subsystem (see [ScheduleMode](../../11-control-tuning/06-scheduled-gains/ScheduleMode.md)); reads return the value of the active set's storage.
+- **Save** — flash-saveable.
+- **Platform** — v5 central-i only. There is no `GantryPosKi` on v4.
+
 ## See also
 
 - [GantryPosGain](GantryPosGain.md) — yaw position-loop proportional gain

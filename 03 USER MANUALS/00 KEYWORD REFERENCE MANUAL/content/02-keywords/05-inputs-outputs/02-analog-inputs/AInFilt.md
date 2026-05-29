@@ -62,6 +62,17 @@ AAInFilt[1]=50000    ; ~500 Hz cutoff (lightest filtering)
 AAInFilt[1]=100      ; ~1 Hz cutoff (heavy smoothing)
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; the array is 1-indexed (`AInFilt[1]`–`AInFilt[4]` on standalone/v4, plus `AInFilt[5]` reserved). `AInFilt[0]` does not exist.
+- **Out of range** — values are clamped to `[1, 50000]` by the parameter table; assigning outside this range returns an error.
+- **Motor on/off** — the filter runs continuously regardless of `MotorOn`; the cached coefficients are valid at every cycle.
+- **Mode independence** — the filter is applied before any [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md)-specific use of the analog reading; the value is filtered the same way in position, velocity, current and force modes.
+- **Write while running** — when `AInFilt[i]` is written the cached `a` and `1−a` coefficients are recomputed; the running output history is **not** reset, so the response transitions smoothly from the old to the new cutoff.
+- **Heavy smoothing pitfall** — very small values (e.g. `AInFilt = 1` ≈ 0.01 Hz) take many seconds to settle; readings appear stale until the filter catches up.
+- **Save** — `AInFilt` is flash-saveable; the filter coefficients are recomputed at power-up from the stored value.
+- **Platform** — central-i v5 stores `AInFilt` as `float32` rather than `int32`; the formula and units are the same.
+
 ## See also
 
 - [AInPort](AInPort.md) — resulting readings

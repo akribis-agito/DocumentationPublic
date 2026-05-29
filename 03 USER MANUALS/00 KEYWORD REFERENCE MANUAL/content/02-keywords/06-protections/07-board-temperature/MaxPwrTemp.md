@@ -61,6 +61,16 @@ Whenever you write `MaxPwrTemp`, three derived band edges are recomputed at 88 /
 
 > **Note:** the controller-board over-temperature limit ([BoardTemp](BoardTemp.md)) is a *fixed* 75 °C constant — only the power-stage limit is user-settable through this keyword.
 
+### Edge cases
+
+- **Motor off:** the fault check is gated on motor-on (the doc statement above), so over-temperature does **not** trip with the motor off — a thermal soak only fails the next time you re-enable.
+- **Simulation mode:** the trip is skipped in simulation.
+- **Mode dependency:** the trip runs regardless of operation mode whenever the motor is on.
+- **Range overflow:** writes outside `20…80` are clamped; whenever you write `MaxPwrTemp` the warning band edges are recomputed.
+- **Clearing the fault:** ConFlt code 1018 clears on re-enable ([MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../07-status-and-faults/ErrLog.md) entry persists.
+- **Shared warning field:** [StatReg](../../07-status-and-faults/StatReg.md) bits 11–12 report the higher of the [PwrTemp](PwrTemp.md) and [BoardTemp](BoardTemp.md) warning levels.
+- **HWProtectBits / ProtectMask:** the IPM over-temperature trip is not maskable through [ProtectMask](../01-general-protection/ProtectMask.md). The separate hardware [HWProtectBits](../01-general-protection/HWProtectBits.md) IPM-fault bit (ConFlt code 1027) is gated by [ProtectMask](../01-general-protection/ProtectMask.md).
+
 ## Examples
 
 ```text

@@ -60,6 +60,17 @@ AAOutPort[1]=5000    ; drive analog output 1 to 5000 mV
 AAOutPort[1]          ; read back the commanded value
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `AOutPort[1]`–`AOutPort[4]`. `AOutPort[0]` does not exist.
+- **Wrong mode** — `AOutPort` is only read by the DAC when [AOutMode](AOutMode.md)`[i] = 0`. Writing it while `AOutMode[i] ≠ 0` stores the value but the output continues to follow the monitored parameter; the stored value takes effect the moment `AOutMode[i]` is set back to `0`.
+- **Out of range** — writes outside ±11905 mV are rejected by the parameter table; the DAC code is also clamped each cycle.
+- **2-output products** — only `AOutPort[1]` and `AOutPort[2]` drive physical channels; `AOutPort[3]` / `AOutPort[4]` accept writes but do not reach any DAC.
+- **Amplifier override** — when the amplifier is an analog-current-command or built-in-linear type, the DAC is owned by the amplifier current command; `AOutPort` writes are stored but do not reach the pin.
+- **Motor on/off** — independent of `MotorOn`; the DAC follows `AOutPort` whether the servo is enabled or not.
+- **Save** — flash-saveable; the last commanded value is restored at boot.
+- **Platform** — central-i v5 stores the value as `float32`; behaviour and units are unchanged.
+
 ## See also
 
 - [AOutMode](AOutMode.md) — selects direct vs monitoring mode (this value is honored only when `AOutMode = 0`)

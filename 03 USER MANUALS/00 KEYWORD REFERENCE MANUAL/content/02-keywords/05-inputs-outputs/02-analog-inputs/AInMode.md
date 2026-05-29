@@ -80,6 +80,19 @@ AAInMode[1]=3        ; analog input 1 -> force feedback of axis A
 AAInMode               ; read the current AInMode assignments
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `AInMode[1]`–`AInMode[4]`. `AInMode[0]` does not exist.
+- **Out-of-range function** — values with lower 16 bits > 10 are rejected: the entry is zeroed and an `AINMODE_OUT_OF_RANGE` warning is logged.
+- **Unassigned function** — a function that no input maps to reads a constant `0` rather than stale data, so a missing route fails safe.
+- **Multiple inputs to one function** — the routing table is rebuilt input-by-input in ascending order; if two inputs assign the same function to the same target axis, the later input's pointer wins.
+- **Multi-axis broadcast** — setting more than one upper-bit fans one input out to multiple axes; each target axis reads the same conditioned value.
+- **Wrong-mode use** — assigning function 1 (velocity command) does not switch the axis into [VELOCITY_CONTROL](../../08-axis-operation/01-general-keywords/OperationMode.md); the routed value is only used while the consuming mode is active. The route is harmless in other modes.
+- **Position feedback (code 10)** — uses the **raw** [AInPort](AInPort.md)`[5]`–`[8]` reading; the filter, offset, deadband and gain stages do not apply to it.
+- **Motor on/off** — routing is rebuilt on write; existing routes are unaffected by `MotorOn` transitions.
+- **Save / Reset** — `AInMode` is flash-saveable. Persisted routes are reapplied at boot via the same parser.
+- **Platform** — code list 0–10 is identical on standalone, central-i v4 and central-i v5.
+
 ## See also
 
 - [AInPort](AInPort.md) — analog-input readings (the values routed by `AInMode`)

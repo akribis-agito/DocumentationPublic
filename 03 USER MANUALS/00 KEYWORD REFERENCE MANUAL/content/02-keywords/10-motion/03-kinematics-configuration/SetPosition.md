@@ -63,6 +63,17 @@ When the motor is **on**, the smoothing buffer must also be re-seeded with the n
 
 It is also blocked while the axis is in motion (`ok_in_motion: false`).
 
+### Edge cases
+
+- **Motor off:** allowed; the reference re-seed of the smoothing buffer is skipped because the buffer is already tracking the feedback.
+- **Motor on:** allowed; the controller temporarily forces [Jerk](Jerk.md) to `0` to re-seed the moving-average history with the new value, then restores `Jerk`. Input shaping must be off (rejected with error if not).
+- **Out-of-range write:** rejected if the value falls outside `[RevPLim, FwdPLim]` (the parameter system also clamps to the data-type range).
+- **Simulation mode (`MotorType` = 5):** allowed; feedback follows reference, so the offset shows up in both immediately.
+- **ModRev wrap:** `SetPosition` writes raw values into the reference and feedback; the value may need to be inside `[0, ModRev)` to make sense for a continuous-rotary axis. Writing outside that range will be wrapped by the controller on the next cycle that satisfies the wrap conditions.
+- **Active fault:** the axis is disabled but `SetPosition` is still allowed (the in-motion check is satisfied — there is no motion). The new value persists across re-enable.
+- **Other motion modes:** the keyword is mode-independent; it operates directly on the reference/feedback registers.
+- **Error mapping / auto-gain / input shaping active:** rejected (see conditions above) — disable, set, then re-enable.
+
 ## Examples
 
 ```text

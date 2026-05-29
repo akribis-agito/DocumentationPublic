@@ -53,6 +53,15 @@ ADInFilt=3           ; require 3 consecutive matching samples
 ADInFilt              ; read back the filter setting
 ```
 
+### Edge cases
+
+- **Out of range** — values are masked to the low 4 bits (`0`–`15`); writes outside this range are clipped, not rejected.
+- **Zero value** — disables debouncing; the raw hardware reading is used directly.
+- **Whole-axis scope** — the value applies to **all** inputs on the axis/module; you cannot debounce one input independently of another.
+- **Edge detection lag** — debouncing delays both rising and falling edges by up to `DInFilt` raw sample periods; for time-critical inputs (e.g. high-rate begin-motion triggers) prefer the lowest filter that still rejects noise.
+- **Motor on/off** — runs in hardware regardless of `MotorOn`.
+- **Save** — flash-saveable; reloaded into the hardware register at boot.
+
 ## See also
 
 - [DInPort-DInPortHigh](DInPort-DInPortHigh.md) — resulting input states (filter is the first stage)

@@ -48,6 +48,13 @@ If force operation mode is entered while no analog input has been assigned the f
 AForce              ; read the force feedback
 ```
 
+### Edge cases
+
+- **No analog force feedback configured** — `Force` reads `0`. Entering force mode in this state fails with [ConFlt](../../07-status-and-faults/ConFlt.md) = `1046` (no force feedback) and the motor is disabled.
+- **Wrong mode** — `Force` is sampled every cycle regardless of [OperationMode](../01-general-keywords/OperationMode.md); the value is the live conditioned analog reading even outside force mode.
+- **Motor off** — sampling continues; useful for monitoring the cell with the servo off.
+- **Read-only** — writes are rejected.
+
 ## See also
 
 - [ForceRef](ForceRef.md) — filtered force reference the loop tracks

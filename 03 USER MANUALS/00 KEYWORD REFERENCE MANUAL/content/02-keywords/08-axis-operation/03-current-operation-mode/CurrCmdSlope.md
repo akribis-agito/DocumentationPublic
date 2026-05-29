@@ -55,6 +55,16 @@ ACurrCmdSlope[3]=700 ; ramp into entry 3 at 700 mA/s
 
 Worked example — if `CurrCmdIndex` = 2, `CurrCmdCntr` = `CurrCmdHTime[2]` (end of the current entry), `CurrRef` = `CurrCmdVal[2]` = 340, `CurrCmdVal[3]` = -500, and `CurrCmdSlope[3]` = 700, then the ramp from 340 mA to -500 mA starts and completes in 1.2 seconds.
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `CurrCmdSlope[1]`–`CurrCmdSlope[20]`. `CurrCmdSlope[0]` does not exist.
+- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 1 or [CurrCmdSrc](CurrCmdSrc.md) ∉ {1, 2}) — the slope is **not consulted**; stored but unused.
+- **Out of range** — `0` and negative values are rejected; the minimum is `1` to guarantee progress.
+- **Large slope** — values that would produce a per-cycle step larger than the remaining distance to the target cause `CurrRef` to snap to the target on the next cycle; the holding timer starts immediately.
+- **Reload mid-ramp** — writing a new slope on the active entry changes the rate from the next cycle; the remainder accumulator is preserved so there is no discontinuity.
+- **Save** — flash-saveable.
+- **Platform** — v5 stores as `float32` with no upper limit; v4 stores as `int32` up to `2 147 483 647`.
+
 ## Changes between versions
 
 central-i v5 stores `CurrCmdSlope` as a 32-bit float and removes the fixed upper range limit (standalone/v4: 32-bit integer, range 1 to 2147483647).

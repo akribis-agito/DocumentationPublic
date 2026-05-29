@@ -67,6 +67,16 @@ AAOutMode[1]=<CCC>   ; monitor a parameter (use its Complex CAN code)
 AAOutMode[1]          ; read back the configured mode
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `AOutMode[1]`–`AOutMode[4]`. `AOutMode[0]` does not exist.
+- **Invalid CCC** — if the Complex CAN code fails validation (unknown keyword, bad axis, out-of-range array index, or the target is a function rather than a parameter), the output is forced to `0 mV` rather than tracking a stale or undefined value.
+- **Forced direct mode** — if the amplifier is an analog-current-command or built-in-linear type, the DAC drives the amplifier current command regardless of `AOutMode`; setting a CCC has no effect in that case.
+- **Wrong scaling** — in monitoring mode, the monitored parameter is treated as millivolts; without an appropriate [AOutShifts](AOutShifts.md) ([AOutGain](AOutGain.md) on v5) the output saturates.
+- **Mode independence** — `AOutMode` itself takes effect immediately and is independent of [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) and `MotorOn`. The monitored parameter may be one that is only meaningful in certain modes (e.g. monitoring `VelRef` while in current mode shows whatever the velocity loop holds, not active control).
+- **Save** — flash-saveable; reloaded at boot.
+- **Platform** — code path is the same on standalone v4, central-i v4 and central-i v5; the v5 difference is in the scaler ([AOutGain](AOutGain.md) instead of [AOutShifts](AOutShifts.md)).
+
 ## See also
 
 - [AOutPort](AOutPort.md) — commanded value (used only when this is `0`)

@@ -48,6 +48,16 @@ After incrementing, the controller decides whether to start another repetition: 
 ARptCounter         ; read the number of repetitions completed
 ```
 
+### Edge cases
+
+- **Motor off:** value preserved from the last completed repetition; reset to `0` by the next `Begin`.
+- **Out-of-range "write":** `RptCounter` is read-only.
+- **Simulation mode (`MotorType` = 5):** counter increments normally on simulated profiler completion.
+- **ModRev wrap:** unrelated — the counter increments per repetition, not per position.
+- **Active fault:** the axis is disabled mid-repetition; the counter holds its current value until the next `Begin`.
+- **Other motion modes:** the counter is not incremented outside `MotionMode = 2`; readings in other modes will reflect the previous repetitive run (or 0).
+- **Counter saturation:** the parameter is a 32-bit signed value (max ≈ 2.1 × 10⁹); for endless `RptCycles = 0` runs the counter could in principle wrap, but a real machine would not run long enough to reach this in practice.
+
 ## See also
 
 - [MotionMode](../02-motion-configuration/MotionMode.md) — selects repetitive PTP motion (`= 2`)

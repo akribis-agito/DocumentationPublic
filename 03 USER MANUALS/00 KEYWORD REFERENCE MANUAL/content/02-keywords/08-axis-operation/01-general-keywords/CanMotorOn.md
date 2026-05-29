@@ -55,6 +55,16 @@ ACanMotorOnRes       ; 1 = enabling would succeed, otherwise the reject/fault co
 AMotorOn=1           ; actually enable the axis
 ```
 
+### Edge cases
+
+- **Motor already on** — pre-checks are still run but the result is forced to `1` regardless (the firmware assumes a successful enable since nothing would change). Reading `CanMotorOnRes = 1` while the motor is on is therefore not a meaningful pre-check.
+- **Simulation motor** / **PD amplifier** — the firmware short-circuits the result to `1`; the snapshot pre-conditions are not consulted.
+- **Time-dependent protections** — a `1` result is not a guarantee. Some protections (e.g. `MaxVBus` over-voltage debounce, board-temperature ramps, in-motion errors) only fault after enable. Always read [ConFlt](../../07-status-and-faults/ConFlt.md) after `MotorOn = 1` to confirm.
+- **Wrong-time semantics** — `CanMotorOn` does **not** know about future motion or load; it cannot predict stall, position-error or velocity-error trips.
+- **Read-only** — the keyword is a function (read it to trigger it); writing is rejected.
+- **Per-axis** — the check is per-axis; a gantry pair must be tested on its master axis.
+- **Same chain as MotorOn** — the check chain exactly mirrors the [MotorOn](MotorOn.md) `= 1` pre-check chain plus the interrupt-level protections; the two are intentionally kept in sync.
+
 ## See also
 
 - [CanMotorOnRes](CanMotorOnRes.md) — result code this command writes

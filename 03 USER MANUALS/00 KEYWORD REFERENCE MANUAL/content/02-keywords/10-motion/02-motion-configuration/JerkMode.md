@@ -50,6 +50,17 @@ Each control cycle the profiler reads `JerkMode` and selects its trajectory law 
 
 Independently of the profiler order, the [Jerk](../03-kinematics-configuration/Jerk.md) keyword sets a moving-average smoothing tail of `2^Jerk` cycles that the profiler flushes at the end of every move (the profile-smoothing tail reported by [MotionStat](../05-motion-status/MotionStat.md) bit 6).
 
+### Edge cases
+
+- **Motor off:** the value is held; it is read on the next `Begin`.
+- **Out-of-range write:** the parameter system rejects values outside `0`–`1`.
+- **Simulation mode (`MotorType` = 5):** the profiler runs identically in simulation.
+- **ModRev wrap:** unrelated to `JerkMode`; both profiler orders handle wrap the same way.
+- **Active fault:** the axis is disabled; on re-enable and the next `Begin`, the current `JerkMode` is read again.
+- **Controlled stop ([Stop](../04-motion-command/Stop.md)) or limit-triggered stop:** `JerkMode` is forced to `0` (second-order) internally for the duration of the stop ramp, regardless of the user setting — emergency decelerations always use the square-root law.
+- **Other motion modes:** `JerkMode` is ignored outside PTP (1) and repetitive PTP (2); jog, gear, ECAM, PD, CNC, vector, joystick, FIFO, spline-buffer and slave each use their own trajectory law.
+- **Cannot change in motion:** writes are rejected while [MotionStat](../05-motion-status/MotionStat.md) is non-zero (the `NOMOTN` flag in the parameter table).
+
 ## Examples
 
 ```text

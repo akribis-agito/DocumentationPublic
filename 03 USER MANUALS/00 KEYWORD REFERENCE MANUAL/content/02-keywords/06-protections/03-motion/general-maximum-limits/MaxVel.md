@@ -53,6 +53,16 @@ When exceeded, the axis is turned off immediately and [ConFlt](../../../07-statu
 
 **3. Command-time validation.** A motion cannot be *started* in the indirect/profiled modes (Jog, PTP, PD/Gear/eCam indirect, position joystick indirect) if the commanded `Speed` exceeds `MaxVel` — `Begin` is rejected (error 271). Likewise, setting `Speed` larger than `MaxVel` while already in motion is rejected (error 269). Direct modes (e.g. pulse-and-direction direct) are not gated this way because the user drives the reference directly; for those, mechanisms 1 and 2 still apply.
 
+### Edge cases
+
+- **Motor off:** the overspeed trip and the saturation are both skipped (the velocity loop does not run). The validation gate at `Begin` is independent and still applies.
+- **Mode dependency:** the overspeed trip operates whenever the motor is on; it does not depend on operation mode. The saturation in the velocity loop applies only when the velocity loop is running.
+- **Feedback used:** the overspeed trip uses the instantaneous feedback `Vel[1]` (not the deeply filtered `Vel[3]` used by stuck detection).
+- **25 % margin:** the trip threshold is `MaxVel × 10/8 = MaxVel × 1.25` (firmware uses `(MaxVel >> 3) * 10` to avoid overflow at high MaxVel values).
+- **Range overflow:** writes outside `0…1300000000` (v4) are clamped; on v5 `MaxVel` is `int64` with no fixed upper bound.
+- **Clearing the fault:** ConFlt code 1019 clears on re-enable ([MotorOn](../../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../../07-status-and-faults/ErrLog.md) entry persists.
+- **HWProtectBits / ProtectMask:** the overspeed trip is not maskable through [ProtectMask](../../01-general-protection/ProtectMask.md) (that mask covers hardware-protection bits only).
+
 ## Examples
 
 ```text

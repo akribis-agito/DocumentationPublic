@@ -49,6 +49,17 @@ Writing a fresh `RefOffsetSamp` (with a non-zero [RefOffsetStep](RefOffsetStep.m
 
 ![Reference-offset per-cycle injection](refoffset-timeline.svg)
 
+### Edge cases
+
+- **Motor off:** the injection only runs while `IN_MOTION_AND_STOP_BITS_SET == IN_MOTION_BIT_SET`; with the motor off there is no motion so no injection occurs. The countdown is preserved.
+- **Out-of-range write:** the parameter system rejects negative values; range is `0`–`2³¹−1`.
+- **Simulation mode (`MotorType` = 5):** the injection runs in simulation; the synthetic feedback follows the offset reference.
+- **ModRev wrap:** the offset is added directly to the high-precision reference accumulator; if the resulting reference crosses the modulo boundary, the wrap fires normally and the offset persists in the wrapped frame.
+- **Active fault:** the axis is disabled — motion stops, the countdown is cleared by the firmware's check, so a leftover offset does not carry into the next motion.
+- **Stop/Abort during injection:** the controller detects any stop request and clears `RefOffsetSamp` to `0` immediately, abandoning the remainder of the injection.
+- **Other motion modes:** the injection runs in any mode that sets the in-motion bit; it bypasses the profiler's `Accel`/`Decel` limits.
+- **Re-arm in motion:** writing a new `RefOffsetSamp` with `RefOffsetStep` non-zero immediately starts injecting on the next cycle.
+
 ## Examples
 
 ```text

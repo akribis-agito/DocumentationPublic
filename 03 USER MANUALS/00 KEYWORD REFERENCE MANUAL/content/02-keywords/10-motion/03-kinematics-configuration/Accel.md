@@ -43,7 +43,7 @@ Acceleration rate for point-to-point motion, in user units per second squared.
 
 ### Effective acceleration each cycle
 
-The profiler runs once per control cycle (16,384 Hz on v4 central-i; sample time ≈ 61 µs). On every cycle it forms the **effective acceleration** as the product of `Accel` and the integer scaling factor [AccelFact](AccelFact.md):
+The profiler runs once per control cycle (the standard servo rate is 16,384 Hz, sample time ≈ 61 µs). On every cycle it forms the **effective acceleration** as the product of `Accel` and the integer scaling factor [AccelFact](AccelFact.md):
 
 $$
 \text{Accel}_{\text{eff}} = \text{Accel} \cdot \text{AccelFact}
@@ -79,6 +79,17 @@ The same `Accel_eff = Accel × AccelFact` construction is used in jog mode and j
 ### Acceleration shaping
 
 If acceleration shaping is enabled ([AccShapeOn](AccShapeOn.md) ≠ 0) the effective acceleration is additionally multiplied by a position-dependent factor interpolated from the [AccShapeDist](AccShapeDist.md)/[AccShapeFact](AccShapeFact.md) tables, so `Accel` becomes the baseline that shaping scales.
+
+### Edge cases
+
+- **Motor off:** the value is held; no profiler computation runs.
+- **Out-of-range write:** the parameter system clamps writes to `100`–`2,000,000,000` user units/s²; values outside the range are rejected.
+- **Simulation mode (`MotorType` = 5):** unchanged; the profiler runs in simulation.
+- **ModRev wrap:** unrelated — `Accel` is a kinematic rate, not a position.
+- **Active fault:** the axis is disabled and the profiler is stopped; the next `Begin` re-reads `Accel`.
+- **Other motion modes:** `Accel` is consumed by jog, PTP, repetitive PTP, PD-indirect, gear-indirect, ECAM-indirect and joystick-indirect modes. Direct modes (PD, gear, ECAM, FIFO, CNC, vector, joystick-position-direct/velocity-direct, slave, spline) ignore `Accel` because the user supplies the position commands directly; the exception is a controlled stop in those modes, which uses [EmrgDec](EmrgDec.md) rather than `Accel`.
+- **Joystick velocity direct (`MotionMode = 14`):** internally `Accel` is set very high so the response is essentially a step; the user `Accel` is only used during a stop ramp.
+- **Cannot be zero:** the minimum is `100` user units/s² to keep the profiler arithmetic finite.
 
 ## Examples
 

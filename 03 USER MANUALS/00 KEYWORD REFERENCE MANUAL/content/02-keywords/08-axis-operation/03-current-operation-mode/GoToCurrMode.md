@@ -76,6 +76,18 @@ AGoToPosMode              ; bumpless return to position control
 
 `GoToCurrMode` is rejected from CNC (multi-axis) motion and does nothing if the axis is already in current mode. It also leaves the `CurrCmdVal` / `CurrCmdSlope` / `CurrCmdHTime` tables intact — the sequence always restarts from entry 1.
 
+### Edge cases
+
+- **Already in current mode** — no-op, returns OK.
+- **CNC member** (`CNCA_MEMBER` or `CNCB_MEMBER`) — rejected with `CANT_GO_TO_CURRENT_OR_FORCE_WHEN_CNC`. Stop the CNC group first.
+- **Vector member** — not blocked at this entry point (only the [DInMode](../../05-inputs-outputs/04-digital-inputs/DInMode.md) code 18 dispatch blocks vector members). Issuing `GoToCurrMode` on a vector member is accepted; consider explicitly stopping the vector first.
+- **In motion** — accepted; the motion ends immediately with `MotionReason = MOTION_REASON_END_GO_TO_CURR` and `MotionSamples[1]` is updated.
+- **From velocity mode** — accepted; no special preparation is run (the velocity loop continues to feed the current loop until the new mode's current command takes over).
+- **From force mode** — accepted; force-mode state is left as-is and `OperationMode` flips to current; the previously running force-command sequence stops being applied.
+- **Motor off** — accepted; the mode flag changes but no power is applied until `MotorOn = 1`.
+- **Tables intact** — `CurrCmdVal` / `CurrCmdSlope` / `CurrCmdHTime` are **not** cleared by this command; the dispatcher always restarts from `CurrCmdIndex = 1`.
+- **Atomic** — the firmware disables interrupts around the mode-switch so the change is visible to all loops in a single control cycle.
+
 ## See also
 
 - [OperationMode](../01-general-keywords/OperationMode.md) — the active control mode

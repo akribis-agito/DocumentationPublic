@@ -46,8 +46,8 @@ The array index selects which status counter or bit the thread waits on:
 |----|----|----|
 | 1 | Down counter 1 | counter target (≥ 0) |
 | 2 | Down counter 2 | counter target (≥ 0) |
-| 3 | Down counter 3 | counter target (≥ 0) |
-| 4 | Down counter 4 | counter target (≥ 0) |
+| 3 | Down counter 3 | **not implemented** in current firmware — selecting this index raises a "no such operation" user-program error |
+| 4 | Down counter 4 | **not implemented** in current firmware — selecting this index raises a "no such operation" user-program error |
 | 5 | Up counter 1 | counter target (≥ 0) |
 | 6 | Up counter 2 | counter target (≥ 0) |
 | 7 | In motion | 0 or 1 |
@@ -60,9 +60,9 @@ The array index selects which status counter or bit the thread waits on:
 | 14 | In ECAM stop | 0 or 1 |
 | 15 | In FIFO stop | 0 or 1 |
 | 16 | Commutation done | 0 or 1 |
-| 17 | In target | 0 or 1 |
-| 18 | Recording trigger detected | 1 or 2 |
-| 19 | Recording completed | 1 or 2 |
+| 17 | In target | 0 or 1 (the wait always ends when the axis settles in target, i.e. when [InTargetStat](../../10-motion/05-motion-status/InTargetStat.md) reaches `4` — `TARGET_REACHED`; the supplied value is range-checked but does not change the condition tested) |
+| 18 | Recording trigger detected | scope number `1` or `2` — the wait ends when [RecStat](../../19-data-recording/RecStat.md) of that scope reaches `3` (trigger detected) |
+| 19 | Recording completed | scope number `1` or `2` — the wait ends when [RecStat](../../19-data-recording/RecStat.md) of that scope reaches `4` (recording complete); a stop without a trigger leaves the status at `5` or `6` and the wait does **not** end |
 | 20 | Digital input 1 | 0 or 1 |
 | 21 | Digital input 2 | 0 or 1 |
 | 22 | Digital input 3 | 0 or 1 |
@@ -81,7 +81,7 @@ The array index selects which status counter or bit the thread waits on:
 ## Examples
 
 ```text
-AWaitStatus[17],1   ; hold until the axis reaches and settles in target (In target = 1)
+AWaitStatus[17],1   ; hold until the axis settles in target (in-target status reaches "target reached"; the assigned value is range-checked but does not change the test)
 AWaitStatus[7],0    ; hold until motion has stopped (In motion = 0)
 AWaitStatus[20],1   ; hold until digital input 1 is high
 ```

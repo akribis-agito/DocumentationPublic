@@ -44,6 +44,13 @@ Performs a software power cycle; flash parameters are reloaded on restart.
 
 On the subsequent start-up the firmware re-initializes, runs [Load](Load.md) to restore the saved parameters, and — if [AutoExec](AutoExec.md) is set and a user program is present — begins running that program. Because flash is reloaded, any unsaved edits are discarded; run [Save](Save.md) first if you want your current settings to survive the reset.
 
+## Edge cases
+
+- **Motor on / in motion.** Rejected — the interpreter returns an error. Stop the axis and disable the motor before resetting.
+- **Unsaved edits.** Lost on `Reset` — the controller comes back up with the last [Save](Save.md). Save first if you want the changes to persist.
+- **Central-i ports.** A reset of the master tears down every link; ports come back up only as [CIAutoConnect](../05-central-i/CIAutoConnect.md) drives them during start-up (or after the host re-issues [CIConnect](../05-central-i/CIConnect.md)).
+- **Host link.** The reset acknowledgement is sent first, then the controller waits about 1–2 seconds before actually restarting so the reply gets out; the host should expect the link to drop and re-open afterwards.
+
 ## Examples
 
 ```text

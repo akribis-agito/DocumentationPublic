@@ -64,6 +64,17 @@ AModeSwitchPos[1]   ; Pos recorded when the axis left position mode (entered cur
 AModeSwitchPos[2]   ; Pos recorded when the axis entered position mode
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `ModeSwitchPos[1]` and `ModeSwitchPos[2]`. `ModeSwitchPos[0]` does not exist.
+- **Read-only** — writes are rejected.
+- **Never transitioned** — until the first transition occurs the corresponding index is `0`. Treat `0` as "no transition recorded" rather than "axis was at zero".
+- **Velocity ↔ velocity** — transitions involving only velocity mode (e.g. position → velocity via [DInMode](../../05-inputs-outputs/04-digital-inputs/DInMode.md) code 16, or velocity → position) **do not** update either index; `ModeSwitchPos` tracks position ↔ current/force only.
+- **Direct `OperationMode` assignment** — writing [OperationMode](../01-general-keywords/OperationMode.md) directly while the motor is off does not always run the same paths; in particular, a direct assignment may not update `ModeSwitchPos`. Use the `GoTo*` commands or the input-driven path for guaranteed latching.
+- **Motor off** — indices reflect the last latched values; they are **not** reset by motor-off.
+- **Force-over-PIV anchor** — `ModeSwitchPos[1]` doubles as the anchor for the synthetic position reference generated during force control; changing the force-mode-entry position changes the anchor.
+- **Platform** — v5 central-i widens to 64-bit; v4 (standalone and central-i) is 32-bit.
+
 ## See also
 
 - [GoToPosMode](GoToPosMode.md) — records index 2 (entry to position mode)

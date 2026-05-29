@@ -60,6 +60,16 @@ ACurrCmdSrc=1        ; use the user-defined CurrCmdVal table
 ACurrCmdSrc=3        ; follow a master axis (slave drive, central-i v5)
 ```
 
+### Edge cases
+
+- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 1) — `CurrCmdSrc` is **not consulted**; writes take effect immediately but the new source only applies once the axis enters current mode.
+- **Out of range** — values outside the valid range (`0`–`2` on v4, `0`–`3` on v5) are accepted by the parameter table but the current generator forces `CurrRef = 0` on any unexpected value.
+- **Source 0 with no analog mapping** — if no analog input is mapped to function 2 (current command) via [AInMode](../../05-inputs-outputs/02-analog-inputs/AInMode.md), `CurrRef` reads as `0`.
+- **Source 3 on v4** — rejected by the v4 parameter table (max value is 2); attempting `CurrCmdSrc = 3` returns an out-of-range error.
+- **Master loss (source 3)** — if [CurrRefMaster](CurrRefMaster.md) points to a stopped or invalid axis the slave's `CurrRef` mirrors whatever the master holds (typically `0`).
+- **Save** — flash-saveable; reloaded at boot.
+- **Motor off** — accepted at any time; the source flag does not require the motor.
+
 ## Changes between versions
 
 central-i v5 adds source value 3 (master-axis current command), extending the valid range to 0–3 (standalone/v4: 0–2). Source 3 makes the axis a slave drive that copies the master axis' current reference; see [CurrRefMaster](CurrRefMaster.md).

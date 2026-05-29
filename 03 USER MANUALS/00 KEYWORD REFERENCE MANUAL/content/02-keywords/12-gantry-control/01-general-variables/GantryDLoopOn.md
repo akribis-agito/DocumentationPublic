@@ -53,6 +53,16 @@ AGantryDLoopOn=0     ; close the linear loop on the motor encoders (single-loop)
 AGantryDLoopOn       ; read the configured mode
 ```
 
+### Edge cases
+
+- **Motor on / in motion at write** — rejected (`NOMOTN`, `NOMTRON`). Configure the dual-loop mode before enabling either gantry member.
+- **Out of range** — values outside `0`–`1` are rejected.
+- **Set on wrong axis** — the engine reads `GantryDLoopOn` on the **master** axis (the same axis where [GantryOn](GantryOn.md) is set). Writes on a yaw or non-gantry axis are accepted but never consulted.
+- **`GantryDLoopOn = 1` without a valid [GantryFdbkSrc](../02-gantry-kinematic-feedback/GantryFdbkSrc.md)** — the load-feedback pointer falls back to zero and the linear loop has no live reference; configure `GantryFdbkSrc` before enabling gantry.
+- **Yaw loop is unchanged** — the differential (yaw) loop still runs on the motor encoders in both modes; only the linear measurement source changes.
+- **Save** — flash-saveable; reloaded at boot.
+- **Platform** — v5 central-i only. There is no dual-loop gantry on v4.
+
 ## See also
 
 - [GantryOn](GantryOn.md) — enables gantry MIMO control

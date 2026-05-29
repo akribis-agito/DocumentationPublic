@@ -60,6 +60,15 @@ APosPosTh=100000     ; position threshold (user units)
 APosPosFlag=2        ; switch to position mode when Pos > PosPosTh
 ```
 
+### Edge cases
+
+- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ∉ {1, 4}) — not evaluated. The check requires the axis to be in current or force mode.
+- **Pre-commutation** — the check is skipped until commutation completes (`StatReg` bit 0 = 1).
+- **Zero value** — disarms the check (axis stays in current/force mode).
+- **Out of range** — values outside `0`–`2` are rejected.
+- **One-shot** — automatically cleared to `0` on the cycle the switch fires; re-arm for the next entry.
+- **Save** — flash-saveable; persists across reboots.
+
 ## See also
 
 - [PosPosTh](PosPosTh.md) — position threshold compared against Pos

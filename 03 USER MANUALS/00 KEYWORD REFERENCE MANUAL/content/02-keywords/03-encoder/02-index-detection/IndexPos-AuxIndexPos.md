@@ -38,6 +38,15 @@ In **v5** the index position is held as a 64-bit value, matching the wider posit
 AIndexPos           ; read the position of the last detected index
 ```
 
+## Edge cases
+
+- **Motor off.** The capture mechanism runs whenever the encoder is being read; the index can still be latched when the axis is moved by hand with the motor disabled.
+- **Speed limit.** Detection is polled once per control cycle, so the captured position has up to one-cycle uncertainty. Move slowly enough that the index pulse spans at least one sample — see the [section overview](00-overview.md).
+- **Encoder type.** Only meaningful for `EncType=1` and `EncType=4`. Absolute encoders carry no index — `IndexPos` will not update for them.
+- **Auxiliary on multi-axis hardware.** `AuxIndexPos` updates only on single-axis hardware variants; on multi-axis controllers the auxiliary index is not detected.
+- **Central-i disconnect.** The master mirrors the remote's per-axis index bit each cycle; with the port disconnected ([CIStatus](../../01-system/05-central-i/CIStatus.md)`[1] ≠ 3`) no remote frames arrive, so `IndexPos` is not updated.
+- **Multiple indexes per move.** Each detected pulse overwrites `IndexPos` with the latest captured position. For a per-event history use the event-based logging ([LockValTable](../03-event-based-feedback-logging/LockValTable-LockValTabB.md)).
+
 ## See also
 
 - [IndexStat](IndexStat-AuxIndexStat.md) — flag indicating whether the index has been detected

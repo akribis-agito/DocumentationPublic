@@ -67,6 +67,16 @@ ALockEn=0            ; disarm when done (LockVal and LockCntr keep their last va
 
 For digital incremental and SIN/COS encoders the position is latched in hardware at the exact trigger edge, so `LockVal` is precise to the trigger instant — ideal for product registration. For absolute encoders the value is the most recently polled `Pos`, so keep axis speed low enough that the trigger does not pass between control cycles.
 
+## Edge cases
+
+- **Motor off.** Capture works whenever the encoder is being read; `LockEn=1` will latch events even when the axis is moved by hand.
+- **In motion.** Permitted to write `LockEn` while moving; the capture arms on the next cycle and the running motion is not disturbed.
+- **Already armed.** Writing `LockEn=1` while it is already `1` is a no-op — the counter and elapsed-cycle timer are reset *only* on the disabled→enabled transition.
+- **Event-generation conflict (standalone only).** On non-Central-i products the capture pin is shared with event generation. Arming `LockEn=1` forces [EventOn](../../18-event-generation/EventOn.md)=0 (and vice-versa). The Central-i remote drives have independent hardware so the two features can coexist.
+- **Tables full.** Once both [LockValTable](LockValTable-LockValTabB.md) and `LockValTabB` are full the history stops, but `LockCntr` and [LockVal](LockVal-AuxLockVal.md) keep updating on every further event. Disarm and re-arm to start over.
+- **Auxiliary encoder.** `AuxLockEn` is provided for parity, but the current firmware wires the capture mechanism to the main encoder only.
+- **Central-i disconnect.** On a disconnected port the remote drive is not feeding the lock-configuration register, and no captured positions return to the master.
+
 ## See also
 
 - [LockSrc](LockSrc-AuxLockSrc.md) — selects the trigger source and edge

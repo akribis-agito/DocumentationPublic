@@ -50,7 +50,16 @@ Each control cycle the controller reads the auxiliary encoder, computes the per-
 ### Use in dual-loop and error mapping
 
 - **Dual-loop:** when [DualLoopOn](../../11-control-tuning/02-dual-loop-control/DualLoopOn.md) = 1, the auxiliary encoder is the load-side feedback. The velocity loop uses the auxiliary velocity scaled by [DualLoopFact](../../11-control-tuning/02-dual-loop-control/DualLoopFact.md) (see [Vel](Vel.md)`[1]`), and the commutation position and its delta are taken from the auxiliary encoder.
-- **Error mapping:** an error-map encoder selection can point the map source at the auxiliary position of an axis, so the auxiliary encoder can supply the mapping coordinate.
+- **Error mapping:** an [error-map encoder](../../04-error-mapping/MapEncoder.md) selection can point the map source at the auxiliary position of an axis, so the auxiliary encoder can supply the mapping coordinate. By default, auxiliary error mapping is not enabled; contact Agito if required.
+
+### Edge cases
+
+- **Motor off:** `AuxPos` keeps tracking the auxiliary encoder reading regardless of motor state — it is a raw feedback value, not a closed-loop quantity. Only writes to `AuxPos` require the motor to be disabled.
+- **Simulation mode (`MotorType` = 5):** there is no physical aux encoder, so `AuxPos` stays at its last written value (no auto-following of an aux reference).
+- **Modulo (`ModRev`):** the modulo/continuous-rotation wrap applies only to the main feedback [Pos](Pos.md); `AuxPos` is **not** wrapped by [ModRev](../../03-encoder/04-modulo-mode/ModRev.md). For a rotary load through a gear, treat `AuxPos` as an unbounded accumulator.
+- **Gantry:** auxiliary encoders are per-axis and are not combined into the gantry common-mode feedback; they are still useful for per-axis dual-loop on each gantry leg.
+- **Out-of-range write:** the parameter system clamps writes to the declared range; values outside the range are rejected with an error rather than silently truncated.
+- **Active fault:** `AuxPos` continues to update from the auxiliary encoder even while the axis is in fault; reading it during fault is the normal way to inspect the load-side stop position.
 
 ## Examples
 

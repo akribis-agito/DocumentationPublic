@@ -50,6 +50,15 @@ During the ramp the controller sets [ForceInTStat](ForceInTStat.md) to 2 (rampin
 AForceCmdSlope[3]=700 ; ramp into entry 3 at 700 units/s
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `ForceCmdSlope[1]`–`ForceCmdSlope[20]`.
+- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 4 or [ForceCmdSrc](ForceCmdSrc.md) ∉ {1, 2}) — the slope is **not consulted**.
+- **Out of range** — `0` and negative values are rejected; minimum is `1` to guarantee progress.
+- **Large slope** — a per-cycle step larger than the remaining distance causes `ForceRef` to snap to the target on the next cycle.
+- **Reload mid-ramp** — writing a new slope on the active entry changes the rate from the next cycle.
+- **Save** — flash-saveable.
+
 ## See also
 
 - [ForceCmdVal](ForceCmdVal.md) — target force values

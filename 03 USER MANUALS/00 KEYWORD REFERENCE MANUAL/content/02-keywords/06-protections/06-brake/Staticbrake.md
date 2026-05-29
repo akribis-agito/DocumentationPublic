@@ -83,6 +83,15 @@ AStatReg                ; bit 29 sets (lock requested) immediately
 
 If the load drops on disable, increase `BrakeLockTime` so the brake fully engages before the motor torque is removed. If motion stutters at the start of a move, increase `BrakeRelTime` so the brake is fully open before the profiler starts.
 
+### Edge cases
+
+- **Motor off:** in mode `1` (manual release with protection) and `4` (input with protection) the brake re-engages when the motor goes off; in mode `2` (manual release without protection) the brake stays released even with the motor off.
+- **Mode `3` timing:** `BrakeLockTime` and `BrakeRelTime` are active **only** in mode `3`. Setting them to `0` in mode `3` defeats the timing logic — keep both ≥ a few control samples.
+- **`BrakeUsed = 0` with manual mode:** a `1→0` change of [BrakeUsed](Staticbrake.md) leaves the brake in its last state (the drive simply stops driving the output); the brake hardware then holds its current state until power loss.
+- **Range overflow:** `BrakeMode` out of range falls back to the safe default — **locked** brake.
+- **HWProtectBits / ProtectMask:** the static-brake mechanism does not raise a [ConFlt](../../07-status-and-faults/ConFlt.md) and is not maskable. The lock request is visible in [StatReg](../../07-status-and-faults/StatReg.md) bit 29.
+- **`MotorReason` and brake:** if you disable the motor and the brake reasserts the lock, [MotorReason](../../07-status-and-faults/MotorReason.md) reflects the disable cause (controller fault, DI, user program, or communication) — not the brake state.
+
 ## See also
 
 - [Dynamic brake](Dynamicbrake.md) — fast electrical braking (shorting the phases)

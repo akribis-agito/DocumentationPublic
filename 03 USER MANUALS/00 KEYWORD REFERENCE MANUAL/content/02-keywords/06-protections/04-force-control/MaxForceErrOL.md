@@ -36,12 +36,22 @@ Maximum allowable force error in open-loop force control; exceeding it faults.
 
 ## How it works
 
-The force loop applies a single active force-error limit to `|ForceErr|`; the drive swaps that limit to `MaxForceErrOL` whenever the force path is **open-loop or being signal-injected**, and to [MaxForceErr](MaxForceErr.md) for normal closed-loop control. The open-loop limit is selected when:
+The force loop applies a single active force-error limit to `|ForceErr|`; the drive swaps that limit to `MaxForceErrOL` for open-loop force operation, and to [MaxForceErr](MaxForceErr.md) for normal closed-loop control. The open-loop limit is selected when:
 
-- [OpenLoopOn](../../08-axis-operation/01-general-keywords/OpenLoopOn.md) is enabled, **or**
-- a direct signal-injection mode is active at the current-reference or force-reference injection point ([InjectType](../../13-injection/InjectType.md) / [InjectPoint](../../13-injection/InjectPoint.md)).
+- [OpenLoopOn](../../08-axis-operation/01-general-keywords/OpenLoopOn.md) is non-zero, **or**
+- a **direct** signal-injection mode is active **at the current-reference injection point** ([InjectType](../../13-injection/InjectType.md) = a direct injection type and [InjectPoint](../../13-injection/InjectPoint.md) = current reference).
 
-When the limit is exceeded in this state, the loop disables the axis and [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1057 (open-loop force error too high), distinguishing it from the closed-loop fault code 1045. Writing the keyword re-evaluates which limit is active, so the change takes effect immediately.
+Important wrong-state note: injecting **at the force-reference injection point** does **not** swap force to `MaxForceErrOL` — the force loop is still closed in that case, so `MaxForceErr` stays in force and a trip raises ConFlt code 1045. Only the position- and velocity-error limits switch to their open-loop counterparts during force-reference injection. Similarly, injection at the velocity- or position-reference point keeps force on `MaxForceErr`. See [MaxForceErr](MaxForceErr.md) for the full mapping.
+
+When the limit is exceeded in this state, the loop disables the axis and [ConFlt](../../07-status-and-faults/ConFlt.md) shows ConFlt code 1057 (open-loop force error too high), distinguishing it from the closed-loop ConFlt code 1045. Writing the keyword re-evaluates which limit is active, so the change takes effect immediately.
+
+### Edge cases
+
+- **Motor off:** the force loop does not run; the open-loop limit is not checked.
+- **Closed-loop operation:** with [OpenLoopOn](../../08-axis-operation/01-general-keywords/OpenLoopOn.md) = 0 and no direct current-reference injection, this limit is inactive — the trip uses [MaxForceErr](MaxForceErr.md) (ConFlt code 1045) instead.
+- **Range overflow:** writes outside `0…327680` are clamped to the keyword range; the in-force internal limit is updated immediately on write.
+- **Clearing the fault:** ConFlt code 1057 clears on re-enable ([MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../07-status-and-faults/ErrLog.md) entry persists.
+- **HWProtectBits / ProtectMask:** open-loop force-error trips are not maskable through [ProtectMask](../01-general-protection/ProtectMask.md) (that mask covers hardware-protection bits only).
 
 ## Examples
 

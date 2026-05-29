@@ -42,6 +42,16 @@ If `DInPortHigh = 18` (binary `…0001 0010`), bits 1 and 4 are set — so digit
 
 For a bi-directional I/O configured as an output (see [BiDirConfig](../01-general-keywords/BiDirConfig.md)), `DInPort`/`DInPortHigh` can be read back to check the output's state.
 
+### Edge cases
+
+- **Read-only** — writes are rejected. Modify input behaviour with [DInLog](DInLog-DInLogHigh.md), [DInFilt](DInFilt.md), [DInMode](DInMode.md).
+- **Unconnected inputs** — read whatever the input pull-up / pull-down enforces; combined with [DInLog](DInLog-DInLogHigh.md) the inversion mask can flip "open" to a logical "on".
+- **`DInPortHigh` on small platforms** — products without inputs 33–64 always return `0` on `DInPortHigh`; the keyword exists for software portability.
+- **Motor on/off** — sampling and debouncing run continuously regardless of `MotorOn`.
+- **Mode independence** — values are valid in every [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md); functions configured by [DInMode](DInMode.md) only consult the bits in the modes where they apply.
+- **Edge detection** — the dispatch in [DInMode](DInMode.md) compares the present and previous cycle's `DInPort`; a debounce filter that holds a transition for fewer cycles than the loop rate may miss an edge.
+- **Central-i mirror lag** — on a central-i master the input word comes from the synchronized I/O mirror; expect one mirror-period of latency relative to the remote pin.
+
 ## See also
 
 - [DInLog-DInLogHigh](DInLog-DInLogHigh.md) — per-input logic inversion

@@ -45,6 +45,15 @@ On each periodic bus-voltage check the drive compares `VBus` with `MinVBus`:
 
 > **Worked example:** with `MinVBus = 18000` (18 V), if `VBus` momentarily drops to 17 V on the next bus check the axis is disabled and `ConFlt = 1009`. Even a single sub-`MinVBus` sample trips; there is no debounce or time window. For a category-level view of where this fits relative to the over-voltage band and `MaxVBusAbs` ceiling, see the [bus-voltage protection bands](00-overview.md).
 
+### Edge cases
+
+- **Motor off:** the under-voltage check still runs (drive-level protection); a brown-out trips even when no axis is enabled.
+- **Mode dependency:** the trip runs regardless of operation mode.
+- **No delay:** `MaxVBusTime` is for the over-voltage path only; under-voltage is always immediate.
+- **Range overflow:** writes outside `11000…90000` (mV) are clamped to the keyword `range`.
+- **Clearing the fault:** ConFlt code 1009 clears on re-enable ([MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 1, once the supply has recovered) or by writing `AConFlt=0`; the [ErrLog](../../07-status-and-faults/ErrLog.md) entry persists.
+- **HWProtectBits / ProtectMask:** the under-voltage trip is not maskable through [ProtectMask](../01-general-protection/ProtectMask.md).
+
 ## Examples
 
 ```text

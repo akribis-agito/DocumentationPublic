@@ -121,6 +121,17 @@ Interpretation:
 - `MotionReason = 5` and `LimitsStat = 2` — the **forward limit switch** is active and stopped the move; the FLS bit is still set, so the axis is sitting on the switch.
 - `MotionReason = 1` and `LimitsStat = 0` — the move ended normally via [Stop](../04-motion-command/Stop.md); no protection event.
 
+### Edge cases
+
+- **Motor off:** `MotionReason` is preserved from the last move (helpful for fault forensics).
+- **Out-of-range "write":** `MotionReason` is read-only.
+- **Simulation mode (`MotorType` = 5):** codes are written the same way.
+- **ModRev wrap:** unrelated.
+- **Active fault:** the reason captured before the fault is preserved; the fault path may also set `MotionReason = 8` (motor disabled).
+- **Other motion modes:** reason codes 9–17 and 18–40 are mode-specific (ECAM, FIFO, homing, group members).
+- **First-cause semantics:** once a non-zero value is written, subsequent stop conditions in the same move do not overwrite it; this matches the firmware "only the first stop cause is recorded" behaviour.
+- **Reset by `Begin`:** `MotionReason` is forced to `0` at every `Begin` (and by homing), so a stale value never carries into the next move.
+
 ## See also
 
 - [MotionStat](MotionStat.md) — detailed bit-mapped motion status

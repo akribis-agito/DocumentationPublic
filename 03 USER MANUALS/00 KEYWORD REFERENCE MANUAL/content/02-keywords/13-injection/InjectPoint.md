@@ -38,10 +38,10 @@ Selects which command signal the injected waveform is applied to.
 
 | Value | Injection location | Location in block diagram |
 |----|----|----|
-| 0 | Current command | see [Control tuning – Current control](../../02-keywords/11-control-tuning/06-current-control/00-overview.md) |
-| 1 | Velocity command | see [Control tuning – Velocity control](../../02-keywords/11-control-tuning/04-velocity-control/00-overview.md) |
-| 2 | Position command | see [Control tuning – Position control](../../02-keywords/11-control-tuning/03-position-control/00-overview.md) |
-| 3 | Force command | see [Control tuning – Force control](../../02-keywords/06-protections/04-force-control/00-overview.md) |
+| 0 | Current command | see [Control tuning – Current control](../11-control-tuning/06-current-control/00-overview.md) |
+| 1 | Velocity command | see [Control tuning – Velocity control](../11-control-tuning/04-velocity-control/00-overview.md) |
+| 2 | Position command | see [Control tuning – Position control](../11-control-tuning/03-position-control/00-overview.md) |
+| 3 | Force command | see [Control tuning – Force control](../06-protections/04-force-control/00-overview.md) |
 
 The injected value enters the selected command at the point where that loop's reference is formed. With a **direct** [InjectType](InjectType.md) the upstream signal is discarded and the command becomes the injection value alone; with an **additive** type the injection is summed onto the command coming from the upstream loop. The amplitude scaling depends on the selected point:
 

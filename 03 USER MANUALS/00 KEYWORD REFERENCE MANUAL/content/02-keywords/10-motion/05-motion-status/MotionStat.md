@@ -94,6 +94,16 @@ AMotionStat                       ; read the current motion status word
 
 Check whether axis A is actively moving (not just stopping) by masking with `0x9` and comparing to `0x1`; detect the deceleration phase with `(AMotionStat & 0x20)`.
 
+### Edge cases
+
+- **Motor off:** the whole word is cleared to `0` (no motion in progress).
+- **Out-of-range "write":** `MotionStat` is read-only.
+- **Simulation mode (`MotorType` = 5):** bits behave identically; the simulated profiler still drives the bit transitions.
+- **ModRev wrap:** unrelated; the bits track the profiler state, not position.
+- **Active fault:** the motor is disabled, all bits cleared.
+- **Other motion modes:** mode-specific bits appear only for the relevant modes (e.g. bit 2 only in repetitive PTP, bits 10–15 only for CNCA/B groups, bits 17 only in spline-buffer, bit 20 only in v5 jog approaching software limit).
+- **Read during a stop ramp:** bits 0 (in-motion) and 3 (stop-request) coexist while the profiler decelerates; bit 0 clears only after the smoothing tail completes.
+
 ## See also
 
 - [MotionReason](MotionReason.md) — reason the previous motion stopped (set when several of these stop bits trigger)

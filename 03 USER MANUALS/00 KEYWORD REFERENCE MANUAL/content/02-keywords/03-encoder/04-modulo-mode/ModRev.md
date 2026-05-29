@@ -79,6 +79,17 @@ AModRev=3000         ; wrap feedback to [0, 2999]
 AModRev=0            ; disable modulo mode
 ```
 
+## Edge cases
+
+- **Motor on / in motion.** Writes are rejected. Stop the axis and disable the motor before changing the divisor; once it is changed the wrap takes effect immediately, with `PosErr` preserved as the whole reference frame shifts.
+- **Half-revolution per cycle.** The wrap subtracts/adds exactly one `ModRev` per control cycle; if the axis travels more than `ModRev/2` in one sample the position still converges back into range after a few cycles, but the boundary behaviour is undefined.
+- **Input shaping.** Modulo is incompatible with [ShapingOn](../../11-control-tuning/08-input-shaping/ShapingOn.md); enabling both faults on motor-on.
+- **Software limits.** `ModRev` must lie inside the software position limits — it is rejected if outside `[RevPLim, FwdPLim]`.
+- **SetPosition.** Permitted, but values should be inside `[0, ModRev)`; out-of-range presets are pulled back into range over a few subsequent cycles.
+- **Auxiliary encoder.** Modulo is implemented for the main encoder only; [AuxModRev](../01-general-settings/AuxModRev.md) is defined but not consumed in current firmware, so the auxiliary feedback does not wrap.
+- **ECAM slave.** When an axis is an active ECAM slave whose master is `Pos`/`PosRef`, the slave wraps coupled with its master rather than independently.
+- **Central-i disconnect.** `ModRev` is a master-side setting; with the port disconnected the master's wrap arithmetic continues to operate on whatever `Pos` it last received.
+
 ## Changes between versions
 
 `ModRev` itself is a 32-bit value on all versions. What differs is the position it wraps:

@@ -60,6 +60,17 @@ AGantryAccFFW=1000  ; set acceleration feedforward gain
 AGantryAccFFW      ; read the current gain
 ```
 
+### Edge cases
+
+- **Gantry off** — writes accepted; the gain has no effect until [GantryOn](../01-general-variables/GantryOn.md) = 1.
+- **Wrong mode** — acceleration feedforward is only applied while in [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) = 3 (position); current / force / velocity modes ignore it.
+- **Zero gain** — disables yaw acceleration feedforward.
+- **Wrong axis** — consulted on the yaw axis of the pair; writes on the master or a non-gantry axis are accepted but not used.
+- **Out of range** — values outside `0`–`500000` (v4) / `0`–`50000000` (v5 per-element) are rejected.
+- **Mismatched with [GantryVelFFW](GantryVelFFW.md)** — large acceleration feedforward without an appropriate velocity feedforward can produce a yaw torque ahead of the velocity correction; tune the two together.
+- **Save** — flash-saveable.
+- **Platform** — v5 stores as a 6-element gain-scheduled `float32` array; v4 stores as a single `int32`.
+
 ## See also
 
 - [GantryPosGain](GantryPosGain.md) — yaw position-loop proportional gain

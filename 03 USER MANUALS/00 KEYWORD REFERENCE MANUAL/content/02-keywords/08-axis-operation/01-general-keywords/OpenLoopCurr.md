@@ -53,6 +53,18 @@ AOpenLoopOn=1        ; enter current open loop
 AOpenLoopCurr=1000   ; apply a 1000 mA current reference
 ```
 
+### Edge cases
+
+- **Wrong mode** ([OpenLoopOn](OpenLoopOn.md) ≠ 1) — the value is **forced to `0` every cycle**; the current loop does not use it.
+- **Motor off** — the value is forced to `0` every motor-off cycle, so re-enabling the motor never finds a residual command.
+- **In motion at write** — rejected (`NOMOTN`). The keyword may be changed while the motor is on (since the open-loop mode itself requires the motor to engage afterwards), but not while a motion profile is running.
+- **Out of range** — values outside the drive's ±full-scale current command are rejected by the parameter table.
+- **Gantry** — the value is applied per-motor without the decoupling matrix; in a gantry the same value drives both members directly, with no common/differential split.
+- **UPM/cogging compensation** — added on top of `OpenLoopCurr` even in open-loop, so the commanded current per-cycle may not match `OpenLoopCurr` exactly when [UPMVelTable](../../09-current-and-voltage/03-current-compensation/UPMVelTable.md) is non-zero.
+- **DC offset** — [CurrRefOffset](../../09-current-and-voltage/03-current-compensation/CurrRefOffset.md) is still applied; subtract it from `OpenLoopCurr` if you want the raw value to drive the loop.
+- **Save** — not flash-saveable; restarts at `0` after reset.
+- **Platform** — v5 stores as `float32` (fractional mA); v4 stores as `int32`.
+
 ## Changes between versions
 
 In **v5 (central-i)** `OpenLoopCurr` is stored as a 32-bit float rather than the v4 integer, so a fractional milliampere reference can be commanded; the range and behaviour are otherwise unchanged. **v5 is central-i only** — on the standalone product `OpenLoopCurr` remains the v4 integer value.

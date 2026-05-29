@@ -42,7 +42,7 @@ See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all r
 
 When the controller reaches this segment, it computes the constant acceleration needed to travel the requested delta over the active [FIFOCycleTime](FIFOCycleTime.md), starting from the current velocity. It then ramps the velocity by that acceleration each control sample, advancing the position reference accordingly, so the delta is reached on the final sample. The evolving velocity and acceleration are reported in [FIFOStatus](FIFOStatus.md) (indexes 4 and 5).
 
-If the delta and cycle time resolve to an acceleration below the smallest the controller can represent (one position unit per second, per second), the segment faults the motion.
+If the delta and cycle time resolve to an acceleration of magnitude below 16 384 counts/s² (one control-sample frequency at the standard 16 384 Hz rate — the smallest acceleration the per-sample velocity step can resolve), the segment faults the motion.
 
 ### Worked example
 

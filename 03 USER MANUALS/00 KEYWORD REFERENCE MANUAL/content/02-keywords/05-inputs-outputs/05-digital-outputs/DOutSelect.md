@@ -69,6 +69,16 @@ ADOutSelect[3]=0     ; output 3 is software-controlled (uses DOutMode[3])
 ADOutSelect[4]=2     ; output 4 = Main Event #1 (Central-i) / A event #1 (standalone)
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `DOutSelect[1]`–`DOutSelect[16]`. `DOutSelect[0]` does not exist.
+- **Out of range** — values outside `0`–`15` are rejected by the parameter table.
+- **Non-zero `DOutSelect`** — overrides [DOutMode](DOutMode.md) and [DOutPort](DOutPort.md) for that output; the hardware function drives the pin directly at the FPGA clock rate.
+- **Unimplemented function** — codes marked "not implemented" or "reserved" produce no useful output on the addressed pin.
+- **Software-only path** — `DOutSelect = 0` is required for [DOutPort](DOutPort.md) bit manipulation and [DOutMode](DOutMode.md) function dispatch.
+- **Save** — flash-saveable; reloaded into the routing MUX at boot.
+- **Platform** — function-code-to-source mapping differs between standalone and central-i; see the table above.
+
 ## See also
 
 - [DOutMode](DOutMode.md) — software function (when DOutSelect = 0)

@@ -56,6 +56,17 @@ AForceCmdHTime[1]=400 ; hold first entry for 400 ms
 AForceCmdHTime[2]=0   ; exit force mode after the second entry
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `ForceCmdHTime[1]`–`ForceCmdHTime[20]`.
+- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 4) — the table is **not consulted**.
+- **Zero value** — exits force mode at that entry; with `ForcePIVOn = 1` the velocity integrator is seeded on exit to avoid a current-ref jump.
+- **Negative value** — holds indefinitely; only an explicit mode change leaves the entry.
+- **End of table (index 20 with positive HTime)** — the firmware holds the last value indefinitely.
+- **Counter saturation** — [ForceCmdCntr](ForceCmdCntr.md) is clamped at 2 000 000 000 to avoid roll-over.
+- **Analog source** ([ForceCmdSrc](ForceCmdSrc.md) = 0) — only `ForceCmdHTime[1]` is consulted; the rest of the array is unused.
+- **Save** — flash-saveable.
+
 ## See also
 
 - [ForceCmdVal](ForceCmdVal.md) — force values paired with these holding times

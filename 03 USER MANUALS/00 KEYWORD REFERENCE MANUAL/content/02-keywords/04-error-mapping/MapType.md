@@ -53,8 +53,8 @@ Each cycle the controller records `PosBeforeMap` (the decoded main-encoder posit
 
 Writing `MapType` does **not** switch the correction on or off abruptly. The controller keeps a separate internal copy of the active type and a 0..1 ramp counter:
 
-- **Engaging** (write `MapType` 1/2/3 from 0): the internal type is set immediately and the ramp counter starts at 0, climbing toward full scale (`16384`) at a rate set by [MapErrOnStep](MapErrOnStep.md). Until it reaches full scale the correction is scaled by `counter / 16384`, so the correction (and the [MapErrOffset](MapErrOffset.md) component) fades in smoothly with no position step.
-- **Disengaging** (write `MapType` 0): the user value goes to 0 but the internal type stays active and the correction ramps **down**; only when the counter reaches 0 does the internal type revert to off. With `MapErrOnStep = 0` the change is immediate (one cycle).
+- **Engaging** (write `MapType` 1/2/3 from 0): the internal type is set immediately and the ramp counter starts at 0, climbing toward full scale (one sample-rate period, `SAMPLES_PER_SECOND` — e.g. `16384` on C2000 builds) at a rate set by [MapErrOnStep](MapErrOnStep.md). Until it reaches full scale the correction is scaled by `counter / SAMPLES_PER_SECOND`, so the correction (and the [MapErrOffset](MapErrOffset.md) component) fades in smoothly with no position step.
+- **Disengaging** (write `MapType` 0): the user value goes to 0 but the internal type stays active and the correction ramps **down**; only when the counter reaches 0 does the internal type revert to off. With [MapErrOnStep](MapErrOnStep.md) = 0 the engage / disengage transition is immediate (one cycle).
 
 This ramp logic is shared by all of `MapType`, [MapErrOnStep](MapErrOnStep.md), [MapErrOffset](MapErrOffset.md), and [MapErrOffRamp](MapErrOffRamp.md). Engaging can also be performed automatically during a homing sequence.
 
@@ -69,6 +69,17 @@ AMapType=1           ; enable 1D error mapping
 AMapType=0           ; disable error mapping (ramps out per MapErrOnStep)
 AMapType             ; read the active mapping mode
 ```
+
+### Edge cases
+
+- **Motion in progress** — `ok_in_motion = false`. Writes during motion are rejected; the change must be made while the axis is standing.
+- **Phasing complete** — mapping operates on the post-commutation feedback path; in practice the axis must already be commutated for mapping to make sense.
+- **Simulation motor** — mapping is **skipped entirely** when [MotorType](../03-motor-type/MotorType.md) = simulation, because feeding the corrected position back into the simulated encoder would close a loop with the position reference. `Pos = PosBeforeMap` in this case regardless of `MapType`.
+- **Wrong dimension** — values outside `0`–`3` are rejected at the parameter table.
+- **Multi-dim (`MapType` = 2 or 3)** — additional encoder axes referenced by [MapEncoder](MapEncoder.md)`[2]`/`[3]` must be motor-on, not moving, and pointing at **main** encoders; otherwise the table build raises a "must be main encoders" / "must be first encoder" event.
+- **First-encoder constraint** — [MapEncoder](MapEncoder.md)`[1]` must point at this axis's own main encoder; otherwise the table build is rejected.
+- **`MapErrOnStep = 0`** — engage / disengage is immediate; useful for tests but produces a position step.
+- **Motor off** — the user-visible `MapType` can be written (`ok_motor_on = true`); the ramp counter continues to update so re-enabling the motor finds the engagement smooth.
 
 ## See also
 

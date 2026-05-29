@@ -55,6 +55,16 @@ AForceCmdSrc=0       ; follow the analog force reference input
 AForceCmdSrc=1       ; use the user-defined ForceCmdVal table
 ```
 
+### Edge cases
+
+- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 4) — `ForceCmdSrc` is **not consulted**; writes take effect immediately but the new source only applies once the axis enters force mode.
+- **Out of range** — values outside `0`–`2` are rejected by the parameter table.
+- **Source 0 with no analog mapping** — if no analog input is mapped to function 4 (force command) via [AInMode](../../05-inputs-outputs/02-analog-inputs/AInMode.md), `ForceRef` reads as `0`.
+- **No master-source equivalent** — unlike [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md), force mode does **not** have a master-axis source (no `ForceCmdSrc = 3`).
+- **In-target detection** — [ForceInTStat](ForceInTStat.md) is only updated when `ForceCmdSrc = 1` or `2`; with `ForceCmdSrc = 0` there is no defined settling target so `ForceInTStat` stays at the motor-on state.
+- **Save** — flash-saveable; reloaded at boot.
+- **Motor off** — accepted at any time; the source flag does not require the motor.
+
 ## See also
 
 - [ForceCmdVal](ForceCmdVal.md) — user-defined force values (sources 1/2)

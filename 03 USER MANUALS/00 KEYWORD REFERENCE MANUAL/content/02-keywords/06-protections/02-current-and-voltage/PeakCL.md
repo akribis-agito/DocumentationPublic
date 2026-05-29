@@ -47,6 +47,16 @@ Every control cycle the drive forms the effective absolute current-command limit
 
 `PeakCL` must be greater than [ContCL](ContCL.md); if `ContCL` ≥ `PeakCL` the firmware uses an effective continuous limit of `PeakCL / 2` (see [ContCL](ContCL.md)).
 
+### Edge cases
+
+- **Motor off:** the saturation does not actively clamp (no `CurrRef` is being generated), but the precomputed limit and the warning thresholds remain in force for the next motor-on.
+- **Mode dependency:** the absolute clamp applies whenever the current loop is active (or `CurrRef` is being driven out to an external current-mode amplifier).
+- **Saturation indication:** clamping sets [StatReg](../../07-status-and-faults/StatReg.md) bit 21 (current saturation).
+- **Interaction with I²t:** while [ContCL](ContCL.md)'s I²t limitation is engaged, the effective absolute clamp is lowered from `PeakCL` to the continuous-current value.
+- **Warning thresholds:** the precomputed `0.88·PeakCL`, `0.92·PeakCL`, `0.96·PeakCL` band edges feed the [StatReg](../../07-status-and-faults/StatReg.md) current-warning field (bits 9–10).
+- **Range overflow:** writes outside `20…64000` (v4) are clamped to the keyword `range`.
+- **HWProtectBits / ProtectMask:** the current saturation is not a trip and not maskable.
+
 ## Changes between versions
 
 In **v4** `PeakCL` is a 32-bit integer; in **v5** (central-i only) it is a 32-bit float (`float32`). The saturation and I²t roles are unchanged.

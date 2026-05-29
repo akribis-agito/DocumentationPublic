@@ -48,6 +48,15 @@ Starting from `DOutPort = 6` (`0b0110`):
 
 ![DOutPortSBit / CBit / TBit applied to DOutPort = 6, showing the resulting output bits](doutport-bit-ops.svg)
 
+### Edge cases
+
+- **Output under software control required** — these operate on the `DOutPort` bit; if the addressed output is driven by a function ([DOutMode](DOutMode.md)`[i] ≠ 0`) or hardware route ([DOutSelect](DOutSelect.md)`[i] ≠ 0`), the function/route rewrites the bit on the next control cycle and the manual change is lost.
+- **Motor on/off** — these operations are independent of `MotorOn`; the bit is set/cleared/toggled regardless of servo state.
+- **Mode independence** — these operations are independent of [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) and are accepted while in motion.
+- **Out-of-range index** — `index − 1` is shifted left into a 32-bit word; indices outside the physical output range still execute the bitwise operation but address a non-routed bit.
+- **Inverted output** ([DOutLog](DOutLog.md) bit set for this output) — the polarity inversion is applied after the manual bit value reaches the pin, so a "set" command can produce a low pin level.
+- **Simulation** — operates the same way; no hardware effect.
+
 ## See also
 
 - [DOutPort](DOutPort.md) — the underlying output bitfield these modify

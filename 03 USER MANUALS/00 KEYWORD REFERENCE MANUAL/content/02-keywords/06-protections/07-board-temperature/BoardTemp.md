@@ -64,6 +64,16 @@ if (BoardTemp > 75 °C)   →   disable axis, raise the board over-temperature f
 
 On newer Central-i remote units the board-temperature band edges come from a per-axis limit instead of these fixed values.
 
+### Edge cases
+
+- **Motor off:** like [MaxPwrTemp](MaxPwrTemp.md), the over-temperature trip is gated on motor-on, so a board overheat with the axis disabled does not trip — the fault only fires the next time you re-enable.
+- **Simulation mode:** the trip is skipped in simulation.
+- **No sensor (AGC301, etc.):** I²C returns 255 → `BoardTemp` is reported as 0 °C and the fixed-75 °C trip never fires.
+- **Fixed limit:** the board limit is **not** configurable on standalone v4 — it is the fixed 75 °C constant. Only [MaxPwrTemp](MaxPwrTemp.md) is user-settable.
+- **Shared warning field:** [StatReg](../../07-status-and-faults/StatReg.md) bits 11–12 carry the higher of [PwrTemp](PwrTemp.md) and `BoardTemp` warning levels.
+- **Clearing the fault:** ConFlt code 1060 clears on re-enable ([MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../07-status-and-faults/ErrLog.md) entry persists.
+- **HWProtectBits / ProtectMask:** the board over-temperature trip is not maskable through [ProtectMask](../01-general-protection/ProtectMask.md).
+
 ## Examples
 
 ```text

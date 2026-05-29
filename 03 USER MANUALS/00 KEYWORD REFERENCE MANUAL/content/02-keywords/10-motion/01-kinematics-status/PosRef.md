@@ -68,6 +68,16 @@ While the motor is off the controller forces the reference to track the live fee
 
 If [ModRev](../../03-encoder/04-modulo-mode/ModRev.md) ≠ 0, when the feedback wraps the controller shifts the **whole reference frame** by `ModRev` in the same control cycle — the raw, smoothed, shaped and all of the shaped/filtered history values are offset together — so the following error is preserved across the wrap and `PosRef` stays inside the modulo frame.
 
+### Edge cases
+
+- **Motor off:** the reference is forced to follow [Pos](Pos.md); the profiler is bypassed.
+- **Simulation mode (`MotorType` = 5):** the profiler runs as usual and [Pos](Pos.md) is forced equal to `PosRef`; the references are otherwise unchanged.
+- **Software position limit hit:** `PosRef` is clamped to the limit (`PosErr` builds against the live feedback up to [MaxPosErr](../../06-protections/03-motion/general-maximum-limits/MaxPosErr.md), so a sustained block can still trigger a fault).
+- **ModRev wrap:** all reference-pipeline stages and the gear-master are shifted together; `PosRef` stays inside `[0, ModRev)`.
+- **Out-of-range write:** `PosRef` is read-only — writes are rejected.
+- **Active fault:** axis disabled, `PosRef = Pos` is enforced.
+- **Dual-loop / gantry:** `PosRef` itself is per-axis; the gantry common-mode/phase split happens downstream when computing [PosErr](PosErr.md) against [GantryFdbk](../../12-gantry-control/02-gantry-kinematic-feedback/GantryFdbk.md).
+
 ## Examples
 
 ```text

@@ -45,7 +45,16 @@ This time-windowed trip tolerates brief over-voltage transients (e.g. regenerati
 
 ![Timeline showing VBus rising above MaxVBus, the over-voltage timer accumulating, and the trip firing when the timer reaches MaxVBusTime with the axis still over the limit](maxvbus-time-window.svg)
 
-For warning purposes the drive also reports a multi-level VBus warning in `StatReg` (bits 7–8) as `VBus` approaches the limit, at 0.88 / 0.92 / 0.96 × `MaxVBus` (low / medium / high).
+For warning purposes the drive also reports a multi-level VBus warning in [StatReg](../../07-status-and-faults/StatReg.md) (bits 7–8) as `VBus` approaches the limit, at 0.88 / 0.92 / 0.96 × `MaxVBus` (low / medium / high).
+
+### Edge cases
+
+- **Motor off:** the bus-voltage check still runs (this protects the drive hardware, not just the moving motor) — a sustained over-voltage trips even when no axis is enabled.
+- **Mode dependency:** the trip runs regardless of operation mode.
+- **`MaxVBusTime = 0`:** the trip fires on the first bus check at or above `MaxVBus`, effectively instant (same speed as [MaxVBusAbs](MaxVBusAbs.md) but using `MaxVBus` as the threshold).
+- **Range overflow:** writes outside `12000…95000` (mV) are clamped to the keyword `range`. Set `MaxVBus` below [MaxVBusAbs](MaxVBusAbs.md) so the timed band acts first on normal regen transients.
+- **Clearing the fault:** ConFlt code 1008 clears on re-enable ([MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../07-status-and-faults/ErrLog.md) entry persists.
+- **HWProtectBits / ProtectMask:** the bus-voltage trip is not maskable through [ProtectMask](../01-general-protection/ProtectMask.md).
 
 > **Worked example:** with `MaxVBus = 80000` (80 V) and `MaxVBusTime = 200` (ms), if `VBus` rises to 82 V and stays there for 250 ms, the timer reaches 200 ms while still over the limit and the axis is disabled with `ConFlt = 1008`. A regeneration spike that briefly hits 82 V for 50 ms and then drops back to 70 V resets the timer and does not trip — but it *will* trip immediately if it ever exceeds [MaxVBusAbs](MaxVBusAbs.md) (no delay).
 

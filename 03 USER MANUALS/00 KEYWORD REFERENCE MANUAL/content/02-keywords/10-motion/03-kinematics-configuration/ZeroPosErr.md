@@ -48,6 +48,16 @@ If the axis is in motion when `ZeroPosErr` is issued, the controller first perfo
 - **Not allowed during multi-axis motion** — CNCA, CNCB, vector or spline-buffer modes are rejected; only simple single-axis motion modes are permitted.
 - The same checks as [SetPosition](SetPosition.md) apply: encoder error mapping off, auto-gain off, the (resulting) position within the software limits, and input shaping off while the motor is on.
 
+### Edge cases
+
+- **Motor off:** the command is a no-op (the reference already tracks the feedback).
+- **Out-of-range:** the resulting `PosRef = Pos` is checked against `[RevPLim, FwdPLim]` via the shared [SetPosition](SetPosition.md) conditions; if `Pos` happens to be outside the limits the command is rejected.
+- **Simulation mode (`MotorType` = 5):** `Pos` is forced to follow `PosRef`, so `PosErr` is already zero and the operation is benign.
+- **ModRev wrap:** if a wrap happens during the operation, the wrap shifts both sides together; the resulting `PosRef = Pos` is preserved.
+- **Active fault:** the axis is disabled (motor off), so the command is a no-op.
+- **In-motion behaviour:** the in-progress single-axis move is **aborted** (no ramp), then `PosRef` is snapped to `Pos`. Multi-axis motion modes are rejected. The user is responsible for ensuring the load is not actually moving; if it is, the snap will produce a step in `PosErr` and likely a fault.
+- **Other motion modes:** allowed only for simple single-axis modes (jog/PTP/PD/gear/ECAM/joystick/FIFO/slave); CNCA/CNCB/vector/spline rejected.
+
 ## Examples
 
 ```text

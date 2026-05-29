@@ -79,6 +79,14 @@ ACIIdentity[5]      ; number of digital inputs on the remote
 ACIIdentity[8]      ; number of analog inputs on the remote
 ```
 
+## Edge cases
+
+- **Motor off / on / in motion.** Read-only; reading is permitted in any motor state.
+- **Before connect / after [CIDisconnect](CIDisconnect.md).** Contents are zeroed and are not meaningful — wait for [CIStatus](CIStatus.md)`[1] = 3` before relying on the array.
+- **Simulation device.** When [CIDeviceType](CIDeviceType.md) selects a simulation class, no real remote is read; the master writes default channel counts into `[5]`–`[9]` so host tooling still sees a plausible interface, and the remaining electrical/version fields stay zero.
+- **Standalone product.** Central-i is the master-side feature; on a standalone controller there is no remote to identify.
+- **Reconnect with a different device.** Changing [CIDeviceType](CIDeviceType.md) while connected forces a disconnect, which clears `CIIdentity`; the new identity is filled when the next [CIConnect](CIConnect.md) reaches the *Get device* stage.
+
 ## Changes between versions
 
 v5 (the Central-i-only, 64-bit firmware) extends the array to 24 elements, adding one further field:

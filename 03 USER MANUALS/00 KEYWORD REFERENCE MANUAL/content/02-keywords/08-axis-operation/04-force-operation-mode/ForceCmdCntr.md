@@ -54,6 +54,16 @@ AForceCmdCntr       ; read elapsed time (ms)
 AForceCmdCntr=0      ; restart the timer
 ```
 
+### Edge cases
+
+- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 4) — not advanced.
+- **Sources 1/2 during ramp** — held at `0` while [ForceCmdSlope](ForceCmdSlope.md) is ramping; only starts counting once `ForceRef = ForceCmdVal[index]`.
+- **Saturation** — clamped at `2 000 000 000` to avoid roll-over.
+- **Clamped index (20)** — counter is left running, not reset.
+- **Manual write** — allowed while in force mode; can restart a hold or short-circuit a long hold.
+- **GoToForceMode** — resets the counter to `0`; direct `OperationMode = 4` does not.
+- **Save** — not flash-saveable.
+
 ## See also
 
 - [ForceCmdHTime](ForceCmdHTime.md) — holding time compared against this counter

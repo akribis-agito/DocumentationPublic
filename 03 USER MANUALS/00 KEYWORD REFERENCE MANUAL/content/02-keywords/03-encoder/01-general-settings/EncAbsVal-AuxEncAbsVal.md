@@ -33,6 +33,15 @@ AEncAbsVal              ; read the processed absolute value
 AAuxEncAbsVal           ; read the processed auxiliary absolute value
 ```
 
+## Edge cases
+
+- **Motor off.** The absolute reading runs whenever the encoder interface is active; `EncAbsVal` updates every cycle regardless of motor state.
+- **Power-up seed.** At the first few cycles after power-up (and, on Central-i, the first cycles after the port is configured) the firmware seeds the accumulated position from `EncAbsVal + EncAbsOff`. Read `EncAbsVal` immediately on boot to obtain the raw masked, direction-handled word.
+- **Encoder type.** Meaningful for absolute encoders (`EncType=3`, `6`, `8`) and for analog position feedback (`EncType=7`, where the analog reading is run through the same direction-handling code path). For incremental/SIN-COS types the value is not produced.
+- **Central-i disconnect.** With the port disconnected ([CIStatus](../../01-system/05-central-i/CIStatus.md)`[1] ≠ 3`) no remote frames arrive and the firmware cannot refresh `EncAbsVal`; the keyword holds its last-applied value.
+- **Write attempts.** Read-only — assignments are rejected.
+- **After EncDir / EncAbsMB / EncAbsBits change.** Take a fresh reading; the value is recomputed from the new mask and direction starting on the next cycle.
+
 ## See also
 
 - [EncAbsMB](EncAbsMB-AuxEncAbsMB.md) — bit-masking applied before this value

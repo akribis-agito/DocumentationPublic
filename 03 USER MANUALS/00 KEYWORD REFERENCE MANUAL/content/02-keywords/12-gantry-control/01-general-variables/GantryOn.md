@@ -36,7 +36,7 @@ Enables gantry MIMO control on the A axis, slaving the A and B axes together.
 
 When gantry mode is on, motion of the gantry stage is commanded by moving the A axis. The gantry feedbacks reported by [GantryFdbk](../02-gantry-kinematic-feedback/GantryFdbk.md) and the initial offset captured in [GantryOffset](../02-gantry-kinematic-feedback/GantryOffset.md) are referenced to this mode, and the yaw correction set by [GantryYawRef](GantryYawRef.md) is applied while it is active.
 
-`GantryOn` is set on the master (linear) axis, which is the even axis of each pair — A is the master and B the yaw axis; on a multi-axis controller C/E/G can likewise be masters with D/F/H as their yaw axes. Writing `GantryOn` on a yaw axis (`BGantryOn=1`, etc.) returns an error. The two axes of a pair must always be used together. `AGantryOn` is automatically cleared to `0` whenever either motor of the pair turns off, so gantry mode is normally enabled only after both motors have been turned on and phased. It is axis-scoped and not saved to flash.
+`GantryOn` is set on the master (linear) axis, which is the **first axis of each pair**. On v4 (standalone or central-i) only the A–B pair is supported, with A as master and B as yaw. On central-i v5 the pairs A–B, C–D, E–F and G–H can all be gantries, with A, C, E and G as masters and B, D, F and H as their yaw axes. Writing `GantryOn` on a yaw axis (`BGantryOn=1`, etc.) is accepted by the parameter table but has **no effect** — the gantry engine only reads the value stored on the master axis. The two axes of a pair must always be used together. `GantryOn` on the master is automatically cleared to `0` whenever either motor of the pair turns off, so gantry mode is normally enabled only after both motors have been turned on and phased. It is axis-scoped and not saved to flash.
 
 ## How it works
 
@@ -68,6 +68,20 @@ AGantryOn=1         ; enable gantry MIMO control (A and B coordinated)
 AGantryOn=0         ; disable gantry mode; axes controlled independently
 AGantryOn          ; read whether gantry mode is active
 ```
+
+### Edge cases
+
+- **In motion at write** — rejected (`NOMOTN`). Stop both members first.
+- **Out of range** — values outside `0`–`1` are rejected.
+- **Either motor off** — the master-axis `GantryOn` is forced to `0` automatically when either member's motor turns off. To re-engage, turn both motors back on, finish their commutation, then write `GantryOn = 1` again.
+- **Mid-engage member trip** — if one motor of an engaged pair turns off mid-cycle, the firmware forces the other off and records [ConFlt](../../07-status-and-faults/ConFlt.md) = `CON_FLT_GANTRY_MEMBER_UNEXPECTED_MOTOR_OFF` (code 1061) on the still-enabled side, then clears the pair's gantry state.
+- **Written on yaw axis** — the parameter table accepts the write but the gantry engine only reads the master-axis storage; the write has no functional effect.
+- **Pair not commutated** — gantry will not produce useful behaviour if either motor's commutation is not done; check [StatReg](../../07-status-and-faults/StatReg.md) bit 0 on both members.
+- **Decoupling map** ([GantryMapType](GantryMapType.md) = 1, v5 only) — at engagement the firmware applies the map ratio to the feedback combination; transient ratio inaccuracy on engagement is smoothed by the gantry-ready-for-smoothing counter.
+- **Dual-loop gantry** ([GantryDLoopOn](GantryDLoopOn.md) = 1, v5 only) — at engagement the firmware also computes the dual-loop offset against the load feedback so the linear position does not jump.
+- **Smoothing pause** — after every `0 → 1` or `1 → 0` transition the controller temporarily disables jerk smoothing on the pair for `JERK_MAX_HISTORY_SIZE` cycles while the smoothing buffer refills with the new reference; expect a brief tracking blip.
+- **Save** — not flash-saveable; comes up `0` at every reset (user must enable after motors are on).
+- **Platform** — v4 supports only A–B; v5 central-i supports A–B, C–D, E–F, G–H.
 
 ## See also
 

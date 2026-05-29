@@ -124,6 +124,15 @@ AIdentity[4]        ; combined firmware version
 AIdentity[25]       ; feature-flag word 1
 ```
 
+## Edge cases
+
+- **Motor off / on / in motion.** Read-only; reading is permitted in any state.
+- **Power-up ordering.** Most fields are populated during the controller's initialisation pass; `Identity[2]` (serial number) and `Identity[3]` (hardware version) are filled later, after [ProductSN](ProductSN.md) has been loaded from flash. Reading these too early returns the sentinel/uninitialised value.
+- **`ProductSN` write.** Writing [ProductSN](ProductSN.md) re-copies `[1]` and `[2]` into `Identity[3]` and `Identity[2]`, so `Identity` stays in sync with the stored value.
+- **Central-i disconnect.** `Identity` describes the *master* controller; it is unaffected by any remote-port link state. For the connected remote's identity see [CIIdentity](../05-central-i/CIIdentity.md).
+- **Simulation / no remote.** The master's own identification is always present regardless of whether any Central-i port is connected.
+- **Uninitialised fields.** Some entries (manufacture date, tester code, customer code, product variant, and on multi-axis Central-i masters the per-channel current ratings) are only populated on units that programmed them; otherwise they read as an "uninitialised" sentinel.
+
 ## Changes between versions
 
 On Central-i v5 the array is larger (`array_size` = 75, vs 63 on v4 — see the frontmatter). The additional indices expose extra version information used by the Central-i system: a Central-i master version (decomposed major/minor/patch/owner/sub-version plus a combined value), the actual and expected EtherCAT-slave-information (ESI) version numbers, and the sizes of the firmware's print buffers. Indices [1]–[62] keep the same meaning on both versions.

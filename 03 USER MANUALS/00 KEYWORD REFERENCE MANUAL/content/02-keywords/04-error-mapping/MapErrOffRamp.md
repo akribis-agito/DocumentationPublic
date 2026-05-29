@@ -47,6 +47,14 @@ AMapErrOffRamp=16384 ; default slew rate (~16384 counts/s at base rate)
 AMapErrOffRamp       ; read the current slew rate
 ```
 
+### Edge cases
+
+- **Out of range** — values outside `1`–`2 147 483 647` are rejected; the minimum is `1` to guarantee progress.
+- **Mapping off** ([MapType](MapType.md) = 0) — value is stored but does not affect the feedback until mapping engages.
+- **Simulation motor** — mapping is skipped; the slew has no observable effect.
+- **In motion** — allowed; the offset continues to slew while moving.
+- **Save** — flash-saveable.
+
 ## See also
 
 - [MapErrOffset](MapErrOffset.md) — the target offset this keyword slews toward

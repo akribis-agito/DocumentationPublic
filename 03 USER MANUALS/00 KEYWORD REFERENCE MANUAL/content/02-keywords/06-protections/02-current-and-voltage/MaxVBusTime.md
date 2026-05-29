@@ -44,6 +44,15 @@ The drive keeps an over-voltage timer. On each periodic bus check, if `VBus ≥ 
 
 > **Worked example:** with `MaxVBus = 80000` (80 V) and `MaxVBusTime = 1000` (ms), a regeneration spike to 82 V for 700 ms is tolerated (the timer is reset when `VBus` falls back). The axis only trips if the bus voltage stays at or above `MaxVBus` continuously for 1000 ms.
 
+### Edge cases
+
+- **Motor off:** the timer accumulates whenever `VBus ≥ MaxVBus` regardless of `MotorOn`; over-voltage protects the drive hardware, not just the moving motor.
+- **Mode dependency:** the timer runs regardless of operation mode.
+- **`MaxVBusTime = 0`:** the over-voltage trip is effectively immediate on the next bus check (no tolerance for transients).
+- **Applies only to over-voltage:** [MinVBus](MinVBus.md) and [MaxVBusAbs](MaxVBusAbs.md) do not use this delay.
+- **Range overflow:** writes outside `0…50000` are clamped to the keyword `range`.
+- **HWProtectBits / ProtectMask:** the bus-voltage trip is not maskable through [ProtectMask](../01-general-protection/ProtectMask.md).
+
 ## Examples
 
 ```text

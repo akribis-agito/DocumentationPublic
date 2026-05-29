@@ -63,6 +63,16 @@ AMapEncoder[2]=3     ; second dimension uses axis B's main encoder (2D map)
 AMapEncoder[1]       ; read the encoder selected for the first dimension
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `MapEncoder[1]`/`[2]`/`[3]`.
+- **Motor on / in motion at write** — rejected (`MPNOMOTN`, `MPNOMTR`).
+- **Out of range** — values outside `1`–`number-of-axes × 2` are rejected.
+- **`MapEncoder[1]` wrong** — must point at this axis's own main encoder for the table build to accept the map; otherwise the build raises a "must be first encoder" event.
+- **2D/3D requires main encoders** — additional encoders for 2D/3D must be **main** encoders of motor-on, standing axes; auxiliary encoders for `[2]`/`[3]` are rejected with a "must be main encoders" event.
+- **`MapType = 0`** — value stored but not consulted.
+- **Save** — flash-saveable.
+
 ## See also
 
 - [MapType](MapType.md) — selects 1D/2D/3D mapping

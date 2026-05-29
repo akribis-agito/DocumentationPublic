@@ -45,12 +45,22 @@ $$
 
 Key behavioral points:
 
-- **Applies to the emergency rate too.** When [EmrgDec](EmrgDec.md) replaces `Decel` on a limit/abort/controlled stop, that value is also multiplied by `AccelFact`, so emergency stops scale with the factor as well.
+- **Applies to the emergency rate too.** When [EmrgDec](EmrgDec.md) replaces `Decel` on a limit-switch, software-limit or controlled-stop-input halt, that value is also multiplied by `AccelFact`, so emergency stops scale with the factor as well. [Abort](../04-motion-command/Abort.md) does not ramp at all and so is not affected by `AccelFact`.
 - **Whole-number only.** `AccelFact` is an integer 1–40. Fractional scaling is not possible — adjust `Accel`/`Decel` directly for finer control.
 - **Live.** Because the multiply happens each cycle, changing `AccelFact` mid-move re-scales the ramp slopes on the next cycle.
 - **Carries into both profiler orders.** The scaled `Accel_eff`/`Decel_eff` are what the second-order ramp uses directly, and what is passed to the third-order jerk profiler as the peak-acceleration/peak-deceleration constraints.
 
 It is dimensionless (no user-unit scaling) and does **not** scale [Speed](Speed.md) or the jerk settings — only the accel/decel rates.
+
+### Edge cases
+
+- **Motor off:** value is held; no profiler runs.
+- **Out-of-range write:** the parameter system clamps to `1`–`40`; values outside are rejected.
+- **Simulation mode (`MotorType` = 5):** unchanged.
+- **ModRev wrap:** unrelated.
+- **Active fault:** the axis is disabled; the next `Begin` re-reads `AccelFact`.
+- **Other motion modes:** consumed by all profiler-driven modes (jog/PTP/PD-indirect/gear-indirect/ECAM-indirect/joystick-indirect) and applied to both normal `Decel` and `EmrgDec`. Direct modes ignore `AccelFact` because they do not use `Accel`/`Decel`.
+- **`AccelFact = 1`:** the default; rates are used as configured.
 
 ## Examples
 

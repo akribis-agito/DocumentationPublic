@@ -87,7 +87,16 @@ Bits 8&ndash;15 are reused for different signals depending on the drive model (A
 
 The Central-i status word additionally carries power-phase / logic-power flags that are folded into `HWProtectBits` (sine/cosine encoder (icNQ) error 0x04, peripheral 5 V fault 0x08, B&ndash;C power phase missing 0x10, A&ndash;C power phase missing 0x20, A&ndash;B logic power missing 0x40). The power-related bits are treated specially: they are gated by the declared [PowerSupply](../02-current-and-voltage/PowerSupply.md) type, so a phase that the supply does not use is not reported as missing. Bits 0&ndash;1 of the remote status are encoder-index flags and are masked out (not part of `HWProtectBits`).
 
-When an enabled bit (see [ProtectMask](ProtectMask.md)) is set, the axis is disabled and the matching [ConFlt](../../07-status-and-faults/ConFlt.md) code is raised — for example a 5 V-fault bit raises fault code 1047 (5 V supply fault), STO1 raises the STO fault, and an over-current bit raises an over-current fault. See [Controller error codes](../../../04-error-codes/controller-error-codes.md) for the full mapping.
+When an enabled bit (see [ProtectMask](ProtectMask.md)) is set, the axis is disabled and the matching [ConFlt](../../07-status-and-faults/ConFlt.md) code is raised — for example a 5 V-fault bit raises ConFlt code 1047 (5 V supply fault), STO1 raises ConFlt code 1024 (STO1 activated), STO2/VCC raises ConFlt code 1034, watchdog raises ConFlt code 1004, an over-current bit raises ConFlt code 1025 (motor A), 1036 (motor B), or 1059 (motor C), and a missing AC phase raises ConFlt code 1054. See [Controller error codes](../../../04-error-codes/controller-error-codes.md) for the full mapping.
+
+### Edge cases
+
+- **Motor off:** bits continue to update from the live hardware signals. A latched STO/encoder/watchdog fault that asserts with the motor off prevents the next motor-on until the underlying signal clears (and any resulting [ConFlt](../../07-status-and-faults/ConFlt.md) is cleared).
+- **Mode dependency:** the hardware-protection sampling runs every control sample regardless of operation mode.
+- **Power-phase masking by [PowerSupply](../02-current-and-voltage/PowerSupply.md):** AC-phase bits are gated by the declared supply type. With `PowerSupply = 2` (DC) the AC-phase bits are suppressed; with `PowerSupply = 1` (single-phase) only the B–C phase bit is checked; with `PowerSupply = 3` (three-phase) both A–C and B–C are checked.
+- **Reuse of bits across hardware variants:** the meaning of bits 8–15 differs between the AG100 (single-channel), linear-amplifier, and other build variants — confirm with the product datasheet which signal each bit reports on your hardware.
+- **Bits 0–1 on Central-i:** encoder-index bits are masked out of `HWProtectBits` even though they appear in the remote status word.
+- **Snapshot:** the value at the moment of a fault is captured in [ConFltSnapVal](../../07-status-and-faults/ConFltSnapVal.md)`[11]` as a fixed slot.
 
 ## Examples
 

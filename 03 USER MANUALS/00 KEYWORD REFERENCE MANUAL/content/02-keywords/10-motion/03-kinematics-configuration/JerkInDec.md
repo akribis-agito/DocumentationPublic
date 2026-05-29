@@ -66,7 +66,17 @@ $$
 
 ### Emergency stops
 
-`JerkInDec` does not shape an emergency stop: limit/abort/controlled-stop halts force the internal jerk mode OFF and brake with [EmrgDec](EmrgDec.md) directly, without jerk limiting.
+`JerkInDec` does not shape an emergency stop: limit-switch (RLS/FLS), software-limit and controlled-stop-input halts force the internal jerk mode OFF and brake with [EmrgDec](EmrgDec.md) directly, without jerk limiting. [Abort](../04-motion-command/Abort.md) does not ramp at all and is also unaffected by `JerkInDec`.
+
+### Edge cases
+
+- **Motor off:** value is held; profiler does not run.
+- **Out-of-range write:** the parameter system clamps to `100`–`1,000,000,000`; values outside are rejected.
+- **Simulation mode (`MotorType` = 5):** unchanged.
+- **ModRev wrap:** the third-order profiler tracks the wrap through its internal state; the jerk constraint is unaffected.
+- **Active fault:** the axis is disabled; on re-enable and next `Begin`, `JerkInDec` is re-read.
+- **Other motion modes:** consumed only by the structured jerk profiler under PTP / repetitive PTP with [JerkMode](../02-motion-configuration/JerkMode.md) = 1. Jog, indirect modes, and direct modes ignore it.
+- **Live change in motion:** allowed, but takes effect at the start of the next profiler segment, not mid-segment.
 
 ## Examples
 

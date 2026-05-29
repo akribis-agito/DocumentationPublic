@@ -32,3 +32,5 @@ Instead, any change in MasterPos corresponds to the same change in the target po
 2. Both direct and indirect gear motion position reference are saturated/protected by software limits.
 3. For indirect gear motion, the profile generation is only up to second order. Please contact Agito if third or higher order motion profile is needed.
 4. Modulo handling with MasterModRev is required only if GearMaster selected variable involves in modulo operation.
+
+**Related, separate mode:** [MotionMode](../../../02-keywords/10-motion/02-motion-configuration/MotionMode.md) `= 10` is a narrower **direct slave** mode in which axis A's reference is driven directly by axis B's reference change, scaled by [MasterFact](../../../02-keywords/10-motion/07-motion-mode-gear-motion/MasterFact.md). It does **not** use `GearMaster`, `MasterPos`, `MasterFilt`, `MasterFactDen` or `MasterModRev`. See [MotionMode10](../../../02-keywords/10-motion/07-motion-mode-gear-motion/MotionMode10.md).

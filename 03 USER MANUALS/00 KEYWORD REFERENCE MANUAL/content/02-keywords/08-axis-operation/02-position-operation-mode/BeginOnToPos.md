@@ -76,6 +76,14 @@ ABeginOnToPos=1      ; arm the entry move
 AGoToPosMode         ; switch and start the relative move
 ```
 
+### Edge cases
+
+- **Auto-clearing** — the flag is cleared the moment the entry move launches; arm it again for the next entry.
+- **Switch path does not honour it** — only the paths listed above clear/check the flag. A direct `OperationMode = 3` assignment does NOT consume `BeginOnToPos` and does NOT run an entry move.
+- **Position-limit clipping** — the entry move is a normal PTP move; if [RetractTarget](RetractTarget.md) (or `RelTrgt`) is outside [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md)/[RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md), the move is clipped.
+- **Out of range** — values outside `0`–`1` are rejected.
+- **Save** — not flash-saveable; resets to `0` at boot.
+
 ## See also
 
 - [GoToPosMode](GoToPosMode.md) — command that triggers the armed move

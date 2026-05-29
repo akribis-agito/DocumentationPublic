@@ -49,6 +49,14 @@ where $T_{s}$ is the controller sampling time. This is implemented as the per-cy
 
 In **dual-loop** ([DualLoopOn](../../11-control-tuning/02-dual-loop-control/DualLoopOn.md) = 1) `AuxVel` (scaled by [DualLoopFact](../../11-control-tuning/02-dual-loop-control/DualLoopFact.md)) becomes the velocity-loop feedback [Vel](Vel.md)`[1]`.
 
+### Edge cases
+
+- **Motor off:** `AuxVel` keeps reflecting the auxiliary encoder's per-cycle change; if the auxiliary shaft is back-driven externally, `AuxVel` will be non-zero with the motor off.
+- **Simulation mode (`MotorType` = 5):** `AuxPos` is not updated by hardware, so `AuxVel` is zero.
+- **ModRev wrap:** [ModRev](../../03-encoder/04-modulo-mode/ModRev.md) acts on [Pos](Pos.md) only — [AuxPos](AuxPos.md) is not wrapped, so `AuxVel` is not subject to a spurious modulo-edge spike. With a rotary aux encoder that itself wraps in hardware, the single-difference derivative will see a one-sample jump at each wrap.
+- **Gantry:** `AuxVel` is per-axis (no gantry common/differential combination); each leg's `AuxVel` is independent.
+- **Active fault:** `AuxVel` continues to be calculated each cycle; reading it during fault shows whether the load is still moving.
+
 ## Examples
 
 ```text

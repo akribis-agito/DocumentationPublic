@@ -13,7 +13,7 @@ The category keywords fit together as follows:
 - [MapType](MapType.md) selects the error-mapping dimension: 1D, 2D, or 3D.
 - [MapEncoder](MapEncoder.md)`[]` selects which axis's encoder is used for the mapping.
 - [MapStartPos](MapStartPos.md)`[]`, [MapPosGap](MapPosGap.md)`[]`, and [MapLength](MapLength.md)`[]` define the coordinates of the error-mapping points.
-- [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md)`[]` stores the error values. `MapTableB[]`, `MapTableC[]`, `MapTableD[]`, and `MapTableE[]` extend the array size — i.e. `MapTableB[1]` comes after `MapTable[65536]`.
+- [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md)`[]` stores the error values. `MapTableB[]`, `MapTableC[]`, `MapTableD[]`, and `MapTableE[]` extend the array size and the five banks chain head-to-tail into one continuous, 1-based index space. The exact size of each bank is **product-dependent** — see the keyword page for the per-product sizes.
 - [MapStartIndex](MapStartIndex.md) selects the `MapTable` index where the active map begins.
 - [MapErrOffset](MapErrOffset.md), [MapErrOffRamp](MapErrOffRamp.md), and [MapErrOnStep](MapErrOnStep.md) govern how the correction is ramped in when mapping engages, avoiding an abrupt position jump.
 

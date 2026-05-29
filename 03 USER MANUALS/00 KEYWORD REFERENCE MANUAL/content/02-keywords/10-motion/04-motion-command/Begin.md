@@ -124,6 +124,19 @@ APosErr                       ; final tracking error in user units
 
 If `Begin` was *rejected*, no motion bits ever set — inspect [ErrLog](../../07-status-and-faults/ErrLog.md) for the rejection code (e.g. 39 motor off, 161 target out of soft limits, 271 `Speed` over `MaxVel`).
 
+### Edge cases
+
+- **Motor off:** rejected with error 39 (`MUST_BE_MOTOR_ON_FOR_MOTION`).
+- **Out-of-range "write":** `Begin` is a function with no value; the keyword carries no payload to validate.
+- **Simulation mode (`MotorType` = 5):** allowed; the simulation path still runs the profiler and updates synthetic feedback.
+- **ModRev wrap:** allowed; the wrap continues to be applied to the reference during the move.
+- **Active fault:** rejected because the motor is off.
+- **Already in motion (`ok_in_motion: false`):** the interpreter rejects the command before it reaches the handler.
+- **PTP retargeting with `PTPKeepMoving = 1`:** the original move never reports "done"; issuing `Begin` again with a new target is the intended way to retarget — the profiler ramps to the new target without first stopping.
+- **`BeginDInOn = 1`:** `Begin` is accepted and bit 9 of [MotionStat](../05-motion-status/MotionStat.md) (wait-for-input) is set; the profiler does not start until the configured digital input rises.
+- **Gantry:** the gantry transition-in-progress flag rejects `Begin` until the gantry is ready.
+- **Multi-axis modes (CNCA, CNCB, vector, spline-buffer):** `Begin` on a member axis arms the master; the per-mode validation differs from PTP.
+
 ## Changes between versions
 
 In **v5 (central-i)** `Begin` adds two pre-condition checks and supports additional motion modes:

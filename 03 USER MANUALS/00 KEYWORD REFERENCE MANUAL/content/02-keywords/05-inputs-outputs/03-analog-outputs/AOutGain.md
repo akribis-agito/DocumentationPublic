@@ -54,6 +54,17 @@ AAOutGain[1]=0.5     ; scale the monitored value by one half
 AAOutGain[1]          ; read back the gain
 ```
 
+### Edge cases
+
+- **Index 0** — invalid; valid indices are `AOutGain[1]`–`AOutGain[4]`. `AOutGain[0]` does not exist.
+- **Wrong mode** ([AOutMode](AOutMode.md) = 0, direct command) — `AOutGain` is **not used**; the DAC follows [AOutPort](AOutPort.md) directly. Setting `AOutGain` in this mode is silently inert until `AOutMode` is changed.
+- **Zero gain** — `AOutGain = 0` collapses the monitored parameter to `0` mV before the offset is added; only [AOutOffset](AOutOffset.md) reaches the DAC.
+- **Negative gain** — inverts the monitored value.
+- **Saturation** — the resulting DAC code is clamped to the ±11905 mV output span at the DAC stage; values outside the span do not wrap but rail.
+- **Motor on/off** — runs every cycle regardless of `MotorOn`.
+- **Save** — flash-saveable; reloaded at boot.
+- **Platform** — central-i v5 only. On v4 (standalone or central-i) use [AOutShifts](AOutShifts.md) for the equivalent power-of-two scaling.
+
 ## See also
 
 - [AOutMode](AOutMode.md) — selects the monitored parameter (gain applies only in monitoring mode)

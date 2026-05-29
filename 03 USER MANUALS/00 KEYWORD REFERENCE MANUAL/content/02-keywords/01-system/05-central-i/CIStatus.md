@@ -84,6 +84,14 @@ ACIStatus[6]                   ; last error code (see table)
 ACIStatus[4]                   ; count of synchronous-message errors
 ```
 
+## Edge cases
+
+- **Motor off / motor on / in motion.** `CIStatus` is read-only and always updated — the keyword reflects the live link regardless of motor state.
+- **After [CIDisconnect](CIDisconnect.md).** Every reported element is cleared to `0`: state machine reads `0` (disabled), the three error counts reset, and the last-error fields are zeroed.
+- **Power-up.** Initial state is `0` (disabled) on every port; [CIAutoConnect](CIAutoConnect.md) drives a port to `1` (in process) then `3` (connected) during boot. Until the port is connected, [CIIdentity](CIIdentity.md) is not meaningful either.
+- **Simulation device.** With [CIDeviceType](CIDeviceType.md) set to a simulation class the port jumps straight to `3` (connected) on [CIConnect](CIConnect.md) — the error counters stay at zero because no real frames are exchanged.
+- **Standalone product.** Central-i ports do not exist on standalone hardware; the keyword has no meaningful reading there. v5 firmware is central-i only, so `CIStatus` is always relevant in v5.
+
 ## See also
 
 - [CIGlobalStat](CIGlobalStat.md) — system-wide connection summary

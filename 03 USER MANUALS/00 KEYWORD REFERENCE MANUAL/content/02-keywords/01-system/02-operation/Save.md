@@ -76,6 +76,13 @@ AParamCS[1]          ; same value as the post-save checksum — confirms a clean
 
 If `ParamCS[1]` before and after `Reset` matches the post-`Save` value, the parameters you saved are the parameters running on the controller. To compare functional configuration across units while ignoring the per-unit network identity, use `ParamCS[1]`; to verify an exact match including IP and MAC, use `ParamCS[3]`.
 
+## Edge cases
+
+- **Motor on / in motion.** Rejected — the interpreter returns an error and nothing is written. Stop the axis and disable the motor first.
+- **Flash full.** If the parameter set exceeds the reserved flash space `Save` returns a "flash full" error after writing what fits; on the next [Load](Load.md) only the records actually written are restored, and missing parameters revert to their defaults.
+- **Power loss mid-Save.** Because `Save` erases the area first, a power loss before the final checksum/marker is written leaves the area incomplete; on the next power-up [Load](Load.md) sees a checksum mismatch and the firmware initialises all parameters to their defaults (rather than loading a partial set).
+- **Central-i disconnect.** The save operates on the master's own parameters and is unaffected by the link state to any remote unit.
+
 ## See also
 
 - [Load](Load.md) — reload parameters from flash (and re-verify the checksum written here)

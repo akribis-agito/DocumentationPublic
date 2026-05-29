@@ -46,7 +46,16 @@ if the stuck counter has reached StuckTime
 
 - The counter increments by one each control sample for as long as the AND-ed [StuckCurr](StuckCurr.md)/[StuckVel](StuckVel.md) condition is true.
 - The instant any sample breaks the condition, the counter is reset to `0`. The fault therefore requires a single unbroken run of `StuckTime`; intermittent stalls do not accumulate.
-- When the counter reaches `StuckTime`, the axis is turned off and [ConFlt](../../../07-status-and-faults/ConFlt.md) records fault code 1007 (motor stuck).
+- When the counter reaches `StuckTime`, the axis is turned off and [ConFlt](../../../07-status-and-faults/ConFlt.md) records ConFlt code 1007 (motor stuck).
+
+### Edge cases
+
+- **Motor off:** detection does not run; the counter is reset to `0` on motor-off.
+- **Mode dependency:** same bypass list as [StuckCurr](StuckCurr.md) — effective only in position-control / velocity-control on non-stepper motors.
+- **`StuckTime = 0`:** the counter reaches the limit on the first sample where the condition is true, so the protection trips immediately (no debouncing).
+- **Range overflow:** writes outside `0…2147483647` are clamped to the keyword `range`.
+- **Clearing the fault:** ConFlt code 1007 clears on re-enable ([MotorOn](../../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../../07-status-and-faults/ErrLog.md) entry persists.
+- **HWProtectBits / ProtectMask:** the motor-stuck trip is not maskable through [ProtectMask](../../01-general-protection/ProtectMask.md) (that mask covers hardware-protection bits only).
 
 ![Motor-stuck detection logic](stuck-logic.svg)
 
