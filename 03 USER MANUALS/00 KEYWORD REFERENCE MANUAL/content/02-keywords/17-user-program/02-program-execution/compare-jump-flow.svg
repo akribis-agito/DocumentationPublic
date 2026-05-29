@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="330" viewBox="0 0 760 330" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="330" viewBox="0 0 760 330" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Building a conditional: push two operands onto the numeric stack, run Compare to leave 1 or 0 on the stack, then a conditional Jump either branches to the target line or falls through to the next line.">
+  <title>Compare-then-Jump control flow on the numeric stack</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
@@ -55,7 +56,7 @@
   <path d="M700,160 L710,180" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
 
   <!-- note -->
-  <text x="30" y="265" font-size="12">Each thread has its own numeric stack. Operands are pushed left-to-right, so the right operand is on top (pop1).</text>
-  <text x="30" y="285" font-size="12">"Jump if zero" (8) takes the branch when the comparison was false; "Jump if not zero" (9) when it was true.</text>
-  <text x="30" y="305" font-size="12">This Compare + Jump pattern is how the compiler builds if / while / for control flow.</text>
+  <text x="30" y="265" font-size="12">Each thread has its own numeric stack. Operands are pushed left-to-right, so the right operand is on top.</text>
+  <text x="30" y="285" font-size="12">"Jump if zero" (op 8) branches when the comparison was false; "Jump if not zero" (op 9) when it was true.</text>
+  <text x="30" y="305" font-size="12">This Compare-then-Jump pattern is how if / while / for control flow is built.</text>
 </svg>

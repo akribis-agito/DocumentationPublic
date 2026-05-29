@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="780" height="220" viewBox="0 0 780 220" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="230" viewBox="0 0 780 230" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="RecTrigPos splits the recorder buffer of length RecLength into a pre-trigger portion equal to RecTrigPos percent of the length, followed by the remainder as post-trigger samples.">
+  <title>RecTrigPos pre-trigger and post-trigger split</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>

@@ -1,37 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="640" height="300" viewBox="0 0 640 300" font-family="sans-serif" font-size="13">
-  <rect x="0" y="0" width="640" height="300" fill="#ffffff"/>
-  <text x="320" y="24" text-anchor="middle" font-size="15" font-weight="bold">Acceleration shaping: factor chosen by distance to target</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="660" height="320" viewBox="0 0 660 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Acceleration shaping lookup: distance from the current PosRef to AbsTrgt selects a deceleration factor. Within Dist[1] the factor is Fact[1] over 65536, within Dist[2] it is Fact[2] over 65536, within Dist[3] it is Fact[3] over 65536; beyond Dist[3] the factor is unity and no shaping is applied.">
+  <title>Acceleration shaping factor by distance to target</title>
+
+  <text x="20" y="22" font-size="14" font-weight="bold">Acceleration shaping: factor chosen by distance to target</text>
 
   <!-- axis -->
-  <line x1="60" y1="250" x2="600" y2="250" stroke="#333" stroke-width="1.5"/>
-  <text x="600" y="272" text-anchor="end">distance to target (AbsTrgt &#8722; PosRef)</text>
-  <text x="60" y="272" text-anchor="middle">0</text>
+  <line x1="60" y1="250" x2="620" y2="250" stroke="#5b6b7b" stroke-width="1.2"/>
+  <text x="610" y="272" text-anchor="end" font-size="11" fill="#5b6b7b">distance to target (AbsTrgt &#8722; PosRef)</text>
+  <text x="60"  y="272" text-anchor="middle" font-size="11" fill="#5b6b7b">0</text>
 
   <!-- target marker -->
-  <line x1="60" y1="60" x2="60" y2="258" stroke="#999" stroke-dasharray="3,3"/>
-  <text x="60" y="52" text-anchor="middle" fill="#666">target</text>
+  <line x1="60" y1="60" x2="60" y2="258" stroke="#5b6b7b" stroke-dasharray="3,3"/>
+  <text x="60" y="52" text-anchor="middle" font-size="11" fill="#5b6b7b">target</text>
 
-  <!-- band boundaries -->
-  <line x1="180" y1="90" x2="180" y2="258" stroke="#bbb" stroke-dasharray="3,3"/>
-  <line x1="300" y1="90" x2="300" y2="258" stroke="#bbb" stroke-dasharray="3,3"/>
-  <line x1="420" y1="90" x2="420" y2="258" stroke="#bbb" stroke-dasharray="3,3"/>
-  <text x="180" y="282" text-anchor="middle" fill="#666">Dist[1]</text>
-  <text x="300" y="282" text-anchor="middle" fill="#666">Dist[2]</text>
-  <text x="420" y="282" text-anchor="middle" fill="#666">Dist[3]</text>
+  <!-- band boundary guide lines -->
+  <line x1="180" y1="90" x2="180" y2="258" stroke="#5b8def" stroke-dasharray="3,3" opacity="0.6"/>
+  <line x1="300" y1="90" x2="300" y2="258" stroke="#5b8def" stroke-dasharray="3,3" opacity="0.6"/>
+  <line x1="420" y1="90" x2="420" y2="258" stroke="#5b8def" stroke-dasharray="3,3" opacity="0.6"/>
+  <text x="180" y="290" text-anchor="middle" font-size="11" fill="#5b6b7b">Dist[1]</text>
+  <text x="300" y="290" text-anchor="middle" font-size="11" fill="#5b6b7b">Dist[2]</text>
+  <text x="420" y="290" text-anchor="middle" font-size="11" fill="#5b6b7b">Dist[3]</text>
 
-  <!-- factor step plot (closest-to-target = lowest factor, ramping up to 1.0) -->
-  <rect x="60"  y="200" width="120" height="50" fill="#cfe3f7" stroke="#4a86c5"/>
-  <rect x="180" y="160" width="120" height="90" fill="#cfe3f7" stroke="#4a86c5"/>
-  <rect x="300" y="120" width="120" height="130" fill="#cfe3f7" stroke="#4a86c5"/>
-  <rect x="420" y="90"  width="180" height="160" fill="#e8e8e8" stroke="#888"/>
+  <!-- factor step plot -->
+  <rect x="60"  y="200" width="120" height="50"  rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <rect x="180" y="160" width="120" height="90"  rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <rect x="300" y="120" width="120" height="130" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <rect x="420" y="90"  width="200" height="160" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2" opacity="0.55"/>
 
-  <text x="120" y="225" text-anchor="middle">Fact[1]/65536</text>
-  <text x="240" y="185" text-anchor="middle">Fact[2]/65536</text>
-  <text x="360" y="145" text-anchor="middle">Fact[3]/65536</text>
-  <text x="510" y="115" text-anchor="middle">factor = 1.0</text>
-  <text x="510" y="132" text-anchor="middle" font-size="11" fill="#666">(no shaping)</text>
+  <text x="120" y="228" text-anchor="middle">Fact[1] / 65536</text>
+  <text x="240" y="188" text-anchor="middle">Fact[2] / 65536</text>
+  <text x="360" y="148" text-anchor="middle">Fact[3] / 65536</text>
+  <text x="520" y="118" text-anchor="middle">factor = 1.0</text>
+  <text x="520" y="134" text-anchor="middle" font-size="11" fill="#5b6b7b">(no shaping)</text>
 
-  <text x="44" y="94" text-anchor="end" fill="#666">&#215;1.0</text>
-  <text x="44" y="254" text-anchor="end" fill="#666">&#215;0</text>
-  <line x1="48" y1="90" x2="52" y2="90" stroke="#666"/>
+  <text x="50" y="94"  text-anchor="end" font-size="11" fill="#5b6b7b">&#215;1.0</text>
+  <text x="50" y="254" text-anchor="end" font-size="11" fill="#5b6b7b">&#215;0</text>
 </svg>

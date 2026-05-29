@@ -1,13 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="700" height="320" viewBox="0 0 700 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="320" viewBox="0 0 860 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Following-error trip: the absolute position or velocity error rises until it crosses the active limit; on the same control sample the axis is disabled. In closed loop the limits are MaxPosErr and MaxVelErr; in open loop or injection mode the higher MaxPosErrOL and MaxVelErrOL limits apply.">
+  <title>Following-error trip &#8211; |PosErr| or |VelErr| crosses the active limit</title>
   <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
 
   <text x="20" y="26" font-size="15" font-weight="bold">Following-error trip &#8211; |PosErr| or |VelErr| crosses the active limit</text>
 
   <!-- axes -->
   <line x1="70" y1="60" x2="70" y2="240" stroke="#5b6b7b" marker-end="url(#arrow)"/>
-  <line x1="70" y1="240" x2="660" y2="240" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="70" y1="240" x2="640" y2="240" stroke="#5b6b7b" marker-end="url(#arrow)"/>
   <text x="58" y="58" text-anchor="end" font-weight="bold">|error|</text>
-  <text x="660" y="258" text-anchor="end" font-weight="bold">time</text>
+  <text x="640" y="258" text-anchor="end" font-weight="bold">time</text>
 
   <!-- closed-loop limit -->
   <line x1="70" y1="170" x2="650" y2="170" stroke="#e0736b" stroke-dasharray="6 4" stroke-width="1.4"/>

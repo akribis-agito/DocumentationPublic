@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="780" height="320" viewBox="0 0 780 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="320" viewBox="0 0 780 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="ErrLog stores 32 event pairs in a circular buffer of 64 elements; the upper 8 bits of each code element tag the source axis or thread, the lower 24 bits hold the error code.">
+  <title>ErrLog 32-pair circular buffer and tagged code layout</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
@@ -47,13 +48,13 @@
 
   <!-- wrap arrow -->
   <path d="M 580 30 C 660 0 660 110 600 110 L 60 110 C 0 110 0 30 50 30" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)" stroke-dasharray="4,3"/>
-  <text x="620" y="105" font-size="11" fill="#5b6b7b">wraps to [1] when full (oldest pair overwritten)</text>
+  <text x="760" y="135" text-anchor="end" font-size="11" fill="#5b6b7b">wraps to [1] when full (oldest pair overwritten)</text>
 
   <!-- pair brackets -->
   <text x="80" y="100" text-anchor="middle" font-size="11" fill="#5b6b7b">pair 1</text>
   <text x="210" y="100" text-anchor="middle" font-size="11" fill="#5b6b7b">pair 2</text>
-  <text x="430" y="100" text-anchor="middle" font-size="11" fill="#5b6b7b">pair 31</text>
-  <text x="550" y="100" text-anchor="middle" font-size="11" fill="#5b6b7b">pair 32</text>
+  <text x="400" y="100" text-anchor="middle" font-size="11" fill="#5b6b7b">pair 31</text>
+  <text x="520" y="100" text-anchor="middle" font-size="11" fill="#5b6b7b">pair 32</text>
 
   <!-- Bottom: tagged code element layout -->
   <text x="20" y="160" font-weight="bold">Element 1 of a pair (tagged code) — 32-bit layout</text>

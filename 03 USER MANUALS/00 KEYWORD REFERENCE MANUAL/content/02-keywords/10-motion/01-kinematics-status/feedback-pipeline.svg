@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="320" viewBox="0 0 720 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="320" viewBox="0 0 720 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Kinematic feedback, reference and error: the encoder produces Pos and Vel; the profiler post-processing produces PosRef, which is differentiated as dPosRef; PosErr is PosRef minus Pos and feeds the position loop.">
+  <title>Kinematic feedback, reference and error</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
   </defs>
@@ -32,7 +33,7 @@
   <!-- PosErr -->
   <rect x="560" y="120" width="130" height="44" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
   <text x="625" y="141" text-anchor="middle" font-weight="bold">PosErr</text>
-  <text x="625" y="157" text-anchor="middle" font-size="11" fill="#5b6b7b">PosRef - Pos</text>
+  <text x="625" y="157" text-anchor="middle" font-size="11" fill="#5b6b7b">PosRef &#8722; Pos</text>
 
   <!-- dPosRef -->
   <rect x="390" y="120" width="110" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
@@ -45,7 +46,7 @@
   <line x1="330" y1="62" x2="390" y2="62" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
   <line x1="445" y1="84" x2="445" y2="120" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
   <line x1="500" y1="120" x2="560" y2="138" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
-  <line x1="290" y1="138" x2="560" y2="146" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <path d="M 290 150 Q 425 195 558 150" fill="none" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
 
-  <text x="425" y="290" text-anchor="middle" fill="#5b6b7b" font-size="11">PosErr feeds the position loop; VelErr = VelRef - Vel[1] feeds the velocity loop.</text>
+  <text x="425" y="290" text-anchor="middle" fill="#5b6b7b" font-size="11">PosErr feeds the position loop; VelErr = VelRef &#8722; Vel[1] feeds the velocity loop.</text>
 </svg>

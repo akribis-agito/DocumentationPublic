@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="700" height="320" viewBox="0 0 700 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="320" viewBox="0 0 700 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Over-voltage time window: when VBus first crosses the MaxVBus threshold a timer starts; if VBus stays above MaxVBus for the full MaxVBusTime the drive trips with ConFlt code 1008 and the axis is disabled. A transient that returns below MaxVBus before the timer elapses resets it.">
+  <title>MaxVBus + MaxVBusTime &#8211; over-voltage time window</title>
   <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
 
   <text x="20" y="26" font-size="15" font-weight="bold">MaxVBus + MaxVBusTime &#8211; over-voltage time window</text>
@@ -21,8 +22,8 @@
   <!-- after trip: drops to 0 (axis off) -->
   <line x1="420" y1="90" x2="420" y2="240" stroke="#e0736b" stroke-width="2" stroke-dasharray="3 3"/>
 
-  <!-- time-window highlight -->
-  <rect x="220" y="120" width="200" height="-30" fill="#fdecea" opacity="0.6"/>
+  <!-- time-window highlight (band above the MaxVBus threshold during the window) -->
+  <rect x="220" y="90" width="200" height="30" fill="#fdecea" opacity="0.6"/>
   <line x1="220" y1="260" x2="220" y2="120" stroke="#9fb4cc" stroke-dasharray="3 3"/>
   <line x1="420" y1="260" x2="420" y2="120" stroke="#9fb4cc" stroke-dasharray="3 3"/>
   <text x="220" y="278" text-anchor="middle" font-size="11" fill="#555">VBus crosses MaxVBus</text>

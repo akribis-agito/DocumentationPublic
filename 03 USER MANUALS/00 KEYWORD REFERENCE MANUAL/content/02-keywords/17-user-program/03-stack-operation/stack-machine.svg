@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="300" viewBox="0 0 720 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="300" viewBox="0 0 720 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Numeric stack expression evaluation: PushConstant or PushParam place operands on the per-thread stack; Math or Compare ops pop operands, combine, and push the result; PopParam stores the top of stack back into a parameter.">
+  <title>Numeric stack expression evaluation</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
@@ -35,9 +36,15 @@
   <text x="360" y="263" text-anchor="middle" font-weight="bold">PopParam</text>
   <text x="360" y="279" text-anchor="middle" font-size="11">store result back</text>
 
-  <!-- arrows -->
-  <path d="M180,140 L246,140" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
-  <path d="M404,140 L466,140" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
-  <path d="M520,180 C500,215 420,215 380,238" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
-  <path d="M320,238 C300,215 320,200 325,184" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <!-- arrows: Push -> Stack -> Operate, Operate -> Stack (result), Stack -> Pop -->
+  <path d="M180,140 L246,140" fill="none" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="213" y="132" text-anchor="middle" font-size="10" fill="#5b6b7b">push</text>
+  <path d="M404,140 L466,140" fill="none" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="435" y="132" text-anchor="middle" font-size="10" fill="#5b6b7b">pop</text>
+  <!-- Operate -> Stack (push result) -->
+  <path d="M466,160 L404,160" fill="none" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="435" y="174" text-anchor="middle" font-size="10" fill="#5b6b7b">result</text>
+  <!-- Stack top -> Pop -->
+  <path d="M325,212 L360,238" fill="none" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="305" y="232" text-anchor="end" font-size="10" fill="#5b6b7b">pop top</text>
 </svg>

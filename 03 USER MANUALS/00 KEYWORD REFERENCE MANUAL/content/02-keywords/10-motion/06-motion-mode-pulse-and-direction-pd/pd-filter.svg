@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="820" height="260" viewBox="0 0 820 260" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="260" viewBox="0 0 820 260" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="PDPosFilt low-pass smoothing: the staircase PDPos input is followed closely when PDPosFilt is high, giving fast tracking with little smoothing; a low PDPosFilt produces a gentler ramp that takes longer to reach the input level.">
+  <title>PDPosFilt smoothing of the position reference</title>
   <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
 
   <text x="410" y="22" text-anchor="middle" font-weight="bold">PDPosFilt: low-pass smoothing of the position reference in direct P/D mode</text>
@@ -10,8 +11,8 @@
   <text x="50" y="130" text-anchor="middle" font-size="11" transform="rotate(-90 50 130)">position</text>
 
   <!-- staircase input PDPos delta -->
-  <path d="M80 200 H160 V170 H260 V145 H360 V120 H460 V90 H560 V80 H780" fill="none" stroke="#bbb" stroke-width="1.6"/>
-  <text x="620" y="70" font-size="11" fill="#888">PDPos (raw input)</text>
+  <path d="M80 200 H160 V170 H260 V145 H360 V120 H460 V90 H560 V80 H780" fill="none" stroke="#5b6b7b" stroke-width="1.4" stroke-dasharray="4 3" opacity="0.7"/>
+  <text x="620" y="70" font-size="11" fill="#5b6b7b">PDPos (raw input)</text>
 
   <!-- high cut-off (low smoothing) - tracks closely -->
   <path d="M80 200 L160 175 L260 150 L360 125 L460 95 L560 82 L780 82" fill="none" stroke="#5b8def" stroke-width="2"/>

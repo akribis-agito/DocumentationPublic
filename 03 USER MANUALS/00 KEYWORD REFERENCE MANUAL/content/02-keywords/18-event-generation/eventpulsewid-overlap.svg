@@ -1,12 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="460" height="170" font-family="sans-serif" font-size="12">
-  <text x="10" y="20">Output, gap time &gt; pulse width (clean pulses):</text>
-  <line x1="20" y1="55" x2="440" y2="55" stroke="#888"/>
-  <path d="M40 55 V35 H70 V55 H180 V35 H210 V55 H320 V35 H350 V55" fill="none" stroke="#1565c0" stroke-width="2"/>
-  <text x="40" y="70" fill="#555">event</text>
-  <text x="180" y="70" fill="#555">event</text>
-  <text x="320" y="70" fill="#555">event</text>
-  <text x="10" y="115">Output, gap time &lt; pulse width (overlap, merged):</text>
-  <line x1="20" y1="150" x2="440" y2="150" stroke="#888"/>
-  <path d="M40 150 V130 H300 V150" fill="none" stroke="#c62828" stroke-width="2"/>
-  <text x="40" y="165" fill="#555">events run together</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="200" viewBox="0 0 500 200" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="12" role="img" aria-label="EventPulseWid overlap behaviour: when gap time between events is larger than the pulse width the outputs are three clean pulses; when gap time is smaller than the pulse width consecutive pulses overlap and merge into one long pulse.">
+  <title>EventPulseWid overlap behaviour</title>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
+    </marker>
+  </defs>
+
+  <!-- Top: clean -->
+  <text x="20" y="20" font-weight="bold">Gap between events &gt; EventPulseWid</text>
+  <text x="20" y="36" font-size="11" fill="#5b6b7b">three distinct output pulses</text>
+  <line x1="20" y1="80" x2="480" y2="80" stroke="#5b6b7b" stroke-width="1.2"/>
+  <path d="M 40 80 V 56 H 80 V 80 H 180 V 56 H 220 V 80 H 320 V 56 H 360 V 80" fill="none" stroke="#5b8def" stroke-width="2"/>
+  <text x="60" y="98" text-anchor="middle" font-size="11" fill="#5b6b7b">event</text>
+  <text x="200" y="98" text-anchor="middle" font-size="11" fill="#5b6b7b">event</text>
+  <text x="340" y="98" text-anchor="middle" font-size="11" fill="#5b6b7b">event</text>
+
+  <!-- Bottom: overlap -->
+  <text x="20" y="130" font-weight="bold">Gap between events &lt; EventPulseWid</text>
+  <text x="20" y="146" font-size="11" fill="#5b6b7b">pulses overlap and merge into one</text>
+  <line x1="20" y1="190" x2="480" y2="190" stroke="#5b6b7b" stroke-width="1.2"/>
+  <path d="M 40 190 V 166 H 360 V 190" fill="none" stroke="#e0736b" stroke-width="2"/>
+  <text x="200" y="180" text-anchor="middle" font-size="11" fill="#e0736b">merged output</text>
 </svg>

@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="700" height="270" viewBox="0 0 700 270" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="270" viewBox="0 0 700 270" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Stop versus Abort behaviour: Stop ramps profiler velocity to zero on Decel and the profiler keeps producing PosRef during the ramp; Abort drops profiler velocity to zero in the same call, freezes PosRef and clears MotionStat.">
+  <title>Stop vs Abort: profiler velocity at command time</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
   </defs>
@@ -28,5 +29,6 @@
   <text x="310" y="170" fill="#e0736b" font-size="11">Abort: profiler v &#8594; 0,</text>
   <text x="310" y="184" fill="#e0736b" font-size="11">PosRef frozen (MotionStat=0, reason 2)</text>
 
-  <text x="360" y="240" text-anchor="middle" fill="#5b6b7b" font-size="11">Stop hands the deceleration to the profiler; Abort ends the motion in the same call. EmrgDec is reserved for limit/controlled-input reasons.</text>
+  <text x="350" y="234" text-anchor="middle" fill="#5b6b7b" font-size="11">Stop hands the deceleration to the profiler; Abort ends the motion in the same call.</text>
+  <text x="350" y="250" text-anchor="middle" fill="#5b6b7b" font-size="11">EmrgDec is reserved for limit and controlled-input reasons.</text>
 </svg>

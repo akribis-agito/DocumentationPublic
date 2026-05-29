@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="320" viewBox="0 0 760 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="320" viewBox="0 0 760 320" role="img" aria-label="DInMode dispatch. Current and previous DInPort values feed edge detection per input bit. An active-functions table (rebuilt on DInMode write) lists function code, input mask, and target axis. Function actions are grouped into motor on/off, mode switch, limits/brake/fault, and motion control." font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <title>DInMode function dispatch</title>
   <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
 
   <text x="380" y="22" text-anchor="middle" font-size="15" font-weight="bold">DInMode function dispatch</text>

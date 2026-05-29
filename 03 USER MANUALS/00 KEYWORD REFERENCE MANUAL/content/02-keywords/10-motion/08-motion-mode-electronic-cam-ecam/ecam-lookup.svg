@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="820" height="200" viewBox="0 0 820 200" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="200" viewBox="0 0 820 200" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Electronic cam motion path: the master variable ECAMMaster indexes into the cam table GenData, which is spaced by ECAMGap with linear interpolation between entries, producing the follower position reference; the lookup repeats ECAMCycles times.">
+  <title>Electronic cam motion: master into the cam table to the follower reference</title>
   <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
 
   <!-- master -->

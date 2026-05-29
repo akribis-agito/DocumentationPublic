@@ -1,6 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="320" viewBox="0 0 720 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="320" viewBox="0 0 720 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="DC bus and logic supplies are measured by the drive and exposed as VBus, VLogic, and DCDC rail readings; bus and logic protections monitor the same readings.">
+  <title>Supply-voltage measurements</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+    <marker id="arrowred" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#e0736b"/></marker>
   </defs>
 
   <text x="360" y="26" text-anchor="middle" font-size="15" font-weight="bold">Supply-voltage measurements</text>
@@ -23,11 +25,12 @@
 
   <rect x="260" y="232" width="150" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
   <text x="335" y="252" text-anchor="middle">Internal rails</text>
-  <text x="335" y="268" text-anchor="middle" font-size="11">(per-rail)</text>
+  <text x="335" y="268" text-anchor="middle" font-size="11">(per-rail DCDC)</text>
 
-  <line x1="160" y1="86" x2="258" y2="86" stroke="#5b6b7b" marker-end="url(#arrow)"/>
-  <line x1="160" y1="200" x2="258" y2="182" stroke="#5b6b7b" marker-end="url(#arrow)"/>
-  <line x1="160" y1="204" x2="258" y2="254" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="160" y1="86" x2="256" y2="86" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="160" y1="200" x2="256" y2="182" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="95" y1="108" x2="95" y2="250" stroke="#5b6b7b" stroke-width="1.4" fill="none"/>
+  <line x1="95" y1="254" x2="256" y2="254" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
 
   <!-- readings / use -->
   <rect x="520" y="44" width="160" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
@@ -39,13 +42,13 @@
   <rect x="520" y="232" width="160" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
   <text x="600" y="258" text-anchor="middle">DCDC readings</text>
 
-  <line x1="410" y1="86" x2="518" y2="70" stroke="#5b6b7b" marker-end="url(#arrow)"/>
-  <line x1="410" y1="182" x2="518" y2="182" stroke="#5b6b7b" marker-end="url(#arrow)"/>
-  <line x1="410" y1="254" x2="518" y2="254" stroke="#5b6b7b" marker-end="url(#arrow)"/>
+  <line x1="410" y1="86" x2="516" y2="70" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="410" y1="182" x2="516" y2="182" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="410" y1="254" x2="516" y2="254" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
 
   <!-- protection note -->
   <rect x="520" y="104" width="160" height="40" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
   <text x="600" y="128" text-anchor="middle" font-size="11">bus / logic protections</text>
-  <line x1="600" y1="88" x2="600" y2="102" stroke="#e0736b" marker-end="url(#arrow)"/>
-  <line x1="600" y1="160" x2="600" y2="146" stroke="#e0736b" marker-end="url(#arrow)"/>
+  <line x1="600" y1="88" x2="600" y2="100" stroke="#e0736b" stroke-width="1.4" marker-end="url(#arrowred)"/>
+  <line x1="600" y1="160" x2="600" y2="148" stroke="#e0736b" stroke-width="1.4" marker-end="url(#arrowred)"/>
 </svg>

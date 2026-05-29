@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="430" viewBox="0 0 720 430" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="430" viewBox="0 0 720 430" role="img" aria-label="Axis operation model. An axis is Disabled (MotorOn = 0) or Enabled (MotorOn = 1). When Enabled, OperationMode picks the active loops: Position (3) runs position, velocity, and current loops; Velocity (2) runs velocity and current; Current (1) runs current only; Force (4) runs the force loop with the current loop. Switching uses direct OperationMode assignment, GoTo* keywords, condition checks, or a configured digital input." font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <title>Axis operation model</title>
   <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
 
   <text x="360" y="24" text-anchor="middle" font-size="15" font-weight="bold">Axis operation model</text>

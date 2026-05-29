@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="780" height="260" viewBox="0 0 780 260" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="260" viewBox="0 0 780 260" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="PStat streaming timeline: while PStatOn is 1, a batch is sent every PStatInterval milliseconds; each batch carries the current value of each non-zero PStatParams entry in index order.">
+  <title>PStat streaming timeline</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
@@ -20,8 +21,8 @@
 
   <text x="80"  y="100" text-anchor="middle" font-size="11">0</text>
   <text x="230" y="100" text-anchor="middle" font-size="11">+ PStatInterval</text>
-  <text x="380" y="100" text-anchor="middle" font-size="11">+ 2 x PStatInterval</text>
-  <text x="530" y="100" text-anchor="middle" font-size="11">+ 3 x PStatInterval</text>
+  <text x="380" y="100" text-anchor="middle" font-size="11">+ 2 &#215; PStatInterval</text>
+  <text x="530" y="100" text-anchor="middle" font-size="11">+ 3 &#215; PStatInterval</text>
   <text x="680" y="100" text-anchor="middle" font-size="11">. . .</text>
 
   <!-- batches as small boxes above ticks -->

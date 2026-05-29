@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="330" viewBox="0 0 720 330" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="330" viewBox="0 0 720 330" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="The protection model: monitored quantities feed threshold checks gated by HWProtectBits and ProtectMask, with three possible outcomes: trip and disable the axis with a ConFlt code, raise a StatReg warning bit, or clamp the value without tripping.">
+  <title>The protection model</title>
   <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
 
   <text x="20" y="26" font-size="15" font-weight="bold">The protection model</text>

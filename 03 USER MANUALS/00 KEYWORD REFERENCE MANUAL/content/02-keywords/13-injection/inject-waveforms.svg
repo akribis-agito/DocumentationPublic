@@ -1,63 +1,64 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="780" height="380" viewBox="0 0 780 380" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="500" viewBox="0 0 780 500" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="InjectType waveforms: sine (1 and 2) with frequency from InjectFreq; square (3 and 4) starting at positive amplitude with equal half-periods; pulse (5, current only) — one rectangular pulse of width InjectTimeOn then back to zero; PRBS (6 and 7) toggling pseudo-randomly between plus and minus amplitude at bit rate equal to sample rate divided by FastIdDownSam; chirp (8 and 9, v5 only) sweeping linearly from InjectChirpF[1] to InjectChirpF[2] and repeating.">
+  <title>InjectType waveforms</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
     </marker>
   </defs>
 
-  <text x="20" y="20" font-weight="bold">InjectType — five waveform shapes</text>
+  <text x="20" y="22" font-weight="bold">InjectType &#8212; five waveform shapes</text>
 
-  <!-- panel template helper -->
-  <!-- sine -->
-  <g transform="translate(20,46)">
-    <rect x="0" y="0" width="360" height="140" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-    <text x="10" y="18" font-weight="bold" font-size="12">Sine (InjectType=1,2)</text>
-    <line x1="20" y1="80" x2="340" y2="80" stroke="#5b6b7b"/>
-    <line x1="20" y1="30" x2="20" y2="130" stroke="#5b6b7b"/>
-    <path d="M 20 80 Q 60 20 100 80 T 180 80 T 260 80 T 340 80" fill="none" stroke="#e0736b" stroke-width="1.6"/>
-    <text x="180" y="155" text-anchor="middle" font-size="11">frequency from InjectFreq, amplitude from InjectPoint</text>
+  <!-- Sine -->
+  <g transform="translate(20,40)">
+    <rect x="0" y="0" width="360" height="170" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <text x="10" y="20" font-weight="bold" font-size="12">Sine (InjectType = 1, 2)</text>
+    <line x1="20" y1="90" x2="340" y2="90" stroke="#5b6b7b"/>
+    <line x1="20" y1="40" x2="20" y2="140" stroke="#5b6b7b"/>
+    <path d="M 20 90 Q 60 30 100 90 T 180 90 T 260 90 T 340 90" fill="none" stroke="#e0736b" stroke-width="1.6"/>
+    <text x="180" y="160" text-anchor="middle" font-size="11">frequency from InjectFreq, amplitude from InjectPoint</text>
   </g>
 
-  <!-- square -->
-  <g transform="translate(400,46)">
-    <rect x="0" y="0" width="360" height="140" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-    <text x="10" y="18" font-weight="bold" font-size="12">Square (InjectType=3,4)</text>
-    <line x1="20" y1="80" x2="340" y2="80" stroke="#5b6b7b"/>
-    <line x1="20" y1="30" x2="20" y2="130" stroke="#5b6b7b"/>
-    <path d="M 20 35 L 100 35 L 100 125 L 180 125 L 180 35 L 260 35 L 260 125 L 340 125" fill="none" stroke="#e0736b" stroke-width="1.6"/>
-    <text x="180" y="155" text-anchor="middle" font-size="11">starts at +amplitude; half-period high, half-period low</text>
+  <!-- Square -->
+  <g transform="translate(400,40)">
+    <rect x="0" y="0" width="360" height="170" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <text x="10" y="20" font-weight="bold" font-size="12">Square (InjectType = 3, 4)</text>
+    <line x1="20" y1="90" x2="340" y2="90" stroke="#5b6b7b"/>
+    <line x1="20" y1="40" x2="20" y2="140" stroke="#5b6b7b"/>
+    <path d="M 20 45 L 100 45 L 100 135 L 180 135 L 180 45 L 260 45 L 260 135 L 340 135" fill="none" stroke="#e0736b" stroke-width="1.6"/>
+    <text x="180" y="160" text-anchor="middle" font-size="11">starts at +amplitude; half-period high, half-period low</text>
   </g>
 
-  <!-- pulse -->
-  <g transform="translate(20,196)">
-    <rect x="0" y="0" width="360" height="140" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-    <text x="10" y="18" font-weight="bold" font-size="12">Pulse (InjectType=5, current only)</text>
-    <line x1="20" y1="80" x2="340" y2="80" stroke="#5b6b7b"/>
-    <line x1="20" y1="30" x2="20" y2="130" stroke="#5b6b7b"/>
-    <path d="M 20 80 L 60 80 L 60 35 L 180 35 L 180 80 L 340 80" fill="none" stroke="#e0736b" stroke-width="1.6"/>
-    <text x="120" y="30" font-size="10" fill="#5b6b7b">InjectTimeOn</text>
-    <text x="180" y="155" text-anchor="middle" font-size="11">single rectangular pulse, then back to zero</text>
+  <!-- Pulse -->
+  <g transform="translate(20,225)">
+    <rect x="0" y="0" width="360" height="170" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <text x="10" y="20" font-weight="bold" font-size="12">Pulse (InjectType = 5, current only)</text>
+    <line x1="20" y1="90" x2="340" y2="90" stroke="#5b6b7b"/>
+    <line x1="20" y1="40" x2="20" y2="140" stroke="#5b6b7b"/>
+    <path d="M 20 90 L 60 90 L 60 45 L 180 45 L 180 90 L 340 90" fill="none" stroke="#e0736b" stroke-width="1.6"/>
+    <!-- width dimension -->
+    <line x1="60" y1="32" x2="180" y2="32" stroke="#5b6b7b" stroke-width="1" marker-end="url(#arrow)"/>
+    <line x1="180" y1="32" x2="60" y2="32" stroke="#5b6b7b" stroke-width="1" marker-end="url(#arrow)"/>
+    <text x="120" y="28" text-anchor="middle" font-size="10" fill="#5b6b7b">InjectTimeOn</text>
+    <text x="180" y="160" text-anchor="middle" font-size="11">single rectangular pulse, then back to zero</text>
   </g>
 
   <!-- PRBS -->
-  <g transform="translate(400,196)">
-    <rect x="0" y="0" width="360" height="140" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-    <text x="10" y="18" font-weight="bold" font-size="12">PRBS (InjectType=6,7)</text>
-    <line x1="20" y1="80" x2="340" y2="80" stroke="#5b6b7b"/>
-    <line x1="20" y1="30" x2="20" y2="130" stroke="#5b6b7b"/>
-    <!-- pseudo-random toggles -->
-    <path d="M 20 35 L 50 35 L 50 125 L 80 125 L 80 35 L 130 35 L 130 125 L 160 125 L 160 35 L 190 35 L 190 125 L 240 125 L 240 35 L 270 35 L 270 125 L 310 125 L 310 35 L 340 35" fill="none" stroke="#e0736b" stroke-width="1.6"/>
-    <text x="180" y="155" text-anchor="middle" font-size="11">toggles between +/- amplitude; bit rate = sample rate / FastIdDownSam</text>
+  <g transform="translate(400,225)">
+    <rect x="0" y="0" width="360" height="170" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <text x="10" y="20" font-weight="bold" font-size="12">PRBS (InjectType = 6, 7)</text>
+    <line x1="20" y1="90" x2="340" y2="90" stroke="#5b6b7b"/>
+    <line x1="20" y1="40" x2="20" y2="140" stroke="#5b6b7b"/>
+    <path d="M 20 45 L 50 45 L 50 135 L 80 135 L 80 45 L 130 45 L 130 135 L 160 135 L 160 45 L 190 45 L 190 135 L 240 135 L 240 45 L 270 45 L 270 135 L 310 135 L 310 45 L 340 45" fill="none" stroke="#e0736b" stroke-width="1.6"/>
+    <text x="180" y="160" text-anchor="middle" font-size="11">toggles &#177; amplitude; bit rate = sample rate / FastIdDownSam</text>
   </g>
 
-  <!-- chirp -->
-  <g transform="translate(20,346)">
-    <text x="10" y="0" font-weight="bold" font-size="12">Chirp (InjectType=8,9, v5 only)</text>
-  </g>
-  <g transform="translate(20,350)">
-    <rect x="0" y="0" width="740" height="26" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <!-- Chirp -->
+  <g transform="translate(20,410)">
+    <rect x="0" y="0" width="740" height="70" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <text x="10" y="20" font-weight="bold" font-size="12">Chirp (InjectType = 8, 9, v5 only)</text>
+    <line x1="20" y1="40" x2="720" y2="40" stroke="#5b6b7b"/>
     <!-- chirp wave that gets denser left-to-right -->
-    <path d="M 10 13 Q 30 0 50 13 T 90 13 T 130 13 T 170 13 T 205 13 T 230 13 T 255 13 T 280 13 T 305 13 T 325 13 T 345 13 T 365 13 T 385 13 T 400 13 T 415 13 T 430 13 T 445 13 T 460 13 T 475 13 T 487 13 T 499 13 T 511 13 T 523 13 T 535 13 T 547 13 T 559 13 T 571 13 T 581 13 T 591 13 T 601 13 T 611 13 T 621 13 T 629 13 T 637 13 T 645 13 T 653 13 T 661 13 T 668 13 T 675 13 T 682 13 T 689 13 T 696 13 T 702 13 T 708 13 T 714 13 T 720 13 T 726 13 T 730 13" fill="none" stroke="#e0736b" stroke-width="1.4"/>
+    <path d="M 20 40 Q 50 18 80 40 T 140 40 T 200 40 T 250 40 T 290 40 T 325 40 T 355 40 T 380 40 T 402 40 T 422 40 T 440 40 T 456 40 T 471 40 T 485 40 T 498 40 T 510 40 T 521 40 T 531 40 T 540 40 T 549 40 T 557 40 T 564 40 T 571 40 T 577 40 T 583 40 T 588 40 T 593 40 T 598 40 T 602 40 T 606 40 T 610 40 T 614 40 T 617 40 T 620 40" fill="none" stroke="#e0736b" stroke-width="1.4"/>
+    <text x="370" y="60" text-anchor="middle" font-size="11">linearly rising frequency from InjectChirpF[1] to InjectChirpF[2], then repeats</text>
   </g>
-  <text x="380" y="378" text-anchor="middle" font-size="11">linearly rising frequency from InjectChirpF[1] to InjectChirpF[2], then repeats</text>
 </svg>

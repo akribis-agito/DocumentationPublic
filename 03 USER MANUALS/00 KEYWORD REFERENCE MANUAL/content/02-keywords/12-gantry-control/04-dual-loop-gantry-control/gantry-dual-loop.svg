@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="340" viewBox="0 0 720 340" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="340" viewBox="0 0 720 340" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Dual-loop gantry control: the linear position loop closes on the load feedback selected by GantryFdbkSrc; the inner velocity loop uses the mean of the two motor encoders (GantryAuxFdbk); the yaw loop runs on the motor encoder difference; the resulting motor currents are linear plus yaw on side A and linear minus yaw on side B.">
+  <title>Dual-loop gantry control</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>

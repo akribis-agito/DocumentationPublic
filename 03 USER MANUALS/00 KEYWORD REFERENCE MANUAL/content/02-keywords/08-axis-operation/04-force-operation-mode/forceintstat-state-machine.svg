@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="290" viewBox="0 0 760 290" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="290" viewBox="0 0 760 290" role="img" aria-label="ForceInTStat state machine. 0 motor off; on motor on goes to 1 (no command yet); on a new entry to 2 (raw reference ramping toward target); when raw ref reaches target to 3 (settling, dwell counter runs); once dwell reaches ForceInTTime to 4 (settled, latched, ForceSamples recorded). If the error leaves ForceInTTol in state 3 the dwell counter resets. Any state returns to 0 on motor off." font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <title>ForceInTStat state machine</title>
   <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
 
   <text x="380" y="22" text-anchor="middle" font-size="15" font-weight="bold">ForceInTStat state machine</text>
@@ -23,7 +24,7 @@
   <text x="530" y="124" text-anchor="middle" font-size="11">at target, settling</text>
   <text x="530" y="138" text-anchor="middle" font-size="11">dwell counter runs</text>
 
-  <rect x="620" y="80" width="120" height="64" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <rect x="610" y="80" width="140" height="64" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
   <text x="680" y="106" text-anchor="middle" font-weight="bold">4</text>
   <text x="680" y="124" text-anchor="middle" font-size="11">settled (latched)</text>
   <text x="680" y="138" text-anchor="middle" font-size="11">ForceSamples recorded</text>
@@ -38,8 +39,8 @@
   <line x1="440" y1="112" x2="470" y2="112" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
   <text x="455" y="100" text-anchor="middle" font-size="10">raw ref = target</text>
 
-  <line x1="590" y1="112" x2="620" y2="112" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
-  <text x="605" y="100" text-anchor="middle" font-size="10">dwell &#8805; ForceInTTime</text>
+  <line x1="590" y1="112" x2="608" y2="112" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="599" y="100" text-anchor="middle" font-size="10">dwell &#8805; ForceInTTime</text>
 
   <!-- 3 self-loop: window exit re-zeroes counter -->
   <path d="M510,144 C490,180 570,180 550,144" fill="none" stroke="#e0736b" stroke-width="1.2" marker-end="url(#arrow)"/>

@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="700" height="360" viewBox="0 0 700 360" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="360" viewBox="0 0 700 360" role="img" aria-label="Entry paths into position operation mode: direct OperationMode = 3 assignment, GoToPosMode, an automatic condition check (PosPosFlag with PosPosTh), or a configured digital input. Once entered, OperationMode = 3 and PosPosFlag is cleared. If BeginOnToPos = 1, an optional point-to-point move to RetractTarget at RetractSpeed runs on entry; this flag auto-clears." font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <title>Entering position operation mode</title>
   <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
 
   <text x="350" y="24" text-anchor="middle" font-size="15" font-weight="bold">Entering position operation mode</text>

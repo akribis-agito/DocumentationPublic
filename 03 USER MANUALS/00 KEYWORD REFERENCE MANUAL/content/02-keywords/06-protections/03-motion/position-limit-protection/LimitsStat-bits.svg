@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="520" height="160" viewBox="0 0 520 160" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="160" viewBox="0 0 520 160" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="LimitsStat 32-bit layout: bits 2 through 31 are unused and read zero; bit 1 is FLS (forward limit switch active, mask 0x0002); bit 0 is RLS (reverse limit switch active, mask 0x0001).">
+  <title>LimitsStat bit layout (32-bit)</title>
   <text x="20" y="26" font-size="15" font-weight="bold">LimitsStat bit layout (32-bit)</text>
 
   <!-- unused -->

@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="780" height="280" viewBox="0 0 780 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="280" viewBox="0 0 780 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="ConFltSnapVal layout: slots 1 to 4 hold values selected by ConFltSnapSrc, slots 5 to 14 hold hard-coded system parameters frozen at the fault.">
+  <title>ConFltSnapVal 14-slot snapshot layout</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
@@ -56,7 +57,7 @@
   <text x="500" y="252" text-anchor="middle" font-size="12">fixed system parameters (StatReg, MotionStat, Pos, Vel,</text>
   <text x="500" y="263" text-anchor="middle" font-size="11">current, ConFlt, HW-prot bits, MotorReason, motion reason, time)</text>
 
-  <!-- side caption -->
-  <text x="755" y="105" text-anchor="end" font-size="11" fill="#5b6b7b">configurable</text>
-  <text x="755" y="252" text-anchor="end" font-size="11" fill="#5b6b7b">hard-coded</text>
+  <!-- group labels on right (clear of slot text) -->
+  <text x="740" y="158" font-size="11" fill="#5b6b7b">user</text>
+  <text x="740" y="252" font-size="11" fill="#5b6b7b">system</text>
 </svg>

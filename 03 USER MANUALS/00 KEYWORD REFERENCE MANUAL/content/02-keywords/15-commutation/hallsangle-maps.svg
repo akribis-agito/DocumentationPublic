@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="780" height="300" viewBox="0 0 780 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="300" viewBox="0 0 780 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="HallsAngle interpretation per HallsAngleSw: when HallsAngleSw equals 0 the six entries hold the angle at the centre of each Hall sector; when HallsAngleSw equals 1 (v5 only) the entries hold the angle at each sector boundary (switch point).">
+  <title>HallsAngle entry interpretation per HallsAngleSw</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
@@ -55,12 +56,12 @@
   <circle cx="549" cy="100" r="4" fill="#e0736b"/>
   <circle cx="663" cy="100" r="4" fill="#e0736b"/>
 
-  <text x="96"  y="155" text-anchor="middle" font-size="11" fill="#e0736b">60</text>
-  <text x="209" y="155" text-anchor="middle" font-size="11" fill="#e0736b">120</text>
-  <text x="323" y="155" text-anchor="middle" font-size="11" fill="#e0736b">180</text>
-  <text x="436" y="155" text-anchor="middle" font-size="11" fill="#e0736b">240</text>
-  <text x="549" y="155" text-anchor="middle" font-size="11" fill="#e0736b">300</text>
-  <text x="663" y="155" text-anchor="middle" font-size="11" fill="#e0736b">360</text>
+  <text x="96"  y="155" text-anchor="middle" font-size="11" fill="#e0736b">30</text>
+  <text x="209" y="155" text-anchor="middle" font-size="11" fill="#e0736b">90</text>
+  <text x="323" y="155" text-anchor="middle" font-size="11" fill="#e0736b">150</text>
+  <text x="436" y="155" text-anchor="middle" font-size="11" fill="#e0736b">210</text>
+  <text x="549" y="155" text-anchor="middle" font-size="11" fill="#e0736b">270</text>
+  <text x="663" y="155" text-anchor="middle" font-size="11" fill="#e0736b">330</text>
   <text x="380" y="172" text-anchor="middle" font-size="11" fill="#5b6b7b">HallsAngle[1..6] = angle at the centre of each sector</text>
 
   <!-- BOTTOM: switch-angle map -->
@@ -77,19 +78,19 @@
   <line x1="606" y1="240" x2="606" y2="256" stroke="#5b6b7b"/>
   <line x1="720" y1="240" x2="720" y2="256" stroke="#5b6b7b"/>
 
-  <!-- transition dots at sector edges (30, 90, 150, ...) -->
-  <circle cx="96"  cy="248" r="4" fill="#e0736b"/>
-  <circle cx="209" cy="248" r="4" fill="#e0736b"/>
-  <circle cx="323" cy="248" r="4" fill="#e0736b"/>
-  <circle cx="436" cy="248" r="4" fill="#e0736b"/>
-  <circle cx="549" cy="248" r="4" fill="#e0736b"/>
-  <circle cx="663" cy="248" r="4" fill="#e0736b"/>
+  <!-- transition dots at sector boundaries (60, 120, 180, 240, 300, 360) -->
+  <circle cx="153" cy="248" r="4" fill="#e0736b"/>
+  <circle cx="266" cy="248" r="4" fill="#e0736b"/>
+  <circle cx="380" cy="248" r="4" fill="#e0736b"/>
+  <circle cx="493" cy="248" r="4" fill="#e0736b"/>
+  <circle cx="606" cy="248" r="4" fill="#e0736b"/>
+  <circle cx="720" cy="248" r="4" fill="#e0736b"/>
 
-  <text x="96"  y="276" text-anchor="middle" font-size="11" fill="#e0736b">30</text>
-  <text x="209" y="276" text-anchor="middle" font-size="11" fill="#e0736b">90</text>
-  <text x="323" y="276" text-anchor="middle" font-size="11" fill="#e0736b">150</text>
-  <text x="436" y="276" text-anchor="middle" font-size="11" fill="#e0736b">210</text>
-  <text x="549" y="276" text-anchor="middle" font-size="11" fill="#e0736b">270</text>
-  <text x="663" y="276" text-anchor="middle" font-size="11" fill="#e0736b">330</text>
+  <text x="153" y="276" text-anchor="middle" font-size="11" fill="#e0736b">60</text>
+  <text x="266" y="276" text-anchor="middle" font-size="11" fill="#e0736b">120</text>
+  <text x="380" y="276" text-anchor="middle" font-size="11" fill="#e0736b">180</text>
+  <text x="493" y="276" text-anchor="middle" font-size="11" fill="#e0736b">240</text>
+  <text x="606" y="276" text-anchor="middle" font-size="11" fill="#e0736b">300</text>
+  <text x="720" y="276" text-anchor="middle" font-size="11" fill="#e0736b">360</text>
   <text x="380" y="293" text-anchor="middle" font-size="11" fill="#5b6b7b">HallsAngle[1..6] = angle at each sector boundary (switch point)</text>
 </svg>

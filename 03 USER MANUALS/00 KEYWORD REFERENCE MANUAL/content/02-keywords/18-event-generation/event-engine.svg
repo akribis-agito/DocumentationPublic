@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="320" viewBox="0 0 720 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="320" viewBox="0 0 720 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Event generation engine: feedback position is compared against the next event position selected by EventType; when reached, an output pulse of width EventPulseWid is fired, EventCntr is incremented, and EventNextPos advances.">
+  <title>Event generation: position-compare engine</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
@@ -33,6 +34,8 @@
   <path d="M190,155 L256,155" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
   <path d="M460,155 L526,155" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
   <text x="494" y="148" text-anchor="middle" font-size="11" fill="#777">yes</text>
-  <path d="M610,190 C610,235 470,250 440,250" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
-  <path d="M280,250 C150,240 110,225 110,192" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <!-- Fire -> Advance -->
+  <path d="M610,190 C610,235 470,250 460,250" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <!-- Advance -> Compare (loop back to wait for next position) -->
+  <path d="M280,250 C200,250 200,210 258,200" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
 </svg>

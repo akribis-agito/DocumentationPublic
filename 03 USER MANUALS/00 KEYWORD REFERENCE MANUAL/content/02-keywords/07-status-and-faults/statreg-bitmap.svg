@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="784" height="150" font-family="Segoe UI,Arial,sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" width="784" height="150" viewBox="0 0 784 150" font-family="-apple-system,Segoe UI,Roboto,sans-serif" role="img" aria-label="StatReg 32-bit layout from bit 31 down to bit 0, color coded by category: status, voltage fault, warning level, limit, saturation, brake, filters, fault, reserved.">
+<title>StatReg 32-bit layout</title>
 <text x="8" y="18" font-size="13" font-weight="bold">StatReg — 32-bit layout (bit 31 … 0)</text>
 <rect x="8" y="44" width="23" height="30" fill="#f3b6ad" stroke="#8a929b" stroke-width="0.6"/>
 <text x="20.0" y="56" font-size="8" text-anchor="middle">31</text>

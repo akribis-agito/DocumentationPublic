@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="250" viewBox="0 0 760 250" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="250" viewBox="0 0 760 250" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Error-mapping pipeline: raw feedback PosBeforeMap indexes MapTable on the position grid (MapStartPos, MapPosGap, MapLength); the table value is interpolated and combined with a ramp and offset to form a correction, which is added back onto PosBeforeMap to produce the corrected position Pos. Source axis is set by MapEncoder and enable by MapType.">
+  <title>Error-mapping position-correction pipeline</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>

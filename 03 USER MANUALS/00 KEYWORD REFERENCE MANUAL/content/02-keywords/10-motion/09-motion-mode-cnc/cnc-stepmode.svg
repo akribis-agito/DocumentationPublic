@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="820" height="280" viewBox="0 0 820 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="280" viewBox="0 0 820 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="CNC step mode timeline: each path segment decelerates to a full stop at its end and the controller waits until CNCADoStep is written to 1 before releasing the next segment; CNCADoStep self-clears once the next segment runs and the path halts again at that segment's end.">
+  <title>CNC step mode timeline</title>
   <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
 
   <text x="410" y="22" text-anchor="middle" font-weight="bold">CNC step mode: each segment runs to a full stop, then waits for CNCADoStep = 1</text>

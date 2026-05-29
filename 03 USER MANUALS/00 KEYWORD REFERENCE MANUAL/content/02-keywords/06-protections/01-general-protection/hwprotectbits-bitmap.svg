@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="280" viewBox="0 0 760 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="280" viewBox="0 0 760 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="HWProtectBits and ProtectMask 16-bit layout for standalone amplifiers; bits 0-7 are core hardware protections, bits 8-15 are model-dependent reuse; ProtectMask uses the same bit positions where 1 disables that protection.">
+  <title>HWProtectBits / ProtectMask &#8211; standalone bit layout</title>
   <text x="20" y="26" font-size="15" font-weight="bold">HWProtectBits / ProtectMask &#8211; standalone bit layout</text>
   <text x="20" y="46" fill="#555" font-size="11">Hardware protection signals; the lower 16 bits are meaningful. ProtectMask uses the same bit positions.</text>
 

@@ -1,22 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="560" height="170" viewBox="0 0 560 170" role="img" aria-label="By-gap event pulse train between EventBegPos and EventEndPos">
-  <line x1="40" y1="120" x2="540" y2="120" stroke="#444" stroke-width="1"/>
-  <polygon points="540,120 532,116 532,124" fill="#444"/>
-  <text x="500" y="140" font-family="sans-serif" font-size="12" fill="#444">position</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="190" viewBox="0 0 600 190" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="By-gap event pulse train between EventBegPos and EventEndPos: a pulse is emitted at EventBegPos and again every EventGap units of position, while the axis is inside the window.">
+  <title>By-gap event pulse train</title>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
+    </marker>
+  </defs>
+
+  <text x="300" y="22" text-anchor="middle" font-weight="bold">By-gap event pulse train</text>
+
+  <!-- position axis -->
+  <line x1="40" y1="130" x2="572" y2="130" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="566" y="150" text-anchor="end" font-size="11" fill="#5b6b7b">position</text>
+
   <!-- pulses at Beg, Beg+Gap, Beg+2Gap, Beg+3Gap -->
-  <g stroke="#1f6feb" stroke-width="2" fill="none">
-    <path d="M100,120 L100,60 L112,60 L112,120"/>
-    <path d="M210,120 L210,60 L222,60 L222,120"/>
-    <path d="M320,120 L320,60 L332,60 L332,120"/>
-    <path d="M430,120 L430,60 L442,60 L442,120"/>
+  <g stroke="#5b8def" stroke-width="2" fill="none">
+    <path d="M100,130 L100,70 L112,70 L112,130"/>
+    <path d="M210,130 L210,70 L222,70 L222,130"/>
+    <path d="M320,130 L320,70 L332,70 L332,130"/>
+    <path d="M430,130 L430,70 L442,70 L442,130"/>
   </g>
+
   <!-- window markers -->
-  <line x1="100" y1="50" x2="100" y2="130" stroke="#cb2431" stroke-width="1" stroke-dasharray="3,3"/>
-  <line x1="470" y1="50" x2="470" y2="130" stroke="#cb2431" stroke-width="1" stroke-dasharray="3,3"/>
-  <text x="70" y="45" font-family="sans-serif" font-size="11" fill="#cb2431">EventBegPos</text>
-  <text x="442" y="45" font-family="sans-serif" font-size="11" fill="#cb2431">EventEndPos</text>
-  <!-- gap arrow -->
-  <line x1="112" y1="150" x2="210" y2="150" stroke="#444" stroke-width="1"/>
-  <polygon points="112,150 120,146 120,154" fill="#444"/>
-  <polygon points="210,150 202,146 202,154" fill="#444"/>
-  <text x="135" y="146" font-family="sans-serif" font-size="11" fill="#444">EventGap</text>
+  <line x1="100" y1="60" x2="100" y2="140" stroke="#e0736b" stroke-width="1.2" stroke-dasharray="3,3"/>
+  <line x1="470" y1="60" x2="470" y2="140" stroke="#e0736b" stroke-width="1.2" stroke-dasharray="3,3"/>
+  <text x="100" y="52" text-anchor="middle" font-size="11" fill="#e0736b">EventBegPos</text>
+  <text x="470" y="52" text-anchor="middle" font-size="11" fill="#e0736b">EventEndPos</text>
+
+  <!-- gap dimension -->
+  <line x1="112" y1="162" x2="210" y2="162" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="210" y1="162" x2="112" y2="162" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="161" y="180" text-anchor="middle" font-size="11" fill="#5b6b7b">EventGap</text>
 </svg>

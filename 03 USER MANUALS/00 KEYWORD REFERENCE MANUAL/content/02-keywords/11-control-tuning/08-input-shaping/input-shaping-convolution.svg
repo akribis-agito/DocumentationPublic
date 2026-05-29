@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" viewBox="0 0 760 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" viewBox="0 0 760 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Input shaping convolves the profiler reference with a short FIR pulse sequence (impulses A0, A1, A2 at delays 0, T/2, T); the three weighted copies sum to produce the shaped reference fed to the position loop.">
+  <title>Input shaping FIR convolution</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
   </defs>
@@ -19,10 +20,9 @@
   <rect x="370" y="70" width="50" height="50" rx="25" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
   <text x="395" y="100" text-anchor="middle">&#931;</text>
 
-  <line x1="420" y1="95" x2="468" y2="95" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
-  <text x="600" y="86" text-anchor="middle">Shaped reference</text>
-  <text x="600" y="102" text-anchor="middle">to position loop</text>
-  <rect x="470" y="70" width="0" height="0"/>
+  <line x1="420" y1="95" x2="520" y2="95" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="615" y="86" text-anchor="middle">Shaped reference</text>
+  <text x="615" y="102" text-anchor="middle">to position loop</text>
 
   <!-- Three impulse taps feeding the sum -->
   <!-- tap A0 at 0 -->

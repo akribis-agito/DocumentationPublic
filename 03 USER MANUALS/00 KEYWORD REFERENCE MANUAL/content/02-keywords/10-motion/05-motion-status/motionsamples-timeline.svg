@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="640" height="220" viewBox="0 0 640 220" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="220" viewBox="0 0 640 220" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="MotionSamples timing relations: index 1 spans Begin to profile end; index 2 spans Begin to the start of settling; index 4 is index 2 minus index 1, the settling delay; index 3 is index 2 plus InTargetTime, from Begin until InTargetStat reaches 4.">
+  <title>MotionSamples timing relations</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
   </defs>

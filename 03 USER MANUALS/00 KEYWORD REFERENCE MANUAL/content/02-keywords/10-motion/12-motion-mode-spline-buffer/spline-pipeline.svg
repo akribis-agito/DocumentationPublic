@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="820" height="190" viewBox="0 0 820 190" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="190" viewBox="0 0 820 190" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Spline buffer motion pipeline: BuffPos and BuffTime waypoints are passed to spline interpolation governed by BuffCalc, BuffSplineMod, BuffEdgeMode and BuffSlopes; the fitted spline is streamed as the reference and repeats per BuffCycles.">
+  <title>Spline buffer motion pipeline</title>
   <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
 
   <!-- waypoints -->

@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="780" height="280" viewBox="0 0 780 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="280" viewBox="0 0 780 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="ProgEvent lifecycle: a triggered event moves from Waiting (state 0) to Pending (state 1) when its condition is met, then to In service (state 2) when scanned; after the handler returns it is re-armed. All three of ProgEventOn, ProgEventGEn, and ProgEventEn for the event must be 1 to run.">
+  <title>ProgEvent arming timeline and gates</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
@@ -34,8 +35,9 @@
   <text x="390" y="210" text-anchor="middle" font-size="11">Return — re-armed for next occurrence</text>
 
   <!-- gates row -->
-  <rect x="20" y="232" width="740" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-  <text x="36" y="258" font-size="12"><tspan font-weight="bold">All 3 must be 1 to run handler:</tspan> &#160;ProgEventOn (sense+serve all) &#160; &#215; &#160; ProgEventGEn (serve all) &#160; &#215; &#160; ProgEventEn[n] (serve event n)</text>
+  <rect x="20" y="226" width="740" height="48" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="36" y="244" font-size="11"><tspan font-weight="bold">All 3 must be 1 to run handler:</tspan></text>
+  <text x="36" y="262" font-size="11">ProgEventOn (sense+serve all) &#160;&#215;&#160; ProgEventGEn (serve all) &#160;&#215;&#160; ProgEventEn[n] (serve event n)</text>
 
   <!-- ProgEventOn=0 callout -->
   <text x="40" y="148" font-size="11" fill="#5b6b7b">ProgEventOn = 0: all events forced back here, pending discarded, sensing stops</text>

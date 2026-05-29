@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="660" height="300" viewBox="0 0 660 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="660" height="300" viewBox="0 0 660 300" role="img" aria-label="Central-i network. A master controller exposes ports (one per remote unit) that each link to a remote amplifier unit. CIConnect brings a port up; CIStatus[1] reports its state; CIIdentity carries the remote device descriptor back to the master." font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <title>Central-i network</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
   </defs>

@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="240" viewBox="0 0 720 240" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="240" viewBox="0 0 720 240" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="PosRef post-processing pipeline: the profiler reference passes through offset and moving-average smoothing, optional input shaping, is reported as PosRef, then has injection and filtering applied before reaching the position loop.">
+  <title>PosRef post-processing pipeline</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
   </defs>
@@ -31,15 +32,15 @@
   <text x="650" y="118" text-anchor="middle">filter</text>
 
   <!-- loop -->
-  <rect x="270" y="170" width="180" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-  <text x="360" y="197" text-anchor="middle">position loop (uses shaped+filtered)</text>
+  <rect x="220" y="170" width="280" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="360" y="197" text-anchor="middle">position loop (uses shaped + filtered)</text>
 
   <!-- arrows -->
   <line x1="120" y1="105" x2="150" y2="105" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
   <line x1="270" y1="105" x2="300" y2="105" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
   <line x1="420" y1="105" x2="450" y2="105" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
   <line x1="570" y1="105" x2="600" y2="105" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
-  <line x1="650" y1="130" x2="450" y2="170" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="650" y1="130" x2="500" y2="172" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
 
   <text x="360" y="55" text-anchor="middle" font-size="11" fill="#5b6b7b">internally carried as 50.14 fixed-point; reported value is the shaped stage shifted back to user units</text>
 </svg>

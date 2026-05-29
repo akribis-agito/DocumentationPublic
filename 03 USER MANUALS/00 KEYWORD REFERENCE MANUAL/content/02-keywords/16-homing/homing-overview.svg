@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="320" viewBox="0 0 720 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="320" viewBox="0 0 720 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Typical homing sequence: approach the switch, hit it, back off to clear it, find the encoder index, set the position to define the origin, and end with HomingStat equal to 100. Any timeout, fault, or wrong end-of-motion reason aborts the run.">
+  <title>Typical homing sequence</title>
   <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
 
   <text x="20" y="26" font-size="15" font-weight="bold">A typical homing sequence</text>
@@ -21,11 +22,11 @@
   <text x="530" y="94" text-anchor="middle" font-weight="bold">Find index</text>
   <text x="530" y="112" text-anchor="middle" font-size="11">jog to encoder index</text>
 
-  <rect x="320" y="180" width="120" height="60" rx="6" fill="#eaf7ea" stroke="#3a8a3a" stroke-width="1.2"/>
+  <rect x="320" y="180" width="120" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
   <text x="380" y="204" text-anchor="middle" font-weight="bold">Set position</text>
   <text x="380" y="222" text-anchor="middle" font-size="11">define the origin</text>
 
-  <rect x="470" y="180" width="120" height="60" rx="6" fill="#eaf7ea" stroke="#3a8a3a" stroke-width="1.2"/>
+  <rect x="470" y="180" width="120" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
   <text x="530" y="204" text-anchor="middle" font-weight="bold">End homing</text>
   <text x="530" y="222" text-anchor="middle" font-size="11">HomingStat = 100</text>
 

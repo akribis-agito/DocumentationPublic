@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="820" height="280" viewBox="0 0 820 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="280" viewBox="0 0 820 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Spline fit: five BuffPos and BuffTime waypoints with the linear interpolation (BuffSplineMod = 1) shown as a dashed broken line and the default cubic spline (BuffSplineMod = 3) shown as a smooth curve through every waypoint.">
+  <title>Spline waypoints with linear and cubic fits</title>
   <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
 
   <text x="410" y="22" text-anchor="middle" font-weight="bold">Spline fit: waypoints (BuffPos / BuffTime) and the interpolated reference</text>
@@ -18,8 +19,8 @@
   <!-- point 5 (780,180) -> (780, 76) -->
 
   <!-- linear segments (light dashed) -->
-  <path d="M80 220 L259 156 L438 188 L618 100 L780 76" fill="none" stroke="#bbb" stroke-dasharray="5 4" stroke-width="1.4"/>
-  <text x="500" y="146" font-size="11" fill="#888">linear (BuffSplineMod = 1)</text>
+  <path d="M80 220 L259 156 L438 188 L618 100 L780 76" fill="none" stroke="#5b6b7b" stroke-dasharray="5 4" stroke-width="1.4" opacity="0.7"/>
+  <text x="500" y="146" font-size="11" fill="#5b6b7b">linear (BuffSplineMod = 1)</text>
 
   <!-- cubic spline (smooth curve through points) -->
   <path d="M80 220 C 140 200 200 130 259 156 S 360 195 438 188 S 540 100 618 100 S 740 80 780 76" fill="none" stroke="#5b8def" stroke-width="2.2"/>

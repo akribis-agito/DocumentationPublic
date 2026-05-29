@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="680" height="270" viewBox="0 0 680 270" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="300" viewBox="0 0 680 300" role="img" aria-label="UserPWM duty cycle examples. Two pulse-width-modulated traces shown: UserPWM = 1024 produces 25% duty, UserPWM = 2048 produces 50% duty. The period T is set by UserPWMDiv; UserPWM = 4095 is approximately always on, 0 is always off." font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <title>UserPWM duty and period</title>
   <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
 
   <text x="340" y="22" text-anchor="middle" font-size="15" font-weight="bold">UserPWM duty and period</text>
@@ -41,7 +42,6 @@
   <text x="120" y="161" font-size="10" fill="#3a6bd6">on</text>
   <text x="260" y="210" font-size="10" fill="#3a6bd6">off</text>
 
-  <!-- Legend on right -->
-  <text x="650" y="62" text-anchor="end" font-size="10" fill="#5b6b7b">on / off</text>
-  <text x="650" y="245" text-anchor="end" font-size="10" fill="#5b6b7b">UserPWM = 4095 &#8594; ~always on; 0 &#8594; always off; smaller UserPWMDiv &#8594; shorter T &#8594; higher frequency.</text>
+  <!-- Footnote -->
+  <text x="340" y="288" text-anchor="middle" font-size="11" fill="#5b6b7b">UserPWM = 4095 &#8594; ~always on; 0 &#8594; always off; smaller UserPWMDiv &#8594; shorter T &#8594; higher frequency.</text>
 </svg>

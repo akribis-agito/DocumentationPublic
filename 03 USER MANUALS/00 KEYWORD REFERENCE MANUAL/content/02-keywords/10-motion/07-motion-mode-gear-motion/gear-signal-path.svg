@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="820" height="250" viewBox="0 0 820 250" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="250" viewBox="0 0 820 250" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Gear-motion signal path: master variable is scaled by MasterFact over MasterFactDen and wrapped at MasterModRev, accumulated into MasterPos, then routed either directly through MasterFilt or indirectly through AbsTrgt and the profiler to the reference.">
+  <title>Gear-motion signal path from GearMaster to PosRef</title>
   <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
 
   <!-- master -->
@@ -7,15 +8,15 @@
   <text x="87" y="138" text-anchor="middle" font-size="11">(GearMaster)</text>
 
   <!-- ratio + modulo -->
-  <rect x="202" y="95" width="160" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-  <text x="282" y="116" text-anchor="middle">Ratio &amp; modulo</text>
-  <text x="282" y="133" text-anchor="middle" font-size="11">MasterFact / MasterFactDen,</text>
-  <text x="282" y="148" text-anchor="middle" font-size="11">MasterModRev</text>
+  <rect x="192" y="95" width="200" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="292" y="116" text-anchor="middle">Ratio &amp; modulo</text>
+  <text x="292" y="133" text-anchor="middle" font-size="11">MasterFact / MasterFactDen,</text>
+  <text x="292" y="148" text-anchor="middle" font-size="11">MasterModRev</text>
 
   <!-- MasterPos accumulator -->
-  <rect x="402" y="95" width="150" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-  <text x="477" y="120" text-anchor="middle">MasterPos</text>
-  <text x="477" y="138" text-anchor="middle" font-size="11">accumulated each cycle</text>
+  <rect x="422" y="95" width="160" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="502" y="120" text-anchor="middle">MasterPos</text>
+  <text x="502" y="138" text-anchor="middle" font-size="11">accumulated each cycle</text>
 
   <!-- direct branch -->
   <rect x="600" y="22" width="208" height="56" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
@@ -28,8 +29,8 @@
   <text x="704" y="212" text-anchor="middle" font-size="11">AbsTrgt &#8594; profiler &#8594; reference</text>
 
   <!-- arrows -->
-  <line x1="162" y1="125" x2="200" y2="125" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
-  <line x1="362" y1="125" x2="400" y2="125" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
-  <line x1="552" y1="115" x2="598" y2="62" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
-  <line x1="552" y1="135" x2="598" y2="188" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="162" y1="125" x2="190" y2="125" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="392" y1="125" x2="420" y2="125" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="582" y1="115" x2="598" y2="62" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="582" y1="135" x2="598" y2="188" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
 </svg>

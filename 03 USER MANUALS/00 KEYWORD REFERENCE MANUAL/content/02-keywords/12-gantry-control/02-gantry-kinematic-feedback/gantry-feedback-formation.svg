@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="700" height="340" viewBox="0 0 700 340" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="340" viewBox="0 0 700 340" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Gantry feedback formation: A-side and B-side positions are combined into a Mean (A plus B plus GantryOffset divided by 2) and a Difference (A minus B minus GantryOffset); the mean becomes GantryFdbk on the master axis (linear feedback) and the difference becomes GantryFdbk on the yaw axis.">
+  <title>Gantry feedback formation</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
@@ -25,10 +26,11 @@
   <text x="315" y="250" text-anchor="middle">Difference</text>
   <text x="315" y="268" text-anchor="middle" fill="#5b6b7b" font-size="11">A &#8722; B &#8722; offset</text>
 
+  <!-- A and B feed both Mean (top) and Difference (bottom) -->
   <line x1="160" y1="70" x2="230" y2="78" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
   <line x1="160" y1="270" x2="230" y2="262" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
-  <line x1="160" y1="78" x2="230" y2="248" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
-  <line x1="160" y1="262" x2="230" y2="92" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="160" y1="80" x2="226" y2="240" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="160" y1="260" x2="226" y2="100" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
   <line x1="315" y1="150" x2="315" y2="115" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
   <line x1="315" y1="190" x2="315" y2="225" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
 

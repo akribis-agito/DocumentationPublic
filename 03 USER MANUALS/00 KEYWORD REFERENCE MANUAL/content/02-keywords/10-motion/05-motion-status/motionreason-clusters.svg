@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="780" height="430" viewBox="0 0 780 430" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="430" viewBox="0 0 780 430" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="MotionReason value clusters by stop source: user commands such as Stop and Abort; limit and travel codes including limit switches, software limits and EmrgDec stops; fault and input codes that typically accompany a ConFlt entry; homing and mode events; mode-specific Stop commands for ECAM, FIFO, CNC, Vector and Buffer; and group member codes for CNCA, CNCB, vector and spline-buffer member axes.">
+  <title>MotionReason value clusters by stop source</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
   </defs>
@@ -17,17 +18,17 @@
 
   <!-- Cluster 2: Limit / travel (4-7) -->
   <rect x="270" y="50" width="230" height="150" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
-  <text x="385" y="70" text-anchor="middle" font-weight="bold" fill="#b35047">Limit &#38; travel</text>
+  <text x="385" y="70" text-anchor="middle" font-weight="bold" fill="#e0736b">Limit &#38; travel</text>
   <text x="285" y="92" fill="#333">4 &#8211; reverse limit switch</text>
   <text x="285" y="110" fill="#333">5 &#8211; forward limit switch</text>
   <text x="285" y="128" fill="#333">6 &#8211; reverse software limit</text>
   <text x="285" y="146" fill="#333">7 &#8211; forward software limit</text>
-  <text x="285" y="164" fill="#b35047">41 &#8211; either soft limit (v5 only)</text>
+  <text x="285" y="164" fill="#e0736b">41 &#8211; either soft limit (v5 only)</text>
   <text x="285" y="186" fill="#555" font-size="11">stop uses EmrgDec, not Decel</text>
 
   <!-- Cluster 3: Fault / disable (8, 21-22, 28) -->
   <rect x="520" y="50" width="240" height="150" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
-  <text x="640" y="70" text-anchor="middle" font-weight="bold" fill="#b35047">Fault / input</text>
+  <text x="640" y="70" text-anchor="middle" font-weight="bold" fill="#e0736b">Fault / input</text>
   <text x="535" y="92" fill="#333">8 &#8211; motor disabled</text>
   <text x="535" y="110" fill="#333">21 &#8211; stop by input signal</text>
   <text x="535" y="128" fill="#333">22 &#8211; abort by input signal</text>

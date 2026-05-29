@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="430" viewBox="0 0 760 430" role="img" aria-label="I/O model overview. Four channel families connect the physical pins to controller keywords: analog input (ADC and conditioning to AInPort), analog output (AOutPort or parameter through DAC), digital input (DInFilt and DInLog to DInPort), digital output (DOutPort and functions through DOutLog and DOutType). Bi-directional pins act as input or output based on BiDirConfig." font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <title>I/O model</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
   </defs>
@@ -60,6 +61,6 @@
   <path d="M558,370 L472,370" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
 
   <!-- BiDirConfig accent -->
-  <rect x="40" y="402" width="320" height="20" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
-  <text x="200" y="416" text-anchor="middle" font-size="11" fill="#9c3b33">Bi-directional pins act as input or output &#8212; set by BiDirConfig</text>
+  <rect x="40" y="402" width="400" height="20" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="240" y="416" text-anchor="middle" font-size="11" fill="#9c3b33">Bi-directional pins act as input or output &#8212; set by BiDirConfig</text>
 </svg>

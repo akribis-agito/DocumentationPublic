@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="860" height="380" viewBox="0 0 860 380" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="380" viewBox="0 0 860 380" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="ForcePIVOn = 0 puts the force PID directly over the current loop with ForceFFW and ForceVelFFW summed in; ForcePIVOn = 1 turns the force output into a position-reference offset that wraps the position-plus-velocity cascade.">
+  <title>ForcePIVOn topologies</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
   </defs>
@@ -54,17 +55,17 @@
   <line x1="260" y1="297" x2="298" y2="297" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
   <rect x="300" y="272" width="160" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
   <text x="380" y="292" text-anchor="middle">to position reference</text>
-  <text x="380" y="310" text-anchor="middle" fill="#5b6b7b">via x sample time + entry</text>
+  <text x="380" y="310" text-anchor="middle" font-size="11" fill="#5b6b7b">via &#215; sample time + entry</text>
 
   <line x1="460" y1="297" x2="498" y2="297" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
   <rect x="500" y="272" width="140" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
   <text x="570" y="292" text-anchor="middle">Position + velocity</text>
   <text x="570" y="310" text-anchor="middle">cascade</text>
 
-  <line x1="640" y1="297" x2="678" y2="297" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
-  <rect x="680" y="272" width="110" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-  <text x="735" y="292" text-anchor="middle">Current loop</text>
-  <text x="735" y="310" text-anchor="middle" fill="#5b6b7b">+ ForceFFW, ForceVelFFW</text>
+  <line x1="640" y1="297" x2="658" y2="297" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <rect x="660" y="272" width="160" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="740" y="292" text-anchor="middle">Current loop</text>
+  <text x="740" y="310" text-anchor="middle" font-size="11" fill="#5b6b7b">+ ForceFFW, ForceVelFFW</text>
 
-  <text x="380" y="345" text-anchor="middle" fill="#5b6b7b">ForceGain scaling: 1E-3. Force output filters are not used here.</text>
+  <text x="600" y="370" text-anchor="middle" font-size="11" fill="#5b6b7b">ForceGain scaling: 1E-3. Force output filters are not used here.</text>
 </svg>

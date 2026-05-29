@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="300" viewBox="0 0 720 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="310" viewBox="0 0 720 310" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="AbsTrgt versus RelTrgt: AbsTrgt is the destination measured from zero; RelTrgt is the signed distance from the current PosRef. At Begin, a non-zero RelTrgt is converted to AbsTrgt as PosRef plus RelTrgt and the move proceeds as an absolute PTP.">
+  <title>AbsTrgt vs RelTrgt geometry</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
   </defs>
@@ -8,7 +9,7 @@
   <!-- shared axis -->
   <line x1="40" y1="100" x2="680" y2="100" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
   <text x="60"  y="118" text-anchor="middle" fill="#5b6b7b" font-size="11">0</text>
-  <text x="680" y="118" text-anchor="middle" fill="#5b6b7b" font-size="11">position (user units)</text>
+  <text x="660" y="118" text-anchor="end" fill="#5b6b7b" font-size="11">position (user units)</text>
 
   <!-- starting reference at 30000 -->
   <circle cx="220" cy="100" r="6" fill="#5b8def"/>
@@ -27,6 +28,7 @@
   <text x="360" y="213" text-anchor="middle" fill="#2e7d32" font-size="11">RelTrgt = +50000 (measured from PosRef)</text>
 
   <!-- conversion -->
-  <text x="370" y="248" text-anchor="middle" fill="#5b6b7b" font-size="11">At Begin: if RelTrgt &#8800; 0, AbsTrgt = PosRef + RelTrgt (here 30000 + 50000 = 80000). The move then proceeds exactly as an absolute PTP.</text>
-  <text x="370" y="270" text-anchor="middle" fill="#5b6b7b" font-size="11">Begin rejects the move if the resulting AbsTrgt is outside the software position limits or against an active limit switch.</text>
+  <text x="360" y="248" text-anchor="middle" fill="#5b6b7b" font-size="11">At Begin: if RelTrgt &#8800; 0, AbsTrgt = PosRef + RelTrgt (here 30000 + 50000 = 80000).</text>
+  <text x="360" y="262" text-anchor="middle" fill="#5b6b7b" font-size="11">The move then proceeds exactly as an absolute PTP.</text>
+  <text x="360" y="284" text-anchor="middle" fill="#5b6b7b" font-size="11">Begin rejects the move if AbsTrgt is outside the software limits or against an active limit switch.</text>
 </svg>

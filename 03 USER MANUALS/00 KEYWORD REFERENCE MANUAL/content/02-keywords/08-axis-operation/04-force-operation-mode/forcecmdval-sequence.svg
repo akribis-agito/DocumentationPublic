@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="680" height="340" viewBox="0 0 680 340" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="340" viewBox="0 0 680 340" role="img" aria-label="ForceCmdVal sequence with ForceCmdSrc = 1. Raw ForceRef ramps to entry 1 (here 340), holds for 400 ms (ForceCmdCntr counts during hold), ramps to entry 2 (here -260), holds for 500 ms, then exits to position mode because ForceCmdHTime[3] = 0. ForceInTStat moves through 3 settling and 4 settled while the error stays within tolerance." font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <title>ForceCmdVal sequence (ForceCmdSrc = 1)</title>
   <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
 
   <text x="340" y="22" text-anchor="middle" font-size="15" font-weight="bold">ForceCmdVal sequence (ForceCmdSrc = 1)</text>

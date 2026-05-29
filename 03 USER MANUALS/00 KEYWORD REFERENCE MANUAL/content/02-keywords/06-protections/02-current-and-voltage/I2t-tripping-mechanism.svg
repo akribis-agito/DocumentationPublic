@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="780" height="280" viewBox="0 0 780 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="280" viewBox="0 0 780 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="I2t tripping mechanism: motor current is squared then low-pass filtered with a time constant derived from PeakCL, ContCL and PeakTime. The filtered value is compared to ContCL squared with 10 percent hysteresis. By default it limits current to ContCL; if configured, it disables the axis with ConFlt code 1044.">
+  <title>I&#178;t tripping mechanism &#8211; thermal model of motor current</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
   </defs>

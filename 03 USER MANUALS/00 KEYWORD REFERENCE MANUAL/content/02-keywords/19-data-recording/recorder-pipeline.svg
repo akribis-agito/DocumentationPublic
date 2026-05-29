@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="340" viewBox="0 0 720 340" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="340" viewBox="0 0 720 340" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Data recorder pipeline: parameters selected via RecParamA and RecParamB are sampled down by RecGap into a per-parameter buffer of RecLength points; RecStart and a trigger condition stop the capture, then RecUpload moves the buffers to the host when RecStat equals 4. The Logger is a separate continuous logger.">
+  <title>Data recorder pipeline</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
@@ -40,8 +41,8 @@
   <path d="M565,130 L565,176" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
 
   <!-- separate logger -->
-  <line x1="20" y1="285" x2="700" y2="285" stroke="#ccc" stroke-width="1" stroke-dasharray="4,4"/>
-  <text x="20" y="305" font-size="11" fill="#777">Separate from the recorder:</text>
-  <rect x="180" y="290" width="360" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-  <text x="360" y="315" text-anchor="middle" font-size="11">Logger continuously logs selected parameters (LoggerOn, LoggerParams, LoggerUpload)</text>
+  <line x1="20" y1="275" x2="700" y2="275" stroke="#ccc" stroke-width="1" stroke-dasharray="4,4"/>
+  <text x="20" y="293" font-size="11" fill="#777">Separate from the recorder:</text>
+  <rect x="100" y="298" width="520" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="360" y="323" text-anchor="middle" font-size="11">Logger continuously logs selected parameters (LoggerOn, LoggerParams, LoggerUpload)</text>
 </svg>

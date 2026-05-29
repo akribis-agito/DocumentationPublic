@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="700" height="260" viewBox="0 0 700 260" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="260" viewBox="0 0 700 260" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Normal stop versus emergency stop: a Stop command ramps velocity to zero on Decel, while a limit or controlled-stop-input ramps on EmrgDec, which is steeper and bypasses jerk smoothing.">
+  <title>Normal stop vs emergency stop velocity ramp</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
   </defs>

@@ -1,47 +1,62 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="340" viewBox="0 0 720 340" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
-  <rect x="0" y="0" width="720" height="340" fill="#ffffff"/>
-  <text x="360" y="24" text-anchor="middle" font-size="15" font-weight="bold">1D error-map lookup and interpolation</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="360" viewBox="0 0 760 360" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="1D error-map lookup and interpolation: the position axis is divided into a regular grid that starts at MapStartPos[1] with spacing MapPosGap[1] and MapLength[1] points; each grid point holds the correction value e[i] in MapTable. The selected encoder position lands between two grid points; the correction is linearly interpolated between the two neighbouring entries. Positions below the grid clamp to e[1] and above the grid clamp to e[L].">
+  <title>1D error-map lookup and interpolation</title>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
+    </marker>
+  </defs>
 
-  <!-- position axis -->
-  <line x1="60" y1="120" x2="660" y2="120" stroke="#5b6b7b" stroke-width="1.5"/>
-  <text x="60" y="150" font-size="11">MapStartPos[1]</text>
-  <line x1="80" y1="112" x2="80" y2="128" stroke="#5b6b7b"/>
-  <line x1="200" y1="112" x2="200" y2="128" stroke="#5b6b7b"/>
-  <line x1="320" y1="112" x2="320" y2="128" stroke="#5b6b7b"/>
-  <line x1="440" y1="112" x2="440" y2="128" stroke="#5b6b7b"/>
-  <line x1="560" y1="112" x2="560" y2="128" stroke="#5b6b7b"/>
+  <text x="380" y="24" text-anchor="middle" font-size="15" font-weight="bold">1D error-map lookup and interpolation</text>
 
-  <text x="140" y="108" text-anchor="middle" font-size="11">&#8592; MapPosGap[1] &#8594;</text>
+  <!-- position axis with arrow -->
+  <line x1="60" y1="130" x2="700" y2="130" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="710" y="134" font-size="11" fill="#5b6b7b">pos</text>
 
-  <!-- grid point indices -->
-  <text x="80"  y="168" text-anchor="middle" font-size="11">idx = MapStartIndex</text>
-  <text x="200" y="168" text-anchor="middle" font-size="11">+1</text>
-  <text x="320" y="168" text-anchor="middle" font-size="11">+2</text>
-  <text x="440" y="168" text-anchor="middle" font-size="11">+3</text>
-  <text x="560" y="185" text-anchor="middle" font-size="11">MapStartIndex</text>
-  <text x="560" y="200" text-anchor="middle" font-size="11">+ MapLength[1] &#8722; 1</text>
+  <!-- grid ticks (5 points) -->
+  <line x1="80"  y1="122" x2="80"  y2="138" stroke="#5b6b7b"/>
+  <line x1="200" y1="122" x2="200" y2="138" stroke="#5b6b7b"/>
+  <line x1="320" y1="122" x2="320" y2="138" stroke="#5b6b7b"/>
+  <line x1="440" y1="122" x2="440" y2="138" stroke="#5b6b7b"/>
+  <line x1="560" y1="122" x2="560" y2="138" stroke="#5b6b7b"/>
+
+  <!-- gap dimension between idx and idx+1 -->
+  <line x1="80" y1="106" x2="200" y2="106" stroke="#5b6b7b" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="200" y1="106" x2="80" y2="106" stroke="#5b6b7b" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="140" y="100" text-anchor="middle" font-size="11" fill="#5b6b7b">MapPosGap[1]</text>
+
+  <!-- grid point index labels -->
+  <text x="80"  y="158" text-anchor="middle" font-size="11">idx = MapStartIndex</text>
+  <text x="200" y="158" text-anchor="middle" font-size="11">+1</text>
+  <text x="320" y="158" text-anchor="middle" font-size="11">+2</text>
+  <text x="440" y="158" text-anchor="middle" font-size="11">+3</text>
+  <text x="560" y="158" text-anchor="middle" font-size="11">. . .</text>
+  <text x="560" y="174" text-anchor="middle" font-size="11" fill="#5b6b7b">+ MapLength[1] &#8722; 1</text>
 
   <!-- table values under grid (1-based) -->
-  <text x="80"  y="220" text-anchor="middle" fill="#1565c0">e[1]</text>
-  <text x="200" y="220" text-anchor="middle" fill="#1565c0">e[2]</text>
-  <text x="320" y="220" text-anchor="middle" fill="#1565c0">e[3]</text>
-  <text x="440" y="220" text-anchor="middle" fill="#1565c0">e[4]</text>
-  <text x="560" y="240" text-anchor="middle" fill="#1565c0">e[L]</text>
-  <text x="610" y="220" fill="#1565c0">= MapTable[ ]</text>
+  <text x="80"  y="216" text-anchor="middle" font-size="12" fill="#5b8def">e[1]</text>
+  <text x="200" y="216" text-anchor="middle" font-size="12" fill="#5b8def">e[2]</text>
+  <text x="320" y="216" text-anchor="middle" font-size="12" fill="#5b8def">e[3]</text>
+  <text x="440" y="216" text-anchor="middle" font-size="12" fill="#5b8def">e[4]</text>
+  <text x="560" y="216" text-anchor="middle" font-size="12" fill="#5b8def">e[L]</text>
+  <text x="610" y="216" font-size="11" fill="#5b8def">= MapTable[ ]</text>
+
+  <!-- MapStartPos[1] callout under idx tick -->
+  <text x="80" y="194" text-anchor="middle" font-size="11" fill="#5b6b7b">MapStartPos[1]</text>
 
   <!-- current position marker -->
-  <line x1="260" y1="60" x2="260" y2="128" stroke="#e0736b" stroke-width="1.5" stroke-dasharray="4 3"/>
-  <text x="260" y="52" text-anchor="middle" fill="#e0736b">selected encoder position</text>
+  <line x1="260" y1="60" x2="260" y2="138" stroke="#e0736b" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="260" y="52" text-anchor="middle" font-size="11" fill="#e0736b">selected encoder position</text>
 
-  <!-- interpolation bracket -->
-  <line x1="200" y1="128" x2="320" y2="128" stroke="#e0736b" stroke-width="3"/>
-  <text x="260" y="270" text-anchor="middle" fill="#e0736b">interpolate between e[2] and e[3]</text>
+  <!-- interpolation bracket between e[2] and e[3] -->
+  <line x1="200" y1="232" x2="320" y2="232" stroke="#e0736b" stroke-width="3"/>
+  <text x="260" y="252" text-anchor="middle" font-size="11" fill="#e0736b">interpolate between e[2] and e[3]</text>
 
-  <!-- formula -->
-  <text x="60" y="305" font-size="12">idx_f = (selected encoder position &#8722; MapStartPos[1]) / MapPosGap[1]</text>
-  <text x="60" y="325" font-size="12">correction = e[i] &#43; frac &#215; (e[i&#43;1] &#8722; e[i])   then added to Pos (ramped)</text>
+  <!-- clamps -->
+  <text x="60" y="92" font-size="10" fill="#5b6b7b">below grid &#8594; clamp to e[1]</text>
+  <text x="700" y="92" text-anchor="end" font-size="10" fill="#5b6b7b">above grid &#8594; clamp to e[L]</text>
 
-  <!-- clamp arrows -->
-  <text x="60" y="92" font-size="10" fill="#777">below range &#8594; e[1]</text>
-  <text x="640" y="92" font-size="10" fill="#777" text-anchor="end">above range &#8594; e[L]</text>
+  <!-- formula block -->
+  <rect x="40" y="280" width="680" height="64" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="60" y="302" font-size="12">idx_f = (selected encoder position &#8722; MapStartPos[1]) / MapPosGap[1]</text>
+  <text x="60" y="324" font-size="12">correction = e[i] + frac &#215; (e[i+1] &#8722; e[i]) &#160;&#160; then added to Pos (ramped)</text>
 </svg>

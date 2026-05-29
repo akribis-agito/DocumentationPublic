@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" viewBox="0 0 760 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" viewBox="0 0 760 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Gantry yaw loop: GantryYawRef feeds a yaw position loop (GantryPosGain, GantryPosKi), then a yaw velocity loop (GantryVelGain, GantryVelKi) with GantryVelFFW and GantryAccFFW feedforwards summed in; output is a differential current applied as GantryCurrRef on the yaw axis; feedback is the GantryFdbk difference and yaw velocity GantryVel.">
+  <title>Gantry yaw control loop</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>

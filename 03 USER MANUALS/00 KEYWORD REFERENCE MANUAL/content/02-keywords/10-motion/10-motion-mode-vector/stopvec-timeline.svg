@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="820" height="280" viewBox="0 0 820 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="280" viewBox="0 0 820 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="StopVec timeline: while the path cruises at VecSpeed, StopVec is issued; VecdPosRef brakes at VecEmrgDec, MotionStat bit 18 sets, MotionReason latches to 29 (StopVec) and stays latched after the path velocity reaches zero.">
+  <title>StopVec timeline</title>
   <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
 
   <text x="410" y="22" text-anchor="middle" font-weight="bold">StopVec timeline: status bits and reason code as the path decelerates with VecEmrgDec</text>
@@ -15,7 +16,7 @@
   <text x="440" y="106" font-size="11" fill="#5b6b7b">braking at VecEmrgDec</text>
 
   <!-- MotionStat bit 18 track -->
-  <text x="12" y="172" font-weight="bold">MotionStat bit 18 (0x00040000)</text>
+  <text x="12" y="172" font-weight="bold">MotionStat bit 18</text>
   <line x1="100" y1="180" x2="780" y2="180" stroke="#5b6b7b" stroke-width="1"/>
   <path d="M100 180 L380 180 L380 160 L500 160 L500 180 L780 180" fill="none" stroke="#5b8def" stroke-width="2"/>
   <text x="440" y="156" font-size="11" fill="#5b6b7b">set</text>

@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="640" height="290" viewBox="0 0 640 290" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="290" viewBox="0 0 640 290" role="img" aria-label="Which control loops are active in each OperationMode. Mode 1 Current runs only the current loop. Mode 2 Velocity adds the velocity loop. Mode 3 Position adds the position loop. Mode 4 Force runs the force loop atop the current loop. Filled cells = loop runs; outlined cells = loop bypassed." font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <title>Loop activity by OperationMode</title>
   <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
 
   <text x="320" y="22" text-anchor="middle" font-size="15" font-weight="bold">Loops active in each OperationMode</text>
@@ -29,7 +30,6 @@
   <rect x="415" y="133" width="70" height="28" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
   <text x="450" y="152" text-anchor="middle">active</text>
   <rect x="525" y="133" width="70" height="28" rx="4" fill="none" stroke="#5b8def" stroke-width="1.2" stroke-dasharray="4,3"/>
-  <text x="560" y="152" text-anchor="middle" font-size="10" fill="#5b6b7b">(force-over-PIV: on)</text>
 
   <!-- Velocity loop row -->
   <rect x="210" y="178" width="70" height="28" rx="4" fill="none" stroke="#5b8def" stroke-width="1.2" stroke-dasharray="4,3"/>

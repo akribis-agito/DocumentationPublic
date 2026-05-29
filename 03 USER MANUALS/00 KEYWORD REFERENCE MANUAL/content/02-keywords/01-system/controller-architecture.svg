@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="640" height="340" viewBox="0 0 640 340" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="340" viewBox="0 0 640 340" role="img" aria-label="Controller architecture. The host (PCSuite) exchanges commands and status with the controller. The controller holds parameters (keywords) saved to flash, a user program, status and identity, and motion control. It may be standalone with on-board axes, or a Central-i master that drives remote amplifier units." font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <title>Controller architecture</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
   </defs>

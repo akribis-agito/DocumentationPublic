@@ -1,30 +1,59 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1060" height="230" viewBox="-10 -10 1080 250" content="&lt;mxfile host=&quot;app.diagrams.net&quot;&gt;&lt;diagram name=&quot;Diagram&quot; id=&quot;d1&quot;&gt;&lt;mxGraphModel dx=&quot;900&quot; dy=&quot;500&quot; grid=&quot;0&quot; gridSize=&quot;10&quot; guides=&quot;1&quot; tooltips=&quot;1&quot; connect=&quot;1&quot; arrows=&quot;1&quot; fold=&quot;1&quot; page=&quot;1&quot; pageScale=&quot;1&quot; pageWidth=&quot;850&quot; pageHeight=&quot;600&quot; math=&quot;0&quot; shadow=&quot;0&quot;&gt;&lt;root&gt;&lt;mxCell id=&quot;0&quot; /&gt;&lt;mxCell id=&quot;1&quot; parent=&quot;0&quot; /&gt;&lt;mxCell id=&quot;start&quot; value=&quot;RecStart is called&quot; style=&quot;rounded=1;arcSize=50;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;0&quot; y=&quot;60&quot; width=&quot;140&quot; height=&quot;50&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;fill&quot; value=&quot;Fill pre-trigger data&quot; style=&quot;rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;180&quot; y=&quot;0&quot; width=&quot;160&quot; height=&quot;50&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;d_pre&quot; value=&quot;Is pre-trigger data&amp;lt;br&amp;gt;completely filled?&quot; style=&quot;rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;180&quot; y=&quot;100&quot; width=&quot;200&quot; height=&quot;80&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;d_trig&quot; value=&quot;Are&amp;lt;br&amp;gt;Trigger 1 (AND/OR) Trigger 2&amp;lt;br&amp;gt;(AND/OR) Trigger 3 detected?&quot; style=&quot;rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;440&quot; y=&quot;100&quot; width=&quot;240&quot; height=&quot;80&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;cont&quot; value=&quot;Continue&amp;lt;br&amp;gt;recording&quot; style=&quot;rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;730&quot; y=&quot;80&quot; width=&quot;130&quot; height=&quot;50&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;end&quot; value=&quot;End of recording&quot; style=&quot;rounded=1;arcSize=50;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;900&quot; y=&quot;80&quot; width=&quot;130&quot; height=&quot;50&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;e0&quot; style=&quot;endArrow=classic;html=1;rounded=0;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;start&quot; target=&quot;d_pre&quot;&gt;&lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;e1&quot; style=&quot;endArrow=classic;html=1;rounded=0;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;d_pre&quot; target=&quot;fill&quot;&gt;&lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;e2&quot; style=&quot;endArrow=classic;html=1;rounded=0;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;fill&quot; target=&quot;d_pre&quot;&gt;&lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;e3&quot; style=&quot;endArrow=classic;html=1;rounded=0;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;d_pre&quot; target=&quot;d_trig&quot;&gt;&lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;e4&quot; style=&quot;endArrow=classic;html=1;rounded=0;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;d_trig&quot; target=&quot;cont&quot;&gt;&lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;e5&quot; style=&quot;endArrow=classic;html=1;rounded=0;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;cont&quot; target=&quot;end&quot;&gt;&lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;/root&gt;&lt;/mxGraphModel&gt;&lt;/diagram&gt;&lt;/mxfile&gt;" style="background-color:#ffffff">
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="240" viewBox="0 0 980 240" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Parallel trigger detection flow: after RecStart the recorder fills the pre-trigger ring until full, then a single combined decision tests Trigger 1, Trigger 2 and Trigger 3 joined by RecTrigsLogic; on match the recorder continues into the post-trigger phase and ends.">
+  <title>Parallel (logical) trigger detection flow</title>
   <defs>
-    <marker id="arrowend" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1f2328"/>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
     </marker>
   </defs>
-  <rect x="0" y="60" width="140" height="50" rx="25.0" ry="25.0" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
-  <rect x="180" y="0" width="160" height="50" rx="6" ry="6" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
-  <polygon points="280.0,100 380,140.0 280.0,180 180,140.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1.5"/>
-  <polygon points="560.0,100 680,140.0 560.0,180 440,140.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1.5"/>
-  <rect x="730" y="80" width="130" height="50" rx="6" ry="6" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
-  <rect x="900" y="80" width="130" height="50" rx="25.0" ry="25.0" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
-  <path d="M 140 85.0 L 180 140.0" fill="none" stroke="#1f2328" stroke-width="1.5" marker-end="url(#arrowend)"/>
-  <path d="M 280.0 100 L 260.0 50" fill="none" stroke="#1f2328" stroke-width="1.5" marker-end="url(#arrowend)"/>
-  <path d="M 260.0 50 L 280.0 100" fill="none" stroke="#1f2328" stroke-width="1.5" marker-end="url(#arrowend)"/>
-  <path d="M 380 140.0 L 440 140.0" fill="none" stroke="#1f2328" stroke-width="1.5" marker-end="url(#arrowend)"/>
-  <path d="M 680 140.0 L 730 105.0" fill="none" stroke="#1f2328" stroke-width="1.5" marker-end="url(#arrowend)"/>
-  <path d="M 860 105.0 L 900 105.0" fill="none" stroke="#1f2328" stroke-width="1.5" marker-end="url(#arrowend)"/>
-  <text x="70.0" y="89.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2328">RecStart is called</text>
-  <text x="260.0" y="29.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2328">Fill pre-trigger data</text>
-  <text x="280.0" y="137.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2328">Is pre-trigger data</text>
-  <text x="280.0" y="151.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2328">completely filled?</text>
-  <text x="560.0" y="130.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2328">Are</text>
-  <text x="560.0" y="144.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2328">Trigger 1 (AND/OR) Trigger 2</text>
-  <text x="560.0" y="158.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2328">(AND/OR) Trigger 3 detected?</text>
-  <text x="795.0" y="102.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2328">Continue</text>
-  <text x="795.0" y="116.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2328">recording</text>
-  <text x="965.0" y="109.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2328">End of recording</text>
+
+  <!-- start (terminator) -->
+  <rect x="20" y="100" width="140" height="50" rx="25" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="90" y="130" text-anchor="middle">RecStart is called</text>
+
+  <!-- pre-trigger fill loop: decision diamond + action box on top -->
+  <rect x="220" y="30" width="180" height="44" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="310" y="58" text-anchor="middle">Fill pre-trigger ring</text>
+
+  <polygon points="310,90 410,135 310,180 210,135" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="310" y="130" text-anchor="middle" font-size="12">Pre-trigger</text>
+  <text x="310" y="146" text-anchor="middle" font-size="12">buffer full?</text>
+
+  <!-- combined trigger decision -->
+  <polygon points="600,90 740,135 600,180 460,135" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="600" y="122" text-anchor="middle" font-size="12">Triggers 1 / 2 / 3</text>
+  <text x="600" y="138" text-anchor="middle" font-size="12">combined per</text>
+  <text x="600" y="154" text-anchor="middle" font-size="12">RecTrigsLogic — fire?</text>
+
+  <!-- continue + end -->
+  <rect x="780" y="110" width="120" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="840" y="132" text-anchor="middle" font-size="12">Continue</text>
+  <text x="840" y="148" text-anchor="middle" font-size="12">recording</text>
+
+  <rect x="830" y="190" width="130" height="40" rx="20" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="895" y="215" text-anchor="middle" font-size="12">End of recording</text>
+
+  <!-- arrows -->
+  <!-- start -> pre-trigger diamond -->
+  <path d="M160,135 L208,135" fill="none" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <!-- diamond no -> Fill -->
+  <path d="M310,90 L310,76" fill="none" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="320" y="86" font-size="11" fill="#5b6b7b">no</text>
+  <!-- Fill -> diamond (loop) -->
+  <path d="M395,74 C420,80 420,100 395,108" fill="none" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <!-- diamond yes -> trigger diamond -->
+  <path d="M410,135 L458,135" fill="none" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="434" y="128" text-anchor="middle" font-size="11" fill="#5b6b7b">yes</text>
+
+  <!-- trigger no -> loop back on itself -->
+  <path d="M600,180 C580,210 540,210 540,180 L540,150" fill="none" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)" stroke-dasharray="4,3"/>
+  <text x="540" y="210" text-anchor="middle" font-size="11" fill="#5b6b7b">no &#8212; keep sampling</text>
+
+  <!-- trigger yes -> continue -->
+  <path d="M740,135 L778,135" fill="none" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="758" y="128" text-anchor="middle" font-size="11" fill="#5b6b7b">yes</text>
+
+  <!-- continue -> end -->
+  <path d="M840,160 L890,188" fill="none" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
 </svg>

@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="300" viewBox="0 0 720 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" viewBox="0 0 760 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Motion pipeline: command and profiler produce PosRef, which feeds control loops and the motor; feedback returns position and velocity, and the motion state is reported as MotionStat and MotionReason.">
+  <title>Motion pipeline</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
   </defs>
@@ -6,49 +7,49 @@
   <text x="20" y="22" font-size="14" font-weight="bold">Motion pipeline</text>
 
   <!-- Target / command -->
-  <rect x="20" y="70" width="120" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-  <text x="80" y="90" text-anchor="middle">Target / command</text>
-  <text x="80" y="106" text-anchor="middle" font-size="11" fill="#5b6b7b">Begin, AbsTrgt</text>
+  <rect x="20" y="70" width="140" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="90" y="90" text-anchor="middle">Target / command</text>
+  <text x="90" y="106" text-anchor="middle" font-size="11" fill="#5b6b7b">Begin, AbsTrgt</text>
 
   <!-- Trajectory profiler -->
-  <rect x="180" y="70" width="150" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-  <text x="255" y="90" text-anchor="middle">Trajectory profiler</text>
-  <text x="255" y="106" text-anchor="middle" font-size="11" fill="#5b6b7b">Speed, Accel, Decel, Jerk</text>
+  <rect x="190" y="70" width="170" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="275" y="90" text-anchor="middle">Trajectory profiler</text>
+  <text x="275" y="106" text-anchor="middle" font-size="11" fill="#5b6b7b">Speed, Accel, Decel, Jerk</text>
 
   <!-- PosRef -->
-  <rect x="370" y="70" width="120" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-  <text x="430" y="90" text-anchor="middle" font-weight="bold">PosRef</text>
-  <text x="430" y="106" text-anchor="middle" font-size="11" fill="#5b6b7b">position reference</text>
+  <rect x="390" y="70" width="130" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="455" y="90" text-anchor="middle" font-weight="bold">PosRef</text>
+  <text x="455" y="106" text-anchor="middle" font-size="11" fill="#5b6b7b">position reference</text>
 
   <!-- Control loops -->
-  <rect x="530" y="70" width="120" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-  <text x="590" y="90" text-anchor="middle">Control loops</text>
-  <text x="590" y="106" text-anchor="middle" font-size="11" fill="#5b6b7b">position / velocity</text>
+  <rect x="550" y="70" width="140" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="620" y="90" text-anchor="middle">Control loops</text>
+  <text x="620" y="106" text-anchor="middle" font-size="11" fill="#5b6b7b">position / velocity</text>
 
   <!-- Motor -->
-  <rect x="560" y="180" width="90" height="46" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-  <text x="605" y="208" text-anchor="middle">Motor</text>
+  <rect x="590" y="180" width="100" height="46" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="640" y="208" text-anchor="middle">Motor</text>
 
   <!-- Feedback -->
-  <rect x="300" y="180" width="180" height="46" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
-  <text x="390" y="201" text-anchor="middle">Feedback: Pos, Vel</text>
-  <text x="390" y="217" text-anchor="middle" font-size="11" fill="#5b6b7b">PosErr = PosRef - Pos</text>
+  <rect x="300" y="180" width="200" height="46" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="400" y="201" text-anchor="middle">Feedback: Pos, Vel</text>
+  <text x="400" y="217" text-anchor="middle" font-size="11" fill="#5b6b7b">PosErr = PosRef &#8722; Pos</text>
 
   <!-- Motion state -->
-  <rect x="180" y="240" width="220" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-  <text x="290" y="265" text-anchor="middle" font-size="12">Motion state: MotionStat, MotionReason</text>
+  <rect x="170" y="240" width="260" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="300" y="265" text-anchor="middle" font-size="12">Motion state: MotionStat, MotionReason</text>
 
   <!-- forward arrows -->
-  <line x1="140" y1="95" x2="180" y2="95" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
-  <line x1="330" y1="95" x2="370" y2="95" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
-  <line x1="490" y1="95" x2="530" y2="95" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
-  <line x1="590" y1="120" x2="590" y2="180" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="160" y1="95" x2="187" y2="95" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="360" y1="95" x2="387" y2="95" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="520" y1="95" x2="547" y2="95" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="620" y1="120" x2="620" y2="177" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
 
   <!-- feedback arrows -->
-  <line x1="560" y1="203" x2="480" y2="203" stroke="#e0736b" stroke-width="1.4" marker-end="url(#arrow)"/>
-  <line x1="390" y1="180" x2="555" y2="100" stroke="#e0736b" stroke-width="1.4" marker-end="url(#arrow)"/>
-  <text x="470" y="150" fill="#e0736b" font-size="11">Pos / Vel</text>
+  <line x1="590" y1="203" x2="503" y2="203" stroke="#e0736b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="400" y1="180" x2="450" y2="123" stroke="#e0736b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="430" y="160" fill="#e0736b" font-size="11">Pos / Vel</text>
 
   <!-- profiler reports state -->
-  <line x1="255" y1="120" x2="270" y2="240" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="275" y1="120" x2="285" y2="237" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
 </svg>

@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="700" height="230" viewBox="0 0 700 230" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="230" viewBox="0 0 700 230" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Motion status lifecycle: Idle to In-motion on Begin, to Settling when the profile ends, to Target reached after InTargetTime; Stop or Abort clears the in-motion bits and MotionReason records why the move ended.">
+  <title>Motion status lifecycle</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
   </defs>

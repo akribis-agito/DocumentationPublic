@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="780" height="360" viewBox="0 0 780 360" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="360" viewBox="0 0 780 360" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="FilterStatus[2] packs four 6-bit fields, one per velocity filter; within each field, bit n+0 means a definition keyword changed since the last CalcFilters, and bits n+1 through n+5 flag specific validation failures.">
+  <title>FilterStatus[2] bit layout</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
   </defs>
@@ -52,8 +53,8 @@
   <text x="630" y="194" text-anchor="middle" fill="#5b6b7b">param 4 bad</text>
 
   <!-- bit roles legend -->
-  <text x="380" y="240" text-anchor="middle">bit n+0 is set when a definition keyword for that filter changed and the coefficients have not been recomputed.</text>
-  <text x="380" y="260" text-anchor="middle">bits n+1 .. n+5 are refreshed only by CalcFilters; any one set means the last calculation rejected the filter.</text>
+  <text x="390" y="240" text-anchor="middle" font-size="12">bit n+0 is set when a definition keyword for that filter changed and coefficients are not yet recomputed.</text>
+  <text x="390" y="260" text-anchor="middle" font-size="12">bits n+1 .. n+5 are refreshed only by CalcFilters; any one set means the last calculation rejected the filter.</text>
 
   <!-- read formula -->
   <rect x="100" y="290" width="560" height="48" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>

@@ -1,13 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="220" viewBox="0 0 320 220" role="img" aria-label="Arc defined by start point, end point and center">
-  <circle cx="160" cy="120" r="80" fill="none" stroke="#bbb" stroke-dasharray="4 4"/>
-  <circle cx="160" cy="120" r="3" fill="#333"/>
-  <text x="166" y="124" font-family="sans-serif" font-size="12">center (VecArcCenter)</text>
-  <line x1="160" y1="120" x2="240" y2="120" stroke="#888"/>
-  <text x="195" y="114" font-family="sans-serif" font-size="11">radius</text>
-  <circle cx="240" cy="120" r="4" fill="#1a7f37"/>
-  <text x="244" y="116" font-family="sans-serif" font-size="11">start</text>
-  <circle cx="120" cy="50" r="4" fill="#cf222e"/>
-  <text x="86" y="46" font-family="sans-serif" font-size="11">end</text>
-  <path d="M 240 120 A 80 80 0 0 0 120 50" fill="none" stroke="#1a7f37" stroke-width="2.5"/>
-  <text x="180" y="205" font-family="sans-serif" font-size="11" text-anchor="middle">arc swept CCW (VecArcDir = 0)</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="240" viewBox="0 0 380 240" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Vector arc defined by a start point, an end point and the centre at VecArcCenter; the radius is set by the centre-to-start distance and the arc is swept counter-clockwise when VecArcDir is zero.">
+  <title>Arc defined by start point, end point and center</title>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <!-- background dashed full circle for context -->
+  <circle cx="180" cy="130" r="90" fill="none" stroke="#5b8def" stroke-dasharray="4 4" opacity="0.45"/>
+
+  <!-- centre marker -->
+  <circle cx="180" cy="130" r="3" fill="#5b6b7b"/>
+  <text x="186" y="134" font-size="11" fill="#5b6b7b">center (VecArcCenter)</text>
+
+  <!-- radius -->
+  <line x1="180" y1="130" x2="270" y2="130" stroke="#5b6b7b" stroke-width="1.2"/>
+  <text x="220" y="123" font-size="11" fill="#5b6b7b" text-anchor="middle">radius</text>
+
+  <!-- start point -->
+  <circle cx="270" cy="130" r="5" fill="#5b8def"/>
+  <text x="278" y="124" font-size="11" fill="#5b8def">start</text>
+
+  <!-- end point -->
+  <circle cx="135" cy="52" r="5" fill="#e0736b"/>
+  <text x="100" y="48" font-size="11" fill="#e0736b">end</text>
+
+  <!-- the actual swept arc -->
+  <path d="M 270 130 A 90 90 0 0 0 135 52" fill="none" stroke="#5b8def" stroke-width="2.4" marker-end="url(#arrow)"/>
+
+  <text x="180" y="225" text-anchor="middle" font-size="11" fill="#5b6b7b">arc swept counter-clockwise (VecArcDir = 0)</text>
 </svg>

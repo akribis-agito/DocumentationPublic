@@ -1,42 +1,56 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="820" height="240" viewBox="-10 0 840 240" content="&lt;mxfile host=&quot;app.diagrams.net&quot;&gt;&lt;diagram name=&quot;Signal path&quot; id=&quot;signal-path&quot;&gt;&lt;mxGraphModel dx=&quot;900&quot; dy=&quot;500&quot; grid=&quot;0&quot; gridSize=&quot;10&quot; guides=&quot;1&quot; tooltips=&quot;1&quot; connect=&quot;1&quot; arrows=&quot;1&quot; fold=&quot;1&quot; page=&quot;1&quot; pageScale=&quot;1&quot; pageWidth=&quot;850&quot; pageHeight=&quot;280&quot; math=&quot;0&quot; shadow=&quot;0&quot;&gt;&lt;root&gt;&lt;mxCell id=&quot;0&quot; /&gt;&lt;mxCell id=&quot;1&quot; parent=&quot;0&quot; /&gt;&lt;mxCell id=&quot;raw&quot; value=&quot;Raw analog&amp;lt;br&amp;gt;input signal&quot; style=&quot;rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;160&quot; y=&quot;40&quot; width=&quot;140&quot; height=&quot;60&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;lpfhw&quot; value=&quot;Low pass filter&amp;lt;br&amp;gt;(Hardware)&quot; style=&quot;rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;320&quot; y=&quot;40&quot; width=&quot;140&quot; height=&quot;60&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;adc&quot; value=&quot;Analog to digital&amp;lt;br&amp;gt;converter (ADC)&quot; style=&quot;rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;480&quot; y=&quot;40&quot; width=&quot;140&quot; height=&quot;60&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;ainfilt&quot; value=&quot;Low pass filter&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;AInFilt&amp;lt;/b&amp;gt;&quot; style=&quot;rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;640&quot; y=&quot;40&quot; width=&quot;140&quot; height=&quot;60&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;ainoffset&quot; value=&quot;Offset&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;AInOffset&amp;lt;/b&amp;gt;&quot; style=&quot;rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;640&quot; y=&quot;160&quot; width=&quot;140&quot; height=&quot;60&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;aindb&quot; value=&quot;Deadband filter&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;AInDB&amp;lt;/b&amp;gt;&quot; style=&quot;rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;480&quot; y=&quot;160&quot; width=&quot;140&quot; height=&quot;60&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;aingain&quot; value=&quot;Gain scaling&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;AInGain&amp;lt;/b&amp;gt;&quot; style=&quot;rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;320&quot; y=&quot;160&quot; width=&quot;140&quot; height=&quot;60&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;ainmute&quot; value=&quot;2nd Deadband filter&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;AInMuteRange&amp;lt;/b&amp;gt;&quot; style=&quot;rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;160&quot; y=&quot;160&quot; width=&quot;140&quot; height=&quot;60&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;ainport&quot; value=&quot;AInPort&quot; style=&quot;rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;0&quot; y=&quot;160&quot; width=&quot;140&quot; height=&quot;60&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;e0&quot; style=&quot;endArrow=classic;html=1;rounded=0;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;raw&quot; target=&quot;lpfhw&quot;&gt;&lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;e1&quot; style=&quot;endArrow=classic;html=1;rounded=0;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;lpfhw&quot; target=&quot;adc&quot;&gt;&lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;e2&quot; style=&quot;endArrow=classic;html=1;rounded=0;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;adc&quot; target=&quot;ainfilt&quot;&gt;&lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;e3&quot; style=&quot;endArrow=classic;html=1;rounded=0;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;ainfilt&quot; target=&quot;ainoffset&quot;&gt;&lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;e4&quot; style=&quot;endArrow=classic;html=1;rounded=0;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;ainoffset&quot; target=&quot;aindb&quot;&gt;&lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;e5&quot; style=&quot;endArrow=classic;html=1;rounded=0;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;aindb&quot; target=&quot;aingain&quot;&gt;&lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;e6&quot; style=&quot;endArrow=classic;html=1;rounded=0;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;aingain&quot; target=&quot;ainmute&quot;&gt;&lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;e7&quot; style=&quot;endArrow=classic;html=1;rounded=0;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;ainmute&quot; target=&quot;ainport&quot;&gt;&lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;/root&gt;&lt;/mxGraphModel&gt;&lt;/diagram&gt;&lt;/mxfile&gt;" style="background-color:#ffffff">
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="260" viewBox="0 0 820 260" role="img" aria-label="Analog input signal path: raw analog goes through a hardware low-pass filter and the ADC, then through firmware filter (AInFilt), offset (AInOffset), deadband (AInDB), gain (AInGain), second deadband (AInMuteRange), and finally to AInPort." font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+  <title>Analog-input signal path</title>
   <defs>
-    <marker id="arrowend" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1f2328"/>
-    </marker>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
   </defs>
-  <rect x="160" y="40" width="140" height="60" rx="6" ry="6" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
-  <rect x="320" y="40" width="140" height="60" rx="6" ry="6" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
-  <rect x="480" y="40" width="140" height="60" rx="6" ry="6" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
-  <rect x="640" y="40" width="140" height="60" rx="6" ry="6" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
-  <rect x="640" y="160" width="140" height="60" rx="6" ry="6" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
-  <rect x="480" y="160" width="140" height="60" rx="6" ry="6" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
-  <rect x="320" y="160" width="140" height="60" rx="6" ry="6" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
-  <rect x="160" y="160" width="140" height="60" rx="6" ry="6" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
-  <rect x="0" y="160" width="140" height="60" rx="6" ry="6" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
-  <path d="M 300 70.0 L 320 70.0" fill="none" stroke="#1f2328" stroke-width="1.5" marker-end="url(#arrowend)"/>
-  <path d="M 460 70.0 L 480 70.0" fill="none" stroke="#1f2328" stroke-width="1.5" marker-end="url(#arrowend)"/>
-  <path d="M 620 70.0 L 640 70.0" fill="none" stroke="#1f2328" stroke-width="1.5" marker-end="url(#arrowend)"/>
-  <path d="M 710.0 100 L 710.0 160" fill="none" stroke="#1f2328" stroke-width="1.5" marker-end="url(#arrowend)"/>
-  <path d="M 640 190.0 L 620 190.0" fill="none" stroke="#1f2328" stroke-width="1.5" marker-end="url(#arrowend)"/>
-  <path d="M 480 190.0 L 460 190.0" fill="none" stroke="#1f2328" stroke-width="1.5" marker-end="url(#arrowend)"/>
-  <path d="M 320 190.0 L 300 190.0" fill="none" stroke="#1f2328" stroke-width="1.5" marker-end="url(#arrowend)"/>
-  <path d="M 160 190.0 L 140 190.0" fill="none" stroke="#1f2328" stroke-width="1.5" marker-end="url(#arrowend)"/>
-  <text x="230.0" y="64" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2328">Raw analog</text>
-  <text x="230.0" y="82" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2328">input signal</text>
-  <text x="390.0" y="64" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2328">Low pass filter</text>
-  <text x="390.0" y="82" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2328">(Hardware)</text>
-  <text x="550.0" y="64" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2328">Analog to digital</text>
-  <text x="550.0" y="82" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2328">converter (ADC)</text>
-  <text x="710.0" y="64" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2328">Low pass filter</text>
-  <text x="710.0" y="82" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1f2328">AInFilt</text>
-  <text x="710.0" y="184" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2328">Offset</text>
-  <text x="710.0" y="202" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1f2328">AInOffset</text>
-  <text x="550.0" y="184" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2328">Deadband filter</text>
-  <text x="550.0" y="202" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1f2328">AInDB</text>
-  <text x="390.0" y="184" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2328">Gain scaling</text>
-  <text x="390.0" y="202" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1f2328">AInGain</text>
-  <text x="230.0" y="184" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2328">2nd Deadband filter</text>
-  <text x="230.0" y="202" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1f2328">AInMuteRange</text>
-  <text x="70.0" y="194" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1f2328">AInPort</text>
+
+  <text x="410" y="22" text-anchor="middle" font-size="14" font-weight="bold">Analog-input signal path</text>
+  <text x="410" y="40" text-anchor="middle" font-size="11" fill="#5b6b7b">hardware stages (top row) feed firmware conditioning (bottom row)</text>
+
+  <!-- Top row: hardware stages -->
+  <rect x="20"  y="60" width="160" height="56" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="100" y="84" text-anchor="middle">Raw analog</text>
+  <text x="100" y="102" text-anchor="middle" font-size="11" fill="#5b6b7b">input pin</text>
+
+  <rect x="220" y="60" width="160" height="56" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="300" y="84" text-anchor="middle">Low-pass filter</text>
+  <text x="300" y="102" text-anchor="middle" font-size="11" fill="#5b6b7b">hardware</text>
+
+  <rect x="420" y="60" width="160" height="56" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="500" y="84" text-anchor="middle">ADC</text>
+  <text x="500" y="102" text-anchor="middle" font-size="11" fill="#5b6b7b">analog &#8594; digital</text>
+
+  <rect x="620" y="60" width="180" height="56" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="710" y="84" text-anchor="middle">Low-pass filter</text>
+  <text x="710" y="102" text-anchor="middle" font-size="11" fill="#5b6b7b">AInFilt (firmware)</text>
+
+  <line x1="180" y1="88" x2="218" y2="88" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="380" y1="88" x2="418" y2="88" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="580" y1="88" x2="618" y2="88" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <!-- Down-link from AInFilt to AInOffset -->
+  <line x1="710" y1="116" x2="710" y2="158" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <!-- Bottom row: firmware stages, right to left -->
+  <rect x="620" y="160" width="180" height="56" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="710" y="184" text-anchor="middle">Offset</text>
+  <text x="710" y="202" text-anchor="middle" font-size="11" fill="#5b6b7b">AInOffset</text>
+
+  <rect x="420" y="160" width="160" height="56" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="500" y="184" text-anchor="middle">Deadband</text>
+  <text x="500" y="202" text-anchor="middle" font-size="11" fill="#5b6b7b">AInDB</text>
+
+  <rect x="220" y="160" width="160" height="56" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="300" y="184" text-anchor="middle">Gain scaling</text>
+  <text x="300" y="202" text-anchor="middle" font-size="11" fill="#5b6b7b">AInGain</text>
+
+  <rect x="20"  y="160" width="160" height="56" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="100" y="184" text-anchor="middle">2nd deadband</text>
+  <text x="100" y="202" text-anchor="middle" font-size="11" fill="#5b6b7b">AInMuteRange</text>
+
+  <line x1="620" y1="188" x2="582" y2="188" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="420" y1="188" x2="382" y2="188" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="220" y1="188" x2="182" y2="188" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <text x="100" y="240" text-anchor="middle" font-size="11" fill="#5b6b7b">AInPort (final conditioned value read by host or assigned via AInMode)</text>
 </svg>

@@ -1,82 +1,78 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="170" font-family="sans-serif" font-size="11">
-  <style>
-    .bit { fill: #f5f5f5; stroke: #888; }
-    .set { fill: #cfe8ff; stroke: #4a90d9; }
-    .num { fill: #333; text-anchor: middle; }
-    .lbl { fill: #222; text-anchor: middle; }
-    .grp { fill: #555; text-anchor: middle; font-size: 10px; }
-  </style>
-  <text x="10" y="16" fill="#222" font-size="13">MotionStat &#8212; 32-bit field (only bits 0&#8211;20 defined; bits 21&#8211;31 reserved)</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="220" viewBox="0 0 780 220" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="MotionStat 32-bit field showing the meaning of bits 0 through 20; bits 21 through 31 are reserved. Bit 0 is highlighted as in-motion; later bits encode dwell, repetition end, stop request, accel and decel ramps, smoothing, mode-specific stop flags, wait-input and CNC and Vector membership and status.">
+  <title>MotionStat bit layout</title>
+
+  <text x="20" y="22" font-size="14" font-weight="bold">MotionStat &#8212; 32-bit field (bits 0&#8211;20 defined; bits 21&#8211;31 reserved)</text>
 
   <!-- Row 1: bits 0-10 -->
   <g>
-    <rect class="set" x="10"  y="30" width="64" height="26"/>
-    <rect class="bit" x="74"  y="30" width="64" height="26"/>
-    <rect class="bit" x="138" y="30" width="64" height="26"/>
-    <rect class="bit" x="202" y="30" width="64" height="26"/>
-    <rect class="bit" x="266" y="30" width="64" height="26"/>
-    <rect class="bit" x="330" y="30" width="64" height="26"/>
-    <rect class="bit" x="394" y="30" width="64" height="26"/>
-    <rect class="bit" x="458" y="30" width="64" height="26"/>
-    <rect class="bit" x="522" y="30" width="64" height="26"/>
-    <rect class="bit" x="586" y="30" width="64" height="26"/>
-    <rect class="bit" x="650" y="30" width="64" height="26"/>
-    <text class="num" x="42"  y="47">0</text>
-    <text class="num" x="106" y="47">1</text>
-    <text class="num" x="170" y="47">2</text>
-    <text class="num" x="234" y="47">3</text>
-    <text class="num" x="298" y="47">4</text>
-    <text class="num" x="362" y="47">5</text>
-    <text class="num" x="426" y="47">6</text>
-    <text class="num" x="490" y="47">7</text>
-    <text class="num" x="554" y="47">8</text>
-    <text class="num" x="618" y="47">9</text>
-    <text class="num" x="682" y="47">10</text>
-    <text class="lbl" x="42"  y="70">in motion</text>
-    <text class="lbl" x="106" y="70">dwelling</text>
-    <text class="lbl" x="170" y="70">rep. end</text>
-    <text class="lbl" x="234" y="70">stop req</text>
-    <text class="lbl" x="298" y="70">accel</text>
-    <text class="lbl" x="362" y="70">decel</text>
-    <text class="lbl" x="426" y="70">smooth</text>
-    <text class="lbl" x="490" y="70">ECAM stop</text>
-    <text class="lbl" x="554" y="70">FIFO stop</text>
-    <text class="lbl" x="618" y="70">wait input</text>
-    <text class="lbl" x="682" y="70">CNCA mbr</text>
+    <rect x="20"  y="40" width="68" height="32" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+    <rect x="90"  y="40" width="68" height="32" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="160" y="40" width="68" height="32" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="230" y="40" width="68" height="32" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="300" y="40" width="68" height="32" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="370" y="40" width="68" height="32" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="440" y="40" width="68" height="32" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="510" y="40" width="68" height="32" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="580" y="40" width="68" height="32" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="650" y="40" width="68" height="32" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="720" y="40" width="48" height="32" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <text x="54"  y="61" text-anchor="middle" font-weight="bold">0</text>
+    <text x="124" y="61" text-anchor="middle">1</text>
+    <text x="194" y="61" text-anchor="middle">2</text>
+    <text x="264" y="61" text-anchor="middle">3</text>
+    <text x="334" y="61" text-anchor="middle">4</text>
+    <text x="404" y="61" text-anchor="middle">5</text>
+    <text x="474" y="61" text-anchor="middle">6</text>
+    <text x="544" y="61" text-anchor="middle">7</text>
+    <text x="614" y="61" text-anchor="middle">8</text>
+    <text x="684" y="61" text-anchor="middle">9</text>
+    <text x="744" y="61" text-anchor="middle">10</text>
+    <text x="54"  y="88" text-anchor="middle" font-size="11" fill="#5b6b7b">in motion</text>
+    <text x="124" y="88" text-anchor="middle" font-size="11" fill="#5b6b7b">dwelling</text>
+    <text x="194" y="88" text-anchor="middle" font-size="11" fill="#5b6b7b">rep end</text>
+    <text x="264" y="88" text-anchor="middle" font-size="11" fill="#5b6b7b">stop req</text>
+    <text x="334" y="88" text-anchor="middle" font-size="11" fill="#5b6b7b">accel</text>
+    <text x="404" y="88" text-anchor="middle" font-size="11" fill="#5b6b7b">decel</text>
+    <text x="474" y="88" text-anchor="middle" font-size="11" fill="#5b6b7b">smooth</text>
+    <text x="544" y="88" text-anchor="middle" font-size="11" fill="#5b6b7b">ECAM stop</text>
+    <text x="614" y="88" text-anchor="middle" font-size="11" fill="#5b6b7b">FIFO stop</text>
+    <text x="684" y="88" text-anchor="middle" font-size="11" fill="#5b6b7b">wait input</text>
+    <text x="744" y="88" text-anchor="middle" font-size="11" fill="#5b6b7b">CNCA mbr</text>
   </g>
 
   <!-- Row 2: bits 11-20 -->
   <g>
-    <rect class="bit" x="10"  y="100" width="64" height="26"/>
-    <rect class="bit" x="74"  y="100" width="64" height="26"/>
-    <rect class="bit" x="138" y="100" width="64" height="26"/>
-    <rect class="bit" x="202" y="100" width="64" height="26"/>
-    <rect class="bit" x="266" y="100" width="64" height="26"/>
-    <rect class="bit" x="330" y="100" width="64" height="26"/>
-    <rect class="bit" x="394" y="100" width="64" height="26"/>
-    <rect class="bit" x="458" y="100" width="64" height="26"/>
-    <rect class="bit" x="522" y="100" width="64" height="26"/>
-    <rect class="bit" x="586" y="100" width="64" height="26"/>
-    <text class="num" x="42"  y="117">11</text>
-    <text class="num" x="106" y="117">12</text>
-    <text class="num" x="170" y="117">13</text>
-    <text class="num" x="234" y="117">14</text>
-    <text class="num" x="298" y="117">15</text>
-    <text class="num" x="362" y="117">16</text>
-    <text class="num" x="426" y="117">17</text>
-    <text class="num" x="490" y="117">18</text>
-    <text class="num" x="554" y="117">19</text>
-    <text class="num" x="618" y="117">20</text>
-    <text class="lbl" x="42"  y="140">CNCA now</text>
-    <text class="lbl" x="106" y="140">CNCA stop</text>
-    <text class="lbl" x="170" y="140">CNCB mbr</text>
-    <text class="lbl" x="234" y="140">CNCB now</text>
-    <text class="lbl" x="298" y="140">CNCB stop</text>
-    <text class="lbl" x="362" y="140">ctrl stop</text>
-    <text class="lbl" x="426" y="140">buff stop</text>
-    <text class="lbl" x="490" y="140">vec stop</text>
-    <text class="lbl" x="554" y="140">vec mbr</text>
-    <text class="lbl" x="618" y="140">jog s/w lim</text>
+    <rect x="20"  y="120" width="68" height="32" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="90"  y="120" width="68" height="32" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="160" y="120" width="68" height="32" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="230" y="120" width="68" height="32" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="300" y="120" width="68" height="32" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="370" y="120" width="68" height="32" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+    <rect x="440" y="120" width="68" height="32" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="510" y="120" width="68" height="32" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="580" y="120" width="68" height="32" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <rect x="650" y="120" width="68" height="32" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <text x="54"  y="141" text-anchor="middle">11</text>
+    <text x="124" y="141" text-anchor="middle">12</text>
+    <text x="194" y="141" text-anchor="middle">13</text>
+    <text x="264" y="141" text-anchor="middle">14</text>
+    <text x="334" y="141" text-anchor="middle">15</text>
+    <text x="404" y="141" text-anchor="middle" font-weight="bold">16</text>
+    <text x="474" y="141" text-anchor="middle">17</text>
+    <text x="544" y="141" text-anchor="middle">18</text>
+    <text x="614" y="141" text-anchor="middle">19</text>
+    <text x="684" y="141" text-anchor="middle">20</text>
+    <text x="54"  y="168" text-anchor="middle" font-size="11" fill="#5b6b7b">CNCA now</text>
+    <text x="124" y="168" text-anchor="middle" font-size="11" fill="#5b6b7b">CNCA stop</text>
+    <text x="194" y="168" text-anchor="middle" font-size="11" fill="#5b6b7b">CNCB mbr</text>
+    <text x="264" y="168" text-anchor="middle" font-size="11" fill="#5b6b7b">CNCB now</text>
+    <text x="334" y="168" text-anchor="middle" font-size="11" fill="#5b6b7b">CNCB stop</text>
+    <text x="404" y="168" text-anchor="middle" font-size="11" fill="#5b6b7b">ctrl stop</text>
+    <text x="474" y="168" text-anchor="middle" font-size="11" fill="#5b6b7b">buff stop</text>
+    <text x="544" y="168" text-anchor="middle" font-size="11" fill="#5b6b7b">vec stop</text>
+    <text x="614" y="168" text-anchor="middle" font-size="11" fill="#5b6b7b">vec mbr</text>
+    <text x="684" y="168" text-anchor="middle" font-size="11" fill="#5b6b7b">jog s/w lim</text>
   </g>
-  <text x="586" y="160" fill="#a05a00" font-size="10">bit 20: v5 only</text>
+
+  <text x="20" y="200" font-size="11" fill="#5b6b7b">Bit 16 latches on fault-driven stop (any mode); bit 20 is set only by Jog on firmware v5.</text>
 </svg>

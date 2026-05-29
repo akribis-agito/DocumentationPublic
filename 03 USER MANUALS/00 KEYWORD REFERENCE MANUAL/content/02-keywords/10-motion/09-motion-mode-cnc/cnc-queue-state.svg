@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="820" height="240" viewBox="0 0 820 240" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="240" viewBox="0 0 820 240" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="CNC queue states tracked via CNCAStatus indexes: starts empty, becomes filling as segments are pushed, becomes running on Begin, becomes full when free slots reach zero, drains as segments finish, and underruns if the queue empties mid-play and the motion ends.">
+  <title>CNC queue states tracked via CNCAStatus indexes</title>
   <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
 
   <text x="410" y="22" text-anchor="middle" font-weight="bold">CNCAStatus queue states: empty &#8594; filling &#8594; running &#8594; full &#8594; drain &#8594; underrun</text>
@@ -24,7 +25,7 @@
   <text x="585" y="135" text-anchor="middle" font-size="11">next push rejected</text>
 
   <rect x="680" y="80" width="120" height="60" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
-  <text x="740" y="105" text-anchor="middle" font-weight="bold" fill="#a8443a">underrun</text>
+  <text x="740" y="105" text-anchor="middle" font-weight="bold" fill="#e0736b">underrun</text>
   <text x="740" y="125" text-anchor="middle" font-size="11">motion ends</text>
 
   <!-- Arrows between boxes -->
@@ -34,7 +35,7 @@
 
   <!-- running -> underrun (curved arrow above) -->
   <path d="M460 80 C520 40, 680 40, 740 80" fill="none" stroke="#e0736b" stroke-width="1.2" marker-end="url(#arrow)"/>
-  <text x="600" y="50" text-anchor="middle" font-size="11" fill="#a8443a">queue empty mid-play</text>
+  <text x="600" y="50" text-anchor="middle" font-size="11" fill="#e0736b">queue empty mid-play</text>
 
   <!-- full -> running (drain) feedback -->
   <path d="M585 140 C585 180, 425 180, 425 140" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>

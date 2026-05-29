@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="680" height="220" viewBox="0 0 680 220" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="220" viewBox="0 0 680 220" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Hall start then refine: a rough angle is taken from the Hall state (ComtStatus 300 or 400) so motion can begin; on the next index pulse (method 3) or Hall transition (method 4) the angle is refined to its final value with ComtStatus 100.">
+  <title>Hall-start commutation refined by index or Hall change</title>
   <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
 
   <text x="20" y="26" font-size="15" font-weight="bold">Hall start, then refine (methods 3 and 4)</text>
@@ -12,7 +13,7 @@
   <text x="340" y="95" text-anchor="middle" font-size="11">index pulse (method 3)</text>
   <text x="340" y="110" text-anchor="middle" font-size="11">or Hall change (method 4)</text>
 
-  <rect x="490" y="56" width="170" height="60" rx="6" fill="#eaf7ea" stroke="#3a8a3a" stroke-width="1.2"/>
+  <rect x="490" y="56" width="170" height="60" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
   <text x="575" y="80" text-anchor="middle" font-weight="bold">Fine angle</text>
   <text x="575" y="100" text-anchor="middle" font-size="11">commutation complete</text>
 

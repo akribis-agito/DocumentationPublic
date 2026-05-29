@@ -1,54 +1,46 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" font-family="sans-serif" font-size="13">
-  <style>
-    .box { fill:#f5f7fa; stroke:#37474f; stroke-width:1.5; }
-    .sel { fill:#fff3e0; stroke:#e65100; stroke-width:1.5; }
-    .out { fill:#e8f5e9; stroke:#2e7d32; stroke-width:1.5; }
-    .lbl { fill:#263238; }
-    .cond { fill:#607d8b; font-size:11px; }
-    line { stroke:#37474f; stroke-width:1.4; marker-end:url(#a); }
-  </style>
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="320" viewBox="0 0 720 320" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Velocity-feedback selection for Vel[1]: one of four sources (main encoder, scaled aux encoder, analog tacho input, or gantry partner velocity) is selected by the loop configuration and routed into the velocity loop.">
+  <title>Vel[1] feedback selection</title>
   <defs>
-    <marker id="a" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto">
-      <path d="M0,0 L8,4 L0,8 z" fill="#37474f"/>
-    </marker>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
   </defs>
 
+  <text x="20" y="22" font-size="14" font-weight="bold">Vel[1] feedback selection</text>
+
   <!-- sources -->
-  <rect class="box" x="20" y="20" width="180" height="34" rx="4"/>
-  <text class="lbl" x="30" y="41">main enc Vel[2] = &#916;Pos &#215; samples/s</text>
+  <rect x="20" y="50" width="230" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="30" y="75">main encoder: &#916;Pos &#215; samples/s</text>
 
-  <rect class="box" x="20" y="80" width="180" height="34" rx="4"/>
-  <text class="lbl" x="30" y="101">aux Vel &#215; DualLoopFact</text>
+  <rect x="20" y="110" width="230" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="30" y="135">aux encoder &#215; DualLoopFact</text>
 
-  <rect class="box" x="20" y="140" width="180" height="34" rx="4"/>
-  <text class="lbl" x="30" y="161">analog tacho input</text>
+  <rect x="20" y="170" width="230" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="30" y="195">analog tacho input</text>
 
-  <rect class="box" x="20" y="200" width="180" height="34" rx="4"/>
-  <text class="lbl" x="30" y="221">GantryVel</text>
+  <rect x="20" y="230" width="230" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="30" y="255">GantryVel (paired axis)</text>
 
   <!-- selector -->
-  <rect class="sel" x="300" y="95" width="150" height="64" rx="6"/>
-  <text class="lbl" x="316" y="122">select per</text>
-  <text class="lbl" x="316" y="140">loop config</text>
+  <rect x="340" y="130" width="160" height="60" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="420" y="155" text-anchor="middle">select per</text>
+  <text x="420" y="172" text-anchor="middle">loop config</text>
 
   <!-- output -->
-  <rect class="out" x="520" y="100" width="100" height="54" rx="6"/>
-  <text class="lbl" x="548" y="132" font-weight="bold">Vel[1]</text>
+  <rect x="570" y="135" width="130" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.6"/>
+  <text x="635" y="158" text-anchor="middle" font-weight="bold">Vel[1]</text>
+  <text x="635" y="175" text-anchor="middle" font-size="11" fill="#5b6b7b">to velocity loop</text>
 
-  <!-- arrows with conditions -->
-  <line x1="200" y1="37" x2="300" y2="108"/>
-  <text class="cond" x="208" y="62">normal</text>
+  <!-- arrows -->
+  <line x1="250" y1="70"  x2="337" y2="143" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="250" y1="130" x2="337" y2="155" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="250" y1="190" x2="337" y2="170" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="250" y1="250" x2="337" y2="183" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
 
-  <line x1="200" y1="97" x2="300" y2="120"/>
-  <text class="cond" x="208" y="92">DualLoopOn=1</text>
+  <text x="258" y="60"  font-size="11" fill="#5b6b7b">default</text>
+  <text x="258" y="120" font-size="11" fill="#5b6b7b">DualLoopOn = 1</text>
+  <text x="258" y="208" font-size="11" fill="#5b6b7b">DualLoopOn = 2</text>
+  <text x="258" y="268" font-size="11" fill="#5b6b7b">gantry pair</text>
 
-  <line x1="200" y1="157" x2="300" y2="135"/>
-  <text class="cond" x="208" y="178">DualLoopOn=2</text>
+  <line x1="500" y1="160" x2="567" y2="160" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
 
-  <line x1="200" y1="217" x2="300" y2="150"/>
-  <text class="cond" x="208" y="240">gantry on (A/B)</text>
-
-  <line x1="450" y1="127" x2="520" y2="127"/>
-
-  <text class="cond" x="520" y="180">to velocity loop (VelErr = VelRef &#8722; Vel[1])</text>
+  <text x="360" y="300" text-anchor="middle" font-size="11" fill="#5b6b7b">VelErr = VelRef &#8722; Vel[1] inside the velocity loop</text>
 </svg>

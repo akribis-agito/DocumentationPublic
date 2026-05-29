@@ -1,30 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="640" height="200" viewBox="0 0 640 200" font-family="sans-serif" font-size="13">
-  <text x="320" y="22" text-anchor="middle" font-size="14" font-weight="bold">Absolute-encoder word (EncAbsBits wide)</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="220" viewBox="0 0 700 220" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Absolute-encoder word layout. The full word is EncAbsBits wide. The high bits are the multi-turn count, the middle bits are the single-turn position kept after a right-shift by EncAbsMB, and the low EncAbsMB bits are discarded. The rollover modulus ReadingCycle equals 2 raised to the power EncAbsBits minus EncAbsMB.">
+  <title>Absolute-encoder word (EncAbsBits wide)</title>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
 
-  <!-- whole word bracket -->
-  <rect x="40" y="50" width="560" height="46" fill="none" stroke="#444" stroke-width="1"/>
+  <text x="350" y="26" text-anchor="middle" font-size="15" font-weight="bold">Absolute-encoder word (EncAbsBits wide)</text>
 
-  <!-- multi-turn -->
-  <rect x="40" y="50" width="300" height="46" fill="#cfe3f7" stroke="#444"/>
-  <text x="190" y="78" text-anchor="middle">multi-turn count (high bits)</text>
+  <!-- multi-turn (high) -->
+  <rect x="60" y="60" width="320" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="220" y="82" text-anchor="middle" font-weight="bold">multi-turn count</text>
+  <text x="220" y="100" text-anchor="middle" font-size="11" fill="#555">high bits</text>
 
-  <!-- single-turn kept -->
-  <rect x="340" y="50" width="180" height="46" fill="#d8f0d8" stroke="#444"/>
-  <text x="430" y="78" text-anchor="middle">single-turn position</text>
+  <!-- single-turn (kept) -->
+  <rect x="380" y="60" width="180" height="50" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="470" y="82" text-anchor="middle" font-weight="bold">single-turn position</text>
+  <text x="470" y="100" text-anchor="middle" font-size="11" fill="#555">kept</text>
 
   <!-- masked low bits -->
-  <rect x="520" y="50" width="80" height="46" fill="#eee" stroke="#444"/>
-  <text x="560" y="74" text-anchor="middle" font-size="11">EncAbsMB</text>
-  <text x="560" y="89" text-anchor="middle" font-size="11">(discarded)</text>
+  <rect x="560" y="60" width="80" height="50" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="600" y="80" text-anchor="middle" font-size="12">EncAbsMB</text>
+  <text x="600" y="98" text-anchor="middle" font-size="11" fill="#b35047">discarded</text>
 
-  <!-- bit position labels -->
-  <text x="40" y="118" text-anchor="middle" font-size="11">MSB</text>
-  <text x="520" y="118" text-anchor="middle" font-size="11">low bits</text>
-  <text x="600" y="118" text-anchor="middle" font-size="11">LSB</text>
+  <!-- MSB / LSB markers -->
+  <text x="60" y="130" text-anchor="start" font-size="11" fill="#555">MSB</text>
+  <text x="640" y="130" text-anchor="end" font-size="11" fill="#555">LSB</text>
 
-  <!-- arrow: meaningful word -->
-  <line x1="40" y1="140" x2="520" y2="140" stroke="#1a7" stroke-width="1.5"/>
-  <text x="280" y="158" text-anchor="middle" fill="#1a7">kept after right-shift by EncAbsMB</text>
+  <!-- bracket: kept after right-shift -->
+  <line x1="60" y1="146" x2="560" y2="146" stroke="#5b6b7b" stroke-width="1.2"/>
+  <line x1="60" y1="142" x2="60" y2="150" stroke="#5b6b7b" stroke-width="1.2"/>
+  <line x1="560" y1="142" x2="560" y2="150" stroke="#5b6b7b" stroke-width="1.2"/>
+  <text x="310" y="164" text-anchor="middle" font-size="12" fill="#333">kept after right-shift by EncAbsMB</text>
 
-  <text x="40" y="186" font-size="12">Rollover modulus ReadingCycle = 2^(EncAbsBits &#8722; EncAbsMB)</text>
+  <!-- formula -->
+  <text x="60" y="196" font-size="12" fill="#333">Rollover modulus  ReadingCycle = 2^(EncAbsBits &#8722; EncAbsMB)</text>
 </svg>

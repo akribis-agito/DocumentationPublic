@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="820" height="290" viewBox="0 0 820 290" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="290" viewBox="0 0 820 290" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="In pseudo dual-loop with DualEncSwapOn, only the motor encoder is used: a scaled copy (x DualLoopFact / 65536) closes the position loop in load units, and the raw signal closes the velocity loop.">
+  <title>Pseudo dual-loop with swapped feedback</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
   </defs>
@@ -32,10 +33,10 @@
   <text x="740" y="198" text-anchor="middle" fill="#5b6b7b">only feedback in use</text>
 
   <!-- branch 1: scaled to load units for position loop -->
-  <line x1="650" y1="185" x2="430" y2="185" stroke="#5b6b7b" stroke-width="1.4"/>
-  <rect x="290" y="168" width="140" height="36" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-  <text x="360" y="192" text-anchor="middle">x DualLoopFact / 65536</text>
-  <line x1="290" y1="185" x2="130" y2="185" stroke="#5b6b7b" stroke-width="1.4"/>
+  <line x1="650" y1="185" x2="440" y2="185" stroke="#5b6b7b" stroke-width="1.4"/>
+  <rect x="280" y="168" width="160" height="36" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="360" y="192" text-anchor="middle" font-size="12">&#215; DualLoopFact / 65536</text>
+  <line x1="280" y1="185" x2="130" y2="185" stroke="#5b6b7b" stroke-width="1.4"/>
   <line x1="130" y1="185" x2="130" y2="122" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
   <text x="100" y="146" fill="#5b6b7b">Pos (load units)</text>
 
