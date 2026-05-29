@@ -18,7 +18,7 @@ The figure below shows the general control structure under dual-loop control.
 
 Position loop will take in the load/main feedback, while velocity loop will take in the motor/auxiliary feedback.
 
-Position and velocity feedback may have different resolutions. To ensure all velocity loop’s inputs (reference and feedback) have the matching unit, scaling factor is needed (DualLoopFact). Depending on the DualLoopFact, the control structure will change, so that VelRef and Vel\[1\] always be in feedback unit with finer resolution.
+Position and velocity feedback may have different resolutions. To ensure all velocity loop’s inputs (reference and feedback) have the matching unit, scaling factor is needed (DualLoopFact). Depending on the DualLoopFact, the control structure will change, so that VelRef and Vel\[1\] always be in feedback unit with finer resolution. In the cascade, the position loop closes on the load/main feedback and produces the velocity reference; that reference is then unit-matched by the command-side scaling, while the velocity feedback from the motor/auxiliary encoder is unit-matched by the feedback-side scaling, so the velocity loop always compares reference and feedback in the same encoder unit (see [DualLoopFact](../../../02-keywords/11-control-tuning/02-dual-loop-control/DualLoopFact.md) for the exact per-`DualLoopFact` gains).
 
 Under dual-loop mode, user can also force the position loop to source from the motor/auxiliary feedback but scaled to the unit of load/main feedback. This is called “pseudo dual-loop” because effectively, only one feedback source is used. The related keyword for this feature is DualEncSwapOn.
 

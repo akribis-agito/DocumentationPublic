@@ -42,6 +42,8 @@ $$
 
 The offset is applied after the brushless anti-cogging term ([UPMVelTable](UPMVelTable.md)) and before the current limitations and saturation handling, so it is a constant bias on the current reference that is still subject to the current limits downstream. The firmware deliberately applies it only after commutation is complete: any current injection that introduces a DC offset must wait for phasing, otherwise an enabled-but-unphased motor could run away.
 
+Because the current reference becomes the quadrature-axis (torque-producing) command of the field-oriented current loop — [IqRef](../02-motor-variables/IqRef.md) takes the final current reference while the direct-axis (field) reference [IdRef](../02-motor-variables/IdRef.md) is held at 0 — `CurrRefOffset` biases the q-axis (torque-producing) reference only and never the d-axis (field) reference.
+
 This keyword exists only on central-i v5, where the current reference is floating-point. Its range is bounded by the current-command range (its limits are derived from the drive's maximum current command).
 
 ## Examples

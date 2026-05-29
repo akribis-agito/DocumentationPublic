@@ -45,6 +45,8 @@ When `DualEncMode = 1`, each control cycle the controller compares the motor (au
 
 A position offset is maintained across the switch so the transition does not produce a position step.
 
+`DualEncMode` is not retained through a power cycle: it reverts to its default `0` (pseudo dual-loop everywhere) at power-up, so range-limited switching must be re-armed each session. It can be changed with the motor on, but not while the axis is in motion. In contrast, [DualEncRange](DualEncRange.md) is retained and can be adjusted even during motion.
+
 ![True dual-loop runs while AuxPos lies between DualEncRange[1] and DualEncRange[2]; pseudo dual-loop runs outside that window](dual-enc-range-switch.svg)
 
 ## Examples

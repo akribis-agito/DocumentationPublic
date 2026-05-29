@@ -52,6 +52,8 @@ Bit 2 (mask `0x00000004`) is retained and visible to a host, but the controller 
 
 The encoder warning (bit 3, mask `0x00000008`) is signalled separately from the error bit but is handled together with it for fault purposes. To confirm a clean encoder, test for the absence of all of these health bits rather than relying on any single bit.
 
+For a BiSS-C encoder the frame ends in a 6-bit CRC. The interface recomputes the CRC over the received data field and its two error/warning status bits every control cycle and compares it against the CRC the encoder sent; a mismatch sets the CRC bit (bit 4). Because the check runs on every frame, a CRC bit that sets intermittently points to marginal link integrity (cable length, shielding, grounding, or connector noise) rather than a permanent fault — clean it up before the error count reaches the [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md) limit and the axis is taken off.
+
 How the bits are acted upon depends on [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md), the abnormal-condition timeout:
 
 - **Disconnect (bit 0, without CRC):** if the motor is on, the axis is taken off immediately and [ConFlt](../../07-status-and-faults/ConFlt.md) reports fault `1070`. On a brushless motor the commutation status is also invalidated (it must re-phase), because the motor may have moved while the encoder was disconnected.
@@ -61,6 +63,8 @@ How the bits are acted upon depends on [EncAbsErrTime](../07-absolute-encoder/En
 
 Setting [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md) to `-1` disables the error/warning/CRC monitoring (the bits may still be reported, but they do not trigger a fault). The disconnect handling is independent of `EncAbsErrTime`.
 
+This monitoring only begins after the power-up seed window closes. The first absolute reading taken at power-up is used to seed the position without checking these status bits, so a corrupted power-up frame can seed an incorrect absolute position (see [EncAbsOff](EncAbsOff-AuxEncAbsOff.md)). Confirm `EncStatReg` is clean a few cycles into boot before relying on the seeded position.
+
 ### Bit layout by encoder protocol
 
 The controller reads the same five status bits regardless of encoder type and applies one fixed interpretation (bit 0 = disconnect, bit 1 = error, bit 3 = warning, bit 4 = CRC). What the encoder interface actually places on each bit, however, depends on the configured protocol:
@@ -69,11 +73,11 @@ The controller reads the same five status bits regardless of encoder type and ap
 |---|---|---|---|
 | 0 (`0x01`) | Disconnected / no response | Encoder error | No response / timeout (disconnect) |
 | 1 (`0x02`) | Amplitude error | Frame CRC failed | Start/stop framing error |
-| 2 (`0x04`) | Frequency error | Unsupported mode | Frame CRC failed |
-| 3 (`0x08`) | System error | Additional encoder error flag | (unused) |
-| 4 (`0x10`) | Frame CRC failed | Additional encoder error flag | (unused) |
+| 2 (`0x04`) | Frequency error | unused (always 0) | Frame CRC failed |
+| 3 (`0x08`) | System error | unused (always 0) | (unused) |
+| 4 (`0x10`) | Frame CRC failed | unused (always 0) | (unused) |
 
-The controller's fixed fault mapping (bit 4 = CRC -> fault `1069`; bit 1 or bit 3 = error/warning -> fault `1068`) lines up exactly with **BiSS-C / SIN-COS**. With **EnDat 2.2** the encoder's CRC failure appears on bit 1, so it is treated as an *error* (fault `1068`), not as a CRC fault (`1069`). With **Tamagawa** the CRC failure appears on bit 2, which is captured but not separately acted upon. For protocol-independent monitoring, test for the absence of *all* low bits rather than a specific bit position.
+The controller's fixed fault mapping (bit 4 = CRC -> fault `1069`; bit 1 or bit 3 = error/warning -> fault `1068`) lines up exactly with **BiSS-C / SIN-COS**. With **EnDat 2.2** the interface surfaces only two conditions: an encoder-error flag on bit 0 and a frame-CRC failure on bit 1; bits 2-4 are not driven and stay clear. Because the encoder's CRC failure therefore appears on bit 1 (not bit 4), it is handled as an *error* (fault `1068` against [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md)), not as a CRC fault (`1069`). With **Tamagawa** the CRC failure appears on bit 2, which is captured but not separately acted upon. For protocol-independent monitoring, test for the absence of *all* low bits rather than a specific bit position.
 
 ## Examples
 
@@ -88,6 +92,7 @@ AEncStatReg          ; read the absolute-encoder status bits
 ## See also
 
 - [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md) — timeout that converts a persistent error/warning/CRC condition into a fault
+- [EncAbsOff](EncAbsOff-AuxEncAbsOff.md) — power-up position seed taken before this monitoring starts
 - [EncType](EncType-AuxEncType.md) — feedback type; these bits apply to the serial absolute encoder
 - [StatReg](../../07-status-and-faults/StatReg.md) — general axis status register
 - [ConFlt](../../07-status-and-faults/ConFlt.md) — fault register; reports codes 1068 / 1069 / 1070 for these conditions

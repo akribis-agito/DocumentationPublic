@@ -13,11 +13,13 @@ Offset added to the absolute encoder reading at power-up.
 
 ## How it works
 
-During the first control cycles after power-up (or, on central-i, the first cycles after the encoder is configured), the firmware seeds the accumulated position directly from the absolute reading plus this offset, instead of starting from zero:
+For a fixed number of control cycles immediately after power-up the firmware seeds the accumulated position directly from the absolute reading plus this offset, instead of letting it accumulate from zero:
 
 $$\text{EncoderPos}_{\text{init}} = \text{Reading}_{\text{masked}} + \text{EncAbsOff}$$
 
-where `Reading_masked` is the raw reading after the [EncAbsMB](EncAbsMB-AuxEncAbsMB.md) right-shift and [EncDir](EncDir-AuxEncDir.md) direction handling (the same value reported as [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)). At the same time the delta is forced to 0 and the previous-reading register is primed, so the axis starts at `EncoderPos_init` with no spurious jump. This seeded value flows through the normal feedback pipeline (error mapping, modulo) to become [Pos](../../10-motion/01-kinematics-status/Pos.md). After the initial cycles the offset is no longer added; the position simply accumulates the per-cycle deltas.
+where `Reading_masked` is the raw reading after the [EncAbsMB](EncAbsMB-AuxEncAbsMB.md) right-shift and [EncDir](EncDir-AuxEncDir.md) direction handling (the same value reported as [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)). At the same time the delta is forced to 0 and the previous-reading register is primed, so the axis starts at `EncoderPos_init` with no spurious jump. This seeded value flows through the normal feedback pipeline (error mapping, modulo) to become [Pos](../../10-motion/01-kinematics-status/Pos.md). After the seed window closes the offset is no longer added; the position simply accumulates the per-cycle deltas.
+
+On the standalone controller this seed window spans up to about 31 control cycles, and fewer on a multi-axis controller, because it is governed by a single counter shared across the absolute axes (see [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)). On central-i it spans roughly the first 150 control cycles after the port is configured, and each axis has its own seed window that is re-armed whenever the port is reconfigured. In all cases the seed completes within the first handful of cycles after boot or configuration.
 
 So `EncAbsOff` shifts where the encoder's absolute zero lands in the controller's position frame. To place machine zero at a chosen physical point, set `EncAbsOff` to the negative of the masked reading observed at that point (read it from [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)).
 
@@ -35,6 +37,10 @@ AEncAbsOff=0            ; encoder absolute zero = machine zero
 AAuxEncAbsOff=-50000    ; place auxiliary machine zero at reading 50000
 ```
 
+## Edge cases
+
+- **Unvalidated power-up seed.** The power-up seed is taken from the encoder's first reading without validating the frame. The CRC / error / disconnect monitoring governed by [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md) only begins after the seed window closes, so a corrupted power-up frame can seed [Pos](../../10-motion/01-kinematics-status/Pos.md) to an incorrect absolute value that survives the power cycle. If absolute power-up integrity matters, confirm [EncStatReg](EncStatReg.md) is clean a few cycles into boot before relying on [Pos](../../10-motion/01-kinematics-status/Pos.md).
+
 ## See also
 
 - [EncAbsVal](EncAbsVal-AuxEncAbsVal.md) — the masked, direction-handled reading the offset is added to
@@ -42,4 +48,6 @@ AAuxEncAbsOff=-50000    ; place auxiliary machine zero at reading 50000
 - [EncAbsMB](EncAbsMB-AuxEncAbsMB.md) — low bits removed before the offset is applied
 - [EncType](EncType-AuxEncType.md) — encoder type; `EncAbsOff` applies for absolute encoders
 - [Pos](../../10-motion/01-kinematics-status/Pos.md) — feedback position seeded from `reading + EncAbsOff` at power-up
+- [EncStatReg](EncStatReg.md) — confirm a clean status before relying on the power-up seed
+- [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md) — abnormal-frame monitoring; begins only after the seed window closes
 - [SetPosition](../../10-motion/03-kinematics-configuration/SetPosition.md) — preset the feedback after start-up

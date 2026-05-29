@@ -29,6 +29,8 @@ Because `EncAbsMB` changes the count-to-electrical-angle scaling, changing it on
 
 > [!note]
 > `EncAbsMB` removes bits from the **bottom** (least significant) of the word. The remaining low bits represent the single-turn position and the high bits the multi-turn count, as shown in the [EncAbsBits](EncAbsBits-AuxEncAbsBits.md) bit-layout figure.
+>
+> `EncAbsMB` is **not** a count of multi-turn bits and does not tell the controller how to split the word into multi-turn and single-turn parts. The controller never decodes those two halves separately — it treats the masked reading as one contiguous unsigned position and simply discards `EncAbsMB` low bits. Set `EncAbsMB` to the number of fine bits you want dropped, not to the encoder's number of multi-turn bits.
 
 ### Auxiliary encoder (AuxEncAbsMB)
 

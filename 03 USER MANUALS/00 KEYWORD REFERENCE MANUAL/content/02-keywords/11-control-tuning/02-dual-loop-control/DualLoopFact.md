@@ -37,7 +37,7 @@ Scaling factor that unit-matches the velocity-loop signals in dual-loop control.
 
 ## How it works
 
-`DualLoopFact` is a fixed-point factor with `65536` representing a ratio of 1. The controller derives the working velocity-loop scaling from it as described below, and applies the same factor when scaling the dual-loop position limits and the shaped position reference.
+`DualLoopFact` is a fixed-point factor with `65536` representing a ratio of 1. The controller derives the working velocity-loop scaling from it as described below. In ordinary single-axis dual loop, `DualLoopFact` affects only the velocity-loop signals; it does not rescale the position limits ([FwdPLim](../../../02-keywords/06-protections/03-motion/position-limit-protection/FwdPLim.md)/[RevPLim](../../../02-keywords/06-protections/03-motion/position-limit-protection/RevPLim.md)), the position/velocity error limits, or the shaped position reference, because the position loop closes on the load encoder, which is already in load units. That additional rescaling by `DualLoopFact` applies only in the gantry dual-loop case (see [Gantry control - Dual-loop control](../../../02-keywords/12-gantry-control/04-dual-loop-gantry-control/00-overview.md)).
 
 To keep precision, the controller chooses where to apply the scaling based on whether `DualLoopFact` is at least `65536` (ratio ≥ 1) or below it (ratio &lt; 1):
 

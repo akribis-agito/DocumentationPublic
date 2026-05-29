@@ -50,6 +50,10 @@ Once per regeneration step (per-axis on central-i, controller-wide on a standalo
 
 The middle row is the dead-band: between the two thresholds nothing changes, so the chopper does not chatter on every small ripple. For this to work you must set **`RegenOn` > `RegenOff`**; if they are equal there is no hysteresis, and `RegenOn` < `RegenOff` is not a valid configuration. On a standalone controller the regen circuit is not per-axis — when it activates, `StatReg` bit 1 is set on all axes at once.
 
+The regeneration thresholds are not tested on every control cycle. The controller services its periodic checks in a 16-step round-robin (one step per control interrupt), and the `RegenOn`/`RegenOff` comparison runs in one of those steps — so `VBus` is compared against the thresholds once every 16 control interrupts. The chopper can therefore switch with a delay of up to 16 control-interrupt periods after `VBus` crosses a threshold. Size the dead-band (`RegenOn` − `RegenOff`) so the bus voltage cannot swing back across the opposite threshold within that interval, which keeps the chopper from chattering.
+
+On a standalone controller `RegenOn` and `RegenOff` share their default, minimum, and maximum with [MaxVBus](../../06-protections/02-current-and-voltage/MaxVBus.md). In the factory default both thresholds equal the `MaxVBus` default, so there is no hysteresis gap and the activation point coincides with the over-voltage limit. You must lower `RegenOff` (and usually `RegenOn`) yourself to create a usable dead-band below `MaxVBus` before relying on the regen circuit.
+
 The "regeneration active" state is also available as a digital output (output function "regeneration active"), which follows `StatReg` bit 1 while `RegenUsed` ≠ 0.
 
 ![Regeneration hysteresis vs bus voltage](regen-hysteresis.svg)

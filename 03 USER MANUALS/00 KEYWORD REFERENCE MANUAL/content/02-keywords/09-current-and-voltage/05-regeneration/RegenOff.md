@@ -50,6 +50,10 @@ DC bus-voltage threshold (mV) below which the regeneration resistor is deactivat
 
 The comparison is `VBus ≤ RegenOff` (inclusive), so the resistor switches off the moment the bus reaches the threshold. The gap between `RegenOff` and `RegenOn` is the dead-band that prevents the chopper from chattering: make it wide enough to cover the bus-voltage ripple produced by the resistor switching. Set **`RegenOff` < `RegenOn`** — equal values remove the hysteresis, and `RegenOff` > `RegenOn` is not a valid configuration. See [RegenOn](RegenOn.md) for the hysteresis diagram.
 
+The regeneration thresholds are not tested on every control cycle. The controller services its periodic checks in a 16-step round-robin (one step per control interrupt), and the `RegenOn`/`RegenOff` comparison runs in one of those steps — so `VBus` is compared against the thresholds once every 16 control interrupts. The chopper can therefore switch with a delay of up to 16 control-interrupt periods after `VBus` crosses a threshold. Size the dead-band (`RegenOn` − `RegenOff`) so the bus voltage cannot swing back across the opposite threshold within that interval, which keeps the chopper from chattering.
+
+On a standalone controller `RegenOn` and `RegenOff` share their default, minimum, and maximum with [MaxVBus](../../06-protections/02-current-and-voltage/MaxVBus.md). In the factory default both thresholds equal the `MaxVBus` default, so there is no hysteresis gap and the activation point coincides with the over-voltage limit. You must lower `RegenOff` (and usually `RegenOn`) yourself to create a usable dead-band below `MaxVBus` before relying on the regen circuit.
+
 ## Examples
 
 ```text

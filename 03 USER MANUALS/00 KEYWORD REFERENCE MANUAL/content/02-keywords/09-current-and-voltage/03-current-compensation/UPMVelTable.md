@@ -57,6 +57,8 @@ To cancel an angle-periodic disturbance (such as cogging torque), populate `UPMV
 
 The added term is in the same units as the current reference ([CurrRef](../02-motor-variables/CurrRef.md)). On central-i v5 the table and reference are floating-point; on v4 they are integer. The indexing and the conditions for application are identical across versions.
 
+Because the current reference becomes the quadrature-axis (torque-producing) command of the field-oriented current loop ([IqRef](../02-motor-variables/IqRef.md)), with the direct-axis (field) reference held at 0, the anti-cogging current biases the q-axis (torque-producing) reference only.
+
 ## Examples
 
 ```text

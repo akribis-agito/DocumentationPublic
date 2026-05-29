@@ -50,7 +50,15 @@ $$
 \text{Pos} = \text{AuxPos} \cdot \frac{\text{DualLoopFact}}{65536}
 $$
 
-so the position loop sees the motor motion expressed in load units. A position offset is captured at the moment of switching so that engaging or leaving pseudo dual-loop does not produce a position step.
+so the position loop sees the motor motion expressed in load units. A position offset is captured at the moment of switching so that engaging or leaving pseudo dual-loop does not produce a position step:
+
+$$
+\text{offset} = \text{Pos} - \text{AuxPos} \cdot \frac{\text{DualLoopFact}}{65536}
+$$
+
+The offset is captured once when the structure changes and then held (it is not recomputed each cycle), so the reported [Pos](../../../02-keywords/10-motion/01-kinematics-status/Pos.md) stays continuous across every engage and disengage.
+
+If [Pos](../../../02-keywords/10-motion/01-kinematics-status/Pos.md) is set (written) while `DualLoopOn = 1` and `DualEncSwapOn = 1`, the auxiliary feedback [AuxPos](../../../02-keywords/10-motion/01-kinematics-status/AuxPos.md) is re-seeded to the new value and the swap offset is cleared, so the new position takes effect cleanly.
 
 With `DualEncSwapOn = 1` and [DualEncMode](DualEncMode.md) = 1, the controller switches between pseudo dual-loop and true dual-loop depending on whether the motor feedback lies inside the [DualEncRange](DualEncRange.md) window. The active structure is reported by [DualLoopStat](DualLoopStat.md).
 

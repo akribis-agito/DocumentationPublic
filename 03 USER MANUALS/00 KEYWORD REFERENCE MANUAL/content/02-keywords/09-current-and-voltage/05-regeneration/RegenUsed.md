@@ -49,6 +49,8 @@ Selects whether an external or internal regeneration resistor is used.
 
 Writing `RegenUsed = 0` takes effect immediately: the chopper command and the regeneration status bit (on every axis on a standalone controller) are cleared at the moment the value is written, so an already-active resistor is switched off without waiting for the next regen step.
 
+On central-i the threshold comparison additionally requires that the axis's port is active and that the connected device is an amplifier with a bus-voltage reading. If no amplifier is bound to the port (or the device does not report bus voltage), regeneration is not evaluated for that axis even when `RegenUsed` is non-zero.
+
 > **Note:** disabling regeneration removes the bus-voltage dissipation path. With no regen resistor, hard decelerations can drive [VBus](../01-system-variables/VBus.md) into the over-voltage protection ([MaxVBus](../../06-protections/02-current-and-voltage/MaxVBus.md) / [MaxVBusAbs](../../06-protections/02-current-and-voltage/MaxVBusAbs.md)) and trip the axis.
 
 ## Examples
