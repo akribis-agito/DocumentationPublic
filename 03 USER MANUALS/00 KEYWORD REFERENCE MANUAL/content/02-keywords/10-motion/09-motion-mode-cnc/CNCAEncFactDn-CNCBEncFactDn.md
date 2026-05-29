@@ -18,9 +18,9 @@ The ratio is applied as the path runs: the engine uses it to convert each axis's
 ## Examples
 
 ```text
-ACNCAEncFactDn[1]=1     ; denominator = 1 (default)
-ACNCAEncFactDn[1]=2     ; with CNCAEncFactNu = 3 gives a 3/2 (1.5:1) scaling ratio
-ACNCAEncFactDn[1]       ; read the current denominator
+ACNCAEncFactDn=1        ; denominator = 1 on axis A (default)
+ACNCAEncFactDn=2        ; with CNCAEncFactNu = 3 gives a 3/2 (1.5:1) scaling ratio
+ACNCAEncFactDn          ; read the current denominator on axis A
 ```
 
 ## See also

@@ -61,7 +61,7 @@ Vector motion is set per move and runs once `Begin` is issued on the lowest-numb
 ```text
 ; ===== Move 1: linear from current point to (15000, 5000) =====
 ; --- 1) Configure the group on the lowest-numbered axis (A) ---
-AVecMemberAxes[1]=3           ; bit 0 (A) + bit 1 (B) = 3
+AVecMemberAxes=3              ; bit 0 (A) + bit 1 (B) = 3
 AVecType=0                    ; 0 = linear
 
 ; --- 2) Set the per-axis end points using AbsTrgt ---

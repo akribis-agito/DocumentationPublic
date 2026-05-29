@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="640" height="240" viewBox="0 0 640 240" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Spline buffer fill and drain: BuffCalc fills the store with one point per sample at indexes 1 through BuffSamples; each control cycle the profiler drains one point at index BuffSamp into PosRef and advances BuffSamp; when BuffSamp passes BuffSamples it wraps and BuffCycle is incremented; the motion ends when BuffCycle passes BuffCycles.">
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="240" viewBox="0 0 640 240" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Spline buffer fill and drain: BuffCalc fills the internal store with one point per servo sample at indexes 1 through BuffStatus[6]; each control cycle the profiler drains the point at BuffStatus[5] into PosRef and advances that index; when it passes BuffStatus[6] it wraps to 1 and BuffStatus[4] is incremented; the motion ends when BuffStatus[4] passes BuffCycles.">
   <title>Spline buffer fill and drain</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
@@ -7,7 +7,7 @@
   <text x="20" y="22" font-size="14" font-weight="bold">Spline buffer: fill once, drain every cycle</text>
 
   <!-- Fill row -->
-  <text x="20" y="56" fill="#5b6b7b" font-size="11">BuffCalc fills the store with one point per sample (indexes 1 to BuffSamples):</text>
+  <text x="20" y="56" fill="#5b6b7b" font-size="11">BuffCalc fills the store with one point per sample (indexes 1 to BuffStatus[6]):</text>
   <g>
     <rect x="20"  y="68" width="56" height="36" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
     <text x="48"  y="91" text-anchor="middle">1</text>
@@ -16,22 +16,22 @@
     <rect x="140" y="68" width="56" height="36" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
     <text x="168" y="91" text-anchor="middle">3</text>
     <text x="240" y="91" text-anchor="middle">&#8230;</text>
-    <rect x="290" y="68" width="100" height="36" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-    <text x="340" y="91" text-anchor="middle">BuffSamples</text>
+    <rect x="290" y="68" width="120" height="36" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+    <text x="350" y="91" text-anchor="middle">BuffStatus[6]</text>
   </g>
 
   <!-- Drain row -->
-  <text x="20" y="132" fill="#5b6b7b" font-size="11">Each control cycle the profiler drains one point at index BuffSamp into PosRef:</text>
-  <rect x="140" y="148" width="80" height="40" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
-  <text x="180" y="165" text-anchor="middle">BuffSamp</text>
-  <text x="180" y="180" text-anchor="middle" font-size="11" fill="#5b6b7b">current index</text>
+  <text x="20" y="132" fill="#5b6b7b" font-size="11">Each control cycle the profiler drains the point at index BuffStatus[5] into PosRef:</text>
+  <rect x="140" y="148" width="120" height="40" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="200" y="165" text-anchor="middle">BuffStatus[5]</text>
+  <text x="200" y="180" text-anchor="middle" font-size="11" fill="#5b6b7b">current index</text>
 
-  <line x1="220" y1="168" x2="368" y2="168" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
-  <text x="380" y="172">PosRef (+ start position)</text>
+  <line x1="260" y1="168" x2="388" y2="168" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="400" y="172">PosRef (+ start position)</text>
 
-  <path d="M 180 148 q 30 -22 60 0" fill="none" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
-  <text x="246" y="138" font-size="11" fill="#5b6b7b">BuffSamp advances each cycle</text>
+  <path d="M 200 148 q 30 -22 60 0" fill="none" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="266" y="138" font-size="11" fill="#5b6b7b">BuffStatus[5] advances each cycle</text>
 
-  <text x="20" y="208" fill="#5b6b7b" font-size="11">When BuffSamp passes BuffSamples: wrap to 1 and increment BuffCycle.</text>
-  <text x="20" y="222" fill="#5b6b7b" font-size="11">The move ends when BuffCycle passes BuffCycles.</text>
+  <text x="20" y="208" fill="#5b6b7b" font-size="11">When BuffStatus[5] passes BuffStatus[6]: wrap to 1 and increment BuffStatus[4].</text>
+  <text x="20" y="222" fill="#5b6b7b" font-size="11">The move ends when BuffStatus[4] passes BuffCycles.</text>
 </svg>

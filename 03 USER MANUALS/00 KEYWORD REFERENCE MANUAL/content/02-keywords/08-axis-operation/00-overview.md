@@ -35,14 +35,14 @@ The following table shows the summary of axis operation keywords.
 | 7   | General keywords        | [CanMotorOnRes](01-general-keywords/CanMotorOnRes.md) | Result code from the last CanMotorOn enable attempt. |
 | 8   | Position operation mode | [BeginOnToPos](02-position-operation-mode/BeginOnToPos.md)   | One-time flag to run a point-to-point move on entering position mode. |
 | 9   | Position operation mode | [GoToPosMode](02-position-operation-mode/GoToPosMode.md)     | Gracefully switches the axis into position control mode. |
-| 10  | Position operation mode | [ModeSwitchPos](02-position-operation-mode/ModeSwitchPos.md) | Position thresholds for automatic entry to / exit from position mode. |
-| 11  | Position operation mode | [PosPosFlag](02-position-operation-mode/PosPosFlag.md)       | Reports whether the axis is within the in-position threshold. |
-| 12  | Position operation mode | [PosPosTh](02-position-operation-mode/PosPosTh.md)           | Position-error threshold used to set the in-position flag. |
-| 13  | Position operation mode | [RetractSpeed](02-position-operation-mode/RetractSpeed.md)   | Speed used during a retract move. |
-| 14  | Position operation mode | [RetractTarget](02-position-operation-mode/RetractTarget.md) | Target position of a retract move. |
-| 15  | Current operation mode  | [CurrAInTh](03-current-operation-mode/CurrAInTh.md)       | Analog-input threshold for current-mode condition switching. |
-| 16  | Current operation mode  | [CurrCmdCntr](03-current-operation-mode/CurrCmdCntr.md)   | Repeat counter for the current-command profile. |
-| 17  | Current operation mode  | [CurrCmdHTime](03-current-operation-mode/CurrCmdHTime.md) | Hold time of each current-command step. |
+| 10  | Position operation mode | [ModeSwitchPos](02-position-operation-mode/ModeSwitchPos.md) | Records the position when the axis enters or exits position mode. |
+| 11  | Position operation mode | [PosPosFlag](02-position-operation-mode/PosPosFlag.md)       | Trigger direction for the position-feedback check to enter position mode. |
+| 12  | Position operation mode | [PosPosTh](02-position-operation-mode/PosPosTh.md)           | Position-feedback threshold used with PosPosFlag to enter position mode. |
+| 13  | Position operation mode | [RetractSpeed](02-position-operation-mode/RetractSpeed.md)   | Maximum velocity of the point-to-point move on entry to position mode. |
+| 14  | Position operation mode | [RetractTarget](02-position-operation-mode/RetractTarget.md) | Absolute target of the point-to-point move on entry to position mode. |
+| 15  | Current operation mode  | [CurrAInTh](03-current-operation-mode/CurrAInTh.md)       | Analog force-feedback threshold (condition B) to enter current mode. |
+| 16  | Current operation mode  | [CurrCmdCntr](03-current-operation-mode/CurrCmdCntr.md)   | Time elapsed in current mode or in the active CurrCmdVal entry. |
+| 17  | Current operation mode  | [CurrCmdHTime](03-current-operation-mode/CurrCmdHTime.md) | Holding time for each current-command table entry. |
 | 18  | Current operation mode  | [CurrCmdIndex](03-current-operation-mode/CurrCmdIndex.md) | Active index into the current-command table. |
 | 19  | Current operation mode  | [CurrCmdSlope](03-current-operation-mode/CurrCmdSlope.md) | Slope (ramp rate) of the current command. |
 | 20  | Current operation mode  | [CurrCmdSrc](03-current-operation-mode/CurrCmdSrc.md)     | Selects the current-reference source. |
@@ -56,8 +56,8 @@ The following table shows the summary of axis operation keywords.
 | 28  | Current operation mode  | [GoToCurrMode](03-current-operation-mode/GoToCurrMode.md) | Gracefully switches the axis into current control mode. |
 | 29  | Force operation mode    | [Force](04-force-operation-mode/Force.md)               | Reports the measured force. |
 | 30  | Force operation mode    | [ForceAInTh](04-force-operation-mode/ForceAInTh.md)     | Analog-input threshold for force-mode condition switching. |
-| 31  | Force operation mode    | [ForceCmdCntr](04-force-operation-mode/ForceCmdCntr.md) | Repeat counter for the force-command profile. |
-| 32  | Force operation mode    | [ForceCmdHTime](04-force-operation-mode/ForceCmdHTime.md) | Hold time of each force-command step. |
+| 31  | Force operation mode    | [ForceCmdCntr](04-force-operation-mode/ForceCmdCntr.md) | Time elapsed in force mode or in the active ForceCmdVal entry. |
+| 32  | Force operation mode    | [ForceCmdHTime](04-force-operation-mode/ForceCmdHTime.md) | Holding time for each force-command table entry. |
 | 33  | Force operation mode    | [ForceCmdIndex](04-force-operation-mode/ForceCmdIndex.md) | Active index into the force-command table. |
 | 34  | Force operation mode    | [ForceCmdSlope](04-force-operation-mode/ForceCmdSlope.md) | Slope (ramp rate) of the force command. |
 | 35  | Force operation mode    | [ForceCmdSrc](04-force-operation-mode/ForceCmdSrc.md)   | Selects the force-reference source. |
@@ -68,5 +68,5 @@ The following table shows the summary of axis operation keywords.
 | 40  | Force operation mode    | [ForceInTTol](04-force-operation-mode/ForceInTTol.md)   | Force tolerance band for the in-target test. |
 | 41  | Force operation mode    | [ForcePosErrTh](04-force-operation-mode/ForcePosErrTh.md) | Position-error threshold for force-mode condition switching. |
 | 42  | Force operation mode    | [ForceRef](04-force-operation-mode/ForceRef.md)         | Reports the active force reference. |
-| 43  | Force operation mode    | [ForceSamples](04-force-operation-mode/ForceSamples.md) | Number of samples averaged for the force measurement. |
+| 43  | Force operation mode    | [ForceSamples](04-force-operation-mode/ForceSamples.md) | Timings of the last completed ForceCmdVal application, in controller cycles. |
 | 44  | Force operation mode    | [GoToForceMode](04-force-operation-mode/GoToForceMode.md) | Gracefully switches the axis into force control mode. |

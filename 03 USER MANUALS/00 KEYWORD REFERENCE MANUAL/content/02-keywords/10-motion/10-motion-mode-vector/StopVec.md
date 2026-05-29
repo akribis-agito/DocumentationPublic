@@ -51,7 +51,7 @@ A motor-off or fault on a member axis, or a member axis reaching a software posi
 ## Examples
 
 ```text
-AStopVec=0           ; stop the active vector motion
+AStopVec             ; stop the active vector motion (invoke as a command)
 ```
 
 ## See also

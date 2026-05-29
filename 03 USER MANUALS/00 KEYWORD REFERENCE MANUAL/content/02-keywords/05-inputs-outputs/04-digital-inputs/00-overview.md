@@ -35,4 +35,4 @@ For array-type keyword representing digital inputs in array indices, 1-based ind
 | 3        | Input 3        |
 | …        | …              |
 
-For filtering purposes, the sampling rate of the raw digital signal is 80MHz. However, DInPort is only updated at 1kHz.
+For filtering purposes, the sampling rate of the raw digital signal is 80MHz. DInPort itself is refreshed every controller control cycle.

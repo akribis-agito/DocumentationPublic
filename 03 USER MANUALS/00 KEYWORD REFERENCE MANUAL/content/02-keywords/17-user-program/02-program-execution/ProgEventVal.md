@@ -49,6 +49,10 @@ Enter `ProgEventVal` in the **same user units** as the monitored parameter selec
 AProgEventVal[1]=100 ; threshold of 100 (in the monitored parameter's user units) for event 1
 ```
 
+## Changes between versions
+
+On v4 (standalone and central-i v4) `ProgEventVal` is a 32-bit signed integer; the same is true of [ProgEventMask](ProgEventMask.md). On central-i v5 both are widened to 64-bit signed integers, so wider trigger sources can be compared at full width.
+
 ## See also
 
 - [ProgEventType](ProgEventType.md) — trigger type (edge, equal, not equal, …)

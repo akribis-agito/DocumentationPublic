@@ -54,7 +54,7 @@ Each control cycle the controller:
 
 If the required number of pulses in one cycle exceeds the hardware limit while the motor is on, the axis faults: [ConFlt](../../07-status-and-faults/ConFlt.md) reports the virtual-encoder maximum-pulses-exceeded fault.
 
-> **Availability:** in the current firmware the full generation path is implemented for the **AG300 controller**; the Central-i remote-output path is product-dependent.
+> **Availability:** in the current firmware the full generation path is implemented for the **standalone controller**; the Central-i remote-output path is product-dependent.
 
 ## Examples
 

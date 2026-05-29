@@ -18,6 +18,14 @@ $$
 Analog\ Output\ \lbrack mV\rbrack = Parameter\ \lbrack mV\rbrack*2\hat{}AOutShifts\ \  + AOutOffset\ \lbrack mV\rbrack
 $$
 
+On **Central-i v5** the power-of-two scaler is replaced by a floating-point gain ([AOutGain](AOutGain.md)) that allows any real multiplier:
+
+$$
+Analog\ Output\ \lbrack mV\rbrack = Parameter\ \lbrack mV\rbrack \times AOutGain\ + AOutOffset\ \lbrack mV\rbrack
+$$
+
+The DAC has a scale of approximately −2.752457 LSB/mV, so the full-scale output is ±11905 mV.
+
 **Note:**
 
 Not all products contain the same number of I/Os. Changing the keyword array at the unused indices will not produce any change. For example, if the product has only 2 analog outputs, changing AOutMode[3] will not make any change.

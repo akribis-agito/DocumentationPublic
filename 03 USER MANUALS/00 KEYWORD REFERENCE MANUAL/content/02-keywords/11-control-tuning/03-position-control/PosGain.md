@@ -55,7 +55,14 @@ The product is computed in extended precision and then clamped to the storable r
 - **What it multiplies:** the position error [PosErr](../../10-motion/01-kinematics-status/PosErr.md) (after the optional position-error filter; see [PosFiltOn](PosFiltOn.md)).
 - **Where it sums:** its output is added to the [VelTrackFact](../04-velocity-control/VelTrackFact.md)-scaled velocity feed-forward to build [VelRef](../../10-motion/01-kinematics-status/VelRef.md), the input to the velocity loop.
 - **Scaling / units:** applied as a direct multiplier (scaling factor 1.0). With a value of `0` the position loop produces no proportional command and only the velocity feed-forward remains.
-- **Range / default:** `0` to `20000`, default `0`.
+
+### Range and default
+
+| | v4 (standalone & central-i) | v5 (central-i) |
+|---|---|---|
+| Data type | 32-bit integer | 32-bit float |
+| Range | 0 to 20000 | 0 to 1000000 |
+| Default | 0 | 0 |
 
 ## Examples
 

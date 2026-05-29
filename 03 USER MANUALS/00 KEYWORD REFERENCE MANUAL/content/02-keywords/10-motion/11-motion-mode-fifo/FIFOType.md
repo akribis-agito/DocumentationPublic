@@ -99,7 +99,7 @@ Queue a few segments, start motion, then keep pushing while monitoring [FIFOStat
 
 ```text
 ; --- 1) Start from a clean queue ---
-AFIFOClear=0                  ; empty the queue (free count returns to 128)
+AFIFOClear                    ; empty the queue (free count returns to 128)
 
 ; --- 2) Prime the queue: cycle time + three motion segments ---
 AFIFOPushCycle=20             ; each following segment lasts 20 control samples
@@ -117,7 +117,7 @@ AFIFOStatus[2]                ; free entries -- pace pushes against this
 AFIFOPushLinP=10000           ; push next segment while there is room
 
 ; --- 5) End cleanly ---
-AStopFIFO=0                   ; play the active segment to completion, then end
+AStopFIFO                     ; play the active segment to completion, then end
 ```
 
 The motion ends gracefully (underrun) if the engine reaches the last queued segment with nothing behind it. To stop earlier with a deceleration ramp, use [Stop](../04-motion-command/Stop.md) instead of `StopFIFO`. The companion FIFO-position-tracking subsystem (see [FIFOPosType](FIFOPosType.md), [FIFOPosPush](FIFOPosPush.md), [FIFOPosStatus](FIFOPosStatus.md)) uses the same fill / drain pattern but streams **absolute target positions** under `MotionMode = 19`.

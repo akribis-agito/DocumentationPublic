@@ -13,17 +13,17 @@ Sets the counting direction of the encoder feedback.
 
 ## How it works
 
-The direction reversal is applied in the **quadrature decode hardware**, not as a software post-step:
+For an **incremental** encoder the direction reversal is applied in the **quadrature decode hardware**, not as a software post-step:
 
-- **AG300 controller** — `EncDir` is written into the decoder control register's quadrature-swap bit. Setting it swaps the A and B channels in hardware, inverting the decoded count direction.
+- **Standalone controller** — `EncDir` is written into the decoder control register's quadrature-swap bit. Setting it swaps the A and B channels in hardware, inverting the decoded count direction.
 - **Central-i remote units** — `EncDir` is packed into the remote encoder configuration word (bit 8) sent to the remote unit, where the hardware applies the same swap.
 
-Because the swap happens at the decoder, the effect is equivalent to negating the per-cycle count delta:
+For an **absolute** encoder there is no quadrature decoder to swap, so the firmware applies the reversal in software each cycle: after the raw word has been right-shifted by [EncAbsMB](EncAbsMB-AuxEncAbsMB.md), the masked reading is replaced with `ReadingCycle − reading` when `EncDir = 1`. The net effect on [Pos](../../10-motion/01-kinematics-status/Pos.md) is the same as for an incremental encoder.
 
 | EncDir | Effect on position |
 |---|---|
 | 0 | Position counts in the encoder's native direction. |
-| 1 | Position counts in the reversed direction (A/B swapped at the decoder). |
+| 1 | Position counts in the reversed direction (incremental: A/B swapped at the decoder; absolute: `ReadingCycle − reading` after masking). |
 
 `EncDir` must be set before motor phasing/commutation, because changing it after phasing inverts the position-to-electrical-angle relationship and would require re-phasing.
 

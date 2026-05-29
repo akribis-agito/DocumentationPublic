@@ -34,7 +34,7 @@ Sequence of user-defined force references (units) for force mode.
 
 `ForceCmdVal` defines a sequence of user-defined force references, in units, applied in force operation mode. It is applicable only when [ForceCmdSrc](ForceCmdSrc.md) = 1 or 2, and each value is paired with a holding time from [ForceCmdHTime](ForceCmdHTime.md). The active entry is selected by [ForceCmdIndex](ForceCmdIndex.md), and the transition into each value is ramped at [ForceCmdSlope](ForceCmdSlope.md).
 
-The array holds **20 usable entries, indexed 1 to 20**. Index `[0]` is unused (the table is 1-indexed to match the command syntax).
+The array holds **20 usable entries, indexed 1 to 20** — the table is 1-indexed, matching the command syntax.
 
 ## How it works
 

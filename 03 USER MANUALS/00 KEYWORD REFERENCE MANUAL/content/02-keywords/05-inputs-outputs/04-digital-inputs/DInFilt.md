@@ -32,7 +32,7 @@ Software debounce filter for all digital inputs on an axis.
 
 ## Overview
 
-`DInFilt` sets a debounce filter: a raw digital input must hold the same value for `DInFilt` consecutive samples before the change is asserted; otherwise the input keeps its previous state. For example, `DInFilt = 3` requires three consecutive readings of "1" before a "1" is asserted. It is the first stage of the [digital-input signal path](00-overview.md), and runs in hardware at the raw sampling rate (much faster than the 1 kHz [DInPort](DInPort-DInPortHigh.md) update).
+`DInFilt` sets a debounce filter: a raw digital input must hold the same value for `DInFilt` consecutive samples before the change is asserted; otherwise the input keeps its previous state. For example, `DInFilt = 3` requires three consecutive readings of "1" before a "1" is asserted. It is the first stage of the [digital-input signal path](00-overview.md), and runs in hardware at the raw sampling rate (much faster than the per-cycle [DInPort](DInPort-DInPortHigh.md) update).
 
 `DInFilt` is a single value that applies to **all** digital inputs of the axis/module (e.g. `CDInFilt` applies to all inputs of axis/module C). Debouncing improves noise immunity at the cost of reducing the effective sampling rate by the filter factor.
 

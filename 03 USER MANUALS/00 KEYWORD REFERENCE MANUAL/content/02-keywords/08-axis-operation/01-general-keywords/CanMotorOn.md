@@ -51,8 +51,8 @@ The check is a **snapshot**: time-dependent protections (e.g. a `MaxVBus` over-v
 
 ```text
 ACanMotorOn          ; run the pre-checks (does not enable the motor)
-ACanMotorOnRes      ; 1 = enabling would succeed, otherwise the reject/fault code
-AMotorOn[1]=1        ; actually enable the axis
+ACanMotorOnRes       ; 1 = enabling would succeed, otherwise the reject/fault code
+AMotorOn=1           ; actually enable the axis
 ```
 
 ## See also

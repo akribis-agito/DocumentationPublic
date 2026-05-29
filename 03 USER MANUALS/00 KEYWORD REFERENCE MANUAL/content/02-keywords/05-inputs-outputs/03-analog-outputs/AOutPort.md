@@ -34,7 +34,7 @@ Commanded analog-output value (mV) in direct command mode.
 
 ## Overview
 
-`AOutPort` sets the value, in millivolts, driven on an analog output when that output is in **direct command mode**. The array index is the analog-output number (1-based: `AOutPort[1]` is analog output 1, `AOutPort[2]` is analog output 2). Index 0 is unused — the array is sized one larger so the indices line up with the channel number (length is 3 on 2-output products and 5 on 4-output products). `AOutPort[Index]` only takes effect when `AOutMode[Index] == 0`; in monitoring mode the output follows the emulated parameter instead. See the [analog-output overview](00-overview.md) for both modes.
+`AOutPort` sets the value, in millivolts, driven on an analog output when that output is in **direct command mode**. The array index is the analog-output number (1-based: `AOutPort[1]` is analog output 1, `AOutPort[2]` is analog output 2). The usable index range matches the number of physical outputs (1 to 2 on 2-output products, 1 to 4 on 4-output products). `AOutPort[Index]` only takes effect when `AOutMode[Index] == 0`; in monitoring mode the output follows the emulated parameter instead. See the [analog-output overview](00-overview.md) for both modes.
 
 The range ±11905 mV comes directly from the DAC: the mV-to-DAC scale factor is −2.752457 LSB/mV, so the full-scale −32768 LSB corresponds to 11905 mV.
 

@@ -27,7 +27,7 @@ $$
 
 The previous cycle's value is retained before the update, which is how the function dispatch (see [DInMode](DInMode.md)) detects rising and falling edges. On a Central-i master the words instead come from the remote unit's synchronized I/O mirror, but the XOR-with-`DInLog` step is identical.
 
-`DInPort` is updated at the 1 kHz rate; the underlying raw signal is sampled and debounced far faster in hardware (see [DInFilt](DInFilt.md)).
+`DInPort` is refreshed every control cycle at the controller's loop rate; the underlying raw signal is sampled and debounced far faster in hardware (see [DInFilt](DInFilt.md)).
 
 ## Examples
 

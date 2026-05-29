@@ -38,19 +38,19 @@ It is an axis-scoped parameter saved to flash and can be changed at any time, in
 
 ## How it works
 
-The controller maintains a ramp **counter** that runs from `0` (correction off) up to a full-scale value equal to the controller's samples-per-second. The applied correction is scaled by `counter / (samples per second)`, so the counter is effectively a 0…1 blend factor between the uncorrected feedback and the fully-corrected feedback. `MapErrOnStep` is the amount the counter changes **per control cycle**:
+The controller maintains a ramp **counter** that runs from `0` (correction off) up to a full-scale of `16384`. The applied correction is scaled by `counter / 16384`, so the counter is effectively a 0…1 blend factor between the uncorrected feedback and the fully-corrected feedback. `MapErrOnStep` is the amount the counter changes **per control cycle**:
 
 - **Engaging** ([MapType](MapType.md) set 1/2/3): the counter increments by `MapErrOnStep` each cycle until it saturates at full scale.
 - **Disengaging** ([MapType](MapType.md) set 0): the counter decrements by `MapErrOnStep` each cycle; when it reaches 0 the internal mapping type reverts to off.
 - **`MapErrOnStep = 0` (default):** the counter jumps straight to full scale on engage / to 0 on disengage — an immediate, single-cycle switch (no ramp).
 
-Larger steps engage faster; the maximum (`16384`) at the base sample rate fully engages in roughly one second. Because full scale equals samples-per-second, a step of `N` engages over about `(samples per second) / N` cycles.
+Larger steps engage faster. A step of `N` engages over about `16384 / N` cycles, so `MapErrOnStep = 1` ramps in over `16384` cycles (≈ 1 s at the base sampling rate), while `MapErrOnStep = 16384` ramps in over a single cycle (effectively immediate). Intermediate values give a controlled fade — for example `MapErrOnStep = 16` takes `1024` cycles to fully engage.
 
 ## Examples
 
 ```text
 AMapErrOnStep=0      ; default: switch correction in/out immediately
-AMapErrOnStep=16     ; gentle fade-in over ~ (samples/s)/16 cycles
+AMapErrOnStep=16     ; gentle fade-in over ~1024 cycles (~62 ms at 16 kHz)
 AMapErrOnStep        ; read the current step size
 ```
 

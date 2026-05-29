@@ -34,7 +34,7 @@ Timings of the last completed ForceCmdVal application, in controller cycles.
 
 `ForceSamples` reports the timings of the last completed [ForceCmdVal](ForceCmdVal.md) application, the force-mode counterpart of [MotionSamples](../../10-motion/05-motion-status/MotionSamples.md). It is applicable only when [ForceCmdSrc](ForceCmdSrc.md) = 1 or 2. The unit is the number of controller cycles, where one cycle is the sample period $T_{s} = \frac{1}{16384\ \text{Hz}} \approx 61.035\ \mu s$. The four timings are recorded together the moment [ForceInTStat](ForceInTStat.md) reaches 4 (settled), using an internal cycle counter and the dwell time [ForceInTTime](ForceInTTime.md).
 
-Each element is initialized to `-1` when the motor is disabled, so `-1` means "no completed application yet". The array uses indices 1 to 4 (index 0 is unused).
+Each element is initialized to `-1` when the motor is disabled, so `-1` means "no completed application yet". The array uses indices 1 to 4 (1-indexed).
 
 ## How it works
 

@@ -48,6 +48,10 @@ Each control cycle, for an integer trigger source, the controller computes `(sou
 
 The mask is meaningful for integer trigger sources. A floating-point trigger source is compared directly, without masking. The value is held as a wide bit pattern, so masks of full word width are supported (see the version note below for width differences).
 
+## Changes between versions
+
+On v4 (standalone and central-i v4) the mask is stored as a 32-bit signed integer; the same is true of [ProgEventVal](ProgEventVal.md). On central-i v5 both `ProgEventMask` and `ProgEventVal` are widened to 64-bit signed integers, so 64-bit status words (for example wide bitmaps) can be masked and compared at full width.
+
 ## Examples
 
 ```text

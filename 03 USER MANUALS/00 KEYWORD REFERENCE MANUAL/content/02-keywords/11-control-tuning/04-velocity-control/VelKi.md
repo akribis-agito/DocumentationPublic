@@ -54,7 +54,16 @@ where $k_i$ and $k_{scale}$ are fixed internal scalings.
 - **What it multiplies:** the velocity-controller proportional output (`VelErr × VelGain`), before that product enters the integral accumulator.
 - **Where it sums:** the accumulated integral is added to the proportional term to form the velocity-PI output that becomes [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md).
 - **Anti-windup:** the integral saturation value is controlled internally. When the current command saturates (at a torque/current limit) and the error has the same sign as the output, integration is halted for that cycle so the integral does not wind up. The integral is also preloaded when switching operation modes so the current command does not jump.
-- **Range / default:** `0` to `20000`, default `0` (no integral action; velocity loop is purely proportional).
+
+### Range and default
+
+| | v4 (standalone & central-i) | v5 (central-i) |
+|---|---|---|
+| Data type | 32-bit integer | 32-bit float |
+| Range | 0 to 20000 | 0 to 20000 |
+| Default | 0 | 0 |
+
+Default `0` means no integral action — the velocity loop is purely proportional.
 
 ![Velocity PI structure: VelErr fans out to a VelGain (P) path and a VelKi (I) path; the I path passes through an anti-windup gate that freezes the accumulator when the current command saturates, then the two paths sum to form the velocity-PI output](velocity-pi-antiwindup.svg)
 

@@ -41,7 +41,7 @@ As the gantry moves, the controller reads the live value of the selected source 
 ## Examples
 
 ```text
-AGantryMapSrc=652    ; index the map by a chosen gantry position source (code shown is illustrative)
+AGantryMapSrc=<code>  ; index the map by a chosen gantry position source (use the CAN code of that source)
 AGantryMapSrc        ; read the configured source code
 ```
 

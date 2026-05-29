@@ -42,7 +42,7 @@ The force-command generator first builds a *raw* force reference each cycle from
 
 This filtering is why the in-target / sequence timing in force mode is keyed to the **unfiltered** (pre-filter) reference: the holding timer and the move/settle measurements start the moment the raw reference reaches the target [ForceCmdVal](ForceCmdVal.md), not when the filtered `ForceRef` catches up. When force mode is not active, `ForceRef` is held equal to the [Force](Force.md) feedback so the switch into force mode is bumpless.
 
-Please refer to [Control tuning – Force control](../../../02-keywords/06-protections/04-force-control/00-overview.md) for more information on the filter.
+Please refer to [Control tuning – Force control](../../11-control-tuning/07-force-control/00-overview.md) for more information on the filter.
 
 ## Examples
 

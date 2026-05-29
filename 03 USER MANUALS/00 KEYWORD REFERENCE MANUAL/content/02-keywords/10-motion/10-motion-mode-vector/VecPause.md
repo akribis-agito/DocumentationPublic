@@ -45,8 +45,8 @@ A pause does not change the target, so all member axes continue to their origina
 ## Examples
 
 ```text
-AVecPause[1]=1       ; pause vector motion (decelerate along the path to a stop)
-AVecPause[1]=0       ; resume vector motion (accelerate back to VecSpeed)
+AVecPause=1          ; on group-master axis A: pause vector motion (decelerate along the path to a stop)
+AVecPause=0          ; resume vector motion (accelerate back to VecSpeed)
 ```
 
 ## See also

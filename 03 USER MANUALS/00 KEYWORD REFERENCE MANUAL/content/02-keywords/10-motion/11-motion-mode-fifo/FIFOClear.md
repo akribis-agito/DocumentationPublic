@@ -45,7 +45,7 @@ Because it discards the segment in progress, `FIFOClear` is intended for use bef
 ## Examples
 
 ```text
-AFIFOClear=0         ; empty the queue (free count returns to 128)
+AFIFOClear           ; empty the queue (free count returns to 128)
 ```
 
 ## See also

@@ -80,7 +80,7 @@ ABuffEdgeMode=0               ; start/end boundary condition (see BuffEdgeMode)
 ABuffCycles=1                 ; play the cycle once
 
 ; --- 4) Pre-compute the trajectory on the primary axis ---
-ABuffCalc=0                   ; rejected if BuffTime is not validly populated
+ABuffCalc                     ; rejected if BuffTime is not validly populated
 
 ; --- 5) Arm spline-buffer motion ---
 AMotionMode=18                ; 18 = spline buffer

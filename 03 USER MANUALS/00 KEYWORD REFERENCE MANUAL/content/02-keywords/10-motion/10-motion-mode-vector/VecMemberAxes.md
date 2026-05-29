@@ -65,9 +65,9 @@ Once the move starts, the controller copies the master's `VecMemberAxes` value o
 ## Examples
 
 ```text
-AVecMemberAxes[1]=3     ; include the first two axes (bits 0 and 1) in the vector group
-AVecMemberAxes[1]=7     ; include the first three axes (bits 0, 1 and 2)
-AVecMemberAxes[1]       ; read the current member-axis mask
+AVecMemberAxes=3        ; on axis A: include the first two axes (bits 0 and 1) in the vector group
+AVecMemberAxes=7        ; include the first three axes (bits 0, 1 and 2)
+AVecMemberAxes          ; read the current member-axis mask on axis A
 ```
 
 ## See also

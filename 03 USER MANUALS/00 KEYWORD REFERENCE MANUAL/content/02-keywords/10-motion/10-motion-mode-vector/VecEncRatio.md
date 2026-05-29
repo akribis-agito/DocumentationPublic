@@ -42,8 +42,8 @@ The value is interpreted as a ratio scaled by 1/256: `256` means a ratio of 1 (t
 ## Examples
 
 ```text
-AVecEncRatio[1]=256    ; ratio of 1 (default, no scaling)
-AVecEncRatio[1]=260    ; ratio of 260/256
+AVecEncRatio=256       ; ratio of 1 on axis A (default, no scaling)
+AVecEncRatio=260       ; ratio of 260/256
 ```
 
 ## See also

@@ -37,7 +37,7 @@ Absolute target position (user units) for the next point-to-point move.
 
 ## Overview
 
-`AbsTrgt` sets the absolute target position, in user units, that the trajectory profiler drives the position reference toward in point-to-point (PTP) motion. When a [Begin](../04-motion-command/Begin.md) is issued in PTP mode ([MotionMode](../02-motion-configuration/MotionMode.md) `= 0`), the axis moves so that the reference [PosRef](../01-kinematics-status/PosRef.md) ends exactly at `AbsTrgt`. It is the absolute counterpart of [RelTrgt](RelTrgt.md), which specifies a relative distance. It is not saved to flash and can be changed at any time, including during a move when [PTPKeepMoving](../02-motion-configuration/PTPKeepMoving.md) is enabled.
+`AbsTrgt` sets the absolute target position, in user units, that the trajectory profiler drives the position reference toward in point-to-point (PTP) motion. When a [Begin](../04-motion-command/Begin.md) is issued in PTP mode ([MotionMode](../02-motion-configuration/MotionMode.md) `= 1`), the axis moves so that the reference [PosRef](../01-kinematics-status/PosRef.md) ends exactly at `AbsTrgt`. It is the absolute counterpart of [RelTrgt](RelTrgt.md), which specifies a relative distance. It is not saved to flash and can be changed at any time, including during a move when [PTPKeepMoving](../02-motion-configuration/PTPKeepMoving.md) is enabled.
 
 `AbsTrgt` is more than a user setpoint: it is also the internal target that several other motion modes write into each cycle, so it is the single "where do I want the reference to be" variable for all profiled-position motion.
 

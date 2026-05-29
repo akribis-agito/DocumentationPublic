@@ -11,9 +11,9 @@ Digital filter applied to the incremental encoder A/B/Z input channels.
 
 ## How it works
 
-`EncFilt` is written into the encoder input-qualification filter in the decode hardware. On the **AG300 controller** it sets the DSP input-qualification divider (firmware default 10, maximum 255). On **Central-i remote units** it is a 3-bit field packed into the remote encoder configuration word and sent to the remote unit (firmware default 2, maximum 7). Like [EncDir](EncDir-AuxEncDir.md) and [EncSubType](EncSubType-AuxEncSubType.md), it only takes effect for the incremental encoder path (`EncType=1`).
+`EncFilt` is written into the encoder input-qualification filter in the decode hardware. On the **standalone controller** it sets the DSP input-qualification divider (firmware default 10, maximum 255). On **Central-i remote units** it is a 3-bit field packed into the remote encoder configuration word and sent to the remote unit (firmware default 2, maximum 7). Like [EncDir](EncDir-AuxEncDir.md) and [EncSubType](EncSubType-AuxEncSubType.md), it only takes effect for the incremental encoder path (`EncType=1`).
 
-For the **AG300 controller**, the filter is characterized as follows:
+For the **standalone controller**, the filter is characterized as follows:
 
 1. The A, B and Z inputs are sampled by the filter mechanism. An input level is qualified only after 6 consecutive samples with identical value. This means the "1" logic of the signal needs to be sampled at least 6 times, and the same for the "0" logic, for a total of (2*6) = 12 samples.
 

@@ -51,7 +51,7 @@ Because the active segment runs to completion at its current velocity, the axis 
 ## Examples
 
 ```text
-AStopFIFO=0          ; let the current segment finish, then end the FIFO motion
+AStopFIFO            ; let the current segment finish, then end the FIFO motion
 ```
 
 ## See also

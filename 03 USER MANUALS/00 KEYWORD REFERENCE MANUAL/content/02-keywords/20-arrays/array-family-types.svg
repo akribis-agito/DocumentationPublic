@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="780" height="280" viewBox="0 0 780 280" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="General-purpose array families by scope and data type: the GenData family (non-axis, shared) has int32 GenData, float32 GenDataF, float64 GenDataD, and int64 GenDataLL; the UserParam family (per-axis) has the matching UserParam, UserParamF, UserParamD, and UserParamLL. All eight arrays are 1-indexed, read/write at any time, and saved to flash by Save.">
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="300" viewBox="0 0 780 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="General-purpose array families by scope and data type: the GenData family (non-axis, shared) has int32 GenData, float32 GenDataF, float64 GenDataD, and int64 GenDataLL; the UserParam family (per-axis) has the matching UserParam, UserParamF, UserParamD, and UserParamLL. The float, double, and long-long variants (GenDataF/D/LL and UserParamF/D/LL) are central-i v5 only. All eight arrays are 1-indexed, read/write at any time, and saved to flash by Save.">
   <title>General-purpose array families by scope and data type</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
@@ -55,5 +55,6 @@
   <text x="670" y="208" text-anchor="middle">UserParamLL</text>
 
   <!-- footer note -->
-  <text x="400" y="270" text-anchor="middle" font-size="11" fill="#5b6b7b">All eight arrays are 1-indexed, read/write at any time, and saved to flash by Save.</text>
+  <text x="400" y="266" text-anchor="middle" font-size="11" fill="#5b6b7b">All eight arrays are 1-indexed, read/write at any time, and saved to flash by Save.</text>
+  <text x="400" y="278" text-anchor="middle" font-size="10.5" fill="#5b6b7b">The float/double/long-long variants (GenDataF/D/LL and UserParamF/D/LL) are available on central-i v5 only.</text>
 </svg>

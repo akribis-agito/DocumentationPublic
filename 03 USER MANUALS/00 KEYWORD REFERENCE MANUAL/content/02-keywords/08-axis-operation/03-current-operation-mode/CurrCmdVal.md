@@ -38,7 +38,7 @@ Sequence of user-defined current references (mA) for current mode.
 
 ## How it works
 
-The array holds **20 usable entries, indexed 1 to 20** (element 0 is unused so that the table indexes can start at 1). Each control cycle the firmware reads the entry pointed to by [CurrCmdIndex](CurrCmdIndex.md):
+The array holds **20 usable entries, indexed 1 to 20** — the table is 1-indexed, matching the command syntax. Each control cycle the firmware reads the entry pointed to by [CurrCmdIndex](CurrCmdIndex.md):
 
 1. `CurrRef` ramps toward `CurrCmdVal[index]` at the rate set by [CurrCmdSlope](CurrCmdSlope.md)`[index]` (the ramp counter [CurrCmdCntr](CurrCmdCntr.md) is held at 0 while ramping).
 2. Once `CurrRef` reaches `CurrCmdVal[index]`, the holding timer [CurrCmdCntr](CurrCmdCntr.md) starts counting up and is compared against [CurrCmdHTime](CurrCmdHTime.md)`[index]` to decide when to advance to the next entry or exit current mode.

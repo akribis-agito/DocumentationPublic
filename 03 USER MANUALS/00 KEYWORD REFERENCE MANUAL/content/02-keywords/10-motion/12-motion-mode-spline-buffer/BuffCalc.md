@@ -70,7 +70,7 @@ ABuffPos[2]=10000
 ABuffTime[1]=100
 ABuffTime[2]=300
 ABuffTime[3]=0       ; terminator
-ABuffCalc=0          ; fit and expand the trajectory (run before Begin)
+ABuffCalc            ; fit and expand the trajectory (run before Begin)
 ```
 
 ## See also

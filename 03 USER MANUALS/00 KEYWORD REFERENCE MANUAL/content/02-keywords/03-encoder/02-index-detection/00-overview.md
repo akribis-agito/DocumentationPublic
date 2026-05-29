@@ -16,4 +16,4 @@ Index detection works similarly for auxiliary encoder (description regarding the
 
 Index detection is a feature subset of [event-based feedback logging](../03-event-based-feedback-logging/00-overview.md) (which offers broader use cases).
 
-> **Note:** The auxiliary-encoder index detection is not implemented in the current firmware.
+> **Note:** Auxiliary-encoder index detection is wired only on the single-axis hardware variants; on multi-axis controllers the auxiliary index is not detected.

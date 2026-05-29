@@ -49,8 +49,8 @@ The value is **forced to 0** whenever `OpenLoopOn ≠ 1` or the motor is disable
 ## Examples
 
 ```text
-AOpenLoopOn[1]=1     ; enter current open loop
-AOpenLoopCurr[1]=1000 ; apply a 1000 mA current reference
+AOpenLoopOn=1        ; enter current open loop
+AOpenLoopCurr=1000   ; apply a 1000 mA current reference
 ```
 
 ## Changes between versions

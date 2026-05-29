@@ -41,7 +41,7 @@ When dual-loop gantry mode is engaged, the controller resolves `GantryFdbkSrc` t
 ## Examples
 
 ```text
-AGantryFdbkSrc=748   ; point the linear loop at a chosen load-side feedback source (code shown is illustrative)
+AGantryFdbkSrc=<code> ; point the linear loop at a chosen load-side feedback source (use the CAN code of that source)
 AGantryFdbkSrc       ; read the configured source code
 ```
 

@@ -73,15 +73,15 @@ The value is a complex CAN code; build it with the [complex CAN code](../../../0
 
 ### Walk-through: run electronic gearing on a master encoder
 
-Configure axis A as a 1:2 follower of axis B's reference, using the direct gear path with the exact axis-to-axis fast track described above. Both axes are assumed motor-on but not in motion; encode the master selection per the [complex CAN code](../../../01-keyword-usage-and-syntax/complex-can-code.md) rules.
+Configure axis A as a 1:1 follower of axis B's reference, using the direct gear path with the exact axis-to-axis fast track described above. Both axes are assumed motor-on but not in motion; encode the master selection per the [complex CAN code](../../../01-keyword-usage-and-syntax/complex-can-code.md) rules. The fast axis-to-axis path requires `MasterFact = 65536`; for non-unity ratios use `MasterFact` alone on v4, or `MasterFact / MasterFactDen` on v5 (central-i).
 
 ```text
 ; --- 1) Select the master variable on the follower (axis A) ---
 AGearMaster=...      ; complex CAN code identifying axis B's PosRef
 
-; --- 2) Set the gear ratio numerator / denominator ---
+; --- 2) Set the gear ratio numerator (and denominator on v5) ---
 AMasterFact=65536    ; 65536 = unity numerator (required for the fast axis-to-axis path)
-AMasterFactDen=2     ; ratio = 65536 / 2  -> follower moves half a master count per count
+AMasterFactDen=65536 ; v5 (central-i) only -- exact rational denominator, default 65536
 AMasterFilt=64       ; 64 = pass-through (required for the fast path)
 
 ; --- 3) (Optional) Tell the controller the master wraps, if it does ---

@@ -47,8 +47,8 @@ The value is **forced to 0** whenever `OpenLoopOn ≠ 2` or the motor is disable
 ## Examples
 
 ```text
-AOpenLoopOn[1]=2     ; enter voltage open loop
-AOpenLoopVolt[1]=500 ; set the injection amplitude (PWM scaling, capped at 20%)
+AOpenLoopOn=2        ; enter voltage open loop
+AOpenLoopVolt=500    ; set the injection amplitude (PWM scaling, capped at 20%)
 ```
 
 ## Changes between versions

@@ -62,9 +62,9 @@ AOperationMode            ; expect 3 (position) — start from a safe known stat
 AMotorOn                  ; expect 1 (servo on)
 ACurrCmdSrc=1             ; use the user-defined CurrCmdVal table
 ACurrCmdVal[1]=500        ; first table entry — 500 mA (adjust to your motor and rig)
-ACurrCmdHTime[1]=2000     ; hold for 2000 control cycles
+ACurrCmdHTime[1]=2000     ; hold for 2000 ms
 ACurrCmdVal[2]=0          ; second entry — back to zero
-ACurrCmdHTime[2]=1000     ; hold for 1000 cycles
+ACurrCmdHTime[2]=1000     ; hold for 1000 ms
 ACurrCmdHTime[3]=0        ; HTime = 0 ends the sequence
 AGoToCurrMode             ; graceful switch; CurrCmdIndex resets to 1, CurrCmdCntr to 0
                           ; ... observe the response ...

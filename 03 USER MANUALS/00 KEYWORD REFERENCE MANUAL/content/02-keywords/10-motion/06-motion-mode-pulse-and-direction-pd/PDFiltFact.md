@@ -34,7 +34,7 @@ $$
 When [PDPosFilt](PDPosFilt.md) (a cut-off frequency in Hz × 100) is written, the controller converts it to the coefficient with a backward-Euler discretisation of `w / (s + w)`:
 
 $$
-\text{PDFiltFact} = 64 \cdot \frac{2\pi\,T_s\,\text{PDPosFilt}}{100 + 2\pi\,T_s\,\text{PDPosFilt}}
+\text{PDFiltFact} = 64 \cdot \frac{2\pi\,T_s\,\text{PDPosFilt}}{100 + T_s\,\text{PDPosFilt}}
 $$
 
 where `Ts` is the sample time. The lower bound of `PDPosFilt` (4150) exists so the resulting `PDFiltFact` never rounds to 0.

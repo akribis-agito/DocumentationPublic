@@ -88,7 +88,7 @@ To diagnose how an axis settles after a move, set scope 1 to capture a small win
 3. **Configure a single trigger** on the first slot of scope 1. Use a rising-edge crossing of `AVel[1]` through zero:
 
    ```text
-   ARecTrigsMode[1]=1           ; serial trigger evaluation (single trigger)
+   ARecTrigsMode[1]=1           ; parallel (logical) trigger evaluation
    ARecTrigsLogic[1]=1
    ARecTrigsLogic[2]=1
    ARecTrigSrc[1]=<complex CAN code of AVel[1]>

@@ -45,7 +45,7 @@ During an active FIFO motion the entry currently being played cannot be removed:
 ## Examples
 
 ```text
-AFIFORemove=0        ; discard the most recently pushed entry
+AFIFORemove          ; discard the most recently pushed entry
 ```
 
 ## See also

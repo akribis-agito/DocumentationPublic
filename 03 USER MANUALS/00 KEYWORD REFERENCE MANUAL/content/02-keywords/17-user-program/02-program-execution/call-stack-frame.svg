@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Call stack of one thread during a function call: input arguments pushed first (bottom), then return address, then caller's frame location at the top; the frame address points at the return address row, with ProgArgThis[k] = frame minus k addressing the arguments below.">
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="380" viewBox="0 0 680 380" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Call stack of one thread during a function call: ProgPushArg pushes the first argument (deepest), then later arguments above it; ProgFuncCall pushes the return address and the caller's frame location on top. The current frame address points at the return-address slot. ProgArgThis[1] reads the slot immediately below the frame (most recently pushed argument); ProgArgThis[k] reads frame minus k (deeper). Return pops back to the caller.">
   <title>Call stack frame layout</title>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
@@ -6,49 +6,56 @@
     </marker>
   </defs>
 
-  <text x="320" y="24" text-anchor="middle" font-size="15" font-weight="bold">Call stack of one thread during a function call</text>
-  <text x="320" y="44" text-anchor="middle" font-size="11" fill="#5b6b7b">drawn with the top of the stack at the top</text>
+  <text x="340" y="24" text-anchor="middle" font-size="15" font-weight="bold">Call stack of one thread during a function call</text>
+  <text x="340" y="44" text-anchor="middle" font-size="11" fill="#5b6b7b">drawn with the top of the stack at the top (stack grows upward)</text>
 
   <!-- direction arrow (grows up) -->
-  <line x1="100" y1="280" x2="100" y2="80" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
-  <text x="92" y="180" text-anchor="end" font-size="11" fill="#5b6b7b">stack</text>
-  <text x="92" y="194" text-anchor="end" font-size="11" fill="#5b6b7b">grows</text>
+  <line x1="100" y1="300" x2="100" y2="80" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="92" y="190" text-anchor="end" font-size="11" fill="#5b6b7b">stack</text>
+  <text x="92" y="204" text-anchor="end" font-size="11" fill="#5b6b7b">grows</text>
 
-  <!-- caller frame (top of stack at top) -->
-  <rect x="180" y="70" width="260" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-  <text x="310" y="86" text-anchor="middle" font-size="12">caller's saved frame location</text>
-  <text x="310" y="102" text-anchor="middle" font-size="11" fill="#5b6b7b">(top of stack)</text>
+  <!-- caller frame (top of stack) -->
+  <rect x="180" y="70" width="300" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="330" y="86" text-anchor="middle" font-size="12">caller's saved frame location</text>
+  <text x="330" y="102" text-anchor="middle" font-size="11" fill="#5b6b7b">(top of stack)</text>
 
   <!-- return address (this is "frame") -->
-  <rect x="180" y="118" width="260" height="40" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
-  <text x="310" y="134" text-anchor="middle" font-size="12">return address</text>
-  <text x="310" y="150" text-anchor="middle" font-size="11" fill="#5b6b7b">frame address points here</text>
+  <rect x="180" y="118" width="300" height="40" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="330" y="134" text-anchor="middle" font-size="12">return address</text>
+  <text x="330" y="150" text-anchor="middle" font-size="11" fill="#5b6b7b">current frame address points here</text>
 
-  <!-- arg 2 -->
-  <rect x="180" y="166" width="260" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-  <text x="310" y="182" text-anchor="middle" font-size="12">argument 2</text>
-  <text x="310" y="198" text-anchor="middle" font-size="11" fill="#5b6b7b">frame &#8722; 2</text>
+  <!-- arg N: most recently pushed (just below the frame) -->
+  <rect x="180" y="166" width="300" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="330" y="182" text-anchor="middle" font-size="12">last argument pushed (most recently)</text>
+  <text x="330" y="198" text-anchor="middle" font-size="11" fill="#5b6b7b">stack position = frame &#8722; 1 &#x2192; ProgArgThis[1]</text>
 
-  <!-- arg 1 -->
-  <rect x="180" y="214" width="260" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
-  <text x="310" y="230" text-anchor="middle" font-size="12">argument 1 (pushed first)</text>
-  <text x="310" y="246" text-anchor="middle" font-size="11" fill="#5b6b7b">frame &#8722; 1</text>
+  <!-- arg N-1 -->
+  <rect x="180" y="214" width="300" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="330" y="230" text-anchor="middle" font-size="12">previous argument pushed</text>
+  <text x="330" y="246" text-anchor="middle" font-size="11" fill="#5b6b7b">stack position = frame &#8722; 2 &#x2192; ProgArgThis[2]</text>
 
-  <!-- bottom rest of stack -->
-  <rect x="180" y="262" width="260" height="34" rx="6" fill="#f4f6f9" stroke="#9aa6b1" stroke-width="1" stroke-dasharray="4,3"/>
-  <text x="310" y="284" text-anchor="middle" font-size="11" fill="#5b6b7b">earlier stack frames</text>
+  <!-- arg 1 (first pushed = deepest) -->
+  <rect x="180" y="262" width="300" height="40" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="330" y="278" text-anchor="middle" font-size="12">first argument pushed (deepest)</text>
+  <text x="330" y="294" text-anchor="middle" font-size="11" fill="#5b6b7b">stack position = frame &#8722; k &#x2192; ProgArgThis[k]  (k = total args)</text>
+
+  <!-- earlier frames at bottom -->
+  <rect x="180" y="310" width="300" height="34" rx="6" fill="#f4f6f9" stroke="#9aa6b1" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="330" y="332" text-anchor="middle" font-size="11" fill="#5b6b7b">earlier stack frames</text>
 
   <!-- accessor callouts on the right -->
-  <line x1="442" y1="138" x2="478" y2="138" stroke="#5b6b7b" stroke-width="1"/>
-  <text x="482" y="142" font-size="11" fill="#5b6b7b">frame = ProgFrame</text>
+  <line x1="482" y1="138" x2="518" y2="138" stroke="#5b6b7b" stroke-width="1"/>
+  <text x="522" y="142" font-size="11" fill="#5b6b7b">frame (return-address slot)</text>
 
-  <line x1="442" y1="186" x2="478" y2="186" stroke="#5b6b7b" stroke-width="1"/>
-  <text x="482" y="190" font-size="11" fill="#5b6b7b">ProgArgThis[2]</text>
+  <line x1="482" y1="186" x2="518" y2="186" stroke="#5b6b7b" stroke-width="1"/>
+  <text x="522" y="190" font-size="11" fill="#5b6b7b">ProgArgThis[1] = last push</text>
 
-  <line x1="442" y1="234" x2="478" y2="234" stroke="#5b6b7b" stroke-width="1"/>
-  <text x="482" y="238" font-size="11" fill="#5b6b7b">ProgArgThis[1]</text>
+  <line x1="482" y1="234" x2="518" y2="234" stroke="#5b6b7b" stroke-width="1"/>
+  <text x="522" y="238" font-size="11" fill="#5b6b7b">ProgArgThis[2]</text>
+
+  <line x1="482" y1="282" x2="518" y2="282" stroke="#5b6b7b" stroke-width="1"/>
+  <text x="522" y="286" font-size="11" fill="#5b6b7b">ProgArgThis[k] = first push</text>
 
   <!-- footer -->
-  <text x="320" y="324" text-anchor="middle" font-size="11" fill="#5b6b7b">ProgPushArg pushes arguments before the call; the call pushes the return address;</text>
-  <text x="320" y="340" text-anchor="middle" font-size="11" fill="#5b6b7b">return pops the frame back to the caller.</text>
+  <text x="340" y="360" text-anchor="middle" font-size="11" fill="#5b6b7b">ProgPushArg pushes arguments first; ProgFuncCall pushes the return address then the caller's frame location; Return pops them back.</text>
 </svg>

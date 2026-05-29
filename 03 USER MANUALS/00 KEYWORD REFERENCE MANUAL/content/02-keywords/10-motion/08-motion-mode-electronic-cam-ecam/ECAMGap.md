@@ -65,7 +65,7 @@ For a worked example, take `ECAMGap = 1000`, `GenData[i1] = 2000`, `GenData[i1+1
 
 `C` is set so the follower does not jump at start: it is the follower's position when [Begin](../04-motion-command/Begin.md) is issued, less the table value at the starting master position (which is positioned by [ECAMMasterIni](ECAMMasterIni.md)). `cycle_offset` accumulates the height difference of the repeating segment across completed cycles (see [ECAMStartCyc](ECAMStartCyc.md) / [ECAMEndCyc](ECAMEndCyc.md)) so the follower advances continuously even when a cycle's first and last table values differ.
 
-Because the interpolation is computed at full internal precision, consecutive cam-table entries may not differ by more than a fixed limit (`131071` user units); a pattern that violates this is rejected at [Begin](../04-motion-command/Begin.md).
+Because the interpolation is computed at full internal precision, consecutive cam-table entries may not differ by more than an internal limit set by the product's sample-frequency (approximately `131071` user units on v4 standalone and `32767` on central-i v5); a pattern that violates this is rejected at [Begin](../04-motion-command/Begin.md).
 
 ### Direction
 

@@ -59,7 +59,14 @@ The integral is the running accumulation of `proportional × VelKi` (see [VelKi]
 - **What it multiplies:** the velocity error [VelErr](../../10-motion/01-kinematics-status/VelErr.md).
 - **Where it sums:** its product is added to the velocity integral; the sum (after internal scaling and the velocity filters) becomes [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md).
 - **Scaling / units:** applied as a multiplier (scaling factor 1.0); the combined PI result is brought to current-command units by a fixed internal scaling.
-- **Range / default:** `0` to `1000000`, default `0`.
+
+### Scaling, range and default
+
+| | v4 (standalone & central-i) | v5 (central-i) |
+|---|---|---|
+| Data type | 32-bit integer | 32-bit float |
+| Range | 0 to 1000000 | 0 to 1000000000 |
+| Default | 0 | 0 |
 
 ## Examples
 
@@ -113,7 +120,7 @@ This recipe sets up the inner velocity loop alongside the outer position loop, t
 
 ## Changes between versions
 
-In **v5 (central-i)** `VelGain` is a floating-point value (same `0` to `1000000000` range concept, wider span); the proportional×error → PI → current-command path is otherwise the same. **v5 is central-i only.**
+In **v5 (central-i)** `VelGain` is a floating-point value with a wider range (`0` to `1000000000`); the proportional×error → PI → current-command path is otherwise the same. **v5 is central-i only.**
 
 ## See also
 

@@ -46,7 +46,7 @@ Proportional position gain for the gantry yaw correction controller.
 In gantry mode the yaw position error is the difference between the shaped/filtered position reference and the gantry (differential) feedback rather than the single-axis feedback:
 
 $$
-PosErr = PosRefShapedFilt - GantryFdbk
+PosErr = PosRef_{shaped} - GantryFdbk
 $$
 
 `GantryPosGain` then scales this yaw position error to form the velocity command that is passed into the yaw velocity loop (the built-in velocity-tracking feedforward term is added on top, exactly as in the ordinary position loop):

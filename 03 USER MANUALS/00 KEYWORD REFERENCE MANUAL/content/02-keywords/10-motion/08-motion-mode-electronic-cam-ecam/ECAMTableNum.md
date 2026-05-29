@@ -48,8 +48,8 @@ Because the parameters are latched at start, changing `ECAMTableNum` mid-motion 
 ## Examples
 
 ```text
-AECAMTableNum[1]=1   ; select cam pattern 1 (default)
-AECAMTableNum[1]     ; read the active cam pattern
+AECAMTableNum=1      ; select cam pattern 1 (default)
+AECAMTableNum        ; read the active cam pattern
 ```
 
 ### Walk-through: define and run one ECAM cycle
@@ -65,7 +65,7 @@ AGenData[4]=2500
 AGenData[5]=0
 
 ; --- 2) Bind cam pattern 1 to the loaded indices ---
-AECAMTableNum[1]=1            ; select cam pattern 1 (the [1] is the pattern slot)
+AECAMTableNum=1               ; select cam pattern 1 (scalar; pattern slot is set via the array index of the other keys)
 AECAMStart[1]=1               ; first GenData index of the pattern
 AECAMEnd[1]=5                 ; last  GenData index of the pattern
 AECAMStartCyc[1]=1            ; start of the repeating segment
@@ -80,7 +80,7 @@ AMotionMode=7                 ; 7 = ECAM
 ABegin                        ; controller latches the table, then follows the master
 
 ; --- 4) Observe the follower ---
-AECAMCycCount                 ; current cycle index (1..ECAMCycles)
+AECAMCycCount[1]              ; current cycle index for pattern 1 (1..ECAMCycles)
 APosRef                       ; follower reference shaped by the cam lookup
 ```
 

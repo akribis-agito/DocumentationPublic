@@ -42,10 +42,7 @@ See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all r
 
 The cycle time takes effect only at a segment boundary — when the controller finishes one segment and is about to start the next. It is not applied mid-segment, so changing it never disturbs the segment in progress.
 
-The value is updated in two ways:
-
-- **From the queue:** a cycle-time entry pushed with [FIFOPushCycle](FIFOPushCycle.md) becomes the active cycle time when the controller reaches it, and applies to every segment that follows until the next cycle-time entry. This is the normal way to vary segment lengths through a sequence.
-- **Directly:** writing `FIFOCycleTime` sets the value used by the next segment that starts.
+`FIFOCycleTime` is **read-only**; it is updated from the queue: a cycle-time entry pushed with [FIFOPushCycle](FIFOPushCycle.md) becomes the active cycle time when the controller reaches it, and applies to every segment that follows until the next cycle-time entry. This is how segment lengths are varied through a sequence.
 
 When a segment begins, its sample count-down is loaded from the cycle time (see [FIFOStatus](FIFOStatus.md) index 3) and the per-sample motion is derived from it — for a position-delta segment, for example, the requested delta is divided across this many samples.
 
@@ -61,7 +58,7 @@ In **v5** the cycle time is bounded to 1–65 536 000 control samples. **v5 is c
 
 ```text
 AFIFOCycleTime            ; read the current segment duration in control samples
-AFIFOCycleTime[1]=16      ; set the next segment to last 16 control samples
+AFIFOPushCycle=16         ; queue a cycle-time entry so the next segment lasts 16 samples
 ```
 
 ## See also

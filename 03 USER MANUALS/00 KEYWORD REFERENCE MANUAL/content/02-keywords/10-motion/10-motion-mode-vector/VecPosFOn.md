@@ -43,8 +43,8 @@ The enable flag is validated when the vector move starts: if it is set to `1`, t
 ## Examples
 
 ```text
-AVecPosFOn[1]=0      ; position filter disabled (default)
-AVecPosFOn[1]=1      ; apply the VecPosFDef position filter to the vector reference
+AVecPosFOn=0         ; position filter disabled on axis A (default)
+AVecPosFOn=1         ; apply the VecPosFDef position filter to the vector reference
 ```
 
 ## See also

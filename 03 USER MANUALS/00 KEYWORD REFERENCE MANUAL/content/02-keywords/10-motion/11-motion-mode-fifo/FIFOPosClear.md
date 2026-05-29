@@ -43,7 +43,7 @@ This is the command to flush a stale trajectory before streaming a new one, or t
 ## Examples
 
 ```text
-AFIFOPosClear=0      ; discard all queued targets
+AFIFOPosClear        ; discard all queued targets
 ```
 
 ## See also

@@ -63,3 +63,23 @@ The following is the list of controller error codes and their descriptions.
 | 1052 | STO2 activated |
 | 1053 | AmpType value not allowed for this product |
 | 1054 | At least one required phase of the AC Power inputs was cut off. |
+| 1055 | Position error exceeds limit in open-loop |
+| 1056 | Velocity error exceeds limit in open-loop |
+| 1057 | Force error exceeds limit in open-loop |
+| 1058 | Undervoltage detected on 10.5 V supply (8 V threshold) |
+| 1059 | Over current detected on motor C |
+| 1060 | Product temperature (BoardTemp) too high |
+| 1061 | Other gantry member axis got motor off |
+| 1062 | External request to fault with controlled stop: stop ended and motor was disabled |
+| 1063 | Other member axis got motor off |
+| 1064 | Error in the encoder sine/cosine reading |
+| 1065 | Stall detection activated, motor is turning off |
+| 1066 | Virtual encoder has exceeded the max number of possible pulses per interrupt |
+| 1067 | Anomaly/collision detected in the system (v5 only) |
+| 1068 | Abs Encoder Error bit is asserted, either the assembly encoder readhead is not good, or the encoder scale needs to be inspected |
+| 1069 | Abs Encoder CRC has failed beyond a time threshold set by EncAbsErrTime. The noise level might be too high |
+| 1070 | Abs Encoder could not be detected and looks like is disconnected |
+| 1071 | Unstable current loop detected (v5 only) |
+| 1072 | High noise/jitter detected (v5 only) |
+| 1080 | No phasing is detected (v5 only) |
+| 1081 | CPU background loop watchdog timeout |

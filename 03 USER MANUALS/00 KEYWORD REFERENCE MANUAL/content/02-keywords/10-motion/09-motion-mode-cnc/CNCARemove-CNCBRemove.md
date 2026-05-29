@@ -1,28 +1,15 @@
 ---
-summary: Function that removes the last segment from the CNC FIFO A (or B).
+summary: Reserved CNC FIFO segment-removal keyword (not exposed in current firmware).
 ---
 # CNCARemove/CNCBRemove
 
-Function that removes the last segment from the CNC FIFO A (or B).
+Reserved CNC FIFO segment-removal keyword. Not exposed by current firmware.
 
 ## Overview
 
-`CNCARemove` (and its `CNCBRemove` counterpart on the second CNC engine) removes the most recently pushed segment from the CNC segment queue (FIFO) for queue A (or B). It is the per-segment complement to [CNCAClear/CNCBClear](CNCAClear-CNCBClear.md), which empties the entire queue. Use it to undo a push — for example, to back out the last segment of a path that was queued in error — without discarding the rest of the queue.
+`CNCARemove` / `CNCBRemove` were intended as the per-segment complement to [CNCAClear/CNCBClear](CNCAClear-CNCBClear.md), removing the most recently pushed segment from the CNC FIFO without discarding the rest of the queue.
 
-## How it works
-
-`CNCARemove` works at the tail of the queue (the last-pushed end), the opposite end from where playback drains segments:
-
-- If the last pushed segment is **closed**, it is popped out of the queue and its ID is cancelled, so the next pushed segment receives that same ID. The queue's free space (element 7 of [CNCAStatus/CNCBStatus](CNCAStatus-CNCBStatus.md)) increases by the words the segment occupied.
-- If you are **part-way through pushing** parameters to a segment (element 5 of the status array is non-zero), that incomplete segment is cancelled and the controller is ready to accept a new one, which receives the same ID as the cancelled segment.
-- `CNCARemove` returns an error if the queue is empty.
-- `CNCARemove` fails and returns an error (removing nothing) if the segment at the tail is the one the engine is currently using for motion.
-
-## Examples
-
-```text
-ACNCARemove          ; remove the last segment from FIFO A
-```
+> **Not in current firmware.** Neither `CNCARemove` nor `CNCBRemove` is exposed as a keyword by the present firmware (LTS v3.X.X or develop). To undo a queued segment today, the only option is to flush the queue with [CNCAClear/CNCBClear](CNCAClear-CNCBClear.md) and re-push the segments to keep.
 
 ## See also
 

@@ -8,6 +8,6 @@ The two side positions are combined into a linear (mean) feedback and a yaw (dif
 
 - [GantryFdbk](GantryFdbk.md) — mean and differential gantry feedbacks
 - [GantryOffset](GantryOffset.md) — initial A/B offset captured when gantry mode is enabled
-- [GantryFdbkSrc](GantryFdbkSrc.md) — selects the yaw feedback source
-- [GantryAuxFdbk](GantryAuxFdbk.md) — auxiliary-encoder feedback
-- [GantryAuxVel](GantryAuxVel.md) — auxiliary-encoder velocity
+- [GantryFdbkSrc](GantryFdbkSrc.md) — selects the load-side feedback used by the linear loop in dual-loop gantry mode (central-i v5)
+- [GantryAuxFdbk](GantryAuxFdbk.md) — auxiliary-encoder feedback (central-i v5)
+- [GantryAuxVel](GantryAuxVel.md) — auxiliary-encoder velocity (central-i v5)

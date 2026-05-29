@@ -39,9 +39,9 @@ Set the pair so that `VecEncFactNu / VecEncFactDn` equals the resolution ratio n
 ## Examples
 
 ```text
-AVecEncFactNu[1]=1     ; numerator = 1 (default)
-AVecEncFactNu[1]=3     ; with VecEncFactDn = 2 gives a 3/2 (1.5:1) scaling ratio
-AVecEncFactNu[1]       ; read the current numerator
+AVecEncFactNu=1        ; numerator = 1 on axis A (default)
+AVecEncFactNu=3        ; with VecEncFactDn = 2 gives a 3/2 (1.5:1) scaling ratio
+AVecEncFactNu          ; read the current numerator on axis A
 ```
 
 ## See also

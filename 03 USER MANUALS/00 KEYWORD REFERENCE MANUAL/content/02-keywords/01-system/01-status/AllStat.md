@@ -63,7 +63,8 @@ The number of values returned therefore depends on the requested axes and groups
 | 7 (0x080) | Lock & events | LockEn, LockCntr, LockVal, EventOn, EventCntr, EventNextPos, EventSelect |
 | 8 (0x100) | User parameters | UserParam[1]–[5] |
 | 9 (0x200) | Added extras | DInPortHigh, BoardTemp |
-| 10 (0x400) | Force / repeat | MotionSamples, ForceSamples, ForceInTStat, RptCounter |
+
+A further table entry exists in firmware (force / repeat: MotionSamples, ForceSamples, ForceInTStat, RptCounter), but no group-mask bit is wired to it on either firmware branch — bits beyond `0x200` therefore return nothing.
 
 The exact property list of each group is fixed in firmware and is shared with Agito PCSuite, which knows how to decode the reply. Group contents may change between firmware releases (the [Identity](Identity.md) feature-flag words advertise some of these changes), so the block should only be parsed against the firmware version that produced it.
 

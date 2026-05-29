@@ -37,7 +37,7 @@ Integral gain for the gantry yaw position loop.
 When gantry mode is active the yaw position error is formed as the difference between the shaped/filtered position reference and the gantry (differential) feedback:
 
 $$
-PosErr = PosRefShapedFilt - GantryFdbk
+PosErr = PosRef_{shaped} - GantryFdbk
 $$
 
 `GantryPosKi` scales the integral (running sum) of this yaw position error. The proportional part ([GantryPosGain](GantryPosGain.md)) and this integral part together form the velocity command sent into the yaw velocity PI loop ([GantryVelGain](GantryVelGain.md) / [GantryVelKi](GantryVelKi.md)), whose output becomes the differential current applied to the two gantry motors. `GantryPosKi` belongs to the same gantry gain set as [GantryPosGain](GantryPosGain.md), [GantryVelGain](GantryVelGain.md), [GantryVelKi](GantryVelKi.md), [GantryAccFFW](GantryAccFFW.md) and [GantryVelFFW](GantryVelFFW.md); on controllers that support gantry gain scheduling all six switch together as a set.

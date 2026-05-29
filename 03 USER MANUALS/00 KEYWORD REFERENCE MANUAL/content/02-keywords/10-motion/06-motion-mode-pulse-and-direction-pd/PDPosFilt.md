@@ -43,7 +43,7 @@ The value is expressed in units of Hz × 100. A required cut-off frequency of 25
 When `PDPosFilt` is written, the controller converts the frequency into the integer filter coefficient [PDFiltFact](PDFiltFact.md) (range 1–64) used by the direct-mode reference update, using a backward-Euler discretisation of the continuous low-pass `w / (s + w)`:
 
 $$
-\text{PDFiltFact} = 64 \cdot \frac{2\pi\,T_s\,\text{PDPosFilt}}{100 + 2\pi\,T_s\,\text{PDPosFilt}}
+\text{PDFiltFact} = 64 \cdot \frac{2\pi\,T_s\,\text{PDPosFilt}}{100 + T_s\,\text{PDPosFilt}}
 $$
 
 where `Ts` is the control sample time and `w = 2π·(PDPosFilt/100)`. The minimum value (4150) is the smallest frequency that keeps the computed coefficient from rounding down to 0 (which would freeze the reference). A **higher** `PDPosFilt` means a faster filter (less smoothing, `PosRef` tracks the pulse stream more closely); a **lower** value means heavier smoothing.
