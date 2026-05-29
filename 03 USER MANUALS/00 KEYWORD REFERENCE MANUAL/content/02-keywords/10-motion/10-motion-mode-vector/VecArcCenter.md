@@ -45,11 +45,13 @@ It is saved to flash and cannot be modified while in motion.
 
 An arc is defined by three things that are all fixed when the move starts: the **start point** (the current position of the two member axes), the **end point** (their targets, from [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) / [RelTrgt](../13-motion-mode-ptp/RelTrgt.md)), and the **center** (the `VecArcCenter` of the two member axes). From these the controller derives the rest of the geometry:
 
-1. **Radius.** It measures the distance from the center to the start point and from the center to the end point. These two radii must agree to within a few counts; if they differ by more the move is rejected (the center is inconsistent with the two end points). The radius used is the average of the two.
+1. **Radius.** It measures the distance from the center to the start point and from the center to the end point. These two radii must agree to within 3 counts; if they differ by more the move is rejected (the center is inconsistent with the two end points). The radius used is the average of the two.
 2. **Start and end angles.** It computes the angle of the start point and of the end point about the center.
 3. **Swept angle and path length.** Combined with [VecArcDir](VecArcDir.md) (which way round) and [VecNumCircles](VecNumCircles.md) (how many extra full turns), this gives the total arc length stored as [VecAbsTrgt](VecAbsTrgt.md).
 
-During the move the path coordinate [VecPosRef](VecPosRef.md) is divided by the radius to get the angle swept so far; each member axis is then driven to `VecArcCenter + radius × cosine/sine` of that angle. The two member axes are given in a significant order — the first is the arc-plane "X" axis (cosine term) and the second the "Y" axis (sine term).
+During the move the path coordinate [VecPosRef](VecPosRef.md) is divided by the radius to get the angle swept so far; each member axis is then driven to `VecArcCenter + radius × cosine/sine` of that angle. The cosine and sine are taken from internal lookup tables with linear interpolation between adjacent entries rather than from a runtime trigonometric call, which keeps the per-cycle update fast. The two member axes are given in a significant order — the first is the arc-plane "X" axis (cosine term) and the second the "Y" axis (sine term).
+
+Beyond the equal-radius check, the arc setup at `Begin` also validates that [VecArcDir](VecArcDir.md) is `0` or `1`, that [VecSpeed](VecSpeed.md) is within its allowed range, and that [VecNumCircles](VecNumCircles.md) is not negative; the move is rejected if any of these fail.
 
 ![Arc defined by start point, end point and center](vec-arc.svg)
 

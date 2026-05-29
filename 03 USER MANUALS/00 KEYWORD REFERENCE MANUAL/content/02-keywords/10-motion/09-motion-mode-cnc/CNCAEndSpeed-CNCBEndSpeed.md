@@ -19,6 +19,10 @@ The deceleration lookahead aims the path velocity at an *effective* boundary tar
 
 The end-of-segment transition (blend versus stop) is selected by [CNCAEndSegMod/CNCBEndSegMod](CNCAEndSegMod-CNCBEndSegMod.md).
 
+### Segment-too-short rejection
+
+A non-zero end speed sets the entry speed of the *next* segment, so a segment can be rejected as too short to traverse at the speed it would be entered. When a pushed segment's length divided by the **previous** segment's end speed is no more than one control-cycle period — that is, when the path would cover the whole segment in a single cycle at that entry speed — the push is rejected with instruction error 291, *"CNC segment is too short. Please reduce the End speed of previous segment or increase the target of the current segment."* Either reducing the prior segment's `CNCAEndSpeed` or lengthening the current segment's target [CNCAAbsTrgt/CNCBAbsTrgt](CNCAAbsTrgt-CNCBAbsTrgt.md) clears the condition.
+
 ![CNC segment chain showing two cornering blends and a final stop driven by CNCAEndSpeed](cnc-endspeed.svg)
 
 ### CNCB note

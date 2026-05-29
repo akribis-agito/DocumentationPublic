@@ -36,12 +36,15 @@ Selects the active ECAM cam pattern / look-up table (1-10).
 
 ## How it works
 
-The controller keeps the eight defining parameters for all 10 patterns at all times, but only one is in effect during a move. When ECAM motion starts ([Begin](../04-motion-command/Begin.md)), the controller copies the parameters of the pattern named by `ECAMTableNum` into the active working set and validates them. A [Begin](../04-motion-command/Begin.md) is rejected if, for the selected pattern:
+The controller keeps the eight defining parameters for all 10 patterns at all times, but only one is in effect during a move. When ECAM motion starts ([Begin](../04-motion-command/Begin.md)), the controller copies the parameters of the pattern named by `ECAMTableNum` into the active working set and validates them. A [Begin](../04-motion-command/Begin.md) is rejected with a specific [instruction error code](../../../04-error-codes/instruction-error-codes.md) if, for the selected pattern:
 
-- any of `ECAMStart`, `ECAMStartCyc`, `ECAMEndCyc` or `ECAMEnd` is `0` (a zero index marks the pattern as unused);
-- the indices do not satisfy `ECAMStart ≤ ECAMStartCyc < ECAMEndCyc ≤ ECAMEnd`;
-- `ECAMGap` is `0`, or `ECAMCycles` is `0`;
-- `ECAMMasterIni` is out of its allowed range, the `ECAMMaster` source is invalid, or two consecutive cam-table entries differ by too much.
+- any of `ECAMStart`, `ECAMStartCyc`, `ECAMEndCyc` or `ECAMEnd` is `0` — a zero index marks the pattern as unused (error code 73);
+- the indices do not satisfy `ECAMStart ≤ ECAMStartCyc < ECAMEndCyc ≤ ECAMEnd` (error code 74);
+- `ECAMGap` is `0` (error code 75), or `ECAMCycles` is `0` (error code 76);
+- the `ECAMMaster` source has a complex CAN code that is out of range (error code 77), names an invalid axis (error code 78), uses a wrong array index (error code 79), or points at a function instead of a parameter (error code 80);
+- the master range needed to play the pattern exceeds ±2,000,000,000 master units (error code 81);
+- two consecutive cam-table entries differ by too much (error code 82);
+- `ECAMMasterIni` is outside the master range for one ECAM cycle (error code 323).
 
 Because the parameters are latched at start, changing `ECAMTableNum` mid-motion has no effect; it is therefore blocked while the axis is in motion. The current-cycle counter [ECAMCycCount](ECAMCycCount.md) is also indexed per pattern, so each pattern keeps its own cycle count.
 

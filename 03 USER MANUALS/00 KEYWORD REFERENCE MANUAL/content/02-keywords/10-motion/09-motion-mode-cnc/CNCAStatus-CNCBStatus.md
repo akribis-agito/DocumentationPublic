@@ -27,8 +27,14 @@ Some elements are not meaningful in every state — for example, before the firs
 | 10 | **CNC motion status** — a bit-field describing the engine state (see below). |
 | 11 | Bit-mask of axes that are members of this CNC group. |
 | 12 | Bit-mask of axes involved in the segment currently playing. |
-| 13 | Count of segments that hit the per-axis maximum-acceleration limit. |
+| 13 | Count of automatic-corner segments whose speed was capped by the per-axis maximum-acceleration limit (see below). |
 | 14 | Count of segments that hit the per-axis maximum velocity-jump limit. |
+
+When the per-axis acceleration limit is enabled, the controller bounds the speed through each automatically generated corner arc so the centripetal acceleration on every member axis stays within that axis's maximum. The corner-speed ceiling is roughly
+
+$$v_{\text{corner}} = \min_{\text{axis}}\sqrt{\frac{a_{\max,\text{axis}}\,R}{p_{\text{axis}}}}$$
+
+where $R$ is the corner radius and $p_{\text{axis}}$ is the axis's projection factor on the arc. When the requested corner speed exceeds this ceiling, the controller rewrites the end speed of the preceding linear segment and the corner arc's speed and end speed down to the ceiling, and index 13 increments by one.
 
 ### Detecting empty, full and underrun
 

@@ -50,7 +50,7 @@ $$
 
 To keep the follower moving continuously across cycles even when `GenData[ECAMStartCyc]` and `GenData[ECAMEndCyc]` differ, the controller adds the height difference `GenData[ECAMEndCyc] - GenData[ECAMStartCyc]` to an accumulated slave offset on each completed cycle (and subtracts it when stepping backwards). The follower therefore advances by that amount per cycle instead of snapping back to the segment's first value.
 
-If the master jumps by more than one full cycle width in a single control cycle, the controller cannot resolve which cycle it belongs to and faults the axis (motor off).
+If the master jumps by more than one full cycle width in a single control cycle, the controller cannot resolve which cycle it belongs to and faults the axis (motor off) with [controller error code 1030](../../../04-error-codes/controller-error-codes.md).
 
 ## Examples
 

@@ -34,7 +34,9 @@ Numerator of the per-axis vector-to-encoder scaling ratio (VecEncFactNu / VecEnc
 
 ## How it works
 
-Set the pair so that `VecEncFactNu / VecEncFactDn` equals the resolution ratio needed for the axis. When numerator and denominator are equal (the default `1` / `1`), the ratio is 1 and no scaling is applied. Both keywords accept whole numbers in the range `1`-`2000`, so a wide range of rational ratios can be expressed (for example `3` / `2` for a 1.5:1 resolution difference). The ratio is applied during the vector move. Configure the pair on each member axis before starting the move, since it cannot be changed in motion.
+Set the pair so that `VecEncFactNu / VecEncFactDn` equals the resolution ratio needed for the axis. When numerator and denominator are equal (the default `1` / `1`), the ratio is 1 and no scaling is applied. Both keywords accept whole numbers in the range `1`-`2000`, so a wide range of rational ratios can be expressed (for example `3` / `2` for a 1.5:1 resolution difference). Configure the pair on each member axis before starting the move, since it cannot be changed in motion.
+
+> On current firmware the vector path interpolation does not apply this ratio. `VecEncFactNu` / [VecEncFactDn](VecEncFactDn.md) are stored per axis, but the vector move computes each member axis purely from the path geometry; verify behavior against your firmware before relying on vector encoder-resolution compensation.
 
 ## Examples
 

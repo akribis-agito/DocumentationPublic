@@ -61,6 +61,6 @@ AVecSpeed           ; read the current value
 
 - [VecAccel](VecAccel.md) — vector acceleration rate
 - [VecDecel](VecDecel.md) — vector deceleration rate
-- [VecJerk](VecJerk.md) — jerk limit for S-curve smoothing
+- [VecJerk](VecJerk.md) — legacy `0`-`9` selector, no effect on the vector path (use [VecJerkMode](VecJerkMode.md))
 - [VecdPosRef](VecdPosRef.md) — reported path velocity (ramps toward `VecSpeed`)
 - [VecPosRef](VecPosRef.md) — path position the profile advances

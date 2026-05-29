@@ -46,6 +46,8 @@ The sum is then clamped by the software position limits. Because the offset is a
 
 A common use is to apply a live correction (for example from an external sensor or a master axis) on top of a fixed streamed profile.
 
+When the axis enters position-tracking mode, `FIFOPosPosOf` is reset to 0 (along with [FIFOPosVelOf](FIFOPosVelOf.md) and [FIFOPosCurrOf](FIFOPosCurrOf.md)), so each run starts with no position offset. Set it again after the mode is entered if a non-zero shift is required.
+
 ## Examples
 
 ```text

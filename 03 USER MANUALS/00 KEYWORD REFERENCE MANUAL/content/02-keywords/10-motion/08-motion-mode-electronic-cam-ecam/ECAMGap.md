@@ -65,6 +65,8 @@ For a worked example, take `ECAMGap = 1000`, `GenData[i1] = 2000`, `GenData[i1+1
 
 `C` is set so the follower does not jump at start: it is the follower's position when [Begin](../04-motion-command/Begin.md) is issued, less the table value at the starting master position (which is positioned by [ECAMMasterIni](ECAMMasterIni.md)). `cycle_offset` accumulates the height difference of the repeating segment across completed cycles (see [ECAMStartCyc](ECAMStartCyc.md) / [ECAMEndCyc](ECAMEndCyc.md)) so the follower advances continuously even when a cycle's first and last table values differ.
 
+The interpolated follower reference is further clamped to the software position limits every control cycle: if the computed `PosRef` would exceed [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md) it is held at `FwdPLim`, and if it would fall below [RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md) it is held at `RevPLim`. This clamp is applied to the final reference (it is separate from the pre-start / post-end clamps to `GenData[ECAMStart]` / `GenData[ECAMEnd]` described in [ECAMStart](ECAMStart.md) / [ECAMEnd](ECAMEnd.md)), so a cam table whose values reach beyond the position limits will flatten the follower at the limit.
+
 Because the interpolation is computed at full internal precision, consecutive cam-table entries may not differ by more than an internal limit set by the product's sample-frequency. At the standard 16 384 Hz control rate (used on every shipping configuration of v4 and v5) the limit is approximately `131 071` user units; a pattern that violates this is rejected at [Begin](../04-motion-command/Begin.md).
 
 ### Direction

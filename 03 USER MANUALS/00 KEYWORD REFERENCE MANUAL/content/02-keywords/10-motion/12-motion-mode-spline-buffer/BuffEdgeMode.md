@@ -32,7 +32,7 @@ Selects the boundary condition at the start and end of the spline buffer traject
 
 ## Overview
 
-`BuffEdgeMode` selects how the spline is constrained at the **first and last waypoint** of the trajectory. These end conditions fix the otherwise-free derivatives at the edges of a parabolic or cubic fit, which determines the entry and exit velocity of the move and whether successive repeats join smoothly. The range is 0 to 2 with a default of 1 (natural). The mode of the **primary axis** is applied to all member axes when [BuffCalc](BuffCalc.md) runs. `BuffEdgeMode` is saved to flash and can be changed at any time, but the change only takes effect after [BuffCalc](BuffCalc.md) is run again.
+`BuffEdgeMode` selects how the spline is constrained at the **first and last waypoint** of the trajectory. These end conditions fix the otherwise-free derivatives at the edges of a parabolic or cubic fit, which determines the entry and exit velocity of the move and whether successive repeats join smoothly. The range is 0 to 2 with a default of 1 (natural). Unlike the curve type ([BuffSplineMod](BuffSplineMod.md), taken from the primary axis) and the time base ([BuffTime](BuffTime.md), taken from the primary axis), the edge condition is read **per member axis**: when [BuffCalc](BuffCalc.md) fits each member's curve it uses that member's own `BuffEdgeMode` (and its own [BuffSlopes](BuffSlopes.md)). Members of one spline-buffer group can therefore carry different edge conditions while sharing the same curve type and time base. `BuffEdgeMode` is saved to flash and can be changed at any time, but the change only takes effect after [BuffCalc](BuffCalc.md) is run again.
 
 ## How it works
 

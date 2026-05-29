@@ -49,7 +49,27 @@ A new position target is taken from the queue at the first sample of every cycle
 
 In both modes the interpolated reference is shifted by [FIFOPosPosOf](FIFOPosPosOf.md) before it is used, and the resulting reference is still clamped by the software position limits.
 
-When the axis enters position-tracking mode, the working target and all internal control points are initialized to the current position reference, so tracking starts smoothly from where the axis already is.
+When the axis enters position-tracking mode, the working target and all internal control points are initialized to the current position reference, so tracking starts smoothly from where the axis already is. At the same time the three position-tracking offsets [FIFOPosPosOf](FIFOPosPosOf.md), [FIFOPosVelOf](FIFOPosVelOf.md), and [FIFOPosCurrOf](FIFOPosCurrOf.md) are all reset to 0, so each run starts from a clean, un-offset reference.
+
+### Interpolation math
+
+The reference is recomputed every sample from an in-cycle sample counter that runs from 0 up to [FIFOPosCycle](FIFOPosCycle.md) − 1 and wraps back to 0 at the first sample of the next cycle (this counter is reported by `FIFOPosStatus[6]`). Writing `k` for that counter and `N` for `FIFOPosCycle`, the in-cycle interpolation factor is `k / N`, which therefore ranges over `0, 1/N, 2/N, …, (N−1)/N` and reaches a maximum of `(N − 1) / N` — always strictly less than 1.
+
+**Linear mode (`FIFOPosType=0`).** Writing `T_start` for the target at the start of the current cycle and `T_end` for the target at its end (`FIFOPosStatus[2]` and `FIFOPosStatus[3]`), the reference at sample `k` is
+
+$$\text{PosRef}(k) = T_\text{start} + (T_\text{end} - T_\text{start})\,\frac{k}{N} + \text{FIFOPosPosOf}$$
+
+**Cubic mode (`FIFOPosType=1`).** Cubic mode uses a Catmull-Rom cubic spline. With the four control points `P1` = previous-cycle start, `P2` = current-cycle start, `P3` = current-cycle end, `P4` = next-cycle end (reported as `FIFOPosStatus[1]` through `FIFOPosStatus[4]`), the reference over the current cycle is
+
+$$\text{PosRef}(t) = P_2 + c_1 t + c_2 t^2 + c_3 t^3 + \text{FIFOPosPosOf}, \qquad t = \frac{k}{N} \in [0, 1)$$
+
+$$c_1 = \frac{P_3 - P_1}{2}$$
+$$c_2 = (P_1 - P_2) + 2(P_3 - P_2) - 0.5\,(P_4 - P_2)$$
+$$c_3 = -0.5\,(P_1 - P_2) - 1.5\,(P_3 - P_2) + 0.5\,(P_4 - P_2)$$
+
+(the coefficients are formed from the targets measured relative to `P2`, and `k` is the in-cycle sample index reported by `FIFOPosStatus[6]`). The curve passes exactly through `P2` at `t = 0` and through `P3` at the next cycle start; `P1` and `P4` only set the tangents, which is what makes the velocity continuous across cycle boundaries. `P4` is the most recently popped target, so cubic mode renders one cycle behind the queue head — the one-cycle look-ahead latency.
+
+**Reaching each target.** Because the in-cycle factor `k / N` never reaches 1, the end-of-cycle target is not produced on the last sample of its own cycle. Instead, at the first sample of the next cycle the start-of-cycle control point is advanced to the previous end-of-cycle control point and the reference is set exactly to that value plus `FIFOPosPosOf`. The trajectory therefore passes precisely through each pushed target one cycle after it is consumed, in both linear and cubic modes.
 
 ## Examples
 

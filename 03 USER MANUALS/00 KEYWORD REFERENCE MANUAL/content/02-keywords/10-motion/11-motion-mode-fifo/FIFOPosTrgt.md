@@ -39,7 +39,7 @@ The role of `FIFOPosTrgt` depends on whether the queue is active (see [FIFOPosFI
 - **Queue active** (`AFIFOPosFIFOEn=1`): at the start of each cycle the controller overwrites `FIFOPosTrgt` with the oldest target popped from the queue. Reading it then shows the target the axis is currently tracking.
 - **Queue bypassed** (`AFIFOPosFIFOEn=0`): the controller does not overwrite it. A host drives the axis by writing `FIFOPosTrgt` directly, once per cycle, and the controller interpolates toward each new value.
 
-When the axis enters position-tracking mode, `FIFOPosTrgt` is initialized to the current position reference so tracking begins from the present location.
+When the axis enters position-tracking mode, `FIFOPosTrgt` is initialized to the current position reference so tracking begins from the present location, and the three position-tracking offsets [FIFOPosPosOf](FIFOPosPosOf.md), [FIFOPosVelOf](FIFOPosVelOf.md), and [FIFOPosCurrOf](FIFOPosCurrOf.md) are reset to 0.
 
 ## How it works
 

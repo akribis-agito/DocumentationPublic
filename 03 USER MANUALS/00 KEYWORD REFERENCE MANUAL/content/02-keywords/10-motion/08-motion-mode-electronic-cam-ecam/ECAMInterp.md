@@ -36,6 +36,8 @@ Reserved internal ECAM keyword (not implemented).
 
 The interpolation between successive [GenData](../../20-arrays/GenData.md) entries is currently always **linear** — the controller blends the two neighbouring table values by the fractional master position (see [ECAMGap](ECAMGap.md) for the mapping). No alternative interpolation mode is selectable.
 
+The linear blend is carried at finer-than-one-sample resolution rather than stepping from one table entry to the next, so the follower reference advances smoothly between cam points. Because the follower velocity (and the velocity/acceleration feedforward derived from it) is the per-cycle change of that reference, this sub-sample blend is what keeps the commanded velocity continuous across table points instead of jumping at each entry. It is also why two consecutive cam-table entries may not differ by more than the internal per-sample limit (see [ECAMGap](ECAMGap.md)): the limit bounds how fast the reference can change in one control cycle.
+
 > **Documentation pending:** `ECAMInterp` is currently reserved and not implemented (`implemented: not_implemented`). It accepts only `0`; no value-dependent behaviour is defined.
 
 ## Examples

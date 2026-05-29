@@ -34,7 +34,7 @@ Array of per-segment durations (servo samples) for the spline buffer trajectory.
 
 `BuffTime` stores the **time stamp of each waypoint**, expressed as a count of servo (control) samples measured from the start of the trajectory. Entry `[i]` is the time at which the matching position waypoint [BuffPos](BuffPos.md)`[i]` is reached, so the duration of a segment is the difference between consecutive entries. Together with [BuffPos](BuffPos.md) it defines the spline trajectory. The arrays are expanded into the interpolated reference by [BuffCalc](BuffCalc.md). `BuffTime` is not saved to flash and can be changed at any time, but the change only takes effect after [BuffCalc](BuffCalc.md) is run again.
 
-> **Product limit.** The usable length of `BuffTime` is the same as for `BuffPos` and depends on the product (see the [section overview](00-overview.md#product-availability)). The last (largest) time stamp must also fit in the internal interpolation-buffer capacity, which is much smaller on standalone drives than on AGM800.
+> **Product limit.** The usable length of `BuffTime` is the same as for `BuffPos` and depends on the product (see the [section overview](00-overview.md#product-availability)). The last (largest) time stamp must also fit in the internal interpolation buffer, whose capacity depends on the product: at most **34** samples on standalone AGD drives, **1028** samples on the 50-waypoint Central-i AGM800 variant, and **163 849** samples on the 10 000-waypoint Central-i AGM800 variant.
 
 ## How it works
 
@@ -53,7 +53,7 @@ When [BuffCalc](BuffCalc.md) runs it checks the `BuffTime` array and rejects the
 | First entry | `BuffTime[1]` must be non-zero. |
 | Ordering | Values must be **strictly increasing** (each entry greater than the previous); equal or decreasing values are rejected. |
 | Terminator | The list must end with a **zero entry**: the first zero marks the end of the trajectory, and the last non-zero entry before it is the final waypoint. |
-| Length | The last (largest) time stamp must not exceed the controller's internal interpolation-buffer capacity, because [BuffCalc](BuffCalc.md) expands one point per sample up to that time. |
+| Length | The last (largest) time stamp must not exceed the controller's internal interpolation-buffer capacity, because [BuffCalc](BuffCalc.md) expands one point per sample up to that time — at most 34 on standalone AGD drives, 1028 on the 50-waypoint AGM800 variant, and 163 849 on the 10 000-waypoint AGM800 variant. |
 
 Because the expanded trajectory holds one interpolated sample for every servo cycle between `t = 0` and the last time stamp, the last `BuffTime` value sets how much internal storage the trajectory consumes.
 

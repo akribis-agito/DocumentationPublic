@@ -46,6 +46,8 @@ current reference = current from control + FIFOPosCurrOf
 
 The bias is applied in position and velocity operation modes (in pure current/force operation the current reference is set directly and this bias does not apply). It is active only in position-tracking mode and only while the axis is in motion; outside those conditions it has no effect. It biases the torque feedforward and does not change the position targets.
 
+When the axis enters position-tracking mode, `FIFOPosCurrOf` is reset to 0 (along with [FIFOPosPosOf](FIFOPosPosOf.md) and [FIFOPosVelOf](FIFOPosVelOf.md)), so each run starts with no current bias. Set it again after the mode is entered if a non-zero bias is required.
+
 ## Changes between versions
 
 On the v5 central-controller build, `FIFOPosCurrOf` is a floating-point value, allowing fractional current bias. On v4 (and on standalone drives) it is a whole-number value with a range of -64000 to 64000.

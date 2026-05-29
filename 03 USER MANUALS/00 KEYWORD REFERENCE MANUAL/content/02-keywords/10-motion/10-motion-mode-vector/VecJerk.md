@@ -32,18 +32,16 @@ Jerk limit (0-9) for vector motion, smoothing the resultant velocity into an S-c
 
 ## Overview
 
-`VecJerk` sets the jerk limit for vector motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 16), controlling the rate of change of the resultant acceleration to produce a smoother S-curve velocity profile. Higher smoothing reduces mechanical shock at the cost of slightly longer moves; it shapes the transitions between the [VecAccel](VecAccel.md) and [VecDecel](VecDecel.md) ramps. It is an axis-related parameter saved to flash, and cannot be changed while the axis is in motion.
+`VecJerk` is a legacy jerk-limit selector (`0`-`9`) for vector motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 16). On current firmware it does **not** shape the vector path: S-curve smoothing along the path is enabled by [VecJerkMode](VecJerkMode.md) and tuned by [VecJerkInAcc](VecJerkInAcc.md) / [VecJerkInDec](VecJerkInDec.md). `VecJerk` is an axis-related parameter saved to flash, and cannot be changed while the axis is in motion.
 
 ## How it works
 
-`VecJerk` selects which path-velocity profiler the move uses, applied to the single path velocity (see [VecSpeed](VecSpeed.md)):
+`VecJerk` is a legacy `0`-`9` selector and has **no effect on the vector path** on current firmware. The vector path profile is selected and shaped by other keywords:
 
-| Value | Profile along the path |
-|----|----|
-| 0 | Trapezoidal: the path velocity ramps linearly up at [VecAccel](VecAccel.md), cruises at [VecSpeed](VecSpeed.md), and ramps linearly down at [VecDecel](VecDecel.md). Acceleration changes instantly at the corners. |
-| 1-9 | S-curve: the path velocity is shaped so acceleration itself ramps in and out, rounding the corners of the trapezoid. The setting controls how much the transitions are smoothed; higher values give gentler corners and a slightly longer move. |
+- The vector path is trapezoidal by default — the path velocity ramps linearly up at [VecAccel](VecAccel.md), cruises at [VecSpeed](VecSpeed.md), and ramps linearly down at [VecDecel](VecDecel.md), so acceleration changes instantly at the corners.
+- S-curve shaping along the path is enabled by [VecJerkMode](VecJerkMode.md) = 1 and tuned by [VecJerkInAcc](VecJerkInAcc.md) / [VecJerkInDec](VecJerkInDec.md), which round the corners of the trapezoid so acceleration itself ramps in and out.
 
-Because the smoothing is applied to the resultant path velocity, it benefits every member axis along the coordinated path at once, removing the step changes in acceleration that would otherwise occur at the start and end of the ramps. As the value is read when the move starts, it cannot be changed during motion.
+`VecJerk` is retained for compatibility; use [VecJerkMode](VecJerkMode.md) with [VecJerkInAcc](VecJerkInAcc.md) / [VecJerkInDec](VecJerkInDec.md) to shape the vector path. Verify behavior against your firmware before relying on `VecJerk` for vector motion.
 
 ## Examples
 
@@ -54,6 +52,8 @@ AVecJerk=9           ; maximum S-curve smoothing
 
 ## See also
 
+- [VecJerkMode](VecJerkMode.md) — enables S-curve shaping of the vector path
+- [VecJerkInAcc](VecJerkInAcc.md) / [VecJerkInDec](VecJerkInDec.md) — tune the S-curve on the acceleration / deceleration ramps
 - [VecAccel](VecAccel.md) — vector acceleration rate
 - [VecDecel](VecDecel.md) — vector deceleration rate
 - [VecSpeed](VecSpeed.md) — target resultant speed

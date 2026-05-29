@@ -44,6 +44,8 @@ velocity reference = velocity from trajectory + FIFOPosVelOf
 
 The offset is applied only in position-tracking mode and only while the axis is in motion; outside those conditions it has no effect. It biases the feedforward path and does not change the position targets, so it does not by itself move the axis to a new position — it primarily improves tracking or applies a deliberate velocity bias. The value is interpreted in the controller's velocity units.
 
+When the axis enters position-tracking mode, `FIFOPosVelOf` is reset to 0 (along with [FIFOPosPosOf](FIFOPosPosOf.md) and [FIFOPosCurrOf](FIFOPosCurrOf.md)), so each run starts with no velocity bias. Set it again after the mode is entered if a non-zero bias is required.
+
 ## Examples
 
 ```text
