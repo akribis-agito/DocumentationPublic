@@ -50,6 +50,22 @@ The default is `0`. This keyword is stored in flash and can only be changed with
 
 `ForcePIVOn` therefore changes both the meaning of the force-loop scaling and which feedforward/filter keywords are active. See [Force control](00-overview.md) for the full structure diagrams.
 
+### Loop math
+
+The two structures form the current reference differently. In standard force control (`ForcePIVOn = 0`) the force PID output (acting on [ForceErr](../../08-axis-operation/04-force-operation-mode/ForceErr.md)) plus the feedforward terms passes through both force output filters $\text{Filt}_1$ and $\text{Filt}_2$ ([ForceFiltOn](ForceFiltOn.md)):
+
+$$
+\text{CurrRef} = \text{Filt}_2\!\big(\text{Filt}_1\!\big( (P+I+D) + \text{ForceRef}\cdot\text{ForceFFW}\cdot 0.001 - \text{Vel}\cdot\text{ForceVelFFW}\cdot 0.00000001 \big)\big)
+$$
+
+In force-over-PIV control (`ForcePIVOn = 1`) the force PID does not feed the current reference directly; it shapes `PosRef`, and only the current-wise feedforward and velocity compensation are added to the velocity-loop output at the current-reference summing point:
+
+$$
+\text{CurrRef} = \text{(velocity-loop output)} + \text{ForceRef}\cdot\text{ForceFFW}\cdot 0.001 - \text{Vel}\cdot\text{ForceVelFFW}\cdot 0.00000001
+$$
+
+Here $P+I+D$ is the force PID output on `ForceErr`, $\text{ForceRef}$ is the filtered reference, and $\text{Vel}$ is the velocity feedback (index 1). The feedforward scalings are those of [ForceFFW](ForceFFW.md) (0.001) and [ForceVelFFW](ForceVelFFW.md) (0.00000001).
+
 ## Examples
 
 ```text

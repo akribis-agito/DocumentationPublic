@@ -49,6 +49,8 @@ Value range is `0` to `2147483647`; the default is `0`. The keyword is stored in
 
 The accumulation includes an anti-windup mechanism: the increment added each cycle is multiplied by the loop clamping flags, so while a downstream loop (velocity and current in standard mode, or the position/velocity cascade and current in force-over-PIV mode) is saturated at a limit, the integrator stops accumulating in the direction that would deepen the saturation. This prevents the integral term from winding up while the output is held at a limit.
 
+In standard force control ([ForcePIVOn](ForcePIVOn.md) = 0) those clamping flags are the velocity-loop and current-loop clamp flags. In force-over-PIV control ([ForcePIVOn](ForcePIVOn.md) = 1) the increment is additionally gated by a dedicated force-loop clamp flag tied to the generated position reference: that flag is asserted (allowing accumulation) every cycle, and is cleared only when the position reference is held at [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md) while the gained force error is still positive, or held at [RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md) while the gained force error is still negative. This stops the force integrator from winding up against a software position limit while the force command keeps pushing into that limit.
+
 ## Examples
 
 ```text

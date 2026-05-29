@@ -50,13 +50,25 @@ When `JerkMode = 1`, the profiler uses `JerkInDec` in the structured jerk profil
 
 | Segment | Jerk used |
 |---------|-----------|
+| Cruise (constant velocity) | 0 — velocity held at `Speed` |
+| Decelerate-to-speed | `±JerkInDec` — slow to a lower target `Speed` |
 | Deceleration, jerk-up | `−JerkInDec` — deceleration rises toward `Decel` |
 | Deceleration, constant | 0 — deceleration held at `Decel` |
 | Deceleration, jerk-down | `+JerkInDec` — deceleration falls back to 0 at the target |
 
-A larger `JerkInDec` reaches the `Decel` limit faster (sharper, shorter braking transition); a smaller value spreads it over more time for a gentler stop.
+The decelerate-to-speed segment runs whenever the current velocity is more than 0.1% above the (possibly lowered) `Speed` target while the move is still short of its deceleration point: the profiler applies `−JerkInDec` to shed acceleration, then `+JerkInDec` to level off at the new cruise speed, before returning to a zero-jerk cruise segment. A larger `JerkInDec` reaches the `Decel` limit faster (sharper, shorter braking transition); a smaller value spreads it over more time for a gentler stop.
 
 ![Third-order velocity and acceleration profile segments](jerkinacc-segments.svg)
+
+### Internal jerk ceiling
+
+As with the acceleration phase, the deceleration-phase jerk is clamped before use so deceleration cannot overshoot the [Decel](Decel.md) limit within a single control cycle. The effective jerk is capped at
+
+$$
+\dot{a}_{\max}^{\,\text{dec}} = \tfrac{1}{2}\,\lvert\text{Decel}\rvert\cdot f_s
+$$
+
+where $f_s$ is the control-loop sample rate. At the ceiling, deceleration ramps from 0 to `Decel` in about two control cycles, so a `JerkInDec` set above the ceiling has no further effect on the braking ramp duration.
 
 ### Units and internal scaling (v4)
 

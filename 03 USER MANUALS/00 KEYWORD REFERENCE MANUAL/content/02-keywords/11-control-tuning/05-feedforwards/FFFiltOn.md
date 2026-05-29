@@ -44,6 +44,8 @@ $$
 \text{AccFFW term} + \text{VelFFW term} \;\longrightarrow\; \boxed{\text{feedforward filter}} \;\longrightarrow\; \text{add to velocity-loop output}
 $$
 
+The feedforward filter is a single second-order (biquad) section placed on the combined feedforward branch — it is not a cascade of sections like the velocity-output filter. Its internal history (the stored previous and previous-previous samples) advances each control cycle independently of the rest of the loop.
+
 When bypassed, the combined feedforward output is used directly. After changing `FFFiltOn` or [FFFiltDef](FFFiltDef.md), run [CalcFilters](../01-general-keywords/CalcFilters.md) so the controller recomputes the internal filter coefficients.
 
 ## Examples

@@ -41,9 +41,9 @@ $$
 \text{VelRef} = \left( \text{PosErr} \cdot \text{PosGain} \right) + \int \left( \text{PosErr} \cdot \text{PosGain} \cdot \text{PosKi} \right) \, dt + \frac{\text{dPosRef} \cdot \text{VelTrackFact}}{1024}
 $$
 
-- **What it multiplies:** the position-controller proportional output (`PosErr × PosGain`), before that product enters the integral accumulator.
+- **What it multiplies:** the position-controller proportional output. The (optionally filtered, see [PosFiltOn](PosFiltOn.md) index 2) position error is multiplied by [PosGain](PosGain.md) to form the proportional term, which `PosKi` then integrates — so `PosKi` multiplies that product (`PosErr_filt × PosGain`) before it enters the integral accumulator.
 - **Where it sums:** the accumulated integral is added to the proportional term and the velocity feed-forward to build [VelRef](../../10-motion/01-kinematics-status/VelRef.md).
-- **Anti-windup:** the integral saturation value is controlled internally. When the command saturates (for example at the current limit) the integral stops accumulating for that cycle, so it does not wind up.
+- **Anti-windup:** the integral saturation value is controlled internally. The position integral increment is gated by all three cascade anti-windup conditions. It is held for a cycle if the velocity reference is clamped at [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md) with the position error pushing further into the clamp ([StatReg](../../07-status-and-faults/StatReg.md) bit 23), and also if either downstream loop saturates — the velocity loop at the current limit (bit 21) or the current loop at the voltage limit (bit 22). Any of these freezes the position integrator so it cannot wind up behind a saturated downstream stage.
 - **Default:** `0` (position integral disabled, so the position loop is purely proportional).
 
 ## Examples

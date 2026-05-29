@@ -58,6 +58,16 @@ A larger `JerkInAcc` makes acceleration reach the `Accel` limit faster (sharper,
 
 ![Third-order velocity and acceleration profile segments](jerkinacc-segments.svg)
 
+### Internal jerk ceiling
+
+Before the profiler uses `JerkInAcc`, the acceleration-phase jerk is clamped so the acceleration cannot overshoot the [Accel](Accel.md) limit within a single control cycle. The effective jerk is capped at
+
+$$
+\dot{a}_{\max} = \tfrac{1}{2}\,\text{Accel}\cdot f_s
+$$
+
+where $f_s$ is the control-loop sample rate. At this ceiling the time to ramp acceleration from 0 to `Accel` is $\text{Accel}/\dot a_{\max} = 2/f_s$, i.e. about two control cycles. Requesting a `JerkInAcc` above the ceiling therefore has no further effect on the jerk-up/jerk-down ramp duration — the ramp is already as short as the discrete update rate allows. The ceiling is recomputed from the current `Accel` whenever the profiler is (re)initialized, including the on-the-fly recompute triggered when `JerkInAcc`, `Accel` or `Speed` change.
+
 ### Units and internal scaling (v4)
 
 On v4 `JerkInAcc` is a dimensionless integer with range 100–1,000,000,000 (default 1,000,000). The controller multiplies the value by a fixed factor of 1000 before applying it in the profiler, so the effective jerk constraint in counts/s³ is:

@@ -14,6 +14,16 @@ The compensation table is defined over a position domain. [CompTbleInit](CompTbl
 
 The filter itself is enabled by [CompFiltOn](CompFiltOn.md), and its low-pass cut-off is set by [CompFiltFreq](CompFiltFreq.md). When the axis position is outside the table domain, compensation is not applied and the measured force is used unchanged.
 
+### Loop math
+
+Each control cycle the steps are:
+
+1. The axis position is first shifted by the per-unit contact-point correction (the difference between the two [CompTbleCrrct](CompTbleCrrct.md) entries) before any lookup.
+2. The corrected position selects the two nearest table points and the expected force $F_t$ is obtained by linear interpolation between them, $F_t = y_0 + c\,(y_1 - y_0)$, where $c$ is the fractional position between the points.
+3. The difference $d = F_m - F_t$ (measured minus table) is smoothed by the first-order low-pass set by [CompFiltFreq](CompFiltFreq.md), giving $d_{\text{filt}}$, and the output force is $d_{\text{filt}} + F_t$. This is algebraically a low-pass of the measured sensor plus a high-pass of the table.
+
+If the corrected position falls before the first table point or past the last in-use index, the sample is treated as out of range: the measured force is used unchanged and the filter state is marked uninitialised, so the next in-range sample re-seeds $d_{\text{filt}}$ with the current difference rather than continuing from a stale value.
+
 The following is the summary of compensation-filter keywords.
 
 | No. | Keywords | Summary |

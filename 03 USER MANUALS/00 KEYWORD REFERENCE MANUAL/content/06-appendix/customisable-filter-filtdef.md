@@ -55,3 +55,11 @@ If fourth velocity filter (N=4) is to be second-order low-pass filter at cutoff 
 - VelFiltDef\[19\] = any number (not applicable)
 
 - VelFiltDef\[20\] = any number (not applicable)
+
+## From transfer function to digital filter
+
+Each transfer function above is specified in the continuous-time (Laplace, *s*) domain. The controller converts it to a digital second-order section using the **bilinear (Tustin) transform**, substituting
+$$s \;\rightarrow\; 2 f_s\,\frac{z-1}{z+1}$$
+where $f_s$ is the controller sample rate. The result is realised as a second-order (biquad) **Direct-Form** difference equation
+$$y_k = b_0\,x_k + b_1\,x_{k-1} + b_2\,x_{k-2} - a_1\,y_{k-1} - a_2\,y_{k-2}$$
+in which all five coefficients are normalised so the leading denominator coefficient is 1. Type 0 (None) sets $b_0=1$ and all other coefficients to 0, i.e. a pass-through. For the notch (type 8) and the first-order phase-defined lead-lag filter (type 6) the sample-rate term is additionally frequency pre-warped, so that the notch/center frequency lands exactly on the specified frequency after discretisation. The coefficients are computed only when [CalcFilters](../02-keywords/11-control-tuning/01-general-keywords/CalcFilters.md) is run after changing a FiltDef definition (or its FiltOn switch).

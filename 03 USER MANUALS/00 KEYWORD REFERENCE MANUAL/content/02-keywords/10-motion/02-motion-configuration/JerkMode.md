@@ -50,6 +50,12 @@ Each control cycle the profiler reads `JerkMode` and selects its trajectory law 
 
 Independently of the profiler order, the [Jerk](../03-kinematics-configuration/Jerk.md) keyword sets a moving-average smoothing tail of `2^Jerk` cycles that the profiler flushes at the end of every move (the profile-smoothing tail reported by [MotionStat](../05-motion-status/MotionStat.md) bit 6).
 
+### Deceleration trigger (mode 1)
+
+Unlike the second-order square-root deceleration law, the third-order profiler (`JerkMode = 1`) decides when to start braking by predicting the **distance** needed to bring the axis to rest under the jerk-limited deceleration ramp. Each cycle it computes the deceleration distance for a trapezoidal sub-profile (jerk-up to `Decel`, constant `Decel`, jerk-down to zero, using [JerkInDec](../03-kinematics-configuration/JerkInDec.md)); for short moves that cannot reach the full `Decel`, it falls back to a triangular sub-profile (jerk-up then jerk-down with no constant-deceleration phase). The profiler stays in the acceleration/cruise phase while this predicted distance is still less than the distance remaining to the target, and switches into deceleration on the first cycle where it meets or exceeds the remaining distance.
+
+Because the switch generally falls partway through a control cycle, the profiler refines the exact within-cycle switching instant by linear interpolation of the position-to-target error between the acceleration-phase and deceleration-phase candidates, iterating a few times until the predicted landing position is within about 0.1 count of the target. This is what lets the jerk-limited move stop on target despite the discrete update rate.
+
 ### Edge cases
 
 - **Motor off:** the value is held; it is read on the next `Begin`.

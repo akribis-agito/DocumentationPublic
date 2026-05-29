@@ -53,6 +53,8 @@ $$
 
 $I_{\Sigma}$ is the running integral; `0.001` is the fixed gain scaling; $a_{aw}$ is the anti-windup gate (0 freezes the integral during voltage saturation, 1 otherwise).
 
+**Voltage feedforward (v5).** When [VoltageFFWOn](../../11-control-tuning/05-feedforwards/VoltageFFWOn.md) is non-zero, the d-axis voltage feedforward [VdFFW](../../11-control-tuning/05-feedforwards/VdFFW.md) is added to `Vd` immediately after the PI output is formed and before the vector saturation below. `VdFFW` carries the model-based resistive, inductive and (opposite-sign) d-q cross-coupling terms but no back-EMF term; the back-EMF voltage acts on the q axis only ([VqFFW](../../11-control-tuning/05-feedforwards/VqFFW.md)). In v4 there is no voltage feedforward and `Vd` is the PI output directly.
+
 **Vector saturation.** Before the inverse Park transform, `Vd` and [Vq](Vq.md) are limited as a vector against the maximum PWM magnitude. If $\text{Vq}^2 + \text{Vd}^2$ exceeds the squared limit (the limit is multiplied by $\frac{4}{3}$ when the enhanced-speed-range bit of [ControlMode](ControlMode.md) is set), both `Vd` and `Vq` are scaled by the same factor so the sine-wave shape is preserved, and the voltage-saturation status bit in [StatReg](../../07-status-and-faults/StatReg.md) is set.
 
 **Inverse Park.** `Vd` and `Vq` then form the phase voltage commands by the inverse Park transform, using the sine/cosine of the electrical commutation angle θ:

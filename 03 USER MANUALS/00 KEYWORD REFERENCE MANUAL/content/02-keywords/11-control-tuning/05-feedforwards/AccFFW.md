@@ -56,13 +56,17 @@ $$
 \text{AccTerm} = \frac{a_{\text{ref}} \cdot \text{AccFFW}}{2^{8}}
 $$
 
-The acceleration term is summed with the velocity feedforward term (see [VelFFW](VelFFW.md)) to form the combined feedforward output. That output optionally passes through the feedforward filter ([FFFiltOn](FFFiltOn.md) / [FFFiltDef](FFFiltDef.md), central-i v5) and is then added to the velocity-loop output to form the current reference [CurrRefCtrl](../../../02-keywords/09-current-and-voltage/02-motor-variables/CurrRefCtrl.md):
+The reference acceleration used here is the *raw* second difference of the reference: unlike the velocity feedforward — whose source [dPosRef](../../../02-keywords/10-motion/01-kinematics-status/dPosRef.md) is the reference-derivative-smoothed first difference (see [VelFFW](VelFFW.md)) — the acceleration term is taken directly from the reference with no additional smoothing of its own.
+
+The acceleration term is summed with the velocity feedforward term (see [VelFFW](VelFFW.md)) to form the combined feedforward output, which is then added to the velocity-loop output to form the current reference [CurrRefCtrl](../../../02-keywords/09-current-and-voltage/02-motor-variables/CurrRefCtrl.md):
 
 $$
-\text{CurrRefCtrl} = (\text{velocity-loop output}) + (\text{filtered feedforward output})
+\text{CurrRefCtrl} = (\text{velocity-loop output}) + (\text{feedforward output})
 $$
 
-During the segment transitions of coordinated/vector motion the feedforward output is momentarily forced to zero to avoid current spikes from limited transition precision.
+In central-i v5 the combined feedforward output first passes through the feedforward filter ([FFFiltOn](FFFiltOn.md) / [FFFiltDef](FFFiltDef.md)) when that filter is enabled; this filter is the only smoothing applied to the acceleration feedforward term. In v4 there is no feedforward filter: the acceleration and velocity terms are summed into the current reference directly, with only their fixed power-of-two gain scalings.
+
+At each coordinated- or vector-motion segment transition the controller suppresses the feedforward for exactly two control cycles, because the reference acceleration computed across the segment boundary has limited precision and would otherwise produce a current spike. In central-i v5 the whole combined feedforward output (acceleration term plus velocity term) is held at zero for those two cycles. In v4 only the acceleration feedforward term is suppressed during the window; the velocity feedforward term continues to act.
 
 ### Scaling, range and default
 

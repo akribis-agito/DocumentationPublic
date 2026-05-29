@@ -50,6 +50,16 @@ Value range is `0` to `2147483647`; the default is `0`. The keyword is stored in
 
 In force-over-PIV control the force loop is the outermost loop and produces a position reference for the inner position/velocity cascade. The force PID output (P + I + D) is summed with this `ForceFFWP` feedforward term; the sum is scaled by the controller sampling time and added to the entry position to form the position reference, which is then saturated at the software position limits. Referencing the feedforward to the entry-time force value keeps the contribution zero at the moment of mode entry, so the switch into force mode is bumpless.
 
+### Loop math
+
+Writing $T_s$ for the controller sampling time, $\text{Pos}_{\text{entry}}$ for the position captured when force mode was entered, and $\text{ForceRef}_{\text{entry}}$ for the filtered force reference captured at that same instant, the generated position reference is:
+
+$$
+\text{PosRef} = \text{Pos}_{\text{entry}} + T_s \cdot \Big( (P+I+D) + \text{ForceFFWP} \cdot (\text{ForceRef} - \text{ForceRef}_{\text{entry}}) \Big)
+$$
+
+followed by saturation at [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md) and [RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md). Because the bracketed sum is multiplied by $T_s$ and added to the previous position reference each cycle, the force-loop output behaves as a velocity command that integrates into `PosRef`: a sustained positive force-loop output ramps the position reference forward at a rate set by that output, rather than producing a fixed position offset. At mode entry both the position-error and force-reference deviations are zero, so `PosRef` starts exactly at $\text{Pos}_{\text{entry}}$.
+
 ## Examples
 
 ```text

@@ -53,7 +53,7 @@ where $k_{i}$ and $k_{\text{scale}}$ are fixed internal scalings.
 
 - **What it multiplies:** the velocity-controller proportional output (`VelErr × VelGain`), before that product enters the integral accumulator.
 - **Where it sums:** the accumulated integral is added to the proportional term to form the velocity-PI output that, with the feedforwards in position mode, forms the loop-side current reference (reported as [CurrRefCtrl](../../09-current-and-voltage/02-motor-variables/CurrRefCtrl.md) on central-i v5) and after compensation/injection the final command [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md).
-- **Anti-windup:** the integral saturation value is controlled internally. When the current command saturates (at a torque/current limit) and the error has the same sign as the output, integration is halted for that cycle so the integral does not wind up. The integral is also preloaded when switching operation modes so the current command does not jump.
+- **Anti-windup:** the integral saturation value is controlled internally. When the current command is held at a limit, integration is halted only if the velocity error has the same sign as the limit the output is pinned against — i.e. the error is still trying to push the output further past the bound. If the error has reversed sign (driving the output back toward the linear region) the integrator resumes immediately, so it never builds up against a one-sided clamp. The integrator is also frozen when the current loop itself saturates against the voltage limit: the velocity-integral increment is gated by both the velocity-loop and the current-loop anti-windup conditions, so either a current-command clamp (current saturation, [StatReg](../../07-status-and-faults/StatReg.md) bit 21) or a phase-voltage clamp at [MaxPWM](../../06-protections/02-current-and-voltage/MaxPWM.md) (voltage saturation, bit 22) halts integration for that cycle. The integral is also preloaded when switching operation modes so the current command does not jump.
 
 ### Range and default
 
@@ -93,7 +93,7 @@ When a move pushes the velocity-loop output into the current limit, the integrat
 
    While bit 21 reads `1`, the velocity-PI output is being clamped at the peak-current limit and the anti-windup gate is set to `0`, so the integrator stops accumulating for those cycles.
 
-3. **Watch saturation clear**. As the axis decelerates or the limit is removed, bit 21 returns to `0`, the gate reopens to `1`, and the integral resumes normal accumulation from the value it held during saturation - it has not wound up.
+3. **Watch saturation clear**. As the axis decelerates or the limit is removed, bit 21 returns to `0`, the gate reopens to `1`, and the integral resumes normal accumulation from the value it held during saturation - it has not wound up. Bit 22 (voltage saturation) holds the velocity integrator for the same reason as bit 21: the velocity-integral increment is gated by the current-loop anti-windup as well, so a sustained phase-voltage clamp at [MaxPWM](../../06-protections/02-current-and-voltage/MaxPWM.md) freezes the integrator just as a current clamp does.
 
 4. **Force a clean restart** after the test, before the next move that should start without any standing integral:
 

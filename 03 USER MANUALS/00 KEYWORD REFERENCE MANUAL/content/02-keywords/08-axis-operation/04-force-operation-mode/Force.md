@@ -40,6 +40,8 @@ Force feedback obtained from the analog input.
 
 Every control cycle the controller copies the filtered analog force-feedback channel into `Force`. `Force` is updated continuously regardless of the active [OperationMode](../01-general-keywords/OperationMode.md), so it can be read for monitoring even outside force mode.
 
+This same conditioned filtered-analog reading is what the force loop uses as feedback: each cycle the loop forms `ForceErr = ForceRef - Force`, so the value shown by `Force` is exactly the quantity subtracted from the reference. The same reading is also compared against [ForceAInTh](ForceAInTh.md) for the analog (condition B) automatic entry into force mode. `Force` is the integer display copy of that internal reading (rounded for reporting); the loop and the threshold engine act on the underlying value.
+
 If force operation mode is entered while no analog input has been assigned the force-feedback function, the force loop cannot run: [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1046 (no force feedback) and the motor is turned off. Assign the feedback channel with [AInMode](../../../02-keywords/05-inputs-outputs/02-analog-inputs/AInMode.md) before commanding force mode.
 
 ## Examples

@@ -114,7 +114,7 @@ This recipe sets up the inner velocity loop alongside the outer position loop, t
    (AStatReg & 0x800000) >> 23   ; velocity saturation (bit 23) - VelRef hit MaxVel
    ```
 
-   If bit 23 reads `1`, the position-loop output (or the velocity feed-forward) is asking for more speed than [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md) allows, so the velocity loop is being driven from a clamped reference. If bit 21 reads `1`, the velocity-PI output is being clamped at the current limit and the velocity-loop integrator is being held by the anti-windup gate inside [VelKi](VelKi.md) until saturation clears.
+   If bit 23 reads `1`, the position-loop output (or the velocity feed-forward) is asking for more speed than [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md) allows, so the velocity loop is being driven from a clamped reference. If bit 21 reads `1`, the velocity-PI output is being clamped at the current limit and the velocity-loop integrator is being held by the anti-windup gate inside [VelKi](VelKi.md) until saturation clears. Bit 22 (voltage saturation) does the same to the velocity integrator: when the commanded phase-voltage vector is clamped at MaxPWM the current-loop anti-windup also gates the velocity-loop integral, so a sustained voltage clip holds the integrator just as a current clip does.
 
 5. **If a notch is needed** to clean the velocity-PI output before it forms the current command, define one in [VelFiltDef](VelFiltDef.md), enable it in [VelFiltOn](VelFiltOn.md), then run [CalcFilters](../01-general-keywords/CalcFilters.md) so the new coefficients take effect.
 
