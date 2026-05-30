@@ -1,49 +1,49 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="860" height="300" viewBox="0 0 860 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Three-phase FOC current loop: IqRef minus measured Iq drives the dq PI, inverse Park produces Vq and Vd, SVPWM drives the motor, phase currents are measured and Clarke and Park transform them back to Iq, Id feedback.">
   <title>Three-phase FOC current loop</title>
   <defs>
-    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
-    <marker id="arrowred" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#e0736b"/></marker>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1f2933"/></marker>
+    <marker id="arrowred" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1f2933"/></marker>
   </defs>
 
   <text x="430" y="24" text-anchor="middle" font-size="15" font-weight="bold">Three-phase (FOC) current loop</text>
 
-  <rect x="20" y="64" width="120" height="48" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <rect x="20" y="64" width="120" height="48" rx="6" fill="#ffffff" stroke="#1f2933" stroke-width="1.2"/>
   <text x="80" y="84" text-anchor="middle">IqRef</text>
   <text x="80" y="100" text-anchor="middle" font-size="11">IdRef = 0</text>
 
-  <circle cx="190" cy="88" r="15" fill="#fff" stroke="#5b6b7b" stroke-width="1.2"/>
+  <circle cx="190" cy="88" r="15" fill="#fff" stroke="#1f2933" stroke-width="1.2"/>
   <text x="190" y="93" text-anchor="middle" font-size="15">&#8722;</text>
 
-  <rect x="240" y="64" width="120" height="48" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <rect x="240" y="64" width="120" height="48" rx="6" fill="#ffffff" stroke="#1f2933" stroke-width="1.2"/>
   <text x="300" y="92" text-anchor="middle">dq current PI</text>
 
-  <rect x="430" y="64" width="120" height="48" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <rect x="430" y="64" width="120" height="48" rx="6" fill="#ffffff" stroke="#1f2933" stroke-width="1.2"/>
   <text x="490" y="84" text-anchor="middle">Inverse Park</text>
   <text x="490" y="100" text-anchor="middle" font-size="11">(angle &#952;)</text>
 
-  <rect x="620" y="64" width="130" height="48" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <rect x="620" y="64" width="130" height="48" rx="6" fill="#ffffff" stroke="#1f2933" stroke-width="1.2"/>
   <text x="685" y="84" text-anchor="middle">Va, Vb, Vc + SVPWM</text>
   <text x="685" y="100" text-anchor="middle" font-size="11">amplifier / motor</text>
 
-  <line x1="140" y1="88" x2="173" y2="88" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
-  <line x1="205" y1="88" x2="236" y2="88" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="140" y1="88" x2="173" y2="88" stroke="#1f2933" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="205" y1="88" x2="236" y2="88" stroke="#1f2933" stroke-width="1.4" marker-end="url(#arrow)"/>
   <text x="222" y="80" text-anchor="middle" font-size="11">Iq, Id err</text>
-  <line x1="360" y1="88" x2="426" y2="88" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="360" y1="88" x2="426" y2="88" stroke="#1f2933" stroke-width="1.4" marker-end="url(#arrow)"/>
   <text x="394" y="80" text-anchor="middle" font-size="11">Vq, Vd</text>
-  <line x1="550" y1="88" x2="616" y2="88" stroke="#5b6b7b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="550" y1="88" x2="616" y2="88" stroke="#1f2933" stroke-width="1.4" marker-end="url(#arrow)"/>
 
-  <rect x="620" y="200" width="130" height="48" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <rect x="620" y="200" width="130" height="48" rx="6" fill="#ffffff" stroke="#1f2933" stroke-width="1.2"/>
   <text x="685" y="220" text-anchor="middle">Measure Ia, Ib</text>
   <text x="685" y="236" text-anchor="middle" font-size="11">(phase currents)</text>
 
-  <line x1="685" y1="112" x2="685" y2="198" stroke="#e0736b" stroke-width="1.4" marker-end="url(#arrowred)"/>
+  <line x1="685" y1="112" x2="685" y2="198" stroke="#1f2933" stroke-width="1.4" marker-end="url(#arrowred)"/>
 
-  <rect x="430" y="200" width="120" height="48" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <rect x="430" y="200" width="120" height="48" rx="6" fill="#ffffff" stroke="#1f2933" stroke-width="1.2"/>
   <text x="490" y="220" text-anchor="middle">Clarke / Park</text>
   <text x="490" y="236" text-anchor="middle" font-size="11">&#8594; Iq, Id</text>
 
-  <line x1="620" y1="224" x2="552" y2="224" stroke="#e0736b" stroke-width="1.4" marker-end="url(#arrowred)"/>
-  <line x1="430" y1="224" x2="190" y2="224" stroke="#e0736b" stroke-width="1.4"/>
-  <line x1="190" y1="224" x2="190" y2="105" stroke="#e0736b" stroke-width="1.4" marker-end="url(#arrowred)"/>
-  <text x="310" y="217" text-anchor="middle" font-size="11" fill="#e0736b">Iq, Id (feedback)</text>
+  <line x1="620" y1="224" x2="552" y2="224" stroke="#1f2933" stroke-width="1.4" marker-end="url(#arrowred)"/>
+  <line x1="430" y1="224" x2="190" y2="224" stroke="#1f2933" stroke-width="1.4"/>
+  <line x1="190" y1="224" x2="190" y2="105" stroke="#1f2933" stroke-width="1.4" marker-end="url(#arrowred)"/>
+  <text x="310" y="217" text-anchor="middle" font-size="11" fill="#1f2933">Iq, Id (feedback)</text>
 </svg>

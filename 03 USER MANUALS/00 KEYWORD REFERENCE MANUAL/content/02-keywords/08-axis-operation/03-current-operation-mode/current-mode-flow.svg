@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="700" height="360" viewBox="0 0 700 360" role="img" aria-label="Current mode flow. CurrCmdSrc selects the reference source (analog input, user table, or master axis). The controller generates CurrRef by ramping at CurrCmdSlope to CurrCmdVal[CurrCmdIndex], holding for CurrCmdHTime, timed by CurrCmdCntr. The current loop regulates motor current to CurrRef. The axis exits to position mode when the feedback threshold is met, CurrCmdHTime[1] elapses, or a zero hold time is reached in the table." font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13">
   <title>Current mode reference and exit</title>
-  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker></defs>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1f2933"/></marker></defs>
 
   <text x="350" y="24" text-anchor="middle" font-size="15" font-weight="bold">Current mode: reference and exit</text>
 
   <!-- sources -->
-  <rect x="30" y="56" width="180" height="118" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <rect x="30" y="56" width="180" height="118" rx="6" fill="#ffffff" stroke="#1f2933" stroke-width="1.2"/>
   <text x="120" y="80" text-anchor="middle" font-weight="bold">Reference source</text>
   <text x="120" y="100" text-anchor="middle" font-size="11">CurrCmdSrc selects:</text>
   <text x="120" y="120" text-anchor="middle" font-size="11">0 analog input</text>
@@ -13,7 +13,7 @@
   <text x="120" y="156" text-anchor="middle" font-size="11">3 master axis (slave)</text>
 
   <!-- generation -->
-  <rect x="270" y="56" width="180" height="118" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <rect x="270" y="56" width="180" height="118" rx="6" fill="#ffffff" stroke="#1f2933" stroke-width="1.2"/>
   <text x="360" y="80" text-anchor="middle" font-weight="bold">CurrRef generation</text>
   <text x="360" y="102" text-anchor="middle" font-size="11">table: ramp at CurrCmdSlope</text>
   <text x="360" y="120" text-anchor="middle" font-size="11">to CurrCmdVal[CurrCmdIndex]</text>
@@ -21,27 +21,27 @@
   <text x="360" y="156" text-anchor="middle" font-size="11">timed by CurrCmdCntr</text>
 
   <!-- current loop -->
-  <rect x="510" y="74" width="160" height="82" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <rect x="510" y="74" width="160" height="82" rx="6" fill="#ffffff" stroke="#1f2933" stroke-width="1.2"/>
   <text x="590" y="104" text-anchor="middle" font-weight="bold">Current loop</text>
   <text x="590" y="126" text-anchor="middle" font-size="11">regulates motor</text>
   <text x="590" y="142" text-anchor="middle" font-size="11">current to CurrRef</text>
 
-  <path d="M210,115 L268,115" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
-  <path d="M450,115 L508,115" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M210,115 L268,115" fill="none" stroke="#1f2933" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M450,115 L508,115" fill="none" stroke="#1f2933" stroke-width="1.2" marker-end="url(#arrow)"/>
 
   <!-- exit -->
-  <rect x="30" y="232" width="300" height="104" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <rect x="30" y="232" width="300" height="104" rx="6" fill="#ffffff" stroke="#1f2933" stroke-width="1.2"/>
   <text x="180" y="256" text-anchor="middle" font-weight="bold">Exit to position mode when</text>
   <text x="180" y="278" text-anchor="middle" font-size="11">feedback threshold met (PosPosFlag / PosPosTh)</text>
   <text x="180" y="296" text-anchor="middle" font-size="11">CurrCmdHTime[1] elapsed (analog / master)</text>
   <text x="180" y="314" text-anchor="middle" font-size="11">zero hold time reached in the table</text>
 
   <!-- position mode -->
-  <rect x="450" y="252" width="180" height="64" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <rect x="450" y="252" width="180" height="64" rx="6" fill="#ffffff" stroke="#1f2933" stroke-width="1.2"/>
   <text x="540" y="280" text-anchor="middle" font-weight="bold">Position mode</text>
   <text x="540" y="299" text-anchor="middle" font-size="11">OperationMode = 3</text>
 
-  <path d="M360,174 L360,212 L180,212 L180,230" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M360,174 L360,212 L180,212 L180,230" fill="none" stroke="#1f2933" stroke-width="1.2" marker-end="url(#arrow)"/>
   <text x="180" y="206" text-anchor="middle" font-size="10">exit condition checked each cycle</text>
-  <path d="M330,284 L448,284" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M330,284 L448,284" fill="none" stroke="#1f2933" stroke-width="1.2" marker-end="url(#arrow)"/>
 </svg>
