@@ -67,17 +67,17 @@ This monitoring only begins after the power-up seed window closes. The first abs
 
 ### Bit layout by encoder protocol
 
-The controller reads the same five status bits regardless of encoder type and applies one fixed interpretation (bit 0 = disconnect, bit 1 = error, bit 3 = warning, bit 4 = CRC). What the encoder interface actually places on each bit, however, depends on the configured protocol:
+The controller reads the same five status bits regardless of encoder type and applies one fixed interpretation (bit 0 = disconnect, bit 1 = error, bit 3 = warning, bit 4 = CRC). For a **BiSS-C / SIN-COS** encoder the encoder interface lines up exactly with that interpretation:
 
-| Bit (mask) | BiSS-C / SIN-COS | EnDat 2.2 | Tamagawa |
-|---|---|---|---|
-| 0 (`0x01`) | Disconnected / no response | Encoder error | No response / timeout (disconnect) |
-| 1 (`0x02`) | Amplitude error | Frame CRC failed | Start/stop framing error |
-| 2 (`0x04`) | Frequency error | unused (always 0) | Frame CRC failed |
-| 3 (`0x08`) | System error | unused (always 0) | (unused) |
-| 4 (`0x10`) | Frame CRC failed | unused (always 0) | (unused) |
+| Bit (mask) | BiSS-C / SIN-COS |
+|---|---|
+| 0 (`0x01`) | Disconnected / no response |
+| 1 (`0x02`) | Amplitude error |
+| 2 (`0x04`) | Frequency error |
+| 3 (`0x08`) | System error |
+| 4 (`0x10`) | Frame CRC failed |
 
-The controller's fixed fault mapping (bit 4 = CRC -> fault `1069`; bit 1 or bit 3 = error/warning -> fault `1068`) lines up exactly with **BiSS-C / SIN-COS**. With **EnDat 2.2** the interface surfaces only two conditions: an encoder-error flag on bit 0 and a frame-CRC failure on bit 1; bits 2-4 are not driven and stay clear. Because the encoder's CRC failure therefore appears on bit 1 (not bit 4), it is handled as an *error* (fault `1068` against [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md)), not as a CRC fault (`1069`). With **Tamagawa** the CRC failure appears on bit 2, which is captured but not separately acted upon. For protocol-independent monitoring, test for the absence of *all* low bits rather than a specific bit position.
+For other absolute protocols (EnDat 2.2, Tamagawa) the encoder interface maps its native error and CRC conditions onto these same five bits, but the exact bit position of each condition can differ by encoder type and hardware variant. Do not assume a specific protocol places its CRC or error flag on a particular bit. For protocol-independent monitoring, test for the absence of *all* low bits rather than a specific bit position.
 
 ## Examples
 

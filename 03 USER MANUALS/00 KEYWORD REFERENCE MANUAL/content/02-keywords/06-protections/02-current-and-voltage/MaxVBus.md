@@ -53,11 +53,11 @@ For warning purposes the drive also reports a multi-level VBus warning in [StatR
 
 ### Edge cases
 
-- **Motor off:** the bus-voltage check still runs (this protects the drive hardware, not just the moving motor) — a sustained over-voltage trips even when no axis is enabled.
+- **Motor off:** the bus-voltage warning and its timer keep running (the [StatReg](../../07-status-and-faults/StatReg.md) over-VBus and warning bits still update), but the disabling trip itself fires only while the motor is on — the trip path is gated on the axis being enabled.
 - **Mode dependency:** the trip runs regardless of operation mode.
 - **`MaxVBusTime = 0`:** the trip fires on the first bus check above `MaxVBus`, effectively instant (same speed as [MaxVBusAbs](MaxVBusAbs.md) but using `MaxVBus` as the threshold).
 - **Timer resolution and threshold:** the over-voltage timer advances one bus-check period at a time (the bus voltage is checked every 16th control cycle) and is saturated at [MaxVBusTime](MaxVBusTime.md). Timer accumulation and the [StatReg](../../07-status-and-faults/StatReg.md) over-VBus warning use `VBus ≥ MaxVBus`, whereas the disabling trip uses the strict `VBus > MaxVBus` and only fires once the timer has reached `MaxVBusTime`. `MaxVBusTime` is entered in milliseconds and converted to samples internally, so on standard (16 kHz) products the effective timer resolution is one bus-check period (~1 ms).
-- **Range overflow:** writes outside `12000…95000` (mV) are clamped to the keyword `range`. Set `MaxVBus` below [MaxVBusAbs](MaxVBusAbs.md) so the timed band acts first on normal regen transients.
+- **Range overflow:** writes outside `12000…95000` (mV) are rejected with an out-of-range error; the stored value is left unchanged. Set `MaxVBus` below [MaxVBusAbs](MaxVBusAbs.md) so the timed band acts first on normal regen transients.
 - **Clearing the fault:** ConFlt code 1008 clears on re-enable ([MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../07-status-and-faults/ErrLog.md) entry persists.
 - **HWProtectBits / ProtectMask:** the bus-voltage trip is not maskable through [ProtectMask](../01-general-protection/ProtectMask.md).
 

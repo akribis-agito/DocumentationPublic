@@ -77,7 +77,7 @@ By default the I²t event is a *current limitation* (the command is clamped to t
 - **Mode dependency:** I²t works whenever the current loop is active (or when an external amplifier follows `CurrRef`). With no current loop active and no external-amplifier following, the I²t event raises a fault rather than limiting (because there is no command path to clamp).
 - **Engage / release hysteresis:** engages at $I_{filt}^{2} > \text{ContCL}^{2}$, releases at $I_{filt}^{2} < 0.90 \times \text{ContCL}^{2}$ (10 % hysteresis prevents chatter).
 - **`ContCL ≥ PeakCL`:** the effective continuous limit is silently set to `PeakCL / 2` — a misconfiguration, not a feature. Correct `ContCL` and [PeakCL](PeakCL.md).
-- **Range overflow:** writes outside `10…32000` (v4) are clamped to the keyword `range`.
+- **Range overflow:** a write outside `10…32000` (v4) is rejected with an out-of-range error and the stored value is unchanged.
 - **Clearing the fault (when configured to trip):** ConFlt code 1044 clears on re-enable ([MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../07-status-and-faults/ErrLog.md) entry persists.
 - **HWProtectBits / ProtectMask:** the I²t trip is not maskable through [ProtectMask](../01-general-protection/ProtectMask.md).
 

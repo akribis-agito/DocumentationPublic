@@ -10,7 +10,7 @@ EPPState is a read-only status that reports what EPP (the repetitive-control fee
 | 1 | Active, first run: a new learning sequence is running. |
 | 2 | Active, repetitive run: a continued learning run is applying and updating the stored correction. |
 
-At the start of a motion, EPPState is set to 1 or 2 by copying the pending [EPPRequest] value. EPPState is forced back to 0 (idle) when the motor is off, when the motor is on but not in motion, and when the axis is disabled. EPPState is read-only and is not stored to flash.
+At the start of a motion, EPPState is set to 1 or 2 by copying the pending [EPPRequest] value. EPPState is forced back to 0 (idle) when the motor is off and when the motor is on but not in motion. EPPState is read-only and is not stored to flash.
 
 **See also:**
 

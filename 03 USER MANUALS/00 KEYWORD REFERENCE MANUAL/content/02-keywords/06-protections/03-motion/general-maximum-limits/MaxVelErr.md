@@ -63,7 +63,7 @@ Key points:
 - **Velocity-command amplifier bypass:** the trip is skipped entirely when [AmpType](../../../02-motor-and-amplifier/AmpType.md) is the analog-velocity-command (external velocity-loop) amplifier — the drive does not check its own follower's velocity error.
 - **Stepper open loop:** `VelErr` is forced to `0` for [MotorType](../../../02-motor-and-amplifier/MotorType.md) = stepper open-loop.
 - **Open-loop / injection:** during [OpenLoopOn](../../../08-axis-operation/01-general-keywords/OpenLoopOn.md) ≠ 0, or direct injection at the current-reference or force-reference point, the active limit becomes [MaxVelErrOL](MaxVelErrOL.md) and the fault becomes ConFlt code 1056. Injection at the velocity- or position-reference point keeps the limit on `MaxVelErr`.
-- **Range overflow:** writes outside `0…1300000000` (v4) are clamped; the internal limit in force is updated on the next change to `MaxVelErr`/`MaxVelErrOL`/`OpenLoopOn`/`InjectType`/`InjectPoint`.
+- **Range overflow:** writes outside `0…1300000000` (v4) are clamped; the internal limit in force is updated on the next change to `MaxVelErr`/`OpenLoopOn`/`InjectType`/`InjectPoint`.
 - **Clearing the fault:** ConFlt code 1021 clears on re-enable ([MotorOn](../../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../../07-status-and-faults/ErrLog.md) entry persists.
 - **HWProtectBits / ProtectMask:** the following-error trip is not maskable through [ProtectMask](../../01-general-protection/ProtectMask.md) (that mask covers hardware-protection bits only).
 

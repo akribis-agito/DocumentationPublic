@@ -57,7 +57,7 @@ Key points:
 - **Motor off:** the position loop and the limit check do not run; on motor-off the error is reset.
 - **Mode dependency:** `PosErr` is forced to `0` outside position-control and force-over-PIV operation, and for open-loop steppers ([MotorType](../../../02-motor-and-amplifier/MotorType.md) = stepper open-loop), so the check cannot trip in those configurations.
 - **Open-loop / injection:** during [OpenLoopOn](../../../08-axis-operation/01-general-keywords/OpenLoopOn.md) ≠ 0 or any direct injection at the current-, velocity-, or force-reference point, the active limit becomes [MaxPosErrOL](MaxPosErrOL.md) and the fault becomes ConFlt code 1055. Only direct injection at the position-reference point keeps the limit on `MaxPosErr`.
-- **Range overflow:** writes outside `0…80000000` (v4) are clamped to the keyword `range`; the internal limit in force is updated on the next change to `MaxPosErr`/`MaxPosErrOL`/`OpenLoopOn`/`InjectType`/`InjectPoint`.
+- **Range overflow:** writes outside `0…80000000` (v4) are rejected with an out-of-range error; the stored value is left unchanged. The internal limit in force is updated on the next change to `MaxPosErr`/`MaxPosErrOL`/`OpenLoopOn`/`InjectType`/`InjectPoint`.
 - **Clearing the fault:** ConFlt code 1020 clears on re-enable ([MotorOn](../../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../../07-status-and-faults/ErrLog.md) entry persists.
 - **HWProtectBits / ProtectMask:** the following-error trip is not maskable through [ProtectMask](../../01-general-protection/ProtectMask.md) (that mask covers hardware-protection bits only).
 

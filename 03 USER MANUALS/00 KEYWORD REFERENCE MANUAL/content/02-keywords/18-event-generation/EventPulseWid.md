@@ -48,7 +48,7 @@ When events are armed, the controller converts the width into the pulse generato
 
 ![Event output pulse width and overlap](eventpulsewid-overlap.svg)
 
-The output duration is produced by a hardware timer, so the width is quantized to the timer step. On central-i remote drives with incremental or SIN-COS feedback this is about **20 ns** for pulses up to roughly **163.8 us**, and **5.12 us** for longer pulses, up to a maximum of about **1.34 seconds**; stand-alone products use a different timer with a shorter maximum. Very short or very long requested widths are rounded to the nearest achievable step, and a requested width smaller than one step still produces a pulse of at least one step.
+The output duration is produced by a hardware timer, so the width is quantized to the timer step. On central-i remote drives with incremental or SIN-COS feedback this is about **20 ns** for pulses up to roughly **163.8 us**, and **5.12 us** for longer pulses, up to a maximum of about **41.9 ms**; stand-alone products use a different timer with a shorter maximum. Very short or very long requested widths are rounded to the nearest achievable step, and a requested width smaller than one step still produces a pulse of at least one step.
 
 ## Examples
 

@@ -57,7 +57,7 @@ A clean cycle (no abnormal bit) resets the counters, so only a *continuous* cond
 A genuine **disconnect** (status bit 0) is handled separately and is **not** governed by `EncAbsErrTime`: it takes the axis off immediately ([ConFlt](../../07-status-and-faults/ConFlt.md) fault `1070`).
 
 > [!caution]
-> On the standalone controller, `-1` is honoured for the disconnect, error and CRC conditions, but an abnormal-handling quirk means the absolute-encoder **warning** condition may still be acted on even with monitoring set to `-1` — the axis can be taken off when that warning bit is set. Central-i honours `-1` for all conditions. Verify against current firmware before relying on `-1` to suppress warning-driven faults on a standalone controller.
+> Setting `-1` suppresses the error, warning and CRC conditions together: while monitoring is disabled none of them counts toward a fault. The **disconnect** condition is independent of `EncAbsErrTime` and is always acted on — `-1` does not suppress a disconnect fault.
 
 > **Availability note:** on Central-i v5 this keyword is marked partially implemented.
 

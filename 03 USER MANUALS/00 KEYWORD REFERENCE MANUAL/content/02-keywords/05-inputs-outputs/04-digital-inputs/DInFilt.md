@@ -38,22 +38,22 @@ Software debounce filter for all digital inputs on an axis.
 
 ## How it works
 
-Writing `DInFilt` pushes the value down to the hardware: it masks the value to its low 4 bits (`& 0xF`, giving the 0–15 range) and writes it into the hardware filter register. That register holds one 4-bit filter setting per axis (A, B, C) packed into a single word, so each axis carries its own debounce length. The debounce is performed in hardware, not in the control-loop software, and a value of `0` disables it (the raw reading passes straight through).
+Writing `DInFilt` pushes the value down to the hardware: the 4-bit setting (the `0`–`15` range) is written into the hardware filter register. That register holds one 4-bit filter setting per axis (A, B, C) packed into a single word, so each axis carries its own debounce length. The debounce is performed in hardware, not in the control-loop software, and a value of `0` disables it (the raw reading passes straight through).
 
 In the present firmware, `DInFilt` is wired to the **pulse/direction capture** input path (the step/direction signals counted into [DInPort](DInPort-DInPortHigh.md)-related position capture), where contact bounce or line noise would otherwise be miscounted as extra steps. The hardware also contains a separate, wider per-port debounce filter for the general isolated/open-collector and differential digital inputs (home, limit, and similar), but present firmware leaves that filter at its minimum (effectively unfiltered) setting. As a result, raising `DInFilt` reliably cleans up the pulse/direction capture path; do not assume it will, on its own, debounce a switch wired to a general-purpose digital input.
 
 ### Hardware behavior
 
-The debouncer samples the input on a fixed hardware tick (about 40 ns for the pulse/direction path). On each tick it compares the freshly sampled level against the level it is currently presenting; while they differ it counts ticks, and only when the count reaches the `DInFilt` threshold does it accept the new level and reset the counter. Any return to the previously accepted level during that window resets the counter to zero immediately. So the accept delay is approximately `DInFilt + 1` ticks (the threshold plus the input-synchronization tick), and a disturbance shorter than that window is rejected outright rather than averaged.
+The debouncer samples the input on a fixed hardware tick (about 80 ns for the pulse/direction path). On each tick it compares the freshly sampled level against the level it is currently presenting; while they differ it counts ticks, and only when the count reaches the `DInFilt` threshold does it accept the new level and reset the counter. Any return to the previously accepted level during that window resets the counter to zero immediately. So the accept delay is approximately `DInFilt + 1` ticks (the threshold plus the input-synchronization tick), and a disturbance shorter than that window is rejected outright rather than averaged.
 
-For the pulse/direction path (≈40 ns tick), the resulting minimum accept delay is approximately:
+For the pulse/direction path (≈80 ns tick), the resulting minimum accept delay is approximately:
 
 | `DInFilt` | Approximate accept delay |
 |-----------|--------------------------|
 | 0         | pass-through (no debounce) |
-| 3         | ≈ 160 ns |
-| 8         | ≈ 360 ns |
-| 15 (max)  | ≈ 640 ns |
+| 3         | ≈ 320 ns |
+| 8         | ≈ 720 ns |
+| 15 (max)  | ≈ 1.28 µs |
 
 These figures assume the standard pulse/direction sampling tick; the exact value is product-specific.
 
@@ -66,7 +66,7 @@ ADInFilt              ; read back the filter setting
 
 ### Edge cases
 
-- **Out of range** — values are masked to the low 4 bits (`0`–`15`); writes outside this range are clipped, not rejected.
+- **Out of range** — the valid range is `0`–`15`; a write outside it is rejected with an out-of-range error and the stored value is unchanged.
 - **Zero value** — disables debouncing; the raw hardware reading is used directly.
 - **Per-axis scope** — one filter length per axis/module; you cannot debounce one input independently of another on the same axis. In present firmware the setting acts on the pulse/direction capture path (see [How it works](#how-it-works)).
 - **Edge detection lag** — debouncing delays both rising and falling edges by up to `DInFilt` raw sample periods; for time-critical inputs (e.g. high-rate begin-motion triggers) prefer the lowest filter that still rejects noise.

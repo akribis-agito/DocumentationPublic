@@ -67,7 +67,7 @@ $$
 \end{aligned}
 $$
 
-A common-mode (space-vector) offset is then applied to [Va](Va.md), [Vb](Vb.md), [Vc](Vc.md) before PWM. The current-loop gains [CurrGain](../../11-control-tuning/06-current-control/CurrGain.md) and [CurrKi](../../11-control-tuning/06-current-control/CurrKi.md) are documented under [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md); this page does not give tuning guidance.
+When the enhanced-speed-range bit of [ControlMode](ControlMode.md) is set, a common-mode (space-vector) offset is then applied to [Va](Va.md), [Vb](Vb.md), [Vc](Vc.md) before PWM. The current-loop gains [CurrGain](../../11-control-tuning/06-current-control/CurrGain.md) and [CurrKi](../../11-control-tuning/06-current-control/CurrKi.md) are documented under [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md); this page does not give tuning guidance.
 
 ## Examples
 

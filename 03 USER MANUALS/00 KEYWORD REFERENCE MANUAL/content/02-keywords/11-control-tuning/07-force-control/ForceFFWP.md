@@ -58,7 +58,7 @@ $$
 \text{PosRef} = \text{Pos}_{\text{entry}} + T_s \cdot \Big( (P+I+D) + \text{ForceFFWP} \cdot (\text{ForceRef} - \text{ForceRef}_{\text{entry}}) \Big)
 $$
 
-followed by saturation at [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md) and [RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md). Because the bracketed sum is multiplied by $T_s$ and added to the previous position reference each cycle, the force-loop output behaves as a velocity command that integrates into `PosRef`: a sustained positive force-loop output ramps the position reference forward at a rate set by that output, rather than producing a fixed position offset. At mode entry both the position-error and force-reference deviations are zero, so `PosRef` starts exactly at $\text{Pos}_{\text{entry}}$.
+followed by saturation at [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md) and [RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md). The bracketed sum is multiplied by $T_s$ and added to the fixed entry position $\text{Pos}_{\text{entry}}$ — recomputed from scratch each cycle, not accumulated onto the previous reference — so a sustained force-loop output holds the position reference at a fixed offset from the entry position proportional to that output. At mode entry both the position-error and force-reference deviations are zero, so `PosRef` starts exactly at $\text{Pos}_{\text{entry}}$.
 
 ## Examples
 
