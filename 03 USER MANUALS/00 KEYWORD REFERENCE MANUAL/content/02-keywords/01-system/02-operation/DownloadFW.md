@@ -40,9 +40,14 @@ The [DontDownload](../01-status/DontDownload.md) flag, when set, blocks firmware
 
 ## How it works
 
-`DownloadFW` hands control from the running firmware to the on-board boot program, which performs the actual image transfer. The sequence is:
+`DownloadFW` hands control from the running firmware to the on-board boot program, which performs the actual image transfer. The transport differs by controller type:
 
-1. **Password handshake.** The controller requests a password and waits for the host to send the expected reply over the same link the command arrived on (USB/serial, CAN, or Ethernet). PCSuite supplies this automatically. A wrong reply returns a password error; no reply within about 10 seconds returns a timeout error — in either case the controller stays in normal operation.
+- **Central-i controllers run firmware download over the Ethernet link only.** Issuing `DownloadFW` over USB/serial (or RJ45 serial) or CAN is rejected with instruction error 235 ("Download Firmware is only available via Ethernet connection") and the controller stays in normal operation; PCSuite drives the whole image transfer over Ethernet.
+- **Standalone controllers** instead run the per-link password handshake below and accept the download over USB/serial or CAN as well.
+
+The sequence (standalone) is:
+
+1. **Password handshake.** The controller requests a password and waits for the host to send the expected reply over the same link the command arrived on (USB/serial or CAN). PCSuite supplies this automatically. A wrong reply returns a password error; no reply within about 10 seconds returns a timeout error — in either case the controller stays in normal operation.
 2. **Quiesce hardware.** On success the serial bus is closed and the FPGA is reset so the drive outputs are taken to a safe state, and the I/O pins are returned to the mode the boot program expects.
 3. **Jump to boot.** The firmware records which interface initiated the download and jumps to the boot program, which receives and writes the new image. The download tool then restarts the unit; on the next start-up the controller runs the new firmware.
 

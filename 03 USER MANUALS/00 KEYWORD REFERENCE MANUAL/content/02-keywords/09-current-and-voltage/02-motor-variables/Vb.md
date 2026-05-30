@@ -40,6 +40,8 @@ Read-only phase B voltage reference for space-vector modulation (PWM-count fract
 
 `Vb` is the phase B voltage reference for space-vector modulation (SVM), expressed as a fraction of the full PWM count times a factor of 1000 (±1000 = ±100 % of maximum PWM amplitude). Phase B is defined in the hardware reference guide. Together with [Va](Va.md) and [Vc](Vc.md) it forms the three-phase voltage commands sent to the modulator and ultimately the PWM duty.
 
+The per-1000 PWM count equals the reported scaling factor × 1000: on a central-i system `Vb` = 1000 commands the full half-period count of 1526 PWM clocks (scaling 1.526), and on a standalone controller it commands that build's full count — 1144 or 4577 PWM clocks depending on the PWM/sampling-rate build (scaling 1.144 or 4.577, the value shown in this page's scaling). The internal PWM compare value is `Vb` × scaling, and `Vb` = ±1000 is ±100 % of the PWM half-period (full modulation depth before [MaxPWM](../../06-protections/02-current-and-voltage/MaxPWM.md) is applied).
+
 ## How it works
 
 `Vb` is produced in the same way as [Va](Va.md), shifted to phase B:
@@ -52,7 +54,7 @@ Read-only phase B voltage reference for space-vector modulation (PWM-count fract
 | Brush / voice-coil motor ([MotorType](../../02-motor-and-amplifier/MotorType.md) = 1 or 2, [ControlMode](ControlMode.md) bit 2 = 0) | $\text{Vb}\ = \ -\text{Va}$ (the brush path drives a single H-bridge across phases A and B). |
 | Brushless current loop bypassed ([ControlMode](ControlMode.md) bit 2 = 1) | $\text{Vb}\ = \ \text{IbRef}$. (Brush sets [IbRef](IbRef.md) = 0 in this case; stepper ignores this bit.) |
 
-The same post-processing as [Va](Va.md) then applies: brushless $\text{Vc} = -(\text{Va} + \text{Vb})$ and brush/stepper $\text{Vc} = 0$, the enhanced-speed-range midpoint subtraction ([ControlMode](ControlMode.md) bit 0, brushless and stepper only), and saturation to the maximum PWM amplitude ([MaxPWM](../../06-protections/02-current-and-voltage/MaxPWM.md)) which sets the voltage-saturation bit ([StatReg](../../07-status-and-faults/StatReg.md) bit 22).
+The same post-processing as [Va](Va.md) then applies: brushless $\text{Vc} = -(\text{Va} + \text{Vb})$ and brush/stepper $\text{Vc} = 0$, the enhanced-speed-range midpoint subtraction ([ControlMode](ControlMode.md) bit 0, brushless and stepper only), and saturation to the maximum PWM amplitude ([MaxPWM](../../06-protections/02-current-and-voltage/MaxPWM.md)) which sets the voltage-saturation bit ([StatReg](../../07-status-and-faults/StatReg.md) bit 22). `MaxPWM` is in the same per-1000 units as `Vb`, defaults to 90 % of the full count (900 keyword units), and can never reach ±1000 because a share of the half-period is reserved for the PWM dead band. In normal brushless vector control the [Vq](Vq.md)/[Vd](Vd.md) vector is limited before the inverse transform so the sinusoidal relationship is preserved; the direct per-phase clamp to ±`MaxPWM` is applied only in the bypass modes (see [Va](Va.md)).
 
 Vb lags Va by 120° of electrical angle, and Vc lags Vb by a further 120°:
 

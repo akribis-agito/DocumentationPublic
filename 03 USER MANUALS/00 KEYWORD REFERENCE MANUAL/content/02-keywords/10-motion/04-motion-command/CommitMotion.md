@@ -44,6 +44,15 @@ When `CommitMotion` is issued the controller hands the staged change to the prof
 2. **Profiler evaluation.** The profiler examines the running move and either accepts the change (there is enough of the move left to retarget cleanly) or rejects it (for example the move is too close to its end to recalculate in time). Each handshake step has a one-second timeout; a timeout is reported as an error.
 3. **Recalculation and transition.** If accepted, the new sine profile is computed and the profiler transitions to it on the fly. The controller can **acknowledge the commit in advance of the actual profile transition** — the acknowledgement tells you the change has been accepted and will be applied at the appropriate point in the move, rather than waiting for the transition itself to complete. This keeps the commit responsive and lets a repetitive move continue without interruption.
 
+### The recalculation window
+
+The new profile is not computed instantaneously; the controller reserves a **fixed window of 16 control-loop cycles** (1&nbsp;ms at the default control rate) for the background recalculation, and the accept/reject decision in step 2 is made against that fixed window. Because the window is a constant, it is the **same regardless of move length** — only how much of the running move remains in front of it matters. Two distinct errors come out of this:
+
+- **Window does not fit (error 387).** Raised up front at the initial check when the time left before the move would otherwise end is shorter than the 16-cycle window, so the recalculation could not finish in time even if it started immediately. For a repetitive move ([MotionMode](../02-motion-configuration/MotionMode.md) = 21) the remaining-time budget also includes the inter-repeat dwell ([RptWait](../02-motion-configuration/RptWait.md)), so a commit issued late in a repeat can still fit if enough dwell follows.
+- **Recalculation did not finish in the window (error 388).** Raised when the 16-cycle countdown reaches zero before the background recalculation has completed. In this case the commit is abandoned and the original move continues unchanged.
+
+Both 387 and 388 apply to sine PTP (mode 20) and sine PTP repetitive (mode 21).
+
 If any step fails or times out, `CommitMotion` returns an error and the move continues unchanged on its original profile.
 
 ## Examples
@@ -63,7 +72,8 @@ ACommitMotion        ; apply the new target on the fly; OK = accepted, error = r
 
 - **Not in motion** — rejected; there is no running move to commit a change to.
 - **Wrong motion mode** — rejected unless the active mode is sine PTP (20) or sine PTP repetitive (21).
-- **Too late in the move** — the profiler may reject the change when there is not enough of the move left to recalculate and transition; the original move finishes unchanged.
+- **Too late in the move** — the profiler may reject the change when there is not enough of the move left to recalculate and transition (error 387, the 16-cycle window does not fit in the time remaining); the original move finishes unchanged.
+- **Recalculation overran** — if the background recalculation does not complete within the 16-cycle window the commit is abandoned (error 388) and the original move continues unchanged.
 - **Timeout** — if the profiler does not respond within about one second at any handshake step, the command returns an error.
 - **Read-only / function** — `CommitMotion` is a command (issue it to trigger it); it carries no value to write.
 - **Platform** — v5 central-i only.
@@ -73,4 +83,5 @@ ACommitMotion        ; apply the new target on the fly; OK = accepted, error = r
 - [MotionMode](../02-motion-configuration/MotionMode.md) — selects the sine point-to-point modes (20 / 21) this command operates on
 - [Begin](Begin.md) — starts the move that `CommitMotion` later retargets
 - [MotionStat](../05-motion-status/MotionStat.md) — in-motion bit that must be set for the command to be accepted
+- [RptWait](../02-motion-configuration/RptWait.md) — inter-repeat dwell that extends the commit budget for a repetitive (mode 21) move
 - [Stop](Stop.md) — controlled stop, the alternative when a change cannot be committed on the fly

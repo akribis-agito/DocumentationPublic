@@ -52,7 +52,7 @@ Writes all flash-saveable parameters from volatile memory to flash.
    While writing, a running **parameter checksum** is accumulated over the values (the [ParamCS](../01-status/ParamCS.md) words). Three checksum variants are kept so a host can compare configuration while ignoring volatile identity fields such as the network IP/MAC address.
 3. **Finalize.** After the last parameter, `Save` writes a marker recording the last CAN code stored (used by [Load](Load.md) to know where the saved set ends) and a whole-area additive checksum that `Load` re-verifies on every restore. If flash fills before the table is exhausted, `Save` returns a "flash full" error.
 
-Because the operation can take a noticeable time, the firmware refreshes the watchdog and signals progress on the status LED while it runs. Index 0 of every array is deliberately excluded from the checksum and from host upload (arrays are 1-indexed).
+Because the operation can take a noticeable time, the firmware refreshes the watchdog and signals progress on the status LED while it runs. On central-i the command is acknowledged immediately — an early empty reply tells the host the operation has begun — and, because the long flash write blocks the loop that normally feeds the watchdog, the firmware pre-loads the background watchdog feed for roughly 120 seconds. A host should therefore allow up to about that long for the final OK/error reply before treating `Save` as hung. Index 0 of every array is deliberately excluded from the checksum and from host upload (arrays are 1-indexed).
 
 ## Examples
 
@@ -79,7 +79,9 @@ If `ParamCS[1]` before and after `Reset` matches the post-`Save` value, the para
 ## Edge cases
 
 - **Motor on / in motion.** Rejected — the interpreter returns an error and nothing is written. Stop the axis and disable the motor first.
-- **Flash full.** If the parameter set exceeds the reserved flash space `Save` returns a "flash full" error after writing what fits; on the next [Load](Load.md) only the records actually written are restored, and missing parameters revert to their defaults.
+- **Flash error.** A failed erase returns error 27 and a failed write returns error 28; in either case `Save` aborts rather than leaving a partial set.
+- **Flash-board / build mismatch.** If the flash-chip layout the firmware was built for does not match the board it is running on, `Save` refuses before writing anything and returns error 251 or 252 (single-flash vs double-flash board mismatch, build-dependent). This guards against writing the parameter area with the wrong flash geometry.
+- **Flash full.** If the parameter set exceeds the reserved flash space `Save` returns a "flash full" error (29) after writing what fits; on the next [Load](Load.md) only the records actually written are restored, and missing parameters revert to their defaults.
 - **Power loss mid-Save.** Because `Save` erases the area first, a power loss before the final checksum/marker is written leaves the area incomplete; on the next power-up [Load](Load.md) sees a checksum mismatch and the firmware initialises all parameters to their defaults (rather than loading a partial set).
 - **Central-i disconnect.** The save operates on the master's own parameters and is unaffected by the link state to any remote unit.
 

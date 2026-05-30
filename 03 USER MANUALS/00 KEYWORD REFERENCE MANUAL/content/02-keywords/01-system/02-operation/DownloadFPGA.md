@@ -40,11 +40,14 @@ A firmware/FPGA version mismatch is reported by [UnitStat](../01-status/UnitStat
 
 ## How it works
 
-`DownloadFPGA` follows the same path as [DownloadFW](DownloadFW.md) — it just targets the FPGA configuration image instead of the processor firmware:
+`DownloadFPGA` behaves differently by controller type:
 
-1. **Password handshake.** The controller requests a password and waits for the host to reply over the link the command arrived on (USB/serial, CAN, or Ethernet). PCSuite supplies this automatically; a wrong reply, or no reply within about 10 seconds, leaves the unit in normal operation.
-2. **Quiesce hardware.** On success the serial bus is closed and the FPGA is reset so the drive outputs are safe, and the I/O pins are set to the mode the boot program expects.
-3. **Jump to boot.** The firmware records the originating interface and hands over to the boot program, which receives and writes the new FPGA image, then restarts the unit.
+- **Central-i controllers do not accept a separate FPGA download.** In the normal operating image `DownloadFPGA` returns instruction error 242 ("This function is not supported in this controller type") and the controller stays in normal operation. On central-i the FPGA configuration is carried inside the single combined firmware image and is updated as part of [DownloadFW](DownloadFW.md); there is no standalone FPGA transfer step.
+- **Standalone controllers** perform a dedicated FPGA transfer that follows the same path as [DownloadFW](DownloadFW.md), just targeting the FPGA configuration image instead of the processor firmware:
+
+  1. **Password handshake.** The controller requests a password and waits for the host to reply over the link the command arrived on (USB/serial or CAN). PCSuite supplies this automatically; a wrong reply, or no reply within about 10 seconds, leaves the unit in normal operation.
+  2. **Quiesce hardware.** On success the serial bus is closed and the FPGA is reset so the drive outputs are safe, and the I/O pins are set to the mode the boot program expects.
+  3. **Jump to boot.** The firmware records the originating interface and hands over to the boot program, which receives and writes the new FPGA image, then restarts the unit.
 
 Firmware and FPGA images are versioned together; after updating one you may need to update the other so they match. The controller flags a mismatch in [UnitStat](../01-status/UnitStat.md) and will refuse to enable the motor while a relevant mismatch is present.
 
