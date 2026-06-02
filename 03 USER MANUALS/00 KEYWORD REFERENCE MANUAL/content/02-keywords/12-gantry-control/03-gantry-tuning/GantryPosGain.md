@@ -43,21 +43,21 @@ Proportional position gain for the gantry yaw correction controller.
 
 ## How it works
 
-In gantry mode the yaw position error is the difference between the shaped/filtered position reference and the gantry (differential) feedback rather than the single-axis feedback:
+In gantry mode each axis forms its position error against its gantry feedback ([GantryFdbk](../02-gantry-kinematic-feedback/GantryFdbk.md)) rather than the single-axis feedback — the common-mode (linear) feedback on the master axis and the differential (yaw) feedback on the yaw axis:
 
 $$
 \text{PosErr} = \text{PosRef}_{\text{shaped}} - \text{GantryFdbk}
 $$
 
-`GantryPosGain` then scales this yaw position error to form the velocity command that is passed into the yaw velocity loop (the built-in velocity-tracking feedforward term is added on top, exactly as in the ordinary position loop):
+`GantryPosGain` then scales this position error to form the velocity command that is passed into the matching velocity loop (the built-in velocity-tracking feedforward term is added on top, exactly as in the ordinary position loop):
 
 $$
 \text{VelRef} = \text{PosErr} \cdot \text{GantryPosGain} + \frac{\text{PosRef} \cdot \text{VelTrackFact}}{1024}
 $$
 
-Increasing `GantryPosGain` raises the differential velocity (and hence corrective current) produced per unit of yaw position error. The resulting velocity command feeds the yaw velocity PI loop set by [GantryVelGain](GantryVelGain.md) / [GantryVelKi](GantryVelKi.md), whose output becomes the differential portion of the motor current command ([CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md)) on the two gantry motors. The yaw correction reference itself is set by [GantryYawRef](../01-general-variables/GantryYawRef.md).
+Increasing `GantryPosGain` raises the velocity command (and hence corrective current) produced per unit of position error. The resulting velocity command feeds the velocity PI loop set by [GantryVelGain](GantryVelGain.md) / [GantryVelKi](GantryVelKi.md), whose output forms the portion of the motor current command ([CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md)) for that axis. The yaw correction reference itself is set by [GantryYawRef](../01-general-variables/GantryYawRef.md).
 
-The value is dimensionless. The allowed range is 0 to 100000 with a default of 100 (on controllers where the gantry gains are a 6-element gain-scheduled array the upper range is extended; see the keyword attributes). A value of 0 disables the proportional position action of the yaw loop.
+The value is dimensionless. The allowed range is 0 to 100000 with a default of 100 (on controllers where the gantry gains are a 6-element gain-scheduled array the upper range is extended; see the keyword attributes). A value of 0 disables the proportional position action of the loop.
 
 ## Examples
 
@@ -69,7 +69,7 @@ AGantryPosGain     ; read the current gain
 ### Edge cases
 
 - **Gantry off** ([GantryOn](../01-general-variables/GantryOn.md) = 0) — the yaw loop is not running; writes are accepted but the gain has no effect until gantry mode is engaged.
-- **Wrong axis** — on v4, `GantryPosGain` is consulted on the yaw axis (`B`); on v5 it is per-axis with gain-scheduling support. Setting it on the master axis on v4 is accepted but does not change the yaw loop behaviour.
+- **Per-axis** — each gantry member axis uses its own `GantryPosGain`: the master (common/linear) axis applies its value in the linear position loop and the yaw axis applies its value in the yaw position loop. The value is read per axis whenever that axis is in gantry mode (on both v4 and v5); on v5 each axis also supports gain scheduling. Writes on a non-gantry axis are accepted but not used.
 - **Motor off** — accepted; the value persists until gantry is engaged.
 - **Out of range** — values outside `0`–`100000` (v4) / `0`–`1000000` (v5) are rejected.
 - **Zero gain** — disables the proportional position action; the yaw loop falls back to integral and feedforward only, with poor tracking.

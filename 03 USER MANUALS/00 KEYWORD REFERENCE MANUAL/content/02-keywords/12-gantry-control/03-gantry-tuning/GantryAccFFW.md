@@ -39,7 +39,7 @@ Acceleration feedforward gain for the gantry yaw correction controller.
 
 ## Overview
 
-`GantryAccFFW` is the acceleration feedforward gain of the gantry yaw correction loop. When gantry mode is active (see [GantryOn](../01-general-variables/GantryOn.md)) it takes the role that the ordinary [AccFFW](../../11-control-tuning/05-feedforwards/00-overview.md) plays in the per-axis loop, injecting a current term proportional to the commanded acceleration so the feedback loops are not solely responsible for accelerating the load. It is an axis-related parameter saved to flash and can be changed at any time, including while in motion and with the motor on.
+`GantryAccFFW` is the acceleration feedforward gain of the gantry control loop. When gantry mode is active (see [GantryOn](../01-general-variables/GantryOn.md)) it takes the role that the ordinary [AccFFW](../../11-control-tuning/05-feedforwards/00-overview.md) plays in the per-axis loop, injecting a current term proportional to the commanded acceleration so the feedback loops are not solely responsible for accelerating the load. It is an axis-related parameter saved to flash and can be changed at any time, including while in motion and with the motor on.
 
 ## How it works
 
@@ -49,7 +49,7 @@ $$
 \text{CurrRef} = \text{VelPIOutput} + \frac{(\text{PosRef}_{n} - 2\,\text{PosRef}_{n-1} + \text{PosRef}_{n-2}) \cdot \text{GantryAccFFW}}{256}
 $$
 
-Because this term is a feedforward, it depends only on the reference trajectory, not on the yaw error, so it can supply the current needed during acceleration without waiting for an error to build up in the [GantryPosGain](GantryPosGain.md) / [GantryVelGain](GantryVelGain.md) feedback loops. Note that in gantry mode the yaw current command uses the acceleration feedforward term only; the velocity feedforward [GantryVelFFW](GantryVelFFW.md) applies on controllers/firmware that include it in the yaw loop.
+Because this term is a feedforward, it depends only on the reference trajectory, not on the position error, so it can supply the current needed during acceleration without waiting for an error to build up in the [GantryPosGain](GantryPosGain.md) / [GantryVelGain](GantryVelGain.md) feedback loops. Each gantry member axis applies its own value: the master (common/linear) axis injects its `GantryAccFFW` into its linear loop and the yaw axis injects its value into the yaw loop. On v4 the gantry current command adds the acceleration feedforward term only (the velocity feedforward term is dropped while gantry is engaged); on v5 both the acceleration feedforward and the velocity feedforward [GantryVelFFW](GantryVelFFW.md) are applied.
 
 The value is dimensionless (a feedforward scaling). The allowed range is 0 to 500000 with a default of 0, i.e. acceleration feedforward is off unless configured (on controllers where the gantry gains are a 6-element gain-scheduled array the upper range is extended; see the keyword attributes).
 
@@ -64,8 +64,8 @@ AGantryAccFFW      ; read the current gain
 
 - **Gantry off** — writes accepted; the gain has no effect until [GantryOn](../01-general-variables/GantryOn.md) = 1.
 - **Wrong mode** — acceleration feedforward is only applied while in [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) = 3 (position); current / force / velocity modes ignore it.
-- **Zero gain** — disables yaw acceleration feedforward.
-- **Wrong axis** — consulted on the yaw axis of the pair; writes on the master or a non-gantry axis are accepted but not used.
+- **Zero gain** — disables acceleration feedforward on that axis.
+- **Per-axis** — each gantry member axis applies its own `GantryAccFFW`: the master (common/linear) axis uses its value in the linear loop and the yaw axis uses its value in the yaw loop. The value is read per axis whenever that axis is in gantry mode; writes on a non-gantry axis are accepted but not used.
 - **Out of range** — values outside `0`–`500000` (v4) / `0`–`50000000` (v5 per-element) are rejected.
 - **Mismatched with [GantryVelFFW](GantryVelFFW.md)** — large acceleration feedforward without an appropriate velocity feedforward can produce a yaw torque ahead of the velocity correction; tune the two together.
 - **Save** — flash-saveable.

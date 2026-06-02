@@ -39,38 +39,40 @@ Proportional velocity gain for the gantry yaw correction controller.
 
 ## Overview
 
-`GantryVelGain` is the proportional gain of the gantry yaw velocity loop. When gantry mode is active (see [GantryOn](../01-general-variables/GantryOn.md)) it takes the role that the ordinary [VelGain](../../11-control-tuning/04-velocity-control/00-overview.md) plays in the per-axis velocity loop, scaling the yaw (differential) velocity error to form the corrective current command. It is an axis-related parameter saved to flash and can be changed at any time, including while in motion and with the motor on.
+`GantryVelGain` is the proportional gain of the gantry velocity loop. When gantry mode is active (see [GantryOn](../01-general-variables/GantryOn.md)) it takes the role that the ordinary [VelGain](../../11-control-tuning/04-velocity-control/00-overview.md) plays in the per-axis velocity loop, scaling the gantry velocity error to form the corrective current command. It is an axis-related parameter saved to flash and can be changed at any time, including while in motion and with the motor on. It is held per axis of the pair: the first axis runs the linear (common) gantry loop and the second axis runs the yaw (phase) loop, each using its own `GantryVelGain` value.
 
 ## How it works
 
-In gantry mode the yaw velocity error is the difference between the velocity command from the yaw position loop and the gantry differential velocity ([GantryVel](GantryVel.md)) rather than the single-axis velocity:
+In gantry mode the velocity error is the difference between the velocity command from the gantry position loop and the gantry velocity feedback ([GantryVel](GantryVel.md)) rather than the single-axis velocity. The feedback is the common (linear) velocity on the first axis of the pair and the differential (yaw/phase) velocity on the second axis:
 
 $$
 \text{VelErr} = \text{VelRef} - \text{GantryVel}
 $$
 
-`GantryVelGain` scales this yaw velocity error to produce the proportional term of the velocity PI controller:
+`GantryVelGain` scales this velocity error to produce the proportional term of the velocity PI controller:
 
 $$
 P = \text{VelErr} \cdot \text{GantryVelGain}
 $$
 
-This proportional term is summed with the integral term scaled by [GantryVelKi](GantryVelKi.md); the combined PI output is then passed through the velocity-loop filters and an internal scaling factor, and finally added to the feedforward terms to form the differential motor current command ([CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md)) applied to the two gantry motors. Raising `GantryVelGain` increases the current produced per unit of yaw velocity error.
+This proportional term is summed with the integral term scaled by [GantryVelKi](GantryVelKi.md); the combined PI output is then passed through the velocity-loop filters and an internal scaling factor, and finally added to the feedforward terms to form the gantry current command ([CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md)). The linear (common) and yaw (phase) current commands are then combined and split across the two gantry motors. Raising `GantryVelGain` increases the current produced per unit of velocity error.
 
-The value is dimensionless. The allowed range is 0 to 100000 with a default of 100 (on controllers where the gantry gains are a 6-element gain-scheduled array the upper range is extended; see the keyword attributes). A value of 0 disables the proportional action of the yaw velocity loop.
+The value is dimensionless. The allowed range is 0 to 100000 with a default of 100 (on controllers where the gantry gains are a 6-element gain-scheduled array the upper range is extended to 100000000; see the keyword attributes). A value of 0 disables the proportional action of the gantry velocity loop.
 
 ## Examples
 
 ```text
-AGantryVelGain=150  ; set yaw velocity proportional gain
-AGantryVelGain     ; read the current gain
+AGantryVelGain[1]=150  ; set gantry velocity proportional gain (first gain set)
+AGantryVelGain[1]      ; read the current gain
 ```
+
+On v4 the keyword is a single value (`AGantryVelGain=150`); on v5 it is a 6-element gain-scheduled array addressed `AGantryVelGain[1]`–`AGantryVelGain[5]`.
 
 ### Edge cases
 
 - **Gantry off** — writes accepted; the gain has no effect until [GantryOn](../01-general-variables/GantryOn.md) = 1.
-- **Zero gain** — disables proportional velocity action; the yaw loop becomes integral + feedforward only.
-- **Wrong axis** — consulted on the yaw axis of the pair; writes on the master or a non-gantry axis are accepted but not used.
+- **Zero gain** — disables proportional velocity action; the gantry velocity loop becomes integral + feedforward only.
+- **Per axis** — each axis of the gantry pair uses its own `GantryVelGain` (first axis = linear/common loop, second axis = yaw/phase loop). On a non-gantry axis the value is accepted but not used.
 - **Out of range** — values outside `0`–`100000` (v4) / `0`–`100000000` (v5 per-element) are rejected.
 - **Save** — flash-saveable.
 - **Platform** — v5 stores as a 6-element gain-scheduled `float32` array; v4 stores as a single `int32`. Same formula applies on both branches.

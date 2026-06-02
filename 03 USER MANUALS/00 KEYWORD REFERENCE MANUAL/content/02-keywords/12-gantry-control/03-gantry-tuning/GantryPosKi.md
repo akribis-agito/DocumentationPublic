@@ -34,15 +34,15 @@ Integral gain for the gantry yaw position loop.
 
 ## How it works
 
-When gantry mode is active the yaw position error is formed as the difference between the shaped/filtered position reference and the gantry (differential) feedback:
+When gantry mode is active each axis forms its position error against its gantry feedback ([GantryFdbk](../02-gantry-kinematic-feedback/GantryFdbk.md)) — the common-mode (linear) feedback on the master axis and the differential (yaw) feedback on the yaw axis:
 
 $$
 \text{PosErr} = \text{PosRef}_{\text{shaped}} - \text{GantryFdbk}
 $$
 
-`GantryPosKi` scales the integral (running sum) of this yaw position error. The proportional part ([GantryPosGain](GantryPosGain.md)) and this integral part together form the velocity command sent into the yaw velocity PI loop ([GantryVelGain](GantryVelGain.md) / [GantryVelKi](GantryVelKi.md)), whose output becomes the differential current applied to the two gantry motors. `GantryPosKi` belongs to the same gantry gain set as [GantryPosGain](GantryPosGain.md), [GantryVelGain](GantryVelGain.md), [GantryVelKi](GantryVelKi.md), [GantryAccFFW](GantryAccFFW.md) and [GantryVelFFW](GantryVelFFW.md); on controllers that support gantry gain scheduling all six switch together as a set.
+`GantryPosKi` scales the integral (running sum) of this position error. The proportional part ([GantryPosGain](GantryPosGain.md)) and this integral part together form the velocity command sent into the matching velocity PI loop ([GantryVelGain](GantryVelGain.md) / [GantryVelKi](GantryVelKi.md)), whose output becomes the current applied to that axis's motor. `GantryPosKi` belongs to the same gantry gain set as [GantryPosGain](GantryPosGain.md), [GantryVelGain](GantryVelGain.md), [GantryVelKi](GantryVelKi.md), [GantryAccFFW](GantryAccFFW.md) and [GantryVelFFW](GantryVelFFW.md); on controllers that support gantry gain scheduling all six switch together as a set.
 
-The value is dimensionless. A value of 0 disables the integral action of the yaw position loop. Refer to the keyword attributes for the range and default on a given controller.
+The value is dimensionless. A value of 0 disables the integral action of the gantry position loop. Refer to the keyword attributes for the range and default on a given controller.
 
 ## Examples
 
@@ -57,7 +57,7 @@ AGantryPosKi[1]     ; read the current value
 - **Gantry off** ([GantryOn](../01-general-variables/GantryOn.md) = 0) — writes accepted; the gain has no effect until gantry is engaged.
 - **Zero gain** — disables integral action; the yaw position loop runs as P + feedforward only.
 - **Wind-up at engagement** — the firmware halves the velocity-loop integral across the master/yaw split when gantry engages; a large `GantryPosKi` can wind up the integral quickly during early settling.
-- **Wrong axis** — consulted on the yaw axis of the pair; writes on the master or a non-gantry axis are accepted but not used.
+- **Per-axis** — each gantry member axis uses its own `GantryPosKi`: the master (common/linear) axis applies its value in the linear position loop and the yaw axis applies its value in the yaw position loop. The value is read per axis whenever that axis is in gantry mode. Writes on a non-gantry axis are accepted but not used. Note that the integral action is only active in builds whose position loop includes integral support; where it is not supported the range is `0`–`0` (see the keyword attributes).
 - **Gain set selection** — the active set is chosen by the gain-scheduling subsystem (see [ScheduleMode](../../11-control-tuning/01-general-keywords/ScheduleMode.md)); reads return the value of the active set's storage.
 - **Save** — flash-saveable.
 - **Platform** — v5 central-i only. There is no `GantryPosKi` on v4.
