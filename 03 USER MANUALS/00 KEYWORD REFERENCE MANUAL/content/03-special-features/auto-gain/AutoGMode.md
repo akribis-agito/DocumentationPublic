@@ -11,7 +11,9 @@ AutoGMode selects the operating mode of the automatic gain tuning algorithm. The
 | 2 | Compute the inertia ratio and gains but do not apply them; apply later with AutoGCopy (semi auto). |
 | 3 | Use the user-supplied inertia ratio from AutoGJratUs and apply the gains automatically (full auto). |
 | 4 | Use the user-supplied inertia ratio from AutoGJratUs but do not apply the gains; apply later with AutoGCopy (semi auto). |
-| 5 | Compute the estimated-to-user inertia-ratio gain, validate it, and use it in the control loop. |
+| 5 | Compute the estimated-to-user inertia-ratio gain (estimated total inertia divided by user-supplied total inertia, in percent) and validate it. |
+
+In modes 3, 4 and 5 the supplied AutoGJratUs is acted on only when it lies within the AutoGMinRat to AutoGMaxRat range; outside that range the gains are not computed and nothing is applied. When gains are applied (full-auto modes 1 and 3, or via AutoGCopy in semi-auto modes 2 and 4), only the parameters enabled in AutoGMask are written, and they are written into the control set selected by AutoGNumSet.
 
 **See also:**
 

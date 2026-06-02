@@ -2,7 +2,7 @@
 
 **Definition:**
 
-AutoGSavPer sets the time period in minutes (the value is entered and displayed in minutes) at which the auto-gain algorithm applies (updates) the newly calculated gains into the controller's active gain set, in the automatic modes. It is an axis-related parameter saved to flash and can be changed at any time.
+AutoGSavPer sets the recurrence interval, in minutes (the value is entered and displayed in minutes), of the auto-gain update cycle: while the algorithm is running it recomputes the gains and refreshes the AutoGStatus results no more often than once per this interval. In the full-auto modes (AutoGMode 1 and 3) the freshly computed gains are also written into the active control set at each update; in the semi-auto modes (AutoGMode 2 and 4) they are recomputed on this interval but applied only later with AutoGCopy. The default is 5 minutes. It is an axis-related parameter saved to flash and can be changed at any time.
 
 **See also:**
 
