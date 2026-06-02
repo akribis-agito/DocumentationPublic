@@ -49,7 +49,7 @@ The controller compares the measured motor temperature against the thresholds an
 
 ```text
 AScheduleTemp[1]=30; AScheduleTemp[2]=45; AScheduleTemp[3]=60; AScheduleTemp[4]=80
-AScheduleMode[1]=8            ; select temperature-band scheduling
+AScheduleMode=8            ; select temperature-band scheduling
 ```
 
 ## See also

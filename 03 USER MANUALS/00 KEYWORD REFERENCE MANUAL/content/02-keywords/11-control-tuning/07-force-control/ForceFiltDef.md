@@ -56,6 +56,8 @@ Within each 5-element block the layout is:
 
 Each filter is realised as a second-order (biquad) section. Force filter 1 and force filter 2 are applied in series to the force PID-plus-feedforward output to form the current reference, at the location enabled by [ForceFiltOn](ForceFiltOn.md). After writing `ForceFiltDef` (and the matching [ForceFiltOn](ForceFiltOn.md)), run [CalcFilters](../01-general-keywords/CalcFilters.md) so the coefficients are recomputed.
 
+Writing `ForceFiltDef` (or `ForceFiltOn`) only flags the definition as modified; the new coefficients take effect only when `CalcFilters` is next run. Until then the motor cannot be enabled — a `MotorOn` request is rejected with error `102` ("Can't enable motor if filters were modified and CalcFilters was not executed"). If the definition for an enabled filter is invalid — an unsupported type code, or a parameter outside its allowed range — `CalcFilters` fails and reports error `325` for force filter 1 or `326` for force filter 2 ("Out of range filter definitions, at Force filter number N"), and the motor stays blocked until a valid definition is computed.
+
 The full parameter-by-type definitions, transfer functions and units are in the appendix: [Customisable filter (FiltDef)](../../../06-appendix/customisable-filter-filtdef.md).
 
 ## Examples

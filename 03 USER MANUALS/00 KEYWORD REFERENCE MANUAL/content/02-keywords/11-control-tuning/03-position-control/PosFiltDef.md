@@ -35,7 +35,7 @@ Defines the type and parameters of each position-loop filter.
 
 ## Overview
 
-`PosFiltDef` holds the definition of the two position-loop filters that [PosFiltOn](PosFiltOn.md) enables. Each filter is described by up to 5 consecutive array elements (a type code plus up to four parameters), so the two filters together occupy the 6-element array:
+`PosFiltDef` holds the definition of the position-loop filters that [PosFiltOn](PosFiltOn.md) enables. Each filter is described by 5 consecutive array elements (a type code plus up to four parameters). On v4 a single filter is supported, so the array spans elements `[1]`–`[5]`; on central-i v5 two filters are supported and they occupy elements `[1]`–`[10]`:
 
 | Filter (N) | Description | Array elements |
 |---|---|---|

@@ -55,15 +55,18 @@ For a given filter, let `n` be the offset of its 6-bit field, where `n = (filter
 
 ### How the bits update
 
-- **Bit `n+0` (pending)** is set the moment a filter definition keyword for that filter is written to a value different from the one currently in use (`FiltDef` / `FiltOn` — see [CalcFilters](CalcFilters.md)). It is cleared when that filter is successfully recalculated. While any filter has bit `n+0` set, [StatReg](../../07-status-and-faults/StatReg.md) bit 26 ("filters modified") is also set.
+- **Bit `n+0` (pending)** is set the moment a filter definition keyword for that filter is written to a value different from the one currently in use (`FiltDef` / `FiltOn` — see [CalcFilters](CalcFilters.md)); writing the same value back leaves the bit clear. It is cleared when that filter is successfully recalculated. The related [StatReg](../../07-status-and-faults/StatReg.md) bit 26 ("filters modified") is a separate summary flag: it is set when filter definitions are loaded from flash and cleared by a successful [CalcFilters](CalcFilters.md); it is not driven bit-for-bit by these per-filter pending bits.
 - **Bits `n+1` to `n+5` (validity)** are refreshed only when [CalcFilters](CalcFilters.md) is commanded. They reflect the result of validating that filter's definition at the last calculation: the type-recognition check and the per-parameter range checks. If a filter passed validation, all five bits are clear; if it failed, the offending bit(s) are set and that filter's definition is rejected (the running filter is left unchanged — see [CalcFilters](CalcFilters.md)).
 
 To read one filter's field, mask the element with `0x3F` after shifting right by `n`. For example, the position error filter (filter 2 of the position group, `n = 6`) is `(FilterStatus[1] >> 6) & 0x3F`.
+
+`FilterStatus` is also writable, and the only accepted value is `0`. Writing `0` to an element discards the still-unapplied filter-definition edits for that whole group: the filter on/off and definition values are reverted to the ones the controller is currently running, and that element's status word (including its pending bits) is cleared. This is the way to abandon edits made since the last [CalcFilters](CalcFilters.md) without recalculating. Writing any non-zero value is rejected with an out-of-range error and changes nothing.
 
 ## Examples
 
 ```text
 AFilterStatus[2]                 ; read the velocity-filter status word
+AFilterStatus[2]=0               ; discard unapplied velocity-filter edits and clear the word
 ```
 
 A value of `0` in a filter's field means that filter is up to date and was last calculated without any issue. A field value of `1` (only bit `n+0` set) means the definition changed and a [CalcFilters](CalcFilters.md) is still needed.
@@ -84,4 +87,4 @@ So velocity filters 1 and 2 have new definitions waiting for a `CalcFilters`, wh
 ## See also
 
 - [CalcFilters](CalcFilters.md) — recalculates coefficients and refreshes the validity bits
-- [StatReg](../../07-status-and-faults/StatReg.md) — bit 26 (filters modified) summarises the pending state across all filters
+- [StatReg](../../07-status-and-faults/StatReg.md) — bit 26 (filters modified) is set when filter definitions are loaded from flash and cleared by a successful `CalcFilters`

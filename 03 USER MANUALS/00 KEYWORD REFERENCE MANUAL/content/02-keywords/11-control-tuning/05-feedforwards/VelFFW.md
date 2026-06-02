@@ -78,13 +78,13 @@ With the default value `0`, velocity feedforward is off.
 ## Examples
 
 ```text
-AVelFFW[1]=65536     ; set velocity feedforward gain (first array element)
+AVelFFW[1]=32768     ; set velocity feedforward gain (first array element)
 AVelFFW[1]           ; read back the gain
 ```
 
 ### Worked example: contribution at a constant slew
 
-With `VelFFW = 65536` (a unit-effective gain after the internal 1/2^16 scaling) and a reference velocity `dPosRef = 50000` (user velocity units), the velocity feedforward term contributed to the current reference is:
+With `VelFFW = 65536` (a unit-effective gain after the internal 1/2^16 scaling; valid in v5, where the range extends well above 65536) and a reference velocity `dPosRef = 50000` (user velocity units), the velocity feedforward term contributed to the current reference is:
 
 `VelTerm = 50000 x 65536 x (1 / 65536) = 50000` (current units)
 

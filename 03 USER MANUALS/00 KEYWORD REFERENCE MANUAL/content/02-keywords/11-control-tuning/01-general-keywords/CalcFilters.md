@@ -49,7 +49,7 @@ The keywords whose change requires a `CalcFilters` to take effect are:
 
 ### What marks a filter as needing recalculation
 
-Each time one of the definition keywords above is written, the new value is compared against the value that was in effect at the last successful calculation. If it differs, the corresponding filter is flagged as "pending recalculation" in [FilterStatus](FilterStatus.md) (bit `n+0` of that filter's field is set). Writing a value identical to the one already in use does not flag the filter. While any filter is flagged, [StatReg](../../07-status-and-faults/StatReg.md) bit 26 ("filters modified") is set.
+On central-i v5, each time one of the definition keywords above is written the new value is compared against the value that was in effect at the last successful calculation. If it differs, the corresponding filter is flagged as "pending recalculation" in [FilterStatus](FilterStatus.md) (bit `n+0` of that filter's field is set). Writing a value identical to the one already in use does not flag the filter. On older firmware that has no per-filter status word, any write to a definition keyword instead sets [StatReg](../../07-status-and-faults/StatReg.md) bit 26 ("filters modified") unconditionally — the value is not compared first.
 
 ### What CalcFilters does, per filter
 
@@ -63,9 +63,7 @@ After processing all of an axis's filters, the controller returns a single reply
 
 ### Status bits cleared
 
-When `CalcFilters` completes with no failure, both [StatReg](../../07-status-and-faults/StatReg.md) bit 26 ("filters modified") and bit 27 ("calc-filters failed") are cleared. If any filter failed validation, the "calc-filters failed" bit (27) is set instead.
-
-On firmware where the enable sequence checks these bits, the axis cannot be enabled while bit 26 or bit 27 is set — see [MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md). On firmware that allows on-the-fly recalculation (where `CalcFilters` is permitted in motion and with the motor on), these two bits no longer block enabling.
+On older firmware, [StatReg](../../07-status-and-faults/StatReg.md) bit 26 ("filters modified") and bit 27 ("calc-filters failed") track the calculation result: when `CalcFilters` completes with no failure both bits are cleared, and if any filter failed validation the "calc-filters failed" bit (27) is set instead. On that firmware the enable sequence checks these bits, so the axis cannot be enabled while bit 26 or bit 27 is set — see [MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md). On central-i v5 the per-filter result is reported through [FilterStatus](FilterStatus.md) rather than through these `StatReg` bits, `CalcFilters` is permitted in motion and with the motor on, and bits 26 and 27 no longer block enabling.
 
 ### Order of messages matters
 
@@ -81,7 +79,7 @@ The example below configures velocity filter 1 as a notch at 450 Hz, 6 dB depth,
 | `VelFiltDef[3]` | 0 | 6 | 0 |
 | `VelFiltDef[4]` | 0 | 4000 | 0 |
 | `VelFiltDef[5]` | 0 | 0 | 0 |
-| Result | Velocity filter 1 = low-pass at 200 Hz, on | Notch at 450 Hz, 6 dB, 40 Hz width, on. **Accepted.** | Notch definition incomplete (depth 0, width 0) — **rejected as an invalid notch.** The definition reverts to the last accepted state (the filter stays a low-pass). `VelFiltDef[3]` and `[4]` are then written, but having arrived after `CalcFilters` they were not part of this validation and are not applied until the next `CalcFilters`. |
+| Result | Velocity filter 1 = low-pass at 200 Hz, on | Notch at 450 Hz, 6 dB, 40 Hz width, on. **Accepted.** | Notch definition incomplete — the notch width is still 0, which is below its allowed minimum, so the filter is **rejected as out of range.** The definition reverts to the last accepted state (the filter stays a low-pass). `VelFiltDef[3]` and `[4]` are then written, but having arrived after `CalcFilters` they were not part of this validation and are not applied until the next `CalcFilters`. |
 
 - Good order: `VelFiltDef[1]=8; VelFiltDef[2]=45000; VelFiltDef[3]=6; VelFiltDef[4]=4000; CalcFilters`
 - Bad order: `VelFiltDef[1]=8; VelFiltDef[2]=45000; CalcFilters; VelFiltDef[3]=6; VelFiltDef[4]=4000`

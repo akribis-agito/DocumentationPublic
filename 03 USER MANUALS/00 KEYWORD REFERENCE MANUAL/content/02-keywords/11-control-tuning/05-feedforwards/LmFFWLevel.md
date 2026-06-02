@@ -46,7 +46,7 @@ Percentage level applied to the inductive (L di/dt) voltage feedforward contribu
 
 For three-phase motors the controller uses the per-phase inductance: if the stored [Lm](../../../02-keywords/09-current-and-voltage/04-motor-measurement/Lm.md) is a line-to-line value it is halved internally to the phase value before the term is computed. The speed-dependent d-q cross-coupling term that also appears in [VqFFW](VqFFW.md) and [VdFFW](VdFFW.md) is derived from the motor inductance [Lm](../../../02-keywords/09-current-and-voltage/04-motor-measurement/Lm.md), the bus voltage and the electrical cycle together with motor speed; it is **not** scaled by `LmFFWLevel`. That cross-coupling term is present whenever voltage feedforward is enabled and the motor is moving, regardless of the `LmFFWLevel` setting.
 
-The valid range is 0 to 200 (%) and the default is 0. `LmFFWLevel` is a flash-backed parameter and may be set with the motor on or in motion; the change takes effect on the next control cycle. With either `LmFFWLevel` or [Lm](../../../02-keywords/09-current-and-voltage/04-motor-measurement/Lm.md) at its minimum, the inductive term is zero.
+The valid range is 0 to 200 (%) and the default is 0. `LmFFWLevel` is a flash-backed parameter and may be set with the motor on or in motion; the change takes effect on the next control cycle. With `LmFFWLevel` at 0 the inductive term is zero. [Lm](../../../02-keywords/09-current-and-voltage/04-motor-measurement/Lm.md) cannot be set below its minimum of 1 (in µH), so the inductive term is disabled by setting `LmFFWLevel` to 0, not by reducing [Lm](../../../02-keywords/09-current-and-voltage/04-motor-measurement/Lm.md).
 
 ## Examples
 

@@ -48,13 +48,13 @@ In the interpolated velocity/position modes (`ScheduleMode = 9` or `10`), a valu
 ## Examples
 
 ```text
-AScheduleMode[1]=1; AScheduleSet=3      ; manual mode, then select gain set 3
+AScheduleMode=1; AScheduleSet=3      ; manual mode, then select gain set 3
 AScheduleSet                            ; read the active gain-set number
 ```
 
 ### Worked example: detecting an interpolated-mode configuration error
 
-With `ScheduleMode = 9` (velocity, interpolated) but `ScheduleVel = [10000, 50000, 50000, 200000, ...]` (the third threshold not greater than the second), the controller cannot interpolate cleanly. Reading `ScheduleSet` returns `-1` and the loops fall back to gain set 1. Restoring strictly increasing thresholds clears the error on the next scheduling cycle.
+With `ScheduleMode = 9` (velocity, interpolated) but `ScheduleVel = [10000, 50000, 50000, 200000, ...]` (the third threshold not greater than the second), the controller cannot interpolate cleanly. Reading `ScheduleSet` returns `-1` and the loops fall back to gain set 1. The thresholds are re-validated whenever `ScheduleVel`, `SchedulePos` or `ScheduleMode` is written, so writing strictly increasing thresholds clears the error.
 
 ## See also
 

@@ -38,7 +38,9 @@ Enables or disables input shaping on the axis.
 | 0 | Input shaping disabled (default). |
 | 1 | Input shaping enabled — the reference is shaped by the impulse sequence built from [ShapingFreq](ShapingFreq.md) and [ShapingDamp](ShapingDamp.md). |
 
-`ShapingOn` is saved to flash and cannot be changed while the axis is in motion or the motor is on. Input shaping is applied only in position or velocity operation mode (not in current or force mode), and it cannot be combined with modulo (continuous-rotation) mode on the main encoder.
+`ShapingOn` is saved to flash and cannot be changed while the axis is in motion or the motor is on. Input shaping is applied only in position or velocity operation mode (not in current or force mode), and it cannot be combined with modulo (continuous-rotation) mode on the main encoder. If shaping is enabled while modulo mode is active on the main encoder, an attempt to turn the motor on is refused, and if the combination becomes active with the motor on, the axis is faulted off with fault code 1032.
+
+While input shaping is enabled and the motor is on, assigning a value to the axis position is rejected with error 85, because the shaper's history buffers cannot be reconciled with a sudden position change. Disable shaping (or turn the motor off) before assigning the position.
 
 ## How it works
 

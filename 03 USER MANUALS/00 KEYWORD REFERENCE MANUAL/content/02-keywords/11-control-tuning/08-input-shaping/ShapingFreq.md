@@ -49,7 +49,7 @@ $$
 | Range | 0 to 32768000 (0 to 500 Hz) |
 | Default | 0 (shaper inactive) |
 
-The lowest usable frequency depends on the length of the shaper's history buffer, which differs by product. If a configured frequency is out of range, the shaper is disabled for the axis.
+The lowest usable frequency depends on the length of the shaper's history buffer, which differs by product. If a non-zero configured frequency is below the minimum or above the maximum, the shaper is disabled for the axis and a warning is logged to the [ErrLog](../../07-status-and-faults/ErrLog.md).
 
 ## How it works
 
@@ -63,7 +63,7 @@ $$
 K = e^{\,-\zeta \pi / \sqrt{1 - \zeta^{2}}}
 $$
 
-where ζ is the damping ratio from [ShapingDamp](ShapingDamp.md). The amplitudes sum to 1. With two frequencies defined, the two three-impulse sequences are convolved into a nine-impulse sequence; the history buffer must be long enough to hold the combined span, otherwise the shaper is disabled.
+where ζ is the damping ratio from [ShapingDamp](ShapingDamp.md). The amplitudes sum to 1. With two frequencies defined, the two three-impulse sequences are convolved into a nine-impulse sequence; the history buffer must be long enough to hold the combined span, otherwise the shaper is disabled and a warning is logged to the [ErrLog](../../07-status-and-faults/ErrLog.md).
 
 ## Examples
 

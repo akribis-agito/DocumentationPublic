@@ -49,6 +49,8 @@ In standard force control the force PID output, summed with the feedforward term
 
 Each filter is realised as a second-order (biquad) section whose type and parameters are defined by [ForceFiltDef](ForceFiltDef.md). After changing `ForceFiltOn` (or `ForceFiltDef`), run [CalcFilters](../01-general-keywords/CalcFilters.md) so the coefficients are recomputed.
 
+Changing `ForceFiltOn` only flags the filters as modified; the change takes effect only when `CalcFilters` is next run. Until then the motor cannot be enabled — a `MotorOn` request is rejected with error `102` ("Can't enable motor if filters were modified and CalcFilters was not executed"). If you enable a filter whose [ForceFiltDef](ForceFiltDef.md) definition is invalid (unsupported type code or a parameter outside its allowed range), `CalcFilters` fails and reports error `325` for force filter 1 or `326` for force filter 2, leaving the motor blocked until a valid definition is computed.
+
 ## Examples
 
 ```text

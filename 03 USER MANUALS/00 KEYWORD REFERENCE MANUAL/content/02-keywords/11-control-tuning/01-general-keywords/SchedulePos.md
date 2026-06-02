@@ -59,7 +59,7 @@ When the axis is under gantry-paired scheduling, the gantry feedback position is
 
 ```text
 ASchedulePos[1]=100000; ASchedulePos[2]=200000; ASchedulePos[3]=300000; ASchedulePos[4]=400000
-AScheduleMode[1]=5            ; select position-band scheduling
+AScheduleMode=5            ; select position-band scheduling
 ```
 
 ## See also

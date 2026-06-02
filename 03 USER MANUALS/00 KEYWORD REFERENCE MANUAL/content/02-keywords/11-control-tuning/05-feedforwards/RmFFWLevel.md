@@ -46,7 +46,7 @@ The resistive term contributes to both the quadrature- and direct-axis feedforwa
 
 For three-phase motors the controller uses the per-phase resistance: if the stored [Rm](../../../02-keywords/09-current-and-voltage/04-motor-measurement/Rm.md) is a line-to-line value it is halved internally to the phase value before the term is computed.
 
-The valid range is 0 to 200 (%) and the default is 0. `RmFFWLevel` is a flash-backed parameter and may be set with the motor on or in motion; the change takes effect on the next control cycle. With either `RmFFWLevel` or [Rm](../../../02-keywords/09-current-and-voltage/04-motor-measurement/Rm.md) at its minimum, the resistive term is zero.
+The valid range is 0 to 200 (%) and the default is 0. `RmFFWLevel` is a flash-backed parameter and may be set with the motor on or in motion; the change takes effect on the next control cycle. The resistive term is zero only when `RmFFWLevel` is 0 (its minimum and default). The measured [Rm](../../../02-keywords/09-current-and-voltage/04-motor-measurement/Rm.md) has a non-zero minimum, so reducing `RmFFWLevel` to 0 is the way to remove the resistive contribution.
 
 ## Examples
 

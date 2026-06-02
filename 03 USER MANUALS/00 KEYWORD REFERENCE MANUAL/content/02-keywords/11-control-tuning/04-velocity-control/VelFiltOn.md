@@ -47,7 +47,7 @@ Enables or bypasses the velocity-loop filters that act on the velocity-PI output
 
 The velocity-PI output is passed through the enabled filters in order, each realised as a second-order (biquad) section from its [VelFiltDef](VelFiltDef.md) parameters. A disabled stage passes its input straight through to the next stage. The output of the final stage (plus the acceleration/velocity feed-forwards in position mode) forms the loop-side current reference (reported as [CurrRefCtrl](../../09-current-and-voltage/02-motor-variables/CurrRefCtrl.md) on central-i v5); after current compensation and injection this becomes the final command [CurrRef](../../09-current-and-voltage/02-motor-variables/CurrRef.md).
 
-After changing `VelFiltOn` or [VelFiltDef](VelFiltDef.md), run [CalcFilters](../01-general-keywords/CalcFilters.md) so the controller recomputes the internal filter coefficients.
+Changing `VelFiltOn` does not by itself recompute the filters; it only flags that the coefficients are out of date. After changing `VelFiltOn` or [VelFiltDef](VelFiltDef.md), run [CalcFilters](../01-general-keywords/CalcFilters.md) so the controller recomputes the internal filter coefficients. In **v4**, until `CalcFilters` has been run the affected axis cannot be enabled — a motor-on attempt is rejected (error code `102`, "Can't enable motor if filters were modified and CalcFilters was not executed"); if the recomputation itself fails, motor-on is rejected with error code `87`. In **v5 (central-i)** the coefficients can be recomputed on the fly and motor-on is not gated on this.
 
 ## Examples
 
