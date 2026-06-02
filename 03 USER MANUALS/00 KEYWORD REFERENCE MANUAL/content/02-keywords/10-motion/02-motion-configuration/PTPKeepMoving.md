@@ -65,10 +65,12 @@ AAbsTrgt=140000      ; profiler retargets to the new value, no stop, no re-Begin
 
 Without `PTPKeepMoving = 1` the second `AAbsTrgt` would simply be parked for the next move — the running move would still target the original 100000. With it set, the profiler reads the updated `AbsTrgt` each cycle and ramps the axis to the new destination, blending the trajectory.
 
+For incremental retargets, writing [RelTrgt](../13-motion-mode-ptp/RelTrgt.md) while the axis is in motion **and** `PTPKeepMoving = 1` automatically adds the written `RelTrgt` to the current `AbsTrgt` (so the blend shifts by that increment). The update is applied atomically, so it stays correct even if a `ModRev` wrap occurs at the same moment — this is the intended way to do incremental on-the-fly retargets while `ModRev` is active. Outside of in-motion blending, writing `AbsTrgt` clears `RelTrgt` to `0`.
+
 ### Edge cases
 
 - **Motor off:** the parameter is held; it is read on the next `Begin`.
-- **Out-of-range write:** the parameter system clamps writes to `0` or `1`; other values are rejected.
+- **Out-of-range write:** the parameter system rejects values outside `0`–`1`.
 - **Simulation mode (`MotorType` = 5):** behaviour is identical (the profiler runs in simulation).
 - **ModRev wrap:** blends work through a wrap because the wrap shifts both `AbsTrgt` and the reference state by `ModRev` together; the blend ramps toward the post-wrap target.
 - **Active fault:** the axis is disabled and the in-motion bits are cleared regardless of `PTPKeepMoving`.
@@ -80,5 +82,5 @@ Without `PTPKeepMoving = 1` the second `AAbsTrgt` would simply be parked for the
 - [Begin](../04-motion-command/Begin.md) — starts (or retargets) the move
 - [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) — absolute target position
 - [RelTrgt](../13-motion-mode-ptp/RelTrgt.md) — relative target position
-- [MotionMode](MotionMode.md) — applies only to point-to-point (mode 1)
+- [MotionMode](MotionMode.md) — applies to point-to-point (mode 1) and repetitive PTP (mode 2)
 - [MotionStat](../05-motion-status/MotionStat.md) — the in-motion bits that `PTPKeepMoving` keeps set

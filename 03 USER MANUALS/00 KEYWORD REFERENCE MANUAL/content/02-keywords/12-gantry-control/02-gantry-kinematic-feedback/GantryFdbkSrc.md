@@ -30,7 +30,7 @@ Selects the feedback source used for the common (linear) gantry position in dual
 
 ## Overview
 
-`GantryFdbkSrc` is a pointer that selects which feedback variable supplies the common (linear) gantry position when **dual-loop gantry control** is active ([GantryDLoopOn](../01-general-variables/GantryDLoopOn.md) = 1). The value written is the numeric code of the source variable (the same numbering used by other source-pointer keywords); the default `0` leaves no external source selected. It is axis-scoped, saved to flash, and can be set only with the motor off and not in motion.
+`GantryFdbkSrc` is a pointer that selects which feedback variable supplies the common (linear) gantry position when **dual-loop gantry control** is active ([GantryDLoopOn](../01-general-variables/GantryDLoopOn.md) = 1). The value written is the numeric code of the source variable (the same numbering used by other source-pointer keywords such as a gear master or virtual encoder); the default `0` leaves no external source selected. The referenced variable must be a 64-bit parameter; the write is validated and rejected if the code is out of range (error `77`), names an invalid axis (error `78`), uses a bad array index (error `79`), points at a function rather than a parameter (error `80`), or references a non-64-bit parameter (error `305`). It is axis-scoped, saved to flash, and can be set only with the motor off and not in motion.
 
 In ordinary (single-loop) gantry control the position loop is driven from the two main encoders combined into a common-mode feedback (see [GantryFdbk](GantryFdbk.md)). In **dual-loop** gantry control the controller instead closes the linear position loop on the feedback that `GantryFdbkSrc` points to — typically a direct load-side measurement at the moving stage — while still using the two motor encoders for the inner velocity loop and for the yaw (differential) loop. The source selected here is conventionally referred to as the load feedback for the gantry; the two main motor encoders then become the auxiliary feedback reported by [GantryAuxFdbk](GantryAuxFdbk.md), whose derivative is [GantryAuxVel](GantryAuxVel.md). See the [dual-loop gantry control overview](../04-dual-loop-gantry-control/00-overview.md) for how each feedback and velocity term is sourced in the three modes.
 
@@ -47,10 +47,10 @@ AGantryFdbkSrc       ; read the configured source code
 
 ### Edge cases
 
-- **Motor on / in motion at write** — rejected (`NOMOTN`, `NOMTRON`).
+- **Motor on / in motion at write** — rejected (error `22` with motor on, error `21` in motion).
 - **Single-loop mode** ([GantryDLoopOn](../01-general-variables/GantryDLoopOn.md) = 0) — `GantryFdbkSrc` is **not consulted**; the linear loop closes on the motor-encoder common-mode and the source pointer sits unused.
 - **Source = 0 (default)** — no load source is bound; if dual-loop is enabled the load-feedback pointer reads zero and the linear loop has no meaningful feedback. Configure a valid source before enabling gantry.
-- **Invalid CAN code** — the pointer resolution falls back to a safe zero pointer; the linear loop reads `0` and behaves as if standing.
+- **Invalid source code** — the write is rejected with a specific error (out-of-range code `77`, invalid axis `78`, bad array index `79`, function instead of parameter `80`, or non-64-bit reference `305`) and the previously stored source is kept.
 - **Set on wrong axis** — consulted on the master axis only; writes elsewhere are stored but ignored.
 - **Engagement offset** — at gantry engagement the controller computes an offset between the load source and the current [PosRef](../../10-motion/01-kinematics-status/PosRef.md) so the reported linear position does not jump.
 - **Save** — flash-saveable; the pointer is re-resolved at boot.

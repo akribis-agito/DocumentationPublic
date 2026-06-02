@@ -40,7 +40,7 @@ The boundary condition matters only for the parabolic and cubic fits ([BuffSplin
 
 | Value | Meaning |
 |---|---|
-| 0 | Specified-slope edge. The velocity at the start (and end) is forced to the slope supplied in [BuffSlopes](BuffSlopes.md). Use this to enter and leave the trajectory at a defined speed (for example to blend into another move). |
+| 0 | Specified-slope edge. The edge velocity is forced to the slope supplied in [BuffSlopes](BuffSlopes.md): for a parabolic fit this sets the initial velocity at the first waypoint, while for a cubic fit it constrains both the entry and exit derivatives (a clamped boundary). Use this to enter (and, for a cubic, leave) the trajectory at a defined speed (for example to blend into another move). |
 | 1 | Natural edge (default). The free edge derivative is set to zero — for a cubic fit the second derivative (curvature) is zero at both ends, and for a parabolic fit the initial slope is zero — giving a relaxed, low-stress start and finish. [BuffSlopes](BuffSlopes.md) is not used. |
 | 2 | Multi-cycle (continuous repeat). The controller treats the trajectory as one period of a repeating motion: it virtually extends the data by one cycle before and one cycle after, fits the spline across the extension, and keeps only the middle cycle's coefficients. The result is that the edge derivatives match what they would be in the *middle* of a continuous repetition, so consecutive cycles ([BuffCycles](BuffCycles.md) > 1) join without a velocity or curvature step. |
 

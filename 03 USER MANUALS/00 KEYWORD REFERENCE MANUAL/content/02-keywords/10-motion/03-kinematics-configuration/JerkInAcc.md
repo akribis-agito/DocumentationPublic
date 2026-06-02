@@ -87,8 +87,8 @@ The third-order profiler is bypassed for limit-switch, software-limit and contro
 - **Simulation mode (`MotorType` = 5):** unchanged.
 - **ModRev wrap:** the third-order profiler tracks the wrap through its internal state; the jerk constraint is unaffected.
 - **Active fault:** the axis is disabled; on re-enable and next `Begin`, `JerkInAcc` is re-read.
-- **Other motion modes:** consumed only by the structured jerk profiler under PTP / repetitive PTP with [JerkMode](../02-motion-configuration/JerkMode.md) = 1. Jog (`MotionMode = 0`), the indirect modes, and any direct mode all ignore it.
-- **Live change in motion:** allowed, but takes effect at the start of the next profiler segment, not mid-segment, because the segment time is computed up front.
+- **Other motion modes:** consumed by the structured jerk profiler in the profiled point-to-point family — PTP (`MotionMode = 1`), repetitive PTP (`MotionMode = 2`) and the joystick-position direct/indirect modes (`MotionMode = 12 / 13`) — when [JerkMode](../02-motion-configuration/JerkMode.md) = 1. Jog (`MotionMode = 0`), the velocity/joystick-velocity modes and the position-direct (`P`/`D`) modes that drive position commands without the profiler all ignore it.
+- **Live change in motion:** allowed and applied immediately — when the profiler detects a changed `JerkInAcc` (or `Speed`/`Accel`/`Decel`) it re-plans from the current state that same cycle. In **v4** this on-the-fly re-plan happens only while the axis is still accelerating or cruising; once the axis has entered the deceleration phase the change is ignored for the rest of the move. In **v5** the re-plan is applied at any time, including during deceleration.
 
 ## Examples
 

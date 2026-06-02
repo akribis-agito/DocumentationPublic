@@ -50,10 +50,11 @@ The reading and scaling are done once per axis every controller cycle. Each cycl
 
 1. Reads the signed pulse count decoded for this cycle.
 2. Scales it by the factor `PDFact / PDFactDen`, carrying the fractional remainder from the previous cycle so fractional pulses are never lost over time.
-3. Applies the direction sign so `PDEncDir = 0` adds and `PDEncDir = 1` subtracts.
-4. Accumulates the result into `PDPos`.
+3. Accumulates the result into `PDPos`.
 
-Because the fractional remainder is carried forward, a fractional `PDFact/PDFactDen` ratio does not drift, and accumulating every cycle guarantees no pulses are dropped between reads. [PDVel](PDVel.md) is derived from the same per-cycle scaled change.
+Because the fractional remainder is carried forward, a fractional `PDFact/PDFactDen` ratio does not drift, and accumulating every cycle guarantees no pulses are dropped between reads. [PDVel](PDVel.md) is derived from the same per-cycle scaled change (before any [PDEncDir](PDEncDir.md) sign is applied).
+
+The overall direction of accumulation is set by the **sign of `PDFact`** (which may be negative). On newer firmware a separate [PDEncDir](PDEncDir.md) bit can also flip the sign (`PDEncDir = 0` adds, `PDEncDir = 1` subtracts); on older firmware `PDEncDir` has no effect and the sign is governed by `PDFact` alone.
 
 ### Hardware behavior
 
@@ -69,10 +70,6 @@ The decoding hardware keeps a running step counter that is latched and reset to 
 ### Modulo
 
 If [ModRev](../../03-encoder/04-modulo-mode/ModRev.md) ≠ 0, when the feedback wraps the controller shifts `PDPos` by one `ModRev` interval together with the rest of the reference frame, so the P/D following error is preserved across the wrap.
-
-### Auxiliary-encoder reuse
-
-When the P/D inputs are repurposed as an auxiliary encoder, the controller copies `PDPos`/`PDVel` into the auxiliary feedback ([AuxPos](../01-kinematics-status/AuxPos.md)/`AuxVel`) instead of using them for P/D motion.
 
 ### Reading in user units
 
@@ -93,7 +90,7 @@ A typical bring-up of a P/D follower (axis A, motor off, no motion in progress).
 APDSubType=0         ; 0 = pulse + direction, 1 = A-quad-B
 APDFact=1            ; numerator   of the pulses-in / counts-out ratio
 APDFactDen=1         ; denominator of the same ratio
-APDEncDir=0          ; sign of the accumulation (0 add, 1 subtract)
+APDEncDir=0          ; extra sign of the accumulation on newer firmware (0 add, 1 subtract); on older firmware use a negative PDFact to reverse direction
 APDPosFilt=12800     ; low-pass cut-off (Hz x 100), default 128 Hz; direct mode only
 
 ; --- 2) Optionally clear the counter so it starts at zero ---

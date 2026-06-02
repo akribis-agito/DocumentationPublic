@@ -45,7 +45,7 @@ Two-element array holding the unit's hardware version and production serial numb
 
 ## How it works
 
-`ProductSN` is held in flash. On power-up, after the controller loads its keywords from flash, it copies `ProductSN[1]` and `ProductSN[2]` into the [Identity](Identity.md) array — into `Identity[3]` (hardware version) and `Identity[2]` (serial number) respectively — where host software reads them to display the unit's serial number. The same copy is repeated whenever `ProductSN` is written, so `Identity` always tracks the stored value.
+`ProductSN` is held in flash. On power-up, after the controller loads its keywords from flash, it copies `ProductSN[1]` and `ProductSN[2]` into the [Identity](Identity.md) array — into `Identity[3]` (hardware version) and `Identity[2]` (serial number) respectively — where host software reads them to display the unit's serial number. This copy is performed only during that start-up load; writing `ProductSN` at run time does not update `Identity`, so a freshly written serial number is not reflected in `Identity` until the next power-up or [Reset](../02-operation/Reset.md).
 
 ## Writing the serial number (elevated permission)
 

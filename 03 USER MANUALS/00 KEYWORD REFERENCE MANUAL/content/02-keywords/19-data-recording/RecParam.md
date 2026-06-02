@@ -9,11 +9,11 @@ Array of complex CAN codes selecting the parameters to record.
 
 > **Note:** `RecParam` does not appear as a controller keyword in the firmware consulted for this reference — only the per-scope [RecParamA/RecParamB](RecParamA-RecParamB.md) variants are available on the controller. This page is retained for the legacy/single-buffer name; confirm availability against the current firmware before relying on `RecParam` directly.
 
-`RecParam` is an array that holds the [complex CAN codes](../../01-keyword-usage-and-syntax/complex-can-code.md) of the parameters (channels) to record. It can hold up to 20 parameters. Recording walks the array in order and captures every entry up to (but not including) the first zero, so a zero entry terminates the list. For per-scope selection on products with separate scope buffers, see [RecParamA/RecParamB](RecParamA-RecParamB.md).
+`RecParam` is an array that holds the [complex CAN codes](../../01-keyword-usage-and-syntax/complex-can-code.md) of the parameters (channels) to record. It can hold up to 20 parameters. Recording walks the array in order, starting at index 1, and captures the non-zero entries. On newer firmware the scan stops at the first zero entry, so a zero terminates the list; on older firmware a zero entry in the middle is skipped rather than treated as a terminator, and later non-zero entries are still recorded. To select exactly one channel on either firmware, place its complex CAN code in index 1 and leave the remaining entries at 0. For per-scope selection on products with separate scope buffers, see [RecParamA/RecParamB](RecParamA-RecParamB.md).
 
 ## How it works
 
-At [RecStart](RecStart.md) the controller scans `RecParam` from index 1 and resolves each non-zero complex CAN code into a recordable channel. The scan stops at the first zero, so to record a single parameter you enter its complex CAN code in `RecParam[1]` and `0` in `RecParam[2]`; later entries are then ignored. The number of channels found multiplied by [RecLength](RecLength.md) must fit the scope buffer, otherwise the start is rejected.
+At [RecStart](RecStart.md) the controller scans `RecParam` from index 1 and resolves each non-zero complex CAN code into a recordable channel. On newer firmware the scan stops at the first zero entry; on older firmware it skips zero entries and continues through all 20 indices. Either way, leaving index 1 set and all later indices at 0 records exactly that one parameter. The number of channels found multiplied by [RecLength](RecLength.md) must fit the scope buffer, otherwise the start is rejected.
 
 Each resolved channel is validated when recording starts. A code is rejected if it is not a real keyword, if it names a command (functions cannot be recorded), if its axis letter is out of range, or if an array index is missing or out of bounds for that keyword. The order set here is the order in which samples are laid out in the buffer and returned by [RecUpload](RecUpload.md).
 
@@ -21,7 +21,7 @@ Each resolved channel is validated when recording starts. A code is rejected if 
 
 ```text
 ARecParam[1]=1026    ; record this parameter
-ARecParam[2]=0       ; terminate the list (only RecParam[1] is recorded)
+ARecParam[2]=0       ; leave remaining entries at 0 (only RecParam[1] is recorded)
 ARecParam[1]        ; query the first recorded parameter code
 ```
 

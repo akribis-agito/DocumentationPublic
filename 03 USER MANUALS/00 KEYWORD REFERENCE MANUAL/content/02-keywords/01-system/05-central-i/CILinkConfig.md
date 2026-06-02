@@ -47,7 +47,7 @@ Each communication cycle has a fixed period. Within it, the master must open its
 | [5] | Offline receive-start | When the master opens its window to receive the offline reply |
 | [6] | Offline receive-end | When the master closes the offline receive window |
 
-An element left at `0` is replaced at connect time by the firmware's built-in default for that timing, so a port can be brought up with `CILinkConfig` all zeros and still use sensible defaults. The values must be ordered consistently within the cycle (send before receive-start, receive-start before receive-end); incorrect timing shows up as synchronous or offline errors in [CIStatus](CIStatus.md).
+Any element left at `0` is replaced at power-up by the firmware's built-in default for that timing: during parameter initialisation the firmware overwrites each zero element with its default and stores that value back into the array, so a port loaded with `CILinkConfig` all zeros comes up with sensible defaults and a subsequent read returns the default rather than `0`. (A value you write to `0` after power-up is not re-defaulted until the next power-up, and would be applied as `0`.) The values must be ordered consistently within the cycle (send before receive-start, receive-start before receive-end); incorrect timing shows up as synchronous or offline errors in [CIStatus](CIStatus.md).
 
 The channel bit-rate itself is set by the firmware to its default at connect (it is not one of these elements); these elements tune *when* in the cycle each transfer happens, which depends on cable length and the remote device.
 

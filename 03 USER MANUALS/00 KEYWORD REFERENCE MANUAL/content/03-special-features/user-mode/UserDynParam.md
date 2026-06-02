@@ -2,7 +2,7 @@
 
 **Definition:**
 
-UserDynParam is an array that holds dynamically configurable parameter identifiers used by special user-defined processing modes. Each element maps to a parameter that the user mode algorithm reads or writes at runtime. It cannot be changed while the axis is in motion or with the motor on. It is a non-axis array parameter and is not saved to flash.
+UserDynParam is a general-purpose data array used by special user-defined processing modes. Each element holds a value that the active user-mode algorithm reads or writes at runtime (for example, captured positions or sensor data). The array provides 50 elements, indexed [1] through [50]. It cannot be changed while the axis is in motion or with the motor on. It is a non-axis array parameter and is not saved to flash.
 
 **See also:**
 

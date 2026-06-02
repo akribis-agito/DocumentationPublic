@@ -85,7 +85,7 @@ $$
 ### Edge cases
 
 - **Motor off:** value is held; profiler does not run.
-- **Out-of-range write:** the parameter system clamps to `100`–`1,000,000,000`; values outside are rejected.
+- **Out-of-range write:** a value outside `100`–`1,000,000,000` is rejected with an out-of-range error and the stored value is left unchanged (it is not clamped).
 - **Simulation mode (`MotorType` = 5):** unchanged.
 - **ModRev wrap:** the third-order profiler tracks the wrap through its internal state; the jerk constraint is unaffected.
 - **Active fault:** the axis is disabled; on re-enable and next `Begin`, `JerkInDec` is re-read.

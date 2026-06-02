@@ -17,11 +17,11 @@ Opening a segment with `CNCAPushType` records the total number of parameters tha
 
 - It is rejected with an error if no segment is currently open — that is, if the queue is empty or the previous segment is already closed. A `CNCAPushType` must come first.
 - The value is stored in the queue and the count of still-needed parameters is decremented by one.
-- When the count reaches zero the segment is **closed**: its parameters are validated as a set (for example, an arc's start and end radius derived from the centre must agree, and a continuous-motion segment must follow on from the previous segment's end speed). A validation failure rejects the segment.
+- When the count reaches zero the segment is **closed**: its parameters are validated as a set (for example, path and end speed must be within the allowed speed range, the segment must be long enough, and an arc's or helix's start and end radius derived from the centre must agree to within the allowed accuracy). A validation failure rejects the segment. (Path continuity against the previous segment's end speed is instead checked earlier, when the next segment is opened with `CNCAPushType`.)
 
 Parameters must be pushed in the exact order listed for the segment type. Until a segment is closed it is not eligible for playback, so a half-pushed segment at the tail of the queue does not protect against an [underrun](CNCAPushType-CNCBPushType.md) — the motion engine treats "last segment still being filled" the same as "no segment ready".
 
-The number of free queue slots is reported by [CNCAStatus/CNCBStatus](CNCAStatus-CNCBStatus.md). Each push consumes one slot; a push is rejected if the queue is full.
+The number of free queue slots is reported by [CNCAStatus/CNCBStatus](CNCAStatus-CNCBStatus.md). Space for the whole segment is reserved when the segment is opened with `CNCAPushType`, which is also where a too-full queue is rejected; the individual `CNCAPushParam` writes do not perform a separate space check, and the only error a `CNCAPushParam` write can return is "no open segment".
 
 ## Examples
 

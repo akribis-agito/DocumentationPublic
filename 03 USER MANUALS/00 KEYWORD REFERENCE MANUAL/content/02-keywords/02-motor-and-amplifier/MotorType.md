@@ -61,7 +61,7 @@ Changing `MotorType` while it is a brushless type re-arms commutation — the co
 | 8 Stepper in closed loop (brushless) | brushless | Reserved option for internal use (not supported). |
 
 > [!note]
-> When [AmpType](AmpType.md) selects an **external amplifier** that closes its own current loop (any mode except the built-in PWM amplifier or the linear-adapter), the controller marks the motor as "driven externally" and skips its internal current loop regardless of `MotorType` — the controller then only outputs the command (analog current, analog velocity, or pulse-direction) and lets the external amplifier handle commutation and current control.
+> When [AmpType](AmpType.md) selects an **external amplifier** that closes its own current loop (on v4, any mode except the built-in PWM amplifier or the linear-adapter; on v5 the digital-SPI mode also keeps the internal loop), the controller marks the motor as "driven externally" and skips its internal current loop regardless of `MotorType` — the controller then only outputs the command (analog current, analog velocity, or pulse-direction) and lets the external amplifier handle commutation and current control.
 
 ### Commutation (brushless types 3, 4)
 

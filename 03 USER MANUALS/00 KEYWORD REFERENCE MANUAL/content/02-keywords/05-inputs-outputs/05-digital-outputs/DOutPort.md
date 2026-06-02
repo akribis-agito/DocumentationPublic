@@ -38,7 +38,7 @@ Bit-packed manual state of the digital outputs (before DOutLog inversion).
 
 `DOutPort` holds the manual state of the digital outputs as a bitfield (0-based bit positions: bit 0 = output 1). Each bit: `1` = on, `0` = off. It is the value *before* any [DOutLog](DOutLog.md) inversion.
 
-`DOutPort` is writable only when the output is under manual control — that is, [DOutSelect](DOutSelect.md)`[x] = 0` **and** [DOutMode](DOutMode.md)`[x] = 0`. It is not saved to flash, so manual states must be re-applied after power-up.
+A write to `DOutPort` is always accepted, but it only *persists* on bits that are under manual control — that is, where [DOutSelect](DOutSelect.md)`[x] = 0` **and** [DOutMode](DOutMode.md)`[x] = 0`. Bits owned by a function are re-driven each cycle, so a manual write to them is overwritten almost immediately. `DOutPort` is not saved to flash, so manual states must be re-applied after power-up.
 
 ## How it works
 

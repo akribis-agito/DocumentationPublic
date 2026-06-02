@@ -50,8 +50,8 @@ Because the offset is sampled at the moment you run the command, the capture sou
 
 ### Behavioral notes
 
-- **Mode 1 only.** Running `LockEventInit` while [LockEventMode](LockEventMode.md) = 0 (legacy mode) has no effect and is rejected with an error, since the offset is already learned automatically in that mode. Use it only after selecting mode 1.
-- **Required before arming in mode 1.** With [LockEventMode](LockEventMode.md) = 1, attempting to arm [LockEn](LockEn-AuxLockEn.md) = 1 or [EventOn](../../18-event-generation/EventOn.md) = 1 before `LockEventInit` has been run is rejected; the controller returns an error indicating the offset has not been initialized. Run `LockEventInit` first, then arm.
+- **Mode 1 only.** Running `LockEventInit` while [LockEventMode](LockEventMode.md) = 0 (legacy mode) has no effect and is rejected with error 334, since the offset is already learned automatically in that mode. Use it only after selecting mode 1.
+- **Required before arming in mode 1.** With [LockEventMode](LockEventMode.md) = 1, attempting to arm [LockEn](LockEn-AuxLockEn.md) = 1 or [EventOn](../../18-event-generation/EventOn.md) = 1 before `LockEventInit` has been run is rejected with error 335 (offset not initialized). Run `LockEventInit` first, then arm.
 - **Re-run after configuration changes.** Any change to the capture source after initialization invalidates the learned offset. A change to `EncSinCosHWEn` (the encoder/lock-event capture-source selector) is detected automatically and resets [LockEventStat](LockEventStat.md) to the not-initialized state, but the controller cannot detect every case. As a rule, run `LockEventInit` again after any change to the lock/event source configuration and before the source starts moving.
 
 ## Examples

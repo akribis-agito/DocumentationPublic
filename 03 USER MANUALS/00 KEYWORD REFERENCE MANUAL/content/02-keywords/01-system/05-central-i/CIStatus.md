@@ -39,8 +39,8 @@ Per-axis array reporting the live Central-i port state, error counters, and last
 | Index | Field | Meaning |
 |-------|-------|---------|
 | [1] | State machine | Connection state — see the state table below |
-| [2] | Reserved | Always reads `0` |
-| [3] | Offline error count | Count of offline (non-cyclic) errors: connection-sequence faults (codes 5–14), a failed offline message send (code 5), and failed background reads from the remote (code 10) |
+| [2] | Mailbox-1 error count | Error counter for the priority (firmware-driven) offline channel. This channel is not currently exercised, so the count is only ever cleared and always reads `0` |
+| [3] | Offline error count | Error counter for the offline (non-cyclic) channel: connection-sequence faults (codes 5–14), a failed offline message send (code 5), and failed background reads from the remote (code 10) |
 | [4] | Sync error count | Number of synchronous-message (per-cycle) errors (codes 1–4) |
 | [5] | Last error time | Time of the last error (seconds since power-on, cf. [Time](../03-timing/Time.md)) |
 | [6] | Last error code | Code of the last error — see the error-code table below |

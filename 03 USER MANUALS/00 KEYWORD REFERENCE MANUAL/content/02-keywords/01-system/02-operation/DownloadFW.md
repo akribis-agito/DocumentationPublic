@@ -47,7 +47,7 @@ The [DontDownload](../01-status/DontDownload.md) flag, when set, blocks firmware
 
 The sequence (standalone) is:
 
-1. **Password handshake.** The controller requests a password and waits for the host to send the expected reply over the same link the command arrived on (USB/serial or CAN). PCSuite supplies this automatically. A wrong reply returns a password error; no reply within about 10 seconds returns a timeout error — in either case the controller stays in normal operation.
+1. **Password handshake.** The controller requests a password and waits for the host to send the expected reply over the same link the command arrived on (USB/serial or CAN). PCSuite supplies this automatically. A wrong reply returns a password error and the controller stays in normal operation; if no reply arrives within about 10 seconds the controller times out and stays in normal operation, but in this case it sends no reply at all, so the host sees only its own timeout.
 2. **Quiesce hardware.** On success the serial bus is closed and the FPGA is reset so the drive outputs are taken to a safe state, and the I/O pins are returned to the mode the boot program expects.
 3. **Jump to boot.** The firmware records which interface initiated the download and jumps to the boot program, which receives and writes the new image. The download tool then restarts the unit; on the next start-up the controller runs the new firmware.
 

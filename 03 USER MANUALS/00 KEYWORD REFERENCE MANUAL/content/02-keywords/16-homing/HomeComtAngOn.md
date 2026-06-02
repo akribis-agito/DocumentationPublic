@@ -37,7 +37,7 @@ Enables capture of the commutation angle at the home position during homing.
 `HomeComtAngOn` controls two related actions:
 
 - During a homing run, when the axis arrives at the recorded index position, the commutation angle present there is captured into [HomeComtAngRd](HomeComtAngRd.md), and — only if `HomeComtAngOn` is non-zero — the commutation is then forced to the value stored in [HomeComtAngWr](HomeComtAngWr.md).
-- When the user writes [HomeComtAngWr](HomeComtAngWr.md) directly, the commutation variables are adjusted by the delta — again only if `HomeComtAngOn` is non-zero.
+- On central-i v5, when the user writes [HomeComtAngWr](HomeComtAngWr.md) directly, the live commutation is also adjusted by the delta between the new value and the angle currently recorded in [HomeComtAngRd](HomeComtAngRd.md)`[1]` — again only if `HomeComtAngOn` is non-zero. On v4 a direct write to [HomeComtAngWr](HomeComtAngWr.md) only stores the value; it takes effect at the next homing run.
 
 It is an axis-scoped parameter, not saved to flash, and can be changed at any time.
 
@@ -53,7 +53,7 @@ If `HomeComtAngOn` is `0`, the angle present at the index is still captured into
 | HomeComtAngOn | Behaviour |
 |---|---|
 | 0 | Capture-only: [HomeComtAngRd](HomeComtAngRd.md) is updated at the index, commutation is not altered. |
-| 1 | Capture-and-apply: as above, then [ComtAng](../15-commutation/ComtAng.md) is forced to [HomeComtAngWr](HomeComtAngWr.md); direct writes to [HomeComtAngWr](HomeComtAngWr.md) also adjust live commutation. |
+| 1 | Capture-and-apply: as above, then [ComtAng](../15-commutation/ComtAng.md) is forced to [HomeComtAngWr](HomeComtAngWr.md); on central-i v5, direct writes to [HomeComtAngWr](HomeComtAngWr.md) also adjust live commutation immediately. |
 
 ## Examples
 

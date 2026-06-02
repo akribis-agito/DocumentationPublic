@@ -32,7 +32,7 @@ The mode does not run a kinematic profiler, so it is not subject to [Speed](../0
 
 ### Ending the motion
 
-The mode stays in motion until the axis is disabled or a new `MotionMode` is set; if the master (axis B) stops moving, the follower reference simply stops changing while the axis remains in motion. Unlike direct gear motion ([MotionMode](../02-motion-configuration/MotionMode.md) `= 5`), this mode does not implement the standard `Stop`/`Abort` deceleration path — to end it, disable the slave axis or set a new `MotionMode` after the motion has ended.
+The mode stays in motion until the axis is disabled or a new `MotionMode` is set; if the master (axis B) stops moving, the follower reference simply stops changing while the axis remains in motion. Unlike direct gear motion ([MotionMode](../02-motion-configuration/MotionMode.md) `= 5`) — which ends the motion immediately when a `Stop`/`Abort` is requested (a controlled stop additionally turns the motor off and logs the controlled-stop fault) — this mode does not act on `Stop`/`Abort` at all: the follower keeps tracking axis B. To end it, disable the slave axis or set a new `MotionMode` after the motion has ended.
 
 ## Availability and restrictions
 
@@ -53,7 +53,7 @@ The mode stays in motion until the axis is disabled or a new `MotionMode` is set
 | Smoothing filter | None (no [MasterFilt](MasterFilt.md)) | First-order low-pass via [MasterFilt](MasterFilt.md) |
 | Modulo handling | None (no [MasterModRev](MasterModRev.md)) | [MasterModRev](MasterModRev.md) wraps the master |
 | Software limits | Not clamped inside this mode | Clamped by [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md) / [RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md) |
-| `Stop` / `Abort` deceleration | Not implemented | Implemented |
+| `Stop` / `Abort` handling | Ignored — motion continues | Ends the motion immediately (no deceleration ramp) |
 
 If you need any of the gear-motion features (a configurable master, exact rational ratios, smoothing, modulo wrap, software limits or a controlled stop), use direct or indirect gear motion ([MotionMode](../02-motion-configuration/MotionMode.md) `= 5` or `= 6`) instead.
 
@@ -72,15 +72,15 @@ The mathematical role of `MasterFact` is the same on both versions — scaling a
 
 ```text
 ; --- Axis A as direct slave of axis B at unity ratio ---
-AMasterFact[1]=65536  ; 65536 = unity (1:1) on v4; on v5 also unity
-AMotionMode[1]=10     ; 10 = direct slave (axis A follows axis B)
+AMasterFact=65536     ; 65536 = unity (1:1) on v4; on v5 also unity
+AMotionMode=10        ; 10 = direct slave (axis A follows axis B)
 ABegin                ; latches axis B reference; A now tracks dB each cycle
 
 ; --- Read axis A's reference while axis B moves ---
-APosRef[1]            ; updates each cycle by MasterFact x change in axis B's reference
+APosRef               ; updates each cycle by MasterFact x change in axis B's reference
 
 ; --- End the motion by disabling the slave axis ---
-AMotorOn[1]=0         ; disable the slave; this mode does not honour Stop/Abort
+AMotorOn=0            ; disable the slave; this mode does not honour Stop/Abort
 ```
 
 `MasterFact = -65536` reverses the follower direction relative to axis B. Other ratios scale linearly (`MasterFact = 131072` doubles the follower change per master change).

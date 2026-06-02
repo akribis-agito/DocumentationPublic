@@ -43,7 +43,7 @@ Maps a controller status onto each digital output (software function assignment)
 `DOutMode` packs two fields into one 32-bit value:
 
 - the **lower 16 bits** select the *function* — the status the output should follow;
-- the **upper 16 bits** select the *source axis* whose status is read (A = 0, B = 1, …; `0` also means "this axis / not axis-related", kept for backward compatibility). A source-axis number that exceeds the number of axes is rejected with a warning and the entry is ignored.
+- the **upper 16 bits** select the *source axis* whose status is read (A = 0, B = 1, …; `0` also means "this axis / not axis-related", kept for backward compatibility). The source-axis number must be **less than** the number of axes; a value at or above it is rejected with a warning and the entry is ignored.
 
 Writing `DOutMode` does not act on it directly each cycle. Instead a compact **functionality table** is rebuilt: every output whose lower-16-bit function is non-zero is recorded with a target `DOutPort` bit (a set-mask and its complement clear-mask), the function code, and the source axis. The new table is swapped in atomically so a half-built table is never used. There is a hard limit of **18 active output functions** at once; beyond that the extra entries are dropped and a warning is logged.
 
@@ -115,7 +115,7 @@ To track a *system-wide* condition rather than the local axis, use the upper-16-
 - **Index 0** — invalid; valid indices are `DOutMode[1]`–`DOutMode[16]`. `DOutMode[0]` does not exist.
 - **DOutSelect ≠ 0** — `DOutMode` is **not consulted**; the output is driven by the hardware function selected by [DOutSelect](DOutSelect.md), regardless of the assigned `DOutMode` function.
 - **More than 18 active functions** — beyond the hard limit the extra entries are dropped and a warning is logged at table-build time.
-- **Out-of-range axis selector** — a source-axis number above the number of axes is rejected with a warning; the entry is ignored at table-build time.
+- **Out-of-range axis selector** — a source-axis number that is not less than the number of axes is rejected with a warning; the entry is ignored at table-build time.
 - **Unimplemented functions** — codes `7` (end of motion), `10` (warnings), `11` (current saturation), `17` (reserved) do not drive the output even when assigned.
 - **In-motion / accel / decel** — only valid for motion modes that use the built-in profiler; direct pulse / direction does not advance these bits.
 - **Manual write to a function bit** — overwritten on the next cycle by the function; if you want manual control, set `DOutMode = 0` first.

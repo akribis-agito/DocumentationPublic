@@ -55,7 +55,7 @@ Each control cycle the current command (`CurrRef`) is saturated in two stages:
 
 Because the `PeakCL` clamp is applied in every mode, no directional limit can raise the command above `PeakCL`; the modes only let you make the limit *tighter* or asymmetric.
 
-The whole `CurrLimMode` mechanism (the directional stage) can be cancelled at runtime by a digital input configured for the torque-limit function — when that input is active the directional limits are bypassed and only the `PeakCL` clamp remains. Whenever the command is clamped, [StatReg](../../07-status-and-faults/StatReg.md) bit 21 (current saturation) is set.
+The whole `CurrLimMode` mechanism (the directional stage) can be cancelled at runtime by a digital input configured for the torque-limit function — while that input holds the directional limits off, they are bypassed and only the `PeakCL` clamp remains. Whenever the command is clamped, [StatReg](../../07-status-and-faults/StatReg.md) bit 21 (current saturation) is set.
 
 These limits are applied only when the current loop is active, or when `CurrRef` is used as an analog output driving an external current-mode amplifier.
 

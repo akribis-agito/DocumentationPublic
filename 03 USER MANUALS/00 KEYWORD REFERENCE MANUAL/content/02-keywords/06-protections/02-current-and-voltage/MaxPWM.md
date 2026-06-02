@@ -52,7 +52,7 @@ Whenever the output voltage is clamped, the firmware records a saturation factor
 - **Motor off:** the saturation does not actively clamp (no phase voltages are being driven), but the limit takes effect immediately on the next motor-on.
 - **Mode dependency:** the per-phase clamp applies whenever the current loop produces phase outputs (servo or stepper internal amplifier).
 - **External amplifier:** `MaxPWM` has no effect when the drive is configured for an external amplifier (analog current or analog velocity command — the phase outputs are not driven by the internal current loop).
-- **Range overflow:** writes outside `0…1470` (0.1 % units, i.e. up to ~147 %) are clamped to the keyword `range`. Note the keyword units are 0.1 %, not %: `1000` = 100 %.
+- **Range overflow:** writes outside `0…1470` (0.1 % units, i.e. up to ~147 %) are rejected with an out-of-range error; the stored value is left unchanged. Note the keyword units are 0.1 %, not %: `1000` = 100 %.
 - **HWProtectBits / ProtectMask:** voltage saturation is not a trip and not maskable.
 
 ## Examples

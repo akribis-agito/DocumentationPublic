@@ -61,7 +61,7 @@ AOpenLoopVolt=500    ; set the injection amplitude (PWM scaling, capped at 20%)
 - **In motion at write** — rejected (`NOMOTN`).
 - **Above 20 % PWM** — values above the 20 % PWM cap are rejected (out-of-range); the write does not take effect and the previous value is kept.
 - **Negative value** — rejected; the parameter accepts only non-negative amplitudes.
-- **Frequency missing** — without [InjectFreq](../../13-injection/InjectFreq.md) set, the injected sinusoid does not advance and the windings see a DC voltage on phase A only.
+- **Frequency missing** — without [InjectFreq](../../13-injection/InjectFreq.md) set, the injected sinusoid does not advance: the phase stays at zero, so phase A is held at `0` and no excitation is produced.
 - **Phase B/C** — held at `0`; the injection is single-phase by design so the motor barely moves.
 - **Simulation** — accepted; produces a numerical-only excitation on the simulated phase A.
 - **Save** — not flash-saveable; restarts at `0` after reset.

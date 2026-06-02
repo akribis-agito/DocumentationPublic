@@ -22,7 +22,7 @@ That resolved length is `CNCAAbsTrgt`. The path-velocity profile (see [CNCASpeed
 
 Internally the path coordinate is accumulated at higher precision than user units so that fractional path motion carried over between segments does not drift; any fraction of `CNCAAbsTrgt` not consumed at the end of one segment is passed to the start of the next so the path stays continuous across a blended corner.
 
-Non-motion segment types (delay, wait, set-position, filter-setup) do not advance the path and report a zero-length effective move while they are pending.
+`CNCAAbsTrgt` is updated only when a linear or arc motion segment becomes active. Non-motion segment types (delay, wait, set-position, filter-setup) do not advance the path and do not change `CNCAAbsTrgt`, so it continues to hold the length of the most recent motion segment while they are pending.
 
 ### CNCB note
 

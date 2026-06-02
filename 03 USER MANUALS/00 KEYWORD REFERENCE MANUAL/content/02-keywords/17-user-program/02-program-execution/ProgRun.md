@@ -48,7 +48,7 @@ The **value** passed to `ProgRun` chooses the task:
 
 When a task value of 1–30 (standalone) or 1–254 (Central-i master) is given, the thread is first re-initialized (pointer set to the start of that task, call and numeric stacks cleared, error cleared) and then started — a clean run from the task entry point. A task value of 0 instead leaves all thread state in place and simply re-enables execution, which is what makes a halted thread continue from the exact instruction where it stopped. To force a paused thread to start over from the beginning instead of resuming, use [ProgReset](ProgReset.md) first.
 
-`ProgRun` is rejected with an error if there is no stored program, if the stored program fails its checksum, if the requested task does not exist, or if the requested thread is already running. While a thread runs, [ProgStat](ProgStat.md) reports `1` for that thread and [ProgPointer](ProgPointer.md) tracks its position.
+`ProgRun` is rejected with an error if there is no stored program, if the stored program fails its checksum, if the requested task does not exist, or if the requested thread is already running. A resume (task value `0`) is also rejected if the thread's pointer has already reached the end of the program — there is nothing left to continue, so reset or start a task instead. While a thread runs, [ProgStat](ProgStat.md) reports `1` for that thread and [ProgPointer](ProgPointer.md) tracks its position.
 
 ## Examples
 

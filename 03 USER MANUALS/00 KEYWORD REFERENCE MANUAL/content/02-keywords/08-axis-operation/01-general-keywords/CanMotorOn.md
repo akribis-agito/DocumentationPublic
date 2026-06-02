@@ -40,7 +40,7 @@ Important: `CanMotorOn` does **not** turn the motor on. It runs the same pre-con
 
 `CanMotorOn` sets `CanMotorOnRes = 1` and then walks a single-pass chain of checks, breaking out at the first failure and storing that reason code:
 
-1. The **same pre-conditions checked when enabling with [MotorOn](MotorOn.md)**, in the same order: FPGA / variant / full-scale health, Central-i port active and device is an amplifier with relay closed, overall current limit, **commutation complete**, inrush bypassed, CalcFilters succeeded, filters not modified.
+1. The **same pre-conditions checked when enabling with [MotorOn](MotorOn.md)**, in the same order: FPGA / variant / full-scale health, Central-i port active and device is an amplifier with relay closed, overall current limit, **commutation complete**, inrush bypassed, filters calculated successfully, and filters not modified. On v5 these last two filter checks no longer block enabling (filters are recalculated on the fly), and a check that draw-mode setup is valid is run first; an invalid draw-mode configuration is reported instead.
 2. Then the **interrupt-level protections** that would fault the axis even at standstill: hardware-protection conditions (STO1/STO2, encoder error, over-current, IPM fault, watchdog, 5 V faults, AC power phases), unknown encoder type, missing power supplies, bus over/under-voltage, logic over/under-voltage, board / IPM / motor over-temperature, and illegal modulo-with-input-shaping.
 
 If the motor is already on, or `MotorType` = simulation, or the amplifier is a PD type, the result is left at `1`.

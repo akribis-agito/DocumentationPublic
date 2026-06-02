@@ -34,21 +34,23 @@ Read-only state of the event output as seen by the controller's input circuitry 
 
 ## Overview
 
-`EventLoopback` is a read-only status variable that reflects the current state of the event output as seen by the controller's input circuitry, providing a hardware loopback confirmation. Use it to verify that the output is actually active when expected. It is an axis-related status variable and is not saved to flash.
+`EventLoopback` is a read-only status variable that reports whether event generation is currently in progress for the axis. Use it to confirm that the event output is active when expected. It is an axis-related status variable and is not saved to flash.
+
+This status is maintained only on Central-i products, where it is driven from an "events in progress" indication reported back by the remote drive each control cycle. On standalone products the firmware does not update this variable, so it stays at `0`.
 
 ## How it works
 
 | Value | Meaning |
 |-------|---------|
-| 0 | Event output is idle (no pulse currently active). |
-| 1 | Event output is active (a pulse is in progress). |
+| 0 | No event generation in progress. |
+| 1 | Event generation is in progress for the axis. |
 
-The controller reads the looped-back output state each control cycle, so `EventLoopback` follows the actual hardware line rather than the commanded value. Because event pulses can be very short relative to the control cycle, a single brief pulse may not be observed as a `1` on every read; use [EventCntr](EventCntr.md) to confirm how many pulses were produced. `EventLoopback` is most useful for confirming a continuously asserted or long-duration output.
+On Central-i products the controller refreshes this status each control cycle from the indication reported by the remote drive. Because the value tracks the drive's in-progress indication rather than each individual pulse edge, a single very short pulse may not always be observed as a `1`; use [EventCntr](EventCntr.md) to confirm how many pulses were produced. `EventLoopback` is most useful for confirming a continuously asserted or long-duration output.
 
 ## Examples
 
 ```text
-AEventLoopback      ; read the looped-back output state (0 or 1)
+AEventLoopback      ; read whether event generation is in progress (0 or 1)
 ```
 
 ## See also

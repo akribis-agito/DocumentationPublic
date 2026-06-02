@@ -32,7 +32,7 @@ Ethernet-binary multi-axis status query used by the AAMotion API (being deprecat
 
 ## Overview
 
-`AllStat` is a function (not a stored value): the AAMotion API calls it to query many statuses across multiple axes in one round-trip instead of reading each keyword on each axis separately. It is supported only over **Ethernet Binary** communication. The reply is a packed block of 32-bit values whose layout depends on which axes and which status groups were requested.
+`AllStat` is a function (not a stored value): the AAMotion API calls it to query many statuses across multiple axes in one round-trip instead of reading each keyword on each axis separately. It works over all of the controller's command channels (the two RS-232 ports, CAN and Ethernet); the AAMotion API uses the **Ethernet Binary** path, where the reply is a packed block of 32-bit values whose layout depends on which axes and which status groups were requested. Over the other channels the same values are returned using that channel's normal parameter-reply format.
 
 > **Deprecation:** `AllStat` is scheduled to be deprecated / revamped. Avoid relying on it for new integrations.
 
@@ -45,7 +45,7 @@ Ethernet-binary multi-axis status query used by the AAMotion API (being deprecat
 - The **array index** is an *axis mask* — bit 0 selects axis 1, bit 1 selects axis 2, and so on. The function iterates over every axis whose bit is set.
 - The **function value** is a *group mask* — each bit selects one status group (see the table). The function iterates over every group whose bit is set.
 
-For each requested axis, and within it each requested group, the firmware walks a fixed list of properties for that group and appends each property's current value to the reply, in group order. Values are converted to the keyword's user units / scaling before being appended, exactly as a direct read of that keyword would return. Properties that are functions rather than plain parameters are not supported and cause the call to return an error; out-of-range array elements append `0`.
+For each requested axis, and within it each requested group, the firmware walks a fixed list of properties for that group and appends each property's current value to the reply, in group order. Values are converted to the keyword's user units / scaling before being appended, exactly as a direct read of that keyword would return. Plain parameters (and parameters backed by a value-returning function) are supported; a property that is a pure function-type keyword is not supported and aborts the whole call with error **178**. Out-of-range array elements append `0`.
 
 The number of values returned therefore depends on the requested axes and groups — the host must know the group layout below to parse the block.
 
@@ -71,8 +71,8 @@ The exact property list of each group is fixed in firmware and is shared with Ag
 ## Examples
 
 ```text
-AAllStat[1]=1        ; axis-1 (index bit 0), basic group (value bit 0)
-AAllStat[3]=0x21     ; axes 1 and 2 (index 0b11... here index bit pattern), basic + less-important groups
+AAllStat[1]=1        ; axis 1 (index bit 0), basic group (value bit 0)
+AAllStat[3]=0x21     ; axes 1 and 2 (index 0b11), basic + less-important groups (value bits 0 and 5)
 ```
 
 (The array index is the axis mask and the assigned value is the group mask; values are returned in the binary reply, not as a printable keyword value.)

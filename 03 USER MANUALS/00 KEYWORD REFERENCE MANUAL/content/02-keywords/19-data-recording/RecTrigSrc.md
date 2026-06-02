@@ -45,6 +45,8 @@ Complex CAN code of the trigger source variable for each trigger.
 
 It is possible to use the same variable as both a trigger source and a recorded variable at the same time.
 
+The trigger source is validated when recording is started (by [RecStart](RecStart.md)). Starting fails if the source resolves to a command/function keyword rather than a readable variable (error 64), to a non-valid axis (error 68), or to an out-of-range array index (error 70).
+
 ## Examples
 
 ```text

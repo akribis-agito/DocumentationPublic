@@ -59,17 +59,17 @@ Because the subtrahend is [Vel](Vel.md)`[1]`, what `VelErr` actually measures ag
 
 ### When it is forced to zero
 
-`VelErr` is set to `0` for stepper open-loop motors (`MotorType` = 6) and whenever the [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) is neither position nor velocity control and force-over-PIV is off. Note that `VelErr` is still **computed** even in current operation mode (it is a true error used to preload the velocity-PI integral so the current command does not jump when switching back to position/velocity control).
+`VelErr` is set to `0` for stepper open-loop motors (`MotorType` = 6) and whenever the [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) is neither position nor velocity control and force-over-PIV is off. In current-control or force-control mode `VelErr` is therefore reported as `0` unless force-over-PIV is enabled, in which case the live error is retained and feeds the velocity-PI integral so the current command does not jump when switching back to position/velocity control.
 
 ### High velocity-error protection
 
-After computing `VelErr` the controller checks its magnitude against [MaxVelErr](../../06-protections/03-motion/general-maximum-limits/MaxVelErr.md) while in position/velocity/force-PIV mode; on exceedance it disables the axis and [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1021 (velocity error exceeds limit). This check is skipped for analog-velocity-command amplifiers. Otherwise `VelErr` drives the velocity PI (gain × error, accumulated into the velocity integral).
+After computing `VelErr` the controller checks its magnitude against [MaxVelErr](../../06-protections/03-motion/general-maximum-limits/MaxVelErr.md) while in position/velocity/force-PIV mode; on exceedance it disables the axis and [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1021 (velocity error exceeds limit). When the relevant `MaxErrStat` bit indicates open-loop the threshold used is [MaxVelErrOL](../../06-protections/03-motion/general-maximum-limits/MaxVelErrOL.md) instead and the fault reported is code 1056 (velocity error exceeds limit in open-loop). This check is skipped for analog-velocity-command amplifiers. Otherwise `VelErr` drives the velocity PI (gain × error, accumulated into the velocity integral).
 
 ### Edge cases
 
 - **Motor off / commutation not done:** the velocity loop is not run; the integral is held; `VelErr` is forced to `0` by the conditions above.
-- **Simulation mode (`MotorType` = 5):** the simulation path runs the loop with synthetic feedback; `VelErr` follows `VelRef − Vel[1]` normally.
-- **Current operation mode:** `VelErr` is **still computed** (not forced to zero) so the velocity-PI integral stays preloaded; this prevents a current-command jump when the axis returns to position or velocity mode. The high-error trip is skipped in this case.
+- **Simulation mode (`MotorType` = 5):** the velocity loop is bypassed, so `VelErr` is not recomputed and holds its last value (it is `0` from the most recent motor-off).
+- **Current / force operation mode:** `VelErr` is forced to `0` unless force-over-PIV is enabled. With force-over-PIV on, the live error is kept and feeds the velocity-PI integral, preventing a current-command jump when the axis returns to position or velocity mode. The high-error trip is skipped when the mode is neither position, velocity nor force-over-PIV.
 - **ModRev wrap:** because `Vel[1]` is constructed from `ΔPos` after the wrap correction (see [Vel](Vel.md)), the wrap does not appear in `Vel[1]` and so does not produce a spike in `VelErr`.
 - **Out-of-range write:** `VelErr` is read-only — writes are rejected.
 - **Active fault:** the axis is disabled — `VelErr` is forced to `0`; the [ConFlt](../../07-status-and-faults/ConFlt.md) snapshot fields capture the moment-of-trip value.

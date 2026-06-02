@@ -60,7 +60,7 @@ ACurrPosErrTh=0      ; disable this condition
 - **After trigger** — both `CurrPosErrTh` and [CurrPosThDir](CurrPosThDir.md) are cleared to `0` to prevent repeat triggers. Re-arm by writing both again.
 - **Sign sensitivity** — a positive threshold fires on `PosErr > value`; a negative threshold fires on `PosErr < value`.
 - **Motor off** — the threshold engine does not run.
-- **Save** — flash-saveable.
+- **Save** — not flash-saveable; reset to `0` at boot.
 
 ## See also
 

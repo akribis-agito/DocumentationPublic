@@ -25,14 +25,17 @@ Task and thread numbers are independent: the task number selects which `ProgTask
 ```text
 AProgTask[5]        ; label: start of task 5
 ; the body of task 5
-AProgHalt[3]        ; stop when run as thread 3
+AProgHaltThis       ; end this task on whichever thread is running it
 
 AProgRun[3],5       ; elsewhere: run task 5 as thread 3
 ```
+
+Because the same task can be launched on different threads, end a task body with [ProgHaltThis](ProgHaltThis.md), which halts the thread currently executing it. `AProgHalt[n]` instead halts the specific thread `n`, so it only ends the task if that task happens to be running as thread `n`.
 
 ## See also
 
 - [ProgRun](ProgRun.md) — run a task as a thread
 - [ProgPriority](ProgPriority.md) — scheduling share of a running thread
-- [ProgHalt](ProgHalt.md) — halt a thread (end of a non-looping task)
+- [ProgHaltThis](ProgHaltThis.md) — halt the current thread (end of a task body)
+- [ProgHalt](ProgHalt.md) — halt a specific thread by number
 - [ProgFunc](ProgFunc.md) — label for a callable function

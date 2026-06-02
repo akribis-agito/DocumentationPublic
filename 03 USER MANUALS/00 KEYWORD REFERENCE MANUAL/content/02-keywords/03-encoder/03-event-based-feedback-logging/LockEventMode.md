@@ -48,7 +48,7 @@ The setting is stored in flash, so the selected mode survives a power cycle. The
 | Value | Meaning |
 |-------|---------|
 | 0 | Legacy / backward-compatible mode. The firmware-to-hardware offset is learned automatically when Lock or Event is armed. No manual initialization is needed; [LockEventStat](LockEventStat.md) reports `0`. |
-| 1 | Unified mode. You must run [LockEventInit](LockEventInit.md) (axis stationary) to learn the offset before arming Lock or Event. Arming without having run it is rejected. |
+| 1 | Unified mode. You must run [LockEventInit](LockEventInit.md) (axis stationary) to learn the offset before arming Lock or Event. Arming without having run it is rejected with error 335. |
 
 ### Effect on the status keyword
 

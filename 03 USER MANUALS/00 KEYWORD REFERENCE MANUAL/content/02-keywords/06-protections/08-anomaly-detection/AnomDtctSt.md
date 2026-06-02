@@ -55,7 +55,7 @@ State values reported in element 1:
 | 0 | Idle. Detection is off ([AnomDtctOn](AnomDtctOn.md) = 0). |
 | 1 | Waiting for motion. Detection is armed but no motion has started yet. |
 | 2 | Active. The detector is tracking the motion and comparing the filtered signal against the band. |
-| 3 | Anomaly detected. The filtered signal left the band; the axis has been stopped or tripped with fault code 1067 on [ConFlt](../../07-status-and-faults/ConFlt.md). |
+| 3 | Anomaly detected. The filtered signal left the band. Depending on the stop mode in [AnomDtctCnfg](AnomDtctCnfg.md), the axis is either brought to a controlled stop (no fault is logged) or the motor is turned off and fault code 1067 is raised on [ConFlt](../../07-status-and-faults/ConFlt.md). |
 
 A further reserved state value (4) is defined for a suspended condition but is not entered by the detector in the firmware consulted for this reference.
 

@@ -46,7 +46,7 @@ Each slot holds a [complex CAN code](../../../01-keyword-usage-and-syntax/comple
 | 10–14 | Axis number (0 = A; ignored for non-axis parameters) |
 | 16–31 | Array index (for array parameters; use 0 for scalars) |
 
-For a scalar parameter on axis A the complex code is just the plain CAN code. Writing `0` to a slot disables it (its [ProgSnapVal](ProgSnapVal.md) entry stays at `-1`). When you set `ProgSnapSrc`, the controller validates the selection, resolves an internal pointer plus a scaling factor for fast capture, and **resets all [ProgSnapVal](ProgSnapVal.md) entries to `-1`**, discarding any previous snapshot — so configure the sources before the error you want to diagnose. Captured values for scaled parameters are stored in raw (internal) units.
+For a scalar parameter on axis A the complex code is just the plain CAN code. Writing `0` to a slot disables it (its [ProgSnapVal](ProgSnapVal.md) entry stays at `-1`). A non-zero selection is validated when written and rejected with an error if it does not name a real parameter (error `279`), names an invalid axis or supplies a non-zero array index for a scalar (error `280`), supplies an array index outside `1` to the parameter's array size (error `281`), or names a command rather than a parameter (error `282`). Once accepted, the controller resolves an internal pointer plus a scaling factor for fast capture, and **resets all [ProgSnapVal](ProgSnapVal.md) entries to `-1`**, discarding any previous snapshot — so configure the sources before the error you want to diagnose. Captured values for scaled parameters are stored in raw (internal) units.
 
 ## Examples
 

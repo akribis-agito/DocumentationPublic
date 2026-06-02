@@ -34,7 +34,9 @@ Pushes a cycle-time (segment-duration) entry into the FIFO motion queue.
 
 `FIFOPushCycle` appends a **cycle-time** entry (type 5 in [FIFOType](FIFOType.md)) to the queue. The value is a segment duration in control samples. When the controller reaches this entry during playback it is consumed without producing motion: it updates [FIFOCycleTime](FIFOCycleTime.md), which then applies to every segment queued after it, until the next cycle-time entry. This lets the segment length vary through a streamed sequence.
 
-It is one of the `FIFOPush*` functions used to fill the queue before or during motion. The entry is added at the tail of the queue. If the queue is full (no free entries), the push is rejected with an error.
+It is one of the `FIFOPush*` functions used to fill the queue before or during motion. The entry is added at the tail of the queue. If the queue is full (no free entries), the push is rejected with error 105 and nothing is added.
+
+A cycle-time entry is also mandatory at the head of the queue: FIFO motion cannot be started unless the first entry in the queue is a cycle-time entry. If you begin FIFO motion while the oldest queued entry is anything else, the begin is rejected with error 108. Push a `FIFOPushCycle` value before any motion segments so the queue starts with a defined segment duration.
 
 See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all related keywords.
 

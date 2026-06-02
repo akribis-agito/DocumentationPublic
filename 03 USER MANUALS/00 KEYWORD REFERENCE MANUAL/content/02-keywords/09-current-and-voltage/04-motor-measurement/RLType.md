@@ -43,6 +43,8 @@ Selects whether PCSuite R/L measurements are reported as phase (0) or line-to-li
 | 0      | Phase data        |
 | 1      | Line-to-line data (default) |
 
+`RLType` is a record of how the stored [Rm](Rm.md) and [Lm](Lm.md) values were measured; the controller does not consult it. In particular, the v5 voltage feed-forward always treats the stored `Rm`/`Lm` as line-to-line for 3-phase brushless motors (halving them to per-phase internally) regardless of the `RLType` setting.
+
 ## Examples
 
 ```text

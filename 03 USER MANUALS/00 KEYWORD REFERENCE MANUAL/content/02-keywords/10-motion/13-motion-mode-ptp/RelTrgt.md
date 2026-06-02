@@ -61,7 +61,7 @@ so the relative distance is added to the **reference position [PosRef](../01-kin
 
 Two consequences follow from this design:
 
-- **`RelTrgt = 0` is "use `AbsTrgt`".** A zero relative target is the signal to leave `AbsTrgt` untouched and move to the absolute target. To command a relative move that should *not* move, you cannot use `RelTrgt = 0`; the axis would instead go to whatever `AbsTrgt` currently holds.
+- **`RelTrgt = 0` is "use `AbsTrgt`".** A zero relative target is the signal to leave `AbsTrgt` untouched and move to the absolute target. To command a relative move that should *not* move, you cannot use `RelTrgt = 0`; the axis would instead go to whatever `AbsTrgt` currently holds. Note that writing [AbsTrgt](AbsTrgt.md) automatically resets `RelTrgt` to 0, so setting an absolute target always cancels any pending relative target.
 - **Relative to the reference, repeatable.** Because the base is `PosRef`, issuing the same `RelTrgt` again steps by the same distance from where the previous move ended, with no accumulation of following error.
 
 After conversion the resulting `AbsTrgt` is range-checked against the software limits and the limit switches exactly as for an absolute move (see [AbsTrgt](AbsTrgt.md) — *Validation at Begin*); an out-of-range relative target therefore rejects `Begin` rather than clipping.

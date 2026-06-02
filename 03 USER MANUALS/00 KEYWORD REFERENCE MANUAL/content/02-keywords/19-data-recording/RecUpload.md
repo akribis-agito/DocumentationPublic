@@ -43,7 +43,7 @@ Streams a scope's metadata and user-unit scaled recorded data to the host.
 
 ## How it works
 
-The data is returned in comma-delimited format for RS232 and Ethernet communication. Over CAN, each value is uploaded as a 9-byte message (8 bytes for the value, 1 byte for the ASCII comma).
+Over RS232 the data is returned as comma-delimited ASCII text. Over Ethernet each value is sent as a raw binary value followed by an ASCII comma; the value is 4 bytes wide in v4 (5-byte fields) and 8 bytes wide in v5 (9-byte fields). Over CAN each value is uploaded as a 5-byte message (4 bytes for the value, 1 byte for the ASCII comma) in both versions.
 
 The first 80 values returned are the metadata. The subsequent values (81<sup>st</sup> value and above) are the recorded data, sequenced according to the [RecParamA/RecParamB](RecParamA-RecParamB.md) order, followed by the data sample order. For very large data sets, use [RecUploadNext](RecUploadNext.md) to retrieve the data in manageable packets.
 

@@ -47,7 +47,7 @@ $$
 `ForceErr` serves two roles beyond closing the loop:
 
 - **In-target detection.** The force in-target check compares `|ForceErr|` against [ForceInTTol](ForceInTTol.md); the axis is settled ([ForceInTStat](ForceInTStat.md) = 4) once it stays inside that window for [ForceInTTime](ForceInTTime.md).
-- **High-error protection.** If `|ForceErr|` exceeds the internal maximum-force-error limit, [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1045 (force error exceeds limit) and the motor is turned off.
+- **High-error protection.** If `|ForceErr|` exceeds the internal maximum-force-error limit, the motor is turned off and [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1045 (force error exceeds limit) when running closed-loop, or fault code 1057 (force error exceeds limit in open-loop) when the axis is running open-loop.
 
 While the axis is not in force mode, `ForceErr` is forced to `0`.
 
@@ -61,7 +61,7 @@ AForceErr           ; read the current force error
 
 - **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 4) — forced to `0`; reading it returns `0` regardless of what `ForceRef − Force` would compute.
 - **Motor off** — held at `0` (the loop is not running).
-- **High-error trip** — exceeding the internal max-force-error limit fires `ConFlt = 1045` and disables the motor; this protection runs only while in force mode.
+- **High-error trip** — exceeding the internal max-force-error limit disables the motor and fires `ConFlt = 1045` (closed-loop) or `ConFlt = 1057` (open-loop); this protection runs only while in force mode.
 - **Read-only** — writes are rejected.
 
 ## See also

@@ -34,7 +34,7 @@ Pushes a parabolic (constant-acceleration) segment into the FIFO motion queue.
 
 `FIFOPushParA` appends a **parabolic-by-acceleration** segment (type 4 in [FIFOType](FIFOType.md)) to the queue. The value is the acceleration reference, held constant for the duration of the segment, producing a parabolic position profile. The segment begins from the current profiler velocity. It is the acceleration-based counterpart of [FIFOPushParP](FIFOPushParP.md), which defines the segment by position delta instead.
 
-It is one of the `FIFOPush*` functions used to fill the queue before or during motion. The entry is added at the tail. If the queue is full, the push is rejected with an error.
+It is one of the `FIFOPush*` functions used to fill the queue before or during motion. The entry is added at the tail. If the queue is full (no free entries), the push is rejected with error 105 and nothing is added.
 
 See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all related keywords.
 
@@ -42,7 +42,7 @@ See [FIFOType](FIFOType.md) for a full description of FIFO motion mode and all r
 
 When the controller reaches this segment, it ramps the velocity by the supplied acceleration each control sample for the segment duration, advancing the position reference accordingly. The evolving velocity and acceleration are reported in [FIFOStatus](FIFOStatus.md) (indexes 4 and 5).
 
-The supplied magnitude must be at least one *control-sample frequency* (16 384 counts/s² at the standard 16 384 Hz control rate). This is the smallest acceleration the per-sample velocity step can resolve. A push with `|value| < 16 384` is rejected with an error at push time. The accepted range is -2 000 000 000 to 2 000 000 000.
+The supplied magnitude must be at least one *control-sample frequency* (16 384 counts/s² at the standard 16 384 Hz control rate). This is the smallest acceleration the per-sample velocity step can resolve. A push with `|value| < 16 384` is rejected with error 106 at push time. The accepted range is -2 000 000 000 to 2 000 000 000.
 
 ## Examples
 

@@ -36,7 +36,7 @@ Enables automatic stop of axis motion when the home digital input changes state.
 
 ## How it works
 
-`StopOnHome` is evaluated by the motion profiler only while the axis is jogging. On each cycle, if `StopOnHome` is non-zero and the home input has just changed state (the internal one-cycle "home change" pulse derived from [HomeStat](HomeStat.md)), the profiler:
+`StopOnHome` is evaluated by the motion profiler only during a jog or a velocity-controlled move. On each cycle, if `StopOnHome` is non-zero and the home input has just changed state (the internal one-cycle "home change" pulse derived from [HomeStat](HomeStat.md)), the profiler:
 
 1. raises the in-stop-request bit so the move decelerates to a stop,
 2. sets the motion end reason to "home change" (reported by [MotionReason](../10-motion/05-motion-status/MotionReason.md) = 16), and

@@ -46,7 +46,7 @@ If the axis is in motion when `ZeroPosErr` is issued, the controller first perfo
 
 - Allowed only in **position operation mode** ([OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md)).
 - **Not allowed during multi-axis motion** — CNCA, CNCB, vector or spline-buffer modes are rejected; only simple single-axis motion modes are permitted.
-- The same checks as [SetPosition](SetPosition.md) apply: encoder error mapping off, auto-gain off, the (resulting) position within the software limits, and input shaping off while the motor is on.
+- The same checks as [SetPosition](SetPosition.md) apply: encoder error mapping off, auto-gain off, the (resulting) position within the software limits, input shaping off while the motor is on, and the axis must not be the Yaw (odd-numbered) axis of a gantry pair — the command is rejected for a gantry Yaw axis.
 
 ### Edge cases
 

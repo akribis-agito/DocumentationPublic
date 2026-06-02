@@ -48,7 +48,7 @@ ASpeedChgNew        ; query current value
 ### Edge cases
 
 - **Motor off:** value is held; used at the next arming.
-- **Out-of-range write:** the parameter system clamps to ±1.3 × 10⁹; values outside are rejected.
+- **Out-of-range write:** a write outside ±1.3 × 10⁹ is rejected (it is not clamped); the stored value is left unchanged.
 - **Simulation mode (`MotorType` = 5):** unchanged.
 - **ModRev wrap:** `SpeedChgNew` is a rate, not a position; unaffected.
 - **Active fault:** the axis is disabled; the value is preserved.

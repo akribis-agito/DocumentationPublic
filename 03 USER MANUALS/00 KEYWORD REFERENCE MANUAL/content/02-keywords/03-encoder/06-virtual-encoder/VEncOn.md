@@ -47,7 +47,7 @@ This is different from the fixed encoder-emulation outputs ([EmulRat](../05-enco
 
 Each control cycle the controller:
 
-1. Reads the source variable selected by [VEncSrc](VEncSrc.md) (handling its data type and any [ModRev](../04-modulo-mode/ModRev.md) roll-over of the source).
+1. Reads the source variable selected by [VEncSrc](VEncSrc.md) and handles any [ModRev](../04-modulo-mode/ModRev.md) roll-over of the source. In the v4 firmware the source is read as a 32-bit integer; the v5 Central-i firmware reads it according to its native data type before converting to a 32-bit integer for tracking.
 2. Multiplies it by [VEncFact](VEncFact.md) to move into the output plane.
 3. Runs a PI tracking controller plus feed-forward so the emitted count (scaled by `VEncFactDen`) follows the scaled source with minimal lag, and computes the number of edges to emit this cycle.
 4. Writes the pulse count, 50% duty period, and "clocks-to-first-pulse" (from [VEncDelay](VEncDelay.md)) to the hardware.

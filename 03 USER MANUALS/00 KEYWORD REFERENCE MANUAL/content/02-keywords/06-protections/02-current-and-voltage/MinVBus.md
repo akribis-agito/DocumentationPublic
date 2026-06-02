@@ -42,7 +42,7 @@ Minimum allowed bus voltage; dropping to or below it immediately disables the ax
 
 On each periodic bus-voltage check the drive compares `VBus` with `MinVBus`:
 
-- If `VBus ≤ MinVBus`, the axis is disabled and [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1009 (bus voltage too low).
+- If `VBus ≤ MinVBus` while the motor is on, the axis is disabled and [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1009 (bus voltage too low). The same condition also blocks a [MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) request: while `VBus ≤ MinVBus` the drive refuses to enable the axis and returns fault code 1009.
 - As `VBus` approaches the limit from above, a multi-level under-voltage warning is reported in [StatReg](../../07-status-and-faults/StatReg.md) (bits 7–8) at 1.12 / 1.08 / 1.04 × `MinVBus` (low / medium / high); at or below `MinVBus`, bit 4 (under-MinVBus) is set.
 
 > **Note:** unlike the over-voltage trip, the under-voltage trip is **immediate** — it does *not* use the [MaxVBusTime](MaxVBusTime.md) delay.
@@ -51,7 +51,7 @@ On each periodic bus-voltage check the drive compares `VBus` with `MinVBus`:
 
 ### Edge cases
 
-- **Motor off:** the under-voltage check still runs (drive-level protection); a brown-out trips even when no axis is enabled.
+- **Motor off:** the under-voltage *status* (and the multi-level warning) still updates regardless of `MotorOn`, but the disabling trip only fires while the motor is on. When the axis is already off, an under-voltage condition does not raise a fault on its own; instead it prevents the axis from being re-enabled (the [MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) request is refused with fault 1009) until the supply recovers.
 - **Mode dependency:** the trip runs regardless of operation mode.
 - **No delay:** `MaxVBusTime` is for the over-voltage path only; under-voltage is always immediate.
 - **Range overflow:** writes outside `11000…90000` (mV) are clamped to the keyword `range`.

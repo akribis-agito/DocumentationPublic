@@ -56,11 +56,11 @@ For an immediate end during a dwell or mid-leg, use [Stop](Stop.md) (controlled 
 ### Edge cases
 
 - **Motor off:** accepted but no effect (no motion).
-- **Not in motion:** the repetitive-stop bit (bit 2) is set unconditionally and is **not** cleared by [Begin](Begin.md) — `Begin` only sets the in-motion bit. The bit is cleared only when a move ends. A stale bit 2 left set while the axis is idle therefore survives into the next repetitive move and ends it after its first repetition. Issue `StopRep` only while a repetitive move is actually running.
+- **Not in motion:** the repetitive-stop bit (bit 2) is set unconditionally, even when the axis is idle. While the axis is not in motion, however, the profiler rewrites the whole motion-status word to "not in motion" every control cycle, so a bit 2 set while idle is cleared almost immediately and does **not** carry over into the next move. The bit only has an effect when it is set during an active repetitive move (`Begin` itself does not clear it, but it also does not need to — an idle axis has already lost the stale bit).
 - **Out-of-range "write":** function has no value.
 - **Simulation mode (`MotorType` = 5):** unchanged.
 - **ModRev wrap:** unrelated — `StopRep` does not touch the reference.
-- **Active fault:** axis disabled; the bit is preserved across re-enable.
+- **Active fault:** the axis is disabled and the move ends; the whole motion-status word is forced to "not in motion", which also clears the repetitive-stop bit, so nothing is preserved across re-enable.
 - **Other motion modes:** `StopRep` only matters in [MotionMode](../02-motion-configuration/MotionMode.md) `= 2`; in other modes the bit is set but unused.
 - **`RptCycles = 0` (endless):** `StopRep` is the principal way to end the endless loop short of `Stop`/`Abort`.
 - **Already at last repetition:** `StopRep` is harmless (the move would end anyway).

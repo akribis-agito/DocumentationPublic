@@ -64,7 +64,7 @@ AStopBuff            ; end spline-buffer playback at the end of the current cycl
 - **Out-of-range "write":** function has no value.
 - **Simulation mode (`MotorType` = 5):** unchanged.
 - **ModRev wrap:** unrelated.
-- **Active fault:** axis disabled; the request is preserved on the primary axis variable.
+- **Active fault:** if any member axis faults the whole buffer move ends immediately — every member's motion bits are cleared (so the pending stop request, bit 17, is also cleared) and the reason becomes the motor-off reason, not the `StopBuff` reason. A previously issued `StopBuff` request does not survive the fault.
 - **Other motion modes:** only spline-buffer mode honours `StopBuff`; in any other mode it is a no-op.
 - **Single-cycle buffer:** issuing `StopBuff` mid-cycle still waits for the cycle boundary; the move ends after the current cycle completes.
 - **Immediate halt required:** use [Abort](Abort.md) (immediate freeze of the reference) or [Stop](Stop.md) (controlled ramp via `Decel`).

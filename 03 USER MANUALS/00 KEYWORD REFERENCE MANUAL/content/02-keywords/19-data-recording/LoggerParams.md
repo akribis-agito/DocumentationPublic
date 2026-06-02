@@ -38,6 +38,8 @@ Lists the parameters captured by the continuous data logger.
 
 The array is 1-indexed: `LoggerParams[1]` is the first logged parameter, up to 40 parameters in total. An element of `0` is treated as empty and selects no parameter. The complex CAN code encodes both the parameter and, for axis parameters, the axis it applies to, so the same parameter on different axes can be logged in the same session.
 
+The list is analyzed when the logger is started (see [LoggerOn](LoggerOn.md)), not when an element is written. An entry that does not resolve to a loggable parameter — an unknown CAN code, an invalid axis or array index, or a command keyword — is silently skipped: it contributes nothing to the packet and raises no error, so it does not appear in the upload at all.
+
 Each logged sample written to the buffer consists of a time stamp followed by one value per configured parameter; this determines the packet size reported by [LoggerStatus](LoggerStatus.md) (index 1). Adding more parameters makes each sample larger and therefore reduces the number of samples the fixed buffer can hold.
 
 The parameter list is captured into the session metadata when logging starts and mirrored from index 4 onward of [LoggerAbout](LoggerAbout.md), so a host can interpret an upload even if the list is later changed. The sampling rate is set by [LoggerGap](LoggerGap.md).

@@ -52,6 +52,7 @@ A pre-cruise stage is only run when the pre-cruise speed is higher than the crui
 | Pre-cruise stroke points toward the final target | rejected — total and pre-cruise stroke must be in the same direction (error 381) |
 | Final target is beyond the pre-cruise target | rejected — total stroke must be longer than the pre-cruise stroke (error 383) |
 | Pre-cruise stroke long enough to accelerate from rest to the cruise speed | rejected — pre-cruise stroke insufficient (error 384) |
+| Remaining stroke after the pre-cruise target long enough to decelerate from cruise speed to rest | rejected — stopping stroke insufficient (error 385) |
 
 ## Examples
 

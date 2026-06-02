@@ -47,7 +47,7 @@ These settings are read and applied to the rollover unit when events are armed w
 ## Examples
 
 ```text
-AEventRollOff=0          ; shift per cycle; non-zero enables rollover
+AEventRollOff=100        ; non-zero shift per cycle; this also enables rollover
 AEventRollCntr=360000    ; wrap the event counter every 360000 user units
 AEventRollCntr           ; query the current rollover threshold
 ```

@@ -210,7 +210,7 @@ Configures the logic of when the index is asserted with respect to the interpola
 
 ### [15] Amplitude monitoring type (default 1)
 
-Only valid when `SinCosSetup[17]=1`. Determines the amplitude checking mechanism.
+Only valid when the amplitude error check is enabled (`SinCosSetup[17]=1` on v5 central-i; `SinCosSetup[18]=1` on v4 — see the version note under [17]/[18]). Determines the amplitude checking mechanism.
 
 | Value | Mechanism |
 |---|---|
@@ -219,7 +219,7 @@ Only valid when `SinCosSetup[17]=1`. Determines the amplitude checking mechanism
 
 ### [16] Amplitude threshold (default 0)
 
-Only valid when `SinCosSetup[17]=1`. Determines the threshold for amplitude checking. If the amplitude is outside the threshold, an amplitude error is asserted when amplitude error checking is enabled. The threshold depends on the checking mechanism.
+Only valid when the amplitude error check is enabled (`SinCosSetup[17]=1` on v5 central-i; `SinCosSetup[18]=1` on v4 — see the version note under [17]/[18]). Determines the threshold for amplitude checking. If the amplitude is outside the threshold, an amplitude error is asserted when amplitude error checking is enabled. The threshold depends on the checking mechanism.
 
 | Value | SinCosSetup[15]=0 | SinCosSetup[15]=1 |
 |---|---|---|
@@ -240,6 +240,9 @@ Enables/disables amplitude value checking. An amplitude error is triggered when 
 |---|---|
 | 0 | Disabled |
 | 1 | Enabled |
+
+> [!note]
+> Indices 17 and 18 are swapped between firmware versions. On **v5** (central-i), index 17 is the amplitude error check and index 18 is the frequency check, as documented here. On **v4**, the two are reversed: index 17 is the **frequency** check and index 18 is the **amplitude** error check. The accepted values (0 = disabled, 1 = enabled) and behaviour of each function are the same; only the array position differs. A value other than 0 or 1 in either position is rejected as out of range and `SinCosSetup[21]` reports 1.
 
 ### [18] Frequency check (default 0)
 

@@ -49,6 +49,8 @@ $$
 
 `RecLength` sets the points captured *per parameter*. The scope buffer is shared across all recorded channels, so the binding limit is the total sample count: the number of channels selected in [RecParamA/RecParamB](RecParamA-RecParamB.md) multiplied by `RecLength` must fit the buffer. If it does not, [RecStart](RecStart.md) is rejected. Recording more channels therefore reduces the maximum usable `RecLength`. The maximum buffer size is product-dependent (see the [Data recording](00-overview.md) overview for per-product point limits).
 
+`RecLength` must be greater than 0 for that scope before [RecStart](RecStart.md) will run; starting with the default of 0 (or any value of 0 or less) is rejected.
+
 [RecTrigPos](RecTrigPos.md) splits these points into pre-trigger and post-trigger portions: the pre-trigger fraction is filled first as a rolling buffer while the scope waits for the trigger, and the remainder is captured after the trigger fires.
 
 Worked example: with `RecLength[1] = 16384` and `RecGap[1] = 1` at a 16384 Hz cycle rate, the recording covers `16384 / 16384 = 1.0` s per parameter. Doubling the down-sampling to `RecGap[1] = 2` doubles the period to 2.0 s for the same point count, at half the time resolution. With 4 channels selected via [RecParamA/RecParamB](RecParamA-RecParamB.md) the buffer must hold `4 x 16384 = 65 536` samples — keep this product within the per-product buffer limit.

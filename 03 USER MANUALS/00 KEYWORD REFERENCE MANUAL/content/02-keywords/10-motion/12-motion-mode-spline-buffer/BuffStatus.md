@@ -59,7 +59,7 @@ The primary axis in `[1]` is what [StopBuff](../04-motion-command/StopBuff.md) t
 
 ### End of motion
 
-The move ends when cycle `[4]` exceeds [BuffCycles](BuffCycles.md), or earlier at the next cycle boundary if [StopBuff](../04-motion-command/StopBuff.md) was requested. In the spline-buffer mode the controller streams pre-computed points directly, so there is no separate deceleration ramp — the trajectory is already shaped by its edge conditions ([BuffEdgeMode](BuffEdgeMode.md)). While playing, the output is still clamped to the software position limits, so a buffered point beyond a limit is held at the limit.
+The move ends when cycle `[4]` exceeds [BuffCycles](BuffCycles.md), or earlier at the next cycle boundary if [StopBuff](../04-motion-command/StopBuff.md) was requested. It also ends immediately if any member axis reaches a hardware travel limit in the direction of motion (forward limit while moving forward, or reverse limit while moving backward): the stop is then propagated to every member of the group. In the spline-buffer mode the controller streams pre-computed points directly, so there is no separate deceleration ramp — the trajectory is already shaped by its edge conditions ([BuffEdgeMode](BuffEdgeMode.md)). While playing, the output is still clamped to the software position limits, so a buffered point beyond a limit is held at the limit.
 
 ## Examples
 

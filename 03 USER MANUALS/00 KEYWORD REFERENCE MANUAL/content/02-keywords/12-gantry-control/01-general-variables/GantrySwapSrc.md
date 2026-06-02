@@ -56,7 +56,7 @@ AGantrySwapSrc        ; read the configured source code
 
 - **In motion at write** — rejected (`NOMOTN`); may be changed with the motor on.
 - **Source = 0 (default)** — no source is bound; on-the-fly swapping has nothing to test and the gantry stays in its configured loop mode.
-- **Invalid CAN code** — the pointer resolution falls back to a safe zero pointer; the swap window is then evaluated against zero.
+- **Invalid or wrong-type source** — the write is validated and rejected with an error if the code is not a valid keyword CAN code, names a command rather than a readable variable, has a bad axis or array index, or is not a 64-bit (int64) source. The pointer is updated only after a write passes validation, so a rejected write leaves the previous source in place.
 - **Swapping not enabled** — `GantrySwapSrc` is stored but has no effect unless dual-loop gantry control and on-the-fly swapping are both enabled.
 - **Set on wrong axis** — consulted on the gantry master axis only; writes elsewhere are stored but ignored.
 - **Save** — flash-saveable; the pointer is re-resolved at boot.

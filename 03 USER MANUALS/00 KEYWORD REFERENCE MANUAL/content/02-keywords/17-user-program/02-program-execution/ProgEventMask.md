@@ -38,16 +38,16 @@ Bitwise mask applied to an event's trigger parameter and trigger value.
 
 ## Overview
 
-`ProgEventMask` defines a bitwise mask that is applied to the monitored event parameter ([ProgEventPar](ProgEventPar.md)) before comparison (indices `[1]`–`[5]`, one per event). The same mask is also applied to the trigger threshold ([ProgEventVal](ProgEventVal.md)), so only the masked bits participate in the condition selected by [ProgEventType](ProgEventType.md). This makes it possible to trigger an event on specific status bits rather than a whole word. It is a non-axis array parameter and is saved to flash.
+`ProgEventMask` defines a bitwise mask that is applied to the monitored event parameter ([ProgEventPar](ProgEventPar.md)) before comparison (indices `[1]`–`[5]`, one per event). Only the masked bits of the source participate in the condition selected by [ProgEventType](ProgEventType.md). This makes it possible to trigger an event on specific status bits rather than a whole word. It is a non-axis array parameter and is saved to flash.
 
 ## How it works
 
-Each control cycle, for an integer trigger source, the controller computes `(source AND mask)` and compares it against `(threshold AND mask)`. Only bits set to `1` in the mask take part:
+For an integer trigger source, the controller computes `(source AND mask)` and compares it against the trigger threshold using the selected condition. The mask is applied to the *source* only; the threshold itself is not re-masked, so set [ProgEventVal](ProgEventVal.md) to the value the masked source should match. The comparison is signed. Only bits set to `1` in the mask take part:
 
 - To watch a single status bit, set just that bit in the mask and set [ProgEventVal](ProgEventVal.md) to the desired masked value (for example, mask `0x0001` with value `0x0001` fires when bit 0 is set, using the "equal" condition).
-- For the edge conditions ([ProgEventType](ProgEventType.md) `5`/`6`), the masked source value is what is tracked across cycles, so an edge is detected on the masked bits only.
+- For the edge conditions ([ProgEventType](ProgEventType.md) `5`/`6`), the source's previous reading is also masked before comparison, so an edge is detected on the masked bits only.
 
-The mask is meaningful for integer trigger sources. A floating-point trigger source is compared directly, without masking. The value is held as a wide bit pattern, so masks of full word width are supported (see the version note below for width differences).
+The mask is meaningful for integer trigger sources. A floating-point trigger source is compared directly, without masking. The value is held as a wide bit pattern, so masks of full word width are supported (see the version note below for width differences). The default is no masking (all bits set), so every bit of the source takes part unless you narrow the mask.
 
 ## Changes between versions
 

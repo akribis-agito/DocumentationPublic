@@ -45,7 +45,7 @@ A positive `RefOffsetStep` shifts the reference forward, a negative value backwa
 ### Edge cases
 
 - **Motor off / not in motion:** the value is held; no injection occurs (the countdown is also held).
-- **Out-of-range write:** clamped to the ±(sample-rate × 10) range shown in the frontmatter (the same clamp in v4 and v5).
+- **Out-of-range write:** a value outside the ±(sample-rate × 10) range shown in the frontmatter is rejected with an out-of-range error and the stored value is left unchanged (it is not clamped). The same range applies in v4 and v5.
 - **Simulation mode (`MotorType` = 5):** unchanged.
 - **ModRev wrap:** as for [RefOffsetSamp](RefOffsetSamp.md); the offset rides through the wrap.
 - **Active fault:** the value is preserved but the countdown is cleared.

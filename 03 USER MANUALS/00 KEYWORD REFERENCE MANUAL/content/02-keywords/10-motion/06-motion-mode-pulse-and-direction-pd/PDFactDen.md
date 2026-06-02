@@ -39,8 +39,10 @@ Denominator of the scaling factor applied to detected pulses before accumulation
 Each controller cycle the increment added to [PDPos](PDPos.md) is:
 
 ```text
-PDPos increment = (pulses this cycle) × PDFact / PDFactDen   (then signed by PDEncDir)
+PDPos increment = (pulses this cycle) × PDFact / PDFactDen
 ```
+
+On Central-i v5 the accumulated increment is then negated when [PDEncDir](PDEncDir.md) is 1; on other versions `PDEncDir` is not implemented and has no effect.
 
 The minimum value is `1` (the ratio is undefined at 0), and the maximum is 16,777,215. Because the per-cycle remainder of the division is carried forward, even a non-integer `PDFact/PDFactDen` ratio accumulates into `PDPos` exactly, without drift — see [PDFact](PDFact.md).
 
@@ -56,4 +58,4 @@ APDFactDen          ; read the current denominator
 
 - [PDFact](PDFact.md) — numerator of the scaling factor (and the exact-remainder mechanism)
 - [PDPos](PDPos.md) — counter the scaling is accumulated into
-- [PDEncDir](PDEncDir.md) — accumulation direction (sign)
+- [PDEncDir](PDEncDir.md) — accumulation direction inversion (Central-i v5 only)

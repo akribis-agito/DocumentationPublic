@@ -20,7 +20,7 @@ The jerk is scaled on-the-fly by the cube of the time-scaling factor [CNCAPercen
 
 ### CNCB note
 
-`CNCBJerk` reports the identical quantity for the independent second CNC group.
+`CNCBJerk` reports the jerk value carried by the active segment of the independent second CNC group in the same way. Note, however, that the jerk-limited (S-curve) path profile is currently applied only on group A: group B reports the segment's jerk value but always runs the backward-compatible trapezoidal profile, so its value does not change the shape of the velocity ramps.
 
 ## Examples
 

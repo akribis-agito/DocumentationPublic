@@ -90,11 +90,12 @@ Common failures: `CIStatus[6] = 9` means the remote does not match `CIDeviceType
 ## Edge cases
 
 - **Motor on / in motion.** Rejected — `CIConnect` cannot be issued while the motor is enabled or moving. Stop the axis and disable the motor first.
-- **Already connected.** Rejected up front (no state change) — disconnect with [CIDisconnect](CIDisconnect.md) before reconnecting.
+- **Already connected.** Rejected up front (command error `158`, no state change) — disconnect with [CIDisconnect](CIDisconnect.md) before reconnecting.
+- **Faulty FPGA.** If the controller has flagged a faulty internal FPGA, `CIConnect` is rejected up front before any of the other checks, returning error `244` ("A faulty FPGA has been detected") with no change to the state machine or [CIStatus](CIStatus.md).
 - **Power-up.** When [CIAutoConnect](CIAutoConnect.md) is set for a port the firmware runs this same sequence during start-up, driving the state machine in a tight loop because interrupts are not yet active. The host can poll [CIStatus](CIStatus.md) afterwards.
 - **Standalone product.** Central-i is the master-side feature; on a standalone controller there are no Central-i ports to connect, so the keyword has no effect there. v5 firmware is central-i only.
 - **Simulation device type.** With [CIDeviceType](CIDeviceType.md) set to a simulation class the physical reset/get-device/configure phases are skipped: the port is marked connected immediately, [CIIdentity](CIIdentity.md) is filled with default channel counts, and the port's connected bit is set in [CIGlobalStat](CIGlobalStat.md). The [CIGlobalStat](CIGlobalStat.md) simulation (high) bit is not set by connect; that bit is governed by [MotorType](../../02-motor-and-amplifier/MotorType.md) = simulation.
-- **Device-type mismatch with axis.** Requesting an amplifier class on a port that cannot drive a motor, or a class incompatible with the axis's `AmpType`, is rejected before the sequence starts: the keyword returns a command error directly, leaving the state machine and [CIStatus](CIStatus.md) unchanged. A device/`AmpType` mismatch that is instead detected *during* the connection sequence faults the port and records the specific code (9, 11, 13, or 14) in [CIStatus](CIStatus.md)`[6]`.
+- **Device-type mismatch with axis.** Requesting an amplifier class on a port that cannot drive a motor (command error `170`), or an amplifier-class `CIDeviceType` whose sub-type is incompatible with the axis's `AmpType` (command error `216`), is rejected before the sequence starts: the keyword returns the command error directly, leaving the state machine and [CIStatus](CIStatus.md) unchanged. A device/`AmpType` mismatch that is instead detected *during* the connection sequence faults the port and records the specific code (9, 11, 13, or 14) in [CIStatus](CIStatus.md)`[6]`.
 
 ## See also
 

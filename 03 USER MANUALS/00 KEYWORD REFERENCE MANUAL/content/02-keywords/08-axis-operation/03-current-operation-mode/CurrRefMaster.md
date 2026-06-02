@@ -57,7 +57,7 @@ ACurrRefMaster=0     ; copy current reference from axis A
 
 - **Motor on / in motion at write** — rejected. Configure with the motor off.
 - **`CurrCmdSrc ≠ 3`** — the value is stored but the slave does not follow anything.
-- **Self-reference** — pointing at the same axis as the slave produces a stuck `CurrRef = 0` (the loop references itself).
+- **Self-reference** — pointing at the same axis as the slave makes the copy a no-op (the axis copies its own `CurrRef`), so `CurrRef` freezes at the value it held when current mode was entered.
 - **Master axis not in current mode** — the slave still copies `CurrRef[master]`; if the master is in position or velocity mode, the slave follows whatever the position / velocity loop holds in `CurrRef`.
 - **Out of range** — values beyond the number of axes are rejected.
 - **Save** — flash-saveable.

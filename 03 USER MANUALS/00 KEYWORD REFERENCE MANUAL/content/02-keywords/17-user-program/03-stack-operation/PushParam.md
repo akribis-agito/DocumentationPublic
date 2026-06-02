@@ -36,7 +36,7 @@ Pushes a parameter's value onto the numeric stack of the current thread.
 
 ## How it works
 
-Each thread has its own numeric (expression) stack. `PushParam` reads the named parameter and places its value on the top of that thread's stack, growing the stack by one entry. The pushed value keeps the parameter's data type (32-bit integer, 64-bit integer, 32-bit float, or 64-bit double).
+Each thread has its own numeric (expression) stack. `PushParam` reads the named parameter and places its value on the top of that thread's stack, growing the stack by one entry. On Central-I v5 the stack is typed, so the pushed value keeps the parameter's data type (32-bit integer, 64-bit integer, 32-bit float, or 64-bit double). On v4 the stack holds 32-bit integers, so the value is placed as a 32-bit integer.
 
 A few behaviours are worth noting:
 

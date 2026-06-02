@@ -41,7 +41,7 @@ Value used for an event's trigger detection.
 
 ## How it works
 
-Enter `ProgEventVal` in the **same user units** as the monitored parameter selected by [ProgEventPar](ProgEventPar.md). When the trigger source is (re)assigned, the controller converts this threshold into the source parameter's internal (raw) units once, applying that parameter's user-unit scaling or scaling factor, so each cycle's comparison is fast. The mask from [ProgEventMask](ProgEventMask.md) is applied to the threshold (for integer sources) before it is compared, so only the masked bits participate. For the edge conditions ([ProgEventType](ProgEventType.md) `5`/`6`) the threshold is the level that the source must cross; for the "changed" condition (`8`) the threshold is not used, since the comparison is against the value captured when the event was armed.
+Enter `ProgEventVal` in the **same user units** as the monitored parameter selected by [ProgEventPar](ProgEventPar.md). Whenever this value or the trigger source is (re)assigned, the controller converts this threshold into the source parameter's internal (raw) units once, applying that parameter's user-unit scaling or scaling factor, so each cycle's comparison is fast. The mask from [ProgEventMask](ProgEventMask.md) is applied to the monitored source reading each cycle, not to this threshold, so the threshold is compared at full width against the masked source. For the edge conditions ([ProgEventType](ProgEventType.md) `5`/`6`) the threshold is the level that the source must cross; for the "changed" condition (`8`) the threshold is not used, since the comparison is against the value captured when the event was armed.
 
 ## Examples
 

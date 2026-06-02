@@ -42,6 +42,8 @@ Motor inductance measurement, in micro-Henry (updated by PCSuite).
 
 On v4 `Lm` is a stored measurement the control loop does not use. On central-i v5 the stored `Lm` value is also used to compute the inductive (L·dI/dt) voltage feed-forward term and a cross-coupling compensation term that are added to the current-loop output when voltage feed-forward is enabled. See [LmFFWLevel](../../11-control-tuning/05-feedforwards/LmFFWLevel.md) and [VoltageFFWOn](../../11-control-tuning/05-feedforwards/VoltageFFWOn.md).
 
+For the v5 feed-forward computation the stored value is treated as a line-to-line inductance: on a 3-phase brushless motor (rotary or linear) it is internally halved to obtain the per-phase inductance before being applied, while for a DC brush motor the stored value is used as-is. This conversion is fixed and does not depend on [RLType](RLType.md), which only records how the measurement was reported.
+
 ## Examples
 
 ```text

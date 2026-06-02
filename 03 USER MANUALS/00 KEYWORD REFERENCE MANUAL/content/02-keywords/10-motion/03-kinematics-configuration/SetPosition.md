@@ -57,9 +57,10 @@ When the motor is **on**, the smoothing buffer must also be re-seeded with the n
 `SetPosition` is rejected (no change made) if any of the following hold:
 
 - Encoder **error mapping** is active — disable it first ([MapType](../../04-error-mapping/MapType.md)). The rejection (error code **83**, "assigning a value to position is not allowed while error mapping is activated") is keyed to the **internal** mapping state, not the user-written [MapType](../../04-error-mapping/MapType.md). After you write `MapType = 0`, mapping ramps down over [MapErrOnStep](../../04-error-mapping/MapErrOnStep.md) cycles, and `SetPosition` stays rejected for the whole ramp-down until the internal type has fully reverted to off. With [MapErrOnStep](../../04-error-mapping/MapErrOnStep.md) = 0 the disengage is immediate (one cycle), so `SetPosition` is accepted right away.
-- **Auto-gain** is on (it uses the position filter).
-- The requested value is **outside the software position limits** [RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md) … [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md).
-- The motor is **on** and **input shaping** is on (its buffers are too large to re-seed).
+- **Auto-gain** is on (it uses the position filter) — error code **84**.
+- The requested value is **outside the software position limits** [RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md) … [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md) — error code **163**.
+- The motor is **on** and **input shaping** is on (its buffers are too large to re-seed) — error code **85**.
+- **(central-i v5 only)** The axis is the **Yaw axis of a gantry pair** (the odd-numbered axis of the pair while gantry mode is on) — error code **329**. Apply `SetPosition` to the gantry's primary (even-numbered) axis instead; on a gantry pair with the motor on, that write shifts both the linear and Yaw axes by the same offset so the gantry feedback is preserved.
 
 It is also blocked while the axis is in motion (`ok_in_motion: false`).
 
@@ -67,7 +68,7 @@ It is also blocked while the axis is in motion (`ok_in_motion: false`).
 
 - **Motor off:** allowed; the reference re-seed of the smoothing buffer is skipped because the buffer is already tracking the feedback.
 - **Motor on:** allowed; the controller temporarily forces [Jerk](Jerk.md) to `0` to re-seed the moving-average history with the new value, then restores `Jerk`. Input shaping must be off (rejected with error if not).
-- **Out-of-range write:** rejected if the value falls outside `[RevPLim, FwdPLim]` (the parameter system also clamps to the data-type range).
+- **Out-of-range write:** rejected if the value falls outside `[RevPLim, FwdPLim]` (with error code 163); a value beyond the data-type range is likewise rejected, not clamped.
 - **Simulation mode (`MotorType` = 5):** allowed; feedback follows reference, so the offset shows up in both immediately.
 - **ModRev wrap:** `SetPosition` writes raw values into the reference and feedback; the value may need to be inside `[0, ModRev)` to make sense for a continuous-rotary axis. Writing outside that range will be wrapped by the controller on the next cycle that satisfies the wrap conditions.
 - **Active fault:** the axis is disabled but `SetPosition` is still allowed (the in-motion check is satisfied — there is no motion). The new value persists across re-enable.

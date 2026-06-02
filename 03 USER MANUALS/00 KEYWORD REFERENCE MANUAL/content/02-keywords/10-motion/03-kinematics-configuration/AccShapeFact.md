@@ -70,7 +70,7 @@ AAccShapeFact[1]        ; query first segment factor
 - **Simulation mode (`MotorType` = 5):** unchanged.
 - **ModRev wrap:** the shaping factor is selected per-cycle from the distance band; the wrap leaves the distance-to-target unchanged.
 - **Active fault:** the axis is disabled; the table is preserved.
-- **Other motion modes:** only the PTP-family profiler consults the table.
+- **Other motion modes:** consulted only by the PTP / repetitive-PTP profiler and by the indirect position-following and indirect gear-following profilers; jog, joystick-velocity and the direct modes ignore the table.
 - **Live change in motion:** allowed; the controller re-sorts after each write, and the new factor takes effect on the next cycle.
 - **`AccShapeFact = 0`:** zero acceleration in that band — the profiler will simply hold its current velocity through that band, neither accelerating nor decelerating, until it exits the band. This can extend the move time and is rarely what the user wants.
 

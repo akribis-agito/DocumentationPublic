@@ -52,7 +52,7 @@ Unlike [Va](Va.md) and [Vb](Vb.md), phase C is not produced by its own current l
 | Brush (single-phase) motor | $\text{Vc}\ = \ 0$ (only phases A and B are driven, with $\text{Vb} = -\text{Va}$). |
 | Two-phase stepper motor | $\text{Vc}\ = \ 0$ before the enhanced-speed-range step (the motor return lines connect to the amplifier C leg). |
 
-After it is formed, `Vc` is subject to the same post-processing as the other phases: the enhanced-speed-range midpoint subtraction (ControlMode bit 0, which can make `Vc` non-zero for steppers), and saturation to the maximum PWM amplitude ([MaxPWM](../../06-protections/02-current-and-voltage/MaxPWM.md)) which sets the voltage-saturation bit ([StatReg](../../07-status-and-faults/StatReg.md) bit 22). `MaxPWM` is in the same per-1000 units as `Vc`, defaults to 90 % of the full count (900 keyword units), and can never reach ±1000 because a share of the half-period is reserved for the PWM dead band.
+After it is formed, `Vc` is subject to the same post-processing as the other phases: the enhanced-speed-range midpoint subtraction (ControlMode bit 0, which can make `Vc` non-zero for steppers), and saturation to the maximum PWM amplitude ([MaxPWM](../../06-protections/02-current-and-voltage/MaxPWM.md)) which sets the voltage-saturation bit ([StatReg](../../07-status-and-faults/StatReg.md) bit 22). `MaxPWM` is in the same per-1000 units as `Vc`, defaults to 90 % of the full count (900 keyword units; 89 %, 890 units, on central-i v5), and can never reach ±1000 because a share of the half-period is reserved for the PWM dead band.
 
 For three-phase motors `Vc` is the third 120°-spaced phase that completes the balanced set ($\text{Va} + \text{Vb} + \text{Vc} = 0$):
 

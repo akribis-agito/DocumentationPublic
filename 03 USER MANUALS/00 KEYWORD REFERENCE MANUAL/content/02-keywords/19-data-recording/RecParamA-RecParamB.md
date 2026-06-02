@@ -11,7 +11,7 @@ Per-scope arrays of complex CAN codes selecting the parameters to capture.
 
 ## How it works
 
-When [RecStart](RecStart.md) runs, the controller scans the array from index 1 and resolves each entry until it reaches the first zero, which terminates the list. Every non-zero complex CAN code up to that point becomes a recorded channel. Duplicated complex CAN codes in the array result in duplicated capture.
+When [RecStart](RecStart.md) runs, the controller scans the array from index 1 to 20. On standalone controllers and on Central-i v4, every non-zero entry becomes a recorded channel and zero entries are skipped, so a zero in the middle of the array does not end the list — entries after it are still recorded. On Central-i v5 the scan stops at the first zero, so only the contiguous run of non-zero entries starting at index 1 is recorded. To get consistent behavior across versions, keep the list contiguous and leave all trailing indices set to zero. Duplicated complex CAN codes in the array result in duplicated capture.
 
 Each entry is validated as recording starts. An entry is rejected (and the start fails) if the code is not a valid keyword, if it names a command rather than a parameter (commands cannot be recorded), if its axis is out of range, or if the array index it points to is missing or outside that keyword's bounds. The total sample count — number of channels multiplied by [RecLength](RecLength.md) — must also fit within the scope's buffer, otherwise the start is rejected.
 

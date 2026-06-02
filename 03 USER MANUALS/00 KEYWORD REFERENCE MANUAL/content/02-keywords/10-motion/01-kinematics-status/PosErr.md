@@ -69,16 +69,16 @@ $$
 | Motor off / commutation not done / amplifier is a position-drive | The position loop is not running this cycle. |
 | `MotorType` = stepper open-loop (value 6) | Open-loop steppers have no position feedback loop. |
 | [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) ≠ position control, and force-over-PIV is off | Velocity/current/force modes do not close the position loop. |
-| Simulation (`MotorType` = 5) | `Pos` is forced to follow `PosRef`, so the true error is zero. |
+| Simulation (`MotorType` = 5) | The position loop is bypassed; `Pos` is forced to follow `PosRef`, so the reported error stays at its last value (zero from enable). |
 
 ### High position-error protection
 
-After computing `PosErr` the controller checks its magnitude against [MaxPosErr](../../06-protections/03-motion/general-maximum-limits/MaxPosErr.md); on exceedance it disables the axis and [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1020 (position error exceeds limit). The threshold used is [MaxPosErrOL](../../06-protections/03-motion/general-maximum-limits/MaxPosErrOL.md) instead when the relevant `MaxErrStat` bit indicates open-loop. Otherwise `PosErr` is multiplied by the position gain ([PosGain](../../11-control-tuning/03-position-control/PosGain.md)) to form the velocity-loop reference [VelRef](VelRef.md).
+After computing `PosErr` the controller checks its magnitude against [MaxPosErr](../../06-protections/03-motion/general-maximum-limits/MaxPosErr.md); on exceedance it disables the axis and [ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1020 (position error exceeds limit). The threshold used is [MaxPosErrOL](../../06-protections/03-motion/general-maximum-limits/MaxPosErrOL.md) instead when the relevant `MaxErrStat` bit indicates open-loop, and in that case the fault reported is code 1055 (position error exceeds limit in open-loop) rather than 1020. Otherwise `PosErr` is multiplied by the position gain ([PosGain](../../11-control-tuning/03-position-control/PosGain.md)) to form the velocity-loop reference [VelRef](VelRef.md).
 
 ### Edge cases
 
 - **Motor off:** the controller forces [PosRef](PosRef.md) = [Pos](Pos.md), and `PosErr` is forced to `0` by the conditions above; no enable transient is produced.
-- **Simulation mode (`MotorType` = 5):** `Pos` follows `PosRef`, so the natural `PosErr` is `0` (also forced).
+- **Simulation mode (`MotorType` = 5):** the position loop is bypassed and `Pos` is driven to follow `PosRef`, so the reported `PosErr` is `0`.
 - **ModRev wrap:** the wrap shifts `Pos`, `PosRef` and the shaped-filtered reference together by `ModRev` in the same cycle, so `PosErr` is preserved through the wrap (no spurious error spike).
 - **Active fault:** the axis is disabled — `PosErr` is forced to `0`; check [ConFlt](../../07-status-and-faults/ConFlt.md) snapshot fields to recover the value at the moment of trip.
 - **Dual-loop:** in pseudo dual-loop, `Pos` is the scaled auxiliary, so `PosErr` measures the load-side error. In true dual-loop the position loop closes on the main encoder; the auxiliary feeds only the velocity loop.

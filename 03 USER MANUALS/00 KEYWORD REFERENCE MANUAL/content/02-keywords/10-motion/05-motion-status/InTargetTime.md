@@ -56,7 +56,7 @@ AInTargetTime       ; read current value
 ### Edge cases
 
 - **Motor off:** value is held; the state machine is at `0` so it is not consulted.
-- **Out-of-range write:** the parameter system clamps to the scaled `0`–`10 s` range; negative values are rejected.
+- **Out-of-range write:** a value outside the `0`…`163840`-sample (`0`–`10 s`) range is **rejected** with error 14 and the stored value is left unchanged; the value is not clamped. Negative values are rejected the same way.
 - **Simulation mode (`MotorType` = 5):** unchanged; `PosErr` is zero so the dwell counter starts incrementing from the first cycle.
 - **ModRev wrap:** unrelated.
 - **Active fault:** axis disabled; the dwell counter is reset.

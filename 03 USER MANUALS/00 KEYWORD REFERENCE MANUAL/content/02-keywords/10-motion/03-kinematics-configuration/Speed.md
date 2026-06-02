@@ -58,7 +58,7 @@ In jog (and joystick-indirect velocity) mode the **signed** `Speed` is used dire
 
 ### Relation to MaxVel
 
-`Speed` is the *commanded* cruise velocity for the profiler. It is distinct from the hard velocity-loop clamp [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md), which limits the velocity **reference** ([VelRef](../01-kinematics-status/VelRef.md)) downstream regardless of how the profile was generated. The frontmatter range (±1.3 × 10⁹) is the maximum allowed speed; keep `Speed` at or below `MaxVel` so the profile is not silently clamped by the velocity loop. When the velocity reference is clamped to `MaxVel`, the velocity-saturation bit of [StatReg](../../07-status-and-faults/StatReg.md) (bit 23) is set, so you can detect the condition.
+`Speed` is the *commanded* cruise velocity for the profiler. It is distinct from the hard velocity-loop clamp [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md), which limits the velocity **reference** ([VelRef](../01-kinematics-status/VelRef.md)) downstream regardless of how the profile was generated. The frontmatter range (±1.3 × 10⁹) is the maximum allowed speed. In indirect modes the controller actively guards `Speed` against `MaxVel`: a `Begin` is rejected if `|Speed| > MaxVel` (error 271), and a write of `|Speed| > MaxVel` issued while moving is rejected (error 269), so `Speed` cannot normally exceed `MaxVel` for those modes. Where the reference does reach the `MaxVel` clamp, the velocity-saturation bit of [StatReg](../../07-status-and-faults/StatReg.md) (bit 23) is set, so you can detect the condition.
 
 ### Live changes
 
@@ -67,13 +67,13 @@ The profiler reads `Speed` every cycle, so raising or lowering it mid-move makes
 ### Edge cases
 
 - **Motor off:** value is held; no profiler computation runs.
-- **Out-of-range write:** the parameter system clamps writes to ±1.3 × 10⁹; values outside are rejected.
+- **Out-of-range write:** a write outside ±1.3 × 10⁹ is rejected (it is not clamped); the stored value is left unchanged.
 - **Simulation mode (`MotorType` = 5):** unchanged.
 - **ModRev wrap:** unrelated — `Speed` is a rate, not a position.
 - **Active fault:** the axis is disabled; the next `Begin` re-reads `Speed` and re-checks against `MaxVel`.
 - **`Speed = 0`:** for jog, the axis just decelerates/stays at rest; for PTP, the `Begin` is accepted and the move enters the in-motion state, but the axis does not advance because the cruise speed is zero — it remains stalled until `Speed` is raised.
-- **`|Speed| > MaxVel` at `Begin`:** rejected for indirect modes (jog, PTP, repetitive PTP, PD-indirect, gear-indirect, joystick-position-indirect) with instruction error 271 (commanded `Speed` exceeds the `MaxVel` limit); the user must lower `Speed` or raise [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md). Direct modes accept any `Speed` because the user supplies position commands directly.
-- **Live raise above `MaxVel` during a move:** the profiler will ramp toward the new value, but the velocity loop will clamp [VelRef](../01-kinematics-status/VelRef.md) to `MaxVel` and set the velocity-saturation bit; the system does not fault.
+- **`|Speed| > MaxVel` at `Begin`:** rejected for indirect modes (jog, PTP, repetitive PTP, PD-indirect, gear-indirect, ecam-indirect, joystick-position-indirect) with instruction error 271 (commanded `Speed` exceeds the `MaxVel` limit); the user must lower `Speed` or raise [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md). Direct modes accept any `Speed` because the user supplies position commands directly.
+- **Live raise above `MaxVel` while in motion:** rejected. A write of `|Speed| > MaxVel` issued while the axis is moving is refused with instruction error 269 (`Speed` cannot be set higher than `MaxVel`); the previous `Speed` is kept. The check applies only when the axis is in motion — when it is not moving the write is accepted and is instead validated against `MaxVel` by the next `Begin` (error 271). (Writing `MaxVel` below the current `Speed` while in motion is the symmetric case, rejected with error 270.)
 - **Jog with `Speed = 0` mid-move:** the axis decelerates to rest at `Decel`.
 
 ## Examples

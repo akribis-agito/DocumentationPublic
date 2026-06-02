@@ -45,7 +45,7 @@ $$
 \text{Ia}\ \lbrack mA\rbrack\ = \ (ADC_{A}\ \cdot\ k_{sense})\ -\ I_{0,A}
 $$
 
-where $k_{sense}$ is the hardware current-sensing factor and $I_{0,A}$ is the per-axis zero-current offset. The current-sensing factor is fixed by the current-range hardware (so a given ADC count maps to a fixed mA value). For three-phase brushless motors only two phases are measured directly and the third is derived from Kirchhoff's law as $\text{Ic} = -(\text{Ia} + \text{Ib})$; depending on the hardware variant `Ia` or `Ib` may be the derived one. `Ia` is then used to form the dq currents [Iq](Iq.md)/[Id](Id.md) and the magnitude [MotorCurr](MotorCurr.md), and it is checked against the per-phase over-current protection [MaxPhaseCurr](../../06-protections/02-current-and-voltage/MaxPhaseCurr.md).
+where $k_{sense}$ is the hardware current-sensing factor and $I_{0,A}$ is the per-axis zero-current offset. The current-sensing factor is fixed by the current-range hardware (so a given ADC count maps to a fixed mA value). For three-phase brushless motors only two phases are measured directly and the third is derived from Kirchhoff's law as $\text{Ic} = -(\text{Ia} + \text{Ib})$; `Ia` itself is always a directly measured phase (the derived phase is the third one). `Ia` is then used to form the dq currents [Iq](Iq.md)/[Id](Id.md) and the magnitude [MotorCurr](MotorCurr.md), and it is checked against the per-phase over-current protection [MaxPhaseCurr](../../06-protections/02-current-and-voltage/MaxPhaseCurr.md): if $|\text{Ia}|$ stays above `MaxPhaseCurr` for several consecutive samples the axis is shut off with a phase A over-current fault (fault code 1013).
 
 ## Examples
 

@@ -42,6 +42,8 @@ $$\text{Output count} = \text{Source} \cdot \frac{\text{VEncFact}}{\text{VEncFac
 
 Internally the firmware first multiplies the source by `VEncFact` into a 64-bit "output plane", then a tracking controller drives the emitted count so that `count × VEncFactDen` follows `source × VEncFact`. The default `VEncFact = VEncFactDen = 65536` gives unity scaling and preserves backward compatibility with older firmware that used a fixed `/65536` factor.
 
+Choosing too aggressive a scale (a large `VEncFact / VEncFactDen` relative to how fast the source moves) makes the number of pulses the virtual encoder must emit in one control cycle exceed what the hardware can produce. If that limit is exceeded while the motor is on, the controller turns the motor off and logs fault **1066** (virtual encoder exceeded the maximum number of pulses per cycle).
+
 ## Examples
 
 ```text

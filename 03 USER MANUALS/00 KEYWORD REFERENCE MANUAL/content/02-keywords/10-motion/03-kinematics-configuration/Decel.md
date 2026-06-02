@@ -86,6 +86,7 @@ In third-order mode ([JerkMode](../02-motion-configuration/JerkMode.md) = 1) `De
 - **Active fault:** the axis is disabled and the profiler is stopped; the next `Begin` re-reads `Decel`.
 - **Other motion modes:** consumed by jog, PTP, repetitive PTP, PD-indirect, gear-indirect and joystick-indirect modes. Direct modes drive position commands directly and ignore `Decel`, except during a controlled stop.
 - **Joystick velocity direct (`MotionMode = 14`):** internally the deceleration is set very high (essentially instant); the user `Decel` is only used during a stop ramp.
+- **During homing:** when a homing sequence starts the controller saves the current `Decel` (along with `Speed`, `Accel`, `EmrgDec` and `JerkMode`) and may overwrite it with a per-step deceleration from the homing definition; the saved value is restored when homing finishes, and jerk smoothing is forced off for the duration of homing.
 - **Cannot be zero:** the minimum is `100` user units/s² to keep the profiler arithmetic finite.
 
 ## Examples

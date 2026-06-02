@@ -40,19 +40,20 @@ It can be issued at any time, including during motion, which is how a host strea
 
 The queue is a cyclic buffer of a fixed depth (see the note below). Each push:
 
-1. Checks for free space. If the queue is full, the push is rejected and an error is returned; nothing is added.
+1. Checks for free space. If the queue is full, the push is rejected with error 273 and nothing is added.
 2. Otherwise stores the value at the next free (newest) slot and reduces the free-space count.
 
 The controller consumes targets from the oldest end at the cycle rate set by [FIFOPosCycle](FIFOPosCycle.md). If pushes fall behind playback and the queue empties, the axis holds its last target rather than ending motion. Queue depth, free space, and fullness can be read from [FIFOPosStatus](FIFOPosStatus.md), and the whole queue can be emptied with [FIFOPosClear](FIFOPosClear.md).
 
-The interpolation applied between pushed targets is set by [FIFOPosType](FIFOPosType.md), and the streamed reference is shifted by [FIFOPosPosOf](FIFOPosPosOf.md) / [FIFOPosVelOf](FIFOPosVelOf.md) / [FIFOPosCurrOf](FIFOPosCurrOf.md) as it is applied.
+The interpolation applied between pushed targets is set by [FIFOPosType](FIFOPosType.md). As the streamed reference is applied, [FIFOPosPosOf](FIFOPosPosOf.md) is added to the position reference, [FIFOPosVelOf](FIFOPosVelOf.md) to the velocity reference, and [FIFOPosCurrOf](FIFOPosCurrOf.md) to the current reference.
 
 > The queue depth depends on the product. On compact-controller and certain processor builds it holds 32 targets; on the larger drive platform it holds 1024 targets. Use [FIFOPosStatus](FIFOPosStatus.md) to read the actual free space rather than assuming a fixed depth.
 
 ## Examples
 
+The pushed value is the value written with the `FIFOPosPush` command itself; it is independent of [FIFOPosTrgt](FIFOPosTrgt.md).
+
 ```text
-AFIFOPosTrgt=100000  ; (optional) stage a working value
 AFIFOPosPush=100000  ; append target 100000 to the queue
 AFIFOPosPush=120000  ; append the next target
 ```

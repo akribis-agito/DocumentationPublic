@@ -43,7 +43,7 @@ The homing engine runs inside the control interrupt, once per controller cycle, 
 1. **Rising edge (just set to 1).** The current kinematics — [Speed](../10-motion/03-kinematics-configuration/Speed.md), acceleration, deceleration, emergency deceleration and the jerk mode — are copied into internal "mirror" variables, and jerk mode is forced off for the duration of homing. Each homing step then overwrites the kinematics with the values from its [HomingDef](HomingDef.md) parameters. The internal step pointer is set to step 1 and the "first cycle in step" flag is raised.
 2. **Each cycle.** The engine executes the current step (see [HomingDef](HomingDef.md) for the per-step behaviour) and republishes the step number to [HomingStat](HomingStat.md) and [HomingStep](HomingStep.md).
 3. **Completion.** Reaching an "End homing" step sets `HomingOn` back to `0` and `HomingStat` to `100`. Any failure (timeout, unexpected motor-off, in-motion, wrong end-of-motion reason, etc.) also clears `HomingOn` to `0` and writes the matching negative error code to `HomingStat`.
-4. **Falling edge (just cleared).** The mirrored kinematics (Speed, accel, decel, emergency decel) are restored, so a homing run leaves the axis's normal motion settings unchanged.
+4. **Falling edge (just cleared).** The mirrored kinematics (Speed, accel, decel, emergency decel) and the jerk mode are restored, so a homing run leaves the axis's normal motion settings unchanged.
 
 While `HomingOn` is `0`, the engine keeps the internal pointer primed at step 1 so the next write of `1` always starts from the beginning.
 

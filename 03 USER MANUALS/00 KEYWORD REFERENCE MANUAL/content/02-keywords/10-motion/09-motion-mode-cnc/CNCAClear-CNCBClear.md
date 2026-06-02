@@ -13,7 +13,7 @@ Unlike [StopCNCA](StopCNCA.md)/[StopCNCB](StopCNCB.md), which halt motion but le
 
 ## How it works
 
-- `CNCAClear` is **rejected with an error while a CNC motion is in progress** on that queue. Stop the motion first ([StopCNCA](StopCNCA.md)/[StopCNCB](StopCNCB.md)), then clear. When the queue is idle (or simply being filled with no motion yet), the clear is accepted.
+- `CNCAClear` is **rejected with error 190 ("This CNC is in motion. Can't clear the CNC FIFO.") while a CNC motion is in progress** on that queue. Stop the motion first ([StopCNCA](StopCNCA.md)/[StopCNCB](StopCNCB.md)), then clear. When the queue is idle (or simply being filled with no motion yet), the clear is accepted.
 - Clearing restores the queue to its empty state: the free-space count returns to the full usable capacity (reported by element 7 of [CNCAStatus/CNCBStatus](CNCAStatus-CNCBStatus.md)), the queue pointers and segment IDs are reset, and the engine again expects the first segment (so the next push must follow the first-segment rules described in [CNCAPushType/CNCBPushType](CNCAPushType-CNCBPushType.md)).
 - The end-of-segment correction counter [CNCAEndErrCnt/CNCBEndErrCnt](CNCAEndErrCnt-CNCBEndErrCnt.md) and the velocity-jump / acceleration-limit counters are reset to 0, and the per-axis maximum velocity-jump and acceleration limits return to their defaults.
 

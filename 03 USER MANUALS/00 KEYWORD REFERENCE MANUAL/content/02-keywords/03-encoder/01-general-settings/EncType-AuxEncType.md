@@ -53,7 +53,7 @@ A typical absolute-encoder commissioning sequence. The example uses a 26-bit BiS
 
 ```text
 AMotorOn=0                ; motor off — these keywords change the feedback pipeline
-AEncType=6                ; absolute, BiSS-C (use 3 for EnDat 2.2, 8 for Tamagawa)
+AEncType=6                ; absolute, BiSS-C (use 3 for EnDat 2.2; 8 for Tamagawa on v4 only)
 AEncAbsBits=26            ; total bit count of the absolute word
 AEncAbsMB=4               ; discard the 4 least-significant (unused/fine) bits
 AEncAbsOff=0              ; offset added to the masked reading at power-up

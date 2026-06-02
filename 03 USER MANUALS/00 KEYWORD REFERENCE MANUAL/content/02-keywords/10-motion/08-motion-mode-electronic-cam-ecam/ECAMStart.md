@@ -56,7 +56,7 @@ The four index keywords divide the cam pattern into three parts that the control
 
 `ECAMStart` is the very first entry of the pattern. While the master sits at or below the master position that maps to `ECAMStart` (the *pre-start* region), the follower reference is clamped to `GenData[ECAMStart]` (for positive [ECAMGap](ECAMGap.md)) so it holds steady rather than running off the table; with negative `ECAMGap` the roles of `ECAMStart` and `ECAMEnd` as the clamped ends are swapped. If a [StopECAM](StopECAM.md) is pending when the master reaches this clamp, the motion ends there.
 
-If `ECAMCycles = 1` there is no repetition, so `ECAMStartCyc` and `ECAMEndCyc` are not used and the whole pattern is simply `ECAMStart` … `ECAMEnd`.
+Even when `ECAMCycles = 1` there is no repetition, all four index keywords must still be set to non-zero values and satisfy the ordering above; `ECAMStartCyc` and `ECAMEndCyc` still bound the repeating segment, which is simply played once, so the whole pattern spans `ECAMStart` … `ECAMEnd`. A value of `0` in any of the four indexes marks the table as unused and is rejected when ECAM motion starts.
 
 ## Examples
 

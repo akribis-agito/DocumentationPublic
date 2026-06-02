@@ -30,7 +30,7 @@ Scaling speed by `P/100` and the ramps by the square of `P/100` is exactly what 
 
 For example, if a segment is programmed with `CNCASpeed = 200000` user units/s and `CNCAAccel = 100000` user units/s², setting `CNCAPercents = 50` runs that segment with a cruise of `100000` user units/s and an acceleration of `25000` user units/s² — the velocity-time profile keeps the same shape, simply stretched to twice the duration. `CNCAPercents = 200` halves the duration: cruise rises to `400000` user units/s with acceleration scaled to `400000` user units/s².
 
-Because the factor is re-applied every cycle, changing `CNCAPercents` mid-path re-targets the speed and ramps on the next cycle. This is broader than [CNCASpeedPer/CNCBSpeedPer](CNCASpeedPer-CNCBSpeedPer.md), which scales the speed only and leaves the ramps unchanged. The two multiply together for the net speed factor.
+Because the factor is re-applied every cycle, changing `CNCAPercents` mid-path re-targets the speed and ramps on the next cycle while the active segment uses the trapezoidal (backward-compatible) profile. When the active segment runs the jerk-limited (S-curve) profile, an on-the-fly change is not applied in the middle of that segment; it takes effect at the start of the next segment instead. This is broader than [CNCASpeedPer/CNCBSpeedPer](CNCASpeedPer-CNCBSpeedPer.md), which scales the speed only and leaves the ramps unchanged. The two multiply together for the net speed factor.
 
 ### CNCB note
 

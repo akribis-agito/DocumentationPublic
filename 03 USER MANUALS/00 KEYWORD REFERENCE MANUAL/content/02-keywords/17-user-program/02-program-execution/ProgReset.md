@@ -43,7 +43,9 @@ Resets a user program task to its initial state.
 - Clears any wait state and pending single-step flags.
 - Clears the thread's [ProgError](ProgError.md) value.
 
-The command is rejected if there is no stored program, if the thread index is out of range, or if the thread is currently running — stop it with [ProgHalt](ProgHalt.md) first. After a reset the thread is left stopped; the next [ProgRun](ProgRun.md) chooses which task it executes.
+Resetting **thread 1** additionally disables the user program event system and clears all event enables and statuses, since the main thread owns events.
+
+The command is rejected if there is no stored program, if the thread index is above the highest thread number, or if the thread is currently running — stop it with [ProgHalt](ProgHalt.md) first. After a reset the thread is left stopped; the next [ProgRun](ProgRun.md) chooses which task it executes.
 
 ## Examples
 

@@ -59,7 +59,7 @@ AMapErrOffset=500    ; bias the corrected position by 500 counts
 - **Motor on / in motion at write** — rejected while the motor is on or the axis is in motion; use [MapErrOffRamp](MapErrOffRamp.md) to control the slew instead.
 - **Mapping off** ([MapType](MapType.md) = 0) — the **actual** internal offset is forced to `0` only after the disengage ramp has fully completed (internal type reverted to off). *During* the disengage ramp-down the actual offset keeps slewing toward its target as normal; what fades it out of the feedback is the engage ramp counter (the whole correction is scaled by `counter / 16384`; see [MapErrOnStep](MapErrOnStep.md)), not a forced-zero of the offset. Once off, writes to `MapErrOffset` are stored but do not affect the feedback until mapping is re-engaged.
 - **Simulation motor** — mapping is skipped entirely in simulation, so the actual offset is held at `0` regardless.
-- **`MapErrOffRamp = 0`** — the actual offset never slews; changing `MapErrOffset` has no effect until `MapErrOffRamp` is non-zero.
+- **Slew always progresses** — [MapErrOffRamp](MapErrOffRamp.md) has a minimum of `1`, so it can never be `0`; the actual offset always slews toward the target (the only question is how fast).
 - **Save** — not flash-saveable; reset to `0` on every boot.
 
 ## See also

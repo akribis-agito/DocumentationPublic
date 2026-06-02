@@ -43,10 +43,10 @@ Like [IaRef](IaRef.md), the phase B reference is the commutation projection of t
 | Motor group (MotorType) | Phase B reference |
 |----|----|
 | Single-phase / brush motor (MotorType = 1, 2) | $\text{IbRef}\ = \ 0$ (only phase A is driven). |
-| Three-phase brushless motor (MotorType = 3, 4) | $\text{IbRef}\ = \ \text{CurrRef}_{dir} \cdot \sin(\theta - 120^\circ)$, where $\theta$ is the commutation angle — the phase B result of the inverse transform of $\text{IqRef} = \text{CurrRef}_{dir}$ and [IdRef](IdRef.md) (= 0). Active when current control runs in the abc domain ([ControlMode](ControlMode.md) bit 1 set). |
+| Three-phase brushless motor (MotorType = 3, 4) | $\text{IbRef}\ = \ \text{CurrRef}_{dir} \cdot \sin(\theta - 120^\circ)$, where $\theta$ is the commutation angle — the phase B result of the inverse transform of $\text{IqRef} = \text{CurrRef}_{dir}$ and [IdRef](IdRef.md) (= 0). This commutation reference is computed every sample regardless of [ControlMode](ControlMode.md); the phase B error [IbErr](IbErr.md) it produces is only used as a control-loop input when current control runs in the abc domain ([ControlMode](ControlMode.md) bit 1 set). When current control is bypassed it is also applied directly as the phase B voltage command. |
 | Two-phase stepper motor (MotorType = 6, 7) | $\text{IbRef}\ = \ \text{CurrRef}_{dir} \cdot \cos(\theta_{step})$, where $\theta_{step}$ is the stepper electrical angle. The two stepper phases are driven in quadrature (sin/cos). |
 
-`IbRef` is bounded to ±64000 mA. Its difference from the measured [Ib](Ib.md) gives [IbErr](IbErr.md), the input to the phase B current loop.
+`IbRef` is bounded by the controller's peak current rating, which is product-dependent (up to ±64000 mA on the highest-rated hardware). Its difference from the measured [Ib](Ib.md) gives [IbErr](IbErr.md), the input to the phase B current loop.
 
 ## Examples
 

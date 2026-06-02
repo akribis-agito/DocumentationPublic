@@ -48,7 +48,7 @@ Opens the control loop at a chosen point (none, current, or voltage).
 
 ### Current open loop (1)
 
-Each cycle the controller overwrites the current reference with the user value from [OpenLoopCurr](OpenLoopCurr.md). The position, velocity and force loops above are bypassed; only cogging compensation ([UPMVelTable](../../09-current-and-voltage/03-current-compensation/UPMVelTable.md)) is still added on top, and the DC current offset still applies. The current loop itself stays closed and regulates the motor to that reference.
+Each cycle the controller overwrites the current reference with the user value from [OpenLoopCurr](OpenLoopCurr.md). The position, velocity and force loops above are bypassed; only cogging compensation ([UPMVelTable](../../09-current-and-voltage/03-current-compensation/UPMVelTable.md)) is still added on top (brushless motors only). The current loop itself stays closed and regulates the motor to that reference.
 
 ### Voltage open loop (2)
 
@@ -80,7 +80,7 @@ AOpenLoopOn=0        ; close all loops (normal operation)
 - **Error limits** — while `OpenLoopOn ≠ 0` the wider open-loop limits replace the normal position/velocity/force error limits; clearing `OpenLoopOn` restores the normal limits on the same cycle.
 - **Voltage mode amplitude** — `OpenLoopVolt` is capped at 20 % PWM to protect the motor; values above the cap are rejected (out-of-range).
 - **Mode independence** — `OpenLoopOn` overrides whatever [OperationMode](OperationMode.md) is configured; the position / velocity / force loops are bypassed regardless of `OperationMode`.
-- **Simulation** — open-loop drive still injects values into the controller pipeline; on a simulated motor the result is a numerical-only response.
+- **Simulation** — open-loop drive requires a real, commutated motor. Current open loop (`1`) injects only when the motor is on, commutation is set and the motor is not a simulated motor; on a simulated motor the current reference is not overwritten.
 - **Save** — not flash-saveable; restarts at `0` after every reset.
 
 ## See also

@@ -32,9 +32,9 @@ Array of absolute positions at which event output pulses are generated.
 
 ## Overview
 
-`EventTable` is an array of absolute positions at which event output pulses are generated in the table-driven event mode ([EventType](EventType.md) = 2). Each element defines a position trigger point in user units; entries must be ordered from low to high. The active range of the table is bounded by [EventTableBeg](EventTableBeg.md) (first index used) and [EventTableEnd](EventTableEnd.md) (last index used). It is an axis-related array parameter and is not saved to flash.
+`EventTable` is an array of absolute positions at which event output pulses are generated in the table-driven event mode ([EventType](EventType.md) = 2). Each element defines a position trigger point in user units. Entries are normally arranged in the order the axis will reach them, but they do not have to rise monotonically — a table whose positions rise and then fall is supported (see *How it works*). The active range of the table is bounded by [EventTableBeg](EventTableBeg.md) (first index used) and [EventTableEnd](EventTableEnd.md) (last index used). It is an axis-related array parameter and is not saved to flash.
 
-The number of usable entries is model-dependent (100 on most models, more on larger models). Because event-table indexing is 1-based, entries are stored from index 1 upward; index 0 is not used as a table position.
+The number of usable entries is model-dependent: 100 on standalone controllers and up to 65000 on central-i. Because event-table indexing is 1-based, entries are stored from index 1 upward; index 0 is not used as a table position.
 
 ## How it works
 

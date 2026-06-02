@@ -41,7 +41,7 @@ Per-axis array defining which parameters are included in the Central-i offline d
 | [1] | Frequency | Offline-channel frequency setting |
 | [2] | Filter length | Offline-channel filter length |
 
-These elements parameterise how the offline channel is run for the port. The per-transaction contents (what to read or write, and the reply) are not held here — they live in [CIOfflineData](CIOfflineData.md); `CIOfflineDef` carries only the channel-level definition. Set it before connecting so it is in place when the link comes up.
+These elements parameterise how the offline channel is run for the port. The per-transaction contents (what to read or write, and the reply) are not held here — they live in [CIOfflineData](CIOfflineData.md); `CIOfflineDef` carries only the channel-level definition.
 
 > Note: in the firmware examined, these two configuration fields are defined and stored but are not consumed by the active offline-message code path, which uses fixed mailbox sizing during [CIConnect](CIConnect.md). Treat the fields as the channel definition; the per-message behaviour is driven by [CIOfflineData](CIOfflineData.md).
 

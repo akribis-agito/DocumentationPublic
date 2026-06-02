@@ -48,6 +48,8 @@ Upper bound for range-based trigger activation logic (RecTrigTyp 9–12).
 
 Please refer to [RecTrigTyp](RecTrigTyp.md) on how the maximum value is used.
 
+When the trigger source ([RecTrigSrc](RecTrigSrc.md)) is a variable expressed in user units, the upper bound is interpreted in those same user units: at [RecStart](RecStart.md) it is converted from user units to the controller's internal units before it is compared with the source, exactly as for [RecTrigVal](RecTrigVal.md). For sources that have no user-unit scaling, the value is compared directly. In v4, if the converted upper bound falls outside the 32-bit integer range, `RecStart` is rejected with an error.
+
 > **Note:** In v4 the upper-bound value is a 32-bit integer. In v5 (Central-i) it is a 64-bit floating-point value, so non-integer range bounds can be specified directly.
 
 ## Examples

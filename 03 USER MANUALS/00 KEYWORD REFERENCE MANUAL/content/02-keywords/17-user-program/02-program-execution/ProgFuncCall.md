@@ -38,9 +38,9 @@ Calls a user program function defined by a ProgFunc label.
 
 ## How it works
 
-Each running thread has its own *call stack* — a per-thread area that records where to return to. When `ProgFuncCall` runs, the engine:
+Each running thread has its own *call stack* — a per-thread area that records where to return to. `ProgFuncCall` is only valid when issued from within a running user program; sending it from a communication terminal is rejected. When `ProgFuncCall` runs, the engine:
 
-1. Verifies the call exists (a [ProgFunc](ProgFunc.md) label with the requested index must be defined) and that the call stack has room (at least two free slots are required). If the stack is full the command fails with a stack-full error.
+1. Verifies the call stack has room (at least two free slots are required) and that the call exists (a [ProgFunc](ProgFunc.md) label with the requested index must be defined). If the stack is full the command fails with a stack-full error; if no matching function is defined it fails with a function-not-found error.
 2. Pushes the *return address* — the location of the next line after the `ProgFuncCall` — onto the call stack.
 3. Pushes the caller's *frame location* and makes the new frame point at the return-address slot. The frame location is the reference point used by [ProgArgThis](ProgArgThis.md) and [ProgArg](ProgArg.md) to find arguments.
 4. Jumps execution to the [ProgFunc](ProgFunc.md) label.

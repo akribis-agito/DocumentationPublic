@@ -61,8 +61,8 @@ ACurrCmdVal[2]=-500  ; second current reference (mA)
 - **Index 0** — invalid; valid indices are `CurrCmdVal[1]`–`CurrCmdVal[20]`. `CurrCmdVal[0]` does not exist.
 - **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 1 or [CurrCmdSrc](CurrCmdSrc.md) ∉ {1, 2}) — the table is **not consulted**; writes are stored but the current loop does not use them.
 - **Out of range** — values outside the drive's ±full-scale current command (typically ±64000 mA) are rejected by the parameter table.
-- **Motor off** — the table is not applied; on motor-on the dispatcher starts from `CurrCmdIndex` (without reset unless `GoToCurrMode` is used).
-- **Sequence end via HTime = 0** — the dispatcher exits current mode when it encounters a [CurrCmdHTime](CurrCmdHTime.md) of `0`; the corresponding `CurrCmdVal` is reached but not held.
+- **Entry point** — [GoToCurrMode](GoToCurrMode.md) and an automatic threshold switch both reset [CurrCmdIndex](CurrCmdIndex.md) to 1 and the hold counter to 0, so the sequence starts from the first entry. Entering current mode through a digital-input mode switch does **not** reset them, so the dispatcher resumes from the existing `CurrCmdIndex`.
+- **Sequence end via HTime = 0** — when the active entry's [CurrCmdHTime](CurrCmdHTime.md) is `0`, the dispatcher switches straight back to position mode without ramping toward (or holding) that entry's `CurrCmdVal`.
 - **HTime negative** — holds indefinitely at that entry.
 - **Reload while running** — writing a new value at the active index while in current mode takes effect on the next ramp/hold cycle; `CurrRef` ramps toward the new value at the current slope.
 - **Save** — flash-saveable.

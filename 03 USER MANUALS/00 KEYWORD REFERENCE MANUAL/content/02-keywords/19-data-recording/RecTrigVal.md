@@ -48,6 +48,8 @@ Comparison value used in trigger activation logic for each trigger.
 
 Please refer to [RecTrigTyp](RecTrigTyp.md) on how the comparison value is used.
 
+When the trigger source ([RecTrigSrc](RecTrigSrc.md)) is a variable that is expressed in user units, the comparison value is interpreted in those same user units: at [RecStart](RecStart.md) the threshold is converted from user units to the controller's internal units before it is compared with the source. The same conversion is applied to [RecTrigValMax](RecTrigValMax.md). For sources that have no user-unit scaling, the value is compared directly.
+
 > **Note:** In v4 the comparison value is a 32-bit integer. In v5 (Central-i) it is a 64-bit floating-point value, so non-integer thresholds can be specified directly.
 
 ## Examples

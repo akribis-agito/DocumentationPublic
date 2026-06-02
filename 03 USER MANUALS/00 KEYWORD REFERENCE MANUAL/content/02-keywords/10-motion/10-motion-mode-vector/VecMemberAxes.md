@@ -58,7 +58,7 @@ When you command the vector move (with `Begin` on [MotionMode](../02-motion-conf
 - At least two axes must be selected.
 - For an arc ([VecType](VecType.md) = 1), exactly two axes must be selected.
 - The command must be issued on the **lowest-numbered** axis in the group — that axis becomes the group master that runs the path profiler. Issuing it on any other member is rejected.
-- Every member axis must be motor-on, set to [MotionMode](../02-motion-configuration/MotionMode.md) = 16, not already in motion, and commutated.
+- Every member axis must be motor-on, set to [MotionMode](../02-motion-configuration/MotionMode.md) = 16, and not already in motion. From v5, each member must also be commutated.
 
 Once the move starts, the controller copies the master's `VecMemberAxes` value onto every member axis so the whole group reports the same membership. While the group is moving, each member also shows bit 19 (`0x00080000`) set in its [MotionStat](../05-motion-status/MotionStat.md) ("member of a vector-motion group"). When the move ends, `VecMemberAxes` is cleared back to `0` on every member.
 

@@ -42,7 +42,7 @@ The array is 1-indexed. Each element reports one aspect of the logger:
 |---|---|---|
 | 1 | Packet size | Number of buffer slots one logged sample occupies (a time stamp plus one slot per configured parameter). 0 or 1 means no parameters are configured, so nothing is being logged. |
 | 2 | Free space | Number of free slots remaining in the internal buffer. A full packet can be stored only while this is at least the packet size (index 1). |
-| 3 | Run state | `0` not logging; `1` logging; `2` paused because the buffer is full (only possible when [LoggerFullMod](LoggerFullMod.md) = 0). |
+| 3 | Run state | `0` not logging; `1` logging; `2` paused because the buffer is full. This normally happens when [LoggerFullMod](LoggerFullMod.md) = 0 (halt when full); it can also occur briefly in overwrite mode if the oldest packet cannot be discarded because it is being read out by [LoggerUpload](LoggerUpload.md) at that instant. |
 | 4 | Packet identifier | Counter that advances by one each time a sample is due, whether or not it could be stored. Useful for detecting gaps. |
 | 5 | Lost-packets counter | Number of due samples that could not be stored normally (buffer full): in stop mode (index 3 = 2) they were dropped; in overwrite mode the oldest sample was discarded to make room. |
 

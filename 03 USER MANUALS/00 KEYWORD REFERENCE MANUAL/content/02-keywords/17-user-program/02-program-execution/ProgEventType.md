@@ -36,7 +36,7 @@ Defines the trigger type (edge, equal, not equal, …) for an event.
 
 ## How it works
 
-Each control cycle, for an event that is armed and waiting, the controller takes the monitored parameter ([ProgEventPar](ProgEventPar.md)), applies the mask ([ProgEventMask](ProgEventMask.md)) to both it and the threshold, and evaluates the condition selected here against the (masked) threshold [ProgEventVal](ProgEventVal.md). In the table below *value* is the current masked source reading and *threshold* is the masked [ProgEventVal](ProgEventVal.md):
+Each control cycle, for an event that is armed and waiting, the controller takes the monitored parameter ([ProgEventPar](ProgEventPar.md)), applies the mask ([ProgEventMask](ProgEventMask.md)) to that reading, and evaluates the condition selected here against the threshold [ProgEventVal](ProgEventVal.md). The mask is applied to the source reading only; the threshold itself is not masked. In the table below *value* is the current masked source reading and *threshold* is the (converted) [ProgEventVal](ProgEventVal.md):
 
 | Value | Condition | Fires when |
 |---|---|---|

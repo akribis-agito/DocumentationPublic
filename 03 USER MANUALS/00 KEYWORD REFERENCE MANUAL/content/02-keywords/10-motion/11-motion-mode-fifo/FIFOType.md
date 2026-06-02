@@ -44,6 +44,8 @@ This page describes FIFO motion mode and all related keywords: [FIFOValue](FIFOV
 
 The queue holds up to **128 usable entries** (the array has 129 elements; index 0 is reserved so that communication indexes start at 1). Each entry has a **type** (reported here) and a **value** (reported by [FIFOValue](FIFOValue.md)). Most entries are motion segments, but one entry type instead carries a new cycle time, so the maximum number of motion segments depends on how many cycle-time entries are interleaved.
 
+A FIFO motion is started by setting `MotionMode = 9` and issuing [Begin](../04-motion-command/Begin.md). `Begin` is rejected with an error if the queue is empty, and also rejected if the first entry in the queue is not a cycle-time entry (type 5) — the segment duration must be established before the first motion segment is played. Push a [FIFOPushCycle](FIFOPushCycle.md) entry first.
+
 ### Entry types
 
 `FIFOType` reports one of the following codes for each entry. The value range is 0–5.

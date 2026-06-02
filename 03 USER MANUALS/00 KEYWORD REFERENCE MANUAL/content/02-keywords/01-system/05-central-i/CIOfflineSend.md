@@ -41,7 +41,7 @@ Command that transmits the Central-i offline data package on the selected axis p
 1. Checks the mailbox is free (not still transmitting or holding an unread reply).
 2. Builds the outgoing message from [CIOfflineData](CIOfflineData.md): the message type ([1], query or assignment), the opcode/register address ([2]), and — for an assignment — the value to write ([3]).
 3. Writes the message into the mailbox, which triggers transmission to the remote.
-4. Waits (up to a timeout) for the reply. On success it stores the returned value in [CIOfflineData](CIOfflineData.md)`[4]` (for a query) and the acknowledge/error code in `[5]`; a timeout or a non-acknowledge reply reports a communication error.
+4. Waits (up to a timeout) for the reply. On success it stores the returned value in [CIOfflineData](CIOfflineData.md)`[4]` (for a query) and the acknowledge/error code in `[5]`; a timeout or a non-acknowledge reply reports a communication error. On any communication error it also bumps the port's offline error count [CIStatus](CIStatus.md)`[3]`, records the time in [CIStatus](CIStatus.md)`[5]`, and sets the last-error code [CIStatus](CIStatus.md)`[6]` to `5` (offline message error).
 5. Logs the whole exchange — sender, type, opcode, value out, value in, ack/error, time, sample counter and port — into the port-B offline log, [OfflineBLog](OfflineBLog.md).
 
 A reply is expected, so the port should be connected ([CIStatus](CIStatus.md) showing connected) before sending.
@@ -57,7 +57,7 @@ ACIOfflineData[4]      ; value returned by the remote
 
 ## Edge cases
 
-- **Port disconnected.** `CIOfflineSend` does not gate on connection state, so it can be issued on a disconnected port. With no remote responding the transaction simply ends with a communication timeout and the error is captured in [CIOfflineData](CIOfflineData.md)`[5]`.
+- **Port disconnected.** `CIOfflineSend` does not gate on connection state, so it can be issued on a disconnected port. With no remote responding the transaction simply ends with a communication timeout: the command reports a communication error, the acknowledge field [CIOfflineData](CIOfflineData.md)`[5]` is left at `0`, and the failure is recorded in the offline error counters of [CIStatus](CIStatus.md) (`[3]`/`[5]`/`[6]`, code `5`). A remote that replies but rejects the request returns its error code in [CIOfflineData](CIOfflineData.md)`[5]` instead.
 - **Motor on / in motion.** The command is permitted while the motor is on or moving — the offline mailbox is independent of the control loop. The reply still arrives in [CIOfflineData](CIOfflineData.md) on the same cycle window.
 - **Power-up.** The offline channel is only usable after [CIConnect](CIConnect.md) (or [CIAutoConnect](CIAutoConnect.md)) has brought the port up; before that, no remote is addressable and the call times out.
 - **Simulated device.** With [CIDeviceType](CIDeviceType.md) set to a simulation class the port is marked connected but there is no real remote — `CIOfflineSend` will time out, and the simulated-port path is intended for host tooling, not for real register access.

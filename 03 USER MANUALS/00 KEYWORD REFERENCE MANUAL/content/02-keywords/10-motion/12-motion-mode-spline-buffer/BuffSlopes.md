@@ -44,7 +44,7 @@ The stored value is a slope expressed in **thousandths of a position unit per se
 
 `BuffSlopes` only affects the fit when **[BuffEdgeMode](BuffEdgeMode.md) = 0** and the curve is a parabolic or cubic spline ([BuffSplineMod](BuffSplineMod.md) = 2 or 3):
 
-- For the **parabolic** fit, `BuffSlopes[1]` sets the initial velocity at the first waypoint; the remaining edge behaviour follows from the segment-by-segment fit.
+- For the **parabolic** fit, `BuffSlopes[1]` sets the initial velocity at the start of the trajectory (the entry slope of the first segment); the remaining edge behaviour follows from the segment-by-segment fit.
 - For the **cubic** fit, `BuffSlopes[1]` constrains the end derivatives so the spline enters and leaves at the requested slope (a clamped-spline boundary condition).
 
 When [BuffEdgeMode](BuffEdgeMode.md) is 1 (natural) or 2 (multi-cycle), the edge derivatives are determined by those modes and `BuffSlopes` is ignored. Linear interpolation ([BuffSplineMod](BuffSplineMod.md) = 1) also ignores it. Index `[2]` is reserved; only `[1]` is applied by the firmware.

@@ -41,7 +41,7 @@ During boot, after the ports are initialised, the controller scans every port. I
 - For a real remote, the per-port state machine is driven from reset all the way to the synchronised state (or to the error state) in a tight loop, since interrupts are not yet running. On success the connect-time special-parameter setup runs and the port begins cyclic exchange.
 - For a **simulation** device type ([CIDeviceType](CIDeviceType.md) set to a simulation class), the port is marked connected immediately and [CIIdentity](CIIdentity.md) is filled with default channel counts — no physical link is attempted.
 
-Because auto-connect happens before the host is involved, the resulting link state is reported through [CIStatus](CIStatus.md) and [CIGlobalStat](CIGlobalStat.md), which the host can poll after start-up. A per-port internal "skip" flag can suppress auto-connect for a port that has just been reconfigured, so it does not connect with stale settings.
+Because auto-connect happens before the host is involved, the resulting link state is reported through [CIStatus](CIStatus.md) and [CIGlobalStat](CIGlobalStat.md), which the host can poll after start-up.
 
 ## Examples
 

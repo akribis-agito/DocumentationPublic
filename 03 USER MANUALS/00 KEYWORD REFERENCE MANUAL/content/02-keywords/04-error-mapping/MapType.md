@@ -60,7 +60,7 @@ This ramp logic is shared by all of `MapType`, [MapErrOnStep](MapErrOnStep.md), 
 
 ### Multi-axis maps require the source axes to be standing
 
-For 2D/3D maps the table is built/validated with the additional source axes (selected by [MapEncoder](MapEncoder.md)) **motor-on and not moving**; the first dimension must reference this axis's own main encoder. Mapping cannot be enabled in motion (`ok_in_motion = false`).
+Mapping itself cannot be enabled in motion (`ok_in_motion = false`), but writing `MapType` does not by itself validate the encoder selections. The stricter encoder/standing requirements are enforced separately, when **event correction** is run on a mapped axis: the first dimension must reference this axis's own main encoder, and for 2D/3D the additional source axes (selected by [MapEncoder](MapEncoder.md)) must be **motor-on and not moving** and must use their **main** encoders.
 
 ## Examples
 
@@ -76,8 +76,8 @@ AMapType             ; read the active mapping mode
 - **Phasing complete** — mapping operates on the post-commutation feedback path; in practice the axis must already be commutated for mapping to make sense.
 - **Simulation motor** — mapping is **skipped entirely** when [MotorType](../02-motor-and-amplifier/MotorType.md) = simulation, because feeding the corrected position back into the simulated encoder would close a loop with the position reference. `Pos = PosBeforeMap` in this case regardless of `MapType`.
 - **Wrong dimension** — values outside `0`–`3` are rejected at the parameter table.
-- **Multi-dim (`MapType` = 2 or 3)** — additional encoder axes referenced by [MapEncoder](MapEncoder.md)`[2]`/`[3]` must be motor-on, not moving, and pointing at **main** encoders; otherwise the table build raises a "must be main encoders" / "must be first encoder" event.
-- **First-encoder constraint** — [MapEncoder](MapEncoder.md)`[1]` must point at this axis's own main encoder; otherwise the table build is rejected.
+- **Multi-dim (`MapType` = 2 or 3)** — writing `MapType` does not check the encoder selections, but running **event correction** on the mapped axis does: the additional encoder axes referenced by [MapEncoder](MapEncoder.md)`[2]`/`[3]` must be motor-on, not moving, and pointing at **main** encoders, otherwise event correction is rejected with error `221` (other axes not enabled or in motion) or `222` (other axes not using their main encoders).
+- **First-encoder constraint** — for event correction, [MapEncoder](MapEncoder.md)`[1]` must point at this axis's own main encoder, otherwise it is rejected with error `220`. Event correction also requires mapping to be active, else error `219`.
 - **`MapErrOnStep = 0`** — engage / disengage is immediate; useful for tests but produces a position step.
 - **Motor off** — the user-visible `MapType` can be written (`ok_motor_on = true`); the ramp counter continues to update so re-enabling the motor finds the engagement smooth.
 

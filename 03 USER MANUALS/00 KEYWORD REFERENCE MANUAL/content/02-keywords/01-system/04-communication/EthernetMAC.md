@@ -49,6 +49,8 @@ For example, the placeholder address `AA:BB:CC:DD:EE:FF` is stored as:
 
 The firmware reads the six decimal octets and assembles them into the hardware MAC address the network interface advertises. To convert a hex octet to decimal, multiply the first hex digit by 16 and add the second (for example `CC` = 12 × 16 + 12 = 204).
 
+If all six octets are left at 0 (the never-configured state), the controller substitutes a built-in default MAC at start-up so the unit still has a valid hardware address. On standalone controllers that fallback is `3E:30:6C:A2:45:5E`; on Central-i it is `01:01:01:01:01:01`. Because this fallback is the same for every unconfigured unit, give each controller on the same network a unique MAC rather than relying on the default.
+
 ## Examples
 
 ```text

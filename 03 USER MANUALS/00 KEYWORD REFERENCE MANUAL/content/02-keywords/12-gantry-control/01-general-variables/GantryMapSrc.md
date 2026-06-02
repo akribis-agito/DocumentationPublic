@@ -36,7 +36,7 @@ As the gantry moves, the controller reads the live value of the selected source 
 
 ## How it works
 
-`GantryMapSrc` is resolved to its target variable's pointer when written, so the controller can read the live value cheaply each cycle. The parameter table allows the write with the motor on but rejects it while in motion (`NOMOTN`); for safety the standard practice is to configure the source before enabling [GantryOn](GantryOn.md). Each control cycle, when the map is enabled ([GantryMapType](GantryMapType.md) = 1), the controller takes the current value of that variable, subtracts [GantryMapInit](GantryMapInit.md), divides by the map gap to get a fractional table index, and linearly interpolates between the two surrounding [GantryMap](GantryMap.md) entries. Positions below the first entry or above the last clamp to the end entries.
+`GantryMapSrc` is resolved to its target variable's pointer when written, so the controller can read the live value cheaply each cycle. The write is validated against the referenced keyword: the code must be in range (otherwise error 77), name a valid axis (error 78) and array index (error 79), refer to a parameter rather than a function (error 80), and the referenced parameter must be a 64-bit position-type value (error 305). A reference that fails any of these checks is rejected and the source is left unchanged. The parameter table allows the write with the motor on but rejects it while in motion (`NOMOTN`); for safety the standard practice is to configure the source before enabling [GantryOn](GantryOn.md). Each control cycle, when the map is enabled ([GantryMapType](GantryMapType.md) = 1), the controller takes the current value of that variable, subtracts [GantryMapInit](GantryMapInit.md), divides by the map gap to get a fractional table index, and linearly interpolates between the two surrounding [GantryMap](GantryMap.md) entries. Positions below the first entry or above the last clamp to the end entries.
 
 ## Examples
 
@@ -50,7 +50,7 @@ AGantryMapSrc        ; read the configured source code
 - **In motion at write** — rejected (`NOMOTN`).
 - **Map type off** ([GantryMapType](GantryMapType.md) = 0) — stored but **not consulted**.
 - **Source = 0 (default)** — no source is bound; the map is effectively unusable until a valid CAN code is written.
-- **Invalid CAN code** — the pointer resolution falls back to a safe zero pointer; the map reads `0` and the interpolation produces the first table entry.
+- **Invalid reference** — a code that is out of range, names a wrong axis or index, points at a function, or refers to a parameter that is not a 64-bit position type is rejected at write time (errors 77, 78, 79, 80 or 305) and the source keeps its previous value; the controller does not silently accept a bad reference.
 - **Set on wrong axis** — read on the master axis only; writes elsewhere are stored but ignored.
 - **Save** — flash-saveable; the pointer is re-resolved at boot.
 - **Platform** — v5 central-i only.

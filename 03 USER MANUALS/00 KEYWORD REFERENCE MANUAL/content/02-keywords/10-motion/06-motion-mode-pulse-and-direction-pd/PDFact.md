@@ -34,19 +34,21 @@ Numerator of the scaling factor applied to detected pulses before accumulation i
 
 `PDFact` is the numerator of the scaling factor applied to the number of pulses detected, before the sign correction and accumulation into the internal counter [PDPos](PDPos.md). Together with the denominator [PDFactDen](PDFactDen.md) it forms the rational scale `PDFact / PDFactDen` that converts incoming pulse counts into `PDPos` increments. This lets the decoded pulse-and-direction command be matched to the desired axis resolution.
 
-A negative `PDFact` reverses the sense of accumulation; the direction sign can also be configured separately with [PDEncDir](PDEncDir.md).
+A negative `PDFact` reverses the sense of accumulation. On Central-i v5 the direction can also be inverted separately with [PDEncDir](PDEncDir.md); on the standalone controller and Central-i v4 `PDEncDir` has no effect, so the accumulation sign comes only from the pulse-counter direction and the sign of `PDFact`.
 
 ## How it works
 
 Each controller cycle the increment added to [PDPos](PDPos.md) is:
 
 ```text
-PDPos increment = (pulses this cycle) × PDFact / PDFactDen   (then signed by PDEncDir)
+PDPos increment = (pulses this cycle) × PDFact / PDFactDen
 ```
+
+On Central-i v5 the accumulated increment is then negated when [PDEncDir](PDEncDir.md) is 1 (left unchanged when 0); on other versions `PDEncDir` is not implemented and has no effect.
 
 **No counts are lost to rounding.** Because `PDFact/PDFactDen` is generally fractional, scaling leaves a remainder; the controller carries that remainder into the next cycle. Over time the accumulated `PDPos` therefore matches the exact rational scaling rather than drifting — `PDFact` and `PDFactDen` are kept as separate integers (rather than one combined value) precisely so this exact remainder can be tracked.
 
-The value range is ±16,777,215. A **negative** `PDFact` reverses the sense of accumulation; this is independent of the [PDEncDir](PDEncDir.md) sign (the two combine).
+The value range is ±16,777,215. A **negative** `PDFact` reverses the sense of accumulation. On Central-i v5 this is independent of the [PDEncDir](PDEncDir.md) inversion, so the two combine (both negative cancels back to the normal sense); on other versions `PDEncDir` has no effect.
 
 ### Worked example
 
@@ -67,4 +69,4 @@ APDFact             ; read the current numerator
 
 - [PDFactDen](PDFactDen.md) — denominator of the scaling factor
 - [PDPos](PDPos.md) — counter the scaling is accumulated into
-- [PDEncDir](PDEncDir.md) — accumulation direction (sign), combined with the sign of `PDFact`
+- [PDEncDir](PDEncDir.md) — accumulation direction inversion (Central-i v5 only), combined with the sign of `PDFact`

@@ -46,7 +46,7 @@ $$
 \text{ECAMStart} \leq \text{ECAMStartCyc} < \text{ECAMEndCyc} \leq \text{ECAMEnd}
 $$
 
-`ECAMEnd` is the last entry of the pattern, terminating the trailing one-shot segment that runs from `ECAMEndCyc` to `ECAMEnd` after all repeating cycles complete (see the segment table in [ECAMStart](ECAMStart.md)). While the master sits at or beyond the master position that maps to `ECAMEnd` (the *post-end* region), the follower reference is clamped to `GenData[ECAMEnd]` (for positive [ECAMGap](ECAMGap.md)) so the follower holds steady at the end of the profile; with negative `ECAMGap` the clamped ends are swapped with `ECAMStart`. If a [StopECAM](StopECAM.md) is pending when the master reaches this clamp, the motion ends there.
+`ECAMEnd` is the last entry of the pattern, terminating the trailing one-shot segment that runs from `ECAMEndCyc` to `ECAMEnd` after all repeating cycles complete (see the segment table in [ECAMStart](ECAMStart.md)). While the master sits at or beyond the master position that maps to `ECAMEnd` (the *post-end* region), the follower reference is clamped to `GenData[ECAMEnd]` so the follower holds steady at the end of the profile. This applies for either sign of [ECAMGap](ECAMGap.md): a negative `ECAMGap` reverses direction by internally negating the master reading, but the post-end clamp still uses `GenData[ECAMEnd]` (and the pre-start clamp still uses `GenData[ECAMStart]`). If a [StopECAM](StopECAM.md) is pending when the master reaches this clamp, the motion ends there.
 
 In the endless modes that keep only a starting segment (`ECAMCycles = 2147483647`) or no tails at all (`ECAMCycles = -2147483648`), the table entries beyond `ECAMEndCyc` up to `ECAMEnd` are ignored — see [ECAMCycles](ECAMCycles.md).
 

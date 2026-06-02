@@ -38,7 +38,7 @@ The factor affects only how values are presented to the host; the internal contr
 
 The factor is stored in flash, so it persists across power cycles.
 
-Global User Units and the embedded P/D scaling [PDUsrUnits](../10-motion/06-motion-mode-pulse-and-direction-pd/PDUsrUnits.md) are mutually exclusive on the same axis. Use one or the other for the P/D feedback; enabling both raises a conflict when an affected keyword is accessed.
+Global User Units and the embedded P/D scaling [PDUsrUnits](../10-motion/06-motion-mode-pulse-and-direction-pd/PDUsrUnits.md) are mutually exclusive on the same axis. Use one or the other for the P/D feedback; with `UserUnitsEn` on and `PDUsrUnits` left at a non-default scaling, reading or writing an affected member keyword (the pulse-and-direction velocity [PDVel](../10-motion/06-motion-mode-pulse-and-direction-pd/PDVel.md)) is rejected with error `338`. Setting `VelPDUnitFct` itself is not blocked by this conflict.
 
 This keyword is available from v5 (central-i) only.
 

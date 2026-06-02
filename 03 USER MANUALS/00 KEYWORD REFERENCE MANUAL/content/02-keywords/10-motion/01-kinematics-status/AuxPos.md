@@ -58,7 +58,7 @@ Each control cycle the controller reads the auxiliary encoder, computes the per-
 - **Simulation mode (`MotorType` = 5):** there is no physical aux encoder, so `AuxPos` stays at its last written value (no auto-following of an aux reference).
 - **Modulo (`ModRev`):** the modulo/continuous-rotation wrap applies only to the main feedback [Pos](Pos.md); `AuxPos` is **not** wrapped by [ModRev](../../03-encoder/04-modulo-mode/ModRev.md). For a rotary load through a gear, treat `AuxPos` as an unbounded accumulator.
 - **Gantry:** auxiliary encoders are per-axis and are not combined into the gantry common-mode feedback; they are still useful for per-axis dual-loop on each gantry leg.
-- **Out-of-range write:** the parameter system clamps writes to the declared range; values outside the range are rejected with an error rather than silently truncated.
+- **Out-of-range write:** a write outside the declared range is rejected with an error; the value is not clamped or silently truncated, so the previous value is kept.
 - **Active fault:** `AuxPos` continues to update from the auxiliary encoder even while the axis is in fault; reading it during fault is the normal way to inspect the load-side stop position.
 
 ## Examples

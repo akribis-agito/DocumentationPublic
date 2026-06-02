@@ -34,6 +34,8 @@ Per-entry pulse width array; -1 uses the global EventPulseWid.
 
 `EventTableWid` is an array that specifies the pulse width for each [EventTable](EventTable.md) entry individually, overriding the global [EventPulseWid](EventPulseWid.md) for selected entries. The width units follow [EventPulseRes](EventPulseRes.md) (microseconds or nanoseconds), the same as `EventPulseWid`. It is an axis-related array parameter and is not saved to flash.
 
+The per-entry widths are applied only in the software event-by-table scheme ([EventType](EventType.md) = `2`). In the hardware-buffered table scheme ([EventType](EventType.md) = `3`), and in all non-table schemes, `EventTableWid` is ignored and the global [EventPulseWid](EventPulseWid.md) is used.
+
 ## How it works
 
 The width behavior is decided first by the value at the begin entry — the entry at the [EventTableBeg](EventTableBeg.md) index — which sets the mode for the whole event session:
@@ -49,7 +51,7 @@ When the begin entry is positive, each entry's width is resolved as follows:
 | Entry value | Width used for that entry |
 |-------------|---------------------------|
 | Positive | That value, as the pulse duration (units per [EventPulseRes](EventPulseRes.md)). It also becomes the carried-forward width for later `-1` entries. |
-| -1 | The most recent positive per-entry width seen earlier in the active range; if none has been seen yet, the global [EventPulseWid](EventPulseWid.md). |
+| -1 | The carried-forward width — the most recent non-`-1` per-entry value seen earlier in the active range; if none has been seen yet, the global [EventPulseWid](EventPulseWid.md). (A `0` entry also updates the carried width to `0`, so a later `-1` then yields a zero-width pulse rather than reaching back to an earlier positive value.) |
 | 0 | A zero-width pulse for that entry. A `0` on a non-begin entry does **not** toggle — toggle mode is enabled only when the begin entry itself is `0`. |
 
 The valid range for each entry is -1 to 10000000; -1 is the only negative value (it defers to the global width). Output polarity is taken from the sign of the width actually in use for the entry: a per-entry width is always non-negative, so inversion happens only when an entry defers (via `-1`) to a negative global [EventPulseWid](EventPulseWid.md). A positive per-entry width never inverts, even if the global is negative.

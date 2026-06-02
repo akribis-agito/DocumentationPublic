@@ -46,7 +46,7 @@ Ratio between feedback encoder counts and the quadrature pulses emitted on the e
 
 The hardware emits one quadrature edge per (factor + 1) internal counts, so a positive `EmulRat = N` divides the feedback by `N`. A value of 0 collapses to the same behaviour as `EmulRat = 1` (factor 0 — pass-through). A negative value uses the magnitude as the divide ratio while inverting the A/B phase, which reverses the apparent count direction at the downstream device.
 
-On older hardware revisions the emulation output also has to be muxed onto the differential output pins (selecting emulation vs. plain differential outputs); on current revisions the output mux is configured per axis as part of the same write.
+On older hardware revisions the emulation output also has to be muxed onto the differential output pins (selecting emulation vs. plain differential outputs); on current revisions the output mux is configured per axis as part of the same write. On those older revisions `EmulRat = 0` is a special case: instead of emitting a pass-through emulated signal it switches the pins back to the plain differential outputs (emulation off). On current revisions `EmulRat = 0` keeps emulation enabled with factor-1 (pass-through) behaviour as shown above.
 
 ![Encoder emulation A/B/Z waveforms: with EmulRat = 4 the hardware emits one A/B quadrature edge for every 4 feedback counts, so the downstream device sees one-quarter the feedback resolution](emul-rat-waveform.svg)
 

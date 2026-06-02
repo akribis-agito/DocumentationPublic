@@ -41,7 +41,7 @@ Read-only derivative of the vector position reference (vector velocity), always 
 
 ## How it works
 
-`VecdPosRef` is computed each control cycle as the change in the (filtered, high-precision) path position [VecPosRef](VecPosRef.md) over that cycle, expressed in user units per second. It is therefore the live path velocity of the move:
+`VecdPosRef` is computed each control cycle as the change in the (filtered, high-precision) path position [VecPosRef](VecPosRef.md) over that cycle, expressed in counts per second. It is therefore the live path velocity of the move:
 
 - during acceleration it rises at [VecAccel](VecAccel.md) toward the cruise ceiling [VecSpeed](VecSpeed.md);
 - it holds at the cruise value while the move is at speed;

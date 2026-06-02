@@ -62,7 +62,7 @@ AAInMuteRange[1]=0   ; no mute (default)
 
 - **Index 0** — invalid; valid indices are `AInMuteRange[1]`–`AInMuteRange[4]`. `AInMuteRange[0]` is the reserved comm/internal slot (not user-accessible) and `AInMuteRange[5]` does not exist.
 - **Out of range** — negative values are not accepted (range begins at `0`); a zero `AInMuteRange` disables this stage entirely.
-- **Mute is on the post-gain side** — the threshold is specified in `AInPort` mV (after [AInGain](AInGain.md)). Setting a mute around the noise floor after gain is straightforward; multiply by `65536 / AInGain` to translate from pre-gain to post-gain mV.
+- **Mute is on the post-gain side** — the threshold is specified in `AInPort` mV (after [AInGain](AInGain.md)). Setting a mute around the noise floor after gain is straightforward; multiply by `AInGain / 65536` to translate a pre-gain mV value into its post-gain equivalent (the gain stage scales by `AInGain / 65536`).
 - **Step discontinuity** — values just outside the band pass through at full magnitude, so the transition `0 → ±AInMuteRange` is sharp; if continuity matters use [AInDB](AInDB.md) instead.
 - **Negative [AInGain](AInGain.md)** — the mute is symmetric around `0`, so inversion in `AInGain` does not need any change to `AInMuteRange`.
 - **Motor on/off and mode independence** — runs every cycle regardless of `MotorOn` or [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md).

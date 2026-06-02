@@ -34,7 +34,7 @@ Pushes a constant-velocity (linear) segment into the FIFO motion queue.
 
 `FIFOPushLinV` appends a **linear-by-velocity** segment (type 2 in [FIFOType](FIFOType.md)) to the queue. The value is the velocity reference, held constant for the duration of the segment. The segment starts from the previous position reference and advances by a fixed per-sample step equal to that velocity.
 
-It is one of the `FIFOPush*` functions used to fill the queue before or during motion. The entry is added at the tail. If the queue is full, the push is rejected with an error.
+It is one of the `FIFOPush*` functions used to fill the queue before or during motion. The entry is added at the tail. If the queue is full (no free entries), the push is rejected with error 105 and nothing is added.
 
 Unlike [FIFOPushLinP](FIFOPushLinP.md), which specifies how far to move and lets the velocity follow from the cycle time, this function specifies the velocity directly. The distance covered therefore depends on the active [FIFOCycleTime](FIFOCycleTime.md).
 

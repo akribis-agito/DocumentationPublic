@@ -34,6 +34,8 @@ Flips the direction of motor excitation (0 = normal, 1 = flipped).
 
 `CurrDir` configures the direction of motor excitation. It is normally used together with the encoder direction setting [EncDir](../../03-encoder/01-general-settings/EncDir-AuxEncDir.md) to flip the axis into the desired physical direction. Because it changes how current is applied to the motor, it cannot be changed while the axis is in motion or the motor is on.
 
+On a brushless motor, changing `CurrDir` to a new value invalidates the existing commutation: the commutation-done status is cleared and commutation must be repeated before the motor can be enabled again. Writing the same value back has no such effect.
+
 ## How it works
 
 `CurrDir` acts as a sign on the current path between the velocity/current loop and the commutation. After the current reference has been limited, the controller forms the direction-corrected reference used by the current loop:

@@ -42,6 +42,8 @@ Motor resistance measurement, in milliohms (updated by PCSuite).
 
 On v4 the control loop does not use `Rm` to drive the current loop directly — it is a stored measurement only. On central-i v5 the stored `Rm` value is also used to compute the resistive (R·i) voltage feed-forward term that is added to the current-loop output when voltage feed-forward is enabled. See [RmFFWLevel](../../11-control-tuning/05-feedforwards/RmFFWLevel.md) and [VoltageFFWOn](../../11-control-tuning/05-feedforwards/VoltageFFWOn.md).
 
+For the v5 feed-forward computation the stored value is treated as a line-to-line resistance: on a 3-phase brushless motor (rotary or linear) it is internally halved to obtain the per-phase resistance before being applied, while for a DC brush motor the stored value is used as-is. This conversion is fixed and does not depend on [RLType](RLType.md), which only records how the measurement was reported.
+
 ## Examples
 
 ```text

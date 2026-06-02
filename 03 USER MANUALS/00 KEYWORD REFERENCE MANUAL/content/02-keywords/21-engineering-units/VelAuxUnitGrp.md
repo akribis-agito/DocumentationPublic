@@ -48,7 +48,7 @@ Each element returns the internal command code of the member keyword (range 0–
 
 This grouping is consumed by the host display/units layer; it does not change the internal control computation. The scale factor and label for these keywords come from [VelAuxUnitFct](VelAuxUnitFct.md) and [VelAuxUnitUnt](VelAuxUnitUnt.md).
 
-Global User Units and the embedded auxiliary scaling [AuxUsrUnits](../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) are mutually exclusive on the same axis. If `UserUnitsEn` is on and `AuxUsrUnits` is also set to a non-default scaling, accessing a member of this group reports a conflict.
+Global User Units and the embedded auxiliary scaling [AuxUsrUnits](../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) are mutually exclusive on the same axis. If `UserUnitsEn` is on and `AuxUsrUnits` is also set to a non-default scaling, reading or writing a member of this group (the auxiliary feedback velocity [AuxVel](../10-motion/01-kinematics-status/AuxVel.md)) is rejected with error `338`. The membership keyword itself is never affected; only its members are. Leave `AuxUsrUnits` at its default or set `UserUnitsEn` back to 0 to resolve the conflict.
 
 This keyword is available from v5 (central-i) only.
 

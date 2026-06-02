@@ -61,7 +61,7 @@ ACurrCurrTh=2000     ; enter current mode when CurrRef > 2000 mA
 - **After trigger** — both `CurrCurrTh` and [CurrPosThDir](CurrPosThDir.md) are cleared to `0`; the user must re-arm both for the next switch.
 - **Direction** — comparison sense set by [CurrCurrThDir](CurrCurrThDir.md); `0` defaults to a rising-edge crossing.
 - **Motor off** — the threshold engine does not run.
-- **Save** — flash-saveable.
+- **Save** — not flash-saveable; the value is lost on power cycle and must be re-armed.
 
 ## See also
 

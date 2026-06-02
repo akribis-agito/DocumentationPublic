@@ -52,7 +52,7 @@ A list of **pre-conditions** is checked first; if any fails the write is rejecte
 2. On a Central-i master (when the remote is **not** a simulation amplifier), the remote port is active, the remote device is an amplifier, and — on AMP55 remotes — its inrush relay is closed. Simulation-amp remotes skip these three checks.
 3. The inrush charge resistor has been bypassed.
 4. **Commutation is complete** ([StatReg](../../07-status-and-faults/StatReg.md) bit 0, commutation done). If commutation has not been done and the commutation mode is "on motor-on" / "on power-on and motor-on", the enable *blocks* and runs auto-phasing first, then waits about 2 s for the motor to settle before continuing.
-5. The last [CalcFilters](../../11-control-tuning/01-general-keywords/CalcFilters.md) succeeded ([StatReg](../../07-status-and-faults/StatReg.md) bit 27, calc-filters failed, is clear) and the loop filters are not in the "modified, not recalculated" state ([StatReg](../../07-status-and-faults/StatReg.md) bit 26, filters modified, is clear).
+5. The last [CalcFilters](../../11-control-tuning/01-general-keywords/CalcFilters.md) succeeded ([StatReg](../../07-status-and-faults/StatReg.md) bit 27, calc-filters failed, is clear) and the loop filters are not in the "modified, not recalculated" state ([StatReg](../../07-status-and-faults/StatReg.md) bit 26, filters modified, is clear). This check applies on v4; on v5 (central-i) these two filter states no longer block enabling — they only indicate whether a recalculation is needed.
 
 When `MotorType` is set to simulation or the amplifier is a PD type, these checks are skipped (no real power stage).
 

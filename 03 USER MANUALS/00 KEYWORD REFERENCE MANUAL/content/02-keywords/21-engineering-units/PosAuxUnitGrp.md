@@ -51,7 +51,7 @@ Each element returns the internal command code of the member keyword (range 0–
 
 This grouping is consumed by the host display/units layer; it does not change the internal control computation. The scale factor and label for these keywords come from [PosAuxUnitFct](PosAuxUnitFct.md) and [PosAuxUnitUnt](PosAuxUnitUnt.md).
 
-Global User Units and the embedded auxiliary scaling [AuxUsrUnits](../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) are mutually exclusive on the same axis. If `UserUnitsEn` is on and `AuxUsrUnits` is also set to a non-default scaling, accessing a member of this group reports a conflict.
+Global User Units and the embedded auxiliary scaling [AuxUsrUnits](../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) are mutually exclusive on the same axis. If `UserUnitsEn` is on and `AuxUsrUnits` is also set to a non-default scaling, accessing one of the scaled members of this group reports a conflict. The check covers only the members that carry auxiliary user-unit scaling (AuxPos, AuxIndexPos, AuxModRev); AuxEncAbsVal is listed for reference but is not user-unit scaled, so accessing it does not raise the conflict.
 
 This keyword is available from v5 (central-i) only.
 

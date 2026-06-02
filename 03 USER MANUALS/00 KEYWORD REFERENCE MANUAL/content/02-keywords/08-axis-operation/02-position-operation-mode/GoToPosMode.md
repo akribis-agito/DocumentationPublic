@@ -77,7 +77,7 @@ AModeSwitchPos[2]   ; read the position recorded on entry to position mode
 - **CNC / vector member** — not blocked at this entry point; consider stopping the group first to avoid the rest of the group entering an unexpected state.
 - **`BeginOnToPos` self-clearing** — when an entry move launches, `BeginOnToPos` is reset to `0`; arm it again for the next entry.
 - **Mode-switch position anchor** — [ModeSwitchPos](ModeSwitchPos.md)`[2]` is overwritten on every successful entry; previous values are lost.
-- **DInMode parallel** — [DInMode](../../05-inputs-outputs/04-digital-inputs/DInMode.md) codes 18 and 22 perform the same transition on edge but only from current/force respectively (and refuse vector/CNC members).
+- **DInMode parallel** — [DInMode](../../05-inputs-outputs/04-digital-inputs/DInMode.md) codes 18 and 22 perform the same entry-to-position transition on a rising edge, but only from current (18) or force (22) mode respectively; like `GoToPosMode` itself, the entry-to-position direction does not check vector/CNC membership (it is the opposite falling-edge transition, back to current/force, that refuses vector/CNC members).
 
 ## See also
 

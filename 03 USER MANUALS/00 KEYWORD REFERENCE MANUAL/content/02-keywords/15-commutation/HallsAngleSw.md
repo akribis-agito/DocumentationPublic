@@ -39,10 +39,12 @@ Selects how the [HallsAngle](HallsAngle.md) table entries are interpreted: as Ha
 
 ## How it works
 
-When the [HallsAngle](HallsAngle.md) table is at its default (every element `-1`, "not configured"), the controller installs one of the two default maps above according to `HallsAngleSw`. The selected style also defines how the stored angles are applied when deriving the commutation angle from the Hall sensors during Hall-based commutation methods (see [ComtMode](ComtMode.md)).
+When the [HallsAngle](HallsAngle.md) table is unconfigured (any of its six entries still at the default `-1`, "not configured"), the controller installs one of the two default maps above according to `HallsAngleSw`. The selected style also defines how the stored angles are applied when deriving the commutation angle from the Hall sensors during Hall-based commutation methods (see [ComtMode](ComtMode.md)).
+
+Changing `HallsAngleSw` to a value different from the current one also re-derives the existing [HallsAngle](HallsAngle.md) entries: switching from mid-point to switch style replaces each entry with the angle midway between adjacent states, and switching the other way does the reverse, so a configured table is converted between the two representations rather than discarded.
 
 > [!note]
-> Despite the legacy one-line summary in this page's metadata, `HallsAngleSw` is **not** a switch-over angle threshold between Hall- and encoder-based feedback. It is a 0/1 selector for the Hall-angle table interpretation, as described above.
+> `HallsAngleSw` is **not** a switch-over angle threshold between Hall- and encoder-based feedback. It is a 0/1 selector for the Hall-angle table interpretation, as described above.
 
 ## Examples
 

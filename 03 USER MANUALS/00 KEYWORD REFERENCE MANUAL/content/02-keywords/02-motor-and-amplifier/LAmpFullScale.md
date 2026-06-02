@@ -49,7 +49,7 @@ Selecting a range does two things in firmware: it sets the analog scaling factor
 | 1             | 1.2 A over 10 V    | 10000 / 1200 ≈ 8.33 mV/mA |
 | 2             | 3.0 A over 10 V    | 10000 / 3000 ≈ 3.33 mV/mA |
 
-The factor and gain bits are recomputed whenever `LAmpFullScale` or [AmpType](AmpType.md) changes (only while `AmpType = 4`). The linear amplifier serves two axes; the other axes' settings do not affect it.
+Writing `LAmpFullScale` (while `AmpType = 4`) recomputes the scaling factor and re-programs the gain bits. Changing [AmpType](AmpType.md) to 4 recomputes only the scaling factor from the current selection — the gain bits are set when `LAmpFullScale` itself is written. The linear amplifier serves two axes; the other axes' settings do not affect it.
 
 ## Examples
 

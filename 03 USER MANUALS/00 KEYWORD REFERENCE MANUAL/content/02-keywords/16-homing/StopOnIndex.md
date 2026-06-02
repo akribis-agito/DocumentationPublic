@@ -36,7 +36,7 @@ Enables automatic stop of axis motion on the next encoder index pulse.
 
 ## How it works
 
-`StopOnIndex` is evaluated by the motion profiler only while the axis is jogging. On each cycle, if `StopOnIndex` is non-zero and the encoder index is currently detected ([IndexStat](../03-encoder/02-index-detection/IndexStat-AuxIndexStat.md) active), the profiler:
+`StopOnIndex` is evaluated by the motion profiler only during a jog or a velocity-controlled move. On each cycle, if `StopOnIndex` is non-zero and the encoder index is currently detected ([IndexStat](../03-encoder/02-index-detection/IndexStat-AuxIndexStat.md) active), the profiler:
 
 1. raises the in-stop-request bit so the move decelerates to a stop,
 2. sets the motion end reason to "index" (reported by [MotionReason](../10-motion/05-motion-status/MotionReason.md) = 11), and

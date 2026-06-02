@@ -19,25 +19,27 @@ In direct P/D motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 3
 
 ### The filter
 
-Each control cycle in direct mode the reference offset is updated as a first-order low-pass of the P/D delta:
+Each control cycle in direct mode the filtered reference offset is updated as a first-order low-pass of the *cumulative* P/D offset since the start of motion:
 
 $$
-\text{PosRef}_k = \frac{\Delta\text{PDPos}_k \cdot \text{PDFiltFact} + \text{PosRef}_{k-1} \cdot (64 - \text{PDFiltFact})}{64}
+\text{Offset}_k = \frac{(\text{PDPos}_k - \text{PDPos}_{\text{Begin}}) \cdot \text{PDFiltFact} + \text{Offset}_{k-1} \cdot (64 - \text{PDFiltFact})}{64}
 $$
 
-`PDFiltFact` ranges from **1** (slowest filter, heaviest smoothing) to **64** (no filtering — `PosRef` follows the delta directly). The constant 64 is a fixed historical scaling.
+The input to the filter is the running difference between the current `PDPos` and the value latched at [Begin](../04-motion-command/Begin.md) (not the per-cycle change), and the filtered result is the offset added to the reference that was latched at `Begin` to form `PosRef`.
 
-> **Note:** The values above operate on `PDPos` and `PosRef` *relative to* the values latched at [Begin](../04-motion-command/Begin.md), so the filter starts from a clean zero offset at the start of motion.
+`PDFiltFact` ranges from **1** (slowest filter, heaviest smoothing) to **64** (no filtering — `PosRef` follows the input directly). The constant 64 is a fixed historical scaling.
+
+> **Note:** Because both the input and the filtered offset are measured *relative to* the values latched at `Begin`, the filter starts from a clean zero offset at the start of motion.
 
 ### How it is derived from PDPosFilt
 
 When [PDPosFilt](PDPosFilt.md) (a cut-off frequency in Hz × 100) is written, the controller converts it to the coefficient with a backward-Euler discretisation of `w / (s + w)`:
 
 $$
-\text{PDFiltFact} = 64 \cdot \frac{2\pi\,T_s\,\text{PDPosFilt}}{100 + T_s\,\text{PDPosFilt}}
+\text{PDFiltFact} = 64 \cdot \frac{2\pi\,T_s\,\text{PDPosFilt}}{100 + 2\pi\,T_s\,\text{PDPosFilt}}
 $$
 
-where `Ts` is the sample time. The lower bound of `PDPosFilt` (4150) exists so the resulting `PDFiltFact` never rounds to 0.
+where `Ts` is the sample time. Earlier firmware omitted the `2π` factor in the denominator (using `100 + Ts·PDPosFilt`), which made the resulting coefficient slightly larger for the same `PDPosFilt`; for example the default `PDPosFilt = 12800` yields `PDFiltFact = 3` on that earlier firmware versus `2` with the corrected form above. The lower bound of `PDPosFilt` (4150) exists so the resulting `PDFiltFact` never rounds to 0 (it yields `PDFiltFact = 1` either way).
 
 ## Examples
 

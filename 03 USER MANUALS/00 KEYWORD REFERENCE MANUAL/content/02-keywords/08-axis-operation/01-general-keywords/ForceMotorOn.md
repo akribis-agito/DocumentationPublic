@@ -32,7 +32,7 @@ Enables the motor before commutation is done, for current-loop tuning only.
 
 `ForceMotorOn` enables the motor **even though the axis has not been commutated (phased) yet**. Normally the controller refuses to enable an un-phased axis, and it will trip an enabled axis off the instant phasing is found to be missing, because driving an un-phased motor can inject DC current into a single winding. `ForceMotorOn` is the deliberate, guarded exception to that rule: it is intended for **current-loop tuning**, where you need the power stage live while the motor is held under current control before phasing has been performed.
 
-Because it overrides a safety interlock, the enable is protected. Writing `ForceMotorOn` only takes effect when the write carries the specific reserved value **`555851`**; any other value is rejected with an error and the motor is not forced on. Reading `ForceMotorOn` returns the current state: `1` while the forced-on (un-phased) enable is active, `0` otherwise.
+Because it overrides a safety interlock, the enable is protected. Writing `ForceMotorOn` only takes effect when the write carries the specific reserved value **`555851`**; any other value is rejected with error `148` and the motor is not forced on. Reading `ForceMotorOn` returns the current state: `1` while the forced-on (un-phased) enable is active, `0` otherwise.
 
 Available on central-i (v5).
 
@@ -44,7 +44,7 @@ Available on central-i (v5).
 2. While `ForceMotorOn = 1`, the protection that disables an un-phased axis is held off, so the axis can stay enabled under current control without phasing.
 3. If the axis belongs to a gantry pair and a member is not commutated, gantry control is dropped first so the force-on can proceed on the individual axis.
 
-The waiver is strictly tied to the forced state. As soon as the motor turns off (by command or by any fault), `ForceMotorOn` returns to `0`, and the normal interlock is back in force: an enabled axis that is found to be un-phased while `ForceMotorOn = 0` is disabled automatically and a controller fault is recorded (read [ConFlt](../../07-status-and-faults/ConFlt.md) for the code — it reports a "no phasing detected" condition). To force the motor on again you must re-issue the reserved value.
+The waiver is strictly tied to the forced state. As soon as the motor turns off (by command or by any fault), `ForceMotorOn` returns to `0`, and the normal interlock is back in force: an enabled axis that is found to be un-phased while `ForceMotorOn = 0` is disabled automatically and [ConFlt](../../07-status-and-faults/ConFlt.md) = `1080` (no phasing detected) is recorded. To force the motor on again you must re-issue the reserved value.
 
 `ForceMotorOn` does **not** bypass any of the other enable checks — hardware health, communication, inrush bypass, drained-bus and protection conditions all still apply, just as for [MotorOn](MotorOn.md). It only lets you operate the current loop before phasing; it is not a way to run position or velocity moves on an un-phased axis.
 
@@ -63,11 +63,11 @@ AMotorOn=0           ; disable; ForceMotorOn returns to 0 automatically
 
 ### Edge cases
 
-- **Wrong write value** — any value other than `555851` is rejected with an error; the motor is not forced on.
+- **Wrong write value** — any value other than `555851` is rejected with error `148`; the motor is not forced on.
 - **Already phased** — if the axis is already commutated there is nothing to waive; the normal [MotorOn](MotorOn.md) path applies.
 - **Other pre-conditions still fail** — the forced enable still runs the full [MotorOn](MotorOn.md) pre-check chain (hardware, communication, inrush, protections); a failure there still rejects the enable.
 - **Auto-clear on motor off** — turning the motor off, or any fault that disables it, resets `ForceMotorOn` to `0`; the no-phasing protection then re-arms.
-- **No-phasing trip** — if an enabled axis is found un-phased while `ForceMotorOn = 0`, it is disabled and [ConFlt](../../07-status-and-faults/ConFlt.md) records a no-phasing fault. See [MotorReason](../../07-status-and-faults/MotorReason.md).
+- **No-phasing trip** — if an enabled axis is found un-phased while `ForceMotorOn = 0`, it is disabled and [ConFlt](../../07-status-and-faults/ConFlt.md) = `1080` (no phasing detected) is recorded. See [MotorReason](../../07-status-and-faults/MotorReason.md).
 - **Gantry** — gantry control is dropped for an un-phased pair before the force-on proceeds.
 - **Intended use** — current-loop tuning only. Do not use it to attempt position/velocity motion on an un-phased motor.
 - **Platform** — v5 central-i only.

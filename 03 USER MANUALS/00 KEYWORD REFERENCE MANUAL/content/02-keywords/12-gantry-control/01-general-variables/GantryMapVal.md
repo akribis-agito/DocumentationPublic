@@ -30,13 +30,13 @@ Live decoupling ratio interpolated from the gantry map at the current position.
 
 ## Overview
 
-`GantryMapVal` is the read-only decoupling ratio the controller is applying right now, interpolated from the [GantryMap](GantryMap.md) table at the position taken from [GantryMapSrc](GantryMapSrc.md). It is a ratio in the range **0.0 to 1.0** (it reads **0.5** — the symmetric split — until the map is built). It is reported on the master axis and is not saved to flash. It is meaningful only when the position-dependent map is enabled ([GantryMapType](GantryMapType.md) = 1). Available on central-i (v5).
+`GantryMapVal` is the read-only decoupling ratio the controller is applying right now, interpolated from the [GantryMap](GantryMap.md) table at the position taken from [GantryMapSrc](GantryMapSrc.md). It is a ratio in the range **0.0 to 1.0** (it reads **0.5** — the symmetric split — until the map is built). It is reported on both axes of the gantry pair (the master-axis value drives the feedback combination, the yaw-axis value drives the current split) and is not saved to flash. It is meaningful only when the position-dependent map is enabled ([GantryMapType](GantryMapType.md) = 1). Available on central-i (v5).
 
 `GantryMapVal` is the diagnostic that lets you confirm the map is being indexed and interpolated as intended: as the gantry moves, this value should sweep smoothly through the ratios you stored in [GantryMap](GantryMap.md).
 
 ## How it works
 
-Each control cycle, when the map is active, the controller reads the source position from [GantryMapSrc](GantryMapSrc.md), finds the surrounding entries in [GantryMap](GantryMap.md) (spaced from [GantryMapInit](GantryMapInit.md) by the map gap) and linearly interpolates between them; the result is `GantryMapVal`. The controller then uses this ratio to weight both the gantry feedback combination and the split of motor currents (see [GantryMapType](GantryMapType.md)). Outside the mapped range it clamps to the first or last table entry.
+Each control cycle, when the map is active, the controller reads the source position from [GantryMapSrc](GantryMapSrc.md), finds the surrounding entries in [GantryMap](GantryMap.md) (spaced from [GantryMapInit](GantryMapInit.md) by the map gap) and linearly interpolates between them; the result is `GantryMapVal`. A separate ratio is interpolated for each of the two gantry axes: the ratio read on the master (even) axis weights the gantry feedback combination, while the ratio read on the yaw (odd) axis weights the split of motor currents (see [GantryMapType](GantryMapType.md)). The two ratios come from different columns of the map and so can read differently on the two axes. Outside the mapped range it clamps to the first or last table entry.
 
 ## Examples
 
@@ -50,7 +50,7 @@ AGantryMapVal        ; read the live decoupling ratio at the current position
 - **Source not configured** ([GantryMapSrc](GantryMapSrc.md) = 0) — the lookup reads from a zero pointer and produces the first table entry; treat the readout with caution.
 - **Outside the table** — values past the last entry clamp to the last entry; below the first entry clamp to the first entry. The diagnostic will plateau when the gantry leaves the mapped range.
 - **Read-only** — writes are rejected.
-- **Non-master axis** — reading on an axis that is not a gantry master returns the master's most recent value or `0` if no master is configured.
+- **Per-axis value** — both axes of an active gantry pair carry their own interpolated ratio: the master (even) axis value drives the feedback combination and the yaw (odd) axis value drives the current split. An axis that is not part of an active gantry pair is not updated by the lookup and holds its default or last value.
 - **Platform** — v5 central-i only.
 
 ## See also

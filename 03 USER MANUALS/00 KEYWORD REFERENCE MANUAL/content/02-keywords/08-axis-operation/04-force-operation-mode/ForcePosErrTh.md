@@ -32,11 +32,11 @@ Position-error threshold (condition B) to enter force mode.
 
 ## Overview
 
-`ForcePosErrTh` is the threshold position error (`PosErr`) value used in the second condition check (condition B) to enter force operation mode. It is used only while the axis is in position operation mode ([OperationMode](../01-general-keywords/OperationMode.md) = 3).
+`ForcePosErrTh` is the threshold position error (`PosErr`) value used in the second condition check (condition B) to enter force operation mode. It is evaluated whenever the axis is neither in current operation mode nor already in force operation mode — that is, while in position operation mode ([OperationMode](../01-general-keywords/OperationMode.md) = 3) **or** velocity operation mode ([OperationMode](../01-general-keywords/OperationMode.md) = 2).
 
 ## How it works
 
-Each cycle, while not in force mode, the controller compares the position error against this threshold:
+Each cycle, while the axis is neither in current mode nor in force mode, the controller compares the position error against this threshold:
 
 | Value | Descriptions                                              |
 |-------|-----------------------------------------------------------|
@@ -55,7 +55,7 @@ AForcePosErrTh=0     ; disable this condition
 
 ### Edge cases
 
-- **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 3) — not evaluated; force entry from velocity mode is not gated by this condition.
+- **Current or force mode** — not evaluated while the axis is already in current operation mode ([OperationMode](../01-general-keywords/OperationMode.md) = 1) or force operation mode ([OperationMode](../01-general-keywords/OperationMode.md) = 4). It is evaluated in both position mode (= 3) and velocity mode (= 2).
 - **Zero value** — disables this condition.
 - **After trigger** — cleared to `0` on entry to force mode to avoid repeat triggers.
 - **Out of range** — values outside ±327680 are rejected.

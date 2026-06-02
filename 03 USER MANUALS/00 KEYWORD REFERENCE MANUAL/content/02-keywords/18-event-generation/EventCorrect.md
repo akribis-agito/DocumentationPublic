@@ -38,16 +38,16 @@ It is a command, not a stored value, so it takes no argument; issuing it trigger
 
 ## How it works
 
-For each entry in the table the controller treats the listed position as a desired true position and looks up where the encoder must read for the mapped (corrected) feedback to equal it, interpolating through the active error map. The result is stored in the matching entry of [EventTableCor](EventTableCor.md). For multi-dimensional maps, the correction also uses the present positions of the other mapped axes, which is why those axes must be enabled and standing still while the command runs.
+For each active entry in the table (from [EventTableBeg](EventTableBeg.md) through [EventTableEnd](EventTableEnd.md)) the controller treats the listed position as a desired true position and looks up where the encoder must read for the mapped (corrected) feedback to equal it, interpolating through the active error map. The result is stored in the matching entry of [EventTableCor](EventTableCor.md). For multi-dimensional maps, the correction also uses the present positions of the other mapped axes, which is why those axes must be enabled and standing still while the command runs.
 
 The command checks several prerequisites and is rejected (returns an error) if any fail:
 
-| Prerequisite | Why |
-|--------------|-----|
-| Encoder error mapping must be active on this axis | The correction is derived from the map; with no map there is nothing to correct. |
-| This axis's main encoder must be the first encoder of its error map | The table positions are corrected against this axis's own feedback. |
-| For 2D/3D maps, the other mapped axes must use their main encoders | The interpolation reads those axes' feedback. |
-| For 2D/3D maps, the other mapped axes must be motor-on and not moving | Their positions must be stable while the table is recomputed. |
+| Prerequisite | Error if violated | Why |
+|--------------|-------------------|-----|
+| Encoder error mapping must be active on this axis | 219 | The correction is derived from the map; with no map there is nothing to correct. |
+| This axis's main encoder must be the first encoder of its error map | 220 | The table positions are corrected against this axis's own feedback. |
+| For 2D/3D maps, the other mapped axes must use their main encoders | 222 | The interpolation reads those axes' feedback. |
+| For 2D/3D maps, the other mapped axes must be motor-on and not moving | 221 | Their positions must be stable while the table is recomputed. |
 
 Run `EventCorrect` again whenever the error map or the source [EventTable](EventTable.md) changes, then select the corrected table for table-mode generation.
 

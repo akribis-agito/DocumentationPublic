@@ -19,7 +19,7 @@ The CNC pipeline is a producer/consumer queue:
 
 1. The host **pushes** segments: one `CNCAPushType` (which reserves the segment and records how many parameters it expects) followed by exactly that many `CNCAPushParam` writes (or a single `CNCAPushSeg` over Ethernet).
 2. Each fully-pushed segment is **queued** in the segment FIFO ([CNCAFIFO/CNCBFIFO](CNCAFIFO-CNCBFIFO.md)), in push order.
-3. The motion engine **plays back** the oldest queued segment, advancing the path one control sample at a time. When a segment ends, the engine takes the next one (skipping over any non-motion segments such as delays or I/O writes until it reaches the next motion segment).
+3. The motion engine **plays back** the oldest queued segment, advancing the path one control sample at a time. When a segment ends, the engine takes the next one. Configuration and side-effect segments (such as I/O writes, array writes, or vector/corner parameter changes) are applied at once and the engine moves straight on to the following segment; a delay segment is also a non-motion segment but it actively holds the path for its requested time, and wait-type segments hold the path until their condition is met.
 4. As each segment is consumed it **drains** from the queue, freeing its space for new pushes.
 
 If the engine reaches the point where it needs a new segment but the queue holds no fully-formed motion segment — either because it is empty, or because the host is still mid-way through pushing the last segment's parameters — the motion ends (**underrun**). To avoid an underrun, keep pushing so that at least one complete segment is always queued ahead of the one being played. Monitor free space with [CNCAStatus/CNCBStatus](CNCAStatus-CNCBStatus.md).
@@ -69,7 +69,11 @@ The number of [CNCAPushParam/CNCBPushParam](CNCAPushParam-CNCBPushParam.md) valu
 | 21 | Wait on input | 0 | 6: input selection, axis selection, analog-input index, digital-input mask, trigger type, trigger value. |
 | 22–25 | Spatial-events setup / table / fixed-gap | 0 | type-specific; configure position-triggered output events along the path. |
 
+Segment types 1–21 are accepted on all firmware. The spatial-events types 22–25 are accepted only on newer firmware (develop); on LTS v3.X.X the highest valid type is 21, and pushing a higher type is rejected. The 3D-arc type (20) is also not available on standalone drives.
+
 Segment type ordering rules: a "set initial positions" segment (type 7) is accepted only as the first push into an empty queue; if it is omitted, the first **motion** segment must be a linear move (type 1), and an automatic corner (type 14) cannot be the first or second motion segment.
+
+Continuity rule: motion must be continuous across the join between segments. A push is rejected for non-continuous motion if the previous segment's end speed is not zero and either (a) the new segment is a motion-blocking type (delay, set positions, relative/absolute, coordinate offsets, wait-on-array, assign positions, write-and-wait, modify position filter, or wait-on-input), or (b) the new segment is a motion segment whose involved-axes word differs from the previous motion segment. [CNCAEndSegMod/CNCBEndSegMod](CNCAEndSegMod-CNCBEndSegMod.md) selects what happens on such a discontinuity: the default rejects the push, while a value of 1 instead forces the previous segment's end speed to zero and accepts the push.
 
 ## Examples
 
@@ -121,3 +125,4 @@ Keep pushing while `Begin` runs to chain longer paths -- the engine underruns if
 - [CNCAFIFO/CNCBFIFO](CNCAFIFO-CNCBFIFO.md) — queued segment data
 - [CNCAStatus/CNCBStatus](CNCAStatus-CNCBStatus.md) — queue depth, free space and motion state
 - [CNCAClear/CNCBClear](CNCAClear-CNCBClear.md) — clear all pending segments
+- [CNCAEndSegMod/CNCBEndSegMod](CNCAEndSegMod-CNCBEndSegMod.md) — behaviour on a non-continuous-motion join

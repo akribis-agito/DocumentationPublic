@@ -41,9 +41,9 @@ Ramp rate (mA/s) toward each current-command table entry.
 
 Each control cycle the controller adds (or subtracts, depending on whether `CurrRef` is below or above the target) an increment of `CurrCmdSlope[index] x sample_time` to `CurrRef`, moving it toward `CurrCmdVal[index]`:
 
-- The fractional part of each per-cycle increment is carried over in an internal remainder accumulator, so the effective ramp rate is exact even when the per-cycle step is below 1 mA.
+- On standalone/v4, where `CurrRef` is an integer, the fractional part of each per-cycle increment is carried over in an internal remainder accumulator, so the effective ramp rate stays exact even when the per-cycle step is below 1 mA. On central-i v5, where `CurrRef` is a float, the increment is applied directly with no rounding and no remainder accumulator.
 - While `CurrRef` is still ramping (not yet equal to the target), [CurrCmdCntr](CurrCmdCntr.md) is forced to 0; only once `CurrRef` exactly equals `CurrCmdVal[index]` does the holding timer start incrementing.
-- When the ramp reaches or overshoots the target in a cycle, `CurrRef` is snapped to `CurrCmdVal[index]` and the remainder accumulator is cleared.
+- When the ramp reaches or overshoots the target in a cycle, `CurrRef` is snapped to `CurrCmdVal[index]` (and, on standalone/v4, the remainder accumulator is cleared).
 
 Because the slope is applied independently per entry, the rate into each `CurrCmdVal` step can differ. On standalone/v4 the minimum value is 1 (a slope of 0 is not allowed, which guarantees the ramp always progresses); central-i v5 lowers the minimum to a near-zero value, so fractional sub-1 mA/s slopes are allowed (see [Changes between versions](#changes-between-versions)).
 
@@ -61,7 +61,7 @@ Worked example — if `CurrCmdIndex` = 2, `CurrCmdCntr` = `CurrCmdHTime[2]` (end
 - **Wrong mode** ([OperationMode](../01-general-keywords/OperationMode.md) ≠ 1 or [CurrCmdSrc](CurrCmdSrc.md) ∉ {1, 2}) — the slope is **not consulted**; stored but unused.
 - **Out of range** — `0` and negative values are rejected. On standalone/v4 the minimum is `1` to guarantee progress; central-i v5 lowers the minimum to a near-zero value, allowing fractional sub-1 mA/s slopes.
 - **Large slope** — values that would produce a per-cycle step larger than the remaining distance to the target cause `CurrRef` to snap to the target on the next cycle; the holding timer starts immediately.
-- **Reload mid-ramp** — writing a new slope on the active entry changes the rate from the next cycle; the remainder accumulator is preserved so there is no discontinuity.
+- **Reload mid-ramp** — writing a new slope on the active entry changes the rate from the next cycle. On standalone/v4 the remainder accumulator is left untouched, so there is no discontinuity; on central-i v5 there is no remainder to preserve.
 - **Save** — flash-saveable.
 - **Platform** — v5 stores as `float32` with no upper limit; v4 stores as `int32` up to `2 147 483 647`.
 

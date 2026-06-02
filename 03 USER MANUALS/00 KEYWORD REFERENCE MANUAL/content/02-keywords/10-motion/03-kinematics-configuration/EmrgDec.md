@@ -67,8 +67,9 @@ An [Abort](../04-motion-command/Abort.md) halts motion immediately by clearing t
 - **Simulation mode (`MotorType` = 5):** unchanged; simulation runs the same profiler.
 - **ModRev wrap:** unrelated; `EmrgDec` is a rate, not a position.
 - **Active fault that disables the axis:** the motor is disabled immediately by the fault path (no profiler ramp); `EmrgDec` is only used for the *controlled* limit/software-limit/controlled-stop-input cases where the motor is intentionally kept enabled while ramping down.
-- **Other motion modes:** the EmrgDec substitution is performed by the PTP-family profiler (jog/PTP/PTP-rep/joystick); direct modes (PD/gear/ECAM/CNC/vector/FIFO/spline/slave) handle stops in their own way and may not consult `EmrgDec`.
+- **Other motion modes:** the `EmrgDec` substitution is performed by every mode that brings the axis to rest through the deceleration profiler — jog, PTP, repetitive PTP, the joystick-position modes, the indirect gearing and P/D-indirect modes, and the FIFO and FIFO-position-tracking modes. The pure direct modes (P/D-direct, gear-direct, ECAM-direct) and the path-buffer modes (CNC, vector, spline-buffer, slave) drive position commands directly and do not consult `EmrgDec`.
 - **Cannot be zero:** the minimum is `100` user units/s² to keep the profiler arithmetic finite.
+- **During homing:** when a homing sequence starts the controller saves the current `EmrgDec` (along with `Speed`, `Accel`, `Decel` and `JerkMode`) and may overwrite it with a per-step deceleration taken from the homing definition; the saved value is restored when homing finishes. Jerk smoothing is also forced off for the duration of homing.
 
 ## Examples
 

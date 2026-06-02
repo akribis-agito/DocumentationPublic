@@ -40,7 +40,7 @@ How long bus voltage may stay above the MaxVBus limit before tripping.
 
 ## How it works
 
-The drive keeps an over-voltage timer. On each periodic bus check, if `VBus ≥ MaxVBus` the timer is accumulated, otherwise it is reset to 0. When the timer reaches `MaxVBusTime` while still over the limit, the [MaxVBus](MaxVBus.md) trip fires ([ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1008). With the default `MaxVBusTime = 0` the over-voltage trip is effectively immediate on the next check.
+The drive keeps an over-voltage timer. On each periodic bus check, if `VBus ≥ MaxVBus` the timer is accumulated, otherwise it is reset to 0. When the timer reaches `MaxVBusTime` while still over the limit and the motor is on, the [MaxVBus](MaxVBus.md) trip fires ([ConFlt](../../07-status-and-faults/ConFlt.md) shows fault code 1008). With the default `MaxVBusTime = 0` the over-voltage trip is effectively immediate on the next check.
 
 ![Timeline showing VBus rising above MaxVBus, the over-voltage timer accumulating, and the trip firing when the timer reaches MaxVBusTime with the axis still over the limit](maxvbus-time-window.svg)
 
@@ -50,7 +50,7 @@ The drive keeps an over-voltage timer. On each periodic bus check, if `VBus ≥ 
 
 ### Edge cases
 
-- **Motor off:** the timer accumulates whenever `VBus ≥ MaxVBus` regardless of `MotorOn`; over-voltage protects the drive hardware, not just the moving motor.
+- **Motor off:** the over-voltage timer accumulates and the [StatReg](../../07-status-and-faults/StatReg.md) over-voltage status updates whenever `VBus ≥ MaxVBus` regardless of `MotorOn`, but the actual trip (disabling the axis and recording the fault) only fires while the motor is on. When the motor is off there is no over-voltage trip; the [MaxVBusAbs](MaxVBusAbs.md) ceiling is what blocks re-enabling if the bus is too high.
 - **Mode dependency:** the timer runs regardless of operation mode.
 - **`MaxVBusTime = 0`:** the over-voltage trip is effectively immediate on the next bus check (no tolerance for transients).
 - **Applies only to over-voltage:** [MinVBus](MinVBus.md) and [MaxVBusAbs](MaxVBusAbs.md) do not use this delay.

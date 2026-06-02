@@ -32,13 +32,15 @@ Command that transfers a compiled user-program binary image into controller prog
 
 ## Overview
 
-`DownloadUPBin` transfers a compiled user-program binary image into the controller's program memory, loading the program that the controller will subsequently execute. It is a non-axis command and is not saved to flash. Because it rewrites program memory, it cannot run while the axis is in motion or while the motor is on; stop motion and disable the motor first.
+`DownloadUPBin` transfers a compiled user-program binary image into the controller's non-volatile program storage, loading the program that the controller will subsequently execute. The downloaded program is retained across power cycles. It is a non-axis command. Because it erases and reprograms the program storage area, it cannot run while the axis is in motion or while the motor is on; stop motion and disable the motor first.
 
 A typical workflow is to erase any existing program with [ProgErase](ProgErase.md), download the new image with `DownloadUPBin`, then reset the program state with [ProgReset](ProgReset.md) before running it.
 
 ## How it works
 
-`DownloadUPBin` starts a transfer on whichever communication channel issued the command (serial, CAN, or Ethernet). After the command is accepted, the host streams the compiled binary as a sequence of fixed-length data blocks. The controller appends each block to program memory in order until it receives the end-of-file marker that terminates the image. The transfer is guarded by a timeout: if blocks stop arriving before the end-of-file marker is seen, the download aborts with an error and the program memory is left incomplete, so the image must be downloaded again.
+`DownloadUPBin` first halts any running user-program threads, then erases the program storage area. If the erase fails the command returns error 27 and no transfer begins. Otherwise the controller acknowledges with `OK` and the host streams the compiled binary as a sequence of 8-byte data blocks on whichever communication channel issued the command (serial, CAN, or Ethernet); each block is written to storage as it arrives. The transfer ends when the host sends a block of eight carriage-return bytes as the end-of-file marker. A block of an unexpected length during the transfer aborts it with error 15.
+
+The transfer is guarded by a 10-second timeout: if blocks stop arriving before the end-of-file marker is seen, the download aborts. On a timeout the controller sends no reply at all, because the link is assumed to be out of sync, and no valid program is left in storage. When the end-of-file marker is received normally, the controller writes a completion signature and verifies the program's checksum; if the checksum does not match, the signature is erased (so no program is present) and the command returns error 171. A failed or interrupted download therefore leaves the controller with no usable program, and the image must be downloaded again.
 
 Because the program file is compiled for a specific layout, the binary must be produced by the PC Suite for the target controller; the offsets that keywords such as [Jump](Jump.md) rely on are fixed when the file is built.
 

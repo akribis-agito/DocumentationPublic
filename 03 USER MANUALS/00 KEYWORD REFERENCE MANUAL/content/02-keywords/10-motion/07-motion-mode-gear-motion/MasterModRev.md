@@ -56,6 +56,8 @@ Each cycle, if `MasterModRev ≠ 0`, the change is compared against half the bou
 
 A change larger than half a revolution is therefore interpreted as a wrap in the opposite direction and unwrapped, so `MasterPos` stays continuous across the master's modulo boundary. This assumes the master moves no more than half its `ModRev` per controller cycle — the same assumption the follower's own modulo handling makes.
 
+In **v5 (central-i)** the unwrap is applied to the raw master change *before* the gear ratio is applied, so `MasterModRev` is simply the master variable's own `ModRev` for any ratio. In **v4** the unwrap is applied to the change *after* it has been scaled by [MasterFact](MasterFact.md), so the comparison uses the geared change: with the default `MasterFact = 65536` (1:1) you set `MasterModRev` to the master's `ModRev` directly, but at a non-1:1 ratio the value to set is the master's `ModRev` multiplied by `MasterFact / 65536`.
+
 ## Examples
 
 ```text
@@ -66,7 +68,7 @@ AMasterModRev            ; read current value
 
 ## Changes between versions
 
-In **v5 (central-i)** `MasterModRev` is a 64-bit value. The wrap-correction logic is the same. **v5 is central-i only.**
+In **v5 (central-i)** `MasterModRev` is a 64-bit value, and the unwrap is applied before the gear ratio (see *The correction*). **v5 is central-i only.**
 
 ## See also
 

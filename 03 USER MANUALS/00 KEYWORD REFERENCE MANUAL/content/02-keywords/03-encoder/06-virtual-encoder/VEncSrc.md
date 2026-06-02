@@ -36,7 +36,9 @@ Selects the source signal used to generate the virtual encoder position.
 
 ## How it works
 
-`VEncSrc` is **not a small enumerated list** — it is an encoded *keyword command code* combining a keyword, its axis, and array index. The controller resolves it at configuration time to the corresponding internal variable and its data type (32-bit/64-bit integer, float, or double). Each control cycle the virtual encoder reads that variable, so any readable controller variable can be the source — for example another axis's position [Pos](../../10-motion/01-kinematics-status/Pos.md) or reference [PosRef](../../10-motion/01-kinematics-status/PosRef.md).
+`VEncSrc` is **not a small enumerated list** — it is an encoded *keyword command code* combining a keyword, its axis, and array index. The controller resolves it at configuration time to a pointer to the corresponding internal variable. Each control cycle the virtual encoder reads that variable, so any readable controller variable can be the source — for example another axis's position [Pos](../../10-motion/01-kinematics-status/Pos.md) or reference [PosRef](../../10-motion/01-kinematics-status/PosRef.md).
+
+In the v4 firmware the source is always read as a **32-bit integer**, so a source that is natively a 64-bit integer, float, or double will not be read correctly. The v5 Central-i firmware records the source's true data type (32-bit integer, 64-bit integer, float, or double) and reads it accordingly, then converts the read value to a 32-bit integer for tracking.
 
 If the chosen source itself wraps under modulo ([ModRev](../04-modulo-mode/ModRev.md)), the firmware detects the wrap (a jump greater than half the source's modulo span) and compensates the tracking memories so the generated output stays continuous.
 

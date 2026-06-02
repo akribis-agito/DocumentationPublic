@@ -57,7 +57,7 @@ The non-fault rejection codes are controller error numbers; the rest are control
 | 245 / 250 / 268 | FPGA version does not match the firmware. |
 | ≥ 1000 | A standing controller fault would block enabling (STO, encoder error, over-current, bus voltage, over-temperature, …). See [Controller error codes](../../../04-error-codes/controller-error-codes.md). |
 
-The list is not exhaustive — some protections may not be analysed by `CanMotorOn`, and because checks run in a fixed order only the **first** failure is reported.
+The list is not exhaustive — some protections may not be analysed by `CanMotorOn`, and because checks run in a fixed order only the **first** failure is reported. On v5 (central-i) the loop-filter checks no longer block enabling, so codes `87` and `102` are not produced; the modified/failed filter state then only affects whether a recalculation is needed and not the motor-on decision.
 
 ## Examples
 

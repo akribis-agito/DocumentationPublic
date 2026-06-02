@@ -51,7 +51,7 @@ if |Vel| > MaxVel × 1.25
 
 When exceeded, the axis is turned off immediately and [ConFlt](../../../07-status-and-faults/ConFlt.md) records fault code 1019 (velocity too high).
 
-**3. Command-time validation.** A motion cannot be *started* in the indirect/profiled modes (Jog, PTP, PD/Gear/eCam indirect, position joystick indirect) if the commanded `Speed` exceeds `MaxVel` — `Begin` is rejected (error 271). Likewise, setting `Speed` larger than `MaxVel` while already in motion is rejected (error 269). Direct modes (e.g. pulse-and-direction direct) are not gated this way because the user drives the reference directly; for those, mechanisms 1 and 2 still apply.
+**3. Command-time validation.** A motion cannot be *started* in the indirect/profiled modes (Jog, PTP, PD/Gear/eCam indirect, position joystick indirect) if the commanded `Speed` exceeds `MaxVel` — `Begin` is rejected (error 271). Likewise, while already in motion, setting `Speed` larger than `MaxVel` is rejected (error 269), and setting `MaxVel` below the current `Speed` is rejected (error 270); both in-motion checks apply only when the axis is in motion. Direct modes (e.g. pulse-and-direction direct) are not gated this way because the user drives the reference directly; for those, mechanisms 1 and 2 still apply.
 
 ### Edge cases
 
@@ -59,7 +59,7 @@ When exceeded, the axis is turned off immediately and [ConFlt](../../../07-statu
 - **Mode dependency:** the overspeed trip operates whenever the motor is on; it does not depend on operation mode. The saturation in the velocity loop applies only when the velocity loop is running.
 - **Feedback used:** the overspeed trip uses the instantaneous feedback `Vel[1]` (not the deeply filtered `Vel[3]` used by stuck detection).
 - **25 % margin:** the trip threshold is `MaxVel × 10/8 = MaxVel × 1.25` (firmware uses `(MaxVel >> 3) * 10` to avoid overflow at high MaxVel values).
-- **Range overflow:** writes outside `0…1300000000` (v4) are clamped; on v5 `MaxVel` is `int64` with no fixed upper bound.
+- **Range overflow:** writes outside the valid range (`0…1300000000` on v4) are rejected with an out-of-range error and the stored value is left unchanged; on v5 `MaxVel` is `int64` with a much wider range and a non-zero lower bound.
 - **Clearing the fault:** ConFlt code 1019 clears on re-enable ([MotorOn](../../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../../07-status-and-faults/ErrLog.md) entry persists.
 - **HWProtectBits / ProtectMask:** the overspeed trip is not maskable through [ProtectMask](../../01-general-protection/ProtectMask.md) (that mask covers hardware-protection bits only).
 

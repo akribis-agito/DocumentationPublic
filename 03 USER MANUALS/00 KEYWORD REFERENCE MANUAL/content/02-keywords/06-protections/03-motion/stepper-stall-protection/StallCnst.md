@@ -51,7 +51,7 @@ where `speed` is the (bit-shifted) absolute commanded speed.
 
 The resulting fit is then scaled by [StallThPcnt](StallThPcnt.md) and offset to form [StallTh](StallTh.md). The array is sized 3; only the slope and intercept entries above participate in the threshold formula.
 
-These coefficients are determined for a specific motor/load by characterising the healthy `StallVal` at several speeds and fitting a line. Until they are set appropriately for the application, stall detection will not track speed correctly.
+These coefficients are determined for a specific motor/load by characterising the healthy `StallVal` at several speeds and fitting a line. They both default to `0`; with the default coefficients the fit is `0`, so the threshold input reduces to just the fixed `−10000` offset and [StallTh](StallTh.md) goes negative. Because [StallVal](StallVal.md) is non-negative, no stall is ever flagged until these coefficients are set appropriately for the application.
 
 ## Examples
 

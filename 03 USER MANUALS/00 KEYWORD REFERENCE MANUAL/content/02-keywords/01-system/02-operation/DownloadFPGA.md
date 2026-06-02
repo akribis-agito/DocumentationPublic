@@ -46,8 +46,9 @@ A firmware/FPGA version mismatch is reported by [UnitStat](../01-status/UnitStat
 - **Standalone controllers** perform a dedicated FPGA transfer that follows the same path as [DownloadFW](DownloadFW.md), just targeting the FPGA configuration image instead of the processor firmware:
 
   1. **Password handshake.** The controller requests a password and waits for the host to reply over the link the command arrived on (USB/serial or CAN). PCSuite supplies this automatically; a wrong reply, or no reply within about 10 seconds, leaves the unit in normal operation.
-  2. **Quiesce hardware.** On success the serial bus is closed and the FPGA is reset so the drive outputs are safe, and the I/O pins are set to the mode the boot program expects.
-  3. **Jump to boot.** The firmware records the originating interface and hands over to the boot program, which receives and writes the new FPGA image, then restarts the unit.
+  2. **Check the FPGA type.** Once the handshake succeeds the controller verifies the fitted FPGA is a type it recognises. If it is not, the download is aborted with instruction error 243 ("Download FPGA encountered an unknown FPGA type") and the controller stays in normal operation.
+  3. **Quiesce hardware.** On success the serial bus is closed and the FPGA is reset so the drive outputs are safe, and the I/O pins are set to the mode the boot program expects.
+  4. **Jump to boot.** The firmware records the originating interface and hands over to the boot program, which receives and writes the new FPGA image, then restarts the unit.
 
 Firmware and FPGA images are versioned together; after updating one you may need to update the other so they match. The controller flags a mismatch in [UnitStat](../01-status/UnitStat.md) and will refuse to enable the motor while a relevant mismatch is present.
 

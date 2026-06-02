@@ -46,7 +46,7 @@ Position tracking always runs on a fixed cycle whose length in servo samples is 
 1. If `FIFOPosFIFOEn` is `1` and the queue is not empty, the oldest queued target is removed and copied into the working target. If the queue is empty, the previous working target is held (the axis keeps its last commanded position rather than ending motion).
 2. The interpolation rule selected by [FIFOPosType](FIFOPosType.md) is set up for the new cycle.
 
-For the remaining samples of the cycle, the position reference is interpolated toward the working target and shifted by the offsets [FIFOPosPosOf](FIFOPosPosOf.md), [FIFOPosVelOf](FIFOPosVelOf.md), and [FIFOPosCurrOf](FIFOPosCurrOf.md). The result is always clamped by the software position limits, and the axis still decelerates and waits if it runs into a forward or reverse limit switch.
+For the remaining samples of the cycle, the position reference is interpolated toward the working target and shifted by the position offset [FIFOPosPosOf](FIFOPosPosOf.md); the velocity offset [FIFOPosVelOf](FIFOPosVelOf.md) is added to the velocity reference and the current offset [FIFOPosCurrOf](FIFOPosCurrOf.md) to the current reference. The result is always clamped by the software position limits, and the axis still decelerates and waits if it runs into a forward or reverse limit switch.
 
 Unlike the main FIFO mode (see [FIFOType](FIFOType.md)), which automatically ends the motion when its queue runs dry, position tracking does not self-terminate on an empty queue — it holds the last target. Use [Stop](../04-motion-command/Stop.md) to decelerate to rest.
 
