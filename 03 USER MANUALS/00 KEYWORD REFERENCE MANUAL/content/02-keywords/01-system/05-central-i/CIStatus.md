@@ -82,6 +82,8 @@ A connected port leaves state `3` and enters state `2` (fault) when the per-cycl
 
 The other synchronous errors — first-part CRC (`CIStatus[6] = 1`), second-part CRC (`CIStatus[6] = 2`), and message-not-sent (`CIStatus[6] = 3`) — are only counted in `CIStatus[4]` and recorded in `CIStatus[5]`/`[6]`; they do not by themselves fault the axis, and the link keeps running. Synchronous errors in the first few control cycles immediately after a connection are ignored (the firmware suppresses them for the first 4 cycles).
 
+State `2` is also reached when a [CIConnect](CIConnect.md) attempt fails during the connection sequence. Any of the setup error codes (`CIStatus[6]` = 5, 6, 7, 8, 9, 11, 12, 13, 14) leaves the port in state `2`, increments the offline error count `CIStatus[3]`, and records the time and code in `CIStatus[5]`/`[6]`, while clearing the port's connected bit in [CIGlobalStat](CIGlobalStat.md). Because the link was never up, this case does **not** raise controller fault [ConFlt](../../07-status-and-faults/ConFlt.md) = 1043 and does not turn a motor off — that response is specific to losing an already-connected link (sync timeout, `CIStatus[6] = 4`).
+
 ## Examples
 
 ```text

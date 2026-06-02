@@ -61,7 +61,8 @@ The sub-type field identifies the specific product variant within the class (dif
 - During [CIConnect](CIConnect.md) the master reads the remote's reported class/sub-type and compares it with `CIDeviceType`. A real amplifier class also requires the axis's `AmpType` to be a compatible drive mode (built-in PWM for an amplifier, analog for an adapter); a mismatch stops the connection with an error (see [CIStatus](CIStatus.md) error codes).
 - Setting an **amplifier** class on a port that cannot drive a motor is rejected by [CIConnect](CIConnect.md).
 - A **simulation** class causes [CIConnect](CIConnect.md) and [CIAutoConnect](CIAutoConnect.md) to mark the port connected immediately and populate [CIIdentity](CIIdentity.md) with default counts, instead of running the physical link sequence.
-- Writing a value that differs from the currently connected device forces an immediate disconnect (clearing [CIStatus](CIStatus.md) and [CIIdentity](CIIdentity.md)), so the port can reconnect with the new role.
+- While the port is **connected**, writing a `CIDeviceType` value that differs from the current one is **rejected** with error 214 ("Changing the value of CIDeviceType or AmpType is not allowed while the Central-i communication with the port is active"). Issue [CIDisconnect](CIDisconnect.md) first, then change the value, then reconnect. (The same rule applies to `AmpType`.) When the port is *not* connected, the write succeeds, and any residual [CIStatus](CIStatus.md)/[CIIdentity](CIIdentity.md) left from a previously connected device of a different type is cleared automatically.
+- The power-on default is `0x00010001` — a real amplifier (class 0x1) with sub-type 1. On the multi-port master only the lower ports can drive a motor; declaring an amplifier class on an I/O-only port is rejected by [CIConnect](CIConnect.md) with error 170 ("Can't connect an amplifier to this port").
 
 ## Examples
 
@@ -69,11 +70,13 @@ The sub-type field identifies the specific product variant within the class (dif
 ACIDeviceType        ; query the configured device class/sub-type for this axis
 ```
 
-To set the port to a simulated amplifier (class 0x3, default sub-type 1):
+To set the port to a *simulated* amplifier, use class `0x3` with the sub-type field zero. The simulation classes are matched on the **full 32-bit word**, so the sub-type field (bits 31-16) must be `0`:
 
 ```text
-ACIDeviceType=0x00010003
+ACIDeviceType=0x00000003
 ```
+
+Use `0x00000004` for a simulated I/O unit. (Unlike the real amplifier/I/O classes, which use the sub-type field, the simulation classes require it to be 0.)
 
 ## Changes between versions
 

@@ -67,7 +67,7 @@ ACIOfflineData[4]      ; value returned by the remote
 
 The transaction is present and behaves the same in both v4 and v5: it does not gate on connection state, and the reply has to come back within the timeout to succeed. The request/response field layout in [CIOfflineData](CIOfflineData.md) and the logging into [OfflineBLog](OfflineBLog.md) are unchanged between versions.
 
-> **Frontmatter flag.** The generator-populated frontmatter currently lists this keyword as `removed_in: v5`, but v5 still defines and uses `CIOfflineSend` (CAN code 502). The generator's removed-in classification should be re-run; the body has been corrected to match the firmware.
+> **Frontmatter flag.** The generator-populated frontmatter lists this keyword as `removed_in: v5` with empty central-i availability. The transaction itself is **not** removed in v5 — the v5 firmware still defines and runs it (CAN code 502, same behaviour). This frontmatter entry is a classification artifact rather than a real removal; the body below describes the actual v5 behaviour.
 
 ## See also
 

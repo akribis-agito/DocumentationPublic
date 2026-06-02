@@ -49,6 +49,8 @@ For port `n` (counting from 0), the connected bit is bit `2n` and the simulation
 | 3 | 6 | 7 | 0x00000040 |
 | n | 2n | 2n+1 | `1 << (2n)` |
 
+The master supports up to 12 Central-i ports (port index 0-11; smaller products expose fewer), so at most the low 24 bits are meaningful — port 11 uses the connected bit 22 and the simulation bit 23. The remaining high bits are always 0, so a host need only scan the bit-pairs up to the number of ports on its product.
+
 The firmware sets the connected bit when a port reaches the synchronised state (via [CIConnect](CIConnect.md) or [CIAutoConnect](CIAutoConnect.md)) and clears it on reset/[CIDisconnect](CIDisconnect.md). The simulation bit is governed independently: it is set when that axis's [MotorType](../../02-motor-and-amplifier/MotorType.md) is set to simulation (value 5) and cleared otherwise; it is updated when `MotorType` is written and does not depend on [CIConnect](CIConnect.md)/[CIDisconnect](CIDisconnect.md). A port whose pair reads `01` (binary) is a live link; `11` is a connected simulation axis; `00` is disconnected.
 
 To test one port, mask with its connected bit — for example port 1 is connected when `(CIGlobalStat & 0x4)` is non-zero.

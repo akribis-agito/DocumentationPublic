@@ -42,7 +42,7 @@ Command that terminates the active Central-i link on the selected axis port.
 - every element of [CIIdentity](CIIdentity.md) is zeroed, since the previously connected device's identity is no longer valid;
 - the port's connected bit in [CIGlobalStat](CIGlobalStat.md) is cleared once the disconnect completes.
 
-The same teardown happens automatically when [CIDeviceType](CIDeviceType.md) is changed to a value that differs from the currently connected device — the firmware forces a disconnect so the port can reconnect with the new role.
+Note that you cannot change [CIDeviceType](CIDeviceType.md) (or `AmpType`) while the port is connected — such a change is rejected with error 214. Issue `CIDisconnect` first, then change the value and reconnect. If the device type stored from a previous connection no longer matches the (now-disconnected) port, the firmware clears the residual status and identity automatically on the next write.
 
 ## Examples
 
