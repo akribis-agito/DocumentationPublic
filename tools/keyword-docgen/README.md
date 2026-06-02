@@ -90,6 +90,10 @@ Each record is `{id, keyword, text, metadata, related}` where:
 Recommendation: index at the document level (each keyword page is a focused
 unit); for the few very long pages, split by `##` section as child chunks.
 
+See [`RAG-INDEXING.md`](RAG-INDEXING.md) for the full chunking design, the
+chunk-size/embedder decision, the diagram-transcript plan, and the resume
+checklist.
+
 ## Tests
 
     .venv/bin/python -m pytest -q
