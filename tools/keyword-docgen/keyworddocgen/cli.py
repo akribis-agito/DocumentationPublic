@@ -12,6 +12,7 @@ from .frontmatter import render_doc, split_doc
 from .manifest import render_manifest
 from .merge import VersionAlreadyRecorded, merge_version
 from .model import PRODUCTS, product_supported
+from .ragindex import chunk_record
 from .table_parser import parse_params
 from .versioning import stamp_corpus
 
@@ -42,6 +43,15 @@ def _build_parser() -> argparse.ArgumentParser:
                    help="Generation date YYYY-MM-DD (fallback for uncommitted)")
     v.add_argument("--manifest-out", required=True, type=Path)
     v.add_argument("--version-file", required=True, type=Path)
+
+    r = sub.add_parser(
+        "rag-export",
+        help="Emit fact-enriched, document-level JSONL chunks for RAG ingestion."
+    )
+    r.add_argument("--content-root", required=True, type=Path)
+    r.add_argument("--manifest", required=True, type=Path,
+                   help="manifest.json — drives the doc list + version stamps")
+    r.add_argument("--out", required=True, type=Path, help="output JSONL path")
     return parser
 
 
@@ -80,6 +90,26 @@ def run_version(args) -> int:
     args.manifest_out.write_text(json.dumps(manifest, indent=2) + "\n")
     args.version_file.write_text(args.corpus_version + "\n")
     print(f"stamped {manifest['document_count']} docs at {args.corpus_version}")
+    return 0
+
+
+def run_rag_export(args) -> int:
+    manifest = json.loads(args.manifest.read_text())
+    docs = manifest.get("documents", [])
+    args.out.parent.mkdir(parents=True, exist_ok=True)
+    written = 0
+    with args.out.open("w", encoding="utf-8") as fh:
+        for doc in docs:
+            fm, body = split_doc((args.content_root / doc["path"]).read_text())
+            rec = chunk_record(
+                doc["path"], fm, body,
+                last_updated=doc["last_updated"],
+                doc_revision=doc["doc_revision"],
+                sha256=doc["sha256"],
+            )
+            fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
+            written += 1
+    print(f"wrote {written} chunks to {args.out}")
     return 0
 
 
@@ -131,6 +161,8 @@ def run(argv: list[str]) -> int:
     args = _build_parser().parse_args(argv)
     if args.mode == "version":
         return run_version(args)
+    if args.mode == "rag-export":
+        return run_rag_export(args)
     defines = DefineTable.from_headers(list(args.defines))
     tables = parse_params(args.params, defines)
     docs = _index_docs(args.docs_root)

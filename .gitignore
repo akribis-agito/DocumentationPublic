@@ -5,3 +5,7 @@ tools/keyword-docgen/.venv/
 tools/keyword-docgen/*.egg-info/
 __pycache__/
 .pytest_cache/
+
+# Regenerable RAG export (produced by `keyword-docgen rag-export`); the manifest
+# + frontmatter are the committed source of truth, the JSONL is a build artifact.
+rag-chunks.jsonl

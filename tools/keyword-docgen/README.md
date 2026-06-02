@@ -44,6 +44,52 @@ Run once per branch checkout, asserting the version manually.
   from `#define` to an enum). A few constants are firmware enums, not `#define`s
   (`MAX_FUNCS`, `MAX_TASKS`, the PWM-range terms), so those ranges rely on that guard.
 
+The generator indexes keyword pages under `02-keywords/**`, `03-special-features/**`
+and `05-legacy-keywords/**`. On a stem collision (a keyword documented in two places)
+it targets the canonical entry — the one already carrying a `keyword:` field — and
+leaves cross-ref stubs / legacy aliases (e.g. `JerkMode`, `AOutShifts`) untouched.
+
+## Versioning (`version`)
+
+Stamps each page's frontmatter with `last_updated` (git last-commit date) and
+`doc_revision` (corpus CalVer), and writes `manifest.json` (path, keyword,
+last_updated, doc_revision, body SHA-256) + `VERSION`.
+
+    keyword-docgen version \
+      --content-root "03 USER MANUALS/00 KEYWORD REFERENCE MANUAL/content" \
+      --repo-root . --corpus-version 2026.06 --generated 2026-06-02 \
+      --manifest-out ".../manifest.json" --version-file ".../VERSION"
+
+- Stamps go AFTER the generator-owned facts and never disturb them; legacy
+  frontmatter-less pages are manifest-only (not stamped on disk).
+- **Incremental:** the existing `manifest.json` is loaded as a baseline. A page
+  whose body SHA is unchanged keeps its prior `last_updated` and `doc_revision`;
+  only changed/new pages get the current version + git date. So a stamp commit
+  never pushes `last_updated` forward, and a release bumps `doc_revision` only
+  for pages whose prose actually changed.
+
+## RAG export (`rag-export`)
+
+Emits one **document-level** JSON chunk per page (`rag-chunks.jsonl`, gitignored
+— regenerate on demand), driven by `manifest.json`:
+
+    keyword-docgen rag-export \
+      --content-root ".../content" --manifest ".../manifest.json" \
+      --out ".../rag-chunks.jsonl"
+
+Each record is `{id, keyword, text, metadata, related}` where:
+- `text` is the page body prefixed with a synthesized **fact header**
+  (`Keyword X (CAN n; scope; access; units; range; v4/v5): summary`) so the
+  embedding captures the structured facts, not just prose;
+- `metadata` carries the frontmatter facts (availability, scope, units,
+  can_code, range, …) plus `doc_revision`/`last_updated`/`sha256` for filtering,
+  citation and **incremental re-embedding** (diff `sha256` vs the last index);
+- `related` is the list of keywords this page links to, for graph-aware
+  re-ranking.
+
+Recommendation: index at the document level (each keyword page is a focused
+unit); for the few very long pages, split by `##` section as child chunks.
+
 ## Tests
 
     .venv/bin/python -m pytest -q
