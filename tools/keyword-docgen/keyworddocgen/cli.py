@@ -74,15 +74,48 @@ def run_version(args) -> int:
     return 0
 
 
+_KEYWORD_ROOTS = ("02-keywords", "03-special-features", "05-legacy-keywords")
+
+
 def _index_docs(docs_root: Path) -> dict[str, Path]:
-    """Map mnemonic -> doc path for every existing keyword .md."""
-    index: dict[str, Path] = {}
-    keywords_dir = docs_root / "02-keywords"
-    for path in keywords_dir.rglob("*.md"):
-        if path.stem.startswith("00-"):
+    """Map mnemonic -> doc path for every keyword .md across the keyword roots.
+
+    Keyword pages live under 02-keywords, but also under 03-special-features
+    (auto-gain, UPM, spring/friction comp, …) and 05-legacy-keywords; all are
+    indexed so they receive generated frontmatter. Section overviews (`00-*`)
+    and any `_`-prefixed dir (`_triage`/`_files`/`_manifest`) are skipped.
+    """
+    candidates: dict[str, list[Path]] = {}
+    for root in _KEYWORD_ROOTS:
+        base = docs_root / root
+        if not base.exists():
             continue
-        index[path.stem] = path
+        for path in sorted(base.rglob("*.md")):
+            if path.stem.startswith("00-"):
+                continue
+            rel = path.relative_to(docs_root)
+            if any(part.startswith("_") for part in rel.parts):
+                continue
+            candidates.setdefault(path.stem, []).append(path)
+
+    # On a stem collision (same mnemonic documented in two places — a canonical
+    # entry plus a cross-ref stub or legacy alias), target the canonical entry,
+    # i.e. the one that already carries a `keyword:` frontmatter field. This
+    # avoids clobbering pointer stubs. If none is canonical yet (a brand-new
+    # keyword doc), take the first in (root, sorted) order.
+    index: dict[str, Path] = {}
+    for stem, paths in candidates.items():
+        canonical = next((p for p in paths if _has_keyword_field(p)), None)
+        index[stem] = canonical or paths[0]
     return index
+
+
+def _has_keyword_field(path: Path) -> bool:
+    try:
+        fm, _ = split_doc(path.read_text())
+    except OSError:
+        return False
+    return isinstance(fm, dict) and "keyword" in fm
 
 
 def run(argv: list[str]) -> int:

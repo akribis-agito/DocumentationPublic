@@ -86,3 +86,66 @@ def test_overwrite_twice_is_idempotent(tmp_path):
     run_v4(docs, mode="append")
     rc = run_v4(docs, mode="overwrite")
     assert rc == 0
+
+
+def test_indexes_special_features_and_legacy_roots(tmp_path):
+    # Keyword pages that live OUTSIDE 02-keywords (legacy, no frontmatter) must
+    # still be discovered and receive generated frontmatter.
+    docs = tmp_path / "docs"
+    sf = docs / "03-special-features" / "auto-gain"
+    lg = docs / "05-legacy-keywords"
+    sf.mkdir(parents=True)
+    lg.mkdir(parents=True)
+    (sf / "PosGain.md").write_text("# PosGain\n\nlegacy body A\n")   # no frontmatter
+    (lg / "PosKi.md").write_text("# PosKi\n\nlegacy body B\n")        # no frontmatter
+
+    run_v4(docs)
+
+    fm_pg, body_pg = split_doc((sf / "PosGain.md").read_text())
+    assert fm_pg["can_code"] == 100
+    assert fm_pg["availability"]["standalone"] == ["v4"]
+    assert "legacy body A" in body_pg          # body preserved
+    fm_pk, body_pk = split_doc((lg / "PosKi.md").read_text())
+    assert fm_pk.get("can_code") is not None   # PosKi also onboarded
+    assert "legacy body B" in body_pk
+
+
+def test_index_prefers_canonical_entry_on_stem_collision(tmp_path):
+    # Same mnemonic in two places: a cross-ref stub (no `keyword:` field) that
+    # sorts FIRST, and the canonical entry (has `keyword:`) that sorts later.
+    # The generator must target the canonical one and never clobber the stub —
+    # so the rule must beat plain sort order.
+    # Mirror the real JerkMode case: canonical sorts FIRST, stub LATER, so a
+    # naive last-wins index would wrongly target the stub.
+    docs = tmp_path / "docs"
+    canon_dir = docs / "02-keywords" / "01-aaa"         # sorts first
+    stub_dir = docs / "02-keywords" / "02-bbb"          # sorts later
+    stub_dir.mkdir(parents=True)
+    canon_dir.mkdir(parents=True)
+    (stub_dir / "PosGain.md").write_text(
+        "---\nsummary: see the primary entry.\n---\n# PosGain\n\nstub pointer\n"
+    )
+    (canon_dir / "PosGain.md").write_text(
+        "---\nkeyword: PosGain\nsummary: canonical.\n---\n# PosGain\n\ncanonical body\n"
+    )
+
+    run_v4(docs)
+
+    fm_c, _ = split_doc((canon_dir / "PosGain.md").read_text())
+    assert fm_c["can_code"] == 100                       # canonical got facts
+    fm_s, body_s = split_doc((stub_dir / "PosGain.md").read_text())
+    assert "can_code" not in fm_s                        # stub untouched
+    assert fm_s["summary"] == "see the primary entry."
+    assert "stub pointer" in body_s
+
+
+def test_index_skips_underscore_dirs(tmp_path):
+    # Scratch/_-prefixed dirs (_triage, _files, _manifest) are never indexed.
+    docs = tmp_path / "docs"
+    tri = docs / "02-keywords" / "_triage"
+    tri.mkdir(parents=True)
+    (tri / "PosGain.md").write_text("# scratch\n")   # not a real doc
+
+    run_v4(docs)
+
+    assert (tri / "PosGain.md").read_text() == "# scratch\n"   # untouched
