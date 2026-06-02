@@ -1,3 +1,33 @@
+---
+keyword: FrictionComp
+availability:
+  standalone:
+  - v4
+  central-i:
+  - v4
+  - v5
+can_code: 406
+attributes:
+  access: rw
+  scope: axis
+  flash: true
+  type: scalar
+  array_size: 1
+  data_type: int32
+  ok_in_motion: true
+  ok_motor_on: true
+  units: scaling
+  range:
+  - 0
+  - 327680000.0
+  default: 0
+  scaling: 65536.0
+  implemented: final
+overrides:
+  central-i.v5:
+    range: null
+    scaling: 1.0
+---
 # FrictionComp
 
 Friction compensation is activated when the user variable `FrictionComp` is non-zero. This parameter always takes positive values.

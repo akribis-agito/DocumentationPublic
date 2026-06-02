@@ -1,3 +1,30 @@
+---
+keyword: UPMDistReject
+availability:
+  standalone:
+  - v4
+  central-i:
+  - v4
+  - v5
+can_code: 605
+attributes:
+  access: rw
+  scope: axis
+  flash: true
+  type: scalar
+  array_size: 1
+  data_type: int32
+  ok_in_motion: true
+  ok_motor_on: true
+  units: none
+  range:
+  - 100
+  - 2000
+  default: 1000
+  scaling: 1.0
+  implemented: final
+overrides: {}
+---
 # UPMDistReject
 
 **Definition:**

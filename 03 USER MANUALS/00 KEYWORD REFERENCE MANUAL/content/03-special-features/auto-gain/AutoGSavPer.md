@@ -1,3 +1,30 @@
+---
+keyword: AutoGSavPer
+availability:
+  standalone:
+  - v4
+  central-i:
+  - v4
+  - v5
+can_code: 366
+attributes:
+  access: rw
+  scope: axis
+  flash: true
+  type: scalar
+  array_size: 1
+  data_type: int32
+  ok_in_motion: true
+  ok_motor_on: true
+  units: scaling
+  range:
+  - 0
+  - 1000
+  default: 300
+  scaling: 60.0
+  implemented: final
+overrides: {}
+---
 # AutoGSavPer
 
 **Definition:**

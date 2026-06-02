@@ -1,3 +1,34 @@
+---
+keyword: IndirectIndex
+availability:
+  standalone:
+  - v4
+  central-i:
+  - v4
+  - v5
+can_code: 434
+attributes:
+  access: rw
+  scope: non-axis
+  flash: false
+  type: scalar
+  array_size: 1
+  data_type: int32
+  ok_in_motion: true
+  ok_motor_on: true
+  units: none
+  range:
+  - 1
+  - 1000
+  default: 1
+  scaling: 1.0
+  implemented: final
+overrides:
+  central-i.v5:
+    range:
+    - 1
+    - 10000
+---
 # IndirectIndex
 
 **Definition:**

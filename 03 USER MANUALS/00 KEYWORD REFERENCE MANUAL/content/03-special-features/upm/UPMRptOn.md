@@ -1,3 +1,33 @@
+---
+keyword: UPMRptOn
+availability:
+  standalone:
+  - v4
+  central-i:
+  - v4
+  - v5
+can_code: 559
+attributes:
+  access: rw
+  scope: axis
+  flash: false
+  type: scalar
+  array_size: 1
+  data_type: int32
+  ok_in_motion: false
+  ok_motor_on: true
+  units: none
+  range:
+  - 0
+  - 2
+  default: 0
+  scaling: 1.0
+  implemented: final
+overrides:
+  central-i.v5:
+    range: null
+    default: null
+---
 # UPMRptOn
 
 **Definition:**

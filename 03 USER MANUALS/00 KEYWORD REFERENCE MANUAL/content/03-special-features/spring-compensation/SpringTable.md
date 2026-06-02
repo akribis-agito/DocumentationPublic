@@ -1,3 +1,30 @@
+---
+keyword: SpringTable
+availability:
+  standalone:
+  - v4
+  central-i:
+  - v4
+  - v5
+can_code: 597
+attributes:
+  access: rw
+  scope: axis
+  flash: true
+  type: array
+  array_size: 41
+  data_type: int32
+  ok_in_motion: true
+  ok_motor_on: true
+  units: none
+  range:
+  - -64000
+  - 64000
+  default: 0
+  scaling: 1.0
+  implemented: final
+overrides: {}
+---
 # SpringTable
 
 **Definition:**

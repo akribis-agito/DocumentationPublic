@@ -1,3 +1,32 @@
+---
+keyword: UPMRptCalc
+availability:
+  standalone:
+  - v4
+  central-i:
+  - v4
+  - v5
+can_code: 560
+attributes:
+  access: ro
+  scope: axis
+  flash: false
+  type: array
+  array_size: 3
+  data_type: int32
+  ok_in_motion: false
+  ok_motor_on: true
+  units: func
+  range:
+  - 0
+  - 0
+  default: 0
+  scaling: 1.0
+  implemented: final
+overrides:
+  central-i.v5:
+    array_size: 1
+---
 # UPMRptCalc
 
 **Definition:**
