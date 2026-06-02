@@ -1,5 +1,7 @@
 ---
 summary: Selects the digital incremental encoder subtype (AqB, pulse-direction, C0/C1, up/down).
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # EncSubType/AuxEncSubType
 

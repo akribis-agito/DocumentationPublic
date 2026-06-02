@@ -1,5 +1,7 @@
 ---
 summary: Reserved per-axis CNC resolution-ratio keyword (not exposed in current firmware).
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # CNCAEncRatio/CNCBEncRatio
 

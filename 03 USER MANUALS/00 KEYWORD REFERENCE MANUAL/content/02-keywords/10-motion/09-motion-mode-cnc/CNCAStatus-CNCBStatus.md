@@ -1,5 +1,7 @@
 ---
 summary: Read-only array holding CNC engine status data for queue A (or B).
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # CNCAStatus/CNCBStatus
 

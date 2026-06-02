@@ -25,6 +25,8 @@ attributes:
   implemented: final
 overrides: {}
 summary: Rate at which the map error offset ramps toward its target.
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # MapErrOffRamp
 

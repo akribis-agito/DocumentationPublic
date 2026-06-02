@@ -1,5 +1,7 @@
 ---
 summary: Per-scope arrays of complex CAN codes selecting the parameters to capture.
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # RecParamA/RecParamB
 

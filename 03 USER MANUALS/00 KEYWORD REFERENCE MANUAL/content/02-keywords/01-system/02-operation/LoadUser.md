@@ -1,6 +1,8 @@
 ---
 keyword: LoadUser
 summary: Restores the user-saved parameter set from flash into the active parameters.
+last_updated: '2026-05-28'
+doc_revision: '2026.06'
 ---
 # LoadUser
 

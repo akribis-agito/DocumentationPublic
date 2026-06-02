@@ -26,6 +26,8 @@ attributes:
 overrides:
   central-i.v4:
     scope: axis
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # AOutShifts
 

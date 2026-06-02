@@ -1,5 +1,7 @@
 ---
 summary: Read-only array reporting the status of the SIN/COS signal interpolation.
+last_updated: '2026-05-27'
+doc_revision: '2026.06'
 ---
 # SinCosSignals/AuxSinCosSig
 

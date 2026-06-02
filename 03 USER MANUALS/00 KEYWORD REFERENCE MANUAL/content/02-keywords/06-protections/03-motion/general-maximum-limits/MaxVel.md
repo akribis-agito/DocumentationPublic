@@ -29,6 +29,8 @@ overrides:
     data_type: int64
     range: null
     default: 1000000
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # MaxVel
 

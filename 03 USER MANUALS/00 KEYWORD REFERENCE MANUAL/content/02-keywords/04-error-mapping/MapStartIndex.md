@@ -25,6 +25,8 @@ attributes:
   implemented: final
 overrides: {}
 summary: MapTable index where the active error-mapping data begins.
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # MapStartIndex
 

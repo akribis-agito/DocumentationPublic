@@ -1,6 +1,8 @@
 ---
 keyword: SaveUser
 summary: Saves current parameters to a dedicated user area in flash, separate from defaults.
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # SaveUser
 

@@ -1,5 +1,7 @@
 ---
 summary: Per-input logic inversion (XOR) for the digital inputs (DInLog = inputs 1–32, DInLogHigh = 33–64).
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # DInLog / DInLogHigh
 

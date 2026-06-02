@@ -1,5 +1,7 @@
 ---
 summary: Digital filter applied to the incremental encoder A/B/Z input channels.
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # EncFilt/AuxEncFilt
 

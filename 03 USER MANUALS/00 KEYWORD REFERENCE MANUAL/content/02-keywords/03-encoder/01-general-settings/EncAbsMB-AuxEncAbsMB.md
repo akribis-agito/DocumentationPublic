@@ -1,5 +1,7 @@
 ---
 summary: Number of least significant bits removed (right-shifted) from the absolute encoder reading.
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # EncAbsMB/AuxEncAbsMB
 

@@ -1,5 +1,7 @@
 ---
 summary: Records the latest position at which the encoder index was detected.
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # IndexPos/AuxIndexPos
 

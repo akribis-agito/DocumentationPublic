@@ -1,5 +1,7 @@
 ---
 summary: History arrays storing the feedback position of each logged digital event.
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # LockValTable/LockValTabB
 

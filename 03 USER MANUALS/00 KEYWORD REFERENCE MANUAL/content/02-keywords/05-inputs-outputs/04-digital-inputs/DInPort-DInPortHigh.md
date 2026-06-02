@@ -1,5 +1,7 @@
 ---
 summary: Bit-packed state of the digital inputs after debounce and logic inversion (DInPort = inputs 1–32, DInPortHigh = 33–64).
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # DInPort / DInPortHigh
 

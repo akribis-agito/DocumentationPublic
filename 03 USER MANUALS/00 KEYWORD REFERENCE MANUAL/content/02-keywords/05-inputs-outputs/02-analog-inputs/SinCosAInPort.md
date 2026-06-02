@@ -1,6 +1,8 @@
 ---
 keyword: SinCosAInPort
 summary: Removed — formerly selected the analog port for sin/cos (resolver) encoder feedback.
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # SinCosAInPort
 

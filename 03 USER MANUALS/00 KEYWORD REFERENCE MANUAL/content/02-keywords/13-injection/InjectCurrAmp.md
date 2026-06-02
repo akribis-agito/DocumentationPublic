@@ -28,6 +28,8 @@ overrides:
   central-i.v5:
     data_type: float32
     default: 2133.3333333333335
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # InjectCurrAmp
 

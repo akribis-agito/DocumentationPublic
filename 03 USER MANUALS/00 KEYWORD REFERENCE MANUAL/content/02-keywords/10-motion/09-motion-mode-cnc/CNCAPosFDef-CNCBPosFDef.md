@@ -1,5 +1,7 @@
 ---
 summary: Array defining the position filter configuration for CNC queue A (or B).
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # CNCAPosFDef/CNCBPosFDef
 

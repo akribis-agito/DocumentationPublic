@@ -32,6 +32,8 @@ overrides:
     range:
     - -2147483648
     - 2147483647
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # BiDirConfig
 

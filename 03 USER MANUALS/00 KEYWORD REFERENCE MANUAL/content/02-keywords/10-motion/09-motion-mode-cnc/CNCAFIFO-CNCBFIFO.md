@@ -1,5 +1,7 @@
 ---
 summary: Read-only array holding the raw segment data queued in the CNC FIFO for queue A (or B).
+last_updated: '2026-05-28'
+doc_revision: '2026.06'
 ---
 # CNCAFIFO/CNCBFIFO
 

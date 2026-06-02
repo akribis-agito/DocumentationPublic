@@ -1,5 +1,7 @@
 ---
 summary: Command that pushes a new motion segment into the CNC FIFO queue A (or B).
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # CNCAPushType/CNCBPushType
 

@@ -1,5 +1,7 @@
 ---
 summary: Parameter array configuring the SIN/COS encoder (gain, offsets, interpolation, index, error checks).
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # SinCosSetup/AuxSinCosSet
 

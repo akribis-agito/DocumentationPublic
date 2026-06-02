@@ -1,5 +1,7 @@
 ---
 summary: Atomic set / clear / toggle of individual DOutPort bits, one output per array index.
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # DOutPortSBit / DOutPortCBit / DOutPortTBit
 

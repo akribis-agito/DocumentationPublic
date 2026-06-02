@@ -1,5 +1,7 @@
 ---
 summary: Reports the jerk (smoothing) of the active CNC segment's path-velocity profile on group A (or B).
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # CNCAJerk/CNCBJerk
 

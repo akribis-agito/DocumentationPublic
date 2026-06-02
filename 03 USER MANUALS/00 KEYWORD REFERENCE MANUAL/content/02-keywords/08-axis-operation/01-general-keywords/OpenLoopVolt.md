@@ -28,6 +28,8 @@ overrides:
   central-i.v5:
     data_type: float32
     scaling: 1.526
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # OpenLoopVolt
 

@@ -27,6 +27,8 @@ attributes:
 overrides:
   central-i.v5:
     data_type: float32
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # Lm
 

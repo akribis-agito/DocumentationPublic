@@ -29,6 +29,8 @@ overrides:
     scope: axis
   central-i.v5:
     scope: axis
+last_updated: '2026-05-30'
+doc_revision: '2026.06'
 ---
 # MaxPwrTemp
 

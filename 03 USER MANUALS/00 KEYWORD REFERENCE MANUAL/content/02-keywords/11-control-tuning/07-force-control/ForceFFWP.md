@@ -27,6 +27,8 @@ overrides:
   central-i.v5:
     data_type: float32
     can_code: 607
+last_updated: '2026-05-30'
+doc_revision: '2026.06'
 ---
 # ForceFFWP
 

@@ -25,6 +25,8 @@ attributes:
   scaling: 65.536
   implemented: final
 overrides: {}
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # ForceCmdHTime
 

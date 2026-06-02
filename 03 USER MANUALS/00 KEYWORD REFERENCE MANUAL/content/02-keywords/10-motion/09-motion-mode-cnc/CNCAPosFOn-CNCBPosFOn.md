@@ -1,5 +1,7 @@
 ---
 summary: Enables the position filter on the CNC queue A (or B) reference output.
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # CNCAPosFOn/CNCBPosFOn
 

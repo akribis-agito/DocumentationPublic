@@ -28,6 +28,8 @@ overrides:
     array_size: 7
     data_type: float32
     range: null
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # ScheduleGains
 

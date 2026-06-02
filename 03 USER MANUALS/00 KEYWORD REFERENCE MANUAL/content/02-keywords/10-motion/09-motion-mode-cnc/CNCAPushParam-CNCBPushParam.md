@@ -1,5 +1,7 @@
 ---
 summary: Pushes parameter values of a CNC segment into the CNC FIFO.
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # CNCAPushParam/CNCBPushParam
 

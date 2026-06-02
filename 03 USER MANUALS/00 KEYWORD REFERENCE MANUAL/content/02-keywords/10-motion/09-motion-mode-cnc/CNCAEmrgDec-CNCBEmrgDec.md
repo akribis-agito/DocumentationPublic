@@ -1,5 +1,7 @@
 ---
 summary: CNC vector deceleration used for an emergency stop.
+last_updated: '2026-05-28'
+doc_revision: '2026.06'
 ---
 # CNCAEmrgDec/CNCBEmrgDec
 

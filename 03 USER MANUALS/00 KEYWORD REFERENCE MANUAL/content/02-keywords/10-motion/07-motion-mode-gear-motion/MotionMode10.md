@@ -1,6 +1,8 @@
 ---
 keyword: MotionMode10
 summary: Direct slave motion (MotionMode = 10) — axis A follows axis B's position reference directly, scaled by MasterFact. Hand-authored; regenerate remaining frontmatter via docgen.
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # MotionMode = 10 — Direct slave motion
 

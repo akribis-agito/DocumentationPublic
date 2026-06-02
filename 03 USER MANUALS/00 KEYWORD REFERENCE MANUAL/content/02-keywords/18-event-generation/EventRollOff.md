@@ -29,6 +29,8 @@ overrides:
     implemented: final
   central-i.v5:
     implemented: partial
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # EventRollOff
 

@@ -1,5 +1,7 @@
 ---
 summary: Running count of end-of-segment auto-corrections the CNC engine has applied to keep the path continuous.
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # CNCAEndErrCnt/CNCBEndErrCnt
 

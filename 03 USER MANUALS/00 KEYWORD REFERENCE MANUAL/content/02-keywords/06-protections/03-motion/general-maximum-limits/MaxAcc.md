@@ -36,6 +36,8 @@ overrides:
     - 686700000000.0
     default: 10000000
     implemented: final
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # MaxAcc
 

@@ -1,5 +1,7 @@
 ---
 summary: Forward/reverse limits that re-interpret an out-of-range absolute encoder position at power-on (customized firmware only).
+last_updated: '2026-05-28'
+doc_revision: '2026.06'
 ---
 # EncAbsFL/EncAbsRL
 

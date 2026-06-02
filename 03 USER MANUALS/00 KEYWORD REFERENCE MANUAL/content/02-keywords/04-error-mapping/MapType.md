@@ -25,6 +25,8 @@ attributes:
   implemented: final
 overrides: {}
 summary: Selects the error-mapping dimension (off, 1D, 2D, or 3D).
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # MapType
 

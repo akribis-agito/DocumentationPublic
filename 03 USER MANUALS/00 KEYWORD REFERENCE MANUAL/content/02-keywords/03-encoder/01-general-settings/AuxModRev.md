@@ -25,6 +25,8 @@ attributes:
   scaling: 1.0
   implemented: not_implemented
 overrides: {}
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # AuxModRev
 

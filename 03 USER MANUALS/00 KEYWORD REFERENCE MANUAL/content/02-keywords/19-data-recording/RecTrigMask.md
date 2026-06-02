@@ -31,6 +31,8 @@ overrides:
     - -2251799813685248
     - 2251799813685247
     default: 18446744073709551615
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # RecTrigMask
 

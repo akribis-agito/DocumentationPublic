@@ -27,6 +27,8 @@ attributes:
 overrides:
   central-i.v5:
     can_code: 731
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # RptCycles
 

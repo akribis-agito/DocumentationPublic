@@ -1,5 +1,7 @@
 ---
 summary: Pushes a complete CNC segment (type and parameters) in one Ethernet message.
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # CNCAPushSeg/CNCBPushSeg
 

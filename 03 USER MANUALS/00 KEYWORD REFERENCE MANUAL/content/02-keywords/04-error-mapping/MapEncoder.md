@@ -25,6 +25,8 @@ attributes:
   implemented: final
 overrides: {}
 summary: Selects which axis encoder drives each error-mapping dimension.
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # MapEncoder
 

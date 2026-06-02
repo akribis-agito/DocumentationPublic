@@ -28,6 +28,8 @@ overrides:
   central-i.v5:
     units: user
     can_code: 567
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # JerkMode
 

@@ -1,5 +1,7 @@
 ---
 summary: Reports the current source line number of the executing user program task.
+last_updated: '2026-05-28'
+doc_revision: '2026.06'
 ---
 # ProgLine
 

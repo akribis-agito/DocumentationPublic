@@ -1,5 +1,7 @@
 ---
 summary: Per-scope arrays holding recording metadata and raw (unconverted) captured data.
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # RecDataA/RecDataB
 

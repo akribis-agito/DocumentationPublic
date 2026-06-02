@@ -1,5 +1,7 @@
 ---
 summary: First-order filter coefficient (1-64) smoothing PDPos into PosRef in direct P/D mode.
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # PDFiltFact
 

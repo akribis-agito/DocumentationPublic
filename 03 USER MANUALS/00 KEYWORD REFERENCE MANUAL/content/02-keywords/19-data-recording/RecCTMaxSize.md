@@ -1,5 +1,7 @@
 ---
 summary: Sets the maximum sample count of the continuous-time recording buffer per channel.
+last_updated: '2026-05-28'
+doc_revision: '2026.06'
 ---
 # RecCTMaxSize
 

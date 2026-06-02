@@ -28,6 +28,8 @@ overrides:
     array_size: 3
     ok_in_motion: true
     ok_motor_on: true
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # PosFiltOn
 

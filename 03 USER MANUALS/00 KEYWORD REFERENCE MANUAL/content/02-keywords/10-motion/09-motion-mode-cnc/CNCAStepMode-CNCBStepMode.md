@@ -1,5 +1,7 @@
 ---
 summary: Enables CNC step mode, halting at the end of each segment until released.
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # CNCAStepMode/CNCBStepMode
 

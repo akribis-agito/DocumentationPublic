@@ -1,5 +1,7 @@
 ---
 summary: Flag indicating whether the encoder index pulse has been detected.
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # IndexStat/AuxIndexStat
 

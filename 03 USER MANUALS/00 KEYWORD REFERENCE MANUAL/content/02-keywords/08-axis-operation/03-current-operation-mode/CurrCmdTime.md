@@ -1,5 +1,7 @@
 ---
 summary: Command time for each current command, in milliseconds.
+last_updated: '2026-05-28'
+doc_revision: '2026.06'
 ---
 # CurrCmdTime
 

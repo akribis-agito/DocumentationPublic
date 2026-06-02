@@ -1,5 +1,7 @@
 ---
 summary: Label keyword marking the start of a user program function.
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # ProgFunc
 

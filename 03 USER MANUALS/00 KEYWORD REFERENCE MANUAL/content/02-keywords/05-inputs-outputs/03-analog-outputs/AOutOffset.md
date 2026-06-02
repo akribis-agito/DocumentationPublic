@@ -33,6 +33,8 @@ overrides:
     range:
     - -700
     - 700
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # AOutOffset
 

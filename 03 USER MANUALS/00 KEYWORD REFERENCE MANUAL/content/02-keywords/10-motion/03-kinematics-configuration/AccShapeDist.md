@@ -30,6 +30,8 @@ overrides:
     range:
     - 0
     - 2251799813685247
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # AccShapeDist
 

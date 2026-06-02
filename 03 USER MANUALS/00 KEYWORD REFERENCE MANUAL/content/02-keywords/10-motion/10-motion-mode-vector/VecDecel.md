@@ -30,6 +30,8 @@ overrides:
     range:
     - 100.0
     - 686700000000.0
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # VecDecel
 

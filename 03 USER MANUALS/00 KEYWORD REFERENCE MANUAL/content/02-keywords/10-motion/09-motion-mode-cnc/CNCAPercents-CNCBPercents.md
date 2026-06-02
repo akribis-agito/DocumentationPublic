@@ -1,5 +1,7 @@
 ---
 summary: On-the-fly scaling of CNC path speed and acceleration/deceleration.
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # CNCAPercents/CNCBPercents
 

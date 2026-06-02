@@ -25,6 +25,8 @@ attributes:
   implemented: final
 overrides: {}
 summary: Current position-error offset applied on top of the map correction.
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # MapErrOffset
 

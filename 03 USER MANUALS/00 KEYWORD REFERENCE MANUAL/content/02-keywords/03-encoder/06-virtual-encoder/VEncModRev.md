@@ -27,6 +27,8 @@ attributes:
 overrides:
   central-i.v5:
     can_code: 830
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # VEncModRev
 

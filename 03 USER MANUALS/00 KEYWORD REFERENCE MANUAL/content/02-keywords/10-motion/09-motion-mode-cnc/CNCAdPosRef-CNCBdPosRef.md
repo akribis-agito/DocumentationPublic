@@ -1,5 +1,7 @@
 ---
 summary: Derivative of CNCAPosRef — the current vector velocity of the profiler.
+last_updated: '2026-05-28'
+doc_revision: '2026.06'
 ---
 # CNCAdPosRef/CNCBdPosRef
 

@@ -32,6 +32,8 @@ overrides:
     range:
     - 0
     - 100000000
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # GantryVelGain
 

@@ -1,5 +1,7 @@
 ---
 summary: Array holding the metadata and raw values of the latest recording.
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # RecData
 

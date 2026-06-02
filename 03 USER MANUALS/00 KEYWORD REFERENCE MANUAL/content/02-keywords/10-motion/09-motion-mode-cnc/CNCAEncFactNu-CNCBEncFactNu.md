@@ -1,5 +1,7 @@
 ---
 summary: Numerator of the CNC queue A (or B) encoder scaling ratio.
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # CNCAEncFactNu/CNCBEncFactNu
 

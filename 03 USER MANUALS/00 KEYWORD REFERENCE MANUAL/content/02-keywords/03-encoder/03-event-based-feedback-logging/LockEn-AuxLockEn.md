@@ -1,5 +1,7 @@
 ---
 summary: Enables or disables event-based feedback logging.
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # LockEn/AuxLockEn
 

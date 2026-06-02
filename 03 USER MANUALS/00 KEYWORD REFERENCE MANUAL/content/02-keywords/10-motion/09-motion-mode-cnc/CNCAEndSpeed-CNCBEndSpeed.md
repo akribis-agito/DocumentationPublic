@@ -1,5 +1,7 @@
 ---
 summary: Reports the commanded speed at the end of the active CNC segment on group A (or B).
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # CNCAEndSpeed/CNCBEndSpeed
 

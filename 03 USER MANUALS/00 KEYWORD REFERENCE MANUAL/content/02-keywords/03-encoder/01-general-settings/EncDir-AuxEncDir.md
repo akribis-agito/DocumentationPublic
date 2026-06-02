@@ -1,5 +1,7 @@
 ---
 summary: Sets the counting direction of the encoder feedback.
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # EncDir/AuxEncDir
 

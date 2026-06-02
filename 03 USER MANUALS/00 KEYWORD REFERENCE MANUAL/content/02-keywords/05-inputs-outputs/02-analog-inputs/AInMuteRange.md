@@ -31,6 +31,8 @@ overrides:
     scope: axis
     data_type: float32
     range: null
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # AInMuteRange
 

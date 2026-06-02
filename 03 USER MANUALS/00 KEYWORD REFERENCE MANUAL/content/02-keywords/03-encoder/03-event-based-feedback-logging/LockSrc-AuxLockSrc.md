@@ -1,5 +1,7 @@
 ---
 summary: Selects the digital event source and trigger edge for feedback logging.
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # LockSrc/AuxLockSrc
 

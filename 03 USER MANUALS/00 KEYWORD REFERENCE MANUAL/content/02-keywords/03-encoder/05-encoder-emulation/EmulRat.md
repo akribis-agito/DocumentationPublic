@@ -25,6 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # EmulRat
 

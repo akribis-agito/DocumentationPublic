@@ -1,5 +1,7 @@
 ---
 summary: Arrays of position-error correction values used by error mapping.
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # MapTable/MapTableB/MapTableC/MapTableD/MapTableE
 

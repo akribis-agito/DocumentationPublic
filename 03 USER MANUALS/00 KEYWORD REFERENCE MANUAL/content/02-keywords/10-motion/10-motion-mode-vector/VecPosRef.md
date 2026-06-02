@@ -30,6 +30,8 @@ overrides:
     range:
     - -2251799813685248
     - 2251799813685247
+last_updated: '2026-05-28'
+doc_revision: '2026.06'
 ---
 # VecPosRef
 

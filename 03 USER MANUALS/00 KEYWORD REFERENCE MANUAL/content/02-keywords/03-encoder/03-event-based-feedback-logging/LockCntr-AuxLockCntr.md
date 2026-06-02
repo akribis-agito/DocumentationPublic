@@ -1,5 +1,7 @@
 ---
 summary: Counts digital events and serves as the index into the feedback-logging history arrays.
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # LockCntr/AuxLockCntr
 

@@ -1,5 +1,7 @@
 ---
 summary: Selects the end-of-segment behaviour for CNC motion queue A (or B).
+last_updated: '2026-05-28'
+doc_revision: '2026.06'
 ---
 # CNCAEndSegMod/CNCBEndSegMod
 

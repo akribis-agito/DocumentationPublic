@@ -1,5 +1,7 @@
 ---
 summary: Pauses CNC motion (deceleration to zero vector velocity) when set to 1.
+last_updated: '2026-05-28'
+doc_revision: '2026.06'
 ---
 # CNCAPause/CNCBPause
 

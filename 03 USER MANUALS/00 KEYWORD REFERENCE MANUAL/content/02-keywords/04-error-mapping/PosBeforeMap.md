@@ -30,6 +30,8 @@ overrides:
     - -2251799813685248
     - 2251799813685247
 summary: Read-only feedback position before error-mapping correction.
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # PosBeforeMap
 

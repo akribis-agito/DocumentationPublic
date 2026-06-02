@@ -1,5 +1,7 @@
 ---
 summary: Label keyword marking the start of a callable user program task.
+last_updated: '2026-06-02'
+doc_revision: '2026.06'
 ---
 # ProgTask
 

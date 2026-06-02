@@ -1,5 +1,7 @@
 ---
 summary: Selects the point-to-point motion profiler order; see JerkMode in motion configuration.
+last_updated: '2026-05-28'
+doc_revision: '2026.06'
 ---
 # JerkMode
 
