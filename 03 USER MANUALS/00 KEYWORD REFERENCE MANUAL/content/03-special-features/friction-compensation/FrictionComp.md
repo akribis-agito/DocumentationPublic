@@ -27,6 +27,8 @@ overrides:
   central-i.v5:
     range: null
     scaling: 1.0
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
 ---
 # FrictionComp
 
