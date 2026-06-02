@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from pathlib import Path
 
@@ -12,6 +13,7 @@ from .manifest import render_manifest
 from .merge import VersionAlreadyRecorded, merge_version
 from .model import PRODUCTS, product_supported
 from .table_parser import parse_params
+from .versioning import stamp_corpus
 
 
 def _build_parser() -> argparse.ArgumentParser:
@@ -25,7 +27,51 @@ def _build_parser() -> argparse.ArgumentParser:
                        help="Header file(s) defining MIN/MAX/DFLT/sizes")
         p.add_argument("--docs-root", required=True, type=Path)
         p.add_argument("--manifest", required=True, type=Path)
+
+    v = sub.add_parser(
+        "version", help="Stamp per-doc last_updated/doc_revision and write the "
+                        "RAG manifest.json (DOC-revision metadata, from git)."
+    )
+    v.add_argument("--content-root", required=True, type=Path,
+                   help="Manual content/ dir holding the doc tree")
+    v.add_argument("--repo-root", required=True, type=Path,
+                   help="Git repo root, for last-commit dates")
+    v.add_argument("--corpus-version", required=True,
+                   help="Corpus CalVer, e.g. 2026.06")
+    v.add_argument("--generated", required=True,
+                   help="Generation date YYYY-MM-DD (fallback for uncommitted)")
+    v.add_argument("--manifest-out", required=True, type=Path)
+    v.add_argument("--version-file", required=True, type=Path)
     return parser
+
+
+_SKIP_NAMES = {"index.md", "README.md"}
+
+
+def _discover_docs(content_root: Path) -> list[Path]:
+    """Every content .md the RAG cares about (excludes _files/ and index/readme)."""
+    docs: list[Path] = []
+    for path in sorted(content_root.rglob("*.md")):
+        if "_files" in path.parts or path.name in _SKIP_NAMES:
+            continue
+        docs.append(path)
+    return docs
+
+
+def run_version(args) -> int:
+    docs = _discover_docs(args.content_root)
+    manifest = stamp_corpus(
+        docs,
+        repo_root=args.repo_root,
+        content_root=args.content_root,
+        version=args.corpus_version,
+        generated=args.generated,
+    )
+    args.manifest_out.parent.mkdir(parents=True, exist_ok=True)
+    args.manifest_out.write_text(json.dumps(manifest, indent=2) + "\n")
+    args.version_file.write_text(args.corpus_version + "\n")
+    print(f"stamped {manifest['document_count']} docs at {args.corpus_version}")
+    return 0
 
 
 def _index_docs(docs_root: Path) -> dict[str, Path]:
@@ -41,6 +87,8 @@ def _index_docs(docs_root: Path) -> dict[str, Path]:
 
 def run(argv: list[str]) -> int:
     args = _build_parser().parse_args(argv)
+    if args.mode == "version":
+        return run_version(args)
     defines = DefineTable.from_headers(list(args.defines))
     tables = parse_params(args.params, defines)
     docs = _index_docs(args.docs_root)
