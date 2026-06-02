@@ -16,9 +16,14 @@ whose prose actually changed.
 from __future__ import annotations
 
 import hashlib
+import subprocess
+from pathlib import Path
+
+from .frontmatter import render_doc, split_doc
 
 
 _STAMP_KEYS = ("last_updated", "doc_revision")
+_MANUAL_NAME = "Keyword Reference Manual"
 
 
 def stamp_frontmatter(fm: dict, last_updated: str, doc_revision: str) -> dict:
@@ -65,3 +70,55 @@ def build_manifest(
         "document_count": len(ordered),
         "documents": ordered,
     }
+
+
+def last_commit_date(path, repo_root) -> str | None:
+    """Return the YYYY-MM-DD of the most recent commit touching `path`, or None
+    if the file has never been committed."""
+    result = subprocess.run(
+        ["git", "-C", str(repo_root), "log", "-1",
+         "--format=%ad", "--date=short", "--", str(path)],
+        capture_output=True, text=True,
+    )
+    out = result.stdout.strip()
+    return out or None
+
+
+def stamp_corpus(
+    doc_paths,
+    *,
+    repo_root,
+    content_root,
+    version: str,
+    generated: str,
+    manual: str = _MANUAL_NAME,
+) -> dict:
+    """Stamp every doc that has frontmatter with its git-derived `last_updated`
+    and the corpus `doc_revision`, and return the RAG manifest covering ALL
+    docs (frontmatter and legacy alike).
+
+    Legacy docs that carry no frontmatter are left on disk untouched (we do not
+    inject a frontmatter block into them) but still appear in the manifest with
+    their git date and a body hash.
+    """
+    content_root = Path(content_root)
+    entries: list[dict] = []
+    for raw in doc_paths:
+        path = Path(raw)
+        text = path.read_text()
+        fm, body = split_doc(text)
+        last_updated = last_commit_date(path, repo_root) or generated
+        keyword = (fm.get("keyword") if fm else None) or path.stem
+        if fm:
+            stamped = stamp_frontmatter(fm, last_updated, version)
+            path.write_text(render_doc(stamped, body))
+            hash_body = body            # frontmatter-independent body hash
+        else:
+            hash_body = text            # legacy: the whole file is the prose
+        rel = str(path.relative_to(content_root))
+        entries.append(
+            manifest_document(rel, keyword, last_updated, version, hash_body)
+        )
+    return build_manifest(
+        entries, manual=manual, version=version, generated=generated
+    )
