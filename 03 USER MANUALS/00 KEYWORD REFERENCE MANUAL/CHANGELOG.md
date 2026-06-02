@@ -25,6 +25,15 @@ versioning machinery itself.
   file, and a machine-readable `manifest.json` (path, keyword, last_updated,
   doc_revision, body SHA-256) for incremental re-indexing. Stamps are derived
   automatically from git via `keyword-docgen version`.
+- **58 previously-undocumented legacy keyword pages** (the `AutoG*`, `Spring*`,
+  `UPM*`, `MotorLearn*`, `BurnIn*`, `Indirect*` and related families) gained
+  generated firmware frontmatter.
+- **New v5 data-capture documentation.** Documented the Central-i signal scope
+  (`ScopeOn`, `ScopeGap`, `ScopeParams`, `ScopeStatus`, `ScopeAbout`,
+  `ScopeUpload`) and the user-program `Print` statement, and reframed the
+  **Data recording** overview to group its three capture mechanisms — the
+  triggered recorder (`Rec*`), the continuous logger (`Logger*`), and the
+  Central-i scope (`Scope*`).
 
 ### Changed / Fixed — firmware-grounded audit
 

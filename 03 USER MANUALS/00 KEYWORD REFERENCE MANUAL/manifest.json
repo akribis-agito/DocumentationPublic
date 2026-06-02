@@ -2,7 +2,7 @@
   "manual": "Keyword Reference Manual",
   "version": "2026.06",
   "generated": "2026-06-02",
-  "document_count": 926,
+  "document_count": 933,
   "documents": [
     {
       "path": "01-keyword-usage-and-syntax/complex-can-code.md",
@@ -4856,6 +4856,13 @@
       "sha256": "eb51bf9cbc49bda40f1fea639b78e052169cc30391788b5677fa9009efd1acc2"
     },
     {
+      "path": "02-keywords/17-user-program/02-program-execution/Print.md",
+      "keyword": "Print",
+      "last_updated": "2026-06-02",
+      "doc_revision": "2026.06",
+      "sha256": "f1508a71aeb55e851466f1c91eedd7ca6ad3e1579714976abd349e1a6d850f86"
+    },
+    {
       "path": "02-keywords/17-user-program/02-program-execution/ProgArg.md",
       "keyword": "ProgArg",
       "last_updated": "2026-05-29",
@@ -5462,7 +5469,7 @@
       "keyword": "00-overview",
       "last_updated": "2026-05-29",
       "doc_revision": "2026.06",
-      "sha256": "c1425b432595dbf0cbd6b1fe8940b54e793643e242661743974baf6ec7ff953d"
+      "sha256": "b8a171a83178a9557cbe046ad77333d07b44a36acdb601e14d9bad5ee995e9a0"
     },
     {
       "path": "02-keywords/19-data-recording/LoggerAbout.md",
@@ -5666,6 +5673,48 @@
       "last_updated": "2026-05-28",
       "doc_revision": "2026.06",
       "sha256": "a7efe1bf2ac1b9425dbde1152d0f5bfabb0f8fd612feb5b8acb6ed32e77e326c"
+    },
+    {
+      "path": "02-keywords/19-data-recording/ScopeAbout.md",
+      "keyword": "ScopeAbout",
+      "last_updated": "2026-06-02",
+      "doc_revision": "2026.06",
+      "sha256": "d0efa049f6ee66de6320670d5e91456a5e2112bd02dbccd70b9f466b9f1f9beb"
+    },
+    {
+      "path": "02-keywords/19-data-recording/ScopeGap.md",
+      "keyword": "ScopeGap",
+      "last_updated": "2026-06-02",
+      "doc_revision": "2026.06",
+      "sha256": "18eaf7480c228320dcdd8fd5e3d215176163b3b24f2433f9601ae1ce228f9aba"
+    },
+    {
+      "path": "02-keywords/19-data-recording/ScopeOn.md",
+      "keyword": "ScopeOn",
+      "last_updated": "2026-06-02",
+      "doc_revision": "2026.06",
+      "sha256": "58fc7e228be2ec19f508a7e63dffb0f4e4cbff6cfc64c92267e88ce48b603761"
+    },
+    {
+      "path": "02-keywords/19-data-recording/ScopeParams.md",
+      "keyword": "ScopeParams",
+      "last_updated": "2026-06-02",
+      "doc_revision": "2026.06",
+      "sha256": "fd17e2c86c0eaac7675477bc1bdb868c8c2f19ffc9e57babea1ddaf53ff1ed9f"
+    },
+    {
+      "path": "02-keywords/19-data-recording/ScopeStatus.md",
+      "keyword": "ScopeStatus",
+      "last_updated": "2026-06-02",
+      "doc_revision": "2026.06",
+      "sha256": "7c7fcee0eabff39040688fa5986b89930d021450bde5bc5ea94923deb0cbb25b"
+    },
+    {
+      "path": "02-keywords/19-data-recording/ScopeUpload.md",
+      "keyword": "ScopeUpload",
+      "last_updated": "2026-06-02",
+      "doc_revision": "2026.06",
+      "sha256": "a7477cb3fa22d450b6e7e23ec175902a05464b0444a5c1f6b367985d18e66b56"
     },
     {
       "path": "02-keywords/20-arrays/00-overview.md",

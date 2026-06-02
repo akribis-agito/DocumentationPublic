@@ -4,6 +4,16 @@ Data recording lets the user record a time series of any set of parameters. The 
 
 ![Data recording: the recorder pipeline](recorder-pipeline.svg)
 
+## Capture mechanisms
+
+This section groups three independent data-capture mechanisms. They share the idea of sampling a set of parameters into a controller buffer and streaming it to the host, but differ in how capture starts and is read back:
+
+- **Triggered recorder — `Rec*` keywords.** Captures a fixed-length, trigger-aligned window in one pass and uploads it when complete. Supports trigger configuration and (on some products) two independent recording systems. This is the mechanism described in detail below; historically its recording systems are called "scopes 1 and 2".
+- **Continuous logger — `Logger*` keywords** (see [LoggerOn](LoggerOn.md)). Runs indefinitely in the background with no trigger, sampling up to 40 parameters, and is drained incrementally with [LoggerUpload](LoggerUpload.md) while it keeps running.
+- **Central-i signal scope — `Scope*` keywords** (see [ScopeOn](ScopeOn.md), Central-i / v5 only). Streams up to six signals continuously for live monitoring, drained incrementally with [ScopeUpload](ScopeUpload.md); pauses if the buffer fills before it is read.
+
+Use the triggered recorder when you need a precise, trigger-aligned snapshot; use the continuous logger or the Central-i scope when you want to monitor signals over an open-ended period. The rest of this overview describes the triggered recorder (`Rec*`).
+
 Depending on the product, the number of scopes and the maximum data points per scope vary. The following table shows the summary of the recording capability of each product.
 
 | Properties | Limits |
