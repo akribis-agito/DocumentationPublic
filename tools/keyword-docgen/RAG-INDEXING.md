@@ -74,6 +74,39 @@ MANUAL="../../03 USER MANUALS/00 KEYWORD REFERENCE MANUAL"
 
 ---
 
+## Versioning system (how it works — already shipped)
+
+Documentation versioning is implemented and live (baseline `2026.06`). It is
+**separate from** the firmware `availability` (v4/v5) facts: `doc_revision` tells
+a consumer how current their copy of the *documentation* is; it says nothing
+about firmware compatibility. `keyword-docgen version` produces three artifacts:
+
+1. **Per-page frontmatter stamps** — `last_updated` (the page's git last-commit
+   date) and `doc_revision` (corpus CalVer), appended *after* the
+   generator-owned facts so they never disturb them. Legacy frontmatter-less
+   pages are manifest-only (not stamped on disk).
+2. **Corpus version** — `VERSION` (`2026.06`), `CHANGELOG.md`, and a git tag
+   (`docs-2026.06`) per release.
+3. **`manifest.json`** — every page with its `path, keyword, last_updated,
+   doc_revision, sha256` (body hash).
+
+**Incremental rule (the important part):** on each run the previous
+`manifest.json` is loaded as a baseline. A page whose **body SHA is unchanged**
+keeps its prior `last_updated` *and* `doc_revision`; only changed/new pages get
+the current version + git date. Two consequences:
+- per-page `doc_revision` stays meaningful release-over-release (it marks the
+  release a page's prose actually changed in), and
+- a stamp/metadata commit never pushes `last_updated` forward (the stamp commit
+  becomes the file's git last-commit, but the prose didn't change, so the date
+  is held).
+
+**Why the RAG cares:** diff `sha256` between two `manifest.json` pulls to
+re-embed *only* changed pages; surface `doc_revision`/`last_updated` in answers
+for staleness and citation.
+
+Full reference: the **"Versioning"** section of `README.md`; design + rationale
+in the `docs-versioning-scheme` project memory.
+
 ## DECISION 1 — embedder / target chunk size (blocks "go")
 
 Measured chunk sizes (est. tokens ≈ words × 1.3, over 933 chunks):
