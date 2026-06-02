@@ -128,6 +128,68 @@ def test_stamp_corpus_manifest(tmp_path):
         b"# PosGain\n\nbody text\n").hexdigest()
 
 
+def test_stamp_corpus_incremental_doc_revision(tmp_path):
+    # On a later release, doc_revision must bump ONLY for pages whose body
+    # changed (vs the previous manifest); unchanged pages keep their revision.
+    _init(tmp_path)
+    content, pg, ag = _make_corpus(tmp_path)
+    _git(tmp_path, "add", "-A")
+    _git(tmp_path, "commit", "-m", "init", date="2026-05-20T10:00:00")
+
+    m1 = stamp_corpus([pg, ag], repo_root=tmp_path, content_root=content,
+                      version="2026.06", generated="2026-06-02")
+
+    # Change only PosGain's body; commit at a later date.
+    pg.write_text(pg.read_text().replace("body text", "new body text"))
+    _git(tmp_path, "add", "-A")
+    _git(tmp_path, "commit", "-m", "edit", date="2026-07-10T10:00:00")
+
+    m2 = stamp_corpus([pg, ag], repo_root=tmp_path, content_root=content,
+                      version="2026.07", generated="2026-07-15", prev_manifest=m1)
+
+    by = {d["keyword"]: d for d in m2["documents"]}
+    assert by["AutoGOn"]["doc_revision"] == "2026.06"   # unchanged -> kept
+    assert by["PosGain"]["doc_revision"] == "2026.07"   # changed -> bumped
+    fm, _ = split_doc(pg.read_text())
+    assert fm["doc_revision"] == "2026.07"               # stamp reflects bump
+    assert fm["last_updated"] == "2026-07-10"
+
+
+def test_last_updated_stable_across_stamp_commit(tmp_path):
+    # A stamp/metadata commit must NOT push last_updated forward. When the body
+    # is unchanged vs the previous manifest, keep the prior last_updated even
+    # though the file's git last-commit date has since advanced.
+    _init(tmp_path)
+    content, pg, ag = _make_corpus(tmp_path)
+    _git(tmp_path, "add", "-A")
+    _git(tmp_path, "commit", "-m", "content", date="2026-05-20T10:00:00")
+
+    m1 = stamp_corpus([pg, ag], repo_root=tmp_path, content_root=content,
+                      version="2026.06", generated="2026-06-02")
+    # m1 wrote pg's frontmatter stamp; commit THAT (body unchanged) at a later date.
+    _git(tmp_path, "add", "-A")
+    _git(tmp_path, "commit", "-m", "stamp", date="2026-06-02T10:00:00")
+
+    m2 = stamp_corpus([pg, ag], repo_root=tmp_path, content_root=content,
+                      version="2026.06", generated="2026-06-30", prev_manifest=m1)
+
+    fm, _ = split_doc(pg.read_text())
+    assert fm["last_updated"] == "2026-05-20"            # not pushed to the stamp date
+    by = {d["keyword"]: d for d in m2["documents"]}
+    assert by["PosGain"]["last_updated"] == "2026-05-20"
+
+
+def test_stamp_corpus_no_prev_manifest_uses_current_version(tmp_path):
+    # Baseline (no previous manifest): every page gets the current version.
+    _init(tmp_path)
+    content, pg, ag = _make_corpus(tmp_path)
+    _git(tmp_path, "add", "-A")
+    _git(tmp_path, "commit", "-m", "init", date="2026-05-20T10:00:00")
+    m = stamp_corpus([pg, ag], repo_root=tmp_path, content_root=content,
+                     version="2026.06", generated="2026-06-02")
+    assert all(d["doc_revision"] == "2026.06" for d in m["documents"])
+
+
 def test_cli_version_subcommand(tmp_path):
     _init(tmp_path)
     content, pg, ag = _make_corpus(tmp_path)

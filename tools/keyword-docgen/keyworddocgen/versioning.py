@@ -92,32 +92,51 @@ def stamp_corpus(
     version: str,
     generated: str,
     manual: str = _MANUAL_NAME,
+    prev_manifest: dict | None = None,
 ) -> dict:
     """Stamp every doc that has frontmatter with its git-derived `last_updated`
-    and the corpus `doc_revision`, and return the RAG manifest covering ALL
-    docs (frontmatter and legacy alike).
+    and a `doc_revision`, and return the RAG manifest covering ALL docs
+    (frontmatter and legacy alike).
+
+    `doc_revision` is **incremental**: a page keeps the revision it had in
+    `prev_manifest` when its body hash is unchanged, and is bumped to `version`
+    only when its body changed (or it is new / there is no previous manifest).
+    This keeps per-page revisions meaningful release-over-release instead of all
+    snapping to the latest version.
 
     Legacy docs that carry no frontmatter are left on disk untouched (we do not
     inject a frontmatter block into them) but still appear in the manifest with
     their git date and a body hash.
     """
     content_root = Path(content_root)
+    prev_by_path = {
+        d["path"]: d for d in (prev_manifest or {}).get("documents", [])
+    }
     entries: list[dict] = []
     for raw in doc_paths:
         path = Path(raw)
         text = path.read_text()
         fm, body = split_doc(text)
-        last_updated = last_commit_date(path, repo_root) or generated
         keyword = (fm.get("keyword") if fm else None) or path.stem
-        if fm:
-            stamped = stamp_frontmatter(fm, last_updated, version)
-            path.write_text(render_doc(stamped, body))
-            hash_body = body            # frontmatter-independent body hash
-        else:
-            hash_body = text            # legacy: the whole file is the prose
         rel = str(path.relative_to(content_root))
+        hash_body = body if fm else text   # legacy: whole file is the prose
+        sha = body_sha256(hash_body)
+        prev = prev_by_path.get(rel)
+        if prev and prev.get("sha256") == sha:
+            # Body unchanged vs the previous manifest: keep both stamps stable.
+            # This also prevents a stamp/metadata commit from pushing
+            # last_updated forward (the stamp commit becomes the file's git
+            # last-commit, but the prose did not change).
+            last_updated = prev["last_updated"]
+            doc_revision = prev["doc_revision"]
+        else:
+            last_updated = last_commit_date(path, repo_root) or generated
+            doc_revision = version
+        if fm:
+            stamped = stamp_frontmatter(fm, last_updated, doc_revision)
+            path.write_text(render_doc(stamped, body))
         entries.append(
-            manifest_document(rel, keyword, last_updated, version, hash_body)
+            manifest_document(rel, keyword, last_updated, doc_revision, hash_body)
         )
     return build_manifest(
         entries, manual=manual, version=version, generated=generated

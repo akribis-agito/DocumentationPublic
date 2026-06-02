@@ -60,12 +60,21 @@ def _discover_docs(content_root: Path) -> list[Path]:
 
 def run_version(args) -> int:
     docs = _discover_docs(args.content_root)
+    # Load the previous manifest (if any) so doc_revision is bumped only for
+    # pages whose body actually changed.
+    prev_manifest = None
+    if args.manifest_out.exists():
+        try:
+            prev_manifest = json.loads(args.manifest_out.read_text())
+        except (OSError, json.JSONDecodeError):
+            prev_manifest = None
     manifest = stamp_corpus(
         docs,
         repo_root=args.repo_root,
         content_root=args.content_root,
         version=args.corpus_version,
         generated=args.generated,
+        prev_manifest=prev_manifest,
     )
     args.manifest_out.parent.mkdir(parents=True, exist_ok=True)
     args.manifest_out.write_text(json.dumps(manifest, indent=2) + "\n")
