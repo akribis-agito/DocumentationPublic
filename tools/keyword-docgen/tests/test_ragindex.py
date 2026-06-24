@@ -83,6 +83,64 @@ def test_chunk_record_keyword_falls_back_to_path_stem():
     assert rec["text"].startswith("Keyword getting-started") or "getting-started" in rec["text"]
 
 
+def test_chunk_record_language_metadata():
+    rec = chunk_record(
+        "02-keywords/PosGain.zh.md", {"keyword": "PosGain", "language": "zh-CN",
+                                      "summary": "译文"},
+        "# PosGain\n\n中文\n",
+        last_updated="2026-06-02", doc_revision="2026.06", sha256="zzz",
+        language="zh-CN",
+    )
+    assert rec["id"] == "02-keywords/PosGain.zh.md"   # zh chunk keyed by own path
+    assert rec["keyword"] == "PosGain"                # same join key
+    assert rec["metadata"]["language"] == "zh-CN"
+    assert "译文" in rec["text"]
+
+
+def test_chunk_record_english_has_no_language_key():
+    rec = chunk_record(
+        "02-keywords/PosGain.md", _fm(), "# PosGain\n\nbody\n",
+        last_updated="2026-06-02", doc_revision="2026.06", sha256="abc",
+    )
+    assert "language" not in rec["metadata"]          # English unchanged
+
+
+def test_cli_rag_export_emits_zh_chunk(tmp_path):
+    content = tmp_path / "content"
+    (content / "02-keywords").mkdir(parents=True)
+    (content / "02-keywords" / "PosGain.md").write_text(
+        "---\nkeyword: PosGain\nsummary: P.\ncan_code: 100\n"
+        "attributes:\n  scope: axis\n---\n# PosGain\n\nSee [PosKi](PosKi.md).\n"
+    )
+    (content / "02-keywords" / "PosGain.zh.md").write_text(
+        "---\nkeyword: PosGain\nlanguage: zh-CN\nsummary: 译文\ncan_code: 100\n"
+        "attributes:\n  scope: axis\n---\n# PosGain\n\n中文。\n"
+    )
+    manifest = {"documents": [{
+        "path": "02-keywords/PosGain.md", "keyword": "PosGain",
+        "last_updated": "2026-06-02", "doc_revision": "2026.06", "sha256": "abc",
+        "variants": {"zh-CN": {"path": "02-keywords/PosGain.zh.md",
+                               "sha256": "zzz"}},
+    }]}
+    mpath = tmp_path / "manifest.json"
+    mpath.write_text(json.dumps(manifest))
+    out = tmp_path / "chunks.jsonl"
+
+    rc = run(["rag-export", "--content-root", str(content),
+              "--manifest", str(mpath), "--out", str(out)])
+    assert rc == 0
+
+    recs = [json.loads(ln) for ln in out.read_text().splitlines()]
+    assert len(recs) == 2
+    en = next(r for r in recs if r["id"] == "02-keywords/PosGain.md")
+    zh = next(r for r in recs if r["id"] == "02-keywords/PosGain.zh.md")
+    assert "language" not in en["metadata"]
+    assert zh["metadata"]["language"] == "zh-CN"
+    assert zh["keyword"] == "PosGain"
+    assert zh["metadata"]["sha256"] == "zzz"
+    assert "中文。" in zh["text"]
+
+
 def test_cli_rag_export(tmp_path):
     content = tmp_path / "content"
     (content / "02-keywords").mkdir(parents=True)

@@ -79,8 +79,14 @@ def chunk_record(
     last_updated: str,
     doc_revision: str,
     sha256: str,
+    language: str | None = None,
 ) -> dict:
-    """Build one document-level chunk for `rel_path`."""
+    """Build one document-level chunk for `rel_path`.
+
+    `language` (e.g. "zh-CN") marks a translated sidecar chunk. When None (the
+    English default) no `language` metadata key is emitted, so English chunks
+    are unchanged. The chunk `id` is always `rel_path`, giving each translated
+    sidecar a stable upsert key of its own."""
     fm = fm or {}
     keyword = fm.get("keyword") or Path(rel_path).stem
     header = fact_header({**fm, "keyword": keyword})
@@ -93,6 +99,8 @@ def chunk_record(
         "doc_revision": doc_revision,
         "sha256": sha256,
     }
+    if language is not None:
+        metadata["language"] = language
     if fm.get("can_code") is not None:
         metadata["can_code"] = fm["can_code"]
     attrs = fm.get("attributes") or {}

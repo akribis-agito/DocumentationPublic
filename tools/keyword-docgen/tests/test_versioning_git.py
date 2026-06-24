@@ -190,6 +190,60 @@ def test_stamp_corpus_no_prev_manifest_uses_current_version(tmp_path):
     assert all(d["doc_revision"] == "2026.06" for d in m["documents"])
 
 
+def test_stamp_corpus_adds_zh_variant_and_keeps_en_record(tmp_path):
+    # A .zh.md sidecar must NOT appear as its own top-level document; instead the
+    # English record gains an additive `variants` object. Records without a
+    # sidecar get no `variants` key, and the English record stays unchanged.
+    import hashlib
+    _init(tmp_path)
+    content, pg, ag = _make_corpus(tmp_path)
+    zh = pg.with_name("PosGain.zh.md")
+    zh_body = "# PosGain\n\n中文正文\n"
+    zh.write_text(
+        "---\nkeyword: PosGain\nlanguage: zh-CN\nsummary: 译文\n"
+        "attributes:\n  range:\n  - 0\n  - 20000\n---\n" + zh_body
+    )
+    _git(tmp_path, "add", "-A")
+    _git(tmp_path, "commit", "-m", "init", date="2026-05-20T10:00:00")
+
+    m = stamp_corpus([pg, ag, zh], repo_root=tmp_path, content_root=content,
+                     version="2026.06", generated="2026-06-02")
+
+    by = {d["keyword"]: d for d in m["documents"]}
+    # zh sidecar is not a standalone document
+    paths = [d["path"] for d in m["documents"]]
+    assert "02-keywords/01-system/PosGain.zh.md" not in paths
+    assert m["document_count"] == 2          # PosGain + AutoGOn only
+    # English PosGain gains a variants object
+    variants = by["PosGain"]["variants"]
+    assert variants["zh-CN"]["path"] == "02-keywords/01-system/PosGain.zh.md"
+    assert variants["zh-CN"]["sha256"] == hashlib.sha256(
+        zh_body.encode("utf-8")).hexdigest()
+    # The English record is otherwise the normal shape.
+    assert by["PosGain"]["sha256"] == hashlib.sha256(
+        b"# PosGain\n\nbody text\n").hexdigest()
+    # A doc without a sidecar gets NO variants key.
+    assert "variants" not in by["AutoGOn"]
+
+
+def test_stamp_corpus_zh_variant_does_not_disturb_en_stamp(tmp_path):
+    # Presence of a sidecar must not change the English doc's own facts/body.
+    _init(tmp_path)
+    content, pg, ag = _make_corpus(tmp_path)
+    zh = pg.with_name("PosGain.zh.md")
+    zh.write_text(
+        "---\nkeyword: PosGain\nlanguage: zh-CN\nsummary: 译文\n---\n中文\n")
+    _git(tmp_path, "add", "-A")
+    _git(tmp_path, "commit", "-m", "init", date="2026-05-20T10:00:00")
+
+    stamp_corpus([pg, ag, zh], repo_root=tmp_path, content_root=content,
+                 version="2026.06", generated="2026-06-02")
+
+    fm, body = split_doc(pg.read_text())
+    assert fm["last_updated"] == "2026-05-20"
+    assert body == "# PosGain\n\nbody text\n"
+
+
 def test_cli_version_subcommand(tmp_path):
     _init(tmp_path)
     content, pg, ag = _make_corpus(tmp_path)

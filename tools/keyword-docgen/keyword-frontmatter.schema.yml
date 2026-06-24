@@ -28,6 +28,18 @@ fields:
     required: false
     description: One-line description shown under the page title.
 
+  language:
+    type: enum
+    values: [en, zh-CN]
+    origin: authored-by-translation
+    required: false
+    description: >
+      Language of the AUTHORED prose (summary + body) in this file. Absent means
+      English (en). A translated sidecar `<Keyword>.zh.md` carries
+      `language: zh-CN`; its generated facts are copied verbatim from the English
+      file (they are language-neutral) while its summary and body are the
+      translation. Never hand-set on an English file.
+
   can_code:
     type: integer
     origin: generated

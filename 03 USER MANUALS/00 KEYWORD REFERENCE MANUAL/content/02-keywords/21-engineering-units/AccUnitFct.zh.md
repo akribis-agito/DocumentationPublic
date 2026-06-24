@@ -1,0 +1,60 @@
+---
+keyword: AccUnitFct
+summary: 内部加速度单位与所选加速度工程单位之间的缩放因子。
+availability:
+  standalone: []
+  central-i:
+  - v5
+can_code: 809
+attributes:
+  access: rw
+  scope: axis
+  flash: true
+  type: scalar
+  array_size: 1
+  data_type: float64
+  ok_in_motion: true
+  ok_motor_on: true
+  units: none
+  range: null
+  default: 1
+  scaling: 1.0
+  implemented: final
+overrides: {}
+last_updated: '2026-05-29'
+doc_revision: '2026.06'
+language: zh-CN
+---
+# AccUnitFct
+
+内部加速度单位与所选加速度工程单位之间的缩放因子。
+
+## 概述
+
+`AccUnitFct` 存储浮点缩放因子，用于将控制器的内部加速度单位与您希望使用的**加速度**工程单位相关联。该单一因子适用于加速度单位组中的每个关键字（参见 [AccUnitGrp](AccUnitGrp.md)），其所代表的工程单位由 [AccUnitUnt](AccUnitUnt.md) 标注。该因子作为全局工程单位功能的一部分生效，该功能通过 [UserUnitsEn](UserUnitsEn.md) 按轴启用。
+
+该关键字仅在 central-i v5 中可用。
+
+## 工作原理
+
+`AccUnitFct` 是每轴的双精度因子，保存至闪存。其默认值为 `1`，表示相对于控制器内部加速度单位不进行任何缩放。将其设置为内部加速度单位与您用 [AccUnitUnt](AccUnitUnt.md) 标注的工程单位之间的换算关系，从而使整个加速度组的值保持一致呈现。
+
+单一因子覆盖整个加速度组，因此加速度限值、加速/减速速率、与急动相关的成员以及 [AccUnitGrp](AccUnitGrp.md) 列出的其他关键字均共用同一换算关系。
+
+> 注意：固件将该因子作为加速度工程单位的配置存储；因子对显示/接受值的实际作用由全局工程单位功能与 [UserUnitsEn](UserUnitsEn.md) 共同处理。无论此设置如何，控制环始终以内部单位运行。
+
+## 示例
+
+```text
+AAccUnitFct[1]=1.0        ; default — no rescaling of the acceleration group
+AAccUnitFct[1]=0.001      ; example factor for the acceleration group
+AAccUnitFct[1]            ; read the current acceleration factor
+```
+
+## 另请参见
+
+- [00-overview](00-overview.md) — 组 / 因子 / 单位模型
+- [AccUnitGrp](AccUnitGrp.md) — 该因子适用的关键字
+- [AccUnitUnt](AccUnitUnt.md) — 加速度单位标签
+- [UserUnitsEn](UserUnitsEn.md) — 主使能
+- [PosUnitFct](PosUnitFct.md) · [VelUnitFct](VelUnitFct.md) · [FrcUnitFct](FrcUnitFct.md) — 其他物理量因子

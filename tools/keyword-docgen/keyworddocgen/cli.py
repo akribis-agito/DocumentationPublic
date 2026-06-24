@@ -8,7 +8,13 @@ import sys
 from pathlib import Path
 
 from .defines import DefineTable
-from .frontmatter import render_doc, split_doc
+from .frontmatter import (
+    is_zh_sidecar,
+    propagate_facts_to_sidecar,
+    render_doc,
+    split_doc,
+    zh_sidecar_path,
+)
 from .manifest import render_manifest
 from .merge import VersionAlreadyRecorded, merge_version
 from .model import PRODUCTS, product_supported
@@ -109,6 +115,19 @@ def run_rag_export(args) -> int:
             )
             fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
             written += 1
+            # Emit a chunk for each translated sidecar carried in `variants`.
+            for lang, variant in (doc.get("variants") or {}).items():
+                zh_fm, zh_body = split_doc(
+                    (args.content_root / variant["path"]).read_text())
+                zh_rec = chunk_record(
+                    variant["path"], zh_fm, zh_body,
+                    last_updated=doc["last_updated"],
+                    doc_revision=doc["doc_revision"],
+                    sha256=variant["sha256"],
+                    language=lang,
+                )
+                fh.write(json.dumps(zh_rec, ensure_ascii=False) + "\n")
+                written += 1
     print(f"wrote {written} chunks to {args.out}")
     return 0
 
@@ -132,6 +151,8 @@ def _index_docs(docs_root: Path) -> dict[str, Path]:
         for path in sorted(base.rglob("*.md")):
             if path.stem.startswith("00-"):
                 continue
+            if is_zh_sidecar(path):
+                continue  # sidecars are fact-propagated from their English doc
             rel = path.relative_to(docs_root)
             if any(part.startswith("_") for part in rel.parts):
                 continue
@@ -193,6 +214,9 @@ def run(argv: list[str]) -> int:
             )
             return 1
         path.write_text(render_doc(new_fm, body))
+        # Propagate the same generated facts into the zh-CN sidecar (if any),
+        # preserving its translated summary/body. No sidecar -> no-op.
+        propagate_facts_to_sidecar(path, new_fm)
 
     scanned = {p: set(tables.get(p, {})) for p in PRODUCTS}
     manifest = render_manifest(scanned, set(docs), args.version)

@@ -19,7 +19,7 @@ import hashlib
 import subprocess
 from pathlib import Path
 
-from .frontmatter import render_doc, split_doc
+from .frontmatter import is_zh_sidecar, render_doc, split_doc, zh_sidecar_path
 
 
 _STAMP_KEYS = ("last_updated", "doc_revision")
@@ -47,15 +47,24 @@ def manifest_document(
     last_updated: str,
     doc_revision: str,
     body: str,
+    variants: dict | None = None,
 ) -> dict:
-    """Build one manifest entry; the body hash is computed here."""
-    return {
+    """Build one manifest entry; the body hash is computed here.
+
+    `variants` is an optional, ADDITIVE map of language -> {path, sha256} for
+    translated sidecars. When absent/empty, no `variants` key is emitted so the
+    English record stays byte-for-byte unchanged and old parsers see no new
+    field."""
+    entry = {
         "path": rel_path,
         "keyword": keyword,
         "last_updated": last_updated,
         "doc_revision": doc_revision,
         "sha256": body_sha256(body),
     }
+    if variants:
+        entry["variants"] = variants
+    return entry
 
 
 def build_manifest(
@@ -82,6 +91,24 @@ def last_commit_date(path, repo_root) -> str | None:
     )
     out = result.stdout.strip()
     return out or None
+
+
+def _zh_variant(en_path: Path, content_root: Path) -> dict | None:
+    """If a `<Keyword>.zh.md` sidecar exists, return an additive variants map
+    `{"zh-CN": {"path": <rel>, "sha256": <body hash>}}`, else None. The sidecar
+    body is hashed (mirroring the English body hash), so a frontmatter-only
+    stamp does not change the variant hash."""
+    zh_path = zh_sidecar_path(en_path)
+    if not zh_path.exists():
+        return None
+    fm, body = split_doc(zh_path.read_text())
+    hash_body = body if fm else zh_path.read_text()
+    return {
+        "zh-CN": {
+            "path": str(zh_path.relative_to(content_root)),
+            "sha256": body_sha256(hash_body),
+        }
+    }
 
 
 def stamp_corpus(
@@ -112,9 +139,12 @@ def stamp_corpus(
     prev_by_path = {
         d["path"]: d for d in (prev_manifest or {}).get("documents", [])
     }
+    # Split off translated sidecars: they are NOT standalone documents — each
+    # rides on its English doc as an additive `variants` entry (path + sha256).
+    english_paths = [Path(raw) for raw in doc_paths if not is_zh_sidecar(raw)]
+
     entries: list[dict] = []
-    for raw in doc_paths:
-        path = Path(raw)
+    for path in english_paths:
         text = path.read_text()
         fm, body = split_doc(text)
         keyword = (fm.get("keyword") if fm else None) or path.stem
@@ -135,8 +165,12 @@ def stamp_corpus(
         if fm:
             stamped = stamp_frontmatter(fm, last_updated, doc_revision)
             path.write_text(render_doc(stamped, body))
+        variants = _zh_variant(path, content_root)
         entries.append(
-            manifest_document(rel, keyword, last_updated, doc_revision, hash_body)
+            manifest_document(
+                rel, keyword, last_updated, doc_revision, hash_body,
+                variants=variants,
+            )
         )
     return build_manifest(
         entries, manual=manual, version=version, generated=generated

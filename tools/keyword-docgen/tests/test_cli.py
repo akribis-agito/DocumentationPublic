@@ -139,6 +139,34 @@ def test_index_prefers_canonical_entry_on_stem_collision(tmp_path):
     assert "stub pointer" in body_s
 
 
+def test_append_propagates_facts_into_zh_sidecar(tmp_path):
+    # An existing .zh.md sidecar gets the same generated facts, while its
+    # translated summary and body are preserved. No new sidecar is created for
+    # docs that lack one.
+    docs = setup_docs(tmp_path)
+    kw = docs / "02-keywords" / "11-control-tuning"
+    (kw / "PosGain.zh.md").write_text(
+        "---\nkeyword: PosGain\nlanguage: zh-CN\nsummary: 比例增益。\n---\n"
+        "# PosGain\n\n中文正文\n"
+    )
+
+    run_v4(docs)
+
+    zh_fm, zh_body = split_doc((kw / "PosGain.zh.md").read_text())
+    assert zh_fm["language"] == "zh-CN"
+    assert zh_fm["summary"] == "比例增益。"          # translated, preserved
+    assert zh_fm["can_code"] == 100                  # generated fact propagated
+    assert zh_fm["attributes"]["range"] == [0, 20000]
+    assert zh_fm["availability"]["standalone"] == ["v4"]
+    assert "中文正文" in zh_body                       # translated body preserved
+
+
+def test_append_does_not_create_zh_sidecar_when_absent(tmp_path):
+    docs = setup_docs(tmp_path)
+    run_v4(docs)
+    assert not (docs / "02-keywords/11-control-tuning/PosGain.zh.md").exists()
+
+
 def test_index_skips_underscore_dirs(tmp_path):
     # Scratch/_-prefixed dirs (_triage, _files, _manifest) are never indexed.
     docs = tmp_path / "docs"
