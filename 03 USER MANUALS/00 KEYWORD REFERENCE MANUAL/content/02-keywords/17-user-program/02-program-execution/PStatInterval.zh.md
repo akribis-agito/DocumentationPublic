@@ -44,7 +44,7 @@ language: zh-CN
 ## 示例
 
 ```text
-APStatInterval=500   ; 每 500 ms 传输一次参数统计
+APStatInterval=500   ; transmit parameter statistics every 500 ms
 ```
 
 ## 参见

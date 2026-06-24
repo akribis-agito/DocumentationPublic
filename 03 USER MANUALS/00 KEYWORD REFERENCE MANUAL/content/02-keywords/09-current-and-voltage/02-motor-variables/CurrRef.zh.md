@@ -71,4 +71,3 @@ ACurrRef            ; read the final current command (mA)
 - [IaRef](IaRef.md)、[IbRef](IbRef.md) — 由电流指令导出的各相参考
 - [PeakCL](../../06-protections/02-current-and-voltage/PeakCL.md) / [ContCL](../../06-protections/02-current-and-voltage/ContCL.md) — CurrRef 钳位所针对的电流限值
 - [StatReg](../../07-status-and-faults/StatReg.md) — bit 21 报告电流饱和状态
-```

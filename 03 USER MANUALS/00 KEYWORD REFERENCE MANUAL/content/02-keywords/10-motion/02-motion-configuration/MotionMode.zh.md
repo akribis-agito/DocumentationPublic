@@ -62,25 +62,25 @@ language: zh-CN
 | 6 | **电子齿轮运动 – 间接模式** 轴将跟随二阶运动曲线（受指定的加速度和速度值限制），其中生成的曲线按比例跟踪主变量的变化。更多信息请参阅 Motion mode – Gear motion。 |
 | 7 | **电子凸轮（ECAM）运动 - 直接模式** 轴将进行永久性的相对运动，其中相对位置参考（相对于 Begin 命令时的初始位置）取决于主变量。相对位置参考在每个控制器周期从一个可定制的数组中获得，该数组映射到用户定义且均匀间隔的主位置范围。这类似于机械凸轮-从动件运动。更多信息请参阅 Motion mode – ECAM motion。 |
 | 8 | **电子凸轮（ECAM）运动 - 间接模式** 该运动模式保留供内部使用。 |
-| 9 | FIFO motion |
+| 9 | FIFO 运动 |
 | 10 | **直接从轴运动** 轴 A 的位置参考在每个控制周期由轴 B 位置参考的变化直接驱动，并按 [MasterFact](../07-motion-mode-gear-motion/MasterFact.md) 缩放。这是一个独立的、范围更窄的机制，区别于电子齿轮运动（它不使用 `GearMaster`、`MasterPos` 或 `MasterFilt`）。仅在多轴版本上可用。更多信息请参阅 [MotionMode10](../07-motion-mode-gear-motion/MotionMode10.md)。 |
-| 11 | CNCA motion |
-| 12 | Joystick position direct mode |
-| 13 | Joystick position indirect mode |
-| 14 | Joystick velocity direct mode |
-| 15 | Joystick velocity indirect mode |
-| 16 | Vector motion |
-| 17 | CNCB motion |
-| 18 | Spline buffer |
-| 19 | FIFO position tracking |
+| 11 | CNCA 运动 |
+| 12 | 摇杆位置直接模式 |
+| 13 | 摇杆位置间接模式 |
+| 14 | 摇杆速度直接模式 |
+| 15 | 摇杆速度间接模式 |
+| 16 | 矢量运动 |
+| 17 | CNCB 运动 |
+| 18 | 样条缓冲区 |
+| 19 | FIFO 位置跟踪 |
 
 ## 版本间的变化
 
 | | v4 (standalone &amp; central-i) | v5 (central-i) |
 |---|---|---|
 | Range | −1 … 19 | −1 … **21** |
-| Mode 20 | not defined | **正弦点到点曲线** |
-| Mode 21 | not defined | **正弦点到点曲线（重复）** |
+| Mode 20 | 未定义 | **正弦点到点曲线** |
+| Mode 21 | 未定义 | **正弦点到点曲线（重复）** |
 
 v5 新增了两种正弦曲线点到点模式。与其他 PTP 系列模式一样，正弦模式（20/21）受 `Begin` 在 [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md)（错误 271）和 [MaxAcc](../../06-protections/03-motion/general-maximum-limits/MaxAcc.md)（错误 324）上的双重闸门约束。**v5 仅适用于 central-i。**
 

@@ -49,7 +49,7 @@ $$
 
 ![I-squared filtered response charging from zero toward PeakCL squared and reaching ContCL squared exactly at PeakTime; the engage and release thresholds are marked](i2t-curve.svg)
 
-> **示例：** 在 `ContCL = 2000` mA、`PeakCL = 4000` mA 和 `PeakTime = 1000` ms 时，固件设定 τ，使得从零阶跃至 4 A 后恰好在 1 s 时达到 `ContCL²` 阈值。如果 `MotorCurr` 从 `t = 0` 起保持在 4 A，则 I²t 限制在 `t ≈ 1 s` 时启用，并将指令钳位至 `ContCL`。当 `I²_filt` 降至 `0.90 × ContCL²` 以下（10 % 迟滞）后，限制解除。
+> **示例演算：** 在 `ContCL = 2000` mA、`PeakCL = 4000` mA 和 `PeakTime = 1000` ms 时，固件设定 τ，使得从零阶跃至 4 A 后恰好在 1 s 时达到 `ContCL²` 阈值。如果 `MotorCurr` 从 `t = 0` 起保持在 4 A，则 I²t 限制在 `t ≈ 1 s` 时启用，并将指令钳位至 `ContCL`。当 `I²_filt` 降至 `0.90 × ContCL²` 以下（10 % 迟滞）后，限制解除。
 
 > **注（Central-i）：** 对于某些远程驱动器子类型，固件会在内部将 `PeakTime` 钳位至 1500 ms。
 

@@ -10,7 +10,7 @@ language: zh-CN
 
 ## 概述
 
-`ProgTask` 在用户程序中用作标签，标记任务的入口点。任务通过 [ProgRun](ProgRun.md) 以 `AProgRun[线程号], 任务号` 的形式启动，该命令将在指定线程号下执行与 `AProgTask[任务号]` 标签对应位置之后的代码，直至遇到 [ProgHalt](ProgHalt.md)。任务与函数（[ProgFunc](ProgFunc.md)）的区别在于：任务作为线程启动运行，而不是被调用后再返回。
+`ProgTask` 在用户程序中用作标签，标记任务的入口点。任务通过 [ProgRun](ProgRun.md) 以 `AProgRun[thread], task no.` 的形式启动，该命令将在指定线程号下执行与 `AProgTask[task no.]` 标签对应位置之后的代码，直至遇到 [ProgHalt](ProgHalt.md)。任务与函数（[ProgFunc](ProgFunc.md)）的区别在于：任务作为线程启动运行，而不是被调用后再返回。
 
 ## 工作原理
 

@@ -85,7 +85,7 @@ $$[\text{harmonic}] = 100 \cdot \frac{\sqrt{a_2^2 + b_2^2}}{A_{out}}\ \%\ \ (\te
 
 其中 $y_{fit}$ 为建模输出，$y_{out}$ 为记录输出，$N$ 为记录长度。谐波质量条目衡量输出第二谐波相对于其基波的大小，噪声质量条目衡量均方根模型拟合残差相对于输出基波的大小。任一值偏高均表明测量存在失真或噪声，辨识点的可靠性较低。
 
-PCSuite 在每次正弦激励后执行 [CalcIden](CalcIden.md) 操作后读取结果。如需更多信息，请联系 Agito。
+PCSuite 在每次正弦激励后的 [CalcIden](CalcIden.md) 操作完成后读取结果。如需更多信息，请联系 Agito。
 
 ![IdenResults captures one point of the identified frequency response: a magnitude value (IdenResults[5] in dB) and a phase value (IdenResults[6] in deg/100) at the fundamental frequency InjectFreq; PCSuite sweeps InjectFreq and concatenates these points into the full magnitude and phase Bode plot used downstream by tuning and filter design](idenresults-bode-points.svg)
 

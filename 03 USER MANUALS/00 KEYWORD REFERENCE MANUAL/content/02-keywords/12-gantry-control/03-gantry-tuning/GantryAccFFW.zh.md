@@ -52,7 +52,7 @@ $$
 \text{CurrRef} = \text{VelPIOutput} + \frac{(\text{PosRef}_{n} - 2\,\text{PosRef}_{n-1} + \text{PosRef}_{n-2}) \cdot \text{GantryAccFFW}}{256}
 $$
 
-由于该项为前馈，仅依赖于参考轨迹而非位置误差，因此可在加速阶段提供所需电流，而无需等待 [GantryPosGain](GantryPosGain.md) / [GantryVelGain](GantryVelGain.md) 反馈环积累误差。每个龙门成员轴各自应用自己的值：主轴（共模/线性）将其 `GantryAccFFW` 注入线性环，偏摆轴将其值注入偏摆环。在 v4 上，龙门电流指令仅叠加加速度前馈项（偏摆轴启用时速度前馈项被丢弃）；在 v5 上，加速度前馈和速度前馈 [GantryVelFFW](GantryVelFFW.md) 均被应用。
+由于该项为前馈，仅依赖于参考轨迹而非位置误差，因此可在加速阶段提供所需电流，而无需等待 [GantryPosGain](GantryPosGain.md) / [GantryVelGain](GantryVelGain.md) 反馈环积累误差。每个龙门成员轴各自应用自己的值：主轴（共模/线性）将其 `GantryAccFFW` 注入线性环，偏摆轴将其值注入偏摆环。在 v4 上，龙门电流指令仅叠加加速度前馈项（龙门启用时速度前馈项被丢弃）；在 v5 上，加速度前馈和速度前馈 [GantryVelFFW](GantryVelFFW.md) 均被应用。
 
 该值无量纲（前馈缩放系数）。允许范围为 0 至 500000，默认值为 0，即除非配置否则加速度前馈关闭（在龙门增益为 6 元素增益调度数组的控制器上，上限范围扩展；详见关键字属性）。
 

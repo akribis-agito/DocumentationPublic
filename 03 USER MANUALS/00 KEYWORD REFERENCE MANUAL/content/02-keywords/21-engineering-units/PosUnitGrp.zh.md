@@ -35,7 +35,7 @@ language: zh-CN
 
 `PosUnitGrp` 报告构成全局工程单位功能中**位置**单位组的关键字。这些与位置相关的关键字，在通过 [PosUnitFct](PosUnitFct.md) 和 [PosUnitUnt](PosUnitUnt.md) 更改位置工程单位时，其值会被统一重新解释。该列表由固件固定；读取它可确认位置单位更改所影响的具体关键字。
 
-此关键字仅在 central-i v5 及以上版本可用。
+此关键字仅在 central-i v5 中可用。
 
 ## 工作原理
 
@@ -90,8 +90,8 @@ language: zh-CN
 ## 示例
 
 ```text
-APosUnitGrp[1]      ; 读取位置单位组的第一个成员
-APosUnitGrp[9]      ; 读取索引 9 处的成员
+APosUnitGrp[1]      ; read the first member of the position unit group
+APosUnitGrp[9]      ; read the member at index 9
 ```
 
 ## 另请参阅

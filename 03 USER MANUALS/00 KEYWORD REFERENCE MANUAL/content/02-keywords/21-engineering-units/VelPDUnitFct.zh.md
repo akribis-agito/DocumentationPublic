@@ -1,6 +1,6 @@
 ---
 keyword: VelPDUnitFct
-summary: 启用全局用户单位时，应用于脉冲方向速度值的比例因子。
+summary: 启用全局用户单位时，应用于脉冲方向速度值的比例系数。
 availability:
   standalone: []
   central-i:
@@ -27,11 +27,11 @@ language: zh-CN
 ---
 # VelPDUnitFct
 
-启用全局用户单位时，应用于脉冲方向速度值的比例因子。
+启用全局用户单位时，应用于脉冲方向速度值的比例系数。
 
 ## 概述
 
-`VelPDUnitFct` 是在全局用户单位功能（[UserUnitsEn](UserUnitsEn.md) = 1）下，脉冲/方向（P/D）速度量的逐轴比例因子。它是主反馈 [VelUnitFct](VelUnitFct.md) 的 P/D 对应项：将 P/D 速度 [PDVel](../10-motion/06-motion-mode-pulse-and-direction-pd/PDVel.md)（P/D 速度单位组 [VelPDUnitGrp](VelPDUnitGrp.md) 的成员）缩放为您希望上位机显示的工程单位。
+`VelPDUnitFct` 是在全局用户单位功能（[UserUnitsEn](UserUnitsEn.md) = 1）下，脉冲/方向（P/D）速度量的每轴比例系数。它是主反馈 [VelUnitFct](VelUnitFct.md) 的 P/D 对应项：将 P/D 速度 [PDVel](../10-motion/06-motion-mode-pulse-and-direction-pd/PDVel.md)（P/D 速度单位组 [VelPDUnitGrp](VelPDUnitGrp.md) 的成员）缩放为您希望上位机显示的工程单位。
 
 该因子仅影响向上位机呈现值的方式，不影响内部控制计算。对应的文本标签由 [VelPDUnitUnt](VelPDUnitUnt.md) 设置。
 
@@ -43,7 +43,7 @@ language: zh-CN
 
 全局用户单位与嵌入式 P/D 缩放 [PDUsrUnits](../10-motion/06-motion-mode-pulse-and-direction-pd/PDUsrUnits.md) 在同一轴上互斥。若 `UserUnitsEn` 已开启且 `PDUsrUnits` 设置为非默认缩放，则读写受影响的成员关键字（脉冲/方向速度 [PDVel](../10-motion/06-motion-mode-pulse-and-direction-pd/PDVel.md)）将被拒绝，并返回错误 `338`。设置 `VelPDUnitFct` 本身不受此冲突限制。
 
-本关键字仅适用于 v5（central-i）及以上版本。
+本关键字仅在 v5（central-i）版本可用。
 
 ## 示例
 
@@ -57,6 +57,6 @@ AVelPDUnitFct[1]      ; 读取当前 P/D 速度因子
 
 - [VelPDUnitGrp](VelPDUnitGrp.md) — 由本因子缩放的关键字
 - [VelPDUnitUnt](VelPDUnitUnt.md) — P/D 速度量的单位标签
-- [VelUnitFct](VelUnitFct.md) — 主反馈速度比例因子
-- [UserUnitsEn](UserUnitsEn.md) — 按轴启用全局用户单位功能
+- [VelUnitFct](VelUnitFct.md) — 主反馈速度比例系数
+- [UserUnitsEn](UserUnitsEn.md) — 每轴启用全局用户单位功能
 - [PDUsrUnits](../10-motion/06-motion-mode-pulse-and-direction-pd/PDUsrUnits.md) — 嵌入式 P/D 缩放（互斥）

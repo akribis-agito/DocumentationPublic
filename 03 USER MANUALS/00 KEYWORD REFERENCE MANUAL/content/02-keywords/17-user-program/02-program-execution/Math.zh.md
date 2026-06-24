@@ -91,10 +91,10 @@ language: zh-CN
 ## 示例
 
 ```text
-; 计算 3 + 4（操作通常由 PC Suite 编译器生成）
-APushConstant=3      ; 压入第一个操作数
-APushConstant=4      ; 压入第二个操作数
-AMath[1]             ; 索引 1 = 加法（32 位整数），结果 7 压回栈
+; Compute 3 + 4 (operations normally emitted by the PC Suite compiler)
+APushConstant=3      ; push first operand
+APushConstant=4      ; push second operand
+AMath[1]             ; index 1 = Add (32-bit integer), result 7 is pushed back to the stack
 ```
 
 ## 参见

@@ -39,7 +39,7 @@ language: zh-CN
 
 例如，地址 `192.168.0.10` 存储为：
 
-| Element | Value |
+| 元素 | 值 |
 |---------|-------|
 | EthernetIP[1] | 192 |
 | EthernetIP[2] | 168 |

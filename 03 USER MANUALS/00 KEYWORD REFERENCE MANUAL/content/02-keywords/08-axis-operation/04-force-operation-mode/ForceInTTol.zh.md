@@ -49,14 +49,14 @@ AForceInTTol=10      ; settled when force error stays within ±10 units
 
 ### 边界情况
 
-- **错误模式 / 错误源** — 仅当 [OperationMode](../01-general-keywords/OperationMode.md) = 4 且 [ForceCmdSrc](ForceCmdSrc.md) ∈ {1, 2} 时使用；其他情况下忽略。
-- **零值** — 实际上要求误差为零；几乎从不锁存到位。
-- **超出范围** — 负值将被拒绝；最大值为 `2 147 483 647`。
-- **已达到状态 4** — 增大 `ForceInTTol` 不会重新置位到位；状态机仅在达到状态 4 之前评估该窗口。
-- **保存** — 可保存至闪存。
+- **错误模式 / 错误源**——仅当 [OperationMode](../01-general-keywords/OperationMode.md) = 4 且 [ForceCmdSrc](ForceCmdSrc.md) ∈ {1, 2} 时使用；其他情况下忽略。
+- **零值**——实际上要求误差为零；几乎从不锁存到位。
+- **超出范围**——负值将被拒绝；最大值为 `2 147 483 647`。
+- **已达到状态 4**——增大 `ForceInTTol` 不会重新置位到位；状态机仅在达到状态 4 之前评估该窗口。
+- **保存**——可保存至闪存。
 
-## 参见
+## 另请参阅
 
-- [ForceInTTime](ForceInTTime.md) — 在该窗口内所需的驻留时间
-- [ForceInTStat](ForceInTStat.md) — 使用该窗口的到位状态
-- [ForceErr](ForceErr.md) — 与该窗口比较的误差
+- [ForceInTTime](ForceInTTime.md) —— 在该窗口内所需的驻留时间
+- [ForceInTStat](ForceInTStat.md) —— 使用该窗口的到位状态
+- [ForceErr](ForceErr.md) —— 与该窗口比较的误差

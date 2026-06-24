@@ -1,6 +1,6 @@
 ---
 keyword: AOutShifts
-summary: 应用于模拟量输出上被监测参数的 2 的幂次缩放。
+summary: 应用于模拟量输出上被监视参数的 2 的幂次缩放。
 availability:
   standalone:
   - v4
@@ -32,15 +32,15 @@ language: zh-CN
 ---
 # AOutShifts
 
-应用于模拟量输出上被监测参数的 2 的幂次缩放。
+应用于模拟量输出上被监视参数的 2 的幂次缩放。
 
 ## 概述
 
-`AOutShifts` 将被监测参数（见 [AOutMode](AOutMode.md)）按 2 的幂次缩放，以使其适配输出的动态范围。数组索引即模拟量输出编号（从 1 开始：`AOutShifts[1]` 应用于模拟量输出 1）。这是[模拟量输出信号路径](00-overview.md)中的缩放环节，**仅在监测模式下**适用——在直接指令模式下，输出跟随 [AOutPort](AOutPort.md)，不使用 `AOutShifts`。
+`AOutShifts` 将被监视参数（见 [AOutMode](AOutMode.md)）按 2 的幂次缩放，以使其适配输出的动态范围。数组索引即模拟量输出编号（从 1 开始：`AOutShifts[1]` 应用于模拟量输出 1）。这是[模拟量输出信号路径](00-overview.md)中的缩放环节，**仅在监视模式下**适用——在直接指令模式下，输出跟随 [AOutPort](AOutPort.md)，不使用 `AOutShifts`。
 
 ## 工作原理
 
-每个控制周期，对于处于监测模式的输出，被监测参数会在相加偏置并转换为 DAC 码之前先进行算术位移：
+每个控制周期，对于处于监视模式的输出，被监视参数会在相加偏置并转换为 DAC 码之前先进行算术位移：
 
 ```text
 if (AOutShifts < 0)  value = parameter >> (-AOutShifts);   // shift right (divide)
@@ -83,7 +83,7 @@ AAOutShifts[1]        ; read back the shift
 
 ## 参见
 
-- [AOutMode](AOutMode.md) —— 选择被监测参数（移位仅在监测模式下适用）
+- [AOutMode](AOutMode.md) —— 选择被监视参数（移位仅在监视模式下适用）
 - [AOutGain](AOutGain.md) —— 取代此移位的 v5 浮点增益
 - [AOutOffset](AOutOffset.md) —— 输出偏置（在本缩放之后、DAC 转换之前相加）
 - [AOutPort](AOutPort.md) —— 直接模式值（不受此移位影响）

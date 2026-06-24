@@ -60,10 +60,10 @@ AVEncModRev=131072       ; source runs modulo 131072 counts/rev; keep output con
 AVEncModRev               ; read the configured modulo span
 ```
 
-## 另请参见
+## 另请参阅
 
-- [VEncSrc](VEncSrc.md) — 此参数所描述的取模范围所对应的源变量
-- [VEncOn](VEncOn.md) — 使能虚拟编码器
-- [VEncValue](VEncValue.md) — 在回绕时保持连续的生成输出计数
-- [VEncFact](VEncFact.md) / [VEncFactDen](VEncFactDen.md) — 源到输出的缩放比例
-- [ModRev](../04-modulo-mode/ModRev.md) — 轴反馈的取模范围（一种典型源）
+- [VEncSrc](VEncSrc.md) —— 此参数所描述的取模范围所对应的源变量
+- [VEncOn](VEncOn.md) —— 启用虚拟编码器
+- [VEncValue](VEncValue.md) —— 在回绕时保持连续的生成输出计数
+- [VEncFact](VEncFact.md) / [VEncFactDen](VEncFactDen.md) —— 源到输出的缩放比值
+- [ModRev](../04-modulo-mode/ModRev.md) —— 轴反馈的取模范围（一种典型源）

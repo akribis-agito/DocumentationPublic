@@ -14,7 +14,7 @@ language: zh-CN
 
 ## 工作原理
 
-两个数组均为 1-indexed，并在与其时间戳配套数组相同的索引处写入。在每个事件上，固件递增 [LockCntr](LockCntr-AuxLockCntr.md) 并将 [LockVal](LockVal-AuxLockVal.md) 写入由该计数器选定的数组。容量取决于产品：每个数组在独立产品上保存 50 条，在 Central-i 产品上保存 65000 条。
+两个数组均为 1 索引，并在与其时间戳配套数组相同的索引处写入。在每个事件上，固件递增 [LockCntr](LockCntr-AuxLockCntr.md) 并将 [LockVal](LockVal-AuxLockVal.md) 写入由该计数器选定的数组。容量取决于产品：每个数组在独立产品上保存 50 条，在 Central-i 产品上保存 65000 条。
 
 **独立产品**（50 + 50 = 100 个事件）：
 
@@ -40,7 +40,7 @@ language: zh-CN
 ALockValTable[1]     ; read the captured position of the first event
 ```
 
-## 另见
+## 参见
 
 - [LockVal](LockVal-AuxLockVal.md) —— 存入这些数组的值
 - [LockTimeTable](LockTimeTable-LockTimeTabB.md) —— 时间戳历史数组（相同的索引方案）

@@ -14,11 +14,11 @@ Agito 支持通过 CAN 总线（仅物理层）、以太网（TCP/IP）、RS-232
 
 **CAN 帧格式：** 一个入站 CAN 命令帧必须携带 2、4、6 或 8 个数据字节（即上述四种访问类型）；任何其他数据长度都以错误 15 被拒绝。回复帧为以下之一：
 
-| Reply | Length | Contents |
+| 回复类型 | 长度 | 内容 |
 |---|---|---|
 | OK（赋值 / 函数） | 1 byte | `>` |
-| Error | 3 bytes | 16-bit error code, then `>` |
-| Inquiry value | 5 bytes | 32-bit value, then `>` |
+| 错误 | 3 bytes | 16-bit error code, then `>` |
+| 查询值 | 5 bytes | 32-bit value, then `>` |
 
 由于 CAN 值字段为 32 位，通过 CAN 交换的关键字值被限制为 32 位整数。保存 64 位值的关键字（例如齿轮主轴或位置参考）无法通过 CAN 完整传输；请使用 ASCII 串行或以太网路径，它们将值格式化为文本，不受 32 位帧字段的约束。
 

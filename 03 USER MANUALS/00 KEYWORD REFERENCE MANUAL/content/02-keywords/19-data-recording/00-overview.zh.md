@@ -73,9 +73,9 @@
 
 **连续记录：** 参见 [RecCTEnable](RecCTEnable.md) 和 [RecCTMaxSize](RecCTMaxSize.md)。
 
-## 操作演练：捕获整定事件
+## 操作演练：捕获到位稳定事件
 
-为诊断轴在运动后如何整定，将示波器 1 设置为在速度（[Vel](../10-motion/01-kinematics-status/Vel.md)，元素 `[1]`）触发触发前后捕获一个小窗口，然后将结果流式传输至上位机。
+为诊断轴在运动后如何到位稳定，将示波器 1 设置为在速度（[Vel](../10-motion/01-kinematics-status/Vel.md)，元素 `[1]`）触发信号触发前后捕获一个小窗口，然后将结果流式传输至上位机。
 
 1. **停止任何之前正在运行的任务**，然后选择要记录的通道。每个条目均为[复合 CAN 代码](../../01-keyword-usage-and-syntax/complex-can-code.md)；用 `0` 结束列表：
 
@@ -109,14 +109,14 @@
    ARecTrigTyp[3]=0             ; 禁用触发 3
    ```
 
-4. **启动示波器。** [RecStat](RecStat.md) 在触发前填充期间报告 `1`，等待触发时报告 `2`，触发触发后报告 `3`，触发后采集完成时报告 `4`：
+4. **启动示波器。** [RecStat](RecStat.md) 在触发前填充期间报告 `1`，等待触发时报告 `2`，触发条件满足后报告 `3`，触发后采集完成时报告 `4`：
 
    ```text
    ARecStart[1]                 ; 启动示波器 1
    ARecStat[1]                  ; 轮询直至读取到 4（完成）
    ```
 
-   如果触发从未触发，可通过 `ARecTrigForce[1]` 强制触发，或通过 `ARecStop[1]` 中止（触发后状态为 `5`，触发前为 `6`）。
+   如果触发条件从未满足，可通过 `ARecTrigForce[1]` 强制触发，或通过 `ARecStop[1]` 中止（触发后状态为 `5`，触发前为 `6`）。
 
 5. **上传。** 一旦 `ARecStat[1] = 4`，[RecUpload](RecUpload.md) 将按 `RecParamA` 设置的顺序流式传输元数据和用户单位缩放后的采样值。对于大型采集，使用 [RecUploadNext](RecUploadNext.md) 以可管理的数据包检索数据，或通过 [RecDataA](RecDataA-RecDataB.md) 读取原始未缩放缓冲区：
 

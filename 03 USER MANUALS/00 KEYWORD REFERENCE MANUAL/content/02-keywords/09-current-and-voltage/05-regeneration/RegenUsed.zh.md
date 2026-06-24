@@ -47,7 +47,7 @@ language: zh-CN
 
 | `RegenUsed` | 行为 |
 |-------------|-----------|
-| 0 | 再生禁用。制动斩波器指令和 [StatReg](../../07-status-and-faults/StatReg.md) 位 1 被强制清除，阈值比较被跳过，且“regeneration active”数字量输出始终读为非激活。 |
+| 0 | 再生禁用。制动斩波器指令和 [StatReg](../../07-status-and-faults/StatReg.md) 位 1 被强制清除，阈值比较被跳过，且”再生激活”数字量输出始终读为非激活。 |
 | 1（默认） | 再生使能。斩波器按照围绕 [VBus](../01-system-variables/VBus.md) 的 `RegenOn` / `RegenOff` 迟滞进行切换。 |
 
 写入 `RegenUsed = 0` 立即生效：斩波器指令和再生状态位（在独立控制器上为每个轴）在写入该值的瞬间即被清除，因此已经激活的电阻会被切断，而无需等待下一个再生步骤。

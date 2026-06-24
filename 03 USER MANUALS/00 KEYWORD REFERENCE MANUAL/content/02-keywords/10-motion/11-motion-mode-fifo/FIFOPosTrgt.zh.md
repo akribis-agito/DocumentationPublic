@@ -42,7 +42,7 @@ language: zh-CN
 - **队列活动**（`AFIFOPosFIFOEn=1`）：每个周期开始时，控制器以从队列弹出的最旧目标覆盖 `FIFOPosTrgt`。读取时显示轴当前正在跟踪的目标。
 - **队列旁路**（`AFIFOPosFIFOEn=0`）：控制器不覆盖该值。上位机通过每个周期直接写入 `FIFOPosTrgt` 来驱动轴，控制器对每个新值进行插值跟踪。
 
-当轴进入位置跟踪模式时，`FIFOPosTrgt` 初始化为当前位置参考，使跟踪从当前位置平滑开始，同时三个位置跟踪偏置 [FIFOPosPosOf](FIFOPosPosOf.md)、[FIFOPosVelOf](FIFOPosVelOf.md) 和 [FIFOPosCurrOf](FIFOPosCurrOf.md) 均复位为 0。
+当轴进入位置跟踪模式时，`FIFOPosTrgt` 初始化为当前位置参考，使跟踪从当前位置开始，同时三个位置跟踪偏置 [FIFOPosPosOf](FIFOPosPosOf.md)、[FIFOPosVelOf](FIFOPosVelOf.md) 和 [FIFOPosCurrOf](FIFOPosCurrOf.md) 均复位为 0。
 
 ## 工作原理
 

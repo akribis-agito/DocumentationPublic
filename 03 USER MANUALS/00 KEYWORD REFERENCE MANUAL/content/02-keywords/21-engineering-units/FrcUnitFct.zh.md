@@ -51,9 +51,9 @@ AFrcUnitFct[1]=0.001      ; example factor for the force group
 AFrcUnitFct[1]            ; read the current force factor
 ```
 
-## 另请参见
+## 另请参阅
 
-- [00-overview](00-overview.md) — 组 / 因子 / 单位模型
+- [00-overview](00-overview.md) — 组 / 系数 / 单位模型
 - [FrcUnitGrp](FrcUnitGrp.md) — 该因子适用的关键字
 - [FrcUnitUnt](FrcUnitUnt.md) — 力单位标签
 - [UserUnitsEn](UserUnitsEn.md) — 主使能

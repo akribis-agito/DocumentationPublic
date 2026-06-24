@@ -78,7 +78,7 @@ AStuckCurr[1]=4000    ; current above which a non-moving motor counts as stuck
 AStuckCurr[1]         ; read back the threshold
 ```
 
-## 参见
+## 另请参阅
 
 - [StuckVel](StuckVel.md) — 速度阈值（AND 条件的另一半）
 - [StuckTime](StuckTime.md) — 该条件必须持续多长时间

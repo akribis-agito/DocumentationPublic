@@ -12,7 +12,7 @@ language: zh-CN
 
 `CNCAEncRatio` / `CNCBEncRatio` 原本用于描述某个 CNC 成员轴与其他轴之间的分辨率比例，以便在成员轴每单位计数不同的情况下保持 CNC 路径的几何精度。
 
-> **当前固件不支持。** 现有固件（LTS v3.X.X 或 develop）均未将 `CNCAEncRatio` 或 `CNCBEncRatio` 作为关键字开放。请使用有理数对 [CNCAEncFactNu/CNCBEncFactNu](CNCAEncFactNu-CNCBEncFactNu.md) / [CNCAEncFactDn/CNCBEncFactDn](CNCAEncFactDn-CNCBEncFactDn.md) 实现等效的每轴 CNC 编码器缩放。
+> **当前固件未提供。** 现有固件（LTS v3.X.X 或 develop）均未将 `CNCAEncRatio` 或 `CNCBEncRatio` 作为关键字开放。请使用有理数对 [CNCAEncFactNu/CNCBEncFactNu](CNCAEncFactNu-CNCBEncFactNu.md) / [CNCAEncFactDn/CNCBEncFactDn](CNCAEncFactDn-CNCBEncFactDn.md) 实现等效的每轴 CNC 编码器缩放。
 
 矢量运动的类似关键字 [VecEncRatio](../10-motion-mode-vector/VecEncRatio.md) 适用于 Vector 引擎；CNC 引擎则使用上述参数对。
 

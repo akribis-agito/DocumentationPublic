@@ -59,6 +59,7 @@ language: zh-CN
 - **模式 1 下的恢复：** 当度量值恢复至 [StallTh](StallTh.md) 以上时，[StatReg](../../../07-status-and-faults/StatReg.md) 堵转位和 [StallStat](StallStat.md) 会自动清除；无需操作员干预。
 - **模式 2 下的恢复：** 该轴以 ConFlt 代码 1065 被禁用。可通过重新使能（[MotorOn](../../../08-axis-operation/01-general-keywords/MotorOn.md) = 1）或写入 `AConFlt=0` 来清除；[ErrLog](../../../07-status-and-faults/ErrLog.md) 条目会保留。
 - **整定前提：** 在针对您的电机/负载拟合 [StallCnst](StallCnst.md) 之前，计算得到的 [StallTh](StallTh.md) 不会随速度变化，检测可能不可靠。
+- **HWProtectBits / ProtectMask：** 堵转跳闸不可通过 [ProtectMask](../../01-general-protection/ProtectMask.md) 屏蔽（该掩码仅覆盖硬件保护位）。
 
 ## 示例
 

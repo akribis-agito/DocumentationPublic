@@ -25,7 +25,7 @@ language: zh-CN
 ALoadUser            ; restore the user-saved parameter set (motor must be stopped)
 ```
 
-## 参见
+## 另请参阅
 
 - [SaveUser](SaveUser.md) — 保存用户参数集
 - [Load](Load.md) / [Save](Save.md) — 主参数集

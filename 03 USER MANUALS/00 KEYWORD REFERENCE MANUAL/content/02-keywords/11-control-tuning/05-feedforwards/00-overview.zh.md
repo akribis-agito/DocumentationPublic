@@ -8,7 +8,7 @@
 
 加速度前馈和速度前馈分别作用于各自对应的物理量，即质量（惯量）和阻尼。两个前馈之和经可编程滤波器后，与速度环输出求和，构成电流控制环的电流参考（CurrRefCtrl）。
 
-加速度前馈和速度前馈仅在位置运行模式（OperationMode = 3）下有效，在速度、力或电流运行模式下无效。速度环输出、前馈量及来自 [TorqCompMode](../../../02-keywords/09-current-and-voltage/03-current-compensation/TorqCompMode.md) 的电流补偿相加，构成 [CurrRefCtrl](../../../02-keywords/09-current-and-voltage/02-motor-variables/CurrRefCtrl.md)。
+加速度前馈和速度前馈仅在位置运行模式（OperationMode = 3）下有效。速度环输出、前馈量及来自 [TorqCompMode](../../../02-keywords/09-current-and-voltage/03-current-compensation/TorqCompMode.md) 的电流补偿相加，构成 [CurrRefCtrl](../../../02-keywords/09-current-and-voltage/02-motor-variables/CurrRefCtrl.md)。
 
 以下是前馈关键字汇总。
 

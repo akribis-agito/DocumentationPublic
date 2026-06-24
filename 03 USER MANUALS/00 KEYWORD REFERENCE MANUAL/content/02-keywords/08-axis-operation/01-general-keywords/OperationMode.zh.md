@@ -85,7 +85,7 @@ AOperationMode      ; read the active control mode
 - **开环优先**——当 [OpenLoopOn](OpenLoopOn.md) ≠ 0 时，无论 `OperationMode` 为何，位置/速度/力环都被旁路；通过设置 `OpenLoopOn = 0` 恢复环路控制。
 - **保存**——可保存至闪存；复位后控制器以最后持久化的模式启动。
 
-## 参见
+## 另请参阅
 
 - [GoToCurrMode](../03-current-operation-mode/GoToCurrMode.md) — 平滑进入电流模式
 - [GoToPosMode](../02-position-operation-mode/GoToPosMode.md) — 平滑进入位置模式

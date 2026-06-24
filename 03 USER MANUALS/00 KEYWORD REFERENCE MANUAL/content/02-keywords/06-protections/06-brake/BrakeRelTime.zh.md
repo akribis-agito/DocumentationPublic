@@ -64,7 +64,7 @@ ABrakeRelTime          ; read back the configured release delay
 
 若运动起始处出现卡顿或轴在运动开始时猛冲，请增大 `BrakeRelTime`，使制动器在规划器启动前完全打开。
 
-## 参见
+## 另请参阅
 
 - [Static brake](Staticbrake.md) — 概述，含模式 3 的定时图
 - [BrakeLockTime](BrakeLockTime.md) — 互补的抱闸（接合）延时

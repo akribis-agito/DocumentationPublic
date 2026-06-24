@@ -37,7 +37,7 @@ language: zh-CN
 
 `CurrCmdIndex` 是当前使用的 [CurrCmdVal](CurrCmdVal.md) 和 [CurrCmdHTime](CurrCmdHTime.md) 值的索引。它仅在 [CurrCmdSrc](CurrCmdSrc.md) = 1 或 2（用户自定义表）时适用。
 
-`CurrCmdIndex` 在收到 [GoToCurrMode](GoToCurrMode.md) 命令时、自动条件切换时或数字量输入切换到电流控制模式时复位为 1。这意味着当直接赋值 [OperationMode](../01-general-keywords/OperationMode.md) 时，用户可以预设该索引，使参考表从所需的 `CurrCmdVal`/`CurrCmdHTime` 对开始。
+`CurrCmdIndex` 在收到 [GoToCurrMode](GoToCurrMode.md) 命令时、自动条件切换时或数字量输入切换到电流运行模式时复位为 1。这意味着当直接赋值 [OperationMode](../01-general-keywords/OperationMode.md) 时，用户可以预设该索引，使参考表从所需的 `CurrCmdVal`/`CurrCmdHTime` 对开始。
 
 ## 工作原理
 
@@ -47,7 +47,7 @@ language: zh-CN
 - 若递增将超过 20，则索引被**钳位到 20** — 此时轴无限期保持最后一个条目的 `CurrCmdVal`（前提是该条目的 `CurrCmdHTime` 非零）。在此钳位状态下，计数器被有意**不**复位，以便用户观察轴停留在最后一个条目上的时长。
 - 一个 `CurrCmdHTime` 为 0 的条目会停止该序列并退出到位置模式（索引不会越过它前进）；`CurrCmdHTime` 为负值则永久保持该条目。
 
-> **注意：** 用户可在电流控制模式下随时改写 `CurrCmdIndex`。这会立即切换正在使用的 `CurrCmdVal`，而不会复位 [CurrCmdCntr](CurrCmdCntr.md) 计时器。
+> **注意：** 用户可在电流运行模式下随时改写 `CurrCmdIndex`。这会立即切换正在使用的 `CurrCmdVal`，而不会复位 [CurrCmdCntr](CurrCmdCntr.md) 计时器。
 
 ## 示例
 
@@ -65,7 +65,7 @@ ACurrCmdIndex=3      ; jump to the third entry
 - **GoToCurrMode** — 始终复位 `CurrCmdIndex = 1`；直接 `OperationMode = 1` 则不会。
 - **保存** — 不可保存至闪存。
 
-## 参见
+## 另请参阅
 
 - [CurrCmdVal](CurrCmdVal.md) — 电流值表
 - [CurrCmdHTime](CurrCmdHTime.md) — 每个条目的保持时间

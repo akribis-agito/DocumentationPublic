@@ -35,6 +35,6 @@ summary: 自动模式电机学习完成后报告的极对数（旋转电机）�
 
 MotorLearnPl 是自动模式电机学习过程完成后（MotorLearnSta = 3）报告的只读结果。对于旋转电机，它是学习到的极对数（即一个机械转动周期内所包含的电气周期数，范围为 1 至 50）；对于直线电机，该值报告为 1。它仅由自动模式学习更新，不受手动模式学习影响。该参数为轴相关状态变量，不保存至闪存。
 
-**参见：**
+**另请参阅：**
 
 [MotorLearnOn](MotorLearnOn.md)、[MotorLearnSta](MotorLearnSta.md)、[MotorLearnRes](MotorLearnRes.md)

@@ -68,7 +68,7 @@ $$
 ## 示例
 
 ```text
-AMasterPos          ; 读取累积的缩放主位置
+AMasterPos          ; read the accumulated scaled master position
 ```
 
 ## 版本间变更

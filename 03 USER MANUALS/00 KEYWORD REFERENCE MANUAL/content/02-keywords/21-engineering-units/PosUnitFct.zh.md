@@ -33,7 +33,7 @@ language: zh-CN
 
 `PosUnitFct` 保存一个浮点型比例系数，用于将控制器内部位置单位与您希望使用的**位置**工程单位相关联。该单一系数适用于位置单位组中的所有关键字（参见 [PosUnitGrp](PosUnitGrp.md)），其所代表的工程单位由 [PosUnitUnt](PosUnitUnt.md) 标注。该系数作为全局工程单位功能的一部分生效，通过 [UserUnitsEn](UserUnitsEn.md) 在每个轴上单独开启。
 
-此关键字仅在 central-i v5 及以上版本可用。
+此关键字仅在 central-i v5 中可用。
 
 ## 工作原理
 
@@ -46,9 +46,9 @@ language: zh-CN
 ## 示例
 
 ```text
-APosUnitFct[1]=1.0        ; 默认值——位置组不进行重新缩放
-APosUnitFct[1]=0.001      ; 位置组的示例比例系数
-APosUnitFct[1]            ; 读取当前位置系数
+APosUnitFct[1]=1.0        ; default — no rescaling of the position group
+APosUnitFct[1]=0.001      ; example factor for the position group
+APosUnitFct[1]            ; read the current position factor
 ```
 
 ## 另请参阅

@@ -49,6 +49,6 @@ language: zh-CN
 ADebugData[1]       ; read a development scratch value (meaning is build-specific)
 ```
 
-## 另请参见
+## 另请参阅
 
 - [RNDDebug](../02-operation/RNDDebug.md) — 相关的开发/调试命令

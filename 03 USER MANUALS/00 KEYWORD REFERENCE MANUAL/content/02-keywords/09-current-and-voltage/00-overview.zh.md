@@ -8,10 +8,10 @@
 
 它分为以下子组：
 
-- [System variables](01-system-variables/00-overview.md) —— 母线和逻辑电源电压读数。
-- [Motor variables](02-motor-variables/00-overview.md) —— 相/dq0 电流、参考、误差和电压指令。
-- [Current compensation](03-current-compensation/00-overview.md) —— 控制环和电机电流偏置以及转矩补偿。
-- [Motor measurement](04-motor-measurement/00-overview.md) —— 测得的电机电阻与电感。
-- [Regeneration](05-regeneration/00-overview.md) —— 制动电阻阈值与监控。
+- [系统变量](01-system-variables/00-overview.md) —— 母线和逻辑电源电压读数。
+- [电机变量](02-motor-variables/00-overview.md) —— 相/dq0 电流、参考、误差和电压指令。
+- [电流补偿](03-current-compensation/00-overview.md) —— 控制环和电机电流偏置以及转矩补偿。
+- [电机测量](04-motor-measurement/00-overview.md) —— 测得的电机电阻与电感。
+- [再生](05-regeneration/00-overview.md) —— 制动电阻阈值与监控。
 
-这些关键字与电流控制环密切相关（参见 [Control tuning – Current control](../11-control-tuning/06-current-control/00-overview.md)），也与母线电压保护密切相关（参见 [Protections – Current and voltage](../06-protections/02-current-and-voltage/00-overview.md)）。
+这些关键字与电流控制环密切相关（参见[控制整定 – 电流控制](../11-control-tuning/06-current-control/00-overview.md)），也与母线电压保护密切相关（参见[保护 – 电流与电压](../06-protections/02-current-and-voltage/00-overview.md)）。

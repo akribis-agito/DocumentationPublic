@@ -62,7 +62,7 @@ language: zh-CN
 AMotorReason        ; 1 = controller fault, 2 = digital input, 3 = user program, 4 = communication
 ```
 
-## 另请参阅
+## 参见
 
 - [ConFlt](ConFlt.md) — 当 MotorReason 为 1（控制器故障）时的具体故障码
 - [ConFltSnapVal](ConFltSnapVal.md) — 故障时捕获的参数快照

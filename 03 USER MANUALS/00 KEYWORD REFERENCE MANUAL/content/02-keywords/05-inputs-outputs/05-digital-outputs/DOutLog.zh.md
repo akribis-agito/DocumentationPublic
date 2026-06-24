@@ -51,7 +51,7 @@ $$
 
 **示例：** 当 `DOutPort = 7`（`…0111`）且 `DOutLog = 3`（`…0011`）时，最终输出字为 `4`（`…0100`）——bit 0 和 bit 1（输出 1 和输出 2）被取反。
 
-## 说明
+## 注意事项
 
 1. `DOutLog` 应用于最终字，因此无论底层 `DOutPort` 位是如何设置的，它都会对输出取反——无论是手动写入、[DOutPortSBit/CBit/TBit](DOutPortSBit-DOutPortCBit-DOutPortTBit.md)，还是 [DOutMode](DOutMode.md) 软件功能，所看到的取反都相同。
 2. 它不影响通过 [DOutSelect](DOutSelect.md) 路由到*硬件*功能（事件、P/D、UserPWM）的输出，这些输出在硬件中绕过 `DOutPort`/`DOutLog` 字。

@@ -16,10 +16,10 @@ language: zh-CN
 
 `IndexStat` 在每个控制周期重新评估。在每次控制中断的开头，固件先假定无索引（`IndexStat = 0`），然后测试索引输入；若被置位，则将 `IndexStat` 设为 1 并捕获 [IndexPos](IndexPos-AuxIndexPos.md)（在独立控制器上来自专用索引输入，在 central-i 上来自逐轴状态位）。由于该标志在每个周期开始时被清除，它只反映*当前*周期 —— 在用户清除之前并不会被锁存。需要对单个索引事件作出响应的使用方（例如回零）会在该标志被置位的那个周期内读取它。
 
-| IndexStat | Meaning |
+| IndexStat | 含义 |
 |---|---|
-| 0 | Index not detected this control cycle |
-| 1 | Index detected this control cycle |
+| 0 | 本控制周期未检测到索引 |
+| 1 | 本控制周期已检测到索引 |
 
 该标志驱动两项固件特性：
 

@@ -1,6 +1,6 @@
 ---
 keyword: StopBuff
-summary: 在当前回放周期结束时停止样条缓冲区（Buff）运动，停止播放并减速至静止。
+summary: 停止样条缓冲区（Buff）运动，停止播放并减速至静止。
 availability:
   standalone:
   - v4

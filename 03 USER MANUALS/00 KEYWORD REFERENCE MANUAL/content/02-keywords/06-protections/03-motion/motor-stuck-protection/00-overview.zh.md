@@ -33,7 +33,7 @@ AMotionReason           ; expect 8 (motor disabled)
 
 如果跳闸始终未触发，说明 AND 条件未被持续满足：要么 `StuckCurr` 太高（驱动器实际从未推得那么用力），要么 `StuckVel` 太低（滤波后的速度 `Vel[3]` 仍在阈值之上略微漂移）。如果跳闸在正常加减速期间触发，请增大 `StuckTime` 或降低 `StuckCurr`。对于步进电机以及 Current/Force/自动定相/电机学习模式，堵转检测被**绕过**；在这些模式下请勿依赖它。
 
-## 参见
+## 另请参阅
 
 - [StuckCurr](StuckCurr.md) — AND 条件中的电流阈值部分
 - [StuckVel](StuckVel.md) — AND 条件中的速度阈值部分

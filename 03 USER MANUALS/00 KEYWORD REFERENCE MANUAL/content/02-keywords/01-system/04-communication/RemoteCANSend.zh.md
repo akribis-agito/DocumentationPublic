@@ -82,7 +82,7 @@ ARemoteCANSend=1     ; perform a write
 ARemoteCANSend=2     ; perform a read; afterwards ARemoteCANVal holds the returned value
 ```
 
-## 另请参阅
+## 参见
 
 - [RemoteCANAdd](RemoteCANAdd.md) — 目标节点地址
 - [RemoteCANCCC](RemoteCANCCC.md) — 待访问的已编码参数

@@ -37,7 +37,7 @@ $$
 
 使能或禁用动态制动。默认 0（禁用）。
 
-| Value | Description |
+| 取值 | 说明 |
 |-------|-------------|
 | 0 | 禁用 |
 | 1 | 使能 |
@@ -57,7 +57,7 @@ $$
 - **`DynBrakeOn = 0`：** 制动从不接入，且 [StatReg](../../07-status-and-faults/StatReg.md) bit 28 从不置位。
 - **范围溢出 / 静默饱和：** 计算出的占空比每个周期被钳位至 `[0, DynBrkRef]`；对 `DynBrkRef` 写入超出关键字 `range` 的值会被钳位。
 
-## 另见
+## 参见
 
 - [Static brake](Staticbrake.md) — 抱闸（静态制动器）控制
 - [ContCL](../02-current-and-voltage/ContCL.md) / [PeakCL](../02-current-and-voltage/PeakCL.md) — 限制制动的电流限值

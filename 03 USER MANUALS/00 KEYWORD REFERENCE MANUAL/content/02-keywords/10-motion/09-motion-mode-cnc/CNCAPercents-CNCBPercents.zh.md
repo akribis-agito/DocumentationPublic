@@ -20,7 +20,7 @@ language: zh-CN
 
 | 量 | 应用的缩放 |
 |----|----|
-| 路径速度（[CNCASpeed/CNCBSpeed](CNCASpeed-CNCBSpeed.md)） | × `P/100`（还 × [CNCASpeedPer/CNCBSpeedPer](CNCASpeedPer-CNCBSpeedPer.md)/100） |
+| 路径速度（[CNCASpeed/CNCBSpeed](CNCASpeed-CNCBSpeed.md)） | × `P/100`（同时 × [CNCASpeedPer/CNCBSpeedPer](CNCASpeedPer-CNCBSpeedPer.md)/100） |
 | 段末速度（[CNCAEndSpeed/CNCBEndSpeed](CNCAEndSpeed-CNCBEndSpeed.md)） | × `P/100` |
 | 加速度（[CNCAAccel/CNCBAccel](CNCAAccel-CNCBAccel.md)）和减速度（[CNCADecel/CNCBDecel](CNCADecel-CNCBDecel.md)） | × `(P/100)²` |
 | 加加速度（[CNCAJerk/CNCBJerk](CNCAJerk-CNCBJerk.md)） | × `(P/100)³` |

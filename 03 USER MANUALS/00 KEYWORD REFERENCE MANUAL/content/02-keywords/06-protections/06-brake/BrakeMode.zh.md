@@ -69,7 +69,7 @@ ABrakeMode=0            ; force the brake locked
 ABrakeMode=2            ; force the brake released (default)
 ```
 
-## 参见
+## 另请参阅
 
 - [Static brake](Staticbrake.md) — 保持制动器控制与定时概述
 - [BrakeUsed](BrakeUsed.md) — 启用静态制动器功能

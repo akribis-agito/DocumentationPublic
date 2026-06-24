@@ -41,13 +41,13 @@ language: zh-CN
 
 ## 工作原理
 
-`MapStartIndex` 是修正期间每次表读取的基索引——固件的表取值例程将单个基于 1 的索引映射到链接的存储区（`MapTable`,然后是 `MapTableB…MapTableE`），因此索引空间**跨所有五个存储区连续**,并且 `MapStartIndex` 可合法地指向其中任意一个。按维度查找在此基础上添加偏移：
+`MapStartIndex` 是修正期间每次表读取的基索引——固件的表取值例程将单个基于 1 的索引映射到链接的存储区（`MapTable`，然后是 `MapTableB…MapTableE`），因此索引空间**跨所有五个存储区连续**，并且 `MapStartIndex` 可合法地指向其中任意一个。按维度查找在此基础上添加偏移：
 
 - **1D：** 条目 `MapStartIndex … MapStartIndex + MapLength[1] − 1`。
 - **2D：** `index = MapStartIndex + column × MapLength[1] + row`（第一维变化最快）。
 - **3D：** `index = MapStartIndex + layer × MapLength[1] × MapLength[2] + column × MapLength[1] + row`。
 
-映射必须能容纳在从 `MapStartIndex` 开始的可用表大小内；该关键字的上界随合并存储区大小变化。由于索引是**基于 1 的**,`MapStartIndex = 1` 选择 `MapTable[1]` 作为第一个条目。
+映射必须能容纳在从 `MapStartIndex` 开始的可用表大小内；该关键字的上界随合并存储区大小变化。由于索引是**基于 1 的**，`MapStartIndex = 1` 选择 `MapTable[1]` 作为第一个条目。
 
 ## 示例
 

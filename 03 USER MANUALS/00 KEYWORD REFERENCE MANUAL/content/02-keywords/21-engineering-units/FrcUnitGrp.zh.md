@@ -63,9 +63,9 @@ AFrcUnitGrp[1]      ; read the first member of the force unit group
 AFrcUnitGrp[3]      ; read the member at index 3
 ```
 
-## 另请参见
+## 另请参阅
 
-- [00-overview](00-overview.md) — 组 / 因子 / 单位模型
+- [00-overview](00-overview.md) — 组 / 系数 / 单位模型
 - [FrcUnitFct](FrcUnitFct.md) — 力缩放因子
 - [FrcUnitUnt](FrcUnitUnt.md) — 力单位标签
 - [UserUnitsEn](UserUnitsEn.md) — 主使能

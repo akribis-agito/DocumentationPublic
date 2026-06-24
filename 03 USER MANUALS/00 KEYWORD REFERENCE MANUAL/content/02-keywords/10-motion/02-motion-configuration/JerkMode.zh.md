@@ -44,7 +44,7 @@ language: zh-CN
 
 `JerkMode` 用于定义点到点运动规划器的阶数，如下所示。
 
-| JerkMode | Motion profiler’s order | Related keywords |
+| JerkMode | 运动规划器阶数 | 相关关键字 |
 |----|----|----|
 | 0 | 2 (Infinite jerk) | Speed, Accel, Decel, Jerk |
 | 1 | 3 (Infinite snap) | Speed, Accel, Decel, Jerk, JerkInAcc, JerkInDec |

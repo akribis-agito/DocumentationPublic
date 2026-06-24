@@ -74,16 +74,16 @@ $$
 ## 示例
 
 ```text
-; --- 轴 A 以单位比值直接跟随轴 B ---
-AMasterFact=65536     ; 65536 = 单位（1:1）在 v4 上；v5 同样为单位比值
-AMotionMode=10        ; 10 = 直接从动（轴 A 跟随轴 B）
-ABegin                ; 锁存轴 B 参考值；A 现在每周期跟踪 dB
+; --- Axis A as direct slave of axis B at unity ratio ---
+AMasterFact=65536     ; 65536 = unity (1:1) on v4; on v5 also unity
+AMotionMode=10        ; 10 = direct slave (axis A follows axis B)
+ABegin                ; latches axis B reference; A now tracks dB each cycle
 
-; --- 轴 B 运动时读取轴 A 的参考值 ---
-APosRef               ; 每周期按 MasterFact x 轴 B 参考变化量更新
+; --- Read axis A's reference while axis B moves ---
+APosRef               ; updates each cycle by MasterFact x change in axis B's reference
 
-; --- 通过禁用从动轴结束运动 ---
-AMotorOn=0            ; 禁用从动轴；该模式不响应 Stop/Abort
+; --- End the motion by disabling the slave axis ---
+AMotorOn=0            ; disable the slave; this mode does not honour Stop/Abort
 ```
 
 `MasterFact = -65536` 使从动轴方向相对于轴 B 反向。其他比值线性缩放（`MasterFact = 131072` 使每次主轴变化对应的从动轴变化量加倍）。

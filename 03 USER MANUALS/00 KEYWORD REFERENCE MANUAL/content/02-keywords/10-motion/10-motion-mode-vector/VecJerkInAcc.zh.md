@@ -1,6 +1,6 @@
 ---
 keyword: VecJerkInAcc
-summary: 限制加加速度（用户单位）用于加加速度限制矢量运动的加速阶段。
+summary: 加加速度限制矢量运动加速阶段的加加速度限值（用户单位）。
 language: zh-CN
 availability:
   standalone: []
@@ -29,7 +29,7 @@ doc_revision: '2026.06'
 ---
 # VecJerkInAcc
 
-限制加加速度（用户单位）用于加加速度限制矢量运动的加速阶段。
+加加速度限制矢量运动加速阶段的加加速度限值（用户单位）。
 
 > 仅适用于 v5（central-i）。
 

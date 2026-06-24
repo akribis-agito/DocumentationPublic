@@ -52,7 +52,7 @@ language: zh-CN
 | 2 | 0x00000004 | 轴在收到 [StopRep](../04-motion-command/StopRep.md) 指令后正在结束重复运动。 |
 | 3 | 0x00000008 | 已请求 [Stop](../04-motion-command/Stop.md)（减速停止）；目标速度正在斜坡至零。 |
 | 4 | 0x00000010 | 轴正在加速（曲线速度上升）。位 4 与位 5 互斥：在匀速巡航阶段（曲线速度已达到 [Speed](../03-kinematics-configuration/Speed.md) 且既不上升也不下降），两个位均清除。 |
-| 5 | 0x00000020 | 轴正在减速（曲线速度下降，或反向朝向反向目标）。只要曲线速度被钳制至软件限位减速曲线，该位也强制置位——即即使未发出 [Stop](../04-motion-command/Stop.md) 指令，也会报告朝向 [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md)/[RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md) 的预先制动。 |
+| 5 | 0x00000020 | 轴正在减速（曲线速度下降，或朝向异号目标反向运动）。只要曲线速度被钳制至软件限位减速曲线，该位也强制置位——即即使未发出 [Stop](../04-motion-command/Stop.md) 指令，也会报告朝向 [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md)/[RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md) 的预先制动。 |
 | 6 | 0x00000040 | 轴处于曲线平滑尾段：目标已到达，但急动/平滑滤波器仍在冲刷 `2^Jerk` 个周期后才宣告运动完成。请参阅 [Jerk](../03-kinematics-configuration/Jerk.md)。 |
 | 7 | 0x00000080 | 轴正在结束 ECAM 运动（在 StopECAM 指令之后）。 |
 | 8 | 0x00000100 | 轴正在结束 FIFO 运动（在 StopFIFO 指令之后）。 |

@@ -37,6 +37,6 @@ SpringPHigh 以用户单位设置弹簧补偿区域的位置上边界。仅当�
 
 默认值为 10000 用户单位。区间判断将整形后的滤波位置参考（即指令曲线，而非测量的反馈位置）与 [SpringPLow](SpringPLow.md) 和 SpringPHigh 进行比较，两端点均包含在内。边界之间不进行范围校验：若将 SpringPHigh 设置为低于 SpringPLow，则区间为空，弹簧补偿将永远不被施加。
 
-**另请参阅：**
+**参见：**
 
 [SpringPLow](SpringPLow.md)、[SpringOn](SpringOn.md)、[SpringTable](SpringTable.md)、[SpringTableGp](SpringTableGp.md)

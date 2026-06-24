@@ -1,6 +1,6 @@
 ---
 keyword: VEncFactDen
-summary: 应用于虚拟编码器源信号的缩放比例的分母。
+summary: 应用于虚拟编码器源信号的缩放比值的分母。
 availability:
   standalone:
   - v4
@@ -31,11 +31,11 @@ language: zh-CN
 ---
 # VEncFactDen
 
-应用于虚拟编码器源信号的缩放比例的分母。
+应用于虚拟编码器源信号的缩放比值的分母。
 
 ## 概述
 
-`VEncFactDen` 是应用于虚拟编码器源的缩放比例的分母。它与 [VEncFact](VEncFact.md) 一起定义了精确的有理缩放因子（`VEncFact / VEncFactDen`），用于在虚拟编码器使能（[VEncOn](VEncOn.md) = 1）时将源变量转换为发出的编码器计数。其范围为 1 到 500,000,000，且必须为正（方向翻转通过为 [VEncFact](VEncFact.md) 取负值来实现）。它是一个保存至闪存的轴相关参数，可在电机使能或运动中更改。
+`VEncFactDen` 是应用于虚拟编码器源的缩放比值的分母。它与 [VEncFact](VEncFact.md) 一起定义了精确的有理缩放因子（`VEncFact / VEncFactDen`），用于在虚拟编码器启用（[VEncOn](VEncOn.md) = 1）时将源变量转换为所发出的编码器计数。其范围为 1 到 500,000,000，且必须为正（方向反向通过为 [VEncFact](VEncFact.md) 取负值来实现）。它是一个保存至闪存的轴相关参数，可在电机使能或运动中更改。
 
 ## 工作原理
 
@@ -49,8 +49,8 @@ $$\text{Output count} = \text{Source} \cdot \frac{\text{VEncFact}}{\text{VEncFac
 AVEncFactDen=65536       ; unity scale when VEncFact=65536
 ```
 
-## 另请参见
+## 另请参阅
 
-- [VEncFact](VEncFact.md) — 缩放比例的分子（取负值可翻转方向）
-- [VEncOn](VEncOn.md) — 使能虚拟编码器
-- [VEncSrc](VEncSrc.md) — 被缩放的源变量
+- [VEncFact](VEncFact.md) —— 缩放比值的分子（取负值可反转方向）
+- [VEncOn](VEncOn.md) —— 启用虚拟编码器
+- [VEncSrc](VEncSrc.md) —— 被缩放的源变量

@@ -51,14 +51,14 @@ AForceInTTime=50     ; require 50 ms within the settling window
 
 ### 边界情况
 
-- **错误模式 / 错误源** — 仅当 [OperationMode](../01-general-keywords/OperationMode.md) = 4 且 [ForceCmdSrc](ForceCmdSrc.md) ∈ {1, 2} 时使用；其他情况下忽略。
-- **零值** — 一旦误差进入 [ForceInTTol](ForceInTTol.md) 一个周期即锁存到位（驻留为零）。
-- **超出容差** — 在驻留期间离开窗口会将驻留计数器重新清零；驻留必须连续累计。
-- **超出范围** — 超出 `0`–`163840` 的值将被拒绝。
-- **保存** — 可保存至闪存。
+- **错误模式 / 错误源**——仅当 [OperationMode](../01-general-keywords/OperationMode.md) = 4 且 [ForceCmdSrc](ForceCmdSrc.md) ∈ {1, 2} 时使用；其他情况下忽略。
+- **零值**——一旦误差进入 [ForceInTTol](ForceInTTol.md) 一个周期即锁存到位（驻留为零）。
+- **超出容差**——在驻留期间离开窗口会将驻留计数器重新清零；驻留必须连续累计。
+- **超出范围**——超出 `0`–`163840` 的值将被拒绝。
+- **保存**——可保存至闪存。
 
-## 参见
+## 另请参阅
 
-- [ForceInTTol](ForceInTTol.md) — 稳定窗口
-- [ForceInTStat](ForceInTStat.md) — 由该定时器驱动的到位状态
-- [ForceErr](ForceErr.md) — 与窗口比较的误差
+- [ForceInTTol](ForceInTTol.md) —— 稳定窗口
+- [ForceInTStat](ForceInTStat.md) —— 由该定时器驱动的到位状态
+- [ForceErr](ForceErr.md) —— 与窗口比较的误差

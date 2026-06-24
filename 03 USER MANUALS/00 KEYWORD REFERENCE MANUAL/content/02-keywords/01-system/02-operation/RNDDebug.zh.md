@@ -43,7 +43,7 @@ language: zh-CN
 
 由于其含义是保留的且在不同构建之间可能有所不同，请勿在应用代码中依赖 `RNDDebug`。请改用专用的状态和诊断关键字。
 
-## 参见
+## 另请参阅
 
 - [DebugData](../01-status/DebugData.md) — 开发/测试暂存数组
 - [DoNothing](DoNothing.md) — 受支持的空操作，用于通信检查

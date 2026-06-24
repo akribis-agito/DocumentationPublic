@@ -35,7 +35,7 @@ language: zh-CN
 
 ## 概述
 
-`PDPosFilt` 是一阶低通滤波器的截止频率，该滤波器应用于 [PDPos](PDPos.md) 自运动开始以来的变化量。它对生成的位置参考进行平滑，使得当解码后的脉冲方向指令发生阶跃时，轴以斜坡方式响应而非直接阶跃。该滤波器仅用于**直接** P/D 运动（[MotionMode](../02-motion-configuration/MotionMode.md) = 3）；间接 P/D 运动使用二阶曲线发生器，没有此类滤波器。
+`PDPosFilt` 是一阶低通滤波器的截止频率，该滤波器应用于 [PDPos](PDPos.md) 自运动开始以来的变化量。它对生成的位置参考进行平滑，使得当解码后的脉冲方向指令发生阶跃时，轴以斜坡方式响应而非直接阶跃。该滤波器仅用于**直接** P/D 运动（[MotionMode](../02-motion-configuration/MotionMode.md) = 3）；间接 P/D 运动使用二阶轨迹规划器，没有此类滤波器。
 
 `PDPosFilt` 是直接模式 P/D 滤波器面向用户的截止频率形式，取代了直接输入滤波器系数的旧方法：写入 `PDPosFilt` 后，控制器会自动计算内部系数 [PDFiltFact](PDFiltFact.md)。
 
@@ -51,7 +51,7 @@ $$
 
 其中 `Ts` 为控制采样时间，`w = 2π·(PDPosFilt/100)`。早期固件在分母中省略了 `2π` 因子（使用 `100 + Ts·PDPosFilt`），因此相同的 `PDPosFilt` 在早期固件中产生略大的系数；最小值（4150）在两种形式下均产生 `PDFiltFact = 1`。最小值（4150）是使计算出的系数不舍入为 0（会冻结参考值）的最小频率。`PDPosFilt` **越大**，滤波器越快（平滑越少，`PosRef` 更紧密地跟随脉冲流）；**越小**，平滑越重。
 
-该滤波器仅在**直接** P/D 运动（[MotionMode](../02-motion-configuration/MotionMode.md) = 3）中有效；间接 P/D 运动使用二阶曲线发生器，没有此类滤波器。
+该滤波器仅在**直接** P/D 运动（[MotionMode](../02-motion-configuration/MotionMode.md) = 3）中有效；间接 P/D 运动使用二阶轨迹规划器，没有此类滤波器。
 
 ![Position reference for a high vs. low PDPosFilt cut-off applied to the same incoming PDPos staircase](pd-filter.svg)
 

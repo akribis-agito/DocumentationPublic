@@ -39,8 +39,8 @@ target path speed = CNCASpeed × (CNCAPercents/100) × (CNCASpeedPer/100) × (se
 ## 示例
 
 ```text
-ACNCASpeed          ; 读取 A 组当前活动段的期望路径速度
-ACNCBSpeed          ; 读取 B 组的期望路径速度
+ACNCASpeed          ; read the desired path speed of the active segment on group A
+ACNCBSpeed          ; read it on group B
 ```
 
 ## 另请参阅

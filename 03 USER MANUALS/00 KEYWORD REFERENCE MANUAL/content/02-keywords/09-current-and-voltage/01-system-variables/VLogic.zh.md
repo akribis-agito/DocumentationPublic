@@ -47,10 +47,10 @@ language: zh-CN
 
 每个保护周期会将测量值与两个固定限值进行一次比较（这些是内置限值，**不可**由用户设置）：
 
-| Condition | Fault | [ConFlt](../../07-status-and-faults/ConFlt.md) code |
-|-----------|-------|------|
-| `VLogic > 5500` mV | Logic voltage too high | 1010 |
-| `VLogic < 4500` mV | Logic voltage too low | 1011 |
+| 条件 | 故障 | [ConFlt](../../07-status-and-faults/ConFlt.md) code |
+|------|------|------|
+| `VLogic > 5500` mV | 逻辑电压过高 | 1010 |
+| `VLogic < 4500` mV | 逻辑电压过低 | 1011 |
 
 任一条件都会关闭电机并记录该故障。因此可接受的范围为：
 

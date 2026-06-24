@@ -47,13 +47,13 @@ AccelFinal  = Accel × AccelFact × factor
 DecelFinal  = Decel × AccelFact × factor
 ```
 
-| AccShapeFact value | Resulting factor |
+| AccShapeFact 值 | 对应因子 |
 |---|---|
-| 65536 | ×1.0 (full acceleration) |
+| 65536 | ×1.0（满加速度） |
 | 49152 | ×0.75 |
 | 32768 | ×0.5 |
 | 16384 | ×0.25 |
-| 0 | ×0 (no acceleration in this band) |
+| 0 | ×0（该分段内无加速度） |
 
 各因子与其距离配对，并在该表被写入时重新排序为距离升序，因此 `AccShapeFact[n]` 中的值始终与 `AccShapeDist[n]` 同行。数组大小为 11 以允许基于 1 的命令索引；只有索引 1–10 被使用。完整机制参见 [AccShapeOn](AccShapeOn.md)。
 

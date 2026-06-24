@@ -73,7 +73,7 @@ AMaxPosErr[1]         ; read back the limit
 
 ### 操作演练：整定并验证跟随误差跳闸
 
-将限值设置为接近应用应当出现的最大跟踪误差，然后在部署前执行最坏情况移动并确认跳闸行为：
+将限值设置为略高于应用可能遇到的最大跟踪误差，然后在部署前执行最坏情况移动并确认跳闸行为：
 
 ```text
 AMaxPosErr[1]=2000    ; chosen well above the expected steady-state |PosErr|

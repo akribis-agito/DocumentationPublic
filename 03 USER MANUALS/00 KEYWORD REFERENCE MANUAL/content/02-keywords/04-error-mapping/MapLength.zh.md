@@ -49,7 +49,7 @@ language: zh-CN
 | 2D | `MapLength[1] × MapLength[2]` | `MapLength[2]` 行，每行 `MapLength[1]`（第一维变化最快） |
 | 3D | `MapLength[1] × MapLength[2] × MapLength[3]` | `MapLength[3]` 层堆叠的 2D 层 |
 
-由于这些条目作为从 [MapStartIndex](MapStartIndex.md) 开始的一个扁平数组寻址，其总量必须能容纳在合并的 [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) 存储区内。每个维度值的范围为 `1 … 60000`；对于 2D/3D,真正的约束是其**乘积**。
+由于这些条目作为从 [MapStartIndex](MapStartIndex.md) 开始的一个扁平数组寻址，其总量必须能容纳在合并的 [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) 存储区内。每个维度值的范围为 `1 … 60000`；对于 2D/3D，真正的约束是其**乘积**。
 
 ## 示例
 
@@ -63,7 +63,7 @@ AMapLength[1]        ; read the number of points in the first dimension
 - **索引 0** — 无效；有效索引为 `MapLength[1]`/`[2]`/`[3]`。
 - **写入时电机使能/运动中** — 在电机使能或轴处于运动中时被拒绝。
 - **超出范围** — 每个维度超出 `1`–`60 000` 的值被拒绝。
-- **乘积溢出** — 对于 2D/3D,各维度的**乘积**必须能容纳在从 [MapStartIndex](MapStartIndex.md) 开始的合并 [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) 存储区内；参数表不会预先检查此乘积,因此超大映射会读取未初始化的条目。
+- **乘积溢出** — 对于 2D/3D，各维度的**乘积**必须能容纳在从 [MapStartIndex](MapStartIndex.md) 开始的合并 [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) 存储区内；参数表不会预先检查此乘积，因此超大映射会读取未初始化的条目。
 - **`MapType = 0`** — 值已存储但不被查询。
 - **保存** — 可保存至闪存。
 

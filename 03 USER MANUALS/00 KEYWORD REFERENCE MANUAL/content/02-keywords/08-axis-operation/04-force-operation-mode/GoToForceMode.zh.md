@@ -35,7 +35,7 @@ language: zh-CN
 
 ## 概述
 
-`GoToForceMode` 指示控制器以平稳方式进入力运行模式（[OperationMode](../01-general-keywords/OperationMode.md) = 4）。与直接赋值 `OperationMode = 4` 不同，该命令执行受控的交接过程，使得控制环切换时执行器不会跳变。关于进入力模式的其他方式（直接赋值、自动条件或数字量输入），参见 [Force operation mode](00-overview.md)。
+`GoToForceMode` 指示控制器以平稳方式进入力运行模式（[OperationMode](../01-general-keywords/OperationMode.md) = 4）。与直接赋值 `OperationMode = 4` 不同，该命令执行受控的交接过程，使得控制环切换时执行器不会跳变。关于进入力模式的其他方式（直接赋值、自动条件或数字量输入），参见[力运行模式](00-overview.md)。
 
 > **注意：** 如果轴已处于力模式，`GoToForceMode` 不执行任何操作；当轴处于电流运行模式（[OperationMode](../01-general-keywords/OperationMode.md) = 1）时，或当其属于某个 CNC（多轴）运动组时，该命令将被**拒绝**。
 
@@ -75,4 +75,4 @@ AGoToForceMode       ; gracefully switch to force operation mode
 - [OperationMode](../01-general-keywords/OperationMode.md) —— 当前活动的控制模式
 - [ForceCmdSrc](ForceCmdSrc.md) —— 进入模式后力参考的来源
 - [ForceCmdIndex](ForceCmdIndex.md) / [ForceCmdCntr](ForceCmdCntr.md) —— 该命令复位的序列状态
-- [Force operation mode](00-overview.md) —— 力模式行为概述
+- [力运行模式](00-overview.md) —— 力模式行为概述

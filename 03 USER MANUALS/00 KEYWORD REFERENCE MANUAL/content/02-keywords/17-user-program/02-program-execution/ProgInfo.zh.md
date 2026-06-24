@@ -35,7 +35,7 @@ language: zh-CN
 
 ## 概述
 
-`ProgInfo` 返回已加载用户程序中存储的信息字符串：CRC 值、日期、CUP 文件名，以及通过 `#information` 编译器指令提供的自由文本信息。用于识别控制器上当前驻留的程序（与 [ProgErase](ProgErase.md) 和 [DownloadUPBin](DownloadUPBin.md) 对应，后两者分别用于删除和加载程序）。该参数为非轴状态命令，不保存至闪存。
+`ProgInfo` 返回已加载用户程序中存储的信息字符串：CRC 值、日期、CUP 文件名，以及通过 `#information` 编译器指令提供的自由文本信息。用于识别控制器上当前驻留的程序（与 [ProgErase](ProgErase.md) 和 [DownloadUPBin](DownloadUPBin.md) 对应，后两者分别用于删除和加载程序）。该命令为非轴状态命令，不保存至闪存。
 
 ## 工作原理
 

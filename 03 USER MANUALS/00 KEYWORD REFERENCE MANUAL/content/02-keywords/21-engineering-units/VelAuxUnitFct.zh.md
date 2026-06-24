@@ -43,7 +43,7 @@ language: zh-CN
 
 全局用户单位与嵌入式辅助缩放 [AuxUsrUnits](../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) 在同一轴上互斥。辅助反馈只能使用其中一个；若两者同时启用，访问受影响的关键字时将产生冲突。
 
-此关键字仅在 v5（central-i）及以上版本可用。
+此关键字仅在 v5（central-i）版本可用。
 
 ## 示例
 

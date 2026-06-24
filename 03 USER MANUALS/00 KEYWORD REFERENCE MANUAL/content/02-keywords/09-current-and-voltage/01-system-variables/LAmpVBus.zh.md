@@ -41,10 +41,10 @@ language: zh-CN
 
 线性驱动器采用分裂（双极性）电源供电，因此具有正、负两条电机轨。当 `AmpType` = 4 时，两条轨都在电流读取步骤中采样，每个原始读数都换算为毫伏：
 
-| Index | Rail | Description                              |
-|-------|------|------------------------------------------|
-| 1     | +Vm  | Positive linear-amplifier bus voltage    |
-| 2     | −Vm  | Negative linear-amplifier bus voltage (reported as a negative value) |
+| 索引 | 电源轨 | 说明                                     |
+|------|--------|------------------------------------------|
+| 1    | +Vm    | Positive linear-amplifier bus voltage    |
+| 2    | −Vm    | Negative linear-amplifier bus voltage (reported as a negative value) |
 
 该数组的大小为两条轨加上一个未使用的索引 0（使通信索引从 1 开始）。负轨单独读取并取反，因此正常的 −Vm 读数为负的毫伏值。
 

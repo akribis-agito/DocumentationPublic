@@ -67,9 +67,9 @@ $$
 ## 示例
 
 ```text
-AMasterFilt=3        ; 默认（约 128 Hz 截止频率）
-AMasterFilt=64       ; 无滤波（1:1 无滞后跟踪）
-AMasterFilt          ; 读取当前值
+AMasterFilt=3        ; default (~128 Hz cut-off)
+AMasterFilt=64       ; no filtering (1:1 lag-free tracking)
+AMasterFilt          ; read current value
 ```
 
 ## 另请参阅

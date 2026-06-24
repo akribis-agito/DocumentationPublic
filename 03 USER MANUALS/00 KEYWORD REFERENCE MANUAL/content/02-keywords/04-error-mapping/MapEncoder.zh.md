@@ -76,7 +76,7 @@ AMapEncoder[1]       ; read the encoder selected for the first dimension
 - **`MapType = 0`**——值已存储但不被查询。
 - **保存**——可保存至闪存。
 
-## 另请参阅
+## 参见
 
 - [MapType](MapType.md) — 选择 1D/2D/3D 映射
 - [MapStartPos](MapStartPos.md) — 每个映射段的起始位置

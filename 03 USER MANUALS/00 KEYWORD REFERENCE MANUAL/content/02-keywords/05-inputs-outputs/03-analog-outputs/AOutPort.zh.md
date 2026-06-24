@@ -40,7 +40,7 @@ language: zh-CN
 
 ## 概述
 
-`AOutPort` 用于设置当某个模拟量输出处于**直接指令模式**时，在该输出上驱动的值（单位为毫伏）。数组索引即模拟量输出编号（从 1 开始：`AOutPort[1]` 为模拟量输出 1，`AOutPort[2]` 为模拟量输出 2）。可用的索引范围与物理输出数量一致（2 输出产品为 1 到 2，4 输出产品为 1 到 4）。`AOutPort[Index]` 仅在 `AOutMode[Index] == 0` 时生效；在监测模式下，输出转而跟随被仿真的参数。两种模式参见[模拟量输出概述](00-overview.md)。
+`AOutPort` 用于设置当某个模拟量输出处于**直接指令模式**时，在该输出上驱动的值（单位为毫伏）。数组索引即模拟量输出编号（从 1 开始：`AOutPort[1]` 为模拟量输出 1，`AOutPort[2]` 为模拟量输出 2）。可用的索引范围与物理输出数量一致（2 输出产品为 1 到 2，4 输出产品为 1 到 4）。`AOutPort[Index]` 仅在 `AOutMode[Index] == 0` 时生效；在监视模式下，输出转而跟随被仿真的参数。两种模式参见[模拟量输出概述](00-overview.md)。
 
 ±11905 mV 的范围直接来自 DAC：mV 到 DAC 的换算系数为 −2.752457 LSB/mV，因此满量程 −32768 LSB 对应 11905 mV。
 
@@ -54,7 +54,7 @@ $$
 \text{DAC code} = (\text{AOutPort} + \text{AOutOffset}) \cdot \text{(mV-to-DAC factor)}
 $$
 
-随后将其钳位至 DAC 范围，再写入通道。注意 [AOutOffset](AOutOffset.md) 在 LSB 转换**之前**以相同的毫伏单位相加。每个输出在直接模式与监测模式之间的选择，在写入 [AOutMode](AOutMode.md) 时确定：当 `AOutMode = 0` 时，或者当驱动器为模拟电流指令型／内置直线型时，强制采用直接模式（此时 DAC 驱动的是驱动器的电流指令）。
+随后将其钳位至 DAC 范围，再写入通道。注意 [AOutOffset](AOutOffset.md) 在 LSB 转换**之前**以相同的毫伏单位相加。每个输出在直接模式与监视模式之间的选择，在写入 [AOutMode](AOutMode.md) 时确定：当 `AOutMode = 0` 时，或者当驱动器为模拟电流指令型／内置直线型时，强制采用直接模式（此时 DAC 驱动的是驱动器的电流指令）。
 
 `AOutPort` 保存至闪存，为数组类型，可在运动中以及电机使能时更改。
 
@@ -71,7 +71,7 @@ AAOutPort[1]          ; read back the commanded value
 ### 边界情况
 
 - **索引 0** —— 无效；有效索引为 `AOutPort[1]`–`AOutPort[4]`。`AOutPort[0]` 不存在。
-- **错误模式** —— 仅当 [AOutMode](AOutMode.md)`[i] = 0` 时，DAC 才读取 `AOutPort`。在 `AOutMode[i] ≠ 0` 时写入会存储该值，但输出仍跟随被监测参数；一旦将 `AOutMode[i]` 重新置为 `0`，存储的值即刻生效。
+- **错误模式** —— 仅当 [AOutMode](AOutMode.md)`[i] = 0` 时，DAC 才读取 `AOutPort`。在 `AOutMode[i] ≠ 0` 时写入会存储该值，但输出仍跟随被监视参数；一旦将 `AOutMode[i]` 重新置为 `0`，存储的值即刻生效。
 - **超出范围** —— 超出 ±11905 mV 的写入会被参数表拒绝；DAC 码也会在每个周期被钳位。该钳位为饱和而非回绕：当某个值（或 `AOutPort + AOutOffset` 之和）超过 ±11905 mV 时，输出会被钉在对应的轨电平上并保持，直到该值回到范围内——它不会翻转到相反的轨电平。由于 `AOutOffset` 也在此限值之内，过大的偏置可能使一个本在范围内的 `AOutPort` 触轨。
 - **2 输出产品** —— 仅存在 `AOutPort[1]` 和 `AOutPort[2]`。数组大小按物理输出数量确定，因此 `AOutPort[3]` / `AOutPort[4]` 越界，对其写入会以索引超出数组大小错误被拒绝而不被存储。
 - **驱动器覆盖** —— 当驱动器为模拟电流指令型或内置直线型时，DAC 由驱动器电流指令占用；`AOutPort` 写入会被存储但不会到达引脚。
@@ -81,6 +81,6 @@ AAOutPort[1]          ; read back the commanded value
 
 ## 参见
 
-- [AOutMode](AOutMode.md) —— 选择直接模式还是监测模式（此值仅在 `AOutMode = 0` 时被采用）
+- [AOutMode](AOutMode.md) —— 选择直接模式还是监视模式（此值仅在 `AOutMode = 0` 时被采用）
 - [AOutOffset](AOutOffset.md) —— 输出校准偏置，在 DAC 转换之前相加
 - [analog-output overview](00-overview.md) —— 完整信号路径

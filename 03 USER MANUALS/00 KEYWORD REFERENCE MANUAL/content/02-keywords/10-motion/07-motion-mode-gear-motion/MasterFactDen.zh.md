@@ -58,10 +58,10 @@ $$
 ## 示例
 
 ```text
-AMasterFactDen=65536 ; 与 MasterFact=65536 组合，给出 1:1 比值（默认）
-AMasterFact=3        ; 与以下配合...
-AMasterFactDen=7     ; ...给出精确的 3:7 比值（从动轴每 7 个主单位移动 3 个单位）
-AMasterFactDen       ; 读取齿轮比分母
+AMasterFactDen=65536 ; with MasterFact=65536 gives a 1:1 ratio (default)
+AMasterFact=3        ; together with...
+AMasterFactDen=7     ; ...gives an exact 3:7 ratio (follower moves 3 per 7 master units)
+AMasterFactDen       ; read the gear-ratio denominator
 ```
 
 ## 另请参阅

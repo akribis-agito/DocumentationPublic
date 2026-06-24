@@ -6,7 +6,7 @@
 
 下面是所有相关关键字的汇总。
 
-| No. | Keyword | Summary |
+| 序号 | 关键字 | 说明 |
 |-----|---------|---------|
 | 1 | [MotionMode](MotionMode.md) | 选择下发 `Begin` 时执行的运动类型。 |
 | 2 | [JerkMode](JerkMode.md) | 选择点到点规划器阶数（二阶或三阶）。 |

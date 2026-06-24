@@ -53,7 +53,7 @@ language: zh-CN
 
 全局用户单位与嵌入式辅助缩放 [AuxUsrUnits](../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) 在同一轴上互斥。若 `UserUnitsEn` 已开启且 `AuxUsrUnits` 也设置为非默认缩放，则对该组成员（辅助反馈速度 [AuxVel](../10-motion/01-kinematics-status/AuxVel.md)）的读取或写入将被拒绝，并返回错误 `338`。成员列表关键字本身不受影响；仅其成员受影响。将 `AuxUsrUnits` 保留为默认值或将 `UserUnitsEn` 设回 0 可解决冲突。
 
-此关键字仅在 v5（central-i）及以上版本可用。
+此关键字仅在 v5（central-i）版本可用。
 
 ## 示例
 

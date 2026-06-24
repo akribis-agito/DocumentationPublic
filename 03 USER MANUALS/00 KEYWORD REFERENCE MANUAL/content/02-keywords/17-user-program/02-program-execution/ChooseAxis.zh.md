@@ -48,10 +48,10 @@ language: zh-CN
 ## 示例
 
 ```text
-AChooseAxis[1]=0     ; 线程 1 将 P 占位符解析为轴 0
-AChooseAxis[2]=1     ; 线程 2 将 P 占位符解析为轴 1
-AChooseAxis[1]      ; 查询分配给线程 1 的轴
-PMotorOn=1           ; 在调用线程的 ChooseAxis 所指定的轴上运行
+AChooseAxis[1]=0     ; thread 1 resolves the P placeholder to axis 0
+AChooseAxis[2]=1     ; thread 2 resolves the P placeholder to axis 1
+AChooseAxis[1]      ; query the axis assigned to thread 1
+PMotorOn=1           ; runs on the calling thread's ChooseAxis axis
 ```
 
 ## 参见

@@ -50,8 +50,8 @@ language: zh-CN
 ## 示例
 
 ```text
-; 在电机关闭且无运动进行时发出
-ADownloadUPBin       ; 将已编译的用户程序二进制文件传输到程序存储器
+; Issue with the motor off and no motion in progress
+ADownloadUPBin       ; transfer the compiled user-program binary into program memory
 ```
 
 ## 参见

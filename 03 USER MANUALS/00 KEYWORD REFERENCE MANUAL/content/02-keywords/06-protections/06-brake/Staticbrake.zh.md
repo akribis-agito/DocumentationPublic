@@ -16,7 +16,7 @@ language: zh-CN
 
 使能或禁用静态制动器功能。
 
-| Value | Description |
+| 取值 | 说明 |
 |-------|-------------|
 | 0 | 禁用 |
 | 1 | 使能 |
@@ -25,7 +25,7 @@ language: zh-CN
 
 定义如何控制制动器。（抱闸 = 断电；松闸 = 通电。）**默认为 2**（手动松闸，无保护）。
 
-| Value | Mode | Behaviour |
+| 取值 | 模式 | 行为 |
 |-------|------|-----------|
 | 0 | **手动抱闸** | 始终抱闸 → 制动器接入。 |
 | 1 | **手动松闸，带保护** | 仅在电机使能时松闸；如果电机失能，制动器重新抱闸。 |
@@ -95,7 +95,7 @@ AStatReg                ; bit 29 sets (lock requested) immediately
 - **HWProtectBits / ProtectMask：** 静态制动机制不产生 [ConFlt](../../07-status-and-faults/ConFlt.md)，且不可被掩码屏蔽。抱闸请求在 [StatReg](../../07-status-and-faults/StatReg.md) bit 29 中可见。
 - **`MotorReason` 与制动器：** 如果你禁用电机且制动器重新置位抱闸，[MotorReason](../../07-status-and-faults/MotorReason.md) 反映的是禁用原因（控制器故障、DI、用户程序或通信）——而非制动器状态。
 
-## 另见
+## 参见
 
 - [Dynamic brake](Dynamicbrake.md) — 快速电气制动（短接电机相）
 - [StatReg](../../07-status-and-faults/StatReg.md) — bit 29 报告静态制动器抱闸请求

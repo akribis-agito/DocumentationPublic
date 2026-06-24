@@ -59,8 +59,8 @@ language: zh-CN
 ## 示例
 
 ```text
-APosPDUnitGrp[1]    ; 读取 P/D 位置分组第一个成员的指令码
-APosPDUnitGrp[2]    ; 读取第二个成员的指令码
+APosPDUnitGrp[1]    ; read the first member command code of the P/D position group
+APosPDUnitGrp[2]    ; read the second member command code
 ```
 
 ## 另请参阅

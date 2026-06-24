@@ -52,7 +52,7 @@ AFrcUnitUnt[2]      ; 读取第二个字符
 
 ## 另请参阅
 
-- [00-overview](00-overview.md) — 分组 / 系数 / 单位模型
+- [00-overview](00-overview.md) — 组 / 系数 / 单位模型
 - [FrcUnitFct](FrcUnitFct.md) — 力比例系数（数值换算）
 - [FrcUnitGrp](FrcUnitGrp.md) — 该单位所适用的关键字
 - [UserUnitsEn](UserUnitsEn.md) — 主使能

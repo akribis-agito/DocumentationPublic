@@ -35,7 +35,7 @@ language: zh-CN
 
 ## 概述
 
-`ProgHaltAll` 通过单条指令暂停所有用户程序线程。与 [ProgHalt](ProgHalt.md) 相同，暂停并非复位：每个线程保留其程序指针及调用栈，可通过 `ProgRun[thread],0` 恢复执行。若需停止所有线程**并**清除其指针和调用栈，请改用 [ProgResetAll](ProgResetAll.md)。该参数为非轴命令，不保存至闪存。
+`ProgHaltAll` 通过单条指令暂停所有用户程序线程。与 [ProgHalt](ProgHalt.md) 相同，暂停并非复位：每个线程保留其程序指针及调用栈，可通过 `ProgRun[thread],0` 恢复执行。若需停止所有线程**并**清除其指针和调用栈，请改用 [ProgResetAll](ProgResetAll.md)。该命令为非轴命令，不保存至闪存。
 
 ## 工作原理
 

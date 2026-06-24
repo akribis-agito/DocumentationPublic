@@ -41,10 +41,10 @@ language: zh-CN
 
 ## 工作原理
 
-| CurrCurrThDir | Descriptions                                            |
+| CurrCurrThDir | 说明                                                    |
 |---------------|---------------------------------------------------------|
-| 0             | Second condition is fulfilled if `CurrRef` > `CurrCurrTh`. |
-| 1             | Second condition is fulfilled if `CurrRef` < `CurrCurrTh`. |
+| 0             | 若 `CurrRef` > `CurrCurrTh`，则满足第二个条件。 |
+| 1             | 若 `CurrRef` < `CurrCurrTh`，则满足第二个条件。 |
 
 `CurrCurrTh` 是三个可互换的条件 B 检查之一（另两个为 [CurrPosErrTh](CurrPosErrTh.md) 和 [CurrAInTh](CurrAInTh.md)）；只要任一已武装的检查得到满足，且条件 A 已经通过，固件即进行切换。
 

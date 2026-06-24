@@ -59,8 +59,8 @@ language: zh-CN
 ```text
 APosPDUnitUnt[1]=109   ; 'm'
 APosPDUnitUnt[2]=109   ; 'm'
-APosPDUnitUnt[3]=0     ; 字符串终止符
-APosPDUnitUnt[1]       ; 读回第一个字符码
+APosPDUnitUnt[3]=0     ; string terminator
+APosPDUnitUnt[1]       ; read back the first character code
 ```
 
 ## 另请参阅

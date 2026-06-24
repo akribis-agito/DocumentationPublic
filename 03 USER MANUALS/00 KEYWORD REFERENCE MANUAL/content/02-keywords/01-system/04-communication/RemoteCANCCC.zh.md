@@ -65,7 +65,7 @@ $$(3 \times 65536) + (0 \times 1024) + 100 = 196708$$
 ARemoteCANCCC=100    ; encoded identifier of the remote parameter to access
 ```
 
-## 另请参阅
+## 参见
 
 - [RemoteCANAdd](RemoteCANAdd.md) — 目标节点地址
 - [RemoteCANVal](RemoteCANVal.md) — 写入的值，或读操作返回的值

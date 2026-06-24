@@ -35,7 +35,7 @@ language: zh-CN
 
 ## 概述
 
-`ProgHaltThis` 暂停正在执行它的线程——这是 [ProgHalt](ProgHalt.md) 的"自暂停"形式，后者通过索引指定目标线程。线程可使用该命令挂起自身执行，例如在一次性例程结束时。与一般暂停相同，线程保留其位置和调用栈，可通过 `ProgRun[thread],0` 恢复执行，而非重新启动，这与 [ProgReset](ProgReset.md) 不同。该参数为非轴命令，不保存至闪存。
+`ProgHaltThis` 暂停正在执行它的线程——这是 [ProgHalt](ProgHalt.md) 的"自暂停"形式，后者通过索引指定目标线程。线程可使用该命令挂起自身执行，例如在一次性例程结束时。与一般暂停相同，线程保留其位置和调用栈，可通过 `ProgRun[thread],0` 恢复执行，而非重新启动，这与 [ProgReset](ProgReset.md) 不同。该命令为非轴命令，不保存至闪存。
 
 ## 工作原理
 

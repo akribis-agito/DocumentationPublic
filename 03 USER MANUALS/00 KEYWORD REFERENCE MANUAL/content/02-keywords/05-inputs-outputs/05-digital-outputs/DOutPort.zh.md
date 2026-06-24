@@ -66,7 +66,7 @@ ADOutPort            ; read the present manual output word
 
 ## 说明
 
-1. 写入整个字（`ADOutPort=value`）会一次性替换每个位。若要在保持其他位不变的情况下更改单个位，诸如 `DOutPort = DOutPort | mask` 的读—改—写可以做到，但对控制器**并不安全**，因为控制器可能在你的读和写之间写入 `DOutPort`（用于 `DOutMode` 功能）。请优先使用 [DOutPortSBit/CBit/TBit](DOutPortSBit-DOutPortCBit-DOutPortTBit.md) 操作，它们以原子方式执行位更改。
+1. 写入整个字（`ADOutPort=value`）会一次性替换每个位。若要在保持其他位不变的情况下更改单个位，诸如 `DOutPort = DOutPort | mask` 的读—改—写可以做到，但对控制器**并不安全**，因为控制器可能在你的读和写之间写入 `DOutPort`（用于 `DOutMode` 功能）。请优先使用 [DOutPortSBit/CBit/TBit](DOutPortSBit-DOutPortCBit-DOutPortTBit.md) 操作，它们以原子方式执行单个位更改。
 2. 不保存至闪存——上电后重新应用手动状态。
 3. 最终物理状态为 `DOutPort XOR DOutLog`，在具有可选灌/拉电流输出的产品上随后由 `DOutType` 路由。
 
@@ -74,7 +74,7 @@ ADOutPort            ; read the present manual output word
 
 - **处于功能控制下的输出**——[DOutMode](DOutMode.md)`[x] ≠ 0` 或 [DOutSelect](DOutSelect.md)`[x] ≠ 0` 的位每个周期都会被控制器重写；对这些位的手动写入会在下一个周期被覆盖。
 - **超出产品输出数量的位**——被参数表接受（存储为 32 位），但在引脚上没有效果。
-- **与控制器竞争**——直接的 `DOutPort = DOutPort | mask` 不安全；请使用 [DOutPortSBit/CBit/TBit](DOutPortSBit-DOutPortCBit-DOutPortTBit.md) 进行原子的单位更改。
+- **与控制器竞争**——直接的 `DOutPort = DOutPort | mask` 不安全；请使用 [DOutPortSBit/CBit/TBit](DOutPortSBit-DOutPortCBit-DOutPortTBit.md) 进行原子的单个位更改。
 - **电机使能/失能**——手动输出与 `MotorOn` 无关；无论伺服是否使能，该位都驱动引脚。
 - **模式无关性**——与 [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) 无关。
 - **功能更新后的读取**——读取 `DOutPort` 返回控制器**实际正在驱动**的位，其中包括功能输出；不要假设读取值就是你上次写入的值。

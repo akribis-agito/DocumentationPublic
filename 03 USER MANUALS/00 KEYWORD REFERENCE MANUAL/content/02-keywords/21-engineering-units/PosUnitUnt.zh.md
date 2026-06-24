@@ -35,7 +35,7 @@ language: zh-CN
 
 `PosUnitUnt` 保存**位置工程单位的名称**——该文本标签与 [PosUnitFct](PosUnitFct.md) 中的比例系数配合使用，例如 `mm` 或 `um`。它记录了位置组（参见 [PosUnitGrp](PosUnitGrp.md)）所使用的单位。该标签仅用于说明：显示时会与数值一同呈现，但本身不执行任何换算——数值换算由 [PosUnitFct](PosUnitFct.md) 设定。
 
-本关键字仅在 central-i v5 及以上版本可用。
+本关键字仅在 central-i v5 版本可用。
 
 ## 工作原理
 

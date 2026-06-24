@@ -39,10 +39,10 @@ CurrCurrTh 电流参考检查的触发方向。
 
 ## 工作原理
 
-| CurrCurrThDir | Descriptions                                            |
+| CurrCurrThDir | 说明                                                    |
 |---------------|---------------------------------------------------------|
-| 0             | Second condition is fulfilled if `CurrRef` > `CurrCurrTh`. |
-| 1             | Second condition is fulfilled if `CurrRef` < `CurrCurrTh`. |
+| 0             | 若 `CurrRef` > `CurrCurrTh`，则满足第二个条件。 |
+| 1             | 若 `CurrRef` < `CurrCurrTh`，则满足第二个条件。 |
 
 只有当 [CurrCurrTh](CurrCurrTh.md) 非零时方向才有效（`CurrCurrTh` 为 0 会完全解除该检查的武装）。与 [CurrPosThDir](CurrPosThDir.md) 不同，当切换触发时固件**不会**清除该关键字 —— 只有 `CurrCurrTh` 和 `CurrPosThDir` 被清零 —— 因此所选方向在下次重新武装阈值时保持不变。
 

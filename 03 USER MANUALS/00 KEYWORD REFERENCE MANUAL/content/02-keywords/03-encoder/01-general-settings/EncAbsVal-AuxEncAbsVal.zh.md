@@ -1,5 +1,5 @@
 ---
-summary: Raw absolute encoder value after bit-masking and direction handling.
+summary: 经位掩码和方向处理后的绝对式编码器原始值。
 last_updated: '2026-05-30'
 doc_revision: '2026.06'
 language: zh-CN

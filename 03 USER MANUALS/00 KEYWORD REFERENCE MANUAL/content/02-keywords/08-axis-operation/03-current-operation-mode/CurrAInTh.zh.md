@@ -72,7 +72,7 @@ ACurrAInTh=0         ; disable this condition
 
 ## 另请参阅
 
-- [Current operation mode](00-overview.md) —— 完整的模式切换条件
+- [电流运行模式](00-overview.md) —— 完整的模式切换条件
 - [CurrPosTh](CurrPosTh.md) —— 第一个条件（位置参考阈值）
 - [CurrPosErrTh](CurrPosErrTh.md) —— 备选的第二个条件（位置误差）
 - [CurrCurrTh](CurrCurrTh.md) —— 备选的第二个条件（电流参考）

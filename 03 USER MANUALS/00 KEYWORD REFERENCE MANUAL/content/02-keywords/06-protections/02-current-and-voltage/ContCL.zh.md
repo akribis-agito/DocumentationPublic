@@ -115,9 +115,9 @@ AStatReg                      ; bit 25 (power limit) set while engaged
 
 ## 另请参阅
 
-- [PeakCL](PeakCL.md) —— 峰值电流限值（以及 I²t 上界）
-- [PeakTime](PeakTime.md) —— 允许处于峰值电流的时间（设置 τ）
-- [CurrLimMode](CurrLimMode.md) —— 控制饱和后的电流指令如何与 `PeakCL` 交互
-- [MaxMotorCurr](MaxMotorCurr.md) —— 瞬时过流跳闸（与 I²t 分开）
-- [StatReg](../../07-status-and-faults/StatReg.md) —— 位 25 标志 I²t 功率限制处于激活状态，位 21 标志电流饱和
-- [ConFlt](../../07-status-and-faults/ConFlt.md) —— 当 I²t 配置为跳闸时的故障 1044
+- [PeakCL](PeakCL.md) — 峰值电流限值（以及 I²t 上界）
+- [PeakTime](PeakTime.md) — 允许处于峰值电流的时间（设置 τ）
+- [CurrLimMode](CurrLimMode.md) — 控制饱和后的电流指令如何与 `PeakCL` 交互
+- [MaxMotorCurr](MaxMotorCurr.md) — 瞬时过流跳闸（与 I²t 分开）
+- [StatReg](../../07-status-and-faults/StatReg.md) — 位 25 标志 I²t 功率限制处于激活状态，位 21 标志电流饱和
+- [ConFlt](../../07-status-and-faults/ConFlt.md) — 当 I²t 配置为跳闸时的故障 1044

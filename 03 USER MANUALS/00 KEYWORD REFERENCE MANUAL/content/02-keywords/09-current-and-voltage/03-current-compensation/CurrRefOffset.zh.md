@@ -33,7 +33,7 @@ language: zh-CN
 
 ## 概述
 
-`CurrRefOffset` 是电流参考偏置，单位为毫安，叠加在电机的电流参考之上。由于它是在电流环（而非位置/速度环）中相加的，因此它是环路侧转矩补偿 [TorqCompMode](TorqCompMode.md)/[TorqCompFix](TorqCompFix.md) 在电流环中的对应项。其作用点参见 [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md)。
+`CurrRefOffset` 是电流参考偏置，单位为毫安，叠加在电机的电流参考之上。由于它是在电流环（而非位置/速度环）中相加的，因此它是环路侧转矩补偿 [TorqCompMode](TorqCompMode.md)/[TorqCompFix](TorqCompFix.md) 在电流环中的对应项。其作用点参见 [控制整定 – 电流控制](../../11-control-tuning/06-current-control/00-overview.md)。
 
 ## 工作原理
 

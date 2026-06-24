@@ -68,7 +68,7 @@ AAOutGain[1]          ; read back the gain
 - **保存** — 可保存至闪存；启动时重新加载。
 - **平台** — 仅 central-i v5。在 v4（standalone 或 central-i）上，使用 [AOutShifts](AOutShifts.md) 实现等效的 2 的幂缩放。
 
-## 另请参阅
+## 参见
 
 - [AOutMode](AOutMode.md) — 选择被监视参数（增益仅在监视模式下适用）
 - [AOutShifts](AOutShifts.md) — v5 中取代的 v4 2 的幂缩放

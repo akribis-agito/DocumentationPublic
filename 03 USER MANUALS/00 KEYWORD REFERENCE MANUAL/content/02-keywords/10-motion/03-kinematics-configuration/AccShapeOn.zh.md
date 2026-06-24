@@ -81,7 +81,7 @@ AAccShapeOn=0        ; disable acceleration shaping
 AAccShapeOn         ; query state
 ```
 
-## 参见
+## 另请参阅
 
 - [AccShapeDist](AccShapeDist.md) — 各表段的整形距离
 - [AccShapeFact](AccShapeFact.md) — 各表段的整形因子

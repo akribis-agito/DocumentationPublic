@@ -1,5 +1,5 @@
 ---
-summary: Offset added to the raw absolute encoder reading.
+summary: 上电时加到绝对式编码器原始读数上的偏置。
 last_updated: '2026-05-30'
 doc_revision: '2026.06'
 language: zh-CN

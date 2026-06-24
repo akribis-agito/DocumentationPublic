@@ -54,4 +54,4 @@ AProgClrCall[1]     ; clear the call stack of thread 1
 - [ProgCallStack](ProgCallStack.md) — 程序调用栈内容
 - [ProgCallDepth](ProgCallDepth.md) — 调用栈中剩余的空闲空间
 - [ProgClrExp](ProgClrExp.md) — 清空数值（表达式）栈
-- [ProgResetAll](ProgResetAll.md) — 停止所有线程并重置指针和调用栈
+- [ProgResetAll](ProgResetAll.md) — 停止所有线程并重置指针和各调用栈

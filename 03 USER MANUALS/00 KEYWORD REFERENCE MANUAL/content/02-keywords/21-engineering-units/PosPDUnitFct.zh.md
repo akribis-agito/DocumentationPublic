@@ -48,9 +48,9 @@ language: zh-CN
 ## 示例
 
 ```text
-APosPDUnitFct=1       ; 默认——P/D 位置原样呈现
-APosPDUnitFct=0.01    ; 将 P/D 位置缩放 0.01 后呈现
-APosPDUnitFct[1]      ; 读取当前 P/D 位置系数
+APosPDUnitFct=1       ; default — present P/D position unchanged
+APosPDUnitFct=0.01    ; present the P/D position scaled by 0.01
+APosPDUnitFct[1]      ; read the current P/D position factor
 ```
 
 ## 另请参阅

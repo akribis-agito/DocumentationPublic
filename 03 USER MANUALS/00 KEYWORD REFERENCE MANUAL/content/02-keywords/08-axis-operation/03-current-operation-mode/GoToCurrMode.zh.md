@@ -91,7 +91,7 @@ AGoToPosMode              ; bumpless return to position control
 - **表保持不变** — `CurrCmdVal` / `CurrCmdSlope` / `CurrCmdHTime` **不会**被该命令清除；派发器始终从 `CurrCmdIndex = 1` 重新开始。
 - **原子性** — 固件在模式切换前后禁用中断，使该变更在单个控制周期内对所有环路可见。
 
-## 参见
+## 另请参见
 
 - [OperationMode](../01-general-keywords/OperationMode.md) — 当前激活的控制模式
 - [CurrCmdSrc](CurrCmdSrc.md) — 进入模式后电流参考的来源

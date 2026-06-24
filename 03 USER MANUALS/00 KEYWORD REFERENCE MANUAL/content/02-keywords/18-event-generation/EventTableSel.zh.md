@@ -1,6 +1,6 @@
 ---
 keyword: EventTableSel
-summary: 按条目选择阵列，用于指定每个事件表条目的脉冲驱动哪条输出线。
+summary: 按条目选择数组，用于指定每个事件表条目的脉冲驱动哪条输出线。
 language: zh-CN
 availability:
   standalone:
@@ -31,7 +31,7 @@ doc_revision: '2026.06'
 ---
 # EventTableSel
 
-按条目选择阵列，控制每个事件表条目的输出特性。
+按条目选择数组，控制每个事件表条目的输出特性。
 
 ## 概述
 

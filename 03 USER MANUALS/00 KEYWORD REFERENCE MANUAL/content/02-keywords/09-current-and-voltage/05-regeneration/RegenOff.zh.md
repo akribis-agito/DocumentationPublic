@@ -1,6 +1,6 @@
 ---
 keyword: RegenOff
-summary: 再生电阻被停用的直流母线电压阈值（mV），低于或等于该值时停用。
+summary: 再生电阻被停用的直流母线电压阈值（mV），低于该值时停用。
 availability:
   standalone:
   - v4
@@ -35,7 +35,7 @@ language: zh-CN
 ---
 # RegenOff
 
-再生电阻被停用的直流母线电压阈值（mV），低于或等于该值时停用。
+再生电阻被停用的直流母线电压阈值（mV），低于该值时停用。
 
 ## 概述
 

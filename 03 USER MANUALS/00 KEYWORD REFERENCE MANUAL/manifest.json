@@ -65,7 +65,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/01-status/About.zh.md",
-          "sha256": "83860b8c8e20c5f743a0cb68df74f6e53149c9b9e3a5260822912cf2d2248271"
+          "sha256": "ba1fbef469d36ad45894c569035e37dc858b3d1194c0a28eddcc49c79cf5aef9"
         }
       }
     },
@@ -91,7 +91,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/01-status/DebugData.zh.md",
-          "sha256": "18431478638124a4d0eb01d9f39b66acd21a32ff623b79b7006a00040bd5a209"
+          "sha256": "6fbc368610f59db677d54ae1bb0fb4ec2507d9b899349e9f33768623db644f34"
         }
       }
     },
@@ -104,7 +104,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/01-status/DontDownload.zh.md",
-          "sha256": "ebd6f2ce2f4cee892376e9ad0c5aff511934fcc4cc93a04400e36515cd44f7f4"
+          "sha256": "bbf34f2fe282e91bb2530f9a478afc388feccc93b43a5d9951efb2d462fb9334"
         }
       }
     },
@@ -195,7 +195,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/02-operation/00-overview.zh.md",
-          "sha256": "54e710873a26d0166847584c5da9b2220d344f0a653733383b59a98a7631c558"
+          "sha256": "51fde06445572261339084e810d76ffaf16b219a52eb37e539c17ea37e5f2adb"
         }
       }
     },
@@ -273,7 +273,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/02-operation/LoadUser.zh.md",
-          "sha256": "4c29d61758eb7a4a7696027549fca36bc26531f569f7480ed6773161baa92227"
+          "sha256": "80a5884797494a99102df0c6c896744d947b4575d6f2c6aa9c54c9c16e4797c7"
         }
       }
     },
@@ -286,7 +286,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/02-operation/RNDDebug.zh.md",
-          "sha256": "a666d20497b1d21c5b56f2dc7e307d422a1308e3e5a1a923dad72d15d5497d7d"
+          "sha256": "10333b4b461b8f5024f4898850b01c7a567287abade715da09e09ddef2a158e9"
         }
       }
     },
@@ -299,7 +299,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/02-operation/Reset.zh.md",
-          "sha256": "b10242762a60e9248735321eb4122fa296890435d2489ab40f835598ff68cb90"
+          "sha256": "e48613dd607aeccfcbd0c0635f7766d61d58a9e3ef9ca56efed7a3dd7e7aac5d"
         }
       }
     },
@@ -364,7 +364,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/03-timing/CounterUp.zh.md",
-          "sha256": "486ce04cbb8017ef6c5c5f8a0f1a02fcf8f8aa4dcd45f745ede7459b5c284bf1"
+          "sha256": "15cf91b44b36089ab47f7230c97ead4d50adf8068efc4384b59fd05be6720aad"
         }
       }
     },
@@ -377,7 +377,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/03-timing/HWTimer.zh.md",
-          "sha256": "7ef7ee7adfba6144b2556c3bd7b0ad36a81e97024fe23ddb64865dbb3d80ef59"
+          "sha256": "97214ca3d22ede788747c3479116a758daa521ac171cf0edbb921ba5f5844562"
         }
       }
     },
@@ -390,7 +390,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/03-timing/Time.zh.md",
-          "sha256": "4fe9c1d6194fa94bb074999a00edd73972dc38b53b714439f23e5a5bb75eac48"
+          "sha256": "e7917413d339d9d37c460f61cca411ce87c1561f2e380dead8bc236fb40b7d73"
         }
       }
     },
@@ -403,7 +403,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/04-communication/00-overview.zh.md",
-          "sha256": "4546423991b9a5b23bc219ede3a38a769b36b50811755f76d866b94a05320d7e"
+          "sha256": "5ba65e91ad79083d85e37c2c4369e29589f4087880b0f1f89385aaa4d10fc007"
         }
       }
     },
@@ -416,7 +416,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/04-communication/CANAddr.zh.md",
-          "sha256": "ec044818dd62b879d783c456ef17d5fb7f60e92e43b475a0068b233075091b67"
+          "sha256": "ad94f674007d2f3d83d36dbb95a73668d4636f1b608c0c24cf893d24f9b7a439"
         }
       }
     },
@@ -455,7 +455,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/04-communication/ChainAddress.zh.md",
-          "sha256": "45d60b62abac0d0fa5fb64e5098275e86c036f1836321da0f5c872b56efbefce"
+          "sha256": "7db666dce54408c1f9a249e10a8a8ed8720597500871887a0b7b7809cb653c3c"
         }
       }
     },
@@ -468,7 +468,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/04-communication/EthernetIP.zh.md",
-          "sha256": "eb898cbd520e90a4e40f8bced0a698ef0d8dd9ebba44717f3651f1285bacb955"
+          "sha256": "9cd7fcaaf85228befd37eb41d5f30c51c389fc4d45e2925766abfbd046aac14b"
         }
       }
     },
@@ -533,7 +533,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/04-communication/RemoteCANCCC.zh.md",
-          "sha256": "5880feb3ab14873b85675d7202d79a223a3c0585e573d456b3d9a03f02a77b67"
+          "sha256": "323db7559ba597f83ed2c2ea05947074b0b806765200cfa496eeda9717e66e1d"
         }
       }
     },
@@ -546,7 +546,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/04-communication/RemoteCANSend.zh.md",
-          "sha256": "c222548f97ae6a77469569a9e2e2135d5b80d5805cc526e10e21df9f33bd4680"
+          "sha256": "9f10b3d1fab4fde6cbfda3bfbfb575c35017e8d2a9a1b2022ecc14bfeb86485e"
         }
       }
     },
@@ -689,7 +689,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/05-central-i/CIOfflineData.zh.md",
-          "sha256": "bf1d8782819b981acc7a1b586a52792248d2d058428785101199adac8cfdb1bf"
+          "sha256": "053dcee7f13fc9a5e7b08d3b9722fc4f6422876f34ccb7703e1bf2e690db8b72"
         }
       }
     },
@@ -702,7 +702,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/05-central-i/CIOfflineDef.zh.md",
-          "sha256": "70d138453af7609dba6c3b78cc956adf41325eef210a8cfc9d79d3f973491b48"
+          "sha256": "744808f14b832bc68c377aaec32745412d1d5e1b03b74ba497530608e8df4e1e"
         }
       }
     },
@@ -845,7 +845,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/02-motor-and-amplifier/AmpType.zh.md",
-          "sha256": "741e86a3583acd03223eebaa7a1eeb1fb640fcc2452b1464038212a4b60a38e3"
+          "sha256": "b8b2ab20a416ada1bd7af81b4503e0986158eadedd8527e3d5a315b507440c6b"
         }
       }
     },
@@ -858,7 +858,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/02-motor-and-amplifier/LAmpFullScale.zh.md",
-          "sha256": "7ed269d9ca8bb91d2f93f2bec589493ed58042b63659022d5e58be84bafb2f5a"
+          "sha256": "06507fce33659df208ec616eeeb8081cc902aac00a45b96a4cf893da2e347563"
         }
       }
     },
@@ -897,7 +897,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/02-motor-and-amplifier/PolePrs.zh.md",
-          "sha256": "a47e96a5e063083c13f97a162b08b2c9bb4f80cc3711492b474008b0d913218e"
+          "sha256": "da76f53b8e7a346dcbbc0763f50ef716e4fa2606d6616db8cffa82827a982c11"
         }
       }
     },
@@ -1157,7 +1157,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.zh.md",
-          "sha256": "ebdfbaa73261114e169bd5aa65f86e15d56e4ad43a3b80af5f750adf290f35df"
+          "sha256": "aab19effc9fa2aa0f687a1123d9c662d9d4a70963c1a0d569f78b18198b69bc4"
         }
       }
     },
@@ -1196,7 +1196,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/02-index-detection/IndexStat-AuxIndexStat.zh.md",
-          "sha256": "8b51e554e1a60f9c3047b434068da7f11b7a673a2dd8084797d2507e1735da6d"
+          "sha256": "d5b2ed0273652aace01616c008b9317aa8b459adc43b3bd6422c6a5d1a19599d"
         }
       }
     },
@@ -1300,7 +1300,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/03-event-based-feedback-logging/LockTimeTable-LockTimeTabB.zh.md",
-          "sha256": "40ad4f59c423ecde9d6163c3b3a358b9de23347a09b93f1b031b71b3d4fae8bb"
+          "sha256": "7b8d8b6c7082a2ec8701e99950c6924a8f01e1befb15c6b85b7a302428248f18"
         }
       }
     },
@@ -1313,7 +1313,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/03-event-based-feedback-logging/LockVal-AuxLockVal.zh.md",
-          "sha256": "b173bf7032f1791eec366a95c2b07ea7c2875adb264e24b442c6e9c0c9f66299"
+          "sha256": "eae13910f207695fa7a8f89528053fd007c705803c2a807c52412caad809cd86"
         }
       }
     },
@@ -1326,7 +1326,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/03-event-based-feedback-logging/LockValTable-LockValTabB.zh.md",
-          "sha256": "9be3111ab196cf79ede8da435a1709e7d831f394df151104e526cfb5c3bc0104"
+          "sha256": "628179cb29b31ec46f0dba92a34a17539e04697ec528eed6ca79b0be3490f5a1"
         }
       }
     },
@@ -1469,7 +1469,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/06-virtual-encoder/VEncFactDen.zh.md",
-          "sha256": "e6e5361594e314fcba353af494dacf358b044dba9c38375a35dcf8c5752f08f4"
+          "sha256": "487e0fdd0aba7911836f2ac82ddc4c9751d65a9bad09ddcf8958dac901fa4a46"
         }
       }
     },
@@ -1482,7 +1482,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/06-virtual-encoder/VEncModRev.zh.md",
-          "sha256": "e51cc18bc9aa1c4f96083ad1f946c8631e3c14853ef53adc771a530aa6bc9961"
+          "sha256": "c313d8990052cbd44fde14a9d540ff71fd2d7aa4e0b1e1a676605ed3746a1ffb"
         }
       }
     },
@@ -1521,7 +1521,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/06-virtual-encoder/VEncType.zh.md",
-          "sha256": "643757cb49c9ea130374da0a52183a17122a5f70320cf5c67727f4db7f45e78d"
+          "sha256": "c1d73d7939605f8164e5b7fb28907cbd2318d40e3d6c79182535fbe6533183d7"
         }
       }
     },
@@ -1560,7 +1560,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/07-absolute-encoder/EncAbsErrTime.zh.md",
-          "sha256": "0dcad0c4f2aa2af84eea3d621159552d3c79b9adde1998f38092f2dd71a935c2"
+          "sha256": "eccb7844c506f5fe9f0a82486781411c397ac1895c647697753b128124c5c615"
         }
       }
     },
@@ -1638,7 +1638,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/04-error-mapping/MapEncoder.zh.md",
-          "sha256": "85dbd419d8d7cd900baae526cb8904eba3b4cbbddc9b36e1caeaa10d1c7fc1e5"
+          "sha256": "baf7f7f2a03101f82ae7f828408e7daf709e2ddc27a4f4c742aacf65e72534b0"
         }
       }
     },
@@ -1677,7 +1677,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/04-error-mapping/MapErrOnStep.zh.md",
-          "sha256": "69858c705f3166010e09895745c115c8c36eafad935f4fbe65a902135c367369"
+          "sha256": "b4570c20f19bfdc2f44aa917b28bc5af9311f4e934896f186b70d062f56474e0"
         }
       }
     },
@@ -1690,7 +1690,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/04-error-mapping/MapLength.zh.md",
-          "sha256": "cbc39b3d7613f3fc324243c2c7577555544ca099a5ce57de6f993b5e947f3ead"
+          "sha256": "fd544fd297f5daee4d585ea3ab10192098fbf4ca4a7d449bff97936730b0833c"
         }
       }
     },
@@ -1703,7 +1703,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/04-error-mapping/MapPosGap.zh.md",
-          "sha256": "d75654add8865893cc34aacbea5bc54d1da83b536d09fac470139bdd3e154e24"
+          "sha256": "37b765aaf400e9991ca12e873a1b080724f50fc28d36dc8a4dac9ef772ab0b1b"
         }
       }
     },
@@ -1716,7 +1716,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/04-error-mapping/MapStartIndex.zh.md",
-          "sha256": "e48af49c59a2e5174f620c44f853164fcee61a1e2c77e38027c66ebd229cf9b8"
+          "sha256": "4d0a35c5e18fecba83ad0b84f257b9d120b1ac6dca27155e457f01133fd9c61a"
         }
       }
     },
@@ -1820,7 +1820,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/05-inputs-outputs/02-analog-inputs/00-overview.zh.md",
-          "sha256": "7eafb9b6aa380af6d98249d8b50b55e04307325b897b286abde0e92a88b5fac0"
+          "sha256": "49e0cbfc2926c8be8d56fa2f4aa96edafebfa150d9b7c693dbde8687973b2ca4"
         }
       }
     },
@@ -1950,7 +1950,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/05-inputs-outputs/03-analog-outputs/AOutGain.zh.md",
-          "sha256": "e2989c98cd12e3e9b37dc056802b63adb230818c10183d6979d0c048a991e9cf"
+          "sha256": "6cf1270752362bc72098f448ec76ecc38a5438545378ec581a9f531624e148aa"
         }
       }
     },
@@ -1989,7 +1989,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/05-inputs-outputs/03-analog-outputs/AOutPort.zh.md",
-          "sha256": "98df54594f75d72c1ebeedb742854305236bdb804e3413438ba207b4db46d95b"
+          "sha256": "a84a329dc811a7b755ffad544bc7fb3ebafa7804608e4c8e096728c00fefb34e"
         }
       }
     },
@@ -2002,7 +2002,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/05-inputs-outputs/03-analog-outputs/AOutShifts.zh.md",
-          "sha256": "6a1c41a6f5c05e2252a1034c7a17c6ed646281e8a295f9245372c232c6c091ec"
+          "sha256": "6cb3b5f6e4ee5987aa093d365b9798f2589a747b478022f4c8fa027dc110f661"
         }
       }
     },
@@ -2028,7 +2028,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/05-inputs-outputs/04-digital-inputs/DInFilt.zh.md",
-          "sha256": "1d60df37f1fb7635345ce023fa1fc608e3610796e97174ac1adfd972f502b692"
+          "sha256": "2688da58cf06da952a4d5f071dae39aa73a8b1bf02f9ea37370a0251d1eceb95"
         }
       }
     },
@@ -2093,7 +2093,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/05-inputs-outputs/05-digital-outputs/DOutLog.zh.md",
-          "sha256": "b5d27f49997dcdb03526fd127973cf132a8beb96eb47cb1794cff2877208856a"
+          "sha256": "10295ed93ce426d20edfaa67078ff0cd24a5fe47b8cb8a2d103477bdea477992"
         }
       }
     },
@@ -2119,7 +2119,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/05-inputs-outputs/05-digital-outputs/DOutPort.zh.md",
-          "sha256": "075ba9822f930d8daaca1943f97a1c5cb5f6f83d265f9eaf33d778977f1eb9a3"
+          "sha256": "a7e265349f337d0e71e382041ca2ccd697d920e664c1f68dbe8bc64490658871"
         }
       }
     },
@@ -2197,7 +2197,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/00-overview.zh.md",
-          "sha256": "c838b1cd6dcaf0d462afc03587d88d2b487a22fdf34a6b1251b57113b67ab223"
+          "sha256": "027622c310dfd82481b899b06b9905cf70b6b98d6e512e16f7a8461dac8ee323"
         }
       }
     },
@@ -2262,7 +2262,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/02-current-and-voltage/ContCL.zh.md",
-          "sha256": "318fdb02e926c3f468bb63dbea29d72e20dbe3f7988717d072907c7dc1f5d842"
+          "sha256": "abda3f8c92a8ca9afbf8841601d288aedc8cc75845d583a29551b522a9805411"
         }
       }
     },
@@ -2275,7 +2275,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/02-current-and-voltage/CurrLimFwd.zh.md",
-          "sha256": "c6e7b2c5b79fc023556c2201ca250786ae505716d9975a43a05f438a90901a06"
+          "sha256": "a7bbf149551bd6ef2db315993a662c6333ae8b44f087b844382d158552f4efc5"
         }
       }
     },
@@ -2405,7 +2405,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/02-current-and-voltage/PeakCL.zh.md",
-          "sha256": "c5e13d5cf1d58c22735e012f06d28919991e029218b2252c38e4aa25482e8a99"
+          "sha256": "7c38574ee1912e3baf39ed9041d0f205c7c3f3348124eeb9c969cfc72cc55943"
         }
       }
     },
@@ -2418,7 +2418,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/02-current-and-voltage/PeakTime.zh.md",
-          "sha256": "96087e22cb32ece4da83799644ed8c4c9dea527201ea98d0a3ebe885415105bf"
+          "sha256": "1fb7ad40eb628f0120c909b3bf4d2acedb3c3512cdc52e323fa6246fcfd05ef3"
         }
       }
     },
@@ -2496,7 +2496,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/03-motion/general-maximum-limits/MaxPosErr.zh.md",
-          "sha256": "f233257290a6cecf739713ea0dfe45b7e149f54dec2c186d2a3e79f842b9f340"
+          "sha256": "5f0eec74e3ecdb9c2f4e3b3e6d8663dacd7c4d648e71c12235807a73786289b3"
         }
       }
     },
@@ -2561,7 +2561,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/03-motion/motor-stuck-protection/00-overview.zh.md",
-          "sha256": "caff4084ab1f7748e156605a95fbe7fd3543a344c076ff99dc6a4fd3ed58a761"
+          "sha256": "f704ebb527020ebee0387cb95921180c07db61e360ac97f4453b4a22e503698d"
         }
       }
     },
@@ -2574,7 +2574,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/03-motion/motor-stuck-protection/StuckCurr.zh.md",
-          "sha256": "77d20b312f3b55b31277251ca6379725d4aae035289780295dbf4597755b7525"
+          "sha256": "7fc8cd96a3732cea35182bb7ed910bccf7873498620b070a1663166295c7a78e"
         }
       }
     },
@@ -2678,7 +2678,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/03-motion/stepper-stall-protection/StallCfg.zh.md",
-          "sha256": "0ec044f2bc1f6f153fdcad8d8f34613c02108eb754aa42bdcb4f7af204fa7a5d"
+          "sha256": "c35579d8fc37197734a7e2635180a0de6fad06d6cf65e32ab48e4d26c8dfda4e"
         }
       }
     },
@@ -2873,7 +2873,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/06-brake/BrakeMode.zh.md",
-          "sha256": "465112adf299d9a10da2112761b94d9349468ee953b4c53c2b2338034786142b"
+          "sha256": "2ee77a4efeeffc1a4218771cf5e7d566d7e91e786e107ae89f64d5d08508bb68"
         }
       }
     },
@@ -2886,7 +2886,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/06-brake/BrakeRelTime.zh.md",
-          "sha256": "67692867e848f2caed827dc804ef47eb7b0177fab84930b13f017e94df8626dd"
+          "sha256": "4be693e5f75a437f4b9a90f587c9b758866630a0d6c720e49935e9d414476a26"
         }
       }
     },
@@ -2925,7 +2925,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/06-brake/DynBrkRef.zh.md",
-          "sha256": "6dc44d967f48b5da3645708694b3df55217b7143c5a23bc4295b08746c7562d2"
+          "sha256": "36183a4b7527d033de26a0101d061aa954d8b6a073302c1f33dc4d120e3c7214"
         }
       }
     },
@@ -2938,7 +2938,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/06-brake/Dynamicbrake.zh.md",
-          "sha256": "6a61460f9941a16097bfe750289e664ddc0604bd4bb1507f1a9ddd48280e2b8e"
+          "sha256": "0c44e8c50e48f8fb11bf51601e718d8ae4140dfcacb169e4dbd9602d1b6d1fef"
         }
       }
     },
@@ -2951,7 +2951,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/06-brake/Staticbrake.zh.md",
-          "sha256": "bc200e0064bac4ce1ca11ed5620a7581d1f366d9ed555469680b7e040f9cfe8a"
+          "sha256": "139d8081f82f2c60e5559a6eb39bb0cd2161823461c91b9824b25ed5ddefc8cb"
         }
       }
     },
@@ -3055,7 +3055,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/08-anomaly-detection/AnomDtctLL.zh.md",
-          "sha256": "d45b19d2ad30a29de478e67c10c10f4f1b54091773cd7284c549fbbc5d471f68"
+          "sha256": "f5e6db28823b5687dcabbe4dee8d9332b9fce34a311b5b0af5c5a9e6f593c676"
         }
       }
     },
@@ -3081,7 +3081,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/08-anomaly-detection/AnomDtctSt.zh.md",
-          "sha256": "381690d4e9a94f1fdb1d671c4dffa5dfc474f7b05a9445b5b73030821b2e2a70"
+          "sha256": "cc1bec06e10945e8a0415e7eff242b8b4b2d80f73c00c9ec031380f90614dda3"
         }
       }
     },
@@ -3185,7 +3185,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/07-status-and-faults/ErrLog.zh.md",
-          "sha256": "fe331c82639fc65fd0c2ace33fb6d8bdaf61a8761cef9c49c1e6838ffc8b09d7"
+          "sha256": "c1b2cdbe15faffec85b80429819529f9bd312221effce017a9cfc7c2f6c73279"
         }
       }
     },
@@ -3198,7 +3198,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/07-status-and-faults/MotorReason.zh.md",
-          "sha256": "f27abbd42253ea7e7e63a22f24b6dc6cc050ae5f735170611841489cd6c424db"
+          "sha256": "090334c81209ca9d23175f503bc4ad4b98893409497538e46ffe9d6b29266393"
         }
       }
     },
@@ -3211,7 +3211,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/07-status-and-faults/StatReg.zh.md",
-          "sha256": "b43220afa4fb8dd414fabca91233fecc96626d6db699d477ea470ff92b0774b0"
+          "sha256": "3758fbc187d07e885d0081610ecbb90d6b4bd73514126d55589a325952af436d"
         }
       }
     },
@@ -3341,7 +3341,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/01-general-keywords/OperationMode.zh.md",
-          "sha256": "7e467b86c3ff139f43d21d09090b4e3bc5f9d5096a14496bc8eed00c17927d12"
+          "sha256": "c8b9fcfa20a9bdc540a2950d74f1c35675524500ac39e7cc51bec7dd25ad4459"
         }
       }
     },
@@ -3471,7 +3471,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/03-current-operation-mode/CurrAInTh.zh.md",
-          "sha256": "a03e3174d6919430074736985775f5fb652614da8324ebb4f90ee57935b3bae6"
+          "sha256": "5b39632eacbec9fda89fcb620b13868260aebff859ad6a37079e945514bd90fc"
         }
       }
     },
@@ -3497,7 +3497,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/03-current-operation-mode/CurrCmdHTime.zh.md",
-          "sha256": "f6dfaf00a5430105a29692c77bac6074c841c9fd60706f88dc6ebade047881c4"
+          "sha256": "36af93df191ed2d9ece98818202c1706f7e0bab1af572d383635d56236d38195"
         }
       }
     },
@@ -3510,7 +3510,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/03-current-operation-mode/CurrCmdIndex.zh.md",
-          "sha256": "2d8093a0fefebd6fcbbdad378457fb199d5296d2b6b8fecb27ba200e1b0bdce0"
+          "sha256": "44526c536776c58df9626de09da0d6062a75626feaac3a6942ec5d68baa80823"
         }
       }
     },
@@ -3575,7 +3575,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/03-current-operation-mode/CurrCurrTh.zh.md",
-          "sha256": "c22ce3b3f5d7ab7ae8e6c592aead3f1d8bb37e9e8431fab5bce8a22adabf8dbf"
+          "sha256": "8cfb811f4c56b7fe09e02355450150a628bf7107dac1a3f42403182d5e15dd57"
         }
       }
     },
@@ -3588,7 +3588,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/03-current-operation-mode/CurrCurrThDir.zh.md",
-          "sha256": "01bbced5229c9166e35770fd9b5d63eb2ad19a59c72c585caa343b5bea42d8fb"
+          "sha256": "7718b8426e10d47081176afaf3a1f15ddce918a0c0bf79d25f7d3d4d1d4264e9"
         }
       }
     },
@@ -3653,7 +3653,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/03-current-operation-mode/GoToCurrMode.zh.md",
-          "sha256": "1e4cc79832f837b082a0558fdc47f38a6112ba72cd98fc4dff8a12b62dd5000a"
+          "sha256": "1c730776d0d4cd0361a6a8297a64ee6625013a1c00065a1800cf3f4c97634895"
         }
       }
     },
@@ -3692,7 +3692,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/04-force-operation-mode/ForceAInTh.zh.md",
-          "sha256": "c22e837fb18afb0011f58ecc37b8caaeeb3b14276ae7d502236e4aec98f8e8ff"
+          "sha256": "d67c8e69a00279af86c83b0b4bc6e0b0d0787386758584bb736ed431638a0c26"
         }
       }
     },
@@ -3809,7 +3809,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/04-force-operation-mode/ForceInTTime.zh.md",
-          "sha256": "833ea07d3adaad4d4567f72d2dd8bb85634d6a82efb5e29ba2f8d0b63a1f3ac4"
+          "sha256": "f762eb16a728437ea43aab5e19cf3b25415f1b53bfce82ec9a5d57f5f675a291"
         }
       }
     },
@@ -3822,7 +3822,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/04-force-operation-mode/ForceInTTol.zh.md",
-          "sha256": "6fd987ea673538b252f8ef5c3097402c82b02d59783de8246fdb66ab3904e4ff"
+          "sha256": "8f92533f2d4b2b8a0c52a69915cd51a1047df0b77d8a9697cca789217fab24c1"
         }
       }
     },
@@ -3835,7 +3835,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/04-force-operation-mode/ForcePosErrTh.zh.md",
-          "sha256": "c6cdcbf98c6bccfab57119d5f066ad6e4276e4f42bbe8f3c9112696ad1b1a2fa"
+          "sha256": "7958aeff66beaedc0e86ef370ff410e91ef6cd59e184791bf1711537070488a0"
         }
       }
     },
@@ -3874,7 +3874,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/04-force-operation-mode/GoToForceMode.zh.md",
-          "sha256": "0409d4f6b8799c296aae74619e35f445b10fd79ebb1f44fdcfbc0ccaf4ac2c41"
+          "sha256": "d9793fad1c0d03881aff14f88a5e3eee5994a0a76135ba9153017f3ddbdf3f2a"
         }
       }
     },
@@ -3887,7 +3887,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/09-current-and-voltage/00-overview.zh.md",
-          "sha256": "86ff153aa1276c9a2724d19b119a3b0a78d26076b4abdcf5799de1e305040830"
+          "sha256": "7b1a2fe8b5cafdeb700d001ac30e4b90036f3b80eac928591b42322759dad4e1"
         }
       }
     },
@@ -3913,7 +3913,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/09-current-and-voltage/01-system-variables/DCDC.zh.md",
-          "sha256": "ac064614eb409f68f6ffae5ececbda1568b66ade261def308d8ba6a7f7ec158d"
+          "sha256": "d33f1e35a68522a17192449f4ce5d82150b69b5a6f05267d0dfb1670eab534ad"
         }
       }
     },
@@ -3926,7 +3926,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/09-current-and-voltage/01-system-variables/LAmpVBus.zh.md",
-          "sha256": "ef2f311fbe0b9e76ccab4522aeeadacc00ada0528f77e714cf8f0234fafed1fa"
+          "sha256": "7cf01939aa9e6106dc989abf8cb04f83623e41ddb4f3012c59d8b9e99bf40edf"
         }
       }
     },
@@ -3952,7 +3952,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/09-current-and-voltage/01-system-variables/VLogic.zh.md",
-          "sha256": "3a4c28e53fa766eb7331023df0e62bed26b3855b069cd480855fdab212fe4ede"
+          "sha256": "6c5fc6c01051a52a84f772572547f159635e59adfea61a7930e3ce18c1ac9d3f"
         }
       }
     },
@@ -4004,7 +4004,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/09-current-and-voltage/02-motor-variables/CurrRef.zh.md",
-          "sha256": "9846c740515b53ca99fea09733c3962ecf9f2c8fa6a2de0bb4001c2fdf5fb56a"
+          "sha256": "9ae2c1ffefed230e6445480cdb360db68a756fa8c0a52f95400a83a64c75b91d"
         }
       }
     },
@@ -4186,7 +4186,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/09-current-and-voltage/02-motor-variables/MotorCurr.zh.md",
-          "sha256": "ef9aa9a6a9d5d67afdf09c2a67f5c9ca3f4b2a95819f4229309355bc02857b8e"
+          "sha256": "5cb5cc35c9dffb13c64197de9c4d35c9792598a732e6ebfa3eadf5bf22c1b642"
         }
       }
     },
@@ -4277,7 +4277,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/09-current-and-voltage/03-current-compensation/CurrRefOffset.zh.md",
-          "sha256": "d223ca11e514349c3e56cad9adab20ccb60dd9f4eb43f46141c52ecd605e4815"
+          "sha256": "740a3eac6d2fed98496ebf6854d3a6c4e97b9b66bf32f7f1abff5016dfdeb4b1"
         }
       }
     },
@@ -4433,7 +4433,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/09-current-and-voltage/05-regeneration/RegenOff.zh.md",
-          "sha256": "9b20f5f529db62744d77de477038a78eec3a5a5c5f58502b8c9e5de6da0a724b"
+          "sha256": "6c85f0992033caba868beff8b119385c53b51d5fabb17b0038243b092e444022"
         }
       }
     },
@@ -4459,7 +4459,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/09-current-and-voltage/05-regeneration/RegenUsed.zh.md",
-          "sha256": "5b9108e112b53e6ebbbe49805e921c53213e95a3de8b38217ea150d6f3e9fc2b"
+          "sha256": "5462046f596d9a53fc0387bd96bba50e800fe5e3fac930e64278549ed73bc7df"
         }
       }
     },
@@ -4667,7 +4667,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/02-motion-configuration/00-overview.zh.md",
-          "sha256": "532a21b6d6f0fcac3bbcc00401c0268c292fc564e9978505ac17b0e824430cf6"
+          "sha256": "1ec4036e0a64f6173007ffec6d66717cebf0ed3f83868a3d5686a50c68541520"
         }
       }
     },
@@ -4680,7 +4680,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/02-motion-configuration/JerkMode.zh.md",
-          "sha256": "67c1e4bf8c28c699591630fbdb21b32a402331fa6170dfc7a96d2fa983e8cf7e"
+          "sha256": "67251b6f2a63d9959fe0c327411498a2708e34547bf2d668dcf8813c1f37b539"
         }
       }
     },
@@ -4693,7 +4693,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/02-motion-configuration/MotionMode.zh.md",
-          "sha256": "5609f024585d7029805231b7408474688bddd9158fac738650d95a84a0b32f1f"
+          "sha256": "9afd80f195befcfb89248071f76a3259f87b6dc57680aa7983a405cae6b8e1a1"
         }
       }
     },
@@ -4745,7 +4745,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/02-motion-configuration/RptWait.zh.md",
-          "sha256": "9c557b235b0a12d94e2ed59630ac66b792ecee1990c407813441ccd913b02a59"
+          "sha256": "8c99e56e4d1b2f5110f4fa827b519a05dd4ad813b403369658637d79dd67f355"
         }
       }
     },
@@ -4784,7 +4784,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/03-kinematics-configuration/AccShapeFact.zh.md",
-          "sha256": "dbb510d78251cfcbcc27a30d760175b2068e9c1041312d035e319e16a0ff3079"
+          "sha256": "dd2f44a1cb3b77b3171406b6bc5fba8614d538394eab3b57fb36a02510cf06cc"
         }
       }
     },
@@ -4797,7 +4797,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/03-kinematics-configuration/AccShapeOn.zh.md",
-          "sha256": "7f8a3d95e9db0c151a1b33d79b904018738e67eef024065912eb5e093d18f224"
+          "sha256": "725917d8e4c58215ae9cd0ea1258e59d2c9fcecf492cffba65bb6838e614034e"
         }
       }
     },
@@ -4823,7 +4823,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/03-kinematics-configuration/AccelFact.zh.md",
-          "sha256": "8aff1b3f8c0764ba7cfb951b7d536f108762a8888f22161fde3a5d335280f6e7"
+          "sha256": "64226691d1be1c9908b6a521ea63d7856fa59d62aa617809bcf60e0ae0659660"
         }
       }
     },
@@ -4836,7 +4836,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/03-kinematics-configuration/Decel.zh.md",
-          "sha256": "4f1c5005c04db15c9150b5bf874b7821c28becfd507af7bf80a6214af2177d59"
+          "sha256": "3c28088c2678daa2c71ae9a88f6ab6f2b6e0fc6471e4688564c1b08f346390dd"
         }
       }
     },
@@ -4914,7 +4914,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/03-kinematics-configuration/RefOffsetSamp.zh.md",
-          "sha256": "301bf12390666afc612d38dd208d326f2d19701fe304bbbbfd7f30a160db079f"
+          "sha256": "9f23ac54539660051b74b2e62161dd68fb3856d2bce9746f4a406c75f1aa6412"
         }
       }
     },
@@ -4966,7 +4966,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/03-kinematics-configuration/SpeedChgDir.zh.md",
-          "sha256": "e089f435300340bf3eb59142ec0220c35bde533961bad929e2ddaca5942edd3c"
+          "sha256": "86f4e9f5a9c6e019695794a9dd3602ae7a261c35fb928ee1312a64989521d0b7"
         }
       }
     },
@@ -5226,7 +5226,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/05-motion-status/MotionStat.zh.md",
-          "sha256": "669f22dd3443e257818460ed2ee7315007127ae5ce2fc264d5346c032e8b8c8c"
+          "sha256": "1a54e00403d88c85f0e4d0176943f2767d8e9262b625d0364bfc46bbfaeaf3f8"
         }
       }
     },
@@ -5369,7 +5369,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDPosFilt.zh.md",
-          "sha256": "720dd41264d3f39280be2099e77affceac1a667fb93fde40c6b0b10f17f5185d"
+          "sha256": "6e77a23c57bac0b1bbc58fbd54630cde2787d653281d2e8384e8f4f1dfd06802"
         }
       }
     },
@@ -5473,7 +5473,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/07-motion-mode-gear-motion/MasterFactDen.zh.md",
-          "sha256": "ffeeb85d1b50758d61a2d5ba12e94db561bda78eb6a460d711eade156a0e5c35"
+          "sha256": "b15fae00d83d0147e0d923c5868c23b26afb67c5f1f88d85f89cfac7ed578c9b"
         }
       }
     },
@@ -5486,7 +5486,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/07-motion-mode-gear-motion/MasterFilt.zh.md",
-          "sha256": "51ce32cb6d064c280f11a07a3fbcd41a3d28a2360b1afec2b42591243a797c4e"
+          "sha256": "e0466ea2dbaee8eb9be4fc6030e54a52c373d16f73ce3471f0d33600b39a054c"
         }
       }
     },
@@ -5512,7 +5512,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/07-motion-mode-gear-motion/MasterPos.zh.md",
-          "sha256": "626a9340230c640ac2114b85ba00f66c4ee3c7522b891645f3af8a0e4c9ea927"
+          "sha256": "cad8a11b11f0de981985f8895bf0839826f21f60907cd3724ebf98b626ff6129"
         }
       }
     },
@@ -5525,7 +5525,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/07-motion-mode-gear-motion/MotionMode10.zh.md",
-          "sha256": "a5036a9150b9dcf67614f49b3b41d4b73f53e4705fdb0ee8d0ef9c61f4ed1b7a"
+          "sha256": "47ce774c45e1d9a0212e82f624b8cef973c6943f4100da8eb4edddac89bb5f0c"
         }
       }
     },
@@ -5837,7 +5837,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/09-motion-mode-cnc/CNCAEncRatio-CNCBEncRatio.zh.md",
-          "sha256": "6b42aaff10311b888b64d71f7ea122209ae739b41f888a2dd997df30903eff2d"
+          "sha256": "7542006e1163e9fc2e6d84f8993d60d266e9bb4fcf876ee9308083d63de4c591"
         }
       }
     },
@@ -5928,7 +5928,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/09-motion-mode-cnc/CNCAPercents-CNCBPercents.zh.md",
-          "sha256": "d0e63c241d87412196d9030cba9b2798ce243e3512ca37d2f39d01325836fca2"
+          "sha256": "18ed305f7718b0306377a315fd23ca56ff67079f3be9673c15542c2881008b71"
         }
       }
     },
@@ -6032,7 +6032,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/09-motion-mode-cnc/CNCASpeed-CNCBSpeed.zh.md",
-          "sha256": "50c80b6dd427da62a059909e012dedd3db46e884449078d427af395211946f8e"
+          "sha256": "b517d5d6d4b47ecfbd8ad7fbf01d20c783dc31ab83afc05d86b2db85b366adcc"
         }
       }
     },
@@ -6175,7 +6175,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/10-motion-mode-vector/VecAbsTrgt.zh.md",
-          "sha256": "a19c264124ae477b4239acfdfc0949f11546f5ef68abf5d85eb8da1047d36041"
+          "sha256": "28159dbed76e3e132668ee26add50f054f7146f0c5746f2e47e12690312f338e"
         }
       }
     },
@@ -6305,7 +6305,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/10-motion-mode-vector/VecJerkInAcc.zh.md",
-          "sha256": "ec071d8726d3b0eee96e48d169b98cfa294f90287cbdfe615d3306a61b73244c"
+          "sha256": "32c54c709c90e56cb2cf50636f80c0a2257dbf04cc7a0054c8ab294741d2e0f3"
         }
       }
     },
@@ -6318,7 +6318,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/10-motion-mode-vector/VecJerkInDec.zh.md",
-          "sha256": "0052656de9807c59e353a246f35d053e87c3d874f8ef2f01a1b37dd62158159d"
+          "sha256": "b14d5c9317f77f337a5c8670034b7ad2ec3d53333d503acf4f97a175c154601b"
         }
       }
     },
@@ -6448,7 +6448,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/10-motion-mode-vector/VecType.zh.md",
-          "sha256": "a27d2bd3c0226c04f1ad1e7cba4417f36bc345de6f87225204f1f82873883cd8"
+          "sha256": "106b5301e6f054e0c01181eb81b68d70efee8df39487d1961318a98502027daf"
         }
       }
     },
@@ -6604,7 +6604,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/11-motion-mode-fifo/FIFOPosTrgt.zh.md",
-          "sha256": "6cd583505f19d88f19482d96022fd8a38fcf4736972a56c1f0997ad30c413de1"
+          "sha256": "e9e3386268765e01f1c71f76cbaf40b1de7bef5988d8c38ef2a005a17a6b7a8a"
         }
       }
     },
@@ -6981,7 +6981,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/11-control-tuning/00-overview.zh.md",
-          "sha256": "1f11f08689be9bd6e1744d879b0f8d86a559d7cd041cbe35a7eba601c6656499"
+          "sha256": "aa526d5de4743794a441e1eadb4ff612f976979d2d1a1fff503e240ce4bfd8fd"
         }
       }
     },
@@ -6994,7 +6994,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/11-control-tuning/01-general-keywords/00-overview.zh.md",
-          "sha256": "862a47ec7cdb05360aef63ad1dcda1234889cb335056e74412b9ee2dc05c82e4"
+          "sha256": "69a0e8484e89028d432f7442fe87f957b002848e44e7c7b9a049db5c5b15745b"
         }
       }
     },
@@ -7397,7 +7397,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/11-control-tuning/05-feedforwards/00-overview.zh.md",
-          "sha256": "8970d2bcab48b1c12266a3bdf138143fcd05e6331cccfdb1dd9cdf51d15abcb6"
+          "sha256": "3c24184d9b9bcd7a1b0064859fb835d07d70b35b62b8df76c3920a98ee3f0dd6"
         }
       }
     },
@@ -7410,7 +7410,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/11-control-tuning/05-feedforwards/AccFFW.zh.md",
-          "sha256": "2af33121a73c0312d210923515ab76190bf4e9c099bf01beab75111e53c077df"
+          "sha256": "fa7fc9a76080656b448076515ca8f1b4c465c1191bd174746efa2af013051682"
         }
       }
     },
@@ -7514,7 +7514,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/11-control-tuning/05-feedforwards/VelFFW.zh.md",
-          "sha256": "1858b2c7327b4c242c31a184febfd029337efc176ac6f66bca602ca032404056"
+          "sha256": "e1351668e5087d93d7788177e06ba7aa0cf303e987bcd016cacc6d5cc7fe64ac"
         }
       }
     },
@@ -7904,7 +7904,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/11-control-tuning/10-stability-diagnostics/00-overview.zh.md",
-          "sha256": "02ec64096fd15bfa9fad90e633d071259723a5ff7c91d121d50f16962de16af3"
+          "sha256": "21f2f9e1984d62c983e5d4a1f66f7ffd3669ec433b4741224f25c951c2daf4c1"
         }
       }
     },
@@ -7995,7 +7995,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/11-control-tuning/10-stability-diagnostics/PIVNoiseStat.zh.md",
-          "sha256": "386b42fcfe416cffa616cb55d486890bd6ca3bdef864c541dba4315f0bd40a6d"
+          "sha256": "1ba179fd2b0427af595de519545158b4b5cc9ab39f4019922420776cb9842f4b"
         }
       }
     },
@@ -8138,7 +8138,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/12-gantry-control/01-general-variables/GantryMapVal.zh.md",
-          "sha256": "98d30f62a860f6e7460efc30c0d4c16b1ff3f2fb569855ca3108297e8d91baa4"
+          "sha256": "58ba5d3886a7a04a589f205abbc13657b8e7d4824b5a37acd428b454e7b41d05"
         }
       }
     },
@@ -8281,7 +8281,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/12-gantry-control/03-gantry-tuning/GantryAccFFW.zh.md",
-          "sha256": "fd342967e07273625d82c59b0dbab607720a622d3658b45ee2278a630ebe96f1"
+          "sha256": "e5f188a8cd5c87d66c7dd305bd73eb959a77082c2a01e8dd7b68ef077d62af84"
         }
       }
     },
@@ -8307,7 +8307,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/12-gantry-control/03-gantry-tuning/GantryPosKi.zh.md",
-          "sha256": "fd99f465a589963922dbb8c3759bf9d41dae4672fac511fbec6cf27f76bee450"
+          "sha256": "19f762ec77376a98b468685949387ac4cb1b34d79d1b54391160fcbef79e25b0"
         }
       }
     },
@@ -8359,7 +8359,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/12-gantry-control/03-gantry-tuning/GantryVelKi.zh.md",
-          "sha256": "b4736ff8610f8f6f4d051cd1fea7ad4f06b9c859b120f5b9f6e5dd235b6c7d54"
+          "sha256": "cf286329465134321c8fb045a96fe5c71df428900804bbd7c57a44218a0e2f43"
         }
       }
     },
@@ -8593,7 +8593,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/14-identification/IdenResults.zh.md",
-          "sha256": "bf196677d3ad20d6a6a6c92a9bbf8c0737b65a52f2d7afbc9f9cb10dc2971f7b"
+          "sha256": "5578eef3946ec8572b583af6b6654b89509706725e90b390eeacd0f5185d038f"
         }
       }
     },
@@ -8905,7 +8905,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/17-user-program/02-program-execution/ChooseAxis.zh.md",
-          "sha256": "b54e7e1827f1929217c6cdf2ae25bae3fd03d300aae4615ccd2f745dce77840e"
+          "sha256": "1f1d2802c2def1aa70f41332303c53c6a9ddec205f6ef1cdee7bba31e9a10cdf"
         }
       }
     },
@@ -8918,7 +8918,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/17-user-program/02-program-execution/Compare.zh.md",
-          "sha256": "569a970e390b79f16dc67ea8daecc64e0c0fce4f8cd34341120837867fd77fc0"
+          "sha256": "f5e60df7dbd032077572c82f3dcdd569cf886c5ce360d0de576058b78153b936"
         }
       }
     },
@@ -8931,7 +8931,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/17-user-program/02-program-execution/DownloadUPBin.zh.md",
-          "sha256": "d417b9f455967e841297ce67cd5cb7bb4c625b46eb19454abfa5da33ac5337a0"
+          "sha256": "0057ca77727c1965012a841d6be463b8b76601b327ef8517ea4643164bd4a186"
         }
       }
     },
@@ -8957,7 +8957,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/17-user-program/02-program-execution/Math.zh.md",
-          "sha256": "922231d1b1d8eb5c18f148c3703ebec0d16244d96690372dfb08cb743430e51c"
+          "sha256": "bbf830b6faa2ea4a46075c641d038897f5c9274c3755e6004ed2c51cb556fa09"
         }
       }
     },
@@ -8970,7 +8970,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/17-user-program/02-program-execution/PStatInterval.zh.md",
-          "sha256": "03aa4ed3c566635ee256aab7c33f78f5d84488421a695b1f569fd77e5f7b5247"
+          "sha256": "9af31593246e16ad0e906d0cc70e5a18f5a351f48d101ed5954260bdd0578ffa"
         }
       }
     },
@@ -8996,7 +8996,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/17-user-program/02-program-execution/PStatParams.zh.md",
-          "sha256": "cd63f18d618f5bea4dc78412f569ae924b6d43b8f932a197ea1f1f5feb28ce38"
+          "sha256": "9ae4178f5fe7c601c1044f3d0abc8ddcb8e4b998dac00a89a97188d422293014"
         }
       }
     },
@@ -9191,7 +9191,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/17-user-program/02-program-execution/ProgClrCall.zh.md",
-          "sha256": "475f3d8f37b671868b708bf9e428559ef7515bd4fe742499580090aab673d515"
+          "sha256": "8afd46080f22c9a920887950bc9bc937f5a37f6993533ff43b3bae384930669f"
         }
       }
     },
@@ -9451,7 +9451,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/17-user-program/02-program-execution/ProgHaltAll.zh.md",
-          "sha256": "0e35dd1fc339b1d500f002e967869b58a0c42234bbcc621ed8847919c7d6f729"
+          "sha256": "8be6972310b2b15428c223147afe34069193d22ccaf1ac9097ce2cb962f206f5"
         }
       }
     },
@@ -9464,7 +9464,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/17-user-program/02-program-execution/ProgHaltThis.zh.md",
-          "sha256": "b090ecf0004bf6484d0c055679570f9b05df5518438d32658bdf5634d5ce7504"
+          "sha256": "f947ad71c453bdbe63be5113c4b366e7c41ad634fabf421ecd37da9d957e56ff"
         }
       }
     },
@@ -9490,7 +9490,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/17-user-program/02-program-execution/ProgInfo.zh.md",
-          "sha256": "f2ed7cb048759945bb7af65923aa59251430babde71c924bf8de321ffb873c4a"
+          "sha256": "27d27cd44275312b38000ac1cf4f3fc2e6e869e9e46ee7eca4fe1d4e28e381d7"
         }
       }
     },
@@ -9646,7 +9646,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/17-user-program/02-program-execution/ProgSnapSrc.zh.md",
-          "sha256": "1f9927e3a4c7d0eb67e92f96ede731a0bd2335a592cdeebfb95f19568c2036b8"
+          "sha256": "e1622b9ec4e687119b2b589022e37b81744ecc00844521e6a549082a6e932411"
         }
       }
     },
@@ -9698,7 +9698,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/17-user-program/02-program-execution/ProgTask.zh.md",
-          "sha256": "0f12f689c0fd820accee0e82f27af406956fdedfafd3b4b16665bf24cab70a7f"
+          "sha256": "326af8d38ec6dfb05c61ffe84591e6a5c075d9930928f7a46166d403f4076f71"
         }
       }
     },
@@ -9971,7 +9971,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/18-event-generation/EventPulseRes.zh.md",
-          "sha256": "af1dc0bc41bb6734d07dbfa902b14d26c4a9741a8f151ef388dc573299f22858"
+          "sha256": "cf4eb44c82d4376073623bda64946535dae15b9caf8356a35e1d6802b9b7a063"
         }
       }
     },
@@ -9984,7 +9984,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/18-event-generation/EventPulseWid.zh.md",
-          "sha256": "94cec1b9848f94afadbceb1ad2477747f0e6d6c9fbc10dc5a560cb2d834878e2"
+          "sha256": "87742b43f04028704b23ddb1c6bc05041e405240f9a09a3c896e134b09fcbd5c"
         }
       }
     },
@@ -10101,7 +10101,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/18-event-generation/EventTableSel.zh.md",
-          "sha256": "077b6cc16c304e62a24964bb38b1a3a6e2b7b7b63d7708f880960641e6d8b9aa"
+          "sha256": "2b8e1deb20c94c5664a7ae8ea5cdbf39a34ebcce0e48c49b8463e0c87391eb16"
         }
       }
     },
@@ -10153,7 +10153,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/19-data-recording/00-overview.zh.md",
-          "sha256": "b02a6f5fe53756a765f817706d5adac7f7bfb24ef98c0e40d0420934314b8527"
+          "sha256": "a1932f5c36e7c71d3b9e938a22ac6518a6c918be8017502c0f98581bed74b773"
         }
       }
     },
@@ -10348,7 +10348,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/19-data-recording/RecParamA-RecParamB.zh.md",
-          "sha256": "50067b220bcef1659b68213fab12a811685189d60ad8d76d6a9863d7b6467ac1"
+          "sha256": "96524cc21bc026a5c887497409f1a5dd46459beb426e8cdba1cbe00600dd33ba"
         }
       }
     },
@@ -10452,7 +10452,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/19-data-recording/RecTrigTyp.zh.md",
-          "sha256": "d85eb9327fc00c9efcb4cae18a862560b46cf36f06a0ef1760c82b852e8398fc"
+          "sha256": "ea0dd155bc2f0f3b9434438d2938fd6adbf0ddbe4a91bf318d4a602fe1852181"
         }
       }
     },
@@ -10699,7 +10699,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/20-arrays/UserParamD.zh.md",
-          "sha256": "d15b1a083be4c2c8f67f3c4142b876e85e8d54d6c369b8cf47f85973a3632957"
+          "sha256": "9df197edee8506a2caa369bf99123d86643f3af96aa7e09e7509de95e0265c75"
         }
       }
     },
@@ -10712,7 +10712,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/20-arrays/UserParamF.zh.md",
-          "sha256": "19c3d59be2812d9fcc5f542c047598e7ef54ecff7db1bc2e81b40a7c307294de"
+          "sha256": "b80ce9efe6a17f72bb6c98152d4e15579ee168d4bf886ca43759e72a842009c4"
         }
       }
     },
@@ -10777,7 +10777,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/21-engineering-units/AccUnitUnt.zh.md",
-          "sha256": "8a96d1fa8cae74a6fc54fbdd6522c0c7b37c8005c9fcd5d21da492875b435471"
+          "sha256": "fe0c637bbbc968feb70c13ca865f03f207c30a177b4f91f151bf7518cd098e0a"
         }
       }
     },
@@ -10790,7 +10790,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/21-engineering-units/FrcUnitFct.zh.md",
-          "sha256": "8dd25ce7b81011b87eb93cda65cdb00d04ac5ae805247c57fe17ace15347b3da"
+          "sha256": "a14ae4174549d1f6e850f54ce6b1ba4efe9f8eaed69cf483019806fa4dc916a3"
         }
       }
     },
@@ -10803,7 +10803,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/21-engineering-units/FrcUnitGrp.zh.md",
-          "sha256": "49702487e5e40bddbb672e25b960b3c7ee9af62b1657f7582ecbb9dce08277cd"
+          "sha256": "f4b38b9d34f2e0ecbb777deeaf8e6c06bba7c3655c9a87f8adb56f38c9152865"
         }
       }
     },
@@ -10816,7 +10816,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/21-engineering-units/FrcUnitUnt.zh.md",
-          "sha256": "3dcd60dc1cb0938e66e14ce2b482c82cedd4472b759a6564a419dc5c47ad1eda"
+          "sha256": "fcd3d20a902589c8ea322a50bf4160d7ffb0f87800258d38d0266a6a38a69102"
         }
       }
     },
@@ -10868,7 +10868,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/21-engineering-units/PosPDUnitFct.zh.md",
-          "sha256": "95fcca079091eeb5067bb001977a5924fa7119550a62eb6ac2fa891386847540"
+          "sha256": "c3e6182588c3881af7a2a741c3af07873a8cf942db72247bb816872055d65592"
         }
       }
     },
@@ -10881,7 +10881,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/21-engineering-units/PosPDUnitGrp.zh.md",
-          "sha256": "082822568b373967ee89960a1f27ab076bf58ea38b2dbdcc6a013b902e62980b"
+          "sha256": "ea5a574dbbf51e5d4728021787a905695158c6c589b568bd16769e69ff200730"
         }
       }
     },
@@ -10894,7 +10894,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/21-engineering-units/PosPDUnitUnt.zh.md",
-          "sha256": "82f6e468d6db190697c501bb3688e3dc0efe1d72ac5c4fd1b43836843f3b4c5f"
+          "sha256": "0aedd44abc5efa71243496562bc4c9ec655353d489513bd405d4bf197343519a"
         }
       }
     },
@@ -10907,7 +10907,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/21-engineering-units/PosUnitFct.zh.md",
-          "sha256": "9b97fb7e57eec31fcda835ba7ba525903d1f36ad2bf0d17d729cbb22e480c837"
+          "sha256": "2b0c00a86f0cf70cdd0a967ecf102d08a7199ae331278ab2511fae1ef96fc49e"
         }
       }
     },
@@ -10920,7 +10920,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/21-engineering-units/PosUnitGrp.zh.md",
-          "sha256": "e38a1b0422ba00ad4ab1cb4f06f4e09033db90d61cdbea9b2266bb41563afc67"
+          "sha256": "8c715c745f33a7b5430207bbd4095517ac1b866dbb31aa440dce39519399fed2"
         }
       }
     },
@@ -10933,7 +10933,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/21-engineering-units/PosUnitUnt.zh.md",
-          "sha256": "474bc389f50a7170ff6312a637e9c4b19078ee71075f9a322970bce7149ed1f1"
+          "sha256": "6cf8c6d62a90c4f91c3c12a166396db81cc044f0b0960febd2184328fd2318be"
         }
       }
     },
@@ -10946,7 +10946,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/21-engineering-units/UserUnitsEn.zh.md",
-          "sha256": "e8a9e7cf5cea450a2d3328e363c5fc5efc5147d269d10619c6315c1f27b65c3f"
+          "sha256": "53711bd294ac5751058ca337639e8fe3e3137d7edd4d200763a7018494d32ec9"
         }
       }
     },
@@ -10959,7 +10959,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/21-engineering-units/VelAuxUnitFct.zh.md",
-          "sha256": "65c1952e31177a47d5a1398cd554d48161e9c6412816068cd6a07396c5b5965f"
+          "sha256": "28df182ab1566ee97bc4417ad360a67fec46d4c4e434e405eb3adf19d1885609"
         }
       }
     },
@@ -10972,7 +10972,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/21-engineering-units/VelAuxUnitGrp.zh.md",
-          "sha256": "8e088f231228a24f3877e074957bb6b8e0127b484dd6cbe53cdb58b83af6af38"
+          "sha256": "3b4d64f0e61be0ac0e5c85b728fa63ba462f56b40e904b33d0379f7e691aa6fb"
         }
       }
     },
@@ -10985,7 +10985,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/21-engineering-units/VelAuxUnitUnt.zh.md",
-          "sha256": "c8e8b6e98cb1a223a2ed61cf9bed9b5bf2a664aee6de53fac17e072492537448"
+          "sha256": "8b90b9867cf674c2d2107a9825d5135004094aed962d80a69f7ddf7a5cf1f93c"
         }
       }
     },
@@ -10998,7 +10998,7 @@
       "variants": {
         "zh-CN": {
           "path": "02-keywords/21-engineering-units/VelPDUnitFct.zh.md",
-          "sha256": "be472e5d465b4c5a31f12913a72122be71b70ccc74e967f5acf1ae259baff3f6"
+          "sha256": "b689a00ff0798467511dfd4d3f63ddaf577b5a44b2780c12851165322213bd0e"
         }
       }
     },
@@ -11232,7 +11232,7 @@
       "variants": {
         "zh-CN": {
           "path": "03-special-features/auto-gain/AutoGMaxLen.zh.md",
-          "sha256": "11adf83b330567fa3ef569ffe3c7cbae92ca4833f08f8d0c37a61ee94238813f"
+          "sha256": "bc64ae644ddbde1a921193bfa1b5ce06f1b6343c3eb3c46a108ef171ee04d85f"
         }
       }
     },
@@ -11310,7 +11310,7 @@
       "variants": {
         "zh-CN": {
           "path": "03-special-features/auto-gain/AutoGOn.zh.md",
-          "sha256": "6d0fd15a7f91b43eba6b8e9ffa92f7b2a3ca0abca3902707a816b627c0bab9a4"
+          "sha256": "f385db3e22fae7a2162be167c8daf02d73e886755b0635de7251cff53b49308f"
         }
       }
     },
@@ -11349,7 +11349,7 @@
       "variants": {
         "zh-CN": {
           "path": "03-special-features/auto-gain/AutoGSavPer.zh.md",
-          "sha256": "074fe5996b3342c1efc11d18f9ef33a1c2a49f87be190ae13bede93deee18e78"
+          "sha256": "2f3c9361d823be5af09ffa6d80270aff94ea2396bb6903d6aee702013f021ef3"
         }
       }
     },
@@ -11622,7 +11622,7 @@
       "variants": {
         "zh-CN": {
           "path": "03-special-features/motor-learning/MotorLearnPl.zh.md",
-          "sha256": "a057c4c3ef9237d3ab60e7f9b80f76415b2bbe3e07b3feb6afa57f021b168c50"
+          "sha256": "1809bad492d796d4601054928722988742cfb9354f42740865d3160513eb4de8"
         }
       }
     },
@@ -11700,7 +11700,7 @@
       "variants": {
         "zh-CN": {
           "path": "03-special-features/spring-compensation/SpringPHigh.zh.md",
-          "sha256": "4cf0c9fd094a293c8f807fff65fb491eedd7d8a8def7b22d131516db38e6f74b"
+          "sha256": "531360a453f3f303b903b83be310fa893954a8f3189c63a4d3ecad422660fc07"
         }
       }
     },
@@ -11765,7 +11765,7 @@
       "variants": {
         "zh-CN": {
           "path": "03-special-features/upm/UPMCalcCoeff.zh.md",
-          "sha256": "a5c9b236e9c577fcbbe7bd9c0f85f655326668d417fb27f762a4f94a5f926868"
+          "sha256": "90eeb485b09b2254b5c43e7bed9bc4df2e369a19c4aa7bd32ccc44494ed9157a"
         }
       }
     },
@@ -11778,7 +11778,7 @@
       "variants": {
         "zh-CN": {
           "path": "03-special-features/upm/UPMDistFilter.zh.md",
-          "sha256": "07a10003b400ca7ca037dcac143b4b8f6663dc200298892567f7737993a71204"
+          "sha256": "c0d56a56660cd5808eb536524cbc781c4bfa3a0e85f5f6158298f991b84e41fd"
         }
       }
     },
@@ -11856,7 +11856,7 @@
       "variants": {
         "zh-CN": {
           "path": "03-special-features/upm/UPMRptMotion.zh.md",
-          "sha256": "b5b2862e93617d12d7393b5e2216ee3f50beaee498c71864c83c060a5b66938c"
+          "sha256": "44bfc451e5acb739a862b887a09944f0d6f8945a5892bec2c33f6b54a192e02f"
         }
       }
     },
@@ -11934,7 +11934,7 @@
       "variants": {
         "zh-CN": {
           "path": "03-special-features/user-mode/UserDynParam.zh.md",
-          "sha256": "88c70d83aae224b4df3deb6a0c74d1790bff76026ebf50eafc7d41a49f68d3af"
+          "sha256": "aaf6b779c644f12924920cfc9e292df6f6ce195b1e3ae042cb534afa4f187983"
         }
       }
     },
@@ -11960,7 +11960,7 @@
       "variants": {
         "zh-CN": {
           "path": "04-error-codes/controller-error-codes.zh.md",
-          "sha256": "1fcb9dbc8d8bd0b5fb07ff80e5c0e21383f0e3a120cfc7531ad80b0dca2e2d4e"
+          "sha256": "9de4d0d69dd524d83e387d36176bcd80ecdec761a0a4e6195abd64849b8566b2"
         }
       }
     },
@@ -12064,7 +12064,7 @@
       "variants": {
         "zh-CN": {
           "path": "06-appendix/customisable-filter-filtdef.zh.md",
-          "sha256": "0d27a403d3041edd8df37fd42d55c385423c797f14b11dd054ebd8a712e1d379"
+          "sha256": "b0bab5b4ed83b7e53dd12a136bcbb2b9b337bba33a9d3e428bf894b4ddbffa32"
         }
       }
     },

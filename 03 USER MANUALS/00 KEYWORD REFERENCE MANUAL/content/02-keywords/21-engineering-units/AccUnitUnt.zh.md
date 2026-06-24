@@ -35,7 +35,7 @@ language: zh-CN
 
 `AccUnitUnt` 存储**加速度工程单位的名称**——与 [AccUnitFct](AccUnitFct.md) 中的比例系数配套使用的文本标签，例如 `mm/s2` 或 `deg/s2`。它用于说明加速度组（参见 [AccUnitGrp](AccUnitGrp.md)）当前所使用的单位。该标签仅起说明作用：其与数值一同显示，但本身不执行任何换算——数值换算由 [AccUnitFct](AccUnitFct.md) 设置。
 
-本关键字仅在 central-i v5 及以上版本中可用。
+本关键字仅在 central-i v5 中可用。
 
 ## 工作原理
 

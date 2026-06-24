@@ -57,8 +57,8 @@ language: zh-CN
 | 2 | 当源值等于 RecTrigVal 时激活 |
 | 3 | 当源值不等于 RecTrigVal 时激活 |
 | 4 | 当源值小于 RecTrigVal 时激活 |
-| 5 | 当源值超过 RecTrigVal 的上升沿时激活 |
-| 6 | 当源值跌破 RecTrigVal 的下降沿时激活 |
+| 5 | 当源值上升沿越过 RecTrigVal 时激活 |
+| 6 | 当源值下降沿跌破 RecTrigVal 时激活 |
 | 7 | 仅手动触发（仅由 [RecTrigForce](RecTrigForce.md) 激活；无需触发源） |
 | 8 | 当源值与记录开始时的值不同时激活 |
 | 9 | 当源值在范围（RecTrigVal, RecTrigValMax）内时激活 |

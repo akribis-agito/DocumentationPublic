@@ -61,7 +61,7 @@ ALAmpFullScale=1     ; 1.2 A corresponds to full-scale (10 V) output
 ALAmpFullScale      ; query the current selection
 ```
 
-## 另请参阅
+## 参见
 
 - [AmpType](AmpType.md) — 必须为 4（保留的线性驱动器）此关键字才适用
 - [AAmpFullScale](AAmpFullScale.md) — 外部驱动器模式的满量程缩放

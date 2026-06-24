@@ -49,7 +49,7 @@ language: zh-CN
 ADontDownload       ; check whether firmware download is currently blocked
 ```
 
-## 另请参见
+## 另请参阅
 
 - [DownloadFW](../02-operation/DownloadFW.md) / [DownloadFPGA](../02-operation/DownloadFPGA.md) — 此标志所门控的固件/FPGA 下载命令
 - [UnitStat](UnitStat.md) — 单元硬件/固件健康状态

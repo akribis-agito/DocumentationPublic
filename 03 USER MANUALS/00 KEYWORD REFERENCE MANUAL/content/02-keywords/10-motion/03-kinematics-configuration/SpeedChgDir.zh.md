@@ -46,7 +46,7 @@ language: zh-CN
 | 0 | 参考**升高至**超过 `SpeedChgPos`（等待更高位置）。用于正向运动的轴。 |
 | 1 | 参考**降低至**低于 `SpeedChgPos`（等待更低位置）。用于反向运动的轴。 |
 
-将 `SpeedChgDir` 设置为与轴经过 `SpeedChgPos` 时的运动方向一致；如果设置到错误的一侧，越界条件将永远不满足，也不会发生更改。完整机制和时序图参见 [SpeedChgOn](SpeedChgOn.md)。
+将 `SpeedChgDir` 设置为与轴经过 `SpeedChgPos` 时的运动方向一致；如果设置到错误的一侧，越过条件将永远不满足，也不会发生更改。完整机制和时序图参见 [SpeedChgOn](SpeedChgOn.md)。
 
 例如，当正向点动且你希望在越过 `SpeedChgPos = 80000` 后减速时，设置 `SpeedChgDir = 0`（在正向越界时触发）。对于应在越过 `SpeedChgPos = 20000` 后加速的反向点动，设置 `SpeedChgDir = 1`。
 

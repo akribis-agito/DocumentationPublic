@@ -52,7 +52,7 @@ language: zh-CN
 ## 示例
 
 ```text
-APStatParams[1]=<待流式传输参数的复合 CAN 代码>    ; 第一个流式传输参数
+APStatParams[1]=<complex CAN code of parameter to stream>    ; 第一个流式传输参数
 APStatParams[2]=0    ; 将第二个槽位置为未使用
 APStatParams         ; 读取完整的流式传输参数列表
 ```

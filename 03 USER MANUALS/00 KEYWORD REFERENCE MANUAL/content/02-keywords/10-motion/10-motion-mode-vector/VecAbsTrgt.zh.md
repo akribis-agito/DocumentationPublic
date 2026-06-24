@@ -48,7 +48,7 @@ language: zh-CN
 
 矢量运动启动时，控制器解析每个成员轴的起点和终点（来自其绝对目标或相对目标），并一次性计算路径总长度，存储为 `VecAbsTrgt`。计算方式取决于几何类型（[VecType](VecType.md)）：
 
-- **直线**（[VecType](VecType.md) = 0）：直线距离，即各轴行程距离的均方根。例如，一个轴移动 3000、另一个轴移动 4000，则 `VecAbsTrgt = 5000`。
+- **直线**（[VecType](VecType.md) = 0）：直线距离，即各轴行程距离的平方和之平方根。例如，一个轴移动 3000、另一个轴移动 4000，则 `VecAbsTrgt = 5000`。
 - **圆弧**（[VecType](VecType.md) = 1）：弧长，等于扫过角度乘以半径。扫过角度从起始角按 [VecArcDir](VecArcDir.md) 设定的方向运行到终止角，并加上 [VecNumCircles](VecNumCircles.md) 所请求的整圈数（每圈 2π）。半径由 [VecArcCenter](VecArcCenter.md) 导出。
 
 `VecAbsTrgt` 是路径坐标 [VecPosRef](VecPosRef.md) 的终值：路径速度曲线将 `VecPosRef` 从 0 斜坡上升至 `VecAbsTrgt`，减速预判使用剩余距离（`VecAbsTrgt − VecPosRef`）来规划制动时机。该值在运动过程中固定不变——运动中修改成员轴目标不会改变它。
