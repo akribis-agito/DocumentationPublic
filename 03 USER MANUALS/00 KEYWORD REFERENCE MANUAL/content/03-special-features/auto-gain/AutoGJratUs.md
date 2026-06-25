@@ -1,5 +1,6 @@
 ---
 keyword: AutoGJratUs
+summary: Sets the user-supplied load-to-motor inertia ratio, expressed as a percentage, that the automatic gain tuning algorithm uses in place of its own estimate.
 availability:
   standalone:
   - v4

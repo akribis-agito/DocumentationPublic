@@ -27,7 +27,7 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 将自动增益整定算法计算所得的增益应用至当前伺服控制器参数。
+summary: 将自动增益整定算法计算所得的增益应用至当前活动伺服控制器参数的指令。
 ---
 # AutoGCopy
 

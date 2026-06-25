@@ -1,5 +1,6 @@
 ---
 keyword: AutoGDownSm
+summary: Sets the downsampling exponent applied to the motion data collected during auto-gain identification.
 availability:
   standalone:
   - v4

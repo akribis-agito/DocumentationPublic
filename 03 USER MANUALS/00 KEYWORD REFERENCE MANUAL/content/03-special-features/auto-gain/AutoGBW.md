@@ -1,5 +1,6 @@
 ---
 keyword: AutoGBW
+summary: Sets the target closed-loop bandwidth in Hz for the automatic gain tuning algorithm.
 availability:
   standalone:
   - v4

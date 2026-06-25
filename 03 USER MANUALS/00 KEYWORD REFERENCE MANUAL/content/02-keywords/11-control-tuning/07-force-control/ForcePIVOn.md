@@ -1,5 +1,6 @@
 ---
 keyword: ForcePIVOn
+summary: Selects the force-control structure.
 availability:
   standalone:
   - v4

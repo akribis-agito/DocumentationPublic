@@ -1,5 +1,6 @@
 ---
 keyword: AutoGCopy
+summary: A command that applies the gains computed by the automatic gain tuning algorithm to the active servo controller parameters.
 availability:
   standalone:
   - v4

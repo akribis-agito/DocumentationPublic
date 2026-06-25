@@ -1,5 +1,6 @@
 ---
 keyword: ForceRefFOn
+summary: Enables the force-command reference filter.
 availability:
   standalone:
   - v4

@@ -1,5 +1,6 @@
 ---
 keyword: ScheduleGains
+summary: Read-only array reporting the tuning gains the control loops are using right now, after gain scheduling has selected the active set.
 availability:
   standalone:
   - v4

@@ -1,5 +1,6 @@
 ---
 keyword: VelFFW
+summary: 速度前馈增益，作用于位置参考的一阶导数。
 availability:
   standalone:
   - v4

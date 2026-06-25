@@ -1,5 +1,6 @@
 ---
 keyword: VelKi
+summary: Integral gain of the velocity loop — accumulates the scaled velocity-controller output, with internal anti-windup.
 availability:
   standalone:
   - v4

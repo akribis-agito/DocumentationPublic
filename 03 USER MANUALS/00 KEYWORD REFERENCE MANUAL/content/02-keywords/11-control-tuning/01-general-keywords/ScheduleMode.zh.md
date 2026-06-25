@@ -27,7 +27,7 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 选择增益调度算法——即决定五个整定增益组中哪一组在每个时刻有效的规则。
+summary: 选择增益调度算法，即决定五个整定增益组中哪一组在每个时刻有效的规则。
 ---
 # ScheduleMode
 

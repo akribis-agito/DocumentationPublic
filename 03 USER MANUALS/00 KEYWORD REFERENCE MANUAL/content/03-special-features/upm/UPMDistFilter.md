@@ -1,5 +1,6 @@
 ---
 keyword: UPMDistFilter
+summary: Sets the cutoff frequency, in Hz, of the low-pass filter on the acceleration signal used by the UPM disturbance rejection loop.
 availability:
   standalone:
   - v4

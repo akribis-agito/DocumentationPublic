@@ -1,5 +1,6 @@
 ---
 keyword: DualEncSwapOn
+summary: Switch for pseudo dual-loop control.
 availability:
   standalone: []
   central-i:

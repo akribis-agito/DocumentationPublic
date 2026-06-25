@@ -1,5 +1,6 @@
 ---
 keyword: UPMDistReject
+summary: Sets the rejection gain of the UPM disturbance rejection loop, controlling how aggressively the estimated disturbance is cancelled.
 availability:
   standalone:
   - v4

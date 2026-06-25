@@ -1,5 +1,6 @@
 ---
 keyword: AutoGOn
+summary: Enables the automatic gain tuning process.
 availability:
   standalone:
   - v4

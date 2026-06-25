@@ -30,7 +30,7 @@ overrides:
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 存储自动电流环 PI 整定所用参考理论电流响应的数组参数。
+summary: 存储自动电流环 PI 整定所用理论电流环响应的数组参数，用作计算代价函数的参考。
 ---
 # TheorCurArray
 

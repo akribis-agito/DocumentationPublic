@@ -1,5 +1,6 @@
 ---
 keyword: ForceGain
+summary: Proportional gain of the force-loop PID controller.
 availability:
   standalone:
   - v4

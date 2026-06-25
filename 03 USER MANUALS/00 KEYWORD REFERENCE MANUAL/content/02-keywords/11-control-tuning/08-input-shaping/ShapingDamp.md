@@ -1,5 +1,6 @@
 ---
 keyword: ShapingDamp
+summary: Damping ratio of each resonance suppressed by the input shaper.
 availability:
   standalone:
   - v4

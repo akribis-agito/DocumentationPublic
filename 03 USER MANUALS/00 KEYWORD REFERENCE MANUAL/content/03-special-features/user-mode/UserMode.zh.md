@@ -27,7 +27,7 @@ overrides: {}
 last_updated: '2026-05-25'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 用于激活控制器内特殊算法的参数；保持为 0 可避免意外启用未记录的专用功能。
+summary: UserMode 是用于激活控制器内特殊算法的参数。
 ---
 # UserMode
 

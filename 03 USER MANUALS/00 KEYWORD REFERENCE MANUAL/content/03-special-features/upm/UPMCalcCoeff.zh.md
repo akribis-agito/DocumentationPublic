@@ -25,7 +25,7 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 根据当前被控对象模型（PlantModel）和配置的滤波器范围（UPMRptRange）重新计算 UPM 重复补偿系数。
+summary: 重新计算 UPM 重复补偿系数，依据当前被控对象模型（PlantModel）和已配置的滤波器范围（UPMRptRange）。
 ---
 # UPMCalcCoeff
 

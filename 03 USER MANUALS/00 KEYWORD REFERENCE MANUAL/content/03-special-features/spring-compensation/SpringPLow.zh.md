@@ -27,7 +27,7 @@ overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 设置弹簧补偿区域的位置下边界（用户单位），同时作为位置比例项的参考零点。
+summary: 设置弹簧补偿区域的位置下边界（用户单位）。
 ---
 # SpringPLow
 

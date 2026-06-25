@@ -1,5 +1,6 @@
 ---
 keyword: UPMDistOn
+summary: Enables the UPM disturbance rejection function.
 availability:
   standalone:
   - v4

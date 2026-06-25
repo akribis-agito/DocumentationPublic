@@ -25,7 +25,7 @@ overrides: {}
 last_updated: '2026-05-28'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 将增益调度与轴的龙门控制状态配对，选择调度作用于标准整定增益还是龙门整定增益。
+summary: 将增益调度与轴的龙门控制状态配对，用于选择调度作用于标准整定增益还是龙门整定增益。
 ---
 # ScheduleGntry
 

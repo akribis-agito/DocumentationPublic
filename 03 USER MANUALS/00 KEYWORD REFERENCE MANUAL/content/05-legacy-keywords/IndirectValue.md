@@ -1,5 +1,6 @@
 ---
 keyword: IndirectValue
+summary: Holds the source value for the indirect access operation.
 availability:
   standalone:
   - v4

@@ -1,5 +1,6 @@
 ---
 keyword: AutoGAccTh
+summary: Sets the acceleration threshold in user units per second squared below which motion data is excluded from the auto-gain identification process.
 availability:
   standalone:
   - v4

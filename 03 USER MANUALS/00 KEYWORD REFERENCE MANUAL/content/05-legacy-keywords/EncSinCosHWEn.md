@@ -1,5 +1,6 @@
 ---
 keyword: EncSinCosHWEn
+summary: Selects which encoder source feeds the hardware lock/event capture mechanism for the axis.
 availability:
   standalone:
   - v4

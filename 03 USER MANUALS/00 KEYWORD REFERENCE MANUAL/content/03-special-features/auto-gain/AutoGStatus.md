@@ -1,5 +1,6 @@
 ---
 keyword: AutoGStatus
+summary: A read-only array (indexes 1 to 50) that reports the working values of the automatic gain tuning process for the axis.
 availability:
   standalone:
   - v4

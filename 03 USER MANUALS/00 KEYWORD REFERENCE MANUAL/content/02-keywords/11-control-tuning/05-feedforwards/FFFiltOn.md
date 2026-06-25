@@ -1,5 +1,6 @@
 ---
 keyword: FFFiltOn
+summary: Enables or bypasses the feedforward filter.
 availability:
   standalone: []
   central-i:

@@ -1,5 +1,6 @@
 ---
 keyword: ForceFiltOn
+summary: Enables each of the two force-loop output filters.
 availability:
   standalone:
   - v4

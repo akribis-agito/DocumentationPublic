@@ -1,6 +1,6 @@
 ---
 keyword: HomeStat
-summary: Read-only bit-field reporting the homing status of the axis.
+summary: Read-only state of the home digital input for the axis.
 availability:
   standalone:
   - v4

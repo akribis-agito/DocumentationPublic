@@ -27,7 +27,7 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 设置 UPM 扰动抑制环路中加速度反馈低通滤波器的截止频率（Hz）。
+summary: 设置 UPM 扰动抑制环路中加速度信号低通滤波器的截止频率（Hz）。
 ---
 # UPMDistFilter
 

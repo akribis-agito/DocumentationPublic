@@ -1,5 +1,6 @@
 ---
 keyword: SpringTableGp
+summary: A reserved, not-yet-implemented keyword, expressed in user units, that is associated with the (also not-yet-implemented) [SpringTable](SpringTable.md).
 availability:
   standalone:
   - v4

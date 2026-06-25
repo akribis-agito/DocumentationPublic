@@ -27,7 +27,7 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 自动模式电机学习完成后报告的极对数（旋转电机）或固定值 1（直线电机）。
+summary: 自动模式电机学习过程完成后（MotorLearnSta = 3）报告的只读结果。
 ---
 # MotorLearnPl
 

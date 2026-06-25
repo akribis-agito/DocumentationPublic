@@ -1,5 +1,6 @@
 ---
 keyword: MotorLearnSta
+summary: A read-only parameter that reports the current status of the motor learning process.
 availability:
   standalone:
   - v4

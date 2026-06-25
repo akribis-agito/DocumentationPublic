@@ -27,7 +27,7 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 选择为该轴硬件锁定/事件捕获机制提供信号的编码器源；范围 0..7，默认值 0；仅在轴编码器配置为正弦/余弦类型时生效。
+summary: 选择为该轴硬件锁定/事件捕获机制提供信号的编码器源。
 ---
 # EncSinCosHWEn
 

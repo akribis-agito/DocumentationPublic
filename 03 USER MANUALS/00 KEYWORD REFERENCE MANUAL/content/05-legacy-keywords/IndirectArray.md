@@ -1,5 +1,6 @@
 ---
 keyword: IndirectArray
+summary: Selects the target array to be accessed indirectly.
 availability:
   standalone:
   - v4

@@ -1,5 +1,6 @@
 ---
 keyword: AutoGMask
+summary: An array that specifies which servo gain parameters the auto-gain algorithm is allowed to update.
 availability:
   standalone:
   - v4

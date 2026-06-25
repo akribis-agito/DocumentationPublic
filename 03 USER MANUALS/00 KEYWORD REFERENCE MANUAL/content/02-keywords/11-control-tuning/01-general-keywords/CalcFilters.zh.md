@@ -1,5 +1,6 @@
 ---
 keyword: CalcFilters
+summary: 重新计算可定制控制环滤波器内部系数的指令，系数由各定义关键字确定。
 availability:
   standalone:
   - v4

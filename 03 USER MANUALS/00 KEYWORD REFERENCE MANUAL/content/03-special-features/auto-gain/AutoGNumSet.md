@@ -1,5 +1,6 @@
 ---
 keyword: AutoGNumSet
+summary: Selects which gain (control) set the auto-gain algorithm writes its calculated parameters into.
 availability:
   standalone:
   - v4

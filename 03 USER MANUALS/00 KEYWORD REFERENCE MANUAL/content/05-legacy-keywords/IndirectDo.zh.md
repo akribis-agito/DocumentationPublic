@@ -27,7 +27,7 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 执行间接数组写操作的命令。
+summary: 执行间接数组写操作的指令。
 ---
 # IndirectDo
 

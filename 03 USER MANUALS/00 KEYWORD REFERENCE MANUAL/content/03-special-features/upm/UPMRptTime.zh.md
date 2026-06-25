@@ -27,7 +27,7 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 设置 UPM 重复补偿算法的记录"尾部"时间（毫秒）。
+summary: 设置 UPM 重复补偿算法记录"尾部"的时长（毫秒）。
 ---
 # UPMRptTime
 

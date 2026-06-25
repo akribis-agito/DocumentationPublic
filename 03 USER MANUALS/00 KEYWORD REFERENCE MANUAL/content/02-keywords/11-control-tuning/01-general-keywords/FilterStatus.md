@@ -1,5 +1,6 @@
 ---
 keyword: FilterStatus
+summary: Per-filter status word reporting which customisable filters have pending definition changes and whether their last calculation found a problem.
 availability:
   standalone: []
   central-i:

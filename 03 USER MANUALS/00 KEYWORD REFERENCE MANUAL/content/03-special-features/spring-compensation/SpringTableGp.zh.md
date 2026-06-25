@@ -27,7 +27,7 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 保留的、尚未实现的关键字，表示相邻 SpringTable 条目之间的位置间距（用户单位），当前对弹簧补偿无效。
+summary: 保留的、尚未实现的关键字（用户单位），与同样尚未实现的 [SpringTable](SpringTable.md) 关联。
 ---
 # SpringTableGp
 

@@ -1,5 +1,6 @@
 ---
 keyword: FrictionComp
+summary: Friction compensation is activated when the user variable `FrictionComp` is non-zero. This parameter always takes positive values.
 availability:
   standalone:
   - v4

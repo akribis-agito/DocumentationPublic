@@ -1,5 +1,6 @@
 ---
 keyword: VelFiltDef
+summary: Defines the type and parameters of each velocity-loop filter.
 availability:
   standalone:
   - v4

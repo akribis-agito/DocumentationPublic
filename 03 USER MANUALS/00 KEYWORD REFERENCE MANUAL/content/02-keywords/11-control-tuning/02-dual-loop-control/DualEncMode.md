@@ -1,5 +1,6 @@
 ---
 keyword: DualEncMode
+summary: Activates range-limited dual-loop control.
 availability:
   standalone: []
   central-i:

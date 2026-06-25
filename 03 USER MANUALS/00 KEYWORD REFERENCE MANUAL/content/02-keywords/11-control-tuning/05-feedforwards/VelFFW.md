@@ -1,5 +1,6 @@
 ---
 keyword: VelFFW
+summary: Velocity feedforward gain, applied to the first derivative of the position reference.
 availability:
   standalone:
   - v4

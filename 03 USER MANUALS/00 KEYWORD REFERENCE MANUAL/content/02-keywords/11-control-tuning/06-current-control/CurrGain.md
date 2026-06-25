@@ -1,5 +1,6 @@
 ---
 keyword: CurrGain
+summary: Proportional gain of the current loop.
 availability:
   standalone:
   - v4

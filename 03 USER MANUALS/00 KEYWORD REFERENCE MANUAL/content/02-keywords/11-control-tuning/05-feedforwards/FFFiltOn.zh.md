@@ -1,5 +1,6 @@
 ---
 keyword: FFFiltOn
+summary: 启用或旁路前馈滤波器。
 availability:
   standalone: []
   central-i:

@@ -1,5 +1,6 @@
 ---
 keyword: SpringTable
+summary: A reserved, not-yet-implemented array keyword (size 41, with usable indices 1 through 40).
 availability:
   standalone:
   - v4

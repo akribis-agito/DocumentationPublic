@@ -1,5 +1,6 @@
 ---
 keyword: AutoGMinRat
+summary: Sets the lower bound of the acceptable load-to-motor inertia ratio (in percent) used by the auto-gain algorithm to validate identification results.
 availability:
   standalone:
   - v4

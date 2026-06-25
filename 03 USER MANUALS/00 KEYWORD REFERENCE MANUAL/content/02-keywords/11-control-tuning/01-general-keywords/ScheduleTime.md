@@ -1,5 +1,6 @@
 ---
 keyword: ScheduleTime
+summary: The dwell time, in milliseconds, used by the time-based gain-scheduling modes to delay the switch back to the steady-state gain set.
 availability:
   standalone:
   - v4

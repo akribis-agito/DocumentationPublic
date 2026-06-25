@@ -1,5 +1,6 @@
 ---
 keyword: TheorCurArray
+summary: An array parameter that stores the theoretical current-loop response used by the automatic current-loop PI tuning as a reference for computing the cost function.
 availability:
   standalone:
   - v4

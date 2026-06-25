@@ -1,5 +1,6 @@
 ---
 keyword: BurnInMode
+summary: Enables the burn-in motion function, which continuously rotates the open-loop commutation angle to stress-test the system over extended periods.
 availability:
   standalone:
   - v4

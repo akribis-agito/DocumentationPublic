@@ -1,5 +1,6 @@
 ---
 keyword: AutoGSavPer
+summary: Sets the recurrence interval, in minutes, of the auto-gain update cycle.
 availability:
   standalone:
   - v4

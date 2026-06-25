@@ -31,7 +31,7 @@ overrides:
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 只读数组，报告增益调度选定当前激活增益组后，控制环正在使用的整定增益。
+summary: 只读数组，报告增益调度选定当前激活增益组后控制环正在使用的整定增益。
 ---
 # ScheduleGains
 

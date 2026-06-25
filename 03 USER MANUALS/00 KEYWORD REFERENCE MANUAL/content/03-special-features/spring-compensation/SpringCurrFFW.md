@@ -1,5 +1,6 @@
 ---
 keyword: SpringCurrFFW
+summary: Sets a constant, position-independent feedforward current, in microamps, that is added by the spring compensation.
 availability:
   standalone:
   - v4

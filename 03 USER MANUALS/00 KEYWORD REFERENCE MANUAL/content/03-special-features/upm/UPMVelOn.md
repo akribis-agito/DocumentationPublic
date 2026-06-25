@@ -1,5 +1,6 @@
 ---
 keyword: UPMVelOn
+summary: Enables the UPM anti-cogging compensation function, which applies an angle-indexed correction table (UPMVelTable) to the current reference to cancel cogging torque.
 availability:
   standalone:
   - v4

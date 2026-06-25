@@ -27,7 +27,7 @@ overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 用于双环控制中速度环信号单位匹配的缩放系数。
+summary: 双环控制中对速度环信号进行单位匹配的缩放系数。
 ---
 # DualLoopFact
 

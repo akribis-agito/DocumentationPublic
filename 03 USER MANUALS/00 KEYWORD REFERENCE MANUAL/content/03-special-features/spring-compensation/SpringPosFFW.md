@@ -1,5 +1,6 @@
 ---
 keyword: SpringPosFFW
+summary: Sets the position feedforward gain that scales the position-dependent spring correction current added to the control output.
 availability:
   standalone:
   - v4

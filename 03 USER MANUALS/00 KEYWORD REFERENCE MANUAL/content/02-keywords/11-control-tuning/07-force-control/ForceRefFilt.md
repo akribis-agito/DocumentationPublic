@@ -1,5 +1,6 @@
 ---
 keyword: ForceRefFilt
+summary: Cut-off frequency of the force-command reference filter.
 availability:
   standalone:
   - v4

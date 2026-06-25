@@ -1,5 +1,6 @@
 ---
 keyword: PosFiltOn
+summary: Enables or bypasses the two position-loop filters.
 availability:
   standalone:
   - v4

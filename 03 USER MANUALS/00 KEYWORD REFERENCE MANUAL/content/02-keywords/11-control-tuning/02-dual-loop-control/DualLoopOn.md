@@ -1,5 +1,6 @@
 ---
 keyword: DualLoopOn
+summary: Enables and configures dual-loop control.
 availability:
   standalone:
   - v4

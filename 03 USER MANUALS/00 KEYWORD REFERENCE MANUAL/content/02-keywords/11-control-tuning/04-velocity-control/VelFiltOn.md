@@ -1,5 +1,6 @@
 ---
 keyword: VelFiltOn
+summary: Enables or bypasses the velocity-loop filters that act on the velocity-PI output.
 availability:
   standalone:
   - v4

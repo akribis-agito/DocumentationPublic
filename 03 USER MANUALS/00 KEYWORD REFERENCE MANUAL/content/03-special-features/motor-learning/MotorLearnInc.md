@@ -1,5 +1,6 @@
 ---
 keyword: MotorLearnInc
+summary: Sets the commutation-angle step size used by the motor-learning routine.
 availability:
   standalone:
   - v4

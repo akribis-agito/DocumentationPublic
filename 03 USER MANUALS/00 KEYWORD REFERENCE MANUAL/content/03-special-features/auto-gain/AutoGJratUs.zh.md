@@ -27,7 +27,7 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 设置用户提供的负载与电机惯量比（百分比），供自动增益整定算法使用。
+summary: 设置用户提供的负载与电机惯量比（百分比），供自动增益整定算法以替代其自身估算值使用。
 ---
 # AutoGJratUs
 

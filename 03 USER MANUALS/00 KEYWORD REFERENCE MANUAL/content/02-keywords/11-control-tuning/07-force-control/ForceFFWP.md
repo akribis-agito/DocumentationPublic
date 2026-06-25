@@ -1,5 +1,6 @@
 ---
 keyword: ForceFFWP
+summary: Position-wise force feedforward gain (force-over-PIV control only).
 availability:
   standalone:
   - v4

@@ -29,7 +29,7 @@ overrides:
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 将速度范围划分为若干区间，用于基于速度的增益调度的速度阈值数组。
+summary: 将速度范围划分为若干区间、用于基于速度的增益调度的速度阈值数组。
 ---
 # ScheduleVel
 

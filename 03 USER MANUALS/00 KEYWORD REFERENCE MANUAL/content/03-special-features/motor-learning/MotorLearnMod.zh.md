@@ -27,7 +27,7 @@ overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 电机学习例程的运行模式选择（自动或手动）。
+summary: 选择电机学习例程所使用的模式，该例程以开环方式驱动电机，以测量极对数和编码器分辨率。
 ---
 # MotorLearnMod
 

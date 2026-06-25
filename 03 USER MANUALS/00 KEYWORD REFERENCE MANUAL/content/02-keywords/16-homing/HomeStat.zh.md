@@ -1,6 +1,6 @@
 ---
 keyword: HomeStat
-summary: 只读位域，报告轴的回零状态。
+summary: 轴的原点数字量输入的只读状态。
 language: zh-CN
 availability:
   standalone:

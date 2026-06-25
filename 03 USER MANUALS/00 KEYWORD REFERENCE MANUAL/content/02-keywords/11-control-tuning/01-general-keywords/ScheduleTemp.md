@@ -1,5 +1,6 @@
 ---
 keyword: ScheduleTemp
+summary: Motor-temperature thresholds that divide the temperature range into bands for temperature-based gain scheduling.
 availability:
   standalone:
   - v4

@@ -1,5 +1,6 @@
 ---
 keyword: UPMRptTime
+summary: Sets the recording "tail" of the UPM repetitive compensation algorithm, in milliseconds.
 availability:
   standalone:
   - v4

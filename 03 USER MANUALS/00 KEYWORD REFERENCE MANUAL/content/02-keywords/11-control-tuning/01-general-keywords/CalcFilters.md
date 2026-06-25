@@ -1,5 +1,6 @@
 ---
 keyword: CalcFilters
+summary: Command that recalculates the internal coefficients of the customisable loop filters from their definition keywords.
 availability:
   standalone:
   - v4

@@ -1,5 +1,6 @@
 ---
 keyword: ForceFFW
+summary: Current-wise force feedforward gain.
 availability:
   standalone:
   - v4

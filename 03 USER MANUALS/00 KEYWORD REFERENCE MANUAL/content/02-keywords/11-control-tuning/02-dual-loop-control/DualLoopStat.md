@@ -1,5 +1,6 @@
 ---
 keyword: DualLoopStat
+summary: Read-only status of the active dual-loop control structure.
 availability:
   standalone: []
   central-i:

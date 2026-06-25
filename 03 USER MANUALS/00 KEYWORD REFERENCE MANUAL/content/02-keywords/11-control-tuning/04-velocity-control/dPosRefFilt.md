@@ -1,5 +1,6 @@
 ---
 keyword: dPosRefFilt
+summary: Cutoff frequency of the first-order low-pass filter applied to the reference velocity (the derivative of the position reference).
 availability:
   standalone:
   - v4

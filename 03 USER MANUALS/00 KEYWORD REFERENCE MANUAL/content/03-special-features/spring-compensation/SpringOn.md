@@ -1,5 +1,6 @@
 ---
 keyword: SpringOn
+summary: Enables the spring compensation feature, which injects a position-dependent feedforward current into the control loop to counteract elastic restoring forces acting on the load.
 availability:
   standalone:
   - v4

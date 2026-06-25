@@ -1,5 +1,6 @@
 ---
 keyword: UPMRptRange
+summary: Sets the frequency range, in Hz, of the UPM repetitive compensation filter.
 availability:
   standalone: []
   central-i:

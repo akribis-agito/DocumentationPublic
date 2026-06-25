@@ -1,5 +1,6 @@
 ---
 keyword: MotorLearnRes
+summary: 'A read-only result reported after a motor-learning pass completes: the encoder resolution measured during the pass.'
 availability:
   standalone:
   - v4

@@ -1,5 +1,6 @@
 ---
 keyword: SpringPLow
+summary: Sets the lower position boundary, in user units, of the spring compensation region.
 availability:
   standalone:
   - v4

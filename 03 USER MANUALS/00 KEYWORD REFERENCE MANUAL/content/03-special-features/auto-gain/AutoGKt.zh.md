@@ -27,7 +27,7 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 存储自动增益整定算法所使用的电机转矩常数（Kt）。
+summary: 存储自动增益整定算法所使用的电机转矩常数（Kt），用于在计算基于带宽的增益时将电流指令换算为力或力矩。
 ---
 # AutoGKt
 

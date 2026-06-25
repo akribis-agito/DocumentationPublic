@@ -1,5 +1,6 @@
 ---
 keyword: CurrGain
+summary: 电流环比例增益。
 availability:
   standalone:
   - v4

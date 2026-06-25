@@ -1,5 +1,6 @@
 ---
 keyword: MotorLearnPl
+summary: A read-only result reported after an automatic-mode motor-learning pass completes (MotorLearnSta = 3).
 availability:
   standalone:
   - v4

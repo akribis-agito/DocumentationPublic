@@ -1,5 +1,6 @@
 ---
 keyword: ScheduleSet
+summary: The tuning-gain set number currently in use, in the range 1–5.
 availability:
   standalone:
   - v4

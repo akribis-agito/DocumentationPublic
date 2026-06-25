@@ -29,7 +29,7 @@ overrides:
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 触发基于累积位置误差数据的 UPM 重复补偿表计算。
+summary: 触发根据累积位置误差数据计算 UPM 重复补偿表的命令。
 ---
 # UPMRptCalc
 

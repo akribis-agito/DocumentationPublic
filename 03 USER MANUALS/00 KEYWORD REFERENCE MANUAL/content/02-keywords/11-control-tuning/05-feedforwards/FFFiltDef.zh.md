@@ -1,5 +1,6 @@
 ---
 keyword: FFFiltDef
+summary: 定义前馈滤波器参数。
 availability:
   standalone: []
   central-i:

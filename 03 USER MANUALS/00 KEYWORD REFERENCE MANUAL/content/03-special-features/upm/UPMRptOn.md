@@ -1,5 +1,6 @@
 ---
 keyword: UPMRptOn
+summary: Requests UPM repetitive (periodic) motion compensation for the next motion.
 availability:
   standalone:
   - v4

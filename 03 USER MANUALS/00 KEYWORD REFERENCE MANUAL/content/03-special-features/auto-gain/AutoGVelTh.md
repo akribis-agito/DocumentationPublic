@@ -1,5 +1,6 @@
 ---
 keyword: AutoGVelTh
+summary: Sets the velocity threshold in user units per second below which motion data is excluded from the auto-gain identification process.
 availability:
   standalone:
   - v4

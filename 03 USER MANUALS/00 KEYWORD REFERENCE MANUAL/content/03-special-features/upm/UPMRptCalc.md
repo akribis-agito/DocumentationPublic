@@ -1,5 +1,6 @@
 ---
 keyword: UPMRptCalc
+summary: A command that triggers the calculation of the UPM repetitive compensation table based on accumulated position error data.
 availability:
   standalone:
   - v4

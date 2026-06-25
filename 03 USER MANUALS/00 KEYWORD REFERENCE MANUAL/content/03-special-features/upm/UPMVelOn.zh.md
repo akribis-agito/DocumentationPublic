@@ -27,7 +27,7 @@ overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 使能 UPM 齿槽补偿功能，将角度索引修正表应用于电流参考。
+summary: 使能 UPM 齿槽补偿功能，将角度索引修正表（UPMVelTable）应用于电流参考以抵消齿槽转矩。
 ---
 # UPMVelOn
 

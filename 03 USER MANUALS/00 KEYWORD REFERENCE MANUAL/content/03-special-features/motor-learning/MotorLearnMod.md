@@ -1,5 +1,6 @@
 ---
 keyword: MotorLearnMod
+summary: Selects the mode used by the motor-learning routine, which drives the motor open-loop to measure the number of pole pairs and the encoder resolution.
 availability:
   standalone:
   - v4

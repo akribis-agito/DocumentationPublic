@@ -1,5 +1,6 @@
 ---
 keyword: AutoGMaxLen
+summary: Sets the per-region upper limit on the number of motion samples the auto-gain algorithm collects for inertia identification.
 availability:
   standalone:
   - v4

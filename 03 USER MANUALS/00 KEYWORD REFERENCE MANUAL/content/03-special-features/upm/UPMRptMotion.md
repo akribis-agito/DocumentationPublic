@@ -1,5 +1,6 @@
 ---
 keyword: UPMRptMotion
+summary: Selects which learned-motion slot the UPM repetitive compensation function uses, choosing the stored feedforward correction table that matches the current motion.
 availability:
   standalone:
   - v4

@@ -1,5 +1,6 @@
 ---
 keyword: AutoGPosFilt
+summary: Sets the cutoff frequency of the first-order low-pass filter used by the auto-gain identification algorithm.
 availability:
   standalone:
   - v4

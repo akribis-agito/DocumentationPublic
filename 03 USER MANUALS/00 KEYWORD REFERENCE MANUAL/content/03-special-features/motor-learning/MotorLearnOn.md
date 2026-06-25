@@ -1,5 +1,6 @@
 ---
 keyword: MotorLearnOn
+summary: Enables the motor-learning routine that measures and reports motor pole pairs and encoder resolution.
 availability:
   standalone:
   - v4

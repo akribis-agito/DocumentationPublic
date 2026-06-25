@@ -1,5 +1,6 @@
 ---
 keyword: CurrKi
+summary: Integral gain of the current loop, with anti-windup.
 availability:
   standalone:
   - v4

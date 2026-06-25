@@ -1,5 +1,6 @@
 ---
 keyword: AutoGMode
+summary: Selects the operating mode of the automatic gain tuning algorithm.
 availability:
   standalone:
   - v4

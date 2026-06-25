@@ -1,5 +1,6 @@
 ---
 keyword: ScheduleMode
+summary: Selects the gain-scheduling algorithm — the rule that decides which of the five tuning-gain sets is active at each moment.
 availability:
   standalone:
   - v4

@@ -1,5 +1,6 @@
 ---
 keyword: FFFiltDef
+summary: Defines the feedforward filter parameters.
 availability:
   standalone: []
   central-i:

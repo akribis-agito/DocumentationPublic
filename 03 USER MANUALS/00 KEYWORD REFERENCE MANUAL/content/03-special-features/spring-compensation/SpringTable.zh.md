@@ -27,7 +27,7 @@ overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 保留的、尚未实现的数组关键字（大小为 41，可用索引为 1 至 40），当前对弹簧补偿无效。
+summary: 保留的、尚未实现的数组关键字（大小为 41，可用索引为 1 至 40）。
 ---
 # SpringTable
 

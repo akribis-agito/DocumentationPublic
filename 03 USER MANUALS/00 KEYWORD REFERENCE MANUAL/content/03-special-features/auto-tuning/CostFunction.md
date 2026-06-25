@@ -1,5 +1,6 @@
 ---
 keyword: CostFunction
+summary: Evaluates the cost metric used by the automatic current-loop PI tuning.
 availability:
   standalone:
   - v4

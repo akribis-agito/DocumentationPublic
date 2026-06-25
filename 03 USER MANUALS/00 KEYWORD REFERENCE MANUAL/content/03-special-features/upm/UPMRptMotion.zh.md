@@ -27,7 +27,7 @@ overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 选择 UPM 重复补偿函数所使用的已学习运动槽位。
+summary: 选择 UPM 重复补偿函数所使用的已学习运动槽位，从中选取与当前运动匹配的存储前馈修正表。
 ---
 # UPMRptMotion
 

@@ -1,5 +1,6 @@
 ---
 keyword: ScheduleGntry
+summary: Pairs gain scheduling with the axis's gantry-control state, selecting whether scheduling acts on the standard tuning gains or the gantry tuning gains.
 availability:
   standalone: []
   central-i:

@@ -27,7 +27,7 @@ overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 设置自整定算法在某运动方向/指令区域内被认为数据充足前必须采集的最少运动样本数。
+summary: 设置自动增益整定算法在某区域内数据充足可进行惯量辨识前必须采集的最少运动样本数。
 ---
 # AutoGMinLen
 

@@ -1,5 +1,6 @@
 ---
 keyword: ForceKi
+summary: Integral gain of the force-loop PID controller.
 availability:
   standalone:
   - v4

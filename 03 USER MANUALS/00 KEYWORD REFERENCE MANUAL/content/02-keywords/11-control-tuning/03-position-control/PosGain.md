@@ -1,5 +1,6 @@
 ---
 keyword: PosGain
+summary: Proportional gain of the position loop — the factor that multiplies the position error to produce the velocity command.
 availability:
   standalone:
   - v4

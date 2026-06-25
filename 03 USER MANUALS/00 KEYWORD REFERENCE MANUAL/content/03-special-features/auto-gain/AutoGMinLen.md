@@ -1,5 +1,6 @@
 ---
 keyword: AutoGMinLen
+summary: Sets the minimum number of collected motion samples the auto-gain algorithm must gather in a region before it has enough data for inertia identification.
 availability:
   standalone:
   - v4

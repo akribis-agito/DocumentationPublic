@@ -1,5 +1,6 @@
 ---
 keyword: ScheduleVel
+summary: Velocity thresholds that divide the speed range into bands for velocity-based gain scheduling.
 availability:
   standalone:
   - v4

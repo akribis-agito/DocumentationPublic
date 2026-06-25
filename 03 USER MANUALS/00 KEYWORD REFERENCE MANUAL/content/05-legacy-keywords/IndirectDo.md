@@ -1,5 +1,6 @@
 ---
 keyword: IndirectDo
+summary: A command that executes the indirect array write operation.
 availability:
   standalone:
   - v4

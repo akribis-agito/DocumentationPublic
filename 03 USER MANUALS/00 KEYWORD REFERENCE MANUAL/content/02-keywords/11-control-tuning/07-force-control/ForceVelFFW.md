@@ -1,5 +1,6 @@
 ---
 keyword: ForceVelFFW
+summary: Velocity feedback compensation gain in the force loop.
 availability:
   standalone:
   - v4

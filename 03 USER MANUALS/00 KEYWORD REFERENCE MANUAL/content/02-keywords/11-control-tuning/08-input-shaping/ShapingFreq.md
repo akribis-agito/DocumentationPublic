@@ -1,5 +1,6 @@
 ---
 keyword: ShapingFreq
+summary: Resonance frequencies suppressed by the input shaper.
 availability:
   standalone:
   - v4

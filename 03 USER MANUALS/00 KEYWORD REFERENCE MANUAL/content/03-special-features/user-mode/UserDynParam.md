@@ -1,5 +1,6 @@
 ---
 keyword: UserDynParam
+summary: A general-purpose data array used by special user-defined processing modes.
 availability:
   standalone:
   - v4

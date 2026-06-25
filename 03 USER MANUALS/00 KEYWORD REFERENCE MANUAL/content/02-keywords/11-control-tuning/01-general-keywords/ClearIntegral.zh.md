@@ -1,5 +1,6 @@
 ---
 keyword: ClearIntegral
+summary: 将所寻址轴的速度环积分项清零的指令。
 availability:
   standalone:
   - v4

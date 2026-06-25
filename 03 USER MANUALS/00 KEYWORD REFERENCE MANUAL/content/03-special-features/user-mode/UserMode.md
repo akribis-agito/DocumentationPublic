@@ -1,5 +1,6 @@
 ---
 keyword: UserMode
+summary: UserMode is a parameter used to activate special algorithms within the controller. These
 availability:
   standalone:
   - v4

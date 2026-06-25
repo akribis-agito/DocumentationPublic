@@ -27,7 +27,7 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 供特殊用户自定义处理模式使用的通用数据数组，提供 50 个元素（索引 [1] 至 [50]），运行时由活动用户模式算法读写。
+summary: 供特殊用户自定义处理模式使用的通用数据数组。
 ---
 # UserDynParam
 

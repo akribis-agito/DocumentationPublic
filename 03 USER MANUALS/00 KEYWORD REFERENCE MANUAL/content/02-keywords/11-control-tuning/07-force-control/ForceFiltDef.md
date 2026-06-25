@@ -1,5 +1,6 @@
 ---
 keyword: ForceFiltDef
+summary: Defines the type and parameters of each force-loop filter.
 availability:
   standalone:
   - v4

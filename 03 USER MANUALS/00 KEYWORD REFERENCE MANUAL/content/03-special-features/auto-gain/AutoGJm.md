@@ -1,5 +1,6 @@
 ---
 keyword: AutoGJm
+summary: Holds the motor inertia value that you supply to the automatic gain tuning algorithm.
 availability:
   standalone:
   - v4

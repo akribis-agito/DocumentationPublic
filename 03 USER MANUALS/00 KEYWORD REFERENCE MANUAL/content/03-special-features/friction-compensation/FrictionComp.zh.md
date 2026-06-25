@@ -30,7 +30,7 @@ overrides:
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 摩擦补偿增益——在运动开始时对速度环积分项进行预设值。
+summary: 当用户变量 `FrictionComp` 非零时，摩擦补偿功能被激活；该参数始终取正值。
 ---
 # FrictionComp
 

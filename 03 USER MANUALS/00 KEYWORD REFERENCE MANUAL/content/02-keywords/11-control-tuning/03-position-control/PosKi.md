@@ -1,5 +1,6 @@
 ---
 keyword: PosKi
+summary: Integral gain of the position loop (central-i v5) — accumulates the scaled position-controller output to add an integral term to the velocity command.
 availability:
   standalone: []
   central-i:

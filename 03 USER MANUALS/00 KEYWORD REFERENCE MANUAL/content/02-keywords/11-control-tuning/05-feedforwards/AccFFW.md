@@ -1,5 +1,6 @@
 ---
 keyword: AccFFW
+summary: Acceleration feedforward gain, applied to the second derivative of the position reference.
 availability:
   standalone:
   - v4

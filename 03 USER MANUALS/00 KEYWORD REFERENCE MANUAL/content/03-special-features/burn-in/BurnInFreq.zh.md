@@ -27,7 +27,7 @@ overrides: {}
 last_updated: '2026-05-30'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 设置老化测试运动的电气旋转（换相）频率，单位为 0.01 Hz。
+summary: 设置老化测试运动的电气旋转（换相）频率，单位为 0.01 Hz（例如，1000 = 10 Hz）。
 ---
 # BurnInFreq
 

@@ -1,5 +1,6 @@
 ---
 keyword: VelGain
+summary: Proportional gain of the velocity loop — the factor that multiplies the velocity error.
 availability:
   standalone:
   - v4

@@ -1,5 +1,6 @@
 ---
 keyword: SpringPHigh
+summary: Sets the upper position boundary, in user units, of the spring compensation region.
 availability:
   standalone:
   - v4

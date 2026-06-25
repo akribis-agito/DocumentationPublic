@@ -25,7 +25,7 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 设置自动增益整定算法每个区域采集运动样本数量的上限。
+summary: 设置自动增益整定算法在惯量辨识过程中每个区域采集运动样本数量的上限。
 ---
 # AutoGMaxLen
 

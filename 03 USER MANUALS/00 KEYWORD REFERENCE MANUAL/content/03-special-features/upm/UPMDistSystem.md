@@ -1,5 +1,6 @@
 ---
 keyword: UPMDistSystem
+summary: Sets the scalar plant-gain estimate used by the UPM disturbance rejection algorithm.
 availability:
   standalone:
   - v4

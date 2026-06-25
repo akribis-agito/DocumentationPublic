@@ -1,5 +1,6 @@
 ---
 keyword: AutoGQualTh
+summary: Sets the maximum allowed value of the identification quality metric (an estimation-error figure expressed as a percentage, where lower is better).
 availability:
   standalone:
   - v4

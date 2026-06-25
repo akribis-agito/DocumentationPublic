@@ -1,5 +1,6 @@
 ---
 keyword: PosFiltDef
+summary: Defines the type and parameters of each position-loop filter.
 availability:
   standalone:
   - v4

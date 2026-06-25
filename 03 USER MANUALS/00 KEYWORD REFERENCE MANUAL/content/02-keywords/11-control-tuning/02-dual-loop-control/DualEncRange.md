@@ -1,5 +1,6 @@
 ---
 keyword: DualEncRange
+summary: Motor-feedback position range within which true dual-loop control is used.
 availability:
   standalone: []
   central-i:

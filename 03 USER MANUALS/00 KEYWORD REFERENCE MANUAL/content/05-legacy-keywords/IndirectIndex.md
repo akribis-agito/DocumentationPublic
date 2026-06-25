@@ -1,5 +1,6 @@
 ---
 keyword: IndirectIndex
+summary: Holds the array index used by the indirect access mechanism.
 availability:
   standalone:
   - v4

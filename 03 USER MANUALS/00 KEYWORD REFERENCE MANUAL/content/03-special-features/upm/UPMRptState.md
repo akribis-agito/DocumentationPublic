@@ -1,5 +1,6 @@
 ---
 keyword: UPMRptState
+summary: A read-only parameter that reports the current operational state of the UPM repetitive compensation function.
 availability:
   standalone:
   - v4

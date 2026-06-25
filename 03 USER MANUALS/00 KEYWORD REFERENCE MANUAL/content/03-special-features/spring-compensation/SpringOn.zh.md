@@ -27,7 +27,7 @@ overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 使能弹簧补偿功能，向控制环注入与位置相关的前馈电流以抵消弹性恢复力。
+summary: 启用弹簧补偿功能，向控制环注入与位置相关的前馈电流，以抵消作用于负载的弹性恢复力。
 ---
 # SpringOn
 

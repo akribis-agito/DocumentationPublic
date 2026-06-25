@@ -1,5 +1,6 @@
 ---
 keyword: UPMRptLevel
+summary: Sets the cutoff frequency of the model-range (Q) low-pass filter used by the UPM repetitive compensation algorithm.
 availability:
   standalone:
   - v4

@@ -25,7 +25,7 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 每个滤波器的状态字，报告哪些可定制滤波器有待处理的定义更改，以及上次计算是否发现问题。
+summary: 每个滤波器的状态字，报告哪些可定制滤波器有待处理的定义更改以及上次计算是否发现问题。
 ---
 # FilterStatus
 

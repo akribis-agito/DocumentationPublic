@@ -1,5 +1,6 @@
 ---
 keyword: ShapingOn
+summary: Enables or disables input shaping on the axis.
 availability:
   standalone:
   - v4

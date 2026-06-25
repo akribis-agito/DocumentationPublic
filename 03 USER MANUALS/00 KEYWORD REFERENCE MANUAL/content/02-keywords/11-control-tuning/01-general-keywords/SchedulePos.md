@@ -1,5 +1,6 @@
 ---
 keyword: SchedulePos
+summary: Position thresholds that divide the travel into bands for position-based gain scheduling.
 availability:
   standalone:
   - v4
