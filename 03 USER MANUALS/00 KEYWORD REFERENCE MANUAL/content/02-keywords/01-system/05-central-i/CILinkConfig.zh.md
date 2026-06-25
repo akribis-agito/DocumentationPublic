@@ -61,7 +61,7 @@ ACILinkConfig[1]    ; read the sync send-start time for this port
 ACILinkConfig[4]    ; read the offline send-start time for this port
 ```
 
-## 另见
+## 另请参阅
 
 - [CIDeviceType](CIDeviceType.md) — 端口的期望设备类别
 - [CIConnect](CIConnect.md) — 链路建立时应用这些时序

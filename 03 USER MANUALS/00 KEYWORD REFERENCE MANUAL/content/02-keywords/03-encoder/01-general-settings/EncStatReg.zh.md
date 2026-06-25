@@ -66,7 +66,7 @@ language: zh-CN
 
 将 [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md) 设为 `-1` 会禁用错误/告警/CRC 监控（这些位仍可能被报告，但不会触发故障）。断开处理独立于 `EncAbsErrTime`。
 
-此监控仅在上电播种窗口关闭后才开始。上电时获取的首个绝对读数用于为位置播种，期间不检查这些状态位，因此损坏的上电帧可能播种出错误的绝对位置（参见 [EncAbsOff](EncAbsOff-AuxEncAbsOff.md)）。在依赖所播种的位置之前，请在引导启动后的若干周期确认 `EncStatReg` 干净。
+此监控仅在上电初始化窗口关闭后才开始。上电时获取的首个绝对读数用于初始化位置，期间不检查这些状态位，因此损坏的上电帧可能将位置初始化为错误的绝对值（参见 [EncAbsOff](EncAbsOff-AuxEncAbsOff.md)）。在依赖所初始化的位置之前，请在引导启动后的若干周期确认 `EncStatReg` 干净。
 
 ### 按编码器协议的位布局
 
@@ -92,10 +92,10 @@ AEncStatReg          ; read the absolute-encoder status bits
 ; bit 0 (0x01) set  -> encoder looks disconnected
 ```
 
-## 参见
+## 另请参阅
 
 - [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md) — 将持续的错误/告警/CRC 状况转换为故障的超时
-- [EncAbsOff](EncAbsOff-AuxEncAbsOff.md) — 在此监控开始之前获取的上电位置播种
+- [EncAbsOff](EncAbsOff-AuxEncAbsOff.md) — 在此监控开始之前获取的上电位置初始化
 - [EncType](EncType-AuxEncType.md) — 反馈类型；这些位适用于串行绝对式编码器
 - [StatReg](../../07-status-and-faults/StatReg.md) — 通用轴状态寄存器
 - [ConFlt](../../07-status-and-faults/ConFlt.md) — 故障寄存器；针对这些状况报告代码 1068 / 1069 / 1070

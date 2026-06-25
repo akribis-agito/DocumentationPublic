@@ -85,7 +85,7 @@ AEmrgDec             ; read current value
 
 在 **v4** 中 `EmrgDec` 是 32 位整数；在 **v5（central-i）** 中它是单精度浮点数。替换逻辑和 `AccelFact` 缩放保持不变。**v5 仅适用于 central-i。**
 
-## 参见
+## 另请参阅
 
 - [Decel](Decel.md) — 正常减速率（由 `Stop` 使用）
 - [Accel](Accel.md) — 加速率

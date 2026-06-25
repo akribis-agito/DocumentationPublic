@@ -51,7 +51,7 @@ AAccUnitFct[1]=0.001      ; example factor for the acceleration group
 AAccUnitFct[1]            ; read the current acceleration factor
 ```
 
-## 另请参见
+## 另请参阅
 
 - [00-overview](00-overview.md) — 组 / 因子 / 单位模型
 - [AccUnitGrp](AccUnitGrp.md) — 该因子适用的关键字

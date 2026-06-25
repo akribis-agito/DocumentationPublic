@@ -65,7 +65,7 @@ AScheduleMode[1]=2           ; optimal settling by time, using ScheduleTime
 
 若新运动在 50 ms 到期前启动，定时器复位，当前增益组立即返回增益组 1。
 
-## 参见
+## 另请参阅
 
 - [ScheduleMode](ScheduleMode.md) — 模式 2、6、7、11 和 12 使用此时间参数
 - [ScheduleSet](ScheduleSet.md) — 当前选中的增益组

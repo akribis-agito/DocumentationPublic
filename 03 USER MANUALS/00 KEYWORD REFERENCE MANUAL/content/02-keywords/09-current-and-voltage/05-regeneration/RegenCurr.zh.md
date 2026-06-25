@@ -65,7 +65,7 @@ ARegenCurr          ; read the present regen-resistor current
 
 在 central-i v5 上，`RegenCurr` 以**浮点**值（`float32`，无固定整数范围）报告，而非 v4 上所用的缩放整数。底层测量相同；仅通过通信返回的数据类型发生变化，因此 v5 读取可能包含小数部分。
 
-## 参见
+## 另请参阅
 
 - [RegenOn](RegenOn.md)、[RegenOff](RegenOff.md) — 再生激活/停用阈值
 - [RegenUsed](RegenUsed.md) — 启用再生电路

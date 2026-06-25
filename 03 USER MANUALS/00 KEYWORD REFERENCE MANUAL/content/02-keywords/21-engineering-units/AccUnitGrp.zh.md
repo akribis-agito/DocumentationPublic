@@ -62,7 +62,7 @@ AAccUnitGrp[1]      ; read the first member of the acceleration unit group
 AAccUnitGrp[3]      ; read the member at index 3
 ```
 
-## 另请参见
+## 另请参阅
 
 - [00-overview](00-overview.md) — 组 / 因子 / 单位模型
 - [AccUnitFct](AccUnitFct.md) — 加速度缩放因子

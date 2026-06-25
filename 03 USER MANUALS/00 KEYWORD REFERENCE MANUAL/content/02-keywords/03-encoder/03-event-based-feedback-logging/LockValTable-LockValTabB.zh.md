@@ -40,7 +40,7 @@ language: zh-CN
 ALockValTable[1]     ; read the captured position of the first event
 ```
 
-## 参见
+## 另请参阅
 
 - [LockVal](LockVal-AuxLockVal.md) —— 存入这些数组的值
 - [LockTimeTable](LockTimeTable-LockTimeTabB.md) —— 时间戳历史数组（相同的索引方案）

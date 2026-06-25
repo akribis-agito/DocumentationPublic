@@ -52,7 +52,7 @@ ACurrFBFact=-1907500     ; default scaling for the supported linear-adapter remo
 ACurrFBFact              ; read the configured current-feedback factor
 ```
 
-## 参见
+## 另请参阅
 
 - [ExtCurrFBSca](ExtCurrFBSca.md) — 此比例的 v5 浮点等效形式
 - [AmpType](../../02-motor-and-amplifier/AmpType.md) — 驱动器类型；本设置适用于直线适配器远程设备

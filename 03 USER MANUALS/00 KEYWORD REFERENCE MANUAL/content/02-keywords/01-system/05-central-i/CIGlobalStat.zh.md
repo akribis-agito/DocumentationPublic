@@ -66,7 +66,7 @@ ACIGlobalStat       ; system-wide Central-i connection state
 
 在用户程序中，通过用 `0x1` 掩码检查端口 0 是否已连接，通过用 `0x2` 掩码检查它是否为仿真。
 
-## 另见
+## 另请参阅
 
 - [CIStatus](CIStatus.md) — 详细的每轴链路状态和错误码
 - [CIConnect](CIConnect.md) / [CIDisconnect](CIDisconnect.md) — 设置/清除已连接位

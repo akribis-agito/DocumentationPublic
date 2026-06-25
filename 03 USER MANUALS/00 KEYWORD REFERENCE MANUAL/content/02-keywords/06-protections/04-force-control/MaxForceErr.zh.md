@@ -72,7 +72,7 @@ AMaxForceErr[1]=2000   ; trip axis A if closed-loop force error exceeds 2000
 AMaxForceErr           ; read the current limit
 ```
 
-## 参见
+## 另请参阅
 
 - [MaxForceErrOL](MaxForceErrOL.md) —— 开环力误差限值
 - [ForceErr](../../08-axis-operation/04-force-operation-mode/ForceErr.md) —— 被限制的实时力误差

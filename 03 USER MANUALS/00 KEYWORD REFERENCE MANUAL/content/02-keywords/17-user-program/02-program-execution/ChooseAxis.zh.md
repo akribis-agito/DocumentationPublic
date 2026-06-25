@@ -54,7 +54,7 @@ AChooseAxis[1]      ; query the axis assigned to thread 1
 PMotorOn=1           ; runs on the calling thread's ChooseAxis axis
 ```
 
-## 参见
+## 另请参阅
 
 - [ProgTask](ProgTask.md) — 与运行中的用户程序线程关联的任务
 - [ProgRun](ProgRun.md) — 启动用户程序线程

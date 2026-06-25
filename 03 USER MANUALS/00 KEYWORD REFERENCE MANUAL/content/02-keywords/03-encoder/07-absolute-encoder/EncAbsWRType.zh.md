@@ -54,7 +54,7 @@ AEncAbsWRType=0      ; read access
 AEncAbsWRType=1      ; write access
 ```
 
-## 参见
+## 另请参阅
 
 - [EncAbsAddr](EncAbsAddr.md) — 事务的寄存器地址
 - [EncAbsWData](EncAbsWData.md) — 写入事务中要写入的数据

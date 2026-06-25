@@ -56,7 +56,7 @@ AStopOnIndex=1       ; 使能在下一个编码器索引时停止
 AStopOnIndex        ; 0 = 已禁用 / 已触发，1 = 已使能
 ```
 
-## 另请参见
+## 另请参阅
 
 - [StopOnHome](StopOnHome.md) — 在原点数字量输入时停止的等效功能
 - [IndexStat](../03-encoder/02-index-detection/IndexStat-AuxIndexStat.md) — 该标志所响应的索引检测

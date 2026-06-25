@@ -70,7 +70,7 @@ AAInOffset[1]=0      ; no offset
 - **保存** — `AInOffset` 可保存至闪存。
 - **平台** — central-i v5 将该值存储为 `float32`；公式和单位不变。
 
-## 参见
+## 另请参阅
 
 - [AInFilt](AInFilt.md) — 在偏置之前施加的滤波级
 - [AInDB](AInDB.md) — 第一级死区，紧接在偏置之后施加

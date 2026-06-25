@@ -68,7 +68,7 @@ AForceAInTh=0        ; disable this condition
 - **电机失能** — 阈值引擎不运行。
 - **保存** — 不可保存至闪存。
 
-## 参见
+## 另请参阅
 
 - [Force operation mode](00-overview.md) — 完整的模式切换条件
 - [ForcePosErrTh](ForcePosErrTh.md) — 备选的第二个条件（位置误差）

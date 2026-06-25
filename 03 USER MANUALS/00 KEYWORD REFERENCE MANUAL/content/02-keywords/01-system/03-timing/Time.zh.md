@@ -67,7 +67,7 @@ ATime               ; seconds since power-on (e.g. 86400 -> 1 day of uptime)
 
 通过在操作之前和之后读取 `ATime` 并相减，以一秒分辨率测量某操作耗时。
 
-## 参见
+## 另请参阅
 
 - [HWTimer](HWTimer.md) — 高分辨率（亚微秒）间隔定时器
 - [CounterUp](CounterUp.md) / [CounterDown](CounterDown.md) — 基于周期的计数器

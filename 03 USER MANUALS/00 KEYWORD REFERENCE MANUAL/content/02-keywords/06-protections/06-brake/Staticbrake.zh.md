@@ -95,7 +95,7 @@ AStatReg                ; bit 29 sets (lock requested) immediately
 - **HWProtectBits / ProtectMask：** 静态制动机制不产生 [ConFlt](../../07-status-and-faults/ConFlt.md)，且不可被掩码屏蔽。抱闸请求在 [StatReg](../../07-status-and-faults/StatReg.md) bit 29 中可见。
 - **`MotorReason` 与制动器：** 如果你禁用电机且制动器重新置位抱闸，[MotorReason](../../07-status-and-faults/MotorReason.md) 反映的是禁用原因（控制器故障、DI、用户程序或通信）——而非制动器状态。
 
-## 参见
+## 另请参阅
 
 - [Dynamic brake](Dynamicbrake.md) — 快速电气制动（短接电机相）
 - [StatReg](../../07-status-and-faults/StatReg.md) — bit 29 报告静态制动器抱闸请求

@@ -61,7 +61,7 @@ ADualEncRange[1]=-100000
 ADualEncRange[2]=100000
 ```
 
-## 参见
+## 另请参阅
 
 - [DualEncRange](DualEncRange.md) — 限定真双环范围的电机反馈边界
 - [DualEncSwapOn](DualEncSwapOn.md) — 伪双环切换开关（须为 1）

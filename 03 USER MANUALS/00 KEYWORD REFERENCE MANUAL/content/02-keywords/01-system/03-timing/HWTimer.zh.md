@@ -55,9 +55,9 @@ $$
 AHWTimer            ; read the counter at event A, again at event B, then subtract
 ```
 
-在短操作之前和之后立即读取 `AHWTimer`；用较晚的读数减去较早的读数，再除以 433，即可得到以微秒为单位的持续时间。
+在短操作之前和之后立即读取 `AHWTimer`；用较早的读数减去较晚的读数，再除以 433，即可得到以微秒为单位的持续时间。
 
-## 参见
+## 另请参阅
 
 - [Time](Time.md) — 自上电以来的秒数（粗粒度，一秒分辨率）
 - [CounterUp](CounterUp.md) / [CounterDown](CounterDown.md) — 基于周期的计数器

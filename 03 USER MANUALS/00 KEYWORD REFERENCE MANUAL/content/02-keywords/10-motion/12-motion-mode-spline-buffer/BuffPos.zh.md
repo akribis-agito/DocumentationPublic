@@ -73,7 +73,7 @@ ABuffPos[2]=10000    ; 第二个路径点，在 ABuffTime[2] 时刻到达
 ABuffPos[3]=10000    ; 第三个路径点（在 10000 处停留）
 ```
 
-## 参见
+## 另请参阅
 
 - [BuffTime](BuffTime.md) — 与路径点配对的逐段时间戳（零值条目终止列表）
 - [BuffCalc](BuffCalc.md) — 拟合样条并将其扩展为插值参考

@@ -79,7 +79,7 @@ ADynBrakeOn=1
 ADynBrkRef=1000         ; brake at full strength (100%) when engaged
 ```
 
-## 参见
+## 另请参阅
 
 - [Dynamic brake](Dynamicbrake.md) — 动态制动机制概述
 - [DynBrkRef](DynBrkRef.md) — 最大制动强度

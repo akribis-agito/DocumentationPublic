@@ -74,7 +74,7 @@ ALockEventMode=0      ; revert to legacy auto-initialize behavior
 ALockEventMode        ; read back the configured mode
 ```
 
-## 参见
+## 另请参阅
 
 - [LockEventInit](LockEventInit.md) —— 运行模式 1 所需的手动偏移量初始化
 - [LockEventStat](LockEventStat.md) —— 报告 lock/event 子系统是否已初始化

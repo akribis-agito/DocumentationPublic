@@ -78,7 +78,7 @@ AModeSwitchPos[2]   ; Pos recorded when the axis entered position mode
 - **Force-over-PIV 锚点** — `ModeSwitchPos[1]` 同时充当力控制期间生成的合成位置参考的锚点；改变力模式进入位置即改变该锚点。
 - **平台** — v5 central-i 扩展为 64 位；v4（standalone 和 central-i）为 32 位。
 
-## 参见
+## 另请参阅
 
 - [GoToPosMode](GoToPosMode.md) — 记录索引 2（进入位置模式）
 - [PosPosFlag](PosPosFlag.md) / [PosPosTh](PosPosTh.md) — 同样记录该切换的内部阈值切换

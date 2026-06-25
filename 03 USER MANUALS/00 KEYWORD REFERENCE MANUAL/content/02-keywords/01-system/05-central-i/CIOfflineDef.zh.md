@@ -55,7 +55,7 @@ ACIOfflineDef[1]    ; read the offline-channel frequency setting
 ACIOfflineDef[2]    ; read the offline-channel filter length
 ```
 
-## 另见
+## 另请参阅
 
 - [CIOfflineData](CIOfflineData.md) — 每次事务的请求/响应缓冲区
 - [CIOfflineSend](CIOfflineSend.md) — 发送一次离线事务

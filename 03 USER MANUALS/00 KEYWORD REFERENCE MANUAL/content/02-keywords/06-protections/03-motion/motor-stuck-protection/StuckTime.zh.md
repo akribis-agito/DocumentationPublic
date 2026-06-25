@@ -71,7 +71,7 @@ AStuckTime[1]=250     ; require 250 ms of unbroken stuck condition (the default)
 AStuckTime[1]         ; read back (returns the value in ms)
 ```
 
-## 参见
+## 另请参阅
 
 - [StuckCurr](StuckCurr.md) — 电流阈值；也列出了模式绕过情况
 - [StuckVel](StuckVel.md) — 速度阈值

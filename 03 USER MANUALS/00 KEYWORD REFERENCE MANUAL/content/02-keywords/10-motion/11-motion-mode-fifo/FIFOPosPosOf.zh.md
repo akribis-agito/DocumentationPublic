@@ -63,4 +63,4 @@ AFIFOPosPosOf=0      ; remove the offset
 - [FIFOPosTrgt](FIFOPosTrgt.md) — 工作目标位置
 - [FIFOPosVelOf](FIFOPosVelOf.md) — 速度前馈偏置
 - [FIFOPosCurrOf](FIFOPosCurrOf.md) — 电流前馈偏置
-- [PosRef](../01-kinematics-status/PosRef.md) — 最终位置参考
+- [PosRef](../01-kinematics-status/PosRef.md) — 输出的位置参考

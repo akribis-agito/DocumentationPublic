@@ -86,7 +86,7 @@ AMaxPwrTemp[1]=65    ; trip axis A if the IPM exceeds 65 °C
 AMaxPwrTemp          ; read the current limit
 ```
 
-## 另请参见
+## 另请参阅
 
 - [PwrTemp](PwrTemp.md) — 测得的功率级温度
 - [BoardTemp](BoardTemp.md) — 控制器板温度（固定 75 °C 限值）

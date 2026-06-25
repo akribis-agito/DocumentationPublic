@@ -75,7 +75,7 @@ AScheduleMode[1]=4            ; select velocity-band scheduling
 
 在插值模式（`ScheduleMode = 9`）下，当 |velocity| = 120000 时，当前增益为增益组 3（基准，锚定在 `ScheduleVel[2] = 50000`）与增益组 4（锚定在 `ScheduleVel[3] = 200000`）的线性混合，混合比例为 (120000 − 50000) / (200000 − 50000) = 0.467，趋向增益组 4。
 
-## 参见
+## 另请参阅
 
 - [ScheduleMode](ScheduleMode.md) — 模式 4 和 9 使用这些阈值
 - [ScheduleSet](ScheduleSet.md) — 当前选中的区间

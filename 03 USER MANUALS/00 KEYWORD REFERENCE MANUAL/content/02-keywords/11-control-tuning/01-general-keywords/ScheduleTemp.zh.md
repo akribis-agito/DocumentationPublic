@@ -56,7 +56,7 @@ AScheduleTemp[1]=30; AScheduleTemp[2]=45; AScheduleTemp[3]=60; AScheduleTemp[4]=
 AScheduleMode=8            ; select temperature-band scheduling
 ```
 
-## 参见
+## 另请参阅
 
 - [ScheduleMode](ScheduleMode.md) — 模式 8 使用这些阈值
 - [ScheduleSet](ScheduleSet.md) — 当前选中的区间

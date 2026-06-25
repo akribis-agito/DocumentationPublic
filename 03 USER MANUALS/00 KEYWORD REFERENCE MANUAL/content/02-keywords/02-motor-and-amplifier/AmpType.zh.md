@@ -106,7 +106,7 @@ AAmpType            ; query the current amplifier mode
 
 v5 仅适用于 central-i；在 standalone 产品上 `AmpType` 保持 v4 范围 0–7。
 
-## 参见
+## 另请参阅
 
 - [AAmpFullScale](AAmpFullScale.md) — 外部模拟模式（2、5、7；v5 中还包括 8）的满量程输出缩放
 - [LAmpFullScale](LAmpFullScale.md) — 内置线性驱动器（模式 4）的满量程选择

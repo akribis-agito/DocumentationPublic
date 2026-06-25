@@ -59,7 +59,7 @@ ABuffCycles=1        ; 轨迹执行一次（默认）
 ABuffCycles=10       ; 轨迹重复十次，首尾相连
 ```
 
-## 参见
+## 另请参阅
 
 - [BuffCalc](BuffCalc.md) — 扩展生成一个周期的轨迹
 - [BuffStatus](BuffStatus.md) — 报告实时周期计数器及周期内索引

@@ -79,7 +79,7 @@ AAOutPort[1]          ; read back the commanded value
 - **保存** —— 可保存至闪存；最后命令的值会在启动时恢复。
 - **平台** —— central-i v5 将该值存储为 `float32`；行为和单位不变。
 
-## 参见
+## 另请参阅
 
 - [AOutMode](AOutMode.md) —— 选择直接模式还是监视模式（此值仅在 `AOutMode = 0` 时被采用）
 - [AOutOffset](AOutOffset.md) —— 输出校准偏置，在 DAC 转换之前相加

@@ -53,7 +53,7 @@ AExtCurrFBSca=-0.4       ; same magnitude, inverted feedback polarity
 AExtCurrFBSca            ; read the configured scaling
 ```
 
-## 参见
+## 另请参阅
 
 - [CurrFBFact](CurrFBFact.md) — 此比例的 v4 整数等效形式
 - [MotorCurr](../02-motor-variables/MotorCurr.md) — 由缩放后的外部反馈产生的电机电流

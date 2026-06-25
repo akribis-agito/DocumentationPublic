@@ -107,7 +107,7 @@ AAccel               ; read current acceleration
 
 在 **v4** 中，`Accel` 是 32 位整数（counts/s²）。在 **v5（central-i）** 中，它是单精度浮点数；运动规划器的 `Accel × AccelFact` 构造、梯形限制和加加速度交互在其他方面保持不变。**v5 仅限 central-i**——在 standalone 上 `Accel` 仍为 v4 的 32 位值。
 
-## 参见
+## 另请参阅
 
 - [Decel](Decel.md) — 减速度（梯形的后缘斜率）
 - [Speed](Speed.md) — 斜坡加速所趋向的巡航速度

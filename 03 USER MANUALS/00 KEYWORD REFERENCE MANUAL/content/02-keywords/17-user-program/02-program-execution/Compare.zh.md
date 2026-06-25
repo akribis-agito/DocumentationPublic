@@ -71,7 +71,7 @@ ACompare[5]          ; pop2 <  pop1 ? push 1 : push 0
 ACompare[8]          ; pop1 == 0   ? push 1 : push 0  (single operand)
 ```
 
-## 参见
+## 另请参阅
 
 - [Jump](Jump.md) — 条件/无条件程序跳转
 - [Math](Math.md) — 数值栈上的算术和位运算操作

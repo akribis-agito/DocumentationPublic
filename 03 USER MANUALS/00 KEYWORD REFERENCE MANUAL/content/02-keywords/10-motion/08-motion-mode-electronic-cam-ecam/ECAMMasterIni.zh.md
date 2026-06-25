@@ -46,7 +46,7 @@ language: zh-CN
 
 ## 工作原理
 
-ECAM 运动启动（[Begin](../04-motion-command/Begin.md)）时，控制器将当前主值快照作为主范围的原点。`ECAMMasterIni` 决定该快照在范围内的位置：当 `ECAMMasterIni = 0` 时，主变量从范围起始处开始（正 [ECAMGap](ECAMGap.md) 时为 `GenData[ECAMStart]`）；正值将起始点向曲线中移动相应的主变量单位数，使从动件从凸轮曲线的中间位置开始。无论 `ECAMMasterIni` 取何值，从动件的参考均在启动时进行偏置，以避免跳变。
+ECAM 运动启动（[Begin](../04-motion-command/Begin.md)）时，控制器将当前主值快照作为主范围的原点。`ECAMMasterIni` 决定该快照在范围内的位置：当 `ECAMMasterIni = 0` 时，主变量从范围起始处开始（正 [ECAMGap](ECAMGap.md) 时为 `GenData[ECAMStart]`）；正值将起始点向曲线中移动相应的主变量单位数，使从动件从凸轮曲线中途某处开始。无论 `ECAMMasterIni` 取何值，从动件的参考均在启动时进行偏置，以避免跳变。
 
 - 对于正 [ECAMGap](ECAMGap.md)，偏置从范围起始处向前测量；对于负 `ECAMGap`，则相对于取反后的主值测量，因此相同的正值仍将起始点向曲线中移动。
 - 对于负 [ECAMCycles](ECAMCycles.md)（双向凸轮），`ECAMMasterIni` 定位的是重复区域的*中间点*——即运动启动时主变量预期所在的位置——使曲线可以向两个方向延伸。

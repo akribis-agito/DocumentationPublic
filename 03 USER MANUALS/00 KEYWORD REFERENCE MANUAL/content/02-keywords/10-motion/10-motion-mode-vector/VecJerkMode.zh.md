@@ -62,7 +62,7 @@ AVecJerkMode=1       ; 急动限制 S 形路径曲线
 AVecJerkMode         ; 读取当前值
 ```
 
-## 参见
+## 另请参阅
 
 - [VecJerkInAcc](VecJerkInAcc.md) — 加速阶段的急动限制
 - [VecJerkInDec](VecJerkInDec.md) — 减速阶段的急动限制

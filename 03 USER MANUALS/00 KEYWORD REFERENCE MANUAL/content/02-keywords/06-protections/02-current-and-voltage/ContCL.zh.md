@@ -41,7 +41,7 @@ I²t 功率限制方案中使用的连续电流限值。
 
 ## 工作原理
 
-![I²t tripping mechanism](I2t-tripping-mechanism.svg)
+![I²t 跳闸机制](I2t-tripping-mechanism.svg)
 
 I²t 方案对电机电流的平方运行一阶低通滤波器——模拟电机的加热/冷却过程，如同对电容充电。滤波后的值 $I_{filt}^{2}$ 表示等效的连续功率。驱动器最高可运行至 `PeakCL`；一旦 $I_{filt}^{2}$ 升高超过 `ContCL²`，限制即接入，电流被压低至连续电平，直到电机“冷却”。
 
@@ -55,7 +55,7 @@ $$
 
 （`PeakTime` 单位为 ms。）随后，离散滤波器在每个控制周期对 `MotorCurr²` 运行。
 
-![I-squared filtered response charging from zero toward PeakCL squared and reaching ContCL squared exactly at PeakTime; the engage and release thresholds are marked](i2t-curve.svg)
+![I 平方滤波响应从零向 PeakCL 平方充电，并在 PeakTime 时恰好到达 ContCL 平方；标注了接入与释放阈值](i2t-curve.svg)
 
 ### 接入 / 释放（迟滞）
 

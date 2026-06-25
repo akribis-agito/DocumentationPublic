@@ -64,7 +64,7 @@ ACounterUp[2]       ; read the second, independent up-counter
 
 例如，如果复位后 `ACounterUp[1]` 读取为 `16384`，则恰好经过了一秒的运行时间。
 
-## 另见
+## 另请参阅
 
 - [CounterDown](CounterDown.md) — 基于周期的减计数器
 - [Time](Time.md) / [HWTimer](HWTimer.md) — 墙钟定时器与高分辨率定时器

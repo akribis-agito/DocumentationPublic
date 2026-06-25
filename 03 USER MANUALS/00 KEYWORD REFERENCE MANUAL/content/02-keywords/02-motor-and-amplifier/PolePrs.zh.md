@@ -65,7 +65,7 @@ APolePrs=4           ; rotary brushless: 4 pole pairs per revolution
 APolePrs            ; query the configured pole-pair count
 ```
 
-## 另见
+## 另请参阅
 
 - [MotorType](MotorType.md) — 决定 PolePrs 的解释方式
 - [EncRes](../03-encoder/01-general-settings/EncRes.md) — 编码器分辨率，与 PolePrs 一起构成电气周期

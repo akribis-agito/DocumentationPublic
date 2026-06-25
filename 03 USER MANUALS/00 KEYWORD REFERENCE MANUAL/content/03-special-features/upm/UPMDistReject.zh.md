@@ -37,6 +37,6 @@ UPMDistReject 设置 UPM 扰动抑制环路的抑制增益，控制对估计扰�
 
 当 UPMDistOn 使能后，控制器在每个控制周期持续运行一个积分扰动观测器环路：计算指令电流（电流参考值乘以被控对象增益 UPMDistSystem）所对应的预期加速度与经 UPMDistFilter 低通滤波后的测量加速度之差，将该差值乘以此处设置的有效增益后积分；积分器输出成为新的电流参考值。有效积分器增益与 UPMDistReject 成正比，与 UPMDistSystem 成反比，因此较大的 UPMDistReject 将更积极地抑制扰动，而较大的 UPMDistSystem 则会降低抑制力度。该环路持续作用于估计的扰动，并不特定于周期性扰动。
 
-**另见：**
+**另请参阅：**
 
 [UPMDistOn](UPMDistOn.md)、[UPMDistSystem](UPMDistSystem.md)、[UPMDistFilter](UPMDistFilter.md)

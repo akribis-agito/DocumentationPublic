@@ -71,7 +71,7 @@ AMapPosGap[1]        ; read the spacing for the first dimension
 - **保存** — 可保存至闪存；倒数在每次写入时以及上电时重新计算。
 - **平台** — 在 standalone v4、central-i v4 和 central-i v5 上相同。
 
-## 参见
+## 另请参阅
 
 - [MapLength](MapLength.md) — 每个维度的修正点数量
 - [MapStartPos](MapStartPos.md) — 每个维度的起始位置

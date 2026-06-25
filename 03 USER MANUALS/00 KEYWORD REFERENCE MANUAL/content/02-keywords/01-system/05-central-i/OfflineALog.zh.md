@@ -64,7 +64,7 @@ AOfflineALog[3]     ; reserved slot; currently reads 0 (not populated)
 AOfflineALog[12]    ; reserved slot; currently reads 0 (not populated)
 ```
 
-## 参见
+## 另请参阅
 
 - [OfflineBLog](OfflineBLog.md) — 离线邮箱 2 日志，即固件实际填充的那个
 - [CIOfflineData](CIOfflineData.md) / [CIOfflineSend](CIOfflineSend.md) — 离线事务

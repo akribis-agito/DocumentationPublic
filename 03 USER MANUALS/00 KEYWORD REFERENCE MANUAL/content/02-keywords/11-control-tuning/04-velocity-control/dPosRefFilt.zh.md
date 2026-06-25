@@ -63,7 +63,7 @@ AdPosRefFilt        ; read the reference-velocity filter cutoff
 
 假设运动曲线产生的参考速度阶跃包含数 kHz 以内的显著频率成分，且位置环带宽约为 200 Hz。截止频率 `dPosRefFilt = 100000`（1000 Hz）可使速度前馈跟随位置环能响应的全部曲线内容，同时滤除 1 kHz 以上的量化抖动。将截止频率提高至旁路阈值以上（`dPosRefFilt > 819200`，即 8192 Hz）——例如默认值 `1000000`——则参考速度不经滤波直接通过。
 
-## 另请参见
+## 另请参阅
 
 - [dPosRef](../../10-motion/01-kinematics-status/dPosRef.md) — 该滤波器所平滑的参考速度
 - [VelTrackFact](VelTrackFact.md) — 将滤波后参考速度缩放为前馈

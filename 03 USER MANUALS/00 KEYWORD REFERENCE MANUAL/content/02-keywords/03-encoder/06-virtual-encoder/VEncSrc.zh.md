@@ -53,7 +53,7 @@ language: zh-CN
 AVEncSrc            ; query the configured virtual encoder source code
 ```
 
-## 另请参见
+## 另请参阅
 
 - [VEncOn](VEncOn.md) — 使能虚拟编码器
 - [VEncType](VEncType.md) — 输出信号格式

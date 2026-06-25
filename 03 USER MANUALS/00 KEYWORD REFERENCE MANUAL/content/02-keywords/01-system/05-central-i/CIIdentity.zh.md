@@ -100,7 +100,7 @@ v5（仅 Central-i 的 64 位固件）将数组扩展为 24 个元素，新增�
 
 元素 [1]–[22] 相对 v4 未变更。
 
-## 另见
+## 另请参阅
 
 - [CIConnect](CIConnect.md) — 连接时填充此数组
 - [CIDisconnect](CIDisconnect.md) — 清除此数组

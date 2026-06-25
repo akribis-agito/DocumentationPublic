@@ -52,7 +52,7 @@ RemoteCANSend 发起的远程写入所针对的目标 CAN 节点地址。
 ARemoteCANAdd=128    ; address of the remote node to access
 ```
 
-## 参见
+## 另请参阅
 
 - [RemoteCANCCC](RemoteCANCCC.md) — 要访问的编码参数（CAN 命令码）
 - [RemoteCANVal](RemoteCANVal.md) — 写入的值，或读取时返回的值

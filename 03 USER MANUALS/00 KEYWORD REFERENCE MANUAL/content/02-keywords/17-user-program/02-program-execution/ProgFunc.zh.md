@@ -33,7 +33,7 @@ AProgFunc[1]        ; label: start of function 1
 AReturn             ; return to the line after the call
 ```
 
-## 参见
+## 另请参阅
 
 - [ProgFuncCall](ProgFuncCall.md) — 调用由 ProgFunc 标签定义的函数
 - [Return](Return.md) — 从函数调用返回

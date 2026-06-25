@@ -79,7 +79,7 @@ AAInPort[5]         ; raw (post-ADC) reading of analog input 1
 - **只读** — 对 `AInPort` 的写入会被拒绝；请通过 [AInGain](AInGain.md) / [AInOffset](AInOffset.md) / [AInDB](AInDB.md) / [AInMuteRange](AInMuteRange.md) / [AInFilt](AInFilt.md) 修改输入行为。
 - **平台** — 在 central-i v5 上，这些值为 32 位浮点，采用相同的 mV 缩放。
 
-## 参见
+## 另请参阅
 
 - [AInFilt](AInFilt.md)、[AInOffset](AInOffset.md)、[AInDB](AInDB.md)、[AInGain](AInGain.md)、[AInMuteRange](AInMuteRange.md) — 产生 `AInPort[1]`–`AInPort[4]` 的处理链
 - [AInMode](AInMode.md) — 为模拟量输入分配功能

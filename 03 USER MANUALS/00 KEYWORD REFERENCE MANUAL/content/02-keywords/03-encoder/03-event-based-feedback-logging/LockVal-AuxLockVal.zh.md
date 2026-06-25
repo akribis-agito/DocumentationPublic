@@ -29,7 +29,7 @@ language: zh-CN
 ALockVal             ; read the position of the most recent captured event
 ```
 
-## 参见
+## 另请参阅
 
 - [LockSrc](LockSrc-AuxLockSrc.md) —— 定义更新 `LockVal` 的触发事件
 - [LockValTable](LockValTable-LockValTabB.md) —— 捕获位置的历史数组

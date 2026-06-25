@@ -78,7 +78,7 @@ $$
 AVq                 ; read quadrature-axis PI output
 ```
 
-## 参见
+## 另请参阅
 
 - [Vd](Vd.md) — 直轴 PI 控制器输出
 - [IqErr](IqErr.md) — 驱动 q 轴 PI 的交轴误差

@@ -57,7 +57,7 @@ APDUsrUnits=327680   ; 每用户单位 5 个计数（比值 5 = 5 x 65536）
 APDUsrUnits         ; 读取当前比例
 ```
 
-## 参见
+## 另请参阅
 
 - [PDPos](PDPos.md) — 以这些用户单位报告的经缩放 P/D 计数器
 - [PDVel](PDVel.md) — 以这些用户单位报告的 P/D 速度

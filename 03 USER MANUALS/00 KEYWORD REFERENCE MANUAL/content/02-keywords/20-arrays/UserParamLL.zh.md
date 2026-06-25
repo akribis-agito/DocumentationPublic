@@ -44,7 +44,7 @@ AUserParamLL[1]=5000000000   ; store a large 64-bit integer
 AUserParamLL[1]              ; read the first element
 ```
 
-## 另请参见
+## 另请参阅
 
 - [UserParam](UserParam.md) — 32 位整数每轴数组
 - [UserParamD](UserParamD.md) — 64 位双精度浮点变体

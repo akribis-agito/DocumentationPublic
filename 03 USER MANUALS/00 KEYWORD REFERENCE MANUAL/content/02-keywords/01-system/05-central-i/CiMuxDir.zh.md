@@ -56,7 +56,7 @@ ACiMuxDir=1          ; route port 0 in one direction; other ports the other way
 ACiMuxDir            ; read the current per-port direction bit field
 ```
 
-## 参见
+## 另请参阅
 
 - [CiMuxSel](CiMuxSel.md) — 路由哪个信号（主站端与远程端选择）
 - [CIConnect](CIConnect.md) — 端口必须已连接才能发送其远程方向

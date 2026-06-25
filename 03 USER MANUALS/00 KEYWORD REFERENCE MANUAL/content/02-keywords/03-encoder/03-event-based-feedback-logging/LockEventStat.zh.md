@@ -62,7 +62,7 @@ ALockEventMode=0      ; revert to legacy mode
 ALockEventStat        ; reads 0 (no manual init needed)
 ```
 
-## 参见
+## 另请参阅
 
 - [LockEventMode](LockEventMode.md) —— 选择传统模式与统一模式
 - [LockEventInit](LockEventInit.md) —— 执行将该状态驱动至 `1` 的初始化

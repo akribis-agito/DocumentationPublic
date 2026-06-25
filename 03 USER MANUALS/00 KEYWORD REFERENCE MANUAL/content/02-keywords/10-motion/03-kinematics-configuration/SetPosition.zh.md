@@ -85,7 +85,7 @@ ASetPosition=0       ; redefine current position as zero
 ASetPosition=50000   ; redefine current position as 50000
 ```
 
-## 参见
+## 另请参阅
 
 - [ZeroPosErr](ZeroPosErr.md) — 置零位置误差（将参考贴合到反馈）而非重新定义坐标
 - [Pos](../01-kinematics-status/Pos.md) / [PosRef](../01-kinematics-status/PosRef.md) — 由 `SetPosition` 一并移动

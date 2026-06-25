@@ -45,7 +45,7 @@ AEncDir=1            ; reverse the counting direction
 - **上电 / 保存 / 复位。** 该设置保存至闪存；硬件交换或软件反转在初始化期间应用，因此新值在 [Save](../../01-system/02-operation/Save.md) + [Reset](../../01-system/02-operation/Reset.md) 之后生效。
 - **Central-i 断开。** 方向位被打包到远程编码器配置字中，并在 [CIConnect](../../01-system/05-central-i/CIConnect.md) 期间发送；在断开的端口上，远程单元保持其上次应用的方向。
 
-## 参见
+## 另请参阅
 
 - [EncType](EncType-AuxEncType.md) — 编码器类型；`EncDir` 不适用于 `EncType=4`
 - [SinCosSetup](SinCosSetup-AuxSinCosSet.md) — SIN/COS 编码器的方向设置

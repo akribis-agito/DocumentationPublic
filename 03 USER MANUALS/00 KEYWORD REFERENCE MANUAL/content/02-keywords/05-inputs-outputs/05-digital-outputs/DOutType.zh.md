@@ -72,7 +72,7 @@ ADOutType            ; read the present sink/source configuration
 - **电机使能/失能**——与 `MotorOn` 无关。
 - **保存**——可保存至闪存；启动时重新加载到硬件级。
 
-## 参见
+## 另请参阅
 
 - [DOutPort](DOutPort.md) / [DOutLog](DOutLog.md)——产生按类型划分的输出字
 - [DOutSelect](DOutSelect.md) / [DOutMode](DOutMode.md)——输出功能分配

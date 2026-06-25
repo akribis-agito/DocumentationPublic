@@ -66,7 +66,7 @@ language: zh-CN
 AMaxPWM=300          ; limit to 30% duty cycle (~14.4 V on a 48 V bus)
 ```
 
-## 参见
+## 另请参阅
 
 - [MaxVBus](MaxVBus.md) / [MinVBus](MinVBus.md) — 母线电压限值
 - [StatReg](../../07-status-and-faults/StatReg.md) — 第 22 位标记电压饱和

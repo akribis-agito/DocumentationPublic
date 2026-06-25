@@ -54,7 +54,7 @@ ACIDisconnect        ; tear down the Central-i link on the selected axis
 ACIStatus[1]         ; reads 0 (disabled) after the disconnect completes
 ```
 
-## 另见
+## 另请参阅
 
 - [CIConnect](CIConnect.md) — 发起链路
 - [CIAutoConnect](CIAutoConnect.md) — 上电时自动连接

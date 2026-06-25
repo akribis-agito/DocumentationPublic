@@ -88,7 +88,7 @@ if (BoardTemp > 75 °C)   →   disable axis, raise the board over-temperature f
 ABoardTemp          ; controller board temperature (°C)
 ```
 
-## 另请参见
+## 另请参阅
 
 - [PwrTemp](PwrTemp.md) — 功率级（IPM）温度
 - [MaxPwrTemp](MaxPwrTemp.md) — 功率级过温限值（用户设置）

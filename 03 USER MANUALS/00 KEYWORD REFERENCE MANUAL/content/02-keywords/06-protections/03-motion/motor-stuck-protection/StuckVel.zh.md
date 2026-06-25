@@ -60,7 +60,7 @@ AStuckVel[1]=40000    ; stuck if velocity stays at/below this (user units/s)
 AStuckVel[1]          ; read back the threshold
 ```
 
-## 参见
+## 另请参阅
 
 - [StuckCurr](StuckCurr.md) — 电流阈值（AND 条件的另一半）；也列出了模式绕过情况
 - [StuckTime](StuckTime.md) — 该条件必须持续多长时间

@@ -51,7 +51,7 @@ language: zh-CN
 AProgExpStckLL[1],0 ; read the deepest value on thread 1's numeric stack as a 64-bit integer
 ```
 
-## 参见
+## 另请参阅
 
 - [ProgExpStack](ProgExpStack.md) — 基础（32 位整数）形式
 - [ProgExpStackF](ProgExpStackF.md) — 32 位浮点数形式

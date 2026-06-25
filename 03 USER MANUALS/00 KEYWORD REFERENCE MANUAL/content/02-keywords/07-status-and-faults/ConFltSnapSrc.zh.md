@@ -66,7 +66,7 @@ AConFltSnapSrc[1]       ; query which parameter the first slot will capture
 AConFltSnapSrc          ; query the whole snapshot source list
 ```
 
-## 参见
+## 另请参阅
 
 - [ConFltSnapVal](ConFltSnapVal.md) — 捕获的值（此处的槽位 1–4，外加固定的系统参数）
 - [ConFlt](ConFlt.md) — 触发快照的故障码

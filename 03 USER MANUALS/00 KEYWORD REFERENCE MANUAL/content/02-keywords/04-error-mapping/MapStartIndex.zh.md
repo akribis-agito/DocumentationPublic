@@ -66,7 +66,7 @@ AMapStartIndex       ; read the current start index
 - **基于 1** — `MapStartIndex = 1` 指向 `MapTable[1]`。索引 `0` 无效。
 - **保存** — 可保存至闪存。
 
-## 参见
+## 另请参阅
 
 - [MapType](MapType.md) — 选择 1D/2D/3D 映射
 - [MapStartPos](MapStartPos.md) — 每个维度的起始位置

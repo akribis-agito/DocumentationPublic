@@ -71,7 +71,7 @@ ABrakeUsed=1
 ABrakeMode=3            ; automatic by motor-on state
 ```
 
-## 参见
+## 另请参阅
 
 - [Static brake](Staticbrake.md) — 保持制动器控制与定时概述
 - [BrakeMode](BrakeMode.md) — 制动器如何抱闸/松闸

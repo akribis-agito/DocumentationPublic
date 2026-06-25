@@ -55,7 +55,7 @@ language: zh-CN
 AVEncValue           ; read the count emitted by the virtual encoder
 ```
 
-## 参见
+## 另请参阅
 
 - [VEncOn](VEncOn.md) — 使能虚拟编码器
 - [VEncSrc](VEncSrc.md) — 输出所跟踪的源变量

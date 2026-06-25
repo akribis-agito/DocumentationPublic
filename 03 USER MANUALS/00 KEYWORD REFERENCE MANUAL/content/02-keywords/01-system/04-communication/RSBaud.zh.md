@@ -73,7 +73,7 @@ ARSBaud[1]=4         ; set the micro-USB port to 115200 bit/s
 ARSBaud[2]=1         ; set the RJ45 port to 9600 bit/s
 ```
 
-## 参见
+## 另请参阅
 
 - [CANBaud](CANBaud.md) — CAN 总线波特率
 - [ChainAddress](ChainAddress.md) — 在此端口上运行的多点串行寻址

@@ -56,7 +56,7 @@ ACurrLimMode=3
 ACurrLimRev=40000    ; magnitude of the negative current limit (mA)
 ```
 
-## 参见
+## 另请参阅
 
 - [CurrLimFwd](CurrLimFwd.md) — 正向电流指令限值
 - [CurrLimMode](CurrLimMode.md) — 必须为 3 本限值才生效

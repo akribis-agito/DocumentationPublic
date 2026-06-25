@@ -89,7 +89,7 @@ APosRef             ; read the current position reference
 
 ## 版本间的差异
 
-在 **v5（central-i）** 中，流水线为 64 位（`PosRef` 报告为 64 位值，范围更大，见 frontmatter）；参考级和钳位行为相同。**v5 仅适用于 central-i**，因此在 standalone 上 `PosRef` 仍为 v4 的 32 位值。
+在 **v5（central-i）** 中，流水线为 64 位（`PosRef` 报告为 64 位值，范围更大，见 frontmatter）；参考级和钳位行为相同。**v5 仅适用于 central-i**，因此在独立产品上 `PosRef` 仍为 v4 的 32 位值。
 
 ## 另请参阅
 

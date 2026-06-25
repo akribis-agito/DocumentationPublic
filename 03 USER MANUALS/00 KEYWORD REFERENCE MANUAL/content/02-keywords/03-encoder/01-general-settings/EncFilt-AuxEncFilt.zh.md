@@ -97,7 +97,7 @@ AEncFilt=0           ; no filtering (highest input frequency)
 AEncFilt=3           ; apply filtering to reject noise
 ```
 
-## 参见
+## 另请参阅
 
 - [EncType](EncType-AuxEncType.md) — 编码器类型；`EncFilt` 适用于 `EncType=1`
 - [EncSubType](EncSubType-AuxEncSubType.md) — 数字增量式编码器子类型

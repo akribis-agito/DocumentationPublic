@@ -65,6 +65,6 @@ AMaxAcc[1]=2000000    ; central-i v5: max accel/decel (user units). No effect on
 AMaxAcc[1]            ; read back
 ```
 
-## 参见
+## 另请参阅
 
 - [MaxVel](MaxVel.md) — 速度限值（饱和 + 超速跳闸）

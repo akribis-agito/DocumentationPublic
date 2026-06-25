@@ -79,7 +79,7 @@ ARptMode=1           ; unidirectional (stepping away)
 ARptMode            ; query current value
 ```
 
-## 参见
+## 另请参阅
 
 - [MotionMode](MotionMode.md) —— 必须为 2，`RptMode` 才适用
 - [RptCycles](RptCycles.md) —— 重复次数（一段还是一步取决于 `RptMode`）

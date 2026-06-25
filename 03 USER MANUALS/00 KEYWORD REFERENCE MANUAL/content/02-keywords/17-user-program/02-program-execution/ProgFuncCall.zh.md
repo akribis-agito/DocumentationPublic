@@ -64,7 +64,7 @@ AProgPushArg=20     ; ...and another
 AProgFuncCall,2     ; call function 2 with two input arguments
 ```
 
-## 参见
+## 另请参阅
 
 - [ProgFunc](ProgFunc.md) — 标记函数起始位置的标签
 - [Return](Return.md) — 从函数调用返回

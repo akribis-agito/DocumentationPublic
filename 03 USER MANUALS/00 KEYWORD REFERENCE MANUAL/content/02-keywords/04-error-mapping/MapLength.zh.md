@@ -67,7 +67,7 @@ AMapLength[1]        ; read the number of points in the first dimension
 - **`MapType = 0`** — 值已存储但不被查询。
 - **保存** — 可保存至闪存。
 
-## 参见
+## 另请参阅
 
 - [MapStartPos](MapStartPos.md) — 每个维度的起始位置
 - [MapPosGap](MapPosGap.md) — 修正点之间的间距

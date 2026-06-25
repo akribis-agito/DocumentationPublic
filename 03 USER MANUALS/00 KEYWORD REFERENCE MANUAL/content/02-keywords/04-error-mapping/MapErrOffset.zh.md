@@ -47,7 +47,7 @@ $$
 \text{actual} \mathrel{+}= \text{MapErrOffRamp} \cdot \text{SampleTime} \quad \text{(toward the target, clamped on arrival)}
 $$
 
-因此 [MapErrOffRamp](MapErrOffRamp.md) 设置变化速率（counts 每秒），而 `MapErrOffset` 设置目标值。每个周期将*实际*偏置加到插值后的修正上，然后该和值在加到反馈以形成 [Pos](../10-motion/01-kinematics-status/Pos.md) 之前，会先按接入斜坡进行缩放（参见 [MapErrOnStep](MapErrOnStep.md)）。以这种方式按斜坡变化意味着更改 `MapErrOffset` 会使校正位置产生平滑移动，而非突跳。实际偏置仅在内部映射类型完全恢复为关闭（退出斜坡完成）后或在仿真中才被强制为 0——而*不是*在退出斜坡退出过程中。
+因此 [MapErrOffRamp](MapErrOffRamp.md) 设置变化速率（counts 每秒），而 `MapErrOffset` 设置目标值。每个周期将*实际*偏置加到插值后的修正上，然后该和值在加到反馈以形成 [Pos](../10-motion/01-kinematics-status/Pos.md) 之前，会先按接入斜坡进行缩放（参见 [MapErrOnStep](MapErrOnStep.md)）。以这种方式按斜坡变化意味着更改 `MapErrOffset` 会使校正位置产生平滑移动，而非突跳。实际偏置仅在内部映射类型完全恢复为关闭（退出斜坡完成）后或在仿真中才被强制为 0——而*不是*在退出斜坡过程中。
 
 ## 示例
 

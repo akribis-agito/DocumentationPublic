@@ -66,7 +66,7 @@ ACurrRefMaster=0     ; copy current reference from axis A
 - **保存** —— 可保存至闪存。
 - **平台** —— 仅 v5 central-i。
 
-## 另请参见
+## 另请参阅
 
 - [CurrCmdSrc](CurrCmdSrc.md) —— 选择主轴电流指令（值 3）
 - [CurrCmdHTime](CurrCmdHTime.md) —— `[1]` 设置从轴跟随主轴的时长

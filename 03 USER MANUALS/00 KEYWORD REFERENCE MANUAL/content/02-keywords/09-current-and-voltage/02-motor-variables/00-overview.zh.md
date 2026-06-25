@@ -1,6 +1,6 @@
 # 电机变量
 
-本子组介绍与电机电流和电压相关的设置、指令和读数。它与电流控制密切相关（参见 [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md)）。
+本子组介绍与电机电流和电压相关的设置、指令和读数。它与电流控制密切相关（参见[控制整定 – 电流控制](../../11-control-tuning/06-current-control/00-overview.md)）。
 
 对于三相电机，此处的关键字位于 abc/dq 变换的两侧：dq 参考值 IqRef/IdRef 成为电压输出 Vq/Vd，进而成为相电压 Va/Vb/Vc；而测量得到的相电流 Ia/Ib 被变换为 dq 反馈 Iq/Id。
 

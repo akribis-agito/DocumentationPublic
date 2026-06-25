@@ -39,6 +39,6 @@ UPMRptCalc 是一条触发命令，用于根据累积的位置误差数据计算
 
 若 UPM 重复计算没有可用的有效被控对象模型，则计算返回错误 236；若捕获的运动长度加上扩展的 UPMRptTime 尾部超出 UPM 重复数组的可用空间，则返回错误 150。
 
-**另见：**
+**另请参阅：**
 
 [UPMRptOn](UPMRptOn.md)、[UPMRptState](UPMRptState.md)、[UPMRptLevel](UPMRptLevel.md)

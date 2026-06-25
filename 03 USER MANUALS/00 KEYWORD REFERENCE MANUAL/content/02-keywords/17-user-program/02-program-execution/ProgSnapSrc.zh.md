@@ -59,7 +59,7 @@ AProgSnapSrc[1]=0   ; 禁用线程 1 的第一个用户槽位
 AProgSnapSrc        ; 读取整个快照源配置
 ```
 
-## 另请参见
+## 另请参阅
 
 - [ProgSnapVal](ProgSnapVal.md) — 快照机制捕获的值
 - [ProgError](ProgError.md) — 触发捕获的逐线程运行时错误

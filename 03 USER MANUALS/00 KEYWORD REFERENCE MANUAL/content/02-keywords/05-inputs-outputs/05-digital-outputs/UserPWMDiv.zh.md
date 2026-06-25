@@ -77,7 +77,7 @@ AUserPWMDiv          ; read the present divisor
 - **电机使能/失能**——与 `MotorOn` 无关。
 - **保存**——可保存至闪存；启动时重新应用。
 
-## 参见
+## 另请参阅
 
 - [UserPWM](UserPWM.md)——按通道的占空比（本周期所适用的比例）
 - [DOutSelect](DOutSelect.md)——将 PWM 通道路由到输出

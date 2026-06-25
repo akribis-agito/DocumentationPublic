@@ -61,7 +61,7 @@ AProgRun[3],5       ; 以线程 3 运行任务 5
 AProgRun[1],0       ; 从 ProgHalt 停止处恢复线程 1
 ```
 
-## 另请参见
+## 另请参阅
 
 - [ProgTask](ProgTask.md) — 标记任务起始位置的标签
 - [ProgHalt](ProgHalt.md) — 暂停线程（可通过 `ProgRun[thread],0` 恢复）

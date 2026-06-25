@@ -50,7 +50,7 @@ language: zh-CN
 ACurrRefCtrl        ; read the loop-side current reference
 ```
 
-## 参见
+## 另请参阅
 
 - [CurrRef](CurrRef.md) — 经解耦/补偿后的最终电机电流指令
 - [CurrCmdSrc](../../08-axis-operation/03-current-operation-mode/CurrCmdSrc.md) — 电流运行模式下的电流指令源

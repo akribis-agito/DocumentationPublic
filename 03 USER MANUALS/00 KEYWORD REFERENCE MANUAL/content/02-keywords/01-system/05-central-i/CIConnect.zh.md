@@ -100,7 +100,7 @@ ACIGlobalStat        ; the port's connected bit is now set in the system-wide su
 - **仿真设备类型。** 当 [CIDeviceType](CIDeviceType.md) 设为某仿真类别时，物理的复位/获取设备/配置阶段被跳过：端口立即标记为已连接，[CIIdentity](CIIdentity.md) 以默认通道计数填充，并在 [CIGlobalStat](CIGlobalStat.md) 中置位该端口的已连接位。[CIGlobalStat](CIGlobalStat.md) 的仿真（高）位不会因连接而被置位；该位由 [MotorType](../../02-motor-and-amplifier/MotorType.md) = simulation 控制。
 - **设备类型与轴不匹配。** 在无法驱动电机的端口上请求驱动器类别（命令错误 `170`），或请求其子类型与轴的 `AmpType` 不兼容的驱动器类别 `CIDeviceType`（命令错误 `216`），都会在序列开始前被拒绝：该关键字直接返回命令错误，状态机和 [CIStatus](CIStatus.md) 保持不变。若设备/`AmpType` 不匹配是在连接序列*进行中*被检测到，则会使端口故障，并在 [CIStatus](CIStatus.md)`[6]` 中记录具体的代码（9、11、13 或 14）。
 
-## 参见
+## 另请参阅
 
 - [CIAutoConnect](CIAutoConnect.md) —— 在上电时自动运行此序列
 - [CIDisconnect](CIDisconnect.md) —— 断开链路

@@ -65,7 +65,7 @@ ACurrPosErrTh=0      ; disable this condition
 - **电机失能** —— 阈值引擎不运行。
 - **保存** —— 不可保存至闪存；启动时复位为 `0`。
 
-## 另请参见
+## 另请参阅
 
 - [电流运行模式](00-overview.md) —— 完整的模式切换条件
 - [CurrAInTh](CurrAInTh.md) —— 可选的第二个条件（模拟力反馈）

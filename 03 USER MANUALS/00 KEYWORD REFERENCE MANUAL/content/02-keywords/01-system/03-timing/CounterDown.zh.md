@@ -59,7 +59,7 @@ ACounterDown[1]       ; read the remaining count; 0 means the interval has elaps
 ACounterDown[2]=820   ; second, independent down-counter (about 50 ms; 820 / 16384 ≈ 0.050 s)
 ```
 
-## 另见
+## 另请参阅
 
 - [CounterUp](CounterUp.md) — 基于周期的加计数器
 - [Time](Time.md) / [HWTimer](HWTimer.md) — 墙钟定时器与高分辨率定时器

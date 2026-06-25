@@ -50,7 +50,7 @@ ASetPDPos=0          ; 将 P/D 计数器重新归零
 ASetPDPos=100000     ; 将 P/D 计数器预设为已知值
 ```
 
-## 参见
+## 另请参阅
 
 - [PDPos](PDPos.md) — 此指令所设置的计数器
 - [PDSubType](PDSubType.md) — P/D 输入信号格式

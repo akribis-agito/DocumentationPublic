@@ -72,7 +72,7 @@ AForceFFWP[1]=500       ; set the position-wise force feedforward gain
 AForceFFWP[1]           ; read the position-wise force feedforward gain
 ```
 
-## 另见
+## 另请参阅
 
 - [ForcePIVOn](ForcePIVOn.md) — 须为 1，ForceFFWP 方可生效
 - [ForceFFW](ForceFFW.md) — 电流维度力前馈

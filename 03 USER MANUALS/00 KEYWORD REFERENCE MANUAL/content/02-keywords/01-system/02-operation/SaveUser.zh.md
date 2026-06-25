@@ -25,7 +25,7 @@ language: zh-CN
 ASaveUser            ; save the current parameters to the user area (motor must be off)
 ```
 
-## 另见
+## 另请参阅
 
 - [LoadUser](LoadUser.md) — 恢复用户参数集
 - [Save](Save.md) / [Load](Load.md) — 主参数集

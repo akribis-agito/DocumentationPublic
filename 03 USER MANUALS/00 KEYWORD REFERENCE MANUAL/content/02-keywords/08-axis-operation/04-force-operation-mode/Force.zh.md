@@ -60,7 +60,7 @@ AForce              ; read the force feedback
 - **电机失能** — 采样继续进行；在伺服关闭情况下可用于监测测试台。
 - **只读** — 写入被拒绝。
 
-## 参见
+## 另请参阅
 
 - [ForceRef](ForceRef.md) — 力环跟踪的滤波后力参考
 - [ForceErr](ForceErr.md) — ForceRef 减去 Force

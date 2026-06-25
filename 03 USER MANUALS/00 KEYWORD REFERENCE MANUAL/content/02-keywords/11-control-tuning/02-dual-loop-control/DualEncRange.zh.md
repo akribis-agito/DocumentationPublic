@@ -60,7 +60,7 @@ ADualEncRange[2]=500000    ; upper bound (motor-encoder counts)
 ADualEncMode=1             ; enable range-limited dual-loop
 ```
 
-## 参见
+## 另请参阅
 
 - [DualEncMode](DualEncMode.md) — 使能范围限定双环（须为 1）
 - [DualEncSwapOn](DualEncSwapOn.md) — 伪双环切换开关（须为 1）

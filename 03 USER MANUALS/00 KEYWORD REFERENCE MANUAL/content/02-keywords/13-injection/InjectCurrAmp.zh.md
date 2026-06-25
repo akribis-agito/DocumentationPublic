@@ -51,7 +51,7 @@ AInjectCurrAmp=2133      ; 2133 mA 注入幅值（默认）
 AInjectCurrAmp          ; 查询当前注入幅值
 ```
 
-## 另请参见
+## 另请参阅
 
 - [InjectPoint](InjectPoint.md) — 电流指令注入时必须为 0
 - [InjectType](InjectType.md) — 选择波形形状及直接/叠加模式

@@ -55,7 +55,7 @@ ARLType=1            ; report line-to-line data (default)
 ARLType=0            ; report phase data
 ```
 
-## 参见
+## 另请参阅
 
 - [Rm](Rm.md) — 测得的电机电阻
 - [Lm](Lm.md) — 测得的电机电感

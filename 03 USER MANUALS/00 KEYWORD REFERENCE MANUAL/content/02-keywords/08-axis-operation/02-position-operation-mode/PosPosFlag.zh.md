@@ -72,7 +72,7 @@ APosPosFlag=2        ; switch to position mode when Pos > PosPosTh
 - **一次性** — 在切换触发的那个周期自动清零为 `0`；下一次进入需重新置位。
 - **保存** — 可保存至闪存；重启后保持。
 
-## 参见
+## 另请参阅
 
 - [PosPosTh](PosPosTh.md) — 与 Pos 比较的位置阈值
 - [Pos](../../10-motion/01-kinematics-status/Pos.md) — 与阈值比较的反馈值

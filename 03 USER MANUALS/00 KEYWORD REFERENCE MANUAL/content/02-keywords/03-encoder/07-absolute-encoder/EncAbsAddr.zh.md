@@ -47,7 +47,7 @@ AEncAbsAddr=16       ; target register address 16
 AEncAbsAddr          ; query the configured address
 ```
 
-## 参见
+## 另请参阅
 
 - [EncAbsWRType](EncAbsWRType.md) — 选择读或写访问
 - [EncAbsWData](EncAbsWData.md) — 要写入所寻址寄存器的数据

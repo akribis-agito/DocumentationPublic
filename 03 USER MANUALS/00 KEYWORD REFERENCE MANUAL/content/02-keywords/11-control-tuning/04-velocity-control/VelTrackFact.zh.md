@@ -68,7 +68,7 @@ AVelTrackFact       ; read the velocity feed-forward factor
 
 前馈项（`20000`）提供了 `VelRef` 的大部分，位置环只需补偿 `2000` 以覆盖残差。将 `VelTrackFact = 0` 将迫使位置环单独从误差产生全部 `22000`，从而增大稳态跟随误差。
 
-## 另请参见
+## 另请参阅
 
 - [dPosRef](../../10-motion/01-kinematics-status/dPosRef.md) — `VelTrackFact` 缩放的参考速度
 - [dPosRefFilt](dPosRefFilt.md) — 缩放前对 `dPosRef` 应用的低通滤波器

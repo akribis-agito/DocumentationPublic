@@ -62,7 +62,7 @@ ARecStart[1]         ; 在第一个示波器上启动记录
 ARecStart[2]         ; 在第二个示波器上启动记录
 ```
 
-## 另请参见
+## 另请参阅
 
 - [RecStat](RecStat.md) — 记录状态
 - [RecStop](RecStop.md) — 停止记录

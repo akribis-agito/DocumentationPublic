@@ -85,7 +85,7 @@ ACIDeviceType=0x00000003
 
 v5 是仅 Central-i 的 64 位固件。它在上述驱动器/I/O/仿真类别之外新增了一个真实设备类别（值 0x5），并增加了额外的驱动器适配器子类型变体。类别编码以及驱动器/I/O/仿真值在其他方面保持不变。
 
-## 参见
+## 另请参阅
 
 - [CIConnect](CIConnect.md) —— 对照此值校验已连接的设备
 - [CILinkConfig](CILinkConfig.md) —— 物理/协议参数

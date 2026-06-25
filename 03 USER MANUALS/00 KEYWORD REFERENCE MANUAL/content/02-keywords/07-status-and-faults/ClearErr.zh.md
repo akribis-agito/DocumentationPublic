@@ -55,7 +55,7 @@ language: zh-CN
 AClearErr            ; clear all entries from the error log
 ```
 
-## 参见
+## 另请参阅
 
 - [ErrLog](ErrLog.md) — 本命令所清除的错误日志
 - [ConFlt](ConFlt.md) — 每轴的故障码；正值会被追加到 ErrLog

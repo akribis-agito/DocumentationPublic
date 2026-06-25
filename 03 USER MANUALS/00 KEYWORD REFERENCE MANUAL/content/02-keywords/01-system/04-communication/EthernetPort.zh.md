@@ -51,7 +51,7 @@ AEthernetPort       ; read the configured port
 AEthernetPort=50000 ; set the TCP port (default), then Save and Reset
 ```
 
-## 参见
+## 另请参阅
 
 - [EthernetIP](EthernetIP.md) — IP 地址
 - [EthernetMAC](EthernetMAC.md) — MAC 地址

@@ -42,7 +42,7 @@ ALockCntr            ; read the number of events captured so far
 ALockCntr=0          ; reset the history-array index (overwrite from the start)
 ```
 
-## 另见
+## 另请参阅
 
 - [LockEn](LockEn-AuxLockEn.md) — 启用记录；将 `LockCntr` 复位为 0
 - [LockSrc](LockSrc-AuxLockSrc.md) — 定义使 `LockCntr` 递增的触发事件

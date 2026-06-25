@@ -60,7 +60,7 @@ language: zh-CN
 AReset               ; software power cycle (motor must be off)
 ```
 
-## 参见
+## 另请参阅
 
 - [Save](Save.md) — 复位前持久化保存参数
 - [Load](Load.md) — 从闪存重新加载而无需重新上电

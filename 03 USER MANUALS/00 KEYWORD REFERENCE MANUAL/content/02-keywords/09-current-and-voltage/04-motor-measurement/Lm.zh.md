@@ -54,7 +54,7 @@ ALm                 ; read measured motor inductance (µH)
 ALm=1200             ; set the inductance value manually (µH)
 ```
 
-## 参见
+## 另请参阅
 
 - [Rm](Rm.md) — 测得的电机电阻
 - [RLType](RLType.md) — 选择相数据与线间数据测量

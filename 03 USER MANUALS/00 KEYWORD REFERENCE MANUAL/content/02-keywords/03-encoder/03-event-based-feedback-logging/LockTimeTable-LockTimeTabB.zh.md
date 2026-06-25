@@ -44,7 +44,7 @@ language: zh-CN
 ALockTimeTable[1]    ; read the time stamp (in control cycles) of the first captured event
 ```
 
-## 参见
+## 另请参阅
 
 - [LockValTable](LockValTable-LockValTabB.md) —— 位置历史数组（相同的索引方案）
 - [LockCntr](LockCntr-AuxLockCntr.md) —— 用作数组索引的事件计数器

@@ -64,7 +64,7 @@ APosAuxUnitUnt[4]=0     ; string terminator
 APosAuxUnitUnt[1]       ; read back the first character code
 ```
 
-## 参见
+## 另请参阅
 
 - [PosAuxUnitFct](PosAuxUnitFct.md) — 辅助位置量的比例因子
 - [PosAuxUnitGrp](PosAuxUnitGrp.md) — 此标签适用的关键字

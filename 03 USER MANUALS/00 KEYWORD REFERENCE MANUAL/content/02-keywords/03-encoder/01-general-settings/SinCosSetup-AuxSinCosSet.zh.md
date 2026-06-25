@@ -15,7 +15,7 @@ language: zh-CN
 > [!warning]
 > 请勿将任何单个 `SinCosSetup` 值设置为下表所列以外的值。不当的值可能导致意外的反馈行为，并可能损坏系统。
 
-> **Note:** 可通过 `SinCosSetup[20]` 启用模拟测试模式（TMA）以检查 SIN/COS 信号。时域视图和 X/Y（Lissajous）视图均适用于信号偏置和相位校准。
+> **注意：** 可通过 `SinCosSetup[20]` 启用模拟测试模式（TMA）以检查 SIN/COS 信号。时域视图和 X/Y（Lissajous）视图均适用于信号偏置和相位校准。
 
 ## 工作原理
 
@@ -151,7 +151,7 @@ language: zh-CN
 
 例如，若 `SinCosSetup[6]=4`（插值因子 4096），则 `SinCosSetup[8]` 的最大值和最小值分别为 24322 和 4，对应的最大输入频率为 250 kHz 和 0.293 kHz。
 
-> **Note:** 建议将 `SinCosSetup[8]` 设置为其最大可能值，以支持尽可能高的编码器速度。
+> **注意：** 建议将 `SinCosSetup[8]` 设置为其最大可能值，以支持尽可能高的编码器速度。
 
 ### [9] 输出 A、B、Z 配置（默认 0）
 

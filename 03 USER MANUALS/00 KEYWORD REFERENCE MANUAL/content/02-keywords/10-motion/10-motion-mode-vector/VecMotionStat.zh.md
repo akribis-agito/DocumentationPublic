@@ -60,7 +60,7 @@ AVecMotionStat       ; 读取当前向量分组状态（在主轴上读取）
 
 如需等待向量运动完成，请轮询主轴上的 `VecMotionStat`，直至其读取为 `0`。
 
-## 参见
+## 另请参阅
 
 - [VecPause](VecPause.md) — 将分组设置为暂停状态（值 2）及恢复
 - [StopVec](StopVec.md) — 请求停止状态（值 3），然后返回 0

@@ -61,7 +61,7 @@ AEthernetMAC[1]=170 ; first octet (AA in hex)
 AEthernetMAC[3]     ; read the third octet (decimal)
 ```
 
-## 参见
+## 另请参阅
 
 - [EthernetIP](EthernetIP.md) — IP 地址
 - [EthernetPort](EthernetPort.md) — TCP 端口号

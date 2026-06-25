@@ -82,7 +82,7 @@ AOfflineBLog[5]     ; value returned by the remote for that message
 AOfflineBLog[6]     ; its acknowledge/error code (0 = ok)
 ```
 
-## 参见
+## 另请参阅
 
 - [OfflineALog](OfflineALog.md) —— 离线邮箱 1 日志（已预留；当前未被填充）
 - [CIOfflineSend](CIOfflineSend.md) —— 在此处记录其事务的来源之一

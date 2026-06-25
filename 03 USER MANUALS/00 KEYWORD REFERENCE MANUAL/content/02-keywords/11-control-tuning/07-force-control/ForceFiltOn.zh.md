@@ -67,7 +67,7 @@ ACalcFilters            ; recompute filter coefficients
 
 在 **v4** 中，`ForceFiltOn` 只能在电机关闭且不在运动中时修改。在 **v5（central-i）** 中，也可在电机使能及运动中修改。
 
-## 另见
+## 另请参阅
 
 - [ForceFiltDef](ForceFiltDef.md) — 定义每个力滤波器的类型及参数
 - [ForcePIVOn](ForcePIVOn.md) — 这些滤波器仅在本参数为 0 时有效

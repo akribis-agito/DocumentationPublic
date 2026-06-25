@@ -54,7 +54,7 @@ language: zh-CN
 AProgHalt[1]        ; pause thread 1; AProgRun[1],0 later resumes from this point
 ```
 
-## 参见
+## 另请参阅
 
 - [ProgRun](ProgRun.md) — 运行线程，或使用 `ProgRun[thread],0` 恢复执行
 - [ProgHaltAll](ProgHaltAll.md) — 暂停所有活动线程

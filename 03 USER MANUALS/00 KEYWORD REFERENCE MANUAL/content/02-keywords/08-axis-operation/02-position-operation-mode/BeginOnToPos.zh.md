@@ -87,7 +87,7 @@ AGoToPosMode         ; switch and start the relative move
 - **超出范围**——`0`–`1` 范围之外的值会被拒绝。
 - **保存**——不可保存至闪存；启动时重置为 `0`。
 
-## 参见
+## 另请参阅
 
 - [GoToPosMode](GoToPosMode.md) — 触发已使能移动的命令
 - [RetractTarget](RetractTarget.md) — 进入移动的绝对目标

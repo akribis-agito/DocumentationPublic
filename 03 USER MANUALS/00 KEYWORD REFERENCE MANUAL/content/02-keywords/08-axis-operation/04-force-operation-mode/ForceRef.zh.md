@@ -60,7 +60,7 @@ AForceRef           ; read the filtered force reference
 - **时序定时与滤波器** — 到位 / 时序定时以**未滤波**参考为基准；不要为序列步骤决策直接将 `ForceRef` 与 [ForceCmdVal](ForceCmdVal.md) 比较。
 - **只读** — 写入将被拒绝。
 
-## 参见
+## 另请参阅
 
 - [ForceCmdSrc](ForceCmdSrc.md) — 选择参考源
 - [ForceCmdSlope](ForceCmdSlope.md) — 原始参考趋向每个表值的斜坡速率

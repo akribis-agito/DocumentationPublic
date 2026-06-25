@@ -71,7 +71,7 @@ AZeroPosErr          ; clear axis A's position error (set PosRef = Pos)
 
 `ZeroPosErr` 仅存在于 **v5（central-i）**。在 v4 中，CAN 码（669）是一个未使用的占位符，因此该功能在独立产品或 v4 central-i 上不可用。
 
-## 另请参见
+## 另请参阅
 
 - [SetPosition](SetPosition.md) — 重新定义坐标（保留 `PosErr`），而非将误差清零
 - [PosErr](../01-kinematics-status/PosErr.md) — 此命令清零的误差

@@ -78,7 +78,7 @@ $$
 AVd                 ; read direct-axis PI output
 ```
 
-## 参见
+## 另请参阅
 
 - [Vq](Vq.md) — 交轴 PI 控制器输出
 - [IdErr](IdErr.md) — 驱动 d 轴 PI 的直轴误差

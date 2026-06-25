@@ -56,7 +56,7 @@ AStopOnHome=1        ; 使能在下一次原点输入状态变化时停止
 AStopOnHome         ; 0 = 已禁用 / 已触发，1 = 已使能
 ```
 
-## 另请参见
+## 另请参阅
 
 - [StopOnIndex](StopOnIndex.md) — 在编码器索引脉冲时停止的等效功能
 - [HomeStat](HomeStat.md) — 该标志所响应的原点输入状态

@@ -125,7 +125,7 @@ ALockSrc=-1          ; digital input 1, falling edge
 ALockSrc              ; read back the configured source/edge
 ```
 
-## 参见
+## 另请参阅
 
 - [LockEn](LockEn-AuxLockEn.md) —— 使能基于事件的反馈记录
 - [LockCntr](LockCntr-AuxLockCntr.md) —— 在每次 `LockSrc` 事件时递增

@@ -65,7 +65,7 @@ AAnomDtctUL[257]=8000    ; first stored slot of motion 1's block (not compared; 
 AAnomDtctUL[2]           ; read the first compared upper-limit point
 ```
 
-## 参见
+## 另请参阅
 
 - [AnomDtctLL](AnomDtctLL.md) —— 分段的下边界
 - [AnomDtctGap](AnomDtctGap.md) —— 每个表点所跨越的控制周期数

@@ -88,7 +88,7 @@ AParamCS[1]          ; same value as the post-save checksum — confirms a clean
 - **Save 中途断电。** 由于 `Save` 会先擦除该区域，在最终校验和/标记写入之前断电会使该区域不完整；在下一次上电时 [Load](Load.md) 检测到校验和不匹配，固件会将所有参数初始化为其默认值（而不是加载不完整的集合）。
 - **Central-i 断开。** 保存操作针对主站自身的参数，不受与任何远程单元链路状态的影响。
 
-## 参见
+## 另请参阅
 
 - [Load](Load.md) — 从闪存重新加载参数（并重新校验此处写入的校验和）
 - [SaveUser](SaveUser.md) — 保存至单独的用户区而非主集

@@ -60,7 +60,7 @@ AStepInMotCurr          ; query the current value
 
 在 **v5（central-i）** 中，此参数为 32 位浮点值（`float32`），而非 v4 的整数；它仍以 mA 表示。v5 仅适用于 central-i。
 
-## 另见
+## 另请参阅
 
 - [StepInPosCurr](StepInPosCurr.md) — 静止时的步进相电流（保持电流）
 - [MotorType](MotorType.md) — 必须为 6 或 7（步进）此关键字才适用

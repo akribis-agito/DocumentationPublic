@@ -84,7 +84,7 @@ ALockEn=0            ; disarm when done (LockVal and LockCntr keep their last va
 - **辅助编码器。** 提供 `AuxLockEn` 以保持对称性，但当前固件仅将捕获机制接入主编码器。
 - **Central-i 断连。** 在断连的端口上，远程驱动器不会馈送锁存配置寄存器，也不会有捕获位置返回主控。
 
-## 另见
+## 另请参阅
 
 - [LockSrc](LockSrc-AuxLockSrc.md) — 选择触发源和边沿
 - [LockCntr](LockCntr-AuxLockCntr.md) — 事件计数器，启用时复位为 0

@@ -64,7 +64,7 @@ AEthernetIP[4]=10    ; sets 192.168.0.10 (Save + Reset to apply)
 AEthernetIP[1]       ; read the most significant octet
 ```
 
-## 参见
+## 另请参阅
 
 - [EthernetPort](EthernetPort.md) — TCP 端口号
 - [EthernetMAC](EthernetMAC.md) — MAC 地址

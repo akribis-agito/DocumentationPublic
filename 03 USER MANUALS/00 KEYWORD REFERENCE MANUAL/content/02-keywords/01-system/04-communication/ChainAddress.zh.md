@@ -60,7 +60,7 @@ AChainAddress=1      ; this unit answers to address "1"; Save and Reset to apply
 AChainAddress=-1     ; disable chain addressing (respond to all commands)
 ```
 
-## 参见
+## 另请参阅
 
 - [CANAddr](CANAddr.md) — CAN 基地址（CAN 总线寻址，与串行链独立）
 - [RSBaud](RSBaud.md) — 链所使用的串口波特率

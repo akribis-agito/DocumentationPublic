@@ -70,7 +70,7 @@ AEncRes=10000        ; 10000 counts per revolution (rotary) or per pitch (linear
 AEncRes             ; query the configured encoder resolution
 ```
 
-## 参见
+## 另请参阅
 
 - [MotorType](../../02-motor-and-amplifier/MotorType.md) — 决定如何解释 `EncRes`
 - [PolePrs](../../02-motor-and-amplifier/PolePrs.md) — 极对数，与 `EncRes` 结合用于换相

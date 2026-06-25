@@ -35,6 +35,6 @@ summary: 选择间接访问机制所操作的目标数组。
 
 IndirectArray 用于选择间接访问的目标数组。其值为数组选择器，而非 CAN 码；当前唯一支持的选项为 1（GenData），有效范围为 1..1，默认值为 1。IndirectArray 与 IndirectIndex 和 IndirectValue 共同构成三寄存器间接访问机制，可实现动态数组寻址。该参数为非轴参数，不保存至闪存。
 
-**参见：**
+**另请参阅：**
 
 [IndirectIndex](IndirectIndex.md)、[IndirectValue](IndirectValue.md)、[IndirectDo](IndirectDo.md)

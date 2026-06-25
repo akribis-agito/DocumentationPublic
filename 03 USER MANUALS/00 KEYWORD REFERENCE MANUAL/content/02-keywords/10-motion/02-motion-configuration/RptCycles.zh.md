@@ -75,7 +75,7 @@ ARptCycles          ; query current value
 - **无法在运动中更改：** 在轴运动中写入会被拒绝；排队的新值仅在下一次 `Begin` 时生效。
 - **值在低于当前 RptCounter 时减小（运动之间）：** 因为测试是 `RptCycles != RptCounter`，将 `RptCycles` 降低到 `RptCounter` 已超过的值，只会在*下一次*递增时停止运动 —— 但这一点无实际意义，因为 `RptCycles` 无法在运动中写入；如果轴处于两次 `Begin` 之间，下一次 `Begin` 无论如何都会重置 `RptCounter`。
 
-## 参见
+## 另请参阅
 
 - [RptMode](RptMode.md) —— 定义何为一次重复
 - [RptWait](RptWait.md) —— 重复之间的停留时间

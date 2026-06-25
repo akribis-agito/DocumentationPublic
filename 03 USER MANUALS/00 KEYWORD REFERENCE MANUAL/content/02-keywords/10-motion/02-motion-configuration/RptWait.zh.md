@@ -64,7 +64,7 @@ ARptWait=500         ; dwell 500 ms between repetitions
 ARptWait            ; query current value
 ```
 
-## 参见
+## 另请参阅
 
 - [MotionMode](MotionMode.md) — 必须为 2，`RptWait` 才适用
 - [RptCycles](RptCycles.md) — 重复次数

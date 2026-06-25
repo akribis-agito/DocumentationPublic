@@ -73,7 +73,7 @@ AVecMemberAxes=7        ; 将前三个轴（第 0、1、2 位）加入分组
 AVecMemberAxes          ; 读取轴 A 上的当前成员轴掩码
 ```
 
-## 参见
+## 另请参阅
 
 - [VecType](VecType.md) — 线性与圆弧向量（圆弧要求恰好两个成员轴）
 - [VecAbsTrgt](VecAbsTrgt.md) — 各成员轴上的合成路径距离

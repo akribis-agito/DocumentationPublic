@@ -48,7 +48,7 @@ AInjectPosAmp=100        ; 位置注入幅值（默认）
 AInjectPosAmp           ; 查询当前位置注入幅值
 ```
 
-## 另请参见
+## 另请参阅
 
 - [InjectPoint](InjectPoint.md) — 位置指令注入时必须为 2
 - [InjectType](InjectType.md) — 选择波形形状及直接/叠加模式

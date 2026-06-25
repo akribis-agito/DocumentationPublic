@@ -55,7 +55,7 @@ AProgSingle[1],0    ; 步入：执行线程 1 的下一行，然后暂停
 AProgSingle[1],1    ; 步过线程 1 中的内部等待循环
 ```
 
-## 另请参见
+## 另请参阅
 
 - [ProgBreakThis](ProgBreakThis.md) — 在运行中的任务上设置断点
 - [ProgPointer](ProgPointer.md) — 每个任务的当前指令指针

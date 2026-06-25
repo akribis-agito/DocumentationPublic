@@ -111,7 +111,7 @@ AJerk                ; read current value
 
 `Jerk` 必须在轴静止时设置（运动中不接受）。
 
-## 参见
+## 另请参阅
 
 - [Accel](Accel.md) — 滤波器圆滑的加速斜坡
 - [Decel](Decel.md) — 滤波器圆滑的减速斜坡

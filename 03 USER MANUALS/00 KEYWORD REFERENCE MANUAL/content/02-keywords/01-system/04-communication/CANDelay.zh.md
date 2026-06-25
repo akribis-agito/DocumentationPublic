@@ -54,7 +54,7 @@ ACANDelay=6          ; require at least ~0.37 ms between CAN messages
 ACANDelay=0          ; no enforced spacing
 ```
 
-## 参见
+## 另请参阅
 
 - [CANAddr](CANAddr.md) — CAN 基地址
 - [CANBaud](CANBaud.md) — CAN 总线波特率

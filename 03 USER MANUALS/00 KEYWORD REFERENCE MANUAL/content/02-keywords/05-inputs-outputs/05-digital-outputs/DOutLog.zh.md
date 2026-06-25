@@ -66,7 +66,7 @@ $$
 - **回读**——读取取反掩码；与 `DOutPort` 结合以计算最终引脚电平。
 - **保存**——可保存至闪存；启动时重新应用。
 
-## 参见
+## 另请参阅
 
 - [DOutPort](DOutPort.md) — 取反前的输出状态（与 DOutLog 进行 XOR 的操作数）
 - [DOutType](DOutType.md) — 在 XOR 之后应用的灌/拉电流路由

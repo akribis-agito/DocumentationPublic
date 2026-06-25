@@ -50,7 +50,7 @@ AIndexPos           ; read the position of the last detected index
 - **Central-i 断开。** 主站每个周期镜像远程单元的逐轴索引位；当端口断开（[CIStatus](../../01-system/05-central-i/CIStatus.md)`[1] ≠ 3`）时，没有远程帧到达，因此 `IndexPos` 不会更新。
 - **一次运动中出现多个索引。** 每个检测到的脉冲都会用最新捕获的位置覆盖 `IndexPos`。如需逐事件的历史记录，请使用基于事件的记录（[LockValTable](../03-event-based-feedback-logging/LockValTable-LockValTabB.md)）。
 
-## 参见
+## 另请参阅
 
 - [IndexStat](IndexStat-AuxIndexStat.md) —— 指示索引是否已被检测到的标志
 - [EncType](../01-general-settings/EncType-AuxEncType.md) —— 编码器类型；索引检测适用于 `EncType=1` 或 `4`

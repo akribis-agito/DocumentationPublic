@@ -42,7 +42,7 @@ AUserParamD[1]=2.5  ; 存储一个双精度值
 AUserParamD[1]      ; 读取第一个元素
 ```
 
-## 参见
+## 另请参阅
 
 - [UserParam](UserParam.md) — 32位整数每轴数组
 - [UserParamF](UserParamF.md) — 32位单精度浮点数变体

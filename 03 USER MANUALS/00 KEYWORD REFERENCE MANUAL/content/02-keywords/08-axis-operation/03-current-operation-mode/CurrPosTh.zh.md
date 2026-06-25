@@ -72,7 +72,7 @@ ACurrPosTh=100000    ; position-reference threshold (user units)
 - **保存** —— 可保存至闪存；重启后保持。
 - **平台** —— v5 central-i 扩展为 64 位；v4 为 32 位。单位和行为不变。
 
-## 另请参见
+## 另请参阅
 
 - [CurrPosThDir](CurrPosThDir.md) —— 选择比较方向
 - [电流运行模式](00-overview.md) —— 完整的模式切换条件

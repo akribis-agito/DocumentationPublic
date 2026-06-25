@@ -53,7 +53,7 @@ language: zh-CN
 APDVel              ; 读取当前 P/D 指令速度（脉冲方向单位/s）
 ```
 
-## 参见
+## 另请参阅
 
 - [PDPos](PDPos.md) — `PDVel` 报告其每周期增量的计数器
 - [PDUsrUnits](PDUsrUnits.md) — 查询单位转换

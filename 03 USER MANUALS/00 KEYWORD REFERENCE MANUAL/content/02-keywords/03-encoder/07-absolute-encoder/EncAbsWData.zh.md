@@ -47,7 +47,7 @@ AEncAbsWData=200     ; value to write to the addressed register
 AEncAbsWData         ; query the staged write value
 ```
 
-## 参见
+## 另请参阅
 
 - [EncAbsAddr](EncAbsAddr.md) — 写入的寄存器地址
 - [EncAbsWRType](EncAbsWRType.md) — 选择读或写访问

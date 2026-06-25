@@ -51,7 +51,7 @@ language: zh-CN
 AProgThread         ; 读取当前正在执行的线程编号
 ```
 
-## 另请参见
+## 另请参阅
 
 - [ProgStat](../02-program-execution/ProgStat.md) — 指定线程的运行/停止状态
 - [ProgPriority](../02-program-execution/ProgPriority.md) — 各线程的调度优先级

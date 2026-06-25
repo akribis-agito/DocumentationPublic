@@ -62,7 +62,7 @@ ADynBrkRef             ; read back the configured ceiling
 ADynBrkRef=500          ; cap braking at roughly half strength
 ```
 
-## 参见
+## 另请参阅
 
 - [Dynamic brake](Dynamicbrake.md) — 动态制动机制概述
 - [DynBrakeOn](DynBrakeOn.md) — 使能动态制动

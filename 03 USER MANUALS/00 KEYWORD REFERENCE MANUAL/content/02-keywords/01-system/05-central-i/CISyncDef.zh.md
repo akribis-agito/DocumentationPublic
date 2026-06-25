@@ -50,7 +50,7 @@ ACISyncDef[1]       ; read the first synchronous-channel definition element
 ACISyncDef[2]       ; read the second synchronous-channel definition element
 ```
 
-## 参见
+## 另请参阅
 
 - [CILinkConfig](CILinkConfig.md) — 同步（及离线）通道的帧时序
 - [CIDeviceType](CIDeviceType.md) — 固定同步帧布局的设备类别

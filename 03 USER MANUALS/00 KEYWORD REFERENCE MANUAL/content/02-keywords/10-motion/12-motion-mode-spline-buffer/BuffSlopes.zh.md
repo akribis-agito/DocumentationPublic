@@ -60,7 +60,7 @@ ABuffSlopes[1]=0     ; 以零速度进入/离开（从静止开始并在静止�
 ABuffSlopes[1]=1000  ; 边缘斜率为每伺服采样 1.0 个位置单位
 ```
 
-## 参见
+## 另请参阅
 
 - [BuffEdgeMode](BuffEdgeMode.md) — 必须为 0 才能应用这些斜率
 - [BuffSplineMod](BuffSplineMod.md) — 斜率仅适用于抛物线/三次曲线拟合

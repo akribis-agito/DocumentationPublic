@@ -82,7 +82,7 @@ AModeSwitchPos[2]   ; read the position recorded on entry to position mode
 - **模式切换位置锚点**——[ModeSwitchPos](ModeSwitchPos.md)`[2]` 在每次成功进入时被覆盖；先前的值会丢失。
 - **DInMode 并行**——[DInMode](../../05-inputs-outputs/04-digital-inputs/DInMode.md) 代码 18 和 22 在上升沿执行相同的进入位置切换，但分别只从电流（18）或力（22）模式进行；与 `GoToPosMode` 本身一样，进入位置的方向不检查矢量/CNC 成员资格（检查矢量/CNC 成员的是相反的下降沿切换，即返回电流/力模式时）。
 
-## 参见
+## 另请参阅
 
 - [BeginOnToPos](BeginOnToPos.md) — 进入时可选地执行一次移动
 - [ModeSwitchPos](ModeSwitchPos.md) — 模式切换时记录的位置

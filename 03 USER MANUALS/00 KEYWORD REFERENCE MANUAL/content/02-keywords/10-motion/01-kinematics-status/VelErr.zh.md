@@ -58,7 +58,7 @@ $$
 \text{VelErr} = \text{VelRef} - \text{Vel}[1]
 $$
 
-由于被减数为 [Vel](Vel.md)`[1]`，`VelErr` 实际测量的对象随环路配置而变化：`Vel[1]` 通常为主编码器导数，在双环模式下为（缩放后的）[AuxVel](AuxVel.md)，在模拟测速机双环模式下为模拟测速机，在龙门模式下（A/B 轴）为 [GantryVel](../../12-gantry-control/03-gantry-tuning/GantryVel.md)。误差公式本身不因配置而分支——配置在上游改变 `Vel[1]`。
+由于减数为 [Vel](Vel.md)`[1]`，`VelErr` 实际测量的对象随环路配置而变化：`Vel[1]` 通常为主编码器导数，在双环模式下为（缩放后的）[AuxVel](AuxVel.md)，在模拟测速机双环模式下为模拟测速机，在龙门模式下（A/B 轴）为 [GantryVel](../../12-gantry-control/03-gantry-tuning/GantryVel.md)。误差公式本身不因配置而分支——配置在上游改变 `Vel[1]`。
 
 ### 强制为零的条件
 

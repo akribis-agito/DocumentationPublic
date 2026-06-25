@@ -75,7 +75,7 @@ APosPosFlag=1        ; switch when Pos < PosPosTh
 - **保存** — 可保存至闪存。
 - **平台** — v5 扩展为 64 位；v4 为 32 位。
 
-## 参见
+## 另请参阅
 
 - [PosPosFlag](PosPosFlag.md) — 置位该检查并选择比较方向
 - [Pos](../../10-motion/01-kinematics-status/Pos.md) — 与此阈值比较的反馈值

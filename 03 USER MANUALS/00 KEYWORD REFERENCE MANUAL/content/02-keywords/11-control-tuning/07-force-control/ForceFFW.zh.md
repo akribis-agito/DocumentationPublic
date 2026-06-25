@@ -69,7 +69,7 @@ AForceFFW[1]            ; read the current-wise force feedforward gain
 
 PID 随后仅需作用于实际力与指令之间的残余误差，稳态分量由前馈承担。
 
-## 另见
+## 另请参阅
 
 - [ForceFFWP](ForceFFWP.md) — 位置维度力前馈（仅 force-over-PIV）
 - [ForceVelFFW](ForceVelFFW.md) — 电流参考处的速度反馈补偿

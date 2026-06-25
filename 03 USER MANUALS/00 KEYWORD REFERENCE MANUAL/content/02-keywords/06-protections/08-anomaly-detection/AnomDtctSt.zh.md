@@ -74,7 +74,7 @@ AAnomDtctSt[4]     ; active upper limit
 AAnomDtctSt[5]     ; active monitored motion
 ```
 
-## 参见
+## 另请参阅
 
 - [AnomDtctOn](AnomDtctOn.md) —— 置位或禁用检测器
 - [AnomDtctUL](AnomDtctUL.md) / [AnomDtctLL](AnomDtctLL.md) —— 当前生效限值来源的分段

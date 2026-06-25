@@ -114,7 +114,7 @@ AJerkInDec           ; read current value
 
 在 **v5** 中 `JerkInDec` 是以用户加加速度单位表示的浮点值，并传入同一结构化规划器，不带 ×1000 因子。**v5 仅适用于 central-i。**
 
-## 参见
+## 另请参阅
 
 - [JerkInAcc](JerkInAcc.md) — 加速阶段的加加速度
 - [Jerk](Jerk.md) — 二阶 S 曲线设置（机制不同）

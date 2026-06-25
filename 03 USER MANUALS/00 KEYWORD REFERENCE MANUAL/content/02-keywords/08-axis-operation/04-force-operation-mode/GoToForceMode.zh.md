@@ -70,7 +70,7 @@ AGoToForceMode       ; gracefully switch to force operation mode
 - **直接赋值与 `GoToForceMode` 的对比** —— 写入 [OperationMode](../01-general-keywords/OperationMode.md) = `4` **不会**复位 `ForceCmdIndex` / `ForceCmdCntr`；它可以继续进行中的序列。`GoToForceMode` 总是从条目 1 重新开始。
 - **原子性** —— 固件在积分器赋初值和模式切换前后禁用中断，使该变更在单个控制周期内对所有控制环可见。
 
-## 参见
+## 另请参阅
 
 - [OperationMode](../01-general-keywords/OperationMode.md) —— 当前活动的控制模式
 - [ForceCmdSrc](ForceCmdSrc.md) —— 进入模式后力参考的来源

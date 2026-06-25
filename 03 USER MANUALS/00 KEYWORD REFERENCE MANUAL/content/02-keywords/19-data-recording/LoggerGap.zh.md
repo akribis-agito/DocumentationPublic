@@ -55,7 +55,7 @@ ALoggerGap=1         ; 每个节拍采样一次（~1 ms，~1 kHz）
 ALoggerGap          ; 查询当前采样间隔
 ```
 
-## 另请参见
+## 另请参阅
 
 - [LoggerOn](LoggerOn.md) — 启动/停止记录器
 - [LoggerParams](LoggerParams.md) — 记录器记录的参数

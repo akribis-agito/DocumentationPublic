@@ -61,7 +61,7 @@ ACIOfflineData[4]      ; read back the value returned by the remote
 ACIOfflineData[5]      ; 0 = ok, non-zero = error code
 ```
 
-## 另见
+## 另请参阅
 
 - [CIOfflineDef](CIOfflineDef.md) — 离线通道定义（频率 / 滤波器）
 - [CIOfflineSend](CIOfflineSend.md) — 发送此事务并捕获回复

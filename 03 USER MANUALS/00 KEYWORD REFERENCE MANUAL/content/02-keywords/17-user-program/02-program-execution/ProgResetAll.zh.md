@@ -50,7 +50,7 @@ AProgHaltAll         ; 首先停止所有线程...
 AProgResetAll        ; ...然后重置所有指针和栈
 ```
 
-## 另请参见
+## 另请参阅
 
 - [ProgReset](ProgReset.md) — 重置单个线程
 - [ProgHaltAll](ProgHaltAll.md) — 停止所有线程（ProgResetAll 执行前必须调用）

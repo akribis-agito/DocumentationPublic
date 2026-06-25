@@ -1,4 +1,3 @@
-language: zh-CN
 # 注入
 
 Agito 控制器支持在 4 个不同位置（由 [InjectPoint](InjectPoint.md) 选择）注入常用波形（正弦波、方波、脉冲、扫频信号（chirp）及伪随机二进制序列（PRBS））。

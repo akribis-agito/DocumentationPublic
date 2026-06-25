@@ -59,7 +59,7 @@ AEncAbsBits             ; query the configured bit count
 AAuxEncAbsBits=22       ; auxiliary absolute encoder is 22-bit
 ```
 
-## 另见
+## 另请参阅
 
 - [EncType](EncType-AuxEncType.md) — 编码器类型；`EncAbsBits` 适用于绝对式编码器（3、6、8）
 - [EncAbsMB](EncAbsMB-AuxEncAbsMB.md) — 去除的低位；与 `EncAbsBits` 共同确定回绕模数

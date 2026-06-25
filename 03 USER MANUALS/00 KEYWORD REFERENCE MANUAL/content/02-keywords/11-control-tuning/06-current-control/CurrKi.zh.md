@@ -105,7 +105,7 @@ ACurrKi              ; read back the gain
 
 4. **确认积分项未发生饱和**：在饱和解除后立即检查 [Vq](../../../02-keywords/09-current-and-voltage/02-motor-variables/Vq.md)，其值应随误差平滑回落，而非超调——超调将表明抗积分饱和未正常介入。
 
-## 另见
+## 另请参阅
 
 - [CurrGain](CurrGain.md) — 电流环比例增益（与本参数共同构成 PI 调节器）
 - [IqErr](../../../02-keywords/09-current-and-voltage/02-motor-variables/IqErr.md) — 增益所积分的交轴电流误差

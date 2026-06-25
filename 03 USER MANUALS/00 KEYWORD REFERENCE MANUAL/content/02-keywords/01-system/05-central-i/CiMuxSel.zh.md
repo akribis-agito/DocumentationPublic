@@ -53,7 +53,7 @@ ACiMuxSel[1]        ; read the master-side multiplexer select for this port
 ACiMuxSel[2]        ; read the remote-side multiplexer select for this port
 ```
 
-## 参见
+## 另请参阅
 
 - [CiMuxDir](CiMuxDir.md) — 多路复用器方向（触发硬件更新）
 - [CIConnect](CIConnect.md) — 端口必须已连接才能发送其远程选择

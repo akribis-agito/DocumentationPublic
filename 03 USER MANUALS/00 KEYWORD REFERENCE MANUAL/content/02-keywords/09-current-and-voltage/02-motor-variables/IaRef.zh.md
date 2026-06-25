@@ -57,7 +57,7 @@ language: zh-CN
 AIaRef              ; read phase A current reference (mA)
 ```
 
-## 参见
+## 另请参阅
 
 - [Ia](Ia.md) — 实测 A 相电流
 - [IaErr](IaErr.md) — A 相电流误差

@@ -126,7 +126,7 @@ AVelGain[1]         ; read the velocity-loop proportional gain
 
 在 **v5（central-i）**中，`VelGain` 为浮点值，范围更宽（`0` 到 `1000000000`）；比例×误差 → PI → 电流指令的路径与之前相同。**v5 仅适用于 central-i。**
 
-## 另请参见
+## 另请参阅
 
 - [VelErr](../../10-motion/01-kinematics-status/VelErr.md) — `VelGain` 所乘的速度误差
 - [VelRef](../../10-motion/01-kinematics-status/VelRef.md) — 速度环参考值

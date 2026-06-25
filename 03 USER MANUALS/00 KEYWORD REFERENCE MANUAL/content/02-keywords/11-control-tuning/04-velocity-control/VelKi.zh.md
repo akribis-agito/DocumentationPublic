@@ -111,7 +111,7 @@ AVelKi[1]           ; read the velocity-loop integral gain
 
 在 **v5（central-i）**中，`VelKi` 为浮点值；比例×误差累加、内部抗积分饱和及模式切换预载与之前相同。**v5 仅适用于 central-i。**
 
-## 另请参见
+## 另请参阅
 
 - [VelGain](VelGain.md) — `VelKi` 积分所用的比例增益
 - [VelErr](../../10-motion/01-kinematics-status/VelErr.md) — 速度环输入端的速度误差

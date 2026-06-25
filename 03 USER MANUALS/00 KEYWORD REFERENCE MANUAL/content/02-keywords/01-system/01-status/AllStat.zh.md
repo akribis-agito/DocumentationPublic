@@ -80,7 +80,7 @@ AAllStat[3]=0x21     ; axes 1 and 2 (index 0b11), basic + less-important groups 
 
 （数组索引为轴掩码，所赋的值为组掩码；值在二进制回复中返回，而非作为可打印的关键字值。）
 
-## 另请参见
+## 另请参阅
 
 - [UnitStat](UnitStat.md) — 单元硬件/固件健康状态
 - [CIStatus](../05-central-i/CIStatus.md) — 每轴的 Central-i 状态组（组 4）

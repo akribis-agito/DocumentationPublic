@@ -67,7 +67,7 @@ AMapErrOnStep        ; read the current step size
 - **快速开/关切换（斜坡中途重新接入）** — 内部映射类型仅在已完全关闭时才从零重新置位接入斜坡。如果你将 [MapType](MapType.md) 设为 0，然后在退出斜坡完成*之前*（计数器仍高于 0）又设回 1/2/3，该重新写入不会将计数器复位为 0；接入只是从计数器的当前部分值继续。因此修正的重新接入比完整斜坡更快且无位置跳变，因为反馈本来就未曾完全卸除该修正。
 - **保存** — 可保存至闪存。
 
-## 参见
+## 另请参阅
 
 - [MapErrOffset](MapErrOffset.md) — 添加到修正上的恒定偏置
 - [MapErrOffRamp](MapErrOffRamp.md) — 该偏置的变化速率

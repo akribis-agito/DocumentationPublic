@@ -55,7 +55,7 @@ AVEncType=0          ; pulse/direction output (default)
 AVEncType=1          ; A-quad-B quadrature output
 ```
 
-## 参见
+## 另请参阅
 
 - [VEncOn](VEncOn.md) — 使能虚拟编码器
 - [VEncSrc](VEncSrc.md) — 虚拟编码器的源变量

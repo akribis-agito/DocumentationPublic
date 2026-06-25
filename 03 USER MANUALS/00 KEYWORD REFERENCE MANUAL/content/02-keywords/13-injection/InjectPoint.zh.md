@@ -65,7 +65,7 @@ AInjectPoint=2       ; 在位置指令处注入
 AInjectPoint        ; 查询当前注入位置
 ```
 
-## 另请参见
+## 另请参阅
 
 - [InjectType](InjectType.md) — 选择波形及注入模式
 - [InjectCurrAmp](InjectCurrAmp.md) — 电流指令注入的幅值（InjectPoint = 0）

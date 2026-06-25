@@ -28,7 +28,7 @@ language: zh-CN
 
 以上述数组定义启动第一个示波器的记录后，BPos、BVel\[1\] 和 BCurrRef 均被捕获。
 
-## 另请参见
+## 另请参阅
 
 - [RecUpload](RecUpload.md) — 按此顺序流式传输捕获数据
 - [RecUploadNext](RecUploadNext.md) — 分包上传

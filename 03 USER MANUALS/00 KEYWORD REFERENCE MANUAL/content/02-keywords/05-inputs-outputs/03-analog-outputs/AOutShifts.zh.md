@@ -81,7 +81,7 @@ AAOutShifts[1]        ; read back the shift
 - **保存** —— 可保存至闪存；启动时重新载入。
 - **平台** —— 仅 standalone v4 和 central-i v4。在 central-i v5 上请使用 [AOutGain](AOutGain.md) 以获得任意实数乘子。
 
-## 参见
+## 另请参阅
 
 - [AOutMode](AOutMode.md) —— 选择被监视参数（移位仅在监视模式下适用）
 - [AOutGain](AOutGain.md) —— 取代此移位的 v5 浮点增益

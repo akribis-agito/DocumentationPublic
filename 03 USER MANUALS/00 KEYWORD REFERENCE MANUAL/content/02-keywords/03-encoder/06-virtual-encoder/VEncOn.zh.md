@@ -72,7 +72,7 @@ AVEncOn=1            ; enable the virtual encoder
 AVEncOn=0            ; disable the virtual encoder
 ```
 
-## 另请参见
+## 另请参阅
 
 - [VEncSrc](VEncSrc.md) — 输出所跟踪的源变量
 - [VEncType](VEncType.md) — 输出信号格式（脉冲/方向或 A-quad-B）

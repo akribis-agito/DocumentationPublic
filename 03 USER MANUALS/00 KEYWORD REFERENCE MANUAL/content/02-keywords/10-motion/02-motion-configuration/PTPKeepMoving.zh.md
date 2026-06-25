@@ -80,7 +80,7 @@ AAbsTrgt=140000      ; profiler retargets to the new value, no stop, no re-Begin
 - **重复 PTP（`MotionMode = 2`）：** 将 `PTPKeepMoving = 0` 保持不变。因为重复模式共用 PTP 规划器及其段结束测试，将 `PTPKeepMoving = 1` 会抑制段完成并使重复停止推进 —— [RptCounter](../05-motion-status/RptCounter.md) 永远不会递增。重复在其他方面由 [RptCounter](../05-motion-status/RptCounter.md)/[RptCycles](RptCycles.md) 和 [StopRep](../04-motion-command/StopRep.md) 管理。
 - **Stop/Abort：** 无论 `PTPKeepMoving` 如何，`Stop` 和 `Abort` 都会结束运动（停止请求位优先）。
 
-## 参见
+## 另请参阅
 
 - [Begin](../04-motion-command/Begin.md) —— 启动（或重定目标）运动
 - [AbsTrgt](../13-motion-mode-ptp/AbsTrgt.md) —— 绝对目标位置

@@ -62,7 +62,7 @@ ACurrPosTh=50000     ; position-reference threshold
 - **超出范围** —— 超出 `-1`–`1` 的值被拒绝。
 - **保存** —— 不可保存至闪存；启动时复位为 `0`。
 
-## 另请参见
+## 另请参阅
 
 - [CurrPosTh](CurrPosTh.md) —— 位置参考阈值
 - [电流运行模式](00-overview.md) —— 完整的模式切换条件

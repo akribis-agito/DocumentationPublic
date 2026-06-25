@@ -68,7 +68,7 @@ ALockEventStat        ; verify this reads 1 (initialized and ready) before armin
 ALockEn=1             ; now allowed; arm event-based feedback logging
 ```
 
-## 另见
+## 另请参阅
 
 - [LockEventMode](LockEventMode.md) — 选择传统模式与统一模式（本命令适用于模式 1）
 - [LockEventStat](LockEventStat.md) — 报告是否已完成初始化

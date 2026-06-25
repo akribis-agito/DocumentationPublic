@@ -51,7 +51,7 @@ AInjectFreq=200      ; 2 Hz
 AInjectFreq         ; 查询当前注入频率
 ```
 
-## 另请参见
+## 另请参阅
 
 - [InjectType](InjectType.md) — 选择使用此频率的正弦/方波波形
 - [InjectChirpF](InjectChirpF.md) — chirp 注入的起始/结束频率

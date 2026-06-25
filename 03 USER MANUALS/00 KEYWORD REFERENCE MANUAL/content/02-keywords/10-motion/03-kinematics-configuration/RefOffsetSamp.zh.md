@@ -70,7 +70,7 @@ ARefOffsetSamp=100   ; spread the offset over 100 servo samples
 ARefOffsetSamp      ; query current value
 ```
 
-## 参见
+## 另请参阅
 
 - [RefOffsetStep](RefOffsetStep.md) — 每采样偏置量
 - [PosRef](../01-kinematics-status/PosRef.md) — 偏置注入的目标参考

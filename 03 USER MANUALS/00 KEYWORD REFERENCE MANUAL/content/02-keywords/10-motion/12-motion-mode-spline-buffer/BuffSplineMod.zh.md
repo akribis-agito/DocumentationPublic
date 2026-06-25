@@ -97,7 +97,7 @@ ABuffStatus[6]                ; 每周期采样数（= 最后一个 BuffTime 值
 
 对 `BuffPos`、`BuffTime`、`BuffSplineMod`、`BuffEdgeMode` 或 `BuffSlopes` 的修改会将轨迹标记为"过期"：在重新运行 `BuffCalc` 之前，下一次 `Begin` 将被拒绝。可通过 [StopBuff](../04-motion-command/StopBuff.md) 在下一个周期边界处结束运动。
 
-## 参见
+## 另请参阅
 
 - [BuffEdgeMode](BuffEdgeMode.md) — 应用于抛物线/三次曲线拟合的起始/末端边界条件
 - [BuffSlopes](BuffSlopes.md) — 边界条件需要时使用的边缘斜率

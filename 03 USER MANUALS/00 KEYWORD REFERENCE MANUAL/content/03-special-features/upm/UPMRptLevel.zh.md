@@ -36,6 +36,6 @@ UPMRptLevel 设置 UPM 重复补偿算法所使用的模型范围（Q）低通�
 
 > **版本说明：** 此为该参数的 v4 名称。在 v5 中，同一参数已重命名为 [UPMRptRange](UPMRptRange.md)，以 Hz 为单位表示频率范围。两者为同一底层参数——v4 控制器请使用 `UPMRptLevel`，v5 控制器请使用 `UPMRptRange`。
 
-**另见：**
+**另请参阅：**
 
 [UPMRptRange](UPMRptRange.md)、[UPMRptOn](UPMRptOn.md)、[UPMRptCalc](UPMRptCalc.md)、[UPMRptState](UPMRptState.md)

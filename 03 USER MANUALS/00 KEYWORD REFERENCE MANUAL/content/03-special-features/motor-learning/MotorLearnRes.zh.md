@@ -35,6 +35,6 @@ summary: 电机学习过程完成后报告的编码器分辨率测量结果。
 
 MotorLearnRes 是电机学习过程完成后报告的只读结果：学习过程中测量到的编码器分辨率。对于旋转电机，该值为两个相邻索引（标记）脉冲之间的编码器计数，即每机械转动一周的计数值；该值仅在自动模式学习完成后报告（MotorLearnSta = 3）。对于直线电机，该值为基于一个电气周期内行程距离估算出的分辨率。该参数为轴相关状态变量，不保存至闪存。
 
-**参见：**
+**另请参阅：**
 
 [MotorLearnOn](MotorLearnOn.md)、[MotorLearnSta](MotorLearnSta.md)、[MotorLearnPl](MotorLearnPl.md)

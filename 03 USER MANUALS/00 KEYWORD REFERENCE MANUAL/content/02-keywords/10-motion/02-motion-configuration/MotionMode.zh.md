@@ -92,7 +92,7 @@ AMotionMode=2        ; repetitive point-to-point motion
 AMotionMode         ; query current mode
 ```
 
-## 参见
+## 另请参阅
 
 - [Begin](../04-motion-command/Begin.md) —— 在所选模式下启动运动
 - [JerkMode](JerkMode.md) —— 规划器阶数（模式 1 和 2）

@@ -49,7 +49,7 @@ AInjectCurrDC=0          ; 无偏置（默认）
 AInjectCurrDC           ; 查询当前直流偏置
 ```
 
-## 另请参见
+## 另请参阅
 
 - [InjectPoint](InjectPoint.md) — 电流指令注入时必须为 0
 - [InjectType](InjectType.md) — 选择波形及直接/叠加模式

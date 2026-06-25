@@ -37,6 +37,6 @@ SpringOn 使能弹簧补偿功能，该功能向控制环注入与位置相关�
 
 SpringOn 接受 0 至 2 的值，默认为 0。补偿功能通过简单的非零测试进行门控，因此任意非零值（1 或 2）均以相同方式使能；两个使能值之间的行为没有区别。由于该参数不保存至闪存，上电时将恢复为 0（禁用），需重新设置以再次使能。轴运动中亦可更改该参数。
 
-**参见：**
+**另请参阅：**
 
 [SpringPLow](SpringPLow.md)、[SpringPHigh](SpringPHigh.md)、[SpringTable](SpringTable.md)、[SpringPosFFW](SpringPosFFW.md)

@@ -68,7 +68,7 @@ ARefOffsetStep      ; query current value
 
 ±（采样率 × 10）范围钳位（frontmatter range 中所示）在 v4 和 v5 中均适用；注入机制不变。**v5 仅限 central-i。**
 
-## 参见
+## 另请参阅
 
 - [RefOffsetSamp](RefOffsetSamp.md) — 施加偏置所经历的采样数
 - [PosRef](../01-kinematics-status/PosRef.md) — 步长累加的目标参考累加器

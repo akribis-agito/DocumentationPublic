@@ -71,7 +71,7 @@ language: zh-CN
 AMaxMotorCurr=50000  ; trip if motor current exceeds 50 A (mA units)
 ```
 
-## 参见
+## 另请参阅
 
 - [MaxPhaseCurr](MaxPhaseCurr.md) — 单相过流跳闸
 - [PeakCL](PeakCL.md) / [ContCL](ContCL.md) — 电流限制（区别于跳闸）

@@ -90,7 +90,7 @@ APosErr                       ; last value before the trip; will be > MaxPosErr
 
 轴会在越过阈值的同一控制采样内被禁用，因此没有斜坡；如果需要的是软停止，则应留出裕量并依靠软件 [FwdPLim](../position-limit-protection/FwdPLim.md)/[RevPLim](../position-limit-protection/RevPLim.md) 先行制动。
 
-## 参见
+## 另请参阅
 
 - [PosErr](../../../10-motion/01-kinematics-status/PosErr.md) — 此限值所作用的被测位置误差
 - [MaxPosErrOL](MaxPosErrOL.md) — 开环位置误差限值（备用阈值）

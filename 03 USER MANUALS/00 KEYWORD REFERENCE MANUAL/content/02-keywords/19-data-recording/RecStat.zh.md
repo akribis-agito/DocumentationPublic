@@ -75,7 +75,7 @@ language: zh-CN
 ARecStat[1]         ; 查询第一个示波器的记录状态
 ```
 
-## 另请参见
+## 另请参阅
 
 - [RecStart](RecStart.md) — 启动记录
 - [RecStop](RecStop.md) — 停止记录

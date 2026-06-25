@@ -67,7 +67,7 @@ AUserPWM[1]          ; read channel 1 duty
 - **电机使能/失能**——与 `MotorOn` 无关。
 - **保存**——可保存至闪存；启动时重新应用到硬件。
 
-## 参见
+## 另请参阅
 
 - [UserPWMDiv](UserPWMDiv.md)——两个通道共享的 PWM 周期/频率
 - [DOutSelect](DOutSelect.md)——将 PWM 通道路由到输出（UserPWM 1 / 2 代码）

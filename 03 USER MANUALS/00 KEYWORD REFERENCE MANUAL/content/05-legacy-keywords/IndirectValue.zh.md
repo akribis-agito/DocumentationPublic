@@ -35,6 +35,6 @@ summary: 保存间接访问操作的源值。
 
 IndirectValue 保存间接访问操作的源值。在执行 IndirectDo 之前，将待写入的值设置到 IndirectValue 中，IndirectDo 将把该值写入所选数组元素。IndirectValue 接受完整的 32 位有符号范围，即 -2147483648 至 2147483647，默认值为 0。该参数为非轴参数，不保存至闪存。
 
-**参见：**
+**另请参阅：**
 
 [IndirectIndex](IndirectIndex.md)、[IndirectArray](IndirectArray.md)、[IndirectDo](IndirectDo.md)

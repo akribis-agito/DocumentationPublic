@@ -44,6 +44,6 @@ MotorLearnSta 是报告电机学习过程当前状态的只读参数。该参数
 | 4 | 自动模式学习失败 |
 | 5 | 已停止——学习过程中电机意外关闭（参见 [MotorReason](../../02-keywords/07-status-and-faults/MotorReason.md)） |
 
-**参见：**
+**另请参阅：**
 
 [MotorLearnOn](MotorLearnOn.md)、[MotorLearnRes](MotorLearnRes.md)、[MotorLearnPl](MotorLearnPl.md)

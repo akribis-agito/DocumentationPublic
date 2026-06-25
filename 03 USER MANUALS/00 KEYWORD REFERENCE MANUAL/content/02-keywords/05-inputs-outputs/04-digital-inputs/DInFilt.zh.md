@@ -76,7 +76,7 @@ ADInFilt              ; read back the filter setting
 - **电机使能／失能** —— 无论 `MotorOn` 状态如何，都在硬件中运行。
 - **保存** —— 可保存至闪存；启动时重新载入硬件寄存器。
 
-## 参见
+## 另请参阅
 
 - [DInPort-DInPortHigh](DInPort-DInPortHigh.md) —— 得到的输入状态（滤波器为第一环节）
 - [DInLog-DInLogHigh](DInLog-DInLogHigh.md) —— 逻辑取反（在本滤波器之后应用）

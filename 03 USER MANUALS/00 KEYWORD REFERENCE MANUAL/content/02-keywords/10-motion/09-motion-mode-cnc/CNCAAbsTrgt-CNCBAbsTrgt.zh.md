@@ -34,8 +34,8 @@ CNC 模式沿路径运行协调的多轴运动，路径以段列表（FIFO）的
 ## 示例
 
 ```text
-ACNCAAbsTrgt        ; 读取 A 组当前活动段路径长度
-ACNCBAbsTrgt        ; 读取 B 组当前活动段路径长度
+ACNCAAbsTrgt        ; A 组当前活动段路径长度
+ACNCBAbsTrgt        ; B 组当前活动段路径长度
 ```
 
 ## 另请参阅

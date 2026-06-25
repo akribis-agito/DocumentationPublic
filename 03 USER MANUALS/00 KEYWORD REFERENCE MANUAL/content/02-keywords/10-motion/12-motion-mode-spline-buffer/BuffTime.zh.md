@@ -49,7 +49,7 @@ language: zh-CN
 
 ### BuffCalc 执行的验证
 
-[BuffCalc](BuffCalc.md) 运行时会检查 `BuffTime` 数组，若以下所有条件不满足则拒绝计算（返回错误）：
+[BuffCalc](BuffCalc.md) 运行时会检查 `BuffTime` 数组，若以下任意条件不满足则拒绝计算（返回错误）：
 
 | 条件 | 要求 |
 |---|---|

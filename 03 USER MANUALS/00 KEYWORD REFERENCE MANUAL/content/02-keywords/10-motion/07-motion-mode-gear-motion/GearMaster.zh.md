@@ -107,7 +107,7 @@ APosRef[1]              ; 从动件参考——应镜像滤波后的 MasterPos
 
 从动件在 `Stop`、`Abort` 或电机被禁用时退出电子齿轮运动。若要更改主变量选择，请先退出电子齿轮运动；轴在运动中时，`GearMaster` 的写入将被拒绝。
 
-## 参见
+## 另请参阅
 
 - [MasterPos](MasterPos.md) — 经累加、缩放的主位置
 - [MasterFact](MasterFact.md) / [MasterFactDen](MasterFactDen.md) — 齿轮比分子 / 分母

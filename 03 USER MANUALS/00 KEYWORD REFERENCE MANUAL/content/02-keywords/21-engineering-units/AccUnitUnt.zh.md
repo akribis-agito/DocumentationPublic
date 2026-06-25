@@ -55,5 +55,5 @@ AAccUnitUnt[2]      ; 读取第二个字符
 - [00-overview](00-overview.md) — 组 / 系数 / 单位模型
 - [AccUnitFct](AccUnitFct.md) — 加速度比例系数（数值换算）
 - [AccUnitGrp](AccUnitGrp.md) — 该单位适用的关键字
-- [UserUnitsEn](UserUnitsEn.md) — 总使能
+- [UserUnitsEn](UserUnitsEn.md) — 主使能
 - [PosUnitUnt](PosUnitUnt.md) · [VelUnitUnt](VelUnitUnt.md) · [FrcUnitUnt](FrcUnitUnt.md) — 其他物理量的单位标签

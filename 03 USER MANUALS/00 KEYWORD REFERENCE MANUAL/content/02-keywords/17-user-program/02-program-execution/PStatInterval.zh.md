@@ -47,7 +47,7 @@ language: zh-CN
 APStatInterval=500   ; transmit parameter statistics every 500 ms
 ```
 
-## 参见
+## 另请参阅
 
 - [PStatOn](PStatOn.md) — 启用/禁用周期性统计流式传输
 - [PStatPort](PStatPort.md) — 用于流式传输的通信端口

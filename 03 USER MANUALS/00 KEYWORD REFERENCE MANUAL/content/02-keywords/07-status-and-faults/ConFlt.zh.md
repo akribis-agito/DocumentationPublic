@@ -103,9 +103,9 @@ v5（Central-i）固件定义了 v4 中不存在的额外故障码：
 
 在 v5 中，可写范围扩展为 `-3000…0`。正故障码仍然只能由控制器设置，但你可以自行写入一个**负**值，以记录禁用轴的应用层原因（一条发给你上层应用程序的用户自定义消息）。`0` 仍然清除故障状态，且无法写入正值。
 
-## 参见
+## 另请参阅
 
-- [Controller error codes](../../04-error-codes/controller-error-codes.md) — 每个故障码的含义
+- [控制器错误码](../../04-error-codes/controller-error-codes.md) — 每个故障码的含义
 - [MotorReason](MotorReason.md) — 轴被禁用的原因（故障还是命令）
 - [ConFltSnapSrc](ConFltSnapSrc.md) / [ConFltSnapVal](ConFltSnapVal.md) — 故障时捕获的参数快照
 - [ErrLog](ErrLog.md) — 正的 ConFlt 值会被追加到的日志

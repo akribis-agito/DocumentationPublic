@@ -14,7 +14,7 @@ Agito 控制器具有若干电流与电压保护机制。
 
 母线电压保护（第 6 项）按正常工作范围周围的分段进行分层：
 
-![Bus-voltage protection bands: over MaxVBusAbs trips instantly, over MaxVBus for longer than MaxVBusTime trips, and at or below MinVBus trips instantly](vbus-bands.svg)
+![母线电压保护分段：超过 MaxVBusAbs 立即跳闸，超过 MaxVBus 且持续时间超过 MaxVBusTime 则跳闸，处于或低于 MinVBus 时立即跳闸](vbus-bands.svg)
 
 <u>Agito 控制器的 I2t 保护：</u>
 
@@ -60,7 +60,7 @@ Agito 将基于该跳闸曲线方程实现自身的 I2t 保护。用户需要定
 
 馈入 I2t 滤波器的平方值正是 `MotorCurr` 的平方。对于无刷（3 相）电机，控制器将 `MotorCurr` 构造为电机电流相量的幅值，$\text{MotorCurr}=\sqrt{\tfrac{2}{3}\,(I_a^{2}+I_b^{2}+I_c^{2})}$；对于有刷电机/音圈，`MotorCurr` $=|I_a|$；对于步进电机，`MotorCurr` $=\sqrt{I_a^{2}+I_b^{2}}$。由于峰值/连续限值（[PeakCL](PeakCL.md)/[ContCL](ContCL.md)）本身就以相电流形式指定，因此滤波器直接与 `ContCL` 的平方进行比较，无需额外缩放。
 
-![I2t tripping mechanism: MotorCurr is squared and low-pass filtered, then compared against the squared continuous current limit to trigger the I2t trip event](I2t-tripping-mechanism.svg)
+![I2t 跳闸机制：MotorCurr 取平方后经低通滤波，再与连续电流限值的平方进行比较，以触发 I2t 跳闸事件](I2t-tripping-mechanism.svg)
 
 低通滤波器的连续形式为
 

@@ -86,7 +86,7 @@ ADOutSelect[4]=2     ; output 4 = Main Event #1 (Central-i) / A event #1 (standa
 - **保存**——可保存至闪存；启动时重新加载到路由 MUX。
 - **平台**——功能代码到信号源的映射在独立式与 central-i 之间不同；参见上表。
 
-## 参见
+## 另请参阅
 
 - [DOutMode](DOutMode.md)——软件功能（当 DOutSelect = 0 时）
 - [DOutPort](DOutPort.md)——手动输出状态

@@ -35,6 +35,6 @@ summary: 选择自整定算法将计算所得参数写入的增益（控制）�
 
 AutoGNumSet 选择自整定算法将计算所得参数写入的增益（控制）组。四个整定参数（位置增益、速度增益、速度积分增益和加速度前馈增益）将被保存到所选组中，保存时机为全自动模式下的自动应用，或通过 AutoGCopy 手动应用结果时。在这四个参数中，只有在 AutoGMask 中启用的参数才会实际被写入。范围 1 至 5；默认值 1。该参数为轴相关参数，保存至闪存，可随时修改。
 
-**另见：**
+**另请参阅：**
 
 [AutoGQualTh](AutoGQualTh.md)、[AutoGOn](AutoGOn.md)、[AutoGStatus](AutoGStatus.md)

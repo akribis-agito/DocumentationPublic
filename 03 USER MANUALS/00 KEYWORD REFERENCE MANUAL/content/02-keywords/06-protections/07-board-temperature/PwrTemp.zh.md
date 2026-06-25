@@ -77,7 +77,7 @@ IPM 温度以模拟电压感测，并通过查找校准曲线转换为 °C（IPM
 APwrTemp            ; power-stage (IPM) temperature (°C)
 ```
 
-## 另请参见
+## 另请参阅
 
 - [MaxPwrTemp](MaxPwrTemp.md) — 功率级过温限值与告警分段
 - [BoardTemp](BoardTemp.md) — 控制器板温度

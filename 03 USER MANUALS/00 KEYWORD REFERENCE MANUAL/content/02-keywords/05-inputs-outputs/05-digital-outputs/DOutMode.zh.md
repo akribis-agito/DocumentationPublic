@@ -124,7 +124,7 @@ ADOutPort                 ; read back the bit driven by the function
 - **对功能位的手动写入**——会在下一个周期被该功能覆盖；如果想要手动控制，请先设置 `DOutMode = 0`。
 - **保存 / 复位**——可保存至闪存；该表在每次写入时以及启动时都会重建。
 
-## 参见
+## 另请参阅
 
 - [DOutSelect](DOutSelect.md) — 必须为 0，DOutMode 才会生效（否则为硬件功能）
 - [DOutPort](DOutPort.md) — 功能所驱动的位（功能 0 = 手动）

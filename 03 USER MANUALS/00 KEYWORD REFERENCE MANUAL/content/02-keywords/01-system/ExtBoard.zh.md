@@ -55,7 +55,7 @@ AExtBoard           ; query the configured expansion-board type
 AExtBoard=0         ; no expansion board (default)
 ```
 
-## 参见
+## 另请参阅
 
 - [Reset](02-operation/Reset.md) —— 应用已更改的 `ExtBoard` 设置
 - [AInPort](../05-inputs-outputs/02-analog-inputs/AInPort.md) —— 模拟量输入端口映射

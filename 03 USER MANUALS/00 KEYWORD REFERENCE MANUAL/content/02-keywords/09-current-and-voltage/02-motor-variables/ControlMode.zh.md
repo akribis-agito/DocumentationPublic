@@ -35,7 +35,7 @@ language: zh-CN
 
 ## 概述
 
-`ControlMode` 通过各个位的赋值来选择电流控制和电压控制选项。它决定电流控制是在 dq0 域中运行（矢量控制）还是在 abc 域中运行（相控制）、空间矢量调制器可使用多少母线电压、是否旁路电流环，以及 I2T 保护触发时所采取的动作。它与 [MotorType](../../02-motor-and-amplifier/MotorType.md) 及电流控制整定协同工作（参见 [Control tuning – Current control](../../11-control-tuning/06-current-control/00-overview.md)）。dq0 输出 [Vd](Vd.md)/[Vq](Vq.md) 与 abc 输出 [Va](Va.md)/[Vb](Vb.md)/[Vc](Vc.md) 取决于 bit 1 的设置。
+`ControlMode` 通过各个位的赋值来选择电流控制和电压控制选项。它决定电流控制是在 dq0 域中运行（矢量控制）还是在 abc 域中运行（相控制）、空间矢量调制器可使用多少母线电压、是否旁路电流环，以及 I2T 保护触发时所采取的动作。它与 [MotorType](../../02-motor-and-amplifier/MotorType.md) 及电流控制整定协同工作（参见[控制整定 – 电流控制](../../11-control-tuning/06-current-control/00-overview.md)）。dq0 输出 [Vd](Vd.md)/[Vq](Vq.md) 与 abc 输出 [Va](Va.md)/[Vb](Vb.md)/[Vc](Vc.md) 取决于 bit 1 的设置。
 
 > 此关键字标记为 `partial`：仅定义了 bit 0–3，有效范围为 0–15，行为可能会变化。固件上电默认值为置位 bit 0（`ControlMode` = 1，增强速度范围生效）。
 

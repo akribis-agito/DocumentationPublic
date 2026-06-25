@@ -6,7 +6,7 @@ language: zh-CN
 ---
 # CNCAJerk/CNCBJerk
 
-报告组 A（或 B）当前活动 CNC 段路径速度曲线的加加速度（急动度）。
+报告组 A（或 B）当前活动 CNC 段路径速度曲线的加加速度（平滑）。
 
 ## 概述
 

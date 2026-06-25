@@ -72,7 +72,7 @@ AAInMuteRange[1]=0   ; no mute (default)
 - **保存** — `AInMuteRange` 可保存至闪存。
 - **平台** — central-i v5 将该值存储为 `float32`；行为不变。
 
-## 参见
+## 另请参阅
 
 - [AInDB](AInDB.md) — 第一级死区，位于增益之前（连续、减法式）
 - [AInGain](AInGain.md) — 在此静音之前施加的增益级

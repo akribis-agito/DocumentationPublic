@@ -51,7 +51,7 @@ AVecPosFDef[1]       ; 读取滤波器类型元素
 AVecPosFDef[2]       ; 读取第一个滤波器参数
 ```
 
-## 参见
+## 另请参阅
 
 - [VecPosFOn](VecPosFOn.md) — 使能/禁用此位置滤波器
 - [VecMemberAxes](VecMemberAxes.md) — 定义分组及其主轴

@@ -37,6 +37,6 @@ SpringCurrFFW 设置一个恒定的、与位置无关的前馈电流（单位：
 
 默认值为 0（无恒定偏置）。允许范围从负到正轴最大电流指令值（以微安表示，即最大电流指令（mA）乘以 1000）。输入的微安值在叠加至电流参考之前会乘以 0.001 转换为毫安，因此仍受下游正常电流与转矩限制的约束。
 
-**参见：**
+**另请参阅：**
 
 [SpringOn](SpringOn.md)、[SpringPosFFW](SpringPosFFW.md)、[SpringTable](SpringTable.md)

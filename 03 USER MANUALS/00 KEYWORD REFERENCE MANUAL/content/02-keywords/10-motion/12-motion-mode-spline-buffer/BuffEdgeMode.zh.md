@@ -59,7 +59,7 @@ ABuffEdgeMode=1      ; 自然边界（默认），轻松起止
 ABuffEdgeMode=2      ; 连续重复边界，用于平滑的多周期运动
 ```
 
-## 参见
+## 另请参阅
 
 - [BuffSlopes](BuffSlopes.md) — `BuffEdgeMode` = 0 时应用的边缘斜率
 - [BuffSplineMod](BuffSplineMod.md) — 边界条件所应用的曲线类型

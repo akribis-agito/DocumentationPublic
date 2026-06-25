@@ -74,7 +74,7 @@ ADualStuckVel[1]=40000   ; max tolerated feedback velocity mismatch (count/s)
 ADualStuckVel[1]         ; read back the threshold
 ```
 
-## 参见
+## 另请参阅
 
 - [DualStuckTime](DualStuckTime.md) — 失配可持续的时长
 - [ConFlt](../../../07-status-and-faults/ConFlt.md) — 记录故障码 1049（双环堵转）

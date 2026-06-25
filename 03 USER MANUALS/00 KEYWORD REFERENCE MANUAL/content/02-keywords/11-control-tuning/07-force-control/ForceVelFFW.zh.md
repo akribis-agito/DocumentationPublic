@@ -71,7 +71,7 @@ AForceVelFFW[1]         ; read the velocity feedback compensation gain
 
 若轴沿反方向运动（`Vel[1] = -5000`），则该项变为 `+0.005`。由于该项被减去，它始终与运动方向相反，在电流指令中起到额外粘性阻尼的作用，并提供克服速度比例负载所需的稳态电流。
 
-## 参见
+## 另请参阅
 
 - [ForceFFW](ForceFFW.md) — 电流前馈（在同一求和点处叠加）
 - [ForceFFWP](ForceFFWP.md) — 位置前馈（仅限 Force-over-PIV）

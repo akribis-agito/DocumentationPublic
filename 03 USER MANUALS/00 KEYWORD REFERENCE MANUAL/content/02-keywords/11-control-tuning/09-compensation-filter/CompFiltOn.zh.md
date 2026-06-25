@@ -46,7 +46,7 @@ language: zh-CN
 
 当关键字设置为 1 时，滤波器仅在轴位置位于由 [CompTbleInit](CompTbleInit.md)、[CompTbleGap](CompTbleGap.md) 和 [CompTbleEnd](CompTbleEnd.md) 定义的表域范围内时有效。超出该范围后，直接使用测量力，滤波器内部状态被重置，以便下次进入表域范围时能够干净地启动。
 
-互补滤波器的截止频率由 [CompFiltFreq](CompFiltFreq.md) 设置，期望力值由 [CompFiltTble](CompFiltTble.md) 设置，每单位位置偏移由 [CompTbleCrrct](CompTbleCrrct.md) 设置。
+互补滤波器的截止频率由 [CompFiltFreq](CompFiltFreq.md) 设置，期望力值由 [CompFiltTble](CompFiltTble.md) 设置，每单元位置偏移由 [CompTbleCrrct](CompTbleCrrct.md) 设置。
 
 ## 示例
 

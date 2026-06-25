@@ -71,7 +71,7 @@ language: zh-CN
 AMaxPhaseCurr=50000  ; per-phase over-current trip (mA)
 ```
 
-## 参见
+## 另请参阅
 
 - [MaxMotorCurr](MaxMotorCurr.md) — 总电机电流跳闸
 - [PeakCL](PeakCL.md) — 峰值电流限制

@@ -53,7 +53,7 @@ ACIAutoConnect=1     ; auto-connect this axis's Central-i port at startup
 ACIAutoConnect=0     ; leave the port disconnected until CIConnect is issued
 ```
 
-## 参见
+## 另请参阅
 
 - [CIConnect](CIConnect.md) —— 此处触发的连接序列（手动运行）
 - [CIDisconnect](CIDisconnect.md) —— 断开链路

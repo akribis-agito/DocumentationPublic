@@ -63,7 +63,7 @@ CAN 标识符为 11 位宽，因此地址必须保持在该范围内；可配置
 ACANAddr=64          ; set the CAN base address (a multiple of 16), then Save and Reset
 ```
 
-## 参见
+## 另请参阅
 
 - [CANBaud](CANBaud.md) — CAN 总线波特率
 - [CANDelay](CANDelay.md) — CAN 回复消息之间的最小间隔

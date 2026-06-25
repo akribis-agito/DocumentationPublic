@@ -58,7 +58,7 @@ ASpeedChgPos        ; query current value
 - **置位时已越过触发点：** 在下一个周期触发（比较为电平判定，而非边沿判定）。
 - **其他运动模式：** 在任何更新 [PosRef](../01-kinematics-status/PosRef.md) 的模式下都会触发；但随之对 [Speed](Speed.md) 的写入仅在使用 `Speed` 的模式下才有意义。
 
-## 另请参见
+## 另请参阅
 
 - [SpeedChgOn](SpeedChgOn.md) — 启用飞行速度变更
 - [SpeedChgNew](SpeedChgNew.md) — 在触发点应用的新速度

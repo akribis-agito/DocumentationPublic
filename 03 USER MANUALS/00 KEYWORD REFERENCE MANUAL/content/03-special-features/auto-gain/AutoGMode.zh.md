@@ -44,8 +44,8 @@ AutoGMode 选择自整定算法的运行模式。该模式控制算法是自行�
 | 4 | 使用 AutoGJratUs 中用户提供的惯量比，但不自动应用增益；之后通过 AutoGCopy 手动应用（半自动）。 |
 | 5 | 计算估算惯量与用户提供惯量之间的增益比（估算总惯量除以用户提供的总惯量，以百分比表示）并进行校验。 |
 
-在模式 3、4 和 5 中，仅当 AutoGJratUs 的值在 AutoGMinRat 至 AutoGMaxRat 范围内时，该值才会被采用；超出该范围时，增益不会被计算，也不会有任何应用操作。当增益被应用时（全自动模式 1 和 3，或在半自动模式 2 和 4 中通过 AutoGCopy 应用），只有在 AutoGMask 中启用的参数才会被写入，且写入目标为 AutoGNumSet 所选的控制组。
+在模式 3、4 和 5 中，仅当 AutoGJratUs 的值在 AutoGMinRat 至 AutoGMaxRat 范围内时，该值才会被采用；超出该范围时，增益不会被计算，也不会有任何应用操作。当增益被应用时（全自动模式 1 和 3，或在半自动模式 2 和 4 中通过 AutoGCopy 应用），只有在 AutoGMask 中启用的参数才会被写入，且写入目标为 AutoGNumSet 所选的增益组。
 
-**另见：**
+**另请参阅：**
 
 [AutoGOn](AutoGOn.md)、[AutoGStatus](AutoGStatus.md)、[AutoGNumSet](AutoGNumSet.md)

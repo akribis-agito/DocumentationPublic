@@ -82,7 +82,7 @@ ADOutPort            ; read the present manual output word
 - **双向引脚**——由 [BiDirConfig](../01-general-keywords/BiDirConfig.md) 路由为输出的引脚，当作为输入回读时会按照 [DInPort](../04-digital-inputs/DInPort-DInPortHigh.md) 中的方式反映该值。
 - **保存**——不可保存至闪存；每次重启时复位为默认值。
 
-## 参见
+## 另请参阅
 
 - [DOutPortSBit-DOutPortCBit-DOutPortTBit](DOutPortSBit-DOutPortCBit-DOutPortTBit.md) — 单个位的中断安全置位/清除/翻转
 - [DOutLog](DOutLog.md) — 与 DOutPort 进行 XOR 的逐位极性

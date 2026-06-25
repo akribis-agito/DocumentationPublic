@@ -39,7 +39,7 @@ language: zh-CN
 
 ## 概述
 
-在电流控制模式下，`CurrCmdSrc` 设定电流指令（`CurrRef`）的来源。每个控制周期，控制器根据所选来源生成电流参考；同一值还决定轴如何以及何时自动从电流模式退出回到位置模式（参见 [电流控制模式](00-overview.md)）。`CurrCmdSrc` 仅在轴实际处于电流模式（[OperationMode](../01-general-keywords/OperationMode.md) = 1）时才被查询。
+在电流运行模式下，`CurrCmdSrc` 设定电流指令（`CurrRef`）的来源。每个控制周期，控制器根据所选来源生成电流参考；同一值还决定轴如何以及何时自动从电流模式退出回到位置模式（参见 [电流运行模式](00-overview.md)）。`CurrCmdSrc` 仅在轴实际处于电流模式（[OperationMode](../01-general-keywords/OperationMode.md) = 1）时才被查询。
 
 ## 工作原理
 
@@ -79,9 +79,9 @@ ACurrCmdSrc=3        ; follow a master axis (slave drive, central-i v5)
 
 central-i v5 新增来源值 3（主轴电流指令），将有效范围扩展到 0–3（standalone/v4：0–2）。来源 3 使轴成为复制主轴电流参考的从轴驱动器；参见 [CurrRefMaster](CurrRefMaster.md)。
 
-## 参见
+## 另请参阅
 
 - [CurrCmdVal](CurrCmdVal.md) — 用户自定义电流值（来源 1/2）
 - [CurrRefMaster](CurrRefMaster.md) — 主轴索引（来源 3）
 - [CurrCmdHTime](CurrCmdHTime.md) — 决定轴何时退出电流模式的计时
-- [电流控制模式](00-overview.md) — 整体模式行为
+- [电流运行模式](00-overview.md) — 整体模式行为

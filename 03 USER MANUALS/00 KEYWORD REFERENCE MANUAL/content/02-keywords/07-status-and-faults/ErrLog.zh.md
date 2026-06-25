@@ -82,7 +82,7 @@ AErrLog             ; read the full log
 
 解码第一条记录：错误码 = `AErrLog[1] & 0xFFFFFF`，来源 = `(AErrLog[1] >> 24) & 0xFF`（1 = 轴 A，0 = 非轴）。
 
-## 参见
+## 另请参阅
 
 - [ClearErr](ClearErr.md) — 清除此日志中的所有条目
 - [ConFlt](ConFlt.md) — 追加到此日志的每轴故障码

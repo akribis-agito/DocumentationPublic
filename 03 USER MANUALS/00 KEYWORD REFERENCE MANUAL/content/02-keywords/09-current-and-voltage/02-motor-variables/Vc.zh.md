@@ -75,7 +75,7 @@ language: zh-CN
 AVc                 ; read phase C SVM voltage reference
 ```
 
-## 参见
+## 另请参阅
 
 - [Va](Va.md), [Vb](Vb.md) — Vc 所补全的 A 相和 B 相电压参考
 - [Vd](Vd.md), [Vq](Vq.md) — 构成 Va/Vb/Vc 的 dq0 电压输出

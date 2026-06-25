@@ -67,7 +67,7 @@ AGoToPosMode         ; switch and start the move
 - **保存** — 可保存至闪存。
 - **平台** — v5 扩展为 64 位；v4 为 32 位。
 
-## 参见
+## 另请参阅
 
 - [BeginOnToPos](BeginOnToPos.md) — 置位进入运动
 - [RetractTarget](RetractTarget.md) — 进入运动的目标

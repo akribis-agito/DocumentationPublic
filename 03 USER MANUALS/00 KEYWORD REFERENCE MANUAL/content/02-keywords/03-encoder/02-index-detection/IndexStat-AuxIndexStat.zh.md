@@ -14,7 +14,7 @@ language: zh-CN
 
 ## 工作原理
 
-`IndexStat` 在每个控制周期重新评估。在每次控制中断的开头，固件先假定无索引（`IndexStat = 0`），然后测试索引输入；若被置位，则将 `IndexStat` 设为 1 并捕获 [IndexPos](IndexPos-AuxIndexPos.md)（在独立控制器上来自专用索引输入，在 central-i 上来自逐轴状态位）。由于该标志在每个周期开始时被清除，它只反映*当前*周期 —— 在用户清除之前并不会被锁存。需要对单个索引事件作出响应的使用方（例如回零）会在该标志被置位的那个周期内读取它。
+`IndexStat` 在每个控制周期重新评估。在每次控制中断的开头，固件先假定无索引（`IndexStat = 0`），然后测试索引输入；若被置位，则将 `IndexStat` 设为 1 并捕获 [IndexPos](IndexPos-AuxIndexPos.md)（在独立控制器上来自专用索引输入，在 central-i 上来自逐轴状态位）。由于该标志在每个周期开始时被清除，它只反映*当前*周期 —— 不会持续锁存等待用户清除。需要对单个索引事件作出响应的使用方（例如回零）会在该标志被置位的那个周期内读取它。
 
 | IndexStat | 含义 |
 |---|---|
@@ -43,9 +43,9 @@ AIndexStat          ; check whether the index was detected this cycle
 - **编码器类型。** 仅对 `EncType=1`（增量式）和 `EncType=4`（SIN/COS）有意义。绝对式编码器不带索引标志，因此 `IndexStat` 不会置位。
 - **多轴硬件上的辅助编码器。** `AuxIndexStat` 仅在单轴硬件型号上接线；在多轴控制器上不检测辅助索引 —— `AuxIndexStat` 不会置位。
 - **Central-i。** 远程驱动器在其逐轴状态字中标记索引；主站每个周期将其镜像到 `IndexStat`，并采用相同的一周期检测规则。
-- **每个周期清除。** 该标志在每次控制中断开始时被重新置位；使用方（回零、`StopOnIndex`）必须在索引发生的那个周期内作出响应，或使用 [LockEn](../03-event-based-feedback-logging/LockEn-AuxLockEn.md) 进行锁存式捕获。
+- **每个周期清除。** 该标志在每次控制中断开始时被清零并重新评估；使用方（回零、`StopOnIndex`）必须在索引发生的那个周期内作出响应，或使用 [LockEn](../03-event-based-feedback-logging/LockEn-AuxLockEn.md) 进行锁存式捕获。
 
-## 参见
+## 另请参阅
 
 - [IndexPos](IndexPos-AuxIndexPos.md) —— 检测到索引时捕获的位置
 - [EncType](../01-general-settings/EncType-AuxEncType.md) —— 编码器类型；索引检测适用于 `EncType=1` 或 `4`

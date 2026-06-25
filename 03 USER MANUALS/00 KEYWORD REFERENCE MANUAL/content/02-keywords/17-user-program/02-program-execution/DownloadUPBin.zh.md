@@ -54,7 +54,7 @@ language: zh-CN
 ADownloadUPBin       ; transfer the compiled user-program binary into program memory
 ```
 
-## 参见
+## 另请参阅
 
 - [ProgErase](ProgErase.md) — 擦除当前用户程序
 - [ProgReset](ProgReset.md) — 重置用户程序状态

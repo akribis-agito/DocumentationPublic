@@ -45,7 +45,7 @@ language: zh-CN
 AAuxModRev          ; query the configured auxiliary modulo divisor
 ```
 
-## 另见
+## 另请参阅
 
 - [ModRev](../04-modulo-mode/ModRev.md) — 主编码器取模除数（已实现的对应项）
 - [AuxPos](../../10-motion/01-kinematics-status/AuxPos.md) — 辅助编码器反馈位置

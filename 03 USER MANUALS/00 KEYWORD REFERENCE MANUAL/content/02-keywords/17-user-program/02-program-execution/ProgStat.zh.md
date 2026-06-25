@@ -57,7 +57,7 @@ language: zh-CN
 AProgStat[1]        ; 线程 1 运行中返回 1，已停止返回 0，无程序返回 -1
 ```
 
-## 另请参见
+## 另请参阅
 
 - [ProgStatAll](ProgStatAll.md) — 所有线程的综合状态
 - [ProgError](ProgError.md) — 每个线程的最近错误代码

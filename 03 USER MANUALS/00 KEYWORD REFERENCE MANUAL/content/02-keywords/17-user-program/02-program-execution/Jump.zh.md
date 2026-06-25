@@ -68,7 +68,7 @@ language: zh-CN
 - `Compare` + `Jump[8]`（"若为零则跳转"）实现 `if (条件为假) goto 目标`——这是 `if (cond) {...}` 的自然形式，当条件不成立时编译器跳过主体。
 - `Compare` + `Jump[9]`（"若非零则跳转"）实现 `if (条件为真) goto 目标`——用于 `while` 和 `for` 中的循环回边。
 
-## 参见
+## 另请参阅
 
 - [Compare](Compare.md) — 为条件跳转产生条件值
 - [Math](Math.md) — 数值栈上的算术/位运算操作

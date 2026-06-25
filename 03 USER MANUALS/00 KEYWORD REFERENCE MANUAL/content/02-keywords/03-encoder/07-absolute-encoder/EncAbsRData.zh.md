@@ -46,7 +46,7 @@ language: zh-CN
 AEncAbsRData        ; read the result of the last register read
 ```
 
-## 参见
+## 另请参阅
 
 - [EncAbsAddr](EncAbsAddr.md) — 已读取的寄存器地址
 - [EncAbsWRType](EncAbsWRType.md) — 选择读或写访问

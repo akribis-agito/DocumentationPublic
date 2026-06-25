@@ -121,7 +121,7 @@ AAccFFW[1]           ; read back the gain
 
 4. **观察 [StatReg](../../../02-keywords/07-status-and-faults/StatReg.md) 位 21**（电流饱和）。尺寸正确的前馈组合可减少位置/速度环需要建立的跟随误差，从而降低加速阶段电流指令饱和的可能性。
 
-## 另请参见
+## 另请参阅
 
 - [VelFFW](VelFFW.md) — 速度前馈增益（与加速度项求和）
 - [FFFiltOn](FFFiltOn.md) / [FFFiltDef](FFFiltDef.md) — 应用于合并前馈输出的前馈滤波器

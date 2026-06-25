@@ -54,7 +54,7 @@ ARm                 ; read measured motor resistance (mΩ)
 ARm=1500             ; set the resistance value manually (mΩ)
 ```
 
-## 参见
+## 另请参阅
 
 - [Lm](Lm.md) — 测得的电机电感
 - [RLType](RLType.md) — 选择相数据与线间数据测量

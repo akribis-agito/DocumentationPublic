@@ -70,7 +70,7 @@ ADualStuckTime[1]=4096   ; how long the feedback mismatch may persist before tri
 ADualStuckTime[1]        ; read back
 ```
 
-## 参见
+## 另请参阅
 
 - [DualStuckVel](DualStuckVel.md) — 容许的速度差阈值
 - [ConFlt](../../../07-status-and-faults/ConFlt.md) — 记录故障码 1049（双环堵转）

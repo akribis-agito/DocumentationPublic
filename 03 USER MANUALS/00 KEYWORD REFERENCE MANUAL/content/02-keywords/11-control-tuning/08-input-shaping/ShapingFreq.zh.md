@@ -78,7 +78,7 @@ AShapingDamp[1]=3277      ; damping ratio 0.05
 AShapingOn=1              ; enable input shaping
 ```
 
-## 参见
+## 另请参阅
 
 - [ShapingOn](ShapingOn.md) — 启用/禁用输入整形
 - [ShapingDamp](ShapingDamp.md) — 与各频率配对的阻尼比

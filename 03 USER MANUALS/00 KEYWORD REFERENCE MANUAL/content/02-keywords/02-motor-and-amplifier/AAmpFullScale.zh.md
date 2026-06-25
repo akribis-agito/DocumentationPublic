@@ -82,7 +82,7 @@ AAAmpFullScale=5000      ; 5000 mA corresponds to full-scale (10 V) analog outpu
 AAAmpFullScale          ; query the current full-scale value
 ```
 
-## 参见
+## 另请参阅
 
 - [AmpType](AmpType.md) —— 选择本缩放所适用的外部驱动器指令模式
 - [AOutPort](../05-inputs-outputs/03-analog-outputs/AOutPort.md) —— 由缩放后指令驱动的模拟输出端口

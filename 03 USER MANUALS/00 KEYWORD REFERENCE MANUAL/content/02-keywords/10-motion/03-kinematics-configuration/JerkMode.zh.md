@@ -21,7 +21,7 @@ language: zh-CN
 
 请注意，紧急停止、限位开关停止或受控停止会覆盖此项选择：无论配置的 `JerkMode` 为何，控制器都会针对该次停止强制采用二阶（模式 0）行为，并以 [EmrgDec](EmrgDec.md) 制动。`JerkMode` 不能在轴运动时更改。
 
-## 参见
+## 另请参阅
 
 - [JerkMode](../02-motion-configuration/JerkMode.md) — 包含完整取值表的主条目
 - [Jerk](Jerk.md) — 二阶 jerk 设置（模式 0）

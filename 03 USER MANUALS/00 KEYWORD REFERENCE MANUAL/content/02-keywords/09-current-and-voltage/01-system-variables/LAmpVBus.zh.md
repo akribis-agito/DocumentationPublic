@@ -43,8 +43,8 @@ language: zh-CN
 
 | 索引 | 电源轨 | 说明                                     |
 |------|--------|------------------------------------------|
-| 1    | +Vm    | Positive linear-amplifier bus voltage    |
-| 2    | −Vm    | Negative linear-amplifier bus voltage (reported as a negative value) |
+| 1    | +Vm    | 线性驱动器正母线电压                     |
+| 2    | −Vm    | 线性驱动器负母线电压（以负值报告）       |
 
 该数组的大小为两条轨加上一个未使用的索引 0（使通信索引从 1 开始）。负轨单独读取并取反，因此正常的 −Vm 读数为负的毫伏值。
 

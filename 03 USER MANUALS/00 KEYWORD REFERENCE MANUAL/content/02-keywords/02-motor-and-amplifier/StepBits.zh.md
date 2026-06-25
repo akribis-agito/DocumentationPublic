@@ -66,7 +66,7 @@ AStepBits=8          ; microstepping (256 steps per electrical cycle)
 AStepBits           ; query the current setting
 ```
 
-## 另见
+## 另请参阅
 
 - [MotorType](MotorType.md) — 必须为 6 或 7（步进）此关键字才适用
 - [PolePrs](PolePrs.md) — 闭环步进电机每转电气周期数

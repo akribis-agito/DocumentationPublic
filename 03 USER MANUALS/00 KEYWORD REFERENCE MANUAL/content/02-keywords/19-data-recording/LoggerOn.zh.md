@@ -57,7 +57,7 @@ ALoggerOn=0          ; 停止连续记录器
 ALoggerOn           ; 查询记录器是否正在运行
 ```
 
-## 另请参见
+## 另请参阅
 
 - [LoggerParams](LoggerParams.md) — 记录器记录的参数
 - [LoggerGap](LoggerGap.md) — 记录器采样间隔

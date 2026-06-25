@@ -59,7 +59,7 @@ ACANBaud=6           ; 1 Mbit/s (default), then Save and Reset
 ACANBaud=4           ; 250 kbit/s
 ```
 
-## 参见
+## 另请参阅
 
 - [CANAddr](CANAddr.md) — CAN 基地址
 - [CANDelay](CANDelay.md) — CAN 回复消息之间的最小间隔

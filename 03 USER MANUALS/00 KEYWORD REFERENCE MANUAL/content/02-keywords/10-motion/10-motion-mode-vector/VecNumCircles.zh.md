@@ -62,7 +62,7 @@ AVecNumCircles=0     ; 仅基础圆弧，无额外圈数（默认）
 AVecNumCircles=5     ; 基础圆弧加五圈额外整圈
 ```
 
-## 参见
+## 另请参阅
 
 - [VecType](VecType.md) — 选择圆弧向量运动
 - [VecArcCenter](VecArcCenter.md) / [VecArcDir](VecArcDir.md) — 圆弧几何形状和方向

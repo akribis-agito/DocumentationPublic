@@ -56,7 +56,7 @@ $$
 AIa                 ; read measured phase A current (mA)
 ```
 
-## 参见
+## 另请参阅
 
 - [IaRef](IaRef.md) — A 相电流参考
 - [IaErr](IaErr.md) — A 相电流误差 (IaRef − Ia)

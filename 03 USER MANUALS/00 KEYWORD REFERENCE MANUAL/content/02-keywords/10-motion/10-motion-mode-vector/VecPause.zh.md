@@ -52,7 +52,7 @@ AVecPause=1          ; 在组主轴 A 上：暂停向量运动（沿路径减速
 AVecPause=0          ; 继续向量运动（加速恢复至 VecSpeed）
 ```
 
-## 参见
+## 另请参阅
 
 - [StopVec](StopVec.md) — 终止（而非暂停）向量运动
 - [VecSpeed](VecSpeed.md) — 暂停后恢复的目标速度

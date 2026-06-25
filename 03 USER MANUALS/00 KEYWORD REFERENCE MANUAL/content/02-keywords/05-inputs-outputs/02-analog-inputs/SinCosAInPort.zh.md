@@ -21,7 +21,7 @@ language: zh-CN
 sin/cos 反馈不再通过通用模拟量输入端口路由。
 在当前固件上它不再是受支持的关键字。
 
-## 参见
+## 另请参阅
 
 - [AInPort](AInPort.md) — 模拟量输入读数
 - [AInMode](AInMode.md) — 模拟量输入功能分配

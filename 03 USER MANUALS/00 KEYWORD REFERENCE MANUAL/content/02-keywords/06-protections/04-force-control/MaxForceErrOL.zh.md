@@ -63,7 +63,7 @@ AMaxForceErrOL[1]=50000   ; trip axis A if open-loop force error exceeds 50000
 AMaxForceErrOL            ; read the current limit
 ```
 
-## 参见
+## 另请参阅
 
 - [MaxForceErr](MaxForceErr.md) —— 闭环力误差限值
 - [OpenLoopOn](../../08-axis-operation/01-general-keywords/OpenLoopOn.md) —— 选择开环运行

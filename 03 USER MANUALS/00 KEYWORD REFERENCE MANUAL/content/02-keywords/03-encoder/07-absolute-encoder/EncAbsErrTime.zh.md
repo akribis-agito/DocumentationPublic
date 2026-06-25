@@ -72,7 +72,7 @@ AEncAbsErrTime=100       ; tolerate up to 100 control cycles of error/warning/CR
 AEncAbsErrTime           ; read the configured tolerance
 ```
 
-## 参见
+## 另请参阅
 
 - [EncStatReg](../01-general-settings/EncStatReg.md) — 此超时所作用的编码器状态位
 - [ConFlt](../../07-status-and-faults/ConFlt.md) — 故障寄存器；报告代码 1068 / 1069 / 1070

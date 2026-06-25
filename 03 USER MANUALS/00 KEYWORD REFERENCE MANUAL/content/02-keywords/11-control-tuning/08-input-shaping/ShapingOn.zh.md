@@ -81,7 +81,7 @@ AShapingOn=1              ; enable input shaping
 
 因此，整形器叠加原始参考（权重 0.291）、延迟 10 ms 的相同参考（权重 0.497）以及延迟 20 ms 的参考（权重 0.213）。从 0 到目标值的阶跃在 20 ms 后到达目标值，但 50 Hz 处的残余振荡被抵消。
 
-## 参见
+## 另请参阅
 
 - [ShapingFreq](ShapingFreq.md) — 待抑制的谐振频率
 - [ShapingDamp](ShapingDamp.md) — 各谐振的阻尼比

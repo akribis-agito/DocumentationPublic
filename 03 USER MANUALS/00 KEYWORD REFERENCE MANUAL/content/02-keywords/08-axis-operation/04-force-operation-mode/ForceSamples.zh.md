@@ -77,7 +77,7 @@ AForceSamples[3]    ; move + settle + in-target time
 - **从未稳定** —— 如果 [ForceInTStat](ForceInTStat.md) 从未达到 `4`（力在窗口内未持续驻留至稳定），则不记录任何时序，其值保持为 `-1`。
 - **索引越界** —— `ForceSamples` 是 1-indexed，有效索引为 `[1]`–`[4]`；索引 `[0]` 无效。
 
-## 参见
+## 另请参阅
 
 - [ForceInTStat](ForceInTStat.md) —— 到位状态（其达到 4 时记录各采样）
 - [ForceInTTol](ForceInTTol.md) —— 稳定窗口

@@ -35,6 +35,6 @@ summary: 设置自整定算法在某运动方向/指令区域内被认为数据�
 
 AutoGMinLen 设置自整定算法在某运动方向/指令区域内被认为数据充足、可进行惯量辨识之前，必须采集的最少运动样本数。样本按运动方向与指令方向分成四个区域；当其中至少两个区域各自累计的样本数均达到 AutoGMinLen 时，算法即认为数据充足，可计算惯量比估算值并更新增益。AutoGMaxLen 设置各区域采集样本数量的上限。范围 10 至 100；默认值 15。该参数为轴相关参数，保存至闪存，可随时修改。
 
-**另见：**
+**另请参阅：**
 
 [AutoGMaxLen](AutoGMaxLen.md)、[AutoGAccTh](AutoGAccTh.md)、[AutoGVelTh](AutoGVelTh.md)

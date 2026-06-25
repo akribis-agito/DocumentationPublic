@@ -106,7 +106,7 @@ AStatReg               ; bits 15-16 carry the 4-level warning
 
 如果 `AMotorTemp` 即使在负载下也读出默认值 `25`，则 [MotorTempUsed](MotorTempUsed.md) 很可能仍为 `0`（传感器禁用）——此时告警与触发检查都会被跳过。
 
-## 参见
+## 另请参阅
 
 - [MotorTemp](MotorTemp.md) —— 测量得到的电机温度
 - [MotorTempUsed](MotorTempUsed.md) —— 传感器类型选择（对该限值起门控作用）

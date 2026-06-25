@@ -82,7 +82,7 @@ AConFltSnapVal      ; read the full captured snapshot
 
 在 v4 中，快照值为 32 位（`int32`）。在 v5（Central-i）中，它们为 64 位（`int64`）：诸如位置和速度等宽值以完整的 64 位分辨率捕获，浮点参数（例如电机电流）以其 IEEE 位模式而非截断的整数存储。上述固定元素布局在两个版本中相同。
 
-## 参见
+## 另请参阅
 
 - [ConFltSnapSrc](ConFltSnapSrc.md) — 选择槽位 1–4 中的参数
 - [ConFlt](ConFlt.md) — 触发捕获的故障码（也捕获在槽位 10 中）

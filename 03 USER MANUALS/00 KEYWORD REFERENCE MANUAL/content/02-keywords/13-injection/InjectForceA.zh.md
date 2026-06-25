@@ -48,7 +48,7 @@ AInjectForceA=10000      ; 力注入幅值（内部力单位）
 AInjectForceA           ; 查询当前力注入幅值
 ```
 
-## 另请参见
+## 另请参阅
 
 - [InjectPoint](InjectPoint.md) — 力指令注入时必须为 3
 - [InjectType](InjectType.md) — 选择波形形状及直接/叠加模式

@@ -72,7 +72,7 @@ ACurrCmdSlope[3]=700 ; ramp into entry 3 at 700 mA/s
 
 central-i v5 将 `CurrCmdSlope` 以 32 位浮点数存储。这既移除了固定的上限范围，又将最小值从 1 降低到接近零的值，因此小于 1 mA/s 的分数斜率成为可能（standalone/v4：32 位整数，范围 1 到 2147483647）。
 
-## 参见
+## 另请参阅
 
 - [CurrCmdVal](CurrCmdVal.md) — 目标电流值
 - [CurrCmdHTime](CurrCmdHTime.md) — 每个条目的保持时间

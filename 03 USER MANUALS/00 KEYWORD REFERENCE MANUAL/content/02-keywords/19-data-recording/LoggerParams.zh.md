@@ -56,7 +56,7 @@ ALoggerParams[3]=0     ; 清除第三个槽位（无参数）
 ALoggerParams[1]      ; 查询第一个记录参数
 ```
 
-## 另请参见
+## 另请参阅
 
 - [LoggerOn](LoggerOn.md) — 启动/停止记录器
 - [LoggerGap](LoggerGap.md) — 记录器采样间隔

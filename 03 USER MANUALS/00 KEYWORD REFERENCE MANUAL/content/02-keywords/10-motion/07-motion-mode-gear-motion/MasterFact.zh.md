@@ -68,7 +68,7 @@ AMasterFact          ; 读取当前值
 
 在 **v4** 中，比值为 `MasterFact / 65536`（仅分子），累加中无分母。在 **v5（central-i）** 中，应用完整有理比值 `MasterFact / MasterFactDen`，并保留小数余量，使非整数比值精确且无长期漂移；参见 [MasterFactDen](MasterFactDen.md)。**v5 仅适用于 central-i。**
 
-## 参见
+## 另请参阅
 
 - [MasterFactDen](MasterFactDen.md) — 齿轮比分母（v5）
 - [MasterPos](MasterPos.md) — 经累加、缩放的主位置

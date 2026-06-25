@@ -97,7 +97,7 @@ APushConstant=4      ; push second operand
 AMath[1]             ; index 1 = Add (32-bit integer), result 7 is pushed back to the stack
 ```
 
-## 参见
+## 另请参阅
 
 - [PushParam](../03-stack-operation/PushParam.md) — 将参数值压入数值栈
 - [PushConstant](../03-stack-operation/PushConstant.md) — 将常量压入数值栈

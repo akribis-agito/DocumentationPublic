@@ -1,4 +1,3 @@
-language: zh-CN
 # 双环龙门控制
 
 在双环龙门控制中，控制器通过独立的负载端反馈（而非两台主电机的编码器）来闭合线性位置环。负载反馈由 [GantryFdbkSrc](../02-gantry-kinematic-feedback/GantryFdbkSrc.md) 指针选择，两台主电机的编码器则用于内部速度环和偏摆（差模）环。

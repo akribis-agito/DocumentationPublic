@@ -105,7 +105,7 @@ AModRev=0            ; disable modulo mode
 
 在 **v5** 中，反馈流水线迁移到 64 位，因此环绕运算作用于 64 位的 `Pos` 及参考。除数范围保持不变。**v5 仅限 central-i。**
 
-## 另见
+## 另请参阅
 
 - [ModShort](ModShort.md) —— 取模模式下 PTP 运动的最短路径选择
 - [Pos](../../10-motion/01-kinematics-status/Pos.md) —— 被环绕的反馈位置（参见其反馈流水线及 ModRev 章节）

@@ -49,7 +49,7 @@ language: zh-CN
 AHomingStep         ; 回零引擎已到达的步骤编号
 ```
 
-## 另请参见
+## 另请参阅
 
 - [HomingStat](HomingStat.md) — 回零运行的整体状态及错误码
 - [HomingOn](HomingOn.md) — 启动回零过程

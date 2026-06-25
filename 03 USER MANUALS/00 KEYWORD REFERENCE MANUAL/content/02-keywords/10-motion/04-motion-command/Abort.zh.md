@@ -84,7 +84,7 @@ language: zh-CN
 AAbort               ; immediately end motion on axis A
 ```
 
-## 另请参见
+## 另请参阅
 
 - [Stop](Stop.md) — 在 `Decel` 上斜坡减速的受控停止
 - [Decel](../03-kinematics-configuration/Decel.md) — `Stop` 使用的减速度（`Abort` 不使用）

@@ -73,7 +73,7 @@ ABuffStatus[5]      ; 当前周期内的点索引
 ABuffStatus[6]      ; 每周期点数（= 最后一个 BuffTime 值）
 ```
 
-## 参见
+## 另请参阅
 
 - [BuffCalc](BuffCalc.md) — 填充内部存储并写入配置元素
 - [BuffCycles](BuffCycles.md) — 与周期索引 [4] 进行比较的重复次数
