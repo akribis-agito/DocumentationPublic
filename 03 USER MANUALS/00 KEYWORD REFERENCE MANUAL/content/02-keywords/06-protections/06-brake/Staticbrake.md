@@ -54,7 +54,9 @@ Time to wait, in milliseconds, after releasing (energizing) the brake before all
 
 ## Timing diagram (BrakeMode = 3)
 
-![Three-lane timing diagram for BrakeMode 3: on an enable command the brake is released immediately and the motor is armed after BrakeRelTime; on a disable command the brake is engaged immediately and the motor is turned off after BrakeLockTime](brake-timing.svg)
+![Four-lane timing diagram for BrakeMode 3: on an enable command the brake is released immediately and the motor is armed after BrakeRelTime, at which point StatReg bit 29 clears; on a disable command StatReg bit 29 sets immediately with the lock command and the motor is turned off after BrakeLockTime](brake-timing.svg)
+
+The fourth lane shows the asymmetry of [StatReg](../../07-status-and-faults/StatReg.md) bit 29: it **clears at the end** of the release window (when motion becomes allowed) but **sets at the start** of the lock window (the moment the brake is asked to hold). Both directions err towards reporting “the brake has been asked to hold”.
 
 ## Walk-through: automatic brake handoff on enable/disable (BrakeMode 3)
 
