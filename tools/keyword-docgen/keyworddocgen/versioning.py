@@ -101,11 +101,11 @@ def _zh_variant(en_path: Path, content_root: Path) -> dict | None:
     zh_path = zh_sidecar_path(en_path)
     if not zh_path.exists():
         return None
-    fm, body = split_doc(zh_path.read_text())
-    hash_body = body if fm else zh_path.read_text()
+    fm, body = split_doc(zh_path.read_text(encoding="utf-8"))
+    hash_body = body if fm else zh_path.read_text(encoding="utf-8")
     return {
         "zh-CN": {
-            "path": str(zh_path.relative_to(content_root)),
+            "path": zh_path.relative_to(content_root).as_posix(),
             "sha256": body_sha256(hash_body),
         }
     }
@@ -145,10 +145,10 @@ def stamp_corpus(
 
     entries: list[dict] = []
     for path in english_paths:
-        text = path.read_text()
+        text = path.read_text(encoding="utf-8")
         fm, body = split_doc(text)
         keyword = (fm.get("keyword") if fm else None) or path.stem
-        rel = str(path.relative_to(content_root))
+        rel = path.relative_to(content_root).as_posix()
         hash_body = body if fm else text   # legacy: whole file is the prose
         sha = body_sha256(hash_body)
         prev = prev_by_path.get(rel)
@@ -164,7 +164,7 @@ def stamp_corpus(
             doc_revision = version
         if fm:
             stamped = stamp_frontmatter(fm, last_updated, doc_revision)
-            path.write_text(render_doc(stamped, body))
+            path.write_text(render_doc(stamped, body), encoding="utf-8", newline="\n")
         variants = _zh_variant(path, content_root)
         entries.append(
             manifest_document(
