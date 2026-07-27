@@ -1,7 +1,7 @@
 ---
 summary: Static (holding) brake control — engagement mode and timing (BrakeUsed, BrakeMode, BrakeLockTime, BrakeRelTime).
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-07-27'
+doc_revision: '2026.07'
 ---
 # Static brake
 
