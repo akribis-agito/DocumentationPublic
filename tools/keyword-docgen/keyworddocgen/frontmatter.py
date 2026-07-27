@@ -91,7 +91,7 @@ def propagate_facts_to_sidecar(en_path, en_fm: dict) -> bool:
     zh_path = zh_sidecar_path(en_path)
     if not zh_path.exists():
         return False
-    zh_fm, zh_body = split_doc(zh_path.read_text())
+    zh_fm, zh_body = split_doc(zh_path.read_text(encoding="utf-8"))
     new_fm = _merge_sidecar_fm(en_fm, zh_fm or {})
-    zh_path.write_text(render_doc(new_fm, zh_body))
+    zh_path.write_text(render_doc(new_fm, zh_body), encoding="utf-8", newline="\n")
     return True

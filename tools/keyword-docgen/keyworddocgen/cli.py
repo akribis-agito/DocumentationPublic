@@ -81,7 +81,7 @@ def run_version(args) -> int:
     prev_manifest = None
     if args.manifest_out.exists():
         try:
-            prev_manifest = json.loads(args.manifest_out.read_text())
+            prev_manifest = json.loads(args.manifest_out.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
             prev_manifest = None
     manifest = stamp_corpus(
@@ -93,20 +93,20 @@ def run_version(args) -> int:
         prev_manifest=prev_manifest,
     )
     args.manifest_out.parent.mkdir(parents=True, exist_ok=True)
-    args.manifest_out.write_text(json.dumps(manifest, indent=2) + "\n")
-    args.version_file.write_text(args.corpus_version + "\n")
+    args.manifest_out.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8", newline="\n")
+    args.version_file.write_text(args.corpus_version + "\n", encoding="utf-8", newline="\n")
     print(f"stamped {manifest['document_count']} docs at {args.corpus_version}")
     return 0
 
 
 def run_rag_export(args) -> int:
-    manifest = json.loads(args.manifest.read_text())
+    manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
     docs = manifest.get("documents", [])
     args.out.parent.mkdir(parents=True, exist_ok=True)
     written = 0
-    with args.out.open("w", encoding="utf-8") as fh:
+    with args.out.open("w", encoding="utf-8", newline="\n") as fh:
         for doc in docs:
-            fm, body = split_doc((args.content_root / doc["path"]).read_text())
+            fm, body = split_doc((args.content_root / doc["path"]).read_text(encoding="utf-8"))
             rec = chunk_record(
                 doc["path"], fm, body,
                 last_updated=doc["last_updated"],
@@ -118,7 +118,7 @@ def run_rag_export(args) -> int:
             # Emit a chunk for each translated sidecar carried in `variants`.
             for lang, variant in (doc.get("variants") or {}).items():
                 zh_fm, zh_body = split_doc(
-                    (args.content_root / variant["path"]).read_text())
+                    (args.content_root / variant["path"]).read_text(encoding="utf-8"))
                 zh_rec = chunk_record(
                     variant["path"], zh_fm, zh_body,
                     last_updated=doc["last_updated"],
@@ -172,7 +172,7 @@ def _index_docs(docs_root: Path) -> dict[str, Path]:
 
 def _has_keyword_field(path: Path) -> bool:
     try:
-        fm, _ = split_doc(path.read_text())
+        fm, _ = split_doc(path.read_text(encoding="utf-8"))
     except OSError:
         return False
     return isinstance(fm, dict) and "keyword" in fm
@@ -202,7 +202,7 @@ def run(argv: list[str]) -> int:
                 if product_supported(p, args.version) else None)
             for p in PRODUCTS
         }
-        fm, body = split_doc(path.read_text())
+        fm, body = split_doc(path.read_text(encoding="utf-8"))
         fm.setdefault("keyword", mnemonic)
         try:
             new_fm = merge_version(fm, scan_cells, args.version, mode=args.mode)
@@ -213,7 +213,7 @@ def run(argv: list[str]) -> int:
                 file=sys.stderr,
             )
             return 1
-        path.write_text(render_doc(new_fm, body))
+        path.write_text(render_doc(new_fm, body), encoding="utf-8", newline="\n")
         # Propagate the same generated facts into the zh-CN sidecar (if any),
         # preserving its translated summary/body. No sidecar -> no-op.
         propagate_facts_to_sidecar(path, new_fm)
@@ -221,7 +221,7 @@ def run(argv: list[str]) -> int:
     scanned = {p: set(tables.get(p, {})) for p in PRODUCTS}
     manifest = render_manifest(scanned, set(docs), args.version)
     args.manifest.parent.mkdir(parents=True, exist_ok=True)
-    args.manifest.write_text(manifest)
+    args.manifest.write_text(manifest, encoding="utf-8", newline="\n")
     return 0
 
 

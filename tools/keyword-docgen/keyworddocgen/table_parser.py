@@ -225,7 +225,7 @@ def _parse_one_table(table_block: str, defines: DefineTable) -> dict[str, dict]:
 
 def parse_params(path: Path, defines: DefineTable) -> dict[str, dict[str, dict]]:
     """Return {product: {mnemonic: {can_code, attributes}}}."""
-    text = Path(path).read_text(errors="replace")
+    text = Path(path).read_text(encoding="utf-8", errors="replace")
     tables: dict[str, dict[str, dict]] = {}
     for guard in _TABLE_OPEN.finditer(text):
         product = _PRODUCT_GUARDS.get(guard.group(1))

@@ -43,7 +43,7 @@ class DefineTable:
     def from_headers(cls, paths: list[Path]) -> "DefineTable":
         raw: dict[str, str] = {}
         for path in paths:
-            text = Path(path).read_text(errors="replace")
+            text = Path(path).read_text(encoding="utf-8", errors="replace")
             for line in text.splitlines():
                 m = _DEFINE_RE.match(line)
                 if not m:

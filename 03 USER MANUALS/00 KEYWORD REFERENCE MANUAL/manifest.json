@@ -1,15 +1,15 @@
 {
   "manual": "Keyword Reference Manual",
-  "version": "2026.06",
-  "generated": "2026-06-25",
+  "version": "2026.07",
+  "generated": "2026-07-27",
   "document_count": 929,
   "documents": [
     {
       "path": "01-keyword-usage-and-syntax/complex-can-code.md",
       "keyword": "complex-can-code",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "235672f5871dea73ccfd3cd0cdbcba33e768869f5ff9f47237fea4eb5e777b0a",
+      "last_updated": "2026-07-03",
+      "doc_revision": "2026.07",
+      "sha256": "aa33458a828e86056c2be29eb8d1fff8929bf8891267e7dbed8d03b68cd66dd2",
       "variants": {
         "zh-CN": {
           "path": "01-keyword-usage-and-syntax/complex-can-code.zh.md",
@@ -2854,13 +2854,13 @@
     {
       "path": "02-keywords/06-protections/06-brake/BrakeLockTime.md",
       "keyword": "BrakeLockTime",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "3d417d4d6ebbc7fe018e5b20b0186281de8707f211be0b4041dd033c686c5548",
+      "last_updated": "2026-07-27",
+      "doc_revision": "2026.07",
+      "sha256": "a41814d34ad001669286ca39091e12b3e48cbe3e744d9417f6a945d7854fb176",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/06-brake/BrakeLockTime.zh.md",
-          "sha256": "1df4acfdb0eca79251b0264c314c14e05a6a9e768ca1e91a22c0d6fd6554d582"
+          "sha256": "df32b30cd7bea8600872c05077a3f3794bfce6d1e45a3c94123657122fbb4106"
         }
       }
     },
@@ -2945,13 +2945,13 @@
     {
       "path": "02-keywords/06-protections/06-brake/Staticbrake.md",
       "keyword": "Staticbrake",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "d6a7d50ffd7a50f6ac1e032aa9a1be4700fe041944fc79c80afae94db897db71",
+      "last_updated": "2026-07-27",
+      "doc_revision": "2026.07",
+      "sha256": "fefa9f062956ae0fda667c803f4e2d8cb80979e5635e04508189a97214234846",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/06-brake/Staticbrake.zh.md",
-          "sha256": "5fe1ff0b98ee515eabaaf3373a79d822afd246f329acff715acf2ae500920088"
+          "sha256": "2faf42d258ecef411943f01ac8aaf07590669391bbeae217d165a5f3fda25462"
         }
       }
     },

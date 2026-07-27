@@ -55,7 +55,9 @@ language: zh-CN
 
 ## 时序图（BrakeMode = 3）
 
-![Three-lane timing diagram for BrakeMode 3: on an enable command the brake is released immediately and the motor is armed after BrakeRelTime; on a disable command the brake is engaged immediately and the motor is turned off after BrakeLockTime](brake-timing.svg)
+![Four-lane timing diagram for BrakeMode 3: on an enable command the brake is released immediately and the motor is armed after BrakeRelTime, at which point StatReg bit 29 clears; on a disable command StatReg bit 29 sets immediately with the lock command and the motor is turned off after BrakeLockTime](brake-timing.svg)
+
+第四条泳道展示了 [StatReg](../../07-status-and-faults/StatReg.md) 第 29 位的不对称性：它在释放窗口**结束时清除**（即允许运动时），却在抱闸窗口**开始时置位**（即制动器被要求保持的那一刻）。两个方向都倾向于报告“已请求制动器保持”。
 
 ## 演示：使能/禁用时的自动制动器交接（BrakeMode 3）
 

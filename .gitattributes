@@ -1,0 +1,17 @@
+# The keyword manual is authored and consumed as UTF-8 with LF line endings.
+# Pinning that here stops a Windows checkout (or a tool that round-trips a file
+# without pinning newline=) from rewriting every page as CRLF, which turns a
+# small docs edit into a whole-corpus diff.
+*.md      text eol=lf
+*.svg     text eol=lf
+*.json    text eol=lf
+*.py      text eol=lf
+VERSION   text eol=lf
+
+# Binary assets: never touch these.
+*.png     binary
+*.jpg     binary
+*.pdf     binary
+*.docx    binary
+*.xlsx    binary
+*.vsd     binary

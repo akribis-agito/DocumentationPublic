@@ -25,8 +25,8 @@ attributes:
   scaling: 65.536
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-07-27'
+doc_revision: '2026.07'
 ---
 # BrakeLockTime
 
@@ -44,11 +44,13 @@ The value is a time in **milliseconds**, settable from about **10 ms to 800 ms**
 
 In [BrakeMode](BrakeMode.md) = 3, when the motor is disabled (and the axis is currently enabled), the sequence:
 
-1. commands the static brake to lock (de-energize) and arms a timer for `BrakeLockTime` while the motor stays energized;
+1. commands the static brake to lock (de-energize), sets the lock request in [StatReg](../../07-status-and-faults/StatReg.md) bit 29, and arms a timer for `BrakeLockTime` while the motor stays energized;
 2. keeps the motor energized until the timer elapses — the motor continues to hold the load during this window;
-3. when the timer elapses, sets the lock request in [StatReg](../../07-status-and-faults/StatReg.md) bit 29 and disables the motor.
+3. when the timer elapses, disables the motor.
 
-The bit-29 set and the motor disable happen together when the lock timer elapses, not at the moment the lock is commanded.
+Bit 29 is set at the moment the lock is commanded, not when the timer elapses — so while the delay runs, the reported state already matches the brake output. The motor disable is what waits for the end of the window.
+
+Note the asymmetry with [BrakeRelTime](BrakeRelTime.md): on the release side bit 29 is *cleared* at the **end** of the delay (when motion becomes allowed), whereas on the lock side it is *set* at the **start**. In both directions the bit errs towards reporting “the brake has been asked to hold”.
 
 `BrakeLockTime` protects the **stop → disable** transition; the complementary [BrakeRelTime](BrakeRelTime.md) protects the **enable → motion** transition. Do not set `BrakeLockTime` to 0 in mode 3 — the timing logic relies on a non-zero delay; keep it at least a few milliseconds (the minimum is around 10 ms).
 
