@@ -150,8 +150,6 @@ and 3 together (`0x00B`).
 | 6–7 | field | Detent curve-fit method: `0` off — take the commutation offset from the last successful detent; `1` least-squares fit; `2` averaging over the recorded detents |
 | 8 | `0x100` | Bidirectional phasing. The search is run once in each direction |
 
-![ComtMode[30] learn options: bits 0, 1, 3 and 8 are single flags, bit 2 is defined but never read, and bits 4–5 and 6–7 are two-bit fields holding a method number rather than a flag](comtmode-learn-bits.svg)
-
 Bits 4–5 and 6–7 hold a small number rather than a single flag, so shift the
 method number into place: least-squares fine Hall learning is `2 << 4` = `0x020`,
 and least-squares curve fitting is `1 << 6` = `0x040`. The two fields are
