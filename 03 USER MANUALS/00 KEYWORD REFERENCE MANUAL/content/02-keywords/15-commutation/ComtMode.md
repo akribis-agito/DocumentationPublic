@@ -27,7 +27,7 @@ attributes:
 overrides:
   central-i.v5:
     array_size: 34
-last_updated: '2026-07-29'
+last_updated: '2026-07-30'
 doc_revision: '2026.06'
 ---
 # ComtMode
@@ -59,6 +59,13 @@ The resulting electrical angle is reported by [ComtAng](ComtAng.md), and progres
 | `[18]` | Commutation accuracy | Required accuracy, in percent. Default `10` |
 | `[19]` | Commutation **mode** | `0` run after power-on (default); `1` manual only (never automatic — trigger via index `[5]`); `2` run when the motor is turned on; `3` run after power-on and on motor-on |
 | `[20]`–`[24]` | Minimal-jumps search parameters | Voltage increment, step count, delta-position threshold, stop-time, and minimal range used by method `5` |
+| `[25]`–`[26]` | Reserved | Not used — no firmware reads these elements |
+| `[27]` | Phasing **domain** | `0` voltage domain (default) — the phasing drive is applied as phase voltages `Va`/`Vb`/`Vc`; `1` current domain — the phasing drive is applied as a current reference and the current loop drives the phases. Read by method `0` only. A value that is neither `0` nor `1` is coerced to `0` on write and on parameter restore. On an axis configured for an external amplifier, the voltage domain is refused ([ComtStatus](ComtStatus.md) `-17`). Central-i v5 only |
+| `[28]` | Phasing current peak | Peak of the current command that each jump of method `0` ramps up to, in mA, when `[27]=1`. Not read in the voltage domain, where the peak is `[2] × [3]` instead. Not clamped, and has no non-zero default — left at `0` in the current domain, no phasing drive is produced. Central-i v5 only |
+| `[29]` | Phasing **direction** | Initial direction of the commutation jumps of method `0`: `-1` or `+1`. Any negative value is normalized to `-1` and any other value to `+1`, on write and on parameter restore. Hard-stop learning and bidirectional phasing may reverse it during the process. Central-i v5 only |
+| `[30]` | **Learn** options | Bit field selecting what a learn pass (`[5]=202`) learns, for method `0` — see [Learn options](#learn-options-30). `0` learns everything. Central-i v5 only |
+| `[31]` | Maximum attempted jumps | Number of jumps method `0` may attempt before failing with [ComtStatus](ComtStatus.md) `-3`. Clamped to `3`–`144` on write and on parameter restore; note that a value below `3` is reset to `12` — one full electrical revolution of 30° steps — not to `3`. Central-i v5 only |
+| `[32]` | Minimum required successful jumps | Number of consecutive in-window jumps method `0` requires to declare success. Clamped to `3`–`60` on write and on parameter restore. Central-i v5 only |
 | `[33]` | **User-defined phasing angle** | Electrical angle in degrees used by method `7`. Normalized to 0–359 on write and on parameter restore. Central-i v5 only |
 
 > [!note]
@@ -116,6 +123,46 @@ measured and stored in index `[4]`, whereas method `7` accepts a number the
 *user* supplies. Neither verifies the value it is given.
 
 ![Hall-start-then-refine commutation: a rough angle from the Hall state lets the axis begin, then the controller refines it to a fine angle at the next index pulse (method 3) or Hall transition (method 4)](hall-encoder-switching.svg)
+
+### Learn options (`[30]`)
+
+Index `[30]` is a **bit field**, not a list of alternatives: several options can be
+selected at once by adding their values together. It is read only when a learn
+pass is requested by writing `202` to index `[5]`, and only by commutation method
+`0`. A plain re-commutation (`[5]=1282`) and the automatic power-on / motor-on
+phasing selected by `[19]` always run with no learning, whatever `[30]` holds.
+Writing `[30]=0` and then requesting a learn pass learns *everything* — bits 0, 1
+and 3 together (`0x00B`).
+
+| Bits | Value | Meaning |
+|---|---|---|
+| 0 | `0x001` | Learn current direction. After two consecutive jumps of the right size but the wrong direction, [CurrDir](../09-current-and-voltage/02-motor-variables/CurrDir.md) and the phasing direction are both flipped and phasing restarts |
+| 1 | `0x002` | Learn hard stop. After two consecutive jumps shorter than half the expected distance, the phasing angle is shifted away from the obstruction (on a second encounter the direction is also flipped) and phasing restarts |
+| 2 | `0x004` | Named for absolute-encoder-zero learning, but not read anywhere in the firmware — see the note below |
+| 3 | `0x008` | Learn rough Hall angles. The [HallsValue](HallsValue.md) readings collected during phasing are analyzed at the end and the [HallsAngle](HallsAngle.md) table is rewritten |
+| 4–5 | field | Fine Hall-angle learn method: `0` off, `1` closest neighbour, `2` least-squares fit, `3` averaging |
+| 6–7 | field | Detent curve-fit method: `0` off — take the commutation offset from the last successful detent; `1` least-squares fit; `2` averaging over the recorded detents |
+| 8 | `0x100` | Bidirectional phasing. The search is run once in each direction |
+
+Bits 4–5 and 6–7 hold a small number rather than a single flag, so shift the
+method number into place: least-squares fine Hall learning is `2 << 4` = `0x020`,
+and least-squares curve fitting is `1 << 6` = `0x040`. The two fields are
+independent and can be combined with each other and with the single-bit options.
+
+Selecting any fine Hall-angle method (bits 4–5 non-zero) clears the rough Hall
+learn bit, since fine learning supersedes it, and switches `[6]` smoothing on —
+fine learning needs the continuously advancing angle that smoothing produces in
+order to time the Hall transitions. Note that this is a write to `[6]` itself, so
+smoothing stays on after the learn pass finishes; set `[6]` back to `0` if the
+axis is meant to phase with stepped voltage.
+
+When a learn pass has changed a stored parameter, commutation finishes with
+[ComtStatus](ComtStatus.md) `500` instead of `100`, as a reminder to save the
+changed parameters to flash.
+
+> [!note]
+> Bit 2 (`0x004`) is defined in the firmware as an absolute-encoder-zero learn
+> bit, but no firmware code reads it. Setting it has no effect.
 
 ## Examples
 
