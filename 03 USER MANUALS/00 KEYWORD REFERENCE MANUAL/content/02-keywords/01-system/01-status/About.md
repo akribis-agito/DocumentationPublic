@@ -28,7 +28,6 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 ---
-
 # About
 
 Internal command (Agito PCSuite) that returns all controller parameters.
