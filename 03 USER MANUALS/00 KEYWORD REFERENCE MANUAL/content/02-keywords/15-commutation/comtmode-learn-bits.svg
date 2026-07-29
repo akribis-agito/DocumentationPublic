@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="430" viewBox="0 0 780 430" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="ComtMode[30] packs the learn options into nine bits. Bit 0 learns the current direction, bit 1 the hard stop, bit 3 the rough Hall angles and bit 8 enables a bidirectional pass. Bit 2 is defined in the firmware but never read, so setting it has no effect. Bits 4 and 5 form a field selecting the fine-Hall method: 1 closest neighbour, 2 least squares, 3 average. Bits 6 and 7 form a field selecting the curve-fit method: 1 least squares, 2 average. The two fields hold small numbers, not single flags, so they are read by masking and shifting rather than by testing a bit.">
+  <title>ComtMode[30] learn-option bit layout</title>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/></marker>
+  </defs>
+
+  <text x="390" y="22" text-anchor="middle" font-weight="bold">ComtMode[30] (learn options) &#8212; single flags and two multi-bit fields</text>
+  <text x="390" y="40" text-anchor="middle" font-size="11" fill="#5b6b7b">Read during a learn pass of the &#8220;jump to zero&#8221; method (ComtMode[1]=0), requested by ComtMode[5]=202</text>
+
+  <!-- single-bit flags -->
+  <rect x="66"  y="56" width="72" height="54" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="102" y="76" text-anchor="middle" font-weight="bold">bit 0</text>
+  <text x="102" y="93" text-anchor="middle" font-size="11" fill="#5b6b7b">current</text>
+  <text x="102" y="105" text-anchor="middle" font-size="11" fill="#5b6b7b">direction</text>
+
+  <rect x="138" y="56" width="72" height="54" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="174" y="76" text-anchor="middle" font-weight="bold">bit 1</text>
+  <text x="174" y="93" text-anchor="middle" font-size="11" fill="#5b6b7b">hard</text>
+  <text x="174" y="105" text-anchor="middle" font-size="11" fill="#5b6b7b">stop</text>
+
+  <!-- bit 2: defined but never read -->
+  <rect x="210" y="56" width="72" height="54" rx="4" fill="#fdecea" stroke="#e0736b" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="246" y="76" text-anchor="middle" font-weight="bold" fill="#b4453c">bit 2</text>
+  <text x="246" y="93" text-anchor="middle" font-size="11" fill="#b4453c">abs-enc zero</text>
+  <text x="246" y="105" text-anchor="middle" font-size="11" fill="#b4453c">never read</text>
+
+  <rect x="282" y="56" width="72" height="54" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="318" y="76" text-anchor="middle" font-weight="bold">bit 3</text>
+  <text x="318" y="93" text-anchor="middle" font-size="11" fill="#5b6b7b">rough Hall</text>
+  <text x="318" y="105" text-anchor="middle" font-size="11" fill="#5b6b7b">angles</text>
+
+  <!-- two multi-bit fields, drawn as spans -->
+  <rect x="354" y="56" width="144" height="54" rx="4" fill="#eef7ee" stroke="#4f9d69" stroke-width="1.6"/>
+  <text x="426" y="76" text-anchor="middle" font-weight="bold">bits 4&#8211;5</text>
+  <text x="426" y="93" text-anchor="middle" font-size="11" fill="#3f7d54">fine-Hall method</text>
+  <text x="426" y="105" text-anchor="middle" font-size="11" fill="#3f7d54">(a value, not a flag)</text>
+
+  <rect x="498" y="56" width="144" height="54" rx="4" fill="#eef7ee" stroke="#4f9d69" stroke-width="1.6"/>
+  <text x="570" y="76" text-anchor="middle" font-weight="bold">bits 6&#8211;7</text>
+  <text x="570" y="93" text-anchor="middle" font-size="11" fill="#3f7d54">curve-fit method</text>
+  <text x="570" y="105" text-anchor="middle" font-size="11" fill="#3f7d54">(a value, not a flag)</text>
+
+  <rect x="642" y="56" width="72" height="54" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="678" y="76" text-anchor="middle" font-weight="bold">bit 8</text>
+  <text x="678" y="93" text-anchor="middle" font-size="11" fill="#5b6b7b">bidirectional</text>
+  <text x="678" y="105" text-anchor="middle" font-size="11" fill="#5b6b7b">pass</text>
+
+  <!-- field value legends -->
+  <line x1="426" y1="110" x2="426" y2="148" stroke="#4f9d69" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="570" y1="110" x2="570" y2="148" stroke="#4f9d69" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <rect x="330" y="152" width="192" height="86" rx="6" fill="#eef7ee" stroke="#4f9d69" stroke-width="1.2"/>
+  <text x="426" y="171" text-anchor="middle" font-weight="bold" font-size="12">fine-Hall method</text>
+  <text x="426" y="190" text-anchor="middle" font-size="12">1 &#8212; closest neighbour</text>
+  <text x="426" y="208" text-anchor="middle" font-size="12">2 &#8212; least squares</text>
+  <text x="426" y="226" text-anchor="middle" font-size="12">3 &#8212; average</text>
+
+  <rect x="530" y="152" width="192" height="86" rx="6" fill="#eef7ee" stroke="#4f9d69" stroke-width="1.2"/>
+  <text x="626" y="171" text-anchor="middle" font-weight="bold" font-size="12">curve-fit method</text>
+  <text x="626" y="190" text-anchor="middle" font-size="12">1 &#8212; least squares</text>
+  <text x="626" y="208" text-anchor="middle" font-size="12">2 &#8212; average</text>
+  <text x="626" y="226" text-anchor="middle" font-size="11" fill="#5b6b7b">0 &#8212; use the last detent</text>
+
+  <!-- bit 2 callout -->
+  <line x1="246" y1="110" x2="246" y2="166" stroke="#e0736b" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <rect x="66" y="170" width="230" height="68" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="181" y="190" text-anchor="middle" font-weight="bold" font-size="12" fill="#b4453c">bit 2 has no effect</text>
+  <text x="181" y="209" text-anchor="middle" font-size="11" fill="#b4453c">Set and clear constants exist, but</text>
+  <text x="181" y="224" text-anchor="middle" font-size="11" fill="#b4453c">nothing in the firmware reads it.</text>
+
+  <!-- how the fields are read -->
+  <rect x="100" y="268" width="580" height="52" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="390" y="289" text-anchor="middle" font-weight="bold">fine-Hall = (ComtMode[30] &amp; 0x30) &gt;&gt; 4&#160;&#160;&#160;&#160;curve-fit = (ComtMode[30] &amp; 0xC0) &gt;&gt; 6</text>
+  <text x="390" y="309" text-anchor="middle" font-size="11" fill="#5b6b7b">The single-bit flags are tested directly: bit 0 = 0x1, bit 1 = 0x2, bit 3 = 0x8, bit 8 = 0x100.</text>
+
+  <text x="390" y="344" text-anchor="middle" font-size="12">The two fields hold a small number, not a flag &#8212; value 1 in bits 4&#8211;5 and value 1 in bits 6&#8211;7</text>
+  <text x="390" y="362" text-anchor="middle" font-size="12">select different methods, so the same digit means different things in each field.</text>
+  <text x="390" y="388" text-anchor="middle" font-size="11" fill="#5b6b7b">Learning direction, hard stop and rough Hall together is the common case (value 0x00B).</text>
+  <text x="390" y="406" text-anchor="middle" font-size="11" fill="#5b6b7b">Selecting any fine-Hall method also switches smoothing on, by writing ComtMode[6] = 1.</text>
+</svg>

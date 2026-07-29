@@ -71,6 +71,10 @@ The resulting electrical angle is reported by [ComtAng](ComtAng.md), and progres
 > [!note]
 > Index `[5]=1282` is a *re-trigger now* command, not the automatic power-on setting. Automatic phasing after power-on is governed by the **mode** at index `[19]` (default `0` already runs commutation after power-on). The legacy phrasing "`ComtMode[5]=1282` to commutate after power-on" works only because writing `1282` forces an immediate re-commutation.
 
+Most elements are read by one method only. The map below shows which:
+
+![Which ComtMode elements each commutation method reads: [1], [5] and [19] apply to every method, while the search-drive elements and the v5 elements [27]–[32] are read only by method 0, [4] only by method 2, [20]–[24] only by method 5, [33] only by method 7, and methods 3, 4 and 6 read no tuning elements at all](comtmode-element-map.svg)
+
 ### Search-based methods
 
 When a search-based commutation method is used (for example "jump to zero" or minimal-jumps search):
@@ -134,6 +138,8 @@ phasing selected by `[19]` always run with no learning, whatever `[30]` holds.
 Writing `[30]=0` and then requesting a learn pass learns *everything* — bits 0, 1
 and 3 together (`0x00B`).
 
+![Learn-option bit layout: bits 0, 1, 3 and 8 are single flags for current direction, hard stop, rough Hall angles and a bidirectional pass; bit 2 is defined but never read; bits 4-5 and bits 6-7 each hold a small method number rather than a flag, and are read by masking and shifting](comtmode-learn-bits.svg)
+
 | Bits | Value | Meaning |
 |---|---|---|
 | 0 | `0x001` | Learn current direction. After two consecutive jumps of the right size but the wrong direction, [CurrDir](../09-current-and-voltage/02-motor-variables/CurrDir.md) and the phasing direction are both flipped and phasing restarts |
@@ -143,6 +149,8 @@ and 3 together (`0x00B`).
 | 4–5 | field | Fine Hall-angle learn method: `0` off, `1` closest neighbour, `2` least-squares fit, `3` averaging |
 | 6–7 | field | Detent curve-fit method: `0` off — take the commutation offset from the last successful detent; `1` least-squares fit; `2` averaging over the recorded detents |
 | 8 | `0x100` | Bidirectional phasing. The search is run once in each direction |
+
+![ComtMode[30] learn options: bits 0, 1, 3 and 8 are single flags, bit 2 is defined but never read, and bits 4–5 and 6–7 are two-bit fields holding a method number rather than a flag](comtmode-learn-bits.svg)
 
 Bits 4–5 and 6–7 hold a small number rather than a single flag, so shift the
 method number into place: least-squares fine Hall learning is `2 << 4` = `0x020`,
