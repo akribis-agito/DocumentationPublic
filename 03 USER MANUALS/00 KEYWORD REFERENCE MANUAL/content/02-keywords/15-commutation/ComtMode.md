@@ -26,8 +26,8 @@ attributes:
   implemented: final
 overrides:
   central-i.v5:
-    array_size: 33
-last_updated: '2026-05-29'
+    array_size: 34
+last_updated: '2026-07-29'
 doc_revision: '2026.06'
 ---
 # ComtMode
@@ -48,7 +48,7 @@ The resulting electrical angle is reported by [ComtAng](ComtAng.md), and progres
 
 | Index | Setting | Values / meaning |
 |---|---|---|
-| `[1]` | Commutation **method** | `0` search "jump to zero"; `2` absolute encoder; `3` special-encoder switching, fixed built-in code→angle table, not [HallsAngle](HallsAngle.md) (waits for index pulse for fine adjustment); `4` Hall + encoder switching (waits for a Hall transition for fine adjustment); `5` minimal-jumps search; `6` Hall-only |
+| `[1]` | Commutation **method** | `0` search "jump to zero"; `2` absolute encoder; `3` special-encoder switching, fixed built-in code→angle table, not [HallsAngle](HallsAngle.md) (waits for index pulse for fine adjustment); `4` Hall + encoder switching (waits for a Hall transition for fine adjustment); `5` minimal-jumps search; `6` Hall-only; `7` user-defined angle — the angle is taken directly from index `[33]`, with no search and no motion (central-i v5 only) |
 | `[2]` | Voltage increment per step (search methods) | Output-voltage step added each iteration. Default `1` |
 | `[3]` | Number of steps (search methods) | Step count over which the search voltage is ramped/applied |
 | `[4]` | Absolute-encoder zero reference | Stored encoder position of electrical-angle zero (written by the controller when method `2` finishes; saved to flash) |
@@ -59,6 +59,7 @@ The resulting electrical angle is reported by [ComtAng](ComtAng.md), and progres
 | `[18]` | Commutation accuracy | Required accuracy, in percent. Default `10` |
 | `[19]` | Commutation **mode** | `0` run after power-on (default); `1` manual only (never automatic — trigger via index `[5]`); `2` run when the motor is turned on; `3` run after power-on and on motor-on |
 | `[20]`–`[24]` | Minimal-jumps search parameters | Voltage increment, step count, delta-position threshold, stop-time, and minimal range used by method `5` |
+| `[33]` | **User-defined phasing angle** | Electrical angle in degrees used by method `7`. Normalized to 0–359 on write and on parameter restore. Central-i v5 only |
 
 > [!note]
 > Index `[5]=1282` is a *re-trigger now* command, not the automatic power-on setting. Automatic phasing after power-on is governed by the **mode** at index `[19]` (default `0` already runs commutation after power-on). The legacy phrasing "`ComtMode[5]=1282` to commutate after power-on" works only because writing `1282` forces an immediate re-commutation.
@@ -89,6 +90,31 @@ The refinement works as follows:
 > [!note]
 > Because method `3` reads the special-encoder code latched in hardware once and then clears the latch, a software reset or a re-commutation request (`[5]`) issued without an intervening power cycle finds the latch empty and fails with [ComtStatus](ComtStatus.md) `-6` (amplifier power cycle is required). It is the only method that does **not** consult [HallsAngle](HallsAngle.md).
 
+### User-defined angle
+
+Method `7` takes the electrical angle directly from index `[33]`, in degrees,
+and applies it without searching:
+
+```
+commutation offset = electrical cycle × ComtMode[33] / 360
+```
+
+No drive is applied and the axis does not move — commutation completes in the
+control cycle it begins, and [ComtStatus](ComtStatus.md) goes straight to `100`.
+This suits an axis whose phasing angle is already known from characterization or
+from a jig, and a vertical or gravity-loaded axis where a search-based method
+risks dropping the load before torque is established.
+
+The value is normalized to 0–359 whenever it is written and whenever parameters
+are restored, so `-90` and `270` are the same setting. The angle is the
+commutation angle itself, not the detent angle — on a motor characterized by its
+detent position, enter the detent angle plus 90°.
+
+Method `7` differs from method `2` (absolute encoder), which also completes
+without motion: method `2` recalls a zero reference the *controller* previously
+measured and stored in index `[4]`, whereas method `7` accepts a number the
+*user* supplies. Neither verifies the value it is given.
+
 ![Hall-start-then-refine commutation: a rough angle from the Hall state lets the axis begin, then the controller refines it to a fine angle at the next index pulse (method 3) or Hall transition (method 4)](hall-encoder-switching.svg)
 
 ## Examples
@@ -103,7 +129,12 @@ AComtMode[1]        ; query the configured commutation method
 
 ## Changes between versions
 
-On central-i v5 the array is extended to 33 elements (vs. 25 on v4/standalone), adding parameters for the minimal-jumps search such as a final detent current, the **maximum number of attempted jumps** (`[31]`) and the **minimum number of required successful jumps** (`[32]`). The core method/mode behavior described above is unchanged.
+On central-i v5 the array is extended to 34 elements (vs. 25 on v4/standalone).
+The additions are parameters for the minimal-jumps search — a final detent
+current, the **maximum number of attempted jumps** (`[31]`) and the **minimum
+number of required successful jumps** (`[32]`) — and the **user-defined phasing
+angle** (`[33]`) used by commutation method `7`. The core method/mode behavior
+described above is unchanged.
 
 ## See also
 
