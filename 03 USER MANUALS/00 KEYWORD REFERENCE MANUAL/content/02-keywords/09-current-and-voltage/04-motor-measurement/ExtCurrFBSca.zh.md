@@ -58,3 +58,4 @@ AExtCurrFBSca            ; read the configured scaling
 - [CurrFBFact](CurrFBFact.md) — 此比例的 v4 整数等效形式
 - [MotorCurr](../02-motor-variables/MotorCurr.md) — 由缩放后的外部反馈产生的电机电流
 - [AmpType](../../02-motor-and-amplifier/AmpType.md) — 所连接远程设备的驱动器类型
+- [ExtCurrCmdOfs](ExtCurrCmdOfs.md) —— 指令侧的每相 mA 偏置，适用于数字 SPI 外部驱动器

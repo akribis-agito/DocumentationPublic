@@ -57,3 +57,4 @@ AExtCurrFBSca            ; read the configured scaling
 - [CurrFBFact](CurrFBFact.md) — v4 integer equivalent of this scale
 - [MotorCurr](../02-motor-variables/MotorCurr.md) — motor current produced from the scaled external feedback
 - [AmpType](../../02-motor-and-amplifier/AmpType.md) — amplifier type of the connected remote
+- [ExtCurrCmdOfs](ExtCurrCmdOfs.md) — per-phase mA offset on the command side, for the digital-SPI external amplifier
