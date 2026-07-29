@@ -27,7 +27,7 @@ attributes:
 overrides:
   central-i.v5:
     array_size: 4
-last_updated: '2026-05-29'
+last_updated: '2026-07-29'
 doc_revision: '2026.06'
 ---
 # ComtStatus
@@ -74,8 +74,15 @@ The array holds the following elements (1-indexed):
 | -14 | Commutation failed: incorrect direction detected during the search (central-i v5 only). |
 | -15 | Commutation failed: a hard stop was reached during the search (central-i v5 only). |
 | -16 | Commutation failed: no Hall transition was found during fine Hall learning (central-i v5 only). |
+| -17 | Commutation refused: phasing would drive voltage directly into an external amplifier, which is not allowed. The axis is turned off (central-i v5 only). |
 
 The illegal-Hall errors (`-7`, `-9` … `-12`) are raised when [HallsValue](HallsValue.md) reads `0` or `7` (the two combinations outside the legal range 1–6), or when the observed Hall sequence does not match the expected order.
+
+### External-amplifier phasing refusal (status `-17`)
+
+The "jump to zero" (`ComtMode[1]=0`) and minimal-jumps search (`ComtMode[1]=5`) commutation methods find the electrical angle by driving phase voltage (`Va`/`Vb`/`Vc`) directly — see [ComtMode](ComtMode.md). That voltage cannot be sent into an external amplifier, so on an axis configured for one, with commutation left in its default voltage domain (i.e. not switched to an explicit current domain), the controller refuses to phase: it sets `ComtStatus[1]` to `-17` and turns the motor off.
+
+For minimal-jumps search this is the final status. For "jump to zero", the refusal happens inside the same control cycle as the method's own end-of-jump check, which then finds the motor already off and immediately overwrites the status to `-1` (unexpected motor off) — so on this method `-17` is transient and what actually persists is `-1` with the motor off. Either way the outcome is the same: phasing is refused and the motor stays off.
 
 ### Burn-in mode (status `600`)
 
