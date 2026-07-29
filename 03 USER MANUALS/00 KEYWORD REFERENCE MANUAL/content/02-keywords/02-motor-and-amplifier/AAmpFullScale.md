@@ -74,6 +74,8 @@ $$
 
 The mid-code 32768 represents 0 A; a phase current is mapped to `32768 + factor × PhaseCurr` and saturated to the 0…65535 range. A phase current equal to `AAmpFullScale` therefore reaches the top of the range (a half-swing of 32768 counts above mid-code).
 
+A per-phase offset, in mA, can be added to the phase current before this factor is applied — see [ExtCurrCmdOfs](../09-current-and-voltage/04-motor-measurement/ExtCurrCmdOfs.md); the mapped code becomes `32768 + factor × (PhaseCurr + ExtCurrCmdOfs)`. The resulting code actually sent to the amplifier is reported by [ExtCurrCmdVal](../09-current-and-voltage/04-motor-measurement/ExtCurrCmdVal.md).
+
 ## Examples
 
 ```text
@@ -86,3 +88,4 @@ AAAmpFullScale          ; query the current full-scale value
 - [AmpType](AmpType.md) — selects the external amplifier command mode this scaling applies to
 - [AOutPort](../05-inputs-outputs/03-analog-outputs/AOutPort.md) — analog output port driven by the scaled command
 - [CurrRef](../09-current-and-voltage/02-motor-variables/CurrRef.md) — current reference scaled in modes 2 and 7
+- [ExtCurrCmdOfs](../09-current-and-voltage/04-motor-measurement/ExtCurrCmdOfs.md) — per-phase mA offset applied before this factor in digital-SPI mode (8)

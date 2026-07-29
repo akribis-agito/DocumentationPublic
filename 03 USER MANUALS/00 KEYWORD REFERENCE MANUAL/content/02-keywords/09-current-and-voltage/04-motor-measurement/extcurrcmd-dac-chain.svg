@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" viewBox="0 0 760 300" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="External-amplifier DAC command chain, per phase: the phase current command in mA has ExtCurrCmdOfs added to it in mA, then the sum is multiplied by the gain 32768 over AAmpFullScale in counts per mA, then 32768 (the DAC mid-code for zero current) is added, then the result is saturated to 0 through 65535. The final value is ExtCurrCmdVal, the DAC code sent to the amplifier. The offset is applied before the gain, in the same mA domain as the phase current, not after the gain as a raw count.">
+  <title>External-amplifier DAC command chain</title>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#5b6b7b"/>
+    </marker>
+  </defs>
+
+  <text x="380" y="26" text-anchor="middle" font-size="15" font-weight="bold">External-amplifier DAC command chain (per phase)</text>
+
+  <!-- Step 1: phase current command -->
+  <rect x="20" y="60" width="150" height="90" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="95" y="86" text-anchor="middle" font-weight="bold">Phase current</text>
+  <text x="95" y="102" text-anchor="middle" font-size="11">command</text>
+  <text x="95" y="120" text-anchor="middle" font-size="11">PhaseCurr[i]</text>
+  <text x="95" y="136" text-anchor="middle" font-size="11">(Ia / Ib), mA</text>
+
+  <!-- Step 2: add offset (this keyword) -->
+  <rect x="210" y="60" width="150" height="90" rx="6" fill="#fdecea" stroke="#e0736b" stroke-width="1.2"/>
+  <text x="285" y="86" text-anchor="middle" font-weight="bold">+ Offset</text>
+  <text x="285" y="104" text-anchor="middle" font-size="11">ExtCurrCmdOfs[i]</text>
+  <text x="285" y="120" text-anchor="middle" font-size="11">mA — this</text>
+  <text x="285" y="136" text-anchor="middle" font-size="11">keyword</text>
+
+  <!-- Step 3: multiply by gain -->
+  <rect x="400" y="60" width="150" height="90" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="475" y="86" text-anchor="middle" font-weight="bold">&#215; Gain</text>
+  <text x="475" y="104" text-anchor="middle" font-size="11">32768 /</text>
+  <text x="475" y="120" text-anchor="middle" font-size="11">AAmpFullScale</text>
+  <text x="475" y="136" text-anchor="middle" font-size="11">counts/mA</text>
+
+  <!-- Step 4: mid-code + saturate -->
+  <rect x="590" y="60" width="150" height="90" rx="6" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="665" y="86" text-anchor="middle" font-weight="bold">+ Mid-code</text>
+  <text x="665" y="104" text-anchor="middle" font-size="11">+ 32768,</text>
+  <text x="665" y="120" text-anchor="middle" font-size="11">saturate to</text>
+  <text x="665" y="136" text-anchor="middle" font-size="11">0&#8230;65535</text>
+
+  <!-- arrows between steps -->
+  <path d="M170,105 L206,105" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M360,105 L396,105" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M550,105 L586,105" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- arrow down to result -->
+  <path d="M665,150 L665,196" fill="none" stroke="#5b6b7b" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- Result: ExtCurrCmdVal -->
+  <rect x="250" y="200" width="490" height="60" rx="6" fill="#eaf6ec" stroke="#4a9d63" stroke-width="1.2"/>
+  <text x="495" y="226" text-anchor="middle" font-weight="bold">ExtCurrCmdVal[i]</text>
+  <text x="495" y="244" text-anchor="middle" font-size="11">DAC code sent to the amplifier (read-only, 0&#8230;65535)</text>
+
+  <!-- note on ordering -->
+  <text x="20" y="285" font-size="11" fill="#777">The offset (red) is added in the mA domain, before the gain — not to the DAC code afterwards.</text>
+</svg>
