@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="330" viewBox="0 0 780 330" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" role="img" aria-label="Which ComtMode elements each commutation method reads. Elements [1] method, [5] repeat request and [19] mode apply to every method. Method 0, jump to zero, additionally reads the search drive and accuracy elements [2], [3], [6], [7] and [18], and the central-i v5 elements [27] through [32]. Method 2, absolute encoder, reads only the stored zero at [4]. Methods 3, 4 and 6, the Hall and special-encoder methods, read no tuning elements at all. Method 5, minimal-jumps search, reads only its own parameters at [20] through [24] and does not read [27] through [32]. Method 7, user-defined angle, reads only the angle at [33]. Elements [8] to [17], [25] and [26] are reserved and read by nothing.">
+  <title>ComtMode elements by commutation method</title>
+
+  <text x="12" y="20" font-size="13" font-weight="bold">Which ComtMode elements each method reads</text>
+  <text x="12" y="38" font-size="11" fill="#5b6b7b">The extended v5 elements [27]&#8211;[32] belong to &#8220;jump to zero&#8221;, not to the minimal-jumps search.</text>
+
+  <!-- column headers -->
+  <text x="150" y="70" font-size="11" font-weight="bold" fill="#5b6b7b">selection</text>
+  <text x="150" y="83" font-size="10" fill="#5b6b7b">[1] [5] [19]</text>
+
+  <text x="258" y="70" font-size="11" font-weight="bold" fill="#5b6b7b">search drive</text>
+  <text x="258" y="83" font-size="10" fill="#5b6b7b">[2] [3] [6] [7] [18]</text>
+
+  <text x="392" y="70" font-size="11" font-weight="bold" fill="#5b6b7b">abs zero</text>
+  <text x="392" y="83" font-size="10" fill="#5b6b7b">[4]</text>
+
+  <text x="462" y="70" font-size="11" font-weight="bold" fill="#5b6b7b">min-jumps</text>
+  <text x="462" y="83" font-size="10" fill="#5b6b7b">[20]&#8211;[24]</text>
+
+  <text x="566" y="70" font-size="11" font-weight="bold" fill="#5b6b7b">v5 phasing</text>
+  <text x="566" y="83" font-size="10" fill="#5b6b7b">[27]&#8211;[32]</text>
+
+  <text x="682" y="70" font-size="11" font-weight="bold" fill="#5b6b7b">user angle</text>
+  <text x="682" y="83" font-size="10" fill="#5b6b7b">[33]</text>
+
+  <line x1="12" y1="92" x2="740" y2="92" stroke="#c8ced6" stroke-width="1"/>
+
+  <!-- method 0 -->
+  <text x="12" y="115" font-size="12" font-weight="bold">method 0</text>
+  <text x="12" y="129" font-size="10" fill="#5b6b7b">jump to zero</text>
+  <rect x="120" y="102" width="60" height="30" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="150" y="122" text-anchor="middle" font-size="14" fill="#3a6fd8">&#10003;</text>
+  <rect x="216" y="102" width="84" height="30" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="258" y="122" text-anchor="middle" font-size="14" fill="#3a6fd8">&#10003;</text>
+  <rect x="524" y="102" width="84" height="30" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="566" y="122" text-anchor="middle" font-size="14" fill="#3a6fd8">&#10003;</text>
+
+  <!-- method 2 -->
+  <text x="12" y="155" font-size="12" font-weight="bold">method 2</text>
+  <text x="12" y="169" font-size="10" fill="#5b6b7b">absolute encoder</text>
+  <rect x="120" y="142" width="60" height="30" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="150" y="162" text-anchor="middle" font-size="14" fill="#3a6fd8">&#10003;</text>
+  <rect x="360" y="142" width="64" height="30" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="392" y="162" text-anchor="middle" font-size="14" fill="#3a6fd8">&#10003;</text>
+
+  <!-- methods 3, 4, 6 -->
+  <text x="12" y="195" font-size="12" font-weight="bold">methods 3, 4, 6</text>
+  <text x="12" y="209" font-size="10" fill="#5b6b7b">Hall / special encoder</text>
+  <rect x="120" y="182" width="60" height="30" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="150" y="202" text-anchor="middle" font-size="14" fill="#3a6fd8">&#10003;</text>
+  <text x="216" y="202" font-size="11" fill="#5b6b7b">no tuning elements &#8212; the angle comes from HallsAngle or the encoder</text>
+
+  <!-- method 5 -->
+  <text x="12" y="235" font-size="12" font-weight="bold">method 5</text>
+  <text x="12" y="249" font-size="10" fill="#5b6b7b">minimal-jumps search</text>
+  <rect x="120" y="222" width="60" height="30" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="150" y="242" text-anchor="middle" font-size="14" fill="#3a6fd8">&#10003;</text>
+  <rect x="428" y="222" width="68" height="30" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="462" y="242" text-anchor="middle" font-size="14" fill="#3a6fd8">&#10003;</text>
+  <rect x="524" y="222" width="84" height="30" rx="4" fill="#fdecea" stroke="#e0736b" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="566" y="242" text-anchor="middle" font-size="12" fill="#b4453c">not read</text>
+
+  <!-- method 7 -->
+  <text x="12" y="275" font-size="12" font-weight="bold">method 7</text>
+  <text x="12" y="289" font-size="10" fill="#5b6b7b">user-defined angle</text>
+  <rect x="120" y="262" width="60" height="30" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="150" y="282" text-anchor="middle" font-size="14" fill="#3a6fd8">&#10003;</text>
+  <rect x="648" y="262" width="68" height="30" rx="4" fill="#eaf2fb" stroke="#5b8def" stroke-width="1.2"/>
+  <text x="682" y="282" text-anchor="middle" font-size="14" fill="#3a6fd8">&#10003;</text>
+
+  <line x1="12" y1="302" x2="740" y2="302" stroke="#c8ced6" stroke-width="1"/>
+
+  <!-- reserved band -->
+  <rect x="12" y="310" width="11" height="11" fill="#f0f1f3" stroke="#8a929b" stroke-width="0.6"/>
+  <text x="30" y="319" font-size="11" fill="#5b6b7b">Reserved, read by nothing: [8]&#8211;[17], [25], [26]. Methods 3, 4 and 6 are selected by [1] and take no further configuration.</text>
+</svg>
