@@ -81,7 +81,7 @@ When a search-based commutation method is used (for example "jump to zero" or mi
 
 The search voltage and step count are configured by `[2]` (voltage increment per step) and `[3]` (number of steps), and the required accuracy by `[18]`. For the "jump to zero" method (`[1]=0`) the search is declared successful after **3 consecutive** jumps land inside the accepted size window; the count of consecutive in-window jumps is reported by [ComtStatus](ComtStatus.md)`[2]`. The search fails with [ComtStatus](ComtStatus.md) `-3` if the accumulated jumps exceed one full electrical revolution (360°, i.e. twelve 30° steps) without succeeding.
 
-On central-i v5 the minimal-jumps search uses the extended elements (see [below](#changes-between-versions)) to bound the attempt: it fails (also `-3`) when the number of jumps exceeds the **maximum attempted jumps** (`[31]`), or when the jumps still remaining can no longer reach the **minimum required successful jumps** (`[32]`); success requires the in-window jump count to reach that `[32]` minimum.
+On central-i v5 both of those "jump to zero" limits become settable, through the extended elements (see [below](#changes-between-versions)): the search fails (also `-3`) when the number of jumps exceeds the **maximum attempted jumps** (`[31]`), or when the jumps still remaining can no longer reach the **minimum required successful jumps** (`[32]`); success requires the in-window jump count to reach that `[32]` minimum rather than the fixed 3 above. The minimal-jumps search (`[1]=5`) does not read `[31]` or `[32]` — it is bounded by its own parameters at `[20]`–`[24]`.
 
 If `[6]` smoothing is enabled, the search voltage is ramped toward its final value (reaching it after the time at index `[7]`) rather than applied as a step, which prevents a gravity-loaded axis from dropping when commutation begins.
 
@@ -177,11 +177,15 @@ AComtMode[1]        ; query the configured commutation method
 ## Changes between versions
 
 On central-i v5 the array is extended to 34 elements (vs. 25 on v4/standalone).
-The additions are parameters for the minimal-jumps search — a final detent
-current, the **maximum number of attempted jumps** (`[31]`) and the **minimum
-number of required successful jumps** (`[32]`) — and the **user-defined phasing
-angle** (`[33]`) used by commutation method `7`. The core method/mode behavior
-described above is unchanged.
+The additions configure the "jump to zero" method (`[1]=0`), not the
+minimal-jumps search: the **phasing domain** (`[27]`) and the **phasing current
+peak** (`[28]`) select and size the drive each jump applies, the **phasing
+direction** (`[29]`) sets which way the jumps start, the **learn options**
+(`[30]`) select what a learn pass adjusts, and the **maximum number of attempted
+jumps** (`[31]`) and **minimum number of required successful jumps** (`[32]`)
+replace the fixed jump bounds that v4 applied. The last addition, the
+**user-defined phasing angle** (`[33]`), is used by commutation method `7`. The
+core method/mode behavior described above is unchanged.
 
 ## See also
 
