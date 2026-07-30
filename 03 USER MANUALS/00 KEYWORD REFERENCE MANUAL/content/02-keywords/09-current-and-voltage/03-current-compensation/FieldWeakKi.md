@@ -40,7 +40,9 @@ While the voltage vector is saturated the integrator accumulates, driving the d-
 
 > **Note:** the integrator needs time to reach its working point. A test or measurement that samples only a short window after enabling field weakening will catch the loop mid-transient and understate what the feature does.
 
-> **Worked example:** on a round machine with a 4 mH phase inductance, enabling field weakening with `FieldWeakKi=2.0` raised the reachable speed from 201.9 to 277.3 rad/s — a 37 % increase — by settling the d-axis current at −3 961 mA. That settling took roughly 15 000 control cycles. On a salient machine of the same mean inductance the same gain reached 315.7 rad/s (57 %) and settled at only −3 446 mA.
+> **Worked example:** `FieldWeakKi = 0` disables weakening outright, whatever [FieldWeakEn](FieldWeakEn.md) is set to: with no integral term the loop never accumulates a d-axis command, so `Id` stays at 0. Any non-zero value lets `Id` ramp negative while the voltage vector is saturated, bounded below by the limit [CurrLimRev](../../06-protections/02-current-and-voltage/CurrLimRev.md) implies and above by zero.
+>
+> The integrator takes **thousands of control cycles** to reach its operating point. A measurement that samples only a short window after enabling captures the ramp, not the settled result, and will understate what the feature does.
 
 ### Edge cases
 

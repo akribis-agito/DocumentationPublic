@@ -40,7 +40,11 @@ Each control cycle the drive adds a voltage of magnitude proportional to `DTComp
 
 > **Important:** `DTCompGain` is a **per-drive calibration**, not a universal setting. The correct value depends on the blanking time of the drive you are using, and the blanking time differs across the range — an AGD155 has four times the dead band of an AGD301. The default of 1.0 is not the optimum for either.
 
-> **Worked example:** measured on an 800 mA square-wave current injection, mean current-loop tracking error against the reference. On a 0.5 µs dead band a gain of 1.0 removes 43 % of the error and a gain of 2.0 removes 86 %. On a 2.0 µs dead band a gain of 1.0 removes only 18 %, while 5.2 removes 97 % — taking the error from 165.6 mA down to 5.2 mA. Note the optimum does not scale linearly with dead time, so it must be measured rather than calculated.
+> **Worked example:** `DTCompGain = 0` adds no voltage at all, so the drive behaves as one without the compensation. A gain of 1.0 adds the drive's nominal dead-band correction, and higher values scale it proportionally.
+>
+> The consequence worth knowing is that the error curve has a **minimum, not a plateau**: below the optimum the compensation under-corrects and some of the stolen volt-seconds remain, and above it the drive over-corrects and the error grows again symmetrically. Too high is as wrong as too low, so the value has to be found by measurement — and the optimum does **not** scale linearly with the dead band, so it cannot be calculated from one drive's value for another.
+
+> **Note:** for the measurement procedure and the values measured per drive, see the *Current-Loop Compensation* application note.
 
 ### Finding the right value
 

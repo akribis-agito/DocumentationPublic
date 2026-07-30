@@ -46,9 +46,11 @@ With `FieldWeakEn=0` the entire outer loop is skipped and the current-loop outpu
 
 > **Note:** below the base speed the feature costs nothing. The drive is not voltage limited there, so the outer loop commands zero d-axis current and behaves exactly as if disabled.
 
-> **Worked example:** commanded to a speed well above its base speed, a test machine capped at 201.9 rad/s with the feature off. With `FieldWeakEn=1` the same drive reached 277.3 rad/s — **37 % higher** — at the same voltage limit, bought with 3 961 mA of d-axis current.
+> **Worked example:** with `FieldWeakEn = 0` the outer loop is skipped entirely and `Id` is held at 0, so the current-loop output is identical to a drive built without the feature.
 >
-> How much you gain depends on the motor's magnetic geometry. That figure is for a round, surface-magnet machine. A salient interior-magnet machine (Lq/Ld ≈ 1.6) reached **315.7 rad/s, 57 % higher**, and did so on *less* d-axis current — 3 446 mA. Salient machines gain more from field weakening and risk less to get it. When estimating for a motor you have not measured, 37 % is the conservative figure.
+> Set `FieldWeakEn = 1` and nothing changes yet: below the base speed the voltage vector is not saturated, the loop stays in region 0, and it still commands `Id = 0`. Once the vector saturates, `Id` is driven negative until either the voltage error is nulled (region 1) or `Id` reaches the limit derived from [CurrLimRev](../../06-protections/02-current-and-voltage/CurrLimRev.md) — at which point `Id` is held there and the q-axis limit is tapered instead (region 2).
+
+> **Important:** how much extra speed this buys is a property of **your motor**, not of the firmware. It follows from the flux linkage, the d/q inductance ratio, and how much demagnetising current the magnet tolerates at temperature — a salient interior-magnet machine gains substantially more than a round surface-magnet one. For measured figures across machine geometries, see the *Current-Loop Compensation* application note. Do not size a machine from a number in this manual.
 
 ### Preconditions
 

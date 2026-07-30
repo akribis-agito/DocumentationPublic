@@ -44,9 +44,11 @@ The nominal value and the whole filter window are latched from `VBus` at motor-o
 
 > **Note:** the ratio is clamped to **[0.8, 1.2]**. The feature can correct a bus that has moved by up to 20 %, and no further. This bound is deliberate — it also means a fully collapsed bus cannot produce an unbounded voltage command.
 
-> **Worked example:** a point-to-point move whose peak demand was 54 W, on a supply able to deliver 41 W, dragged the bus from 48.0 V down to 34.3 V during acceleration; braking regeneration then pushed it to 51.1 V. With compensation enabled, following error through that move fell by **17 %**, both peak and rms. On a *stiff* supply the same comparison shows almost no difference, because there is nothing to compensate.
+> **Worked example:** with the nominal latched at 48.0 V at motor-on, a filtered bus of 44.0 V gives `ratio = 48.0 / 44.0 = 1.091`, and the drive scales its voltage output up by 9.1 % — exactly recovering what the sag would otherwise have cost. At a filtered 40.0 V the arithmetic gives 1.200, which is the clamp: the sag is 16.7 % and the compensation is still exact. At a filtered 30.0 V the arithmetic gives 1.600 but the ratio is **pinned at 1.200**, so only the first 20 % is recovered and the rest is not.
 >
-> The useful comparison is your move's **peak power** against what your supply can deliver, not how "weak" the supply feels. The benefit peaks when the supply is around three quarters of the peak demand: above the peak there is nothing to compensate, and far below it the sag outruns the clamp.
+> Read [VBusRatio](VBusRatio.md) to see which of those three cases an axis is actually in.
+
+> **Note:** how much a real move benefits depends on your supply and the move's peak power demand, not on this keyword. Measured figures are in the *Current-Loop Compensation* application note.
 
 ### When it helps, and when it does not
 
