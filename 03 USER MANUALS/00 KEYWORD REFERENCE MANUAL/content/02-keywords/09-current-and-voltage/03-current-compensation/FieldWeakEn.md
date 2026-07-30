@@ -46,7 +46,9 @@ With `FieldWeakEn=0` the entire outer loop is skipped and the current-loop outpu
 
 > **Note:** below the base speed the feature costs nothing. The drive is not voltage limited there, so the outer loop commands zero d-axis current and behaves exactly as if disabled.
 
-> **Worked example:** commanded to a speed well above its base speed, a test machine capped at 201.9 rad/s with the feature off. With `FieldWeakEn=1` the same drive reached 277.3 rad/s — **37 % higher** — at the same voltage limit. The extra speed was bought with 3 961 mA of d-axis current.
+> **Worked example:** commanded to a speed well above its base speed, a test machine capped at 201.9 rad/s with the feature off. With `FieldWeakEn=1` the same drive reached 277.3 rad/s — **37 % higher** — at the same voltage limit, bought with 3 961 mA of d-axis current.
+>
+> How much you gain depends on the motor's magnetic geometry. That figure is for a round, surface-magnet machine. A salient interior-magnet machine (Lq/Ld ≈ 1.6) reached **315.7 rad/s, 57 % higher**, and did so on *less* d-axis current — 3 446 mA. Salient machines gain more from field weakening and risk less to get it. When estimating for a motor you have not measured, 37 % is the conservative figure.
 
 ### Preconditions
 
