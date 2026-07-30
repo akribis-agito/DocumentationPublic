@@ -6,7 +6,7 @@ availability:
   standalone: []
   central-i:
   - v5
-can_code: 873
+can_code: 875
 attributes:
   access: rw
   scope: axis
