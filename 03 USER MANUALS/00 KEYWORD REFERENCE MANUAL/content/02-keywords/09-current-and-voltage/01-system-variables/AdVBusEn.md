@@ -44,7 +44,9 @@ The nominal value and the whole filter window are latched from `VBus` at motor-o
 
 > **Note:** the ratio is clamped to **[0.8, 1.2]**. The feature can correct a bus that has moved by up to 20 %, and no further. This bound is deliberate — it also means a fully collapsed bus cannot produce an unbounded voltage command.
 
-> **Worked example:** a point-to-point move on a supply with significant source resistance dragged the bus from 48.0 V down to 31.2 V during acceleration, then braking regeneration pushed it to 58.8 V. With compensation enabled, following error through that move fell by 21 % rms. On a *stiff* supply the same comparison shows almost no difference, because there is nothing to compensate.
+> **Worked example:** a point-to-point move whose peak demand was 54 W, on a supply able to deliver 41 W, dragged the bus from 48.0 V down to 34.3 V during acceleration; braking regeneration then pushed it to 51.1 V. With compensation enabled, following error through that move fell by **17 %**, both peak and rms. On a *stiff* supply the same comparison shows almost no difference, because there is nothing to compensate.
+>
+> The useful comparison is your move's **peak power** against what your supply can deliver, not how "weak" the supply feels. The benefit peaks when the supply is around three quarters of the peak demand: above the peak there is nothing to compensate, and far below it the sag outruns the clamp.
 
 ### When it helps, and when it does not
 
