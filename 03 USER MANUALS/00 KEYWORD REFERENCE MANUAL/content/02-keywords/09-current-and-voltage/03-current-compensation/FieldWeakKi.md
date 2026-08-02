@@ -16,7 +16,9 @@ attributes:
   ok_in_motion: false
   ok_motor_on: false
   units: none
-  range: [0, 100]
+  range:
+  - 0
+  - 100
   default: 0
   scaling: 1
   implemented: final
