@@ -28,7 +28,7 @@ overrides:
   central-i.v5:
     array_size: 4
 last_updated: '2026-07-29'
-doc_revision: '2026.06'
+doc_revision: '2026.07'
 ---
 # ComtStatus
 

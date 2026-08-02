@@ -1,6 +1,6 @@
 ---
 keyword: VBusRatio
-summary: "Read-only: the voltage-scaling ratio DC-bus feedforward is currently applying."
+summary: 'Read-only: the voltage-scaling ratio DC-bus feedforward is currently applying.'
 availability:
   standalone: []
   central-i:
@@ -16,7 +16,9 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range: [0, 10]
+  range:
+  - 0
+  - 10
   default: 1.0
   scaling: 1
   implemented: final

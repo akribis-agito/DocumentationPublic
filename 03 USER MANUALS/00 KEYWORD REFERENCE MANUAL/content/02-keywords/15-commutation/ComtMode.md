@@ -28,7 +28,7 @@ overrides:
   central-i.v5:
     array_size: 34
 last_updated: '2026-07-30'
-doc_revision: '2026.06'
+doc_revision: '2026.07'
 ---
 # ComtMode
 
