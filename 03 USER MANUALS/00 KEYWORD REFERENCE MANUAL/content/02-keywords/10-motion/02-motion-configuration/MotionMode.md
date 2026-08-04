@@ -28,7 +28,7 @@ overrides:
   central-i.v5:
     range:
     - -1
-    - 21
+    - 23
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 ---
@@ -77,11 +77,13 @@ The following table shows the types of motion described by `MotionMode`.
 
 | | v4 (standalone &amp; central-i) | v5 (central-i) |
 |---|---|---|
-| Range | −1 … 19 | −1 … **21** |
+| Range | −1 … 19 | −1 … **23** |
 | Mode 20 | not defined | **sine point-to-point profile** |
 | Mode 21 | not defined | **sine point-to-point profile (repetitive)** |
+| Mode 22 | not defined | **PVAJ** — executes a downloaded position/velocity/acceleration/jerk list on this axis ([PVAJ overview](../15-motion-mode-pvaj/00-overview.md)) |
+| Mode 23 | not defined | **MultiAxisPVAJ** — executes one such list across a group of axes as a single coordinated motion |
 
-v5 adds two sine-profile point-to-point modes. Like the other PTP-family modes, the sine modes (20/21) are gated by `Begin` on both [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md) (error 271) and [MaxAcc](../../06-protections/03-motion/general-maximum-limits/MaxAcc.md) (error 324). **v5 is central-i only.**
+v5 adds two sine-profile point-to-point modes and the two PVAJ modes (22/23), which follow a downloaded trajectory table rather than a profile the controller computes — see the [PVAJ overview](../15-motion-mode-pvaj/00-overview.md). The PVAJ modes are **AGM800 only**, and require the list to be validated and armed before `Begin`. Like the other PTP-family modes, the sine modes (20/21) are gated by `Begin` on both [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md) (error 271) and [MaxAcc](../../06-protections/03-motion/general-maximum-limits/MaxAcc.md) (error 324). **v5 is central-i only.**
 
 ## Examples
 
