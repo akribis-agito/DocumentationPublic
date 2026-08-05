@@ -56,7 +56,18 @@ On each periodic bus-voltage check the drive compares `VBus` with `MinVBus`:
 - **Motor off:** the under-voltage *status* (and the multi-level warning) still updates regardless of `MotorOn`, but the disabling trip only fires while the motor is on. When the axis is already off, an under-voltage condition does not raise a fault on its own; instead it prevents the axis from being re-enabled (the [MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) request is refused with fault 1009) until the supply recovers.
 - **Mode dependency:** the trip runs regardless of operation mode.
 - **No delay:** `MaxVBusTime` is for the over-voltage path only; under-voltage is always immediate.
-- **Range overflow:** writes outside `11000…90000` (mV) are clamped to the keyword `range`.
+- **Range overflow:** writes outside the keyword `range` are clamped to it.
+- **The range depends on the drive family.** The `range` shown above is resolved from a
+  single firmware configuration and is the AGD200 / AGD301 (48 V-class) one:
+  `11000…90000` mV. High-voltage drives use a different envelope:
+
+  | Family | `MinVBus` range (mV) | Default |
+  |---|---|---|
+  | AGD200 / AGD301, AGD101-EC (48 V class) | 11000…90000 | 11000 |
+  | AGD155 / AGA155 / AGD155-EC, AGD156-EC (high voltage) | 100000…340000 | 100000 |
+
+  Query the drive rather than assuming: it reports its own limits, and the values
+  above are the firmware's compile-time envelope for each family.
 - **Clearing the fault:** ConFlt code 1009 clears on re-enable ([MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 1, once the supply has recovered) or by writing `AConFlt=0`; the [ErrLog](../../07-status-and-faults/ErrLog.md) entry persists.
 - **HWProtectBits / ProtectMask:** the under-voltage trip is not maskable through [ProtectMask](../01-general-protection/ProtectMask.md).
 
