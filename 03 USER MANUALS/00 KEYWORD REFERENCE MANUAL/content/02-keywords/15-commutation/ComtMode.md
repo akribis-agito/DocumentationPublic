@@ -53,15 +53,15 @@ The resulting electrical angle is reported by [ComtAng](ComtAng.md), and progres
 | `[3]` | Number of steps (search methods) | Step count over which the search voltage is ramped/applied |
 | `[4]` | Absolute-encoder zero reference | Stored encoder position of electrical-angle zero (written by the controller when method `2` finishes; saved to flash) |
 | `[5]` | **Repeat-commutation request** | Write `1282` to re-run commutation now; write `202` to re-run with a learn pass. The controller clears the request back to `0` after acting (only acts when the motor is off and the axis is in normal operation) |
-| `[6]` | Smooth voltage rise | `0` off, `1` on — ramps the applied search voltage instead of stepping it (useful on vertical/gravity-loaded axes) |
+| `[6]` | Smooth voltage rise | `0` off, `1` on — ramps the applied search drive instead of stepping it (useful on vertical/gravity-loaded axes). For method `5` it also advances the flux angle continuously across each jump instead of stepping the angle between jumps |
 | `[7]` | Initial voltage rise time | Time (ms) over which the initial search voltage is reached. Default `5` |
 | `[8]`–`[17]` | Reserved | Not used (formerly an obsolete search method) |
 | `[18]` | Commutation accuracy | Required accuracy, in percent. Default `10` |
 | `[19]` | Commutation **mode** | `0` run after power-on (default); `1` manual only (never automatic — trigger via index `[5]`); `2` run when the motor is turned on; `3` run after power-on and on motor-on |
 | `[20]`–`[24]` | Minimal-jumps search parameters | Voltage increment, step count, delta-position threshold, stop-time, and minimal range used by method `5` |
 | `[25]`–`[26]` | Reserved | Not used — no firmware reads these elements |
-| `[27]` | Phasing **domain** | `0` voltage domain (default) — the phasing drive is applied as phase voltages `Va`/`Vb`/`Vc`; `1` current domain — the phasing drive is applied as a current reference and the current loop drives the phases. Read by method `0` only. A value that is neither `0` nor `1` is coerced to `0` on write and on parameter restore. On an axis configured for an external amplifier, the voltage domain is refused ([ComtStatus](ComtStatus.md) `-17`). Central-i v5 only |
-| `[28]` | Phasing current peak | Peak of the current command that each jump of method `0` ramps up to, in mA, when `[27]=1`. Not read in the voltage domain, where the peak is `[2] × [3]` instead. Not clamped, and has no non-zero default — left at `0` in the current domain, no phasing drive is produced. Central-i v5 only |
+| `[27]` | Phasing **domain** | `0` voltage domain (default) — the phasing drive is applied as phase voltages `Va`/`Vb`/`Vc`; `1` current domain — the phasing drive is applied as a current reference and the current loop drives the phases. Read by methods `0` and `5`. A value that is neither `0` nor `1` is coerced to `0` on write and on parameter restore. On an axis configured for an external amplifier, the voltage domain is refused ([ComtStatus](ComtStatus.md) `-17`). Central-i v5 only |
+| `[28]` | Phasing current peak | Peak of the current command that each jump of method `0` or `5` ramps up to, in mA, when `[27]=1`. Not read in the voltage domain, where the peak is `[2] × [3]` for method `0` and `[20] × [21]` for method `5` instead. Not clamped, and has no non-zero default — left at `0` in the current domain, no phasing drive is produced. Central-i v5 only |
 | `[29]` | Phasing **direction** | Initial direction of the commutation jumps of method `0`: `-1` or `+1`. Any negative value is normalized to `-1` and any other value to `+1`, on write and on parameter restore. Hard-stop learning and bidirectional phasing may reverse it during the process. Central-i v5 only |
 | `[30]` | **Learn** options | Bit field selecting what a learn pass (`[5]=202`) learns, for method `0` — see [Learn options](#learn-options-30). `0` learns everything. Central-i v5 only |
 | `[31]` | Maximum attempted jumps | Number of jumps method `0` may attempt before failing with [ComtStatus](ComtStatus.md) `-3`. Clamped to `3`–`144` on write and on parameter restore; note that a value below `3` is reset to `12` — one full electrical revolution of 30° steps — not to `3`. Central-i v5 only |
@@ -73,7 +73,7 @@ The resulting electrical angle is reported by [ComtAng](ComtAng.md), and progres
 
 Most elements are read by one method only. The map below shows which:
 
-![Which ComtMode elements each commutation method reads: [1], [5] and [19] apply to every method, while the search-drive elements and the v5 elements [27]–[32] are read only by method 0, [4] only by method 2, [20]–[24] only by method 5, [33] only by method 7, and methods 3, 4 and 6 read no tuning elements at all](comtmode-element-map.svg)
+![Which ComtMode elements each commutation method reads: [1], [5] and [19] apply to every method, while the search-drive elements and the v5 elements [29]–[32] are read only by method 0, [27] and [28] by methods 0 and 5, [4] only by method 2, [20]–[24] only by method 5, [33] only by method 7, and methods 3, 4 and 6 read no tuning elements at all](comtmode-element-map.svg)
 
 ### Search-based methods
 
@@ -87,7 +87,7 @@ The search voltage and step count are configured by `[2]` (voltage increment per
 
 On central-i v5 both of those "jump to zero" limits become settable, through the extended elements (see [below](#changes-between-versions)): the search fails (also `-3`) when the number of jumps exceeds the **maximum attempted jumps** (`[31]`), or when the jumps still remaining can no longer reach the **minimum required successful jumps** (`[32]`); success requires the in-window jump count to reach that `[32]` minimum rather than the fixed 3 above. The minimal-jumps search (`[1]=5`) does not read `[31]` or `[32]` — it is bounded by its own parameters at `[20]`–`[24]`.
 
-If `[6]` smoothing is enabled, the search voltage is ramped toward its final value (reaching it after the time at index `[7]`) rather than applied as a step, which prevents a gravity-loaded axis from dropping when commutation begins.
+If `[6]` smoothing is enabled, the search drive is ramped toward its final value rather than applied as a step, which prevents a gravity-loaded axis from dropping when commutation begins. For method `0` it reaches that value after the time at index `[7]`; for method `5` it ramps over the jump itself, and the flux angle is advanced continuously across the jump rather than stepped between jumps.
 
 ### Hall- and encoder-based methods
 
