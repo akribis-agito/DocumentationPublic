@@ -50,7 +50,7 @@ With the 5 ms default, an event reaches the host about as quickly as a host poll
 
 The period is counted by the controller's millisecond tick, which runs at 1024 Hz (every 16 control cycles), so one unit is about 0.98 ms.
 
-> **`PushEvFlushMs` does not limit retries.** If a send fails, the timer is not restarted, so the controller tries again on every background pass until a send succeeds, whatever the setting. If a host is connected but not reading, each of those attempts can hold the background loop for about 5 to 6 seconds. See the [overview](00-overview.md#how-it-works).
+> **`PushEvFlushMs` does not limit retries.** If a send is refused, the timer is not restarted, so the controller tries again on every background pass until a send succeeds, whatever the setting. If a host is connected but not reading, each of those attempts can hold the background loop for up to about 6 seconds. See the [overview](00-overview.md#how-it-works).
 
 ## Examples
 

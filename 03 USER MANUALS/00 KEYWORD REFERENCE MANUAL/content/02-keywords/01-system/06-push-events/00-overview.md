@@ -45,13 +45,13 @@ Connect the host to port 50010 before or after enabling. `PushEvSelect`, `PushEv
 
 1. **Detection.** Every control cycle, for each axis, the controller checks the selected event types. A detected event is written as one fixed-size record into an event queue of **64 rows**, with a timestamp. Nothing is formatted or sent at this point.
 2. **Sending.** The controller's background loop sends the queue when either trigger fires: more than [PushEvFlushMs](PushEvFlushMs.md) has passed since the last successful send, or the queue is at least [PushEvFillPct](PushEvFillPct.md) percent full. It sends at most one packet per background pass, of up to 28 events, oldest first.
-3. **Removal.** Events are removed from the queue only after the packet has been sent successfully. If a send fails, for example because no host is connected, the events stay queued and the controller tries again on the next pass.
+3. **Removal.** Events are removed from the queue only once the whole packet has been handed to the controller's TCP stack for sending. If a send is refused, for example because no host is connected, the events stay queued and the controller tries again on a later pass.
 
 Detection does not depend on the connection. With no host connected, events keep being queued. When the queue is full, each **new** event is dropped and counted in [PushEvLost](PushEvLost.md) and [PushEvTotLost](PushEvTotLost.md), so a queue that filled while nobody was reading holds the **first** 64 events, not the last. To start a session with an empty queue, write `PushEvEnable=0` and then `PushEvEnable=1`.
 
-When a push-event packet and a `printf` packet are both ready, the event packet is sent first and `printf` waits for a later pass. `PushEvFlushMs` and `PushEvFillPct` apply to events only; `printf` output keeps its own fixed timing.
+When a push-event packet and a `printf` packet are both ready, the event packet is sent first and `printf` waits for a later pass. In any pass where the controller attempts a push-event send, successful or not, `printf` does not send, so a pass never makes more than one send on the push socket. `PushEvFlushMs` and `PushEvFillPct` apply to events only; `printf` output keeps its own fixed timing.
 
-> **A host that connects to the push port must keep reading it.** Push events use the same blocking send as `printf`. If a host is connected to port 50010 but stops reading, each send attempt can hold the controller's background loop for about 5 to 6 seconds, and the controller does not execute keyword commands from the host during that time, including a command to turn push events off. A failed send is retried on the next pass, and a pass in which `printf` output is also waiting can make a second attempt, so one pass can be held for up to about 12 seconds. If a pass is held for more than 10 seconds, the background watchdog switches off all motors with a CPU background-watchdog controller fault. These times come from the firmware design and have not been measured on hardware. Do not leave a client connected to port 50010 without reading it.
+> **A host that connects to the push port must keep reading it.** Push events use the same blocking send as `printf`. If a host is connected to port 50010 but stops reading, each send attempt can hold the controller's background loop for up to about 6 seconds. The controller makes at most one such attempt per background pass, and retries on later passes until the host reads again or disconnects. While the loop is held, commands from the Ethernet command port and the serial ports wait, including a command to turn push events off; Modbus TCP requests are still serviced. The background watchdog, which fires after 10 seconds without a completed pass, is not expected to trip, but this bound comes from the firmware design and has not been measured on hardware. Do not leave a client connected to port 50010 without reading it.
 
 ## Packet format
 
@@ -89,7 +89,7 @@ Record:
 
 The DATA length is always `7 + 50 × n` bytes, so a client can check a packet by arithmetic. The event time is `timeSec + timeTick / 16384` seconds. Data fields a type does not use are sent as `0.0`.
 
-After a send that timed out because the host stopped reading, the controller retries the same events, but some or all of the earlier attempt may still reach the host once it reads again. A client should therefore expect a packet to arrive more than once, or a stretch of the stream that is not a complete packet, after such a stall. Discard repeated records (the same type, axis, `timeSec` and `timeTick`) To resynchronise, scan for the next envelope (`1.<SOURCE>,<version>.`; `printf` packets with `SOURCE = 1` share the stream) and confirm it with `n` and the `7 + 50 × n` length.
+A packet can be cut short if a send is interrupted part-way, for example when the connection breaks. A client that finds a stretch of the stream that is not a complete packet should resynchronise: scan for the next envelope (`1.<SOURCE>,<version>.`; `printf` packets with `SOURCE = 1` share the stream) and confirm it with `n` and the `7 + 50 × n` length.
 
 ## Product availability
 
