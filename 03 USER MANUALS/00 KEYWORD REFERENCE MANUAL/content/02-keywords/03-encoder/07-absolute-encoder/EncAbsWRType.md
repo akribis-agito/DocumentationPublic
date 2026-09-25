@@ -6,6 +6,7 @@ availability:
   - v4
   central-i:
   - v4
+  - v5
 can_code: 715
 attributes:
   access: rw
@@ -23,7 +24,9 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  central-i.v5:
+    can_code: 898
 last_updated: '2026-05-28'
 doc_revision: '2026.06'
 ---
@@ -33,7 +36,7 @@ Selects read or write access for the next absolute encoder register transaction.
 
 ## Overview
 
-`EncAbsWRType` selects the direction of the next absolute-encoder register transaction (read or write) performed by [EncAbsSendCmd](EncAbsSendCmd.md). Set it before issuing `EncAbsSendCmd` to define whether the transaction reads from or writes to the encoder memory at [EncAbsAddr](EncAbsAddr.md). It is an axis-scope parameter, not saved to flash, and cannot be changed while the motor is on or in motion. Available on v4 firmware only.
+`EncAbsWRType` selects the direction of the next absolute-encoder register transaction (read or write) performed by [EncAbsSendCmd](EncAbsSendCmd.md). Set it before issuing `EncAbsSendCmd` to define whether the transaction reads from or writes to the encoder memory at [EncAbsAddr](EncAbsAddr.md). It is an axis-scope parameter, not saved to flash, and cannot be changed while the motor is on or in motion. Available on v4 (standalone and central-i) and v5 (central-i); the CAN code differs between the two (see [Changes between versions](#changes-between-versions)).
 
 ## How it works
 
@@ -45,6 +48,14 @@ Selects read or write access for the next absolute encoder register transaction.
 | 1 | Write | Sends the encoder "write to memory" command, writing [EncAbsWData](EncAbsWData.md) to the addressed register. |
 
 The value is a direction selector only; it does not itself trigger the transaction. See [EncAbsSendCmd](EncAbsSendCmd.md) for the full sequence.
+
+## Changes between versions
+
+| | v4 (standalone & central-i) | v5 (central-i) |
+|---|---|---|
+| CAN code | 715 | 898 |
+
+The value range, default and motor-on / in-motion restrictions are the same in both versions. **v5 is central-i only.** The transaction that uses this value runs only on a standalone controller: on a central-i master, v5 refuses [EncAbsSendCmd](EncAbsSendCmd.md) and on v4 the transaction does not reach the encoder.
 
 ## Examples
 

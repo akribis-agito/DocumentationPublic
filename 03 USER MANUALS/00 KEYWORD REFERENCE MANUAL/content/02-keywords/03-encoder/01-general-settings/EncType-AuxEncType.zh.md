@@ -32,15 +32,25 @@ language: zh-CN
 
 对于绝对式编码器，另请参阅 [EncAbsBits](EncAbsBits-AuxEncAbsBits.md)、[EncAbsMB](EncAbsMB-AuxEncAbsMB.md)、[EncAbsOff](EncAbsOff-AuxEncAbsOff.md) 和 [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)。使用绝对式编码器时，反馈 [Pos](../../10-motion/01-kinematics-status/Pos.md) 在上电时由绝对读数初始化，而非从零开始。
 
+### Tamagawa（值 8）
+
+Tamagawa 编码器是一种单圈串行绝对式编码器，可用作主编码器（`EncType=8`），在硬件支持的产品上也可用作辅助编码器（`AuxEncType=8`）。它在一个识别字节（ENID）中报告自身的分辨率，[EncAbsBits](EncAbsBits-AuxEncAbsBits.md) / `AuxEncAbsBits` 的设置方式取决于产品：
+
+- **独立式控制器（v4）：** 控制器从编码器读取分辨率，并将其存入 `EncAbsBits`（主编码器）或 `AuxEncAbsBits`（辅助编码器）。当 `EncType` 或 `AuxEncType` 为 8 时，写入这两个关键字中的任何一个都会被拒绝，并返回错误 331（“Tamagawa encoder resolution cannot be changed, it is learned”）。
+- **Central-i：** 分辨率**不会**从编码器读取。请手动将 `EncAbsBits`（对于辅助 Tamagawa 编码器还需设置 `AuxEncAbsBits`）设置为编码器的单圈分辨率。错误的值不会被检测出来：回绕模数由它计算得出（参见 [EncAbsBits](EncAbsBits-AuxEncAbsBits.md)），因此位置会累积错误。在 **v4** 上，一旦任一类型为 8，位数写入即被拒绝，因此请在选择类型 8 之前写入 `EncAbsBits` / `AuxEncAbsBits`。在 **v5** 上，可以随时写入。
+
+在独立式控制器上，可以使用 [EncAbsSendCmd](../07-absolute-encoder/EncAbsSendCmd.md) 读写编码器的板载存储器；该功能在 central-i 主控上不可用。
+
 对于模拟 SIN/COS 编码器，另请参阅 [SinCosSetup](SinCosSetup-AuxSinCosSet.md) 和 [SinCosSignals](SinCosSignals-AuxSinCosSig.md)。对于 `EncType=4`，方向通过 `SinCosSetup` 设置，而非 [EncDir](EncDir-AuxEncDir.md)。
 
 ## 版本间的变化
 
 | | v4（独立式与 central-i） | v5（central-i） |
 |---|---|---|
-| Tamagawa（值 8） | 已定义（类型枚举至值 8） | Tamagawa 不在核心类型列表中（类型枚举至值 7） |
+| Tamagawa（值 8） | 支持 | 支持（central-i） |
+| central-i 上使用 Tamagawa 编码器时的 `EncAbsBits` / `AuxEncAbsBits` | 必须手动设置，且须在选择类型 8 之前设置（之后写入会被拒绝） | 必须手动设置；可随时写入 |
 
-在 **v5** 中，核心固件将编码器类型枚举至值 7（模拟量位置反馈）；值 8（Tamagawa）存在于 v4 列表中。与往常一样，受支持的类型最终由产品硬件决定。**v5 仅适用于 central-i。**
+两个版本都将编码器类型枚举至值 8（Tamagawa）。与往常一样，受支持的类型最终由产品硬件决定。**v5 仅适用于 central-i。**
 
 ## 示例
 
@@ -56,7 +66,7 @@ AEncType=6           ; BiSS-C absolute encoder
 
 ```text
 AMotorOn=0                ; motor off — these keywords change the feedback pipeline
-AEncType=6                ; absolute, BiSS-C (use 3 for EnDat 2.2; 8 for Tamagawa on v4 only)
+AEncType=6                ; absolute, BiSS-C (use 3 for EnDat 2.2; 8 for Tamagawa)
 AEncAbsBits=26            ; total bit count of the absolute word
 AEncAbsMB=4               ; discard the 4 least-significant (unused/fine) bits
 AEncAbsOff=0              ; offset added to the masked reading at power-up
