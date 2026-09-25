@@ -23,8 +23,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-08-16'
-doc_revision: '2026.08'
+last_updated: '2026-09-25'
+doc_revision: '2026.09'
 ---
 # ECATDrvReset
 

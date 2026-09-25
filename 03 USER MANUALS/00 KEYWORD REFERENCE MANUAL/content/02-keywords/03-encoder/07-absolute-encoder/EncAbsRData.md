@@ -27,8 +27,8 @@ attributes:
 overrides:
   central-i.v5:
     can_code: 901
-last_updated: '2026-05-28'
-doc_revision: '2026.06'
+last_updated: '2026-09-25'
+doc_revision: '2026.09'
 ---
 # EncAbsRData
 

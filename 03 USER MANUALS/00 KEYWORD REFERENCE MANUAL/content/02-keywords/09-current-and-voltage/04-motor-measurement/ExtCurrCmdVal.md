@@ -24,7 +24,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-07-30'
-doc_revision: '2026.07'
+doc_revision: '2026.09'
 ---
 # ExtCurrCmdVal
 

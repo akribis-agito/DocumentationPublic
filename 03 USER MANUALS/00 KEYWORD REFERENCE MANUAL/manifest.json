@@ -1,8 +1,8 @@
 {
   "manual": "Keyword Reference Manual",
-  "version": "2026.07",
-  "generated": "2026-07-27",
-  "document_count": 929,
+  "version": "2026.09",
+  "generated": "2026-09-25",
+  "document_count": 952,
   "documents": [
     {
       "path": "01-keyword-usage-and-syntax/complex-can-code.md",
@@ -248,6 +248,19 @@
         "zh-CN": {
           "path": "02-keywords/01-system/02-operation/DownloadFW.zh.md",
           "sha256": "6f6b798f13dda1ca6faf8fa9abb5de81f9716466ad27189fefb31b9c4c3a18b4"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/01-system/02-operation/ECATDrvReset.md",
+      "keyword": "ECATDrvReset",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.09",
+      "sha256": "4b8b9ef71087418c3277239e56e1379ab1bce88cbb4033560c237c4fd9baf432",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/01-system/02-operation/ECATDrvReset.zh.md",
+          "sha256": "671b646dfdb347d4f501d4c412b82e7f726753801ef86fa317ab1ae6d5182388"
         }
       }
     },
@@ -826,26 +839,26 @@
     {
       "path": "02-keywords/02-motor-and-amplifier/AAmpFullScale.md",
       "keyword": "AAmpFullScale",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "fe3d0659e9327655682def38c6a7806c02e9fa387790b20d65332e1e13b26a33",
+      "last_updated": "2026-07-30",
+      "doc_revision": "2026.09",
+      "sha256": "5a0d3a81eb5fc56fe95f803d7b842046f9c6e95634038283cbebb82e11e6bb8b",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/02-motor-and-amplifier/AAmpFullScale.zh.md",
-          "sha256": "fd7349c820bef27423e4ca4e85469d274df29ccae33b92475fd1161ce0699719"
+          "sha256": "7f8ef71458040b84909da56635e2dbb2d5e0272d46034a2feda11fac2932401d"
         }
       }
     },
     {
       "path": "02-keywords/02-motor-and-amplifier/AmpType.md",
       "keyword": "AmpType",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "0c4d4972af964ce889e19083a499b8b58df88302113280c6a32157d711ea2db2",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.09",
+      "sha256": "1aa038633fd468f6bfc1f247639ea1c3a835d36d0b35122e0191f8a03be3dbc1",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/02-motor-and-amplifier/AmpType.zh.md",
-          "sha256": "741e86a3583acd03223eebaa7a1eeb1fb640fcc2452b1464038212a4b60a38e3"
+          "sha256": "6d692e5e25968710b9f0f6b8758ffc7d24b2bf332479f8b2a8c9df361c801422"
         }
       }
     },
@@ -872,6 +885,32 @@
         "zh-CN": {
           "path": "02-keywords/02-motor-and-amplifier/MagneticPitch.zh.md",
           "sha256": "d594caa477d4b86b94741d67c7b5cbb1cc26c7652d1f4cb4e0f6fcb9b8c34dd1"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/02-motor-and-amplifier/MotForceConst.md",
+      "keyword": "MotForceConst",
+      "last_updated": "2026-07-30",
+      "doc_revision": "2026.09",
+      "sha256": "cff4a46b5964c5d765d2c3ee52ac7083f3efa6487eccb01aa41e3dff14ecd21b",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/02-motor-and-amplifier/MotForceConst.zh.md",
+          "sha256": "36b75c954788f655b54e8aa6d15681fc6bfc19a42460aeb01aec0371684b71df"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/02-motor-and-amplifier/MotTorqConst.md",
+      "keyword": "MotTorqConst",
+      "last_updated": "2026-07-30",
+      "doc_revision": "2026.09",
+      "sha256": "67a8f51b436d615787b779d727c2c605c0a728269407f1e2c8b0998243f56ccb",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/02-motor-and-amplifier/MotTorqConst.zh.md",
+          "sha256": "e919aca85e52412d1e1b3bfdeaf525f409ae870975b3ed7385866a7aab0eaaef"
         }
       }
     },
@@ -1112,13 +1151,13 @@
     {
       "path": "02-keywords/03-encoder/01-general-settings/EncType-AuxEncType.md",
       "keyword": "EncType-AuxEncType",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "3487e1c094687795384ebad9f740e474d389b371aae2031b556760c9fb4841c6",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.09",
+      "sha256": "7ff1474494789dffe74bf14b0e0e8747506b7b3235a7d42adcf7e0483b664503",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/01-general-settings/EncType-AuxEncType.zh.md",
-          "sha256": "aec032b45a3bf2c5db4689a684cb593bb77a62e729d058d58c65fa5606610676"
+          "sha256": "60603c63ceef09e38428cfd7c1be0cbf5eab225dd247fa0aae99e2db7e778009"
         }
       }
     },
@@ -1541,13 +1580,13 @@
     {
       "path": "02-keywords/03-encoder/07-absolute-encoder/EncAbsAddr.md",
       "keyword": "EncAbsAddr",
-      "last_updated": "2026-05-28",
-      "doc_revision": "2026.06",
-      "sha256": "2bfc3e0e824580251f03af996e88eb30946c848a3e3ee9647cbb743d0c2edf93",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.09",
+      "sha256": "b861c6e39b84b04e4a3e1a890d09cbedb83d9b28b1c992b325b87fb68ce7db6f",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/07-absolute-encoder/EncAbsAddr.zh.md",
-          "sha256": "a2db809b811504fefc29cb79fc9d97f9f2ac3d30a83bcd4a4174f370643baa6c"
+          "sha256": "831a9bc93a63dbe06b4d68078e6f3b65c476baa631a932a9ef278de698714daf"
         }
       }
     },
@@ -1567,52 +1606,52 @@
     {
       "path": "02-keywords/03-encoder/07-absolute-encoder/EncAbsRData.md",
       "keyword": "EncAbsRData",
-      "last_updated": "2026-05-28",
-      "doc_revision": "2026.06",
-      "sha256": "0f03bacb3056588243ecf544b3e5910b8b63350e24b8a5bdf8aac589d867a0f8",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.09",
+      "sha256": "c4b9689aaeb21b70e9a0983c237960048977ce28fe259233985a093abdacef95",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/07-absolute-encoder/EncAbsRData.zh.md",
-          "sha256": "ea894a8682df36b01139a20f92041ac4bedec1a1df560d4c94b0f017656ba61c"
+          "sha256": "0f23912323ec780132accdf1c1cc8a28bc76e9f21e4531f8757ece35f7998890"
         }
       }
     },
     {
       "path": "02-keywords/03-encoder/07-absolute-encoder/EncAbsSendCmd.md",
       "keyword": "EncAbsSendCmd",
-      "last_updated": "2026-05-28",
-      "doc_revision": "2026.06",
-      "sha256": "82662009b15de109d9031425a4e21a5e843101c5a82146daa992ede74cae9e53",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.09",
+      "sha256": "dde39fccc0c46fb124f3bdc0876259681fd30631866e6ec8ba72974d22e5be0c",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/07-absolute-encoder/EncAbsSendCmd.zh.md",
-          "sha256": "33cd40385556f8a4b60eb9c8a2f2e42e946d3cc57e0a526a6a6e4d04db968b30"
+          "sha256": "284a33133cf04fad176932e41a5aa4c40b23cb4b43f3858c486fc6951152acbc"
         }
       }
     },
     {
       "path": "02-keywords/03-encoder/07-absolute-encoder/EncAbsWData.md",
       "keyword": "EncAbsWData",
-      "last_updated": "2026-05-28",
-      "doc_revision": "2026.06",
-      "sha256": "7ffcba472a0643601925f0e7b92dfb18c32e4a9b281eee498181d4800ff3d847",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.09",
+      "sha256": "67d1129ced199d1abb1c88db336f7ffbc3bb77f1cf7d15fc3098b5ec7a945924",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/07-absolute-encoder/EncAbsWData.zh.md",
-          "sha256": "e8e19cb00d16cf78c7eaec1a54723ac92979cb096b46f8e4a79f127809fea6de"
+          "sha256": "d4b5224d21bd3110f8a0e52788c443ada5a1a6737a0e52de5be57d5101795592"
         }
       }
     },
     {
       "path": "02-keywords/03-encoder/07-absolute-encoder/EncAbsWRType.md",
       "keyword": "EncAbsWRType",
-      "last_updated": "2026-05-28",
-      "doc_revision": "2026.06",
-      "sha256": "f3a1015acfa3f25644c585b11f4fc72dd0599da615c8e7550ca615b5f18ce292",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.09",
+      "sha256": "4590f165f6cc03602bfc0c3ec9288d0c4cb5793bfdb5a47dfaba745b13da8ca6",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/07-absolute-encoder/EncAbsWRType.zh.md",
-          "sha256": "60e643c61e0ceae2595cda446beffd4c42ec3129de82d7751dc49c12b3405415"
+          "sha256": "5032ae5f2447c60ff104e1d0228b18b62e7b40afbfd8c5e82b80a77c474c29f2"
         }
       }
     },
@@ -2347,13 +2386,13 @@
     {
       "path": "02-keywords/06-protections/02-current-and-voltage/MaxVBus.md",
       "keyword": "MaxVBus",
-      "last_updated": "2026-05-30",
-      "doc_revision": "2026.06",
-      "sha256": "a0c4c8db49bc2ffdcc3a2d4350d93c90ad8114593732fa4f9bf9606170412dc6",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.09",
+      "sha256": "9ad774cf18d600b53febf0ef87af08b2a33761d9c91c6cad769e47beae35678c",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/02-current-and-voltage/MaxVBus.zh.md",
-          "sha256": "7059ee9591de7312a41211c83cb1823587931480146e5983e0640af3cd2e7318"
+          "sha256": "f3f4a723c6c61d4c75408543224367e198ac3a0240581d6c3c43153221839628"
         }
       }
     },
@@ -2386,13 +2425,13 @@
     {
       "path": "02-keywords/06-protections/02-current-and-voltage/MinVBus.md",
       "keyword": "MinVBus",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "bb119443c25a5f4a5bdce88847f7b4d13d3796ab1821963fd04cb178e90e7a71",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.09",
+      "sha256": "c2e059ed33536a6787cc3733e0e4967f93e2518df15cadcfbf3b2dc6073a0518",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/02-current-and-voltage/MinVBus.zh.md",
-          "sha256": "b776234ebb4aeee9ef0bb7d22a7595a41eac9856efcef6178054f9d78a8fa36f"
+          "sha256": "a9d3ee7b61808ae7c5850cceb43587fc4a2f55dd9b96ea4721367eb4ac372baf"
         }
       }
     },
@@ -3905,6 +3944,19 @@
       }
     },
     {
+      "path": "02-keywords/09-current-and-voltage/01-system-variables/AdVBusEn.md",
+      "keyword": "AdVBusEn",
+      "last_updated": "2026-07-30",
+      "doc_revision": "2026.09",
+      "sha256": "3e88ca2ba25fe33f14507f447568f54cce6a7d94089c77563cd4d544c194a48f",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/09-current-and-voltage/01-system-variables/AdVBusEn.zh.md",
+          "sha256": "24a03ac5d60677a11ff6fe7bc1f6418b50dcf7fd8c991d0d53820cdfb97bfe2f"
+        }
+      }
+    },
+    {
       "path": "02-keywords/09-current-and-voltage/01-system-variables/DCDC.md",
       "keyword": "DCDC",
       "last_updated": "2026-05-29",
@@ -3940,6 +3992,19 @@
         "zh-CN": {
           "path": "02-keywords/09-current-and-voltage/01-system-variables/VBus.zh.md",
           "sha256": "293fa473da23992fa5c5b887a30ed6b0aa169cd20ddc529bb833813917b18ec0"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/09-current-and-voltage/01-system-variables/VBusRatio.md",
+      "keyword": "VBusRatio",
+      "last_updated": "2026-07-30",
+      "doc_revision": "2026.09",
+      "sha256": "27b6f916e8cb1f48cadef527ad1ea5a15af1f3380f96f4dde178a562daa3bbbe",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/09-current-and-voltage/01-system-variables/VBusRatio.zh.md",
+          "sha256": "1534be4b455dc4badc144d52f9c77a2dd8ec46671c2da8f38cc06ebd6c5f793e"
         }
       }
     },
@@ -4269,6 +4334,19 @@
       }
     },
     {
+      "path": "02-keywords/09-current-and-voltage/03-current-compensation/CurrBw.md",
+      "keyword": "CurrBw",
+      "last_updated": "2026-07-30",
+      "doc_revision": "2026.09",
+      "sha256": "9e5b73cd05fc11a4cf97c2948d9c1c5605160b613492b80e4f28beaa58c481ad",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/09-current-and-voltage/03-current-compensation/CurrBw.zh.md",
+          "sha256": "6f92d118183c83c05ab1f681a295f482de6626032bce3c2b4450027a3f1a4a69"
+        }
+      }
+    },
+    {
       "path": "02-keywords/09-current-and-voltage/03-current-compensation/CurrRefOffset.md",
       "keyword": "CurrRefOffset",
       "last_updated": "2026-05-29",
@@ -4278,6 +4356,84 @@
         "zh-CN": {
           "path": "02-keywords/09-current-and-voltage/03-current-compensation/CurrRefOffset.zh.md",
           "sha256": "740a3eac6d2fed98496ebf6854d3a6c4e97b9b66bf32f7f1abff5016dfdeb4b1"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/09-current-and-voltage/03-current-compensation/DTCompGain.md",
+      "keyword": "DTCompGain",
+      "last_updated": "2026-07-30",
+      "doc_revision": "2026.09",
+      "sha256": "20a75960e7ee8ce2185b1e434394cc5361f008f06e2e5ca2ab7bdd399e21df7d",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/09-current-and-voltage/03-current-compensation/DTCompGain.zh.md",
+          "sha256": "2356785385a377bdc7878a2f3cc9b6205853771b355ebdb9281d3ec44e1dba0b"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/09-current-and-voltage/03-current-compensation/DTCompLvl.md",
+      "keyword": "DTCompLvl",
+      "last_updated": "2026-07-30",
+      "doc_revision": "2026.09",
+      "sha256": "58eac032975445561568f3faf97ff4d1d109109c851c5f6bb2217c3d116058e1",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/09-current-and-voltage/03-current-compensation/DTCompLvl.zh.md",
+          "sha256": "8c1647ebbdfc5660342fe1fbb752e48b663172dd45e2d02f107cc32474590e27"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/09-current-and-voltage/03-current-compensation/FieldWeakEn.md",
+      "keyword": "FieldWeakEn",
+      "last_updated": "2026-07-30",
+      "doc_revision": "2026.09",
+      "sha256": "d66acda1891c76b6fc18acfd6696eb60339d4323b0266182d5bbc8ad44dc5702",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/09-current-and-voltage/03-current-compensation/FieldWeakEn.zh.md",
+          "sha256": "7c0e3f902caf4af2075b530174183978c214b75ed06d59647f84d13a040a0c0c"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/09-current-and-voltage/03-current-compensation/FieldWeakKi.md",
+      "keyword": "FieldWeakKi",
+      "last_updated": "2026-07-30",
+      "doc_revision": "2026.09",
+      "sha256": "b499f1f022a7274762b9ba44276136d66f8c8b8c5aeb06c99181ebcca3acbb34",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/09-current-and-voltage/03-current-compensation/FieldWeakKi.zh.md",
+          "sha256": "320da8785197aea79a825b189644fabb57725d25fb74fb18fa37fdaecaf7d21b"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/09-current-and-voltage/03-current-compensation/FieldWeakKp.md",
+      "keyword": "FieldWeakKp",
+      "last_updated": "2026-07-30",
+      "doc_revision": "2026.09",
+      "sha256": "4601a2db10040381bcd25815c298358c10630e9499b91d3e1f3d22f08e08eb7c",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/09-current-and-voltage/03-current-compensation/FieldWeakKp.zh.md",
+          "sha256": "605c90d260cd266cc1e83d6d4312a04640ae285257c0395681d667f505c67e10"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/09-current-and-voltage/03-current-compensation/FieldWkAdapEn.md",
+      "keyword": "FieldWkAdapEn",
+      "last_updated": "2026-07-30",
+      "doc_revision": "2026.09",
+      "sha256": "7923b003e2f9d77ffa1b0038d8eefda30f0981d02634cc183f26d4f04b2f1d83",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/09-current-and-voltage/03-current-compensation/FieldWkAdapEn.zh.md",
+          "sha256": "8a9245101e76b0cbdcce0f3ef4269022d3b732782072ecce6d2351d887e6b0d7"
         }
       }
     },
@@ -4347,15 +4503,41 @@
       }
     },
     {
+      "path": "02-keywords/09-current-and-voltage/04-motor-measurement/ExtCurrCmdOfs.md",
+      "keyword": "ExtCurrCmdOfs",
+      "last_updated": "2026-07-30",
+      "doc_revision": "2026.09",
+      "sha256": "1dd1922a3d1b9034b53cc46d9287fa6cd7ef13f6d27540e79faa3f241037a3e0",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/09-current-and-voltage/04-motor-measurement/ExtCurrCmdOfs.zh.md",
+          "sha256": "91e0667648e1039408f53d6c227538afb3bd4e7d4ed9824356aa76fe9bdfef28"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/09-current-and-voltage/04-motor-measurement/ExtCurrCmdVal.md",
+      "keyword": "ExtCurrCmdVal",
+      "last_updated": "2026-07-30",
+      "doc_revision": "2026.09",
+      "sha256": "b48aaf1f7a30a1f65d25495423650bb5606b1d98e4a6cb386c266f4ceae90901",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/09-current-and-voltage/04-motor-measurement/ExtCurrCmdVal.zh.md",
+          "sha256": "a33f9173d6baac195039267c91dbd9081e0ab24e48e1444edc3616fc587c0a3f"
+        }
+      }
+    },
+    {
       "path": "02-keywords/09-current-and-voltage/04-motor-measurement/ExtCurrFBSca.md",
       "keyword": "ExtCurrFBSca",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "df37a2b00a5397a58432a2e983fb3a1d2aa7b85c9e054e64856f8fa4d90c676b",
+      "last_updated": "2026-07-30",
+      "doc_revision": "2026.09",
+      "sha256": "3f60e9f0eabd7b71631547d31d7ad5e2e9bcccbea2df9a3a93611b8f9f454779",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/09-current-and-voltage/04-motor-measurement/ExtCurrFBSca.zh.md",
-          "sha256": "cf47910afbee4a145eb8a66e4d54837e764f5f885d2c31126633694eec176a75"
+          "sha256": "eab26115aa505a54af0f3e6bc97afc2c4513eb0b74569a1b191ab719ee8d359b"
         }
       }
     },
@@ -4659,6 +4841,32 @@
       }
     },
     {
+      "path": "02-keywords/10-motion/01-kinematics-status/ddPosRef.md",
+      "keyword": "ddPosRef",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.09",
+      "sha256": "0570200050db8069c15a060ac9291f06e90b9cf7116202341409648b875d037d",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/10-motion/01-kinematics-status/ddPosRef.zh.md",
+          "sha256": "13f05a567335cfbb5f31046f4d406e4af8939bfe203af9f647bd48eb6fc277e9"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/10-motion/01-kinematics-status/dddPosRef.md",
+      "keyword": "dddPosRef",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.09",
+      "sha256": "a56ebf1d30cae76874a5b299e379770540c33cd62eb42a184155dfdeaf261b25",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/10-motion/01-kinematics-status/dddPosRef.zh.md",
+          "sha256": "5b10e671f219386e1f3a4fdc9f28d2c005cfc413642c671101d896de5b88f890"
+        }
+      }
+    },
+    {
       "path": "02-keywords/10-motion/02-motion-configuration/00-overview.md",
       "keyword": "00-overview",
       "last_updated": "2026-05-29",
@@ -4687,13 +4895,13 @@
     {
       "path": "02-keywords/10-motion/02-motion-configuration/MotionMode.md",
       "keyword": "MotionMode",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "6cb2601c0be7eea559de1d1f4a57009cc50985354c9bc6c60fdecdae7b538646",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.09",
+      "sha256": "be79c764717b9d26bba3e38cd8336c4dfcda69097926c5b002d2a47fc3edfd95",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/02-motion-configuration/MotionMode.zh.md",
-          "sha256": "ae82584b5f0cd97e5c19412ab45c71a266cd1de2142aeccc68c90797ada71e88"
+          "sha256": "385fdab441a08309e9e67add152703133980a69a65ffcd6cfce4da6e4617edbf"
         }
       }
     },
@@ -6973,6 +7181,97 @@
       }
     },
     {
+      "path": "02-keywords/10-motion/15-motion-mode-pvaj/00-overview.md",
+      "keyword": "00-overview",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.09",
+      "sha256": "827b640d92df0f5ebdc989542848d6098ac9ed3b8026b235bb5f22f8e22fd05f",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/10-motion/15-motion-mode-pvaj/00-overview.zh.md",
+          "sha256": "a6876821c0a5a8be7668d5554f33e3924ba325dce663d7af146ed585a5f793cd"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/10-motion/15-motion-mode-pvaj/PVAJArm.md",
+      "keyword": "PVAJArm",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.09",
+      "sha256": "929d68b7ee1e3543f44d482d2a8656f45649f916b9c458760d87273fdf64f6cb",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/10-motion/15-motion-mode-pvaj/PVAJArm.zh.md",
+          "sha256": "97f02dc25bfb14a8b93bf55964d6879aee84e76a323472ed84aa6f44aa124b9a"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/10-motion/15-motion-mode-pvaj/PVAJList.md",
+      "keyword": "PVAJList",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.09",
+      "sha256": "a92b1cc4308d47fe5b489b9f3c16c2b25008384afa0cd41aacf06329a8a50e16",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/10-motion/15-motion-mode-pvaj/PVAJList.zh.md",
+          "sha256": "fbebf02f6759e869520eabc8ac1df84926e2f059f6ad0fad456ab84d587ac7a9"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/10-motion/15-motion-mode-pvaj/PVAJPosTol.md",
+      "keyword": "PVAJPosTol",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.09",
+      "sha256": "523406090afb9d86148aee92caa2c2e3f81713e1aadec7f217b39a34e9d7b2ff",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/10-motion/15-motion-mode-pvaj/PVAJPosTol.zh.md",
+          "sha256": "6197a57290dcb07f63d2fb40b70d82784370f53670abf8cea017a185aa38df1e"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/10-motion/15-motion-mode-pvaj/PVAJStatus.md",
+      "keyword": "PVAJStatus",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.09",
+      "sha256": "7bc96c0c6900cb5d49a27033371a625e089f48d1a63192d682ab909300706a0e",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/10-motion/15-motion-mode-pvaj/PVAJStatus.zh.md",
+          "sha256": "ab722d9b131c71cd8a5d95c0eba96f294bd91487ee7fd97f72dfc46a03429973"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/10-motion/15-motion-mode-pvaj/PVAJValidate.md",
+      "keyword": "PVAJValidate",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.09",
+      "sha256": "07f4dc00a955e72fb3e9200482ec189a554cfe7d8a3367b66ca5b51c2d838b7d",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/10-motion/15-motion-mode-pvaj/PVAJValidate.zh.md",
+          "sha256": "5e53eb1140dd6ddd11071d0543f12a83d578f09c305713d2a3c6b114389c93ce"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/10-motion/15-motion-mode-pvaj/PVAJVelTol.md",
+      "keyword": "PVAJVelTol",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.09",
+      "sha256": "82c88487395b2cd6088b52ff71f1293a9dbd7a06e0cac4e4242c8f9c3f329c94",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/10-motion/15-motion-mode-pvaj/PVAJVelTol.zh.md",
+          "sha256": "9adc49bafc0233c1256365321de5d29020e672c374fe7f6da1dbdf3bee1cc0de"
+        }
+      }
+    },
+    {
       "path": "02-keywords/11-control-tuning/00-overview.md",
       "keyword": "00-overview",
       "last_updated": "2026-05-29",
@@ -8639,26 +8938,26 @@
     {
       "path": "02-keywords/15-commutation/ComtMode.md",
       "keyword": "ComtMode",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "d1c4d45d94010574012bbc426283927ef1db404da74d8fb38d5185e2a411f1a9",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.09",
+      "sha256": "9e7bb75210e1f3f8e926e8503d25f6cdca62b0312100bcda240c787c6ea74503",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/15-commutation/ComtMode.zh.md",
-          "sha256": "a3ce83360be16a7553bb3af0f0b86b382e33a91c17fb5a1e24c6c804e6fe7c40"
+          "sha256": "e1750bfd1cf91805bb3991498901c37d9197b4db2d6961b0292b6eaeed0b58e8"
         }
       }
     },
     {
       "path": "02-keywords/15-commutation/ComtStatus.md",
       "keyword": "ComtStatus",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "ba7a636b71639e6ef54c9af7a3f40167781ec6fca839b1f8f872209325976bd9",
+      "last_updated": "2026-07-29",
+      "doc_revision": "2026.09",
+      "sha256": "3efbb31f46c238cd4fe00bb18e48ac69a2f2bcaf8f16e6668aabd1c9572c1798",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/15-commutation/ComtStatus.zh.md",
-          "sha256": "75c1f65ed5b371ecf6b5c1c4c76253680a729a4c259bc2e90b305feba2b2ac76"
+          "sha256": "c3e05df0235d22a24430d2be9f6e01ff58cd495e0fd391742a6b9a739dd9105a"
         }
       }
     },
