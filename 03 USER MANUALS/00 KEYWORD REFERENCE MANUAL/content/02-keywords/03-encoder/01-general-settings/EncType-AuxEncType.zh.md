@@ -42,7 +42,7 @@ Tamagawa 编码器是一种单圈串行绝对式编码器，可用作主编码�
 在独立式控制器上，可以使用 [EncAbsSendCmd](../07-absolute-encoder/EncAbsSendCmd.md) 读写编码器的板载存储器；该功能在 central-i 主控上不可用。
 
 > [!caution]
-> 在 **v4** central-i 主控上，选择类型 8 还会写入远程驱动器中一个无关的设置。在 v4 central-i 主控上选择类型 8 之后，请在运行电机前检查远程驱动器的配置。**v5** 不会写入该设置。
+> 在 **v4** central-i 主控上，`EncType=8` 会写入远程驱动器中一个无关的设置，并且只要 `EncType` 为 8，每次控制器启动或远程单元重新连接时都会再次写入。请勿在 v4 central-i 主控上将 Tamagawa 编码器用作主编码器。**v5** 不会写入该设置。`AuxEncType=8` 不受影响。
 
 对于模拟 SIN/COS 编码器，另请参阅 [SinCosSetup](SinCosSetup-AuxSinCosSet.md) 和 [SinCosSignals](SinCosSignals-AuxSinCosSig.md)。对于 `EncType=4`，方向通过 `SinCosSetup` 设置，而非 [EncDir](EncDir-AuxEncDir.md)。
 
@@ -50,7 +50,7 @@ Tamagawa 编码器是一种单圈串行绝对式编码器，可用作主编码�
 
 | | v4（独立式与 central-i） | v5（central-i） |
 |---|---|---|
-| Tamagawa（值 8） | 在独立式控制器上支持。在 central-i 主控上，选择该值还会更改一个无关的远程驱动器设置（见上文注意事项） | 支持（central-i） |
+| Tamagawa（值 8） | 在独立式控制器上支持。在 central-i 主控上，请勿将其用作主编码器：`EncType=8` 会反复更改一个无关的远程驱动器设置（见上文注意事项） | 支持（central-i） |
 | central-i 上使用 Tamagawa 编码器时的 `EncAbsBits` / `AuxEncAbsBits` | 必须手动设置，且须在选择类型 8 之前设置（之后写入会被拒绝） | 必须手动设置；可随时写入 |
 
 两个版本都将编码器类型枚举至值 8（Tamagawa）。与往常一样，受支持的类型最终由产品硬件决定。**v5 仅适用于 central-i。**

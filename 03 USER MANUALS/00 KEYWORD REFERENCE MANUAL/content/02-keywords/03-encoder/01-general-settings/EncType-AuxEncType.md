@@ -41,7 +41,7 @@ A Tamagawa encoder is a single-turn serial absolute encoder, selectable for the 
 The encoder's on-board memory can be read and written with [EncAbsSendCmd](../07-absolute-encoder/EncAbsSendCmd.md) on a standalone controller; it is not available on a central-i master.
 
 > [!caution]
-> On a **v4** central-i master, selecting type 8 also writes to an unrelated setting in the remote drive. After selecting type 8 on a v4 central-i master, check the remote drive's configuration before running the motor. **v5** does not write it.
+> On a **v4** central-i master, `EncType=8` writes to an unrelated setting in the remote drive, and the write repeats every time the controller starts or the remote reconnects while `EncType` is 8. Do not use a Tamagawa encoder as the main encoder on a v4 central-i master. **v5** does not write it. `AuxEncType=8` is not affected.
 
 For an analog SIN/COS encoder, also refer to [SinCosSetup](SinCosSetup-AuxSinCosSet.md) and [SinCosSignals](SinCosSignals-AuxSinCosSig.md). For `EncType=4` the direction is set via `SinCosSetup`, not [EncDir](EncDir-AuxEncDir.md).
 
@@ -49,7 +49,7 @@ For an analog SIN/COS encoder, also refer to [SinCosSetup](SinCosSetup-AuxSinCos
 
 | | v4 (standalone & central-i) | v5 (central-i) |
 |---|---|---|
-| Tamagawa (value 8) | Supported on a standalone controller. On a central-i master, selecting it also changes an unrelated remote-drive setting (see the caution above) | Supported (central-i) |
+| Tamagawa (value 8) | Supported on a standalone controller. On a central-i master, do not use it as the main encoder: `EncType=8` repeatedly changes an unrelated remote-drive setting (see the caution above) | Supported (central-i) |
 | `EncAbsBits` / `AuxEncAbsBits` with a Tamagawa encoder on central-i | Must be set by hand, before selecting type 8 (the write is refused afterwards) | Must be set by hand; the write is accepted at any time |
 
 Both versions enumerate encoder types up to value 8 (Tamagawa). As always, supported types are ultimately determined by the product hardware. **v5 is central-i only.**
