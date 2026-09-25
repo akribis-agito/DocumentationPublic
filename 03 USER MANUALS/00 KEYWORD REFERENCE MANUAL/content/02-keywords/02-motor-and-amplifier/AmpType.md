@@ -36,6 +36,10 @@ doc_revision: '2026.06'
 
 Selects how the axis drives its motor — built-in amplifier or an external amplifier via analog/digital command.
 
+> **Built-in amplifier only on some models.** On AG100-DRV50 and on EtherCAT
+> models the only accepted value is `0` (built-in PWM) — those units have no
+> external-amplifier hardware, so the external-amplifier settings are rejected.
+
 ## Overview
 
 `AmpType` defines the amplifier mode used by the axis. Depending on the Agito product, an axis can drive its internal PWM amplifier directly or interface with an external amplifier through an analog or digital command. The choice determines which command signal the axis produces, and which related keywords apply — for example the external analog modes use [AAmpFullScale](AAmpFullScale.md) to scale the output. Contact Agito for the amplifier functionality available on each product.
