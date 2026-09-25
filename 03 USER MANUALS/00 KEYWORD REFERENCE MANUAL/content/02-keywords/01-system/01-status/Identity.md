@@ -26,7 +26,7 @@ attributes:
   implemented: final
 overrides:
   central-i.v5:
-    array_size: 75
+    array_size: 76
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 ---
@@ -87,6 +87,7 @@ A host typically reads `Identity[1]` to learn the model, `Identity[16]` to learn
 | [54] | Product variant | Uninitialised unless applicable |
 | [55] | Position-tracking FIFO size | |
 | [62] | Feature flags, word 2 | Capability bitfield (see below) |
+| [75] | Push-event queue depth | Rows in the [push-event](../06-push-events/00-overview.md) queue (64 on AGM800); Central-i v5 firmware with push events only |
 
 > Indices [42]–[51] expose the unit's *active* network address. They are read-only reflections of the live configuration and vary per unit; they are not shown here with any real value.
 
@@ -112,7 +113,7 @@ Additional internal type codes exist for non-standard products; the codes above 
 
 ### Feature-flag words (indices 25 and 62)
 
-`Identity[25]` and `Identity[62]` are bitfields in which each bit advertises support for a specific firmware capability. Host software tests these bits to decide which features are available, rather than inferring capability from the firmware version number. Word 1 (`Identity[25]`) carries the bulk of the flags — for example learn-commutation, additional CNC segment features, vector motion mode, true-jerk CNC, smooth auto-phase, dynamic (indirect) array indexing, and Halls-only commutation. Word 2 (`Identity[62]`) carries newer flags as word 1 fills up.
+`Identity[25]` and `Identity[62]` are bitfields in which each bit advertises support for a specific firmware capability. Host software tests these bits to decide which features are available, rather than inferring capability from the firmware version number. Word 1 (`Identity[25]`) carries the bulk of the flags — for example learn-commutation, additional CNC segment features, vector motion mode, true-jerk CNC, smooth auto-phase, dynamic (indirect) array indexing, and Halls-only commutation. Word 2 (`Identity[62]`) carries newer flags as word 1 fills up. For example, bit `0x40` of word 2 is set when the firmware supports [push events](../06-push-events/00-overview.md).
 
 To test a capability, mask the word with the bit for that feature; a non-zero result means the feature is present. Because the bit assignments grow with each release, treat any bit that the running firmware does not set as "not supported".
 
@@ -137,7 +138,7 @@ AIdentity[25]       ; feature-flag word 1
 
 ## Changes between versions
 
-On Central-i v5 the array is larger (`array_size` = 75, vs 63 on v4 — see the frontmatter). The additional indices expose extra version information used by the Central-i system: a Central-i master version (decomposed major/minor/patch/owner/sub-version plus a combined value), the actual and expected EtherCAT-slave-information (ESI) version numbers, and the sizes of the firmware's print buffers. The documented indices [1]–[55] and [62] keep the same meaning on both versions. On Central-i v5 a few additional internal fields appear at [56]–[61] that are not used by host software and are not documented here.
+On Central-i v5 the array is larger (`array_size` = 76, vs 63 on v4 — see the frontmatter). The additional indices expose extra version information used by the Central-i system: a Central-i master version (decomposed major/minor/patch/owner/sub-version plus a combined value), the actual and expected EtherCAT-slave-information (ESI) version numbers, and the sizes of the firmware's print buffers. The documented indices [1]–[55] and [62] keep the same meaning on both versions; [75], the push-event queue depth, exists on Central-i v5 only. On Central-i v5 a few additional internal fields appear at [56]–[61] that are not used by host software and are not documented here.
 
 ## See also
 
