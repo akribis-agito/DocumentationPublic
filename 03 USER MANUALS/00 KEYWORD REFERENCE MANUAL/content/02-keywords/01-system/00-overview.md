@@ -13,3 +13,4 @@ It is organised into:
 - **Timing** — system cycle counters and timers.
 - **Communication** — CAN, Ethernet, and serial (RS-232/USB) configuration, plus remote-controller messaging.
 - **Central-i** — the Central-i link subsystem: connection, configuration, status, multiplexing, and offline data/logging.
+- **Push events** — events the controller sends to the host unprompted on the push socket, such as the end of a move (AGM800 only).
