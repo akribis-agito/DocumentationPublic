@@ -57,7 +57,16 @@ language: zh-CN
 - **电机失能：** 无论 `MotorOn` 如何，欠压*状态*（及多级告警）仍会更新，但禁用性跳闸仅在电机使能时才触发。当轴已失能时，欠压条件本身不会触发故障；相反，它会阻止轴被重新使能（[MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) 请求被以故障 1009 拒绝），直到供电恢复。
 - **模式依赖性：** 无论运行模式如何，跳闸均会运行。
 - **无延迟：** `MaxVBusTime` 仅用于过压路径；欠压始终为立即。
-- **范围溢出：** 超出 `11000…90000`（mV）的写入将被钳位到关键字 `range`。
+- **范围溢出：** 超出关键字 `range` 的写入将被钳位到该范围。
+- **取值范围因驱动器系列而异。** 上方显示的 `range` 由单一固件配置解析得出，对应
+  AGD200 / AGD301（48 V 级）：`11000…90000` mV。高压驱动器使用不同的范围：
+
+  | 系列 | `MinVBus` 范围 (mV) | 默认值 |
+  |---|---|---|
+  | AGD200 / AGD301、AGD101-EC（48 V 级） | 11000…90000 | 11000 |
+  | AGD155 / AGA155 / AGD155-EC、AGD156-EC（高压） | 100000…340000 | 100000 |
+
+  请向驱动器查询实际限值，不要臆断；上表为各系列固件的编译期范围。
 - **清除故障：** ConFlt 码 1009 在重新使能（[MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 1，在供电恢复后）时或通过写入 `AConFlt=0` 清除；[ErrLog](../../07-status-and-faults/ErrLog.md) 条目则保留。
 - **HWProtectBits / ProtectMask：** 欠压跳闸不可通过 [ProtectMask](../01-general-protection/ProtectMask.md) 屏蔽。
 

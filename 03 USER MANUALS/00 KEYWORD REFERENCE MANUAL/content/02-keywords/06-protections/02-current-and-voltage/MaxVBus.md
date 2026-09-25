@@ -59,7 +59,17 @@ For warning purposes the drive also reports a multi-level VBus warning in [StatR
 - **Mode dependency:** the trip runs regardless of operation mode.
 - **`MaxVBusTime = 0`:** the trip fires on the first bus check above `MaxVBus`, effectively instant (same speed as [MaxVBusAbs](MaxVBusAbs.md) but using `MaxVBus` as the threshold).
 - **Timer resolution and threshold:** the over-voltage timer advances one bus-check period at a time (the bus voltage is checked every 16th control cycle) and is saturated at [MaxVBusTime](MaxVBusTime.md). Timer accumulation and the [StatReg](../../07-status-and-faults/StatReg.md) over-VBus warning use `VBus ≥ MaxVBus`, whereas the disabling trip uses the strict `VBus > MaxVBus` and only fires once the timer has reached `MaxVBusTime`. `MaxVBusTime` is entered in milliseconds and converted to samples internally, so on standard (16 kHz) products the effective timer resolution is one bus-check period (~1 ms).
-- **Range overflow:** writes outside `12000…95000` (mV) are rejected with an out-of-range error; the stored value is left unchanged. Set `MaxVBus` below [MaxVBusAbs](MaxVBusAbs.md) so the timed band acts first on normal regen transients.
+- **Range overflow:** writes outside the keyword `range` are rejected with an out-of-range error; the stored value is left unchanged.
+- **The range depends on the drive family.** The `range` shown above is resolved from a
+  single firmware configuration and is the AGD200 / AGD301 (48 V-class) one:
+  `12000…95000` mV. High-voltage drives use a different envelope:
+
+  | Family | `MaxVBus` range (mV) | Default |
+  |---|---|---|
+  | AGD200 / AGD301, AGD101-EC (48 V class) | 12000…95000 | 95000 |
+  | AGD155 / AGA155 / AGD155-EC, AGD156-EC (high voltage) | 155000…390000 | 390000 |
+
+  Query the drive rather than assuming. Set `MaxVBus` below [MaxVBusAbs](MaxVBusAbs.md) so the timed band acts first on normal regen transients.
 - **Clearing the fault:** ConFlt code 1008 clears on re-enable ([MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../07-status-and-faults/ErrLog.md) entry persists.
 - **HWProtectBits / ProtectMask:** the bus-voltage trip is not maskable through [ProtectMask](../01-general-protection/ProtectMask.md).
 

@@ -60,7 +60,16 @@ language: zh-CN
 - **模式依赖性：** 无论运行模式如何，跳闸均会运行。
 - **`MaxVBusTime = 0`：** 在第一次检测到母线电压高于 `MaxVBus` 的检查时即跳闸，实际上为瞬时（速度与 [MaxVBusAbs](MaxVBusAbs.md) 相同，但使用 `MaxVBus` 作为阈值）。
 - **计时器分辨率与阈值：** 过压计时器每次推进一个母线检查周期（母线电压每第 16 个控制周期检查一次），并在 [MaxVBusTime](MaxVBusTime.md) 处饱和。计时器累加与 [StatReg](../../07-status-and-faults/StatReg.md) 过 VBus 告警使用 `VBus ≥ MaxVBus`，而禁用性跳闸使用严格的 `VBus > MaxVBus`，且仅在计时器达到 `MaxVBusTime` 后才触发。`MaxVBusTime` 以毫秒输入并在内部转换为采样数，因此在标准（16 kHz）产品上，有效计时器分辨率为一个母线检查周期（约 1 ms）。
-- **范围溢出：** 超出 `12000…95000`（mV）的写入将以超范围错误被拒绝；所存储的值保持不变。请将 `MaxVBus` 设在 [MaxVBusAbs](MaxVBusAbs.md) 以下，以便定时分段在正常再生瞬变时先起作用。
+- **范围溢出：** 超出关键字 `range` 的写入将以超范围错误被拒绝；所存储的值保持不变。
+- **取值范围因驱动器系列而异。** 上方显示的 `range` 由单一固件配置解析得出，对应
+  AGD200 / AGD301（48 V 级）：`12000…95000` mV。高压驱动器使用不同的范围：
+
+  | 系列 | `MaxVBus` 范围 (mV) | 默认值 |
+  |---|---|---|
+  | AGD200 / AGD301、AGD101-EC（48 V 级） | 12000…95000 | 95000 |
+  | AGD155 / AGA155 / AGD155-EC、AGD156-EC（高压） | 155000…390000 | 390000 |
+
+  请向驱动器查询实际限值，不要臆断。请将 `MaxVBus` 设在 [MaxVBusAbs](MaxVBusAbs.md) 以下，以便定时分段在正常再生瞬变时先起作用。
 - **清除故障：** ConFlt 码 1008 在重新使能（[MotorOn](../../08-axis-operation/01-general-keywords/MotorOn.md) = 1）时或通过写入 `AConFlt=0` 清除；[ErrLog](../../07-status-and-faults/ErrLog.md) 条目则保留。
 - **HWProtectBits / ProtectMask：** 母线电压跳闸不可通过 [ProtectMask](../01-general-protection/ProtectMask.md) 屏蔽。
 
