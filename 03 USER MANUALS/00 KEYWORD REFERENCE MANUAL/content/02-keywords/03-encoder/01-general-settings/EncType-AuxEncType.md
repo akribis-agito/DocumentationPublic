@@ -31,15 +31,28 @@ For a digital incremental encoder, also refer to [EncSubType](EncSubType-AuxEncS
 
 For an absolute encoder, also refer to [EncAbsBits](EncAbsBits-AuxEncAbsBits.md), [EncAbsMB](EncAbsMB-AuxEncAbsMB.md), [EncAbsOff](EncAbsOff-AuxEncAbsOff.md) and [EncAbsVal](EncAbsVal-AuxEncAbsVal.md). With an absolute encoder the feedback [Pos](../../10-motion/01-kinematics-status/Pos.md) is initialised from the absolute reading at power-up rather than starting at zero.
 
+### Tamagawa (value 8)
+
+A Tamagawa encoder is a single-turn serial absolute encoder, selectable for the main encoder (`EncType=8`) and, on products whose hardware supports it, the auxiliary encoder (`AuxEncType=8`). It reports its own resolution in an identification byte (ENID), and how [EncAbsBits](EncAbsBits-AuxEncAbsBits.md) / `AuxEncAbsBits` are set depends on the product:
+
+- **Standalone controller (v4):** the controller reads the resolution from the encoder and stores it in `EncAbsBits` (main) or `AuxEncAbsBits` (auxiliary). While `EncType` or `AuxEncType` is 8, writing either keyword is refused with error 331 ("Tamagawa encoder resolution cannot be changed, it is learned").
+- **Central-i:** the resolution is **not** read from the encoder. Set `EncAbsBits`, and `AuxEncAbsBits` for an auxiliary Tamagawa encoder, by hand to the encoder's single-turn resolution. A wrong value is not detected: the rollover modulus is computed from it (see [EncAbsBits](EncAbsBits-AuxEncAbsBits.md)), so the position accumulates incorrectly. On **v4** the bit-count write is refused once either type is 8, so write `EncAbsBits` / `AuxEncAbsBits` before selecting type 8. On **v5** it can be written at any time.
+
+The encoder's on-board memory can be read and written with [EncAbsSendCmd](../07-absolute-encoder/EncAbsSendCmd.md) on a standalone controller; it is not available on a central-i master.
+
+> [!caution]
+> On a **v4** central-i master, `EncType=8` writes to an unrelated setting in the remote drive, and the write repeats every time the controller starts or the remote reconnects while `EncType` is 8. Do not use a Tamagawa encoder as the main encoder on a v4 central-i master. **v5** does not write it. `AuxEncType=8` is not affected.
+
 For an analog SIN/COS encoder, also refer to [SinCosSetup](SinCosSetup-AuxSinCosSet.md) and [SinCosSignals](SinCosSignals-AuxSinCosSig.md). For `EncType=4` the direction is set via `SinCosSetup`, not [EncDir](EncDir-AuxEncDir.md).
 
 ## Changes between versions
 
 | | v4 (standalone & central-i) | v5 (central-i) |
 |---|---|---|
-| Tamagawa (value 8) | Defined (types enumerated up to value 8) | Tamagawa absent from the core type list (types enumerated up to value 7) |
+| Tamagawa (value 8) | Supported on a standalone controller. On a central-i master, do not use it as the main encoder: `EncType=8` repeatedly changes an unrelated remote-drive setting (see the caution above) | Supported (central-i) |
+| `EncAbsBits` / `AuxEncAbsBits` with a Tamagawa encoder on central-i | Must be set by hand, before selecting type 8 (the write is refused afterwards) | Must be set by hand; the write is accepted at any time |
 
-In **v5** the core firmware enumerates encoder types up to value 7 (analog position feedback); value 8 (Tamagawa) is present in the v4 list. As always, supported types are ultimately determined by the product hardware. **v5 is central-i only.**
+Both versions enumerate encoder types up to value 8 (Tamagawa). As always, supported types are ultimately determined by the product hardware. **v5 is central-i only.**
 
 ## Examples
 
@@ -55,7 +68,7 @@ A typical absolute-encoder commissioning sequence. The example uses a 26-bit BiS
 
 ```text
 AMotorOn=0                ; motor off — these keywords change the feedback pipeline
-AEncType=6                ; absolute, BiSS-C (use 3 for EnDat 2.2; 8 for Tamagawa on v4 only)
+AEncType=6                ; absolute, BiSS-C (use 3 for EnDat 2.2; for Tamagawa see "Tamagawa (value 8)" above)
 AEncAbsBits=26            ; total bit count of the absolute word
 AEncAbsMB=4               ; discard the 4 least-significant (unused/fine) bits
 AEncAbsOff=0              ; offset added to the masked reading at power-up

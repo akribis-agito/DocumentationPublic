@@ -6,6 +6,7 @@ availability:
   - v4
   central-i:
   - v4
+  - v5
 can_code: 717
 attributes:
   access: rw
@@ -23,7 +24,9 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  central-i.v5:
+    can_code: 900
 last_updated: '2026-05-28'
 doc_revision: '2026.06'
 ---
@@ -33,11 +36,19 @@ Data value to be written to the absolute encoder register on a write transaction
 
 ## Overview
 
-`EncAbsWData` holds the byte to be written to the absolute encoder register on a write transaction issued via [EncAbsSendCmd](EncAbsSendCmd.md). Load it before calling `EncAbsSendCmd` with [EncAbsWRType](EncAbsWRType.md) set to 1 (write). The valid range is 0 to 255 (8-bit). It is an axis-scope parameter, not saved to flash, and cannot be changed while the motor is on or in motion. Available on v4 firmware only.
+`EncAbsWData` holds the byte to be written to the absolute encoder register on a write transaction issued via [EncAbsSendCmd](EncAbsSendCmd.md). Load it before calling `EncAbsSendCmd` with [EncAbsWRType](EncAbsWRType.md) set to 1 (write). The valid range is 0 to 255 (8-bit). It is an axis-scope parameter, not saved to flash, and cannot be changed while the motor is on or in motion. Available on v4 (standalone and central-i) and v5 (central-i); the CAN code differs between the two (see [Changes between versions](#changes-between-versions)).
 
 ## How it works
 
 On a write transaction `EncAbsSendCmd` writes `EncAbsWData` to the encoder-interface write-data register after setting [EncAbsAddr](EncAbsAddr.md), then issues the encoder "write to memory" command. It is ignored on a read transaction ([EncAbsWRType](EncAbsWRType.md) = 0). The value is the data byte sent to the addressed encoder register.
+
+## Changes between versions
+
+| | v4 (standalone & central-i) | v5 (central-i) |
+|---|---|---|
+| CAN code | 717 | 900 |
+
+The value range, default and motor-on / in-motion restrictions are the same in both versions. **v5 is central-i only.** The transaction that uses this value runs only on a standalone controller: on a central-i master, v5 refuses [EncAbsSendCmd](EncAbsSendCmd.md), and on v4 the transaction does not reach the encoder and changes unrelated settings in the remote drive (see [EncAbsSendCmd](EncAbsSendCmd.md)).
 
 ## Examples
 

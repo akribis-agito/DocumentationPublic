@@ -6,6 +6,7 @@ availability:
   - v4
   central-i:
   - v4
+  - v5
 can_code: 719
 attributes:
   access: ro
@@ -23,7 +24,11 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  central-i.v5:
+    can_code: 902
+    ok_in_motion: false
+    ok_motor_on: false
 last_updated: '2026-05-28'
 doc_revision: '2026.06'
 language: zh-CN
@@ -34,7 +39,7 @@ language: zh-CN
 
 ## 概述
 
-`EncAbsSendCmd` 是一个命令函数，它使用先前载入 [EncAbsAddr](EncAbsAddr.md)、[EncAbsWData](EncAbsWData.md) 和 [EncAbsWRType](EncAbsWRType.md) 的地址、数据和类型，发起对绝对式编码器的寄存器读取或写入事务。读取事务完成后，[EncAbsRData](EncAbsRData.md) 保存读回的值。它是轴相关命令函数。整个接口针对串行绝对式编码器（Tamagawa 系列，[EncType](../01-general-settings/EncType-AuxEncType.md) = 8）的板载存储器，仅适用于 v4 固件。
+`EncAbsSendCmd` 是一个命令函数，它使用先前载入 [EncAbsAddr](EncAbsAddr.md)、[EncAbsWData](EncAbsWData.md) 和 [EncAbsWRType](EncAbsWRType.md) 的地址、数据和类型，发起对绝对式编码器的寄存器读取或写入事务。读取事务完成后，[EncAbsRData](EncAbsRData.md) 保存读回的值。它是轴相关命令函数。整个接口针对作为该轴主编码器连接的串行绝对式编码器（Tamagawa 系列，[EncType](../01-general-settings/EncType-AuxEncType.md) = 8）的板载存储器；没有辅助编码器版本。该事务在独立式控制器上执行。在 central-i 主控上，v5 会拒绝该命令；v4 的事务无法到达编码器，并且会更改远程驱动器中无关的设置（参见[版本间的变化](#版本间的变化)）。
 
 ## 工作原理
 
@@ -52,11 +57,26 @@ language: zh-CN
 3. 发出编码器“写入存储器”数据命令。
 4. 等待固定数量的控制周期，让写入完成。
 
-任一分支完成后，固件将编码器接口命令返回其空闲（正常位置读出）状态，然后向上位机回复 OK。在 central-i 主控上，相同的序列通过 central-i 链路发送至远程单元；如果被寻址的端口未激活，命令将返回“port not active”错误。寄存器和数据均为 8 位（0–255）。
+任一分支完成后，固件将编码器接口命令返回其空闲（正常位置读出）状态，然后向上位机回复 OK。在 v4 central-i 主控上，如果所寻址的端口未激活，该命令返回“port not active”错误。寄存器和数据均为 8 位（0–255）。
+
+> [!caution]
+> **请勿在 v4 central-i 主控上使用 `EncAbsSendCmd`。** 该命令会被接受，但事务无法到达编码器：central-i 远程单元只通过其编码器配置字接收 Tamagawa 命令、地址和写入数据，而 `EncAbsSendCmd` 并未使用该配置字，因此 [EncAbsRData](EncAbsRData.md) 中不是编码器数据。该命令反而会写入远程驱动器中无关的设置。如果已在 v4 central-i 主控上使用过该命令，请在运行电机前检查并恢复远程驱动器的配置。**v5** 在 central-i 主控上会拒绝该命令（见下文）。
 
 ![Absolute-encoder register transaction sequence](encabs-transaction.svg)
 
 由于事务在等待编码器期间会阻塞，且参数在电机使能或运动中无法更改，此接口旨在用于离线配置/诊断，而非运行时使用。
+
+## 版本间的变化
+
+| | v4（独立式与 central-i） | v5（central-i） |
+|---|---|---|
+| CAN 代码 | 719 | 902 |
+| 在 central-i 主控上 | 请勿使用：会被接受，但无法到达编码器，并且会更改远程驱动器中无关的设置 | 拒绝，返回错误 242（“This function is not supported in this controller type”） |
+| 电机使能 | 允许 | 拒绝，返回错误 22（“The parameter assignment or function call are not valid with motor on”） |
+| 运动中 | 允许 | 拒绝，返回错误 21（“The parameter assignment or function call are not valid during motion”） |
+| 编码器类型 | 不检查：请先设置 [EncType](../01-general-settings/EncType-AuxEncType.md) = 8。若为其他编码器类型，该命令会写入该编码器的接口设置。 | 不适用（在 central-i 主控上被拒绝） |
+
+在 **v5** 上，编码器 EEPROM 接口不可用：`EncAbsSendCmd` 在 central-i 主控上被拒绝，因此 [EncAbsWRType](EncAbsWRType.md)、[EncAbsAddr](EncAbsAddr.md)、[EncAbsWData](EncAbsWData.md) 和 [EncAbsRData](EncAbsRData.md) 在该平台上不起作用。通过 central-i 读取 Tamagawa 编码器（[EncType](../01-general-settings/EncType-AuxEncType.md) = 8）的位置反馈不受影响。**v5 仅适用于 central-i。**
 
 ## 示例
 
