@@ -49,7 +49,7 @@ language: zh-CN
 |---|---|---|
 | CAN 代码 | 718 | 901 |
 
-取值范围、默认值和只读访问在两个版本中相同。**v5 仅适用于 central-i。** 它仅在独立式控制器上被填充：在 central-i 主控上，v5 会拒绝 [EncAbsSendCmd](EncAbsSendCmd.md)，v4 的读取则无法到达编码器，因此 `EncAbsRData` 中不是编码器数据。
+取值范围、默认值和只读访问在两个版本中相同。**v5 仅适用于 central-i。** 它仅在独立式控制器上被填充：在 central-i 主控上，v5 会拒绝 [EncAbsSendCmd](EncAbsSendCmd.md)；v4 的读取无法到达编码器（因此 `EncAbsRData` 中不是编码器数据），并且会更改远程驱动器中无关的设置（参见 [EncAbsSendCmd](EncAbsSendCmd.md)）。
 
 ## 示例
 

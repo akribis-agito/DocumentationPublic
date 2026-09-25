@@ -49,7 +49,7 @@ language: zh-CN
 |---|---|---|
 | CAN 代码 | 717 | 900 |
 
-取值范围、默认值以及电机使能/运动中的限制在两个版本中相同。**v5 仅适用于 central-i。** 使用该值的事务仅在独立式控制器上执行：在 central-i 主控上，v5 会拒绝 [EncAbsSendCmd](EncAbsSendCmd.md)，v4 的事务则无法到达编码器。
+取值范围、默认值以及电机使能/运动中的限制在两个版本中相同。**v5 仅适用于 central-i。** 使用该值的事务仅在独立式控制器上执行：在 central-i 主控上，v5 会拒绝 [EncAbsSendCmd](EncAbsSendCmd.md)；v4 的事务无法到达编码器，并且会更改远程驱动器中无关的设置（参见 [EncAbsSendCmd](EncAbsSendCmd.md)）。
 
 ## 示例
 

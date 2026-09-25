@@ -40,13 +40,16 @@ A Tamagawa encoder is a single-turn serial absolute encoder, selectable for the 
 
 The encoder's on-board memory can be read and written with [EncAbsSendCmd](../07-absolute-encoder/EncAbsSendCmd.md) on a standalone controller; it is not available on a central-i master.
 
+> [!caution]
+> On a **v4** central-i master, selecting type 8 also writes to an unrelated setting in the remote drive. After selecting type 8 on a v4 central-i master, check the remote drive's configuration before running the motor. **v5** does not write it.
+
 For an analog SIN/COS encoder, also refer to [SinCosSetup](SinCosSetup-AuxSinCosSet.md) and [SinCosSignals](SinCosSignals-AuxSinCosSig.md). For `EncType=4` the direction is set via `SinCosSetup`, not [EncDir](EncDir-AuxEncDir.md).
 
 ## Changes between versions
 
 | | v4 (standalone & central-i) | v5 (central-i) |
 |---|---|---|
-| Tamagawa (value 8) | Supported | Supported (central-i) |
+| Tamagawa (value 8) | Supported on a standalone controller. On a central-i master, selecting it also changes an unrelated remote-drive setting (see the caution above) | Supported (central-i) |
 | `EncAbsBits` / `AuxEncAbsBits` with a Tamagawa encoder on central-i | Must be set by hand, before selecting type 8 (the write is refused afterwards) | Must be set by hand; the write is accepted at any time |
 
 Both versions enumerate encoder types up to value 8 (Tamagawa). As always, supported types are ultimately determined by the product hardware. **v5 is central-i only.**
@@ -65,7 +68,7 @@ A typical absolute-encoder commissioning sequence. The example uses a 26-bit BiS
 
 ```text
 AMotorOn=0                ; motor off — these keywords change the feedback pipeline
-AEncType=6                ; absolute, BiSS-C (use 3 for EnDat 2.2; 8 for Tamagawa)
+AEncType=6                ; absolute, BiSS-C (use 3 for EnDat 2.2; for Tamagawa see "Tamagawa (value 8)" above)
 AEncAbsBits=26            ; total bit count of the absolute word
 AEncAbsMB=4               ; discard the 4 least-significant (unused/fine) bits
 AEncAbsOff=0              ; offset added to the masked reading at power-up

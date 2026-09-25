@@ -48,7 +48,7 @@ On a read transaction `EncAbsSendCmd` waits for the encoder to respond, reads th
 |---|---|---|
 | CAN code | 718 | 901 |
 
-The value range, default and read-only access are the same in both versions. **v5 is central-i only.** It is filled only on a standalone controller: on a central-i master, v5 refuses [EncAbsSendCmd](EncAbsSendCmd.md) and on v4 the read does not reach the encoder, so `EncAbsRData` does not hold encoder data there.
+The value range, default and read-only access are the same in both versions. **v5 is central-i only.** It is filled only on a standalone controller: on a central-i master, v5 refuses [EncAbsSendCmd](EncAbsSendCmd.md), and on v4 the read does not reach the encoder (so `EncAbsRData` does not hold encoder data there) and changes unrelated settings in the remote drive (see [EncAbsSendCmd](EncAbsSendCmd.md)).
 
 ## Examples
 

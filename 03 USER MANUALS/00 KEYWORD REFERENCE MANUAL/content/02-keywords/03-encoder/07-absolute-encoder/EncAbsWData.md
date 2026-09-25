@@ -48,7 +48,7 @@ On a write transaction `EncAbsSendCmd` writes `EncAbsWData` to the encoder-inter
 |---|---|---|
 | CAN code | 717 | 900 |
 
-The value range, default and motor-on / in-motion restrictions are the same in both versions. **v5 is central-i only.** The transaction that uses this value runs only on a standalone controller: on a central-i master, v5 refuses [EncAbsSendCmd](EncAbsSendCmd.md) and on v4 the transaction does not reach the encoder.
+The value range, default and motor-on / in-motion restrictions are the same in both versions. **v5 is central-i only.** The transaction that uses this value runs only on a standalone controller: on a central-i master, v5 refuses [EncAbsSendCmd](EncAbsSendCmd.md), and on v4 the transaction does not reach the encoder and changes unrelated settings in the remote drive (see [EncAbsSendCmd](EncAbsSendCmd.md)).
 
 ## Examples
 
