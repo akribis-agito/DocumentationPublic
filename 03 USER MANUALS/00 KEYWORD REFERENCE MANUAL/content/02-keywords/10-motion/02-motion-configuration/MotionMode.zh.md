@@ -28,7 +28,7 @@ overrides:
   central-i.v5:
     range:
     - -1
-    - 21
+    - 23
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
@@ -78,11 +78,13 @@ language: zh-CN
 
 | | v4 (standalone &amp; central-i) | v5 (central-i) |
 |---|---|---|
-| Range | −1 … 19 | −1 … **21** |
+| Range | −1 … 19 | −1 … **23** |
 | Mode 20 | 未定义 | **正弦点到点曲线** |
 | Mode 21 | 未定义 | **正弦点到点曲线（重复）** |
+| Mode 22 | 未定义 | **PVAJ** —— 在本轴上执行下载的位置/速度/加速度/加加速度列表（[PVAJ 概述](../15-motion-mode-pvaj/00-overview.md)） |
+| Mode 23 | 未定义 | **MultiAxisPVAJ** —— 将同一列表作为单一协调运动跨多个轴执行 |
 
-v5 新增了两种正弦曲线点到点模式。与其他 PTP 系列模式一样，正弦模式（20/21）受 `Begin` 在 [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md)（错误 271）和 [MaxAcc](../../06-protections/03-motion/general-maximum-limits/MaxAcc.md)（错误 324）上的双重闸门约束。**v5 仅适用于 central-i。**
+v5 新增了两种正弦曲线点到点模式，以及两种 PVAJ 模式（22/23）—— 后者遵循下载的轨迹表，而非由控制器计算的曲线，参见 [PVAJ 概述](../15-motion-mode-pvaj/00-overview.md)。PVAJ 模式**仅适用于 AGM800**，且要求列表在 `Begin` 之前完成校验与使能。与其他 PTP 系列模式一样，正弦模式（20/21）受 `Begin` 在 [MaxVel](../../06-protections/03-motion/general-maximum-limits/MaxVel.md)（错误 271）和 [MaxAcc](../../06-protections/03-motion/general-maximum-limits/MaxAcc.md)（错误 324）上的双重闸门约束。**v5 仅适用于 central-i。**
 
 ## 示例
 
