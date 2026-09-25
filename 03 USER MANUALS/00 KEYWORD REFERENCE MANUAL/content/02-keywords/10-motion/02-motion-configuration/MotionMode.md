@@ -29,8 +29,8 @@ overrides:
     range:
     - -1
     - 23
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-09-25'
+doc_revision: '2026.09'
 ---
 # MotionMode
 

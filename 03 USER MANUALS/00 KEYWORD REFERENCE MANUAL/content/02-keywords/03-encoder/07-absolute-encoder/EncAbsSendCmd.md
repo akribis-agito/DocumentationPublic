@@ -29,8 +29,8 @@ overrides:
     can_code: 902
     ok_in_motion: false
     ok_motor_on: false
-last_updated: '2026-05-28'
-doc_revision: '2026.06'
+last_updated: '2026-09-25'
+doc_revision: '2026.09'
 ---
 # EncAbsSendCmd
 

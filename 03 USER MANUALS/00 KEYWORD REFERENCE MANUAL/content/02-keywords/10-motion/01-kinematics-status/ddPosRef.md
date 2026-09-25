@@ -23,8 +23,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-08-02'
-doc_revision: '2026.07'
+last_updated: '2026-09-25'
+doc_revision: '2026.09'
 ---
 # ddPosRef
 
