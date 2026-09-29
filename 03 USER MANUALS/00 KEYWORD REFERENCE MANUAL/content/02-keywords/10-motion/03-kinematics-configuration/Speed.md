@@ -37,7 +37,7 @@ Target (maximum) velocity for point-to-point and jog motion, in user units per s
 
 ## Overview
 
-`Speed` is the cruise (target) velocity the trajectory profiler ramps the axis toward, in user units per second. The axis accelerates up to `Speed` at the rate set by [Accel](Accel.md) and brakes to rest at the rate set by [Decel](Decel.md), producing a trapezoidal (or, on a short move, triangular) velocity profile. It is read/write, axis-scoped, saved to flash, and can be changed at any time, including during motion. With [JerkMode](../02-motion-configuration/JerkMode.md) = 1, a change made once deceleration has begun is ignored until the move ends or a new target position is commanded.
+`Speed` is the cruise (target) velocity the trajectory profiler ramps the axis toward, in user units per second. The axis accelerates up to `Speed` at the rate set by [Accel](Accel.md) and brakes to rest at the rate set by [Decel](Decel.md), producing a trapezoidal (or, on a short move, triangular) velocity profile. It is read/write, axis-scoped, saved to flash, and can be changed at any time, including during motion. With [JerkMode](../02-motion-configuration/JerkMode.md) = 1, a change made once the final deceleration to the target has begun is ignored until the move ends or a new target position is commanded.
 
 ![Velocity profile: trapezoid versus S-curve](velocity-profile.svg)
 
