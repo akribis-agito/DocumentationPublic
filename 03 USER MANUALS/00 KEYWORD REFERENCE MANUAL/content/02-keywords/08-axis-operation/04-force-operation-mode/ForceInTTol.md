@@ -34,7 +34,7 @@ Settling window around the target force used for in-target status.
 
 ## Overview
 
-`ForceInTTol` is the settling window around the target value ([ForceCmdVal](ForceCmdVal.md)), in units, used to determine the in-target status of force control. It is applicable only when [ForceCmdSrc](ForceCmdSrc.md) = 1 or 2. Together with the dwell time [ForceInTTime](ForceInTTime.md), it determines when [ForceInTStat](ForceInTStat.md) reports settled.
+`ForceInTTol` is the settling window around the target value ([ForceCmdVal](ForceCmdVal.md)), in units, used to determine the in-target status of force control. It is applicable in Force Operation Mode when [ForceCmdSrc](ForceCmdSrc.md) = 1 or 2, and in Current Operation Mode ([OperationMode](../01-general-keywords/OperationMode.md) = 1) when [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md) = 1 or 2, where it is compared in mA against `CurrRef − MotorCurr`; like every USER_UNITS keyword, the value you read or write is scaled by [UsrUnits](../../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md). Together with the dwell time [ForceInTTime](ForceInTTime.md), it determines when [ForceInTStat](ForceInTStat.md) reports settled.
 
 ## How it works
 
@@ -48,7 +48,7 @@ AForceInTTol=10      ; settled when force error stays within ±10 units
 
 ### Edge cases
 
-- **Wrong mode / source** — only used when [OperationMode](../01-general-keywords/OperationMode.md) = 4 and [ForceCmdSrc](ForceCmdSrc.md) ∈ {1, 2}; ignored otherwise.
+- **Wrong mode / source** — only used when [OperationMode](../01-general-keywords/OperationMode.md) = 4 and [ForceCmdSrc](ForceCmdSrc.md) ∈ {1, 2}, or OperationMode = 1 and [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md) ∈ {1, 2}; ignored otherwise. One value serves both modes, so switching between force and current mode needs ForceInTTol set for the mode in use.
 - **Zero value** — effectively requires zero error; settling almost never latches.
 - **Out of range** — negative values rejected; max is `2 147 483 647`.
 - **State 4 already reached** — increasing `ForceInTTol` does not re-arm settling; the state machine evaluates the window only before reaching state 4.

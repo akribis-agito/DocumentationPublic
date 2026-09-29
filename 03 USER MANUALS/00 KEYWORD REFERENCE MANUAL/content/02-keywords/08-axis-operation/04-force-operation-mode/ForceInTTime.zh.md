@@ -35,7 +35,7 @@ language: zh-CN
 
 ## 概述
 
-`ForceInTTime` 定义了力误差（[ForceErr](ForceErr.md)）必须持续保持在稳定窗口（[ForceInTTol](ForceInTTol.md)）内的最小时间（单位：毫秒），之后轴才在 [ForceInTStat](ForceInTStat.md) 中被视为已到位。仅当 [ForceCmdSrc](ForceCmdSrc.md) = 1 或 2 时适用。
+`ForceInTTime` 定义了力误差（[ForceErr](ForceErr.md)）必须持续保持在稳定窗口（[ForceInTTol](ForceInTTol.md)）内的最小时间（单位：毫秒），之后轴才在 [ForceInTStat](ForceInTStat.md) 中被视为已到位。在力模式下当 [ForceCmdSrc](ForceCmdSrc.md) = 1 或 2 时适用；在电流模式（[OperationMode](../01-general-keywords/OperationMode.md) = 1）下当 [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md) = 1 或 2 时也适用，此时误差为 `CurrRef − MotorCurr`。
 
 ## 工作原理
 
@@ -51,7 +51,7 @@ AForceInTTime=50     ; require 50 ms within the settling window
 
 ### 边界情况
 
-- **错误模式 / 错误源**——仅当 [OperationMode](../01-general-keywords/OperationMode.md) = 4 且 [ForceCmdSrc](ForceCmdSrc.md) ∈ {1, 2} 时使用；其他情况下忽略。
+- **错误模式 / 错误源**——仅当 [OperationMode](../01-general-keywords/OperationMode.md) = 4 且 [ForceCmdSrc](ForceCmdSrc.md) ∈ {1, 2}，或 OperationMode = 1 且 [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md) ∈ {1, 2} 时使用；其他情况下忽略。
 - **零值**——一旦误差进入 [ForceInTTol](ForceInTTol.md) 一个周期即锁存到位（驻留为零）。
 - **超出容差**——在驻留期间离开窗口会将驻留计数器重新清零；驻留必须连续累计。
 - **超出范围**——超出 `0`–`163840` 的值将被拒绝。
