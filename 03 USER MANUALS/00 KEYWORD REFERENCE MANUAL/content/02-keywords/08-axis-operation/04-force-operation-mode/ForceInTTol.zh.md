@@ -35,7 +35,7 @@ language: zh-CN
 
 ## 概述
 
-`ForceInTTol` 是目标值（[ForceCmdVal](ForceCmdVal.md)）周围的稳定窗口（单位：用户单位），用于判定力控制的到位状态。在力模式下当 [ForceCmdSrc](ForceCmdSrc.md) = 1 或 2 时适用；在电流模式（[OperationMode](../01-general-keywords/OperationMode.md) = 1）下当 [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md) = 1 或 2 时也适用，此时它以 mA 与 `CurrRef − MotorCurr` 比较；与所有 USER_UNITS 关键字一样，读写的值按 [UsrUnits](../../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) 缩放。它与驻留时间 [ForceInTTime](ForceInTTime.md) 共同决定 [ForceInTStat](ForceInTStat.md) 何时报告到位。
+`ForceInTTol` 是目标值（[ForceCmdVal](ForceCmdVal.md)）周围的稳定窗口（单位：用户单位），用于判定力控制的到位状态。在力模式下当 [ForceCmdSrc](ForceCmdSrc.md) = 1 或 2 时适用；在电流模式（[OperationMode](../01-general-keywords/OperationMode.md) = 1）下当 [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md) = 1 或 2 时也适用，此时它以 mA 与 `CurrRef − MotorCurr` 比较；与其他以用户单位表示的关键字一样，读写的值按 [UsrUnits](../../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) 缩放。它与驻留时间 [ForceInTTime](ForceInTTime.md) 共同决定 [ForceInTStat](ForceInTStat.md) 何时报告到位。
 
 ## 工作原理
 

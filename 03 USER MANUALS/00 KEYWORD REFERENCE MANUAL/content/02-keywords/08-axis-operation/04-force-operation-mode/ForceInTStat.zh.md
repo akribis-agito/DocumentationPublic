@@ -35,9 +35,9 @@ language: zh-CN
 
 ## 概述
 
-`ForceInTStat` 在使用用户自定义力参考数组时报告力控制的到位（力稳定到位）状态。它是位置/速度 [InTargetStat](../../10-motion/05-motion-status/InTargetStat.md) 在力模式下的对应项，并使用相同的状态值。在力模式（[OperationMode](../01-general-keywords/OperationMode.md) = 4）下当 [ForceCmdSrc](ForceCmdSrc.md) = 1 或 2 时适用，在电流模式（[OperationMode](../01-general-keywords/OperationMode.md) = 1）下当 [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md) = 1 或 2 时也适用。它跟踪从电机使能、斜坡变化直至在 [ForceInTTol](ForceInTTol.md) 范围内稳定到位至少 [ForceInTTime](ForceInTTime.md) 的进程。EtherCAT Profile Torque（0x2C00 CSTForceLoopEnable = 0 且采用线性 FIFO 插补时）以 CurrCmdSrc = 1 运行于电流模式：ForceInTStat = 4 时置位状态字 bit 10（到达目标），否则清除该位。
+`ForceInTStat` 在使用用户自定义力参考数组时报告力控制的到位（力稳定到位）状态。它是位置/速度 [InTargetStat](../../10-motion/05-motion-status/InTargetStat.md) 在力模式下的对应项，并使用相同的状态值。在力模式（[OperationMode](../01-general-keywords/OperationMode.md) = 4）下当 [ForceCmdSrc](ForceCmdSrc.md) = 1 或 2 时适用，在电流模式（[OperationMode](../01-general-keywords/OperationMode.md) = 1）下当 [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md) = 1 或 2 时也适用。它跟踪从电机使能、斜坡变化直至在 [ForceInTTol](ForceInTTol.md) 范围内稳定到位至少 [ForceInTTime](ForceInTTime.md) 的进程。EtherCAT Profile Torque（0x2C00 CSTForceLoopEnable = 0 且 [FIFOPosType](../../10-motion/11-motion-mode-fifo/FIFOPosType.md) = 0（线性） 时）以 CurrCmdSrc = 1 运行于电流模式：ForceInTStat = 4 时置位状态字 bit 10（到达目标），否则清除该位。
 
-在电流模式下，同一状态机作用于电流指令：目标为 [CurrCmdVal](../03-current-operation-mode/CurrCmdVal.md)，斜坡为 [CurrCmdSlope](../03-current-operation-mode/CurrCmdSlope.md)，ForceInTTol 以 mA 与 `CurrRef − MotorCurr`（MotorCurr 取上一个控制周期的值）比较；与所有 USER_UNITS 关键字一样，读写的值按 [UsrUnits](../../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) 缩放。无限保持（[CurrCmdHTime](../03-current-operation-mode/CurrCmdHTime.md) < 0）与定时保持（CurrCmdHTime > 0）均运行该状态机。在电流模式下达到状态 4 时同样会写入 [ForceSamples](ForceSamples.md)，但其值在该模式下没有意义：无限保持期间 [CurrCmdCntr](../03-current-operation-mode/CurrCmdCntr.md) 不计数，且样本计数器会沿用先前指令的计数。
+在电流模式下，同一状态机作用于电流指令：目标为 [CurrCmdVal](../03-current-operation-mode/CurrCmdVal.md)，斜坡为 [CurrCmdSlope](../03-current-operation-mode/CurrCmdSlope.md)，ForceInTTol 以 mA 与 `CurrRef − MotorCurr`（MotorCurr 取上一个控制周期的值）比较；与其他以用户单位表示的关键字一样，读写的值按 [UsrUnits](../../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) 缩放。无限保持（[CurrCmdHTime](../03-current-operation-mode/CurrCmdHTime.md) < 0）与定时保持（CurrCmdHTime > 0）均运行该状态机。在电流模式下达到状态 4 时同样会写入 [ForceSamples](ForceSamples.md)，但其值在该模式下没有意义：无限保持期间 [CurrCmdCntr](../03-current-operation-mode/CurrCmdCntr.md) 不计数，且样本计数器会沿用先前指令的计数。
 
 ## 工作原理
 
@@ -59,7 +59,7 @@ language: zh-CN
 
 ![ForceInTStat state machine](forceintstat-state-machine.svg)
 
-> **注意：** `ForceInTStat` 仅反映表来源。使用模拟量来源（[ForceCmdSrc](ForceCmdSrc.md) = 0，或电流模式下 [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md) = 0）时没有定义的稳定目标，因此不运行到位检测。CurrCmdSrc = 3（跟随主轴）和 4（EtherCAT 主站）时同样如此。
+> **注意：** `ForceInTStat` 仅反映表来源。使用模拟量来源（[ForceCmdSrc](ForceCmdSrc.md) = 0，或电流模式下 [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md) = 0）时没有定义的稳定目标，因此不运行到位检测。CurrCmdSrc = 3（跟随主轴）和 4（EtherCAT 主站，由 EtherCAT Cyclic Synchronous Torque 设置）时同样如此。
 
 ## 示例
 

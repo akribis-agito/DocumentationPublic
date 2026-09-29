@@ -34,7 +34,7 @@ Settling window around the target force used for in-target status.
 
 ## Overview
 
-`ForceInTTol` is the settling window around the target value ([ForceCmdVal](ForceCmdVal.md)), in units, used to determine the in-target status of force control. It is applicable in Force Operation Mode when [ForceCmdSrc](ForceCmdSrc.md) = 1 or 2, and in Current Operation Mode ([OperationMode](../01-general-keywords/OperationMode.md) = 1) when [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md) = 1 or 2, where it is compared in mA against `CurrRef − MotorCurr`; like every USER_UNITS keyword, the value you read or write is scaled by [UsrUnits](../../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md). Together with the dwell time [ForceInTTime](ForceInTTime.md), it determines when [ForceInTStat](ForceInTStat.md) reports settled.
+`ForceInTTol` is the settling window around the target value ([ForceCmdVal](ForceCmdVal.md)), in units, used to determine the in-target status of force control. It is applicable in Force Operation Mode when [ForceCmdSrc](ForceCmdSrc.md) = 1 or 2, and in Current Operation Mode ([OperationMode](../01-general-keywords/OperationMode.md) = 1) when [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md) = 1 or 2, where it is compared in mA against `CurrRef − MotorCurr`; the value you read or write is scaled by [UsrUnits](../../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md), as for other keywords given in user units. Together with the dwell time [ForceInTTime](ForceInTTime.md), it determines when [ForceInTStat](ForceInTStat.md) reports settled.
 
 ## How it works
 
