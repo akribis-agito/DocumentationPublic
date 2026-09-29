@@ -41,7 +41,7 @@ Deceleration rate for point-to-point motion, in user units per second squared.
 
 `Decel` is the deceleration limit the trajectory profiler uses to ramp the axis down from the commanded [Speed](Speed.md) to rest at the end of a move. It is the counterpart to [Accel](Accel.md) and is also the rate used by a controlled [Stop](../04-motion-command/Stop.md). On a limit switch (RLS/FLS), a software position limit (FwdPLim/RevPLim), or a controlled-stop input, the profiler substitutes the separate, usually larger [EmrgDec](EmrgDec.md) rate. An [Abort](../04-motion-command/Abort.md), by contrast, does **not** use either rate — it instantaneously clears the in-motion bits, leaving the position loop to hold the last reference. Like `Accel`, `Decel` is scaled by [AccelFact](AccelFact.md) and smoothed by [Jerk](Jerk.md) / [JerkInDec](JerkInDec.md) according to [JerkMode](../02-motion-configuration/JerkMode.md).
 
-`Decel` is read/write, axis-scoped and saved to flash. It can be changed at any time, including during motion — the profiler re-reads it every control cycle.
+`Decel` is read/write, axis-scoped and saved to flash. It can be changed at any time, including during motion — the profiler re-reads it every control cycle. With [JerkMode](../02-motion-configuration/JerkMode.md) = 1, a change made once deceleration has begun is ignored until the move ends or a new target position is commanded.
 
 ![Velocity profile: trapezoid versus S-curve](velocity-profile.svg)
 

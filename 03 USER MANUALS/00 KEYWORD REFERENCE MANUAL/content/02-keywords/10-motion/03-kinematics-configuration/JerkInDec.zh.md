@@ -43,7 +43,7 @@ language: zh-CN
 
 ## 概述
 
-`JerkInDec` 是在三阶轨迹规划器的**减速**阶段所应用的加加速度约束，当 [JerkMode](../02-motion-configuration/JerkMode.md) = 1 时使用。它是 [JerkInAcc](JerkInAcc.md) 的减速侧对应参数：它限定减速度上升到峰值 [Decel](Decel.md) 以及从峰值回落的速度，从而圆滑制动斜坡的拐角，使轴平稳地停下。该参数可读写、轴相关、保存至闪存，并可在任意时刻更改，包括在运动中更改。
+`JerkInDec` 是在三阶轨迹规划器的**减速**阶段所应用的加加速度约束，当 [JerkMode](../02-motion-configuration/JerkMode.md) = 1 时使用。它是 [JerkInAcc](JerkInAcc.md) 的减速侧对应参数：它限定减速度上升到峰值 [Decel](Decel.md) 以及从峰值回落的速度，从而圆滑制动斜坡的拐角，使轴平稳地停下。该参数可读写、轴相关、保存至闪存，并可在任意时刻更改，包括在运动中更改。当 [JerkMode](../02-motion-configuration/JerkMode.md) = 1 时，减速开始后所做的更改会被忽略，直到该次运动结束或下达新的目标位置为止。
 
 与 `JerkInAcc` 一样，这是真正的加加速度限制（而非二阶 [Jerk](Jerk.md) 所控制的移动平均指数），并且仅在 `JerkMode = 1` 时被查询。
 
@@ -93,7 +93,7 @@ $$
 - **ModRev 环绕：** 三阶规划器通过其内部状态跟踪环绕；加加速度约束不受影响。
 - **活动故障：** 轴被禁用；重新使能并下一次 `Begin` 时，会重新读取 `JerkInDec`。
 - **其他运动模式：** 仅当 [JerkMode](../02-motion-configuration/JerkMode.md) = 1 时，在 PTP / 重复 PTP 下由结构化加加速度规划器消耗。点动、间接模式和直接模式都会忽略它。
-- **运动中实时更改：** 允许，但在下一个规划器段开始时生效，而非段中途生效。
+- **运动中实时更改：** 与 [JerkInAcc](JerkInAcc.md) 相同：在轴仍处于加速或巡航阶段时，更改 `JerkInDec`（或 `JerkInAcc`、`Speed`、`Accel`、`Decel`）会在同一周期从当前状态重新规划运动；一旦轴进入减速阶段，该更改会被忽略，直到该次运动结束或下达新的目标位置为止。
 
 ## 示例
 

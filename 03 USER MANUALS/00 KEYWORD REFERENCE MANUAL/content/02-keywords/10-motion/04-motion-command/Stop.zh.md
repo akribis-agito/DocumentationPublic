@@ -78,6 +78,7 @@ AStop                ; controlled stop using the normal Decel rate
 - **存在激活故障：** 该轴被禁用——`Stop` 是空操作（电机失能路径覆盖斜坡）。
 - **在重复 PTP（`MotionMode = 2`）的停留期间：** 停止请求被执行并结束重复；停留的等待计数器被放弃。
 - **PTPKeepMoving = 1：** `Stop` 仍会结束运动；keep-moving 标志被停止请求位覆盖。
+- **加加速度受限运动（`JerkMode` = 1，或向量组的 `VecJerkMode` = 1）：** 在减速开始后发出的 `Stop` 不会缩短运动：运动会在其目标位置结束。
 - **CNCA / CNCB / vector / spline-buffer 成员：** 整个组被请求停止；每轴原因如上所列。
 
 ## 另请参阅

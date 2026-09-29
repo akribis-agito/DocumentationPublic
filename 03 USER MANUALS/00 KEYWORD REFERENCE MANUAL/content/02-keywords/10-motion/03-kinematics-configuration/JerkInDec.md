@@ -42,7 +42,7 @@ Jerk applied during the deceleration phase of a third-order (infinite-snap) prof
 
 ## Overview
 
-`JerkInDec` is the jerk constraint applied during the **deceleration** phase of the third-order trajectory profiler, used when [JerkMode](../02-motion-configuration/JerkMode.md) = 1. It is the deceleration-side counterpart of [JerkInAcc](JerkInAcc.md): it bounds how fast the deceleration may rise to and fall from the peak [Decel](Decel.md), rounding the corners of the braking ramp so the axis comes to rest smoothly. It is read/write, axis-scoped, saved to flash, and can be changed at any time, including during motion.
+`JerkInDec` is the jerk constraint applied during the **deceleration** phase of the third-order trajectory profiler, used when [JerkMode](../02-motion-configuration/JerkMode.md) = 1. It is the deceleration-side counterpart of [JerkInAcc](JerkInAcc.md): it bounds how fast the deceleration may rise to and fall from the peak [Decel](Decel.md), rounding the corners of the braking ramp so the axis comes to rest smoothly. It is read/write, axis-scoped, saved to flash, and can be changed at any time, including during motion. With [JerkMode](../02-motion-configuration/JerkMode.md) = 1, a change made once deceleration has begun is ignored until the move ends or a new target position is commanded.
 
 Like `JerkInAcc`, this is a genuine jerk limit (not the moving-average exponent that the second-order [Jerk](Jerk.md) controls), and it is only consulted when `JerkMode = 1`.
 
@@ -92,7 +92,7 @@ $$
 - **ModRev wrap:** the third-order profiler tracks the wrap through its internal state; the jerk constraint is unaffected.
 - **Active fault:** the axis is disabled; on re-enable and next `Begin`, `JerkInDec` is re-read.
 - **Other motion modes:** consumed only by the structured jerk profiler under PTP / repetitive PTP with [JerkMode](../02-motion-configuration/JerkMode.md) = 1. Jog, indirect modes, and direct modes ignore it.
-- **Live change in motion:** allowed, but takes effect at the start of the next profiler segment, not mid-segment.
+- **Live change in motion:** as for [JerkInAcc](JerkInAcc.md): while the axis is still accelerating or cruising, a changed `JerkInDec` (or `JerkInAcc`, `Speed`, `Accel`, `Decel`) re-plans the move from the current state that same cycle; once the axis has entered the deceleration phase, the change is ignored until the move ends or a new target position is commanded.
 
 ## Examples
 

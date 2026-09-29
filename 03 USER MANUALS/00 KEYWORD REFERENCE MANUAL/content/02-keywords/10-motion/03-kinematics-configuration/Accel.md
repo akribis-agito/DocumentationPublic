@@ -41,7 +41,7 @@ Acceleration rate for point-to-point motion, in user units per second squared.
 
 `Accel` is the acceleration limit the trajectory profiler stays within when ramping the axis up toward the commanded [Speed](Speed.md). It is one of the four core kinematic limits — `Speed`, `Accel`, [Decel](Decel.md) and the jerk setting — that the profiler shapes a move from. The deceleration side is set separately by `Decel`; the value is scaled by [AccelFact](AccelFact.md); and the abruptness of the start/end of the ramp is governed by [Jerk](Jerk.md) (second-order) or [JerkInAcc](JerkInAcc.md)/[JerkInDec](JerkInDec.md) (third-order), selected by [JerkMode](../02-motion-configuration/JerkMode.md).
 
-`Accel` is read/write, axis-scoped and saved to flash. It can be changed at any time, including during motion — the profiler re-reads it every control cycle, so a new value takes effect on the next cycle.
+`Accel` is read/write, axis-scoped and saved to flash. It can be changed at any time, including during motion — the profiler re-reads it every control cycle, so a new value takes effect on the next cycle. With [JerkMode](../02-motion-configuration/JerkMode.md) = 1, a change made once deceleration has begun is ignored until the move ends or a new target position is commanded.
 
 ## How it works
 
