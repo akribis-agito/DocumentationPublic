@@ -42,7 +42,7 @@ Per-axis array reporting the live Central-i port state, error counters, and last
 |-------|-------|---------|
 | [1] | State machine | Connection state — see the state table below |
 | [2] | Mailbox-1 error count | Error counter for the priority (firmware-driven) offline channel. This channel is not currently exercised, so the count is only ever cleared and always reads `0` |
-| [3] | Offline error count | Error counter for the offline (non-cyclic) channel: connection-sequence faults (codes 5–14), a failed offline message send (code 5), and failed background reads from the remote (code 10) |
+| [3] | Offline error count | Error counter for the offline (non-cyclic) channel: connection-sequence faults (codes 5–16), a failed offline message send (code 5), and failed background reads from the remote (code 10) |
 | [4] | Sync error count | Number of synchronous-message (per-cycle) errors (codes 1–4) |
 | [5] | Last error time | Time of the last error (seconds since power-on, cf. [Time](../03-timing/Time.md)) |
 | [6] | Last error code | Code of the last error — see the error-code table below |
@@ -77,6 +77,8 @@ Per-axis array reporting the live Central-i port state, error counters, and last
 | 12 | Device read from E² differs from FPGA (contact Agito) |
 | 13 | Amplifier requires `AmpType` = built-in PWM |
 | 14 | Adapter requires `AmpType` = linear-remote |
+| 15 | No valid reply to a remote timing write during the connection sequence (unanswered, or, on the current master FPGA, a reply with a bad CRC) |
+| 16 | A remote timing write's reply was reported in error during the connection sequence |
 
 ### What sets the fault state
 
@@ -84,7 +86,7 @@ A connected port leaves state `3` and enters state `2` (fault) when the per-cycl
 
 The other synchronous errors — first-part CRC (`CIStatus[6] = 1`), second-part CRC (`CIStatus[6] = 2`), and message-not-sent (`CIStatus[6] = 3`) — are only counted in `CIStatus[4]` and recorded in `CIStatus[5]`/`[6]`; they do not by themselves fault the axis, and the link keeps running. Synchronous errors in the first few control cycles immediately after a connection are ignored (the firmware suppresses them for the first 4 cycles).
 
-State `2` is also reached when a [CIConnect](CIConnect.md) attempt fails during the connection sequence. Any of the setup error codes (`CIStatus[6]` = 5, 6, 7, 8, 9, 11, 12, 13, 14) leaves the port in state `2`, increments the offline error count `CIStatus[3]`, and records the time and code in `CIStatus[5]`/`[6]`, while clearing the port's connected bit in [CIGlobalStat](CIGlobalStat.md). Because the link was never up, this case does **not** raise controller fault [ConFlt](../../07-status-and-faults/ConFlt.md) = 1043 and does not turn a motor off — that response is specific to losing an already-connected link (sync timeout, `CIStatus[6] = 4`).
+State `2` is also reached when a [CIConnect](CIConnect.md) attempt fails during the connection sequence. Any of the setup error codes (`CIStatus[6]` = 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16) leaves the port in state `2`, increments the offline error count `CIStatus[3]`, and records the time and code in `CIStatus[5]`/`[6]`, while clearing the port's connected bit in [CIGlobalStat](CIGlobalStat.md). Because the link was never up, this case does **not** raise controller fault [ConFlt](../../07-status-and-faults/ConFlt.md) = 1043 and does not turn a motor off — that response is specific to losing an already-connected link (sync timeout, `CIStatus[6] = 4`).
 
 ## Examples
 
