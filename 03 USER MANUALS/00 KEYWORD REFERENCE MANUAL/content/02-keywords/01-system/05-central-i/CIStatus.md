@@ -77,8 +77,8 @@ Per-axis array reporting the live Central-i port state, error counters, and last
 | 12 | Device read from E² differs from FPGA (contact Agito) |
 | 13 | Amplifier requires `AmpType` = built-in PWM |
 | 14 | Adapter requires `AmpType` = linear-remote |
-| 15 | Remote timing write timeout: the remote did not answer a timing write at power-up |
-| 16 | Remote timing write error: a timing write's reply at power-up was in error |
+| 15 | No valid reply to a remote timing write during the connection sequence (unanswered, or, on the current master FPGA, a reply with a bad CRC) |
+| 16 | A remote timing write's reply was reported in error during the connection sequence |
 
 ### What sets the fault state
 
