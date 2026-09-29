@@ -40,7 +40,7 @@ language: zh-CN
 
 ## 概述
 
-`VecDecel` 设置协调多轴矢量运动（[MotionMode](../02-motion-configuration/MotionMode.md) = 16）的减速度，单位为用户单位每秒平方。它定义合成（矢量）速度在受控停止结束时从 [VecSpeed](VecSpeed.md) 斜坡减速至静止的快慢，作用于整条路径。该参数为轴相关参数，保存至闪存，可在任何时候（包括运动中）修改。
+`VecDecel` 设置协调多轴矢量运动（[MotionMode](../02-motion-configuration/MotionMode.md) = 16）的减速度，单位为用户单位每秒平方。它定义合成（矢量）速度在受控停止结束时从 [VecSpeed](VecSpeed.md) 斜坡减速至静止的快慢，作用于整条路径。该参数为轴相关参数，保存至闪存，可在任何时候（包括运动中）修改。当 [VecJerkMode](VecJerkMode.md) = 1（v5）时，开始向目标位置的最终减速后所做的更改会被忽略，直到该次运动结束或下达新的目标位置为止；已暂停的运动仍会以恢复后的值继续运行。
 
 `VecDecel` 为受控（正常）减速；[VecEmrgDec](VecEmrgDec.md) 为停止或故障时使用的更快紧急减速率。
 

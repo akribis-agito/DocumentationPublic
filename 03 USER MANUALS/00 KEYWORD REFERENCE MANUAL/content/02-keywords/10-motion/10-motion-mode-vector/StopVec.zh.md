@@ -35,7 +35,7 @@ language: zh-CN
 
 ## 概述
 
-`StopVec` 是一条停止协调矢量运动（[MotionMode](../02-motion-configuration/MotionMode.md) = 16）的指令。所有参与轴（由 [VecMemberAxes](VecMemberAxes.md) 选择）使用配置的 [VecDecel](VecDecel.md) 减速度协同减速至静止，在停止过程中保持矢量路径协调。它是一个轴相关的指令函数，可在任意时刻发出，包括运动期间。`StopVec` 是在矢量运动到达编程终点之前结束该运动的方式。
+`StopVec` 是一条停止协调矢量运动（[MotionMode](../02-motion-configuration/MotionMode.md) = 16）的指令。所有参与轴（由 [VecMemberAxes](VecMemberAxes.md) 选择）使用配置的 [VecDecel](VecDecel.md) 减速度协同减速至静止，在停止过程中保持矢量路径协调。它是一个轴相关的指令函数，可在任意时刻发出，包括运动期间。当 [VecJerkMode](VecJerkMode.md) = 1（v5）时，在开始向目标位置的最终减速后发出的 `StopVec` 不会缩短运动：运动会继续运行至其目标位置（分组可能在距目标最多一个计数处停止）。`StopVec` 是在矢量运动到达编程终点之前结束该运动的方式。
 
 ## 工作原理
 

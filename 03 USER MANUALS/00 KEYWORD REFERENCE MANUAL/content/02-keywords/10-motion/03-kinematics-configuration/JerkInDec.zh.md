@@ -93,7 +93,7 @@ $$
 - **ModRev 环绕：** 三阶规划器通过其内部状态跟踪环绕；加加速度约束不受影响。
 - **活动故障：** 轴被禁用；重新使能并下一次 `Begin` 时，会重新读取 `JerkInDec`。
 - **其他运动模式：** 仅当 [JerkMode](../02-motion-configuration/JerkMode.md) = 1 时，在 PTP / 重复 PTP 下由结构化加加速度规划器消耗。点动、间接模式和直接模式都会忽略它。
-- **运动中实时更改：** 与 [JerkInAcc](JerkInAcc.md) 相同：在轴仍处于加速或巡航阶段时，更改 `JerkInDec`（或 `JerkInAcc`、`Speed`、`Accel`、`Decel`）会在同一周期从当前状态重新规划运动；一旦轴开始向目标位置的最终减速，该更改会被忽略，直到该次运动结束或下达新的目标位置为止。
+- **运动中实时更改：** 与 [JerkInAcc](JerkInAcc.md) 相同：在轴仍处于加速、巡航或减速至较低 Speed 阶段时，更改 `JerkInDec`（或 `JerkInAcc`、`Speed`、`Accel`、`Decel`）会在同一周期从当前状态重新规划运动；一旦轴开始向目标位置的最终减速，该更改会被忽略，直到该次运动结束或下达新的目标位置为止。
 
 ## 示例
 

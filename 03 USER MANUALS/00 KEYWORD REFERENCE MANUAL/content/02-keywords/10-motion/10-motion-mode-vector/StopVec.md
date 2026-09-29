@@ -34,7 +34,7 @@ Command that stops coordinated vector motion, decelerating all member axes along
 
 ## Overview
 
-`StopVec` is a command that stops coordinated vector motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 16). All participating axes (selected by [VecMemberAxes](VecMemberAxes.md)) decelerate together using the configured [VecDecel](VecDecel.md) deceleration and come to rest, keeping the vector path coordinated as it stops. It is an axis-related command function that can be issued at any time, including during motion. `StopVec` is the way to end a vector move before it reaches its programmed endpoint.
+`StopVec` is a command that stops coordinated vector motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 16). All participating axes (selected by [VecMemberAxes](VecMemberAxes.md)) decelerate together using the configured [VecDecel](VecDecel.md) deceleration and come to rest, keeping the vector path coordinated as it stops. It is an axis-related command function that can be issued at any time, including during motion. With [VecJerkMode](VecJerkMode.md) = 1 (v5), a `StopVec` issued once the final deceleration to the target has begun does not shorten the move: it runs on to its target (the group can stop up to one count short of it). `StopVec` is the way to end a vector move before it reaches its programmed endpoint.
 
 ## How it works
 

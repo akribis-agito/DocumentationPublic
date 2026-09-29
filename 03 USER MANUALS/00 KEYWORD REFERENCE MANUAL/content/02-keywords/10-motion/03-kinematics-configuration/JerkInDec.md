@@ -92,7 +92,7 @@ $$
 - **ModRev wrap:** the third-order profiler tracks the wrap through its internal state; the jerk constraint is unaffected.
 - **Active fault:** the axis is disabled; on re-enable and next `Begin`, `JerkInDec` is re-read.
 - **Other motion modes:** consumed only by the structured jerk profiler under PTP / repetitive PTP with [JerkMode](../02-motion-configuration/JerkMode.md) = 1. Jog, indirect modes, and direct modes ignore it.
-- **Live change in motion:** as for [JerkInAcc](JerkInAcc.md): while the axis is still accelerating or cruising, a changed `JerkInDec` (or `JerkInAcc`, `Speed`, `Accel`, `Decel`) re-plans the move from the current state that same cycle; once the axis has begun its final deceleration to the target, the change is ignored until the move ends or a new target position is commanded.
+- **Live change in motion:** as for [JerkInAcc](JerkInAcc.md): while the axis is still accelerating, cruising or slowing to a lower Speed, a changed `JerkInDec` (or `JerkInAcc`, `Speed`, `Accel`, `Decel`) re-plans the move from the current state that same cycle; once the axis has begun its final deceleration to the target, the change is ignored until the move ends or a new target position is commanded.
 
 ## Examples
 

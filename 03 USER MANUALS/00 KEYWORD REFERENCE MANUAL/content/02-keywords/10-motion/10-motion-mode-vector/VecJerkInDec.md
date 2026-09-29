@@ -36,7 +36,7 @@ Jerk limit (user units) for the deceleration phase of a jerk-limited vector move
 
 `VecJerkInDec` sets the jerk limit used while the resultant velocity is **falling** during a jerk-limited vector move ([MotionMode](../02-motion-configuration/MotionMode.md) = 16). Jerk is the rate of change of acceleration, so this value bounds how quickly the path deceleration is allowed to build up and bleed off as the move ramps down to rest. A lower value rounds the trailing corners of the velocity profile more gently (less shock, slightly longer stop); a higher value approaches a sharp trapezoidal corner.
 
-It is an axis-related parameter saved to flash, given in user units, and can be changed at any time, including during motion. It applies to the path as a whole rather than to any single axis.
+It is an axis-related parameter saved to flash, given in user units, and can be changed at any time, including during motion. With [VecJerkMode](VecJerkMode.md) = 1 (v5), a change made once the final deceleration to the target has begun is ignored until the move ends or a new target position is commanded; a paused move still resumes with the restored value. It applies to the path as a whole rather than to any single axis.
 
 `VecJerkInDec` is only active when [VecJerkMode](VecJerkMode.md) = 1; with the mode off the vector move uses a trapezoidal profile and this value is ignored. The companion [VecJerkInAcc](VecJerkInAcc.md) sets the jerk limit for the acceleration phase.
 
