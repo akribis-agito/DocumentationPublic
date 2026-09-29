@@ -35,7 +35,7 @@ language: zh-CN
 
 ## 概述
 
-`ForceInTTol` 是目标值（[ForceCmdVal](ForceCmdVal.md)）周围的稳定窗口（单位：用户单位），用于判定力控制的到位状态。仅当 [ForceCmdSrc](ForceCmdSrc.md) = 1 或 2 时适用。它与驻留时间 [ForceInTTime](ForceInTTime.md) 共同决定 [ForceInTStat](ForceInTStat.md) 何时报告到位。
+`ForceInTTol` 是目标值（[ForceCmdVal](ForceCmdVal.md)）周围的稳定窗口（单位：用户单位），用于判定力控制的到位状态。在力模式下当 [ForceCmdSrc](ForceCmdSrc.md) = 1 或 2 时适用；在电流模式（[OperationMode](../01-general-keywords/OperationMode.md) = 1）下当 [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md) = 1 或 2 时也适用，此时它以 mA 与 `CurrRef − MotorCurr` 比较；与其他以用户单位表示的关键字一样，读写的值按 [UsrUnits](../../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) 缩放。它与驻留时间 [ForceInTTime](ForceInTTime.md) 共同决定 [ForceInTStat](ForceInTStat.md) 何时报告到位。
 
 ## 工作原理
 
@@ -49,7 +49,7 @@ AForceInTTol=10      ; settled when force error stays within ±10 units
 
 ### 边界情况
 
-- **错误模式 / 错误源**——仅当 [OperationMode](../01-general-keywords/OperationMode.md) = 4 且 [ForceCmdSrc](ForceCmdSrc.md) ∈ {1, 2} 时使用；其他情况下忽略。
+- **错误模式 / 错误源**——仅当 [OperationMode](../01-general-keywords/OperationMode.md) = 4 且 [ForceCmdSrc](ForceCmdSrc.md) ∈ {1, 2}，或 OperationMode = 1 且 [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md) ∈ {1, 2} 时使用；其他情况下忽略。两种模式共用同一个值，因此在力模式与电流模式之间切换时，需要按所用模式设置 ForceInTTol。
 - **零值**——实际上要求误差为零；几乎从不锁存到位。
 - **超出范围**——负值将被拒绝；最大值为 `2 147 483 647`。
 - **已达到状态 4**——增大 `ForceInTTol` 不会重新置位到位；状态机仅在达到状态 4 之前评估该窗口。

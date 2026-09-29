@@ -64,7 +64,7 @@ AForceCmdSrc=1       ; use the user-defined ForceCmdVal table
 - **超出范围**——`0`–`2` 之外的取值会被参数表拒绝。
 - **来源 0 但无模拟量映射**——若未通过 [AInMode](../../05-inputs-outputs/02-analog-inputs/AInMode.md) 将任何模拟量输入映射到功能 4（力指令），则 `ForceRef` 读取为 `0`。
 - **无主轴来源等价项**——与 [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md) 不同，力模式**没有**主轴来源（不存在 `ForceCmdSrc = 3`）。
-- **到位检测**——仅当 `ForceCmdSrc = 1` 或 `2` 时才更新 [ForceInTStat](ForceInTStat.md)；当 `ForceCmdSrc = 0` 时没有定义的稳定到位目标，因此 `ForceInTStat` 保持在电机使能状态。
+- **到位检测**——在力模式下，仅当 `ForceCmdSrc = 1` 或 `2` 时才更新 [ForceInTStat](ForceInTStat.md)；当 `ForceCmdSrc = 0` 时没有定义的稳定到位目标，因此 `ForceInTStat` 保持在电机使能状态。在电流模式下 `ForceCmdSrc` 不起作用：当 [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md) = 1 或 2 时更新 `ForceInTStat`。
 - **保存**——可保存至闪存；在引导时重新加载。
 - **电机失能**——任何时候均可接受；该来源标志不需要电机。
 

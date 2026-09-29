@@ -34,7 +34,7 @@ Minimum dwell time within the settling window before force control is settled.
 
 ## Overview
 
-`ForceInTTime` defines the minimum time, in milliseconds, that the force error ([ForceErr](ForceErr.md)) must continuously stay within the settling window ([ForceInTTol](ForceInTTol.md)) before the axis is considered settled in [ForceInTStat](ForceInTStat.md). It is applicable only when [ForceCmdSrc](ForceCmdSrc.md) = 1 or 2.
+`ForceInTTime` defines the minimum time, in milliseconds, that the force error ([ForceErr](ForceErr.md)) must continuously stay within the settling window ([ForceInTTol](ForceInTTol.md)) before the axis is considered settled in [ForceInTStat](ForceInTStat.md). It is applicable in Force Operation Mode when [ForceCmdSrc](ForceCmdSrc.md) = 1 or 2, and in Current Operation Mode ([OperationMode](../01-general-keywords/OperationMode.md) = 1) when [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md) = 1 or 2, where the error is `CurrRef − MotorCurr`.
 
 ## How it works
 
@@ -50,7 +50,7 @@ AForceInTTime=50     ; require 50 ms within the settling window
 
 ### Edge cases
 
-- **Wrong mode / source** — only used when [OperationMode](../01-general-keywords/OperationMode.md) = 4 and [ForceCmdSrc](ForceCmdSrc.md) ∈ {1, 2}; ignored otherwise.
+- **Wrong mode / source** — only used when [OperationMode](../01-general-keywords/OperationMode.md) = 4 and [ForceCmdSrc](ForceCmdSrc.md) ∈ {1, 2}, or OperationMode = 1 and [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md) ∈ {1, 2}; ignored otherwise.
 - **Zero value** — settling latches as soon as the error enters [ForceInTTol](ForceInTTol.md) for one cycle (dwell of zero).
 - **Tolerance excursion** — leaving the window during the dwell re-zeros the dwell counter; the dwell must accumulate consecutively.
 - **Out of range** — values outside `0`–`163840` are rejected.

@@ -35,7 +35,9 @@ language: zh-CN
 
 ## 概述
 
-`ForceInTStat` 在使用用户自定义力参考数组时报告力控制的到位（力稳定到位）状态。它是位置/速度 [InTargetStat](../../10-motion/05-motion-status/InTargetStat.md) 在力模式下的对应项，并使用相同的状态值。仅当 [ForceCmdSrc](ForceCmdSrc.md) = 1 或 2 时适用，它跟踪从电机使能、斜坡变化直至在 [ForceInTTol](ForceInTTol.md) 范围内稳定到位至少 [ForceInTTime](ForceInTTime.md) 的进程。
+`ForceInTStat` 在使用用户自定义力参考数组时报告力控制的到位（力稳定到位）状态。它是位置/速度 [InTargetStat](../../10-motion/05-motion-status/InTargetStat.md) 在力模式下的对应项，并使用相同的状态值。在力模式（[OperationMode](../01-general-keywords/OperationMode.md) = 4）下当 [ForceCmdSrc](ForceCmdSrc.md) = 1 或 2 时适用，在电流模式（[OperationMode](../01-general-keywords/OperationMode.md) = 1）下当 [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md) = 1 或 2 时也适用。它跟踪从电机使能、斜坡变化直至在 [ForceInTTol](ForceInTTol.md) 范围内稳定到位至少 [ForceInTTime](ForceInTTime.md) 的进程。EtherCAT Profile Torque（0x2C00 CSTForceLoopEnable = 0 且 [FIFOPosType](../../10-motion/11-motion-mode-fifo/FIFOPosType.md) = 0（线性） 时）以 CurrCmdSrc = 1 运行于电流模式：ForceInTStat = 4 时置位状态字 bit 10（到达目标），否则清除该位。
+
+在电流模式下，同一状态机作用于电流指令：目标为 [CurrCmdVal](../03-current-operation-mode/CurrCmdVal.md)，斜坡为 [CurrCmdSlope](../03-current-operation-mode/CurrCmdSlope.md)，ForceInTTol 以 mA 与 `CurrRef − MotorCurr`（MotorCurr 取上一个控制周期的值）比较；与其他以用户单位表示的关键字一样，读写的值按 [UsrUnits](../../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) 缩放。无限保持（[CurrCmdHTime](../03-current-operation-mode/CurrCmdHTime.md) < 0）与定时保持（CurrCmdHTime > 0）均运行该状态机。在电流模式下达到状态 4 时同样会写入 [ForceSamples](ForceSamples.md)，但其值在该模式下没有意义：无限保持期间 [CurrCmdCntr](../03-current-operation-mode/CurrCmdCntr.md) 不计数，且样本计数器会沿用先前指令的计数。
 
 ## 工作原理
 
@@ -50,14 +52,14 @@ language: zh-CN
 状态机在力指令生成器内部推进：
 
 - **2 → 3：** 原始参考等于目标 [ForceCmdVal](ForceCmdVal.md) 的那一刻，控制器离开斜坡变化状态，切换到状态 3，并清零驻留计数器。
-- **3 内部：** 每个周期，若 `|ForceErr| <= ForceInTTol` 则驻留计数器递增；若 `ForceErr` 离开窗口则计数器重新清零。这意味着状态 3 同时涵盖“正在稳定”和“已稳定但等待驻留”。
+- **3 内部：** 每个周期，若 `|ForceErr| <= ForceInTTol`（电流模式下为 `|CurrRef − MotorCurr| <= ForceInTTol`）则驻留计数器递增；若误差离开窗口则计数器重新清零。这意味着状态 3 同时涵盖“正在稳定”和“已稳定但等待驻留”。
 - **3 → 4：** 一旦驻留计数器达到 [ForceInTTime](ForceInTTime.md)，状态锁存为 4，并记录 [ForceSamples](ForceSamples.md) 时间。
 
 一旦达到状态 4，该项的稳定到位条件**不再被检查**，因此它实际上被锁存，直到力指令改变（原始参考斜坡变化至新的 [ForceCmdVal](ForceCmdVal.md)，返回状态 2）或电机被禁用（状态 0）。这与位置控制中 [InTargetStat](../../10-motion/05-motion-status/InTargetStat.md) = 4 的粘滞行为一致。
 
 ![ForceInTStat state machine](forceintstat-state-machine.svg)
 
-> **注意：** `ForceInTStat` 仅反映表来源。使用模拟量来源（[ForceCmdSrc](ForceCmdSrc.md) = 0）时没有定义的稳定目标，因此不运行到位检测。
+> **注意：** `ForceInTStat` 仅反映表来源。使用模拟量来源（[ForceCmdSrc](ForceCmdSrc.md) = 0，或电流模式下 [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md) = 0）时没有定义的稳定目标，因此不运行到位检测。CurrCmdSrc = 3（跟随主轴）和 4（EtherCAT 主站，由 EtherCAT Cyclic Synchronous Torque 设置）时同样如此。
 
 ## 示例
 
@@ -68,7 +70,7 @@ AForceInTStat       ; 4 = settled in target, 2 = still ramping
 ### 边界情况
 
 - **电机失能**——锁存为 `0`。电机使能后重新置位为 `1`。
-- **模式错误**（[OperationMode](../01-general-keywords/OperationMode.md) ≠ 4）——力指令引擎不运行；`ForceInTStat` 不更新，并保持其最后值，直到下一次进入力模式。
+- **模式错误**（[OperationMode](../01-general-keywords/OperationMode.md) 既非 1 也非 4）——两个指令引擎都不运行；`ForceInTStat` 不更新，并保持其最后值，直到下一次进入力模式或电流模式。
 - **`ForceCmdSrc` = 0（模拟量来源）**——没有定义的稳定目标，因此状态机不运行；`ForceInTStat` 保持在电机使能状态（`1`）。
 - **状态 4 具有粘滞性**——一旦达到 `4`，离开容差窗口**不会**使状态下降。只有新的斜坡变化（状态 `2`）或电机失能（状态 `0`）才会清除它。
 - **运行时更改容差**——增大 [ForceInTTol](ForceInTTol.md) 不会因力此前恰好处于新窗口内而追溯进入状态 `3`；状态机只向前看。
@@ -79,5 +81,5 @@ AForceInTStat       ; 4 = settled in target, 2 = still ramping
 
 - [ForceInTTol](ForceInTTol.md) —— 稳定到位窗口
 - [ForceInTTime](ForceInTTime.md) —— 窗口内所需的驻留时间
-- [ForceSamples](ForceSamples.md) —— 测得的移动/稳定时间（状态达到 4 时记录）
+- [ForceSamples](ForceSamples.md) —— 测得的移动/稳定时间（状态达到 4 时记录；在电流模式下没有意义）
 - [InTargetStat](../../10-motion/05-motion-status/InTargetStat.md) —— 位置/速度/电流到位状态（相同的状态值）
