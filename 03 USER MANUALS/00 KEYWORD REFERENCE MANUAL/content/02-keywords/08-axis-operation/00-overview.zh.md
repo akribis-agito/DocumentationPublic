@@ -64,9 +64,9 @@
 | 36  | 力运行模式    | [ForceCmdSrc](04-force-operation-mode/ForceCmdSrc.md)   | 选择力参考源。 |
 | 37  | 力运行模式    | [ForceCmdVal](04-force-operation-mode/ForceCmdVal.md)   | 用户定义的力命令值或表。 |
 | 38  | 力运行模式    | [ForceErr](04-force-operation-mode/ForceErr.md)         | 报告力误差（参考减去测量值）。 |
-| 39  | 力运行模式    | [ForceInTStat](04-force-operation-mode/ForceInTStat.md) | 报告力到位状态。 |
-| 40  | 力运行模式    | [ForceInTTime](04-force-operation-mode/ForceInTTime.md) | 声明力到位所需的驻留时间。 |
-| 41  | 力运行模式    | [ForceInTTol](04-force-operation-mode/ForceInTTol.md)   | 到位测试的力容差带。 |
+| 39  | 力运行模式    | [ForceInTStat](04-force-operation-mode/ForceInTStat.md) | 报告力指令的到位状态；在电流模式下报告电流指令的到位状态。 |
+| 40  | 力运行模式    | [ForceInTTime](04-force-operation-mode/ForceInTTime.md) | 声明力（或电流）到位所需的驻留时间。 |
+| 41  | 力运行模式    | [ForceInTTol](04-force-operation-mode/ForceInTTol.md)   | 到位测试的力（或电流）容差带。 |
 | 42  | 力运行模式    | [ForcePosErrTh](04-force-operation-mode/ForcePosErrTh.md) | 用于力模式条件切换的位置误差阈值。 |
 | 43  | 力运行模式    | [ForceRef](04-force-operation-mode/ForceRef.md)         | 报告活动的力参考。 |
 | 44  | 力运行模式    | [ForceSamples](04-force-operation-mode/ForceSamples.md) | 上次完成的 ForceCmdVal 应用的时序，以控制器周期为单位。 |

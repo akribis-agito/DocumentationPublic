@@ -64,9 +64,9 @@ The following table shows the summary of axis operation keywords.
 | 36  | Force operation mode    | [ForceCmdSrc](04-force-operation-mode/ForceCmdSrc.md)   | Selects the force-reference source. |
 | 37  | Force operation mode    | [ForceCmdVal](04-force-operation-mode/ForceCmdVal.md)   | User-defined force-command value or table. |
 | 38  | Force operation mode    | [ForceErr](04-force-operation-mode/ForceErr.md)         | Reports the force error (reference minus measured). |
-| 39  | Force operation mode    | [ForceInTStat](04-force-operation-mode/ForceInTStat.md) | Reports the force in-target status. |
-| 40  | Force operation mode    | [ForceInTTime](04-force-operation-mode/ForceInTTime.md) | Dwell time required to declare force in-target. |
-| 41  | Force operation mode    | [ForceInTTol](04-force-operation-mode/ForceInTTol.md)   | Force tolerance band for the in-target test. |
+| 39  | Force operation mode    | [ForceInTStat](04-force-operation-mode/ForceInTStat.md) | Reports the in-target status of the force command, or of the current command in current mode. |
+| 40  | Force operation mode    | [ForceInTTime](04-force-operation-mode/ForceInTTime.md) | Dwell time required to declare force (or current) in-target. |
+| 41  | Force operation mode    | [ForceInTTol](04-force-operation-mode/ForceInTTol.md)   | Force (or current) tolerance band for the in-target test. |
 | 42  | Force operation mode    | [ForcePosErrTh](04-force-operation-mode/ForcePosErrTh.md) | Position-error threshold for force-mode condition switching. |
 | 43  | Force operation mode    | [ForceRef](04-force-operation-mode/ForceRef.md)         | Reports the active force reference. |
 | 44  | Force operation mode    | [ForceSamples](04-force-operation-mode/ForceSamples.md) | Timings of the last completed ForceCmdVal application, in controller cycles. |

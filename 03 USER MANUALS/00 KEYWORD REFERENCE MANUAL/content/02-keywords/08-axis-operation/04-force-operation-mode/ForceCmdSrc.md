@@ -63,7 +63,7 @@ AForceCmdSrc=1       ; use the user-defined ForceCmdVal table
 - **Out of range** — values outside `0`–`2` are rejected by the parameter table.
 - **Source 0 with no analog mapping** — if no analog input is mapped to function 4 (force command) via [AInMode](../../05-inputs-outputs/02-analog-inputs/AInMode.md), `ForceRef` reads as `0`.
 - **No master-source equivalent** — unlike [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md), force mode does **not** have a master-axis source (no `ForceCmdSrc = 3`).
-- **In-target detection** — [ForceInTStat](ForceInTStat.md) is only updated when `ForceCmdSrc = 1` or `2`; with `ForceCmdSrc = 0` there is no defined settling target so `ForceInTStat` stays at the motor-on state.
+- **In-target detection** — in Force Operation Mode, [ForceInTStat](ForceInTStat.md) is only updated when `ForceCmdSrc = 1` or `2`; with `ForceCmdSrc = 0` there is no defined settling target so `ForceInTStat` stays at the motor-on state. In Current Operation Mode `ForceCmdSrc` plays no part: `ForceInTStat` is updated when [CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md) = 1 or 2.
 - **Save** — flash-saveable; reloaded at boot.
 - **Motor off** — accepted at any time; the source flag does not require the motor.
 

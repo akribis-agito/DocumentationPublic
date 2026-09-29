@@ -35,7 +35,7 @@ language: zh-CN
 
 ## 概述
 
-`ForceSamples` 报告上一次完成的 [ForceCmdVal](ForceCmdVal.md) 应用的各项时序，是 [MotionSamples](../../10-motion/05-motion-status/MotionSamples.md) 在力模式下的对应项。它仅在 [ForceCmdSrc](ForceCmdSrc.md) = 1 或 2 时适用。单位为控制器周期数，其中一个周期即采样周期 $T_{s} = \frac{1}{16384\ \text{Hz}} \approx 61.035\ \mu s$。这四项时序在 [ForceInTStat](ForceInTStat.md) 达到 4（已稳定）的时刻一起记录，使用内部周期计数器和驻留时间 [ForceInTTime](ForceInTTime.md)。
+`ForceSamples` 报告上一次完成的 [ForceCmdVal](ForceCmdVal.md) 应用的各项时序，是 [MotionSamples](../../10-motion/05-motion-status/MotionSamples.md) 在力模式下的对应项。它在力模式下当 [ForceCmdSrc](ForceCmdSrc.md) = 1 或 2 时适用。在电流模式（[OperationMode](../01-general-keywords/OperationMode.md) = 1，[CurrCmdSrc](../03-current-operation-mode/CurrCmdSrc.md) = 1 或 2）下，[ForceInTStat](ForceInTStat.md) 达到 4 时同样会写入该值，但其值在该模式下没有意义：无限保持期间 [CurrCmdCntr](../03-current-operation-mode/CurrCmdCntr.md) 不计数，且样本计数器会沿用先前指令的计数。单位为控制器周期数，其中一个周期即采样周期 $T_{s} = \frac{1}{16384\ \text{Hz}} \approx 61.035\ \mu s$。这四项时序在 [ForceInTStat](ForceInTStat.md) 达到 4（已稳定）的时刻一起记录，使用内部周期计数器和驻留时间 [ForceInTTime](ForceInTTime.md)。
 
 当电机失能时，每个元素都被初始化为 `-1`，因此 `-1` 表示“尚无已完成的应用”。该数组使用索引 1 至 4（1-indexed）。
 
