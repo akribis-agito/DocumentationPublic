@@ -39,7 +39,7 @@ Vector deceleration rate (user units/s^2) ramping the resultant velocity down to
 
 ## Overview
 
-`VecDecel` sets the deceleration rate for coordinated multi-axis vector motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 16), in user units per second squared. It defines how quickly the resultant (vector) velocity ramps down from [VecSpeed](VecSpeed.md) to rest at the end of a controlled stop, applying to the path as a whole. It is an axis-related parameter saved to flash and can be changed at any time, including during motion. With [VecJerkMode](VecJerkMode.md) = 1 (v5), a change made once the final deceleration to the target has begun is ignored until the move ends or a new target position is commanded; a paused move still resumes with the restored value.
+`VecDecel` sets the deceleration rate for coordinated multi-axis vector motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 16), in user units per second squared. It defines how quickly the resultant (vector) velocity ramps down from [VecSpeed](VecSpeed.md) to rest at the end of a controlled stop, applying to the path as a whole. It is an axis-related parameter saved to flash and can be changed at any time, including during motion. With [VecJerkMode](VecJerkMode.md) = 1 (v5), a change made once the final deceleration to the target has begun is ignored until the move ends or a new target position is commanded; a paused move still resumes when VecPause returns to 0, using the current values.
 
 `VecDecel` is the controlled (normal) deceleration; [VecEmrgDec](VecEmrgDec.md) is the faster emergency rate used on a stop or fault.
 

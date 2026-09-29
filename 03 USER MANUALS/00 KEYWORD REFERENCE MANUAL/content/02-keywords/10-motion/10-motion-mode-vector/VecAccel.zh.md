@@ -40,7 +40,7 @@ language: zh-CN
 
 ## 概述
 
-`VecAccel` 设置协调多轴矢量运动（[MotionMode](../02-motion-configuration/MotionMode.md) = 16）的加速度，单位为用户单位每秒平方。它定义合成（矢量）速度向 [VecSpeed](VecSpeed.md) 斜坡加速的快慢，作用于整条路径而非某一单轴。该参数为轴相关参数，保存至闪存，可在任何时候（包括运动中）修改。当 [VecJerkMode](VecJerkMode.md) = 1（v5）时，开始向目标位置的最终减速后所做的更改会被忽略，直到该次运动结束或下达新的目标位置为止；已暂停的运动仍会以恢复后的值继续运行。
+`VecAccel` 设置协调多轴矢量运动（[MotionMode](../02-motion-configuration/MotionMode.md) = 16）的加速度，单位为用户单位每秒平方。它定义合成（矢量）速度向 [VecSpeed](VecSpeed.md) 斜坡加速的快慢，作用于整条路径而非某一单轴。该参数为轴相关参数，保存至闪存，可在任何时候（包括运动中）修改。当 [VecJerkMode](VecJerkMode.md) = 1（v5）时，开始向目标位置的最终减速后所做的更改会被忽略，直到该次运动结束或下达新的目标位置为止；已暂停的运动在 VecPause 恢复为 0 后仍会继续，并使用当前值。
 
 `VecAccel` 控制加速斜坡；[VecDecel](VecDecel.md) 控制受控减速斜坡。默认情况下路径曲线为梯形，加速度在斜坡开始时即刻跳变至 `VecAccel`；路径的 S 曲线平滑通过 [VecJerkMode](VecJerkMode.md) = 1 单独启用，并由 [VecJerkInAcc](VecJerkInAcc.md) / [VecJerkInDec](VecJerkInDec.md) 进行整定。
 
