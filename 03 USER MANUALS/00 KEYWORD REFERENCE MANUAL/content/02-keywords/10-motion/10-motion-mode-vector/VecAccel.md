@@ -39,7 +39,7 @@ Vector acceleration rate (user units/s^2) ramping the resultant velocity up to V
 
 ## Overview
 
-`VecAccel` sets the acceleration rate for coordinated multi-axis vector motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 16), in user units per second squared. It defines how quickly the resultant (vector) velocity ramps up toward [VecSpeed](VecSpeed.md), applying to the path as a whole rather than to any single axis. It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
+`VecAccel` sets the acceleration rate for coordinated multi-axis vector motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 16), in user units per second squared. It defines how quickly the resultant (vector) velocity ramps up toward [VecSpeed](VecSpeed.md), applying to the path as a whole rather than to any single axis. It is an axis-related parameter saved to flash and can be changed at any time, including during motion. With [VecJerkMode](VecJerkMode.md) = 1 (v5), a change made once the final deceleration to the target has begun is ignored until the move ends or a new target position is commanded; a paused move still resumes when VecPause returns to 0, using the current values.
 
 `VecAccel` governs the ramp-up; [VecDecel](VecDecel.md) governs the controlled ramp-down. By default the path profile is trapezoidal, so the acceleration steps instantly to `VecAccel` at the start of the ramp; S-curve smoothing of the path is enabled separately by [VecJerkMode](VecJerkMode.md) = 1 and tuned by [VecJerkInAcc](VecJerkInAcc.md) / [VecJerkInDec](VecJerkInDec.md).
 

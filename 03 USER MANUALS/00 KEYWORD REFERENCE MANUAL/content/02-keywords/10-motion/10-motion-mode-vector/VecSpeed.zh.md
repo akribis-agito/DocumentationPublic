@@ -38,7 +38,7 @@ language: zh-CN
 
 ## 概述
 
-`VecSpeed` 设置协调多轴矢量运动（[MotionMode](../02-motion-configuration/MotionMode.md) = 16）的最大矢量（合成）速度，单位为用户单位每秒。各轴速度按比例缩放，使矢量幅值不超过该值，从而使多轴路径以受控的进给速率运行。加速和减速斜坡由 [VecAccel](VecAccel.md) 和 [VecDecel](VecDecel.md) 控制。该参数为轴相关参数，保存至闪存，可在任何时候修改，包括运动期间。
+`VecSpeed` 设置协调多轴矢量运动（[MotionMode](../02-motion-configuration/MotionMode.md) = 16）的最大矢量（合成）速度，单位为用户单位每秒。各轴速度按比例缩放，使矢量幅值不超过该值，从而使多轴路径以受控的进给速率运行。加速和减速斜坡由 [VecAccel](VecAccel.md) 和 [VecDecel](VecDecel.md) 控制。该参数为轴相关参数，保存至闪存，可在任何时候修改，包括运动期间。当 [VecJerkMode](VecJerkMode.md) = 1（v5）时，开始向目标位置的最终减速后所做的更改会被忽略，直到该次运动结束或下达新的目标位置为止；已暂停的运动在 VecPause 恢复为 0 后仍会继续，并使用当前值。
 
 ## 工作原理
 

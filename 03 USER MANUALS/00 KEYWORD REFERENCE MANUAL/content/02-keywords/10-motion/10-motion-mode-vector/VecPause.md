@@ -44,6 +44,8 @@ Set `VecPause` on the **group master** (the lowest-numbered member axis — see 
 
 A pause does not change the target, so all member axes continue to their original endpoints when resumed. If the group is stopped (for example by [StopVec](StopVec.md)) the controller clears `VecPause` back to `0` automatically, because the move is no longer holdable.
 
+With [VecJerkMode](VecJerkMode.md) = 1 (v5), two timing rules follow from the jerk-limited profiler. Releasing the pause (`VecPause` = 0) while the group is still decelerating into it takes effect only once the group is at rest. `VecPause` set during the move's own final deceleration does not stop the group short: the move completes with `VecPause` still set, so the next vector move starts paused until `VecPause` = 0.
+
 ## Examples
 
 ```text

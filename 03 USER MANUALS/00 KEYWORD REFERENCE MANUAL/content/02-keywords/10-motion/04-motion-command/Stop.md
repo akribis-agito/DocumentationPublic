@@ -77,6 +77,7 @@ AStop                ; controlled stop using the normal Decel rate
 - **Active fault:** the axis is disabled — `Stop` is a no-op (the motor-off path overrides the ramp).
 - **During dwell of repetitive PTP (`MotionMode = 2`):** the stop request is honored and ends the repetition; the dwell's wait counter is abandoned.
 - **PTPKeepMoving = 1:** `Stop` still ends the move; the keep-moving flag is overridden by the stop-request bit.
+- **Jerk-limited move (`JerkMode` = 1, or `VecJerkMode` = 1 for a vector group):** a `Stop` issued once the final deceleration to the target has begun does not shorten the move: it runs on to its target (a vector group can stop up to one count short of it).
 - **Member of CNCA / CNCB / vector / spline-buffer:** the whole group is requested to stop; per-axis reasons are listed above.
 
 ## See also

@@ -42,7 +42,7 @@ language: zh-CN
 
 `Decel` 是轨迹规划器用于在运动结束时将轴从指令 [Speed](Speed.md) 减速至静止的减速度限值。它是 [Accel](Accel.md) 的对应参数，同时也是受控 [Stop](../04-motion-command/Stop.md) 时所使用的速率。在限位开关（RLS/FLS）、软件位置限位（FwdPLim/RevPLim）或受控停止输入触发时，规划器会以单独设置的、通常更大的 [EmrgDec](EmrgDec.md) 替代本参数。而 [Abort](../04-motion-command/Abort.md) 与此不同，它**不**使用任何速率——它立即清除运动中状态位，由位置环保持最后一个参考位置。与 `Accel` 一样，`Decel` 受 [AccelFact](AccelFact.md) 缩放，并根据 [JerkMode](../02-motion-configuration/JerkMode.md) 由 [Jerk](Jerk.md) / [JerkInDec](JerkInDec.md) 进行平滑处理。
 
-`Decel` 为读写型、轴作用域，并保存至闪存。可在任意时刻更改，包括运动过程中——规划器每个控制周期重新读取该值。
+`Decel` 为读写型、轴作用域，并保存至闪存。可在任意时刻更改，包括运动过程中——规划器每个控制周期重新读取该值。当 [JerkMode](../02-motion-configuration/JerkMode.md) = 1 时，开始向目标位置的最终减速后所做的更改会被忽略，直到该次运动结束或下达新的目标位置为止。
 
 ![速度曲线：梯形与 S 形对比](velocity-profile.svg)
 

@@ -37,7 +37,7 @@ Maximum vector (resultant) speed in user units/s for coordinated multi-axis moti
 
 ## Overview
 
-`VecSpeed` sets the maximum vector (resultant) speed for coordinated multi-axis vector motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 16), in user units per second. The individual axis velocities are scaled so that the vector magnitude does not exceed this value, which is what keeps a multi-axis path moving at a controlled feed rate. The ramps to and from this speed are governed by [VecAccel](VecAccel.md) and [VecDecel](VecDecel.md). It is an axis-related parameter saved to flash and can be changed at any time, including during motion.
+`VecSpeed` sets the maximum vector (resultant) speed for coordinated multi-axis vector motion ([MotionMode](../02-motion-configuration/MotionMode.md) = 16), in user units per second. The individual axis velocities are scaled so that the vector magnitude does not exceed this value, which is what keeps a multi-axis path moving at a controlled feed rate. The ramps to and from this speed are governed by [VecAccel](VecAccel.md) and [VecDecel](VecDecel.md). It is an axis-related parameter saved to flash and can be changed at any time, including during motion. With [VecJerkMode](VecJerkMode.md) = 1 (v5), a change made once the final deceleration to the target has begun is ignored until the move ends or a new target position is commanded; a paused move still resumes when VecPause returns to 0, using the current values.
 
 ## How it works
 

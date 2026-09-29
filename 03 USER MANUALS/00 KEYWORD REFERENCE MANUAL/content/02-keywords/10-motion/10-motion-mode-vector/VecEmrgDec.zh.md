@@ -48,6 +48,8 @@ language: zh-CN
 
 当成员轴在运动中到达软件位置限位时（其他成员轴的 [MotionReason](../05-motion-status/MotionReason.md) = 34，触发轴为 6 / 7），或输入信号请求受控停止时（[MotionReason](../05-motion-status/MotionReason.md) = 28），选用紧急减速率。用户发出的 [StopVec](StopVec.md) **不会**触发此标志——停止仍以 [VecDecel](VecDecel.md) 制动（[MotionReason](../05-motion-status/MotionReason.md) = 29，以及矢量停止位 [MotionStat](../05-motion-status/MotionStat.md) 第 18 位 / 掩码 `0x00040000`）。硬件反向/正向限位开关不通过此路径处理。
 
+当 [VecJerkMode](VecJerkMode.md) = 1（v5）时，以此速率减速的停止不使用加加速度受限规划器：路径速度从当前值以 `VecEmrgDec` 线性减速，不加加加速度限制。`VecJerkMode` 保持原值，下一个矢量运动仍使用加加速度限制。
+
 任一成员轴发生电机关闭或故障时，运动立即终止，而非以上述任一速率斜坡减速。
 
 ## 示例

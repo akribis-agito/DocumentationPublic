@@ -51,7 +51,7 @@ This is the v5 jerk-control scheme for vector motion, expressed as an explicit j
 
 Because the profile shapes the **resultant** path velocity, jerk limiting benefits all member axes along the coordinated path at once. With the mode on, the move is considered finished when the S-curve profiler reaches its completed segment; with the mode off, it finishes when the path reference reaches the target with a low enough path velocity.
 
-The mode is fixed for the duration of a move. To switch profilers, change `VecJerkMode` before issuing `Begin`.
+The mode is fixed for the duration of a move. To switch profilers, change `VecJerkMode` before issuing `Begin`. One exception within a move: an emergency stop that decelerates at [VecEmrgDec](VecEmrgDec.md) ramps the path velocity down without jerk limiting; `VecJerkMode` itself is not changed.
 
 ## Examples
 

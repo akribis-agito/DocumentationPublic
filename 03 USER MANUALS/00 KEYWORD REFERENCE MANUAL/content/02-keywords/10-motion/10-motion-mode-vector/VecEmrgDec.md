@@ -47,6 +47,8 @@ A vector move normally decelerates the path velocity at [VecDecel](VecDecel.md).
 
 The emergency rate is selected when a member axis reaches a software position limit during the move ([MotionReason](../05-motion-status/MotionReason.md) = 34 for the other members, 6 / 7 for the offending axis), or when a controlled stop by an input signal is requested ([MotionReason](../05-motion-status/MotionReason.md) = 28). A user [StopVec](StopVec.md) does **not** raise this flag — the stop still brakes at [VecDecel](VecDecel.md) (with [MotionReason](../05-motion-status/MotionReason.md) = 29 and the vector-stop bit, [MotionStat](../05-motion-status/MotionStat.md) bit 18 / mask `0x00040000`). A hardware reverse/forward limit switch is not handled through this path.
 
+With [VecJerkMode](VecJerkMode.md) = 1 (v5), a stop that decelerates at this rate does not use the jerk-limited profiler: the path velocity ramps down linearly at `VecEmrgDec` from its current value, without jerk limiting. `VecJerkMode` keeps its value, and the next vector move is jerk-limited again.
+
 A motor-off or fault on any member axis ends the move immediately rather than ramping at any of these rates.
 
 ## Examples

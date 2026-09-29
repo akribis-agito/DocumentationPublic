@@ -42,7 +42,7 @@ language: zh-CN
 
 `Accel` 是轨迹规划器在将轴向指令 [Speed](Speed.md) 加速时所保持不超过的加速度限值。它是运动规划器据以塑形运动的四个核心运动学限值之一——`Speed`、`Accel`、[Decel](Decel.md) 以及加加速度设置。减速侧由 `Decel` 单独设置；数值由 [AccelFact](AccelFact.md) 缩放；斜坡起止的陡缓程度则由 [Jerk](Jerk.md)（二阶）或 [JerkInAcc](JerkInAcc.md)/[JerkInDec](JerkInDec.md)（三阶）控制，并由 [JerkMode](../02-motion-configuration/JerkMode.md) 选择。
 
-`Accel` 为读/写、轴范围且保存至闪存。它可在任意时刻更改，包括在运动过程中——运动规划器每个控制周期都会重新读取它，因此新值在下一个周期生效。
+`Accel` 为读/写、轴范围且保存至闪存。它可在任意时刻更改，包括在运动过程中——运动规划器每个控制周期都会重新读取它，因此新值在下一个周期生效。当 [JerkMode](../02-motion-configuration/JerkMode.md) = 1 时，开始向目标位置的最终减速后所做的更改会被忽略，直到该次运动结束或下达新的目标位置为止。
 
 ## 工作原理
 
