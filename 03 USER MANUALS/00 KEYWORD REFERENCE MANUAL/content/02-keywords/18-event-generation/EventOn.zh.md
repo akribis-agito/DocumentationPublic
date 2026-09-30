@@ -66,6 +66,10 @@ language: zh-CN
 
 在独立产品上，位置比较输出和位置捕获触发（[LockEn](../03-encoder/03-event-based-feedback-logging/LockEn-AuxLockEn.md)）共用同一硬件引脚，因此两者不能同时激活。使能 `EventOn = 1` 会自动清除 `LockEn`，使能 `LockEn` 也会自动清除 `EventOn`。此限制不适用于 Central-i 产品，在 Central-i 产品上两项功能使用远程驱动器中独立的硬件。
 
+### Central-i 使能期间的坐标变更
+
+`SetPosition` 保持已经使能的硬件事件序列的物理目标位置，包括之后下发的表项。该事件序列继续运行时，锁存捕获可以使用新原点。下一次 `EventOn` 从 `0` 跳变至 `1` 时，新序列使用当前坐标系：模式 0 重新测定硬件偏移，模式 1 使用已初始化并随 `SetPosition` 更新的偏移。在已经使能时再次写入 `1` 不会重新对齐。
+
 ## 示例
 
 ```text

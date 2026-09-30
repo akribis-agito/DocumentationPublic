@@ -22,6 +22,10 @@ How the position is captured depends on the encoder type:
 
 The captured value is referenced to the same feedback pipeline as [Pos](../../10-motion/01-kinematics-status/Pos.md): the firmware compensates for the offset between the raw hardware capture counter and the user-unit feedback value, so `LockVal` is directly comparable to `Pos`.
 
+### Central-i coordinate changes
+
+After `SetPosition` changes the selected capture coordinate, subsequent `LockVal` publications use the new origin without re-arming. Previously published values and table entries retain their recorded coordinates. This rule also applies to mailbox replies completed after the coordinate change; a pending capture is published in the new frame.
+
 ## Examples
 
 ```text
