@@ -65,6 +65,10 @@ On an incremental (or SIN-COS) encoder the compare and the pulse are performed i
 
 On standalone products the position-compare output and the position-capture trigger ([LockEn](../03-encoder/03-event-based-feedback-logging/LockEn-AuxLockEn.md)) share the same hardware pin, so only one can be active at a time. Arming `EventOn = 1` automatically clears `LockEn`, and arming `LockEn` automatically clears `EventOn`. This restriction does not apply to Central-i products, where the two features use independent hardware in the remote drive.
 
+### Central-i coordinate changes while armed
+
+`SetPosition` preserves the physical targets of an already-armed hardware event sequence, including table targets sent afterward. Lock captures can use the new origin while that event sequence continues. A new `EventOn` transition from `0` to `1` establishes the next sequence in the current coordinate frame: mode 0 relearns the hardware offset, while mode 1 uses the initialized offset maintained across `SetPosition`. Writing `1` while already enabled performs no realignment.
+
 ## Examples
 
 ```text
