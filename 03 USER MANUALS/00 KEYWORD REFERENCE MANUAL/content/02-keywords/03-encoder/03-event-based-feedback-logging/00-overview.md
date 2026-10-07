@@ -29,3 +29,4 @@ In case LockValTable and LockTimeTable are full, the recording will progress to 
 
 1. The logging mechanism works only for main encoder. Please contact Agito if this feature is required for auxiliary encoder.
 2. For non-Central-i products, the event-based position logging feature and the event generation feature are mutually exclusive. Enabling one automatically disables the other. For example, enabling event generation ([EventOn](../../18-event-generation/EventOn.md) = 1) will automatically disable event-based feedback logging (`LockEn = 0`).
+3. On Central-i masters, digital events that fall in the same control cycle share one capture, so `LockCntr` can advance by fewer than the number of events. [LockLost](LockLost.md) counts the lock samples that did not become a capture of their own.

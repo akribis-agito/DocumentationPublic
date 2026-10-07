@@ -48,6 +48,7 @@ The keywords are organised into the following sub-sections:
 | [LockEn/AuxLockEn](03-event-based-feedback-logging/LockEn-AuxLockEn.md) | Enables or disables event-based feedback logging. |
 | [LockSrc/AuxLockSrc](03-event-based-feedback-logging/LockSrc-AuxLockSrc.md) | Selects the digital event source and trigger edge for feedback logging. |
 | [LockCntr/AuxLockCntr](03-event-based-feedback-logging/LockCntr-AuxLockCntr.md) | Counts digital events and indexes the feedback-logging history arrays. |
+| [LockLost](03-event-based-feedback-logging/LockLost.md) | Counts the lock samples that did not become a capture of their own, on Central-i masters. |
 | [LockVal/AuxLockVal](03-event-based-feedback-logging/LockVal-AuxLockVal.md) | Records the feedback position of the most recent logged digital event. |
 | [LockValTable/LockValTabB](03-event-based-feedback-logging/LockValTable-LockValTabB.md) | History arrays storing the feedback position of each logged digital event. |
 | [LockTimeTable/LockTimeTabB](03-event-based-feedback-logging/LockTimeTable-LockTimeTabB.md) | History arrays storing the controller-cycle time of each logged digital event. |
