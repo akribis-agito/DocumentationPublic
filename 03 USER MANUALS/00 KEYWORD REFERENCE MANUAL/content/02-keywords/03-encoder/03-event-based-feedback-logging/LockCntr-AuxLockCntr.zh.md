@@ -10,7 +10,7 @@ language: zh-CN
 
 ## 概述
 
-`LockCntr` 跟踪自记录被武装以来捕获的触发事件数量，触发事件由 [LockSrc](LockSrc-AuxLockSrc.md) 定义。它同时充当历史数组 [LockValTable](LockValTable-LockValTabB.md) / [LockTimeTable](LockTimeTable-LockTimeTabB.md)（及其 B 表）的运行索引。每次发生触发事件时，`LockCntr` 递增 1。`AuxLockCntr` 是其辅助编码器对应项。
+`LockCntr` 跟踪自记录被武装以来捕获的触发事件数量，触发事件由 [LockSrc](LockSrc-AuxLockSrc.md) 定义。它同时充当历史数组 [LockValTable](LockValTable-LockValTabB.md) / [LockTimeTable](LockTimeTable-LockTimeTabB.md)（及其 B 表）的运行索引。每次捕获一个触发事件时，`LockCntr` 递增 1（处于同一控制周期内的边沿见下文）。`AuxLockCntr` 是其辅助编码器对应项。
 
 当记录（[LockEn](LockEn-AuxLockEn.md)）从禁用状态被启用时，`LockCntr` 复位为 `0`。它是可写的，因此你可以预置它，使历史数组从所选索引处开始填充，或将其复位以从表的开头开始覆盖。
 
@@ -33,7 +33,11 @@ language: zh-CN
 
 ### 每个控制周期记录一个事件
 
-该计数器每个控制周期处理一次，且每个周期最多记录一个事件。如果在单个控制周期内发生多个触发边沿，硬件仅保留该周期中最近捕获的位置，且 `LockCntr` 恰好前进一个——同一周期内较早的边沿不会被单独计数或存储。要将每个边沿作为不同条目捕获，请使触发速率远低于每个控制周期一个事件（作为实用经验法则，低于每两个控制周期一个事件可为此时序限制留有余量）。超出该速率时，间隔很近的边沿会被合并为单个记录事件。
+该计数器每个控制周期处理一次，且每个周期最多记录一次捕获。硬件仅保留该周期中最近捕获的位置，因此处于同一控制周期内的边沿共用一次捕获。
+
+在 Central-i 主站上，如果在单个控制周期内发生多个触发边沿，`LockCntr` 前进一个并记录最后一个边沿的位置，同时 [LockLost](LockLost.md) 前进一个。该周期内较早的边沿不会被单独计数或存储。不带 `LockLost` 的 Central-i 固件会忽略这样的周期：`LockCntr` 不会前进。如果某个边沿到达时，上一个边沿的位置仍在读取中，则该边沿会在之后被读取，并作为独立条目记录，`LockLost` 不变；如果在进行第二次读取之前又出现一个边沿，则 `LockLost` 加一。
+
+要将每个边沿作为不同条目捕获，请使触发边沿之间保持足够间隔。在 Central-i 主站上以固定间隔触发四个事件的台架测量中，间隔不小于 200 µs 时每个边沿都被记录。间隔更小的边沿可能共用一次捕获，参见 [LockLost](LockLost.md)。
 
 ## 示例
 
@@ -46,4 +50,5 @@ ALockCntr=0          ; reset the history-array index (overwrite from the start)
 
 - [LockEn](LockEn-AuxLockEn.md) — 启用记录；将 `LockCntr` 复位为 0
 - [LockSrc](LockSrc-AuxLockSrc.md) — 定义使 `LockCntr` 递增的触发事件
+- [LockLost](LockLost.md) — 统计 Central-i 主站上未能单独成为一次捕获的锁存采样
 - [LockValTable](LockValTable-LockValTabB.md) / [LockTimeTable](LockTimeTable-LockTimeTabB.md) — 以 `LockCntr` 为索引的历史数组

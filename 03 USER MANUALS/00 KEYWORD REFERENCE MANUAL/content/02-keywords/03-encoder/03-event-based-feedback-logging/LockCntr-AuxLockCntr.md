@@ -9,7 +9,7 @@ Counts digital events and serves as the index into the feedback-logging history 
 
 ## Overview
 
-`LockCntr` tracks the number of trigger events captured since logging was armed, as defined by [LockSrc](LockSrc-AuxLockSrc.md). It also acts as the running index for the history arrays [LockValTable](LockValTable-LockValTabB.md) / [LockTimeTable](LockTimeTable-LockTimeTabB.md) (and their B-tables). `LockCntr` increments by 1 each time a trigger event occurs. `AuxLockCntr` is the auxiliary-encoder counterpart.
+`LockCntr` tracks the number of trigger events captured since logging was armed, as defined by [LockSrc](LockSrc-AuxLockSrc.md). It also acts as the running index for the history arrays [LockValTable](LockValTable-LockValTabB.md) / [LockTimeTable](LockTimeTable-LockTimeTabB.md) (and their B-tables). `LockCntr` increments by 1 each time a trigger event is captured (see below for edges that share a control cycle). `AuxLockCntr` is the auxiliary-encoder counterpart.
 
 `LockCntr` is reset to `0` when logging ([LockEn](LockEn-AuxLockEn.md)) is enabled from the disabled state. It is writable, so you can preset it to populate the history arrays starting at a chosen index, or reset it to overwrite from the beginning of the tables.
 
@@ -32,7 +32,11 @@ While `LockCntr` is within the first table's capacity the event is stored in [Lo
 
 ### One event recorded per control cycle
 
-The counter is serviced once per control cycle, and at most one event is recorded per cycle. If more than one trigger edge occurs within a single control cycle, the hardware keeps only the most recent captured position from that cycle, and `LockCntr` advances by exactly one — the earlier edges within that same cycle are not counted or stored separately. To capture every edge as a distinct entry, keep the trigger rate well below one event per control cycle (as a practical rule of thumb, below one event per two control cycles leaves margin against this timing limit). Beyond that rate, closely spaced edges are coalesced into a single logged event.
+The counter is serviced once per control cycle, and at most one capture is recorded per cycle. The hardware keeps only the most recent captured position from a cycle, so edges that share a control cycle share one capture.
+
+On Central-i masters, if more than one trigger edge occurs within a single control cycle, `LockCntr` advances by one with the position of the last edge, and [LockLost](LockLost.md) advances by one. The earlier edges in that cycle are not counted or stored separately. Central-i firmware without `LockLost` ignored such a cycle: `LockCntr` did not advance. An edge that arrives while the position of the previous edge is still being read is read afterwards and recorded as its own entry, and `LockLost` does not change; a further edge before that second read is made adds one to `LockLost`.
+
+To capture every edge as a distinct entry, keep the trigger edges well apart. In a bench measurement with four events at a fixed gap on a Central-i master, every edge was recorded at gaps of 200 µs and above. Closer edges can share a capture; see [LockLost](LockLost.md).
 
 ## Examples
 
@@ -45,4 +49,5 @@ ALockCntr=0          ; reset the history-array index (overwrite from the start)
 
 - [LockEn](LockEn-AuxLockEn.md) — enables logging; resets `LockCntr` to 0
 - [LockSrc](LockSrc-AuxLockSrc.md) — defines the trigger event that increments `LockCntr`
+- [LockLost](LockLost.md) — counts the lock samples on Central-i masters that did not become a capture of their own
 - [LockValTable](LockValTable-LockValTabB.md) / [LockTimeTable](LockTimeTable-LockTimeTabB.md) — history arrays indexed by `LockCntr`
