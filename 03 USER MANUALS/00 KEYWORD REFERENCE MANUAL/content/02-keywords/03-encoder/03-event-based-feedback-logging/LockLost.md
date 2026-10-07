@@ -54,6 +54,8 @@ The remote unit samples the trigger once per control cycle (about 61 µs). It la
 
 `LockLost` counts control cycles, not edges: a cycle that holds four edges adds one to `LockCntr` and one to `LockLost`. The captured position of such a cycle is that of the last edge.
 
+[LockTimeTable](LockTimeTable-LockTimeTabB.md) stamps a capture with the control cycle in which its position was read, so an edge that was read after the previous reply carries that later cycle, not the cycle of the edge itself.
+
 To record every edge as its own entry, keep the trigger edges well apart. In a bench measurement with four events at a fixed gap, every edge was recorded at gaps of 200 µs and above.
 
 ## Examples
