@@ -48,6 +48,7 @@
 | [LockEn/AuxLockEn](03-event-based-feedback-logging/LockEn-AuxLockEn.md) | 启用或禁用基于事件的反馈记录。 |
 | [LockSrc/AuxLockSrc](03-event-based-feedback-logging/LockSrc-AuxLockSrc.md) | 选择反馈记录的数字事件源和触发边沿。 |
 | [LockCntr/AuxLockCntr](03-event-based-feedback-logging/LockCntr-AuxLockCntr.md) | 对数字事件计数并索引反馈记录历史数组。 |
+| [LockLost](03-event-based-feedback-logging/LockLost.md) | 统计在 Central-i 主站上未能单独成为一次捕获的锁存采样。 |
 | [LockVal/AuxLockVal](03-event-based-feedback-logging/LockVal-AuxLockVal.md) | 记录最近一次已记录数字事件的反馈位置。 |
 | [LockValTable/LockValTabB](03-event-based-feedback-logging/LockValTable-LockValTabB.md) | 存储每次已记录数字事件反馈位置的历史数组。 |
 | [LockTimeTable/LockTimeTabB](03-event-based-feedback-logging/LockTimeTable-LockTimeTabB.md) | 存储每次已记录数字事件控制器周期时间的历史数组。 |
