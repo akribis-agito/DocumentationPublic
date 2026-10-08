@@ -81,7 +81,7 @@ It is also blocked while the axis is in motion (`ok_in_motion: false`).
 
 `SetPosition` adjusts the hardware-to-firmware capture offset by the actual change to the selected feedback coordinate. Subsequent `LockVal` publications use the new origin without toggling `LockEn` or repeating `LockEventInit`; this also applies to a capture whose mailbox reply completes after the position change. Previously published `LockVal` and capture-table entries are not rewritten. A source whose coordinate did not change is not shifted.
 
-An already-armed hardware event sequence keeps its physical target positions across `SetPosition`, including table entries sent afterward. To start a sequence using the new origin, disable events and arm them again (`EventOn=0`, then `EventOn=1`). Writing `EventOn=1` while already enabled does not restart or realign it. This does not initialize a previously uninitialized lock/event source or remove the stationary-source requirement for initialization.
+An already-armed hardware event sequence keeps its physical target positions across `SetPosition`, including table entries sent afterward. To start a sequence using the new origin, disable events and arm them again (`EventOn=0`, then `EventOn=1`). Writing `EventOn=1` while already enabled does not restart or realign it. This does not initialize a previously uninitialized lock/event source.
 
 ## Examples
 

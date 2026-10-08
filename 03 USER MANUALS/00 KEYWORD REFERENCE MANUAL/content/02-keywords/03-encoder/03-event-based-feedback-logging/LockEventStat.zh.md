@@ -56,7 +56,7 @@ language: zh-CN
 ```text
 ALockEventMode=1      ; select the unified scheme
 ALockEventStat        ; reads -1 until LockEventInit has been run
-ALockEventInit        ; learn the offset (axis stationary)
+ALockEventInit        ; learn the offset
 ALockEventStat        ; now reads 1 (ready to arm)
 ALockEventMode=0      ; revert to legacy mode
 ALockEventStat        ; reads 0 (no manual init needed)

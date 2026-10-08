@@ -39,7 +39,7 @@ Selects the lock/event operating mode: legacy auto-init (`0`) or the unified sch
 There are two ways to learn that offset:
 
 - **Mode 0 (legacy / backward compatible)** — the offset is learned automatically the moment you arm the feature, i.e. when [LockEn](LockEn-AuxLockEn.md) or [EventOn](../../18-event-generation/EventOn.md) transitions from `0` to `1`. This matches the behavior of earlier firmware, so existing configurations keep working unchanged.
-- **Mode 1 (unified scheme)** — the offset is *not* learned on arming. Instead you run the [LockEventInit](LockEventInit.md) command yourself, with the axis stationary, before arming Lock or Event. This gives you control over exactly when the offset is sampled, which matters when the capture source may be moving at the instant you would otherwise arm.
+- **Mode 1 (unified scheme)** — the offset is *not* learned on arming. Instead you run the [LockEventInit](LockEventInit.md) command yourself, before arming Lock or Event. This gives you control over exactly when the offset is sampled. In both modes the offset pairs the hardware counter with the controller-side position of the same sampling instant, so it is exact while a main-encoder or auxiliary-encoder source moves. With the virtual-encoder source, arm (or run [LockEventInit](LockEventInit.md)) while the source is stationary: pairing in motion is not yet verified for that source.
 
 The setting is stored in flash, so the selected mode survives a power cycle. The default is `0` (legacy behavior).
 
@@ -50,7 +50,7 @@ The setting is stored in flash, so the selected mode survives a power cycle. The
 | Value | Meaning |
 |-------|---------|
 | 0 | Legacy / backward-compatible mode. The firmware-to-hardware offset is learned automatically when Lock or Event is armed. No manual initialization is needed; [LockEventStat](LockEventStat.md) reports `0`. |
-| 1 | Unified mode. You must run [LockEventInit](LockEventInit.md) (axis stationary) to learn the offset before arming Lock or Event. Arming without having run it is rejected with error 335. |
+| 1 | Unified mode. You must run [LockEventInit](LockEventInit.md) (with the virtual-encoder source, while it is stationary) to learn the offset before arming Lock or Event. Arming without having run it is rejected with error 335. |
 
 ### Effect on the status keyword
 
@@ -61,13 +61,13 @@ Writing `LockEventMode` immediately re-evaluates [LockEventStat](LockEventStat.m
 
 ### When re-initialization is needed (mode 1)
 
-Any configuration change that alters the capture source invalidates a previously learned offset. In particular, a change to `EncSinCosHWEn` (the encoder/lock-event capture-source selector) clears the "initialized" condition and returns [LockEventStat](LockEventStat.md) to the not-initialized state, so [LockEventInit](LockEventInit.md) must be run again before arming. The firmware can only detect some such changes automatically, so as a rule run [LockEventInit](LockEventInit.md) after any change to the lock/event source configuration and before the capture source starts moving.
+Any configuration change that alters the capture source invalidates a previously learned offset. In particular, a change to `EncSinCosHWEn` (the encoder/lock-event capture-source selector) clears the "initialized" condition and returns [LockEventStat](LockEventStat.md) to the not-initialized state, so [LockEventInit](LockEventInit.md) must be run again before arming. The firmware can only detect some such changes automatically, so as a rule run [LockEventInit](LockEventInit.md) after any change to the lock/event source configuration.
 
 ## Examples
 
 ```text
 ALockEventMode=1      ; select the unified lock/event scheme
-ALockEventInit        ; learn the firmware/hardware offset (axis stationary)
+ALockEventInit        ; learn the firmware/hardware offset
 ALockEn=1             ; now allowed; arm event-based feedback logging
 ALockEventMode=0      ; revert to legacy auto-initialize behavior
 ALockEventMode        ; read back the configured mode
