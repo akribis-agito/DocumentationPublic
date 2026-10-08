@@ -29,7 +29,7 @@ The absolute value of `LockSrc` determines the digital event source. The mapping
 
 `LockSrc=0` is a convenience setting that selects the **main encoder index of this axis** with normal (rising) polarity, without having to know the per-product index value. It is honoured on firmware/FPGA versions that advertise support for it; on older versions, use the explicit index value from the tables below instead (for example `32` on the standalone AGD101, or `16` on Central-i products).
 
-On Central-i products, `LockSrc=0` always selects the main encoder index (input `16`, rising edge), whatever [EncSinCosHWEn](../../../05-legacy-keywords/EncSinCosHWEn.md) selects. `EncSinCosHWEn` chooses which position counter the lock latches, not which input triggers it: with `EncSinCosHWEn` = 3 (auxiliary encoder), `LockSrc=0` captures the auxiliary-encoder position at the main encoder's index. To lock at the auxiliary encoder's own index, use `15` (`-15` for its falling edge). For the main encoder index on the falling edge, use `-16`: `0` has no falling-edge form.
+On Central-i products, `LockSrc=0` always selects the main encoder index (input `16`, rising edge), whatever [EncSinCosHWEn](../../../05-legacy-keywords/EncSinCosHWEn.md) selects. `EncSinCosHWEn` chooses which position counter the lock latches, not which input triggers it: with `EncSinCosHWEn` = 3 (auxiliary encoder), `LockSrc=0` captures the auxiliary-encoder position at the main encoder's index. On the Central-i remotes that have an auxiliary encoder index (AGA101 / AGA110, AGA155 and AGL103; see the Central-i table below), use `15` to lock at that index (`-15` for its falling edge); the table lists no source `15` for the other Central-i remotes. For the main encoder index on the falling edge, use `-16`: `0` has no falling-edge form.
 
 For standalone products (non-Central-i):
 
@@ -122,7 +122,7 @@ This is why an encoder index is preferred when you need the most precise registr
 ALockSrc=32          ; main encoder index, rising edge (standalone AGD101)
 ALockSrc=16          ; main encoder index, rising edge (Central-i)
 ALockSrc=0           ; main encoder index, rising edge (where supported)
-ALockSrc=15          ; auxiliary encoder index, rising edge (Central-i)
+ALockSrc=15          ; auxiliary encoder index, rising edge (Central-i remotes with one: AGA101/AGA110, AGA155, AGL103)
 ALockSrc=-1          ; digital input 1, falling edge
 ALockSrc              ; read back the configured source/edge
 ```

@@ -30,7 +30,7 @@ language: zh-CN
 
 `LockSrc=0` 是一个便捷设置，它以正常（上升沿）极性选择**本轴的主编码器索引**，而无需知道每个产品的索引值。在通告支持该设置的固件/FPGA 版本上会被采纳；在较旧版本上，请改用下方表格中的显式索引值（例如，独立式 AGD101 上为 `32`，Central-i 产品上为 `16`）。
 
-在 Central-i 产品上，无论 [EncSinCosHWEn](../../../05-legacy-keywords/EncSinCosHWEn.md) 选择什么，`LockSrc=0` 始终选择主编码器索引（输入 `16`，上升沿）。`EncSinCosHWEn` 决定锁存记录哪个位置计数器，而不决定由哪个输入触发锁存：当 `EncSinCosHWEn` = 3（辅助编码器）时，`LockSrc=0` 在主编码器索引处捕获辅助编码器位置。若要在辅助编码器自身的索引处锁存，请使用 `15`（其下降沿使用 `-15`）。若要在主编码器索引的下降沿锁存，请使用 `-16`：`0` 没有下降沿形式。
+在 Central-i 产品上，无论 [EncSinCosHWEn](../../../05-legacy-keywords/EncSinCosHWEn.md) 选择什么，`LockSrc=0` 始终选择主编码器索引（输入 `16`，上升沿）。`EncSinCosHWEn` 决定锁存记录哪个位置计数器，而不决定由哪个输入触发锁存：当 `EncSinCosHWEn` = 3（辅助编码器）时，`LockSrc=0` 在主编码器索引处捕获辅助编码器位置。在具有辅助编码器索引的 Central-i 远程单元上（AGA101 / AGA110、AGA155 和 AGL103；见下方 Central-i 表格），若要在该索引处锁存，请使用 `15`（其下降沿使用 `-15`）；表格中其他 Central-i 远程单元没有源 `15`。若要在主编码器索引的下降沿锁存，请使用 `-16`：`0` 没有下降沿形式。
 
 对于独立式产品（非 Central-i）：
 
@@ -123,7 +123,7 @@ language: zh-CN
 ALockSrc=32          ; main encoder index, rising edge (standalone AGD101)
 ALockSrc=16          ; main encoder index, rising edge (Central-i)
 ALockSrc=0           ; main encoder index, rising edge (where supported)
-ALockSrc=15          ; auxiliary encoder index, rising edge (Central-i)
+ALockSrc=15          ; auxiliary encoder index, rising edge (Central-i remotes with one: AGA101/AGA110, AGA155, AGL103)
 ALockSrc=-1          ; digital input 1, falling edge
 ALockSrc              ; read back the configured source/edge
 ```
