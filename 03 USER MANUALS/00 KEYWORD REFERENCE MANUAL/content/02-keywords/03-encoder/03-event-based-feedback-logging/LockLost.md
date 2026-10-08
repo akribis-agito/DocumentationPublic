@@ -47,6 +47,7 @@ The remote unit samples the trigger once per control cycle (about 61 µs). It la
 | One edge in a control cycle | +1 | 0 |
 | Two or more edges in one control cycle | +1, with the position of the last edge | +1 |
 | An edge while the read for the previous edge is pending | +1 once that read is answered (the edge is read afterwards and recorded as its own entry) | 0 |
+| An edge while the read for the previous edge is queued behind a table event, or is waiting to be retried | +1 once that read is answered, with the position of the later edge | +1 |
 | A further edge while that follow-up read is still waiting | unchanged by this edge, which shares the follow-up capture | +1 |
 | While a read is pending, a control cycle that holds several edges | +1 once the follow-up read is answered | +1 |
 | The remote returns no position, or does not answer in time | 0 | +1 |
