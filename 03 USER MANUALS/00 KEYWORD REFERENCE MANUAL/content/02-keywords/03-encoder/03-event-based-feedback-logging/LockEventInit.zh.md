@@ -37,25 +37,25 @@ language: zh-CN
 
 `LockEventInit` 是统一锁存/事件方案（[LockEventMode](LockEventMode.md) = 1）所使用的命令关键字。运行它时，控制器对内部硬件捕获计数器采样，并针对所配置的捕获源计算它与控制器侧位置之间的偏移：当主编码器为源时使用主编码器位置（`Pos`），对于虚拟编码器源使用虚拟编码器值（`VEncValue`），对于辅助编码器源则使用辅助编码器位置（`AuxPos`），因此该源上的捕获以 `AuxPos` 坐标报告。正是该偏移使得捕获位置能够以你在其他地方所用的相同单位和参考来报告。
 
-在模式 1 中，此步骤由你负责：在锁存/事件源完全配置好后、武装 [LockEn](LockEn-AuxLockEn.md) 或 [EventOn](../../18-event-generation/EventOn.md) 之前，运行一次 `LockEventInit`。在传统模式（[LockEventMode](LockEventMode.md) = 0）中，控制器在功能被武装时自动学习此偏移，因此该命令在那里不被使用。
+在模式 1 中，此步骤由你负责：在锁存/事件源完全配置好后（使用虚拟编码器源时，须在其静止时）、武装 [LockEn](LockEn-AuxLockEn.md) 或 [EventOn](../../18-event-generation/EventOn.md) 之前，运行一次 `LockEventInit`。在传统模式（[LockEventMode](LockEventMode.md) = 0）中，控制器在功能被武装时自动学习此偏移，因此该命令在那里不被使用。
 
 ## 工作原理
 
 仅当所配置的捕获源使用增量式或 AqB 主编码器、虚拟编码器或辅助编码器源时，`LockEventInit` 才计算偏移（并将 [LockEventStat](LockEventStat.md) 驱动为 `1`）。如果选择主编码器作为源但它是绝对式编码器（例如 SSI、EnDat 或 SinCos），命令返回成功但*不会*计算偏移，并使 [LockEventStat](LockEventStat.md) 保持不变——因此请务必在武装前确认 [LockEventStat](LockEventStat.md) 实际读数为 `1`。
 
-当满足上述前提条件（模式 1 以及适用的捕获源）时，控制器将：
+当满足上述前提条件（模式 1、适用的捕获源，以及对于虚拟编码器源而言静止的源）时，控制器将：
 
 1. 读取当前硬件捕获计数器。
 2. 针对所配置源的匹配控制器侧位置（取硬件计数器采样时刻的值）计算偏移：主编码器源使用主编码器位置，虚拟编码器源使用虚拟编码器值，辅助编码器源使用辅助编码器位置。
 3. 将锁存/事件子系统标记为已初始化，并将 [LockEventStat](LockEventStat.md) 设置为 `1`（就绪）。（此步骤取决于所配置的源和编码器类型；参见上述前提条件。）
 
-远程驱动器在其回复到达控制器之前固定数量的控制周期对捕获计数器采样，而控制器保存捕获源在最近每个控制周期的位置，因此偏移将计数器与同一时刻的位置配对。所以运行该命令时捕获源可以处于运动中。
+远程驱动器在其回复到达控制器之前固定数量的控制周期对捕获计数器采样，而控制器保存捕获源在最近每个控制周期的位置，因此偏移将计数器与同一时刻的位置配对。所以对于主编码器源或辅助编码器源，运行该命令时捕获源可以处于运动中。对于虚拟编码器源（`VEncValue`），请在源静止时运行该命令：该源在运动中的配对尚未经过验证。
 
 ### 行为说明
 
 - **仅模式 1。** 在 [LockEventMode](LockEventMode.md) = 0（传统模式）下运行 `LockEventInit` 无效，并以错误 334 被拒绝，因为在该模式下偏移已自动学习。仅在选择模式 1 后使用它。
 - **模式 1 中武装前必需。** 在 [LockEventMode](LockEventMode.md) = 1 时，若在运行 `LockEventInit` 之前尝试武装 [LockEn](LockEn-AuxLockEn.md) = 1 或 [EventOn](../../18-event-generation/EventOn.md) = 1，将以错误 335（偏移未初始化）被拒绝。请先运行 `LockEventInit`，然后再武装。
-- **配置更改后需重新运行。** 初始化后对捕获源的任何更改都会使学习到的偏移失效。对 `EncSinCosHWEn`（编码器/锁存事件捕获源选择器）的更改会被自动检测到并将 [LockEventStat](LockEventStat.md) 复位为未初始化状态，但控制器无法检测每一种情况。作为规则，在对锁存/事件源配置进行任何更改之后，重新运行 `LockEventInit`。
+- **配置更改后需重新运行。** 初始化后对捕获源的任何更改都会使学习到的偏移失效。对 `EncSinCosHWEn`（编码器/锁存事件捕获源选择器）的更改会被自动检测到并将 [LockEventStat](LockEventStat.md) 复位为未初始化状态，但控制器无法检测每一种情况。作为规则，在对锁存/事件源配置进行任何更改之后（使用虚拟编码器源时，须在其开始运动之前），重新运行 `LockEventInit`。
 
 ## 示例
 
