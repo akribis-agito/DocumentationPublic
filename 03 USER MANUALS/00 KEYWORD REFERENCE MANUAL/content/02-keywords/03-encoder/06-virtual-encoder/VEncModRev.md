@@ -1,6 +1,6 @@
 ---
 keyword: VEncModRev
-summary: Modulo span (counts per revolution) of the virtual-encoder source, so the generator stays continuous across source roll-over.
+summary: Modulo span (counts per revolution) used to compensate virtual-encoder source wraps.
 availability:
   standalone:
   - v4
@@ -32,11 +32,11 @@ doc_revision: '2026.06'
 ---
 # VEncModRev
 
-Modulo span (counts per revolution) of the virtual-encoder source, so the generator stays continuous across source roll-over.
+Modulo span (counts per revolution) used to compensate virtual-encoder source wraps.
 
 ## Overview
 
-`VEncModRev` tells the virtual encoder how large the source signal's modulo span is, so that when the source ([VEncSrc](VEncSrc.md)) wraps from the top of its range back to zero (or vice-versa), the generated output does not jump. The virtual encoder is an encoder-**signal generator** (it emits a quadrature or pulse/direction signal that tracks a source variable), not a feedback input; see [VEncOn](VEncOn.md). `VEncModRev` exists purely to keep that generated signal continuous when the chosen source itself runs in modulo.
+`VEncModRev` supplies the span used to compensate a wrap of the source ([VEncSrc](VEncSrc.md)). The virtual encoder generates a quadrature or pulse/direction signal that tracks that source; see [VEncOn](VEncOn.md).
 
 It is a per-axis parameter saved to flash, can be changed while the motor is on (but not in motion), and is `0` by default, which **disables** the wrap handling. The usable range is `0` to `2,000,000,000`.
 
@@ -47,7 +47,9 @@ It is a per-axis parameter saved to flash, can be changed while the motor is on 
 Each control cycle the generator compares the new source value with the previous one:
 
 - If `VEncModRev = 0`, no wrap handling is done; the source is assumed never to roll over.
-- If `VEncModRev ≠ 0` and the source changes by more than **half** of `VEncModRev` in a single cycle, the change is treated as a roll-over (not a real jump). The generator shifts its internal tracking by one full span and steps the generated count [VEncValue](VEncValue.md) by the scaled equivalent of one span, so the emitted signal continues smoothly instead of producing a large burst of edges.
+- If `VEncModRev ≠ 0` and the source changes by more than **half** of `VEncModRev` in a single cycle, the generator compensates a roll-over by shifting its tracking memories and [VEncValue](VEncValue.md) by one scaled span.
+
+In firmware containing [Firmware-Main #1103](https://github.com/akribis-agito/Firmware-Main/issues/1103), the source-step capacity check follows this compensation. If the compensated step exceeds one-sample capacity, tracking restarts at the new reference and that step is discarded. With the motor on, fault **1066** remains. See [VEncOn](VEncOn.md).
 
 The scaled span is computed from `VEncModRev` together with the output scaling [VEncFact](VEncFact.md) / [VEncFactDen](VEncFactDen.md), so the wrap compensation is applied in the same units as the generated output.
 
@@ -55,7 +57,7 @@ The scaled span is computed from `VEncModRev` together with the output scaling [
 
 ```text
 AVEncModRev=0            ; default: source never wraps, no roll-over handling
-AVEncModRev=131072       ; source runs modulo 131072 counts/rev; keep output continuous on wrap
+AVEncModRev=131072       ; compensate source wraps at 131072 counts/rev
 AVEncModRev               ; read the configured modulo span
 ```
 
@@ -63,6 +65,6 @@ AVEncModRev               ; read the configured modulo span
 
 - [VEncSrc](VEncSrc.md) — source variable whose modulo span this describes
 - [VEncOn](VEncOn.md) — enables the virtual encoder
-- [VEncValue](VEncValue.md) — the generated output count that is kept continuous across wraps
+- [VEncValue](VEncValue.md) — the virtual-encoder tracking count
 - [VEncFact](VEncFact.md) / [VEncFactDen](VEncFactDen.md) — source-to-output scaling ratio
 - [ModRev](../04-modulo-mode/ModRev.md) — modulo span of the axis feedback (a typical source)
