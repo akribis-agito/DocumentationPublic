@@ -42,7 +42,9 @@ Read-only array describing the controller: identification, versions, limits and 
 
 The array is populated once at power-up while the controller initialises. Fixed facts about the build and hardware are written directly: the product-type code, the firmware version (and its decomposed major/minor/patch/owner/sub-version fields), the FPGA version (read from an FPGA register and decoded into the same fields), current and bus-voltage limits, the current-loop frequency, the recording-buffer limits, the axis count, the boot version, user-program limits, the parameter count, and the two capability bitfields. Two fields are not known until the serial number has been loaded from flash: `Identity[2]` (serial number) and `Identity[3]` (hardware version) are copied from `ProductSN[2]` and `ProductSN[1]` respectively after the keywords are loaded (and again whenever `ProductSN` is written). Fields that the unit cannot determine are left at an "uninitialised" sentinel value.
 
-A host typically reads `Identity[1]` to learn the model, `Identity[16]` to learn the axis count, and the two feature-flag words to decide which optional behaviours to enable.
+A host typically reads `Identity[1]` to learn the model and the two feature-flag words to decide which optional behaviours to enable. On a Central-i master, `Identity[16]` counts allocated port slots; use `Identity[23]` for the supported servo-axis count.
+
+The six-axis AGM800-EC configuration reports 12 port slots in `Identity[16]` and 6 servo axes (A–F) in `Identity[23]`. Legacy AGM800 reports 12 port slots and 8 servo axes (A–H). Retained port slots remain available for supported non-motion functions; they do not imply additional usable servo axes. Read these fields from the running firmware when selecting axes.
 
 ![Identity array — fields grouped by purpose](identity-field-map.svg)
 
@@ -65,14 +67,14 @@ A host typically reads `Identity[1]` to learn the model, `Identity[16]` to learn
 | [13] | Current-loop frequency | Samples per second |
 | [14] | Maximum recording length | Usable data-recording buffer length |
 | [15] | Maximum recording vectors | Number of recordable channels |
-| [16] | Number of axes | |
+| [16] | Number of axes / allocated ports | Central-i master: allocated port slots; see [23] for servo axes |
 | [17] | Boot version | |
 | [18] | User-program maximum threads | |
 | [19] | User-program numeric stack depth | |
 | [20] | Maximum internal PWM value | PWM timer period |
 | [21] | Number of parameters | Count of keywords in the parameter table |
 | [22] | Type of communication | Active comm channel (set when a host connects) |
-| [23] | Central-i master: number of servo axes | |
+| [23] | Central-i master: number of servo axes | 6 in the six-axis AGM800-EC configuration; 8 on legacy AGM800 |
 | [24] | Analog-inputs update rate | Samples between analog-input filter updates |
 | [25] | Feature flags, word 1 | Capability bitfield (see below) |
 | [26]–[30] | Firmware version fields | Major, minor, patch, owner, sub-version |
@@ -123,7 +125,8 @@ To test a capability, mask the word with the bit for that feature; a non-zero re
 ```text
 AIdentity[1]        ; product-type code
 AIdentity[2]        ; production serial number
-AIdentity[16]       ; number of axes
+AIdentity[16]       ; axes, or allocated ports on a Central-i master
+AIdentity[23]       ; Central-i master: supported servo axes
 AIdentity[4]        ; combined firmware version
 AIdentity[25]       ; feature-flag word 1
 ```
