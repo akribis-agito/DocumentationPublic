@@ -30,11 +30,13 @@ overrides:
     range:
     - 100.0
     - 686700000000.0
-last_updated: '2026-06-02'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 language: zh-CN
 ---
 # EmrgDec
+
+> **AGM800-EC** — 关键字换算采用 16,000 Hz 控制频率，内部值与外部值之间的比例为 `1.048576`。读取时除以此系数；允许的写入操作乘以此系数，整数值需舍入。在 AGM800-EC 上，嵌入式 `UsrUnits`、`AuxUsrUnits` 和 `PDUsrUnits` 比例不缩放此关键字。下文的用户单位说明适用于使用嵌入式缩放的产品；AGM800-EC 应采用此处的 EC 换算。 参见 [AGM800-EC 时间与单位](../../01-system/03-timing/AGM800-EC-units.zh.md)。
 
 在限位开关、软件限位或受控停止输入触发停止时所应用的紧急减速率，单位为用户单位每平方秒。
 

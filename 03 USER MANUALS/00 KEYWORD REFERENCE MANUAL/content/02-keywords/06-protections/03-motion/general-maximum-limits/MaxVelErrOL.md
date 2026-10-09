@@ -28,10 +28,12 @@ overrides:
   central-i.v5:
     data_type: int64
     range: null
-last_updated: '2026-05-30'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 ---
 # MaxVelErrOL
+
+> **AGM800-EC** — The keyword conversion uses the 16,000 Hz control rate and an internal-to-external factor of `1.024`. Reads divide by this factor; accepted writes multiply by it, with rounding for integer values. Embedded `UsrUnits`, `AuxUsrUnits` and `PDUsrUnits` ratios do not scale this keyword on AGM800-EC. User-unit descriptions below apply to products that use embedded scaling; use the EC conversion described here for AGM800-EC. See [AGM800-EC timing and units](../../../01-system/03-timing/AGM800-EC-units.md).
 
 Maximum open-loop (injection) velocity error; exceeding it disables the axis.
 

@@ -24,12 +24,14 @@ attributes:
   scaling: 65.536
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 language: zh-CN
 summary: 基于时间的增益调度模式中，切换回稳态增益组前的保持时间（毫秒）。
 ---
 # ScheduleTime
+
+> **AGM800-EC** — 此关键字仍以毫秒为单位。AGM800-EC 按 **16 个采样/ms**（每采样 62.5 µs）换算，必要时进行整数舍入。下文的 16.384 个采样/ms 计算适用于传统 16,384 Hz 配置。各产品的内部采样数范围和默认值应以控制器元数据为准。 参见 [AGM800-EC 时间与单位](../../01-system/03-timing/AGM800-EC-units.zh.md)。
 
 基于时间的增益调度模式所用的保持时间，单位为毫秒，用于延迟切换回稳态增益组。
 

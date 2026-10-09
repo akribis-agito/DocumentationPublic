@@ -25,11 +25,13 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 language: zh-CN
 ---
 # GantryOn
+
+> **AGM800-EC** — 此产品的经过时间应按 **16,000 个控制周期/s（每周期 62.5 µs）** 计算。下文的 16,384 Hz 时间换算和示例描述传统配置。`2^14` 等定点比例保持不变。 参见 [AGM800-EC 时间与单位](../../01-system/03-timing/AGM800-EC-units.zh.md)。
 
 在 A 轴上启用龙门多输入多输出（MIMO）控制，将 A 轴和 B 轴联动为从属关系。
 

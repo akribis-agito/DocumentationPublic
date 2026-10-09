@@ -1,9 +1,11 @@
 ---
 summary: Ratio between a desired user unit and encoder counts for reading position and its derivatives.
-last_updated: '2026-05-29'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 ---
 # UsrUnits/AuxUsrUnits
+
+> **AGM800-EC** — Embedded scaling still applies to the corresponding position keywords. It does **not** apply to the EC velocity/acceleration/jerk keywords listed in the timing-and-units page; those use their fixed time-domain conversion. Thus the derivative-unit examples below do not apply to that EC list. Error 338 concerns keywords that still use embedded scaling and belong to an enabled global engineering-unit group. See [AGM800-EC timing and units](../../01-system/03-timing/AGM800-EC-units.md).
 
 Ratio between a desired user unit and encoder counts for reading position and its derivatives.
 

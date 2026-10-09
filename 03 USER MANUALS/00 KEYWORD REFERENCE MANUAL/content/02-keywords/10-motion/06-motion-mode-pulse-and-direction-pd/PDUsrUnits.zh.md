@@ -25,11 +25,13 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 language: zh-CN
 ---
 # PDUsrUnits
+
+> **AGM800-EC** — 嵌入式缩放仍适用于相应的位置关键字，但**不适用于**时间与单位页面列出的 EC 速度、加速度和加加速度关键字；后者采用固定时间域换算。因此，下文关于导数单位的示例不适用于该 EC 列表。错误 338 涉及仍使用嵌入式缩放且属于已启用全局工程单位组的关键字。 参见 [AGM800-EC 时间与单位](../../01-system/03-timing/AGM800-EC-units.zh.md)。
 
 用于将 PDPos 和 PDVel 查询结果转换为用户单位的每用户单位计数比例因子。
 

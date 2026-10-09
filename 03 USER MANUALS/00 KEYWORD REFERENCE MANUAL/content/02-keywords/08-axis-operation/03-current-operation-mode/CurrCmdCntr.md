@@ -25,10 +25,12 @@ attributes:
   scaling: 65.536
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 ---
 # CurrCmdCntr
+
+> **AGM800-EC** — This keyword remains in milliseconds. AGM800-EC converts at **16 samples/ms** (62.5 µs per sample), with integer rounding where required. The 16.384 samples/ms calculations below apply to the legacy 16,384 Hz configuration. Product-dependent raw sample limits and defaults must be read from the controller metadata. See [AGM800-EC timing and units](../../01-system/03-timing/AGM800-EC-units.md).
 
 Time elapsed in current mode or in the active CurrCmdVal entry.
 

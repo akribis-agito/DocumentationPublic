@@ -1,5 +1,7 @@
 # Event-based feedback logging
 
+> **AGM800-EC** — Use **16,000 controller cycles/s (62.5 µs/cycle)** for elapsed-time calculations on this product. The 16,384 Hz time conversions and examples below describe the legacy configuration. Fixed-point scales such as `2^14` remain unchanged. See [AGM800-EC timing and units](../../01-system/03-timing/AGM800-EC-units.md).
+
 Agito allows logging of encoder feedback value based on digital event defined by LockSrc. This feature is enabled by LockEn. After enabling this feature (LockEn = 1), an internal timer (LockTimer) will start from 0.
 
 ![Event-based feedback logging: a digital event (LockSrc, edge) increments LockCntr and logs LockVal each time it occurs; the captured position and time are stored in LockValTable and LockTimeTable, overflowing into the B tables when full](lock-capture.svg)

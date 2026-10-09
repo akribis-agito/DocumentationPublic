@@ -1,5 +1,7 @@
 # Push Events
 
+> **AGM800-EC** — Decode event timestamps as `timeSec + timeTick / 16000` seconds. Each `timeTick` unit is 62.5 µs; its 16-cycle update step is 1 ms. Packet layout is unchanged. The 16384 divisor below applies to legacy AGM800. See [AGM800-EC timing and units](../03-timing/AGM800-EC-units.md).
+
 **Overview:**
 
 Push events let the controller tell the host that something happened, **unprompted**, instead of the host finding out by polling. Polling costs link bandwidth and CPU on both ends, is up to one poll period late, and can miss an event that starts and ends between two polls. A pushed event carries its own timestamp, taken in the control interrupt when the event was detected.

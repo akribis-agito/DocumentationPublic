@@ -25,11 +25,13 @@ attributes:
   implemented: final
 overrides: {}
 summary: 映射接入时用于施加映射修正的步长。
-last_updated: '2026-05-29'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 language: zh-CN
 ---
 # MapErrOnStep
+
+> **AGM800-EC** — 此无量纲斜坡步长指令采用 `1.024` 换算：内部步长为指令值乘以 1.024 后舍入至整数。计数器满量程仍为 16384，每周期为 62.5 µs。内部步长 N 非零时，接入约需 `16384/N` 个周期。EC 指令范围为 0–16000；元数据中的最大值 16384 是与 1.024 系数配套的内部限值。下文未缩放的指令示例描述传统换算方式。 参见 [AGM800-EC 时间与单位](../01-system/03-timing/AGM800-EC-units.zh.md)。
 
 映射接入时用于施加映射修正的步长。
 

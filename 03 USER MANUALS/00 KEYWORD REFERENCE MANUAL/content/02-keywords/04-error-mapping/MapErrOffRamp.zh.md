@@ -25,11 +25,13 @@ attributes:
   implemented: final
 overrides: {}
 summary: 映射误差偏置向其目标值收敛的速率。
-last_updated: '2026-05-29'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 language: zh-CN
 ---
 # MapErrOffRamp
+
+> **AGM800-EC** — 变化速率仍以计数/s 表示。每周期在目标钳位前施加 `MapErrOffRamp / 16000` 个计数，使用 62.5 µs 周期。下文传统配置的默认值/速率示例不能理解为 EC 时钟频率。 参见 [AGM800-EC 时间与单位](../01-system/03-timing/AGM800-EC-units.zh.md)。
 
 映射误差偏置向其目标值收敛的速率。
 
