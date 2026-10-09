@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-10'
+doc_revision: '2026.10'
 ---
 # GoToPosMode
 
@@ -37,6 +37,8 @@ Command to gracefully enter position operation mode.
 `GoToPosMode` instructs the controller to enter position operation mode ([OperationMode](../01-general-keywords/OperationMode.md) = 3) in a graceful, bumpless manner. The position feedback ([Pos](../../10-motion/01-kinematics-status/Pos.md)) at the moment the command is processed is recorded in [ModeSwitchPos](ModeSwitchPos.md) index 2.
 
 `GoToPosMode` can only switch the axis **from current mode (1) or force mode (4)**, because only those modes continuously prepare the variables needed for a clean transition. It is rejected from velocity mode (2) and does nothing if the axis is already in position mode (3). Through the [BeginOnToPos](BeginOnToPos.md) flag the command can also launch a point-to-point move on entry, to a target set by [RetractTarget](RetractTarget.md) (or [RelTrgt](../../10-motion/13-motion-mode-ptp/RelTrgt.md)) at speed [RetractSpeed](RetractSpeed.md). For the other ways to reach position mode (direct [OperationMode](../01-general-keywords/OperationMode.md) assignment, the internal condition check via [PosPosFlag](PosPosFlag.md)/[PosPosTh](PosPosTh.md), or a [DInMode](../../05-inputs-outputs/04-digital-inputs/DInMode.md) digital input), see [OperationMode](../01-general-keywords/OperationMode.md).
+
+The six-axis AGM800-EC configuration supports motion and motor enable only on axes A–F, including simulated motors. The remaining ports retain supported non-motion functions. Read [Identity](../../01-system/01-status/Identity.md) field 23 for the servo-axis count and field 16 for the allocated port count.
 
 ## How it works
 

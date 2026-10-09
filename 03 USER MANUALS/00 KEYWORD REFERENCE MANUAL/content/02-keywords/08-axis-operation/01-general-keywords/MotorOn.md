@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-09'
+doc_revision: '2026.10'
 ---
 # MotorOn
 
@@ -39,6 +39,8 @@ Enables or disables the motor, and reports the servo on/off status.
 The motor can also be disabled internally by a controller fault (see [ConFlt](../../../02-keywords/07-status-and-faults/ConFlt.md) and [Controller error codes](../../../04-error-codes/controller-error-codes.md)). When the axis is enabled, `ConFlt` is cleared; if the fault state remains, the fault is retriggered and the axis is disabled again. To enable the motor with pre-checks and a reportable result, use [CanMotorOn](CanMotorOn.md) / [CanMotorOnRes](CanMotorOnRes.md).
 
 Some keywords are only writable or callable when the axis is disabled — refer to each keyword's attribute table (`ok_motor_on`) for details.
+
+The six-axis AGM800-EC configuration supports motion and motor enable only on axes A–F, including simulated motors. The remaining ports retain supported non-motion functions. Read [Identity](../../01-system/01-status/Identity.md) field 23 for the servo-axis count and field 16 for the allocated port count.
 
 ## How it works
 

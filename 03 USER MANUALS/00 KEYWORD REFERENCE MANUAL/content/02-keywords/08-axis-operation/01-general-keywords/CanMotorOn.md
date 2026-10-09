@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-09'
+doc_revision: '2026.10'
 ---
 # CanMotorOn
 
@@ -37,6 +37,8 @@ Command that attempts to enable the motor after running pre-checks.
 `CanMotorOn` is a command function that tests whether the axis *could* be enabled and reports the result in [CanMotorOnRes](CanMotorOnRes.md). It is an axis-related command and can be issued at any time.
 
 Important: `CanMotorOn` does **not** turn the motor on. It runs the same pre-condition checks that `MotorOn = 1` would run, but instead of enabling it writes either `1` (all checks passed — enabling would succeed) or the error/fault code of the first failed check into [CanMotorOnRes](CanMotorOnRes.md). To actually enable the axis you still write [MotorOn](MotorOn.md) `= 1`. Use `CanMotorOn` first when you want to know *why* an enable would be refused without provoking an error response.
+
+The six-axis AGM800-EC configuration supports motion and motor enable only on axes A–F, including simulated motors. The remaining ports retain supported non-motion functions. Read [Identity](../../01-system/01-status/Identity.md) field 23 for the servo-axis count and field 16 for the allocated port count.
 
 ## How it works
 

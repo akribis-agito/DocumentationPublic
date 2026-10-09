@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-10'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # GoToForceMode
@@ -38,6 +38,8 @@ language: zh-CN
 `GoToForceMode` 指示控制器以平稳方式进入力运行模式（[OperationMode](../01-general-keywords/OperationMode.md) = 4）。与直接赋值 `OperationMode = 4` 不同，该命令执行受控的交接过程，使得控制环切换时执行器不会跳变。关于进入力模式的其他方式（直接赋值、自动条件或数字量输入），参见[力运行模式](00-overview.md)。
 
 > **注意：** 如果轴已处于力模式，`GoToForceMode` 不执行任何操作；当轴处于电流运行模式（[OperationMode](../01-general-keywords/OperationMode.md) = 1）时，或当其属于某个 CNC（多轴）运动组时，该命令将被**拒绝**。
+
+六轴 AGM800-EC 配置仅支持 A–F 轴的运动和电机使能；模拟电机也受此限制。其余端口仍可使用受支持的非运动功能。请通过 [Identity](../../01-system/01-status/Identity.zh.md) 的字段 23 查询伺服轴数，字段 16 查询分配的端口数。
 
 ## 工作原理
 

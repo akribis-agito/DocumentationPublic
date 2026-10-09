@@ -7,24 +7,22 @@ availability:
   - v5
 can_code: 844
 attributes:
-  access: ro
-  scope: axis
+  access: rw
+  scope: non-axis
   flash: false
   type: scalar
   array_size: 1
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
-  units: func
-  range:
-  - 0
-  - 0
-  default: 0
+  units: none
+  range: null
+  default: null
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-30'
-doc_revision: '2026.06'
+last_updated: '2026-10-10'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # CommitMotion
@@ -33,11 +31,13 @@ language: zh-CN
 
 ## 概述
 
-`CommitMotion` 在一次正弦点到点运动**已经处于运行中**时对其应用更改，而无需停止并重新发出该运动。你在该轴仍处于运动中时暂存新的运动参数，然后调用 `CommitMotion` 请求控制器重新计算曲线并无缝过渡到新目标。它是一个轴相关的命令函数，不携带任何值。
+`CommitMotion` 在一次正弦点到点运动**已经处于运行中**时对其应用更改，而无需停止并重新发出该运动。你在该轴仍处于运动中时暂存新的运动参数，然后调用 `CommitMotion` 请求控制器重新计算曲线并无缝过渡到新目标。它是一个带轴掩码值的非轴相关命令：写入 `ACommitMotion=1` 选择 A 轴，`ACommitMotion=2` 选择 B 轴，`ACommitMotion=3` 同时选择 A、B 轴。位 0 选择 A 轴，位 1 选择 B 轴，后续位依次选择后续轴。
 
 它仅在正弦点到点模式（[MotionMode](../02-motion-configuration/MotionMode.md) = 20，正弦 PTP；以及 21，正弦 PTP repetitive）下且该轴处于运动中时才有意义。在任何其他模式下，或当该轴不处于运动中时，该命令会被拒绝。
 
-可用于 central-i（v5）。
+可用于 central-i（v5）。通信文本仍需前缀，请使用 `ACommitMotion=...`。实际选择的轴由掩码决定，而不是由前缀决定。
+
+六轴 AGM800-EC 配置的掩码仅允许选择 A–F 轴（位 0–5）。若掩码包含不支持的轴，命令会在提交任何所选轴之前返回错误 170；例如同时选择 A、G 轴的混合掩码 65 也会整体被拒绝。受支持的掩码仍须通过下述运动模式检查。零掩码超出命令范围。伺服轴数可通过 [Identity](../../01-system/01-status/Identity.zh.md) 的字段 23 查询。
 
 ## 工作原理
 
@@ -68,7 +68,7 @@ AAbsTrgt=100000      ; initial target
 ABegin               ; start the sine PTP move
                      ; ... while it is running, stage a new target ...
 AAbsTrgt=150000      ; new target
-ACommitMotion        ; apply the new target on the fly; OK = accepted, error = rejected/timed out
+ACommitMotion=1       ; commit axis A; OK = accepted, error = rejected/timed out
 ```
 
 ### 边界情况
@@ -78,7 +78,7 @@ ACommitMotion        ; apply the new target on the fly; OK = accepted, error = r
 - **运动中太晚** — 当剩余的运动量不足以重新计算并过渡时，规划器可能会拒绝该更改（错误 387，16 周期窗口在剩余时间内放不下）；原始运动保持不变完成。
 - **重新计算超出窗口** — 如果后台重新计算未在 16 周期窗口内完成，则放弃本次提交（错误 388），原始运动保持不变继续进行。
 - **超时** — 如果规划器在任何握手步骤中约一秒内未响应，该命令返回错误。
-- **只读 / 函数** — `CommitMotion` 是一个命令（发出它以触发它）；它不携带任何要写入的值。
+- **轴掩码** — 写入掩码即执行命令；它不是保存的设置。
 - **平台** — 仅 v5 central-i。
 
 ## 另请参阅

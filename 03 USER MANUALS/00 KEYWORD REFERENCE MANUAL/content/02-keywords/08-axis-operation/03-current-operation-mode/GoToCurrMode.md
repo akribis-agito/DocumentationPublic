@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-10'
+doc_revision: '2026.10'
 ---
 # GoToCurrMode
 
@@ -35,6 +35,8 @@ Command to gracefully enter current operation mode.
 ## Overview
 
 `GoToCurrMode` instructs the controller to enter current operation mode in a graceful manner. For other ways to enter current mode, see [OperationMode](../01-general-keywords/OperationMode.md).
+
+The six-axis AGM800-EC configuration supports motion and motor enable only on axes A–F, including simulated motors. The remaining ports retain supported non-motion functions. Read [Identity](../../01-system/01-status/Identity.md) field 23 for the servo-axis count and field 16 for the allocated port count.
 
 ## How it works
 

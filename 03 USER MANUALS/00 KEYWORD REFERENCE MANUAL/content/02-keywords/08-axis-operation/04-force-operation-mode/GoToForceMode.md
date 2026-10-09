@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-10'
+doc_revision: '2026.10'
 ---
 # GoToForceMode
 
@@ -37,6 +37,8 @@ Command to gracefully enter force operation mode.
 `GoToForceMode` instructs the controller to enter force operation mode ([OperationMode](../01-general-keywords/OperationMode.md) = 4) in a graceful manner. Unlike a direct `OperationMode = 4` assignment, the command runs a controlled hand-off so the actuator does not jump when the loop switches over. For other ways to enter force mode (direct assignment, automatic condition, or digital input), see [Force operation mode](00-overview.md).
 
 > **Note:** `GoToForceMode` does nothing if the axis is already in force mode, and it is **rejected** while the axis is in current operation mode ([OperationMode](../01-general-keywords/OperationMode.md) = 1) or while it is a member of a CNC (multi-axis) motion group.
+
+The six-axis AGM800-EC configuration supports motion and motor enable only on axes A–F, including simulated motors. The remaining ports retain supported non-motion functions. Read [Identity](../../01-system/01-status/Identity.md) field 23 for the servo-axis count and field 16 for the allocated port count.
 
 ## How it works
 

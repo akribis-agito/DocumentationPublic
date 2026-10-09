@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-09'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # Begin
@@ -40,6 +40,8 @@ language: zh-CN
 处理程序依次完成三件事：首先运行一连串**前置条件**检查，若该轴未就绪则拒绝该命令；然后运行**特定于模式的校验与初始化**；最后通过设置 [MotionStat](../05-motion-status/MotionStat.md) 中的位来**武装该次运动**。运动通过 [Stop](Stop.md)（受控）或 [Abort](Abort.md)（立即）结束。运动也可以通过 [BeginDInOn](BeginDInOn.md) 推迟到某个数字量输入边沿后再启动。
 
 当该轴已处于运动中时，`Begin` 会被拒绝（该关键字带有 `ok_in_motion: false` 属性，由解释器强制执行）。无限模式——摇杆位置模式以及带 [PTPKeepMoving](../02-motion-configuration/PTPKeepMoving.md) `= 1` 的 PTP——则会保持该次运动持续有效，并跟踪新的位置指令而不结束。
+
+六轴 AGM800-EC 配置仅支持 A–F 轴的运动和电机使能；模拟电机也受此限制。其余端口仍可使用受支持的非运动功能。请通过 [Identity](../../01-system/01-status/Identity.zh.md) 的字段 23 查询伺服轴数，字段 16 查询分配的端口数。
 
 ## 工作原理
 

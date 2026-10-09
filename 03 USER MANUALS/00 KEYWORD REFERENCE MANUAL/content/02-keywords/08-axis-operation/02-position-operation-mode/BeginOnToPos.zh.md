@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-10'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # BeginOnToPos
@@ -38,6 +38,8 @@ language: zh-CN
 `BeginOnToPos` 是一个一次性（自动清除）标志，若设为 1，则指示控制器在轴进入位置运行模式的时刻启动一次点到点运动。目标位置由 [RetractTarget](RetractTarget.md)（或 [RelTrgt](../../10-motion/13-motion-mode-ptp/RelTrgt.md)）定义，最大速度由 [RetractSpeed](RetractSpeed.md) 定义。一旦移动被使能并触发，该标志即重置为 0，因此下次进入时必须重新设置。
 
 该标志仅在为干净进入位置模式做准备的切换路径上生效：[GoToPosMode](GoToPosMode.md) 命令、内部反馈阈值切换（[PosPosFlag](PosPosFlag.md)/[PosPosTh](PosPosTh.md) 以及调度表结束），以及 [DInMode](../../05-inputs-outputs/04-digital-inputs/DInMode.md) 的位置/电流或位置/力输入。当 [OperationMode](../01-general-keywords/OperationMode.md) 通过直接赋值更改时，该标志**无效**。
+
+六轴 AGM800-EC 配置仅支持 A–F 轴的运动和电机使能；模拟电机也受此限制。其余端口仍可使用受支持的非运动功能。请通过 [Identity](../../01-system/01-status/Identity.zh.md) 的字段 23 查询伺服轴数，字段 16 查询分配的端口数。
 
 ## 工作原理
 

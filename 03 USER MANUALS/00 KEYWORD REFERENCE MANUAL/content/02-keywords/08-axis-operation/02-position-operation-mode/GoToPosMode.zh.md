@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-10'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # GoToPosMode
@@ -38,6 +38,8 @@ language: zh-CN
 `GoToPosMode` 指示控制器以平滑、无冲击的方式进入位置运行模式（[OperationMode](../01-general-keywords/OperationMode.md) = 3）。命令被处理的时刻的位置反馈（[Pos](../../10-motion/01-kinematics-status/Pos.md)）被记录到 [ModeSwitchPos](ModeSwitchPos.md) 的索引 2 中。
 
 `GoToPosMode` 只能将轴**从电流模式（1）或力模式（4）**切换过来，因为只有这些模式才会持续准备干净切换所需的变量。从速度模式（2）调用会被拒绝，若轴已处于位置模式（3）则不执行任何操作。通过 [BeginOnToPos](BeginOnToPos.md) 标志，该命令还可在进入时启动一次点到点移动，目标由 [RetractTarget](RetractTarget.md)（或 [RelTrgt](../../10-motion/13-motion-mode-ptp/RelTrgt.md)）设置，速度为 [RetractSpeed](RetractSpeed.md)。关于到达位置模式的其他方式（直接 [OperationMode](../01-general-keywords/OperationMode.md) 赋值、通过 [PosPosFlag](PosPosFlag.md)/[PosPosTh](PosPosTh.md) 的内部条件检查，或 [DInMode](../../05-inputs-outputs/04-digital-inputs/DInMode.md) 数字量输入），请参见 [OperationMode](../01-general-keywords/OperationMode.md)。
+
+六轴 AGM800-EC 配置仅支持 A–F 轴的运动和电机使能；模拟电机也受此限制。其余端口仍可使用受支持的非运动功能。请通过 [Identity](../../01-system/01-status/Identity.zh.md) 的字段 23 查询伺服轴数，字段 16 查询分配的端口数。
 
 ## 工作原理
 

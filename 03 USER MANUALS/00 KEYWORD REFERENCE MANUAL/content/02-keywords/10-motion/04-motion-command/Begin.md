@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-09'
+doc_revision: '2026.10'
 ---
 # Begin
 
@@ -39,6 +39,8 @@ Starts motion on the axis according to the current motion mode and target settin
 The handler does three things in order: it runs a chain of **pre-conditions** that reject the command if the axis is not ready, then runs **mode-specific validation and initialization**, and finally **arms the move** by setting bits in [MotionStat](../05-motion-status/MotionStat.md). Motion is ended by [Stop](Stop.md) (controlled) or [Abort](Abort.md) (immediate). A move can also be deferred until a digital-input edge via [BeginDInOn](BeginDInOn.md).
 
 `Begin` is rejected while the axis is already in motion (the keyword carries the `ok_in_motion: false` attribute, enforced by the interpreter). Endless modes — joystick-position and PTP with [PTPKeepMoving](../02-motion-configuration/PTPKeepMoving.md) `= 1` — instead keep the move alive and track new position commands without ending.
+
+The six-axis AGM800-EC configuration supports motion and motor enable only on axes A–F, including simulated motors. The remaining ports retain supported non-motion functions. Read [Identity](../../01-system/01-status/Identity.md) field 23 for the servo-axis count and field 16 for the allocated port count.
 
 ## How it works
 
