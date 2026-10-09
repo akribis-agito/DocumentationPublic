@@ -24,7 +24,7 @@ The captured value is referenced to the same feedback pipeline as [Pos](../../10
 
 ### Central-i coordinate changes
 
-After `SetPosition` changes the selected capture coordinate, subsequent `LockVal` publications use the new origin without re-arming. Previously published values and table entries retain their recorded coordinates. This rule also applies to mailbox replies completed after the coordinate change; a pending capture is published in the new frame.
+After `SetPosition` or `ZeroPosErr` changes the selected capture coordinate, subsequent `LockVal` publications use the new origin without re-arming. Previously published values and table entries retain their recorded coordinates. This rule also applies to mailbox replies completed after the coordinate change; a pending capture is published in the new frame.
 
 ## Examples
 

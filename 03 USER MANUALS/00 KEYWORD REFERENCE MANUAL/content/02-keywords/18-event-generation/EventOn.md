@@ -67,7 +67,7 @@ On standalone products the position-compare output and the position-capture trig
 
 ### Central-i coordinate changes while armed
 
-`SetPosition` preserves the physical targets of an already-armed hardware event sequence, including table targets sent afterward. Lock captures can use the new origin while that event sequence continues. A new `EventOn` transition from `0` to `1` establishes the next sequence in the current coordinate frame: mode 0 relearns the hardware offset, while mode 1 uses the initialized offset maintained across `SetPosition`. Writing `1` while already enabled performs no realignment.
+`SetPosition` and `ZeroPosErr` preserve the physical targets of an already-armed hardware event sequence, including table targets sent afterward. Lock captures can use the new origin while that event sequence continues. A new `EventOn` transition from `0` to `1` establishes the next sequence in the current coordinate frame: mode 0 relearns the hardware offset, while mode 1 uses the initialized offset maintained across `SetPosition` and `ZeroPosErr`. Writing `1` while already enabled performs no realignment.
 
 ## Examples
 
