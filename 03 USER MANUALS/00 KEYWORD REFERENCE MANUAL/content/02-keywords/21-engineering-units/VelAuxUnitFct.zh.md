@@ -21,7 +21,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 language: zh-CN
 ---
@@ -41,7 +41,7 @@ language: zh-CN
 
 该系数存储于闪存，因此在重新上电后保持不变。
 
-全局用户单位与嵌入式辅助缩放 [AuxUsrUnits](../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) 在同一轴上互斥。辅助反馈只能使用其中一个；若两者同时启用，访问受影响的关键字时将产生冲突。
+仅当访问的关键字使用嵌入式 `UsrUnits`、`AuxUsrUnits` 或 `PDUsrUnits` 缩放、属于相应的全局单位组，且该轴同时设置了 `UserUnitsEn = 1` 和非默认嵌入式比例时，才触发错误 `338`。在 AGM800-EC 上，`AuxVel` 和 `PDVel` 使用固定时间域缩放，不会触发此冲突。仍使用嵌入式缩放的位置关键字继续受此检查约束。完整换算列表见 [AGM800-EC 时间与单位](../01-system/03-timing/AGM800-EC-units.zh.md)。
 
 此关键字仅在 v5（central-i）版本可用。
 
@@ -59,4 +59,4 @@ AVelAuxUnitFct[1]      ; 读取当前辅助速度系数
 - [VelAuxUnitUnt](VelAuxUnitUnt.md) — 辅助速度量的单位标签
 - [VelUnitFct](VelUnitFct.md) — 主反馈速度比例系数
 - [UserUnitsEn](UserUnitsEn.md) — 每轴启用全局用户单位功能
-- [AuxUsrUnits](../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) — 嵌入式辅助缩放（互斥）
+- [AuxUsrUnits](../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) — 嵌入式辅助缩放

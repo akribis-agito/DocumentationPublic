@@ -27,11 +27,11 @@
 | P/D 位置 | [PosPDUnitGrp](PosPDUnitGrp.md) | [PosPDUnitFct](PosPDUnitFct.md) | [PosPDUnitUnt](PosPDUnitUnt.md) |
 | P/D 速度 | [VelPDUnitGrp](VelPDUnitGrp.md) | [VelPDUnitFct](VelPDUnitFct.md) | [VelPDUnitUnt](VelPDUnitUnt.md) |
 
-辅助编码器（Aux）和脉冲/方向（P/D）变体仅适用于位置和速度——不存在加速度或力的 Aux/PD 变体。Aux 变体适用于辅助反馈关键字（`AuxPos`、`AuxVel`），P/D 变体适用于脉冲/方向关键字（`PDPos`、`PDVel`）。其内嵌缩放冲突针对 `AuxUsrUnits`（Aux 变体）和 `PDUsrUnits`（P/D 变体），而非 `UsrUnits`。
+辅助编码器（Aux）和脉冲/方向（P/D）变体仅适用于位置和速度——不存在加速度或力的 Aux/PD 变体。Aux 变体适用于辅助反馈关键字（`AuxPos`、`AuxVel`），P/D 变体适用于脉冲/方向关键字（`PDPos`、`PDVel`）。对于使用内嵌缩放的关键字，其冲突针对 `AuxUsrUnits`（Aux 变体）和 `PDUsrUnits`（P/D 变体），而非 `UsrUnits`。
 
 ## 与内嵌 UsrUnits 缩放的关系
 
-该全局工程单位功能独立于现有的每轴 [UsrUnits](../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md)（及 `AuxUsrUnits`）缩放。两种方法在同一轴上**互斥**：如果某轴上 `UserUnitsEn` 已激活，同时该轴上匹配的内嵌缩放也设置为非默认值，则读取或写入属于受影响全局单位组的关键字时，将以错误码 `338`（"Global User Units feature is mutually exclusive with embedded controller user units"）拒绝操作。冲突范围包括位置、速度和加速度关键字（与 [UsrUnits](../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) 冲突）、辅助关键字（与 `AuxUsrUnits` 冲突）以及脉冲/方向关键字（与 `PDUsrUnits` 冲突）。力单位组虽有自己的因子和标签关键字，但不受此内嵌缩放冲突的约束，永远不会触发错误 `338`。禁用其中一种缩放方法即可消除冲突。详见 [UserUnitsEn](UserUnitsEn.md)。
+仅当访问的关键字使用嵌入式 `UsrUnits`、`AuxUsrUnits` 或 `PDUsrUnits` 缩放、属于相应的全局单位组，且该轴同时设置了 `UserUnitsEn = 1` 和非默认嵌入式比例时，才触发错误 `338`。在 AGM800-EC 上，`AuxVel` 和 `PDVel` 使用固定时间域缩放，不会触发此冲突。仍使用嵌入式缩放的位置关键字继续受此检查约束。完整换算列表见 [AGM800-EC 时间与单位](../01-system/03-timing/AGM800-EC-units.zh.md)。
 
 ## 关键字
 

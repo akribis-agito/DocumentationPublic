@@ -23,7 +23,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 language: zh-CN
 ---
@@ -51,7 +51,7 @@ language: zh-CN
 
 此分组由上位机显示/单位层使用；不改变内部控制计算。这些关键字的比例系数和标签分别来自 [VelAuxUnitFct](VelAuxUnitFct.md) 和 [VelAuxUnitUnt](VelAuxUnitUnt.md)。
 
-全局用户单位与嵌入式辅助缩放 [AuxUsrUnits](../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) 在同一轴上互斥。若 `UserUnitsEn` 已开启且 `AuxUsrUnits` 也设置为非默认缩放，则对该组成员（辅助反馈速度 [AuxVel](../10-motion/01-kinematics-status/AuxVel.md)）的读取或写入将被拒绝，并返回错误 `338`。成员列表关键字本身不受影响；仅其成员受影响。将 `AuxUsrUnits` 保留为默认值或将 `UserUnitsEn` 设回 0 可解决冲突。
+仅当访问的关键字使用嵌入式 `UsrUnits`、`AuxUsrUnits` 或 `PDUsrUnits` 缩放、属于相应的全局单位组，且该轴同时设置了 `UserUnitsEn = 1` 和非默认嵌入式比例时，才触发错误 `338`。在 AGM800-EC 上，`AuxVel` 和 `PDVel` 使用固定时间域缩放，不会触发此冲突。仍使用嵌入式缩放的位置关键字继续受此检查约束。完整换算列表见 [AGM800-EC 时间与单位](../01-system/03-timing/AGM800-EC-units.zh.md)。
 
 此关键字仅在 v5（central-i）版本可用。
 

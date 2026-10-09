@@ -21,7 +21,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 ---
 # VelPDUnitFct
@@ -40,7 +40,7 @@ The factor affects only how values are presented to the host; the internal contr
 
 The factor is stored in flash, so it persists across power cycles.
 
-Global User Units and the embedded P/D scaling [PDUsrUnits](../10-motion/06-motion-mode-pulse-and-direction-pd/PDUsrUnits.md) are mutually exclusive on the same axis. Use one or the other for the P/D feedback; with `UserUnitsEn` on and `PDUsrUnits` left at a non-default scaling, reading or writing an affected member keyword (the pulse-and-direction velocity [PDVel](../10-motion/06-motion-mode-pulse-and-direction-pd/PDVel.md)) is rejected with error `338`. Setting `VelPDUnitFct` itself is not blocked by this conflict.
+Error `338` applies only when the accessed keyword uses embedded `UsrUnits`, `AuxUsrUnits` or `PDUsrUnits` scaling, belongs to the corresponding global unit group, and both `UserUnitsEn = 1` and a non-default embedded ratio are set on that axis. On AGM800-EC, `AuxVel` and `PDVel` use fixed time-domain scaling and do not raise this conflict. Position keywords that retain embedded scaling remain subject to the check. See [AGM800-EC timing and units](../01-system/03-timing/AGM800-EC-units.md) for the full conversion list.
 
 This keyword is available from v5 (central-i) only.
 
@@ -58,4 +58,4 @@ AVelPDUnitFct[1]      ; read the current P/D velocity factor
 - [VelPDUnitUnt](VelPDUnitUnt.md) — unit label for the P/D velocity quantity
 - [VelUnitFct](VelUnitFct.md) — main-feedback velocity scale factor
 - [UserUnitsEn](UserUnitsEn.md) — enables the Global User Units feature per axis
-- [PDUsrUnits](../10-motion/06-motion-mode-pulse-and-direction-pd/PDUsrUnits.md) — embedded P/D scaling (mutually exclusive)
+- [PDUsrUnits](../10-motion/06-motion-mode-pulse-and-direction-pd/PDUsrUnits.md) — embedded P/D scaling

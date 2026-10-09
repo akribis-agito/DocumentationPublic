@@ -23,7 +23,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 language: zh-CN
 ---
@@ -48,18 +48,11 @@ language: zh-CN
 
 该设置存储于闪存，因此在重新上电后保持不变。
 
-### 与嵌入式 UsrUnits 缩放的互斥性
+### 嵌入式缩放冲突
 
-全局工程单位功能与嵌入式每轴 [UsrUnits](../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) / `AuxUsrUnits` 缩放在同一轴上**互斥**。两者均将关键字值表示为原始内部单位以外的形式，因此同一时刻只能激活其中一个。
+仅当访问的关键字使用嵌入式 `UsrUnits`、`AuxUsrUnits` 或 `PDUsrUnits` 缩放、属于相应的全局单位组，且该轴同时设置了 `UserUnitsEn = 1` 和非默认嵌入式比例时，才触发错误 `338`。在 AGM800-EC 上，`AuxVel` 和 `PDVel` 使用固定时间域缩放，不会触发此冲突。仍使用嵌入式缩放的位置关键字继续受此检查约束。完整换算列表见 [AGM800-EC 时间与单位](../01-system/03-timing/AGM800-EC-units.zh.md)。
 
-每当访问受影响的关键字时，控制器均会执行此检查。若对某轴同时满足以下两个条件，则对属于任一全局单位组的关键字进行读取或写入将被拒绝，并返回错误码 `338`：
-
-- `UserUnitsEn` 设置为 1，且
-- 对应的嵌入式缩放（主反馈关键字对应 `UsrUnits`，或辅助/脉冲方向变体对应其各自关键字）设置为非默认值。
-
-错误 `338` 提示："Global User Units feature is mutually exclusive with embedded controller user units. Please disable one of the scaling factors."（全局用户单位功能与嵌入式控制器用户单位互斥，请禁用其中一个缩放系数。）要解决冲突，请将嵌入式缩放保留为默认值，或将 `UserUnitsEn` 设回 0。
-
-如果嵌入式缩放处于默认值，启用 `UserUnitsEn` 不会引发此冲突。
+出现冲突时，可将相应嵌入式比例恢复为默认值，或将 `UserUnitsEn` 设为 0。
 
 ## 示例
 
@@ -74,4 +67,4 @@ AUserUnitsEn[1]        ; 读取当前使能状态
 - [00-overview](00-overview.md) — 组 / 系数 / 单位模型
 - [PosUnitGrp](PosUnitGrp.md) — 位置相关的受影响关键字
 - [PosUnitFct](PosUnitFct.md) — 位置比例系数
-- [UsrUnits/AuxUsrUnits](../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) — 与本功能互斥的嵌入式缩放
+- [UsrUnits/AuxUsrUnits](../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) — 嵌入式每轴缩放

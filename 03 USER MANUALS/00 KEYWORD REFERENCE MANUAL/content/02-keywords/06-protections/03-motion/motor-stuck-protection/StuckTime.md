@@ -30,7 +30,7 @@ doc_revision: '2026.06'
 ---
 # StuckTime
 
-> **AGM800-EC** — This keyword remains in milliseconds. AGM800-EC converts at **16 samples/ms** (62.5 µs per sample), with integer rounding where required. The 16.384 samples/ms calculations below apply to the legacy 16,384 Hz configuration. Product-dependent raw sample limits and defaults must be read from the controller metadata. See [AGM800-EC timing and units](../../../01-system/03-timing/AGM800-EC-units.md).
+> **AGM800-EC** — This keyword remains in milliseconds. AGM800-EC converts at **16 samples/ms** (62.5 µs per sample), with integer rounding where required. The 16.384 samples/ms calculations below apply to the legacy 16,384 Hz configuration. The default remains 4096 internal samples: **256 ms on AGM800-EC**, versus 250 ms on legacy AGM800. Other product-dependent raw sample limits must be read from the controller metadata. See [AGM800-EC timing and units](../../../01-system/03-timing/AGM800-EC-units.md).
 
 Duration the stuck condition must persist before the axis is flagged stuck.
 

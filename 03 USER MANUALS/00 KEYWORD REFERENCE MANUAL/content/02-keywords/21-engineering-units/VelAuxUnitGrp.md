@@ -23,7 +23,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 ---
 # VelAuxUnitGrp
@@ -50,7 +50,7 @@ Each element returns the internal command code of the member keyword (range 0–
 
 This grouping is consumed by the host display/units layer; it does not change the internal control computation. The scale factor and label for these keywords come from [VelAuxUnitFct](VelAuxUnitFct.md) and [VelAuxUnitUnt](VelAuxUnitUnt.md).
 
-Global User Units and the embedded auxiliary scaling [AuxUsrUnits](../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) are mutually exclusive on the same axis. If `UserUnitsEn` is on and `AuxUsrUnits` is also set to a non-default scaling, reading or writing a member of this group (the auxiliary feedback velocity [AuxVel](../10-motion/01-kinematics-status/AuxVel.md)) is rejected with error `338`. The membership keyword itself is never affected; only its members are. Leave `AuxUsrUnits` at its default or set `UserUnitsEn` back to 0 to resolve the conflict.
+Error `338` applies only when the accessed keyword uses embedded `UsrUnits`, `AuxUsrUnits` or `PDUsrUnits` scaling, belongs to the corresponding global unit group, and both `UserUnitsEn = 1` and a non-default embedded ratio are set on that axis. On AGM800-EC, `AuxVel` and `PDVel` use fixed time-domain scaling and do not raise this conflict. Position keywords that retain embedded scaling remain subject to the check. See [AGM800-EC timing and units](../01-system/03-timing/AGM800-EC-units.md) for the full conversion list.
 
 This keyword is available from v5 (central-i) only.
 
