@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-09'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # MotorOn
@@ -40,6 +40,8 @@ language: zh-CN
 电机也可能因控制器故障而被内部禁用（参见 [ConFlt](../../../02-keywords/07-status-and-faults/ConFlt.md) 和 [控制器错误代码](../../../04-error-codes/controller-error-codes.md)）。当轴被使能时，`ConFlt` 会被清除；如果故障状态仍然存在，故障将被重新触发，轴随即再次被禁用。如需在使能电机时进行预检查并获得可报告的结果，请使用 [CanMotorOn](CanMotorOn.md) / [CanMotorOnRes](CanMotorOnRes.md)。
 
 某些关键字仅在轴被禁用时才可写入或调用——详情请参阅各关键字的属性表（`ok_motor_on`）。
+
+六轴 AGM800-EC 配置仅支持 A–F 轴的运动和电机使能；模拟电机也受此限制。其余端口仍可使用受支持的非运动功能。请通过 [Identity](../../01-system/01-status/Identity.zh.md) 的字段 23 查询伺服轴数，字段 16 查询分配的端口数。
 
 ## 工作原理
 

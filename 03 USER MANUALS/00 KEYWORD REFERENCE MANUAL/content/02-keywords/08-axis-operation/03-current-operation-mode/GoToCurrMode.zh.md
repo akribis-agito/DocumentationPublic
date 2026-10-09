@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-10'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # GoToCurrMode
@@ -36,6 +36,8 @@ language: zh-CN
 ## 概述
 
 `GoToCurrMode` 指示控制器以平稳的方式进入电流运行模式。有关进入电流模式的其他方法，请参见 [OperationMode](../01-general-keywords/OperationMode.md)。
+
+六轴 AGM800-EC 配置仅支持 A–F 轴的运动和电机使能；模拟电机也受此限制。其余端口仍可使用受支持的非运动功能。请通过 [Identity](../../01-system/01-status/Identity.zh.md) 的字段 23 查询伺服轴数，字段 16 查询分配的端口数。
 
 ## 工作原理
 

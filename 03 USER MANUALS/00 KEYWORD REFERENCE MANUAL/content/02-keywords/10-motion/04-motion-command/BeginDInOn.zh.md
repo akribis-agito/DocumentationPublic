@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-10'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # BeginDInOn
@@ -38,6 +38,8 @@ language: zh-CN
 `BeginDInOn` 使一条 [Begin](Begin.md) 命令在运动实际启动之前**等待某个数字量输入上升沿**。单独发出时，`Begin` 会在下一个控制周期启动运动；当 `BeginDInOn = 1` 时，`Begin` 改为武装该次运动并将其挂起，直到所配置的输入上升。这使得运动可以在软件控制下完成设置，但由外部硬件时序来释放。它是一个轴相关参数（范围 0–1，默认 0），保存至闪存，可随时更改。
 
 `BeginDInOn` 是*每轴使能*。释放该次运动的输入由 [DInMode](../../05-inputs-outputs/04-digital-inputs/DInMode.md) 单独选定，它必须为该轴的某个数字量输入分配启动运动功能（功能码 3）。两者都必须设置：`BeginDInOn = 1` 且有一个 `DInMode` 输入被配置为启动运动。
+
+六轴 AGM800-EC 配置仅支持 A–F 轴的运动和电机使能；模拟电机也受此限制。其余端口仍可使用受支持的非运动功能。请通过 [Identity](../../01-system/01-status/Identity.zh.md) 的字段 23 查询伺服轴数，字段 16 查询分配的端口数。
 
 ## 工作原理
 

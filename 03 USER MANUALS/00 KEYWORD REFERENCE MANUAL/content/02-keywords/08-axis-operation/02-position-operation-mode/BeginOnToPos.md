@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-10'
+doc_revision: '2026.10'
 ---
 # BeginOnToPos
 
@@ -37,6 +37,8 @@ One-time flag to run a point-to-point move on entering position mode.
 `BeginOnToPos` is a one-time (auto-clearing) flag which, if set to 1, instructs the controller to launch a point-to-point motion at the moment the axis enters position operation mode. The target position is defined by [RetractTarget](RetractTarget.md) (or [RelTrgt](../../10-motion/13-motion-mode-ptp/RelTrgt.md)) and the maximum velocity by [RetractSpeed](RetractSpeed.md). As soon as the move is armed and triggered, the flag is reset to 0, so it must be set again for the next entry.
 
 The flag is honoured only on the transitions that prepare a clean entry into position mode: the [GoToPosMode](GoToPosMode.md) command, the internal feedback-threshold switch ([PosPosFlag](PosPosFlag.md)/[PosPosTh](PosPosTh.md) and the scheduled-table end), and a [DInMode](../../05-inputs-outputs/04-digital-inputs/DInMode.md) position/current or position/force input. It has **no effect** when [OperationMode](../01-general-keywords/OperationMode.md) is changed by direct assignment.
+
+The six-axis AGM800-EC configuration supports motion and motor enable only on axes A–F, including simulated motors. The remaining ports retain supported non-motion functions. Read [Identity](../../01-system/01-status/Identity.md) field 23 for the servo-axis count and field 16 for the allocated port count.
 
 ## How it works
 

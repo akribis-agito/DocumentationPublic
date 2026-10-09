@@ -7,24 +7,22 @@ availability:
   - v5
 can_code: 844
 attributes:
-  access: ro
-  scope: axis
+  access: rw
+  scope: non-axis
   flash: false
   type: scalar
   array_size: 1
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
-  units: func
-  range:
-  - 0
-  - 0
-  default: 0
+  units: none
+  range: null
+  default: null
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-30'
-doc_revision: '2026.06'
+last_updated: '2026-10-10'
+doc_revision: '2026.10'
 ---
 # CommitMotion
 
@@ -32,11 +30,13 @@ Command that commits a staged on-the-fly change to a running sine point-to-point
 
 ## Overview
 
-`CommitMotion` applies a change to a sine point-to-point move **while that move is already running**, without stopping and re-issuing it. You stage the new move parameters with the axis still in motion, then call `CommitMotion` to ask the controller to recalculate the profile and transition to the new target seamlessly. It is an axis-related command function and carries no value.
+`CommitMotion` applies a change to a sine point-to-point move **while that move is already running**, without stopping and re-issuing it. You stage the new move parameters with the axis still in motion, then call `CommitMotion` to ask the controller to recalculate the profile and transition to the new target seamlessly. It is a non-axis command with an axis-mask value: write `ACommitMotion=1` for axis A, `ACommitMotion=2` for B, or `ACommitMotion=3` for A and B together. Bit 0 selects A, bit 1 selects B, and subsequent bits select subsequent axes.
 
 It is only meaningful in the sine point-to-point modes ([MotionMode](../02-motion-configuration/MotionMode.md) = 20, sine PTP, and 21, sine PTP repetitive) while the axis is in motion. In any other mode, or when the axis is not in motion, the command is rejected.
 
-Available on central-i (v5).
+Available on central-i (v5). Command text still requires the communication prefix: use `ACommitMotion=...`. The mask, rather than the prefix, selects the axes.
+
+The six-axis AGM800-EC configuration accepts only axes A–F in the mask (bits 0–5). Within the command range 1–4095, a mask selecting an unsupported axis G–L returns error 170 before any selected axis is committed, including mixed masks such as 65 (A and G). A supported mask must still pass the motion-mode checks below. A zero mask is outside the command range. See [Identity](../../01-system/01-status/Identity.md) field 23 for the servo-axis count.
 
 ## How it works
 
@@ -67,7 +67,7 @@ AAbsTrgt=100000      ; initial target
 ABegin               ; start the sine PTP move
                      ; ... while it is running, stage a new target ...
 AAbsTrgt=150000      ; new target
-ACommitMotion        ; apply the new target on the fly; OK = accepted, error = rejected/timed out
+ACommitMotion=1       ; commit axis A; OK = accepted, error = rejected/timed out
 ```
 
 ### Edge cases
@@ -77,7 +77,7 @@ ACommitMotion        ; apply the new target on the fly; OK = accepted, error = r
 - **Too late in the move** — the profiler may reject the change when there is not enough of the move left to recalculate and transition (error 387, the 16-cycle window does not fit in the time remaining); the original move finishes unchanged.
 - **Recalculation overran** — if the background recalculation does not complete within the 16-cycle window the commit is abandoned (error 388) and the original move continues unchanged.
 - **Timeout** — if the profiler does not respond within about one second at any handshake step, the command returns an error.
-- **Read-only / function** — `CommitMotion` is a command (issue it to trigger it); it carries no value to write.
+- **Axis mask** — write the mask to execute the command; it is not a stored setting.
 - **Platform** — v5 central-i only.
 
 ## See also

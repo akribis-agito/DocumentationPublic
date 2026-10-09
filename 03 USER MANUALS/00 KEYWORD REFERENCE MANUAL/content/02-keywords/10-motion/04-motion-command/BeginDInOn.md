@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-10'
+doc_revision: '2026.10'
 ---
 # BeginDInOn
 
@@ -37,6 +37,8 @@ Enables a digital-input trigger that automatically issues `Begin` on the axis.
 `BeginDInOn` makes a [Begin](Begin.md) command **wait for a digital-input rising edge** before the move actually starts. Issued by itself, `Begin` starts motion on the next control cycle; with `BeginDInOn = 1`, `Begin` instead arms the move and holds it suspended until the configured input rises. This lets a move be set up under software control but released by external hardware timing. It is an axis-related parameter (range 0–1, default 0) saved to flash, and may be changed at any time.
 
 `BeginDInOn` is the *per-axis enable*. The input that releases the move is selected separately through [DInMode](../../05-inputs-outputs/04-digital-inputs/DInMode.md), which must assign the begin-motion functionality (functionality code 3) to a digital input for that axis. Both must be set: `BeginDInOn = 1` and a `DInMode` input configured as begin-motion.
+
+The six-axis AGM800-EC configuration supports motion and motor enable only on axes A–F, including simulated motors. The remaining ports retain supported non-motion functions. Read [Identity](../../01-system/01-status/Identity.md) field 23 for the servo-axis count and field 16 for the allocated port count.
 
 ## How it works
 

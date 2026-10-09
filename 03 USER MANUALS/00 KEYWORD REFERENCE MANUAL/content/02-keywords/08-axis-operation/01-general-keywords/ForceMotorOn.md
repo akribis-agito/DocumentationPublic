@@ -23,8 +23,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-09'
+doc_revision: '2026.10'
 ---
 # ForceMotorOn
 
@@ -34,9 +34,11 @@ Enables the motor before commutation is done, for current-loop tuning only.
 
 `ForceMotorOn` enables the motor **even though the axis has not been commutated (phased) yet**. Normally the controller refuses to enable an un-phased axis, and it will trip an enabled axis off the instant phasing is found to be missing, because driving an un-phased motor can inject DC current into a single winding. `ForceMotorOn` is the deliberate, guarded exception to that rule: it is intended for **current-loop tuning**, where you need the power stage live while the motor is held under current control before phasing has been performed.
 
-Because it overrides a safety interlock, the enable is protected. Writing `ForceMotorOn` only takes effect when the write carries the specific reserved value **`555851`**; any other value is rejected with error `148` and the motor is not forced on. Reading `ForceMotorOn` returns the current state: `1` while the forced-on (un-phased) enable is active, `0` otherwise.
+Because it overrides a safety interlock, the enable is protected. On a supported axis, writing `ForceMotorOn` only takes effect when the write carries the specific reserved value **`555851`**; any other value is rejected with error `148` and the motor is not forced on. Reading `ForceMotorOn` returns the current state: `1` while the forced-on (un-phased) enable is active, `0` otherwise.
 
 Available on central-i (v5).
+
+The six-axis AGM800-EC configuration supports motion and motor enable only on axes A–F, including simulated motors. The remaining ports retain supported non-motion functions. Read [Identity](../../01-system/01-status/Identity.md) field 23 for the servo-axis count and field 16 for the allocated port count.
 
 ## How it works
 
@@ -65,7 +67,7 @@ AMotorOn=0           ; disable; ForceMotorOn returns to 0 automatically
 
 ### Edge cases
 
-- **Wrong write value** — any value other than `555851` is rejected with error `148`; the motor is not forced on.
+- **Wrong write value on a supported axis** — any value other than `555851` is rejected with error `148`; the motor is not forced on.
 - **Already phased** — if the axis is already commutated there is nothing to waive; the normal [MotorOn](MotorOn.md) path applies.
 - **Other pre-conditions still fail** — the forced enable still runs the full [MotorOn](MotorOn.md) pre-check chain (hardware, communication, inrush, protections); a failure there still rejects the enable.
 - **Auto-clear on motor off** — turning the motor off, or any fault that disables it, resets `ForceMotorOn` to `0`; the no-phasing protection then re-arms.

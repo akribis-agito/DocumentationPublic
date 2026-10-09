@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-09'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # CanMotorOn
@@ -38,6 +38,8 @@ language: zh-CN
 `CanMotorOn` 是一个命令函数，用于测试轴*是否能够*被使能，并在 [CanMotorOnRes](CanMotorOnRes.md) 中报告结果。它是轴相关命令，可在任意时刻发出。
 
 重要提示：`CanMotorOn` **不会**使电机上电。它运行与 `MotorOn = 1` 相同的预条件检查，但并不进行使能，而是将 `1`（全部检查通过——使能将成功）或第一个失败检查的错误/故障码写入 [CanMotorOnRes](CanMotorOnRes.md)。要实际使能轴，仍需写入 [MotorOn](MotorOn.md) `= 1`。当你想知道使能*为何*会被拒绝而又不想触发错误响应时，可先使用 `CanMotorOn`。
+
+六轴 AGM800-EC 配置仅支持 A–F 轴的运动和电机使能；模拟电机也受此限制。其余端口仍可使用受支持的非运动功能。请通过 [Identity](../../01-system/01-status/Identity.zh.md) 的字段 23 查询伺服轴数，字段 16 查询分配的端口数。
 
 ## 工作原理
 
