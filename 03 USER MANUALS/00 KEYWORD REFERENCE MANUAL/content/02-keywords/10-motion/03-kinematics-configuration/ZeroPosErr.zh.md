@@ -43,6 +43,8 @@ language: zh-CN
 
 当电机失能时，`ZeroPosErr` 不执行任何操作（在该状态下参考已经跟随反馈）。当电机使能时，它采样当前反馈 `Pos` 并将其写入**整个参考链**——`PosRef`、整形后及整形滤波后的参考以及它们的全部 64 位历史，加上高精度参考累加器——同时保持 `Pos` 不变。结果为 `PosRef = Pos`，即 `PosErr = 0`。与 [SetPosition](SetPosition.md) 一样，它会暂时将 [Jerk](Jerk.md) 强制为 `0` 以重新填充平滑缓冲区，并重置参考滤波器历史。
 
+`ZeroPosErr` 会调整其所赋值的每个编码器（主编码器，以及在双环编码器交换时的 `AuxPos`）的硬件与固件之间的捕获偏移，因此此后发布的 `LockVal` 使用 `ZeroPosErr` 之后的坐标，无需切换 `LockEn` 或再次执行 `LockEventInit`；这也包括在 `ZeroPosErr` 之后才收到邮箱回复的捕获。已经发布的 `LockVal` 和捕获历史表项不会被改写。
+
 如果在发出 `ZeroPosErr` 时轴正在运动，控制器首先执行一次 [Abort](../04-motion-command/Abort.md) 式的立即结束运动，然后将误差清零。它假定此刻电机实际并未移动；对运动中的轴发出该命令的行为类似于中止。
 
 ### 条件
