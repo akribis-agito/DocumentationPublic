@@ -36,7 +36,7 @@ It is only meaningful in the sine point-to-point modes ([MotionMode](../02-motio
 
 Available on central-i (v5). Command text still requires the communication prefix: use `ACommitMotion=...`. The mask, rather than the prefix, selects the axes.
 
-The six-axis AGM800-EC configuration accepts only axes A–F in the mask (bits 0–5). A mask containing an unsupported axis returns error 170 before any selected axis is committed, including mixed masks such as 65 (A and G). A supported mask must still pass the motion-mode checks below. A zero mask is outside the command range. See [Identity](../../01-system/01-status/Identity.md) field 23 for the servo-axis count.
+The six-axis AGM800-EC configuration accepts only axes A–F in the mask (bits 0–5). Within the command range 1–4095, a mask selecting an unsupported axis G–L returns error 170 before any selected axis is committed, including mixed masks such as 65 (A and G). A supported mask must still pass the motion-mode checks below. A zero mask is outside the command range. See [Identity](../../01-system/01-status/Identity.md) field 23 for the servo-axis count.
 
 ## How it works
 
