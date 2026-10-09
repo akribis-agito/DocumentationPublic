@@ -27,8 +27,8 @@ attributes:
 overrides:
   central-i.v5:
     array_size: 76
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-09'
+doc_revision: '2026.10'
 ---
 # Identity
 
@@ -108,6 +108,7 @@ The product type is a small numeric code identifying the model. The codes corres
 | 12 | AGD155EC |
 | 13 | AGD101EC |
 | 14 | AGD156EC |
+| 16 | AGM800-EC |
 
 Additional internal type codes exist for non-standard products; the codes above are the ones returned by the standard customer models.
 

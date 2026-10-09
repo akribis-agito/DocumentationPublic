@@ -27,8 +27,8 @@ attributes:
 overrides:
   central-i.v5:
     array_size: 76
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-09'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # Identity
@@ -109,6 +109,7 @@ language: zh-CN
 | 12 | AGD155EC |
 | 13 | AGD101EC |
 | 14 | AGD156EC |
+| 16 | AGM800-EC |
 
 非标准产品还存在额外的内部类型代码；上方代码是标准客户型号返回的代码。
 
