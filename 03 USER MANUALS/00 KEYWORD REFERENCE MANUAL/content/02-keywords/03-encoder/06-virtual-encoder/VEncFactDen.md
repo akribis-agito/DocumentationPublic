@@ -38,9 +38,11 @@ Denominator of the scaling ratio applied to the virtual encoder source signal.
 
 ## How it works
 
-$$\text{Output count} = \text{Source} \cdot \frac{\text{VEncFact}}{\text{VEncFactDen}}$$
+$$\text{Tracking reference} = \text{Source} \cdot \frac{\text{VEncFact}}{\text{VEncFactDen}}$$
 
 The firmware keeps a precomputed `1 / VEncFactDen` for the per-cycle tracking calculation, updated whenever the scaling factor is written. The default `VEncFactDen = 65536` (with `VEncFact = 65536`) gives unity scaling and matches the fixed `/65536` factor used by older firmware.
+
+In firmware containing [Firmware-Main #1103](https://github.com/akribis-agito/Firmware-Main/issues/1103), writing `VEncFactDen` while `VEncOn=1` restarts tracking at the new reference instead of replaying the reference change as a pulse burst. The source variable itself is unchanged. See [VEncOn](VEncOn.md) for source-step handling and motor-on protection.
 
 ## Examples
 

@@ -39,9 +39,11 @@ language: zh-CN
 
 ## 工作原理
 
-$$\text{Output count} = \text{Source} \cdot \frac{\text{VEncFact}}{\text{VEncFactDen}}$$
+$$\text{Tracking reference} = \text{Source} \cdot \frac{\text{VEncFact}}{\text{VEncFactDen}}$$
 
 固件为逐周期的跟踪计算保留了一个预先计算好的 `1 / VEncFactDen`，每当写入缩放因子时即更新。默认值 `VEncFactDen = 65536`（配合 `VEncFact = 65536`）给出单位缩放，并与旧固件使用的固定 `/65536` 因子相匹配。
+
+在包含 [Firmware-Main #1103](https://github.com/akribis-agito/Firmware-Main/issues/1103) 修复的固件中，当 `VEncOn=1` 时写入 `VEncFactDen`，会以新参考值重新开始跟踪，而不会将参考值变化作为脉冲突发输出。源变量本身保持不变。源值跳变的处理及电机使能时的保护，请参阅 [VEncOn](VEncOn.md)。
 
 ## 示例
 

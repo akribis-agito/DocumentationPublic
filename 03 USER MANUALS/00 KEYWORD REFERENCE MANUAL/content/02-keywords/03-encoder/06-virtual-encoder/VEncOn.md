@@ -54,9 +54,15 @@ Each control cycle the controller:
 3. Runs a PI tracking controller plus feed-forward so the emitted count (scaled by `VEncFactDen`) follows the scaled source with minimal lag, and computes the number of edges to emit this cycle.
 4. Writes the pulse count, 50% duty period, and "clocks-to-first-pulse" (from [VEncDelay](VEncDelay.md)) to the hardware.
 
-The edges computed for a cycle are spread evenly across that one control cycle and re-armed each cycle, so the output is re-clocked every cycle rather than free-running. The control cycle runs at roughly 16.4 kHz (about 61 microseconds per cycle), so the effective output rate is the number of edges emitted in a cycle taken over that fixed ~61 microsecond window: emitting *N* edges in a cycle corresponds to *N* x 16,384 edges per second.
+The edges computed for a cycle are spread evenly across that control cycle and re-armed each cycle. The control frequency depends on the product configuration: emitting *N* edges per cycle at a control frequency of *f* cycles per second gives an output rate of *N × f* edges per second.
 
 If the required number of pulses in one cycle exceeds the hardware limit while the motor is on, the axis faults: [ConFlt](../../07-status-and-faults/ConFlt.md) reports the virtual-encoder maximum-pulses-exceeded fault. The per-cycle limit is roughly a few thousand edges (the exact figure depends on the product's internal clock), because each edge needs both an on and an off half-period within the cycle; the limit is therefore about half the number of clock counts available in one control cycle.
+
+### Restarting tracking after a source change
+
+In firmware containing [Firmware-Main #1103](https://github.com/akribis-agito/Firmware-Main/issues/1103), writing `VEncSrc`, `VEncFact` or `VEncFactDen` while enabled restarts tracking at the new source/reference. The reference change is discarded rather than emitted as a catch-up pulse burst. This resets the tracker, not the selected source variable.
+
+A source-value step whose scaled magnitude exceeds the product's per-cycle pulse capacity also restarts tracking, after modulo-wrap compensation. Subsequent ordinary source motion is followed from the new reference. With the motor on, a real over-capacity source step still turns the motor off and reports fault **1066**; the existing tracker-output over-capacity protection also remains. Initial enable or explicit source/scale reconfiguration does not itself count as source motion merely because the old stored reference differs.
 
 ### Hardware behavior
 

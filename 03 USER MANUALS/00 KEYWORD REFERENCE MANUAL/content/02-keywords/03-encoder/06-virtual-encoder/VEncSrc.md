@@ -42,9 +42,11 @@ Selects the source signal used to generate the virtual encoder position.
 
 In the v4 firmware the source is always read as a **32-bit integer**, so a source that is natively a 64-bit integer, float, or double will not be read correctly. The v5 Central-i firmware records the source's true data type (32-bit integer, 64-bit integer, float, or double) and reads it accordingly, then converts the read value to a 32-bit integer for tracking.
 
-If the chosen source itself wraps under modulo ([ModRev](../04-modulo-mode/ModRev.md)), the firmware detects the wrap (a jump greater than half the source's modulo span) and compensates the tracking memories so the generated output stays continuous.
+If the chosen source wraps under modulo ([ModRev](../04-modulo-mode/ModRev.md)), the firmware detects the wrap (a jump greater than half the source's modulo span) and compensates the tracking memories. With the #1103 behavior described below, the capacity check uses this compensated step; wrapping alone does not cause a restart, but a compensated step above capacity does.
 
 The numeric value to write for a given source is the keyword's command code; obtain it from PCSuite or the keyword reference rather than guessing.
+
+In firmware containing [Firmware-Main #1103](https://github.com/akribis-agito/Firmware-Main/issues/1103), writing `VEncSrc` while `VEncOn=1` restarts tracking at the new reference instead of replaying the reference change as a pulse burst. The source variable itself is unchanged. See [VEncOn](VEncOn.md) for source-step handling and motor-on protection.
 
 ## Examples
 
