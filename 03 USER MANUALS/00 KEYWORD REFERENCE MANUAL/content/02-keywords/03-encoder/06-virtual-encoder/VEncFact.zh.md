@@ -39,13 +39,15 @@ language: zh-CN
 
 ## 工作原理
 
-所发出的编码器计数按此有理因子缩放后跟踪源值：
+跟踪参考值为按此有理因子缩放后的源值：
 
-$$\text{Output count} = \text{Source} \cdot \frac{\text{VEncFact}}{\text{VEncFactDen}}$$
+$$\text{Tracking reference} = \text{Source} \cdot \frac{\text{VEncFact}}{\text{VEncFactDen}}$$
 
 在内部，固件首先将源乘以 `VEncFact` 进入 64 位“输出平面”，然后由一个跟踪控制器驱动所发出的计数，使得 `count × VEncFactDen` 跟随 `source × VEncFact`。默认值 `VEncFact = VEncFactDen = 65536` 给出单位缩放，并与使用固定 `/65536` 因子的较旧固件保持向后兼容。
 
 选择过于激进的缩放（相对于源的移动速度而言 `VEncFact / VEncFactDen` 过大）会使虚拟编码器在一个控制周期内必须发出的脉冲数超过硬件所能产生的数量。若在电机使能时超出该限制，控制器将关闭电机并记录故障 **1066**（虚拟编码器超过每周期最大脉冲数）。
+
+在包含 [Firmware-Main #1103](https://github.com/akribis-agito/Firmware-Main/issues/1103) 修复的固件中，当 `VEncOn=1` 时写入 `VEncFact`，会以新参考值重新开始跟踪，而不会将参考值变化作为脉冲突发输出。源变量本身保持不变。源值跳变的处理及电机使能时的保护，请参阅 [VEncOn](VEncOn.md)。
 
 ## 示例
 

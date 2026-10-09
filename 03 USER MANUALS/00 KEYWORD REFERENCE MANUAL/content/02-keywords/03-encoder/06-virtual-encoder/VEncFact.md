@@ -38,13 +38,15 @@ Numerator of the scaling ratio applied to the virtual encoder source signal.
 
 ## How it works
 
-The emitted encoder count tracks the source value scaled by this rational factor:
+The tracking reference is the source value scaled by this rational factor:
 
-$$\text{Output count} = \text{Source} \cdot \frac{\text{VEncFact}}{\text{VEncFactDen}}$$
+$$\text{Tracking reference} = \text{Source} \cdot \frac{\text{VEncFact}}{\text{VEncFactDen}}$$
 
 Internally the firmware first multiplies the source by `VEncFact` into a 64-bit "output plane", then a tracking controller drives the emitted count so that `count × VEncFactDen` follows `source × VEncFact`. The default `VEncFact = VEncFactDen = 65536` gives unity scaling and preserves backward compatibility with older firmware that used a fixed `/65536` factor.
 
 Choosing too aggressive a scale (a large `VEncFact / VEncFactDen` relative to how fast the source moves) makes the number of pulses the virtual encoder must emit in one control cycle exceed what the hardware can produce. If that limit is exceeded while the motor is on, the controller turns the motor off and logs fault **1066** (virtual encoder exceeded the maximum number of pulses per cycle).
+
+In firmware containing [Firmware-Main #1103](https://github.com/akribis-agito/Firmware-Main/issues/1103), writing `VEncFact` while `VEncOn=1` restarts tracking at the new reference instead of replaying the reference change as a pulse burst. The source variable itself is unchanged. See [VEncOn](VEncOn.md) for source-step handling and motor-on protection.
 
 ## Examples
 
