@@ -29,10 +29,12 @@ overrides:
     range:
     - -2147483647
     - 2147483647
-last_updated: '2026-05-30'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 ---
 # ECAMGap
+
+> **AGM800-EC** — The physical control rate is 16,000 Hz; the cam interpolation retains its `2^14` fixed-point domain. The numeric interpolation limit below is not rescaled merely because the physical clock differs. See [AGM800-EC timing and units](../../01-system/03-timing/AGM800-EC-units.md).
 
 Linear spacing between successive ECAM master values; its sign sets pattern direction.
 

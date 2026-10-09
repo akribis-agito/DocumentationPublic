@@ -1,5 +1,7 @@
 # 基于事件的反馈记录
 
+> **AGM800-EC** — 此产品的经过时间应按 **16,000 个控制周期/s（每周期 62.5 µs）** 计算。下文的 16,384 Hz 时间换算和示例描述传统配置。`2^14` 等定点比例保持不变。 参见 [AGM800-EC 时间与单位](../../01-system/03-timing/AGM800-EC-units.zh.md)。
+
 Agito 允许根据由 LockSrc 定义的数字事件来记录编码器反馈值。该功能通过 LockEn 启用。启用该功能（LockEn = 1）后，内部计时器（LockTimer）将从 0 开始计时。
 
 ![基于事件的反馈记录：数字事件（LockSrc，边沿）每次发生时使 LockCntr 递增并记录 LockVal；捕获的位置与时间存入 LockValTable 与 LockTimeTable，存满后溢出至 B 表](lock-capture.svg)

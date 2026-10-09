@@ -25,10 +25,12 @@ attributes:
   implemented: final
 overrides: {}
 summary: Rate at which the map error offset ramps toward its target.
-last_updated: '2026-05-29'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 ---
 # MapErrOffRamp
+
+> **AGM800-EC** — The slew rate remains in counts/s. Each cycle applies `MapErrOffRamp / 16000` counts before the target clamp, using the 62.5 µs cycle period. The legacy default/rate example below must not be read as an EC clock frequency. See [AGM800-EC timing and units](../01-system/03-timing/AGM800-EC-units.md).
 
 Rate at which the map error offset ramps toward its target.
 

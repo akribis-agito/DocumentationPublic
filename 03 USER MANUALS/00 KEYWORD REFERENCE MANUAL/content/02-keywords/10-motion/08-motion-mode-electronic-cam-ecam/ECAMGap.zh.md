@@ -29,11 +29,13 @@ overrides:
     range:
     - -2147483647
     - 2147483647
-last_updated: '2026-05-30'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 language: zh-CN
 ---
 # ECAMGap
+
+> **AGM800-EC** — 实际控制频率为 16,000 Hz；凸轮插值仍采用 `2^14` 定点域。下文的插值数值限值不会仅因实际时钟不同而按比例改变。 参见 [AGM800-EC 时间与单位](../../01-system/03-timing/AGM800-EC-units.zh.md)。
 
 相邻 ECAM 主轴值之间的线性间距；其符号决定曲线方向。
 

@@ -25,10 +25,12 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-30'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 ---
 # Time
+
+> **AGM800-EC** — The seconds accumulator counts **16,000 samples per second**, updated in steps of 16 samples (1 ms). `Time` still reports whole seconds. The 16384-sample calculations and measured legacy-clock accuracy below do not describe AGM800-EC. See [AGM800-EC timing and units](AGM800-EC-units.md).
 
 Read-only seconds elapsed since power-on.
 

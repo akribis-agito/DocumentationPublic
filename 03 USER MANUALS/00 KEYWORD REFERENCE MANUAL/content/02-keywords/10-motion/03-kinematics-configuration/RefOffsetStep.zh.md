@@ -25,11 +25,13 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 language: zh-CN
 ---
 # RefOffsetStep
+
+> **AGM800-EC** — 参考累加器仍采用 `2^14` 定点比例。在默认 `UsrUnits = 65536` 下，`RefOffsetStep = 16384` 每个有效周期增加一个位置计数，即 AGM800-EC 上的 **16,000 计数/s**。指令值 1 每周期仅为 1/16384 个计数。此关键字仍使用嵌入式 `UsrUnits` 缩放。 参见 [AGM800-EC 时间与单位](../../01-system/03-timing/AGM800-EC-units.zh.md)。
 
 在参考偏置修正期间每采样施加的位置偏置量。
 

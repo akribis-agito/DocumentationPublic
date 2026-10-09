@@ -23,7 +23,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 ---
 # UserUnitsEn
@@ -47,18 +47,11 @@ This feature is available from central-i v5 only.
 
 The setting is stored in flash, so it persists across power cycles.
 
-### Mutual exclusivity with the embedded UsrUnits scaling
+### Embedded-scaling conflict
 
-The global engineering-units feature and the embedded per-axis [UsrUnits](../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) / `AuxUsrUnits` scaling are **mutually exclusive on the same axis**. Both express keyword values in something other than raw internal units, so only one may be active at a time.
+Error `338` applies only when the accessed keyword uses embedded `UsrUnits`, `AuxUsrUnits` or `PDUsrUnits` scaling, belongs to the corresponding global unit group, and both `UserUnitsEn = 1` and a non-default embedded ratio are set on that axis. On AGM800-EC, `AuxVel` and `PDVel` use fixed time-domain scaling and do not raise this conflict. Position keywords that retain embedded scaling remain subject to the check. See [AGM800-EC timing and units](../01-system/03-timing/AGM800-EC-units.md) for the full conversion list.
 
-The controller enforces this whenever an affected keyword is accessed. Reading or writing a keyword that belongs to one of the global unit groups is rejected with error code `338` if both of the following are true for that axis:
-
-- `UserUnitsEn` is set to 1, and
-- the corresponding embedded scaling (`UsrUnits` for main-feedback keywords, or the auxiliary / pulse-direction variants for their respective keywords) is set to a non-default value.
-
-Error `338` reports: "Global User Units feature is mutually exclusive with embedded controller user units. Please disable one of the scaling factors." To resolve the conflict, leave the embedded scaling at its default or set `UserUnitsEn` back to 0.
-
-If the embedded scaling is at its default value, enabling `UserUnitsEn` does not raise this conflict.
+To clear a conflict, restore the matching embedded ratio to its default or set `UserUnitsEn` to 0.
 
 ## Examples
 
@@ -73,4 +66,4 @@ AUserUnitsEn[1]        ; read the current enable state
 - [00-overview](00-overview.md) — the Group / Factor / Unit model
 - [PosUnitGrp](PosUnitGrp.md) — keywords affected for position
 - [PosUnitFct](PosUnitFct.md) — position scale factor
-- [UsrUnits/AuxUsrUnits](../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) — the embedded scaling this feature is mutually exclusive with
+- [UsrUnits/AuxUsrUnits](../03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md) — embedded per-axis scaling

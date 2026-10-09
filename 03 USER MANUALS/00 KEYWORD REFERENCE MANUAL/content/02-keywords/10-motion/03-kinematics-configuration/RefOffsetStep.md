@@ -25,10 +25,12 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 ---
 # RefOffsetStep
+
+> **AGM800-EC** — The reference accumulator stays at `2^14` fixed-point scaling. With default `UsrUnits = 65536`, `RefOffsetStep = 16384` adds one position count per active cycle: **16,000 counts/s** on AGM800-EC. A command value of 1 is only 1/16384 count per cycle. Embedded `UsrUnits` scaling still applies to this keyword. See [AGM800-EC timing and units](../../01-system/03-timing/AGM800-EC-units.md).
 
 Per-sample position offset magnitude applied during a reference offset correction.
 

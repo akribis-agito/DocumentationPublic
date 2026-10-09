@@ -25,11 +25,13 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 language: zh-CN
 ---
 # ForceSamples
+
+> **AGM800-EC** — 此产品的经过时间应按 **16,000 个控制周期/s（每周期 62.5 µs）** 计算。下文的 16,384 Hz 时间换算和示例描述传统配置。`2^14` 等定点比例保持不变。 参见 [AGM800-EC 时间与单位](../../01-system/03-timing/AGM800-EC-units.zh.md)。
 
 上一次完成的 ForceCmdVal 应用的各项时序，以控制器周期为单位。
 

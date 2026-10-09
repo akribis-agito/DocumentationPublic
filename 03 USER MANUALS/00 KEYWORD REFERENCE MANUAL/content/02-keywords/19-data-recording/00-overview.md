@@ -1,5 +1,7 @@
 # Data recording
 
+> **AGM800-EC** — Use **16,000 controller cycles/s (62.5 µs/cycle)** for elapsed-time calculations on this product. The 16,384 Hz time conversions and examples below describe the legacy configuration. Fixed-point scales such as `2^14` remain unchanged. See [AGM800-EC timing and units](../01-system/03-timing/AGM800-EC-units.md).
+
 Data recording lets the user record a time series of any set of parameters. The recorded data are stored within the controller and can be streamed to the PC afterwards.
 
 ![Data recording: the recorder pipeline](recorder-pipeline.svg)

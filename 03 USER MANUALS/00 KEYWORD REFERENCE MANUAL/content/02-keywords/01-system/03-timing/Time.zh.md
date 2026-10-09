@@ -25,11 +25,13 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-30'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 language: zh-CN
 ---
 # Time
+
+> **AGM800-EC** — 秒累加器每秒计入 **16,000 个采样**，每次更新 16 个采样（1 ms）。`Time` 仍报告整秒。下文的 16384 个采样计算和传统时钟实测精度不适用于 AGM800-EC。 参见 [AGM800-EC 时间与单位](AGM800-EC-units.zh.md)。
 
 只读，自上电以来经过的秒数。
 

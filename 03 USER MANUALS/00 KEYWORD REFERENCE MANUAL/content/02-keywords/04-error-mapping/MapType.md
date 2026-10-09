@@ -25,10 +25,12 @@ attributes:
   implemented: final
 overrides: {}
 summary: Selects the error-mapping dimension (off, 1D, 2D, or 3D).
-last_updated: '2026-06-02'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 ---
 # MapType
+
+> **AGM800-EC** — Use **16,000 controller cycles/s (62.5 µs/cycle)** for elapsed-time calculations on this product. The 16,384 Hz time conversions and examples below describe the legacy configuration. Fixed-point scales such as `2^14` remain unchanged. See [AGM800-EC timing and units](../01-system/03-timing/AGM800-EC-units.md).
 
 Selects the error-mapping dimension (off, 1D, 2D, or 3D).
 

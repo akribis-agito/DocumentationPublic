@@ -1,5 +1,7 @@
 # Timing
 
+> **AGM800-EC** — Use **16,000 controller cycles/s (62.5 µs/cycle)** for elapsed-time calculations on this product. The 16,384 Hz time conversions and examples below describe the legacy configuration. Fixed-point scales such as `2^14` remain unchanged. See [AGM800-EC timing and units](AGM800-EC-units.md).
+
 **Overview:**
 
 Agito controller reports the system timing in terms of cycle count. The timing can be used for user program function to trigger an event at correct time. Some timer keywords are also settable, allowing more flexibility in determining process time.

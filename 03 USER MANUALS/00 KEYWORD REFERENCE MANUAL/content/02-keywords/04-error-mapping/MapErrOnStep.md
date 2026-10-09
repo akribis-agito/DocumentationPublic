@@ -25,10 +25,12 @@ attributes:
   implemented: final
 overrides: {}
 summary: Step size used to apply the map correction when mapping engages.
-last_updated: '2026-05-29'
+last_updated: '2026-10-10'
 doc_revision: '2026.06'
 ---
 # MapErrOnStep
+
+> **AGM800-EC** — This dimensionless ramp-step command uses a `1.024` conversion: the internal step is the command multiplied by 1.024 and rounded to an integer. The counter full scale stays 16384; cycles last 62.5 µs. For a nonzero internal step N, engagement takes about `16384/N` cycles. The EC command range is 0–16000; the metadata maximum of 16384 is an internal bound paired with the 1.024 factor. The unscaled command examples below describe the legacy conversion. See [AGM800-EC timing and units](../01-system/03-timing/AGM800-EC-units.md).
 
 Step size used to apply the map correction when mapping engages.
 
