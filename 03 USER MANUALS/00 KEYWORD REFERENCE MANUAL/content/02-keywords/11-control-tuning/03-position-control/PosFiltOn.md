@@ -58,6 +58,12 @@ Each enabled filter applies the second-order (biquad) response built from its [P
 
 After changing `PosFiltOn` or [PosFiltDef](PosFiltDef.md), run [CalcFilters](../01-general-keywords/CalcFilters.md) so the controller recomputes the internal filter coefficients.
 
+## Low-pass reference state
+
+For AGM800 and AGM800-EC firmware containing [Firmware-Main #1177](https://github.com/akribis-agito/Firmware-Main/issues/1177), the precision correction applies to the first- and second-order low-pass response at index 1. An instant filter recalculation resets its histories; a gradual recalculation preserves the reference histories while updating the response. Changing the requested definition alone does not select a new internal calculation path: it follows the coefficients successfully applied by [CalcFilters](../01-general-keywords/CalcFilters.md).
+
+Bypassing index 1 passes the reference through. Bypassing a filter while the motor is on is distinct from a motor-off or position reset; it is not a request to reinitialize the motion reference.
+
 ## Examples
 
 ```text

@@ -59,6 +59,12 @@ summary: 启用或旁路两个位置环滤波器。
 
 更改 `PosFiltOn` 或 [PosFiltDef](PosFiltDef.md) 后，须运行 [CalcFilters](../01-general-keywords/CalcFilters.md)，使控制器重新计算内部滤波器系数。
 
+## 低通参考滤波状态
+
+对于包含 [Firmware-Main #1177](https://github.com/akribis-agito/Firmware-Main/issues/1177) 修复的 AGM800 和 AGM800-EC 固件，精度修正适用于索引 1 的一阶和二阶低通响应。立即重新计算滤波器时会重置其历史状态；渐变重新计算则在更新响应的同时保留参考历史。仅修改请求的滤波器定义不会切换内部计算路径；该路径跟随 [CalcFilters](../01-general-keywords/CalcFilters.md) 成功应用的系数。
+
+旁路索引 1 时参考值直接通过。电机开启时旁路滤波器与电机关断或位置重置不同，不表示要求重新初始化运动参考。
+
 ## 示例
 
 ```text
