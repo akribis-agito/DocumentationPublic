@@ -59,6 +59,12 @@ profiler ─► raw reference ─► (offset / moving-average) ─► smoothed r
 
 `PosRef` 报告为整形并滤波后的参考值（即将更高精度的内部值移回用户单位，并带舍入）。这与位置环用于减去反馈的值完全相同，因此 `PosErr = PosRef − Pos` 所用的正是报告的 `PosRef`——即使输入整形、注入或位置滤波器处于激活状态，`PosRef` 的读数与 `PosErr` 计算所依据的值之间也没有偏差。
 
+### 低通稳定过程与舍入
+
+在包含 [Firmware-Main #1177](https://github.com/akribis-agito/Firmware-Main/issues/1177) 修复的 AGM800 和 AGM800-EC 固件中，最终的一阶和二阶低通参考滤波器保留额外的小数状态，以修正低频下的终点偏差。传递给现有控制和导数计算的参考值仍使用相同的定点单位；额外状态不会改变绝对位置范围。
+
+额外精度的计算结果先舍入到最近的内部 Q14 步长（1/16384 计数），恰好为半步长时向正无穷方向舍入。随后，报告的整数位置对该 Q14 值保持原有舍入规则：舍入到最近整数，恰好为半整数时向正无穷方向舍入（`1.5 → 2`，`-1.5 → -1`）。这与虚拟编码器的小数稳定规则不同。整数 `PosRef` 不再变化，并不能证明所有内部小数状态或派生前馈项都已保持不变。滤波稳定过程、轨迹规划完成和实际到达目标仍是不同的概念。
+
 ### 软件位置限位钳位
 
 当参考值超出软件运动限位时，它被钳位到该限位，而非在超出后报告。参见 [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md) 和 [RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md)。

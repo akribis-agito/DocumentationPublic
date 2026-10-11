@@ -58,6 +58,12 @@ profiler ─► raw reference ─► (offset / moving-average) ─► smoothed r
 
 `PosRef` is reported as the shaped-and-filtered reference (the higher-precision internal value shifted back to user units, with rounding). This is the same value the position loop subtracts the feedback from, so `PosErr = PosRef − Pos` uses exactly the reported `PosRef` — there is no offset between what `PosRef` reads and what `PosErr` is computed against, even when input shaping, injection or the position filter is active.
 
+### Low-pass settling and rounding
+
+In AGM800 and AGM800-EC firmware containing [Firmware-Main #1177](https://github.com/akribis-agito/Firmware-Main/issues/1177), the final first- and second-order low-pass reference filters retain extra fractional state to correct low-frequency endpoint loss. The reference passed to the existing control and derivative calculations remains in the same fixed-point units; the extra state does not change the absolute position range.
+
+The extra-precision result is first rounded to the nearest internal Q14 step (1/16384 count), with exact halves toward positive infinity. The reported integer position then keeps its existing rounding rule on that Q14 value: nearest integer, with exact halves toward positive infinity (`1.5 → 2`, `-1.5 → -1`). This differs from the virtual encoder's fractional-settling rule. An integer `PosRef` that has stopped changing does not prove all internal fractional state or derived feed-forward terms are constant. Filter settling also remains separate from profiler completion and physical arrival at the target.
+
 ### Software position-limit clamping
 
 When the reference exceeds a software travel limit it is clamped to the limit rather than reported beyond it. See [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md) and [RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md).

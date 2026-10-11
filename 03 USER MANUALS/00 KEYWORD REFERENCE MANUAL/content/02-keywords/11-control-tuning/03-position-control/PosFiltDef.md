@@ -60,6 +60,12 @@ The selected filter is realised as a second-order (biquad) section in the positi
 
 The full parameter-by-type definitions, transfer functions and units are in the appendix: [Customisable filter (FiltDef)](../../../06-appendix/customisable-filter-filtdef.md).
 
+## Low-pass reference precision
+
+In AGM800 and AGM800-EC firmware containing [Firmware-Main #1177](https://github.com/akribis-agito/Firmware-Main/issues/1177), the post-profiler first- and second-order low-pass filters (index 1, types 1 and 2) retain additional internal precision. This corrects a low-frequency numerical defect that could leave the filtered reference short of a stationary target, or prevent a second-order filter from responding. The specified transfer functions, parameter units and accepted ranges are unchanged.
+
+Filter lag and settling time still depend on the selected parameters. The correction does not make the filtered reference jump to the target when the profiler finishes, and does not change motion-completion criteria. It does not cover the other filter types, the position-error filter at index 2, or vector filtering.
+
 ## Examples
 
 ```text
