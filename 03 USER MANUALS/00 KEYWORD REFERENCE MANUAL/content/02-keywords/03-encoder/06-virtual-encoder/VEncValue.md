@@ -50,6 +50,14 @@ When the virtual encoder is first turned on, `VEncValue` is initialized to the c
 
 In firmware containing [Firmware-Main #1103](https://github.com/akribis-agito/Firmware-Main/issues/1103), source/scale writes and source steps above one-sample capacity also reset the tracking reference. The capacity check follows modulo compensation. A reset can change `VEncValue` without emitting the corresponding edges. See [VEncOn](VEncOn.md) for subsequent tracking and retained motor-on protection.
 
+## Fractional settling
+
+In firmware containing [Firmware-Main #1171](https://github.com/akribis-agito/Firmware-Main/issues/1171), an unchanged scaled source settles to its nearest integer count; exact halves round away from zero (`1.5 → 2`, `-1.5 → -2`). The stop decision includes output increments already issued but not yet accumulated into `VEncValue`. These increments finish normally; settling does not cancel or send them again.
+
+The moving tracking controller and feed-forward calculation remain in use. A source that moves in slow discrete steps can have larger peak tracking error under this settling rule. It does not eliminate abrupt-step overshoot or guarantee zero tracking error. Reference resets described above still discard the discontinuity; a fractional new reference may subsequently settle by a count.
+
+`VEncValue` remains a software tracking count. It does not independently measure emitted physical pulses or close a physical feedback loop.
+
 ## Examples
 
 ```text
