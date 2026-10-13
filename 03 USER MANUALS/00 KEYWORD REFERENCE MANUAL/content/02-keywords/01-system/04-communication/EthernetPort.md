@@ -50,7 +50,7 @@ How the value is used depends on the platform:
 
 In AGM800/AGM800-EC development firmware containing the port-policy prerequisite [Firmware-Main #1241](https://github.com/akribis-agito/Firmware-Main/issues/1241), a new assignment of **49990** is rejected because its push port would occupy reserved command port 50000. **49989** is rejected only when the optional PStat listener is included, because that listener would occupy 50000. A rejected assignment leaves the previous keyword value unchanged. Other products retain their existing policy.
 
-If an older saved value has one of these conflicts, start-up uses effective main port **50000** and the derived default ports. It reports a port-conflict diagnostic and leaves the saved keyword and flash untouched. To replace that saved setting, assign a valid value and explicitly Save and Reset.
+If an older saved value has one of these conflicts, start-up uses effective main port **50000** and the derived default ports, leaving the saved keyword and flash untouched. It reports a port-conflict diagnostic unless the all-to-default DIP setting already selects defaults. To replace that saved setting, assign a valid value and explicitly Save and Reset.
 
 **Identity[52] reports the main command port actually in use.** It therefore reports 50000 after an effective-default start-up even when reading `EthernetPort` still returns the older saved value. For a valid saved port 51234, it reports 51234 and push listens at 51244.
 
