@@ -1,7 +1,7 @@
 ---
 summary: Offset added to the raw absolute encoder reading.
-last_updated: '2026-05-30'
-doc_revision: '2026.06'
+last_updated: '2026-10-16'
+doc_revision: '2026.10'
 ---
 # EncAbsOff/AuxEncAbsOff
 
@@ -21,7 +21,7 @@ $$\text{EncoderPos}_{\text{init}} = \text{Reading}_{\text{masked}} + \text{EncAb
 
 where `Reading_masked` is the raw reading after the [EncAbsMB](EncAbsMB-AuxEncAbsMB.md) right-shift and [EncDir](EncDir-AuxEncDir.md) direction handling (the same value reported as [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)). At the same time the delta is forced to 0 and the previous-reading register is primed, so the axis starts at `EncoderPos_init` with no spurious jump. This seeded value flows through the normal feedback pipeline (error mapping, modulo) to become [Pos](../../10-motion/01-kinematics-status/Pos.md). After the seed window closes the offset is no longer added; the position simply accumulates the per-cycle deltas.
 
-On the standalone controller this seed window is about one second after power-up (governed by a single counter shared across the absolute axes, so it is correspondingly shorter on a multi-axis controller; see [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)). On central-i it spans roughly the first 150 control cycles after the port is configured, and each axis has its own seed window that is re-armed whenever the port is reconfigured. In all cases the seed has completed well before the axis is enabled.
+The standalone controller uses a shared countdown; Central-i uses a per-axis countdown re-armed during port configuration (see [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)). This countdown does not qualify the sample used to seed position.
 
 So `EncAbsOff` shifts where the encoder's absolute zero lands in the controller's position frame. To place machine zero at a chosen physical point, set `EncAbsOff` to the negative of the masked reading observed at that point (read it from [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)).
 
@@ -41,7 +41,7 @@ AAuxEncAbsOff=-50000    ; place auxiliary machine zero at reading 50000
 
 ## Edge cases
 
-- **Unvalidated power-up seed.** The power-up seed is taken from the encoder's first reading without validating the frame. The CRC / error / disconnect monitoring governed by [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md) only begins after the seed window closes, so a corrupted power-up frame can seed [Pos](../../10-motion/01-kinematics-status/Pos.md) to an incorrect absolute value that survives the power cycle. If absolute power-up integrity matters, confirm [EncStatReg](EncStatReg.md) is clean a few cycles into boot before relying on [Pos](../../10-motion/01-kinematics-status/Pos.md).
+- **Unvalidated power-up seed.** Initialization uses the processed reading during its countdown; it does not wait for a qualified first sample. Main absolute-encoder error handling begins after this window. A later clear [EncStatReg](EncStatReg.md) does not validate the reading used to seed [Pos](../../10-motion/01-kinematics-status/Pos.md). The [retained-feedback repair](https://github.com/akribis-agito/Firmware-Main/issues/1297) prevents repeated formatting of a retained Central-i word; it adds no startup qualification.
 
 ## See also
 
@@ -50,6 +50,6 @@ AAuxEncAbsOff=-50000    ; place auxiliary machine zero at reading 50000
 - [EncAbsMB](EncAbsMB-AuxEncAbsMB.md) — low bits removed before the offset is applied
 - [EncType](EncType-AuxEncType.md) — encoder type; `EncAbsOff` applies for absolute encoders
 - [Pos](../../10-motion/01-kinematics-status/Pos.md) — feedback position seeded from `reading + EncAbsOff` at power-up
-- [EncStatReg](EncStatReg.md) — confirm a clean status before relying on the power-up seed
+- [EncStatReg](EncStatReg.md) — diagnostic meaning and startup limits
 - [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md) — abnormal-frame monitoring; begins only after the seed window closes
 - [SetPosition](../../10-motion/03-kinematics-configuration/SetPosition.md) — preset the feedback after start-up

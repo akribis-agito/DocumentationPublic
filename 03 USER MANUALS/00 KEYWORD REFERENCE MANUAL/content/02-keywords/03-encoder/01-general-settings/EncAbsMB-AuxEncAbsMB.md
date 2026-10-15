@@ -1,7 +1,7 @@
 ---
 summary: Number of least significant bits removed (right-shifted) from the absolute encoder reading.
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-16'
+doc_revision: '2026.10'
 ---
 # EncAbsMB/AuxEncAbsMB
 
@@ -15,7 +15,7 @@ Range 0–8, default 0 (no bits removed).
 
 ## How it works
 
-The very first operation applied to a fresh absolute reading each control cycle is the right-shift:
+Formatting an absolute reading begins with the right-shift:
 
 $$\text{Reading}_{\text{masked}} = \text{Reading}_{\text{raw}} \gg \text{EncAbsMB}$$
 
