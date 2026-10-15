@@ -22,7 +22,7 @@ $$\text{EncoderPos}_{\text{init}} = \text{Reading}_{\text{masked}} + \text{EncAb
 
 其中 `Reading_masked` 是经过 [EncAbsMB](EncAbsMB-AuxEncAbsMB.md) 右移和 [EncDir](EncDir-AuxEncDir.md) 方向处理后的原始读数（即作为 [EncAbsVal](EncAbsVal-AuxEncAbsVal.md) 报告的同一值）。同时增量被强制为 0，前一读数寄存器被预置，使轴从 `EncoderPos_init` 开始且不产生虚假跳变。该初始值流经正常反馈流程（误差映射、取模）成为 [Pos](../../10-motion/01-kinematics-status/Pos.md)。初始化窗口关闭后不再加偏置；位置仅累积每周期的增量。
 
-在独立控制器上，此初始化窗口约为上电后一秒（由各绝对轴共享的单个计数器控制，因此在多轴控制器上相应更短；参见 [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)）。在 Central-i 上，它大致跨越端口配置后的前 150 个控制周期，且每个轴拥有自己的初始化窗口，每当端口被重新配置时重新置位。此倒计时不确认用于位置初始化的样本是否有效。
+独立控制器使用共享倒计时；Central-i 使用逐轴倒计时，并在端口配置期间重新置位（参见 [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)）。此倒计时不确认用于位置初始化的样本是否有效。
 
 因此 `EncAbsOff` 改变编码器的绝对零点在控制器位置坐标系中的落点。要将机械零点置于选定的物理点，请将 `EncAbsOff` 设为在该点观测到的掩码读数的相反数（从 [EncAbsVal](EncAbsVal-AuxEncAbsVal.md) 读取）。
 

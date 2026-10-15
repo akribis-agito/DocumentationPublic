@@ -1,7 +1,7 @@
 ---
 summary: 从绝对式编码器读数中移除（右移）的最低有效位数量。
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-16'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # EncAbsMB/AuxEncAbsMB
@@ -16,7 +16,7 @@ language: zh-CN
 
 ## 工作原理
 
-每个控制周期对新的绝对读数应用的第一个操作就是右移：
+格式化绝对读数时，首先执行右移：
 
 $$\text{Reading}_{\text{masked}} = \text{Reading}_{\text{raw}} \gg \text{EncAbsMB}$$
 

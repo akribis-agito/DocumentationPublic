@@ -21,7 +21,7 @@ $$\text{EncoderPos}_{\text{init}} = \text{Reading}_{\text{masked}} + \text{EncAb
 
 where `Reading_masked` is the raw reading after the [EncAbsMB](EncAbsMB-AuxEncAbsMB.md) right-shift and [EncDir](EncDir-AuxEncDir.md) direction handling (the same value reported as [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)). At the same time the delta is forced to 0 and the previous-reading register is primed, so the axis starts at `EncoderPos_init` with no spurious jump. This seeded value flows through the normal feedback pipeline (error mapping, modulo) to become [Pos](../../10-motion/01-kinematics-status/Pos.md). After the seed window closes the offset is no longer added; the position simply accumulates the per-cycle deltas.
 
-On the standalone controller this seed window is about one second after power-up (governed by a single counter shared across the absolute axes, so it is correspondingly shorter on a multi-axis controller; see [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)). On Central-i it spans roughly the first 150 control cycles after the port is configured, and each axis has its own seed window that is re-armed whenever the port is reconfigured. This countdown does not qualify the sample used to seed position.
+The standalone controller uses a shared countdown; Central-i uses a per-axis countdown re-armed during port configuration (see [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)). This countdown does not qualify the sample used to seed position.
 
 So `EncAbsOff` shifts where the encoder's absolute zero lands in the controller's position frame. To place machine zero at a chosen physical point, set `EncAbsOff` to the negative of the masked reading observed at that point (read it from [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)).
 
