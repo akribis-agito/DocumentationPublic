@@ -1,7 +1,7 @@
 ---
 summary: Number of bits of the absolute encoder reading.
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-16'
+doc_revision: '2026.10'
 ---
 # EncAbsBits/AuxEncAbsBits
 
@@ -42,9 +42,9 @@ Changing `EncAbsBits` on a brushless motor invalidates the commutation (the coun
 
 For a BiSS-C encoder (`EncType=6`) the `EncAbsBits` data field is one field inside a larger serial frame that the controller clocks out of the encoder. Each cycle the master sends a clock burst and the encoder returns, in order: an acknowledge bit, a start bit, a single CDS (control-data) bit, the absolute position word, two error/warning status bits, and a CRC. The position word is `EncAbsBits` wide and is transmitted most-significant-bit first. `EncAbsBits` is what tells the controller where the data field ends and the trailing status and CRC bits begin, so an incorrect bit count misframes the whole reading. The two error/warning bits and a failed CRC are surfaced to the host through [EncStatReg](EncStatReg.md).
 
-The full frame is re-clocked and re-read every control cycle — the absolute reading is not latched once at start-up and then counted incrementally in hardware. Each cycle the controller takes the fresh absolute word, masks it (right-shift by `EncAbsMB`), applies direction, and computes the change from the previous cycle to accumulate position. Because the absolute value is re-acquired every cycle, the reported position is self-correcting: a single corrupted or missed frame does not permanently offset the count once clean frames resume (subject to the CRC handling described under [EncStatReg](EncStatReg.md)).
+The firmware accumulates changes between processed absolute readings, rather than treating the encoder as an incremental counter. A control cycle does not guarantee a new valid absolute measurement: a remote may retain a word, transport may reject a frame, or error handling may predict position. See [EncAbsVal](EncAbsVal-AuxEncAbsVal.md) for retained-feedback behavior and [EncStatReg](EncStatReg.md) for diagnostic limits.
 
-At power-up the accumulated feedback position is seeded directly from the first absolute reading plus [EncAbsOff](EncAbsOff-AuxEncAbsOff.md), so the machine knows its true position immediately without homing — see [Pos](../../10-motion/01-kinematics-status/Pos.md).
+During the startup window, the accumulated feedback position is seeded from the processed absolute reading plus [EncAbsOff](EncAbsOff-AuxEncAbsOff.md). The countdown does not qualify that sample; it does not by itself prove the machine position is correct.
 
 ### Auxiliary encoder (AuxEncAbsBits)
 

@@ -1,7 +1,7 @@
 ---
 summary: 绝对式编码器读数的位数。
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-16'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # EncAbsBits/AuxEncAbsBits
@@ -43,9 +43,9 @@ $$\text{ReadingCycle} = 2^{\,\text{EncAbsBits} - \text{EncAbsMB}}$$
 
 对于 BiSS-C 编码器（`EncType=6`），`EncAbsBits` 数据字段是控制器从编码器时钟读出的较大串行帧内的一个字段。每个周期主机发送一个时钟脉冲串，编码器按顺序返回：一个应答位、一个起始位、一个 CDS（控制数据）位、绝对位置字、两个错误/告警状态位，以及一个 CRC。位置字宽为 `EncAbsBits`，并以最高有效位优先传输。`EncAbsBits` 告知控制器数据字段在何处结束、尾随的状态位和 CRC 位在何处开始，因此错误的位数会使整个读数错帧。两个错误/告警位以及失败的 CRC 通过 [EncStatReg](EncStatReg.md) 呈现给上位机。
 
-完整帧在每个控制周期都会重新时钟读出并重新读取——绝对读数不会在启动时只锁存一次然后在硬件中增量计数。每个周期控制器获取新的绝对字，对其掩码（右移 `EncAbsMB`），应用方向，并计算相对于上一周期的变化以累加位置。由于绝对值每个周期都重新获取，所报告的位置具有自校正性：一旦干净的帧恢复，单个损坏或丢失的帧不会永久偏移计数（受 [EncStatReg](EncStatReg.md) 中所述的 CRC 处理约束）。
+固件累加已处理绝对读数之间的变化，而不是将编码器当作增量计数器。每个控制周期并不保证有新的有效绝对测量值：远程设备可能保留之前的字，传输可能拒绝帧，错误处理也可能预测位置。保留反馈行为请参见 [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)，诊断限制请参见 [EncStatReg](EncStatReg.md)。
 
-上电时，累加反馈位置直接由第一次绝对读数加上 [EncAbsOff](EncAbsOff-AuxEncAbsOff.md) 进行播种，因此机器无需回零即可立即知道其真实位置——参见 [Pos](../../10-motion/01-kinematics-status/Pos.md)。
+启动窗口内，累加反馈位置根据已处理的绝对读数加上 [EncAbsOff](EncAbsOff-AuxEncAbsOff.md) 进行初始化。此倒计时不确认样本是否有效，因此本身不能证明机器位置正确。
 
 ### 辅助编码器（AuxEncAbsBits）
 
