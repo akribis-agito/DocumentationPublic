@@ -25,76 +25,43 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-30'
-doc_revision: '2026.06'
+last_updated: '2026-10-16'
+doc_revision: '2026.10'
 ---
 # EncStatReg
 
-Read-only status register reporting absolute-encoder health bits (disconnect, error, warning, CRC).
+Read-only, per-axis encoder status. Read it in PCSuite with `AEncStatReg` (axis A). The layout and available information depend on the controller, FPGA image and feedback type. It is not a universal feedback-validity register.
 
-## Overview
+## Central-i main feedback
 
-`EncStatReg` is a read-only, per-axis bitfield that reports the health of a **serial absolute encoder**. Each control cycle the controller refreshes it from the encoder interface and keeps the low-order health bits. It is the encoder-specific companion to the general axis status register [StatReg](../../07-status-and-faults/StatReg.md): when one of these bits indicates a persistent fault, the axis is taken off and the matching code appears in [ConFlt](../../07-status-and-faults/ConFlt.md).
+For main BiSS-C, EnDat and Tamagawa feedback, the CI_MASTER firmware synthesizes status from the received remote inputs. Firmware containing the [status-reporting repair](https://github.com/akribis-agito/Firmware-Main/issues/1273) refreshes these existing mapped bits whenever the main absolute-encoder handler runs, after its initialization window:
 
-The register is meaningful only for an axis whose feedback is a serial absolute encoder (see [EncType](EncType-AuxEncType.md)). For incremental, Sin/Cos, or other feedback types the bits stay clear. It is not saved to flash and always reflects the live state.
-
-## How it works
-
-The controller reads the encoder-interface status each cycle and retains only the lowest five bits (mask `0x1F`); higher bits are not reflected. The meaningful health bits are:
-
-| Bit | Mask | Meaning when set |
+| Bit | Mask | Received input |
 |---|---|---|
-| 0 | `0x00000001` | Encoder did not respond / looks disconnected. |
-| 1 | `0x00000002` | Encoder error bit asserted (read-head or scale problem reported by the encoder). |
-| 2 | `0x00000004` | Reported but not acted upon by the controller (protocol-dependent meaning — see *Bit layout by encoder protocol* below). |
-| 3 | `0x00000008` | Encoder warning asserted (a degraded but non-fatal condition reported by the encoder). |
-| 4 | `0x00000010` | CRC of the encoder data frame failed (likely high noise on the link). |
+| 0 | `0x01` | Remote main-encoder protection indication. Its physical meaning depends on protocol and hardware. |
+| 1 | `0x02` | Either existing error or warning input in the remote status word; the inputs are combined. |
+| 4 | `0x10` | Existing CRC input in the remote status word. |
 
-Bit 2 (mask `0x00000004`) is retained and visible to a host, but the controller does not test it for fault handling — it never takes the axis off on bit 2 alone. Its meaning is protocol-dependent, so do not assume a clean encoder just because bit 2 is the only bit set.
+Each mapped bit reflects its own current input, including simultaneous conditions. Recovered conditions clear, including CRC; other register bits are preserved. Reporting is independent of [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md). The repair changes reporting only: it retains the existing counter, motor-off, commutation and extrapolation policy.
 
-The encoder warning (bit 3, mask `0x00000008`) is signalled separately from the error bit but is handled together with it for fault purposes. To confirm a clean encoder, test for the absence of all of these health bits rather than relying on any single bit.
+These names describe the firmware mapping, not equivalent physical evidence across protocols. In the CIG1 completed-main Tamagawa path, the shared field carries CRC, protocol error and unavailable. Unavailable combines several causes, including no new completion since the most recent gather; it is not a cable-disconnect verdict. BiSS-C and EnDat do not use this same completed-main publication, and that shared field can instead carry inverse-period status. The main-encoder protection signal is also protocol-dependent: for example, the CIG1 EnDat path combines CRC and encoder error into it. Do not interpret every bit-0 indication as a physically disconnected cable or every clear register as healthy, fresh feedback.
 
-For a BiSS-C encoder the frame ends in a 6-bit CRC. The interface recomputes the CRC over the received data field and its two error/warning status bits every control cycle and compares it against the CRC the encoder sent; a mismatch sets the CRC bit (bit 4). Because the check runs on every frame, a CRC bit that sets intermittently points to marginal link integrity (cable length, shielding, grounding, or connector noise) rather than a permanent fault — clean it up before the error count reaches the [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md) limit and the axis is taken off.
+## Standalone controllers
 
-How the bits are acted upon depends on [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md), the abnormal-condition timeout:
+The local main BiSS-C, EnDat and Tamagawa branch reads the FPGA status register at offset `0x005c`, retaining its low five bits. Protocol-specific packing matters. In the consolidated FPGA packages, BiSS-C packs disconnected/amplitude/frequency/system/CRC at bits 0/1/2/3/4; EnDat packs encoder-error/unsupported-mode/Error1/Error2/CRC at bits 0/1/2/3/4. Check the image's contract before interpreting another protocol or variant.
 
-- **Disconnect (bit 0, without CRC):** if the motor is on, the axis is taken off immediately and [ConFlt](../../07-status-and-faults/ConFlt.md) reports fault `1070`. On a brushless motor the commutation status is also invalidated (it must re-phase), because the motor may have moved while the encoder was disconnected.
-- **CRC error (bit 4):** while the condition persists the controller extrapolates the position and counts the cycles. If the condition lasts longer than [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md) cycles and the motor is on, the axis is taken off and [ConFlt](../../07-status-and-faults/ConFlt.md) reports fault `1069`.
-- **Error or warning (bit 1, or the warning condition):** handled the same way against the same timeout; on expiry [ConFlt](../../07-status-and-faults/ConFlt.md) reports fault `1068`.
-- When no abnormal bit is present, the error counters reset.
+The standalone handler uses the status itself for its fault policy and can clear bits 0/1 in the bypass/no-error branch. The CI_MASTER reporting repair does not change that behavior. Do not assume identical clearing semantics across standalone and Central-i controllers. SIN/COS has separate amplitude-status handling using this register; its bits are not serial-reply status. This register does not establish equivalent auxiliary-encoder monitoring or SSI/Nikon support.
 
-Setting [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md) to `-1` disables the error/warning/CRC monitoring (the bits may still be reported, but they do not trigger a fault). The disconnect handling is independent of `EncAbsErrTime`.
+## Reporting versus fault response
 
-This monitoring only begins after the power-up seed window closes. The first absolute reading taken at power-up is used to seed the position without checking these status bits, so a corrupted power-up frame can seed an incorrect absolute position (see [EncAbsOff](EncAbsOff-AuxEncAbsOff.md)). Confirm `EncStatReg` is clean a few cycles into boot before relying on the seeded position.
+`EncAbsErrTime=-1` bypasses the existing CRC/error counting, extrapolation and timeout fault response. Independent main-encoder protection handling remains active. With handling enabled, CRC and generic-error conditions use separate counters and can produce [ConFlt](../../07-status-and-faults/ConFlt.md) 1069 and 1068; the existing protection path uses 1070. A reported condition and a recorded fault are different observations. Consult the fault log for recorded fault history.
 
-### Bit layout by encoder protocol
-
-The controller reads the same five status bits regardless of encoder type and applies one fixed interpretation (bit 0 = disconnect, bit 1 = error, bit 3 = warning, bit 4 = CRC). For a **BiSS-C / SIN-COS** encoder the encoder interface lines up exactly with that interpretation:
-
-| Bit (mask) | BiSS-C / SIN-COS |
-|---|---|
-| 0 (`0x01`) | Disconnected / no response |
-| 1 (`0x02`) | Amplitude error |
-| 2 (`0x04`) | Frequency error |
-| 3 (`0x08`) | System error |
-| 4 (`0x10`) | Frame CRC failed |
-
-For other absolute protocols (EnDat 2.2, Tamagawa) the encoder interface maps its native error and CRC conditions onto these same five bits, but the exact bit position of each condition can differ by encoder type and hardware variant. Do not assume a specific protocol places its CRC or error flag on a particular bit. For protocol-independent monitoring, test for the absence of *all* low bits rather than a specific bit position.
-
-## Examples
-
-```text
-AEncStatReg          ; read the absolute-encoder status bits
-
-; test a specific condition (host-side bit test)
-; bit 4 (0x10) set  -> CRC errors are occurring
-; bit 0 (0x01) set  -> encoder looks disconnected
-```
+This status does not provide a physical acquisition timestamp, a common freshness guarantee, qualified-first-sample initialization, measured/held/predicted position selection, or detailed Tamagawa SF/ALMC alarms. Monitoring in the absolute-encoder handler starts after its initialization window; a clear register cannot validate the position seeded during that window. Capture at control-cycle resolution to investigate short transients: host polling can miss a condition that has recovered.
 
 ## See also
 
-- [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md) — timeout that converts a persistent error/warning/CRC condition into a fault
-- [EncAbsOff](EncAbsOff-AuxEncAbsOff.md) — power-up position seed taken before this monitoring starts
-- [EncType](EncType-AuxEncType.md) — feedback type; these bits apply to the serial absolute encoder
-- [StatReg](../../07-status-and-faults/StatReg.md) — general axis status register
-- [ConFlt](../../07-status-and-faults/ConFlt.md) — fault register; reports codes 1068 / 1069 / 1070 for these conditions
+- [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md) — existing error-handling timeout and bypass
+- [EncAbsOff](EncAbsOff-AuxEncAbsOff.md) — absolute-position initialization offset
+- [EncType](EncType-AuxEncType.md) — feedback selection
+- [StatReg](../../07-status-and-faults/StatReg.md) — general axis status
+- [ConFlt](../../07-status-and-faults/ConFlt.md) — reported fault code
