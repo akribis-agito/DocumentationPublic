@@ -70,7 +70,7 @@ AMapPosGap[1]        ; read the spacing for the first dimension
 - **Save** — flash-saveable; the reciprocal is recomputed on every write and at power-up.
 - **Platform** — same on standalone v4, central-i v4 and central-i v5.
 
-> **Changing the map with the motor on.** A write at standstill takes effect on the next control sample. Because the map corrects the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), the corrected position can step once, and the servo moves the axis by that step. To avoid it, first set a non-zero [MapErrOnStep](MapErrOnStep.md) (at its default of `0` the correction switches in and out in one cycle, which is itself a step), then set [MapType](MapType.md) = `0`, change the map, and switch `MapType` back on so the correction ramps out and back in. Writes are refused while the axis is in motion (error 21).
+> **Changing the map with the motor on.** A write at standstill takes effect on the next control sample. Because the map corrects the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), the corrected position can step once, and the servo moves the axis by that step. To avoid it, first set a non-zero [MapErrOnStep](MapErrOnStep.md) (at its default of `0` the correction switches in and out in one cycle, which is itself a step), then set [MapType](MapType.md) = `0`, wait until the correction has ramped fully out ([Pos](../10-motion/01-kinematics-status/Pos.md) equals [PosBeforeMap](PosBeforeMap.md)), change the map, and switch `MapType` back on so the correction ramps back in. Writes are refused while the axis is in motion (error 21).
 
 ## See also
 

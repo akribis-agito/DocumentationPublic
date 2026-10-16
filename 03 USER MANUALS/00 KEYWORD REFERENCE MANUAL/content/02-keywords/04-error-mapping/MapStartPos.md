@@ -81,7 +81,7 @@ AMapStartPos[1]          ; read the start position of the first dimension
 
 In **v5** the position pipeline is 64-bit, so the map start positions are stored as 64-bit values to match the wider [Pos](../10-motion/01-kinematics-status/Pos.md)/[PosBeforeMap](PosBeforeMap.md) range. v5 is **central-i only**; on standalone `MapStartPos` remains the 32-bit v4 value.
 
-> **Changing the map with the motor on.** A write at standstill takes effect on the next control sample. Because the map corrects the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), the corrected position can step once, and the servo moves the axis by that step. To avoid it, first set a non-zero [MapErrOnStep](MapErrOnStep.md) (at its default of `0` the correction switches in and out in one cycle, which is itself a step), then set [MapType](MapType.md) = `0`, change the map, and switch `MapType` back on so the correction ramps out and back in. Writes are refused while the axis is in motion (error 21).
+> **Changing the map with the motor on.** A write at standstill takes effect on the next control sample. Because the map corrects the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), the corrected position can step once, and the servo moves the axis by that step. To avoid it, first set a non-zero [MapErrOnStep](MapErrOnStep.md) (at its default of `0` the correction switches in and out in one cycle, which is itself a step), then set [MapType](MapType.md) = `0`, wait until the correction has ramped fully out ([Pos](../10-motion/01-kinematics-status/Pos.md) equals [PosBeforeMap](PosBeforeMap.md)), change the map, and switch `MapType` back on so the correction ramps back in. Writes are refused while the axis is in motion (error 21).
 
 ## See also
 
