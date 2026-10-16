@@ -15,7 +15,7 @@ attributes:
   array_size: 4
   data_type: int32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
   range:
   - -2147483648
@@ -30,7 +30,7 @@ overrides:
     - -2251799813685248
     - 2251799813685247
 summary: Starting position of each error-mapping dimension, in encoder counts.
-last_updated: '2026-05-29'
+last_updated: '2026-10-16'
 doc_revision: '2026.06'
 ---
 # MapStartPos
@@ -41,7 +41,7 @@ Starting position of each error-mapping dimension, in encoder counts.
 
 `MapStartPos` is a per-dimension array (`[1]` first dimension, `[2]` second, `[3]` third) that defines the position of the first correction point of each error-mapping dimension, in **encoder counts** (pre-correction, i.e. measured on the [MapEncoder](MapEncoder.md)-selected source). Together with [MapPosGap](MapPosGap.md) (spacing) and [MapLength](MapLength.md) (number of points) it fully describes the lookup grid covered by the [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) entries.
 
-It is an axis-scoped array saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+It is an axis-scoped array saved to flash, and can be changed with the motor on, but not while the axis is in motion.
 
 ## How it works
 
@@ -64,7 +64,7 @@ AMapStartPos[1]          ; read the start position of the first dimension
 ### Edge cases
 
 - **Index 0** — invalid; valid indices are `MapStartPos[1]` (1D), `[2]` (2D), `[3]` (3D). `MapStartPos[0]` does not exist.
-- **Motor on / in motion at write** — rejected while the motor is on or the axis is in motion. Configure with the motor off.
+- **Motor on / in motion at write** — accepted with the motor on at standstill; rejected while the axis is in motion (error 21).
 - **`MapType = 0`** — the value is stored but not consulted; only the active dimensions of [MapType](MapType.md) are used (1D → only `[1]`; 2D → `[1]` and `[2]`; 3D → all three).
 - **Below the range** — readings ≤ `MapStartPos` clamp to the first correction entry (held flat, no extrapolation).
 - **Beyond the range** — readings ≥ `MapStartPos + (MapLength − 1) × MapPosGap` clamp to the last correction entry.
@@ -80,6 +80,8 @@ AMapStartPos[1]          ; read the start position of the first dimension
 | Range | ±2,147,483,647 | ±2,251,799,813,685,247 |
 
 In **v5** the position pipeline is 64-bit, so the map start positions are stored as 64-bit values to match the wider [Pos](../10-motion/01-kinematics-status/Pos.md)/[PosBeforeMap](PosBeforeMap.md) range. v5 is **central-i only**; on standalone `MapStartPos` remains the 32-bit v4 value.
+
+> **Changing the map with the motor on.** A write at standstill takes effect on the next control sample. Because the map corrects the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), the corrected position can step once, and the servo moves the axis by that step. To make the change gradual instead (the axis still moves by the whole correction, once as it ramps out and again as it ramps in), first set a small [MapErrOnStep](MapErrOnStep.md) (the ramp takes `16384 / MapErrOnStep` cycles, so e.g. `16` gives about 1024 cycles; `0`, the default, and `16384` switch the whole correction in one cycle, which is itself a step), then set [MapType](MapType.md) = `0`, wait for the disengage ramp to finish (about `16384 / MapErrOnStep` control cycles; `Pos` equalling `PosBeforeMap` is not a reliable sign, because a small correction can read 0 while the ramp is still running), change the map, and switch `MapType` back on so the correction ramps back in. A non-zero [MapErrOffset](MapErrOffset.md) is forced to 0 while mapping is off and slews back in at [MapErrOffRamp](MapErrOffRamp.md). Writes are refused while the axis is in motion (error 21). On firmware before this change, writes with the motor on are refused (error 22).
 
 ## See also
 

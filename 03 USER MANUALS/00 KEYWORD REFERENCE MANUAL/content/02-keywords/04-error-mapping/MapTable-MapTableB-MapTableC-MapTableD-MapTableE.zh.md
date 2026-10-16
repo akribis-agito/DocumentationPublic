@@ -1,6 +1,35 @@
 ---
+keyword: MapTable
+availability:
+  standalone:
+  - v4
+  central-i:
+  - v4
+  - v5
+can_code: 326
+attributes:
+  access: rw
+  scope: axis
+  flash: true
+  type: array
+  array_size: 1601
+  data_type: int32
+  ok_in_motion: false
+  ok_motor_on: true
+  units: none
+  range:
+  - -2147483648
+  - 2147483647
+  default: 0
+  scaling: 1.0
+  implemented: final
+overrides:
+  central-i.v4:
+    array_size: 3001
+  central-i.v5:
+    array_size: 3001
 summary: 误差映射所用的位置误差修正值数组。
-last_updated: '2026-05-29'
+last_updated: '2026-10-16'
 doc_revision: '2026.06'
 language: zh-CN
 ---
@@ -14,9 +43,11 @@ language: zh-CN
 
 五个区块一起构成**一个连续的、从 1 开始的索引空间**：[MapStartIndex](MapStartIndex.md) 和按维度的偏移将其作为单个数组寻址，固件的取值例程将每个索引路由到正确的区块。`B`–`E` 区块的存在仅为扩展总容量——一个映射可以在 `MapTable` 中开始并继续延伸到 `MapTableB`，依此类推。
 
-所有变体均保存至闪存，且无法在轴运动中或电机使能时修改。
+所有变体均保存至闪存，可在电机使能时修改，但无法在轴运动中修改。
 
 ![1D map lookup and interpolation](map-lookup-1d.svg)
+
+> **快速信息说明。** 本页的属性块描述 `MapTable`（CAN 326；数组大小：standalone 为 1601，central-i 为 3001，扩展闪存 central-i 版本为 60001）。`MapTableB`–`MapTableE` 为 CAN 485–488，数组大小为 `MAP_TABLE_SIZE_HUGE`（standalone 为 2，central-i 为 501，扩展闪存 central-i 版本为 60001），其访问、闪存、电机使能和运动属性与 `MapTable` 相同。
 
 ## 工作原理
 
@@ -55,13 +86,15 @@ AMapTableB[1]        ; read the first entry of the second bank
 ### 边界情况
 
 - **索引 0** —— 无效；有效索引为 `[1…N]`，其中 `N` 为区块大小。
-- **写入时电机使能 / 运动中** —— 电机使能或轴运动中时拒绝写入。
+- **写入时电机使能 / 运动中** —— 电机使能且静止时接受；轴运动中时拒绝写入（错误 21）。
 - **索引超出范围** —— 被参数表拒绝；请参考产品的区块大小。
 - **映射关闭**（[MapType](MapType.md) = 0）—— 表被存储但不被读取。
 - **仿真电机** —— 完全跳过映射；表被存储但不产生修正。
 - **超出映射范围** —— `[MapStartPos, MapStartPos + (MapLength − 1) × MapPosGap]` 之外的读数钳位到边界条目；不外推。
 - **仅编码器计数** —— 单位是源 [MapEncoder](MapEncoder.md) 的修正前编码器计数，而非用户单位。
 - **保存** —— 可保存至闪存；大表在重启后保持。
+
+> **电机使能时修改映射。** 静止时写入将在下一个控制周期生效。由于映射修正的是反馈（[Pos](../10-motion/01-kinematics-status/Pos.md)），修正后的位置可能发生一次阶跃，伺服会使轴移动该阶跃量。若要使变化平缓（轴仍会移动整个修正量：斜坡退出时一次、斜坡接入时一次），请先将 [MapErrOnStep](MapErrOnStep.md) 设为较小的值（斜坡需要 `16384 / MapErrOnStep` 个周期，例如 `16` 约为 1024 个周期；默认值 `0` 和 `16384` 会在一个周期内接入或断开整个修正，本身就是阶跃），再将 [MapType](MapType.md) 设为 `0`，等待断开斜坡完成（约 `16384 / MapErrOnStep` 个控制周期；`Pos` 等于 `PosBeforeMap` 并不可靠，因为斜坡仍在进行时较小的修正值也可能读数为 0）后再修改映射，然后重新开启 `MapType`，使修正值按斜坡重新接入。非零的 [MapErrOffset](MapErrOffset.md) 在映射关闭期间被强制为 0，重新开启后按 [MapErrOffRamp](MapErrOffRamp.md) 斜坡恢复。轴运动中时写入被拒绝（错误 21）。在此更改之前的固件上，电机使能时的写入会被拒绝（错误 22）。
 
 ## 另请参阅
 

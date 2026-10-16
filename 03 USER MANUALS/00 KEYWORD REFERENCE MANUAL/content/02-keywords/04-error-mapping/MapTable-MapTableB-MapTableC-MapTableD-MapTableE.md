@@ -1,6 +1,35 @@
 ---
+keyword: MapTable
+availability:
+  standalone:
+  - v4
+  central-i:
+  - v4
+  - v5
+can_code: 326
+attributes:
+  access: rw
+  scope: axis
+  flash: true
+  type: array
+  array_size: 1601
+  data_type: int32
+  ok_in_motion: false
+  ok_motor_on: true
+  units: none
+  range:
+  - -2147483648
+  - 2147483647
+  default: 0
+  scaling: 1.0
+  implemented: final
+overrides:
+  central-i.v4:
+    array_size: 3001
+  central-i.v5:
+    array_size: 3001
 summary: Arrays of position-error correction values used by error mapping.
-last_updated: '2026-05-29'
+last_updated: '2026-10-16'
 doc_revision: '2026.06'
 ---
 # MapTable/MapTableB/MapTableC/MapTableD/MapTableE
@@ -13,9 +42,11 @@ Arrays of position-error correction values used by error mapping.
 
 The five banks together form **one continuous, 1-based index space**: [MapStartIndex](MapStartIndex.md) and the per-dimension offsets address it as if it were a single array, and the firmware's fetch routine routes each index to the correct bank. The `B`–`E` banks exist only to extend total capacity — a map can begin in `MapTable` and run on into `MapTableB`, etc.
 
-All variants are saved to flash and cannot be changed while the axis is in motion or the motor is on.
+All variants are saved to flash and can be changed with the motor on, but not while the axis is in motion.
 
 ![1D map lookup and interpolation](map-lookup-1d.svg)
+
+> **Quick Facts note.** The attributes block on this page describes `MapTable` (CAN 326; array size 1601 on standalone, 3001 on central-i, 60001 on the extended-flash central-i build). `MapTableB`–`MapTableE` are CAN 485–488 with array size `MAP_TABLE_SIZE_HUGE` (2 on standalone, 501 on central-i, 60001 on the extended-flash central-i build) and share `MapTable`'s access, flash, motor-on and in-motion attributes.
 
 ## How it works
 
@@ -54,13 +85,15 @@ AMapTableB[1]        ; read the first entry of the second bank
 ### Edge cases
 
 - **Index 0** — invalid; valid indices are `[1…N]` where `N` is the bank size.
-- **Motor on / in motion at write** — rejected while the motor is on or the axis is in motion.
+- **Motor on / in motion at write** — accepted with the motor on at standstill; rejected while the axis is in motion (error 21).
 - **Out of range index** — rejected by the parameter table; refer to the product's bank sizes.
 - **Mapping off** ([MapType](MapType.md) = 0) — the tables are stored but not consulted.
 - **Simulation motor** — mapping is skipped entirely; tables are stored but produce no correction.
 - **Beyond mapped range** — readings outside `[MapStartPos, MapStartPos + (MapLength − 1) × MapPosGap]` clamp to the boundary entry; no extrapolation.
 - **Encoder counts only** — units are pre-correction encoder counts of the source [MapEncoder](MapEncoder.md), not user units.
 - **Save** — flash-saveable; large tables persist across reboots.
+
+> **Changing the map with the motor on.** A write at standstill takes effect on the next control sample. Because the map corrects the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), the corrected position can step once, and the servo moves the axis by that step. To make the change gradual instead (the axis still moves by the whole correction, once as it ramps out and again as it ramps in), first set a small [MapErrOnStep](MapErrOnStep.md) (the ramp takes `16384 / MapErrOnStep` cycles, so e.g. `16` gives about 1024 cycles; `0`, the default, and `16384` switch the whole correction in one cycle, which is itself a step), then set [MapType](MapType.md) = `0`, wait for the disengage ramp to finish (about `16384 / MapErrOnStep` control cycles; `Pos` equalling `PosBeforeMap` is not a reliable sign, because a small correction can read 0 while the ramp is still running), change the map, and switch `MapType` back on so the correction ramps back in. A non-zero [MapErrOffset](MapErrOffset.md) is forced to 0 while mapping is off and slews back in at [MapErrOffRamp](MapErrOffRamp.md). Writes are refused while the axis is in motion (error 21). On firmware before this change, writes with the motor on are refused (error 22).
 
 ## See also
 

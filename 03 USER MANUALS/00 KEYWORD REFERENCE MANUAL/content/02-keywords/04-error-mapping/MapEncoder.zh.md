@@ -15,7 +15,7 @@ attributes:
   array_size: 4
   data_type: int32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
   range:
   - 1
@@ -25,7 +25,7 @@ attributes:
   implemented: final
 overrides: {}
 summary: 选择由哪个轴编码器驱动每个误差映射维度。
-last_updated: '2026-05-29'
+last_updated: '2026-10-16'
 doc_revision: '2026.06'
 language: zh-CN
 ---
@@ -37,7 +37,7 @@ language: zh-CN
 
 `MapEncoder` 是一个按维数组，用于选择由哪个编码器提供用于查找误差映射表的*未修正*位置。索引 `[1]` 是第一维（对于 1D，是唯一的维度）；`[2]` 和 `[3]` 为 [MapType](MapType.md) = 2 和 3 添加第二和第三维。所查找的编码器读数即用于索引该表——关于索引如何形成，请参阅 [MapStartPos](MapStartPos.md)/[MapPosGap](MapPosGap.md)/[MapLength](MapLength.md)——因此 2D/3D 映射可以使修正值依赖于不止一个轴的位置。
 
-`MapEncoder` 是一个轴相关数组，保存至闪存，且不能在运动中或电机使能时更改。
+`MapEncoder` 是一个轴相关数组，保存至闪存，可在电机使能时更改，但不能在运动中更改。
 
 ## 工作原理
 
@@ -69,12 +69,14 @@ AMapEncoder[1]       ; read the encoder selected for the first dimension
 ### 边界情况
 
 - **索引 0**——无效；有效索引为 `MapEncoder[1]`/`[2]`/`[3]`。
-- **写入时电机使能 / 运动中**——电机使能或轴处于运动中时，写入被拒绝。
+- **写入时电机使能 / 运动中**——电机使能且静止时接受；轴处于运动中时拒绝（错误 21）。
 - **超出范围**——超出 `1`–`轴数 × 2` 的值被拒绝。
 - **`MapEncoder[1]` 错误**——必须指向本轴自身的主编码器，表构建才会接受该映射；否则构建会引发“must be first encoder”事件。
 - **2D/3D 需要主编码器**——用于 2D/3D 的附加编码器必须是处于电机使能、静止状态的轴的**主**编码器；用于 `[2]`/`[3]` 的辅助编码器会被拒绝并引发“must be main encoders”事件。
 - **`MapType = 0`**——值已存储但不被查询。
 - **保存**——可保存至闪存。
+
+> **电机使能时修改映射。** 静止时写入将在下一个控制周期生效。由于映射修正的是反馈（[Pos](../10-motion/01-kinematics-status/Pos.md)），修正后的位置可能发生一次阶跃，伺服会使轴移动该阶跃量。若要使变化平缓（轴仍会移动整个修正量：斜坡退出时一次、斜坡接入时一次），请先将 [MapErrOnStep](MapErrOnStep.md) 设为较小的值（斜坡需要 `16384 / MapErrOnStep` 个周期，例如 `16` 约为 1024 个周期；默认值 `0` 和 `16384` 会在一个周期内接入或断开整个修正，本身就是阶跃），再将 [MapType](MapType.md) 设为 `0`，等待断开斜坡完成（约 `16384 / MapErrOnStep` 个控制周期；`Pos` 等于 `PosBeforeMap` 并不可靠，因为斜坡仍在进行时较小的修正值也可能读数为 0）后再修改映射，然后重新开启 `MapType`，使修正值按斜坡重新接入。非零的 [MapErrOffset](MapErrOffset.md) 在映射关闭期间被强制为 0，重新开启后按 [MapErrOffRamp](MapErrOffRamp.md) 斜坡恢复。轴运动中时写入被拒绝（错误 21）。在此更改之前的固件上，电机使能时的写入会被拒绝（错误 22）。
 
 ## 另请参阅
 

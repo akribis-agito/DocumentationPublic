@@ -15,7 +15,7 @@ attributes:
   array_size: 1
   data_type: int32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
   range:
   - 1
@@ -25,7 +25,7 @@ attributes:
   implemented: final
 overrides: {}
 summary: MapTable index where the active error-mapping data begins.
-last_updated: '2026-05-29'
+last_updated: '2026-10-16'
 doc_revision: '2026.06'
 ---
 # MapStartIndex
@@ -36,7 +36,7 @@ MapTable index where the active error-mapping data begins.
 
 `MapStartIndex` sets the [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) index at which the active error-mapping data begins. The correction values for a given map are not required to start at the first table element, so this lets several maps share the table region or lets unused leading entries be skipped. Correction proceeds from this index across the points defined by [MapStartPos](MapStartPos.md), [MapPosGap](MapPosGap.md), and [MapLength](MapLength.md), for the dimensions selected by [MapType](MapType.md).
 
-It is an axis-scoped parameter saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+It is an axis-scoped parameter saved to flash, and can be changed with the motor on, but not while the axis is in motion.
 
 ## How it works
 
@@ -58,12 +58,14 @@ AMapStartIndex       ; read the current start index
 
 ### Edge cases
 
-- **Motor on / in motion at write** — rejected while the motor is on or the axis is in motion.
+- **Motor on / in motion at write** — accepted with the motor on at standstill; rejected while the axis is in motion (error 21).
 - **Out of range** — values outside `1`–`300 000` are rejected.
 - **Past the table** — values beyond the combined bank size dispatch to uninitialised memory; combine carefully with [MapLength](MapLength.md).
 - **`MapType = 0`** — value stored but not consulted.
 - **1-based** — `MapStartIndex = 1` points at `MapTable[1]`. Index `0` is invalid.
 - **Save** — flash-saveable.
+
+> **Changing the map with the motor on.** A write at standstill takes effect on the next control sample. Because the map corrects the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), the corrected position can step once, and the servo moves the axis by that step. To make the change gradual instead (the axis still moves by the whole correction, once as it ramps out and again as it ramps in), first set a small [MapErrOnStep](MapErrOnStep.md) (the ramp takes `16384 / MapErrOnStep` cycles, so e.g. `16` gives about 1024 cycles; `0`, the default, and `16384` switch the whole correction in one cycle, which is itself a step), then set [MapType](MapType.md) = `0`, wait for the disengage ramp to finish (about `16384 / MapErrOnStep` control cycles; `Pos` equalling `PosBeforeMap` is not a reliable sign, because a small correction can read 0 while the ramp is still running), change the map, and switch `MapType` back on so the correction ramps back in. A non-zero [MapErrOffset](MapErrOffset.md) is forced to 0 while mapping is off and slews back in at [MapErrOffRamp](MapErrOffRamp.md). Writes are refused while the axis is in motion (error 21). On firmware before this change, writes with the motor on are refused (error 22).
 
 ## See also
 

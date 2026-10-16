@@ -15,7 +15,7 @@ attributes:
   array_size: 4
   data_type: int32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
   range:
   - 1
@@ -25,7 +25,7 @@ attributes:
   implemented: final
 overrides: {}
 summary: Encoder-count spacing between adjacent error-mapping points.
-last_updated: '2026-05-29'
+last_updated: '2026-10-16'
 doc_revision: '2026.06'
 ---
 # MapPosGap
@@ -36,7 +36,7 @@ Encoder-count spacing between adjacent error-mapping points.
 
 `MapPosGap` is a per-dimension array (`[1]`/`[2]`/`[3]`) that sets the position spacing, in encoder counts, between consecutive correction points along each error-mapping dimension. A larger gap spreads the same number of points ([MapLength](MapLength.md)) across a wider range, giving coarser resolution; a smaller gap gives finer correction over a shorter range. Together with [MapStartPos](MapStartPos.md) (start) and [MapLength](MapLength.md) (count) it defines the lookup grid of [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md).
 
-It is an axis-scoped array saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+It is an axis-scoped array saved to flash, and can be changed with the motor on, but not while the axis is in motion.
 
 ## How it works
 
@@ -63,12 +63,14 @@ AMapPosGap[1]        ; read the spacing for the first dimension
 ### Edge cases
 
 - **Index 0** — invalid; valid indices are `MapPosGap[1]`/`[2]`/`[3]`. `MapPosGap[0]` does not exist.
-- **Motor on / in motion at write** — rejected while the motor is on or the axis is in motion.
+- **Motor on / in motion at write** — accepted with the motor on at standstill; rejected while the axis is in motion (error 21).
 - **Zero value** — silently substituted with the default `1000` so the reciprocal stays defined.
 - **Out of range** — values outside `1`–`8 000 000` are rejected (the 8 M ceiling guarantees exact float reciprocal).
 - **`MapType = 0`** — value stored but not consulted.
 - **Save** — flash-saveable; the reciprocal is recomputed on every write and at power-up.
 - **Platform** — same on standalone v4, central-i v4 and central-i v5.
+
+> **Changing the map with the motor on.** A write at standstill takes effect on the next control sample. Because the map corrects the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), the corrected position can step once, and the servo moves the axis by that step. To make the change gradual instead (the axis still moves by the whole correction, once as it ramps out and again as it ramps in), first set a small [MapErrOnStep](MapErrOnStep.md) (the ramp takes `16384 / MapErrOnStep` cycles, so e.g. `16` gives about 1024 cycles; `0`, the default, and `16384` switch the whole correction in one cycle, which is itself a step), then set [MapType](MapType.md) = `0`, wait for the disengage ramp to finish (about `16384 / MapErrOnStep` control cycles; `Pos` equalling `PosBeforeMap` is not a reliable sign, because a small correction can read 0 while the ramp is still running), change the map, and switch `MapType` back on so the correction ramps back in. A non-zero [MapErrOffset](MapErrOffset.md) is forced to 0 while mapping is off and slews back in at [MapErrOffRamp](MapErrOffRamp.md). Writes are refused while the axis is in motion (error 21). On firmware before this change, writes with the motor on are refused (error 22).
 
 ## See also
 

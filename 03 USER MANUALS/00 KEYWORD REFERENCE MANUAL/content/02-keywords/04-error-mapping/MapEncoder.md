@@ -15,7 +15,7 @@ attributes:
   array_size: 4
   data_type: int32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
   range:
   - 1
@@ -25,7 +25,7 @@ attributes:
   implemented: final
 overrides: {}
 summary: Selects which axis encoder drives each error-mapping dimension.
-last_updated: '2026-05-29'
+last_updated: '2026-10-16'
 doc_revision: '2026.06'
 ---
 # MapEncoder
@@ -36,7 +36,7 @@ Selects which axis encoder drives each error-mapping dimension.
 
 `MapEncoder` is a per-dimension array that selects which encoder supplies the *uncorrected* position used to look up the error-mapping table. Index `[1]` is the first (and for 1D, only) dimension; `[2]` and `[3]` add the second and third dimensions for [MapType](MapType.md) = 2 and 3. The looked-up encoder reading is what indexes the table — see [MapStartPos](MapStartPos.md)/[MapPosGap](MapPosGap.md)/[MapLength](MapLength.md) for how the index is formed — so a 2D/3D map can make the correction depend on more than one axis's position.
 
-`MapEncoder` is an axis-scoped array saved to flash and cannot be changed in motion or motor-on.
+`MapEncoder` is an axis-scoped array saved to flash and can be changed with the motor on, but not in motion.
 
 ## How it works
 
@@ -68,12 +68,14 @@ AMapEncoder[1]       ; read the encoder selected for the first dimension
 ### Edge cases
 
 - **Index 0** — invalid; valid indices are `MapEncoder[1]`/`[2]`/`[3]`.
-- **Motor on / in motion at write** — rejected while the motor is on or the axis is in motion.
+- **Motor on / in motion at write** — accepted with the motor on at standstill; rejected while the axis is in motion (error 21).
 - **Out of range** — values outside `1`–`number-of-axes × 2` are rejected.
 - **`MapEncoder[1]` wrong** — must point at this axis's own main encoder for the table build to accept the map; otherwise the build raises a "must be first encoder" event.
 - **2D/3D requires main encoders** — additional encoders for 2D/3D must be **main** encoders of motor-on, standing axes; auxiliary encoders for `[2]`/`[3]` are rejected with a "must be main encoders" event.
 - **`MapType = 0`** — value stored but not consulted.
 - **Save** — flash-saveable.
+
+> **Changing the map with the motor on.** A write at standstill takes effect on the next control sample. Because the map corrects the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), the corrected position can step once, and the servo moves the axis by that step. To make the change gradual instead (the axis still moves by the whole correction, once as it ramps out and again as it ramps in), first set a small [MapErrOnStep](MapErrOnStep.md) (the ramp takes `16384 / MapErrOnStep` cycles, so e.g. `16` gives about 1024 cycles; `0`, the default, and `16384` switch the whole correction in one cycle, which is itself a step), then set [MapType](MapType.md) = `0`, wait for the disengage ramp to finish (about `16384 / MapErrOnStep` control cycles; `Pos` equalling `PosBeforeMap` is not a reliable sign, because a small correction can read 0 while the ramp is still running), change the map, and switch `MapType` back on so the correction ramps back in. A non-zero [MapErrOffset](MapErrOffset.md) is forced to 0 while mapping is off and slews back in at [MapErrOffRamp](MapErrOffRamp.md). Writes are refused while the axis is in motion (error 21). On firmware before this change, writes with the motor on are refused (error 22).
 
 ## See also
 

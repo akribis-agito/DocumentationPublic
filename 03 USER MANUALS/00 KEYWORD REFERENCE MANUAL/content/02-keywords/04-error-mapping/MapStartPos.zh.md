@@ -15,7 +15,7 @@ attributes:
   array_size: 4
   data_type: int32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
   range:
   - -2147483648
@@ -30,7 +30,7 @@ overrides:
     - -2251799813685248
     - 2251799813685247
 summary: 各误差映射维度的起始位置，以编码器计数表示。
-last_updated: '2026-05-29'
+last_updated: '2026-10-16'
 doc_revision: '2026.06'
 language: zh-CN
 ---
@@ -42,7 +42,7 @@ language: zh-CN
 
 `MapStartPos` 是一个按维度划分的数组（`[1]` 为第一维，`[2]` 为第二维，`[3]` 为第三维），它定义各误差映射维度第一个修正点的位置，以**编码器计数**表示（修正前，即在 [MapEncoder](MapEncoder.md) 所选源上测得）。它与 [MapPosGap](MapPosGap.md)（间距）和 [MapLength](MapLength.md)（点数）一起，完整描述了 [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) 条目所覆盖的查找网格。
 
-它是一个保存至闪存的轴相关数组，且无法在轴运动中或电机使能时修改。
+它是一个保存至闪存的轴相关数组，可在电机使能时修改，但无法在轴运动中修改。
 
 ## 工作原理
 
@@ -65,7 +65,7 @@ AMapStartPos[1]          ; read the start position of the first dimension
 ### 边界情况
 
 - **索引 0** —— 无效；有效索引为 `MapStartPos[1]`（1D）、`[2]`（2D）、`[3]`（3D）。`MapStartPos[0]` 不存在。
-- **写入时电机使能 / 运动中** —— 电机使能或轴运动中时拒绝写入。请在电机失能时配置。
+- **写入时电机使能 / 运动中** —— 电机使能且静止时接受；轴运动中时拒绝写入（错误 21）。
 - **`MapType = 0`** —— 该值被存储但不被读取；只有 [MapType](MapType.md) 的活动维度才会被使用（1D → 仅 `[1]`；2D → `[1]` 和 `[2]`；3D → 全部三个）。
 - **低于范围** —— ≤ `MapStartPos` 的读数钳位到第一个修正条目（保持平直，不外推）。
 - **超出范围** —— ≥ `MapStartPos + (MapLength − 1) × MapPosGap` 的读数钳位到最后一个修正条目。
@@ -81,6 +81,8 @@ AMapStartPos[1]          ; read the start position of the first dimension
 | 范围 | ±2,147,483,647 | ±2,251,799,813,685,247 |
 
 在 **v5** 中位置流水线为 64 位，因此映射起始位置以 64 位值存储，以匹配更宽的 [Pos](../10-motion/01-kinematics-status/Pos.md)/[PosBeforeMap](PosBeforeMap.md) 范围。v5 **仅 central-i** 可用；在 standalone 上 `MapStartPos` 仍为 32 位的 v4 值。
+
+> **电机使能时修改映射。** 静止时写入将在下一个控制周期生效。由于映射修正的是反馈（[Pos](../10-motion/01-kinematics-status/Pos.md)），修正后的位置可能发生一次阶跃，伺服会使轴移动该阶跃量。若要使变化平缓（轴仍会移动整个修正量：斜坡退出时一次、斜坡接入时一次），请先将 [MapErrOnStep](MapErrOnStep.md) 设为较小的值（斜坡需要 `16384 / MapErrOnStep` 个周期，例如 `16` 约为 1024 个周期；默认值 `0` 和 `16384` 会在一个周期内接入或断开整个修正，本身就是阶跃），再将 [MapType](MapType.md) 设为 `0`，等待断开斜坡完成（约 `16384 / MapErrOnStep` 个控制周期；`Pos` 等于 `PosBeforeMap` 并不可靠，因为斜坡仍在进行时较小的修正值也可能读数为 0）后再修改映射，然后重新开启 `MapType`，使修正值按斜坡重新接入。非零的 [MapErrOffset](MapErrOffset.md) 在映射关闭期间被强制为 0，重新开启后按 [MapErrOffRamp](MapErrOffRamp.md) 斜坡恢复。轴运动中时写入被拒绝（错误 21）。在此更改之前的固件上，电机使能时的写入会被拒绝（错误 22）。
 
 ## 另请参阅
 

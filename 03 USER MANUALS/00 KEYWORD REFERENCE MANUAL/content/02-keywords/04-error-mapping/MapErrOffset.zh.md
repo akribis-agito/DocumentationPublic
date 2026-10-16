@@ -15,7 +15,7 @@ attributes:
   array_size: 1
   data_type: int32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
   range:
   - -2147483648
@@ -25,7 +25,7 @@ attributes:
   implemented: final
 overrides: {}
 summary: 在映射修正之上叠加应用的当前位置误差偏置。
-last_updated: '2026-06-02'
+last_updated: '2026-10-16'
 doc_revision: '2026.06'
 language: zh-CN
 ---
@@ -37,7 +37,7 @@ language: zh-CN
 
 `MapErrOffset` 是一个加到插值后映射修正上的**目标**位置误差偏置（以编码器 counts 为单位）。它允许你在 [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) 所产生结果的基础上，再用一个常量来偏置校正位置——例如在不重新测量映射的情况下微调残余偏置。映射本身由 [MapType](MapType.md) 启用。
 
-它是一个轴相关参数，不保存至闪存，且不能在轴处于运动中或电机使能时更改。
+它是一个轴相关参数，不保存至闪存，可在电机使能时更改，但不能在轴处于运动中时更改。
 
 ## 工作原理
 
@@ -59,11 +59,13 @@ AMapErrOffset=500    ; bias the corrected position by 500 counts
 
 ### 边界情况
 
-- **写入时电机使能 / 运动中**——电机使能或轴处于运动中时，写入被拒绝；请改用 [MapErrOffRamp](MapErrOffRamp.md) 来控制变化速率。
+- **写入时电机使能 / 运动中**——电机使能且静止时接受；轴处于运动中时拒绝（错误 21）。[MapErrOffRamp](MapErrOffRamp.md) 设定被接受的写入的生效速率。
 - **映射关闭**（[MapType](MapType.md) = 0）——**实际**内部偏置仅在退出斜坡完全完成（内部类型已恢复为关闭）之后才被强制为 `0`。在退出斜坡退出*过程中*，实际偏置照常继续向其目标值逼近；使其从反馈中淡出的是接入斜坡计数器（整个修正按 `counter / 16384` 缩放；参见 [MapErrOnStep](MapErrOnStep.md)），而非强制将偏置归零。一旦关闭，对 `MapErrOffset` 的写入会被存储，但在映射重新接入之前不影响反馈。
 - **仿真电机**——仿真中完全跳过映射，因此实际偏置无论如何都保持为 `0`。
 - **变化速率始终有进展**——[MapErrOffRamp](MapErrOffRamp.md) 的最小值为 `1`，因此它永远不会为 `0`；实际偏置始终向目标值逼近（唯一的问题只是速度多快）。
 - **保存**——不可保存至闪存；每次启动时复位为 `0`。
+
+> **电机使能时修改偏置。** 静止时写入会被接受，且受速率限制：实际偏置每个周期最多向新值移动 [MapErrOffRamp](MapErrOffRamp.md) × 采样时间。若斜率设置过高，整个变化可能在一个周期内完成，从而使修正后的位置发生阶跃。电机使能时伺服会跟随该斜坡，因此请选择对该轴足够慢的变化速率。轴运动中时写入被拒绝（错误 21）。在此更改之前的固件上，电机使能时的写入会被拒绝（错误 22）。
 
 ## 另请参阅
 
