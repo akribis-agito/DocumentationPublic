@@ -58,13 +58,13 @@ AMapErrOffset=500    ; bias the corrected position by 500 counts
 
 ### Edge cases
 
-- **Motor on / in motion at write** (Firmware-Main #1316) — accepted with the motor on at standstill; rejected while the axis is in motion (error 21); use [MapErrOffRamp](MapErrOffRamp.md) to control the slew instead.
+- **Motor on / in motion at write** — accepted with the motor on at standstill; rejected while the axis is in motion (error 21); use [MapErrOffRamp](MapErrOffRamp.md) to control the slew instead.
 - **Mapping off** ([MapType](MapType.md) = 0) — the **actual** internal offset is forced to `0` only after the disengage ramp has fully completed (internal type reverted to off). *During* the disengage ramp-down the actual offset keeps slewing toward its target as normal; what fades it out of the feedback is the engage ramp counter (the whole correction is scaled by `counter / 16384`; see [MapErrOnStep](MapErrOnStep.md)), not a forced-zero of the offset. Once off, writes to `MapErrOffset` are stored but do not affect the feedback until mapping is re-engaged.
 - **Simulation motor** — mapping is skipped entirely in simulation, so the actual offset is held at `0` regardless.
 - **Slew always progresses** — [MapErrOffRamp](MapErrOffRamp.md) has a minimum of `1`, so it can never be `0`; the actual offset always slews toward the target (the only question is how fast).
 - **Save** — not flash-saveable; reset to `0` on every boot.
 
-> **Changing the map with the motor on.** A write at standstill takes effect on the next control sample. Because the map corrects the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), the corrected position can step once, and the servo moves the axis by that step. To avoid it, set [MapType](MapType.md) = `0` before changing the map and switch it back on afterwards (the correction then ramps in at [MapErrOnStep](MapErrOnStep.md)). Writes are refused while the axis is in motion (error 21).
+> **Changing the offset with the motor on.** A write at standstill is accepted and does not step the corrected position: the applied offset slews toward the new value at [MapErrOffRamp](MapErrOffRamp.md). With the motor on, the servo follows that slew, so choose a ramp slow enough for the axis. Writes are refused while the axis is in motion (error 21).
 
 ## See also
 

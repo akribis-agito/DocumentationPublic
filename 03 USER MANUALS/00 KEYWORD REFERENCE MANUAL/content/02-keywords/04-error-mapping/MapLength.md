@@ -60,13 +60,13 @@ AMapLength[1]        ; read the number of points in the first dimension
 ### Edge cases
 
 - **Index 0** — invalid; valid indices are `MapLength[1]`/`[2]`/`[3]`.
-- **Motor on / in motion at write** (Firmware-Main #1316) — accepted with the motor on at standstill; rejected while the axis is in motion (error 21).
+- **Motor on / in motion at write** — accepted with the motor on at standstill; rejected while the axis is in motion (error 21).
 - **Out of range** — values outside `1`–`60 000` per dimension are rejected.
 - **Product overflow** — for 2D/3D the **product** of dimensions must fit within the combined [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) banks starting at [MapStartIndex](MapStartIndex.md); the parameter table does not pre-check this product, so an oversize map will read uninitialised entries.
 - **`MapType = 0`** — value stored but not consulted.
 - **Save** — flash-saveable.
 
-> **Changing the map with the motor on.** A write at standstill takes effect on the next control sample. Because the map corrects the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), the corrected position can step once, and the servo moves the axis by that step. To avoid it, set [MapType](MapType.md) = `0` before changing the map and switch it back on afterwards (the correction then ramps in at [MapErrOnStep](MapErrOnStep.md)). Writes are refused while the axis is in motion (error 21).
+> **Changing the map with the motor on.** A write at standstill takes effect on the next control sample. Because the map corrects the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), the corrected position can step once, and the servo moves the axis by that step. To avoid it, first set a non-zero [MapErrOnStep](MapErrOnStep.md) (at its default of `0` the correction switches in and out in one cycle, which is itself a step), then set [MapType](MapType.md) = `0`, change the map, and switch `MapType` back on so the correction ramps out and back in. Writes are refused while the axis is in motion (error 21).
 
 ## See also
 

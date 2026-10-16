@@ -26,7 +26,7 @@ The correction values are stored as one flat, 1-based list starting at [MapStart
 
 ## Walk-through: apply a 1D map at runtime
 
-Suppose the encoder under axis A is known to have a small repeatable position error from `0` to `100000` counts, sampled at `1000`-count intervals. A 1D map can correct it on the fly. Mapping touches the **feedback** (it adjusts [Pos](../10-motion/01-kinematics-status/Pos.md)), not the command, and is configured with the motor off because the geometry is precomputed when [MapType](MapType.md) is written.
+Suppose the encoder under axis A is known to have a small repeatable position error from `0` to `100000` counts, sampled at `1000`-count intervals. A 1D map can correct it on the fly. Mapping touches the **feedback** (it adjusts [Pos](../10-motion/01-kinematics-status/Pos.md)), not the command, and is best configured with mapping off. Map parameters can be written with the motor on at standstill but not in motion; changing a live map steps the corrected position (see the note on each keyword page).
 
 1. **Define the lookup geometry.** For a 1D map only the `[1]` slot of each per-dimension array is used. Choose this axis's own main encoder as the source (it must be — `MapEncoder[1]` is checked when the map is built):
 

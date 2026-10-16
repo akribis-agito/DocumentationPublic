@@ -76,7 +76,7 @@ AMapEncoder[1]       ; read the encoder selected for the first dimension
 - **`MapType = 0`**——值已存储但不被查询。
 - **保存**——可保存至闪存。
 
-> **电机使能时修改映射。** 静止时写入将在下一个控制周期生效。由于映射修正的是反馈（[Pos](../10-motion/01-kinematics-status/Pos.md)），修正后的位置可能发生一次阶跃，伺服会使轴移动该阶跃量。为避免这种情况，请在修改映射前将 [MapType](MapType.md) 设为 `0`，修改完成后再重新开启（修正值随后按 [MapErrOnStep](MapErrOnStep.md) 斜坡接入）。轴运动中时写入被拒绝（错误 21）。
+> **电机使能时修改映射。** 静止时写入将在下一个控制周期生效。由于映射修正的是反馈（[Pos](../10-motion/01-kinematics-status/Pos.md)），修正后的位置可能发生一次阶跃，伺服会使轴移动该阶跃量。为避免这种情况，请先将 [MapErrOnStep](MapErrOnStep.md) 设为非零值（其默认值 `0` 会在一个周期内接入或断开修正，本身就是阶跃），再将 [MapType](MapType.md) 设为 `0`，修改映射，然后重新开启 `MapType`，使修正值按斜坡退出并重新接入。轴运动中时写入被拒绝（错误 21）。
 
 ## 另请参阅
 

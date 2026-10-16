@@ -47,6 +47,8 @@ language: zh-CN
 
 ![1D map lookup and interpolation](map-lookup-1d.svg)
 
+> **快速信息说明。** 本页的属性块描述 `MapTable`（CAN 326；数组大小：standalone 为 1601，central-i 为 3001，双闪存配置下为 60001）。`MapTableB`–`MapTableE` 为 CAN 485–488，数组大小为 `MAP_TABLE_SIZE_HUGE`（standalone 为 2，central-i 为 501），其访问、闪存、电机使能和运动属性与 `MapTable` 相同。
+
 ## 工作原理
 
 ### 存储值如何成为修正值
@@ -92,7 +94,7 @@ AMapTableB[1]        ; read the first entry of the second bank
 - **仅编码器计数** —— 单位是源 [MapEncoder](MapEncoder.md) 的修正前编码器计数，而非用户单位。
 - **保存** —— 可保存至闪存；大表在重启后保持。
 
-> **电机使能时修改映射。** 静止时写入将在下一个控制周期生效。由于映射修正的是反馈（[Pos](../10-motion/01-kinematics-status/Pos.md)），修正后的位置可能发生一次阶跃，伺服会使轴移动该阶跃量。为避免这种情况，请在修改映射前将 [MapType](MapType.md) 设为 `0`，修改完成后再重新开启（修正值随后按 [MapErrOnStep](MapErrOnStep.md) 斜坡接入）。轴运动中时写入被拒绝（错误 21）。
+> **电机使能时修改映射。** 静止时写入将在下一个控制周期生效。由于映射修正的是反馈（[Pos](../10-motion/01-kinematics-status/Pos.md)），修正后的位置可能发生一次阶跃，伺服会使轴移动该阶跃量。为避免这种情况，请先将 [MapErrOnStep](MapErrOnStep.md) 设为非零值（其默认值 `0` 会在一个周期内接入或断开修正，本身就是阶跃），再将 [MapType](MapType.md) 设为 `0`，修改映射，然后重新开启 `MapType`，使修正值按斜坡退出并重新接入。轴运动中时写入被拒绝（错误 21）。
 
 ## 另请参阅
 
