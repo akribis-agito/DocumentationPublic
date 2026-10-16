@@ -82,7 +82,7 @@ AMapStartPos[1]          ; read the start position of the first dimension
 
 在 **v5** 中位置流水线为 64 位，因此映射起始位置以 64 位值存储，以匹配更宽的 [Pos](../10-motion/01-kinematics-status/Pos.md)/[PosBeforeMap](PosBeforeMap.md) 范围。v5 **仅 central-i** 可用；在 standalone 上 `MapStartPos` 仍为 32 位的 v4 值。
 
-> **电机使能时修改映射。** 静止时写入将在下一个控制周期生效。由于映射修正的是反馈（[Pos](../10-motion/01-kinematics-status/Pos.md)），修正后的位置可能发生一次阶跃，伺服会使轴移动该阶跃量。为避免这种情况，请先将 [MapErrOnStep](MapErrOnStep.md) 设为非零值（其默认值 `0` 会在一个周期内接入或断开修正，本身就是阶跃），再将 [MapType](MapType.md) 设为 `0`，等待修正值完全斜坡退出（[Pos](../10-motion/01-kinematics-status/Pos.md) 等于 [PosBeforeMap](PosBeforeMap.md)）后再修改映射，然后重新开启 `MapType`，使修正值按斜坡重新接入。轴运动中时写入被拒绝（错误 21）。
+> **电机使能时修改映射。** 静止时写入将在下一个控制周期生效。由于映射修正的是反馈（[Pos](../10-motion/01-kinematics-status/Pos.md)），修正后的位置可能发生一次阶跃，伺服会使轴移动该阶跃量。为避免这种情况，请先将 [MapErrOnStep](MapErrOnStep.md) 设为非零值（其默认值 `0` 会在一个周期内接入或断开修正，本身就是阶跃），再将 [MapType](MapType.md) 设为 `0`，等待断开斜坡完成（约 `16384 / MapErrOnStep` 个控制周期；`Pos` 等于 `PosBeforeMap` 并不可靠，因为斜坡仍在进行时较小的修正值也可能读数为 0）后再修改映射，然后重新开启 `MapType`，使修正值按斜坡重新接入。轴运动中时写入被拒绝（错误 21）。
 
 ## 另请参阅
 

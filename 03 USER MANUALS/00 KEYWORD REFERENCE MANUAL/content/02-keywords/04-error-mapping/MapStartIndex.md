@@ -65,7 +65,7 @@ AMapStartIndex       ; read the current start index
 - **1-based** — `MapStartIndex = 1` points at `MapTable[1]`. Index `0` is invalid.
 - **Save** — flash-saveable.
 
-> **Changing the map with the motor on.** A write at standstill takes effect on the next control sample. Because the map corrects the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), the corrected position can step once, and the servo moves the axis by that step. To avoid it, first set a non-zero [MapErrOnStep](MapErrOnStep.md) (at its default of `0` the correction switches in and out in one cycle, which is itself a step), then set [MapType](MapType.md) = `0`, wait until the correction has ramped fully out ([Pos](../10-motion/01-kinematics-status/Pos.md) equals [PosBeforeMap](PosBeforeMap.md)), change the map, and switch `MapType` back on so the correction ramps back in. Writes are refused while the axis is in motion (error 21).
+> **Changing the map with the motor on.** A write at standstill takes effect on the next control sample. Because the map corrects the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), the corrected position can step once, and the servo moves the axis by that step. To avoid it, first set a non-zero [MapErrOnStep](MapErrOnStep.md) (at its default of `0` the correction switches in and out in one cycle, which is itself a step), then set [MapType](MapType.md) = `0`, wait for the disengage ramp to finish (about `16384 / MapErrOnStep` control cycles; `Pos` equalling `PosBeforeMap` is not a reliable sign, because a small correction can read 0 while the ramp is still running), change the map, and switch `MapType` back on so the correction ramps back in. Writes are refused while the axis is in motion (error 21).
 
 ## See also
 

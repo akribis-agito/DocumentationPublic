@@ -66,7 +66,7 @@ AMapStartIndex       ; read the current start index
 - **基于 1** — `MapStartIndex = 1` 指向 `MapTable[1]`。索引 `0` 无效。
 - **保存** — 可保存至闪存。
 
-> **电机使能时修改映射。** 静止时写入将在下一个控制周期生效。由于映射修正的是反馈（[Pos](../10-motion/01-kinematics-status/Pos.md)），修正后的位置可能发生一次阶跃，伺服会使轴移动该阶跃量。为避免这种情况，请先将 [MapErrOnStep](MapErrOnStep.md) 设为非零值（其默认值 `0` 会在一个周期内接入或断开修正，本身就是阶跃），再将 [MapType](MapType.md) 设为 `0`，等待修正值完全斜坡退出（[Pos](../10-motion/01-kinematics-status/Pos.md) 等于 [PosBeforeMap](PosBeforeMap.md)）后再修改映射，然后重新开启 `MapType`，使修正值按斜坡重新接入。轴运动中时写入被拒绝（错误 21）。
+> **电机使能时修改映射。** 静止时写入将在下一个控制周期生效。由于映射修正的是反馈（[Pos](../10-motion/01-kinematics-status/Pos.md)），修正后的位置可能发生一次阶跃，伺服会使轴移动该阶跃量。为避免这种情况，请先将 [MapErrOnStep](MapErrOnStep.md) 设为非零值（其默认值 `0` 会在一个周期内接入或断开修正，本身就是阶跃），再将 [MapType](MapType.md) 设为 `0`，等待断开斜坡完成（约 `16384 / MapErrOnStep` 个控制周期；`Pos` 等于 `PosBeforeMap` 并不可靠，因为斜坡仍在进行时较小的修正值也可能读数为 0）后再修改映射，然后重新开启 `MapType`，使修正值按斜坡重新接入。轴运动中时写入被拒绝（错误 21）。
 
 ## 另请参阅
 
