@@ -46,7 +46,7 @@ All variants are saved to flash and can be changed with the motor on, but not wh
 
 ![1D map lookup and interpolation](map-lookup-1d.svg)
 
-> **Quick Facts note.** The attributes block on this page describes `MapTable` (CAN 326; array size 1601 on standalone, 3001 on central-i, 60001 with the double-flash configuration). `MapTableB`–`MapTableE` are CAN 485–488 with array size `MAP_TABLE_SIZE_HUGE` (2 on standalone, 501 on central-i, 60001 with the double-flash configuration) and share `MapTable`'s access, flash, motor-on and in-motion attributes.
+> **Quick Facts note.** The attributes block on this page describes `MapTable` (CAN 326; array size 1601 on standalone, 3001 on central-i, 60001 on the extended-flash central-i build). `MapTableB`–`MapTableE` are CAN 485–488 with array size `MAP_TABLE_SIZE_HUGE` (2 on standalone, 501 on central-i, 60001 on the extended-flash central-i build) and share `MapTable`'s access, flash, motor-on and in-motion attributes.
 
 ## How it works
 
@@ -93,7 +93,7 @@ AMapTableB[1]        ; read the first entry of the second bank
 - **Encoder counts only** — units are pre-correction encoder counts of the source [MapEncoder](MapEncoder.md), not user units.
 - **Save** — flash-saveable; large tables persist across reboots.
 
-> **Changing the map with the motor on.** A write at standstill takes effect on the next control sample. Because the map corrects the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), the corrected position can step once, and the servo moves the axis by that step. To avoid it, first set a non-zero [MapErrOnStep](MapErrOnStep.md) (at its default of `0` the correction switches in and out in one cycle, which is itself a step), then set [MapType](MapType.md) = `0`, wait for the disengage ramp to finish (about `16384 / MapErrOnStep` control cycles; `Pos` equalling `PosBeforeMap` is not a reliable sign, because a small correction can read 0 while the ramp is still running), change the map, and switch `MapType` back on so the correction ramps back in. Writes are refused while the axis is in motion (error 21).
+> **Changing the map with the motor on.** A write at standstill takes effect on the next control sample. Because the map corrects the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), the corrected position can step once, and the servo moves the axis by that step. To make the change gradual instead (the axis still moves by the whole correction, once as it ramps out and again as it ramps in), first set a non-zero [MapErrOnStep](MapErrOnStep.md) (at its default of `0` the correction switches in and out in one cycle, which is itself a step), then set [MapType](MapType.md) = `0`, wait for the disengage ramp to finish (about `16384 / MapErrOnStep` control cycles; `Pos` equalling `PosBeforeMap` is not a reliable sign, because a small correction can read 0 while the ramp is still running), change the map, and switch `MapType` back on so the correction ramps back in. A non-zero [MapErrOffset](MapErrOffset.md) is forced to 0 while mapping is off and slews back in at [MapErrOffRamp](MapErrOffRamp.md). Writes are refused while the axis is in motion (error 21). On firmware before this change, writes with the motor on are refused (error 22).
 
 ## See also
 

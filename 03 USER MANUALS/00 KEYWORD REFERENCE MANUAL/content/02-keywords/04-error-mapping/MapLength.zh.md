@@ -67,7 +67,7 @@ AMapLength[1]        ; read the number of points in the first dimension
 - **`MapType = 0`** — 值已存储但不被查询。
 - **保存** — 可保存至闪存。
 
-> **电机使能时修改映射。** 静止时写入将在下一个控制周期生效。由于映射修正的是反馈（[Pos](../10-motion/01-kinematics-status/Pos.md)），修正后的位置可能发生一次阶跃，伺服会使轴移动该阶跃量。为避免这种情况，请先将 [MapErrOnStep](MapErrOnStep.md) 设为非零值（其默认值 `0` 会在一个周期内接入或断开修正，本身就是阶跃），再将 [MapType](MapType.md) 设为 `0`，等待断开斜坡完成（约 `16384 / MapErrOnStep` 个控制周期；`Pos` 等于 `PosBeforeMap` 并不可靠，因为斜坡仍在进行时较小的修正值也可能读数为 0）后再修改映射，然后重新开启 `MapType`，使修正值按斜坡重新接入。轴运动中时写入被拒绝（错误 21）。
+> **电机使能时修改映射。** 静止时写入将在下一个控制周期生效。由于映射修正的是反馈（[Pos](../10-motion/01-kinematics-status/Pos.md)），修正后的位置可能发生一次阶跃，伺服会使轴移动该阶跃量。若要使变化平缓（轴仍会移动整个修正量：斜坡退出时一次、斜坡接入时一次），请先将 [MapErrOnStep](MapErrOnStep.md) 设为非零值（其默认值 `0` 会在一个周期内接入或断开修正，本身就是阶跃），再将 [MapType](MapType.md) 设为 `0`，等待断开斜坡完成（约 `16384 / MapErrOnStep` 个控制周期；`Pos` 等于 `PosBeforeMap` 并不可靠，因为斜坡仍在进行时较小的修正值也可能读数为 0）后再修改映射，然后重新开启 `MapType`，使修正值按斜坡重新接入。非零的 [MapErrOffset](MapErrOffset.md) 在映射关闭期间被强制为 0，重新开启后按 [MapErrOffRamp](MapErrOffRamp.md) 斜坡恢复。轴运动中时写入被拒绝（错误 21）。在此更改之前的固件上，电机使能时的写入会被拒绝（错误 22）。
 
 ## 另请参阅
 

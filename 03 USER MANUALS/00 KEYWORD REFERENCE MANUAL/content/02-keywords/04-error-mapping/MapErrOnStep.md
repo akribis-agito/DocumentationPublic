@@ -25,7 +25,7 @@ attributes:
   implemented: final
 overrides: {}
 summary: Step size used to apply the map correction when mapping engages.
-last_updated: '2026-10-10'
+last_updated: '2026-10-16'
 doc_revision: '2026.06'
 ---
 # MapErrOnStep
@@ -62,7 +62,7 @@ AMapErrOnStep        ; read the current step size
 
 - **Out of range** — values outside `0`–`16384` are rejected.
 - **Zero step** — engage / disengage is immediate (one cycle); the correction can produce a position step in the feedback.
-- **In motion** — accepted; the ramp continues to advance during motion, so it is safe to change `MapType` while moving as long as the step is small enough to absorb the correction discontinuity.
+- **In motion** — `MapErrOnStep` itself can be written in motion, and an engage/disengage ramp already running continues to advance during motion. [MapType](MapType.md) itself cannot be written while the axis is in motion (error 21), so start or stop mapping at standstill.
 - **`MapType = 0` already** — writes are accepted but the ramp counter sits at `0` until `MapType` is set non-zero.
 - **Internal state** — the ramp counter and internal map type are shared with [MapErrOffset](MapErrOffset.md) / [MapErrOffRamp](MapErrOffRamp.md); a fast `MapErrOnStep` engage during an active `MapErrOffset` ramp produces a faster-than-expected total change.
 - **Fast off/on toggle (mid-ramp re-engage)** — the internal map type only re-arms the engage ramp from zero when it was already fully off. If you set [MapType](MapType.md) = 0 and then back to 1/2/3 *before* the disengage ramp has finished (counter still above 0), the re-write does not reset the counter to 0; engaging simply resumes from the counter's current partial value. The correction therefore re-engages faster than a full ramp and without a position step, because the feedback never had to fully drop the correction in the first place.

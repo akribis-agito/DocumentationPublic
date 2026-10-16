@@ -31,7 +31,7 @@
 1. **定义查找几何结构。** 对于 1D 映射，仅使用各按维数组的 `[1]` 槽位。选择本轴自身的主编码器作为源（必须如此——构建映射时会检查 `MapEncoder[1]`）：
 
    ```text
-   AMotorOn=0                  ; mapping cannot be enabled while in motion
+   AMotorOn=0                  ; motor off for first setup (writes are also accepted with the motor on, axis still)
    AMapEncoder[1]=1            ; first dimension: axis A's main encoder
    AMapStartPos[1]=0           ; first correction point at encoder count 0
    AMapPosGap[1]=1000          ; correction points spaced 1000 counts apart

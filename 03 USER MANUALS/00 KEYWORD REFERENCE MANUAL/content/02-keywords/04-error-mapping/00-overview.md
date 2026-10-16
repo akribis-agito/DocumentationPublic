@@ -31,7 +31,7 @@ Suppose the encoder under axis A is known to have a small repeatable position er
 1. **Define the lookup geometry.** For a 1D map only the `[1]` slot of each per-dimension array is used. Choose this axis's own main encoder as the source (it must be — `MapEncoder[1]` is checked when the map is built):
 
    ```text
-   AMotorOn=0                  ; mapping cannot be enabled while in motion
+   AMotorOn=0                  ; motor off for first setup (writes are also accepted with the motor on, axis still)
    AMapEncoder[1]=1            ; first dimension: axis A's main encoder
    AMapStartPos[1]=0           ; first correction point at encoder count 0
    AMapPosGap[1]=1000          ; correction points spaced 1000 counts apart
