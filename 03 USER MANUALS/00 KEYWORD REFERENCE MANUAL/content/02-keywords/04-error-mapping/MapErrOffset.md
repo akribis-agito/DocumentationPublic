@@ -25,7 +25,7 @@ attributes:
   implemented: final
 overrides: {}
 summary: Current position-error offset applied on top of the map correction.
-last_updated: '2026-10-16'
+last_updated: '2026-10-17'
 doc_revision: '2026.06'
 ---
 # MapErrOffset
@@ -40,13 +40,13 @@ It is an axis-scoped parameter, not saved to flash, and can be changed with the 
 
 ## How it works
 
-The value you write is the **target**; the firmware does not apply it as a step. Internally it keeps a separate *actual* offset that slews toward `MapErrOffset` by a fixed amount each control cycle:
+The value you write is the **target**; the firmware moves toward it at a limited rate rather than applying it directly (see the note below on high ramp rates). Internally it keeps a separate *actual* offset that slews toward `MapErrOffset` by a fixed amount each control cycle:
 
 $$
 \text{actual} \mathrel{+}= \text{MapErrOffRamp} \cdot \text{SampleTime} \quad \text{(toward the target, clamped on arrival)}
 $$
 
-So [MapErrOffRamp](MapErrOffRamp.md) sets the slew rate (counts per second) and `MapErrOffset` sets the destination. Each cycle the *actual* offset is added to the interpolated correction, and the sum is then scaled by the engage ramp (see [MapErrOnStep](MapErrOnStep.md)) before being added to the feedback to form [Pos](../10-motion/01-kinematics-status/Pos.md). Ramping in this way means changing `MapErrOffset` produces a smooth move of the corrected position rather than a jump. The actual offset is forced to 0 only once the internal mapping type has fully reverted to off (the disengage ramp complete) or in simulation — *not* during the disengage ramp-down itself.
+So [MapErrOffRamp](MapErrOffRamp.md) sets the slew rate (counts per second) and `MapErrOffset` sets the destination. Each cycle the *actual* offset is added to the interpolated correction, and the sum is then scaled by the engage ramp (see [MapErrOnStep](MapErrOnStep.md)) before being added to the feedback to form [Pos](../10-motion/01-kinematics-status/Pos.md). Ramping in this way means changing `MapErrOffset` moves the corrected position gradually, provided `MapErrOffRamp` is low enough that the change spans several cycles. The actual offset is forced to 0 only once the internal mapping type has fully reverted to off (the disengage ramp complete) or in simulation — *not* during the disengage ramp-down itself.
 
 ## Examples
 
