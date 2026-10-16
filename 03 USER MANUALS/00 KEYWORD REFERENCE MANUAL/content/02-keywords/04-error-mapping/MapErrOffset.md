@@ -40,7 +40,7 @@ It is an axis-scoped parameter, not saved to flash, and can be changed with the 
 
 ## How it works
 
-The value you write is the **target**; the firmware moves toward it at a limited rate rather than applying it directly (see the note below on high ramp rates). Internally it keeps a separate *actual* offset that slews toward `MapErrOffset` by a fixed amount each control cycle:
+The value you write is the **target**; the firmware moves toward it by at most `MapErrOffRamp` × sample time per cycle, so a large ramp can reach it in a single cycle. Internally it keeps a separate *actual* offset that slews toward `MapErrOffset` by a fixed amount each control cycle:
 
 $$
 \text{actual} \mathrel{+}= \text{MapErrOffRamp} \cdot \text{SampleTime} \quad \text{(toward the target, clamped on arrival)}

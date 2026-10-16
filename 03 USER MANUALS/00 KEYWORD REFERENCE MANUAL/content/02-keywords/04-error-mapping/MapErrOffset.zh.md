@@ -41,7 +41,7 @@ language: zh-CN
 
 ## 工作原理
 
-你写入的值是**目标值**；固件以受限的速率向其逼近，而不是直接应用它（关于较高斜坡速率，参见下方说明）。在内部，固件维护一个单独的*实际*偏置，该偏置每个控制周期以固定量向 `MapErrOffset` 逼近：
+你写入的值是**目标值**；固件每个周期最多向其移动 `MapErrOffRamp` × 采样时间，因此斜坡速率较大时可能在一个周期内到达目标值。在内部，固件维护一个单独的*实际*偏置，该偏置每个控制周期以固定量向 `MapErrOffset` 逼近：
 
 $$
 \text{actual} \mathrel{+}= \text{MapErrOffRamp} \cdot \text{SampleTime} \quad \text{(toward the target, clamped on arrival)}
