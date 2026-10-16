@@ -1,6 +1,35 @@
 ---
+keyword: MapTable
+availability:
+  standalone:
+  - v4
+  central-i:
+  - v4
+  - v5
+can_code: 326
+attributes:
+  access: rw
+  scope: axis
+  flash: true
+  type: array
+  array_size: 1601
+  data_type: int32
+  ok_in_motion: false
+  ok_motor_on: true
+  units: none
+  range:
+  - -2147483648
+  - 2147483647
+  default: 0
+  scaling: 1.0
+  implemented: final
+overrides:
+  central-i.v4:
+    array_size: 3001
+  central-i.v5:
+    array_size: 3001
 summary: 误差映射所用的位置误差修正值数组。
-last_updated: '2026-05-29'
+last_updated: '2026-10-16'
 doc_revision: '2026.06'
 language: zh-CN
 ---
@@ -62,6 +91,8 @@ AMapTableB[1]        ; read the first entry of the second bank
 - **超出映射范围** —— `[MapStartPos, MapStartPos + (MapLength − 1) × MapPosGap]` 之外的读数钳位到边界条目；不外推。
 - **仅编码器计数** —— 单位是源 [MapEncoder](MapEncoder.md) 的修正前编码器计数，而非用户单位。
 - **保存** —— 可保存至闪存；大表在重启后保持。
+
+> **电机使能时修改映射。** 静止时写入将在下一个控制周期生效。由于映射修正的是反馈（[Pos](../10-motion/01-kinematics-status/Pos.md)），修正后的位置可能发生一次阶跃，伺服会使轴移动该阶跃量。为避免这种情况，请在修改映射前将 [MapType](MapType.md) 设为 `0`，修改完成后再重新开启（修正值随后按 [MapErrOnStep](MapErrOnStep.md) 斜坡接入）。轴运动中时写入被拒绝（错误 21）。
 
 ## 另请参阅
 

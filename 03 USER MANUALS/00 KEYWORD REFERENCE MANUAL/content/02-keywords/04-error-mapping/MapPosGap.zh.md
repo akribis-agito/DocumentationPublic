@@ -25,7 +25,7 @@ attributes:
   implemented: final
 overrides: {}
 summary: 相邻误差映射点之间的编码器计数间距。
-last_updated: '2026-05-29'
+last_updated: '2026-10-16'
 doc_revision: '2026.06'
 language: zh-CN
 ---
@@ -70,6 +70,8 @@ AMapPosGap[1]        ; read the spacing for the first dimension
 - **`MapType = 0`** — 值已存储但不被查询。
 - **保存** — 可保存至闪存；倒数在每次写入时以及上电时重新计算。
 - **平台** — 在 standalone v4、central-i v4 和 central-i v5 上相同。
+
+> **电机使能时修改映射。** 静止时写入将在下一个控制周期生效。由于映射修正的是反馈（[Pos](../10-motion/01-kinematics-status/Pos.md)），修正后的位置可能发生一次阶跃，伺服会使轴移动该阶跃量。为避免这种情况，请在修改映射前将 [MapType](MapType.md) 设为 `0`，修改完成后再重新开启（修正值随后按 [MapErrOnStep](MapErrOnStep.md) 斜坡接入）。轴运动中时写入被拒绝（错误 21）。
 
 ## 另请参阅
 

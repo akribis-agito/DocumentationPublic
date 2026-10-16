@@ -30,7 +30,7 @@ overrides:
     - -2251799813685248
     - 2251799813685247
 summary: Starting position of each error-mapping dimension, in encoder counts.
-last_updated: '2026-05-29'
+last_updated: '2026-10-16'
 doc_revision: '2026.06'
 ---
 # MapStartPos
@@ -80,6 +80,8 @@ AMapStartPos[1]          ; read the start position of the first dimension
 | Range | ±2,147,483,647 | ±2,251,799,813,685,247 |
 
 In **v5** the position pipeline is 64-bit, so the map start positions are stored as 64-bit values to match the wider [Pos](../10-motion/01-kinematics-status/Pos.md)/[PosBeforeMap](PosBeforeMap.md) range. v5 is **central-i only**; on standalone `MapStartPos` remains the 32-bit v4 value.
+
+> **Changing the map with the motor on.** A write at standstill takes effect on the next control sample. Because the map corrects the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), the corrected position can step once, and the servo moves the axis by that step. To avoid it, set [MapType](MapType.md) = `0` before changing the map and switch it back on afterwards (the correction then ramps in at [MapErrOnStep](MapErrOnStep.md)). Writes are refused while the axis is in motion (error 21).
 
 ## See also
 

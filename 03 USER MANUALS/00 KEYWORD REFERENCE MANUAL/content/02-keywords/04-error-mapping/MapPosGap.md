@@ -25,7 +25,7 @@ attributes:
   implemented: final
 overrides: {}
 summary: Encoder-count spacing between adjacent error-mapping points.
-last_updated: '2026-05-29'
+last_updated: '2026-10-16'
 doc_revision: '2026.06'
 ---
 # MapPosGap
@@ -69,6 +69,8 @@ AMapPosGap[1]        ; read the spacing for the first dimension
 - **`MapType = 0`** — value stored but not consulted.
 - **Save** — flash-saveable; the reciprocal is recomputed on every write and at power-up.
 - **Platform** — same on standalone v4, central-i v4 and central-i v5.
+
+> **Changing the map with the motor on.** A write at standstill takes effect on the next control sample. Because the map corrects the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), the corrected position can step once, and the servo moves the axis by that step. To avoid it, set [MapType](MapType.md) = `0` before changing the map and switch it back on afterwards (the correction then ramps in at [MapErrOnStep](MapErrOnStep.md)). Writes are refused while the axis is in motion (error 21).
 
 ## See also
 

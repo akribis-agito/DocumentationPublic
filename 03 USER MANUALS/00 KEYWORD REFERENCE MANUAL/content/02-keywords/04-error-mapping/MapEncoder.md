@@ -25,7 +25,7 @@ attributes:
   implemented: final
 overrides: {}
 summary: Selects which axis encoder drives each error-mapping dimension.
-last_updated: '2026-05-29'
+last_updated: '2026-10-16'
 doc_revision: '2026.06'
 ---
 # MapEncoder
@@ -74,6 +74,8 @@ AMapEncoder[1]       ; read the encoder selected for the first dimension
 - **2D/3D requires main encoders** — additional encoders for 2D/3D must be **main** encoders of motor-on, standing axes; auxiliary encoders for `[2]`/`[3]` are rejected with a "must be main encoders" event.
 - **`MapType = 0`** — value stored but not consulted.
 - **Save** — flash-saveable.
+
+> **Changing the map with the motor on.** A write at standstill takes effect on the next control sample. Because the map corrects the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), the corrected position can step once, and the servo moves the axis by that step. To avoid it, set [MapType](MapType.md) = `0` before changing the map and switch it back on afterwards (the correction then ramps in at [MapErrOnStep](MapErrOnStep.md)). Writes are refused while the axis is in motion (error 21).
 
 ## See also
 

@@ -25,7 +25,7 @@ attributes:
   implemented: final
 overrides: {}
 summary: MapTable index where the active error-mapping data begins.
-last_updated: '2026-05-29'
+last_updated: '2026-10-16'
 doc_revision: '2026.06'
 ---
 # MapStartIndex
@@ -64,6 +64,8 @@ AMapStartIndex       ; read the current start index
 - **`MapType = 0`** — value stored but not consulted.
 - **1-based** — `MapStartIndex = 1` points at `MapTable[1]`. Index `0` is invalid.
 - **Save** — flash-saveable.
+
+> **Changing the map with the motor on.** A write at standstill takes effect on the next control sample. Because the map corrects the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), the corrected position can step once, and the servo moves the axis by that step. To avoid it, set [MapType](MapType.md) = `0` before changing the map and switch it back on afterwards (the correction then ramps in at [MapErrOnStep](MapErrOnStep.md)). Writes are refused while the axis is in motion (error 21).
 
 ## See also
 

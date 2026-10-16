@@ -1,6 +1,35 @@
 ---
+keyword: MapTable
+availability:
+  standalone:
+  - v4
+  central-i:
+  - v4
+  - v5
+can_code: 326
+attributes:
+  access: rw
+  scope: axis
+  flash: true
+  type: array
+  array_size: 1601
+  data_type: int32
+  ok_in_motion: false
+  ok_motor_on: true
+  units: none
+  range:
+  - -2147483648
+  - 2147483647
+  default: 0
+  scaling: 1.0
+  implemented: final
+overrides:
+  central-i.v4:
+    array_size: 3001
+  central-i.v5:
+    array_size: 3001
 summary: Arrays of position-error correction values used by error mapping.
-last_updated: '2026-05-29'
+last_updated: '2026-10-16'
 doc_revision: '2026.06'
 ---
 # MapTable/MapTableB/MapTableC/MapTableD/MapTableE
@@ -61,6 +90,8 @@ AMapTableB[1]        ; read the first entry of the second bank
 - **Beyond mapped range** — readings outside `[MapStartPos, MapStartPos + (MapLength − 1) × MapPosGap]` clamp to the boundary entry; no extrapolation.
 - **Encoder counts only** — units are pre-correction encoder counts of the source [MapEncoder](MapEncoder.md), not user units.
 - **Save** — flash-saveable; large tables persist across reboots.
+
+> **Changing the map with the motor on.** A write at standstill takes effect on the next control sample. Because the map corrects the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), the corrected position can step once, and the servo moves the axis by that step. To avoid it, set [MapType](MapType.md) = `0` before changing the map and switch it back on afterwards (the correction then ramps in at [MapErrOnStep](MapErrOnStep.md)). Writes are refused while the axis is in motion (error 21).
 
 ## See also
 

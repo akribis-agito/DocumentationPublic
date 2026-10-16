@@ -25,7 +25,7 @@ attributes:
   implemented: final
 overrides: {}
 summary: 选择由哪个轴编码器驱动每个误差映射维度。
-last_updated: '2026-05-29'
+last_updated: '2026-10-16'
 doc_revision: '2026.06'
 language: zh-CN
 ---
@@ -75,6 +75,8 @@ AMapEncoder[1]       ; read the encoder selected for the first dimension
 - **2D/3D 需要主编码器**——用于 2D/3D 的附加编码器必须是处于电机使能、静止状态的轴的**主**编码器；用于 `[2]`/`[3]` 的辅助编码器会被拒绝并引发“must be main encoders”事件。
 - **`MapType = 0`**——值已存储但不被查询。
 - **保存**——可保存至闪存。
+
+> **电机使能时修改映射。** 静止时写入将在下一个控制周期生效。由于映射修正的是反馈（[Pos](../10-motion/01-kinematics-status/Pos.md)），修正后的位置可能发生一次阶跃，伺服会使轴移动该阶跃量。为避免这种情况，请在修改映射前将 [MapType](MapType.md) 设为 `0`，修改完成后再重新开启（修正值随后按 [MapErrOnStep](MapErrOnStep.md) 斜坡接入）。轴运动中时写入被拒绝（错误 21）。
 
 ## 另请参阅
 

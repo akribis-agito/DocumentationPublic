@@ -30,7 +30,7 @@ overrides:
     - -2251799813685248
     - 2251799813685247
 summary: 各误差映射维度的起始位置，以编码器计数表示。
-last_updated: '2026-05-29'
+last_updated: '2026-10-16'
 doc_revision: '2026.06'
 language: zh-CN
 ---
@@ -81,6 +81,8 @@ AMapStartPos[1]          ; read the start position of the first dimension
 | 范围 | ±2,147,483,647 | ±2,251,799,813,685,247 |
 
 在 **v5** 中位置流水线为 64 位，因此映射起始位置以 64 位值存储，以匹配更宽的 [Pos](../10-motion/01-kinematics-status/Pos.md)/[PosBeforeMap](PosBeforeMap.md) 范围。v5 **仅 central-i** 可用；在 standalone 上 `MapStartPos` 仍为 32 位的 v4 值。
+
+> **电机使能时修改映射。** 静止时写入将在下一个控制周期生效。由于映射修正的是反馈（[Pos](../10-motion/01-kinematics-status/Pos.md)），修正后的位置可能发生一次阶跃，伺服会使轴移动该阶跃量。为避免这种情况，请在修改映射前将 [MapType](MapType.md) 设为 `0`，修改完成后再重新开启（修正值随后按 [MapErrOnStep](MapErrOnStep.md) 斜坡接入）。轴运动中时写入被拒绝（错误 21）。
 
 ## 另请参阅
 

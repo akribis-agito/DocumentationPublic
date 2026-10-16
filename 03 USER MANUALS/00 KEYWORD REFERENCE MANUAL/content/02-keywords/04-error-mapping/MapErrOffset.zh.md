@@ -25,7 +25,7 @@ attributes:
   implemented: final
 overrides: {}
 summary: 在映射修正之上叠加应用的当前位置误差偏置。
-last_updated: '2026-06-02'
+last_updated: '2026-10-16'
 doc_revision: '2026.06'
 language: zh-CN
 ---
@@ -64,6 +64,8 @@ AMapErrOffset=500    ; bias the corrected position by 500 counts
 - **仿真电机**——仿真中完全跳过映射，因此实际偏置无论如何都保持为 `0`。
 - **变化速率始终有进展**——[MapErrOffRamp](MapErrOffRamp.md) 的最小值为 `1`，因此它永远不会为 `0`；实际偏置始终向目标值逼近（唯一的问题只是速度多快）。
 - **保存**——不可保存至闪存；每次启动时复位为 `0`。
+
+> **电机使能时修改映射。** 静止时写入将在下一个控制周期生效。由于映射修正的是反馈（[Pos](../10-motion/01-kinematics-status/Pos.md)），修正后的位置可能发生一次阶跃，伺服会使轴移动该阶跃量。为避免这种情况，请在修改映射前将 [MapType](MapType.md) 设为 `0`，修改完成后再重新开启（修正值随后按 [MapErrOnStep](MapErrOnStep.md) 斜坡接入）。轴运动中时写入被拒绝（错误 21）。
 
 ## 另请参阅
 

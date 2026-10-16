@@ -25,7 +25,7 @@ attributes:
   implemented: final
 overrides: {}
 summary: Current position-error offset applied on top of the map correction.
-last_updated: '2026-06-02'
+last_updated: '2026-10-16'
 doc_revision: '2026.06'
 ---
 # MapErrOffset
@@ -63,6 +63,8 @@ AMapErrOffset=500    ; bias the corrected position by 500 counts
 - **Simulation motor** — mapping is skipped entirely in simulation, so the actual offset is held at `0` regardless.
 - **Slew always progresses** — [MapErrOffRamp](MapErrOffRamp.md) has a minimum of `1`, so it can never be `0`; the actual offset always slews toward the target (the only question is how fast).
 - **Save** — not flash-saveable; reset to `0` on every boot.
+
+> **Changing the map with the motor on.** A write at standstill takes effect on the next control sample. Because the map corrects the feedback ([Pos](../10-motion/01-kinematics-status/Pos.md)), the corrected position can step once, and the servo moves the axis by that step. To avoid it, set [MapType](MapType.md) = `0` before changing the map and switch it back on afterwards (the correction then ramps in at [MapErrOnStep](MapErrOnStep.md)). Writes are refused while the axis is in motion (error 21).
 
 ## See also
 
