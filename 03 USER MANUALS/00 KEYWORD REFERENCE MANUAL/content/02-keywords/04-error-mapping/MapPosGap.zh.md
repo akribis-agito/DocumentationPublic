@@ -25,7 +25,7 @@ attributes:
   implemented: final
 overrides: {}
 summary: 相邻误差映射点之间的编码器计数间距。
-last_updated: '2026-10-16'
+last_updated: '2026-10-17'
 doc_revision: '2026.06'
 language: zh-CN
 ---
@@ -71,7 +71,7 @@ AMapPosGap[1]        ; read the spacing for the first dimension
 - **保存** — 可保存至闪存；倒数在每次写入时以及上电时重新计算。
 - **平台** — 在 standalone v4、central-i v4 和 central-i v5 上相同。
 
-> **电机使能时修改映射。** 静止时写入将在下一个控制周期生效。由于映射修正的是反馈（[Pos](../10-motion/01-kinematics-status/Pos.md)），修正后的位置可能发生一次阶跃，伺服会使轴移动该阶跃量。若要使变化平缓（轴仍会移动整个修正量：斜坡退出时一次、斜坡接入时一次），请先将 [MapErrOnStep](MapErrOnStep.md) 设为较小的值（斜坡需要 `16384 / MapErrOnStep` 个周期，例如 `16` 约为 1024 个周期；默认值 `0` 和 `16384` 会在一个周期内接入或断开整个修正，本身就是阶跃），再将 [MapType](MapType.md) 设为 `0`，等待断开斜坡完成（约 `16384 / MapErrOnStep` 个控制周期；`Pos` 等于 `PosBeforeMap` 并不可靠，因为斜坡仍在进行时较小的修正值也可能读数为 0）后再修改映射，然后重新开启 `MapType`，使修正值按斜坡重新接入。非零的 [MapErrOffset](MapErrOffset.md) 在映射关闭期间被强制为 0，重新开启后按 [MapErrOffRamp](MapErrOffRamp.md) 斜坡恢复。轴运动中时写入被拒绝（错误 21）。在此更改之前的固件上，电机使能时的写入会被拒绝（错误 22）。
+> **电机使能时修改映射。** 静止时写入将在下一个控制周期生效。由于映射修正的是反馈（[Pos](../10-motion/01-kinematics-status/Pos.md)），修正后的位置可能发生一次阶跃，伺服会使轴移动该阶跃量。若要使变化平缓（轴仍会移动整个修正量：斜坡退出时一次、斜坡接入时一次），请先将 [MapErrOnStep](MapErrOnStep.md) 设为较小的值（斜坡需要 `16384 / MapErrOnStep` 个周期，例如 `16` 约为 1024 个周期；默认值 `0` 和 `16384` 会在一个周期内接入或断开整个修正，本身就是阶跃），再将 [MapType](MapType.md) 设为 `0`，等待断开斜坡完成（约 `16384 / MapErrOnStep` 个控制周期；`Pos` 等于 `PosBeforeMap` 并不可靠，因为斜坡仍在进行时较小的修正值也可能读数为 0）后再修改映射，然后重新开启 `MapType`，使修正值按斜坡重新接入。断开斜坡完成后，实际施加的偏置保持为 0（[MapErrOffset](MapErrOffset.md) 关键字本身保持其值），重新开启映射后按 [MapErrOffRamp](MapErrOffRamp.md) 斜坡恢复。轴运动中时写入被拒绝（错误 21）。在此更改之前的固件上，电机使能时的写入会被拒绝（错误 22）。
 
 ## 另请参阅
 

@@ -25,7 +25,7 @@ attributes:
   implemented: final
 overrides: {}
 summary: 在映射修正之上叠加应用的当前位置误差偏置。
-last_updated: '2026-10-16'
+last_updated: '2026-10-17'
 doc_revision: '2026.06'
 language: zh-CN
 ---
@@ -41,13 +41,13 @@ language: zh-CN
 
 ## 工作原理
 
-你写入的值是**目标值**；固件不会以阶跃方式应用它。在内部，固件维护一个单独的*实际*偏置，该偏置每个控制周期以固定量向 `MapErrOffset` 逼近：
+你写入的值是**目标值**；固件每个周期最多向其移动 `MapErrOffRamp` × 采样时间，因此斜坡速率较大时可能在一个周期内到达目标值。在内部，固件维护一个单独的*实际*偏置，该偏置每个控制周期以固定量向 `MapErrOffset` 逼近：
 
 $$
 \text{actual} \mathrel{+}= \text{MapErrOffRamp} \cdot \text{SampleTime} \quad \text{(toward the target, clamped on arrival)}
 $$
 
-因此 [MapErrOffRamp](MapErrOffRamp.md) 设置变化速率（counts 每秒），而 `MapErrOffset` 设置目标值。每个周期将*实际*偏置加到插值后的修正上，然后该和值在加到反馈以形成 [Pos](../10-motion/01-kinematics-status/Pos.md) 之前，会先按接入斜坡进行缩放（参见 [MapErrOnStep](MapErrOnStep.md)）。以这种方式按斜坡变化意味着更改 `MapErrOffset` 会使校正位置产生平滑移动，而非突跳。实际偏置仅在内部映射类型完全恢复为关闭（退出斜坡完成）后或在仿真中才被强制为 0——而*不是*在退出斜坡过程中。
+因此 [MapErrOffRamp](MapErrOffRamp.md) 设置变化速率（counts 每秒），而 `MapErrOffset` 设置目标值。每个周期将*实际*偏置加到插值后的修正上，然后该和值在加到反馈以形成 [Pos](../10-motion/01-kinematics-status/Pos.md) 之前，会先按接入斜坡进行缩放（参见 [MapErrOnStep](MapErrOnStep.md)）。以这种方式按斜坡变化意味着更改 `MapErrOffset` 会使校正位置逐步移动，前提是 `MapErrOffRamp` 足够低，使变化跨越多个周期。实际偏置仅在内部映射类型完全恢复为关闭（退出斜坡完成）后或在仿真中才被强制为 0——而*不是*在退出斜坡过程中。
 
 ## 示例
 
