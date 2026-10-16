@@ -64,7 +64,7 @@ AMapErrOffset=500    ; bias the corrected position by 500 counts
 - **Slew always progresses** — [MapErrOffRamp](MapErrOffRamp.md) has a minimum of `1`, so it can never be `0`; the actual offset always slews toward the target (the only question is how fast).
 - **Save** — not flash-saveable; reset to `0` on every boot.
 
-> **Changing the offset with the motor on.** A write at standstill is accepted and does not step the corrected position: the applied offset slews toward the new value at [MapErrOffRamp](MapErrOffRamp.md). With the motor on, the servo follows that slew, so choose a ramp slow enough for the axis. Writes are refused while the axis is in motion (error 21). On firmware before this change, writes with the motor on are refused (error 22).
+> **Changing the offset with the motor on.** A write at standstill is accepted and is rate-limited: the applied offset moves toward the new value by at most [MapErrOffRamp](MapErrOffRamp.md) × sample time per cycle. With a high ramp the whole change can land in one cycle, which steps the corrected position. With the motor on, the servo follows that slew, so choose a ramp slow enough for the axis. Writes are refused while the axis is in motion (error 21). On firmware before this change, writes with the motor on are refused (error 22).
 
 ## See also
 
