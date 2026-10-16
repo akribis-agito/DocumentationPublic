@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-16'
+doc_revision: '2026.10'
 ---
 # OfflineBLog
 
@@ -41,6 +41,12 @@ Rolling log of all logged Central-i offline (mailbox) transactions, recorded on 
 - the connect/event state machine (the "special" offline handling, e.g. during [CIConnect](CIConnect.md) and event processing).
 
 The [Sender](#sender-field-values) field of each logged message identifies which of these issued it, so the host can review what was sent and what the remote returned. The companion array [OfflineALog](OfflineALog.md) (offline mailbox 1) is reserved but is not currently populated.
+
+## AGM800 and AGM800-EC queue logging
+
+With the mailbox-2 queue, the foreground owner publishes one complete entry when an accepted transaction reaches a terminal result. This includes timeouts and cancellation, so an entry does not always mean that a request reached the wire. Entries retain their original sender and port even when several producers have work queued.
+
+The array remains a shared five-entry ring across ports. Time and sample-counter fields describe terminal completion, rather than submission. ACK/error is zero on success, preserves an available remote error word, and otherwise reports local communication error `151`. The queue API retains the detailed terminal status internally. A request rejected before it enters the queue does not occupy a transaction-log entry.
 
 ## How it works
 

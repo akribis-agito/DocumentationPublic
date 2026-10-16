@@ -25,8 +25,8 @@ attributes:
 overrides: {}
 removed_in:
 - v5
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-16'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # CIOfflineSend
@@ -37,7 +37,19 @@ language: zh-CN
 
 `CIOfflineSend` 在所选轴端口上执行一次 Central-i **离线**事务：它将由 [CIOfflineData](CIOfflineData.md) 构建的带地址信箱消息发送给所连接的远程单元，等待回复，并将结果写回 [CIOfflineData](CIOfflineData.md)。这是上位机在周期性同步数据交换之外，直接读取或写入远程单元内某个寄存器的方式。它是一个函数关键字（无值）。
 
-## 工作原理
+## 使用信箱队列的 AGM800 与 AGM800-EC
+
+本节适用于包含信箱 2 队列的固件。较早固件的行为见下方旧实现说明。命令仍为同步调用：只有自己的请求完成或失败后才返回。
+
+- 端口必须已连接。未连接时返回错误 `159`，不发送请求。
+- 固件复制请求，并将其加入每端口有界 FIFO，与内部信箱 2 请求共用该队列。队列满时返回通信错误 `151`；已接受请求保持入队顺序。
+- 查询成功后更新 `CIOfflineData[4]`；失败时保留该值。应同时检查命令回复与 `CIOfflineData[5]`：零表示成功，非零表示远程拒绝或本地固件错误。
+- 超时、CRC 错误或无效回复会停止该端口后续离线发送。后续命令返回 `151`，不会把先前请求的迟到回复当作本次结果。执行 `CIDisconnect`，再执行 `CIConnect` 以恢复；固件会先排空旧信箱，再重新识别远程单元。失败的写操作不会自动重发。
+- 已接受的事务在最终完成时写入 `OfflineBLog`，包括最终失败的事务。入队前被拒绝的请求不代表一次实际传输。
+
+信箱 1 仍专用于位置锁存与事件通道。队列由前台服务，中断中的电机控制不会等待离线回复。
+
+## 旧实现
 
 `CIOfflineSend` 使用端口的**第二个**离线信箱（上位机通道），将第一个信箱留给固件自身的后台通信。被调用时它会：
 
@@ -59,6 +71,8 @@ ACIOfflineData[4]      ; value returned by the remote
 ```
 
 ## 边界情况
+
+以下边界情况描述未使用信箱队列的较早固件。
 
 - **端口断开。** `CIOfflineSend` 不以连接状态为前提，因此可在断开的端口上发出。若无远程响应，事务只是以通信超时结束：命令报告通信错误，确认字段 [CIOfflineData](CIOfflineData.md)`[5]` 保持为 `0`，故障记录在 [CIStatus](CIStatus.md) 的离线错误计数器中（`[3]`/`[5]`/`[6]`，码 `5`）。若远程作出回复但拒绝该请求，则会在 [CIOfflineData](CIOfflineData.md)`[5]` 中返回其错误码。
 - **电机使能 / 运动中。** 该命令在电机使能或运动时均允许执行——离线信箱独立于控制环。回复仍会在同一周期窗口内到达 [CIOfflineData](CIOfflineData.md)。
