@@ -15,7 +15,7 @@ attributes:
   array_size: 4
   data_type: int32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
   range:
   - 1
@@ -37,7 +37,7 @@ language: zh-CN
 
 `MapLength` 是一个按维度划分的数组（`[1]`/`[2]`/`[3]`），用于指定沿每个误差映射维度存在多少修正点。它与 [MapStartPos](MapStartPos.md)（点的起始位置）和 [MapPosGap](MapPosGap.md)（间距）一起定义了 [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) 条目所覆盖的位置范围：维度 `d` 跨越 `MapStartPos[d] … MapStartPos[d] + (MapLength[d] − 1) × MapPosGap[d]`。
 
-它是一个轴相关数组，保存至闪存，在轴处于运动中或电机使能时不能更改。
+它是一个轴相关数组，保存至闪存，可在电机使能时更改，但在轴处于运动中时不能更改。
 
 ## 工作原理
 
@@ -61,7 +61,7 @@ AMapLength[1]        ; read the number of points in the first dimension
 ### 边界情况
 
 - **索引 0** — 无效；有效索引为 `MapLength[1]`/`[2]`/`[3]`。
-- **写入时电机使能/运动中** — 在电机使能或轴处于运动中时被拒绝。
+- **写入时电机使能/运动中** — 电机使能且静止时接受；轴处于运动中时拒绝（错误 21）。
 - **超出范围** — 每个维度超出 `1`–`60 000` 的值被拒绝。
 - **乘积溢出** — 对于 2D/3D，各维度的**乘积**必须能容纳在从 [MapStartIndex](MapStartIndex.md) 开始的合并 [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) 存储区内；参数表不会预先检查此乘积，因此超大映射会读取未初始化的条目。
 - **`MapType = 0`** — 值已存储但不被查询。

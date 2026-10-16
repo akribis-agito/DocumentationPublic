@@ -15,7 +15,7 @@ attributes:
   array_size: 4
   data_type: int32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
   range:
   - 1
@@ -36,7 +36,7 @@ Encoder-count spacing between adjacent error-mapping points.
 
 `MapPosGap` is a per-dimension array (`[1]`/`[2]`/`[3]`) that sets the position spacing, in encoder counts, between consecutive correction points along each error-mapping dimension. A larger gap spreads the same number of points ([MapLength](MapLength.md)) across a wider range, giving coarser resolution; a smaller gap gives finer correction over a shorter range. Together with [MapStartPos](MapStartPos.md) (start) and [MapLength](MapLength.md) (count) it defines the lookup grid of [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md).
 
-It is an axis-scoped array saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+It is an axis-scoped array saved to flash, and can be changed with the motor on, but not while the axis is in motion.
 
 ## How it works
 
@@ -63,7 +63,7 @@ AMapPosGap[1]        ; read the spacing for the first dimension
 ### Edge cases
 
 - **Index 0** — invalid; valid indices are `MapPosGap[1]`/`[2]`/`[3]`. `MapPosGap[0]` does not exist.
-- **Motor on / in motion at write** — rejected while the motor is on or the axis is in motion.
+- **Motor on / in motion at write** (Firmware-Main #1316) — accepted with the motor on at standstill; rejected while the axis is in motion (error 21).
 - **Zero value** — silently substituted with the default `1000` so the reciprocal stays defined.
 - **Out of range** — values outside `1`–`8 000 000` are rejected (the 8 M ceiling guarantees exact float reciprocal).
 - **`MapType = 0`** — value stored but not consulted.

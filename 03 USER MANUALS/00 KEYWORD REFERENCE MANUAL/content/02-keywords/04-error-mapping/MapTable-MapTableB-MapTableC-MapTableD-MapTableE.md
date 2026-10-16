@@ -13,7 +13,7 @@ Arrays of position-error correction values used by error mapping.
 
 The five banks together form **one continuous, 1-based index space**: [MapStartIndex](MapStartIndex.md) and the per-dimension offsets address it as if it were a single array, and the firmware's fetch routine routes each index to the correct bank. The `B`–`E` banks exist only to extend total capacity — a map can begin in `MapTable` and run on into `MapTableB`, etc.
 
-All variants are saved to flash and cannot be changed while the axis is in motion or the motor is on.
+All variants are saved to flash and can be changed with the motor on, but not while the axis is in motion.
 
 ![1D map lookup and interpolation](map-lookup-1d.svg)
 
@@ -54,7 +54,7 @@ AMapTableB[1]        ; read the first entry of the second bank
 ### Edge cases
 
 - **Index 0** — invalid; valid indices are `[1…N]` where `N` is the bank size.
-- **Motor on / in motion at write** — rejected while the motor is on or the axis is in motion.
+- **Motor on / in motion at write** (Firmware-Main #1316) — accepted with the motor on at standstill; rejected while the axis is in motion (error 21).
 - **Out of range index** — rejected by the parameter table; refer to the product's bank sizes.
 - **Mapping off** ([MapType](MapType.md) = 0) — the tables are stored but not consulted.
 - **Simulation motor** — mapping is skipped entirely; tables are stored but produce no correction.

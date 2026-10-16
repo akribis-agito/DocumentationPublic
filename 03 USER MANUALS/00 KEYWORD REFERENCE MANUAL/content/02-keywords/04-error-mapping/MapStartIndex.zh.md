@@ -15,7 +15,7 @@ attributes:
   array_size: 1
   data_type: int32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
   range:
   - 1
@@ -37,7 +37,7 @@ language: zh-CN
 
 `MapStartIndex` 设置活动误差映射数据开始处的 [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) 索引。给定映射的修正值不必从第一个表元素开始，因此这允许多个映射共享表区域，或允许跳过未使用的前导条目。修正从此索引开始，跨越由 [MapStartPos](MapStartPos.md)、[MapPosGap](MapPosGap.md) 和 [MapLength](MapLength.md) 定义的点，针对由 [MapType](MapType.md) 选择的维度进行。
 
-它是一个轴相关参数，保存至闪存，在轴处于运动中或电机使能时不能更改。
+它是一个轴相关参数，保存至闪存，可在电机使能时更改，但在轴处于运动中时不能更改。
 
 ## 工作原理
 
@@ -59,7 +59,7 @@ AMapStartIndex       ; read the current start index
 
 ### 边界情况
 
-- **写入时电机使能/运动中** — 在电机使能或轴处于运动中时被拒绝。
+- **写入时电机使能/运动中** — 电机使能且静止时接受；轴处于运动中时拒绝（错误 21）。
 - **超出范围** — 超出 `1`–`300 000` 的值被拒绝。
 - **超出表范围** — 超过合并存储区大小的值会派发到未初始化内存；需与 [MapLength](MapLength.md) 谨慎配合。
 - **`MapType = 0`** — 值已存储但不被查询。

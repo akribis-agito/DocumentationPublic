@@ -15,7 +15,7 @@ attributes:
   array_size: 4
   data_type: int32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
   range:
   - 1
@@ -36,7 +36,7 @@ Number of correction points along each error-mapping dimension.
 
 `MapLength` is a per-dimension array (`[1]`/`[2]`/`[3]`) that specifies how many correction points exist along each error-mapping dimension. Together with [MapStartPos](MapStartPos.md) (where the points begin) and [MapPosGap](MapPosGap.md) (spacing) it defines the positional extent covered by the [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) entries: dimension `d` spans `MapStartPos[d] … MapStartPos[d] + (MapLength[d] − 1) × MapPosGap[d]`.
 
-It is an axis-scoped array saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+It is an axis-scoped array saved to flash, and can be changed with the motor on, but not while the axis is in motion.
 
 ## How it works
 
@@ -60,7 +60,7 @@ AMapLength[1]        ; read the number of points in the first dimension
 ### Edge cases
 
 - **Index 0** — invalid; valid indices are `MapLength[1]`/`[2]`/`[3]`.
-- **Motor on / in motion at write** — rejected while the motor is on or the axis is in motion.
+- **Motor on / in motion at write** (Firmware-Main #1316) — accepted with the motor on at standstill; rejected while the axis is in motion (error 21).
 - **Out of range** — values outside `1`–`60 000` per dimension are rejected.
 - **Product overflow** — for 2D/3D the **product** of dimensions must fit within the combined [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) banks starting at [MapStartIndex](MapStartIndex.md); the parameter table does not pre-check this product, so an oversize map will read uninitialised entries.
 - **`MapType = 0`** — value stored but not consulted.

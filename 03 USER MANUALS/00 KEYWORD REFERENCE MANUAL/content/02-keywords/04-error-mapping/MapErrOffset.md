@@ -15,7 +15,7 @@ attributes:
   array_size: 1
   data_type: int32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
   range:
   - -2147483648
@@ -36,7 +36,7 @@ Current position-error offset applied on top of the map correction.
 
 `MapErrOffset` is a **target** position-error offset (in encoder counts) added to the interpolated map correction. It lets you bias the corrected position by a constant on top of whatever the [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) produces — for example to trim a residual offset without re-measuring the map. The mapping itself is enabled by [MapType](MapType.md).
 
-It is an axis-scoped parameter, not saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+It is an axis-scoped parameter, not saved to flash, and can be changed with the motor on, but not while the axis is in motion.
 
 ## How it works
 
@@ -58,7 +58,7 @@ AMapErrOffset=500    ; bias the corrected position by 500 counts
 
 ### Edge cases
 
-- **Motor on / in motion at write** — rejected while the motor is on or the axis is in motion; use [MapErrOffRamp](MapErrOffRamp.md) to control the slew instead.
+- **Motor on / in motion at write** (Firmware-Main #1316) — accepted with the motor on at standstill; rejected while the axis is in motion (error 21); use [MapErrOffRamp](MapErrOffRamp.md) to control the slew instead.
 - **Mapping off** ([MapType](MapType.md) = 0) — the **actual** internal offset is forced to `0` only after the disengage ramp has fully completed (internal type reverted to off). *During* the disengage ramp-down the actual offset keeps slewing toward its target as normal; what fades it out of the feedback is the engage ramp counter (the whole correction is scaled by `counter / 16384`; see [MapErrOnStep](MapErrOnStep.md)), not a forced-zero of the offset. Once off, writes to `MapErrOffset` are stored but do not affect the feedback until mapping is re-engaged.
 - **Simulation motor** — mapping is skipped entirely in simulation, so the actual offset is held at `0` regardless.
 - **Slew always progresses** — [MapErrOffRamp](MapErrOffRamp.md) has a minimum of `1`, so it can never be `0`; the actual offset always slews toward the target (the only question is how fast).

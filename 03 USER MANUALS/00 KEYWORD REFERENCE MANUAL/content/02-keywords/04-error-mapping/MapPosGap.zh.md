@@ -15,7 +15,7 @@ attributes:
   array_size: 4
   data_type: int32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
   range:
   - 1
@@ -37,7 +37,7 @@ language: zh-CN
 
 `MapPosGap` 是一个按维度划分的数组（`[1]`/`[2]`/`[3]`），用于设置沿每个误差映射维度相邻修正点之间的位置间距（以编码器计数为单位）。较大的间距将相同数量的点（[MapLength](MapLength.md)）分散到更宽的范围，从而给出较粗的分辨率；较小的间距则在较短范围内给出更精细的修正。它与 [MapStartPos](MapStartPos.md)（起始）和 [MapLength](MapLength.md)（数量）一起定义了 [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) 的查找网格。
 
-它是一个轴相关数组，保存至闪存，在轴处于运动中或电机使能时不能更改。
+它是一个轴相关数组，保存至闪存，可在电机使能时更改，但在轴处于运动中时不能更改。
 
 ## 工作原理
 
@@ -64,7 +64,7 @@ AMapPosGap[1]        ; read the spacing for the first dimension
 ### 边界情况
 
 - **索引 0** — 无效；有效索引为 `MapPosGap[1]`/`[2]`/`[3]`。`MapPosGap[0]` 不存在。
-- **写入时电机使能/运动中** — 在电机使能或轴处于运动中时被拒绝。
+- **写入时电机使能/运动中** — 电机使能且静止时接受；轴处于运动中时拒绝（错误 21）。
 - **零值** — 静默替换为默认值 `1000`，以保持倒数有定义。
 - **超出范围** — 超出 `1`–`8 000 000` 的值被拒绝（8 M 上限保证精确的浮点倒数）。
 - **`MapType = 0`** — 值已存储但不被查询。

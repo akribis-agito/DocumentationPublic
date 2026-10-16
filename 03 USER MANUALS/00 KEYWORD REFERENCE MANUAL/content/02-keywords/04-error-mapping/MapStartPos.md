@@ -15,7 +15,7 @@ attributes:
   array_size: 4
   data_type: int32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
   range:
   - -2147483648
@@ -41,7 +41,7 @@ Starting position of each error-mapping dimension, in encoder counts.
 
 `MapStartPos` is a per-dimension array (`[1]` first dimension, `[2]` second, `[3]` third) that defines the position of the first correction point of each error-mapping dimension, in **encoder counts** (pre-correction, i.e. measured on the [MapEncoder](MapEncoder.md)-selected source). Together with [MapPosGap](MapPosGap.md) (spacing) and [MapLength](MapLength.md) (number of points) it fully describes the lookup grid covered by the [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) entries.
 
-It is an axis-scoped array saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+It is an axis-scoped array saved to flash, and can be changed with the motor on, but not while the axis is in motion.
 
 ## How it works
 
@@ -64,7 +64,7 @@ AMapStartPos[1]          ; read the start position of the first dimension
 ### Edge cases
 
 - **Index 0** — invalid; valid indices are `MapStartPos[1]` (1D), `[2]` (2D), `[3]` (3D). `MapStartPos[0]` does not exist.
-- **Motor on / in motion at write** — rejected while the motor is on or the axis is in motion. Configure with the motor off.
+- **Motor on / in motion at write** (Firmware-Main #1316) — accepted with the motor on at standstill; rejected while the axis is in motion (error 21).
 - **`MapType = 0`** — the value is stored but not consulted; only the active dimensions of [MapType](MapType.md) are used (1D → only `[1]`; 2D → `[1]` and `[2]`; 3D → all three).
 - **Below the range** — readings ≤ `MapStartPos` clamp to the first correction entry (held flat, no extrapolation).
 - **Beyond the range** — readings ≥ `MapStartPos + (MapLength − 1) × MapPosGap` clamp to the last correction entry.

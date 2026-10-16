@@ -15,7 +15,7 @@ attributes:
   array_size: 4
   data_type: int32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
   range:
   - 1
@@ -36,7 +36,7 @@ Selects which axis encoder drives each error-mapping dimension.
 
 `MapEncoder` is a per-dimension array that selects which encoder supplies the *uncorrected* position used to look up the error-mapping table. Index `[1]` is the first (and for 1D, only) dimension; `[2]` and `[3]` add the second and third dimensions for [MapType](MapType.md) = 2 and 3. The looked-up encoder reading is what indexes the table — see [MapStartPos](MapStartPos.md)/[MapPosGap](MapPosGap.md)/[MapLength](MapLength.md) for how the index is formed — so a 2D/3D map can make the correction depend on more than one axis's position.
 
-`MapEncoder` is an axis-scoped array saved to flash and cannot be changed in motion or motor-on.
+`MapEncoder` is an axis-scoped array saved to flash and can be changed with the motor on, but not in motion.
 
 ## How it works
 
@@ -68,7 +68,7 @@ AMapEncoder[1]       ; read the encoder selected for the first dimension
 ### Edge cases
 
 - **Index 0** — invalid; valid indices are `MapEncoder[1]`/`[2]`/`[3]`.
-- **Motor on / in motion at write** — rejected while the motor is on or the axis is in motion.
+- **Motor on / in motion at write** (Firmware-Main #1316) — accepted with the motor on at standstill; rejected while the axis is in motion (error 21).
 - **Out of range** — values outside `1`–`number-of-axes × 2` are rejected.
 - **`MapEncoder[1]` wrong** — must point at this axis's own main encoder for the table build to accept the map; otherwise the build raises a "must be first encoder" event.
 - **2D/3D requires main encoders** — additional encoders for 2D/3D must be **main** encoders of motor-on, standing axes; auxiliary encoders for `[2]`/`[3]` are rejected with a "must be main encoders" event.

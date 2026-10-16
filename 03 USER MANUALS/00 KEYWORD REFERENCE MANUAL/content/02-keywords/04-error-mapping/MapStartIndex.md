@@ -15,7 +15,7 @@ attributes:
   array_size: 1
   data_type: int32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
   range:
   - 1
@@ -36,7 +36,7 @@ MapTable index where the active error-mapping data begins.
 
 `MapStartIndex` sets the [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) index at which the active error-mapping data begins. The correction values for a given map are not required to start at the first table element, so this lets several maps share the table region or lets unused leading entries be skipped. Correction proceeds from this index across the points defined by [MapStartPos](MapStartPos.md), [MapPosGap](MapPosGap.md), and [MapLength](MapLength.md), for the dimensions selected by [MapType](MapType.md).
 
-It is an axis-scoped parameter saved to flash, and cannot be changed while the axis is in motion or the motor is on.
+It is an axis-scoped parameter saved to flash, and can be changed with the motor on, but not while the axis is in motion.
 
 ## How it works
 
@@ -58,7 +58,7 @@ AMapStartIndex       ; read the current start index
 
 ### Edge cases
 
-- **Motor on / in motion at write** — rejected while the motor is on or the axis is in motion.
+- **Motor on / in motion at write** (Firmware-Main #1316) — accepted with the motor on at standstill; rejected while the axis is in motion (error 21).
 - **Out of range** — values outside `1`–`300 000` are rejected.
 - **Past the table** — values beyond the combined bank size dispatch to uninitialised memory; combine carefully with [MapLength](MapLength.md).
 - **`MapType = 0`** — value stored but not consulted.
