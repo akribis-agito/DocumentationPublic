@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-17'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # EventOn
@@ -88,4 +88,4 @@ AEventOn            ; 查询当前状态
 
 ## AGM800 队列事件失败
 
-在启用队列的 AGM800 和 AGM800-EC 固件中，中断事件写入未获确认时将停止事件序列，随后异步发送并检查远端禁用命令。旧事件事务或远端清理尚未完成，或清理失败时，`EventOn=1` 返回错误 151。清理失败后需重新连接。
+在启用队列的 AGM800 和 AGM800-EC 固件中，中断事件写入未获确认时将停止事件序列，随后异步发送并检查远端禁用命令。从禁用状态重新启用时，若旧事件事务或远端清理尚未完成，或清理失败，`EventOn=1` 返回错误 151。事件序列已启用时，重复写入 `EventOn=1` 保持幂等，不会重新启动序列。清理失败后需重新连接。

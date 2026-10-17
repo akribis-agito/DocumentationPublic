@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-17'
+doc_revision: '2026.10'
 ---
 # EventOn
 
@@ -87,4 +87,4 @@ AEventOn            ; query the current state
 
 ## Queued AGM800 event failures
 
-On queue-enabled AGM800 and AGM800-EC firmware, an unacknowledged interrupt event write stops the series. Checked remote-disable commands follow asynchronously. `EventOn=1` returns error 151 while an old event exchange or remote cleanup is pending, or if cleanup failed. Reconnect is required after a failed cleanup.
+On queue-enabled AGM800 and AGM800-EC firmware, an unacknowledged interrupt event write stops the series. Checked remote-disable commands follow asynchronously. A new `EventOn=1` transition from the disarmed state returns error 151 while an old event exchange or remote cleanup is pending, or if cleanup failed. Repeating `EventOn=1` on an already-active series remains idempotent. Reconnect is required after a failed cleanup.
