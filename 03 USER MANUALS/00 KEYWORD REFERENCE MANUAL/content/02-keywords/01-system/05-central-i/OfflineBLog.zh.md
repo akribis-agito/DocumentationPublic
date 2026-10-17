@@ -61,8 +61,8 @@ language: zh-CN
 | +4 | Value out | 发送的值（针对赋值） |
 | +5 | Value in | 返回的值（针对查询） |
 | +6 | Acknowledge / error | `0` = 正常，否则为远端的错误码 |
-| +7 | Time | 发送消息时的控制器时间（参见 [Time](../03-timing/Time.md)） |
-| +8 | Sample counter | 发送时的采样计数器 |
+| +7 | Time | 启用队列的 AGM800/EC 为完成时的控制器时间；旧固件为发送时刻（参见 [Time](../03-timing/Time.md)） |
+| +8 | Sample counter | 启用队列的 AGM800/EC 为完成时的采样计数器；旧固件为发送时刻 |
 | +9 | Port | 消息所发往的轴/端口号 |
 
 消息槽 *k*（k = 0…4）占用元素 `[9k+1]` … `[9k+9]`。
@@ -73,16 +73,15 @@ language: zh-CN
 
 | 取值 | 含义 |
 |-------|---------|
+| 1 | 来自中断的 CNC/事件清理（启用队列的 AGM800 和 AGM800-EC） |
 | 2 | 主机函数 —— 用户程序调用 [CIOfflineSend](CIOfflineSend.md) |
 | 3 | 后台离线流量 |
 | 4 | 连接/事件状态机（“特殊”离线处理） |
 
-在启用队列的 AGM800 和 AGM800-EC 固件中，取值 `1` 表示来自中断的 CNC 或事件清理请求。
-
 ## 示例
 
 ```text
-AOfflineBLog[1]     ; sender of the first logged message (2 = CIOfflineSend, 3 = background, 4 = special)
+AOfflineBLog[1]     ; sender of the first logged message (1 = interrupt, 2 = CIOfflineSend, 3 = background, 4 = special)
 AOfflineBLog[3]     ; opcode of the first logged message
 AOfflineBLog[5]     ; value returned by the remote for that message
 AOfflineBLog[6]     ; its acknowledge/error code (0 = ok)

@@ -60,8 +60,8 @@ The buffer has the same shape as [OfflineALog](OfflineALog.md): up to **5 messag
 | +4 | Value out | Value sent (for an assignment) |
 | +5 | Value in | Value returned (for a query) |
 | +6 | Acknowledge / error | `0` = ok, otherwise the remote's error code |
-| +7 | Time | Controller time when the message was sent (cf. [Time](../03-timing/Time.md)) |
-| +8 | Sample counter | Sample counter at send time |
+| +7 | Time | Controller time at completion on queue-enabled AGM800/EC; at send time on legacy firmware (cf. [Time](../03-timing/Time.md)) |
+| +8 | Sample counter | Sample counter at completion on queue-enabled AGM800/EC; at send time on legacy firmware |
 | +9 | Port | Axis/port number the message went to |
 
 Message slot *k* (k = 0…4) occupies elements `[9k+1]` … `[9k+9]`.
@@ -72,16 +72,15 @@ The **Sender** field (offset `+1` in each slot) identifies what issued the logge
 
 | Value | Meaning |
 |-------|---------|
+| 1 | Interrupt-origin CNC/event cleanup (queue-enabled AGM800 and AGM800-EC) |
 | 2 | Host function — a user program calling [CIOfflineSend](CIOfflineSend.md) |
 | 3 | Background offline traffic |
 | 4 | Connect/event state machine (the "special" offline handling) |
 
-On queue-enabled AGM800 and AGM800-EC firmware, value `1` identifies interrupt-origin CNC and event-cleanup submissions.
-
 ## Examples
 
 ```text
-AOfflineBLog[1]     ; sender of the first logged message (2 = CIOfflineSend, 3 = background, 4 = special)
+AOfflineBLog[1]     ; sender of the first logged message (1 = interrupt, 2 = CIOfflineSend, 3 = background, 4 = special)
 AOfflineBLog[3]     ; opcode of the first logged message
 AOfflineBLog[5]     ; value returned by the remote for that message
 AOfflineBLog[6]     ; its acknowledge/error code (0 = ok)
