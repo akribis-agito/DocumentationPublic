@@ -48,7 +48,7 @@ Outside the versioned window below, assignments change as features are developed
 
 These Zynq builds allocate 356 elements (indices 0–355). The diagnostic latch
 remains at 300–331. The dedicated timing window is 332–355; other builds may
-not expose it. Pin the firmware image and check signature `0x49535132` before
+not expose it. Pin the firmware image and check signature `0x49535133` before
 interpreting these fields.
 
 | Indices | Meaning |
@@ -84,3 +84,5 @@ ADebugData[1]       ; read a development scratch value (meaning is build-specifi
 ## See also
 
 - [RNDDebug](../02-operation/RNDDebug.md) — related development/debug command
+
+Version 3 (`0x49535133`) preserves the version 2 fields and orders each timer read with compiler memory barriers and CPU DSB/ISB instructions. Versions 1/2 used volatile MMIO alone. Earlier probe overhead is included; barriers after the final timer read, final publication and the FIQ wrapper are excluded. Keep capture versions separate when comparing timings.
