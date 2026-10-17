@@ -25,7 +25,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-10-16'
+last_updated: '2026-10-17'
 doc_revision: '2026.10'
 ---
 # EncStatReg
@@ -53,6 +53,8 @@ The local main BiSS-C, EnDat and Tamagawa branch reads the FPGA status register 
 The standalone handler uses the status itself for its fault policy and can clear bits 0/1 in the bypass/no-error branch. The CI_MASTER reporting repair does not change that behavior. Do not assume identical clearing semantics across standalone and Central-i controllers. SIN/COS has separate amplitude-status handling using this register; its bits are not serial-reply status. This register does not establish equivalent auxiliary-encoder monitoring or SSI/Nikon support.
 
 ## Reporting versus fault response
+
+Firmware containing the [accepted-quality repair](https://github.com/akribis-agito/Firmware-Main/issues/1408) preserves this current-input diagnostic mapping. For active standard AMP main BiSS-C, EnDat and Tamagawa feedback on AGM800/EC, encoder-error policy instead uses quality accepted with the main position under CRC1. After a rejected or skipped decode, diagnostics can differ from that retained policy evidence: a rejected bad frame can set diagnostic bits without spoiling accepted good quality, and a rejected clean frame can clear diagnostic bits without clearing accepted bad quality. This does not change lock/event status ownership or qualify startup, physical freshness or full encoder alarms.
 
 `EncAbsErrTime=-1` bypasses the existing CRC/error counting, extrapolation and timeout fault response. Independent main-encoder protection handling remains active. With handling enabled, CRC and generic-error conditions use separate counters and can produce [ConFlt](../../07-status-and-faults/ConFlt.md) 1069 and 1068; the existing protection path uses 1070. A reported condition and a recorded fault are different observations. Consult the fault log for recorded fault history.
 
