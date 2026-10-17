@@ -51,10 +51,10 @@ Each invocation of the existing absolute-encoder handler processes the protocol'
 
 The two recoverable groups are counted separately:
 
-- **CRC errors** (status bit 4). On expiry, [ConFlt](../../07-status-and-faults/ConFlt.md) reports fault `1069`.
-- **Error / warning** (status bit 1, or the warning condition at bit 3). On expiry, [ConFlt](../../07-status-and-faults/ConFlt.md) reports fault `1068`.
+- **CRC errors.** On expiry, [ConFlt](../../07-status-and-faults/ConFlt.md) reports fault `1069`.
+- **Error / warning.** On expiry, [ConFlt](../../07-status-and-faults/ConFlt.md) reports fault `1068`.
 
-A clean cycle (no abnormal bit) resets the counters, so only a *continuous* condition lasting longer than `EncAbsErrTime` produces a fault — short noise glitches are ridden through by extrapolation.
+For Central-i main feedback, enabled handling gives CRC precedence over error/warning. Each branch increments its own counter; an invocation with neither monitored condition resets both. The counters are not counts of new encoder replies.
 
 The existing **main-encoder protection** path is separate from `EncAbsErrTime` and can produce [ConFlt](../../07-status-and-faults/ConFlt.md) fault `1070`. On Central-i its physical meaning depends on the protocol and FPGA image; bit 0 is not a universal cable-disconnect verdict.
 

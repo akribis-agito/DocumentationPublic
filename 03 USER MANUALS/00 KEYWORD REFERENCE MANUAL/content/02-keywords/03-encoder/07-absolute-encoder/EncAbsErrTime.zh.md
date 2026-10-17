@@ -52,10 +52,10 @@ language: zh-CN
 
 两个可恢复的分组分别计数：
 
-- **CRC 错误**（状态位 4）。到期时，[ConFlt](../../07-status-and-faults/ConFlt.md) 报告故障 `1069`。
-- **错误 / 告警**（状态位 1，或位 3 处的告警状况）。到期时，[ConFlt](../../07-status-and-faults/ConFlt.md) 报告故障 `1068`。
+- **CRC 错误。** 到期时，[ConFlt](../../07-status-and-faults/ConFlt.md) 报告故障 `1069`。
+- **错误 / 告警。** 到期时，[ConFlt](../../07-status-and-faults/ConFlt.md) 报告故障 `1068`。
 
-一个干净的周期（无异常位）会复位计数器，因此只有持续时间超过 `EncAbsErrTime` 的*连续*状况才会产生故障——短暂的噪声毛刺通过外推被平滑度过。
+对于 Central-i 主反馈，启用的错误处理优先处理 CRC，再处理错误/告警。各分支递增各自的计数器；一次处理调用中两类受监控状况均不存在时，两个计数器都复位。计数器并非按新的编码器回复数计数。
 
 现有的**主编码器保护**路径独立于 `EncAbsErrTime`，可产生 [ConFlt](../../07-status-and-faults/ConFlt.md) 故障 `1070`。在 Central-i 上，其物理含义取决于协议和 FPGA 镜像；位 0 不能统一解释为电缆断开。
 
