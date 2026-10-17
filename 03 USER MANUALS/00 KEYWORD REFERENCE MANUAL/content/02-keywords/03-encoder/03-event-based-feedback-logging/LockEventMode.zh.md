@@ -1,6 +1,6 @@
 ---
 keyword: LockEventMode
-summary: '选择 lock/event 工作模式：传统自动初始化 (0) 或需要 LockEventInit 的统一方案 (1)。'
+summary: Selects legacy, manual or automatic lock/event offset learning.
 availability:
   standalone: []
   central-i:
@@ -18,66 +18,43 @@ attributes:
   units: none
   range:
   - -1
-  - 1
+  - 2
   default: 0
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-17'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # LockEventMode
 
-选择 lock/event 工作模式：传统自动初始化（`0`）或需要 [LockEventInit](LockEventInit.md) 的统一方案（`1`）。
+选择控制器如何学习控制器位置与远端捕获计数器之间的偏移。保存的默认值为 `0`。
 
-> 仅 v5（central-i）起可用。
+| 值 | 行为 |
+| --- | --- |
+| `0` | 传统模式：每次 `LockEn` 或 `EventOn` 从 0 变为 1 时学习偏移。`LockEventStat` 报告 0。 |
+| `1` | 手动模式：捕获源静止时执行 [LockEventInit](LockEventInit.md)，然后再使能锁存或事件。 |
+| `2` | 自动模式：对于需要辅助计数器的捕获源，在锁存和事件均关闭时，进入模式 2、修改受跟踪的相关配置或重连后完成配置重放时，重新计算偏移。 |
 
-## 概述
+数值范围保留 `-1` 以兼容旧配置，但它不是受支持的工作模式。请使用 0、1 或 2。
 
-`LockEventMode` 用于选择基于事件的反馈记录（“位置锁存”/“捕获”）和事件生成功能如何获取它们所需的偏移量，该偏移量位于你在控制器中回读的值（例如 `Pos`、`AuxPos` 或 `VEncValue`）与执行锁存的内部硬件捕获计数器之间。该计数器从任意偏移量开始计数，因此固件必须先学习一次这个差值，然后才能以你期望的单位报告捕获到的位置。
+模式 2 下重复写入相同值不会强制重新测量。在模式 1 和模式 2 下，都可以执行 `LockEventInit` 显式刷新偏移。测量时捕获源必须静止。先设置 `LockEn=0`、`EventOn=0` 再配置捕获源；对于需要辅助计数器的源，使能前应检查 [LockEventStat](LockEventStat.md)。
 
-学习该偏移量有两种方式：
+模式 1 和 2 下，锁存或事件使能期间修改受跟踪的捕获源、方向或位置参考，会被错误 403 拒绝。如果相关配置在使能后已使偏移发生变化，此时切换到模式 1 或 2 也会被拒绝。请先关闭两项功能再修改配置。未计算偏移时，使能被错误 335 拒绝；偏移过期时，使能被错误 404 拒绝。远端读取失败会使偏移保持无效，而不会将旧数据标记为有效。
 
-- **模式 0（传统/向后兼容）** —— 偏移量在你使能该功能的那一刻自动学习，即当 [LockEn](LockEn-AuxLockEn.md) 或 [EventOn](../../18-event-generation/EventOn.md) 从 `0` 跳变到 `1` 时。这与早期固件的行为一致，因此现有配置可保持不变继续工作。
-- **模式 1（统一方案）** —— 偏移量*不会*在使能时学习。相反，你需要在轴静止时、于使能 Lock 或 Event 之前，自行运行 [LockEventInit](LockEventInit.md) 命令。这使你能够精确控制何时采样偏移量，当捕获源在你原本会使能的那一刻可能正在运动时，这一点尤为重要。
+模式 1 在偏移失效后需要显式初始化。模式 2 在未使能时以及重连后尝试自动重新计算；请确认状态，不要仅凭赋值命令成功就认为已完成测量。主绝对式编码器源不需要该辅助计数器偏移，状态可能保持不变。
 
-该设置存储于闪存中，因此所选模式可在重新上电后保留。默认值为 `0`（传统行为）。
-
-> **仅支持 `0` 和 `1` 两个工作值。** 尽管该关键字的数值范围下探至 `-1`，但 `-1` 并不是有效的工作模式：在该模式下，使能时没有自动偏移量学习，没有 [LockEventInit](LockEventInit.md) 初始化，使能也不被阻止。这种组合可能导致捕获偏移量未被计算，从而产生错误的捕获位置，因此不应使用 `-1`。
-
-## 工作原理
-
-| 值 | 含义 |
-|-------|---------|
-| 0 | 传统/向后兼容模式。固件到硬件的偏移量在 Lock 或 Event 使能时自动学习。无需手动初始化；[LockEventStat](LockEventStat.md) 报告 `0`。 |
-| 1 | 统一模式。在使能 Lock 或 Event 之前，你必须运行 [LockEventInit](LockEventInit.md)（轴静止）来学习偏移量。未运行该命令即使能将被以错误 335 拒绝。 |
-
-### 对状态关键字的影响
-
-写入 `LockEventMode` 会立即重新评估 [LockEventStat](LockEventStat.md)：
-
-- 设置 `LockEventMode=0` 会将状态置为 `0`（传统模式，就绪）。
-- 设置 `LockEventMode=1` 时，如果自上电以来偏移量已被计算，则将状态置为 `1`；如果尚未计算，则置为“未初始化”状态 —— 此时你必须在使能前运行 [LockEventInit](LockEventInit.md)。
-
-### 何时需要重新初始化（模式 1）
-
-任何改变捕获源的配置更改都会使先前学习到的偏移量失效。具体而言，对 `EncSinCosHWEn`（编码器/lock-event 捕获源选择器）的更改会清除“已初始化”条件，并将 [LockEventStat](LockEventStat.md) 返回至未初始化状态，因此在使能前必须重新运行 [LockEventInit](LockEventInit.md)。固件只能自动检测其中某些更改，因此作为通用规则，应在对 lock/event 源配置进行任何更改之后、且在捕获源开始运动之前运行 [LockEventInit](LockEventInit.md)。
-
-## 示例
+请使用兼容的远端 FPGA，参见 [辅助寄存器兼容性要求](LockEventInit.md#remote-fpga-compatibility)。读取未映射寄存器得到零，不等于测得了偏移。
 
 ```text
-ALockEventMode=1      ; select the unified lock/event scheme
-ALockEventInit        ; learn the firmware/hardware offset (axis stationary)
-ALockEn=1             ; now allowed; arm event-based feedback logging
-ALockEventMode=0      ; revert to legacy auto-initialize behavior
-ALockEventMode        ; read back the configured mode
+ALockEn=0
+AEventOn=0
+ALockEventMode=2
+; 在捕获源静止时配置它
+ALockEventInit        ; 模式 2 下可选的显式刷新
+ALockEventStat        ; 对需要辅助计数器的源，要求状态为 1
+ALockEn=1
 ```
 
-## 另请参阅
-
-- [LockEventInit](LockEventInit.md) —— 运行模式 1 所需的手动偏移量初始化
-- [LockEventStat](LockEventStat.md) —— 报告 lock/event 子系统是否已初始化
-- [LockEn](LockEn-AuxLockEn.md) —— 使能基于事件的反馈记录
-- [LockSrc](LockSrc-AuxLockSrc.md) —— 选择触发源和触发边沿
-- [EventOn](../../18-event-generation/EventOn.md) —— 使能事件生成
+另见：[LockEventInit](LockEventInit.md)、[LockEventStat](LockEventStat.md)、[LockEn](LockEn-AuxLockEn.md)、[EventOn](../../18-event-generation/EventOn.md)。

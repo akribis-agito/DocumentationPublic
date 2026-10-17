@@ -1,6 +1,6 @@
 ---
 keyword: LockEventStat
-summary: Reports the initialization state of the lock/event subsystem.
+summary: Reports legacy, valid, uncomputed or stale lock/event offset state.
 availability:
   standalone: []
   central-i:
@@ -17,53 +17,30 @@ attributes:
   ok_motor_on: true
   units: none
   range:
-  - 0
+  - -2
   - 1
   default: 0
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-17'
+doc_revision: '2026.10'
 ---
 # LockEventStat
 
-Reports the initialization state of the lock/event subsystem.
-
-> Available from v5 (central-i) only.
-
-## Overview
-
-`LockEventStat` is a read-only status that tells you whether the lock/event subsystem is ready to be armed. It reflects how the firmware-to-hardware capture offset is being handled under the current [LockEventMode](LockEventMode.md), and in the unified mode whether the required [LockEventInit](LockEventInit.md) step has been completed.
-
-Use it as a precondition check before arming [LockEn](LockEn-AuxLockEn.md) or [EventOn](../../18-event-generation/EventOn.md) when running the unified scheme.
-
-## How it works
-
-`LockEventStat` is recomputed whenever [LockEventMode](LockEventMode.md) is written, whenever [LockEventInit](LockEventInit.md) completes, and whenever a configuration change affects the capture source.
+Reports the offset state used by [LockEventMode](LockEventMode.md). It is a read-only axis value.
 
 | Value | Meaning |
-|-------|---------|
-| 0 | Legacy mode ([LockEventMode](LockEventMode.md) = 0). No manual initialization is needed — the offset is learned automatically when Lock or Event is armed. |
-| 1 | Unified mode ([LockEventMode](LockEventMode.md) = 1) and initialized: [LockEventInit](LockEventInit.md) has been run and the subsystem is ready to arm. |
-| -1 | Unified mode ([LockEventMode](LockEventMode.md) = 1) but not yet initialized: run [LockEventInit](LockEventInit.md) before arming Lock or Event. |
+| --- | --- |
+| `0` | Legacy mode 0. Offset learning occurs on arming; this status is not a measurement certificate. |
+| `1` | The applicable offset is valid. |
+| `-1` | No offset has been computed. |
+| `-2` | A previously computed offset is stale. |
 
-A `-1` reading appears when [LockEventMode](LockEventMode.md) is set to `1` and the offset has not been computed since power-up, or when a configuration change has invalidated a previously computed offset. In particular, a change to `EncSinCosHWEn` (the encoder/lock-event capture-source selector) is detected automatically and returns this status to `-1`. In that state, arming [LockEn](LockEn-AuxLockEn.md) or [EventOn](../../18-event-generation/EventOn.md) is rejected until [LockEventInit](LockEventInit.md) is run.
+In mode 1, run [LockEventInit](LockEventInit.md) with the source stationary after invalidation. In mode 2, firmware attempts recomputation while both features are off when tracked dependencies change or the remote reconnects. Check the resulting state before arming when the selected source requires an ancillary counter. A repeated assignment of mode 2 does not force a new measurement; `LockEventInit` does.
 
-## Examples
+An applicable uncomputed offset refuses arming with error 335; a stale offset refuses it with error 404. A failed ancillary read leaves the offset invalid. The main absolute-encoder source does not need this offset and may leave the status unchanged.
 
-```text
-ALockEventMode=1      ; select the unified scheme
-ALockEventStat        ; reads -1 until LockEventInit has been run
-ALockEventInit        ; learn the offset (axis stationary)
-ALockEventStat        ; now reads 1 (ready to arm)
-ALockEventMode=0      ; revert to legacy mode
-ALockEventStat        ; reads 0 (no manual init needed)
-```
+Status 1 assumes a compatible remote FPGA. Historical v4.3.6 returns zero for unmapped ancillary reads and cannot certify this measurement; see [remote FPGA compatibility](LockEventInit.md#remote-fpga-compatibility).
 
-## See also
-
-- [LockEventMode](LockEventMode.md) — selects legacy vs. unified mode
-- [LockEventInit](LockEventInit.md) — performs the initialization that drives this status to `1`
-- [LockEn](LockEn-AuxLockEn.md) — arms event-based feedback logging
-- [EventOn](../../18-event-generation/EventOn.md) — arms event generation
+See also: [LockEventInit](LockEventInit.md), [LockEventMode](LockEventMode.md), [LockEn](LockEn-AuxLockEn.md), [EventOn](../../18-event-generation/EventOn.md).
