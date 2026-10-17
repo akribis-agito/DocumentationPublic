@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-17'
+doc_revision: '2026.10'
 ---
 # EventOn
 
@@ -84,3 +84,7 @@ AEventOn            ; query the current state
 - [EventCntr](EventCntr.md) — reset to 0 on the 0 → 1 arming edge
 - [EventAlwaysOn](EventAlwaysOn.md) — forces continuous (endless) by-gap generation
 - [LockEn](../03-encoder/03-event-based-feedback-logging/LockEn-AuxLockEn.md) — position capture; shares the same pin on standalone products
+
+## Queued AGM800 event failures
+
+On queue-enabled AGM800 and AGM800-EC firmware, an unacknowledged interrupt event write stops the series. Checked remote-disable commands follow asynchronously. A new `EventOn=1` transition from the disarmed state returns error 151 while an old event exchange or remote cleanup is pending, or if cleanup failed. Repeating `EventOn=1` on an already-active series remains idempotent. Reconnect is required after a failed cleanup.
