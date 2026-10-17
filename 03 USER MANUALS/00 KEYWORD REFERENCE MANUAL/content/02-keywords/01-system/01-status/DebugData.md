@@ -26,7 +26,7 @@ attributes:
   implemented: final
 overrides:
   central-i.v5:
-    array_size: 351
+    array_size: 356
 last_updated: '2026-10-17'
 doc_revision: '2026.10'
 ---
@@ -46,9 +46,9 @@ Outside the versioned window below, assignments change as features are developed
 
 ## Versioned ISR timing window (pre-release AGM800 / AGM800-EC)
 
-These Zynq builds allocate 351 elements (indices 0–350). The diagnostic latch
-remains at 300–331. The dedicated timing window is 332–350; other builds may
-not expose it. Pin the firmware image and check signature `0x49535131` before
+These Zynq builds allocate 356 elements (indices 0–355). The diagnostic latch
+remains at 300–331. The dedicated timing window is 332–355; other builds may
+not expose it. Pin the firmware image and check signature `0x49535132` before
 interpreting these fields.
 
 | Indices | Meaning |
@@ -64,6 +64,9 @@ interpreting these fields.
 | 345–346 | Gaps above 1.5 nominal periods; body spans reaching the period |
 | 347–348 | Last/maximum helper calls per tick |
 | 349–350 | First/last entry timestamp, low 32 bits |
+| 351–355 | Phase duration, helper sum, entry gap, task selector before increment, and tick number from the maximum body-duration sample |
+
+Version 1 (`0x49535131`) exposes only indices 332–350. Version 2 adds same-tick peak correlation; independent maxima can occur on different ticks.
 
 Write only the request field. Wait for state 4 before reading a snapshot; frozen
 results remain stable until the next start/reset. Convert duration counts using
