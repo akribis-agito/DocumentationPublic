@@ -41,7 +41,7 @@ language: zh-CN
 - 后台离线流量，以及
 - 连接/事件状态机（“特殊”离线处理，例如在 [CIConnect](CIConnect.md) 与事件处理期间）。
 
-每条已记录消息的 [Sender](#sender-字段取值) 字段标识其中哪一个发起了该消息，因此上位机可以查看发送了什么以及远端返回了什么。配套数组 [OfflineALog](OfflineALog.md)（离线邮箱 1）已预留，但当前未被填充。
+每条已记录消息的 [Sender](#sender-字段取值) 字段标识其中哪一个发起了该消息，因此上位机可以查看发送了什么以及远端返回了什么。配套数组 [OfflineALog](OfflineALog.md)（离线邮箱 1）在启用队列的 AGM800 和 AGM800-EC 固件中记录优先级锁存/事件事务。
 
 ## AGM800 与 AGM800-EC 的队列日志
 
@@ -77,7 +77,7 @@ language: zh-CN
 | 3 | 后台离线流量 |
 | 4 | 连接/事件状态机（“特殊”离线处理） |
 
-取值 `1`（中断）已预留，当前不会发出。
+在启用队列的 AGM800 和 AGM800-EC 固件中，取值 `1` 表示来自中断的 CNC 或事件清理请求。
 
 ## 示例
 
@@ -90,6 +90,6 @@ AOfflineBLog[6]     ; its acknowledge/error code (0 = ok)
 
 ## 另请参阅
 
-- [OfflineALog](OfflineALog.md) —— 离线邮箱 1 日志（已预留；当前未被填充）
+- [OfflineALog](OfflineALog.md) —— 离线邮箱 1 日志（优先级事务）
 - [CIOfflineSend](CIOfflineSend.md) —— 在此处记录其事务的来源之一
 - [CIOfflineData](CIOfflineData.md) —— 每个事务的请求/响应缓冲区

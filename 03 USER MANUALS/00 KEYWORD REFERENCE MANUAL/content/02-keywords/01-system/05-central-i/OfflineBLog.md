@@ -40,7 +40,7 @@ Rolling log of all logged Central-i offline (mailbox) transactions, recorded on 
 - background offline traffic, and
 - the connect/event state machine (the "special" offline handling, e.g. during [CIConnect](CIConnect.md) and event processing).
 
-The [Sender](#sender-field-values) field of each logged message identifies which of these issued it, so the host can review what was sent and what the remote returned. The companion array [OfflineALog](OfflineALog.md) (offline mailbox 1) is reserved but is not currently populated.
+The [Sender](#sender-field-values) field of each logged message identifies which of these issued it, so the host can review what was sent and what the remote returned. The companion array [OfflineALog](OfflineALog.md) (offline mailbox 1) records priority lock/event transactions on queue-enabled AGM800 and AGM800-EC firmware.
 
 ## AGM800 and AGM800-EC queue logging
 
@@ -76,7 +76,7 @@ The **Sender** field (offset `+1` in each slot) identifies what issued the logge
 | 3 | Background offline traffic |
 | 4 | Connect/event state machine (the "special" offline handling) |
 
-Value `1` (interrupt) is reserved and is not currently emitted.
+On queue-enabled AGM800 and AGM800-EC firmware, value `1` identifies interrupt-origin CNC and event-cleanup submissions.
 
 ## Examples
 
@@ -89,6 +89,6 @@ AOfflineBLog[6]     ; its acknowledge/error code (0 = ok)
 
 ## See also
 
-- [OfflineALog](OfflineALog.md) — the offline mailbox 1 log (reserved; not currently populated)
+- [OfflineALog](OfflineALog.md) — the priority offline mailbox 1 log
 - [CIOfflineSend](CIOfflineSend.md) — one of the sources whose transactions are logged here
 - [CIOfflineData](CIOfflineData.md) — request/response buffer for each transaction
