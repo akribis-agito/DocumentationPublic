@@ -1,6 +1,6 @@
 ---
 keyword: LockEventStat
-summary: Reports legacy, valid, uncomputed or stale lock/event offset state.
+summary: 报告锁存/事件偏移的传统、有效、未计算或过期状态。
 availability:
   standalone: []
   central-i:

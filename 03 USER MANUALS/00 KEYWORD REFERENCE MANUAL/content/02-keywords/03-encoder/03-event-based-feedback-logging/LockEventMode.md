@@ -40,7 +40,7 @@ Selects how the controller learns the offset between its position and the remote
 
 In mode 2, writing the same value again does not force a new measurement. `LockEventInit` can explicitly recompute in either mode 1 or mode 2. Keep the source stationary during offset measurement. Configure the source with both `LockEn=0` and `EventOn=0`, then check [LockEventStat](LockEventStat.md) before arming when the source requires an ancillary counter.
 
-In modes 1 and 2, a tracked source/direction/reference change while either feature is armed is refused with error 403. Entering mode 1 or 2 is also refused if a dependency moved the offset after arming. Disarm before changing the configuration. An uncomputed offset prevents arming with error 335; a stale offset prevents arming with error 404. A failed remote read leaves the offset invalid rather than certifying old data.
+In modes 1 and 2, a tracked capture-source configuration or direction change while either feature is armed is refused with error 403. Entering mode 1 or 2 is also refused if a dependency moved the offset after arming. Disarm before changing the configuration. An uncomputed offset prevents arming with error 335; a stale offset prevents arming with error 404. A failed remote read leaves the offset invalid rather than certifying old data.
 
 Mode 1 requires a new explicit initialization after invalidation. Mode 2 attempts automatic recomputation while unarmed and after reconnect; confirm its status rather than assuming an assignment succeeded in obtaining a measurement. The main absolute-encoder source does not require the ancillary-counter offset and can leave the status unchanged.
 

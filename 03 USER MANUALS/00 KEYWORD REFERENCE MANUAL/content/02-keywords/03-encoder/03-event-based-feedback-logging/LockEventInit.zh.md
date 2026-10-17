@@ -1,6 +1,6 @@
 ---
 keyword: LockEventInit
-summary: Learns the capture offset in manual mode 1 or automatic mode 2.
+summary: 在手动模式 1 或自动模式 2 下学习捕获偏移。
 availability:
   standalone: []
   central-i:
