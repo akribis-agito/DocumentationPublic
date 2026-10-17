@@ -39,6 +39,10 @@ language: zh-CN
 
 在模式 1 中，此步骤由你负责：在锁存/事件源完全配置好且轴静止后、武装 [LockEn](LockEn-AuxLockEn.md) 或 [EventOn](../../18-event-generation/EventOn.md) 之前，运行一次 `LockEventInit`。在传统模式（[LockEventMode](LockEventMode.md) = 0）中，控制器在功能被武装时自动学习此偏移，因此该命令在那里不被使用。
 
+## 远端 FPGA 兼容性
+
+在 AGM800 和 AGM800-EC 上，偏移初始化要求远端 FPGA 实现辅助位置读取寄存器 `0x72/0x73`。历史版本的远端 FPGA v4.3.6 未实现这些寄存器，读取未映射地址时返回零。因此，该版本上的成功零值回复或 `LockEventStat=1` 不能证明偏移正确。依赖捕获坐标之前，应使用经过配套验证的固件和 FPGA 组合。
+
 ## 工作原理
 
 仅当所配置的捕获源使用增量式或 AqB 主编码器、虚拟编码器或辅助编码器源时，`LockEventInit` 才计算偏移（并将 [LockEventStat](LockEventStat.md) 驱动为 `1`）。如果选择主编码器作为源但它是绝对式编码器（例如 SSI、EnDat 或 SinCos），命令返回成功但*不会*计算偏移，并使 [LockEventStat](LockEventStat.md) 保持不变——因此请务必在武装前确认 [LockEventStat](LockEventStat.md) 实际读数为 `1`。

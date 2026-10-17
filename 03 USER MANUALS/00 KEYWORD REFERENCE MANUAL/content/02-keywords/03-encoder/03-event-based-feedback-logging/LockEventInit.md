@@ -38,6 +38,10 @@ Initializes the unified lock/event configuration by learning the firmware-to-har
 
 In mode 1 this step is your responsibility: you run `LockEventInit` once the lock/event source is fully configured and the axis is stationary, before arming [LockEn](LockEn-AuxLockEn.md) or [EventOn](../../18-event-generation/EventOn.md). In the legacy mode ([LockEventMode](LockEventMode.md) = 0) the controller learns this offset automatically when the feature is armed, so the command is not used there.
 
+## Remote FPGA compatibility
+
+On AGM800 and AGM800-EC, offset initialization requires a remote FPGA that implements the ancillary-position read registers `0x72/0x73`. The historical remote FPGA v4.3.6 does not implement these registers and returns zero for unmapped reads. A successful zero reply or `LockEventStat=1` on that image does not certify a correct offset. Use a firmware/FPGA combination validated together before relying on capture coordinates.
+
 ## How it works
 
 `LockEventInit` computes the offset (and drives [LockEventStat](LockEventStat.md) to `1`) only when the configured capture source uses an incremental or AqB main encoder, the virtual encoder, or the auxiliary-encoder source. If the main encoder is selected as the source but it is an absolute-type encoder (for example SSI, EnDat, or SinCos), the command returns success but does *not* compute the offset and leaves [LockEventStat](LockEventStat.md) unchanged — so always confirm [LockEventStat](LockEventStat.md) actually reads `1` before arming.
