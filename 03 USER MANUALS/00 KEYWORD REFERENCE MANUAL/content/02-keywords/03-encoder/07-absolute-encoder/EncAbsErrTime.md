@@ -27,8 +27,8 @@ attributes:
 overrides:
   central-i.v5:
     implemented: partial
-last_updated: '2026-05-30'
-doc_revision: '2026.06'
+last_updated: '2026-10-17'
+doc_revision: '2026.10'
 ---
 # EncAbsErrTime
 
@@ -36,13 +36,13 @@ Number of control cycles an absolute-encoder error/warning/CRC condition may per
 
 ## Overview
 
-`EncAbsErrTime` sets how long a recoverable absolute-encoder problem is tolerated before the controller treats it as a fault. While a problem is flagged in [EncStatReg](../01-general-settings/EncStatReg.md), the controller keeps the axis running on an extrapolated position for up to this many control cycles; if the condition is still present after that, and the motor is on, the axis is taken off and the matching code is recorded in [ConFlt](../../07-status-and-faults/ConFlt.md).
+`EncAbsErrTime` sets how long the existing absolute-encoder error policy tolerates an error, warning or CRC condition. Before the count exceeds the threshold, enabled handling uses position extrapolation. Once the count exceeds it, and the motor is on, the axis is taken off and the matching code is recorded in [ConFlt](../../07-status-and-faults/ConFlt.md). [EncStatReg](../01-general-settings/EncStatReg.md) reports diagnostics; its current value is not always the evidence used by this policy.
 
 It is a per-axis parameter, saved to flash. The value is a count of control cycles (the loop runs at the controller's fixed sample rate, so the tolerated time is `EncAbsErrTime` × the control-cycle period). The valid range is `-1` to `10000`, and the default is `-1`. It applies to axes using a serial absolute encoder (see [EncType](../01-general-settings/EncType-AuxEncType.md)).
 
 ## How it works
 
-Each control cycle the controller inspects the absolute-encoder status bits ([EncStatReg](../01-general-settings/EncStatReg.md)):
+Each invocation of the existing absolute-encoder handler processes the protocol's error-policy inputs:
 
 | EncAbsErrTime | Behaviour |
 |---|---|
@@ -51,12 +51,20 @@ Each control cycle the controller inspects the absolute-encoder status bits ([En
 
 The two recoverable groups are counted separately:
 
-- **CRC errors** (status bit 4). On expiry, [ConFlt](../../07-status-and-faults/ConFlt.md) reports fault `1069`.
-- **Error / warning** (status bit 1, or the warning condition at bit 3). On expiry, [ConFlt](../../07-status-and-faults/ConFlt.md) reports fault `1068`.
+- **CRC errors.** On expiry, [ConFlt](../../07-status-and-faults/ConFlt.md) reports fault `1069`.
+- **Error / warning.** On expiry, [ConFlt](../../07-status-and-faults/ConFlt.md) reports fault `1068`.
 
-A clean cycle (no abnormal bit) resets the counters, so only a *continuous* condition lasting longer than `EncAbsErrTime` produces a fault — short noise glitches are ridden through by extrapolation.
+For Central-i main feedback, enabled handling gives CRC precedence over error/warning. Each branch increments its own counter; an invocation with neither monitored condition resets both. The counters are not counts of new encoder replies.
 
-A genuine **disconnect** (status bit 0) is handled separately and is **not** governed by `EncAbsErrTime`: it takes the axis off immediately ([ConFlt](../../07-status-and-faults/ConFlt.md) fault `1070`).
+The existing **main-encoder protection** path is separate from `EncAbsErrTime` and can produce [ConFlt](../../07-status-and-faults/ConFlt.md) fault `1070`. On Central-i its physical meaning depends on the protocol and FPGA image; bit 0 is not a universal cable-disconnect verdict.
+
+## Central-i accepted position and policy quality
+
+On AGM800 and AGM800-EC firmware containing the [accepted-quality repair](https://github.com/akribis-agito/Firmware-Main/issues/1408), active standard AMP main BiSS-C, EnDat and Tamagawa feedback uses the existing error/warning/CRC inputs accepted with the main position under the Central-i CRC1 check. A CRC1-accepted frame may itself report an encoder error. Rejected or skipped transport decoding retains both the accepted position and its policy quality.
+
+[EncStatReg](../01-general-settings/EncStatReg.md) continues to report current decoded inputs. A rejected bad frame can therefore appear in diagnostics without starting encoder-error counting for a retained good sample; a rejected clean frame can clear diagnostics without clearing the policy evidence from a retained bad sample. Existing counters still count control-handler invocations, including repeated use of retained bad quality, rather than new replies. The `-1` bypass, thresholds and fault actions are unchanged.
+
+This ownership rule does not apply to local controllers, auxiliary feedback, ADP05/AGFB, simulation or analytic feedback producers. Before the first accepted frame after a reset, zero compatibility values do not establish healthy or qualified feedback. Initialization timing is unchanged. Neither this parameter nor a clear diagnostic register establishes physical sample age or full Tamagawa SF/ALMC alarm state.
 
 > [!caution]
 > Setting `-1` suppresses the error, warning and CRC conditions together: while monitoring is disabled none of them counts toward a fault. The **disconnect** condition is independent of `EncAbsErrTime` and is always acted on — `-1` does not suppress a disconnect fault.
@@ -73,6 +81,6 @@ AEncAbsErrTime           ; read the configured tolerance
 
 ## See also
 
-- [EncStatReg](../01-general-settings/EncStatReg.md) — the encoder status bits this timeout acts on
+- [EncStatReg](../01-general-settings/EncStatReg.md) — current encoder diagnostics and their distinction from accepted policy quality
 - [ConFlt](../../07-status-and-faults/ConFlt.md) — fault register; reports codes 1068 / 1069 / 1070
 - [EncType](../01-general-settings/EncType-AuxEncType.md) — feedback type; this applies to the serial absolute encoder
