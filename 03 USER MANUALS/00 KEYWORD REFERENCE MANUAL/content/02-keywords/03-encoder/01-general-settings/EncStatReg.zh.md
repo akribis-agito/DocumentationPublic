@@ -25,7 +25,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-10-17'
+last_updated: '2026-10-18'
 doc_revision: '2026.10'
 language: zh-CN
 ---
@@ -35,7 +35,7 @@ language: zh-CN
 
 ## Central-i 主反馈
 
-对于主 BiSS-C、EnDat 和 Tamagawa 反馈，CI_MASTER 固件根据收到的远端输入合成状态。包含[状态报告修复](https://github.com/akribis-agito/Firmware-Main/issues/1273)的固件会在初始化窗口结束后，每次执行主绝对式编码器处理程序时刷新以下现有映射位：
+对于主 BiSS-C、EnDat 和 Tamagawa 反馈，CI_MASTER 固件根据收到的远端输入合成状态。包含[状态报告修复](https://github.com/akribis-agito/Firmware-Main/issues/1273)的固件会在初始化窗口结束后，每次执行主绝对式编码器处理程序时刷新以下现有映射位。包含 [Tamagawa 启动修复](https://github.com/akribis-agito/Firmware-Main/issues/1452)的固件还会在活动标准 AMP 主 Tamagawa 的稳定等待期间报告同样的映射位：
 
 | 位 | 掩码 | 收到的输入 |
 |---|---|---|
@@ -59,7 +59,7 @@ language: zh-CN
 
 `EncAbsErrTime=-1` 旁路现有 CRC/错误计数、外推和超时故障响应，但独立的主编码器保护处理仍有效。启用处理后，CRC 和通用错误条件使用各自的计数器，并可产生 [ConFlt](../../07-status-and-faults/ConFlt.md) 1069 和 1068；现有保护路径使用 1070。当前报告的条件与已记录的故障是不同的观察结果；历史故障应查看故障日志。
 
-此状态不提供物理采样时间戳、通用的新鲜度保证、首个有效样本初始化判定、测量/保持/预测位置来源，或 Tamagawa 的详细 SF/ALMC 报警。绝对式编码器处理程序中的监控在初始化窗口后开始；寄存器清零不能验证该窗口内初始化的位置。调查短暂异常时应按控制周期捕获数据，上位机轮询可能错过已经恢复的条件。
+此状态不提供物理采样时间戳、通用的新鲜度保证、测量/保持/预测位置来源，或 Tamagawa 的详细 SF/ALMC 报警。寄存器清零本身不能确认位置样本有效。Tamagawa 启动修复使用独立的新接受回复及质量条件，并在稳定等待期间报告诊断，不提前执行现有故障计数和动作；其他反馈路径保留其初始化窗口。调查短暂异常时应按控制周期捕获数据，上位机轮询可能错过已经恢复的条件。
 
 ## 另请参阅
 

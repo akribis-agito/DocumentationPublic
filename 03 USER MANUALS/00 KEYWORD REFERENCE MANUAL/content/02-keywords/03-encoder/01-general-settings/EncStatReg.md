@@ -25,7 +25,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-10-17'
+last_updated: '2026-10-18'
 doc_revision: '2026.10'
 ---
 # EncStatReg
@@ -34,7 +34,7 @@ Read-only, per-axis encoder status. Read it in PCSuite with `AEncStatReg` (axis 
 
 ## Central-i main feedback
 
-For main BiSS-C, EnDat and Tamagawa feedback, the CI_MASTER firmware synthesizes status from the received remote inputs. Firmware containing the [status-reporting repair](https://github.com/akribis-agito/Firmware-Main/issues/1273) refreshes these existing mapped bits whenever the main absolute-encoder handler runs, after its initialization window:
+For main BiSS-C, EnDat and Tamagawa feedback, the CI_MASTER firmware synthesizes status from the received remote inputs. Firmware containing the [status-reporting repair](https://github.com/akribis-agito/Firmware-Main/issues/1273) refreshes these existing mapped bits whenever the main absolute-encoder handler runs, after its initialization window. Firmware containing the [Tamagawa startup repair](https://github.com/akribis-agito/Firmware-Main/issues/1452) also publishes these same mapped bits during active standard AMP main-Tamagawa settling:
 
 | Bit | Mask | Received input |
 |---|---|---|
@@ -58,7 +58,7 @@ Firmware containing the [accepted-quality repair](https://github.com/akribis-agi
 
 `EncAbsErrTime=-1` bypasses the existing CRC/error counting, extrapolation and timeout fault response. Independent main-encoder protection handling remains active. With handling enabled, CRC and generic-error conditions use separate counters and can produce [ConFlt](../../07-status-and-faults/ConFlt.md) 1069 and 1068; the existing protection path uses 1070. A reported condition and a recorded fault are different observations. Consult the fault log for recorded fault history.
 
-This status does not provide a physical acquisition timestamp, a common freshness guarantee, qualified-first-sample initialization, measured/held/predicted position selection, or detailed Tamagawa SF/ALMC alarms. Monitoring in the absolute-encoder handler starts after its initialization window; a clear register cannot validate the position seeded during that window. Capture at control-cycle resolution to investigate short transients: host polling can miss a condition that has recovered.
+This status does not provide a physical acquisition timestamp, a common freshness guarantee, measured/held/predicted position selection, or detailed Tamagawa SF/ALMC alarms. A clear register does not itself qualify a position sample. The Tamagawa startup repair uses separate new-acceptance/quality eligibility and reports diagnostics during settling without advancing the existing fault schedule; other feedback paths retain their initialization window. Capture at control-cycle resolution to investigate short transients: host polling can miss a condition that has recovered.
 
 ## See also
 

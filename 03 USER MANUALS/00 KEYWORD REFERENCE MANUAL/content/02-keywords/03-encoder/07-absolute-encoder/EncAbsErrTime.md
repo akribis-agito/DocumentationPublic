@@ -27,7 +27,7 @@ attributes:
 overrides:
   central-i.v5:
     implemented: partial
-last_updated: '2026-10-17'
+last_updated: '2026-10-18'
 doc_revision: '2026.10'
 ---
 # EncAbsErrTime
@@ -64,7 +64,15 @@ On AGM800 and AGM800-EC firmware containing the [accepted-quality repair](https:
 
 [EncStatReg](../01-general-settings/EncStatReg.md) continues to report current decoded inputs. A rejected bad frame can therefore appear in diagnostics without starting encoder-error counting for a retained good sample; a rejected clean frame can clear diagnostics without clearing the policy evidence from a retained bad sample. Existing counters still count control-handler invocations, including repeated use of retained bad quality, rather than new replies. The `-1` bypass, thresholds and fault actions are unchanged.
 
-This ownership rule does not apply to local controllers, auxiliary feedback, ADP05/AGFB, simulation or analytic feedback producers. Before the first accepted frame after a reset, zero compatibility values do not establish healthy or qualified feedback. Initialization timing is unchanged. Neither this parameter nor a clear diagnostic register establishes physical sample age or full Tamagawa SF/ALMC alarm state.
+This ownership rule does not apply to local controllers, auxiliary feedback, ADP05/AGFB, simulation or analytic feedback producers. Before the first accepted frame after a reset, zero compatibility values do not establish healthy or qualified feedback. The shared settling countdown and enable policy are unchanged. Neither this parameter nor a clear diagnostic register establishes physical sample age or full Tamagawa SF/ALMC alarm state.
+
+## AGM800/EC main-Tamagawa startup
+
+In firmware containing the [startup repair](https://github.com/akribis-agito/Firmware-Main/issues/1452), active standard AMP main Tamagawa with `EncAbsErrTime >= 0` retains its preceding position during the ordinary settling interval and until a newly CRC1-accepted reply has clear existing quality bits. That reply establishes absolute position plus [EncAbsOff](../01-general-settings/EncAbsOff-AuxEncAbsOff.md) with zero movement delta. A healthy reply retained from an earlier tick cannot establish this baseline. Rewriting the main encoder type/subtype establishes new eligibility, including after tracking has already begun.
+
+Existing diagnostics are visible during settling. Fault counters/actions begin on their ordinary post-settling schedule while position remains pending; auxiliary initialization is unchanged. A continuing bad/unavailable quality can leave position pending indefinitely with the motor off, because timeout faults require the motor to be on. This is not a new enable interlock.
+
+`-1` retains the legacy startup path. Selecting `-1` while position is pending returns to ordinary counting on the next handler invocation, without inserting another zero-delta seed. This bypass does not validate the encoder. Startup eligibility uses existing transport/quality evidence; it does not prove physical sample age, remote configuration acknowledgment or full Tamagawa SF/ALMC health. Other feedback protocols and producers retain their existing startup behavior.
 
 > [!caution]
 > Setting `-1` suppresses the error, warning and CRC conditions together: while monitoring is disabled none of them counts toward a fault. The **disconnect** condition is independent of `EncAbsErrTime` and is always acted on — `-1` does not suppress a disconnect fault.
