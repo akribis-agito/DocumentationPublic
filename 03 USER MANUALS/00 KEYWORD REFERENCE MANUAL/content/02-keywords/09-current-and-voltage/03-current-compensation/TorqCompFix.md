@@ -44,6 +44,8 @@ When [TorqCompMode](TorqCompMode.md) is set to a fixed-value mode (1 to 5), the 
 
 The array is dimensioned so that index `1` through `5` map to the five fixed-value modes; the array is 1-indexed (index `0` is not used as a compensation source). Values are in the same units as the current reference, and are bounded to the keyword's range. On central-i v5 the values are floating-point; on v4 they are integer.
 
+**Gravity and constant offsets.** On AGM800 and AGM800-EC, use `TorqCompFix` for gravity on a vertical axis, spring preload or any other constant current, and keep the friction feedforward levels (`FricIPos`/`FricINeg`) for friction only. Nulling this offset is the first step when tuning friction feedforward: with `FricMethod` = 0, set the selected entry so the axis holds still and moves slowly with the same current in both directions. See [Friction feedforward](../../../03-special-features/friction-compensation/00-overview.md).
+
 ## Examples
 
 ```text
@@ -57,3 +59,4 @@ ATorqCompFix[2]=-150 ; fixed compensation used when TorqCompMode=2
 - [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) — must be 2 or 3 for this to apply
 - [CurrRefOffset](CurrRefOffset.md) — current-side bias (applied later in the chain than this loop-side compensation)
 - [CurrRef](../02-motor-variables/CurrRef.md) — current reference that the selected entry biases
+- [Friction feedforward](../../../03-special-features/friction-compensation/00-overview.md) — friction levels and tuning order (null the offset here first)

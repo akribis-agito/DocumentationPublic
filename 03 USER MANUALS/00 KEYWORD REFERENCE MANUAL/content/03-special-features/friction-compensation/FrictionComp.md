@@ -49,3 +49,5 @@ Friction compensation is applied only while `FrictionComp` is non-zero. A value 
 **Note:**
 
 This function is valid only for motion modes driven by the velocity profiler.
+
+**Not the friction feedforward.** `FrictionComp` seeds the integrator once per move. AGM800 and AGM800-EC also have a friction feedforward stage that adds a friction current on every control cycle; see [Friction feedforward](00-overview.md).

@@ -33,7 +33,7 @@ language: zh-CN
 
 ## 概述
 
-`FFFiltDef` 定义前馈滤波器的参数。当 [FFFiltOn](FFFiltOn.md) 使能该滤波器时，滤波器作用于合并后的前馈输出（[AccFFW](AccFFW.md) 与 [VelFFW](VelFFW.md) 项之和），然后将该输出叠加到速度环输出上，形成电流参考值。
+`FFFiltDef` 定义前馈滤波器的参数。当 [FFFiltOn](FFFiltOn.md) 使能该滤波器时，滤波器作用于合并后的前馈输出（[AccFFW](AccFFW.md) 与 [VelFFW](VelFFW.md) 项之和，在 AGM800 和 AGM800-EC 上还包括摩擦前馈电流），然后将该输出叠加到速度环输出上，形成电流参考值。
 
 前馈滤波器是本组中唯一的可定制滤波器，索引 N = 1。每个可定制滤波器由最多 5 个参数描述：一个滤波器类型选择器加最多四个特定类型参数。前馈滤波器的五个元素为 `FFFiltDef[1]` 至 `FFFiltDef[5]`。
 
@@ -48,6 +48,8 @@ language: zh-CN
 ## 工作原理
 
 滤波器类型及其参数（截止/陷波/极点/零点频率、阻尼比等）在可定制滤波器参考手册中列出。控制器根据这些参数计算二阶（双二次）系数，并在 [FFFiltOn](FFFiltOn.md)`[1] = 1` 时将滤波器应用于合并后的前馈输出。这是前馈支路上的单个双二次节，而非多节级联。写入 `FFFiltDef`（及对应的 [FFFiltOn](FFFiltOn.md)）后，运行 [CalcFilters](../01-general-keywords/CalcFilters.md) 以重新计算系数。
+
+在 AGM800 和 AGM800-EC 上，摩擦前馈电流（[摩擦前馈](../../../03-special-features/friction-compensation/00-overview.md)）在滤波器之前加入同一求和，因此滤波器同样平滑摩擦。[FFFiltOn](FFFiltOn.md) = 1 时，换向处的摩擦阶跃会被平滑并延迟。在 CNC 段切换时，固件将全部前馈（包括摩擦）清零两个控制周期；清零作用于滤波器之前的求和。在速度模式以及 [ForcePIVOn](../07-force-control/ForcePIVOn.md) = 1 的力模式下，不使用 [AccFFW](AccFFW.md) 和 [VelFFW](VelFFW.md)，因此滤波器只承载摩擦。[CurrFFWValues](CurrFFWValues.md)`[1]` 读取滤波器输出；`CurrFFWValues[6]` 读取滤波器之前的摩擦电流。
 
 完整的按类型分类的参数定义、传递函数和单位见附录：[可定制滤波器 (FiltDef)](../../../06-appendix/customisable-filter-filtdef.md)（前馈滤波器的索引 N = 1）。
 
@@ -66,4 +68,6 @@ ACalcFilters         ; 重新计算滤波器系数
 - [FFFiltOn](FFFiltOn.md) — 使能/旁路前馈滤波器
 - [CalcFilters](../01-general-keywords/CalcFilters.md) — 更改后重新计算滤波器系数
 - [AccFFW](AccFFW.md) / [VelFFW](VelFFW.md) — 滤波器作用的前馈项
+- [摩擦前馈](../../../03-special-features/friction-compensation/00-overview.md) — 同样经过该滤波器的摩擦电流
+- [CurrFFWValues](CurrFFWValues.md) — 读回滤波器前后的前馈电流
 - 附录：[可定制滤波器 (FiltDef)](../../../06-appendix/customisable-filter-filtdef.md) — 完整的滤波器类型与参数参考

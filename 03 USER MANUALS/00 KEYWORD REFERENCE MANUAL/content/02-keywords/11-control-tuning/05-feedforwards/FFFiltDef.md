@@ -32,7 +32,7 @@ Defines the feedforward filter parameters.
 
 ## Overview
 
-`FFFiltDef` defines the parameters of the feedforward filter. The filter acts on the combined feedforward output (the sum of the [AccFFW](AccFFW.md) and [VelFFW](VelFFW.md) terms) when it is enabled by [FFFiltOn](FFFiltOn.md), before that output is added to the velocity-loop output to form the current reference.
+`FFFiltDef` defines the parameters of the feedforward filter. The filter acts on the combined feedforward output (the sum of the [AccFFW](AccFFW.md) and [VelFFW](VelFFW.md) terms and, on AGM800 and AGM800-EC, the friction feedforward current) when it is enabled by [FFFiltOn](FFFiltOn.md), before that output is added to the velocity-loop output to form the current reference.
 
 The feedforward filter is the single customisable filter in this group, index N = 1. Each customisable filter is described by up to 5 parameters: a filter-type selector plus up to four type-specific parameters. The five elements for the feedforward filter are `FFFiltDef[1]` through `FFFiltDef[5]`.
 
@@ -47,6 +47,8 @@ The feedforward filter is the single customisable filter in this group, index N 
 ## How it works
 
 The filter type and its parameters (cutoff/notch/pole/zero frequencies, damping ratios, etc.) are listed in the customisable filter reference. The controller computes the second-order (biquad) coefficients from these parameters and applies the filter to the combined feedforward output when [FFFiltOn](FFFiltOn.md)`[1] = 1`. This is a single biquad section on the combined feedforward branch, not a cascade of sections. After writing `FFFiltDef` (and the matching [FFFiltOn](FFFiltOn.md)), run [CalcFilters](../01-general-keywords/CalcFilters.md) so the coefficients are recomputed.
+
+On AGM800 and AGM800-EC the friction feedforward current ([Friction feedforward](../../../03-special-features/friction-compensation/00-overview.md)) is added to the same sum before the filter, so the filter smooths friction too. With [FFFiltOn](FFFiltOn.md) = 1 the friction step at a reversal is smoothed and delayed. At CNC segment transitions the firmware zeroes all feedforward for two control cycles, friction included; this happens on the sum, before the filter. In velocity mode, and in force mode with [ForcePIVOn](../07-force-control/ForcePIVOn.md) = 1, [AccFFW](AccFFW.md) and [VelFFW](VelFFW.md) are not used, so the filter carries friction only. [CurrFFWValues](CurrFFWValues.md)`[1]` reads the filter output; `CurrFFWValues[6]` reads the friction current before the filter.
 
 The full parameter-by-type definitions, transfer functions and units are in the appendix: [Customisable filter (FiltDef)](../../../06-appendix/customisable-filter-filtdef.md) (index N = 1 for the feedforward filter).
 
@@ -65,4 +67,6 @@ ACalcFilters         ; recompute filter coefficients
 - [FFFiltOn](FFFiltOn.md) — enable/bypass the feedforward filter
 - [CalcFilters](../01-general-keywords/CalcFilters.md) — recomputes filter coefficients after changes
 - [AccFFW](AccFFW.md) / [VelFFW](VelFFW.md) — feedforward terms the filter acts on
+- [Friction feedforward](../../../03-special-features/friction-compensation/00-overview.md) — friction current that also passes through this filter
+- [CurrFFWValues](CurrFFWValues.md) — read back the feedforward currents before and after the filter
 - Appendix: [Customisable filter (FiltDef)](../../../06-appendix/customisable-filter-filtdef.md) — full filter-type and parameter reference
