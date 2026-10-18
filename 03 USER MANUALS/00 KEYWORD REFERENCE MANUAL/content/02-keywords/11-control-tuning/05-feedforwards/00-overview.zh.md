@@ -8,7 +8,7 @@
 
 加速度前馈和速度前馈分别作用于各自对应的物理量，即质量（惯量）和阻尼。两个前馈之和经可编程滤波器后，与速度环输出求和，构成电流控制环的电流参考（CurrRefCtrl）。
 
-加速度前馈和速度前馈仅在位置运行模式（OperationMode = 3）下有效。速度环输出、前馈量及来自 [TorqCompMode](../../../02-keywords/09-current-and-voltage/03-current-compensation/TorqCompMode.md) 的电流补偿相加，构成 [CurrRefCtrl](../../../02-keywords/09-current-and-voltage/02-motor-variables/CurrRefCtrl.md)。
+加速度前馈和速度前馈仅在位置运行模式（OperationMode = 3）下有效。在 AGM800 和 AGM800-EC 上，摩擦前馈在滤波器之前加入同一求和（见下文）。速度环输出、前馈量及来自 [TorqCompMode](../../../02-keywords/09-current-and-voltage/03-current-compensation/TorqCompMode.md) 的电流补偿相加，构成 [CurrRefCtrl](../../../02-keywords/09-current-and-voltage/02-motor-variables/CurrRefCtrl.md)。
 
 以下是前馈关键字汇总。
 
@@ -32,3 +32,12 @@
 | 9   | [BEMFFFWLevel](../../../02-keywords/11-control-tuning/05-feedforwards/BEMFFFWLevel.md)   | 反电动势项的级别 |
 | 10  | [VqFFW](../../../02-keywords/11-control-tuning/05-feedforwards/VqFFW.md)                 | q 轴电压前馈输出（只读）|
 | 11  | [VdFFW](../../../02-keywords/11-control-tuning/05-feedforwards/VdFFW.md)                 | d 轴电压前馈输出（只读）|
+
+## 摩擦前馈（AGM800 和 AGM800-EC）
+
+摩擦前馈环节根据速度算出克服摩擦所需的电流，并在 CNC 跳过之前、前馈滤波器之前将其加入前馈求和。因此，在 CNC 段切换时摩擦随其余前馈一起清零；滤波器打开时，摩擦由 [FFFiltOn](FFFiltOn.md) / [FFFiltDef](FFFiltDef.md) 平滑（并在换向处延迟）。与加速度前馈和速度前馈不同，它在速度模式以及 [ForcePIVOn](../../../02-keywords/11-control-tuning/07-force-control/ForcePIVOn.md) = 1 的力模式下同样运行；此时滤波器只承载摩擦。模型、关键字及整定顺序参见[摩擦前馈](../../../03-special-features/friction-compensation/00-overview.md)。
+
+| 序号 | 关键字 | 说明 |
+|-----|----------|---------|
+| 12  | [摩擦前馈](../../../03-special-features/friction-compensation/00-overview.md) | 摩擦模型（`FricMethod` 0 至 5）、电平、钳位与整定 |
+| 13  | [CurrFFWValues](../../../02-keywords/11-control-tuning/05-feedforwards/CurrFFWValues.md) | 前馈电流读回：`[1]` 为滤波后总量（包含摩擦），`[6]` 为滤波器之前的摩擦 |

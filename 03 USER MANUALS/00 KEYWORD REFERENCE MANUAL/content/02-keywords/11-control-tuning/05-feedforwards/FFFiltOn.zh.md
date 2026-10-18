@@ -33,7 +33,7 @@ language: zh-CN
 
 ## 概述
 
-`FFFiltOn` 使能或旁路前馈滤波器。该滤波器作用于合并后的前馈输出（[AccFFW](AccFFW.md) 与 [VelFFW](VelFFW.md) 项之和），然后将其叠加到速度环输出上，形成电流参考值。
+`FFFiltOn` 使能或旁路前馈滤波器。该滤波器作用于合并后的前馈输出（[AccFFW](AccFFW.md) 与 [VelFFW](VelFFW.md) 项之和，在 AGM800 和 AGM800-EC 上还包括摩擦前馈电流），然后将其叠加到速度环输出上，形成电流参考值。
 
 | `FFFiltOn[1]` | 行为 |
 |---|---|
@@ -45,10 +45,12 @@ language: zh-CN
 使能时，滤波器为二阶（双二次）节，其系数由 [FFFiltDef](FFFiltDef.md) 中的参数计算得出。滤波器置于合并前馈信号通路上：
 
 $$
-\text{AccFFW 项} + \text{VelFFW 项} \;\longrightarrow\; \boxed{\text{前馈滤波器}} \;\longrightarrow\; \text{叠加到速度环输出}
+\text{AccFFW 项} + \text{VelFFW 项} + \text{摩擦项} \;\longrightarrow\; \boxed{\text{前馈滤波器}} \;\longrightarrow\; \text{叠加到速度环输出}
 $$
 
 前馈滤波器是置于合并前馈支路上的单个二阶（双二次）节——不同于速度输出滤波器的多节级联结构。其内部历史状态（存储的前一拍和前两拍采样值）每个控制周期独立更新，与环路其余部分无关。
+
+在 AGM800 和 AGM800-EC 上，摩擦前馈电流（[摩擦前馈](../../../03-special-features/friction-compensation/00-overview.md)）在滤波器之前加入同一求和，因此滤波器同样平滑摩擦。`FFFiltOn` = 1 时，换向处的摩擦阶跃会被平滑并延迟。在 CNC 段切换时，固件将全部前馈（包括摩擦）清零两个控制周期；清零作用于滤波器之前的求和。在速度模式以及 [ForcePIVOn](../07-force-control/ForcePIVOn.md) = 1 的力模式下，不使用 [AccFFW](AccFFW.md) 和 [VelFFW](VelFFW.md)，因此滤波器只承载摩擦。[CurrFFWValues](CurrFFWValues.md)`[1]` 读取滤波器输出；`CurrFFWValues[6]` 读取滤波器之前的摩擦电流。
 
 旁路时，合并后的前馈输出直接使用。更改 `FFFiltOn` 或 [FFFiltDef](FFFiltDef.md) 后，运行 [CalcFilters](../01-general-keywords/CalcFilters.md) 以使控制器重新计算内部滤波器系数。
 
@@ -65,3 +67,5 @@ ACalcFilters         ; 重新计算滤波器系数
 - [FFFiltDef](FFFiltDef.md) — 前馈滤波器定义参数
 - [CalcFilters](../01-general-keywords/CalcFilters.md) — 更改后重新计算滤波器系数
 - [AccFFW](AccFFW.md) / [VelFFW](VelFFW.md) — 滤波器作用的前馈项
+- [摩擦前馈](../../../03-special-features/friction-compensation/00-overview.md) — 同样经过该滤波器的摩擦电流
+- [CurrFFWValues](CurrFFWValues.md) — 读回滤波器前后的前馈电流

@@ -45,6 +45,8 @@ language: zh-CN
 
 数组维度使得索引 `1` 至 `5` 对应五种固定值模式；该数组为 1 索引（索引 `0` 不用作补偿源）。其值与电流参考采用相同单位，并受该关键字的范围限定。在 central-i v5 上其值为浮点数；在 v4 上为整数。
 
+**重力和恒定偏置。** 在 AGM800 和 AGM800-EC 上，请用 `TorqCompFix` 承载竖直轴的重力、弹簧预紧或其他任何恒定电流，摩擦前馈电平（`FricIPos`/`FricINeg`）只用于摩擦。整定摩擦前馈的第一步就是消除该偏置：在 `FricMethod` = 0 下设置所选条目，使轴静止保持时以及低速向两个方向运动时电流相同。参见[摩擦前馈](../../../03-special-features/friction-compensation/00-overview.md)。
+
 ## 示例
 
 ```text
@@ -58,3 +60,4 @@ ATorqCompFix[2]=-150 ; fixed compensation used when TorqCompMode=2
 - [OperationMode](../../08-axis-operation/01-general-keywords/OperationMode.md) — 须为 2 或 3 时本项才适用
 - [CurrRefOffset](CurrRefOffset.md) — 电流侧偏置（在链路中施加的位置晚于此环路侧补偿）
 - [CurrRef](../02-motor-variables/CurrRef.md) — 所选条目偏置的电流参考
+- [摩擦前馈](../../../03-special-features/friction-compensation/00-overview.md) — 摩擦电平与整定顺序（首先在此消除偏置）
