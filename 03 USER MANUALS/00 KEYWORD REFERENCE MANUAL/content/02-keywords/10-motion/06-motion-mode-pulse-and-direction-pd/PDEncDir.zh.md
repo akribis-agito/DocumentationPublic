@@ -52,8 +52,8 @@ language: zh-CN
 
 | 值 | 对 PDPos 的影响 |
 |---|---|
-| 0 | **正常。** 方向信号为逻辑高电平时，`PDPos` 按 `pulses × PDFact/PDFactDen` 递增；逻辑低电平时递减。 |
-| 1 | **反转。** 方向信号为逻辑高电平时，`PDPos` 递减；逻辑低电平时递增。 |
+| 0 | **正常。** 方向信号为逻辑低电平时，`PDPos` 按 `pulses × PDFact/PDFactDen` 递增；逻辑高电平时递减。 |
+| 1 | **反转。** 方向信号为逻辑低电平时，`PDPos` 递减；逻辑高电平时递增。 |
 
 这与 `PDFact` 的符号组合使用：负的 `PDFact` 与 `PDEncDir = 1` 相互抵消。轴在运动中或电机使能时不能更改 `PDEncDir`。
 
@@ -67,6 +67,8 @@ APDEncDir=1          ; inverted accumulation direction
 ## 版本间变更
 
 `PDEncDir` 仅适用于 **central-i v5**。在 v4 上该关键字为保留（未实现）。在 v5（central-i）上，它是一个读/写闪存参数，范围为 0–1，应用上述符号。v5 仅适用于 central-i，因此独立产品不提供 `PDEncDir`。
+
+自 FPGA v5.5.0-rc4 起，所有产品对 P/D 输入的计数方向一致：方向低电平时递增。在此之前，AGD155-AF、AGD155-EC、AGD200 和 AGD301（以及设置为 P/D 的 Central-i 编码器）在方向高电平时递增，只有 AGD101 在方向低电平时递增。如果您曾在这些产品上设置 `PDEncDir = 1` 或调换方向线来补偿，请在升级后撤销。
 
 ## 另请参阅
 
