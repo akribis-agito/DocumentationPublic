@@ -51,8 +51,8 @@ Configures the sign (direction) of PDPos accumulation relative to the direction 
 
 | Value | Effect on PDPos |
 |---|---|
-| 0 | **Normal.** `PDPos` increments by `pulses × PDFact/PDFactDen` when the direction signal is logic high, and decrements when it is logic low. |
-| 1 | **Inverted.** `PDPos` decrements when the direction signal is logic high, and increments when it is logic low. |
+| 0 | **Normal.** `PDPos` increments by `pulses × PDFact/PDFactDen` when the direction signal is logic low, and decrements when it is logic high. |
+| 1 | **Inverted.** `PDPos` decrements when the direction signal is logic low, and increments when it is logic high. |
 
 This combines with the sign of `PDFact`: a negative `PDFact` and `PDEncDir = 1` cancel out. `PDEncDir` cannot be changed while the axis is in motion or the motor is on.
 
@@ -66,6 +66,8 @@ APDEncDir=1          ; inverted accumulation direction
 ## Changes between versions
 
 `PDEncDir` is **central-i v5 only**. On v4 the keyword is reserved (not implemented). On v5 (central-i) it is a read/write flash parameter with range 0–1 that applies the sign described above. v5 is central-i only, so the standalone product does not expose `PDEncDir`.
+
+From FPGA v5.5.0-rc4 every product counts the P/D input in the same direction: direction low counts up. Before that, AGD155-AF, AGD155-EC, AGD200 and AGD301 (and Central-i encoders set to P/D) counted up on direction high, and only AGD101 counted up on direction low. If you set `PDEncDir = 1` or swapped the direction wire to compensate on those products, undo it after updating.
 
 ## See also
 
