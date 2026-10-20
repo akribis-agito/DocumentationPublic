@@ -51,6 +51,7 @@ The keywords are organised into the following sub-sections:
 | [LockVal/AuxLockVal](03-event-based-feedback-logging/LockVal-AuxLockVal.md) | Records the feedback position of the most recent logged digital event. |
 | [LockValTable/LockValTabB](03-event-based-feedback-logging/LockValTable-LockValTabB.md) | History arrays storing the feedback position of each logged digital event. |
 | [LockTimeTable/LockTimeTabB](03-event-based-feedback-logging/LockTimeTable-LockTimeTabB.md) | History arrays storing the controller-cycle time of each logged digital event. |
+| [LockBMapTable/LockBMapTabB](03-event-based-feedback-logging/LockBMapTable-LockBMapTabB.md) | History arrays storing the before-map feedback position of each logged digital event, on Central-i masters built with the lock FIFO. |
 
 ## Modulo mode
 
