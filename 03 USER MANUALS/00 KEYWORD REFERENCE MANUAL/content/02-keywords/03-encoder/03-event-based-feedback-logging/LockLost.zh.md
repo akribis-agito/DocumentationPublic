@@ -23,7 +23,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-10-07'
+last_updated: '2026-10-20'
 doc_revision: '2026.09'
 language: zh-CN
 ---
@@ -59,6 +59,18 @@ language: zh-CN
 [LockTimeTable](LockTimeTable-LockTimeTabB.md) 记录的是读取到该位置的控制周期，因此在上一次应答之后才被读取的边沿记录的是那个较晚的周期，而不是该边沿本身所在的周期。
 
 要将每个边沿作为独立条目记录，请使触发边沿之间保持足够间隔。在以固定间隔触发四个事件的台架测量中，间隔不小于 200 µs 时每个边沿都被记录。
+
+### 启用锁存 FIFO 时
+
+以锁存 FIFO 构建的 Central-i 固件（编译开关 `CFG_CI_LOCK_FIFO = 1`，默认关闭）会在具备 FIFO 的远程单元上读空其 FIFO，因此每个边沿都作为独立条目被捕获，而不再只保留每个周期的最后一个边沿。使用 FIFO 时：
+
+| 情形 | `LockCntr` | `LockLost` |
+|---|---|---|
+| 远程单元的 FIFO 溢出并丢弃边沿（本次记录会话中首次） | FIFO 保留的每个边沿 +1；主站继续读取 | +1，仅一次，与丢弃的边沿数量无关 |
+| 同一会话中再次溢出 | FIFO 保留的每个边沿 +1 | 0 |
+| 仍有边沿在排队时禁用记录，或某次读取持续失败而清空 FIFO | 这些边沿不计 | 每个排队的边沿 +1 |
+
+一次记录会话从 [LockEn](LockEn-AuxLockEn.md) 0 → 1 开始，到下一次该跳变为止。溢出后，捕获的序列存在缺口：`LockLost` 表明发生了溢出，但不表示丢弃了多少个边沿。
 
 ## 示例
 

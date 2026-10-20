@@ -23,7 +23,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-10-07'
+last_updated: '2026-10-20'
 doc_revision: '2026.09'
 ---
 # LockLost
@@ -58,6 +58,18 @@ The remote unit samples the trigger once per control cycle (about 61 µs). It la
 [LockTimeTable](LockTimeTable-LockTimeTabB.md) stamps a capture with the control cycle in which its position was read, so an edge that was read after the previous reply carries that later cycle, not the cycle of the edge itself.
 
 To record every edge as its own entry, keep the trigger edges well apart. In a bench measurement with four events at a fixed gap, every edge was recorded at gaps of 200 µs and above.
+
+### With the lock FIFO
+
+Central-i firmware built with the lock FIFO (compile switch `CFG_CI_LOCK_FIFO = 1`, off by default) drains a FIFO on remotes that have one, so every edge is captured as its own entry instead of only the last edge of each cycle. With the FIFO in use:
+
+| Situation | `LockCntr` | `LockLost` |
+|---|---|---|
+| The remote's FIFO overflows and drops edges (first time in a logging session) | +1 for every edge the FIFO kept; the master keeps draining | +1 once, however many edges were dropped |
+| Further overflows in the same session | +1 for every edge the FIFO kept | 0 |
+| Logging is disabled, or a read keeps failing and the FIFO is flushed, while edges are still queued | 0 for those edges | +1 for each queued edge |
+
+A logging session runs from [LockEn](LockEn-AuxLockEn.md) 0 → 1 to the next such transition. After an overflow the captured run has a gap: `LockLost` tells you that it happened, not how many edges were dropped.
 
 ## Examples
 
