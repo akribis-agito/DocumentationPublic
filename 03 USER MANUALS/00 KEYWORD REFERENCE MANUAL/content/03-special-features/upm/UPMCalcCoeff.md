@@ -14,7 +14,7 @@ attributes:
   array_size: 1
   data_type: int32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: func
   range:
   - 0
@@ -23,8 +23,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-20'
+doc_revision: '2026.10'
 ---
 # UPMCalcCoeff
 
@@ -34,9 +34,13 @@ UPMCalcCoeff is a command that (re)calculates the UPM repetitive compensation co
 
 The command requires a supported plant model: an integrator-type model (for example gain over s-squared, or gain over s times (s plus a)) with a single gain term and no high-frequency pole, optionally followed by resonance, anti-resonance, or second-order low-pass terms. The model must ALSO contain exactly one delay term (the system/feedback delay) in addition to the single gain term and the integrator(s). Having zero or more than one delay term, zero or more than one gain term, the wrong number of integrator components, or any high-frequency pole makes the model unsupported. Note that the delay's value itself is not used by the UPM repetitive calculation; only the presence of exactly one delay term is required for the model to be accepted.
 
-If the plant model is missing or unsupported, the command returns error 234 (at least one plant model entry is illegal) and the coefficients are left invalid, so a subsequent UPMRptCalc will not run (it then returns error 236, no valid plant model). A failed UPMCalcCoeff also sets a distinct "calculation failed" indication (separate from the needs-recalculation indication); this indication persists until a later successful UPMCalcCoeff clears it, and it does not block enabling the motor. The command itself replies OK or error so you can observe the outcome directly; the two indications are reflected in the axis status register (the needs-recalculation indication on bit 26, the calculation-failed indication on bit 27). On success the pending-recalculation indication is cleared. The command cannot be issued while the axis is in motion or with the motor on. It is an axis-related command and is not saved to flash.
+If the plant model is missing or unsupported, the command returns error 234 (at least one plant model entry is illegal) and the coefficients are left invalid, so a subsequent UPMRptCalc will not run (it then returns error 236, no valid plant model). A failed UPMCalcCoeff also sets a distinct "calculation failed" indication (separate from the needs-recalculation indication); this indication persists until a later successful UPMCalcCoeff clears it, and it does not block enabling the motor. The command itself replies OK or error so you can observe the outcome directly; the two indications are reflected in the axis status register (the needs-recalculation indication on bit 26, the calculation-failed indication on bit 27). On success the pending-recalculation indication is cleared. The command can be issued with the motor on while the axis is at standstill, but not while the axis is in motion (error 21). It is an axis-related command and is not saved to flash.
 
 This keyword is available from v5 (central-i).
+
+## Changes between versions
+
+Firmware up to and including v5.3.0-rc5 refuses UPMCalcCoeff with the motor on (error 22, not valid with motor on); turn the motor off, issue UPMCalcCoeff, then turn the motor on again. Later firmware accepts it with the motor on at standstill. In motion it is refused on every version.
 
 **See also:**
 
