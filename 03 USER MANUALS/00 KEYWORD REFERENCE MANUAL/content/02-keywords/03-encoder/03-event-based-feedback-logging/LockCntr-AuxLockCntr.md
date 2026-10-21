@@ -30,7 +30,9 @@ While `LockCntr` is within the first table's capacity the event is stored in [Lo
 
 `LockCntr` itself is a 32-bit counter and does not wrap in any practical run; it is the *table index* that is bounded by the capacities above.
 
-### One event recorded per control cycle
+### Single-latch capture limits
+
+The following limits apply without an active remote FIFO. With negotiated FIFO capture, multiple edges within a control cycle can remain distinct queued positions; the firmware drains them over subsequent cycles. Remote capacity, transfer throughput and overflow still limit acquisition. See [LockLost](LockLost.md).
 
 The counter is serviced once per control cycle, and at most one capture is recorded per cycle. The hardware keeps only the most recent captured position from a cycle, so edges that share a control cycle share one capture.
 

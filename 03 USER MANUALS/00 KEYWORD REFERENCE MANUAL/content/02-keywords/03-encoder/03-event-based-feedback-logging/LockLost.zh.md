@@ -23,7 +23,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-10-20'
+last_updated: '2026-10-21'
 doc_revision: '2026.09'
 language: zh-CN
 ---
@@ -33,11 +33,13 @@ language: zh-CN
 
 ## 概述
 
-`LockLost` 是与 [LockCntr](LockCntr-AuxLockCntr.md) 配套的只读计数器。`LockCntr` 统计已捕获的位置；`LockLost` 统计其位置无法被单独捕获的触发采样，原因是远程单元仅保留最近一个边沿的位置。在一连串触发边沿之后，请同时读取两者：`LockLost` 不为零，表示即使 `LockCntr` 已前进，[LockValTable](LockValTable-LockValTabB.md) / [LockTimeTable](LockTimeTable-LockTimeTabB.md) 中仍缺少部分边沿。
+`LockLost` 是与 [LockCntr](LockCntr-AuxLockCntr.md) 配套的只读计数器。`LockCntr` 统计已捕获的位置；`LockLost` 统计其位置无法被单独捕获的触发采样，原因包括单次锁存捕获合并、读取失败、积压丢弃或远端 FIFO 溢出。在一连串触发边沿之后，请同时读取两者：`LockLost` 不为零，表示即使 `LockCntr` 已前进，[LockValTable](LockValTable-LockValTabB.md) / [LockTimeTable](LockTimeTable-LockTimeTabB.md) 中仍缺少部分边沿。
 
 当记录（[LockEn](LockEn-AuxLockEn.md)）从禁用状态被启用时，`LockLost` 与 `LockCntr` 一同复位为 `0`。它按轴设置，为 32 位，不保存至闪存，仅在 Central-i 主站上可用。
 
-## 工作原理
+## 单次锁存路径
+
+本节适用于无法使用或已关闭 FIFO 捕获的情况。
 
 远程单元每个控制周期（约 61 µs）对触发采样一次。它锁存该周期内最后一个边沿的位置，不保留其他信息，因此同一周期内较早边沿的位置无法恢复。包含两个或更多边沿的周期会作为错误采样上报给主站。主站通过离线邮箱读取所保留的位置，这需要若干个控制周期才能得到应答，而在此期间到达的边沿会替换下一次读取将返回的位置。
 
@@ -58,19 +60,23 @@ language: zh-CN
 
 [LockTimeTable](LockTimeTable-LockTimeTabB.md) 记录的是读取到该位置的控制周期，因此在上一次应答之后才被读取的边沿记录的是那个较晚的周期，而不是该边沿本身所在的周期。
 
-要将每个边沿作为独立条目记录，请使触发边沿之间保持足够间隔。在以固定间隔触发四个事件的台架测量中，间隔不小于 200 µs 时每个边沿都被记录。
+在此单次锁存路径上，应使触发边沿之间保持足够间隔。在以固定间隔触发四个事件的台架测量中，间隔不小于 200 µs 时每个边沿都被记录。
 
-### 启用锁存 FIFO 时
+## 启用锁存 FIFO 时
 
-以锁存 FIFO 构建的 Central-i 固件（编译开关 `CFG_CI_LOCK_FIFO = 1`，默认关闭）会在具备 FIFO 的远程单元上读空其 FIFO，因此每个边沿都作为独立条目被捕获，而不再只保留每个周期的最后一个边沿。使用 FIFO 时：
+以锁存 FIFO 构建的 Central-i 固件（编译开关 `CFG_CI_LOCK_FIFO = 1`，AGM800 和 AGM800-EC 从固件 5.3.0-rc6 起默认启用）会在具备 FIFO 的远程单元上读空其 FIFO，在 FIFO 容量和传输吞吐量允许的范围内，将保留的边沿作为独立捕获返回。使用 FIFO 时：
 
 | 情形 | `LockCntr` | `LockLost` |
 |---|---|---|
 | 远程单元的 FIFO 溢出并丢弃边沿（本次记录会话中首次） | FIFO 保留的每个边沿 +1；主站继续读取 | +1，仅一次，与丢弃的边沿数量无关 |
 | 同一会话中再次溢出 | FIFO 保留的每个边沿 +1 | 0 |
-| 仍有边沿在排队时禁用记录，或某次读取持续失败而清空 FIFO | 这些边沿不计 | 每个排队的边沿 +1 |
+| 仍有边沿在排队时禁用记录，或某次读取持续失败而清空 FIFO | 这些边沿不计 | 按丢弃的积压计数，限制见下文 |
 
 一次记录会话从 [LockEn](LockEn-AuxLockEn.md) 0 → 1 开始，到下一次该跳变为止。溢出后，捕获的序列存在缺口：`LockLost` 表明发生了溢出，但不表示丢弃了多少个边沿。
+
+能读取远端状态时，积压计数使用远端精确值。链路丢失或远端复位后，当积压超过线上的饱和值 31 时，可能只能给出下限估计；状态延迟也会影响此诊断计数。`LockLost` 不是每个丢失边沿的精确审计值。
+
+FIFO 时间戳及映射修正量由固件在观察积压时采样，多个捕获可共享同一组元数据。请参阅 [LockBMapTable](LockBMapTable-LockBMapTabB.md)。
 
 ## 示例
 
