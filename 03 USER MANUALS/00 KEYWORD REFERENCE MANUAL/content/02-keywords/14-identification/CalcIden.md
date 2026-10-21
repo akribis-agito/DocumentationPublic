@@ -4,6 +4,7 @@ summary: Command that calculates the input/output sinusoidal relation for sine s
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
   - v5
@@ -25,7 +26,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-10-10'
+last_updated: '2026-10-21'
 doc_revision: '2026.06'
 ---
 # CalcIden
@@ -41,6 +42,8 @@ Command that calculates the input/output sinusoidal relation for sine sweep iden
 ## How it works
 
 The input and output data must each contain at least 30 and at most 250 data points. `CalcIden` evaluates the recorded vectors at the fundamental frequency set in [InjectFreq](../13-injection/InjectFreq.md) and populates [IdenResults](IdenResults.md) with the magnitude and phase relations.
+
+On firmware containing the [recorder-index fix](https://github.com/akribis-agito/Firmware-Main/issues/1712), the calculation reads valid samples throughout the recorder data ring, including offsets above 65,535 on AGM800. Each input and output cell wraps within the data region, so a two- or three-channel row may cross the ring end without reading the header or an adjacent buffer. The 30–250-sample calculation limit is unchanged; recorder location does not increase this limit.
 
 ### Mechanism
 

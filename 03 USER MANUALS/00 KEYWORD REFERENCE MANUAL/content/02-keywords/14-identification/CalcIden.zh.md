@@ -4,6 +4,7 @@ summary: 用于计算正弦扫频辨识中输入/输出正弦关系的指令。
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
   - v5
@@ -25,7 +26,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-10-10'
+last_updated: '2026-10-21'
 doc_revision: '2026.06'
 language: zh-CN
 ---
@@ -42,6 +43,8 @@ language: zh-CN
 ## 工作原理
 
 输入和输出数据各自至少须包含 30 个、至多 250 个数据点。`CalcIden` 在 [InjectFreq](../13-injection/InjectFreq.md) 设定的基波频率处对记录向量进行评估，并将幅值和相位关系填入 [IdenResults](IdenResults.md)。
+
+在包含[记录器索引修复](https://github.com/akribis-agito/Firmware-Main/issues/1712)的固件中，计算可读取记录器数据环内任意有效位置的采样，包括 AGM800 上大于 65,535 的偏移。每个输入、输出数据单元均在数据区域内独立回绕，因此双通道或三通道采样行跨越数据环末端时，不会读到记录头或相邻缓冲区。计算长度仍为 30–250 个采样；记录位置不会提高此限制。
 
 ### 机制
 
