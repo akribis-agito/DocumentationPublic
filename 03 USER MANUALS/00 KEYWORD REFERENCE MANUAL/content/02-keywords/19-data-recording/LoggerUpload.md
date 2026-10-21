@@ -4,6 +4,7 @@ summary: Command that transfers the logged data buffer to the host.
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
   - v5
@@ -25,8 +26,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-22'
+doc_revision: '2026.10'
 ---
 # LoggerUpload
 
@@ -45,6 +46,8 @@ Each invocation streams only the samples (packets) that are complete and waiting
 3. As packets are sent, their buffer space is released, which is reflected as increasing free space in [LoggerStatus](LoggerStatus.md) (index 2).
 
 Because the logger runs continuously, a host typically calls `LoggerUpload` periodically to keep the buffer from filling. In stop mode ([LoggerFullMod](LoggerFullMod.md) = 0) this is also how a paused logger resumes, since uploading frees the space it was waiting for.
+
+On firmware containing the correction for Firmware-Main issue #1725, free space released by an upload is acknowledged on the next control tick. A new upload arriving before that acknowledgement returns a valid reply with zero packets and leaves the remaining data queued. Continue periodic polling; this transient empty reply does not by itself mean the logger buffer is fully drained. Once acknowledged, the next call uploads the remaining complete packets. The packet format and per-call limit are unchanged.
 
 ## Examples
 

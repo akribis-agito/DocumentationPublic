@@ -4,6 +4,7 @@ summary: 将已记录的数据缓冲区传输至上位机的指令。
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
   - v5
@@ -25,8 +26,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-22'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # LoggerUpload
@@ -46,6 +47,8 @@ language: zh-CN
 3. 数据包发送后，其占用的缓冲区空间被释放，体现为 [LoggerStatus](LoggerStatus.md)（索引 2）中剩余空间增加。
 
 由于记录器持续运行，上位机通常需定期调用 `LoggerUpload` 以防止缓冲区填满。在停止模式下（[LoggerFullMod](LoggerFullMod.md) = 0），上传操作同时也是使已暂停的记录器恢复运行的方式，因为上传释放了记录器等待的空间。
+
+在包含 Firmware-Main 问题 #1725 修复的固件中，上传释放的缓冲区空间会在下一个控制周期确认。如果新的上传请求早于该确认到达，控制器会返回有效的零数据包应答，其余数据仍保留在队列中。上位机应继续定期轮询；此暂时的空应答本身不代表记录器缓冲区已全部读空。确认完成后，下一次调用会上传剩余的完整数据包。数据包格式和每次调用的数量限制保持不变。
 
 ## 示例
 
