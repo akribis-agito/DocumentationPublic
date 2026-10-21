@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-21'
+doc_revision: '2026.10'
 ---
 # HomingOn
 
@@ -48,6 +48,8 @@ The homing engine runs inside the control interrupt, once per controller cycle, 
 4. **Falling edge (just cleared).** The mirrored kinematics (Speed, accel, decel, emergency decel) and the jerk mode are restored, so a homing run leaves the axis's normal motion settings unchanged.
 
 While `HomingOn` is `0`, the engine keeps the internal pointer primed at step 1 so the next write of `1` always starts from the beginning.
+
+On firmware containing [the homing-completion fix](https://github.com/akribis-agito/Firmware-Main/issues/1690), homing-owned point-to-point moves finish normally even if [PTPKeepMoving](../10-motion/02-motion-configuration/PTPKeepMoving.md) is `1`. In particular, “Move to lock position” can report completion and advance to the next homing step. The parameter itself remains unchanged; after homing, ordinary PTP tracking retains its indefinite behavior. Completion here is the end of the motion profile, not a separate guarantee of physical settling accuracy.
 
 ## Examples
 
