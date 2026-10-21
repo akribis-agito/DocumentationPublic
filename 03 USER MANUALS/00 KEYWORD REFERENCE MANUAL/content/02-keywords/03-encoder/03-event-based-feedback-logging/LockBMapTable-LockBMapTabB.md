@@ -1,6 +1,6 @@
 ---
 summary: History arrays storing the before-map feedback position of each logged digital event, on Central-i masters built with the lock FIFO.
-last_updated: '2026-10-20'
+last_updated: '2026-10-21'
 doc_revision: '2026.10'
 ---
 # LockBMapTable/LockBMapTabB
@@ -13,7 +13,7 @@ History arrays storing the before-map feedback position of each logged digital e
 
 Both arrays are read-only, per axis and not saved to flash.
 
-**Availability:** only on Central-i masters whose firmware is built with the lock FIFO (compile switch `CFG_CI_LOCK_FIFO = 1`, off by default). In every other build, CAN codes 958 and 959 are unused placeholders and reading them returns an error.
+**Availability:** AGM800 and AGM800-EC Central-i master firmware built with `CFG_CI_LOCK_FIFO = 1` (enabled by default starting with firmware 5.3.0-rc6), and their matching PC simulations. A build with the switch disabled, or a C2000/C28388 master build, leaves CAN codes 958 and 959 as placeholders; reading them returns an error. FIFO operation is negotiated separately with each remote; a remote without FIFO support keeps the single-latch capture path.
 
 ## How it works
 
