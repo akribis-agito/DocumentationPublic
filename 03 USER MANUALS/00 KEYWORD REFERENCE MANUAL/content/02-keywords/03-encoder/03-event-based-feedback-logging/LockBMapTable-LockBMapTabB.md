@@ -13,7 +13,7 @@ History arrays storing the before-map feedback position of each logged digital e
 
 For FIFO captures, the remote records each raw position independently, but firmware applies mapping and coordinate corrections sampled when it observes the backlog. Several captures can share the same correction and `LockTimeTable` timestamp; while the backlog count is saturated, later captures can reuse the newest sampled metadata. The mapped value and timestamp are therefore not independently sampled at every trigger.
 
-A full remote FIFO drops new captures while retained positions continue draining. Dropped captures have no table entries, even if these history arrays still have space. `LockLost` reports capture loss; the sticky remote-overflow indication adds **one per session**, not the exact number of dropped edges. The 130,000-entry history capacity is separate from remote FIFO capacity and does not guarantee lossless capture at a given event rate.
+A full remote FIFO drops new captures while retained positions continue draining. Dropped captures have no table entries, even if these history arrays still have space. `LockLost` reports capture loss; the sticky remote-overflow indication adds **one between FIFO arms** (automatic recovery can rearm the FIFO within a logging session), not the exact number of dropped edges. The 130,000-entry history capacity is separate from remote FIFO capacity and does not guarantee lossless capture at a given event rate.
 
 Both arrays are read-only, per axis and not saved to flash.
 
