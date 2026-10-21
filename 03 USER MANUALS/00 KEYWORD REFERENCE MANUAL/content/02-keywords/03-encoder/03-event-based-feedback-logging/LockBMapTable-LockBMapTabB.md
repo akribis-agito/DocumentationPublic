@@ -11,6 +11,10 @@ History arrays storing the before-map feedback position of each logged digital e
 
 `LockBMapTable` (CAN code 958) and `LockBMapTabB` (CAN code 959) store, for each logged trigger event, the captured feedback position **before error mapping** (the value of `LockValBefMap`, CAN code 957), in user units. They are the before-map companions of [LockValTable](LockValTable-LockValTabB.md) / `LockValTabB`: the same event is written at the same index, so `LockBMapTable[n]` and `LockValTable[n]` describe the same capture, before and after mapping.
 
+For FIFO captures, the remote records each raw position independently, but firmware applies mapping and coordinate corrections sampled when it observes the backlog. Several captures can share the same correction and `LockTimeTable` timestamp; while the backlog count is saturated, later captures can reuse the newest sampled metadata. The mapped value and timestamp are therefore not independently sampled at every trigger.
+
+A full remote FIFO drops new captures while retained positions continue draining. Dropped captures have no table entries, even if these history arrays still have space. `LockLost` reports capture loss; the sticky remote-overflow indication adds **one per session**, not the exact number of dropped edges. The 130,000-entry history capacity is separate from remote FIFO capacity and does not guarantee lossless capture at a given event rate.
+
 Both arrays are read-only, per axis and not saved to flash.
 
 **Availability:** AGM800 and AGM800-EC Central-i master firmware built with `CFG_CI_LOCK_FIFO = 1` (enabled by default starting with firmware 5.3.0-rc6), and their matching PC simulations. A build with the switch disabled, or a C2000/C28388 master build, leaves CAN codes 958 and 959 as placeholders; reading them returns an error. FIFO operation is negotiated separately with each remote; a remote without FIFO support keeps the single-latch capture path.
