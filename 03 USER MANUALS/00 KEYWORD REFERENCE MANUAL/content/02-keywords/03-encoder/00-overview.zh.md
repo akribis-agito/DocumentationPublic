@@ -51,6 +51,7 @@
 | [LockVal/AuxLockVal](03-event-based-feedback-logging/LockVal-AuxLockVal.md) | 记录最近一次已记录数字事件的反馈位置。 |
 | [LockValTable/LockValTabB](03-event-based-feedback-logging/LockValTable-LockValTabB.md) | 存储每次已记录数字事件反馈位置的历史数组。 |
 | [LockTimeTable/LockTimeTabB](03-event-based-feedback-logging/LockTimeTable-LockTimeTabB.md) | 存储每次已记录数字事件控制器周期时间的历史数组。 |
+| [LockBMapTable/LockBMapTabB](03-event-based-feedback-logging/LockBMapTable-LockBMapTabB.md) | 在启用锁存 FIFO 构建的 Central-i 主站上，存储每次已记录数字事件映射前反馈位置的历史数组。 |
 
 ## Modulo mode
 
