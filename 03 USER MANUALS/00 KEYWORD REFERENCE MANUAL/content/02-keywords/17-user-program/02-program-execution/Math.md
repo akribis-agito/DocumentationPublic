@@ -4,6 +4,7 @@ summary: Low-level user-program op that applies a math operation to the top of t
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
   - v5
@@ -25,10 +26,12 @@ attributes:
   scaling: 1.0
   implemented: partial
 overrides:
+  standalone.v5:
+    array_size: 113
   central-i.v5:
     array_size: 113
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-21'
+doc_revision: '2026.10'
 ---
 # Math
 
@@ -70,9 +73,9 @@ The index selects which operation is performed and on which data type; the numbe
 
 > **Integer set limitations:** Invert (`1 / Pop1`), the trigonometric functions, logarithm, base-10 logarithm and exponential have no integer result — index `6` (invert) reports "operation not implemented", and the trigonometric/logarithmic indices on the integer set do not produce a value. Use the floating-point or double variants for these (see below).
 
-> **"Value pointed to" (index `31`):** `Pop1` is treated as an encoded parameter reference, and the parameter it names is resolved against the thread's own axis selection ([ChooseAxis](ChooseAxis.md)) — the same axis resolution used by [PushParam](../03-stack-operation/PushParam.md) and [PopParam](../03-stack-operation/PopParam.md). The reference is validated before the read: the operation is rejected if the encoded code is out of range, the resolved axis is out of range, an array index falls outside that parameter's range, or the reference names a command or function rather than a readable parameter. The Central-i v5 typed sets add float, 64-bit-integer and double "value pointed to" variants, each performing the identical axis resolution and validation.
+> **"Value pointed to" (index `31`):** `Pop1` is treated as an encoded parameter reference, and the parameter it names is resolved against the thread's own axis selection ([ChooseAxis](ChooseAxis.md)) — the same axis resolution used by [PushParam](../03-stack-operation/PushParam.md) and [PopParam](../03-stack-operation/PopParam.md). The reference is validated before the read: the operation is rejected if the encoded code is out of range, the resolved axis is out of range, an array index falls outside that parameter's range, or the reference names a command or function rather than a readable parameter. The v5 typed sets add float, 64-bit-integer and double "value pointed to" variants, each performing the identical axis resolution and validation.
 
-Higher index ranges repeat the operation set for the other data types and add casts. **These are Central-i v5 only**: on v4 (standalone and Central-i) the maximum operation index is `31`, and selecting any index from `32` upward is rejected as an out-of-range operation.
+Higher index ranges repeat the operation set for the other data types and add casts. **These require v5 firmware exposing the typed operation sets**: on v4 (standalone and Central-i) the maximum operation index is `31`, and selecting any index from `32` upward is rejected as an out-of-range operation.
 
 | Index range | Data type / purpose | Available on |
 |----|----|----|
@@ -85,7 +88,11 @@ Higher index ranges repeat the operation set for the other data types and add ca
 
 Values are integers in the integer variants; in the floating-point and double variants the operands and result carry their floating-point representation. It is the program's (normally the compiler's) responsibility to use the variant that matches the operand types.
 
-**Result range checking.** Each operation's result is checked against the magnitude limits of its result type before it is pushed; if the result would exceed that range, the operation stops with a run-time "result out of range" error rather than silently wrapping or saturating. On v4 the result is computed at higher precision and then tested against the signed 32-bit range (about ±2.1 billion) before being narrowed and pushed. On Central-i v5 the check is per result type — the 32-bit integer, 64-bit integer, 32-bit float and double results are each tested against their own type's magnitude limits. In all cases the controller also verifies the numeric stack has room before pushing the result, stopping with a stack-full error if it does not.
+**Result range checking.** Each operation's result is checked against the magnitude limits of its result type before it is pushed; if the result would exceed that range, the operation stops with a run-time "result out of range" error rather than silently wrapping or saturating. On v4 the result is computed at higher precision and then tested against the signed 32-bit range (about ±2.1 billion) before being narrowed and pushed. On v5 the check is per result type — the 32-bit integer, 64-bit integer, 32-bit float and double results are each tested against their own type's magnitude limits. In all cases the controller also verifies the numeric stack has room before pushing the result, stopping with a stack-full error if it does not.
+
+## DOUBLE square-root and power precision
+
+On firmware exposing the typed operations and containing [the C2000 precision fix](https://github.com/akribis-agito/Firmware-Main/issues/1705), DOUBLE power (`Math[85]`) and square root (`Math[86]`) retain 64-bit precision through the math-library call, including standalone C2000 builds whose C `double` type is only 32 bits. For example, squaring the DOUBLE value `1.0000000001` yields approximately `1.0000000002`; the intermediate value is not rounded to single precision first. This does not increase the precision of the FLOAT variants. Negative square-root inputs and negative exponents continue to report their existing errors.
 
 ## Examples
 
