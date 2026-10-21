@@ -40,6 +40,8 @@ Maps a controller status onto each digital output (software function assignment)
 
 `DOutMode` assigns a software function to a digital output so the output reflects a selected controller status. It applies only when [DOutSelect](DOutSelect.md) for that output is `0` (software control). The array **index** is the output number (1-based: `DOutMode[1]` is output 1).
 
+Each assignment controls only its own output bit: output 17, when exposed by the product, is independent of output 16. Use the controller-reported array size to determine the available output indices.
+
 ## How it works
 
 `DOutMode` packs two fields into one 32-bit value:
