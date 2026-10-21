@@ -1,6 +1,6 @@
 ---
 keyword: MaxPWM
-summary: Limits the maximum PWM duty cycle (and thus the maximum voltage to the motor).
+summary: Limits PWM voltage-command magnitude; AGD101 maximum is 900 (90%), other products use their reported limits.
 availability:
   standalone:
   - v4
@@ -18,9 +18,7 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: scaling
-  range:
-  - 0
-  - 1470
+  range: null
   default: null
   scaling: 1.144
   implemented: final
@@ -29,41 +27,39 @@ overrides:
     scaling: 1.526
   central-i.v5:
     scaling: 1.526
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-21'
+doc_revision: '2026.10'
 ---
 # MaxPWM
 
-Limits the maximum PWM duty cycle (and thus the maximum voltage to the motor).
+Limits the PWM voltage-command magnitude.
 
 ## Overview
 
-For PWM amplifiers, `MaxPWM` limits the maximum duty cycle of the PWM drive — and therefore the maximum voltage applied to the motor. The units are **0.1%**: `1000` represents 100% duty cycle, and `0` represents 0%.
+`MaxPWM` limits the voltage command produced by the current loop. Its units are **0.1% of the PWM command range**: `900` means 90% of that range. This is a bipolar modulation limit, not a direct high-side switch duty percentage. On AGD101's centred up/down PWM, a positive phase command of 90% maps to an ideal high-side duty of 95% before dead time; zero phase command maps to 50% duty.
+
+The generated Quick Facts distinguish legacy standalone/central-i version cells, not individual AGD101 variants. A universal numeric range is therefore left unresolved; the legacy standalone scaling of 1.144 is not the normal AGD101 C28388 scaling (3.125 ticks per keyword unit). Use the product-specific limit below and the controller’s reported metadata.
+
+### AGD101 limit
+
+For AGD101, the maximum accepted setting is **900 (90%)**. The existing 90% default is retained. Higher settings are rejected without changing the stored value. When loading a parameter image saved by older firmware, an AGD101 value above the new internal bound is replaced by the existing default through the normal load-range validation.
+
+The limit reserves modulation headroom for low-side current-sampling validation. It does not enable oversampling or certify current-sense settling, noise, or timing. Internal values use whole PWM counter ticks, so scaling and readback have the normal counter quantization. The change applies to AGD101's current-rating variants; other products retain their own product-dependent bounds.
 
 ## How it works
 
-`MaxPWM` is applied as the saturation limit on the output voltages inside the current loop, in two ways:
+For brushless vector control, the firmware limits the output voltage vector using a precomputed `MaxPWM²`. The enhanced-speed-range option in [ControlMode](../../09-current-and-voltage/02-motor-variables/ControlMode.md) changes that vector budget. Direct per-phase clamps to ±`MaxPWM` apply in current-control or vector-control bypass modes. Configurable dead-time compensation can also change the final phase commands; the keyword alone does not establish a guaranteed physical low-side conduction window.
 
-- **Vector magnitude.** For brushless motors the firmware limits the magnitude of the output voltage vector so that $\sqrt{V_q^{2}+V_d^{2}} \le \text{MaxPWM}$ (using a precomputed `MaxPWM²`). If the enhanced-speed-range option is enabled in `ControlMode`, the squared budget is scaled by $\frac{4}{3}$ (space-vector over-modulation).
-- **Per-phase clamp.** Each phase output (`Va`, `Vb`, `Vc`) is independently clamped to ±`MaxPWM`.
-
-Whenever the output voltage is clamped, the firmware records a saturation factor and sets [StatReg](../../07-status-and-faults/StatReg.md) bit 22 (voltage saturation). `MaxPWM` is a *limit*, not a trip — exceeding the demand simply saturates the output; it does not raise a [ConFlt](../../07-status-and-faults/ConFlt.md) fault.
-
-### Edge cases
-
-- **Motor off:** the saturation does not actively clamp (no phase voltages are being driven), but the limit takes effect immediately on the next motor-on.
-- **Mode dependency:** the per-phase clamp applies whenever the current loop produces phase outputs (servo or stepper internal amplifier).
-- **External amplifier:** `MaxPWM` has no effect when the drive is configured for an external amplifier (analog current or analog velocity command — the phase outputs are not driven by the internal current loop).
-- **Range overflow:** writes outside `0…1470` (0.1 % units, i.e. up to ~147 %) are rejected with an out-of-range error; the stored value is left unchanged. Note the keyword units are 0.1 %, not %: `1000` = 100 %.
-- **HWProtectBits / ProtectMask:** voltage saturation is not a trip and not maskable.
+Voltage saturation is reported in [StatReg](../../07-status-and-faults/StatReg.md) bit 22. `MaxPWM` limits the requested output; saturation does not itself raise a [ConFlt](../../07-status-and-faults/ConFlt.md) fault.
 
 ## Examples
 
-With a 48 V bus and default `MaxPWM = 900`, to cap the output at 30% duty cycle (14.4 V) set:
-
 ```text
-AMaxPWM=300          ; limit to 30% duty cycle (~14.4 V on a 48 V bus)
+AMaxPWM=900          ; AGD101 maximum: 90% PWM voltage-command range
+AMaxPWM=300          ; reduce the limit to 30% of the command range
 ```
+
+`AMaxPWM=901` is outside the AGD101 range and is refused. Use the controller's reported keyword limits for other products.
 
 ## See also
 
