@@ -36,6 +36,8 @@ Runs by-gap event generation continuously, without stopping at EventEndPos.
 
 `EventAlwaysOn` selects continuous ("endless") operation for by-gap event generation ([EventType](EventType.md) = 1). It does **not** force the output level high; it changes when the engine *stops*. With normal (windowed) operation, by-gap pulses stop once the position passes [EventEndPos](EventEndPos.md). With `EventAlwaysOn = 1`, the generator keeps producing a pulse every [EventGap](EventGap.md) without ever reaching an end position, so it runs for as long as [EventOn](EventOn.md) remains set.
 
+The end-position bypass applies to software event generation as well as hardware compare. It also applies when `EventBegPos` and `EventEndPos` are equal: that setting does not limit an endless run to one event.
+
 This applies only to by-gap mode. The single-event, table, hardware-table, and trigger-now schemes are unaffected by `EventAlwaysOn`.
 
 ## How it works
