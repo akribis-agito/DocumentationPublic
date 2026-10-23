@@ -45,6 +45,8 @@ language: zh-CN
 
 最大可持续事件频率受 `EventGap` 除以轴速度的限制：当该时间间隔接近发出一个宽度为 [EventPulseWid](EventPulseWid.md) 的脉冲所需时间时，脉冲将开始合并。
 
+在有限的按间隔生成模式（`EventType = 1`、`EventAlwaysOn = 0`）下，若间隔为零或其符号使比较位置背离终点，执行 `EventOn = 1` 将被拒绝并返回错误 **14**。拒绝后，已配置的间隔和位置保持不变。对于 `EventBegPos = 20000`、`EventEndPos = 200`，应使用 `EventGap = -100`；正间隔会向远离终点的方向推进，因此会被拒绝。请在未使能时配置窗口，修正间隔后再使能。
+
 ## 示例
 
 ```text

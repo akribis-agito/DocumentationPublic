@@ -44,6 +44,8 @@ When by-gap generation is armed, the number of events for the window is |([Event
 
 The maximum sustainable event rate is bounded by `EventGap` divided by the axis velocity: as that interval approaches the time needed to emit one pulse of width [EventPulseWid](EventPulseWid.md), pulses begin to merge.
 
+For finite by-gap generation (`EventType = 1`, `EventAlwaysOn = 0`), arming with `EventOn = 1` rejects a zero gap or a gap whose sign points away from the end, returning error **14**. The refusal preserves the configured gap and positions. For `EventBegPos = 20000` and `EventEndPos = 200`, use `EventGap = -100`; a positive gap advances away from the end and is refused. Configure the window while disarmed, correct its gap, then arm it.
+
 ## Examples
 
 ```text
