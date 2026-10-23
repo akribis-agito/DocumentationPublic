@@ -42,6 +42,8 @@ Arming is a `0 → 1` edge: writing `EventOn = 1` while it is already `1` does n
 
 ### Arming (0 → 1)
 
+For a finite by-gap sequence (`EventType = 1`, `EventAlwaysOn = 0`), `EventGap` must be nonzero and advance from `EventBegPos` toward `EventEndPos`: positive for an increasing window, negative for a decreasing window. A zero gap or a gap pointing away from the end causes `EventOn = 1` to be refused with error **14**; a disarmed sequence stays disarmed and its configured positions and gap remain available for correction. For example, begin `20000` and end `200` require a negative gap such as `-100`; `+100` is refused. This check does not change single-event, table-event or endless-mode arming.
+
 When `EventOn` transitions from `0` to `1` the controller:
 
 1. Resets [EventCntr](EventCntr.md) to `0`.
