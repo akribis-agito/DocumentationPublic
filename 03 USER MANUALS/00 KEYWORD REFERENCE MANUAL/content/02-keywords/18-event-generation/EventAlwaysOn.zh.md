@@ -37,6 +37,8 @@ language: zh-CN
 
 `EventAlwaysOn` 为按间隔事件生成（[EventType](EventType.md) = 1）选择连续（"无限"）运行模式。它**不会**强制输出电平为高；它改变的是引擎*停止*的时机。在正常（窗口）运行模式下，按间隔脉冲在位置超过 [EventEndPos](EventEndPos.md) 后停止。当 `EventAlwaysOn = 1` 时，生成器持续每隔 [EventGap](EventGap.md) 产生一个脉冲，不会到达结束位置，因此只要 [EventOn](EventOn.md) 保持置位，它就持续运行。
 
+软件事件生成与硬件比较均应跳过结束位置检查。即使 `EventBegPos` 与 `EventEndPos` 相等，也不会将无限运行限制为仅生成一次事件。
+
 此设置仅适用于按间隔模式。单次事件、表、硬件表和立即触发方案不受 `EventAlwaysOn` 影响。
 
 ## 工作原理
