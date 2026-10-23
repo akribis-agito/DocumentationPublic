@@ -42,6 +42,7 @@ Bounding position at which by-gap event generation stops.
 
 - If `EventEndPos` is greater than `EventBegPos`, events run in the positive direction and stop once a compare position would exceed `EventEndPos`.
 - If `EventEndPos` is less than `EventBegPos`, events run in the negative direction and stop once a compare position would fall below `EventEndPos`.
+- If `EventEndPos` equals `EventBegPos` and `EventAlwaysOn = 0`, the finite window contains one event position. After that event fires, generation disarms (`EventOn = 0`), including when `EventGap` is negative; it does not continue at positions outside the window.
 
 After each by-gap event fires, the controller advances the next compare point by [EventGap](EventGap.md) and tests it against `EventEndPos` in the watched direction; when the bound is passed it disarms generation ([EventOn](EventOn.md) returns to `0`). This end check is skipped when [EventAlwaysOn](EventAlwaysOn.md) = 1, which makes by-gap generation run continuously and ignore `EventEndPos`.
 

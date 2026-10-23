@@ -43,6 +43,7 @@ language: zh-CN
 
 - 若 `EventEndPos` 大于 `EventBegPos`，事件沿正方向运行，当比较位置将超过 `EventEndPos` 时停止。
 - 若 `EventEndPos` 小于 `EventBegPos`，事件沿负方向运行，当比较位置将低于 `EventEndPos` 时停止。
+- 若 `EventEndPos` 等于 `EventBegPos` 且 `EventAlwaysOn = 0`，有限窗口只包含一个事件位置。该事件触发后，生成器解除置位（`EventOn = 0`）；即使 `EventGap` 为负值，也不会继续在窗口外的位置生成事件。
 
 每次按间隔事件触发后，控制器将下一个比较点按 [EventGap](EventGap.md) 步进，并在被监视方向上与 `EventEndPos` 进行比较；当超过边界时，生成器解除置位（[EventOn](EventOn.md) 返回 `0`）。当 [EventAlwaysOn](EventAlwaysOn.md) = 1 时，跳过此结束检查，使按间隔生成持续运行并忽略 `EventEndPos`。
 
