@@ -1,6 +1,6 @@
 ---
 keyword: OfflineALog
-summary: Reserved offline (mailbox) message log for Central-i offline mailbox 1; not currently populated by the firmware, so it stays at 0.
+summary: Priority offline mailbox-1 transaction log on queue-enabled AGM800 and AGM800-EC firmware.
 availability:
   standalone:
   - v4
@@ -25,46 +25,43 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-17'
+doc_revision: '2026.10'
 ---
 # OfflineALog
 
-Reserved offline (mailbox) message log for Central-i **offline mailbox 1**; not currently populated by the firmware.
+Priority offline mailbox-1 transaction log on **queue-enabled AGM800 and AGM800-EC firmware**.
 
 ## Overview
 
-`OfflineALog` is a non-axis array that is **reserved** as the log for Central-i **offline mailbox 1** (the priority, firmware-driven channel). It is **not currently populated** by the firmware, so all of its elements stay at their default of `0`; reading it does not return offline-message data.
+The interrupt worker records lock-position queries and event target/selector writes when each transaction completes. The log is a shared ring of five messages across all ports. Older firmware and other products may leave this reserved array at zero.
 
-The offline transactions that are actually logged are recorded in [OfflineBLog](OfflineBLog.md) (offline mailbox 2). Use that log to inspect the offline messages that were exchanged and their results.
+Each entry is published as a complete terminal transaction, including failures and cancellations. A request refused before admission has no entry. A zero acknowledgement/error field means successful completion; a nonzero field is the remote error or a local communication error. Time and sample fields identify completion.
 
-## How it works
+## Field layout
 
-The array is dimensioned the same way as [OfflineBLog](OfflineBLog.md): up to **5 messages of 9 fields** each (45 used elements, indices `[1]`…`[45]`). Because nothing currently writes to it, every element reads `0`. The intended per-message field layout (which [OfflineBLog](OfflineBLog.md) does populate) is, in order:
+Slot *k* (k = 0…4) occupies `[9k+1]` … `[9k+9]`.
 
-| Offset in slot | Field | Meaning |
-|----------------|-------|---------|
-| +1 | Sender | What issued the message (interrupt / host function / background / special) |
+| Offset | Field | Meaning |
+|---|---|---|
+| +1 | Sender | `1` = interrupt |
 | +2 | Message type | `0` = query, `1` = assignment |
-| +3 | Opcode | Remote register address read or written |
-| +4 | Value out | Value sent (for an assignment) |
-| +5 | Value in | Value returned (for a query) |
-| +6 | Acknowledge / error | `0` = ok, otherwise the remote's error code |
-| +7 | Time | Controller time when the message was sent (cf. [Time](../03-timing/Time.md)) |
-| +8 | Sample counter | Sample counter at send time |
-| +9 | Port | Axis/port number the message went to |
-
-Message slot *k* (k = 0…4) would occupy elements `[9k+1]` … `[9k+9]`. The same field layout is populated for [OfflineBLog](OfflineBLog.md).
+| +3 | Opcode | Remote register address |
+| +4 | Value out | Copied assignment value |
+| +5 | Value in | Successful query value; otherwise zero |
+| +6 | Acknowledge / error | Zero on success; nonzero on failure |
+| +7 | Time | Controller time at completion |
+| +8 | Sample counter | Sample counter at completion |
+| +9 | Port | Zero-based axis/port number |
 
 ## Examples
 
 ```text
-AOfflineALog[3]     ; reserved slot; currently reads 0 (not populated)
-AOfflineALog[12]    ; reserved slot; currently reads 0 (not populated)
+AOfflineALog[3]     ; opcode in slot 0
+AOfflineALog[6]     ; terminal acknowledgement/error in slot 0
 ```
 
 ## See also
 
-- [OfflineBLog](OfflineBLog.md) — the offline mailbox 2 log, which is the one the firmware actually populates
-- [CIOfflineData](CIOfflineData.md) / [CIOfflineSend](CIOfflineSend.md) — offline transactions
-- [CIStatus](CIStatus.md) — offline error counters and last-error code
+- [OfflineBLog](OfflineBLog.md) — mailbox-2 transactions, including CNC interrupt submissions
+- [CIStatus](CIStatus.md) — mailbox error counters and last error

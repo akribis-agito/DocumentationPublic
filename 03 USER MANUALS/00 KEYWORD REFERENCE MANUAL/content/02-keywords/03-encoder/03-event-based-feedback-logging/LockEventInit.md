@@ -1,6 +1,6 @@
 ---
 keyword: LockEventInit
-summary: Initializes the unified lock/event configuration by learning the firmware-to-hardware capture offset (mode 1 only).
+summary: Learns the capture offset in manual mode 1 or automatic mode 2.
 availability:
   standalone: []
   central-i:
@@ -23,54 +23,31 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-17'
+doc_revision: '2026.10'
 ---
 # LockEventInit
 
-Initializes the unified lock/event configuration by learning the firmware-to-hardware capture offset; meaningful only when [LockEventMode](LockEventMode.md) = 1.
+Learns the offset between the hardware ancillary capture counter and the matching controller position. It is required in manual [LockEventMode](LockEventMode.md) 1 and can force a fresh measurement in automatic mode 2. Mode 0 uses initialization on arming; calling this command there is refused with error 334.
 
-> Available from v5 (central-i) only.
+Turn `LockEn` and `EventOn` off, finish configuring the source, and keep it stationary during measurement. The matching coordinates are `Pos` for the main incremental/AqB source, `VEncValue` for the virtual source, and `AuxPos` for the auxiliary source. A successful applicable measurement sets [LockEventStat](LockEventStat.md) to 1.
 
-## Overview
+For the main absolute-encoder source, no ancillary offset is needed: the command can return success without changing the status. Therefore interpret status according to the selected source. A remote read failure returns error 151 and leaves the offset invalid. Modes 1/2 refuse arming with error 335 when no measurement exists, or 404 when an earlier measurement is stale.
 
-`LockEventInit` is a command keyword used by the unified lock/event scheme ([LockEventMode](LockEventMode.md) = 1). When you run it, the controller samples the internal hardware capture counter and computes the offset between it and the controller-side position for the configured capture source: the main-encoder position (`Pos`) when the main encoder is the source, the virtual-encoder value (`VEncValue`) for the virtual-encoder source, or the auxiliary-encoder position (`AuxPos`) for the auxiliary-encoder source, so captures on that source are reported in `AuxPos` coordinates. That offset is what lets captured positions be reported in the same units and reference you use elsewhere.
+## Remote FPGA compatibility
 
-In mode 1 this step is your responsibility: you run `LockEventInit` once the lock/event source is fully configured and the axis is stationary, before arming [LockEn](LockEn-AuxLockEn.md) or [EventOn](../../18-event-generation/EventOn.md). In the legacy mode ([LockEventMode](LockEventMode.md) = 0) the controller learns this offset automatically when the feature is armed, so the command is not used there.
+On AGM800 and AGM800-EC, the remote FPGA must implement ancillary-position reads `0x72/0x73`. Historical remote FPGA v4.3.6 does not implement them and returns zero for unmapped reads. A successful zero reply or `LockEventStat=1` on that image does not certify a correct offset. Use a firmware/FPGA combination validated together before relying on capture coordinates.
 
-## How it works
-
-`LockEventInit` computes the offset (and drives [LockEventStat](LockEventStat.md) to `1`) only when the configured capture source uses an incremental or AqB main encoder, the virtual encoder, or the auxiliary-encoder source. If the main encoder is selected as the source but it is an absolute-type encoder (for example SSI, EnDat, or SinCos), the command returns success but does *not* compute the offset and leaves [LockEventStat](LockEventStat.md) unchanged — so always confirm [LockEventStat](LockEventStat.md) actually reads `1` before arming.
-
-When the precondition above is met (mode 1, an applicable capture source, and a stationary source), the controller:
-
-1. Reads the current hardware capture counter.
-2. Computes the offset against the matching controller-side position for the configured source: the main-encoder position for the main-encoder source, the virtual-encoder value for the virtual-encoder source, or the auxiliary-encoder position for the auxiliary-encoder source.
-3. Marks the lock/event subsystem as initialized and sets [LockEventStat](LockEventStat.md) to `1` (ready). (This step is conditional on the configured source and encoder type; see the precondition above.)
-
-Because the offset is sampled at the moment you run the command, the capture source must be stationary while you run it; otherwise the learned offset will not match later captures.
-
-### Behavioral notes
-
-- **Mode 1 only.** Running `LockEventInit` while [LockEventMode](LockEventMode.md) = 0 (legacy mode) has no effect and is rejected with error 334, since the offset is already learned automatically in that mode. Use it only after selecting mode 1.
-- **Required before arming in mode 1.** With [LockEventMode](LockEventMode.md) = 1, attempting to arm [LockEn](LockEn-AuxLockEn.md) = 1 or [EventOn](../../18-event-generation/EventOn.md) = 1 before `LockEventInit` has been run is rejected with error 335 (offset not initialized). Run `LockEventInit` first, then arm.
-- **Re-run after configuration changes.** Any change to the capture source after initialization invalidates the learned offset. A change to `EncSinCosHWEn` (the encoder/lock-event capture-source selector) is detected automatically and resets [LockEventStat](LockEventStat.md) to the not-initialized state, but the controller cannot detect every case. As a rule, run `LockEventInit` again after any change to the lock/event source configuration and before the source starts moving.
-
-## Examples
+## Example
 
 ```text
-ALockEventMode=1      ; select the unified lock/event scheme
-ALockSrc=16           ; configure the capture source/edge (central-i main encoder index)
-                      ; ... make sure the axis is stationary ...
-ALockEventInit        ; learn the firmware/hardware offset
-ALockEventStat        ; verify this reads 1 (initialized and ready) before arming
-ALockEn=1             ; now allowed; arm event-based feedback logging
+ALockEn=0
+AEventOn=0
+ALockEventMode=1
+; configure the capture source and keep it stationary
+ALockEventInit
+ALockEventStat        ; require 1 for an applicable ancillary-counter source
+ALockEn=1
 ```
 
-## See also
-
-- [LockEventMode](LockEventMode.md) — selects legacy vs. unified mode (this command applies in mode 1)
-- [LockEventStat](LockEventStat.md) — reports whether initialization has been done
-- [LockEn](LockEn-AuxLockEn.md) — arms event-based feedback logging
-- [LockSrc](LockSrc-AuxLockSrc.md) — selects the trigger source and edge
-- [EventOn](../../18-event-generation/EventOn.md) — arms event generation
+Mode 1 requires another explicit measurement after a dependency change or reconnect invalidates the offset. Mode 2 attempts automatic recomputation while both features are off; this command remains available for an explicit refresh. See [LockEventMode](LockEventMode.md) and [LockEventStat](LockEventStat.md).

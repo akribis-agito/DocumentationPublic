@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-17'
+doc_revision: '2026.10'
 ---
 # OfflineBLog
 
@@ -40,7 +40,13 @@ Rolling log of all logged Central-i offline (mailbox) transactions, recorded on 
 - background offline traffic, and
 - the connect/event state machine (the "special" offline handling, e.g. during [CIConnect](CIConnect.md) and event processing).
 
-The [Sender](#sender-field-values) field of each logged message identifies which of these issued it, so the host can review what was sent and what the remote returned. The companion array [OfflineALog](OfflineALog.md) (offline mailbox 1) is reserved but is not currently populated.
+The [Sender](#sender-field-values) field of each logged message identifies which of these issued it, so the host can review what was sent and what the remote returned. The companion array [OfflineALog](OfflineALog.md) (offline mailbox 1) records priority lock/event transactions on queue-enabled AGM800 and AGM800-EC firmware.
+
+## AGM800 and AGM800-EC queue logging
+
+With the mailbox-2 queue, the foreground owner publishes one complete entry when an accepted transaction reaches a terminal result. This includes timeouts and cancellation, so an entry does not always mean that a request reached the wire. Entries retain their original sender and port even when several producers have work queued.
+
+The array remains a shared five-entry ring across ports. Time and sample-counter fields describe terminal completion, rather than submission. ACK/error is zero on success, preserves an available remote error word, and otherwise reports local communication error `151`. The queue API retains the detailed terminal status internally. A request rejected before it enters the queue does not occupy a transaction-log entry.
 
 ## How it works
 
@@ -54,8 +60,8 @@ The buffer has the same shape as [OfflineALog](OfflineALog.md): up to **5 messag
 | +4 | Value out | Value sent (for an assignment) |
 | +5 | Value in | Value returned (for a query) |
 | +6 | Acknowledge / error | `0` = ok, otherwise the remote's error code |
-| +7 | Time | Controller time when the message was sent (cf. [Time](../03-timing/Time.md)) |
-| +8 | Sample counter | Sample counter at send time |
+| +7 | Time | Controller time at completion on queue-enabled AGM800/EC; at send time on legacy firmware (cf. [Time](../03-timing/Time.md)) |
+| +8 | Sample counter | Sample counter at completion on queue-enabled AGM800/EC; at send time on legacy firmware |
 | +9 | Port | Axis/port number the message went to |
 
 Message slot *k* (k = 0…4) occupies elements `[9k+1]` … `[9k+9]`.
@@ -66,16 +72,15 @@ The **Sender** field (offset `+1` in each slot) identifies what issued the logge
 
 | Value | Meaning |
 |-------|---------|
+| 1 | Interrupt-origin CNC/event cleanup (queue-enabled AGM800 and AGM800-EC) |
 | 2 | Host function — a user program calling [CIOfflineSend](CIOfflineSend.md) |
 | 3 | Background offline traffic |
 | 4 | Connect/event state machine (the "special" offline handling) |
 
-Value `1` (interrupt) is reserved and is not currently emitted.
-
 ## Examples
 
 ```text
-AOfflineBLog[1]     ; sender of the first logged message (2 = CIOfflineSend, 3 = background, 4 = special)
+AOfflineBLog[1]     ; sender of the first logged message (1 = interrupt, 2 = CIOfflineSend, 3 = background, 4 = special)
 AOfflineBLog[3]     ; opcode of the first logged message
 AOfflineBLog[5]     ; value returned by the remote for that message
 AOfflineBLog[6]     ; its acknowledge/error code (0 = ok)
@@ -83,6 +88,6 @@ AOfflineBLog[6]     ; its acknowledge/error code (0 = ok)
 
 ## See also
 
-- [OfflineALog](OfflineALog.md) — the offline mailbox 1 log (reserved; not currently populated)
+- [OfflineALog](OfflineALog.md) — the priority offline mailbox 1 log
 - [CIOfflineSend](CIOfflineSend.md) — one of the sources whose transactions are logged here
 - [CIOfflineData](CIOfflineData.md) — request/response buffer for each transaction

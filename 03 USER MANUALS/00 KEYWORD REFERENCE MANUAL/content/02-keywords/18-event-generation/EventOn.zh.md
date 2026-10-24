@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-17'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # EventOn
@@ -87,3 +87,7 @@ AEventOn            ; 查询当前状态
 - [EventCntr](EventCntr.md) — 在 0 → 1 使能边沿时复位为 0
 - [EventAlwaysOn](EventAlwaysOn.md) — 强制连续（无限）按间隔生成
 - [LockEn](../03-encoder/03-event-based-feedback-logging/LockEn-AuxLockEn.md) — 位置捕获；在独立产品上共用同一引脚
+
+## AGM800 队列事件失败
+
+在启用队列的 AGM800 和 AGM800-EC 固件中，中断事件写入未获确认时将停止事件序列，随后异步发送并检查远端禁用命令。从禁用状态重新启用时，若旧事件事务或远端清理尚未完成，或清理失败，`EventOn=1` 返回错误 151。事件序列已启用时，重复写入 `EventOn=1` 保持幂等，不会重新启动序列。清理失败后需重新连接。
