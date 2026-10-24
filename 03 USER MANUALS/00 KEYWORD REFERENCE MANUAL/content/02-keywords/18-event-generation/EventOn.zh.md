@@ -1,6 +1,6 @@
 ---
 keyword: EventOn
-summary: 使能事件生成；加载第一个比较位置，与 Lock 互斥。
+summary: 使能所选事件模式；已验证硬件表必须先显式预加载。
 availability:
   standalone:
   - v4
@@ -25,13 +25,19 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-25'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # EventOn
 
 使能事件生成；加载第一个比较位置，与 Lock 互斥。
+
+## 已验证硬件事件表（EventType=3）
+
+必须先由 [EventLoad](EventLoad.zh.md) 建立当前会话，并获得远程验证后的 Ready。写入 1 仅请求 ARM，不加载表、不重新学习偏移、不回退软件模式。设置回调不会隐式使能。ARM 待完成时 EventOn 保持 0，仅在匹配会话的新鲜 Armed/Running 确认后为 1；拒绝返回错误 151，原因见 [EventError](EventError.zh.md)。写入 0 请求 [EventAbort](EventAbort.zh.md)，并不直接证明远程清理完成。使能或运行已占用引擎时，重复使能被拒绝而不重新开始。Complete 需要全部目标及末脉冲完成。配置或原点改变会使捕获会话失效，须恢复并重新加载；下文传统坐标保持行为不适用于此模式。EventCntr 在加载被接受时清零，不在使能时隐式上传表。
+
+下文的传统行为适用于其他事件模式。
 
 ## 概述
 

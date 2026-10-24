@@ -25,12 +25,18 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-25'
+doc_revision: '2026.10'
 ---
 # EventTableWid
 
 Per-entry pulse width array; -1 uses the global EventPulseWid.
+
+## Verified hardware table (EventType=3)
+
+The verified engine **honors per-entry widths**. The selected begin row decides the entire session: −1 uses global EventPulseWid (its sign fixes polarity and zero selects toggle); 0 selects toggle; positive selects per-entry pulse widths with normal polarity. In per-entry mode, later −1 inherits the preceding effective width, later 0 retires without a pulse, and later positive values replace the width. A later 0 never changes the session to toggle. Widths follow EventPulseRes, and invalid values/overflow are refused. See EventPulseRes for clock-based quantization. The legacy statement below that hardware-table mode ignores this array does not apply to the verified engine.
+
+The remaining legacy behavior below applies to other event modes.
 
 ## Overview
 

@@ -23,8 +23,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-25'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # LockEventInit
@@ -32,6 +32,12 @@ language: zh-CN
 通过学习固件到硬件的捕获偏移来初始化统一的锁存/事件配置；仅当 [LockEventMode](LockEventMode.md) = 1 时有意义。
 
 > 仅自 v5（central-i）起可用。
+
+## 已校验硬件表的所有权
+
+对于通过 Identity[62] 位 `0x200` 声明已校验表 API 的固件，在 LockEventMode 为 1 或 2 时，只要硬件表仍拥有除 Ready 以外的状态，`LockEventInit` 就会以错误 151 被拒绝。拒绝时偏移保持不变，也不会发送辅助计数器查询。应在 [EventLoad](../../18-event-generation/EventLoad.zh.md) 之前完成对齐初始化。
+
+在 Ready 状态执行此命令会在重新测量之前使已准备的表失效，即使随后的辅助计数器读取失败也一样。请确认 Abort/清理完成并确认保留的错误，随后确认对齐有效，再重新执行完整的 EventLoad 后才能武装。不能重复使用旧的 Ready 发布值。
 
 ## 概述
 

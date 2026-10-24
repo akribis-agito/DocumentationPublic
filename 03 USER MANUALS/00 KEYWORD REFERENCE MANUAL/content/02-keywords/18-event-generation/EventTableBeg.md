@@ -25,12 +25,18 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-25'
+doc_revision: '2026.10'
 ---
 # EventTableBeg
 
 Starting index of the active region within the event table.
+
+## Verified hardware table (EventType=3)
+
+[EventLoad](EventLoad.md) captures the inclusive selected range before arming: N=EventTableEnd−EventTableBeg+1 must be 1..2048. Invalid ranges are refused rather than truncated or treated as a single event. The larger controller-side array remains available, but only the selected range enters one hardware session. Strict ordering in one direction is required in both original and corrected remote coordinates; no duplicates, reversals or signed-counter rollover. Configure before loading. Changes invalidate Ready; conflicting writes while transfer/arm/run owns the session are refused. EventOn=1 does not reread or upload the live table.
+
+The remaining legacy behavior below applies to other event modes.
 
 ## Overview
 
