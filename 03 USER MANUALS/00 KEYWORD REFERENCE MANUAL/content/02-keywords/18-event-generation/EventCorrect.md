@@ -53,6 +53,8 @@ The command checks several prerequisites and is rejected (returns an error) if a
 
 Run `EventCorrect` again whenever the error map or the source [EventTable](EventTable.md) changes, then select the corrected table for table-mode generation.
 
+For the verified hardware-table API, issue the bare FUNC command, without assignment syntax. Fence the source/table generations before correction and input readback. A successful invocation advances each selected-axis generation exactly once modulo32; the selected original/width/selection rows and settings must read back unchanged, with no extra generation increments. A failed mapping check can still advance generations; failure cannot establish corrected-table provenance. EventLoad/Ready must match the final witness.
+
 ## Examples
 
 ```text

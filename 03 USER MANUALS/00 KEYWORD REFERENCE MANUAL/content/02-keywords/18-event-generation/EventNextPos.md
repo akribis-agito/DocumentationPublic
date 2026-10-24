@@ -25,12 +25,18 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-28'
-doc_revision: '2026.06'
+last_updated: '2026-10-25'
+doc_revision: '2026.10'
 ---
 # EventNextPos
 
 Read-only position at which the next event pulse will be generated.
+
+## Verified hardware table (EventType=3)
+
+Uses the next target from the **immutable original controller-coordinate snapshot** captured by EventLoad, including when EventTableSrc selects EventTableCor. It is not reconstructed by adding a main-encoder offset to a remote counter. It clears on accepted load; completion/abort retain the last value until a new load. Use EventStatus remaining/session/freshness to decide whether it is currently meaningful.
+
+The remaining legacy behavior below applies to other event modes.
 
 ## Overview
 

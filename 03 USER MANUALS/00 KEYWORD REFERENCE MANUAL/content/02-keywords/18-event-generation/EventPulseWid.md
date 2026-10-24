@@ -25,12 +25,18 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-25'
+doc_revision: '2026.10'
 ---
 # EventPulseWid
 
 Duration of the event output pulse in microseconds.
+
+## Verified hardware table (EventType=3)
+
+Widths are converted using the advertised remote CLOCK_HZ with checked 64-bit arithmetic. Choose a 2-clock quantum when the nearest rounded count fits 18 bits; otherwise use 512 clocks. Ties round upward. Refuse overflow or a positive width that quantizes to zero; do not silently clamp. At 100 MHz these quanta are 20 ns and 5.12 μs. The realized width is count×quantum/CLOCK_HZ; this arithmetic is not an electrical accuracy claim. Pulse width plus recovery must fit target spacing: an early target faults rather than producing a delayed pulse. Session polarity/mode and all selected widths are frozen by EventLoad, so an edit requires a new load. Toggle Complete may retain its final level until explicit EventAbort.
+
+The remaining legacy behavior below applies to other event modes.
 
 ## Overview
 

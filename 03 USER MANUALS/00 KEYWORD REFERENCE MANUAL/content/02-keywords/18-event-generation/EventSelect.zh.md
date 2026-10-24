@@ -25,13 +25,19 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-28'
-doc_revision: '2026.06'
+last_updated: '2026-10-25'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # EventSelect
 
 选择多事件输出组中当前事件脉冲所驱动的输出线。
+
+## 已验证硬件事件表（EventType=3）
+
+EventLoad 将逐项 EventTableSel 掩码固定在私有已验证记录中，不会在每个目标后用远程结果改写此关键字，因此读取 EventSelect 不能确定最近硬件表输出。须先配置记录再加载；占用期间拒绝冲突配置写入，更改使 Ready 失效。
+
+下文的传统行为适用于其他事件模式。
 
 ## 概述
 

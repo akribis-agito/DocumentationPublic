@@ -25,13 +25,19 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-28'
-doc_revision: '2026.06'
+last_updated: '2026-10-25'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # EventNextPos
 
 下一个事件脉冲将在其处生成的位置，只读。
+
+## 已验证硬件事件表（EventType=3）
+
+取自 EventLoad 捕获的**不可变原始控制器坐标快照**中的下一目标，即使 EventTableSrc 选择 EventTableCor 也如此。不会通过远程计数器加主编码器偏移重建。接受加载时清零，完成或中止后保留最后值直至下一次加载。须结合 EventStatus 的剩余项数、会话和新鲜度判断其当前是否有效。
+
+下文的传统行为适用于其他事件模式。
 
 ## 概述
 

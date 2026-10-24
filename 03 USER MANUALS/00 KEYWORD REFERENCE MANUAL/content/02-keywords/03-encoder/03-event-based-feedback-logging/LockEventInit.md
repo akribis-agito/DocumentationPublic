@@ -23,14 +23,20 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-25'
+doc_revision: '2026.10'
 ---
 # LockEventInit
 
 Initializes the unified lock/event configuration by learning the firmware-to-hardware capture offset; meaningful only when [LockEventMode](LockEventMode.md) = 1.
 
 > Available from v5 (central-i) only.
+
+## Verified hardware-table ownership
+
+On firmware advertising the verified-table API (Identity[62] bit `0x200`), `LockEventInit` in LockEventMode 1 or 2 is refused with error 151 while a hardware table owns any state other than Ready. Refusal leaves the offset unchanged and sends no ancillary-counter inquiry. Establish alignment before [EventLoad](../../18-event-generation/EventLoad.md).
+
+Running it from Ready invalidates that prepared table before remeasurement, even if the ancillary read later fails. Confirm Abort/cleanup and acknowledge retained errors, then confirm valid alignment and perform a fresh EventLoad before arming. An old Ready publication cannot be reused.
 
 ## Overview
 

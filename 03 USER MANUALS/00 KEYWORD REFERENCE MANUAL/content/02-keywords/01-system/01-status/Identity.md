@@ -130,6 +130,8 @@ numbering must refuse such builds before writing settings. Firmware version
 and a FricMethod maximum of 5 cannot distinguish the two numberings.
 Existing parameter files retain their numeric method and are not migrated.
 
+Bit `0x200` of `Identity[62]` advertises the verified hardware event-table public API ([EventLoad](../../18-event-generation/EventLoad.md), EventAbort, EventAckErr, EventStatus and EventError). It is distinct from friction-numbering bit `0x100`. The connected remote must independently report a compatible engine and capacity before loading or arming. This API bit does not certify product fit, timing, or the physical 500 kHz–1 MHz envelope. Hosts must refresh missing keyword metadata when this capability appears, including with an existing controller-type/firmware-version cache key; reconnect invalidates cached readiness.
+
 ## Examples
 
 ```text
