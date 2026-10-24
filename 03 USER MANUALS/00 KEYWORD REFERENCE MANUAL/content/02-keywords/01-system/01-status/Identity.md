@@ -27,7 +27,7 @@ attributes:
 overrides:
   central-i.v5:
     array_size: 76
-last_updated: '2026-10-09'
+last_updated: '2026-10-25'
 doc_revision: '2026.10'
 ---
 # Identity
@@ -119,6 +119,16 @@ Additional internal type codes exist for non-standard products; the codes above 
 `Identity[25]` and `Identity[62]` are bitfields in which each bit advertises support for a specific firmware capability. Host software tests these bits to decide which features are available, rather than inferring capability from the firmware version number. Word 1 (`Identity[25]`) carries the bulk of the flags — for example learn-commutation, additional CNC segment features, vector motion mode, true-jerk CNC, smooth auto-phase, dynamic (indirect) array indexing, and Halls-only commutation. Word 2 (`Identity[62]`) carries newer flags as word 1 fills up. For example, bit `0x40` of word 2 is set when the firmware supports [push events](../06-push-events/00-overview.md).
 
 To test a capability, mask the word with the bit for that feature; a non-zero result means the feature is present. Because the bit assignments grow with each release, treat any bit that the running firmware does not set as "not supported".
+
+
+Bit `0x100` of `Identity[62]` explicitly identifies the Stribeck-first friction
+numbering: `FricMethod=1` selects Stribeck (2 linear, 3 hysteresis, 4 play,
+5 LuGre, 0 off). A clear bit does not prove the old numbering; it means this
+contract is not advertised. Some earlier development builds already use the
+new numbering but do not advertise the bit. Hosts requiring Stribeck-first
+numbering must refuse such builds before writing settings. Firmware version
+and a FricMethod maximum of 5 cannot distinguish the two numberings.
+Existing parameter files retain their numeric method and are not migrated.
 
 ## Examples
 
