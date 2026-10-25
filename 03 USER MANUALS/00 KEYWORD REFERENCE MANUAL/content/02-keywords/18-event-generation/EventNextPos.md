@@ -32,11 +32,11 @@ doc_revision: '2026.10'
 
 Read-only position at which the next event pulse will be generated.
 
-## Verified hardware table (EventType=3)
+## Verified hardware table (EventType=3 with an EventLoad session)
 
 Uses the next target from the **immutable original controller-coordinate snapshot** captured by EventLoad, including when EventTableSrc selects EventTableCor. It is not reconstructed by adding a main-encoder offset to a remote counter. It clears on accepted load; completion/abort retain the last value until a new load. Use EventStatus remaining/session/freshness to decide whether it is currently meaningful.
 
-The remaining legacy behavior below applies to other event modes.
+The remaining legacy behavior below also applies to EventType=3 when no verified-table session owns the axis. The verified-table capability gates EventLoad, not legacy hardware-table arming.
 
 ## Overview
 

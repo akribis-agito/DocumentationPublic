@@ -32,11 +32,15 @@ doc_revision: '2026.10'
 
 Arms event generation; loads the first compare position and is mutually exclusive with Lock.
 
-## Verified hardware table (EventType=3)
+## Verified hardware table (EventType=3 with an EventLoad session)
 
-Requires a current remotely verified Ready session prepared with [EventLoad](EventLoad.md). Writing 1 requests ARM only; it never loads, relearns alignment or falls back to software. A settings callback does not arm. EventOn remains 0 while ARM is pending and becomes 1 only after fresh matching Armed/Running confirmation; a refusal returns error 151 with [EventError](EventError.md) context. Writing 0 requests [EventAbort](EventAbort.md); it does not itself prove remote cleanup. Repeating an enable while arm/run owns the engine is refused rather than restarting it. Complete requires all targets and the final pulse tail. Configuration/origin changes invalidate the captured session and require recovery and a new load; the legacy coordinate-preservation description below does not apply to this mode. EventCntr clears on accepted load, not on an implicit table upload at arm.
+When a verified-table session owns the axis, arming requires a current remotely verified Ready session prepared with [EventLoad](EventLoad.md). Writing 1 requests ARM only; it never loads, relearns alignment or falls back to software. A settings callback does not arm. EventOn remains 0 while ARM is pending and becomes 1 only after fresh matching Armed/Running confirmation; a refusal returns error 151 with [EventError](EventError.md) context. Writing 0 requests [EventAbort](EventAbort.md); it does not itself prove remote cleanup. Repeating an enable while arm/run owns the engine is refused rather than restarting it. Complete requires all targets and the final pulse tail. Configuration/origin changes invalidate the captured session and require recovery and a new load; the legacy coordinate-preservation description below does not apply to this mode. EventCntr clears on accepted load, not on an implicit table upload at arm.
 
-The remaining legacy behavior below applies to other event modes.
+The remaining legacy behavior below also applies to EventType=3 when no verified-table session owns the axis. The verified-table capability gates EventLoad, not legacy hardware-table arming.
+
+## Legacy hardware-table arming
+
+When no verified-table session owns the axis, EventType=3 with EventOn=1 uses the legacy hardware-table path described below. With an incremental encoder or enabled hardware SinCos source, it streams the selected table at arm time; other source configurations retain their existing legacy behavior. This path remains available when the verified-table capability is absent. It does not acquire verified-session status or integrity guarantees. A session in transfer, recovery or error still owns the axis; it cannot silently switch to the legacy path.
 
 ## Overview
 

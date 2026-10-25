@@ -44,7 +44,7 @@ doc_revision: '2026.10'
 | 0 | **单次事件** — 当反馈位置到达 [EventBegPos](EventBegPos.md) 时产生一个脉冲，随后停止生成并将 [EventOn](EventOn.md) 返回至 `0`。 |
 | 1 | **按间距生成事件** — 在 [EventBegPos](EventBegPos.md) 处产生第一个脉冲；此后每经过 [EventGap](EventGap.md) 设定的距离产生一个脉冲。位置超过 [EventEndPos](EventEndPos.md) 后脉冲停止（除非 [EventAlwaysOn](EventAlwaysOn.md) 强制持续运行）。 |
 | 2 | **按表生成事件** — 使用一组比较位置表，范围由 [EventTableBeg](EventTableBeg.md)（起始索引）和 [EventTableEnd](EventTableEnd.md)（结束索引）限定。控制器依次加载每个位置，并为每次事件从 [EventTableSel](EventTableSel.md) 重新加载 [EventSelect](EventSelect.md)，使每个位置可在选定的输出线上触发。比较位置来自 [EventTable](EventTable.md)，或在选定时来自已校正表 [EventTableCor](EventTableCor.md)。 |
-| 3 | **已验证硬件事件表** — 显式 [EventLoad](EventLoad.zh.md) 1–2048 项并验证实际 RAM；仅 Ready 可由 EventOn 使能。需要能力支持，仅有限运行，不运行时补表。 |
+| 3 | **硬件事件表** — 没有已验证表会话时，EventOn 使用传统硬件表，即使没有已验证表能力也可用。由 EventLoad 会话占用时，须显式预加载 1–2048 项并验证实际 RAM；EventOn 随后仅在 Ready 时请求 ARM，不在运行中补表。EventLoad 要求主控制器和远程设备均具备相容能力。 |
 | 4 | **立即触发** — 设置 [EventOn](EventOn.md) 时立即触发单个脉冲，无需等待位置穿越。用于按需断言事件输出（例如测试下游接线）。 |
 
 按间距方案在窗口范围内产生规律的脉冲序列：

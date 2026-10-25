@@ -32,11 +32,11 @@ doc_revision: '2026.10'
 
 Counts events generated since the last EventOn; resettable by the user.
 
-## Verified hardware table (EventType=3)
+## Verified hardware table (EventType=3 with an EventLoad session)
 
 Reports **retired targets**, not measured electrical pulses or edges, from the current coherent remote snapshot. A zero-width or output-mask-zero record can retire without an edge; toggle records have different edge/cycle counts. Accepted EventLoad clears the count; completion/abort retain terminal counts until a new accepted load. Use EventStatus for full session/freshness/completion checks. Writes are blocked while the table lease owns this state; writing the counter is not a remote engine reset. The legacy pulse-count description below does not apply to this mode.
 
-The remaining legacy behavior below applies to other event modes.
+The remaining legacy behavior below also applies to EventType=3 when no verified-table session owns the axis. The verified-table capability gates EventLoad, not legacy hardware-table arming.
 
 ## Overview
 
