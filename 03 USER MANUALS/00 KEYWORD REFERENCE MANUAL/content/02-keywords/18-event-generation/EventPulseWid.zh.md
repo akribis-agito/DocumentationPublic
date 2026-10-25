@@ -25,13 +25,19 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-25'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # EventPulseWid
 
 事件输出脉冲的持续时间，单位为微秒。
+
+## 已验证硬件事件表（EventType=3，且由 EventLoad 会话占用）
+
+使用远程宣告的 CLOCK_HZ 和有检查的 64 位运算换算脉宽。最近舍入的计数可装入 18 位时选择 2 时钟量子，否则选择 512 时钟；恰好半量子向上舍入。溢出或正脉宽量化为零时拒绝，不静默限幅。在 100 MHz 下量子为 20 ns 和 5.12 μs。实现宽度为 count×quantum/CLOCK_HZ，此运算不代表电气精度已验证。脉宽与恢复时间须适应目标间隔，过早目标会故障停止而不延迟补发。EventLoad 固定会话极性、模式和全部所选脉宽，更改后须重新加载。翻转模式 Complete 可保持最终电平直至显式 EventAbort。
+
+下文的传统行为也适用于没有已验证表会话占用轴时的 EventType=3。已验证表能力仅限制 EventLoad，不限制传统硬件表使能。
 
 ## 概述
 

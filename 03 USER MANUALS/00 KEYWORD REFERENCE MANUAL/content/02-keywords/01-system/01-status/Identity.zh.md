@@ -129,6 +129,8 @@ language: zh-CN
 之前拒绝这些固件。固件版本号以及 FricMethod 最大值为 5 都无法区分两种编号。
 已有参数文件保留其原始方法数值，不会自动迁移。
 
+`Identity[62]` 的 `0x200` 位宣告已验证硬件事件表公开 API（[EventLoad](../../18-event-generation/EventLoad.zh.md)、EventAbort、EventAckErr、EventStatus 和 EventError），与摩擦编号位 `0x100` 不同。加载或使能前，连接的远程设备还须独立报告兼容引擎和容量。此 API 位不证明产品资源、时序或 500 kHz–1 MHz 物理指标已验证。即使控制器类型和固件版本缓存键相同，此能力出现时主机也须刷新缺失的关键字元数据；重连必须清除缓存的 Ready。
+
 ## 示例
 
 ```text

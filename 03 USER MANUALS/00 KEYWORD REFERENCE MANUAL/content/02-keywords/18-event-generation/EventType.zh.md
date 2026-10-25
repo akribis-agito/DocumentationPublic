@@ -26,8 +26,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-25'
+doc_revision: '2026.10'
 ---
 # EventType
 
@@ -44,7 +44,7 @@ doc_revision: '2026.06'
 | 0 | **单次事件** — 当反馈位置到达 [EventBegPos](EventBegPos.md) 时产生一个脉冲，随后停止生成并将 [EventOn](EventOn.md) 返回至 `0`。 |
 | 1 | **按间距生成事件** — 在 [EventBegPos](EventBegPos.md) 处产生第一个脉冲；此后每经过 [EventGap](EventGap.md) 设定的距离产生一个脉冲。位置超过 [EventEndPos](EventEndPos.md) 后脉冲停止（除非 [EventAlwaysOn](EventAlwaysOn.md) 强制持续运行）。 |
 | 2 | **按表生成事件** — 使用一组比较位置表，范围由 [EventTableBeg](EventTableBeg.md)（起始索引）和 [EventTableEnd](EventTableEnd.md)（结束索引）限定。控制器依次加载每个位置，并为每次事件从 [EventTableSel](EventTableSel.md) 重新加载 [EventSelect](EventSelect.md)，使每个位置可在选定的输出线上触发。比较位置来自 [EventTable](EventTable.md)，或在选定时来自已校正表 [EventTableCor](EventTableCor.md)。 |
-| 3 | **按表生成事件（硬件缓冲）** — 与模式 2 的表驱动方案相同，但在使能时将完整的比较位置列表预加载至比较硬件的缓冲区（FIFO），而非逐条重新加载。由于硬件无需按事件处理即可推进缓冲位置，该模式支持比模式 2 更高的事件速率。仅在比较硬件支持的情况下可用。 |
+| 3 | **硬件事件表** — 没有已验证表会话时，EventOn 使用传统硬件表，即使没有已验证表能力也可用。由 EventLoad 会话占用时，须显式预加载 1–2048 项并验证实际 RAM；EventOn 随后仅在 Ready 时请求 ARM，不在运行中补表。EventLoad 要求主控制器和远程设备均具备相容能力。 |
 | 4 | **立即触发** — 设置 [EventOn](EventOn.md) 时立即触发单个脉冲，无需等待位置穿越。用于按需断言事件输出（例如测试下游接线）。 |
 
 按间距方案在窗口范围内产生规律的脉冲序列：
@@ -54,6 +54,10 @@ doc_revision: '2026.06'
 ### 硬件行为
 
 比较匹配采用边沿检测：每次反馈位置穿越比较位置时仅产生一次输出动作，因此轴必须离开比较位置并重新到达，该位置才能再次触发。当 [EventPulseWid](EventPulseWid.md) 选择切换模式时，输出在每次事件时翻转状态并保持直至下一次事件（不按脉冲重新使能）；当生成被撤销使能时（即到达结束位置或计数，或单元复位后），输出返回空闲电平。
+
+选择模式 3 前，必须先解除正在运行或准备中的传统事件任务；该任务仍活动时，模式切换被拒绝并返回错误 151。其他传统模式之间的切换行为保持不变。
+
+已验证模式 3 的严格单方向目标、源偏移、捕获代次和逐项设置遵循 [EventLoad](EventLoad.zh.md)。翻转完成可保持最终输出电平，显式 Abort 才返回配置的非活动电平。比较器或 API 能力本身不能证明 500 kHz–1 MHz 的现场要求已达成。
 
 ## 示例
 

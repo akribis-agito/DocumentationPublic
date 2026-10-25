@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-25'
+doc_revision: '2026.10'
 ---
 # EventType
 
@@ -43,7 +43,7 @@ Events are pulses on a designated output generated when the actual feedback posi
 | 0 | **Single event** — one pulse is generated when the feedback position reaches [EventBegPos](EventBegPos.md), then generation stops and [EventOn](EventOn.md) returns to `0`. |
 | 1 | **Event by gap** — a first pulse is generated at [EventBegPos](EventBegPos.md); a further pulse is generated each time the distance set by [EventGap](EventGap.md) is passed. Pulses stop once the position passes [EventEndPos](EventEndPos.md) (unless [EventAlwaysOn](EventAlwaysOn.md) forces continuous operation). |
 | 2 | **Events by table** — a table of compare positions is used, bounded by [EventTableBeg](EventTableBeg.md) (start index) and [EventTableEnd](EventTableEnd.md) (end index). The controller loads each position in turn and reloads [EventSelect](EventSelect.md) from [EventTableSel](EventTableSel.md) for every event, so each position can fire on a chosen output line. Compare positions are taken from [EventTable](EventTable.md), or from the corrected table [EventTableCor](EventTableCor.md) when so selected. |
-| 3 | **Events by table (hardware-buffered)** — same table-driven scheme as mode 2, but the full list of compare positions is pre-loaded into the compare hardware's buffer (FIFO) at arming rather than reloaded one at a time. This supports higher event rates than mode 2 because the hardware advances through the buffered positions without per-event servicing. Available where the compare hardware supports it. |
+| 3 | **Hardware table** — without a verified-table session, EventOn uses the legacy hardware table, including when the verified-table capability is absent. With an EventLoad session, explicitly preload 1–2048 records and verify stored RAM; EventOn then requires Ready and requests ARM only, with no runtime refill. EventLoad requires compatible master and remote capabilities. |
 | 4 | **Trigger now** — fires a single pulse immediately when [EventOn](EventOn.md) is set, without waiting for a position crossing. Use it to assert the event output on demand (for example, to test downstream wiring). |
 
 The by-gap scheme produces a regular pulse train across the window:
@@ -53,6 +53,10 @@ The by-gap scheme produces a regular pulse train across the window:
 ### Hardware behavior
 
 A compare match is edge-detected: exactly one output action is produced each time the feedback position crosses a compare position, so the axis must move away from a compare position and re-reach it before that position can fire again. When [EventPulseWid](EventPulseWid.md) selects toggle mode, the output flips state on each event and holds that state until the next event (it is not re-armed per pulse); it returns to the idle level when generation is disarmed — that is, once the end position or count is reached, or the unit is reset.
+
+Disarm an active or preparing legacy event job before selecting mode 3; the transition is refused with error 151 while that job remains active. Changes between the other legacy modes retain their existing behavior.
+
+In verified mode 3, strict one-direction targets, source alignment, captured generations and per-entry settings follow [EventLoad](EventLoad.md). Toggle completion can retain the final output level; explicit Abort returns the configured inactive level. A comparator or API capability alone does not establish the 500 kHz–1 MHz field requirement.
 
 ## Examples
 

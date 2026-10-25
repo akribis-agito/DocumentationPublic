@@ -25,12 +25,18 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-28'
-doc_revision: '2026.06'
+last_updated: '2026-10-25'
+doc_revision: '2026.10'
 ---
 # EventSelect
 
 Selects which output line of a multi-event output group the current event pulse drives.
+
+## Verified hardware table (EventType=3 with an EventLoad session)
+
+Per-entry EventTableSel masks are frozen into the private verified records at EventLoad; this keyword is not rewritten from the remote on every target. Reading EventSelect therefore does not identify the most recent hardware-table output. Configure the records before loading; conflicting configuration writes are refused while owned, and changes invalidate Ready.
+
+The remaining legacy behavior below also applies to EventType=3 when no verified-table session owns the axis. The verified-table capability gates EventLoad, not legacy hardware-table arming.
 
 ## Overview
 

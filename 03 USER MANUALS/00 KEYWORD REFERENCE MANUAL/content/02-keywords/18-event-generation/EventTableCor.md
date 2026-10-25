@@ -25,12 +25,18 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-28'
-doc_revision: '2026.06'
+last_updated: '2026-10-25'
+doc_revision: '2026.10'
 ---
 # EventTableCor
 
 Read-only array of corrected event positions produced by EventCorrect.
+
+## Verified hardware table (EventType=3 with an EventLoad session)
+
+[EventLoad](EventLoad.md) captures the inclusive selected range before arming: N=EventTableEnd−EventTableBeg+1 must be 1..2048. Invalid ranges are refused rather than truncated or treated as a single event. The larger controller-side array remains available, but only the selected range enters one hardware session. Strict ordering in one direction is required in both original and corrected remote coordinates; no duplicates, reversals or signed-counter rollover. Configure before loading. Changes invalidate Ready; conflicting writes while transfer/arm/run owns the session are refused. EventOn=1 does not reread or upload the live table.
+
+The remaining legacy behavior below also applies to EventType=3 when no verified-table session owns the axis. The verified-table capability gates EventLoad, not legacy hardware-table arming.
 
 ## Overview
 

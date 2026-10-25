@@ -26,12 +26,18 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-28'
-doc_revision: '2026.06'
+last_updated: '2026-10-25'
+doc_revision: '2026.10'
 ---
 # EventTableSel
 
 按条目选择数组，控制每个事件表条目的输出特性。
+
+## 已验证硬件事件表（EventType=3，且由 EventLoad 会话占用）
+
+三位掩码 0..7 与每项位置和脉宽一起原子捕获。掩码 0 可无输出边沿退出。不会在上一脉冲中途应用新设置。如果下个目标到达时所需脉冲或恢复尚未完成，引擎保留原始行并故障停止，不排队补发迟到脉冲。公开的 EventSelect 不逐事件更新；应查看保留的源表和 EventStatus。
+
+下文的传统行为也适用于没有已验证表会话占用轴时的 EventType=3。已验证表能力仅限制 EventLoad，不限制传统硬件表使能。
 
 ## 概述
 

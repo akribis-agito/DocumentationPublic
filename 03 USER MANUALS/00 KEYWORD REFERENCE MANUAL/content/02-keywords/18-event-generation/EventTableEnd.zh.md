@@ -26,12 +26,18 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-28'
-doc_revision: '2026.06'
+last_updated: '2026-10-25'
+doc_revision: '2026.10'
 ---
 # EventTableEnd
 
 事件表中活动区域的结束索引。
+
+## 已验证硬件事件表（EventType=3，且由 EventLoad 会话占用）
+
+[EventLoad](EventLoad.zh.md) 在使能前捕获包含两端的所选范围：N=EventTableEnd−EventTableBeg+1 须为 1..2048。无效范围被拒绝，不会截断或作为单次事件运行。控制器侧大数组保留，但一次硬件会话只使用所选范围。原始坐标和修正后的远程坐标均须按同一方向严格排序，不允许重复、反向或有符号计数器回绕。应先配置再加载；更改使 Ready 失效，传输、使能或运行占用会话时拒绝冲突写入。EventOn=1 不会重新读取或上传实时表。
+
+下文的传统行为也适用于没有已验证表会话占用轴时的 EventType=3。已验证表能力仅限制 EventLoad，不限制传统硬件表使能。
 
 ## 概述
 

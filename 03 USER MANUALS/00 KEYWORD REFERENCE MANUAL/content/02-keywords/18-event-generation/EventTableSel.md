@@ -25,12 +25,18 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-28'
-doc_revision: '2026.06'
+last_updated: '2026-10-25'
+doc_revision: '2026.10'
 ---
 # EventTableSel
 
 Per-entry selection array controlling each event table entry's characteristics.
+
+## Verified hardware table (EventType=3 with an EventLoad session)
+
+The three-bit mask 0..7 is captured atomically with each position/width record. Mask 0 retires without a selected output edge. No setting is applied halfway through an earlier pulse. If the next target arrives before required pulse/recovery completion, the engine faults with the original row; it does not queue a late catch-up pulse. The published EventSelect keyword is not updated per event; inspect the retained source table and EventStatus.
+
+The remaining legacy behavior below also applies to EventType=3 when no verified-table session owns the axis. The verified-table capability gates EventLoad, not legacy hardware-table arming.
 
 ## Overview
 

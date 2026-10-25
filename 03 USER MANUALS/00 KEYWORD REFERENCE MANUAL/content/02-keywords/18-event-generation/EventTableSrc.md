@@ -25,12 +25,18 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-28'
-doc_revision: '2026.06'
+last_updated: '2026-10-25'
+doc_revision: '2026.10'
 ---
 # EventTableSrc
 
 Selects the position source used to evaluate event table triggers.
+
+## Verified hardware table (EventType=3 with an EventLoad session)
+
+Select 0 for EventTable or 1 for EventTableCor **before EventLoad**. Both original table targets and the corrected selected targets must remain strictly ordered in the same direction after checked coordinate conversion. EventNextPos continues to report the original retained controller frame. Changing this selector invalidates Ready and is refused while the session owns configuration. This selector chooses table values, not the encoder/capture source; configure and initialize that source separately.
+
+The remaining legacy behavior below also applies to EventType=3 when no verified-table session owns the axis. The verified-table capability gates EventLoad, not legacy hardware-table arming.
 
 ## Overview
 
