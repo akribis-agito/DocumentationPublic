@@ -25,7 +25,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
+last_updated: '2026-10-27'
 doc_revision: '2026.06'
 ---
 # EventOn
@@ -36,13 +36,15 @@ Arms event generation; loads the first compare position and is mutually exclusiv
 
 `EventOn = 1` arms the position-compare engine: the controller loads the first compare position (according to [EventType](EventType.md)) and starts watching the feedback position so an output pulse is fired each time a configured compare position is crossed. It should be set while the axis is at a position before the first requested event (smaller than [EventBegPos](EventBegPos.md) when moving in the positive direction) to prevent unexpected behavior.
 
-Arming is a `0 → 1` edge: writing `EventOn = 1` while it is already `1` does not restart the sequence. The finite by-gap validation below still runs on that write; if it fails, the command returns error 14 and preserves the current `EventOn` value. Disarm before changing the window or gap. The `0 → 1` transition resets [EventCntr](EventCntr.md) to `0` (and, on standalone products, clears the position-capture enable since the two functions share the same pin).
+Arming is a `0 → 1` edge: writing `EventOn = 1` while it is already `1` does not restart the sequence. The finite by-gap and legacy hardware-table validations below still run on that write; if it fails, the command returns error 14 and preserves the current `EventOn` value. Disarm before changing the window or gap. The `0 → 1` transition resets [EventCntr](EventCntr.md) to `0` (and, on standalone products, clears the position-capture enable since the two functions share the same pin).
 
 ## How it works
 
 ### Arming (0 → 1)
 
 For a finite by-gap sequence (`EventType = 1`, `EventAlwaysOn = 0`), `EventGap` must be nonzero and advance from `EventBegPos` toward `EventEndPos`: positive for an increasing window, negative for a decreasing window. A zero gap or a gap pointing away from the end causes `EventOn = 1` to be refused with error **14**; a disarmed sequence stays disarmed and its configured positions and gap remain available for correction. For example, begin `20000` and end `200` require a negative gap such as `-100`; `+100` is refused. This check does not change single-event, table-event or endless-mode arming.
+
+On Central-i, a legacy hardware-table arm (`EventType = 3`, with no verified-table session owning the axis) preloads the full window when the encoder is incremental or `EncSinCosHWEn` bits 0–1 select a hardware counter. That window must contain at most **1024 rows**, counted as `EventTableEnd - EventTableBeg + 1`, for either `EventTableSrc` (raw or corrected). `EventOn = 1` is refused with error **14** above this limit, before storing the enable or sending remote table/control writes; a disarmed axis stays disarmed and its table configuration is preserved. Writing `EventOn = 0` remains allowed. The limit does not apply to the nonincremental/no-hardware-counter path that loads only the first row, or to standalone products. An axis owned by the verified-table service retains its separate **2048-record** admission and Ready-only arming rules.
 
 When `EventOn` transitions from `0` to `1` the controller:
 
