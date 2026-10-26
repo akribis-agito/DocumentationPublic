@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-17'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # OfflineBLog
@@ -41,7 +41,13 @@ language: zh-CN
 - 后台离线流量，以及
 - 连接/事件状态机（“特殊”离线处理，例如在 [CIConnect](CIConnect.md) 与事件处理期间）。
 
-每条已记录消息的 [Sender](#sender-字段取值) 字段标识其中哪一个发起了该消息，因此上位机可以查看发送了什么以及远端返回了什么。配套数组 [OfflineALog](OfflineALog.md)（离线邮箱 1）已预留，但当前未被填充。
+每条已记录消息的 [Sender](#sender-字段取值) 字段标识其中哪一个发起了该消息，因此上位机可以查看发送了什么以及远端返回了什么。配套数组 [OfflineALog](OfflineALog.md)（离线邮箱 1）在启用队列的 AGM800 和 AGM800-EC 固件中记录优先级锁存/事件事务。
+
+## AGM800 与 AGM800-EC 的队列日志
+
+使用信箱 2 队列时，前台统一管理者在已接受的事务获得最终结果后，一次写入完整记录。超时与取消也会被记录，因此日志项不一定表示请求已实际发送到链路。即使多个来源同时排队，各项仍保留其原始发送方与端口。
+
+数组仍是各端口共用的五项环形日志。时间与采样计数器记录最终完成时刻，而不是提交时刻。成功时确认/错误字段为零；若存在远程错误字则保留该字，否则记录本地通信错误 `151`。内部队列 API 还保留更具体的最终状态。入队前被拒绝的请求不占用事务日志项。
 
 ## 工作原理
 
@@ -55,8 +61,8 @@ language: zh-CN
 | +4 | Value out | 发送的值（针对赋值） |
 | +5 | Value in | 返回的值（针对查询） |
 | +6 | Acknowledge / error | `0` = 正常，否则为远端的错误码 |
-| +7 | Time | 发送消息时的控制器时间（参见 [Time](../03-timing/Time.md)） |
-| +8 | Sample counter | 发送时的采样计数器 |
+| +7 | Time | 启用队列的 AGM800/EC 为完成时的控制器时间；旧固件为发送时刻（参见 [Time](../03-timing/Time.md)） |
+| +8 | Sample counter | 启用队列的 AGM800/EC 为完成时的采样计数器；旧固件为发送时刻 |
 | +9 | Port | 消息所发往的轴/端口号 |
 
 消息槽 *k*（k = 0…4）占用元素 `[9k+1]` … `[9k+9]`。
@@ -67,16 +73,15 @@ language: zh-CN
 
 | 取值 | 含义 |
 |-------|---------|
+| 1 | 来自中断的 CNC/事件清理（启用队列的 AGM800 和 AGM800-EC） |
 | 2 | 主机函数 —— 用户程序调用 [CIOfflineSend](CIOfflineSend.md) |
 | 3 | 后台离线流量 |
 | 4 | 连接/事件状态机（“特殊”离线处理） |
 
-取值 `1`（中断）已预留，当前不会发出。
-
 ## 示例
 
 ```text
-AOfflineBLog[1]     ; sender of the first logged message (2 = CIOfflineSend, 3 = background, 4 = special)
+AOfflineBLog[1]     ; sender of the first logged message (1 = interrupt, 2 = CIOfflineSend, 3 = background, 4 = special)
 AOfflineBLog[3]     ; opcode of the first logged message
 AOfflineBLog[5]     ; value returned by the remote for that message
 AOfflineBLog[6]     ; its acknowledge/error code (0 = ok)
@@ -84,6 +89,6 @@ AOfflineBLog[6]     ; its acknowledge/error code (0 = ok)
 
 ## 另请参阅
 
-- [OfflineALog](OfflineALog.md) —— 离线邮箱 1 日志（已预留；当前未被填充）
+- [OfflineALog](OfflineALog.md) —— 离线邮箱 1 日志（优先级事务）
 - [CIOfflineSend](CIOfflineSend.md) —— 在此处记录其事务的来源之一
 - [CIOfflineData](CIOfflineData.md) —— 每个事务的请求/响应缓冲区

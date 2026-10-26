@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-17'
+doc_revision: '2026.10'
 ---
 # MotorType
 
@@ -45,6 +45,8 @@ Defines the type of motor connected to the axis, governing how currents and volt
 > The frontmatter range is 0–7. Value 8 (closed-loop stepper, brushless) is reserved for internal use (the firmware marks it "not supported yet") and is documented here for completeness only.
 
 ## How it works
+
+On AGM800 and AGM800-EC, `MotorType` configures the controller’s motor class and commutation state. It does not program a motor-type register in the remote amplifier.
 
 Internally, `MotorType` collapses to one of three **motor-class flags** that the real-time control loop tests on every cycle (so it does not have to re-check the specific type): *brush* (covers DC brush, voice coil, and simulation), *brushless* (linear, rotary, and the reserved brushless-stepper), and *stepper* (open- and closed-loop). The class flag selects which current/voltage-generation path runs in the control loop, and it also sets the commutation requirement: brushless types are marked "commutation required" (the [StatReg](../07-status-and-faults/StatReg.md) commutation bit is cleared until auto-phasing completes), while brush and stepper types are marked "commutation done / not needed" immediately.
 

@@ -25,8 +25,8 @@ attributes:
 overrides: {}
 removed_in:
 - v5
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-16'
+doc_revision: '2026.10'
 ---
 # CIOfflineSend
 
@@ -36,7 +36,19 @@ Command that transmits the Central-i offline data package on the selected axis p
 
 `CIOfflineSend` performs a single Central-i **offline** transaction on the selected axis port: it sends the addressed mailbox message built from [CIOfflineData](CIOfflineData.md) to the connected remote unit, waits for the reply, and writes the result back into [CIOfflineData](CIOfflineData.md). It is the way the host reads or writes one register inside a remote unit directly, outside the cyclic synchronous data exchange. It is a function keyword (no value).
 
-## How it works
+## AGM800 and AGM800-EC with the mailbox queue
+
+This section applies to firmware containing the mailbox-2 queue. Earlier firmware follows the legacy behavior below. The command remains synchronous: it returns after its own request completes or fails.
+
+- The port must be connected. An inactive port is rejected with error `159`; no request is sent.
+- The firmware copies the request into a bounded per-port FIFO shared with internal mailbox-2 users. A full queue is rejected with communication error `151`; accepted requests keep their order.
+- A successful query updates `CIOfflineData[4]`. A failed query leaves that value unchanged. Check the command reply and `CIOfflineData[5]`: zero means success; a nonzero value is a remote rejection or local firmware error.
+- A timeout, CRC fault or malformed reply stops further offline sends on that port. Later commands fail with `151`, rather than consuming an earlier request's late reply. Use `CIDisconnect` followed by `CIConnect` to recover; the firmware drains the old mailbox before enumeration. Failed writes are never replayed automatically.
+- Accepted transactions, including terminal failures, are recorded in `OfflineBLog`. A request rejected before admission does not represent a transmitted exchange.
+
+Mailbox 1 remains the separate position-lock/event lane. Queue service runs in the foreground; motor control does not wait for the reply inside the ISR.
+
+## Legacy implementation
 
 `CIOfflineSend` uses the port's **second** offline mailbox (the host channel), leaving the first mailbox for the firmware's own background traffic. When called it:
 
@@ -58,6 +70,8 @@ ACIOfflineData[4]      ; value returned by the remote
 ```
 
 ## Edge cases
+
+The following edge cases describe firmware without the mailbox queue.
 
 - **Port disconnected.** `CIOfflineSend` does not gate on connection state, so it can be issued on a disconnected port. With no remote responding the transaction simply ends with a communication timeout: the command reports a communication error, the acknowledge field [CIOfflineData](CIOfflineData.md)`[5]` is left at `0`, and the failure is recorded in the offline error counters of [CIStatus](CIStatus.md) (`[3]`/`[5]`/`[6]`, code `5`). A remote that replies but rejects the request returns its error code in [CIOfflineData](CIOfflineData.md)`[5]` instead.
 - **Motor on / in motion.** The command is permitted while the motor is on or moving — the offline mailbox is independent of the control loop. The reply still arrives in [CIOfflineData](CIOfflineData.md) on the same cycle window.

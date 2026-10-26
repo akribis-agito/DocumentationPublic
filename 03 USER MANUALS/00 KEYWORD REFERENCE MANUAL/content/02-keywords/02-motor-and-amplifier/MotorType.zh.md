@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-17'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # MotorType
@@ -46,6 +46,8 @@ language: zh-CN
 > 前置数据范围为 0–7。值 8（闭环步进、无刷）保留供内部使用（固件将其标记为"not supported yet"），此处记录仅为完整性考虑。
 
 ## 工作原理
+
+在 AGM800 和 AGM800-EC 上，`MotorType` 配置控制器的电机类别和换相状态，不会设置远端放大器中的电机类型寄存器。
 
 在内部，`MotorType` 归并为实时控制环每个周期都会测试的三个**电机类别标志**之一（因此无需重新检查具体类型）：*brush*（涵盖直流有刷、音圈和仿真）、*brushless*（直线、旋转和保留的无刷步进）以及 *stepper*（开环和闭环）。类别标志选择控制环中运行哪条电流/电压生成路径，并设置换相要求：无刷类型被标记为"需要换相"（[StatReg](../07-status-and-faults/StatReg.md) 换相位在自动定相完成前被清除），而有刷和步进类型则立即被标记为"换相完成/不需要换相"。
 

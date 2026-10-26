@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-28'
-doc_revision: '2026.06'
+last_updated: '2026-10-16'
+doc_revision: '2026.10'
 ---
 # CIOfflineData
 
@@ -35,6 +35,12 @@ Per-axis array holding the payload sent during a Central-i offline (simulation) 
 ## Overview
 
 `CIOfflineData` is the per-axis request/response buffer for a single Central-i **offline** transaction — a non-cyclic "mailbox" read or write to one register inside the connected remote unit. Unlike the synchronous channel (which exchanges control data every cycle), the offline channel carries occasional, addressed messages: query the value of a remote register, or assign a value to it. You set up the buffer, call [CIOfflineSend](CIOfflineSend.md), and then read the reply back from the same array. It is saved to flash. Index `[0]` is unused; the fields are `[1]`–`[5]`.
+
+## AGM800 and AGM800-EC queue results
+
+With the mailbox-2 queue implementation, fields `[1]`–`[3]` are copied when `CIOfflineSend` submits the request. The queue owns that snapshot until completion. Field `[4]` changes only after a successful query; it must not be treated as a fresh reading when the command fails.
+
+Field `[5]` is zero on success. Otherwise it contains the remote's error word when available, or a local firmware error such as `151` (communication/queue failure) or `159` (inactive port). After an uncertain exchange, subsequent sends are refused until `CIDisconnect` and `CIConnect` recover the port. These rules apply to queue-enabled AGM800/AGM800-EC firmware; earlier firmware can leave `[5]` at zero on a timeout, so always check the command reply too.
 
 ## How it works
 
