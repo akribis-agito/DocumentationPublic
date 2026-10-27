@@ -29,8 +29,8 @@ overrides:
     scope: axis
   central-i.v5:
     scope: axis
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-27'
+doc_revision: '2026.10'
 language: zh-CN
 ---
 # DOutSelect
@@ -53,8 +53,8 @@ language: zh-CN
 | 7 | B event #3 | Aux. event #3（未实现） |
 | 8 | C event #1 | Pulse（P/D 控制） |
 | 9 | C event #2 | Direction（P/D 控制） |
-| 10 | C event #3 | 保留 |
-| 11 | UserPWM 1 | 保留 |
+| 10 | C event #3 | 主编码器原始索引（需能力支持） |
+| 11 | UserPWM 1 | 辅助编码器原始索引（需能力支持） |
 | 12 | UserPWM 2 | UserPWM 1 |
 | 13 | 保留 | UserPWM 2 |
 | 14 | 保留 | 保留 |
@@ -91,3 +91,13 @@ ADOutSelect[4]=2     ; output 4 = Main Event #1 (Central-i) / A event #1 (standa
 - [DOutMode](DOutMode.md)——软件功能（当 DOutSelect = 0 时）
 - [DOutPort](DOutPort.md)——手动输出状态
 - [UserPWM](UserPWM.md)——用户 PWM 通道
+
+## Central-i 原始索引输出
+
+在 AGM800 和 AGM800-EC 上，选择器 10/11 分别要求已连接远端在 `CIIdentity[27]`（FEATURES 字 3）的位 13/14 声明支持，且快照经过有效性和一致性检查。不能将没有该声明的旧 FPGA/固件视为支持。本路由仅适用于快速差分或双向差分输出；使用双向引脚时须通过 BiDirConfig 选择输出方向。隔离输出不提供此路由。
+
+该信号跟随物理增量编码器 Z 接收器；选择主 SinCos/NQC 模式时使用其 Z 接收器。AGFB 增量反馈使用参考标记接收器。辅助路由使用其物理增量 Z 接收器。其他编码器模式或构建中不存在的信号源输出低电平。电缆断开时输出遵循接收器电气状态，本路由不判断编码器有效性。不增加编码器滤波、A/B 限定、锁存边沿检测、PEG 重新布防或脉冲展宽；上升沿和下降沿均通过，与行进方向无关。更改编码器模式或选择器可能立即改变输出，不保证无毛刺切换。极性遵循现有硬件约定，DOutLog 不反相此硬件源。脉宽和延迟保证必须基于已验证的板卡、映像、接收器和输出驱动器；数字仿真不构成物理最小脉宽规格。
+
+固件在保存直接关键字赋值之前检查能力和引脚，不支持时返回范围错误 14。包含索引选择器的已保存配置等待能力发现完成后才恢复输出多路复用器。若发现完成但不支持，则拒绝该多路复用器更新并记录错误，不会将该值静默解释为其他源。PCSuite 隐藏不支持的选项、保留选择器编号，并在应用时验证；导入和直接客户端写入也由固件检查。
+
+选择器 8/9 的脉冲/方向行为保持不变。编码器仿真属于单独交付，本索引功能不启用它。

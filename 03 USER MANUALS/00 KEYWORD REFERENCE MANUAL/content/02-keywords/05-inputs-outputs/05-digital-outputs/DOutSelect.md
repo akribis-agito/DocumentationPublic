@@ -29,8 +29,8 @@ overrides:
     scope: axis
   central-i.v5:
     scope: axis
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-27'
+doc_revision: '2026.10'
 ---
 # DOutSelect
 
@@ -52,8 +52,8 @@ Selects the hardware function (or software control) routed to each digital outpu
 | 7 | B event #3 | Aux. event #3 (not implemented) |
 | 8 | C event #1 | Pulse (P/D control) |
 | 9 | C event #2 | Direction (P/D control) |
-| 10 | C event #3 | Reserved |
-| 11 | UserPWM 1 | Reserved |
+| 10 | C event #3 | Main encoder raw index (capability required) |
+| 11 | UserPWM 1 | Auxiliary encoder raw index (capability required) |
 | 12 | UserPWM 2 | UserPWM 1 |
 | 13 | Reserved | UserPWM 2 |
 | 14 | Reserved | Reserved |
@@ -90,3 +90,13 @@ ADOutSelect[4]=2     ; output 4 = Main Event #1 (Central-i) / A event #1 (standa
 - [DOutMode](DOutMode.md) — software function (when DOutSelect = 0)
 - [DOutPort](DOutPort.md) — manual output state
 - [UserPWM](UserPWM.md) — user PWM channels
+
+## Central-i raw index outputs
+
+On AGM800 and AGM800-EC, selectors 10/11 require the connected remote capability reported in `CIIdentity[27]` (FEATURES word 3), bit 13/14 respectively, with a valid coherent snapshot. Older FPGA/firmware without that advertisement must not be treated as supporting the route. Only fast differential or bidirectional differential outputs are eligible; set [BiDirConfig](../01-general-keywords/BiDirConfig.md) to output when using a bidirectional pin. Isolated outputs do not carry these routes.
+
+The signal follows the physical incremental Z receiver, or the main SinCos/NQC Z receiver when that encoder mode is selected. AGFB incremental feedback uses its reference-mark receiver. Auxiliary routing supports its physical incremental Z receiver. Other encoder modes and absent build-time sources hold the route low. An unplugged cable follows the receiver's electrical state; this routing does not qualify encoder validity. No encoder filtering, A/B qualification, lock edge detection, PEG rearming or pulse stretching is added. Both edges pass, independently of travel direction. Selecting a different encoder mode or mux source can change the output immediately; reconfiguration is not a glitch-free switch. Output polarity uses the existing hardware convention; `DOutLog` does not invert this hardware source. Pulse-width and latency guarantees require the qualified board/image, receiver and output-driver limits; digital simulation is not a physical minimum-pulse-width specification.
+
+Firmware rejects an unsupported source or isolated-pin assignment with range error 14 before storing a direct keyword write. Saved settings that contain index selectors wait for discovery before the output mux is restored. If discovery finishes without support, the mux update is rejected and an error is logged; unsupported values are not silently reinterpreted as another source. PCSuite hides unsupported choices while preserving selector numbers and validates Apply. Imports/direct clients are also checked by firmware.
+
+Selectors 8/9 keep their pulse/direction behaviour. Encoder emulation is a separate delivery; these index selectors do not enable it.
