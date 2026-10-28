@@ -17,8 +17,8 @@ attributes:
   ok_motor_on: true
   units: none
   range:
-  - 0
-  - 31
+  - -2147483648
+  - 2147483647
   default: 0
   scaling: 1.0
   implemented: final
