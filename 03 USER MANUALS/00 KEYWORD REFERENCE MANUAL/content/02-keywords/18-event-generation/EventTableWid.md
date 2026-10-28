@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-29'
+doc_revision: '2026.10'
 ---
 # EventTableWid
 
@@ -40,9 +40,11 @@ On implementations without `EventTblMode`, the per-entry widths are applied only
 
 For AGM800 original-engine preloads (`EventType=3` with [EventLoad](EventLoad.md)), [EventTblMode](EventTblMode.md)=0 resolves the first selected row's width once for all rows. Mode 1 resolves selected rows in order using the hardware carry-forward rule described here. Settings are committed with their positions before arming. Changing widths invalidates a prepared load and is refused during a run.
 
-The effective width must fit the existing 13-bit hardware field (0–8191 units) after the existing fine/coarse conversion. If it still does not fit, preparation fails before arm; it is not silently truncated. This restriction does not change EventType=2.
+In pulse mode, the effective width must fit the existing 13-bit hardware field (1–8191 units) after the existing fine/coarse conversion; zero encoded units are refused before arm. If it still does not fit, preparation fails before arm; it is not silently truncated. This restriction does not change EventType=2.
 
-For this hardware preload path, a first selected width of -1 is resolved through `EventPulseWid`; an effective zero selects run-wide toggle in both modes. After a nonzero first effective width, mode 1 resolves each row and carries the most recent non--1 width forward. A later zero and a subsequent -1 remain zero-width pulses.
+For this hardware preload path, a first selected width of -1 is resolved through `EventPulseWid`; an effective zero selects run-wide toggle in both modes. After a nonzero first effective width, mode 1 resolves each row and carries the most recent non--1 width forward. A later zero, or a subsequent -1 inheriting that zero, makes preparation fail in pulse mode; it does not switch the run to toggle mode. A nonzero request that quantizes to zero is also refused (for example, 1–9 ns with EventPulseRes=1).
+
+For both hardware preload modes, output polarity is fixed by the sign of the first resolved width for the whole run. With EventTblMode=1, if the first row is -1 and EventPulseWid is negative, later positive widths change pulse duration but retain inverted polarity. Mode 1 varies duration and output selection per row; it does not vary run polarity.
 
 ## How it works
 

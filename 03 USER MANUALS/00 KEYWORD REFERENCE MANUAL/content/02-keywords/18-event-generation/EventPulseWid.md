@@ -25,8 +25,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-29'
+doc_revision: '2026.10'
 ---
 # EventPulseWid
 
@@ -54,7 +54,7 @@ The output duration is produced by a hardware timer, so the width is quantized t
 
 ### AGM800 prepared hardware tables
 
-For EventLoad-managed `EventType=3`, the effective width after the existing fine/coarse conversion must fit the current 13-bit hardware field (0–8191 units). A value outside that field fails preparation before arm; the preload path does not silently truncate or apply the larger-width clamping described for other paths. Other event types retain their existing behavior.
+For EventLoad-managed `EventType=3`, the effective width after the existing fine/coarse conversion must fit the current 13-bit hardware field (1–8191 units in pulse mode). A value outside that field, including a nonzero request that rounds to zero, fails preparation before arm; the preload path does not silently truncate or apply the larger-width clamping described for other paths. An effective first width of zero selects run-wide toggle mode instead. With EventPulseRes=1, pulse requests of 1–9 ns are refused because they encode as zero; 10 ns rounds to one 20 ns unit. Other event types retain their existing behavior.
 
 
 ## Examples
