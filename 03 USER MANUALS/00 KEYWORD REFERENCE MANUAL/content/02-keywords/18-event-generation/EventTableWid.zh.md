@@ -39,11 +39,15 @@ doc_revision: '2026.06'
 
 在未提供 `EventTblMode` 的实现中，按条目宽度仅在软件事件按表方案（[EventType](EventType.md) = `2`）中应用。在硬件缓冲表方案（[EventType](EventType.md) = `3`）以及所有非表方案中，`EventTableWid` 被忽略，使用全局 [EventPulseWid](EventPulseWid.md)。
 
-对于 AGM800 原有引擎预加载（支持 [EventLoad](EventLoad.md) 的 `EventType=3`），[EventTblMode](EventTblMode.md)=0 仅解析首个所选行的宽度，并用于所有行。模式 1 对各所选行使用下述软件表首行及向后继承规则。使能前，设置与其位置一同提交。修改宽度会使已准备的数据失效，运行期间不允许修改。
+对于 AGM800 原有引擎预加载（支持 [EventLoad](EventLoad.md) 的 `EventType=3`），[EventTblMode](EventTblMode.md)=0 仅解析首个所选行的宽度，并用于所有行。模式 1 按顺序使用此处说明的硬件向后继承规则解析各所选行。使能前，设置与其位置一同提交。修改宽度会使已准备的数据失效，运行期间不允许修改。
 
 有效宽度在按原有规则选择细或粗分辨率后，必须能够装入现有 13 位硬件字段（0–8191 个单位）；若仍无法表示，准备过程会在使能前失败，不会静默截断。此限制不改变 EventType=2。
 
+对于此硬件预加载路径，首个所选宽度为 -1 时使用 `EventPulseWid` 解析；有效值为零时，两种模式均在整个运行中采用翻转模式。首个有效宽度非零时，模式 1 逐行解析，并向后继承最近的非 -1 宽度。后续零值及其后的 -1 均保持为零宽度脉冲。
+
 ## 工作原理
+
+以下软件表参考说明及示例不覆盖上文的硬件预加载规则。
 
 宽度行为首先由起始条目（位于 [EventTableBeg](EventTableBeg.md) 索引处）的值决定，该值为整个事件会话设定模式：
 

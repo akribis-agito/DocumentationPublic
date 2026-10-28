@@ -39,6 +39,8 @@ See [EventTableWid](EventTableWid.md) for begin-row global/toggle behavior and w
 
 Set this parameter before loading. It is not saved to flash and cannot change while preparing or running. Stop with `EventOn=0` before changing it, then load again. Every run preloads its selected range, with at most 2048 rows; there is no retained-window mode.
 
+For this hardware preload path, the first selected row determines run-wide toggle: literal width 0, or width -1 with `EventPulseWid=0`, toggles every event in either mode. Later widths do not switch a pulse run into toggle mode.
+
 ```text
 AEventOn=0
 AEventType=3
