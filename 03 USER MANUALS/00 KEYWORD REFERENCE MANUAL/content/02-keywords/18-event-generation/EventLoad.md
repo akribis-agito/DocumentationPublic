@@ -40,6 +40,10 @@ The converted effective pulse width must fit the original hardware's 13-bit fiel
 
 If a selected output cannot finish its pulse and recovery before the next event, the run faults. Stop, correct the settings and explicitly load again; there is no delayed-event queue or automatic retry.
 
+For `LockEventMode=0`, `EventLoad` measures the coordinate offset automatically before claiming the table transport. Modes 1 and 2 retain the existing initialization contract. A failed measurement refuses preparation.
+
+While Ready, a `DOutSelect` edit discards preparation and returns error 151 before changing either the parameter or the remote mux. Allow stop/clear cleanup to finish, retry the routing assignment, then issue a fresh `EventLoad`. Loading and running routing edits remain refused.
+
 ```text
 AEventOn=0
 AEventType=3
