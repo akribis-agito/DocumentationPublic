@@ -35,7 +35,7 @@ doc_revision: '2026.06'
 
 ## 概述
 
-`EventTableSrc` 选择在生成表驱动事件时比较器使用哪组表位置：[EventTable](EventTable.md) 中的原始条目，或 [EventTableCor](EventTableCor.md) 中经误差映射校正的条目。这是一个保存至闪存的轴相关参数，可随时修改。
+`EventTableSrc` 选择在生成表驱动事件时比较器使用哪组表位置：[EventTable](EventTable.md) 中的原始条目，或 [EventTableCor](EventTableCor.md) 中经误差映射校正的条目。这是一个保存至闪存的轴相关参数，通常可随时修改；由 EventLoad 管理的模式 3 须遵守下述已准备硬件表的限制。
 
 ## 工作原理
 

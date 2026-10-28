@@ -44,7 +44,9 @@ Arming is a `0 → 1` edge: writing `EventOn = 1` while it is already `1` does n
 
 For a finite by-gap sequence (`EventType = 1`, `EventAlwaysOn = 0`), `EventGap` must be nonzero and advance from `EventBegPos` toward `EventEndPos`: positive for an increasing window, negative for a decreasing window. A zero gap or a gap pointing away from the end causes `EventOn = 1` to be refused with error **14**; a disarmed sequence stays disarmed and its configured positions and gap remain available for correction. For example, begin `20000` and end `200` require a negative gap such as `-100`; `+100` is refused. This check does not change single-event, table-event or endless-mode arming.
 
-On Central-i, a legacy hardware-table arm (`EventType = 3`, with no verified-table session owning the axis) preloads the full window when the encoder is incremental or `EncSinCosHWEn` bits 0–1 select a hardware counter. That window must contain at most **1024 rows**, counted as `EventTableEnd - EventTableBeg + 1`, for either `EventTableSrc` (raw or corrected). `EventOn = 1` is refused with error **14** above this limit, before storing the enable or sending remote table/control writes; a disarmed axis stays disarmed and its table configuration is preserved. Writing `EventOn = 0` remains allowed. The limit does not apply to the nonincremental/no-hardware-counter path that loads only the first row, or to standalone products. An axis owned by the verified-table service retains its separate **2048-record** admission and Ready-only arming rules.
+On older Central-i firmware without `EventTblMode`, a legacy hardware-table arm (`EventType = 3`, with no verified-table session owning the axis) preloads the full window when the encoder is incremental or `EncSinCosHWEn` bits 0–1 select a hardware counter. That window must contain at most **1024 rows**, counted as `EventTableEnd - EventTableBeg + 1`, for either `EventTableSrc` (raw or corrected). `EventOn = 1` is refused with error **14** above this limit, before storing the enable or sending remote table/control writes; a disarmed axis stays disarmed and its table configuration is preserved. Writing `EventOn = 0` remains allowed. The limit does not apply to the nonincremental/no-hardware-counter path that loads only the first row, or to standalone products. An axis owned by the verified-table service retains its separate **2048-record** admission and Ready-only arming rules.
+
+The following arm-time preparation applies to the other event types and older implementations. EventLoad-managed mode 3 uses its already-prepared table, as described below.
 
 When `EventOn` transitions from `0` to `1` the controller:
 
@@ -71,7 +73,7 @@ On standalone products the position-compare output and the position-capture trig
 
 ### Central-i coordinate changes while armed
 
-`SetPosition` and `ZeroPosErr` preserve the physical targets of an already-armed hardware event sequence, including table targets sent afterward. Lock captures can use the new origin while that event sequence continues. A new `EventOn` transition from `0` to `1` establishes the next sequence in the current coordinate frame: mode 0 relearns the hardware offset, while mode 1 uses the initialized offset maintained across `SetPosition` and `ZeroPosErr`. Writing `1` while already enabled performs no realignment.
+Except for the EventLoad-managed mode-3 run described below, `SetPosition` and `ZeroPosErr` preserve the physical targets of an already-armed hardware event sequence, including table targets sent afterward. Lock captures can use the new origin while that event sequence continues. A new `EventOn` transition from `0` to `1` establishes the next sequence in the current coordinate frame: mode 0 relearns the hardware offset, while mode 1 uses the initialized offset maintained across `SetPosition` and `ZeroPosErr`. Writing `1` while already enabled performs no realignment.
 
 ### AGM800 hardware-table preload
 

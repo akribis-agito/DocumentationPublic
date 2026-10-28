@@ -35,7 +35,7 @@ doc_revision: '2026.06'
 
 ## 概述
 
-`EventTableEnd` 设置 [EventTable](EventTable.md) 中活动区域的结束索引，定义用于事件生成的最后一个条目。它与 [EventTableBeg](EventTableBeg.md) 配合使用，后者标记第一个活动条目。索引从 1 开始（范围 1–100）。这是一个保存至闪存的轴相关参数，可随时修改。
+`EventTableEnd` 设置 [EventTable](EventTable.md) 中活动区域的结束索引，定义用于事件生成的最后一个条目。它与 [EventTableBeg](EventTableBeg.md) 配合使用，后者标记第一个活动条目。索引从 1 开始；独立控制器范围为 1–100，Central-i 使用控制器报告的表格容量。这是一个保存至闪存的轴相关参数。由 EventLoad 管理的模式 3 须遵守下述已准备硬件表的限制。
 
 ## 工作原理
 

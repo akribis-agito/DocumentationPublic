@@ -34,7 +34,7 @@ Ending index of the active region within the event table.
 
 ## Overview
 
-`EventTableEnd` sets the ending index of the active region within [EventTable](EventTable.md), defining the last entry used for event generation. It pairs with [EventTableBeg](EventTableBeg.md), which marks the first active entry. The index is 1-based (range 1–100). It is an axis-related parameter saved to flash and can be changed at any time.
+`EventTableEnd` sets the ending index of the active region within [EventTable](EventTable.md), defining the last entry used for event generation. It pairs with [EventTableBeg](EventTableBeg.md), which marks the first active entry. The index is 1-based; standalone controllers use 1–100, while Central-i uses the table capacity reported by the controller. It is an axis-related parameter saved to flash. The prepared hardware-table restrictions below apply to EventLoad-managed mode 3.
 
 ## How it works
 

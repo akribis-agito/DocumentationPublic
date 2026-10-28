@@ -34,7 +34,7 @@ Selects the position source used to evaluate event table triggers.
 
 ## Overview
 
-`EventTableSrc` selects which set of table positions the comparator uses when generating table-driven events: the raw entries in [EventTable](EventTable.md), or the error-map-corrected entries in [EventTableCor](EventTableCor.md). It is an axis-related parameter saved to flash and can be changed at any time.
+`EventTableSrc` selects which set of table positions the comparator uses when generating table-driven events: the raw entries in [EventTable](EventTable.md), or the error-map-corrected entries in [EventTableCor](EventTableCor.md). It is an axis-related parameter saved to flash and can normally be changed at any time; the prepared hardware-table restrictions below apply to EventLoad-managed mode 3.
 
 ## How it works
 

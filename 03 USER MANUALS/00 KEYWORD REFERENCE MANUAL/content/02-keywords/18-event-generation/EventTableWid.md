@@ -40,6 +40,8 @@ On implementations without `EventTblMode`, the per-entry widths are applied only
 
 For AGM800 original-engine preloads (`EventType=3` with [EventLoad](EventLoad.md)), [EventTblMode](EventTblMode.md)=0 resolves the first selected row's width once for all rows. Mode 1 uses the software-table begin-row and carry-forward rules below for each selected row. Settings are committed with their positions before arming. Changing widths invalidates a prepared load and is refused during a run.
 
+The effective width must fit the existing 13-bit hardware field (0–8191 units) after the existing fine/coarse conversion. If it still does not fit, preparation fails before arm; it is not silently truncated. This restriction does not change EventType=2.
+
 ## How it works
 
 The width behavior is decided first by the value at the begin entry — the entry at the [EventTableBeg](EventTableBeg.md) index — which sets the mode for the whole event session:
