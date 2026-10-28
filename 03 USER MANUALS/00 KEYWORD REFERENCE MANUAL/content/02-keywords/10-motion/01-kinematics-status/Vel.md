@@ -102,6 +102,11 @@ Refer to [Control tuning – Dual-loop control](../../11-control-tuning/02-dual-
 - **Active fault:** all four array elements continue to update — they are derived from the encoder, not from the control loop, so they remain valid diagnostics after a fault.
 - **Gantry:** as noted above, with gantry on `Vel[1]` becomes [GantryVel](../../12-gantry-control/03-gantry-tuning/GantryVel.md) (linear-mode velocity on A, phase velocity on B); `Vel[2]/[3]/[4]` are still per-axis.
 
+### AGM800 hardware-table mode
+
+On firmware providing the original-engine hardware-table preload, `EventType=3` disables use of 1/T and forces `Vel[4]=0`, regardless of `OneOverTOn`. Its cyclic status bits carry hardware-table Ready/Fault instead. Returning to another event mode allows 1/T to resume only after fresh timing data; stale table status is never interpreted as a velocity sample. The other velocity elements retain their existing meanings.
+
+
 ## Examples
 
 ```text

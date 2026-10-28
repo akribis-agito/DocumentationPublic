@@ -42,6 +42,11 @@ When table-driven events are armed with [EventOn](EventOn.md) = 1, the controlle
 
 `EventTableBeg` is read when events are armed, so change it before setting `EventOn` = 1. The pair is not range-checked against each other: arming always uses the entry at `EventTableBeg` as the first compare position, and the index then advances and stops once it passes `EventTableEnd`. If `EventTableBeg` is set higher than `EventTableEnd`, only the single entry at `EventTableBeg` fires, after which generation stops.
 
+### Prepared hardware-table runs
+
+For AGM800 `EventType=3` with [EventLoad](EventLoad.md), `EventTableBeg` and `EventTableEnd` select the inclusive range to preload (1–2048 rows). The first selected index need not be 1. [EventTblMode](EventTblMode.md)=0 resolves settings from this first selected row. Changing the selected range invalidates a ready load; stop and load the new range before arming.
+
+
 ## Examples
 
 ```text

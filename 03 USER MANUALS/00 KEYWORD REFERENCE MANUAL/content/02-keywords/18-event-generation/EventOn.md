@@ -73,6 +73,13 @@ On standalone products the position-compare output and the position-capture trig
 
 `SetPosition` and `ZeroPosErr` preserve the physical targets of an already-armed hardware event sequence, including table targets sent afterward. Lock captures can use the new origin while that event sequence continues. A new `EventOn` transition from `0` to `1` establishes the next sequence in the current coordinate frame: mode 0 relearns the hardware offset, while mode 1 uses the initialized offset maintained across `SetPosition` and `ZeroPosErr`. Writing `1` while already enabled performs no realignment.
 
+### AGM800 hardware-table preload
+
+On AGM800 firmware implementing [EventLoad](EventLoad.md), `EventType=3` requires a complete prepared table before `EventOn=1`. Configure and upload the selected rows, run `EventCorrect` first if selecting corrected positions, issue `EventLoad`, then wait for [EventStatus](EventStatus.md) Ready (bit 1). Loading does not arm the output. A failed or incomplete load cannot arm.
+
+`EventOn=0` stops/cancels and discards the prepared run. Reload the selected range for every run; there is no retained-window or reconnect-resume workflow. Relevant table, coordinate, source or pulse-setting changes invalidate a prepared load and are refused during an active run. Other event types retain their existing arming behavior.
+
+
 ## Examples
 
 ```text

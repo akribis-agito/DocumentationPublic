@@ -43,6 +43,11 @@ language: zh-CN
 
 `EventTableBeg` 在事件使能时读取，因此须在设置 `EventOn` = 1 之前完成更改。该参数对不会与 `EventTableEnd` 相互进行范围校验：使能时始终使用 `EventTableBeg` 处的条目作为第一个比较位置，之后索引推进，超过 `EventTableEnd` 时停止。若 `EventTableBeg` 设置高于 `EventTableEnd`，则仅触发 `EventTableBeg` 处的单个条目，之后生成停止。
 
+### 已准备的硬件表运行
+
+对于支持 [EventLoad](EventLoad.md) 的 AGM800 `EventType=3`，`EventTableBeg` 和 `EventTableEnd` 指定包含首尾行的预加载范围（1–2048 行）。起始索引不必为 1。[EventTblMode](EventTblMode.md)=0 时，从首个所选行解析设置。修改范围会使就绪数据失效；使能前应停止并加载新范围。
+
+
 ## 示例
 
 ```text

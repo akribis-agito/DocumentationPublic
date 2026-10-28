@@ -47,6 +47,14 @@ Use `EventTableSrc` = 1 when an encoder error map is active and you want pulses 
 
 When a pure-software comparison is in effect, the feedback the comparator reads is already error-corrected, so the raw [EventTable](EventTable.md) is used regardless of this setting.
 
+### AGM800 prepared hardware tables
+
+For `EventType=3` with [EventLoad](EventLoad.md), choose the source before loading. With source 1, run `EventCorrect` and inspect `EventTableCor` before `EventLoad`; the loader uses these corrected values with the existing table offset and hardware-coordinate conversion, without applying the map a second time. Changing the source or relevant table/map/coordinate settings invalidates a prepared load and is refused while the run is active.
+
+
+For closely spaced corrected points, inspect the actual `EventTableCor` values before a run. Existing EventCorrect rounding can produce one-count errors or repeated positions; this preload feature does not change that arithmetic.
+
+
 ## Examples
 
 ```text

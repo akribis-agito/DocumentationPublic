@@ -48,6 +48,14 @@ doc_revision: '2026.06'
 
 当纯软件比较生效时，比较器读取的反馈已经过误差校正，因此无论本参数设置如何，均使用原始 [EventTable](EventTable.md)。
 
+### AGM800 已准备的硬件表
+
+对于支持 [EventLoad](EventLoad.md) 的 `EventType=3`，应在加载前选择位置源。源为 1 时，先运行 `EventCorrect` 并检查 `EventTableCor`，再执行 `EventLoad`。加载器将这些校正值与原有表偏移及硬件坐标转换配合使用，不会重复应用误差映射。修改位置源或相关表格、映射、坐标设置会使已准备的数据失效，运行期间不允许修改。
+
+
+校正点间距较小时，应在运行前检查实际的 `EventTableCor` 数值。现有 EventCorrect 舍入可能产生一个计数的误差或重复位置；本预加载功能不改变该运算。
+
+
 ## 示例
 
 ```text

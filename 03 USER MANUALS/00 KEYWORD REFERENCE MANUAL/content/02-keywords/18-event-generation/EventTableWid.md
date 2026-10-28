@@ -36,7 +36,9 @@ Per-entry pulse width array; -1 uses the global EventPulseWid.
 
 `EventTableWid` is an array that specifies the pulse width for each [EventTable](EventTable.md) entry individually, overriding the global [EventPulseWid](EventPulseWid.md) for selected entries. The width units follow [EventPulseRes](EventPulseRes.md) (microseconds or nanoseconds), the same as `EventPulseWid`. It is an axis-related array parameter and is not saved to flash.
 
-The per-entry widths are applied only in the software event-by-table scheme ([EventType](EventType.md) = `2`). In the hardware-buffered table scheme ([EventType](EventType.md) = `3`), and in all non-table schemes, `EventTableWid` is ignored and the global [EventPulseWid](EventPulseWid.md) is used.
+On implementations without `EventTblMode`, the per-entry widths are applied only in the software event-by-table scheme ([EventType](EventType.md) = `2`). In the hardware-buffered table scheme ([EventType](EventType.md) = `3`), and in all non-table schemes, `EventTableWid` is ignored and the global [EventPulseWid](EventPulseWid.md) is used.
+
+For AGM800 original-engine preloads (`EventType=3` with [EventLoad](EventLoad.md)), [EventTblMode](EventTblMode.md)=0 resolves the first selected row's width once for all rows. Mode 1 uses the software-table begin-row and carry-forward rules below for each selected row. Settings are committed with their positions before arming. Changing widths invalidates a prepared load and is refused during a run.
 
 ## How it works
 

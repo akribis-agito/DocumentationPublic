@@ -40,6 +40,11 @@ Ending index of the active region within the event table.
 
 In table-driven mode ([EventType](EventType.md) = 2) the controller advances through [EventTable](EventTable.md) one index per generated pulse, starting at [EventTableBeg](EventTableBeg.md). After producing the pulse for the `EventTableEnd` entry, the next advance carries the index past `EventTableEnd` and event generation stops; the controller clears [EventOn](EventOn.md) to 0. The number of pulses a full pass produces is therefore `EventTableEnd − EventTableBeg + 1`, which you can confirm with [EventCntr](EventCntr.md).
 
+### Prepared hardware-table runs
+
+For AGM800 `EventType=3` with [EventLoad](EventLoad.md), preload exactly `EventTableBeg..EventTableEnd`, including both ends, with at most 2048 rows. Changing either boundary invalidates a prepared load. Reload the selected range for every run.
+
+
 ## Examples
 
 ```text

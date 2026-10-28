@@ -54,6 +54,15 @@ The by-gap scheme produces a regular pulse train across the window:
 
 A compare match is edge-detected: exactly one output action is produced each time the feedback position crosses a compare position, so the axis must move away from a compare position and re-reach it before that position can fire again. When [EventPulseWid](EventPulseWid.md) selects toggle mode, the output flips state on each event and holds that state until the next event (it is not re-armed per pulse); it returns to the idle level when generation is disarmed — that is, once the end position or count is reached, or the unit is reset.
 
+### AGM800 original-engine hardware tables
+
+On firmware providing [EventLoad](EventLoad.md), mode 3 loads the entire selected range before arming, up to 2048 rows. Use [EventTblMode](EventTblMode.md) to choose the first selected row's pulse/output settings for all rows, or resolved per-row settings. Every run requires a fresh load. The FPGA advances autonomously without per-event offline counter/next-position reads. `EventCntr` is refreshed once at completion; request an explicit inquiry if an intermediate value is needed.
+
+In mode 3 the status bits normally used by 1/T carry Ready/Fault, and public `Vel[4]` is zero. 1/T cannot be used in this mode; other modes resume it only after fresh timing data. Lock capture remains available subject to its normal configuration.
+
+Pulse overlap on any selected output faults the run. The pulse width plus recovery must fit the interval on that output: at a target 1 MHz the interval is 1 µs; at 500 kHz it is 2 µs. These are requested test rates, not a qualification claim for every board or pulse setting. Stop and reload after a fault.
+
+
 ## Examples
 
 ```text
