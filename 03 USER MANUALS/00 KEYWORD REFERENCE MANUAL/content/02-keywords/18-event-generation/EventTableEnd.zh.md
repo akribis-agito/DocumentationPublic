@@ -35,11 +35,16 @@ doc_revision: '2026.06'
 
 ## 概述
 
-`EventTableEnd` 设置 [EventTable](EventTable.md) 中活动区域的结束索引，定义用于事件生成的最后一个条目。它与 [EventTableBeg](EventTableBeg.md) 配合使用，后者标记第一个活动条目。索引从 1 开始（范围 1–100）。这是一个保存至闪存的轴相关参数，可随时修改。
+`EventTableEnd` 设置 [EventTable](EventTable.md) 中活动区域的结束索引，定义用于事件生成的最后一个条目。它与 [EventTableBeg](EventTableBeg.md) 配合使用，后者标记第一个活动条目。索引从 1 开始；独立控制器范围为 1–100，Central-i 使用控制器报告的表格容量。这是一个保存至闪存的轴相关参数。由 EventLoad 管理的模式 3 须遵守下述已准备硬件表的限制。
 
 ## 工作原理
 
 在表驱动模式（[EventType](EventType.md) = 2）下，控制器从 [EventTableBeg](EventTableBeg.md) 开始，逐条推进 [EventTable](EventTable.md)，每生成一个脉冲递进一个索引。为 `EventTableEnd` 条目产生脉冲后，下一次推进使索引超过 `EventTableEnd`，事件生成停止；控制器将 [EventOn](EventOn.md) 清零为 0。因此，完整一轮产生的脉冲数为 `EventTableEnd − EventTableBeg + 1`，可通过 [EventCntr](EventCntr.md) 确认。
+
+### 已准备的硬件表运行
+
+对于支持 [EventLoad](EventLoad.md) 的 AGM800 `EventType=3`，完整预加载 `EventTableBeg..EventTableEnd`，包含首尾行，最多 2048 行。修改任一边界会使已准备的数据失效。每次运行都重新加载所选范围。
+
 
 ## 示例
 

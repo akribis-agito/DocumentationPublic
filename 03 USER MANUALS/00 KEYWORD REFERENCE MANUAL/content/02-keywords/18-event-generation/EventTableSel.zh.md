@@ -43,6 +43,11 @@ doc_revision: '2026.06'
 
 使能事件（[EventOn](EventOn.md) = 1）时，加载第一个活动条目（位于 [EventTableBeg](EventTableBeg.md)）的选择值；之后随表推进，依次加载各条目的选择值。
 
+### AGM800 预加载硬件表
+
+对于支持 [EventLoad](EventLoad.md) 的 `EventType=3`，[EventTblMode](EventTblMode.md)=0 对所有行使用首个所选行的输出选择；模式 1 使用各所选行的选择。预加载时将设置与位置配对，无需为每个事件传送设置。若新脉冲与任一所选输出上未结束的脉冲或恢复过程重叠，硬件报错，不会延迟排队脉冲。修改选择会使已准备的数据失效，运行期间不允许修改。
+
+
 ## 示例
 
 ```text

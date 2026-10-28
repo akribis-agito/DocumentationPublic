@@ -37,7 +37,11 @@ doc_revision: '2026.06'
 
 `EventTableWid` 是一个数组，为每个 [EventTable](EventTable.md) 条目单独指定脉冲宽度，覆盖选定条目的全局 [EventPulseWid](EventPulseWid.md)。宽度单位与 `EventPulseWid` 相同，遵循 [EventPulseRes](EventPulseRes.md)（微秒或纳秒）。这是一个轴相关的数组参数，不保存至闪存。
 
-按条目宽度仅在软件事件按表方案（[EventType](EventType.md) = `2`）中应用。在硬件缓冲表方案（[EventType](EventType.md) = `3`）以及所有非表方案中，`EventTableWid` 被忽略，使用全局 [EventPulseWid](EventPulseWid.md)。
+在未提供 `EventTblMode` 的实现中，按条目宽度仅在软件事件按表方案（[EventType](EventType.md) = `2`）中应用。在硬件缓冲表方案（[EventType](EventType.md) = `3`）以及所有非表方案中，`EventTableWid` 被忽略，使用全局 [EventPulseWid](EventPulseWid.md)。
+
+对于 AGM800 原有引擎预加载（支持 [EventLoad](EventLoad.md) 的 `EventType=3`），[EventTblMode](EventTblMode.md)=0 仅解析首个所选行的宽度，并用于所有行。模式 1 对各所选行使用下述软件表首行及向后继承规则。使能前，设置与其位置一同提交。修改宽度会使已准备的数据失效，运行期间不允许修改。
+
+有效宽度在按原有规则选择细或粗分辨率后，必须能够装入现有 13 位硬件字段（0–8191 个单位）；若仍无法表示，准备过程会在使能前失败，不会静默截断。此限制不改变 EventType=2。
 
 ## 工作原理
 

@@ -34,7 +34,7 @@ Selects the position source used to evaluate event table triggers.
 
 ## Overview
 
-`EventTableSrc` selects which set of table positions the comparator uses when generating table-driven events: the raw entries in [EventTable](EventTable.md), or the error-map-corrected entries in [EventTableCor](EventTableCor.md). It is an axis-related parameter saved to flash and can be changed at any time.
+`EventTableSrc` selects which set of table positions the comparator uses when generating table-driven events: the raw entries in [EventTable](EventTable.md), or the error-map-corrected entries in [EventTableCor](EventTableCor.md). It is an axis-related parameter saved to flash and can normally be changed at any time; the prepared hardware-table restrictions below apply to EventLoad-managed mode 3.
 
 ## How it works
 
@@ -46,6 +46,14 @@ Selects the position source used to evaluate event table triggers.
 Use `EventTableSrc` = 1 when an encoder error map is active and you want pulses to fire at the *true* commanded positions rather than the uncorrected positions. Run [EventCorrect](EventCorrect.md) to populate [EventTableCor](EventTableCor.md) before arming.
 
 When a pure-software comparison is in effect, the feedback the comparator reads is already error-corrected, so the raw [EventTable](EventTable.md) is used regardless of this setting.
+
+### AGM800 prepared hardware tables
+
+For `EventType=3` with [EventLoad](EventLoad.md), choose the source before loading. With source 1, run `EventCorrect` and inspect `EventTableCor` before `EventLoad`; the loader uses these corrected values with the existing table offset and hardware-coordinate conversion, without applying the map a second time. Changing the source or relevant table/map/coordinate settings invalidates a prepared load and is refused while the run is active.
+
+
+For closely spaced corrected points, inspect the actual `EventTableCor` values before a run. Existing EventCorrect rounding can produce one-count errors or repeated positions; this preload feature does not change that arithmetic.
+
 
 ## Examples
 

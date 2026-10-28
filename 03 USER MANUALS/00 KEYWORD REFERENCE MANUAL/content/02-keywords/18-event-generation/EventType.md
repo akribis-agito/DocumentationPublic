@@ -43,7 +43,7 @@ Events are pulses on a designated output generated when the actual feedback posi
 | 0 | **Single event** — one pulse is generated when the feedback position reaches [EventBegPos](EventBegPos.md), then generation stops and [EventOn](EventOn.md) returns to `0`. |
 | 1 | **Event by gap** — a first pulse is generated at [EventBegPos](EventBegPos.md); a further pulse is generated each time the distance set by [EventGap](EventGap.md) is passed. Pulses stop once the position passes [EventEndPos](EventEndPos.md) (unless [EventAlwaysOn](EventAlwaysOn.md) forces continuous operation). |
 | 2 | **Events by table** — a table of compare positions is used, bounded by [EventTableBeg](EventTableBeg.md) (start index) and [EventTableEnd](EventTableEnd.md) (end index). The controller loads each position in turn and reloads [EventSelect](EventSelect.md) from [EventTableSel](EventTableSel.md) for every event, so each position can fire on a chosen output line. Compare positions are taken from [EventTable](EventTable.md), or from the corrected table [EventTableCor](EventTableCor.md) when so selected. |
-| 3 | **Events by table (hardware-buffered)** — same table-driven scheme as mode 2, but the full list of compare positions is pre-loaded into the compare hardware's buffer (FIFO) at arming rather than reloaded one at a time. This supports higher event rates than mode 2 because the hardware advances through the buffered positions without per-event servicing. Available where the compare hardware supports it. |
+| 3 | **Events by table (hardware-buffered)** — same table-driven scheme as mode 2, but the full list of compare positions is preloaded into the compare hardware's buffer (FIFO) instead of being reloaded one at a time. On firmware providing EventTblMode, EventLoad prepares the table before EventOn arms; older implementations perform the transfer at arming. This supports higher event rates than mode 2 because the hardware advances through the buffered positions without per-event servicing. Available where the compare hardware supports it. |
 | 4 | **Trigger now** — fires a single pulse immediately when [EventOn](EventOn.md) is set, without waiting for a position crossing. Use it to assert the event output on demand (for example, to test downstream wiring). |
 
 The by-gap scheme produces a regular pulse train across the window:
@@ -53,6 +53,15 @@ The by-gap scheme produces a regular pulse train across the window:
 ### Hardware behavior
 
 A compare match is edge-detected: exactly one output action is produced each time the feedback position crosses a compare position, so the axis must move away from a compare position and re-reach it before that position can fire again. When [EventPulseWid](EventPulseWid.md) selects toggle mode, the output flips state on each event and holds that state until the next event (it is not re-armed per pulse); it returns to the idle level when generation is disarmed — that is, once the end position or count is reached, or the unit is reset.
+
+### AGM800 original-engine hardware tables
+
+On firmware providing [EventLoad](EventLoad.md), mode 3 loads the entire selected range before arming, up to 2048 rows. Use [EventTblMode](EventTblMode.md) to choose the first selected row's pulse/output settings for all rows, or resolved per-row settings. Every run requires a fresh load. The FPGA advances autonomously without per-event offline counter/next-position reads. `EventCntr` is refreshed once at completion; request an explicit inquiry if an intermediate value is needed.
+
+In mode 3 the status bits normally used by 1/T carry Ready/Fault, and public `Vel[4]` is zero. 1/T cannot be used in this mode; other modes resume it only after fresh timing data. Lock capture remains available subject to its normal configuration.
+
+Pulse overlap on any selected output faults the run. The pulse width plus recovery must fit the interval on that output: at a target 1 MHz the interval is 1 µs; at 500 kHz it is 2 µs. These are requested test rates, not a qualification claim for every board or pulse setting. Stop and reload after a fault.
+
 
 ## Examples
 

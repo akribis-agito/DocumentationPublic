@@ -42,6 +42,11 @@ As the controller advances through the active table range, it reads the `EventTa
 
 The first active entry's selection (at [EventTableBeg](EventTableBeg.md)) is loaded when events are armed with [EventOn](EventOn.md) = 1; each subsequent entry's selection is loaded as the table advances.
 
+### AGM800 preloaded hardware tables
+
+For `EventType=3` with [EventLoad](EventLoad.md), [EventTblMode](EventTblMode.md)=0 uses the first selected row's output selection for every row; mode 1 uses each selected row's selection. The settings and positions are paired during preload, so no per-event settings transfer is needed. The hardware faults if a new pulse overlaps an unfinished pulse or recovery on a selected output; it does not queue a delayed pulse. Changing selections invalidates a prepared load and is refused during a run.
+
+
 ## Examples
 
 ```text
