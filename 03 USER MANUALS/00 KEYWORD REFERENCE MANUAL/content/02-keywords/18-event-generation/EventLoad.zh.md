@@ -29,7 +29,7 @@ language: zh-CN
 ---
 # EventLoad
 
-对于 AGM800 `EventType=3`，此无参数命令在后台分步预加载 `EventTableBeg..EventTableEnd`（包含首尾行），范围为 1–2048 行。它不使能输出，也不启动运动。
+对于 AGM800 与 AGM800-EC `EventType=3`，此无参数命令在后台分步预加载 `EventTableBeg..EventTableEnd`（包含首尾行），范围为 1–2048 行。它不使能输出，也不启动运动。
 
 先配置位置、[EventTblMode](EventTblMode.md)、宽度、输出及位置源。使用校正源时，先运行 [EventCorrect](EventCorrect.md) 并检查 `EventTableCor`。加载前在静止时按正常流程建立锁存与事件的坐标对齐。加载器仅应用一次原有表偏移及硬件坐标转换。
 

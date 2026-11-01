@@ -28,7 +28,7 @@ doc_revision: '2026.10'
 ---
 # EventLoad
 
-For AGM800 `EventType=3`, this argument-free command starts a bounded background preload of `EventTableBeg..EventTableEnd` (inclusive), containing 1–2048 rows. It does not arm outputs or start motion.
+For AGM800 and AGM800-EC `EventType=3`, this argument-free command starts a bounded background preload of `EventTableBeg..EventTableEnd` (inclusive), containing 1–2048 rows. It does not arm outputs or start motion.
 
 Configure positions, [EventTblMode](EventTblMode.md), widths, outputs and source first. For a corrected source, run [EventCorrect](EventCorrect.md) and inspect the resulting `EventTableCor` before loading. Establish the normal lock/event coordinate alignment at standstill before loading. The loader applies the existing table offset and hardware-coordinate conversion once.
 

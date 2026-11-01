@@ -28,7 +28,7 @@ doc_revision: '2026.10'
 ---
 # EventStatus
 
-Read-only scalar flags for the AGM800 original-engine preload (`EventType=3`). This is a compact status word, not the older verified-engine status array.
+Read-only scalar flags for the AGM800 and AGM800-EC original-engine preload (`EventType=3`).
 
 | Bit | Mask | Meaning |
 |-----|------|---------|

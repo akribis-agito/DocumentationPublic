@@ -39,7 +39,7 @@ doc_revision: '2026.06'
 
 在未提供 `EventTblMode` 的实现中，按条目宽度仅在软件事件按表方案（[EventType](EventType.md) = `2`）中应用。在硬件缓冲表方案（[EventType](EventType.md) = `3`）以及所有非表方案中，`EventTableWid` 被忽略，使用全局 [EventPulseWid](EventPulseWid.md)。
 
-对于 AGM800 原有引擎预加载（支持 [EventLoad](EventLoad.md) 的 `EventType=3`），[EventTblMode](EventTblMode.md)=0 仅解析首个所选行的宽度，并用于所有行。模式 1 按顺序使用此处说明的硬件向后继承规则解析各所选行。使能前，设置与其位置一同提交。修改宽度会使已准备的数据失效，运行期间不允许修改。
+对于 AGM800 与 AGM800-EC 原有引擎预加载（支持 [EventLoad](EventLoad.md) 的 `EventType=3`），[EventTblMode](EventTblMode.md)=0 仅解析首个所选行的宽度，并用于所有行。模式 1 按顺序使用此处说明的硬件向后继承规则解析各所选行。使能前，设置与其位置一同提交。修改宽度会使已准备的数据失效，运行期间不允许修改。
 
 有效宽度在按原有规则选择细或粗分辨率后，必须能够装入现有 13 位硬件字段（1–8191 个单位；有效宽度为 0 仅在首个所选行上被接受，此时选择翻转模式）；若仍无法表示，准备过程会在使能前失败，不会静默截断。此限制不改变 EventType=2。
 
