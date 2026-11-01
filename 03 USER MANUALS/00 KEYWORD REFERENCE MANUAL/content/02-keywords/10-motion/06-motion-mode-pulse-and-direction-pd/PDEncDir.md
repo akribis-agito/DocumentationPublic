@@ -67,7 +67,7 @@ APDEncDir=1          ; inverted accumulation direction
 
 `PDEncDir` is **central-i v5 only**. On v4 the keyword is reserved (not implemented). On v5 (central-i) it is a read/write flash parameter with range 0–1 that applies the sign described above. v5 is central-i only, so the standalone product does not expose `PDEncDir`.
 
-From FPGA v5.5.0-rc4 every product counts the P/D input in the same direction: direction low counts up. Before that, AGD155-AF, AGD155-EC, AGD200 and AGD301 (and Central-i encoders set to P/D) counted up on direction high, and only AGD101 counted up on direction low. If you set `PDEncDir = 1` or swapped the direction wire to compensate on those products, undo it after updating.
+From FPGA v5.5.0-rc3 every product counts the P/D input in the same direction: direction low counts up. Before that, AGD155-AF, AGD155-EC, AGD200 and AGD301 (and Central-i encoders set to P/D) counted up on direction high, and only AGD101 counted up on direction low. If you set `PDEncDir = 1` or swapped the direction wire to compensate on those products, undo it after updating.
 
 ## See also
 
