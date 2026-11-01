@@ -89,7 +89,7 @@ The six-axis AGM800-EC configuration reports 12 port slots in `Identity[16]` and
 | [54] | Product variant | Uninitialised unless applicable |
 | [55] | Position-tracking FIFO size | |
 | [62] | Feature flags, word 2 | Capability bitfield (see below) |
-| [75] | Push-event queue depth | Rows in the [push-event](../06-push-events/00-overview.md) queue (64 on AGM800); Central-i v5 firmware with push events only |
+| [75] | Push-event queue depth | Rows in the [push-event](../06-push-events/00-overview.md) queue (64 on AGM800 and AGM800-EC); Central-i v5 firmware with push events only |
 
 > Indices [42]–[51] expose the unit's *active* network address. They are read-only reflections of the live configuration and vary per unit; they are not shown here with any real value.
 
