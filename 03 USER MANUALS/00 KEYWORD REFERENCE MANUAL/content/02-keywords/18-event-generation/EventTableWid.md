@@ -42,7 +42,7 @@ For AGM800 original-engine preloads (`EventType=3` with [EventLoad](EventLoad.md
 
 The effective width must fit the existing 13-bit hardware field (1–8191 units; an effective width of 0 is accepted only on the first selected row, where it selects toggle mode) after the existing fine/coarse conversion. If it still does not fit, preparation fails before arm; it is not silently truncated. This restriction does not change EventType=2.
 
-For this hardware preload path, a first selected width of -1 is resolved through `EventPulseWid`; an effective zero selects run-wide toggle in both modes. After a nonzero first effective width, mode 1 resolves each row and carries the most recent non--1 width forward. A later zero and a subsequent -1 remain zero-width pulses.
+For this hardware preload path, a first selected width of -1 is resolved through `EventPulseWid`; an effective zero selects run-wide toggle in both modes. After a nonzero first effective width, mode 1 resolves each row and carries the most recent non--1 width forward. A later row whose width is zero fails preparation and sets the [EventStatus](EventStatus.md) Fault bit; it never produces a zero-width pulse. A later -1 takes the most recent non--1 width, or `EventPulseWid` when no earlier row set one.
 
 ## How it works
 
