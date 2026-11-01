@@ -2,7 +2,8 @@
 keyword: CurrFFWValues
 summary: 只读的前馈电流：滤波后的总量及其各组成部分，单位为 mA。
 availability:
-  standalone: []
+  standalone:
+  - v5
   central-i:
   - v5
 can_code: 856
@@ -20,7 +21,9 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  standalone.v5:
+    array_size: 1
 language: zh-CN
 ---
 # CurrFFWValues
@@ -48,7 +51,7 @@ language: zh-CN
 
 在速度环不形成电流参考的模式下（例如电流模式），索引 1 保持其上一次的值。
 
-在没有摩擦前馈环节的产品上，数组到索引 5 为止。
+在独立控制器上，`CurrFFWValues` 存在但不接受任何索引，因此无法读取上述任何值。
 
 ## 示例
 
