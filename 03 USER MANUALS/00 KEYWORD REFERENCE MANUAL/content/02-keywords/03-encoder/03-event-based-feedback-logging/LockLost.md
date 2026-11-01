@@ -69,7 +69,8 @@ Central-i firmware built with the lock FIFO (compile switch `CFG_CI_LOCK_FIFO = 
 |---|---|---|
 | The remote's FIFO overflows and drops edges (first time since the FIFO was armed) | +1 for every edge the FIFO kept; the master keeps draining | +1 once, however many edges were dropped |
 | Further overflows before FIFO recovery/rearming | +1 for every edge the FIFO kept | 0 |
-| Logging is disabled, or a read keeps failing and the FIFO is flushed, while edges are still queued | 0 for those edges | Count the discarded backlog; see the limits below |
+| Logging is disabled with `LockFifoKeep = 0` (the default), or a read keeps failing and the FIFO is flushed, while edges are still queued | 0 for those edges | Count the discarded backlog; see the limits below |
+| Logging is disabled with `LockFifoKeep = 1` while edges are still queued | +1 for every queued edge read after the disable | 0 once the queue is drained; if the drain is cut short (link loss, remote reset, repeated read failures or the drain limit), count the backlog still left |
 
 A [LockEn](LockEn-AuxLockEn.md) 0 → 1 transition starts logging and clears the counter. Automatic recovery after repeated read failures can flush and rearm the FIFO while LockEn stays 1; a subsequent overflow then adds another indication. The once-only rule applies between FIFO arms, not necessarily for the entire LockEn session. After an overflow the captured run has a gap: `LockLost` tells you that it happened, not how many edges were dropped.
 
