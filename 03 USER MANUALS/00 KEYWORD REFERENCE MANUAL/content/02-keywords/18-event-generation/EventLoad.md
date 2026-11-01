@@ -28,7 +28,7 @@ doc_revision: '2026.10'
 ---
 # EventLoad
 
-For AGM800 `EventType=3`, this argument-free command starts a bounded background preload of `EventTableBeg..EventTableEnd` (inclusive), containing 1–2048 rows. It does not arm outputs or start motion.
+For AGM800 and AGM800-EC `EventType=3`, this argument-free command starts a bounded background preload of `EventTableBeg..EventTableEnd` (inclusive), containing 1–2048 rows. It does not arm outputs or start motion.
 
 Configure positions, [EventTblMode](EventTblMode.md), widths, outputs and source first. For a corrected source, run [EventCorrect](EventCorrect.md) and inspect the resulting `EventTableCor` before loading. Establish the normal lock/event coordinate alignment at standstill before loading. The loader applies the existing table offset and hardware-coordinate conversion once.
 
@@ -36,9 +36,11 @@ Read [EventStatus](EventStatus.md): Loading is bit 0, Ready bit 1 and Fault bit 
 
 `EventOn=0` cancels/stops and discards the prepared run. Every run requires a fresh preload of the selected range. Relevant edits invalidate a prepared load; active-run edits are refused. A disconnect discards the job rather than adopting or resuming it after reconnect. Ordinary command/communication errors report failures; no EventAbort/EventAckErr/EventError ceremony is required.
 
-The converted effective pulse width must fit the original hardware's 13-bit field (0–8191 units after fine/coarse conversion); an unrepresentable width fails preparation before arm instead of being truncated.
+The converted effective pulse width must fit the original hardware's 13-bit field (1–8191 units after fine/coarse conversion; an effective width of 0 is accepted only on the first selected row, where it selects toggle mode); an unrepresentable width fails preparation before arm instead of being truncated.
 
-If a selected output cannot finish its pulse and recovery before the next event, the run faults. Stop, correct the settings and explicitly load again; there is no delayed-event queue or automatic retry.
+In FPGA 5.5.0 and later, a pulse that would overlap the previous one faults the table instead of being queued. If the hardware reports a table fault during the run, the controller stops the run and sets the Fault bit. Stop, correct the settings and explicitly load again; there is no automatic retry.
+
+> **Compatibility note (FPGA 5.5.0 release candidates):** On FPGA 5.5.0-rc5 and earlier, overlapping pulses do not fault the table: they are queued and fire late.
 
 For `LockEventMode=0`, `EventLoad` measures the coordinate offset automatically before claiming the table transport. Modes 1 and 2 retain the existing initialization contract. A failed measurement refuses preparation.
 

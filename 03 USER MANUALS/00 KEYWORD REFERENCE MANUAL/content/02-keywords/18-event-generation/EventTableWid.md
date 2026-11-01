@@ -38,11 +38,11 @@ Per-entry pulse width array; -1 uses the global EventPulseWid.
 
 On implementations without `EventTblMode`, the per-entry widths are applied only in the software event-by-table scheme ([EventType](EventType.md) = `2`). In the hardware-buffered table scheme ([EventType](EventType.md) = `3`), and in all non-table schemes, `EventTableWid` is ignored and the global [EventPulseWid](EventPulseWid.md) is used.
 
-For AGM800 original-engine preloads (`EventType=3` with [EventLoad](EventLoad.md)), [EventTblMode](EventTblMode.md)=0 resolves the first selected row's width once for all rows. Mode 1 resolves selected rows in order using the hardware carry-forward rule described here. Settings are committed with their positions before arming. Changing widths invalidates a prepared load and is refused during a run.
+For AGM800 and AGM800-EC original-engine preloads (`EventType=3` with [EventLoad](EventLoad.md)), [EventTblMode](EventTblMode.md)=0 resolves the first selected row's width once for all rows. Mode 1 resolves selected rows in order using the hardware carry-forward rule described here. Settings are committed with their positions before arming. Changing widths invalidates a prepared load and is refused during a run.
 
-The effective width must fit the existing 13-bit hardware field (0–8191 units) after the existing fine/coarse conversion. If it still does not fit, preparation fails before arm; it is not silently truncated. This restriction does not change EventType=2.
+The effective width must fit the existing 13-bit hardware field (1–8191 units; an effective width of 0 is accepted only on the first selected row, where it selects toggle mode) after the existing fine/coarse conversion. If it still does not fit, preparation fails before arm; it is not silently truncated. This restriction does not change EventType=2.
 
-For this hardware preload path, a first selected width of -1 is resolved through `EventPulseWid`; an effective zero selects run-wide toggle in both modes. After a nonzero first effective width, mode 1 resolves each row and carries the most recent non--1 width forward. A later zero and a subsequent -1 remain zero-width pulses.
+For this hardware preload path, a first selected width of -1 is resolved through `EventPulseWid`; an effective zero selects run-wide toggle in both modes. After a nonzero first effective width, mode 1 resolves each row and carries the most recent non--1 width forward. A later row whose width is zero fails preparation and sets the [EventStatus](EventStatus.md) Fault bit; it never produces a zero-width pulse. A later -1 takes the most recent non--1 width, or `EventPulseWid` when no earlier row set one.
 
 ## How it works
 

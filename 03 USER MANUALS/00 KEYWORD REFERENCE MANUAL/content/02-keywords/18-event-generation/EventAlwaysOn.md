@@ -38,7 +38,7 @@ Runs by-gap event generation continuously, without stopping at EventEndPos.
 
 The end-position bypass applies to software event generation as well as hardware compare. It also applies when `EventBegPos` and `EventEndPos` are equal: that setting does not limit an endless run to one event.
 
-This applies only to by-gap mode. The single-event, table, hardware-table, and trigger-now schemes are unaffected by `EventAlwaysOn`.
+This applies only to by-gap mode. The single-event, table, hardware-table, and trigger-now schemes are unaffected by `EventAlwaysOn`; in particular, a hardware-table run (`EventType = 3`) always fires its selected rows and then completes.
 
 ## How it works
 
