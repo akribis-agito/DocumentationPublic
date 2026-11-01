@@ -38,7 +38,9 @@ Read [EventStatus](EventStatus.md): Loading is bit 0, Ready bit 1 and Fault bit 
 
 The converted effective pulse width must fit the original hardware's 13-bit field (1–8191 units after fine/coarse conversion; an effective width of 0 is accepted only on the first selected row, where it selects toggle mode); an unrepresentable width fails preparation before arm instead of being truncated.
 
-If the hardware reports a table fault during the run, the controller stops the run and sets the Fault bit. Stop, correct the settings and explicitly load again; there is no automatic retry.
+In FPGA 5.5.0 and later, a pulse that would overlap the previous one faults the table instead of being queued. If the hardware reports a table fault during the run, the controller stops the run and sets the Fault bit. Stop, correct the settings and explicitly load again; there is no automatic retry.
+
+> **Compatibility note (FPGA 5.5.0 release candidates):** On FPGA 5.5.0-rc5 and earlier, overlapping pulses do not fault the table: they are queued and fire late.
 
 For `LockEventMode=0`, `EventLoad` measures the coordinate offset automatically before claiming the table transport. Modes 1 and 2 retain the existing initialization contract. A failed measurement refuses preparation.
 

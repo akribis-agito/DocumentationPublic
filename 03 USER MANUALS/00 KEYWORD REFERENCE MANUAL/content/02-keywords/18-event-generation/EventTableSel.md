@@ -44,7 +44,7 @@ The first active entry's selection (at [EventTableBeg](EventTableBeg.md)) is loa
 
 ### AGM800 and AGM800-EC preloaded hardware tables
 
-For `EventType=3` with [EventLoad](EventLoad.md), [EventTblMode](EventTblMode.md)=0 uses the first selected row's output selection for every row; mode 1 uses each selected row's selection. The settings and positions are paired during preload, so no per-event settings transfer is needed. If the hardware reports a table fault during the run, the controller stops the run and sets the [EventStatus](EventStatus.md) Fault bit. Changing selections invalidates a prepared load and is refused during a run.
+For `EventType=3` with [EventLoad](EventLoad.md), [EventTblMode](EventTblMode.md)=0 uses the first selected row's output selection for every row; mode 1 uses each selected row's selection. The settings and positions are paired during preload, so no per-event settings transfer is needed. In FPGA 5.5.0 and later, a pulse that would overlap the previous one faults the table (for FPGA 5.5.0 release candidates, see the compatibility note in [EventLoad](EventLoad.md)). If the hardware reports a table fault during the run, the controller stops the run and sets the [EventStatus](EventStatus.md) Fault bit. Changing selections invalidates a prepared load and is refused during a run.
 
 
 ## Examples
