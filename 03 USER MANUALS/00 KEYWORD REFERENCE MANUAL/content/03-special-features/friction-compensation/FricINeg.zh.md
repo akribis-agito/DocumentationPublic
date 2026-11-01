@@ -35,7 +35,7 @@ language: zh-CN
 
 ## 工作原理
 
-方法 1、2 和 3 把 `FricINeg` 作为带符号的电平使用：通常为负值。方法 4 和 5 只使用其幅值，符号取自运动方向。象限切换补偿用它计算起动超出量（|[FricIStatNeg](FricIStatNeg.md)| − |FricINeg|）。
+方法 2、3 和 4 把 `FricINeg` 作为带符号的电平使用：通常为负值。方法 1 和 5 只使用其幅值，符号取自运动方向。象限切换补偿用它计算起动超出量（|[FricIStatNeg](FricIStatNeg.md)| − |FricINeg|）。
 
 不要用这个电平承载重力或其他恒定偏置；请将其放入 [TorqCompFix](../../02-keywords/09-current-and-voltage/03-current-compensation/TorqCompFix.md)，`FricINeg` 只用于摩擦。
 

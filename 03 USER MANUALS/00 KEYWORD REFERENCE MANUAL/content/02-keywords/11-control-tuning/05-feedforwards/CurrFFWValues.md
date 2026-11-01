@@ -2,7 +2,8 @@
 keyword: CurrFFWValues
 summary: 'Read-only feedforward currents: the filtered total and its parts, in mA.'
 availability:
-  standalone: []
+  standalone:
+  - v5
   central-i:
   - v5
 can_code: 856
@@ -20,7 +21,9 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  standalone.v5:
+    array_size: 1
 ---
 # CurrFFWValues
 
@@ -47,7 +50,7 @@ Index 1 is what the feedforward filter ([FFFiltOn](FFFiltOn.md) / [FFFiltDef](FF
 
 In modes where the velocity loop does not form the current reference (for example current mode), index 1 keeps its last value.
 
-On products without the friction feedforward stage the array ends at index 5.
+On a standalone controller `CurrFFWValues` exists but accepts no index, so none of these values can be read there.
 
 ## Examples
 

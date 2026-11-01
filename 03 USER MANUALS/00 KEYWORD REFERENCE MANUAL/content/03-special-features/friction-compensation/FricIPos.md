@@ -34,7 +34,7 @@ Coulomb (sliding) friction level for the positive direction, in mA.
 
 ## How it works
 
-Methods 1, 2 and 3 use `FricIPos` as a signed level: normally positive. Methods 4 and 5 use its size only and take the sign from the direction of travel. Quadrant-switching compensation uses it to work out the breakaway excess (|[FricIStatPos](FricIStatPos.md)| − |FricIPos|).
+Methods 2, 3 and 4 use `FricIPos` as a signed level: normally positive. Methods 1 and 5 use its size only and take the sign from the direction of travel. Quadrant-switching compensation uses it to work out the breakaway excess (|[FricIStatPos](FricIStatPos.md)| − |FricIPos|).
 
 Do not use this level to carry gravity or another constant offset; put that in [TorqCompFix](../../02-keywords/09-current-and-voltage/03-current-compensation/TorqCompFix.md) and keep `FricIPos` for friction only.
 

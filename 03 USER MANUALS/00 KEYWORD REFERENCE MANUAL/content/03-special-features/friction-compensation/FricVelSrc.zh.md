@@ -31,7 +31,7 @@ language: zh-CN
 
 ## 概述
 
-`FricVelSrc` 选择驱动摩擦方法 1、2、3 和 5 的速度。适用于 AGM800 和 AGM800-EC（central-i v5）。
+`FricVelSrc` 选择驱动摩擦方法 1 至 4 的速度。适用于 AGM800 和 AGM800-EC（central-i v5）。
 
 | `FricVelSrc` | 所用速度 |
 |---|---|
@@ -43,7 +43,7 @@ language: zh-CN
 
 三种来源的单位都是 counts/s，因此无论选择哪一种，同一组死区带和 Stribeck 速度都适用。参考值（0 或 1）信号干净、无噪声，并且在指令换向时准确换向；反馈值（2）跟随轴的实际运动。
 
-速度模式下没有位置参考，因此无论 `FricVelSrc` 如何设置，该环节都使用 `VelRef`。LuGre（方法 4）和象限切换补偿始终使用速度反馈。粘性项（[FricViscous](FricViscous.md)）始终使用速度反馈。
+速度模式下没有位置参考，因此无论 `FricVelSrc` 如何设置，该环节都使用 `VelRef`。LuGre（方法 5）和象限切换补偿始终使用速度反馈。粘性项（[FricViscous](FricViscous.md)）始终使用速度反馈。
 
 ## 示例
 

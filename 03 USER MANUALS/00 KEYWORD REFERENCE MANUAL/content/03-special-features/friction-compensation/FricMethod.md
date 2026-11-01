@@ -35,15 +35,15 @@ Selects the friction feedforward model (0 = off, 1 to 5).
 | `FricMethod` | Model | What it does |
 |---|---|---|
 | 0 | Off (default) | No friction feedforward. |
-| 1 | Linear | Ramps from 0 to the Coulomb level across the band, then holds the level. No memory. |
-| 2 | Hysteresis | Switches between the two Coulomb levels when the velocity leaves the band. Remembers the last level inside the band. |
-| 3 | Play | Like 2, but the switch is a ramp across the band instead of a jump. |
-| 4 | LuGre | A bristle model with internal state. Uses the Coulomb and breakaway levels, the Stribeck velocities and the bristle parameters. |
-| 5 | Stribeck | A smooth Coulomb level plus a breakaway hump that fades with speed. No memory. |
+| 1 | Stribeck | A smooth Coulomb level plus a breakaway hump that fades with speed. No memory. |
+| 2 | Linear | Ramps from 0 to the Coulomb level across the band, then holds the level. No memory. |
+| 3 | Hysteresis | Switches between the two Coulomb levels when the velocity leaves the band. Remembers the last level inside the band. |
+| 4 | Play | Like 3, but the switch is a ramp across the band instead of a jump. |
+| 5 | LuGre | A bristle model with internal state. Uses the Coulomb and breakaway levels, the Stribeck velocities and the bristle parameters. |
 
 ## How it works
 
-Method 5 computes, for velocity $v$:
+Method 1 computes, for velocity $v$:
 
 $$
 I = \operatorname{sign}(v)\cdot\tanh\!\left(\frac{|v|}{V_{band}}\right)\cdot\left(F_c + (F_s - F_c)\,e^{-(v/V_s)^2}\right) + \text{FricViscous}\cdot v_{fb}
@@ -57,14 +57,14 @@ with, for the direction of travel:
 - $V_s$ = [FricVStribPos](FricVStribPos.md) or [FricVStribNeg](FricVStribNeg.md): the speed over which the breakaway hump fades to the Coulomb level
 - $v$ comes from [FricVelSrc](FricVelSrc.md); $v_{fb}$ is always the velocity feedback.
 
-Method 5 replaces the separate Stribeck feedforward of 5.3.0-rc4 (`StribOn` and the `Strib*` keywords). Quadrant-switching compensation ([FricQSCOn](FricQSCOn.md)) is added on top of methods 0 to 3 only; methods 4 and 5 already contain the breakaway level.
+Method 1 replaces the separate Stribeck feedforward of 5.3.0-rc4 (`StribOn` and the `Strib*` keywords). Quadrant-switching compensation ([FricQSCOn](FricQSCOn.md)) is added on top of methods 0, 2, 3 and 4 only; methods 1 and 5 already contain the breakaway level.
 
-The range is 0 to 5. Values saved under 5.3.0-rc4 are not converted. After upgrading from rc4, re-enter the friction settings.
+The range is 0 to 5. Values saved under 5.3.0-rc4 or rc5 are not converted: those candidates numbered the methods 1 linear, 2 hysteresis, 3 play, 4 LuGre (and, on rc5, 5 Stribeck), so a saved value selects a different model on rc6 and later. After upgrading from rc4 or rc5, re-enter the friction settings.
 
 ## Examples
 
 ```text
-AFricMethod=5      ; Stribeck model
+AFricMethod=1      ; Stribeck model
 AFricMethod=0      ; friction feedforward off
 ```
 

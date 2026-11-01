@@ -89,7 +89,7 @@ The six-axis AGM800-EC configuration reports 12 port slots in `Identity[16]` and
 | [54] | Product variant | Uninitialised unless applicable |
 | [55] | Position-tracking FIFO size | |
 | [62] | Feature flags, word 2 | Capability bitfield (see below) |
-| [75] | Push-event queue depth | Rows in the [push-event](../06-push-events/00-overview.md) queue (64 on AGM800); Central-i v5 firmware with push events only |
+| [75] | Push-event queue depth | Rows in the [push-event](../06-push-events/00-overview.md) queue (64 on AGM800 and AGM800-EC); Central-i v5 firmware with push events only |
 
 > Indices [42]–[51] expose the unit's *active* network address. They are read-only reflections of the live configuration and vary per unit; they are not shown here with any real value.
 
@@ -121,14 +121,12 @@ Additional internal type codes exist for non-standard products; the codes above 
 To test a capability, mask the word with the bit for that feature; a non-zero result means the feature is present. Because the bit assignments grow with each release, treat any bit that the running firmware does not set as "not supported".
 
 
-Bit `0x100` of `Identity[62]` explicitly identifies the Stribeck-first friction
-numbering: `FricMethod=1` selects Stribeck (2 linear, 3 hysteresis, 4 play,
-5 LuGre, 0 off). A clear bit does not prove the old numbering; it means this
-contract is not advertised. Some earlier development builds already use the
-new numbering but do not advertise the bit. Hosts requiring Stribeck-first
-numbering must refuse such builds before writing settings. Firmware version
-and a FricMethod maximum of 5 cannot distinguish the two numberings.
-Existing parameter files retain their numeric method and are not migrated.
+No `Identity` bit advertises the friction method numbering. Firmware 5.3.0-rc6
+and later number [FricMethod](../../../03-special-features/friction-compensation/FricMethod.md)
+Stribeck-first: 0 off, 1 Stribeck, 2 linear, 3 hysteresis, 4 play, 5 LuGre.
+The 5.3.0-rc4 and rc5 candidates numbered it 1 linear, 2 hysteresis, 3 play,
+4 LuGre, and on rc5 also 5 Stribeck. Existing parameter files retain their
+numeric method and are not migrated.
 
 ## Examples
 

@@ -36,15 +36,15 @@ language: zh-CN
 | `FricMethod` | 模型 | 作用 |
 |---|---|---|
 | 0 | 关闭（默认） | 无摩擦前馈。 |
-| 1 | 线性 | 在死区带内从 0 斜坡上升到库仑电平，之后保持该电平。无记忆。 |
-| 2 | 滞环 | 速度离开死区带时在两个库仑电平之间切换。在死区带内保持上一次的电平。 |
-| 3 | 间隙（Play） | 与 2 相同，但切换是穿过死区带的斜坡，而不是跳变。 |
-| 4 | LuGre | 带内部状态的刷毛模型。使用库仑电平、静摩擦（起动）电平、Stribeck 速度和刷毛参数。 |
-| 5 | Stribeck | 平滑的库仑电平加上随速度衰减的起动峰。无记忆。 |
+| 1 | Stribeck | 平滑的库仑电平加上随速度衰减的起动峰。无记忆。 |
+| 2 | 线性 | 在死区带内从 0 斜坡上升到库仑电平，之后保持该电平。无记忆。 |
+| 3 | 滞环 | 速度离开死区带时在两个库仑电平之间切换。在死区带内保持上一次的电平。 |
+| 4 | 间隙（Play） | 与 3 相同，但切换是穿过死区带的斜坡，而不是跳变。 |
+| 5 | LuGre | 带内部状态的刷毛模型。使用库仑电平、静摩擦（起动）电平、Stribeck 速度和刷毛参数。 |
 
 ## 工作原理
 
-方法 5 对速度 $v$ 计算：
+方法 1 对速度 $v$ 计算：
 
 $$
 I = \operatorname{sign}(v)\cdot\tanh\!\left(\frac{|v|}{V_{band}}\right)\cdot\left(F_c + (F_s - F_c)\,e^{-(v/V_s)^2}\right) + \text{FricViscous}\cdot v_{fb}
@@ -58,14 +58,14 @@ $$
 - $V_s$ = [FricVStribPos](FricVStribPos.md) 或 [FricVStribNeg](FricVStribNeg.md)：起动峰衰减到库仑电平所跨越的速度
 - $v$ 来自 [FricVelSrc](FricVelSrc.md)；$v_{fb}$ 始终为速度反馈。
 
-方法 5 取代了 5.3.0-rc4 中独立的 Stribeck 前馈（`StribOn` 及 `Strib*` 关键字）。象限切换补偿（[FricQSCOn](FricQSCOn.md)）仅叠加在方法 0 至 3 上；方法 4 和 5 已包含起动电平。
+方法 1 取代了 5.3.0-rc4 中独立的 Stribeck 前馈（`StribOn` 及 `Strib*` 关键字）。象限切换补偿（[FricQSCOn](FricQSCOn.md)）仅叠加在方法 0、2、3 和 4 上；方法 1 和 5 已包含起动电平。
 
-取值范围为 0 至 5。在 5.3.0-rc4 下保存的值不会被转换。从 rc4 升级后，请重新输入摩擦设置。
+取值范围为 0 至 5。在 5.3.0-rc4 或 rc5 下保存的值不会被转换：这些候选版本的编号为 1 线性、2 迟滞、3 play、4 LuGre（rc5 另有 5 为 Stribeck），因此保存的值在 rc6 及之后选择的是另一种模型。从 rc4 或 rc5 升级后，请重新输入摩擦设置。
 
 ## 示例
 
 ```text
-AFricMethod=5      ; Stribeck 模型
+AFricMethod=1      ; Stribeck 模型
 AFricMethod=0      ; 关闭摩擦前馈
 ```
 

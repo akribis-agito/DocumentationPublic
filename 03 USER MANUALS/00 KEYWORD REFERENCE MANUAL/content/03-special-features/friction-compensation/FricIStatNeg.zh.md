@@ -35,7 +35,7 @@ language: zh-CN
 
 ## 工作原理
 
-方法 4（LuGre）和 5（Stribeck）在低速时从该电平开始，速度越过 [FricVStribNeg](FricVStribNeg.md) 后衰减到库仑电平（[FricINeg](FricINeg.md)）。它们只使用其幅值。象限切换补偿（[FricQSCOn](FricQSCOn.md)）以差值 |`FricIStatNeg`| − |FricINeg| 作为冲击的大小。方法 1 至 3 不使用该参数。
+方法 1（Stribeck）和 5（LuGre）在低速时从该电平开始，速度越过 [FricVStribNeg](FricVStribNeg.md) 后衰减到库仑电平（[FricINeg](FricINeg.md)）。它们只使用其幅值。象限切换补偿（[FricQSCOn](FricQSCOn.md)）以差值 |`FricIStatNeg`| − |FricINeg| 作为冲击的大小。方法 2 至 4 不使用该参数。
 
 请将其设为不低于库仑电平；低于库仑电平的值按等于库仑电平处理。
 

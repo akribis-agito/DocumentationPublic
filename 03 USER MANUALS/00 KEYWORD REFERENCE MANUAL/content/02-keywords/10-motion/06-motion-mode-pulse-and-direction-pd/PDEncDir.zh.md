@@ -68,7 +68,7 @@ APDEncDir=1          ; inverted accumulation direction
 
 `PDEncDir` 仅适用于 **central-i v5**。在 v4 上该关键字为保留（未实现）。在 v5（central-i）上，它是一个读/写闪存参数，范围为 0–1，应用上述符号。v5 仅适用于 central-i，因此独立产品不提供 `PDEncDir`。
 
-自 FPGA v5.5.0-rc4 起，所有产品对 P/D 输入的计数方向一致：方向低电平时递增。在此之前，AGD155-AF、AGD155-EC、AGD200 和 AGD301（以及设置为 P/D 的 Central-i 编码器）在方向高电平时递增，只有 AGD101 在方向低电平时递增。如果您曾在这些产品上设置 `PDEncDir = 1` 或调换方向线来补偿，请在升级后撤销。
+自 FPGA v5.5.0-rc3 起，所有产品对 P/D 输入的计数方向一致：方向低电平时递增。在此之前，AGD155-AF、AGD155-EC、AGD200 和 AGD301（以及设置为 P/D 的 Central-i 编码器）在方向高电平时递增，只有 AGD101 在方向低电平时递增。如果您曾在这些产品上设置 `PDEncDir = 1` 或调换方向线来补偿，请在升级后撤销。
 
 ## 另请参阅
 

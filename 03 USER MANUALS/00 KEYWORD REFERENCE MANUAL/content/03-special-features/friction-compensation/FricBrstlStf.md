@@ -1,6 +1,6 @@
 ---
 keyword: FricBrstlStf
-summary: LuGre bristle stiffness (σ0), used by FricMethod 4 (renamed from FricSigma0).
+summary: LuGre bristle stiffness (σ0), used by FricMethod 5 (renamed from FricSigma0).
 availability:
   standalone: []
   central-i:
@@ -26,11 +26,11 @@ overrides: {}
 ---
 # FricBrstlStf
 
-LuGre bristle stiffness (σ0), used by FricMethod 4 (renamed from FricSigma0).
+LuGre bristle stiffness (σ0), used by FricMethod 5 (renamed from FricSigma0).
 
 ## Overview
 
-`FricBrstlStf` is the LuGre model's bristle stiffness, σ0. Available on AGM800 and AGM800-EC (central-i v5). It replaces `FricSigma0` from 5.3.0-rc4 (same CAN code). Only method 4 (LuGre) uses it.
+`FricBrstlStf` is the LuGre model's bristle stiffness, σ0. Available on AGM800 and AGM800-EC (central-i v5). It replaces `FricSigma0` from 5.3.0-rc4 (same CAN code). Only method 5 (LuGre) uses it.
 
 ## How it works
 
