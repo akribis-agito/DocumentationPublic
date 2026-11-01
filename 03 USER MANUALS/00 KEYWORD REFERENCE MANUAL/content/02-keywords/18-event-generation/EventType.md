@@ -60,7 +60,7 @@ On firmware providing [EventLoad](EventLoad.md), mode 3 loads the entire selecte
 
 In mode 3 the status bits normally used by 1/T carry Ready/Fault, and public `Vel[4]` is zero. 1/T cannot be used in this mode; other modes resume it only after fresh timing data. Lock capture remains available subject to its normal configuration.
 
-Pulse overlap on any selected output faults the run. The pulse width plus recovery must fit the interval on that output: at a target 1 MHz the interval is 1 µs; at 500 kHz it is 2 µs. These are requested test rates, not a qualification claim for every board or pulse setting. Stop and reload after a fault.
+A table fault reported by the hardware during the run stops the run and sets the [EventStatus](EventStatus.md) Fault bit. At a target 1 MHz the interval between events is 1 µs; at 500 kHz it is 2 µs. These are requested test rates, not a qualification claim for every board or pulse setting. Stop and reload after a fault.
 
 
 ## Examples

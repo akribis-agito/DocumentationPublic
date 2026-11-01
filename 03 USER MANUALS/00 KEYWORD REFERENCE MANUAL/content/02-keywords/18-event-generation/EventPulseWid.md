@@ -54,7 +54,7 @@ The output duration is produced by a hardware timer, so the width is quantized t
 
 ### AGM800 prepared hardware tables
 
-For EventLoad-managed `EventType=3`, the effective width after the existing fine/coarse conversion must fit the current 13-bit hardware field (0–8191 units). A value outside that field fails preparation before arm; the preload path does not silently truncate or apply the larger-width clamping described for other paths. Other event types retain their existing behavior.
+For EventLoad-managed `EventType=3`, the effective width after the existing fine/coarse conversion must fit the current 13-bit hardware field (1–8191 units; an effective width of 0 is accepted only on the first selected row, where it selects toggle mode). A value outside that field fails preparation before arm; the preload path does not silently truncate or apply the larger-width clamping described for other paths. Other event types retain their existing behavior.
 
 
 ## Examples

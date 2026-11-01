@@ -36,9 +36,9 @@ Read [EventStatus](EventStatus.md): Loading is bit 0, Ready bit 1 and Fault bit 
 
 `EventOn=0` cancels/stops and discards the prepared run. Every run requires a fresh preload of the selected range. Relevant edits invalidate a prepared load; active-run edits are refused. A disconnect discards the job rather than adopting or resuming it after reconnect. Ordinary command/communication errors report failures; no EventAbort/EventAckErr/EventError ceremony is required.
 
-The converted effective pulse width must fit the original hardware's 13-bit field (0–8191 units after fine/coarse conversion); an unrepresentable width fails preparation before arm instead of being truncated.
+The converted effective pulse width must fit the original hardware's 13-bit field (1–8191 units after fine/coarse conversion; an effective width of 0 is accepted only on the first selected row, where it selects toggle mode); an unrepresentable width fails preparation before arm instead of being truncated.
 
-If a selected output cannot finish its pulse and recovery before the next event, the run faults. Stop, correct the settings and explicitly load again; there is no delayed-event queue or automatic retry.
+If the hardware reports a table fault during the run, the controller stops the run and sets the Fault bit. Stop, correct the settings and explicitly load again; there is no automatic retry.
 
 For `LockEventMode=0`, `EventLoad` measures the coordinate offset automatically before claiming the table transport. Modes 1 and 2 retain the existing initialization contract. A failed measurement refuses preparation.
 
