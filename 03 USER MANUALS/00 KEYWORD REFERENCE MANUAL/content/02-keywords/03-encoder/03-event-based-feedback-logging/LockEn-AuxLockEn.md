@@ -30,7 +30,7 @@ When `LockEn` transitions `0 → 1` the firmware:
 
 Writing `LockEn=1` while it is already `1` does **not** re-arm or reset the counter/timer — the reset only happens on the disabled → enabled transition.
 
-On AGM800 Central-i master firmware containing [Firmware-Main #1110](https://github.com/akribis-agito/Firmware-Main/issues/1110), this transition also clears any reply already present in the port's position-capture mailbox. This prevents a reply left from the previous session from becoming the new session's first capture. It does not cancel an outstanding transaction: a reply arriving after the clear is outside this guarantee.
+On AGM800 and AGM800-EC Central-i masters, this transition also ends the previous session's position-capture read. No reply requested before the re-arm becomes the new session's first capture, including the reply to a read still outstanding at the transition: that reply is discarded when it arrives.
 
 ### Capture pipeline
 
