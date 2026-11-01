@@ -21,7 +21,7 @@ $$\text{EncoderPos}_{\text{init}} = \text{Reading}_{\text{masked}} + \text{EncAb
 
 where `Reading_masked` is the raw reading after the [EncAbsMB](EncAbsMB-AuxEncAbsMB.md) right-shift and [EncDir](EncDir-AuxEncDir.md) direction handling (the same value reported as [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)). At the same time the delta is forced to 0 and the previous-reading register is primed, so the axis starts at `EncoderPos_init` with no spurious jump. This seeded value flows through the normal feedback pipeline (error mapping, modulo) to become [Pos](../../10-motion/01-kinematics-status/Pos.md). After the seed window closes the offset is no longer added; the position simply accumulates the per-cycle deltas.
 
-The standalone controller uses a shared countdown; Central-i uses a per-axis countdown re-armed during port configuration (see [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)). This countdown does not qualify the sample used to seed position.
+The standalone controller uses a shared countdown; Central-i uses a per-axis countdown re-armed during port configuration (see [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)). This countdown does not qualify the sample used to seed position. Exception: on AGM800 and AGM800-EC, active standard AMP main Tamagawa feedback with [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md) `>= 0` is not seeded during the countdown and keeps its preceding position; only after the countdown does a reply that passed the Central-i CRC1 check in the current control cycle with clear quality bits set the position to the absolute reading plus `EncAbsOff`.
 
 So `EncAbsOff` shifts where the encoder's absolute zero lands in the controller's position frame. To place machine zero at a chosen physical point, set `EncAbsOff` to the negative of the masked reading observed at that point (read it from [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)).
 
@@ -41,7 +41,7 @@ AAuxEncAbsOff=-50000    ; place auxiliary machine zero at reading 50000
 
 ## Edge cases
 
-- **Unvalidated power-up seed.** Initialization uses the processed reading during its countdown; it does not wait for a qualified first sample. Main absolute-encoder error handling begins after this window. A later clear [EncStatReg](EncStatReg.md) does not validate the reading used to seed [Pos](../../10-motion/01-kinematics-status/Pos.md). The [retained-feedback repair](https://github.com/akribis-agito/Firmware-Main/issues/1297) prevents repeated formatting of a retained Central-i word; it adds no startup qualification.
+- **Unvalidated power-up seed.** Except for the AGM800/AGM800-EC main Tamagawa case described under How it works, initialization uses the processed reading during its countdown; it does not wait for a qualified first sample. Main absolute-encoder error handling begins after this window. A later clear [EncStatReg](EncStatReg.md) does not validate the reading used to seed [Pos](../../10-motion/01-kinematics-status/Pos.md). The [retained-feedback repair](https://github.com/akribis-agito/Firmware-Main/issues/1297) prevents repeated formatting of a retained Central-i word; it adds no startup qualification.
 
 ## See also
 

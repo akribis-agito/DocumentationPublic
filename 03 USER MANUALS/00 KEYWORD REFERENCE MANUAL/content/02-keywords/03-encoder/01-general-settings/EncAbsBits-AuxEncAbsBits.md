@@ -44,7 +44,7 @@ For a BiSS-C encoder (`EncType=6`) the `EncAbsBits` data field is one field insi
 
 The firmware accumulates changes between processed absolute readings, rather than treating the encoder as an incremental counter. A control cycle does not guarantee a new valid absolute measurement: a remote may retain a word, transport may reject a frame, or error handling may predict position. See [EncAbsVal](EncAbsVal-AuxEncAbsVal.md) for retained-feedback behavior and [EncStatReg](EncStatReg.md) for diagnostic limits.
 
-During the startup window, the accumulated feedback position is seeded from the processed absolute reading plus [EncAbsOff](EncAbsOff-AuxEncAbsOff.md). The countdown does not qualify that sample; it does not by itself prove the machine position is correct.
+During the startup window, the accumulated feedback position is seeded from the processed absolute reading plus [EncAbsOff](EncAbsOff-AuxEncAbsOff.md). The countdown does not qualify that sample; it does not by itself prove the machine position is correct. Exception: on AGM800 and AGM800-EC, active standard AMP main Tamagawa feedback with [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md) `>= 0` is not seeded during the countdown and keeps its preceding position; only after the countdown does a reply that passed the Central-i CRC1 check in the current control cycle with clear quality bits set the position to the absolute reading plus `EncAbsOff`.
 
 ### Auxiliary encoder (AuxEncAbsBits)
 
