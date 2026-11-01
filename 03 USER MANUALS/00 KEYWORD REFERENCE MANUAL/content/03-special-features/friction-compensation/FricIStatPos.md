@@ -34,7 +34,7 @@ Breakaway (static) friction level for the positive direction, in mA.
 
 ## How it works
 
-Methods 4 (LuGre) and 5 (Stribeck) start from this level at low speed and fade to the Coulomb level ([FricIPos](FricIPos.md)) as the speed passes [FricVStribPos](FricVStribPos.md). They use its size only. Quadrant-switching compensation ([FricQSCOn](FricQSCOn.md)) uses the difference |`FricIStatPos`| − |FricIPos| as the size of its kick. Methods 1 to 3 do not use it.
+Methods 1 (Stribeck) and 5 (LuGre) start from this level at low speed and fade to the Coulomb level ([FricIPos](FricIPos.md)) as the speed passes [FricVStribPos](FricVStribPos.md). They use its size only. Quadrant-switching compensation ([FricQSCOn](FricQSCOn.md)) uses the difference |`FricIStatPos`| − |FricIPos| as the size of its kick. Methods 2 to 4 do not use it.
 
 Set it at or above the Coulomb level; a value below the Coulomb level is treated as equal to it.
 

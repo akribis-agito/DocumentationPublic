@@ -36,7 +36,7 @@ Enables quadrant-switching compensation (a breakaway kick at reversals and start
 
 When the velocity feedback leaves the band ([FricVBandPos](FricVBandPos.md) / [FricVBandNeg](FricVBandNeg.md)) in a new direction, and after the hold-off [FricQSCHold](FricQSCHold.md), the stage adds a kick of about |[FricIStatPos](FricIStatPos.md)| − |[FricIPos](FricIPos.md)| (or the negative-side pair) that decays with the time constant [FricQSCTime](FricQSCTime.md). The kick carries only the breakaway excess; the sliding level comes from the selected [FricMethod](FricMethod.md).
 
-The kick is added on top of methods 0 to 3. It is skipped for methods 4 and 5, which already contain the breakaway level. Its output is part of the stage, so [FricLim](FricLim.md) clamps it too.
+The kick is added on top of methods 0, 2, 3 and 4. It is skipped for methods 1 and 5, which already contain the breakaway level. Its output is part of the stage, so [FricLim](FricLim.md) clamps it too.
 
 ## Examples
 

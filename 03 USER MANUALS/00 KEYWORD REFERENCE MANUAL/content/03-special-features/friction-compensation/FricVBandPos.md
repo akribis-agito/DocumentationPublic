@@ -40,13 +40,13 @@ Near zero velocity the direction of travel is uncertain, and this band says how 
 
 | Method | Use of `FricVBandPos` |
 |---|---|
-| 1 (linear) | Width of the ramp from 0 to the Coulomb level |
-| 2 (hysteresis) | Velocity at which the level switches to the positive side |
-| 3 (play) | Width of the ramp that leads to the positive-side level |
-| 5 (Stribeck) | Width of the smooth (tanh) build-up through zero |
+| 1 (Stribeck) | Width of the smooth (tanh) build-up through zero |
+| 2 (linear) | Width of the ramp from 0 to the Coulomb level |
+| 3 (hysteresis) | Velocity at which the level switches to the positive side |
+| 4 (play) | Width of the ramp that leads to the positive-side level |
 | Quadrant switching | Dead band: no kick until the velocity leaves the band |
 
-LuGre (method 4) does not use the band; it uses [FricVStribPos](FricVStribPos.md). A band of 0 means "switch at zero velocity". Values saved under 5.3.0-rc4 are not converted. After upgrading from rc4, re-enter the friction settings.
+LuGre (method 5) does not use the band; it uses [FricVStribPos](FricVStribPos.md). A band of 0 means "switch at zero velocity". Values saved under 5.3.0-rc4 are not converted. After upgrading from rc4, re-enter the friction settings.
 
 ## Examples
 

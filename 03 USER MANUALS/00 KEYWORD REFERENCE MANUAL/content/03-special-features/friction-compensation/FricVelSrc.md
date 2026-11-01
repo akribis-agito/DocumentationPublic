@@ -30,7 +30,7 @@ Selects the velocity the friction models use (0 = dPosRef, 1 = VelRef, 2 = veloc
 
 ## Overview
 
-`FricVelSrc` chooses which velocity drives friction methods 1, 2, 3 and 5. Available on AGM800 and AGM800-EC (central-i v5).
+`FricVelSrc` chooses which velocity drives friction methods 1 to 4. Available on AGM800 and AGM800-EC (central-i v5).
 
 | `FricVelSrc` | Velocity used |
 |---|---|
@@ -42,7 +42,7 @@ Selects the velocity the friction models use (0 = dPosRef, 1 = VelRef, 2 = veloc
 
 All three sources are in counts/s, so the same band and Stribeck velocities apply whichever you choose. A reference (0 or 1) gives a clean, noise-free signal and switches direction exactly when the command does; the feedback (2) follows what the axis really does.
 
-In velocity mode there is no position reference, so the stage always uses `VelRef` there, whatever `FricVelSrc` says. LuGre (method 4) and quadrant-switching compensation always use the velocity feedback. The viscous term ([FricViscous](FricViscous.md)) always uses the velocity feedback.
+In velocity mode there is no position reference, so the stage always uses `VelRef` there, whatever `FricVelSrc` says. LuGre (method 5) and quadrant-switching compensation always use the velocity feedback. The viscous term ([FricViscous](FricViscous.md)) always uses the velocity feedback.
 
 ## Examples
 

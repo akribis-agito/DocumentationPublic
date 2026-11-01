@@ -1,6 +1,6 @@
 ---
 keyword: FricBrstlStf
-summary: LuGre 刷毛刚度（σ0），供 FricMethod 4 使用（由 FricSigma0 更名）。
+summary: LuGre 刷毛刚度（σ0），供 FricMethod 5 使用（由 FricSigma0 更名）。
 availability:
   standalone: []
   central-i:
@@ -27,11 +27,11 @@ language: zh-CN
 ---
 # FricBrstlStf
 
-LuGre 刷毛刚度（σ0），供 FricMethod 4 使用（由 FricSigma0 更名）。
+LuGre 刷毛刚度（σ0），供 FricMethod 5 使用（由 FricSigma0 更名）。
 
 ## 概述
 
-`FricBrstlStf` 是 LuGre 模型的刷毛刚度 σ0。适用于 AGM800 和 AGM800-EC（central-i v5）。它取代 5.3.0-rc4 中的 `FricSigma0`（CAN 代码不变）。仅方法 4（LuGre）使用该参数。
+`FricBrstlStf` 是 LuGre 模型的刷毛刚度 σ0。适用于 AGM800 和 AGM800-EC（central-i v5）。它取代 5.3.0-rc4 中的 `FricSigma0`（CAN 代码不变）。仅方法 5（LuGre）使用该参数。
 
 ## 工作原理
 
