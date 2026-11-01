@@ -22,7 +22,7 @@ $$\text{EncoderPos}_{\text{init}} = \text{Reading}_{\text{masked}} + \text{EncAb
 
 其中 `Reading_masked` 是经过 [EncAbsMB](EncAbsMB-AuxEncAbsMB.md) 右移和 [EncDir](EncDir-AuxEncDir.md) 方向处理后的原始读数（即作为 [EncAbsVal](EncAbsVal-AuxEncAbsVal.md) 报告的同一值）。同时增量被强制为 0，前一读数寄存器被预置，使轴从 `EncoderPos_init` 开始且不产生虚假跳变。该初始值流经正常反馈流程（误差映射、取模）成为 [Pos](../../10-motion/01-kinematics-status/Pos.md)。初始化窗口关闭后不再加偏置；位置仅累积每周期的增量。
 
-独立控制器使用共享倒计时；Central-i 使用逐轴倒计时，并在端口配置期间重新置位（参见 [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)）。此倒计时不确认用于位置初始化的样本是否有效。
+独立控制器使用共享倒计时；Central-i 使用逐轴倒计时，并在端口配置期间重新置位（参见 [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)）。此倒计时不确认用于位置初始化的样本是否有效。例外：在 AGM800 和 AGM800-EC 上，活动的标准 AMP 主 Tamagawa 反馈在 [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md) `>= 0` 时不在倒计时期间初始化，而是保持先前位置；倒计时结束后，只有本控制周期新通过 Central-i CRC1 检查、且质量位全部清零的回复，才将位置设为绝对读数加 `EncAbsOff`。
 
 因此 `EncAbsOff` 改变编码器的绝对零点在控制器位置坐标系中的落点。要将机械零点置于选定的物理点，请将 `EncAbsOff` 设为在该点观测到的掩码读数的相反数（从 [EncAbsVal](EncAbsVal-AuxEncAbsVal.md) 读取）。
 
@@ -42,7 +42,7 @@ AAuxEncAbsOff=-50000    ; place auxiliary machine zero at reading 50000
 
 ## 边界情况
 
-- **未验证的上电初始化。** 初始化在倒计时期间使用已处理的读数，并不等待首次有效样本。主绝对式编码器错误处理在此窗口结束后才开始。之后 [EncStatReg](EncStatReg.md) 清零，并不能验证用于初始化 [Pos](../../10-motion/01-kinematics-status/Pos.md) 的读数。[保留反馈修复](https://github.com/akribis-agito/Firmware-Main/issues/1297)防止对保留的 Central-i 字重复格式化，但不增加启动有效性确认。
+- **未验证的上电初始化。** 除“工作原理”中所述的 AGM800/AGM800-EC 主 Tamagawa 情况外，初始化在倒计时期间使用已处理的读数，并不等待首次有效样本。主绝对式编码器错误处理在此窗口结束后才开始。之后 [EncStatReg](EncStatReg.md) 清零，并不能验证用于初始化 [Pos](../../10-motion/01-kinematics-status/Pos.md) 的读数。[保留反馈修复](https://github.com/akribis-agito/Firmware-Main/issues/1297)防止对保留的 Central-i 字重复格式化，但不增加启动有效性确认。
 
 ## 另请参阅
 

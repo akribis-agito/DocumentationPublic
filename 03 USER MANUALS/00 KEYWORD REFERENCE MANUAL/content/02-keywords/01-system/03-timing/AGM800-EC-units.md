@@ -47,6 +47,10 @@ The table lists the fixed time-domain conversions. For writable keywords, writes
 | [CNCBVel](../../10-motion/09-motion-mode-cnc/CNCAVel-CNCBVel.md) | 1.024 |
 | [ddPosRef](../../10-motion/01-kinematics-status/ddPosRef.md) | 1.048576 |
 | [dddPosRef](../../10-motion/01-kinematics-status/dddPosRef.md) | 1.073741824 |
+| [FricVStribPos](../../../03-special-features/friction-compensation/FricVStribPos.md) | 1.024 |
+| [FricVStribNeg](../../../03-special-features/friction-compensation/FricVStribNeg.md) | 1.024 |
+| [FricVBandPos](../../../03-special-features/friction-compensation/FricVBandPos.md) | 1.024 |
+| [FricVBandNeg](../../../03-special-features/friction-compensation/FricVBandNeg.md) | 1.024 |
 
 `MapErrOnStep` is a dimensionless ramp step, not a velocity; its internal counter full scale remains 16384.
 

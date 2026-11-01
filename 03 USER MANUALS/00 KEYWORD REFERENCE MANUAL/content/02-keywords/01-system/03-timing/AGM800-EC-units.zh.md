@@ -47,6 +47,10 @@ AGM800-EC（Identity 产品类型 16）采用标称 **16,000 Hz** 控制频率�
 | [CNCBVel](../../10-motion/09-motion-mode-cnc/CNCAVel-CNCBVel.zh.md) | 1.024 |
 | [ddPosRef](../../10-motion/01-kinematics-status/ddPosRef.zh.md) | 1.048576 |
 | [dddPosRef](../../10-motion/01-kinematics-status/dddPosRef.zh.md) | 1.073741824 |
+| [FricVStribPos](../../../03-special-features/friction-compensation/FricVStribPos.zh.md) | 1.024 |
+| [FricVStribNeg](../../../03-special-features/friction-compensation/FricVStribNeg.zh.md) | 1.024 |
+| [FricVBandPos](../../../03-special-features/friction-compensation/FricVBandPos.zh.md) | 1.024 |
+| [FricVBandNeg](../../../03-special-features/friction-compensation/FricVBandNeg.zh.md) | 1.024 |
 
 `MapErrOnStep` 是无量纲斜坡步长，不是速度；其内部计数器满量程仍为 16384。
 
