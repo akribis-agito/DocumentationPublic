@@ -1,7 +1,7 @@
 ---
 summary: Raw absolute encoder value after bit-masking and direction handling.
-last_updated: '2026-10-16'
-doc_revision: '2026.10'
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 ---
 # EncAbsVal/AuxEncAbsVal
 

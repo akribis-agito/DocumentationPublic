@@ -30,7 +30,7 @@ overrides:
   central-i.v5:
     scope: axis
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 ---
 # MaxVBusTime
 

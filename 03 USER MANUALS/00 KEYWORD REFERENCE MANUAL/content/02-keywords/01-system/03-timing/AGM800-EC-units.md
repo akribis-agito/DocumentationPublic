@@ -1,7 +1,7 @@
 ---
 summary: AGM800-EC timing and units
-last_updated: '2026-10-10'
-doc_revision: '2026.10'
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 ---
 # AGM800-EC timing and units
 

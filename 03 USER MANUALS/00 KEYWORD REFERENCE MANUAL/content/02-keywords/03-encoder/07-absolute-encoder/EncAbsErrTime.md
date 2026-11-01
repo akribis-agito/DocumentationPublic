@@ -28,7 +28,7 @@ overrides:
   central-i.v5:
     implemented: partial
 last_updated: '2026-10-18'
-doc_revision: '2026.10'
+doc_revision: '2026.11'
 ---
 # EncAbsErrTime
 

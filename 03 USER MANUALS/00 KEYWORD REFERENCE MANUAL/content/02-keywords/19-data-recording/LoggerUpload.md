@@ -27,7 +27,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-22'
-doc_revision: '2026.10'
+doc_revision: '2026.11'
 ---
 # LoggerUpload
 

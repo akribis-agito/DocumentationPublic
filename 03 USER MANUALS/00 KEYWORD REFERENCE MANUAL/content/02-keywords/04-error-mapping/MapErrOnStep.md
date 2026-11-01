@@ -26,7 +26,7 @@ attributes:
 overrides: {}
 summary: Step size used to apply the map correction when mapping engages.
 last_updated: '2026-10-16'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 ---
 # MapErrOnStep
 

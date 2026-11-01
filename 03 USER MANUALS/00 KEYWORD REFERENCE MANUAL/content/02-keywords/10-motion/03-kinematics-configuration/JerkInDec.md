@@ -34,7 +34,7 @@ overrides:
     default: 100000000.0
     can_code: 566
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 ---
 # JerkInDec
 

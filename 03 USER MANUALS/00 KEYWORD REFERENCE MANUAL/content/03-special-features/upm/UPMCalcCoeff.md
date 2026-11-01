@@ -24,7 +24,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-20'
-doc_revision: '2026.10'
+doc_revision: '2026.11'
 ---
 # UPMCalcCoeff
 

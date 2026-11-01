@@ -31,7 +31,7 @@ overrides:
   central-i.v5:
     array_size: 113
 last_updated: '2026-10-21'
-doc_revision: '2026.10'
+doc_revision: '2026.11'
 ---
 # Math
 

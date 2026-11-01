@@ -26,7 +26,7 @@ attributes:
 overrides: {}
 summary: Number of correction points along each error-mapping dimension.
 last_updated: '2026-10-17'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 ---
 # MapLength
 

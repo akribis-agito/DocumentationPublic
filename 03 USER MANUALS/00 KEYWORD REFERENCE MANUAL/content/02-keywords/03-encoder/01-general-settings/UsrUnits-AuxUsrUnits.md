@@ -1,7 +1,7 @@
 ---
 summary: Ratio between a desired user unit and encoder counts for reading position and its derivatives.
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 ---
 # UsrUnits/AuxUsrUnits
 

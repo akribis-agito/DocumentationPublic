@@ -1,7 +1,7 @@
 ---
 summary: Number of bits of the absolute encoder reading.
-last_updated: '2026-10-16'
-doc_revision: '2026.10'
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 ---
 # EncAbsBits/AuxEncAbsBits
 

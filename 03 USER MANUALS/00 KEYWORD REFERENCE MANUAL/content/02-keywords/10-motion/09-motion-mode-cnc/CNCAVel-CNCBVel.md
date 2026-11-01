@@ -1,7 +1,7 @@
 ---
 summary: Read-only array reporting the actual resultant path velocity of the CNC group A (or B) members.
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 ---
 # CNCAVel/CNCBVel
 

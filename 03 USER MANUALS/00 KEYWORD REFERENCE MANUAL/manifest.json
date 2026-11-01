@@ -1,8 +1,8 @@
 {
   "manual": "Keyword Reference Manual",
-  "version": "2026.09",
-  "generated": "2026-09-25",
-  "document_count": 952,
+  "version": "2026.11",
+  "generated": "2026-11-01",
+  "document_count": 986,
   "documents": [
     {
       "path": "01-keyword-usage-and-syntax/complex-can-code.md",
@@ -33,13 +33,13 @@
     {
       "path": "02-keywords/01-system/00-overview.md",
       "keyword": "00-overview",
-      "last_updated": "2026-05-28",
-      "doc_revision": "2026.06",
-      "sha256": "6565b93fbdec82e90195c4bc4a75ebd3a89370d6f3d2af684830c93de3136904",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "5d167f26e2389966eeb7902e446bcc0030737785f05b91243381e03ffb25584b",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/00-overview.zh.md",
-          "sha256": "11e3fd7e4d6e7467c00122b91c8992685df1b4115cb3141000467876ac1ae694"
+          "sha256": "77d0ca14649ed8b4e29f870d9b8cc43ed536329f61df1b869343443a3eeaa2f0"
         }
       }
     },
@@ -124,13 +124,13 @@
     {
       "path": "02-keywords/01-system/01-status/Identity.md",
       "keyword": "Identity",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "dfa4bb9b644c81ffe1147bc34a92de05ee4fc94797c19b1c28c999eb7daadba8",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "e3abca63413bf551bf92d6b63e7bf4444dfe1c4af958d203979373a4799a3c32",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/01-status/Identity.zh.md",
-          "sha256": "174bd809a88b13fd9e43d4040128fd605afa9e547ccdf4c8906cffbfecae4de4"
+          "sha256": "c9cb0f24b612d157df313083f27d2ea3432d2503127264f2dedf7f3806bb8b22"
         }
       }
     },
@@ -345,39 +345,52 @@
     {
       "path": "02-keywords/01-system/03-timing/00-overview.md",
       "keyword": "00-overview",
-      "last_updated": "2026-05-30",
-      "doc_revision": "2026.06",
-      "sha256": "9611c9e39257f6fda27f68bae6e8e8d6b6ef2de62fdf6532c6371490dd076f41",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "4822edda9a1baf4aa32b4579ff10f5e1926bb9be2dab54a52cc948b9f9299e4d",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/03-timing/00-overview.zh.md",
-          "sha256": "5d8ca2ce4cb466b7193904de3295e81546cc1a8f59134aa693d9edbdb0dbad44"
+          "sha256": "84c948f5d97d4e7a78d869adaec7bb9c1570d3885f4394fb80c90d9b0de380e9"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/01-system/03-timing/AGM800-EC-units.md",
+      "keyword": "AGM800-EC-units",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "5bb4138293a8df8f4f7fad0e3e5a89a73fbc04f23fd7b57d6916ebe1d4f9c0ba",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/01-system/03-timing/AGM800-EC-units.zh.md",
+          "sha256": "f6fa33949b3469a6e19f5b22ff28a64b3049dce0c8111486aa66afbfccbb14c0"
         }
       }
     },
     {
       "path": "02-keywords/01-system/03-timing/CounterDown.md",
       "keyword": "CounterDown",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "02b960671f42a605bd19d080be5599b5fb9ac6e05e06fac52d0726f19035cb9c",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "82fbe4f795fce63496aed1ffedf46ce15da74ae9c06ce7e20a15c66fc326c942",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/03-timing/CounterDown.zh.md",
-          "sha256": "cdc9ff682419cdbb04714a009963e3996e808b0ec92d41407b544b50976f0137"
+          "sha256": "5a2a9baf7ec00ded8784241ef7874ab7306267a247be4be8e6ba6dd4030a2bc8"
         }
       }
     },
     {
       "path": "02-keywords/01-system/03-timing/CounterUp.md",
       "keyword": "CounterUp",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "c1bc00d2e572836fcde8aaa5c24bd7b879a6b65349f359ed385e165950c7a19f",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "36e1237bf6fd1dae89f98a01fdf0d3d9a8f5210c2a58fe67cb184e58b71ec957",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/03-timing/CounterUp.zh.md",
-          "sha256": "b89b5c8a81471f4f00d2f06a484bad054bc743860c8f896aee0054e494c00b5d"
+          "sha256": "64da1029914e19a5e372153fb98fa1fc3fea60218f6498239988084142530ebf"
         }
       }
     },
@@ -397,13 +410,13 @@
     {
       "path": "02-keywords/01-system/03-timing/Time.md",
       "keyword": "Time",
-      "last_updated": "2026-05-30",
-      "doc_revision": "2026.06",
-      "sha256": "ca477944aca349ca03f92853ae3055689356157184dadc6bcdd854551c06d725",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "89e0837eedde866638b832ce6bece92163bb93cf261a3da9c137a47342087cdd",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/03-timing/Time.zh.md",
-          "sha256": "1c201a12417ac3a23bc3c9675092e725d8c5cb88e3909b384725b91db3330677"
+          "sha256": "ca3a2982fafeaf40c7dad4adc14bc8613efb384e17ef692ee4afdec4f42a897f"
         }
       }
     },
@@ -449,13 +462,13 @@
     {
       "path": "02-keywords/01-system/04-communication/CANDelay.md",
       "keyword": "CANDelay",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "58da604407505d208afec8e6838b6e6513b7c73a80451d6f30ecaa5b24b3e1d4",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "007c92a6ffaad2ed29333cacfa5c69756c894d24c4a9f518189f4932e05b636c",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/04-communication/CANDelay.zh.md",
-          "sha256": "6940f0e27c5094d13637277c94b625d2b5c38e3b3e0497f3f9ed0249cd4e215d"
+          "sha256": "6ffebf7fab23e991dd4e16ef171db41fbba633ff06059de51c9f63c1d4cf9ce4"
         }
       }
     },
@@ -501,13 +514,13 @@
     {
       "path": "02-keywords/01-system/04-communication/EthernetPort.md",
       "keyword": "EthernetPort",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "89b5f71ca05f46593ac97f01be3bd3f25bb50b1f6b6fcf40c369141081d5f150",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "1364f86675e67496566816c7fd56e5e58c0ad7e3fd96a83d49e7497535542a55",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/04-communication/EthernetPort.zh.md",
-          "sha256": "754ef67527a60d38af59cf5942484fb85c3783d40998266577520ce1999ef843"
+          "sha256": "7764f688c60712dfe49b3245eb66a046b34048ffe248188e7d4999e3e3f73da0"
         }
       }
     },
@@ -670,13 +683,13 @@
     {
       "path": "02-keywords/01-system/05-central-i/CIIdentity.md",
       "keyword": "CIIdentity",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "92036bb830438bad8d1b2ff2f73a2ff8c72b694a2a8cee89a67f897c5f4df428",
+      "last_updated": "2026-10-27",
+      "doc_revision": "2026.11",
+      "sha256": "3a7827b7b33c4a13c005b79e60af3fa22c3caa4e55c694fcb986f599b6ac67d6",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/05-central-i/CIIdentity.zh.md",
-          "sha256": "a827621b99f6b279afe18463358fce59d966b46f7612692461085b82502ea3a3"
+          "sha256": "4cf9f87fa2d6f84957ff3a6a081547b74980f27e8ab6c3f4068907ab4e30a1a3"
         }
       }
     },
@@ -735,13 +748,13 @@
     {
       "path": "02-keywords/01-system/05-central-i/CIStatus.md",
       "keyword": "CIStatus",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "ad1b747d4ca43fec6a3690fe68d1ed1a6b137763f392448c87d524f457a2e884",
+      "last_updated": "2026-09-29",
+      "doc_revision": "2026.11",
+      "sha256": "ad2460530c5d79efc4e3dd0e1445a21f11999b9c46c50e3b45b19e73fd7fa257",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/01-system/05-central-i/CIStatus.zh.md",
-          "sha256": "12d9905c8873dc008f886f87514823b8250ae69849731799e01786798aef5253"
+          "sha256": "1e3fa320c904fa2f082484c12fbd78e7e3c0b7a40240b890cf046e13ce658153"
         }
       }
     },
@@ -807,6 +820,123 @@
         "zh-CN": {
           "path": "02-keywords/01-system/05-central-i/OfflineBLog.zh.md",
           "sha256": "68d0657366adb528058903ab0f3343eb1e7ad2bb350d79c830f692769097798f"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/01-system/06-push-events/00-overview.md",
+      "keyword": "00-overview",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "8cd3184e33f13690b99404082821fd51c908768c85927b599e9f799e70636a1e",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/01-system/06-push-events/00-overview.zh.md",
+          "sha256": "9866cde3bc4ec2bbe00f4bdf07c9c4690bb125f5442d31473ac2a5ad6b4ffc42"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/01-system/06-push-events/PushEvEnable.md",
+      "keyword": "PushEvEnable",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.11",
+      "sha256": "c01debc7e721ae5c658b7c3db577d84896eae51b2a1abee5e15efc90db2b7f24",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/01-system/06-push-events/PushEvEnable.zh.md",
+          "sha256": "265d6349a8b20db1c370543d9ab119a52790bd11213dd20dfbda862bc0435aa3"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/01-system/06-push-events/PushEvFillPct.md",
+      "keyword": "PushEvFillPct",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.11",
+      "sha256": "1fa5f95e027e8b42664e6a1c626aad05059507e94015157a0451b90b50fc06f9",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/01-system/06-push-events/PushEvFillPct.zh.md",
+          "sha256": "98159ceee17f4ace43cf7e03830f102aede2930f90234e68e24eea19da1f5045"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/01-system/06-push-events/PushEvFlushMs.md",
+      "keyword": "PushEvFlushMs",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "4fe584c00219599c0aae9bc0a1a458d47b12fcdb547e9daa9c35bf96a2822199",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/01-system/06-push-events/PushEvFlushMs.zh.md",
+          "sha256": "87c515e4e33f6db87f0a424c84e63381dcf6d42c3a8fc6083711012eaa75a553"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/01-system/06-push-events/PushEvLost.md",
+      "keyword": "PushEvLost",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.11",
+      "sha256": "8b88033f096569b45e0860ada88615b55f6fc4b8819ed909f0b745e6eec33374",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/01-system/06-push-events/PushEvLost.zh.md",
+          "sha256": "62d1ed06e9921784edd9c23bf69890c87eb6a6734c4072541c0a978a27c1344d"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/01-system/06-push-events/PushEvSelSys.md",
+      "keyword": "PushEvSelSys",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.11",
+      "sha256": "263c2b4647cf8ad0d07c8808ca2ad59a042f4f129c9c8aadee1812eff4c05112",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/01-system/06-push-events/PushEvSelSys.zh.md",
+          "sha256": "bd344f4c1b6963c4acef5193f23a9273a50aee4f175a458c62de9e6d86c7852c"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/01-system/06-push-events/PushEvSelect.md",
+      "keyword": "PushEvSelect",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.11",
+      "sha256": "d15d8702847ca37bec55f5293c088bd61eab0c13ac7e62ac9ee69d6d20f4e42f",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/01-system/06-push-events/PushEvSelect.zh.md",
+          "sha256": "e2c1c89e1c48c7098c4153a0c75b6b95fb15ce6157fa79b28366b7d4752ba68c"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/01-system/06-push-events/PushEvStat.md",
+      "keyword": "PushEvStat",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.11",
+      "sha256": "38bc8fe395de5f8498b7d165020aa85364443cf14c1f6de3b1e208f708d5db9e",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/01-system/06-push-events/PushEvStat.zh.md",
+          "sha256": "9a4e9db21b8d123b83373fdf5a754d469fe5c067e332b89d7edb740889851017"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/01-system/06-push-events/PushEvTotLost.md",
+      "keyword": "PushEvTotLost",
+      "last_updated": "2026-09-25",
+      "doc_revision": "2026.11",
+      "sha256": "1b89823eb833cb404c98d97403145d27233ae0b036c66430983706ad69352c20",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/01-system/06-push-events/PushEvTotLost.zh.md",
+          "sha256": "a681c76cae060fccc67b8b32fe0271bbaaceb873bd399e0facc90c525ed8f532"
         }
       }
     },
@@ -982,13 +1112,13 @@
     {
       "path": "02-keywords/03-encoder/00-overview.md",
       "keyword": "00-overview",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "5cc7b84712fb3022038028c44f8721ae01af10e366aebeb2429af906d346bf03",
+      "last_updated": "2026-10-21",
+      "doc_revision": "2026.11",
+      "sha256": "7ffc358dbdb5ea5ea5078acc03b8a7c9c3cd9457299799356ee679013ab50e91",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/00-overview.zh.md",
-          "sha256": "c3b256aecd11e4805e5a4b993acabbfd7d9288d2fc25b197ad060fb0f972a22d"
+          "sha256": "7e3a6e6304a64afc4ef5e8ef3b84809611407ea91c62fd84068ee9ca2a428dc3"
         }
       }
     },
@@ -1021,13 +1151,13 @@
     {
       "path": "02-keywords/03-encoder/01-general-settings/EncAbsBits-AuxEncAbsBits.md",
       "keyword": "EncAbsBits-AuxEncAbsBits",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "b8994e386b241fa057d502ac7b6c0588664d98c4faf1b30f1f0dc066b472dfda",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "29876ef0c976adb43de8b16ad1198f077d212c5b8046b4f4e1e82be9b031c95c",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/01-general-settings/EncAbsBits-AuxEncAbsBits.zh.md",
-          "sha256": "f85b7177a0e788ff7db0c5d41263e16fd146744e4bace0ef73b7052528dc156a"
+          "sha256": "ff3250fb1edd0ec527077653c9b905dc0f3591237f2985148b274240b620b64f"
         }
       }
     },
@@ -1047,39 +1177,39 @@
     {
       "path": "02-keywords/03-encoder/01-general-settings/EncAbsMB-AuxEncAbsMB.md",
       "keyword": "EncAbsMB-AuxEncAbsMB",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "75dac676b7714c46a6bf4aef9a1c794a6121d34eb7b5a58e7537dbf0ba40ef83",
+      "last_updated": "2026-10-16",
+      "doc_revision": "2026.11",
+      "sha256": "33fe7e6134889f97657ef4d8922ff816a5bb7d729498c794d5a374b5e0a36062",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/01-general-settings/EncAbsMB-AuxEncAbsMB.zh.md",
-          "sha256": "6b190889a24f982afe35839635e251549baa12febff29fb48e667e8d1ad4cf90"
+          "sha256": "ef42a4d0a251fcaad5cd8214de22efe81d155a1482aff717f2050bfd0fb19afb"
         }
       }
     },
     {
       "path": "02-keywords/03-encoder/01-general-settings/EncAbsOff-AuxEncAbsOff.md",
       "keyword": "EncAbsOff-AuxEncAbsOff",
-      "last_updated": "2026-05-30",
-      "doc_revision": "2026.06",
-      "sha256": "010790d2354e93750ab00298a12972e0ab0c69a22e1deb32fcac51dfccc65d6d",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "4bb40df53b2a1346ea30c7175e427a4b6f74dacd164ae9e52a0594b82da93a21",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/01-general-settings/EncAbsOff-AuxEncAbsOff.zh.md",
-          "sha256": "5c742fcb0b8eea9c26795268bd2cc4fc565b8e23ef491e6705d4c34a2f70cb98"
+          "sha256": "ba2b6517b05a082804822e276de099de0dadb875829e9136624a9e55cb055721"
         }
       }
     },
     {
       "path": "02-keywords/03-encoder/01-general-settings/EncAbsVal-AuxEncAbsVal.md",
       "keyword": "EncAbsVal-AuxEncAbsVal",
-      "last_updated": "2026-05-30",
-      "doc_revision": "2026.06",
-      "sha256": "7f29271b7436d6eb2f457bc8600aabf6bd2ea9e9522cf4b01732be5f8074a826",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "04d48d4bc5a8c0ebb58c0c176ca87109e99a603f4684712b7fabfdb9a3e66a95",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/01-general-settings/EncAbsVal-AuxEncAbsVal.zh.md",
-          "sha256": "e755eeaf69bd373e8164c50f7476e55aea52c2172354660cb035cb69daa86321"
+          "sha256": "0bbd98feaca68163014267d40c00a33def53c14a2d695957558158dbec84303c"
         }
       }
     },
@@ -1125,13 +1255,13 @@
     {
       "path": "02-keywords/03-encoder/01-general-settings/EncStatReg.md",
       "keyword": "EncStatReg",
-      "last_updated": "2026-05-30",
-      "doc_revision": "2026.06",
-      "sha256": "2b5973eabe0d4f3eb2abbab4707f9a2def1ecc23496ab931fbea57c24ffc270b",
+      "last_updated": "2026-10-18",
+      "doc_revision": "2026.11",
+      "sha256": "9ad307bdd93a1791de42be1b224be36f63bd7e58579ce962a79f9229342df8b4",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/01-general-settings/EncStatReg.zh.md",
-          "sha256": "2151986858538188beb3e1369e1f9b3523751d5c6aca1abb0de365107e751cf8"
+          "sha256": "829498d9e5bd17c70415ce56626022d7858c4ef501f326f584086e237a6a98f7"
         }
       }
     },
@@ -1190,13 +1320,13 @@
     {
       "path": "02-keywords/03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.md",
       "keyword": "UsrUnits-AuxUsrUnits",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "217cb50fcbb32c49e03d52f710c7368ad95b7252f0174ee2d4cd1e7f076a0ed1",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "700ee4d60000d8803c6240d61375827012d3281d2eef1d1de703740722e8a5ca",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/01-general-settings/UsrUnits-AuxUsrUnits.zh.md",
-          "sha256": "aab19effc9fa2aa0f687a1123d9c662d9d4a70963c1a0d569f78b18198b69bc4"
+          "sha256": "e11f00971a489a0eba61ced59fab91443629b3f0fb5c65bb4100a225df3a5c5d"
         }
       }
     },
@@ -1242,52 +1372,65 @@
     {
       "path": "02-keywords/03-encoder/03-event-based-feedback-logging/00-overview.md",
       "keyword": "00-overview",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "b70aea30e82fedb63bacbcf65aea1d95ae7b1127205d91027ddb3b319c29fc3a",
+      "last_updated": "2026-10-21",
+      "doc_revision": "2026.11",
+      "sha256": "179b945e0be4ac0a80b1308f2aec87de9c825c31b365b877a79ec06817449054",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/03-event-based-feedback-logging/00-overview.zh.md",
-          "sha256": "d2d3059fda489051dba172ffc9a8ce6d204785131b965d5c3b47ffac0ee8d66f"
+          "sha256": "ecb6464116940b34a8f9e38a6712f4427eb4b7c6393d47830e233ac4a7630819"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/03-encoder/03-event-based-feedback-logging/LockBMapTable-LockBMapTabB.md",
+      "keyword": "LockBMapTable-LockBMapTabB",
+      "last_updated": "2026-10-21",
+      "doc_revision": "2026.11",
+      "sha256": "d668aee371f7cf866c5c1d75401794b9f270af8b8746635a43d4c54cbd7554f1",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/03-encoder/03-event-based-feedback-logging/LockBMapTable-LockBMapTabB.zh.md",
+          "sha256": "721266c8fd90b97da396b497b81fa3a6073c6e13f1bd76c5ea2db6e2f0a2a67b"
         }
       }
     },
     {
       "path": "02-keywords/03-encoder/03-event-based-feedback-logging/LockCntr-AuxLockCntr.md",
       "keyword": "LockCntr-AuxLockCntr",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "17414476c879616c06195ad6a5e20eb32e08fe86b9ccd24a69e4377a4b3ad292",
+      "last_updated": "2026-10-21",
+      "doc_revision": "2026.11",
+      "sha256": "57959660e5bf20d363be235c9378f801135262614ef6e0ad21be0116738f1979",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/03-event-based-feedback-logging/LockCntr-AuxLockCntr.zh.md",
-          "sha256": "280c64c8972c7694184ef55eb6e46cd822ff6f534fe33672e8eb045fa2983769"
+          "sha256": "9133a88bf421d9f8ed74e13eb6e10f70321c8566ef62e0b473251248fe92ee12"
         }
       }
     },
     {
       "path": "02-keywords/03-encoder/03-event-based-feedback-logging/LockEn-AuxLockEn.md",
       "keyword": "LockEn-AuxLockEn",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "8bad3db2e80ae9812b0e1ba68b2f3f16e9a175fec06683e81705961c5a0894db",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "52df6978e8138e5a9b09878bda8a1eb3817b2baab3ba2d5845a89a866c55f1c8",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/03-event-based-feedback-logging/LockEn-AuxLockEn.zh.md",
-          "sha256": "8662e2a50ce6047ae2021bacfa425d3f7032997e05f4216828bb45d09e1db0a1"
+          "sha256": "519fbc072bcef069edd729b34f1fb36f08840da68bdbd565ad64abf09cdcf5c6"
         }
       }
     },
     {
       "path": "02-keywords/03-encoder/03-event-based-feedback-logging/LockEventInit.md",
       "keyword": "LockEventInit",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "b81276107850e7712762a3722588513631db1710bad243be49341d257e0d894c",
+      "last_updated": "2026-10-09",
+      "doc_revision": "2026.11",
+      "sha256": "90c694ab93b79f71ba3e154a1d91e9aa1faac1bb10d36b64a462107b9096b898",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/03-event-based-feedback-logging/LockEventInit.zh.md",
-          "sha256": "3c8d9b1c3e4f248c1b86ef09235b26ca88ac400b7b17466d13c1cf845cf4f9d2"
+          "sha256": "7af102976af7bc4af06bb516b6807db5bb0b96f0555622c966ef2301bb10eba2"
         }
       }
     },
@@ -1318,41 +1461,54 @@
       }
     },
     {
+      "path": "02-keywords/03-encoder/03-event-based-feedback-logging/LockLost.md",
+      "keyword": "LockLost",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "8036c6a0546c2f6bd016dfca613a0fa98e0b753fbfaa733555bc29c1b5f64695",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/03-encoder/03-event-based-feedback-logging/LockLost.zh.md",
+          "sha256": "50e798347a764f84defa865ae9f558293899b7d9c63794d2acdc03e66ed610a4"
+        }
+      }
+    },
+    {
       "path": "02-keywords/03-encoder/03-event-based-feedback-logging/LockSrc-AuxLockSrc.md",
       "keyword": "LockSrc-AuxLockSrc",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "75ad09d23ce69a913c9f974a410ed803f20f9c6f8e1a7145bca30ba31aade57b",
+      "last_updated": "2026-10-09",
+      "doc_revision": "2026.11",
+      "sha256": "414fdacd95623ba7460c041d240817edb16374ed54af3fe73da57def6232eee9",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/03-event-based-feedback-logging/LockSrc-AuxLockSrc.zh.md",
-          "sha256": "c5aecb54cfaa193d90f5b9a1d2fff4cc7e12738d17fb6039633620d0b27f449e"
+          "sha256": "105252b0d1aabb4db9bd9a2abaaf3a9ffe54348c01b9a0abe1a3529e1fed3406"
         }
       }
     },
     {
       "path": "02-keywords/03-encoder/03-event-based-feedback-logging/LockTimeTable-LockTimeTabB.md",
       "keyword": "LockTimeTable-LockTimeTabB",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "a04ecd2029f15fd901264a30ff6f7bb91116e782edb11907db40fe5d6b052e02",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "10e4ada65e73f1469e4a42453ce7df46b55bf76419f1edd9d3265834417aaa5b",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/03-event-based-feedback-logging/LockTimeTable-LockTimeTabB.zh.md",
-          "sha256": "b712121d755bbd619b14caadcd44180b2c798167e2e3220a98934da1bf814296"
+          "sha256": "f879ca4b219fad0e08d1af65da94bc5c2bf8c786a5885d8632b6410551d1a491"
         }
       }
     },
     {
       "path": "02-keywords/03-encoder/03-event-based-feedback-logging/LockVal-AuxLockVal.md",
       "keyword": "LockVal-AuxLockVal",
-      "last_updated": "2026-05-28",
-      "doc_revision": "2026.06",
-      "sha256": "f5f5f6cd54b3b275b531120b3a62a98a1db9c0e3ebc224def3b9473d33041fa1",
+      "last_updated": "2026-10-09",
+      "doc_revision": "2026.11",
+      "sha256": "7367526fec656495d94f7b0c75341e7c90d752d53426554653425e0d777a9d00",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/03-event-based-feedback-logging/LockVal-AuxLockVal.zh.md",
-          "sha256": "6720f47d9e2728a7c4a39bd27f3dca955a71d1e4c56fd9e6f73ba152238cad13"
+          "sha256": "dcd309ca745ff48088091f3049e04f43472e5309551fc351ad881b632d5ef216"
         }
       }
     },
@@ -1489,65 +1645,65 @@
     {
       "path": "02-keywords/03-encoder/06-virtual-encoder/VEncFact.md",
       "keyword": "VEncFact",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "ff7b58c8438f6926d8072845ed54b16f2bf94e093f9b6e97140d84a09834acf1",
+      "last_updated": "2026-10-09",
+      "doc_revision": "2026.11",
+      "sha256": "a3af2b4590535b4496d12548d4e2c3f3c251cb3880aa48a90ccf0799fa3759d9",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/06-virtual-encoder/VEncFact.zh.md",
-          "sha256": "97691d08816a90b3d6d41ba0b03ed50e08be0054e6b15828e142c4bf1b79143b"
+          "sha256": "e74c7fabfa52ab5e14bdbbac14181b8750a8dacdf1c072b9e6c36602ba32f4e3"
         }
       }
     },
     {
       "path": "02-keywords/03-encoder/06-virtual-encoder/VEncFactDen.md",
       "keyword": "VEncFactDen",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "1407d8dd626d083073c8c0a40ef381a23e399a0dfc0e01a3eb76ac18f8c20042",
+      "last_updated": "2026-10-09",
+      "doc_revision": "2026.11",
+      "sha256": "264387143f8556009fca59efdf54deeb85b6258abb9767617ae5bde521e19ae2",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/06-virtual-encoder/VEncFactDen.zh.md",
-          "sha256": "487e0fdd0aba7911836f2ac82ddc4c9751d65a9bad09ddcf8958dac901fa4a46"
+          "sha256": "072227d9a87fda335be07bbf59ec059ba13b271b94e3e73de626c6d051d52b77"
         }
       }
     },
     {
       "path": "02-keywords/03-encoder/06-virtual-encoder/VEncModRev.md",
       "keyword": "VEncModRev",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "56540e055e68a6b0746ea795a9a48ae71a6261a0672f60cbbaf9d98d64487182",
+      "last_updated": "2026-10-09",
+      "doc_revision": "2026.11",
+      "sha256": "1569e19911530d214bfe1e51fcedc1f35e053cbf3f7d17e965c44e19ce7305c8",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/06-virtual-encoder/VEncModRev.zh.md",
-          "sha256": "c313d8990052cbd44fde14a9d540ff71fd2d7aa4e0b1e1a676605ed3746a1ffb"
+          "sha256": "4ec872cc3aa0986f4b273c2edfa7271e86b8eee9774a5c985944d9c584a9f3cc"
         }
       }
     },
     {
       "path": "02-keywords/03-encoder/06-virtual-encoder/VEncOn.md",
       "keyword": "VEncOn",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "b338cdd656a3bdaf2d0dc6a1d397ec1387269c681efa49c22a86a7112ac58390",
+      "last_updated": "2026-10-09",
+      "doc_revision": "2026.11",
+      "sha256": "e0ba0aba73ab992f270f64c58949ea819b2b29f5bf3a0ea6376b2f2454b88f43",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/06-virtual-encoder/VEncOn.zh.md",
-          "sha256": "a02b662315d0b528a0780837ee59e6c2eb0cde99f77f80cea503422bac3eb7a0"
+          "sha256": "2602d8c94cc88231f224bd3ea6256cb4f5a84e666009bede19dddfb8cda8e2bb"
         }
       }
     },
     {
       "path": "02-keywords/03-encoder/06-virtual-encoder/VEncSrc.md",
       "keyword": "VEncSrc",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "cf0011ea2d196ae0cf869e7e2cd37c3795603aae42a5f183694e674ab611a296",
+      "last_updated": "2026-10-09",
+      "doc_revision": "2026.11",
+      "sha256": "0f52969b5d974e8860f7ddd3d81b0d9cf53c9e34b341227a66823c0ef0d1f3be",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/06-virtual-encoder/VEncSrc.zh.md",
-          "sha256": "e80d91cee9543bf89bb2df50b37f288ab642702e394fdbc4b2d32a0040b5b551"
+          "sha256": "9a60cfb847642206d1390d9aba82882a7830ba024422290d3904b107e38538ca"
         }
       }
     },
@@ -1567,13 +1723,13 @@
     {
       "path": "02-keywords/03-encoder/06-virtual-encoder/VEncValue.md",
       "keyword": "VEncValue",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "d50913d64d174f9932d1953ab3b261baa5906ceb07238aa8e0c36d8314854d76",
+      "last_updated": "2026-10-11",
+      "doc_revision": "2026.11",
+      "sha256": "aaf07b64515f7ec7b50ca5db8a22a96198ba4997e388c93a070f6a020188a236",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/06-virtual-encoder/VEncValue.zh.md",
-          "sha256": "bca1cfe058ca7dfbb38682270a598e1e556c940a9a21c9468249c62ef0f854a4"
+          "sha256": "a750a3cd577568f44d4923018791a5723424a82ebbfa81a5da9a8cb0c513f933"
         }
       }
     },
@@ -1593,13 +1749,13 @@
     {
       "path": "02-keywords/03-encoder/07-absolute-encoder/EncAbsErrTime.md",
       "keyword": "EncAbsErrTime",
-      "last_updated": "2026-05-30",
-      "doc_revision": "2026.06",
-      "sha256": "7aa8622e54a837b32cbe3f19f9961f59212343c9f46ea981308c2f978d012320",
+      "last_updated": "2026-10-18",
+      "doc_revision": "2026.11",
+      "sha256": "b7228fb59f0a07537c2b571538c71e023a73b5716921d7d7d1d9df4f46d6ce35",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/07-absolute-encoder/EncAbsErrTime.zh.md",
-          "sha256": "5f941f8f7f19e3a1c31197082f565c07a7b4207bbaee6301b037c300a08f5134"
+          "sha256": "86fe6c2ac93b560f7b44d8c9aa2ab6be604cf661a0b9d56197889deca7a4d56d"
         }
       }
     },
@@ -1658,143 +1814,143 @@
     {
       "path": "02-keywords/04-error-mapping/00-overview.md",
       "keyword": "00-overview",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "e5bc8c6e6d009daa90b95853261eb746d605517fead999362d6afcf6f6f565c0",
+      "last_updated": "2026-10-16",
+      "doc_revision": "2026.11",
+      "sha256": "e5fbd75e2bf157506c965efbe390216af0e9972494770fc56d98035b7afa291f",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/04-error-mapping/00-overview.zh.md",
-          "sha256": "a915ede3db4f5fcd39ff15794e33c133d131d364759f2c17530411efd88727cd"
+          "sha256": "ca79ebbc245be5d6a756ba21580a5fbc268b9a0150017b545be0c4c135a7c3a8"
         }
       }
     },
     {
       "path": "02-keywords/04-error-mapping/MapEncoder.md",
       "keyword": "MapEncoder",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "2d8633a0e38984e8ce74fede5449e15e23678fda6d43514e3f90f4fe442d18f1",
+      "last_updated": "2026-10-17",
+      "doc_revision": "2026.11",
+      "sha256": "9b8b5fab572253a6a85544d73d434f6e5576bfaee7dd23297e0141aeda1d3d74",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/04-error-mapping/MapEncoder.zh.md",
-          "sha256": "85dbd419d8d7cd900baae526cb8904eba3b4cbbddc9b36e1caeaa10d1c7fc1e5"
+          "sha256": "f0c969ae0dbc06edbca5b18bae67998f3b514d4320a5977ba935ae17b91df060"
         }
       }
     },
     {
       "path": "02-keywords/04-error-mapping/MapErrOffRamp.md",
       "keyword": "MapErrOffRamp",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "a4dcaca90f91a75eb23ffeebcb60995c8ec8a9dd5f5fff0ffa87f4b65aef5853",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "5af083167709e696b10813e44a49621a85d56b77ace81065db65319f2071111e",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/04-error-mapping/MapErrOffRamp.zh.md",
-          "sha256": "36e0f6cfd22eca922eab624be0b3819232d3dae66b234b036c046cac552968bf"
+          "sha256": "36cfa7fa4529cbbd30f8a7d70f2194f0809a3f1778b760be568849572a01fc82"
         }
       }
     },
     {
       "path": "02-keywords/04-error-mapping/MapErrOffset.md",
       "keyword": "MapErrOffset",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "8b7e5b9ea166c34c5f264a24421080661280ec98d01fb17ec5cbac0bf4c0424e",
+      "last_updated": "2026-10-17",
+      "doc_revision": "2026.11",
+      "sha256": "0e0b23d2f61408aa9075c4d9986073a61e52da9367d9020504f380c2f990cd1e",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/04-error-mapping/MapErrOffset.zh.md",
-          "sha256": "205f4c784b52111df7382d7986a499651175a7479113b8b14a56a91128182bd8"
+          "sha256": "175e7893d7366192f376f9b4ae40e33d275057ae018790d238a10584e14e5e56"
         }
       }
     },
     {
       "path": "02-keywords/04-error-mapping/MapErrOnStep.md",
       "keyword": "MapErrOnStep",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "5606a8a21e7afdc7a620f9b8e0f7f959688fc5584ec3d0ab1c6cb1da30cda70f",
+      "last_updated": "2026-10-16",
+      "doc_revision": "2026.11",
+      "sha256": "420280f77c80474bfcfe04ae83278df99a52ec3a95ddc1f4e887c404867e6052",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/04-error-mapping/MapErrOnStep.zh.md",
-          "sha256": "af4e4e83049f7888dc3e842b56d4fa4f96066856cf0bc5d240f6c5d09cb0ab15"
+          "sha256": "f5c9d85f616bb85635dbf887cb3ead54cb268d2c2a8d5db49ba5b7a2b54a251a"
         }
       }
     },
     {
       "path": "02-keywords/04-error-mapping/MapLength.md",
       "keyword": "MapLength",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "0318a247e65ecef12f43c0d87e6859bd20465fa43d1d2823721d05971efb1072",
+      "last_updated": "2026-10-17",
+      "doc_revision": "2026.11",
+      "sha256": "4c3fdafa119d570fa572533eebe246213198bee0f690397e8a64484445e35132",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/04-error-mapping/MapLength.zh.md",
-          "sha256": "8e64223649f27f2a4e223c69ecdafc8e804a385f2b970bebe297a00b7a434b75"
+          "sha256": "2ccce4d384585c1c7c0dec8a3ec588edaa1bb9b83ce40e9057150504df0be8f7"
         }
       }
     },
     {
       "path": "02-keywords/04-error-mapping/MapPosGap.md",
       "keyword": "MapPosGap",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "4917819354119a88be53f3b5465632960a0f39b5cfb6d099fb3ed9ee416b41ca",
+      "last_updated": "2026-10-17",
+      "doc_revision": "2026.11",
+      "sha256": "8df1a8376fe32187845c0e427afd7b26d6414b34f96295c12103c4d1fc6ff7fa",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/04-error-mapping/MapPosGap.zh.md",
-          "sha256": "0fd70320b3c8b95dde815bcbea25a8adf07b4198c2537fe004371c0d8acbb0a4"
+          "sha256": "199b93ce0881866d56acb07eef93952964f00e11e742624b514b28fdf9331784"
         }
       }
     },
     {
       "path": "02-keywords/04-error-mapping/MapStartIndex.md",
       "keyword": "MapStartIndex",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "9e34fe95002ad9adeba0dbfb8c2327f020a5ddecd37f8791f0416628ffe172ec",
+      "last_updated": "2026-10-17",
+      "doc_revision": "2026.11",
+      "sha256": "4de90f8e938503335534ef7d87e082b7f7c5f4440e14b65cbd209074a3decd4e",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/04-error-mapping/MapStartIndex.zh.md",
-          "sha256": "07106ea4682d114c0256525ad511264e06d90d3286006a0464284e746c53617d"
+          "sha256": "1494a8b1097aa22c78c00fff6f0b9c6d6cd09b206584c942a29c55d50b529825"
         }
       }
     },
     {
       "path": "02-keywords/04-error-mapping/MapStartPos.md",
       "keyword": "MapStartPos",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "a94c04fce9a08adfdf17a3c1c70acc19a758cea436080c41164c4a92f7aab38e",
+      "last_updated": "2026-10-17",
+      "doc_revision": "2026.11",
+      "sha256": "21b2cb16f0b9d9c6b637ec0c53451442cbd7751f0a4d132ce8b793f9b2bdfbfa",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/04-error-mapping/MapStartPos.zh.md",
-          "sha256": "8ed9cb8433c4eeb0f1a9df493ea1d2741efbb304e1fb5dbeb3a789ab9c6753b8"
+          "sha256": "50a083fab43a62aadc216a756457697e30637d174e53a57d3de249a240836ed1"
         }
       }
     },
     {
       "path": "02-keywords/04-error-mapping/MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md",
-      "keyword": "MapTable-MapTableB-MapTableC-MapTableD-MapTableE",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "ef810cf924947998ef6c7d0cd2e372c8e80925bad85044c394a3173211186404",
+      "keyword": "MapTable",
+      "last_updated": "2026-10-17",
+      "doc_revision": "2026.11",
+      "sha256": "64f2946d63d61ee63c8219ffe7c56e829e0d8ad943d55dc9784348aebd8e0c86",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/04-error-mapping/MapTable-MapTableB-MapTableC-MapTableD-MapTableE.zh.md",
-          "sha256": "06ed72dc8bc0049dbdcb3de474cbf68dd3736b9d6ced6dc11c90e87cbbab7f58"
+          "sha256": "ed41f6f771fd361b7a7c5d63dafd592e2fee07f0c3f89288099b18807a9710fa"
         }
       }
     },
     {
       "path": "02-keywords/04-error-mapping/MapType.md",
       "keyword": "MapType",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "1334a8c868fd867d491830b8b3af8a9f737f9d2fd0fa28b16c24b76c380e5a44",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "09fc64153f29f4e91ce295beba759bebbda3a9a8b056d8c0533b79b804600cc6",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/04-error-mapping/MapType.zh.md",
-          "sha256": "e43a895cf5da417b5b16a4ec9f26fa5baca2dbfd0d9ccb97ee2c1cec01ed2dce"
+          "sha256": "90893541a699cd288802ddc82a33650adc4dbb41db4ec1e020c5caa98db91ec8"
         }
       }
     },
@@ -2139,13 +2295,13 @@
     {
       "path": "02-keywords/05-inputs-outputs/05-digital-outputs/DOutMode.md",
       "keyword": "DOutMode",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "db18f2032cdb1dedfcc1734a6358ff3df2f9d16176fd896fec24d6cafcf8c675",
+      "last_updated": "2026-10-21",
+      "doc_revision": "2026.11",
+      "sha256": "e866b3ba052a7a29e84cb09b759e30b771a71be96d315e415b1f5dfbc48d3ed9",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/05-inputs-outputs/05-digital-outputs/DOutMode.zh.md",
-          "sha256": "5e6047fd1b63c3c24d72a6e99d7a8848f5966dc7adf561d5c25d4e46fd45deb9"
+          "sha256": "3ac02ccaea199fd1c9eaad8671b48974f034af845510b9c7b0c0afd404a96b14"
         }
       }
     },
@@ -2178,13 +2334,13 @@
     {
       "path": "02-keywords/05-inputs-outputs/05-digital-outputs/DOutSelect.md",
       "keyword": "DOutSelect",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "68d909a31034a61430462e74011216217999ebd931a89833ce71388820665253",
+      "last_updated": "2026-10-27",
+      "doc_revision": "2026.11",
+      "sha256": "64d3328d4a3b045c0b6bc20664dad3ef23f4c7518e2a37069a9ae62d0faa29b7",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/05-inputs-outputs/05-digital-outputs/DOutSelect.zh.md",
-          "sha256": "dcbaf24c3a5b9b49664324c83930687fd3c9d6e0b4b42879ac2cb0a10e98e27c"
+          "sha256": "7442b9b3b299ddf4138bf9976c3ffe35c881db7fc2206dcfcbfa64d93b92965c"
         }
       }
     },
@@ -2360,13 +2516,13 @@
     {
       "path": "02-keywords/06-protections/02-current-and-voltage/MaxPWM.md",
       "keyword": "MaxPWM",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "2141f8015fc5497d795461f31595fd062e7221935a84739089e842e0ea9beb1f",
+      "last_updated": "2026-10-21",
+      "doc_revision": "2026.11",
+      "sha256": "f83b1c13ced55a23cf37e5047df72b57ecfb4484ef429f296f9ca824b8d8e010",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/02-current-and-voltage/MaxPWM.zh.md",
-          "sha256": "702d0d451bf463a8fb8e6353091ebc12015ff3cbb347ef7faaf17b26baed6e25"
+          "sha256": "961b77359c486bbd82a0c7d8de9747e42cee073ac71a6d33ec8a0defa58aaf91"
         }
       }
     },
@@ -2412,13 +2568,13 @@
     {
       "path": "02-keywords/06-protections/02-current-and-voltage/MaxVBusTime.md",
       "keyword": "MaxVBusTime",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "fdad6d0c1e4896e5575a50c90f1ca6a36d4a45233c0cd43b35b22ba454679034",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "6fc2b9b622c3dbc855e0260d05fc74673bc461c73c60c5d57130d26de9894bcf",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/02-current-and-voltage/MaxVBusTime.zh.md",
-          "sha256": "52791aa0bdef3f6b70232c729e3f42dbc6c843a00182a3284abf23635b087d96"
+          "sha256": "fedbf8cc34dcb19d1feeec4904b1366ce2c4d9afed432a593407e1acc63da595"
         }
       }
     },
@@ -2490,26 +2646,26 @@
     {
       "path": "02-keywords/06-protections/03-motion/dual-loop-stuck-protection/DualStuckTime.md",
       "keyword": "DualStuckTime",
-      "last_updated": "2026-05-30",
-      "doc_revision": "2026.06",
-      "sha256": "08f1d388186cfa25e4b906a8da3a04d851fb4c7e0da9c963f96396ecc8bb2178",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "5a77a0e2d020c924761625bba1525e140852715dd8143d9258703401348323eb",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/03-motion/dual-loop-stuck-protection/DualStuckTime.zh.md",
-          "sha256": "5f93d3c274ddeb209a2f8cd36054b9bb69593dc311904657f29c7db836653fdc"
+          "sha256": "c3c46612e997fefbb34aaf0d2026ca60ce5d7878dc85dbb1e01d71376c4f8596"
         }
       }
     },
     {
       "path": "02-keywords/06-protections/03-motion/dual-loop-stuck-protection/DualStuckVel.md",
       "keyword": "DualStuckVel",
-      "last_updated": "2026-05-30",
-      "doc_revision": "2026.06",
-      "sha256": "6ff58d680ef1d39b56d59bf5073ab407dc825ad3468b2c296485d43a98b3ff2c",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "fcd7b8ec1e769521138a80ac2e4b11cf94b7de0068df86837155a72feb7eea3d",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/03-motion/dual-loop-stuck-protection/DualStuckVel.zh.md",
-          "sha256": "4c5eb0f1b47c768e6f761c0ebdcf14f9d67dd42b40ab82d2d05ab35c639f5f52"
+          "sha256": "6a699bc3d3c60669405dad198b99133a9104af63b2fafe6df36074cf725193c1"
         }
       }
     },
@@ -2555,39 +2711,39 @@
     {
       "path": "02-keywords/06-protections/03-motion/general-maximum-limits/MaxVel.md",
       "keyword": "MaxVel",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "8fbce3d2e12ac3e4df22701b06940df15d62a1e7a06ad00935e863ca1f9cb03e",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "2aa4b675d61254aaaf0bbb5fedbf4ce57a87a77e4e43a8e8b6796f07d6a46c05",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/03-motion/general-maximum-limits/MaxVel.zh.md",
-          "sha256": "c1daf09df35fa31de8f4b1713fcfd33ebcd81ecc823cfbc6b7e610c78989ef6d"
+          "sha256": "fc0c98c9a351f2ca9f6be0f7da7727e66311162f6d4b809ef0edc78a2747c65e"
         }
       }
     },
     {
       "path": "02-keywords/06-protections/03-motion/general-maximum-limits/MaxVelErr.md",
       "keyword": "MaxVelErr",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "c6577d809c6db9470692dee9d5363566c6fbbccf16aa2fea536856504c60132a",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "59001705de271fdca75db29b507b9503e1d378c41338d4a76c799d2bf66cccd5",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/03-motion/general-maximum-limits/MaxVelErr.zh.md",
-          "sha256": "0583b7a385a90e98bcea96194533883923d01b2c41139637e123e72d206cc90e"
+          "sha256": "ea92b7ada01e8b7b478269394928cf1dfba58908d5a101e76040283bb7431de7"
         }
       }
     },
     {
       "path": "02-keywords/06-protections/03-motion/general-maximum-limits/MaxVelErrOL.md",
       "keyword": "MaxVelErrOL",
-      "last_updated": "2026-05-30",
-      "doc_revision": "2026.06",
-      "sha256": "efe1083666e9bffbb78aaca70991828285aa9806eb4c3968688f24e199654ad3",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "56575a665dce4babf6e3ec93ec4078088cf27a2f685b0af91fdea187c68b6820",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/03-motion/general-maximum-limits/MaxVelErrOL.zh.md",
-          "sha256": "601338d94b2143b1858a038bb96420927c466f26f13013c6ee90fb50fdd6569e"
+          "sha256": "3d45230ec18e3193aca6cac7a652e78c4712a3dbb99c72a6b7698e589e58af75"
         }
       }
     },
@@ -2620,26 +2776,26 @@
     {
       "path": "02-keywords/06-protections/03-motion/motor-stuck-protection/StuckTime.md",
       "keyword": "StuckTime",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "2f0b085c7431cfdf6677e2518d509fe2909326adb3027f29691677d971e013d7",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "53ecbe19d98fa4ac5fff7691ac1e644295c895f7b280241f247cb641c9f16e3f",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/03-motion/motor-stuck-protection/StuckTime.zh.md",
-          "sha256": "e50a1f43c277b8a62a1644d26627fce017a387c72b62072fca7b3193c3ce81c3"
+          "sha256": "a55b89895a126366fd21c88cb2d1381394a3553ebd40acfd83b132b31aa8336e"
         }
       }
     },
     {
       "path": "02-keywords/06-protections/03-motion/motor-stuck-protection/StuckVel.md",
       "keyword": "StuckVel",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "04beca997c492285f051a40fe86a8a8e7ec259455a1bf5a2371d921bb37a0e5c",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "e816986385a186d2ebda311d70aa3f8e063354b53344368178011ffb62418aca",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/03-motion/motor-stuck-protection/StuckVel.zh.md",
-          "sha256": "bbe2194d39c93f9e8cd98d219f274491a8852fee104939b44e5d3d6cc411e586"
+          "sha256": "5674f092cda75896ca812c3eb97f402824e4c9d40984a9fef9cb3197dd89b9cd"
         }
       }
     },
@@ -2893,13 +3049,13 @@
     {
       "path": "02-keywords/06-protections/06-brake/BrakeLockTime.md",
       "keyword": "BrakeLockTime",
-      "last_updated": "2026-07-27",
-      "doc_revision": "2026.07",
-      "sha256": "a41814d34ad001669286ca39091e12b3e48cbe3e744d9417f6a945d7854fb176",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "3ef7d89eeb876a5331c088ffd5849ebd3c3ba6b1653af00b22592af237d147e3",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/06-brake/BrakeLockTime.zh.md",
-          "sha256": "df32b30cd7bea8600872c05077a3f3794bfce6d1e45a3c94123657122fbb4106"
+          "sha256": "97ba750b9e6ae9903ccc8b7270e5e72d09248d98dca8d6c587709ba1f4cad93c"
         }
       }
     },
@@ -2919,13 +3075,13 @@
     {
       "path": "02-keywords/06-protections/06-brake/BrakeRelTime.md",
       "keyword": "BrakeRelTime",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "7a44f8f99c6afb214ef00cd12d14ea7ad8303300ecd168452de47a3ea2f7038e",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "af79f204a6356c40532a57b8ee4e082e981ccadddadc749ce7f3971c3508f5c1",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/06-protections/06-brake/BrakeRelTime.zh.md",
-          "sha256": "4be693e5f75a437f4b9a90f587c9b758866630a0d6c720e49935e9d414476a26"
+          "sha256": "64b956f1b7175e6fed995c8ce8638cca95f4c1f22134cc7c6f661d678a0fbf23"
         }
       }
     },
@@ -3257,13 +3413,13 @@
     {
       "path": "02-keywords/08-axis-operation/00-overview.md",
       "keyword": "00-overview",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "31fbcde82e5dede2f0964c4f69b25335ce1235b20b2e5883435e507468e43f78",
+      "last_updated": "2026-09-29",
+      "doc_revision": "2026.11",
+      "sha256": "32f2cf975fe58e1d4990b29d8cb070e6fd950a18e2f59a014a32f77fdad73641",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/00-overview.zh.md",
-          "sha256": "96d0a26a322b6ce4a27cb10cffc9fe7470a9a07ba784b7436b107c37ebfa543c"
+          "sha256": "5792481f25b8beada0e679469b569a568fb20661b73ca34c99657b0b765030cc"
         }
       }
     },
@@ -3283,13 +3439,13 @@
     {
       "path": "02-keywords/08-axis-operation/01-general-keywords/CanMotorOn.md",
       "keyword": "CanMotorOn",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "b9a248e90158e2d7fc953af4b22088d9ede40940d9c6597116b15fe25534c482",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "95d11b39f536c7c836707acbe83afbdd123f94da1caebc6022c7a1ebc0cadb25",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/01-general-keywords/CanMotorOn.zh.md",
-          "sha256": "3b1ca7fb4ea2935579531644b700c0e2c1968fde067e5c5430475c09e405bc91"
+          "sha256": "2f01a724b27b37badc4c8c11f936b113698454a5ae0c33ae7a97cb7c4b711ade"
         }
       }
     },
@@ -3309,26 +3465,26 @@
     {
       "path": "02-keywords/08-axis-operation/01-general-keywords/ForceMotorOn.md",
       "keyword": "ForceMotorOn",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "9ff263d6803442f02f4406fe7f5a40552f42f5d7f490e66e719f5fb5ca750906",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "7feeaae5ced23751ca99811f685f86e0c57366cb578466a3e4099d6bb7a55a3e",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/01-general-keywords/ForceMotorOn.zh.md",
-          "sha256": "87bad2d58a1a6a18598a599841d1b178183fab2c60822e1acd5335421fb311ec"
+          "sha256": "ff3275a9bc7970a32522a40ac78d3ce18c8b11cc794900387c3ba6c8f8a8280b"
         }
       }
     },
     {
       "path": "02-keywords/08-axis-operation/01-general-keywords/MotorOn.md",
       "keyword": "MotorOn",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "817e45612d8590392bbd8b3e9edfaa1d4e2e844869f87807d2d4c744b2095d93",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "837df79ca8d03cbc1451a22d7ee97f23a92f3a23136eb20f501f778a19b71977",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/01-general-keywords/MotorOn.zh.md",
-          "sha256": "de239b8491b207311cad40593cbf09ee4f04d040de82a234dc9286d14c4e3e64"
+          "sha256": "0212811e60bf1023db4962cf8f37e309760dbb4f1b730ee529b4ed91bf77944f"
         }
       }
     },
@@ -3400,26 +3556,26 @@
     {
       "path": "02-keywords/08-axis-operation/02-position-operation-mode/BeginOnToPos.md",
       "keyword": "BeginOnToPos",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "dcf7bbd57437a2708efe2e354f8e626826d2fc39697f42bfaed782d90bc762ef",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "f0616d4caf892813321e22fbd207a6f14129fa18f5ac49bb6b394f040ff1cd2c",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/02-position-operation-mode/BeginOnToPos.zh.md",
-          "sha256": "62f96b1db2e9a4107b87b05ba58e602be0bec21295c78e9abb3a2d6240cccd19"
+          "sha256": "d363068d3d763e3a94f3838665f67ecc0b91b6d01c9e1b180a07c1e0a4071285"
         }
       }
     },
     {
       "path": "02-keywords/08-axis-operation/02-position-operation-mode/GoToPosMode.md",
       "keyword": "GoToPosMode",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "d589b21b0d67498aa4bc7a2c5f0f4642bff63c6cc5cc4d61889b3428e7e79403",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "1d4320fec1eacf5187e344259e7463b810e26e0bdcc24014354103b707e97a6a",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/02-position-operation-mode/GoToPosMode.zh.md",
-          "sha256": "4527ea785cdec16197795266aabaf9c93af6004fc10b009c4b47aa0a6851f3d2"
+          "sha256": "d9c5fc72829a0cd21d815cf2296bc2c47b465d4d1e96d25fa1e65f255be482a3"
         }
       }
     },
@@ -3465,13 +3621,13 @@
     {
       "path": "02-keywords/08-axis-operation/02-position-operation-mode/RetractSpeed.md",
       "keyword": "RetractSpeed",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "e586b626c27596721a8c410aeecadd555664cadc87ef4c3d66bf74c8c34d6c81",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "c9705f422880cbe5abc70b4eecc4a2d91571320606b5dc0a64822429668866e8",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/02-position-operation-mode/RetractSpeed.zh.md",
-          "sha256": "b1f8ce6e71b52d48e57727023278f7f8605e3a61936fec0d10c3c8815eca6a93"
+          "sha256": "c50dabdafe37f30b814dea8b7e769713c858cea91302ed0b9261dcddff0cdb9c"
         }
       }
     },
@@ -3517,26 +3673,26 @@
     {
       "path": "02-keywords/08-axis-operation/03-current-operation-mode/CurrCmdCntr.md",
       "keyword": "CurrCmdCntr",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "059646f117ae496ab5b5350e9815dc076ba9af57404e352961b6df9059c11ea3",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "90dfc2daf1887275889b1d7883f135176cbad80d0e6e562dfa5a9c91da19f3f7",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/03-current-operation-mode/CurrCmdCntr.zh.md",
-          "sha256": "5708bd7e72528fc71651372eae61f9e78d18008cb39f1aed028a71c64e2c1387"
+          "sha256": "b7471ffc9c5b6290e1b2eb414c58d9286d4e82ad1533b5840ca7cfba97e7ed94"
         }
       }
     },
     {
       "path": "02-keywords/08-axis-operation/03-current-operation-mode/CurrCmdHTime.md",
       "keyword": "CurrCmdHTime",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "0418c137d5d1aaf854dd9a8632ef27e69fbff2c83155d8c3eef1e0d16368fdd4",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "6fc96823c45fa13bb5691a1a61e5a0c7da0955903615ef26d102a14897fdb64b",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/03-current-operation-mode/CurrCmdHTime.zh.md",
-          "sha256": "36af93df191ed2d9ece98818202c1706f7e0bab1af572d383635d56236d38195"
+          "sha256": "7b64d3fbe356df06b28f70f97264031cbc714de65fb6c91c2f602dd7c553f33f"
         }
       }
     },
@@ -3686,13 +3842,13 @@
     {
       "path": "02-keywords/08-axis-operation/03-current-operation-mode/GoToCurrMode.md",
       "keyword": "GoToCurrMode",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "66492be737b7359e4642511fd7c2a9b975939f9503e6862ce79bb5be7467fd6a",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "7c3a3fd5e6f964af24e2a82204883bef0e7da31d2a05452834c1adc1e39f017c",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/03-current-operation-mode/GoToCurrMode.zh.md",
-          "sha256": "b9025d981a5cb05f59ae4545ecdd155da3bdcd6a1a3586e968900662f7112a8a"
+          "sha256": "476f31399fafaec8f9ae7c5d953f4c95b6988b0c20cf47b2a3ad72c73fd7081e"
         }
       }
     },
@@ -3738,26 +3894,26 @@
     {
       "path": "02-keywords/08-axis-operation/04-force-operation-mode/ForceCmdCntr.md",
       "keyword": "ForceCmdCntr",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "ae7ce4cff82a569ed86e88ee70b99c08ab25d675bbd8b26e08e17b4a8d12c568",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "986795484e1ee0b6308c9841532dc2d04d15c591f419806a80db1b4cc668f888",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/04-force-operation-mode/ForceCmdCntr.zh.md",
-          "sha256": "c1d02c481e866bcd33e50b7782082dee8b0a34dc9490ecdd0fbb2cd05a253bf6"
+          "sha256": "6098142e94061dcf7c03d75278520a2082989f760e80dba22fec8db45c842d14"
         }
       }
     },
     {
       "path": "02-keywords/08-axis-operation/04-force-operation-mode/ForceCmdHTime.md",
       "keyword": "ForceCmdHTime",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "bcb36b443d551d21e672a32fda740c11a362d5c3f6e622ead02fc30981dad91b",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "48ed93fb9ea231df650d80c96f68cfdb4b60f3dff183024983659b3ba9a7500e",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/04-force-operation-mode/ForceCmdHTime.zh.md",
-          "sha256": "35be935ba5c205f0c0de59bce347e117795ee911ef4532a5c4793b4981cc12b7"
+          "sha256": "776723ea74aea1d8474465f2eda57c7ea5b37f5a69eb0f39fedbc10b77cf0871"
         }
       }
     },
@@ -3790,13 +3946,13 @@
     {
       "path": "02-keywords/08-axis-operation/04-force-operation-mode/ForceCmdSrc.md",
       "keyword": "ForceCmdSrc",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "32b9fb23cf69004757fc5d3ebf0ee2c3a585eecc2cd068314d87244d10deeb8e",
+      "last_updated": "2026-09-29",
+      "doc_revision": "2026.11",
+      "sha256": "ece52b5db8cd31470f3bc239d78856c5369737b95714fcf08cccafce136262f8",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/04-force-operation-mode/ForceCmdSrc.zh.md",
-          "sha256": "cbfd5be271254c53cc85062aa8311d14783b498ce2ebcc85fc1b30acbd263cb1"
+          "sha256": "68372bf0a66d644ba14705b7b38af762ea7e06743a6a66459cd867a0e3ed96e1"
         }
       }
     },
@@ -3829,39 +3985,39 @@
     {
       "path": "02-keywords/08-axis-operation/04-force-operation-mode/ForceInTStat.md",
       "keyword": "ForceInTStat",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "2d23ea96bcbfc50a2cf09395345d6e6bd440683eeaee3b0e74e410fcd3bf6423",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "c3ba25366ec39da88906fb9ec9a9fcfc9a80604d729da145d6964c00b5768d3e",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/04-force-operation-mode/ForceInTStat.zh.md",
-          "sha256": "1375e781f4f0cd8ec5fbd870a272f3b65ccc723f73d58f6f18ffe90063eb716f"
+          "sha256": "7439f69d72459ef3f15ec288fe8d97f5ab76385a084dcf648e607a5b5678b7a6"
         }
       }
     },
     {
       "path": "02-keywords/08-axis-operation/04-force-operation-mode/ForceInTTime.md",
       "keyword": "ForceInTTime",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "0a063abcd95405f78215fb7552d866561ec2142731b96922fd01a439655ff371",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "cd0251ea60c1be2ec83e96c45a19b59d8c6c96a6b4dce3ecec19ef121a89baac",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/04-force-operation-mode/ForceInTTime.zh.md",
-          "sha256": "f762eb16a728437ea43aab5e19cf3b25415f1b53bfce82ec9a5d57f5f675a291"
+          "sha256": "27baed731fef565dd022169a42df8c3de1c18cdd49eac32b0debff7f29e09972"
         }
       }
     },
     {
       "path": "02-keywords/08-axis-operation/04-force-operation-mode/ForceInTTol.md",
       "keyword": "ForceInTTol",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "a75141a17689d4cb125bb69281fe6663e98385024e7b78cb59ae0ef1c5f0a446",
+      "last_updated": "2026-09-29",
+      "doc_revision": "2026.11",
+      "sha256": "7232fbdcea39e30dc69fb19e30fe4507ce200091333d0387d6a127aaff55758b",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/04-force-operation-mode/ForceInTTol.zh.md",
-          "sha256": "8f92533f2d4b2b8a0c52a69915cd51a1047df0b77d8a9697cca789217fab24c1"
+          "sha256": "77e9832bcdd581a2860c8f0136bc3417f095555dbec16272183eb0ba7170923a"
         }
       }
     },
@@ -3894,26 +4050,26 @@
     {
       "path": "02-keywords/08-axis-operation/04-force-operation-mode/ForceSamples.md",
       "keyword": "ForceSamples",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "3790572515901c50f917204c013fa9206f290746d7a172895b5c57b8fc202333",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "9890cd9bdb115fc1dac43b4294c6d0741c5098b320bd6887d91da5bd18f51025",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/04-force-operation-mode/ForceSamples.zh.md",
-          "sha256": "1d192602d3e423c7331977ec47ac2426b6ccef1636a5ef966d3ea4f45f84eac4"
+          "sha256": "47b11d3b32c8b0caccf3f5c777e7ba95bfb29c04b3d76543a0d19c87f34a7d16"
         }
       }
     },
     {
       "path": "02-keywords/08-axis-operation/04-force-operation-mode/GoToForceMode.md",
       "keyword": "GoToForceMode",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "3a1e3ef9d4a76a3111452fc697742171e0e4d783a9e5ea8f955117001dbb900d",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "348fa9f42043eeb80f416626906113984158cb17581f45cfc88cba18105fd510",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/08-axis-operation/04-force-operation-mode/GoToForceMode.zh.md",
-          "sha256": "441fd3982b9aecefa2ce4e5e5af32db34f4585381baa350718642f188602fdfe"
+          "sha256": "eadd7f80cdf9738fc71df2980e1e72efac5be75be9a435546c6c612bcaf5dce9"
         }
       }
     },
@@ -4440,13 +4596,13 @@
     {
       "path": "02-keywords/09-current-and-voltage/03-current-compensation/TorqCompFix.md",
       "keyword": "TorqCompFix",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "8c41cc4c34291524de8c721c9db4ebc7f1675519986a1f53a809d8f9f49909d7",
+      "last_updated": "2026-10-18",
+      "doc_revision": "2026.11",
+      "sha256": "51fead20aa8a0bd305699a377a081b53379a040422dddf5859f308fd9d276afc",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/09-current-and-voltage/03-current-compensation/TorqCompFix.zh.md",
-          "sha256": "81a21660391749b398c9ca2d93afbb2ee2237aab7530fec49569c405b7c0cce4"
+          "sha256": "215e21732fba591d1a01492b81323643a196bf6496325e6712b9535d7cdb3d4c"
         }
       }
     },
@@ -4687,13 +4843,13 @@
     {
       "path": "02-keywords/10-motion/01-kinematics-status/AuxVel.md",
       "keyword": "AuxVel",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "e7ff71b6f699b41eef07f62fc5761839e747d734c8747ffadf7e1ddf68095a4e",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "07043ee21ba0351572362cdd8bfe679c60886e5a4ebb78aa0be2910549759da2",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/01-kinematics-status/AuxVel.zh.md",
-          "sha256": "e0796b2abeec22ec53360dd503c3656476e825b287f87cdc185f94b8728a2f49"
+          "sha256": "9c9438583e853f242535470f5b5c362b6b015f790ce01c4f507900bf556bef2e"
         }
       }
     },
@@ -4778,91 +4934,91 @@
     {
       "path": "02-keywords/10-motion/01-kinematics-status/PosRef.md",
       "keyword": "PosRef",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "ba41a69f3edb4bf6600b4dcf7502d96fece5a614986f6e517fbe630d212d1ce0",
+      "last_updated": "2026-10-12",
+      "doc_revision": "2026.11",
+      "sha256": "a87a5c7f52bf69ef8e304862a979f810799f3c6e58dbc05372faf1d78c404e7a",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/01-kinematics-status/PosRef.zh.md",
-          "sha256": "757bfd4aa1b46b660442afec87e36e54ad8d0502beb92e691a76631282b5a41a"
+          "sha256": "5ff3038286e2dc95f964f9a50edd9e6c008859a91efa5b4d7a0055860f025bc1"
         }
       }
     },
     {
       "path": "02-keywords/10-motion/01-kinematics-status/Vel.md",
       "keyword": "Vel",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "4f9dcce950ab1c92a61d55d0c070e86bc9f4e6521f971084b85b19471002bea4",
+      "last_updated": "2026-10-28",
+      "doc_revision": "2026.11",
+      "sha256": "0e397c3bc92a4540dda09052463603b4a7473a941e70a8707bd408b2cf4c476c",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/01-kinematics-status/Vel.zh.md",
-          "sha256": "8f19103e3d1304661f5897afc62a7d77c554e758744878cc397f31527d04a7dc"
+          "sha256": "7453018918e2bdc088edf529cef3364489837d651507494cd517f99a35cf19f4"
         }
       }
     },
     {
       "path": "02-keywords/10-motion/01-kinematics-status/VelErr.md",
       "keyword": "VelErr",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "e5cd60981f556230f4aeb2a0b63cad20a34032f5430bcdf61004d57576ec0146",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "44e32c9048d3b9253946b5b314716bb79de5d81eb0921eb1b5fd11832e99e933",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/01-kinematics-status/VelErr.zh.md",
-          "sha256": "6a3660fd231f8f585be6140ef02622e989eb1f1a55217887cec6f3904cf3dff2"
+          "sha256": "d58fa09173b34cf23202a18437882b7078a589b96f7cae32087634ff66b619fb"
         }
       }
     },
     {
       "path": "02-keywords/10-motion/01-kinematics-status/VelRef.md",
       "keyword": "VelRef",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "9b1644e8460ffad765dde1f3d437536531e7a386da3e200878ed7f311a90a2de",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "5c04798bf7c94b900f5b77188234f3ca29f2bbca0be69ac56167c0c585bd9723",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/01-kinematics-status/VelRef.zh.md",
-          "sha256": "d4c43f447554f9319a68f87c4991b65cff841c3b93f77e90db43a00994a43ce1"
+          "sha256": "fe64481f1a13c8656fb19d31acb1170772073afb001b738e21ebb2f49a86ecbf"
         }
       }
     },
     {
       "path": "02-keywords/10-motion/01-kinematics-status/dPosRef.md",
       "keyword": "dPosRef",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "08db397a27dc3c745d5e2ab2f741a06ebba5d69e77df2a66883f1afd8c84746d",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "d11ea1c8648d9df5c61089981ed39ee29fe3091c53cf2005ecf266175a712e5c",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/01-kinematics-status/dPosRef.zh.md",
-          "sha256": "82132d458b7ff406640faab0377473d203833d2860006e88f43b106fcc8ae28f"
+          "sha256": "35a8db2f1d0bfb83886a0c88a5bc4eef8e1aed5e59c4085befd4a5d6e7270ee9"
         }
       }
     },
     {
       "path": "02-keywords/10-motion/01-kinematics-status/ddPosRef.md",
       "keyword": "ddPosRef",
-      "last_updated": "2026-09-25",
-      "doc_revision": "2026.09",
-      "sha256": "0570200050db8069c15a060ac9291f06e90b9cf7116202341409648b875d037d",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "e5c4f8904d170be65b0293db0619506a478e72ef7387d28c16c8ec7516ac9d91",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/01-kinematics-status/ddPosRef.zh.md",
-          "sha256": "13f05a567335cfbb5f31046f4d406e4af8939bfe203af9f647bd48eb6fc277e9"
+          "sha256": "e08ff79f958789cff0027e1d78cf255784cd3fc056c7c55f4d16ce544b864d29"
         }
       }
     },
     {
       "path": "02-keywords/10-motion/01-kinematics-status/dddPosRef.md",
       "keyword": "dddPosRef",
-      "last_updated": "2026-09-25",
-      "doc_revision": "2026.09",
-      "sha256": "a56ebf1d30cae76874a5b299e379770540c33cd62eb42a184155dfdeaf261b25",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "279dae7aa21e53436869a1fdec4d592b790c8aa9670a28f547fcba395e5bac43",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/01-kinematics-status/dddPosRef.zh.md",
-          "sha256": "5b10e671f219386e1f3a4fdc9f28d2c005cfc413642c671101d896de5b88f890"
+          "sha256": "de1051565fa386587b78c483bdda8555da52e2cfb9e9c02c379434f37bce6e71"
         }
       }
     },
@@ -4908,13 +5064,13 @@
     {
       "path": "02-keywords/10-motion/02-motion-configuration/PTPKeepMoving.md",
       "keyword": "PTPKeepMoving",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "350baea6ba26e24b1a2f37f9d05fcdc1543c283c09dd299dc3586d07b75e9f5d",
+      "last_updated": "2026-10-21",
+      "doc_revision": "2026.11",
+      "sha256": "533cb4d89bbdefb1905cf0aae1986d0e4528fb14c5eafa761e1a514a945f51af",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/02-motion-configuration/PTPKeepMoving.zh.md",
-          "sha256": "5b3897c64b6f2cc8a55977d9dd5a201f37816ff7fde8921514713d861a949e18"
+          "sha256": "849e14e01108175e22b4a9cbfd6b94923954ec8f7a9781da947e81ec80ad607b"
         }
       }
     },
@@ -4947,13 +5103,13 @@
     {
       "path": "02-keywords/10-motion/02-motion-configuration/RptWait.md",
       "keyword": "RptWait",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "ab2868c251a6810543eed61b760e27d1349a21466e1a350e49a91a382f69c253",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "514213c9b808b49d9aef8dc948a9c82e985c919dec190b82b1c25baa76716874",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/02-motion-configuration/RptWait.zh.md",
-          "sha256": "9c557b235b0a12d94e2ed59630ac66b792ecee1990c407813441ccd913b02a59"
+          "sha256": "16e3ffcfc67e1c402420acb25209bdd8163042d21fa98949e707ebc8bdf15584"
         }
       }
     },
@@ -5012,13 +5168,13 @@
     {
       "path": "02-keywords/10-motion/03-kinematics-configuration/Accel.md",
       "keyword": "Accel",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "a6044922d02ac2a58c4ee927ca3fe729987344d7a669a1aa32c731ddacfb423e",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "2c0163dafbe855387ef23b142015822aaa2997fe19670aa2114933378349db66",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/03-kinematics-configuration/Accel.zh.md",
-          "sha256": "e1b93bf88737521186551901abadf4cfca1d972e62a822d619e936a70b14cb9d"
+          "sha256": "ef24073ca923a1eaf8a35829dbdf94af93e01dd00b0b581fe270c542956aa5a4"
         }
       }
     },
@@ -5038,65 +5194,65 @@
     {
       "path": "02-keywords/10-motion/03-kinematics-configuration/Decel.md",
       "keyword": "Decel",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "913eeb53f236e0f29e551561452477c1180c19af074972ea76b1eb612f7254ae",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "c8255a44b3825de42b76d0abc09d83d09df8503e2a639dce5bd56ba8d41186b2",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/03-kinematics-configuration/Decel.zh.md",
-          "sha256": "3c28088c2678daa2c71ae9a88f6ab6f2b6e0fc6471e4688564c1b08f346390dd"
+          "sha256": "98743e801f97e9754008f5d895689efe6bf53d75ce8aba324343a03c7c638bba"
         }
       }
     },
     {
       "path": "02-keywords/10-motion/03-kinematics-configuration/EmrgDec.md",
       "keyword": "EmrgDec",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "2c43b0eba3f3b0abc1a8caa1104265d9572bec26c11f0c6221ec2d51df7d6eb4",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "cec8dc7f1b41190748fcbb08894ad7d55194c4286287909eb3011069b2ada9a0",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/03-kinematics-configuration/EmrgDec.zh.md",
-          "sha256": "86cff953f38c53709c9093c386fedd3b076c0f9b971bec48f86bdc793d36b374"
+          "sha256": "a6e0ff54ba85a6bc441f786bd472aae63e9534688d97709c0726790bc7433f23"
         }
       }
     },
     {
       "path": "02-keywords/10-motion/03-kinematics-configuration/Jerk.md",
       "keyword": "Jerk",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "85815f66b50e1cf2199915c62faf76a185f222a88f769aaee2f9cd0e410333d0",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "3d745170df6bdd967ff5b35937c3eeb12ddd10a86b5fbd838d770d95bb88e4d6",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/03-kinematics-configuration/Jerk.zh.md",
-          "sha256": "4cc7be5b21c6358ee5ca2b4a96d3b6c52b115c041187089a9f7d6f2822c347cf"
+          "sha256": "0761b438f0dde70ce6e103cde0494489608f51febf3ac439d063801e2cbb020b"
         }
       }
     },
     {
       "path": "02-keywords/10-motion/03-kinematics-configuration/JerkInAcc.md",
       "keyword": "JerkInAcc",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "51fbec8f48ed5386de9f033ef5a9a50d197303a0e0055b09708158cafee11d61",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "2f38f9ecc4ef39781ebf35f1115c9afb9c7b1f05c7548ea4ecdcec2a1a088975",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/03-kinematics-configuration/JerkInAcc.zh.md",
-          "sha256": "101e005016e7f8104c4382f5514680f0d5ef2999913a8e65c7ae0ad9f71d0476"
+          "sha256": "4a91baebef5156f63b5227179a80effe333c48036e24ad7394f3934b91c237af"
         }
       }
     },
     {
       "path": "02-keywords/10-motion/03-kinematics-configuration/JerkInDec.md",
       "keyword": "JerkInDec",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "bf1a826f775dae7213f310b89236de6af9cead90a59bf4574c637d4bf58569c2",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "385edccc3baf1dfb0cadf0bf4bc93ddda2cfbc7771234a1763ae9e7ac776c085",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/03-kinematics-configuration/JerkInDec.zh.md",
-          "sha256": "f5b6b4770cbd468dab5340c762b4c6bb02e0ec554b83b8038ddb9be06bc3b3dc"
+          "sha256": "2d0c27f727ed854daf3a12a0bfc7c40669329337a20eb430a900d4d11dc53d2e"
         }
       }
     },
@@ -5129,39 +5285,39 @@
     {
       "path": "02-keywords/10-motion/03-kinematics-configuration/RefOffsetStep.md",
       "keyword": "RefOffsetStep",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "8c8b39a8b5a1a839b06911ea1d81ab5a30ff5978bec3b1ac74f06346a063816b",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "5719061a7f9f51c85636edd886b03cf8d3573a370dbcb4b26bea3c51011d84b8",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/03-kinematics-configuration/RefOffsetStep.zh.md",
-          "sha256": "722f8ea562536a41667bf6c33353e1ca99de9e05cf92ba2d8e9019bb974def82"
+          "sha256": "2597c37b33f8bba647d50ce4c6cebbb43e60cd19444244269ea9b0345c1d1c11"
         }
       }
     },
     {
       "path": "02-keywords/10-motion/03-kinematics-configuration/SetPosition.md",
       "keyword": "SetPosition",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "1f99d763f46df16f179f5c3025d32e7e8dd2aa37cd2691b4ed1ae28dfa16ab42",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "80e04dce0730baca8bef5b98423539d43bb4899e3be237412721acfd76c42049",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/03-kinematics-configuration/SetPosition.zh.md",
-          "sha256": "cc9a45b03cb79f6fcba50f80d70f35a26d6740b887cc57cc9bc611ca608e75c5"
+          "sha256": "2fdbce239eff44905255b8441baaf597d128468a64d04af2c36f97253e59897d"
         }
       }
     },
     {
       "path": "02-keywords/10-motion/03-kinematics-configuration/Speed.md",
       "keyword": "Speed",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "baa3370f534facc220e2870c12ab9f34b7eb75bdfe0c8436f9dc710d37b4452f",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "0ef74ed20d4493c0845194bcc9ffc61846b0ab0344e47a5c96a773286cf4d34f",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/03-kinematics-configuration/Speed.zh.md",
-          "sha256": "b33dcc92dac6f668c004bd8bdd30c9f051e90fe0d821b1e1cac08175c7587bee"
+          "sha256": "0844f02cb8fe731a5e7f30216e81a04c50608af51433967b09107e540623aaa1"
         }
       }
     },
@@ -5181,13 +5337,13 @@
     {
       "path": "02-keywords/10-motion/03-kinematics-configuration/SpeedChgNew.md",
       "keyword": "SpeedChgNew",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "7a658f067e33bd58c7ff61e03fb4777b08d5f6d8ae767cbc7e377ecab286e40c",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "a4d4b7a250ca6899f7777fc6aab0f237baa3c49573c21805103db033f7bb291b",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/03-kinematics-configuration/SpeedChgNew.zh.md",
-          "sha256": "c31a978e3a53b32146fe209b0fe673dca0aba39e50e07ee59889c857becea516"
+          "sha256": "78da2374d2c391327cd3a7f5fe355a666867b1ef5b878166c2760025c808855c"
         }
       }
     },
@@ -5220,13 +5376,13 @@
     {
       "path": "02-keywords/10-motion/03-kinematics-configuration/ZeroPosErr.md",
       "keyword": "ZeroPosErr",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "d57e1523aed95c0c91af9a65385e417c601a4f75153f7f54f9f8cc0a249e8d65",
+      "last_updated": "2026-10-09",
+      "doc_revision": "2026.11",
+      "sha256": "b74afc32bae8f3588fb3c8dd295c457a76719c40de26c435f57b8a0004054157",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/03-kinematics-configuration/ZeroPosErr.zh.md",
-          "sha256": "e0d6452226566d31b5255af59f47a43f94a02bf8a168e099628ce74afdefe8e4"
+          "sha256": "b7c7769bf95f66ffd833f77cfddf103aa8ba4e5ce4f79c91f51665f72d60665d"
         }
       }
     },
@@ -5259,52 +5415,52 @@
     {
       "path": "02-keywords/10-motion/04-motion-command/Begin.md",
       "keyword": "Begin",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "753b9b89ef751801ffb41c139d93b9736b4ef6e8a99c31e89b8a1c5d615d4105",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "868bbd11d9ffbd2bcc094c25ffcfa76c604a355fab260ad88b78a1c069116e87",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/04-motion-command/Begin.zh.md",
-          "sha256": "b017ce8e16a2365605f33de6bb59272acc29133dd5cf9947061a5c8feab67124"
+          "sha256": "24a802cc7b5be244c6a81ea5b4213868a0a1d8e91bf396e4bf9fab589ea3baa2"
         }
       }
     },
     {
       "path": "02-keywords/10-motion/04-motion-command/BeginDInOn.md",
       "keyword": "BeginDInOn",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "267ed9fc82d1c7259feb5c4d0ea53e35fd7594af89feb3c89bb9890c9a570bed",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "228230ef23e1d053bac2a596b0607eddd1835fdea08b6ead3c8996a4649b8607",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/04-motion-command/BeginDInOn.zh.md",
-          "sha256": "e613bfb8d8df03c7b105c6f7c383e704f39c89856468c242d5c587db5461f744"
+          "sha256": "9fd9ef722e05b15ab41e5bdc3cb5435dcc3cfbd5f14fb7d45e849aa02610cb88"
         }
       }
     },
     {
       "path": "02-keywords/10-motion/04-motion-command/CommitMotion.md",
       "keyword": "CommitMotion",
-      "last_updated": "2026-05-30",
-      "doc_revision": "2026.06",
-      "sha256": "94482fea2b6b9dad073d97e9c2ddb8d24398393d48218013d84b99a1e201c73c",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "ad6e43fd7d5163492571b70b78f15ee3d237b3945a28b6cdf9d9e38802907353",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/04-motion-command/CommitMotion.zh.md",
-          "sha256": "fa2a17de3b27214b2024239fb3620b687f8a853ba36ffce6174be4e60f525045"
+          "sha256": "c3daf4dc1e2ee225ed84cfbf0a2215ca8eeb7505594dd03f3c254d68818ae179"
         }
       }
     },
     {
       "path": "02-keywords/10-motion/04-motion-command/Stop.md",
       "keyword": "Stop",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "93b8ded997aef3498dff5beeea7a73a249d127fe57fc54c21e9e2de2e64bd4a5",
+      "last_updated": "2026-09-29",
+      "doc_revision": "2026.11",
+      "sha256": "07d78b85f689737d6ed773020937106d0584b6fb32eaf3ad8dde3cc33829d5f2",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/04-motion-command/Stop.zh.md",
-          "sha256": "aac4308db8b5aaa618a6bed51f89c7d68e0f1cfd47171a641dcd8ee10851ff48"
+          "sha256": "1b8f2ce92424ab9b4726b65681a8c76a82f9a410115ec326fd8b8d22b6682940"
         }
       }
     },
@@ -5363,13 +5519,13 @@
     {
       "path": "02-keywords/10-motion/05-motion-status/InTargetTime.md",
       "keyword": "InTargetTime",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "5c366e778cb91503334ce52a4bd2d1a4b9137bff80170afc243d0854ea49b206",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "659f3e02e037f2198ad3a8f93151561d98fbcba6b48dfd04e53abeb0d0d7b781",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/05-motion-status/InTargetTime.zh.md",
-          "sha256": "d316cda564f4cb98d0ee2a0a537595c84788028ca2bcd0540b39e192f3b65ca8"
+          "sha256": "2a3d3429ad7a866c942ff0bfedb6376debc81d88c415dabf7406a7defd107441"
         }
       }
     },
@@ -5389,13 +5545,13 @@
     {
       "path": "02-keywords/10-motion/05-motion-status/InTargetVelTh.md",
       "keyword": "InTargetVelTh",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "db64615bd4ffbe6d32c79701f4c7be4dcc9625981f4e07fa1e6fdb6ee7e237e7",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "93c03eab442932f0f331f256f4c08cc6e1d32c8261d9f2237e4697e9fc5ed848",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/05-motion-status/InTargetVelTh.zh.md",
-          "sha256": "5b58a95de43ed325371b427a739eb8f351d62d8632477a092272a665f8038022"
+          "sha256": "cb8131d02c429dbc1e71df3ebcc5e8ca9dafeca17ee43f9f14c7a0a3c9edf0ff"
         }
       }
     },
@@ -5415,13 +5571,13 @@
     {
       "path": "02-keywords/10-motion/05-motion-status/MotionSamples.md",
       "keyword": "MotionSamples",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "eed97e55d4260f568cb79712ee72471d73a37b54d71ee20a0c307f0d9bd9d6a1",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "7a5a6d0c2ab55d268ea64c8a8de8be98658ef45ac2224629c37282d9a0cc716c",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/05-motion-status/MotionSamples.zh.md",
-          "sha256": "bdda4e2c1d6c3c445bb1b576f56c9affb18c74731e2857a523cbc4399c69ff2a"
+          "sha256": "e908cd227ee54f13adf3602cbbab8c71836c43aa6ba55c7f061a0bf2269cfd7f"
         }
       }
     },
@@ -5454,13 +5610,13 @@
     {
       "path": "02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/00-overview.md",
       "keyword": "00-overview",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "c9b4a046fe8e91fcfa7b564c28d6b871570b59e277bf1ac623e489c9ae5e2864",
+      "last_updated": "2026-10-19",
+      "doc_revision": "2026.11",
+      "sha256": "71619f1e0cfe27a6979b916e87d1c2db947d84001a4b9c90e40cb8913c4b62ea",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/00-overview.zh.md",
-          "sha256": "9182273feb488f744684c0d1c746f756871149f7723cec1051a178142b7c80fa"
+          "sha256": "a00c9fa80b315abb8c72e93929be4a018d9d795d995dbd93dfbea719d9d4d6c7"
         }
       }
     },
@@ -5480,13 +5636,13 @@
     {
       "path": "02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDEncDir.md",
       "keyword": "PDEncDir",
-      "last_updated": "2026-05-28",
-      "doc_revision": "2026.06",
-      "sha256": "87ab8e066a6410916ac233b81bf3e23947ff4b765e0813bfc94b4b7e88795d4c",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "adf4412dedb279d2cfce4b4c87a70df8dc58c763dd901dd20615dd917a2d2627",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDEncDir.zh.md",
-          "sha256": "a4a3363f519229e52e9054b32f78898cb66bc8c5702d98f4a3c77a8a1fec315a"
+          "sha256": "c1a73d10da9a9caeb9a1168694f07b22fcb82552dd6aa574a44bfbbcb43d97b7"
         }
       }
     },
@@ -5506,13 +5662,13 @@
     {
       "path": "02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDEndTime.md",
       "keyword": "PDEndTime",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "b1ad8064b1e1ffe9adea5b74ee35297a2d96e03f9a8fe70f9ce3d9436f424ecb",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "727e87e04a50cae584ed05e22852b425c09212549f52540b2a4a70aad68c5cd5",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDEndTime.zh.md",
-          "sha256": "3ecd94af001130dbf5e6a0adb2ce50fbf4a2d761e00ccfbf8749093340343b86"
+          "sha256": "ea04edb032c4afe11d141cb87f20de8992ef5806f4746b065ff2cee15c961ce4"
         }
       }
     },
@@ -5558,13 +5714,13 @@
     {
       "path": "02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDPos.md",
       "keyword": "PDPos",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "9182f8d38afe74e8fde948850d5e2dda33023e6ccb3f4d9a0cf7449bdefbfdba",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "61710775e1adebb7727117ad525f314d2f37dc293ed189de8114d92c8ff6703c",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDPos.zh.md",
-          "sha256": "3550812561343e2f52df438b9524914eb64fd784510579685b466940c7f5395b"
+          "sha256": "e82a669d78971bc767adf4a8c32106829dc271b5abe45427d076881006b9bafc"
         }
       }
     },
@@ -5597,26 +5753,26 @@
     {
       "path": "02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDUsrUnits.md",
       "keyword": "PDUsrUnits",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "0fb6a46c57db3dd57cdd49349771052977509e3f3d907f674cd8f1cea084bf3b",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "79db4dbb64e8d5e6d9060ac864451f93c29518a4509230531788d2ec6704305f",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDUsrUnits.zh.md",
-          "sha256": "7c51e9bd8c5c7c2a0d772f8bb96cb3ff34c1e60f8d9e2384902c552c4cdad958"
+          "sha256": "c747f193e5f809c8e5b3295cc7b5a9226b65eb60704b6e717b4506589fc53c8b"
         }
       }
     },
     {
       "path": "02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDVel.md",
       "keyword": "PDVel",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "344b23f322720c8c0b70b9217ec1a8af0bc53286388dc24abcbd2bf670461bf5",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "5add438083a753ce870da5f7f3de4ab0530a6492cfeab69fb205ff47c3029ae1",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDVel.zh.md",
-          "sha256": "3e01806340036a358a03f4ebeb2c80e9aa48de47c4b1ac3bc13e70a3348fefaa"
+          "sha256": "c955f952a63003688911876ce70d40de211cbe8fdd71b7965f2ef32f1a705740"
         }
       }
     },
@@ -5688,13 +5844,13 @@
     {
       "path": "02-keywords/10-motion/07-motion-mode-gear-motion/MasterFilt.md",
       "keyword": "MasterFilt",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "66d7ad626b28156d9c52f2f2ac83b9aa9db3b2cc005ec4e3b3c37b65eb77cec2",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "fbfa7128071d0f852e510dd44195e3c597ec6a14da78f63c6ff471be21618f07",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/07-motion-mode-gear-motion/MasterFilt.zh.md",
-          "sha256": "e0466ea2dbaee8eb9be4fc6030e54a52c373d16f73ce3471f0d33600b39a054c"
+          "sha256": "e597f7e270f5ff73315865392a6653864d3c2e3dcd97eb1061c7ee46ff0f30ad"
         }
       }
     },
@@ -5805,13 +5961,13 @@
     {
       "path": "02-keywords/10-motion/08-motion-mode-electronic-cam-ecam/ECAMGap.md",
       "keyword": "ECAMGap",
-      "last_updated": "2026-05-30",
-      "doc_revision": "2026.06",
-      "sha256": "98a79d4f43acd4d7fc4d3b11387db38353443053a50af955301093af8ebb33ee",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "0ea9e3ce4a12e21f4ff9e790f5236f223935a92422bff24cdf02e4e6331a7001",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/08-motion-mode-electronic-cam-ecam/ECAMGap.zh.md",
-          "sha256": "8b5c87480d1f8b746f55d97ba6c3cbbb40a1135b270e1f07635be22c2a47d62f"
+          "sha256": "774fbc110e5290eab259cfbbf5c67344352aec1672de771508cfe6206cc595f8"
         }
       }
     },
@@ -6286,13 +6442,13 @@
     {
       "path": "02-keywords/10-motion/09-motion-mode-cnc/CNCAVel-CNCBVel.md",
       "keyword": "CNCAVel-CNCBVel",
-      "last_updated": "2026-05-28",
-      "doc_revision": "2026.06",
-      "sha256": "9b42ef1cd510b4744b04991f1cde0ccbebc03ccae6e66442c7fa2a042dc99918",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "0899e65b24b082322e73f3bbc777600f768ffd94cdd7513400fe5c5600793eda",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/09-motion-mode-cnc/CNCAVel-CNCBVel.zh.md",
-          "sha256": "128027044e809a55c5a3a2f41619e6589f7f031744ea1484b1d1065e83755aed"
+          "sha256": "852038d34a47c655e9d759111110439c02d4c4f8b78860373f8b4b746150a224"
         }
       }
     },
@@ -6364,13 +6520,13 @@
     {
       "path": "02-keywords/10-motion/10-motion-mode-vector/StopVec.md",
       "keyword": "StopVec",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "96c8174d996e4c5cca6fc884d6f5c2669b13f987d13f3d05bf244dcf3692cd05",
+      "last_updated": "2026-09-29",
+      "doc_revision": "2026.11",
+      "sha256": "c85d0e4d78623274741036055bca8764066c417834f51f28b9fa72d132f3d71f",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/10-motion-mode-vector/StopVec.zh.md",
-          "sha256": "148e02ab334fce201bf6cfd886f236d52af6be5905d69afeced7ffe776d08fd7"
+          "sha256": "07fe4f66657ca8d61488a5d53771d3788293363b9a428ade2e382e2648e8e569"
         }
       }
     },
@@ -6390,13 +6546,13 @@
     {
       "path": "02-keywords/10-motion/10-motion-mode-vector/VecAccel.md",
       "keyword": "VecAccel",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "742463e211c856a997d5f910c8502206a2da335f46aeb34a72fd005247bb6510",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "da4834202d3fa90630ab87d6e62caef51c4b5b5de3e57e5300842350e94506bf",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/10-motion-mode-vector/VecAccel.zh.md",
-          "sha256": "52de2d775e010f8204983e8feef471669b9609fe4b7bfe7a931c4840742dd7e8"
+          "sha256": "ddee7411c350d4d25872de16e8ff1ad128decee058c2df9704b1e7b339ecc1ee"
         }
       }
     },
@@ -6429,26 +6585,26 @@
     {
       "path": "02-keywords/10-motion/10-motion-mode-vector/VecDecel.md",
       "keyword": "VecDecel",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "12b7d6f9baf2a3822d77a069daf1939455f9f3e72ce877f2415e23affb863d0a",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "13f61631ed55c9c09f566d9be566a3b6b481b9bd976df73da372d70784fa2471",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/10-motion-mode-vector/VecDecel.zh.md",
-          "sha256": "223c3e28be3e2686dc2109ae8d5087df88375240b3d05652a77abb530a946f02"
+          "sha256": "4dd8c818541adafb2c06ebccf5f172e96ecd100f8487e2f2f0697c390aa64363"
         }
       }
     },
     {
       "path": "02-keywords/10-motion/10-motion-mode-vector/VecEmrgDec.md",
       "keyword": "VecEmrgDec",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "0ccd7ef7519c723d6c70d2e4f1ade1377f1042aa8d7afc3e77f76776133c0247",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "39a9c1ee7325485f761dc85cd9e68b3972a2fea137e98cdc99416f4200cda280",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/10-motion-mode-vector/VecEmrgDec.zh.md",
-          "sha256": "95fc92493cac26c2517d1188f3c50e9684d97f6c9c73c735def4d81cabe343cc"
+          "sha256": "feeacf779afb911fae2dd8808f651bbd82b86a679eb103ee68404c1807a4d641"
         }
       }
     },
@@ -6507,39 +6663,39 @@
     {
       "path": "02-keywords/10-motion/10-motion-mode-vector/VecJerkInAcc.md",
       "keyword": "VecJerkInAcc",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "26eca31ec17e5850aef9a5f134d540c7cd3aec023a0c75d8c32c9fa878a3cd53",
+      "last_updated": "2026-09-29",
+      "doc_revision": "2026.11",
+      "sha256": "114760a68f92b2f0b4242038395c62c3667c0ffe552a7c907a9f169162cd5f07",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/10-motion-mode-vector/VecJerkInAcc.zh.md",
-          "sha256": "32c54c709c90e56cb2cf50636f80c0a2257dbf04cc7a0054c8ab294741d2e0f3"
+          "sha256": "0047e354fea36e67d6b4d63807514a0042f8771e5866236c4a363df662eb4a82"
         }
       }
     },
     {
       "path": "02-keywords/10-motion/10-motion-mode-vector/VecJerkInDec.md",
       "keyword": "VecJerkInDec",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "147c16f0ffbd8f95573f9764b8e7391481a19d4e0a91e33890d5232a1599f5e0",
+      "last_updated": "2026-09-29",
+      "doc_revision": "2026.11",
+      "sha256": "47569896dd4397ac7fd928ccd7c0be845340e004dfaacfec8553fef02906bbb9",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/10-motion-mode-vector/VecJerkInDec.zh.md",
-          "sha256": "b14d5c9317f77f337a5c8670034b7ad2ec3d53333d503acf4f97a175c154601b"
+          "sha256": "fb5b9986fb954f0bdf74c3a03951f0a7da9d30f0704658ffbd4b3f0abc400f72"
         }
       }
     },
     {
       "path": "02-keywords/10-motion/10-motion-mode-vector/VecJerkMode.md",
       "keyword": "VecJerkMode",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "ad86a00274dd51c5ceb48c25e477ef281000282ba888c4a79c7dd9db0a98a802",
+      "last_updated": "2026-09-29",
+      "doc_revision": "2026.11",
+      "sha256": "6a93b64edfbae9a11fb38e1d40e109182aeb772754691263f2776f0a924145e8",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/10-motion-mode-vector/VecJerkMode.zh.md",
-          "sha256": "9cee386f3a344e67e23538c4600d06b75f36068bc29d6e4a98a1d247b78d90ba"
+          "sha256": "ea9f6021cb30c8dc68546484ebc2dfd6c37c2f5e856351ac07cb0d7a03d9ab72"
         }
       }
     },
@@ -6585,13 +6741,13 @@
     {
       "path": "02-keywords/10-motion/10-motion-mode-vector/VecPause.md",
       "keyword": "VecPause",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "db7b786618c6d4f0734f9c23a313732aa04672b36e731d38538b1e5c486bd130",
+      "last_updated": "2026-09-29",
+      "doc_revision": "2026.11",
+      "sha256": "17f254345304aab6574c7784edcbb9e65afd61fd11f595ec27d250858fdb0b22",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/10-motion-mode-vector/VecPause.zh.md",
-          "sha256": "d653e880c22cca75857ab608f97844b2cf5342ec53bdff63d8f95cb4760a40f1"
+          "sha256": "236466f2ab0eb945ef5e21d75b70e98d9ed2767c8152cdccab9c51542dbf0702"
         }
       }
     },
@@ -6637,13 +6793,13 @@
     {
       "path": "02-keywords/10-motion/10-motion-mode-vector/VecSpeed.md",
       "keyword": "VecSpeed",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "b9f003782a9f2936f577f6ac49e71b739a366a5afd3ce9af499dec82ac2b0892",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "515fa3bd974c643a8f5573cefa71badf28f00687ee259d89d37bf1769e61867c",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/10-motion-mode-vector/VecSpeed.zh.md",
-          "sha256": "db07a5e08b075dac5ea72dbafcf2f3e9a3f133489a91ccfdac632a1605e6f36d"
+          "sha256": "3b15f40f8be7ee617425b4897321064db3bf0e23188a53948793e28bdbd780b1"
         }
       }
     },
@@ -6663,13 +6819,13 @@
     {
       "path": "02-keywords/10-motion/10-motion-mode-vector/VecdPosRef.md",
       "keyword": "VecdPosRef",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "e2f803a60d5f90d98ff85d00d50915eee26f15fc2a03f7f8bc01e5ab050b6f71",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "17fbedf81105c55837b9f6adfbe2221edeca92dc885568cacca84e8299fd1478",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/10-motion-mode-vector/VecdPosRef.zh.md",
-          "sha256": "996cb85d6eaae43657226106cce0836c27b77b10ff7b58acedfd0bdfc111b6ac"
+          "sha256": "e18f93335d5176d27062f7c37493d711079e0c9836d92757f6886a113867f902"
         }
       }
     },
@@ -6702,13 +6858,13 @@
     {
       "path": "02-keywords/10-motion/11-motion-mode-fifo/FIFOCycleTime.md",
       "keyword": "FIFOCycleTime",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "ff392978bc1b28af8f035d0ea561f284ddc0b3995c8cca4eeb1c4772f6d18c5f",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "30d1eedff806043690eccaa9bdab6ac4e745c612e6efd8aa63a30c042f384893",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/11-motion-mode-fifo/FIFOCycleTime.zh.md",
-          "sha256": "2807e318102e2fb011e0c01fd7a9ffdd0f1fa519ee2b0eff5a4131ce03d53f78"
+          "sha256": "10d8b9b6fbbe0f364e0e7c4c015fd6e18d5b73c9935db2f024ad06dc5b89dc89"
         }
       }
     },
@@ -6741,13 +6897,13 @@
     {
       "path": "02-keywords/10-motion/11-motion-mode-fifo/FIFOPosCycle.md",
       "keyword": "FIFOPosCycle",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "8534f2a970e8311494538d8912612f2f60cd63076762fd30f5268a48c9a7484a",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "853be56614dc6fcfd0d60af469ab1b2feb64c55691fe57a4de2175a7f9d466ae",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/11-motion-mode-fifo/FIFOPosCycle.zh.md",
-          "sha256": "db4803888cb49a3a78b87e117be1b3357b23c8ec3843c451e780054ad042e781"
+          "sha256": "fce9f43ae34a6590f596c5955a8dcfa06324a2746758cd68c4a6ff1ab0fe5e2b"
         }
       }
     },
@@ -6845,13 +7001,13 @@
     {
       "path": "02-keywords/10-motion/11-motion-mode-fifo/FIFOPushCycle.md",
       "keyword": "FIFOPushCycle",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "4c49892fa7fd34540dd0e128e832998997942c0724113c0f3d7a0e8fa0822841",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "b12997a481b274ea3f1243b2b13bfb2f63a491ba57d33aaff27beab6fc3a4847",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/11-motion-mode-fifo/FIFOPushCycle.zh.md",
-          "sha256": "683d7767d60e7b7327ea81867653ee2290fddd65bb2e47ae8ee285d8b19ac666"
+          "sha256": "4caf414f5f2f701b154951f643dbe67097b30631280b5556937bd036b2610f5e"
         }
       }
     },
@@ -6897,13 +7053,13 @@
     {
       "path": "02-keywords/10-motion/11-motion-mode-fifo/FIFOPushParP.md",
       "keyword": "FIFOPushParP",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "c33f6955c13c010351f11ef00f5bece976dc3e20ac3fb8f41628903b34704c2b",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "feaaf1ebd7a0f8bcb7b0d6da8a829d53702def1b1e25ec2af4da406af03029e0",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/11-motion-mode-fifo/FIFOPushParP.zh.md",
-          "sha256": "d62293eaccd6ffb1c9d97c43892fc621b8a3540680f32ed509e209d683eba1bb"
+          "sha256": "0a5485ccabe6372b145652a81cf05b074ed0abb3c1cd1e781aa6f061835f467e"
         }
       }
     },
@@ -7079,13 +7235,13 @@
     {
       "path": "02-keywords/10-motion/12-motion-mode-spline-buffer/BuffTime.md",
       "keyword": "BuffTime",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "fe610de799b6b70596776ddc1dd1ed3a9695629c31243d852d18248f110a585a",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "41c1d1a3f809c7c3e8de4ca8c69397c18c5d9e3f8a261d65581d1405cbc40e3e",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/12-motion-mode-spline-buffer/BuffTime.zh.md",
-          "sha256": "540472542b70d9c51fe8d9a7e9d331d6635bde8d5abf02f5e5162445caf263c1"
+          "sha256": "f357d6c730ee8ea6895b2b944c3c9a2022628ef2bf4cdae60a24e75dd9e3d823"
         }
       }
     },
@@ -7417,26 +7573,26 @@
     {
       "path": "02-keywords/11-control-tuning/01-general-keywords/ScheduleTime.md",
       "keyword": "ScheduleTime",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "2295372a10f95a68271867cff41ed09e6860df3477a530ff0162d15eed31229b",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "94ff91a1b0075727e6b02ea524938b5fb75f4f82c20bbac20ee5da3315be1112",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/11-control-tuning/01-general-keywords/ScheduleTime.zh.md",
-          "sha256": "82976545abd004c191e13f7afedfa39e52ae73ac7b128215b2f07e7b2a15f4be"
+          "sha256": "e168b086f140e8c9a5bf9d1968b64d01acc6ec7e39ee5b7f203ff89bc2c6cc76"
         }
       }
     },
     {
       "path": "02-keywords/11-control-tuning/01-general-keywords/ScheduleVel.md",
       "keyword": "ScheduleVel",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "6d9f37bbe1ec0e3b981fd04adc7a65181b807922bd580ad3e1cb94a2cfdbf47f",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "dea9c0e5064133c527784f4852428eb041b59c731022e9a2563ac47cb30ad600",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/11-control-tuning/01-general-keywords/ScheduleVel.zh.md",
-          "sha256": "d5be8f36cc44ed88832291ec72c2c3a86bde6dc69f58a89d933cc12ce4c55afb"
+          "sha256": "5393bca14c55cc04bc52cc92093f126cbd743e8ebfd74ceeafc5684ad34603d9"
         }
       }
     },
@@ -7547,26 +7703,26 @@
     {
       "path": "02-keywords/11-control-tuning/03-position-control/PosFiltDef.md",
       "keyword": "PosFiltDef",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "b95928c7f4a9e9b1078296ebc7e5fb8bd953bc019b6310c2b24203d90b0e8ac2",
+      "last_updated": "2026-10-12",
+      "doc_revision": "2026.11",
+      "sha256": "e8437b62dbdcc08c5a3db3604c1712768b899dfb17656d21b547a19bb850f322",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/11-control-tuning/03-position-control/PosFiltDef.zh.md",
-          "sha256": "e9d45bd1bdebf637877f1a0048b59e8833aa745ad43a6c3a7d0da2409d5c557b"
+          "sha256": "fc37b508e5554ca3da2afb1454d98bd27660544dab5ab62e0298b6edc8851904"
         }
       }
     },
     {
       "path": "02-keywords/11-control-tuning/03-position-control/PosFiltOn.md",
       "keyword": "PosFiltOn",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "99a97bff1021ef81cd658863500a7d8cf9233270c9b5e6b805a8e92242db801d",
+      "last_updated": "2026-10-12",
+      "doc_revision": "2026.11",
+      "sha256": "3a1c1d399fce01ddc1cf8b3df808389e0350ab60644e135eb599463c99a3fab1",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/11-control-tuning/03-position-control/PosFiltOn.zh.md",
-          "sha256": "f71b001957d31890eb46f9836df51a4f5517b663a82aedbfbdcaf39b6627ca27"
+          "sha256": "4eaab318bb79b31542b3e0a4f348c2b1206e852e834b12d0f5a80369728c1e11"
         }
       }
     },
@@ -7690,13 +7846,13 @@
     {
       "path": "02-keywords/11-control-tuning/05-feedforwards/00-overview.md",
       "keyword": "00-overview",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "36ac3f2d57b909dc8d5fd202226e2bc8cedb0333e759a83fb74fd5a0b8a8a2d4",
+      "last_updated": "2026-10-18",
+      "doc_revision": "2026.11",
+      "sha256": "4119e943f844bd89b6ad3a88dce969d404cc82cd34079731a6edcdd844b59b30",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/11-control-tuning/05-feedforwards/00-overview.zh.md",
-          "sha256": "3c24184d9b9bcd7a1b0064859fb835d07d70b35b62b8df76c3920a98ee3f0dd6"
+          "sha256": "851d8e38fd130cb8b2fecd4d6b496a1896ca82019f470047d45a0e3052ca602d"
         }
       }
     },
@@ -7740,28 +7896,41 @@
       }
     },
     {
+      "path": "02-keywords/11-control-tuning/05-feedforwards/CurrFFWValues.md",
+      "keyword": "CurrFFWValues",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "e02ebed6650a1664bd3aaea752804dedbf7fc584b4cab7c62aec3171e698a957",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/11-control-tuning/05-feedforwards/CurrFFWValues.zh.md",
+          "sha256": "5944495026d7f1f24769f1d1776c81317edf9f86b7319c9d12af597b65f455b0"
+        }
+      }
+    },
+    {
       "path": "02-keywords/11-control-tuning/05-feedforwards/FFFiltDef.md",
       "keyword": "FFFiltDef",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "06dcd780e77a9ccaf1f932c591bed84fe6317047313c4bfdd5c3cda106460242",
+      "last_updated": "2026-10-18",
+      "doc_revision": "2026.11",
+      "sha256": "e81c12a18d6e9189658193c289438eaf3895f89020a5dea7e247ec61ac08a05b",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/11-control-tuning/05-feedforwards/FFFiltDef.zh.md",
-          "sha256": "0c51cebf61afdcc3ad89068bcae883d7659dc9c95607c31a320290d9fe801df1"
+          "sha256": "2929070d41a69569efb4c9639ecdfc6bd5b34944ddf572fe62386b15afe4c57d"
         }
       }
     },
     {
       "path": "02-keywords/11-control-tuning/05-feedforwards/FFFiltOn.md",
       "keyword": "FFFiltOn",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "3783688d28670fe2d8ce5d32c987f6ed388a083e53f0c1e533f34cf0a53be739",
+      "last_updated": "2026-10-18",
+      "doc_revision": "2026.11",
+      "sha256": "2ed95d314db3f75ddfda2e85d982a5e65df894f00ce60ca056ccbd721162f360",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/11-control-tuning/05-feedforwards/FFFiltOn.zh.md",
-          "sha256": "7b7be8423d10054e3c2c92a10a4abccb03353a35ba2e0d23ba57e54bb78c35c5"
+          "sha256": "f03203020477946c8be92b1a901378073ee77f68b4eaed1631b83c5407d6e025"
         }
       }
     },
@@ -8444,13 +8613,13 @@
     {
       "path": "02-keywords/12-gantry-control/01-general-variables/GantryOn.md",
       "keyword": "GantryOn",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "c2fc58adc9fe9285ae956680a067b108011e9de4cf7452b168d7c1d2205b4c0e",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "5fa1858f02586bc7480110d32aaeff08cb48d73aaf9361da1308477d99bc8da0",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/12-gantry-control/01-general-variables/GantryOn.zh.md",
-          "sha256": "ea91a7405be708541c0d6ef917bb82864faebac841a798d91d24d870f434b2bb"
+          "sha256": "803a30d8c20553c78bfb8661bf3077d2f9ed1a03a98bfffcd41903c56408dc6f"
         }
       }
     },
@@ -8808,13 +8977,13 @@
     {
       "path": "02-keywords/13-injection/InjectTimeOn.md",
       "keyword": "InjectTimeOn",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "8fbfa6d13cc23ce4eed1435852013a2214333ad32250362998ab20ed8782dd86",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "7e77fb502df71702c0d14a97b182bf68b973fb90d0c3c165093b9197d076c4c3",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/13-injection/InjectTimeOn.zh.md",
-          "sha256": "df94956b1909f0c78ccbaed0727d067220ac5ab6fbfad0595cdb7e1b223fe687"
+          "sha256": "43d8c993eade0e106957b3e5541197de2d61797ad72cad259edf76a7dc8d1400"
         }
       }
     },
@@ -8834,13 +9003,13 @@
     {
       "path": "02-keywords/13-injection/InjectVelAmp.md",
       "keyword": "InjectVelAmp",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "2d50ef6e432db8f7e6e922f16dadf0eaa41b29ad3ec2e2048aff2aa2b8a09766",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "47731d492df449ac08ea5c661440008e42e8026ac9e235b8d15925136953cf08",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/13-injection/InjectVelAmp.zh.md",
-          "sha256": "5ef7c0f7967711f8a685fc7bc660db3b321661325eeacb33f18342b85fb35913"
+          "sha256": "136f3f58a1b4395bb83ad6f0453a38d9a5c79919e3025fbc98d192abe8bfe0af"
         }
       }
     },
@@ -8873,13 +9042,13 @@
     {
       "path": "02-keywords/14-identification/CalcIden.md",
       "keyword": "CalcIden",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "996c7ebfac689df3de5bbc176f7643aba5fc0b1299caa25a42f10ed5436bbb75",
+      "last_updated": "2026-10-21",
+      "doc_revision": "2026.11",
+      "sha256": "1618e3490ed3aa993ae4e67fffefcadd3685c3f7e3c9da820b90e6c97d9cc534",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/14-identification/CalcIden.zh.md",
-          "sha256": "4e1fedeb3b8fb2a99273d433104567b76aeb3f6cea14b1819c5a9f53db78414f"
+          "sha256": "c26815ee55b976b6703cade1636927924452676c48949f5aa933adaeec853ac6"
         }
       }
     },
@@ -9094,13 +9263,13 @@
     {
       "path": "02-keywords/16-homing/HomingOn.md",
       "keyword": "HomingOn",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "1db0ee114f7d53656745a37f2efcab6485952425bf2b23f087fa30df58237095",
+      "last_updated": "2026-10-21",
+      "doc_revision": "2026.11",
+      "sha256": "e8b59fc57f6f429bbbebf57e85bc33a539617b2f141cacec54eda8a75191cce1",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/16-homing/HomingOn.zh.md",
-          "sha256": "3fe912f93dc7e59f69712763ce114499bbf2ee3484fca4db5fff216f6fd37884"
+          "sha256": "427261b5a9db9e7bdb5ba79b07272d7f94e1373cc70aa3638ec3c2304b5161a8"
         }
       }
     },
@@ -9250,13 +9419,13 @@
     {
       "path": "02-keywords/17-user-program/02-program-execution/Math.md",
       "keyword": "Math",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "5fbee442b66999071c327fd365aababe752619be416d352896131b7a837404ec",
+      "last_updated": "2026-10-21",
+      "doc_revision": "2026.11",
+      "sha256": "97fe2354dc85e911d6f12671ca60dd284210649ace2efbfc645ab1812b362486",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/17-user-program/02-program-execution/Math.zh.md",
-          "sha256": "c4c29fa8377f91323304e1d24aacc934441981415003d8001c626fad7e485b18"
+          "sha256": "abc966bf3748be1abd697d0d4ccac7818c3cade5fe2286290e808ee0cc27de45"
         }
       }
     },
@@ -10147,13 +10316,13 @@
     {
       "path": "02-keywords/18-event-generation/EventAlwaysOn.md",
       "keyword": "EventAlwaysOn",
-      "last_updated": "2026-05-28",
-      "doc_revision": "2026.06",
-      "sha256": "1f6f3c16b14d6d0469f859bc87a5899cdfb2fa1516adbf09d74537aa5903aed4",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "db29ab45101f2d63c18443c840b5e4666020870ec285da03d440c18c00a5f84d",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/18-event-generation/EventAlwaysOn.zh.md",
-          "sha256": "a621903e96f87513badbf701e919a03814ce5ed5a0899bb5e5ceea8c0a39abbe"
+          "sha256": "a46c9ca8be7574ec5a3da8b78628c8f2dda9f2b7d019889ae2fb51ad999986a7"
         }
       }
     },
@@ -10199,26 +10368,39 @@
     {
       "path": "02-keywords/18-event-generation/EventEndPos.md",
       "keyword": "EventEndPos",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "9e9ef6b64fe77ccea7f1465849050076bd78dd3366f08a6dcf2c3aed32e7ac35",
+      "last_updated": "2026-10-24",
+      "doc_revision": "2026.11",
+      "sha256": "22dd469e162c8795296a417b5f0f22241b8e165b3a4b9bb84fb0ca2fb2b73969",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/18-event-generation/EventEndPos.zh.md",
-          "sha256": "d29a0284bda34025106a434362bd7c5c1fd6c5503548ec52eec8bd644267c874"
+          "sha256": "cddf8e1b9001cda9cfd9131ffd3dd83faee0d8b6f993755a389a44c59153b38a"
         }
       }
     },
     {
       "path": "02-keywords/18-event-generation/EventGap.md",
       "keyword": "EventGap",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "9e2c4460e79e9ec3a17e1e8bf632483bcf76ce6d9638f829a90732108453cbdf",
+      "last_updated": "2026-10-23",
+      "doc_revision": "2026.11",
+      "sha256": "47825724f96320dfe641c84caa5d0e7ba1ac2132c9fb93f0b4e6228864bb6bbb",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/18-event-generation/EventGap.zh.md",
-          "sha256": "f4c577f891e75b1bf2500b56922e9b20e020003e76296ea06b560ef15623975c"
+          "sha256": "6bd54032abd767aa1caf8304ac553b71cf45fafcf4de2d6f61a28feb8435f6db"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/18-event-generation/EventLoad.md",
+      "keyword": "EventLoad",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "6b82f90547cc7835795487662b6f5f231f04a24289730f633007133c6cfc1c3f",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/18-event-generation/EventLoad.zh.md",
+          "sha256": "d9e27c74fa86ff9061a9122bfd59cf638663c734c6bf9a5ace814e198c099207"
         }
       }
     },
@@ -10251,13 +10433,13 @@
     {
       "path": "02-keywords/18-event-generation/EventOn.md",
       "keyword": "EventOn",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "5a45945bf1676eed5d61ba948359f214b6976477d45ae911fba53623b6923429",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "2b232cdfc3d4bdb8fae8753b0e08149f0a2ce1e0cb2e57de9b672763cce9f195",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/18-event-generation/EventOn.zh.md",
-          "sha256": "db43f9f5de02379580e918acef7d33af5312d05bd21ff1d2d32cc91460ab3f68"
+          "sha256": "69fa2d5e76cb89c2d82879d68e9d45f6010b02cf38b35262f462da08de4a11cc"
         }
       }
     },
@@ -10277,13 +10459,13 @@
     {
       "path": "02-keywords/18-event-generation/EventPulseWid.md",
       "keyword": "EventPulseWid",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "c28f37ca81eae5eafe395783daaef61c6fd93ec0890026d9f5cf7fe7b405ed2e",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "d44e1fef9f66575dde7f60246426758a5689ef8b18713f52beed14c8334d263b",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/18-event-generation/EventPulseWid.zh.md",
-          "sha256": "87742b43f04028704b23ddb1c6bc05041e405240f9a09a3c896e134b09fcbd5c"
+          "sha256": "b3d1025bc0a39d975751ab8566a6f73c3e6eb2c26972e001758478e44929c92c"
         }
       }
     },
@@ -10327,6 +10509,19 @@
       }
     },
     {
+      "path": "02-keywords/18-event-generation/EventStatus.md",
+      "keyword": "EventStatus",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "06a197e4159ecdaa4072188f2620441b025d650e29af235c7e38464bd9053b99",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/18-event-generation/EventStatus.zh.md",
+          "sha256": "02884210f9675a0e4e60ffd554b9b94b99acb18d000d10c11561bd243483b23f"
+        }
+      }
+    },
+    {
       "path": "02-keywords/18-event-generation/EventSuppress.md",
       "keyword": "EventSuppress",
       "last_updated": "2026-05-29",
@@ -10355,13 +10550,13 @@
     {
       "path": "02-keywords/18-event-generation/EventTableBeg.md",
       "keyword": "EventTableBeg",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "7d0761a21a7b798b75d9d07a888133ff2c0dea95a1291f0eaa485de6a93cc87d",
+      "last_updated": "2026-10-28",
+      "doc_revision": "2026.11",
+      "sha256": "194fda946a66f5eff376c2af591c065cd1290958946e8b5c61a83b98e72da69a",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/18-event-generation/EventTableBeg.zh.md",
-          "sha256": "b85ac1de6ae2bfe115803bfbc5117ecf7f2aeafbccf27f42870bf39af52b91a4"
+          "sha256": "bf293e61e9a4cf33d280edd3de7b0a8f34c436e8b0396e8fc00d692eaefdfa1c"
         }
       }
     },
@@ -10381,78 +10576,91 @@
     {
       "path": "02-keywords/18-event-generation/EventTableEnd.md",
       "keyword": "EventTableEnd",
-      "last_updated": "2026-05-28",
-      "doc_revision": "2026.06",
-      "sha256": "cc36c4cb6c8e6a54cb82a5b2e024e540b08c23db299e407e3e72e9b4ce1bd189",
+      "last_updated": "2026-10-28",
+      "doc_revision": "2026.11",
+      "sha256": "9741e5f5dc034b03526ba14a971ecfa4c79dc8fb3c916948a7c4c18dea1a8b08",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/18-event-generation/EventTableEnd.zh.md",
-          "sha256": "7f018c6e754e7c094b59c879d904fac8c16045b75bd9f09f8cd06b9b0cbb801e"
+          "sha256": "78e79c8f783be6bb04949398dd09207a1de9c728c99b2cb762899e51b6d7efc6"
         }
       }
     },
     {
       "path": "02-keywords/18-event-generation/EventTableSel.md",
       "keyword": "EventTableSel",
-      "last_updated": "2026-05-28",
-      "doc_revision": "2026.06",
-      "sha256": "45c1efd603b5d1101b7780c9f92c36c78bdad6a81e5eca40372809854771ab46",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "b2b44fa17393c9c3ad96ce6f3389fc688603f21effef1f1f7330891fccd7e998",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/18-event-generation/EventTableSel.zh.md",
-          "sha256": "2b8e1deb20c94c5664a7ae8ea5cdbf39a34ebcce0e48c49b8463e0c87391eb16"
+          "sha256": "317e4c175fb63003f4d4c596d73ec0b7d44a72688514825b5710ef9aca0fdfc9"
         }
       }
     },
     {
       "path": "02-keywords/18-event-generation/EventTableSrc.md",
       "keyword": "EventTableSrc",
-      "last_updated": "2026-05-28",
-      "doc_revision": "2026.06",
-      "sha256": "5ac32d82a15bbb8d97e6297fb6c14936f8675093bbd64ad67a8d78ce799e12bc",
+      "last_updated": "2026-10-28",
+      "doc_revision": "2026.11",
+      "sha256": "1cdeac8c1ddcd76c9edb4f753feb7029d956e52ff56fd687d5cd2283bf5d53ad",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/18-event-generation/EventTableSrc.zh.md",
-          "sha256": "eb482e231a8b4aaa7d97c2208e98433f6de7f89f9f44fca7cd77ed43426bf3a3"
+          "sha256": "a6a2c08d0b15ddc4b7c2dac15d784b40d570945298a66a1fcc6bbd32eeb52015"
         }
       }
     },
     {
       "path": "02-keywords/18-event-generation/EventTableWid.md",
       "keyword": "EventTableWid",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "c4c831a405042f865f7122adcd0c82313284472daf5ff69f1b04dc919231a710",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "a9898e6d209bcb40c4445551ba44b0afa08b78116ddf98e0cf2deb070977b870",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/18-event-generation/EventTableWid.zh.md",
-          "sha256": "781f19d7111e116d134fb97fd8012ac9c255821699eb08e241ae1f50b522a6d0"
+          "sha256": "f6f9e18bfdac2ddcdd9b95c455ccbb6be1a31641b19da93c642805fc4c5a8da5"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/18-event-generation/EventTblMode.md",
+      "keyword": "EventTblMode",
+      "last_updated": "2026-10-28",
+      "doc_revision": "2026.11",
+      "sha256": "141b695add6184c4309c7d0d2237d3d78621a1b8328e8d17f7dee15ff71744a0",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/18-event-generation/EventTblMode.zh.md",
+          "sha256": "e0314e8f23e75eba25e1d5297479d7d65d3aa23e6841b99101792a5cc7e86a70"
         }
       }
     },
     {
       "path": "02-keywords/18-event-generation/EventType.md",
       "keyword": "EventType",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "428f57dfbc3d4f5b18583d02f75a440f5719b8df8b2fd967072507138926207f",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "a59eb6d004047ca6e18141d9fac1ff6230fe99c851ceb8063baf79a5d1709af6",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/18-event-generation/EventType.zh.md",
-          "sha256": "cce29aae3b5391bce25c6ca8083ffc6915cbfc530f5407806bae6e595c4a9d9d"
+          "sha256": "27d0fddcd0061160460c698b3159652420ac532386f03eb05a36087eaa12c0cf"
         }
       }
     },
     {
       "path": "02-keywords/19-data-recording/00-overview.md",
       "keyword": "00-overview",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "b8a171a83178a9557cbe046ad77333d07b44a36acdb601e14d9bad5ee995e9a0",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "dbec6f8d0690ea1cd74d99008d271db54e97170e39897262844a0c1cddecae5e",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/19-data-recording/00-overview.zh.md",
-          "sha256": "a1932f5c36e7c71d3b9e938a22ac6518a6c918be8017502c0f98581bed74b773"
+          "sha256": "ffa0d5c75029ba6ac99f6d8179840bc3fcfec1c56faf631b0162e31f82ce354a"
         }
       }
     },
@@ -10537,13 +10745,13 @@
     {
       "path": "02-keywords/19-data-recording/LoggerUpload.md",
       "keyword": "LoggerUpload",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "ecb735efc5dd391dc5bb907c59d23bb2478e75fe1c7d41b8cb1c51028e1e262f",
+      "last_updated": "2026-10-22",
+      "doc_revision": "2026.11",
+      "sha256": "6f70644629a0a10eb6cd597c165082c121d2675b671f3e69e4b865a44da30c88",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/19-data-recording/LoggerUpload.zh.md",
-          "sha256": "3da46b17600023d7afcc948463c1f7e2c1ed79143e30b0889bab421c44c65894"
+          "sha256": "dfee6aa97c5be6f478f80f672e087442e4652cd462fe3a0fa9c51ac5f658cce4"
         }
       }
     },
@@ -10615,13 +10823,13 @@
     {
       "path": "02-keywords/19-data-recording/RecLength.md",
       "keyword": "RecLength",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "d1724cef9d24e03618e880eed5e72e25138ce7a2d2356909b547bf2d5385a3b5",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "195b8c4eb97196b9a6e1c27adcdef50e8fedf45b47bb33ae7769883afc10b03b",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/19-data-recording/RecLength.zh.md",
-          "sha256": "ddb85f70c816a1ef7f247ff32473a6279430ad33d68d8e8db7511e25b8e99e0a"
+          "sha256": "607cb8f3c609b7a9a0245101b5bd7191e15ac4331093ef3d0f72241968b3d299"
         }
       }
     },
@@ -11031,13 +11239,13 @@
     {
       "path": "02-keywords/21-engineering-units/00-overview.md",
       "keyword": "00-overview",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "90d6c64422f14f282abd61d00c44aad683f21229a5df935c81b897c1ce9bed84",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "010dbbadb969e65a6ad52c66ba3748d072fd58f7c5c9f38678fe6bf58324deb4",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/21-engineering-units/00-overview.zh.md",
-          "sha256": "527aea94f0e8c16fc6ee15b98f07d4759c99cd98463ebc1353ee3a890c2a9005"
+          "sha256": "730440653b2e298d2d154758015c0f69b084468dc66342252a78f6481470fb0b"
         }
       }
     },
@@ -11239,39 +11447,39 @@
     {
       "path": "02-keywords/21-engineering-units/UserUnitsEn.md",
       "keyword": "UserUnitsEn",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "ba01d7f5547e4f78dfa90b89c6cb20151da7574528be0847df58b4501389bc52",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "c738c3d8738b55702c653128ba98e0582cb260b1a85671e2aeb6970eb7c8d89f",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/21-engineering-units/UserUnitsEn.zh.md",
-          "sha256": "53711bd294ac5751058ca337639e8fe3e3137d7edd4d200763a7018494d32ec9"
+          "sha256": "f2f5d6b40a55c5133d0e23a8f6febf1ad7d285666f20ca95aa1795c4421b202f"
         }
       }
     },
     {
       "path": "02-keywords/21-engineering-units/VelAuxUnitFct.md",
       "keyword": "VelAuxUnitFct",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "7099086ce00c7e45c232052439738a5f420e45252e22ec39bae37b078857f549",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "f1ec80ee2f50a2fb0be31bac0b69e2bc227235538976b9dad28fdc4f2c2b94d8",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/21-engineering-units/VelAuxUnitFct.zh.md",
-          "sha256": "28df182ab1566ee97bc4417ad360a67fec46d4c4e434e405eb3adf19d1885609"
+          "sha256": "f05ee1c2fef07d8456a752ddc80ef17a24b9bfa51c554c31971971e3287f789e"
         }
       }
     },
     {
       "path": "02-keywords/21-engineering-units/VelAuxUnitGrp.md",
       "keyword": "VelAuxUnitGrp",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "2f018e830fec4a402439a22764e72a86519f6cd68ffb4fd7cfbc6b16d3809fb2",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "50dfdd0e05f1cce83c3bf650277f0ad6684c89096feea5d9a251e985fecab9d3",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/21-engineering-units/VelAuxUnitGrp.zh.md",
-          "sha256": "3b4d64f0e61be0ac0e5c85b728fa63ba462f56b40e904b33d0379f7e691aa6fb"
+          "sha256": "99014113ef512f9ef2e2442587b46ea2907209e0244361eafc26d08cb0541d6a"
         }
       }
     },
@@ -11291,26 +11499,26 @@
     {
       "path": "02-keywords/21-engineering-units/VelPDUnitFct.md",
       "keyword": "VelPDUnitFct",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "db37311bb8cae74d4cfb1641a2a4ed0c272eb061283af6b54be3ed3492a10c72",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "ad6a5dc2a6d8db5fbfa5e190aa162d3616005be1179f967135b0a0adbef10bbb",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/21-engineering-units/VelPDUnitFct.zh.md",
-          "sha256": "b689a00ff0798467511dfd4d3f63ddaf577b5a44b2780c12851165322213bd0e"
+          "sha256": "249aca6ec77f5e5372a922b250132a65281bfa1530390acbe42e5c3debb6d89b"
         }
       }
     },
     {
       "path": "02-keywords/21-engineering-units/VelPDUnitGrp.md",
       "keyword": "VelPDUnitGrp",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "b4917e35699bcf0580ec187c26b7fc4a427c06e96d6fb87d94d1724b8b49f76a",
+      "last_updated": "2026-10-10",
+      "doc_revision": "2026.11",
+      "sha256": "a5efce1abdb845cf1698815ad6eec0e825fd84f34de87d041d14aadf7c64217a",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/21-engineering-units/VelPDUnitGrp.zh.md",
-          "sha256": "04babc9a3ec34a08cda3880e03bf2c23a52d95311cbb8cf8c7148185e9f2fe91"
+          "sha256": "ae0e6716bac63fd919026137cabb8e70ee9f4d24b20483a6e3630fd3659ff7b7"
         }
       }
     },
@@ -11861,15 +12069,249 @@
       }
     },
     {
+      "path": "03-special-features/friction-compensation/00-overview.md",
+      "keyword": "00-overview",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "2622d845cdff93021c13dbee7b193aba09213c079a4ae0712f88e8b5251c522c",
+      "variants": {
+        "zh-CN": {
+          "path": "03-special-features/friction-compensation/00-overview.zh.md",
+          "sha256": "55123ab1e6b71a7ae60d0d60da5a383ee6bccc800ef972dcd9c3f232b04a6e88"
+        }
+      }
+    },
+    {
+      "path": "03-special-features/friction-compensation/FricBrstlDmp.md",
+      "keyword": "FricBrstlDmp",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "15ced2a198be3b13969509aa60f3876731edf6d0e67db412b24e2817d61be51a",
+      "variants": {
+        "zh-CN": {
+          "path": "03-special-features/friction-compensation/FricBrstlDmp.zh.md",
+          "sha256": "c6bb1174fc5de32101a534c5965b2daae5416551c0d71e8b139b26271a3bd09e"
+        }
+      }
+    },
+    {
+      "path": "03-special-features/friction-compensation/FricBrstlStf.md",
+      "keyword": "FricBrstlStf",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "d137b6b3e1783ebc0a710c8a42be3fe69afa614717c80f5ff9a6046af9e2ca02",
+      "variants": {
+        "zh-CN": {
+          "path": "03-special-features/friction-compensation/FricBrstlStf.zh.md",
+          "sha256": "0fb8b04acdb01ffb7688fb6bd322be84ac102b64b27827c620eea29a6b1b068b"
+        }
+      }
+    },
+    {
+      "path": "03-special-features/friction-compensation/FricINeg.md",
+      "keyword": "FricINeg",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "a88af38937bd571463b30d2591ebb8a0a665afb3058aab2bf8d6891de231f343",
+      "variants": {
+        "zh-CN": {
+          "path": "03-special-features/friction-compensation/FricINeg.zh.md",
+          "sha256": "1f49f19c686a098e66b4bdcf83714c8e456200f7b9b59ee55085e5c1fa771e0f"
+        }
+      }
+    },
+    {
+      "path": "03-special-features/friction-compensation/FricIPos.md",
+      "keyword": "FricIPos",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "75db394206eaec718aa13bc2e5faa7d9085424f3891e67066c1569b58455ced3",
+      "variants": {
+        "zh-CN": {
+          "path": "03-special-features/friction-compensation/FricIPos.zh.md",
+          "sha256": "3f84e678cd001e8268f9f8b1b8fe385fc364188e80735816b3162261270de569"
+        }
+      }
+    },
+    {
+      "path": "03-special-features/friction-compensation/FricIStatNeg.md",
+      "keyword": "FricIStatNeg",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "7538f0b2c4c3dba23e6395008c3a068dca84ecb4aba462ab6528647db78ff122",
+      "variants": {
+        "zh-CN": {
+          "path": "03-special-features/friction-compensation/FricIStatNeg.zh.md",
+          "sha256": "1ca4a5926015fc8093e94f69dfc37dd44aec5974fe57203c5bdd06a7f859581a"
+        }
+      }
+    },
+    {
+      "path": "03-special-features/friction-compensation/FricIStatPos.md",
+      "keyword": "FricIStatPos",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "68b620624ad0fc6520491164a5650f3b41f77af077ec1d91da700b360b9a0cef",
+      "variants": {
+        "zh-CN": {
+          "path": "03-special-features/friction-compensation/FricIStatPos.zh.md",
+          "sha256": "4c6f38819e4033169b0e891a3acff021c4d389763496dff95d22e8e55cf1ca4c"
+        }
+      }
+    },
+    {
+      "path": "03-special-features/friction-compensation/FricLim.md",
+      "keyword": "FricLim",
+      "last_updated": "2026-10-18",
+      "doc_revision": "2026.11",
+      "sha256": "261e488c46f2103f988a8af6f592356a0f5ce0db62ba149ca3ff5287a3415377",
+      "variants": {
+        "zh-CN": {
+          "path": "03-special-features/friction-compensation/FricLim.zh.md",
+          "sha256": "8bf6f66178304cad1992395beb8c0d3416ec58d33516defaec6b8c74a854bd34"
+        }
+      }
+    },
+    {
+      "path": "03-special-features/friction-compensation/FricMethod.md",
+      "keyword": "FricMethod",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "215f4a1a3dc9f9077ac6a699f2f81be2a57fda00af8d3bc42e6a453dd29ba48d",
+      "variants": {
+        "zh-CN": {
+          "path": "03-special-features/friction-compensation/FricMethod.zh.md",
+          "sha256": "4944962d974bae60ce9c0da7339c48606f061d5c3e095cd93bfbaf25065a7aa7"
+        }
+      }
+    },
+    {
+      "path": "03-special-features/friction-compensation/FricQSCHold.md",
+      "keyword": "FricQSCHold",
+      "last_updated": "2026-10-18",
+      "doc_revision": "2026.11",
+      "sha256": "e36c69e664c4f3168b08498f1c95e83f72e633144ef64cd1c811346c2e17c5bb",
+      "variants": {
+        "zh-CN": {
+          "path": "03-special-features/friction-compensation/FricQSCHold.zh.md",
+          "sha256": "e782de245f913f04a756031958be6b7046edb19dfd00867e251764b1b9c9603c"
+        }
+      }
+    },
+    {
+      "path": "03-special-features/friction-compensation/FricQSCOn.md",
+      "keyword": "FricQSCOn",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "60277d382f1ad1ae1004eea6d410a3f280b8487f807d98da940d273224255d4c",
+      "variants": {
+        "zh-CN": {
+          "path": "03-special-features/friction-compensation/FricQSCOn.zh.md",
+          "sha256": "598735fed603cba1e794fce422b771eb7c4a715237b5c2c98d2f0d3f06bc4373"
+        }
+      }
+    },
+    {
+      "path": "03-special-features/friction-compensation/FricQSCTime.md",
+      "keyword": "FricQSCTime",
+      "last_updated": "2026-10-18",
+      "doc_revision": "2026.11",
+      "sha256": "41fc345e6974e46afacba4c3dfb253dd72696a946203dbcf3e0da12b797c710c",
+      "variants": {
+        "zh-CN": {
+          "path": "03-special-features/friction-compensation/FricQSCTime.zh.md",
+          "sha256": "30e2cbaec4d8035565e8069f2fa432ddc52ec3f3331bce27038ae6e0f4d6ff0b"
+        }
+      }
+    },
+    {
+      "path": "03-special-features/friction-compensation/FricVBandNeg.md",
+      "keyword": "FricVBandNeg",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "b417747da3bbf862c515c5fb68c1a395ed9bed8800fbfc5344375300aa97e27d",
+      "variants": {
+        "zh-CN": {
+          "path": "03-special-features/friction-compensation/FricVBandNeg.zh.md",
+          "sha256": "e0e233e5f22c6232eafd37d9ddfce3db90897edae6783adf028d3038fbd350b2"
+        }
+      }
+    },
+    {
+      "path": "03-special-features/friction-compensation/FricVBandPos.md",
+      "keyword": "FricVBandPos",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "2289057bd3b1ca710933dfbdcedd5ed95e72eb702cd33560a7658f5bb39e321d",
+      "variants": {
+        "zh-CN": {
+          "path": "03-special-features/friction-compensation/FricVBandPos.zh.md",
+          "sha256": "8703c135871c4bb72430767462c3d3dbc9ea9a382534aef7ef0f100a84ffe6ce"
+        }
+      }
+    },
+    {
+      "path": "03-special-features/friction-compensation/FricVStribNeg.md",
+      "keyword": "FricVStribNeg",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "9e11a88533a671a6ba1cabf91057d78f47ee86dcba8ae130f768144f0311fca4",
+      "variants": {
+        "zh-CN": {
+          "path": "03-special-features/friction-compensation/FricVStribNeg.zh.md",
+          "sha256": "90f926236d32a997903371ce108dbe3186009db4be388a9f8428bb43bb765d3d"
+        }
+      }
+    },
+    {
+      "path": "03-special-features/friction-compensation/FricVStribPos.md",
+      "keyword": "FricVStribPos",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "f67c9441055a458825be59833cc071933768d0da520b117b845713fa96a3c0ae",
+      "variants": {
+        "zh-CN": {
+          "path": "03-special-features/friction-compensation/FricVStribPos.zh.md",
+          "sha256": "306d2b4ab9b52e11fe956df3b7e9356c54810d5e24310f563a902ab820340609"
+        }
+      }
+    },
+    {
+      "path": "03-special-features/friction-compensation/FricVelSrc.md",
+      "keyword": "FricVelSrc",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "23243d3cbd0ffc538bfe84314669edb45f2822769e60a75491e7ad7085ec4dd1",
+      "variants": {
+        "zh-CN": {
+          "path": "03-special-features/friction-compensation/FricVelSrc.zh.md",
+          "sha256": "684f1194a79b1875b52b30f7380139bce865138922bb679880dd26f851833ed7"
+        }
+      }
+    },
+    {
+      "path": "03-special-features/friction-compensation/FricViscous.md",
+      "keyword": "FricViscous",
+      "last_updated": "2026-11-01",
+      "doc_revision": "2026.11",
+      "sha256": "04cecd2edf22ea1b26eb662af1127518b398b527127113f5ae87bdb9dc03e0f0",
+      "variants": {
+        "zh-CN": {
+          "path": "03-special-features/friction-compensation/FricViscous.zh.md",
+          "sha256": "33acc7b8dba0c3b34965e60144a9b2a0e0a63b8c77160101f013be93c9f92cf2"
+        }
+      }
+    },
+    {
       "path": "03-special-features/friction-compensation/FrictionComp.md",
       "keyword": "FrictionComp",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "6afaaa7a63dcde7777eab349fc7da655dfb32a1c87d08e500c16754f9c8825c1",
+      "last_updated": "2026-10-18",
+      "doc_revision": "2026.11",
+      "sha256": "361a35d9260792cff43a435a27a4d6c45a2402fc2b505dd9227bf6ba1d4064c7",
       "variants": {
         "zh-CN": {
           "path": "03-special-features/friction-compensation/FrictionComp.zh.md",
-          "sha256": "3db83e4ecd6104a30184fabf3daf1974ed936920fa0494211b0bcb0100f3c0cf"
+          "sha256": "e2515b1baf4491d7009998bc3cee4a52ab565313cdc364caf4dd857a7b27567c"
         }
       }
     },
@@ -12058,13 +12500,13 @@
     {
       "path": "03-special-features/upm/UPMCalcCoeff.md",
       "keyword": "UPMCalcCoeff",
-      "last_updated": "2026-06-02",
-      "doc_revision": "2026.06",
-      "sha256": "04a606f2dd2a63c09edf0e5f5b8fd2c5731dfc65ac4650e795fad8961f2e0c70",
+      "last_updated": "2026-10-20",
+      "doc_revision": "2026.11",
+      "sha256": "22950773d9b615181695320aff56e6d0fa661d3a992daa60a73f9843d96d8a75",
       "variants": {
         "zh-CN": {
           "path": "03-special-features/upm/UPMCalcCoeff.zh.md",
-          "sha256": "90eeb485b09b2254b5c43e7bed9bc4df2e369a19c4aa7bd32ccc44494ed9157a"
+          "sha256": "e3b0357b0047b2188916ec649a45a2eaa87570986939c60545087959b33aa5b5"
         }
       }
     },

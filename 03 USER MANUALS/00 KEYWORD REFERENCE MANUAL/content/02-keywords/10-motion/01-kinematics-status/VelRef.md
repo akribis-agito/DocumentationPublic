@@ -29,7 +29,7 @@ overrides:
     data_type: int64
     range: null
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 ---
 # VelRef
 

@@ -1,7 +1,7 @@
 ---
 summary: History arrays storing the controller-cycle time of each logged digital event.
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 ---
 # LockTimeTable/LockTimeTabB
 

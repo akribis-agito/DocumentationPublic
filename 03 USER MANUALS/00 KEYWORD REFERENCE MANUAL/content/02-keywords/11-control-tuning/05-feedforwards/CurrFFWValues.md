@@ -24,6 +24,8 @@ attributes:
 overrides:
   standalone.v5:
     array_size: 1
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 ---
 # CurrFFWValues
 

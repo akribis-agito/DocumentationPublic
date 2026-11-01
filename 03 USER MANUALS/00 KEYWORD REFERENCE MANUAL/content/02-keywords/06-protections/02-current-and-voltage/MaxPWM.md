@@ -28,7 +28,7 @@ overrides:
   central-i.v5:
     scaling: 1.526
 last_updated: '2026-10-21'
-doc_revision: '2026.10'
+doc_revision: '2026.11'
 ---
 # MaxPWM
 

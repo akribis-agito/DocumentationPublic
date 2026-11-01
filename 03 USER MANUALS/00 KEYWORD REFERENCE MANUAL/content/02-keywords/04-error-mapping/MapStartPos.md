@@ -31,7 +31,7 @@ overrides:
     - 2251799813685247
 summary: Starting position of each error-mapping dimension, in encoder counts.
 last_updated: '2026-10-17'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 ---
 # MapStartPos
 
