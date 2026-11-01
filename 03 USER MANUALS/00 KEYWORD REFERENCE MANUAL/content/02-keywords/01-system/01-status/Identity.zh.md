@@ -122,11 +122,10 @@ language: zh-CN
 要测试某项能力，用该功能对应的位对该字进行掩码运算；结果非零表示该功能存在。由于位分配随每次发布而增长，应将运行中固件未置位的任何位视为"不支持"。
 
 
-`Identity[62]` 的 `0x100` 位明确标示 Stribeck 优先的摩擦方法编号：
-`FricMethod=1` 为 Stribeck（2 为线性、3 为迟滞、4 为 play、5 为 LuGre、0 为关闭）。
-该位未置位并不证明采用旧编号，只表示未声明此编号约定。某些较早的开发固件
-已经采用新编号，但未提供该标志。需要 Stribeck 优先编号的上位机必须在写入设置
-之前拒绝这些固件。固件版本号以及 FricMethod 最大值为 5 都无法区分两种编号。
+没有任何 `Identity` 位声明摩擦方法编号。5.3.0-rc6 及之后的固件按 Stribeck 优先为
+[FricMethod](../../../03-special-features/friction-compensation/FricMethod.zh.md) 编号：
+0 为关闭、1 为 Stribeck、2 为线性、3 为迟滞、4 为 play、5 为 LuGre。
+5.3.0-rc4 与 rc5 候选版本的编号为 1 线性、2 迟滞、3 play、4 LuGre，rc5 另有 5 为 Stribeck。
 已有参数文件保留其原始方法数值，不会自动迁移。
 
 ## 示例

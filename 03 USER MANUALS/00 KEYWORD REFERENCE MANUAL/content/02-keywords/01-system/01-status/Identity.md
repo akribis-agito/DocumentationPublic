@@ -121,14 +121,12 @@ Additional internal type codes exist for non-standard products; the codes above 
 To test a capability, mask the word with the bit for that feature; a non-zero result means the feature is present. Because the bit assignments grow with each release, treat any bit that the running firmware does not set as "not supported".
 
 
-Bit `0x100` of `Identity[62]` explicitly identifies the Stribeck-first friction
-numbering: `FricMethod=1` selects Stribeck (2 linear, 3 hysteresis, 4 play,
-5 LuGre, 0 off). A clear bit does not prove the old numbering; it means this
-contract is not advertised. Some earlier development builds already use the
-new numbering but do not advertise the bit. Hosts requiring Stribeck-first
-numbering must refuse such builds before writing settings. Firmware version
-and a FricMethod maximum of 5 cannot distinguish the two numberings.
-Existing parameter files retain their numeric method and are not migrated.
+No `Identity` bit advertises the friction method numbering. Firmware 5.3.0-rc6
+and later number [FricMethod](../../../03-special-features/friction-compensation/FricMethod.md)
+Stribeck-first: 0 off, 1 Stribeck, 2 linear, 3 hysteresis, 4 play, 5 LuGre.
+The 5.3.0-rc4 and rc5 candidates numbered it 1 linear, 2 hysteresis, 3 play,
+4 LuGre, and on rc5 also 5 Stribeck. Existing parameter files retain their
+numeric method and are not migrated.
 
 ## Examples
 

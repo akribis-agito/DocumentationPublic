@@ -59,7 +59,7 @@ with, for the direction of travel:
 
 Method 1 replaces the separate Stribeck feedforward of 5.3.0-rc4 (`StribOn` and the `Strib*` keywords). Quadrant-switching compensation ([FricQSCOn](FricQSCOn.md)) is added on top of methods 0, 2, 3 and 4 only; methods 1 and 5 already contain the breakaway level.
 
-The range is 0 to 5. Values saved under 5.3.0-rc4 are not converted. After upgrading from rc4, re-enter the friction settings.
+The range is 0 to 5. Values saved under 5.3.0-rc4 or rc5 are not converted: those candidates numbered the methods 1 linear, 2 hysteresis, 3 play, 4 LuGre (and, on rc5, 5 Stribeck), so a saved value selects a different model on rc6 and later. After upgrading from rc4 or rc5, re-enter the friction settings.
 
 ## Examples
 
