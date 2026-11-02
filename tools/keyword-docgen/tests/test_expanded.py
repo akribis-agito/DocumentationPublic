@@ -46,6 +46,16 @@ def test_macro_input_does_not_silently_emit_empty_manifest(tmp_path):
         parse_params(p, DefineTable({}))
 
 
+def test_scaling_tag_and_unknown_factor_are_not_assumed_unit_scaling(tmp_path):
+    p = source(tmp_path)
+    text = p.read_text(encoding="utf-8").replace('{0,0,0,0,1,0', '{0,0,4,0,1,0')
+    text = text.replace('20000,0,1,{0}', '20000,0,UNKNOWN_FACTOR,{0}')
+    p.write_text(text, encoding="utf-8")
+    attrs = parse_expanded(p, 2)["PosGain"]["attributes"]
+    assert attrs["units"] == "scaling"
+    assert attrs["scaling"] is None
+
+
 def test_cli_requires_both_products_before_writing(tmp_path):
     docs = tmp_path / "docs" / "02-keywords"
     docs.mkdir(parents=True)

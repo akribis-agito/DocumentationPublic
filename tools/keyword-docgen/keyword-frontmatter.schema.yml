@@ -89,11 +89,11 @@ fields:
       data_type:    { type: enum, values: [int32, float32, int64, float64] }
       ok_in_motion: { type: boolean }
       ok_motor_on:  { type: boolean }
-      units:        { type: enum, values: [user, none, func] }
+      units:        { type: enum, values: [user, none, func, aux_user_units, pd_user_units, scaling] }
       range:        { type: "list[2] | null", items: integer }   # [min, max], or null if unresolved
       default:      { type: "integer | null" }
-      scaling:      { type: number }
-      implemented:  { type: enum, values: [final, partial] }
+      scaling:      { type: "number | null" }               # null means unresolved, never an assumed 1
+      implemented:  { type: enum, values: [final, partial, not_implemented, future] }
 
   overrides:
     type: object
