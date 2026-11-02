@@ -40,8 +40,8 @@ overrides:
     - -2147483648
     - 2147483647
     implemented: not_implemented
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-11-03'
+doc_revision: '2026.11'
 ---
 # ModShort
 

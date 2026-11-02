@@ -40,7 +40,7 @@ overrides:
     - -2147483648
     - 2147483647
     implemented: not_implemented
-last_updated: '2026-11-01'
+last_updated: '2026-11-03'
 doc_revision: '2026.11'
 ---
 # PDEncDir

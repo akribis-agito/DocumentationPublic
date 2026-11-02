@@ -1,6 +1,6 @@
 ---
 summary: Offset added to the raw absolute encoder reading.
-last_updated: '2026-11-01'
+last_updated: '2026-11-03'
 doc_revision: '2026.11'
 ---
 # EncAbsOff/AuxEncAbsOff

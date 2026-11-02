@@ -27,7 +27,7 @@ attributes:
 overrides:
   central-i.v5:
     implemented: partial
-last_updated: '2026-10-18'
+last_updated: '2026-11-03'
 doc_revision: '2026.11'
 ---
 # EncAbsErrTime

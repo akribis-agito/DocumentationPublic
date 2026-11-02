@@ -1,8 +1,8 @@
 {
   "manual": "Keyword Reference Manual",
   "version": "2026.11",
-  "generated": "2026-11-01",
-  "document_count": 986,
+  "generated": "2026-11-03",
+  "document_count": 987,
   "documents": [
     {
       "path": "01-keyword-usage-and-syntax/complex-can-code.md",
@@ -982,13 +982,13 @@
     {
       "path": "02-keywords/02-motor-and-amplifier/AmpType.md",
       "keyword": "AmpType",
-      "last_updated": "2026-09-25",
-      "doc_revision": "2026.09",
-      "sha256": "1aa038633fd468f6bfc1f247639ea1c3a835d36d0b35122e0191f8a03be3dbc1",
+      "last_updated": "2026-11-03",
+      "doc_revision": "2026.11",
+      "sha256": "0e55ee4f7a0c1b03d6e173dbf33374bb480d434cd2ddc961a31c95d29d19ebe8",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/02-motor-and-amplifier/AmpType.zh.md",
-          "sha256": "6d692e5e25968710b9f0f6b8758ffc7d24b2bf332479f8b2a8c9df361c801422"
+          "sha256": "4ae7541ac40a8c661550f269c714ed4c04a92ad61cf88e988992d541df240b04"
         }
       }
     },
@@ -1190,26 +1190,26 @@
     {
       "path": "02-keywords/03-encoder/01-general-settings/EncAbsOff-AuxEncAbsOff.md",
       "keyword": "EncAbsOff-AuxEncAbsOff",
-      "last_updated": "2026-11-01",
+      "last_updated": "2026-11-03",
       "doc_revision": "2026.11",
-      "sha256": "4bb40df53b2a1346ea30c7175e427a4b6f74dacd164ae9e52a0594b82da93a21",
+      "sha256": "e96f1ed85ab911433518aa797895340445383cd91ae48a75aa424c778d78cfc1",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/01-general-settings/EncAbsOff-AuxEncAbsOff.zh.md",
-          "sha256": "ba2b6517b05a082804822e276de099de0dadb875829e9136624a9e55cb055721"
+          "sha256": "3f0d44a84d7ced9c2407cf90e9bf3eb1777d1f44d7474cc6363c16cc178012d3"
         }
       }
     },
     {
       "path": "02-keywords/03-encoder/01-general-settings/EncAbsVal-AuxEncAbsVal.md",
       "keyword": "EncAbsVal-AuxEncAbsVal",
-      "last_updated": "2026-11-01",
+      "last_updated": "2026-11-03",
       "doc_revision": "2026.11",
-      "sha256": "04d48d4bc5a8c0ebb58c0c176ca87109e99a603f4684712b7fabfdb9a3e66a95",
+      "sha256": "3406e04bc32b9867252a0dda1c40aaed8fdf8b0217533be57a7e965b42ec0964",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/01-general-settings/EncAbsVal-AuxEncAbsVal.zh.md",
-          "sha256": "0bbd98feaca68163014267d40c00a33def53c14a2d695957558158dbec84303c"
+          "sha256": "e6ff7e4e746af8d6c42881ef39d621247d7f30247fa29086c56d7776edb6a2a2"
         }
       }
     },
@@ -1255,13 +1255,13 @@
     {
       "path": "02-keywords/03-encoder/01-general-settings/EncStatReg.md",
       "keyword": "EncStatReg",
-      "last_updated": "2026-10-18",
+      "last_updated": "2026-11-03",
       "doc_revision": "2026.11",
-      "sha256": "9ad307bdd93a1791de42be1b224be36f63bd7e58579ce962a79f9229342df8b4",
+      "sha256": "d9d6f44668499896ce06066599d7cb687a6fcd39f8974829c9d892c076dddec2",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/01-general-settings/EncStatReg.zh.md",
-          "sha256": "829498d9e5bd17c70415ce56626022d7858c4ef501f326f584086e237a6a98f7"
+          "sha256": "f9506d484e77e33455e40f408b06141bcb7a7ae2b3daaf464eb6040b6a64a1ca"
         }
       }
     },
@@ -1461,6 +1461,19 @@
       }
     },
     {
+      "path": "02-keywords/03-encoder/03-event-based-feedback-logging/LockFifoKeep.md",
+      "keyword": "LockFifoKeep",
+      "last_updated": "2026-11-03",
+      "doc_revision": "2026.11",
+      "sha256": "185b68a4860f1cecead6101181b3eb8bffb2a7810081fe6816c05635209d06ed",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/03-encoder/03-event-based-feedback-logging/LockFifoKeep.zh.md",
+          "sha256": "06af9399a21a0042eb8405f7e9d87913048190f10a75b0bb7310954dd0fe5f97"
+        }
+      }
+    },
+    {
       "path": "02-keywords/03-encoder/03-event-based-feedback-logging/LockLost.md",
       "keyword": "LockLost",
       "last_updated": "2026-11-01",
@@ -1554,13 +1567,13 @@
     {
       "path": "02-keywords/03-encoder/04-modulo-mode/ModShort.md",
       "keyword": "ModShort",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "d7889f55ecbb6efec174272aa40568c7b0109c4947b8a74eda6ff3ba2d6ca6e5",
+      "last_updated": "2026-11-03",
+      "doc_revision": "2026.11",
+      "sha256": "8cb6f503b543dfaf2eef4bf387cd12961124fe80367f76dee2d14d599a1d7e44",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/04-modulo-mode/ModShort.zh.md",
-          "sha256": "8e6963b5396ade64e39fa5486bd4f42db74aeaeef50f620bfbb51c4e00d085af"
+          "sha256": "520907bf9221ae8b36d722c918c5c7285041af1321b0f62abfaecc0993ae9117"
         }
       }
     },
@@ -1736,26 +1749,26 @@
     {
       "path": "02-keywords/03-encoder/07-absolute-encoder/EncAbsAddr.md",
       "keyword": "EncAbsAddr",
-      "last_updated": "2026-09-25",
-      "doc_revision": "2026.09",
-      "sha256": "b861c6e39b84b04e4a3e1a890d09cbedb83d9b28b1c992b325b87fb68ce7db6f",
+      "last_updated": "2026-11-03",
+      "doc_revision": "2026.11",
+      "sha256": "2d65563f190d02219a6d0869097b70b364fbb16d8656b3ae76bc089091148b91",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/07-absolute-encoder/EncAbsAddr.zh.md",
-          "sha256": "831a9bc93a63dbe06b4d68078e6f3b65c476baa631a932a9ef278de698714daf"
+          "sha256": "74e5ae1a984cc5a91a4af84e9da6c6134e147f946ed73106d4d6a6b25ccb811c"
         }
       }
     },
     {
       "path": "02-keywords/03-encoder/07-absolute-encoder/EncAbsErrTime.md",
       "keyword": "EncAbsErrTime",
-      "last_updated": "2026-10-18",
+      "last_updated": "2026-11-03",
       "doc_revision": "2026.11",
-      "sha256": "b7228fb59f0a07537c2b571538c71e023a73b5716921d7d7d1d9df4f46d6ce35",
+      "sha256": "03b00e79edd50d852fb9119fa7d296d641b9ac22e39309bb7a77d5227a11ac56",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/03-encoder/07-absolute-encoder/EncAbsErrTime.zh.md",
-          "sha256": "86fe6c2ac93b560f7b44d8c9aa2ab6be604cf661a0b9d56197889deca7a4d56d"
+          "sha256": "9a5607f1108993baf002c9c712c216d21340c6c2bb7040b9b10988d3f722579c"
         }
       }
     },
@@ -5298,13 +5311,13 @@
     {
       "path": "02-keywords/10-motion/03-kinematics-configuration/SetPosition.md",
       "keyword": "SetPosition",
-      "last_updated": "2026-11-01",
+      "last_updated": "2026-11-03",
       "doc_revision": "2026.11",
-      "sha256": "80e04dce0730baca8bef5b98423539d43bb4899e3be237412721acfd76c42049",
+      "sha256": "f0c9f08d4f319f538b251d128e659932d9233d29a40451d3cc98f720d1dd5da8",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/03-kinematics-configuration/SetPosition.zh.md",
-          "sha256": "2fdbce239eff44905255b8441baaf597d128468a64d04af2c36f97253e59897d"
+          "sha256": "8ab0d00f196f0df555ebff432aa6bbf0009de5176dd2a486365d3174c8811b30"
         }
       }
     },
@@ -5636,13 +5649,13 @@
     {
       "path": "02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDEncDir.md",
       "keyword": "PDEncDir",
-      "last_updated": "2026-11-01",
+      "last_updated": "2026-11-03",
       "doc_revision": "2026.11",
-      "sha256": "adf4412dedb279d2cfce4b4c87a70df8dc58c763dd901dd20615dd917a2d2627",
+      "sha256": "fba5d3de1dea183a4eb2caf34ac7cd7847a73400c7b4c05993447905d89bdf29",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/10-motion/06-motion-mode-pulse-and-direction-pd/PDEncDir.zh.md",
-          "sha256": "c1a73d10da9a9caeb9a1168694f07b22fcb82552dd6aa574a44bfbbcb43d97b7"
+          "sha256": "ee704d50251ab24b6dfd4c39060c780ba20e761f5f2eebb4d1eb5b6c22f3f32c"
         }
       }
     },
@@ -9042,13 +9055,13 @@
     {
       "path": "02-keywords/14-identification/CalcIden.md",
       "keyword": "CalcIden",
-      "last_updated": "2026-10-21",
+      "last_updated": "2026-11-03",
       "doc_revision": "2026.11",
-      "sha256": "1618e3490ed3aa993ae4e67fffefcadd3685c3f7e3c9da820b90e6c97d9cc534",
+      "sha256": "c9b415855261659e7acff0fdf52ff906619fe73340377478501e5c9154f08dd6",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/14-identification/CalcIden.zh.md",
-          "sha256": "c26815ee55b976b6703cade1636927924452676c48949f5aa933adaeec853ac6"
+          "sha256": "ed8330547fe62e0845c3dd3e4420dcca8e1f3de0cb7839dfb08801be9041d7ba"
         }
       }
     },

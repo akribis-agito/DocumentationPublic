@@ -34,8 +34,8 @@ overrides:
     range:
     - 0
     - 7
-last_updated: '2026-09-25'
-doc_revision: '2026.09'
+last_updated: '2026-11-03'
+doc_revision: '2026.11'
 ---
 # AmpType
 

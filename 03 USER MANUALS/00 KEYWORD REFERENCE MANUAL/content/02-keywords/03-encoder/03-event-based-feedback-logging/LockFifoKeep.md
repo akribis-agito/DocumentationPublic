@@ -23,6 +23,8 @@ attributes:
   scaling: 1
   implemented: final
 overrides: {}
+last_updated: '2026-11-03'
+doc_revision: '2026.11'
 ---
 # LockFifoKeep
 
