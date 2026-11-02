@@ -35,7 +35,7 @@ def _init(repo):
 def test_last_commit_date(tmp_path):
     _init(tmp_path)
     f = tmp_path / "a.md"
-    f.write_text("hi\n")
+    f.write_text("hi\n", encoding="utf-8")
     _git(tmp_path, "add", "a.md")
     _git(tmp_path, "commit", "-m", "x", date="2026-05-20T10:00:00")
     assert last_commit_date(f, tmp_path) == "2026-05-20"
@@ -44,7 +44,7 @@ def test_last_commit_date(tmp_path):
 def test_last_commit_date_uncommitted_is_none(tmp_path):
     _init(tmp_path)
     f = tmp_path / "b.md"
-    f.write_text("hi\n")  # never committed
+    f.write_text("hi\n", encoding="utf-8")  # never committed
     assert last_commit_date(f, tmp_path) is None
 
 
@@ -66,9 +66,9 @@ def _make_corpus(tmp_path):
         "overrides: {}\n"
         "---\n"
         "# PosGain\n\nbody text\n"
-    )
+    , encoding="utf-8")
     ag = d2 / "AutoGOn.md"   # legacy: no frontmatter
-    ag.write_text("# AutoGOn\n\nlegacy body\n")
+    ag.write_text("# AutoGOn\n\nlegacy body\n", encoding="utf-8")
     return content, pg, ag
 
 
@@ -81,7 +81,7 @@ def test_stamp_corpus_stamps_frontmatter_and_preserves_facts(tmp_path):
     stamp_corpus([pg, ag], repo_root=tmp_path, content_root=content,
                  version="2026.06", generated="2026-06-02")
 
-    fm, body = split_doc(pg.read_text())
+    fm, body = split_doc(pg.read_text(encoding="utf-8"))
     assert fm["last_updated"] == "2026-05-20"
     assert fm["doc_revision"] == "2026.06"
     assert fm["attributes"]["range"] == [0, 20000]   # owned fact preserved
@@ -99,7 +99,7 @@ def test_stamp_corpus_leaves_legacy_doc_without_frontmatter(tmp_path):
                  version="2026.06", generated="2026-06-02")
 
     # No frontmatter is injected into a legacy doc.
-    assert ag.read_text() == "# AutoGOn\n\nlegacy body\n"
+    assert ag.read_text(encoding="utf-8") == "# AutoGOn\n\nlegacy body\n"
 
 
 def test_stamp_corpus_manifest(tmp_path):
@@ -140,7 +140,7 @@ def test_stamp_corpus_incremental_doc_revision(tmp_path):
                       version="2026.06", generated="2026-06-02")
 
     # Change only PosGain's body; commit at a later date.
-    pg.write_text(pg.read_text().replace("body text", "new body text"))
+    pg.write_text(pg.read_text(encoding="utf-8").replace("body text", "new body text"), encoding="utf-8")
     _git(tmp_path, "add", "-A")
     _git(tmp_path, "commit", "-m", "edit", date="2026-07-10T10:00:00")
 
@@ -150,7 +150,7 @@ def test_stamp_corpus_incremental_doc_revision(tmp_path):
     by = {d["keyword"]: d for d in m2["documents"]}
     assert by["AutoGOn"]["doc_revision"] == "2026.06"   # unchanged -> kept
     assert by["PosGain"]["doc_revision"] == "2026.07"   # changed -> bumped
-    fm, _ = split_doc(pg.read_text())
+    fm, _ = split_doc(pg.read_text(encoding="utf-8"))
     assert fm["doc_revision"] == "2026.07"               # stamp reflects bump
     assert fm["last_updated"] == "2026-07-10"
 
@@ -173,7 +173,7 @@ def test_last_updated_stable_across_stamp_commit(tmp_path):
     m2 = stamp_corpus([pg, ag], repo_root=tmp_path, content_root=content,
                       version="2026.06", generated="2026-06-30", prev_manifest=m1)
 
-    fm, _ = split_doc(pg.read_text())
+    fm, _ = split_doc(pg.read_text(encoding="utf-8"))
     assert fm["last_updated"] == "2026-05-20"            # not pushed to the stamp date
     by = {d["keyword"]: d for d in m2["documents"]}
     assert by["PosGain"]["last_updated"] == "2026-05-20"
@@ -202,7 +202,7 @@ def test_stamp_corpus_adds_zh_variant_and_keeps_en_record(tmp_path):
     zh.write_text(
         "---\nkeyword: PosGain\nlanguage: zh-CN\nsummary: 译文\n"
         "attributes:\n  range:\n  - 0\n  - 20000\n---\n" + zh_body
-    )
+    , encoding="utf-8")
     _git(tmp_path, "add", "-A")
     _git(tmp_path, "commit", "-m", "init", date="2026-05-20T10:00:00")
 
@@ -232,14 +232,14 @@ def test_stamp_corpus_zh_variant_does_not_disturb_en_stamp(tmp_path):
     content, pg, ag = _make_corpus(tmp_path)
     zh = pg.with_name("PosGain.zh.md")
     zh.write_text(
-        "---\nkeyword: PosGain\nlanguage: zh-CN\nsummary: 译文\n---\n中文\n")
+        "---\nkeyword: PosGain\nlanguage: zh-CN\nsummary: 译文\n---\n中文\n", encoding="utf-8")
     _git(tmp_path, "add", "-A")
     _git(tmp_path, "commit", "-m", "init", date="2026-05-20T10:00:00")
 
     stamp_corpus([pg, ag, zh], repo_root=tmp_path, content_root=content,
                  version="2026.06", generated="2026-06-02")
 
-    fm, body = split_doc(pg.read_text())
+    fm, body = split_doc(pg.read_text(encoding="utf-8"))
     assert fm["last_updated"] == "2026-05-20"
     assert body == "# PosGain\n\nbody text\n"
 
@@ -263,11 +263,11 @@ def test_cli_version_subcommand(tmp_path):
     ])
     assert rc == 0
 
-    m = json.loads(manifest_out.read_text())
+    m = json.loads(manifest_out.read_text(encoding="utf-8"))
     assert m["version"] == "2026.06"
     assert m["document_count"] == 2
-    assert version_file.read_text().strip() == "2026.06"
+    assert version_file.read_text(encoding="utf-8").strip() == "2026.06"
 
-    fm, _ = split_doc(pg.read_text())
+    fm, _ = split_doc(pg.read_text(encoding="utf-8"))
     assert fm["doc_revision"] == "2026.06"
     assert fm["last_updated"] == "2026-05-20"

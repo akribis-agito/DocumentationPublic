@@ -2,7 +2,8 @@
 keyword: dddPosRef
 summary: 加加速度参考，即位置参考 PosRef 的三阶微分。
 availability:
-  standalone: []
+  standalone:
+  - v5
   central-i:
   - v5
 can_code: 858

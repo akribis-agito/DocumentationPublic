@@ -1,15 +1,16 @@
 ---
 keyword: ModShort
-summary: Selects the path of motion (normal, positive-only, negative-only, or shortest) for absolute PTP under modulo mode; implemented on central-i v5 only.
+summary: Selects the path of motion (normal, positive-only, negative-only, or shortest) for absolute PTP under modulo mode; implemented on v5.
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
   - v5
 can_code: 149
 attributes:
-  access: '0'
+  access: rw
   scope: axis
   flash: true
   type: scalar
@@ -17,21 +18,28 @@ attributes:
   data_type: int32
   ok_in_motion: false
   ok_motor_on: false
-  units: '0'
+  units: none
   range:
-  - -2147483648
-  - 2147483647
+  - 0
+  - 3
   default: 0
-  scaling: 1.0
-  implemented: not_implemented
+  scaling: 1
+  implemented: final
 overrides:
-  central-i.v5:
-    access: rw
-    units: none
+  standalone.v4:
+    access: '0'
+    units: '0'
     range:
-    - 0
-    - 3
-    implemented: final
+    - -2147483648
+    - 2147483647
+    implemented: not_implemented
+  central-i.v4:
+    access: '0'
+    units: '0'
+    range:
+    - -2147483648
+    - 2147483647
+    implemented: not_implemented
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 ---
@@ -43,7 +51,7 @@ Selects the path of motion for absolute PTP under modulo mode.
 
 `ModShort` defines the path of motion taken in absolute point-to-point (PTP) motion when modulo mode is enabled (`ModRev ≠ 0`). It is used for general motion ([MotionMode](../../10-motion/02-motion-configuration/MotionMode.md) = 1 or 2) or during homing ([HomingDef](../../16-homing/HomingDef.md)[1, 11, …, 141] = 12). It complements [ModRev](ModRev.md), which enables modulo wrapping. Being axis-scope and flash-saved, it cannot be changed while the motor is on or in motion.
 
-> **Availability:** `ModShort` is implemented on **central-i v5 only** (range 0–3). On v4 (standalone and central-i) it is not implemented and has no effect — an absolute PTP move always goes to the literal target.
+> **Availability:** `ModShort` is implemented on **v5 (standalone and central-i)** (range 0–3). On v4 (standalone and central-i) it is not implemented and has no effect — an absolute PTP move always goes to the literal target.
 
 ## How it works
 
@@ -67,11 +75,11 @@ AModShort=3          ; shortest path
 
 ## Changes between versions
 
-| | v4 (standalone & central-i) | v5 (central-i) |
+| | v4 (standalone & central-i) | v5 (standalone & central-i) |
 |---|---|---|
 | Access | not implemented (no effect) | read/write, range 0–3 |
 
-The path-selection logic exists only on the v5 firmware; it is absent on v4. **v5 is central-i only.**
+The path-selection logic exists only on the v5 firmware; it is absent on v4. Both standalone and Central-i provide the keyword in v5.
 
 ## See also
 

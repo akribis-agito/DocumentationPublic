@@ -236,4 +236,66 @@ def parse_params(path: Path, defines: DefineTable) -> dict[str, dict[str, dict]]
         brace_idx = text.index("{", eq_idx)
         table_block = _extract_balanced(text, brace_idx)
         tables[product] = _parse_one_table(table_block, defines)
+    if not tables or not any(tables.values()):
+        raise ValueError("No keyword rows parsed; macro tables require explicit preprocessed product tables")
     return tables
+
+
+def parse_expanded(path: Path, expected_rows: int) -> dict[str, dict]:
+    """Read a preprocessor-expanded positional initializer with resolved pools.
+
+    The caller selects the real product/compiler flags and resolves KeywordPool
+    cells before supplying this file. Never infer product gates from raw macros.
+    CAN codes are physical positions, including placeholder rows.
+    """
+    text = Path(path).read_text(encoding="utf-8")
+    matches = list(re.finditer(r"KeywordsTableArray\s*\[[^\]]+\]\s*=\s*\{", text))
+    if len(matches) != 1 or expected_rows <= 0:
+        raise ValueError("Expected exactly one expanded keyword table and a positive row count")
+    block = _extract_balanced(text, matches[0].end() - 1)
+    if not block.endswith("}"):
+        raise ValueError("Unterminated expanded table")
+    entries = list(_iter_entries(block))
+    if len(entries) != expected_rows:
+        raise ValueError(f"Expanded row count {len(entries)} != expected {expected_rows}")
+    maps = {
+        2: {"0": "NO_USER_UNITS", "1": "USER_UNITS", "2": "AUX_USER_UNITS",
+            "3": "PD_USER_UNITS", "4": "SCALING"},
+        3: {"0": "RW", "1": "RO"}, 4: {"0": "NOMOTN", "1": "OKINMOTN"},
+        5: {"0": "OKMTRON", "1": "NOMTRON"},
+        6: {"0": "NOARRAY", "1": "ISARRAY"},
+        7: {"0": "NOFLASH", "1": "FLASH"},
+        8: {"0": "NON_AXIS", "1": "AXIS"},
+        9: {"0": "NOT_IMPLEMENTED", "1": "PARTIAL", "2": "FINAL", "3": "FUTURE"},
+    }
+    result = {}
+    defines = DefineTable({})
+    for code, entry in enumerate(entries):
+        fields = _split_fields(entry)
+        if len(fields) not in (9, 10) or not re.fullmatch(r'"[A-Za-z_][A-Za-z_0-9]*"', fields[0]):
+            raise ValueError(f"Malformed expanded keyword row {code}")
+        name = fields[0].strip('"')
+        if set(name) == {"Z"}:
+            continue
+        if name in result:
+            raise ValueError(f"Duplicate expanded mnemonic {name}")
+        attr = _split_fields(fields[1].strip("{} "))
+        if len(attr) != 12:
+            raise ValueError(f"Malformed attributes at row {code}")
+        for idx, mapping in maps.items():
+            if attr[idx] not in mapping:
+                raise ValueError(f"Unexpanded/unknown attribute {attr[idx]} at row {code}")
+            attr[idx] = mapping[attr[idx]]
+        if attr[11] not in _DATA_TYPE:
+            raise ValueError(f"Unexpanded data type at row {code}")
+        maxidx = defines.resolve(fields[2])
+        if maxidx is None or int(maxidx) != maxidx or maxidx < 0:
+            raise ValueError(f"Unresolved array bound at row {code}: {fields[2]}")
+        # Reuse the legacy semantic mapping, supplying the physical CAN index.
+        record = _entry_to_record([str(code), fields[0], "{" + ",".join(attr) + "}"] + fields[2:], defines)
+        # Unknown scaling must remain unknown, rather than silently becoming 1.
+        record["attributes"]["scaling"] = defines.resolve(fields[6])
+        result[name] = record
+    if not result:
+        raise ValueError("Expanded table contains no allocated keywords")
+    return result

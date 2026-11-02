@@ -98,3 +98,5 @@ ASetPosition=50000   ; redefine current position as 50000
 - [PosErr](../01-kinematics-status/PosErr.md) — 由 `SetPosition` 保留（不置零）
 - [MapType](../../04-error-mapping/MapType.md) — 误差映射必须关闭
 - [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md) / [RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md) — 值必须位于这两者之间
+
+若事件表清理失败，事件表仍占有轴，直到重新连接恢复。在此期间，即使运行已停止，`SetPosition` 仍被拒绝，错误码为 151。

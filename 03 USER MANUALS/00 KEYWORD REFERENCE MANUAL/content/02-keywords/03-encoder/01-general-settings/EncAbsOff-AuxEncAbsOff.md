@@ -41,7 +41,7 @@ AAuxEncAbsOff=-50000    ; place auxiliary machine zero at reading 50000
 
 ## Edge cases
 
-- **Unvalidated power-up seed.** Except for the AGM800/AGM800-EC main Tamagawa case described under How it works, initialization uses the processed reading during its countdown; it does not wait for a qualified first sample. Main absolute-encoder error handling begins after this window. A later clear [EncStatReg](EncStatReg.md) does not validate the reading used to seed [Pos](../../10-motion/01-kinematics-status/Pos.md). The [retained-feedback repair](https://github.com/akribis-agito/Firmware-Main/issues/1297) prevents repeated formatting of a retained Central-i word; it adds no startup qualification.
+- **Unvalidated power-up seed.** Except for the AGM800/AGM800-EC main Tamagawa case described under How it works, initialization uses the processed reading during its countdown; it does not wait for a qualified first sample. Main absolute-encoder error handling begins after this window. A later clear [EncStatReg](EncStatReg.md) does not validate the reading used to seed [Pos](../../10-motion/01-kinematics-status/Pos.md). The retained-feedback repair in firmware 5.3.0-rc4 and later prevents repeated formatting of a retained Central-i word; it adds no startup qualification.
 
 ## See also
 

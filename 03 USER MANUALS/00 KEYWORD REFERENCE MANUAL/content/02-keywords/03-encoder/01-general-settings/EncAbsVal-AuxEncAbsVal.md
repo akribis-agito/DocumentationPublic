@@ -26,7 +26,7 @@ So `EncAbsVal` is the masked, direction-corrected reading — exactly the value 
 
 ### Rejected Central-i transport frames
 
-For AGM800/AGM800-EC firmware containing the [retained-feedback repair](https://github.com/akribis-agito/Firmware-Main/issues/1297), a rejected standard AMP transport frame does not cause the previously accepted word to be shifted or direction-inverted again. While that standard AMP port remains active with unchanged configuration, `EncAbsVal` retains the formatted measurement until another transport word is accepted. Existing error handling may separately predict the position used for accumulation; `EncAbsVal` is not that estimate.
+For AGM800/AGM800-EC firmware 5.3.0-rc4 and later, a rejected standard AMP transport frame does not cause the previously accepted word to be shifted or direction-inverted again. While that standard AMP port remains active with unchanged configuration, `EncAbsVal` retains the formatted measurement until another transport word is accepted. Existing error handling may separately predict the position used for accumulation; `EncAbsVal` is not that estimate.
 
 Transport acceptance does not establish a newly acquired, error-free encoder measurement. This repair adds no timestamp, first-sample qualification or detailed encoder alarm reporting. See [EncStatReg](EncStatReg.md) for diagnostic limits. It does not change `EncAbsErrTime=-1` bypass or existing fault thresholds.
 

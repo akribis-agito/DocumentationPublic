@@ -4,6 +4,7 @@ summary: Selects how the axis drives its motor — built-in amplifier or an exte
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
   - v5
@@ -20,15 +21,19 @@ attributes:
   units: none
   range:
   - 0
-  - 7
+  - 8
   default: 0
-  scaling: 1.0
+  scaling: 1
   implemented: partial
 overrides:
-  central-i.v5:
+  standalone.v4:
     range:
     - 0
-    - 8
+    - 7
+  central-i.v4:
+    range:
+    - 0
+    - 7
 last_updated: '2026-09-25'
 doc_revision: '2026.09'
 ---
@@ -107,7 +112,7 @@ AAmpType            ; query the current amplifier mode
 | Range | 0–7 | 0–8 |
 | Added modes | — | 6 (PD with feedback), 8 (digital SPI phase-current) |
 
-v5 is central-i only; on the standalone product `AmpType` keeps the v4 range 0–7.
+In v5, standalone and Central-i expose `AmpType` with the table range 0–8. The numeric range does not imply that every mode is supported by every product; the remote-unit table above applies to Central-i.
 
 ## See also
 

@@ -111,11 +111,11 @@ def test_cli_rag_export_emits_zh_chunk(tmp_path):
     (content / "02-keywords" / "PosGain.md").write_text(
         "---\nkeyword: PosGain\nsummary: P.\ncan_code: 100\n"
         "attributes:\n  scope: axis\n---\n# PosGain\n\nSee [PosKi](PosKi.md).\n"
-    )
+    , encoding="utf-8")
     (content / "02-keywords" / "PosGain.zh.md").write_text(
         "---\nkeyword: PosGain\nlanguage: zh-CN\nsummary: 译文\ncan_code: 100\n"
         "attributes:\n  scope: axis\n---\n# PosGain\n\n中文。\n"
-    )
+    , encoding="utf-8")
     manifest = {"documents": [{
         "path": "02-keywords/PosGain.md", "keyword": "PosGain",
         "last_updated": "2026-06-02", "doc_revision": "2026.06", "sha256": "abc",
@@ -123,14 +123,14 @@ def test_cli_rag_export_emits_zh_chunk(tmp_path):
                                "sha256": "zzz"}},
     }]}
     mpath = tmp_path / "manifest.json"
-    mpath.write_text(json.dumps(manifest))
+    mpath.write_text(json.dumps(manifest), encoding="utf-8")
     out = tmp_path / "chunks.jsonl"
 
     rc = run(["rag-export", "--content-root", str(content),
               "--manifest", str(mpath), "--out", str(out)])
     assert rc == 0
 
-    recs = [json.loads(ln) for ln in out.read_text().splitlines()]
+    recs = [json.loads(ln) for ln in out.read_text(encoding="utf-8").splitlines()]
     assert len(recs) == 2
     en = next(r for r in recs if r["id"] == "02-keywords/PosGain.md")
     zh = next(r for r in recs if r["id"] == "02-keywords/PosGain.zh.md")
@@ -147,20 +147,20 @@ def test_cli_rag_export(tmp_path):
     (content / "02-keywords" / "PosGain.md").write_text(
         "---\nkeyword: PosGain\nsummary: P.\ncan_code: 100\n"
         "attributes:\n  scope: axis\n---\n# PosGain\n\nSee [PosKi](PosKi.md).\n"
-    )
+    , encoding="utf-8")
     manifest = {"documents": [{
         "path": "02-keywords/PosGain.md", "keyword": "PosGain",
         "last_updated": "2026-06-02", "doc_revision": "2026.06", "sha256": "abc",
     }]}
     mpath = tmp_path / "manifest.json"
-    mpath.write_text(json.dumps(manifest))
+    mpath.write_text(json.dumps(manifest), encoding="utf-8")
     out = tmp_path / "chunks.jsonl"
 
     rc = run(["rag-export", "--content-root", str(content),
               "--manifest", str(mpath), "--out", str(out)])
     assert rc == 0
 
-    lines = out.read_text().splitlines()
+    lines = out.read_text(encoding="utf-8").splitlines()
     assert len(lines) == 1
     rec = json.loads(lines[0])
     assert rec["keyword"] == "PosGain"

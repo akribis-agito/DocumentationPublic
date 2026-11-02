@@ -4,10 +4,11 @@ summary: Register address within the absolute encoder to be accessed by the next
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
   - v5
-can_code: 716
+can_code: 899
 attributes:
   access: rw
   scope: axis
@@ -22,11 +23,13 @@ attributes:
   - 0
   - 255
   default: 0
-  scaling: 1.0
+  scaling: 1
   implemented: final
 overrides:
-  central-i.v5:
-    can_code: 899
+  standalone.v4:
+    can_code: 716
+  central-i.v4:
+    can_code: 716
 last_updated: '2026-09-25'
 doc_revision: '2026.09'
 ---
@@ -36,7 +39,7 @@ Register address within the absolute encoder to be accessed by the next transact
 
 ## Overview
 
-`EncAbsAddr` specifies the memory address inside the absolute encoder to be accessed by the next [EncAbsSendCmd](EncAbsSendCmd.md) transaction. It is used together with [EncAbsWRType](EncAbsWRType.md) (read or write) to target the correct encoder register. The valid range is 0 to 255 (8-bit). It is an axis-scope parameter, not saved to flash, and cannot be changed while the motor is on or in motion. Available on v4 (standalone and central-i) and v5 (central-i); the CAN code differs between the two (see [Changes between versions](#changes-between-versions)).
+`EncAbsAddr` specifies the memory address inside the absolute encoder to be accessed by the next [EncAbsSendCmd](EncAbsSendCmd.md) transaction. It is used together with [EncAbsWRType](EncAbsWRType.md) (read or write) to target the correct encoder register. The valid range is 0 to 255 (8-bit). It is an axis-scope parameter, not saved to flash, and cannot be changed while the motor is on or in motion. Available on v4 (standalone and central-i) and v5 (standalone and central-i); the CAN code differs between the two (see [Changes between versions](#changes-between-versions)).
 
 ## How it works
 
@@ -44,11 +47,11 @@ When [EncAbsSendCmd](EncAbsSendCmd.md) runs, it writes `EncAbsAddr` to the encod
 
 ## Changes between versions
 
-| | v4 (standalone & central-i) | v5 (central-i) |
+| | v4 (standalone & central-i) | v5 (standalone and central-i) |
 |---|---|---|
 | CAN code | 716 | 899 |
 
-The value range, default and motor-on / in-motion restrictions are the same in both versions. **v5 is central-i only.** The transaction that uses this value runs only on a standalone controller: on a central-i master, v5 refuses [EncAbsSendCmd](EncAbsSendCmd.md), and on v4 the transaction does not reach the encoder and changes unrelated settings in the remote drive (see [EncAbsSendCmd](EncAbsSendCmd.md)).
+The value range, default and motor-on / in-motion restrictions are the same in both versions.  The transaction that uses this value runs only on a standalone controller: on a central-i master, v5 refuses [EncAbsSendCmd](EncAbsSendCmd.md), and on v4 the transaction does not reach the encoder and changes unrelated settings in the remote drive (see [EncAbsSendCmd](EncAbsSendCmd.md)).
 
 ## Examples
 

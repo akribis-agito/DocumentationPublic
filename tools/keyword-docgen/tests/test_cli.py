@@ -13,7 +13,7 @@ def setup_docs(tmp_path: Path) -> Path:
     # Only PosGain has a doc; PosKi will land in the manifest.
     (kw / "PosGain.md").write_text(
         "---\nsummary: Proportional gain.\n---\n# PosGain\n\nProportional gain.\n"
-    )
+    , encoding="utf-8")
     return docs
 
 
@@ -37,21 +37,20 @@ def run_v5(docs, mode="append"):
     ])
 
 
-def test_v5_scan_does_not_record_standalone(tmp_path):
-    # v5 is central-i only: a v5 scan must not add standalone availability,
-    # even though the develop source still has a CONTROLLER (standalone) table.
+def test_v5_scan_records_both_products_from_their_tables(tmp_path):
+    # Both products are present in this source fixture.
     docs = setup_docs(tmp_path)
     run_v4(docs)
     run_v5(docs)
-    fm, _ = split_doc((docs / "02-keywords/11-control-tuning/PosGain.md").read_text())
-    assert fm["availability"]["standalone"] == ["v4"]          # no v5 for standalone
+    fm, _ = split_doc((docs / "02-keywords/11-control-tuning/PosGain.md").read_text(encoding="utf-8"))
+    assert fm["availability"]["standalone"] == ["v4", "v5"]
     assert fm["availability"]["central-i"] == ["v4", "v5"]      # central-i gains v5
 
 
 def test_updates_existing_doc_frontmatter(tmp_path):
     docs = setup_docs(tmp_path)
     run_v4(docs)
-    fm, body = split_doc((docs / "02-keywords/11-control-tuning/PosGain.md").read_text())
+    fm, body = split_doc((docs / "02-keywords/11-control-tuning/PosGain.md").read_text(encoding="utf-8"))
     assert fm["can_code"] == 100
     assert fm["attributes"]["range"] == [0, 20000]
     assert fm["availability"]["standalone"] == ["v4"]
@@ -68,7 +67,7 @@ def test_does_not_create_doc_for_undocumented_keyword(tmp_path):
 def test_writes_manifest_with_undocumented(tmp_path):
     docs = setup_docs(tmp_path)
     run_v4(docs)
-    manifest = (docs / "_manifest" / "undocumented.md").read_text()
+    manifest = (docs / "_manifest" / "undocumented.md").read_text(encoding="utf-8")
     assert "PosKi" in manifest
     assert "PosGain" not in manifest
 
@@ -96,16 +95,16 @@ def test_indexes_special_features_and_legacy_roots(tmp_path):
     lg = docs / "05-legacy-keywords"
     sf.mkdir(parents=True)
     lg.mkdir(parents=True)
-    (sf / "PosGain.md").write_text("# PosGain\n\nlegacy body A\n")   # no frontmatter
-    (lg / "PosKi.md").write_text("# PosKi\n\nlegacy body B\n")        # no frontmatter
+    (sf / "PosGain.md").write_text("# PosGain\n\nlegacy body A\n", encoding="utf-8")   # no frontmatter
+    (lg / "PosKi.md").write_text("# PosKi\n\nlegacy body B\n", encoding="utf-8")        # no frontmatter
 
     run_v4(docs)
 
-    fm_pg, body_pg = split_doc((sf / "PosGain.md").read_text())
+    fm_pg, body_pg = split_doc((sf / "PosGain.md").read_text(encoding="utf-8"))
     assert fm_pg["can_code"] == 100
     assert fm_pg["availability"]["standalone"] == ["v4"]
     assert "legacy body A" in body_pg          # body preserved
-    fm_pk, body_pk = split_doc((lg / "PosKi.md").read_text())
+    fm_pk, body_pk = split_doc((lg / "PosKi.md").read_text(encoding="utf-8"))
     assert fm_pk.get("can_code") is not None   # PosKi also onboarded
     assert "legacy body B" in body_pk
 
@@ -124,16 +123,16 @@ def test_index_prefers_canonical_entry_on_stem_collision(tmp_path):
     canon_dir.mkdir(parents=True)
     (stub_dir / "PosGain.md").write_text(
         "---\nsummary: see the primary entry.\n---\n# PosGain\n\nstub pointer\n"
-    )
+    , encoding="utf-8")
     (canon_dir / "PosGain.md").write_text(
         "---\nkeyword: PosGain\nsummary: canonical.\n---\n# PosGain\n\ncanonical body\n"
-    )
+    , encoding="utf-8")
 
     run_v4(docs)
 
-    fm_c, _ = split_doc((canon_dir / "PosGain.md").read_text())
+    fm_c, _ = split_doc((canon_dir / "PosGain.md").read_text(encoding="utf-8"))
     assert fm_c["can_code"] == 100                       # canonical got facts
-    fm_s, body_s = split_doc((stub_dir / "PosGain.md").read_text())
+    fm_s, body_s = split_doc((stub_dir / "PosGain.md").read_text(encoding="utf-8"))
     assert "can_code" not in fm_s                        # stub untouched
     assert fm_s["summary"] == "see the primary entry."
     assert "stub pointer" in body_s
@@ -148,11 +147,11 @@ def test_append_propagates_facts_into_zh_sidecar(tmp_path):
     (kw / "PosGain.zh.md").write_text(
         "---\nkeyword: PosGain\nlanguage: zh-CN\nsummary: 比例增益。\n---\n"
         "# PosGain\n\n中文正文\n"
-    )
+    , encoding="utf-8")
 
     run_v4(docs)
 
-    zh_fm, zh_body = split_doc((kw / "PosGain.zh.md").read_text())
+    zh_fm, zh_body = split_doc((kw / "PosGain.zh.md").read_text(encoding="utf-8"))
     assert zh_fm["language"] == "zh-CN"
     assert zh_fm["summary"] == "比例增益。"          # translated, preserved
     assert zh_fm["can_code"] == 100                  # generated fact propagated
@@ -172,8 +171,8 @@ def test_index_skips_underscore_dirs(tmp_path):
     docs = tmp_path / "docs"
     tri = docs / "02-keywords" / "_triage"
     tri.mkdir(parents=True)
-    (tri / "PosGain.md").write_text("# scratch\n")   # not a real doc
+    (tri / "PosGain.md").write_text("# scratch\n", encoding="utf-8")   # not a real doc
 
     run_v4(docs)
 
-    assert (tri / "PosGain.md").read_text() == "# scratch\n"   # untouched
+    assert (tri / "PosGain.md").read_text(encoding="utf-8") == "# scratch\n"   # untouched

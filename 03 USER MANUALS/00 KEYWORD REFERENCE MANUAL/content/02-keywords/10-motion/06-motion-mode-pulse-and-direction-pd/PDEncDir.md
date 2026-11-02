@@ -4,12 +4,13 @@ summary: Configures the sign (direction) of PDPos accumulation relative to the d
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
   - v5
 can_code: 63
 attributes:
-  access: '0'
+  access: rw
   scope: axis
   flash: true
   type: scalar
@@ -17,21 +18,28 @@ attributes:
   data_type: int32
   ok_in_motion: false
   ok_motor_on: false
-  units: '0'
+  units: none
   range:
-  - -2147483648
-  - 2147483647
+  - 0
+  - 1
   default: 0
-  scaling: 1.0
-  implemented: not_implemented
+  scaling: 1
+  implemented: final
 overrides:
-  central-i.v5:
-    access: rw
-    units: none
+  standalone.v4:
+    access: '0'
+    units: '0'
     range:
-    - 0
-    - 1
-    implemented: final
+    - -2147483648
+    - 2147483647
+    implemented: not_implemented
+  central-i.v4:
+    access: '0'
+    units: '0'
+    range:
+    - -2147483648
+    - 2147483647
+    implemented: not_implemented
 last_updated: '2026-11-01'
 doc_revision: '2026.11'
 ---
@@ -43,7 +51,7 @@ Configures the sign (direction) of PDPos accumulation relative to the direction 
 
 `PDEncDir` reverses the sign of [PDPos](PDPos.md) accumulation, i.e. it flips which way the counter moves for a given direction signal. It lets the pulse-and-direction decoding sense be inverted without rewiring, and is independent of the magnitude scaling set by [PDFact](PDFact.md) / [PDFactDen](PDFactDen.md). It parallels the feedback-direction keyword [EncDir](../../03-encoder/01-general-settings/EncDir-AuxEncDir.md), but acts on the P/D *input* rather than the encoder feedback.
 
-> **Availability:** `PDEncDir` is implemented on **v5 (central-i) only**. On v4 it is reserved/not implemented — see *Changes between versions* below.
+> **Availability:** `PDEncDir` is implemented on **v5 (standalone and central-i)**. On v4 it is reserved/not implemented — see *Changes between versions* below.
 
 ## How it works
 
@@ -65,7 +73,7 @@ APDEncDir=1          ; inverted accumulation direction
 
 ## Changes between versions
 
-`PDEncDir` is **central-i v5 only**. On v4 the keyword is reserved (not implemented). On v5 (central-i) it is a read/write flash parameter with range 0–1 that applies the sign described above. v5 is central-i only, so the standalone product does not expose `PDEncDir`.
+`PDEncDir` is **v5 (standalone and central-i)**. On v4 the keyword is reserved (not implemented). On v5 it is a read/write flash parameter with range 0–1 that applies the sign described above.
 
 From FPGA v5.5.0-rc3 every product counts the P/D input in the same direction: direction low counts up. Before that, AGD155-AF, AGD155-EC, AGD200 and AGD301 (and Central-i encoders set to P/D) counted up on direction high, and only AGD101 counted up on direction low. If you set `PDEncDir = 1` or swapped the direction wire to compensate on those products, undo it after updating.
 

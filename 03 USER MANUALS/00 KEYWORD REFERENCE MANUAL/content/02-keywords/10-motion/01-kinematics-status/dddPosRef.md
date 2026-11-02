@@ -2,7 +2,8 @@
 keyword: dddPosRef
 summary: Jerk reference, the third derivative of the position reference PosRef.
 availability:
-  standalone: []
+  standalone:
+  - v5
   central-i:
   - v5
 can_code: 858

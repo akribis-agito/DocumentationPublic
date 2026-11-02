@@ -22,16 +22,12 @@ def cell_key(product: str, version: str) -> str:
 
 
 def product_supported(product: str, version: str) -> bool:
-    """Whether a (product, version) combination is a supported/shipped product.
+    """Known matrix cell; actual keyword presence comes from that product's table.
 
-    v5 moved the controller to 64-bit calculations and dropped the standalone
-    product; v5 is central-i only. The develop branch still *compiles* a
-    standalone (CONTROLLER) keyword table, but it is not a supported product, so
-    the generator must not record standalone availability on a v5 scan.
+    Firmware 5.3.0 has CONTROLLER rows as well as CI_MASTER rows. Product-family
+    availability does not imply every hardware variant implements the keyword.
     """
-    if version == "v5" and product == "standalone":
-        return False
-    return True
+    return product in PRODUCTS and version in VERSION_ORDER
 
 
 def infer_data_type(record: dict) -> str:

@@ -4,12 +4,13 @@ summary: 配置 PDPos 累积相对于方向信号的符号（方向）。
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
   - v5
 can_code: 63
 attributes:
-  access: '0'
+  access: rw
   scope: axis
   flash: true
   type: scalar
@@ -17,21 +18,28 @@ attributes:
   data_type: int32
   ok_in_motion: false
   ok_motor_on: false
-  units: '0'
+  units: none
   range:
-  - -2147483648
-  - 2147483647
+  - 0
+  - 1
   default: 0
-  scaling: 1.0
-  implemented: not_implemented
+  scaling: 1
+  implemented: final
 overrides:
-  central-i.v5:
-    access: rw
-    units: none
+  standalone.v4:
+    access: '0'
+    units: '0'
     range:
-    - 0
-    - 1
-    implemented: final
+    - -2147483648
+    - 2147483647
+    implemented: not_implemented
+  central-i.v4:
+    access: '0'
+    units: '0'
+    range:
+    - -2147483648
+    - 2147483647
+    implemented: not_implemented
 last_updated: '2026-05-28'
 doc_revision: '2026.06'
 language: zh-CN
@@ -44,7 +52,7 @@ language: zh-CN
 
 `PDEncDir` 反转 [PDPos](PDPos.md) 累积的符号，即翻转给定方向信号下计数器的运动方向。它无需重新接线即可反转脉冲方向解码的感知方向，且与 [PDFact](PDFact.md) / [PDFactDen](PDFactDen.md) 设置的幅值缩放相互独立。它与反馈方向关键字 [EncDir](../../03-encoder/01-general-settings/EncDir-AuxEncDir.md) 类似，但作用于 P/D *输入*而非编码器反馈。
 
-> **适用范围：** `PDEncDir` 仅在 **v5（central-i）** 上实现。在 v4 上为保留/未实现——参见下方*版本间变更*。
+> **适用范围：** `PDEncDir` 在 **v5（独立式和 central-i）** 上实现。在 v4 上为保留/未实现——参见下方*版本间变更*。
 
 ## 工作原理
 
@@ -66,7 +74,7 @@ APDEncDir=1          ; inverted accumulation direction
 
 ## 版本间变更
 
-`PDEncDir` 仅适用于 **central-i v5**。在 v4 上该关键字为保留（未实现）。在 v5（central-i）上，它是一个读/写闪存参数，范围为 0–1，应用上述符号。v5 仅适用于 central-i，因此独立产品不提供 `PDEncDir`。
+`PDEncDir` 适用于 **v5（独立式和 central-i）**。在 v4 上该关键字为保留（未实现）。在 v5 上，它是一个读/写闪存参数，范围为 0–1，应用上述符号。
 
 自 FPGA v5.5.0-rc3 起，所有产品对 P/D 输入的计数方向一致：方向低电平时递增。在此之前，AGD155-AF、AGD155-EC、AGD200 和 AGD301（以及设置为 P/D 的 Central-i 编码器）在方向高电平时递增，只有 AGD101 在方向低电平时递增。如果您曾在这些产品上设置 `PDEncDir = 1` 或调换方向线来补偿，请在升级后撤销。
 

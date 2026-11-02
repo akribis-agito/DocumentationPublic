@@ -18,6 +18,10 @@ _INT_OPS = {
     ast.Mult: operator.mul,
     ast.Div: operator.floordiv,
     ast.USub: operator.neg,
+    ast.LShift: operator.lshift,
+    ast.RShift: operator.rshift,
+    ast.BitOr: operator.or_,
+    ast.BitAnd: operator.and_,
 }
 # Float operand path: true division so 1526/1000 -> 1.526.
 _FLOAT_OPS = {
@@ -88,6 +92,7 @@ class DefineTable:
         )
         # Drop C float-literal suffixes (200.0f -> 200.0) so they parse as Python.
         expr = _FLOAT_SUFFIX.sub(r"\1", expr)
+        expr = re.sub(r"(?<![\w.])((?:0[xX][0-9a-fA-F]+|\d+))(?:[uU](?:[lL]{1,2})?|[lL]{1,2}[uU]?)(?!\w)", r"\1", expr)
         try:
             # The lookbehind keeps the 'e' of scientific notation (e.g. 3.4e+38)
             # and hex digits from being mistaken for symbols to substitute.
@@ -108,6 +113,8 @@ class DefineTable:
             left = self._eval(node.left)
             right = self._eval(node.right)
             ops = _INT_OPS if isinstance(left, int) and isinstance(right, int) else _FLOAT_OPS
+            if type(node.op) not in ops:
+                raise ValueError("integer operands required")
             return ops[type(node.op)](left, right)
         if isinstance(node, ast.UnaryOp) and type(node.op) in _INT_OPS:
             val = self._eval(node.operand)

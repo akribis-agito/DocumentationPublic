@@ -33,7 +33,7 @@ def test_zh_sidecar_path_only_strips_final_md(tmp_path):
 
 def test_no_sidecar_does_nothing(tmp_path):
     en = tmp_path / "PosGain.md"
-    en.write_text(render_doc(_en_facts(), "# PosGain\n\nbody\n"))
+    en.write_text(render_doc(_en_facts(), "# PosGain\n\nbody\n"), encoding="utf-8")
     changed = propagate_facts_to_sidecar(en, _en_facts())
     assert changed is False
     # No empty sidecar created.
@@ -44,7 +44,7 @@ def test_no_sidecar_does_nothing(tmp_path):
 
 def test_propagation_preserves_summary_language_and_body(tmp_path):
     en = tmp_path / "PosGain.md"
-    en.write_text(render_doc(_en_facts(), "# PosGain\n\nEnglish body\n"))
+    en.write_text(render_doc(_en_facts(), "# PosGain\n\nEnglish body\n"), encoding="utf-8")
 
     zh_fm = {
         "keyword": "PosGain",
@@ -56,12 +56,12 @@ def test_propagation_preserves_summary_language_and_body(tmp_path):
     }
     zh = tmp_path / "PosGain.zh.md"
     zh_body = "# PosGain\n\n中文正文\n"               # translated body
-    zh.write_text(render_doc(zh_fm, zh_body))
+    zh.write_text(render_doc(zh_fm, zh_body), encoding="utf-8")
 
     changed = propagate_facts_to_sidecar(en, _en_facts())
     assert changed is True
 
-    new_fm, new_body = split_doc(zh.read_text())
+    new_fm, new_body = split_doc(zh.read_text(encoding="utf-8"))
     # Facts now match English exactly.
     assert new_fm["can_code"] == 100
     assert new_fm["attributes"] == {"access": "rw", "range": [0, 20000], "default": 0}
@@ -75,25 +75,25 @@ def test_propagation_preserves_summary_language_and_body(tmp_path):
 def test_propagation_defaults_language_when_missing(tmp_path):
     # A sidecar that somehow lacks `language` gets zh-CN (it IS the zh file).
     en = tmp_path / "PosGain.md"
-    en.write_text(render_doc(_en_facts(), "# PosGain\n\nEnglish body\n"))
+    en.write_text(render_doc(_en_facts(), "# PosGain\n\nEnglish body\n"), encoding="utf-8")
     zh = tmp_path / "PosGain.zh.md"
     zh.write_text(render_doc(
-        {"keyword": "PosGain", "summary": "译文"}, "身体\n"))
+        {"keyword": "PosGain", "summary": "译文"}, "身体\n"), encoding="utf-8")
 
     propagate_facts_to_sidecar(en, _en_facts())
-    new_fm, _ = split_doc(zh.read_text())
+    new_fm, _ = split_doc(zh.read_text(encoding="utf-8"))
     assert new_fm["language"] == "zh-CN"
     assert new_fm["summary"] == "译文"
 
 
 def test_propagation_never_overwrites_summary_with_english(tmp_path):
     en = tmp_path / "PosGain.md"
-    en.write_text(render_doc(_en_facts(), "# PosGain\n\nbody\n"))
+    en.write_text(render_doc(_en_facts(), "# PosGain\n\nbody\n"), encoding="utf-8")
     zh = tmp_path / "PosGain.zh.md"
     zh.write_text(render_doc(
         {"keyword": "PosGain", "language": "zh-CN", "summary": "译文"},
-        "身体\n"))
+        "身体\n"), encoding="utf-8")
     propagate_facts_to_sidecar(en, _en_facts())
-    new_fm, _ = split_doc(zh.read_text())
+    new_fm, _ = split_doc(zh.read_text(encoding="utf-8"))
     assert new_fm["summary"] != "Proportional position gain."
     assert new_fm["summary"] == "译文"

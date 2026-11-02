@@ -26,8 +26,29 @@ Run once per branch checkout, asserting the version manually.
       --docs-root "03 USER MANUALS/00 KEYWORD REFERENCE MANUAL/content" \
       --manifest  "03 USER MANUALS/00 KEYWORD REFERENCE MANUAL/content/_manifest/undocumented.md"
 
-    # On the develop branch checkout (assert as v5):
-    keyword-docgen append --version v5 ...
+Modern master tables use `KW_ROW*`, product gates and constant pools. A raw
+macro source is rejected rather than producing an empty undocumented manifest.
+Expand each product with its real compiler flags and resolve the pools first
+(Firmware-Main `Tools/Cyclops/kwexpand.py`, `expand(..., pools=True,
+cc_args=[...])`). Save its returned rows, including placeholders, in one
+`KeywordsTableArray[1024] = { ... };` initializer per product. Then:
+
+    keyword-docgen overwrite --version v5 \
+      --expanded-table standalone=/path/to/controller-expanded.c \
+      --expanded-table central-i=/path/to/master-expanded.c \
+      --expected-rows 1024 \
+      --docs-root "03 USER MANUALS/00 KEYWORD REFERENCE MANUAL/content" \
+      --manifest /path/to/review/undocumented.md
+
+Both product tables are required before any page is written. Physical row
+positions determine CAN codes; count mismatches, unresolved attributes/array
+bounds and duplicate mnemonics fail. Unknown numeric range/default/scaling
+values remain unknown. Retain the source commit, compiler and full flags with
+the expansion. A PC product profile is not qualification of target timing or
+every hardware variant. In particular, the current two-family metadata cannot
+represent AGM800-EC conversion differences; review those separately and retain
+the authored hardware-specific notes. Run a comparison before a corpus-wide
+overwrite. Standalone v5 availability now follows the supplied table.
 
 - `append` errors if the version is already recorded in a doc (safe first add).
 - `overwrite` re-scans and replaces that version's facts (idempotent refresh).

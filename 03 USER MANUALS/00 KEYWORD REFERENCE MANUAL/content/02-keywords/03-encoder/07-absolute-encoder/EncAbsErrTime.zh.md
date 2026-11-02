@@ -61,7 +61,7 @@ language: zh-CN
 
 ## Central-i 已接受的位置与策略质量
 
-在包含[已接受质量修复](https://github.com/akribis-agito/Firmware-Main/issues/1408)的 AGM800 和 AGM800-EC 固件中，活动的标准 AMP 主 BiSS-C、EnDat 和 Tamagawa 反馈使用通过 Central-i CRC1 检查、与主位置一起被接受的现有错误/告警/CRC 输入。通过 CRC1 的传输帧本身仍可能报告编码器错误。传输解码被拒绝或跳过时，已接受的位置及其策略质量均保持不变。
+在 AGM800 和 AGM800-EC 固件 5.3.0-rc5 及后续版本中，活动的标准 AMP 主 BiSS-C、EnDat 和 Tamagawa 反馈使用通过 Central-i CRC1 检查、与主位置一起被接受的现有错误/告警/CRC 输入。通过 CRC1 的传输帧本身仍可能报告编码器错误。传输解码被拒绝或跳过时，已接受的位置及其策略质量均保持不变。
 
 [EncStatReg](../01-general-settings/EncStatReg.md) 继续报告当前解码输入。因此，被拒绝的异常帧可以显示在诊断中，却不会为保留的正常样本启动编码器错误计数；被拒绝的正常帧可以清除诊断显示，却不会清除保留的异常样本所提供的策略依据。现有计数器仍按控制处理程序的执行次数计数，包括重复使用保留的异常质量，而不是按新回复数计数。`-1` 旁路、阈值及故障动作不变。
 
@@ -69,7 +69,7 @@ language: zh-CN
 
 ## AGM800/EC 主 Tamagawa 启动
 
-在包含[启动修复](https://github.com/akribis-agito/Firmware-Main/issues/1452)的固件中，活动的标准 AMP 主 Tamagawa 在 `EncAbsErrTime >= 0` 时，会在原有稳定等待期间及等待新有效回复期间保持先前位置。只有本控制周期新通过 CRC1 检查、且现有质量位全部清零的回复，才能建立“绝对位置加 [EncAbsOff](../01-general-settings/EncAbsOff-AuxEncAbsOff.md)”的基准；建立该基准时运动增量为零。较早周期保留的正常回复不能用于建立此基准。重写主编码器类型或子类型会重新要求满足条件，即使此前已开始跟踪。
+在固件 5.3.0-rc5 及后续版本中，活动的标准 AMP 主 Tamagawa 在 `EncAbsErrTime >= 0` 时，会在原有稳定等待期间及等待新有效回复期间保持先前位置。只有本控制周期新通过 CRC1 检查、且现有质量位全部清零的回复，才能建立“绝对位置加 [EncAbsOff](../01-general-settings/EncAbsOff-AuxEncAbsOff.md)”的基准；建立该基准时运动增量为零。较早周期保留的正常回复不能用于建立此基准。重写主编码器类型或子类型会重新要求满足条件，即使此前已开始跟踪。
 
 稳定等待期间仍报告现有诊断。即使位置基准尚未建立，故障计数及动作仍按原有稳定等待结束后的时序执行；辅助编码器初始化不变。异常或不可用质量持续存在时，电机关闭状态下的位置可能一直等待，因为超时故障动作要求电机开启。这不是新增的使能联锁。
 

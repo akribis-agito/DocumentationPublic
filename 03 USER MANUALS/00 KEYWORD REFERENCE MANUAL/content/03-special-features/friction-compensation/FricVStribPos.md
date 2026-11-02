@@ -15,7 +15,7 @@ attributes:
   data_type: int64
   ok_in_motion: true
   ok_motor_on: true
-  units: none
+  units: user
   range:
   - 0
   - 20000000000

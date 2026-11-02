@@ -13,6 +13,15 @@ def test_parses_plain_int():
     assert make_table().resolve("POSGAIN_MAX") == 20000
 
 
+def test_preprocessed_integer_suffixes_and_bit_bounds():
+    t = DefineTable({})
+    assert t.resolve("20000000000LL") == 20000000000
+    assert t.resolve("0x1FFUL") == 511
+    assert t.resolve("(1 << 3) - 1") == 7
+    assert t.resolve("0x100U | 0x200U") == 768
+    assert t.resolve("1.5 << 2") is None
+
+
 def test_strips_trailing_comment():
     assert make_table().resolve("CONTROL_SIZE") == 6
 

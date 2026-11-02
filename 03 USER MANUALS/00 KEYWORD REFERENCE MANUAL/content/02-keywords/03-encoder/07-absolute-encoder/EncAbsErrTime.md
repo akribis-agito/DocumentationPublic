@@ -60,7 +60,7 @@ The existing **main-encoder protection** path is separate from `EncAbsErrTime` a
 
 ## Central-i accepted position and policy quality
 
-On AGM800 and AGM800-EC firmware containing the [accepted-quality repair](https://github.com/akribis-agito/Firmware-Main/issues/1408), active standard AMP main BiSS-C, EnDat and Tamagawa feedback uses the existing error/warning/CRC inputs accepted with the main position under the Central-i CRC1 check. A CRC1-accepted frame may itself report an encoder error. Rejected or skipped transport decoding retains both the accepted position and its policy quality.
+On AGM800 and AGM800-EC firmware 5.3.0-rc5 and later, active standard AMP main BiSS-C, EnDat and Tamagawa feedback uses the existing error/warning/CRC inputs accepted with the main position under the Central-i CRC1 check. A CRC1-accepted frame may itself report an encoder error. Rejected or skipped transport decoding retains both the accepted position and its policy quality.
 
 [EncStatReg](../01-general-settings/EncStatReg.md) continues to report current decoded inputs. A rejected bad frame can therefore appear in diagnostics without starting encoder-error counting for a retained good sample; a rejected clean frame can clear diagnostics without clearing the policy evidence from a retained bad sample. Existing counters still count control-handler invocations, including repeated use of retained bad quality, rather than new replies. The `-1` bypass, thresholds and fault actions are unchanged.
 
@@ -68,7 +68,7 @@ This ownership rule does not apply to local controllers, auxiliary feedback, ADP
 
 ## AGM800/EC main-Tamagawa startup
 
-In firmware containing the [startup repair](https://github.com/akribis-agito/Firmware-Main/issues/1452), active standard AMP main Tamagawa with `EncAbsErrTime >= 0` retains its preceding position during the ordinary settling interval and until a newly CRC1-accepted reply has clear existing quality bits. That reply establishes absolute position plus [EncAbsOff](../01-general-settings/EncAbsOff-AuxEncAbsOff.md) with zero movement delta. A healthy reply retained from an earlier tick cannot establish this baseline. Rewriting the main encoder type/subtype establishes new eligibility, including after tracking has already begun.
+In firmware 5.3.0-rc5 and later, active standard AMP main Tamagawa with `EncAbsErrTime >= 0` retains its preceding position during the ordinary settling interval and until a newly CRC1-accepted reply has clear existing quality bits. That reply establishes absolute position plus [EncAbsOff](../01-general-settings/EncAbsOff-AuxEncAbsOff.md) with zero movement delta. A healthy reply retained from an earlier tick cannot establish this baseline. Rewriting the main encoder type/subtype establishes new eligibility, including after tracking has already begun.
 
 Existing diagnostics are visible during settling. Fault counters/actions begin on their ordinary post-settling schedule while position remains pending; auxiliary initialization is unchanged. A continuing bad/unavailable quality can leave position pending indefinitely with the motor off, because timeout faults require the motor to be on. This is not a new enable interlock.
 

@@ -4,10 +4,11 @@ summary: 绝对式编码器内部的寄存器地址，供下一次事务访问�
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
   - v5
-can_code: 716
+can_code: 899
 attributes:
   access: rw
   scope: axis
@@ -22,11 +23,13 @@ attributes:
   - 0
   - 255
   default: 0
-  scaling: 1.0
+  scaling: 1
   implemented: final
 overrides:
-  central-i.v5:
-    can_code: 899
+  standalone.v4:
+    can_code: 716
+  central-i.v4:
+    can_code: 716
 last_updated: '2026-05-28'
 doc_revision: '2026.06'
 language: zh-CN
@@ -37,7 +40,7 @@ language: zh-CN
 
 ## 概述
 
-`EncAbsAddr` 指定绝对式编码器内部、供下一次 [EncAbsSendCmd](EncAbsSendCmd.md) 事务访问的存储地址。它与 [EncAbsWRType](EncAbsWRType.md)（读或写）配合使用，以指向正确的编码器寄存器。有效范围为 0 到 255（8 位）。它是轴相关参数，不保存至闪存，且不能在电机使能或运动中更改。适用于 v4（独立式与 central-i）和 v5（central-i）；两个版本的 CAN 代码不同（参见[版本间的变化](#版本间的变化)）。
+`EncAbsAddr` 指定绝对式编码器内部、供下一次 [EncAbsSendCmd](EncAbsSendCmd.md) 事务访问的存储地址。它与 [EncAbsWRType](EncAbsWRType.md)（读或写）配合使用，以指向正确的编码器寄存器。有效范围为 0 到 255（8 位）。它是轴相关参数，不保存至闪存，且不能在电机使能或运动中更改。适用于 v4（独立式与 central-i）和 v5（独立式和 central-i）；两个版本的 CAN 代码不同（参见[版本间的变化](#版本间的变化)）。
 
 ## 工作原理
 
@@ -45,11 +48,11 @@ language: zh-CN
 
 ## 版本间的变化
 
-| | v4（独立式与 central-i） | v5（central-i） |
+| | v4（独立式与 central-i） | v5（独立式和 central-i） |
 |---|---|---|
 | CAN 代码 | 716 | 899 |
 
-取值范围、默认值以及电机使能/运动中的限制在两个版本中相同。**v5 仅适用于 central-i。** 使用该值的事务仅在独立式控制器上执行：在 central-i 主控上，v5 会拒绝 [EncAbsSendCmd](EncAbsSendCmd.md)；v4 的事务无法到达编码器，并且会更改远程驱动器中无关的设置（参见 [EncAbsSendCmd](EncAbsSendCmd.md)）。
+取值范围、默认值以及电机使能/运动中的限制在两个版本中相同。 使用该值的事务仅在独立式控制器上执行：在 central-i 主控上，v5 会拒绝 [EncAbsSendCmd](EncAbsSendCmd.md)；v4 的事务无法到达编码器，并且会更改远程驱动器中无关的设置（参见 [EncAbsSendCmd](EncAbsSendCmd.md)）。
 
 ## 示例
 

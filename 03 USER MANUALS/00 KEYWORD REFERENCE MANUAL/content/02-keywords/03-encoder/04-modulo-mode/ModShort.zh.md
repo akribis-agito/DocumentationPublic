@@ -1,15 +1,16 @@
 ---
 keyword: ModShort
-summary: 在取模模式下为绝对 PTP 运动选择运动路径（正常、仅正向、仅负向或最短）；仅在 central-i v5 上实现。
+summary: 在取模模式下为绝对 PTP 运动选择运动路径（正常、仅正向、仅负向或最短）；在 v5 上实现。
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
   - v5
 can_code: 149
 attributes:
-  access: '0'
+  access: rw
   scope: axis
   flash: true
   type: scalar
@@ -17,21 +18,28 @@ attributes:
   data_type: int32
   ok_in_motion: false
   ok_motor_on: false
-  units: '0'
+  units: none
   range:
-  - -2147483648
-  - 2147483647
+  - 0
+  - 3
   default: 0
-  scaling: 1.0
-  implemented: not_implemented
+  scaling: 1
+  implemented: final
 overrides:
-  central-i.v5:
-    access: rw
-    units: none
+  standalone.v4:
+    access: '0'
+    units: '0'
     range:
-    - 0
-    - 3
-    implemented: final
+    - -2147483648
+    - 2147483647
+    implemented: not_implemented
+  central-i.v4:
+    access: '0'
+    units: '0'
+    range:
+    - -2147483648
+    - 2147483647
+    implemented: not_implemented
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
@@ -44,7 +52,7 @@ language: zh-CN
 
 `ModShort` 定义了在启用取模模式（`ModRev ≠ 0`）时，绝对点到点（PTP）运动所采用的运动路径。它用于常规运动（[MotionMode](../../10-motion/02-motion-configuration/MotionMode.md) = 1 或 2）或回零过程中（[HomingDef](../../16-homing/HomingDef.md)[1, 11, …, 141] = 12）。它与 [ModRev](ModRev.md)（启用取模环绕）配合使用。由于它是轴相关参数并保存至闪存，因此在电机使能或运动中时无法更改。
 
-> **可用性：** `ModShort` 仅在 **central-i v5** 上实现（范围 0–3）。在 v4（standalone 和 central-i）上未实现且无效——绝对 PTP 运动始终前往字面目标。
+> **可用性：** `ModShort` 在 **v5（独立式和 central-i）** 上实现（范围 0–3）。在 v4（standalone 和 central-i）上未实现且无效——绝对 PTP 运动始终前往字面目标。
 
 ## 工作原理
 
@@ -68,11 +76,11 @@ AModShort=3          ; shortest path
 
 ## 版本间变更
 
-| | v4（standalone 和 central-i） | v5（central-i） |
+| | v4（standalone 和 central-i） | v5（独立式和 central-i） |
 |---|---|---|
 | 访问 | 未实现（无效） | 读/写，范围 0–3 |
 
-路径选择逻辑仅存在于 v5 固件上；v4 上没有此逻辑。**v5 仅适用于 central-i。**
+路径选择逻辑仅存在于 v5 固件上；v4 上没有此逻辑。独立式和 Central-i 在 v5 上均提供此关键字。
 
 ## 另请参阅
 

@@ -81,7 +81,7 @@ It is also blocked while the axis is in motion (`ok_in_motion: false`).
 
 `SetPosition` adjusts the hardware-to-firmware capture offset by the actual change to the selected feedback coordinate. Subsequent `LockVal` publications use the new origin without toggling `LockEn` or repeating `LockEventInit`; this also applies to a capture whose mailbox reply completes after the position change. Previously published `LockVal` and capture-table entries are not rewritten. A source whose coordinate did not change is not shifted.
 
-Except for an EventLoad-managed `EventType=3` run on AGM800 and AGM800-EC, an already-armed hardware event sequence keeps its physical target positions across `SetPosition`, including table entries sent afterward. While such a run on any axis is loading, armed or finishing, `SetPosition` is refused with error 151; while the table is Ready and not yet armed, `SetPosition` discards the prepared load, so issue a fresh [EventLoad](../../18-event-generation/EventLoad.md) before arming. To start a sequence using the new origin, disable events and arm them again (`EventOn=0`, then `EventOn=1`). Writing `EventOn=1` while already enabled does not restart or realign it. This does not initialize a previously uninitialized lock/event source or remove the stationary-source requirement for initialization.
+Except for an EventLoad-managed `EventType=3` run on AGM800 and AGM800-EC, an already-armed hardware event sequence keeps its physical target positions across `SetPosition`, including table entries sent afterward. While such a run on any axis is loading, armed, finishing, or still owns the axis after cleanup failed, `SetPosition` is refused with error 151; while the table is Ready and not yet armed, `SetPosition` discards the prepared load, so issue a fresh [EventLoad](../../18-event-generation/EventLoad.md) before arming. To start a sequence using the new origin, disable events and arm them again (`EventOn=0`, then `EventOn=1`). Writing `EventOn=1` while already enabled does not restart or realign it. This does not initialize a previously uninitialized lock/event source or remove the stationary-source requirement for initialization.
 
 ## Examples
 
@@ -97,3 +97,5 @@ ASetPosition=50000   ; redefine current position as 50000
 - [PosErr](../01-kinematics-status/PosErr.md) — preserved (not zeroed) by `SetPosition`
 - [MapType](../../04-error-mapping/MapType.md) — error mapping must be off
 - [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md) / [RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md) — value must lie within these
+
+If cleanup fails, the event-table lease remains held until reconnect recovery. A stopped run is therefore not by itself permission to change coordinates.

@@ -19,7 +19,7 @@ from .manifest import render_manifest
 from .merge import VersionAlreadyRecorded, merge_version
 from .model import PRODUCTS, product_supported
 from .ragindex import chunk_record
-from .table_parser import parse_params
+from .table_parser import parse_params, parse_expanded
 from .versioning import stamp_corpus
 
 
@@ -29,8 +29,12 @@ def _build_parser() -> argparse.ArgumentParser:
     for mode in ("append", "overwrite"):
         p = sub.add_parser(mode)
         p.add_argument("--version", required=True, choices=["v4", "v5"])
-        p.add_argument("--params", required=True, type=Path)
-        p.add_argument("--defines", required=True, type=Path, nargs="+",
+        source = p.add_mutually_exclusive_group(required=True)
+        source.add_argument("--params", type=Path)
+        source.add_argument("--expanded-table", action="append", metavar="PRODUCT=PATH",
+                            help="Pool-resolved preprocessed positional table; supply both products")
+        p.add_argument("--expected-rows", type=int, default=1024)
+        p.add_argument("--defines", type=Path, nargs="+", default=[],
                        help="Header file(s) defining MIN/MAX/DFLT/sizes")
         p.add_argument("--docs-root", required=True, type=Path)
         p.add_argument("--manifest", required=True, type=Path)
@@ -185,7 +189,23 @@ def run(argv: list[str]) -> int:
     if args.mode == "rag-export":
         return run_rag_export(args)
     defines = DefineTable.from_headers(list(args.defines))
-    tables = parse_params(args.params, defines)
+    try:
+        if args.expanded_table:
+            tables = {}
+            for item in args.expanded_table:
+                product, sep, path = item.partition("=")
+                if not sep or product not in PRODUCTS or product in tables:
+                    raise ValueError("Expanded tables require unique PRODUCT=PATH inputs")
+                tables[product] = parse_expanded(Path(path), args.expected_rows)
+            if set(tables) != set(PRODUCTS):
+                raise ValueError("Supply both standalone and central-i expanded tables")
+        else:
+            if not args.defines:
+                raise ValueError("Raw legacy tables require --defines headers")
+            tables = parse_params(args.params, defines)
+    except ValueError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
     docs = _index_docs(args.docs_root)
 
     # Build per-keyword scan cells across products.

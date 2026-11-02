@@ -42,7 +42,7 @@ AAuxEncAbsOff=-50000    ; place auxiliary machine zero at reading 50000
 
 ## 边界情况
 
-- **未验证的上电初始化。** 除“工作原理”中所述的 AGM800/AGM800-EC 主 Tamagawa 情况外，初始化在倒计时期间使用已处理的读数，并不等待首次有效样本。主绝对式编码器错误处理在此窗口结束后才开始。之后 [EncStatReg](EncStatReg.md) 清零，并不能验证用于初始化 [Pos](../../10-motion/01-kinematics-status/Pos.md) 的读数。[保留反馈修复](https://github.com/akribis-agito/Firmware-Main/issues/1297)防止对保留的 Central-i 字重复格式化，但不增加启动有效性确认。
+- **未验证的上电初始化。** 除“工作原理”中所述的 AGM800/AGM800-EC 主 Tamagawa 情况外，初始化在倒计时期间使用已处理的读数，并不等待首次有效样本。主绝对式编码器错误处理在此窗口结束后才开始。之后 [EncStatReg](EncStatReg.md) 清零，并不能验证用于初始化 [Pos](../../10-motion/01-kinematics-status/Pos.md) 的读数。固件 5.3.0-rc4 及后续版本中的保留反馈修复防止对保留的 Central-i 字重复格式化，但不增加启动有效性确认。
 
 ## 另请参阅
 

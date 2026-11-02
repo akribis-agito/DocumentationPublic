@@ -4,6 +4,7 @@ summary: 选择轴驱动其电机的方式——使用内置驱动器，或通�
 availability:
   standalone:
   - v4
+  - v5
   central-i:
   - v4
   - v5
@@ -20,15 +21,19 @@ attributes:
   units: none
   range:
   - 0
-  - 7
+  - 8
   default: 0
-  scaling: 1.0
+  scaling: 1
   implemented: partial
 overrides:
-  central-i.v5:
+  standalone.v4:
     range:
     - 0
-    - 8
+    - 7
+  central-i.v4:
+    range:
+    - 0
+    - 7
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
@@ -108,7 +113,7 @@ AAmpType            ; query the current amplifier mode
 | 范围 | 0–7 | 0–8 |
 | 新增模式 | — | 6（带反馈的 PD）、8（数字 SPI 相电流） |
 
-v5 仅适用于 central-i；在 standalone 产品上 `AmpType` 保持 v4 范围 0–7。
+在 v5 上，独立式和 Central-i 均提供 `AmpType`，表中范围为 0–8。数值范围不表示每种产品都支持所有模式；上方的远程单元表适用于 Central-i。
 
 ## 另请参阅
 

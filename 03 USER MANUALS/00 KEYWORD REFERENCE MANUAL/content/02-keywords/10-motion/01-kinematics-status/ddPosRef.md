@@ -2,7 +2,8 @@
 keyword: ddPosRef
 summary: Acceleration reference, the second derivative of the position reference PosRef.
 availability:
-  standalone: []
+  standalone:
+  - v5
   central-i:
   - v5
 can_code: 857
