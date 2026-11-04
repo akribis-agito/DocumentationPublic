@@ -2,11 +2,8 @@
 keyword: MaxPWM
 summary: Limits PWM voltage-command magnitude; AGD101 maximum is 900 (90%), other products use their reported limits.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 91
 attributes:
   access: rw
@@ -18,15 +15,63 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: scaling
-  range: null
-  default: null
-  scaling: 1.144
+  range:
+  - 0
+  - 4464
+  default: 4119.3
+  scaling: 4.577
   implemented: final
 overrides:
-  central-i.v4:
+  ci-master:
+    range:
+    - 0
+    - 1470
+    default: 1358.14
     scaling: 1.526
-  central-i.v5:
-    scaling: 1.526
+  agd155-af-2a06:
+    range:
+    - 0
+    - 4351
+  agd155-af-2a10:
+    range:
+    - 0
+    - 4351
+  agd155-ec:
+    range:
+    - 0
+    - 3024
+    default: 2812.5
+    scaling: 3.125
+  agd155-ec-var34:
+    range:
+    - 0
+    - 3024
+    default: 2812.5
+    scaling: 3.125
+  agd155-ec-var34-3:
+    range:
+    - 0
+    - 2874
+    default: 2812.5
+    scaling: 3.125
+  agd156-ec:
+    range:
+    - 0
+    - 2874
+    default: 2812.5
+    scaling: 3.125
+  agd101-ec-34a:
+    range:
+    - 0
+    - 2813.0
+    default: 2812.5
+    scaling: 3.125
+  agd101-ec-17a:
+    range:
+    - 0
+    - 2813.0
+    default: 2812.5
+    scaling: 3.125
 last_updated: '2026-10-21'
 doc_revision: '2026.11'
 ---

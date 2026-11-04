@@ -2,11 +2,8 @@
 keyword: HomeComtAngRd
 summary: Read-only array of commutation angles captured at the home position.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 410
 attributes:
   access: ro

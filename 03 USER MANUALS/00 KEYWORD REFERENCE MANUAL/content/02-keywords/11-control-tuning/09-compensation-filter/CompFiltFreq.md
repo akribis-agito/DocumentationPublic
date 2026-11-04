@@ -2,9 +2,8 @@
 keyword: CompFiltFreq
 summary: Cut-off frequency, in hertz, of the compensation filter's first-order low-pass stage.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 835
 attributes:
   access: rw

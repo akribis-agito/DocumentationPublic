@@ -2,14 +2,11 @@
 keyword: PDEncDir
 summary: 配置 PDPos 累积相对于方向信号的符号（方向）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 63
 attributes:
-  access: '0'
+  access: rw
   scope: axis
   flash: true
   type: scalar
@@ -17,23 +14,16 @@ attributes:
   data_type: int32
   ok_in_motion: false
   ok_motor_on: false
-  units: '0'
+  units: none
   range:
-  - -2147483648
-  - 2147483647
+  - 0
+  - 1
   default: 0
   scaling: 1.0
-  implemented: not_implemented
-overrides:
-  central-i.v5:
-    access: rw
-    units: none
-    range:
-    - 0
-    - 1
-    implemented: final
-last_updated: '2026-05-28'
-doc_revision: '2026.06'
+  implemented: final
+overrides: {}
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # PDEncDir

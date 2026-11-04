@@ -1,13 +1,9 @@
 ---
 keyword: FIFOPosFIFOEn
 summary: 使能或禁用 FIFO 位置跟踪模式。
-language: zh-CN
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 665
 attributes:
   access: rw
@@ -28,6 +24,7 @@ attributes:
 overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
+language: zh-CN
 ---
 # FIFOPosFIFOEn
 

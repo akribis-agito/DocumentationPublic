@@ -2,9 +2,7 @@
 keyword: FricINeg
 summary: 负方向的库仑（滑动）摩擦电平，单位为 mA。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 929
 attributes:
   access: rw
@@ -23,6 +21,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # FricINeg

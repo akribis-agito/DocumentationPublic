@@ -2,11 +2,8 @@
 keyword: StatReg
 summary: 只读位域，报告轴的一般状态、饱和、限位及多级告警。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 33
 attributes:
   access: ro

@@ -2,11 +2,8 @@
 keyword: FIFOValue
 summary: Read-only array reporting the data value paired with each FIFO motion entry.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 280
 attributes:
   access: ro

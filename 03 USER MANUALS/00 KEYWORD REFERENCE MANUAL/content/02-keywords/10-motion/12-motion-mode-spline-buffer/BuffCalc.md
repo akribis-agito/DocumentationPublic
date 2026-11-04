@@ -2,18 +2,15 @@
 keyword: BuffCalc
 summary: Command that pre-computes the spline coefficients from the buffer waypoints.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 547
 attributes:
   access: ro
   scope: axis
   flash: false
   type: array
-  array_size: 1
+  array_size: 8
   data_type: int32
   ok_in_motion: false
   ok_motor_on: true
@@ -24,7 +21,27 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    array_size: 256
+  agd155-af-2a06:
+    array_size: 2
+  agd155-af-2a10:
+    array_size: 2
+  agd155-ec:
+    array_size: 2
+  agd155-ec-var34:
+    array_size: 2
+  agd155-ec-var34-3:
+    array_size: 2
+  agd156-ec:
+    array_size: 2
+  agd101-ec-34a:
+    array_size: 2
+  agd101-ec-17a:
+    array_size: 2
+  agm800-ec:
+    array_size: 64
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 ---

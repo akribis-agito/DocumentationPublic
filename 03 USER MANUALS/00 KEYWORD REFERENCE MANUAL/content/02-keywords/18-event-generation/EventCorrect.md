@@ -2,11 +2,8 @@
 keyword: EventCorrect
 summary: Command that recalculates corrected event-table positions from the current axis position and mapping.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 419
 attributes:
   access: ro

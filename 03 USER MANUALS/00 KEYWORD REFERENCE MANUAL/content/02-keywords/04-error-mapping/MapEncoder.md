@@ -1,11 +1,8 @@
 ---
 keyword: MapEncoder
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 322
 attributes:
   access: rw
@@ -17,9 +14,7 @@ attributes:
   ok_in_motion: false
   ok_motor_on: true
   units: none
-  range:
-  - 1
-  - 8
+  range: null
   default: 1
   scaling: 1.0
   implemented: final

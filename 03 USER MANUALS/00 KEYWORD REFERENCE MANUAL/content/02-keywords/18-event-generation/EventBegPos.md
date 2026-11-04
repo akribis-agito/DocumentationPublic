@@ -2,11 +2,8 @@
 keyword: EventBegPos
 summary: Position of the first generated event in single-event and by-gap modes.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 181
 attributes:
   access: rw

@@ -2,9 +2,8 @@
 keyword: PIVNoiseWSize
 summary: Length, in milliseconds, of the sliding window over which the PIV noise statistic is computed.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 800
 attributes:
   access: rw

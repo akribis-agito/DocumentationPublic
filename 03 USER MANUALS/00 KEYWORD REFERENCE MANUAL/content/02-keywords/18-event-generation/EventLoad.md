@@ -2,9 +2,7 @@
 keyword: EventLoad
 summary: Prepares the selected hardware event table without arming outputs.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 970
 attributes:
   access: ro

@@ -1,10 +1,9 @@
 ---
 keyword: LockEventMode
-summary: '选择 lock/event 工作模式：传统自动初始化 (0) 或需要 LockEventInit 的统一方案 (1)。'
+summary: 选择 lock/event 工作模式：传统自动初始化 (0) 或需要 LockEventInit 的统一方案 (1)。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 831
 attributes:
   access: rw
@@ -18,7 +17,7 @@ attributes:
   units: none
   range:
   - -1
-  - 1
+  - 2
   default: 0
   scaling: 1.0
   implemented: final

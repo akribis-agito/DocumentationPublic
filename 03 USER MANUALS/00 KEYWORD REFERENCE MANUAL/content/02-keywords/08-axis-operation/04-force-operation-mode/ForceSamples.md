@@ -2,11 +2,8 @@
 keyword: ForceSamples
 summary: Timings of the last completed ForceCmdVal application, in controller cycles.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 736
 attributes:
   access: ro

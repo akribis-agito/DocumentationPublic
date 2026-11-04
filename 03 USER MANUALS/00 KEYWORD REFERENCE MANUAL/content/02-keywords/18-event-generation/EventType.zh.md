@@ -1,13 +1,9 @@
 ---
 keyword: EventType
 summary: 选择事件生成的比较方案（单次、按间距或按表）。
-language: zh-CN
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 180
 attributes:
   access: rw
@@ -26,8 +22,9 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
+language: zh-CN
 ---
 # EventType
 

@@ -2,11 +2,8 @@
 keyword: SetPosition
 summary: Redefines the axis position to a given value without moving the motor.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 154
 attributes:
   access: rw
@@ -14,22 +11,17 @@ attributes:
   flash: false
   type: scalar
   array_size: 1
-  data_type: int32
+  data_type: int64
   ok_in_motion: false
   ok_motor_on: true
   units: func
   range:
-  - -2147483648
-  - 2147483647
+  - -2251799813685248
+  - 2251799813685247
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    data_type: int64
-    range:
-    - -2251799813685248
-    - 2251799813685247
+overrides: {}
 last_updated: '2026-11-01'
 doc_revision: '2026.11'
 ---

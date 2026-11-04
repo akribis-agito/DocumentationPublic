@@ -2,9 +2,8 @@
 keyword: AnomDtctSt
 summary: Read-only status array reporting the detector state, filtered signal value, active band, and active motion.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 780
 attributes:
   access: ro
@@ -13,7 +12,7 @@ attributes:
   type: array
   array_size: 6
   data_type: int32
-  ok_in_motion: true
+  ok_in_motion: false
   ok_motor_on: true
   units: none
   range:
@@ -22,7 +21,9 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    ok_in_motion: true
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 ---

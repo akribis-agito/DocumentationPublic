@@ -2,11 +2,8 @@
 keyword: OfflineBLog
 summary: 在离线邮箱 2 上记录的所有 Central-i 离线（邮箱）事务的滚动日志。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 621
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: ForceInTStat
 summary: In-target status of force control for the user-defined reference table.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 735
 attributes:
   access: ro

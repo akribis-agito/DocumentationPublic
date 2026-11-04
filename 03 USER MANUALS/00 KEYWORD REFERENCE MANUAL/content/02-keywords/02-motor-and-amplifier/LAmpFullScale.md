@@ -2,11 +2,8 @@
 keyword: LAmpFullScale
 summary: Reserved selection of the full-scale current range for a specific built-in linear amplifier product.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 229
 attributes:
   access: rw

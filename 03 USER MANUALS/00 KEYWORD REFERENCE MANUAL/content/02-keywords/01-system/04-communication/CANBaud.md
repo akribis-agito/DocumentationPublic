@@ -2,11 +2,8 @@
 keyword: CANBaud
 summary: CAN bus baud rate, selected from a fixed table.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 68
 attributes:
   access: rw

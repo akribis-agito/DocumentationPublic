@@ -2,9 +2,8 @@
 keyword: VelAuxUnitGrp
 summary: Read-only list of the auxiliary-encoder velocity keywords that share the auxiliary velocity user-unit scaling and label.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 820
 attributes:
   access: ro

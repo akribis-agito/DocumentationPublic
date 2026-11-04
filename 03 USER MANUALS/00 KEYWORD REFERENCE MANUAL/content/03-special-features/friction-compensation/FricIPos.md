@@ -2,9 +2,7 @@
 keyword: FricIPos
 summary: Coulomb (sliding) friction level for the positive direction, in mA.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 928
 attributes:
   access: rw

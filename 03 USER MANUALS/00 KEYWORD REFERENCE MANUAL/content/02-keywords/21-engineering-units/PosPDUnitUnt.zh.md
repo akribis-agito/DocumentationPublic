@@ -2,9 +2,8 @@
 keyword: PosPDUnitUnt
 summary: 脉冲方向位置的自由文本单位标签，每个数组元素保存一个字符。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 819
 attributes:
   access: rw

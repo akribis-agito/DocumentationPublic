@@ -2,11 +2,8 @@
 keyword: StopOnIndex
 summary: Enables automatic stop of axis motion on the next encoder index pulse.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 167
 attributes:
   access: rw

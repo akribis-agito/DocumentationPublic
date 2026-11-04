@@ -2,11 +2,8 @@
 keyword: OpenLoopOn
 summary: 在选定的点（无、电流或电压）处打开控制环。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 144
 attributes:
   access: rw

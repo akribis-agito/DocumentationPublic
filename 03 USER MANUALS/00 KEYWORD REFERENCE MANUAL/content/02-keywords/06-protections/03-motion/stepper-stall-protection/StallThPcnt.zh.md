@@ -2,11 +2,8 @@
 keyword: StallThPcnt
 summary: 步进失步阈值（以百分比表示，10–90%，默认 50%）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 512
 attributes:
   access: rw

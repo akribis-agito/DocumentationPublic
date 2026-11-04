@@ -2,11 +2,8 @@
 keyword: CIDeviceType
 summary: 选择某轴上 Central-i 端口的角色/类别。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 503
 attributes:
   access: rw
@@ -21,7 +18,7 @@ attributes:
   range:
   - -2147483648
   - 2147483647
-  default: null
+  default: 65537
   scaling: 1.0
   implemented: final
 overrides: {}

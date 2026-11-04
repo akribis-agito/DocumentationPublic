@@ -2,11 +2,8 @@
 keyword: StepBits
 summary: Sets the number of steps per electrical cycle for a stepper motor, controlling full-, half-, or micro-stepping.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 256
 attributes:
   access: rw

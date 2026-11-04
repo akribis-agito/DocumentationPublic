@@ -2,11 +2,8 @@
 keyword: FIFOPosStatus
 summary: 报告 FIFO 位置跟踪队列状态的只读数组。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 668
 attributes:
   access: ro

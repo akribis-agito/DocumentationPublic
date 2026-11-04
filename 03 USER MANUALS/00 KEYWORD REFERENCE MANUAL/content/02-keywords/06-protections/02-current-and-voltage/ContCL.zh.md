@@ -2,11 +2,8 @@
 keyword: ContCL
 summary: I²t 功率限制方案中使用的连续电流限值。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 51
 attributes:
   access: rw
@@ -14,19 +11,102 @@ attributes:
   flash: true
   type: scalar
   array_size: 1
-  data_type: int32
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
   range:
   - 10
-  - 32000
-  default: 32000
+  - 8000
+  default: 8000
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
-    data_type: float32
+  ci-master:
+    range:
+    - 10
+    - 32000
+    default: 32000
+  agc300-et:
+    range:
+    - 10
+    - 2000
+    default: 2000
+  agc301-et:
+    range:
+    - 10
+    - 2000
+    default: 2000
+  agc301-et-bioxtreme:
+    range:
+    - 10
+    - 2000
+    default: 2000
+  agd200-et-2d01:
+    range:
+    - 10
+    - 2000
+    default: 2000
+  agd200-et-2d02:
+    range:
+    - 10
+    - 4000
+    default: 4000
+  agd301-et-2d01:
+    range:
+    - 10
+    - 2000
+    default: 2000
+  agd301-et-2d02:
+    range:
+    - 10
+    - 4000
+    default: 4000
+  agd301-et-2d09:
+    range:
+    - 10
+    - 12750
+    default: 12750
+  agd155-af-2a06:
+    range:
+    - 10
+    - 8500
+    default: 8500
+  agd155-af-2a10:
+    range:
+    - 10
+    - 14250
+    default: 14250
+  agd155-ec:
+    range:
+    - 10
+    - 8500
+    default: 8500
+  agd155-ec-var34:
+    range:
+    - 10
+    - 14250
+    default: 14250
+  agd155-ec-var34-3:
+    range:
+    - 10
+    - 14166
+    default: 14166
+  agd156-ec:
+    range:
+    - 10
+    - 4242
+    default: 4242
+  agd101-ec-34a:
+    range:
+    - 10
+    - 14140
+    default: 14140
+  agd101-ec-17a:
+    range:
+    - 10
+    - 7070
+    default: 7070
 last_updated: '2026-05-30'
 doc_revision: '2026.06'
 language: zh-CN

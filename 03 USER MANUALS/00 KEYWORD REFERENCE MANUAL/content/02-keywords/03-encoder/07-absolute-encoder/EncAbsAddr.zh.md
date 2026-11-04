@@ -2,12 +2,9 @@
 keyword: EncAbsAddr
 summary: 绝对式编码器内部的寄存器地址，供下一次事务访问。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
-can_code: 716
+- controller
+- ci-master
+can_code: 899
 attributes:
   access: rw
   scope: axis
@@ -24,11 +21,9 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    can_code: 899
-last_updated: '2026-05-28'
-doc_revision: '2026.06'
+overrides: {}
+last_updated: '2026-09-25'
+doc_revision: '2026.09'
 language: zh-CN
 ---
 # EncAbsAddr

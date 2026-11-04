@@ -2,9 +2,7 @@
 keyword: FricVelSrc
 summary: Selects the velocity the friction models use (0 = dPosRef, 1 = VelRef, 2 = velocity feedback).
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 927
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: HomeComtAngWr
 summary: Sets the commutation angle applied at the home position to skip a homing sequence.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 409
 attributes:
   access: rw

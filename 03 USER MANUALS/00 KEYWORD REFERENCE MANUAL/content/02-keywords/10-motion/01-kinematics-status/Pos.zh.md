@@ -2,11 +2,8 @@
 keyword: Pos
 summary: 以用户单位表示的主位置反馈；位置环反馈信号。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 2
 attributes:
   access: ro
@@ -25,7 +22,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
+  ci-master:
     data_type: int64
     range:
     - -2251799813685248

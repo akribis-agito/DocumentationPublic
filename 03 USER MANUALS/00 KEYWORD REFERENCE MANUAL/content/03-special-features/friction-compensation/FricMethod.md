@@ -2,9 +2,7 @@
 keyword: FricMethod
 summary: Selects the friction feedforward model (0 = off, 1 to 5).
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 926
 attributes:
   access: rw

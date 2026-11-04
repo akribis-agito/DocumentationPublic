@@ -2,11 +2,8 @@
 keyword: PosRef
 summary: 进入位置环的位置参考，经规划器后处理之后。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 24
 attributes:
   access: ro
@@ -25,13 +22,13 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
+  ci-master:
     data_type: int64
     range:
     - -2251799813685248
     - 2251799813685247
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-12'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # PosRef

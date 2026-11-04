@@ -2,11 +2,8 @@
 keyword: ControlMode
 summary: Bit-packed selection of current/voltage control options (SVM limit, vector vs phase, loop bypass, I2T action).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 109
 attributes:
   access: rw

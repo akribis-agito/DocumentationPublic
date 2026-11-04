@@ -2,12 +2,9 @@
 keyword: EncAbsRData
 summary: 从绝对式编码器寄存器读取事务中返回的数据。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
-can_code: 718
+- controller
+- ci-master
+can_code: 901
 attributes:
   access: ro
   scope: axis
@@ -24,11 +21,9 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    can_code: 901
-last_updated: '2026-05-28'
-doc_revision: '2026.06'
+overrides: {}
+last_updated: '2026-09-25'
+doc_revision: '2026.09'
 language: zh-CN
 ---
 # EncAbsRData

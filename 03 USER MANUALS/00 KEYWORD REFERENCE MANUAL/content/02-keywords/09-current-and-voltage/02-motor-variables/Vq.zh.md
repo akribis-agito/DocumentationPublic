@@ -2,11 +2,8 @@
 keyword: Vq
 summary: 只读的交轴 PI 控制器输出，用于 dq0 域电流控制（仅限三相）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 17
 attributes:
   access: ro
@@ -14,23 +11,29 @@ attributes:
   flash: false
   type: scalar
   array_size: 1
-  data_type: int32
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: scaling
-  range:
-  - -2147483648
-  - 2147483647
+  range: null
   default: 0
-  scaling: 1.144
+  scaling: 4.577
   implemented: final
 overrides:
-  central-i.v4:
+  ci-master:
     scaling: 1.526
-  central-i.v5:
-    data_type: float32
-    range: null
-    scaling: 1.526
+  agd155-ec:
+    scaling: 3.125
+  agd155-ec-var34:
+    scaling: 3.125
+  agd155-ec-var34-3:
+    scaling: 3.125
+  agd156-ec:
+    scaling: 3.125
+  agd101-ec-34a:
+    scaling: 3.125
+  agd101-ec-17a:
+    scaling: 3.125
 last_updated: '2026-05-30'
 doc_revision: '2026.06'
 language: zh-CN

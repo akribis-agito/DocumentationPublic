@@ -2,11 +2,8 @@
 keyword: ForceAInTh
 summary: 用于进入力模式的模拟量力反馈阈值（条件 B）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 584
 attributes:
   access: rw

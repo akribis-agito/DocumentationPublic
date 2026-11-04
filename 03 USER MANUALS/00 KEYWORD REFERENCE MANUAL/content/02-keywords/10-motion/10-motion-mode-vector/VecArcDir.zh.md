@@ -2,11 +2,8 @@
 keyword: VecArcDir
 summary: 矢量圆弧运动的扫描方向（0 = 逆时针，1 = 顺时针）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 634
 attributes:
   access: rw

@@ -2,9 +2,8 @@
 keyword: PreCruAbsTrgt
 summary: 正弦点到点运动中预巡航目标的绝对位置（用户单位）。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 841
 attributes:
   access: rw

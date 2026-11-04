@@ -2,9 +2,8 @@
 keyword: ProgPushArgLL
 summary: Pushes a 64-bit signed integer onto the running thread's argument stack ahead of a function call.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 783
 attributes:
   access: rw

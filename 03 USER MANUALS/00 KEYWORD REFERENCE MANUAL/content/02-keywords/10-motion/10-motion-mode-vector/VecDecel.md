@@ -2,11 +2,8 @@
 keyword: VecDecel
 summary: Vector deceleration rate (user units/s^2) ramping the resultant velocity down to rest.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 637
 attributes:
   access: rw
@@ -14,22 +11,38 @@ attributes:
   flash: true
   type: scalar
   array_size: 1
-  data_type: int32
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: user
   range:
-  - 100
-  - 2000000000
-  default: 100000
+  - 100.0
+  - 686700000000.0
+  default: 100000.0
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
-    data_type: float32
-    range:
-    - 100.0
-    - 686700000000.0
+  agd155-ec:
+    units: scaling
+    scaling: 1.048576
+  agd155-ec-var34:
+    units: scaling
+    scaling: 1.048576
+  agd155-ec-var34-3:
+    units: scaling
+    scaling: 1.048576
+  agd156-ec:
+    units: scaling
+    scaling: 1.048576
+  agd101-ec-34a:
+    units: scaling
+    scaling: 1.048576
+  agd101-ec-17a:
+    units: scaling
+    scaling: 1.048576
+  agm800-ec:
+    units: scaling
+    scaling: 1.048576
 last_updated: '2026-10-10'
 doc_revision: '2026.11'
 ---

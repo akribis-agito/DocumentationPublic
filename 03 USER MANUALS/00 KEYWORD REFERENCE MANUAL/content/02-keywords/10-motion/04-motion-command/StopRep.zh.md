@@ -2,11 +2,8 @@
 keyword: StopRep
 summary: 停止重复（repeat）运动并清除重复运动状态。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 148
 attributes:
   access: ro

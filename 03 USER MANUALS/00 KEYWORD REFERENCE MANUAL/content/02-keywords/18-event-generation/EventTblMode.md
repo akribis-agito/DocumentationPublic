@@ -2,9 +2,7 @@
 keyword: EventTblMode
 summary: Chooses common or per-row settings for a preloaded hardware event table.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 975
 attributes:
   access: rw

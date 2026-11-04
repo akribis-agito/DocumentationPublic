@@ -2,9 +2,8 @@
 keyword: VelUnitGrp
 summary: Read-only list of the keywords that belong to the velocity unit group.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 805
 attributes:
   access: ro

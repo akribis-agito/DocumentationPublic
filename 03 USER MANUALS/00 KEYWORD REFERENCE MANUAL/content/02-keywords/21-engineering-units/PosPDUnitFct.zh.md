@@ -2,9 +2,8 @@
 keyword: PosPDUnitFct
 summary: 启用全局用户单位时，应用于脉冲方向位置值的比例系数。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 818
 attributes:
   access: rw

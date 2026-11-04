@@ -2,9 +2,8 @@
 summary: Denominator of the per-axis vector-to-encoder scaling ratio (VecEncFactNu / VecEncFactDn).
 keyword: VecEncFactDn
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 713
 attributes:
   access: rw

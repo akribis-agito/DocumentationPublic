@@ -2,11 +2,8 @@
 keyword: VecMemberAxes
 summary: Bit mask selecting which axes participate in the coordinated vector motion.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 631
 attributes:
   access: rw

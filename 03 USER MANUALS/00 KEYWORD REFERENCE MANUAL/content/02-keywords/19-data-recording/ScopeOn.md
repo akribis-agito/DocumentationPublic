@@ -2,9 +2,8 @@
 keyword: ScopeOn
 summary: Enables or disables the Central-i signal scope.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 742
 attributes:
   access: rw

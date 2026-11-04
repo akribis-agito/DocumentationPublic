@@ -2,11 +2,8 @@
 keyword: MasterModRev
 summary: 当主变量发生环绕时，用于修正 MasterPos 累积的取模除数。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 519
 attributes:
   access: rw
@@ -25,7 +22,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
+  ci-master:
     data_type: int64
 last_updated: '2026-06-02'
 doc_revision: '2026.06'

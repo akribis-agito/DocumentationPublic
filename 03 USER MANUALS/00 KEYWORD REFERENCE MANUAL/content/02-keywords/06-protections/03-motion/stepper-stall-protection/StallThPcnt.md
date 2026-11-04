@@ -2,11 +2,8 @@
 keyword: StallThPcnt
 summary: Stepper stall threshold as a percentage (10–90%, default 50%).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 512
 attributes:
   access: rw

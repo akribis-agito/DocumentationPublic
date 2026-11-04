@@ -2,11 +2,8 @@
 keyword: FWInfo
 summary: Read-only command returning firmware version and build information.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 312
 attributes:
   access: ro

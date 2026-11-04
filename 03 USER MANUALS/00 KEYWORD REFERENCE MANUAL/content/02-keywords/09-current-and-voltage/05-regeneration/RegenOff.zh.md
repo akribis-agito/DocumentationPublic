@@ -2,11 +2,8 @@
 keyword: RegenOff
 summary: 再生电阻被停用的直流母线电压阈值（mV），低于该值时停用。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 96
 attributes:
   access: rw
@@ -25,10 +22,42 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v4:
+  ci-master:
     scope: axis
-  central-i.v5:
-    scope: axis
+    range:
+    - 12000
+    - 390000
+    default: 390000
+  agd155-af-2a06:
+    range:
+    - 155000
+    - 390000
+    default: 390000
+  agd155-af-2a10:
+    range:
+    - 155000
+    - 390000
+    default: 390000
+  agd155-ec:
+    range:
+    - 155000
+    - 390000
+    default: 390000
+  agd155-ec-var34:
+    range:
+    - 155000
+    - 390000
+    default: 390000
+  agd155-ec-var34-3:
+    range:
+    - 155000
+    - 390000
+    default: 390000
+  agd156-ec:
+    range:
+    - 155000
+    - 390000
+    default: 390000
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

@@ -2,12 +2,8 @@
 keyword: CalcIden
 summary: Command that calculates the input/output sinusoidal relation for sine sweep identification.
 availability:
-  standalone:
-  - v4
-  - v5
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 128
 attributes:
   access: ro

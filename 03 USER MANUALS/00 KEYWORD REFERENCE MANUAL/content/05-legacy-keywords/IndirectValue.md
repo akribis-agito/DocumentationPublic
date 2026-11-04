@@ -2,11 +2,8 @@
 keyword: IndirectValue
 summary: Holds the source value for the indirect access operation.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 435
 attributes:
   access: rw

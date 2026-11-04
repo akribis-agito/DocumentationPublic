@@ -2,11 +2,8 @@
 keyword: DownloadUPBin
 summary: 将已编译的用户程序二进制镜像传输到控制器程序存储器的指令。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 207
 attributes:
   access: ro

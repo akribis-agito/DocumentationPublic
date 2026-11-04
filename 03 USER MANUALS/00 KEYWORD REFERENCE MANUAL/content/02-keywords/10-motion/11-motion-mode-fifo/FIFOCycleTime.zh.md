@@ -1,13 +1,9 @@
 ---
 keyword: FIFOCycleTime
 summary: 当前正在执行的 FIFO 运动段的持续时长，以控制周期采样数表示。
-language: zh-CN
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 283
 attributes:
   access: ro
@@ -21,13 +17,49 @@ attributes:
   units: none
   range:
   - 1
-  - 65536000
-  default: 65536
+  - 16384000
+  default: 16384
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  agd155-ec:
+    range:
+    - 1
+    - 16000000
+    default: 16000
+  agd155-ec-var34:
+    range:
+    - 1
+    - 16000000
+    default: 16000
+  agd155-ec-var34-3:
+    range:
+    - 1
+    - 16000000
+    default: 16000
+  agd156-ec:
+    range:
+    - 1
+    - 16000000
+    default: 16000
+  agd101-ec-34a:
+    range:
+    - 1
+    - 16000000
+    default: 16000
+  agd101-ec-17a:
+    range:
+    - 1
+    - 16000000
+    default: 16000
+  agm800-ec:
+    range:
+    - 1
+    - 16000000
+    default: 16000
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
+language: zh-CN
 ---
 # FIFOCycleTime
 

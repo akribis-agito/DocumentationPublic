@@ -2,11 +2,8 @@
 keyword: LoggerAbout
 summary: Reports metadata about the current continuous logger session.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 535
 attributes:
   access: ro

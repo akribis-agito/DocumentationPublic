@@ -2,11 +2,8 @@
 keyword: ProgEventMask
 summary: 应用于事件触发参数与触发值的位掩码。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 521
 attributes:
   access: rw
@@ -21,16 +18,15 @@ attributes:
   range:
   - -2147483648
   - 2147483647
-  default: 4294967295
+  default: -1
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
+  ci-master:
     data_type: int64
     range:
     - -2251799813685248
     - 2251799813685247
-    default: null
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN

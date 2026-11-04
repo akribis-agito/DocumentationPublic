@@ -2,11 +2,8 @@
 keyword: LAmpFullScale
 summary: 为特定内置线性驱动器产品保留的满量程电流范围选择。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 229
 attributes:
   access: rw

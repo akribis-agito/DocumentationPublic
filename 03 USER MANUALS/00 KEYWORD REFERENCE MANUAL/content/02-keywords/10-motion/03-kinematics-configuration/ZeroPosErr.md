@@ -2,9 +2,8 @@
 summary: Zeroes the axis position error by snapping the position reference onto the feedback (v5 central-i).
 keyword: ZeroPosErr
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 669
 attributes:
   access: ro

@@ -2,11 +2,8 @@
 keyword: DontDownload
 summary: 只读安全互锁，置位时阻止固件下载。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 670
 attributes:
   access: ro

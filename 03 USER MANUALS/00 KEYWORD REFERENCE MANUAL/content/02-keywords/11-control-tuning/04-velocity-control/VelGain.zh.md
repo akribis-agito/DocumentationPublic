@@ -1,11 +1,9 @@
 ---
 keyword: VelGain
+summary: 速度环比例增益——乘以速度误差的系数。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 102
 attributes:
   access: rw
@@ -13,26 +11,20 @@ attributes:
   flash: true
   type: array
   array_size: 6
-  data_type: int32
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
   range:
   - 0
-  - 1000000
+  - 1000000000
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    data_type: float32
-    range:
-    - 0
-    - 1000000000
+overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 速度环比例增益——乘以速度误差的系数。
 ---
 # VelGain
 

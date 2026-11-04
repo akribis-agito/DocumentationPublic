@@ -2,11 +2,8 @@
 keyword: TorqCompMode
 summary: Selects the source of the loop's current (torque) compensation in velocity/position mode.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 391
 attributes:
   access: rw

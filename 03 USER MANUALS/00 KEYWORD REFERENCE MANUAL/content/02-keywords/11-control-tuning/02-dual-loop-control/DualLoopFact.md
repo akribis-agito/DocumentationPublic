@@ -2,11 +2,8 @@
 keyword: DualLoopFact
 summary: Scaling factor that unit-matches the velocity-loop signals in dual-loop control.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 270
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: CiMuxDir
 summary: Sets the direction of the Central-i multiplexer (which port the shared bus routes to).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 551
 attributes:
   access: rw

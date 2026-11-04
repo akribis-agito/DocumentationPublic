@@ -2,11 +2,8 @@
 keyword: BrakeUsed
 summary: Enables or disables control of an external static (holding) brake.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 379
 attributes:
   access: rw

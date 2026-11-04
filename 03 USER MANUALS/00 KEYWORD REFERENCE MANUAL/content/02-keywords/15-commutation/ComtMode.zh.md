@@ -2,18 +2,15 @@
 keyword: ComtMode
 summary: 换相设置数组，配置电机电角度的建立方式。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 72
 attributes:
   access: rw
   scope: axis
   flash: true
   type: array
-  array_size: 25
+  array_size: 34
   data_type: int32
   ok_in_motion: false
   ok_motor_on: false
@@ -24,11 +21,9 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    array_size: 34
-last_updated: '2026-07-30'
-doc_revision: '2026.06'
+overrides: {}
+last_updated: '2026-09-25'
+doc_revision: '2026.09'
 language: zh-CN
 ---
 # ComtMode

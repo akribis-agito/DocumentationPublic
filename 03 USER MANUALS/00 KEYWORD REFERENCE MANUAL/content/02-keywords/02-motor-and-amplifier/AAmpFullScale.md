@@ -2,11 +2,8 @@
 keyword: AAmpFullScale
 summary: Full-scale command value for an external amplifier, scaling the axis command to the analog or SPI output.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 228
 attributes:
   access: rw

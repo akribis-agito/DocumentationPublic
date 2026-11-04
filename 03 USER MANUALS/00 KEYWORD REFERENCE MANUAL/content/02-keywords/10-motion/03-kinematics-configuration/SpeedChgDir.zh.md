@@ -2,11 +2,8 @@
 keyword: SpeedChgDir
 summary: 选择动态速度更改触发器生效的运动方向。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 347
 attributes:
   access: rw

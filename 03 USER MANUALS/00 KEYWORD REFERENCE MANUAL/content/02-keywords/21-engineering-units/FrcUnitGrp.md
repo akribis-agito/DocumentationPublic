@@ -2,9 +2,8 @@
 keyword: FrcUnitGrp
 summary: Read-only list of the keywords that belong to the force unit group.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 811
 attributes:
   access: ro

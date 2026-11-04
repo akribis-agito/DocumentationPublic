@@ -2,11 +2,8 @@
 keyword: FastIdInit
 summary: Resets the PRBS sequence index to the first pre-defined binary value.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 540
 attributes:
   access: ro

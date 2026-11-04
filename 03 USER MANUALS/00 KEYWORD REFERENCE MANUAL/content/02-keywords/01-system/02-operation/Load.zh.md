@@ -2,11 +2,8 @@
 keyword: Load
 summary: 将所有参数从闪存重新加载至易失性存储器，丢弃未保存的更改。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 233
 attributes:
   access: ro

@@ -2,9 +2,8 @@
 keyword: DualLoopStat
 summary: Read-only status of the active dual-loop control structure.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 727
 attributes:
   access: ro

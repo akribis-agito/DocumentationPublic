@@ -2,11 +2,8 @@
 keyword: BrakeUsed
 summary: 启用或禁用对外部静态（保持）制动器的控制。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 379
 attributes:
   access: rw

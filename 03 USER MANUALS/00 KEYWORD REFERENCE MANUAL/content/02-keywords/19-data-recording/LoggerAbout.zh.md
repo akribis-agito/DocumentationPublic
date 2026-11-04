@@ -2,11 +2,8 @@
 keyword: LoggerAbout
 summary: 报告当前连续记录器会话的元数据。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 535
 attributes:
   access: ro

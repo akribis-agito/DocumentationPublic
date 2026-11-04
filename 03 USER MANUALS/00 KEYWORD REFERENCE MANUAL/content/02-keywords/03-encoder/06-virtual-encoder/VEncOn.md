@@ -2,11 +2,8 @@
 keyword: VEncOn
 summary: Enables or disables the software-generated virtual encoder for the axis.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 613
 attributes:
   access: rw

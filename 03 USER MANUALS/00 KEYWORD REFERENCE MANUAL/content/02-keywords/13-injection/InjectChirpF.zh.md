@@ -2,9 +2,8 @@
 summary: 扫频注入的初始和终止频率，单位为 Hz/100。
 keyword: InjectChirpF
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 716
 attributes:
   access: rw

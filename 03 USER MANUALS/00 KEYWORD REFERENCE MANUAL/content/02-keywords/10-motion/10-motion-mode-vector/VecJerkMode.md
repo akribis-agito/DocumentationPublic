@@ -2,9 +2,8 @@
 keyword: VecJerkMode
 summary: 'Selects how jerk limiting is applied to vector motion: 0 trapezoidal, 1 jerk-limited S-curve.'
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 755
 attributes:
   access: rw

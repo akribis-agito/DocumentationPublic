@@ -2,9 +2,8 @@
 keyword: FFFiltOn
 summary: Enables or bypasses the feedforward filter.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 728
 attributes:
   access: rw

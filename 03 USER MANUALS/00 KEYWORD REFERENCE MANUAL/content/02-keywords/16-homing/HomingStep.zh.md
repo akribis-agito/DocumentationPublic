@@ -2,11 +2,8 @@
 keyword: HomingStep
 summary: 只读数值，指示回零引擎已执行到的回零步骤编号。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 385
 attributes:
   access: ro

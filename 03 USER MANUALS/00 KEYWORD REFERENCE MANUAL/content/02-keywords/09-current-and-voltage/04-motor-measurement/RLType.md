@@ -2,11 +2,8 @@
 keyword: RLType
 summary: Selects whether PCSuite R/L measurements are reported as phase (0) or line-to-line (1) data.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 375
 attributes:
   access: rw

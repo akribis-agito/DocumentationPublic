@@ -2,11 +2,8 @@
 keyword: EventGap
 summary: 按间隔模式下相邻事件之间的位置间距。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 182
 attributes:
   access: rw
@@ -25,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-23'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # EventGap

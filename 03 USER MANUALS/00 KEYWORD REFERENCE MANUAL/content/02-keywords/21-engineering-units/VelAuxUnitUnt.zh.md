@@ -2,9 +2,8 @@
 keyword: VelAuxUnitUnt
 summary: 辅助编码器速度的自由文本单位标签，每个数组元素存储一个字符。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 822
 attributes:
   access: rw

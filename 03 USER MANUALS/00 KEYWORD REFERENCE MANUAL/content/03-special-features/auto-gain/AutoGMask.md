@@ -2,11 +2,22 @@
 keyword: AutoGMask
 summary: An array that specifies which servo gain parameters the auto-gain algorithm is allowed to update.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
+products:
+- agc300-et
+- agc301-et
+- agc301-et-bioxtreme
+- agd155-af-2a06
+- agd155-af-2a10
+- agd200-et-2d01
+- agd200-et-2d02
+- agd200-et-2d05
+- agd200-et-2d05-71
+- agd301-et-2d01
+- agd301-et-2d02
+- agd301-et-2d05
+- agd301-et-2d09
 can_code: 370
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: CILinkConfig
 summary: Per-axis array configuring the physical and protocol parameters of a Central-i port.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 539
 attributes:
   access: rw

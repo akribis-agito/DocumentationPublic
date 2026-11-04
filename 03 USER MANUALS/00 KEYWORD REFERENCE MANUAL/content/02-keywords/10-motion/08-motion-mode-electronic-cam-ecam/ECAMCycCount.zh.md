@@ -2,11 +2,8 @@
 keyword: ECAMCycCount
 summary: 当前 ECAM 凸轮曲线重复循环的只读索引。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 307
 attributes:
   access: ro

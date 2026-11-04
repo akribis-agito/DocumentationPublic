@@ -2,11 +2,8 @@
 keyword: UserDynParam
 summary: A general-purpose data array used by special user-defined processing modes.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 371
 attributes:
   access: rw

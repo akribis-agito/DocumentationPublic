@@ -2,11 +2,8 @@
 keyword: HomingOn
 summary: Starts and reports the active homing process for the axis.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 340
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: LoggerParams
 summary: Lists the parameters captured by the continuous data logger.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 532
 attributes:
   access: rw

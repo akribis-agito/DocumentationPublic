@@ -2,9 +2,8 @@
 keyword: CurrStbleSTD
 summary: 稳定性检测用电流环方差阈值，以峰值电流限值的百分比表示。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 791
 attributes:
   access: rw

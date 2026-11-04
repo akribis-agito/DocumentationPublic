@@ -2,11 +2,8 @@
 keyword: PushParam
 summary: 将参数的值压入当前线程的数值栈。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 200
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: LAmpVBus
 summary: 内置线性驱动器（AmpType = 4）母线电压测量值的只读量。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 253
 attributes:
   access: ro

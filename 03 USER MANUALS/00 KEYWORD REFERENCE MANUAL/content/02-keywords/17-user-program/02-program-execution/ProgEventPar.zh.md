@@ -2,11 +2,8 @@
 keyword: ProgEventPar
 summary: 通过复合 CAN 代码选择触发事件的控制器参数。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 520
 attributes:
   access: rw

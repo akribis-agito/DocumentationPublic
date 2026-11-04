@@ -1,11 +1,8 @@
 ---
 keyword: MapErrOffRamp
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 454
 attributes:
   access: rw
@@ -23,7 +20,21 @@ attributes:
   default: 16384
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  agd155-ec:
+    default: 16000
+  agd155-ec-var34:
+    default: 16000
+  agd155-ec-var34-3:
+    default: 16000
+  agd156-ec:
+    default: 16000
+  agd101-ec-34a:
+    default: 16000
+  agd101-ec-17a:
+    default: 16000
+  agm800-ec:
+    default: 16000
 summary: Rate at which the map error offset ramps toward its target.
 last_updated: '2026-10-10'
 doc_revision: '2026.11'

@@ -2,11 +2,8 @@
 keyword: PosErr
 summary: 位置误差（参考值减反馈），用于控制和保护。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 18
 attributes:
   access: ro

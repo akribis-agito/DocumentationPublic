@@ -2,9 +2,8 @@
 keyword: PreCruRelTrgt
 summary: Pre-cruise target as a distance from the start of a sine point-to-point move (user units).
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 842
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: GoToPosMode
 summary: 平滑进入位置运行模式的命令。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 336
 attributes:
   access: ro
@@ -26,7 +23,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-10'
-doc_revision: '2026.10'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # GoToPosMode

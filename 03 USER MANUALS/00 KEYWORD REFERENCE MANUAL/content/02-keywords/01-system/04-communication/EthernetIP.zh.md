@@ -2,11 +2,8 @@
 keyword: EthernetIP
 summary: 控制器 IP 地址，每个数组元素存储一个字节。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 600
 attributes:
   access: rw

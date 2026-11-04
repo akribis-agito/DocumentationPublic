@@ -2,11 +2,8 @@
 keyword: FIFOPosPosOf
 summary: Position offset added to every FIFO position segment.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 662
 attributes:
   access: rw

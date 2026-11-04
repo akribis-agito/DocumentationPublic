@@ -2,9 +2,7 @@
 keyword: FricQSCOn
 summary: 使能象限切换补偿（在换向和起动时施加起动冲击）。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 938
 attributes:
   access: rw
@@ -23,6 +21,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # FricQSCOn

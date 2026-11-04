@@ -2,9 +2,7 @@
 keyword: FricQSCHold
 summary: 象限切换冲击前的保持时间，单位为 µs（由 FricQSCDelay 更名，原单位为采样周期）。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 940
 attributes:
   access: rw
@@ -23,6 +21,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+last_updated: '2026-10-18'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # FricQSCHold

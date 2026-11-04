@@ -1,11 +1,8 @@
 ---
 keyword: MapLength
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 324
 attributes:
   access: rw
@@ -19,14 +16,18 @@ attributes:
   units: none
   range:
   - 1
-  - 60000
+  - 1600
   default: 10
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    range:
+    - 1
+    - 3000
 summary: 沿每个误差映射维度的修正点数量。
 last_updated: '2026-10-17'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # MapLength

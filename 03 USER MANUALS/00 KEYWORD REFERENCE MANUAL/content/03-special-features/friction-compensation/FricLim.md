@@ -2,9 +2,7 @@
 keyword: FricLim
 summary: Clamp on the whole friction stage, in % of PeakCL (renamed from StribLim).
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 925
 attributes:
   access: rw

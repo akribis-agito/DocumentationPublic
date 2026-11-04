@@ -2,11 +2,8 @@
 keyword: LimitsStat
 summary: Read-only bitfield reporting reverse/forward limit-switch activation.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 49
 attributes:
   access: ro

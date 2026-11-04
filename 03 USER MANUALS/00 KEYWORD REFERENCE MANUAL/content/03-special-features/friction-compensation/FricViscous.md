@@ -2,9 +2,7 @@
 keyword: FricViscous
 summary: 'Viscous friction slope: extra current per count/s of velocity feedback.'
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 932
 attributes:
   access: rw

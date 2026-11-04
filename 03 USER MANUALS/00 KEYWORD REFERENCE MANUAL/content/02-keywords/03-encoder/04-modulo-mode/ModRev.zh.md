@@ -2,11 +2,8 @@
 keyword: ModRev
 summary: 取模除数；当非零时，将反馈（及参考）环绕到范围 [0, ModRev-1]。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 70
 attributes:
   access: rw

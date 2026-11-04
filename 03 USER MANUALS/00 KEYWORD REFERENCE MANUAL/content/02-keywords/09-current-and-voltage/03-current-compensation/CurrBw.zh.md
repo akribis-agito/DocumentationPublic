@@ -1,11 +1,9 @@
 ---
 keyword: CurrBw
 summary: 电流环带宽（Hz），用于归一化磁场削弱增益。
-language: zh-CN
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 877
 attributes:
   access: rw
@@ -13,16 +11,20 @@ attributes:
   flash: true
   type: scalar
   array_size: 1
-  data_type: float
+  data_type: float32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
-  range: [500, 8000]
-  default: 1000
-  scaling: 1
+  range:
+  - 500.0
+  - 8000.0
+  default: 1000.0
+  scaling: 1.0
   implemented: final
 last_updated: '2026-07-30'
-doc_revision: '2026.07'
+doc_revision: '2026.09'
+overrides: {}
+language: zh-CN
 ---
 
 # CurrBw

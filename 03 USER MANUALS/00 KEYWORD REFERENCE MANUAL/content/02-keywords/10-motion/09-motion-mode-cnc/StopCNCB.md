@@ -2,11 +2,8 @@
 keyword: StopCNCB
 summary: Command that stops execution of the CNC motion queue B.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 688
 attributes:
   access: ro

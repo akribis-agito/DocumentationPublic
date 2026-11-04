@@ -2,11 +2,8 @@
 keyword: AccShapeFact
 summary: 加速度整形曲线的逐段加速度缩放因子数组。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 164
 attributes:
   access: rw

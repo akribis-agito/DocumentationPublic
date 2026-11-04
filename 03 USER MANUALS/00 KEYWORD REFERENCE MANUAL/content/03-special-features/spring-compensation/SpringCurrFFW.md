@@ -2,11 +2,8 @@
 keyword: SpringCurrFFW
 summary: Sets a constant, position-independent feedforward current, in microamps, that is added by the spring compensation.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 596
 attributes:
   access: rw
@@ -19,12 +16,80 @@ attributes:
   ok_motor_on: true
   units: none
   range:
-  - -64000000
-  - 64000000
+  - -16000000
+  - 16000000
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    range:
+    - -64000000
+    - 64000000
+  agc300-et:
+    range:
+    - -4000000
+    - 4000000
+  agc301-et:
+    range:
+    - -4000000
+    - 4000000
+  agc301-et-bioxtreme:
+    range:
+    - -4000000
+    - 4000000
+  agd200-et-2d01:
+    range:
+    - -4000000
+    - 4000000
+  agd200-et-2d02:
+    range:
+    - -8000000
+    - 8000000
+  agd301-et-2d01:
+    range:
+    - -4000000
+    - 4000000
+  agd301-et-2d02:
+    range:
+    - -8000000
+    - 8000000
+  agd301-et-2d09:
+    range:
+    - -25500000
+    - 25500000
+  agd155-af-2a06:
+    range:
+    - -25500000
+    - 25500000
+  agd155-af-2a10:
+    range:
+    - -28500000
+    - 28500000
+  agd155-ec:
+    range:
+    - -25500000
+    - 25500000
+  agd155-ec-var34:
+    range:
+    - -28500000
+    - 28500000
+  agd155-ec-var34-3:
+    range:
+    - -42500000
+    - 42500000
+  agd156-ec:
+    range:
+    - -12726000
+    - 12726000
+  agd101-ec-34a:
+    range:
+    - -28280000
+    - 28280000
+  agd101-ec-17a:
+    range:
+    - -14140000
+    - 14140000
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 ---

@@ -2,11 +2,8 @@
 keyword: AuxModRev
 summary: 辅助编码器的取模旋转除数（当前固件未实现）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 71
 attributes:
   access: rw

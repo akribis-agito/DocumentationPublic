@@ -2,11 +2,8 @@
 keyword: MotionStat
 summary: 当前运动的位映射详细状态（可同时置位多个位）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 32
 attributes:
   access: ro

@@ -2,11 +2,8 @@
 keyword: HomeComtAngOn
 summary: 使能在回零过程中捕获原点位置处的换相角。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 408
 attributes:
   access: rw

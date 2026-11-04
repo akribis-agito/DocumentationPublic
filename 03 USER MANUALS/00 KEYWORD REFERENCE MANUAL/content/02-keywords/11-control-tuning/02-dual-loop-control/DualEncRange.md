@@ -2,9 +2,8 @@
 keyword: DualEncRange
 summary: Motor-feedback position range within which true dual-loop control is used.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 726
 attributes:
   access: rw

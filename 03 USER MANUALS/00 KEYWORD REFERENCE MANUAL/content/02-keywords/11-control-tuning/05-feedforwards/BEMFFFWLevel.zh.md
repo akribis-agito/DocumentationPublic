@@ -2,9 +2,7 @@
 keyword: BEMFFFWLevel
 summary: 应用于反电动势电压前馈贡献量的百分比级别。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 848
 attributes:
   access: rw

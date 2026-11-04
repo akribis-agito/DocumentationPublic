@@ -2,11 +2,8 @@
 keyword: InTargetTol
 summary: 用于判定到位的位置整定窗口（PosErr）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 265
 attributes:
   access: rw

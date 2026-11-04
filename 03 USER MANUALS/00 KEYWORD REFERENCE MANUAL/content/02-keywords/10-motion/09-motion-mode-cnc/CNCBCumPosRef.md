@@ -2,9 +2,7 @@
 keyword: CNCBCumPosRef
 summary: Cumulative commanded path position of CNC group B across all segments since the motion started.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 700
 attributes:
   access: ro

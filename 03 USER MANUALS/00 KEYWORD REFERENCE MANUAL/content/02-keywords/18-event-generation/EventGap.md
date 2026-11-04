@@ -2,11 +2,8 @@
 keyword: EventGap
 summary: Position spacing between successive events in by-gap mode.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 182
 attributes:
   access: rw

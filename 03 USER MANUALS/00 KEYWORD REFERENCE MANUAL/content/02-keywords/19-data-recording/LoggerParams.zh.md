@@ -2,11 +2,8 @@
 keyword: LoggerParams
 summary: 列出连续数据记录器所捕获的参数。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 532
 attributes:
   access: rw

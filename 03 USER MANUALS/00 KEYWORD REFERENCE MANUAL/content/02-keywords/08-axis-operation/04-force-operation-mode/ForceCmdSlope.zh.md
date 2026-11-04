@@ -2,11 +2,8 @@
 keyword: ForceCmdSlope
 summary: 朝向每个力指令表条目的斜坡变化速率（单位/秒）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 569
 attributes:
   access: rw

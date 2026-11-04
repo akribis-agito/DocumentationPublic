@@ -2,9 +2,7 @@
 keyword: FricLim
 summary: 整个摩擦环节的钳位，单位为 PeakCL 的 %（由 StribLim 更名）。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 925
 attributes:
   access: rw
@@ -23,6 +21,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+last_updated: '2026-10-18'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # FricLim

@@ -2,11 +2,8 @@
 keyword: ProgCallDepth
 summary: 报告线程程序调用栈中剩余的空闲空间。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 277
 attributes:
   access: ro
@@ -24,7 +21,9 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    array_size: 13
 last_updated: '2026-05-28'
 doc_revision: '2026.06'
 language: zh-CN

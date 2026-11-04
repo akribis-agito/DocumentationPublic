@@ -2,12 +2,9 @@
 keyword: VEncModRev
 summary: 用于补偿虚拟编码器源回绕的取模范围（每转计数）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
-can_code: 629
+- controller
+- ci-master
+can_code: 830
 attributes:
   access: rw
   scope: axis
@@ -24,11 +21,9 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    can_code: 830
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+overrides: {}
+last_updated: '2026-10-09'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # VEncModRev

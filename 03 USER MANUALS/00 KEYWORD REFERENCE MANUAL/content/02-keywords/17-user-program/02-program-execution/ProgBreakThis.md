@@ -2,11 +2,8 @@
 keyword: ProgBreakThis
 summary: Sets a breakpoint on the currently executing user program task.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 429
 attributes:
   access: ro

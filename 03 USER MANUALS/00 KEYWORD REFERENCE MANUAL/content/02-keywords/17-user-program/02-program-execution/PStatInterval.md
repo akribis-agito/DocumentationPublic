@@ -2,11 +2,8 @@
 keyword: PStatInterval
 summary: Time between successive parameter-statistics transmissions, in milliseconds.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 482
 attributes:
   access: rw

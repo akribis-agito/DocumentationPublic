@@ -2,11 +2,8 @@
 keyword: About
 summary: 返回所有控制器参数的内部命令（Agito PCSuite）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 223
 attributes:
   access: ro

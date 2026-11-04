@@ -2,9 +2,8 @@
 summary: 选择用于索引龙门映射校正表的位置源。
 keyword: GantryMapSrc
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 753
 attributes:
   access: rw
@@ -19,7 +18,7 @@ attributes:
   range:
   - 0
   - 2147483647
-  default: 0
+  default: 2
   scaling: 1.0
   implemented: final
 overrides: {}

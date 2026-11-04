@@ -2,9 +2,8 @@
 summary: General-purpose, non-axis 32-bit single-precision floating-point array for shared user/host storage.
 keyword: GenDataF
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 719
 attributes:
   access: rw

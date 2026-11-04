@@ -2,9 +2,7 @@
 keyword: FricQSCHold
 summary: Hold-off before the quadrant-switching kick, in µs (renamed from FricQSCDelay, which was in samples).
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 940
 attributes:
   access: rw

@@ -2,17 +2,15 @@
 keyword: CurrFFWValues
 summary: 只读的前馈电流：滤波后的总量及其各组成部分，单位为 mA。
 availability:
-  standalone:
-  - v5
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 856
 attributes:
   access: ro
   scope: axis
   flash: false
   type: array
-  array_size: 7
+  array_size: 1
   data_type: float32
   ok_in_motion: true
   ok_motor_on: true
@@ -22,8 +20,10 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  standalone.v5:
-    array_size: 1
+  ci-master:
+    array_size: 7
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # CurrFFWValues

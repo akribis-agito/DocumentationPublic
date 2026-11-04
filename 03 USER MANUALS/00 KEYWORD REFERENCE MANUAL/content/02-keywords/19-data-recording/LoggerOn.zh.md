@@ -2,11 +2,8 @@
 keyword: LoggerOn
 summary: 启用或禁用连续数据记录器。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 530
 attributes:
   access: rw

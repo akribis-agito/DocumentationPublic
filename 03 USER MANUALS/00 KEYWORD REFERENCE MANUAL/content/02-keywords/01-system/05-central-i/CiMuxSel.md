@@ -2,11 +2,8 @@
 keyword: CiMuxSel
 summary: Per-axis array selecting which physical port is routed through the Central-i multiplexer.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 552
 attributes:
   access: rw

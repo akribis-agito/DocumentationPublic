@@ -2,11 +2,8 @@
 keyword: VecNumCircles
 summary: Number of additional full revolutions to add to a vector arc move (0 = just the base arc, no extra turns).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 646
 attributes:
   access: rw

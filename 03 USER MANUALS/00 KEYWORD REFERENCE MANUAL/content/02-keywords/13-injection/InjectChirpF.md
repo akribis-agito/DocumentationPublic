@@ -2,9 +2,8 @@
 summary: Initial and final frequencies of the chirp injection, in Hz/100.
 keyword: InjectChirpF
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 716
 attributes:
   access: rw

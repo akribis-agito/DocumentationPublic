@@ -2,16 +2,15 @@
 keyword: PosUnitGrp
 summary: Read-only list of the keywords that belong to the position unit group.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 802
 attributes:
   access: ro
   scope: non-axis
   flash: false
   type: array
-  array_size: 40
+  array_size: 41
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true

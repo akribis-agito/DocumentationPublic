@@ -2,9 +2,7 @@
 keyword: LmFFWLevel
 summary: Percentage level applied to the inductive (L di/dt) voltage feedforward contribution.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 846
 attributes:
   access: rw

@@ -1,11 +1,9 @@
 ---
 keyword: VelTrackFact
+summary: 速度前馈（跟踪）系数——缩放叠加到位置控制器输出上的参考派生速度。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 107
 attributes:
   access: rw
@@ -27,7 +25,6 @@ overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 速度前馈（跟踪）系数——缩放叠加到位置控制器输出上的参考派生速度。
 ---
 # VelTrackFact
 

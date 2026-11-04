@@ -2,9 +2,8 @@
 summary: 在当前索引位置从龙门映射表读取的修正值。
 keyword: GantryMapVal
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 750
 attributes:
   access: ro

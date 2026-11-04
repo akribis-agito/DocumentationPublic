@@ -2,11 +2,8 @@
 keyword: MotionStat
 summary: Bit-mapped detailed status of the current motion (multiple bits can be set).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 32
 attributes:
   access: ro

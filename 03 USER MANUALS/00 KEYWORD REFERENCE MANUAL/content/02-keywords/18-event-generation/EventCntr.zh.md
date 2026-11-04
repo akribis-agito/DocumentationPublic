@@ -2,11 +2,8 @@
 keyword: EventCntr
 summary: 统计自上次 EventOn 以来生成的事件数；可由用户重置。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 186
 attributes:
   access: rw

@@ -2,9 +2,7 @@
 keyword: FricBrstlStf
 summary: LuGre bristle stiffness (σ0), used by FricMethod 5 (renamed from FricSigma0).
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 935
 attributes:
   access: rw

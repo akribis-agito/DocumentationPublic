@@ -2,9 +2,8 @@
 keyword: ProgArgF
 summary: Reads a thread's current function argument slot as a 32-bit floating-point (float) value, from outside the function.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 723
 attributes:
   access: rw
@@ -22,7 +21,9 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    array_size: 13
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 ---

@@ -2,11 +2,8 @@
 keyword: DInFilt
 summary: 用于某一轴上所有数字量输入的软件消抖滤波器。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 213
 attributes:
   access: rw

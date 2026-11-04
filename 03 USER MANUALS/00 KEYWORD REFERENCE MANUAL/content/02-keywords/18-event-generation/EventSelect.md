@@ -2,11 +2,8 @@
 keyword: EventSelect
 summary: Selects which output line of a multi-event output group the current event pulse drives.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 317
 attributes:
   access: rw

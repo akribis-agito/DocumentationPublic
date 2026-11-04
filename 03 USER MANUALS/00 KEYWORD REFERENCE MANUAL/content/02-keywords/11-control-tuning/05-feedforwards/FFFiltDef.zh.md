@@ -2,9 +2,8 @@
 keyword: FFFiltDef
 summary: 定义前馈滤波器参数。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 729
 attributes:
   access: rw
@@ -23,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-18'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # FFFiltDef

@@ -2,11 +2,8 @@
 keyword: MasterFact
 summary: Numerator of the gear ratio applied to the master-variable delta.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 120
 attributes:
   access: rw

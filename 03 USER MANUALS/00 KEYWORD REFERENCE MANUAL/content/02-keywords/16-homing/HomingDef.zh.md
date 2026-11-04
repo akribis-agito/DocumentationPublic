@@ -1,13 +1,9 @@
 ---
 keyword: HomingDef
 summary: 数组，定义最多 20 个回零步骤，每个步骤包含一条指令及其参数。
-language: zh-CN
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 341
 attributes:
   access: rw
@@ -28,6 +24,7 @@ attributes:
 overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
+language: zh-CN
 ---
 # HomingDef
 

@@ -2,9 +2,8 @@
 summary: Enables dual-loop (position + yaw) gantry control mode.
 keyword: GantryDLoopOn
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 675
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: PDFact
 summary: Numerator of the scaling factor applied to detected pulses before accumulation into PDPos.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 110
 attributes:
   access: rw

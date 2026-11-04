@@ -2,9 +2,7 @@
 keyword: FricIStatNeg
 summary: Breakaway (static) friction level for the negative direction, in mA.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 934
 attributes:
   access: rw

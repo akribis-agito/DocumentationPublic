@@ -2,11 +2,8 @@
 keyword: HallsValue
 summary: Read-only raw Hall-sensor state, reported as a 3-bit value (bits CBA).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 383
 attributes:
   access: ro

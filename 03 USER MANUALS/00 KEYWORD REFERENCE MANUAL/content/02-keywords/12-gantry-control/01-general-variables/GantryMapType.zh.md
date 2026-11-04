@@ -2,9 +2,8 @@
 summary: 选择应用于偏摆轴的龙门映射修正类型。
 keyword: GantryMapType
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 749
 attributes:
   access: rw
@@ -22,7 +21,11 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    range:
+    - 0
+    - 1
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN

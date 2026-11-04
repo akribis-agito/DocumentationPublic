@@ -2,11 +2,8 @@
 keyword: SetPDPos
 summary: Command that presets/re-zeroes the pulse-and-direction position counter without moving.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 156
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: GearMaster
 summary: 复合 CAN 代码，用于选择电子齿轮运动的主变量。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 489
 attributes:
   access: rw

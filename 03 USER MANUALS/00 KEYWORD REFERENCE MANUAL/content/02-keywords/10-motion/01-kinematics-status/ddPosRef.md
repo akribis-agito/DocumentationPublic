@@ -2,9 +2,8 @@
 keyword: ddPosRef
 summary: Acceleration reference, the second derivative of the position reference PosRef.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 857
 attributes:
   access: ro
@@ -22,7 +21,28 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  agd155-ec:
+    units: scaling
+    scaling: 1.048576
+  agd155-ec-var34:
+    units: scaling
+    scaling: 1.048576
+  agd155-ec-var34-3:
+    units: scaling
+    scaling: 1.048576
+  agd156-ec:
+    units: scaling
+    scaling: 1.048576
+  agd101-ec-34a:
+    units: scaling
+    scaling: 1.048576
+  agd101-ec-17a:
+    units: scaling
+    scaling: 1.048576
+  agm800-ec:
+    units: scaling
+    scaling: 1.048576
 last_updated: '2026-10-10'
 doc_revision: '2026.11'
 ---

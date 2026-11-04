@@ -2,11 +2,8 @@
 keyword: AccShapeOn
 summary: Enables acceleration shaping to reduce vibration via a shaped acceleration curve.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 162
 attributes:
   access: rw

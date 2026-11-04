@@ -2,11 +2,8 @@
 keyword: Rm
 summary: Motor resistance measurement, in milliohms (updated by PCSuite).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 373
 attributes:
   access: rw
@@ -14,7 +11,7 @@ attributes:
   flash: true
   type: scalar
   array_size: 1
-  data_type: int32
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
@@ -24,9 +21,7 @@ attributes:
   default: 1000
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    data_type: float32
+overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 ---

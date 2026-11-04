@@ -2,26 +2,28 @@
 keyword: VBusRatio
 summary: 'Read-only: the voltage-scaling ratio DC-bus feedforward is currently applying.'
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 879
 attributes:
   access: ro
-  scope: axis
+  scope: non-axis
   flash: false
   type: scalar
   array_size: 1
-  data_type: float
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
   range:
-  - 0
-  - 10
+  - 0.0
+  - 10.0
   default: 1.0
-  scaling: 1
+  scaling: 1.0
   implemented: final
+overrides:
+  ci-master:
+    scope: axis
 last_updated: '2026-07-30'
 doc_revision: '2026.09'
 ---

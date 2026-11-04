@@ -2,9 +2,8 @@
 keyword: CommitMotion
 summary: Command that commits a staged on-the-fly change to a running sine point-to-point move.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 844
 attributes:
   access: rw
@@ -16,11 +15,49 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range: null
-  default: null
+  range:
+  - 1
+  - 7
+  default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    range:
+    - 1
+    - 4095
+  agd155-af-2a06:
+    range:
+    - 1
+    - 1
+  agd155-af-2a10:
+    range:
+    - 1
+    - 1
+  agd155-ec:
+    range:
+    - 1
+    - 1
+  agd155-ec-var34:
+    range:
+    - 1
+    - 1
+  agd155-ec-var34-3:
+    range:
+    - 1
+    - 1
+  agd156-ec:
+    range:
+    - 1
+    - 1
+  agd101-ec-34a:
+    range:
+    - 1
+    - 1
+  agd101-ec-17a:
+    range:
+    - 1
+    - 1
 last_updated: '2026-10-10'
 doc_revision: '2026.11'
 ---

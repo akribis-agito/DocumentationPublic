@@ -2,11 +2,8 @@
 keyword: VecMotionStat
 summary: 只读枚举值，报告当前向量运动状态（0 未运动，1 运动中，2 已暂停，3 停止中）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 641
 attributes:
   access: ro

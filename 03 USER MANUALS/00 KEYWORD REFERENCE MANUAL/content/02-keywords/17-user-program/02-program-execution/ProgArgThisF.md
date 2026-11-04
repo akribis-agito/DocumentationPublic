@@ -2,9 +2,8 @@
 keyword: ProgArgThisF
 summary: Reads or writes the current function's argument and local-variable slots as 32-bit floating-point (float) values.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 722
 attributes:
   access: rw

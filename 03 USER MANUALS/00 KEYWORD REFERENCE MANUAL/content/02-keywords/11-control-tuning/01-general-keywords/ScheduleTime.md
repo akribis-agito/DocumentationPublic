@@ -2,11 +2,8 @@
 keyword: ScheduleTime
 summary: The dwell time, in milliseconds, used by the time-based gain-scheduling modes to delay the switch back to the steady-state gain set.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 262
 attributes:
   access: rw
@@ -20,11 +17,53 @@ attributes:
   units: scaling
   range:
   - 0
-  - 655360
-  default: null
-  scaling: 65.536
+  - 163840
+  default: 512
+  scaling: 16.384
   implemented: final
-overrides: {}
+overrides:
+  agd155-ec:
+    range:
+    - 0
+    - 160000
+    default: 500
+    scaling: 16.0
+  agd155-ec-var34:
+    range:
+    - 0
+    - 160000
+    default: 500
+    scaling: 16.0
+  agd155-ec-var34-3:
+    range:
+    - 0
+    - 160000
+    default: 500
+    scaling: 16.0
+  agd156-ec:
+    range:
+    - 0
+    - 160000
+    default: 500
+    scaling: 16.0
+  agd101-ec-34a:
+    range:
+    - 0
+    - 160000
+    default: 500
+    scaling: 16.0
+  agd101-ec-17a:
+    range:
+    - 0
+    - 160000
+    default: 500
+    scaling: 16.0
+  agm800-ec:
+    range:
+    - 0
+    - 160000
+    default: 500
+    scaling: 16.0
 last_updated: '2026-10-10'
 doc_revision: '2026.11'
 ---

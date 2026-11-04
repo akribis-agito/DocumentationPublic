@@ -2,9 +2,8 @@
 summary: 龙门偏摆位置环的积分增益。
 keyword: GantryPosKi
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 715
 attributes:
   access: rw
@@ -22,7 +21,11 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    range:
+    - 0
+    - 20000
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN

@@ -2,9 +2,8 @@
 keyword: FrcUnitFct
 summary: 内部力单位与所选力工程单位之间的缩放因子。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 812
 attributes:
   access: rw

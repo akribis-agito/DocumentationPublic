@@ -2,11 +2,8 @@
 keyword: OfflineALog
 summary: Central-i 离线邮箱 1 的预留离线（邮箱）消息日志；当前固件未予填充，因此保持为 0。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 620
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: BuffSplineMod
 summary: 选择执行缓冲曲线时使用的样条插值模式。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 544
 attributes:
   access: rw

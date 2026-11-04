@@ -1,9 +1,9 @@
 ---
 keyword: UPMCalcCoeff
+summary: 重新计算 UPM 重复补偿系数，依据当前被控对象模型（PlantModel）和已配置的滤波器范围（UPMRptRange）。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 649
 attributes:
   access: ro
@@ -23,9 +23,8 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-20'
-doc_revision: '2026.10'
+doc_revision: '2026.11'
 language: zh-CN
-summary: 重新计算 UPM 重复补偿系数，依据当前被控对象模型（PlantModel）和已配置的滤波器范围（UPMRptRange）。
 ---
 # UPMCalcCoeff
 

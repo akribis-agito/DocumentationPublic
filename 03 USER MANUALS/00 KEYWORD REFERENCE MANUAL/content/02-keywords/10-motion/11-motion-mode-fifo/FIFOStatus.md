@@ -2,11 +2,8 @@
 keyword: FIFOStatus
 summary: Read-only array reporting the status of the FIFO motion queue.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 282
 attributes:
   access: ro

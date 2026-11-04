@@ -2,11 +2,8 @@
 keyword: AuxModRev
 summary: Modulo revolution divisor for the auxiliary encoder (not implemented in current firmware).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 71
 attributes:
   access: rw

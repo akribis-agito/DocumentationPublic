@@ -2,9 +2,7 @@
 keyword: PVAJVelTol
 summary: PVAJValidate 使用的速度连续性容差。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 885
 attributes:
   access: rw
@@ -12,15 +10,17 @@ attributes:
   flash: true
   type: scalar
   array_size: 1
-  data_type: float
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
-  units: counts/second
+  units: none
+  range: null
   default: 100.0
   scaling: 1.0
   implemented: final
-last_updated: '2026-08-04'
-doc_revision: '2026.08'
+last_updated: '2026-09-25'
+doc_revision: '2026.09'
+overrides: {}
 language: zh-CN
 ---
 # PVAJVelTol

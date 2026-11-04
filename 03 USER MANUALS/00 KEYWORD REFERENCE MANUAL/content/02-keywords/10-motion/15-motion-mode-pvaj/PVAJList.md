@@ -2,9 +2,7 @@
 keyword: PVAJList
 summary: The PVAJ trajectory table - header plus up to 8192 position/velocity/acceleration/jerk rows.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 880
 attributes:
   access: rw
@@ -12,13 +10,15 @@ attributes:
   flash: false
   type: array
   array_size: 32772
-  data_type: double
+  data_type: float64
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  default: 0
+  range: null
+  default: 0.0
   scaling: 1.0
   implemented: final
+overrides: {}
 last_updated: '2026-09-25'
 doc_revision: '2026.09'
 ---

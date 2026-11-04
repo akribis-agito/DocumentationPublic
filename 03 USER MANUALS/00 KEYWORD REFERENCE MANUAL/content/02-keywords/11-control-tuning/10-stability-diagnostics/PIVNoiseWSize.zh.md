@@ -2,9 +2,8 @@
 keyword: PIVNoiseWSize
 summary: 计算 PIV 噪声统计量所用滑动窗口的长度，单位为毫秒。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 800
 attributes:
   access: rw

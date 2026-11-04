@@ -2,11 +2,8 @@
 keyword: StatReg
 summary: Read-only bitfield reporting general axis status, saturations, limits and multi-level warnings.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 33
 attributes:
   access: ro

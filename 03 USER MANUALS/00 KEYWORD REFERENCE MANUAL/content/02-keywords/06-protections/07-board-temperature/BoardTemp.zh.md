@@ -2,11 +2,8 @@
 keyword: BoardTemp
 summary: 只读的控制器板温度（°C）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 397
 attributes:
   access: ro
@@ -25,9 +22,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v4:
-    scope: axis
-  central-i.v5:
+  ci-master:
     scope: axis
 last_updated: '2026-05-29'
 doc_revision: '2026.06'

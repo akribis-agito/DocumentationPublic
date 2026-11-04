@@ -2,11 +2,8 @@
 keyword: MotorTempUsed
 summary: Selects the motor temperature-sensor type.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 398
 attributes:
   access: rw

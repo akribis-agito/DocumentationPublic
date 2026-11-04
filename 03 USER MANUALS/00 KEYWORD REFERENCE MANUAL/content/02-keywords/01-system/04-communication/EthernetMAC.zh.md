@@ -2,11 +2,8 @@
 keyword: EthernetMAC
 summary: 控制器 MAC 地址，以十进制八位字节存储，每个数组元素存放一个。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 602
 attributes:
   access: rw

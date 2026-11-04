@@ -2,37 +2,47 @@
 keyword: JerkInAcc
 summary: Jerk applied during the acceleration phase of a third-order (infinite-snap) profile.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
-can_code: 720
+- controller
+- ci-master
+can_code: 565
 attributes:
   access: rw
   scope: axis
   flash: true
   type: scalar
   array_size: 1
-  data_type: int32
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
-  units: none
+  units: user
   range:
-  - 100
-  - 1000000000
-  default: 1000000
+  - 10000.0
+  - 1.0e+20
+  default: 100000000.0
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
-    data_type: float32
-    units: user
-    range:
-    - 10000.0
-    - 1.0e+20
-    default: 100000000.0
-    can_code: 565
+  agd155-ec:
+    units: scaling
+    scaling: 1.073741824
+  agd155-ec-var34:
+    units: scaling
+    scaling: 1.073741824
+  agd155-ec-var34-3:
+    units: scaling
+    scaling: 1.073741824
+  agd156-ec:
+    units: scaling
+    scaling: 1.073741824
+  agd101-ec-34a:
+    units: scaling
+    scaling: 1.073741824
+  agd101-ec-17a:
+    units: scaling
+    scaling: 1.073741824
+  agm800-ec:
+    units: scaling
+    scaling: 1.073741824
 last_updated: '2026-10-10'
 doc_revision: '2026.11'
 ---

@@ -2,11 +2,8 @@
 keyword: StepInMotCurr
 summary: 步进电机相电流指令，单位 mA，在电机运动中施加。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 255
 attributes:
   access: rw
@@ -14,19 +11,85 @@ attributes:
   flash: true
   type: scalar
   array_size: 1
-  data_type: int32
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
   range:
   - 50
-  - 64000
+  - 16000
   default: 50
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
-    data_type: float32
+  ci-master:
+    range:
+    - 50
+    - 64000
+  agc300-et:
+    range:
+    - 50
+    - 4000
+  agc301-et:
+    range:
+    - 50
+    - 4000
+  agc301-et-bioxtreme:
+    range:
+    - 50
+    - 4000
+  agd200-et-2d01:
+    range:
+    - 50
+    - 4000
+  agd200-et-2d02:
+    range:
+    - 50
+    - 8000
+  agd301-et-2d01:
+    range:
+    - 50
+    - 4000
+  agd301-et-2d02:
+    range:
+    - 50
+    - 8000
+  agd301-et-2d09:
+    range:
+    - 50
+    - 25500
+  agd155-af-2a06:
+    range:
+    - 50
+    - 25500
+  agd155-af-2a10:
+    range:
+    - 50
+    - 28500
+  agd155-ec:
+    range:
+    - 50
+    - 25500
+  agd155-ec-var34:
+    range:
+    - 50
+    - 28500
+  agd155-ec-var34-3:
+    range:
+    - 50
+    - 42500
+  agd156-ec:
+    range:
+    - 50
+    - 12726
+  agd101-ec-34a:
+    range:
+    - 50
+    - 28280
+  agd101-ec-17a:
+    range:
+    - 50
+    - 14140
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

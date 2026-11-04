@@ -2,11 +2,8 @@
 keyword: ProgHeap
 summary: Controller-wide, volatile read/write int32 array providing shared storage for the user program and communication.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 1021
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: Save
 summary: 将所有可保存至闪存的参数从易失性存储器写入闪存。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 232
 attributes:
   access: ro

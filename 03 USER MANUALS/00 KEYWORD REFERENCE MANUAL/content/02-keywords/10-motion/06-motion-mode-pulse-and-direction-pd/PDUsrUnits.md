@@ -2,11 +2,8 @@
 keyword: PDUsrUnits
 summary: Counts-per-user-unit scale for converting PDPos and PDVel to user units on query.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 66
 attributes:
   access: rw

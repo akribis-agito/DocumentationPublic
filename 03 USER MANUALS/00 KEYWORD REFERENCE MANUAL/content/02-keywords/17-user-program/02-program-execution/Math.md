@@ -2,19 +2,15 @@
 keyword: Math
 summary: Low-level user-program op that applies a math operation to the top of the numeric stack.
 availability:
-  standalone:
-  - v4
-  - v5
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 206
 attributes:
   access: ro
   scope: non-axis
   flash: false
   type: array
-  array_size: 32
+  array_size: 113
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
@@ -25,11 +21,7 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: partial
-overrides:
-  standalone.v5:
-    array_size: 113
-  central-i.v5:
-    array_size: 113
+overrides: {}
 last_updated: '2026-10-21'
 doc_revision: '2026.11'
 ---

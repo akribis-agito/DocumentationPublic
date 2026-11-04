@@ -2,9 +2,7 @@
 keyword: MagneticPitch
 summary: 直线电机的磁极距，单位毫米，用于将速度从 counts/s 转换为 m/s 以供反电动势前馈使用。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 849
 attributes:
   access: rw

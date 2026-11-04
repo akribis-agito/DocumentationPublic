@@ -2,11 +2,8 @@
 keyword: ProgStatAll
 summary: 返回所有用户程序任务的综合状态字。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 298
 attributes:
   access: ro

@@ -2,18 +2,15 @@
 keyword: Compare
 summary: 低级用户程序操作码，从栈中弹出两个值进行比较，并将 1 或 0 压入栈中。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 195
 attributes:
   access: ro
   scope: non-axis
   flash: false
   type: array
-  array_size: 10
+  array_size: 34
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
@@ -24,9 +21,7 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: partial
-overrides:
-  central-i.v5:
-    array_size: 34
+overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

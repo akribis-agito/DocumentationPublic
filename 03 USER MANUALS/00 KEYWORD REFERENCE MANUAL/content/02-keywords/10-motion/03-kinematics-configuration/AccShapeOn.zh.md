@@ -2,11 +2,8 @@
 keyword: AccShapeOn
 summary: 通过整形后的加速度曲线启用加速度整形以降低振动。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 162
 attributes:
   access: rw

@@ -2,18 +2,15 @@
 keyword: ComtMode
 summary: Array of commutation settings that configure how the motor electrical angle is established.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 72
 attributes:
   access: rw
   scope: axis
   flash: true
   type: array
-  array_size: 25
+  array_size: 34
   data_type: int32
   ok_in_motion: false
   ok_motor_on: false
@@ -24,9 +21,7 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    array_size: 34
+overrides: {}
 last_updated: '2026-09-25'
 doc_revision: '2026.09'
 ---

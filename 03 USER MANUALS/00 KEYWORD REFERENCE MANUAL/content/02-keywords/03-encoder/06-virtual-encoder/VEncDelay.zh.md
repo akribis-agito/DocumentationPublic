@@ -2,11 +2,8 @@
 keyword: VEncDelay
 summary: 脉冲/方向建立延迟（us），即方向变化与第一个虚拟编码器脉冲之间的延迟。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 616
 attributes:
   access: rw

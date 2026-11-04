@@ -2,9 +2,7 @@
 keyword: VqFFW
 summary: 只读交轴电压前馈输出，叠加至 q 轴电压指令。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 850
 attributes:
   access: ro

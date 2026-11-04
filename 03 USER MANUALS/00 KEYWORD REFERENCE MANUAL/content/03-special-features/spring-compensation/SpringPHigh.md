@@ -2,11 +2,8 @@
 keyword: SpringPHigh
 summary: Sets the upper position boundary, in user units, of the spring compensation region.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 594
 attributes:
   access: rw

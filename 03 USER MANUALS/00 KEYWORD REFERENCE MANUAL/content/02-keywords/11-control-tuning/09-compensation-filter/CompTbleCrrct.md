@@ -2,9 +2,8 @@
 keyword: CompTbleCrrct
 summary: Per-unit contact-point correction that shifts the compensation table along the position axis.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 840
 attributes:
   access: rw
@@ -12,17 +11,22 @@ attributes:
   flash: true
   type: array
   array_size: 3
-  data_type: int64
+  data_type: int32
   ok_in_motion: true
   ok_motor_on: true
   units: none
   range:
-  - -2251799813685248
-  - 2251799813685247
+  - -2147483648
+  - 2147483647
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    data_type: int64
+    range:
+    - -2251799813685248
+    - 2251799813685247
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 ---

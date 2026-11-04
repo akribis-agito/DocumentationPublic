@@ -2,9 +2,8 @@
 keyword: PIVNoiseStat
 summary: Read-only status array exposing the live noise statistic and active threshold of the PIV noise detector.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 799
 attributes:
   access: ro

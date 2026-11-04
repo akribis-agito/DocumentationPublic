@@ -2,11 +2,8 @@
 keyword: ECAMInterp
 summary: 保留的内部 ECAM 关键字（未实现）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 308
 attributes:
   access: rw

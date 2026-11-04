@@ -2,9 +2,8 @@
 keyword: LockEventInit
 summary: Initializes the unified lock/event configuration by learning the firmware-to-hardware capture offset (mode 1 only).
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 832
 attributes:
   access: ro

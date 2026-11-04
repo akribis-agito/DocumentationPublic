@@ -2,11 +2,8 @@
 keyword: BrakeLockTime
 summary: Delay after engaging the static brake before the motor is disabled (BrakeMode 3).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 381
 attributes:
   access: rw
@@ -19,12 +16,54 @@ attributes:
   ok_motor_on: true
   units: scaling
   range:
-  - 655
+  - 164
   - 13107
   default: 1638
-  scaling: 65.536
+  scaling: 16.384
   implemented: final
-overrides: {}
+overrides:
+  agd155-ec:
+    range:
+    - 160
+    - 12800
+    default: 1600
+    scaling: 16.0
+  agd155-ec-var34:
+    range:
+    - 160
+    - 12800
+    default: 1600
+    scaling: 16.0
+  agd155-ec-var34-3:
+    range:
+    - 160
+    - 12800
+    default: 1600
+    scaling: 16.0
+  agd156-ec:
+    range:
+    - 160
+    - 12800
+    default: 1600
+    scaling: 16.0
+  agd101-ec-34a:
+    range:
+    - 160
+    - 12800
+    default: 1600
+    scaling: 16.0
+  agd101-ec-17a:
+    range:
+    - 160
+    - 12800
+    default: 1600
+    scaling: 16.0
+  agm800-ec:
+    range:
+    - 160
+    - 12800
+    default: 1600
+    scaling: 16.0
 last_updated: '2026-10-10'
 doc_revision: '2026.11'
 ---

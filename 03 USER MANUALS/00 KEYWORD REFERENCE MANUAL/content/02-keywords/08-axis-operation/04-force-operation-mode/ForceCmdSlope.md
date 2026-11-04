@@ -2,11 +2,8 @@
 keyword: ForceCmdSlope
 summary: Ramp rate (unit/s) toward each force-command table entry.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 569
 attributes:
   access: rw

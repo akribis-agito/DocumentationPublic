@@ -2,11 +2,8 @@
 keyword: EventNextPos
 summary: 下一个事件脉冲将在其处生成的位置，只读。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 319
 attributes:
   access: ro

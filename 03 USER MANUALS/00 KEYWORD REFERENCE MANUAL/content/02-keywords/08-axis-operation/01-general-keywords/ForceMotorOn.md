@@ -2,9 +2,8 @@
 keyword: ForceMotorOn
 summary: Enables the motor before commutation is done, for current-loop tuning only.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 829
 attributes:
   access: rw

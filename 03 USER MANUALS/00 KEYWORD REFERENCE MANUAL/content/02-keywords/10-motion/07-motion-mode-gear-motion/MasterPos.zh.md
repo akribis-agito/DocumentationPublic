@@ -2,11 +2,8 @@
 keyword: MasterPos
 summary: 齿轮运动主变量经缩放后的累积位置。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 44
 attributes:
   access: ro
@@ -25,7 +22,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
+  ci-master:
     data_type: int64
     range:
     - -2251799813685248

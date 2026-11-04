@@ -2,11 +2,8 @@
 keyword: MasterFact
 summary: 应用于主变量增量的齿轮比分子。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 120
 attributes:
   access: rw

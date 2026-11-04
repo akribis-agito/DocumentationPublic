@@ -2,11 +2,8 @@
 keyword: GantryOn
 summary: Enables gantry MIMO control on the A axis, slaving the A and B axes together.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 650
 attributes:
   access: rw

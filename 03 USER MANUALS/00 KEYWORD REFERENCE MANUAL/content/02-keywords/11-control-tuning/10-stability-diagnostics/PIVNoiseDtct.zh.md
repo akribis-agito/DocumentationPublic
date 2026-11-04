@@ -2,9 +2,8 @@
 keyword: PIVNoiseDtct
 summary: 在轴保持静止时，启用对位置/速度环中过度噪声或抖动的运行时检测。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 797
 attributes:
   access: rw

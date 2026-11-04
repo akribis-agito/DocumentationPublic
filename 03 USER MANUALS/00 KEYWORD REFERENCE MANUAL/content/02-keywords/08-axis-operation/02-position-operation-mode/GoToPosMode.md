@@ -2,11 +2,8 @@
 keyword: GoToPosMode
 summary: Command to gracefully enter position operation mode.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 336
 attributes:
   access: ro

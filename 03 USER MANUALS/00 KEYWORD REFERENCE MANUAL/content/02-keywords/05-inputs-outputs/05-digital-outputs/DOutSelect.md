@@ -2,18 +2,15 @@
 keyword: DOutSelect
 summary: Selects the hardware function (or software control) routed to each digital output.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 314
 attributes:
   access: rw
   scope: non-axis
   flash: true
   type: array
-  array_size: 17
+  array_size: 26
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
@@ -25,10 +22,35 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v4:
+  ci-master:
     scope: axis
-  central-i.v5:
-    scope: axis
+    array_size: 17
+  agc300-et:
+    array_size: 9
+  agd200-et-2d01:
+    array_size: 9
+  agd200-et-2d02:
+    array_size: 9
+  agd200-et-2d05:
+    array_size: 9
+  agd200-et-2d05-71:
+    array_size: 9
+  agd155-af-2a06:
+    array_size: 12
+  agd155-af-2a10:
+    array_size: 12
+  agd155-ec:
+    array_size: 12
+  agd155-ec-var34:
+    array_size: 12
+  agd155-ec-var34-3:
+    array_size: 12
+  agd156-ec:
+    array_size: 9
+  agd101-ec-34a:
+    array_size: 9
+  agd101-ec-17a:
+    array_size: 9
 last_updated: '2026-10-27'
 doc_revision: '2026.11'
 ---

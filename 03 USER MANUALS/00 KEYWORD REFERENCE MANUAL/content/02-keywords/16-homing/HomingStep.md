@@ -2,11 +2,8 @@
 keyword: HomingStep
 summary: Read-only number of the homing step the engine has reached.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 385
 attributes:
   access: ro

@@ -1,11 +1,8 @@
 ---
 keyword: MapStartIndex
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 321
 attributes:
   access: rw
@@ -19,11 +16,15 @@ attributes:
   units: none
   range:
   - 1
-  - 300000
+  - 1604
   default: 1
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    range:
+    - 1
+    - 5000
 summary: MapTable index where the active error-mapping data begins.
 last_updated: '2026-10-17'
 doc_revision: '2026.11'

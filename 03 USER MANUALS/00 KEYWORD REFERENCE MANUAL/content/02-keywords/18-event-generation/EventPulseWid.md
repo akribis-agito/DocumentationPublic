@@ -2,11 +2,8 @@
 keyword: EventPulseWid
 summary: Duration of the event output pulse in microseconds.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 179
 attributes:
   access: rw

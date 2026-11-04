@@ -2,11 +2,8 @@
 keyword: RNDDebug
 summary: 保留供 Agito 研发使用的部分实现诊断功能。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 1022
 attributes:
   access: rw

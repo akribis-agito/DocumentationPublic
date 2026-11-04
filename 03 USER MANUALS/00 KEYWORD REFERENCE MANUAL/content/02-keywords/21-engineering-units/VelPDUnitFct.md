@@ -2,9 +2,8 @@
 keyword: VelPDUnitFct
 summary: Scale factor applied to pulse-and-direction velocity values when Global User Units is enabled.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 824
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: VEncFactDen
 summary: Denominator of the scaling ratio applied to the virtual encoder source signal.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 618
 attributes:
   access: rw

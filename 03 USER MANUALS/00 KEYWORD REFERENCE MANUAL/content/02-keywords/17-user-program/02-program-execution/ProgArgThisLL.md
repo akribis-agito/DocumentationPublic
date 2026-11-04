@@ -2,9 +2,8 @@
 keyword: ProgArgThisLL
 summary: Reads or writes the current function's argument and local-variable slots as 64-bit signed integers.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 785
 attributes:
   access: rw

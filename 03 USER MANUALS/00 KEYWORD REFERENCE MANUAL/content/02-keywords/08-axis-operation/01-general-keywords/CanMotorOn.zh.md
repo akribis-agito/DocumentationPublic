@@ -2,11 +2,8 @@
 keyword: CanMotorOn
 summary: 在运行预检查后尝试使能电机的命令。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 129
 attributes:
   access: ro
@@ -25,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-10-09'
-doc_revision: '2026.10'
+last_updated: '2026-10-10'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # CanMotorOn

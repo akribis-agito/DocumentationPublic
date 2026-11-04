@@ -1,11 +1,9 @@
 ---
 summary: 每轴矢量到编码器缩放比分子（VecEncFactNu / VecEncFactDn）。
-language: zh-CN
 keyword: VecEncFactNu
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 712
 attributes:
   access: rw
@@ -26,6 +24,7 @@ attributes:
 overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
+language: zh-CN
 ---
 # VecEncFactNu
 

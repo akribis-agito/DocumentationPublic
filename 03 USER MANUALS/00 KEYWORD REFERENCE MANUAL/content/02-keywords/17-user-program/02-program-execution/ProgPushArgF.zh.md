@@ -1,11 +1,9 @@
 ---
 keyword: ProgPushArgF
 summary: 将一个 32 位浮点（单精度）值压入运行中线程的参数栈，以备函数调用使用。
-language: zh-CN
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 721
 attributes:
   access: rw
@@ -24,6 +22,7 @@ attributes:
 overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
+language: zh-CN
 ---
 # ProgPushArgF
 

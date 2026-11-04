@@ -1,13 +1,9 @@
 ---
 keyword: FIFOPosClear
 summary: 命令，清除 FIFO 位置队列中所有待处理的段。
-language: zh-CN
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 667
 attributes:
   access: ro
@@ -28,6 +24,7 @@ attributes:
 overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
+language: zh-CN
 ---
 # FIFOPosClear
 

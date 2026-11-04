@@ -1,9 +1,9 @@
 ---
 keyword: DualEncMode
+summary: 启用范围限定双环控制。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 725
 attributes:
   access: rw
@@ -25,7 +25,6 @@ overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 启用范围限定双环控制。
 ---
 # DualEncMode
 

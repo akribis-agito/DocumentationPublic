@@ -2,11 +2,8 @@
 keyword: Begin
 summary: Starts motion on the axis according to the current motion mode and target settings.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 131
 attributes:
   access: ro

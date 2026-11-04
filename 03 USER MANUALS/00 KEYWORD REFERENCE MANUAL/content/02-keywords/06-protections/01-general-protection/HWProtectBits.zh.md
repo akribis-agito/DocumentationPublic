@@ -2,11 +2,8 @@
 keyword: HWProtectBits
 summary: 只读位域，报告处于激活状态的硬件保护条件。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 74
 attributes:
   access: ro

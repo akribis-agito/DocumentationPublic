@@ -2,9 +2,7 @@
 keyword: FricIStatPos
 summary: Breakaway (static) friction level for the positive direction, in mA.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 933
 attributes:
   access: rw

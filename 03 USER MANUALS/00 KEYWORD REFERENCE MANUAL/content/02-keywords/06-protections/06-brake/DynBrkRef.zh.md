@@ -2,11 +2,8 @@
 keyword: DynBrkRef
 summary: 设置动态制动的最大强度（短接占空比上限）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 404
 attributes:
   access: rw
@@ -18,11 +15,51 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: scaling
-  range: null
-  default: null
-  scaling: 2.288
+  range:
+  - 0
+  - 9154
+  default: 9154
+  scaling: 9.154
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    scaling: 3.052
+  agd155-ec:
+    range:
+    - 0
+    - 6250
+    default: 6250
+    scaling: 6.25
+  agd155-ec-var34:
+    range:
+    - 0
+    - 6250
+    default: 6250
+    scaling: 6.25
+  agd155-ec-var34-3:
+    range:
+    - 0
+    - 6250
+    default: 6250
+    scaling: 6.25
+  agd156-ec:
+    range:
+    - 0
+    - 6250
+    default: 6250
+    scaling: 6.25
+  agd101-ec-34a:
+    range:
+    - 0
+    - 6250
+    default: 6250
+    scaling: 6.25
+  agd101-ec-17a:
+    range:
+    - 0
+    - 6250
+    default: 6250
+    scaling: 6.25
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

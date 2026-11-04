@@ -2,11 +2,8 @@
 keyword: FIFOPosVelOf
 summary: Velocity feedforward offset added to every FIFO position segment.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 663
 attributes:
   access: rw

@@ -1,11 +1,8 @@
 ---
 keyword: MapEncoder
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 322
 attributes:
   access: rw
@@ -17,16 +14,14 @@ attributes:
   ok_in_motion: false
   ok_motor_on: true
   units: none
-  range:
-  - 1
-  - 8
+  range: null
   default: 1
   scaling: 1.0
   implemented: final
 overrides: {}
 summary: 选择由哪个轴编码器驱动每个误差映射维度。
 last_updated: '2026-10-17'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # MapEncoder

@@ -2,11 +2,8 @@
 keyword: RetractSpeed
 summary: 进入位置模式时点到点运动的最大速度。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 608
 attributes:
   access: rw
@@ -25,11 +22,34 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
+  ci-master:
     data_type: int64
-    range: null
+    range:
+    - -20000000000
+    - 20000000000
+  agd155-ec:
+    units: scaling
+    scaling: 1.024
+  agd155-ec-var34:
+    units: scaling
+    scaling: 1.024
+  agd155-ec-var34-3:
+    units: scaling
+    scaling: 1.024
+  agd156-ec:
+    units: scaling
+    scaling: 1.024
+  agd101-ec-34a:
+    units: scaling
+    scaling: 1.024
+  agd101-ec-17a:
+    units: scaling
+    scaling: 1.024
+  agm800-ec:
+    units: scaling
+    scaling: 1.024
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # RetractSpeed

@@ -2,11 +2,8 @@
 keyword: EventPulseRes
 summary: 'Selects the time unit used to interpret the event pulse width: microseconds or nanoseconds.'
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 517
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: dPosRefFilt
 summary: Cutoff frequency of the first-order low-pass filter applied to the reference velocity (the derivative of the position reference).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 106
 attributes:
   access: rw

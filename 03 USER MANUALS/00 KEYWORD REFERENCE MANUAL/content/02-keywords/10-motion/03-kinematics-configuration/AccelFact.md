@@ -2,11 +2,8 @@
 keyword: AccelFact
 summary: Scaling factor applied to Accel to adjust effective acceleration without changing Accel.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 168
 attributes:
   access: rw

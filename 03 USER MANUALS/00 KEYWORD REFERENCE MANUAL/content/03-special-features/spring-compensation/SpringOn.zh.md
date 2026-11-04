@@ -1,11 +1,9 @@
 ---
 keyword: SpringOn
+summary: 启用弹簧补偿功能，向控制环注入与位置相关的前馈电流，以抵消作用于负载的弹性恢复力。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 592
 attributes:
   access: rw
@@ -27,7 +25,6 @@ overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 启用弹簧补偿功能，向控制环注入与位置相关的前馈电流，以抵消作用于负载的弹性恢复力。
 ---
 # SpringOn
 

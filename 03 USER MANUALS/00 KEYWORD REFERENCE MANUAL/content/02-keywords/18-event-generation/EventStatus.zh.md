@@ -2,9 +2,7 @@
 keyword: EventStatus
 summary: 报告硬件表加载与运行的精简状态标志。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 973
 attributes:
   access: ro
@@ -23,8 +21,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-10-28'
-doc_revision: '2026.10'
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # EventStatus

@@ -2,9 +2,7 @@
 keyword: PushEvTotLost
 summary: Push events dropped since power-on.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 910
 attributes:
   access: rw

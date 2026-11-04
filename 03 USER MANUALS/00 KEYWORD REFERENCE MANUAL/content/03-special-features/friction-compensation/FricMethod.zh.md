@@ -2,9 +2,7 @@
 keyword: FricMethod
 summary: 选择摩擦前馈模型（0 = 关闭，1 至 5）。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 926
 attributes:
   access: rw
@@ -23,6 +21,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # FricMethod

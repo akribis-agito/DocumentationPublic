@@ -2,11 +2,8 @@
 keyword: StallCnst
 summary: 步进失步（堵转）检测的整定常数（3 元素数组）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 515
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: FrictionComp
 summary: Friction compensation is activated when the user variable `FrictionComp` is non-zero. This parameter always takes positive values.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 406
 attributes:
   access: rw
@@ -24,10 +21,7 @@ attributes:
   default: 0
   scaling: 65536.0
   implemented: final
-overrides:
-  central-i.v5:
-    range: null
-    scaling: 1.0
+overrides: {}
 last_updated: '2026-10-18'
 doc_revision: '2026.11'
 ---

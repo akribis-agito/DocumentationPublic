@@ -2,9 +2,7 @@
 keyword: BEMFConst
 summary: 电机反电动势常数，用于计算与速度成比例的电压前馈项。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 847
 attributes:
   access: rw
