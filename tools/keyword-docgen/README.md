@@ -73,7 +73,8 @@ expanded rows.
   - `AG300_CTL01UProgFuncs.h` — `USER_PROGRAM_NUMERIC_STACK_DEPTH`,
     `USER_PROGRAM_CALL_STACK_DEPTH`, etc., used by the user-program stack keyword ranges.
 - The resolver handles floats (e.g. scaling `1.526`, float defaults, `1000.0f`), treats
-  the float-type limit `±3.4e38` (`FLOAT_MIN`/`FLOAT_MAX` and aliases) as unbounded
+  the float-type limits `±3.4e38` (`FLOAT_MIN`/`FLOAT_MAX` and aliases) and `±1e38`
+  (`DOUBLE_MAX` on a C2000 build) as unbounded
   (`range: null`), and `overwrite` never downgrades a previously-resolved numeric
   range/default to `null` when a re-scan can't resolve it (e.g. a constant that moved
   from `#define` to an enum). A few constants are firmware enums, not `#define`s
