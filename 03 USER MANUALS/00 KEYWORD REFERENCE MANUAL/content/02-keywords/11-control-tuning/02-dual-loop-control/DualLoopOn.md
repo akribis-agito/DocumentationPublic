@@ -2,11 +2,8 @@
 keyword: DualLoopOn
 summary: Enables and configures dual-loop control.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 269
 attributes:
   access: rw

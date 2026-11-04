@@ -2,9 +2,8 @@
 keyword: ForceMotorOn
 summary: 在换相完成之前使能电机，仅用于电流环整定。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 829
 attributes:
   access: rw
@@ -23,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-10-09'
-doc_revision: '2026.10'
+last_updated: '2026-10-10'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # ForceMotorOn

@@ -2,11 +2,8 @@
 keyword: BeginOnToPos
 summary: 进入位置模式时执行一次点到点移动的一次性标志。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 587
 attributes:
   access: rw
@@ -26,7 +23,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-10'
-doc_revision: '2026.10'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # BeginOnToPos

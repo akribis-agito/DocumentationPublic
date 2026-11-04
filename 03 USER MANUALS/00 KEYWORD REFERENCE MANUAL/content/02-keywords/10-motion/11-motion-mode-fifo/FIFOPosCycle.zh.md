@@ -1,13 +1,9 @@
 ---
 keyword: FIFOPosCycle
 summary: 连续 FIFO 位置段之间的周期时间，以伺服采样数表示。
-language: zh-CN
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 660
 attributes:
   access: rw
@@ -25,9 +21,14 @@ attributes:
   default: 16
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    range:
+    - 1
+    - 167
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
+language: zh-CN
 ---
 # FIFOPosCycle
 

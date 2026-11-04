@@ -2,11 +2,8 @@
 keyword: CounterDown
 summary: Two independent down-counters decremented every controller cycle.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 39
 attributes:
   access: rw

@@ -1,11 +1,9 @@
 ---
 keyword: ForcePIVOn
+summary: 选择力控制结构。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 622
 attributes:
   access: rw
@@ -27,7 +25,6 @@ overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 选择力控制结构。
 ---
 # ForcePIVOn
 

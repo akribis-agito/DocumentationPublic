@@ -2,11 +2,8 @@
 keyword: UPMRptState
 summary: A read-only parameter that reports the current operational state of the UPM repetitive compensation function.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 557
 attributes:
   access: ro
@@ -24,10 +21,7 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    range: null
-    default: null
+overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 ---

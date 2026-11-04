@@ -1,10 +1,9 @@
 ---
 keyword: AnomDtctCnfg
-summary: '异常检测的配置数组：监测源、滤波器极点、停止行为和运动选择。'
+summary: 异常检测的配置数组：监测源、滤波器极点、停止行为和运动选择。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 779
 attributes:
   access: rw

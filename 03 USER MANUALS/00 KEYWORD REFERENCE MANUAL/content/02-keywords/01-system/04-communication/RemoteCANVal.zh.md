@@ -2,11 +2,8 @@
 keyword: RemoteCANVal
 summary: 在 RemoteCANSend 时写入远程控制器参数的值。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 442
 attributes:
   access: rw

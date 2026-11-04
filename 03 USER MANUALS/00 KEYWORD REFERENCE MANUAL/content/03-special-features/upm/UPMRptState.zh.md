@@ -1,11 +1,9 @@
 ---
 keyword: UPMRptState
+summary: 只读参数，报告 UPM 重复补偿函数的当前运行状态。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 557
 attributes:
   access: ro
@@ -23,14 +21,10 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    range: null
-    default: null
+overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 只读参数，报告 UPM 重复补偿函数的当前运行状态。
 ---
 # UPMRptState
 

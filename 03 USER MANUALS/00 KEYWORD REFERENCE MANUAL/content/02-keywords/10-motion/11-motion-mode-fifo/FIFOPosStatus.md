@@ -2,11 +2,8 @@
 keyword: FIFOPosStatus
 summary: Read-only array reporting the state of the FIFO position-tracking queue.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 668
 attributes:
   access: ro

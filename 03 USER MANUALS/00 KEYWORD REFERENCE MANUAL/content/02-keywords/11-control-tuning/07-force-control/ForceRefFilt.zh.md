@@ -1,11 +1,9 @@
 ---
 keyword: ForceRefFilt
+summary: 力指令参考滤波器的截止频率。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 586
 attributes:
   access: rw
@@ -27,7 +25,6 @@ overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 力指令参考滤波器的截止频率。
 ---
 # ForceRefFilt
 

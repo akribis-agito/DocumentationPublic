@@ -1,11 +1,9 @@
 ---
 keyword: ScheduleSet
+summary: 当前使用的整定增益组编号，范围为 1–5。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 261
 attributes:
   access: rw
@@ -27,7 +25,6 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 当前使用的整定增益组编号，范围为 1–5。
 ---
 # ScheduleSet
 

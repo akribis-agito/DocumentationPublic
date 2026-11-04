@@ -2,9 +2,7 @@
 keyword: PVAJArm
 summary: 对已校验的 PVAJ 列表进行快照，使该轴可被 Begin 启动。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 882
 attributes:
   access: rw
@@ -15,15 +13,16 @@ attributes:
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
-  units: none
+  units: func
   range:
   - 0
   - 1
   default: 0
   scaling: 1.0
   implemented: final
-last_updated: '2026-08-04'
-doc_revision: '2026.08'
+last_updated: '2026-09-25'
+doc_revision: '2026.09'
+overrides: {}
 language: zh-CN
 ---
 # PVAJArm

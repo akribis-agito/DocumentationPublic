@@ -1,13 +1,9 @@
 ---
 keyword: FIFOClear
 summary: 命令功能，清空 FIFO 运动队列，丢弃所有条目。
-language: zh-CN
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 290
 attributes:
   access: ro
@@ -28,6 +24,7 @@ attributes:
 overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
+language: zh-CN
 ---
 # FIFOClear
 

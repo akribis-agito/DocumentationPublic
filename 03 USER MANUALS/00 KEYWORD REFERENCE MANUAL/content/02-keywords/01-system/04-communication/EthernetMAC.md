@@ -2,11 +2,8 @@
 keyword: EthernetMAC
 summary: Controller MAC address, stored as decimal octets one per array element.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 602
 attributes:
   access: rw

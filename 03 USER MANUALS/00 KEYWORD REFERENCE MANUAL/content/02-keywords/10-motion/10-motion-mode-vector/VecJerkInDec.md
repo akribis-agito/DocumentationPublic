@@ -2,9 +2,8 @@
 keyword: VecJerkInDec
 summary: Jerk limit (user units) for the deceleration phase of a jerk-limited vector move.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 757
 attributes:
   access: rw

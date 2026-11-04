@@ -2,9 +2,8 @@
 keyword: PIVNoiseStat
 summary: 只读状态数组，提供 PIV 噪声检测器的实时噪声统计量和当前阈值。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 799
 attributes:
   access: ro

@@ -2,9 +2,7 @@
 keyword: EventStatus
 summary: Reports compact hardware-table loading and run flags.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 973
 attributes:
   access: ro

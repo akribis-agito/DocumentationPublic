@@ -2,11 +2,8 @@
 keyword: VEncValue
 summary: Read-only virtual-encoder tracking count in the scaled source reference frame.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 623
 attributes:
   access: ro

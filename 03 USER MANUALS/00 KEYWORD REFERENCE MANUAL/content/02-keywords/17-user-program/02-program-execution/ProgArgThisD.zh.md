@@ -2,9 +2,8 @@
 keyword: ProgArgThisD
 summary: 以 64 位浮点数（double）形式读写当前函数的参数槽和局部变量槽。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 786
 attributes:
   access: rw

@@ -2,9 +2,7 @@
 keyword: PushEvEnable
 summary: 推送事件总开关；任何 0 与 1 之间的切换都会清空事件队列。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 907
 attributes:
   access: rw
@@ -24,7 +22,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-09-25'
-doc_revision: '2026.09'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # PushEvEnable

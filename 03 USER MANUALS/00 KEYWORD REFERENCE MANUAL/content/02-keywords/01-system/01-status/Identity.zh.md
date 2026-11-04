@@ -2,33 +2,28 @@
 keyword: Identity
 summary: 只读数组，描述控制器——产品类型、序列号、版本、限值与能力标志——供上位机软件用于识别与功能检测。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 1
 attributes:
   access: ro
   scope: non-axis
   flash: false
   type: array
-  array_size: 63
+  array_size: 76
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
-  units: '0'
+  units: none
   range:
   - -2147483648
   - 2147483647
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    array_size: 76
-last_updated: '2026-10-25'
-doc_revision: '2026.10'
+overrides: {}
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # Identity

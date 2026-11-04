@@ -2,16 +2,15 @@
 summary: Active error-map correction value applied to the gantry yaw axis.
 keyword: GantryMap
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 748
 attributes:
   access: rw
   scope: axis
   flash: true
   type: array
-  array_size: 1025
+  array_size: 2
   data_type: float64
   ok_in_motion: false
   ok_motor_on: true
@@ -22,7 +21,9 @@ attributes:
   default: 0.5
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    array_size: 1025
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 ---

@@ -1,9 +1,9 @@
 ---
 keyword: PosKi
+summary: 位置环积分增益（central-i v5）——对经缩放的位置控制器输出进行累积，以在速度指令中加入积分项。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 714
 attributes:
   access: rw
@@ -21,11 +21,14 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    range:
+    - 0
+    - 20000
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 位置环积分增益（central-i v5）——对经缩放的位置控制器输出进行累积，以在速度指令中加入积分项。
 ---
 # PosKi
 

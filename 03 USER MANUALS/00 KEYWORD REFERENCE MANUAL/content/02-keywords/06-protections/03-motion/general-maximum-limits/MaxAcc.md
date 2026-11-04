@@ -2,40 +2,26 @@
 keyword: MaxAcc
 summary: Maximum allowable acceleration/deceleration, checked before a motion starts.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 81
 attributes:
-  access: '0'
+  access: rw
   scope: axis
   flash: true
   type: scalar
   array_size: 1
-  data_type: int32
-  ok_in_motion: false
-  ok_motor_on: false
-  units: '0'
+  data_type: float32
+  ok_in_motion: true
+  ok_motor_on: true
+  units: user
   range:
-  - -2147483648
-  - 2147483647
-  default: 0
+  - 100.0
+  - 686700000000.0
+  default: 10000000
   scaling: 1.0
-  implemented: partial
-overrides:
-  central-i.v5:
-    access: rw
-    data_type: float32
-    ok_in_motion: true
-    ok_motor_on: true
-    units: user
-    range:
-    - 100.0
-    - 686700000000.0
-    default: 10000000
-    implemented: final
+  implemented: final
+overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 ---

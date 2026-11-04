@@ -2,11 +2,8 @@
 keyword: WaitStatus
 summary: 使用户程序线程保持等待，直到所选状态达到所需值。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 194
 attributes:
   access: rw

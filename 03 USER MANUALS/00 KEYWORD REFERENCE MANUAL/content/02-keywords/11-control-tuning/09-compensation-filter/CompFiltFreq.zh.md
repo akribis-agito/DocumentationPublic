@@ -2,9 +2,8 @@
 keyword: CompFiltFreq
 summary: 补偿滤波器一阶低通级的截止频率，单位为赫兹。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 835
 attributes:
   access: rw

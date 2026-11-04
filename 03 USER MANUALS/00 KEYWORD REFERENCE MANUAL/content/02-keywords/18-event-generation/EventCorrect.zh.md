@@ -2,11 +2,8 @@
 keyword: EventCorrect
 summary: 根据当前轴位置和映射重新计算修正后事件表位置的命令。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 419
 attributes:
   access: ro

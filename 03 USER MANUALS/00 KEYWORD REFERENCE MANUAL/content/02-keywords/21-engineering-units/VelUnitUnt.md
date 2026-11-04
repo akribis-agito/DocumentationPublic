@@ -2,9 +2,8 @@
 keyword: VelUnitUnt
 summary: Display label (name) of the velocity engineering unit, stored as a short text string.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 807
 attributes:
   access: rw

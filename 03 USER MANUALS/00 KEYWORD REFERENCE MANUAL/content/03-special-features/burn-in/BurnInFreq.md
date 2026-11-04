@@ -2,11 +2,8 @@
 keyword: BurnInFreq
 summary: Sets the electrical rotation (commutation) frequency of the burn-in motion in units of 0.01 Hz (for example, 1000 = 10 Hz).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 425
 attributes:
   access: rw

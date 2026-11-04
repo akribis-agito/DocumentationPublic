@@ -2,11 +2,8 @@
 keyword: StepInPosCurr
 summary: 步进电机相电流指令，单位 mA，在电机静止时保持。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 254
 attributes:
   access: rw
@@ -14,19 +11,85 @@ attributes:
   flash: true
   type: scalar
   array_size: 1
-  data_type: int32
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
   range:
   - 0
-  - 32000
+  - 8000
   default: 50
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
-    data_type: float32
+  ci-master:
+    range:
+    - 0
+    - 32000
+  agc300-et:
+    range:
+    - 0
+    - 2000
+  agc301-et:
+    range:
+    - 0
+    - 2000
+  agc301-et-bioxtreme:
+    range:
+    - 0
+    - 2000
+  agd200-et-2d01:
+    range:
+    - 0
+    - 2000
+  agd200-et-2d02:
+    range:
+    - 0
+    - 4000
+  agd301-et-2d01:
+    range:
+    - 0
+    - 2000
+  agd301-et-2d02:
+    range:
+    - 0
+    - 4000
+  agd301-et-2d09:
+    range:
+    - 0
+    - 12750
+  agd155-af-2a06:
+    range:
+    - 0
+    - 12750
+  agd155-af-2a10:
+    range:
+    - 0
+    - 14250
+  agd155-ec:
+    range:
+    - 0
+    - 12750
+  agd155-ec-var34:
+    range:
+    - 0
+    - 14250
+  agd155-ec-var34-3:
+    range:
+    - 0
+    - 21250
+  agd156-ec:
+    range:
+    - 0
+    - 6363
+  agd101-ec-34a:
+    range:
+    - 0
+    - 14140
+  agd101-ec-17a:
+    range:
+    - 0
+    - 7070
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

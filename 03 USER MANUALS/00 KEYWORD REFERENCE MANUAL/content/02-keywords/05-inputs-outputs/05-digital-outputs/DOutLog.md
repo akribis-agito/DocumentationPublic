@@ -2,11 +2,8 @@
 keyword: DOutLog
 summary: Per-output logic inversion (XOR) applied to the final digital-output state.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 212
 attributes:
   access: rw
@@ -18,15 +15,70 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range: null
+  range:
+  - 0
+  - 33554431
   default: 0
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v4:
+  ci-master:
     scope: axis
-  central-i.v5:
-    scope: axis
+    range:
+    - 0
+    - 65535
+  agc300-et:
+    range:
+    - 0
+    - 255
+  agd200-et-2d01:
+    range:
+    - 0
+    - 255
+  agd200-et-2d02:
+    range:
+    - 0
+    - 255
+  agd200-et-2d05:
+    range:
+    - 0
+    - 255
+  agd200-et-2d05-71:
+    range:
+    - 0
+    - 255
+  agd155-af-2a06:
+    range:
+    - 0
+    - 2047
+  agd155-af-2a10:
+    range:
+    - 0
+    - 2047
+  agd155-ec:
+    range:
+    - 0
+    - 2047
+  agd155-ec-var34:
+    range:
+    - 0
+    - 2047
+  agd155-ec-var34-3:
+    range:
+    - 0
+    - 2047
+  agd156-ec:
+    range:
+    - 0
+    - 255
+  agd101-ec-34a:
+    range:
+    - 0
+    - 255
+  agd101-ec-17a:
+    range:
+    - 0
+    - 255
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 ---

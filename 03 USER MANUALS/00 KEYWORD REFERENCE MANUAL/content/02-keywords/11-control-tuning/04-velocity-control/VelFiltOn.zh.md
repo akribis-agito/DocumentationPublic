@@ -1,21 +1,19 @@
 ---
 keyword: VelFiltOn
+summary: 启用或旁路作用于速度 PI 输出的速度环滤波器。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 122
 attributes:
   access: rw
   scope: axis
   flash: true
   type: array
-  array_size: 3
+  array_size: 5
   data_type: int32
-  ok_in_motion: false
-  ok_motor_on: false
+  ok_in_motion: true
+  ok_motor_on: true
   units: none
   range:
   - 0
@@ -23,14 +21,10 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    ok_in_motion: true
-    ok_motor_on: true
+overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 启用或旁路作用于速度 PI 输出的速度环滤波器。
 ---
 # VelFiltOn
 

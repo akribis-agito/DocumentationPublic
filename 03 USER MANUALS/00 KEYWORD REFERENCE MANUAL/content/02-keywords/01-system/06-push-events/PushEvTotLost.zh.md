@@ -2,9 +2,7 @@
 keyword: PushEvTotLost
 summary: 自上电以来丢弃的推送事件总数。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 910
 attributes:
   access: rw
@@ -24,7 +22,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-09-25'
-doc_revision: '2026.09'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # PushEvTotLost

@@ -2,11 +2,8 @@
 keyword: OfflineALog
 summary: Reserved offline (mailbox) message log for Central-i offline mailbox 1; not currently populated by the firmware, so it stays at 0.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 620
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: StepBits
 summary: 设置步进电机每电气周期的步数，控制全步、半步或微步运行。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 256
 attributes:
   access: rw

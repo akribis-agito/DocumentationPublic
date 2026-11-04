@@ -2,11 +2,8 @@
 keyword: MinVBus
 summary: 允许的最小母线电压；降至或低于它将立即禁用轴。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 89
 attributes:
   access: rw
@@ -25,12 +22,43 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v4:
+  ci-master:
     scope: axis
-  central-i.v5:
-    scope: axis
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+    range:
+    - 11000
+    - 340000
+  agd155-af-2a06:
+    range:
+    - 100000
+    - 340000
+    default: 100000
+  agd155-af-2a10:
+    range:
+    - 100000
+    - 340000
+    default: 100000
+  agd155-ec:
+    range:
+    - 100000
+    - 340000
+    default: 100000
+  agd155-ec-var34:
+    range:
+    - 100000
+    - 340000
+    default: 100000
+  agd155-ec-var34-3:
+    range:
+    - 100000
+    - 340000
+    default: 100000
+  agd156-ec:
+    range:
+    - 100000
+    - 340000
+    default: 100000
+last_updated: '2026-09-25'
+doc_revision: '2026.09'
 language: zh-CN
 ---
 # MinVBus

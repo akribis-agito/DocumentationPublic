@@ -2,11 +2,8 @@
 keyword: OpenLoopVolt
 summary: Voltage reference applied to the modulation in voltage open-loop mode.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 146
 attributes:
   access: rw
@@ -14,20 +11,52 @@ attributes:
   flash: false
   type: scalar
   array_size: 1
-  data_type: int32
+  data_type: float32
   ok_in_motion: false
   ok_motor_on: true
   units: scaling
-  range: null
+  range:
+  - 0
+  - 915.4000000000001
   default: 0
-  scaling: 1.144
+  scaling: 4.577
   implemented: final
 overrides:
-  central-i.v4:
+  ci-master:
+    range:
+    - 0
+    - 305.2
     scaling: 1.526
-  central-i.v5:
-    data_type: float32
-    scaling: 1.526
+  agd155-ec:
+    range:
+    - 0
+    - 625.0
+    scaling: 3.125
+  agd155-ec-var34:
+    range:
+    - 0
+    - 625.0
+    scaling: 3.125
+  agd155-ec-var34-3:
+    range:
+    - 0
+    - 625.0
+    scaling: 3.125
+  agd156-ec:
+    range:
+    - 0
+    - 625.0
+    scaling: 3.125
+  agd101-ec-34a:
+    range:
+    - 0
+    - 625.0
+    scaling: 3.125
+  agd101-ec-17a:
+    range:
+    - 0
+    - 625.0
+    scaling: 3.125
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 ---

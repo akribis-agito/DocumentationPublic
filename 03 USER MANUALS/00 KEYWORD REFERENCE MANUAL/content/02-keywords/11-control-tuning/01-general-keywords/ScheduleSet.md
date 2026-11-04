@@ -2,11 +2,8 @@
 keyword: ScheduleSet
 summary: The tuning-gain set number currently in use, in the range 1–5.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 261
 attributes:
   access: rw

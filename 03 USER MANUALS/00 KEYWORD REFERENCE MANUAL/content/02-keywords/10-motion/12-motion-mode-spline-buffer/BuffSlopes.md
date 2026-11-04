@@ -2,11 +2,8 @@
 keyword: BuffSlopes
 summary: Edge velocity slopes imposed on the spline buffer trajectory when required.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 546
 attributes:
   access: rw

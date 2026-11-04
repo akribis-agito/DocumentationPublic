@@ -1,11 +1,9 @@
 ---
 keyword: IndirectDo
+summary: 执行间接数组写操作的指令。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 437
 attributes:
   access: ro
@@ -27,7 +25,6 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 执行间接数组写操作的指令。
 ---
 # IndirectDo
 

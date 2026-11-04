@@ -2,11 +2,8 @@
 keyword: InjectPoint
 summary: 选择将注入波形施加到哪个指令信号。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 113
 attributes:
   access: rw

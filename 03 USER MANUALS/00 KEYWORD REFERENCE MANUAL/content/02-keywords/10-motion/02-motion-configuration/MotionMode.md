@@ -2,11 +2,8 @@
 keyword: MotionMode
 summary: Selects the type of motion performed when Begin is issued.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 141
 attributes:
   access: rw
@@ -20,12 +17,12 @@ attributes:
   units: none
   range:
   - -1
-  - 19
+  - 21
   default: -1
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
+  ci-master:
     range:
     - -1
     - 23

@@ -1,13 +1,9 @@
 ---
 keyword: FIFORemove
 summary: 命令函数，用于移除最近压入 FIFO 运动队列的条目。
-language: zh-CN
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 289
 attributes:
   access: ro
@@ -28,6 +24,7 @@ attributes:
 overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
+language: zh-CN
 ---
 # FIFORemove
 

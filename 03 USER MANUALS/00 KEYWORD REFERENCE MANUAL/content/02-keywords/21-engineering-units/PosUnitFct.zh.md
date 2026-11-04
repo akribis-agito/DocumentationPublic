@@ -2,9 +2,8 @@
 keyword: PosUnitFct
 summary: 内部位置单位与所选位置工程单位之间的比例系数。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 803
 attributes:
   access: rw

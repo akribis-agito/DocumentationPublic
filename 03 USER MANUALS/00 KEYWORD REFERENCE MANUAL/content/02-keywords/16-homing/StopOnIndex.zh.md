@@ -2,11 +2,8 @@
 keyword: StopOnIndex
 summary: 在下一个编码器索引脉冲时自动停止轴运动。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 167
 attributes:
   access: rw

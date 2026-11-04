@@ -2,11 +2,8 @@
 keyword: ShapingFreq
 summary: Resonance frequencies suppressed by the input shaper.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 152
 attributes:
   access: rw

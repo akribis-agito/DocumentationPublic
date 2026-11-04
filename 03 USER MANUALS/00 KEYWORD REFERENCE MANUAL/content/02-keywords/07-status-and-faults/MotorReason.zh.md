@@ -2,11 +2,8 @@
 keyword: MotorReason
 summary: 只读代码，报告轴上次被禁用的原因。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 498
 attributes:
   access: ro

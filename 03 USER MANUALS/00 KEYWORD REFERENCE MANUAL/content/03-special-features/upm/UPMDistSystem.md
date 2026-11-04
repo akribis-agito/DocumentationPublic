@@ -2,11 +2,8 @@
 keyword: UPMDistSystem
 summary: Sets the scalar plant-gain estimate used by the UPM disturbance rejection algorithm.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 604
 attributes:
   access: rw

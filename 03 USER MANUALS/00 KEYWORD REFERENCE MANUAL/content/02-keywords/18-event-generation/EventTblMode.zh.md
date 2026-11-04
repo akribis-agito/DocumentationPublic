@@ -2,9 +2,7 @@
 keyword: EventTblMode
 summary: 选择预加载硬件事件表使用公共设置还是逐行设置。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 975
 attributes:
   access: rw
@@ -24,7 +22,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-28'
-doc_revision: '2026.10'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # EventTblMode

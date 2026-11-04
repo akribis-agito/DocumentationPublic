@@ -1,15 +1,13 @@
 ---
 keyword: AdVBusEn
 summary: 使能直流母线前馈，在母线电压跌落时维持实际输出电压。默认启用。
-language: zh-CN
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 878
 attributes:
   access: rw
-  scope: axis
+  scope: non-axis
   flash: true
   type: scalar
   array_size: 1
@@ -17,12 +15,18 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range: [0, 1]
+  range:
+  - 0
+  - 1
   default: 1
-  scaling: 1
+  scaling: 1.0
   implemented: final
 last_updated: '2026-07-30'
-doc_revision: '2026.07'
+doc_revision: '2026.09'
+overrides:
+  ci-master:
+    scope: axis
+language: zh-CN
 ---
 
 # AdVBusEn

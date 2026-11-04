@@ -2,9 +2,8 @@
 keyword: PushConstLL
 summary: 将 64 位有符号整数常量压入当前线程的数值栈。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 781
 attributes:
   access: rw

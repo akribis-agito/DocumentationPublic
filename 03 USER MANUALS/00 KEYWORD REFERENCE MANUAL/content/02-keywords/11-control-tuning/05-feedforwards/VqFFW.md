@@ -2,9 +2,7 @@
 keyword: VqFFW
 summary: Read-only quadrature-axis voltage feedforward output added to the q-axis voltage command.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 850
 attributes:
   access: ro

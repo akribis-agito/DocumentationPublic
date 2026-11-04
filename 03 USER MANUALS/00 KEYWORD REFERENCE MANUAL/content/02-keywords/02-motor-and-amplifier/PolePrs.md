@@ -2,11 +2,8 @@
 keyword: PolePrs
 summary: Number of motor magnet pole pairs, interpreted according to the motor type, for correct feedback and commutation.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 54
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: EncAbsErrTime
 summary: Number of control cycles an absolute-encoder error/warning/CRC condition may persist before the axis faults; -1 disables monitoring.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 423
 attributes:
   access: rw
@@ -24,9 +21,7 @@ attributes:
   default: -1
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    implemented: partial
+overrides: {}
 last_updated: '2026-10-18'
 doc_revision: '2026.11'
 ---

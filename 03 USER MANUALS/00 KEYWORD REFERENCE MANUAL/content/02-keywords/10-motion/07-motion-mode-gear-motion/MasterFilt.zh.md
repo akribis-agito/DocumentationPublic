@@ -2,11 +2,8 @@
 keyword: MasterFilt
 summary: 应用于经缩放主位置增量的一阶低通滤波器系数（直接齿轮运动）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 161
 attributes:
   access: rw
@@ -26,7 +23,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # MasterFilt

@@ -2,11 +2,8 @@
 keyword: MaxPosErr
 summary: 最大闭环位置误差；超过它将禁用轴。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 84
 attributes:
   access: rw

@@ -1,37 +1,28 @@
 ---
 keyword: ScheduleGains
+summary: 只读数组，报告增益调度选定当前激活增益组后控制环正在使用的整定增益。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 274
 attributes:
   access: ro
   scope: axis
   flash: false
   type: array
-  array_size: 6
-  data_type: int32
+  array_size: 8
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range:
-  - -2147483648
-  - 2147483647
+  range: null
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    array_size: 7
-    data_type: float32
-    range: null
+overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 只读数组，报告增益调度选定当前激活增益组后控制环正在使用的整定增益。
 ---
 # ScheduleGains
 

@@ -2,11 +2,8 @@
 keyword: CurrLimMode
 summary: Selects how the current command (CurrRef) is saturated.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 392
 attributes:
   access: rw

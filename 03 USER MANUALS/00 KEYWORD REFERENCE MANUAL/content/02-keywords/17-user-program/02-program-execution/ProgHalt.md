@@ -2,11 +2,8 @@
 keyword: ProgHalt
 summary: Halts a specified user program thread; it can later be resumed where it stopped.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 197
 attributes:
   access: ro
@@ -24,7 +21,9 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: partial
-overrides: {}
+overrides:
+  ci-master:
+    array_size: 13
 last_updated: '2026-05-28'
 doc_revision: '2026.06'
 ---

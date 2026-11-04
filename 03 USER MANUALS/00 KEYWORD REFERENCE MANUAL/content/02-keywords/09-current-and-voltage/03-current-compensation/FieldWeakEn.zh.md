@@ -1,11 +1,9 @@
 ---
 keyword: FieldWeakEn
 summary: 使能磁场削弱，允许电机在基速以上运行。
-language: zh-CN
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 875
 attributes:
   access: rw
@@ -15,14 +13,18 @@ attributes:
   array_size: 1
   data_type: int32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
-  range: [0, 1]
+  range:
+  - 0
+  - 1
   default: 0
-  scaling: 1
+  scaling: 1.0
   implemented: final
 last_updated: '2026-07-30'
-doc_revision: '2026.07'
+doc_revision: '2026.09'
+overrides: {}
+language: zh-CN
 ---
 
 # FieldWeakEn

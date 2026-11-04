@@ -2,9 +2,8 @@
 keyword: VelAuxUnitFct
 summary: Scale factor applied to auxiliary-encoder velocity values when Global User Units is enabled.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 821
 attributes:
   access: rw

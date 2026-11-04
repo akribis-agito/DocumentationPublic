@@ -2,11 +2,8 @@
 keyword: SpeedChgDir
 summary: Selects the direction in which the speed-change-on-the-fly trigger is active.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 347
 attributes:
   access: rw

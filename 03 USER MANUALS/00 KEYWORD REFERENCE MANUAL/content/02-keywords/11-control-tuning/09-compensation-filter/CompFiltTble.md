@@ -2,9 +2,8 @@
 keyword: CompFiltTble
 summary: Compensation table holding the expected force at each evenly spaced table position.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 836
 attributes:
   access: rw

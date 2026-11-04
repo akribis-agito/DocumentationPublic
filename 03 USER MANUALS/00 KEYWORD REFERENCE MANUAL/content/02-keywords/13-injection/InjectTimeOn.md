@@ -2,11 +2,8 @@
 keyword: InjectTimeOn
 summary: Pulse duration for pulse injection, in milliseconds.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 125
 attributes:
   access: rw
@@ -20,11 +17,46 @@ attributes:
   units: scaling
   range:
   - 0
-  - 65536
+  - 16384
   default: 0
-  scaling: 65.536
+  scaling: 16.384
   implemented: final
-overrides: {}
+overrides:
+  agd155-ec:
+    range:
+    - 0
+    - 16000
+    scaling: 16.0
+  agd155-ec-var34:
+    range:
+    - 0
+    - 16000
+    scaling: 16.0
+  agd155-ec-var34-3:
+    range:
+    - 0
+    - 16000
+    scaling: 16.0
+  agd156-ec:
+    range:
+    - 0
+    - 16000
+    scaling: 16.0
+  agd101-ec-34a:
+    range:
+    - 0
+    - 16000
+    scaling: 16.0
+  agd101-ec-17a:
+    range:
+    - 0
+    - 16000
+    scaling: 16.0
+  agm800-ec:
+    range:
+    - 0
+    - 16000
+    scaling: 16.0
 last_updated: '2026-10-10'
 doc_revision: '2026.11'
 ---

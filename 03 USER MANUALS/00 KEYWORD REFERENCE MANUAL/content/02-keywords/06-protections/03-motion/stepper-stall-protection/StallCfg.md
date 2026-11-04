@@ -2,11 +2,8 @@
 keyword: StallCfg
 summary: Configures the stepper stall-detection mode.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 513
 attributes:
   access: rw

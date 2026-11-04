@@ -2,31 +2,26 @@
 keyword: Identity
 summary: Read-only array describing the controller — product type, serial number, versions, limits and capability flags — used by host software for identification and feature detection.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 1
 attributes:
   access: ro
   scope: non-axis
   flash: false
   type: array
-  array_size: 63
+  array_size: 76
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
-  units: '0'
+  units: none
   range:
   - -2147483648
   - 2147483647
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    array_size: 76
+overrides: {}
 last_updated: '2026-11-01'
 doc_revision: '2026.11'
 ---

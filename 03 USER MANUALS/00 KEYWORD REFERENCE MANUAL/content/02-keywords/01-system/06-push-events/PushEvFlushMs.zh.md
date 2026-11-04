@@ -2,9 +2,7 @@
 keyword: PushEvFlushMs
 summary: 已入队的推送事件在发送前的最长等待时间，单位为毫秒。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 913
 attributes:
   access: rw
@@ -23,8 +21,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-09-25'
-doc_revision: '2026.09'
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # PushEvFlushMs

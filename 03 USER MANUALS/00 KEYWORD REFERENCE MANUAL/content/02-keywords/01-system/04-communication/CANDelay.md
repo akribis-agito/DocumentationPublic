@@ -2,11 +2,8 @@
 keyword: CANDelay
 summary: Delay, in samples, applied to CAN messages.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 222
 attributes:
   access: rw

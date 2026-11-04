@@ -2,11 +2,8 @@
 keyword: InjectPoint
 summary: Selects which command signal the injected waveform is applied to.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 113
 attributes:
   access: rw

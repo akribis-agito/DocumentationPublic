@@ -2,11 +2,8 @@
 keyword: MotorOn
 summary: Enables or disables the motor, and reports the servo on/off status.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 130
 attributes:
   access: rw

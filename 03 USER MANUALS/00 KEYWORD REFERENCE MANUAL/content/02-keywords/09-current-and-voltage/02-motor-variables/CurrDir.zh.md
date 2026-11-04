@@ -2,11 +2,8 @@
 keyword: CurrDir
 summary: 翻转电机励磁方向（0 = 正常，1 = 翻转）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 76
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: MasterFilt
 summary: First-order low-pass filter coefficient for the scaled master-position delta (direct gear motion).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 161
 attributes:
   access: rw

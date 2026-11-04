@@ -1,11 +1,9 @@
 ---
 keyword: UserMode
+summary: UserMode 是用于激活控制器内特殊算法的参数。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 77
 attributes:
   access: rw
@@ -27,7 +25,6 @@ overrides: {}
 last_updated: '2026-05-25'
 doc_revision: '2026.06'
 language: zh-CN
-summary: UserMode 是用于激活控制器内特殊算法的参数。
 ---
 # UserMode
 

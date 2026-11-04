@@ -2,9 +2,7 @@
 keyword: PushEvSelSys
 summary: 待发送的控制器级推送事件类型位掩码。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 912
 attributes:
   access: rw
@@ -24,7 +22,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-09-25'
-doc_revision: '2026.09'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # PushEvSelSys

@@ -2,9 +2,8 @@
 keyword: PosAuxUnitUnt
 summary: Free-text unit label for auxiliary-encoder position, one character per array element.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 816
 attributes:
   access: rw

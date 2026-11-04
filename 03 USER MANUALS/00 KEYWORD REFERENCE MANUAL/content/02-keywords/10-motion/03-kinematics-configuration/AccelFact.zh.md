@@ -2,11 +2,8 @@
 keyword: AccelFact
 summary: 应用于 Accel 的缩放因子，用于在不改变 Accel 的情况下调整有效加速度。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 168
 attributes:
   access: rw

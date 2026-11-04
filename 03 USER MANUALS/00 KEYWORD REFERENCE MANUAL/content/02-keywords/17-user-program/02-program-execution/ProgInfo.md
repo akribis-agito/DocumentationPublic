@@ -2,11 +2,8 @@
 keyword: ProgInfo
 summary: Reports the information strings embedded in the loaded user program.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 297
 attributes:
   access: ro

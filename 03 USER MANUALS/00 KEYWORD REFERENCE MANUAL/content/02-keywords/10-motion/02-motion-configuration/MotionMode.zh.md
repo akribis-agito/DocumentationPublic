@@ -2,11 +2,8 @@
 keyword: MotionMode
 summary: 选择发出 Begin 时所执行的运动类型。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 141
 attributes:
   access: rw
@@ -20,17 +17,17 @@ attributes:
   units: none
   range:
   - -1
-  - 19
+  - 21
   default: -1
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
+  ci-master:
     range:
     - -1
     - 23
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-09-25'
+doc_revision: '2026.09'
 language: zh-CN
 ---
 # MotionMode

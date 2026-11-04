@@ -2,11 +2,8 @@
 keyword: EventEndPos
 summary: Bounding position at which by-gap event generation stops.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 183
 attributes:
   access: rw

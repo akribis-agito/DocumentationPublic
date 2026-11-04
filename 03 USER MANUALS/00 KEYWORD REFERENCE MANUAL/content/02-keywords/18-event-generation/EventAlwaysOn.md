@@ -2,11 +2,8 @@
 keyword: EventAlwaysOn
 summary: Runs by-gap event generation continuously, without stopping at EventEndPos.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 619
 attributes:
   access: rw

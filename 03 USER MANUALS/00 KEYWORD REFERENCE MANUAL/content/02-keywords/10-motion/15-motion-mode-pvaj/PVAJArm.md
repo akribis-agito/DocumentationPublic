@@ -2,9 +2,7 @@
 keyword: PVAJArm
 summary: Snapshots a validated PVAJ list and makes the axis eligible for Begin.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 882
 attributes:
   access: rw
@@ -15,13 +13,14 @@ attributes:
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
-  units: none
+  units: func
   range:
   - 0
   - 1
   default: 0
   scaling: 1.0
   implemented: final
+overrides: {}
 last_updated: '2026-09-25'
 doc_revision: '2026.09'
 ---

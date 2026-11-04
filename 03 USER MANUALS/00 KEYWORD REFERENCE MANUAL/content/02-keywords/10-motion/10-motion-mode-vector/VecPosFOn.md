@@ -2,11 +2,8 @@
 keyword: VecPosFOn
 summary: Enables (1) the position filter defined by VecPosFDef on the vector reference output.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 648
 attributes:
   access: rw

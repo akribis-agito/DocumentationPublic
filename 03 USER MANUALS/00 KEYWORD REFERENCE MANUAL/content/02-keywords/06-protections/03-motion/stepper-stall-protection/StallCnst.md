@@ -2,11 +2,8 @@
 keyword: StallCnst
 summary: Tuning constants for stepper stall detection (3-element array).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 515
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: MaxVBusTime
 summary: 母线电压在跳闸前可保持高于 MaxVBus 限值的时长。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 93
 attributes:
   access: rw
@@ -22,15 +19,27 @@ attributes:
   - 0
   - 50000
   default: 0
-  scaling: 65.536
+  scaling: 16.384
   implemented: final
 overrides:
-  central-i.v4:
+  ci-master:
     scope: axis
-  central-i.v5:
-    scope: axis
+  agd155-ec:
+    scaling: 16.0
+  agd155-ec-var34:
+    scaling: 16.0
+  agd155-ec-var34-3:
+    scaling: 16.0
+  agd156-ec:
+    scaling: 16.0
+  agd101-ec-34a:
+    scaling: 16.0
+  agd101-ec-17a:
+    scaling: 16.0
+  agm800-ec:
+    scaling: 16.0
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # MaxVBusTime

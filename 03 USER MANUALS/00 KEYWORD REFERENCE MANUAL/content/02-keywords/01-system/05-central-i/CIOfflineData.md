@@ -2,11 +2,8 @@
 keyword: CIOfflineData
 summary: Per-axis array holding the payload sent during a Central-i offline (simulation) transaction.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 501
 attributes:
   access: rw

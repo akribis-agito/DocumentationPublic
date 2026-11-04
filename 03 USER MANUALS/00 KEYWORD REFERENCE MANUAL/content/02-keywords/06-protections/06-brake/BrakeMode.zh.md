@@ -2,11 +2,8 @@
 keyword: BrakeMode
 summary: 选择静态（保持）制动器抱闸与松闸的方式。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 380
 attributes:
   access: rw

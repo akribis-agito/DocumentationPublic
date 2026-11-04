@@ -2,11 +2,8 @@
 keyword: SpringPosFFW
 summary: Sets the position feedforward gain that scales the position-dependent spring correction current added to the control output.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 595
 attributes:
   access: rw

@@ -2,9 +2,8 @@
 keyword: CurrStbleStat
 summary: Read-only status array exposing the live statistics and thresholds of the current-loop stability detector.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 792
 attributes:
   access: ro

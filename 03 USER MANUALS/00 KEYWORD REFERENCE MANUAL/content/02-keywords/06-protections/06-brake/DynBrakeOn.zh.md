@@ -2,11 +2,8 @@
 keyword: DynBrakeOn
 summary: 在电机失能时启用电气动态制动。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 405
 attributes:
   access: rw

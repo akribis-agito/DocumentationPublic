@@ -2,18 +2,15 @@
 keyword: ProgArgThis
 summary: Reads back the argument values received by the currently executing task.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 433
 attributes:
   access: rw
   scope: non-axis
   flash: false
   type: array
-  array_size: 21
+  array_size: 27
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
@@ -24,9 +21,7 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    array_size: 27
+overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 ---

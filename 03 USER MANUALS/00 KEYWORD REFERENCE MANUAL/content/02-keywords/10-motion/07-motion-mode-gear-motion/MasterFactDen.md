@@ -2,9 +2,8 @@
 summary: Denominator of the gear ratio applied to the master-variable delta.
 keyword: MasterFactDen
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 632
 attributes:
   access: rw

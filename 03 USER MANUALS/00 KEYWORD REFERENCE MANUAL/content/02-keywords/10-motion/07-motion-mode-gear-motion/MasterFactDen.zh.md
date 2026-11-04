@@ -2,9 +2,8 @@
 summary: 应用于主变量增量的齿轮比分母。
 keyword: MasterFactDen
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 632
 attributes:
   access: rw

@@ -2,9 +2,8 @@
 keyword: GantryMapGap
 summary: 龙门解耦映射表中相邻条目之间的源位置单位间距。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 751
 attributes:
   access: rw

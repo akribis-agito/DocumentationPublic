@@ -2,11 +2,8 @@
 keyword: EventOn
 summary: Arms event generation; loads the first compare position and is mutually exclusive with Lock.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 178
 attributes:
   access: rw

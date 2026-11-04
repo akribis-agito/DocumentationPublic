@@ -1,28 +1,32 @@
 ---
 keyword: VBusRatio
 summary: 只读：直流母线前馈当前施加的电压缩放比值。
-language: zh-CN
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 879
 attributes:
   access: ro
-  scope: axis
+  scope: non-axis
   flash: false
   type: scalar
   array_size: 1
-  data_type: float
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range: [0, 10]
+  range:
+  - 0.0
+  - 10.0
   default: 1.0
-  scaling: 1
+  scaling: 1.0
   implemented: final
 last_updated: '2026-07-30'
-doc_revision: '2026.07'
+doc_revision: '2026.09'
+overrides:
+  ci-master:
+    scope: axis
+language: zh-CN
 ---
 
 # VBusRatio

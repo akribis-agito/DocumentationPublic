@@ -2,11 +2,8 @@
 keyword: RemoteCANSend
 summary: 使用 RemoteCAN* 寄存器向远程节点发送 CAN 写操作的命令。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 443
 attributes:
   access: rw

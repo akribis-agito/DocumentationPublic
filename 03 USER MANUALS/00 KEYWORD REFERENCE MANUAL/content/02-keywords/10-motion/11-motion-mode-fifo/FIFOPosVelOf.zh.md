@@ -2,11 +2,8 @@
 keyword: FIFOPosVelOf
 summary: 叠加到每个 FIFO 位置段上的速度前馈偏置。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 663
 attributes:
   access: rw

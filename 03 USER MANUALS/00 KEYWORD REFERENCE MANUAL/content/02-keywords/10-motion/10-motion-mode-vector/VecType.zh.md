@@ -2,11 +2,8 @@
 keyword: VecType
 summary: 选择矢量运动几何形状（0 = 线性，1 = 圆弧）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 630
 attributes:
   access: rw

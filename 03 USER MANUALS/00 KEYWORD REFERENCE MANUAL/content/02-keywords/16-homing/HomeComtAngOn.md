@@ -2,11 +2,8 @@
 keyword: HomeComtAngOn
 summary: Enables capture of the commutation angle at the home position during homing.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 408
 attributes:
   access: rw

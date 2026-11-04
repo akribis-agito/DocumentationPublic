@@ -2,9 +2,7 @@
 keyword: VdFFW
 summary: 只读直轴电压前馈输出，叠加至 d 轴电压指令。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 851
 attributes:
   access: ro

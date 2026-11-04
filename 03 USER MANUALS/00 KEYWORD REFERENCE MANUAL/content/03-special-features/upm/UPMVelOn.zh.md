@@ -1,11 +1,9 @@
 ---
 keyword: UPMVelOn
+summary: 使能 UPM 齿槽补偿功能，将角度索引修正表（UPMVelTable）应用于电流参考以抵消齿槽转矩。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 407
 attributes:
   access: rw
@@ -27,7 +25,6 @@ overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 使能 UPM 齿槽补偿功能，将角度索引修正表（UPMVelTable）应用于电流参考以抵消齿槽转矩。
 ---
 # UPMVelOn
 

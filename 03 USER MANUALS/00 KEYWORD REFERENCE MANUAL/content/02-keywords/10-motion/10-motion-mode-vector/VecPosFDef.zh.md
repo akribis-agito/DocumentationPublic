@@ -2,11 +2,8 @@
 keyword: VecPosFDef
 summary: 定义应用于向量参考输出的位置滤波器系数的数组。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 647
 attributes:
   access: rw

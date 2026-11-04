@@ -2,11 +2,8 @@
 keyword: CIAutoConnect
 summary: When enabled, establishes the Central-i connection automatically at power-up.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 500
 attributes:
   access: rw

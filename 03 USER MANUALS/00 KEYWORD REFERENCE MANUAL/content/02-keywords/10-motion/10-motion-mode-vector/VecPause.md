@@ -2,11 +2,8 @@
 keyword: VecPause
 summary: Pauses (1) or resumes (0) vector motion by ramping the resultant speed to/from zero.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 640
 attributes:
   access: rw

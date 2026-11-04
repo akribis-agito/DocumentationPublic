@@ -2,9 +2,7 @@
 keyword: LockLost
 summary: 统计在 Central-i 主站上未能单独成为一次捕获的锁存采样。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 918
 attributes:
   access: ro
@@ -23,8 +21,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-10-21'
-doc_revision: '2026.09'
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # LockLost

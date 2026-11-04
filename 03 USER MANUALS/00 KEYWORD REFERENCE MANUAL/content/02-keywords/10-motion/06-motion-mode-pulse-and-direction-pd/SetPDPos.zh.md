@@ -2,11 +2,8 @@
 keyword: SetPDPos
 summary: 指令，用于在不移动轴的情况下预设或重新归零脉冲方向位置计数器。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 156
 attributes:
   access: rw

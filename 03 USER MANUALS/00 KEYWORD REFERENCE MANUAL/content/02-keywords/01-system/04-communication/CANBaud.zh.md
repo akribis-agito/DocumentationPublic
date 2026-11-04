@@ -2,11 +2,8 @@
 keyword: CANBaud
 summary: CAN 总线波特率，从固定表中选择。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 68
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: ProtectMask
 summary: Bitfield enabling which hardware protection conditions trigger a fault.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 97
 attributes:
   access: rw

@@ -2,9 +2,7 @@
 keyword: FricINeg
 summary: Coulomb (sliding) friction level for the negative direction, in mA.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 929
 attributes:
   access: rw

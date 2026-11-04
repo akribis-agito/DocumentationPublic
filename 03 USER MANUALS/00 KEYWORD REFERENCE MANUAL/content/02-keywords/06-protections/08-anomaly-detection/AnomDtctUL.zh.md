@@ -2,9 +2,8 @@
 keyword: AnomDtctUL
 summary: 上限表，按被监测运动定义滤波后信号所要比较的期望分段的上边界。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 776
 attributes:
   access: rw
@@ -22,7 +21,35 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    array_size: 257
+  agc300-et:
+    array_size: 257
+  agd200-et-2d01:
+    array_size: 257
+  agd200-et-2d02:
+    array_size: 257
+  agd200-et-2d05:
+    array_size: 257
+  agd200-et-2d05-71:
+    array_size: 257
+  agd155-af-2a06:
+    array_size: 257
+  agd155-af-2a10:
+    array_size: 257
+  agd155-ec:
+    array_size: 257
+  agd155-ec-var34:
+    array_size: 257
+  agd155-ec-var34-3:
+    array_size: 257
+  agd156-ec:
+    array_size: 257
+  agd101-ec-34a:
+    array_size: 257
+  agd101-ec-17a:
+    array_size: 257
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

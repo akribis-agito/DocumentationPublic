@@ -2,9 +2,8 @@
 keyword: PosAuxUnitGrp
 summary: 共享辅助位置用户单位缩放和标签的辅助编码器位置关键字只读列表。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 814
 attributes:
   access: ro

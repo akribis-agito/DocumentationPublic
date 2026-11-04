@@ -2,11 +2,8 @@
 keyword: ControlMode
 summary: 以位打包方式选择电流/电压控制选项（SVM 限值、矢量 vs 相控制、环路旁路、I2T 动作）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 109
 attributes:
   access: rw

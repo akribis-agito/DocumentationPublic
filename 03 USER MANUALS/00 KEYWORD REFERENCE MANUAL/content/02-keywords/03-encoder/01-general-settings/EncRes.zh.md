@@ -2,11 +2,8 @@
 keyword: EncRes
 summary: 编码器分辨率；每磁距（直线电机）或每转（旋转电机）的计数。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 56
 attributes:
   access: rw

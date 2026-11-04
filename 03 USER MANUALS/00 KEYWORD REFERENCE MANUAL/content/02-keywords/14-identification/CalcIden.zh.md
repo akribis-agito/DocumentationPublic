@@ -2,12 +2,8 @@
 keyword: CalcIden
 summary: 用于计算正弦扫频辨识中输入/输出正弦关系的指令。
 availability:
-  standalone:
-  - v4
-  - v5
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 128
 attributes:
   access: ro
@@ -27,7 +23,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-21'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # CalcIden

@@ -2,9 +2,8 @@
 keyword: FFFiltOn
 summary: 启用或旁路前馈滤波器。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 728
 attributes:
   access: rw
@@ -23,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-18'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # FFFiltOn

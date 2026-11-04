@@ -2,12 +2,9 @@
 keyword: RptCycles
 summary: 重复点到点运动的重复次数；0 表示无限期重复。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
-can_code: 713
+- controller
+- ci-master
+can_code: 731
 attributes:
   access: rw
   scope: axis
@@ -24,9 +21,7 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    can_code: 731
+overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

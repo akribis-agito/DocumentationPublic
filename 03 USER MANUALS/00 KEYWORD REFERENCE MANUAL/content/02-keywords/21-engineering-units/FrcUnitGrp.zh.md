@@ -2,9 +2,8 @@
 keyword: FrcUnitGrp
 summary: 属于力单位组的关键字的只读列表。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 811
 attributes:
   access: ro

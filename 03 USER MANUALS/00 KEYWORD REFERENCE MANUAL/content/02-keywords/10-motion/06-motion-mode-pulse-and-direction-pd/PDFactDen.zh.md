@@ -2,11 +2,8 @@
 keyword: PDFactDen
 summary: 在累积至 PDPos 之前，应用于检测到的脉冲的缩放系数的分母。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 119
 attributes:
   access: rw

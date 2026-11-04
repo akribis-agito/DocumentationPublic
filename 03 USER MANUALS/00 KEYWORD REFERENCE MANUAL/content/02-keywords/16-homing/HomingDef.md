@@ -2,11 +2,8 @@
 keyword: HomingDef
 summary: Array defining up to 20 homing steps, each an instruction plus its parameters.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 341
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: ProgEventOn
 summary: Activates or disables handling of user program events.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 527
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: ProgEventEn
 summary: 启用或禁用单个用户程序事件的处理服务。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 524
 attributes:
   access: rw

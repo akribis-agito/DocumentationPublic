@@ -2,12 +2,9 @@
 keyword: EncAbsWRType
 summary: 为下一次绝对式编码器寄存器事务选择读或写访问。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
-can_code: 715
+- controller
+- ci-master
+can_code: 898
 attributes:
   access: rw
   scope: axis
@@ -24,11 +21,9 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    can_code: 898
-last_updated: '2026-05-28'
-doc_revision: '2026.06'
+overrides: {}
+last_updated: '2026-09-25'
+doc_revision: '2026.09'
 language: zh-CN
 ---
 # EncAbsWRType

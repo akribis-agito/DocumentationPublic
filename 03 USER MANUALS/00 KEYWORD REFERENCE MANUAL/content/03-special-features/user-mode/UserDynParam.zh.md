@@ -1,11 +1,9 @@
 ---
 keyword: UserDynParam
+summary: 供特殊用户自定义处理模式使用的通用数据数组。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 371
 attributes:
   access: rw
@@ -27,7 +25,6 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 供特殊用户自定义处理模式使用的通用数据数组。
 ---
 # UserDynParam
 

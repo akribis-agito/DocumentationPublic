@@ -2,11 +2,8 @@
 keyword: StopOnHome
 summary: 当原点数字量输入状态变化时，自动停止轴运动。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 169
 attributes:
   access: rw

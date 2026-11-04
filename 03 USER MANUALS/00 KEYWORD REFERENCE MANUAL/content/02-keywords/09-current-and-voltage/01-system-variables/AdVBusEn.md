@@ -2,13 +2,12 @@
 keyword: AdVBusEn
 summary: Enables DC-bus feedforward, which holds delivered voltage as the bus sags. Enabled by default.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 878
 attributes:
   access: rw
-  scope: axis
+  scope: non-axis
   flash: true
   type: scalar
   array_size: 1
@@ -20,8 +19,11 @@ attributes:
   - 0
   - 1
   default: 1
-  scaling: 1
+  scaling: 1.0
   implemented: final
+overrides:
+  ci-master:
+    scope: axis
 last_updated: '2026-07-30'
 doc_revision: '2026.09'
 ---

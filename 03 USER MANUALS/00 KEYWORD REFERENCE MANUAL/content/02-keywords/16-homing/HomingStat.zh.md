@@ -1,13 +1,9 @@
 ---
 keyword: HomingStat
 summary: 只读回零过程状态，包含步骤编号及错误码。
-language: zh-CN
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 342
 attributes:
   access: ro
@@ -28,6 +24,7 @@ attributes:
 overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
+language: zh-CN
 ---
 # HomingStat
 

@@ -2,9 +2,8 @@
 keyword: Print
 summary: 用户程序语句，向上位机输出文本字符串。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 827
 attributes:
   access: rw

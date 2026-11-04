@@ -2,11 +2,8 @@
 keyword: MaxMotorTemp
 summary: 允许的最大电机温度（PT100 传感器）；超出即触发故障。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 399
 attributes:
   access: rw

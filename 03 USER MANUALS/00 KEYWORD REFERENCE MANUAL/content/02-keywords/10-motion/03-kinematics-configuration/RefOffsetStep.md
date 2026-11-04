@@ -2,11 +2,8 @@
 keyword: RefOffsetStep
 summary: Per-sample position offset magnitude applied during a reference offset correction.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 166
 attributes:
   access: rw
@@ -19,8 +16,8 @@ attributes:
   ok_motor_on: true
   units: user
   range:
-  - -655360
-  - 655360
+  - -163840
+  - 163840
   default: 0
   scaling: 1.0
   implemented: final

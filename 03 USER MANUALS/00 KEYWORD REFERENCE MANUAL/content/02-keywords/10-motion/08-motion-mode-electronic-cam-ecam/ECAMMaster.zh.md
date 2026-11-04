@@ -2,11 +2,8 @@
 keyword: ECAMMaster
 summary: 复杂 CAN 编码，用于为每个 ECAM 凸轮曲线选择主变量来源。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 309
 attributes:
   access: rw

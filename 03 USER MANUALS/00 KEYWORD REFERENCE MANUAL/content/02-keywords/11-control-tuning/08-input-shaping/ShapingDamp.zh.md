@@ -1,11 +1,9 @@
 ---
 keyword: ShapingDamp
+summary: 输入整形器所抑制各谐振的阻尼比。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 153
 attributes:
   access: rw
@@ -27,7 +25,6 @@ overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 输入整形器所抑制各谐振的阻尼比。
 ---
 # ShapingDamp
 

@@ -2,11 +2,8 @@
 keyword: LimitsStat
 summary: 只读位域，报告反向/正向限位开关的激活状态。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 49
 attributes:
   access: ro

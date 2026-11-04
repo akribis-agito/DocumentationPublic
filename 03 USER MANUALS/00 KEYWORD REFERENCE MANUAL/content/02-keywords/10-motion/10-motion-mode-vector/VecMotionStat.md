@@ -2,11 +2,8 @@
 keyword: VecMotionStat
 summary: Read-only enumerated value reporting the current vector-motion state (0 not in motion, 1 in motion, 2 paused, 3 stopping).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 641
 attributes:
   access: ro

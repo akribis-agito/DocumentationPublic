@@ -2,11 +2,8 @@
 keyword: MotionSamples
 summary: Move and settle times of the last completed motion, in controller cycles.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 267
 attributes:
   access: ro

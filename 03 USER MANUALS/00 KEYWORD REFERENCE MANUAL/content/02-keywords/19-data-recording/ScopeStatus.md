@@ -2,9 +2,8 @@
 keyword: ScopeStatus
 summary: Reports the current state of the Central-i scope.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 745
 attributes:
   access: ro

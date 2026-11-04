@@ -1,13 +1,9 @@
 ---
 keyword: EventTableSel
 summary: 按条目选择数组，用于指定每个事件表条目的脉冲驱动哪条输出线。
-language: zh-CN
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 318
 attributes:
   access: rw
@@ -25,9 +21,12 @@ attributes:
   default: 1
   scaling: 1.0
   implemented: final
-overrides: {}
-last_updated: '2026-05-28'
-doc_revision: '2026.06'
+overrides:
+  ci-master:
+    array_size: 65001
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
+language: zh-CN
 ---
 # EventTableSel
 

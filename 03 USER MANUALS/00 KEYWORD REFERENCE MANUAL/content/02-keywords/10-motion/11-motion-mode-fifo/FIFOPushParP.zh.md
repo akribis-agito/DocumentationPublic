@@ -1,13 +1,9 @@
 ---
 keyword: FIFOPushParP
 summary: 将由位置值定义的抛物线段压入 FIFO 运动队列。
-language: zh-CN
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 287
 attributes:
   access: rw
@@ -27,7 +23,8 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
+language: zh-CN
 ---
 # FIFOPushParP
 

@@ -2,9 +2,8 @@
 summary: 选择 HallsAngle 表条目的解释方式（0 = 霍尔状态中点角度，1 = 霍尔状态切换角度）。
 keyword: HallsAngleSw
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 679
 attributes:
   access: rw

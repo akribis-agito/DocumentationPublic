@@ -2,11 +2,8 @@
 keyword: EventNextPos
 summary: Read-only position at which the next event pulse will be generated.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 319
 attributes:
   access: ro

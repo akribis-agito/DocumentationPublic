@@ -2,9 +2,8 @@
 keyword: VelPDUnitGrp
 summary: 只读列表，列出共享 P/D 速度用户单位缩放和标签的脉冲方向速度关键字。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 823
 attributes:
   access: ro
@@ -24,7 +23,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # VelPDUnitGrp

@@ -2,11 +2,8 @@
 keyword: CalcFilters
 summary: 重新计算可定制控制环滤波器内部系数的指令，系数由各定义关键字确定。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 360
 attributes:
   access: ro
@@ -15,8 +12,8 @@ attributes:
   type: scalar
   array_size: 1
   data_type: int32
-  ok_in_motion: false
-  ok_motor_on: false
+  ok_in_motion: true
+  ok_motor_on: true
   units: func
   range:
   - 0
@@ -24,10 +21,7 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    ok_in_motion: true
-    ok_motor_on: true
+overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN

@@ -2,11 +2,8 @@
 keyword: FIFOPosPush
 summary: Command that pushes a new position segment into the FIFO position queue.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 666
 attributes:
   access: rw

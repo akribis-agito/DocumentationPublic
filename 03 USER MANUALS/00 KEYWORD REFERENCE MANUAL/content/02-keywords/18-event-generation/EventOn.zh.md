@@ -2,11 +2,8 @@
 keyword: EventOn
 summary: 使能事件生成；加载第一个比较位置，与 Lock 互斥。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 178
 attributes:
   access: rw
@@ -25,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-10-27'
-doc_revision: '2026.06'
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # EventOn

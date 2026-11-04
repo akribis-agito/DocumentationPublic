@@ -2,11 +2,8 @@
 keyword: RemoteCANCCC
 summary: 由 RemoteCANSend 发起的远程写操作所使用的 CAN 命令码（参数标识符）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 441
 attributes:
   access: rw

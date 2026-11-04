@@ -1,13 +1,9 @@
 ---
 keyword: HomeComtAngRd
 summary: 只读数组，保存在原点位置捕获的换相角。
-language: zh-CN
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 410
 attributes:
   access: ro
@@ -28,6 +24,7 @@ attributes:
 overrides: {}
 last_updated: '2026-05-28'
 doc_revision: '2026.06'
+language: zh-CN
 ---
 # HomeComtAngRd
 

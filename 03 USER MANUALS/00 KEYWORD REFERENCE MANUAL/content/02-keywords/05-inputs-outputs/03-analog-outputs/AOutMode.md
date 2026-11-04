@@ -2,11 +2,8 @@
 keyword: AOutMode
 summary: Selects direct command mode or parameter-monitoring mode for each analog output.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 220
 attributes:
   access: rw
@@ -25,10 +22,18 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v4:
+  ci-master:
     scope: axis
-  central-i.v5:
-    scope: axis
+  agd155-af-2a06:
+    array_size: 3
+  agd155-af-2a10:
+    array_size: 3
+  agd155-ec:
+    array_size: 3
+  agd155-ec-var34:
+    array_size: 3
+  agd155-ec-var34-3:
+    array_size: 3
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 ---

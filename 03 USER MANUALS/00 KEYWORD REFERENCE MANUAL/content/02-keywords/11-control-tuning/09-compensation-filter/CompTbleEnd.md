@@ -2,9 +2,8 @@
 keyword: CompTbleEnd
 summary: Highest compensation-table index that is in use, bounding the table domain.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 839
 attributes:
   access: rw

@@ -2,14 +2,11 @@
 keyword: ModShort
 summary: 在取模模式下为绝对 PTP 运动选择运动路径（正常、仅正向、仅负向或最短）；仅在 central-i v5 上实现。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 149
 attributes:
-  access: '0'
+  access: rw
   scope: axis
   flash: true
   type: scalar
@@ -17,21 +14,14 @@ attributes:
   data_type: int32
   ok_in_motion: false
   ok_motor_on: false
-  units: '0'
+  units: none
   range:
-  - -2147483648
-  - 2147483647
+  - 0
+  - 3
   default: 0
   scaling: 1.0
-  implemented: not_implemented
-overrides:
-  central-i.v5:
-    access: rw
-    units: none
-    range:
-    - 0
-    - 3
-    implemented: final
+  implemented: final
+overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

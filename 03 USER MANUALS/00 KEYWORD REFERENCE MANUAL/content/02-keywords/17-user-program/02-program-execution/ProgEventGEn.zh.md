@@ -2,11 +2,8 @@
 keyword: ProgEventGEn
 summary: 所有用户程序事件处理服务的全局启用。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 526
 attributes:
   access: rw

@@ -1,21 +1,19 @@
 ---
 keyword: PosFiltOn
+summary: 启用或旁路两个位置环滤波器。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 124
 attributes:
   access: rw
   scope: axis
   flash: true
   type: array
-  array_size: 2
+  array_size: 3
   data_type: int32
-  ok_in_motion: false
-  ok_motor_on: false
+  ok_in_motion: true
+  ok_motor_on: true
   units: none
   range:
   - 0
@@ -23,15 +21,10 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    array_size: 3
-    ok_in_motion: true
-    ok_motor_on: true
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+overrides: {}
+last_updated: '2026-10-12'
+doc_revision: '2026.11'
 language: zh-CN
-summary: 启用或旁路两个位置环滤波器。
 ---
 # PosFiltOn
 

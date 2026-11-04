@@ -2,12 +2,9 @@
 keyword: EventLoopback
 summary: Read-only state of the event output as seen by the controller's input circuitry (hardware loopback).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
-can_code: 565
+- controller
+- ci-master
+can_code: 372
 attributes:
   access: ro
   scope: axis
@@ -24,9 +21,7 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    can_code: 372
+overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 ---

@@ -2,11 +2,8 @@
 keyword: InjectFreq
 summary: Frequency of the injected sine or square wave, in Hz/100.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 117
 attributes:
   access: rw

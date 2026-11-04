@@ -2,9 +2,7 @@
 keyword: PushEvSelSys
 summary: Bitmask of the controller-wide push-event types to send.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 912
 attributes:
   access: rw

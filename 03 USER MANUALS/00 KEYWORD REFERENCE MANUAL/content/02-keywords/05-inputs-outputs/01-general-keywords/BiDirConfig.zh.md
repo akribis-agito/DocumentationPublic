@@ -2,11 +2,8 @@
 keyword: BiDirConfig
 summary: 将每个双向 I/O 引脚配置为输入或输出的位域。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 495
 attributes:
   access: rw
@@ -19,19 +16,69 @@ attributes:
   ok_motor_on: true
   units: none
   range:
-  - 4294967295
-  - 2147483647
+  - 0
+  - 255
   default: 0
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v4:
-    scope: axis
-  central-i.v5:
+  ci-master:
     scope: axis
     range:
     - -2147483648
     - 2147483647
+  agc300-et:
+    range:
+    - 0
+    - 0
+  agd200-et-2d01:
+    range:
+    - 0
+    - 0
+  agd200-et-2d02:
+    range:
+    - 0
+    - 0
+  agd200-et-2d05:
+    range:
+    - 0
+    - 0
+  agd200-et-2d05-71:
+    range:
+    - 0
+    - 0
+  agd155-af-2a06:
+    range:
+    - 0
+    - 1
+  agd155-af-2a10:
+    range:
+    - 0
+    - 1
+  agd155-ec:
+    range:
+    - 0
+    - 1
+  agd155-ec-var34:
+    range:
+    - 0
+    - 1
+  agd155-ec-var34-3:
+    range:
+    - 0
+    - 1
+  agd156-ec:
+    range:
+    - 0
+    - 15
+  agd101-ec-34a:
+    range:
+    - 0
+    - 15
+  agd101-ec-17a:
+    range:
+    - 0
+    - 15
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

@@ -2,11 +2,8 @@
 keyword: Stop
 summary: Controlled stop; decelerates the axis to rest using the normal Decel rate.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 132
 attributes:
   access: ro

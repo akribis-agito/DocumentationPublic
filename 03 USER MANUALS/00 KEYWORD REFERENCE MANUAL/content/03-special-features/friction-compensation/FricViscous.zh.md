@@ -2,9 +2,7 @@
 keyword: FricViscous
 summary: 粘性摩擦斜率：每 count/s 速度反馈对应的附加电流。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 932
 attributes:
   access: rw
@@ -23,6 +21,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # FricViscous

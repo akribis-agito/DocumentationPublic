@@ -2,9 +2,8 @@
 summary: 叠加在电机电流参考之上的电流参考偏置（mA）。
 keyword: CurrRefOffset
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 599
 attributes:
   access: rw
@@ -17,12 +16,80 @@ attributes:
   ok_motor_on: true
   units: none
   range:
-  - -6400
-  - 6400
+  - -1600
+  - 1600
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    range:
+    - -6400
+    - 6400
+  agc300-et:
+    range:
+    - -400
+    - 400
+  agc301-et:
+    range:
+    - -400
+    - 400
+  agc301-et-bioxtreme:
+    range:
+    - -400
+    - 400
+  agd200-et-2d01:
+    range:
+    - -400
+    - 400
+  agd200-et-2d02:
+    range:
+    - -800
+    - 800
+  agd301-et-2d01:
+    range:
+    - -400
+    - 400
+  agd301-et-2d02:
+    range:
+    - -800
+    - 800
+  agd301-et-2d09:
+    range:
+    - -2550
+    - 2550
+  agd155-af-2a06:
+    range:
+    - -2550
+    - 2550
+  agd155-af-2a10:
+    range:
+    - -2850
+    - 2850
+  agd155-ec:
+    range:
+    - -2550
+    - 2550
+  agd155-ec-var34:
+    range:
+    - -2850
+    - 2850
+  agd155-ec-var34-3:
+    range:
+    - -4250
+    - 4250
+  agd156-ec:
+    range:
+    - -1273
+    - 1272
+  agd101-ec-34a:
+    range:
+    - -2828
+    - 2828
+  agd101-ec-17a:
+    range:
+    - -1414
+    - 1414
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

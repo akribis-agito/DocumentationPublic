@@ -2,11 +2,8 @@
 keyword: ForceInTTol
 summary: 用于到位状态判定的目标力周围的稳定窗口。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 734
 attributes:
   access: rw
@@ -25,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-09-29'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # ForceInTTol

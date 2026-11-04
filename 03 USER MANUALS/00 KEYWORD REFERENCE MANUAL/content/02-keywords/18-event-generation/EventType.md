@@ -2,11 +2,8 @@
 keyword: EventType
 summary: Selects the compare scheme for event generation (single, by-gap, or by-table).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 180
 attributes:
   access: rw

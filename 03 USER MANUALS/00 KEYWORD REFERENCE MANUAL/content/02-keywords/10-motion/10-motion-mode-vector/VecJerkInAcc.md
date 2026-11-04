@@ -2,9 +2,8 @@
 keyword: VecJerkInAcc
 summary: Jerk limit (user units) for the acceleration phase of a jerk-limited vector move.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 756
 attributes:
   access: rw

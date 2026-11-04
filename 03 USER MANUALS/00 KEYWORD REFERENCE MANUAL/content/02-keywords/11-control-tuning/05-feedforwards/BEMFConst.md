@@ -2,9 +2,7 @@
 keyword: BEMFConst
 summary: Motor back-EMF constant used to compute the speed-proportional voltage feedforward.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 847
 attributes:
   access: rw

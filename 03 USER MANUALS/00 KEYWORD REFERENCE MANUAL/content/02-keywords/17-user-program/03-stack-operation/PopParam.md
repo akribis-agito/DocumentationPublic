@@ -2,11 +2,8 @@
 keyword: PopParam
 summary: Pops the top value of the numeric stack into a parameter.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 202
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: OneOverTOn
 summary: Enables or disables the 1/T velocity measurement reported as Vel[4].
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 187
 attributes:
   access: rw

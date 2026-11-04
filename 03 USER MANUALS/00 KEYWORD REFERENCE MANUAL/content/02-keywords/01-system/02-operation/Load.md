@@ -2,11 +2,8 @@
 keyword: Load
 summary: Reloads all parameters from flash into volatile memory, discarding unsaved changes.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 233
 attributes:
   access: ro

@@ -2,11 +2,8 @@
 keyword: StallStat
 summary: 只读步进失步（堵转）状态标志（0 = 无堵转，1 = 已堵转）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 514
 attributes:
   access: ro

@@ -2,11 +2,8 @@
 keyword: InjectCurrDC
 summary: 直接模式下叠加到电流指令注入的直流偏置，单位为 mA。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 126
 attributes:
   access: rw
@@ -14,19 +11,85 @@ attributes:
   flash: false
   type: scalar
   array_size: 1
-  data_type: int32
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
   range:
-  - -32000
-  - 32000
+  - -8000.0
+  - 8000.0
   default: 0
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
-    data_type: float32
+  ci-master:
+    range:
+    - -32000.0
+    - 32000.0
+  agc300-et:
+    range:
+    - -2000.0
+    - 2000.0
+  agc301-et:
+    range:
+    - -2000.0
+    - 2000.0
+  agc301-et-bioxtreme:
+    range:
+    - -2000.0
+    - 2000.0
+  agd200-et-2d01:
+    range:
+    - -2000.0
+    - 2000.0
+  agd200-et-2d02:
+    range:
+    - -4000.0
+    - 4000.0
+  agd301-et-2d01:
+    range:
+    - -2000.0
+    - 2000.0
+  agd301-et-2d02:
+    range:
+    - -4000.0
+    - 4000.0
+  agd301-et-2d09:
+    range:
+    - -12750.0
+    - 12750.0
+  agd155-af-2a06:
+    range:
+    - -12750.0
+    - 12750.0
+  agd155-af-2a10:
+    range:
+    - -14250.0
+    - 14250.0
+  agd155-ec:
+    range:
+    - -12750.0
+    - 12750.0
+  agd155-ec-var34:
+    range:
+    - -14250.0
+    - 14250.0
+  agd155-ec-var34-3:
+    range:
+    - -21250.0
+    - 21250.0
+  agd156-ec:
+    range:
+    - -6363.0
+    - 6363.0
+  agd101-ec-34a:
+    range:
+    - -14140.0
+    - 14140.0
+  agd101-ec-17a:
+    range:
+    - -7070.0
+    - 7070.0
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

@@ -2,11 +2,8 @@
 keyword: CIGlobalStat
 summary: Read-only register encoding the connection state of all Central-i ports.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 510
 attributes:
   access: ro

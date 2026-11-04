@@ -1,11 +1,9 @@
 ---
 keyword: DTCompGain
 summary: 死区补偿增益；设为 0 则禁用该功能。
-language: zh-CN
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 869
 attributes:
   access: rw
@@ -13,16 +11,20 @@ attributes:
   flash: true
   type: scalar
   array_size: 1
-  data_type: float
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range: [0, 10]
-  default: 0
-  scaling: 1
+  range:
+  - 0.0
+  - 10.0
+  default: 0.0
+  scaling: 1.0
   implemented: final
 last_updated: '2026-07-30'
-doc_revision: '2026.07'
+doc_revision: '2026.09'
+overrides: {}
+language: zh-CN
 ---
 
 # DTCompGain

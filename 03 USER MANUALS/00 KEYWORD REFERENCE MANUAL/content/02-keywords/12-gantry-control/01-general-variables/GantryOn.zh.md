@@ -2,11 +2,8 @@
 keyword: GantryOn
 summary: 在 A 轴上启用龙门多输入多输出（MIMO）控制，将 A 轴和 B 轴联动为从属关系。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 650
 attributes:
   access: rw
@@ -26,7 +23,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # GantryOn

@@ -2,11 +2,8 @@
 keyword: EventPulseRes
 summary: 选择解释事件脉冲宽度所用的时间单位：微秒或纳秒。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 517
 attributes:
   access: rw

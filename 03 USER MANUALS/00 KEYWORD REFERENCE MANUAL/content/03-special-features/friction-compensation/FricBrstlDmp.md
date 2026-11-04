@@ -2,9 +2,7 @@
 keyword: FricBrstlDmp
 summary: LuGre bristle damping (σ1), used by FricMethod 5 (renamed from FricSigma1).
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 936
 attributes:
   access: rw

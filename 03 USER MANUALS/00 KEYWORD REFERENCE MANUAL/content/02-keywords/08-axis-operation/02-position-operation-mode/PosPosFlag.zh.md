@@ -2,11 +2,8 @@
 keyword: PosPosFlag
 summary: 进入位置模式所用位置反馈检查的触发方向。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 328
 attributes:
   access: rw

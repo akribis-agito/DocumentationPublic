@@ -2,11 +2,8 @@
 keyword: Abort
 summary: 通过清除运动状态立即结束运动；无规划器减速斜坡。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 133
 attributes:
   access: ro

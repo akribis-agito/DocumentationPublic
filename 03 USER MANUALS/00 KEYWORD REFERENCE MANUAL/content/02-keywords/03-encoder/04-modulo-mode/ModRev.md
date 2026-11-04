@@ -2,11 +2,8 @@
 keyword: ModRev
 summary: Modulo divisor; wraps the feedback (and references) to the range [0, ModRev-1] when non-zero.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 70
 attributes:
   access: rw

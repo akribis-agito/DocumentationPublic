@@ -2,11 +2,8 @@
 keyword: AmpType
 summary: Selects how the axis drives its motor — built-in amplifier or an external amplifier via analog/digital command.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 226
 attributes:
   access: rw
@@ -20,15 +17,43 @@ attributes:
   units: none
   range:
   - 0
-  - 7
+  - 8
   default: 0
   scaling: 1.0
   implemented: partial
 overrides:
-  central-i.v5:
+  agd155-af-2a06:
     range:
     - 0
-    - 8
+    - 0
+  agd155-af-2a10:
+    range:
+    - 0
+    - 0
+  agd155-ec:
+    range:
+    - 0
+    - 0
+  agd155-ec-var34:
+    range:
+    - 0
+    - 0
+  agd155-ec-var34-3:
+    range:
+    - 0
+    - 0
+  agd156-ec:
+    range:
+    - 0
+    - 0
+  agd101-ec-34a:
+    range:
+    - 0
+    - 0
+  agd101-ec-17a:
+    range:
+    - 0
+    - 0
 last_updated: '2026-09-25'
 doc_revision: '2026.09'
 ---

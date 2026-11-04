@@ -2,22 +2,19 @@
 keyword: PDEncFilt
 summary: 保留的脉冲方向关键字；在当前固件中未实现。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 62
 attributes:
-  access: '0'
+  access: rw
   scope: axis
   flash: true
   type: scalar
   array_size: 1
   data_type: int32
   ok_in_motion: false
-  ok_motor_on: false
-  units: '0'
+  ok_motor_on: true
+  units: none
   range:
   - -2147483648
   - 2147483647

@@ -2,11 +2,8 @@
 keyword: Time
 summary: Read-only seconds elapsed since power-on.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 41
 attributes:
   access: ro

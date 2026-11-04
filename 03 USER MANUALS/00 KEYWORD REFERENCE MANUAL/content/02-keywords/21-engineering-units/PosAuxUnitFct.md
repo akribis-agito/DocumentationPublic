@@ -2,9 +2,8 @@
 keyword: PosAuxUnitFct
 summary: Scale factor applied to auxiliary-encoder position values when Global User Units is enabled.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 815
 attributes:
   access: rw

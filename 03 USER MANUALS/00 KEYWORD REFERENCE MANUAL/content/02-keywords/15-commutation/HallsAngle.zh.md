@@ -2,11 +2,8 @@
 keyword: HallsAngle
 summary: 将每个霍尔传感器状态映射到换相所用电角度的数组。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 384
 attributes:
   access: rw

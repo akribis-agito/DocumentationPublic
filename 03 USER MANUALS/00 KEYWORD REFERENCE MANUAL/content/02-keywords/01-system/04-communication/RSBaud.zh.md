@@ -2,11 +2,8 @@
 keyword: RSBaud
 summary: 每个端口的串口（RS232/USB）波特率，从固定表中选择。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 79
 attributes:
   access: rw
@@ -20,15 +17,11 @@ attributes:
   units: none
   range:
   - 1
-  - 5
+  - 4
   default: 4
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    range:
-    - 1
-    - 4
+overrides: {}
 last_updated: '2026-05-28'
 doc_revision: '2026.06'
 language: zh-CN

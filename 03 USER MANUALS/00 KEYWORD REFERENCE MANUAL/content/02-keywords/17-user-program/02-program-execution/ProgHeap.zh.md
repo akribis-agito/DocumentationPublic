@@ -2,11 +2,8 @@
 keyword: ProgHeap
 summary: 控制器级易失性读写 int32 数组，为用户程序与通信提供共享存储。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 1021
 attributes:
   access: rw

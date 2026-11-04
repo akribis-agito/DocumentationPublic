@@ -2,9 +2,8 @@
 keyword: PushConstantF
 summary: 将 32 位浮点（float）常量压入当前线程的数值栈。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 720
 attributes:
   access: rw

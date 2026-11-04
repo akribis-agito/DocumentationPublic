@@ -2,9 +2,8 @@
 keyword: VelAuxUnitGrp
 summary: 共享辅助速度用户单位缩放和标签的辅助编码器速度关键字只读列表。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 820
 attributes:
   access: ro
@@ -24,7 +23,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # VelAuxUnitGrp

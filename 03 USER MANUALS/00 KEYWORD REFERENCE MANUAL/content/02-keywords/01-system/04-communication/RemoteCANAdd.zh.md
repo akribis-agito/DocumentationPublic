@@ -2,11 +2,8 @@
 keyword: RemoteCANAdd
 summary: RemoteCANSend 发起的远程写入所针对的目标 CAN 节点地址。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 440
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: CIOfflineDef
 summary: 定义哪些参数纳入 Central-i 离线数据集的轴级数组。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 507
 attributes:
   access: rw

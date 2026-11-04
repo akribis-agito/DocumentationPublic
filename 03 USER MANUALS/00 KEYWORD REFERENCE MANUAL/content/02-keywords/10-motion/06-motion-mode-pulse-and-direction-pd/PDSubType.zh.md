@@ -2,11 +2,8 @@
 keyword: PDSubType
 summary: 选择脉冲方向输入信号格式（例如步进/方向与正转/反转脉冲）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 421
 attributes:
   access: rw
@@ -20,7 +17,7 @@ attributes:
   units: none
   range:
   - 0
-  - 1
+  - 3
   default: 0
   scaling: 1.0
   implemented: final

@@ -2,11 +2,8 @@
 keyword: RemoteCANSend
 summary: Command that transmits a CAN write to a remote node using the RemoteCAN* registers.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 443
 attributes:
   access: rw

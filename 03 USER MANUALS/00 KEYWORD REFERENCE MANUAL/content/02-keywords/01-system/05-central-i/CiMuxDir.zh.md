@@ -2,11 +2,8 @@
 keyword: CiMuxDir
 summary: 设置 Central-i 多路复用器的方向（共享总线路由到哪个端口）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 551
 attributes:
   access: rw

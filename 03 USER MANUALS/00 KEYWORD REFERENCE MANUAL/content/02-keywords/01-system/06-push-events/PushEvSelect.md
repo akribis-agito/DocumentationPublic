@@ -2,9 +2,7 @@
 keyword: PushEvSelect
 summary: Per-axis bitmask of the push-event types to send.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 908
 attributes:
   access: rw

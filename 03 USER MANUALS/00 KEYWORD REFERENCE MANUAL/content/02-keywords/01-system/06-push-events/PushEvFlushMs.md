@@ -2,9 +2,7 @@
 keyword: PushEvFlushMs
 summary: Longest time a queued push event waits before it is sent, in milliseconds.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 913
 attributes:
   access: rw

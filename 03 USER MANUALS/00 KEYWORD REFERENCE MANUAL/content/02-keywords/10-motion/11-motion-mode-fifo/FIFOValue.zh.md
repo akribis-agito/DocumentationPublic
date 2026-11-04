@@ -2,11 +2,8 @@
 keyword: FIFOValue
 summary: 只读数组，报告与每条 FIFO 运动条目配对的数据值。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 280
 attributes:
   access: ro

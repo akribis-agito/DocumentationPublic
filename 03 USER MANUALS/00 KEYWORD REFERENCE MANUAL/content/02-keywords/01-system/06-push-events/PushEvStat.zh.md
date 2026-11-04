@@ -2,9 +2,7 @@
 keyword: PushEvStat
 summary: 推送事件队列中的空闲行数。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 911
 attributes:
   access: ro
@@ -24,7 +22,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-09-25'
-doc_revision: '2026.09'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # PushEvStat

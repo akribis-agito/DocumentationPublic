@@ -2,11 +2,8 @@
 keyword: VecArcDir
 summary: Arc sweep direction for vector arc motion (0 = CCW, 1 = CW).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 634
 attributes:
   access: rw

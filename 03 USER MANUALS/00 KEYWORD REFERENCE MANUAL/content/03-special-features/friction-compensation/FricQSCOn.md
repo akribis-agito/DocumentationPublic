@@ -2,9 +2,7 @@
 keyword: FricQSCOn
 summary: Enables quadrant-switching compensation (a breakaway kick at reversals and starts).
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 938
 attributes:
   access: rw

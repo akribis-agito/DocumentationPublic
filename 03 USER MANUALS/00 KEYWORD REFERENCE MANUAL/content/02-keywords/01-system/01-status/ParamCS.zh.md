@@ -2,11 +2,8 @@
 keyword: ParamCS
 summary: 只读校验和，覆盖控制器的参数集，用于验证配置。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 428
 attributes:
   access: ro

@@ -2,9 +2,7 @@
 keyword: PVAJValidate
 summary: 在允许使能之前校验 PVAJ 列表。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 881
 attributes:
   access: rw
@@ -15,15 +13,16 @@ attributes:
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
-  units: none
+  units: func
   range:
   - 1
   - 3
   default: 0
   scaling: 1.0
   implemented: final
-last_updated: '2026-08-04'
-doc_revision: '2026.08'
+last_updated: '2026-09-25'
+doc_revision: '2026.09'
+overrides: {}
 language: zh-CN
 ---
 # PVAJValidate

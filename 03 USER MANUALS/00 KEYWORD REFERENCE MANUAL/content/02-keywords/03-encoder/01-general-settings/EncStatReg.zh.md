@@ -2,11 +2,8 @@
 keyword: EncStatReg
 summary: 只读状态寄存器，报告绝对式编码器的健康位（断开、错误、告警、CRC）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 422
 attributes:
   access: ro
@@ -26,7 +23,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-18'
-doc_revision: '2026.10'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # EncStatReg

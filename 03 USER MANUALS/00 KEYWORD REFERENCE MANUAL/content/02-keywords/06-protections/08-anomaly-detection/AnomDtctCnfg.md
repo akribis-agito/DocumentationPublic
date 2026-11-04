@@ -2,9 +2,8 @@
 keyword: AnomDtctCnfg
 summary: 'Configuration array for anomaly detection: monitored source, filter pole, stop behavior, and motion selection.'
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 779
 attributes:
   access: rw

@@ -2,9 +2,8 @@
 keyword: PushConstantD
 summary: Pushes a 64-bit floating-point (double) constant onto the numeric stack of the current thread.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 782
 attributes:
   access: rw

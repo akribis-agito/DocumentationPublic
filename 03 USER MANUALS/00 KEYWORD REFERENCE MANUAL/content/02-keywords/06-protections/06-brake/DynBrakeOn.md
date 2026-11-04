@@ -2,11 +2,8 @@
 keyword: DynBrakeOn
 summary: Enables electrical dynamic braking when the motor is off.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 405
 attributes:
   access: rw

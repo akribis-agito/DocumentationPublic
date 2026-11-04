@@ -2,11 +2,8 @@
 keyword: MaxForceErrOL
 summary: 开环力控制中允许的最大力误差；超出即触发故障。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 591
 attributes:
   access: rw

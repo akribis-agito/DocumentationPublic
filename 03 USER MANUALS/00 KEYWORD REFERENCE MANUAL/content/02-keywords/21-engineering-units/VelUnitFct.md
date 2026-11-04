@@ -2,9 +2,8 @@
 keyword: VelUnitFct
 summary: Scale factor between internal velocity units and the selected velocity engineering unit.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 806
 attributes:
   access: rw

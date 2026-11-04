@@ -2,9 +2,8 @@
 keyword: DualEncMode
 summary: Activates range-limited dual-loop control.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 725
 attributes:
   access: rw

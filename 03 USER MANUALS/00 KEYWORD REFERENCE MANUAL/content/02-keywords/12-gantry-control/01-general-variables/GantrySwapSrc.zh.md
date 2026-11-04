@@ -2,9 +2,8 @@
 keyword: GantrySwapSrc
 summary: 选择用于决定龙门双环与单环控制在线切换的位置源。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 754
 attributes:
   access: rw
@@ -19,7 +18,7 @@ attributes:
   range:
   - 0
   - 2147483647
-  default: 0
+  default: 2
   scaling: 1.0
   implemented: final
 overrides: {}

@@ -2,11 +2,8 @@
 keyword: DownloadFW
 summary: 使控制器进入固件下载模式的命令。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 230
 attributes:
   access: ro

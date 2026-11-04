@@ -2,11 +2,8 @@
 keyword: DownloadFPGA
 summary: 使控制器进入 FPGA 下载模式的命令。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 231
 attributes:
   access: ro

@@ -2,9 +2,8 @@
 keyword: FFFiltDef
 summary: Defines the feedforward filter parameters.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 729
 attributes:
   access: rw

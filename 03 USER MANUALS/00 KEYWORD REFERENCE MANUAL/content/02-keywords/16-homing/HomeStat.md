@@ -2,11 +2,8 @@
 keyword: HomeStat
 summary: Read-only state of the home digital input for the axis.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 111
 attributes:
   access: ro

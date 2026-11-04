@@ -2,11 +2,8 @@
 keyword: VecPause
 summary: 通过将合成速度斜坡至零或从零斜坡恢复，暂停（1）或继续（0）向量运动。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 640
 attributes:
   access: rw
@@ -25,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-09-29'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # VecPause

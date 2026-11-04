@@ -2,9 +2,8 @@
 keyword: AuxAsPDPosOn
 summary: 将脉冲方向输入接入辅助编码器反馈（双环），而非默认的跨轴辅助来源。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 686
 attributes:
   access: rw

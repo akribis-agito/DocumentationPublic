@@ -2,9 +2,7 @@
 keyword: VoltageFFWOn
 summary: 电流/电压环中电压前馈的主使能开关。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 852
 attributes:
   access: rw

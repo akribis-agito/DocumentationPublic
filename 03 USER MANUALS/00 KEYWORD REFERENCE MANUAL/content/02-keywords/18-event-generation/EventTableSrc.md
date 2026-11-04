@@ -2,11 +2,8 @@
 keyword: EventTableSrc
 summary: Selects the position source used to evaluate event table triggers.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 313
 attributes:
   access: rw

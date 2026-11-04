@@ -2,11 +2,8 @@
 keyword: Jerk
 summary: 加速度的变化率；有限值会产生 S 曲线运动曲线。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 139
 attributes:
   access: rw
@@ -24,9 +21,13 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    range:
+    - 0
+    - 13
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # Jerk

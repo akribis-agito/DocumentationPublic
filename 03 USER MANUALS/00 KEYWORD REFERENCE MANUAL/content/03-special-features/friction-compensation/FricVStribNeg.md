@@ -2,9 +2,7 @@
 keyword: FricVStribNeg
 summary: Stribeck velocity for the negative direction, in counts/s (methods 1 and 5).
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 922
 attributes:
   access: rw
@@ -15,14 +13,17 @@ attributes:
   data_type: int64
   ok_in_motion: true
   ok_motor_on: true
-  units: none
+  units: user
   range:
   - 0
   - 20000000000
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  agm800-ec:
+    units: scaling
+    scaling: 1.024
 last_updated: '2026-11-01'
 doc_revision: '2026.11'
 ---

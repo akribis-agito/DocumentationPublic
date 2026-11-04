@@ -2,9 +2,7 @@
 keyword: LockLost
 summary: Counts the lock samples that did not become a capture of their own, on Central-i masters.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 918
 attributes:
   access: ro

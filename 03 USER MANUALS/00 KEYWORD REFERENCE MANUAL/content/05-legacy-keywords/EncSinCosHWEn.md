@@ -2,11 +2,8 @@
 keyword: EncSinCosHWEn
 summary: Selects which encoder source feeds the hardware lock/event capture mechanism for the axis.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 496
 attributes:
   access: rw

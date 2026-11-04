@@ -2,9 +2,7 @@
 keyword: MagneticPitch
 summary: Linear-motor magnetic pitch in millimetres, used to convert speed from counts/s to m/s for the back-EMF feed-forward.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 849
 attributes:
   access: rw

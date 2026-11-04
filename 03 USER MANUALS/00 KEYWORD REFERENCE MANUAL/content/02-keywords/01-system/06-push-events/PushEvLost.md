@@ -2,9 +2,7 @@
 keyword: PushEvLost
 summary: Push events dropped since the last packet was sent.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 909
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: SpeedChgOn
 summary: 为该轴启用动态速度更改功能。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 345
 attributes:
   access: rw

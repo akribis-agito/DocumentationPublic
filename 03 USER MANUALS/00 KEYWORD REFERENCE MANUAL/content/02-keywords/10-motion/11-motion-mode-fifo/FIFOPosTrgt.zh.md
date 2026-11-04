@@ -2,11 +2,8 @@
 keyword: FIFOPosTrgt
 summary: 下一个 FIFO 位置段所携带的目标位置。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 661
 attributes:
   access: rw

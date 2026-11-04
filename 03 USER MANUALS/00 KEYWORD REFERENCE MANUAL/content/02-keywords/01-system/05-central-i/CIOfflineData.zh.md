@@ -2,11 +2,8 @@
 keyword: CIOfflineData
 summary: 保存 Central-i 离线（仿真）事务期间所发送有效载荷的轴级数组。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 501
 attributes:
   access: rw

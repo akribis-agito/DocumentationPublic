@@ -2,9 +2,7 @@
 keyword: PushEvStat
 summary: Free rows in the push-event queue.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 911
 attributes:
   access: ro

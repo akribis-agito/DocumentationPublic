@@ -2,11 +2,8 @@
 keyword: FIFOType
 summary: Read-only array reporting the type of each entry stored in the FIFO motion queue.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 281
 attributes:
   access: ro

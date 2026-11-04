@@ -2,11 +2,8 @@
 keyword: ECAMGap
 summary: Linear spacing between successive ECAM master values; its sign sets pattern direction.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 304
 attributes:
   access: rw
@@ -19,16 +16,12 @@ attributes:
   ok_motor_on: true
   units: none
   range:
-  - -8000000
-  - 8000000
+  - -2147483647
+  - 2147483647
   default: 100
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    range:
-    - -2147483647
-    - 2147483647
+overrides: {}
 last_updated: '2026-10-10'
 doc_revision: '2026.11'
 ---

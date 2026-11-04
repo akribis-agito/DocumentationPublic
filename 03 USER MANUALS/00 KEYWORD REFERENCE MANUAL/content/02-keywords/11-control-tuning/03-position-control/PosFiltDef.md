@@ -2,21 +2,18 @@
 keyword: PosFiltDef
 summary: Defines the type and parameters of each position-loop filter.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 123
 attributes:
   access: rw
   scope: axis
   flash: true
   type: array
-  array_size: 6
+  array_size: 11
   data_type: int32
-  ok_in_motion: false
-  ok_motor_on: false
+  ok_in_motion: true
+  ok_motor_on: true
   units: none
   range:
   - -2147483648
@@ -24,11 +21,7 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    array_size: 11
-    ok_in_motion: true
-    ok_motor_on: true
+overrides: {}
 last_updated: '2026-10-12'
 doc_revision: '2026.11'
 ---

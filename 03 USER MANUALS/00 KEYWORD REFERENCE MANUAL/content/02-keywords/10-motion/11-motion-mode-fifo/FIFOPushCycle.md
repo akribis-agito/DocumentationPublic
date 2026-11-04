@@ -2,11 +2,8 @@
 keyword: FIFOPushCycle
 summary: Pushes a cycle-time (segment-duration) entry into the FIFO motion queue.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 284
 attributes:
   access: rw
@@ -20,11 +17,39 @@ attributes:
   units: func
   range:
   - 1
-  - 65536000
+  - 16384000
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  agd155-ec:
+    range:
+    - 1
+    - 16000000
+  agd155-ec-var34:
+    range:
+    - 1
+    - 16000000
+  agd155-ec-var34-3:
+    range:
+    - 1
+    - 16000000
+  agd156-ec:
+    range:
+    - 1
+    - 16000000
+  agd101-ec-34a:
+    range:
+    - 1
+    - 16000000
+  agd101-ec-17a:
+    range:
+    - 1
+    - 16000000
+  agm800-ec:
+    range:
+    - 1
+    - 16000000
 last_updated: '2026-10-10'
 doc_revision: '2026.11'
 ---
