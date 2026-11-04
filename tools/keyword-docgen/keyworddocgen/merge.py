@@ -45,8 +45,8 @@ def _reconstruct_cells(fm: dict) -> dict[str, dict]:
 def merge_scan(fm: dict, scan_cells: dict, mode: str) -> dict:
     """Return a new frontmatter dict carrying the scan's facts.
 
-    `scan_cells` maps product type -> {"can_code", "attributes", "products"} or
-    None when the keyword is absent from that type. `mode` is "append" (errors
+    `scan_cells` maps product type -> {"can_code", "attributes", "products",
+    "product_overrides"} or None when the keyword is absent from that type. `mode` is "append" (errors
     if the doc already carries generated facts) or "overwrite".
     """
     fm = dict(fm or {})
@@ -67,7 +67,8 @@ def merge_scan(fm: dict, scan_cells: dict, mode: str) -> dict:
             if attrs.get(field) is None and _is_finite(prior.get(ptype, {}).get(field)):
                 attrs[field] = prior[ptype][field]
         cells[ptype] = {"attrs": attrs, "can_code": cell["can_code"],
-                        "products": list(cell.get("products") or [])}
+                        "products": list(cell.get("products") or []),
+                        "product_overrides": dict(cell.get("product_overrides") or {})}
     if not cells:
         raise ValueError(f"{fm.get('keyword')}: absent from every product type")
 
@@ -95,8 +96,8 @@ def merge_scan(fm: dict, scan_cells: dict, mode: str) -> dict:
 
 
 def _compute_overrides(cells: dict[str, dict], primary_type: str) -> dict:
-    """Per-product-type deltas from the primary cell, covering both attributes
-    and can_code."""
+    """Deltas from the primary cell per product type, then deltas from its type's
+    cell per product (keyed by catalog ID), covering both attributes and can_code."""
     primary = cells[primary_type]
     overrides: dict[str, dict] = {}
     for ptype, cell in cells.items():
@@ -107,4 +108,6 @@ def _compute_overrides(cells: dict[str, dict], primary_type: str) -> dict:
             diff["can_code"] = cell["can_code"]
         if diff:
             overrides[ptype] = diff
+    for cell in cells.values():
+        overrides.update(cell["product_overrides"])
     return overrides

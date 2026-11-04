@@ -137,3 +137,21 @@ def test_preserves_existing_summary_and_category():
     fm = merge_scan(fm, both(), mode="append")
     assert fm["summary"] == "Proportional gain."
     assert fm["category"] == "control-tuning"
+
+
+def test_per_product_overrides_are_keyed_by_catalog_id():
+    scan = {"controller": {**cell(range=[-16000, 16000]),
+                           "product_overrides": {"agd155-ec": {"range": [-8000, 8000]}}},
+            "ci-master": {**cell(range=[-25500, 25500]),
+                          "product_overrides": {"agm800-ec": {"scaling": 1.024}}}}
+    fm = merge_scan({}, scan, mode="append")
+    assert fm["attributes"]["range"] == [-16000, 16000]
+    # Type delta first, then each product's delta from its own type's cell.
+    assert fm["overrides"] == {
+        "ci-master": {"range": [-25500, 25500]},
+        "agd155-ec": {"range": [-8000, 8000]},
+        "agm800-ec": {"scaling": 1.024},
+    }
+    # A rescan without them drops them.
+    fm = merge_scan(fm, both(), mode="overwrite")
+    assert fm["overrides"] == {}

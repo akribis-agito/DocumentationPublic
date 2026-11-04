@@ -341,13 +341,22 @@ def parse_kw_row_table(firmware_root: Path, products: list[str] | None = None,
 V5_REFERENCE_PRODUCTS = {"controller": "agd301-et-2d05", "ci-master": "agm800"}
 
 
+def _delta(rec: dict, cell: dict) -> dict:
+    diff = {k: v for k, v in rec["attributes"].items() if v != cell["attributes"].get(k)}
+    if rec["can_code"] != cell["can_code"]:
+        diff["can_code"] = rec["can_code"]
+    return diff
+
+
 def collapse_by_product_type(per_product: dict[str, dict]) -> dict[str, dict[str, dict]]:
     """Fold `parse_kw_row_table` output into {product type: {mnemonic: cell}}.
 
-    A cell is {can_code, attributes, products}. Its facts come from the type's
-    reference product, or from the first product of the type that has the
-    keyword when the reference does not. `products` lists the catalog IDs of
-    the type's products that have the keyword, or is empty when all of them do.
+    A cell is {can_code, attributes, products, product_overrides}. Its facts come
+    from the type's reference product, or from the first product of the type that
+    has the keyword when the reference does not. `products` lists the catalog IDs
+    of the type's products that have the keyword, or is empty when all of them do.
+    `product_overrides` maps the catalog ID of each product whose facts differ from
+    the cell's to only the fields (attributes or can_code) that differ.
     """
     out: dict[str, dict[str, dict]] = {}
     for ptype in V5_PRODUCT_TYPES.values():
@@ -363,5 +372,7 @@ def collapse_by_product_type(per_product: dict[str, dict]) -> dict[str, dict[str
         for name, cell in cells.items():
             have = [pid for pid in ids if name in per_product[pid]["keywords"]]
             cell["products"] = [] if len(have) == len(ids) else have
+            deltas = {pid: _delta(per_product[pid]["keywords"][name], cell) for pid in have}
+            cell["product_overrides"] = {pid: d for pid, d in deltas.items() if d}
         out[ptype] = cells
     return out

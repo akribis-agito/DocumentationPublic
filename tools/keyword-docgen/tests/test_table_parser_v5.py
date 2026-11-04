@@ -111,3 +111,11 @@ def test_missing_product_config_raises(tmp_path):
     (tmp_path / "CommonIncludes" / "ProductConfig.h").write_text("// no products\n")
     with pytest.raises(TableError):
         parse_kw_row_table(tmp_path)
+
+
+def test_collapse_records_per_product_differences(per_product):
+    cells = collapse_by_product_type(per_product)
+    # The cell carries the reference product's bound; agd155-ec's own is kept per product.
+    assert cells["controller"]["CurrLim"]["product_overrides"] == {"agd155-ec": {"range": [-8000000, 8000000]}}
+    assert cells["controller"]["Pos"]["product_overrides"] == {}
+    assert cells["ci-master"]["CurrLim"]["product_overrides"] == {}

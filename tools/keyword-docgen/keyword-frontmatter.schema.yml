@@ -110,12 +110,23 @@ fields:
     origin: generated
     required: false
     description: >
-      Deltas of the non-primary product type from the primary. Keys are product
-      types; values are a partial map containing ONLY the fields that differ
-      from the primary. May include any attributes field AND `can_code`. Drives
-      the divergence markers.
-    example:
-      ci-master: { data_type: int64, range: [-2251799813685248, 2251799813685247] }
+      Two kinds of key, each mapping to a partial map containing ONLY the fields
+      that differ (any attributes field AND `can_code`). Drives the divergence
+      markers.
+      A product type key (`controller` / `ci-master`) holds the non-primary
+      type's deltas from the primary cell.
+      A catalog ID key (lowercase, as in `products`, e.g. `agd155-ec`) holds one
+      product's deltas from its own type's cell (the primary cell plus that
+      type's entry). A type's cell carries the facts of its reference product
+      (agd301-et-2d05 for controller, agm800 for ci-master, or the type's first
+      product that has the keyword when the reference does not); a cell value
+      applies to every product of the type that has the keyword and no catalog
+      ID entry for that field. Type keys come first, then catalog IDs in
+      ProductConfig.h order.
+    example:   # CurrRef: the controller cell (agd301-et-2d05) is range [-16000, 16000]
+      ci-master: { range: [-64000, 64000] }
+      agd200-et-2d01: { range: [-4000, 4000] }
+      agd155-ec: { range: [-25500, 25500] }
 
 # ---------------------------------------------------------------------------
 # data_type vocabulary (display labels)
@@ -140,7 +151,8 @@ render_mapping:
   title:            "# heading + summary line"
   availability:     "one-row strip of two cells, controller then ci-master, labelled from product_type_labels. Cell = present / present-but-differs / n/a; a cell whose type has products listed in `products` names them."
   primary_cell:     "controller if available, else ci-master; its attributes populate Quick Facts in full."
-  quick_facts:      "one row per attributes.* field (primary-cell values)."
+  quick_facts:      "one row per attributes.* field (primary-cell values). A field that a catalog-ID override carries is product-dependent: its row says so and is never shown as a single value for the whole type."
   divergence_dot:   "a field gets a marker if it appears in overrides.ci-master (or overrides.controller); the other type's value is shown on hover/expand from that override."
+  per_product:      "a field carried by any catalog-ID override expands to a per-product list: each listed product with its own value (labelled with its catalog ID), and the cell value for the type's remaining products."
   array_indexing:   "present array indexes starting at 1 (index 0 is reserved/inaccessible)."
   behavioural_diff: "authored body prose for behaviour that differs between product types (not derivable from facts)."

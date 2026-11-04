@@ -221,3 +221,15 @@ def test_overwrite_writes_scanned_data_types_over_stray_spellings(tmp_path):
     fm, _ = split_doc(page.read_text())
     assert fm["attributes"]["data_type"] == "float32"
     assert "double" not in page.read_text()
+
+
+def test_per_product_bound_is_a_product_override(tmp_path):
+    docs = tmp_path / "docs"
+    page = write_page(docs, "CurrLim")
+    run_scan(docs)
+    fm, _ = split_doc(page.read_text())
+    assert fm["attributes"]["range"] == [-16000000, 16000000]      # agd301-et-2d05, the reference
+    assert fm["overrides"] == {
+        "ci-master": {"range": [-25500000, 25500000]},
+        "agd155-ec": {"range": [-8000000, 8000000]},
+    }
