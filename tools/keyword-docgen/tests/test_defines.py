@@ -67,3 +67,12 @@ def test_int_division_stays_int():
     # C integer division of int operands stays integral
     r = make_table().resolve("INT_DIV")
     assert r == 10000 and isinstance(r, int)
+
+
+def test_resolves_preprocessed_c_forms():
+    t = DefineTable({})
+    assert t.resolve("((long double) 2251799813685247LL)") == 2251799813685247
+    assert t.resolve("(((((long) 0x1) << 12) - 1))") == 4095
+    assert t.resolve("((16384 >> 8))") == 64
+    assert t.resolve("((0x00010000 | 0x1))") == 65537
+    assert t.resolve("(1UL << 2.0)") is None   # a bit op on a float is not a number
