@@ -100,7 +100,7 @@ Emits one **document-level** JSON chunk per page (`rag-chunks.jsonl`, gitignored
 
 Each record is `{id, keyword, text, metadata, related}` where:
 - `text` is the page body prefixed with a synthesized **fact header**
-  (`Keyword X (CAN n; scope; access; units; range; v4/v5): summary`) so the
+  (`Keyword X (CAN n; scope; access; units; range; product types; products; differs on <override keys>): summary`) so the
   embedding captures the structured facts, not just prose;
 - `metadata` carries the frontmatter facts (availability, scope, units,
   can_code, range, …) plus `doc_revision`/`last_updated`/`sha256` for filtering,
