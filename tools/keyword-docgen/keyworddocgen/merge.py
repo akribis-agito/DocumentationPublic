@@ -15,12 +15,12 @@ class VersionAlreadyRecorded(Exception):
     """Raised by append when the version is already present in the doc."""
 
 
-_FLOAT_TYPE_LIMIT = 3.0e38
+_FLOAT_TYPE_LIMIT = 1.0e38
 
 
 def _is_finite(value) -> bool:
     """True for a real numeric range/default we should not lose — excludes None
-    and the float-type-limit sentinel (+/-3.4e38), which means 'unbounded'."""
+    and the float-type-limit sentinels (+/-3.4e38, +/-1e38 on C2000), which mean 'unbounded'."""
     if value is None:
         return False
     nums = value if isinstance(value, list) else [value]

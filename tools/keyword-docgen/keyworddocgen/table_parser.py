@@ -42,10 +42,11 @@ _FLASH = {"FLASH": True, "NOFLASH": False}
 _SCOPE = {"AXIS": "axis", "NON_AXIS": "non-axis"}
 _IMPL = {"FINAL": "final", "PARTIAL": "partial"}
 _UNITS = {"USER_UNITS": "user", "NO_USER_UNITS": "none", "FUNC_UNITS": "func"}
-# The float-type limit (+/-3.4e38, FLOAT_MIN/FLOAT_MAX and aliases like VQ_MIN/VQ_MAX)
-# is not a real bound; a keyword whose min/max resolves to it accepts any float, so
-# its range is reported as null (unbounded). Detected by value so aliases are caught.
-_FLOAT_TYPE_LIMIT = 3.0e38
+# The float-type limit (+/-3.4e38, FLOAT_MIN/FLOAT_MAX and aliases like VQ_MIN/VQ_MAX;
+# +/-1e38, DOUBLE_MAX on a C2000 build) is not a real bound; a keyword whose min/max
+# resolves to it accepts any float, so its range is reported as null (unbounded).
+# Detected by value so aliases are caught.
+_FLOAT_TYPE_LIMIT = 1.0e38
 
 
 # develop bParamType tokens
@@ -259,9 +260,9 @@ def parse_params(path: Path, defines: DefineTable) -> dict[str, dict[str, dict]]
 # Which rows a build gets, and with which widths and scopes, is decided by the
 # row wrappers (KW_ROW_CIM_ONLY, KW_ROW_EC, ...) and by macros such as AXIS_CIM
 # and CW_TYPETAG_POS under the product's configuration. Following those by regex
-# would drift, so the file is expanded once per product the way the
-# PC-simulation build configures it (Platform/PC/CMakeLists.txt: PROCESSOR=4,
-# -DPRODUCT=PRODUCT_...), and the expanded rows are read. A row's min/max/
+# would drift, so the file is expanded once per product with -DPRODUCT=PRODUCT_...
+# and that product's hardware build configuration (its processor's defines and
+# include path), and the expanded rows are read. A row's min/max/
 # default/scaling cells are indexes into the value pools (CommonIncludes/
 # KeywordPool.h); they resolve through the pool arrays of the same expansion,
 # which hold what the controller serves.
@@ -269,13 +270,28 @@ def parse_params(path: Path, defines: DefineTable) -> dict[str, dict[str, dict]]
 
 V5_PARAMS_C = Path("CommonC") / "AG300_CTL01Params.c"
 V5_PRODUCT_CONFIG_H = Path("CommonIncludes") / "ProductConfig.h"
-# The PC-simulation include path, as Tools/Cyclops/kwpool_check.py's PC arm.
-_PC_SIM_INCLUDES = (
-    "Platform/PC", "Platform/PC/stubs", "CommonIncludes", "CommonC", "Platform/Common/uip", ".",
-    "Platform/PC/lwip",
-    "Platform/Zynq/MAS02bsp/ps7_cortexa9_0/libsrc/lwip211_v1_0/src/lwip-2.1.1/src/include",
-)
-_PC_SIM_DEFINES = ("-DPROCESSOR=4",)
+# Build configurations: (defines, include path) per processor, as the ARM_FLAGS of
+# Firmware-Main Tools/Cyclops/kwpool_check.py. "pc" is the PC simulation.
+V5_BUILDS = {
+    "c2000": (("-DPROCESSOR=1",),
+              ("CommonIncludes", "CommonC", "Platform/Common/uip", ".", "Platform/C2000",
+               "Platform/C2000/C2834xIncludes")),
+    "c28388": (("-DPROCESSOR=3", "-DCPU1", "-D_INLINE", "-D_SAMPLING_RATE_NORMAL"),
+               ("CommonIncludes", "CommonC", "Platform/Common/uip", ".", "EtherCAT/MotionCore",
+                "Platform/C28388", "Platform/C28388/driverlib", "Platform/C28388/inc",
+                "Platform/C28388/C2000Ware",
+                "Platform/C28388/C2000Ware/device_support/f2838x/headers/include",
+                "Platform/C28388/C2000Ware/device_support/f2838x/common/include")),
+    "zynq": (("-DPROCESSOR=2", "-DZYNQ_IPC_CORE=0"),
+             ("Platform/Zynq/MAS02/src", "CommonIncludes", "CommonC", ".", "EtherCAT/MotionCore",
+              "Platform/Common/uip", "Platform/Zynq/MAS02bsp/ps7_cortexa9_0/include",
+              "Platform/Zynq/MAS02bsp/ps7_cortexa9_0/libsrc/lwip211_v1_0/src/lwip-2.1.1/src/include",
+              "Platform/Zynq/toolchain/gcc-arm-none-eabi/arm-none-eabi/include")),
+    "pc": (("-DPROCESSOR=4",),
+           ("Platform/PC", "Platform/PC/stubs", "CommonIncludes", "CommonC", "Platform/Common/uip", ".",
+            "Platform/PC/lwip",
+            "Platform/Zynq/MAS02bsp/ps7_cortexa9_0/libsrc/lwip211_v1_0/src/lwip-2.1.1/src/include")),
+}
 PREPROCESSOR_ENV = "KEYWORD_DOCGEN_CC"
 _PREPROCESSOR_CANDIDATES = ("clang", "gcc")
 
@@ -314,25 +330,37 @@ def find_preprocessor() -> str:
     raise TableError(f"no C preprocessor found: install clang or gcc, or set {PREPROCESSOR_ENV}")
 
 
+def hardware_build(product: str) -> str:
+    """The processor a product's hardware build targets, by kwpool_check.py's family rule:
+    the AGM800 family on Zynq, the *_EC drives on C28388, every other product on C2000."""
+    if product.startswith("PRODUCT_AGM800"):
+        return "zynq"
+    return "c28388" if "_EC" in product else "c2000"
+
+
 def list_v5_products(firmware_root: Path) -> list[str]:
     """Every `PRODUCT_*` that `CommonIncludes/ProductConfig.h` configures."""
     text = (Path(firmware_root) / V5_PRODUCT_CONFIG_H).read_text(encoding="utf-8", errors="replace")
     return _V5_PRODUCT_RE.findall(text)
 
 
-def _preprocess_v5(root: Path, product: str, cc: str) -> str:
+def _preprocess_v5(root: Path, product: str, cc: str, build: str) -> str:
+    defines, includes = V5_BUILDS[build]
+    # The Zynq include path holds newlib headers whose include_next would reach the host libc
+    # under clang (kwpool_check.py does the same).
+    host = ("-ffreestanding", "-nostdlibinc") if build == "zynq" and "clang" in Path(cc).name.lower() else ()
     fd, tu = tempfile.mkstemp(suffix=".c")
     with os.fdopen(fd, "w", encoding="utf-8") as fh:
         fh.write(f'#include "{(root / V5_PARAMS_C).as_posix()}"\n{_V5_TYPE_PROBE} PRODUCT_TYPE\n')
     try:
         cmd = [cc, "-E", "-P", "-x", "c", "-std=gnu11", "-w", "-funsigned-char",
-               *_PC_SIM_DEFINES, f"-DPRODUCT={product}",
-               *[f"-I{(root / inc).as_posix()}" for inc in _PC_SIM_INCLUDES], tu]
+               *host, *defines, f"-DPRODUCT={product}",
+               *[f"-I{(root / inc).as_posix()}" for inc in includes], tu]
         res = subprocess.run(cmd, capture_output=True, text=True, errors="replace")
     finally:
         os.unlink(tu)
     if res.returncode != 0 or not res.stdout:
-        raise TableError(f"{product}: {cc} -E failed:\n{res.stderr[-2000:]}")
+        raise TableError(f"{product} ({build} build): {cc} -E failed:\n{res.stderr[-2000:]}")
     return res.stdout
 
 
@@ -412,9 +440,10 @@ def parse_v5_expansion(pp: str, func_units=frozenset()) -> tuple[str, dict[str, 
 
 
 def parse_kw_row_table(firmware_root: Path, products: list[str] | None = None,
-                       cc: str | None = None) -> dict[str, dict]:
-    """Return {catalog id: {"product_type", "keywords": {mnemonic: {can_code, attributes}}}}
-    for every product ProductConfig.h configures (or the given `PRODUCT_*` keys)."""
+                       cc: str | None = None, build: str | None = None) -> dict[str, dict]:
+    """Return {catalog id: {"product_type", "build", "keywords": {mnemonic: {can_code, attributes}}}}
+    for every product ProductConfig.h configures (or the given `PRODUCT_*` keys), each from
+    its hardware build, or from `build` (a V5_BUILDS key, e.g. "pc") for every product."""
     root = Path(firmware_root).resolve()
     cc = cc or find_preprocessor()
     source = (root / V5_PARAMS_C).read_text(encoding="utf-8", errors="replace")
@@ -424,8 +453,9 @@ def parse_kw_row_table(firmware_root: Path, products: list[str] | None = None,
         raise TableError(f"no PRODUCT_* blocks in {root / V5_PRODUCT_CONFIG_H}")
     out: dict[str, dict] = {}
     for product in products:
-        ptype, keywords = parse_v5_expansion(_preprocess_v5(root, product, cc), func_units)
-        out[catalog_id(product)] = {"product_type": ptype, "keywords": keywords}
+        arm = build or hardware_build(product)
+        ptype, keywords = parse_v5_expansion(_preprocess_v5(root, product, cc, arm), func_units)
+        out[catalog_id(product)] = {"product_type": ptype, "build": arm, "keywords": keywords}
     return out
 
 

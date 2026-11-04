@@ -197,7 +197,7 @@ def test_v5_kw_row_run_lists_keywords_without_a_page(tmp_path):
     docs = setup_docs(tmp_path)   # only PosGain has a page
     assert run_v5_kw_row(docs) == 0
     manifest = (docs / "_manifest" / "undocumented.md").read_text()
-    for name in ("Pos", "CurrLim", "DInPort", "PhaseVoltage", "RptCount", "Display7Seg"):
+    for name in ("Pos", "CurrLim", "DInPort", "PhaseVoltage", "RptCount", "Display7Seg", "ECATSend"):
         assert f"| {name} |" in manifest
     assert "PosGain" not in manifest
     fm, _ = split_doc((docs / "02-keywords/11-control-tuning/PosGain.md").read_text())

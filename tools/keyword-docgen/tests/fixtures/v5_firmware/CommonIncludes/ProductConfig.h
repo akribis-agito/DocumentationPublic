@@ -1,5 +1,5 @@
 // Minimal stand-in for Firmware-Main CommonIncludes/ProductConfig.h: three products,
-// two product types, one feature switch and the control width.
+// two product types, two feature switches and the full-scale current.
 #define CONTROLLER				1
 #define CI_MASTER				2
 
@@ -14,6 +14,7 @@
 #elif PRODUCT == PRODUCT_AGD155_EC
 	#define PRODUCT_TYPE			CONTROLLER
 	#define CFG_FEAT_7SEG_DISPLAY	1
+	#define CFG_FEAT_ECAT_CM		1
 	#define MAX_CURRENT_COMMAND		8000
 #elif PRODUCT == PRODUCT_AGM800
 	#define PRODUCT_TYPE			CI_MASTER
