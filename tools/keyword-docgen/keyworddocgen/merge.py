@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from .model import PRIMARY_PRODUCT_TYPE, PRODUCT_TYPES, normalise_data_type
+from .model import PRIMARY_PRODUCT_TYPE, PRODUCT_TYPES
 
 
 class FactsAlreadyRecorded(Exception):
@@ -60,7 +60,6 @@ def merge_scan(fm: dict, scan_cells: dict, mode: str) -> dict:
         if cell is None:
             continue
         attrs = dict(cell["attributes"])
-        attrs["data_type"] = normalise_data_type(attrs.get("data_type"))
         # No-regression guard: a re-scan that can no longer resolve a numeric
         # range/default (e.g. a constant moved from #define to enum) must not
         # downgrade a previously-known value of the same product type to null.

@@ -85,14 +85,6 @@ def test_absent_from_every_type_is_an_error():
         merge_scan({"keyword": "Gone"}, {"controller": None, "ci-master": None}, mode="overwrite")
 
 
-@pytest.mark.parametrize("stray, normal", [("float", "float32"), ("double", "float64")])
-def test_normalises_stray_data_type(stray, normal):
-    fm = merge_scan({}, {"controller": cell(data_type=stray), "ci-master": cell(data_type=normal)},
-                    mode="append")
-    assert fm["attributes"]["data_type"] == normal
-    assert fm["overrides"] == {}
-
-
 def test_v1_front_matter_is_replaced_not_merged():
     v1 = {
         "keyword": "PosGain", "summary": "Gain.", "can_code": 348,

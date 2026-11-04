@@ -45,8 +45,9 @@ PC-simulation build configures it (`-DPROCESSOR=4 -DPRODUCT=PRODUCT_…`, the
   when the reference does not. A keyword on only some products of a type lists them in
   `products` (catalog IDs, `PRODUCT_AGD155_EC` → `agd155-ec`).
 - The primary cell is `controller` when the keyword has one, else `ci-master`; the other
-  type's differences go to `overrides.<type>`. A stray `float` / `double` data type is
-  written as `float32` / `float64`.
+  type's differences go to `overrides.<type>`. `data_type` comes from the row's type tag,
+  so it is always one of `int32` / `float32` / `int64` / `float64`; `overwrite` replaces
+  the stray v1 `float` / `double` spellings with it.
 - The resolver treats the float-type limit `±3.4e38` as unbounded (`range: null`), and
   `overwrite` never downgrades a previously-resolved numeric range/default of the same
   product type to `null` when a re-scan can't resolve it.

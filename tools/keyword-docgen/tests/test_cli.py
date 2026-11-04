@@ -210,3 +210,13 @@ def test_overwrite_replaces_v1_front_matter(tmp_path):
     assert fm["attributes"]["default"] == 20.0     # v1 values are never carried over
     assert fm["overrides"] == {}
     assert fm["summary"] == "Gain."
+
+
+def test_overwrite_writes_scanned_data_types_over_stray_spellings(tmp_path):
+    # Eleven v1 pages carry `float` / `double`; the scan only emits the schema enum.
+    docs = tmp_path / "docs"
+    page = write_page(docs, "DInPort", "attributes: {data_type: float}\noverrides:\n  central-i.v5: {data_type: double}\n")
+    assert run_scan(docs, mode="overwrite") == 0
+    fm, _ = split_doc(page.read_text())
+    assert fm["attributes"]["data_type"] == "float32"
+    assert "double" not in page.read_text()
