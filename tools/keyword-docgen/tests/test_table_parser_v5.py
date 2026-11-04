@@ -6,6 +6,7 @@ from keyworddocgen.table_parser import (
     TableError,
     catalog_id,
     collapse_by_product_type,
+    hardware_build,
     list_v5_products,
     parse_kw_row_table,
 )
@@ -29,10 +30,31 @@ def test_catalog_id():
 def test_product_type_and_keyword_set_per_product(per_product):
     assert {pid: p["product_type"] for pid, p in per_product.items()} == {
         "agd301-et-2d05": "controller", "agd155-ec": "controller", "agm800": "ci-master"}
-    assert set(per_product["agd301-et-2d05"]["keywords"]) == {"Pos", "PosGain", "CurrLim", "DInPort", "RptCount"}
-    assert set(per_product["agd155-ec"]["keywords"]) == {
-        "Pos", "PosGain", "CurrLim", "DInPort", "RptCount", "Display7Seg"}
-    assert set(per_product["agm800"]["keywords"]) == {"Pos", "PosGain", "CurrLim", "DInPort", "PhaseVoltage"}
+    assert {pid: p["build"] for pid, p in per_product.items()} == {
+        "agd301-et-2d05": "c2000", "agd155-ec": "c28388", "agm800": "zynq"}
+    common = {"Pos", "PosGain", "CurrLim", "DInPort", "GenDataD"}
+    assert set(per_product["agd301-et-2d05"]["keywords"]) == common | {"RptCount"}
+    # KW_ROW_EC needs the EtherCAT CM and a C28388 or Zynq build.
+    assert set(per_product["agd155-ec"]["keywords"]) == common | {"RptCount", "Display7Seg", "ECATSend"}
+    assert set(per_product["agm800"]["keywords"]) == common | {"PhaseVoltage"}
+
+
+def test_hardware_build_per_product():
+    assert hardware_build("PRODUCT_AGM800_EC") == "zynq"
+    assert hardware_build("PRODUCT_AGD101_EC_17A") == "c28388"
+    assert hardware_build("PRODUCT_AGD200_ET_2D01") == "c2000"
+
+
+def test_sim_build_stubs_the_ethercat_rows():
+    sim = parse_kw_row_table(FW, products=["PRODUCT_AGD155_EC"], build="pc")["agd155-ec"]
+    assert sim["build"] == "pc"
+    assert "ECATSend" not in sim["keywords"] and "Display7Seg" in sim["keywords"]
+
+
+def test_double_type_limit_is_unbounded_on_every_build(per_product):
+    # +/-1e38 on C2000, +/-1e308 elsewhere: both mean "any value".
+    assert per_product["agd301-et-2d05"]["keywords"]["GenDataD"]["attributes"]["range"] is None
+    assert per_product["agm800"]["keywords"]["GenDataD"]["attributes"]["range"] is None
 
 
 def test_can_code_is_the_row_position(per_product):
@@ -71,9 +93,10 @@ def test_collapse_by_product_type(per_product):
     cells = collapse_by_product_type(per_product)
     assert set(cells) == {"controller", "ci-master"}
     ctl, cim = cells["controller"], cells["ci-master"]
-    assert set(ctl) == {"Pos", "PosGain", "CurrLim", "DInPort", "RptCount", "Display7Seg"}
-    assert set(cim) == {"Pos", "PosGain", "CurrLim", "DInPort", "PhaseVoltage"}
+    assert set(ctl) == {"Pos", "PosGain", "CurrLim", "DInPort", "GenDataD", "RptCount", "Display7Seg", "ECATSend"}
+    assert set(cim) == {"Pos", "PosGain", "CurrLim", "DInPort", "GenDataD", "PhaseVoltage"}
     assert ctl["Display7Seg"]["products"] == ["agd155-ec"]   # KW_ROW_7SEG
+    assert ctl["ECATSend"]["products"] == ["agd155-ec"]      # KW_ROW_EC
     assert ctl["Pos"]["products"] == []                      # every controller
     assert cim["PhaseVoltage"]["products"] == []             # KW_ROW_CIM_ONLY: every ci-master
     assert "PhaseVoltage" not in ctl and "RptCount" not in cim

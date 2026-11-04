@@ -32,16 +32,25 @@ v5 has one positional `KW_ROW(idx, "name", …)` table in `CommonC/AG300_CTL01Pa
 the row wrappers (`KW_ROW_CIM_ONLY`, `KW_ROW_CTL_ONLY`, `KW_ROW_EC`, `KW_ROW_7SEG`,
 `KW_ROW_AUTOGAIN`, …) and macros such as `AXIS_CIM` and `CW_TYPETAG_POS` decide what each
 product gets. The generator does not follow those macros itself: it runs the file through
-a C preprocessor once per `PRODUCT_*` in `CommonIncludes/ProductConfig.h`, configured as the
-PC-simulation build configures it (`-DPROCESSOR=4 -DPRODUCT=PRODUCT_…`, the
-`Platform/PC` include path), and reads the expanded rows.
+a C preprocessor once per `PRODUCT_*` in `CommonIncludes/ProductConfig.h`, with
+`-DPRODUCT=PRODUCT_…` and that product's hardware build configuration, and reads the
+expanded rows.
 
+- **Hardware build per product** (`table_parser.hardware_build`, the family rule of
+  Firmware-Main `Tools/Cyclops/kwpool_check.py`): the AGM800 family on Zynq
+  (`PROCESSOR=2`), the `*_EC` drives on C28388 (`PROCESSOR=3`), every other product on
+  C2000 (`PROCESSOR=1`), each with that arm's defines and include path. The processor
+  decides real rows and facts: the EtherCAT rows (`ECAT_MOTION_CORE`) exist only on a
+  C28388 or Zynq build, and bounds such as `MAX_FUNCS`, `JERK_MAX` or `MAXVBUS_MAX` and the
+  C28388 sampling-rate scaling follow it. A product that does not preprocess is an error,
+  never a fall-back to another build. `parse_kw_row_table(..., build="pc")` reads every
+  product as the PC simulation instead, which is what a simulator's About table reports.
 - **Needs `clang` or `gcc` on `PATH`** (or `KEYWORD_DOCGEN_CC=<path>`), for the tests too.
 - The CAN code is the row's position. Min/max/default/scaling resolve through the value
   pools of the same expansion, so they are what that product's build serves.
 - Products collapse to the two product types, `controller` (`CONTROLLER`) and `ci-master`
   (`CI_MASTER`). A type's facts come from its reference product (`agd301-et-2d05`, the
-  PC-simulation default, and `agm800`), or from the first product that has the keyword
+  PC-simulation default product, and `agm800`), or from the first product that has the keyword
   when the reference does not. A keyword on only some products of a type lists them in
   `products` (catalog IDs, `PRODUCT_AGD155_EC` → `agd155-ec`).
 - The primary cell is `controller` when the keyword has one, else `ci-master`; the other

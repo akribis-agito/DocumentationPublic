@@ -164,6 +164,7 @@ def test_manifest_lists_every_v5_keyword_without_a_page(tmp_path):
     assert "| PhaseVoltage | ci-master |" in manifest
     assert "| Display7Seg | controller |" in manifest
     assert "| RptCount | controller |" in manifest
+    assert "| ECATSend | controller |" in manifest
 
 
 def write_page(docs, name, front=""):
