@@ -19,7 +19,7 @@ from .manifest import render_manifest
 from .merge import VersionAlreadyRecorded, merge_version
 from .model import PRODUCTS, product_supported
 from .ragindex import chunk_record
-from .table_parser import parse_params
+from .table_parser import TableError, collapse_by_product_type, parse_kw_row_table, parse_params
 from .versioning import stamp_corpus
 
 
@@ -29,9 +29,15 @@ def _build_parser() -> argparse.ArgumentParser:
     for mode in ("append", "overwrite"):
         p = sub.add_parser(mode)
         p.add_argument("--version", required=True, choices=["v4", "v5"])
-        p.add_argument("--params", required=True, type=Path)
-        p.add_argument("--defines", required=True, type=Path, nargs="+",
-                       help="Header file(s) defining MIN/MAX/DFLT/sizes")
+        src = p.add_mutually_exclusive_group(required=True)
+        src.add_argument("--firmware-root", type=Path,
+                         help="Firmware-Main checkout with the v5 KW_ROW table; expanded "
+                              "once per product by a C preprocessor")
+        src.add_argument("--params", type=Path,
+                         help="Params.c with one table per product type (LTS, pre-KW_ROW "
+                              "develop); needs --defines")
+        p.add_argument("--defines", type=Path, nargs="+",
+                       help="Header file(s) defining MIN/MAX/DFLT/sizes (with --params)")
         p.add_argument("--docs-root", required=True, type=Path)
         p.add_argument("--manifest", required=True, type=Path)
 
@@ -178,14 +184,31 @@ def _has_keyword_field(path: Path) -> bool:
     return isinstance(fm, dict) and "keyword" in fm
 
 
+# v5 product type -> the v1 schema's product cell.
+_V1_CELL = {"controller": "standalone", "ci-master": "central-i"}
+
+
+def _scan_tables(parser, args) -> dict[str, dict]:
+    if args.firmware_root:
+        cells = collapse_by_product_type(parse_kw_row_table(args.firmware_root))
+        return {_V1_CELL[ptype]: names for ptype, names in cells.items()}
+    if not args.defines:
+        parser.error("--params needs --defines")
+    return parse_params(args.params, DefineTable.from_headers(list(args.defines)))
+
+
 def run(argv: list[str]) -> int:
-    args = _build_parser().parse_args(argv)
+    parser = _build_parser()
+    args = parser.parse_args(argv)
     if args.mode == "version":
         return run_version(args)
     if args.mode == "rag-export":
         return run_rag_export(args)
-    defines = DefineTable.from_headers(list(args.defines))
-    tables = parse_params(args.params, defines)
+    try:
+        tables = _scan_tables(parser, args)
+    except TableError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
     docs = _index_docs(args.docs_root)
 
     # Build per-keyword scan cells across products.

@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import pytest
+
 from keyworddocgen.cli import run
 from keyworddocgen.frontmatter import split_doc
 
@@ -177,3 +179,45 @@ def test_index_skips_underscore_dirs(tmp_path):
     run_v4(docs)
 
     assert (tri / "PosGain.md").read_text() == "# scratch\n"   # untouched
+
+
+V5_FW = FIX / "v5_firmware"
+
+
+def run_v5_kw_row(docs, mode="append"):
+    return run([
+        mode, "--version", "v5",
+        "--firmware-root", str(V5_FW),
+        "--docs-root", str(docs),
+        "--manifest", str(docs / "_manifest" / "undocumented.md"),
+    ])
+
+
+def test_v5_kw_row_run_lists_keywords_without_a_page(tmp_path):
+    docs = setup_docs(tmp_path)   # only PosGain has a page
+    assert run_v5_kw_row(docs) == 0
+    manifest = (docs / "_manifest" / "undocumented.md").read_text()
+    for name in ("Pos", "CurrLim", "DInPort", "PhaseVoltage", "RptCount", "Display7Seg"):
+        assert f"| {name} |" in manifest
+    assert "PosGain" not in manifest
+    fm, _ = split_doc((docs / "02-keywords/11-control-tuning/PosGain.md").read_text())
+    assert fm["can_code"] == 2
+    assert fm["availability"]["central-i"] == ["v5"]
+    assert fm["attributes"]["range"] == [0, 4095]
+
+
+def test_params_without_defines_is_an_error(tmp_path):
+    docs = setup_docs(tmp_path)
+    with pytest.raises(SystemExit):
+        run(["append", "--version", "v4", "--params", str(FIX / "params_sample.c"),
+             "--docs-root", str(docs), "--manifest", str(docs / "m.md")])
+
+
+def test_v5_table_passed_as_params_fails_visibly(tmp_path, capsys):
+    docs = setup_docs(tmp_path)
+    rc = run(["append", "--version", "v5",
+              "--params", str(V5_FW / "CommonC" / "AG300_CTL01Params.c"),
+              "--defines", str(FIX / "defs.h"),
+              "--docs-root", str(docs), "--manifest", str(docs / "m.md")])
+    assert rc == 1
+    assert "--firmware-root" in capsys.readouterr().err

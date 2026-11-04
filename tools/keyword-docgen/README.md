@@ -26,8 +26,34 @@ Run once per branch checkout, asserting the version manually.
       --docs-root "03 USER MANUALS/00 KEYWORD REFERENCE MANUAL/content" \
       --manifest  "03 USER MANUALS/00 KEYWORD REFERENCE MANUAL/content/_manifest/undocumented.md"
 
-    # On the develop branch checkout (assert as v5):
-    keyword-docgen append --version v5 ...
+    # On a v5 checkout (develop, 5.3.0-rc7 and later): the KW_ROW table
+    keyword-docgen append --version v5 \
+      --firmware-root /path/to/Firmware-Main \
+      --docs-root "03 USER MANUALS/00 KEYWORD REFERENCE MANUAL/content" \
+      --manifest  "03 USER MANUALS/00 KEYWORD REFERENCE MANUAL/content/_manifest/undocumented.md"
+
+### v5: the KW_ROW table (`--firmware-root`)
+
+v5 has one positional `KW_ROW(idx, "name", …)` table in `CommonC/AG300_CTL01Params.c`;
+the row wrappers (`KW_ROW_CIM_ONLY`, `KW_ROW_CTL_ONLY`, `KW_ROW_EC`, `KW_ROW_7SEG`,
+`KW_ROW_AUTOGAIN`, …) and macros such as `AXIS_CIM` and `CW_TYPETAG_POS` decide what each
+product gets. The generator does not follow those macros itself: it runs the file through
+a C preprocessor once per `PRODUCT_*` in `CommonIncludes/ProductConfig.h`, configured as the
+PC-simulation build configures it (`-DPROCESSOR=4 -DPRODUCT=PRODUCT_…`, the
+`Platform/PC` include path), and reads the expanded rows.
+
+- **Needs `clang` or `gcc` on `PATH`** (or `KEYWORD_DOCGEN_CC=<path>`), for the tests too.
+- The CAN code is the row's position. Min/max/default/scaling resolve through the value
+  pools of the same expansion, so they are what that product's build serves.
+- Products collapse to the two product types, `controller` (`CONTROLLER`) and `ci-master`
+  (`CI_MASTER`). A type's facts come from its reference product (`agd301-et-2d05`, the
+  PC-simulation default, and `agm800`), or from the first product that has the keyword
+  when the reference does not. A keyword on only some products of a type lists them in
+  `products` (catalog IDs, `PRODUCT_AGD155_EC` → `agd155-ec`).
+- Under schema v1 the types fill the v1 cells, `controller` → `standalone` and
+  `ci-master` → `central-i`, and a v5 scan still records only `central-i`. The manifest
+  lists the keywords of both.
+- `--params` on a v5 file is an error, not an empty scan.
 
 - `append` errors if the version is already recorded in a doc (safe first add).
 - `overwrite` re-scans and replaces that version's facts (idempotent refresh).
