@@ -7,7 +7,6 @@ import json
 import sys
 from pathlib import Path
 
-from .defines import DefineTable
 from .frontmatter import (
     is_zh_sidecar,
     propagate_facts_to_sidecar,
@@ -16,10 +15,10 @@ from .frontmatter import (
     zh_sidecar_path,
 )
 from .manifest import render_manifest
-from .merge import VersionAlreadyRecorded, merge_version
-from .model import PRODUCTS, product_supported
+from .merge import FactsAlreadyRecorded, merge_scan
+from .model import PRODUCT_TYPES
 from .ragindex import chunk_record
-from .table_parser import TableError, collapse_by_product_type, parse_kw_row_table, parse_params
+from .table_parser import TableError, collapse_by_product_type, parse_kw_row_table
 from .versioning import stamp_corpus
 
 
@@ -28,16 +27,9 @@ def _build_parser() -> argparse.ArgumentParser:
     sub = parser.add_subparsers(dest="mode", required=True)
     for mode in ("append", "overwrite"):
         p = sub.add_parser(mode)
-        p.add_argument("--version", required=True, choices=["v4", "v5"])
-        src = p.add_mutually_exclusive_group(required=True)
-        src.add_argument("--firmware-root", type=Path,
-                         help="Firmware-Main checkout with the v5 KW_ROW table; expanded "
-                              "once per product by a C preprocessor")
-        src.add_argument("--params", type=Path,
-                         help="Params.c with one table per product type (LTS, pre-KW_ROW "
-                              "develop); needs --defines")
-        p.add_argument("--defines", type=Path, nargs="+",
-                       help="Header file(s) defining MIN/MAX/DFLT/sizes (with --params)")
+        p.add_argument("--firmware-root", required=True, type=Path,
+                       help="Firmware-Main checkout with the v5 KW_ROW table; expanded "
+                            "once per product by a C preprocessor")
         p.add_argument("--docs-root", required=True, type=Path)
         p.add_argument("--manifest", required=True, type=Path)
 
@@ -184,34 +176,20 @@ def _has_keyword_field(path: Path) -> bool:
     return isinstance(fm, dict) and "keyword" in fm
 
 
-# v5 product type -> the v1 schema's product cell.
-_V1_CELL = {"controller": "standalone", "ci-master": "central-i"}
-
-
-def _scan_tables(parser, args) -> dict[str, dict]:
-    if args.firmware_root:
-        cells = collapse_by_product_type(parse_kw_row_table(args.firmware_root))
-        return {_V1_CELL[ptype]: names for ptype, names in cells.items()}
-    if not args.defines:
-        parser.error("--params needs --defines")
-    return parse_params(args.params, DefineTable.from_headers(list(args.defines)))
-
-
 def run(argv: list[str]) -> int:
-    parser = _build_parser()
-    args = parser.parse_args(argv)
+    args = _build_parser().parse_args(argv)
     if args.mode == "version":
         return run_version(args)
     if args.mode == "rag-export":
         return run_rag_export(args)
     try:
-        tables = _scan_tables(parser, args)
+        tables = collapse_by_product_type(parse_kw_row_table(args.firmware_root))
     except TableError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
     docs = _index_docs(args.docs_root)
 
-    # Build per-keyword scan cells across products.
+    # Build per-keyword scan cells across product types.
     all_keywords = set()
     for names in tables.values():
         all_keywords |= set(names)
@@ -220,18 +198,14 @@ def run(argv: list[str]) -> int:
         path = docs.get(mnemonic)
         if path is None:
             continue  # undocumented -> handled by the manifest below
-        scan_cells = {
-            p: (tables.get(p, {}).get(mnemonic)
-                if product_supported(p, args.version) else None)
-            for p in PRODUCTS
-        }
+        scan_cells = {t: tables.get(t, {}).get(mnemonic) for t in PRODUCT_TYPES}
         fm, body = split_doc(path.read_text(encoding="utf-8"))
         fm.setdefault("keyword", mnemonic)
         try:
-            new_fm = merge_version(fm, scan_cells, args.version, mode=args.mode)
-        except VersionAlreadyRecorded:
+            new_fm = merge_scan(fm, scan_cells, mode=args.mode)
+        except FactsAlreadyRecorded:
             print(
-                f"error: {mnemonic}: version {args.version} already recorded "
+                f"error: {mnemonic}: generated facts already recorded "
                 f"(use 'overwrite' to refresh)",
                 file=sys.stderr,
             )
@@ -241,8 +215,8 @@ def run(argv: list[str]) -> int:
         # preserving its translated summary/body. No sidecar -> no-op.
         propagate_facts_to_sidecar(path, new_fm)
 
-    scanned = {p: set(tables.get(p, {})) for p in PRODUCTS}
-    manifest = render_manifest(scanned, set(docs), args.version)
+    scanned = {t: set(tables.get(t, {})) for t in PRODUCT_TYPES}
+    manifest = render_manifest(scanned, set(docs))
     args.manifest.parent.mkdir(parents=True, exist_ok=True)
     args.manifest.write_text(manifest, encoding="utf-8", newline="\n")
     return 0

@@ -1,8 +1,9 @@
 # keyword-docgen
 
-Generates version/product-aware YAML frontmatter on keyword docs from the firmware
-`KeywordsTableArray` in `AG300_CTL01Params.c`. It only updates docs that already exist
-and lists undocumented keywords in a manifest. See the design spec at
+Generates product-type-aware YAML frontmatter (schema v2,
+[`keyword-frontmatter.schema.yml`](keyword-frontmatter.schema.yml)) on keyword docs from
+the firmware v5 `KeywordsTableArray` in `AG300_CTL01Params.c`. It only updates docs that
+already exist and lists undocumented keywords in a manifest. See the design spec at
 `docs/superpowers/specs/2026-05-27-keyword-documentation-system-design.md`.
 
 ## Install
@@ -13,26 +14,19 @@ and lists undocumented keywords in a manifest. See the design spec at
 
 ## Usage
 
-Run once per branch checkout, asserting the version manually.
+Run against a v5 Firmware-Main checkout (develop, 5.3.0-rc7 and later):
 
-    # On the LTS branch checkout (assert as v4):
-    keyword-docgen append --version v4 \
-      --params /path/to/Firmware-Main/CommonC/AG300_CTL01Params.c \
-      --defines /path/to/Firmware-Main/CommonIncludes/AG300_CTL01Params.h \
-                /path/to/Firmware-Main/CommonIncludes/AG300_CTL01ParamsCommon.h \
-                /path/to/Firmware-Main/CommonIncludes/CentraliLib.h \
-                /path/to/Firmware-Main/CommonIncludes/AG300_CTL01Interpreter.h \
-                /path/to/Firmware-Main/CommonIncludes/AG300_CTL01UProgFuncs.h \
-      --docs-root "03 USER MANUALS/00 KEYWORD REFERENCE MANUAL/content" \
-      --manifest  "03 USER MANUALS/00 KEYWORD REFERENCE MANUAL/content/_manifest/undocumented.md"
-
-    # On a v5 checkout (develop, 5.3.0-rc7 and later): the KW_ROW table
-    keyword-docgen append --version v5 \
+    keyword-docgen overwrite \
       --firmware-root /path/to/Firmware-Main \
       --docs-root "03 USER MANUALS/00 KEYWORD REFERENCE MANUAL/content" \
       --manifest  "03 USER MANUALS/00 KEYWORD REFERENCE MANUAL/content/_manifest/undocumented.md"
 
-### v5: the KW_ROW table (`--firmware-root`)
+- `append` errors if a doc already carries generated facts (`availability`), so it is a
+  safe first add.
+- `overwrite` re-scans and replaces the generated facts (idempotent refresh). On a page
+  that still has schema-v1 front matter it replaces the v1 facts; none of them carry over.
+
+### The KW_ROW table
 
 v5 has one positional `KW_ROW(idx, "name", …)` table in `CommonC/AG300_CTL01Params.c`;
 the row wrappers (`KW_ROW_CIM_ONLY`, `KW_ROW_CTL_ONLY`, `KW_ROW_EC`, `KW_ROW_7SEG`,
@@ -59,26 +53,17 @@ expanded rows.
   PC-simulation default product, and `agm800`), or from the first product that has the keyword
   when the reference does not. A keyword on only some products of a type lists them in
   `products` (catalog IDs, `PRODUCT_AGD155_EC` → `agd155-ec`).
-- Under schema v1 the types fill the v1 cells, `controller` → `standalone` and
-  `ci-master` → `central-i`, and a v5 scan still records only `central-i`. The manifest
-  lists the keywords of both.
-- `--params` on a v5 file is an error, not an empty scan.
-
-- `append` errors if the version is already recorded in a doc (safe first add).
-- `overwrite` re-scans and replaces that version's facts (idempotent refresh).
-- **Pass the full `--defines` header set.** Range/default/scaling macros chain across
-  several headers; omitting one silently regresses the affected keywords to `null`:
-  - `AG300_CTL01Interpreter.h` — `LONG64_MAX`/`LONG64_MIN` (= ±(2^51 − 1)); the 64-bit
-    range macros expand to `(long double) LONG64_MAX`.
-  - `AG300_CTL01UProgFuncs.h` — `USER_PROGRAM_NUMERIC_STACK_DEPTH`,
-    `USER_PROGRAM_CALL_STACK_DEPTH`, etc., used by the user-program stack keyword ranges.
-- The resolver handles floats (e.g. scaling `1.526`, float defaults, `1000.0f`), treats
-  the float-type limits `±3.4e38` (`FLOAT_MIN`/`FLOAT_MAX` and aliases) and `±1e38`
-  (`DOUBLE_MAX` on a C2000 build) as unbounded
-  (`range: null`), and `overwrite` never downgrades a previously-resolved numeric
-  range/default to `null` when a re-scan can't resolve it (e.g. a constant that moved
-  from `#define` to an enum). A few constants are firmware enums, not `#define`s
-  (`MAX_FUNCS`, `MAX_TASKS`, the PWM-range terms), so those ranges rely on that guard.
+- The primary cell is `controller` when the keyword has one, else `ci-master`; the other
+  type's differences go to `overrides.<type>`. A product whose facts differ from its
+  type's cell (a range that follows its full-scale current, a scaling that follows its
+  sampling rate) gets its own `overrides.<catalog-id>` with only those fields, relative to
+  its type's cell, so a value is never shown as another product's.
+- `data_type` comes from the row's type tag, so it is always one of `int32` / `float32` /
+  `int64` / `float64`; `overwrite` replaces the stray v1 `float` / `double` spellings with it.
+- The resolver treats the float-type limits `±3.4e38` and `±1e38` (`DOUBLE_MAX` on a C2000
+  build) as unbounded (`range: null`), and `overwrite` never downgrades a
+  previously-resolved numeric range/default of the same product type to `null` when a
+  re-scan can't resolve it.
 
 The generator indexes keyword pages under `02-keywords/**`, `03-special-features/**`
 and `05-legacy-keywords/**`. On a stem collision (a keyword documented in two places)

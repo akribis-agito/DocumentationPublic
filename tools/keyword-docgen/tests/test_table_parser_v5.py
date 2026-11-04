@@ -9,9 +9,7 @@ from keyworddocgen.table_parser import (
     hardware_build,
     list_v5_products,
     parse_kw_row_table,
-    parse_params,
 )
-from keyworddocgen.defines import DefineTable
 
 FW = Path(__file__).parent / "fixtures" / "v5_firmware"
 
@@ -115,7 +113,9 @@ def test_missing_product_config_raises(tmp_path):
         parse_kw_row_table(tmp_path)
 
 
-def test_per_product_table_parser_rejects_a_v5_table():
-    # The pre-KW_ROW parser finds no per-product table in a v5 file: an error, not an empty scan.
-    with pytest.raises(TableError, match="--firmware-root"):
-        parse_params(FW / "CommonC" / "AG300_CTL01Params.c", DefineTable({}))
+def test_collapse_records_per_product_differences(per_product):
+    cells = collapse_by_product_type(per_product)
+    # The cell carries the reference product's bound; agd155-ec's own is kept per product.
+    assert cells["controller"]["CurrLim"]["product_overrides"] == {"agd155-ec": {"range": [-8000000, 8000000]}}
+    assert cells["controller"]["Pos"]["product_overrides"] == {}
+    assert cells["ci-master"]["CurrLim"]["product_overrides"] == {}

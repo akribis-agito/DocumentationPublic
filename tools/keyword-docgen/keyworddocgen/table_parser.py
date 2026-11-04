@@ -1,14 +1,5 @@
-"""Parse KeywordsTableArray entries from a Params.c into per-product maps.
-
-Handles three source formats:
-  * LTS branch: backslash line-continuations, 11 inline attribute tokens, no
-    data-type field (treated as int32).
-  * pre-KW_ROW develop: one table per PRODUCT_TYPE, attributes wrapped in a
-    nested {...} brace with 12 fields including a data-type field (bParamType),
-    and the pointer wrapped in {...}.
-  * v5 (`parse_kw_row_table`): one positional KW_ROW table for every product,
-    read per product through a real C preprocessor.
-"""
+"""Parse the v5 KW_ROW keyword table (`KeywordsTableArray` in Params.c) into
+per-product and per-product-type keyword maps, through a real C preprocessor."""
 
 from __future__ import annotations
 
@@ -26,36 +17,11 @@ class TableError(RuntimeError):
     """The firmware keyword table could not be found, expanded or read."""
 
 
-_PRODUCT_GUARDS = {
-    "CONTROLLER": "standalone",
-    "CI_MASTER": "central-i",
-}
-
-_TABLE_OPEN = re.compile(
-    r"#if\s*\(PRODUCT_TYPE\s*==\s*(\w+)\)\s*&&\s*\(IS_BOOT_IMAGE\s*==\s*0\)"
-)
-
-# Attribute-token maps (shared by both formats).
-_ACCESS = {"RW": "rw", "RO": "ro"}
-_TYPE = {"ISARRAY": "array", "NOARRAY": "scalar"}
-_FLASH = {"FLASH": True, "NOFLASH": False}
-_SCOPE = {"AXIS": "axis", "NON_AXIS": "non-axis"}
-_IMPL = {"FINAL": "final", "PARTIAL": "partial"}
-_UNITS = {"USER_UNITS": "user", "NO_USER_UNITS": "none", "FUNC_UNITS": "func"}
 # The float-type limit (+/-3.4e38, FLOAT_MIN/FLOAT_MAX and aliases like VQ_MIN/VQ_MAX;
 # +/-1e38, DOUBLE_MAX on a C2000 build) is not a real bound; a keyword whose min/max
 # resolves to it accepts any float, so its range is reported as null (unbounded).
 # Detected by value so aliases are caught.
 _FLOAT_TYPE_LIMIT = 1.0e38
-
-
-# develop bParamType tokens
-_DATA_TYPE = {
-    "0": "int32", "LONG32": "int32",
-    "1": "float32", "FLOAT": "float32",
-    "2": "float64", "DOUBLE": "float64",
-    "3": "int64", "LONG64": "int64",
-}
 
 
 def _split_fields(body: str) -> list[str]:
@@ -163,95 +129,6 @@ def _range(lo, hi):
     if abs(lo) >= _FLOAT_TYPE_LIMIT or abs(hi) >= _FLOAT_TYPE_LIMIT:
         return None
     return [lo, hi]
-
-
-def _attrs_from_tokens(
-    units_tok, access_tok, motion_tok, motoron_tok, array_tok, flash_tok,
-    axis_tok, impl_tok, maxidx, lo, hi, dflt, scaling, data_type,
-) -> dict:
-    is_array = _TYPE.get(array_tok, "scalar") == "array"
-    array_size = (maxidx + 1) if (is_array and maxidx is not None) else 1
-    return {
-        "access": _ACCESS.get(access_tok, access_tok.lower()),
-        "scope": _SCOPE.get(axis_tok, axis_tok.lower()),
-        "flash": _FLASH.get(flash_tok, False),
-        "type": "array" if is_array else "scalar",
-        "array_size": array_size,
-        "data_type": data_type,
-        "ok_in_motion": motion_tok == "OKINMOTN",
-        "ok_motor_on": motoron_tok == "OKMTRON",
-        "units": _UNITS.get(units_tok, units_tok.lower()),
-        "range": _range(lo, hi),
-        "default": dflt,
-        "scaling": float(scaling) if scaling is not None else 1.0,
-        "implemented": _IMPL.get(impl_tok, impl_tok.lower()),
-    }
-
-
-def _entry_to_record(fields: list[str], defines: DefineTable) -> dict | None:
-    mnemonic = fields[1].strip().strip('"')
-    if not mnemonic or mnemonic.startswith("ZZ"):
-        return None
-
-    if fields[2].startswith("{"):
-        # develop format: attributes nested brace + data-type field
-        attr = _split_fields(fields[2].strip("{} "))
-        if len(attr) < 12:
-            return None
-        maxidx = defines.resolve(fields[3])
-        attributes = _attrs_from_tokens(
-            units_tok=attr[2], access_tok=attr[3], motion_tok=attr[4],
-            motoron_tok=attr[5], array_tok=attr[6], flash_tok=attr[7],
-            axis_tok=attr[8], impl_tok=attr[9], maxidx=maxidx,
-            lo=defines.resolve(fields[4]), hi=defines.resolve(fields[5]),
-            dflt=defines.resolve(fields[6]), scaling=defines.resolve(fields[7]),
-            data_type=_DATA_TYPE.get(attr[11], "int32"),
-        )
-    else:
-        # LTS format: 11 inline attribute tokens, no data-type field
-        if len(fields) < 18:
-            return None
-        maxidx = defines.resolve(fields[13])
-        attributes = _attrs_from_tokens(
-            units_tok=fields[4], access_tok=fields[5], motion_tok=fields[6],
-            motoron_tok=fields[7], array_tok=fields[8], flash_tok=fields[9],
-            axis_tok=fields[10], impl_tok=fields[11], maxidx=maxidx,
-            lo=defines.resolve(fields[14]), hi=defines.resolve(fields[15]),
-            dflt=defines.resolve(fields[16]), scaling=defines.resolve(fields[17]),
-            data_type="int32",
-        )
-    return {"can_code": int(fields[0]), "attributes": attributes}
-
-
-def _parse_one_table(table_block: str, defines: DefineTable) -> dict[str, dict]:
-    result: dict[str, dict] = {}
-    for entry in _iter_entries(table_block):
-        fields = _split_fields(entry)
-        if len(fields) < 8:
-            continue
-        record = _entry_to_record(fields, defines)
-        if record:
-            result[fields[1].strip().strip('"')] = record
-    return result
-
-
-def parse_params(path: Path, defines: DefineTable) -> dict[str, dict[str, dict]]:
-    """Return {product: {mnemonic: {can_code, attributes}}}."""
-    text = Path(path).read_text(encoding="utf-8", errors="replace")
-    tables: dict[str, dict[str, dict]] = {}
-    for guard in _TABLE_OPEN.finditer(text):
-        product = _PRODUCT_GUARDS.get(guard.group(1))
-        if product is None:
-            continue
-        def_idx = text.index("KeywordsTableArray[NUM_OF_CAN_CODES]", guard.end())
-        eq_idx = text.index("=", def_idx)
-        brace_idx = text.index("{", eq_idx)
-        table_block = _extract_balanced(text, brace_idx)
-        tables[product] = _parse_one_table(table_block, defines)
-    if not tables:
-        raise TableError(f"{path}: no per-product KeywordsTableArray; a v5 KW_ROW "
-                         "table is read with --firmware-root")
-    return tables
 
 
 # ---------------------------------------------------------------------------
@@ -464,13 +341,22 @@ def parse_kw_row_table(firmware_root: Path, products: list[str] | None = None,
 V5_REFERENCE_PRODUCTS = {"controller": "agd301-et-2d05", "ci-master": "agm800"}
 
 
+def _delta(rec: dict, cell: dict) -> dict:
+    diff = {k: v for k, v in rec["attributes"].items() if v != cell["attributes"].get(k)}
+    if rec["can_code"] != cell["can_code"]:
+        diff["can_code"] = rec["can_code"]
+    return diff
+
+
 def collapse_by_product_type(per_product: dict[str, dict]) -> dict[str, dict[str, dict]]:
     """Fold `parse_kw_row_table` output into {product type: {mnemonic: cell}}.
 
-    A cell is {can_code, attributes, products}. Its facts come from the type's
-    reference product, or from the first product of the type that has the
-    keyword when the reference does not. `products` lists the catalog IDs of
-    the type's products that have the keyword, or is empty when all of them do.
+    A cell is {can_code, attributes, products, product_overrides}. Its facts come
+    from the type's reference product, or from the first product of the type that
+    has the keyword when the reference does not. `products` lists the catalog IDs
+    of the type's products that have the keyword, or is empty when all of them do.
+    `product_overrides` maps the catalog ID of each product whose facts differ from
+    the cell's to only the fields (attributes or can_code) that differ.
     """
     out: dict[str, dict[str, dict]] = {}
     for ptype in V5_PRODUCT_TYPES.values():
@@ -486,5 +372,7 @@ def collapse_by_product_type(per_product: dict[str, dict]) -> dict[str, dict[str
         for name, cell in cells.items():
             have = [pid for pid in ids if name in per_product[pid]["keywords"]]
             cell["products"] = [] if len(have) == len(ids) else have
+            deltas = {pid: _delta(per_product[pid]["keywords"][name], cell) for pid in have}
+            cell["product_overrides"] = {pid: d for pid, d in deltas.items() if d}
         out[ptype] = cells
     return out
