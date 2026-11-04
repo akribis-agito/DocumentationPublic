@@ -1,21 +1,17 @@
-"""Merge a scanned version's facts into a doc's frontmatter."""
+"""Merge a v5 scan's per-product-type facts into a doc's frontmatter (schema v2)."""
 
 from __future__ import annotations
 
-from .model import (
-    PRODUCTS,
-    PRIMARY_PRODUCT,
-    cell_key,
-    latest_version,
-    version_rank,
-)
+from .model import PRIMARY_PRODUCT_TYPE, PRODUCT_TYPES, normalise_data_type
 
 
-class VersionAlreadyRecorded(Exception):
-    """Raised by append when the version is already present in the doc."""
+class FactsAlreadyRecorded(Exception):
+    """Raised by append when the doc already carries generated facts."""
 
 
 _FLOAT_TYPE_LIMIT = 3.0e38
+# Generated keys of the v1 schema (version axis, standalone/central-i cells).
+_V1_ONLY_KEYS = ("removed_in",)
 
 
 def _is_finite(value) -> bool:
@@ -29,116 +25,87 @@ def _is_finite(value) -> bool:
     )
 
 
-def _reconstruct_cells(fm: dict) -> dict[tuple[str, str], dict]:
-    """Rebuild {(product, version): {"attrs": {...}, "can_code": int}} from the
-    primary attributes/can_code plus per-cell overrides. `can_code` may appear
-    inside an override entry (it can differ by version)."""
-    cells: dict[tuple[str, str], dict] = {}
+def _reconstruct_cells(fm: dict) -> dict[str, dict]:
+    """Rebuild {product type: attrs} from schema-v2 primary attributes plus
+    overrides. A v1 page (availability keyed by product, values are versions)
+    yields nothing: its v4 facts are never carried into a v5 cell."""
+    availability = fm.get("availability")
+    if not isinstance(availability, list):
+        return {}
     primary_attrs = fm.get("attributes") or {}
-    top_can = fm.get("can_code")
-    availability = fm.get("availability", {})
-    overrides = fm.get("overrides", {})
-    for product in PRODUCTS:
-        for version in availability.get(product, []):
-            ov = dict(overrides.get(cell_key(product, version), {}))
-            can_code = ov.pop("can_code", top_can)
-            attrs = dict(primary_attrs)
-            attrs.update(ov)
-            cells[(product, version)] = {"attrs": attrs, "can_code": can_code}
+    overrides = fm.get("overrides") or {}
+    cells: dict[str, dict] = {}
+    for ptype in availability:
+        attrs = dict(primary_attrs)
+        attrs.update({k: v for k, v in (overrides.get(ptype) or {}).items() if k != "can_code"})
+        cells[ptype] = attrs
     return cells
 
 
-def _recorded_versions(fm: dict) -> set[str]:
-    versions: set[str] = set()
-    for vs in fm.get("availability", {}).values():
-        versions.update(vs)
-    return versions
+def merge_scan(fm: dict, scan_cells: dict, mode: str) -> dict:
+    """Return a new frontmatter dict carrying the scan's facts.
 
-
-def merge_version(fm: dict, scan_cells: dict, version: str, mode: str) -> dict:
-    """Return a new frontmatter dict with `version`'s facts merged in.
-
-    `scan_cells` maps product -> {"can_code", "attributes"} or None if absent.
-    `mode` is "append" (errors if version already present) or "overwrite".
+    `scan_cells` maps product type -> {"can_code", "attributes", "products"} or
+    None when the keyword is absent from that type. `mode` is "append" (errors
+    if the doc already carries generated facts) or "overwrite".
     """
     fm = dict(fm or {})
-    if mode == "append" and version in _recorded_versions(fm):
-        raise VersionAlreadyRecorded(version)
+    if mode == "append" and "availability" in fm:
+        raise FactsAlreadyRecorded()
+    prior = _reconstruct_cells(fm)
 
-    cells = _reconstruct_cells(fm)
+    cells: dict[str, dict] = {}
+    for ptype in PRODUCT_TYPES:
+        cell = scan_cells.get(ptype)
+        if cell is None:
+            continue
+        attrs = dict(cell["attributes"])
+        attrs["data_type"] = normalise_data_type(attrs.get("data_type"))
+        # No-regression guard: a re-scan that can no longer resolve a numeric
+        # range/default (e.g. a constant moved from #define to enum) must not
+        # downgrade a previously-known value of the same product type to null.
+        for field in ("range", "default"):
+            if attrs.get(field) is None and _is_finite(prior.get(ptype, {}).get(field)):
+                attrs[field] = prior[ptype][field]
+        cells[ptype] = {"attrs": attrs, "can_code": cell["can_code"],
+                        "products": list(cell.get("products") or [])}
+    if not cells:
+        raise ValueError(f"{fm.get('keyword')}: absent from every product type")
 
-    # Drop any prior cells for this version, then apply the scan.
-    for product in PRODUCTS:
-        prior = cells.pop((product, version), None)
-        cell = scan_cells.get(product)
-        if cell is not None:
-            attrs = dict(cell["attributes"])
-            # No-regression guard: a re-scan that can no longer resolve a numeric
-            # range/default (e.g. a constant moved from #define to enum, or a
-            # header is missing) must not downgrade a previously-known value to
-            # null. Keep the prior finite value instead.
-            if prior is not None:
-                for field in ("range", "default"):
-                    if attrs.get(field) is None and _is_finite(prior["attrs"].get(field)):
-                        attrs[field] = prior["attrs"][field]
-            cells[(product, version)] = {
-                "attrs": attrs,
-                "can_code": cell["can_code"],
-            }
-
-    # removed_in: a version we scanned but where the keyword is now absent,
-    # while older cells still exist.
-    removed_in = set(fm.get("removed_in", []))
-    removed_in.discard(version)
-    scanned_absent = all(scan_cells.get(p) is None for p in PRODUCTS)
-    if scanned_absent and cells:
-        removed_in.add(version)
-
-    availability = {
-        product: sorted(
-            [v for (p, v) in cells if p == product], key=version_rank
-        )
-        for product in PRODUCTS
+    primary_type = PRIMARY_PRODUCT_TYPE if PRIMARY_PRODUCT_TYPE in cells else next(iter(cells))
+    primary = cells[primary_type]
+    generated = {
+        "can_code": primary["can_code"],
+        "availability": list(cells),
+        "attributes": primary["attrs"],
+        "overrides": _compute_overrides(cells, primary_type),
     }
-
-    primary_cell = _pick_primary(cells)
-    result = dict(fm)
-    result["availability"] = availability
-    if primary_cell is not None:
-        primary = cells[primary_cell]
-        result["can_code"] = primary["can_code"]
-        result["attributes"] = primary["attrs"]
-        result["overrides"] = _compute_overrides(cells, primary_cell)
-    if removed_in:
-        result["removed_in"] = sorted(removed_in, key=version_rank)
-    else:
-        result.pop("removed_in", None)
+    products = sorted({pid for cell in cells.values() for pid in cell["products"]})
+    result: dict = {}
+    for key, value in fm.items():
+        if key in _V1_ONLY_KEYS or key == "products":
+            continue
+        result[key] = generated.pop(key, value)
+        if key == "availability" and products:
+            result["products"] = products
+    for key, value in generated.items():
+        result[key] = value
+        if key == "availability" and products:
+            result["products"] = products
     return result
 
 
-def _pick_primary(cells: dict[tuple[str, str], dict]) -> tuple[str, str] | None:
-    for product in [PRIMARY_PRODUCT] + [p for p in PRODUCTS if p != PRIMARY_PRODUCT]:
-        versions = [v for (p, v) in cells if p == product]
-        latest = latest_version(versions)
-        if latest is not None:
-            return (product, latest)
-    return None
-
-
-def _compute_overrides(cells, primary_cell) -> dict:
-    """Per-cell deltas from the primary cell, covering both attributes and
-    can_code (which can differ by version)."""
-    primary = cells[primary_cell]
+def _compute_overrides(cells: dict[str, dict], primary_type: str) -> dict:
+    """Per-product-type deltas from the primary cell, covering both attributes
+    and can_code."""
+    primary = cells[primary_type]
     overrides: dict[str, dict] = {}
-    for (product, version), cell in cells.items():
-        if (product, version) == primary_cell:
+    for ptype, cell in cells.items():
+        if ptype == primary_type:
             continue
-        diff = {
-            k: v for k, v in cell["attrs"].items()
-            if v != primary["attrs"].get(k)
-        }
+        diff = {k: v for k, v in cell["attrs"].items() if v != primary["attrs"].get(k)}
         if cell["can_code"] != primary["can_code"]:
             diff["can_code"] = cell["can_code"]
         if diff:
-            overrides[cell_key(product, version)] = diff
+            overrides[ptype] = diff
     return overrides

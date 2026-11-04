@@ -1,7 +1,5 @@
 from pathlib import Path
 
-import pytest
-
 from keyworddocgen.cli import run
 from keyworddocgen.frontmatter import split_doc
 
@@ -12,81 +10,59 @@ def setup_docs(tmp_path: Path) -> Path:
     docs = tmp_path / "docs"
     kw = docs / "02-keywords" / "11-control-tuning"
     kw.mkdir(parents=True)
-    # Only PosGain has a doc; PosKi will land in the manifest.
+    # Only PosGain has a doc; the other keywords land in the manifest.
     (kw / "PosGain.md").write_text(
         "---\nsummary: Proportional gain.\n---\n# PosGain\n\nProportional gain.\n"
     )
     return docs
 
 
-def run_v4(docs, mode="append"):
+def run_scan(docs, mode="append"):
     return run([
-        mode, "--version", "v4",
-        "--params", str(FIX / "params_sample.c"),
-        "--defines", str(FIX / "defs.h"),
+        mode,
+        "--firmware-root", str(FIX / "v5_firmware"),
         "--docs-root", str(docs),
         "--manifest", str(docs / "_manifest" / "undocumented.md"),
     ])
-
-
-def run_v5(docs, mode="append"):
-    return run([
-        mode, "--version", "v5",
-        "--params", str(FIX / "params_sample_develop.c"),
-        "--defines", str(FIX / "defs.h"),
-        "--docs-root", str(docs),
-        "--manifest", str(docs / "_manifest" / "undocumented.md"),
-    ])
-
-
-def test_v5_scan_does_not_record_standalone(tmp_path):
-    # v5 is central-i only: a v5 scan must not add standalone availability,
-    # even though the develop source still has a CONTROLLER (standalone) table.
-    docs = setup_docs(tmp_path)
-    run_v4(docs)
-    run_v5(docs)
-    fm, _ = split_doc((docs / "02-keywords/11-control-tuning/PosGain.md").read_text())
-    assert fm["availability"]["standalone"] == ["v4"]          # no v5 for standalone
-    assert fm["availability"]["central-i"] == ["v4", "v5"]      # central-i gains v5
 
 
 def test_updates_existing_doc_frontmatter(tmp_path):
     docs = setup_docs(tmp_path)
-    run_v4(docs)
+    run_scan(docs)
     fm, body = split_doc((docs / "02-keywords/11-control-tuning/PosGain.md").read_text())
-    assert fm["can_code"] == 100
-    assert fm["attributes"]["range"] == [0, 20000]
-    assert fm["availability"]["standalone"] == ["v4"]
+    assert fm["can_code"] == 2
+    assert fm["attributes"]["range"] == [0, 4095]
+    assert fm["availability"] == ["controller", "ci-master"]
     assert fm["summary"] == "Proportional gain."        # preserved
     assert "Proportional gain." in body                  # body preserved
 
 
 def test_does_not_create_doc_for_undocumented_keyword(tmp_path):
     docs = setup_docs(tmp_path)
-    run_v4(docs)
-    assert not (docs / "02-keywords/11-control-tuning/PosKi.md").exists()
+    run_scan(docs)
+    assert not (docs / "02-keywords/11-control-tuning/CurrLim.md").exists()
 
 
 def test_writes_manifest_with_undocumented(tmp_path):
     docs = setup_docs(tmp_path)
-    run_v4(docs)
+    run_scan(docs)
     manifest = (docs / "_manifest" / "undocumented.md").read_text()
-    assert "PosKi" in manifest
+    assert "| CurrLim | controller, ci-master |" in manifest
     assert "PosGain" not in manifest
 
 
-def test_append_twice_same_version_errors(tmp_path, capsys):
+def test_append_twice_errors(tmp_path, capsys):
     docs = setup_docs(tmp_path)
-    run_v4(docs)
-    rc = run_v4(docs)                # second append of v4
+    run_scan(docs)
+    rc = run_scan(docs)              # second append
     assert rc != 0
     assert "already recorded" in capsys.readouterr().err.lower()
 
 
 def test_overwrite_twice_is_idempotent(tmp_path):
     docs = setup_docs(tmp_path)
-    run_v4(docs, mode="append")
-    rc = run_v4(docs, mode="overwrite")
+    run_scan(docs, mode="append")
+    rc = run_scan(docs, mode="overwrite")
     assert rc == 0
 
 
@@ -99,16 +75,16 @@ def test_indexes_special_features_and_legacy_roots(tmp_path):
     sf.mkdir(parents=True)
     lg.mkdir(parents=True)
     (sf / "PosGain.md").write_text("# PosGain\n\nlegacy body A\n")   # no frontmatter
-    (lg / "PosKi.md").write_text("# PosKi\n\nlegacy body B\n")        # no frontmatter
+    (lg / "CurrLim.md").write_text("# CurrLim\n\nlegacy body B\n")        # no frontmatter
 
-    run_v4(docs)
+    run_scan(docs)
 
     fm_pg, body_pg = split_doc((sf / "PosGain.md").read_text())
-    assert fm_pg["can_code"] == 100
-    assert fm_pg["availability"]["standalone"] == ["v4"]
+    assert fm_pg["can_code"] == 2
+    assert fm_pg["availability"] == ["controller", "ci-master"]
     assert "legacy body A" in body_pg          # body preserved
-    fm_pk, body_pk = split_doc((lg / "PosKi.md").read_text())
-    assert fm_pk.get("can_code") is not None   # PosKi also onboarded
+    fm_pk, body_pk = split_doc((lg / "CurrLim.md").read_text())
+    assert fm_pk.get("can_code") is not None   # CurrLim also onboarded
     assert "legacy body B" in body_pk
 
 
@@ -131,10 +107,10 @@ def test_index_prefers_canonical_entry_on_stem_collision(tmp_path):
         "---\nkeyword: PosGain\nsummary: canonical.\n---\n# PosGain\n\ncanonical body\n"
     )
 
-    run_v4(docs)
+    run_scan(docs)
 
     fm_c, _ = split_doc((canon_dir / "PosGain.md").read_text())
-    assert fm_c["can_code"] == 100                       # canonical got facts
+    assert fm_c["can_code"] == 2                       # canonical got facts
     fm_s, body_s = split_doc((stub_dir / "PosGain.md").read_text())
     assert "can_code" not in fm_s                        # stub untouched
     assert fm_s["summary"] == "see the primary entry."
@@ -152,20 +128,20 @@ def test_append_propagates_facts_into_zh_sidecar(tmp_path):
         "# PosGain\n\n中文正文\n"
     )
 
-    run_v4(docs)
+    run_scan(docs)
 
     zh_fm, zh_body = split_doc((kw / "PosGain.zh.md").read_text())
     assert zh_fm["language"] == "zh-CN"
     assert zh_fm["summary"] == "比例增益。"          # translated, preserved
-    assert zh_fm["can_code"] == 100                  # generated fact propagated
-    assert zh_fm["attributes"]["range"] == [0, 20000]
-    assert zh_fm["availability"]["standalone"] == ["v4"]
+    assert zh_fm["can_code"] == 2                  # generated fact propagated
+    assert zh_fm["attributes"]["range"] == [0, 4095]
+    assert zh_fm["availability"] == ["controller", "ci-master"]
     assert "中文正文" in zh_body                       # translated body preserved
 
 
 def test_append_does_not_create_zh_sidecar_when_absent(tmp_path):
     docs = setup_docs(tmp_path)
-    run_v4(docs)
+    run_scan(docs)
     assert not (docs / "02-keywords/11-control-tuning/PosGain.zh.md").exists()
 
 
@@ -176,48 +152,61 @@ def test_index_skips_underscore_dirs(tmp_path):
     tri.mkdir(parents=True)
     (tri / "PosGain.md").write_text("# scratch\n")   # not a real doc
 
-    run_v4(docs)
+    run_scan(docs)
 
     assert (tri / "PosGain.md").read_text() == "# scratch\n"   # untouched
 
 
-V5_FW = FIX / "v5_firmware"
-
-
-def run_v5_kw_row(docs, mode="append"):
-    return run([
-        mode, "--version", "v5",
-        "--firmware-root", str(V5_FW),
-        "--docs-root", str(docs),
-        "--manifest", str(docs / "_manifest" / "undocumented.md"),
-    ])
-
-
-def test_v5_kw_row_run_lists_keywords_without_a_page(tmp_path):
-    docs = setup_docs(tmp_path)   # only PosGain has a page
-    assert run_v5_kw_row(docs) == 0
+def test_manifest_lists_every_v5_keyword_without_a_page(tmp_path):
+    docs = setup_docs(tmp_path)
+    assert run_scan(docs) == 0
     manifest = (docs / "_manifest" / "undocumented.md").read_text()
-    for name in ("Pos", "CurrLim", "DInPort", "PhaseVoltage", "RptCount", "Display7Seg"):
-        assert f"| {name} |" in manifest
-    assert "PosGain" not in manifest
-    fm, _ = split_doc((docs / "02-keywords/11-control-tuning/PosGain.md").read_text())
+    assert "| PhaseVoltage | ci-master |" in manifest
+    assert "| Display7Seg | controller |" in manifest
+    assert "| RptCount | controller |" in manifest
+
+
+def write_page(docs, name, front=""):
+    kw = docs / "02-keywords" / "11-control-tuning"
+    kw.mkdir(parents=True, exist_ok=True)
+    (kw / f"{name}.md").write_text(f"---\n{front}---\n# {name}\n")
+    return kw / f"{name}.md"
+
+
+def test_product_gated_keyword_carries_products(tmp_path):
+    docs = tmp_path / "docs"
+    page = write_page(docs, "Display7Seg")
+    run_scan(docs)
+    fm, _ = split_doc(page.read_text())
+    assert fm["availability"] == ["controller"]
+    assert fm["products"] == ["agd155-ec"]
+
+
+def test_ci_master_width_is_an_override(tmp_path):
+    docs = tmp_path / "docs"
+    page = write_page(docs, "Pos")
+    run_scan(docs)
+    fm, _ = split_doc(page.read_text())
+    assert fm["attributes"]["data_type"] == "int32"
+    assert fm["overrides"] == {"ci-master": {"data_type": "int64"}}
+    assert "products" not in fm
+
+
+def test_overwrite_replaces_v1_front_matter(tmp_path):
+    docs = tmp_path / "docs"
+    page = write_page(docs, "PosGain", (
+        "keyword: PosGain\nsummary: Gain.\ncan_code: 100\n"
+        "availability:\n  standalone: [v4]\n  central-i: [v4, v5]\n"
+        "attributes: {range: [0, 20000], default: 7, data_type: float}\n"
+        "overrides:\n  central-i.v5: {can_code: 348}\n"
+        "removed_in: [v5]\n"
+    ))
+    assert run_scan(docs, mode="overwrite") == 0
+    text = page.read_text()
+    fm, _ = split_doc(text)
+    assert "v4" not in text and "v5" not in text and "removed_in" not in fm
+    assert fm["availability"] == ["controller", "ci-master"]
     assert fm["can_code"] == 2
-    assert fm["availability"]["central-i"] == ["v5"]
-    assert fm["attributes"]["range"] == [0, 4095]
-
-
-def test_params_without_defines_is_an_error(tmp_path):
-    docs = setup_docs(tmp_path)
-    with pytest.raises(SystemExit):
-        run(["append", "--version", "v4", "--params", str(FIX / "params_sample.c"),
-             "--docs-root", str(docs), "--manifest", str(docs / "m.md")])
-
-
-def test_v5_table_passed_as_params_fails_visibly(tmp_path, capsys):
-    docs = setup_docs(tmp_path)
-    rc = run(["append", "--version", "v5",
-              "--params", str(V5_FW / "CommonC" / "AG300_CTL01Params.c"),
-              "--defines", str(FIX / "defs.h"),
-              "--docs-root", str(docs), "--manifest", str(docs / "m.md")])
-    assert rc == 1
-    assert "--firmware-root" in capsys.readouterr().err
+    assert fm["attributes"]["default"] == 20.0     # v1 values are never carried over
+    assert fm["overrides"] == {}
+    assert fm["summary"] == "Gain."

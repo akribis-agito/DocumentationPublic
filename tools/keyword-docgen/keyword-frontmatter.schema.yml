@@ -9,7 +9,7 @@
 // Source of truth for facts: firmware KeywordsTableArray (AG300_CTL01Params.c),
 // extracted by tools/keyword-docgen. Prose (body) and `summary` are authored.
 
-version: 1
+version: 2
 
 # ---------------------------------------------------------------------------
 # Field reference
@@ -45,7 +45,7 @@ fields:
     origin: generated
     required: true
     description: >
-      CAN code of the PRIMARY cell. The CAN code can differ between versions;
+      CAN code of the PRIMARY cell. The CAN code can differ between product types;
       when it does, the differing cell's can_code appears inside its `overrides`
       entry (treated like any other divergent field). Renderers should show the
       primary can_code with a divergence marker when an override carries can_code.
@@ -57,26 +57,36 @@ fields:
     description: Category slug (e.g. control-tuning, system).
 
   availability:
-    type: object
+    type: list
+    items: { type: enum, values: [controller, ci-master] }
     origin: generated
     required: true
-    description: Which (product, version) cells this keyword exists in.
-    properties:
-      standalone: { type: list, items: version }   # e.g. [v4]
-      central-i:  { type: list, items: version }    # e.g. [v4, v5]
-    note: >
-      An empty list means the keyword is not available on that product. NOTE:
-      v5 is central-i only (v5 moved to 64-bit and dropped the standalone
-      product), so `standalone` never contains `v5` — the matrix cell
-      standalone x v5 is always N/A.
+    description: >
+      The firmware product types (v5) this keyword exists on, in this order.
+      `controller` is every CONTROLLER product (drives and controllers, 32-bit
+      control width); `ci-master` is CI_MASTER, the AGM800 family (64-bit).
+    example: [controller, ci-master]
+
+  products:
+    type: list
+    items: string
+    origin: generated
+    required: false
+    description: >
+      Catalog IDs, lowercase (`PRODUCT_AGD155_EC` -> `agd155-ec`), of the
+      products that have this keyword, listed only for a product type on which
+      some products lack it. A type in `availability` with none of its products
+      listed here means every product of that type. Absent means every product
+      of every type in `availability`.
+    example: [agd155-ec, agd155-ec-var34, agd156-ec]
 
   attributes:
     type: object
     origin: generated
     required: true
     description: >
-      Facts for the PRIMARY cell (latest version of the primary product,
-      standalone). Every field below is rendered in Quick Facts.
+      Facts for the PRIMARY cell: `controller` if it is in `availability`,
+      otherwise `ci-master`. Every field below is rendered in Quick Facts.
     properties:
       access:       { type: enum, values: [ro, rw] }
       scope:        { type: enum, values: [axis, non-axis] }
@@ -89,30 +99,23 @@ fields:
       data_type:    { type: enum, values: [int32, float32, int64, float64] }
       ok_in_motion: { type: boolean }
       ok_motor_on:  { type: boolean }
-      units:        { type: enum, values: [user, none, func] }
+      units:        { type: enum, values: [user, none, func, aux_user_units, pd_user_units, scaling] }
       range:        { type: "list[2] | null", items: integer }   # [min, max], or null if unresolved
       default:      { type: "integer | null" }
       scaling:      { type: number }
-      implemented:  { type: enum, values: [final, partial] }
+      implemented:  { type: enum, values: [final, partial, not_implemented, future] }
 
   overrides:
     type: object
     origin: generated
     required: false
     description: >
-      Per-cell deltas from the primary. Keys are "<product>.<version>" (flat
-      dotted); values are a partial map containing ONLY the fields that differ
-      from the primary. May include any attributes field AND `can_code` (the CAN
-      code can differ by version). Drives the divergence markers.
+      Deltas of the non-primary product type from the primary. Keys are product
+      types; values are a partial map containing ONLY the fields that differ
+      from the primary. May include any attributes field AND `can_code`. Drives
+      the divergence markers.
     example:
-      standalone.v4: { can_code: 468, range: [0, 32767], default: 120, access: ro }
-      central-i.v5:  { default: 90 }
-
-  removed_in:
-    type: list
-    origin: generated
-    required: false
-    description: Versions scanned in which the keyword is absent though older cells exist.
+      ci-master: { data_type: int64, range: [-2251799813685248, 2251799813685247] }
 
 # ---------------------------------------------------------------------------
 # data_type vocabulary (display labels)
@@ -124,13 +127,20 @@ data_type_labels:
   float64: "64-bit double"
 
 # ---------------------------------------------------------------------------
+# Product type vocabulary (display labels)
+# ---------------------------------------------------------------------------
+product_type_labels:
+  controller: "Drives & controllers (32-bit)"
+  ci-master:  "AGM800 Central-i master (64-bit)"
+
+# ---------------------------------------------------------------------------
 # Render mapping — how a renderer turns this frontmatter into the page
 # ---------------------------------------------------------------------------
 render_mapping:
   title:            "# heading + summary line"
-  availability:     "2x2 matrix (rows: standalone/central-i, cols: versions). Cell = present / present-but-differs / n/a."
-  primary_cell:     "standalone + latest available version; its attributes populate Quick Facts in full."
-  quick_facts:      "one row per attributes.* field (latest-version values)."
-  divergence_dot:   "a field gets a marker if it appears in any overrides.* entry; the old value is shown on hover/expand from that override."
+  availability:     "one-row strip of two cells, controller then ci-master, labelled from product_type_labels. Cell = present / present-but-differs / n/a; a cell whose type has products listed in `products` names them."
+  primary_cell:     "controller if available, else ci-master; its attributes populate Quick Facts in full."
+  quick_facts:      "one row per attributes.* field (primary-cell values)."
+  divergence_dot:   "a field gets a marker if it appears in overrides.ci-master (or overrides.controller); the other type's value is shown on hover/expand from that override."
   array_indexing:   "present array indexes starting at 1 (index 0 is reserved/inaccessible)."
-  behavioural_diff: "authored '## Changes between versions' body section (not derivable from facts)."
+  behavioural_diff: "authored body prose for behaviour that differs between product types (not derivable from facts)."

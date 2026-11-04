@@ -8,9 +8,7 @@ from keyworddocgen.table_parser import (
     collapse_by_product_type,
     list_v5_products,
     parse_kw_row_table,
-    parse_params,
 )
-from keyworddocgen.defines import DefineTable
 
 FW = Path(__file__).parent / "fixtures" / "v5_firmware"
 
@@ -90,9 +88,3 @@ def test_missing_product_config_raises(tmp_path):
     (tmp_path / "CommonIncludes" / "ProductConfig.h").write_text("// no products\n")
     with pytest.raises(TableError):
         parse_kw_row_table(tmp_path)
-
-
-def test_per_product_table_parser_rejects_a_v5_table():
-    # The pre-KW_ROW parser finds no per-product table in a v5 file: an error, not an empty scan.
-    with pytest.raises(TableError, match="--firmware-root"):
-        parse_params(FW / "CommonC" / "AG300_CTL01Params.c", DefineTable({}))
