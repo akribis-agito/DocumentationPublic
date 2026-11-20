@@ -97,7 +97,7 @@ For brushless vector control, the firmware limits the output voltage vector usin
 
 Voltage saturation is reported in [StatReg](../../07-status-and-faults/StatReg.md) bit 22. `MaxPWM` limits the requested output; saturation does not itself raise a [ConFlt](../../07-status-and-faults/ConFlt.md) fault.
 
-On a Central-i PWM amplifier, the default uses the maximum permitted by the connected remote after allowing for dead time. Read the limits and default for the specific port before restoring a configuration.
+On a Central-i PWM amplifier, the default uses the maximum permitted by the connected remote after allowing for dead time. Read the limits and default for the specific port before restoring a configuration. Before a remote connects, the controller calculates its startup default using nominal dead time and the same 10% reserve.
 
 ## Examples
 
