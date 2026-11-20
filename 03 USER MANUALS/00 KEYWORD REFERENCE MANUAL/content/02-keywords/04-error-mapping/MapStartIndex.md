@@ -49,6 +49,8 @@ It is an axis-scoped parameter saved to flash, and can be changed with the motor
 
 The map must fit within the available table size from `MapStartIndex` onward; the upper bound of the keyword tracks the combined bank size. Because indices are **1-based**, `MapStartIndex = 1` selects `MapTable[1]` as the first entry.
 
+The last point in an active map is `MapStartIndex + MapLength[1] × … × MapLength[d] − 1`, where `d` is the active dimension count. It must fit within the product’s map storage. Enabling a map or changing its start or length returns error 14 if the last point would exceed that storage. The previous setting stays in effect.
+
 ## Examples
 
 ```text

@@ -52,6 +52,8 @@ language: zh-CN
 
 由于这些条目作为从 [MapStartIndex](MapStartIndex.md) 开始的一个扁平数组寻址，其总量必须能容纳在合并的 [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) 存储区内。每个维度值的范围为 `1 … 60000`；对于 2D/3D，真正的约束是其**乘积**。
 
+生效映射的最后一点索引为 `MapStartIndex + MapLength[1] × … × MapLength[d] − 1`，其中 `d` 为生效的维数。该索引必须在产品的映射表容量内。如果启用映射或更改起始索引、长度会使最后一点越界，控制器返回错误 14，原设置继续生效。 如果 Load 恢复的起始索引和各维长度导致当前生效的映射模式超出存储容量，控制器会关闭映射，保留恢复的值，并记录警告 2003。
+
 ## 示例
 
 ```text

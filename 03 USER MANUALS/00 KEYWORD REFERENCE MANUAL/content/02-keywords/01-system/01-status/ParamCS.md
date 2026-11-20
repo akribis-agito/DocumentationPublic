@@ -35,7 +35,7 @@ Read-only checksum over the controller's parameter set, for verifying configurat
 
 ## How it works
 
-The checksum is recomputed when the parameter set is saved. The firmware walks every saved parameter value: each 32-bit value is split into its high and low 16-bit halves, and both halves are added (with 16-bit wraparound) into a running sum. Values that are stored with scaling are first converted back to their raw (unscaled) integer form, so the checksum reflects the stored representation rather than the displayed user-units value. Element `[0]` of array parameters is excluded (it is never uploaded), so array contents start contributing from element `[1]`.
+The checksum is recomputed when the parameter set is saved. The firmware walks every saved parameter value: each 32-bit value is split into its high and low 16-bit halves, and both halves are added (with 16-bit wraparound) into a running sum. Scaled integer values are converted back to command units before summation. Each 32-bit floating-point value contributes both words of its stored IEEE representation, including when the keyword applies scaling. Element `[0]` of array parameters is excluded (it is never uploaded), so array contents start contributing from element `[1]`.
 
 Three sums are maintained in parallel, differing only in which network-identity parameters they include. They populate the three usable elements:
 
