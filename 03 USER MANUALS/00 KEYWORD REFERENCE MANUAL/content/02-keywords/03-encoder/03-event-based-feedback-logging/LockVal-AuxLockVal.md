@@ -1,6 +1,6 @@
 ---
 summary: Records the feedback position of the most recent logged digital event.
-last_updated: '2026-10-09'
+last_updated: '2026-11-20'
 doc_revision: '2026.11'
 ---
 # LockVal/AuxLockVal
@@ -21,6 +21,8 @@ How the position is captured depends on the encoder type:
 - **Absolute / other non-incremental encoders** — hardware latching is not available, so `LockVal` is set to the most recent polled feedback position ([Pos](../../10-motion/01-kinematics-status/Pos.md)). The trigger must persist long enough to be seen at the control-cycle rate, and the captured value is exact to the position at the polling instant but slightly delayed relative to the true trigger instant. For this method, keep axis speed low enough that an index/trigger is not missed between control cycles.
 
 The captured value is referenced to the same feedback pipeline as [Pos](../../10-motion/01-kinematics-status/Pos.md): the firmware compensates for the offset between the raw hardware capture counter and the user-unit feedback value, so `LockVal` is directly comparable to `Pos`.
+
+On an AGM800 axis with main-encoder position mapping enabled, the lock value includes the map correction at the control sample that handles the latch. Firmware with the interpolation fix rounds this correction to the nearest encoder count, choosing the greater integer at a half count. A correction of 12.735 counts contributes 13 counts. The pre-map latch value and the auxiliary encoder stay in their own coordinate frames. During motion the sampled correction can differ from the correction at the instant of the pulse.
 
 ### Central-i coordinate changes
 
