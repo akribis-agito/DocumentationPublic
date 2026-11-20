@@ -50,6 +50,8 @@ The command checks several prerequisites and is rejected (returns an error) if a
 
 Run `EventCorrect` again whenever the error map or the source [EventTable](EventTable.md) changes, then select the corrected table for table-mode generation.
 
+The inverse map rounds the interpolated raw encoder position to the nearest count when storing the corrected event table. At an exact half count it chooses the greater integer, so +1.5 becomes +2 and −1.5 becomes −1. Forward position mapping uses the same tie rule. Encoder quantisation and the control sample at which a lock is read can still affect the reported position.
+
 ## Examples
 
 ```text

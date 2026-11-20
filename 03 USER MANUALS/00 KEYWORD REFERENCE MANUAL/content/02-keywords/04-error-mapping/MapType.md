@@ -63,6 +63,8 @@ This ramp logic is shared by all of `MapType`, [MapErrOnStep](MapErrOnStep.md), 
 
 Mapping itself cannot be enabled in motion (`ok_in_motion = false`), but writing `MapType` does not by itself validate the encoder selections. The stricter encoder/standing requirements are enforced separately, when **event correction** is run on a mapped axis: the first dimension must reference this axis's own main encoder, and for 2D/3D the additional source axes (selected by [MapEncoder](MapEncoder.md)) must be **motor-on and not moving** and must use their **main** encoders.
 
+Position mapping rounds the interpolated correction to the nearest count. Exact half counts round toward the greater integer. In two- and three-dimensional maps the intermediate blends retain their fractional values until the final correction is rounded.
+
 ## Examples
 
 ```text

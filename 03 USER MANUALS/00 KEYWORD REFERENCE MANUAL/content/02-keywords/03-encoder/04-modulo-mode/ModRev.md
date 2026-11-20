@@ -64,6 +64,8 @@ Because the whole reference frame moves together, `PosErr = PosRef − Pos` is u
 - **ECAM coupling.** When an axis is an active ECAM slave whose master is `Pos`/`PosRef`, the slave wraps only together with its master (coupled roll-over), not independently.
 - **SetPosition.** Presetting [Pos](../../10-motion/01-kinematics-status/Pos.md) with [SetPosition](../../10-motion/03-kinematics-configuration/SetPosition.md) is allowed but the value should be within `[0, ModRev)`; out-of-range values are pulled back into range over subsequent cycles.
 
+An endless software fixed-gap event series shifts its pending threshold with the feedback on each wrap. For a modulus of 300 and a gap of 95, the local event positions continue as 40, 135, 230, 25, 120. This keeps the spacing at 95 counts through the wrap.
+
 ## Examples
 
 The table shows the modulo operation output for a `ModRev` of 3000:
