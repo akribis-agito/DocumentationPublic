@@ -36,6 +36,8 @@ language: zh-CN
 
 `MasterFactDen` **仅在 v5（central-i）上存在**。v4 没有分母：比值为 `MasterFact / 65536`（参见 [MasterFact](MasterFact.md)）。因此，默认值 `65536` 在 `MasterFact = 65536` 时可复现 v4 的 1:1 比值。
 
+在含小数余量跟踪修复的多轴固件中，直接从轴模式也使用约分后的 `MasterFact / MasterFactDen`。轴 A 保留余量并跟随轴 B 的参考变化。参见 [MotionMode10](MotionMode10.md)。
+
 ## 工作原理
 
 $$

@@ -35,6 +35,8 @@ Denominator of the gear ratio applied to the master-variable delta.
 
 `MasterFactDen` exists **only on v5 (central-i)**. On v4 there is no denominator: the ratio is `MasterFact / 65536` (see [MasterFact](MasterFact.md)). The default `65536` therefore reproduces the v4 1:1 ratio when `MasterFact = 65536`.
 
+On multi-axis firmware with the fractional tracking fix, direct slave mode also uses the reduced `MasterFact / MasterFactDen` ratio. Axis A carries the remainder as it follows changes in axis B’s reference. See [MotionMode10](MotionMode10.md).
+
 ## How it works
 
 $$
