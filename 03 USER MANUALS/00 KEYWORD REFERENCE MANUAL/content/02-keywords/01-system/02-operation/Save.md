@@ -53,6 +53,8 @@ Writes all flash-saveable parameters from volatile memory to flash.
 
 Because the operation can take a noticeable time, the firmware keeps the watchdog satisfied across the write. On central-i the command is acknowledged immediately — an early empty reply tells the host the operation has begun — and, because the long flash write blocks the loop that normally feeds the watchdog, the firmware pre-loads the background watchdog feed for roughly 120 seconds. A host should therefore allow up to about that long for the final OK/error reply before treating `Save` as hung. Index 0 of every array is deliberately excluded from the checksum and from host upload (arrays are 1-indexed).
 
+Flash verification covers both 16-bit words of every stored 32-bit floating-point value. A failed check returns error 30 before parameters are restored. Existing valid flash images remain readable. A host that compares `ParamCS` should refresh its saved reference if the configuration includes scaled floating-point parameters.
+
 ## Examples
 
 ```text

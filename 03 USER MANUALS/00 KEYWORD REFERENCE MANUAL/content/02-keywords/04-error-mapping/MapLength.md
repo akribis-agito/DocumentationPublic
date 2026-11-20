@@ -51,6 +51,8 @@ It is an axis-scoped array saved to flash, and can be changed with the motor on,
 
 Because the entries are addressed as one flat array starting at [MapStartIndex](MapStartIndex.md), the total must fit within the combined [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) banks. Each per-dimension value ranges `1 … 60000`; for 2D/3D the **product** is the real constraint.
 
+The last point in an active map is `MapStartIndex + MapLength[1] × … × MapLength[d] − 1`, where `d` is the active dimension count. It must fit within the product’s map storage. Enabling a map or changing its start or length returns error 14 if the last point would exceed that storage. The previous setting stays in effect.
+
 ## Examples
 
 ```text

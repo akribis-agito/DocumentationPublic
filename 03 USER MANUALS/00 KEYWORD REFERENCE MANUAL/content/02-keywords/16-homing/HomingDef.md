@@ -224,6 +224,8 @@ The remaining elements of each step (`HomingDef[2, 12, …, 192]`, `HomingDef[3,
 | HomingDef[4, 14, …, 194] | Value to wait for. |
 | HomingDef[5, 15, …, 195] | Timeout [controller cycles]. |
 
+A homing lock step temporarily selects the main encoder in hardware. Reading or saving `EncSinCosHWEn` returns the configured selection throughout the step. Changing that selection during the override is refused. On completion, timeout or abort, the firmware restores the configured source and leaves the previous lock and event sessions disarmed. Mode 0 learns the offset at the next enable. Mode 1 requires a fresh `LockEventInit`. Mode 2 recomputes after the source write succeeds and the remote settles.
+
 ## Examples
 
 A three-step sequence — jog into the reverse limit, set position there to 0, then end:
