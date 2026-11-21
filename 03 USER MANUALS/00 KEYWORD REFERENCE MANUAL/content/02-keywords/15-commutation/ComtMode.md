@@ -46,7 +46,7 @@ The resulting electrical angle is reported by [ComtAng](ComtAng.md), and progres
 | `[1]` | Commutation **method** | `0` search "jump to zero"; `2` absolute encoder; `3` special-encoder switching, fixed built-in code→angle table, not [HallsAngle](HallsAngle.md) (waits for index pulse for fine adjustment); `4` Hall + encoder switching (waits for a Hall transition for fine adjustment); `5` minimal-jumps search; `6` Hall-only; `7` user-defined angle — the angle is taken directly from index `[33]`, with no search and no motion (central-i v5 only) |
 | `[2]` | Voltage increment per step (search methods) | Output-voltage step added each iteration. Default `1` |
 | `[3]` | Number of steps (search methods) | Step count over which the search voltage is ramped/applied |
-| `[4]` | Absolute-encoder zero reference | Stored encoder position of electrical-angle zero (written by the controller when method `2` finishes; saved to flash) |
+| `[4]` | Absolute-encoder zero | Method 2 recalls this value. On firmware with the revised search, a successful search updates it only when the learn word includes bit 2. |
 | `[5]` | **Repeat-commutation request** | Write `1282` to re-run commutation now; write `202` to re-run with a learn pass. The controller clears the request back to `0` after acting (only acts when the motor is off and the axis is in normal operation) |
 | `[6]` | Smooth voltage rise | `0` off, `1` on — ramps the applied search drive instead of stepping it (useful on vertical/gravity-loaded axes). For method `5` it also advances the flux angle continuously across each jump instead of stepping the angle between jumps |
 | `[7]` | Initial voltage rise time | Time (ms) over which the initial search voltage is reached. Default `5` |
@@ -54,7 +54,8 @@ The resulting electrical angle is reported by [ComtAng](ComtAng.md), and progres
 | `[18]` | Commutation accuracy | Required accuracy, in percent. Default `10` |
 | `[19]` | Commutation **mode** | `0` run after power-on (default); `1` manual only (never automatic — trigger via index `[5]`); `2` run when the motor is turned on; `3` run after power-on and on motor-on |
 | `[20]`–`[24]` | Minimal-jumps search parameters | Voltage increment, step count, delta-position threshold, stop-time, and minimal range used by method `5` |
-| `[25]`–`[26]` | Reserved | Not used — no firmware reads these elements |
+| `[25]` | Legacy VBus learn switch | Firmware with the revised search uses bit 9 of `[30]`. |
+| `[26]` | VBus learn target current | Desired motor current in mA for the method 0 voltage-domain search. |
 | `[27]` | Phasing **domain** | `0` voltage domain (default) — the phasing drive is applied as phase voltages `Va`/`Vb`/`Vc`; `1` current domain — the phasing drive is applied as a current reference and the current loop drives the phases. Read by methods `0` and `5`. A value that is neither `0` nor `1` is coerced to `0` on write and on parameter restore. On an axis configured for an external amplifier, the voltage domain is refused ([ComtStatus](ComtStatus.md) `-17`). Central-i v5 only |
 | `[28]` | Phasing current peak | Peak of the current command that each jump of method `0` or `5` ramps up to, in mA, when `[27]=1`. Not read in the voltage domain, where the peak is `[2] × [3]` for method `0` and `[20] × [21]` for method `5` instead. Not clamped, and has no non-zero default — left at `0` in the current domain, no phasing drive is produced. Central-i v5 only |
 | `[29]` | Phasing **direction** | Initial direction of the commutation jumps of method `0`: `-1` or `+1`. Any negative value is normalized to `-1` and any other value to `+1`, on write and on parameter restore. Hard-stop learning and bidirectional phasing may reverse it during the process. Central-i v5 only |
@@ -133,17 +134,18 @@ phasing selected by `[19]` always run with no learning, whatever `[30]` holds.
 Writing `[30]=0` and then requesting a learn pass learns *everything* — bits 0, 1
 and 3 together (`0x00B`).
 
-![Learn-option bit layout: bits 0, 1, 3 and 8 are single flags for current direction, hard stop, rough Hall angles and a bidirectional pass; bit 2 is defined but never read; bits 4-5 and bits 6-7 each hold a small method number rather than a flag, and are read by masking and shifting](comtmode-learn-bits.svg)
+Earlier firmware bit layout: ![Learn-option bit layout: bits 0, 1, 3 and 8 are single flags for current direction, hard stop, rough Hall angles and a bidirectional pass; bit 2 is defined but never read; bits 4-5 and bits 6-7 each hold a small method number rather than a flag, and are read by masking and shifting](comtmode-learn-bits.svg)
 
 | Bits | Value | Meaning |
 |---|---|---|
 | 0 | `0x001` | Learn current direction. After two consecutive jumps of the right size but the wrong direction, [CurrDir](../09-current-and-voltage/02-motor-variables/CurrDir.md) and the phasing direction are both flipped and phasing restarts |
 | 1 | `0x002` | Learn hard stop. After two consecutive jumps shorter than half the expected distance, the phasing angle is shifted away from the obstruction (on a second encounter the direction is also flipped) and phasing restarts |
-| 2 | `0x004` | Named for absolute-encoder-zero learning, but not read anywhere in the firmware — see the note below |
+| 2 | `0x004` | Record the absolute-encoder zero in `[4]` on firmware with the revised search. |
 | 3 | `0x008` | Learn rough Hall angles. The [HallsValue](HallsValue.md) readings collected during phasing are analyzed at the end and the [HallsAngle](HallsAngle.md) table is rewritten |
 | 4–5 | field | Fine Hall-angle learn method: `0` off, `1` closest neighbour, `2` least-squares fit, `3` averaging |
 | 6–7 | field | Detent curve-fit method: `0` off — take the commutation offset from the last successful detent; `1` least-squares fit; `2` averaging over the recorded detents |
 | 8 | `0x100` | Bidirectional phasing. The search is run once in each direction |
+| 9 | `0x200` | For method 0 in the voltage domain, learn the voltage for the current in `[26]` and continue directly into phasing. |
 
 Bits 4–5 and 6–7 hold a small number rather than a single flag, so shift the
 method number into place: least-squares fine Hall learning is `2 << 4` = `0x020`,
@@ -161,9 +163,7 @@ When a learn pass has changed a stored parameter, commutation finishes with
 [ComtStatus](ComtStatus.md) `500` instead of `100`, as a reminder to save the
 changed parameters to flash.
 
-> [!note]
-> Bit 2 (`0x004`) is defined in the firmware as an absolute-encoder-zero learn
-> bit, but no firmware code reads it. Setting it has no effect.
+> Identity word 62 bit `0x100` identifies the revised VBus search. ComtStatus[5] reports the learned peak in PWM codes. ComtMode[2] holds the per-step increment.
 
 ## Examples
 
