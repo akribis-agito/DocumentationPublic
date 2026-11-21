@@ -1,32 +1,32 @@
 ---
 keyword: MotionMode10
-summary: Direct slave motion (MotionMode = 10) — axis A follows axis B's position reference directly, scaled by MasterFact. Hand-authored; regenerate remaining frontmatter via docgen.
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+summary: Direct slave motion (MotionMode = 10) — axis A follows axis B's position reference directly, scaled by the configured gear ratio. Hand-authored; regenerate remaining frontmatter via docgen.
+last_updated: '2026-11-20'
+doc_revision: '2026.11'
 ---
 # MotionMode = 10 — Direct slave motion
 
-Direct slave motion mode ([MotionMode](../02-motion-configuration/MotionMode.md) `= 10`) is a separate, narrower mode from gear motion. Axis A's position reference is driven each control cycle from the change in axis B's position reference, scaled by [MasterFact](MasterFact.md). It does **not** use [GearMaster](GearMaster.md), [MasterPos](MasterPos.md), [MasterFilt](MasterFilt.md), [MasterFactDen](MasterFactDen.md) or [MasterModRev](MasterModRev.md).
+In direct slave motion, axis A follows changes in axis B’s position reference. Firmware with the fractional tracking fix uses the reduced ratio from [MasterFact](MasterFact.md) and [MasterFactDen](MasterFactDen.md). The master is always axis B on supported multi-axis products.
 
-![Direct slave: axis B's per-cycle reference change is scaled by MasterFact and added to axis A's reference](slave-direct-signal-path.svg)
+![Axis B reference changes are scaled by the configured ratio and accumulated on axis A](slave-direct-signal-path.svg)
 
 ## How it works
 
 ### Per-cycle update
 
-While the mode is in motion, every control cycle the controller forms the change in axis B's position reference since the previous cycle and adds it, scaled by `MasterFact`, to axis A's position reference. There is no intermediate accumulator (no `MasterPos`), no low-pass filter (no `MasterFilt`) and no master selection by complex CAN code (no `GearMaster`) — the master is hard-wired to axis B's reference, and the slave is hard-wired to axis A.
+From each sample to the next, the controller scales axis B’s reference change by the configured ratio and carries the fractional remainder forward. Over an interval with one ratio, the ideal change in axis A’s reference is
 
 $$
-\Delta_{\text{PosRef A}} = \frac{\text{MasterFact}}{65536} \cdot \Delta_{\text{PosRef B}}
+\Delta_{\text{PosRef A, ideal}} = \frac{\text{MasterFact}}{\text{MasterFactDen}} \cdot \Delta_{\text{PosRef B}}
 $$
 
-The follower change is added to axis A's existing reference each cycle, so the reference accumulates by `MasterFact / 65536` of axis B's reference change. A negative `MasterFact` reverses the follower direction relative to the master.
+Axis A follows the nearest whole internal reference unit. At an exact half unit it takes the greater integer. The residual stays within half an internal reference unit as the direction reverses. A negative numerator reverses the follower direction.
 
 ### Begin
 
 Issuing [Begin](../04-motion-command/Begin.md) with `MotionMode = 10`:
 
-- snapshots axis B's current position reference as the "previous" value, so the first cycle produces a zero change (no jump at start);
+- snapshots axis B’s current reference and clears axis A’s remainder. Leaving mode 10 or changing the reduced ratio also clears the remainder. Rewriting an equivalent ratio retains it.
 - starts the motion immediately (no `BeginDInOn` arming path is honoured for this mode);
 - marks axis A as in motion.
 
@@ -50,18 +50,18 @@ The mode stays in motion until the axis is disabled or a new `MotionMode` is set
 |---|---|---|
 | Master selection | Hard-wired to axis B's reference | Any variable, via [GearMaster](GearMaster.md) |
 | Slave axis | Hard-wired to axis A | The commanded axis |
-| Ratio | [MasterFact](MasterFact.md) only (v4: integer, v5: floating-point) | [MasterFact](MasterFact.md) / [MasterFactDen](MasterFactDen.md), with fractional-remainder carry on v5 |
+| Ratio | [MasterFact](MasterFact.md) / [MasterFactDen](MasterFactDen.md), with a carried remainder on firmware with the tracking fix | [MasterFact](MasterFact.md) / [MasterFactDen](MasterFactDen.md), with remainder carry in v5 |
 | Master accumulator | None (no [MasterPos](MasterPos.md)) | [MasterPos](MasterPos.md) accumulates each cycle |
 | Smoothing filter | None (no [MasterFilt](MasterFilt.md)) | First-order low-pass via [MasterFilt](MasterFilt.md) |
 | Modulo handling | None (no [MasterModRev](MasterModRev.md)) | [MasterModRev](MasterModRev.md) wraps the master |
 | Software limits | Not clamped inside this mode | Clamped by [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md) / [RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md) |
 | `Stop` / `Abort` handling | Ignored — motion continues | Ends the motion immediately (no deceleration ramp) |
 
-If you need any of the gear-motion features (a configurable master, exact rational ratios, smoothing, modulo wrap, software limits or a controlled stop), use direct or indirect gear motion ([MotionMode](../02-motion-configuration/MotionMode.md) `= 5` or `= 6`) instead.
+If you need any of the gear-motion features (a configurable master, smoothing, modulo wrap, software limits or a controlled stop), use direct or indirect gear motion ([MotionMode](../02-motion-configuration/MotionMode.md) `= 5` or `= 6`) instead.
 
 ## Changes between versions
 
-The mathematical role of `MasterFact` is the same on both versions — scaling axis B's per-cycle reference change before adding it to axis A's reference — but the precision differs:
+The following table describes firmware before the fractional tracking fix. Both versions scale axis B’s position-reference change before adding it to axis A’s reference.
 
 | | v4 (standalone &amp; central-i) | v5 (central-i) |
 |---|---|---|
@@ -73,25 +73,26 @@ The mathematical role of `MasterFact` is the same on both versions — scaling a
 ## Examples
 
 ```text
-; --- Axis A as direct slave of axis B at unity ratio ---
-AMasterFact=65536     ; 65536 = unity (1:1) on v4; on v5 also unity
+; --- Axis A follows axis B at 7:13 on firmware with fractional tracking ---
+AMasterFact=7
+AMasterFactDen=13
 AMotionMode=10        ; 10 = direct slave (axis A follows axis B)
 ABegin                ; latches axis B reference; A now tracks dB each cycle
 
 ; --- Read axis A's reference while axis B moves ---
-APosRef               ; updates each cycle by MasterFact x change in axis B's reference
+APosRef               ; reads the current follower reference
 
 ; --- End the motion by disabling the slave axis ---
 AMotorOn=0            ; disable the slave; this mode does not honour Stop/Abort
 ```
 
-`MasterFact = -65536` reverses the follower direction relative to axis B. Other ratios scale linearly (`MasterFact = 131072` doubles the follower change per master change).
+With this configuration, a net change of 13 internal reference units on axis B adds 7 units to axis A. Changing the numerator to −7 reverses the direction.
 
 ## See also
 
 - [MotionMode](../02-motion-configuration/MotionMode.md) — selects the type of motion (this is value `10`)
-- [MasterFact](MasterFact.md) — scaling factor read by this mode
+- [MasterFact](MasterFact.md) and [MasterFactDen](MasterFactDen.md) — numerator and denominator
 - [GearMaster](GearMaster.md) — **not** used by this mode (used by `MotionMode = 5` / `= 6`)
-- [MasterPos](MasterPos.md), [MasterFilt](MasterFilt.md), [MasterFactDen](MasterFactDen.md), [MasterModRev](MasterModRev.md) — gear-motion only; not used by this mode
+- [MasterPos](MasterPos.md), [MasterFilt](MasterFilt.md), [MasterModRev](MasterModRev.md) — gear-motion only; not used by this mode
 - [PosRef](../01-kinematics-status/PosRef.md) — the reference this mode drives directly
 - [Begin](../04-motion-command/Begin.md) — starts the motion

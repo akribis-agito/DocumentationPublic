@@ -43,6 +43,8 @@ The maximum sustainable event rate is bounded by `EventGap` divided by the axis 
 
 For finite by-gap generation (`EventType = 1`, `EventAlwaysOn = 0`), arming with `EventOn = 1` rejects a zero gap or a gap whose sign points away from the end, returning error **14**. The refusal preserves the configured gap and positions. For `EventBegPos = 20000` and `EventEndPos = 200`, use `EventGap = -100`; a positive gap advances away from the end and is refused. Configure the window while disarmed, correct its gap, then arm it.
 
+On C2000 and C28388 axes using the software comparator, arming a finite fixed-gap window selects the first point ahead in its direction of travel. For a window from 1000 to 2000 with a gap of 100, arming at 1550 selects 1600. Holding at 1550 emits no pulse. If one control sample crosses several points, the controller emits one pulse, advances beyond all the crossed points, and records error 414 in the axis error log on the first such miss after arming.
+
 ## Examples
 
 ```text

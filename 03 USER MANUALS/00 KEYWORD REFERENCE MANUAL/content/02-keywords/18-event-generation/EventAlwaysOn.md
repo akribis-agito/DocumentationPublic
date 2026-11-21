@@ -48,6 +48,8 @@ When `EventAlwaysOn = 1`, the controller arms the by-gap engine in continuous mo
 
 `EventAlwaysOn` is an axis-related parameter saved to flash and can be changed at any time.
 
+With an endless fixed-gap software series, a ModRev wrap shifts the next threshold by the same modulus as the position feedback. Spacing therefore continues across revolutions, including when the gap does not divide the modulus. This applies to software-comparator axes on the controller and to Central-i software events.
+
 ## Examples
 
 ```text

@@ -50,7 +50,7 @@ $$
 
 ### 关于独立直接从轴模式的说明
 
-直接从轴运动模式（[MotionMode](../02-motion-configuration/MotionMode.md) `= 10`，参见 [MotionMode10](MotionMode10.md)）同样使用 `MasterFact` 作为缩放因子，但直接读取该值，无需经过 `MasterPos` 或 `MasterFilt`。它是与电子齿轮运动（`MotionMode = 5` 和 `= 6`）不同的独立机制——该模式的输入约定参见 [MotionMode10](MotionMode10.md)。
+在含小数余量跟踪修复的多轴固件中，直接从轴模式也使用约分后的 `MasterFact / MasterFactDen`。轴 A 保留余量并跟随轴 B 的参考变化。参见 [MotionMode10](MotionMode10.md)。
 
 ## 示例
 

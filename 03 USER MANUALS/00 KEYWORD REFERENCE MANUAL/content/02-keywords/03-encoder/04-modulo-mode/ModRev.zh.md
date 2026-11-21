@@ -65,6 +65,8 @@ language: zh-CN
 - **ECAM 耦合。** 当某轴为活动的 ECAM 从轴，且其主轴为 `Pos`/`PosRef` 时，从轴仅与其主轴一起环绕（耦合回绕），而非独立环绕。
 - **SetPosition。** 允许使用 [SetPosition](../../10-motion/03-kinematics-configuration/SetPosition.md) 预设 [Pos](../../10-motion/01-kinematics-status/Pos.md)，但该值应在 `[0, ModRev)` 范围内；超出范围的值会在随后的几个周期内被拉回范围内。
 
+连续的固定间距软件事件在每次回绕时，将待比较的位置与反馈同步平移。例如，模数为 300、间距为 95 时，当前圈内的事件位置依次为 40、135、230、25、120。回绕前后间距均为 95 个计数。
+
 ## 示例
 
 下表显示 `ModRev` 为 3000 时的取模操作输出：

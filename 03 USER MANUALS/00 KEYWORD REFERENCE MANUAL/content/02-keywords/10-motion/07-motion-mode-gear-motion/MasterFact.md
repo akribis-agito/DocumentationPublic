@@ -49,7 +49,7 @@ A negative `MasterFact` reverses the follower direction relative to the master. 
 
 ### Note on the separate direct-slave mode
 
-The direct-slave motion mode ([MotionMode](../02-motion-configuration/MotionMode.md) `= 10`, see [MotionMode10](MotionMode10.md)) also uses `MasterFact` as its scaling factor, but reads it directly without going through `MasterPos` or `MasterFilt`. It is a separate mechanism from gear motion (`MotionMode = 5` and `= 6`) — see [MotionMode10](MotionMode10.md) for that mode's input convention.
+On multi-axis firmware with the fractional tracking fix, direct slave mode also uses the reduced `MasterFact / MasterFactDen` ratio. Axis A carries the remainder as it follows changes in axis B’s reference. See [MotionMode10](MotionMode10.md).
 
 ## Examples
 
