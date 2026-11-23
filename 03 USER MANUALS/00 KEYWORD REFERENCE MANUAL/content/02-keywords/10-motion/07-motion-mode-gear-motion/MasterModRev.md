@@ -24,8 +24,8 @@ attributes:
 overrides:
   ci-master:
     data_type: int64
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-11-23'
+doc_revision: '2026.11'
 ---
 # MasterModRev
 
@@ -55,7 +55,7 @@ Each cycle, if `MasterModRev ≠ 0`, the change is compared against half the bou
 
 A change larger than half a revolution is therefore interpreted as a wrap in the opposite direction and unwrapped, so `MasterPos` stays continuous across the master's modulo boundary. This assumes the master moves no more than half its `ModRev` per controller cycle — the same assumption the follower's own modulo handling makes.
 
-In **v5 (central-i)** the unwrap is applied to the raw master change *before* the gear ratio is applied, so `MasterModRev` is simply the master variable's own `ModRev` for any ratio. In **v4** the unwrap is applied to the change *after* it has been scaled by [MasterFact](MasterFact.md), so the comparison uses the geared change: with the default `MasterFact = 65536` (1:1) you set `MasterModRev` to the master's `ModRev` directly, but at a non-1:1 ratio the value to set is the master's `ModRev` multiplied by `MasterFact / 65536`.
+In v5 the controller unwraps the raw master change before applying the gear ratio. Set `MasterModRev` to the master variable’s wrap period in master counts. Central-i masters store this setting as a 64-bit value.
 
 ## Examples
 
@@ -67,7 +67,7 @@ AMasterModRev            ; read current value
 
 ## Changes between versions
 
-In **v5 (central-i)** `MasterModRev` is a 64-bit value, and the unwrap is applied before the gear ratio (see *The correction*). **v5 is central-i only.**
+The legacy YiGuang firmware applied wrap correction after gearing, so a saved period is in follower counts. To migrate a nonzero period with a nonzero gear ratio, divide its magnitude by the absolute value of the old gear ratio (saved `MasterFact / 65536`). For a legacy ratio of 1:2 or −1:2, a period of 500 follower counts becomes 1,000 master counts. Check that this equals the physical master wrap period before reusing the setting. A zero period still disables correction. An incorrect period can turn a normal master wrap into a large follower command. [Migration note](https://github.com/akribis-agito/Firmware-Main/blob/develop/docs/engineering/Gearing-Migration.md)
 
 ## See also
 

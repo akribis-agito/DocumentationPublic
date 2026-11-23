@@ -22,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-11-23'
+doc_revision: '2026.11'
 ---
 # MasterFact
 
@@ -62,7 +62,7 @@ AMasterFact          ; read current value
 
 ## Changes between versions
 
-In **v4** the ratio is `MasterFact / 65536` (numerator only); there is no denominator in the accumulation. In **v5 (central-i)** the full rational ratio `MasterFact / MasterFactDen` is applied, carrying the fractional remainder, so non-integer ratios are exact and free of long-term drift; see [MasterFactDen](MasterFactDen.md). **v5 is central-i only.**
+Legacy v4 gearing rounds the requested ratio to a multiple of 1/65536. Firmware using `MasterFact / MasterFactDen` carries the fractional remainder from one cycle to the next. At 1:3 the old factor was 21845/65536. With positive net master travel the legacy follower falls behind the v5 follower. Reversing net travel reverses the difference. A ratio that rounds upward gives the opposite result. See [MasterFactDen](MasterFactDen.md) for the measured differences and [MasterModRev](MasterModRev.md) to convert a saved wrap period.
 
 ## See also
 

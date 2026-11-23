@@ -9,6 +9,8 @@ Two related subsystems are documented in this section:
 - **FIFO segment motion** ([MotionMode](../02-motion-configuration/MotionMode.md) = 9) — sequences of linear (constant-velocity) and parabolic (constant-acceleration) segments. See [FIFOType](FIFOType.md) for the full description, with [FIFOValue](FIFOValue.md), [FIFOStatus](FIFOStatus.md), [FIFOCycleTime](FIFOCycleTime.md), the `FIFOPush*` functions ([FIFOPushCycle](FIFOPushCycle.md), [FIFOPushLinP](FIFOPushLinP.md), [FIFOPushLinV](FIFOPushLinV.md), [FIFOPushParP](FIFOPushParP.md), [FIFOPushParA](FIFOPushParA.md)), [FIFORemove](FIFORemove.md), [FIFOClear](FIFOClear.md), and [StopFIFO](StopFIFO.md).
 - **FIFO position tracking** ([MotionMode](../02-motion-configuration/MotionMode.md) = 19) — a reference trajectory streamed from a position queue. See [FIFOPosType](FIFOPosType.md), [FIFOPosFIFOEn](FIFOPosFIFOEn.md), [FIFOPosCycle](FIFOPosCycle.md), [FIFOPosPush](FIFOPosPush.md), [FIFOPosTrgt](FIFOPosTrgt.md), [FIFOPosPosOf](FIFOPosPosOf.md), [FIFOPosVelOf](FIFOPosVelOf.md), [FIFOPosCurrOf](FIFOPosCurrOf.md), [FIFOPosStatus](FIFOPosStatus.md), and [FIFOPosClear](FIFOPosClear.md).
 
+On EtherCAT motion cores, [InitFifoParams](InitFifoParams.md) loads the addressed axis’s current cyclic targets and clears its FIFO tracking offsets. [FIFOTorqueTrgt](FIFOTorqueTrgt.md) exposes the working torque target.
+
 ## Underrun behaviour by subsystem
 
 The two subsystems behave differently when the queue empties — this is a frequently missed detail:

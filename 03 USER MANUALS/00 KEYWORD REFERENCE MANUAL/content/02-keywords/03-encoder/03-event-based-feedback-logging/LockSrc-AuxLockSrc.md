@@ -1,6 +1,6 @@
 ---
 summary: Selects the digital event source and trigger edge for feedback logging.
-last_updated: '2026-10-09'
+last_updated: '2026-11-23'
 doc_revision: '2026.11'
 ---
 # LockSrc/AuxLockSrc
@@ -112,9 +112,12 @@ In both cases the absolute value is converted to a zero-based input index intern
 Not all trigger sources reach the capture logic with the same latency:
 
 - **Discrete digital inputs and bidirectional differential I/O** pass through a configurable input debounce/glitch filter before they can trigger a capture. This filter rejects short noise pulses, but it also adds a small, filter-dependent delay between the physical edge and the latched capture. The delay scales with how the input filtering is configured.
-- **Encoder index lines and Hall-sensor lines** feed the capture logic essentially raw, with no debounce stage, so they trigger with the lowest latency.
+- **Hall inputs** reach the capture logic without the configurable debounce stage used by discrete inputs.
+- **CIG1 encoder index** (remotes with an ancillary counter, starting with FPGA v5.5.0-rc1). Select the index of the encoder whose position the ancillary counter measures. The FPGA decodes that index with the count. On the rising edge it waits five FPGA clocks so the transition into the index state is counted. On either edge and in either direction, it can then report the count held while the index is active.
 
-This is why an encoder index is preferred when you need the most precise registration: it captures the feedback position with minimal and consistent delay relative to the true edge, whereas a filtered discrete input trades a little timing precision for noise immunity.
+In FPGA simulation the aligned capture was exact for index states at least four clocks (40 ns) wide with `EncFilt = 0`, or three clocks (30 ns) with `EncFilt = 1…7`. The released image also filters short index pulses. With `EncFilt = 1…7` the pulse must last at least `min(EncFilt + 1, 5)` clocks to pass that filter. Both the capture and pulse-width limits apply. [Index alignment measurements](https://github.com/akribis-agito/FPGA-main/blob/deede701/changelog/unreleased/09-357-cig1-index-lock-in-index-count.md) · [CIG1 release notes](https://github.com/akribis-agito/FPGA-main/releases/tag/v5.5.0-rc1)
+
+Selecting the other encoder’s index captures one encoder’s position on the other encoder’s edge. For example, with `EncSinCosHWEn = 3` and `LockSrc = 0`, the main index captures the auxiliary position. The simulated offset depended on speed and `EncFilt` and reached two counts at five clocks per count or slower, and five counts at two clocks per count. [Measured limits](https://github.com/akribis-agito/FPGA-main/blob/deede701/changelog/unreleased/09-357-cig1-index-lock-in-index-count.md)
 
 ## Examples
 

@@ -22,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-11-23'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # MasterFact
@@ -63,7 +63,7 @@ AMasterFact          ; 读取当前值
 
 ## 版本间变化
 
-在 **v4** 中，比值为 `MasterFact / 65536`（仅分子），累加中无分母。在 **v5（central-i）** 中，应用完整有理比值 `MasterFact / MasterFactDen`，并保留小数余量，使非整数比值精确且无长期漂移；参见 [MasterFactDen](MasterFactDen.md)。**v5 仅适用于 central-i。**
+旧版 v4 电子齿轮将设定齿轮比舍入为 1/65536 的整数倍。使用 `MasterFact / MasterFactDen` 的固件会将每个周期的小数余量带入下一周期。以 1:3 为例，旧系数为 21845/65536。主轴净位移为正时，旧版从轴落后于 v5 从轴。净位移反向时，位置差也反向。若旧齿轮比向上舍入，位置差的方向相反。实测差值见 [MasterFactDen](MasterFactDen.md)，已保存的回绕周期换算见 [MasterModRev](MasterModRev.md)。
 
 ## 另请参阅
 
