@@ -59,9 +59,11 @@ When the begin entry is positive, each entry's width is resolved as follows:
 
 | Entry value | Width used for that entry |
 |-------------|---------------------------|
-| Positive | That value, as the pulse duration (units per [EventPulseRes](EventPulseRes.md)). It also becomes the carried-forward width for later `-1` entries. |
+| Positive | The requested pulse duration in [EventPulseRes](EventPulseRes.md) units. It becomes the carried-forward width for later `-1` entries. |
 | -1 | The carried-forward width — the most recent non-`-1` per-entry value seen earlier in the active range; if none has been seen yet, the global [EventPulseWid](EventPulseWid.md). (A `0` entry also updates the carried width to `0`, so a later `-1` then yields a zero-width pulse rather than reaching back to an earlier positive value.) |
 | 0 | A zero-width pulse for that entry. A `0` on a non-begin entry does **not** toggle — toggle mode is enabled only when the begin entry itself is `0`. |
+
+On AGM800 and AGM800-EC firmware containing the software-table width fix, `EventType=2` with incremental or hardware SIN-COS feedback limits explicit and inherited pulse widths to **41.93792 ms** on every row. For 5.3.0-rc7 behavior, see [EventPulseWid](EventPulseWid.md).
 
 The valid range for each entry is -1 to 10000000; -1 is the only negative value (it defers to the global width). Output polarity is taken from the sign of the width actually in use for the entry: a per-entry width is always non-negative, so inversion happens only when an entry defers (via `-1`) to a negative global [EventPulseWid](EventPulseWid.md). A positive per-entry width never inverts, even if the global is negative.
 

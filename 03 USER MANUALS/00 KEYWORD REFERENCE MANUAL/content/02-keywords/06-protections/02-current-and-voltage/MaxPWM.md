@@ -93,7 +93,11 @@ The limit reserves modulation headroom for low-side current-sampling validation.
 
 ## How it works
 
-For brushless vector control, the firmware limits the output voltage vector using a precomputed `MaxPWM²`. The enhanced-speed-range option in [ControlMode](../../09-current-and-voltage/02-motor-variables/ControlMode.md) changes that vector budget. Direct per-phase clamps to ±`MaxPWM` apply in current-control or vector-control bypass modes. Configurable dead-time compensation can also change the final phase commands; the keyword alone does not establish a guaranteed physical low-side conduction window.
+For brushless vector control, the firmware limits the output voltage vector using a precomputed `MaxPWM²`. The enhanced-speed-range option in [ControlMode](../../09-current-and-voltage/02-motor-variables/ControlMode.md) changes that vector budget.
+
+On AGD101 17 A and 34 A firmware builds containing the change in PR #2675, the final limit applies after dead-time compensation, in both vector control and bypass. If any phase exceeds `MaxPWM`, the drive scales all three commands by one factor to preserve their line-voltage ratios and reports voltage saturation. In v5.3.0-rc7, compensation follows the vector limit and can raise a phase command above the configured amplitude. Low-side current-sense accuracy also depends on switching delays and analogue settling. [Firmware change](https://github.com/akribis-agito/Firmware-Main/pull/2675)
+
+On other products, bypass modes clamp each phase independently to ±`MaxPWM`.
 
 Voltage saturation is reported in [StatReg](../../07-status-and-faults/StatReg.md) bit 22. `MaxPWM` limits the requested output; saturation does not itself raise a [ConFlt](../../07-status-and-faults/ConFlt.md) fault.
 

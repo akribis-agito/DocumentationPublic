@@ -47,7 +47,11 @@ When events are armed, the controller converts the width into the pulse generato
 
 ![Event output pulse width and overlap](eventpulsewid-overlap.svg)
 
-The output duration is produced by a hardware timer, so the width is quantized to the timer step. On central-i remote drives with incremental or SIN-COS feedback this is about **20 ns** for pulses up to roughly **163.8 us**, and **5.12 us** for longer pulses, up to a maximum of about **1.34 seconds**; stand-alone products use a different timer with a shorter maximum. Requested widths are quantized to the timer step: central-i masters round to the nearest step, so up to about **41.9 ms** the same width gives the same pulse whether it is armed with the sequence or loaded for a later table point (a table point loaded later is limited to about 41.9 ms; the first pulse reaches the 1.34 s maximum), and stand-alone products truncate toward the nearest lower step. A width that exceeds the longest producible pulse is clamped to that maximum, except for a table point loaded later on a central-i master: there a width above about 41.9 ms is not clamped: only its low 13 bits are kept, giving a different and usually much shorter pulse (for example, 50 ms gives about 8.06 ms), so widths for later table points must stay within that limit.
+Central-i masters round the requested width to the nearest timer step. At a remote clock of 100 MHz the fine step is **20 ns** for widths up to about 163.8 µs, and the coarse step is **5.12 µs** for longer widths. Stand-alone products use a different timer with a shorter maximum and round down to the timer step.
+
+On AGM800 and AGM800-EC firmware containing the software-table width fix, a streamed table (`EventType=2` with incremental or hardware SIN-COS feedback) limits the first and every subsequent pulse to **41.93792 ms** (8,191 coarse steps). The limit applies to the magnitude of both explicit and inherited widths. An inherited negative width keeps its inverted polarity. A first table entry set to zero still selects toggle mode. Other event modes retain their own limits. The 18-bit arming format can encode up to about 1.34 s, subject to the remote hardware. [Firmware-Main #2675](https://github.com/akribis-agito/Firmware-Main/pull/2675)
+
+**5.3.0-rc7 compatibility.** The first streamed table row used the 18-bit arming format. Later rows sent only the low 13 bits of the converted width. For example, a later 50 ms request encoded about 8.06 ms. Keep streamed widths within 41.93792 ms on that firmware.
 
 ### AGM800 prepared hardware tables
 

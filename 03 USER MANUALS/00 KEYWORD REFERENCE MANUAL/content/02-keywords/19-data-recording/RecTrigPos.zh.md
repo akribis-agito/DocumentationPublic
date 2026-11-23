@@ -74,7 +74,9 @@ ARecTrigPos[1]=10    ; reserve 10% of RecLength for pre-trigger data
 ARecTrigPos[1]      ; query the first scope pre-trigger percentage
 ```
 
-若 `RecLength[1] = 16384` 且 `RecTrigPos[1] = 10`，则第一示波器将有 1638 个触发前数据点和 14746 个触发后数据点。
+若 `RecLength[1] = 16384` 且 `RecTrigPos[1] = 10`，则第一示波器将有 1638 个触发前数据点和 14746 个触发后数据点。记录器按每个通道的完整采样次数对触发前点数四舍五入，恰好半个采样点时向上取整。
+
+若 `RecLength[1] = 205` 且 `RecTrigPos[1] = 20`，每个通道将保留 41 个触发前采样点。第 42 个采样点满足触发条件，也是余下 164 个点中的第一个。比例为 0% 时，触发点是第一个保留点。比例为 100% 时，所有保留点都在触发之前。这些位置适用于已配置触发且包含记录器修正的固件。[环形缓冲区头部字段](RecDataA-RecDataB.md) · [固件变更 #2675](https://github.com/akribis-agito/Firmware-Main/pull/2675)
 
 ## 另请参阅
 

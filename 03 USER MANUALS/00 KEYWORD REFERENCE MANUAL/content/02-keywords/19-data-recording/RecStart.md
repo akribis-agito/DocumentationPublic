@@ -75,7 +75,7 @@ After starting, monitor progress with [RecStat](RecStat.md) and, if needed, forc
 - Records each channel's data type and user-unit scaling, converts the trigger thresholds into internal units, and seeds the previous/initial trigger-source values used to detect edges and changes.
 - Computes how many points fall before the trigger (from `RecTrigPos`) and how many must follow it, then clears the buffer indices and counters.
 
-It then arms the scope by setting [RecStat](RecStat.md) to 1 (filling pre-trigger). If no trigger is configured (the first trigger type is "none"), the scope skips straight to status 3 (trigger detected) and records the full requested length immediately.
+It then sets [RecStat](RecStat.md) to 1 while pre-trigger samples are needed. Firmware with the [recorder correction](RecTrigPos.md) arms a trigger at status 2 immediately when the rounded pre-trigger count is zero. If no trigger is configured (the first trigger type is "none"), the scope skips straight to status 3 (trigger detected) and records the full requested length immediately.
 
 ## Examples
 
