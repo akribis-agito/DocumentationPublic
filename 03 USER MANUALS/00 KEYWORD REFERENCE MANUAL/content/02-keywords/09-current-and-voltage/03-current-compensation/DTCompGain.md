@@ -40,6 +40,8 @@ A power bridge must never let both transistors in a leg conduct at once, so the 
 
 Each control cycle the drive adds a voltage of magnitude proportional to `DTCompGain` to each phase, signed by that phase's commanded current. Within a band of ±[DTCompLvl](DTCompLvl.md) around zero current the sign is interpolated linearly rather than switched, so the compensation does not chatter as the current crosses zero.
 
+On AGD101 17 A and 34 A firmware builds containing the change in PR #2675, compensation shares the available `MaxPWM` range with the current-loop voltage. If the combined demand exceeds the limit on any phase, the drive scales all three phase commands together and reports voltage saturation. Increasing `DTCompGain` at that point cannot increase the largest commanded phase magnitude past `MaxPWM`. In v5.3.0-rc7, compensation can raise a phase command above this limit. [Firmware change](https://github.com/akribis-agito/Firmware-Main/pull/2675)
+
 > **Important:** `DTCompGain` is a **per-drive calibration**, not a universal setting. The correct value depends on the blanking time of the drive you are using, and the blanking time differs across the range — an AGD155 has four times the dead band of an AGD301. The default of 1.0 is not the optimum for either.
 
 > **Worked example:** `DTCompGain = 0` adds no voltage at all, so the drive behaves as one without the compensation. A gain of 1.0 adds the drive's nominal dead-band correction, and higher values scale it proportionally.
