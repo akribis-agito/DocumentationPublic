@@ -1,6 +1,6 @@
 ---
 summary: Records the feedback position of the most recent logged digital event.
-last_updated: '2026-11-20'
+last_updated: '2026-11-23'
 doc_revision: '2026.11'
 ---
 # LockVal/AuxLockVal
@@ -27,6 +27,8 @@ On an AGM800 axis with main-encoder position mapping enabled, the lock value inc
 ### Central-i coordinate changes
 
 After `SetPosition` or `ZeroPosErr` changes the selected capture coordinate, subsequent `LockVal` publications use the new origin without re-arming. Previously published values and table entries retain their recorded coordinates. This rule also applies to mailbox replies completed after the coordinate change; a pending capture is published in the new frame.
+
+For the same capture before the error-map table, offsets and ramps are applied, read [LockValBefMap](LockValBefMap.md).
 
 ## Examples
 

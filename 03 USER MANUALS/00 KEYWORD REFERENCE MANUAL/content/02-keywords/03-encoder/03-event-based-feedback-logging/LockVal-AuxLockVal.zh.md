@@ -1,6 +1,6 @@
 ---
 summary: 记录最近一次已记录数字事件的反馈位置。
-last_updated: '2026-11-20'
+last_updated: '2026-11-23'
 doc_revision: '2026.11'
 language: zh-CN
 ---
@@ -28,6 +28,8 @@ language: zh-CN
 ### Central-i 坐标变更
 
 `SetPosition` 或 `ZeroPosErr` 改变所选捕获坐标后，此后发布的 `LockVal` 使用新原点，无需重新使能。已经发布的数值与历史表项保留记录时的坐标。此规则也适用于在坐标变更后完成的邮箱回复：尚未发布的捕获值按新坐标系发布。
+
+要读取同一次捕获在应用误差映射表、映射偏移和渐变修正之前的位置，请读取 [LockValBefMap](LockValBefMap.zh.md)。
 
 ## 示例
 
