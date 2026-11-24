@@ -23,8 +23,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # CurrFBFact
@@ -37,7 +37,7 @@ language: zh-CN
 
 它是保存至闪存的轴相关参数。该值以固定的 10⁻⁶（六位小数）比例进行解释，因此存储的整数是所施加因子的百万分之一；例如默认值 `-1907500` 施加约为 `-1.9075` 的因子。负号反映了所支持硬件的反馈极性。
 
-> 这是外部电流反馈比例的 v4 形式。在 v5 上等效设置为浮点形式的 [ExtCurrFBSca](ExtCurrFBSca.md)。
+> 这是外部电流反馈比例的 v4 形式。在 v5 上等效设置为浮点形式的 [ExtAmpConfig](ExtAmpConfig.zh.md)。
 
 ## 工作原理
 
@@ -54,6 +54,6 @@ ACurrFBFact              ; read the configured current-feedback factor
 
 ## 另请参阅
 
-- [ExtCurrFBSca](ExtCurrFBSca.md) — 此比例的 v5 浮点等效形式
+- [ExtAmpConfig](ExtAmpConfig.zh.md) — 此比例的 v5 浮点等效形式
 - [AmpType](../../02-motor-and-amplifier/AmpType.md) — 驱动器类型；本设置适用于直线适配器远程设备
 - [MotorCurr](../02-motor-variables/MotorCurr.md) — 由缩放后的反馈产生的电机电流

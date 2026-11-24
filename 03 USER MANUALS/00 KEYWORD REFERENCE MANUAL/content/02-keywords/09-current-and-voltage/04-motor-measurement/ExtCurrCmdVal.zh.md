@@ -22,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-07-30'
-doc_revision: '2026.09'
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # ExtCurrCmdVal
@@ -41,11 +41,11 @@ language: zh-CN
 每个控制周期，对相索引 `i`，控制器计算
 
 ```
-codeBeforeMidCode = round( gain × (PhaseCurr[i] + ExtCurrCmdOfs[i]) )
+codeBeforeMidCode = round( gain × (PhaseCurr[i] + offset_mA[i]) )
 ExtCurrCmdVal[i]  = codeBeforeMidCode + 32768                          ; saturated to 0…65535
 ```
 
-其中 `gain = 32768 / AAmpFullScale`（counts/mA），`32768` 为 DAC 的中间码（相电流和偏置均为零时对应 0 mA）。完整的"先偏置、后增益"推导及算例见 [ExtCurrCmdOfs](ExtCurrCmdOfs.md)。
+其中 `offset_mA[1]` 和 `offset_mA[2]` 分别为 `ExtAmpConfig[2]` 和 `ExtAmpConfig[3]`；`gain = 32768 / AAmpFullScale`（counts/mA），`32768` 为 DAC 的中间码（相电流和偏置均为零时对应 0 mA）。完整的"先偏置、后增益"推导及算例见 [ExtAmpConfig](ExtAmpConfig.zh.md)。
 
 `ExtCurrCmdVal` 会饱和：若计算出的代码超出 DAC 的 0–65535 范围，会被钳位到最近的一端，而不会回绕。该值就是实际写入驱动器 SPI/DAC 寄存器的值，因此即使未钳位的计算结果本可以更大，它也如实反映了发生的钳位。
 
@@ -61,7 +61,7 @@ AExtCurrCmdVal[1]=100   ; rejected: ExtCurrCmdVal is read-only
 
 ## 另请参阅
 
-- [ExtCurrCmdOfs](ExtCurrCmdOfs.md) —— 进入该代码的每相 mA 偏置，含完整指令链与算例
+- [ExtAmpConfig](ExtAmpConfig.zh.md) —— 进入该代码的每相 mA 偏置，含完整指令链与算例
 - [AAmpFullScale](../../02-motor-and-amplifier/AAmpFullScale.md) —— 在偏置与该代码之间施加的增益
 - [AmpType](../../02-motor-and-amplifier/AmpType.md) —— 选择本关键字所适用的数字 SPI 驱动器模式（8）
 - [ComtStatus](../../15-commutation/ComtStatus.md) —— 状态 `-17`，轴配置为外部驱动器时的定相拒绝
