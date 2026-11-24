@@ -54,8 +54,8 @@ overrides:
     range:
     - 0
     - 0
-last_updated: '2026-09-25'
-doc_revision: '2026.09'
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 ---
 # AmpType
 
@@ -72,7 +72,7 @@ Selects how the axis drives its motor — built-in amplifier or an external ampl
 Because `AmpType` is an axis-scope parameter saved to flash, it cannot be changed while the motor is on or in motion; set it during axis configuration (typically from the PCSuite setup page), then `Save`.
 
 > [!note] Status: partial
-> The frontmatter marks `AmpType` as `partial`. On v4 the firmware range is 0–7; v5 (central-i) extends it to 0–8. Selecting a value the product does not support is rejected at motor-on with controller fault [1053](../../04-error-codes/controller-error-codes.md) ("AmpType value not allowed for this product").
+> The frontmatter marks `AmpType` as `partial`. On v4 the firmware range is 0–7. On v5 the upper bound depends on the product. Selecting a value the product does not support is rejected at motor-on with controller fault [1053](../../04-error-codes/controller-error-codes.md) ("AmpType value not allowed for this product").
 
 ## How it works
 
@@ -127,12 +127,12 @@ AAmpType            ; query the current amplifier mode
 
 ## Changes between versions
 
-| | v4 (standalone & central-i) | v5 (central-i) |
+| | v4 (standalone and Central-i) | v5 (standalone and Central-i) |
 |---|---|---|
-| Range | 0–7 | 0–8 |
+| Range | 0–7 | 0–8, or fixed at 0 on the drive variants listed below |
 | Added modes | — | 6 (PD with feedback), 8 (digital SPI phase-current) |
 
-v5 is central-i only; on the standalone product `AmpType` keeps the v4 range 0–7.
+Both v5 product families expose `AmpType`. The AGD155-AF variants and the AGD101-EC, AGD155-EC and AGD156-EC drive builds listed in the product overrides accept only 0 (built-in PWM). The remote-unit restrictions above apply on Central-i.
 
 ## See also
 
