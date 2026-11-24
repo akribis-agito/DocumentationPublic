@@ -102,3 +102,4 @@ AStatReg                       ; read the full axis status word
 - [MotionStat](../10-motion/05-motion-status/MotionStat.md) — 运动专用状态位域
 - [UnitStat](../01-system/01-status/UnitStat.md) — 单元级硬件/固件状态
 - [LimitsStat](../06-protections/03-motion/position-limit-protection/LimitsStat.md) — 专用限位开关状态
+- [StatRegExt](StatRegExt.zh.md) — 扩展的单轴补偿状态
