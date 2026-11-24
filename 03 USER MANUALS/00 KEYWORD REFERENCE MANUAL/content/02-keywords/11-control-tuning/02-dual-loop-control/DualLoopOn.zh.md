@@ -22,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # DualLoopOn
@@ -51,6 +51,8 @@ language: zh-CN
 当 `DualLoopOn = 1` 时，速度反馈取自辅助编码器速度，并缩放至 `DualLoopFact` 所选单位；换相由辅助（电机）编码器推导，而非主编码器。当 `DualLoopOn = 2` 时，速度反馈改为经过滤波的模拟测速机信号。
 
 当前激活的结果由 [DualLoopStat](DualLoopStat.md) 报告。伪双环变体（[DualEncSwapOn](DualEncSwapOn.md)）和范围限制变体（[DualEncMode](DualEncMode.md) / [DualEncRange](DualEncRange.md)）进一步修改位置环所使用的反馈。
+
+在 `AuxAsPDPosOn = 0` 的多轴 CONTROLLER 驱动器上，A 轴使用 B 轴的电机编码器，B 轴使用 C 轴的，C 轴使用 A 轴的。每个轴从下一轴最近一个完整采样周期读取位置、每周期位置增量和速度。速度环对速度应用 `DualLoopFact`，换相使用位置及其每周期增量。
 
 ## 示例
 
