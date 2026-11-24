@@ -43,7 +43,7 @@ overrides:
   agm800-ec:
     units: scaling
     scaling: 1.024
-last_updated: '2026-10-10'
+last_updated: '2026-11-24'
 doc_revision: '2026.11'
 language: zh-CN
 ---
@@ -86,6 +86,8 @@ if dual-loop is enabled
 - **范围溢出：** 超出 `0…1300000000` 的写入会以超范围错误被拒绝；存储值保持不变。
 - **清除故障：** ConFlt 码 1049 在重新使能（[MotorOn](../../../08-axis-operation/01-general-keywords/MotorOn.md) = 1）或写入 `AConFlt=0` 时清除；[ErrLog](../../../07-status-and-faults/ErrLog.md) 条目仍保留。
 - **HWProtectBits / ProtectMask：** 双环堵转跳闸不可通过 [ProtectMask](../../01-general-protection/ProtectMask.md) 屏蔽（该掩码仅覆盖硬件保护位）。
+
+多轴 CONTROLLER 驱动器在 `DualLoopOn = 1` 且 `AuxAsPDPosOn = 0` 时，使用下一轴经 `DualLoopFact` 缩放的编码器速度进行比较。增益为 1 时，每采样周期 37 个计数对应两个编码器使用的内部 Q14 速度值 606208。早期固件对第二编码器使用未缩放的每周期增量（37）。如果保护阈值是在该固件上整定的，请重新核对，并按本产品规定的单位输入阈值。
 
 ## 示例
 
