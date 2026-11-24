@@ -1,6 +1,6 @@
 ---
 keyword: PVAJList
-summary: PVAJ 轨迹表 —— 表头加最多 8192 行位置/速度/加速度/加加速度。
+summary: PVAJ 轨迹表，含表头；Orbit FR 最多 16 行，标准配置最多 8192 行。
 availability:
 - ci-master
 can_code: 880
@@ -18,8 +18,8 @@ attributes:
   default: 0.0
   scaling: 1.0
   implemented: final
-last_updated: '2026-09-25'
-doc_revision: '2026.09'
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 overrides: {}
 language: zh-CN
 ---
@@ -33,13 +33,13 @@ language: zh-CN
 
 | 索引 | 内容 |
 |---|---|
-| `[1]` | **Len** —— 列表行数，`1`–`8192` |
+| `[1]` | **Len** —— 列表行数，`1`–`8192`（Orbit FR 为 `1`–`16`） |
 | `[2]` | **Gap** —— 相邻两行之间的控制周期数，`1`–`32` |
 | `[3]` | **Mode** —— `0` 绝对，`1` 相对于 `Begin` 时刻的位置 |
 | `[4]`、`[5]`、`[6]`、`[7]` | 第 1 行：位置、速度、加速度、加加速度 |
 | `[8]` … | 第 2 行，其后以 4 为步长依次类推 |
 
-因此最后一个可用索引为 **32771** —— 第 8192 行的 `J`。
+最后一个可用索引为标准固件的 **32771** 或 Orbit FR 的 **67**，即最后一个数据行的加加速度值。
 
 数值以 double 存储。位置单位为 counts，速度为 counts/秒，加速度为 counts/秒²，加加速度为 counts/秒³。
 
@@ -49,8 +49,12 @@ language: zh-CN
 
 ## 闪存
 
-仅当产品的参数区足够大（14 MB）时，`PVAJList` 才保存至闪存；其他情况下**不**保存。若参数区较小，3 MB 的条目会使**每一次** `SaveFile` 都以闪存已满失败，而不仅仅是丢失 PVAJ 列表。
+双闪存固件会保存 `PVAJList`，包括 Orbit FR 的 16 行列表。参数区较小的产品不将本列表保存至闪存。
 
 ## 错误
 
 列表的范围与连续性由 [PVAJValidate](PVAJValidate.md) 检查，而非在写入时检查；错误码参见该页面。
+
+## Orbit FR 型号
+
+Orbit FR 版 AGM800 的本表含 16 个数据行。计入三个表头元素后，可用索引为 1 至 67。标准 8192 行布局的末尾索引为 32771。
