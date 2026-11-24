@@ -1,7 +1,7 @@
 {
   "manual": "Keyword Reference Manual",
   "version": "2026.11",
-  "generated": "2026-11-04",
+  "generated": "2026-11-24",
   "document_count": 986,
   "documents": [
     {
@@ -969,13 +969,13 @@
     {
       "path": "02-keywords/02-motor-and-amplifier/AAmpFullScale.md",
       "keyword": "AAmpFullScale",
-      "last_updated": "2026-07-30",
-      "doc_revision": "2026.09",
-      "sha256": "5a0d3a81eb5fc56fe95f803d7b842046f9c6e95634038283cbebb82e11e6bb8b",
+      "last_updated": "2026-11-24",
+      "doc_revision": "2026.11",
+      "sha256": "a89a251af22e1af178bfd51b08438a3aac119a13a3dc50df4018c3ac8df53bbc",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/02-motor-and-amplifier/AAmpFullScale.zh.md",
-          "sha256": "7f8ef71458040b84909da56635e2dbb2d5e0272d46034a2feda11fac2932401d"
+          "sha256": "58f8b6f07a175e996d0b7c10fb63276d1fd7ca35012fa8808b236a6bee0d4143"
         }
       }
     },
@@ -4635,65 +4635,65 @@
     {
       "path": "02-keywords/09-current-and-voltage/04-motor-measurement/00-overview.md",
       "keyword": "00-overview",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "90e4dd2f76adaa4ebc75911ae92f9e5ec64a28f2d1cdc8f8fbeeced654b916ba",
+      "last_updated": "2026-11-24",
+      "doc_revision": "2026.11",
+      "sha256": "fe5f5d100732997eed54f23c591bd73123823a8fd6b34864fb5d242ec4919f03",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/09-current-and-voltage/04-motor-measurement/00-overview.zh.md",
-          "sha256": "4939d0c4ee147d8b740cf2ce1affbbca14509bc1a86cac2f4656ed0f6f048983"
+          "sha256": "9972f469013edd4d705035f468edebc03786e0c1baab83b435e2fd6e584fb22f"
         }
       }
     },
     {
       "path": "02-keywords/09-current-and-voltage/04-motor-measurement/CurrFBFact.md",
       "keyword": "CurrFBFact",
-      "last_updated": "2026-05-29",
-      "doc_revision": "2026.06",
-      "sha256": "d9b16d83ae4e43d921341a873ef9fb768ee8f46d4d02bac8e2c6648a106708b9",
+      "last_updated": "2026-11-24",
+      "doc_revision": "2026.11",
+      "sha256": "80b72a2b673d3bfe0010f95b55bc2ae6496c779fbaa9c050065622c963d89bdf",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/09-current-and-voltage/04-motor-measurement/CurrFBFact.zh.md",
-          "sha256": "efc7ea9cece50f746dcf0dc10e00a2e288b5a5d85cd1fcab46a534fe0c12cc58"
+          "sha256": "56d1af8e00250b2d6b5aa1039a29787c6228a13804ca888f3db196d2525612b1"
         }
       }
     },
     {
-      "path": "02-keywords/09-current-and-voltage/04-motor-measurement/ExtCurrCmdOfs.md",
-      "keyword": "ExtCurrCmdOfs",
-      "last_updated": "2026-07-30",
-      "doc_revision": "2026.09",
-      "sha256": "1dd1922a3d1b9034b53cc46d9287fa6cd7ef13f6d27540e79faa3f241037a3e0",
+      "path": "02-keywords/09-current-and-voltage/04-motor-measurement/ExtAmpConfig.md",
+      "keyword": "ExtAmpConfig",
+      "last_updated": "2026-11-24",
+      "doc_revision": "2026.11",
+      "sha256": "26548ca676be21668083ee7ae695144268b3f46fd63543f8617c8b8d9f0f2247",
       "variants": {
         "zh-CN": {
-          "path": "02-keywords/09-current-and-voltage/04-motor-measurement/ExtCurrCmdOfs.zh.md",
-          "sha256": "91e0667648e1039408f53d6c227538afb3bd4e7d4ed9824356aa76fe9bdfef28"
+          "path": "02-keywords/09-current-and-voltage/04-motor-measurement/ExtAmpConfig.zh.md",
+          "sha256": "79606b3da2726d32be01faccfbcfd63ef47153d41e1198e52884080cc494e9f8"
+        }
+      }
+    },
+    {
+      "path": "02-keywords/09-current-and-voltage/04-motor-measurement/ExtClearFault.md",
+      "keyword": "ExtClearFault",
+      "last_updated": "2026-11-24",
+      "doc_revision": "2026.11",
+      "sha256": "891243a114a54545cd321117a64e88eca1a1729c1a2f830bcf23904ff3c84cab",
+      "variants": {
+        "zh-CN": {
+          "path": "02-keywords/09-current-and-voltage/04-motor-measurement/ExtClearFault.zh.md",
+          "sha256": "262743e2cedf91877ca6eca95dcd4e0bfad2e36bf47a3f325da50f528f4df73e"
         }
       }
     },
     {
       "path": "02-keywords/09-current-and-voltage/04-motor-measurement/ExtCurrCmdVal.md",
       "keyword": "ExtCurrCmdVal",
-      "last_updated": "2026-07-30",
-      "doc_revision": "2026.09",
-      "sha256": "b48aaf1f7a30a1f65d25495423650bb5606b1d98e4a6cb386c266f4ceae90901",
+      "last_updated": "2026-11-24",
+      "doc_revision": "2026.11",
+      "sha256": "834fdaff507cc0f9cc92bc4236c89ae8fd935e865421b6577afb9c8a65a0686f",
       "variants": {
         "zh-CN": {
           "path": "02-keywords/09-current-and-voltage/04-motor-measurement/ExtCurrCmdVal.zh.md",
-          "sha256": "a33f9173d6baac195039267c91dbd9081e0ab24e48e1444edc3616fc587c0a3f"
-        }
-      }
-    },
-    {
-      "path": "02-keywords/09-current-and-voltage/04-motor-measurement/ExtCurrFBSca.md",
-      "keyword": "ExtCurrFBSca",
-      "last_updated": "2026-07-30",
-      "doc_revision": "2026.09",
-      "sha256": "3f60e9f0eabd7b71631547d31d7ad5e2e9bcccbea2df9a3a93611b8f9f454779",
-      "variants": {
-        "zh-CN": {
-          "path": "02-keywords/09-current-and-voltage/04-motor-measurement/ExtCurrFBSca.zh.md",
-          "sha256": "eab26115aa505a54af0f3e6bc97afc2c4513eb0b74569a1b191ab719ee8d359b"
+          "sha256": "d0d8308876e053f0b75aa21ecd45152fc86d6497eae8e3dcb31c38a360ec98d3"
         }
       }
     },

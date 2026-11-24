@@ -23,8 +23,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 ---
 # CurrFBFact
 
@@ -36,7 +36,7 @@ Scale factor (micro-units) mapping a remote analog current-sense input to motor 
 
 It is a per-axis parameter saved to flash. The value is interpreted with a fixed scaling of 10⁻⁶ (six decimal places), so the stored integer is one millionth of the applied factor; for example the default `-1907500` applies a factor of about `-1.9075`. The negative sign reflects the feedback polarity of the supported hardware.
 
-> This is the v4 form of the external current-feedback scale. On v5 the equivalent setting is the floating-point [ExtCurrFBSca](ExtCurrFBSca.md).
+> This is the v4 form of the external current-feedback scale. On v5 the equivalent setting is the floating-point scale at index 1 of [ExtAmpConfig](ExtAmpConfig.md).
 
 ## How it works
 
@@ -53,6 +53,6 @@ ACurrFBFact              ; read the configured current-feedback factor
 
 ## See also
 
-- [ExtCurrFBSca](ExtCurrFBSca.md) — v5 floating-point equivalent of this scale
+- [ExtAmpConfig](ExtAmpConfig.md) — v5 floating-point equivalent of this scale
 - [AmpType](../../02-motor-and-amplifier/AmpType.md) — amplifier type; this applies to the linear-adapter remote
 - [MotorCurr](../02-motor-variables/MotorCurr.md) — motor current produced from the scaled feedback

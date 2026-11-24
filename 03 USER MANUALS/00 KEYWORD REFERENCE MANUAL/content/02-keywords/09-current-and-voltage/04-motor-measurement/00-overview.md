@@ -5,4 +5,5 @@ This subgroup holds the motor electrical parameters measured by the PCSuite resi
 - [Rm](Rm.md) — measured motor resistance (mΩ).
 - [Lm](Lm.md) — measured motor inductance (µH).
 - [RLType](RLType.md) — phase vs line-to-line measurement type.
-- [CurrFBFact](CurrFBFact.md) / [ExtCurrFBSca](ExtCurrFBSca.md) — scale factor converting an external/remote analog current-sense input into motor current feedback; CurrFBFact is the v4 integer form, ExtCurrFBSca the v5 floating-point form.
+- [CurrFBFact](CurrFBFact.md) / [ExtAmpConfig](ExtAmpConfig.md) — scale factor converting an external/remote analog current-sense input into motor current feedback; CurrFBFact is the v4 integer form, ExtAmpConfig[1] is the floating-point scale in current v5 firmware.
+- [ExtClearFault](ExtClearFault.md) — clear a latched fault on an ADP05 external amplifier.
