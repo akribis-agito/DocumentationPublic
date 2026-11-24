@@ -22,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-30'
-doc_revision: '2026.06'
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 ---
 # Save
 
@@ -85,6 +85,10 @@ If `ParamCS[1]` before and after `Reset` matches the post-`Save` value, the para
 - **Flash full.** If the parameter set exceeds the reserved flash space `Save` returns a "flash full" error (29) after writing what fits; on the next [Load](Load.md) only the records actually written are restored, and missing parameters revert to their defaults.
 - **Power loss mid-Save.** Because `Save` erases the area first, a power loss before the final checksum/marker is written leaves the area incomplete; on the next power-up [Load](Load.md) sees a checksum mismatch and the firmware initialises all parameters to their defaults (rather than loading a partial set).
 - **Central-i disconnect.** The save operates on the master's own parameters and is unaffected by the link state to any remote unit.
+
+## Orbit FR
+
+Before upgrading an Orbit FR AGM800, export settings, error maps and GenData by mnemonic and keep the user-program source. After upgrading, import the backup into the matching integrated firmware, issue Save and verify the restored settings after reboot. Rebuild and download user programs against the integrated keyword table. An old raw flash backup uses an incompatible layout.
 
 ## See also
 

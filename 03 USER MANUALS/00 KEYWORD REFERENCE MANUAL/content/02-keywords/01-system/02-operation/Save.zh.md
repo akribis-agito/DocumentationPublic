@@ -22,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-30'
-doc_revision: '2026.06'
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # Save
@@ -86,6 +86,10 @@ AParamCS[1]          ; same value as the post-save checksum — confirms a clean
 - **闪存已满。** 如果参数集超出保留的闪存空间，`Save` 会在写入能容纳的部分后返回 "flash full" 错误（29）；在下一次 [Load](Load.md) 时只恢复实际写入的记录，缺失的参数恢复为其默认值。
 - **Save 中途断电。** 由于 `Save` 会先擦除该区域，在最终校验和/标记写入之前断电会使该区域不完整；在下一次上电时 [Load](Load.md) 检测到校验和不匹配，固件会将所有参数初始化为其默认值（而不是加载不完整的集合）。
 - **Central-i 断开。** 保存操作针对主站自身的参数，不受与任何远程单元链路状态的影响。
+
+## Orbit FR 型号
+
+升级 Orbit FR 版 AGM800 前，请按关键字名称导出参数、误差映射表及 GenData，并保留用户程序源代码。升级后将备份导入对应的集成固件，执行 Save，重启后核对恢复的数据。请使用集成固件的关键字表重新编译并下载用户程序。旧版原始闪存备份的布局与此版本不兼容。
 
 ## 另请参阅
 
