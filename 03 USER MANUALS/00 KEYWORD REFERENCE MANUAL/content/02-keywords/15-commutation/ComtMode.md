@@ -62,7 +62,7 @@ The resulting electrical angle is reported by [ComtAng](ComtAng.md), and progres
 | `[30]` | **Learn** options | Bit field selecting what a learn pass (`[5]=202`) learns, for method `0` — see [Learn options](#learn-options-30). `0` learns everything. Central-i v5 only |
 | `[31]` | Maximum attempted jumps | Number of jumps method `0` may attempt before failing with [ComtStatus](ComtStatus.md) `-3`. Clamped to `3`–`144` on write and on parameter restore; note that a value below `3` is reset to `12` — one full electrical revolution of 30° steps — not to `3`. Central-i v5 only |
 | `[32]` | Minimum required successful jumps | Number of consecutive in-window jumps method `0` requires to declare success. Clamped to `3`–`60` on write and on parameter restore. Central-i v5 only |
-| `[33]` | **User-defined phasing angle** | Electrical angle in degrees used by method `7`. Normalized to 0–359 on write and on parameter restore. Central-i v5 only |
+| `[33]` | **User-defined phasing angle** | Electrical angle for method `7`. Range 0–359999 millidegrees where `ComtStatus[11]` exists, or 0–359 whole degrees on earlier firmware. Central-i v5 only |
 
 > [!note]
 > Index `[5]=1282` is a *re-trigger now* command, not the automatic power-on setting. Automatic phasing after power-on is governed by the **mode** at index `[19]` (default `0` already runs commutation after power-on). The legacy phrasing "`ComtMode[5]=1282` to commutate after power-on" works only because writing `1282` forces an immediate re-commutation.
@@ -99,23 +99,9 @@ The refinement works as follows:
 
 ### User-defined angle
 
-Method `7` takes the electrical angle directly from index `[33]`, in degrees,
-and applies it without searching:
+Method `7` applies a known electrical angle in one control cycle without driving a search. Drives exposing `ComtStatus[11]` use millidegrees in `ComtMode[33]` (360000 per turn) and allow re-phasing with the motor enabled. Earlier drives use whole degrees (360 per turn). In both cases the offset equals the electrical cycle multiplied by the register value divided by the units per turn. For a motor characterized by its detent position, enter the detent angle plus 90°.
 
-```
-commutation offset = electrical cycle × ComtMode[33] / 360
-```
-
-No drive is applied and the axis does not move — commutation completes in the
-control cycle it begins, and [ComtStatus](ComtStatus.md) goes straight to `100`.
-This suits an axis whose phasing angle is already known from characterization or
-from a jig, and a vertical or gravity-loaded axis where a search-based method
-risks dropping the load before torque is established.
-
-The value is normalized to 0–359 whenever it is written and whenever parameters
-are restored, so `-90` and `270` are the same setting. The angle is the
-commutation angle itself, not the detent angle — on a motor characterized by its
-detent position, enter the detent angle plus 90°.
+Convert saved parameters and program writes before enabling an upgraded axis. For 90°, change the raw value from 90 to 90000. PCSuite 19.1.1 sends whole degrees. Use a PCSuite build that recognizes the new firmware; its angle field continues to display degrees.
 
 Method `7` differs from method `2` (absolute encoder), which also completes
 without motion: method `2` recalls a zero reference the *controller* previously
