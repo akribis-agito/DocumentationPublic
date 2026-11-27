@@ -46,6 +46,8 @@ The array holds the following elements (1-indexed):
 | `[3]` | Bidirectional-search state (central-i v5 only). Reports the progress of a bidirectional commutation search: `0` unused, `1` armed, `2` first direction finished, `3` both directions finished. This index does not exist on v4/standalone. |
 | `[4]` | VBus learning status. 0 idle, 1 running, 2 finished, -1 retry limit, -2 voltage saturation, -3 unexpected motor-off, -4 wrong domain. |
 | `[5]` | Learned peak voltage in PWM codes on firmware with the revised search. |
+| `[11]` | Phasing method in use. Zero before the first run. |
+| `[12]` | Signed 32-bit completion counter. Increments on success, decrements on failure and wraps. Read before triggering and compare afterward. |
 
 `ComtStatus[1]` (phasing status) values:
 
