@@ -55,7 +55,7 @@ On AGM800 and AGM800-EC firmware containing the software-table width fix, a stre
 
 ### AGM800 prepared hardware tables
 
-For EventLoad-managed `EventType=3`, the effective width after the existing fine/coarse conversion must fit the current 13-bit hardware field (1–8191 units; an effective width of 0 is accepted only on the first selected row, where it selects toggle mode). A value outside that field fails preparation before arm; the preload path does not silently truncate or apply the larger-width clamping described for other paths. Other event types retain their existing behavior.
+For EventLoad-managed `EventType=3`, the effective width after the existing fine/coarse conversion must fit the current 13-bit hardware field (1–8191 units; an effective width of 0 is accepted only on the first selected row, where it selects toggle mode). A value outside that field fails preparation before arm; the preload path does not silently truncate or apply the larger-width clamping described for other paths. Other event types retain their existing behavior. With EventPulseRes=1 and a 100 MHz remote clock, 1–9 ns rounds to zero and fails pulse-mode preload. A 10 ns request rounds to one 20 ns step.
 
 
 ## Examples
