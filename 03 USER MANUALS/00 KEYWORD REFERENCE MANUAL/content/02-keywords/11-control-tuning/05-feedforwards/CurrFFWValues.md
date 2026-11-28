@@ -10,7 +10,7 @@ attributes:
   scope: axis
   flash: false
   type: array
-  array_size: 1
+  array_size: 5
   data_type: float32
   ok_in_motion: true
   ok_motor_on: true
@@ -22,7 +22,7 @@ attributes:
 overrides:
   ci-master:
     array_size: 7
-last_updated: '2026-11-01'
+last_updated: '2026-11-28'
 doc_revision: '2026.11'
 ---
 # CurrFFWValues
@@ -35,27 +35,27 @@ Read-only feedforward currents: the filtered total and its parts, in mA.
 
 | Index | Value |
 |---|---|
-| `CurrFFWValues[1]` | Total feedforward current after the feedforward filter, as added to the current reference. **Includes the friction current.** |
+| `CurrFFWValues[1]` | Total feedforward current after the feedforward filter, as added to the current reference. On AGM800 and AGM800-EC this includes friction current. |
 | `CurrFFWValues[2]` | Velocity feedforward term ([VelFFW](VelFFW.md)) |
 | `CurrFFWValues[3]` | Acceleration feedforward term ([AccFFW](AccFFW.md)) |
 | `CurrFFWValues[4]` | Jerk feedforward term |
-| `CurrFFWValues[5]` | Reserved (reads 0) |
+| `CurrFFWValues[5]` | Reserved on Central-i (reads 0) |
 | `CurrFFWValues[6]` | Friction feedforward current, *before* the feedforward filter (AGM800 and AGM800-EC only) |
 
 ## How it works
 
-Index 6 is the output of the friction feedforward stage after the [FricLim](../../../03-special-features/friction-compensation/FricLim.md) clamp. It replaces `FricCurr` from 5.3.0-rc4. It reads 0 when the stage is off or not running (for example in current mode).
+On AGM800 and AGM800-EC, index 6 is the output of the friction feedforward stage after the [FricLim](../../../03-special-features/friction-compensation/FricLim.md) clamp. It replaces `FricCurr` from 5.3.0-rc4. It reads 0 when the stage is off or not running (for example in current mode).
 
-Index 1 is what the feedforward filter ([FFFiltOn](FFFiltOn.md) / [FFFiltDef](FFFiltDef.md)) puts out. The friction current goes through that filter together with the velocity and acceleration terms, so index 1 includes friction. With `FFFiltOn` = 0, index 1 is the plain sum. With `FFFiltOn` = 1, index 1 lags index 6 at reversals. During the two control cycles of a CNC feedforward skip, the feedforward going into the filter is zeroed (friction included), so index 1 drops — straight to 0 with `FFFiltOn` = 0 — while indexes 2 to 6 keep their values. In velocity mode and in force mode with [ForcePIVOn](../07-force-control/ForcePIVOn.md) = 1, the velocity and acceleration terms are not used, and index 1 carries friction only.
+Index 1 is what the feedforward filter ([FFFiltOn](FFFiltOn.md) / [FFFiltDef](FFFiltDef.md)) puts out. On AGM800 and AGM800-EC, the friction current goes through that filter together with the velocity and acceleration terms, so index 1 includes friction. With `FFFiltOn` = 0, index 1 is the plain sum. With `FFFiltOn` = 1, index 1 lags index 6 at reversals. During the two control cycles of a CNC feedforward skip, the feedforward going into the filter is zeroed (friction included), so index 1 drops — straight to 0 with `FFFiltOn` = 0 — while indexes 2 to 6 keep their values. In velocity mode and in force mode with [ForcePIVOn](../07-force-control/ForcePIVOn.md) = 1, the velocity and acceleration terms are not used, and index 1 carries friction only.
 
 In modes where the velocity loop does not form the current reference (for example current mode), index 1 keeps its last value.
 
-On a standalone controller `CurrFFWValues` exists but accepts no index, so none of these values can be read there.
+Standalone controllers with support for these readbacks advertise a highest index of 4 in `About`. Earlier standalone firmware advertises 0 and rejects indexed reads.
 
 ## Examples
 
 ```text
-ACurrFFWValues[6]     ; friction current before the filter, mA
+ACurrFFWValues[6]     ; AGM800 / AGM800-EC: friction current before the filter, mA
 ACurrFFWValues[1]     ; total feedforward current after the filter, mA
 ```
 
