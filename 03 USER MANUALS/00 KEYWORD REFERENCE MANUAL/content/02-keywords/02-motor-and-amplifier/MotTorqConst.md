@@ -58,6 +58,8 @@ Every field-weakening constant — characteristic current, demagnetising limit, 
 AMotTorqConst=0.36    ; 0.36 N.m per amp
 ```
 
+On AGM800 firmware with the load-estimator fix (Firmware-Main #2710), collision detection accepts any positive MotTorqConst for rotary motors, including 1.0. Enter the value from the motor data sheet.
+
 ## See also
 
 - [MotForceConst](MotForceConst.md) — the linear equivalent

@@ -63,6 +63,8 @@ AMotForceConst=76.5   ; AKM100-B1
 AMagneticPitch=42     ; must be set as well
 ```
 
+On AGM800 firmware with the load-estimator fix (Firmware-Main #2710), collision detection accepts any positive MotForceConst for linear and voice-coil motors, including 10.0. Enter the value from the motor data sheet.
+
 ## See also
 
 - [MotTorqConst](MotTorqConst.md) — the rotary equivalent

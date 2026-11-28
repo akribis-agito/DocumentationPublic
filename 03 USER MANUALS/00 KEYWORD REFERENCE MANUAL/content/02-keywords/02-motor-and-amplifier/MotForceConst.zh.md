@@ -64,6 +64,8 @@ AMotForceConst=76.5   ; AKM100-B1
 AMagneticPitch=42     ; 必须同时设置
 ```
 
+在包含负载估计器修正（Firmware-Main #2710）的 AGM800 固件中，碰撞检测接受直线电机和音圈电机的任何正 MotForceConst 值，包括 10.0。请输入电机数据表中的实际值。
+
 ## 另请参阅
 
 - [MotTorqConst](MotTorqConst.md) — 旋转电机对应项
