@@ -32,6 +32,8 @@ Enables field weakening, allowing operation above the base speed.
 
 ## Overview
 
+Production standalone drives with the #1594 firmware change accept only 0, including when restoring saved parameters. Central-i accepts 0 or 1.
+
 Every motor has a *base speed*: the speed at which its own back-EMF consumes the whole DC bus, leaving no voltage to drive current. Above it the machine stops accelerating regardless of what is commanded.
 
 Field weakening commands a **negative d-axis current**, which opposes the magnet flux and lowers the back-EMF, so the same bus reaches a higher speed. `FieldWeakEn` is the master switch.
