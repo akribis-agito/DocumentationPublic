@@ -42,7 +42,7 @@ language: zh-CN
 
 同一个点到点规划器由单次 PTP（[MotionMode](MotionMode.md) `= 1`）和重复 PTP（`MotionMode = 2`）共用，因此 `PTPKeepMoving` 在两者中都会被查询。对于重复 PTP，应将其保持为 `0`：将其设置为 `1` 会抑制段结束完成，因此段永远不会报告完成，[RptCounter](../05-motion-status/RptCounter.md) 永远不会递增，重复也无法推进。摇杆位置模式（`MotionMode = 12` 和 `13`）是独立的无限期运动，不受 `PTPKeepMoving` 影响。它对点动、电子齿轮、ECAM 或其他模式没有影响。
 
-在包含[回零完成修复](https://github.com/akribis-agito/Firmware-Main/issues/1690)的固件中，内置[回零](../../16-homing/HomingOn.zh.md)是一个例外：其点到点步骤（包括“移动到锁存位置”）即使在 `PTPKeepMoving = 1` 时，也会在指令位置处结束运动，使回零序列能够进入下一步。控制器不会修改 `PTPKeepMoving`；回零结束后，普通跟踪运动仍按原有方式工作。
+内置[回零](../../16-homing/HomingOn.zh.md)是一个例外：其点到点步骤（包括“移动到锁存位置”）即使在 `PTPKeepMoving = 1` 时，也会在指令位置处结束运动，使回零序列能够进入下一步。控制器不会修改 `PTPKeepMoving`；回零结束后，普通跟踪运动仍按原有方式工作。
 
 ![PTPKeepMoving blend vs restart](ptpkeepmoving-blend.svg)
 

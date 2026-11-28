@@ -41,7 +41,7 @@ Because the motion never reports "done", a fresh `Begin` (with a new `AbsTrgt`/`
 
 The same point-to-point profiler is shared by single PTP ([MotionMode](MotionMode.md) `= 1`) and repetitive PTP (`MotionMode = 2`), so `PTPKeepMoving` is consulted in both. For repetitive PTP it should be left at `0`: setting it to `1` suppresses the end-of-segment completion, so a segment never reports done, [RptCounter](../05-motion-status/RptCounter.md) never increments, and the repetition cannot advance. The joystick-position modes (`MotionMode = 12` and `13`) are independently endless and are not influenced by `PTPKeepMoving`. It has no effect on jog, gear, ECAM or the other modes.
 
-On firmware containing [the homing-completion fix](https://github.com/akribis-agito/Firmware-Main/issues/1690), built-in [homing](../../16-homing/HomingOn.md) is an exception: its point-to-point steps, including “Move to lock position,” finish at their commanded endpoint even when `PTPKeepMoving = 1`, so the homing sequence can advance. The controller does not change `PTPKeepMoving`; subsequent ordinary tracking retains its usual behavior after homing ends.
+Built-in [homing](../../16-homing/HomingOn.md) is an exception: its point-to-point steps, including “Move to lock position,” finish at their commanded endpoint even when `PTPKeepMoving = 1`, so the homing sequence can advance. The controller does not change `PTPKeepMoving`; subsequent ordinary tracking retains its usual behavior after homing ends.
 
 ![PTPKeepMoving blend vs restart](ptpkeepmoving-blend.svg)
 

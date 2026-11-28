@@ -47,7 +47,7 @@ language: zh-CN
 
 当 `HomingOn` 为 `0` 时，引擎将内部指针保持在步骤 1，以确保下一次写入 `1` 时始终从头开始。
 
-在包含[回零完成修复](https://github.com/akribis-agito/Firmware-Main/issues/1690)的固件中，即使 [PTPKeepMoving](../10-motion/02-motion-configuration/PTPKeepMoving.zh.md) 为 `1`，回零过程中的点到点运动也会正常结束。因此，“移动到锁存位置”可以完成并进入下一个回零步骤。该参数本身保持不变；回零结束后，普通 PTP 跟踪运动仍可持续运行。此处的完成是指运动规划结束，并不单独保证实际机械轴的稳定精度。
+即使 [PTPKeepMoving](../10-motion/02-motion-configuration/PTPKeepMoving.zh.md) 为 `1`，回零过程中的点到点运动也会正常结束。因此，“移动到锁存位置”可以完成并进入下一个回零步骤。该参数本身保持不变；回零结束后，普通 PTP 跟踪运动仍可持续运行。此处的完成是指运动规划结束，并不单独保证实际机械轴的稳定精度。
 
 ## 示例
 
