@@ -43,7 +43,7 @@ Each invocation streams only the samples (packets) that are complete and waiting
 
 Because the logger runs continuously, a host typically calls `LoggerUpload` periodically to keep the buffer from filling. In stop mode ([LoggerFullMod](LoggerFullMod.md) = 0) this is also how a paused logger resumes, since uploading frees the space it was waiting for.
 
-On firmware containing the correction for Firmware-Main issue #1725, free space released by an upload is acknowledged on the next control tick. A new upload arriving before that acknowledgement returns a valid reply with zero packets and leaves the remaining data queued. Continue periodic polling; this transient empty reply does not by itself mean the logger buffer is fully drained. Once acknowledged, the next call uploads the remaining complete packets. The packet format and per-call limit are unchanged.
+Free space released by an upload is acknowledged on the next control tick. A new upload arriving before that acknowledgement returns a valid reply with zero packets and leaves the remaining data queued. Continue periodic polling; this transient empty reply does not by itself mean the logger buffer is fully drained. Once acknowledged, the next call uploads the remaining complete packets. The packet format and per-call limit are unchanged.
 
 ## Examples
 
