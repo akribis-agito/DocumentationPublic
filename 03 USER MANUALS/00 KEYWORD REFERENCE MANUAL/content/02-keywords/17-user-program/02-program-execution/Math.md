@@ -84,7 +84,7 @@ Values are integers in the integer variants; in the floating-point and double va
 
 ## DOUBLE square-root and power precision
 
-On firmware exposing the typed operations and containing [the C2000 precision fix](https://github.com/akribis-agito/Firmware-Main/issues/1705), DOUBLE power (`Math[85]`) and square root (`Math[86]`) retain 64-bit precision through the math-library call, including standalone C2000 builds whose C `double` type is only 32 bits. For example, squaring the DOUBLE value `1.0000000001` yields approximately `1.0000000002`; the intermediate value is not rounded to single precision first. This does not increase the precision of the FLOAT variants. Negative square-root inputs and negative exponents continue to report their existing errors.
+DOUBLE power (`Math[85]`) and square root (`Math[86]`) retain 64-bit precision through the math-library call, including standalone C2000 builds whose C `double` type is only 32 bits. For example, squaring the DOUBLE value `1.0000000001` yields approximately `1.0000000002`; the intermediate value is not rounded to single precision first. This does not increase the precision of the FLOAT variants. Negative square-root inputs and negative exponents continue to report their existing errors.
 
 ## Examples
 
