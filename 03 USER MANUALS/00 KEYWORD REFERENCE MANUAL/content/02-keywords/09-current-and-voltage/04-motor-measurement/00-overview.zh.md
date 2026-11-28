@@ -5,4 +5,4 @@
 - [Rm](Rm.md) — 测得的电机电阻（mΩ）。
 - [Lm](Lm.md) — 测得的电机电感（µH）。
 - [RLType](RLType.md) — 相数据与线间数据测量类型。
-- [CurrFBFact](CurrFBFact.md) / [ExtCurrFBSca](ExtCurrFBSca.md) — 将外部/远程模拟电流检测输入转换为电机电流反馈的比例因子；CurrFBFact 为 v4 整数形式，ExtCurrFBSca 为 v5 浮点形式。
+- [CurrFBFact](CurrFBFact.md) / [ExtAmpConfig](ExtAmpConfig.zh.md) — 将外部/远程模拟电流检测输入转换为电机电流反馈的比例因子；CurrFBFact 为 v4 整数形式，ExtAmpConfig[1] 为 v5 浮点形式。

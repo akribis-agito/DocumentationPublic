@@ -22,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-07-30'
-doc_revision: '2026.09'
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # AAmpFullScale
@@ -72,7 +72,7 @@ $$
 
 中间码 32768 表示 0 A；相电流被映射为 `32768 + factor × PhaseCurr`，并饱和到 0…65535 范围。因此，等于 `AAmpFullScale` 的相电流将达到范围顶端（即高于中间码 32768 计数的半摆幅）。
 
-在施加该系数之前，可以为相电流加上一个每相偏置（mA）——见 [ExtCurrCmdOfs](../09-current-and-voltage/04-motor-measurement/ExtCurrCmdOfs.md)；映射后的代码变为 `32768 + factor × (PhaseCurr + ExtCurrCmdOfs)`。实际发送给驱动器的代码由 [ExtCurrCmdVal](../09-current-and-voltage/04-motor-measurement/ExtCurrCmdVal.md) 报告。
+在施加该系数之前，可以为相电流加上一个每相偏置（mA，Ia 对应元素 2，Ib 对应元素 3）——见 [ExtAmpConfig](../09-current-and-voltage/04-motor-measurement/ExtAmpConfig.zh.md)；映射后的代码变为 `32768 + factor × (PhaseCurr + offset_mA)`。实际发送给驱动器的代码由 [ExtCurrCmdVal](../09-current-and-voltage/04-motor-measurement/ExtCurrCmdVal.md) 报告。
 
 ## 示例
 
@@ -86,4 +86,4 @@ AAAmpFullScale          ; query the current full-scale value
 - [AmpType](AmpType.md) —— 选择本缩放所适用的外部驱动器指令模式
 - [AOutPort](../05-inputs-outputs/03-analog-outputs/AOutPort.md) —— 由缩放后指令驱动的模拟输出端口
 - [CurrRef](../09-current-and-voltage/02-motor-variables/CurrRef.md) —— 在模式 2 和 7 中被缩放的电流参考
-- [ExtCurrCmdOfs](../09-current-and-voltage/04-motor-measurement/ExtCurrCmdOfs.md) —— 数字 SPI 模式（8）下在该系数之前施加的每相 mA 偏置
+- [ExtAmpConfig](../09-current-and-voltage/04-motor-measurement/ExtAmpConfig.zh.md) —— 数字 SPI 模式（8）下在该系数之前施加的每相 mA 偏置

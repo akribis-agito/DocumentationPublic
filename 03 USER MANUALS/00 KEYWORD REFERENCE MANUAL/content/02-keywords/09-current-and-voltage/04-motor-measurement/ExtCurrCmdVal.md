@@ -22,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-07-30'
-doc_revision: '2026.09'
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 ---
 # ExtCurrCmdVal
 
@@ -40,11 +40,11 @@ It is a diagnostic value, not a control: being read-only and not saved to flash,
 Each control cycle, for phase index `i`, the controller computes
 
 ```
-codeBeforeMidCode = round( gain × (PhaseCurr[i] + ExtCurrCmdOfs[i]) )
+codeBeforeMidCode = round( gain × (PhaseCurr[i] + offset_mA[i]) )
 ExtCurrCmdVal[i]  = codeBeforeMidCode + 32768                          ; saturated to 0…65535
 ```
 
-where `gain = 32768 / AAmpFullScale` (counts/mA) and `32768` is the DAC's mid-code (0 mA at zero phase current and zero offset). See [ExtCurrCmdOfs](ExtCurrCmdOfs.md) for the full offset-before-gain derivation and a worked example.
+where `offset_mA[1]` is `ExtAmpConfig[2]` and `offset_mA[2]` is `ExtAmpConfig[3]`. The gain is `32768 / AAmpFullScale` (counts/mA) and `32768` is the DAC's mid-code (0 mA at zero phase current and zero offset). See [ExtAmpConfig](ExtAmpConfig.md) for the full offset-before-gain derivation and a worked example.
 
 `ExtCurrCmdVal` saturates: if the computed code would fall outside the DAC's 0–65535 range it is clamped to the nearest end, it does not wrap. The value is what is actually written to the amplifier's SPI/DAC register, so it reflects any clamping that occurred, even if the unclamped calculation would have gone further.
 
@@ -60,7 +60,7 @@ AExtCurrCmdVal[1]=100   ; rejected: ExtCurrCmdVal is read-only
 
 ## See also
 
-- [ExtCurrCmdOfs](ExtCurrCmdOfs.md) — the per-phase mA offset that feeds into this code, with the full command chain and a worked example
+- [ExtAmpConfig](ExtAmpConfig.md) — the per-phase mA offset that feeds into this code, with the full command chain and a worked example
 - [AAmpFullScale](../../02-motor-and-amplifier/AAmpFullScale.md) — the gain applied between the offset and this code
 - [AmpType](../../02-motor-and-amplifier/AmpType.md) — selects the digital-SPI amplifier mode (8) this keyword applies to
 - [ComtStatus](../../15-commutation/ComtStatus.md) — status `-17`, phasing refused on an axis with an external amplifier
