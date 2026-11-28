@@ -42,6 +42,8 @@ Per-filter status word reporting which customisable filters have pending definit
 
 ![Velocity-filter status word: four packed 6-bit fields, each carrying a pending bit and per-parameter validity bits](filter-status-bitfield.svg)
 
+For filters that support live adjustment, PCSuite checks the drive’s keyword list. When the drive lists `FilterStatus`, PCSuite applies filter settings and reads their status synchronously. When the keyword is absent, PCSuite uses its older download procedure, which checks the motor state before applying settings. Two drives can therefore support filtering and use different setup procedures.
+
 ## How it works
 
 For a given filter, let `n` be the offset of its 6-bit field, where `n = (filter number − 1) × 6`. The bits within the field are:
