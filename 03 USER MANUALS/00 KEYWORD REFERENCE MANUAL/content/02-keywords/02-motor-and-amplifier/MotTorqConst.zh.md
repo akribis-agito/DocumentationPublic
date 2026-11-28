@@ -59,6 +59,8 @@ psi_f = (2/3) * MotTorqConst / PolePairs
 AMotTorqConst=0.36    ; 每安培 0.36 N.m
 ```
 
+在包含负载估计器修正（Firmware-Main #2710）的 AGM800 固件中，碰撞检测接受旋转电机的任何正 MotTorqConst 值，包括 1.0。请输入电机数据表中的实际值。
+
 ## 另请参阅
 
 - [MotForceConst](MotForceConst.md) — 直线电机对应项
