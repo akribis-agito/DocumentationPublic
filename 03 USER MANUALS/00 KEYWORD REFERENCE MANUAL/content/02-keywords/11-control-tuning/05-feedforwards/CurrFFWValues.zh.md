@@ -10,7 +10,7 @@ attributes:
   scope: axis
   flash: false
   type: array
-  array_size: 1
+  array_size: 5
   data_type: float32
   ok_in_motion: true
   ok_motor_on: true
@@ -22,7 +22,7 @@ attributes:
 overrides:
   ci-master:
     array_size: 7
-last_updated: '2026-11-01'
+last_updated: '2026-11-28'
 doc_revision: '2026.11'
 language: zh-CN
 ---
@@ -36,27 +36,27 @@ language: zh-CN
 
 | 索引 | 值 |
 |---|---|
-| `CurrFFWValues[1]` | 经过前馈滤波器后、加入电流参考的前馈总电流。**包含摩擦电流。** |
+| `CurrFFWValues[1]` | 经过前馈滤波器后、加入电流参考的前馈总电流。在 AGM800 和 AGM800-EC 上，此值包含摩擦电流。 |
 | `CurrFFWValues[2]` | 速度前馈项（[VelFFW](VelFFW.md)） |
 | `CurrFFWValues[3]` | 加速度前馈项（[AccFFW](AccFFW.md)） |
 | `CurrFFWValues[4]` | 加加速度（Jerk）前馈项 |
-| `CurrFFWValues[5]` | 保留（读数为 0） |
+| `CurrFFWValues[5]` | Central-i 保留（读数为 0） |
 | `CurrFFWValues[6]` | 前馈滤波器*之前*的摩擦前馈电流（仅 AGM800 和 AGM800-EC） |
 
 ## 工作原理
 
-索引 6 是摩擦前馈环节经 [FricLim](../../../03-special-features/friction-compensation/FricLim.md) 钳位后的输出。它取代 5.3.0-rc4 中的 `FricCurr`。当该环节关闭或未运行时（例如电流模式），读数为 0。
+在 AGM800 和 AGM800-EC 上，索引 6 是摩擦前馈环节经 [FricLim](../../../03-special-features/friction-compensation/FricLim.md) 钳位后的输出。它取代 5.3.0-rc4 中的 `FricCurr`。当该环节关闭或未运行时（例如电流模式），读数为 0。
 
-索引 1 是前馈滤波器（[FFFiltOn](FFFiltOn.md) / [FFFiltDef](FFFiltDef.md)）的输出。摩擦电流与速度、加速度前馈项一起经过该滤波器，因此索引 1 包含摩擦。`FFFiltOn` = 0 时，索引 1 即为简单求和。`FFFiltOn` = 1 时，在换向处索引 1 滞后于索引 6。在 CNC 前馈跳过的两个控制周期内，进入滤波器的前馈（包括摩擦）被清零，因此索引 1 下降——`FFFiltOn` = 0 时直接降为 0——而索引 2 至 6 保持其值。在速度模式以及 [ForcePIVOn](../07-force-control/ForcePIVOn.md) = 1 的力模式下，不使用速度和加速度前馈项，索引 1 只承载摩擦。
+索引 1 是前馈滤波器（[FFFiltOn](FFFiltOn.md) / [FFFiltDef](FFFiltDef.md)）的输出。在 AGM800 和 AGM800-EC 上，摩擦电流与速度、加速度前馈项一起经过该滤波器，因此索引 1 包含摩擦。`FFFiltOn` = 0 时，索引 1 即为简单求和。`FFFiltOn` = 1 时，在换向处索引 1 滞后于索引 6。在 CNC 前馈跳过的两个控制周期内，进入滤波器的前馈（包括摩擦）被清零，因此索引 1 下降——`FFFiltOn` = 0 时直接降为 0——而索引 2 至 6 保持其值。在速度模式以及 [ForcePIVOn](../07-force-control/ForcePIVOn.md) = 1 的力模式下，不使用速度和加速度前馈项，索引 1 只承载摩擦。
 
 在速度环不形成电流参考的模式下（例如电流模式），索引 1 保持其上一次的值。
 
-在独立控制器上，`CurrFFWValues` 存在但不接受任何索引，因此无法读取上述任何值。
+支持这些读数的独立控制器在 `About` 中报告的最大索引为 4。较早的独立控制器固件报告 0，且不接受索引读取。
 
 ## 示例
 
 ```text
-ACurrFFWValues[6]     ; 滤波器之前的摩擦电流，mA
+ACurrFFWValues[6]     ; AGM800 / AGM800-EC：滤波器之前的摩擦电流，mA
 ACurrFFWValues[1]     ; 滤波器之后的前馈总电流，mA
 ```
 
