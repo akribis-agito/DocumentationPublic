@@ -2,11 +2,8 @@
 keyword: ParamAbout
 summary: Function returning a single parameter's minimum, maximum and default values, selected by CAN code.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 499
 attributes:
   access: rw

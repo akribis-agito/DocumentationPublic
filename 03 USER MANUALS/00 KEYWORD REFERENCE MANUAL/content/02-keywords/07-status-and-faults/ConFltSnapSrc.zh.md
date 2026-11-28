@@ -2,11 +2,8 @@
 keyword: ConFltSnapSrc
 summary: 配置在发生故障时哪些参数被捕获到 ConFltSnapVal。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 528
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: PlantModel
 summary: 已辨识的被控对象模型系数数组，供自整定和速度滤波器设计使用。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 558
 attributes:
   access: rw

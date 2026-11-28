@@ -2,9 +2,8 @@
 keyword: ProgThread
 summary: 报告当前正在执行的用户程序线程编号。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 737
 attributes:
   access: ro
@@ -22,7 +21,11 @@ attributes:
   default: 1
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    range:
+    - 1
+    - 14
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

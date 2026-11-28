@@ -2,11 +2,8 @@
 keyword: GantryCurrRef
 summary: 龙门偏摆校正的只读电流（力矩）参考值。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 651
 attributes:
   access: ro
@@ -14,20 +11,15 @@ attributes:
   flash: false
   type: scalar
   array_size: 1
-  data_type: int32
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range:
-  - -2147483648
-  - 2147483647
+  range: null
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    data_type: float32
-    range: null
+overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

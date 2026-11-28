@@ -2,11 +2,8 @@
 keyword: CANAddr
 summary: CAN base address of the controller node.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 67
 attributes:
   access: rw

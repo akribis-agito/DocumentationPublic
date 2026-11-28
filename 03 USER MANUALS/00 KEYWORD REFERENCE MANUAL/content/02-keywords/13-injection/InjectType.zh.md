@@ -2,11 +2,8 @@
 keyword: InjectType
 summary: 选择注入波形形状及直接注入或叠加注入模式。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 112
 attributes:
   access: rw
@@ -20,15 +17,11 @@ attributes:
   units: none
   range:
   - 0
-  - 7
+  - 9
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    range:
-    - 0
-    - 9
+overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

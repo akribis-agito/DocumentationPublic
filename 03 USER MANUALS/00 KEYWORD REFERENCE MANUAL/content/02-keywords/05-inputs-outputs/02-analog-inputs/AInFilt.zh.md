@@ -2,11 +2,8 @@
 keyword: AInFilt
 summary: 每个模拟量输入的数字低通滤波器系数。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 218
 attributes:
   access: rw
@@ -14,7 +11,7 @@ attributes:
   flash: true
   type: array
   array_size: 5
-  data_type: int32
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
@@ -25,11 +22,56 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v4:
+  ci-master:
     scope: axis
-  central-i.v5:
-    scope: axis
-    data_type: float32
+  agd155-af-2a06:
+    array_size: 3
+    range:
+    - 1
+    - 800000
+    default: 100000
+  agd155-af-2a10:
+    array_size: 3
+    range:
+    - 1
+    - 800000
+    default: 100000
+  agd155-ec:
+    array_size: 3
+    range:
+    - 1
+    - 800000
+    default: 100000
+  agd155-ec-var34:
+    array_size: 3
+    range:
+    - 1
+    - 800000
+    default: 100000
+  agd155-ec-var34-3:
+    array_size: 3
+    range:
+    - 1
+    - 800000
+    default: 100000
+  agd156-ec:
+    array_size: 2
+    range:
+    - 1
+    - 800000
+    default: 100000
+  agd101-ec-34a:
+    array_size: 2
+    range:
+    - 1
+    - 800000
+    default: 100000
+  agd101-ec-17a:
+    array_size: 2
+    range:
+    - 1
+    - 800000
+    default: 100000
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

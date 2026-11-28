@@ -2,11 +2,8 @@
 keyword: ProgHaltAll
 summary: Halts all currently active user program threads.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 278
 attributes:
   access: ro

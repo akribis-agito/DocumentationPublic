@@ -2,11 +2,8 @@
 keyword: InTargetStat
 summary: 报告轴的运动与整定状态（禁用、运动中、整定中、已到达）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 268
 attributes:
   access: ro

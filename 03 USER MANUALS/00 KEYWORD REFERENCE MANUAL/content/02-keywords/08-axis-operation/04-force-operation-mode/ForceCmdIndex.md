@@ -2,11 +2,8 @@
 keyword: ForceCmdIndex
 summary: Index of the active ForceCmdVal / ForceCmdHTime table entry.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 573
 attributes:
   access: rw

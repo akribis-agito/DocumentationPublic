@@ -2,9 +2,8 @@
 keyword: PushConstantD
 summary: 将 64 位浮点（double）常量压入当前线程的数值栈。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 782
 attributes:
   access: rw

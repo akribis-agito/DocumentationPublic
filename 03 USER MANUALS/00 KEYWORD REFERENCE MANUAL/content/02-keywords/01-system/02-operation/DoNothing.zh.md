@@ -2,11 +2,8 @@
 keyword: DoNothing
 summary: 用于检查通信响应能力的空操作命令。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 239
 attributes:
   access: ro

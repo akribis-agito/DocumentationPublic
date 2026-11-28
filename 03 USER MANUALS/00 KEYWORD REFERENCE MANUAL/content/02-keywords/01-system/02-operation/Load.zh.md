@@ -2,11 +2,8 @@
 keyword: Load
 summary: 将所有参数从闪存重新加载至易失性存储器，丢弃未保存的更改。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 233
 attributes:
   access: ro
@@ -25,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-30'
-doc_revision: '2026.06'
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # Load
@@ -69,6 +66,10 @@ language: zh-CN
 ```text
 ALoad                ; reload all flash-saved parameters, discarding unsaved edits
 ```
+
+## Orbit FR 型号
+
+集成后的 Orbit FR 版 AGM800 恢复记录前会检查已存参数的格式。请使用按关键字名称导出的备份迁移旧配置。旧版原始参数映像无法载入集成后的布局。
 
 ## 另请参阅
 

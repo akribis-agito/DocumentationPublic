@@ -2,11 +2,8 @@
 keyword: ProgStat
 summary: Reports the running status of a specified user program thread.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 259
 attributes:
   access: ro
@@ -24,7 +21,9 @@ attributes:
   default: -1
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    array_size: 13
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 ---

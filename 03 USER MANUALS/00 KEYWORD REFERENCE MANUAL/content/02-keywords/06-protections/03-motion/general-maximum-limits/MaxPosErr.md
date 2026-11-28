@@ -2,11 +2,8 @@
 keyword: MaxPosErr
 summary: Maximum closed-loop position error; exceeding it disables the axis.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 84
 attributes:
   access: rw

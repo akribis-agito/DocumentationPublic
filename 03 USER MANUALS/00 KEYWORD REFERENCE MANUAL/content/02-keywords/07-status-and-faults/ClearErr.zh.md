@@ -2,11 +2,8 @@
 keyword: ClearErr
 summary: 清除控制器错误日志（ErrLog）的命令。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 236
 attributes:
   access: ro

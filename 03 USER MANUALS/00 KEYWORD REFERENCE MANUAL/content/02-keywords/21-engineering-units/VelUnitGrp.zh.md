@@ -2,9 +2,8 @@
 keyword: VelUnitGrp
 summary: 只读列表，列出属于速度单位组的关键字。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 805
 attributes:
   access: ro

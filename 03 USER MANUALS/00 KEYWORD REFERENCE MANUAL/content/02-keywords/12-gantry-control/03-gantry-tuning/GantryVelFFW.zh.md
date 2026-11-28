@@ -2,9 +2,8 @@
 summary: 龙门偏摆校正控制器的速度前馈增益。
 keyword: GantryVelFFW
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 678
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: EmulIndexType
 summary: 选择在编码器仿真输出上生成的索引脉冲类型。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 402
 attributes:
   access: rw

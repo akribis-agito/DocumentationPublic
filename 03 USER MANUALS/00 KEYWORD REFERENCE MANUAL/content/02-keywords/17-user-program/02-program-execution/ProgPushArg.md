@@ -2,11 +2,8 @@
 keyword: ProgPushArg
 summary: Pushes a value onto the argument stack of a target user program task.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 431
 attributes:
   access: rw

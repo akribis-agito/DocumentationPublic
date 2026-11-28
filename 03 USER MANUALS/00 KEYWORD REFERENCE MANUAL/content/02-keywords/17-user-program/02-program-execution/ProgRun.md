@@ -2,11 +2,8 @@
 keyword: ProgRun
 summary: Runs (or resumes) a task as a given thread number.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 198
 attributes:
   access: rw
@@ -20,11 +17,40 @@ attributes:
   units: func
   range:
   - 0
-  - 254
+  - 30
   default: 0
   scaling: 1.0
   implemented: partial
-overrides: {}
+overrides:
+  ci-master:
+    array_size: 13
+    range:
+    - 0
+    - 254
+  agd155-ec:
+    range:
+    - 0
+    - 254
+  agd155-ec-var34:
+    range:
+    - 0
+    - 254
+  agd155-ec-var34-3:
+    range:
+    - 0
+    - 254
+  agd156-ec:
+    range:
+    - 0
+    - 254
+  agd101-ec-34a:
+    range:
+    - 0
+    - 254
+  agd101-ec-17a:
+    range:
+    - 0
+    - 254
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 ---

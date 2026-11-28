@@ -1,7 +1,7 @@
 ---
 summary: 选择反馈记录的数字事件源和触发边沿。
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-11-23'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # LockSrc/AuxLockSrc
@@ -113,9 +113,12 @@ language: zh-CN
 并非所有触发源到达捕获逻辑的延迟都相同：
 
 - **分立数字输入和双向差分 I/O** 在能够触发捕获之前会先经过一个可配置的输入消抖/毛刺滤波器。该滤波器拒绝短噪声脉冲，但同时也会在物理边沿与锁存捕获之间增加一个小的、与滤波器相关的延迟。该延迟随输入滤波的配置方式而变化。
-- **编码器索引线和霍尔传感器线**基本上以原始信号馈入捕获逻辑，没有消抖级，因此它们以最低的延迟触发。
+- **霍尔输入**直接送入捕获逻辑，无需经过分立输入使用的可配置消抖级。
+- **CIG1 编码器索引**（具有辅助计数器的远程模块，自 FPGA v5.5.0-rc1 起）。请选用辅助计数器当前测量的编码器自身的索引。FPGA 将该索引与位置计数一起解码。在上升沿，FPGA 延迟五个时钟捕获，以计入进入索引状态时的跳变。在任一边沿和任一运动方向上，均可捕获索引有效期间的计数。
 
-这就是为什么当你需要最精确的配准时优先选择编码器索引：它以相对于真实边沿最小且一致的延迟捕获反馈位置，而经滤波的分立输入则以少许时序精度换取抗噪能力。
+在 FPGA 仿真中，`EncFilt = 0` 时索引状态至少持续四个时钟（40 ns），`EncFilt = 1…7` 时至少持续三个时钟（30 ns），对齐后的捕获值才与索引计数完全一致。发布的镜像还会滤除短索引脉冲。在 `EncFilt = 1…7` 时，脉冲至少要持续 `min(EncFilt + 1, 5)` 个时钟才能通过滤波。使用时需要同时满足捕获和脉宽要求。[索引对齐测量](https://github.com/akribis-agito/FPGA-main/blob/deede701/changelog/unreleased/09-357-cig1-index-lock-in-index-count.md) · [CIG1 发布说明](https://github.com/akribis-agito/FPGA-main/releases/tag/v5.5.0-rc1)
+
+选择另一个编码器的索引时，锁存的是该索引边沿到来时当前编码器的位置。例如，`EncSinCosHWEn = 3` 且 `LockSrc = 0` 时，主编码器索引触发辅助编码器位置的锁存。仿真中的偏差取决于速度和 `EncFilt`。每计数五个时钟或更慢时，偏差可达两个计数；每计数两个时钟时，偏差可达五个计数。[测得的偏差范围](https://github.com/akribis-agito/FPGA-main/blob/deede701/changelog/unreleased/09-357-cig1-index-lock-in-index-count.md)
 
 ## 示例
 

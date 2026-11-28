@@ -2,11 +2,8 @@
 keyword: TorqCompMode
 summary: 在速度/位置模式下选择环路电流（转矩）补偿的来源。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 391
 attributes:
   access: rw

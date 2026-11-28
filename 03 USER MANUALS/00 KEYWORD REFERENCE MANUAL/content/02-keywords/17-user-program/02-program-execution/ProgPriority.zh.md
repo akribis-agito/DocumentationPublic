@@ -1,13 +1,9 @@
 ---
 keyword: ProgPriority
 summary: 设置用户程序线程的调度优先级（服务间隔）。
-language: zh-CN
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 296
 attributes:
   access: rw
@@ -25,9 +21,12 @@ attributes:
   default: 1
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    array_size: 13
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
+language: zh-CN
 ---
 # ProgPriority
 

@@ -1,7 +1,7 @@
 ---
 summary: History arrays storing the before-map feedback position of each logged digital event, on Central-i masters built with the lock FIFO.
 last_updated: '2026-10-21'
-doc_revision: '2026.10'
+doc_revision: '2026.11'
 ---
 # LockBMapTable/LockBMapTabB
 

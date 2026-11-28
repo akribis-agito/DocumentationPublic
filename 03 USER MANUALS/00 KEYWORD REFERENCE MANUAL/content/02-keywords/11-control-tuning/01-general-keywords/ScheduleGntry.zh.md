@@ -1,9 +1,9 @@
 ---
 keyword: ScheduleGntry
+summary: 将增益调度与轴的龙门控制状态配对，用于选择调度作用于标准整定增益还是龙门整定增益。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 658
 attributes:
   access: rw
@@ -25,7 +25,6 @@ overrides: {}
 last_updated: '2026-05-28'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 将增益调度与轴的龙门控制状态配对，用于选择调度作用于标准整定增益还是龙门整定增益。
 ---
 # ScheduleGntry
 

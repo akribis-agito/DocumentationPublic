@@ -2,11 +2,8 @@
 keyword: CurrPosErrTh
 summary: Position-error threshold (condition B) to enter current mode.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 337
 attributes:
   access: rw

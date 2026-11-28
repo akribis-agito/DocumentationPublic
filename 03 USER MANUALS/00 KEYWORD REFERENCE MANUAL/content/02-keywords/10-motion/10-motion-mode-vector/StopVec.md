@@ -2,11 +2,8 @@
 keyword: StopVec
 summary: Command that stops coordinated vector motion, decelerating all member axes along the path.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 645
 attributes:
   access: ro
@@ -25,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-09-29'
+doc_revision: '2026.11'
 ---
 # StopVec
 

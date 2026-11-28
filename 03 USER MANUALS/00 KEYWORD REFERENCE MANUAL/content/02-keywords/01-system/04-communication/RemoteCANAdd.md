@@ -2,11 +2,8 @@
 keyword: RemoteCANAdd
 summary: Target CAN node address for a remote write issued by RemoteCANSend.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 440
 attributes:
   access: rw

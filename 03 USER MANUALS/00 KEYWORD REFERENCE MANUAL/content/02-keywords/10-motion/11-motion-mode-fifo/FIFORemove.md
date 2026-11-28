@@ -2,11 +2,8 @@
 keyword: FIFORemove
 summary: Command function that removes the last entry pushed into the FIFO motion queue.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 289
 attributes:
   access: ro

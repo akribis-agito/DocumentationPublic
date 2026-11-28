@@ -2,11 +2,8 @@
 keyword: Stop
 summary: 受控停止；使用正常的 Decel 速率将该轴减速至静止。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 132
 attributes:
   access: ro
@@ -25,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-09-29'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # Stop

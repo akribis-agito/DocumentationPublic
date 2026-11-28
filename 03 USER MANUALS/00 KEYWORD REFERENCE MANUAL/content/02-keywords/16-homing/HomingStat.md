@@ -2,11 +2,8 @@
 keyword: HomingStat
 summary: Read-only status of the homing process, including step number and error codes.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 342
 attributes:
   access: ro

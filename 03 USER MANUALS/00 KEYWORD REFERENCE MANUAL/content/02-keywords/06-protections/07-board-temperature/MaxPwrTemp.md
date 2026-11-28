@@ -2,11 +2,8 @@
 keyword: MaxPwrTemp
 summary: Maximum allowed power-stage temperature (°C); exceeding it triggers protection.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 90
 attributes:
   access: rw
@@ -25,9 +22,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v4:
-    scope: axis
-  central-i.v5:
+  ci-master:
     scope: axis
 last_updated: '2026-05-30'
 doc_revision: '2026.06'

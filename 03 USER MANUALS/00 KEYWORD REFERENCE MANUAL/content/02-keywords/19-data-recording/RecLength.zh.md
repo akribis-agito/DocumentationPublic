@@ -1,33 +1,99 @@
 ---
 keyword: RecLength
 summary: 每个示波器每个参数捕获的数据点数（记录时长）。
-language: zh-CN
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 241
 attributes:
   access: rw
   scope: non-axis
   flash: true
   type: array
-  array_size: 2
+  array_size: 3
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
   units: none
   range:
   - 0
-  - 30500
+  - 23000
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    range:
+    - 0
+    - 5000000
+  agc300-et:
+    array_size: 2
+    range:
+    - 0
+    - 3600
+  agd200-et-2d01:
+    array_size: 2
+    range:
+    - 0
+    - 7000
+  agd200-et-2d02:
+    array_size: 2
+    range:
+    - 0
+    - 7000
+  agd200-et-2d05:
+    array_size: 2
+    range:
+    - 0
+    - 7000
+  agd200-et-2d05-71:
+    array_size: 2
+    range:
+    - 0
+    - 7000
+  agd155-af-2a06:
+    array_size: 2
+    range:
+    - 0
+    - 7500
+  agd155-af-2a10:
+    array_size: 2
+    range:
+    - 0
+    - 7500
+  agd155-ec:
+    array_size: 2
+    range:
+    - 0
+    - 7500
+  agd155-ec-var34:
+    array_size: 2
+    range:
+    - 0
+    - 7500
+  agd155-ec-var34-3:
+    array_size: 2
+    range:
+    - 0
+    - 7500
+  agd156-ec:
+    array_size: 2
+    range:
+    - 0
+    - 7500
+  agd101-ec-34a:
+    array_size: 2
+    range:
+    - 0
+    - 7500
+  agd101-ec-17a:
+    array_size: 2
+    range:
+    - 0
+    - 7500
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
+language: zh-CN
 ---
 # RecLength
 

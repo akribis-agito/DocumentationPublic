@@ -2,9 +2,8 @@
 keyword: PosPDUnitGrp
 summary: 共享 P/D 位置用户单位缩放和标签的脉冲方向位置关键字只读列表。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 817
 attributes:
   access: ro

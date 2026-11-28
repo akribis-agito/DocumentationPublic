@@ -2,11 +2,8 @@
 keyword: SetPosition
 summary: 在不移动电机的情况下将轴位置重新定义为给定值。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 154
 attributes:
   access: rw
@@ -14,24 +11,19 @@ attributes:
   flash: false
   type: scalar
   array_size: 1
-  data_type: int32
+  data_type: int64
   ok_in_motion: false
   ok_motor_on: true
   units: func
   range:
-  - -2147483648
-  - 2147483647
+  - -2251799813685248
+  - 2251799813685247
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    data_type: int64
-    range:
-    - -2251799813685248
-    - 2251799813685247
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+overrides: {}
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # SetPosition
@@ -82,7 +74,9 @@ language: zh-CN
 
 `SetPosition` 根据所选反馈坐标的实际变化量调整硬件计数与固件坐标之间的偏移。此后发布的 `LockVal` 使用新原点，无需切换 `LockEn` 或再次执行 `LockEventInit`；这也包括在位置变更后才收到邮箱回复的捕获。已经发布的 `LockVal` 和捕获历史表项不会被改写。坐标未发生变化的捕获源不会被平移。
 
-已经使能的硬件事件序列在 `SetPosition` 后保持原有物理目标位置，包括之后下发的表项。若要按新原点启动序列，请先关闭事件，再重新使能（`EventOn=0`，然后 `EventOn=1`）。在已经使能时写入 `EventOn=1` 不会重启或重新对齐序列。此操作不会初始化尚未初始化的锁存／事件源，也不会取消初始化时捕获源必须静止的要求。
+AGM800 与 AGM800-EC 上由 EventLoad 管理的 `EventType=3` 运行除外，已经使能的硬件事件序列在 `SetPosition` 后保持原有物理目标位置，包括之后下发的表项。任一轴上的此类运行处于加载、使能或结束过程中时，`SetPosition` 被拒绝并返回错误 151；事件表处于 Ready 且尚未使能时，`SetPosition` 会丢弃已准备的数据，使能前须重新执行 [EventLoad](../../18-event-generation/EventLoad.md)。若要按新原点启动序列，请先关闭事件，再重新使能（`EventOn=0`，然后 `EventOn=1`）。在已经使能时写入 `EventOn=1` 不会重启或重新对齐序列。此操作不会初始化尚未初始化的锁存／事件源，也不会取消初始化时捕获源必须静止的要求。
+
+若事件表清理失败，事件表仍占有轴，直到重新连接恢复。在此期间，即使运行已停止，`SetPosition` 仍被拒绝，错误码为 151。
 
 ## 示例
 

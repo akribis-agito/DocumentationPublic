@@ -2,11 +2,8 @@
 keyword: GoToCurrMode
 summary: 用于平稳进入电流运行模式的命令。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 335
 attributes:
   access: ro
@@ -26,7 +23,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-10'
-doc_revision: '2026.10'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # GoToCurrMode

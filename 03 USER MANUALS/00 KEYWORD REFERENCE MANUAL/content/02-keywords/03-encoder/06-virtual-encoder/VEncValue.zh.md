@@ -2,11 +2,8 @@
 keyword: VEncValue
 summary: 只读的虚拟编码器跟踪计数，采用经缩放的源参考坐标。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 623
 attributes:
   access: ro
@@ -25,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-11'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # VEncValue

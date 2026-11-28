@@ -2,9 +2,7 @@
 keyword: FricViscous
 summary: 'Viscous friction slope: extra current per count/s of velocity feedback.'
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 932
 attributes:
   access: rw
@@ -23,6 +21,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 ---
 # FricViscous
 
@@ -34,7 +34,7 @@ Viscous friction slope: extra current per count/s of velocity feedback.
 
 ## How it works
 
-The stage adds `FricViscous` × velocity feedback to methods 1, 2, 3 and 5. It always uses the velocity feedback, whatever [FricVelSrc](FricVelSrc.md) says. LuGre (method 4) uses it as its viscous coefficient (σ2). The default is 0 (no viscous term).
+The stage adds `FricViscous` × velocity feedback to methods 1 to 4. It always uses the velocity feedback, whatever [FricVelSrc](FricVelSrc.md) says. LuGre (method 5) uses it as its viscous coefficient (σ2). The default is 0 (no viscous term).
 
 Tune it last, after the offset and the per-direction levels: run the axis at a few constant speeds and set the slope so the remaining current no longer grows with speed.
 

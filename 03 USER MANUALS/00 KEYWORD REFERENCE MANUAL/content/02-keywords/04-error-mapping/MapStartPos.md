@@ -1,11 +1,8 @@
 ---
 keyword: MapStartPos
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 323
 attributes:
   access: rw
@@ -24,14 +21,14 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
+  ci-master:
     data_type: int64
     range:
     - -2251799813685248
     - 2251799813685247
 summary: Starting position of each error-mapping dimension, in encoder counts.
 last_updated: '2026-10-17'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 ---
 # MapStartPos
 

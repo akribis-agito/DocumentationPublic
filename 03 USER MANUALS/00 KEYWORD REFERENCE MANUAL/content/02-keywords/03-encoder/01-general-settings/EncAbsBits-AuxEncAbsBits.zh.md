@@ -45,7 +45,7 @@ $$\text{ReadingCycle} = 2^{\,\text{EncAbsBits} - \text{EncAbsMB}}$$
 
 固件累加已处理绝对读数之间的变化，而不是将编码器当作增量计数器。每个控制周期并不保证有新的有效绝对测量值：远程设备可能保留之前的字，传输可能拒绝帧，错误处理也可能预测位置。保留反馈行为请参见 [EncAbsVal](EncAbsVal-AuxEncAbsVal.md)，诊断限制请参见 [EncStatReg](EncStatReg.md)。
 
-启动窗口内，累加反馈位置根据已处理的绝对读数加上 [EncAbsOff](EncAbsOff-AuxEncAbsOff.md) 进行初始化。此倒计时不确认样本是否有效，因此本身不能证明机器位置正确。
+启动窗口内，累加反馈位置根据已处理的绝对读数加上 [EncAbsOff](EncAbsOff-AuxEncAbsOff.md) 进行初始化。此倒计时不确认样本是否有效，因此本身不能证明机器位置正确。例外：在 AGM800 和 AGM800-EC 上，活动的标准 AMP 主 Tamagawa 反馈在 [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md) `>= 0` 时不在倒计时期间初始化，而是保持先前位置；倒计时结束后，只有本控制周期新通过 Central-i CRC1 检查、且质量位全部清零的回复，才将位置设为绝对读数加 `EncAbsOff`。
 
 ### 辅助编码器（AuxEncAbsBits）
 

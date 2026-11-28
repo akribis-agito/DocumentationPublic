@@ -2,11 +2,8 @@
 keyword: UserMode
 summary: UserMode is a parameter used to activate special algorithms within the controller. These
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 77
 attributes:
   access: rw

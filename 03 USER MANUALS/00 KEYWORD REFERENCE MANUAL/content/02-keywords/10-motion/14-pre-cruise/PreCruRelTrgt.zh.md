@@ -2,9 +2,8 @@
 keyword: PreCruRelTrgt
 summary: 以正弦点到点运动起始点为基准的预巡航目标距离（用户单位）。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 842
 attributes:
   access: rw

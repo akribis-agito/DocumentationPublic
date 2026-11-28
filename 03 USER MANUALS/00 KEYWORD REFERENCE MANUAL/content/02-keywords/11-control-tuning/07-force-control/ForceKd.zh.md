@@ -1,11 +1,9 @@
 ---
 keyword: ForceKd
+summary: 力环 PID 控制器的微分增益。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 588
 attributes:
   access: rw
@@ -13,7 +11,7 @@ attributes:
   flash: true
   type: scalar
   array_size: 1
-  data_type: int32
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
@@ -23,13 +21,10 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    data_type: float32
+overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 力环 PID 控制器的微分增益。
 ---
 # ForceKd
 

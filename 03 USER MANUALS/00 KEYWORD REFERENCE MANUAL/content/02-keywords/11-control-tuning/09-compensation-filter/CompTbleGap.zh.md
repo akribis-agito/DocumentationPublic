@@ -2,9 +2,8 @@
 keyword: CompTbleGap
 summary: 相邻补偿表格点之间的位置间距，单位为编码器计数。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 837
 attributes:
   access: rw

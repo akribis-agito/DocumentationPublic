@@ -2,11 +2,8 @@
 keyword: EmulRat
 summary: 反馈编码器计数与仿真输出上发出的正交脉冲之间的比值。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 69
 attributes:
   access: rw

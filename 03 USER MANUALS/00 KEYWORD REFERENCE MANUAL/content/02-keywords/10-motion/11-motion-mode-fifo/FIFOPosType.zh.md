@@ -2,11 +2,8 @@
 keyword: FIFOPosType
 summary: 选择 FIFO 位置跟踪功能的工作模式。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 659
 attributes:
   access: rw

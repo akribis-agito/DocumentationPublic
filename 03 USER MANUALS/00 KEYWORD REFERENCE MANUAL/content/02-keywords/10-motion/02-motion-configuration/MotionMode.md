@@ -2,11 +2,8 @@
 keyword: MotionMode
 summary: Selects the type of motion performed when Begin is issued.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 141
 attributes:
   access: rw
@@ -20,12 +17,12 @@ attributes:
   units: none
   range:
   - -1
-  - 19
+  - 21
   default: -1
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
+  ci-master:
     range:
     - -1
     - 23
@@ -62,7 +59,7 @@ The following table shows the types of motion described by `MotionMode`.
 | 7 | **Electronic cam (ECAM) motion - direct mode** Axis will undergo perpetual relative motion, in which the relative position reference (relative to its initial position upon the Begin command) depends on a master variable. The relative position reference is obtained at every controller cycle from a customisable array that maps to a user-defined and evenly spaced master position range. It is analogous to mechanical cam-follower motion. Please refer to Motion mode – ECAM motion for more information. |
 | 8 | **Electronic cam (ECAM) motion - indirect mode** This motion mode is reserved for internal use. |
 | 9 | FIFO motion |
-| 10 | **Direct slave motion** Axis A's position reference is driven directly from the change in axis B's position reference each control cycle, scaled by [MasterFact](../07-motion-mode-gear-motion/MasterFact.md). This is a separate, narrower mechanism from gear motion (it does not use `GearMaster`, `MasterPos` or `MasterFilt`). Available on multi-axis builds only. Please refer to [MotionMode10](../07-motion-mode-gear-motion/MotionMode10.md) for more information. |
+| 10 | **Direct slave motion** Axis A's position reference is driven directly from the change in axis B's position reference each control cycle, scaled by the configured `MasterFact / MasterFactDen` ratio. This is a separate, narrower mechanism from gear motion (it does not use `GearMaster`, `MasterPos` or `MasterFilt`). Available on multi-axis builds only. Please refer to [MotionMode10](../07-motion-mode-gear-motion/MotionMode10.md) for more information. |
 | 11 | CNCA motion |
 | 12 | Joystick position direct mode |
 | 13 | Joystick position indirect mode |

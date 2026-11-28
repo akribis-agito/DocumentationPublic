@@ -2,19 +2,16 @@
 keyword: ForceFFWP
 summary: Position-wise force feedforward gain (force-over-PIV control only).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
-can_code: 599
+- controller
+- ci-master
+can_code: 607
 attributes:
   access: rw
   scope: axis
   flash: true
   type: scalar
   array_size: 1
-  data_type: int32
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
@@ -24,10 +21,7 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    data_type: float32
-    can_code: 607
+overrides: {}
 last_updated: '2026-05-30'
 doc_revision: '2026.06'
 ---

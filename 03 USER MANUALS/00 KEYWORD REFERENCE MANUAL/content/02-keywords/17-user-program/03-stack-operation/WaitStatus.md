@@ -2,11 +2,8 @@
 keyword: WaitStatus
 summary: Holds a user program thread until a selected status reaches a required value.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 194
 attributes:
   access: rw

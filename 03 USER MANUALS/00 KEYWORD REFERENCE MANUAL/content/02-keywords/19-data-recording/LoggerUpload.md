@@ -2,12 +2,8 @@
 keyword: LoggerUpload
 summary: Command that transfers the logged data buffer to the host.
 availability:
-  standalone:
-  - v4
-  - v5
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 536
 attributes:
   access: ro
@@ -27,7 +23,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-22'
-doc_revision: '2026.10'
+doc_revision: '2026.11'
 ---
 # LoggerUpload
 

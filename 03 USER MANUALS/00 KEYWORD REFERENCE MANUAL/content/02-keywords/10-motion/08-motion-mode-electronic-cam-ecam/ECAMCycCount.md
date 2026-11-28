@@ -2,11 +2,8 @@
 keyword: ECAMCycCount
 summary: Read-only index of the current ECAM cam-pattern repetition cycle.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 307
 attributes:
   access: ro

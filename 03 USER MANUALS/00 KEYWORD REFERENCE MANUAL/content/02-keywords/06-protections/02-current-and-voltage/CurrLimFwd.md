@@ -2,11 +2,8 @@
 keyword: CurrLimFwd
 summary: Positive current-command limit (used when CurrLimMode = 3).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 393
 attributes:
   access: rw
@@ -14,19 +11,102 @@ attributes:
   flash: true
   type: scalar
   array_size: 1
-  data_type: int32
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
   range:
   - 0
-  - 64000
-  default: 64000
+  - 16000
+  default: 16000
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
-    data_type: float32
+  ci-master:
+    range:
+    - 0
+    - 64000
+    default: 64000
+  agc300-et:
+    range:
+    - 0
+    - 4000
+    default: 4000
+  agc301-et:
+    range:
+    - 0
+    - 4000
+    default: 4000
+  agc301-et-bioxtreme:
+    range:
+    - 0
+    - 4000
+    default: 4000
+  agd200-et-2d01:
+    range:
+    - 0
+    - 4000
+    default: 4000
+  agd200-et-2d02:
+    range:
+    - 0
+    - 8000
+    default: 8000
+  agd301-et-2d01:
+    range:
+    - 0
+    - 4000
+    default: 4000
+  agd301-et-2d02:
+    range:
+    - 0
+    - 8000
+    default: 8000
+  agd301-et-2d09:
+    range:
+    - 0
+    - 25500
+    default: 25500
+  agd155-af-2a06:
+    range:
+    - 0
+    - 25500
+    default: 25500
+  agd155-af-2a10:
+    range:
+    - 0
+    - 28500
+    default: 28500
+  agd155-ec:
+    range:
+    - 0
+    - 25500
+    default: 25500
+  agd155-ec-var34:
+    range:
+    - 0
+    - 28500
+    default: 28500
+  agd155-ec-var34-3:
+    range:
+    - 0
+    - 42500
+    default: 42500
+  agd156-ec:
+    range:
+    - 0
+    - 12726
+    default: 12726
+  agd101-ec-34a:
+    range:
+    - 0
+    - 28280
+    default: 28280
+  agd101-ec-17a:
+    range:
+    - 0
+    - 14140
+    default: 14140
 last_updated: '2026-05-27'
 doc_revision: '2026.06'
 ---

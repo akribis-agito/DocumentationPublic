@@ -2,11 +2,8 @@
 keyword: AInPort
 summary: 只读模拟量输入读数——处理后的值和原始 ADC 值。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 35
 attributes:
   access: ro
@@ -14,23 +11,33 @@ attributes:
   flash: false
   type: array
   array_size: 9
-  data_type: int32
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range:
-  - -2147483648
-  - 2147483647
+  range: null
   default: 0
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v4:
+  ci-master:
     scope: axis
-  central-i.v5:
-    scope: axis
-    data_type: float32
-    range: null
+  agd155-af-2a06:
+    array_size: 5
+  agd155-af-2a10:
+    array_size: 5
+  agd155-ec:
+    array_size: 5
+  agd155-ec-var34:
+    array_size: 5
+  agd155-ec-var34-3:
+    array_size: 5
+  agd156-ec:
+    array_size: 3
+  agd101-ec-34a:
+    array_size: 3
+  agd101-ec-17a:
+    array_size: 3
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN

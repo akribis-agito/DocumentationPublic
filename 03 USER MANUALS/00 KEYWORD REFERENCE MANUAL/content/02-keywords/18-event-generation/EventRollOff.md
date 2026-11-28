@@ -2,11 +2,8 @@
 keyword: EventRollOff
 summary: Position offset applied to the event grid each time the event counter rolls over.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 739
 attributes:
   access: rw
@@ -23,12 +20,8 @@ attributes:
   - 2147483647
   default: 0
   scaling: 1.0
-  implemented: '0'
-overrides:
-  central-i.v4:
-    implemented: final
-  central-i.v5:
-    implemented: partial
+  implemented: partial
+overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 ---

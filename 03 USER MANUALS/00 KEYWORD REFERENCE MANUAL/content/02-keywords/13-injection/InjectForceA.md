@@ -2,11 +2,8 @@
 keyword: InjectForceA
 summary: Amplitude of force-command injection, in internal force units.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 590
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: StallVal
 summary: Read-only current value of the stepper stall-detection metric.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 511
 attributes:
   access: ro

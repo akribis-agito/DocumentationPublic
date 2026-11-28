@@ -2,11 +2,8 @@
 keyword: ForcePIVOn
 summary: Selects the force-control structure.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 622
 attributes:
   access: rw

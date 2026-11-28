@@ -2,11 +2,8 @@
 keyword: DOutType
 summary: 单端数字量输出的按输出灌/拉电流模式（位域）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 209
 attributes:
   access: rw
@@ -20,15 +17,68 @@ attributes:
   units: none
   range:
   - 0
-  - 65535
+  - 131071
   default: 0
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v4:
+  ci-master:
     scope: axis
-  central-i.v5:
-    scope: axis
+    range:
+    - 0
+    - 65535
+  agc300-et:
+    range:
+    - 0
+    - 15
+  agd200-et-2d01:
+    range:
+    - 0
+    - 15
+  agd200-et-2d02:
+    range:
+    - 0
+    - 15
+  agd200-et-2d05:
+    range:
+    - 0
+    - 15
+  agd200-et-2d05-71:
+    range:
+    - 0
+    - 15
+  agd155-af-2a06:
+    range:
+    - 0
+    - 63
+  agd155-af-2a10:
+    range:
+    - 0
+    - 63
+  agd155-ec:
+    range:
+    - 0
+    - 63
+  agd155-ec-var34:
+    range:
+    - 0
+    - 63
+  agd155-ec-var34-3:
+    range:
+    - 0
+    - 63
+  agd156-ec:
+    range:
+    - 0
+    - 15
+  agd101-ec-34a:
+    range:
+    - 0
+    - 15
+  agd101-ec-17a:
+    range:
+    - 0
+    - 15
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

@@ -2,9 +2,8 @@
 keyword: CompTbleEnd
 summary: 当前使用的最高补偿表索引，限定表域范围。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 839
 attributes:
   access: rw

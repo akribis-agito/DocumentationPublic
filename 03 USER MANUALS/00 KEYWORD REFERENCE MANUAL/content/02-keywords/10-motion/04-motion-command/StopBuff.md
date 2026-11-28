@@ -2,11 +2,8 @@
 keyword: StopBuff
 summary: Stops spline-buffer (Buff) motion, halting playback and decelerating to rest.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 550
 attributes:
   access: ro

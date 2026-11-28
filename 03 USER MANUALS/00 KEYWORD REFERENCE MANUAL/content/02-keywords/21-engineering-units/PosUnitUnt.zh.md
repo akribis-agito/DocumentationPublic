@@ -2,9 +2,8 @@
 keyword: PosUnitUnt
 summary: 位置工程单位的显示标签（名称），以短文本字符串形式存储。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 804
 attributes:
   access: rw

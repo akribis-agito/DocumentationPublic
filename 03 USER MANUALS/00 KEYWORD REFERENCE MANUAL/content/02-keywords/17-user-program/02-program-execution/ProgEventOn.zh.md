@@ -2,11 +2,8 @@
 keyword: ProgEventOn
 summary: 激活或禁用用户程序事件的处理。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 527
 attributes:
   access: rw

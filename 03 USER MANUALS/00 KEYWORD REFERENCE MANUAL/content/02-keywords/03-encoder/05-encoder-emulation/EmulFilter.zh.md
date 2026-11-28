@@ -2,11 +2,8 @@
 keyword: EmulFilter
 summary: 应用于编码器仿真输出信号的数字滤波器。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 403
 attributes:
   access: rw

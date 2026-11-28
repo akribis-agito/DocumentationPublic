@@ -2,9 +2,8 @@
 keyword: FrcUnitFct
 summary: Scale factor between internal force units and the selected force engineering unit.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 812
 attributes:
   access: rw

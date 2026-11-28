@@ -2,11 +2,8 @@
 keyword: LoggerFullMod
 summary: 选择记录器缓冲区填满时的行为（覆盖或停止）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 533
 attributes:
   access: rw

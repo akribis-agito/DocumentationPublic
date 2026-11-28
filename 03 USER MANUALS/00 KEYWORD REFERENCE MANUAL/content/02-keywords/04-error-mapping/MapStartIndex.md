@@ -1,11 +1,8 @@
 ---
 keyword: MapStartIndex
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 321
 attributes:
   access: rw
@@ -19,14 +16,18 @@ attributes:
   units: none
   range:
   - 1
-  - 300000
+  - 1604
   default: 1
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    range:
+    - 1
+    - 5000
 summary: MapTable index where the active error-mapping data begins.
 last_updated: '2026-10-17'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 ---
 # MapStartIndex
 
@@ -47,6 +48,8 @@ It is an axis-scoped parameter saved to flash, and can be changed with the motor
 - **3D:** `index = MapStartIndex + layer × MapLength[1] × MapLength[2] + column × MapLength[1] + row`.
 
 The map must fit within the available table size from `MapStartIndex` onward; the upper bound of the keyword tracks the combined bank size. Because indices are **1-based**, `MapStartIndex = 1` selects `MapTable[1]` as the first entry.
+
+The last point in an active map is `MapStartIndex + MapLength[1] × … × MapLength[d] − 1`, where `d` is the active dimension count. It must fit within the product’s map storage. Enabling a map or changing its start or length returns error 14 if the last point would exceed that storage. The previous setting stays in effect.
 
 ## Examples
 

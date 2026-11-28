@@ -2,11 +2,8 @@
 keyword: AutoExec
 summary: 置位后，在上电或重启时自动运行用户程序。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 208
 attributes:
   access: rw

@@ -2,9 +2,7 @@
 keyword: FricQSCTime
 summary: 象限切换冲击的衰减时间常数，单位为 µs。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 939
 attributes:
   access: rw
@@ -23,6 +21,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+last_updated: '2026-10-18'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # FricQSCTime

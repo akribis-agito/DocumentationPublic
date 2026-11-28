@@ -2,9 +2,7 @@
 keyword: FricVBandNeg
 summary: 负侧的过零死区带，单位为 counts/s（由 FricVBlindNeg 更名）。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 931
 attributes:
   access: rw
@@ -15,14 +13,19 @@ attributes:
   data_type: int64
   ok_in_motion: true
   ok_motor_on: true
-  units: none
+  units: user
   range:
   - 0
   - 20000000000
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  agm800-ec:
+    units: scaling
+    scaling: 1.024
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # FricVBandNeg
@@ -41,13 +44,13 @@ language: zh-CN
 
 | 方法 | `FricVBandNeg` 的用途 |
 |---|---|
-| 1（线性） | 从 0 到库仑电平的斜坡宽度 |
-| 2（滞环） | 电平切换到负侧的速度 |
-| 3（间隙） | 通往负侧电平的斜坡宽度 |
-| 5（Stribeck） | 过零平滑（tanh）建立的宽度 |
+| 1（Stribeck） | 过零平滑（tanh）建立的宽度 |
+| 2（线性） | 从 0 到库仑电平的斜坡宽度 |
+| 3（滞环） | 电平切换到负侧的速度 |
+| 4（间隙） | 通往负侧电平的斜坡宽度 |
 | 象限切换 | 死区：速度离开该带之前不施加冲击 |
 
-LuGre（方法 4）不使用死区带，而使用 [FricVStribNeg](FricVStribNeg.md)。死区带为 0 表示"在零速处切换"。在 5.3.0-rc4 下保存的值不会被转换。从 rc4 升级后，请重新输入摩擦设置。
+LuGre（方法 5）不使用死区带，而使用 [FricVStribNeg](FricVStribNeg.md)。死区带为 0 表示"在零速处切换"。在 5.3.0-rc4 下保存的值不会被转换。从 rc4 升级后，请重新输入摩擦设置。
 
 ## 示例
 

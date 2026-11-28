@@ -1,11 +1,9 @@
 ---
 keyword: FieldWeakEn
 summary: 使能磁场削弱，允许电机在基速以上运行。
-language: zh-CN
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 875
 attributes:
   access: rw
@@ -15,14 +13,18 @@ attributes:
   array_size: 1
   data_type: int32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
-  range: [0, 1]
+  range:
+  - 0
+  - 1
   default: 0
-  scaling: 1
+  scaling: 1.0
   implemented: final
 last_updated: '2026-07-30'
-doc_revision: '2026.07'
+doc_revision: '2026.09'
+overrides: {}
+language: zh-CN
 ---
 
 # FieldWeakEn
@@ -30,6 +32,8 @@ doc_revision: '2026.07'
 使能磁场削弱，允许电机在基速以上运行。
 
 ## 概述
+
+采用 #1594 更改的独立驱动器出厂时仅接受 0。保存的参数也受此限制。Central-i 仍接受 0 或 1。
 
 每台电机都有一个*基速*：在该速度下其反电动势耗尽整个直流母线电压，没有余量再驱动电流。超过该速度后，无论如何指令，电机都不再加速。
 

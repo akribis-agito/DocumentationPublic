@@ -1,13 +1,9 @@
 ---
 keyword: ProgPushArg
 summary: 将一个值压入目标用户程序任务的参数栈。
-language: zh-CN
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 431
 attributes:
   access: rw
@@ -28,6 +24,7 @@ attributes:
 overrides: {}
 last_updated: '2026-05-28'
 doc_revision: '2026.06'
+language: zh-CN
 ---
 # ProgPushArg
 

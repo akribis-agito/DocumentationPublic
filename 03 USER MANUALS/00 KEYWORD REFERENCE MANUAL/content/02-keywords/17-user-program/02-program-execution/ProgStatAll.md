@@ -2,11 +2,8 @@
 keyword: ProgStatAll
 summary: Returns a combined status word for all user program tasks.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 298
 attributes:
   access: ro

@@ -2,11 +2,8 @@
 keyword: FIFOPosClear
 summary: Command that clears all pending segments from the FIFO position queue.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 667
 attributes:
   access: ro

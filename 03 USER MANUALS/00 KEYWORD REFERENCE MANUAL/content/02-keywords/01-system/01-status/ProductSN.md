@@ -2,12 +2,9 @@
 keyword: ProductSN
 summary: Two-element array holding the unit's hardware version and production serial number; written only under elevated permission and persisted to flash.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
-can_code: 468
+- controller
+- ci-master
+can_code: 348
 attributes:
   access: rw
   scope: non-axis
@@ -24,9 +21,7 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    can_code: 348
+overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 ---

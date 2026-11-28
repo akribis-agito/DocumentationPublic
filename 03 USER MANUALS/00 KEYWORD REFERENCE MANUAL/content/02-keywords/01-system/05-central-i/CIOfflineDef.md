@@ -2,11 +2,8 @@
 keyword: CIOfflineDef
 summary: Per-axis array defining which parameters are included in the Central-i offline dataset.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 507
 attributes:
   access: rw

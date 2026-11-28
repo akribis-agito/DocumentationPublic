@@ -2,11 +2,8 @@
 keyword: ProgErase
 summary: 从控制器内存中清除已存储的用户程序。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 299
 attributes:
   access: ro

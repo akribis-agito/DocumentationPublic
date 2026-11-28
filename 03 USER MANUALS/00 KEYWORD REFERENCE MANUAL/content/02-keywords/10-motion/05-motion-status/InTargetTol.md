@@ -2,11 +2,8 @@
 keyword: InTargetTol
 summary: Position settling window (PosErr) used to declare target reached.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 265
 attributes:
   access: rw

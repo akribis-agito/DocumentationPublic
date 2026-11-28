@@ -1,7 +1,7 @@
 ---
 summary: Parameter array configuring the SIN/COS encoder (gain, offsets, interpolation, index, error checks).
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-11-23'
+doc_revision: '2026.11'
 ---
 # SinCosSetup/AuxSinCosSet
 
@@ -85,15 +85,16 @@ Calibrates the phase difference between the sine and cosine signals.
 
 For example, `SinCosSetup[5]=12` gives a phase difference of 90 + (22.5/32) * 12 = 98.4375 degrees.
 
-### [6] Interpolation factor (default 0)
+### [6] Interpolation resolution (SELRES)
 
-Defines the SIN/COS encoder interpolation factor.
+For the main encoder, one sine period produces $2^{16-\mathrm{SELRES}}$ counts. Firmware containing [#2650](https://github.com/akribis-agito/Firmware-Main/pull/2650) checks the integer code against the active interface.
 
-| Value | Interpolation factor |
+| Main encoder interface | Accepted SELRES |
 |---|---|
-| 3 – 13 | $2^{\,16 - \text{Value}}$ |
+| iC-NQC binary interpolation, including AGD155-EC board layout v3 | 3 through 13 |
+| Internal ADC on AGD101-EC, AGD156-EC and AGD155-EC board layout v4 | 0 through 16 |
 
-For example, `SinCosSetup[6]=7` interpolates each SIN or COS cycle to $2^{\,16-7} = 512$ counts per cycle.
+AGD155-EC selects the interface at startup from its board layout. Layout code 2 identifies v4. On the internal ADC, the default code 0 gives 65,536 counts per period. Code 7 gives 512 counts per period on both interfaces. An out-of-range code sets `SinCosSetup[21]` to `0x00060001` (393217) and preserves the last applied interpolation scale. AGFB and ADP05 remote interfaces use a separate resolution encoding.
 
 ### [7] Hysteresis threshold (default 0)
 
@@ -279,7 +280,7 @@ Configures what signal appears on the incremental signal lines that go to the DS
 
 Denotes the status of the SIN/COS encoder settings in the encoder chip. This is the error message returned by the chip. A write/assignment to this array location is rejected.
 
-| Value | Status |
+| Low 16 bits | Status |
 |---|---|
 | 0 | Chip settings are OK. |
 | 1 | Chip settings not written: at least 1 `SinCosSetup` setting is out of range. |

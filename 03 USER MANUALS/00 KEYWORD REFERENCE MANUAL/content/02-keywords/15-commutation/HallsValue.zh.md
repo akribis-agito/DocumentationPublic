@@ -2,11 +2,8 @@
 keyword: HallsValue
 summary: 只读原始霍尔传感器状态，以 3 位值（CBA 位）报告。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 383
 attributes:
   access: ro

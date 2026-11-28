@@ -2,9 +2,8 @@
 keyword: VelPDUnitUnt
 summary: Free-text unit label for pulse-and-direction velocity, one character per array element.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 825
 attributes:
   access: rw

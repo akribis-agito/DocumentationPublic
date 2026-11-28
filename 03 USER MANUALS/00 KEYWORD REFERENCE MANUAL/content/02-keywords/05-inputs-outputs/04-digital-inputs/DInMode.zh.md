@@ -2,31 +2,82 @@
 keyword: DInMode
 summary: 为每个数字量输入分配一个软件函数，并支持逐轴定向。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 225
 attributes:
   access: rw
   scope: non-axis
   flash: true
   type: array
-  array_size: 33
+  array_size: 32
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range: null
+  range:
+  - 0
+  - 458779
   default: 0
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v4:
+  ci-master:
     scope: axis
-  central-i.v5:
-    scope: axis
+    array_size: 33
+    range:
+    - 0
+    - 268369947
+  agc300-et:
+    array_size: 23
+  agd200-et-2d01:
+    array_size: 23
+  agd200-et-2d02:
+    array_size: 23
+  agd200-et-2d05:
+    array_size: 23
+  agd200-et-2d05-71:
+    array_size: 23
+  agd155-af-2a06:
+    array_size: 21
+    range:
+    - 0
+    - 65563
+  agd155-af-2a10:
+    array_size: 21
+    range:
+    - 0
+    - 65563
+  agd155-ec:
+    array_size: 21
+    range:
+    - 0
+    - 65563
+  agd155-ec-var34:
+    array_size: 21
+    range:
+    - 0
+    - 65563
+  agd155-ec-var34-3:
+    array_size: 21
+    range:
+    - 0
+    - 65563
+  agd156-ec:
+    array_size: 13
+    range:
+    - 0
+    - 65563
+  agd101-ec-34a:
+    array_size: 13
+    range:
+    - 0
+    - 65563
+  agd101-ec-17a:
+    array_size: 13
+    range:
+    - 0
+    - 65563
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

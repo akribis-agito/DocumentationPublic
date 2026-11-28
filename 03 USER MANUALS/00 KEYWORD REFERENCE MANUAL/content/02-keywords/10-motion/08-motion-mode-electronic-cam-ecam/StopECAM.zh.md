@@ -2,11 +2,8 @@
 keyword: StopECAM
 summary: 通过收缩主值范围退出 ECAM 运动，同时保留起始/结束段。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 310
 attributes:
   access: ro

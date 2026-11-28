@@ -1,11 +1,9 @@
 ---
 keyword: ScheduleTemp
+summary: 将温度范围划分为若干区间、用于基于温度的增益调度的电机温度阈值数组。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 273
 attributes:
   access: rw
@@ -27,7 +25,6 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 将温度范围划分为若干区间、用于基于温度的增益调度的电机温度阈值数组。
 ---
 # ScheduleTemp
 

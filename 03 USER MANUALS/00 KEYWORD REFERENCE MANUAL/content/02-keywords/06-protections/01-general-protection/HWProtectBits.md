@@ -2,11 +2,8 @@
 keyword: HWProtectBits
 summary: Read-only bitfield reporting active hardware protection conditions.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 74
 attributes:
   access: ro

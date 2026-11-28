@@ -2,9 +2,7 @@
 keyword: FricViscous
 summary: 粘性摩擦斜率：每 count/s 速度反馈对应的附加电流。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 932
 attributes:
   access: rw
@@ -23,6 +21,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # FricViscous
@@ -35,7 +35,7 @@ language: zh-CN
 
 ## 工作原理
 
-该环节在方法 1、2、3 和 5 上叠加 `FricViscous` × 速度反馈。无论 [FricVelSrc](FricVelSrc.md) 如何设置，它始终使用速度反馈。LuGre（方法 4）把它用作粘性系数（σ2）。默认值为 0（无粘性项）。
+该环节在方法 1 至 4 上叠加 `FricViscous` × 速度反馈。无论 [FricVelSrc](FricVelSrc.md) 如何设置，它始终使用速度反馈。LuGre（方法 5）把它用作粘性系数（σ2）。默认值为 0（无粘性项）。
 
 请在偏置和各方向电平之后最后整定：让轴以几个恒定速度运行，设置斜率，使剩余电流不再随速度增大。
 

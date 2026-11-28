@@ -2,9 +2,8 @@
 keyword: CurrStbleDtct
 summary: 使能对轴上不稳定（振荡）电流环的运行时检测。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 789
 attributes:
   access: rw

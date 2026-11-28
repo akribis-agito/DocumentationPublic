@@ -2,9 +2,8 @@
 keyword: PosAuxUnitGrp
 summary: Read-only list of the auxiliary-encoder position keywords that share the auxiliary position user-unit scaling and label.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 814
 attributes:
   access: ro

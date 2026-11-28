@@ -1,11 +1,9 @@
 ---
 keyword: MotForceConst
 summary: 直线电机与音圈电机的电机力常数，单位 N/A；磁场削弱的前提条件。
-language: zh-CN
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 871
 attributes:
   access: rw
@@ -13,16 +11,20 @@ attributes:
   flash: true
   type: scalar
   array_size: 1
-  data_type: float
+  data_type: float32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
-  range: [0, 1000]
-  default: 10
-  scaling: 1
+  range:
+  - 0.0
+  - 1000.0
+  default: 10.0
+  scaling: 1.0
   implemented: final
 last_updated: '2026-07-30'
-doc_revision: '2026.07'
+doc_revision: '2026.09'
+overrides: {}
+language: zh-CN
 ---
 
 # MotForceConst
@@ -61,6 +63,8 @@ psi_f = 1.061032954e-4 * MotForceConst * MagneticPitch
 AMotForceConst=76.5   ; AKM100-B1
 AMagneticPitch=42     ; 必须同时设置
 ```
+
+在包含负载估计器修正（Firmware-Main #2710）的 AGM800 固件中，碰撞检测接受直线电机和音圈电机的任何正 MotForceConst 值，包括 10.0。请输入电机数据表中的实际值。
 
 ## 另请参阅
 

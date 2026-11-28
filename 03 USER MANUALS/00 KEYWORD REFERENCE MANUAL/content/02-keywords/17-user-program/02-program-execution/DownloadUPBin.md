@@ -2,11 +2,8 @@
 keyword: DownloadUPBin
 summary: Command that transfers a compiled user-program binary image into controller program memory.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 207
 attributes:
   access: ro

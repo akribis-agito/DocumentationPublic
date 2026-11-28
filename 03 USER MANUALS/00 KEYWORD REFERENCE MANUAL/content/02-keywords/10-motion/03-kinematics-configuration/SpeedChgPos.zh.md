@@ -2,11 +2,8 @@
 keyword: SpeedChgPos
 summary: 触发飞行速度变更事件的轴位置。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 346
 attributes:
   access: rw

@@ -9,6 +9,8 @@ FIFO 运动模式允许用户将一系列运动段推入队列，控制器随后
 - **FIFO 段运动**（[MotionMode](../02-motion-configuration/MotionMode.md) = 9）— 线性（匀速）和抛物线（匀加速）段的序列。完整描述参见 [FIFOType](FIFOType.md)，以及 [FIFOValue](FIFOValue.md)、[FIFOStatus](FIFOStatus.md)、[FIFOCycleTime](FIFOCycleTime.md)、`FIFOPush*` 函数（[FIFOPushCycle](FIFOPushCycle.md)、[FIFOPushLinP](FIFOPushLinP.md)、[FIFOPushLinV](FIFOPushLinV.md)、[FIFOPushParP](FIFOPushParP.md)、[FIFOPushParA](FIFOPushParA.md)）、[FIFORemove](FIFORemove.md)、[FIFOClear](FIFOClear.md) 和 [StopFIFO](StopFIFO.md)。
 - **FIFO 位置跟踪**（[MotionMode](../02-motion-configuration/MotionMode.md) = 19）— 从位置队列流式传输的参考轨迹。参见 [FIFOPosType](FIFOPosType.md)、[FIFOPosFIFOEn](FIFOPosFIFOEn.md)、[FIFOPosCycle](FIFOPosCycle.md)、[FIFOPosPush](FIFOPosPush.md)、[FIFOPosTrgt](FIFOPosTrgt.md)、[FIFOPosPosOf](FIFOPosPosOf.md)、[FIFOPosVelOf](FIFOPosVelOf.md)、[FIFOPosCurrOf](FIFOPosCurrOf.md)、[FIFOPosStatus](FIFOPosStatus.md) 和 [FIFOPosClear](FIFOPosClear.md)。
 
+在 EtherCAT 运动控制核上，[InitFifoParams](InitFifoParams.zh.md) 为指定轴载入当前周期目标，并清零其 FIFO 跟踪偏移量。[FIFOTorqueTrgt](FIFOTorqueTrgt.zh.md) 用于访问当前转矩目标。
+
 ## 各子系统的队列下溢行为
 
 两个子系统在队列清空时的行为不同——这是一个常被忽略的细节：

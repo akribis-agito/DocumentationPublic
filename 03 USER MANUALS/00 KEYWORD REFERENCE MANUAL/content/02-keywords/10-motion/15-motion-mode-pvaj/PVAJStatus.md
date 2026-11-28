@@ -2,9 +2,7 @@
 keyword: PVAJStatus
 summary: PVAJ state, current row and rows remaining.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 883
 attributes:
   access: ro
@@ -16,9 +14,13 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: none
+  range:
+  - 0
+  - 2147483647
   default: 0
   scaling: 1.0
   implemented: final
+overrides: {}
 last_updated: '2026-09-25'
 doc_revision: '2026.09'
 ---

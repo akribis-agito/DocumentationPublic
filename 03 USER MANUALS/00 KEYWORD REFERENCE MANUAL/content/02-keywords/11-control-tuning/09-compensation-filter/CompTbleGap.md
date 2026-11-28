@@ -2,9 +2,8 @@
 keyword: CompTbleGap
 summary: Position spacing, in encoder counts, between adjacent compensation-table points.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 837
 attributes:
   access: rw

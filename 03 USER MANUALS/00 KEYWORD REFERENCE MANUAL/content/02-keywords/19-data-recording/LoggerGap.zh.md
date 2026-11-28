@@ -2,11 +2,8 @@
 keyword: LoggerGap
 summary: 设置连续记录器的采样间隔（单位：伺服周期）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 531
 attributes:
   access: rw

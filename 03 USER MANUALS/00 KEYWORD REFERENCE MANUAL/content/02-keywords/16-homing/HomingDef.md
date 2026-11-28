@@ -2,11 +2,8 @@
 keyword: HomingDef
 summary: Array defining up to 20 homing steps, each an instruction plus its parameters.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 341
 attributes:
   access: rw
@@ -226,6 +223,8 @@ The remaining elements of each step (`HomingDef[2, 12, …, 192]`, `HomingDef[3,
 | HomingDef[3, 13, …, 193] | UserParam index to watch. |
 | HomingDef[4, 14, …, 194] | Value to wait for. |
 | HomingDef[5, 15, …, 195] | Timeout [controller cycles]. |
+
+A homing lock step temporarily selects the main encoder in hardware. Reading or saving `EncSinCosHWEn` returns the configured selection throughout the step. Changing that selection during the override is refused. On completion, timeout or abort, the firmware restores the configured source and leaves the previous lock and event sessions disarmed. Mode 0 learns the offset at the next enable. Mode 1 requires a fresh `LockEventInit`. Mode 2 recomputes after the source write succeeds and the remote settles.
 
 ## Examples
 

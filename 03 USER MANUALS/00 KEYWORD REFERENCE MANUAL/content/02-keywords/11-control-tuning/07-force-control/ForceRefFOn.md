@@ -2,11 +2,8 @@
 keyword: ForceRefFOn
 summary: Enables the force-command reference filter.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 579
 attributes:
   access: rw

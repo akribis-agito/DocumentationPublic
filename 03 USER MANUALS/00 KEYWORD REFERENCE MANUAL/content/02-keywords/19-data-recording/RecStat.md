@@ -2,18 +2,15 @@
 keyword: RecStat
 summary: Reports the recording status of each scope.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 249
 attributes:
   access: ro
   scope: non-axis
   flash: false
   type: array
-  array_size: 2
+  array_size: 3
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
@@ -24,7 +21,33 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  agc300-et:
+    array_size: 2
+  agd200-et-2d01:
+    array_size: 2
+  agd200-et-2d02:
+    array_size: 2
+  agd200-et-2d05:
+    array_size: 2
+  agd200-et-2d05-71:
+    array_size: 2
+  agd155-af-2a06:
+    array_size: 2
+  agd155-af-2a10:
+    array_size: 2
+  agd155-ec:
+    array_size: 2
+  agd155-ec-var34:
+    array_size: 2
+  agd155-ec-var34-3:
+    array_size: 2
+  agd156-ec:
+    array_size: 2
+  agd101-ec-34a:
+    array_size: 2
+  agd101-ec-17a:
+    array_size: 2
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 ---
@@ -57,7 +80,7 @@ The value returned from `RecStat` is defined as shown.
 
 For example, if RecStat\[1\] returns the value of 4, it indicates that recording of the first scope is successful, and the user can begin to stream the recorded data.
 
-The normal progression is 1 → 2 → 3 → 4:
+For a capture with both pre-trigger and post-trigger samples, the normal progression is 1 → 2 → 3 → 4.
 
 - [RecStart](RecStart.md) arms the scope at **1**, filling the pre-trigger portion set by [RecTrigPos](RecTrigPos.md) as a rolling buffer while ignoring trigger events.
 - Once enough pre-trigger points are held, the scope moves to **2** and begins evaluating the trigger condition(s) on each recorded sample.
@@ -66,7 +89,7 @@ The normal progression is 1 → 2 → 3 → 4:
 
 The pre-trigger and post-trigger portions together always total [RecLength](RecLength.md) points per recorded channel. When the trigger fires, the scope captures a fixed number of post-trigger points equal to ([RecLength](RecLength.md) minus the pre-trigger points set by [RecTrigPos](RecTrigPos.md)) per channel and then settles at status 4, so the completed capture spans exactly [RecLength](RecLength.md) per channel no matter how long the scope waited at status 2. For a no-trigger start ([RecTrigTyp](RecTrigTyp.md) = 0), which jumps straight to status 3, the full [RecLength](RecLength.md) per channel is recorded as post-trigger data.
 
-If no trigger is configured, `RecStart` jumps straight to **3**. [RecStop](RecStop.md) produces **5** if it interrupts a recording that had already triggered, or **6** if it interrupts before the trigger. Values **4**, **5** and **6** are all "finished" states from which [RecUpload](RecUpload.md) can run (status 6 has no valid triggered data and is reported as an error by the upload).
+On firmware with the [recorder correction](RecTrigPos.md), a configured trigger starts at **2** when the rounded pre-trigger count is zero. When all requested samples precede the trigger, the scope goes directly from **2** to **4** as the trigger fires. If no trigger is configured, `RecStart` jumps straight to **3**. [RecStop](RecStop.md) produces **5** if it interrupts a recording that had already triggered, or **6** if it interrupts before the trigger. Values **4**, **5** and **6** are all "finished" states from which [RecUpload](RecUpload.md) can run (status 6 has no valid triggered data and is reported as an error by the upload).
 
 ## Examples
 

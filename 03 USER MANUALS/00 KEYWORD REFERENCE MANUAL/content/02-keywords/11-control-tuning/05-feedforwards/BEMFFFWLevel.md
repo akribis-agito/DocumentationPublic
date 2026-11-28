@@ -2,9 +2,7 @@
 keyword: BEMFFFWLevel
 summary: Percentage level applied to the back-EMF voltage feedforward contribution.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 848
 attributes:
   access: rw

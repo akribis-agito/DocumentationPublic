@@ -2,11 +2,8 @@
 keyword: CounterUp
 summary: 两个独立的加计数器，每个控制器周期递增一次。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 40
 attributes:
   access: rw
@@ -26,7 +23,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # CounterUp

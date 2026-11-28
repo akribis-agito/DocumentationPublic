@@ -1,11 +1,9 @@
 ---
 keyword: IndirectIndex
+summary: 保存间接访问机制所使用的数组索引。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 434
 attributes:
   access: rw
@@ -19,19 +17,70 @@ attributes:
   units: none
   range:
   - 1
-  - 1000
+  - 5000
   default: 1
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
+  ci-master:
     range:
     - 1
-    - 10000
+    - 1000
+  agc300-et:
+    range:
+    - 1
+    - 1000
+  agd200-et-2d01:
+    range:
+    - 1
+    - 1000
+  agd200-et-2d02:
+    range:
+    - 1
+    - 1000
+  agd200-et-2d05:
+    range:
+    - 1
+    - 1000
+  agd200-et-2d05-71:
+    range:
+    - 1
+    - 1000
+  agd155-af-2a06:
+    range:
+    - 1
+    - 1000
+  agd155-af-2a10:
+    range:
+    - 1
+    - 1000
+  agd155-ec:
+    range:
+    - 1
+    - 1000
+  agd155-ec-var34:
+    range:
+    - 1
+    - 1000
+  agd155-ec-var34-3:
+    range:
+    - 1
+    - 1000
+  agd156-ec:
+    range:
+    - 1
+    - 1000
+  agd101-ec-34a:
+    range:
+    - 1
+    - 1000
+  agd101-ec-17a:
+    range:
+    - 1
+    - 1000
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 保存间接访问机制所使用的数组索引。
 ---
 # IndirectIndex
 

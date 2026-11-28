@@ -2,11 +2,8 @@
 keyword: MasterModRev
 summary: 当主变量发生环绕时，用于修正 MasterPos 累积的取模除数。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 519
 attributes:
   access: rw
@@ -25,10 +22,10 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
+  ci-master:
     data_type: int64
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-11-23'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # MasterModRev
@@ -59,7 +56,7 @@ language: zh-CN
 
 因此，大于半圈的变化量被解释为反方向的环绕并予以消除，使 `MasterPos` 在主变量的取模边界处保持连续。这一假设前提是主变量每个控制周期移动量不超过其 `ModRev` 的一半——与从动轴自身取模处理所作的假设相同。
 
-在 **v5（central-i）** 中，消除操作在齿轮比应用*之前*对原始主变量变化量执行，因此对于任意比值，`MasterModRev` 直接等于主变量自身的 `ModRev`。在 **v4** 中，消除操作在变化量经 [MasterFact](MasterFact.md) 缩放*之后*执行，因此比较使用齿轮后的变化量：在默认 `MasterFact = 65536`（1:1）时，将 `MasterModRev` 直接设为主变量的 `ModRev`；在非 1:1 比值时，应设为主变量的 `ModRev` 乘以 `MasterFact / 65536`。
+在 v5 中，控制器先对主变量的原始变化量进行回绕修正，再应用齿轮比。请将 `MasterModRev` 设为主变量以主轴计数表示的回绕周期。Central-i 主站以 64 位数值存储此设置。
 
 ## 示例
 
@@ -71,7 +68,7 @@ AMasterModRev            ; 读取当前值
 
 ## 版本间变更
 
-在 **v5（central-i）** 中，`MasterModRev` 为 64 位值，且消除操作在齿轮比应用之前执行（参见*修正方式*）。**v5 仅适用于 central-i。**
+旧版 YiGuang 固件在应用齿轮比之后才进行回绕修正，因此保存的周期以从轴计数表示。旧齿轮比和周期均非零时，将旧周期的绝对值除以旧齿轮比（已保存的 `MasterFact / 65536`）的绝对值。例如，旧齿轮比为 1:2 或 −1:2 时，500 个从轴计数应换算为 1,000 个主轴计数。使用该设置前，请确认换算结果等于主轴的实际回绕周期。周期为零时仍然禁用修正。周期设置错误可能使主轴的一次正常回绕变成从轴的大幅运动指令。[迁移说明](https://github.com/akribis-agito/Firmware-Main/blob/develop/docs/engineering/Gearing-Migration.md)
 
 ## 另请参阅
 

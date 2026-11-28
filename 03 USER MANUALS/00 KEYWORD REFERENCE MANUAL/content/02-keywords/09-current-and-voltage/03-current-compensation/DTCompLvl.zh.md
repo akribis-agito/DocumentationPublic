@@ -1,11 +1,9 @@
 ---
 keyword: DTCompLvl
 summary: 零电流附近对死区补偿进行插值（而非切换）的电流区间，单位 mA。
-language: zh-CN
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 870
 attributes:
   access: rw
@@ -13,16 +11,20 @@ attributes:
   flash: true
   type: scalar
   array_size: 1
-  data_type: float
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range: [0, 1000]
-  default: 1
-  scaling: 1
+  range:
+  - 0.0
+  - 1000.0
+  default: 1.0
+  scaling: 1.0
   implemented: final
 last_updated: '2026-07-30'
-doc_revision: '2026.07'
+doc_revision: '2026.09'
+overrides: {}
+language: zh-CN
 ---
 
 # DTCompLvl

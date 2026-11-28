@@ -2,9 +2,8 @@
 keyword: CurrStbleStat
 summary: 只读状态数组，提供电流环稳定性检测器的实时统计量和阈值。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 792
 attributes:
   access: ro

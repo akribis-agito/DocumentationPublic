@@ -2,9 +2,8 @@
 keyword: VelPDUnitFct
 summary: 启用全局用户单位时，应用于脉冲方向速度值的比例系数。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 824
 attributes:
   access: rw
@@ -22,7 +21,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # VelPDUnitFct

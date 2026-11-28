@@ -2,11 +2,8 @@
 keyword: VecNumCircles
 summary: 在向量圆弧运动中附加完整圆周数（0 = 仅执行基础圆弧，不添加额外圈数）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 646
 attributes:
   access: rw

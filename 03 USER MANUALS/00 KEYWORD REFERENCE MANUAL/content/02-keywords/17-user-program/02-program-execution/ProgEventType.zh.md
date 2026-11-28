@@ -2,11 +2,8 @@
 keyword: ProgEventType
 summary: 定义事件的触发类型（边沿、等于、不等于……）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 522
 attributes:
   access: rw

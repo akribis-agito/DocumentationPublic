@@ -2,11 +2,8 @@
 keyword: StallCfg
 summary: 配置步进失步（堵转）检测模式。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 513
 attributes:
   access: rw

@@ -2,18 +2,15 @@
 keyword: RecStart
 summary: 命令，用于在所选示波器上启动记录。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 248
 attributes:
   access: ro
   scope: non-axis
   flash: false
   type: array
-  array_size: 2
+  array_size: 3
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
@@ -24,7 +21,33 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  agc300-et:
+    array_size: 2
+  agd200-et-2d01:
+    array_size: 2
+  agd200-et-2d02:
+    array_size: 2
+  agd200-et-2d05:
+    array_size: 2
+  agd200-et-2d05-71:
+    array_size: 2
+  agd155-af-2a06:
+    array_size: 2
+  agd155-af-2a10:
+    array_size: 2
+  agd155-ec:
+    array_size: 2
+  agd155-ec-var34:
+    array_size: 2
+  agd155-ec-var34-3:
+    array_size: 2
+  agd156-ec:
+    array_size: 2
+  agd101-ec-34a:
+    array_size: 2
+  agd101-ec-17a:
+    array_size: 2
 last_updated: '2026-05-28'
 doc_revision: '2026.06'
 language: zh-CN
@@ -53,7 +76,7 @@ language: zh-CN
 - 记录每个通道的数据类型和用户单位比例因子，将触发阈值转换为内部单位，并初始化用于检测边沿和变化的触发源前值/初值。
 - 根据 `RecTrigPos` 计算触发前的采样点数和触发后所需点数，然后清除缓冲区索引和计数器。
 
-随后通过将 [RecStat](RecStat.md) 设为 1（填充触发前数据）来使示波器进入就绪状态。若未配置触发（第一个触发类型为"无"），示波器直接跳至状态 3（已检测到触发）并立即记录完整请求长度。
+如需采集触发前数据，示波器先将 [RecStat](RecStat.md) 设为 1。在包含[记录器修正](RecTrigPos.md)的固件中，若触发前点数取整后为零，示波器在配置了触发条件时直接进入状态 2 等待触发。若未配置触发（第一个触发类型为"无"），示波器直接跳至状态 3（已检测到触发）并立即记录完整请求长度。
 
 ## 示例
 

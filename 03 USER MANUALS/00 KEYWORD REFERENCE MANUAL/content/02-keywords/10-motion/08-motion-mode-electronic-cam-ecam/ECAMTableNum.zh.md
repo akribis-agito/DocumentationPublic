@@ -2,11 +2,8 @@
 keyword: ECAMTableNum
 summary: 选择活动 ECAM 凸轮曲线/查找表（1-10）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 311
 attributes:
   access: rw

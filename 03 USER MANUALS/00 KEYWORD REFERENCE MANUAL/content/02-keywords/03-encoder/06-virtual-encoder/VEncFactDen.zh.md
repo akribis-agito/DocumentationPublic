@@ -2,11 +2,8 @@
 keyword: VEncFactDen
 summary: 应用于虚拟编码器源信号的缩放比值的分母。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 618
 attributes:
   access: rw
@@ -25,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-09'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # VEncFactDen

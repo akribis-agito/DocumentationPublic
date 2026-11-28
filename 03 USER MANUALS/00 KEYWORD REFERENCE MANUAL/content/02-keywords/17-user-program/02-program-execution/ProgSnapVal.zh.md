@@ -2,11 +2,8 @@
 keyword: ProgSnapVal
 summary: 保存程序快照机制捕获的值。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 538
 attributes:
   access: ro
@@ -14,22 +11,19 @@ attributes:
   flash: false
   type: array
   array_size: 81
-  data_type: int32
+  data_type: int64
   ok_in_motion: true
   ok_motor_on: true
   units: none
   range:
-  - -2147483648
-  - 2147483647
+  - -2251799813685248
+  - 2251799813685247
   default: -1
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
-    data_type: int64
-    range:
-    - -2251799813685248
-    - 2251799813685247
+  ci-master:
+    array_size: 121
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

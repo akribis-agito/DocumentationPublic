@@ -2,18 +2,15 @@
 keyword: RecTrigMask
 summary: Bitwise mask applied to trigger source and comparison values.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 251
 attributes:
   access: rw
   scope: non-axis
   flash: true
   type: array
-  array_size: 4
+  array_size: 7
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
@@ -21,16 +18,41 @@ attributes:
   range:
   - -2147483648
   - 2147483647
-  default: 4294967295
+  default: 18446744073709551615
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
+  ci-master:
     data_type: int64
     range:
     - -2251799813685248
     - 2251799813685247
-    default: 18446744073709551615
+  agc300-et:
+    array_size: 4
+  agd200-et-2d01:
+    array_size: 4
+  agd200-et-2d02:
+    array_size: 4
+  agd200-et-2d05:
+    array_size: 4
+  agd200-et-2d05-71:
+    array_size: 4
+  agd155-af-2a06:
+    array_size: 4
+  agd155-af-2a10:
+    array_size: 4
+  agd155-ec:
+    array_size: 4
+  agd155-ec-var34:
+    array_size: 4
+  agd155-ec-var34-3:
+    array_size: 4
+  agd156-ec:
+    array_size: 4
+  agd101-ec-34a:
+    array_size: 4
+  agd101-ec-17a:
+    array_size: 4
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 ---

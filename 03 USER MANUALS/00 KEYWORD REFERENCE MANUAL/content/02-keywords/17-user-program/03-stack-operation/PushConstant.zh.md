@@ -2,11 +2,8 @@
 keyword: PushConstant
 summary: 将常量值压入当前线程的数值栈。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 201
 attributes:
   access: rw

@@ -2,9 +2,8 @@
 summary: 启用双环（位置 + 偏摆）龙门控制模式。
 keyword: GantryDLoopOn
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 675
 attributes:
   access: rw

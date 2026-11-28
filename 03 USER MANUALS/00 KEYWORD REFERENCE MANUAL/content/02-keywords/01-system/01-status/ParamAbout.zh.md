@@ -2,11 +2,8 @@
 keyword: ParamAbout
 summary: 函数，返回由 CAN 代码选定的单个参数的最小值、最大值与默认值。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 499
 attributes:
   access: rw

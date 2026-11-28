@@ -2,11 +2,8 @@
 keyword: HallOnlyFilt
 summary: 在仅霍尔换相模式下，对基于霍尔传感器的换相角施加的数字滤波器。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 477
 attributes:
   access: rw

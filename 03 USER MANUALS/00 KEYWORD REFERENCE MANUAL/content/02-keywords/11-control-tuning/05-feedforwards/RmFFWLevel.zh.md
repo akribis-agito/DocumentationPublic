@@ -2,9 +2,7 @@
 keyword: RmFFWLevel
 summary: 应用于阻性（R i）电压前馈贡献量的百分比级别。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 845
 attributes:
   access: rw

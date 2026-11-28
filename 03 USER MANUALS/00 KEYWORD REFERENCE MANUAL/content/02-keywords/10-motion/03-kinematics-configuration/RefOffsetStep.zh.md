@@ -2,11 +2,8 @@
 keyword: RefOffsetStep
 summary: 在参考偏置修正期间每采样施加的位置偏置量。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 166
 attributes:
   access: rw
@@ -19,14 +16,14 @@ attributes:
   ok_motor_on: true
   units: user
   range:
-  - -655360
-  - 655360
+  - -163840
+  - 163840
   default: 0
   scaling: 1.0
   implemented: final
 overrides: {}
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # RefOffsetStep

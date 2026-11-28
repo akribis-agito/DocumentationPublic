@@ -2,11 +2,8 @@
 keyword: CurrCurrThDir
 summary: CurrCurrTh 电流参考检查的触发方向。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 343
 attributes:
   access: rw

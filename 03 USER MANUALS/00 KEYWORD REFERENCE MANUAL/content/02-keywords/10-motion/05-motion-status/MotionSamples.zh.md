@@ -2,11 +2,8 @@
 keyword: MotionSamples
 summary: 上次已完成运动的运动时间与整定时间，以控制器周期为单位。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 267
 attributes:
   access: ro
@@ -26,7 +23,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # MotionSamples

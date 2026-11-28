@@ -2,11 +2,8 @@
 keyword: MotionReason
 summary: 记录上次运动停止的原因，以数字原因代码表示。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 43
 attributes:
   access: ro

@@ -2,11 +2,8 @@
 keyword: FwdPLim
 summary: Forward software travel limit; reference position is capped here.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 83
 attributes:
   access: rw
@@ -25,7 +22,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
+  ci-master:
     data_type: int64
     range:
     - -2251799813685248

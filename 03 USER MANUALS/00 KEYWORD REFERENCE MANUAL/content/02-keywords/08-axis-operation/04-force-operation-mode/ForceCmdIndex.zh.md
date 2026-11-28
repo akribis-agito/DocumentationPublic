@@ -2,11 +2,8 @@
 keyword: ForceCmdIndex
 summary: 当前 ForceCmdVal / ForceCmdHTime 表条目的索引。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 573
 attributes:
   access: rw

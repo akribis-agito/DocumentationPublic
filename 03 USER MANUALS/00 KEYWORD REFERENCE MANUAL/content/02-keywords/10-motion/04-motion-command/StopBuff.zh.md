@@ -2,11 +2,8 @@
 keyword: StopBuff
 summary: 停止样条缓冲区（Buff）运动，停止播放并减速至静止。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 550
 attributes:
   access: ro

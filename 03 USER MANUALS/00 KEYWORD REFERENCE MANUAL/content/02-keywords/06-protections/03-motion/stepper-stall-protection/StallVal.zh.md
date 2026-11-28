@@ -2,11 +2,8 @@
 keyword: StallVal
 summary: 只读的步进失步检测度量当前值。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 511
 attributes:
   access: ro

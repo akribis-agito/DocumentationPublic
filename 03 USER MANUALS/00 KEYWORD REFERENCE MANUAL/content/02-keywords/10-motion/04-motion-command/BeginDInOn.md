@@ -2,11 +2,8 @@
 keyword: BeginDInOn
 summary: Enables a digital-input trigger that automatically issues Begin on the axis.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 142
 attributes:
   access: rw
@@ -26,7 +23,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-10'
-doc_revision: '2026.10'
+doc_revision: '2026.11'
 ---
 # BeginDInOn
 

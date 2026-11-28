@@ -13,6 +13,48 @@ which pages changed between two revisions.
 > `doc_revision` tells you how current your copy of the *documentation* is; it
 > says nothing about firmware compatibility.
 
+## 2026.11 — 2026-11-01
+
+The firmware 5.3.0 additions since 2026.09, with every page checked against
+firmware 5.3.0-rc7 and corrected where it disagreed.
+
+### Added
+
+- **Push events** (`PushEv*`) on AGM800 and AGM800-EC, with each product's tick.
+- **AGM800-EC:** product type 16 in `Identity`, six-axis motion, and the
+  keyword conversions at its 16 kHz control rate.
+- **Friction feedforward for 5.3.0:** `FricMethod` and its parameter pages, in
+  the 5.3.0 numbering (0 off, 1 Stribeck, 2 linear, 3 hysteresis, 4 play,
+  5 LuGre), with a note for values saved on 5.3.0-rc4 or rc5.
+- **Lock capture:** coordinates across `SetPosition` and `ZeroPosErr`, the
+  before-map capture tables, FIFO capture and its loss accounting.
+- **Event generation:** the hardware-table preload (`EventLoad`,
+  `EventType = 3`), finite and endless by-gap runs, pulse-width quantization.
+- **Encoders:** the virtual encoder, Central-i status against feedback
+  validity, absolute-feedback startup and the AGM800 Tamagawa startup rule.
+- Smaller pages: `CIStatus` codes 15 and 16, `Map*` writes with the motor on
+  at standstill, `UPMCalcCoeff` with the motor on, `DOutMode`, homing with
+  tracking, AGD101 `MaxPWM`, `DOUBLE` math precision, `CalcIden` indices,
+  logger upload, the AGM800 Ethernet port policy, the P/D count direction.
+
+### Fixed — checked against firmware 5.3.0-rc7
+
+- **Friction numbering:** the pages used the earlier numbering, so the
+  documented replacement for `StribOn` selected LuGre.
+- **`Identity[62]`:** no bit advertises the friction numbering; the page no
+  longer tells hosts to refuse firmware without one.
+- **Lock capture:** the AGM800 re-arm behaviour, the `LockFifoKeep = 1` case in
+  `LockLost`, and the `EventType = 3` exception on `SetPosition`.
+- **Event generation:** later table-point widths keep only their low 13 bits
+  instead of clamping; the 1024-row legacy limit, which no released firmware
+  has, is gone; preload width range, Ready and fault reporting corrected; the
+  overlap fault applies from FPGA 5.5.0.
+- **Encoders and AGM800-EC:** absolute-encoder startup, the missing friction
+  rows in the AGM800-EC conversion table, and the Ethernet port policy, which
+  ships in firmware 5.3.0.
+- **Scope:** push events and the event-table preload exist on AGM800-EC as
+  well as AGM800; `ForceInTStat` names EtherCAT object 0x2001.
+
 ## 2026.06 — 2026-06-02
 
 First versioned release: a baseline of the corpus (926 pages) plus the

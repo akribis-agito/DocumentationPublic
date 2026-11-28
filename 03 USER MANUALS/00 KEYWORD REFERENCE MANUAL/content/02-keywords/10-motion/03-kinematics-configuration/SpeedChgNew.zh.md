@@ -2,11 +2,8 @@
 keyword: SpeedChgNew
 summary: 动态速度更改期间，当轴到达 SpeedChgPos 时所应用的新速度。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 344
 attributes:
   access: rw
@@ -24,9 +21,30 @@ attributes:
   default: 10000
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  agd155-ec:
+    units: scaling
+    scaling: 1.024
+  agd155-ec-var34:
+    units: scaling
+    scaling: 1.024
+  agd155-ec-var34-3:
+    units: scaling
+    scaling: 1.024
+  agd156-ec:
+    units: scaling
+    scaling: 1.024
+  agd101-ec-34a:
+    units: scaling
+    scaling: 1.024
+  agd101-ec-17a:
+    units: scaling
+    scaling: 1.024
+  agm800-ec:
+    units: scaling
+    scaling: 1.024
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # SpeedChgNew

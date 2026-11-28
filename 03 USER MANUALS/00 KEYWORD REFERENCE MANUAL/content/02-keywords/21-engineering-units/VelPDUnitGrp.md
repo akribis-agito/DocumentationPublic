@@ -2,9 +2,8 @@
 keyword: VelPDUnitGrp
 summary: Read-only list of the pulse-and-direction velocity keywords that share the P/D velocity user-unit scaling and label.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 823
 attributes:
   access: ro
@@ -24,7 +23,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 ---
 # VelPDUnitGrp
 

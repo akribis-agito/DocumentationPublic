@@ -2,9 +2,7 @@
 keyword: PushEvEnable
 summary: Master switch for push events; any 0-1 change empties the event queue.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 907
 attributes:
   access: rw
@@ -24,7 +22,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-09-25'
-doc_revision: '2026.09'
+doc_revision: '2026.11'
 ---
 # PushEvEnable
 

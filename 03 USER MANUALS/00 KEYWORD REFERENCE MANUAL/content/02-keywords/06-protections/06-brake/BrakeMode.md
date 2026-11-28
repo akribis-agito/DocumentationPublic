@@ -2,11 +2,8 @@
 keyword: BrakeMode
 summary: Selects how the static (holding) brake is engaged and released.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 380
 attributes:
   access: rw

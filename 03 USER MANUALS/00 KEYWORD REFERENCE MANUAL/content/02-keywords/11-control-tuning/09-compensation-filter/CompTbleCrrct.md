@@ -2,9 +2,8 @@
 keyword: CompTbleCrrct
 summary: Per-unit contact-point correction that shifts the compensation table along the position axis.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 840
 attributes:
   access: rw
@@ -12,19 +11,24 @@ attributes:
   flash: true
   type: array
   array_size: 3
-  data_type: int64
+  data_type: int32
   ok_in_motion: true
   ok_motor_on: true
   units: none
   range:
-  - -2251799813685248
-  - 2251799813685247
+  - -2147483648
+  - 2147483647
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+overrides:
+  ci-master:
+    data_type: int64
+    range:
+    - -2251799813685248
+    - 2251799813685247
+last_updated: '2026-11-23'
+doc_revision: '2026.11'
 ---
 # CompTbleCrrct
 
@@ -47,7 +51,7 @@ The array is 1-indexed: index 1 and index 2 are the usable elements (index 0 is 
 | 1 | Contact-point position recorded when the table was created |
 | 2 | Actual contact-point position for the present unit |
 
-Both elements default to 0, which produces no shift.
+Both elements default to 0, which produces no shift. Changing the position display or entry units leaves both numbers in main-encoder counts. For example, a stored contact point of 10,000 still reads 10,000 after the position unit changes from counts to millimetres. [CompTbleGap](CompTbleGap.md) and [CompTbleInit](CompTbleInit.md) use the position unit group. [CompTbleEnd](CompTbleEnd.md) is a table index.
 
 ## Examples
 

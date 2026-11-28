@@ -1,10 +1,8 @@
 ---
 keyword: FricBrstlDmp
-summary: LuGre 刷毛阻尼（σ1），供 FricMethod 4 使用（由 FricSigma1 更名）。
+summary: LuGre 刷毛阻尼（σ1），供 FricMethod 5 使用（由 FricSigma1 更名）。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 936
 attributes:
   access: rw
@@ -23,15 +21,17 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # FricBrstlDmp
 
-LuGre 刷毛阻尼（σ1），供 FricMethod 4 使用（由 FricSigma1 更名）。
+LuGre 刷毛阻尼（σ1），供 FricMethod 5 使用（由 FricSigma1 更名）。
 
 ## 概述
 
-`FricBrstlDmp` 是 LuGre 模型的刷毛阻尼 σ1。适用于 AGM800 和 AGM800-EC（central-i v5）。它取代 5.3.0-rc4 中的 `FricSigma1`（CAN 代码不变）。仅方法 4（LuGre）使用该参数。
+`FricBrstlDmp` 是 LuGre 模型的刷毛阻尼 σ1。适用于 AGM800 和 AGM800-EC（central-i v5）。它取代 5.3.0-rc4 中的 `FricSigma1`（CAN 代码不变）。仅方法 5（LuGre）使用该参数。
 
 ## 工作原理
 

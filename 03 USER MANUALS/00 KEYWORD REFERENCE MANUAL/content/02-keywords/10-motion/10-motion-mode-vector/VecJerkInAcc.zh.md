@@ -1,11 +1,9 @@
 ---
 keyword: VecJerkInAcc
 summary: 加加速度限制矢量运动加速阶段的加加速度限值（用户单位）。
-language: zh-CN
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 756
 attributes:
   access: rw
@@ -24,8 +22,9 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-09-29'
+doc_revision: '2026.11'
+language: zh-CN
 ---
 # VecJerkInAcc
 

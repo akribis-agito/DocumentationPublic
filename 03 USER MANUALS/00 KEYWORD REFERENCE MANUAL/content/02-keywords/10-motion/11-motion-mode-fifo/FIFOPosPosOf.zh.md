@@ -2,11 +2,8 @@
 keyword: FIFOPosPosOf
 summary: 叠加到每个 FIFO 位置段上的位置偏置。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 662
 attributes:
   access: rw

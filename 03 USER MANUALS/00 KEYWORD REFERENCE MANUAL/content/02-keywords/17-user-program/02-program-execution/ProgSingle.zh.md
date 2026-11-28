@@ -2,11 +2,8 @@
 keyword: ProgSingle
 summary: 对用户程序线程执行单步调试（调试器步入/步过）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 191
 attributes:
   access: rw
@@ -24,7 +21,9 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: partial
-overrides: {}
+overrides:
+  ci-master:
+    array_size: 13
 last_updated: '2026-05-28'
 doc_revision: '2026.06'
 language: zh-CN

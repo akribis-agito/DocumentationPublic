@@ -2,11 +2,8 @@
 keyword: IndirectArray
 summary: Selects the target array to be accessed indirectly.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 436
 attributes:
   access: rw

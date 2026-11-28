@@ -1,11 +1,8 @@
 ---
 keyword: MapType
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 320
 attributes:
   access: rw
@@ -26,7 +23,7 @@ attributes:
 overrides: {}
 summary: Selects the error-mapping dimension (off, 1D, 2D, or 3D).
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 ---
 # MapType
 
@@ -65,6 +62,8 @@ This ramp logic is shared by all of `MapType`, [MapErrOnStep](MapErrOnStep.md), 
 ### Multi-axis maps require the source axes to be standing
 
 Mapping itself cannot be enabled in motion (`ok_in_motion = false`), but writing `MapType` does not by itself validate the encoder selections. The stricter encoder/standing requirements are enforced separately, when **event correction** is run on a mapped axis: the first dimension must reference this axis's own main encoder, and for 2D/3D the additional source axes (selected by [MapEncoder](MapEncoder.md)) must be **motor-on and not moving** and must use their **main** encoders.
+
+Position mapping rounds the interpolated correction to the nearest count. Exact half counts round toward the greater integer. In two- and three-dimensional maps the intermediate blends retain their fractional values until the final correction is rounded.
 
 ## Examples
 

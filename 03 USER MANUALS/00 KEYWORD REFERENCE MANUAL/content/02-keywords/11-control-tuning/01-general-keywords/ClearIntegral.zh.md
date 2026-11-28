@@ -2,11 +2,8 @@
 keyword: ClearIntegral
 summary: 将所寻址轴的速度环积分项清零的指令。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 412
 attributes:
   access: ro

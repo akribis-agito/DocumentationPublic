@@ -2,11 +2,8 @@
 keyword: VecMemberAxes
 summary: 位掩码，用于选择参与协调向量运动的轴。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 631
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: PushParam
 summary: Pushes a parameter's value onto the numeric stack of the current thread.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 200
 attributes:
   access: rw

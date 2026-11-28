@@ -2,11 +2,8 @@
 keyword: PStatPort
 summary: 选择用于参数统计流式传输的通信端口。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 481
 attributes:
   access: rw

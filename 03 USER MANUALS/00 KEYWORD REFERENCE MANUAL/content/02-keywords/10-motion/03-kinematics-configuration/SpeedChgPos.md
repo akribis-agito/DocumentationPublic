@@ -2,11 +2,8 @@
 keyword: SpeedChgPos
 summary: Axis position at which a speed-change-on-the-fly event is triggered.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 346
 attributes:
   access: rw

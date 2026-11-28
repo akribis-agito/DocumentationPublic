@@ -2,16 +2,15 @@
 summary: 每轴、功能相关的 32 位单精度浮点数组，用于用户与上位机的共享存储。
 keyword: UserParamF
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 718
 attributes:
   access: rw
   scope: axis
   flash: true
   type: array
-  array_size: 21
+  array_size: 11
   data_type: float32
   ok_in_motion: true
   ok_motor_on: true
@@ -20,7 +19,21 @@ attributes:
   default: 0.0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    array_size: 21
+  agd155-ec:
+    array_size: 21
+  agd155-ec-var34:
+    array_size: 21
+  agd155-ec-var34-3:
+    array_size: 21
+  agd156-ec:
+    array_size: 21
+  agd101-ec-34a:
+    array_size: 21
+  agd101-ec-17a:
+    array_size: 21
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

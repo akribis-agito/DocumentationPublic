@@ -336,7 +336,7 @@ The following is the list of instruction error codes and their descriptions.
 | 328 | Setting Product Serial Number is not allowed without Elevated Permissions |
 | 329 | SetPosition is not allowed for the Yaw axis in gantry mode |
 | 330 | AbsTrgt out of range in the current ModShort Mode |
-| 331 | Out of range filter definitions, at feedforward filter |
+| 331 | Tamagawa encoder resolution cannot be changed, it is learned |
 | 334 | Using LockEventInit when LockEventMode is 0 (backward compatible mode) makes no sense. Please check your lock/event configuration logic |
 | 335 | Can't enable Lock or Event if LockEventMode is 1, and LockEventInit was not executed |
 | 336 | DrawRunBack requested with axis letter with no scheme or no valid scheme related to it |
@@ -344,6 +344,7 @@ The following is the list of instruction error codes and their descriptions.
 | 338 | Global User Units feature is mutually exclusive with embedded controller user units. Please disable one of the scaling factors |
 | 339 | Cannot start recording without any parameter to record |
 | 340 | UPMRptCalc is not allowed when UPM state is not Idle. Please check the UPMState before calling UPMRptCalc |
+| 342 | Out of range filter definitions at feedforward filter |
 | 380 | Total stroke cannot be zero |
 | 381 | Total stroke and cruise stroke must be in the same direction |
 | 382 | Speed defined cannot be zero |

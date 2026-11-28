@@ -2,11 +2,8 @@
 keyword: VLogic
 summary: 只读的 5 V 逻辑电源电压；超出 4500–5500 mV 范围将禁用电机。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 37
 attributes:
   access: ro
@@ -25,9 +22,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v4:
-    scope: axis
-  central-i.v5:
+  ci-master:
     scope: axis
 last_updated: '2026-05-29'
 doc_revision: '2026.06'

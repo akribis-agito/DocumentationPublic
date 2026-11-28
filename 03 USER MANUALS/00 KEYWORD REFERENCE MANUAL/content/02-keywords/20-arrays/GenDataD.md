@@ -2,9 +2,8 @@
 summary: General-purpose, non-axis 64-bit double-precision floating-point array for shared user/host storage.
 keyword: GenDataD
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 773
 attributes:
   access: rw

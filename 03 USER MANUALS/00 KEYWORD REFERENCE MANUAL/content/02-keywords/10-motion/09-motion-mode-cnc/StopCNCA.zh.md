@@ -2,11 +2,8 @@
 keyword: StopCNCA
 summary: 停止 CNC 运动队列 A 执行的指令。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 456
 attributes:
   access: ro

@@ -2,9 +2,8 @@
 keyword: AccUnitUnt
 summary: Display label (name) of the acceleration engineering unit, stored as a short text string.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 810
 attributes:
   access: rw

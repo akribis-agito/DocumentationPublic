@@ -2,9 +2,7 @@
 keyword: OneOverTAuto
 summary: 用于 1/T 速度测量的保留关键字（未实现）。
 availability:
-  standalone:
-  - v4
-  central-i: []
+- controller
 can_code: 188
 attributes:
   access: rw
@@ -23,8 +21,6 @@ attributes:
   scaling: 1.0
   implemented: not_implemented
 overrides: {}
-removed_in:
-- v5
 last_updated: '2026-05-28'
 doc_revision: '2026.06'
 language: zh-CN

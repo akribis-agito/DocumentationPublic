@@ -2,12 +2,9 @@
 keyword: RptCounter
 summary: Counts repetitions made during repetitive point-to-point (PTP) motion.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
-can_code: 714
+- controller
+- ci-master
+can_code: 732
 attributes:
   access: ro
   scope: axis
@@ -24,9 +21,7 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    can_code: 732
+overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 ---

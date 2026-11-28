@@ -2,11 +2,8 @@
 keyword: ProgPointer
 summary: 报告每个用户程序任务的当前指令指针。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 279
 attributes:
   access: ro
@@ -24,7 +21,9 @@ attributes:
   default: -1
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    array_size: 13
 last_updated: '2026-05-28'
 doc_revision: '2026.06'
 language: zh-CN

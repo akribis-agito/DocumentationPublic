@@ -2,11 +2,8 @@
 keyword: FIFOPosTrgt
 summary: Target position carried by the next FIFO position segment.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 661
 attributes:
   access: rw

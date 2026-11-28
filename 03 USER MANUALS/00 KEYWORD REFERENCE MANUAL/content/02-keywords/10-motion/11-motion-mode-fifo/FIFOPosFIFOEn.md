@@ -2,11 +2,8 @@
 keyword: FIFOPosFIFOEn
 summary: Enables or disables FIFO position-tracking mode.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 665
 attributes:
   access: rw

@@ -40,10 +40,15 @@ def fact_header(fm: dict) -> str:
     rng = attrs.get("range")
     if rng:
         parts.append(f"range={rng}")
-    avail = fm.get("availability") or {}
-    versions = sorted({v for vs in avail.values() if vs for v in vs})
-    if versions:
-        parts.append("/".join(versions))
+    avail = fm.get("availability") or []
+    if avail:
+        parts.append("/".join(avail))
+    products = fm.get("products") or []
+    if products:
+        parts.append(f"products={','.join(products)}")
+    overrides = fm.get("overrides") or {}
+    if overrides:
+        parts.append(f"differs on {','.join(overrides)}")
 
     head = f"Keyword {keyword}"
     if parts:
@@ -107,10 +112,9 @@ def chunk_record(
     for key in _META_ATTRS:
         if key in attrs:
             metadata[key] = attrs[key]
-    if fm.get("availability"):
-        metadata["availability"] = fm["availability"]
-    if fm.get("removed_in"):
-        metadata["removed_in"] = fm["removed_in"]
+    for key in ("availability", "products", "overrides"):
+        if fm.get(key):
+            metadata[key] = fm[key]
 
     return {
         "id": rel_path,

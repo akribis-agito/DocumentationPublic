@@ -2,11 +2,8 @@
 keyword: ProgInfo
 summary: 报告已加载用户程序中嵌入的信息字符串。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 297
 attributes:
   access: ro

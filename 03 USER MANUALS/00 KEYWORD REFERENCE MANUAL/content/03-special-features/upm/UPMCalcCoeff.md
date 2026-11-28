@@ -2,9 +2,8 @@
 keyword: UPMCalcCoeff
 summary: A command that (re)calculates the UPM repetitive compensation coefficients from the current plant model (PlantModel) and the configured filter range (UPMRptRange).
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 649
 attributes:
   access: ro
@@ -24,7 +23,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-20'
-doc_revision: '2026.10'
+doc_revision: '2026.11'
 ---
 # UPMCalcCoeff
 

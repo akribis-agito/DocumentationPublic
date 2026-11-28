@@ -1,33 +1,33 @@
 ---
 keyword: MotionMode10
-summary: 直接从动运动（MotionMode = 10）——轴 A 直接跟随轴 B 的位置参考，按 MasterFact 缩放。Hand-authored; regenerate remaining frontmatter via docgen.
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+summary: 直接从动运动（MotionMode = 10）——轴 A 直接跟随轴 B 的位置参考，按设定的齿轮比值缩放。Hand-authored; regenerate remaining frontmatter via docgen.
+last_updated: '2026-11-20'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # MotionMode = 10 — 直接从动运动
 
-直接从动运动模式（[MotionMode](../02-motion-configuration/MotionMode.md) `= 10`）是一种独立的、比齿轮运动更简化的模式。轴 A 的位置参考在每个控制周期由轴 B 的位置参考变化量驱动，并按 [MasterFact](MasterFact.md) 缩放。该模式**不**使用 [GearMaster](GearMaster.md)、[MasterPos](MasterPos.md)、[MasterFilt](MasterFilt.md)、[MasterFactDen](MasterFactDen.md) 或 [MasterModRev](MasterModRev.md)。
+在直接从轴运动模式下，轴 A 跟随轴 B 的位置参考变化。含小数余量跟踪修复的固件使用 [MasterFact](MasterFact.md) 与 [MasterFactDen](MasterFactDen.md) 的约分比值。在支持此模式的多轴产品上，主轴固定为轴 B。
 
-![直接从动：轴 B 每周期参考值变化量经 MasterFact 缩放后加至轴 A 的参考值](slave-direct-signal-path.svg)
+![按设定比值缩放轴 B 的参考变化，并累加至轴 A](slave-direct-signal-path.svg)
 
 ## 工作原理
 
 ### 逐周期更新
 
-运动进行中，每个控制周期，控制器计算轴 B 的位置参考相较于上一周期的变化量，并将其乘以 `MasterFact` 后加至轴 A 的位置参考。没有中间累加器（无 `MasterPos`）、没有低通滤波器（无 `MasterFilt`）、也没有通过复杂 CAN 码进行主轴选择（无 `GearMaster`）——主轴硬性绑定为轴 B 的参考值，从动轴硬性绑定为轴 A。
+控制器按设定比值缩放每个采样周期内轴 B 的参考变化，并将小数余量保留到下一周期。在比值固定的区间内，轴 A 参考值的理想变化量为
 
 $$
-\Delta_{\text{PosRef A}} = \frac{\text{MasterFact}}{65536} \cdot \Delta_{\text{PosRef B}}
+\Delta_{\text{PosRef A, ideal}} = \frac{\text{MasterFact}}{\text{MasterFactDen}} \cdot \Delta_{\text{PosRef B}}
 $$
 
-从动轴变化量每周期叠加至轴 A 的现有参考值，因此参考值按轴 B 参考变化量的 `MasterFact / 65536` 倍累积。负的 `MasterFact` 使从动轴方向相对于主轴反向。
+轴 A 的参考变化量按内部参考单位取最近整数。恰好位于半单位时取较大的整数。运动反向时，余量仍在半个内部参考单位以内。分子为负时，从轴方向反转。
 
 ### Begin
 
 以 `MotionMode = 10` 发出 [Begin](../04-motion-command/Begin.md)：
 
-- 快照轴 B 当前位置参考作为"上一"值，使第一个周期产生零变化量（启动时无跳变）；
+- 记录轴 B 的当前参考值并清除轴 A 的余量。退出模式 10 或更改约分后的比值也会清除余量。写入等值比值会保留余量。
 - 立即开始运动（该模式不响应 `BeginDInOn` 的触发路径）；
 - 将轴 A 标记为运动中。
 
@@ -51,18 +51,18 @@ $$
 |---|---|---|
 | 主轴选择 | 硬性绑定至轴 B 的参考值 | 任意变量，通过 [GearMaster](GearMaster.md) 选择 |
 | 从动轴 | 硬性绑定至轴 A | 被指令的轴 |
-| 比值 | 仅 [MasterFact](MasterFact.md)（v4：整数，v5：浮点数） | [MasterFact](MasterFact.md) / [MasterFactDen](MasterFactDen.md)，v5 带小数余数延续 |
+| 比值 | [MasterFact](MasterFact.md) / [MasterFactDen](MasterFactDen.md)，含跟踪修复的固件会保留余量 | [MasterFact](MasterFact.md) / [MasterFactDen](MasterFactDen.md)，v5 保留余量 |
 | 主轴累加器 | 无（无 [MasterPos](MasterPos.md)） | [MasterPos](MasterPos.md) 每周期累积 |
 | 平滑滤波器 | 无（无 [MasterFilt](MasterFilt.md)） | 通过 [MasterFilt](MasterFilt.md) 实现一阶低通 |
 | 取模处理 | 无（无 [MasterModRev](MasterModRev.md)） | [MasterModRev](MasterModRev.md) 对主轴进行环绕处理 |
 | 软件限位 | 该模式内不进行钳位 | 由 [FwdPLim](../../06-protections/03-motion/position-limit-protection/FwdPLim.md) / [RevPLim](../../06-protections/03-motion/position-limit-protection/RevPLim.md) 钳位 |
 | `Stop` / `Abort` 响应 | 忽略——运动继续 | 立即结束运动（无减速斜坡） |
 
-若需要任何齿轮运动功能（可配置主轴、精确有理比值、平滑、取模环绕、软件限位或受控停止），请改用直接或间接齿轮运动（[MotionMode](../02-motion-configuration/MotionMode.md) `= 5` 或 `= 6`）。
+若需要任何齿轮运动功能（可配置主轴、平滑、取模环绕、软件限位或受控停止），请改用直接或间接齿轮运动（[MotionMode](../02-motion-configuration/MotionMode.md) `= 5` 或 `= 6`）。
 
 ## 版本间变更
 
-`MasterFact` 的数学作用在两个版本中相同——在将轴 B 每周期参考变化量加至轴 A 的参考值之前进行缩放——但精度有所不同：
+下表描述小数余量跟踪修复之前的固件。两个版本均先缩放轴 B 的位置参考变化量，再累加到轴 A 的参考值。
 
 | | v4（独立版本 &amp; central-i） | v5（central-i） |
 |---|---|---|
@@ -74,25 +74,26 @@ $$
 ## 示例
 
 ```text
-; --- Axis A as direct slave of axis B at unity ratio ---
-AMasterFact=65536     ; 65536 = unity (1:1) on v4; on v5 also unity
+; --- 含小数跟踪修复的固件：轴 A 以 7:13 跟随轴 B ---
+AMasterFact=7
+AMasterFactDen=13
 AMotionMode=10        ; 10 = direct slave (axis A follows axis B)
 ABegin                ; latches axis B reference; A now tracks dB each cycle
 
 ; --- Read axis A's reference while axis B moves ---
-APosRef               ; updates each cycle by MasterFact x change in axis B's reference
+APosRef               ; 读取当前从轴参考值
 
 ; --- End the motion by disabling the slave axis ---
 AMotorOn=0            ; disable the slave; this mode does not honour Stop/Abort
 ```
 
-`MasterFact = -65536` 使从动轴方向相对于轴 B 反向。其他比值线性缩放（`MasterFact = 131072` 使每次主轴变化对应的从动轴变化量加倍）。
+按上述配置，轴 B 的净变化量为 13 个内部参考单位时，轴 A 增加 7 个单位。将分子改为 −7 可反转方向。
 
 ## 另请参阅
 
 - [MotionMode](../02-motion-configuration/MotionMode.md) — 选择运动类型（此为值 `10`）
-- [MasterFact](MasterFact.md) — 该模式读取的缩放因子
+- [MasterFact](MasterFact.md) 和 [MasterFactDen](MasterFactDen.md) — 分子与分母
 - [GearMaster](GearMaster.md) — 该模式**不**使用（由 `MotionMode = 5` / `= 6` 使用）
-- [MasterPos](MasterPos.md)、[MasterFilt](MasterFilt.md)、[MasterFactDen](MasterFactDen.md)、[MasterModRev](MasterModRev.md) — 仅用于齿轮运动；该模式不使用
+- [MasterPos](MasterPos.md)、[MasterFilt](MasterFilt.md)、[MasterModRev](MasterModRev.md) — 仅用于齿轮运动；该模式不使用
 - [PosRef](../01-kinematics-status/PosRef.md) — 该模式直接驱动的参考值
 - [Begin](../04-motion-command/Begin.md) — 启动运动

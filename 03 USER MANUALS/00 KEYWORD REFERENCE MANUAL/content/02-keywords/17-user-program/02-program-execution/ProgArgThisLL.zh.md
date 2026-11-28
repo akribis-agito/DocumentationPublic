@@ -2,9 +2,8 @@
 keyword: ProgArgThisLL
 summary: 以 64 位有符号整数形式读写当前函数的参数槽和局部变量槽。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 785
 attributes:
   access: rw

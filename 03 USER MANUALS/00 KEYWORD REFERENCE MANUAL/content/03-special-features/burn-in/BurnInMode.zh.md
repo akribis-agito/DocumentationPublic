@@ -1,11 +1,9 @@
 ---
 keyword: BurnInMode
+summary: 使能老化测试运动功能，开环连续旋转换相角以对系统进行长时间压力测试。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 424
 attributes:
   access: rw
@@ -27,7 +25,6 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 使能老化测试运动功能，开环连续旋转换相角以对系统进行长时间压力测试。
 ---
 # BurnInMode
 

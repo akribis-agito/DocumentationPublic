@@ -2,9 +2,8 @@
 keyword: ScopeGap
 summary: Sets the Central-i scope sampling interval.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 743
 attributes:
   access: rw

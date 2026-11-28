@@ -2,9 +2,7 @@
 keyword: HWTimer
 summary: High-resolution free-running counter for measuring short intervals.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 768
 attributes:
   access: ro

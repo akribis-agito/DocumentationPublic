@@ -2,9 +2,8 @@
 keyword: MotForceConst
 summary: Motor force constant for linear and voice-coil motors, in N/A.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 871
 attributes:
   access: rw
@@ -12,16 +11,17 @@ attributes:
   flash: true
   type: scalar
   array_size: 1
-  data_type: float
+  data_type: float32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
   range:
-  - 0
-  - 1000
-  default: 10
-  scaling: 1
+  - 0.0
+  - 1000.0
+  default: 10.0
+  scaling: 1.0
   implemented: final
+overrides: {}
 last_updated: '2026-07-30'
 doc_revision: '2026.09'
 ---
@@ -62,6 +62,8 @@ From `psi_f` the drive computes the characteristic current, the demagnetising cu
 AMotForceConst=76.5   ; AKM100-B1
 AMagneticPitch=42     ; must be set as well
 ```
+
+On AGM800 firmware with the load-estimator fix (Firmware-Main #2710), collision detection accepts any positive MotForceConst for linear and voice-coil motors, including 10.0. Enter the value from the motor data sheet.
 
 ## See also
 

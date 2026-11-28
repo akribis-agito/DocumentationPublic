@@ -2,9 +2,8 @@
 keyword: CNCACumPosRef
 summary: 自运动开始以来 CNC A 组跨所有段的累计指令路径位置。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 468
 attributes:
   access: ro

@@ -2,11 +2,8 @@
 keyword: UPMRptOn
 summary: Requests UPM repetitive (periodic) motion compensation for the next motion.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 559
 attributes:
   access: rw
@@ -24,10 +21,7 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    range: null
-    default: null
+overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 ---

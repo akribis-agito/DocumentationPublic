@@ -2,9 +2,8 @@
 keyword: CurrStbleDtct
 summary: Enables run-time detection of an unstable (oscillating) current loop on the axis.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 789
 attributes:
   access: rw

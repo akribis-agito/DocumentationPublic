@@ -2,11 +2,8 @@
 keyword: VelTrackFact
 summary: Velocity feed-forward (tracking) factor — scales the reference-derived velocity that is added to the position-controller output.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 107
 attributes:
   access: rw

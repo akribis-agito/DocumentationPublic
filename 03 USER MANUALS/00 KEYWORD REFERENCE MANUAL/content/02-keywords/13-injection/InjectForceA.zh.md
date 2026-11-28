@@ -2,11 +2,8 @@
 keyword: InjectForceA
 summary: 力指令注入的幅值，以内部力单位表示。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 590
 attributes:
   access: rw

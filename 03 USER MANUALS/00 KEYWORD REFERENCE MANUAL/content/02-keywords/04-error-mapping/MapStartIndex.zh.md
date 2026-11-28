@@ -1,11 +1,8 @@
 ---
 keyword: MapStartIndex
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 321
 attributes:
   access: rw
@@ -19,14 +16,18 @@ attributes:
   units: none
   range:
   - 1
-  - 300000
+  - 1604
   default: 1
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    range:
+    - 1
+    - 5000
 summary: 活动误差映射数据开始处的 MapTable 索引。
 last_updated: '2026-10-17'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # MapStartIndex
@@ -48,6 +49,8 @@ language: zh-CN
 - **3D：** `index = MapStartIndex + layer × MapLength[1] × MapLength[2] + column × MapLength[1] + row`。
 
 映射必须能容纳在从 `MapStartIndex` 开始的可用表大小内；该关键字的上界随合并存储区大小变化。由于索引是**基于 1 的**，`MapStartIndex = 1` 选择 `MapTable[1]` 作为第一个条目。
+
+生效映射的最后一点索引为 `MapStartIndex + MapLength[1] × … × MapLength[d] − 1`，其中 `d` 为生效的维数。该索引必须在产品的映射表容量内。如果启用映射或更改起始索引、长度会使最后一点越界，控制器返回错误 14，原设置继续生效。
 
 ## 示例
 

@@ -2,11 +2,8 @@
 keyword: MinVBus
 summary: Minimum allowed bus voltage; dropping to or below it immediately disables the axis.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 89
 attributes:
   access: rw
@@ -25,10 +22,41 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v4:
+  ci-master:
     scope: axis
-  central-i.v5:
-    scope: axis
+    range:
+    - 11000
+    - 340000
+  agd155-af-2a06:
+    range:
+    - 100000
+    - 340000
+    default: 100000
+  agd155-af-2a10:
+    range:
+    - 100000
+    - 340000
+    default: 100000
+  agd155-ec:
+    range:
+    - 100000
+    - 340000
+    default: 100000
+  agd155-ec-var34:
+    range:
+    - 100000
+    - 340000
+    default: 100000
+  agd155-ec-var34-3:
+    range:
+    - 100000
+    - 340000
+    default: 100000
+  agd156-ec:
+    range:
+    - 100000
+    - 340000
+    default: 100000
 last_updated: '2026-09-25'
 doc_revision: '2026.09'
 ---

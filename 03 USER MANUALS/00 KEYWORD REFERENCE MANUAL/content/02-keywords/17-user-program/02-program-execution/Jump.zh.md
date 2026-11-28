@@ -2,18 +2,15 @@
 keyword: Jump
 summary: 低级用户程序操作码，将执行跳转到程序中的另一位置。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 196
 attributes:
   access: rw
   scope: non-axis
   flash: false
   type: array
-  array_size: 10
+  array_size: 34
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
@@ -24,9 +21,7 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: partial
-overrides:
-  central-i.v5:
-    array_size: 34
+overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

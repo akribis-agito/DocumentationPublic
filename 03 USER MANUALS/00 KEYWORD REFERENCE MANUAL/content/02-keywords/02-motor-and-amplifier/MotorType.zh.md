@@ -2,11 +2,8 @@
 keyword: MotorType
 summary: 定义连接到轴的电机类型，决定电流和电压如何计算与保护。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 50
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: AutoExec
 summary: When set, runs the user program automatically on power-up or restart.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 208
 attributes:
   access: rw

@@ -2,9 +2,8 @@
 keyword: AnomDtctOn
 summary: Enables or disables anomaly (collision) detection on the axis.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 778
 attributes:
   access: rw

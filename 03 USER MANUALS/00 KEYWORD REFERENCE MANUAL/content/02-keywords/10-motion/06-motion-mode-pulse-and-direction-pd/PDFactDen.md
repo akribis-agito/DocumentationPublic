@@ -2,11 +2,8 @@
 keyword: PDFactDen
 summary: Denominator of the scaling factor applied to detected pulses before accumulation into PDPos.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 119
 attributes:
   access: rw

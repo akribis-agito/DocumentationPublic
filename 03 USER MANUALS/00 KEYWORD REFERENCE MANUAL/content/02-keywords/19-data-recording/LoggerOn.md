@@ -2,11 +2,8 @@
 keyword: LoggerOn
 summary: Enables or disables the continuous data logger.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 530
 attributes:
   access: rw

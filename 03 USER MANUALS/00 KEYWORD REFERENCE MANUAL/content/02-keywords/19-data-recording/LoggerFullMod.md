@@ -2,11 +2,8 @@
 keyword: LoggerFullMod
 summary: Selects logger behavior when its buffer fills (overwrite or stop).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 533
 attributes:
   access: rw

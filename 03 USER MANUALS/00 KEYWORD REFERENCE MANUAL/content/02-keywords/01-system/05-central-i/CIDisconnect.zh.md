@@ -2,11 +2,8 @@
 keyword: CIDisconnect
 summary: 终止所选轴端口上活动的 Central-i 链路的命令。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 505
 attributes:
   access: ro

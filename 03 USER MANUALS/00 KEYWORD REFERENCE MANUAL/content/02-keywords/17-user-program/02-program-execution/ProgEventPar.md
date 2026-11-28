@@ -2,11 +2,8 @@
 keyword: ProgEventPar
 summary: Selects (by complex CAN code) the controller parameter that triggers an event.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 520
 attributes:
   access: rw

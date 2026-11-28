@@ -2,9 +2,16 @@
 keyword: ECATDrvReset
 summary: Command that asks the EtherCAT communication module to reset the drive.
 availability:
-  standalone:
-  - v5
-  central-i: []
+- controller
+- ci-master
+products:
+- agd101-ec-17a
+- agd101-ec-34a
+- agd155-ec
+- agd155-ec-var34
+- agd155-ec-var34-3
+- agd156-ec
+- agm800-ec
 can_code: 888
 attributes:
   access: ro

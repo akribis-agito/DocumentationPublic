@@ -2,11 +2,8 @@
 keyword: MotionReason
 summary: Records why the last motion stopped, encoded as a numeric reason code.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 43
 attributes:
   access: ro

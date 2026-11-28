@@ -2,11 +2,8 @@
 keyword: SpeedChgOn
 summary: Enables the speed-change-on-the-fly feature for the axis.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 345
 attributes:
   access: rw

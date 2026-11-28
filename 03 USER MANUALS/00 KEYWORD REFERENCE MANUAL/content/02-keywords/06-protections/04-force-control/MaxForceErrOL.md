@@ -2,11 +2,8 @@
 keyword: MaxForceErrOL
 summary: Maximum allowable force error in open-loop force control; exceeding it faults.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 591
 attributes:
   access: rw

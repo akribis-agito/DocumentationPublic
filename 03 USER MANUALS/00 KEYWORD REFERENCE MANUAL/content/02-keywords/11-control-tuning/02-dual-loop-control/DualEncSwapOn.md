@@ -2,9 +2,8 @@
 keyword: DualEncSwapOn
 summary: Switch for pseudo dual-loop control.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 724
 attributes:
   access: rw

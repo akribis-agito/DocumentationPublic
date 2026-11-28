@@ -2,9 +2,8 @@
 keyword: ProgExpStackF
 summary: Reads a value on the numeric (expression) stack as a 32-bit floating-point (float), without popping it.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 793
 attributes:
   access: rw
@@ -22,7 +21,9 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: partial
-overrides: {}
+overrides:
+  ci-master:
+    array_size: 14
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 ---

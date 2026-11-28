@@ -2,16 +2,15 @@
 keyword: AccUnitGrp
 summary: 属于加速度单位组的关键字的只读列表。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 808
 attributes:
   access: ro
   scope: non-axis
   flash: false
   type: array
-  array_size: 8
+  array_size: 10
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true

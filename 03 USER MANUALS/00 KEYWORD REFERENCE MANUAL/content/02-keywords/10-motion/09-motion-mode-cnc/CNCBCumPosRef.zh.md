@@ -2,9 +2,7 @@
 keyword: CNCBCumPosRef
 summary: 自运动开始以来 CNC 组 B 跨所有段的累积指令路径位置。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 700
 attributes:
   access: ro

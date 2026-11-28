@@ -2,11 +2,8 @@
 keyword: MaxPWM
 summary: 限制 PWM 电压指令幅值；AGD101 最大值为 900（90%），其他产品使用其报告的范围。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 91
 attributes:
   access: rw
@@ -18,17 +15,65 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: scaling
-  range: null
-  default: null
-  scaling: 1.144
+  range:
+  - 0
+  - 4464
+  default: 4119.3
+  scaling: 4.577
   implemented: final
 overrides:
-  central-i.v4:
+  ci-master:
+    range:
+    - 0
+    - 1470
+    default: 1358.14
     scaling: 1.526
-  central-i.v5:
-    scaling: 1.526
+  agd155-af-2a06:
+    range:
+    - 0
+    - 4351
+  agd155-af-2a10:
+    range:
+    - 0
+    - 4351
+  agd155-ec:
+    range:
+    - 0
+    - 3024
+    default: 2812.5
+    scaling: 3.125
+  agd155-ec-var34:
+    range:
+    - 0
+    - 3024
+    default: 2812.5
+    scaling: 3.125
+  agd155-ec-var34-3:
+    range:
+    - 0
+    - 2874
+    default: 2812.5
+    scaling: 3.125
+  agd156-ec:
+    range:
+    - 0
+    - 2874
+    default: 2812.5
+    scaling: 3.125
+  agd101-ec-34a:
+    range:
+    - 0
+    - 2813.0
+    default: 2812.5
+    scaling: 3.125
+  agd101-ec-17a:
+    range:
+    - 0
+    - 2813.0
+    default: 2812.5
+    scaling: 3.125
 last_updated: '2026-10-21'
-doc_revision: '2026.10'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # MaxPWM
@@ -49,9 +94,15 @@ AGD101 允许的最大设置为 **900（90%）**，保留原有 90% 默认值。
 
 ## 工作原理
 
-无刷矢量控制使用预先计算的 `MaxPWM²` 限制输出电压矢量。[ControlMode](../../09-current-and-voltage/02-motor-variables/ControlMode.zh.md) 中的扩展速度范围选项会改变该矢量预算。直接将各相钳位至 ±`MaxPWM` 的处理适用于电流控制或矢量控制旁路模式。可配置的死区补偿也可能改变最终相电压指令，因此仅凭此关键字不能保证物理低侧导通窗口。
+无刷矢量控制使用预先计算的 `MaxPWM²` 限制输出电压矢量。[ControlMode](../../09-current-and-voltage/02-motor-variables/ControlMode.zh.md) 中的扩展速度范围选项会改变该矢量预算。
+
+AGD101 的 17 A 和 34 A 型号使用包含 PR #2675 更改的固件时，矢量控制及旁路模式均在死区补偿后限制最终相电压。只要任一相超过 `MaxPWM`，驱动器就按同一比例缩放三相指令，以保持线电压之间的比例，并报告电压饱和。在 v5.3.0-rc7 中，补偿在矢量限幅后施加，最终相电压指令可能超过设定的幅值。低侧电流采样的准确度还取决于开关延迟和模拟电路的建立时间。[固件更改](https://github.com/akribis-agito/Firmware-Main/pull/2675)
+
+其他产品在旁路模式下将各相分别钳位至 ±`MaxPWM`。
 
 电压饱和通过 [StatReg](../../07-status-and-faults/StatReg.zh.md) 第 22 位报告。`MaxPWM` 限制请求的输出；饱和本身不会触发 [ConFlt](../../07-status-and-faults/ConFlt.zh.md) 故障。
+
+对于 Central-i PWM 放大器，默认值为连接的远端在预留死区时间后的允许上限。恢复配置前，应读取相应端口的上下限和默认值。 在远端连接前，控制器根据标称死区时间计算上电默认值，并保留相同的 10% 裕量。
 
 ## 示例
 

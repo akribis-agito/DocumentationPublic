@@ -2,9 +2,8 @@
 keyword: CompFiltTble
 summary: 补偿表，存储各均匀间隔表位置处的期望力。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 836
 attributes:
   access: rw

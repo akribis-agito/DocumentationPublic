@@ -2,11 +2,8 @@
 keyword: EventGap
 summary: 按间隔模式下相邻事件之间的位置间距。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 182
 attributes:
   access: rw
@@ -25,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-23'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # EventGap
@@ -46,6 +43,8 @@ language: zh-CN
 最大可持续事件频率受 `EventGap` 除以轴速度的限制：当该时间间隔接近发出一个宽度为 [EventPulseWid](EventPulseWid.md) 的脉冲所需时间时，脉冲将开始合并。
 
 在有限的按间隔生成模式（`EventType = 1`、`EventAlwaysOn = 0`）下，若间隔为零或其符号使比较位置背离终点，执行 `EventOn = 1` 将被拒绝并返回错误 **14**。拒绝后，已配置的间隔和位置保持不变。对于 `EventBegPos = 20000`、`EventEndPos = 200`，应使用 `EventGap = -100`；正间隔会向远离终点的方向推进，因此会被拒绝。请在未使能时配置窗口，修正间隔后再使能。
+
+在使用软件比较器的 C2000 和 C28388 轴上，启用有限的固定间距事件窗口时，控制器选取沿窗口方向尚未到达的第一个点。例如，窗口为 1000 到 2000、间距为 100 时，在 1550 启用会选中 1600。保持在 1550 时不会输出脉冲。如果一个控制采样周期越过多个点，控制器只输出一个脉冲，并将比较位置移到所有已越过点的前方。每次启用后的首次漏发会在该轴的错误日志中记录错误 414。
 
 ## 示例
 

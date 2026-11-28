@@ -2,11 +2,8 @@
 keyword: UPMRptMotion
 summary: Selects which learned-motion slot the UPM repetitive compensation function uses, choosing the stored feedforward correction table that matches the current motion.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 562
 attributes:
   access: rw
@@ -20,11 +17,39 @@ attributes:
   units: none
   range:
   - 0
-  - 4
+  - 0
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    range:
+    - 0
+    - 4
+  agd155-ec:
+    range:
+    - 0
+    - 4
+  agd155-ec-var34:
+    range:
+    - 0
+    - 4
+  agd155-ec-var34-3:
+    range:
+    - 0
+    - 4
+  agd156-ec:
+    range:
+    - 0
+    - 4
+  agd101-ec-34a:
+    range:
+    - 0
+    - 4
+  agd101-ec-17a:
+    range:
+    - 0
+    - 4
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 ---

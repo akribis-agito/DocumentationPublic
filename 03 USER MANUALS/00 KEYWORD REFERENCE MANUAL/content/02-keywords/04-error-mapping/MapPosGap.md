@@ -1,11 +1,8 @@
 ---
 keyword: MapPosGap
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 325
 attributes:
   access: rw
@@ -26,7 +23,7 @@ attributes:
 overrides: {}
 summary: Encoder-count spacing between adjacent error-mapping points.
 last_updated: '2026-10-17'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 ---
 # MapPosGap
 

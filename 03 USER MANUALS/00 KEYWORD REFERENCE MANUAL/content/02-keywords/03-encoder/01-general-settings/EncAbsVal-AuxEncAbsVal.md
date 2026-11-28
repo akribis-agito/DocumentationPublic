@@ -1,7 +1,7 @@
 ---
 summary: Raw absolute encoder value after bit-masking and direction handling.
-last_updated: '2026-10-16'
-doc_revision: '2026.10'
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 ---
 # EncAbsVal/AuxEncAbsVal
 
@@ -26,7 +26,7 @@ So `EncAbsVal` is the masked, direction-corrected reading — exactly the value 
 
 ### Rejected Central-i transport frames
 
-For AGM800/AGM800-EC firmware containing the [retained-feedback repair](https://github.com/akribis-agito/Firmware-Main/issues/1297), a rejected standard AMP transport frame does not cause the previously accepted word to be shifted or direction-inverted again. While that standard AMP port remains active with unchanged configuration, `EncAbsVal` retains the formatted measurement until another transport word is accepted. Existing error handling may separately predict the position used for accumulation; `EncAbsVal` is not that estimate.
+For AGM800/AGM800-EC firmware 5.3.0-rc4 and later, a rejected standard AMP transport frame does not cause the previously accepted word to be shifted or direction-inverted again. While that standard AMP port remains active with unchanged configuration, `EncAbsVal` retains the formatted measurement until another transport word is accepted. Existing error handling may separately predict the position used for accumulation; `EncAbsVal` is not that estimate.
 
 Transport acceptance does not establish a newly acquired, error-free encoder measurement. This repair adds no timestamp, first-sample qualification or detailed encoder alarm reporting. See [EncStatReg](EncStatReg.md) for diagnostic limits. It does not change `EncAbsErrTime=-1` bypass or existing fault thresholds.
 
@@ -44,7 +44,7 @@ AAuxEncAbsVal           ; read the processed auxiliary absolute value
 ## Edge cases
 
 - **Motor off.** The absolute reading runs whenever the encoder interface is active; processing does not require the motor to be enabled. This does not guarantee a fresh encoder sample on each cycle.
-- **Power-up seed.** For a fixed period after power-up the firmware seeds the accumulated position from `EncAbsVal + EncAbsOff`. The standalone controller uses a shared countdown; Central-i uses a per-axis countdown re-armed during port configuration. The countdown is not a qualified-first-sample check; a later clear status does not validate the value used during initialization.
+- **Power-up seed.** For a fixed period after power-up the firmware seeds the accumulated position from `EncAbsVal + EncAbsOff`. The standalone controller uses a shared countdown; Central-i uses a per-axis countdown re-armed during port configuration. The countdown is not a qualified-first-sample check; a later clear status does not validate the value used during initialization. Exception: on AGM800 and AGM800-EC, active standard AMP main Tamagawa feedback with [EncAbsErrTime](../07-absolute-encoder/EncAbsErrTime.md) `>= 0` is not seeded during the countdown and keeps its preceding position; only after the countdown does a reply that passed the Central-i CRC1 check in the current control cycle with clear quality bits set the position to the absolute reading plus `EncAbsOff`.
 - **Startup reading.** Do not infer readiness from a fixed number of host reads or from a nonzero value. Link and encoder startup can leave an unavailable or retained reading; this keyword does not expose sample age or qualified initialization.
 - **Encoder type.** Meaningful for absolute encoders (`EncType=3`, `6`, `8`) and for analog position feedback (`EncType=7`, where the analog reading is run through the same direction-handling code path). For incremental/SIN-COS types the value is not produced.
 - **Central-i disconnect.** A disconnected port supplies no new accepted transport word. The retained-feedback repair does not add a position-hold or initialization guarantee for inactive ports; this keyword alone does not establish usable feedback.

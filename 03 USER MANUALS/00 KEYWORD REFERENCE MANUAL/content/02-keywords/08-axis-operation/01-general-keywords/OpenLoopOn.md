@@ -2,11 +2,8 @@
 keyword: OpenLoopOn
 summary: Opens the control loop at a chosen point (none, current, or voltage).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 144
 attributes:
   access: rw

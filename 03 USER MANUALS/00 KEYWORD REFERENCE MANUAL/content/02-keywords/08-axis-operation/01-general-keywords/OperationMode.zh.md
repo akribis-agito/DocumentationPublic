@@ -2,11 +2,8 @@
 keyword: OperationMode
 summary: 选择轴的控制模式以及哪些控制环处于激活状态。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 78
 attributes:
   access: rw

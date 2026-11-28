@@ -2,18 +2,15 @@
 keyword: ComtStatus
 summary: Read-only array reporting the actual commutation (phasing) status of the axis.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 143
 attributes:
   access: ro
   scope: axis
   flash: false
   type: array
-  array_size: 3
+  array_size: 11
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
@@ -24,9 +21,7 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    array_size: 4
+overrides: {}
 last_updated: '2026-07-29'
 doc_revision: '2026.09'
 ---
@@ -49,6 +44,10 @@ The array holds the following elements (1-indexed):
 | `[1]` | Phasing status. Default 0. See the value table below. |
 | `[2]` | Number of consecutive successful jumps during the "jump to zero" search method (`ComtMode[1]=0`). Default 0; the search completes after 3 consecutive in-range jumps. |
 | `[3]` | Bidirectional-search state (central-i v5 only). Reports the progress of a bidirectional commutation search: `0` unused, `1` armed, `2` first direction finished, `3` both directions finished. This index does not exist on v4/standalone. |
+| `[4]` | VBus learning status. 0 idle, 1 running, 2 finished, -1 retry limit, -2 voltage saturation, -3 unexpected motor-off, -4 wrong domain. |
+| `[5]` | Learned peak voltage in PWM codes on firmware with the revised search. |
+| `[11]` | Phasing method in use. Zero before the first run. |
+| `[12]` | Signed 32-bit completion counter. Increments on success, decrements on failure and wraps. Read before triggering and compare afterward. |
 
 `ComtStatus[1]` (phasing status) values:
 
@@ -75,6 +74,8 @@ The array holds the following elements (1-indexed):
 | -15 | Commutation failed: a hard stop was reached during the search (central-i v5 only). |
 | -16 | Commutation failed: no Hall transition was found during fine Hall learning (central-i v5 only). |
 | -17 | Commutation refused: phasing would drive voltage directly into an external amplifier, which is not allowed. The axis is turned off (central-i v5 only). |
+| -18 | Automatic VBus learning failed. Read `[4]` for the reason. |
+| -19 | Invalid step count. Method 0 requires ComtMode[3] ≥ 1 and method 5 requires ComtMode[21] ≥ 1. |
 
 The illegal-Hall errors (`-7`, `-9` … `-12`) are raised when [HallsValue](HallsValue.md) reads `0` or `7` (the two combinations outside the legal range 1–6), or when the observed Hall sequence does not match the expected order.
 
@@ -82,7 +83,7 @@ The illegal-Hall errors (`-7`, `-9` … `-12`) are raised when [HallsValue](Hall
 
 The "jump to zero" (`ComtMode[1]=0`) and minimal-jumps search (`ComtMode[1]=5`) commutation methods find the electrical angle by driving phase voltage (`Va`/`Vb`/`Vc`) directly — see [ComtMode](ComtMode.md). That voltage cannot be sent into an external amplifier, so on an axis configured for one, with commutation left in its default voltage domain (i.e. not switched to an explicit current domain), the controller refuses to phase: it sets `ComtStatus[1]` to `-17` and turns the motor off.
 
-For minimal-jumps search this is the final status. For "jump to zero", the refusal happens inside the same control cycle as the method's own end-of-jump check, which then finds the motor already off and immediately overwrites the status to `-1` (unexpected motor off) — so on this method `-17` is transient and what actually persists is `-1` with the motor off. Either way the outcome is the same: phasing is refused and the motor stays off.
+Firmware with the revised search retains -17 as the final status for both methods. Earlier jump-to-zero implementations may subsequently report -1.
 
 ### Burn-in mode (status `600`)
 

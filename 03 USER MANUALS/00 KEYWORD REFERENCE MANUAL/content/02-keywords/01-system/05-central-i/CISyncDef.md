@@ -2,11 +2,8 @@
 keyword: CISyncDef
 summary: Per-axis array defining the parameters exchanged synchronously each control cycle.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 506
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: ForceCmdSrc
 summary: 在力模式下选择力参考的来源。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 570
 attributes:
   access: rw
@@ -20,13 +17,13 @@ attributes:
   units: none
   range:
   - 0
-  - 2
+  - 3
   default: 0
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-09-29'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # ForceCmdSrc

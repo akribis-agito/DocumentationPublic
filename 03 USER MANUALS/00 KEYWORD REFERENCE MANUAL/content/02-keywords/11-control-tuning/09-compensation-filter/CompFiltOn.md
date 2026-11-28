@@ -2,9 +2,8 @@
 keyword: CompFiltOn
 summary: Enables the compensation filter that blends measured force with a position-predicted force.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 834
 attributes:
   access: rw

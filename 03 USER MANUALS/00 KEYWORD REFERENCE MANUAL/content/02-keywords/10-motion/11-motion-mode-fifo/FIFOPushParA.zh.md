@@ -1,13 +1,9 @@
 ---
 keyword: FIFOPushParA
 summary: 将抛物线（恒加速度）段压入 FIFO 运动队列。
-language: zh-CN
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 288
 attributes:
   access: rw
@@ -28,6 +24,7 @@ attributes:
 overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
+language: zh-CN
 ---
 # FIFOPushParA
 

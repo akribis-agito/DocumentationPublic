@@ -2,11 +2,8 @@
 keyword: LoggerStatus
 summary: 报告连续数据记录器的当前状态。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 534
 attributes:
   access: ro

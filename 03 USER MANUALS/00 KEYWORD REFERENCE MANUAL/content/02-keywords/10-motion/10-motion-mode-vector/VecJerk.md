@@ -2,11 +2,8 @@
 keyword: VecJerk
 summary: Jerk limit (0-9) for vector motion, smoothing the resultant velocity into an S-curve.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 639
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: CIGlobalStat
 summary: 编码所有 Central-i 端口连接状态的只读寄存器。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 510
 attributes:
   access: ro

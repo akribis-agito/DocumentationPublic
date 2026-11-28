@@ -2,18 +2,15 @@
 keyword: RecStart
 summary: Command that starts recording on the selected scope.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 248
 attributes:
   access: ro
   scope: non-axis
   flash: false
   type: array
-  array_size: 2
+  array_size: 3
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
@@ -24,7 +21,33 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  agc300-et:
+    array_size: 2
+  agd200-et-2d01:
+    array_size: 2
+  agd200-et-2d02:
+    array_size: 2
+  agd200-et-2d05:
+    array_size: 2
+  agd200-et-2d05-71:
+    array_size: 2
+  agd155-af-2a06:
+    array_size: 2
+  agd155-af-2a10:
+    array_size: 2
+  agd155-ec:
+    array_size: 2
+  agd155-ec-var34:
+    array_size: 2
+  agd155-ec-var34-3:
+    array_size: 2
+  agd156-ec:
+    array_size: 2
+  agd101-ec-34a:
+    array_size: 2
+  agd101-ec-17a:
+    array_size: 2
 last_updated: '2026-05-28'
 doc_revision: '2026.06'
 ---
@@ -52,7 +75,7 @@ After starting, monitor progress with [RecStat](RecStat.md) and, if needed, forc
 - Records each channel's data type and user-unit scaling, converts the trigger thresholds into internal units, and seeds the previous/initial trigger-source values used to detect edges and changes.
 - Computes how many points fall before the trigger (from `RecTrigPos`) and how many must follow it, then clears the buffer indices and counters.
 
-It then arms the scope by setting [RecStat](RecStat.md) to 1 (filling pre-trigger). If no trigger is configured (the first trigger type is "none"), the scope skips straight to status 3 (trigger detected) and records the full requested length immediately.
+It then sets [RecStat](RecStat.md) to 1 while pre-trigger samples are needed. Firmware with the [recorder correction](RecTrigPos.md) arms a trigger at status 2 immediately when the rounded pre-trigger count is zero. If no trigger is configured (the first trigger type is "none"), the scope skips straight to status 3 (trigger detected) and records the full requested length immediately.
 
 ## Examples
 

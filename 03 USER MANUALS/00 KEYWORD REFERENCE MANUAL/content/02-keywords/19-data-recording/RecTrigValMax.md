@@ -2,32 +2,52 @@
 keyword: RecTrigValMax
 summary: Upper bound for range-based trigger activation logic (RecTrigTyp 9–12).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 293
 attributes:
   access: rw
   scope: non-axis
   flash: true
   type: array
-  array_size: 4
-  data_type: int32
+  array_size: 7
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range:
-  - -2147483648
-  - 2147483647
-  default: 0
+  range: null
+  default: 0.0
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
+  ci-master:
     data_type: float64
-    range: null
+  agc300-et:
+    array_size: 4
+  agd200-et-2d01:
+    array_size: 4
+  agd200-et-2d02:
+    array_size: 4
+  agd200-et-2d05:
+    array_size: 4
+  agd200-et-2d05-71:
+    array_size: 4
+  agd155-af-2a06:
+    array_size: 4
+  agd155-af-2a10:
+    array_size: 4
+  agd155-ec:
+    array_size: 4
+  agd155-ec-var34:
+    array_size: 4
+  agd155-ec-var34-3:
+    array_size: 4
+  agd156-ec:
+    array_size: 4
+  agd101-ec-34a:
+    array_size: 4
+  agd101-ec-17a:
+    array_size: 4
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 ---

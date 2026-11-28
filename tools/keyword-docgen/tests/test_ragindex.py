@@ -10,12 +10,15 @@ def _fm():
     return {
         "keyword": "PosGain",
         "summary": "Proportional position gain.",
-        "availability": {"standalone": ["v4"], "central-i": ["v4", "v5"]},
+        "availability": ["controller", "ci-master"],
+        "products": ["agd155-ec", "agm800"],
         "can_code": 100,
         "attributes": {
             "access": "rw", "scope": "axis", "units": "user",
             "range": [0, 20000], "default": 0, "data_type": "int32",
         },
+        "overrides": {"ci-master": {"data_type": "int64"},
+                      "agd155-ec": {"range": [0, 5000]}},
     }
 
 
@@ -27,7 +30,9 @@ def test_fact_header_includes_key_facts():
     assert "100" in h                       # can_code
     assert "axis" in h                      # scope
     assert "20000" in h                     # range bound
-    assert "v4" in h and "v5" in h          # versions
+    assert "controller/ci-master" in h      # product types
+    assert "products=agd155-ec,agm800" in h
+    assert "differs on ci-master,agd155-ec" in h
     assert "Proportional position gain." in h
 
 
@@ -67,7 +72,9 @@ def test_chunk_record_structure():
     assert md["can_code"] == 100
     assert md["scope"] == "axis"
     assert md["units"] == "user"
-    assert md["availability"] == {"standalone": ["v4"], "central-i": ["v4", "v5"]}
+    assert md["availability"] == ["controller", "ci-master"]
+    assert md["products"] == ["agd155-ec", "agm800"]
+    assert md["overrides"]["agd155-ec"] == {"range": [0, 5000]}
     assert md["last_updated"] == "2026-06-02"
     assert md["doc_revision"] == "2026.06"
     assert md["sha256"] == "abc123"

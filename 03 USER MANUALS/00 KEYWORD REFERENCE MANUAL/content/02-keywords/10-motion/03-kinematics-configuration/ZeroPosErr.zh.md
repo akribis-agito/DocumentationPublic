@@ -2,9 +2,8 @@
 summary: 通过将位置参考对齐到反馈来将轴位置误差清零（v5 central-i）。
 keyword: ZeroPosErr
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 669
 attributes:
   access: ro
@@ -23,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-09'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # ZeroPosErr

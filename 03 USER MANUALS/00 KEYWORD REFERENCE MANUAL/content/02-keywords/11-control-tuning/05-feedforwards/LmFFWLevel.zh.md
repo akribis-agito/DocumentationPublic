@@ -2,9 +2,7 @@
 keyword: LmFFWLevel
 summary: 应用于感性（L di/dt）电压前馈贡献量的百分比级别。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 846
 attributes:
   access: rw

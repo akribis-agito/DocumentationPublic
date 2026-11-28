@@ -2,12 +2,9 @@
 keyword: RptMode
 summary: Selects whether repetitive point-to-point motion is bidirectional or unidirectional.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
-can_code: 712
+- controller
+- ci-master
+can_code: 730
 attributes:
   access: rw
   scope: axis
@@ -24,9 +21,7 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    can_code: 730
+overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 ---

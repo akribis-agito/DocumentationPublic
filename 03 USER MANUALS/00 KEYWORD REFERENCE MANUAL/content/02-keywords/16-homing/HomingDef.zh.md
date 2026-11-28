@@ -1,13 +1,9 @@
 ---
 keyword: HomingDef
 summary: 数组，定义最多 20 个回零步骤，每个步骤包含一条指令及其参数。
-language: zh-CN
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 341
 attributes:
   access: rw
@@ -28,6 +24,7 @@ attributes:
 overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
+language: zh-CN
 ---
 # HomingDef
 
@@ -227,6 +224,8 @@ doc_revision: '2026.06'
 | HomingDef[3, 13, …, 193] | 要监视的 UserParam 索引。 |
 | HomingDef[4, 14, …, 194] | 等待的目标值。 |
 | HomingDef[5, 15, …, 195] | 超时【控制器周期】。 |
+
+回零锁存步骤会暂时将硬件切换到主编码器。在此期间读取或保存 `EncSinCosHWEn` 得到的仍是用户配置值，尝试更改该选择将被拒绝。回零完成、超时或中止后，固件恢复配置的信号源，原有的锁存和事件保持禁用。模式 0 在下次启用时学习偏移量，模式 1 需要重新执行 `LockEventInit`，模式 2 在信号源写入成功且远端稳定后重新计算。
 
 ## 示例
 

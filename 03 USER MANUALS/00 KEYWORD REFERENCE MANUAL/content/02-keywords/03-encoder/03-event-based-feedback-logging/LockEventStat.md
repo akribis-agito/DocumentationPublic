@@ -2,9 +2,8 @@
 keyword: LockEventStat
 summary: Reports the initialization state of the lock/event subsystem.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 833
 attributes:
   access: ro
@@ -17,7 +16,7 @@ attributes:
   ok_motor_on: true
   units: none
   range:
-  - 0
+  - -2
   - 1
   default: 0
   scaling: 1.0

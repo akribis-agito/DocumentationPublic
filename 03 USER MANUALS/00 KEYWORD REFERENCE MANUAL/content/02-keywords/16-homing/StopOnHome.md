@@ -2,11 +2,8 @@
 keyword: StopOnHome
 summary: Enables automatic stop of axis motion when the home digital input is asserted.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 169
 attributes:
   access: rw

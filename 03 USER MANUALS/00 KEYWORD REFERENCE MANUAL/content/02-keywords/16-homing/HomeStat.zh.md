@@ -1,13 +1,9 @@
 ---
 keyword: HomeStat
 summary: 轴的原点数字量输入的只读状态。
-language: zh-CN
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 111
 attributes:
   access: ro
@@ -28,6 +24,7 @@ attributes:
 overrides: {}
 last_updated: '2026-05-28'
 doc_revision: '2026.06'
+language: zh-CN
 ---
 # HomeStat
 

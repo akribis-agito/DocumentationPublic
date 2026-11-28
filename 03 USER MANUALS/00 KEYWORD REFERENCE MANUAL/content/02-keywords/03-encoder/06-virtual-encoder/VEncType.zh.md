@@ -2,11 +2,8 @@
 keyword: VEncType
 summary: 设置虚拟编码器的输出格式或信号类型。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 615
 attributes:
   access: rw

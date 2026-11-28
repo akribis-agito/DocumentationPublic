@@ -2,9 +2,7 @@
 keyword: HWTimer
 summary: 用于测量短时间间隔的高分辨率自由运行计数器。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 768
 attributes:
   access: ro

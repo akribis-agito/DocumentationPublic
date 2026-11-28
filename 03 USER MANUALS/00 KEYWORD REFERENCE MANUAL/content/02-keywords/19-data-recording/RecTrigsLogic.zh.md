@@ -2,18 +2,15 @@
 keyword: RecTrigsLogic
 summary: 在并行检测中连接触发条件的逻辑运算符。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 518
 attributes:
   access: rw
   scope: non-axis
   flash: true
   type: array
-  array_size: 3
+  array_size: 5
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
@@ -24,7 +21,33 @@ attributes:
   default: 1
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  agc300-et:
+    array_size: 3
+  agd200-et-2d01:
+    array_size: 3
+  agd200-et-2d02:
+    array_size: 3
+  agd200-et-2d05:
+    array_size: 3
+  agd200-et-2d05-71:
+    array_size: 3
+  agd155-af-2a06:
+    array_size: 3
+  agd155-af-2a10:
+    array_size: 3
+  agd155-ec:
+    array_size: 3
+  agd155-ec-var34:
+    array_size: 3
+  agd155-ec-var34-3:
+    array_size: 3
+  agd156-ec:
+    array_size: 3
+  agd101-ec-34a:
+    array_size: 3
+  agd101-ec-17a:
+    array_size: 3
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

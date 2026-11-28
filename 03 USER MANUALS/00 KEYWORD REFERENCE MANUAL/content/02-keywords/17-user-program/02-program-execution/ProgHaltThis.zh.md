@@ -2,11 +2,8 @@
 keyword: ProgHaltThis
 summary: 暂停当前正在执行的用户程序任务。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 258
 attributes:
   access: ro

@@ -2,18 +2,15 @@
 keyword: RecTrigTyp
 summary: 每个触发的触发激活逻辑（边沿、比较或范围）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 245
 attributes:
   access: rw
   scope: non-axis
   flash: true
   type: array
-  array_size: 4
+  array_size: 7
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
@@ -24,7 +21,33 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  agc300-et:
+    array_size: 4
+  agd200-et-2d01:
+    array_size: 4
+  agd200-et-2d02:
+    array_size: 4
+  agd200-et-2d05:
+    array_size: 4
+  agd200-et-2d05-71:
+    array_size: 4
+  agd155-af-2a06:
+    array_size: 4
+  agd155-af-2a10:
+    array_size: 4
+  agd155-ec:
+    array_size: 4
+  agd155-ec-var34:
+    array_size: 4
+  agd155-ec-var34-3:
+    array_size: 4
+  agd156-ec:
+    array_size: 4
+  agd101-ec-34a:
+    array_size: 4
+  agd101-ec-17a:
+    array_size: 4
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

@@ -2,11 +2,8 @@
 keyword: ProgResetAll
 summary: Stops all running threads and resets every pointer and stack.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 192
 attributes:
   access: rw

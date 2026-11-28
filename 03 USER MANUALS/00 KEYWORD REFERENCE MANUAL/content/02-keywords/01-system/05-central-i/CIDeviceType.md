@@ -2,11 +2,8 @@
 keyword: CIDeviceType
 summary: Selects the role/class of the Central-i port on an axis.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 503
 attributes:
   access: rw
@@ -21,7 +18,7 @@ attributes:
   range:
   - -2147483648
   - 2147483647
-  default: null
+  default: 65537
   scaling: 1.0
   implemented: final
 overrides: {}

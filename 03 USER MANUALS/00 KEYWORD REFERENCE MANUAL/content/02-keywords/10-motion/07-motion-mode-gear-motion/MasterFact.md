@@ -2,11 +2,8 @@
 keyword: MasterFact
 summary: Numerator of the gear ratio applied to the master-variable delta.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 120
 attributes:
   access: rw
@@ -25,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-11-23'
+doc_revision: '2026.11'
 ---
 # MasterFact
 
@@ -52,7 +49,7 @@ A negative `MasterFact` reverses the follower direction relative to the master. 
 
 ### Note on the separate direct-slave mode
 
-The direct-slave motion mode ([MotionMode](../02-motion-configuration/MotionMode.md) `= 10`, see [MotionMode10](MotionMode10.md)) also uses `MasterFact` as its scaling factor, but reads it directly without going through `MasterPos` or `MasterFilt`. It is a separate mechanism from gear motion (`MotionMode = 5` and `= 6`) — see [MotionMode10](MotionMode10.md) for that mode's input convention.
+On multi-axis firmware with the fractional tracking fix, direct slave mode also uses the reduced `MasterFact / MasterFactDen` ratio. Axis A carries the remainder as it follows changes in axis B’s reference. See [MotionMode10](MotionMode10.md).
 
 ## Examples
 
@@ -65,7 +62,7 @@ AMasterFact          ; read current value
 
 ## Changes between versions
 
-In **v4** the ratio is `MasterFact / 65536` (numerator only); there is no denominator in the accumulation. In **v5 (central-i)** the full rational ratio `MasterFact / MasterFactDen` is applied, carrying the fractional remainder, so non-integer ratios are exact and free of long-term drift; see [MasterFactDen](MasterFactDen.md). **v5 is central-i only.**
+Legacy v4 gearing rounds the requested ratio to a multiple of 1/65536. Firmware using `MasterFact / MasterFactDen` carries the fractional remainder from one cycle to the next. At 1:3 the old factor was 21845/65536. With positive net master travel the legacy follower falls behind the v5 follower. Reversing net travel reverses the difference. A ratio that rounds upward gives the opposite result. See [MasterFactDen](MasterFactDen.md) for the measured differences and [MasterModRev](MasterModRev.md) to convert a saved wrap period.
 
 ## See also
 

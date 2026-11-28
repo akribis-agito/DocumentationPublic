@@ -2,9 +2,7 @@
 keyword: EventTblMode
 summary: 选择预加载硬件事件表使用公共设置还是逐行设置。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 975
 attributes:
   access: rw
@@ -23,8 +21,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-10-29'
-doc_revision: '2026.10'
+last_updated: '2026-10-28'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # EventTblMode
@@ -40,7 +38,7 @@ language: zh-CN
 
 加载前设置此参数。该参数不保存到闪存，准备或运行期间不可修改。先用 `EventOn=0` 停止，再修改并重新加载。每次运行都预加载所选范围，最多 2048 行，不提供保留窗口模式。
 
-对于此硬件预加载路径，首个所选行决定整个运行是否采用翻转模式：该行宽度为 0，或为 -1 且 `EventPulseWid=0` 时，两种模式均使每次事件翻转输出。后续行的宽度不会将脉冲运行改为翻转模式。 输出极性同样在整个运行期间保持不变：首个解析后宽度的符号适用于所有行，模式 1 只改变脉冲时长和输出选择。在脉冲模式下，转换为零个硬件单位的宽度会使 EventLoad 在使能前失败；继承和量化规则参见 EventTableWid。
+对于此硬件预加载路径，首个所选行决定整个运行是否采用翻转模式：该行宽度为 0，或为 -1 且 `EventPulseWid=0` 时，两种模式均使每次事件翻转输出。后续行的宽度不会将脉冲运行改为翻转模式。 在硬件预加载的两种模式中，首个解析后的脉宽决定整次运行的极性。例如，在模式 1 中，如果首行为 -1 且 EventPulseWid 为负，后续行即使指定正脉宽，输出仍保持反向；后续行可改变脉宽大小和输出选择。在脉冲模式中，舍入为零个硬件步长的脉宽会使准备失败。
 
 ```text
 AEventOn=0

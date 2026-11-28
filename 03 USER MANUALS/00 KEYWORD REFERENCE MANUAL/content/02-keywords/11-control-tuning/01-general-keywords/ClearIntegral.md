@@ -2,11 +2,8 @@
 keyword: ClearIntegral
 summary: Command that zeroes the velocity-loop integrator of the addressed axis.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 412
 attributes:
   access: ro

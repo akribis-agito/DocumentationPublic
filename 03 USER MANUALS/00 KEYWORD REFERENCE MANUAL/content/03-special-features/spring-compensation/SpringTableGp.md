@@ -2,11 +2,8 @@
 keyword: SpringTableGp
 summary: A reserved, not-yet-implemented keyword, expressed in user units, that is associated with the (also not-yet-implemented) [SpringTable](SpringTable.md).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 598
 attributes:
   access: rw

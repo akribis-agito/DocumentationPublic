@@ -2,11 +2,8 @@
 keyword: MotionMode
 summary: 选择发出 Begin 时所执行的运动类型。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 141
 attributes:
   access: rw
@@ -20,17 +17,17 @@ attributes:
   units: none
   range:
   - -1
-  - 19
+  - 21
   default: -1
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
+  ci-master:
     range:
     - -1
     - 23
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-09-25'
+doc_revision: '2026.09'
 language: zh-CN
 ---
 # MotionMode
@@ -63,7 +60,7 @@ language: zh-CN
 | 7 | **电子凸轮（ECAM）运动 - 直接模式** 轴将进行永久性的相对运动，其中相对位置参考（相对于 Begin 命令时的初始位置）取决于主变量。相对位置参考在每个控制器周期从一个可定制的数组中获得，该数组映射到用户定义且均匀间隔的主位置范围。这类似于机械凸轮-从动件运动。更多信息请参阅 Motion mode – ECAM motion。 |
 | 8 | **电子凸轮（ECAM）运动 - 间接模式** 该运动模式保留供内部使用。 |
 | 9 | FIFO 运动 |
-| 10 | **直接从轴运动** 轴 A 的位置参考在每个控制周期由轴 B 位置参考的变化直接驱动，并按 [MasterFact](../07-motion-mode-gear-motion/MasterFact.md) 缩放。这是一个独立的、范围更窄的机制，区别于电子齿轮运动（它不使用 `GearMaster`、`MasterPos` 或 `MasterFilt`）。仅在多轴版本上可用。更多信息请参阅 [MotionMode10](../07-motion-mode-gear-motion/MotionMode10.md)。 |
+| 10 | **直接从轴运动** 轴 A 的位置参考在每个控制周期由轴 B 位置参考的变化直接驱动，并按 `MasterFact / MasterFactDen` 缩放。这是一个独立的、范围更窄的机制，区别于电子齿轮运动（它不使用 `GearMaster`、`MasterPos` 或 `MasterFilt`）。仅在多轴版本上可用。更多信息请参阅 [MotionMode10](../07-motion-mode-gear-motion/MotionMode10.md)。 |
 | 11 | CNCA 运动 |
 | 12 | 摇杆位置直接模式 |
 | 13 | 摇杆位置间接模式 |

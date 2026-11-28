@@ -1,37 +1,28 @@
 ---
 keyword: ScheduleGains
+summary: 只读数组，报告增益调度选定当前激活增益组后控制环正在使用的整定增益。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 274
 attributes:
   access: ro
   scope: axis
   flash: false
   type: array
-  array_size: 6
-  data_type: int32
+  array_size: 8
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range:
-  - -2147483648
-  - 2147483647
+  range: null
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    array_size: 7
-    data_type: float32
-    range: null
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+overrides: {}
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 language: zh-CN
-summary: 只读数组，报告增益调度选定当前激活增益组后控制环正在使用的整定增益。
 ---
 # ScheduleGains
 
@@ -49,6 +40,7 @@ summary: 只读数组，报告增益调度选定当前激活增益组后控制�
 | 4 | 速度环积分增益 |
 | 5 | 速度前馈增益 |
 | 6 | 位置环积分增益（仅限 central-i v5） |
+| 7 | 速度环当前生效的积分电流限值（mA），来自 [VelIntLim](../04-velocity-control/VelIntLim.zh.md) |
 
 索引 6（位置环积分增益）仅在 central-i v5 上存在，其中 [PosKi](../03-position-control/PosKi.md) 可用且可参与调度。在 v4 上仅报告索引 1–5。
 
@@ -56,7 +48,7 @@ summary: 只读数组，报告增益调度选定当前激活增益组后控制�
 
 每个控制周期，控制器根据 [ScheduleMode](ScheduleMode.md) 选择的规则确定激活的增益组编号（[ScheduleSet](ScheduleSet.md)），然后从该组加载 `ScheduleGains`：
 
-- 在步进模式下，调度增益元素（v4 上为五个，central-i v5 上为六个）从激活组索引处对应的增益数组复制——例如 `ScheduleGains[2]` = [AccFFW](../05-feedforwards/AccFFW.md)`[set]`。
+- 在步进模式下，调度增益元素（v4 上为五个；已集成该功能的 v5 固件还将积分限值调度到元素 7）从激活组索引处对应的增益数组复制——例如 `ScheduleGains[2]` = [AccFFW](../05-feedforwards/AccFFW.md)`[set]`。
 - 在插值模式（速度范围或位置范围）下，每个元素通过在当前测量值两侧的两个增益组之间线性插值计算得出，因此报告值连续变化而非阶跃变化。
 - 当轴使用龙门配对调度时，增益取自龙门整定数组而非标准数组（参见 [ScheduleGntry](ScheduleGntry.md)）。
 

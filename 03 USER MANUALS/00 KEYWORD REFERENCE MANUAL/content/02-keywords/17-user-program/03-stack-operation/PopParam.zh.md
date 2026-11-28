@@ -2,11 +2,8 @@
 keyword: PopParam
 summary: 将数值栈顶值弹出并写入参数。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 202
 attributes:
   access: rw

@@ -2,18 +2,15 @@
 keyword: BuffPos
 summary: 定义样条缓冲轨迹的路径点位置数组（用户单位）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 543
 attributes:
   access: rw
   scope: axis
   flash: false
   type: array
-  array_size: 10001
+  array_size: 6
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
@@ -24,7 +21,9 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    array_size: 10001
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

@@ -2,11 +2,8 @@
 keyword: PDPosFilt
 summary: 在直接脉冲/方向模式下对 PDPos 进行平滑的一阶低通截止频率（Hz/100）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 150
 attributes:
   access: rw

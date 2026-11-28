@@ -1,11 +1,9 @@
 ---
 keyword: TheorCurArray
+summary: 存储自动电流环 PI 整定所用理论电流环响应的数组参数，用作计算代价函数的参考。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 671
 attributes:
   access: rw
@@ -13,24 +11,18 @@ attributes:
   flash: true
   type: array
   array_size: 309
-  data_type: int32
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range:
-  - -2147483648
-  - 2147483647
+  range: null
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    data_type: float32
-    range: null
+overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 存储自动电流环 PI 整定所用理论电流环响应的数组参数，用作计算代价函数的参考。
 ---
 # TheorCurArray
 

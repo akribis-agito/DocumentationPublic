@@ -2,11 +2,8 @@
 keyword: ECAMCycles
 summary: Number of occurrences of the cyclical ECAM cam pattern (and endless modes).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 305
 attributes:
   access: rw

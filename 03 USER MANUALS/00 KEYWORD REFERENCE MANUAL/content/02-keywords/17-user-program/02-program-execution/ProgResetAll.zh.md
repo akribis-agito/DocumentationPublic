@@ -2,11 +2,8 @@
 keyword: ProgResetAll
 summary: 停止所有正在运行的线程，并重置每个指针和栈。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 192
 attributes:
   access: rw

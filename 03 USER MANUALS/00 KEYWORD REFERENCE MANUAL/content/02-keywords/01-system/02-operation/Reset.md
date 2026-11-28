@@ -2,11 +2,8 @@
 keyword: Reset
 summary: Performs a software power cycle; flash parameters are reloaded on restart.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 234
 attributes:
   access: ro

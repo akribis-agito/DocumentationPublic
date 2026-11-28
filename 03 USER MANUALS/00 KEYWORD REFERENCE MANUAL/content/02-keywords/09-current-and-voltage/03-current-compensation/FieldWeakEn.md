@@ -2,9 +2,8 @@
 keyword: FieldWeakEn
 summary: Enables field weakening, allowing operation above the base speed.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 875
 attributes:
   access: rw
@@ -14,14 +13,15 @@ attributes:
   array_size: 1
   data_type: int32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
   range:
   - 0
   - 1
   default: 0
-  scaling: 1
+  scaling: 1.0
   implemented: final
+overrides: {}
 last_updated: '2026-07-30'
 doc_revision: '2026.09'
 ---
@@ -31,6 +31,8 @@ doc_revision: '2026.09'
 Enables field weakening, allowing operation above the base speed.
 
 ## Overview
+
+Production standalone drives with the #1594 firmware change accept only 0, including when restoring saved parameters. Central-i accepts 0 or 1.
 
 Every motor has a *base speed*: the speed at which its own back-EMF consumes the whole DC bus, leaving no voltage to drive current. Above it the machine stops accelerating regardless of what is commanded.
 

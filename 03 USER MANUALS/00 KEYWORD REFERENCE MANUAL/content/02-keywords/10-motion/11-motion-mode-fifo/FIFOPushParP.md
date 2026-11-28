@@ -2,11 +2,8 @@
 keyword: FIFOPushParP
 summary: Pushes a parabolic segment defined by a position value into the FIFO motion queue.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 287
 attributes:
   access: rw
@@ -26,7 +23,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 ---
 # FIFOPushParP
 

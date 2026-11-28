@@ -2,11 +2,8 @@
 keyword: Load
 summary: Reloads all parameters from flash into volatile memory, discarding unsaved changes.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 233
 attributes:
   access: ro
@@ -25,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-30'
-doc_revision: '2026.06'
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 ---
 # Load
 
@@ -68,6 +65,10 @@ On central-i the command is acknowledged immediately — an early empty reply te
 ```text
 ALoad                ; reload all flash-saved parameters, discarding unsaved edits
 ```
+
+## Orbit FR
+
+The integrated Orbit FR AGM800 checks its saved parameter format before restoring the records. Migrate older configurations using a mnemonic export. An old raw parameter image cannot be loaded into the integrated layout.
 
 ## See also
 

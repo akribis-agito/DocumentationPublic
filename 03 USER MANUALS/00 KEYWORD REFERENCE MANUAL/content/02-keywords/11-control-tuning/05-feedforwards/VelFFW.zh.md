@@ -2,11 +2,8 @@
 keyword: VelFFW
 summary: 速度前馈增益，作用于位置参考的一阶导数。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 108
 attributes:
   access: rw
@@ -14,22 +11,17 @@ attributes:
   flash: true
   type: array
   array_size: 6
-  data_type: int32
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
   range:
   - 0
-  - 50000
+  - 1000000000
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    data_type: float32
-    range:
-    - 0
-    - 1000000000
+overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN

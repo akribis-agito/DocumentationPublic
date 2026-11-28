@@ -1,13 +1,9 @@
 ---
 keyword: HomingOn
 summary: 启动并报告轴的当前回零过程。
-language: zh-CN
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 340
 attributes:
   access: rw
@@ -27,7 +23,8 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-21'
-doc_revision: '2026.10'
+doc_revision: '2026.11'
+language: zh-CN
 ---
 # HomingOn
 

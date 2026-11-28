@@ -2,9 +2,8 @@
 summary: General-purpose, non-axis 64-bit signed integer array for shared user/host storage.
 keyword: GenDataLL
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 775
 attributes:
   access: rw

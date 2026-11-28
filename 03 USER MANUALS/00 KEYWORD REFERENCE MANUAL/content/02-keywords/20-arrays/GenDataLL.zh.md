@@ -2,9 +2,8 @@
 summary: 通用非轴 64 位有符号整数数组，用于用户/上位机共享存储。
 keyword: GenDataLL
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 775
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: ProgArg
 summary: 传递给索引用户程序任务的参数值。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 439
 attributes:
   access: rw
@@ -20,15 +17,13 @@ attributes:
   units: none
   range:
   - 0
-  - 20
+  - 26
   default: 0
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
-    range:
-    - 0
-    - 26
+  ci-master:
+    array_size: 13
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

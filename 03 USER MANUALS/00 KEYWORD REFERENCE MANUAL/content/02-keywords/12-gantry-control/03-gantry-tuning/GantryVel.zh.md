@@ -2,9 +2,8 @@
 summary: 只读龙门速度反馈——主轴为共模（线性），偏摆轴为差模（偏摆）。
 keyword: GantryVel
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 676
 attributes:
   access: ro
@@ -12,17 +11,22 @@ attributes:
   flash: false
   type: scalar
   array_size: 1
-  data_type: int64
+  data_type: int32
   ok_in_motion: true
   ok_motor_on: true
   units: user
   range:
-  - -2251799813685248
-  - 2251799813685247
+  - -2147483648
+  - 2147483647
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    data_type: int64
+    range:
+    - -2251799813685248
+    - 2251799813685247
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN

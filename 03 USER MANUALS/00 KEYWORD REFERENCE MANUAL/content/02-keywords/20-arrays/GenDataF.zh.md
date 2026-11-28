@@ -2,9 +2,8 @@
 summary: 通用非轴 32 位单精度浮点数组，用于用户/上位机共享存储。
 keyword: GenDataF
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 719
 attributes:
   access: rw

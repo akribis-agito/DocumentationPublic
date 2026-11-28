@@ -2,9 +2,8 @@
 keyword: PosPDUnitGrp
 summary: Read-only list of the pulse-and-direction position keywords that share the P/D position user-unit scaling and label.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 817
 attributes:
   access: ro

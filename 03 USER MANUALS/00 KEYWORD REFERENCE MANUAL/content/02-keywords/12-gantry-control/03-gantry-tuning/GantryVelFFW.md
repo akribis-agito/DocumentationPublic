@@ -2,9 +2,8 @@
 summary: Velocity feedforward gain for the gantry yaw correction controller.
 keyword: GantryVelFFW
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 678
 attributes:
   access: rw

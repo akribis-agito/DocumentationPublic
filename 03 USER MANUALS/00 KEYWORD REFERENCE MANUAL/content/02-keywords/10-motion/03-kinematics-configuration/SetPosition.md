@@ -2,11 +2,8 @@
 keyword: SetPosition
 summary: Redefines the axis position to a given value without moving the motor.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 154
 attributes:
   access: rw
@@ -14,24 +11,19 @@ attributes:
   flash: false
   type: scalar
   array_size: 1
-  data_type: int32
+  data_type: int64
   ok_in_motion: false
   ok_motor_on: true
   units: func
   range:
-  - -2147483648
-  - 2147483647
+  - -2251799813685248
+  - 2251799813685247
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    data_type: int64
-    range:
-    - -2251799813685248
-    - 2251799813685247
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+overrides: {}
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 ---
 # SetPosition
 
@@ -81,7 +73,9 @@ It is also blocked while the axis is in motion (`ok_in_motion: false`).
 
 `SetPosition` adjusts the hardware-to-firmware capture offset by the actual change to the selected feedback coordinate. Subsequent `LockVal` publications use the new origin without toggling `LockEn` or repeating `LockEventInit`; this also applies to a capture whose mailbox reply completes after the position change. Previously published `LockVal` and capture-table entries are not rewritten. A source whose coordinate did not change is not shifted.
 
-An already-armed hardware event sequence keeps its physical target positions across `SetPosition`, including table entries sent afterward. To start a sequence using the new origin, disable events and arm them again (`EventOn=0`, then `EventOn=1`). Writing `EventOn=1` while already enabled does not restart or realign it. This does not initialize a previously uninitialized lock/event source or remove the stationary-source requirement for initialization.
+Except for an EventLoad-managed `EventType=3` run on AGM800 and AGM800-EC, an already-armed hardware event sequence keeps its physical target positions across `SetPosition`, including table entries sent afterward. While such a run on any axis is loading, armed, finishing, or still owns the axis after cleanup failed, `SetPosition` is refused with error 151; while the table is Ready and not yet armed, `SetPosition` discards the prepared load, so issue a fresh [EventLoad](../../18-event-generation/EventLoad.md) before arming. To start a sequence using the new origin, disable events and arm them again (`EventOn=0`, then `EventOn=1`). Writing `EventOn=1` while already enabled does not restart or realign it. This does not initialize a previously uninitialized lock/event source or remove the stationary-source requirement for initialization.
+
+If cleanup fails, the event-table lease remains held until reconnect recovery. A stopped run is therefore not by itself permission to change coordinates.
 
 ## Examples
 

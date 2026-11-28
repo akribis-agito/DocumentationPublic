@@ -2,9 +2,8 @@
 keyword: CompTbleCrrct
 summary: 每单元接触点修正值，沿位置轴平移补偿表。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 840
 attributes:
   access: rw
@@ -12,19 +11,24 @@ attributes:
   flash: true
   type: array
   array_size: 3
-  data_type: int64
+  data_type: int32
   ok_in_motion: true
   ok_motor_on: true
   units: none
   range:
-  - -2251799813685248
-  - 2251799813685247
+  - -2147483648
+  - 2147483647
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+overrides:
+  ci-master:
+    data_type: int64
+    range:
+    - -2251799813685248
+    - 2251799813685247
+last_updated: '2026-11-23'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # CompTbleCrrct
@@ -48,7 +52,7 @@ language: zh-CN
 | 1 | 建表时记录的接触点位置 |
 | 2 | 当前单元的实际接触点位置 |
 
-两个元素的默认值均为 0，即不产生平移。
+两个元素的默认值均为 0，即不产生平移。更改位置的显示或输入单位后，这两个数值仍以主编码器计数表示。例如，将位置单位从计数改为毫米后，原先保存为 10,000 的接触点读数仍为 10,000。[CompTbleGap](CompTbleGap.md) 和 [CompTbleInit](CompTbleInit.md) 使用位置单位组。[CompTbleEnd](CompTbleEnd.md) 表示表索引。
 
 ## 示例
 

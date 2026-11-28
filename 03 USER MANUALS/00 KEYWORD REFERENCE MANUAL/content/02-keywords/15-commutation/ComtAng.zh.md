@@ -2,11 +2,8 @@
 keyword: ComtAng
 summary: 只读的电机瞬时换相（电气）角度，以度为单位乘以 100。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 73
 attributes:
   access: ro

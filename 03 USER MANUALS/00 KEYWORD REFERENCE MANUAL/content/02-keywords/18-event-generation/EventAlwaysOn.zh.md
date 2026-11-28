@@ -2,11 +2,8 @@
 keyword: EventAlwaysOn
 summary: 使按间隔事件生成持续运行，不在 EventEndPos 处停止。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 619
 attributes:
   access: rw
@@ -25,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-28'
-doc_revision: '2026.06'
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # EventAlwaysOn
@@ -37,9 +34,9 @@ language: zh-CN
 
 `EventAlwaysOn` 为按间隔事件生成（[EventType](EventType.md) = 1）选择连续（"无限"）运行模式。它**不会**强制输出电平为高；它改变的是引擎*停止*的时机。在正常（窗口）运行模式下，按间隔脉冲在位置超过 [EventEndPos](EventEndPos.md) 后停止。当 `EventAlwaysOn = 1` 时，生成器持续每隔 [EventGap](EventGap.md) 产生一个脉冲，不会到达结束位置，因此只要 [EventOn](EventOn.md) 保持置位，它就持续运行。
 
-软件事件生成与硬件比较均应跳过结束位置检查。即使 `EventBegPos` 与 `EventEndPos` 相等，也不会将无限运行限制为仅生成一次事件。
+软件事件生成与硬件比较均跳过结束位置检查。即使 `EventBegPos` 与 `EventEndPos` 相等，也不会将无限运行限制为仅生成一次事件。
 
-此设置仅适用于按间隔模式。单次事件、表、硬件表和立即触发方案不受 `EventAlwaysOn` 影响。
+此设置仅适用于按间隔模式。单次事件、表、硬件表和立即触发方案不受 `EventAlwaysOn` 影响；尤其是硬件表运行（`EventType = 3`）始终触发完所选各行后结束。
 
 ## 工作原理
 
@@ -51,6 +48,8 @@ language: zh-CN
 当 `EventAlwaysOn = 1` 时，控制器在 [EventOn](EventOn.md) `0 → 1` 边沿以连续模式置位按间隔引擎，从而跳过通常会终止生成的结束位置检查。若要使其对下次运行生效，请在置位前更改 `EventAlwaysOn`。实际输出状态可通过 [EventLoopback](EventLoopback.md) 读回。
 
 `EventAlwaysOn` 是保存至闪存的轴相关参数，可随时更改。
+
+对于连续的固定间距软件事件，ModRev 回绕时，下一个比较位置与位置反馈同步平移一个模数。因此，即使事件间距不能整除模数，跨圈后仍会保持原来的间距。这适用于控制器上使用软件比较器的轴以及 Central-i 软件事件。
 
 ## 示例
 

@@ -2,11 +2,8 @@
 keyword: ProgEventStat
 summary: 报告每个事件的状态，并允许清除待处理的事件。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 525
 attributes:
   access: rw

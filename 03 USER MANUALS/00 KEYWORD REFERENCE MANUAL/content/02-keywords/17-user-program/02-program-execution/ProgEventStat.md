@@ -2,11 +2,8 @@
 keyword: ProgEventStat
 summary: Reports each event's state and lets a pending event be cleared.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 525
 attributes:
   access: rw

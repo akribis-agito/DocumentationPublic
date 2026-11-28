@@ -2,11 +2,8 @@
 keyword: WaitTime
 summary: Suspends the current task for a specified time in milliseconds.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 193
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: ECAMGap
 summary: 相邻 ECAM 主轴值之间的线性间距；其符号决定曲线方向。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 304
 attributes:
   access: rw
@@ -19,18 +16,14 @@ attributes:
   ok_motor_on: true
   units: none
   range:
-  - -8000000
-  - 8000000
+  - -2147483647
+  - 2147483647
   default: 100
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    range:
-    - -2147483647
-    - 2147483647
+overrides: {}
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # ECAMGap

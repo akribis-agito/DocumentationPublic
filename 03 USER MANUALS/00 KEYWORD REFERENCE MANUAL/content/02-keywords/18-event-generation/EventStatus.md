@@ -2,9 +2,7 @@
 keyword: EventStatus
 summary: Reports compact hardware-table loading and run flags.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 973
 attributes:
   access: ro
@@ -23,12 +21,12 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-10-28'
-doc_revision: '2026.10'
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 ---
 # EventStatus
 
-Read-only scalar flags for the AGM800 original-engine preload (`EventType=3`). This is a compact status word, not the older verified-engine status array.
+Read-only scalar flags for the AGM800 and AGM800-EC original-engine preload (`EventType=3`).
 
 | Bit | Mask | Meaning |
 |-----|------|---------|
@@ -38,7 +36,7 @@ Read-only scalar flags for the AGM800 original-engine preload (`EventType=3`). T
 | 3 | 8 | Complete: the run has completed. |
 | 4 | 16 | Fault: the load or run failed; stop and explicitly reload. |
 
-Loading is local firmware state. Ready/Fault and run state use the normal cyclic hardware status; automatic per-event offline counter/next-position reads are not needed. `EventCntr` is refreshed once after completion. Use an explicit inquiry if an intermediate count is needed.
+Loading is local firmware state. Ready is set by the firmware when a single read-back at the end of the load confirms that the hardware accepted the complete table. A hardware fault and the end of a run are detected from the normal cyclic hardware status; automatic per-event offline counter/next-position reads are not needed. `EventCntr` is refreshed once after completion. Use an explicit inquiry if an intermediate count is needed.
 
 Issue [EventLoad](EventLoad.md) after configuration, wait until Ready is set and Fault is clear, then arm with `EventOn=1`. `EventOn=0` stops/cancels and discards the job. Reconnect never resumes it. Relevant edits invalidate readiness and are refused during active operation. No error acknowledgement command is required.
 

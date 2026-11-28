@@ -1,10 +1,8 @@
 ---
 keyword: FricBrstlDmp
-summary: LuGre bristle damping (σ1), used by FricMethod 4 (renamed from FricSigma1).
+summary: LuGre bristle damping (σ1), used by FricMethod 5 (renamed from FricSigma1).
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 936
 attributes:
   access: rw
@@ -23,14 +21,16 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 ---
 # FricBrstlDmp
 
-LuGre bristle damping (σ1), used by FricMethod 4 (renamed from FricSigma1).
+LuGre bristle damping (σ1), used by FricMethod 5 (renamed from FricSigma1).
 
 ## Overview
 
-`FricBrstlDmp` is the LuGre model's bristle damping, σ1. Available on AGM800 and AGM800-EC (central-i v5). It replaces `FricSigma1` from 5.3.0-rc4 (same CAN code). Only method 4 (LuGre) uses it.
+`FricBrstlDmp` is the LuGre model's bristle damping, σ1. Available on AGM800 and AGM800-EC (central-i v5). It replaces `FricSigma1` from 5.3.0-rc4 (same CAN code). Only method 5 (LuGre) uses it.
 
 ## How it works
 

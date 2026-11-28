@@ -2,11 +2,8 @@
 keyword: ProgBreaks
 summary: Per-thread breakpoint settings for user program debugging.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 294
 attributes:
   access: rw

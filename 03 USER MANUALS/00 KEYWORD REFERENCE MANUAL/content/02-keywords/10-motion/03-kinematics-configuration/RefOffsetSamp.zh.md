@@ -2,11 +2,8 @@
 keyword: RefOffsetSamp
 summary: 将参考位置偏置斜坡接入所经历的伺服采样数。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 165
 attributes:
   access: rw

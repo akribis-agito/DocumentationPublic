@@ -2,11 +2,8 @@
 keyword: InTargetStat
 summary: Reports the motion and settling state of the axis (disabled, moving, settling, reached).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 268
 attributes:
   access: ro

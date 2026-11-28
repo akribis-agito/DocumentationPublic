@@ -2,16 +2,15 @@
 summary: Active error-map correction value applied to the gantry yaw axis.
 keyword: GantryMap
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 748
 attributes:
   access: rw
   scope: axis
   flash: true
   type: array
-  array_size: 1025
+  array_size: 2
   data_type: float64
   ok_in_motion: false
   ok_motor_on: true
@@ -22,9 +21,11 @@ attributes:
   default: 0.5
   scaling: 1.0
   implemented: final
-overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+overrides:
+  ci-master:
+    array_size: 1025
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 ---
 # GantryMap
 
@@ -34,7 +35,7 @@ Table of position-dependent decoupling ratios for the gantry.
 
 `GantryMap` holds the table of decoupling ratios used when the position-dependent gantry map is enabled ([GantryMapType](GantryMapType.md) = 1). Each entry is a ratio in the range **0.0 to 1.0** (default **0.5**), describing how the gantry is split between its two motors at a given position along the beam. A value of 0.5 is the symmetric split; values away from 0.5 move the controlled mid-point toward one side, so a non-uniform mechanism can be linearised across its travel. It is a flash-saved array on the master axis.
 
-The table is **indexed from 1** and provides up to **1024 usable entries**. The position that selects an entry comes from the source chosen by [GantryMapSrc](GantryMapSrc.md); the first entry corresponds to position [GantryMapInit](GantryMapInit.md), and successive entries are spaced one map gap apart (the gap is set by the related `GantryMapGap` keyword). The controller interpolates linearly between entries and reports the live result as [GantryMapVal](GantryMapVal.md). Available on central-i (v5).
+The table is **indexed from 1** and provides up to **1024 usable entries** on standard firmware and **one entry** on Orbit FR. The position that selects an entry comes from the source chosen by [GantryMapSrc](GantryMapSrc.md); the first entry corresponds to position [GantryMapInit](GantryMapInit.md), and successive entries are spaced one map gap apart (the gap is set by the related `GantryMapGap` keyword). The controller interpolates linearly between entries and reports the live result as [GantryMapVal](GantryMapVal.md). Available on central-i (v5).
 
 ## How it works
 
@@ -55,10 +56,10 @@ AGantryMapVal        ; read the live interpolated ratio at the current position
 
 ### Edge cases
 
-- **Index 0** — invalid; valid indices are `GantryMap[1]`–`GantryMap[1024]`. `GantryMap[0]` does not exist.
+- **Index 0** — invalid; standard firmware accepts `GantryMap[1]`–`GantryMap[1024]`; Orbit FR accepts only `GantryMap[1]`. `GantryMap[0]` does not exist.
 - **In motion at write** — rejected (`NOMOTN`). The map may be edited with the motor on but not during a move.
 - **Map type off** ([GantryMapType](GantryMapType.md) = 0) — the table is stored but **not consulted**; the gantry uses the symmetric 50/50 split.
-- **Outside the table range** — positions before [GantryMapInit](GantryMapInit.md) clamp to entry 1; positions past entry 1024 clamp to the last populated entry.
+- **Outside the table range** — positions before [GantryMapInit](GantryMapInit.md) clamp to entry 1; positions past the last entry clamp to the last populated entry.
 - **Out-of-range values** — entries outside `[0.0, 1.0]` are rejected on write; valid ratios are 0.0-1.0, with 0.5 being the symmetric default.
 - **Set on wrong axis** — the engine reads `GantryMap` on the **master** axis. Writes elsewhere are accepted but never consulted.
 - **Save** — flash-saveable; large table that persists across reboots.

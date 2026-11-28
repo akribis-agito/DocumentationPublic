@@ -2,11 +2,8 @@
 keyword: StopCNCA
 summary: Command that stops execution of the CNC motion queue A.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 456
 attributes:
   access: ro

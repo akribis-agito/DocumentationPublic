@@ -2,11 +2,8 @@
 keyword: EncRes
 summary: Encoder resolution; counts per magnetic pitch (linear) or per revolution (rotary).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 56
 attributes:
   access: rw

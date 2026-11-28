@@ -1,11 +1,9 @@
 ---
 keyword: ScopeStatus
 summary: 报告 Central-i 示波器的当前状态。
-language: zh-CN
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 745
 attributes:
   access: ro
@@ -26,6 +24,7 @@ attributes:
 overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
+language: zh-CN
 ---
 # ScopeStatus
 

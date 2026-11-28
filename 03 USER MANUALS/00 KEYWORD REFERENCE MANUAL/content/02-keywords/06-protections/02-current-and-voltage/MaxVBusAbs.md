@@ -2,11 +2,8 @@
 keyword: MaxVBusAbs
 summary: Absolute bus-voltage ceiling; exceeding it disables the axis instantly.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 94
 attributes:
   access: rw
@@ -25,10 +22,42 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v4:
+  ci-master:
     scope: axis
-  central-i.v5:
-    scope: axis
+    range:
+    - 12000
+    - 390000
+    default: 390000
+  agd155-af-2a06:
+    range:
+    - 155000
+    - 390000
+    default: 390000
+  agd155-af-2a10:
+    range:
+    - 155000
+    - 390000
+    default: 390000
+  agd155-ec:
+    range:
+    - 155000
+    - 390000
+    default: 390000
+  agd155-ec-var34:
+    range:
+    - 155000
+    - 390000
+    default: 390000
+  agd155-ec-var34-3:
+    range:
+    - 155000
+    - 390000
+    default: 390000
+  agd156-ec:
+    range:
+    - 155000
+    - 390000
+    default: 390000
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 ---

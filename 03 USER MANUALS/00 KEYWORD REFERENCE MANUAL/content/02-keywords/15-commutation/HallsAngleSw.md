@@ -2,9 +2,8 @@
 summary: Selects how HallsAngle table entries are interpreted (0 = Hall-state mid-point angles, 1 = Hall-state transition/switch angles).
 keyword: HallsAngleSw
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 679
 attributes:
   access: rw

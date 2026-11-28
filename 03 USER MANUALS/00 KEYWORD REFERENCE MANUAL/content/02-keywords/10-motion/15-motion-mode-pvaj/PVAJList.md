@@ -1,10 +1,8 @@
 ---
 keyword: PVAJList
-summary: The PVAJ trajectory table - header plus up to 8192 position/velocity/acceleration/jerk rows.
+summary: PVAJ trajectory table with a header and up to 16 Orbit FR or 8192 standard rows.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 880
 attributes:
   access: rw
@@ -12,15 +10,17 @@ attributes:
   flash: false
   type: array
   array_size: 32772
-  data_type: double
+  data_type: float64
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  default: 0
+  range: null
+  default: 0.0
   scaling: 1.0
   implemented: final
-last_updated: '2026-09-25'
-doc_revision: '2026.09'
+overrides: {}
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 ---
 # PVAJList
 
@@ -32,13 +32,13 @@ Indexes are 1-based, as for every array keyword.
 
 | Index | Contents |
 |---|---|
-| `[1]` | **Len** — number of rows in the list, `1`–`8192` |
+| `[1]` | **Len** — number of rows in the list, `1`–`8192` (`1`–`16` on Orbit FR) |
 | `[2]` | **Gap** — control ticks between consecutive rows, `1`–`32` |
 | `[3]` | **Mode** — `0` absolute, `1` relative to the position at `Begin` |
 | `[4]`, `[5]`, `[6]`, `[7]` | row 1: position, velocity, acceleration, jerk |
 | `[8]` … | row 2, and so on in strides of four |
 
-The last usable index is therefore **32771** — `J` of row 8192.
+The last usable index is **32771** on standard firmware or **67** on Orbit FR, the jerk entry of the final row.
 
 Values are held as doubles. Position is in counts, velocity in counts/second, acceleration in counts/second², jerk in counts/second³.
 
@@ -48,8 +48,12 @@ Writing **any** element returns the axis to the *not validated* state, so a list
 
 ## Flash
 
-`PVAJList` is saved to flash only on a product whose parameter region is large enough to hold it (14 MB); elsewhere it is **not** flash-saved. A 3 MB row against a smaller parameter region would make *every* `SaveFile` fail with a full-flash error, not merely lose the PVAJ list.
+The double-flash firmware saves `PVAJList`. This includes the 16-row list on Orbit FR. On products with a smaller parameter allocation, the list is volatile.
 
 ## Errors
 
 The range and continuity of the list are checked by [PVAJValidate](PVAJValidate.md), not on write; see that page for the codes.
+
+## Orbit FR
+
+On an Orbit FR AGM800 this list has 16 data rows. Including the three header entries, usable indices run from 1 through 67. The ordinary 8192-row layout has last index 32771.

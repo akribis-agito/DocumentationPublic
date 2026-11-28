@@ -11,7 +11,7 @@ $$
 $$
 
 1. **Model.** [FricMethod](FricMethod.md) picks the friction model (0 = off, 1 to 5).
-2. **Quadrant-switching kick (optional).** With [FricQSCOn](FricQSCOn.md) = 1, a short breakaway kick is added at starts and reversals (methods 0 to 3 only).
+2. **Quadrant-switching kick (optional).** With [FricQSCOn](FricQSCOn.md) = 1, a short breakaway kick is added at starts and reversals (methods 0, 2, 3 and 4 only).
 3. **One clamp.** [FricLim](FricLim.md) limits the total to ±`FricLim` % of [PeakCL](../../02-keywords/06-protections/02-current-and-voltage/PeakCL.md).
 4. **Feedforward path.** The clamped friction current is added to the feedforward sum *before* the CNC skip and *before* the feedforward filter:
    - At CNC segment transitions the firmware zeroes all feedforward for two control cycles. Friction is zeroed with the rest — one rule for all feedforward.
@@ -27,13 +27,13 @@ $$
 | `FricMethod` | Model | Keywords it uses |
 |---|---|---|
 | 0 | Off | — |
-| 1 | Linear ramp through zero | FricIPos/Neg, FricVBandPos/Neg, FricViscous |
-| 2 | Hysteresis (switch with memory) | FricIPos/Neg, FricVBandPos/Neg, FricViscous |
-| 3 | Play (hysteresis with a ramp) | FricIPos/Neg, FricVBandPos/Neg, FricViscous |
-| 4 | LuGre (bristle model) | FricIPos/Neg, FricIStatPos/Neg, FricVStribPos/Neg, FricBrstlStf, FricBrstlDmp, FricViscous |
-| 5 | Stribeck | FricIPos/Neg, FricIStatPos/Neg, FricVBandPos/Neg, FricVStribPos/Neg, FricViscous |
+| 1 | Stribeck | FricIPos/Neg, FricIStatPos/Neg, FricVBandPos/Neg, FricVStribPos/Neg, FricViscous |
+| 2 | Linear ramp through zero | FricIPos/Neg, FricVBandPos/Neg, FricViscous |
+| 3 | Hysteresis (switch with memory) | FricIPos/Neg, FricVBandPos/Neg, FricViscous |
+| 4 | Play (hysteresis with a ramp) | FricIPos/Neg, FricVBandPos/Neg, FricViscous |
+| 5 | LuGre (bristle model) | FricIPos/Neg, FricIStatPos/Neg, FricVStribPos/Neg, FricBrstlStf, FricBrstlDmp, FricViscous |
 
-Method 5, for velocity $v$ (from [FricVelSrc](FricVelSrc.md)) and velocity feedback $v_{fb}$, per direction of travel:
+Method 1, for velocity $v$ (from [FricVelSrc](FricVelSrc.md)) and velocity feedback $v_{fb}$, per direction of travel:
 
 $$
 I = \operatorname{sign}(v)\cdot\tanh\!\left(\frac{|v|}{\text{FricVBand}}\right)\cdot\left(\text{FricI} + (\text{FricIStat} - \text{FricI})\,e^{-(v/\text{FricVStrib})^2}\right) + \text{FricViscous}\cdot v_{fb}
@@ -48,7 +48,7 @@ The levels are used as magnitudes; the sign comes from the direction of travel.
 | 921 | [FricVStribPos](FricVStribPos.md) | Stribeck velocity, positive direction (counts/s) |
 | 922 | [FricVStribNeg](FricVStribNeg.md) | Stribeck velocity, negative direction (counts/s) |
 | 925 | [FricLim](FricLim.md) | Clamp on the whole stage (% of PeakCL) |
-| 926 | [FricMethod](FricMethod.md) | Model: 0 off, 1 linear, 2 hysteresis, 3 play, 4 LuGre, 5 Stribeck |
+| 926 | [FricMethod](FricMethod.md) | Model: 0 off, 1 Stribeck, 2 linear, 3 hysteresis, 4 play, 5 LuGre |
 | 927 | [FricVelSrc](FricVelSrc.md) | Velocity source: 0 dPosRef, 1 VelRef, 2 feedback |
 | 928 | [FricIPos](FricIPos.md) | Coulomb level, positive direction (mA) |
 | 929 | [FricINeg](FricINeg.md) | Coulomb level, negative direction (mA) |
@@ -76,18 +76,18 @@ Friction levels are for friction only. Put gravity on a vertical axis, spring pr
 Tune with `FFFiltOn` = 0 so the filter does not hide what friction is doing.
 
 1. **Null the offset.** Select a fixed compensation entry with [TorqCompMode](../../02-keywords/09-current-and-voltage/03-current-compensation/TorqCompMode.md) (for example `TorqCompMode` = 1) and set that entry of [TorqCompFix](../../02-keywords/09-current-and-voltage/03-current-compensation/TorqCompFix.md) (here `TorqCompFix[1]`) so the axis holds still and moves at low speed with the same current in both directions. Do this with `FricMethod` = 0.
-2. **Per-direction levels.** Move slowly at constant speed in each direction and set `FricIPos` and `FricINeg` to the current the velocity loop still needs. For methods 4 and 5, then set the breakaway levels `FricIStatPos`/`FricIStatNeg` and the Stribeck velocities `FricVStribPos`/`FricVStribNeg`. Set the bands `FricVBandPos`/`FricVBandNeg` just above the velocity noise.
+2. **Per-direction levels.** Move slowly at constant speed in each direction and set `FricIPos` and `FricINeg` to the current the velocity loop still needs. For methods 1 and 5, then set the breakaway levels `FricIStatPos`/`FricIStatNeg` and the Stribeck velocities `FricVStribPos`/`FricVStribNeg`. Set the bands `FricVBandPos`/`FricVBandNeg` just above the velocity noise.
 3. **Slope.** Last, run at a few higher speeds and set `FricViscous` so the remaining current no longer grows with speed.
 
 Then turn `FFFiltOn` back on if you use the feedforward filter, and check the reversals.
 
 ## Changes from 5.3.0-rc4
 
-5.3.0 merges the rc4 Stribeck feedforward into this stage as `FricMethod` = 5 and renames several keywords. **There is no compatibility layer**: values saved under rc4 are not converted. After upgrading, re-enter the friction settings.
+5.3.0 merges the rc4 Stribeck feedforward into this stage as `FricMethod` = 1 and renames several keywords. **There is no compatibility layer**: values saved under rc4 are not converted. After upgrading, re-enter the friction settings.
 
 | rc4 keyword (CAN) | 5.3.0 | Note |
 |---|---|---|
-| StribOn (920) | `FricMethod` = 5 | Code 920 is now unused. |
+| StribOn (920) | `FricMethod` = 1 | Code 920 is now unused. |
 | StribVs (921) | [FricVStribPos](FricVStribPos.md) / [FricVStribNeg](FricVStribNeg.md) | Now per direction; 921 is `FricVStribPos`. |
 | StribEps (922) | [FricVBandPos](FricVBandPos.md) / [FricVBandNeg](FricVBandNeg.md) | The tanh width is the band; 922 is now `FricVStribNeg`. |
 | StribFc (923) | [FricIPos](FricIPos.md) / [FricINeg](FricINeg.md) | Code 923 is now unused. |
@@ -98,9 +98,9 @@ Then turn `FFFiltOn` back on if you use the feedforward filter, and check the re
 | FricCurr (937) | [CurrFFWValues](../../02-keywords/11-control-tuning/05-feedforwards/CurrFFWValues.md)`[6]` | Code 937 is now unused. |
 | FricQSCDelay (940) | [FricQSCHold](FricQSCHold.md) | Same code; now in µs instead of control cycles. |
 
-LuGre (method 4) now reads the Stribeck velocity from `FricVStribPos`/`FricVStribNeg`; in rc4 it read the band.
+LuGre (method 5) now reads the Stribeck velocity from `FricVStribPos`/`FricVStribNeg`; in rc4 it read the band.
 
-To set up the rc4 Stribeck behaviour in 5.3.0: `FricMethod` = 5, `FricIPos` = StribFc, `FricINeg` = −StribFc, `FricIStatPos` = StribFc + StribFsEx, `FricIStatNeg` = −(StribFc + StribFsEx), `FricVBandPos` = `FricVBandNeg` = StribEps, `FricVStribPos` = `FricVStribNeg` = StribVs, `FricLim` = StribLim, `FricViscous` = 0, `FricVelSrc` = 0.
+To set up the rc4 Stribeck behaviour in 5.3.0: `FricMethod` = 1, `FricIPos` = StribFc, `FricINeg` = −StribFc, `FricIStatPos` = StribFc + StribFsEx, `FricIStatNeg` = −(StribFc + StribFsEx), `FricVBandPos` = `FricVBandNeg` = StribEps, `FricVStribPos` = `FricVStribNeg` = StribVs, `FricLim` = StribLim, `FricViscous` = 0, `FricVelSrc` = 0.
 
 ## See also
 

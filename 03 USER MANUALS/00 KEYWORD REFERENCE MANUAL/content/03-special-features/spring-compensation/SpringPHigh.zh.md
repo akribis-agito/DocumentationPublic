@@ -1,11 +1,9 @@
 ---
 keyword: SpringPHigh
+summary: 设置弹簧补偿区域的位置上边界（用户单位）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 594
 attributes:
   access: rw
@@ -27,7 +25,6 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 设置弹簧补偿区域的位置上边界（用户单位）。
 ---
 # SpringPHigh
 

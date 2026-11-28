@@ -2,11 +2,8 @@
 keyword: DontDownload
 summary: Read-only safety interlock that, when set, blocks firmware download.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 670
 attributes:
   access: ro

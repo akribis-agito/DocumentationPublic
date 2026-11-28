@@ -2,11 +2,8 @@
 keyword: BuffCycles
 summary: Number of times the spline buffer trajectory is repeated.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 548
 attributes:
   access: rw

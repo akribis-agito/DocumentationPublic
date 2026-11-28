@@ -2,11 +2,8 @@
 keyword: WaitTime
 summary: 将当前任务暂停指定的毫秒数。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 193
 attributes:
   access: rw

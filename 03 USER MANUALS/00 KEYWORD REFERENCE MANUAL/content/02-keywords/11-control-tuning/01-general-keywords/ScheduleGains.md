@@ -2,35 +2,26 @@
 keyword: ScheduleGains
 summary: Read-only array reporting the tuning gains the control loops are using right now, after gain scheduling has selected the active set.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 274
 attributes:
   access: ro
   scope: axis
   flash: false
   type: array
-  array_size: 6
-  data_type: int32
+  array_size: 8
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range:
-  - -2147483648
-  - 2147483647
+  range: null
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    array_size: 7
-    data_type: float32
-    range: null
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+overrides: {}
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 ---
 # ScheduleGains
 
@@ -48,6 +39,7 @@ Read-only array reporting the tuning gains the control loops are using right now
 | 4 | Velocity-loop integral gain |
 | 5 | Velocity feedforward gain |
 | 6 | Position-loop integral gain (central-i v5 only) |
+| 7 | Active velocity-loop integral-current limit in mA, from [VelIntLim](../04-velocity-control/VelIntLim.md) |
 
 Index 6 (the position-loop integral gain) exists only on central-i v5, where [PosKi](../03-position-control/PosKi.md) is available and schedulable. On v4 only indices 1–5 are reported.
 
@@ -55,7 +47,7 @@ Index 6 (the position-loop integral gain) exists only on central-i v5, where [Po
 
 Each control cycle, the controller determines the active set number ([ScheduleSet](ScheduleSet.md)) from the rule chosen by [ScheduleMode](ScheduleMode.md), then loads `ScheduleGains` from that set:
 
-- In the stepped modes, the scheduled-gain elements (five on v4, six on central-i v5) are copied from the corresponding gain arrays at the active set index — for example `ScheduleGains[2]` = [AccFFW](../05-feedforwards/AccFFW.md)`[set]`.
+- In the stepped modes, the scheduled-gain elements (five on v4; the integrated v5 firmware also schedules the integral limit in element 7) are copied from the corresponding gain arrays at the active set index — for example `ScheduleGains[2]` = [AccFFW](../05-feedforwards/AccFFW.md)`[set]`.
 - In the interpolated modes (velocity or position range), each element is computed by linear interpolation between the two sets that bound the current measurement, so the reported values move continuously rather than in steps.
 - When the axis is using gantry-paired scheduling, the gains are taken from the gantry tuning arrays instead of the standard ones (see [ScheduleGntry](ScheduleGntry.md)).
 

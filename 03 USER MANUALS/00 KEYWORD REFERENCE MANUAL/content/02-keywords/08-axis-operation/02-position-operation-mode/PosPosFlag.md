@@ -2,11 +2,8 @@
 keyword: PosPosFlag
 summary: Trigger direction for the position-feedback check to enter position mode.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 328
 attributes:
   access: rw

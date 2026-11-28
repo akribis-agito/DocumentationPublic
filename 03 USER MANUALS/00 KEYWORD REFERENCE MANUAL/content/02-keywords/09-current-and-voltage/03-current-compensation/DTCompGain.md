@@ -2,9 +2,8 @@
 keyword: DTCompGain
 summary: Dead-time compensation gain; 0 disables the feature.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 869
 attributes:
   access: rw
@@ -12,16 +11,17 @@ attributes:
   flash: true
   type: scalar
   array_size: 1
-  data_type: float
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
   range:
-  - 0
-  - 10
-  default: 0
-  scaling: 1
+  - 0.0
+  - 10.0
+  default: 0.0
+  scaling: 1.0
   implemented: final
+overrides: {}
 last_updated: '2026-07-30'
 doc_revision: '2026.09'
 ---
@@ -39,6 +39,8 @@ A power bridge must never let both transistors in a leg conduct at once, so the 
 ## How it works
 
 Each control cycle the drive adds a voltage of magnitude proportional to `DTCompGain` to each phase, signed by that phase's commanded current. Within a band of ±[DTCompLvl](DTCompLvl.md) around zero current the sign is interpolated linearly rather than switched, so the compensation does not chatter as the current crosses zero.
+
+On AGD101 17 A and 34 A firmware builds containing the change in PR #2675, compensation shares the available `MaxPWM` range with the current-loop voltage. If the combined demand exceeds the limit on any phase, the drive scales all three phase commands together and reports voltage saturation. Increasing `DTCompGain` at that point cannot increase the largest commanded phase magnitude past `MaxPWM`. In v5.3.0-rc7, compensation can raise a phase command above this limit. [Firmware change](https://github.com/akribis-agito/Firmware-Main/pull/2675)
 
 > **Important:** `DTCompGain` is a **per-drive calibration**, not a universal setting. The correct value depends on the blanking time of the drive you are using, and the blanking time differs across the range — an AGD155 has four times the dead band of an AGD301. The default of 1.0 is not the optimum for either.
 

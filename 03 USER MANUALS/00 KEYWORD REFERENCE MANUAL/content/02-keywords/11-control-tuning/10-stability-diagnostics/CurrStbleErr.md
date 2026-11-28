@@ -2,9 +2,8 @@
 keyword: CurrStbleErr
 summary: Current-loop tracking-error threshold for stability detection, in percent of the peak current limit.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 790
 attributes:
   access: rw

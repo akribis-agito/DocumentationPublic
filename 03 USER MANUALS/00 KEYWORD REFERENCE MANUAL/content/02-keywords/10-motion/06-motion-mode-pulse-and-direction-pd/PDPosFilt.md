@@ -2,11 +2,8 @@
 keyword: PDPosFilt
 summary: First-order low-pass cut-off frequency (Hz/100) smoothing PDPos in direct P/D mode.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 150
 attributes:
   access: rw

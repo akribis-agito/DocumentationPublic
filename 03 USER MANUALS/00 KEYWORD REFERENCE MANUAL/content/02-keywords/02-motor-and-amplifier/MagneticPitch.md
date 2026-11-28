@@ -1,10 +1,9 @@
 ---
 keyword: MagneticPitch
-summary: Linear-motor magnetic pitch in millimetres, used to convert speed from counts/s to m/s for the back-EMF feed-forward.
+summary: Linear brushless motor travel in millimetres per electrical period.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 849
 attributes:
   access: rw
@@ -28,15 +27,13 @@ doc_revision: '2026.06'
 ---
 # MagneticPitch
 
-Linear-motor magnetic pitch in millimetres, used to convert speed from counts/s to m/s for the back-EMF feed-forward.
+Linear brushless motor travel in millimetres per electrical period.
 
 ## Overview
 
-`MagneticPitch` is the magnetic pitch of a **linear** motor — the physical distance, in millimetres, of one magnetic period of the motor's magnet track. The controller uses it only to relate the motor's mechanical speed to its encoder count rate, which is needed when the back-EMF feed-forward is enabled. It has no effect on rotary motors.
+CAN 849 is a per-axis parameter saved to flash, with a range of 0 to 1000 mm. It is available on Central-i and on standalone drives with the #1594 firmware change. Older standalone parameter files can omit it. The default of zero means the pitch is unconfigured.
 
-It is a per-axis parameter saved to flash. The value is in millimetres, with a usable range of 0 to 1000 mm and a default of 0. A value of 0 means the conversion is effectively not configured, so set it to the motor's actual magnetic pitch when using a linear motor with back-EMF feed-forward.
-
-> Available from v5 (Central-i) only.
+For linear brushless motors, counts/mm = EncRes / MagneticPitch when the pitch is positive. For example, 3250 counts per period and 32.5 mm per period gives 100 counts/mm. Rotary and voice-coil encoder conventions are unchanged.
 
 ## How it works
 
@@ -44,7 +41,7 @@ The back-EMF feed-forward predicts the voltage needed to overcome the motor's ge
 
 $$\text{speed in m/s} = \text{speed in counts/s} \cdot \frac{\text{MagneticPitch}\,[\text{mm}] \cdot 10^{-3}}{\text{EncRes}}$$
 
-where [EncRes](../03-encoder/01-general-settings/EncRes.md) is the number of counts per magnetic period. The result feeds the back-EMF voltage term. Because it only scales that term, `MagneticPitch` matters only when the back-EMF feed-forward is in use on a linear motor; it is ignored for other [MotorType](MotorType.md) settings (rotary and voice-coil motors use their own conversions).
+where [EncRes](../03-encoder/01-general-settings/EncRes.md) is the number of counts per magnetic period. The result feeds the back-EMF voltage term.
 
 ## Examples
 

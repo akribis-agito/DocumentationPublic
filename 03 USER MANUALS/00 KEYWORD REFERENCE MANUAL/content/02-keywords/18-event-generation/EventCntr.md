@@ -2,11 +2,8 @@
 keyword: EventCntr
 summary: Counts events generated since the last EventOn; resettable by the user.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 186
 attributes:
   access: rw

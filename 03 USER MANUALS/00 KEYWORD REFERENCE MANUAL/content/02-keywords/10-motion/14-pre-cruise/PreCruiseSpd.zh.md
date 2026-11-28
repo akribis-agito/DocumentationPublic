@@ -2,9 +2,8 @@
 keyword: PreCruiseSpd
 summary: 正弦点到点运动预巡航阶段所保持的速度（用户单位）。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 843
 attributes:
   access: rw
@@ -16,7 +15,9 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: user
-  range: null
+  range:
+  - 0
+  - 20000000000
   default: 0
   scaling: 1.0
   implemented: final

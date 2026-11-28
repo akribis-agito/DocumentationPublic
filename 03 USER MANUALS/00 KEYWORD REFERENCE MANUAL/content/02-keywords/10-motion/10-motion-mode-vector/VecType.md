@@ -2,11 +2,8 @@
 keyword: VecType
 summary: Selects the vector motion geometry (0 = linear, 1 = arc).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 630
 attributes:
   access: rw

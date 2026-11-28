@@ -2,11 +2,8 @@
 keyword: EventGap
 summary: Position spacing between successive events in by-gap mode.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 182
 attributes:
   access: rw
@@ -25,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-10-23'
+doc_revision: '2026.11'
 ---
 # EventGap
 
@@ -45,6 +42,8 @@ When by-gap generation is armed, the number of events for the window is |([Event
 The maximum sustainable event rate is bounded by `EventGap` divided by the axis velocity: as that interval approaches the time needed to emit one pulse of width [EventPulseWid](EventPulseWid.md), pulses begin to merge.
 
 For finite by-gap generation (`EventType = 1`, `EventAlwaysOn = 0`), arming with `EventOn = 1` rejects a zero gap or a gap whose sign points away from the end, returning error **14**. The refusal preserves the configured gap and positions. For `EventBegPos = 20000` and `EventEndPos = 200`, use `EventGap = -100`; a positive gap advances away from the end and is refused. Configure the window while disarmed, correct its gap, then arm it.
+
+On C2000 and C28388 axes using the software comparator, arming a finite fixed-gap window selects the first point ahead in its direction of travel. For a window from 1000 to 2000 with a gap of 100, arming at 1550 selects 1600. Holding at 1550 emits no pulse. If one control sample crosses several points, the controller emits one pulse, advances beyond all the crossed points, and records error 414 in the axis error log on the first such miss after arming.
 
 ## Examples
 

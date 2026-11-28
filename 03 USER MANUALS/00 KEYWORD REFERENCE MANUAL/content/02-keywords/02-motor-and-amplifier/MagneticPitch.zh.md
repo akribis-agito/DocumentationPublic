@@ -1,10 +1,9 @@
 ---
 keyword: MagneticPitch
-summary: 直线电机的磁极距，单位毫米，用于将速度从 counts/s 转换为 m/s 以供反电动势前馈使用。
+summary: 直线无刷电机每个电气周期的行程，单位为毫米。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 849
 attributes:
   access: rw
@@ -29,15 +28,13 @@ language: zh-CN
 ---
 # MagneticPitch
 
-直线电机的磁极距，单位毫米，用于将速度从 counts/s 转换为 m/s 以供反电动势前馈使用。
+直线无刷电机每个电气周期的行程，单位为毫米。
 
 ## 概述
 
-`MagneticPitch` 是**直线**电机的磁极距——电机磁轨一个磁周期的物理距离，单位为毫米。控制器仅用它将电机的机械速度与编码器计数率相关联，这在启用反电动势前馈时是必需的。它对旋转电机无影响。
+CAN 849 是保存在闪存中的单轴参数，范围为 0 至 1000 mm。新版独立驱动器和 Central-i 均提供此参数。旧版独立驱动器的参数文件可能没有这一项。默认值 0 表示未配置磁极距。
 
-它是保存至闪存的轴相关参数。该值以毫米为单位，可用范围为 0 到 1000 mm，默认值为 0。值为 0 表示该转换实际上未配置，因此在使用带反电动势前馈的直线电机时，应将其设置为电机的实际磁极距。
-
-> 仅自 v5（Central-i）起可用。
+对于直线无刷电机，每毫米计数 = EncRes / MagneticPitch。例如，3250 计数和 32.5 mm 对应 100 计数/mm。此换算需要正磁极距。旋转电机和音圈电机沿用原有编码器单位。
 
 ## 工作原理
 
@@ -45,7 +42,7 @@ language: zh-CN
 
 $$\text{speed in m/s} = \text{speed in counts/s} \cdot \frac{\text{MagneticPitch}\,[\text{mm}] \cdot 10^{-3}}{\text{EncRes}}$$
 
-其中 [EncRes](../03-encoder/01-general-settings/EncRes.md) 为每个磁周期的计数数。其结果输入到反电动势电压项。由于它仅缩放该项，因此 `MagneticPitch` 仅在直线电机上使用反电动势前馈时才有意义；对于其他 [MotorType](MotorType.md) 设置它会被忽略（旋转电机和音圈电机使用各自的转换）。
+其中 [EncRes](../03-encoder/01-general-settings/EncRes.md) 为每个磁周期的计数数。其结果输入到反电动势电压项。
 
 ## 示例
 

@@ -2,11 +2,8 @@
 keyword: ConFlt
 summary: 保存导致轴被禁用的控制器错误码。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 31
 attributes:
   access: rw
@@ -19,16 +16,12 @@ attributes:
   ok_motor_on: false
   units: none
   range:
-  - 0
+  - -3000
   - 0
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    range:
-    - -3000
-    - 0
+overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

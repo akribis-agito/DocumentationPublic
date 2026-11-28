@@ -2,11 +2,8 @@
 keyword: Pos
 summary: Main position feedback in user units; the position-loop feedback signal.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 2
 attributes:
   access: ro
@@ -25,7 +22,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
+  ci-master:
     data_type: int64
     range:
     - -2251799813685248

@@ -82,19 +82,19 @@ Record:
 | 0 | type | uint8 | Event type (see *Event types*). Type `0` is never sent |
 | 1 | axis | uint8 | Axis the event belongs to (`0` = A, `1` = B, …), or `0xFF` for a controller-wide event |
 | 2 | timeSec | uint32 | Whole seconds since power-on (the value of [Time](../03-timing/Time.md)) when the event was detected |
-| 6 | timeTick | uint32 | Position within that second, in units of 1/16384 s. It advances in steps of 16 (about 1 ms) |
+| 6 | timeTick | uint32 | Position within that second, in units of 1/16384 s on AGM800 and 1/16000 s on AGM800-EC. It advances in steps of 16 (about 1 ms on AGM800, exactly 1 ms on AGM800-EC) |
 | 10 | data1 | double | Type-specific |
 | 18 | data2 | double | Type-specific |
 | 26 | data3 | double | Type-specific |
 | 34 | data4 | double | Type-specific |
 | 42 | data5 | double | Type-specific |
 
-The DATA length is always `7 + 50 × n` bytes, so a client can check a packet by arithmetic. The event time is `timeSec + timeTick / 16384` seconds. Data fields a type does not use are sent as `0.0`.
+The DATA length is always `7 + 50 × n` bytes, so a client can check a packet by arithmetic. The event time is `timeSec + timeTick / 16384` seconds on AGM800 and `timeSec + timeTick / 16000` seconds on AGM800-EC. Data fields a type does not use are sent as `0.0`.
 
 A packet can be cut short if a send is interrupted part-way, for example when the connection breaks. A client that finds a stretch of the stream that is not a complete packet should resynchronise: scan for the next envelope (`1.<SOURCE>,<version>.`; `printf` packets with `SOURCE = 1` share the stream) and confirm it with `n` and the `7 + 50 × n` length.
 
 ## Product availability
 
-Push events exist on the **AGM800** (Central-i master, v5) only. On every other product, and on AGM800 firmware that predates push events, the eight `PushEv*` keywords are **absent**: reading or writing them by name returns the unknown-keyword error. A host can therefore detect support by trying to read `PushEvEnable`. It can also test [Identity](../01-status/Identity.md)`[62]` bit `0x40`, which is set when the firmware supports push events. `Identity[75]` reports the event-queue depth (64).
+Push events exist on the **AGM800** and **AGM800-EC** (Central-i masters, v5) only. On every other product, and on AGM800 or AGM800-EC firmware that predates push events, the eight `PushEv*` keywords are **absent**: reading or writing them by name returns the unknown-keyword error. A host can therefore detect support by trying to read `PushEvEnable`. It can also test [Identity](../01-status/Identity.md)`[62]` bit `0x40`, which is set when the firmware supports push events. `Identity[75]` reports the event-queue depth (64).
 
 Push events are separate from [Event generation](../../18-event-generation/00-overview.md), which produces position-synchronised output pulses in hardware. If you need a signal at the exact moment an axis passes a position, use event generation. Push events report to the host over Ethernet.

@@ -2,12 +2,9 @@
 keyword: EncAbsSendCmd
 summary: 发起对绝对式编码器的寄存器读/写事务的命令。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
-can_code: 719
+- controller
+- ci-master
+can_code: 902
 attributes:
   access: ro
   scope: axis
@@ -15,8 +12,8 @@ attributes:
   type: scalar
   array_size: 1
   data_type: int32
-  ok_in_motion: true
-  ok_motor_on: true
+  ok_in_motion: false
+  ok_motor_on: false
   units: func
   range:
   - 0
@@ -24,13 +21,9 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    can_code: 902
-    ok_in_motion: false
-    ok_motor_on: false
-last_updated: '2026-05-28'
-doc_revision: '2026.06'
+overrides: {}
+last_updated: '2026-09-25'
+doc_revision: '2026.09'
 language: zh-CN
 ---
 # EncAbsSendCmd

@@ -2,11 +2,8 @@
 keyword: EventPulseWid
 summary: Duration of the event output pulse in microseconds.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 179
 attributes:
   access: rw
@@ -25,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-10-29'
-doc_revision: '2026.10'
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 ---
 # EventPulseWid
 
@@ -50,11 +47,15 @@ When events are armed, the controller converts the width into the pulse generato
 
 ![Event output pulse width and overlap](eventpulsewid-overlap.svg)
 
-The output duration is produced by a hardware timer, so the width is quantized to the timer step. On central-i remote drives with incremental or SIN-COS feedback this is about **20 ns** for pulses up to roughly **163.8 us**, and **5.12 us** for longer pulses, up to a maximum of about **1.34 seconds**; stand-alone products use a different timer with a shorter maximum. Requested widths are quantized to the timer step: central-i masters round to the nearest step, so up to about **41.9 ms** the same width gives the same pulse whether it is armed with the sequence or loaded for a later table point (a table point loaded later is limited to about 41.9 ms; the first pulse reaches the 1.34 s maximum), and stand-alone products truncate toward the nearest lower step. A width that exceeds the longest producible pulse is clamped to that maximum.
+Central-i masters round the requested width to the nearest timer step. At a remote clock of 100 MHz the fine step is **20 ns** for widths up to about 163.8 µs, and the coarse step is **5.12 µs** for longer widths. Stand-alone products use a different timer with a shorter maximum and round down to the timer step.
+
+On AGM800 and AGM800-EC firmware containing the software-table width fix, a streamed table (`EventType=2` with incremental or hardware SIN-COS feedback) limits the first and every subsequent pulse to **41.93792 ms** (8,191 coarse steps). The limit applies to the magnitude of both explicit and inherited widths. An inherited negative width keeps its inverted polarity. A first table entry set to zero still selects toggle mode. Other event modes retain their own limits. The 18-bit arming format can encode up to about 1.34 s, subject to the remote hardware. [Firmware-Main #2675](https://github.com/akribis-agito/Firmware-Main/pull/2675)
+
+**5.3.0-rc7 compatibility.** The first streamed table row used the 18-bit arming format. Later rows sent only the low 13 bits of the converted width. For example, a later 50 ms request encoded about 8.06 ms. Keep streamed widths within 41.93792 ms on that firmware.
 
 ### AGM800 prepared hardware tables
 
-For EventLoad-managed `EventType=3`, the effective width after the existing fine/coarse conversion must fit the current 13-bit hardware field (1–8191 units in pulse mode). A value outside that field, including a nonzero request that rounds to zero, fails preparation before arm; the preload path does not silently truncate or apply the larger-width clamping described for other paths. An effective first width of zero selects run-wide toggle mode instead. With EventPulseRes=1, pulse requests of 1–9 ns are refused because they encode as zero; 10 ns rounds to one 20 ns unit. Other event types retain their existing behavior.
+For EventLoad-managed `EventType=3`, the effective width after the existing fine/coarse conversion must fit the current 13-bit hardware field (1–8191 units; an effective width of 0 is accepted only on the first selected row, where it selects toggle mode). A value outside that field fails preparation before arm; the preload path does not silently truncate or apply the larger-width clamping described for other paths. Other event types retain their existing behavior. With EventPulseRes=1 and a 100 MHz remote clock, 1–9 ns rounds to zero and fails pulse-mode preload. A 10 ns request rounds to one 20 ns step.
 
 
 ## Examples

@@ -1,11 +1,8 @@
 ---
 keyword: MapErrOffset
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 411
 attributes:
   access: rw
@@ -26,7 +23,7 @@ attributes:
 overrides: {}
 summary: 在映射修正之上叠加应用的当前位置误差偏置。
 last_updated: '2026-10-17'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # MapErrOffset

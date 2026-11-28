@@ -2,18 +2,15 @@
 keyword: GenData
 summary: General-purpose, non-axis 32-bit integer array for shared user/host storage.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 237
 attributes:
   access: rw
   scope: non-axis
   flash: true
   type: array
-  array_size: 1001
+  array_size: 5001
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
@@ -25,10 +22,36 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
-    array_size: 10001
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+  ci-master:
+    array_size: 1001
+  agc300-et:
+    array_size: 1001
+  agd200-et-2d01:
+    array_size: 1001
+  agd200-et-2d02:
+    array_size: 1001
+  agd200-et-2d05:
+    array_size: 1001
+  agd200-et-2d05-71:
+    array_size: 1001
+  agd155-af-2a06:
+    array_size: 1001
+  agd155-af-2a10:
+    array_size: 1001
+  agd155-ec:
+    array_size: 1001
+  agd155-ec-var34:
+    array_size: 1001
+  agd155-ec-var34-3:
+    array_size: 1001
+  agd156-ec:
+    array_size: 1001
+  agd101-ec-34a:
+    array_size: 1001
+  agd101-ec-17a:
+    array_size: 1001
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 ---
 # GenData
 
@@ -42,7 +65,7 @@ General-purpose, non-axis 32-bit integer array for shared user/host storage.
 
 ![General-purpose array families: the GenData row holds the four non-axis variants (GenData int32, GenDataF float32, GenDataD float64, GenDataLL int64) recommended for user programs, and the UserParam row holds the four per-axis variants (UserParam, UserParamF, UserParamD, UserParamLL) some of whose entries are reserved internally](array-family-types.svg)
 
-Each element holds a 32-bit signed integer, so the value range is -2147483648 to 2147483647 and the default is 0. The array is 1-indexed: the first usable element is `GenData[1]` (index 0 is reserved and inaccessible). The number of usable elements depends on the controller model: typically 1000, with 5000 on larger controllers and up to 10000 on models with double-flash storage.
+Each element holds a 32-bit signed integer, so the value range is -2147483648 to 2147483647 and the default is 0. The array is 1-indexed: the first usable element is `GenData[1]` (index 0 is reserved and inaccessible). The number of usable elements depends on the controller model: typically 1000, with 5000 on larger controllers and up to 10000 on ordinary double-flash models. Orbit FR exposes 30000.
 
 ## Addressing
 
@@ -72,6 +95,10 @@ AGenData[1]=100      ; store 100 in the first element
 AGenData[1]         ; read the first element
 AGenData[1000]=0     ; highest usable index on a 1000-element model
 ```
+
+## Orbit FR
+
+On the Orbit FR AGM800, GenData indices 1 through 30000 and the five error-map tables are retained. Export these values before migrating to integrated firmware. DrawControl download/erase operates on its own payload sectors, separate from saved parameters.
 
 ## See also
 

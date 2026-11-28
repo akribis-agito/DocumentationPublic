@@ -1,11 +1,9 @@
 ---
 keyword: UPMDistReject
+summary: 设置 UPM 扰动抑制环路的抑制增益，控制估计扰动的消除力度。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 605
 attributes:
   access: rw
@@ -27,7 +25,6 @@ overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 设置 UPM 扰动抑制环路的抑制增益，控制估计扰动的消除力度。
 ---
 # UPMDistReject
 

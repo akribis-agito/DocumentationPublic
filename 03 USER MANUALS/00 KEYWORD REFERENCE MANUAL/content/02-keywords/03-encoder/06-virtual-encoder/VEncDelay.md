@@ -2,11 +2,8 @@
 keyword: VEncDelay
 summary: Pulse/direction setup delay (us) between a direction change and the first virtual-encoder pulse.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 616
 attributes:
   access: rw

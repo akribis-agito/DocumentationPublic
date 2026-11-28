@@ -2,11 +2,8 @@
 keyword: InjectedValue
 summary: 当前注入值的只读读数；单位随注入点而定。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 118
 attributes:
   access: ro

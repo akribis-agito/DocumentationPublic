@@ -2,9 +2,8 @@
 keyword: AccUnitFct
 summary: 内部加速度单位与所选加速度工程单位之间的缩放因子。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 809
 attributes:
   access: rw

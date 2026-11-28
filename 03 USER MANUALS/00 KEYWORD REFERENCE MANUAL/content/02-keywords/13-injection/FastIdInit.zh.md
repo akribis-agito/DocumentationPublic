@@ -2,11 +2,8 @@
 keyword: FastIdInit
 summary: 将 PRBS 序列索引复位至第一个预定义二进制值。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 540
 attributes:
   access: ro

@@ -2,9 +2,8 @@
 keyword: ScopeUpload
 summary: Command that transfers the Central-i scope buffer to the host.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 747
 attributes:
   access: ro

@@ -2,11 +2,8 @@
 keyword: PolePrs
 summary: 电机磁极对数，按电机类型进行解释，用于正确的反馈与换相。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 54
 attributes:
   access: rw

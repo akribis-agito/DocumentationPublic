@@ -1,11 +1,9 @@
 ---
 keyword: DTCompGain
 summary: 死区补偿增益；设为 0 则禁用该功能。
-language: zh-CN
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 869
 attributes:
   access: rw
@@ -13,16 +11,20 @@ attributes:
   flash: true
   type: scalar
   array_size: 1
-  data_type: float
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range: [0, 10]
-  default: 0
-  scaling: 1
+  range:
+  - 0.0
+  - 10.0
+  default: 0.0
+  scaling: 1.0
   implemented: final
 last_updated: '2026-07-30'
-doc_revision: '2026.07'
+doc_revision: '2026.09'
+overrides: {}
+language: zh-CN
 ---
 
 # DTCompGain
@@ -38,6 +40,8 @@ doc_revision: '2026.07'
 ## 工作原理
 
 每个控制周期，驱动器按 `DTCompGain` 比例向各相叠加一个电压，其符号取自该相的指令电流。在零电流附近 ±[DTCompLvl](DTCompLvl.md) 的区间内，符号采用线性插值而非直接切换，以避免电流过零时补偿产生抖振。
+
+AGD101 的 17 A 和 34 A 型号使用包含 PR #2675 更改的固件时，补偿电压与电流环输出电压共用 `MaxPWM` 限定的范围。任一相的合成指令超过限幅时，驱动器按同一比例缩放三相指令，并报告电压饱和。此时继续增大 `DTCompGain`，最大相电压指令的幅值仍受 `MaxPWM` 限制。在 v5.3.0-rc7 中，补偿后的相电压指令可能超过该限幅。[固件更改](https://github.com/akribis-agito/Firmware-Main/pull/2675)
 
 > **重要：** `DTCompGain` 是**逐驱动器标定**的参数，而非通用设置。正确值取决于所用驱动器的封锁时间，而该时间在产品系列间并不相同——AGD155 的死区时间是 AGD301 的四倍。默认值 1.0 对两者都不是最优值。
 

@@ -1,11 +1,8 @@
 ---
 keyword: MapLength
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 324
 attributes:
   access: rw
@@ -19,14 +16,18 @@ attributes:
   units: none
   range:
   - 1
-  - 60000
+  - 1600
   default: 10
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    range:
+    - 1
+    - 3000
 summary: Number of correction points along each error-mapping dimension.
 last_updated: '2026-10-17'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 ---
 # MapLength
 
@@ -49,6 +50,8 @@ It is an axis-scoped array saved to flash, and can be changed with the motor on,
 | 3D | `MapLength[1] × MapLength[2] × MapLength[3]` | `MapLength[3]` stacked 2D layers |
 
 Because the entries are addressed as one flat array starting at [MapStartIndex](MapStartIndex.md), the total must fit within the combined [MapTable](MapTable-MapTableB-MapTableC-MapTableD-MapTableE.md) banks. Each per-dimension value ranges `1 … 60000`; for 2D/3D the **product** is the real constraint.
+
+The last point in an active map is `MapStartIndex + MapLength[1] × … × MapLength[d] − 1`, where `d` is the active dimension count. It must fit within the product’s map storage. Enabling a map or changing its start or length returns error 14 if the last point would exceed that storage. The previous setting stays in effect. If Load restores a start and lengths that do not fit the currently active mapping mode, it disables the map, retains the restored values, and logs warning 2003.
 
 ## Examples
 

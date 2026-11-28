@@ -2,11 +2,8 @@
 keyword: ECAMMaster
 summary: Complex CAN code selecting the master-variable source for each ECAM cam pattern.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 309
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: EmulRat
 summary: Ratio between feedback encoder counts and the quadrature pulses emitted on the emulation output.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 69
 attributes:
   access: rw

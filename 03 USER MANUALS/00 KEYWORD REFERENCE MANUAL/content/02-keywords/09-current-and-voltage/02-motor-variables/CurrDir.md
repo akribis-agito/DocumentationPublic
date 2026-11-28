@@ -2,11 +2,8 @@
 keyword: CurrDir
 summary: Flips the direction of motor excitation (0 = normal, 1 = flipped).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 76
 attributes:
   access: rw

@@ -2,9 +2,8 @@
 keyword: VelUnitFct
 summary: 内部速度单位与所选速度工程单位之间的比例因子。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 806
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: RptWait
 summary: 重复点到点运动各次重复之间的驻留时间，单位为毫秒。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 147
 attributes:
   access: rw
@@ -22,11 +19,25 @@ attributes:
   - 0
   - 2147483647
   default: 0
-  scaling: 65.536
+  scaling: 16.384
   implemented: final
-overrides: {}
+overrides:
+  agd155-ec:
+    scaling: 16.0
+  agd155-ec-var34:
+    scaling: 16.0
+  agd155-ec-var34-3:
+    scaling: 16.0
+  agd156-ec:
+    scaling: 16.0
+  agd101-ec-34a:
+    scaling: 16.0
+  agd101-ec-17a:
+    scaling: 16.0
+  agm800-ec:
+    scaling: 16.0
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # RptWait

@@ -2,9 +2,7 @@
 keyword: PushEvSelect
 summary: 按轴设置的待发送推送事件类型位掩码。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 908
 attributes:
   access: rw
@@ -24,7 +22,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-09-25'
-doc_revision: '2026.09'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # PushEvSelect

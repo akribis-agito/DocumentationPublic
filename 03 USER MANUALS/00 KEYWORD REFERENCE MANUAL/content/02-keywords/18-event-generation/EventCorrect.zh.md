@@ -2,11 +2,8 @@
 keyword: EventCorrect
 summary: 根据当前轴位置和映射重新计算修正后事件表位置的命令。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 419
 attributes:
   access: ro
@@ -53,6 +50,8 @@ language: zh-CN
 | 对于 2D/3D 映射，其他已映射轴必须电机使能且不处于运动中 | 221 | 重新计算表时其位置必须稳定。 |
 
 每当误差映射或源 [EventTable](EventTable.md) 发生变化时，需重新运行 `EventCorrect`，然后为表模式生成选择修正后的表。
+
+反向映射在写入校正后的事件表时，将插值得到的原始编码器位置舍入到最近的计数。恰好处于半计数时取较大的整数，因此 +1.5 变为 +2，−1.5 变为 −1。正向位置映射采用相同规则。编码器量化以及读取锁存值所在的控制采样周期仍会影响报告的位置。
 
 ## 示例
 

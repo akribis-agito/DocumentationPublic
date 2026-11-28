@@ -2,11 +2,8 @@
 keyword: AmpType
 summary: 选择轴驱动其电机的方式——使用内置驱动器，或通过模拟/数字指令使用外部驱动器。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 226
 attributes:
   access: rw
@@ -20,17 +17,45 @@ attributes:
   units: none
   range:
   - 0
-  - 7
+  - 8
   default: 0
   scaling: 1.0
   implemented: partial
 overrides:
-  central-i.v5:
+  agd155-af-2a06:
     range:
     - 0
-    - 8
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+    - 0
+  agd155-af-2a10:
+    range:
+    - 0
+    - 0
+  agd155-ec:
+    range:
+    - 0
+    - 0
+  agd155-ec-var34:
+    range:
+    - 0
+    - 0
+  agd155-ec-var34-3:
+    range:
+    - 0
+    - 0
+  agd156-ec:
+    range:
+    - 0
+    - 0
+  agd101-ec-34a:
+    range:
+    - 0
+    - 0
+  agd101-ec-17a:
+    range:
+    - 0
+    - 0
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # AmpType
@@ -48,7 +73,7 @@ language: zh-CN
 由于 `AmpType` 是保存至闪存的轴相关参数，因此无法在电机使能或运动中更改；应在轴配置期间（通常在 PCSuite 设置页面）进行设置，然后执行 `Save`。
 
 > [!note] 状态：partial
-> 前置数据将 `AmpType` 标记为 `partial`。在 v4 上固件范围为 0–7；v5（central-i）将其扩展至 0–8。选择产品不支持的值时，将在电机使能时被拒绝，并触发控制器故障 [1053](../../04-error-codes/controller-error-codes.md)（"AmpType value not allowed for this product"）。
+> 前置数据将 `AmpType` 标记为 `partial`。在 v4 上固件范围为 0–7；v5 的上限取决于具体产品。选择产品不支持的值时，将在电机使能时被拒绝，并触发控制器故障 [1053](../../04-error-codes/controller-error-codes.md)（"AmpType value not allowed for this product"）。
 
 ## 工作原理
 
@@ -103,12 +128,12 @@ AAmpType            ; query the current amplifier mode
 
 ## 版本间变更
 
-| | v4（standalone 与 central-i） | v5（central-i） |
+| | v4（独立式和 Central-i） | v5（独立式和 Central-i） |
 |---|---|---|
-| 范围 | 0–7 | 0–8 |
+| 范围 | 0–7 | 0–8；下列驱动器型号仅接受 0 |
 | 新增模式 | — | 6（带反馈的 PD）、8（数字 SPI 相电流） |
 
-v5 仅适用于 central-i；在 standalone 产品上 `AmpType` 保持 v4 范围 0–7。
+两个 v5 产品系列均提供 `AmpType`。产品参数覆盖项中列出的 AGD155-AF、AGD101-EC、AGD155-EC 和 AGD156-EC 驱动器型号仅接受 0（内置 PWM）。上方远程单元的限制适用于 Central-i。
 
 ## 另请参阅
 

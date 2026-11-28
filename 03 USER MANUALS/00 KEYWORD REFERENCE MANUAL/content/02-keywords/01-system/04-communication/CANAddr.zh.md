@@ -2,11 +2,8 @@
 keyword: CANAddr
 summary: 控制器节点的 CAN 基地址。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 67
 attributes:
   access: rw

@@ -2,9 +2,8 @@
 summary: Correction value read from the gantry map table at the current indexed position.
 keyword: GantryMapVal
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 750
 attributes:
   access: ro

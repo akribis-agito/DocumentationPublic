@@ -2,11 +2,8 @@
 keyword: EventAlwaysOn
 summary: Runs by-gap event generation continuously, without stopping at EventEndPos.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 619
 attributes:
   access: rw
@@ -25,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-28'
-doc_revision: '2026.06'
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 ---
 # EventAlwaysOn
 
@@ -38,7 +35,7 @@ Runs by-gap event generation continuously, without stopping at EventEndPos.
 
 The end-position bypass applies to software event generation as well as hardware compare. It also applies when `EventBegPos` and `EventEndPos` are equal: that setting does not limit an endless run to one event.
 
-This applies only to by-gap mode. The single-event, table, hardware-table, and trigger-now schemes are unaffected by `EventAlwaysOn`.
+This applies only to by-gap mode. The single-event, table, hardware-table, and trigger-now schemes are unaffected by `EventAlwaysOn`; in particular, a hardware-table run (`EventType = 3`) always fires its selected rows and then completes.
 
 ## How it works
 
@@ -50,6 +47,8 @@ This applies only to by-gap mode. The single-event, table, hardware-table, and t
 When `EventAlwaysOn = 1`, the controller arms the by-gap engine in continuous mode at the [EventOn](EventOn.md) `0 → 1` edge, so the end-position check that would normally halt generation is bypassed. Change `EventAlwaysOn` before arming for it to take effect on the next run. The actual output state can be read back through [EventLoopback](EventLoopback.md).
 
 `EventAlwaysOn` is an axis-related parameter saved to flash and can be changed at any time.
+
+With an endless fixed-gap software series, a ModRev wrap shifts the next threshold by the same modulus as the position feedback. Spacing therefore continues across revolutions, including when the gap does not divide the modulus. This applies to software-comparator axes on the controller and to Central-i software events.
 
 ## Examples
 

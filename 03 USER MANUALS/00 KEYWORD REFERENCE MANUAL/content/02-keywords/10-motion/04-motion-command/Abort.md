@@ -2,11 +2,8 @@
 keyword: Abort
 summary: Immediately ends motion by clearing the motion state; no profiler deceleration ramp.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 133
 attributes:
   access: ro

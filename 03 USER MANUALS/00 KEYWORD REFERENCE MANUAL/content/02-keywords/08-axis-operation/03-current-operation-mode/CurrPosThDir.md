@@ -2,11 +2,8 @@
 keyword: CurrPosThDir
 summary: Trigger direction for the CurrPosTh position-reference check.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 427
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: ECAMCycles
 summary: 周期性 ECAM 凸轮曲线的重复次数（含无限循环模式）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 305
 attributes:
   access: rw

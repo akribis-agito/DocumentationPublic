@@ -2,11 +2,8 @@
 keyword: InjectFreq
 summary: 注入正弦波或方波的频率，单位为 Hz/100。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 117
 attributes:
   access: rw

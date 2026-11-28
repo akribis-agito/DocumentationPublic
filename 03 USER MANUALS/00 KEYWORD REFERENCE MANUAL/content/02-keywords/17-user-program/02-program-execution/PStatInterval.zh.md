@@ -2,11 +2,8 @@
 keyword: PStatInterval
 summary: 相邻两次参数统计传输之间的时间间隔，单位为毫秒。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 482
 attributes:
   access: rw

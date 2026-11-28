@@ -2,9 +2,8 @@
 keyword: ProgPushArgD
 summary: Pushes a 64-bit floating-point (double) value onto the running thread's argument stack ahead of a function call.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 784
 attributes:
   access: rw

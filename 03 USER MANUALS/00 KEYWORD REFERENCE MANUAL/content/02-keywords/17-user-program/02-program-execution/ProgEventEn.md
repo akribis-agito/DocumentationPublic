@@ -2,11 +2,8 @@
 keyword: ProgEventEn
 summary: Enables or disables servicing of an individual user program event.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 524
 attributes:
   access: rw

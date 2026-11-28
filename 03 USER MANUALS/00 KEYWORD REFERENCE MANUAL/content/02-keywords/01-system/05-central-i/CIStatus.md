@@ -2,11 +2,8 @@
 keyword: CIStatus
 summary: Per-axis array reporting the live Central-i port state, error counters, and last-error details.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 508
 attributes:
   access: ro
@@ -25,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-09-29'
+doc_revision: '2026.11'
 ---
 # CIStatus
 

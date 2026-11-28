@@ -2,11 +2,8 @@
 keyword: PTPKeepMoving
 summary: Lets a new Begin blend into the existing move instead of stopping first.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 625
 attributes:
   access: rw
@@ -26,7 +23,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-21'
-doc_revision: '2026.10'
+doc_revision: '2026.11'
 ---
 # PTPKeepMoving
 

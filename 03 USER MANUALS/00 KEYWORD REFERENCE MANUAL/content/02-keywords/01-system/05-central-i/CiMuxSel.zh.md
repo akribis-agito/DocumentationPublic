@@ -2,11 +2,8 @@
 keyword: CiMuxSel
 summary: 逐轴数组，选择通过 Central-i 多路复用器路由的物理端口。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 552
 attributes:
   access: rw

@@ -2,9 +2,8 @@
 keyword: ExtCurrCmdVal
 summary: Read-only array reporting the actual DAC code sent to the digital-SPI external amplifier, per phase.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 868
 attributes:
   access: ro

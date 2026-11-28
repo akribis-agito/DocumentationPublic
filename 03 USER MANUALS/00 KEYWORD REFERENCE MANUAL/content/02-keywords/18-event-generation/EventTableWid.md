@@ -2,11 +2,8 @@
 keyword: EventTableWid
 summary: Per-entry pulse width array; -1 uses the global EventPulseWid.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 497
 attributes:
   access: rw
@@ -24,9 +21,11 @@ attributes:
   default: -1
   scaling: 1.0
   implemented: final
-overrides: {}
-last_updated: '2026-10-29'
-doc_revision: '2026.10'
+overrides:
+  ci-master:
+    array_size: 65001
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 ---
 # EventTableWid
 
@@ -38,13 +37,11 @@ Per-entry pulse width array; -1 uses the global EventPulseWid.
 
 On implementations without `EventTblMode`, the per-entry widths are applied only in the software event-by-table scheme ([EventType](EventType.md) = `2`). In the hardware-buffered table scheme ([EventType](EventType.md) = `3`), and in all non-table schemes, `EventTableWid` is ignored and the global [EventPulseWid](EventPulseWid.md) is used.
 
-For AGM800 original-engine preloads (`EventType=3` with [EventLoad](EventLoad.md)), [EventTblMode](EventTblMode.md)=0 resolves the first selected row's width once for all rows. Mode 1 resolves selected rows in order using the hardware carry-forward rule described here. Settings are committed with their positions before arming. Changing widths invalidates a prepared load and is refused during a run.
+For AGM800 and AGM800-EC original-engine preloads (`EventType=3` with [EventLoad](EventLoad.md)), [EventTblMode](EventTblMode.md)=0 resolves the first selected row's width once for all rows. Mode 1 resolves selected rows in order using the hardware carry-forward rule described here. Settings are committed with their positions before arming. Changing widths invalidates a prepared load and is refused during a run.
 
-In pulse mode, the effective width must fit the existing 13-bit hardware field (1–8191 units) after the existing fine/coarse conversion; zero encoded units are refused before arm. If it still does not fit, preparation fails before arm; it is not silently truncated. This restriction does not change EventType=2.
+The effective width must fit the existing 13-bit hardware field (1–8191 units; an effective width of 0 is accepted only on the first selected row, where it selects toggle mode) after the existing fine/coarse conversion. If it still does not fit, preparation fails before arm; it is not silently truncated. This restriction does not change EventType=2. In both hardware preload modes the first resolved width sets polarity for the entire run. For example, in mode 1, a first row of -1 with a negative EventPulseWid selects inverted polarity even for later positive widths. Those rows may change pulse duration and output selection. In pulse mode, a width that rounds to zero hardware steps fails preparation.
 
-For this hardware preload path, a first selected width of -1 is resolved through `EventPulseWid`; an effective zero selects run-wide toggle in both modes. After a nonzero first effective width, mode 1 resolves each row and carries the most recent non--1 width forward. A later zero, or a subsequent -1 inheriting that zero, makes preparation fail in pulse mode; it does not switch the run to toggle mode. A nonzero request that quantizes to zero is also refused (for example, 1–9 ns with EventPulseRes=1).
-
-For both hardware preload modes, output polarity is fixed by the sign of the first resolved width for the whole run. With EventTblMode=1, if the first row is -1 and EventPulseWid is negative, later positive widths change pulse duration but retain inverted polarity. Mode 1 varies duration and output selection per row; it does not vary run polarity.
+For this hardware preload path, a first selected width of -1 is resolved through `EventPulseWid`; an effective zero selects run-wide toggle in both modes. After a nonzero first effective width, mode 1 resolves each row and carries the most recent non--1 width forward. A later row whose width is zero fails preparation and sets the [EventStatus](EventStatus.md) Fault bit; it never produces a zero-width pulse. A later -1 takes the most recent non--1 width, or `EventPulseWid` when no earlier row set one.
 
 ## How it works
 
@@ -62,9 +59,11 @@ When the begin entry is positive, each entry's width is resolved as follows:
 
 | Entry value | Width used for that entry |
 |-------------|---------------------------|
-| Positive | That value, as the pulse duration (units per [EventPulseRes](EventPulseRes.md)). It also becomes the carried-forward width for later `-1` entries. |
+| Positive | The requested pulse duration in [EventPulseRes](EventPulseRes.md) units. It becomes the carried-forward width for later `-1` entries. |
 | -1 | The carried-forward width — the most recent non-`-1` per-entry value seen earlier in the active range; if none has been seen yet, the global [EventPulseWid](EventPulseWid.md). (A `0` entry also updates the carried width to `0`, so a later `-1` then yields a zero-width pulse rather than reaching back to an earlier positive value.) |
 | 0 | A zero-width pulse for that entry. A `0` on a non-begin entry does **not** toggle — toggle mode is enabled only when the begin entry itself is `0`. |
+
+On AGM800 and AGM800-EC firmware containing the software-table width fix, `EventType=2` with incremental or hardware SIN-COS feedback limits explicit and inherited pulse widths to **41.93792 ms** on every row. For 5.3.0-rc7 behavior, see [EventPulseWid](EventPulseWid.md).
 
 The valid range for each entry is -1 to 10000000; -1 is the only negative value (it defers to the global width). Output polarity is taken from the sign of the width actually in use for the entry: a per-entry width is always non-negative, so inversion happens only when an entry defers (via `-1`) to a negative global [EventPulseWid](EventPulseWid.md). A positive per-entry width never inverts, even if the global is negative.
 

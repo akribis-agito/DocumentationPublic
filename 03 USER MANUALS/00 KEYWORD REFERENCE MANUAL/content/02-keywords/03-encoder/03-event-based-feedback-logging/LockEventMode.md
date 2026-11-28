@@ -2,9 +2,8 @@
 keyword: LockEventMode
 summary: 'Selects the lock/event operating mode: legacy auto-init (0) or the unified scheme that requires LockEventInit (1).'
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 831
 attributes:
   access: rw
@@ -18,7 +17,7 @@ attributes:
   units: none
   range:
   - -1
-  - 1
+  - 2
   default: 0
   scaling: 1.0
   implemented: final

@@ -2,9 +2,8 @@
 keyword: PosAuxUnitFct
 summary: 启用全局用户单位时，应用于辅助编码器位置值的比例系数。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 815
 attributes:
   access: rw

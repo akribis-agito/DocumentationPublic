@@ -2,9 +2,7 @@
 keyword: OneOverTFreq
 summary: Down-sampling exponent for the hardware polling frequency used in Vel[4].
 availability:
-  standalone:
-  - v4
-  central-i: []
+- controller
 can_code: 189
 attributes:
   access: rw
@@ -23,8 +21,6 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-removed_in:
-- v5
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 ---

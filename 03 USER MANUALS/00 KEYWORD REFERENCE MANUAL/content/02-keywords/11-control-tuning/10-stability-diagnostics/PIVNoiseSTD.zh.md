@@ -2,9 +2,8 @@
 keyword: PIVNoiseSTD
 summary: 静止噪声/抖动检测的 PIV 噪声方差阈值，以峰值电流限值的百分比表示。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 798
 attributes:
   access: rw

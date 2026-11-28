@@ -1,13 +1,9 @@
 ---
 keyword: VecJerk
 summary: 矢量运动的加加速度限制选择（0-9），将合成速度平滑为 S 曲线。
-language: zh-CN
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 639
 attributes:
   access: rw
@@ -28,6 +24,7 @@ attributes:
 overrides: {}
 last_updated: '2026-05-30'
 doc_revision: '2026.06'
+language: zh-CN
 ---
 # VecJerk
 

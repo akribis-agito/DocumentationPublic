@@ -2,11 +2,8 @@
 keyword: UPMDistOn
 summary: Enables the UPM disturbance rejection function.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 603
 attributes:
   access: rw

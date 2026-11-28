@@ -2,11 +2,8 @@
 keyword: MotorTemp
 summary: 只读的实测电机温度（在当前固件中标记为未实现）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 400
 attributes:
   access: ro
@@ -23,7 +20,7 @@ attributes:
   - 150
   default: 25
   scaling: 1.0
-  implemented: not_implemented
+  implemented: final
 overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'

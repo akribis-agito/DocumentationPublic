@@ -2,11 +2,8 @@
 keyword: MaxMotorCurr
 summary: 电机电流的硬限制；超过该值将禁用轴。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 99
 attributes:
   access: rw
@@ -14,19 +11,102 @@ attributes:
   flash: true
   type: scalar
   array_size: 1
-  data_type: int32
+  data_type: float32
   ok_in_motion: true
   ok_motor_on: true
   units: none
   range:
   - 0
-  - 76000
-  default: 76000
+  - 19000
+  default: 19000
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
-    data_type: float32
+  ci-master:
+    range:
+    - 0
+    - 76000
+    default: 76000
+  agc300-et:
+    range:
+    - 0
+    - 4750
+    default: 4750
+  agc301-et:
+    range:
+    - 0
+    - 4750
+    default: 4750
+  agc301-et-bioxtreme:
+    range:
+    - 0
+    - 4750
+    default: 4750
+  agd200-et-2d01:
+    range:
+    - 0
+    - 4750
+    default: 4750
+  agd200-et-2d02:
+    range:
+    - 0
+    - 9500
+    default: 9500
+  agd301-et-2d01:
+    range:
+    - 0
+    - 4750
+    default: 4750
+  agd301-et-2d02:
+    range:
+    - 0
+    - 9500
+    default: 9500
+  agd301-et-2d09:
+    range:
+    - 0
+    - 28000
+    default: 28000
+  agd155-af-2a06:
+    range:
+    - 0
+    - 28000
+    default: 28000
+  agd155-af-2a10:
+    range:
+    - 0
+    - 30500
+    default: 30500
+  agd155-ec:
+    range:
+    - 0
+    - 28000
+    default: 28000
+  agd155-ec-var34:
+    range:
+    - 0
+    - 30500
+    default: 30500
+  agd155-ec-var34-3:
+    range:
+    - 0
+    - 47000
+    default: 47000
+  agd156-ec:
+    range:
+    - 0
+    - 14507
+    default: 14507
+  agd101-ec-34a:
+    range:
+    - 0
+    - 30000
+    default: 30000
+  agd101-ec-17a:
+    range:
+    - 0
+    - 15000
+    default: 15000
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN

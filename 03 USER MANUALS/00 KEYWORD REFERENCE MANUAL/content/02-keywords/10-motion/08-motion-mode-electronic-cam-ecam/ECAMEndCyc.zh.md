@@ -2,11 +2,8 @@
 keyword: ECAMEndCyc
 summary: 周期性/重复 ECAM 凸轮曲线结束处的 GenData 索引。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 302
 attributes:
   access: rw
@@ -20,15 +17,67 @@ attributes:
   units: none
   range:
   - 0
-  - 1000
+  - 5000
   default: 100
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
+  ci-master:
     range:
     - 0
-    - 10000
+    - 1000
+  agc300-et:
+    range:
+    - 0
+    - 1000
+  agd200-et-2d01:
+    range:
+    - 0
+    - 1000
+  agd200-et-2d02:
+    range:
+    - 0
+    - 1000
+  agd200-et-2d05:
+    range:
+    - 0
+    - 1000
+  agd200-et-2d05-71:
+    range:
+    - 0
+    - 1000
+  agd155-af-2a06:
+    range:
+    - 0
+    - 1000
+  agd155-af-2a10:
+    range:
+    - 0
+    - 1000
+  agd155-ec:
+    range:
+    - 0
+    - 1000
+  agd155-ec-var34:
+    range:
+    - 0
+    - 1000
+  agd155-ec-var34-3:
+    range:
+    - 0
+    - 1000
+  agd156-ec:
+    range:
+    - 0
+    - 1000
+  agd101-ec-34a:
+    range:
+    - 0
+    - 1000
+  agd101-ec-17a:
+    range:
+    - 0
+    - 1000
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

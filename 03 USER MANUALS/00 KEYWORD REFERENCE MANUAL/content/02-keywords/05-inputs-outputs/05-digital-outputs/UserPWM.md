@@ -2,11 +2,8 @@
 keyword: UserPWM
 summary: Duty cycle of each user-controlled PWM output channel.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 626
 attributes:
   access: rw
@@ -25,9 +22,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v4:
-    scope: axis
-  central-i.v5:
+  ci-master:
     scope: axis
 last_updated: '2026-05-29'
 doc_revision: '2026.06'

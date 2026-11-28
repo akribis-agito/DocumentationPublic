@@ -2,11 +2,8 @@
 keyword: StallStat
 summary: Read-only stepper stall status flag (0 = no stall, 1 = stalled).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 514
 attributes:
   access: ro

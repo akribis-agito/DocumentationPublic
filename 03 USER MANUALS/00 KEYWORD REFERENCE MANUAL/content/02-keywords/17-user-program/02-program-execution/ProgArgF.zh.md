@@ -2,9 +2,8 @@
 keyword: ProgArgF
 summary: 从函数外部以 32 位浮点数（float）形式读取线程当前函数的参数槽。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 723
 attributes:
   access: rw
@@ -22,7 +21,9 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    array_size: 13
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

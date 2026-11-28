@@ -2,11 +2,8 @@
 keyword: ForceCmdVal
 summary: 用于力模式的用户自定义力参考序列（单位）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 571
 attributes:
   access: rw

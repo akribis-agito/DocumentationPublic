@@ -2,11 +2,8 @@
 keyword: CILinkConfig
 summary: 配置 Central-i 端口物理和协议参数的每轴数组。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 539
 attributes:
   access: rw

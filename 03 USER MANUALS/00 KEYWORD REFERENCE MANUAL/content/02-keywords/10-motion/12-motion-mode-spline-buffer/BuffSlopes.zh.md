@@ -2,11 +2,8 @@
 keyword: BuffSlopes
 summary: 在需要时施加于样条缓冲轨迹边缘的速度斜率。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 546
 attributes:
   access: rw

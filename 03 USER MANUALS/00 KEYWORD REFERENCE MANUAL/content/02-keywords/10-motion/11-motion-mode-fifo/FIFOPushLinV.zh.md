@@ -1,13 +1,9 @@
 ---
 keyword: FIFOPushLinV
 summary: 将恒速（线性）段压入 FIFO 运动队列。
-language: zh-CN
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 286
 attributes:
   access: rw
@@ -28,6 +24,7 @@ attributes:
 overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
+language: zh-CN
 ---
 # FIFOPushLinV
 

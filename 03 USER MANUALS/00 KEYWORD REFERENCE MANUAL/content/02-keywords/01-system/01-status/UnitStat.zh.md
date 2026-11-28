@@ -2,11 +2,8 @@
 keyword: UnitStat
 summary: 报告本单元硬件与固件健康状态的只读位域。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 75
 attributes:
   access: ro

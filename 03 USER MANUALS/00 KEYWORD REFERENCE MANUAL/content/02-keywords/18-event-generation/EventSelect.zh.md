@@ -2,11 +2,8 @@
 keyword: EventSelect
 summary: 选择多事件输出组中当前事件脉冲所驱动的输出线。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 317
 attributes:
   access: rw

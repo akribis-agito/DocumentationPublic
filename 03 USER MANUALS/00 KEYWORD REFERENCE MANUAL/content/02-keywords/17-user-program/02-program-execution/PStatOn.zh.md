@@ -2,11 +2,8 @@
 keyword: PStatOn
 summary: 启用或禁用周期性参数统计流式传输。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 480
 attributes:
   access: rw

@@ -1,13 +1,9 @@
 ---
 keyword: EventTableWid
 summary: 按条目脉冲宽度数组；-1 表示使用全局 EventPulseWid。
-language: zh-CN
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 497
 attributes:
   access: rw
@@ -25,9 +21,12 @@ attributes:
   default: -1
   scaling: 1.0
   implemented: final
-overrides: {}
-last_updated: '2026-10-29'
-doc_revision: '2026.10'
+overrides:
+  ci-master:
+    array_size: 65001
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
+language: zh-CN
 ---
 # EventTableWid
 
@@ -39,13 +38,11 @@ doc_revision: '2026.10'
 
 在未提供 `EventTblMode` 的实现中，按条目宽度仅在软件事件按表方案（[EventType](EventType.md) = `2`）中应用。在硬件缓冲表方案（[EventType](EventType.md) = `3`）以及所有非表方案中，`EventTableWid` 被忽略，使用全局 [EventPulseWid](EventPulseWid.md)。
 
-对于 AGM800 原有引擎预加载（支持 [EventLoad](EventLoad.md) 的 `EventType=3`），[EventTblMode](EventTblMode.md)=0 仅解析首个所选行的宽度，并用于所有行。模式 1 按顺序使用此处说明的硬件向后继承规则解析各所选行。使能前，设置与其位置一同提交。修改宽度会使已准备的数据失效，运行期间不允许修改。
+对于 AGM800 与 AGM800-EC 原有引擎预加载（支持 [EventLoad](EventLoad.md) 的 `EventType=3`），[EventTblMode](EventTblMode.md)=0 仅解析首个所选行的宽度，并用于所有行。模式 1 按顺序使用此处说明的硬件向后继承规则解析各所选行。使能前，设置与其位置一同提交。修改宽度会使已准备的数据失效，运行期间不允许修改。
 
-在脉冲模式下，有效宽度在按原有规则选择细或粗分辨率后，必须能够装入现有 13 位硬件字段（1–8191 个单位）；编码为零个单位时会在使能前被拒绝；若仍无法表示，准备过程会在使能前失败，不会静默截断。此限制不改变 EventType=2。
+有效宽度在按原有规则选择细或粗分辨率后，必须能够装入现有 13 位硬件字段（1–8191 个单位；有效宽度为 0 仅在首个所选行上被接受，此时选择翻转模式）；若仍无法表示，准备过程会在使能前失败，不会静默截断。此限制不改变 EventType=2。 在硬件预加载的两种模式中，首个解析后的脉宽决定整次运行的极性。例如，在模式 1 中，如果首行为 -1 且 EventPulseWid 为负，后续行即使指定正脉宽，输出仍保持反向；后续行可改变脉宽大小和输出选择。在脉冲模式中，舍入为零个硬件步长的脉宽会使准备失败。
 
-对于此硬件预加载路径，首个所选宽度为 -1 时使用 `EventPulseWid` 解析；有效值为零时，两种模式均在整个运行中采用翻转模式。首个有效宽度非零时，模式 1 逐行解析，并向后继承最近的非 -1 宽度。在脉冲模式下，后续零值或继承该零值的 -1 会使准备失败，不会将运行改为翻转模式。非零请求若量化为零也会被拒绝（例如 EventPulseRes=1 时的 1–9 ns）。
-
-两种硬件预加载模式的输出极性均由首个解析后宽度的符号决定，并在整个运行期间保持不变。在 EventTblMode=1 时，如果首行为 -1 且 EventPulseWid 为负，后续正宽度只改变脉冲时长，仍保持反相极性。模式 1 可逐行改变时长和输出选择，但不能逐行改变运行极性。
+对于此硬件预加载路径，首个所选宽度为 -1 时使用 `EventPulseWid` 解析；有效值为零时，两种模式均在整个运行中采用翻转模式。首个有效宽度非零时，模式 1 逐行解析，并向后继承最近的非 -1 宽度。后续行宽度为零时，准备失败并置位 [EventStatus](EventStatus.md) 的 Fault 位，不会产生零宽度脉冲。后续 -1 取最近的非 -1 宽度；若之前没有行设置宽度，则使用 `EventPulseWid`。
 
 ## 工作原理
 
@@ -63,9 +60,11 @@ doc_revision: '2026.10'
 
 | 条目值 | 该条目使用的宽度 |
 |-------------|---------------------------|
-| 正值 | 该值作为脉冲时长（单位参见 [EventPulseRes](EventPulseRes.md)）。同时成为后续 `-1` 条目的向后传递宽度。 |
+| 正值 | 请求的脉冲时长，单位由 [EventPulseRes](EventPulseRes.md) 指定。该值也会传递给后续的 `-1` 条目。 |
 | -1 | 向后传递宽度——即活动范围中更早出现的最近非 `-1` 按条目值；若尚未出现，则使用全局 [EventPulseWid](EventPulseWid.md)。（`0` 条目也会将传递宽度更新为 `0`，因此后续 `-1` 条目将产生零宽度脉冲，而非回溯到更早的正值。） |
 | 0 | 该条目产生零宽度脉冲。非起始条目的 `0` **不会**触发切换——切换模式仅在起始条目本身为 `0` 时启用。 |
+
+在包含软件表脉宽修复的 AGM800 和 AGM800-EC 固件中，对于使用增量式或硬件 SIN-COS 反馈的 `EventType=2`，各行显式设置和继承的脉宽上限均为 **41.93792 ms**。5.3.0-rc7 的行为见 [EventPulseWid](EventPulseWid.md)。
 
 每个条目的有效范围为 -1 至 10000000；-1 是唯一的负值（延用全局宽度）。输出极性取自该条目实际使用宽度的符号：按条目宽度始终为非负值，因此仅当条目通过 `-1` 延用负值全局 [EventPulseWid](EventPulseWid.md) 时才发生反相。正值的按条目宽度不会反相，即使全局值为负。
 

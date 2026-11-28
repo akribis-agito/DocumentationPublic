@@ -2,11 +2,8 @@
 keyword: ProgHaltAll
 summary: 暂停所有当前活动的用户程序线程。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 278
 attributes:
   access: ro

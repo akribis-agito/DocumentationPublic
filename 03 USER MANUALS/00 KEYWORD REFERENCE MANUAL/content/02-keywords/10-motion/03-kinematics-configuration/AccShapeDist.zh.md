@@ -2,11 +2,8 @@
 keyword: AccShapeDist
 summary: 定义加速度整形曲线的逐段距离数组。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 163
 attributes:
   access: rw
@@ -25,7 +22,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
+  ci-master:
     data_type: int64
     range:
     - 0

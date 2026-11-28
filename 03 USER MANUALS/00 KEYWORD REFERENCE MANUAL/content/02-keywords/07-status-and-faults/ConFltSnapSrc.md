@@ -2,11 +2,8 @@
 keyword: ConFltSnapSrc
 summary: Configures which parameters are captured into ConFltSnapVal on a fault.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 528
 attributes:
   access: rw

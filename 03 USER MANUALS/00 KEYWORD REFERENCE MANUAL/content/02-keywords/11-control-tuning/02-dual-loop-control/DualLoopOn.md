@@ -2,11 +2,8 @@
 keyword: DualLoopOn
 summary: Enables and configures dual-loop control.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 269
 attributes:
   access: rw
@@ -25,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 ---
 # DualLoopOn
 
@@ -53,6 +50,8 @@ When dual-loop is enabled, the load feedback should be connected to the main fee
 With `DualLoopOn = 1`, the velocity feedback is taken from the auxiliary-encoder velocity and scaled to the unit chosen by `DualLoopFact`; commutation is derived from the auxiliary (motor) encoder rather than the main encoder. With `DualLoopOn = 2`, the velocity feedback is the filtered analog tachometer signal instead.
 
 The active result is reported by [DualLoopStat](DualLoopStat.md). The pseudo dual-loop variant ([DualEncSwapOn](DualEncSwapOn.md)) and the range-limited variant ([DualEncMode](DualEncMode.md) / [DualEncRange](DualEncRange.md)) further modify which feedback the position loop uses.
+
+On multi-axis CONTROLLER drives using `AuxAsPDPosOn = 0`, axis A takes its motor encoder from B, B from C, and C from A. Each axis uses the next encoder's last complete position, position change per tick and velocity. The velocity loop applies `DualLoopFact` to the velocity. Commutation uses the position and its change per tick.
 
 ## Examples
 

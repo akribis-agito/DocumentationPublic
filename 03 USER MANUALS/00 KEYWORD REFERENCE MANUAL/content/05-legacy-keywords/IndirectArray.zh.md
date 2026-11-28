@@ -1,11 +1,9 @@
 ---
 keyword: IndirectArray
+summary: 选择间接访问机制所操作的目标数组。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 436
 attributes:
   access: rw
@@ -27,7 +25,6 @@ overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 选择间接访问机制所操作的目标数组。
 ---
 # IndirectArray
 

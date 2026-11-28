@@ -2,9 +2,8 @@
 keyword: PosPDUnitUnt
 summary: Free-text unit label for pulse-and-direction position, one character per array element.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 819
 attributes:
   access: rw

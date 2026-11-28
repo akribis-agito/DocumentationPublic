@@ -39,11 +39,12 @@ size), then run the **Next steps** checklist.
 {
   "id": "02-keywords/.../PosGain.md",          // rel path = stable upsert key
   "keyword": "PosGain",
-  "text": "Keyword PosGain (CAN 100; axis; rw; range=[0, 20000]; v4/v5): <summary>\n\n<body>",
+  "text": "Keyword PosGain (CAN 100; axis; rw; range=[0, 20000]; controller/ci-master; differs on agd155-ec): <summary>\n\n<body>",
   "metadata": {
     "path": "...", "keyword": "PosGain",
     "can_code": 100, "scope": "axis", "units": "user", "range": [0,20000],
-    "access": "rw", "data_type": "int32", "availability": {...}, ...,
+    "access": "rw", "data_type": "int32", "availability": ["controller", "ci-master"],
+    "products": [...], "overrides": {...}, ...,
     "last_updated": "2026-06-02", "doc_revision": "2026.06", "sha256": "…"
   },
   "related": ["PosKi", "VelGain", ...]          // intra-manual links, for graph re-ranking
@@ -51,9 +52,11 @@ size), then run the **Next steps** checklist.
 ```
 
 - `text` = **synthesized fact header** + body. The header front-loads the facts
-  so fact queries ("range of X", "is X available in v5") embed/retrieve well.
+  so fact queries ("range of X", "is X on the AGM800") embed/retrieve well. It names
+  the product types, the `products` the keyword is limited to, and the override keys
+  (`differs on ci-master,agd155-ec`) whose facts differ from the primary cell.
 - `metadata` = filterable facts + version stamps (filter by `availability`,
-  `scope`, `units`; cite by `doc_revision`; re-embed by `sha256`).
+  `products`, `scope`, `units`; per-product facts in `overrides`; cite by `doc_revision`; re-embed by `sha256`).
 - `related` = keywords this page links to.
 
 ### Commands
@@ -77,7 +80,7 @@ MANUAL="../../03 USER MANUALS/00 KEYWORD REFERENCE MANUAL"
 ## Versioning system (how it works — already shipped)
 
 Documentation versioning is implemented and live (baseline `2026.06`). It is
-**separate from** the firmware `availability` (v4/v5) facts: `doc_revision` tells
+**separate from** the firmware `availability` (product type) facts: `doc_revision` tells
 a consumer how current their copy of the *documentation* is; it says nothing
 about firmware compatibility. `keyword-docgen version` produces three artifacts:
 

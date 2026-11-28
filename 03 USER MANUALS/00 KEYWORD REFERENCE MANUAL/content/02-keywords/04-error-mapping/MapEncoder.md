@@ -1,11 +1,8 @@
 ---
 keyword: MapEncoder
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 322
 attributes:
   access: rw
@@ -17,16 +14,14 @@ attributes:
   ok_in_motion: false
   ok_motor_on: true
   units: none
-  range:
-  - 1
-  - 8
+  range: null
   default: 1
   scaling: 1.0
   implemented: final
 overrides: {}
 summary: Selects which axis encoder drives each error-mapping dimension.
-last_updated: '2026-10-17'
-doc_revision: '2026.06'
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 ---
 # MapEncoder
 
@@ -55,7 +50,7 @@ So the mapping is:
 | 4 | Axis B auxiliary encoder |
 | … | … (pattern repeats per axis) |
 
-The default is `1` (this axis's own main encoder). For the table-building/correction routine to accept the map, `MapEncoder[1]` **must** point to this axis's own main encoder; for 2D/3D, the second/third entries must point to **main** encoders of standing, motor-on axes (a wrong selection raises a "must be main encoders" / "must be first encoder" event). The valid range spans `1 … (number of axes) × 2`; on a single-axis controller only `1` and `2` are meaningful.
+The default is `1` (this axis's own main encoder). For the table-building/correction routine to accept the map, `MapEncoder[1]` **must** point to this axis's own main encoder; for 2D/3D, the second/third entries must point to **main** encoders of standing, motor-on axes (a wrong selection raises a "must be main encoders" / "must be first encoder" event). The ordinary encoder range spans `1 … (number of axes) × 2`; on a single-axis controller only `1` and `2` are meaningful.
 
 ## Examples
 
@@ -69,7 +64,7 @@ AMapEncoder[1]       ; read the encoder selected for the first dimension
 
 - **Index 0** — invalid; valid indices are `MapEncoder[1]`/`[2]`/`[3]`.
 - **Motor on / in motion at write** — accepted with the motor on at standstill; rejected while the axis is in motion (error 21).
-- **Out of range** — values outside `1`–`number-of-axes × 2` are rejected.
+- AGM800 also accepts gantry selectors 100, 101, 102 and 103 for the linear feedback of pairs A/B, C/D, E/F and G/H respectively, in any of the three map dimensions. An invalid saved selector between the ordinary encoders and 100 falls back to the default encoder. A new write outside the ordinary or implemented-pair ranges is rejected.
 - **`MapEncoder[1]` wrong** — must point at this axis's own main encoder for the table build to accept the map; otherwise the build raises a "must be first encoder" event.
 - **2D/3D requires main encoders** — additional encoders for 2D/3D must be **main** encoders of motor-on, standing axes; auxiliary encoders for `[2]`/`[3]` are rejected with a "must be main encoders" event.
 - **`MapType = 0`** — value stored but not consulted.

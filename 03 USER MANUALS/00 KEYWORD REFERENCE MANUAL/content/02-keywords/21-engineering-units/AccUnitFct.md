@@ -2,9 +2,8 @@
 keyword: AccUnitFct
 summary: Scale factor between internal acceleration units and the selected acceleration engineering unit.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 809
 attributes:
   access: rw

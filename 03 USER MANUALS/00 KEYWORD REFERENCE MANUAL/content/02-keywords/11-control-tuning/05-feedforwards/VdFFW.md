@@ -2,9 +2,7 @@
 keyword: VdFFW
 summary: Read-only direct-axis voltage feedforward output added to the d-axis voltage command.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 851
 attributes:
   access: ro

@@ -2,11 +2,8 @@
 keyword: PlantModel
 summary: Array of identified plant-model coefficients used by auto-tuning and velocity filter design.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 558
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: EmulIndexType
 summary: Selects the type of index pulse generated on the encoder emulation output.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 402
 attributes:
   access: rw

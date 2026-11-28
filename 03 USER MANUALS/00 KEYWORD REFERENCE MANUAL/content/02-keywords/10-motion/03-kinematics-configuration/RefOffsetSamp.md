@@ -2,11 +2,8 @@
 keyword: RefOffsetSamp
 summary: Number of servo samples over which a reference position offset is ramped in.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 165
 attributes:
   access: rw

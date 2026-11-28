@@ -2,11 +2,8 @@
 keyword: RLType
 summary: 选择 PCSuite 的 R/L 测量结果以相数据（0）还是线间（线对线）数据（1）报告。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 375
 attributes:
   access: rw

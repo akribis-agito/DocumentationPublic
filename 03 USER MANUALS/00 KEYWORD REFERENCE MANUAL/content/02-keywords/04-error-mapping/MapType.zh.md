@@ -1,11 +1,8 @@
 ---
 keyword: MapType
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 320
 attributes:
   access: rw
@@ -26,7 +23,7 @@ attributes:
 overrides: {}
 summary: 选择误差映射维度（关闭、1D、2D 或 3D）。
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # MapType
@@ -66,6 +63,8 @@ language: zh-CN
 ### 多轴映射要求源轴处于静止
 
 映射本身无法在运动中启用（`ok_in_motion = false`），但写入 `MapType` 本身不会验证编码器选择。更严格的编码器/静止要求是单独强制执行的，即当在已映射的轴上运行**事件修正**时：第一维必须引用本轴自身的主编码器，对于 2D/3D，附加的源轴（由 [MapEncoder](MapEncoder.md) 选择）必须**电机使能且不运动**，并且必须使用其**主**编码器。
+
+位置映射将插值得到的修正量舍入到最近的计数。恰好处于半计数时取较大的整数。在二维和三维映射中，中间插值保留小数，直到得到最终修正量时才舍入。
 
 ## 示例
 

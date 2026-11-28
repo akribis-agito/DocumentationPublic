@@ -2,11 +2,8 @@
 keyword: FastIdDownSam
 summary: 设置 PRBS 新值生成速率的降采样因子。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 541
 attributes:
   access: rw

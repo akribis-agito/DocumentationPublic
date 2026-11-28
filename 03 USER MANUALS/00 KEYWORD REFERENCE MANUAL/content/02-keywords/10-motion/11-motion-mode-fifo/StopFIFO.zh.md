@@ -2,11 +2,8 @@
 keyword: StopFIFO
 summary: 命令，将当前正在执行的 FIFO 片段设为最后一个片段，从而结束序列。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 291
 attributes:
   access: ro

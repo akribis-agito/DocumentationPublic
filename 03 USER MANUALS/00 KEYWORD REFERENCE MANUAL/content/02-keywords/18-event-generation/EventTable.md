@@ -2,11 +2,8 @@
 keyword: EventTable
 summary: Array of absolute positions at which event output pulses are generated.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 316
 attributes:
   access: rw
@@ -24,7 +21,9 @@ attributes:
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    array_size: 65001
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 ---

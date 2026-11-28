@@ -2,9 +2,8 @@
 keyword: UserUnitsEn
 summary: Master enable for the global engineering-units feature on an axis.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 826
 attributes:
   access: rw
@@ -24,7 +23,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-10-10'
-doc_revision: '2026.06'
+doc_revision: '2026.11'
 ---
 # UserUnitsEn
 

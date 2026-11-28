@@ -2,11 +2,8 @@
 keyword: BuffCycles
 summary: 样条缓冲轨迹的重复执行次数。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 548
 attributes:
   access: rw

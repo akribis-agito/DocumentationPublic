@@ -2,9 +2,16 @@
 keyword: ECATDrvReset
 summary: 请求 EtherCAT 通信模块复位驱动器的命令。
 availability:
-  standalone:
-  - v5
-  central-i: []
+- controller
+- ci-master
+products:
+- agd101-ec-17a
+- agd101-ec-34a
+- agd155-ec
+- agd155-ec-var34
+- agd155-ec-var34-3
+- agd156-ec
+- agm800-ec
 can_code: 888
 attributes:
   access: ro
@@ -23,8 +30,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-08-16'
-doc_revision: '2026.08'
+last_updated: '2026-09-25'
+doc_revision: '2026.09'
 language: zh-CN
 ---
 # ECATDrvReset

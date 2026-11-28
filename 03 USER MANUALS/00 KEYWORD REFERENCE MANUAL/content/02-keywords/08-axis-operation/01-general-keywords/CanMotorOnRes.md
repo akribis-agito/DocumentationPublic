@@ -2,11 +2,8 @@
 keyword: CanMotorOnRes
 summary: Result code from the last CanMotorOn enable attempt.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 413
 attributes:
   access: ro

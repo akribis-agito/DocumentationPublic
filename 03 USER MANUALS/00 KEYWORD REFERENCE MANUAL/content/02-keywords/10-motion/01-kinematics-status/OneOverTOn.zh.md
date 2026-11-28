@@ -2,11 +2,8 @@
 keyword: OneOverTOn
 summary: 使能或禁用以 Vel[4] 报告的 1/T 速度测量。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 187
 attributes:
   access: rw

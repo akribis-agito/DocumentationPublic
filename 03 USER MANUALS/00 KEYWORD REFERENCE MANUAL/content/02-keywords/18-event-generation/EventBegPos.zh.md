@@ -2,11 +2,8 @@
 keyword: EventBegPos
 summary: 单次事件和按间隔模式中第一个生成事件的位置。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 181
 attributes:
   access: rw

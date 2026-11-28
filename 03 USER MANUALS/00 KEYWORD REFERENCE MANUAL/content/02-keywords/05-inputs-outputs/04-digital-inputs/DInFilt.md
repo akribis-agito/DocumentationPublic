@@ -2,11 +2,8 @@
 keyword: DInFilt
 summary: Software debounce filter for all digital inputs on an axis.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 213
 attributes:
   access: rw

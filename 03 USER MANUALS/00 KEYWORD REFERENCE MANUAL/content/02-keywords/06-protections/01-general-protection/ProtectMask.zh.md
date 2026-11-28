@@ -2,11 +2,8 @@
 keyword: ProtectMask
 summary: 位域，启用哪些硬件保护条件触发故障。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 97
 attributes:
   access: rw

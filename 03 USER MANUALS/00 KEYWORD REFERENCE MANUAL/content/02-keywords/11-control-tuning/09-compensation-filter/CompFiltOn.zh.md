@@ -2,9 +2,8 @@
 keyword: CompFiltOn
 summary: 启用补偿滤波器，将测量力与位置预测力进行融合。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 834
 attributes:
   access: rw

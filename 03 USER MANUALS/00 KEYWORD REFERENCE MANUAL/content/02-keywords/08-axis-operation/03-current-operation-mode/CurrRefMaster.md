@@ -2,9 +2,8 @@
 summary: Index of the master axis whose current reference a slave drive copies.
 keyword: CurrRefMaster
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 553
 attributes:
   access: rw
@@ -18,11 +17,51 @@ attributes:
   units: none
   range:
   - 0
-  - 7
+  - 2
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    range:
+    - 0
+    - 7
+  agd155-af-2a06:
+    range:
+    - 0
+    - 0
+  agd155-af-2a10:
+    range:
+    - 0
+    - 0
+  agd155-ec:
+    range:
+    - 0
+    - 0
+  agd155-ec-var34:
+    range:
+    - 0
+    - 0
+  agd155-ec-var34-3:
+    range:
+    - 0
+    - 0
+  agd156-ec:
+    range:
+    - 0
+    - 0
+  agd101-ec-34a:
+    range:
+    - 0
+    - 0
+  agd101-ec-17a:
+    range:
+    - 0
+    - 0
+  agm800-ec:
+    range:
+    - 0
+    - 5
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 ---

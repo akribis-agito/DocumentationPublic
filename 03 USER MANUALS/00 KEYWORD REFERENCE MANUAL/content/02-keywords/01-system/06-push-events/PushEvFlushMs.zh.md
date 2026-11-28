@@ -2,9 +2,7 @@
 keyword: PushEvFlushMs
 summary: 已入队的推送事件在发送前的最长等待时间，单位为毫秒。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 913
 attributes:
   access: rw
@@ -23,8 +21,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-09-25'
-doc_revision: '2026.09'
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # PushEvFlushMs
@@ -49,7 +47,7 @@ language: zh-CN
 
 `PushEvFlushMs` 仅作用于推送事件，不改变 `printf` 的发送时序。
 
-该周期由控制器的毫秒节拍计数，该节拍以 1024 Hz 运行（每 16 个控制周期一次），因此一个单位约为 0.98 ms。
+该周期由控制器的毫秒节拍计数，该节拍每 16 个控制周期一次：AGM800 上为 1024 Hz，一个单位约为 0.98 ms；AGM800-EC 上为 1000 Hz，一个单位为 1 ms。
 
 > **`PushEvFlushMs` 不限制重试。** 如果发送被拒绝，定时器不会重新开始计时，因此无论如何设置，控制器都会在每个后台轮次重试，直到发送成功。如果上位机已连接但不读取，每次重试都可能使后台循环停顿最长约 6 秒。参见[概述](00-overview.md)。
 

@@ -2,9 +2,7 @@
 keyword: PushEvFillPct
 summary: Push-event queue fill level, in percent, that forces a send.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 914
 attributes:
   access: rw
@@ -24,7 +22,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-09-25'
-doc_revision: '2026.09'
+doc_revision: '2026.11'
 ---
 # PushEvFillPct
 

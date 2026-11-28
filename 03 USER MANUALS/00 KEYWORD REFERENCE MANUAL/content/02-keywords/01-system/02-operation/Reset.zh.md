@@ -2,11 +2,8 @@
 keyword: Reset
 summary: 执行软件重新上电；重启时重新加载闪存参数。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 234
 attributes:
   access: ro

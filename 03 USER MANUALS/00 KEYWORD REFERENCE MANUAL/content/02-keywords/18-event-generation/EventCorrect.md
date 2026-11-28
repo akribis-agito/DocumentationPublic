@@ -2,11 +2,8 @@
 keyword: EventCorrect
 summary: Command that recalculates corrected event-table positions from the current axis position and mapping.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 419
 attributes:
   access: ro
@@ -52,6 +49,8 @@ The command checks several prerequisites and is rejected (returns an error) if a
 | For 2D/3D maps, the other mapped axes must be motor-on and not moving | 221 | Their positions must be stable while the table is recomputed. |
 
 Run `EventCorrect` again whenever the error map or the source [EventTable](EventTable.md) changes, then select the corrected table for table-mode generation.
+
+The inverse map rounds the interpolated raw encoder position to the nearest count when storing the corrected event table. At an exact half count it chooses the greater integer, so +1.5 becomes +2 and −1.5 becomes −1. Forward position mapping uses the same tie rule. Encoder quantisation and the control sample at which a lock is read can still affect the reported position.
 
 ## Examples
 

@@ -2,11 +2,8 @@
 keyword: EncStatReg
 summary: Read-only status register reporting absolute-encoder health bits (disconnect, error, warning, CRC).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 422
 attributes:
   access: ro
@@ -25,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-10-18'
-doc_revision: '2026.10'
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 ---
 # EncStatReg
 
@@ -34,7 +31,7 @@ Read-only, per-axis encoder status. Read it in PCSuite with `AEncStatReg` (axis 
 
 ## Central-i main feedback
 
-For main BiSS-C, EnDat and Tamagawa feedback, the CI_MASTER firmware synthesizes status from the received remote inputs. Firmware containing the [status-reporting repair](https://github.com/akribis-agito/Firmware-Main/issues/1273) refreshes these existing mapped bits whenever the main absolute-encoder handler runs, after its initialization window. Firmware containing the [Tamagawa startup repair](https://github.com/akribis-agito/Firmware-Main/issues/1452) also publishes these same mapped bits during active standard AMP main-Tamagawa settling:
+For main BiSS-C, EnDat and Tamagawa feedback, the CI_MASTER firmware synthesizes status from the received remote inputs. Firmware 5.3.0-rc4 and later refreshes these existing mapped bits whenever the main absolute-encoder handler runs, after its initialization window. Firmware 5.3.0-rc5 and later also publishes these same mapped bits during active standard AMP main-Tamagawa settling:
 
 | Bit | Mask | Received input |
 |---|---|---|
@@ -54,7 +51,7 @@ The standalone handler uses the status itself for its fault policy and can clear
 
 ## Reporting versus fault response
 
-Firmware containing the [accepted-quality repair](https://github.com/akribis-agito/Firmware-Main/issues/1408) preserves this current-input diagnostic mapping. For active standard AMP main BiSS-C, EnDat and Tamagawa feedback on AGM800/EC, encoder-error policy instead uses quality accepted with the main position under CRC1. After a rejected or skipped decode, diagnostics can differ from that retained policy evidence: a rejected bad frame can set diagnostic bits without spoiling accepted good quality, and a rejected clean frame can clear diagnostic bits without clearing accepted bad quality. This does not change lock/event status ownership or qualify startup, physical freshness or full encoder alarms.
+Firmware 5.3.0-rc5 and later preserves this current-input diagnostic mapping. For active standard AMP main BiSS-C, EnDat and Tamagawa feedback on AGM800/EC, encoder-error policy instead uses quality accepted with the main position under CRC1. After a rejected or skipped decode, diagnostics can differ from that retained policy evidence: a rejected bad frame can set diagnostic bits without spoiling accepted good quality, and a rejected clean frame can clear diagnostic bits without clearing accepted bad quality. This does not change lock/event status ownership or qualify startup, physical freshness or full encoder alarms.
 
 `EncAbsErrTime=-1` bypasses the existing CRC/error counting, extrapolation and timeout fault response. Independent main-encoder protection handling remains active. With handling enabled, CRC and generic-error conditions use separate counters and can produce [ConFlt](../../07-status-and-faults/ConFlt.md) 1069 and 1068; the existing protection path uses 1070. A reported condition and a recorded fault are different observations. Consult the fault log for recorded fault history.
 

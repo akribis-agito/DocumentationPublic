@@ -2,11 +2,22 @@
 keyword: AutoGStatus
 summary: A read-only array (indexes 1 to 50) that reports the working values of the automatic gain tuning process for the axis.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
+products:
+- agc300-et
+- agc301-et
+- agc301-et-bioxtreme
+- agd155-af-2a06
+- agd155-af-2a10
+- agd200-et-2d01
+- agd200-et-2d02
+- agd200-et-2d05
+- agd200-et-2d05-71
+- agd301-et-2d01
+- agd301-et-2d02
+- agd301-et-2d05
+- agd301-et-2d09
 can_code: 357
 attributes:
   access: ro

@@ -1,11 +1,9 @@
 ---
 keyword: ScopeAbout
 summary: 报告当前 Central-i 示波器会话的元数据。
-language: zh-CN
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 746
 attributes:
   access: ro
@@ -26,6 +24,7 @@ attributes:
 overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
+language: zh-CN
 ---
 # ScopeAbout
 

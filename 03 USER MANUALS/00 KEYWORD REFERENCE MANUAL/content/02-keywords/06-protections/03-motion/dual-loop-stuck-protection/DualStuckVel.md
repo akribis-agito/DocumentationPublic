@@ -2,11 +2,8 @@
 keyword: DualStuckVel
 summary: Maximum tolerated velocity difference between the two dual-loop feedbacks.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 157
 attributes:
   access: rw
@@ -24,9 +21,30 @@ attributes:
   default: 40000
   scaling: 1.0
   implemented: final
-overrides: {}
-last_updated: '2026-10-10'
-doc_revision: '2026.06'
+overrides:
+  agd155-ec:
+    units: scaling
+    scaling: 1.024
+  agd155-ec-var34:
+    units: scaling
+    scaling: 1.024
+  agd155-ec-var34-3:
+    units: scaling
+    scaling: 1.024
+  agd156-ec:
+    units: scaling
+    scaling: 1.024
+  agd101-ec-34a:
+    units: scaling
+    scaling: 1.024
+  agd101-ec-17a:
+    units: scaling
+    scaling: 1.024
+  agm800-ec:
+    units: scaling
+    scaling: 1.024
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 ---
 # DualStuckVel
 
@@ -67,6 +85,8 @@ The default is `40000` count/s. Because the gate is `DualLoopOn`, this protectio
 - **Range overflow:** writes outside `0…1300000000` are rejected with an out-of-range error; the stored value is left unchanged.
 - **Clearing the fault:** ConFlt code 1049 clears on re-enable ([MotorOn](../../../08-axis-operation/01-general-keywords/MotorOn.md) = 1) or by writing `AConFlt=0`; the [ErrLog](../../../07-status-and-faults/ErrLog.md) entry persists.
 - **HWProtectBits / ProtectMask:** the dual-loop-stuck trip is not maskable through [ProtectMask](../../01-general-protection/ProtectMask.md) (that mask covers hardware-protection bits only).
+
+On multi-axis CONTROLLER drives with `DualLoopOn = 1` and `AuxAsPDPosOn = 0`, the comparison uses the next axis's encoder velocity scaled by `DualLoopFact`. At unity gain, 37 counts per tick gives 606208 in the internal Q14 velocity units used by both encoders. Earlier firmware used the unscaled delta (37) for the second encoder. Recheck the protection threshold if it was tuned on that firmware. Enter the threshold in the units specified for the product.
 
 ## Examples
 

@@ -2,9 +2,8 @@
 keyword: LockEventInit
 summary: 通过学习固件到硬件的捕获偏移来初始化统一的锁存/事件配置（仅模式 1）。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 832
 attributes:
   access: ro
@@ -23,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-10-09'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # LockEventInit

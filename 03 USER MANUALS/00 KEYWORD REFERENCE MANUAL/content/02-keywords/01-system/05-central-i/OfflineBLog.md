@@ -2,11 +2,8 @@
 keyword: OfflineBLog
 summary: Rolling log of all logged Central-i offline (mailbox) transactions, recorded on offline mailbox 2.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 621
 attributes:
   access: rw

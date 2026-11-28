@@ -2,11 +2,8 @@
 keyword: ChainAddress
 summary: 控制器以菊花链拓扑运行时使用的 CAN 地址。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 159
 attributes:
   access: rw

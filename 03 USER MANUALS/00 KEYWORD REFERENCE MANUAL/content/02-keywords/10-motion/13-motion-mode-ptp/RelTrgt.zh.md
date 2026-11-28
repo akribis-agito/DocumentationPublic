@@ -2,11 +2,8 @@
 keyword: RelTrgt
 summary: 下一次点到点运动的相对目标距离（用户单位）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 135
 attributes:
   access: rw
@@ -25,7 +22,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
+  ci-master:
     data_type: int64
     range:
     - -2251799813685248

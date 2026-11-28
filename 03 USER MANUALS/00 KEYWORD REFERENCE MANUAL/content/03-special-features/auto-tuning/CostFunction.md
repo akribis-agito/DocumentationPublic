@@ -2,11 +2,8 @@
 keyword: CostFunction
 summary: Evaluates the cost metric used by the automatic current-loop PI tuning.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 672
 attributes:
   access: ro

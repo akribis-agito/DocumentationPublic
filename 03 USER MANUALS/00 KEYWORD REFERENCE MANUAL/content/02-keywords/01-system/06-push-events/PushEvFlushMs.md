@@ -2,9 +2,7 @@
 keyword: PushEvFlushMs
 summary: Longest time a queued push event waits before it is sent, in milliseconds.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 913
 attributes:
   access: rw
@@ -23,8 +21,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-09-25'
-doc_revision: '2026.09'
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 ---
 # PushEvFlushMs
 
@@ -48,7 +46,7 @@ With the 5 ms default, an event reaches the host about as quickly as a host poll
 
 `PushEvFlushMs` applies to push events only. It does not change `printf` timing.
 
-The period is counted by the controller's millisecond tick, which runs at 1024 Hz (every 16 control cycles), so one unit is about 0.98 ms.
+The period is counted by the controller's millisecond tick, which runs every 16 control cycles: at 1024 Hz on AGM800, so one unit is about 0.98 ms, and at 1000 Hz on AGM800-EC, so one unit is 1 ms.
 
 > **`PushEvFlushMs` does not limit retries.** If a send is refused, the timer is not restarted, so the controller tries again on every background pass until a send succeeds, whatever the setting. If a host is connected but not reading, each of those attempts can hold the background loop for up to about 6 seconds. See the [overview](00-overview.md#how-it-works).
 

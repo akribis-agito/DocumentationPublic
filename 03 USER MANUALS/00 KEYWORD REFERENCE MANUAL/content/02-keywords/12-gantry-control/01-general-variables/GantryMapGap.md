@@ -2,9 +2,8 @@
 keyword: GantryMapGap
 summary: Spacing in source-position units between consecutive entries of the gantry decoupling map.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 751
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: ExtBoard
 summary: Selects the hardware configuration of the attached external expansion board.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 612
 attributes:
   access: rw
@@ -20,11 +17,47 @@ attributes:
   units: none
   range:
   - 0
-  - 0
+  - 1
   default: 0
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  ci-master:
+    range:
+    - 0
+    - 0
+  agd155-af-2a06:
+    range:
+    - 0
+    - 0
+  agd155-af-2a10:
+    range:
+    - 0
+    - 0
+  agd155-ec:
+    range:
+    - 0
+    - 0
+  agd155-ec-var34:
+    range:
+    - 0
+    - 0
+  agd155-ec-var34-3:
+    range:
+    - 0
+    - 0
+  agd156-ec:
+    range:
+    - 0
+    - 0
+  agd101-ec-34a:
+    range:
+    - 0
+    - 0
+  agd101-ec-17a:
+    range:
+    - 0
+    - 0
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 ---

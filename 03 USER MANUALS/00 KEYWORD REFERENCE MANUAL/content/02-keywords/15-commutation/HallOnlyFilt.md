@@ -2,11 +2,8 @@
 keyword: HallOnlyFilt
 summary: Digital filter applied to the Hall-sensor-based commutation angle in Hall-only commutation mode.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 477
 attributes:
   access: rw

@@ -2,11 +2,8 @@
 keyword: InjectPosAmp
 summary: 位置指令注入的幅值，以主用户单位表示。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 116
 attributes:
   access: rw

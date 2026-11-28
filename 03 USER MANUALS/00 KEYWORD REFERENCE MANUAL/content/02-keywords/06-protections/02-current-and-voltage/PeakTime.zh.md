@@ -2,11 +2,8 @@
 keyword: PeakTime
 summary: 允许处于峰值电流的最长时间；设定 I²t 时间常数。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 53
 attributes:
   access: rw
@@ -24,7 +21,31 @@ attributes:
   default: 500
   scaling: 1.0
   implemented: final
-overrides: {}
+overrides:
+  agd155-af-2a06:
+    range:
+    - 1
+    - 1500
+  agd155-af-2a10:
+    range:
+    - 1
+    - 1500
+  agd155-ec:
+    range:
+    - 1
+    - 1500
+  agd155-ec-var34:
+    range:
+    - 1
+    - 1500
+  agd155-ec-var34-3:
+    range:
+    - 1
+    - 1500
+  agd156-ec:
+    range:
+    - 1
+    - 1500
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

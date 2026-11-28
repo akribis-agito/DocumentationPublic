@@ -2,9 +2,8 @@
 keyword: Print
 summary: User-program statement that outputs a text string to the host.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 827
 attributes:
   access: rw

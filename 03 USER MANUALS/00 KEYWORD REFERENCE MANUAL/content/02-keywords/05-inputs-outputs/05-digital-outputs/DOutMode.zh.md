@@ -2,35 +2,84 @@
 keyword: DOutMode
 summary: 将某个控制器状态映射到每个数字量输出（软件功能分配）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 210
 attributes:
   access: rw
   scope: non-axis
   flash: true
   type: array
-  array_size: 17
+  array_size: 26
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
   units: none
   range:
   - 0
-  - 262165
+  - 196629
   default: 0
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v4:
+  ci-master:
     scope: axis
-  central-i.v5:
-    scope: axis
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+    array_size: 17
+    range:
+    - 0
+    - 786453
+  agc300-et:
+    array_size: 9
+  agd200-et-2d01:
+    array_size: 9
+  agd200-et-2d02:
+    array_size: 9
+  agd200-et-2d05:
+    array_size: 9
+  agd200-et-2d05-71:
+    array_size: 9
+  agd155-af-2a06:
+    array_size: 12
+    range:
+    - 0
+    - 65557
+  agd155-af-2a10:
+    array_size: 12
+    range:
+    - 0
+    - 65557
+  agd155-ec:
+    array_size: 12
+    range:
+    - 0
+    - 65557
+  agd155-ec-var34:
+    array_size: 12
+    range:
+    - 0
+    - 65557
+  agd155-ec-var34-3:
+    array_size: 12
+    range:
+    - 0
+    - 65557
+  agd156-ec:
+    array_size: 9
+    range:
+    - 0
+    - 65557
+  agd101-ec-34a:
+    array_size: 9
+    range:
+    - 0
+    - 65557
+  agd101-ec-17a:
+    array_size: 9
+    range:
+    - 0
+    - 65557
+last_updated: '2026-10-21'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # DOutMode

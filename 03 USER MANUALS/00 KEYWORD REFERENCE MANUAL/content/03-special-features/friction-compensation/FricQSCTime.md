@@ -2,9 +2,7 @@
 keyword: FricQSCTime
 summary: Decay time constant of the quadrant-switching kick, in µs.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 939
 attributes:
   access: rw
@@ -23,6 +21,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+last_updated: '2026-10-18'
+doc_revision: '2026.11'
 ---
 # FricQSCTime
 

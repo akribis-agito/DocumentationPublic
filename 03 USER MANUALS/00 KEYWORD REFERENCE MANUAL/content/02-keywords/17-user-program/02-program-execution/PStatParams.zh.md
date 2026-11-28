@@ -2,11 +2,8 @@
 keyword: PStatParams
 summary: 列出每次周期性统计发送所包含的参数。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 483
 attributes:
   access: rw

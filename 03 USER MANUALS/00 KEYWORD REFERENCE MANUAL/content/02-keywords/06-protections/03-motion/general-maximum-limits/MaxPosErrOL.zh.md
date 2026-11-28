@@ -2,11 +2,8 @@
 keyword: MaxPosErrOL
 summary: 最大开环（注入）位置误差；超过该值将禁用轴。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 388
 attributes:
   access: rw
@@ -25,7 +22,7 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
+  ci-master:
     data_type: int64
 last_updated: '2026-05-30'
 doc_revision: '2026.06'

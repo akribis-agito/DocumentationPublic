@@ -2,9 +2,7 @@
 keyword: FricQSCOn
 summary: 使能象限切换补偿（在换向和起动时施加起动冲击）。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 938
 attributes:
   access: rw
@@ -23,6 +21,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
+last_updated: '2026-11-01'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # FricQSCOn
@@ -37,7 +37,7 @@ language: zh-CN
 
 当速度反馈朝新的方向离开死区带（[FricVBandPos](FricVBandPos.md) / [FricVBandNeg](FricVBandNeg.md)），并经过保持时间 [FricQSCHold](FricQSCHold.md) 后，环节叠加一个约为 |[FricIStatPos](FricIStatPos.md)| − |[FricIPos](FricIPos.md)|（或负方向对应值）的冲击，并按时间常数 [FricQSCTime](FricQSCTime.md) 衰减。冲击只包含起动超出量；滑动电平由所选的 [FricMethod](FricMethod.md) 提供。
 
-冲击叠加在方法 0 至 3 上。方法 4 和 5 已包含起动电平，因此不叠加。冲击属于该环节的输出，因此同样受 [FricLim](FricLim.md) 钳位。
+冲击叠加在方法 0、2、3 和 4 上。方法 1 和 5 已包含起动电平，因此不叠加。冲击属于该环节的输出，因此同样受 [FricLim](FricLim.md) 钳位。
 
 ## 示例
 

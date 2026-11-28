@@ -2,9 +2,7 @@
 keyword: OneOverTGap
 summary: 触发 1/T 轮询保存的编码器计数器变化量（以二的幂表示）。
 availability:
-  standalone:
-  - v4
-  central-i: []
+- controller
 can_code: 190
 attributes:
   access: rw
@@ -23,8 +21,6 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-removed_in:
-- v5
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

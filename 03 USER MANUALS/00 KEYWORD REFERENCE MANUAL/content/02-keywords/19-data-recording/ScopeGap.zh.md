@@ -1,11 +1,9 @@
 ---
 keyword: ScopeGap
 summary: 设置 Central-i 示波器的采样间隔。
-language: zh-CN
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 743
 attributes:
   access: rw
@@ -26,6 +24,7 @@ attributes:
 overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
+language: zh-CN
 ---
 # ScopeGap
 

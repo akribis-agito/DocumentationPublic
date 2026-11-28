@@ -1,11 +1,9 @@
 ---
 keyword: FrictionComp
+summary: 当用户变量 `FrictionComp` 非零时，摩擦补偿功能被激活；该参数始终取正值。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 406
 attributes:
   access: rw
@@ -23,14 +21,10 @@ attributes:
   default: 0
   scaling: 65536.0
   implemented: final
-overrides:
-  central-i.v5:
-    range: null
-    scaling: 1.0
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+overrides: {}
+last_updated: '2026-10-18'
+doc_revision: '2026.11'
 language: zh-CN
-summary: 当用户变量 `FrictionComp` 非零时，摩擦补偿功能被激活；该参数始终取正值。
 ---
 # FrictionComp
 

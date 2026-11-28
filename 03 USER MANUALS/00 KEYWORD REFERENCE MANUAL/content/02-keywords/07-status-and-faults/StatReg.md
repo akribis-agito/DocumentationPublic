@@ -2,11 +2,8 @@
 keyword: StatReg
 summary: Read-only bitfield reporting general axis status, saturations, limits and multi-level warnings.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 33
 attributes:
   access: ro
@@ -104,3 +101,4 @@ Check current saturation (bit 21) in a user program by masking with `0x200000`; 
 - [MotionStat](../10-motion/05-motion-status/MotionStat.md) — motion-specific status bitfield
 - [UnitStat](../01-system/01-status/UnitStat.md) — unit-level hardware/firmware status
 - [LimitsStat](../06-protections/03-motion/position-limit-protection/LimitsStat.md) — dedicated limit-switch status
+- [StatRegExt](StatRegExt.md) — additional per-axis compensation status

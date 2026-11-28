@@ -2,11 +2,8 @@
 keyword: BurnInMode
 summary: Enables the burn-in motion function, which continuously rotates the open-loop commutation angle to stress-test the system over extended periods.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 424
 attributes:
   access: rw

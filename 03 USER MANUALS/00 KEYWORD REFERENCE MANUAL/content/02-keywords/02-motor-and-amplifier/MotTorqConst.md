@@ -2,9 +2,8 @@
 keyword: MotTorqConst
 summary: Motor torque constant for rotary and DC-brush motors.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 872
 attributes:
   access: rw
@@ -12,16 +11,17 @@ attributes:
   flash: true
   type: scalar
   array_size: 1
-  data_type: float
+  data_type: float32
   ok_in_motion: false
-  ok_motor_on: false
+  ok_motor_on: true
   units: none
   range:
-  - 0
-  - 1000
-  default: 1
-  scaling: 1
+  - 0.0
+  - 1000.0
+  default: 1.0
+  scaling: 1.0
   implemented: final
+overrides: {}
 last_updated: '2026-07-30'
 doc_revision: '2026.09'
 ---
@@ -57,6 +57,8 @@ Every field-weakening constant — characteristic current, demagnetising limit, 
 ```text
 AMotTorqConst=0.36    ; 0.36 N.m per amp
 ```
+
+On AGM800 firmware with the load-estimator fix (Firmware-Main #2710), collision detection accepts any positive MotTorqConst for rotary motors, including 1.0. Enter the value from the motor data sheet.
 
 ## See also
 

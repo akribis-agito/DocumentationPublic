@@ -2,9 +2,7 @@
 keyword: RmFFWLevel
 summary: Percentage level applied to the resistive (R i) voltage feedforward contribution.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 845
 attributes:
   access: rw

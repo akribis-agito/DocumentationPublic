@@ -2,11 +2,8 @@
 keyword: CurrPosThDir
 summary: CurrPosTh 位置参考检查的触发方向。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 427
 attributes:
   access: rw

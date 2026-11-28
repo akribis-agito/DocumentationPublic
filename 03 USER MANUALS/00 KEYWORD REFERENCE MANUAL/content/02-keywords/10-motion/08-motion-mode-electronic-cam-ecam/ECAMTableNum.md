@@ -2,11 +2,8 @@
 keyword: ECAMTableNum
 summary: Selects the active ECAM cam pattern / look-up table (1-10).
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 311
 attributes:
   access: rw

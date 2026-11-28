@@ -2,11 +2,8 @@
 keyword: PStatParams
 summary: Lists the parameters included in each periodic statistics transmission.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 483
 attributes:
   access: rw

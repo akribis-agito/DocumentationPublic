@@ -2,9 +2,8 @@
 keyword: ExtCurrCmdVal
 summary: 只读数组，报告实际发送给数字 SPI 外部驱动器的每相 DAC 代码。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 868
 attributes:
   access: ro
@@ -24,7 +23,7 @@ attributes:
   implemented: final
 overrides: {}
 last_updated: '2026-07-30'
-doc_revision: '2026.07'
+doc_revision: '2026.09'
 language: zh-CN
 ---
 # ExtCurrCmdVal

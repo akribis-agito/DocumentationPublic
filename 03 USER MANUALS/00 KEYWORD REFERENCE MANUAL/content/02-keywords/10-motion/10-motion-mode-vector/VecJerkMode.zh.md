@@ -2,9 +2,8 @@
 keyword: VecJerkMode
 summary: 选择向量运动急动限制的应用方式：0 为梯形曲线，1 为急动限制 S 形曲线。
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 755
 attributes:
   access: rw
@@ -23,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+last_updated: '2026-09-29'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # VecJerkMode

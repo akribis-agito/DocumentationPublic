@@ -2,11 +2,8 @@
 keyword: RNDDebug
 summary: Partially-implemented diagnostic function reserved for Agito R&D.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 1022
 attributes:
   access: rw

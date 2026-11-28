@@ -1,11 +1,9 @@
 ---
 keyword: ScopeOn
 summary: 启用或禁用 Central-i 信号示波器。
-language: zh-CN
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 742
 attributes:
   access: rw
@@ -26,6 +24,7 @@ attributes:
 overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
+language: zh-CN
 ---
 # ScopeOn
 

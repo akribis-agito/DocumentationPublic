@@ -2,11 +2,8 @@
 keyword: MotorTempUsed
 summary: 选择电机温度传感器类型。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 398
 attributes:
   access: rw

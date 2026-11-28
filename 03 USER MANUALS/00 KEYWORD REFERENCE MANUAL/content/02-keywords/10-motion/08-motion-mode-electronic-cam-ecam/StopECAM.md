@@ -2,11 +2,8 @@
 keyword: StopECAM
 summary: Exits ECAM motion by shrinking the master range, preserving start/end segments.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 310
 attributes:
   access: ro

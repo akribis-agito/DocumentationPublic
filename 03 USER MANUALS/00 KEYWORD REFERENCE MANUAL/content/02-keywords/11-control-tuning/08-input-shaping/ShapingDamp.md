@@ -2,11 +2,8 @@
 keyword: ShapingDamp
 summary: Damping ratio of each resonance suppressed by the input shaper.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 153
 attributes:
   access: rw

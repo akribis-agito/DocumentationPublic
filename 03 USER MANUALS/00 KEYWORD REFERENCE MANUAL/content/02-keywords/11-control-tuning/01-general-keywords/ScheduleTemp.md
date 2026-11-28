@@ -2,11 +2,8 @@
 keyword: ScheduleTemp
 summary: Motor-temperature thresholds that divide the temperature range into bands for temperature-based gain scheduling.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 273
 attributes:
   access: rw

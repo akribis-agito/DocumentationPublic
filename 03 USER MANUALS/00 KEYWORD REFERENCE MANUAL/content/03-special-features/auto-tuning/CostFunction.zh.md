@@ -1,11 +1,9 @@
 ---
 keyword: CostFunction
+summary: 评估自动电流环 PI 整定所用的代价函数指标。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 672
 attributes:
   access: ro
@@ -27,7 +25,6 @@ overrides: {}
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 评估自动电流环 PI 整定所用的代价函数指标。
 ---
 # CostFunction
 

@@ -2,11 +2,8 @@
 keyword: EmulFilter
 summary: Digital filter applied to the encoder emulation output signal.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 403
 attributes:
   access: rw

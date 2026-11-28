@@ -2,9 +2,8 @@
 keyword: PosUnitFct
 summary: Scale factor between internal position units and the selected position engineering unit.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 803
 attributes:
   access: rw

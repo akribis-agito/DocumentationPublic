@@ -2,9 +2,8 @@
 keyword: ScopeAbout
 summary: Reports metadata about the current Central-i scope session.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 746
 attributes:
   access: ro

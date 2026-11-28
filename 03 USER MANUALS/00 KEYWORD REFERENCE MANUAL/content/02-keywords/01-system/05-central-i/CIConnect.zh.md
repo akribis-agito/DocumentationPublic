@@ -2,11 +2,8 @@
 keyword: CIConnect
 summary: 在所选轴端口上发起 Central-i 链路的命令。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 504
 attributes:
   access: ro

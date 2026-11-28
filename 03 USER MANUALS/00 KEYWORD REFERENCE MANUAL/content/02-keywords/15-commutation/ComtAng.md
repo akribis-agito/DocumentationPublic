@@ -2,11 +2,8 @@
 keyword: ComtAng
 summary: Read-only instantaneous commutation (electrical) angle of the motor, in degrees scaled by 100.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 73
 attributes:
   access: ro

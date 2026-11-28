@@ -2,9 +2,8 @@
 keyword: PosUnitUnt
 summary: Display label (name) of the position engineering unit, stored as a short text string.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 804
 attributes:
   access: rw

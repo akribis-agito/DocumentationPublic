@@ -2,11 +2,8 @@
 keyword: ShapingOn
 summary: Enables or disables input shaping on the axis.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 151
 attributes:
   access: rw

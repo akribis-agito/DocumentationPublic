@@ -2,11 +2,8 @@
 keyword: StallTh
 summary: Read-only stepper stall-detection threshold.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 516
 attributes:
   access: ro

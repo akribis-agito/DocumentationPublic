@@ -1,11 +1,23 @@
 ---
 keyword: AutoGMask
+summary: 指定自动增益算法允许更新哪些伺服增益参数的数组掩码。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
+products:
+- agc300-et
+- agc301-et
+- agc301-et-bioxtreme
+- agd155-af-2a06
+- agd155-af-2a10
+- agd200-et-2d01
+- agd200-et-2d02
+- agd200-et-2d05
+- agd200-et-2d05-71
+- agd301-et-2d01
+- agd301-et-2d02
+- agd301-et-2d05
+- agd301-et-2d09
 can_code: 370
 attributes:
   access: rw
@@ -27,7 +39,6 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 指定自动增益算法允许更新哪些伺服增益参数的数组掩码。
 ---
 # AutoGMask
 

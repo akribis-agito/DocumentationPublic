@@ -2,11 +2,8 @@
 keyword: ForceCmdVal
 summary: Sequence of user-defined force references (units) for force mode.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 571
 attributes:
   access: rw

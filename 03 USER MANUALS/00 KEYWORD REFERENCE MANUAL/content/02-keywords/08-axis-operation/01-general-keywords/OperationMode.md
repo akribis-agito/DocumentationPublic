@@ -2,11 +2,8 @@
 keyword: OperationMode
 summary: Selects the axis control mode and which control loops are active.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 78
 attributes:
   access: rw

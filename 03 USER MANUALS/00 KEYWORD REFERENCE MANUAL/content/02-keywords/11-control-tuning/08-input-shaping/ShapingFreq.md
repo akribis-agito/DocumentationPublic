@@ -2,11 +2,8 @@
 keyword: ShapingFreq
 summary: Resonance frequencies suppressed by the input shaper.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 152
 attributes:
   access: rw
@@ -25,8 +22,8 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides: {}
-last_updated: '2026-06-02'
-doc_revision: '2026.06'
+last_updated: '2026-11-23'
+doc_revision: '2026.11'
 ---
 # ShapingFreq
 
@@ -54,6 +51,8 @@ $$
 
 The lowest usable frequency depends on the length of the shaper's history buffer, which differs by product. If a non-zero configured frequency is below the minimum or above the maximum, the shaper is disabled for the axis and a warning is logged to the [ErrLog](../../07-status-and-faults/ErrLog.md).
 
+On C2000 or C28388 firmware containing [#2650](https://github.com/akribis-agito/Firmware-Main/pull/2650), a 16 kHz control loop with a 50-sample history accepts an enabled frequency from 323.232330322265625 Hz (raw value 21183354) through 500 Hz. Use **324 Hz** as the lowest whole-Hz setting. A zero entry disables that stage. The largest stored delay is 49 samples. Even at 500 Hz a stage needs 32 samples, so this configuration has room for one enabled stage. Other sample rates and buffer lengths have different limits.
+
 ## How it works
 
 For each resonance the controller computes the half-period spacing from the frequency (the impulses are placed at 0, half the period and one full period, where the period is 1/`f`) and the impulse amplitudes from the damping ratio in [ShapingDamp](ShapingDamp.md). The amplitudes for one resonance are:
@@ -71,7 +70,7 @@ where ζ is the damping ratio from [ShapingDamp](ShapingDamp.md). The amplitudes
 ## Examples
 
 ```text
-AShapingFreq[1]=3276800   ; first resonance at 50 Hz (50 x 65536)
+AShapingFreq[1]=26214400  ; first resonance at 400 Hz (400 x 65536)
 AShapingFreq[2]=0         ; no second resonance
 AShapingDamp[1]=3277      ; damping ratio 0.05
 AShapingOn=1              ; enable input shaping

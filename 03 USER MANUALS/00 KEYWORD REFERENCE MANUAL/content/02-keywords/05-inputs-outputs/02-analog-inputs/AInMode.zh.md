@@ -2,11 +2,8 @@
 keyword: AInMode
 summary: 为每个模拟量输入分配控制功能，并支持按轴定向。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 257
 attributes:
   access: rw
@@ -18,15 +15,58 @@ attributes:
   ok_in_motion: true
   ok_motor_on: true
   units: none
-  range: null
+  range:
+  - 0
+  - 458762
   default: 0
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v4:
+  ci-master:
     scope: axis
-  central-i.v5:
-    scope: axis
+    range:
+    - 0
+    - 268369930
+  agd155-af-2a06:
+    array_size: 3
+    range:
+    - 0
+    - 65546
+  agd155-af-2a10:
+    array_size: 3
+    range:
+    - 0
+    - 65546
+  agd155-ec:
+    array_size: 3
+    range:
+    - 0
+    - 65546
+  agd155-ec-var34:
+    array_size: 3
+    range:
+    - 0
+    - 65546
+  agd155-ec-var34-3:
+    array_size: 3
+    range:
+    - 0
+    - 65546
+  agd156-ec:
+    array_size: 2
+    range:
+    - 0
+    - 65546
+  agd101-ec-34a:
+    array_size: 2
+    range:
+    - 0
+    - 65546
+  agd101-ec-17a:
+    array_size: 2
+    range:
+    - 0
+    - 65546
 last_updated: '2026-05-29'
 doc_revision: '2026.06'
 language: zh-CN

@@ -2,18 +2,15 @@
 keyword: GenData
 summary: 通用非轴 32 位整数数组，用于用户/上位机共享存储。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 237
 attributes:
   access: rw
   scope: non-axis
   flash: true
   type: array
-  array_size: 1001
+  array_size: 5001
   data_type: int32
   ok_in_motion: true
   ok_motor_on: true
@@ -25,10 +22,36 @@ attributes:
   scaling: 1.0
   implemented: final
 overrides:
-  central-i.v5:
-    array_size: 10001
-last_updated: '2026-05-29'
-doc_revision: '2026.06'
+  ci-master:
+    array_size: 1001
+  agc300-et:
+    array_size: 1001
+  agd200-et-2d01:
+    array_size: 1001
+  agd200-et-2d02:
+    array_size: 1001
+  agd200-et-2d05:
+    array_size: 1001
+  agd200-et-2d05-71:
+    array_size: 1001
+  agd155-af-2a06:
+    array_size: 1001
+  agd155-af-2a10:
+    array_size: 1001
+  agd155-ec:
+    array_size: 1001
+  agd155-ec-var34:
+    array_size: 1001
+  agd155-ec-var34-3:
+    array_size: 1001
+  agd156-ec:
+    array_size: 1001
+  agd101-ec-34a:
+    array_size: 1001
+  agd101-ec-17a:
+    array_size: 1001
+last_updated: '2026-11-24'
+doc_revision: '2026.11'
 language: zh-CN
 ---
 # GenData
@@ -43,7 +66,7 @@ language: zh-CN
 
 ![通用数组系列：GenData 行包含四个非轴变体（GenData int32、GenDataF float32、GenDataD float64、GenDataLL int64），推荐用于用户程序；UserParam 行包含四个轴相关变体（UserParam、UserParamF、UserParamD、UserParamLL），其中部分条目由内部保留](array-family-types.svg)
 
-每个元素存储一个 32 位有符号整数，因此值范围为 -2147483648 至 2147483647，默认值为 0。数组为 1 索引：第一个可用元素为 `GenData[1]`（索引 0 保留，不可访问）。可用元素数量取决于控制器型号：通常为 1000，较大型控制器为 5000，双闪存存储型号最多为 10000。
+每个元素存储一个 32 位有符号整数，因此值范围为 -2147483648 至 2147483647，默认值为 0。数组为 1 索引：第一个可用元素为 `GenData[1]`（索引 0 保留，不可访问）。可用元素数量取决于控制器型号：通常为 1000，较大型控制器为 5000，普通双闪存存储型号最多为 10000，Orbit FR 为 30000。
 
 ## 寻址
 
@@ -73,6 +96,10 @@ AGenData[1]=100      ; store 100 in the first element
 AGenData[1]         ; read the first element
 AGenData[1000]=0     ; highest usable index on a 1000-element model
 ```
+
+## Orbit FR 型号
+
+Orbit FR 版 AGM800 保留 GenData 的索引 1 至 30000 及五个误差映射表。迁移至集成固件前请导出这些值。DrawControl 下载和擦除仅作用于其载荷所在的扇区，参数保存在独立区域。
 
 ## 另请参阅
 

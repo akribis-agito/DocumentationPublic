@@ -2,9 +2,7 @@
 keyword: VoltageFFWOn
 summary: Master enable for voltage feedforward in the current/voltage loop.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- ci-master
 can_code: 852
 attributes:
   access: rw

@@ -2,9 +2,8 @@
 keyword: ScopeParams
 summary: Lists the signals captured by the Central-i scope.
 availability:
-  standalone: []
-  central-i:
-  - v5
+- controller
+- ci-master
 can_code: 744
 attributes:
   access: rw

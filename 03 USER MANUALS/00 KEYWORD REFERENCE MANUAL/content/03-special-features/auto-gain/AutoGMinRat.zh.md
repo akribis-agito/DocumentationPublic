@@ -1,11 +1,23 @@
 ---
 keyword: AutoGMinRat
+summary: 设置自整定算法验证辨识结果时可接受的负载与电机惯量比下限（百分比）。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
+products:
+- agc300-et
+- agc301-et
+- agc301-et-bioxtreme
+- agd155-af-2a06
+- agd155-af-2a10
+- agd200-et-2d01
+- agd200-et-2d02
+- agd200-et-2d05
+- agd200-et-2d05-71
+- agd301-et-2d01
+- agd301-et-2d02
+- agd301-et-2d05
+- agd301-et-2d09
 can_code: 364
 attributes:
   access: rw
@@ -27,7 +39,6 @@ overrides: {}
 last_updated: '2026-06-02'
 doc_revision: '2026.06'
 language: zh-CN
-summary: 设置自整定算法验证辨识结果时可接受的负载与电机惯量比下限（百分比）。
 ---
 # AutoGMinRat
 

@@ -2,11 +2,8 @@
 keyword: BuffEdgeMode
 summary: Selects the boundary condition at the start and end of the spline buffer trajectory.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 545
 attributes:
   access: rw

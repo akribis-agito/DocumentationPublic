@@ -2,11 +2,8 @@
 keyword: InjectedValue
 summary: Read-only readout of the present injection value; units follow the injection point.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 118
 attributes:
   access: ro

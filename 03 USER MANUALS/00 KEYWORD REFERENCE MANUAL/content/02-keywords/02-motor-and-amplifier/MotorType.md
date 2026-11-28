@@ -2,11 +2,8 @@
 keyword: MotorType
 summary: Defines the type of motor connected to the axis, governing how currents and voltages are computed and protected.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 50
 attributes:
   access: rw

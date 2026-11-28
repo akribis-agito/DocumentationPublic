@@ -2,11 +2,8 @@
 keyword: Return
 summary: Returns from a user program function call to the line after the call.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 432
 attributes:
   access: rw
@@ -20,15 +17,11 @@ attributes:
   units: func
   range:
   - 0
-  - 10
+  - 16
   default: 0
   scaling: 1.0
   implemented: final
-overrides:
-  central-i.v5:
-    range:
-    - 0
-    - 16
+overrides: {}
 last_updated: '2026-05-28'
 doc_revision: '2026.06'
 ---

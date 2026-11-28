@@ -2,11 +2,8 @@
 keyword: VecPosFDef
 summary: Array defining the position-filter coefficients applied to the vector reference output.
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 647
 attributes:
   access: rw

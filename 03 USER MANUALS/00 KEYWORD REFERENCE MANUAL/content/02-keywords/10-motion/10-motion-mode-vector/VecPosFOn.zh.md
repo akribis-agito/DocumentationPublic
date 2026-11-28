@@ -2,11 +2,8 @@
 keyword: VecPosFOn
 summary: 启用（1）由 VecPosFDef 定义的位置滤波器，作用于矢量参考输出。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 648
 attributes:
   access: rw

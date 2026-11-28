@@ -2,11 +2,8 @@
 keyword: FIFOType
 summary: 只读数组，报告 FIFO 运动队列中每条条目的类型。
 availability:
-  standalone:
-  - v4
-  central-i:
-  - v4
-  - v5
+- controller
+- ci-master
 can_code: 281
 attributes:
   access: ro

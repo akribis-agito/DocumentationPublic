@@ -18,6 +18,13 @@ _INT_OPS = {
     ast.Mult: operator.mul,
     ast.Div: operator.floordiv,
     ast.USub: operator.neg,
+    ast.Mod: operator.mod,
+    ast.LShift: operator.lshift,
+    ast.RShift: operator.rshift,
+    ast.BitOr: operator.or_,
+    ast.BitAnd: operator.and_,
+    ast.BitXor: operator.xor,
+    ast.Invert: operator.invert,
 }
 # Float operand path: true division so 1526/1000 -> 1.526.
 _FLOAT_OPS = {
@@ -32,6 +39,8 @@ _FLOAT_OPS = {
 # Keep the numeric part, drop the suffix (Python can't parse the 'f'). Requires a
 # decimal point so it never touches hex literals like 0x1F.
 _FLOAT_SUFFIX = re.compile(r"((?:\d*\.\d+|\d+\.\d*)(?:[eE][+-]?\d+)?)[fF]")
+# A C integer literal with a u/l suffix, e.g. 2147483647L, 1UL, 0xFFu.
+_INT_SUFFIX = re.compile(r"\b(0[xX][0-9a-fA-F]+|\d+)[uUlL]+\b")
 
 
 class DefineTable:
@@ -88,13 +97,14 @@ class DefineTable:
         )
         # Drop C float-literal suffixes (200.0f -> 200.0) so they parse as Python.
         expr = _FLOAT_SUFFIX.sub(r"\1", expr)
+        expr = _INT_SUFFIX.sub(r"\1", expr)
         try:
             # The lookbehind keeps the 'e' of scientific notation (e.g. 3.4e+38)
             # and hex digits from being mistaken for symbols to substitute.
             substituted = re.sub(r"(?<![\w.])[A-Za-z_]\w*", repl, expr)
             node = ast.parse(substituted.strip(), mode="eval").body
             return self._eval(node)
-        except (ValueError, SyntaxError, TypeError):
+        except (ValueError, SyntaxError, TypeError, KeyError):  # KeyError: a bit op on a float
             return None
 
     def _eval(self, node: ast.AST) -> int | float:
